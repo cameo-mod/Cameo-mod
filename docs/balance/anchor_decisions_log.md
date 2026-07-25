@@ -127,3 +127,35 @@ buff only works at *close* range; Dreadnought needs its OWN damage-reduction tun
 
 **Weapons.yaml below-divider cleanup = ON HOLD** (maintainer: "don't delete anything yet"). Plan
 stays in `weapons_cleanup_plan.md`; no deletions/moves until greenlit.
+
+---
+
+## ✅ Dreadnought — LOCKED 2026-07-25 (heavy, long-range, frontal, tanky)
+
+**Baseline = Pulverizer Mecha** (`asianalliance_pulverizermecha`):
+| HP | Speed | Range | Dmg/shot | Reload | DPS | special K | cost0 |
+|--:|--:|--:|--:|--:|--:|--:|--:|
+| **300000** | **60** | **7500** | **10000** | **15** | **666.7** | **1.25** (gatling) | **3000** |
+- **Gatling mechanic** = fast reload 15 + a **1.25× special modifier (K)** for the spin-up ability.
+  Range band **7000–8000**. DPS = 10000/15 = 666.7.
+
+**Verifier = Neo Cymek** (`ixian_neocymek`) — "one of the best late-game units":
+| HP | Speed | Range | DPS | special K | cost0 |
+|--:|--:|--:|--:|--:|--:|
+| **600000** | **60** | **7500** | **1333.3** | **1.25** (CLOAK) | **7500** |
+- **Give it a CLOAK** → adds a matching **1.25× K** so it cancels the baseline's gatling K in the
+  identity (maintainer's idea — endorsed; Ixian is already cloak-heavy, thematic).
+- **Two weapons, BOTH hit ground** (only one hits air) → **SUM both weapons' DPS** (they fire
+  together on a ground target). Keep its current bursts/burst-delays/reload; reach the **2× DPS
+  (1333.3)** via **FirepowerMultipliers**, NOT by changing damage-per-shot.
+- HP 2× (600000), cost 2.5× (7500), speed/range matched to baseline (60 / 7500) for a clean identity.
+- ✓ identity: 2×HP + 2×DPS + same K(1.25) + same spd/rng → **2.5× cost = 7500**.
+
+**Members:** Warhound, Neo Jagdpanzer (+ the two above). **Ladder:** LightTank 400 · TankDestroyer
+600 · MBT 800 · HighTech 2000 · **Dreadnought 3000** (top of the vehicle ladder).
+
+**★ MULTI-WEAPON GROUND-SUM RULE (maintainer 2026-07-25):** when a unit has multiple weapons that
+can ALL hit the GROUND, **SUM their DPS** (they fire together on a ground target) — even if only one
+of them also hits air. This is DISTINCT from the **AG/AA PAIR LAW** (an AG-only + an AA-only weapon =
+alternatives, counted ONCE). Rule of thumb: **the ground is the reference — sum every weapon that
+reaches a ground target.**
