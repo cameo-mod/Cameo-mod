@@ -52,11 +52,28 @@ need the **new weapon types (§13 warhead library) implemented first**, and the 
 
 ## ✅ HighTechTank — LOCKED 2026-07-25
 
-**Baseline:** **RA1 Soviet Mammoth Tank** (`ra1_soviets_mammothtank`), **cost0 2000** (its nostalgic
-price). Keep speed 50 + range ~6400; HP/Damage set by `fit_class` to price at 2000 in-band (current
-375000 HP likely comes down — HP was scaling faster than cost).
-**Verifier:** **Siege Mammoth Tank** (`ra1_soviets_siegemammothtank`, the upgraded version) at
-**exactly 2.5× = 5000¢**, restatted to 2×HP / 2×DPS (same speed/range).
+**Baseline = RA1 Soviet Mammoth Tank** (`ra1_soviets_mammothtank`) — EXACT round numbers
+(maintainer 2026-07-25):
+| HP | Speed | Range | Dmg/shot | Burst | BurstDelay | **eff-reload** | **cost0** | DPS |
+|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| **400000** | **50** | **6500** | **20000** | **2** | 8 (keep) | **80** | **2000** | **500** |
+- eff-reload 80 with burst 2 + BurstDelay 8 ⇒ **ReloadDelay 72** (72 + 8·(2−1) = 80). Total per burst
+  = 40000. Range band 6000–7000.
+
+**Verifier = Siege Mammoth Tank** (`ra1_soviets_siegemammothtank`) — 2×HP / 2×DPS / 2.5×cost, SAME
+speed+range:
+| HP | Speed | Range | Dmg/shot | Burst | eff-reload | **cost0** | DPS |
+|--:|--:|--:|--:|--:|--:|--:|--:|
+| **800000** | **50** | **6500** | **40000** | **2** | **80** | **5000** | **1000** |
+- ✓ identity verified: 2×HP + 2×DPS (same spd/rng) = **exactly 2.5× cost** under the class-baseline
+  formula (o 1.5 / p 2 / q 4 → mean 2.5).
+
+**⚠ Pricing-flag cleanup (both units):** all 10/8 armaments are `pricing=True` (base gun + Targeting-
+Computer/Thermobaric/Tesla upgrade variants + the AA MammothTusk). Only the **base main gun** should
+price for the anchor DPS (500); the upgrade variants are upgrade-gated, the AA tusk is the limited-AA
+secondary (§9). Fix the pricing flags so DPS isn't summed across all variants.
+**Other Soviet mammoth variants:** only these two exist in the RA1 Soviet roster; the per-armament
+upgrade variants inherit the base damage (20000 baseline / 40000 verifier) + their upgrade modifiers.
 - Ladder so far: LightTank 400 · MBT 800 · **HighTechTank 2000**. (Maintainer called 2000 "twice the
   MBT baseline" — vs the Tiger's cost0 800 that's 2.5×; confirm MBT stays 800 or bumps to 1000.)
 - **Apocalypse** sits as a heavy *member*, not the baseline.
