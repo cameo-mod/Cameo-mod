@@ -1,0 +1,46 @@
+# Design-only per-weapon-template WeaponClass scalar (0.75-1.25) — the pipeline DPS knob.
+# RESTORED from git 04de392b3; the InvalidWeaponField lint (d42ad53a1) strips WeaponClass
+# from weapons.yaml because OpenRA WeaponInfo has no such field. This sidecar is NOT
+# engine-loaded, so the linter can never touch it. formula.py/extract_stats read it here.
+# Key = weapon template (^Name); value = WeaponClass factor. See BALANCE_PIPELINE.
+
+^SmallArms: 0.75
+^SniperWeapon: 0.75
+^Chaingun: 1.0
+^FlakWeapon: 1.0
+^HeavyAAWeapon: 1.25
+^LightMissile: 0.75
+^MediumMissile: 1.0
+^HeavyMissile: 1.25
+^TankDestroyerCannon: 0.75
+^MediumCannon: 1.0
+^HeavyCannon: 1.25
+^LaserWeapon: 1.25
+^RailgunWeapon: 1.25
+^TeslaWeapon: 1.25
+^TeslaChargedWeapon: 1.5
+^LightFlameWeapon: 0.75
+^MediumFlameWeapon: 1.0
+^HeavyFlameWeapon: 1.25
+^LightChemicalWeapon: 0.75
+^MediumChemicalWeapon: 1.0
+^HeavyChemicalWeapon: 1.25
+^Grenade: 0.75
+^ShrapnelWeapon: 1.0
+^HeavyBomb: 1.25
+^NuclearWarhead: 1.25
+^SwordWeapon: 1.0
+^ArrowWeapon: 0.75
+^MagicWeapon: 1.25
+^ToxicWeapon: 0.5
+^HealingWeapon: 1.5
+^RepairWeapon: 1.5
+^HeavyMG: 1.25
+^LightMG: 0.75
+^TSRailgun: 1.25
+^LightDemolition: 0.75
+^MediumDemolition: 1.0
+^HeavyDemolition: 1.25
+^LightConcussion: 0.75
+^MediumConcussion: 1.0
+^HeavyConcussion: 1.25
