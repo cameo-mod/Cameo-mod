@@ -33,20 +33,25 @@ mod numbers — we normalize, reason, and extrapolate them into Cameo's own syst
 | original RA2+YR | Red Alert 2 | Westwood | `Downloads\RA2inis`, `YRinis` | `parse_ini.py` | ✅ |
 | StarCraft / Warcraft 2 | — | Blizzard | unitstatistics | web | ✅ |
 | **DTA** | TD+RA1 crossover | **TS engine ×10** | `G:\...\DTA\DTA Release\INI\Rules.ini` + `Enhance.ini` | `parse_ini.py`, `compare_ini.py` | ✅ Classic+Enhanced |
-| **Combined Arms** | TD/RA1/RA2/Yuri/**Scrin** | **OpenRA** | `Downloads\CAmod-master\mods\ca\rules\` | `extract_openra.py` | ✅ HP/Cost/Speed (need weapons) |
-| **Shattered Paradise** | GDI/Nod/CABAL/**Scrin**/Mutant | **OpenRA** | `Downloads\Shattered-Paradise-SDK-bleed\mods\sp\rules\` | `extract_openra.py` | ✅ HP (need weapons) |
-| **Mental Omega 3.3.6** | RA2 (Allied/Soviet/Epsilon/Foehn) | Ares/YR | `expandmo99.mix` entry `0xe8df0937` (content-scan) | `extract_all.py`→`parse_ini.py` | ✅ HP/Cost/Speed (need weapons) |
-| **CnC Reloaded 2.7.0** | **RA2 + TS combined** | Ares/YR | `Downloads\CnCReloaded-2.7.0\Tools\Map Editor\rulesmd.ini` (loose, full) | `parse_ini.py` | ⏳ TODO |
-| **Romanov's Vengeance** | **RA2 remake** | **OpenRA** | `Downloads\Romanovs-Vengeance-master\mods\rv\rules\` + `\weapons\` | `extract_openra.py` | ⏳ TODO |
+| **Combined Arms** | TD/RA1/RA2/Yuri/**Scrin** | **OpenRA** | `Downloads\CAmod-master\mods\ca\rules\`+`\weapons\` | `openra_full.py` | ✅ **full weapons** (`ca_units.csv`) |
+| **Shattered Paradise** | GDI/Nod/CABAL/**Scrin**/Mutant | **OpenRA** | `Downloads\Shattered-Paradise-SDK-bleed\mods\sp\rules\`+`\weapons\` | `openra_full.py` | ✅ **full weapons** (`sp_units.csv`) |
+| **Mental Omega 3.3.6** | RA2 (Allied/Soviet/Epsilon/Foehn) | Ares/YR | `expandmo99.mix` (content-scan → `mo_ini/*.ini`) | `extract_all.py`→`ini_full.py` | ✅ HP/Cost/Speed; weapons split across mix entries (partial) |
+| **CnC Reloaded 2.7.0** | **RA2 + TS combined** | Ares/YR | `Downloads\CnCReloaded-2.7.0\Tools\Map Editor\rulesmd.ini` (loose, full) | `ini_full.py` | ✅ **full weapons** (`cncr_units.csv`) |
+| **Romanov's Vengeance** | **RA2 remake** | **OpenRA** | `Downloads\Romanovs-Vengeance-master\mods\rv\rules\` + `\weapons\` | `openra_full.py` | ✅ **full weapons** (`rv_units.csv`) |
 | Dune II / Dune 2000 / Emperor | Dune | Westwood | TBD (need INIs) | — | ⏳ TODO |
 | Outpost 2 | — | Sierra | TBD | — | ⏳ TODO |
 | SC2 / Cosmonarchy / WC3 | — | Blizzard | web | web | ⏳ identity-only |
 
-**Scratchpad tools** (session scratchpad): `parse_ini.py` (INI→Strength/Cost/Speed/TechLevel;
-digit + prefixed keys), `compare_ini.py` (Classic-vs-Enhanced diff), `extract_openra.py`
-(OpenRA yaml→HP/Cost/Speed), `mix_extract.py` (unencrypted-mix extract by filename hash),
-`extract_all.py` (dump ALL mix entries, keep INIs — bypasses the RA2 hash; **how MO was
-recovered**). Blowfish-encrypted mixes (flags `0x30000`, e.g. `ra2md.mix`) still need XCC Mixer.
+**Scratchpad tools** (session scratchpad): **`ini_full.py`** (INI → full spreadsheet rows: unit →
+Primary/Secondary weapon `Damage/ROF/Range/Burst` → warhead `Verses` profile + role classification;
+writes CSV), **`openra_full.py`** (OpenRA rules+weapons with **recursive inheritance resolution** →
+unit → Armament(Weapon,Damage-override) → weapon `ReloadDelay/Range/Burst/BurstDelays` → warhead
+`Damage`+`Versus` map; writes CSV), **`synth_hp.py`** (normalizes archetype HP to each source's
+rifleman → cross-source band vs Cameo anchor). Legacy: `parse_ini.py`, `compare_ini.py` (DTA
+Classic-vs-Enhanced), `extract_openra.py`, `mix_extract.py`, `extract_all.py` (dump ALL mix
+entries, keep INIs — **how MO was recovered**). Blowfish-encrypted mixes (flags `0x30000`, e.g.
+`ra2md.mix`) still need XCC Mixer. **CSVs produced (uniform schema):** `ra2_units.csv`,
+`yr_units.csv`, `ts_units.csv`, `cncr_units.csv`, `rv_units.csv`, `ca_units.csv`, `sp_units.csv`.
 
 ---
 
@@ -89,10 +94,13 @@ spreadsheet**, so the reference is directly usable. Per unit:
   **MinRange**, **Warhead(s)**, and each warhead's **Versus values** (vs each armor type) + spread
 - Then: **normalize** to that mod's basic rifleman and **convert to our system**.
 
-**Tooling gap:** `parse_ini.py` / `extract_openra.py` currently grab **HP/Cost/Speed/Tech only**.
-**EXTEND them to weapons** — the Westwood INIs have `[Weapon]`/`[Warhead]` sections with
-`Damage`/`ROF`/`Range`/`Burst`/`Verses=`; OpenRA has `Armament:`/`Weapons:` + `weapons/*.yaml`
-with `Warhead@…: Versus:`. This is required before we can synthesize the DPS/versus side (§8).
+**Tooling gap — CLOSED (2026-07-25):** `ini_full.py` + `openra_full.py` now extract the full weapon
+set. Westwood INIs: `[Weapon]` `Damage`/`ROF`/`Range`/`Burst` + `[Warhead]` `Verses=` (11-column
+order `none,flak,plate,light,medium,heavy,wood,steel,concrete,sp10,sp11`). OpenRA: `Armament:`
+(with inline `Damage:` override) + `weapons/*.yaml` `ReloadDelay/Range/MinRange/Burst/BurstDelays`
++ `Warhead@…: Versus:` map, resolved through `Inherits:`. Each row is auto-classified
+anti-inf / anti-armor / general from its versus profile. **The DPS/versus side (§8) is now
+extractable.** See §12 for the first grounded output.
 
 ---
 
@@ -228,3 +236,123 @@ out multipliers** (§7); (f) rerun the formula per class → apply. All under th
 **Open questions:** does the formula itself need reshaping to hit synthesized targets, or just
 better anchors? How exactly to weight each source in the synthesis? Where to draw each class's
 spread band precisely? — resolve with the data in hand, class by class.
+
+---
+
+## 12. GROUNDED SYNTHESIS FINDINGS — the HP-spread audit (2026-07-25)
+
+First real cross-source output, from the seven uniform CSVs (§1). Every unit's HP is normalized to
+**its own source's basic rifleman** (GI / Light Infantry / e1), so the numbers are directly
+comparable *as multiples of the rifle*. Cameo's rifle anchor = **20000 HP = 1.00×**.
+
+**Rifle HP per source (the ÷ anchor):** RA2 125 · YR 125 · CnCR 125 · TS 125 · RV 12500 · CA 5000
+· SP 12500. (Raw scales differ 100×; normalization erases that.)
+
+### 12.1 Infantry — normalized HP (×rifle)
+
+| Archetype (Cameo class) | RA2 | YR | CnCR | TS | RV | CA | SP | **Source band** | **Cameo now** |
+|---|--:|--:|--:|--:|--:|--:|--:|:--:|:--:|
+| rifle / GI (scout) | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | **1.00** | 1.00 |
+| grenadier | – | – | – | – | 1.00 | 1.00 | – | **1.00** | **0.40** |
+| rocket soldier (rocket_trooper) | – | – | – | 0.80 | 0.96 | 0.70 | 0.80 | **0.70–0.96** | **0.50** |
+| flak/AA trooper (rocket_trooper) | – | 0.80 | 0.80 | – | 1.00 | – | – | **0.80–1.00** | **0.50** |
+| engineer (support) | 0.60 | 0.60 | 0.60 | 0.80 | 0.80 | 0.50 | 0.80 | **0.50–0.80** | **0.25** |
+| sniper (pure_sniper) | 1.00 | 1.00 | 1.00 | – | 1.00 | 0.90 | – | **0.90–1.00** | **0.55** |
+| flame / pyro (special_forces) | – | – | – | – | 1.00 | 1.80 | – | **1.00–1.80** | 0.75 |
+| shock / tesla (heavy_infantry) | 1.04 | 1.04 | 1.04 | – | 1.04 | – | – | **1.04** | **2.50** |
+| desolator (heavy_sniper) | – | 1.20 | 1.20 | – | 1.20 | – | – | **1.20** | 1.25 |
+| virus (heavy_sniper) | – | 0.80 | 0.80 | – | 1.00 | – | – | **0.80–1.00** | 1.25 |
+| rocketeer / jet (flying) | 1.00 | 1.00 | 0.84 | 0.96 | 1.00 | – | – | **0.84–1.00** | 0.90 |
+| commando / Tanya (commando) | 1.00 | 1.60 | – | – | 1.20 | 2.20 | – | **1.00–2.20** | **4.00** |
+| Boris (commando) | – | 1.60 | 1.60 | – | 1.20 | – | – | **1.20–1.60** | **4.00** |
+
+**★ The governing result — every C&C game/mod keeps basic-roster infantry inside a ~0.5×–1.8×
+rifle band (a ~3× total spread).** Even elite heroes (Tanya/Boris) top out ~1.6× (CA's Tanya 2.2×
+is the single widest). Infantry are differentiated by **role / weapon / cost / tech, NOT HP** — the
+homogeneity insight, now quantified. Cameo violates this at both ends:
+- **commando 4.0×** — nearly **double** the widest source (CA 2.2×), **3–4× the RA2 norm (1.0–1.2×)**.
+- **heavy_infantry 2.5×** — vs shock/tesla's **1.04×** everywhere. Cameo made it **~2.4× too tanky**.
+- **too fragile:** grenadier 0.40× (src 1.00×), engineer/support 0.25× (src 0.5–0.8×), sniper 0.55×
+  (src ~1.0× — a deliberate Cameo glass-cannon choice, but far below every source).
+
+### 12.2 Vehicles — normalized HP (×rifle)
+
+| Tier / unit | RA2·YR·CnCR | TS | RV | CA | SP | **Consensus (RA2-fam+TS)** |
+|---|--:|--:|--:|--:|--:|:--:|
+| light tank | Lasher 2.4 | – | 1tnk 2.0 | 1TNK 5.4 | – | **~2.0–2.4** |
+| MBT (Grizzly / Titan / medium) | Grizzly 2.4 | Titan 3.2 · Tick 2.8 | mtnk 2.4 | MTNK 10.4* | MMCH 3.6 · 4TNK 2.8 | **~2.4–3.2** |
+| heavy tank (Rhino / assault) | Rhino 3.2 | 3TNK 2.8 | htnk 3.2 · 3tnk 3.2 | HTNK 19* | – | **~3.2** |
+| Mammoth / super-heavy | – | Mammoth 4.8 | 4tnk 4.8 | 2TNK 9.4* | G4TNK 7.2 | **~4.8** |
+| Apocalypse / epic | Apoc(YR/CnCR) 6.4 | – | apoc 6.4 | – | – | **~6.4** |
+
+\* CA runs a deliberately **wider inf↔vehicle gap** (its rifle is a fragile 5000) — an outlier, kept
+for reference but **excluded from the consensus**. Per-mod scale normalization (the maintainer's
+warning) matters exactly here.
+
+**Consensus vehicle ladder (RA2-family + TS agree tightly):** light **2.0–2.4×** · MBT **2.4–3.2×**
+· heavy **3.2×** · Mammoth **4.8×** · Apocalypse/epic **6.4×**. **The whole tank ladder lives in a
+~2–6.4× rifle window (~3× internal spread).**
+
+### 12.3 Cameo TODAY vs the consensus — the quantified problem
+
+Cameo current vehicle HP ÷ 20000 rifle (from the ledgers):
+
+| Cameo unit | HP | ×rifle | consensus for its tier | verdict |
+|---|--:|--:|:--:|---|
+| TD Stealth Tank | 25000 | 1.25× | ~2.0 (light) | ok/low |
+| RA1 Allied Medium | 90000 | 4.5× | ~2.4–3.2 (MBT) | high |
+| **RA2 Grizzly** | 100000 | **5.0×** | ~2.4 (MBT) | **2× too tanky** |
+| Naxis Tiger (MBT anchor) | 100000 | 5.0× | ~2.4–3.2 | high |
+| RA2 Rhino | 130000 | 6.5× | ~3.2 (heavy) | 2× |
+| TD Mammoth | 225000 | 11.25× | ~4.8 (mammoth) | 2.3× |
+| **RA2 Apocalypse** | 350000 | **17.5×** | ~6.4 (epic) | **2.7× too tanky** |
+| RA1 Soviet Mammoth | 375000 | 18.75× | ~4.8–6.4 | ~3× |
+| Naxis Sturm Tiger | 250000 | 12.5× | epic ~6.4 | ~2× |
+| Futuretech Future Tank | 650000 | 32.5× | epic ~6.4 | **5× — "unkillable"** |
+| Japan Exorcist O-I | 750000 | 37.5× | epic ~6.4 | **6×** |
+| Syndicate Tortuga | 875000 | 43.75× | epic ~6.4 | **7×** |
+| Soviet Monster Tank | 1,000,000 | 50× | epic ~6.4 | **8× — "unstoppable"** |
+
+**Diagnosis — both complaints are the SAME root cause: Cameo stretched a ~11× total spread into
+~200×.**
+- Sources span **support engineer 0.5× → Apocalypse 6.4× ≈ 11× total**.
+- Cameo spans **support 0.25× → Monster Tank 50× ≈ 200× total** — ~18× wider than any source.
+- **"Some units unkillable / unstoppable"** = the epic/experimental tier at **17–50× rifle** — no
+  tech-appropriate enemy unit can trade with a 32–50× HP monster.
+- **"MBTs feel too weak"** = *relative* — a basic MBT at 5× looks fine in isolation, but in a game
+  where same-side super-units sit at 17–50×, the MBT is dwarfed; the ceiling is so high the whole
+  floor feels flat. (Damage compounding it: the 2000-step made damage too high → the global 50%
+  cut; §7.)
+
+### 12.4 The data-grounded target band (feed this to the pipeline — §5)
+
+Keep rifle = 20000 (1.00×). Allow Cameo ~1.5× more spread than the tight sources (a **middle
+ground**, not a copy), and enforce a hard ceiling. Proposed anchor multiples:
+
+| Band | ×rifle | HP @ 20000 rifle | notes |
+|---|:--:|--:|---|
+| support / engineer | 0.5–0.7× | 10–14k | up from 0.25× |
+| grenadier / light support inf | 0.8–1.0× | 16–20k | up from 0.40× |
+| **scout / rifle (anchor)** | **1.00×** | **20000** | unchanged |
+| rocket / flak / sniper / SF | 0.8–1.3× | 16–26k | snipers back toward ~1.0× |
+| heavy infantry (tesla/shock) | 1.5–2.0× | 30–40k | **down from 2.5×** |
+| mortar / heavy sniper / melee | 1.2–1.6× | 24–32k | ~unchanged |
+| **commando** | **2.0–2.5×** | **40–50k** | **HALVE from 4.0× / 80k** |
+| light / scout vehicle | 1.5–2.0× | 30–40k | |
+| **MBT** | **2.5–3.5×** | **50–70k** | the "too weak" fix is *relative* — bring the ceiling down, not the MBT up |
+| heavy / Mammoth tank | 4–5× | 80–100k | down from 11–19× |
+| super-heavy / Apocalypse-class | 6–8× | 120–160k | down from 17× |
+| **epic / experimental (HARD CAP)** | **8–10×** | **160–200k** | down from 32–50× — this is the "unkillable" fix |
+
+**Resulting total spread: ~0.5× … ~10× ≈ 20× total** (vs sources 11×, vs current ~200×). A true
+middle ground: still wider than any single game (Cameo has more units to separate), but with a
+firm ceiling so nothing is untradeable. **No infantry class exceeds the MBT's durability; no unit
+exceeds ~10× rifle.** These become the re-derived class anchors in §5 step 4 — run through the
+pipeline, never hand-edited.
+
+**Caveats / honesty:** (a) this pass covers **HP only** — DPS/versus (§8) and cost still need the
+same treatment; a low-HP unit can still be oppressive via damage. (b) The epic tier may want a
+*separate* "epic" class rather than being squeezed into normal bands — flag for the maintainer.
+(c) CA's wide gap shows some mods deliberately spread more; the 20× target is a judgement call the
+maintainer signs off, not a law from the data. (d) Numbers are **proposals for the pipeline**, not
+applied — no yaml/anchor was edited to produce this section.
