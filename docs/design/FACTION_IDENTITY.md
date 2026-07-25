@@ -61,7 +61,7 @@ Legend: **HP** / **SPD** / **DMG** / **RNG** columns are the lean (＋ high, −
 |---|---|:-:|:-:|:-:|:-:|---|
 | Allies RA1 | Tech / Mobility / Naval | ・ | ・ | ・ | ・ | **Infantry = utility** (Medic/Spy/Thief/Mechanic), *no durability edge — shared 50-HP rifleman*. Identity lives in **vehicles (−HP/+SPD light-fast) + navy (Cruiser 700)** → vehicle/naval pass. |
 | Soviets RA1 | Brute Force | ・ | ＋ | ＋ | ・ | **Infantry = faster + more offensive variety** (Grenadier/Flamethrower/Shock Trooper), cheap fodder — *not tankier* (same 50 HP, spd 5 > Allied 4). Identity lives in **vehicles (+HP/−SPD, Mammoth monopoly) + air** → vehicle/air pass. |
-| Japan RA1 | Rush / Mobility (← RA3 Empire) | − | ＋ | ・ | ・ | ← **RA3 Empire** (web-verified): **core units individually weak → fast + massed**; **transforming** units, naval/air dominance, psionics (Yuriko); Samurai / Rocket Angel / Tsunami / Mecha. |
+| Japan RA1 | Rush / Mobility (← RA3 Empire + WW2 + Touhou) | − | ＋ | ・ | ・ | ← a **funny mix: RA3 Empire of the Rising Sun + WW2 Japan + Touhou + misc**. Core units weak → fast + massed; **transforming** mecha, naval/air, Rocket Angels, Samurai/Tsunami; **Touhou** bullet-hell / character flavour. |
 
 ### Red Alert 2 / Yuri
 

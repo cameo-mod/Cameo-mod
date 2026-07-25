@@ -15,10 +15,12 @@ order below wins; fix the loser, never both.
 ## Read order (every session, in this order)
 
 1. `CLAUDE.md` — mission, gates, memory rules (root).
-2. `DESIGN.md` — binding design contract (naming, stat formulas, tiers, content-pack layout, agent rules).
-3. `design/ROADMAP.md` — active work queue; pick from the top, record new bugs here.
-4. `audit/SUMMARY.md` — current known-issue state by bug class.
-5. Then the topic docs for your task (see the table).
+2. `LESSONS_LEARNED.md` — accumulated pitfalls, safe defaults.
+3. `AGENT_WORKSPACE.md` — mandatory workflow, evidence rules, commit gate.
+4. `DESIGN.md` — binding design contract (naming, stat formulas, tiers, content-pack layout, agent rules).
+5. `design/ROADMAP.md` — active work queue; pick from the top, record new bugs here.
+6. `audit/SUMMARY.md` — current known-issue state by bug class.
+7. Then the topic docs for your task (see the table).
 
 Crashes and player-visible regressions always jump the queue.
 
@@ -35,6 +37,7 @@ Crashes and player-visible regressions always jump the queue.
 | Faction identity, lore, playstyle (curated compendium) | `FACTIONS.md` |
 | Faction BALANCE bias (how units differ within a class, source-cited) | `design/FACTION_IDENTITY.md` |
 | Original source-game unit stats (ground-truth matrix for relative balance) | `design/ORIGINAL_UNIT_STATS.md` |
+| Mod-synthesis balance overhaul plan (sources per faction, weapon/AA/spread laws, methodology) | `design/BALANCE_SYNTHESIS.md` |
 | Engine / custom-trait / C# reference | `Cameo_Knowledge_Base_Manual.md` |
 | ContentPack migration runbook | `MIGRATION.md` |
 | Accumulated pitfalls & safe defaults | `LESSONS_LEARNED.md` |

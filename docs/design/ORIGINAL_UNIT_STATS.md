@@ -67,16 +67,21 @@ parent works (see `FACTION_IDENTITY.md` citations) + FACTIONS.md.
 
 ## ★ Balance reference map — which peer anchors which Cameo faction (maintainer 2026-07-25)
 
-The whole point of extracting the mods: **each Cameo faction is balanced against a chosen peer
-that already fields that faction (or its closest analog).** We borrow the peer's *normalized
-relative ordering*, NOT its raw numbers, and map it onto Cameo's own class anchors + formula.
+The whole point of extracting the mods: **each Cameo faction is balanced against chosen peers
+that already field that faction (or its closest analog).** We borrow the peers' *normalized
+relative ordering*, NOT their raw numbers, and map it onto Cameo's own class anchors + formula.
 
-| Cameo faction(s) | Layer-1 source | **Primary peer reference** | Why |
+**→ Full synthesis plan (all sources per faction, extraction format, methodology, and the new
+weapon/AA/spread laws): [`BALANCE_SYNTHESIS.md`](BALANCE_SYNTHESIS.md).**
+**Cross-reference principle:** synthesize from **all** sources that contain a unit, not just the
+"primary" mod (CA's Apocalypse tank informs RA2 too; pool every appearance).
+
+| Cameo faction(s) | Layer-1 source | **Peer references (synthesize all)** | Why |
 |---|---|---|---|
-| **RA2 Allies / Soviets / Yuri** | RA2 + YR | **Mental Omega 3.3.6** | best-balanced RA2 mod; MO Allied/Soviet/Epsilon map 1:1 |
-| **TS GDI / Nod / Forgotten / CABAL** | TS + FS | **Shattered Paradise** | SP literally has GDI / Nod / CABAL / Mutant(Forgotten) |
-| **TD GDI / Nod** | Tiberian Dawn | **Combined Arms** | CA fields the TD factions at OpenRA fidelity |
-| **RA1 Allies / Soviets / Japan** | RA1 (Japan ← RA3 Empire) | **Combined Arms** | CA fields the RA1 rosters |
+| **RA2 Allies / Soviets / Yuri** | RA2 + YR | **Mental Omega + Romanov's Vengeance + CnC Reloaded** | MO best-balanced; RV = RA2-in-OpenRA; CnCR = RA2+TS |
+| **TS GDI / Nod / Forgotten / CABAL** | TS + FS | **Shattered Paradise + CnC Reloaded** | SP has GDI/Nod/CABAL/Mutant; CnCR adds TS depth |
+| **TD GDI / Nod** | Tiberian Dawn | **Combined Arms + DTA** | both crossover the TD factions |
+| **RA1 Allies / Soviets / Japan** | RA1 (Japan ← RA3 Empire + WW2 + **Touhou**) | **Combined Arms + DTA** | CA/DTA field the RA1 rosters |
 | **Scrin** (future add) | — | **Shattered Paradise + Combined Arms** (synthesis) | two independent Scrin → richer Cameo Scrin, OUR assets |
 | **Steel Consortium** | — | **MO Foehn Revolt** | inspired, not identical; Foehn = tankiest infantry → durable lean ✓ |
 | **Latin Syndicate** | — | **MO Latin Confederation** (Soviet subfaction) | "basically the same" — black-market Soviet surplus, explosives |
@@ -691,6 +696,8 @@ us place a borrowed unit correctly instead of guessing, and lets us decide a fac
 | **Dawn of the Tiberium Age** | **TS engine** (HP & vs-armor ×10) | TD+RA1 crossover peer | ✅ **done** — Classic + Enhanced `[STAT ÷10]` |
 | **Combined Arms** (OpenRA) | **Cameo's exact engine** | direct crossover peer — *own power level, normalize* | ✅ **done** — de-homogenizes by role `[STAT peer]` |
 | **Shattered Paradise** (OpenRA) | **Cameo's exact engine** | TS-era peer (GDI/Nod/CABAL/Scrin/Mutant) | ✅ **done** — by role + faction `[STAT peer]` |
+| **CnC Reloaded 2.7.0** | Ares (RA2 **+ TS** combined) | RA2 **and** TS synthesis | ⏳ TODO — loose `Tools/Map Editor/rulesmd.ini` `[STAT]` |
+| **Romanov's Vengeance** | OpenRA (RA2 remake) | RA2 synthesis | ⏳ TODO — `mods/rv/rules` + `mods/rv/weapons` `[STAT]` |
 
 ## Identity / playstyle stubs (safe from lore + design knowledge; exact stats pending web)
 

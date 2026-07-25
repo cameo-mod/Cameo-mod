@@ -19,6 +19,22 @@ factions, everything through the balance workbook. Faction reference:
 
 ---
 
+## ★ MAJOR PROGRAM (2026-07-25): mod-synthesis balance overhaul — see [`BALANCE_SYNTHESIS.md`](BALANCE_SYNTHESIS.md)
+
+Big multi-session effort to fix Cameo's extreme-value balance by synthesizing extracted mods into
+class anchors. Full plan + the new binding laws (spread-width, baseline-only, class↔weapon binding,
+AA-gating, rock-paper-scissors) are captured in `BALANCE_SYNTHESIS.md` + `ORIGINAL_UNIT_STATS.md`
+(reference map + extracted data) + memory. Work items, in order:
+1. **Extract remaining sources** — CnC Reloaded (`Tools/Map Editor/rulesmd.ini`), Romanov's Vengeance
+   (`mods/rv/rules`+`weapons`), Dune games, Outpost 2. **Extend tooling to weapons/warheads/versus**
+   (currently HP/Cost/Speed only) — the full spreadsheet stat set.
+2. **Normalized full reference tables** per mod per faction (÷ each mod's basic rifleman).
+3. **Synthesize per-class/faction targets** → **re-derive class anchors** (tightened spread band).
+4. **Weapon/warhead rework** — class↔weapon binding matrix, grow the warhead library, remove wild
+   mixes (audit `weapons.yaml` vs mod versus-values + `ARMOR_SYSTEM.md`).
+5. **AA class-gating** (§9) + **bake out per-class multipliers** into baselines (§7).
+6. **Promote the §6–§10 laws into `DESIGN.md`** (binding). Then rerun the formula per class → apply.
+
 ## Active documentation maintenance
 
 - [x] **Documentation architecture quick wins** — owner: Cascade. Added `docs/README.md`; reduced `PROJECT_CONTEXT.md` to orientation and canonical links; kept the complete startup, evidence, incident, and commit-gate protocol in `AGENT_WORKSPACE.md`. Validation: checked links in the entry documents and ran `git diff --check`.
