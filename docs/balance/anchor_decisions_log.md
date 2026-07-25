@@ -77,17 +77,17 @@ price). Keep speed 50 + range ~6400; HP/Damage set by `fit_class` to price at 20
 - **ArtilleryTank** = between tank and artillery (e.g. **Ixian Combat Siege**; maybe Sturm Tiger —
   research later; so far Ixian Combat Siege is the only clear fit).
 
-## ⚠ NEW CLASS NEEDED — heavy, long-range, FRONTAL, TANKY (name TBD)
+## ✅ NEW CLASS — **Dreadnought** (`^DreadnoughtTemplate`) — heavy, long-range, FRONTAL, TANKY
 
-**The problem:** units that are frontal-facing + long range + **tanky** are wrongly on LineBreaker,
-whose damage-reduction + firepower buff only works for *close* range. Result: they're "tanky as
-f***" AND long-ranged = nearly uncounterable (unlike fragile FireSupport). Misfits:
+**Named by maintainer 2026-07-25.** Frontal-facing + long range + **tanky** — the tanky counterpart
+to the fragile FireSupport. Currently mis-assigned to LineBreaker, whose damage-reduction + firepower
+buff only works at *close* range; Dreadnought needs its OWN damage-reduction tuned for long range
+(NOT the LineBreaker buff). Members (move off LineBreaker):
 - `asianalliance_pulverizermecha` — 285000 HP, Superheavy, cost 3000
 - `terran_warhound` — 300000 HP, Heavy, cost 4500
 - `ixian_neocymek` — 300000 HP, Heavy, cost 4500
 
-All are heavy mechs/walkers. **Needs its own template** (own damage-reduction tuned for long range,
-NOT the LineBreaker buff). **Name pending maintainer.**
+**TODO:** create `^DreadnoughtTemplate` in defaults.yaml (boot-gated); baseline/verifier pick later.
 
 ## HOLD
 
