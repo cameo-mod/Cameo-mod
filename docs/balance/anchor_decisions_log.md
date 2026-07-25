@@ -57,8 +57,9 @@ need the **new weapon types (§13 warhead library) implemented first**, and the 
 | HP | Speed | Range | Dmg/shot | Burst | BurstDelay | **eff-reload** | **cost0** | DPS |
 |--:|--:|--:|--:|--:|--:|--:|--:|--:|
 | **400000** | **50** | **6500** | **20000** | **2** | 8 (keep) | **80** | **2000** | **500** |
-- eff-reload 80 with burst 2 + BurstDelay 8 ⇒ **ReloadDelay 72** (72 + 8·(2−1) = 80). Total per burst
-  = 40000. Range band 6000–7000.
+- **eff-reload 80** for BOTH weapons, but they keep their different burst delays: **cannon bd 8 ⇒
+  ReloadDelay 72** (72+8); **AA tusk bd 12 ⇒ ReloadDelay 68** (68+12). Total per burst = 40000.
+  Range band 6000–7000. (Verifier likewise: eff-reload 80 both, cannon RD 72 / AA RD 68.)
 
 **Verifier = Siege Mammoth Tank** (`ra1_soviets_siegemammothtank`) — 2×HP / 2×DPS / 2.5×cost, SAME
 speed+range:
@@ -71,9 +72,11 @@ speed+range:
 **⚠ Pricing-flag cleanup (both units):** all 10/8 armaments are `pricing=True` (base gun + Targeting-
 Computer/Thermobaric/Tesla upgrade variants + the AA MammothTusk). Anchor DPS = **500** from the base
 main gun. Upgrade variants are upgrade-gated (excluded). **★ AG/AA PAIR LAW (maintainer 2026-07-25):
-a unit's anti-ground and anti-air base weapons must be IDENTICAL** (same Damage, Burst, BurstDelays,
-WeaponClass) **and count as ONE for pricing — never summed**, because they can't fire on the same
-target. So Mammoth main gun (AG) = MammothTusk (AA) in stats, priced once (DPS 500), not 500+500.
+a unit's anti-ground and anti-air base weapons must have the SAME EFFECTIVE reload delay** (so
+identical DPS) **+ same Damage, Burst, WeaponClass — but their BurstDelays MAY differ** (ReloadDelay
+compensates to keep eff-reload equal). **Counted as ONE for pricing — never summed** (can't fire on
+the same target). Mammoth: cannon bd 8 → ReloadDelay 72; AA tusk bd 12 → ReloadDelay 68; **both
+eff-reload 80** → both DPS 500, priced once (not 500+500).
 **Other Soviet mammoth variants:** only these two exist in the RA1 Soviet roster; the per-armament
 upgrade variants inherit the base damage (20000 baseline / 40000 verifier) + their upgrade modifiers.
 - Ladder so far: LightTank 400 · MBT 800 · **HighTechTank 2000**. (Maintainer called 2000 "twice the
