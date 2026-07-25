@@ -1087,8 +1087,7 @@ JapanCarrierTarget:
 	Warhead@1Dam: TargetDamage
 
 RAAtomic:
-	Inherits: Atomic
-	-Warhead@FlashEffect:
+	Inherits: ^AtomicCore
 	Warhead@NuclearFlash: NuclearFlashEffect
 		Duration: 40
 		Radius: 0.35

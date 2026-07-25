@@ -53,6 +53,16 @@ def main() -> int:
 	if world is None or not any(c.key == "NuclearFlashRenderer" for c in world.children):
 		failures.append("World is missing the active NuclearFlashRenderer trait")
 
+	ra_atomic_source = ruleset.weapon("RAAtomic")
+	if ra_atomic_source is None:
+		failures.append("RAAtomic is missing from the active mod.yaml include graph")
+	else:
+		inherits = [target for _, target in ruleset.inherits_of(ra_atomic_source)]
+		if "^AtomicCore" not in inherits:
+			failures.append("RAAtomic must inherit ^AtomicCore directly")
+		if any(c.key.startswith("-Warhead@") for c in ra_atomic_source.children):
+			failures.append("RAAtomic must not use regex-fragile negative warhead removals")
+
 	for weapon_name, expected_fields in EXPECTED.items():
 		launcher_name = LAUNCHERS[weapon_name]
 		launcher = ruleset.resolve(launcher_name)

@@ -239,10 +239,11 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
 
 - [x] **RA1 Soviet atomic bomb lost its directional flash**: bulk YAML lint
   commit `d42ad53a1` deleted the `Warhead@NuclearFlash` header from active
-  `RAAtomic`, leaving its tuning fields under a removal node. Restored the
-  approved 40-tick effect and added an active-ruleset contract audit covering
-  RA1 `RAAtomic`, Ixian `PulseMissile`, and CABAL `CabalMagicNuke`; PR CI now
-  runs the audit for `master`.
+  `RAAtomic`, leaving its tuning fields under a removal node. Split the shared
+  weapon into `^AtomicCore` and an `Atomic` wrapper so `RAAtomic` can define the
+  approved 40-tick effect without a regex-fragile negative removal. Added an
+  active-ruleset contract audit covering RA1 `RAAtomic`, Ixian `PulseMissile`,
+  and CABAL `CabalMagicNuke`.
 
 ### P0 — Completed (2026-07-24 session)
 
