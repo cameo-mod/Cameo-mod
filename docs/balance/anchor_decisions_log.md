@@ -47,3 +47,49 @@ DOWN into band), futuretech_robottank. **Tick Tank DROPPED** (slow/deploys — d
 **PREREQ note:** the class↔weapon binding rules (which unit class may pick which weapon class/type)
 need the **new weapon types (§13 warhead library) implemented first**, and the restored
 **`WeaponClass`** sidecar (`docs/balance/weapon_classes.yaml`) wired into the pipeline.
+
+---
+
+## ✅ HighTechTank — LOCKED 2026-07-25
+
+**Baseline:** **RA1 Soviet Mammoth Tank** (`ra1_soviets_mammothtank`), **cost0 2000** (its nostalgic
+price). Keep speed 50 + range ~6400; HP/Damage set by `fit_class` to price at 2000 in-band (current
+375000 HP likely comes down — HP was scaling faster than cost).
+**Verifier:** **Siege Mammoth Tank** (`ra1_soviets_siegemammothtank`, the upgraded version) at
+**exactly 2.5× = 5000¢**, restatted to 2×HP / 2×DPS (same speed/range).
+- Ladder so far: LightTank 400 · MBT 800 · **HighTechTank 2000**. (Maintainer called 2000 "twice the
+  MBT baseline" — vs the Tiger's cost0 800 that's 2.5×; confirm MBT stays 800 or bumps to 1000.)
+- **Apocalypse** sits as a heavy *member*, not the baseline.
+- **Turreted tanks are ALWAYS Light / MBT / HighTech** (maintainer rule).
+
+## ✅ TankDestroyer — DEFINITION LOCKED (baseline TBD)
+
+**Role:** **frontal-facing (no turret), long range, anti-tank.** All the same kind.
+**Members:** `ra1_allies_alliedtankdestroyer`, `ra2_allies_tankdestroyer`, `naxis_hetzer`,
+`naxis_jagdpanzer`, Ordos Tank Destroyer. (Baseline/verifier pick next.)
+
+## Taxonomy clarifications (maintainer 2026-07-25)
+
+- **LineBreaker** = **very short range + very durable** (flame tanks). The template's heavy
+  damage-reduction + extra-firepower suits CLOSE range only.
+- **FireSupport** = **weaker armor + longer range**; countered easily *because* fragile. **REMOVE
+  anti-air from FireSupport** (e.g. GDI MLRS loses AA) for consistency.
+- **ArtilleryTank** = between tank and artillery (e.g. **Ixian Combat Siege**; maybe Sturm Tiger —
+  research later; so far Ixian Combat Siege is the only clear fit).
+
+## ⚠ NEW CLASS NEEDED — heavy, long-range, FRONTAL, TANKY (name TBD)
+
+**The problem:** units that are frontal-facing + long range + **tanky** are wrongly on LineBreaker,
+whose damage-reduction + firepower buff only works for *close* range. Result: they're "tanky as
+f***" AND long-ranged = nearly uncounterable (unlike fragile FireSupport). Misfits:
+- `asianalliance_pulverizermecha` — 285000 HP, Superheavy, cost 3000
+- `terran_warhound` — 300000 HP, Heavy, cost 4500
+- `ixian_neocymek` — 300000 HP, Heavy, cost 4500
+
+All are heavy mechs/walkers. **Needs its own template** (own damage-reduction tuned for long range,
+NOT the LineBreaker buff). **Name pending maintainer.**
+
+## HOLD
+
+**Weapons.yaml below-divider cleanup = ON HOLD** (maintainer: "don't delete anything yet"). Plan
+stays in `weapons_cleanup_plan.md`; no deletions/moves until greenlit.
