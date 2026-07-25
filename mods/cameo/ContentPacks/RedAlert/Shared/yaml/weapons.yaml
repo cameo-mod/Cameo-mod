@@ -1089,7 +1089,8 @@ JapanCarrierTarget:
 RAAtomic:
 	Inherits: Atomic
 	-Warhead@FlashEffect:
-		Duration: 50
+	Warhead@NuclearFlash: NuclearFlashEffect
+		Duration: 40
 		Radius: 0.35
 		Brightness: 1.3
 		Darkness: 0.85

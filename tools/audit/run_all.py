@@ -26,7 +26,7 @@ AUDITS = [
     "missing_elite", "elite_gating", "rank_decoration", "dune_rank_decoration",
     "effect_warhead_names", "weapon_suffixes", "balance_sheet",
     "consistency_report", "packs", "balance_drift", "template_conformance",
-    "multiplier_modifiers",
+    "multiplier_modifiers", "nuclear_flash_bindings",
 ]
 
 EXTRAS = [

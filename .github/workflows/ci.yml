@@ -3,7 +3,7 @@ name: Continuous Integration
 on:
   push:
   pull_request:
-    branches: [ bleed, 'prep-*' ]
+    branches: [ master, bleed, 'prep-*' ]
 
 permissions:
   contents: read  #  to fetch code (actions/checkout)
@@ -21,6 +21,9 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x'
+
+      - name: Check Nuclear Flash Bindings
+        run: python tools/audit/audit_nuclear_flash_bindings.py
 
       - name: Check Mods
         run: |
