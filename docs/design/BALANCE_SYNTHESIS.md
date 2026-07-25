@@ -352,9 +352,14 @@ firm ceiling so nothing is untradeable. **No infantry class exceeds the MBT's du
 exceeds ~10× rifle.** These become the re-derived class anchors in §5 step 4 — run through the
 pipeline, never hand-edited.
 
+**⚠️ SUPERSEDED IN PART BY §18 (maintainer, 2026-07-25):** the hard HP bands below are **retracted**
+as *caps* — they become *descriptive* only. The real "unkillable" cause is **defensive upgrade
+stacking**, not base HP; **epics (build-limit-1) are fine as-is**; and the correct base-unit limiter
+is the **cost-band (50–400% class cost)**, not an HP ceiling. Read §18 first.
+
 **Caveats / honesty:** (a) this pass covers **HP only** — DPS/versus (§8) and cost still need the
-same treatment; a low-HP unit can still be oppressive via damage. (b) The epic tier may want a
-*separate* "epic" class rather than being squeezed into normal bands — flag for the maintainer.
+same treatment; a low-HP unit can still be oppressive via damage. (b) The epic tier is a **build-
+limit-1 promotion role**, deliberately extreme — NOT squeezed into normal bands (§18.1).
 (c) CA's wide gap shows some mods deliberately spread more; the 20× target is a judgement call the
 maintainer signs off, not a law from the data. (d) Numbers are **proposals for the pipeline**, not
 applied — no yaml/anchor was edited to produce this section.
@@ -606,13 +611,14 @@ secondary** — so the §13 binding is already correct; only the HP/cost magnitu
 - **Δ HP: 350,000 → ~140,000 = −210,000 (−60%).** The Cameo Apocalypse is **2.7× too tanky** vs the
   pure consensus, **2.5× over** the epic cap.
 
-**Recommendation (formula-phrased):** the Apocalypse is `^EpicVehicleTemplate`. Set the **epic-class
-HP anchor** to the §12.4 epic band (6–8× rifle = 120–160k) and re-run the formula — the Apocalypse
-prices/spreads within the epic class around **~140k**, not 350k. **Keep the weapon binding as-is**
-(AP anti-armor + limited AA rocket — correct and consistent across all five sources). Cost: consensus
-~1750 credits at rifle-cost 150–200 (≈9–11× rifle cost); Cameo cost to be checked in the same pass.
-This single change — plus the same epic re-anchor applied to Monster Tank (50×→cap), Tortuga (44×),
-Future Tank (32×), Exorcist (37×) — resolves the bulk of the "unkillable/unstoppable" complaints.
+**Recommendation (formula-phrased) — CORRECTED per §18:** the Apocalypse is a **regular MBT/
+HighTech tank, NOT epic** (§18.1). With MO added, the RA2-era Apoc consensus is **3.0–6.4× rifle**
+(MO 3.0×, vanilla/CnCR/RV 6.4×) → a Cameo target roughly **80–140k**, reached **not by a hard HP cut
+but by the cost-band** (§18.4): price the Apocalypse in-formula and let its 50–400%-cost envelope
+settle its HP. **Keep the weapon binding as-is** (AP anti-armor + limited AA rocket — correct across
+every source). **Do NOT** apply this to Monster Tank / Tortuga / Exorcist — those are, respectively,
+an intended epic, an intended slow-tank trade-off, and an ability-pricing bug (§18.3), not base-HP
+problems.
 
 **Method proven:** raw → normalized → synthesized → Δ → formula recommendation, with the versus
 scale-trap avoided (weapon identity read by role, not number) and the remake double-count caught.
@@ -681,3 +687,98 @@ tank — Ordos 3.2× / Atreides 3.7× / Harkonnen 4.8×** (the house durability 
 This is the **Ordos** synthesis anchor (Dune faction). Note the house identity is already in the HP:
 Harkonnen tankiest, Ordos lightest — matches `FACTION_IDENTITY.md`. Dune II + Emperor still needed
 (maintainer has no local copy) for the full Dune synthesis; D2K-OpenRA covers the core now.
+
+---
+
+## 18. MAINTAINER CORRECTIONS (2026-07-25) — the "unkillable" cause is UPGRADES, not base HP
+
+Critical course-correction from the maintainer. **My §12 diagnosis was partly wrong.** Recording it
+in full; §12/§16 are superseded where they conflict with this section.
+
+### 18.1 "Epic" is a ROLE, not a high HP number — Apocalypse is NOT epic
+
+- **Epic units in Cameo** = hero-like: **build limit 1**, unlocked behind a **Tier-4 promotion (4
+  promotion points)**, and *deliberately allowed to be far stronger than everything else.* They are
+  a heavy investment and **easily focus-fired down** (everyone shoots the one unit). **This is
+  working as intended.**
+- **Monster Tank at 1,000,000 HP is FINE** — it's an epic (build-limit-1, promotion-gated), and has
+  *never* been particularly strong in practice. My §12 "Monster 50× = unstoppable" was **WRONG**.
+- **The Apocalypse is a REGULAR unit** (no build limit), so its category is **NOT `^EpicVehicle`** —
+  it's a `^MainBattleTank` / `^HighTechTank`. §16 miscategorised it; the HP comparison still holds as
+  data, but "epic re-anchor" was the wrong framing — see the cost-band below.
+- **Doc-1 generator fix:** `category()` must NOT map high HP → epic. Epic = build-limit-1 +
+  promotion-gate (a rules property: `BuildLimit: 1` + promotion prereq), detected from the actor,
+  never from HP.
+
+### 18.2 The REAL "unkillable / unstoppable" cause = DEFENSIVE UPGRADE STACKING
+
+Base units **without upgrades are basically fine.** Units become unkillable when **defensive
+upgrades stack**, especially combined:
+- **Armor upgrades** (damage multiplier / damage resistance),
+- **Regeneration** (nanobots / self-heal),
+- **Shields** (Steel Consortium, Dune factions).
+
+Several of these together → unstoppable. **So the fix is NOT re-anchoring base HP down — it's fixing
+upgrade stacking/pricing.** This is a **new top work-item** (see 18.5). My §12 "Cameo stretched HP
+to 200×" over-indexed on base HP; the base spread wants only *modest* tightening (18.4), the
+*upgrades* are the actual bug.
+
+### 18.3 Unit-specific corrections (not the problems I thought)
+
+- **Tortuga (875k HP):** intentionally **ultra-slow + ultra-tanky** → in practice **one of the WORST
+  units** (so slow it's trivially outplayed/kited; nobody builds it despite the HP). Its durability
+  is a *deliberate trade-off*, correctly costed by being unusable. **Leave it.**
+- **Exorcist O-I (750k HP):** the problem is **NOT tankiness** — it's her **ability**, a
+  superweapon-like nuke that blows up everything around her. **Underpriced:** its **special-category
+  ability modifier is 1.25×** and should be **~2.0×**. Fix the ability price, not the HP.
+
+### 18.4 The maintainer's COST-BAND proposal — assessment (asked: "what do you think?")
+
+**Proposal:** run the formula so **every unit sits within 50%–400% of its class-baseline COST** (hard
+caps), with the **verifier at exactly 2.5× cost**. E.g. scout baseline 100 → hard floor 50, hard
+ceiling 400.
+
+**My honest assessment — this is a GOOD mechanism, and better than my §12.4 HP-cap idea:**
+- ✅ **It caps AGGREGATE power, and cost already IS the power proxy** (Cost = cost0·(O/O0+P/P0+Q/Q0)/3
+  — HP, DPS, range folded into one). A hard 400% cost ceiling ⇒ no unit exceeds 4× its class's total
+  power. That's a real, clean limit.
+- ✅ **It respects trade-offs — which my HP-cap did NOT.** A unit can still be very tanky *if it pays
+  by being weak elsewhere* (exactly the Tortuga: huge HP, but so slow it's bad). My "HP ≤ 10× rifle"
+  rule would have wrongly *forbidden* the Tortuga; the cost-band *allows* it because its low speed/
+  utility keeps its cost in band. **The cost-band is the correct tool; retract the hard HP cap.**
+- ✅ **Verifier at 2.5× cost** sits comfortably inside the 0.5–4.0× band (upper-middle), leaving
+  headroom for genuinely maxed units without them blowing past 4×.
+- ⚠️ **Caveat 1 — it bounds aggregate, not any single stat.** A 400%-cost unit that dumps everything
+  into HP could still be ~8–10× baseline HP if its DPS/range are minimal. Usually fine (it's a
+  trade-off), but if you ever want a *specific* stat ceiling too, add a per-stat sub-cap on top.
+- ⚠️ **Caveat 2 — it does NOT touch UPGRADES** (priced separately), so **it will not fix the
+  unkillable problem** (18.2). The cost-band tidies *base* units (modest, welcome); the upgrade-
+  stacking fix is a separate track.
+- ⚠️ **Caveat 3 — it's per-class.** Cross-class absolute spread still reflects the class baselines
+  (support 500 vs commando 3000, etc.) — which is correct; classes *should* differ.
+
+**Verdict: adopt it.** It's the right amount of tightening ("not as much as I recommended" — agreed),
+it's formula-native, and it preserves design intent. It **supersedes §12.4's hard HP bands** (those
+become *descriptive* "where units tend to land," not caps). Pair it with the upgrade fix (18.5).
+
+### 18.5 Revised work-items (this section supersedes §12's conclusions)
+
+1. **Fix defensive-upgrade stacking** — audit armor(damage-mult) / regen(nanobots,self-heal) /
+   shield(Consortium,Dune) upgrades; cap or diminish stacking so combined defensives can't make a
+   unit unkillable. **This is the actual "unkillable" fix — new top priority.**
+2. **Adopt the cost-band** (50–400% class-baseline cost, verifier 2.5×) as the base-unit power cap.
+3. **Re-price the Exorcist ability** (special modifier 1.25× → ~2.0×); audit other superweapon-like
+   abilities for the same under-pricing.
+4. **Fix the epic definition in tooling** — epic = build-limit-1 + promotion-gate, never HP.
+   Recategorise Apocalypse (regular MBT/HighTech), keep Monster/epics as-is.
+5. Base-HP re-anchoring is **demoted** to whatever the cost-band naturally produces — no drastic cut.
+
+### 18.6 Mental Omega — re-included (639 units, `mo_units.csv`)
+
+Reconstructed MO's full roster by merging its split `expandmo99.mix` INIs → `ini_full.py`. **MO is
+the key per-faction-differentiation reference** (the maintainer's point): unlike vanilla's flat
+baselines, MO re-stats every faction's basic units — **Conscript 205 ≠ GI**, and it re-tunes heavies
+(**Rhino 500, Apocalypse 620** — MO *lowered* the Apoc). MO rifle ≈ 205 (buffed infantry), so MO's
+inf:MBT ratio = 500/205 = **2.4×** (matches vanilla) but its Apoc is only **3.0× rifle** (vs vanilla
+6.4×) — MO compressed the top. **MO is now a first-class synthesis voice** for the RA2 factions and
+the template for how Cameo should de-homogenise per faction.

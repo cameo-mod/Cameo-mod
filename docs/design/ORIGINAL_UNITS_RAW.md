@@ -9,6 +9,8 @@ Warhead role auto-classified from the Versus armor-ORDER (anti-inf / anti-armor 
 
 **Category** = best-guess Cameo template; **⚠ = low confidence, needs maintainer review**
 (esp. the NEW ^LightTank / ^TankDestroyer / ^AntiAirTank / ^ArtilleryTank templates).
+**NOTE:** *Epic* is a Cameo build-limit-1 promotion role (§18.1), NOT a high-HP guess —
+this generator never auto-labels epic; high-HP tanks are filed as heavy/high-tech.
 **Description** = TODO (deep-web per-unit blurb, filled incrementally).
 
 > First cut: **RA2 family** (Allies/Soviets/Yuri) across RA2 · YR · CnC Reloaded · Romanov's
@@ -73,20 +75,20 @@ Warhead role auto-classified from the Versus armor-ORDER (anti-inf / anti-armor 
 | Tesla Tank | vehicle | 300 | 2.4 | 1200 | 6 | TankBolt | 135 | 75 | 4 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
 | Hind Transport | vehicle | 300 | 2.4 | 1000 | 15 | BlackHawkCanno | 35 | 40 | 6 | anti-inf | ⚠ ^SupportVehicle (unarmed/transport) | TODO |
 | Placeholder | vehicle | 300 | 2.4 | 2000 | 4 | CometFragment | 30 | 120 | 3 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
-| Rhino Heavy Tank | vehicle | 400 | 3.2 | 900 | 6 | 120mm | 90 | 65 | 5.75 | anti-armor | ^MainBattleTank | TODO |
+| Rhino Heavy Tank | vehicle | 400 | 3.2 | 900 | 6 | 120mm | 90 | 65 | 5.75 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
 | Tank Destroyer | vehicle | 400 | 3.2 | 900 | 5 | SABOT | 150 | 70 | 5 | anti-armor | ^MainBattleTank | TODO |
 | Sea Scorpion | vehicle | 400 | 3.2 | 600 | 8 | FlakTrackGun | 25 | 40 | 5 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
-| Destroyer | vehicle | 600 | 4.8 | 1000 | 6 | 155mm | 60 | 110 | 8 | general | ⚠ ^HighTechTank | TODO |
-| Typhoon Attack Sub | vehicle | 600 | 4.8 | 1000 | 4 | SubTorpedo | 100 | 120 | 7 | anti-armor | ⚠ ^HighTechTank | TODO |
-| Coast Guard Boat | vehicle | 600 | 4.8 | 1000 | 6 | 155mm | 60 | 110 | 8 | general | ⚠ ^HighTechTank | TODO |
-| Apocalypse | vehicle | 800 | 6.4 | 1750 | 4 | 120mmx | 100 | 80 | 5.75 | anti-armor | ^EpicVehicle | TODO |
+| Destroyer | vehicle | 600 | 4.8 | 1000 | 6 | 155mm | 60 | 110 | 8 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Typhoon Attack Sub | vehicle | 600 | 4.8 | 1000 | 4 | SubTorpedo | 100 | 120 | 7 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| Coast Guard Boat | vehicle | 600 | 4.8 | 1000 | 6 | 155mm | 60 | 110 | 8 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Apocalypse | vehicle | 800 | 6.4 | 1750 | 4 | 120mmx | 100 | 80 | 5.75 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
 | Aircraft Carrier | vehicle | 800 | 6.4 | 2000 | 4 | HornetLauncher | 1 | 150 | 25 | ? | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | Aegis Cruiser | vehicle | 800 | 6.4 | 1200 | 4 | Medusa | 100 | 15 | 12 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | Dreadnought | vehicle | 800 | 6.4 | 2000 | 4 | DredLauncher | 50 | 50 | 25 | ? | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | War Miner | vehicle | 1000 | 8.0 | 1400 | 4 | 20mmRapid | 30 | 20 | 5.5 | anti-inf | ^Harvester/support | TODO |
 | Chrono Miner | vehicle | 1000 | 8.0 | 1400 | 4 | none |  |  |  | ? | ^Harvester/support | TODO |
 | Vladimir's Dreadnought | vehicle | 1500 | 12.0 | 2500 | 8 | DredLauncher | 50 | 50 | 25 | ? | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
-| Kirov Airship | vehicle | 2000 | 16.0 | 2000 | 5 | BlimpBomb | 250 | 50 | 1.5 | general | ^EpicVehicle | TODO |
+| Kirov Airship | vehicle | 2000 | 16.0 | 2000 | 5 | BlimpBomb | 250 | 50 | 1.5 | general | ⚠ ^HighTechTank (heavy) | TODO |
 
 ## Yuri's Revenge  (rifle = 125 HP)
 
@@ -171,26 +173,353 @@ Warhead role auto-classified from the Versus armor-ORDER (anti-inf / anti-armor 
 | Lasher Light Tank | vehicle | 300 | 2.4 | 700 | 7 | ATGUN | 65 | 60 | 5 | anti-armor | ^MainBattleTank | TODO |
 | Placeholder | vehicle | 300 | 2.4 | 2000 | 4 | CometFragment | 30 | 120 | 3 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
 | Soviet Siege Chopper | vehicle | 300 | 2.4 | 1400 | 12 | BlackHawkCanno | 35 | 40 | 6 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
-| Rhino Heavy Tank | vehicle | 400 | 3.2 | 900 | 6 | 120mm | 90 | 65 | 5.75 | anti-armor | ^MainBattleTank | TODO |
+| Rhino Heavy Tank | vehicle | 400 | 3.2 | 900 | 6 | 120mm | 90 | 65 | 5.75 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
 | Tank Destroyer | vehicle | 400 | 3.2 | 900 | 5 | SABOT | 150 | 70 | 5 | anti-armor | ^MainBattleTank | TODO |
 | Sea Scorpion | vehicle | 400 | 3.2 | 600 | 8 | FlakTrackGun | 25 | 25 | 5 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
 | ZZZ Not Used | vehicle | 400 | 3.2 | 1000 | 6 | Comet | 100 | 100 | 10 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
-| Master Mind | vehicle | 500 | 4.0 | 1750 | 4 | MultipleMindCo | 3 | 10 | 6 | general | ⚠ ^HighTechTank | TODO |
-| Destroyer | vehicle | 600 | 4.8 | 1000 | 6 | 155mm | 60 | 110 | 8 | general | ⚠ ^HighTechTank | TODO |
-| Typhoon Attack Sub | vehicle | 600 | 4.8 | 1000 | 4 | SubTorpedo | 100 | 120 | 7 | anti-armor | ⚠ ^HighTechTank | TODO |
-| Coast Guard Boat | vehicle | 600 | 4.8 | 1000 | 6 | 155mm | 60 | 110 | 8 | general | ⚠ ^HighTechTank | TODO |
-| Battle Fortress | vehicle | 600 | 4.8 | 2000 | 4 | 20mmRapid | 30 | 20 | 5.5 | anti-inf | ⚠ ^HighTechTank | TODO |
-| Floating Disk | vehicle | 600 | 4.8 | 1750 | 15 | DiskLaser | 90 | 80 | 7 | anti-inf | ⚠ ^HighTechTank | TODO |
-| Apocalypse | vehicle | 800 | 6.4 | 1750 | 4 | 120mmx | 100 | 80 | 5.75 | anti-armor | ^EpicVehicle | TODO |
+| Master Mind | vehicle | 500 | 4.0 | 1750 | 4 | MultipleMindCo | 3 | 10 | 6 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Destroyer | vehicle | 600 | 4.8 | 1000 | 6 | 155mm | 60 | 110 | 8 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Typhoon Attack Sub | vehicle | 600 | 4.8 | 1000 | 4 | SubTorpedo | 100 | 120 | 7 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| Coast Guard Boat | vehicle | 600 | 4.8 | 1000 | 6 | 155mm | 60 | 110 | 8 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Battle Fortress | vehicle | 600 | 4.8 | 2000 | 4 | 20mmRapid | 30 | 20 | 5.5 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Floating Disk | vehicle | 600 | 4.8 | 1750 | 15 | DiskLaser | 90 | 80 | 7 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Apocalypse | vehicle | 800 | 6.4 | 1750 | 4 | 120mmx | 100 | 80 | 5.75 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
 | Aircraft Carrier | vehicle | 800 | 6.4 | 2000 | 4 | HornetLauncher | 1 | 150 | 25 | ? | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | Aegis Cruiser | vehicle | 800 | 6.4 | 1200 | 4 | Medusa | 100 | 15 | 12 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | Dreadnought | vehicle | 800 | 6.4 | 2000 | 4 | DredLauncher | 50 | 50 | 25 | ? | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | War Miner | vehicle | 1000 | 8.0 | 1400 | 4 | 20mmRapid | 30 | 20 | 5.5 | anti-inf | ^Harvester/support | TODO |
 | Chrono Miner | vehicle | 1000 | 8.0 | 1400 | 4 | none |  |  |  | ? | ^Harvester/support | TODO |
-| Yuri Boomer | vehicle | 1200 | 9.6 | 2000 | 5 | BoomerTorpedo | 60 | 120 | 7 | general | ^EpicVehicle | TODO |
+| Yuri Boomer | vehicle | 1200 | 9.6 | 2000 | 5 | BoomerTorpedo | 60 | 120 | 7 | general | ⚠ ^HighTechTank (heavy) | TODO |
 | Vladimir's Dreadnought | vehicle | 1500 | 12.0 | 2500 | 8 | DredLauncher | 50 | 50 | 25 | ? | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
-| Kirov Airship | vehicle | 2000 | 16.0 | 2000 | 5 | BlimpBomb | 250 | 50 | 1.5 | general | ^EpicVehicle | TODO |
+| Kirov Airship | vehicle | 2000 | 16.0 | 2000 | 5 | BlimpBomb | 250 | 50 | 1.5 | general | ⚠ ^HighTechTank (heavy) | TODO |
 | Slave Miner | vehicle | 2000 | 16.0 | 1500 | 3 | 20mmRapid | 30 | 20 | 5.5 | anti-inf | ^Harvester/support | TODO |
+
+## Mental Omega  (rifle = 205 HP)
+
+| Unit | kind | HP | ×rifle | Cost | Spd | Weapon | Dmg | Rld | Rng | Role | **Category** | Desc |
+|---|---|--:|--:|--:|--:|---|--:|--:|--:|---|---|---|
+| Decoy Quetzal Eyes | aircraft | 100 | 0.5 | 0 | 25 | DSeekerBomb | 1 | 1 | 1 | general | ⚠ ^Fighter | TODO |
+| Wastelot | aircraft | 180 | 0.9 | 750 | 34 | WastelotAttack | 20 | 500 | 12 | general | ⚠ ^Fighter | TODO |
+| Hailstorm Hailjet | aircraft | 200 | 1.0 | 100 | 18 | VentrexBeam | 15 | 1 | 6 | anti-inf | ⚠ ^Fighter | TODO |
+| Quetzal Eyes | aircraft | 200 | 1.0 | 200 | 25 | SeekerBomb | 200 | 1 | 1 | general | ⚠ ^Fighter | TODO |
+| Kingsnake | aircraft | 200 | 1.0 | 1200 | 26 | SnakeMissile | 100 | 10 | 8 | anti-armor | ⚠ ^Fighter | TODO |
+| Stormchild | aircraft | 220 | 1.1 | 1150 | 30 | StormMissile | 200 | 10 | 8 | general | ⚠ ^Fighter | TODO |
+| Stormchild | aircraft | 220 | 1.1 | 1150 | 30 | StormMissile | 200 | 10 | 8 | general | ⚠ ^Fighter | TODO |
+| Harrier | aircraft | 230 | 1.1 | 1200 | 22 | Maverick | 95 | 10 | 8 | anti-armor | ^Helicopter | TODO |
+| Harrier | aircraft | 230 | 1.1 | 1200 | 25 | MaverickB | 90 | 10 | 6 | anti-inf | ^Helicopter | TODO |
+| Foxtrot | aircraft | 230 | 1.1 | 1300 | 24 | FoxMissile | 15 | 15 | 8 | general | ⚠ ^Fighter | TODO |
+| Harrier | aircraft | 230 | 1.1 | 1200 | 25 | Maverick | 95 | 10 | 8 | anti-armor | ^Helicopter | TODO |
+| Harrier | aircraft | 230 | 1.1 | 1200 | 25 | Maverick | 95 | 10 | 8 | anti-armor | ^Helicopter | TODO |
+| Shrike | aircraft | 240 | 1.2 | 200 | 42 | FlyingDroneRoc | 60 | 10 | 7.5 | general | ⚠ ^Fighter | TODO |
+| Dybbuk-I (Hive) | aircraft | 250 | 1.2 | 50 | 40 | GehennaBlaster | 27 | 3 | 10 | anti-armor | ⚠ ^Fighter | TODO |
+| Black Eagle (AI) | aircraft | 260 | 1.3 | 1300 | 26 | Maverick2 | 90 | 10 | 6 | general | ⚠ ^Fighter | TODO |
+| Black Eagle | aircraft | 260 | 1.3 | 1300 | 26 | Maverick2 | 90 | 10 | 6 | general | ⚠ ^Fighter | TODO |
+| Black Eagle | aircraft | 260 | 1.3 | 1300 | 26 | Maverick2 | 90 | 10 | 6 | general | ⚠ ^Fighter | TODO |
+| Dybbuk-Attacker | aircraft | 260 | 1.3 | 1150 | 22 | GehennaBlaster | 45 | 1 | 8 | anti-armor | ⚠ ^Fighter | TODO |
+| Hummingbird | aircraft | 300 | 1.5 | 1400 | 36 | TimeWarp1 | 1 | 10 | 8.5 | anti-armor | ⚠ ^Fighter | TODO |
+| Leviathan Helibot | aircraft | 300 | 1.5 | 300 | 25 | LeviathanDrone | 60 | 10 | 4 | anti-armor | ^Helicopter | TODO |
+| Barracuda | aircraft | 320 | 1.6 | 2000 | 18 | StealthMissile | 125 | 10 | 8 | anti-inf | ⚠ ^Fighter | TODO |
+| Dustdevil | aircraft | 400 | 2.0 | 1400 | 26 | Dustbombs | 1 | 12 | 9 | general | ⚠ ^Fighter | TODO |
+| Dybbuk-Evolver | aircraft | 440 | 2.1 | 1700 | 18 | EvolverRun | 100 | 12 | 6 | anti-inf | ⚠ ^Fighter | TODO |
+| Dybbuk-Striker | aircraft | 450 | 2.2 | 1000 | 25 | StrikerGunRun | 50 | 9 | 14 | anti-inf | ⚠ ^Fighter | TODO |
+| Dybbuk-Striker | aircraft | 450 | 2.2 | 800 | 30 | StrikerGunRun | 50 | 9 | 14 | anti-inf | ⚠ ^Fighter | TODO |
+| Cargo Plane American | aircraft | 500 | 2.4 | 1000 | 24 | ParaDropWeapon | 10 | 100 | 5 | anti-inf | ⚠ ^Fighter | TODO |
+| Dybbuk-Seizer | aircraft | 500 | 2.4 | 2000 | 38 | DybbukMindCont | 3 | 25 | 9 | general | ⚠ ^Fighter | TODO |
+| SPYP | aircraft | 600 | 2.9 | 2000 | 45 | SpyCameraWeapo | 6 | 10 | 20 | anti-inf | support/^SupportInfantry | TODO |
+| Recon Probe | aircraft | 600 | 2.9 | 500 | 50 | ReconBomb | 7 | 300 | 5 | anti-inf | ⚠ ^Fighter | TODO |
+| Cargo Plane Foehn | aircraft | 700 | 3.4 | 1000 | 50 | ParaDropWeapon | 10 | 100 | 5 | anti-inf | ⚠ ^Fighter | TODO |
+| Mig Transport | aircraft | 800 | 3.9 | 1000 | 100 | ParaDropWeapon | 10 | 100 | 5 | anti-inf | support/^SupportInfantry | TODO |
+| Dybbuk-Transport | aircraft | 1000 | 4.9 | 1000 | 50 | ParaDropWeapon | 10 | 100 | 5 | anti-inf | ⚠ ^Fighter | TODO |
+| Ironwing | aircraft | 1000 | 4.9 | 1000 | 45 | ParaDropWeapon | 10 | 100 | 5 | anti-inf | ⚠ ^Fighter | TODO |
+| Sandstorm | aircraft | 1125 | 5.5 | 1500 | 27 | Smokebombs | 1 | 12 | 13 | general | ⚠ ^Fighter | TODO |
+| Black Widow Alpha | aircraft | 1500 | 7.3 | 1500 | 42 | WidowAlphaSign | 1 | 10 | 10.5 | anti-inf | ⚠ ^Fighter | TODO |
+| Black Widow | aircraft | 1600 | 7.8 | 1200 | 42 | WidowAlphaSign | 1 | 10 | 10.5 | anti-inf | ⚠ ^Fighter | TODO |
+| Stratofortress | aircraft | 2000 | 9.8 | 1800 | 18 | StratoRun | 150 | 10 | 7 | general | ⚠ ^Fighter | TODO |
+| PDPLANE4 | aircraft | 8000 | 39.0 | 1000 | 24 | ParaDropWeapon | 10 | 100 | 5 | anti-inf | ⚠ ^Fighter | TODO |
+| Lionheart Bomber (SW) | aircraft | 10000 | 48.8 | 2000 | 32 | LionheartBomb2 | 160 | 13 | 17.5 | anti-armor | ^Bomber | TODO |
+| Lionheart Bomber | aircraft | 10000 | 48.8 | 2000 | 32 | LionheartBomb | 350 | 13 | 17.5 | anti-armor | ^Bomber | TODO |
+| Harbinger | aircraft | 10000 | 48.8 | 3000 | 19 | HarbingerCanno | 1 | 30 | 12 | anti-inf | ⚠ ^Fighter | TODO |
+| Sciencist | infantry | 1 | 0.0 | 100 | 6 | None |  |  |  | ? | ^ScoutInfantry (rifle) | TODO |
+| Sciencist | infantry | 1 | 0.0 | 100 | 6 | None |  |  |  | ? | ^ScoutInfantry (rifle) | TODO |
+| Chinese Agent | infantry | 1 | 0.0 | 2000 | 6 | none |  |  |  | ? | ^ScoutInfantry (rifle) | TODO |
+| Dunerider | infantry | 10 | 0.0 | 600 | 10 | MP5 | 80 | 12 | 6 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Virus (No Mark) | infantry | 10 | 0.0 | 1100 | 5 | Virusgun | 200 | 180 | 13 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| General Cell | infantry | 10 | 0.0 | 10 | 5 | NotAWeapon | 0 |  | 1 | general | ^ScoutInfantry (rifle) | TODO |
+| Civilian Fem Yellow | infantry | 15 | 0.1 | 300 | 6 | Pistola | 40 | 20 | 3 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Civilian Male White | infantry | 15 | 0.1 | 1250 | 6 | Pistola | 40 | 20 | 3 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Civilian Texan A | infantry | 15 | 0.1 | 10 | 4 | Pistola | 40 | 20 | 3 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Civilian Texan C | infantry | 15 | 0.1 | 10 | 4 | none |  |  |  | ? | ^ScoutInfantry (rifle) | TODO |
+| Civilian Texan C | infantry | 15 | 0.1 | 10 | 4 | Pistola | 40 | 20 | 3 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Civilian Snow Fat Male | infantry | 15 | 0.1 | 10 | 4 | Pistola | 40 | 20 | 3 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Civilian Snow Female A | infantry | 15 | 0.1 | 10 | 4 | Pistola | 40 | 20 | 3 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Civilian Snow Thin Male | infantry | 15 | 0.1 | 10 | 4 | Pistola | 40 | 20 | 3 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Allied Attack Dog | infantry | 75 | 0.4 | 100 | 13 | DogBite | 200 | 30 | 1.83 | anti-inf | support/^SupportInfantry | TODO |
+| 18 RMB | infantry | 75 | 0.4 | 18 | 9 | SpookBite | 300 | 30 | 1.83 | anti-inf | support/^SupportInfantry | TODO |
+| Foehn Engineer | infantry | 90 | 0.4 | 300 | 6 | none |  |  |  | ? | support/^SupportInfantry | TODO |
+| Archer | infantry | 100 | 0.5 | 200 | 6 | Longbow | 55 | 70 | 6 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Scout Raven | infantry | 100 | 0.5 | 1 | 25 | MothraFollow | 0 | 100 | 7 | general | ^ScoutInfantry (rifle) | TODO |
+| Bloatick | infantry | 100 | 0.5 | 350 | 13 | SpiderBomb | 150 | 10 | 1.33 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| PsiCorps Trooper | infantry | 100 | 0.5 | 1200 | 6 | none |  |  |  | ? | ^ScoutInfantry (rifle) | TODO |
+| Arnie Frankfurter | infantry | 100 | 0.5 | 1000 | 6 | TERMIGUN | 40 | 5 | 6.5 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Sammy Stallion | infantry | 100 | 0.5 | 1000 | 6 | SammyGun | 65 | 8 | 6.5 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Flint Westwood | infantry | 100 | 0.5 | 1000 | 6 | FlintPistola | 100 | 10 | 6 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Ivan Cadet | infantry | 100 | 0.5 | 100 | 7 | JaguarPilotBom | 0 | 10 | 1.33 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Decoy Clairvoyant | infantry | 100 | 0.5 | 0 | 6 | DClairWeb | 1 | 105 | 5.5 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Hijacker | infantry | 120 | 0.6 | 450 | 7 | MakeupKit | 1 | 100 | -2 | anti-inf | support/^SupportInfantry | TODO |
+| Repulsor | infantry | 120 | 0.6 | 1250 | 8 | MakeupKit | 1 | 100 | -2 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Rocketeer | infantry | 135 | 0.7 | 450 | 34 | 20mm | 40 | 20 | 6 | anti-inf | ^RocketTrooperInfantry | TODO |
+| Ivan Biker | infantry | 135 | 0.7 | 300 | 10 | JaguarPilotBom | 0 | 10 | 1.33 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Saboteur | infantry | 140 | 0.7 | 1000 | 7 | MakeupKit | 1 | 100 | -2 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Arsonist | infantry | 140 | 0.7 | 1000 | 6 | MakeupKit | 1 | 100 | -2 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Decoy Knightframe | infantry | 140 | 0.7 | 0 | 6 | DKnightGun | 1 | 65 | 6 | general | ^ScoutInfantry (rifle) | TODO |
+| Allied Engineer | infantry | 150 | 0.7 | 900 | 8 | none |  |  |  | ? | support/^SupportInfantry | TODO |
+| Archer | infantry | 150 | 0.7 | 200 | 7 | Longbow | 55 | 70 | 6 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Technician | infantry | 150 | 0.7 | 50 | 6 | none |  |  |  | ? | ^ScoutInfantry (rifle) | TODO |
+| Sciencist | infantry | 150 | 0.7 | 100 | 6 | None |  |  |  | ? | ^ScoutInfantry (rifle) | TODO |
+| Animal Hyena | infantry | 150 | 0.7 | 10 | 9 | DogBite | 200 | 30 | 1.83 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Chrono Legionnaire (AI) | infantry | 150 | 0.7 | 1250 | 5 | SP_Cleg | 0 | 150 | 5 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Decoy Lancer | infantry | 150 | 0.7 | 0 | 7 | DLancerAirslas | 1 | 35 | 3.5 | general | ^ScoutInfantry (rifle) | TODO |
+| Knightframe | infantry | 175 | 0.9 | 450 | 5 | KnightGun | 50 | 40 | 6 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Virus | infantry | 180 | 0.9 | 1500 | 4 | VirusSupergun | 200 | 160 | 11 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Shock Trooper | infantry | 200 | 1.0 | 500 | 7 | ShockBolt | 80 | 90 | 5.5 | general | ⚠ ^HeavyInfantry | TODO |
+| Cosmonaut | infantry | 200 | 1.0 | 600 | 9 | Lunarblaster | 25 | 20 | 6.5 | general | ^ScoutInfantry (rifle) | TODO |
+| Slave Worker | infantry | 200 | 1.0 | 10 | 5 | SHOVEL | 50 | 30 | 1.5 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Libra Clone | infantry | 200 | 1.0 | 400 | 7 | none |  |  |  | ? | ^ScoutInfantry (rifle) | TODO |
+| Chinese Agent | infantry | 200 | 1.0 | 2000 | 5 | none |  |  |  | ? | ^ScoutInfantry (rifle) | TODO |
+| Libra Clone Somnia | infantry | 200 | 1.0 | 400 | 7 | NotAWeapon | 0 |  | 1 | general | ^ScoutInfantry (rifle) | TODO |
+| Conscript | infantry | 205 | 1.0 | 60 | 7 | M1Carbine | 16 | 20 | 5 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Flak Trooper | infantry | 210 | 1.0 | 150 | 6 | FlakGuyGun | 36 | 25 | 5 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Desolator | infantry | 210 | 1.0 | 950 | 6 | RadBeamWeapon | 150 | 45 | 7.5 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Mortar Quad | infantry | 220 | 1.1 | 600 | 8 | QuadMortar | 60 | 65 | 10 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Duplicant | infantry | 220 | 1.1 | 400 | 7 | DuplicantAttac | 0 | 10 | 1.33 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Syncronin | infantry | 220 | 1.1 | 950 | 8 | BondBreaker | 0 | 80 | 11.5 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Pyro | infantry | 225 | 1.1 | 350 | 8 | Flamethrower | 55 | 40 | 5 | anti-inf | ⚠ ^SpecialForcesInfantry | TODO |
+| Crazy Ivan | infantry | 230 | 1.1 | 500 | 8 | FVIvanBomber | 1 | 100 | 5 | general | ^ScoutInfantry (rifle) | TODO |
+| Huntress | infantry | 240 | 1.2 | 800 | 8 | HuntressAttack | 230 | 70 | 7.5 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Zorbtrotter | infantry | 240 | 1.2 | 1350 | 7 | ZorbAttack | 90 | 120 | 8 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Morales (AI) | infantry | 240 | 1.2 | 1500 | 7 | SuperSniperAI | 300 | 180 | 15 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Conscript Disguise | infantry | 250 | 1.2 | 130 | 6 | M1Carbine | 16 | 20 | 5 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| PsiCorps Trooper | infantry | 250 | 1.2 | 1200 | 7 | MindControl | 1 | 100 | 8 | general | ^ScoutInfantry (rifle) | TODO |
+| Neonwasp | infantry | 250 | 1.2 | 1050 | 30 | NeonwaspCutter | 18 | 1 | 7 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Conscript | infantry | 250 | 1.2 | 60 | 7 | M1Carbine | 16 | 20 | 5 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Fin | infantry | 260 | 1.3 | 1500 | 7 | FinAutoSniperG | 150 | 1 | 8.5 | anti-inf | ^ScoutInfantry (rifle) | TODO |
+| Alize | infantry | 260 | 1.3 | 1500 | 7 | none |  |  |  | ? | ^ScoutInfantry (rifle) | TODO |
+| Flak Trooper | infantry | 290 | 1.4 | 150 | 6 | FlakGuyGun | 36 | 25 | 5 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Eradicator | infantry | 300 | 1.5 | 950 | 6 | RadBeamWeapon | 150 | 45 | 7.5 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Epsilon Engineer | infantry | 300 | 1.5 | 500 | 8 | none |  |  |  | ? | support/^SupportInfantry | TODO |
+| Brute | infantry | 300 | 1.5 | 500 | 8 | Punch | 85 | 50 | 1.5 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Infiltrator | infantry | 300 | 1.5 | 1200 | 7 | MakeupKit | 1 | 100 | -2 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Kanegawa Industries Scientis | infantry | 300 | 1.5 | 100 | 6 | None |  |  |  | ? | ⚠ ^HeavyInfantry | TODO |
+| Savage | infantry | 300 | 1.5 | 500 | 9 | Punch | 85 | 50 | 1.5 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Yuri | infantry | 300 | 1.5 | 1200 | 3 | YuriPrimeContr | 1 | 10 | 10 | general | ⚠ ^HeavyInfantry | TODO |
+| Shock Trooper | infantry | 320 | 1.6 | 500 | 8 | ShockBolt | 80 | 90 | 5.5 | general | ⚠ ^HeavyInfantry | TODO |
+| Rashidi | infantry | 320 | 1.6 | 1500 | 8 | none |  |  |  | ? | ⚠ ^HeavyInfantry | TODO |
+| Stalker | infantry | 330 | 1.6 | 1400 | 6 | StalkerGrenade | 110 | 155 | 14 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Zorbfloater | infantry | 330 | 1.6 | 1350 | 5 | ZorbLongAttack | 90 | 140 | 10 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Dummy Reznov | infantry | 360 | 1.8 | 1500 | 6 | ReznovSniper | 1 | 300 | 16 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Kingsframe | infantry | 380 | 1.9 | 450 | 6 | KingsGun | 80 | 90 | 7.5 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Yuri | infantry | 400 | 2.0 | 1500 | 7 | NotAWeapon | 0 |  | 1 | general | ⚠ ^HeavyInfantry | TODO |
+| WAT | infantry | 400 | 2.0 | 100 | 5 | Mummypunch | 250 | 60 | 1.5 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Syncronaut | infantry | 440 | 2.1 | 950 | 8 | BondEruption | 0 | 80 | 2 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Norio | infantry | 450 | 2.2 | 1500 | 40 | IceBeamE | 15 | 2 | 10 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Virus | infantry | 450 | 2.2 | 1500 | 6 | Virusgun | 200 | 180 | 13 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Railguneer | infantry | 450 | 2.2 | 500 | 5 | RailguneerBlas | 65 | 100 | 7 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Gyrocopter | infantry | 500 | 2.4 | 600 | 10 | GyroGun | 45 | 20 | 7.5 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Animal Brontosaurus | infantry | 500 | 2.4 | 1000 | 8 | ChimpBite | 30 | 30 | 1.5 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Animal Cow | infantry | 500 | 2.4 | 10 | 7 | Demobomb | 1000 | 100 | 1.33 | general | ⚠ ^HeavyInfantry | TODO |
+| Animal Camel | infantry | 500 | 2.4 | 10 | 6 | SpiderBombB | 300 | 10 | 1.73 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Animal Giant Beetle | infantry | 500 | 2.4 | 1000 | 9 | BeetleBite | 250 | 25 | 1.5 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Eureka | infantry | 520 | 2.5 | 1500 | 6 | EurekaBlast | 250 | 360 | 9 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Viktor Reznov | infantry | 540 | 2.6 | 1913 | 8 | ReznovSniper | 1 | 300 | 16 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Col. Krukov | infantry | 540 | 2.6 | 1500 | 8 | KrukovRadBeam | 225 | 30 | 7 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Cyborg Vanguard | infantry | 600 | 2.9 | 1200 | 6 | CyborgGrenade | 120 | 100 | 6.5 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Cyborg Vanguard | infantry | 625 | 3.0 | 1200 | 10 | AKM | 100 | 20 | 7 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Siegfried | infantry | 700 | 3.4 | 1500 |  | SiegfriedBeam | 1000 | 150 | 7 | general | ⚠ ^HeavyInfantry | TODO |
+| Siegfried | infantry | 700 | 3.4 | 1500 |  | SiegfriedBeam | 1000 | 150 | 7 | general | ⚠ ^HeavyInfantry | TODO |
+| Cyborg Vanguard | infantry | 700 | 3.4 | 1200 | 8 | YunruOpen | 0 | 90 | 2 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Siegfried | infantry | 700 | 3.4 | 1500 |  | SiegfriedBeam | 1000 | 150 | 7 | general | ⚠ ^HeavyInfantry | TODO |
+| Yunru | infantry | 700 | 3.4 | 1500 | 8 | YunruEMP | 1 | 900 | 255 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Godsbane | infantry | 725 | 3.5 | 1300 | 5 | GodsbaneMissil | 1 | 80 | 10 | general | ⚠ ^HeavyInfantry | TODO |
+| Siegfried | infantry | 750 | 3.7 | 1500 | 8 | none |  |  |  | ? | ⚠ ^HeavyInfantry | TODO |
+| Giantsbane | infantry | 750 | 3.7 | 1300 | 5 | GiantsbaneMiss | 50 | 150 | 9 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Scourge | infantry | 999 | 4.9 | 1050 | 10 | ScourgeGuns | 55 | 10 | 7 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Volkov | infantry | 1000 | 4.9 | 3000 | 7 | VolkovBoltBlue | 30 | 3 | 9.5 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Uragan | infantry | 1050 | 5.1 | 1500 | 9 | UraganPunches | 25 | 120 | 12 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Chitzkoi | infantry | 1250 | 6.1 | 2000 | 13 | RoboTeeth | 65 | 15 | 4.5 | general | ⚠ ^HeavyInfantry | TODO |
+| Ghost | infantry | 1500 | 7.3 | 100 | 9 | none |  |  |  | ? | support/^SupportInfantry | TODO |
+| Virus | infantry | 3500 | 17.1 | 1500 | 11 | SP_PsychicDart | 2000 | 15 | 16 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Red Devil | infantry | 3600 | 17.6 | 50 | 5 | none |  |  |  | ? | ⚠ ^HeavyInfantry | TODO |
+| Libra | infantry | 6000 | 29.3 | 1500 | 13 | PsychicDarts | 12 | 1 | 14 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Space Commando | infantry | 6000 | 29.3 | 3000 | 8 | SpaceComEMP | 1 | 20 | 12 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Gene Boss Brute | infantry | 7000 | 34.1 | 1 | 7 | RedLotusPunch | 100 | 45 | 2 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Libra | infantry | 7500 | 36.6 | 1500 | 13 | PsychicDarts | 12 | 1 | 14 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Libra | infantry | 7500 | 36.6 | 1500 | 5 | SP_PsychicDart | 2000 | 15 | 16 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Libra | infantry | 7500 | 36.6 | 1500 | 5 | SP_PsychicDart | 480 | 15 | 16 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Libra | infantry | 7500 | 36.6 | 1500 | 5 | SP_PsychicDart | 480 | 15 | 16 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Virus Boss Brute | infantry | 7500 | 36.6 | 1 | 7 | VirusPunch | 100 | 45 | 2 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Psychic Boss Brute | infantry | 8000 | 39.0 | 1 | 7 | MagnetPunch | 100 | 45 | 2 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Who's that? | infantry | 9000 | 43.9 | 1500 | 8 | None |  |  |  | ? | ⚠ ^HeavyInfantry | TODO |
+| Clairvoyant | infantry | 9999 | 48.8 | 400 | 6 | none |  |  |  | ? | ⚠ ^HeavyInfantry | TODO |
+| Animal T-Rex | infantry | 15000 | 73.2 | 2500 | 10 | TRexBite | 400 | 15 | 1.5 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Volkov | infantry | 15000 | 73.2 | 1500 | 8 | VolkovBoltBlue | 30 | 3 | 9.5 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Deviatress | infantry | 20000 | 97.6 | 1500 | 6 | ConfuseRifle | 1 | 6000 | 12 | anti-inf | ⚠ ^HeavyInfantry | TODO |
+| Tanya (AI) | infantry | 99999 | 487.8 | 1500 | 10 | TanyaLaser | 120 | 5 | 8.5 | anti-inf | ^HeroInfantry | TODO |
+| Siegfried (AI) | infantry | 99999 | 487.8 | 1500 | 9 | SiegfriedCanno | 115 | 90 | 12 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Siegfried (AI) | infantry | 99999 | 487.8 | 1500 | 9 | SiegfriedCanno | 115 | 90 | 12 | anti-armor | ^RocketTrooperInfantry | TODO |
+| Virus | infantry | 114514 | 558.6 | 1500 | 10 | none |  |  |  | ? | ⚠ ^HeavyInfantry | TODO |
+| Cyborg Commando | infantry | 9999999 | 48780.5 | 2500 | 1 | none |  |  |  | ? | ^HeroInfantry | TODO |
+| SAMA | infantry | 15516655 | 75691.0 | 0 | 6 | NotAWeapon | 0 |  | 1 | general | ⚠ ^HeavyInfantry | TODO |
+| Range Provider | vehicle | 1 | 0.0 | 0 | 99 | SP_ChaseParado | 0 | 1 | 0.5 | anti-inf | ⚠ ^LightTank (NEW) | TODO |
+| Fake Medic Buff Boss Brute | vehicle | 1 | 0.0 | 0 | 0 | ThorHeavyGun | 200 | 50 | 7 | anti-inf | support/^SupportInfantry | TODO |
+| Road Roller | vehicle | 1 | 0.0 | 0 | 7 | MobileGrinderR | 100 | 8 | 2 | general | ⚠ ^ScoutVehicle | TODO |
+| Addon - Magnetic Beam | vehicle | 10 | 0.0 | 0 | 1 | MagnetShift | 0 | 30 | 384 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Addon - Salamander Confusion | vehicle | 10 | 0.0 | 1 | 1 | SalamanderBeam | 110 | 100 | 10.5 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Addon - Salamander Confusion | vehicle | 10 | 0.0 | 1 | 1 | SalamanderFiel | 220 | 200 | 10.5 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Addon - Nautilus Beam | vehicle | 10 | 0.0 | 0 | 1 | MagnetShift2 | 0 | 60 | 4 | general | ⚠ ^ScoutVehicle | TODO |
+| Addon - Cyclops Close Combat | vehicle | 10 | 0.0 | 1 | 1 | CyclopsBuff | 100 | 30 | 12 | anti-inf | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Addon - Hunter-Seeker | vehicle | 10 | 0.0 | 0 | 1 | SunburstLaser | 120 | 18 | 7 | anti-inf | ⚠ ^LightTank (NEW) | TODO |
+| Scud Launcher | vehicle | 100 | 0.5 | 800 | 6 | V3Launcher | 1 | 150 | 28 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Iron Dragon | vehicle | 100 | 0.5 | 2000 | 4 | IronDragonBall | 80 | 160 | 14 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Old V2 Launcher | vehicle | 100 | 0.5 | 1600 | 4 | none |  |  |  | ? | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Terror Drone | vehicle | 140 | 0.7 | 500 | 9 | DroneJump | 50 | 60 | 2.73 | anti-inf | ⚠ ^LightTank (NEW) | TODO |
+| Terror Drone (No Attack) | vehicle | 140 | 0.7 | 500 | 10 | DroneJump | 50 | 60 | 2.73 | anti-inf | ⚠ ^LightTank (NEW) | TODO |
+| Speeder (Lobber) | vehicle | 150 | 0.7 | 750 | 15 | SpeederStrikeB | 28 | 30 | 10 | anti-armor | ⚠ ^TankDestroyer(fragile,AP) / ^LightTank | TODO |
+| Speeder Trike (AI) | vehicle | 175 | 0.9 | 700 | 11 | SpeederStrikeA | 20 | 10 | 10 | anti-armor | ⚠ ^TankDestroyer(fragile,AP) / ^LightTank | TODO |
+| Draco Autoturret | vehicle | 180 | 0.9 | 400 | 36 | DracoCannonDro | 45 | 40 | 6 | anti-inf | ⚠ ^LightTank (NEW) | TODO |
+| Old Ranger | vehicle | 200 | 1.0 | 400 | 8 | RangerGun | 25 | 25 | 6 | anti-inf | ⚠ ^LightTank (NEW) | TODO |
+| Vulture | vehicle | 220 | 1.1 | 1450 | 34 | VultureCannon | 20 | 12 | 7.5 | anti-inf | ⚠ ^LightTank (NEW) | TODO |
+| Bomb Buggy | vehicle | 225 | 1.1 | 1300 | 10 | Demobomb | 1000 | 100 | 1.33 | general | ⚠ ^ScoutVehicle | TODO |
+| Driller APC | vehicle | 240 | 1.2 | 1000 | 4 | none |  |  |  | ? | ⚠ ^SupportVehicle (unarmed/transport) | TODO |
+| Old Demo Truck | vehicle | 240 | 1.2 | 1200 | 5 | Demobomb | 1000 | 100 | 1.33 | general | ⚠ ^ScoutVehicle | TODO |
+| Tesla Cruiser | vehicle | 250 | 1.2 | 1500 | 8 | TankBolt | 45 | 55 | 7 | general | ⚠ ^ScoutVehicle | TODO |
+| Hunter-Seeker | vehicle | 250 | 1.2 | 800 | 50 | none |  |  |  | ? | ⚠ ^ScoutVehicle | TODO |
+| Quickshifter | vehicle | 250 | 1.2 | 2000 | 3 | Phalanx | 36 | 15 | 9.5 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Old Longbow | vehicle | 250 | 1.2 | 1100 | 29 | LongbowStrike | 50 | 60 | 7 | anti-inf | ⚠ ^LightTank (NEW) | TODO |
+| Genequad | vehicle | 250 | 1.2 | 900 | 10 | GeneticGas | 150 | 45 | 3 | anti-inf | ⚠ ^LightTank (NEW) | TODO |
+| Teratorn | vehicle | 260 | 1.3 | 700 | 9 | TeratornLaser | 0 | 5 | 9 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Deployed Irritator | vehicle | 265 | 1.3 | 1200 | 5 | ConfuseRay | 210 | 200 | 8 | general | ⚠ ^ScoutVehicle | TODO |
+| Irritator | vehicle | 270 | 1.3 | 1200 | 5 | ConfuseRay | 210 | 200 | 8 | general | ⚠ ^ScoutVehicle | TODO |
+| Decoy Quetzal | vehicle | 270 | 1.3 | 0 | 18 | SeekerLauncher | 1 | 150 | 24 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Sweeper | vehicle | 275 | 1.3 | 1050 | 7 | NotAWeapon | 0 |  | 1 | general | ⚠ ^ScoutVehicle | TODO |
+| Hovracoon | vehicle | 280 | 1.4 | 900 | 10 | RaccoonEMP | 1 | 1 | 9.5 | anti-inf | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Robo Tengu | vehicle | 280 | 1.4 | 600 | 14 | CRM60 | 40 | 18 | 7 | anti-inf | ⚠ ^LightTank (NEW) | TODO |
+| Robot Tank (Water) | vehicle | 280 | 1.4 | 550 | 12 | RobogunW | 45 | 20 | 6 | anti-inf | ⚠ ^LightTank (NEW) | TODO |
+| Jaguar Battle Tank | vehicle | 300 | 1.5 | 750 | 6 | 120mmJaguar | 85 | 65 | 6 | anti-inf | ⚠ ^LightTank (NEW) | TODO |
+| Diverbee | vehicle | 300 | 1.5 | 800 | 36 | DiverbeeAttack | 220 | 500 | 7 | anti-armor | ⚠ ^TankDestroyer(fragile,AP) / ^LightTank | TODO |
+| Oxidizer (Water) | vehicle | 300 | 1.5 | 1000 | 7 | OxidizerFake | 0 | 1 | 11 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Shadray Torch Tank | vehicle | 315 | 1.5 | 1600 | 4 | ShadrayWave | 10 | 60 | 12.5 | anti-inf | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Raccoon | vehicle | 320 | 1.6 | 850 | 6 | RaccoonEMP | 1 | 1 | 9.5 | anti-inf | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Rejuvenator | vehicle | 320 | 1.6 | 1500 | 22 | RejuvenationBu | -5 | 3 | 9 | anti-armor | ⚠ ^TankDestroyer(fragile,AP) / ^LightTank | TODO |
+| Warhawk | vehicle | 330 | 1.6 | 1200 | 34 | ComancheLaser | 20 | 10 | 7 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Old Heavy Tank | vehicle | 330 | 1.6 | 850 | 4 | 120mmHeavy | 50 | 65 | 6 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Old Artillery | vehicle | 330 | 1.6 | 900 | 4 | ArtyCannon | 50 | 95 | 10 | anti-armor | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Demolition Truck | vehicle | 350 | 1.7 | 1300 | 7 | Demobomb | 1000 | 100 | 1.33 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Wormqueen | vehicle | 350 | 1.7 | 2000 | 4 | WormqueenBolt | 120 | 170 | 11 | anti-inf | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Shadow Tank (No Attack) | vehicle | 350 | 1.7 | 1000 | 8 | ShadowPower | 40 | 50 | 6 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Tsurugi Powersuit | vehicle | 350 | 1.7 | 550 | 7 | HoverMissile | 25 | 35 | 6 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Zephyr Artillery (AI) | vehicle | 350 | 1.7 | 950 | 5 | Howitzer | 100 | 100 | 14 | anti-armor | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Aeroblaze (Long) | vehicle | 355 | 1.7 | 1450 | 6 | AeroblazeFake | 0 | 1 | 9 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Basilisk | vehicle | 360 | 1.8 | 1750 | 25 | SP_BasiliskCan | 70 | 150 | 10.5 | anti-inf | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Buratino | vehicle | 360 | 1.8 | 1350 | 6 | BuratinoStrike | 45 | 150 | 15 | anti-inf | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Jackal Racer | vehicle | 360 | 1.8 | 750 | 18 | none |  |  |  | ? | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Siren Frigate | vehicle | 360 | 1.8 | 1500 | 8 | NeutronBlaster | 14 | 80 | 9 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Reaper Corvette | vehicle | 360 | 1.8 | 1300 | 8 | ReaperCannon | 110 | 75 | 7.5 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Reaper (Land) | vehicle | 360 | 1.8 | 1300 | 6 | ReaperCannon | 110 | 75 | 7.5 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Buratino (Spread) | vehicle | 360 | 1.8 | 1350 | 6 | BuratinoStrike | 60 | 150 | 15 | anti-inf | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Bulldog (Painter) | vehicle | 370 | 1.8 | 700 | 8 | BulldogPainter | 1 | 1 | 8.5 | general | support/^SupportInfantry | TODO |
+| Athena Cannon (No Attack) | vehicle | 370 | 1.8 | 1600 | 4 | AthenaStrike | 220 | 300 | 15 | anti-inf | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Vulture (AI) | vehicle | 380 | 1.9 | 1450 | 34 | VultureBombsAI | 80 | 200 | 1.5 | anti-inf | ⚠ ^LightTank (NEW) | TODO |
+| Flak Track | vehicle | 385 | 1.9 | 600 | 4 | HalftrackGunX | 42 | 20 | 6 | anti-inf | ⚠ ^AntiAirTank (NEW) | TODO |
+| Tigr APC | vehicle | 385 | 1.9 | 600 | 5 | HalftrackGunX | 42 | 20 | 6 | anti-inf | ⚠ ^AntiAirTank (NEW) | TODO |
+| Roadrunner | vehicle | 415 | 2.0 | 1250 | 8 | RoadrunnerChok | 300 | 180 | 1.5 | anti-armor | ^MainBattleTank | TODO |
+| Roadrunner (No Attack) | vehicle | 415 | 2.0 | 1300 | 8 | RoadrunnerChok | 300 | 180 | 1.5 | anti-armor | ^MainBattleTank | TODO |
+| Draco Light Tank | vehicle | 420 | 2.0 | 750 | 5 | DracoCannon | 60 | 40 | 6 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Rhino Heavy Tank | vehicle | 420 | 2.0 | 900 | 5 | 120mm | 95 | 65 | 6 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Invader | vehicle | 440 | 2.1 | 0 | 32 | SP_DiskLaser | 50 | 60 | 6.5 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Magnetron | vehicle | 440 | 2.1 | 1500 | 5 | MagneticBeamX | 0 | 30 | 50 | anti-inf | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Cyclops Walker | vehicle | 450 | 2.2 | 800 | 6 | CyclopsCannon | 25 | 18 | 7 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Tank Killer | vehicle | 450 | 2.2 | 750 | 6 | TankKiller | 100 | 65 | 6.5 | anti-armor | ^MainBattleTank | TODO |
+| Hydra Cannon | vehicle | 450 | 2.2 | 750 | 6 | HydraCannon | 16 | 2 | 6.5 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Decoy Pteranodon | vehicle | 450 | 2.2 | 0 | 24 | DSonicRay | 1 | 110 | 7.5 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Angelshark | vehicle | 460 | 2.2 | 1400 | 8 | SharkTorpedo | 120 | 120 | 9 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Swordfish | vehicle | 470 | 2.3 | 1000 | 6 | SwordfishAirsl | 35 | 35 | 5 | anti-armor | ^MainBattleTank | TODO |
+| Warhawk | vehicle | 500 | 2.4 | 1200 | 34 | ComancheLaser | 20 | 10 | 7 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Rhino Heavy Tank | vehicle | 500 | 2.4 | 850 | 6 | 120mm | 95 | 65 | 6 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Seitaad Ballista | vehicle | 500 | 2.4 | 2000 | 5 | SeitaadEMPCann | 1 | 20 | 12 | anti-armor | ⚠ ^AntiAirTank (NEW) | TODO |
+| Mastermind | vehicle | 505 | 2.5 | 1800 | 4 | MultipleMindCo | 99 | 20 | 10 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Qilin Assault Tank | vehicle | 510 | 2.5 | 900 | 5 | 120mmTiger | 700000 | 65 | 6 | anti-armor | ^MainBattleTank | TODO |
+| Minermite | vehicle | 510 | 2.5 | 900 | 6 | MiteRepairBull | -25 | 30 | 4 | anti-armor | ^Harvester/support | TODO |
+| Quetzal | vehicle | 510 | 2.5 | 2250 | 18 | SeekerLauncher | 1 | 150 | 24 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Phantasm MLRS | vehicle | 520 | 2.5 | 2000 | 6 | PhantasmMissil | 50 | 150 | 10 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Gehenna Platform (AI) | vehicle | 540 | 2.6 | 1500 | 1 | GehennaLaunche | 1 | 150 | 14 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Sentinel | vehicle | 540 | 2.6 | 1500 | 5 | SentinelFake | 0 | 1 | 10.5 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Mosquito Demoboat | vehicle | 540 | 2.6 | 1350 | 0 | Scorchbomb | 1 | 300 | 1.33 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Alanqa Skystation | vehicle | 550 | 2.7 | 2050 | 15 | AlanqaAA | 105 | 60 | 7.5 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Tesla Cruiser | vehicle | 550 | 2.7 | 1500 | 5 | TankBolt | 45 | 55 | 7 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| War Miner | vehicle | 600 | 2.9 | 1400 | 4 | 20mmRapid | 30 | 20 | 6 | anti-inf | ^Harvester/support | TODO |
+| Wolfhound | vehicle | 600 | 2.9 | 1800 | 13 | WolfStrike | 65 | 70 | 8 | anti-armor | ^MainBattleTank | TODO |
+| Ruiner | vehicle | 600 | 2.9 | 1100 | 30 | RuinerRay | 1 | 120 | 10 | anti-inf | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Colossus | vehicle | 600 | 2.9 | 1550 | 6 | ColossusCannon | 40 | 65 | 7 | anti-armor | ⚠ ^AntiAirTank (NEW) | TODO |
+| Catastrophe Tank | vehicle | 620 | 3.0 | 1600 | 4 | CatastropheGre | 0 | 80 | 7.5 | ? | ⚠ ^HighTechTank (heavy) | TODO |
+| Catastrophe Tank | vehicle | 620 | 3.0 | 1600 | 4 | CatastropheGre | 0 | 80 | 7.5 | ? | ⚠ ^HighTechTank (heavy) | TODO |
+| Catastrophe Tank | vehicle | 620 | 3.0 | 1600 | 4 | CatastropheGre | 0 | 80 | 7.5 | ? | ⚠ ^HighTechTank (heavy) | TODO |
+| Catastrophe Tank | vehicle | 620 | 3.0 | 1600 | 4 | CatastropheGre | 0 | 80 | 7.5 | ? | ⚠ ^HighTechTank (heavy) | TODO |
+| Apocalypse | vehicle | 620 | 3.0 | 1600 | 4 | CatastropheGre | 0 | 80 | 7.5 | ? | ⚠ ^HighTechTank (heavy) | TODO |
+| Paladin Tank Hunter (AI) | vehicle | 640 | 3.1 | 1350 | 5 | JagdPanther | 200 | 70 | 8.5 | anti-armor | ^MainBattleTank | TODO |
+| Paladin Tank Hunter | vehicle | 640 | 3.1 | 1300 | 6 | JagdPanther | 200 | 70 | 8.5 | anti-armor | ^MainBattleTank | TODO |
+| Whipray | vehicle | 650 | 3.2 | 1300 | 7 | MantaConfuseRa | 105 | 20 | 9 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Colossus (Anti-Air) (AI) | vehicle | 670 | 3.3 | 1550 | 0 | ColossusAAFake | 0 | 1 | 11 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Colossus (Aircraft Killer) | vehicle | 670 | 3.3 | 1550 | 0 | ColossusAAFake | 0 | 1 | 11 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Borillo (Water) | vehicle | 700 | 3.4 | 1000 | 5 | BorilloFlameth | 60 | 35 | 6 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Bison Combat Tank | vehicle | 700 | 3.4 | 900 | 5 | RoachBlast | 65 | 40 | 6 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Charon Tank (No Attack) | vehicle | 710 | 3.5 | 1700 | 4 | NeutronCannon | 1000 | 490 | 7 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Magnetic Beam | vehicle | 720 | 3.5 | 0 | 6 | MagnetShift | 0 | 30 | 384 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Typhoon (Tesla) | vehicle | 720 | 3.5 | 1100 | 6 | SuperSubTorped | 150 | 250 | 10 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Armadillo | vehicle | 720 | 3.5 | 1000 | 5 | ArmadilloFlame | 40 | 35 | 5.5 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| SODAR Array | vehicle | 750 | 3.7 | 950 | 7 | NotAWeapon | 0 |  | 1 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Old M.A.D. Tank | vehicle | 750 | 3.7 | 1500 | 4 | Madbomb | 275 | 100 | 1.33 | anti-armor | ^MainBattleTank | TODO |
+| SODAR Array (Water) | vehicle | 750 | 3.7 | 950 | 6 | NotAWeapon | 0 |  | 1 | general | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Gharial (Water) | vehicle | 750 | 3.7 | 2050 | 4 | GharialCannon | 75 | 80 | 8 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Armadillo (Water) | vehicle | 790 | 3.9 | 1200 | 5 | ArmadilloFlame | 40 | 35 | 5.5 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Thor Gunship (Escort) | vehicle | 800 | 3.9 | 2000 | 14 | ThorHeavyGun | 200 | 50 | 7 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Gharial | vehicle | 800 | 3.9 | 2050 | 2 | none |  |  |  | ? | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Spin Brute | vehicle | 800 | 3.9 | 500 | 7 | Punch | 85 | 50 | 1.5 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
+| Nuwa Cannon | vehicle | 850 | 4.1 | 2000 | 5 | UraniumCannon | 130 | 120 | 8.5 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Gravitron | vehicle | 880 | 4.3 | 1600 | 12 | GravitronField | 80 | 20 | 6 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| Pteranodon | vehicle | 900 | 4.4 | 2000 | 24 | SonicRay | 55 | 110 | 7.5 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| Borillo | vehicle | 920 | 4.5 | 1000 | 7 | BorilloFlameth | 60 | 35 | 6 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Megalodon | vehicle | 920 | 4.5 | 1700 | 9 | Megaslash | 10 | 50 | 2.5 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Cargo Plane | vehicle | 1000 | 4.9 | 1000 | 16 | ParaDropWeapon | 10 | 100 | 5 | anti-inf | ⚠ ^SupportVehicle (unarmed/transport) | TODO |
+| Ramwagon | vehicle | 1000 | 4.9 | 2000 | 7 | RamWeldCutter | 12 | 1 | 7 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| Scavenger | vehicle | 1000 | 4.9 | 2000 | 6 | RuptureBeam | 10 | 5 | 8 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| Zubr Transport | vehicle | 1050 | 5.1 | 1000 | 7 | ZubrFake | 0 | 5 | 8 | general | ⚠ ^SupportVehicle (unarmed/transport) | TODO |
+| Zubr Transport | vehicle | 1050 | 5.1 | 1000 | 7 | ZubrFake | 0 | 5 | 8 | general | ⚠ ^SupportVehicle (unarmed/transport) | TODO |
+| Zubr Transport | vehicle | 1050 | 5.1 | 1000 | 7 | ZubrFake | 0 | 5 | 8 | general | ⚠ ^SupportVehicle (unarmed/transport) | TODO |
+| Apocalypse Tank | vehicle | 1050 | 5.1 | 2000 | 5 | 120mmx | 130 | 80 | 8 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Orcinus Waveshaper | vehicle | 1150 | 5.6 | 1750 | 5 | NotAWeapon | 0 |  | 1 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Thor Gunship (AI) | vehicle | 1200 | 5.9 | 2000 | 8 | ThorHeavyGun | 200 | 50 | 7 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Battle Tortoise (AI) VS Inf | vehicle | 1250 | 6.1 | 1900 | 4 | FortressGun | 60 | 10 | 6 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Battle Tortoise (AI) VS Veh | vehicle | 1250 | 6.1 | 1900 | 4 | FortressGun | 60 | 10 | 6 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Battle Tortoise (AI) VS Def | vehicle | 1250 | 6.1 | 1900 | 4 | FortressGun | 60 | 10 | 6 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Leviathan Helicarrier | vehicle | 1300 | 6.3 | 3200 | 3 | LeviLauncher | 1 | 150 | 23 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| F-Tank Alpha (Cannon) | vehicle | 1300 | 6.3 | 2000 | 4 | FTankCannon | 180 | 180 | 8 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| War Rig | vehicle | 1350 | 6.6 | 2000 | 5 | MobileGrinderR | 100 | 8 | 2 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| MAMM | vehicle | 1500 | 7.3 | 2000 | 5 | 120mmx | 130 | 80 | 8 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Apocalypse Tank | vehicle | 1575 | 7.7 | 2000 | 4 | 120mmx | 130 | 80 | 8 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Tigr APC | vehicle | 1650 | 8.0 | 600 | 6 | HalftrackGunX | 42 | 20 | 6 | anti-inf | ⚠ ^AntiAirTank (NEW) | TODO |
+| Kirov Airship | vehicle | 2000 | 9.8 | 2400 | 10 | BlimpBomb | 375 | 45 | 1 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Archelon | vehicle | 2000 | 9.8 | 2000 | 4 | ArchelonAttack | 200 | 150 | 4.5 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Archelon (No Attack) | vehicle | 2000 | 9.8 | 2000 | 4 | ArchelonAttack | 200 | 150 | 4.5 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Archelon (Water) | vehicle | 2000 | 9.8 | 2000 | 4 | ArchelonAttack | 200 | 150 | 4.5 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Enterprise Aircraft Carrier | vehicle | 2000 | 9.8 | 2500 | 4 | SuperGehennaLa | 1 | 150 | 70 | ? | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| M.A.D.M.A.N. | vehicle | 2400 | 11.7 | 3000 | 3 | MadBlastStart | 1 | 300 | 1 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Gear Change (Spawner) | vehicle | 2500 | 12.2 | 0 | 0 | none |  |  |  | ? | ⚠ ^HighTechTank (heavy) | TODO |
+| Kingsnake Warp | vehicle | 2700 | 13.2 | 1500 | 5 | SnakeLauncher | 1 | 150 | 20 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| M.A.D.M.A.N. (AI) | vehicle | 3000 | 14.6 | 3000 | 4 | MadBlastStartA | 1 | 300 | 12 | ? | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Kirov Airship | vehicle | 3000 | 14.6 | 2400 | 5 | BlimpBombNuke | 375 | 45 | 1 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Apocalypse Prototype | vehicle | 3600 | 17.6 | 1500 | 5 | 120mmMammoth | 120 | 5 | 7 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| The Paradox Engine | vehicle | 5000 | 24.4 | 5000 | 10 | SeekerLauncher | 1 | 150 | 24 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
+| Perun Flagship | vehicle | 5000 | 24.4 | 2500 | 16 | PerunBolt | 100 | 60 | 10 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 
 ## CnC Reloaded  (rifle = 125 HP)
 
@@ -450,75 +779,75 @@ Warhead role auto-classified from the Versus armor-ORDER (anti-inf / anti-armor 
 | Titan | vehicle | 470 | 3.8 | 800 | 4 | TS120mm | 92 | 80 | 6.75 | anti-armor | ^MainBattleTank | TODO |
 | Tank Destroyer | vehicle | 475 | 3.8 | 850 | 5 | SABOT | 150 | 65 | 5 | anti-armor | ^MainBattleTank | TODO |
 | Centurion | vehicle | 490 | 3.9 | 1600 | 4 | TT100mm | 70 | 95 | 9 | anti-armor | ^MainBattleTank | TODO |
-| Master Mind | vehicle | 500 | 4.0 | 1750 | 4 | MultipleMindCo | 3 | 10 | 5 | general | ⚠ ^HighTechTank | TODO |
-| Oppressor Disk | vehicle | 500 | 4.0 | 1750 | 15 | MediumDiskLase | 55 | 105 | 6 | anti-inf | ⚠ ^HighTechTank | TODO |
+| Master Mind | vehicle | 500 | 4.0 | 1750 | 4 | MultipleMindCo | 3 | 10 | 5 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Oppressor Disk | vehicle | 500 | 4.0 | 1750 | 15 | MediumDiskLase | 55 | 105 | 6 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
 | Centurion (upgraded) | vehicle | 500 | 4.0 | 1500 | 4 | CenturionLaser | 80 | 135 | 9 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | CABAL's Basilisk | vehicle | 500 | 4.0 | 2000 | 7 | BasiliskLaser | 60 | 90 | 10 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
-| Avenger Tank (Upgraded) | vehicle | 500 | 4.0 | 800 | 5 | LinearRailGun | 57 | 65 | 5 | general | ⚠ ^HighTechTank | TODO |
-| Disruptor | vehicle | 575 | 4.6 | 1300 | 4 | TSSonicZap | 0 | 190 | 6 | general | ⚠ ^HighTechTank | TODO |
-| Adult Visceroid | vehicle | 588 | 4.7 | 1 | 8 | SlimeAttack | 125 | 80 | 1.40 | anti-inf | ⚠ ^HighTechTank | TODO |
-| Destroyer | vehicle | 600 | 4.8 | 1000 | 6 | 155mm | 65 | 110 | 8 | general | ⚠ ^HighTechTank | TODO |
-| Typhoon Attack Sub | vehicle | 600 | 4.8 | 1000 | 4 | SubTorpedo | 100 | 120 | 7 | anti-armor | ⚠ ^HighTechTank | TODO |
-| Sentinel Submarine | vehicle | 600 | 4.8 | 1300 | 4 | NodSubTorpedo | 60 | 100 | 7 | anti-armor | ⚠ ^HighTechTank | TODO |
+| Avenger Tank (Upgraded) | vehicle | 500 | 4.0 | 800 | 5 | LinearRailGun | 57 | 65 | 5 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Disruptor | vehicle | 575 | 4.6 | 1300 | 4 | TSSonicZap | 0 | 190 | 6 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Adult Visceroid | vehicle | 588 | 4.7 | 1 | 8 | SlimeAttack | 125 | 80 | 1.40 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Destroyer | vehicle | 600 | 4.8 | 1000 | 6 | 155mm | 65 | 110 | 8 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Typhoon Attack Sub | vehicle | 600 | 4.8 | 1000 | 4 | SubTorpedo | 100 | 120 | 7 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| Sentinel Submarine | vehicle | 600 | 4.8 | 1300 | 4 | NodSubTorpedo | 60 | 100 | 7 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
 | Talon Missile Submarine | vehicle | 600 | 4.8 | 1700 | 5 | CruiseLauncher | 25 | 50 | 20 | ? | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
-| Coast Guard Boat | vehicle | 600 | 4.8 | 1000 | 6 | 155mm | 65 | 110 | 8 | general | ⚠ ^HighTechTank | TODO |
-| Battle Fortress | vehicle | 600 | 4.8 | 2000 | 3 | 20mmRapid | 30 | 20 | 5.5 | anti-inf | ⚠ ^HighTechTank | TODO |
-| Orion Destroyer | vehicle | 600 | 4.8 | 1000 | 5 | TS158mm | 70 | 110 | 8 | general | ⚠ ^HighTechTank | TODO |
-| Floating Disk | vehicle | 600 | 4.8 | 1750 | 15 | DiskLaser | 90 | 100 | 7 | anti-inf | ⚠ ^HighTechTank | TODO |
+| Coast Guard Boat | vehicle | 600 | 4.8 | 1000 | 6 | 155mm | 65 | 110 | 8 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Battle Fortress | vehicle | 600 | 4.8 | 2000 | 3 | 20mmRapid | 30 | 20 | 5.5 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Orion Destroyer | vehicle | 600 | 4.8 | 1000 | 5 | TS158mm | 70 | 110 | 8 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Floating Disk | vehicle | 600 | 4.8 | 1750 | 15 | DiskLaser | 90 | 100 | 7 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
 | Gattling Submarine | vehicle | 600 | 4.8 | 1200 | 5 | AGGattling | 25 | 16 | 6 | anti-inf | ⚠ ^AntiAirTank (NEW) | TODO |
 | Talon Missile Submarine | vehicle | 600 | 4.8 | 1700 | 5 | CruiseLauncher | 25 | 50 | 20 | ? | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | CABAL's Basilisk | vehicle | 600 | 4.8 | 1800 | 7 | BasiliskLaser2 | 70 | 90 | 11 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | CABAL's Leviathan | vehicle | 600 | 4.8 | 3000 | 5 | LeviathanLaunc | 1 | 45 | 13 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | Artemis Cruiser | vehicle | 650 | 5.2 | 1850 | 4 | RA1RedEye | 32 | 20 | 15 | anti-armor | ⚠ ^AntiAirTank (NEW) | TODO |
-| Mammoth Tank (TD) | vehicle | 650 | 5.2 | 1750 | 4 | 120mmxOLD | 100 | 80 | 5.75 | anti-armor | ⚠ ^EpicVehicle | TODO |
-| Mammoth Tank (TD) | vehicle | 650 | 5.2 | 1750 | 4 | 120mmxOLD | 100 | 80 | 5.75 | anti-armor | ⚠ ^EpicVehicle | TODO |
-| Mammoth Tank (RA1) | vehicle | 650 | 5.2 | 1750 | 4 | 120mmxOLD | 100 | 80 | 5.75 | anti-armor | ⚠ ^EpicVehicle | TODO |
-| Mammoth Tank (RA1) | vehicle | 650 | 5.2 | 1750 | 4 | 120mmxOLD | 100 | 80 | 5.75 | anti-armor | ⚠ ^EpicVehicle | TODO |
+| Mammoth Tank (TD) | vehicle | 650 | 5.2 | 1750 | 4 | 120mmxOLD | 100 | 80 | 5.75 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| Mammoth Tank (TD) | vehicle | 650 | 5.2 | 1750 | 4 | 120mmxOLD | 100 | 80 | 5.75 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| Mammoth Tank (RA1) | vehicle | 650 | 5.2 | 1750 | 4 | 120mmxOLD | 100 | 80 | 5.75 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| Mammoth Tank (RA1) | vehicle | 650 | 5.2 | 1750 | 4 | 120mmxOLD | 100 | 80 | 5.75 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
 | Artemis Cruiser | vehicle | 650 | 5.2 | 1850 | 4 | RA1RedEye | 32 | 20 | 15 | anti-armor | ⚠ ^AntiAirTank (NEW) | TODO |
 | Gorgon | vehicle | 650 | 5.2 | 1400 | 5 | SlowdownWaveWe | 1 | 15 | 9 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
-| Overlord Tank | vehicle | 700 | 5.6 | 2000 | 3 | 140mmx | 130 | 145 | 6.75 | anti-armor | ⚠ ^HighTechTank | TODO |
-| Avatar | vehicle | 700 | 5.6 | 1750 | 4 | AvatarHeavyLas | 100 | 95 | 6 | general | ⚠ ^HighTechTank | TODO |
-| Avatar | vehicle | 700 | 5.6 | 1750 | 4 | Avatar2HeavyLa | 100 | 5 | 6 | general | ⚠ ^HighTechTank | TODO |
-| Avatar | vehicle | 700 | 5.6 | 1750 | 4 | AvatarHeavyLas | 100 | 95 | 6 | general | ⚠ ^HighTechTank | TODO |
-| Avatar | vehicle | 700 | 5.6 | 1750 | 4 | Avatar2HeavyLa | 100 | 5 | 6 | general | ⚠ ^HighTechTank | TODO |
+| Overlord Tank | vehicle | 700 | 5.6 | 2000 | 3 | 140mmx | 130 | 145 | 6.75 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| Avatar | vehicle | 700 | 5.6 | 1750 | 4 | AvatarHeavyLas | 100 | 95 | 6 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Avatar | vehicle | 700 | 5.6 | 1750 | 4 | Avatar2HeavyLa | 100 | 5 | 6 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Avatar | vehicle | 700 | 5.6 | 1750 | 4 | AvatarHeavyLas | 100 | 95 | 6 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Avatar | vehicle | 700 | 5.6 | 1750 | 4 | Avatar2HeavyLa | 100 | 5 | 6 | general | ⚠ ^HighTechTank (heavy) | TODO |
 | Gorgon | vehicle | 725 | 5.8 | 1200 | 5 | ScrambleWaveWe | 1 | 15 | 9 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | Gorgon | vehicle | 725 | 5.8 | 1200 | 2 | ScrambleWaveWe | 1 | 15 | 9 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
-| Tiberium Floater | vehicle | 750 | 6.0 | 500 | 10 | Floater_Electr | 115 | 65 | 2 | general | ^EpicVehicle | TODO |
-| Reckoner (Bunker mode) | vehicle | 750 | 6.0 | 1500 | 5 | InvisibleTarge | 0 | 10 | 5 | general | ^EpicVehicle | TODO |
-| Avatar | vehicle | 750 | 6.0 | 1750 | 4 | AvatarHeavyLas | 100 | 95 | 6 | general | ^EpicVehicle | TODO |
-| Avatar | vehicle | 750 | 6.0 | 1750 | 4 | Avatar2HeavyLa | 100 | 5 | 6 | general | ^EpicVehicle | TODO |
-| Avatar | vehicle | 750 | 6.0 | 1750 | 4 | AvatarHeavyLas | 100 | 95 | 6 | general | ^EpicVehicle | TODO |
-| Avatar | vehicle | 750 | 6.0 | 1750 | 4 | Avatar2HeavyLa | 100 | 5 | 6 | general | ^EpicVehicle | TODO |
+| Tiberium Floater | vehicle | 750 | 6.0 | 500 | 10 | Floater_Electr | 115 | 65 | 2 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Reckoner (Bunker mode) | vehicle | 750 | 6.0 | 1500 | 5 | InvisibleTarge | 0 | 10 | 5 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Avatar | vehicle | 750 | 6.0 | 1750 | 4 | AvatarHeavyLas | 100 | 95 | 6 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Avatar | vehicle | 750 | 6.0 | 1750 | 4 | Avatar2HeavyLa | 100 | 5 | 6 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Avatar | vehicle | 750 | 6.0 | 1750 | 4 | AvatarHeavyLas | 100 | 95 | 6 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Avatar | vehicle | 750 | 6.0 | 1750 | 4 | Avatar2HeavyLa | 100 | 5 | 6 | general | ⚠ ^HighTechTank (heavy) | TODO |
 | War Miner | vehicle | 800 | 6.4 | 1400 | 4 | 20mmRapid | 30 | 20 | 5.5 | anti-inf | ^Harvester/support | TODO |
-| Apocalypse | vehicle | 800 | 6.4 | 1750 | 4 | 120mmx | 100 | 90 | 5.75 | anti-armor | ^EpicVehicle | TODO |
+| Apocalypse | vehicle | 800 | 6.4 | 1750 | 4 | 120mmx | 100 | 90 | 5.75 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
 | Aircraft Carrier | vehicle | 800 | 6.4 | 2000 | 4 | HornetLauncher | 1 | 150 | 25 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | Aegis Cruiser | vehicle | 800 | 6.4 | 1200 | 4 | Medusa | 100 | 15 | 12 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | Dreadnought | vehicle | 800 | 6.4 | 2000 | 4 | DredLauncher | 50 | 50 | 25 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | Chrono Miner | vehicle | 800 | 6.4 | 1400 | 4 | none |  |  |  | ? | ^Harvester/support | TODO |
-| Mobile EM-Pulse | vehicle | 800 | 6.4 | 1250 | 6 | MobileEMPulseW | 0 | 1800 | 3 | anti-armor | ^EpicVehicle | TODO |
+| Mobile EM-Pulse | vehicle | 800 | 6.4 | 1250 | 6 | MobileEMPulseW | 0 | 1800 | 3 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
 | Dreadnought | vehicle | 800 | 6.4 | 2000 | 4 | DredLauncher | 50 | 50 | 25 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | Aircraft Carrier | vehicle | 800 | 6.4 | 2000 | 4 | HornetLauncher | 1 | 150 | 25 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
-| Apocalypse (RA3) | vehicle | 800 | 6.4 | 1750 | 4 | RA3_120mmx | 100 | 90 | 5.75 | anti-armor | ^EpicVehicle | TODO |
-| RA3 Apocalypse (Grinder mode | vehicle | 800 | 6.4 | 1750 | 6 | GrinderApoc | 100 | 10 | 1.8 | anti-inf | ^EpicVehicle | TODO |
-| Mobile EM-Pulse (Charged) | vehicle | 800 | 6.4 | 1250 | 6 | MobileEMPulseW | 0 | 1800 | 3 | anti-armor | ^EpicVehicle | TODO |
+| Apocalypse (RA3) | vehicle | 800 | 6.4 | 1750 | 4 | RA3_120mmx | 100 | 90 | 5.75 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| RA3 Apocalypse (Grinder mode | vehicle | 800 | 6.4 | 1750 | 6 | GrinderApoc | 100 | 10 | 1.8 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
+| Mobile EM-Pulse (Charged) | vehicle | 800 | 6.4 | 1250 | 6 | MobileEMPulseW | 0 | 1800 | 3 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
 | CABAL's Leviathan | vehicle | 800 | 6.4 | 2700 | 5 | LeviathanFlame | 80 | 210 | 12.83 | anti-inf | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
-| Mammoth Tank Mk. III | vehicle | 880 | 7.0 | 1800 | 3 | TW120mmx | 100 | 110 | 5.75 | anti-armor | ^EpicVehicle | TODO |
-| Soviet Iron Fist | vehicle | 1000 | 8.0 | 2000 | 3 | 20mmRapid | 30 | 20 | 5.5 | anti-inf | ^EpicVehicle | TODO |
+| Mammoth Tank Mk. III | vehicle | 880 | 7.0 | 1800 | 3 | TW120mmx | 100 | 110 | 5.75 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| Soviet Iron Fist | vehicle | 1000 | 8.0 | 2000 | 3 | 20mmRapid | 30 | 20 | 5.5 | anti-inf | ⚠ ^HighTechTank (heavy) | TODO |
 | CABAL's Leviathan | vehicle | 1000 | 8.0 | 2600 | 5 | LeviathanLaunc | 1 | 45 | 13 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | CABAL's Leviathan | vehicle | 1000 | 8.0 | 2600 | 5 | LeviathanLaunc | 1 | 45 | 13 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
-| Mammoth Mk.II | vehicle | 1100 | 8.8 | 2750 | 3 | MechRailgun | 0 | 100 | 7 | general | ^EpicVehicle | TODO |
-| Mammoth Mk.II | vehicle | 1150 | 9.2 | 2750 | 3 | MechRailgun | 0 | 100 | 7 | general | ^EpicVehicle | TODO |
-| Yuri Boomer | vehicle | 1200 | 9.6 | 2000 | 5 | BoomerTorpedo | 60 | 130 | 7 | general | ^EpicVehicle | TODO |
-| Yuri Boomer | vehicle | 1200 | 9.6 | 2000 | 5 | BoomerTorpedo | 60 | 130 | 7 | general | ^EpicVehicle | TODO |
-| Paladin Destroyer (Ground) | vehicle | 1450 | 11.6 | 1500 | 2 | TS115mm | 100 | 125 | 8 | general | ^EpicVehicle | TODO |
-| Paladin (Water) | vehicle | 1450 | 11.6 | 1500 | 5 | TS115mm | 100 | 125 | 8 | general | ^EpicVehicle | TODO |
+| Mammoth Mk.II | vehicle | 1100 | 8.8 | 2750 | 3 | MechRailgun | 0 | 100 | 7 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Mammoth Mk.II | vehicle | 1150 | 9.2 | 2750 | 3 | MechRailgun | 0 | 100 | 7 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Yuri Boomer | vehicle | 1200 | 9.6 | 2000 | 5 | BoomerTorpedo | 60 | 130 | 7 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Yuri Boomer | vehicle | 1200 | 9.6 | 2000 | 5 | BoomerTorpedo | 60 | 130 | 7 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Paladin Destroyer (Ground) | vehicle | 1450 | 11.6 | 1500 | 2 | TS115mm | 100 | 125 | 8 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Paladin (Water) | vehicle | 1450 | 11.6 | 1500 | 5 | TS115mm | 100 | 125 | 8 | general | ⚠ ^HighTechTank (heavy) | TODO |
 | Vladimir's Dreadnought | vehicle | 1500 | 12.0 | 2500 | 8 | DredLauncher | 50 | 50 | 25 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
-| Kirov Airship | vehicle | 2000 | 16.0 | 2000 | 5 | BlimpBomb | 250 | 50 | 1.5 | general | ^EpicVehicle | TODO |
+| Kirov Airship | vehicle | 2000 | 16.0 | 2000 | 5 | BlimpBomb | 250 | 50 | 1.5 | general | ⚠ ^HighTechTank (heavy) | TODO |
 | Slave Miner | vehicle | 2000 | 16.0 | 1750 | 3 | 20mmRapid | 30 | 20 | 5.5 | anti-inf | ^Harvester/support | TODO |
-| Redeemer | vehicle | 2000 | 16.0 | 3000 | 3 | RedeemerLaserF | 300 | 85 | 8 | general | ^EpicVehicle | TODO |
+| Redeemer | vehicle | 2000 | 16.0 | 3000 | 3 | RedeemerLaserF | 300 | 85 | 8 | general | ⚠ ^HighTechTank (heavy) | TODO |
 | Mammoth Mk.II Prototype | vehicle | 4000 | 32.0 | 4000 | 3 | MM2ProtoWeapon | 275 | 175 | 9 | anti-inf | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
-| GDI Hunter-Seeker | vehicle | 5000 | 40.0 | 1000 | 25 | SuicideBomb | 30000 | 1 | .5 | general | ^EpicVehicle | TODO |
-| Nod Hunter-Seeker | vehicle | 5000 | 40.0 | 1000 | 25 | SuicideBomb | 30000 | 1 | .5 | general | ^EpicVehicle | TODO |
+| GDI Hunter-Seeker | vehicle | 5000 | 40.0 | 1000 | 25 | SuicideBomb | 30000 | 1 | .5 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| Nod Hunter-Seeker | vehicle | 5000 | 40.0 | 1000 | 25 | SuicideBomb | 30000 | 1 | .5 | general | ⚠ ^HighTechTank (heavy) | TODO |
 | Core Defender | vehicle | 6000 | 48.0 | 13000 | 5 | DEFOB | 350 | 65 | 10.5 | general | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 
 ## Romanov's Veng.  (rifle = 12500 HP)
@@ -721,14 +1050,14 @@ Warhead role auto-classified from the Versus armor-ORDER (anti-inf / anti-armor 
 | kamaz | vehicle | 40000 | 3.2 | 800 | 135 | ToxinSprayerTr | 32 | 60 | 5.0 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
 | lart | vehicle | 40000 | 3.2 | 1600 | 75 | AnniLaserCharg |  | 51 | 11.0 | ? | ⚠ ^ArtilleryTank(tanky)/^Artillery(fragile) | TODO |
 | spider | vehicle | 40000 | 3.2 | 700 | 120 | PoisonSting | 80 | 40 | 5.0 | anti-inf | ⚠ ^MainBattleTank / ^HighTechTank | TODO |
-| hytk | vehicle | 50000 | 4.0 | 1100 | 90 | 105mmx | 65 | 70 | 6.0 | anti-armor | ⚠ ^HighTechTank | TODO |
-| mind | vehicle | 50000 | 4.0 | 1750 | 75 | MasterMindCont | 0 | 100 | 7.0 | ? | ⚠ ^HighTechTank | TODO |
-| 4tnk | vehicle | 60000 | 4.8 | 1700 | 60 | 120mm | 90 | 65 | 6.0 | anti-armor | ⚠ ^HighTechTank | TODO |
-| expn | vehicle | 80000 | 6.4 | 1200 | 105 | GroundDummyAim |  | 20 | 8.0 | ? | ^EpicVehicle | TODO |
-| apoc | vehicle | 80000 | 6.4 | 1750 | 75 | 120mmx | 100 | 65 | 6.0 | anti-armor | ^EpicVehicle | TODO |
-| exps | vehicle | 80000 | 6.4 | 1200 | 105 | GroundDummyAim |  | 20 | 8.0 | ? | ^EpicVehicle | TODO |
-| grtk | vehicle | 80000 | 6.4 | 2000 | 135 | TankGrind | 15000 | 25 | 1.8 | general | ^EpicVehicle | TODO |
-| expy | vehicle | 80000 | 6.4 | 1200 | 105 | GroundDummyAim |  | 20 | 8.0 | ? | ^EpicVehicle | TODO |
+| hytk | vehicle | 50000 | 4.0 | 1100 | 90 | 105mmx | 65 | 70 | 6.0 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| mind | vehicle | 50000 | 4.0 | 1750 | 75 | MasterMindCont | 0 | 100 | 7.0 | ? | ⚠ ^HighTechTank (heavy) | TODO |
+| 4tnk | vehicle | 60000 | 4.8 | 1700 | 60 | 120mm | 90 | 65 | 6.0 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| expn | vehicle | 80000 | 6.4 | 1200 | 105 | GroundDummyAim |  | 20 | 8.0 | ? | ⚠ ^HighTechTank (heavy) | TODO |
+| apoc | vehicle | 80000 | 6.4 | 1750 | 75 | 120mmx | 100 | 65 | 6.0 | anti-armor | ⚠ ^HighTechTank (heavy) | TODO |
+| exps | vehicle | 80000 | 6.4 | 1200 | 105 | GroundDummyAim |  | 20 | 8.0 | ? | ⚠ ^HighTechTank (heavy) | TODO |
+| grtk | vehicle | 80000 | 6.4 | 2000 | 135 | TankGrind | 15000 | 25 | 1.8 | general | ⚠ ^HighTechTank (heavy) | TODO |
+| expy | vehicle | 80000 | 6.4 | 1200 | 105 | GroundDummyAim |  | 20 | 8.0 | ? | ⚠ ^HighTechTank (heavy) | TODO |
 | harv | vehicle | 100000 | 8.0 | 1400 | 75 | 20mmrapid | 30 | 20 | 6.0 | mixed | ^Harvester/support | TODO |
-| deva | vehicle | 100000 | 8.0 | 2200 | 105 | 120mmxRad | 200 | 65 | 6.0 | mixed | ^EpicVehicle | TODO |
-| smin | vehicle | 150000 | 12.0 | 1500 | 105 | 20mmrapid | 30 | 20 | 6.0 | mixed | ^EpicVehicle | TODO |
+| deva | vehicle | 100000 | 8.0 | 2200 | 105 | 120mmxRad | 200 | 65 | 6.0 | mixed | ⚠ ^HighTechTank (heavy) | TODO |
+| smin | vehicle | 150000 | 12.0 | 1500 | 105 | 20mmrapid | 30 | 20 | 6.0 | mixed | ⚠ ^HighTechTank (heavy) | TODO |
