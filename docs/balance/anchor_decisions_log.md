@@ -649,31 +649,39 @@ the sidecar and **auto-update the sidecar** on mismatch (single always-accurate 
 
 | | Unit | HP | Range | DPS | cost0 |
 |---|---|--:|--:|--:|--:|
-| **Baseline** | `td_gdi_advancedguardtower` | 200000 | **9000** | 1250? | **UNDER REVIEW (1000?)** |
-| **Verifier** | `ixian_rocketturret` | 2.5×HP | 9000 | 2.5×DPS | **4× baseline** |
+| | Unit | HP | Range | DPS | cost0 |
+|---|---|--:|--:|--:|--:|
+| **Baseline** | `td_gdi_advancedguardtower` | 200000 | **9000** | **~800** | **1000** |
+| **Verifier** | `ixian_rocketturret` (1×1) | 500000 | 9000 | 2000 | **4000** |
 
-- Baseline range band **8000–10000**. **1×1**, Steel armor, power = cost/10. Heavy-missile-only (wc 1.25).
-- **⚠ COST + POWER UNDER REVIEW (maintainer 2026-07-26):** with the 4× convention, cost0 1200 → verifier
-  4800, overshooting SuperDefense (4000). Also the guard tower as specced (200k HP / DPS 1250 / range
-  9000) is **stronger than its old 1600 price** — underpriced at 1000. **The footprint rule (Advanced
-  1×1 vs Super 2×2) already keeps the classes distinct, so cost overlap is harmless** — the real issue
-  is value-for-cost. **Ideas (pick one):** (A) cost 1000, keep stats (strong-but-cheap anchor; verifier
-  4000 = meets Super floor); (B) cost 1000 + **trim DPS 1250 → ~800** (a clean 2× step over Basic's 400,
-  fair; verifier 4000); (C) cost 1200, verifier 4800 (footprint separates it from Super anyway).
-  **Recommend (B).**
-- Verifier = **Ixian rocket turret** (1×1, clean K=1.0) → 2.5×HP + 2.5×DPS + same range = 4× baseline.
-  **Resolve its Tier-2 → Tier-3 move + the Ixian AA-gap** (let their guard-tower after-upgrade AA count,
-  or give them a dedicated AA turret).
+- **LOCKED idea B (maintainer 2026-07-26):** cost0 **1000**, **DPS trimmed 1250 → ~800** — a clean
+  2×HP / 2×DPS / +range step over Basic (100k/400/500), fairly priced. Range band **8000–10000**, Steel
+  armor, power = cost/10, heavy-missile-only (wc 1.25). Verifier = **Ixian rocket turret** at 2.5×HP +
+  2.5×DPS + same range = **4× → 4000** (= the SuperDefense floor, a clean boundary).
+- **Ixian rocket turret → Tier 3** (maintainer confirmed). Creates an **Ixian AA gap** → **FILL by
+  reactivating `d2k_airdefenseplatform`** — a commented-out D2K "Air Defense Platform" (in `d2k.yaml`
+  ~line 7123, NOT in the packs): a slow hovering base-defense (speed 28) with dual high-calibre AA MG,
+  `AttackAircraft`, 1500¢ / 75000 HP / Heavy, high_tech_factory + research_centre gated. Currently
+  `~anyharkonnen` — **repoint the prereq to Ixian** (high-tech fits their theme). BOOT-GATED (verify the
+  weapon `d2k_airdefenseplatform`, the `.husk`, and sequences still exist before uncommenting).
 
-## ✅ SuperDefense — LOCKED baseline 2026-07-26 (epic, 2×2 footprint, Steel armor, power = cost/5)
+## ✅ SuperDefense — baseline 2026-07-26 (epic capstone, 2×2, Steel, power = cost/5)
 
-**Membership:** footprint > 1×1 (except AA turrets) + extremely-powerful 1×1. **Baseline =
-`asianalliance_plasmacannon`** @ **4000** (300000 HP, range 14000, **2×2**, PlasmaWeapon 1.25, **no
-charge** — the clean epic candidate). Members (MOVE out of AdvancedDefense): `ra2_allies_grandcannon`,
-`ixian_stormlasher`, `latinsyndicate_smlturret` (all 5000, 2×2). **NO 4× verifier** — a 4× of 4000 =
-16000 has no real unit; SuperDefense is a **narrow epic tier** (baseline 4000, members clustered
-4000–5000), so it's baseline-anchored only (the epic ceiling), not a full baseline→4× band. **cost0
-4000 + range band TBD.**
+**★ CLEAR Advanced-vs-Super distinction (footprint scan 2026-07-26):** footprint ALONE fails — the
+obelisks are **2×2 but Advanced** (TD obelisk 1×1/1800, TS obelisk 2×2/2200, Cabal obelisk 2×2/2400,
+Quantum Cannon 2×2/2000, Tesla/Prism 2000/2200). The true super defenses are **2×2 AND expensive**
+(plasma 4000, grand cannon/SML/storm lasher 5000). So the rule is **SuperDefense = 2×2 footprint AND
+cost ≥ ~4000** (the faction's capstone); everything cheaper = Advanced (any footprint). There's a clean
+natural GAP between the obelisks (~2400) and the supers (~4000).
+
+**Baseline = `asianalliance_plasmacannon`** (300000 HP, range 14000, 2×2, PlasmaWeapon 1.25, no charge).
+Members (MOVE out of AdvancedDefense): `ra2_allies_grandcannon`, `ixian_stormlasher`,
+`latinsyndicate_smlturret` (all 5000, 2×2).
+**⚠ BASELINE-COST DECISION:** (a) keep plasma **@4000** → clean boundary (Advanced verifier 4000 = Super
+floor 4000), Super = **epic ceiling, NO 4× verifier** (4× of 4000 = 16000 has no unit); OR (b) maintainer's
+idea — plasma **@2500** → 4× verifier = **10000** (= BFG-10k price, but the BFG is epic/build-limit-1, its
+OWN class → need a different 10000 unit), but 2500 **overlaps** the Advanced band (1000→4000). **Recommend
+(a):** cleaner boundary, keeps idea B intact. `steelconsortium_bfg10000` stays its own epic class (BuildLimit 1).
 `cabal_heavycabalobelisk` (2400, charge) is NOT Super (charge → Advanced/own handling).
 
 **★ Tesla Coil EXEMPT from charge-up rule** (maintainer 2026-07-26): both RA1+RA2 tesla coils have a
