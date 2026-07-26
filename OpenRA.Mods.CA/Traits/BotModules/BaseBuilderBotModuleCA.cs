@@ -40,6 +40,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Tells the AI what building types are considered infantry production facilities.")]
 		public readonly FrozenSet<string> BarracksTypes = FrozenSet<string>.Empty;
 
+		[Desc("Factions that may prioritize their first barracks before their first refinery when enabled by BotLimits.")]
+		public readonly FrozenSet<string> BarracksBeforeRefineryFactions = FrozenSet<string>.Empty;
+
 		[Desc("Tells the AI what building types are considered anti-air defenses.")]
 		public readonly FrozenSet<string> AntiAirTypes = FrozenSet<string>.Empty;
 
@@ -249,6 +252,7 @@ namespace OpenRA.Mods.CA.Traits
 		int checkBestResourceLocationTicks;
 		int sellRefineryTick;
 		bool firstTick = true;
+		bool openingBarracksPriorityCompleted;
 
 		readonly BaseBuilderQueueManagerCA[] builders;
 		int currentBuilderIndex = 0;
@@ -348,6 +352,9 @@ namespace OpenRA.Mods.CA.Traits
 				ResourceMapModule = bot.Player.PlayerActor.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
 				firstTick = false;
 			}
+
+			if (!openingBarracksPriorityCompleted && AIUtils.CountActorByCommonName(barracksBuildings) > 0)
+				openingBarracksPriorityCompleted = true;
 
 			if (RelocationHoldConyard != null &&
 				(!RelocationHoldConyard.IsInWorld || RelocationHoldConyard.IsDead ||
@@ -661,6 +668,23 @@ namespace OpenRA.Mods.CA.Traits
 			Info.ProductionTypes.Count == 0 ||
 			AIUtils.CountActorByCommonName(ProductionBuildings) > 0;
 
+		public bool HasCompletedPowerPlant() => AIUtils.CountActorByCommonName(powerBuildings) > 0;
+
+		public bool OpeningBarracksPriorityCompleted => openingBarracksPriorityCompleted;
+
+		public bool HasBuiltOrQueuedBarracks() =>
+			AIUtils.CountActorByCommonName(barracksBuildings) > 0 || CountQueuedBuildings(Info.BarracksTypes) > 0;
+
+		public bool HasQueuedPowerPlant() => CountQueuedBuildings(Info.PowerTypes) > 0;
+
+		int CountQueuedBuildings(IReadOnlySet<string> buildingTypes) =>
+			Info.BuildingQueues.Concat(Info.DefenseQueues)
+				.Distinct()
+				.SelectMany(category => AIUtils.FindQueues(player, category))
+				.Distinct()
+				.SelectMany(queue => queue.AllQueued())
+				.Count(item => buildingTypes.Contains(item.Item));
+
 		void SellUselessRefinery(IBot bot)
 		{
 			// Sell one refinery each time. Perserve at least one refinery
@@ -700,7 +724,8 @@ namespace OpenRA.Mods.CA.Traits
 			return new List<MiniYamlNode>()
 			{
 				new("InitialBaseCenter", FieldSaver.FormatValue(initialBaseCenter)),
-				new("DefenseCenter", FieldSaver.FormatValue(DefenseCenter))
+				new("DefenseCenter", FieldSaver.FormatValue(DefenseCenter)),
+				new("OpeningBarracksPriorityCompleted", FieldSaver.FormatValue(openingBarracksPriorityCompleted))
 			};
 		}
 
@@ -716,6 +741,11 @@ namespace OpenRA.Mods.CA.Traits
 			var defenseCenterNode = data.NodeWithKeyOrDefault("DefenseCenter");
 			if (defenseCenterNode != null)
 				DefenseCenter = FieldLoader.GetValue<CPos>("DefenseCenter", defenseCenterNode.Value.Value);
+
+			var openingBarracksPriorityCompletedNode = data.NodeWithKeyOrDefault("OpeningBarracksPriorityCompleted");
+			if (openingBarracksPriorityCompletedNode != null)
+				openingBarracksPriorityCompleted = FieldLoader.GetValue<bool>("OpeningBarracksPriorityCompleted",
+					openingBarracksPriorityCompletedNode.Value.Value);
 		}
 
 		void INotifyActorDisposing.Disposing(Actor self)

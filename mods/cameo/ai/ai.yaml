@@ -85,6 +85,7 @@
 		BuildingIntervalModifier: 150
 		UnitDelayModifier: 150
 		UnitIntervalModifier: 150
+		PrioritizeBarracksBeforeRefinery: true
 		RequiresCondition: hardbot
 	BotLimits@veryhard:
 		ProductionTypeLimit: 4
@@ -95,12 +96,14 @@
 		BuildingIntervalModifier: 125
 		UnitDelayModifier: 125
 		UnitIntervalModifier: 125
+		PrioritizeBarracksBeforeRefinery: true
 		RequiresCondition: veryhardbot
 	BotLimits@brutal:
 		ProductionTypeLimit: 4
 		ConstructionYardLimit: 4
 		RefineryLimit: 7
 		HarvesterLimit: 21
+		PrioritizeBarracksBeforeRefinery: true
 		RequiresCondition: brutalbot
 	BotLimits@challenger:
 		ProductionTypeLimit: 5
@@ -111,6 +114,7 @@
 		BuildingIntervalModifier: 75
 		UnitDelayModifier: 75
 		UnitIntervalModifier: 75
+		PrioritizeBarracksBeforeRefinery: true
 		RequiresCondition: challengerbot
 	BotLimits@unbeatable:
 		ProductionTypeLimit: 6
@@ -121,6 +125,7 @@
 		BuildingIntervalModifier: 50
 		UnitDelayModifier: 50
 		UnitIntervalModifier: 50
+		PrioritizeBarracksBeforeRefinery: true
 		RequiresCondition: unbeatablebot
 	BotLimits@god:
 		ProductionTypeLimit: 7
@@ -131,6 +136,7 @@
 		BuildingIntervalModifier: 25
 		UnitDelayModifier: 25
 		UnitIntervalModifier: 25
+		PrioritizeBarracksBeforeRefinery: true
 		RequiresCondition: cameogodbot
 
 Player:
@@ -3478,6 +3484,8 @@ Player:
 		RefineryTypes: td_gdi_tiberiumrefinery, td_nod_tiberiumrefinery, ra1_allies_alliedorerefinery, ra1_soviets_orerefinery, japan_japaneseorerefinery, ra2_soviets_orerefinery, ra2_allies_alliedorerefinery, yuri_slaveminer_deployed, ts_gdi_tiberiumrefinery, ts_nod_tiberiumrefinery, forgotten_refinery, cabal_refinery, terran_refinery, protoss_assimilator, zerg_extractor, glsupply, chsupply, usasupply, refinery, ixian_refineryixian, ordos_refineryordos, wc2_humans_elvenlumbermill, wc2_orcs_trolllumbermill, wc2_humans_townhall, wc2_orcs_greathall, asianalliance_asianorerefinery, steelconsortium_consortiumrefinery, latinsyndicate_recyclingrefinery, naxis_orerefinery, schwarzermond_orerefinery, futuretech_refinery, tkm_orerefinery
 		PowerTypes: nuke, nuk2, ra1_powerplant, ra1_advancedpowerplant, japan_waveforcereactor, ra2_soviets_teslareactor, ra2_allies_alliedpowerplant, ra2_soviets_nuclearreactor, yuri_bioreactor, terran_supplydepot, protoss_pylon, scbotoverlord, ts_gdi_powerplant, forgotten_crystalpowerextractor, cabal_powerplant, ts_nod_powerplant, ts_nod_advancedpowerplant, chpower, chpower2, usapower, wind_trap, ixian_windtrap, ordos_windtrap, d2k_mini_windtrap, wc2_humans_farm, wc2_orcs_pigfarm, asianalliance_asianpetrolplant, asianalliance_tankreactor, steelconsortium_consortiumpowerplant, latinsyndicate_powerstation, naxis_naxpetrolplant, schwarzermond_hydrogenplant, futuretech_thermalpowerplant, zerg_overlord, tkm_powerplant
 		BarracksTypes: td_gdi_barracks, td_nod_handofnod, ra1_allies_alliedbarracks, ra1_soviets_barracks, ra2_allies_alliedbarracks, ra2_soviets_barracks, yuri_barracks, terran_barracks, protoss_gateway, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, ordos_barracks, wc2_humans_barracks, wc2_orcs_barracks, asianalliance_asianbarracks, steelconsortium_steelbarracks, latinsyndicate_combatbarracks, naxis_barracks, schwarzermond_barracks, futuretech_troopgate, tkm_barracks
+		# Conventional selectable factions; Japan, StarCraft, and Warcraft II use nonstandard economies.
+		BarracksBeforeRefineryFactions: td_gdi, td_nod, ra1_allies, ra1_soviets, ts_gdi, ts_nod, forgotten, cabal, ra2_allies, ra2_soviets, yuri, asianalliance, steelconsortium, latinsyndicate, naxis, schwarzermond, futuretech, ixian, ordos, tkm
 		VehiclesFactoryTypes: td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_alliedwarfactory, ra1_soviets_warfactory, ra1_soviets_largefactory, ra2_allies_alliedwarfactory, ra2_soviets_warfactory, yuri_warfactory, terran_weaponsfactory, protoss_roboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, ordos_heavyfactory, ordos_starport, ordos_lightfactory, wc2_humans_gnomishinventor, wc2_orcs_golbinalchemist, asianalliance_asianwarfactory, steelconsortium_consortiumwarfactory, latinsyndicate_syndicatefactory, naxis_warfactory, schwarzermond_warfactory, futuretech_warpgate, ts_nod_warfactory, cabal_mechfactory, forgotten_warfactory, tkm_warfactory
 		ProductionTypes: td_gdi_barracks, td_nod_handofnod, ra1_allies_alliedbarracks, ra1_soviets_barracks, ra2_allies_alliedbarracks, ra2_soviets_barracks, yuri_barracks, terran_barracks, protoss_gateway, zerg_spawningpool, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, wc2_humans_barracks, wc2_orcs_barracks, asianalliance_asianbarracks, steelconsortium_steelbarracks, latinsyndicate_combatbarracks, naxis_barracks, schwarzermond_barracks, futuretech_troopgate, td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_alliedwarfactory, ra1_soviets_warfactory, ra1_soviets_largefactory, ra2_allies_alliedwarfactory, ra2_soviets_warfactory, yuri_warfactory, terran_weaponsfactory, protoss_roboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, wc2_humans_gnomishinventor, wc2_orcs_golbinalchemist, asianalliance_asianwarfactory, steelconsortium_consortiumwarfactory, latinsyndicate_syndicatefactory, naxis_warfactory, schwarzermond_warfactory, futuretech_warpgate, td_gdi_helipad, ts_nod_helipad, ts_nod_helipad, forgotten_helipad, ts_gdi_helipad, td_nod_helipad, ra1_allies_alliedhelipad, ra1_soviets_airfield, ra1_soviets_largesovietairfield, japan_japaneseairfield, ra2_allies_airforcecommandhq, ra2_soviets_airfield, ixian_hightechfactory, asianalliance_asianairforcecommand, latinsyndicate_airstation, naxis_airfield, schwarzermond_airfield, futuretech_launchpad, ordos_heavyfactory, ordos_starport, ordos_lightfactory, ordos_barracks, ordos_barracks, tkm_barracks, tkm_warfactory, tkm_airpad
 		NavalProductionTypes: cncsyrd, cncspen, ra1_soviets_subpen, ra1_allies_alliednavalyard, japan_japanesenavalyard, yrygyard, ra2gayard, ra2nayard, cgyard.asian, cgyard.latin, naval.nax

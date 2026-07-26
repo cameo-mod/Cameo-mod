@@ -365,16 +365,57 @@ namespace OpenRA.Mods.CA.Traits
 		ActorInfo ChooseBuildingToBuild(ProductionQueue queue)
 		{
 			var buildableThings = queue.BuildableItems();
+			var availableCash = playerResources.GetCashAndResources();
 
 			// This gets used quite a bit, so let's cache it here
 			var power = GetProducibleBuilding(baseBuilder.Info.PowerTypes, buildableThings,
 				a => a.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount));
+			var prioritizeOpeningBarracks = botLimits != null && botLimits.Info.PrioritizeBarracksBeforeRefinery
+				&& baseBuilder.Info.BarracksBeforeRefineryFactions.Contains(player.Faction.InternalName)
+				&& !baseBuilder.OpeningBarracksPriorityCompleted
+				&& !baseBuilder.HasBuiltOrQueuedBarracks();
+
+			// Do not let another empty construction queue duplicate a pending opening power plant.
+			if (prioritizeOpeningBarracks && baseBuilder.HasQueuedPowerPlant())
+				return null;
 
 			// First priority is to get out of a low power situation
 			if (playerPower != null && playerPower.ExcessPower < minimumExcessPower && power != null && power.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount) > 0)
 			{
 					AIUtils.BotDebug("{0} decided to build {1}: Priority override (low power)", queue.Actor.Owner, power.Name);
 					return power;
+			}
+
+			if (prioritizeOpeningBarracks)
+			{
+				// Finish the opening power plant before starting the barracks.
+				if (!baseBuilder.HasCompletedPowerPlant())
+				{
+					if (!baseBuilder.HasQueuedPowerPlant() && power != null && queue.GetProductionCost(power) <= availableCash)
+					{
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override (opening power)", queue.Actor.Owner, power.Name);
+						return power;
+					}
+				}
+				else
+				{
+					var barracks = GetProducibleBuilding(baseBuilder.Info.BarracksTypes, buildableThings);
+
+					if (barracks != null && queue.GetProductionCost(barracks) <= availableCash)
+					{
+						if (HasSufficientPowerForActor(barracks))
+						{
+							AIUtils.BotDebug("{0} decided to build {1}: Priority override (opening barracks)", queue.Actor.Owner, barracks.Name);
+							return barracks;
+						}
+
+						if (power != null && queue.GetProductionCost(power) <= availableCash)
+						{
+							AIUtils.BotDebug("{0} decided to build {1}: Priority override (opening barracks would cause low power)", queue.Actor.Owner, power.Name);
+							return power;
+						}
+					}
+				}
 			}
 
 			// Next is to build up a strong economy
