@@ -349,6 +349,27 @@ by the maintainer 2026-07-26 — **NOT yet locked** (baseline + verifier TBD whe
 - **AA-primary scout candidates to REVIEW** (have AA but weren't explicitly ordered moved — decide at
   lock time): `ts_gdi_pitbull` (missiles), `japan_armoredcar` (flak).
 
-**OPEN before locking:** baseline + verifier pick; confirm rule 3 (transport K 1.25); does the
-"ground-weapon-priced, AA = 2× dmg free" rule need a small K so dedicated AA isn't under-priced?; the
-Cargo+AA transport scan; naxis_bmwbike + Pitbull + Armored Car placement.
+### Findings (2026-07-26 roster scan)
+- **`ra2_soviets_flaktrack` = TRANSPORT** (Cargo MaxWeight 5) + AA. Its AA range is already GND×1.5
+  (5528→8292) → the +50%-range rule is native here. **Priced by the cargo rule** (Σ passengers), see
+  the reconciliation below.
+- **`latinsyndicate_diablo` = NON-transport**, clean GND cannon (dps 193, rng 7300) + AA cannon (rng
+  10450 ≈ +43%). Latin's dedicated AA → strong **baseline candidate** (K 1.0). cost 1200.
+- **`td_nod_reconbike` / `td_nod_chemicalattackbike` / `ts_nod_attackcycle` / `ts_gdi_pitbull` =
+  AA-PRIMARY** — their only real weapon is AA missiles (+ a dmg-1 point-defense laser); **no distinct
+  ground weapon.** ⇒ the "AA = +50%rng/+100%dmg OFF the ground weapon" rule has nothing to derive from.
+  **RULING NEEDED:** (a) give them a ground weapon and derive AA from it, or (b) treat their
+  anti-vehicle missile as the "ground" weapon and add a +50%/+100% AA variant?
+- **`naxis_bmwbike` = GROUND-ONLY** (two WW2 MGs, no AA) → **STAYS Scout** (resolved, not AA).
+- **`japan_armoredcar` = scout-with-AA** (MG + AA MG, non-transport). Maintainer rule "currently scout
+  ⇒ stays scout" → keep Scout, but flag as an AA candidate.
+
+### ★ Reconciled CARGO × weapon pricing (proposed — confirm)
+The cargo rule (cost = Σ passengers) and rule 3 (transport+weapon → K 1.25) combine cleanly:
+**armed transport cost = Σ(passenger costs at capacity) × 1.25**; unarmed transport = Σ × 1.0. So the
+Flak Track is priced Σ(passengers)×1.25, and its AntiAir-template membership governs its armor + the
+derived AA weapon, NOT its price. *(Confirm this interpretation.)*
+
+**OPEN before locking:** baseline + verifier pick (Diablo the cleanest non-transport anchor?); confirm
+rule 3 + the reconciled cargo×1.25; does "ground-weapon-priced, AA free at 2× dmg" under-price dedicated
+AA (need a small class K)?; the AA-primary bikes/Pitbull ruling (a vs b above); Armored Car placement.
