@@ -16,10 +16,10 @@ propose baseline+verifier → they give exact numbers → LOCK here → later: c
 **LOCKED (cost0):** ScoutVehicle 300 · LightTank 400 · AntiAir 600 · TankDestroyer 600 · MBT 800
 (Tiger pivot, signed) · FireSupport 1000 · ArtilleryTank 1200 (baseline; verifier pending) · LineBreaker
 1200 · HighTechTank 2000 · Dreadnought 3000.
-**➡ NEXT DEFENSE CLASSES:** BasicDefense **LOCKED** (guardtower baseline 100k/7000/DPS400/500, MG-Nest
-verifier). Remaining: **AntiAirDefense, AdvancedDefense, SuperDefense, Bunker** → then aircraft
-(rearmable formula first) / naval. Defense formula = **3-input** (done). Verifiers PENDING: defense
-convention (2.778× vs 4.667×); ArtilleryTank (lunar grille / Juggernaut Mk II); Artillery (V2).
+**➡ NEXT DEFENSE CLASSES:** BasicDefense + AntiAirDefense **LOCKED**. Remaining: **AdvancedDefense,
+SuperDefense, Bunker** → then aircraft (rearmable formula first) / naval. Defense formula = **3-input**;
+verifier convention = **2.778×** (confirmed); armor from templates (Concrete/Steel); flat-10 regen.
+Verifiers PENDING: ArtilleryTank (lunar grille / Juggernaut Mk II); Artillery (V2).
 **Open flags:** LineBreaker armor (TBD); `japan_armoredcar` Scout-vs-AntiAir; umlaut renames
 (`naxis_brummbr`→brummbar, `naxis_kbelwagen`→kubelwagen — boot-gated); `asianalliance_pulverizer`→AntiAir.
 **Future audits:** projectile speed = range÷2 (V3-type missiles exempt); weapon-type↔unit-type binding.
@@ -523,9 +523,19 @@ normal form — decide per subclass).
 
 ## ★ DEFENSE CLASS RULES (maintainer 2026-07-26)
 
-**Formula:** the 3-input defense formula (HP, Range, DPS — above). **Verifier convention (PENDING
-confirm):** 2×HP + 2×DPS + same range → **2.778×** cost (the 3-input analog of the mobile 2.5×; NB not
-round — round the verifier cost if preferred, or pick 2×-all = 4.667×).
+**Formula:** the 3-input defense formula (HP, Range, DPS — above). **Verifier convention = 2×HP + 2×DPS
++ same range → 2.778×** cost (CONFIRMED 2026-07-26 via the AA Air-Defender pick; the 3-input analog of
+the mobile 2.5×; verifier cost need not be round).
+
+**★ Defense HP granularity + regen (maintainer 2026-07-26):** defenses regenerate at a **FLAT 10 HP per
+step** (NOT HP-scaled like units), so their self-heal is constant regardless of HP ⇒ **defense HP may be
+in EITHER 1000 or 2500 steps** (both fine). No per-actor `Step = HP/n` for defenses.
+
+**★ Defense ARMOR scheme (already in the templates, `defaults.yaml` 2005–2071):** BasicDefense =
+**Concrete**, AntiAirDefense = **Concrete**, AdvancedDefense = **Steel**, SuperDefense = **Steel**,
+Bunker = **Steel**. Build-time modifiers: Basic **100** (longest), Advanced/Bunker **75**, AntiAir/Super
+**50** (quickest). *(Advanced/Super build-times may need to lengthen to match "plan-ahead" intent +
+the new power/cost ratios — review in the implementation pass.)*
 
 **★ Power-to-Cost per defense TYPE** (was a uniform `cost/20`):
 | Type | Power draw | Build-time modifier |
@@ -566,6 +576,22 @@ Alliance **plasma cannon**, Ixian **storm lasher**, … (full footprint scan whe
   (dmg 4000 ×5 / rd 25 bd 5) / cost 1000.
 - Baseline guardtower restat: HP 60000→**100000**, range 6720→**7000**, weapon → **DPS 400**, keep
   cost 500.
+
+---
+
+## ✅ AntiAirDefense — LOCKED 2026-07-26 (pure AA, long range, Concrete armor, quickest build)
+
+| | Unit | HP | Range | Dmg | Reload | DPS | cost0 |
+|---|---|--:|--:|--:|--:|--:|--:|
+| **Baseline** | `ra2_soviets_flakcannon` | **150000** | **12500** | **12000** | **12** | **1000** | **600** |
+| **Verifier** | `latinsyndicate_latinaadefender` | **300000** | 12500 | 24000 | 12 | **2000** | **≈1667** |
+
+- DPS = 12000 / 12 = **1000** (burst 1). **Range band 10000–15000** (12500 middle). Armor **Concrete**,
+  power = cost/20, quickest build time. **Pure-AA priced directly on the AA weapon** (no ground-weapon
+  split — confirmed).
+- Verifier = Latin **Air Defender** — naturally a **dual flak** (2× damage) + tankier → fits 2×HP +
+  2×DPS + same range = **2.778× → 1667**. ✓ identity.
+- HP 150000 / 300000 are clean (flat-10 regen → any 1000/2500 step is fine).
 
 ---
 
