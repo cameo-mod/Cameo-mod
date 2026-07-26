@@ -607,28 +607,45 @@ via a hard-coded `_WEAPON_CLASS_OVERRIDES` table, instead of reading the authori
   Excel say **1.25**. Also **`ShrapnelWeapon` should be 1.25** (Heavy), table has 1.0.
 
 **Rule (DESIGN.md §"WeaponClass"):** Light/Medium/Heavy warhead = 0.75/1.0/1.25; a weapon's class = the
-**arithmetic mean of its WARHEAD classes** (NOT the versus-armor list). **FIX (pending maintainer go):**
-(a) correct the override table to match the sidecar (`LaserWeapon`/`ShrapnelWeapon` → 1.25, full
-reconcile); (b) re-wire `extract_stats.py` to read `weapon_classes.yaml` + use the weapon's own class.
+**arithmetic mean of its WARHEAD classes** (NOT the versus-armor list).
 
-## ◧ AdvancedDefense + SuperDefense — IN PROGRESS (2026-07-26)
+**✅ FIXED 2026-07-26:** (a) `weapon_classes.yaml` `^ShrapnelWeapon` 1.0 → **1.25**; (b) `extract_stats.py`
+now **loads the sidecar as the SINGLE authoritative source** (`_load_weapon_class_sidecar`), deleting the
+stale hard-coded `_WEAPON_CLASS_OVERRIDES` table (LaserWeapon/TeslaWeapon/Grenade/ShrapnelWeapon all
+disagreed); (c) **NEW dedicated gate `extract_stats.py --check-weapon-classes`** — fails if any weapon
+references a class template missing from the sidecar (so a stale/guessed value can never recur). **The
+gate immediately found 48 unmapped templates** (theme variants `^RA2Chaingun`/`^SteelSmallArms`/…,
+generics `^MissileWeapon`/`^MG`/`^EMPDamage`, effects `^TSLaserEffect`/`^AADeployTargeting`) — **TODO:
+complete the sidecar** (theme-X → base-X class; non-damage effects → the IGNORE set) before wiring the
+gate into `run_all.sh`. Ledgers pick up the corrected classes on the next sanctioned `extract_stats` run.
 
-**Key finding (footprint scan):** the clean, "epic ~4000" defenses are **all 2×2 → SuperDefense**, not
-AdvancedDefense (they're currently mis-filed in `^AdvancedDefenseTemplate` and must MOVE):
-| Unit | cost | HP | Range | footprint | charge |
-|---|--:|--:|--:|:-:|:-:|
-| `asianalliance_plasmacannon` | **4000** | 300000 | 14000 | 2×2 | none ✓ |
-| `ixian_stormlasher` | 5000 | 200000 | 11384 | 2×2 | none ✓ |
-| `latinsyndicate_smlturret` | 5000 | 300000 | 15000 | 2×2 | none ✓ |
-| `ra2_allies_grandcannon` | 5000 | 250000 | 11800 | 2×2 | none ✓ |
-| `cabal_heavycabalobelisk` | 2400 | 300000 | 12288 | — | CHARGE ✗ |
+## ✅ AdvancedDefense — LOCKED baseline 2026-07-26 (1×1, Steel armor, plan-ahead build)
 
-⇒ **SuperDefense** (`^SuperDefenseTemplate`, exists): epic 2×2 defenses. **`asianalliance_plasmacannon`
-@ 4000** = the clean epic candidate you asked for (PlasmaWeapon 1.25, no charge). Grand Cannon /
-Storm Lasher / SML @ 5000.
-⇒ **AdvancedDefense** is therefore **1×1 only** — a ~4000 defense is too big (2×2) to be Advanced. So
-its verifier must be a strong **1×1** defense (~2500–3000), e.g. the **Ixian rocket turret** (clean
-K=1.0, but Tier-2 → resolve the tier/AA-gap) or a heavy tesla/prism. Obelisk rejected (charge, K-shift).
+| | Unit | HP | Range | Dmg | Burst | eff-reload | wc | DPS | cost0 |
+|---|---|--:|--:|--:|--:|--:|--:|--:|--:|
+| **Baseline** | `td_gdi_advancedguardtower` | **200000** | **9000** | **20000** | **2** | **40** | 1.25 | **1250** | **1200** |
+| **Verifier** | `ixian_rocketturret` | 400000 | 9000 | 40000 | 2 | 40 | 1.25 | 2500 | **3333** ⚠ |
+
+- Baseline range band **8000–10000**. **1×1**, Steel armor, power = cost/10. Guard tower uses **ONLY the
+  heavy-missile warheads** (Heavy → wc 1.25); DPS = 20000×2 / 40 × 1.25 = **1250**.
+- **⚠ VERIFIER-COST CONFLICT — DECIDE ONCE for all defenses:** you said 3000, but the **3-input defense
+  formula** prices 2×HP + 2×DPS + same range at **2.778× = 3333**, NOT 2.5× = 3000. Pick (a) keep the
+  clean 2×/2× doubling → verifier **3333**, or (b) hold **3000** and use ~1.87×HP + 1.87×DPS (ugly).
+  **Retro-applies to the AA Air-Defender (2.778× = 1667 vs 2.5× = 1500).**
+- Verifier = **Ixian rocket turret** (1×1, clean K=1.0) — **resolve its Tier-2 → Tier-3 move + the Ixian
+  AA-gap** (let their guard-tower after-upgrade AA count, or give them a dedicated AA turret).
+
+## ✅ SuperDefense — LOCKED baseline 2026-07-26 (epic, 2×2 footprint, Steel armor, power = cost/5)
+
+**Membership:** footprint > 1×1 (except AA turrets) + extremely-powerful 1×1. **Baseline =
+`asianalliance_plasmacannon`** @ **4000** (300000 HP, range 14000, **2×2**, PlasmaWeapon 1.25, **no
+charge** — the clean epic candidate). Members (MOVE out of AdvancedDefense): `ra2_allies_grandcannon`,
+`ixian_stormlasher`, `latinsyndicate_smlturret` (all 5000, 2×2). **Verifier + cost0 + range band TBD.**
+`cabal_heavycabalobelisk` (2400, charge) is NOT Super (charge → Advanced/own handling).
+
+**★ Tesla Coil EXEMPT from charge-up rule** (maintainer 2026-07-26): both RA1+RA2 tesla coils have a
+QUICK charge (25) and are already strong → NO 0.75 discount, NO reload=2×charge; **K = 1.25 (EMP)**;
+effective reload still 125 (RA1: ReloadDelay 100 + InitialChargeDelay 25). See [[cameo-charge-up-rule]].
 
 ---
 
