@@ -13,12 +13,12 @@ propose baseline+verifier → they give exact numbers → LOCK here → later: c
 + `fit_class` + sign-off. **Every class needs a baseline AND a verifier** (verifier = 2×HP + 2×DPS +
 2.5×cost, same speed/range → clean identity). Support is EXEMPT; cargo = Σ(passengers).
 
-**LOCKED (cost0):** ScoutVehicle 300 · LightTank 400 · TankDestroyer 600 · MBT 800 (Tiger pivot,
-signed) · FireSupport 1000 · LineBreaker 1200 · HighTechTank 2000 · Dreadnought 3000.
-**➡ NEXT: AntiAir Vehicle** (NEW `^AntiAirVehicleTemplate` — draft rules recorded below: **priced on
-the GROUND weapon**, the AA weapon is a fixed **+50% range / +100% damage** bonus; absorbs the TD/TS
-bikes + AA troop-transports + Diablo + flak-tracks; confirm the transport-K1.25 rule + baseline/verifier).
-**Then:** ArtilleryTank (Ixian Combat Siege), Artillery → then the 5 DEFENSE classes → aircraft/naval.
+**LOCKED (cost0):** ScoutVehicle 300 · LightTank 400 · **AntiAir 600** · TankDestroyer 600 · MBT 800
+(Tiger pivot, signed) · FireSupport 1000 · LineBreaker 1200 · HighTechTank 2000 · Dreadnought 3000.
+**➡ NEXT: (1) ArtilleryTank** (Ixian Combat Siege — between tank + artillery, range beyond 10000),
+then (2) **Artillery** → then the **5 DEFENSE classes** → aircraft/naval.
+**Armor ladder + AntiAir now LOCKED** (see sections below). **Open flags:** LineBreaker + ArtilleryTank
+armor (TBD); `japan_armoredcar` Scout-vs-AntiAir.
 Infantry anchors (14) already exist, need sign-off (commando needs a verifier). **After all anchors:**
 create templates in defaults.yaml (boot-gated), run `fit_class`, wire `check_band` into `run_all.sh`.
 **Upgrades LAST.** **Weapons.yaml below-divider cleanup = ON HOLD** (`weapons_cleanup_plan.md`, no
@@ -41,6 +41,27 @@ survive, so it leaves the direct-fire ladder and jumps to 10000. Artillery / Art
 *beyond* 10000 (indirect long-range — resolve the overlap when we lock them). Scout / AntiAir /
 LineBreaker have their own ranges (LineBreaker short ~2500; Scout 4500). **These ranges override the
 per-class range values below.**
+
+## ★ ARMOR LADDER (maintainer 2026-07-26 — one armor type per class)
+
+Each class carries a fixed armor type (lightest → heaviest: **Scout < Light < Medium < Heavy <
+Superheavy**):
+
+| Class | Armor |
+|---|---|
+| ScoutVehicle | **Scout** |
+| LightTank | **Medium** *(revised from Light, 2026-07-26)* |
+| AntiAir Vehicle | **Medium** |
+| MBT | **Heavy** |
+| TankDestroyer | **Heavy** |
+| HighTechTank | **Superheavy** |
+| Dreadnought | **Superheavy** |
+| FireSupport | **Light** |
+| Artillery | **Light** |
+| LineBreaker | **TBD** — "very durable" → likely Heavy/Superheavy (confirm) |
+| ArtilleryTank | **TBD** — between tank + artillery → likely Light/Medium (confirm) |
+
+*(Aircraft / naval / defenses get their own armor scheme later.)*
 
 ## ★ TWO NEW PRICING RULES (maintainer 2026-07-26)
 
@@ -66,7 +87,8 @@ cost = 1000¢**, restatted to **2× HP / 2× DPS** (80000 HP / 8000 dmg @ 40, sa
 - The **regular Nod Light Tank** (`td_nod_lighttank`) keeps its current price but is rebalanced to fit
   this band.
 
-**Class rules:** all members → **Light armor**; rebalanced into the baseline→verifier band.
+**Class rules:** all members → **Medium armor** (revised from Light on 2026-07-26 — see ARMOR LADDER);
+rebalanced into the baseline→verifier band.
 
 **★ REBALANCE METHOD (maintainer 2026-07-25, applies to ALL classes):** each member **keeps its
 current Speed, Range, Cost, ReloadDelay, Burst, BurstDelays** where possible. Rebalance is done by
@@ -249,7 +271,7 @@ outside the gun range-ladder).
   wc 0.75 = 450). The class self-anchors on the real baseline unit → the buggy keeps its weapon as-is,
   no nerf. *(The earlier "75" was a bogus cross-class ¾-of-LightTank guess — corrected 2026-07-26 per
   maintainer.)* HP 20000 = ½ the LightTank → fragile. Speed 200 = fastest class. Range **4500** =
-  scout's own. cost0 **300** = nostalgic. NB the weapon is anti-infantry (SmallArms warhead) so this
+  scout's own (**band 4000–5000**). cost0 **300** = nostalgic. NB the weapon is anti-infantry (SmallArms warhead) so this
   raw DPS is NOT cross-comparable with the tanks' anti-armor DPS — each class self-anchors.
 
 **Verifier = Terran Vulture** (`terran_vulture`), restatted to the 2.5× identity point:
@@ -326,28 +348,37 @@ survive. **Range = 10000** (revised up from 7500; leaves the direct-fire gun lad
 
 ---
 
-## ◧ AntiAir Vehicle (`^AntiAirVehicleTemplate`) — DRAFT rules (maintainer 2026-07-26; finalize after FireSupport)
+## ✅ AntiAir Vehicle (`^AntiAirVehicleTemplate`) — LOCKED 2026-07-26 (great vs air, HORRIBLE vs ground)
 
-**Concept:** dedicated mobile anti-air. Absorbs the planned AntiAirTank plus new members. Rules named
-by the maintainer 2026-07-26 — **NOT yet locked** (baseline + verifier TBD when we reach this class).
+**Concept:** dedicated mobile anti-air — short range + Medium armor vs ground (bad on purpose), massive
+range + firepower vs air (excellent). All members = **Medium armor**. Absorbs the planned AntiAirTank.
 
-**★ NEW PRICING RULE (the class's identity):**
-1. **Priced ONLY on the GROUND weapon** — balanced as if it were a ground unit.
-2. **The AA weapon is a fixed function of the ground weapon: +50% RANGE and +100% DAMAGE** (AA range =
-   ground range × 1.5, AA damage = ground damage × 2). The strong AA weapon comes "free" with the class
-   → makes them *excellent* dedicated AA. **This SUPERSEDES the old AG/AA pair law for this class.**
-3. **Transport-with-a-weapon → special K 1.25** *(maintainer tentative — "I think maybe")*: any troop
-   TRANSPORT that also has a weapon carries a 1.25× special modifier; if that weapon is AA it lives in
-   this template. **CONFIRM before locking.**
+| | Unit | HP | Speed | Range(GND) | GND Dmg | Reload | DPS | cost0 |
+|---|---|--:|--:|--:|--:|--:|--:|--:|
+| **Baseline** | `latinsyndicate_diablo` | **50000** | **125** | **5000** | **10000** | **15** | **667** | **600** |
+| **Verifier** | `steelconsortium_barracuda` | **100000** | 125 | 5000 | 20000 | 15 | **1333** | **1500** |
+
+- DPS = 10000 / 15 = 666.7 (burst 1, wc 1.0); verifier 2× via dmg 20000 / 15. ✓ identity 2×HP + 2×DPS +
+  same spd/rng → exactly 2.5× cost (600 → 1500). **GND range band 4500–5500** (baseline 5000 ±500).
+- **★ AA weapon = the ground weapon +50% RANGE / +100% DAMAGE** → Diablo AA: **range 7500, damage
+  20000**. Priced ONLY on the GROUND weapon; the strong AA weapon is **FREE** (the class's whole appeal).
+  **NO class K** — they are MEANT to be horrible vs ground (short 5000 range, Medium armor) and to shine
+  vs air (7500 range, 2× damage). **Supersedes the old AG/AA pair law for this class.**
+- **★ AA-primary members (bikes / Pitbull) — SPLIT rule:** their single dual-purpose missile is split
+  into a **separate ground weapon** (priced, range in the 4500–5500 band) **and a separate AA weapon**
+  (+50% range / +100% damage off it), applied as two armaments.
 
 **Membership (drafted):**
 - **All troop transports that have anti-air** (new rule; needs a Cargo+AA scan across the roster).
 - **TD/TS bikes** moved from Scout: `td_nod_reconbike`, `td_nod_chemicalattackbike`,
-  `ts_nod_attackcycle` (+ `naxis_bmwbike`? flag).
-- **`latinsyndicate_diablo`** (Latin's main AA vehicle — moved from Support earlier).
-- **Flak-tracks** (`ra2_soviets_flaktrack`) and similar.
-- **AA-primary scout candidates to REVIEW** (have AA but weren't explicitly ordered moved — decide at
-  lock time): `ts_gdi_pitbull` (missiles), `japan_armoredcar` (flak).
+  `ts_nod_attackcycle` (SPLIT their missile per the rule above). **`naxis_bmwbike` STAYS Scout** (its
+  two weapons are ground-only WW2 MGs — no AA).
+- **`latinsyndicate_diablo`** (baseline — Latin's main AA vehicle).
+- **`ts_gdi_pitbull`** (missiles) → AntiAir (AA-primary, SPLIT rule).
+- **Armed AA transports** (e.g. `ra2_soviets_flaktrack`, Cargo 5) → AntiAir template for armor + the
+  derived AA weapon, but **priced by the cargo rule** (below), not the ground-weapon formula.
+- **`japan_armoredcar`** (MG + AA MG, non-transport) — FLAG: stays Scout (maintainer "currently scout ⇒
+  stays scout") or move to AntiAir? (has AA.)
 
 ### Findings (2026-07-26 roster scan)
 - **`ra2_soviets_flaktrack` = TRANSPORT** (Cargo MaxWeight 5) + AA. Its AA range is already GND×1.5
@@ -364,12 +395,14 @@ by the maintainer 2026-07-26 — **NOT yet locked** (baseline + verifier TBD whe
 - **`japan_armoredcar` = scout-with-AA** (MG + AA MG, non-transport). Maintainer rule "currently scout
   ⇒ stays scout" → keep Scout, but flag as an AA candidate.
 
-### ★ Reconciled CARGO × weapon pricing (proposed — confirm)
-The cargo rule (cost = Σ passengers) and rule 3 (transport+weapon → K 1.25) combine cleanly:
-**armed transport cost = Σ(passenger costs at capacity) × 1.25**; unarmed transport = Σ × 1.0. So the
-Flak Track is priced Σ(passengers)×1.25, and its AntiAir-template membership governs its armor + the
-derived AA weapon, NOT its price. *(Confirm this interpretation.)*
+### ★ CARGO × weapon pricing (CORRECTED by maintainer 2026-07-26)
+For an armed transport the **price is FIXED = Σ(passenger costs at capacity)** — **NOT** ×1.25. The
+**1.25× is the special modifier K applied INSIDE the balance formula**, which at that fixed price budgets
+the unit **weaker combat stats**: `formula(stats) = Σ / 1.25`. So the transport pays full Σ for its
+cargo utility and receives combat stats as if it cost Σ/1.25 (weaker at the same price). Unarmed
+transport = Σ, no weapon (K n/a). Flak Track: price = Σ(5 passengers), stats solved with K 1.25; its
+AntiAir membership only governs armor + the derived AA weapon.
 
-**OPEN before locking:** baseline + verifier pick (Diablo the cleanest non-transport anchor?); confirm
-rule 3 + the reconciled cargo×1.25; does "ground-weapon-priced, AA free at 2× dmg" under-price dedicated
-AA (need a small class K)?; the AA-primary bikes/Pitbull ruling (a vs b above); Armored Car placement.
+**RESOLVED (all locked):** baseline Diablo @600 / verifier Barracuda @1500; AA = +50%rng/+100%dmg free,
+NO class K (horrible-vs-ground / great-vs-air is the point); AA-primary units SPLIT their dual weapon;
+cargo K as corrected above. **Only open flag:** `japan_armoredcar` placement (Scout vs AntiAir).
