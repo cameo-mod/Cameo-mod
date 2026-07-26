@@ -16,10 +16,12 @@ propose baseline+verifier → they give exact numbers → LOCK here → later: c
 **LOCKED (cost0):** ScoutVehicle 300 · LightTank 400 · AntiAir 600 · TankDestroyer 600 · MBT 800
 (Tiger pivot, signed) · FireSupport 1000 · ArtilleryTank 1200 (baseline; verifier pending) · LineBreaker
 1200 · HighTechTank 2000 · Dreadnought 3000.
-**➡ NEXT DEFENSE CLASSES:** BasicDefense + AntiAirDefense **LOCKED**. Remaining: **AdvancedDefense,
-SuperDefense, Bunker** → then aircraft (rearmable formula first) / naval. Defense formula = **3-input**;
-verifier convention = **2.778×** (confirmed); armor from templates (Concrete/Steel); flat-10 regen.
-Verifiers PENDING: ArtilleryTank (lunar grille / Juggernaut Mk II); Artillery (V2).
+**➡ NEXT DEFENSE CLASSES:** Basic + AntiAir + Advanced(baseline) + Super(baseline) **LOCKED**. Remaining:
+**AdvancedDefense cost (idea B: 1000 + DPS trim)** + **Bunker** → then aircraft (rearmable formula first)
+/ naval. Defense formula = **3-input**; **verifier convention = 2.5×HP + 2.5×DPS → 4.0×** (Basic 2000,
+AntiAir 2400; Super = epic tier, no 4×); armor Concrete/Steel; flat-10 regen. **Nuclear Warhead Versus
+fix CONFIRMED (boot-gated, step 3).** Verifiers PENDING: ArtilleryTank (lunar grille / Juggernaut Mk II);
+Artillery (V2).
 **Open flags:** LineBreaker armor (TBD); `japan_armoredcar` Scout-vs-AntiAir; umlaut renames
 (`naxis_brummbr`→brummbar, `naxis_kbelwagen`→kubelwagen — boot-gated); `asianalliance_pulverizer`→AntiAir.
 **Future audits:** projectile speed = range÷2 (V3-type missiles exempt); weapon-type↔unit-type binding.
@@ -523,9 +525,12 @@ normal form — decide per subclass).
 
 ## ★ DEFENSE CLASS RULES (maintainer 2026-07-26)
 
-**Formula:** the 3-input defense formula (HP, Range, DPS — above). **Verifier convention = 2×HP + 2×DPS
-+ same range → 2.778×** cost (CONFIRMED 2026-07-26 via the AA Air-Defender pick; the 3-input analog of
-the mobile 2.5×; verifier cost need not be round).
+**Formula:** the 3-input defense formula (HP, Range, DPS — above). **★ Verifier convention = 2.5×HP +
+2.5×DPS + same range → exactly 4.0× cost** (maintainer 2026-07-26 — the ONLY "both-round" point of the
+3-input formula: price = (2·2.5+1)²/9 = 36/9 = 4). Replaces the earlier 2.778×. More extreme band, but
+clean. **Caveat:** 4× only makes sense where a class spans a real range (Basic/AntiAir/Advanced);
+**SuperDefense is a narrow epic tier** (4000–5000), so 4× of 4000 = 16000 has no real unit → Super uses
+NO 4× verifier (see its section).
 
 **★ Defense HP granularity + regen (maintainer 2026-07-26):** defenses regenerate at a **FLAT 10 HP per
 step** (NOT HP-scaled like units), so their self-heal is constant regardless of HP ⇒ **defense HP may be
@@ -567,13 +572,12 @@ Alliance **plasma cannon**, Ixian **storm lasher**, … (full footprint scan whe
 | | Unit | HP | Range | DPS | cost0 |
 |---|---|--:|--:|--:|--:|
 | **Baseline** | `td_gdi_guardtower` | **100000** | **7000** | **400** | **500** |
-| **Verifier** | `japan_japanesemgnest` | **200000** | 7000 | **800** | **≈1400** (2.778×) |
+| **Verifier** | `japan_japanesemgnest` | **250000** | 7000 | **1000** | **2000** (4×) |
 
 - All BasicDefenses **range 6500–7500** (7000 middle). Power draw = **cost / 20** (guardtower 500 →
   power 25), longest build-time modifier.
-- Verifier = Japanese MG Nest restatted to 2×HP + 2×DPS + same range = 2.778× → **1389 (≈1400)**.
-  *(Confirm the defense verifier convention / whether to round.)* Current MG Nest = 110000 HP / dual MG
-  (dmg 4000 ×5 / rd 25 bd 5) / cost 1000.
+- Verifier = Japanese MG Nest restatted to **2.5×HP + 2.5×DPS + same range = 4× → 2000** (250000 HP /
+  DPS 1000 / 7000). Current MG Nest = 110000 HP / dual MG (dmg 4000 ×5 / rd 25 bd 5) / cost 1000.
 - Baseline guardtower restat: HP 60000→**100000**, range 6720→**7000**, weapon → **DPS 400**, keep
   cost 500.
 
@@ -584,14 +588,14 @@ Alliance **plasma cannon**, Ixian **storm lasher**, … (full footprint scan whe
 | | Unit | HP | Range | Dmg | Reload | DPS | cost0 |
 |---|---|--:|--:|--:|--:|--:|--:|
 | **Baseline** | `ra2_soviets_flakcannon` | **150000** | **12500** | **12000** | **12** | **1000** | **600** |
-| **Verifier** | `latinsyndicate_latinaadefender` | **300000** | 12500 | 24000 | 12 | **2000** | **≈1667** |
+| **Verifier** | `latinsyndicate_latinaadefender` | **375000** | 12500 | 30000 | 12 | **2500** | **2400** |
 
 - DPS = 12000 / 12 = **1000** (burst 1). **Range band 10000–15000** (12500 middle). Armor **Concrete**,
   power = cost/20, quickest build time. **Pure-AA priced directly on the AA weapon** (no ground-weapon
   split — confirmed).
-- Verifier = Latin **Air Defender** — naturally a **dual flak** (2× damage) + tankier → fits 2×HP +
-  2×DPS + same range = **2.778× → 1667**. ✓ identity.
-- HP 150000 / 300000 are clean (flat-10 regen → any 1000/2500 step is fine).
+- Verifier = Latin **Air Defender** (dual flak, naturally tankier) → **2.5×HP + 2.5×DPS + same range =
+  4× → 2400** (375000 HP / DPS 2500 / 12500). ✓ 4× convention.
+- HP 150000 / 375000 clean (flat-10 regen → any 1000/2500 step is fine).
 
 ---
 
@@ -624,28 +628,52 @@ after the automatic law it's down from 48 → **10** (targeting-only `^AADeployT
 0.75; `^D2K_Cannon`/`^DRPlasmaWeapon`/`^TSDefaultMissile`). Finish those 10, then wire into `run_all.sh`.
 Ledgers pick up the corrected classes on the next sanctioned `extract_stats` run.
 
+**★ Robustness upgrade (to build): classify by the Versus FLOOR/STEP, not just Shield** — the Shield can
+be non-standard (Charged Tesla Shield = 200, an EMP bonus). The floor is the reliable signal:
+`class = 0.75 + (floor − 10)/60` → floor 10/25/40/55 = 0.75/1.0/1.25/1.5. Cross-check floor vs Shield vs
+the sidecar and **auto-update the sidecar** on mismatch (single always-accurate source).
+**Off-ladder EXCEPTIONS (hard-set in the sidecar):** `^ToxicWeapon` = **0.5**; `^TeslaChargedWeapon` +
+`^NuclearWarhead` = **1.5** (Superheavy, step 3). Sidecar: `^NuclearWarhead` 1.25 → **1.5**.
+
+**★ NUCLEAR WARHEAD Versus fix — CONFIRMED 2026-07-26 (BOOT-GATED weapons.yaml edit, apply in the pass):**
+`^NuclearWarhead` is currently a **Heavy** profile (step 4, 100→40, Shield 140 = class 1.25). Change to
+**Superheavy (step 3)** to match its 1.5 class — KEEP the armor order, change the step 4→3:
+- **Main warhead:** Superheavy 100, then −3 per row (Plate 97, Heavy 94, Flak 91, Medium 88, None 85,
+  Light 82, Heroic 79, Scout 76, Steel 73, Concrete 70, Wood 67, Spaceship 64, Helicopter 61, Bomber 58,
+  **Fighter 55** floor), **Shield 155** (standard top+floor; NOT the Tesla's 200 — nukes get no shield
+  bonus). **HAZMAT 50 kept.**
+- **% warhead:** superheavy window **30 → 15** (Superheavy 30 … Fighter 15, step 1), **Shield 45** (was
+  the Heavy window 25→10 / Shield 35). Matches the Charged Tesla's % ladder (30→15).
+
 ## ✅ AdvancedDefense — LOCKED baseline 2026-07-26 (1×1, Steel armor, plan-ahead build)
 
-| | Unit | HP | Range | Dmg | Burst | eff-reload | wc | DPS | cost0 |
-|---|---|--:|--:|--:|--:|--:|--:|--:|--:|
-| **Baseline** | `td_gdi_advancedguardtower` | **200000** | **9000** | **20000** | **2** | **40** | 1.25 | **1250** | **1200** |
-| **Verifier** | `ixian_rocketturret` | 400000 | 9000 | 40000 | 2 | 40 | 1.25 | 2500 | **3333** ⚠ |
+| | Unit | HP | Range | DPS | cost0 |
+|---|---|--:|--:|--:|--:|
+| **Baseline** | `td_gdi_advancedguardtower` | 200000 | **9000** | 1250? | **UNDER REVIEW (1000?)** |
+| **Verifier** | `ixian_rocketturret` | 2.5×HP | 9000 | 2.5×DPS | **4× baseline** |
 
-- Baseline range band **8000–10000**. **1×1**, Steel armor, power = cost/10. Guard tower uses **ONLY the
-  heavy-missile warheads** (Heavy → wc 1.25); DPS = 20000×2 / 40 × 1.25 = **1250**.
-- **⚠ VERIFIER-COST CONFLICT — DECIDE ONCE for all defenses:** you said 3000, but the **3-input defense
-  formula** prices 2×HP + 2×DPS + same range at **2.778× = 3333**, NOT 2.5× = 3000. Pick (a) keep the
-  clean 2×/2× doubling → verifier **3333**, or (b) hold **3000** and use ~1.87×HP + 1.87×DPS (ugly).
-  **Retro-applies to the AA Air-Defender (2.778× = 1667 vs 2.5× = 1500).**
-- Verifier = **Ixian rocket turret** (1×1, clean K=1.0) — **resolve its Tier-2 → Tier-3 move + the Ixian
-  AA-gap** (let their guard-tower after-upgrade AA count, or give them a dedicated AA turret).
+- Baseline range band **8000–10000**. **1×1**, Steel armor, power = cost/10. Heavy-missile-only (wc 1.25).
+- **⚠ COST + POWER UNDER REVIEW (maintainer 2026-07-26):** with the 4× convention, cost0 1200 → verifier
+  4800, overshooting SuperDefense (4000). Also the guard tower as specced (200k HP / DPS 1250 / range
+  9000) is **stronger than its old 1600 price** — underpriced at 1000. **The footprint rule (Advanced
+  1×1 vs Super 2×2) already keeps the classes distinct, so cost overlap is harmless** — the real issue
+  is value-for-cost. **Ideas (pick one):** (A) cost 1000, keep stats (strong-but-cheap anchor; verifier
+  4000 = meets Super floor); (B) cost 1000 + **trim DPS 1250 → ~800** (a clean 2× step over Basic's 400,
+  fair; verifier 4000); (C) cost 1200, verifier 4800 (footprint separates it from Super anyway).
+  **Recommend (B).**
+- Verifier = **Ixian rocket turret** (1×1, clean K=1.0) → 2.5×HP + 2.5×DPS + same range = 4× baseline.
+  **Resolve its Tier-2 → Tier-3 move + the Ixian AA-gap** (let their guard-tower after-upgrade AA count,
+  or give them a dedicated AA turret).
 
 ## ✅ SuperDefense — LOCKED baseline 2026-07-26 (epic, 2×2 footprint, Steel armor, power = cost/5)
 
 **Membership:** footprint > 1×1 (except AA turrets) + extremely-powerful 1×1. **Baseline =
 `asianalliance_plasmacannon`** @ **4000** (300000 HP, range 14000, **2×2**, PlasmaWeapon 1.25, **no
 charge** — the clean epic candidate). Members (MOVE out of AdvancedDefense): `ra2_allies_grandcannon`,
-`ixian_stormlasher`, `latinsyndicate_smlturret` (all 5000, 2×2). **Verifier + cost0 + range band TBD.**
+`ixian_stormlasher`, `latinsyndicate_smlturret` (all 5000, 2×2). **NO 4× verifier** — a 4× of 4000 =
+16000 has no real unit; SuperDefense is a **narrow epic tier** (baseline 4000, members clustered
+4000–5000), so it's baseline-anchored only (the epic ceiling), not a full baseline→4× band. **cost0
+4000 + range band TBD.**
 `cabal_heavycabalobelisk` (2400, charge) is NOT Super (charge → Advanced/own handling).
 
 **★ Tesla Coil EXEMPT from charge-up rule** (maintainer 2026-07-26): both RA1+RA2 tesla coils have a
