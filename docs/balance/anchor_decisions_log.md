@@ -16,10 +16,10 @@ propose baseline+verifier → they give exact numbers → LOCK here → later: c
 **LOCKED (cost0):** ScoutVehicle 300 · LightTank 400 · AntiAir 600 · TankDestroyer 600 · MBT 800
 (Tiger pivot, signed) · FireSupport 1000 · ArtilleryTank 1200 (baseline; verifier pending) · LineBreaker
 1200 · HighTechTank 2000 · Dreadnought 3000.
-**➡ NEXT: the 5 DEFENSE classes** (BasicDefense, AdvancedDefense, SuperDefense, AntiAirDefense, Bunker)
-→ then aircraft/naval. **First ruling needed:** the defense "speed" term (static units → footprint /
-power-draw substitute). **Artillery baseline LOCKED** (Allied Artillery, DPS 300); verifiers PENDING
-for ArtilleryTank (lunar grille / Juggernaut Mk II) and Artillery (V2) — maintainer to name.
+**➡ NEXT DEFENSE CLASSES:** BasicDefense **LOCKED** (guardtower baseline 100k/7000/DPS400/500, MG-Nest
+verifier). Remaining: **AntiAirDefense, AdvancedDefense, SuperDefense, Bunker** → then aircraft
+(rearmable formula first) / naval. Defense formula = **3-input** (done). Verifiers PENDING: defense
+convention (2.778× vs 4.667×); ArtilleryTank (lunar grille / Juggernaut Mk II); Artillery (V2).
 **Open flags:** LineBreaker armor (TBD); `japan_armoredcar` Scout-vs-AntiAir; umlaut renames
 (`naxis_brummbr`→brummbar, `naxis_kbelwagen`→kubelwagen — boot-gated); `asianalliance_pulverizer`→AntiAir.
 **Future audits:** projectile speed = range÷2 (V3-type missiles exempt); weapon-type↔unit-type binding.
@@ -520,6 +520,54 @@ placeholder ~250 multiplier) does NOT reflect their real damage cadence — the 
 back → rearm), not the weapon reload. **TODO: derive an aircraft-specific formula when we lock the
 aircraft classes** (applies to all return-to-base aircraft; loitering gunships/fighters may keep the
 normal form — decide per subclass).
+
+## ★ DEFENSE CLASS RULES (maintainer 2026-07-26)
+
+**Formula:** the 3-input defense formula (HP, Range, DPS — above). **Verifier convention (PENDING
+confirm):** 2×HP + 2×DPS + same range → **2.778×** cost (the 3-input analog of the mobile 2.5×; NB not
+round — round the verifier cost if preferred, or pick 2×-all = 4.667×).
+
+**★ Power-to-Cost per defense TYPE** (was a uniform `cost/20`):
+| Type | Power draw | Build-time modifier |
+|---|---|---|
+| BasicDefense | **cost / 20** | LONGEST (early-game — fine as is) |
+| AntiAirDefense | **cost / 20** | QUICKEST (specialized, need it fast) |
+| AdvancedDefense | **cost / 10** | long (the thing you plan in advance) |
+| SuperDefense | **cost / 5** | long (scale accordingly) |
+Build-time modifiers scale with the power/cost ratio.
+
+**★ SuperDefense membership rule:** any defense with a **footprint bigger than 1×1 cell** (Building
+`Dimensions` > `1,1`) — **EXCEPT anti-air turrets** — is a SuperDefense (verified: Grand Cannon =
+`2,2`). PLUS **1×1 defenses that are extremely powerful** (large HP AND large cost) also qualify —
+cross-reference the roster. Named members: `ra2_allies_grandcannon` + Latin **SML turret**, Asian
+Alliance **plasma cannon**, Ixian **storm lasher**, … (full footprint scan when we lock SuperDefense).
+
+**★ Bunker rules:**
+- **Pure bunker** (holds cargo, no own weapon) → price scales with **HP + number of cargo slots** (the
+  garrison capacity is the value).
+- **Combined defense + bunker** (e.g. **RA1 Bastion** — own weapon AND holds cargo) → **special K =
+  1.25** (same as armed vehicle transports — weaker stats at the same price).
+- **Pillbox with a FIXED garrison** (an infantry unit permanently inside, whose weapon IS the pillbox's
+  weapon) → priced as a **BasicDefense** on that garrisoned weapon's DPS (the garrison = the weapon).
+
+---
+
+## ✅ BasicDefense — LOCKED baseline 2026-07-26 (range band 6500–7500)
+
+| | Unit | HP | Range | DPS | cost0 |
+|---|---|--:|--:|--:|--:|
+| **Baseline** | `td_gdi_guardtower` | **100000** | **7000** | **400** | **500** |
+| **Verifier** | `japan_japanesemgnest` | **200000** | 7000 | **800** | **≈1400** (2.778×) |
+
+- All BasicDefenses **range 6500–7500** (7000 middle). Power draw = **cost / 20** (guardtower 500 →
+  power 25), longest build-time modifier.
+- Verifier = Japanese MG Nest restatted to 2×HP + 2×DPS + same range = 2.778× → **1389 (≈1400)**.
+  *(Confirm the defense verifier convention / whether to round.)* Current MG Nest = 110000 HP / dual MG
+  (dmg 4000 ×5 / rd 25 bd 5) / cost 1000.
+- Baseline guardtower restat: HP 60000→**100000**, range 6720→**7000**, weapon → **DPS 400**, keep
+  cost 500.
+
+---
 
 ## 🔤 NAMING FIX — dropped umlauts (maintainer 2026-07-26) — BOOT-GATED, via rename tool
 
