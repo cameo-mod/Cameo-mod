@@ -146,54 +146,66 @@ def actor_subtype(rs, local, section: str) -> str:
     return SECTION_DEFAULT_SUBTYPE.get(section, "Unclassified")
 
 
-_WEAPON_CLASS_OVERRIDES = {
-    "SmallArms": 0.75,
-    "SniperWeapon": 0.75,
-    "Light": 0.75,
-    "Chaingun": 1.0,
-    "MediumCannon": 1.0,
-    "Medium": 1.0,
-    "Grenade": 1.0,
-    "FlakWeapon": 1.0,
-    "TeslaWeapon": 1.0,
-    "TeslaChargedWeapon": 1.0,
-    "LaserWeapon": 1.0,
-    "PlasmaWeapon": 1.25,
-    "ShrapnelWeapon": 1.0,
-    "RailgunWeapon": 1.25,
-    "HeavyCannon": 1.25,
-    "HeavyMissile": 1.25,
-    "Heavy": 1.25,
-    "HeavyBomb": 1.25,
-    "Superheavy": 1.5,
-    "NuclearWarhead": 5.0,
-    "Superweapon": 5.0,
-    "RepairWeapon": 1.5,
-    "Engineer": 1.5,
-}
+WEAPON_CLASS_SIDECAR_PATH = ROOT / "docs/balance/weapon_classes.yaml"
+
+
+def _load_weapon_class_sidecar() -> dict[str, float]:
+    """The SINGLE authoritative source for per-template WeaponClass:
+    ``docs/balance/weapon_classes.yaml`` (the linter-proof sidecar).
+
+    The extractor must NEVER hard-code its own weapon-class values — bug
+    2026-07-26: a stale in-code table had ``LaserWeapon = 1.0`` while the
+    sidecar + legacy Excel said 1.25 (and TeslaWeapon, Grenade, ShrapnelWeapon
+    all disagreed too). Keys are stored WITHOUT the leading ``^``.
+    """
+    out: dict[str, float] = {}
+    if not WEAPON_CLASS_SIDECAR_PATH.exists():
+        return out
+    for line in WEAPON_CLASS_SIDECAR_PATH.read_text(encoding="utf-8").splitlines():
+        line = line.split("#", 1)[0].strip()
+        if not line or ":" not in line:
+            continue
+        key, _, val = line.partition(":")
+        try:
+            out[key.strip().lstrip("^")] = float(val.strip())
+        except ValueError:
+            continue
+    return out
+
+
+_WEAPON_CLASS_SIDECAR = _load_weapon_class_sidecar()
 
 _WEAPON_CLASS_IGNORE = {
     "ImpactGlow", "AMTProjectile", "RemovesIvanBombs", "RemovesTerrorDrone",
     "DefuseKit", "GenericC4", "TanyaAttach",
 }
 
+# Populated during extraction: class templates a weapon references that are
+# NOT in the authoritative sidecar (fell through to keyword-guessing). The
+# ``--check-weapon-classes`` gate fails when this is non-empty so a missing
+# sidecar entry can never silently mis-price a unit again.
+_UNMAPPED_WEAPON_TEMPLATES: set[str] = set()
+
 
 def weapon_class_from_types(types: list[str]) -> float | None:
-    """Map a weapon's resolved ^-class templates to an arithmetic-mean H.
+    """Arithmetic mean of a weapon's resolved ^-class templates (DESIGN.md
+    §WeaponClass), read from the authoritative sidecar.
 
-    Returns None when no damage-bearing class template is recognised, so
-    legacy/maintainer values from the ledger take precedence and weapons
-    with only utility templates stay blank instead of defaulting to 1.
+    Returns None when no class template is recognised, so weapons with only
+    utility templates stay blank instead of defaulting to 1. Any template not
+    in the sidecar (and not ignored) is recorded in _UNMAPPED_WEAPON_TEMPLATES
+    and given a keyword-based provisional value the check will flag.
     """
     vals = []
     for t in types:
         name = t[1:] if t.startswith("^") else t
         if name in _WEAPON_CLASS_IGNORE:
             continue
-        if name in _WEAPON_CLASS_OVERRIDES:
-            vals.append(_WEAPON_CLASS_OVERRIDES[name])
+        if name in _WEAPON_CLASS_SIDECAR:
+            vals.append(_WEAPON_CLASS_SIDECAR[name])
             continue
-        # keyword fallbacks, most specific first
+        # NOT in the authoritative sidecar -> record + provisional keyword value
+        _UNMAPPED_WEAPON_TEMPLATES.add(name)
         if "Superweapon" in name or "Nuclear" in name:
             vals.append(5.0)
         elif "Superheavy" in name:
@@ -209,6 +221,44 @@ def weapon_class_from_types(types: list[str]) -> float | None:
     if not vals:
         return None
     return sum(vals) / len(vals)
+
+
+# Versus-Shield → WeaponClass (ARMOR_SYSTEM.md, canonical Versus law):
+# the main SpreadDamage warhead's step (Light 6 / Medium 5 / Heavy 4) shows up
+# as Shield = 100 + floor = 110 / 125 / 140, and +15 shield = +0.25 class.
+# So the class is READABLE straight from the resolved Versus table — no hand-
+# maintained list can drift out of sync with the yaml.
+_SHIELD_TO_CLASS = {110: 0.75, 125: 1.0, 140: 1.25, 155: 1.5, 170: 1.75, 185: 2.0}
+
+
+def weapon_class_from_versus(resolved) -> float | None:
+    """Arithmetic mean of the class of every main SpreadDamage warhead, read
+    from its ``Versus: Shield`` value (110/125/140 → 0.75/1.0/1.25). Skips the
+    percentage / extra-damage / friendly-fire warheads (their own 17/25/35
+    Shield scale). Returns None when no main warhead exposes a recognised
+    Shield, so the caller can fall back to the sidecar."""
+    classes = []
+    for c in resolved.children:
+        if not c.key.startswith("Warhead@") or c.value != "SpreadDamage":
+            continue
+        tag = c.key.split("@", 1)[1].lower()
+        if tag.endswith(("extradamage", "percentage", "friendlyfire")):
+            continue
+        versus = child(c, "Versus")
+        if versus is None:
+            continue
+        shield = versus.get("Shield")
+        if shield is None:
+            continue
+        try:
+            cls = _SHIELD_TO_CLASS.get(int(float(shield)))
+        except (TypeError, ValueError):
+            continue
+        if cls is not None:
+            classes.append(cls)
+    if not classes:
+        return None
+    return sum(classes) / len(classes)
 
 
 def firepower_multiplier(resolved, local):
@@ -309,17 +359,27 @@ def weapon_entry(rs, wname: str) -> dict | None:
         out["versus_templates"] = [c.value for c in local.children
                                    if c.key == "Inherits" or c.key.startswith("Inherits@")]
     out["weapon_types"] = weapon_types(rs, wname)
+    # Priority: explicit WeaponClass field (rare — the lint strips it) →
+    # AUTOMATIC Versus-Shield law (self-correcting, ARMOR_SYSTEM.md) →
+    # sidecar-template fallback (records unmapped templates for the check).
     wc = resolved.get("WeaponClass")
+    parsed = None
     if wc is not None:
         try:
-            out["design_weapon_class"] = float(wc)
-            out["weapon_class_source"] = "WeaponClass"
+            parsed = float(wc)
         except (ValueError, TypeError):
+            parsed = None
+    if parsed is not None:
+        out["design_weapon_class"] = parsed
+        out["weapon_class_source"] = "WeaponClass"
+    else:
+        vclass = weapon_class_from_versus(resolved)
+        if vclass is not None:
+            out["design_weapon_class"] = vclass
+            out["weapon_class_source"] = "versus_shield"
+        else:
             out["design_weapon_class"] = weapon_class_from_types(out["weapon_types"])
             out["weapon_class_source"] = "template"
-    else:
-        out["design_weapon_class"] = weapon_class_from_types(out["weapon_types"])
-        out["weapon_class_source"] = "template"
     return out
 
 
@@ -521,9 +581,31 @@ def main() -> int:
     ap.add_argument("--check", action="store_true",
                     help="diff against the committed ledger; exit 1 on drift")
     ap.add_argument("--faction", help="ledger-name substring filter")
+    ap.add_argument("--check-weapon-classes", action="store_true",
+                    help="fail if any weapon references a class template missing "
+                         "from docs/balance/weapon_classes.yaml (the sidecar)")
     args = ap.parse_args()
 
     ledgers = build_ledgers(Model(), args.faction)
+
+    if args.check_weapon_classes:
+        # Extraction has populated _UNMAPPED_WEAPON_TEMPLATES with every class
+        # template that was NOT found in the authoritative sidecar. A non-empty
+        # set means a weapon would be priced from a guessed value -> hard fail,
+        # so the LaserWeapon=1.0 class of bug can never recur silently.
+        missing = sorted(_UNMAPPED_WEAPON_TEMPLATES)
+        if missing:
+            print("WEAPON-CLASS CHECK FAILED -- templates missing from "
+                  f"{rel(WEAPON_CLASS_SIDECAR_PATH)}:")
+            for name in missing:
+                print(f"  ^{name}")
+            print(f"add each to the sidecar with its Light/Medium/Heavy class "
+                  f"(0.75/1.0/1.25). {len(missing)} unmapped.")
+            return 1
+        print(f"weapon-class check OK: every class template is in "
+              f"{rel(WEAPON_CLASS_SIDECAR_PATH)} ({len(_WEAPON_CLASS_SIDECAR)} entries)")
+        return 0
+
     if args.check:
         drift = 0
         for name, doc in ledgers.items():
