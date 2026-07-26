@@ -16,11 +16,13 @@ propose baseline+verifier → they give exact numbers → LOCK here → later: c
 **LOCKED (cost0):** ScoutVehicle 300 · LightTank 400 · AntiAir 600 · TankDestroyer 600 · MBT 800
 (Tiger pivot, signed) · FireSupport 1000 · ArtilleryTank 1200 (baseline; verifier pending) · LineBreaker
 1200 · HighTechTank 2000 · Dreadnought 3000.
-**➡ NEXT: (1) Artillery** (frontal, no turret, Light armor, range 15000 band 13000–17000), then (2) the
-**5 DEFENSE classes** → aircraft/naval. **ArtilleryTank verifier PENDING** (same-tier: lunar grille /
-Juggernaut Mk II — maintainer to name).
+**➡ NEXT: the 5 DEFENSE classes** (BasicDefense, AdvancedDefense, SuperDefense, AntiAirDefense, Bunker)
+→ then aircraft/naval. **First ruling needed:** the defense "speed" term (static units → footprint /
+power-draw substitute). **Artillery baseline LOCKED** (Allied Artillery, DPS 300); verifiers PENDING
+for ArtilleryTank (lunar grille / Juggernaut Mk II) and Artillery (V2) — maintainer to name.
 **Open flags:** LineBreaker armor (TBD); `japan_armoredcar` Scout-vs-AntiAir; umlaut renames
 (`naxis_brummbr`→brummbar, `naxis_kbelwagen`→kubelwagen — boot-gated); `asianalliance_pulverizer`→AntiAir.
+**Future audits:** projectile speed = range÷2 (V3-type missiles exempt); weapon-type↔unit-type binding.
 Infantry anchors (14) already exist, need sign-off (commando needs a verifier). **After all anchors:**
 create templates in defaults.yaml (boot-gated), run `fit_class`, wire `check_band` into `run_all.sh`.
 **Upgrades LAST.** **Weapons.yaml below-divider cleanup = ON HOLD** (`weapons_cleanup_plan.md`, no
@@ -445,6 +447,45 @@ Artillery. Range **12000 (band 10000–14000)**.
 `forgotten_mlrs`, `ts_gdi_juggernaut` (+`juggernautmkii`), `ts_nod_artillery` + the Combat Siege
 baseline + Sturm Tiger. *(`ra2_tractor_driveby` = flag, likely a special/civilian driveby.)*
 **Non-turreted artillery stays pure Artillery** (frontal, Light armor, range 15000).
+
+---
+
+## ✅ Artillery (pure) — LOCKED baseline 2026-07-26 (FRONTAL, fragile, Light armor, longest range)
+
+**Definition:** frontal-facing (**NO turret**), **Light armor**, fragile, **range 15000 (band
+13000–17000)** — the longest-range ground class. Distinct from the turreted, Medium-armor ArtilleryTank.
+
+| | Unit | HP | Speed | Range | DPS | cost0 | Armor |
+|---|---|--:|--:|--:|--:|--:|--:|
+| **Baseline** | `ra1_allies_alliedartillery` | **20000** | **60** | **15000** | **300** | **600** | Light |
+| **Verifier** | *(pending — V2 candidate)* | 40000 | 60 | 15000 | 600 | **1500** | Light |
+
+- ✓ identity: 2×HP + 2×DPS + same spd/rng → exactly 2.5× cost (600 → 1500). DPS 300 (round, high
+  per-shot / slow reload).
+- **Verifier candidate = `ra1_soviets_v2rocketlauncher`** — restat to 40000 / DPS 600 / 1500, same
+  60 spd / 15000 rng. **Confirm** (mind the tech-tier match — Allied Artillery is early T1).
+- **Members = Artillery-template WITHOUT `AttackTurreted`** (frontal): `td_nod_artillery`,
+  `naxis_grille`, **`naxis_brummbr`** (Brummbär — frontal casemate gun ⇒ pure Artillery, NOT
+  ArtilleryTank; needs the umlaut rename), `naxis_donnerschlag`, `ra1_soviets_v1rockettruck` /
+  `v2rocketlauncher` / `nuclearv2launcher`, `ra2_soviets_v3rocketlauncher`, `td_nod_specterartillery` /
+  `chemicalssmlauncher`, `japan_ballista`, WC2 ballista/catapult/siege-engine, `ixian_ixmissiletank` /
+  `ixsiegetank`, `steelconsortium_dagger` / `hammerheadartillerytank`, `ordos_deviatorartillery`,
+  `latinsyndicate_burrito`, `futuretech_athenacannon`, `cabal_artilleryspider`, `asianalliance_viper`,
+  `tkm_dronepodtruck` / `tornadoglauncher`.
+- **Deploy siege tanks** (`terran_siegetank` 150k HP, `siege_tank`, `missile_tank`) = tanky DEPLOY
+  specials → FLAG (their own handling, not fragile Light artillery).
+
+---
+
+## ★ FUTURE-AUDIT RULES (maintainer 2026-07-26 — record now, wire into `run_all.sh` later)
+
+1. **Projectile speed = range ÷ 2** for every weapon (e.g. range 15000 → projectile speed 7500).
+   **EXCEPTION:** interceptable / shoot-down-able missiles (e.g. the **V3**) keep their own (slower)
+   speed so they *can* be shot down. → a **projectile-speed audit** will enforce this.
+2. **Weapon type ↔ unit type binding:** each unit CLASS is bound to a weapon TYPE, and a unit's weapon
+   must inherit the weapon type bound to its class — unit type and weapon type are always linked. → a
+   **weapon-type-binding audit** will enforce this (depends on the WeaponClass sidecar + the §13
+   warhead library being wired in).
 
 ---
 
