@@ -138,6 +138,63 @@ def class_baseline_price(hp, speed, range_wdist, dps_value,
     return (o + p + q) / 3
 
 
+def class_baseline_estimators_3(hp, range_wdist, dps_value,
+                                hp0, range0_wdist, dps0, cost0,
+                                special=1.0, tech_tier=1.0) -> tuple[float, float, float]:
+    """Speed-less 3-input form (HP, Range, DPS) for STATIC units (defenses).
+
+    Same construction as the 4-input v2 form but with the elementary-symmetric
+    MEANS of THREE normalized ratios, so all three terms apply the SAME logic
+    (degree 1 / degree 2 / degree 3) and O = P = Q = cost0 EXACTLY at the
+    baseline (maintainer rule 2026-07-26):
+
+        h = hp / hp0 ; r = (range / range0) * special ; d = dps / dps0
+        O = (h + r + d) / 3           * cost0   # degree 1: mean of the singles
+        P = (h*r + h*d + r*d) / 3     * cost0   # degree 2: mean of the pairs
+        Q = (h * r * d)              * cost0    # degree 3: the triple product
+
+    At the baseline (h=r=d=1): O = P = Q = cost0 and price = cost0.
+    Price is still LINEAR in r (h, d constant), so solve_range stays closed-form.
+    """
+    h = hp / hp0
+    r = (range_wdist / range0_wdist) * special
+    d = dps_value / dps0
+    o = (h + r + d) / 3 * cost0 * tech_tier
+    p = (h * r + h * d + r * d) / 3 * cost0 * tech_tier
+    q = (h * r * d) * cost0 * tech_tier
+    return o, p, q
+
+
+def class_baseline_price_3(hp, range_wdist, dps_value,
+                           hp0, range0_wdist, dps0, cost0,
+                           special=1.0, tech_tier=1.0) -> float:
+    o, p, q = class_baseline_estimators_3(hp, range_wdist, dps_value,
+                                          hp0, range0_wdist, dps0,
+                                          cost0, special, tech_tier)
+    return (o + p + q) / 3
+
+
+def solve_class_baseline_range_3(cost, hp, dps_value,
+                                 hp0, range0_wdist, dps0, cost0,
+                                 special=1.0, tech_tier=1.0) -> float:
+    """Range (wdist) such that class_baseline_price_3 == cost.
+
+    class_baseline_price_3 is linear in the normalized range term
+    r = (range / range0) * special (h, d are constants), so:
+        3*price = [(h+d)/3 + h*d/3] * cost0      (the r-free part, A3)
+                + [1/3 + (h+d)/3 + h*d] * cost0 * r   (coeff of r, B3)
+        r = (3*cost - A3) / B3
+    """
+    h = hp / hp0
+    d = dps_value / dps0
+    a3 = ((h + d) / 3 + (h * d) / 3) * cost0 * tech_tier
+    b3 = (1.0 / 3 + (h + d) / 3 + h * d) * cost0 * tech_tier
+    if b3 == 0:
+        raise ZeroDivisionError("class_baseline_price_3 is range-independent for these stats")
+    r_norm = (cost * 3 - a3) / b3
+    return (r_norm / special) * range0_wdist
+
+
 def solve_class_baseline_range(cost, hp, speed, dps_value,
                                hp0, speed0, range0_wdist, dps0, cost0,
                                special=1.0, tech_tier=1.0) -> float:

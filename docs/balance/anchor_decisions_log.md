@@ -489,6 +489,38 @@ baseline + Sturm Tiger. *(`ra2_tractor_driveby` = flag, likely a special/civilia
 
 ---
 
+## ★ DEFENSE PRICING FORMULA — 3-input (maintainer 2026-07-26) — implemented in `formula.py`
+
+Static defenses have no speed → the 4-input v2 formula's speed term is meaningless (like "speed 100" as
+a placeholder). **Defenses use a new 3-input formula** (HP, Range, DPS) built with the SAME
+degree-1 / degree-2 / degree-3 logic, symmetric across all three inputs, so O = P = Q = cost0 at the
+baseline:
+
+    h = hp/hp0 ; r = (range/range0)*special ; d = dps/dps0
+    O = (h + r + d)/3        * cost0   (degree 1 — mean of the singles)
+    P = (h*r + h*d + r*d)/3  * cost0   (degree 2 — mean of the pairs)
+    Q = (h * r * d)          * cost0   (degree 3 — the triple product)
+    Cost = (O + P + Q)/3
+
+`formula.py`: `class_baseline_estimators_3` / `class_baseline_price_3` /
+`solve_class_baseline_range_3` (price stays LINEAR in range → closed-form solve). Verified numerically:
+- baseline → O=P=Q=cost0, price=cost0 ✓
+- **fully symmetric:** 2× any ONE input → **1.667×** cost (all three interchangeable — the "same logic").
+- 2×HP + 2×DPS + same range → **2.778×** (vs the mobile 2.5×); 2× all three → **4.667×**.
+
+**★ ONLY for defenses** (mobile classes keep the 4-input formula + 2.5× verifier). **OPEN — defense
+verifier convention:** pick (a) 2×HP + 2×DPS + same range = 2.778×, (b) a 2×-all = 4.667× tripwire, or
+(c) another.
+
+## ★ REARMABLE AIRCRAFT — needs its OWN formula (maintainer 2026-07-26; when we reach aircraft)
+
+Bombers / rearmable aircraft return to base to reload, so the weapon `ReloadDelay` (currently a
+placeholder ~250 multiplier) does NOT reflect their real damage cadence — the same nonsense as
+"speed 100" for defenses. **Effective DPS must be driven by the SORTIE cycle** (fly out → attack → fly
+back → rearm), not the weapon reload. **TODO: derive an aircraft-specific formula when we lock the
+aircraft classes** (applies to all return-to-base aircraft; loitering gunships/fighters may keep the
+normal form — decide per subclass).
+
 ## 🔤 NAMING FIX — dropped umlauts (maintainer 2026-07-26) — BOOT-GATED, via rename tool
 
 Rule: umlauts transliterate to the base letter (ü→u, ö→o, ä→a, ß→ss). A roster scan (display-name
