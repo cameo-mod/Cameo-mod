@@ -13,12 +13,14 @@ propose baseline+verifier → they give exact numbers → LOCK here → later: c
 + `fit_class` + sign-off. **Every class needs a baseline AND a verifier** (verifier = 2×HP + 2×DPS +
 2.5×cost, same speed/range → clean identity). Support is EXEMPT; cargo = Σ(passengers).
 
-**LOCKED (cost0):** ScoutVehicle 300 · LightTank 400 · **AntiAir 600** · TankDestroyer 600 · MBT 800
-(Tiger pivot, signed) · FireSupport 1000 · LineBreaker 1200 · HighTechTank 2000 · Dreadnought 3000.
-**➡ NEXT: (1) ArtilleryTank** (Ixian Combat Siege — between tank + artillery, range beyond 10000),
-then (2) **Artillery** → then the **5 DEFENSE classes** → aircraft/naval.
-**Armor ladder + AntiAir now LOCKED** (see sections below). **Open flags:** LineBreaker + ArtilleryTank
-armor (TBD); `japan_armoredcar` Scout-vs-AntiAir.
+**LOCKED (cost0):** ScoutVehicle 300 · LightTank 400 · AntiAir 600 · TankDestroyer 600 · MBT 800
+(Tiger pivot, signed) · FireSupport 1000 · ArtilleryTank 1200 (baseline; verifier pending) · LineBreaker
+1200 · HighTechTank 2000 · Dreadnought 3000.
+**➡ NEXT: (1) Artillery** (frontal, no turret, Light armor, range 15000 band 13000–17000), then (2) the
+**5 DEFENSE classes** → aircraft/naval. **ArtilleryTank verifier PENDING** (same-tier: lunar grille /
+Juggernaut Mk II — maintainer to name).
+**Open flags:** LineBreaker armor (TBD); `japan_armoredcar` Scout-vs-AntiAir; umlaut renames
+(`naxis_brummbr`→brummbar, `naxis_kbelwagen`→kubelwagen — boot-gated); `asianalliance_pulverizer`→AntiAir.
 Infantry anchors (14) already exist, need sign-off (commando needs a verifier). **After all anchors:**
 create templates in defaults.yaml (boot-gated), run `fit_class`, wire `check_band` into `run_all.sh`.
 **Upgrades LAST.** **Weapons.yaml below-divider cleanup = ON HOLD** (`weapons_cleanup_plan.md`, no
@@ -33,14 +35,16 @@ deletions). WeaponClass restored to `weapon_classes.yaml`.
 | HighTechTank | 6000 | 5500–6500 |
 | Dreadnought | 6500 | 6000–7000 |
 | TankDestroyer | 7000 | 6500–7500 |
-| ~~FireSupport 7500~~ → **10000** | **10000** | 9500–10500 |
+| **FireSupport** | **10000** | **9000–11000** |
+| **ArtilleryTank** | **12000** | **10000–14000** |
 
 The **direct-fire gun ladder now ENDS at TankDestroyer 7000** (500-step, close brawler → long-range).
-**FireSupport revised to 10000 (2026-07-26):** slow + very fragile → it must OUTRANGE the tanks to
-survive, so it leaves the direct-fire ladder and jumps to 10000. Artillery / ArtilleryTank extend
-*beyond* 10000 (indirect long-range — resolve the overlap when we lock them). Scout / AntiAir /
-LineBreaker have their own ranges (LineBreaker short ~2500; Scout 4500). **These ranges override the
-per-class range values below.**
+The **indirect long-range classes** sit above it with wider ±bands: **FireSupport 10000 (band
+9000–11000)** — slow + very fragile, must outrange tanks; **ArtilleryTank 12000 (band 10000–14000)** —
+tanky TURRETED artillery (Medium armor); **pure Artillery 15000 (band 13000–17000)** — FRONTAL-facing
+(no turret), Light armor, fragile. Scout / AntiAir / LineBreaker
+have their own ranges (Scout 4500 band 4000–5000; **AntiAir GND 5000 band 4500–5500**, AA weapon
++50% = 7500; LineBreaker short ~2500). **These ranges override the per-class range values below.**
 
 ## ★ ARMOR LADDER (maintainer 2026-07-26 — one armor type per class)
 
@@ -58,8 +62,8 @@ Superheavy**):
 | Dreadnought | **Superheavy** |
 | FireSupport | **Light** |
 | Artillery | **Light** |
+| ArtilleryTank | **Medium** (tanky turreted artillery) |
 | LineBreaker | **TBD** — "very durable" → likely Heavy/Superheavy (confirm) |
-| ArtilleryTank | **TBD** — between tank + artillery → likely Light/Medium (confirm) |
 
 *(Aircraft / naval / defenses get their own armor scheme later.)*
 
@@ -406,3 +410,52 @@ AntiAir membership only governs armor + the derived AA weapon.
 **RESOLVED (all locked):** baseline Diablo @600 / verifier Barracuda @1500; AA = +50%rng/+100%dmg free,
 NO class K (horrible-vs-ground / great-vs-air is the point); AA-primary units SPLIT their dual weapon;
 cargo K as corrected above. **Only open flag:** `japan_armoredcar` placement (Scout vs AntiAir).
+
+**★ Added member (maintainer 2026-07-26):** `asianalliance_pulverizer` (85000 HP, range 5517 → fits the
+GND band 4500–5500) → **move to AntiAir Vehicle**, and **remove its "disabled when Pulverizer Mecha is
+unlocked" prerequisite** (they're different units). *(NOT the `asianalliance_pulverizermecha`, which is
+the Dreadnought member.)* Implement in the boot-gated pass.
+
+---
+
+## ✅ ArtilleryTank — LOCKED baseline 2026-07-26 (TANKY, TURRETED artillery — verifier pending)
+
+**Definition (maintainer 2026-07-26):** the **tankiest artillery** — a unit with the **Artillery role +
+a TURRET** (`AttackTurreted`), Medium armor, more durable than the frontal-facing (Light-armor) pure
+Artillery. Range **12000 (band 10000–14000)**.
+
+| | Unit | HP | Speed | Range | DPS | cost0 | Armor |
+|---|---|--:|--:|--:|--:|--:|--:|
+| **Baseline** | `ixian_ixcombatsiege` | **80000** | **80** | **12000** | **80** | **1200** | Medium |
+| **Verifier** | *(pending — same-tier, see below)* | 160000 | 80 | 12000 | 160 | **3000** | Medium |
+
+- Baseline = Ixian Combat Siege (Tier 2). Verifier target = 2×HP / 2×DPS / 2.5×cost, same spd/rng
+  (160000 / DPS 160 / 3000). ✓ identity holds.
+- **Verifier pick OPEN — tech-tier matched (maintainer wants baseline+verifier same tier):** Combat
+  Siege is Tier 2; the only other Tier-2 turreted artillery is **`schwarzermond_lunargrille`** (the
+  "lunar grille"). Also a natural premium option: **`ts_gdi_juggernautmkii`** (the Juggernaut Mk II
+  upgrade — tier to confirm). **Name the verifier.**
+- **`naxis_sturmtiger` = slow HEAVY member** of ArtilleryTank (250000 HP / range 14000 fits the band;
+  keeps its speed 30 via the rebalance method — members keep their own speed). NOT the verifier (too
+  slow to share the baseline's 80) and NOT Dreadnought (its 14000 range far exceeds Dreadnought's 6500).
+
+**Membership = Artillery-template + `AttackTurreted` (roster scan 2026-07-26):** `ordos_cobratank`,
+`ordos_pythontank`, `japan_waveforceartillery`, `ra1_soviets_grad`, `asianalliance_howitzer`,
+`schwarzermond_lunargrille`, `schwarzermond_mars`, `td_gdi_archerartillery`, `forgotten_missilevan`,
+`forgotten_mlrs`, `ts_gdi_juggernaut` (+`juggernautmkii`), `ts_nod_artillery` + the Combat Siege
+baseline + Sturm Tiger. *(`ra2_tractor_driveby` = flag, likely a special/civilian driveby.)*
+**Non-turreted artillery stays pure Artillery** (frontal, Light armor, range 15000).
+
+---
+
+## 🔤 NAMING FIX — dropped umlauts (maintainer 2026-07-26) — BOOT-GATED, via rename tool
+
+Rule: umlauts transliterate to the base letter (ü→u, ö→o, ä→a, ß→ss). A roster scan (display-name
+umlaut vs actor id) found **only two ids that DROPPED the umlaut instead of transliterating:**
+- `naxis_brummbr` → **`naxis_brummbar`** (Brummbär)
+- `naxis_kbelwagen` → **`naxis_kubelwagen`** (Kübelwagen)
+
+`schwarzermond_ubermensch` (Übermensch) is already correct (Ü→u); `frank.nax` is a codename (not
+name-derived). **To fix via `tools/rename/apply.py` + a `rename_map` (touches rules/sequences/weapons/
+cameos/AI/fluent), then BOOT-GATE.** (Also the `frank.nax` display name "Übermutant" shows a mojibake
+`�` — check the source file encoding separately.)
