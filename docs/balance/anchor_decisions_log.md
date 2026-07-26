@@ -6,6 +6,22 @@ work follow. Fixed MBT anchor pivot: **Tiger `tiger.nax` = 100000 HP / 100 spd /
 dmg @ 50 reload / cost0 800** (DPS 200). (Range bumped 5000→5500 on 2026-07-26 to complete the range
 ladder — see the RANGE LADDER section.)_
 
+## ▶ STATUS / RESUME HERE (2026-07-26)
+
+**Collaborative class-by-class anchor definition IN PROGRESS.** The maintainer names a class → I
+propose baseline+verifier → they give exact numbers → LOCK here → later: create template (boot-gated)
++ `fit_class` + sign-off. **Every class needs a baseline AND a verifier** (verifier = 2×HP + 2×DPS +
+2.5×cost, same speed/range → clean identity). Support is EXEMPT; cargo = Σ(passengers).
+
+**LOCKED (cost0):** LightTank 400 · TankDestroyer 600 · MBT 800 (Tiger pivot, signed) · LineBreaker
+1200 · HighTechTank 2000 · Dreadnought 3000.
+**➡ NEXT: (1) ScoutVehicle, then (2) FireSupport** (7500 range, band 7000–8000, **NO anti-air**).
+**Then:** AntiAirTank (Diablo + flak-tracks), ArtilleryTank (Ixian Combat Siege), Artillery → then the
+5 DEFENSE classes → aircraft/naval. Infantry anchors (14) already exist, need sign-off (commando needs
+a verifier). **After all anchors:** create templates in defaults.yaml (boot-gated), run `fit_class`,
+wire `check_band` into `run_all.sh`. **Upgrades LAST.** **Weapons.yaml below-divider cleanup = ON
+HOLD** (`weapons_cleanup_plan.md`, no deletions). WeaponClass restored to `weapon_classes.yaml`.
+
 ## ★ RANGE LADDER (maintainer 2026-07-26 — verified consistent, steps of 500)
 
 | Class | baseline range | band (±500) |
@@ -154,7 +170,7 @@ stays in `weapons_cleanup_plan.md`; no deletions/moves until greenlit.
 
 ---
 
-## ✅ Dreadnought — UPDATED 2026-07-26 (Warhound baseline)
+## ✅ Dreadnought — LOCKED 2026-07-26 (Warhound baseline, no cloak)
 
 **Baseline = Warhound** (`terran_warhound`) — the previous baseline stats, but KEEP the Warhound's own
 weapons (adjust only their DAMAGE to hit the target DPS):
@@ -174,15 +190,13 @@ thing":
 - 2× HP, **2× DPS** (adjust the weapon damage; keep its bursts/burst-delays/reloads), 2.5× cost, same
   speed/range → clean identity.
 
-**⚠ CLOAK / special-K decision needed:** the cloak was introduced only to cancel the *Pulverizer's
-gatling* K 1.25. With the **Warhound (no gatling, K 1.0)** as the new baseline, the Neo Cymek's cloak
-(K 1.25) would **break** the 2.5× identity. Options: **(a) DROP the Neo Cymek cloak** → both K 1.0,
-clean tripwire (recommended); (b) keep the cloak AND cloak the Warhound too (both K 1.25); (c) keep
-the cloak as a deliberate verifier bonus (not a clean tripwire). **Awaiting your call.**
+**Cloak/K = RESOLVED (2026-07-26): NO cloak on either.** Both Warhound baseline and Neo Cymek verifier
+run at **K 1.0** (the cloak's only purpose — cancelling the Pulverizer's gatling K — is gone now that
+the Warhound is the baseline). Clean 2×HP + 2×DPS + K 1.0 + same spd/rng → 2.5× cost = 7500 identity.
 
-**Pulverizer Mecha** → scaled DOWN to a **member** at **cost 2500**, **range 6000** (the minimum of
-the dreadnought band 6000–7000 — you wrote "(6500)", but 6500 is the band *center*; using 6000 as the
-min — correct me if you meant 6500). Keeps its gatling. **Other members:** Neo Jagdpanzer.
+**Pulverizer Mecha** → scaled DOWN to a **member** at **cost 2500**, **range 6000** (CONFIRMED — the
+minimum of the dreadnought band 6000–7000). Keeps its gatling (its own K 1.25 as a member, not the
+anchor). **Other members:** Neo Jagdpanzer.
 
 **Ladder:** LightTank 400 · TankDestroyer 600 · MBT 800 · HighTech 2000 · Pulverizer(member) 2500 ·
 **Dreadnought baseline 3000.**
