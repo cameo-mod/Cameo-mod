@@ -14,11 +14,10 @@ propose baseline+verifier → they give exact numbers → LOCK here → later: c
 2.5×cost, same speed/range → clean identity). Support is EXEMPT; cargo = Σ(passengers).
 
 **LOCKED (cost0):** ScoutVehicle 300 · LightTank 400 · TankDestroyer 600 · MBT 800 (Tiger pivot,
-signed) · LineBreaker 1200 · HighTechTank 2000 · Dreadnought 3000.
-**➡ NEXT: (1) FireSupport** (7500 range, band 7000–8000, **NO anti-air**), then (2) **AntiAir Vehicle**
-(NEW `^AntiAirVehicleTemplate` — draft rules recorded below: **priced on the GROUND weapon**, the AA
-weapon is a fixed **+50% range / +100% damage** bonus; absorbs the TD/TS bikes + AA troop-transports +
-Diablo + flak-tracks).
+signed) · FireSupport 1000 · LineBreaker 1200 · HighTechTank 2000 · Dreadnought 3000.
+**➡ NEXT: AntiAir Vehicle** (NEW `^AntiAirVehicleTemplate` — draft rules recorded below: **priced on
+the GROUND weapon**, the AA weapon is a fixed **+50% range / +100% damage** bonus; absorbs the TD/TS
+bikes + AA troop-transports + Diablo + flak-tracks; confirm the transport-K1.25 rule + baseline/verifier).
 **Then:** ArtilleryTank (Ixian Combat Siege), Artillery → then the 5 DEFENSE classes → aircraft/naval.
 Infantry anchors (14) already exist, need sign-off (commando needs a verifier). **After all anchors:**
 create templates in defaults.yaml (boot-gated), run `fit_class`, wire `check_band` into `run_all.sh`.
@@ -34,11 +33,14 @@ deletions). WeaponClass restored to `weapon_classes.yaml`.
 | HighTechTank | 6000 | 5500–6500 |
 | Dreadnought | 6500 | 6000–7000 |
 | TankDestroyer | 7000 | 6500–7500 |
-| FireSupport | 7500 | 7000–8000 |
+| ~~FireSupport 7500~~ → **10000** | **10000** | 9500–10500 |
 
-Clean 500-step ladder; role order sensible (close brawler → long-range support). Artillery /
-ArtilleryTank extend *beyond* 7500 (indirect long-range). Scout / AntiAirTank / LineBreaker have their
-own ranges (LineBreaker is short, ~2500). **These ranges override the per-class range values below.**
+The **direct-fire gun ladder now ENDS at TankDestroyer 7000** (500-step, close brawler → long-range).
+**FireSupport revised to 10000 (2026-07-26):** slow + very fragile → it must OUTRANGE the tanks to
+survive, so it leaves the direct-fire ladder and jumps to 10000. Artillery / ArtilleryTank extend
+*beyond* 10000 (indirect long-range — resolve the overlap when we lock them). Scout / AntiAir /
+LineBreaker have their own ranges (LineBreaker short ~2500; Scout 4500). **These ranges override the
+per-class range values below.**
 
 ## ★ TWO NEW PRICING RULES (maintainer 2026-07-26)
 
@@ -239,22 +241,24 @@ outside the gun range-ladder).
 
 ## ✅ ScoutVehicle — LOCKED 2026-07-26 (fastest, most fragile, cheapest; INFANTRY HP granularity)
 
-**Baseline = Nod Buggy** (`td_nod_buggy`):
+**Baseline = Nod Buggy** (`td_nod_buggy`) — anchored on its REAL stats (not an invented DPS):
 | HP | Speed | Range | DPS | cost0 | Armor |
 |--:|--:|--:|--:|--:|--:|
-| **20000** | **200** | **4500** | **75** | **300** | Scout |
-- HP 20000 = ½ the LightTank (40000) → the fragile end of the ladder. Speed 200 = fastest class. Range
-  **4500** = scout's own, one notch below the 5000 gun-ladder floor. DPS **75** = ¾ of the LightTank's
-  100 (harasser, not a fighter). cost0 **300** = nostalgic (Buggy/Ranger/Raider-Car price).
+| **20000** | **200** | **4500** | **450** | **300** | Scout |
+- **DPS 450 = the buggy's ACTUAL main-gun DPS** (MachineGun: 4000 dmg × burst 3 / eff-reload 20 ×
+  wc 0.75 = 450). The class self-anchors on the real baseline unit → the buggy keeps its weapon as-is,
+  no nerf. *(The earlier "75" was a bogus cross-class ¾-of-LightTank guess — corrected 2026-07-26 per
+  maintainer.)* HP 20000 = ½ the LightTank → fragile. Speed 200 = fastest class. Range **4500** =
+  scout's own. cost0 **300** = nostalgic. NB the weapon is anti-infantry (SmallArms warhead) so this
+  raw DPS is NOT cross-comparable with the tanks' anti-armor DPS — each class self-anchors.
 
 **Verifier = Terran Vulture** (`terran_vulture`), restatted to the 2.5× identity point:
 | HP | Speed | Range | DPS | cost0 |
 |--:|--:|--:|--:|--:|
-| **40000** | **200** | **4500** | **150** | **750** |
+| **40000** | **200** | **4500** | **900** | **750** |
 - 2×HP + 2×DPS + same spd/rng → exactly 2.5× cost (300 → 750). ✓ clean identity (o1.5 / p2 / q4 → 2.5).
-- Vulture is fast + a natural scout; its CURRENT weapon already deals DPS 150 (dmg 4000 / rd 25 ×
-  wc 0.9375 = 150), so only HP (75000→40000), cost (900→750), speed (125→**200**), range (4800→4500)
-  change. Ground-only (lays mines) → no AA question.
+- Restat: HP 75000→40000, cost 900→750, speed 125→**200**, range 4800→4500, weapon damage → **DPS 900**
+  (2× the buggy). Ground-only (lays mines) → no AA question.
 
 **★ INFANTRY HP GRANULARITY (maintainer 2026-07-26) — the scout class's special rule:**
 Scouts use the **infantry HP granularity (steps of 1000)**, NOT the vehicle granularity (steps of
@@ -293,6 +297,32 @@ self-heal convention:
 **★ Cross-note (infantry):** TD **rocket infantry → 300¢** (align with the other rocket-infantry
 anchors; was 200) — matters for cargo/transport pricing (Σ passengers). Feeds the rocket-trooper
 infantry anchor.
+
+---
+
+## ✅ FireSupport — LOCKED 2026-07-26 (fragile, LONGEST range 10000, NO anti-air)
+
+**Role:** weak armor + the longest direct range — slow + fragile → it must OUTRANGE the tanks to
+survive. **Range = 10000** (revised up from 7500; leaves the direct-fire gun ladder). **NO anti-air**
+(strip it — e.g. GDI MLRS loses its AA).
+
+| | Unit | HP | Speed | Range | DPS | cost0 |
+|---|---|--:|--:|--:|--:|--:|
+| **Baseline** | `td_gdi_mlrs` (GDI MLRS) | **25000** | **80** | **10000** | **400** | **1000** |
+| **Verifier** | `latinsyndicate_missiletruck` | **50000** | 80 | 10000 | **800** | **2500** |
+
+- ✓ identity: 2×HP + 2×DPS + same spd/rng → exactly 2.5× cost (1000 → 2500). (o1.5 / p2 / q4 → 2.5.)
+- **Baseline (GDI MLRS):** iconic fragile rocket support. **AA stripped**; weapon buffed to **DPS 400**
+  (from ~188); range 9920→10000; keeps HP 25000 / speed 80 / cost 1000.
+- **Verifier (Latin Syndicate missile truck):** fits Latin's "best artillery / rocket-artillery"
+  faction identity. Restat: HP 30000→50000, cost 1000→**2500** (premium tier), speed 75→80, range
+  7777→10000, DPS →800. *(NB the 1000→2500 cost jump makes it a premium unit — flag if you want it
+  kept cheaper and a different verifier named.)*
+- **Ladder (cost):** … MBT 800 · **FireSupport 1000** · LineBreaker 1200 · HighTech 2000 · Dreadnought
+  3000. Fragile long-range members to rebalance into band: prism tank, hover-MLRS, tank-killer,
+  missile trucks, SSM launcher, Type-89 MLRS, etc.
+- **Consequence:** FireSupport at 10000 now sits where Artillery / ArtilleryTank were "beyond 7500" —
+  resolve the range overlap when we lock those (they must extend past 10000).
 
 ---
 
