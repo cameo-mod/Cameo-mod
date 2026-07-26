@@ -13,14 +13,17 @@ propose baseline+verifier → they give exact numbers → LOCK here → later: c
 + `fit_class` + sign-off. **Every class needs a baseline AND a verifier** (verifier = 2×HP + 2×DPS +
 2.5×cost, same speed/range → clean identity). Support is EXEMPT; cargo = Σ(passengers).
 
-**LOCKED (cost0):** LightTank 400 · TankDestroyer 600 · MBT 800 (Tiger pivot, signed) · LineBreaker
-1200 · HighTechTank 2000 · Dreadnought 3000.
-**➡ NEXT: (1) ScoutVehicle, then (2) FireSupport** (7500 range, band 7000–8000, **NO anti-air**).
-**Then:** AntiAirTank (Diablo + flak-tracks), ArtilleryTank (Ixian Combat Siege), Artillery → then the
-5 DEFENSE classes → aircraft/naval. Infantry anchors (14) already exist, need sign-off (commando needs
-a verifier). **After all anchors:** create templates in defaults.yaml (boot-gated), run `fit_class`,
-wire `check_band` into `run_all.sh`. **Upgrades LAST.** **Weapons.yaml below-divider cleanup = ON
-HOLD** (`weapons_cleanup_plan.md`, no deletions). WeaponClass restored to `weapon_classes.yaml`.
+**LOCKED (cost0):** ScoutVehicle 300 · LightTank 400 · TankDestroyer 600 · MBT 800 (Tiger pivot,
+signed) · LineBreaker 1200 · HighTechTank 2000 · Dreadnought 3000.
+**➡ NEXT: (1) FireSupport** (7500 range, band 7000–8000, **NO anti-air**), then (2) **AntiAir Vehicle**
+(NEW `^AntiAirVehicleTemplate` — draft rules recorded below: **priced on the GROUND weapon**, the AA
+weapon is a fixed **+50% range / +100% damage** bonus; absorbs the TD/TS bikes + AA troop-transports +
+Diablo + flak-tracks).
+**Then:** ArtilleryTank (Ixian Combat Siege), Artillery → then the 5 DEFENSE classes → aircraft/naval.
+Infantry anchors (14) already exist, need sign-off (commando needs a verifier). **After all anchors:**
+create templates in defaults.yaml (boot-gated), run `fit_class`, wire `check_band` into `run_all.sh`.
+**Upgrades LAST.** **Weapons.yaml below-divider cleanup = ON HOLD** (`weapons_cleanup_plan.md`, no
+deletions). WeaponClass restored to `weapon_classes.yaml`.
 
 ## ★ RANGE LADDER (maintainer 2026-07-26 — verified consistent, steps of 500)
 
@@ -231,3 +234,91 @@ reaches a ground target.**
 **Zerg Ultralisk**, **Consortium Megalodon**. (Berserker / MAD Tank read as epic/suicide — flag if not.)
 **Ladder (cost):** … LineBreaker baseline **1200** (short-range brawler class; its own range ~2500,
 outside the gun range-ladder).
+
+---
+
+## ✅ ScoutVehicle — LOCKED 2026-07-26 (fastest, most fragile, cheapest; INFANTRY HP granularity)
+
+**Baseline = Nod Buggy** (`td_nod_buggy`):
+| HP | Speed | Range | DPS | cost0 | Armor |
+|--:|--:|--:|--:|--:|--:|
+| **20000** | **200** | **4500** | **75** | **300** | Scout |
+- HP 20000 = ½ the LightTank (40000) → the fragile end of the ladder. Speed 200 = fastest class. Range
+  **4500** = scout's own, one notch below the 5000 gun-ladder floor. DPS **75** = ¾ of the LightTank's
+  100 (harasser, not a fighter). cost0 **300** = nostalgic (Buggy/Ranger/Raider-Car price).
+
+**Verifier = Terran Vulture** (`terran_vulture`), restatted to the 2.5× identity point:
+| HP | Speed | Range | DPS | cost0 |
+|--:|--:|--:|--:|--:|
+| **40000** | **200** | **4500** | **150** | **750** |
+- 2×HP + 2×DPS + same spd/rng → exactly 2.5× cost (300 → 750). ✓ clean identity (o1.5 / p2 / q4 → 2.5).
+- Vulture is fast + a natural scout; its CURRENT weapon already deals DPS 150 (dmg 4000 / rd 25 ×
+  wc 0.9375 = 150), so only HP (75000→40000), cost (900→750), speed (125→**200**), range (4800→4500)
+  change. Ground-only (lays mines) → no AA question.
+
+**★ INFANTRY HP GRANULARITY (maintainer 2026-07-26) — the scout class's special rule:**
+Scouts use the **infantry HP granularity (steps of 1000)**, NOT the vehicle granularity (steps of
+2500), so the 20000–30000 band holds **11 levels** (20k,21k,…,30k) instead of 5. Enforced by the
+self-heal convention:
+- **Engine mechanic:** self-heal Step is tied to max-HP. Vehicles use `ChangesHealth@SelfHealing.Step
+  = HP/2500` (→ HP must be a multiple of 2500); infantry use **`Step = HP/1000`** (→ HP a multiple of
+  1000). **Scouts switch to the infantry rule: `Step = HP/1000`** (verified: buggy 20000 → Step 20;
+  Ixian/Ordos infantry actors already set Step = HP/1000).
+- **Template change (to implement, boot-gated):** `^ScoutVehicleTemplate` currently inherits the
+  VEHICLE self-heal from `^VehicleBuffs` (Step 10 / **Delay 1** / **DamageCooldown 10**). Override it to
+  the INFANTRY timing from `^InfantryBuffs` (**Delay 2** / **DamageCooldown 20** / StartIfBelow 100),
+  and set each scout actor's `ChangesHealth@SelfHealing.Step = HP/1000` (applied in the member
+  rebalance, since HP must first be re-rounded to a multiple of 1000). **HARD RULE — do not forget.**
+- `Repairable.HpPerStep = HP/20` stays (a multiple of 1000 is always a multiple of 20 → clean).
+
+**Rebalance method (as always):** each member keeps its Speed/Range/Cost/Reload/Burst; tune main Damage
+→ FirepowerMultiplier (+HP to band, now in 1000-steps).
+
+**Membership (2026-07-26):** all currently-`^ScoutVehicleTemplate` actors STAY scouts (maintainer:
+"currently scout ⇒ still scout unless I give another order") **EXCEPT the moves below.**
+- **KEEP (rebalance into band):** `td_nod_buggy` (baseline), `ra1_allies_ranger`, `td_gdi_humvee`,
+  `forgotten_raidercar`, `ts_nod_attackbuggy`, `futuretech_scoutdroid` (**bump speed** ~70→~180 — too
+  slow for the fastest class), `japan_armoredcar`, `japan_scoutcar`, `tkm_technical`, `tkm_as42`,
+  `ordos_leech`, `forgotten_bowler`, `forgotten_ruiner`, `protoss_positron`,
+  `steelconsortium_whiterabbit`, `terran_vulture` (verifier).
+- **`ordos_raider` = PREMIUM HEAVY SCOUT** (maintainer): keeps its 1200¢ / 60000 HP / K 1.25 — an
+  intentional high outlier priced with the special modifier. Stays scout.
+- **MOVED OUT → AntiAir Vehicle** (maintainer new order): `td_nod_reconbike`,
+  `td_nod_chemicalattackbike` (TD bikes), `ts_nod_attackcycle` (TS bike). *(`naxis_bmwbike` = WW2 Naxis
+  bike — FLAG: move too, or keep scout?)*
+- **`ra2_soviets_terrordrone` = SPECIAL EXCEPTION** (maintainer): melee suicide/sabotage → EXEMPT.
+- **`ra2_c_hum` = CIVILIAN** (`ra2_c_` prefix, only in garrison/spawn lists, 80000 HP is a civilian
+  stat) → out of scope, not a buildable faction scout.
+
+**★ Cross-note (infantry):** TD **rocket infantry → 300¢** (align with the other rocket-infantry
+anchors; was 200) — matters for cargo/transport pricing (Σ passengers). Feeds the rocket-trooper
+infantry anchor.
+
+---
+
+## ◧ AntiAir Vehicle (`^AntiAirVehicleTemplate`) — DRAFT rules (maintainer 2026-07-26; finalize after FireSupport)
+
+**Concept:** dedicated mobile anti-air. Absorbs the planned AntiAirTank plus new members. Rules named
+by the maintainer 2026-07-26 — **NOT yet locked** (baseline + verifier TBD when we reach this class).
+
+**★ NEW PRICING RULE (the class's identity):**
+1. **Priced ONLY on the GROUND weapon** — balanced as if it were a ground unit.
+2. **The AA weapon is a fixed function of the ground weapon: +50% RANGE and +100% DAMAGE** (AA range =
+   ground range × 1.5, AA damage = ground damage × 2). The strong AA weapon comes "free" with the class
+   → makes them *excellent* dedicated AA. **This SUPERSEDES the old AG/AA pair law for this class.**
+3. **Transport-with-a-weapon → special K 1.25** *(maintainer tentative — "I think maybe")*: any troop
+   TRANSPORT that also has a weapon carries a 1.25× special modifier; if that weapon is AA it lives in
+   this template. **CONFIRM before locking.**
+
+**Membership (drafted):**
+- **All troop transports that have anti-air** (new rule; needs a Cargo+AA scan across the roster).
+- **TD/TS bikes** moved from Scout: `td_nod_reconbike`, `td_nod_chemicalattackbike`,
+  `ts_nod_attackcycle` (+ `naxis_bmwbike`? flag).
+- **`latinsyndicate_diablo`** (Latin's main AA vehicle — moved from Support earlier).
+- **Flak-tracks** (`ra2_soviets_flaktrack`) and similar.
+- **AA-primary scout candidates to REVIEW** (have AA but weren't explicitly ordered moved — decide at
+  lock time): `ts_gdi_pitbull` (missiles), `japan_armoredcar` (flak).
+
+**OPEN before locking:** baseline + verifier pick; confirm rule 3 (transport K 1.25); does the
+"ground-weapon-priced, AA = 2× dmg free" rule need a small K so dedicated AA isn't under-priced?; the
+Cargo+AA transport scan; naxis_bmwbike + Pitbull + Armored Car placement.
