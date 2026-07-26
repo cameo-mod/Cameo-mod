@@ -595,6 +595,43 @@ Alliance **plasma cannon**, Ixian **storm lasher**, … (full footprint scan whe
 
 ---
 
+## ⚠ WEAPON-CLASS EXTRACTION BUG (found 2026-07-26) — extractor ≠ authoritative
+
+`extract_stats.py`'s `design_weapon_class` is WRONG — it averages a weapon's **versus-armor templates**
+via a hard-coded `_WEAPON_CLASS_OVERRIDES` table, instead of reading the authoritative sidecar
+`weapon_classes.yaml` for the weapon's **own class**. Two symptoms found:
+- **Guard tower → 1.0833** = mean of its 6 recognized versus templates `[Grenade 1.0, Shrapnel 1.0,
+  Flak 1.0, HeavyAA 1.25, HeavyMissile 1.25, MediumMissile 1.0]` = 6.5/6 = 13/12. (Should be its OWN
+  class ≈ 1.0.) `^TankDestroyerCannon` → None (unrecognized).
+- **Obelisk → 1.0** because the override table has **`LaserWeapon: 1.0`** — WRONG; sidecar + legacy
+  Excel say **1.25**. Also **`ShrapnelWeapon` should be 1.25** (Heavy), table has 1.0.
+
+**Rule (DESIGN.md §"WeaponClass"):** Light/Medium/Heavy warhead = 0.75/1.0/1.25; a weapon's class = the
+**arithmetic mean of its WARHEAD classes** (NOT the versus-armor list). **FIX (pending maintainer go):**
+(a) correct the override table to match the sidecar (`LaserWeapon`/`ShrapnelWeapon` → 1.25, full
+reconcile); (b) re-wire `extract_stats.py` to read `weapon_classes.yaml` + use the weapon's own class.
+
+## ◧ AdvancedDefense + SuperDefense — IN PROGRESS (2026-07-26)
+
+**Key finding (footprint scan):** the clean, "epic ~4000" defenses are **all 2×2 → SuperDefense**, not
+AdvancedDefense (they're currently mis-filed in `^AdvancedDefenseTemplate` and must MOVE):
+| Unit | cost | HP | Range | footprint | charge |
+|---|--:|--:|--:|:-:|:-:|
+| `asianalliance_plasmacannon` | **4000** | 300000 | 14000 | 2×2 | none ✓ |
+| `ixian_stormlasher` | 5000 | 200000 | 11384 | 2×2 | none ✓ |
+| `latinsyndicate_smlturret` | 5000 | 300000 | 15000 | 2×2 | none ✓ |
+| `ra2_allies_grandcannon` | 5000 | 250000 | 11800 | 2×2 | none ✓ |
+| `cabal_heavycabalobelisk` | 2400 | 300000 | 12288 | — | CHARGE ✗ |
+
+⇒ **SuperDefense** (`^SuperDefenseTemplate`, exists): epic 2×2 defenses. **`asianalliance_plasmacannon`
+@ 4000** = the clean epic candidate you asked for (PlasmaWeapon 1.25, no charge). Grand Cannon /
+Storm Lasher / SML @ 5000.
+⇒ **AdvancedDefense** is therefore **1×1 only** — a ~4000 defense is too big (2×2) to be Advanced. So
+its verifier must be a strong **1×1** defense (~2500–3000), e.g. the **Ixian rocket turret** (clean
+K=1.0, but Tier-2 → resolve the tier/AA-gap) or a heavy tesla/prism. Obelisk rejected (charge, K-shift).
+
+---
+
 ## 🔤 NAMING FIX — dropped umlauts (maintainer 2026-07-26) — BOOT-GATED, via rename tool
 
 Rule: umlauts transliterate to the base letter (ü→u, ö→o, ä→a, ß→ss). A roster scan (display-name
