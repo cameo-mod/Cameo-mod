@@ -606,18 +606,23 @@ via a hard-coded `_WEAPON_CLASS_OVERRIDES` table, instead of reading the authori
 - **Obelisk → 1.0** because the override table has **`LaserWeapon: 1.0`** — WRONG; sidecar + legacy
   Excel say **1.25**. Also **`ShrapnelWeapon` should be 1.25** (Heavy), table has 1.0.
 
-**Rule (DESIGN.md §"WeaponClass"):** Light/Medium/Heavy warhead = 0.75/1.0/1.25; a weapon's class = the
-**arithmetic mean of its WARHEAD classes** (NOT the versus-armor list).
+**★ THE RULE IS AUTOMATIC (ARMOR_SYSTEM.md — canonical Versus law):** a weapon's class = read from its
+main SpreadDamage warhead's **`Versus: Shield`** value — Light/Medium/Heavy = step 6/5/4 = Shield
+**110 / 125 / 140 → 0.75 / 1.0 / 1.25** (+15 shield = +0.25; superheavy bands 155/170/185 → 1.5/1.75/2.0).
+Multi-warhead weapons = arithmetic mean. So `^Grenade` (Light Demolition, Shield 110) = **0.75**,
+`^ShrapnelWeapon` (Medium Concussion, Shield 125) = **1.0** — automatic, no hand list.
 
-**✅ FIXED 2026-07-26:** (a) `weapon_classes.yaml` `^ShrapnelWeapon` 1.0 → **1.25**; (b) `extract_stats.py`
-now **loads the sidecar as the SINGLE authoritative source** (`_load_weapon_class_sidecar`), deleting the
-stale hard-coded `_WEAPON_CLASS_OVERRIDES` table (LaserWeapon/TeslaWeapon/Grenade/ShrapnelWeapon all
-disagreed); (c) **NEW dedicated gate `extract_stats.py --check-weapon-classes`** — fails if any weapon
-references a class template missing from the sidecar (so a stale/guessed value can never recur). **The
-gate immediately found 48 unmapped templates** (theme variants `^RA2Chaingun`/`^SteelSmallArms`/…,
-generics `^MissileWeapon`/`^MG`/`^EMPDamage`, effects `^TSLaserEffect`/`^AADeployTargeting`) — **TODO:
-complete the sidecar** (theme-X → base-X class; non-damage effects → the IGNORE set) before wiring the
-gate into `run_all.sh`. Ledgers pick up the corrected classes on the next sanctioned `extract_stats` run.
+**✅ FIXED 2026-07-26:** `extract_stats.py` now derives `design_weapon_class` **automatically from the
+Versus Shield** (`weapon_class_from_versus`, `source="versus_shield"`) — self-correcting from the yaml,
+so a stale value can't recur. The `weapon_classes.yaml` sidecar is the **fallback** for weapons with no
+Versus of their own; the stale hard-coded override table was deleted (it had LaserWeapon 1.0, Grenade
+1.0 — both wrong; Shield-derived gives 1.25 / 0.75 correctly). **`^ShrapnelWeapon` reverted to 1.0**
+(maintainer: shrapnel was right, GRENADE was the wrong one — now 0.75 via Shield). New gate
+**`--check-weapon-classes`** fails on any template lacking BOTH a Versus Shield and a sidecar entry;
+after the automatic law it's down from 48 → **10** (targeting-only `^AADeployTargeting`/`^DeployTargeting`
+→ IGNORE set; abstract parents `^MissileWeapon`/`^MG`/`^LightMG`/`^AntiGroundMissile`; `^SnipeWeapon` →
+0.75; `^D2K_Cannon`/`^DRPlasmaWeapon`/`^TSDefaultMissile`). Finish those 10, then wire into `run_all.sh`.
+Ledgers pick up the corrected classes on the next sanctioned `extract_stats` run.
 
 ## ✅ AdvancedDefense — LOCKED baseline 2026-07-26 (1×1, Steel armor, plan-ahead build)
 

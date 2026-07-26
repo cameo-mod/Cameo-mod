@@ -223,6 +223,44 @@ def weapon_class_from_types(types: list[str]) -> float | None:
     return sum(vals) / len(vals)
 
 
+# Versus-Shield → WeaponClass (ARMOR_SYSTEM.md, canonical Versus law):
+# the main SpreadDamage warhead's step (Light 6 / Medium 5 / Heavy 4) shows up
+# as Shield = 100 + floor = 110 / 125 / 140, and +15 shield = +0.25 class.
+# So the class is READABLE straight from the resolved Versus table — no hand-
+# maintained list can drift out of sync with the yaml.
+_SHIELD_TO_CLASS = {110: 0.75, 125: 1.0, 140: 1.25, 155: 1.5, 170: 1.75, 185: 2.0}
+
+
+def weapon_class_from_versus(resolved) -> float | None:
+    """Arithmetic mean of the class of every main SpreadDamage warhead, read
+    from its ``Versus: Shield`` value (110/125/140 → 0.75/1.0/1.25). Skips the
+    percentage / extra-damage / friendly-fire warheads (their own 17/25/35
+    Shield scale). Returns None when no main warhead exposes a recognised
+    Shield, so the caller can fall back to the sidecar."""
+    classes = []
+    for c in resolved.children:
+        if not c.key.startswith("Warhead@") or c.value != "SpreadDamage":
+            continue
+        tag = c.key.split("@", 1)[1].lower()
+        if tag.endswith(("extradamage", "percentage", "friendlyfire")):
+            continue
+        versus = child(c, "Versus")
+        if versus is None:
+            continue
+        shield = versus.get("Shield")
+        if shield is None:
+            continue
+        try:
+            cls = _SHIELD_TO_CLASS.get(int(float(shield)))
+        except (TypeError, ValueError):
+            continue
+        if cls is not None:
+            classes.append(cls)
+    if not classes:
+        return None
+    return sum(classes) / len(classes)
+
+
 def firepower_multiplier(resolved, local):
     """Extract a single unconditional, locally-defined FirepowerMultiplier.
 
@@ -321,17 +359,27 @@ def weapon_entry(rs, wname: str) -> dict | None:
         out["versus_templates"] = [c.value for c in local.children
                                    if c.key == "Inherits" or c.key.startswith("Inherits@")]
     out["weapon_types"] = weapon_types(rs, wname)
+    # Priority: explicit WeaponClass field (rare — the lint strips it) →
+    # AUTOMATIC Versus-Shield law (self-correcting, ARMOR_SYSTEM.md) →
+    # sidecar-template fallback (records unmapped templates for the check).
     wc = resolved.get("WeaponClass")
+    parsed = None
     if wc is not None:
         try:
-            out["design_weapon_class"] = float(wc)
-            out["weapon_class_source"] = "WeaponClass"
+            parsed = float(wc)
         except (ValueError, TypeError):
+            parsed = None
+    if parsed is not None:
+        out["design_weapon_class"] = parsed
+        out["weapon_class_source"] = "WeaponClass"
+    else:
+        vclass = weapon_class_from_versus(resolved)
+        if vclass is not None:
+            out["design_weapon_class"] = vclass
+            out["weapon_class_source"] = "versus_shield"
+        else:
             out["design_weapon_class"] = weapon_class_from_types(out["weapon_types"])
             out["weapon_class_source"] = "template"
-    else:
-        out["design_weapon_class"] = weapon_class_from_types(out["weapon_types"])
-        out["weapon_class_source"] = "template"
     return out
 
 
