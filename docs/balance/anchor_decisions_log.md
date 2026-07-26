@@ -658,12 +658,15 @@ the sidecar and **auto-update the sidecar** on mismatch (single always-accurate 
   2×HP / 2×DPS / +range step over Basic (100k/400/500), fairly priced. Range band **8000–10000**, Steel
   armor, power = cost/10, heavy-missile-only (wc 1.25). Verifier = **Ixian rocket turret** at 2.5×HP +
   2.5×DPS + same range = **4× → 4000** (= the SuperDefense floor, a clean boundary).
-- **Ixian rocket turret → Tier 3** (maintainer confirmed). Creates an **Ixian AA gap** → **FILL by
-  reactivating `d2k_airdefenseplatform`** — a commented-out D2K "Air Defense Platform" (in `d2k.yaml`
-  ~line 7123, NOT in the packs): a slow hovering base-defense (speed 28) with dual high-calibre AA MG,
-  `AttackAircraft`, 1500¢ / 75000 HP / Heavy, high_tech_factory + research_centre gated. Currently
-  `~anyharkonnen` — **repoint the prereq to Ixian** (high-tech fits their theme). BOOT-GATED (verify the
-  weapon `d2k_airdefenseplatform`, the `.husk`, and sequences still exist before uncommenting).
+- **Ixian rocket turret → Tier 3** (maintainer confirmed). Creates an **Ixian AA gap — STILL OPEN.**
+  *(`d2k_airdefenseplatform` is NOT usable — it's the upcoming HARKONNEN faction's flying spaceship, not
+  a turret. Reverted 2026-07-26.)* Full `d2k.yaml` scan: **no unused static AA turret exists** — every
+  AA entry is already in the packs (rocket turret, ordos autogun) or is an aircraft. Dune's only AA
+  defense was the Rocket Turret. **OPTIONS for the Ixian AA (maintainer to pick):**
+  (1) **Ixian Railgun Drone** (`ixian_railgundrone`, exists, mobile AA, high-tech — their AA is mobile,
+  not a turret); (2) give the **Ixian machine-gun / gun turret an AA mode** (compact, reuses a turret);
+  (3) **keep a light Rocket Turret at T2** (Ixian AA) + the heavier Missile Tower at T3 (the verifier);
+  (4) **new Ixian AA turret** (railgun/needle-flak, T2, ~800–1000 — fits their high-tech identity).
 
 ## ✅ SuperDefense — baseline 2026-07-26 (epic capstone, 2×2, Steel, power = cost/5)
 
