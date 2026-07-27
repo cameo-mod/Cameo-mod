@@ -20,17 +20,14 @@ flagged inline. Faction reference: [FACTIONS.md](../FACTIONS.md)._
 
 ---
 
-## 🔴 BUG (jumps the queue) — campaign maps vanish from editor + mission selector
+## 🔴 BUG — campaign maps vanish from editor + mission selector
 
-**Reported by NFWRambo 2026-07-26.** Player-made **campaign maps** ("Special Delivery") are **no longer
-selectable in the map editor OR the mission selector**. Onset correlates with editing a map's
-`map.yaml` to **add new factions**, and/or adding a **`rules.yaml` + lua script files** to the map.
-Blocks his map-making. **Likely cause:** a map-level rules/faction override that fails to parse or
-references a faction/actor that no longer resolves (rename fallout?), so the map is silently rejected
-at load/enumeration. **To investigate:** get "Special Delivery"'s `map.yaml` + `rules.yaml`; try loading
-it and check `%APPDATA%/OpenRA/Logs` for a parse/enumeration exception; diff its faction list against the
-current faction set; check whether the map-rules loader hard-fails (dropping the map from the list) vs
-warns. **Owner: next session (post-compact).**
+- [x] **FIXED** (`42ba6f34c`, 2026-07-27): Root cause was `LockFaction: Random`
+  (string) instead of `LockFaction: True` (boolean) in 6 map.yaml files — a
+  regression from commit `6ccb9a749`. OpenRA silently dropped maps with invalid
+  `LockFaction` values. Also fixed invalid fluent key `bot-campaign-ai.name` →
+  `CampaignAI` in delivery/deliverycoop rules.yaml and added missing
+  `bot_ai.campaign` fluent key to en.ftl.
 
 ## ★ MAJOR PROGRAM (2026-07-25): mod-synthesis balance overhaul — see [`BALANCE_SYNTHESIS.md`](BALANCE_SYNTHESIS.md)
 
