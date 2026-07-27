@@ -327,12 +327,12 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   (rocketcyborg, hackercyborg, eliminator800) that had `ra2player` instead
   of `playerra2` as their death palette (mismatch with their
   `PlayerPalette: playerra2`).
-- [ ] **TS-only death palette audit** (Effort: M): The broken commit
-  `9579827e9` was reverted, but the original fixes in `a2b4de333` and
-  `b417c6f96` may have set wrong palette values for some TS actors. Need
-  a smarter audit script that only checks TS content packs and reports
-  mismatches between `DeathSequencePalette` and `PlayerPalette`. Do NOT
-  touch TD, D2k, RA1, RA2, TKM files.
+- [x] **TS-only death palette audit** (`54816b1f3`, 2026-07-27): Wrote
+  `tools/audit/audit_ts_death_palette.py` — checks all 56 YAML files in
+  TiberianSun ContentPacks for DeathSequencePalette vs PlayerPalette
+  mismatches. Found and fixed 2 issues: `cabal_cyborgreaper` and
+  `cabal_heavyreaper` were missing `DeathSequencePalette: playerra2`.
+  Audit now passes with 0 issues. Did NOT touch TD, D2k, RA1, RA2, TKM.
 
 - [x] **Shellmap boot crash: "No valid shellmaps available"** (`6a74333d5`):
   the fix-oramap.ps1 rename pass used CASE-INSENSITIVE replaces on map.yaml
