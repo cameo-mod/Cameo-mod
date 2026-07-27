@@ -214,7 +214,7 @@ Speech:
 		EnemySWApproaching: alaunch2
 			Priority: true
 		HarvesterAttack: harvat
-		InsufficientPower: lopower1
+		InsufficientPower: nopowr1, lopower1
 		InsufficientFunds: nofunds1
 		IonCannonCharging: ionchrg1
 		IonCannonReady: ionredy1
@@ -226,7 +226,7 @@ Speech:
 			Priority: true
 		Lose: fail1
 			Priority: true
-		LowPower: lopower1
+		LowPower: nopowr1, lopower1
 		NewOptions: newopt1
 		NoBuild: nobuild1
 		NuclearWarheadApproaching: income1
