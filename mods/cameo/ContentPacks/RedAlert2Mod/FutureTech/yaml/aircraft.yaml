@@ -313,7 +313,7 @@ landcarr_drone.futu:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@upgrade: ^RA2AlliedAdvancedAeronautics
 	Valued:
-		Cost: 1250
+		Cost: 100
 	Tooltip:
 		Name: Hornet
 	Buildable:
@@ -353,5 +353,9 @@ landcarr_drone.futu:
 		InitialStanceAI: Defend
 		InitialStance: Defend
 		ScanRadius: 12
+	-UpdatesPlayerStatistics:
+	-MapEditorData:
+	-ActorLostNotification:
+	RejectsOrders:
 	CarrierSlave:
 		LandingDistance: 0

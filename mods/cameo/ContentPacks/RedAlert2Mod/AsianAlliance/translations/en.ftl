@@ -1,6 +1,5 @@
 actor_aacarrier =
-   .description = Aircraft carrier that deploys 4 fighters
-      armed with machine guns.
+   .description = Aircraft carrier that deploys 4 kamikaze drones.
 
 actor_aagunb =
    .description = Fast gunboat armed with a cannon and a flak gun.

@@ -205,7 +205,7 @@ kami.asian:
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Valued:
-		Cost: 800
+		Cost: 80
 	Tooltip:
 		Name: Kamikaze
 	Buildable:
@@ -226,20 +226,22 @@ kami.asian:
 		Range: 7500
 		Type: GroundPosition
 	Armament@PRIMARY:
-		Weapon: AsianKamikazeChaingun
-		LocalOffset: 427,-171,-213, 427,171,-213
-		PauseOnCondition: !ammo
-	AmmoPool:
-		Ammo: 18
-		AmmoCondition: ammo
+		Weapon: AsianKamikazeImpactTargeting
 	SpawnActorOnDeath:
 		Actor: kami_husk.asian
+		RequiresCondition: airborne && !diving
+	DiveOnAttack:
+		Speed: 300
+		DiveCondition: diving
+	SpawnedExplodes:
+		Weapon: ASDFKamikazeExplosion
+		EmptyWeapon: ASDFKamikazeExplosion
+		RequiresCondition: diving
 	WithMoveAnimation:
 		MoveSequence: move
 	AttackAircraft:
 		FacingTolerance: 40
 		PersistentTargeting: false
-		RequiresCondition: ammo
 	CarrierSlave:
 		LandingDistance: 8000
 	AutoTarget:
@@ -249,10 +251,6 @@ kami.asian:
 	-UpdatesPlayerStatistics:
 	-ActorLostNotification:
 	-MapEditorData:
-	WithAmmoPipsDecoration:
-		Position: BottomLeft
-		RequiresSelection: true
-		PipCount: 9
 	RenderSprites:
 		PlayerPalette: playerra2
 	GrantConditionOnMovement@Turn:
@@ -281,53 +279,50 @@ kami.asian:
 kami_chemical.asian:
 	Inherits: kami.asian
 	Valued:
-		Cost: 1600
+		Cost: 160
 	Health:
 		HP: 15000
 	ChangesHealth@SelfHealing:
 		Step: 6
 	Tooltip:
-		Name: Chemical Kamikaze
+		Name: Chemical Attack Plane
+	Armament@PRIMARY:
+		Weapon: AsianKamikazeChaingun
+		LocalOffset: 427,-171,-213, 427,171,-213
+		PauseOnCondition: !ammo
 	Armament@Secondary:
 		Weapon: AsianChemicalBombs
 		LocalOffset: 427,-171,-213, 427,171,-213
 		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 18
+		AmmoCondition: ammo
+	-DiveOnAttack:
+	-SpawnedExplodes:
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 9
 	RenderSprites:
 		Image: kami.asian
 	SpawnActorOnDeath:
 		Actor: kami_chemical_husk.asian
+		RequiresCondition: airborne
 
 kami_asdf.asian:
 	Inherits: kami.asian
 	Valued:
-		Cost: 500
+		Cost: 50
 	Tooltip:
 		Name: Airstrike Kamikaze
 	Buildable:
 		Description: template_airstrike_slave.description
 	-CarrierSlave:
 	-AutoTarget:
-	-AmmoPool:
-	-WithAmmoPipsDecoration:
-	AttackAircraft:
-		-RequiresCondition:
-	Armament@PRIMARY:
-		Weapon: ASDFKamikazeTargeting
-		-PauseOnCondition:
-	DiveOnAttack:
-		Speed: 300
-		DiveCondition: diving
-	SpawnedExplodes:
-		Weapon: ASDFKamikazeExplosion
-		EmptyWeapon: ASDFKamikazeExplosion
-		RequiresCondition: diving
 	AirstrikeSlaveCA:
 	GivesExperienceToMaster:
 	RenderSprites:
 		Image: kami.asian
-	SpawnActorOnDeath:
-		Actor: kami_husk.asian
-		RequiresCondition: airborne && !diving
 
 #######################################
 # RA2 Asian Husks

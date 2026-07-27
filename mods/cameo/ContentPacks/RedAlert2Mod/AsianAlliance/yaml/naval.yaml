@@ -370,8 +370,8 @@ karrier.asian:
 		PlayerPalette: playerra2
 	CarrierMaster:
 		Actors: kami.asian, kami.asian, kami.asian, kami.asian
-		RearmTicks: 300
-		RespawnTicks: 600
+		RearmTicks: 0
+		RespawnTicks: 150
 		InstaRepair: true
 		SlaveDisposalOnKill: KillSlaves
 		SpawnAllAtOnce: false
@@ -418,14 +418,14 @@ tsun.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	CarrierMaster:
-		Actors: kami_chemical.asian, kami_chemical.asian, kami_chemical.asian, kami_chemical.asian
+		Actors: kami_chemical.asian, kami_chemical.asian, kami_chemical.asian
 		RearmTicks: 150
 		RespawnTicks: 300
 		InstaRepair: true
 		SlaveDisposalOnKill: KillSlaves
 		SpawnAllAtOnce: false
 	Armament@PRIMARY:
-		Weapon: JapanCarrierTarget
+		Weapon: TsunamiCarrierTarget
 	Voiced:
 		VoiceSet: AsianTsunamiVoice
 	GrantConditionOnPrerequisite@Upgrade:

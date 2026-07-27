@@ -228,7 +228,7 @@ cabal_hunterdrone:
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Valued:
-		Cost: 500
+		Cost: 50
 	Tooltip:
 		Name: Hunter Drone
 	Buildable:
@@ -317,6 +317,7 @@ cabal_orbdrone_slave:
 	Inherits: cabal_orbdrone
 	-Buildable:
 	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
 	-MapEditorData:
 	Aircraft:
 		Repulsable: true
