@@ -35,33 +35,124 @@ def dps(damage: float, reload_delay: float, weapon_class: float = 1.0,
     return base * firepower_multiplier
 
 
-def spread_damage_sum(warheads, smallarms_only: bool = False) -> float:
-    """Effective per-shot damage = SUM of every offensive SpreadDamage warhead
-    (maintainer law 2026-07-22). A multi-warhead weapon deals the ADDED damage
+# Twin warheads — NEVER main / NEVER in the damage total (DESIGN.md):
+#   *ExtraDamage   Tesla/Nuclear shield chip — ALWAYS excluded from damage
+#   *FriendlyFire  own-side splash (50% twin)
+#   *Percentage    HealthPercentageDamage (1-per-2000 twin)
+_TWIN_SUFFIXES = ("extradamage", "percentage", "friendlyfire")
+
+
+def _is_main_spread(w, template_names=None) -> bool:
+    """A MAIN damage warhead: a `SpreadDamage` node whose name matches an
+    inherited weapon-class template (`Warhead@TankDestroyerCannon` ↔
+    `^TankDestroyerCannon`). The `*ExtraDamage` / `*FriendlyFire` /
+    `*Percentage` twins are NEVER main (ExtraDamage is ALWAYS excluded from
+    the damage calculation). When ``template_names`` is None the template
+    match is skipped (any non-twin SpreadDamage qualifies)."""
+    if (w.get("type") or "") != "SpreadDamage":
+        return False
+    tag = (w.get("tag") or "").lower()
+    if tag.endswith(_TWIN_SUFFIXES):
+        return False
+    if template_names:
+        return tag in template_names
+    return True
+
+
+def main_spread_warheads(warheads, template_names=None) -> list:
+    """The main damage warheads (see ``_is_main_spread``). ``template_names``
+    may carry the leading ``^``; it is normalised here. If a template list is
+    given but nothing matches — a non-conforming special weapon (nuke rings,
+    waveforce, death-explosion) whose warheads are not named after its
+    templates — fall back to every non-twin SpreadDamage so a combat weapon
+    never silently reads as 0 damage."""
+    warheads = warheads or []
+    if template_names:
+        tn = {str(t).lower().lstrip("^") for t in template_names}
+        mains = [w for w in warheads if _is_main_spread(w, tn)]
+        if mains:
+            return mains
+    return [w for w in warheads if _is_main_spread(w)]
+
+
+def spread_damage_sum(warheads, smallarms_only: bool = False,
+                      template_names=None) -> float:
+    """Effective per-shot damage = SUM of the MAIN damage warheads
+    (maintainer law 2026-07-22; main = template-named SpreadDamage, see
+    ``main_spread_warheads``). A multi-warhead weapon deals the ADDED damage
     of all its warheads to a target, so the SUM — never the max — is the price
-    driver: pricing on the max would let a 10-warhead weapon deal 10x the damage
-    for the price of one. Excluded from the sum:
-      * ``*ExtraDamage``   shield-only chip damage (intentional, priced elsewhere)
-      * ``*Percentage``    HealthPercentageDamage (not SpreadDamage anyway)
-      * ``*FriendlyFire``  own-side splash, not offensive value
+    driver: pricing on the max would let a 10-warhead weapon deal 10x the
+    damage for the price of one. `*ExtraDamage` / `*FriendlyFire` /
+    `*Percentage` twins are excluded.
+
     This is the ONE canonical warhead-damage reducer; every pricing tool MUST
-    call it so the MAX convention can never creep back in.
-    ``smallarms_only`` restricts the sum to SmallArms warheads (cheap scouts
-    <=150% of C0 price only their SmallArms warhead)."""
+    call it so the MAX convention can never creep back in. ``smallarms_only``
+    restricts the sum to SmallArms warheads (cheap scouts <=150% of C0 price
+    only their SmallArms warhead)."""
     total = 0.0
-    for w in warheads or []:
-        if (w.get("type") or "") != "SpreadDamage":
-            continue
-        tag = (w.get("tag") or "").lower()
-        if tag.endswith(("extradamage", "percentage", "friendlyfire")):
-            continue
-        if smallarms_only and not tag.startswith("smallarms"):
+    for w in main_spread_warheads(warheads, template_names):
+        if smallarms_only and not (w.get("tag") or "").lower().startswith("smallarms"):
             continue
         try:
             total += float(w.get("damage"))
         except (TypeError, ValueError):
             continue
     return total
+
+
+DAMAGE_STEP = 2000
+
+
+def snap_damage_step(value: float, step: int = DAMAGE_STEP) -> int:
+    """Nearest multiple of the 2000-damage grid (DESIGN.md); a positive
+    value never snaps below one step."""
+    if value <= 0:
+        return 0
+    return max(step, int(round(value / step)) * step)
+
+
+def distribute_damage(new_total, warheads, template_names=None) -> dict[str, int]:
+    """Turn a design per-shot TOTAL (a spread_damage_sum) into per-warhead
+    Damage values by the FIXED law in DESIGN.md ("Damage: 2000-steps"):
+
+      * EVERY main damage warhead (template-named SpreadDamage, see
+        ``main_spread_warheads``) carries the IDENTICAL value
+        D = new_total / N snapped to the 2000-damage grid — they never
+        differ ("all class warheads carry the identical value"). Coarse
+        control only; fine-tune the effective damage with the actor's
+        FirepowerMultiplier, NEVER by making warheads unequal or off-grid.
+      * each ``*FriendlyFire`` SpreadDamage twin = 50% of D (D // 2).
+      * each ``*ExtraDamage`` SpreadDamage twin = 50% of D (D // 2): energy
+        weapons trade area-of-effect for a shield/bonus chip, so it is
+        ALWAYS half the main — yet still EXCLUDED from the damage total.
+      * each ``*Percentage`` HealthPercentageDamage twin = 1 per 2000 of D
+        (D // 2000, i.e. 16000 -> 8).
+
+    This is the ONE canonical way to write per-warhead Damage, so a single
+    design number can NEVER again be broadcast identically onto every
+    warhead (the 2026-07-22 over-damage bug). Returns {tag: new_int_damage}
+    for every warhead the law assigns a value to.
+    """
+    warheads = warheads or []
+    mains = main_spread_warheads(warheads, template_names)
+    if not mains:
+        return {}
+    main_tags = {(w.get("tag") or "") for w in mains}
+    per = snap_damage_step(float(new_total) / len(mains))
+
+    result: dict[str, int] = {}
+    for w in warheads:
+        tag = w.get("tag") or ""
+        low = tag.lower()
+        if tag in main_tags:
+            result[tag] = per
+        elif low.endswith(("friendlyfire", "extradamage")):
+            # 50% twin — ExtraDamage may be SpreadDamage OR OpenToppedDamage
+            # (e.g. SniperWeaponExtraDamage); the rule is type-agnostic.
+            result[tag] = per // 2
+        elif low.endswith("percentage"):           # HealthPercentageDamage twin
+            result[tag] = per // DAMAGE_STEP
+    return result
 
 
 def estimators(hp: float, speed: float, range_wdist: float, dps_value: float,
@@ -227,3 +318,46 @@ def solve_class_baseline_range(cost, hp, speed, dps_value,
         raise ZeroDivisionError("class_baseline_price is range-independent for these stats")
     r_norm = (cost * 3 - (a + c)) / denom
     return (r_norm / special) * range0_wdist
+
+
+def _selftest() -> None:
+    """Runnable invariant checks: `python tools/balance/formula.py`."""
+    def wh(tag, dmg, typ="SpreadDamage"):
+        return {"tag": tag, "damage": str(dmg), "type": typ}
+
+    def mains(res):
+        return {t: v for t, v in res.items()
+                if not t.lower().endswith(("extradamage", "percentage", "friendlyfire"))}
+
+    # DESIGN.md law: mains identical on the 2000 grid, FF=50%, ExtraDamage
+    # =50% (excluded from total), Pct=1/2000. total 10000 / 5 mains -> 2000.
+    whs = [wh("A", 22000), wh("Aextradamage", 22000, "SpreadDamage"),
+           wh("Apercentage", 1, "HealthPercentageDamage"),
+           wh("B", 22000), wh("C", 22000), wh("D", 22000),
+           wh("Dfriendlyfire", 22000), wh("E", 22000)]
+    r = distribute_damage(10000, whs)
+    assert set(mains(r).values()) == {2000}, r          # identical mains
+    assert sum(mains(r).values()) == 10000, r
+    assert r["Dfriendlyfire"] == 1000, r                # FF = 50%
+    assert r["Aextradamage"] == 1000, r                 # ExtraDamage = 50%
+    assert r["Apercentage"] == 1, r                     # 1 per 2000
+    # ExtraDamage carries a value (50%) but is EXCLUDED from the total
+    assert spread_damage_sum(whs) == 22000 * 5          # Aextradamage not summed
+
+    # 16000 main -> Percentage 8 (DESIGN.md example)
+    r = distribute_damage(16000, [wh("m", 4000), wh("mpercentage", 1, "HealthPercentageDamage")])
+    assert r["m"] == 16000 and r["mpercentage"] == 8, r
+
+    # off-grid total snaps to the 2000 step; mains stay identical (fine-tune=FP)
+    r = distribute_damage(9000, [wh("a", 2000), wh("b", 2000), wh("c", 2000)])
+    assert len(set(r.values())) == 1, r                 # identical
+    assert all(v % 2000 == 0 for v in r.values()), r    # on the 2000 grid
+
+    # Tiger anchor (DESIGN §12) still holds
+    assert round(price(100000, 100, 5000, dps(10000, 50))) == 800
+
+    print("formula self-test OK")
+
+
+if __name__ == "__main__":
+    _selftest()

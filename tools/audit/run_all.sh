@@ -27,7 +27,8 @@ for a in inherits faction_leaks upgrades upgrade_coverage ai sequences \
          elite_naming missing_elite elite_gating rank_decoration \
          dune_rank_decoration effect_warhead_names weapon_suffixes \
          balance_sheet consistency_report packs balance_drift \
-         template_conformance multiplier_modifiers nuclear_flash_bindings; do
+         template_conformance multiplier_modifiers nuclear_flash_bindings \
+         warhead_split; do
   echo "== audit_$a"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" \
     || failed=1

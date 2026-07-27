@@ -35,7 +35,7 @@ numbers ourselves.
 | Layer | What | Use |
 |---|---|---|
 | **1. Original-game identity** (this doc, normalized per-game) | source stats ÷ that game's basic combat unit → relative role | *who each unit/faction is* — the identity lookup (inspiration only) |
-| **2. Old-balance snapshot** (`OLD_BALANCE_STATS.md`, auto-gen from ledger) | our units' current pre-rebalance stats | *keep what already works* — only change what conflicts |
+| **2. Old-balance snapshot** (`docs/balance/*.json` ledger, via `extract_stats.py`) | our units' current pre-rebalance stats | *keep what already works* — only change what conflicts |
 | **3. Formula pipeline** (`FORMULA_V2.md` + converter) | class baselines, Δ≤1, 5-stat uniqueness | *the mechanical target* |
 
 **Interpolation rule (per unit):** start from Layer 2 (keep the current stat if it's fine
@@ -202,7 +202,7 @@ Rifle Infantry and Engineer; the divergence is in vehicles, air and navy, not th
 | Heavy Tank | Soviet | 400 | 950 | 7 | Heavy | 105mm (dual) | Medium |
 | **Mammoth Tank** | Soviet | **600** | 1700 | **4** | Heavy | 120mm + AA missiles | Medium |
 | APC | Allied | 200 | 800 | 10 | Heavy | MG | Short |
-| Artillery | Allied | **75** | 600 | 6 | Light | 155mm | Long | 
+| Artillery | Allied | **75** | 600 | 6 | Light | 155mm | Long |
 | V2 Rocket | Soviet | 150 | 700 | 7 | Light | ballistic | Long |
 | Tesla Tank | Soviet | 110 | 1500 | 8 | Heavy | Tesla | Medium |
 | Chrono Tank | Allied | 350 | 2400 | 5 | Light | AP Tusk | Medium |

@@ -104,6 +104,25 @@ number appears exactly as the yaml states it, with provenance:
   (`requires`) — the old single-Damage flattening is retired; which
   armaments count toward pricing is a design flag per armament
   (default: unconditional + primary-upgrade ones).
+- **Multi-warhead damage convention.** Cameo weapons stack several
+  offensive `Warhead@X: SpreadDamage` nodes (one per inherited weapon-class
+  template); the engine detonates ALL of them, so the effective per-shot
+  damage is the SUM (`formula.spread_damage_sum`), never the max. The
+  workbook's **Damage cell is that per-shot TOTAL** — the same quantity
+  pricing/DPS use — so the sheet and the price never disagree. Editing it
+  writes per-warhead Damage through the ONE canonical reducer
+  `formula.distribute_damage`, which applies the fixed DESIGN.md law:
+  **every main class warhead gets the IDENTICAL value `total ÷ N` snapped
+  to the 2000-damage grid** ("all class warheads carry the identical
+  value" — never proportional, never off-grid), `*FriendlyFire` and
+  `*ExtraDamage` twins = **50%** of the main, `*Percentage` twins = **1 per
+  2000**. `*ExtraDamage` (the energy-weapon shield/AoE-compensation chip) is
+  always 50% of the main but is **excluded from the damage total**.
+  Fine-tuning the effective damage is done with the actor
+  **FirepowerMultiplier**, never by nudging or un-equalising warhead Damage. A single number can therefore never be
+  broadcast identically onto every warhead (the 2026-07-22 over-damage
+  regression, commit `04de392b3`). `audit_warhead_split` fails the suite if
+  that fingerprint ever reappears.
 - All derived quantities (DPS, effective reload, price) exist ONLY as
   formula cells in the sheet and as `formula.py` functions — computed,
   never stored.

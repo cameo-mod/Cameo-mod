@@ -1,5 +1,12 @@
 # PROPOSAL — vehicle + defense class anchors (baseline + verifier)
 
+> **⚠ STALE for LightTank and MBT.** The LightTank anchor was LOCKED by the maintainer
+> on 2026-07-25 at **40000 HP / 4000 dmg / 40 reload / cost0 400** (see
+> `anchor_decisions_log.md`), superseding the 50000/5000/50/500 proposed below.
+> The MBT anchor (Tiger) is also locked at the values shown in
+> `anchor_decisions_log.md`. The remaining classes below are still proposals
+> pending maintainer confirmation.
+
 _Maintainer asked me to **propose, you confirm** (2026-07-25). Every class gets a **baseline** (the
 100% anchor) **and a verifier** (the 250% tripwire = **2× HP + 2× DPS + 2.5× cost**, same range/
 speed as the baseline) — because the baseline→verifier band holds ~80% of units. Grounded in the
