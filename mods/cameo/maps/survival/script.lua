@@ -24,13 +24,33 @@ RemainingTime = 0
 timerStarted = false
 Text = ""
 
-PrepSeconds = 80      -- build-up time before wave 1
-WaveGapSeconds = 40    -- time between waves
-BaseBudget = 1500      -- wave-1 budget at 1 player
-BudgetGrowth = 650     -- extra budget per wave index
+PrepSeconds = 120     -- build-up time before wave 1 (was 80, +40)
+WaveGapSeconds = 60    -- time between waves (was 40, +20)
+BaseBudget = 2250      -- wave-1 budget at 1 player (was 1500, +50%)
+BudgetGrowth = 975     -- extra budget per wave index (was 650, +50%)
 RampFactor = 0.08      -- superlinear ramp: late waves outscale early ones
                        -- (wave 16 gets ~2.2x the old linear budget)
 CenterPos = CPos.New(50, 50)
+FinalWaveTimeout = 0
+
+-- Corner positions for FutureTech support buildings (one set per edge player)
+FutureTechCorners = {
+	{ rcc = CPos.New(3, 3),   pp = CPos.New(6, 3) },   -- top-left  (Foes[1], Top edge)
+	{ rcc = CPos.New(98, 3),  pp = CPos.New(95, 3) },  -- top-right (Foes[2], Right edge)
+	{ rcc = CPos.New(98, 98), pp = CPos.New(95, 98) }, -- bot-right (Foes[3], South edge)
+	{ rcc = CPos.New(3, 98),  pp = CPos.New(6, 98) },  -- bot-left  (Foes[4], Left edge)
+}
+
+SpawnFutureTechSupport = function()
+	for i = 1, 4 do
+		if Foes[i] ~= nil then
+			local c = FutureTechCorners[i]
+			Actor.Create("futuretech_robotcontrolcenter", true, { Owner = Foes[i], Location = c.rcc })
+			Actor.Create("futuretech_thermalpowerplant", true, { Owner = Foes[i], Location = c.pp })
+		end
+	end
+	Media.DisplayMessage("FutureTech support buildings deployed (Robot Control Center + Power Plant in each corner).", "")
+end
 
 -- { name, tier, units = { {type, cost}, ... }, epic = {type, cost} or nil }
 Waves = {
@@ -148,6 +168,9 @@ SendWave = function(idx)
 	end
 
 	Media.DisplayMessage("Wave " .. idx .. "/" .. #Waves .. " — " .. wave.name .. " (Tier " .. wave.tier .. ") inbound!", "")
+	if wave.name == "FutureTech Prototypes" then
+		SpawnFutureTechSupport()
+	end
 	if idx < #Waves then
 		Text = "Next: Wave " .. (idx + 1) .. "/" .. #Waves .. " — " .. Waves[idx + 1].name .. "."
 		RemainingTime = DateTime.Seconds(WaveGapSeconds)
@@ -155,6 +178,7 @@ SendWave = function(idx)
 		Trigger.AfterDelay(DateTime.Seconds(WaveGapSeconds), function() SendWave(idx + 1) end)
 	else
 		FinalWaveSent = true
+		FinalWaveTimeout = DateTime.Seconds(180) -- 3-minute failsafe after final wave
 		timerStarted = false
 		UserInterface.SetMissionText("FINAL WAVE — destroy every attacker to win!", Player.GetPlayer("Neutral").Color)
 	end
@@ -164,17 +188,40 @@ CheckVictory = function()
 	if GameWon or not FinalWaveSent then
 		return
 	end
+	local aliveCount = 0
 	for _, unit in ipairs(LiveFoes) do
 		if not unit.IsDead then
-			return
+			aliveCount = aliveCount + 1
 		end
 	end
-	GameWon = true
-	UserInterface.SetMissionText("YOU SURVIVED ALL " .. #Waves .. " WAVES!", Player.GetPlayer("Neutral").Color)
-	Media.DisplayMessage("The last attacker has fallen. You survived!", "")
-	for _, Spieler in ipairs(ActivePlayer) do
-		if SurviveObjectives[Spieler.InternalName] ~= nil then
-			Spieler.MarkCompletedObjective(SurviveObjectives[Spieler.InternalName])
+	if aliveCount == 0 then
+		GameWon = true
+		UserInterface.SetMissionText("YOU SURVIVED ALL " .. #Waves .. " WAVES!", Player.GetPlayer("Neutral").Color)
+		Media.DisplayMessage("The last attacker has fallen. You survived!", "")
+		for _, Spieler in ipairs(ActivePlayer) do
+			if SurviveObjectives[Spieler.InternalName] ~= nil then
+				Spieler.MarkCompletedObjective(SurviveObjectives[Spieler.InternalName])
+			end
+		end
+		return
+	end
+	-- failsafe: if 3 minutes pass after the final wave and units are stuck,
+	-- force-kill stragglers and declare victory
+	FinalWaveTimeout = FinalWaveTimeout - 100
+	if FinalWaveTimeout <= 0 then
+		Media.DisplayMessage("Time limit reached — clearing remaining attackers.", "")
+		for _, unit in ipairs(LiveFoes) do
+			if not unit.IsDead then
+				unit.Destroy()
+			end
+		end
+		GameWon = true
+		UserInterface.SetMissionText("YOU SURVIVED ALL " .. #Waves .. " WAVES!", Player.GetPlayer("Neutral").Color)
+		Media.DisplayMessage("Victory by timeout — all remaining attackers eliminated!", "")
+		for _, Spieler in ipairs(ActivePlayer) do
+			if SurviveObjectives[Spieler.InternalName] ~= nil then
+				Spieler.MarkCompletedObjective(SurviveObjectives[Spieler.InternalName])
+			end
 		end
 	end
 end
