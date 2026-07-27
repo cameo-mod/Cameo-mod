@@ -281,6 +281,7 @@ SteelQuantumCannon_eliteScatter:
 	Inherits: SteelQuantumCannon_elite
 	Range: 3500
 	-Report:
+	Projectile: LaserZap
 		Color: 00EEFF88
 		-HitAnim:
 		Damage: 2000
@@ -1219,6 +1220,7 @@ SteelAirTurretEScatter:
 	Inherits: SteelAirTurretE
 	Range: 4500
 	-Report:
+	Projectile: LaserZap
 		Color: 00EEFF88
 		Width: 64
 		-HitAnim:
@@ -1699,6 +1701,7 @@ SteelStalkerRailgunEScatter:
 	Inherits: SteelStalkerRailgunE
 	Range: 5000
 	-Report:
+	Projectile: LaserZap
 		Color: 00EEFF88
 		Width: 96
 		-HitAnim:
