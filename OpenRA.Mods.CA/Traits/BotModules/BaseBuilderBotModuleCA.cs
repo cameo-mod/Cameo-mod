@@ -323,9 +323,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		protected override void TraitEnabled(Actor self)
 		{
-			botLimits = self.Owner.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
-			if (botLimits != null)
-				refineryLimit = botLimits.Info.RefineryLimit;
+			RefreshBotLimits();
 
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
 			assignRallyPointsTicks = world.LocalRandom.Next(0, Info.AssignRallyPointsInterval);
@@ -349,6 +347,8 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			if (firstTick)
 			{
+				// Conditional traits are initialized after INotifyCreated, so resolve difficulty limits again here.
+				RefreshBotLimits();
 				ResourceMapModule = bot.Player.PlayerActor.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
 				firstTick = false;
 			}
@@ -476,6 +476,15 @@ namespace OpenRA.Mods.CA.Traits
 				SellUselessRefinery(bot);
 				sellRefineryTick = Info.SellRefineryInterval;
 			}
+		}
+
+		void RefreshBotLimits()
+		{
+			botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
+			refineryLimit = botLimits?.Info.RefineryLimit ?? 0;
+
+			foreach (var builder in builders)
+				builder.SetBotLimits(botLimits);
 		}
 
 		void IBotRespondToAttack.RespondToAttack(IBot bot, Actor self, AttackInfo e)

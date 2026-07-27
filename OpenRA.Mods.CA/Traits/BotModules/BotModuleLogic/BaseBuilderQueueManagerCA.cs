@@ -69,13 +69,22 @@ namespace OpenRA.Mods.CA.Traits
 			if (baseBuilder.Info.NavalProductionTypes.Count == 0)
 				waterState = WaterCheck.DontCheck;
 			limitBuildRadius = world.WorldActor.TraitOrDefault<MapBuildRadius>().BuildRadiusEnabled;
-			botLimits = p.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
-			if (botLimits != null)
+		}
+
+		public void SetBotLimits(BotLimits limits)
+		{
+			botLimits = limits;
+			if (botLimits == null)
 			{
-				productionTypeLimit = botLimits.Info.ProductionTypeLimit;
-				buildingDelayModifier = botLimits.Info.BuildingDelayModifier;
-				buildingIntervalModifier = botLimits.Info.BuildingIntervalModifier;
+				productionTypeLimit = 0;
+				buildingDelayModifier = 100;
+				buildingIntervalModifier = 100;
+				return;
 			}
+
+			productionTypeLimit = botLimits.Info.ProductionTypeLimit;
+			buildingDelayModifier = botLimits.Info.BuildingDelayModifier;
+			buildingIntervalModifier = botLimits.Info.BuildingIntervalModifier;
 		}
 
 		public void Tick(IBot bot)
@@ -499,7 +508,7 @@ namespace OpenRA.Mods.CA.Traits
 				// Does this building have initial delay, if so have we passed it?
 				if (baseBuilder.Info.BuildingDelays != null &&
 					baseBuilder.Info.BuildingDelays.TryGetValue(name, out var delay) &&
-					delay * (buildingDelayModifier / 100) > world.WorldTick)
+					delay * buildingDelayModifier / 100 > world.WorldTick)
 					continue;
 
 				// Does this building have an interval which hasn't elapsed yet?
