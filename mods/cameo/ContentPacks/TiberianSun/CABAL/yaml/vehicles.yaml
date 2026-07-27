@@ -153,6 +153,7 @@ cabal_cyborgreaper:
 		StartIfBelow: 100
 		DamageCooldown: 1
 	WithDeathAnimation:
+		DeathSequencePalette: playerra2
 		PlayerPalette: playerra2
 		CrushedSequencePalette: ra2effect
 
@@ -825,6 +826,7 @@ cabal_heavyreaper:
 		Image: cabal_cyborgreaper
 		PlayerPalette: playerra2
 	WithDeathAnimation:
+		DeathSequencePalette: playerra2
 		PlayerPalette: playerra2
 		CrushedSequencePalette: ra2effect
 
