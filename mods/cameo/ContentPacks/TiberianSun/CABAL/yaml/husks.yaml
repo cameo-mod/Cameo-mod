@@ -92,6 +92,7 @@ cabal_manticore_backup:
 	WithMoveAnimation:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
+	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
 		Condition: buildingrebirth
 		CooldownDuration: 40
