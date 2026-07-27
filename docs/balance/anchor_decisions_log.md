@@ -62,17 +62,19 @@ problem**. (Obelisk Prime shelved as Advanced verifier.)
 2000–6000 cost band around 4000** (no 4× → no absurd 16k builds). **Hard ceiling = BFG-10000 @ 10000
 cost, BuildLimit 1** — nothing in the game costs more.
 
-**(e) Bunker pattern** (extrapolated from existing garrison bunkers — all **Steel**, HP≈100×cost,
-4–6 cargo slots): latin 60k/3/600 · battlebunker 80k/6/800 · tkm 120k/4/600 · yuri 100k/4/1000 ·
-naxi 90k/6/1000 · terran 240k/4/1200 · **bastion 350k/5/2000 (K1.25)**. → **`^BunkerTemplate`: Steel
-armor, no inherent weapon (garrison shoots), ~5 cargo slots, HP = 100×cost; Bastion variant K1.25.**
-Proposed baseline: **cost 800 / HP 80000 / 5 slots** (confirm).
+**(e) Bunker** — `^BunkerTemplate`: **Concrete** armor, no inherent weapon (garrison shoots), Bastion
+variant **K1.25**. **COST FORMULA = `HP/600 × slots`** (NOT the 3-input defense formula — bunkers have
+no own DPS/range). Verified: Soviet battle bunker **80000 HP × 6 slots → 800 = its current price
+EXACTLY**. Keep the iconic bunkers' HP+slots fixed, derive cost (Terran 240k/4 → 1600; battle bunker
+unchanged at 800).
 
 **(f) Standing vehicle items:**
 - **ArtilleryTank verifier = Lunar Grille** ✓. **Juggernaut MkII = real Artillery** (turret only in
   theory; must DEPLOY → stationary → frontal artillery).
-- **Artillery verifier = Naxis Brummbär** (T2, promotion-gated, no odd modifiers, **WC 1.0**). V2
-  nuclear launcher rejected (T3 + nuclear WC≠1). Artilleries compared at **WC 1.0**.
+- **Artillery baseline = RA1 allies artillery** (`ra1_allies_alliedartillery`: **HP 20000 / spd 60 /
+  range 15000 / DPS 375 / cost0 600**, Light armor, frontal). **Verifier = Naxis Brummbär** (T2,
+  promotion-gated, no odd modifiers, **WC 1.0**). V2 nuclear launcher rejected (T3 + nuclear WC≠1).
+  Artilleries compared at **WC 1.0**.
 - **LineBreaker armor = Superheavy** ✓ (was TBD).
 - **`japan_armoredcar` = AntiAir** (currently a SUPPORT vehicle with +50% range; **supports split into
   real supports (exempt) + AntiAir**). **`asianalliance_pulverizer` = AntiAir** ✓.
@@ -85,16 +87,89 @@ Proposed baseline: **cost 800 / HP 80000 / 5 slots** (confirm).
 | Vehicle class | Armor | | Defense template | Armor |
 |---|---|---|---|---|
 | ScoutVehicle | Scout | | BasicDefense | Concrete |
-| LightTank | Medium | | EarlyAdvancedDefense | Concrete |
+| LightTank | Medium | | EarlyAdvancedDefense | **Steel** |
 | AntiAir | Medium | | AntiAirDefense | Concrete |
 | MBT | Heavy | | AdvancedAntiAirDefense | Steel |
 | TankDestroyer | Heavy | | AdvancedDefense | Steel |
 | HighTechTank | Superheavy | | SuperDefense | Steel |
-| Dreadnought | Superheavy | | Bunker | Steel |
+| Dreadnought | Superheavy | | Bunker | **Concrete** |
 | FireSupport | Light | | | |
 | Artillery | Light | | | |
 | ArtilleryTank | Medium | | | |
 | **LineBreaker** | **Superheavy** | | | |
+
+## ★ VEHICLE BASELINE LADDER + LATE RULES (2026-07-27, pre-compact)
+
+**FULL VEHICLE BASELINE LADDER** (HP bumps 2026-07-27 to enable removing template multipliers):
+
+| Class | baseline actor | HP | spd | range | DPS | cost0 | armor |
+|---|---|--:|--:|--:|--:|--:|---|
+_FINAL numbers (maintainer 2026-07-27, second pass — HP + DPS bumped to bake out ALL buffs):_
+
+| ScoutVehicle | `td_nod_buggy` | 40000 | 200 | 4500 | 450 | 300 | Scout |
+| LightTank | `ra1_allies_alliedlighttank` | 100000 | 120 | 5000 | **200** | 400 | Medium |
+| TankDestroyer | `naxis_hetzer` | 150000 | 60 | 7000 | **500** | 600 | Heavy |
+| AntiAir | `latinsyndicate_diablo` | 80000 | 125 | 6000 | **800** | 600 | Medium |
+| Artillery | `ra1_allies_alliedartillery` | 50000 | **70** | 15000 | **500** | 600 | Light |
+| MBT | `tiger.nax` | 200000 | 100 | 5500 | **400** | 800 | Heavy |
+| FireSupport | `td_gdi_mlrs` | 75000 | **90** | 10000 | **600** | 1000 | Light |
+| ArtilleryTank | `ixian_ixcombatsiege` | 125000 | 80 | 12000 | **160** | 1200 | Medium |
+| LineBreaker | `td_nod_flametank` | 300000 | 80 | 2500 | **1000** | 1200 | Superheavy |
+| HighTechTank | `ra1_soviets_mammothtank` | 500000 | 50 | 6000 | **1000** | 2000 | Superheavy |
+| Dreadnought | `terran_warhound` | 600000 | 60 | 6500 | **1200** | 3000 | Superheavy |
+
+**DPS DOUBLED from the first pass** for LightTank (100→200), TankDestroyer (250→500), MBT (200→400),
+ArtilleryTank (80→160), HighTechTank (500→1000). AntiAir→800, LineBreaker→round 1000, Dreadnought→1200,
+**Artillery→500, FireSupport→600**. Scout DPS unchanged (450).
+
+**★ GOAL — REMOVE ALL BUFF MULTIPLIERS** (maintainer 2026-07-27, CONFIRMED): delete **every** template /
+class buff layer — `^VehicleBuffs`, `^InfantryBuffs`, `^AircraftBuffs`, `^TankBuffs`, `^DefenseBuffs`,
+`MainBattleTankBuff`, `HighTechTankBuff`, `SupportVehicleBuff`, `FireSupportBuff`, etc. (both the
+`FirepowerMultiplier@*` and `DamageMultiplier@*`) — and **bake them into the baseline HP + damage** so
+the baseline is WYSIWYG. The HP+DPS bumps in the FINAL table above ARE that bake. **ONLY the two global
+buffs survive** (BALANCE_SYNTHESIS §7): the global **50% firepower reduction + 150% damage multiplier**
+(150% on units+defenses only, buildings exempt). Each actor keeps at most ONE
+`FirepowerMultiplier@<actor>` fine-tune knob. This is the core of the `fit_class` build pass.
+
+**★ WEAPON STRUCTURE RULES (maintainer 2026-07-27):**
+- **Max 2 inherited templates per weapon.** Basic units = **1** weapon-template inherit; upgraded /
+  promotion units = up to **2** (where appropriate). Special fun units (siege tank, siege engine, a
+  few others with many mixed warheads) are **EXEMPT** — regular units must obey.
+- **Weapon-type ↔ unit-class binding** (goal): limit which unit class may carry which weapon type and
+  vice versa — cleaner + consistent. Needs the weapon-type library + `weapon_classes.yaml` wired.
+- **Twin law (locked):** FriendlyFire **and** ExtraDamage twins = **50%** of the main (ExtraDamage any
+  type — SpreadDamage/OpenToppedDamage — and EXCLUDED from the damage total); Percentage = **1 per
+  2000**; only **template-named** warheads may exist (`1Dam` retired). Code: `formula.distribute_damage`
+  / `spread_damage_sum`; guard `audit_warhead_split`.
+
+**★★ PERMISSION RULE (maintainer 2026-07-27 — ABSOLUTE):** NEVER change a weapon's **warhead**, its
+**Burst**, or its **BurstDelays** without **explicit maintainer permission**. Other stats (HP, Damage
+value, Range, Speed, Cost, ReloadDelay, FirepowerMultiplier) may be tuned more freely (especially once
+the synthesized reference data lands). Warhead/burst/burst-delay = ASK FIRST, every time.
+
+**★ REFERENCE DATA INCOMPLETE (2026-07-27):** the synthesized cross-mod reference stats (data-mining)
+are **NOT finished** — several games still un-mined. Balance tuning that leans on the reference band
+waits for it; structural/template work proceeds now.
+
+**★ RECLASSIFICATION FLAGS — one-time check before the build** (current template ≠ new class; confirm
+each is intentional). From the live membership snapshot:
+- **→ new `^AntiAirVehicleTemplate`** (from Support/Scout): `latinsyndicate_diablo` (baseline!),
+  `steelconsortium_barracuda` (verifier!), `ra1_allies_alliedheavyaatank`, `ra1_soviets_flaktruck`,
+  `ra1_soviets_gatlingtank`, `ra2_soviets_flaktrack`, `tkm_flakbus`, `wirbelwind.nax`,
+  `yuri_gatlingtank`, `forgotten_m113adats`, `japan_armoredcar`, `asianalliance_pulverizer`,
+  the two Nod bikes (`td_nod_reconbike`/`td_nod_chemicalattackbike` + TS `ts_nod_attackcycle`).
+- **→ new `^LightTankTemplate`** (from MBT): `ra1_allies_alliedlighttank` (baseline!),
+  `td_nod_lighttank`, `td_nod_lighttankmkii` (verifier!), `ordos_combattank`, + the LightTank member
+  list. **Turreted tanks are ALWAYS Light/MBT/HighTech.**
+- **→ `^TankDestroyerTemplate`** (from LineBreaker): `naxis_hetzer` (baseline!), `naxis_jagdpanzer`,
+  `ordos_tankdestroyer`, `ra1_allies_alliedtankdestroyer`, `ra2_allies_tankdestroyer`.
+- **→ `^DreadnoughtTemplate`** (from LineBreaker): `terran_warhound` (baseline!), `ixian_neocymek`
+  (verifier!), `asianalliance_pulverizermecha`, `schwarzermond_neojagdpanzer`.
+- **→ new `^ArtilleryTankTemplate`** (from FireSupport/Artillery, turreted): `ixian_ixcombatsiege`
+  (baseline!), `schwarzermond_lunargrille` (verifier!), `asianalliance_howitzer`,
+  `td_gdi_archerartillery`, `ts_gdi_juggernautmkii` (deploys → maybe real Artillery).
+- **LineBreaker keeps** only flame/melee/very-short durable (flame tanks, Ogre/Knight/Ultralisk/Megalodon).
+- **FireSupport keeps** long-range fragile (MLRS baseline, missile trucks); LOSES the AA + the siege/turret units.
 
 ## ★ RANGE LADDER (maintainer 2026-07-26 — verified consistent, steps of 500)
 
