@@ -909,6 +909,60 @@ asianalliance_hyperionprojector:
 	ActorStatValues:
 		Upgrades: asianalliance_upgrade_celestialpower
 
+asianalliance_spitfire:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@shape: ^2x2Shape
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 50
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_militaryacademy
+		Description: actor_asianalliance_spitfire.description
+		IconPalette: ra2cameo
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Spitfire
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 100000
+	Selectable:
+		Bounds: 2048, 2048
+	Turreted:
+		TurnSpeed: 24
+		InitialFacing: 896
+		Offset: -1,1,1
+	AttackTurreted:
+		Voice: Attack
+	Armament:
+		Weapon: AsianSpitfireRockets
+		LocalOffset: 888,333,333, 888,-333,333
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	WithRangeCircle:
+	AutoTarget:
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	Power:
+		Amount: -100
+	RevealsShroud:
+		Range: 14000
+	DetectCloaked:
+		Range: 7000
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_dragonfire
+
 asianalliance_tankreactor:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape

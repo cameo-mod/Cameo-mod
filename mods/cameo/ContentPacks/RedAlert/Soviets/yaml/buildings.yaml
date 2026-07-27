@@ -277,6 +277,7 @@ ra1_soviets_airfield:
 	ParatroopersPower@paratroopers:
 		OrderName: SovietParatroopers
 		ChargeInterval: 9000
+		Prerequisites:
 			1: ra1_soviets_upgrade_afterburners
 			2: ra1_soviets_upgrade_afterburners, ra1_soviets_doctrine_conscription
 			3: ra1_soviets_upgrade_afterburners, ra1_soviets_doctrine_industrialefficiency

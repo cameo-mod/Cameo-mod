@@ -1191,6 +1191,123 @@ AsianTurretPlasma:
 	Warhead@FireShrapnel: FireShrapnel
 		Amount: 8
 
+AsianHarbingerPlasma:
+	Inherits: ^LightFlameWeapon
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^MediumCannon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
+	Inherits: ^RA2MediumMissile
+	Range: 7777
+	Burst: 2
+	BurstDelays: 5
+	ReloadDelay: 60
+	Report: aa_plasfire.wav
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Speed: 555
+		Image: aa_plasred
+		Palette: ra2effect
+		ContrailStartColor: DD000088
+		ContrailLength: 34
+		-PointDefenseTypes:
+	Warhead@LightFlameWeapon: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@MediumMissile: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment
+		Amount: 1
+		AimChance: 0
+		AimTargetStances: Enemy, Neutral
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_apoc_explosion
+		ImpactSounds: gexpapoa.wav
+		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+
 AsianRailgun:
 	Inherits: ^RailgunWeapon
 	Range: 9600
@@ -2127,6 +2244,46 @@ AsianMLRS:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+
+AsianSpitfireRockets:
+	Inherits: AsianMLRS
+	ReloadDelay: 90
+	Burst: 8
+	BurstDelays: 4
+	Range: 12000
+	MinRange: 2400
+	Report: vmigatta.wav
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_large_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 
 AsianKamikazeImpactTargeting:
 	ReloadDelay: 25
