@@ -16,14 +16,26 @@ propose baseline+verifier → they give exact numbers → LOCK here → later: c
 **LOCKED (cost0):** ScoutVehicle 300 · LightTank 400 · AntiAir 600 · TankDestroyer 600 · MBT 800
 (Tiger pivot, signed) · FireSupport 1000 · ArtilleryTank 1200 (baseline; verifier pending) · LineBreaker
 1200 · HighTechTank 2000 · Dreadnought 3000.
-**➡ NEXT DEFENSE CLASSES:** Basic + AntiAir + Advanced(baseline) + Super(baseline) **LOCKED**. Remaining:
-**AdvancedDefense cost (idea B: 1000 + DPS trim)** + **Bunker** → then aircraft (rearmable formula first)
-/ naval. Defense formula = **3-input**; **verifier convention = 2.5×HP + 2.5×DPS → 4.0×** (Basic 2000,
-AntiAir 2400; Super = epic tier, no 4×); armor Concrete/Steel; flat-10 regen. **Nuclear Warhead Versus
-fix CONFIRMED (boot-gated, step 3).** Verifiers PENDING: ArtilleryTank (lunar grille / Juggernaut Mk II);
-Artillery (V2).
-**Open flags:** LineBreaker armor (TBD); `japan_armoredcar` Scout-vs-AntiAir; umlaut renames
-(`naxis_brummbr`→brummbar, `naxis_kbelwagen`→kubelwagen — boot-gated); `asianalliance_pulverizer`→AntiAir.
+**➡ RESUME AFTER COMPACT — make ALL pending decisions, then FINISH ALL TEMPLATES.** Defenses = **7
+templates** now (see "DEFENSE TEMPLATE ROSTER" below). Baselines locked: Basic 500, AntiAir 600, Advanced
+1000 (idea B), Super (plasma, cost open). **Verifier convention = 2.5×HP + 2.5×DPS → 4.0×** (Basic
+verifier = **Photon Cannon @2000**, AntiAir 2400).
+**★ OPEN DECISIONS (all deferred to after compact):**
+- (a) NAME the new hybrid template `^AdvancedAntiAirDefense?` (Ixian Missile Tower + Japan Ballista Tower,
+  range 10000, T2). **This solves the Ixian AA gap** — missile tower stays here, NOT moved to Advanced T3.
+- (b) NEW `^EarlyAdvancedDefenseTemplate` (Nod Laser Tower, Photon Cannon) — shares Basic's formula, T1/2
+  exempt from the T3 rule.
+- (c) Advanced verifier = Cabal Obelisk Prime? — its **charge K 0.75 vs baseline K 1.0** breaks the 4×
+  identity — UNRESOLVED.
+- (d) Super baseline 4000 (clean, epic ceiling — recommend) vs 2500 (overlaps).
+- (e) Define **Bunker** (HP + cargo slots; Bastion K1.25).
+- (f) ArtilleryTank verifier (lunar grille / Juggernaut MkII); Artillery verifier (V2); LineBreaker armor;
+  `japan_armoredcar` Scout-vs-AntiAir; `asianalliance_pulverizer`→AntiAir.
+- **THEN BUILD every template in `defaults.yaml` (boot-gated)** + apply the Nuclear Versus fix (step 3) +
+  scout self-heal + Step=HP/1000 + per-class armor + power/cost + umlaut renames → `fit_class` → sign-off.
+**★ BUG (NFWRambo, player-visible regression — investigate after compact, jumps the queue):** campaign
+maps ("Special Delivery") vanished from the map editor + mission selector; triggered by adding factions to
+`map.yaml`, or adding a `rules.yaml` + lua scripts. See `docs/design/ROADMAP.md`.
 **Future audits:** projectile speed = range÷2 (V3-type missiles exempt); weapon-type↔unit-type binding.
 Infantry anchors (14) already exist, need sign-off (commando needs a verifier). **After all anchors:**
 create templates in defaults.yaml (boot-gated), run `fit_class`, wire `check_band` into `run_all.sh`.
@@ -541,6 +553,37 @@ in EITHER 1000 or 2500 steps** (both fine). No per-actor `Step = HP/n` for defen
 Bunker = **Steel**. Build-time modifiers: Basic **100** (longest), Advanced/Bunker **75**, AntiAir/Super
 **50** (quickest). *(Advanced/Super build-times may need to lengthen to match "plan-ahead" intent +
 the new power/cost ratios — review in the implementation pass.)*
+
+## ◧ DEFENSE TEMPLATE ROSTER — grew 5 → 7 (maintainer 2026-07-26; FINALIZE + BUILD after the compact)
+
+**Common:** verifier convention **2.5×HP + 2.5×DPS + same range → 4× cost**; power/cost Basic&AntiAir /20,
+Advanced /10, Super /5; armor Basic/AntiAir = Concrete, Advanced/Super/Bunker = Steel; regen flat 10/step.
+
+1. **`^BasicDefenseTemplate`** — baseline GDI Guard Tower (100k/7000/DPS400/**500**). **Verifier = Protoss
+   Photon Cannon @ 2000** (4× of 500 — maintainer: "we don't even need to change anything"). Concrete, T1.
+2. **NEW `^EarlyAdvancedDefenseTemplate`** — early-game advanced defenses (**TD Nod Laser Tower, Protoss
+   Photon Cannon**). **SHARES the BasicDefense formula + SAME weights**; the ONLY difference = it is an
+   **EXCEPTION to the "must be Tier 3" rule → allowed on Tier 1/2** (and the defense audit must accept
+   that). The Photon Cannon (2000) IS the shared Basic verifier point.
+3. **`^AntiAirDefenseTemplate`** — pure AA. Flak Cannon (150k/12500/DPS1000/**600**) → Air Defender @ 2400.
+   Range band 10000–15000. Concrete, quickest build.
+4. **NEW hybrid `^AdvancedAntiAirDefenseTemplate`** (name TBD) — **between AntiAir and Advanced, range
+   EXACTLY 10000** (where the AntiAir band 10000–15000 meets the Advanced band 8000–10000). For **advanced
+   turrets that ALSO shoot air and are their faction's ONLY AA**: **Ixian Missile Tower**
+   (`ixian_rocketturret`), **Japan Ballista Tower** (`japan_ballistatower`). **Allowed on Tier 2**, accepted
+   by the defense audit. **★ SOLVES THE IXIAN AA GAP** — the Missile Tower stays AA-capable in THIS class;
+   the earlier "move it to pure Advanced T3" plan is **DROPPED**.
+5. **`^AdvancedDefenseTemplate`** — Advanced Guard Tower (200k/9000/DPS~800/**1000**), Steel, T3. **★
+   VERIFIER STILL OPEN:** the **Cabal Obelisk Prime** is the strongest advanced defense (ideal verifier)
+   BUT its **charge-delay K 0.75** mismatches the baseline's K 1.0, breaking the clean 4× identity.
+   **Decide after compact** (accept K-shift / matched-K baseline / non-charge verifier).
+6. **`^SuperDefenseTemplate`** — epic capstone = **2×2 footprint AND cost ≥ ~4000**. Plasma Cannon baseline.
+   **★ OPEN: cost 4000 (clean boundary, epic ceiling, no 4× verifier — RECOMMEND) vs 2500 (overlaps).**
+7. **`^BunkerTemplate`** — NOT YET DEFINED. Price = HP + cargo slots; Bastion (defense+bunker) = K1.25.
+
+**★ DECISIONS PENDING AFTER COMPACT:** (4) name the hybrid template; (5) Advanced verifier + the Obelisk
+Prime charge-K problem; (6) Super baseline 4000 vs 2500; (7) define Bunker; then **BUILD all defense
+templates in defaults.yaml (boot-gated)**. Plus the standing vehicle verifiers (ArtilleryTank, Artillery).
 
 **★ Power-to-Cost per defense TYPE** (was a uniform `cost/20`):
 | Type | Power draw | Build-time modifier |

@@ -4,9 +4,10 @@ _The living work queue, resumable by any agent. Rule zero: crashes and
 bugs ALWAYS jump the queue. Ordering within a section: **quickest wins
 first, then by severity**. Effort: S < 1h, M = one session, L = multi-
 session. Every completed item gets its commit hash; every new order
-lands here first. Goal: **finish the CABAL faction**, then the dune
-factions, everything through the balance workbook. Faction reference:
-[FACTIONS.md](../FACTIONS.md)._
+lands here first. Goal: **mod-synthesis balance overhaul** (see ★ MAJOR
+PROGRAM below) — finish infantry classes, then vehicles/aircraft/defenses/
+naval. CABAL faction work is largely complete; remaining CABAL items are
+flagged inline. Faction reference: [FACTIONS.md](../FACTIONS.md)._
 
 > **Multi-agent repo.** Three contributors touch this tree: the
 > maintainer (AedisToru), **333ggg** (i333ggg@yandex.ru — works Starcraft
@@ -18,6 +19,18 @@ factions, everything through the balance workbook. Faction reference:
 > GDI), unrelated to CABAL.
 
 ---
+
+## 🔴 BUG (jumps the queue) — campaign maps vanish from editor + mission selector
+
+**Reported by NFWRambo 2026-07-26.** Player-made **campaign maps** ("Special Delivery") are **no longer
+selectable in the map editor OR the mission selector**. Onset correlates with editing a map's
+`map.yaml` to **add new factions**, and/or adding a **`rules.yaml` + lua script files** to the map.
+Blocks his map-making. **Likely cause:** a map-level rules/faction override that fails to parse or
+references a faction/actor that no longer resolves (rename fallout?), so the map is silently rejected
+at load/enumeration. **To investigate:** get "Special Delivery"'s `map.yaml` + `rules.yaml`; try loading
+it and check `%APPDATA%/OpenRA/Logs` for a parse/enumeration exception; diff its faction list against the
+current faction set; check whether the map-rules loader hard-fails (dropping the map from the list) vs
+warns. **Owner: next session (post-compact).**
 
 ## ★ MAJOR PROGRAM (2026-07-25): mod-synthesis balance overhaul — see [`BALANCE_SYNTHESIS.md`](BALANCE_SYNTHESIS.md)
 
@@ -1426,7 +1439,7 @@ All other factions have a single, thematically appropriate wall type.
 
 ### Backlog — Rank decorations & elite weapons (DESIGN §16, 2026-07-15)
 
-- [ ] **Fix TS Nod rank decoration** — 13 TS Nod actors were using
+- [x] **Fix TS Nod rank decoration** — 13 TS Nod actors were using
   `^GDIRankDecoration` instead of `^NodRankDecoration`. FIXED in this
   session. Also fixed 4 TS Forgotten actors in `defenses.yaml` and 2
   core `tiberiansun.yaml` Nod units (`ts_nod_attackcycle`,
