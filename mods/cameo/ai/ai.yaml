@@ -4473,6 +4473,8 @@ Player:
 		IdleBaseUnitsMaximum: 50
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000
+		# One immediately buildable basic combat unit for each barracks-first faction.
+		OpeningDefenseUnitTypes: td_gdi_minigunner, td_nod_minigunner, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, ts_gdi_lightinfantry, ts_nod_lightinfantry, forgotten_mutant, cabal_cyborginfantry, ra2_allies_gi, ra2_soviets_conscript, yuri_initiate, asianalliance_asianmilitia, steelconsortium_clonetrooper, latinsyndicate_latinmilitia, naxis_naxiriflerecruit, schwarzermond_lunarsoldier, futuretech_enforcer, ixian_lightinfantry, ordos_lightinfantry, tkm_rifleman
 		MaxAircraft: 25
 		MaintainAirSuperiority: true
 		MaxAirSuperiority: 25

@@ -213,6 +213,7 @@ namespace OpenRA.Mods.CA.Traits
 				if ((playerResources.GetCashAndResources() < minCashRequirement && !baseBuilder.Info.RefineryTypes.Contains(item.Name)) || itemQueuedThisTick)
 					return false;
 
+				baseBuilder.RecordOpeningStructureQueued(queue, item);
 				bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
 				itemQueuedThisTick = true;
 				SetBuildingInterval(item.Name);
