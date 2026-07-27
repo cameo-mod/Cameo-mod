@@ -42,6 +42,60 @@ create templates in defaults.yaml (boot-gated), run `fit_class`, wire `check_ban
 **Upgrades LAST.** **Weapons.yaml below-divider cleanup = ON HOLD** (`weapons_cleanup_plan.md`, no
 deletions). WeaponClass restored to `weapon_classes.yaml`.
 
+## ★ DECISIONS 2026-07-27 (post-compact template lock — all confirmed)
+
+**(a) `^AdvancedAntiAirDefense`** (NEW hybrid, range **10000**, **T2**, closes Ixian AA gap):
+- **Baseline = Ixian Missile Turret** = **2×HP + 2×DPS of the TD GDI Advanced Guard Tower @ 2.5× price**
+  (Guard Tower = 200k HP / DPS 1000 / cost 1200 → Missile Turret = **400k HP / DPS 2000 / cost 3000**,
+  range 10000). **SINGLE weapon** vs both ground + air (simple).
+- **Verifier = Japan Ballista Tower** — cheaper + weaker, **same 10000 range**, but **TWO weapons
+  balanced SEPARATELY**, each keeping its behaviour: **artillery-burst anti-ground** + **single
+  high-damage missile anti-air** (both range 10000).
+
+**(c) AdvancedDefense verifier = Consortium Quantum Cannon** (`steelconsortium_quantumcannon`),
+re-priced to **4000** (= 4.0× Advanced baseline 1000). **Dual `SteelQuantumTurretRail`** summed →
+give it the consolidated **`FirepowerMultiplier@steelconsortium_quantumcannon: 50`** so 2 weapons ×0.5 =
+net 1× (per the multiplier-consolidation rule). Replaces Cabal Obelisk Prime → **drops the charge-K
+problem**. (Obelisk Prime shelved as Advanced verifier.)
+
+**(d) SuperDefense — baseline 4000, NO verifier.** Instead **cluster all super defenses in a
+2000–6000 cost band around 4000** (no 4× → no absurd 16k builds). **Hard ceiling = BFG-10000 @ 10000
+cost, BuildLimit 1** — nothing in the game costs more.
+
+**(e) Bunker pattern** (extrapolated from existing garrison bunkers — all **Steel**, HP≈100×cost,
+4–6 cargo slots): latin 60k/3/600 · battlebunker 80k/6/800 · tkm 120k/4/600 · yuri 100k/4/1000 ·
+naxi 90k/6/1000 · terran 240k/4/1200 · **bastion 350k/5/2000 (K1.25)**. → **`^BunkerTemplate`: Steel
+armor, no inherent weapon (garrison shoots), ~5 cargo slots, HP = 100×cost; Bastion variant K1.25.**
+Proposed baseline: **cost 800 / HP 80000 / 5 slots** (confirm).
+
+**(f) Standing vehicle items:**
+- **ArtilleryTank verifier = Lunar Grille** ✓. **Juggernaut MkII = real Artillery** (turret only in
+  theory; must DEPLOY → stationary → frontal artillery).
+- **Artillery verifier = Naxis Brummbär** (T2, promotion-gated, no odd modifiers, **WC 1.0**). V2
+  nuclear launcher rejected (T3 + nuclear WC≠1). Artilleries compared at **WC 1.0**.
+- **LineBreaker armor = Superheavy** ✓ (was TBD).
+- **`japan_armoredcar` = AntiAir** (currently a SUPPORT vehicle with +50% range; **supports split into
+  real supports (exempt) + AntiAir**). **`asianalliance_pulverizer` = AntiAir** ✓.
+
+**★ AntiAir range REVISED: baseline 6000, band 5000–7000** (was 5000/4500–5500). **Range ⟂ HP
+(inversely)**: fragile AA (the two Nod bikes) → longer range (→7000) to survive; tanky AA → shorter
+(→5000). **AA weapon = ground +50% = 9000.**
+
+**★ FULL ARMOR TABLE (confirm before build):**
+| Vehicle class | Armor | | Defense template | Armor |
+|---|---|---|---|---|
+| ScoutVehicle | Scout | | BasicDefense | Concrete |
+| LightTank | Medium | | EarlyAdvancedDefense | Concrete |
+| AntiAir | Medium | | AntiAirDefense | Concrete |
+| MBT | Heavy | | AdvancedAntiAirDefense | Steel |
+| TankDestroyer | Heavy | | AdvancedDefense | Steel |
+| HighTechTank | Superheavy | | SuperDefense | Steel |
+| Dreadnought | Superheavy | | Bunker | Steel |
+| FireSupport | Light | | | |
+| Artillery | Light | | | |
+| ArtilleryTank | Medium | | | |
+| **LineBreaker** | **Superheavy** | | | |
+
 ## ★ RANGE LADDER (maintainer 2026-07-26 — verified consistent, steps of 500)
 
 | Class | baseline range | band (±500) |
