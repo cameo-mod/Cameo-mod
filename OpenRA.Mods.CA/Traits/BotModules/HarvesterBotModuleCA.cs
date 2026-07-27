@@ -493,9 +493,42 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			respondToAttackCooldown = 30;
-			var scanFromActor = dockClientManager.ClosestDock(null, forceEnter: true, ignoreOccupancy: true)?.Actor;
-			if (scanFromActor != null)
-				bot.QueueOrder(new Order("Dock", self, Target.FromActor(scanFromActor), false));
+			var dock = dockClientManager.ClosestDock(null, forceEnter: true, ignoreOccupancy: true);
+			if (dock == null)
+				return;
+
+			var harvester = self.Trait<Harvester>();
+			if (!harvester.IsEmpty)
+			{
+				bot.QueueOrder(new Order("ForceDock", self, Target.FromActor(dock.Value.Actor), false));
+				return;
+			}
+
+			// Empty harvesters have nothing to unload. Retreat clear of the refinery entrance,
+			// then resume harvesting instead of attempting a dock that will be rejected.
+			var mobile = self.Trait<Mobile>();
+			var deliveryLoc = world.Map.CellContaining(dock.Value.Trait.DockPosition);
+			var preferredRetreatLoc = deliveryLoc + harvester.Info.UnblockCell;
+			bool IsValidRetreatLoc(CPos loc)
+			{
+				return loc != deliveryLoc &&
+					mobile.CanEnterCell(loc, check: BlockedByActor.Immovable) &&
+					mobile.CanStayInCell(loc) &&
+					mobile.PathFinder.PathMightExistForLocomotorBlockedByImmovable(
+						mobile.Locomotor, self.Location, loc);
+			}
+
+			var retreatLoc = mobile.NearestCell(preferredRetreatLoc, IsValidRetreatLoc, 1, 5);
+			var hasRetreat = IsValidRetreatLoc(retreatLoc);
+			if (hasRetreat)
+				bot.QueueOrder(new Order("Move", self, Target.FromCell(world, retreatLoc), false));
+
+			var wrapper = harvesters.TryGetValue(self, out var existingWrapper)
+				? existingWrapper
+				: new HarvesterTraitWrapper(self);
+			var resourceTarget = FindNextResource(self, wrapper);
+			if (resourceTarget.Type != TargetType.Invalid)
+				bot.QueueOrder(new Order("Harvest", self, resourceTarget, hasRetreat));
 		}
 	}
 }
