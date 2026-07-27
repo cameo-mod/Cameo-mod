@@ -171,6 +171,15 @@ SCVRepair:
 	ReloadDelay: 5
 	Range: 2000
 
+SCWorkerExplode:
+	Inherits: UnitExplodeSmall
+	Warhead@Grenade: SpreadDamage
+		Damage: 12000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 6000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 6
+
 RavenTurretSpawner:
 	ValidTargets: Air, Ground, Water
 	ReloadDelay: 25
