@@ -315,7 +315,10 @@ cabal_orbdrone:
 
 cabal_orbdrone_slave:
 	Inherits: cabal_orbdrone
-	-Buildable:
+	Valued:
+		Cost: 270
+	Buildable:
+		-Queue:
 	-UpdatesPlayerStatistics:
 	-ActorLostNotification:
 	-MapEditorData:

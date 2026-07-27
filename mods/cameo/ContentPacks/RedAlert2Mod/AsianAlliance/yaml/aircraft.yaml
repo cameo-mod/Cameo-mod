@@ -205,7 +205,7 @@ kami.asian:
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Valued:
-		Cost: 80
+		Cost: 90
 	Tooltip:
 		Name: Kamikaze
 	Buildable:
@@ -279,7 +279,7 @@ kami.asian:
 kami_chemical.asian:
 	Inherits: kami.asian
 	Valued:
-		Cost: 160
+		Cost: 225
 	Health:
 		HP: 15000
 	ChangesHealth@SelfHealing:
