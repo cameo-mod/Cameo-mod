@@ -214,6 +214,19 @@ Clean **250 HP/credit spine** across LightTank/TankDestroyer/MBT/LineBreaker/Hig
 lower (Artillery 83, FireSupport 75); Scout leads DPS/Cost (1.5). **ArtilleryTank DPS/Cost 0.133** is
 the deliberate outlier (tanky long-range siege, not a damage dealer — flagged, standing unless changed).
 
+**★ LADDER REVISION 2026-07-27c (maintainer, ratio-driven):**
+- **LineBreaker: cost 1200 → 1000** (HP 300000 / DPS 1000) → **HP/Cost 300 (highest), DPS/Cost 1.0**. ✓ LOCKED
+- **Artillery: cost 600 → 500** (HP 50000 / DPS 500) → **HP/Cost 100, DPS/Cost 1.0**. ✓ LOCKED
+- **TankDestroyer: DPS 500 → 600** (HP 150000 / cost 600) → HP/Cost 250, **DPS/Cost 1.0**. ✓ LOCKED
+- **Dreadnought — UNDER-DETERMINED (2 targets: HP/Cost 300 = LineBreaker, DPS/Cost 0.5 = turreted tanks;
+  3 vars).** Two ways: **(A)** keep cost 3000 (apex) → **HP 900000 / DPS 1500**; **(B)** keep HP 600000
+  → **cost 2000 / DPS 1000** (ties HighTech cost). ⏳ maintainer to pick.
+- **ArtilleryTank — UNDER-DETERMINED ("HP/Cost + DPS/Cost between Tank(MBT 250/0.5) and Artillery
+  (100/1.0)" → midpoints HP/Cost 175, DPS/Cost 0.75).** **(A)** keep cost 1200 → **HP 210000 / DPS 900**;
+  **(B)** keep HP 125000 → **cost ~700 / DPS 525**. ⏳ maintainer to pick.
+- **`asianalliance_viper` class STILL OPEN** (LightTank per additions list vs Artillery per members list;
+  currently Artillery, frontal no-turret — left as Artillery pending decision).
+
 ## ★ RANGE LADDER (maintainer 2026-07-26 — verified consistent, steps of 500)
 
 | Class | baseline range | band (±500) |
