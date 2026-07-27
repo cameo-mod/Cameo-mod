@@ -370,13 +370,12 @@ namespace OpenRA.Mods.CA.Traits
 			// This gets used quite a bit, so let's cache it here
 			var power = GetProducibleBuilding(baseBuilder.Info.PowerTypes, buildableThings,
 				a => a.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount));
-			var prioritizeOpeningBarracks = botLimits != null && botLimits.Info.PrioritizeBarracksBeforeRefinery
+			var openingBarracksPolicyActive = botLimits != null && botLimits.Info.PrioritizeBarracksBeforeRefinery
 				&& baseBuilder.Info.BarracksBeforeRefineryFactions.Contains(player.Faction.InternalName)
-				&& !baseBuilder.OpeningBarracksPriorityCompleted
-				&& !baseBuilder.HasBuiltOrQueuedBarracks();
+				&& !baseBuilder.OpeningBarracksPriorityCompleted;
 
-			// Do not let another empty construction queue duplicate a pending opening power plant.
-			if (prioritizeOpeningBarracks && baseBuilder.HasQueuedPowerPlant())
+			// Wait for the queued opening structure to be placed before allowing another construction queue to proceed.
+			if (openingBarracksPolicyActive && (baseBuilder.HasQueuedPowerPlant() || baseBuilder.HasQueuedBarracks()))
 				return null;
 
 			// First priority is to get out of a low power situation
@@ -386,7 +385,7 @@ namespace OpenRA.Mods.CA.Traits
 					return power;
 			}
 
-			if (prioritizeOpeningBarracks)
+			if (openingBarracksPolicyActive && !baseBuilder.HasBuiltOrQueuedBarracks())
 			{
 				// Finish the opening power plant before starting the barracks.
 				if (!baseBuilder.HasCompletedPowerPlant())

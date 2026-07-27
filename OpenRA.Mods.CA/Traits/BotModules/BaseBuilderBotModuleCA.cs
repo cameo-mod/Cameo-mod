@@ -675,6 +675,8 @@ namespace OpenRA.Mods.CA.Traits
 		public bool HasBuiltOrQueuedBarracks() =>
 			AIUtils.CountActorByCommonName(barracksBuildings) > 0 || CountQueuedBuildings(Info.BarracksTypes) > 0;
 
+		public bool HasQueuedBarracks() => CountQueuedBuildings(Info.BarracksTypes) > 0;
+
 		public bool HasQueuedPowerPlant() => CountQueuedBuildings(Info.PowerTypes) > 0;
 
 		int CountQueuedBuildings(IReadOnlySet<string> buildingTypes) =>
