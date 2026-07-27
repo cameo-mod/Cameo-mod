@@ -1,6 +1,6 @@
 # Incident: TD GDI Release-Regression Investigation
 
-**Status:** open — no palette or actor-reference fix may be made until the affected scenario is boot-tested and the current release comparison is complete.
+**Status:** crash resolved (boot-verified 2026-07-17, ROADMAP §P0 CRASH) — the death palette commit (9579827e9) was reverted per user instructions. The `brik:` sequence crash was fixed by correcting references to existing TD filenames and boot-verified. The remaining open item is the **TS-only death palette audit** (ROADMAP, unchecked): the original palette fixes in `a2b4de333` and `b417c6f96` may have set wrong palette values for some TS actors; a smarter audit script is needed to check TS content packs specifically.
 
 ## Evidence source
 
@@ -16,7 +16,7 @@ System.IO.FileNotFoundException: cameo|sequences/tiberiandawn.yaml:1161: futuret
 
 The current `brik:` sequence had two references to nonexistent `futuretech_concretebarrier_brik.shp`. The current asset tree contains the original TD files `bits/td/brik.shp` and `bits/td/brikicon.png`; the known-good release uses those names. Both current sequence references were corrected locally to those existing original filenames.
 
-**Verification pending:** successful boot to the main menu with no new exception log. Do not mark this incident resolved until that happens.
+**Boot verification:** PASSED 2026-07-17 (ROADMAP §P0 CRASH: "Boot verified"). No new exception logs generated. The crash component of this incident is closed.
 
 ## TD GDI vehicle migration comparison
 
@@ -42,18 +42,18 @@ The GDI vehicle `PlayerPalette` overrides match release behavior:
 - default `player`: MCV, APC, Humvees, tanks, MLRS, Assault APC, Predator, Mammoth Mk III;
 - `player_rgba`: Boxer, Archer Artillery, Defense Rig.
 
-The release and current `player` palette definitions, vehicle/aircraft body traits, and inspected sprite file sizes do not show a proven palette-data regression. The reported visual issue remains unconfirmed until a successful boot allows an in-game reproduction.
+The release and current `player` palette definitions, vehicle/aircraft body traits, and inspected sprite file sizes do not show a proven palette-data regression. The reported visual issue remains unconfirmed pending in-game reproduction.
 
 ## Firehawk comparison
 
 - Release actor `gdifirehawk` and current `td_gdi_firehawk` both rely on the default `player` palette.
 - The renamed Firehawk sprite has the same size as the release asset.
 - The Firehawk husk uses the corresponding renamed sequence in the current tree.
-- No data-only cause of palette flicker was established. Reproduce after boot recovery before modifying palette, animation, or trait data.
+- No data-only cause of palette flicker was established. Reproduce in-game before modifying palette, animation, or trait data.
 
-## Required next steps
+## Remaining next steps
 
-1. Boot after the concrete-barrier repair; preserve any next exception exactly.
+1. **TS-only death palette audit** (ROADMAP, unchecked): build a smarter audit script that only checks TS content packs and reports mismatches between `PlayerPalette` and `DeathSequencePalette` for TS actors. The original fixes in `a2b4de333` and `b417c6f96` may have set wrong palette values for some TS actors.
 2. Run `audit_sequences.py` and record the current output in `docs/audit/latest/`.
 3. Compare GDI and Nod sequence key ownership and actor image resolution using the release build, with explicit checks for MCV, harvester, Firehawk, Construction Yard transform, and all GDI vehicle tooltips.
 4. Create a targeted reproducible map or in-game checklist before any palette change.

@@ -33,7 +33,7 @@ Live crashes and faction bugs (CABAL Backup Systems, husk repair/reanimate, cybo
 
 ## Research and constraints discovered
 
-1. **Read order required before touching YAML**: `docs/DESIGN.md` → `docs/audit/SUMMARY.md` → `docs/Cameo_Knowledge_Base_Manual.md` → `docs/MASTER_REPORT.md` (§9/§10/§13).
+1. **Read order required before touching YAML**: Follow the canonical reading order in [`docs/README.md`](../README.md). Then consult `docs/audit/SUMMARY.md`, `docs/Cameo_Knowledge_Base_Manual.md`, and `docs/MASTER_REPORT.md` (§9/§10/§13) for additional context.
 2. **Naming grammar** (`DESIGN.md` §1):
    - One lowercase group, no hyphens, underscores only.
    - Game prefixes only on collisions.

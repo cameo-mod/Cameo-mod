@@ -6,13 +6,13 @@ Please report bugs and crashes at our [Discord](https://discord.gg/Xn2eSpS) so t
 
 The key scripts in this SDK are:
 
-| Windows               | Linux / macOS            | Purpose
+| Windows               | Linux / macOS            | Purpose |
 | --------------------- | ------------------------ | ------------- |
-| make.cmd              | Makefile                 | Compiles the mod and fetches dependencies (including the OpenRA engine).
-| launch-game.cmd       | launch-game.sh           | Launches the mod from the SDK directory.
-| launch-server.cmd     | launch-server.sh         | Launches a dedicated server for the mod from the SDK directory.
-| utility.cmd           | utility.sh         | Launches the OpenRA Utility for the mod.
-| &lt;not available&gt; | packaging/package-all.sh | Generates release installers for the mod.
+| make.cmd              | Makefile                 | Compiles the mod and fetches dependencies (including the OpenRA engine). |
+| launch-game.cmd       | launch-game.sh           | Launches the mod from the SDK directory. |
+| launch-server.cmd     | launch-server.sh         | Launches a dedicated server for the mod from the SDK directory. |
+| utility.cmd           | utility.sh               | Launches the OpenRA Utility for the mod. |
+| _(not available)_     | packaging/package-all.sh | Generates release installers for the mod. |
 
 To launch Cameo from the development environment you must first compile the mod by running `make.cmd` (Windows), or opening a terminal in the SDK directory and running `make` (Linux / macOS).  You can then run `launch-game.cmd` (Windows) or `launch-game.sh` (Linux / macOS) to run your game.
 

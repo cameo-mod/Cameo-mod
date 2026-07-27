@@ -1,5 +1,10 @@
 # MEGAPLAN — YAML Clean-up Program: Zero Errors, Zero Warnings
 
+> **Non-binding index.** Per `docs/README.md`, this is a program index, not an
+> active work queue. Live task status and completion tracking belong in
+> `docs/design/ROADMAP.md`. The phase status and commit log below are kept for
+> reference only — do not update them as a parallel task tracker.
+
 Achieve zero errors and zero warnings from `OpenRA.Utility.exe cameo --check-yaml` across the entire mod.
 
 ## Baseline
@@ -197,7 +202,7 @@ After each phase:
 1. Re-run `--check-yaml` and save output
 2. Run `analyze_check_yaml.py` to compare against baseline
 3. Commit with message `fix(yaml-cleanup): phase N — <description>`
-4. Update this document with progress
+4. Update `docs/design/ROADMAP.md` with progress (this document is an index, not a live tracker)
 
 ## Final Goal
 
@@ -208,7 +213,7 @@ This is achievable but requires sustained effort across multiple sessions. The b
 - Phase 6 (unused conditions) — eliminates ~77% of all warnings
 - Phase 2 (Interactable/Selectable) — eliminates both errors AND warnings simultaneously
 
-## Progress Log
+## Progress Log (snapshot — not actively maintained; see ROADMAP.md for live status)
 
 | Date | Phase | Commit | Impact |
 |---|---|---|---|
@@ -219,7 +224,7 @@ This is achievable but requires sustained effort across multiple sessions. The b
 | 2026-07-23 | Phase 4 | `eda48914b` | RepairActors, CargoConditions, ExcludedActorTypes cleanup |
 | 2026-07-23 | Phase 4 | `f6b876358` | Restore ordos_contaminator, move RepairActors to ^Conyard template |
 | 2026-07-23 | Phase 2 | `ed5b9cbca` | Fix Interactable at root (^upgrade.template) instead of child patch |
-| 2026-07-23 | Phase 5 | (pending) | ~disabled* rename (241 replacements), ProvidesPrerequisite additions |
+| 2026-07-23 | Phase 5 | committed | ~disabled* rename (241 replacements), ProvidesPrerequisite additions |
 
 ## Enforcement
 

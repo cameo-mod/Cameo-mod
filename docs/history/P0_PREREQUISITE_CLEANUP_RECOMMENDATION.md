@@ -1,5 +1,16 @@
 # P0 Recommendation: Prevent Behavior-Changing YAML Cleanup
 
+> **OVERRULED by [AEDIS_RESPONSE_DISABLED_POLICY_2026-07-24.md](AEDIS_RESPONSE_DISABLED_POLICY_2026-07-24.md).**
+> Aedis confirmed that consolidating WIP/unbuildable/disable markers to `~disabled`
+> is intentional project policy. The concerns below are preserved as historical
+> context, but the policy decision supersedes the recommendation against blanket
+> replacement. The remaining valid question (accidental vs. intentional disabling)
+> still applies on a per-actor basis.
+>
+> **Implementation:** See `docs/design/MEGAPLAN_YAML_CLEANUP.md` Phase 5 for the
+> completed `~disabled` consolidation. The binding rule is codified in `DESIGN.md`
+> §9 and enforced by `tools/audit/audit_yaml_lint_rules.py`.
+
 ## Summary
 
 The goal of reducing `OpenRA.Utility --check-yaml` warnings is useful, but

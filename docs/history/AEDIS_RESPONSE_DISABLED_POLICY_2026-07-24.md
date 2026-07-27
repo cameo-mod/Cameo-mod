@@ -62,9 +62,12 @@ of `~disabled`, or its replacement of an older marker, is not itself a defect.
 
 ## Effect on the prerequisite triage
 
-The actors listed as "needs individual review" in
-`PREREQUISITE_TRIAGE_2026-07-24.md` should not be reviewed for restoration of
-the old category names. They should be reviewed only where there is concrete
-reason to suspect accidental disabling or a concealed prerequisite defect.
+The actors listed as "needs individual review" in the prerequisite triage
+(notice: `PREREQUISITE_TRIAGE_2026-07-24.md` is not in the repository — the
+triage was conducted in-session and its findings were folded into this
+response and the MEGAPLAN_YAML_CLEANUP cleanup) should not be reviewed for
+restoration of the old category names. They should be reviewed only where
+there is concrete reason to suspect accidental disabling or a concealed
+prerequisite defect.
 
 No YAML or code change follows directly from Aedis's clarification.

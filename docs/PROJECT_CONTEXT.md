@@ -8,6 +8,9 @@ Cameo is an OpenRA crossover RTS mod. The repository is undergoing a migration t
 
 ## Required reading
 
+**The canonical reading order is defined in `docs/README.md`.** The list below
+is provided for convenience; if it disagrees with README.md, README.md wins.
+
 Read these documents in order before any implementation work. Load all of them into context at the start of every session.
 
 1. **[LESSONS_LEARNED.md](LESSONS_LEARNED.md)** — accumulated pitfalls, safe defaults, and the required reading order.
@@ -18,10 +21,10 @@ Read these documents in order before any implementation work. Load all of them i
 
 Crashes and player-visible regressions always take priority over queued work.
 
-## Current safety focus
+## Current focus
 
-- The currently reported TD GDI palette/animation issue is open. Its evidence record is `audit/INCIDENT_TD_GDI_RELEASE_REGRESSION.md`.
-- A menu-load crash was observed from two `brik:` sequence entries referencing nonexistent `futuretech_concretebarrier_brik.shp`. Local references were returned to the existing release-compatible TD filenames; a clean boot remains required before resolution.
+- **Active program:** mod-synthesis balance overhaul (see `design/BALANCE_SYNTHESIS.md` and `design/ROADMAP.md` ★ MAJOR PROGRAM). Goal: fix extreme-value balance by synthesizing extracted mods into class anchors, then re-derive all stats via the universal class formula.
+- **B8 crash-class content: 0** — all previously known crash-class issues are resolved. Historical incidents (TD GDI palette revert, `brik:` sequence fix) are documented in `audit/INCIDENT_TD_GDI_RELEASE_REGRESSION.md` (crash resolved, boot-verified; remaining: TS-only death palette audit pending).
 - Do not change palettes, templates, actor names, or tooltip data merely because a migration looks suspicious. Require an observed mismatch, current audit output, release comparison, or engine exception.
 
 ## Multi-agent rule

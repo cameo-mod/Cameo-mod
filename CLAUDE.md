@@ -15,17 +15,27 @@ audited and deleted. Current progress + the exact runbook to continue:
 
 ## Required reading, in order
 
-1. **`docs/DESIGN.md`** — the binding design contract (naming grammar, stat
+See `docs/README.md` for the canonical reading order and document authority.
+The essential documents, in order:
+
+1. **`docs/LESSONS_LEARNED.md`** — accumulated pitfalls, safe defaults, and
+   the required reading order.
+2. **`docs/AGENT_WORKSPACE.md`** — mandatory workflow, evidence rules,
+   incident protocol, and commit gate.
+3. **`docs/DESIGN.md`** — the binding design contract (naming grammar, stat
    formulas, tech tiers, content-pack layout, description scheme, agent
    operating rules). Read it before touching any yaml.
-2. **`docs/audit/SUMMARY.md`** — current known-issue state by bug class.
-3. `docs/Cameo_Knowledge_Base_Manual.md` — the ENGINE/CODE reference
-   (v0.1 by kmoney): custom traits, assemblies (OpenRA.Mods.Cameo/CA),
+4. **`docs/design/ROADMAP.md`** — active work queue; crashes always jump
+   the queue.
+5. **`docs/audit/SUMMARY.md`** — current known-issue state by bug class.
+6. `docs/Cameo_Knowledge_Base_Manual.md` — the ENGINE/CODE reference
+   (v.0.4): custom traits, assemblies (OpenRA.Mods.Cameo/CA),
    activities, bot modules, UI internals. Consult it for any C#-side
    question (it lists code-derived identifiers!); verify against source
    when in doubt — it is a contributor document, not the binding contract.
-4. `docs/MASTER_REPORT.md` — long-form analysis, bug taxonomy (B1–B12),
-   roadmap; consult §9/§10/§13 when DESIGN.md is not enough.
+7. `docs/MASTER_REPORT.md` — historical long-form analysis, bug taxonomy
+   (B1–B12); consult §9/§10/§13 when DESIGN.md is not enough. Not a live
+   roadmap — active work belongs in ROADMAP.md.
 
 ## Tooling
 
