@@ -124,7 +124,7 @@ yuri_slaveminer:
 
 yuri_gatlingtank:
 	Inherits: ^Tank
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^AntiAirVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -214,7 +214,7 @@ yuri_gatlingtank:
 yuri_lashertank:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
-	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@Template: ^LightTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice

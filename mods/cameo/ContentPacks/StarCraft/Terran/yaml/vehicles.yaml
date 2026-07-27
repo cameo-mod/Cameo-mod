@@ -62,7 +62,7 @@ terran_vulture:
 	Inherits@SC: ^SCTVEHICLE
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
-	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@Template: ^LightTankTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
@@ -138,8 +138,7 @@ terran_siegetank:
 	Inherits@SC: ^SCTVEHICLE
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
-	Inherits@ArtilleryBuffs: ^ArtilleryBuffs
-	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@Template: ^ArtilleryTankTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
@@ -604,7 +603,7 @@ terran_warhound:
 	Inherits: ^Vehicle
 	Inherits@SC: ^SCTVEHICLE
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
-	Inherits@Template: ^LineBreakerTemplate
+	Inherits@Template: ^DreadnoughtTemplate
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff

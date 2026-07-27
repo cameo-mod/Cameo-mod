@@ -159,7 +159,7 @@ ra2_soviets_rhinoheavytank:
 
 ra2_soviets_flaktrack:
 	Inherits: ^Tank
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^AntiAirVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove

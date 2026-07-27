@@ -374,7 +374,7 @@ ts_gdi_titanmkii:
 
 ts_gdi_juggernautmkii:
 	Inherits: ^Tank
-	Inherits@Template: ^ArtilleryTemplate
+	Inherits@Template: ^ArtilleryTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^GDIRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -443,7 +443,7 @@ ts_gdi_juggernautmkii:
 
 ts_gdi_juggernaut:
 	Inherits: ^Tank
-	Inherits@Template: ^ArtilleryTemplate
+	Inherits@Template: ^ArtilleryTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^GDIRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove

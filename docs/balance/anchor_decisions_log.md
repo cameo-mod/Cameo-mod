@@ -171,6 +171,49 @@ each is intentional). From the live membership snapshot:
 - **LineBreaker keeps** only flame/melee/very-short durable (flame tanks, Ogre/Knight/Ultralisk/Megalodon).
 - **FireSupport keeps** long-range fragile (MLRS baseline, missile trucks); LOSES the AA + the siege/turret units.
 
+## ★ DECISIONS 2026-07-27b (comparison-check resolutions — maintainer confirmed)
+
+Ran the one-time old-vs-new class comparison (`scratchpad/class_compare.py`): **390 vehicle
+actors, 56 reclassifications** (matching the locked lists). Discrepancies resolved:
+- **`ra1_allies_sheridanassaulttank` → LightTank** ✓ (was missed by a garbled id in the member list;
+  it IS a light tank). Currently `^MainBattleTankTemplate`.
+- **`naxis_kbelwagen` → AntiAir** ✓ — its `NaxiWW2KübelwagenMachinegun` has `ValidTargets: …, Air`,
+  so it CAN hit air; it also has `^CargoVehicle` → **armed AA transport → AntiAir template**, priced by
+  the **cargo rule** (Σ passengers), NOT LightTank/Scout. **ALSO umlaut-rename `naxis_kbelwagen →
+  naxis_kubelwagen`** (u, not dropped) — add to the umlaut rename batch with `naxis_brummbr→brummbar`.
+- **`ra1_soviets_madtank` → Epic** (BuildLimit 1 → epic; drop the LineBreaker inherit, keep Epic).
+- **`japan_exorcistoitank` → Epic** (BuildLimit 1 → epic; drop the HighTech inherit, keep Epic).
+- **`terran_siegetank` → ArtilleryTank**; **`siege_tank` (Harkonnen/Shared) → Artillery**;
+  **`missile_tank` → FireSupport**; **`ts_nod_ticktank` → MBT** (stays; tick tank not LightTank).
+- **`yrsmin.empy` → REMOVE** (only 2 defs — `RedAlert2/Shared/…/misc.yaml` + `rules/redalert2.yaml`;
+  zero references → delete both).
+- Civilian/AI-only dupes (`ra2_c_abram`, `ra2_c_ifv`, `ra2_c_hum`, `ra2leopard`, `yrrobo`) = **EXCLUDE
+  from the rebalance** (not buildable faction units), leave defined.
+
+**★ REMOVE-ALL-MULTIPLIERS = ONE PASS (maintainer 2026-07-27b):** do NOT keep the multiplier layers in
+place for a first pass — **strip every `DamageMultiplier@*Buff` / `FirepowerMultiplier@*Buff` NOW**
+(keep only `^GlobalBuffs` FP50/DMG150 + self-heal + tech-upgrade inherits) and **find the new balance by
+setting the baseline actors to the ladder and scaling each class from there** (`fit_class`). Temporary
+imbalance during the pass is accepted.
+
+**★ BASELINE RATIOS (WYSIWYG after buff removal — HP/Cost = effective-HP/credit):**
+| Class | HP | DPS | Cost | HP/Cost | DPS/Cost |
+|---|--:|--:|--:|--:|--:|
+| Scout | 40000 | 450 | 300 | 133.3 | 1.500 |
+| LightTank | 100000 | 200 | 400 | 250.0 | 0.500 |
+| AntiAir | 80000 | 800 | 600 | 133.3 | 1.333 |
+| TankDestroyer | 150000 | 500 | 600 | 250.0 | 0.833 |
+| Artillery | 50000 | 500 | 600 | 83.3 | 0.833 |
+| MBT | 200000 | 400 | 800 | 250.0 | 0.500 |
+| FireSupport | 75000 | 600 | 1000 | 75.0 | 0.600 |
+| ArtilleryTank | 125000 | 160 | 1200 | 104.2 | 0.133 |
+| LineBreaker | 300000 | 1000 | 1200 | 250.0 | 0.833 |
+| HighTechTank | 500000 | 1000 | 2000 | 250.0 | 0.500 |
+| Dreadnought | 600000 | 1200 | 3000 | 200.0 | 0.400 |
+Clean **250 HP/credit spine** across LightTank/TankDestroyer/MBT/LineBreaker/HighTech; fragile classes
+lower (Artillery 83, FireSupport 75); Scout leads DPS/Cost (1.5). **ArtilleryTank DPS/Cost 0.133** is
+the deliberate outlier (tanky long-range siege, not a damage dealer — flagged, standing unless changed).
+
 ## ★ RANGE LADDER (maintainer 2026-07-26 — verified consistent, steps of 500)
 
 | Class | baseline range | band (±500) |

@@ -528,7 +528,7 @@ rocket_raider.ixian:
 
 ixian_shockraider:
 	Inherits@D2KV: ^D2KVehicle
-	Inherits@Template: ^FireSupportTemplate
+	Inherits@Template: ^LightTankTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -1149,13 +1149,12 @@ heavy_rocket_raider.ixian:
 
 ixian_ixcombatsiege:
 	Inherits@D2KT: ^D2KTank
-	Inherits@Template: ^FireSupportTemplate
+	Inherits@Template: ^ArtilleryTankTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@IXEMP: ^D2K_Ix_Turret_EMP
-	Inherits@AntiBuil: ^PrioritizeBuilding
 	Inherits@Barrel: ^D2K_ReinforcedBarrel
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
@@ -1218,7 +1217,7 @@ ixian_ixcombatsiege:
 
 ixian_neocymek:
 	Inherits: ^Vehicle
-	Inherits@Template: ^LineBreakerTemplate
+	Inherits@Template: ^DreadnoughtTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff

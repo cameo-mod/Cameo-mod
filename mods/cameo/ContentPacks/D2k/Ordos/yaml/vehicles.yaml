@@ -789,14 +789,12 @@ ordos_spiceharvester:
 
 ordos_cobratank:
 	Inherits@D2KT: ^D2KTank
-	Inherits@Template: ^ArtilleryTemplate
+	Inherits@Template: ^ArtilleryTankTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@EMP: ^FrontalEMP
-	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@AntiBuil: ^PrioritizeBuilding
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Tooltip:
@@ -895,15 +893,13 @@ ordos_cobratank:
 
 ordos_pythontank:
 	Inherits@D2KT: ^D2KTank
-	Inherits@Template: ^ArtilleryTemplate
+	Inherits@Template: ^ArtilleryTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@EMP: ^FrontalEMP
-	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@AntiBuil: ^PrioritizeBuilding
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Inherits@bot: ^SiegeModeVehicle
@@ -1627,7 +1623,7 @@ ordos_deviatorartillery:
 
 ordos_combattank:
 	Inherits@D2KT: ^D2KTank
-	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@Template: ^LightTankTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -1873,7 +1869,7 @@ ordos_heavyautoguntank:
 
 ordos_tankdestroyer:
 	Inherits@D2KT: ^D2KTank
-	Inherits@Template: ^LineBreakerTemplate
+	Inherits@Template: ^TankDestroyerTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove

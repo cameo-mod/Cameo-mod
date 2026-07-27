@@ -973,7 +973,7 @@ steelconsortium_quantumtank:
 
 steelconsortium_manta:
 	Inherits: ^Tank
-	Inherits@Template: ^FireSupportTemplate
+	Inherits@Template: ^LightTankTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -1075,7 +1075,7 @@ steelconsortium_manta:
 
 steelconsortium_barracuda:
 	Inherits: ^Tank
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^AntiAirVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2

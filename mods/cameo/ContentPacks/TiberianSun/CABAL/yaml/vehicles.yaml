@@ -1027,7 +1027,7 @@ cabal_coredefender:
 
 cabal_ravager:
 	Inherits: ^Walker
-	Inherits@Template: ^LineBreakerTemplate
+	Inherits@Template: ^LightTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove

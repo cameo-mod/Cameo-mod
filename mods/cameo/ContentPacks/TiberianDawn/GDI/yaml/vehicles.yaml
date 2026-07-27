@@ -471,7 +471,7 @@ td_gdi_mlrs:
 
 td_gdi_archerartillery:
 	Inherits: ^Tank
-	Inherits@Template: ^ArtilleryTemplate
+	Inherits@Template: ^ArtilleryTankTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^TurretEMP

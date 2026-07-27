@@ -729,7 +729,7 @@ japan_hovercrafttransport:
 
 japan_armoredcar:
 	Inherits: ^Vehicle
-	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@Template: ^AntiAirVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -740,7 +740,6 @@ japan_armoredcar:
 	Inherits@botmicro: ^BotAutoDeployTransport
 	Inherits@WaveforceBullets: ^WaveforceBullets
 	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
-	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
 	Buildable:
 		Queue: Vehicle, RAVehicle
@@ -1135,7 +1134,7 @@ japan_grenadebuggy:
 
 japan_shrineminitank:
 	Inherits: ^Tank
-	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@Template: ^LightTankTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -1144,7 +1143,6 @@ japan_shrineminitank:
 	Inherits@WaveforceBullets: ^WaveforceBullets
 	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
 	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
-	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
 	Buildable:
 		Queue: Vehicle, RAVehicle
@@ -1287,20 +1285,16 @@ japan_waveforcetank:
 
 japan_waveforceartillery:
 	Inherits: ^Vehicle
-	Inherits@Template: ^ArtilleryTemplate
+	Inherits@Template: ^ArtilleryTankTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@detect: ^GenericGroundDetector
-	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
-	Inherits@AntiBuil: ^PrioritizeBuilding
-	Inherits@AntiDef: ^PrioritizeDefence
 	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
 	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
-	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 75
@@ -1350,7 +1344,6 @@ japan_waveforceartillery:
 
 japan_exorcistoitank:
 	Inherits: ^Tank
-	Inherits@Template: ^HighTechTankTemplate
 	Inherits@GAINSEXPERIENCE: ^EpicVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff

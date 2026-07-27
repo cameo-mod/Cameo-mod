@@ -345,7 +345,7 @@ ts_nod_mobilerepairvehicle:
 
 ts_nod_artillery:
 	Inherits: ^Tank
-	Inherits@Template: ^ArtilleryTemplate
+	Inherits@Template: ^ArtilleryTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^NodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -542,7 +542,7 @@ ts_nod_mobilestealthgenerator:
 
 ts_nod_attackcycle:
 	Inherits: ^Vehicle
-	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@Template: ^AntiAirVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^NodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
