@@ -290,7 +290,7 @@ CountEnemyValue = function()
 end
 
 MaxEnemyValueForWave = function(waveIdx)
-	return math.floor((2000 + 400 * waveIdx) * PlayerScale())
+	return math.floor((5000 + 500 * waveIdx) * (1 + PlayerScale()))
 end
 
 RemainingEnemyBudget = function(waveIdx)
@@ -901,12 +901,302 @@ MCVDeployPositions = {
 
 MCVSentFromSide = { false, false, false, false }
 
+-- Maps MCV actor name to key buildings for base construction after deploy
+FactionBuildings = {
+	["td_gdi_mobileconstructionvehicle"]    = { power = "NUKE",  barracks = "td_gdi_barracks",     warfactory = "td_gdi_weaponsfactory",  refinery = "td_gdi_tiberiumrefinery" },
+	["td_nod_mobileconstructionvehicle"]    = { power = "NUKE",  barracks = "td_nod_handofnod",     warfactory = "td_nod_airstrip",        refinery = "td_nod_tiberiumrefinery" },
+	["ra1_allies_alliedmobileconstructionvehicle"] = { power = "ra1_powerplant", barracks = "ra1_allies_alliedbarracks", warfactory = "ra1_allies_alliedwarfactory", refinery = "ra1_allies_alliedorerefinery" },
+	["ra1_soviets_mobileconstructionvehicle"] = { power = "ra1_powerplant", barracks = "ra1_soviets_barracks", warfactory = "ra1_soviets_warfactory", refinery = "ra1_soviets_orerefinery" },
+	["ra2_allies_alliedmobileconstructionvehicle"] = { power = "ra2_allies_alliedpowerplant", barracks = "ra2_allies_alliedbarracks", warfactory = "ra2_allies_alliedwarfactory", refinery = "ra2_allies_alliedorerefinery" },
+	["ra2_soviets_mobileconstructionvehicle"] = { power = "ra2_soviets_teslareactor", barracks = "ra2_soviets_barracks", warfactory = "ra2_soviets_warfactory", refinery = "ra2_soviets_orerefinery" },
+	["yuri_mobileconstructionvehicle"]      = { power = "yuri_bioreactor", barracks = "yuri_barracks", warfactory = "yuri_warfactory", refinery = "yuri_slaveminer_deployed" },
+	["japan_japanesemobileconstructionvehicle"] = { power = "japan_waveforcereactor", barracks = "japan_japanesebarracks", warfactory = "japan_japanesewarfactory", refinery = "japan_japaneseorerefinery" },
+	["ts_gdi_mobileconstructionvehicle"]    = { power = "ts_gdi_powerplant", barracks = "ts_gdi_barracks", warfactory = "ts_gdi_warfactory", refinery = "ts_gdi_tiberiumrefinery" },
+	["ts_nod_mobileconstructionvehicle"]    = { power = "ts_nod_powerplant", barracks = "ts_nod_handof",   warfactory = "ts_nod_warfactory", refinery = "ts_nod_tiberiumrefinery" },
+	["cabal_mobileconstructionvehicle"]     = { power = "cabal_powerplant", barracks = "cabal_cyborgfactory", warfactory = "cabal_mechfactory", refinery = "cabal_refinery" },
+	["forgotten_mobileconstructionvehicle"] = { power = "forgotten_crystalpowerextractor", barracks = "forgotten_barracks", warfactory = "forgotten_warfactory", refinery = "forgotten_refinery" },
+	["asianalliance_asianmobileconstructionvehicle"] = { power = "asianalliance_tankreactor", barracks = "asianalliance_asianbarracks", warfactory = "asianalliance_asianwarfactory", refinery = "asianalliance_asianorerefinery" },
+	["latinsyndicate_syndicatemobileconstructionvehicle"] = { power = "latinsyndicate_powerstation", barracks = "latinsyndicate_combatbarracks", warfactory = "latinsyndicate_syndicatefactory", refinery = "latinsyndicate_recyclingrefinery" },
+	["ordos_mobileconstructionvehicle"]     = { power = "ordos_windtrap", barracks = "ordos_barracks", warfactory = "ordos_starport", refinery = "ordos_refineryordos" },
+	["ixian_mobileconstructionvehicle"]     = { power = "ixian_windtrap", barracks = "ixian_barracks", warfactory = "ixian_starport", refinery = "ixian_refineryixian" },
+	["naxis_naximobileconstructionvehicle"] = { power = "naxis_naxpetrolplant", barracks = "naxis_barracks", warfactory = "naxis_sausagefactory", refinery = "naxis_orerefinery" },
+	["schwarzermond_naxismobileconstructionvehicle"] = { power = "schwarzermond_moondairyfarm", barracks = "schwarzermond_barracks", warfactory = "schwarzermond_warfactory", refinery = "schwarzermond_orerefinery" },
+	["steelconsortium_consortiummobileconstructionvehicle"] = { power = "steelconsortium_consortiumpowerplant", barracks = "steelconsortium_steelbarracks", warfactory = "steelconsortium_consortiumwarfactory", refinery = "steelconsortium_consortiumrefinery" },
+	["futuretech_mobileconstructionvehicle"] = { power = "futuretech_thermalpowerplant", barracks = "futuretech_troopgate", warfactory = "futuretech_warpgate", refinery = "futuretech_refinery" },
+	["tkm_mobileconstructionvehicletkm"]    = { power = "tkm_powerplant", barracks = "tkm_barracks", warfactory = "tkm_warfactory", refinery = "tkm_orerefinery" },
+	["wc2_humans_mobileconstructionvehiclehuman"] = { power = "wc2_humans_farm", barracks = "wc2_humans_barracks", warfactory = "wc2_humans_blacksmith", refinery = nil },
+	["wc2_orcs_mobileconstructionvehicleorc"] = { power = "wc2_orcs_pigfarm", barracks = "wc2_orcs_barracks", warfactory = "wc2_orcs_blacksmith", refinery = nil },
+	["terran_mobilecommandcenter"]         = { power = "terran_supplydepot", barracks = "terran_barracks", warfactory = "terran_starport", refinery = "terran_refinery" },
+	["protoss_mobilenexus"]                = { power = "protoss_pylon", barracks = "protoss_gateway", warfactory = "protoss_roboticsfacility", refinery = "protoss_assimilator" },
+	["zerg_hatcherydrone"]                 = { power = nil, barracks = "zerg_spawningpool", warfactory = "zerg_hydraliskden", refinery = "zerg_extractor" },
+}
+
+-- Maps MCV actor name to the faction's upgrade list (unlocked progressively each wave)
+FactionUpgrades = {
+	["td_gdi_mobileconstructionvehicle"] = {
+		"td_gdi_upgrade_longrangesensors", "td_gdi_upgrade_armorpiercingbullets", "td_gdi_upgrade_a10airstrike",
+		"td_gdi_upgrade_heavyaircraftarmorplating", "td_gdi_upgrade_advancedmissiletargeting",
+		"td_gdi_upgrade_cuttingedgeequipment", "td_gdi_upgrade_highvelocitycannons", "td_gdi_upgrade_lightweightarmorplating",
+	},
+	["td_nod_mobileconstructionvehicle"] = {
+		"td_nod_upgrade_guerillatactics", "td_nod_upgrade_tiberiuminfusion", "td_nod_upgrade_improvedartilleries",
+		"td_nod_upgrade_blackmarketupgrades", "td_nod_upgrade_elementalwarfare", "td_nod_upgrade_elitecapacitors",
+		"td_nod_upgrade_cyberneticmodifications", "td_nod_upgrade_advancedguerillatactics",
+	},
+	["ra1_allies_alliedmobileconstructionvehicle"] = {
+		"ra1_allies_upgrade_advancedradarsystems", "ra1_allies_upgrade_infantryarmorplating", "ra1_allies_upgrade_reinforcedstructures",
+		"ra1_allies_upgrade_airsuperioritydoctrine", "ra1_allies_upgrade_lasertargetingsystems",
+		"ra1_allies_upgrade_chronoarmor", "ra1_allies_upgrade_cryomissiles", "ra1_allies_upgrade_gpssatellitesupport",
+	},
+	["ra1_soviets_mobileconstructionvehicle"] = {
+		"ra1_soviets_upgrade_hazmatsuits", "ra1_soviets_upgrade_vengeance", "ra1_soviets_upgrade_menofsteel",
+		"ra1_soviets_upgrade_massproduction", "ra1_soviets_upgrade_wareconomy", "ra1_soviets_upgrade_incendiarybullets",
+		"ra1_soviets_upgrade_scorchedearth", "ra1_soviets_upgrade_teslaarcing", "ra1_soviets_upgrade_teslarockets",
+		"ra1_soviets_upgrade_reactoroverload", "ra1_soviets_upgrade_autoloaders", "ra1_soviets_upgrade_highexplosiverockets",
+		"ra1_soviets_upgrade_stalinium", "ra1_soviets_upgrade_unstableisotopes", "ra1_soviets_upgrade_thermonuclearrockets",
+		"ra1_soviets_upgrade_nucleartankshells", "ra1_soviets_upgrade_afterburners", "ra1_soviets_upgrade_hammertank",
+		"ra1_soviets_upgrade_heavyteslatank", "ra1_soviets_upgrade_shtoradefensesystem", "ra1_soviets_upgrade_kotinnucleartank",
+		"ra1_soviets_upgrade_commissar", "ra1_soviets_upgrade_heatraytank", "ra1_soviets_upgrade_teslayak",
+		"ra1_soviets_upgrade_armoredyak", "ra1_soviets_upgrade_nuclearyak",
+	},
+	["ra2_allies_alliedmobileconstructionvehicle"] = {
+		"ra2_allies_upgrade_assaultsquadtraining", "ra2_allies_upgrade_vanguardtraining", "ra2_allies_upgrade_infiltratorstraining",
+		"ra2_allies_upgrade_compositearmorplating", "ra2_allies_upgrade_reflectivearmorplating", "ra2_allies_upgrade_ionpulseplating",
+		"ra2_allies_upgrade_elitegi", "ra2_allies_upgrade_paratroopers", "ra2_allies_upgrade_eliterocketeer",
+		"ra2_allies_upgrade_prismlinking", "ra2_allies_upgrade_forceshield", "ra2_allies_upgrade_heavymiragetank",
+		"ra2_allies_upgrade_advancedaeronautics", "ra2_allies_upgrade_tanklasertargeting", "ra2_allies_upgrade_thunderboltmissiles",
+		"ra2_allies_upgrade_intensifiedprismbeams", "ra2_allies_upgrade_prismaticbarrier", "ra2_allies_upgrade_chronoengine",
+	},
+	["ra2_soviets_mobileconstructionvehicle"] = {
+		"ra2_soviets_upgrade_terrordronesurprise", "ra2_soviets_upgrade_teslacoilchargers", "ra2_soviets_upgrade_teslaoverload",
+		"ra2_soviets_upgrade_heavycannons", "ra2_soviets_upgrade_grindertanktreads", "ra2_soviets_upgrade_kirovarmorplatings",
+		"ra2_soviets_upgrade_gastroburners", "ra2_soviets_upgrade_kirovatomicbombs",
+	},
+	["yuri_mobileconstructionvehicle"] = {
+		"yuri_upgrade_initiatepowersurge", "yuri_upgrade_brutestrengthmutations", "yuri_upgrade_lasherarmorimprovements",
+		"yuri_upgrade_gatlingfirepowerupgrade", "yuri_upgrade_meltingvirus", "yuri_upgrade_domination",
+		"yuri_upgrade_gatlingspeedupgrade", "yuri_upgrade_corrosiveammo", "yuri_upgrade_supermagnets",
+		"yuri_upgrade_bioreactorefficiency", "yuri_upgrade_bioengineering", "yuri_upgrade_psychicrange",
+		"yuri_upgrade_psionicarmor", "yuri_upgrade_toxicengines", "yuri_upgrade_psionicplasmabeams",
+		"yuri_upgrade_gravitondrive", "yuri_upgrade_disksiphonattack", "yuri_upgrade_diskhighfrequencylasers",
+		"yuri_upgrade_infantrystealthsuits", "yuri_upgrade_geneticmodificationboost", "yuri_upgrade_psychicvision",
+	},
+	["japan_japanesemobileconstructionvehicle"] = {
+		"japan_upgrade_bushidodiscipline", "japan_upgrade_waveforcebullets", "japan_upgrade_divinewindprotocol",
+		"japan_upgrade_stealthsuitintegration", "japan_upgrade_energizedarrows", "japan_upgrade_superiorwarengines",
+		"japan_upgrade_advancedplasmaweapons", "japan_upgrade_nanotechrepairs",
+	},
+	["ts_gdi_mobileconstructionvehicle"] = {
+		"ts_gdi_upgrade_seretraining", "ts_gdi_upgrade_projectileimprovements", "ts_gdi_upgrade_mechanicalreliability",
+		"ts_gdi_upgrade_ceramicarmor", "ts_gdi_upgrade_mechengineering", "ts_gdi_upgrade_sonicweaponry",
+		"ts_gdi_upgrade_railgunweaponry", "ts_gdi_upgrade_modernfirecontrolsystems",
+	},
+	["ts_nod_mobileconstructionvehicle"] = {
+		"ts_nod_upgrade_infiltrationkit", "ts_nod_upgrade_mobilityspecialization", "ts_nod_upgrade_auxiliaryweapon",
+		"ts_nod_upgrade_stealthfieldsimprovements", "ts_nod_upgrade_tiberiumlenses", "ts_nod_upgrade_tiberiumcoremissiles",
+		"ts_nod_upgrade_advancedtiberiumrefinement", "ts_nod_upgrade_willofkane",
+	},
+	["cabal_mobileconstructionvehicle"] = {
+		"cabal_upgrade_mobilitymatrix", "cabal_upgrade_darkarmament", "cabal_upgrade_neutronnuclearcatalyst",
+		"cabal_upgrade_radarhack", "cabal_upgrade_networkedcombatprotocols", "cabal_upgrade_backupsystems",
+		"cabal_upgrade_handof", "cabal_upgrade_dataworm", "cabal_upgrade_firewallprotocol",
+		"cabal_upgrade_reinforcedchassis", "cabal_upgrade_overchargedservos", "cabal_upgrade_neuraluplink",
+		"cabal_upgrade_reclamationprotocols", "cabal_upgrade_fullassimilation", "cabal_upgrade_cyberneticplating",
+	},
+	["forgotten_mobileconstructionvehicle"] = {
+		"forgotten_upgrade_genomemapping", "forgotten_upgrade_chemicalfuel", "forgotten_upgrade_friendlywildlife",
+		"forgotten_upgrade_junkarmor", "forgotten_upgrade_tiberiumboosters", "forgotten_upgrade_unity",
+		"forgotten_upgrade_chemicalweapons", "forgotten_upgrade_tiberiumadaptability", "forgotten_upgrade_mutantsoldier",
+	},
+	["asianalliance_asianmobileconstructionvehicle"] = {
+		"asianalliance_upgrade_massparadrop", "asianalliance_upgrade_clusterbombs", "asianalliance_upgrade_chaosbombs",
+		"asianalliance_upgrade_dragonfire", "asianalliance_upgrade_celestialpower", "asianalliance_upgrade_banzaimode",
+		"asianalliance_upgrade_wayofthedragon", "asianalliance_upgrade_asiandiplomacy",
+	},
+	["latinsyndicate_syndicatemobileconstructionvehicle"] = {
+		"latinsyndicate_upgrade_empcannon", "latinsyndicate_upgrade_yuristolentechchainguns",
+		"latinsyndicate_upgrade_sovietstolentechindustrialmethods", "latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging",
+		"latinsyndicate_upgrade_asianalliancestolentechhotfire", "latinsyndicate_upgrade_cashrecovery",
+	},
+	["ordos_mobileconstructionvehicle"] = {
+		"ordos_upgrade_lightfactory", "ordos_upgrade_antiairtrooper", "ordos_upgrade_heavycombattank",
+		"ordos_upgrade_heavycombattankrockets", "ordos_upgrade_heavyautoguntank", "ordos_upgrade_shields",
+		"ordos_upgrade_biologicalwarfare", "ordos_upgrade_contraband", "ordos_upgrade_lasercartridges",
+		"ordos_upgrade_rapidfirearmorpiercingbelts", "ordos_upgrade_hoverdrive",
+	},
+	["ixian_mobileconstructionvehicle"] = {
+		"ixian_upgrade_twinbazooka", "ixian_upgrade_tungstenneedleguns", "ixian_upgrade_personalshield",
+		"ixian_upgrade_generalpurposearmor", "ixian_upgrade_reinforcedbarrel", "ixian_upgrade_heavymissiles",
+		"ixian_upgrade_heavykodatank", "ixian_upgrade_advancedixiantechnology",
+	},
+	["naxis_naximobileconstructionvehicle"] = {
+		"naxis_upgrade_me262", "naxis_upgrade_ostfrontexperience", "naxis_upgrade_atlantikwall",
+		"naxis_upgrade_tankarsenalrenovation", "naxis_upgrade_massopticsintegration", "naxis_upgrade_wunderwaffe",
+		"naxis_upgrade_blitzkrieg",
+	},
+	["schwarzermond_naxismobileconstructionvehicle"] = {
+		"schwarzermond_upgrade_crystallens", "schwarzermond_upgrade_amplifiedlens", "schwarzermond_upgrade_vrilpoweredweapons",
+		"schwarzermond_upgrade_helium3", "schwarzermond_upgrade_vrilinfusion", "schwarzermond_upgrade_lunaralloys",
+		"schwarzermond_upgrade_moonpropaganda", "schwarzermond_upgrade_cryptofascism",
+	},
+	["steelconsortium_consortiummobileconstructionvehicle"] = {
+		"steelconsortium_upgrade_pulseweapons", "steelconsortium_upgrade_naniteinfusion", "steelconsortium_upgrade_ferrocretecurtain",
+		"steelconsortium_upgrade_empcannon", "steelconsortium_upgrade_scalpeldefenders", "steelconsortium_upgrade_resonanceammo",
+		"steelconsortium_upgrade_quantumweaponpower", "steelconsortium_upgrade_shieldresistance",
+	},
+	["futuretech_mobileconstructionvehicle"] = {
+		-- FutureTech has no upgrades in upgrades.yaml
+	},
+	["tkm_mobileconstructionvehicletkm"] = {
+		"tkm_upgrade_berezkaarsenalupgrade", "tkm_upgrade_titanarsenalupgrade", "tkm_upgrade_natoarsenalupgrade",
+		"tkm_upgrade_semiautoriflesupgrade", "tkm_upgrade_twinrocketsupgrade", "tkm_upgrade_titanarmorpiercingbulletsupgrade",
+		"tkm_upgrade_incendiaryrocketsupgrade", "tkm_upgrade_cryorocketsupgrade", "tkm_upgrade_technicaltankrocketaddon",
+		"tkm_upgrade_pointdefensesystem", "tkm_upgrade_heavytitanplating", "tkm_upgrade_infantryupgrade", "tkm_upgrade_gp25upgrade",
+	},
+	["wc2_humans_mobileconstructionvehiclehuman"] = {
+		"wc2_humans_upgrade_betterfarm", "wc2_humans_upgrade_bestfarm", "wc2_humans_upgrade_swordstrength",
+		"wc2_humans_upgrade_swordstrengthii", "wc2_humans_upgrade_armorstrength", "wc2_humans_upgrade_armorstrengthii",
+		"wc2_humans_upgrade_arrowstrength", "wc2_humans_upgrade_arrowstrengthii", "wc2_humans_upgrade_warcraft3footman",
+		"wc2_humans_upgrade_ranger", "wc2_humans_upgrade_highelvenarcher", "wc2_humans_upgrade_rangerlongbow",
+		"wc2_humans_upgrade_rangerscouting", "wc2_humans_upgrade_rangermarksman", "wc2_humans_upgrade_ballistastrength",
+		"wc2_humans_upgrade_ballistastrengthii", "wc2_humans_upgrade_cannondamage", "wc2_humans_upgrade_cannondamageii",
+		"wc2_humans_upgrade_paladin", "wc2_humans_upgrade_warcraft3knightwip", "wc2_humans_upgrade_healing",
+		"wc2_humans_upgrade_exorcism", "wc2_humans_upgrade_slow", "wc2_humans_upgrade_polymorph", "wc2_humans_upgrade_blizzard",
+	},
+	["wc2_orcs_mobileconstructionvehicleorc"] = {
+		"wc2_orcs_upgrade_betterfarm", "wc2_orcs_upgrade_bestfarm", "wc2_orcs_upgrade_axestrength",
+		"wc2_orcs_upgrade_axestrengthii", "wc2_orcs_upgrade_armorstrength", "wc2_orcs_upgrade_armorstrengthii",
+		"wc2_orcs_upgrade_throwingaxestrength", "wc2_orcs_upgrade_throwingaxestrengthii", "wc2_orcs_upgrade_warcraft3grunt",
+		"wc2_orcs_upgrade_berserker", "wc2_orcs_upgrade_trollheadhunter", "wc2_orcs_upgrade_berserkerlightaxes",
+		"wc2_orcs_upgrade_berserkerscouting", "wc2_orcs_upgrade_berserkerregeneration", "wc2_orcs_upgrade_catapultstrength",
+		"wc2_orcs_upgrade_catapultstrengthii", "wc2_orcs_upgrade_cannondamage", "wc2_orcs_upgrade_cannondamageii",
+		"wc2_orcs_upgrade_ogremage", "wc2_orcs_upgrade_bloodlust", "wc2_orcs_upgrade_runes",
+		"wc2_orcs_upgrade_haste", "wc2_orcs_upgrade_deathanddecay", "wc2_orcs_upgrade_raisedead",
+	},
+	["terran_mobilecommandcenter"] = {
+		"terran_upgrade_stimpack", "terran_upgrade_u238shells", "terran_upgrade_upgradesupplydepotlevel1",
+		"terran_upgrade_upgradesupplydepotlevel2", "terran_upgrade_cloakupgrade", "terran_upgrade_advancedsiegemode",
+		"terran_upgrade_yamatocannonandtacticaljumpupgrade", "terran_upgrade_infantryweaponslevel1",
+		"terran_upgrade_infantryweaponslevel2", "terran_upgrade_infantryarmorlevel1", "terran_upgrade_infantryarmorlevel2",
+		"terran_upgrade_vehicleweaponslevel1", "terran_upgrade_vehicleweaponslevel2", "terran_upgrade_vehicleplatinglevel1",
+		"terran_upgrade_vehicleplatinglevel2", "terran_upgrade_shipweaponslevel1", "terran_upgrade_shipweaponslevel2",
+		"terran_upgrade_shipplatinglevel1", "terran_upgrade_shipplatinglevel2",
+	},
+	["protoss_mobilenexus"] = {
+		"protoss_upgrade_singularitycharge", "protoss_upgrade_resonatingglaves", "protoss_upgrade_upgradepylonlevel1",
+		"protoss_upgrade_upgradepylonlevel2", "protoss_upgrade_plasmashields", "protoss_upgrade_reavercapacity",
+		"protoss_upgrade_graviticpropulsion", "protoss_upgrade_groundweaponslevel1", "protoss_upgrade_groundweaponslevel2",
+		"protoss_upgrade_groundarmorlevel1", "protoss_upgrade_groundarmorlevel2", "protoss_upgrade_airweaponslevel1",
+		"protoss_upgrade_airweaponslevel2", "protoss_upgrade_airarmorlevel1", "protoss_upgrade_airarmorlevel2",
+	},
+	["zerg_hatcherydrone"] = {
+		"zerg_upgrade_pneumatizedcarapace", "zerg_upgrade_metabolicboost", "zerg_upgrade_adrenalglands",
+		"zerg_upgrade_groovedspines", "zerg_upgrade_meleeattackslevel1", "zerg_upgrade_meleeattackslevel2",
+		"zerg_upgrade_missileattackslevel1", "zerg_upgrade_missileattackslevel2", "zerg_upgrade_carapacelevel1",
+		"zerg_upgrade_carapacelevel2", "zerg_upgrade_flyerattackslevel1", "zerg_upgrade_flyerattackslevel2",
+		"zerg_upgrade_flyercarapacelevel1", "zerg_upgrade_flyercarapacelevel2",
+	},
+}
+
+-- Track which upgrades have been unlocked per Foe player
+FoeUpgradesUnlocked = { {}, {}, {}, {} }
+
+-- Unlock upgrades for the current wave's faction, scaling with wave index
+UnlockFactionUpgrades = function(mcvType, waveIdx)
+	local upgrades = FactionUpgrades[mcvType]
+	if upgrades == nil or #upgrades == 0 then return end
+
+	-- Determine which Foe player owns this faction's units
+	-- Find the Foe player that has the most units from this faction
+	-- Simple approach: pick a random Foe that has units
+	local foeIdx = RandomFoe()
+	if foeIdx == nil then return end
+
+	local unlocked = FoeUpgradesUnlocked[foeIdx]
+	if unlocked == nil then
+		unlocked = {}
+		FoeUpgradesUnlocked[foeIdx] = unlocked
+	end
+
+	-- Track which upgrades from this faction have already been unlocked
+	local alreadyUnlocked = {}
+	for _, u in ipairs(unlocked) do
+		alreadyUnlocked[u] = true
+	end
+
+	-- Number of upgrades to unlock this wave: scales with wave tier
+	-- Tier 1: 1 per wave, Tier 2: 1-2, Tier 3: 2, Tier 4: 2-3
+	local tier = math.min(4, math.floor(waveIdx / 7) + 1)
+	local toUnlock = math.min(tier, 3)
+
+	-- Find upgrades from this faction not yet unlocked
+	local available = {}
+	for _, u in ipairs(upgrades) do
+		if not alreadyUnlocked[u] then
+			table.insert(available, u)
+		end
+	end
+
+	if #available == 0 then return end
+
+	-- Unlock up to toUpgrade upgrades
+	for i = 1, math.min(toUnlock, #available) do
+		local upgradeType = available[i]
+		pcall(function()
+			Actor.Create(upgradeType, true, { Owner = Foes[foeIdx] })
+		end)
+		table.insert(unlocked, upgradeType)
+	end
+end
+
+-- Build a small forward base around the deployed MCV position
+BuildBaseAfterDeploy = function(mcvType, owner, deployPos)
+	local buildings = FactionBuildings[mcvType]
+	if buildings == nil then return end
+
+	-- Building layout offsets relative to deploy position (in cells)
+	-- Layout: power plant adjacent, then refinery, barracks, warfactory in a ring
+	local layout = {
+		{ dx =  4, dy =  0, key = "power" },
+		{ dx = -4, dy =  0, key = "refinery" },
+		{ dx =  0, dy =  4, key = "barracks" },
+		{ dx =  0, dy = -4, key = "warfactory" },
+		{ dx =  4, dy =  4, key = nil },  -- extra power plant
+	}
+
+	local buildOrder = {}
+	for _, item in ipairs(layout) do
+		if item.key ~= nil and buildings[item.key] ~= nil then
+			table.insert(buildOrder, { type = buildings[item.key], dx = item.dx, dy = item.dy })
+		end
+	end
+	-- Add a second power plant if available
+	if buildings.power ~= nil then
+		table.insert(buildOrder, { type = buildings.power, dx = 4, dy = 4 })
+	end
+
+	-- Spawn buildings with delays to simulate construction
+	for i, b in ipairs(buildOrder) do
+		Trigger.AfterDelay(DateTime.Seconds(3 * i), function()
+			local pos = CPos.New(deployPos.X + b.dx, deployPos.Y + b.dy)
+			-- Clamp to map bounds
+			pos = CPos.New(
+				math.max(2, math.min(148, pos.X)),
+				math.max(2, math.min(148, pos.Y))
+			)
+			pcall(function()
+				Actor.Create(b.type, true, { Owner = owner, Location = pos })
+			end)
+		end)
+	end
+end
+
 SendMCV = function(faction, waveIdx)
 	if faction.mcv == nil then
 		return
 	end
-	local chance = 8 + waveIdx * 2
-	if chance > 30 then chance = 30 end
+	local chance = 15 + waveIdx * 3
+	if chance > 50 then chance = 50 end
 	if Utils.RandomInteger(1, 101) > chance then
 		return
 	end
@@ -960,6 +1250,8 @@ SendMCV = function(faction, waveIdx)
 							-- Some MCVs use Build instead of Deploy
 							mcv.Build()
 						end
+						-- After deploy, build a forward base
+						BuildBaseAfterDeploy(faction.mcv, Foes[foeIdx], deployPos)
 					end
 				end
 			end
@@ -2122,6 +2414,9 @@ SendWave = function(idx)
 
 	-- Random MCV deployment (lottery system -- different side each time)
 	SendMCV(wave, idx)
+
+	-- Unlock faction upgrades progressively (scales with wave index, like veterancy)
+	UnlockFactionUpgrades(wave.mcv, idx)
 
 	-- Random sneak attack near player base
 	LaunchSneakAttack(wave, idx)
