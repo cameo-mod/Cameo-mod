@@ -171,7 +171,7 @@ ixian_ixsiegetank:
 
 ixian_ixmissiletank:
 	Inherits@D2KT: ^D2KTank
-	Inherits@Template: ^FireSupportTemplate
+	Inherits@Template: ^MissileVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove

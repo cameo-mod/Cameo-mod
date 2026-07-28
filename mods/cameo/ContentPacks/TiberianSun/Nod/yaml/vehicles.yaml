@@ -542,7 +542,7 @@ ts_nod_mobilestealthgenerator:
 
 ts_nod_attackcycle:
 	Inherits: ^Vehicle
-	Inherits@Template: ^AntiAirVehicleTemplate
+	Inherits@Template: ^MissileVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^NodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove

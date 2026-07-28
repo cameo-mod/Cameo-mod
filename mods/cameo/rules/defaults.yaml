@@ -1641,8 +1641,6 @@
 	Inherits@snipe: ^DriverKillImmune
 	Targetable@Epic:
 		TargetTypes: Epic
-	DamageMultiplier@EpicBuff:
-		Modifier: 40
 	Armor:
 		Type: Superheavy
 	RevealsShroud:
@@ -1785,6 +1783,29 @@
 		IconPalette: cameo
 	TooltipExtras@Dreadnought:
 		Description: Dreadnought
+
+^MissileVehicleTemplate:
+	Inherits@EXPERIENCE: ^GainsExperienceVehicle
+	Inherits@EXT: ^ExternalConditions
+	Inherits@VehicleBuffs: ^VehicleBuffs
+	Inherits@upgrade: ^AdvancedGuerillaTactics
+	# Dual-purpose: ONE weapon hits ground AND air (priced once, no air bonus). Air engagement comes
+	# from the weapon's ValidTargets + the actor's AutoTarget inherit — no air-preference node here, so
+	# it stays a neutral flexer (unlike ^AntiAirVehicleTemplate which prioritizes Air and gets a free
+	# +range/+damage air weapon). Sits exactly between FireSupport and AntiAir on the class ladder.
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 7000
+	KeepsDistance:
+		Distance: 8
+	Buildable:
+		Description: Mobile missile vehicle.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		BuildPaletteOrder: 42
+		BuildDurationModifier: 75
+		IconPalette: cameo
+	TooltipExtras@MissileVehicle:
+		Description: Missile Vehicle
 
 ^FighterTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceAircraft
@@ -1931,8 +1952,6 @@
 	Inherits@snipe: ^DriverKillImmune
 	Targetable@Epic:
 		TargetTypes: Epic
-	DamageMultiplier@EpicBuff:
-		Modifier: 50
 	Integrity:
 		MaxPercentageStrength: 200
 	Buildable:

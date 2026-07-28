@@ -78,7 +78,7 @@ combat_tank.harkonnen:
 
 missile_tank:
 	Inherits@D2KT: ^D2KTank
-	Inherits@Template: ^FireSupportTemplate
+	Inherits@Template: ^MissileVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender

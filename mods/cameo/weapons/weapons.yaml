@@ -1,4 +1,4 @@
-﻿^AnyWeapon:
+^AnyWeapon:
 
 
 ###############################################
@@ -1174,6 +1174,7 @@
 		HelixPlayerColor: true
 		Blockable: false
 		ZOffset: 2048
+		HitAnim:
 	Warhead@RailgunWeapon: SpreadDamage
 		AffectsParent: false
 		Spread: 250
@@ -5243,7 +5244,6 @@ AngryMobTargeting:
 		Blockable: true
 		DamageActorsInLine: true
 		BeamColor: 0080FFC8
-		HitAnim:
 	Warhead@1Dam: SpreadDamage
 		ValidRelationships: Neutral, Enemy
 		Range: 0, 33

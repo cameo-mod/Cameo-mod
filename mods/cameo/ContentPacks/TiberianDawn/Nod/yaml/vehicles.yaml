@@ -260,7 +260,7 @@ td_nod_buggy:
 
 td_nod_reconbike:
 	Inherits: ^Vehicle
-	Inherits@Template: ^AntiAirVehicleTemplate
+	Inherits@Template: ^MissileVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiVeh: ^PrioritizeVehicle
@@ -268,7 +268,6 @@ td_nod_reconbike:
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@PLD: ^PointLaserDefenseSystem
 	Inherits@GuerillaTactics: ^GuerillaTactics
-	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
 	Tooltip:
@@ -538,7 +537,7 @@ td_nod_stealthtank:
 
 td_nod_chemicalattackbike:
 	Inherits: ^Vehicle
-	Inherits@Template: ^AntiAirVehicleTemplate
+	Inherits@Template: ^MissileVehicleTemplate
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -549,7 +548,6 @@ td_nod_chemicalattackbike:
 	Inherits@PLD: ^PointLaserDefenseSystem
 	Inherits@ElementalWarfare: ^ElementalWarfare
 	Inherits@GuerillaTactics: ^GuerillaTactics
-	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
 	Tooltip:
