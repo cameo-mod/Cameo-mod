@@ -6,6 +6,114 @@ work follow. Fixed MBT anchor pivot: **Tiger `tiger.nax` = 100000 HP / 100 spd /
 dmg @ 50 reload / cost0 800** (DPS 200). (Range bumped 5000→5500 on 2026-07-26 to complete the range
 ladder — see the RANGE LADDER section.)_
 
+---
+
+# ★★★ FINAL LOCKED — VEHICLE LADDER + CLASSES (2026-07-28) ★★★
+_This section SUPERSEDES all the iterative discussion below. A fresh session should read THIS as the
+authoritative final state of the vehicle overhaul. Everything below the `═══` divider is iteration
+history / per-class rationale (still valid as reasoning, but the numbers here are the final ones)._
+
+## The 13 vehicle classes — FINAL numbers (all maintainer-confirmed, ALL stats unique per column)
+
+| Class | HP | Spd | DPS | Range | Cost | HP/Cost | DPS/Cost | Armor | Baseline actor | Verifier (2×HP/2×DPS/2.5×cost, matched tier+K) |
+|---|--:|--:|--:|--:|--:|--:|--:|---|---|---|
+| Scout | 30,000 | 200 | 450 | 4,500 | 300 | 100 | 1.50 | Scout | `td_nod_buggy` | `terran_vulture` |
+| LightTank | 100,000 | 120 | 200 | 5,000 | 400 | 250 | 0.50 | Medium | `ra1_allies_alliedlighttank` | `td_nod_lighttankmkii` |
+| Artillery | 50,000 | 70 | 500 | 15,000 | 500 | 100 | 1.00 | Light | `ra1_allies_alliedartillery` | `naxis_brummbar` (T2, NOT V2 which is T3) |
+| TankDestroyer | 150,000 | 55 | 600 | 7,500 | 600 | 250 | 1.00 | Heavy | `naxis_hetzer` | `ra2_allies_tankdestroyer` |
+| ArtilleryTank | 140,000 | 85 | 525 | 12,000 | 700 | 200 | 0.75 | Medium | `ixian_ixcombatsiege` | `schwarzermond_lunargrille` |
+| MBT | 220,000 | 100 | 480 | 5,500 | 800 | 275 | 0.60 | Heavy | `tiger.nax` | `naxis_kingtigerheavytank` (T1/T1, K1.0, 800→2000 exact 2.5×) |
+| AntiAir | 125,000 | 130 | 1,250 | 6,000 | 1,000 | 125 | 1.25 | Medium | `latinsyndicate_diablo` | `steelconsortium_barracuda` |
+| **MissileVehicle** | 120,000 | 110 | 1,200 | 8,000 | 1,200 | 100 | 1.00 | Light | `ts_gdi_hovermlrs` | `terran_cyclone` (T1/1.0) |
+| FireSupport | 105,000 | 90 | 2,100 | 10,000 | 1,400 | 75 | 1.50 | Light | `latinsyndicate_missiletruck` | **TBD at FS membership curation** (pure-ground T1/T2 K1.0; pool: forgotten_warriortank/protoss_reaver/eden_thorshammer) |
+| LineBreaker | 800,000 | 60 | 1,600 | 2,500 | 1,600 | 500 | 1.00 | Superheavy | `td_nod_flametank` | `td_nod_flametankmkii` |
+| HighTechTank | 600,000 | 80 | 1,500 | 6,500 | 2,000 | 300 | 0.75 | Superheavy | `ra1_soviets_mammothtank` | `ra1_soviets_siegemammothtank` |
+| Dreadnought | 1,200,000 | 50 | 2,400 | 7,000 | 3,000 | 400 | 0.80 | Superheavy | `terran_warhound` | `ixian_neocymek` |
+| **EpicVehicle** | 5,000,000 | 45 | 10,000 | 8,500 | 10,000 | 500 | 1.00 | Superheavy | `ra1_soviets_monstertank` | n/a (BuildLimit 1) |
+
+**Verifier stats are DERIVED** from each baseline by 2×HP + 2×DPS + 2.5×cost, SAME speed/range, and MUST
+match the baseline's **tier M-bucket AND K** (see the tier+K rule below). E.g. MBT verifier King Tiger =
+440000 HP / 960 DPS / 2000 cost.
+
+**Ladder derivation notes (final):**
+- Speeds: LineBreaker↔HighTech SWAPPED (LineBreaker 80→**60** slow juggernaut; HighTech 60→**80**) — this
+  cut LineBreaker's mobile-durability outlier. TankDestroyer 55, Dreadnought 50.
+- FireSupport DPS **DOUBLED** 1050→2100 (DPS/Cost 1.5) so it's no longer efficiency-dominated by the
+  MissileVehicle — now FS = fragile high-DPS long-range sniper, MV = balanced dual-purpose flexer.
+- HP/Cost spine 250 (LightTank/TD/MBT-ish) → MBT 275 → HighTech 300 → Dreadnought 400 → LineBreaker 500.
+- Ranges: HighTech/Dreadnought/TankDestroyer all +500 vs the old ladder (bands too); AntiAir stays 6000.
+- Composite check columns: A = HP/Cost×Speed (mobile-durability), B = DPS/Cost×Range (ranged-poke),
+  Total = A+B. Roster is role-clustered (brawlers high-A/low-B, artillery high-B/low-A). No remaining
+  outliers after the LineBreaker slow-down + FS buff.
+
+## MissileVehicle class (`^MissileVehicleTemplate`) — the vehicle analog of `^AdvancedAntiAirDefense`
+- **Solves:** FireSupport was to lose AA (fragile+long-range+AA = too strong), but 6 factions had NO
+  dedicated AA vehicle (ts_gdi, ixian, ordos, futuretech, terran, zerg) and relied on a dual-role unit.
+- **Weapon rule (KEY):** MissileVehicle has **ONE weapon** hitting **both ground and air** (priced once
+  as DPS; no air bonus). AntiAir keeps its **separate FREE air weapon** (+50% range→9000, +100% damage),
+  priced only on the ground weapon. So AntiAir >> MV vs air; MV > AntiAir vs ground (range 8000 vs 6000);
+  FireSupport = pure ground siege at 10000, no air. MV dominant in neither = flexible fragile all-rounder.
+- **Baseline = Hover MLRS** (`ts_gdi_hovermlrs`, T2, single dual-purpose weapon, range 8159≈8000). NOT the
+  TD GDI MLRS (which is the SAME KIND — its 227mm/227mmAMT are `!upgrade`/`upgrade` MUTUALLY EXCLUSIVE =
+  effectively ONE weapon; it's also a MissileVehicle, not FireSupport).
+- **Membership = the "missile-MLRS family":** long-range missile units that ALSO hit air. Includes
+  ts_gdi_hovermlrs, td_gdi_mlrs, latinsyndicate_lars, asianalliance_type89mlrs, ixian_ixmissiletank +
+  the AA-capable FireSupport pool + **Nod bikes** (td_nod_reconbike/chemicalattackbike, ts_nod_attackcycle
+  — MOVE from AntiAir → MissileVehicle, kept very fast as members). **Curate from a COMPLETE air-capable
+  scan** (my earlier scan only read `*weapon*.yaml` files — MISS: missiles.yaml/ballistics.yaml/
+  tiberiandawn.yaml define weapons too; rescan ALL yaml for `ValidTargets: … Air`).
+
+## Epic vehicles (`^EpicVehicleTemplate` + `^EpicAirUnitTemplate`) — RULES
+- **Remove `DamageMultiplier@EpicBuff`** (defaults.yaml:1644 + :1934) — the last multiplier standing.
+- **4× raw HP** replaces it (the general ×2 HP bake + ×2 for the removed epic damage-reduction).
+- **Epic vehicle baseline = Monster Tank** (`ra1_soviets_monstertank`): HP 1,000,000×4 = **5,000,000**,
+  spd 45, range **8,500**, cost 10,000, Superheavy. **DPS = 10,000 (DPS/Cost 1.0).**
+- **Epic DPS calc:** its cannon (`MonsterTank120mm`, dmg 40k, burst 2, eff-reload 103+32=135) + AA tusk
+  (`MonsterTankTusk`, dmg 20k, burst 4, eff-reload 125+9=134) both hit ground+air and have the SAME
+  eff-reload → **DPS values ADD**. Current summed ≈ 1,190; buff both weapons ~8.4× (to 5,000 DPS each →
+  10,000 total; cannon dmg → ~337,500, tusk → ~167,500) via the pipeline (`distribute_damage` snaps to
+  the 2000-grid). Damage-VALUE change = allowed without permission.
+
+## ★ FUNDAMENTAL VERIFIER RULE (I violated this — do NOT again): TIER **and** K must MATCH
+Baseline+verifier must share the same **TechTier M-bucket AND K** or the 2.5× cost identity is wrong.
+- **TechTier M** (DESIGN.md §"Tier counting for the M discount"; set ONLY by TECH-building prereqs —
+  production buildings + refineries never count): no-tech = T1, radar/equiv = T2, tech-center = T3, beyond
+  = T4/5. **T1 = T2 = M 1.0** (same bucket!) · T3 = 0.75 · T4/5 = 0.5. So a **T1 baseline + T2 verifier is
+  FINE** (Artillery RA1-Allied-Artillery T2 / Brummbär T2 ✓; also T1/T2 mix ok), but a **T2 baseline + T3
+  verifier is WRONG** (Hover MLRS T2 / Ixian Missile Tank T3 ✗; V2 rocket T3 ✗).
+- **K** (special modifier): **gatling → K 1.25** (Asian MLRS, Latin LARS = gatling → invalid MV verifiers);
+  flame/charge/cloak likewise must match. Tier detection = read Buildable Prerequisites for a tech building.
+Also saved as memory [[cameo-verifier-tier-k-match]].
+
+## ★ NEXT MAJOR TASK (after compaction): NEW WEAPON CLASSES / TYPES
+The rule **unit-class ↔ weapon-class are directly bound** (each unit class carries a specific weapon type)
+needs MORE weapon templates to exist first. Maintainer will name the ones to create; **I ALSO propose my
+own**. Initial suggestions to develop: **Light/Medium/Heavy Laser** (so beam units like the FS-verifier
+candidates fit a class), Light/Medium/Heavy of each family (Cannon, Missile/Rocket, MG/Autocannon, Flame,
+Plasma, Tesla, Gatling, Artillery-shell), + AA variants. Weapon class = derived from the main SpreadDamage
+warhead's `Versus: Shield` (110/125/140 = 0.75/1.0/1.25; superheavy 155/170/185 = 1.5/1.75/2.0). Wire the
+`weapon_classes.yaml` sidecar + `--check-weapon-classes` into `run_all.sh`, then the weapon-type↔unit-type
+binding audit. **THEN** each vehicle class gets its bound weapon type(s).
+
+## ★ BUILD/IMPLEMENT ORDER (resume here after compaction)
+1. **Record complete** (this section) — done.
+2. **Build `^MissileVehicleTemplate`** in defaults.yaml (Light armor, single dual-purpose weapon behaviour,
+   tooltip, build order) — boot-gated, same pattern as the 5 templates already built in commit `090d3d997`.
+3. **Reassign the missile-MLRS family + Nod bikes → MissileVehicle** (scripted, collision-checked via the
+   MiniYaml.cs:471 direct-sibling∩closure rule — see `scratchpad/collide.py` pattern); remove EpicBuff
+   multiplier; boot-test → commit.
+4. **NUMERIC PASS (needs maintainer `apply_balance --confirm` order):** set each baseline actor to the FINAL
+   table above → `fit_class` scales every member 0.5–4.0× band, verifier at 2.5× → per-actor armor
+   normalization (strip per-actor `Armor:Type` overrides so the class armor applies) → self-heal Step
+   (scouts HP/1000, others HP/2500) → epic 4×HP + Monster-Tank DPS buff → re-extract → audits + BOOT GATE →
+   commit yaml+ledger together.
+5. **Weapon classes** (the next major task above).
+
+**STRUCTURAL PASS ALREADY DONE + COMMITTED** `090d3d997` (5 vehicle templates, buffs stripped, 58
+reassignments, boot-verified). Do NOT redo it.
+
+═══════════════════════════════════════════════════════════════════════════════════════════════════
+
 ## ▶ STATUS / RESUME HERE (2026-07-26)
 
 **Collaborative class-by-class anchor definition IN PROGRESS.** The maintainer names a class → I
@@ -218,14 +326,46 @@ the deliberate outlier (tanky long-range siege, not a damage dealer — flagged,
 - **LineBreaker: cost 1200 → 1000** (HP 300000 / DPS 1000) → **HP/Cost 300 (highest), DPS/Cost 1.0**. ✓ LOCKED
 - **Artillery: cost 600 → 500** (HP 50000 / DPS 500) → **HP/Cost 100, DPS/Cost 1.0**. ✓ LOCKED
 - **TankDestroyer: DPS 500 → 600** (HP 150000 / cost 600) → HP/Cost 250, **DPS/Cost 1.0**. ✓ LOCKED
-- **Dreadnought — UNDER-DETERMINED (2 targets: HP/Cost 300 = LineBreaker, DPS/Cost 0.5 = turreted tanks;
-  3 vars).** Two ways: **(A)** keep cost 3000 (apex) → **HP 900000 / DPS 1500**; **(B)** keep HP 600000
-  → **cost 2000 / DPS 1000** (ties HighTech cost). ⏳ maintainer to pick.
-- **ArtilleryTank — UNDER-DETERMINED ("HP/Cost + DPS/Cost between Tank(MBT 250/0.5) and Artillery
-  (100/1.0)" → midpoints HP/Cost 175, DPS/Cost 0.75).** **(A)** keep cost 1200 → **HP 210000 / DPS 900**;
-  **(B)** keep HP 125000 → **cost ~700 / DPS 525**. ⏳ maintainer to pick.
-- **`asianalliance_viper` class STILL OPEN** (LightTank per additions list vs Artillery per members list;
-  currently Artillery, frontal no-turret — left as Artillery pending decision).
+- **Dreadnought = (A) LOCKED:** cost **3000** (apex) → **HP 900000 / DPS 1500** (HP/Cost 300, DPS/Cost 0.5).
+- **ArtilleryTank = (B) LOCKED:** keep **HP 125000** → cost **700 / DPS 525** (HP/Cost ~178, DPS/Cost 0.75).
+- **`asianalliance_viper` = Artillery LOCKED** (stays; frontal no-turret).
+
+## ★ NEW CLASS — `^MissileVehicleTemplate` (2026-07-28) — flexible ground+air missile skirmisher
+
+**Solves:** FireSupport was to lose AA (fragile-long-range + AA = too strong), but 6 factions have NO
+dedicated AntiAir vehicle and rely on a dual-role FireSupport unit (ts_gdi hovermlrs, ixian, ordos,
+futuretech, terran, zerg). Rather than strip their only AA, split the dual-role units into their own
+class — the **vehicle analog of `^AdvancedAntiAirDefense`** (the defense-side hybrid). **Nothing gets its
+AA stripped.**
+
+**Position = EXACTLY between FireSupport and AntiAir** (maintainer 2026-07-28, ratio-defined):
+| Class | HP | Spd | DPS | Range | Cost | Armor | HP/Cost | DPS/Cost |
+|---|--:|--:|--:|--:|--:|---|--:|--:|
+| FireSupport | 75000 | 90 | **750** | 10000 | 1000 | Light | 75 | 0.75 |
+| **MissileVehicle** | **80000** | **110** | **800** | **8000** | **800** | **Light** | **100** | **1.00** |
+| AntiAir | **75000** | **130** | **750** | 6000 | 600 | Medium | 125 | 1.25 |
+
+- **MissileVehicle baseline = `td_gdi_mlrs`** (GDI Hover-style MLRS — the unit that prompted the split).
+  Verifier (2×HP+2×DPS+2.5×cost): HP 155000 / DPS 1400 / cost 2000, same spd/rng — pick a verifier unit.
+- **Weapon rule (KEY, maintainer 2026-07-28):** MissileVehicle has **ONE weapon** that hits **both ground
+  and air** (priced once as its DPS; no air bonus → air = ground). AntiAir keeps its **separate FREE air
+  weapon** (+50% range → 9000, +100% damage), priced only on the ground weapon (unchanged rule). So
+  AntiAir >> MissileVehicle vs air; MissileVehicle > AntiAir vs ground (range 8000 vs 6000); FireSupport =
+  pure ground siege at 10000, no air. MissileVehicle dominant in neither → the flexible fragile all-rounder.
+- **Armor = Light** (fragility is the counterweight to flexibility; clear counter = fast closers).
+- **Speed 110** baseline; **members keep own speed → Nod bikes stay very fast** (`td_nod_reconbike`,
+  `td_nod_chemicalattackbike`, `ts_nod_attackcycle` MOVE from AntiAir → MissileVehicle, fast outliers).
+
+**★ FireSupport + AntiAir stat changes (2026-07-28):**
+- **FireSupport:** DPS 600 → **750** (only change). **Baseline switches GDI MLRS → Latin Syndicate
+  Missile Truck** (`latinsyndicate_missiletruck`; already in-class, fits Latin's rocket identity).
+  **RA1 V1 Rocket Truck STAYS Artillery** (indirect ballistic, 15000, frontal). **⏳ FireSupport needs a
+  NEW verifier** (old baseline→MissileVehicle, old verifier→baseline).
+- **AntiAir:** HP 80000 → **75000**, DPS 800 → **750**, Speed 125 → **130** (so MissileVehicle mid = 110).
+
+**★ Membership curation PENDING** (from the 15 AA-capable FireSupport units + Nod bikes): clear missile
+dual-role → MissileVehicle; false positives (e.g. `zerg_lurker` targeting-only) stay put; gatling/beam
+units (futuretech_gunstrider, japan_waveforcetank) may be AntiAir instead. Propose + confirm before moving.
 
 ## ★ RANGE LADDER (maintainer 2026-07-26 — verified consistent, steps of 500)
 
