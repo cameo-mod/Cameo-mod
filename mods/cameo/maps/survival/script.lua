@@ -893,10 +893,10 @@ end
 -- =====================================================================
 
 MCVDeployPositions = {
-	CPos.New(25, 25),
-	CPos.New(125, 25),
-	CPos.New(125, 125),
-	CPos.New(25, 125),
+	CPos.New(15, 15),
+	CPos.New(135, 15),
+	CPos.New(135, 135),
+	CPos.New(15, 135),
 }
 
 MCVSentFromSide = { false, false, false, false }
