@@ -95,6 +95,20 @@ warhead's `Versus: Shield` (110/125/140 = 0.75/1.0/1.25; superheavy 155/170/185 
 `weapon_classes.yaml` sidecar + `--check-weapon-classes` into `run_all.sh`, then the weapon-type↔unit-type
 binding audit. **THEN** each vehicle class gets its bound weapon type(s).
 
+### Weapon-class program — GUIDING RULES (maintainer, 2026-07-28)
+- **STRICT ORDER:** finish the **vehicle unit templates FIRST** (MissileVehicle etc.), **THEN** build the
+  new weapon templates. The maintainer will **name exactly** which weapon templates we need; I **also
+  propose my own** (do not pre-build them before that conversation).
+- **PURPOSE = kill warhead-mixing.** Today many weapons mix many warheads; the goal is **1–2 warheads max
+  per weapon**, achieved by having a proper template per role so a weapon inherits ONE role instead of
+  stitching several.
+- **HARD LIMIT = 2 weapon-template inherits per weapon** (this is the *upgraded* variant's ceiling; a basic
+  weapon = 1). See [[cameo-weapon-structure-rules]].
+- **Special-unit exemption is NOT a blank cheque — it is TBD.** A special unit may exceed 2 **only when the
+  extra mixing is genuinely justified** (a deliberate multi-role "for-fun" siege unit); an unjustified >2 is
+  a cleanup target, NOT an exemption. The exact justification bar is **still to be determined** with the
+  maintainer — do not assume the old siege-tank list is the final allow-list.
+
 ## ★ BUILD/IMPLEMENT ORDER (resume here after compaction)
 1. **Record complete** (this section) — done.
 2. **Build `^MissileVehicleTemplate`** in defaults.yaml (Light armor, single dual-purpose weapon behaviour,

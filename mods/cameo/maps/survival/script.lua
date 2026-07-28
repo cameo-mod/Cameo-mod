@@ -49,14 +49,15 @@ PlayerCount = 0
 LiveFoes = {}
 FinalWaveSent = false
 GameWon = false
+GameLost = false
 RemainingTime = 0
 timerStarted = false
 Text = ""
 CurrentWaveIdx = 1
 
 PrepSeconds = Utils.RandomInteger(150, 361)   -- random prep: 2.5-6 minutes (LONGER, more random)
-BaseBudget = 2200      -- wave-1 base budget at 1 player (BOOSTED for extreme difficulty)
-BudgetGrowth = 950     -- extra budget per wave index (BOOSTED)
+BaseBudget = 2500      -- wave-1 base budget at 1 player
+BudgetGrowth = 500     -- extra budget per wave index
 CenterPos = CPos.New(75, 75)
 
 -- =====================================================================
@@ -290,7 +291,7 @@ CountEnemyValue = function()
 end
 
 MaxEnemyValueForWave = function(waveIdx)
-	return math.floor((5000 + 500 * waveIdx) * (1 + PlayerScale()))
+	return math.floor((2500 + 500 * waveIdx) * (0.5 + PlayerScale()))
 end
 
 RemainingEnemyBudget = function(waveIdx)
@@ -931,6 +932,120 @@ FactionBuildings = {
 	["zerg_hatcherydrone"]                 = { power = nil, barracks = "zerg_spawningpool", warfactory = "zerg_hydraliskden", refinery = "zerg_extractor" },
 }
 
+-- Maps faction internal name to construction yard actor name
+FactionConyards = {
+	td_gdi = "td_gdi_constructionyard",
+	td_nod = "td_nod_constructionyard",
+	ra1_allies = "ra1_allies_alliedconstructionyard",
+	ra1_soviets = "ra1_soviets_constructionyard",
+	ra2_allies = "ra2_allies_alliedconstructionyard",
+	ra2_soviets = "ra2_soviets_constructionyard",
+	yuri = "yuri_constructionyard",
+	asianalliance = "asianalliance_asianconstructionyard",
+	latinsyndicate = "latinsyndicate_syndicateconstructionyard",
+	ordos = "ordos_constructionyard",
+	ts_gdi = "ts_gdi_constructionyard",
+	ts_nod = "ts_nod_constructionyard",
+	japan = "japan_japaneseconstructionyard",
+	naxis = "naxis_constructionyard",
+	schwarzermond = "schwarzermond_constructionyard",
+	ixian = "ixian_constructionyard",
+	wc2_humans = "wc2_humans_townhall",
+	wc2_orcs = "wc2_orcs_greathall",
+	tkm = "tkm_constructionyard",
+	steelconsortium = "steelconsortium_consortiumconstructionyard",
+	futuretech = "futuretech_constructionyard",
+	cabal = "cabal_constructionyard",
+	forgotten = "forgotten_constructionyard",
+	zerg = "zerg_hatchery",
+	protoss = "protoss_nexus",
+	terran = "terran_commandcenter",
+}
+
+-- Reverse map: MCV actor name -> faction internal name
+MCVFactionMap = {}
+for _, w in ipairs(Waves) do
+	if w.mcv ~= nil then
+		for factionName, _ in pairs(FactionInternalToDisplayName) do
+			if w.mcv:sub(1, #factionName) == factionName then
+				MCVFactionMap[w.mcv] = factionName
+			end
+		end
+	end
+end
+
+-- Reverse map: faction internal name -> MCV actor name
+FactionToMCV = {}
+for mcvName, factionName in pairs(MCVFactionMap) do
+	FactionToMCV[factionName] = mcvName
+end
+
+-- Spawn a pre-built base (minus conyard) plus an MCV for a Foe player at a corner.
+-- The AI deploys the MCV naturally, which sets DefenseCenter and avoids the bot crash.
+SpawnAIBase = function(foeIdx, cornerPos)
+	local foe = Foes[foeIdx]
+	if foe == nil then return end
+
+	local faction = foe.Faction
+	if faction == nil or faction == "" or faction == "Random" then
+		local keys = {}
+		for k, _ in pairs(FactionConyards) do table.insert(keys, k) end
+		faction = keys[Utils.RandomInteger(1, #keys + 1)]
+	end
+
+	local mcv = FactionToMCV[faction]
+	if mcv == nil then return end
+
+	-- Find the FactionBuildings entry by matching MCV to faction
+	local buildings = nil
+	for mcvName, bld in pairs(FactionBuildings) do
+		if MCVFactionMap[mcvName] == faction then
+			buildings = bld
+			break
+		end
+	end
+	if buildings == nil then return end
+
+	-- Spawn MCV first so we can capture the actor reference and force-deploy it
+	local mcvActor = nil
+	pcall(function()
+		mcvActor = Actor.Create(mcv, true, { Owner = foe, Location = cornerPos })
+	end)
+
+	-- Force-deploy the MCV on the next tick so the AI bot doesn't drive it to center
+	if mcvActor ~= nil then
+		Trigger.AfterDelay(0, function()
+			if not mcvActor.IsDead then
+				if mcvActor.HasProperty("Deploy") then
+					mcvActor.Deploy()
+				elseif mcvActor.HasProperty("Build") then
+					mcvActor.Build()
+				end
+			end
+		end)
+	end
+
+	-- Spawn the rest of the base buildings near the corner
+	local offsets = {
+		{ dx = 5, dy = 0, actor = buildings.power },
+		{ dx = 0, dy = 4, actor = buildings.barracks },
+		{ dx = 5, dy = 4, actor = buildings.warfactory },
+		{ dx = 0, dy = 8, actor = buildings.refinery },
+	}
+
+	for _, o in ipairs(offsets) do
+		if o.actor ~= nil then
+			local pos = CPos.New(cornerPos.X + o.dx, cornerPos.Y + o.dy)
+			pcall(function()
+				Actor.Create(o.actor, true, { Owner = foe, Location = pos })
+			end)
+		end
+	end
+
+	-- Give initial cash so AI bot modules can start producing
+	GiveAICashInjection(foe, 5000)
+end
+
 -- Maps MCV actor name to the faction's upgrade list (unlocked progressively each wave)
 FactionUpgrades = {
 	["td_gdi_mobileconstructionvehicle"] = {
@@ -1465,7 +1580,7 @@ DoubleTrouble = function(waveIdx)
 		local otherWave = Waves[otherIdx]
 
 		-- BIGGER budget: 0.8x (was 0.6x)
-		local budget = RandomBudgetVariance((BaseBudget + BudgetGrowth * (waveIdx - 1)) * 0.8 * PlayerScale())
+		local budget = RandomBudgetVariance((BaseBudget + BudgetGrowth * (waveIdx - 1)) * 0.8 * (0.5 + PlayerScale()))
 		local maxUnits = RandomUnitCountVariance(math.floor((8 + math.floor(waveIdx / 2)) * PlayerScale()))
 		local list = ComposeWave(otherWave, budget, maxUnits)
 		if #list == 0 then return end
@@ -1522,7 +1637,7 @@ DoubleTrouble = function(waveIdx)
 				end
 				if thirdIdx == waveIdx or thirdIdx == otherIdx then return end
 				local thirdWave = Waves[thirdIdx]
-				local budget3 = RandomBudgetVariance((BaseBudget + BudgetGrowth * (waveIdx - 1)) * 0.6 * PlayerScale())
+				local budget3 = RandomBudgetVariance((BaseBudget + BudgetGrowth * (waveIdx - 1)) * 0.6 * (0.5 + PlayerScale()))
 				local maxUnits3 = RandomUnitCountVariance(math.floor((6 + math.floor(waveIdx / 3)) * PlayerScale()))
 				local list3 = ComposeWave(thirdWave, budget3, maxUnits3)
 				if #list3 == 0 then return end
@@ -2037,7 +2152,7 @@ SurpriseWave = function(waveIdx)
 		local surpriseIdx = Utils.RandomInteger(1, #Waves)
 		local surpriseWave = Waves[surpriseIdx]
 		-- BIGGER budget: 0.7x (was 0.5x)
-		local budget = RandomBudgetVariance((BaseBudget + BudgetGrowth * waveIdx) * 0.7 * PlayerScale())
+		local budget = RandomBudgetVariance((BaseBudget + BudgetGrowth * waveIdx) * 0.7 * (0.5 + PlayerScale()))
 		local maxUnits = RandomUnitCountVariance(math.floor((10 + waveIdx) * PlayerScale()))
 		local list = ComposeWave(surpriseWave, budget, maxUnits)
 		if #list == 0 then return end
@@ -2059,7 +2174,7 @@ SurpriseWave = function(waveIdx)
 			Trigger.AfterDelay(DateTime.Seconds(Utils.RandomInteger(5, 15)), function()
 				local s2Idx = Utils.RandomInteger(1, #Waves)
 				local s2Wave = Waves[s2Idx]
-				local budget2 = RandomBudgetVariance((BaseBudget + BudgetGrowth * waveIdx) * 0.5 * PlayerScale())
+				local budget2 = RandomBudgetVariance((BaseBudget + BudgetGrowth * waveIdx) * 0.5 * (0.5 + PlayerScale()))
 				local maxUnits2 = RandomUnitCountVariance(math.floor((8 + waveIdx) * PlayerScale()))
 				local list2 = ComposeWave(s2Wave, budget2, maxUnits2)
 				if #list2 == 0 then return end
@@ -2087,10 +2202,6 @@ GetherData = function()
 		end
 	end
 	PlayerCount = math.max(#ActivePlayer, 1)
-	table.insert(Foes, Player.GetPlayer("True Nemesis"))
-	table.insert(Foes, Player.GetPlayer("True Enemy"))
-	table.insert(Foes, Player.GetPlayer("True Opponent"))
-	table.insert(Foes, Player.GetPlayer("True Villian"))
 	ThrottledDisplayMessage(tostring(PlayerCount) .. " player(s) -- wave strength scales with the team.", "", true)
 	ThrottledDisplayMessage("CHAOS EDITION: Expect the unexpected. Everything is random.", "", true)
 end
@@ -2348,7 +2459,7 @@ SendWave = function(idx)
 	CurrentWaveIdx = idx
 	local wave = Waves[idx]
 	-- Random budget variance and unit count variance
-	local budget = RandomBudgetVariance((BaseBudget + BudgetGrowth * (idx - 1)) * PlayerScale())
+	local budget = RandomBudgetVariance((BaseBudget + BudgetGrowth * (idx - 1)) * (0.5 + PlayerScale()))
 	local maxUnits = RandomUnitCountVariance(15 + idx * 2 + 8 * (PlayerCount - 1))  -- WAS 10+idx+6*(players-1), now MUCH more
 	local list = ComposeWave(wave, budget, maxUnits)
 
@@ -2435,6 +2546,27 @@ SendWave = function(idx)
 	end
 end
 
+CheckDefeat = function()
+	if GameLost or GameWon then return end
+	if #ActivePlayer == 0 then return end
+	local allDead = true
+	for _, p in ipairs(ActivePlayer) do
+		local actors = p.GetActors()
+		if #actors > 0 then
+			allDead = false
+			break
+		end
+	end
+	if allDead then
+		GameLost = true
+		for _, p in ipairs(ActivePlayer) do
+			p.MarkFailed()
+		end
+		UserInterface.SetMissionText("YOUR BASE HAS BEEN DESTROYED!", Player.GetPlayer("Neutral").Color)
+		ThrottledDisplayMessage("Your forces have been wiped out. Better luck next time!", "", true)
+	end
+end
+
 CheckVictory = function()
 	if GameWon or not FinalWaveSent then
 		return
@@ -2457,6 +2589,21 @@ CheckVictory = function()
 end
 
 WorldLoaded = function()
+	-- Populate Foes immediately so they're available for all functions
+	table.insert(Foes, Player.GetPlayer("True Nemesis"))
+	table.insert(Foes, Player.GetPlayer("True Enemy"))
+	table.insert(Foes, Player.GetPlayer("True Opponent"))
+	table.insert(Foes, Player.GetPlayer("True Villian"))
+
+	-- Spawn bases on first tick (Actor.Create doesn't work during WorldLoaded)
+	Trigger.AfterDelay(0, function()
+		for i = 1, 4 do
+			if Foes[i] ~= nil then
+				SpawnAIBase(i, MCVDeployPositions[i])
+			end
+		end
+	end)
+
 	-- Shuffle wave order for this game
 	ShuffleWaves()
 
@@ -2481,6 +2628,7 @@ Tick = function()
 		RemainingTime = RemainingTime - 1
 	end
 	if DateTime.GameTime % 100 == 0 then
+		CheckDefeat()
 		CheckVictory()
 	end
 	-- Periodic cash injection for AI Foe players so bot modules can keep building/producing

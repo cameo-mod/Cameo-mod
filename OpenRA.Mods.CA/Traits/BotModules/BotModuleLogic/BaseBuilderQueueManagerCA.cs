@@ -623,16 +623,18 @@ namespace OpenRA.Mods.CA.Traits
 				case BuildingType.Defense:
 
 					// Build near the closest enemy structure
+					var defenseCenter = baseBuilder.DefenseCenter ?? baseCenter;
 					var closestEnemy = world.ActorsHavingTrait<Building>()
 						.Where(a => !a.Disposed && player.RelationshipWith(a.Owner) == PlayerRelationship.Enemy)
-						.ClosestToIgnoringPath(world.Map.CenterOfCell(baseBuilder.DefenseCenter.Value));
+						.ClosestToIgnoringPath(world.Map.CenterOfCell(defenseCenter));
 
 					var targetCell = closestEnemy != null ? closestEnemy.Location : baseCenter;
-					return findPos(actorType, distanceToBaseIsImportant, producer, baseBuilder.DefenseCenter.Value, targetCell, baseBuilder.Info.MinimumDefenseRadius, baseBuilder.Info.MaximumDefenseRadius);
+					return findPos(actorType, distanceToBaseIsImportant, producer, defenseCenter, targetCell, baseBuilder.Info.MinimumDefenseRadius, baseBuilder.Info.MaximumDefenseRadius);
 
 				case BuildingType.Fragile:
 					// Build away from where enemy last attacked
-					return findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, baseBuilder.DefenseCenter.Value, baseBuilder.Info.MinBaseRadius,
+					var fragileDefenseCenter = baseBuilder.DefenseCenter ?? baseCenter;
+					return findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, fragileDefenseCenter, baseBuilder.Info.MinBaseRadius,
 						distanceToBaseIsImportant ? baseBuilder.Info.MaxBaseRadius : world.Map.Grid.MaximumTileSearchRange, sortMax: true);
 
 				case BuildingType.Refinery:
@@ -708,12 +710,13 @@ namespace OpenRA.Mods.CA.Traits
 					}
 
 					// Try and find a free spot somewhere else in the base
+					var crawlDefenseCenter = baseBuilder.DefenseCenter ?? baseCenter;
 					closestEnemy = world.ActorsHavingTrait<Building>()
 						.Where(a => !a.Disposed && player.RelationshipWith(a.Owner) == PlayerRelationship.Enemy)
-						.ClosestToIgnoringPath(world.Map.CenterOfCell(baseBuilder.DefenseCenter.Value));
+						.ClosestToIgnoringPath(world.Map.CenterOfCell(crawlDefenseCenter));
 
 					targetCell = closestEnemy != null ? closestEnemy.Location : baseCenter;
-					return findPos(actorType, distanceToBaseIsImportant, producer, baseBuilder.DefenseCenter.Value, targetCell, baseBuilder.Info.MinimumDefenseRadius, baseBuilder.Info.MaximumDefenseRadius);
+					return findPos(actorType, distanceToBaseIsImportant, producer, crawlDefenseCenter, targetCell, baseBuilder.Info.MinimumDefenseRadius, baseBuilder.Info.MaximumDefenseRadius);
 
 				case BuildingType.Building:
 					return findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, baseCenter, baseBuilder.Info.MinBaseRadius,

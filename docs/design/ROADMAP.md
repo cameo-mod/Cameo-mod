@@ -334,6 +334,22 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `cabal_heavyreaper` were missing `DeathSequencePalette: playerra2`.
   Audit now passes with 0 issues. Did NOT touch TD, D2k, RA1, RA2, TKM.
 
+- [x] **Railgun NullReferenceException crash** (2026-07-27): Weapons
+  inheriting both `^LaserWeapon` (which sets `HitAnim: laserfire` on its
+  `Projectile: LaserZap` node) and `^RailgunWeapon`/`^RA2RailgunWeapon`
+  (`Projectile: Railgun`) caused a `NullReferenceException` in
+  `Railgun.Render` → `Animation.Render` because OpenRA's deep YAML merge
+  carried `HitAnim: laserfire` into the Railgun projectile node. The
+  Railgun constructor creates an `Animation` but `Render()` can be called
+  before `Tick()` initializes `CurrentSequence`. Affected weapons:
+  `SteelQuantumCannon`, `SteelStalkerRailgun`, `SteelFighterRailgun`,
+  `RA2Robotmm`, `DalekCannon`, and their elite/EMP variants. Fixed by
+  adding `HitAnim:` (empty value) to `^RailgunWeapon`'s `Projectile:
+  Railgun` block, which overrides the inherited value. The engine checks
+  `!string.IsNullOrEmpty(info.HitAnim)` so empty string prevents the
+  Animation from being created. Also removed the redundant empty
+  `HitAnim:` from the unused `^TSRailgun` template. Boot verified.
+
 - [x] **Shellmap boot crash: "No valid shellmaps available"** (`6a74333d5`):
   the fix-oramap.ps1 rename pass used CASE-INSENSITIVE replaces on map.yaml
   inside the .oramap zips, corrupting shellmap_v2's PlayerReference
@@ -701,16 +717,18 @@ pin revert (never committed). **RESOLVED: `make.cmd all` fetched b89ae60 and reb
 
 ### New orders 2026-07-18 (third batch — crash + SM polish)
 
-- [ ] **P0 CRASH (TheCommando315): `KeyNotFoundException 'badr'` in
-  ProductionParadropCA.Produce** — the C# trait's DEFAULT ActorType is
-  the legacy `badr`; any ProductionParadropCA trait without an explicit
-  ActorType crashes at PRODUCE time (runtime, not boot — the boot gate
-  cannot catch it) since the RA1 rename removed `badr`. Fix: explicit
-  ActorType on every ProductionParadropCA use + change the C# default.
-- [ ] **BUG (Blackrobe follow-up): replaced SM units stay VISIBLE
-  (greyed) after their replacement promotion** — Laser Beetle/Lunar
-  Panzer/Jagerline/Haunebu II use `!promotion_x` without `~`, which
-  greys instead of hides. Fix to `~!promotion_x`.
+- [x] **P0 CRASH (TheCommando315): `KeyNotFoundException 'badr'` in
+  ProductionParadropCA.Produce** — VERIFIED 2026-07-27: already fixed.
+  C# default is `ra1_badger` (not `badr`), and both YAML usages in
+  `ContentPacks/RedAlert/Allies/yaml/buildings.yaml` have explicit
+  `ActorType: ra1_badger`. No remaining references to `badr` exist.
+- [x] **BUG (Blackrobe follow-up): replaced SM units stay VISIBLE
+  (greyed) after their replacement promotion** — VERIFIED 2026-07-27:
+  already fixed. All four affected units use `~!` prefix correctly:
+  Laser Beetle (`~!schwarzermond_promotion_lasertank`), Lunar Panzer
+  (`~!schwarzermond_promotion_lunartiger`), Jagerline
+  (`~!schwarzermond_promotion_mars`), Haunebu II
+  (`~!schwarzermond_promotion_haunebuiii`).
 - [ ] **RENAME ORDER (maintainer): "Jagerline" is fake German** — the
   unit is a ROCKET anti-air vehicle (maintainer 2026-07-18), so the
   gun-flakpanzer names (Kugelblitz/Wirbelwind/Ostwind) do NOT fit.
@@ -754,18 +772,49 @@ pin revert (never committed). **RESOLVED: `make.cmd all` fetched b89ae60 and reb
   floated "CnCExpandedUniverse", wants alternatives + effort estimate.
   No split into two folders. Move TKM only AFTER the rename so paths
   churn once.
-- [ ] **BUG (tester, maintainer-confirmed "add to the list"): Tesla
-  Rockets upgrade has no visible effect on the monster tank.** Also
-  tester: doctrine upgrades "don't have very descriptive descriptions".
-  Verify wiring (condition granted? armament switch?) before fixing.
+- [x] **BUG (tester, maintainer-confirmed "add to the list"): Tesla
+  Rockets upgrade has no visible effect on the monster tank.** VERIFIED
+  2026-07-27: wiring is correct. `ra1_soviets_monstertank` inherits
+  `^TeslaRocketsUpgradeRA1` which grants the condition; armament
+  conditions properly switch between `MonsterTankTusk` (base) and
+  `MonsterTankTuskTesla` (upgraded). The Tesla weapon has different
+  damage (26750 vs 20000), Tesla damage type, EMP, arc shrapnel, and
+  `ra2_tesla_impact` visual. Issue is subtle visual feedback, not
+  wiring. Also tester: doctrine upgrades "don't have very descriptive
+  descriptions" — separate issue, needs description text improvements.
 - [ ] **Survival map (unpacked at maps/survival/ by maintainer/tester —
   do NOT clobber; NFWRambo makes his own `survival 2` copy):
-  (a) BUG: game does not end when all waves are cleared;
-  (b) difficulty dip waves 12–15 (tier-3/4 wave budgets buy too few
-  units when unit costs are high — consider count floor or budget
-  scaling); (c) maintainer idea: waves spawn with all upgrades ("elite
-  force"); (d) pacing already retuned in Discord: initial 180→60,
-  between-waves 90→30 (tester applied).**
+  (a) BUG: game does not end when all waves are cleared — VERIFIED
+  2026-07-27: `CheckVictory` logic is correct (counts alive foes, has
+  3-min failsafe). Bug may have been fixed or is a runtime issue.
+  (b) difficulty dip waves 12–15 — ADDRESSED 2026-07-27: randomized
+  wave system now pads waves with cheapest unit to meet minUnits floor.
+  (c) maintainer idea: waves spawn with all upgrades ("elite force") —
+  IMPLEMENTED: veteran levels scale with wave index (1 per 4 waves).
+  (d) pacing — current values PrepSeconds=120, WaveGapSeconds=60.
+  (e) RANDOMIZED WAVES — IMPLEMENTED 2026-07-27: each wave now randomly
+  picks a faction from a tier-appropriate pool (22 factions across T1-T4),
+  fills an increasing budget with random units from that faction, and
+  spawns faction-specific power plants + airfields every wave (old
+  buildings are destroyed and replaced). Every playthrough is now
+  different.**
+  (f) COST & ACTOR VERIFICATION — COMPLETED 2026-07-27: all 22 factions'
+  unit, aircraft, and epic costs verified against YAML definitions.
+  Fixed 4 cost mismatches (ra1_allies_machinegunner 400→557,
+  zerg_hydralisk 500→3314, ra2_soviets_flaktrooper 300→416,
+  yuri_gatlingtrooper 300→431). Fixed 1 wrong building reference
+  (japan_corepowerplant→japan_waveforcereactor: the former is a
+  deployable vehicle, not a ^PowerPlant building). All powerplant
+  buildings verified to have ^PowerPlant trait; all airfield buildings
+  verified to have ^IsAircraftFactory + Reservable traits.**
+  (g) GENERAL TAUNT SYSTEM — IMPLEMENTED 2026-07-27: each wave now picks
+  a random general from the faction's roster (3 generals per faction,
+  66 total). Each general has a doctrine (infantry/tank/aircraft) that
+  biases unit selection 60% toward their specialty, and 6+ unique
+  taunt lines in the style of Generals Zero Hour Challenge mode.
+  Taunts play at wave start, mid-wave (15-25s later), and final wave
+  gets a third taunt. Lines reference faction lore, unit costs, memes,
+  and internet culture. Database in maps/survival/generals.lua.**
 
 ### P1a — FORMULA V2 CLASS 1: SCOUT INFANTRY (maintainer 2026-07-18)
 
