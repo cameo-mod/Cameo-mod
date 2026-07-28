@@ -122,7 +122,7 @@ scrapcar2_driveby.latin:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	Cargo:
-		InitialUnits: latinsyndicate_latinmilitia, latinsyndicate_grenademonkey, latinsyndicate_latintankkiller
+		InitialUnits: latinsyndicate_latinmilitia, latinsyndicate_grenademonkey, latinsyndicate_tankkiller
 	RenderSprites:
 		Image: scrapcar2.latin
 		PlayerPalette: playerra2
@@ -325,7 +325,7 @@ latinsyndicate_tortugatank:
 latinsyndicate_rushertank:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
-	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@Template: ^LightTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
@@ -519,7 +519,7 @@ latinsyndicate_smokertank:
 
 latinsyndicate_diablo:
 	Inherits: ^Tank
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^AntiAirVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -774,7 +774,7 @@ latinsyndicate_latinapc:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: latinsyndicate_latinmilitia, latinsyndicate_latintankkiller, latinsyndicate_grenademonkey, latinsyndicate_latinflametrooper, latinsyndicate_narco
+		InitialUnits: latinsyndicate_latinmilitia, latinsyndicate_tankkiller, latinsyndicate_grenademonkey, latinsyndicate_latinflametrooper, latinsyndicate_narco
 	GrantConditionOnPrerequisite@Missile:
 		Condition: latinsyndicate_doctrine_cartelrockets
 		Prerequisites: latinsyndicate_doctrine_cartelrockets
@@ -859,7 +859,7 @@ latinsyndicate_narcohummer:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: latinsyndicate_latinmilitia, latinsyndicate_latintankkiller, latinsyndicate_grenademonkey, latinsyndicate_latinflametrooper, latinsyndicate_narco
+		InitialUnits: latinsyndicate_latinmilitia, latinsyndicate_tankkiller, latinsyndicate_grenademonkey, latinsyndicate_latinflametrooper, latinsyndicate_narco
 	AttackOpenTopped:
 		Voice: Attack
 		Armaments: garrisoned
@@ -942,7 +942,7 @@ latinsyndicate_carteltruck:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 10
-		InitialUnits: latinsyndicate_latinmilitia, latinsyndicate_latintankkiller, latinsyndicate_grenademonkey, latinsyndicate_latinflametrooper, latinsyndicate_narco, latinsyndicate_latinmilitia, latinsyndicate_latintankkiller, latinsyndicate_grenademonkey, latinsyndicate_latinflametrooper, latinsyndicate_narco
+		InitialUnits: latinsyndicate_latinmilitia, latinsyndicate_tankkiller, latinsyndicate_grenademonkey, latinsyndicate_latinflametrooper, latinsyndicate_narco, latinsyndicate_latinmilitia, latinsyndicate_tankkiller, latinsyndicate_grenademonkey, latinsyndicate_latinflametrooper, latinsyndicate_narco
 	AttackOpenTopped:
 		Voice: Attack
 		Armaments: garrisoned
@@ -1098,7 +1098,7 @@ latinsyndicate_burrito:
 latinsyndicate_lars:
 	Inherits: ^Vehicle
 	Inherits@anim: ^RA2Vehicle
-	Inherits@Template: ^FireSupportTemplate
+	Inherits@Template: ^MissileVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove

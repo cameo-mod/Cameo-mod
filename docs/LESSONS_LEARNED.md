@@ -8,6 +8,9 @@ This is the central, repository-owned record of hard-won lessons, safe defaults,
 
 ## Required reading order for every new task
 
+**The canonical reading order is defined in `docs/README.md`.** The list below
+is provided for convenience; if it disagrees with README.md, README.md wins.
+
 1. `docs/LESSONS_LEARNED.md` (this file) — safe defaults and pitfalls.
 2. `docs/AGENT_WORKSPACE.md` — source-of-truth map, operating sequence, incident protocol, commit gate.
 3. `docs/PROJECT_CONTEXT.md` — short project orientation and current safety focus.

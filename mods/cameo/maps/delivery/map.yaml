@@ -31,7 +31,7 @@ Players:
 		AllowBots: False
 		Playable: True
 		Required: True
-		LockFaction: Random
+		LockFaction: True
 		Faction: td_gdi
 		LockColor: True
 		Color: F0E286
@@ -40,7 +40,7 @@ Players:
 	PlayerReference@Truck:
 		Name: Truck
 		Bot: campaign
-		LockFaction: Random
+		LockFaction: True
 		Faction: td_gdi
 		LockColor: True
 		Color: F0E286

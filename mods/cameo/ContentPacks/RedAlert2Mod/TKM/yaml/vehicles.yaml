@@ -1434,7 +1434,7 @@ tkm_sandmarine:
 		PlayerPalette: player_rgba
 tkm_flakbus:
 	Inherits: ^Vehicle
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^AntiAirVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove

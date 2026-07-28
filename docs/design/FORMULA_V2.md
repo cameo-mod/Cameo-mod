@@ -71,10 +71,13 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
   2×-health bake replaced the ScoutInfantryBuff 50% damage reduction.)
 - **Damage**: steps of 2000; every weapon carries a
   HealthPercentageDamage warhead at 1% per 2000 damage.
-- **Burst is flavor, not power**: keep burst feel, trim effective DPS
-  to the formula target with a **unit-named FirepowerMultiplier**
-  (e.g. burst 3 → ~33%). Gatling/spinup units (soviet gatling tank,
-  RA1 allied heavy AA tank) are special cases — handle individually.
+- **Burst is flavor, not power** (i.e. burst count is a presentation/
+  weapon-feel constraint, not a balance input — increasing burst raises
+  raw output, so the FirepowerMultiplier compensates): keep burst feel,
+  trim effective DPS to the formula target with a **unit-named
+  FirepowerMultiplier** (e.g. burst 3 → ~33%). Gatling/spinup units
+  (soviet gatling tank, RA1 allied heavy AA tank) are special cases —
+  handle individually.
 - **Weapon-class bands by cost** (scout values; per-class analogues):
   ≤150% of C₀ → SmallArms only (WC 0.75); above → SmallArms+Chaingun
   (WC 0.875). The class's own DPS₀ already includes the baseline WC.
@@ -145,7 +148,7 @@ the current DPS math misprices; hand-price + flag, and FIX the math
 
 | gap | detect by | example |
 |---|---|---|
-| Multi-warhead stacking (DPS undercounted) | one weapon inherits several damage templates (`^Grenade+^Shrapnel+^HeavyBomb+^MediumMissile+^Chaingun+^FlakWeapon…`) so a shot applies many warheads; max-warhead DPS misses the SUM | **Patriarch** (K 2.0 was a kludge; real fix = sum the damage warheads in DPS, then K→1.0) |
+| Multi-warhead stacking (DPS undercounted) | one weapon inherits several damage templates (`^Grenade+^Shrapnel+^HeavyBomb+^MediumMissile+^Chaingun+^FlakWeapon…`) so a shot applies many warheads; max-warhead DPS misses the SUM | **Patriarch** (K 2.0 was a kludge; real fix = sum the damage warheads in DPS, then K→1.0) — **DONE**: DPS/pricing use `formula.spread_damage_sum`; the workbook Damage cell is the per-shot TOTAL and `formula.distribute_damage` gives every main warhead the identical `total ÷ N` on the 2000 grid (FF + ExtraDamage 50%, Percentage 1/2000, ExtraDamage excluded from the total; fine-tune with FirepowerMultiplier), so the design number can't be broadcast onto every warhead. Guard: `audit_warhead_split`. See BALANCE_PIPELINE §3. |
 | Probabilistic / bounce / AoE-DoT | <100%-hit split warheads, or damage-over-area-over-time from a caster/spawned actor | high templar psi-storm, spawned black-hole DoT |
 
 **Validation (reproduces legacy K exactly):**
@@ -226,11 +229,15 @@ class-specific log, because they apply to all classes.
 - **Weapon Versus tables**: built by the step law in ARMOR_SYSTEM.md —
   LEVEL = step 6/5/4 (light/medium/heavy, floor 10/25/40, Shield
   110/125/140), PROFILE = the armor order. Generate, never hand-type.
-- **`*ExtraDamage` warheads are KEPT but EXCLUDED from pricing** (maintainer
-  2026-07-20): the `Warhead@…ExtraDamage` a template carries (Railgun/
-  Laser/…, Versus ~1 vs everything except Shield ~100) is intentional
-  shield-only chip damage. Never strip or scale it — just let it inherit —
-  and the DPS sum must skip any warhead whose key ends `ExtraDamage`.
+- **`*ExtraDamage` warheads: value = 50% of the main, EXCLUDED from the
+  damage total** (maintainer 2026-07-27, supersedes the 2026-07-20
+  "never scale" note). The `Warhead@…ExtraDamage` an energy template carries
+  (Railgun/Laser/Tesla/…, Versus ~1 vs everything except Shield ~100) is the
+  compensation for an energy weapon's smaller area-of-effect plus its
+  shield/bonus chip. It is ALWAYS **50% of the main warhead damage** (Tesla
+  main 2000 → ExtraDamage 1000), written by `formula.distribute_damage`, but
+  the DPS/price **sum still skips any warhead whose key ends `ExtraDamage`**
+  (`formula.spread_damage_sum`).
 - **A "weapon class" (WC 1.0) = a light+medium+heavy warhead TRIAD**
   (maintainer 2026-07-20): one light + one medium + one heavy SpreadDamage
   warhead summed. Baseline japan = SmallArms + Chaingun + Railgun-AP; a

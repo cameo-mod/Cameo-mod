@@ -146,7 +146,7 @@ changes are naming consistency, documentation, audit scripts, and exception conf
 - **Fix**: Expanded to match DESIGN.md §1, with cross-reference.
 
 #### 15. `backlog_weapon_rename.md`: Stale variant markers list (FIXED)
-- **File**: `docs/backlog_weapon_rename.md` line 40
+- **File**: `docs/history/backlog_weapon_rename.md` line 40
 - **Issue**: Listed variant markers without `_EMP`, `_AA`, `_upgraded`.
 - **Fix**: Added the new suffixes.
 
@@ -239,8 +239,9 @@ The following files/areas were checked and found clean:
 - `docs/design/shattered_paradise_research.md` — no stale references
 - `docs/Cameo_Knowledge_Base_Manual.md` — actor IDs with `_aa` (e.g.
   `d2k_aa_mine`) are actor names, not weapon suffixes; not a violation
-- `docs/session_progress_2026_07_14.md` — historical session log; left
-  as-is since it documents state at that point in time
+- `docs/session_progress_2026_07_14.md` — historical session log; no
+  longer in the repository (removed in a prior cleanup). Its content was
+  superseded by DEVELOPMENT_LOG.md and ROADMAP.md.
 - `docs/audit/display_text_review.md` — historical audit output; left as-is
 - ROADMAP WEAPON-SUFFIX-ELITE/EMP/AA entries — all consistent with
   DESIGN.md §1 and §16.3

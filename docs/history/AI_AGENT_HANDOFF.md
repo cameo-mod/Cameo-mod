@@ -1,6 +1,6 @@
 # AI Agent Handoff — Comprehensive Session Log
 
-> **Last updated:** 2026-07-25, 12:15 UTC+02:00
+> **Last updated:** 2026-07-25 (session log; repository state updated 2026-07-25)
 >
 > **Purpose:** This document gives the next AI agent (or human contributor) a complete
 > picture of everything that happened on and around 2026-07-24, so they can pick up
@@ -15,10 +15,10 @@
 | Item | Value |
 |---|---|
 | **Branch** | `master` (feature branch `fix/ra2-weapons-migration` was merged) |
-| **HEAD commit** | `46e4b140e` — "Fix RA2 YAML crashes: migrate weapons to ContentPack, restore Yuri headers, fix Kübelwagen encoding, add AI agent handoff doc" |
-| **Master status** | Clean, pushed, up to date with `origin/master` |
-| **Uncommitted changes** | `docs/FACTIONS.md` (superweapon audit corrections); `docs/audit/latest/superweapon_audit.yaml` (new audit file); `docs/audit/SUMMARY.md` (audit section added); `docs/design/ROADMAP.md` (audit task marked complete); `docs/LESSONS_LEARNED.md` (audit lessons added); `docs/history/AI_AGENT_HANDOFF.md` (this file, updated); `docs/Cameo_Knowledge_Base_Manual.md` (NuclearFlashRenderer entry + version bump to v.0.3.1); `check-yaml-output.txt` (untracked temp file — delete before commit) |
-| **Engine pin** | `b1d04ea76a1ee6c3c3f538bc40b6b77c8b6a977a` (in `mod.config` → `ENGINE_VERSION`; also must be in `engine/VERSION` after `make all`) |
+| **HEAD commit** | `aa0d8194b` — "docs(balance): finalize Dreadnought (no cloak, Pulverizer range 6000) + resume block" (balance doc updates; prior session was `388005dbb`) |
+| **Master status** | Local commits ahead of `origin/master` (`18d3c43e8`) — balance doc commits not yet pushed |
+| **Uncommitted changes** | None |
+| **Engine pin** | `2949af84d08e2087237281c14937c2086ff6b113` (in `mod.config` → `ENGINE_VERSION`; also must be in `engine/VERSION` after `make all`) |
 
 ---
 
@@ -101,18 +101,17 @@ This was the second session of the Claude Opus agent, where the major RA2 weapon
 
 ### 2.7 Post-Commit Session (23:25–present UTC+02:00) — AI Agent (Claude Opus, session 3 = current)
 
-After the commit was made, the following additional work was done (currently uncommitted):
+After the commit was made, additional documentation work was done and later committed in `388005dbb`:
 
 1. **Updated `docs/Cameo_Knowledge_Base_Manual.md`:**
-   - Bumped version from v.0.3 to v.0.3.1
+   - Bumped version from v.0.3 to v.0.3.1 (later further updated to v.0.4)
    - Updated version note to mention full RA2 weapons migration and NuclearFlashRenderer
    - Updated `redalert2.yaml` references to say "fully migrated" instead of "superseded"
    - Added `NuclearFlashRenderer.cs` to the custom trait reference table with note about the shader file requirement
 
 2. **Attempted to run `utility.cmd cameo --check-yaml`** to verify remaining errors — this was canceled by the user before completion.
 
-**Untracked files:**
-- `check-yaml-output.txt` — temp file from a previous check-yaml run. Should be deleted before committing.
+All changes from this session were committed in `388005dbb`.
 
 ---
 
@@ -191,7 +190,7 @@ The shader brightens pixels near the blast center and darkens the surrounding ar
 
 ### 3.5 Engine VERSION File
 
-The `engine/VERSION` file is not tracked by git. It must contain the same hash as `mod.config`'s `ENGINE_VERSION` (`b1d04ea76a1ee6c3c3f538bc40b6b77c8b6a977a`). If `make all` is run, it sets this correctly. If the file gets corrupted or reverted, `utility.cmd` and the game will fail with "Required engine files not found."
+The `engine/VERSION` file is not tracked by git. It must contain the same hash as `mod.config`'s `ENGINE_VERSION` (`2949af84d08e2087237281c14937c2086ff6b113` as of 2026-07-25). If `make all` is run, it sets this correctly. If the file gets corrupted or reverted, `utility.cmd` and the game will fail with "Required engine files not found."
 
 ### 3.6 Documentation Updates in the Commit
 
@@ -284,29 +283,20 @@ The file `mods/cameo/weapons/redalert2.yaml` is still present in the repo but co
 2. Eventually deleting `mods/cameo/weapons/redalert2.yaml` once all references are confirmed migrated
 3. The ContentPack `content.yaml` still has a `Weapons:` entry pointing to the ContentPack weapons.yaml — this is correct and should remain
 
-### 5.4 Uncommitted Knowledge Base Manual update
+### 5.4 Knowledge Base Manual update (COMMITTED in `388005dbb`)
 
-`docs/Cameo_Knowledge_Base_Manual.md` has been updated with:
-- Version bump from v.0.3 to v.0.3.1
+`docs/Cameo_Knowledge_Base_Manual.md` was updated with:
+- Version bump from v.0.3 to v.0.3.1 (later further updated to v.0.4)
 - NuclearFlashRenderer entry in the custom trait table
 - Updated `redalert2.yaml` references to say "fully migrated"
 
-This needs to be committed.
+This was committed in `388005dbb`.
 
 ---
 
 ## 6. What Needs To Be Done Next
 
-### Step 1: Commit the Knowledge Base Manual update
-```powershell
-# Delete the temp file first
-Remove-Item check-yaml-output.txt -ErrorAction SilentlyContinue
-
-# Stage and commit the Knowledge Base update
-git add docs/Cameo_Knowledge_Base_Manual.md
-git commit -m "Update Knowledge Base Manual to v.0.3.1: add NuclearFlashRenderer, mark RA2 weapons as fully migrated"
-git push origin master
-```
+### Step 1: ~~Commit the Knowledge Base Manual update~~ (DONE — committed in `388005dbb`)
 
 ### Step 2: Run `make all` to ensure engine is synced
 ```powershell
@@ -345,10 +335,12 @@ Read `check-yaml-output.txt` and check for any NEW errors introduced by our chan
 
 ### Step 8: Commit, push, and merge
 ```powershell
-git add -A
+git add <specific files>
 git commit -m "Descriptive commit message that ALL developers can understand"
 git push origin master
 ```
+
+**Never `git add -A`** — the maintainer usually has live uncommitted edits. Always scope `git add` to the specific files changed.
 
 ---
 
@@ -372,8 +364,8 @@ git push origin master
 ### Committed in `dc6d55de5` (second fix):
 - `mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml` — restored `^RA2RailgunWeapon` header
 
-### Currently uncommitted:
-- `docs/Cameo_Knowledge_Base_Manual.md` — NuclearFlashRenderer entry + version bump to v.0.3.1
+### Previously uncommitted (now committed in `388005dbb`):
+- `docs/Cameo_Knowledge_Base_Manual.md` — NuclearFlashRenderer entry + version bump (now v.0.4)
 
 ### NOT in git (engine directory, .gitignored):
 - `engine/glsl/postprocess_nuclearflash.frag` — must be recreated after `make all`
@@ -461,7 +453,7 @@ void main()
 
 A comprehensive cross-reference audit of all superweapon and support power YAML traits against `docs/FACTIONS.md` was completed. This was a documentation-only audit — no game files were modified.
 
-**Files modified (all uncommitted):**
+**Files modified (all committed in `388005dbb`):**
 - `docs/audit/latest/superweapon_audit.yaml` — new file, raw audit data (607 lines)
 - `docs/FACTIONS.md` — 14 discrepancies corrected across detailed faction sections and the superweapon reference table
 - `docs/audit/SUMMARY.md` — added "Superweapon documentation audit" section
@@ -509,8 +501,5 @@ The Supernova Missile IS implemented in `rules/outpost2.yaml` (not yet migrated 
 
 ### 12.5 What Needs To Be Done Next
 
-1. **Commit the documentation changes** — all audit files are uncommitted. Stage and commit with a descriptive message like "Superweapon documentation audit: cross-reference YAML vs FACTIONS.md, fix 14 discrepancies". Remember to:
-   - Delete `check-yaml-output.txt` before committing
-   - Boot-gate before committing
-   - Use scoped `git add <files>`, never `git add -A`
+1. **~~Commit the documentation changes~~** (DONE — committed in `388005dbb`)
 2. **Pick up the next task from ROADMAP.md** — the superweapon audit is complete. The next priorities per ROADMAP are the balance class-formula program (infantry restat pass) and the remaining check-yaml error fixes.

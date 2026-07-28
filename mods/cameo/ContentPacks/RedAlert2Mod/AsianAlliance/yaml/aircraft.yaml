@@ -200,12 +200,77 @@ asianalliance_pelican:
 	ActorStatValues:
 		Upgrades: asianalliance_doctrine_asianphalanx
 
+asianalliance_harbinger:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^FighterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
+	Inherits@Voxels: ^RenderVoxel
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Harbinger
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~asianalliance_asianairforcecommand, asianalliance_asianbattlelab
+		Queue: Aircraft, RAAircraft
+		Description: actor_asianalliance_harbinger.description
+		IconPalette: ra2cameo
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 16
+		Speed: 210
+		IdleTurnSpeed: 12
+		IdleSpeed: 140
+		TakeoffSounds: vintupa.wav
+		LandingSounds: vintdna.wav
+		Voice: Move
+	Health:
+		HP: 90000
+	Repairable:
+		HpPerStep: 4500
+	ChangesHealth@SelfHealing:
+		Step: 36
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: AsianHarbingerPlasma
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 100, -100, 50, -50
+	SpawnActorOnDeath:
+		Actor: harbinger_husk.asian
+	Contrail@1:
+		Offset: -512,0,256
+		TrailLength: 15
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Voiced:
+		VoiceSet: CHMiGVoice
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+	AttackMove:
+		Voice: AttackMove
+	DeathSounds:
+	RenderVoxels:
+	WithVoxelBody:
+	-WithFacingSpriteBody:
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_dragonfire
+
 kami.asian:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Valued:
-		Cost: 800
+		Cost: 90
 	Tooltip:
 		Name: Kamikaze
 	Buildable:
@@ -226,20 +291,22 @@ kami.asian:
 		Range: 7500
 		Type: GroundPosition
 	Armament@PRIMARY:
-		Weapon: AsianKamikazeChaingun
-		LocalOffset: 427,-171,-213, 427,171,-213
-		PauseOnCondition: !ammo
-	AmmoPool:
-		Ammo: 18
-		AmmoCondition: ammo
+		Weapon: AsianKamikazeImpactTargeting
 	SpawnActorOnDeath:
 		Actor: kami_husk.asian
+		RequiresCondition: airborne && !diving
+	DiveOnAttack:
+		Speed: 300
+		DiveCondition: diving
+	SpawnedExplodes:
+		Weapon: ASDFKamikazeExplosion
+		EmptyWeapon: ASDFKamikazeExplosion
+		RequiresCondition: diving
 	WithMoveAnimation:
 		MoveSequence: move
 	AttackAircraft:
 		FacingTolerance: 40
 		PersistentTargeting: false
-		RequiresCondition: ammo
 	CarrierSlave:
 		LandingDistance: 8000
 	AutoTarget:
@@ -249,10 +316,6 @@ kami.asian:
 	-UpdatesPlayerStatistics:
 	-ActorLostNotification:
 	-MapEditorData:
-	WithAmmoPipsDecoration:
-		Position: BottomLeft
-		RequiresSelection: true
-		PipCount: 9
 	RenderSprites:
 		PlayerPalette: playerra2
 	GrantConditionOnMovement@Turn:
@@ -281,53 +344,50 @@ kami.asian:
 kami_chemical.asian:
 	Inherits: kami.asian
 	Valued:
-		Cost: 1600
+		Cost: 225
 	Health:
 		HP: 15000
 	ChangesHealth@SelfHealing:
 		Step: 6
 	Tooltip:
-		Name: Chemical Kamikaze
+		Name: Chemical Attack Plane
+	Armament@PRIMARY:
+		Weapon: AsianKamikazeChaingun
+		LocalOffset: 427,-171,-213, 427,171,-213
+		PauseOnCondition: !ammo
 	Armament@Secondary:
 		Weapon: AsianChemicalBombs
 		LocalOffset: 427,-171,-213, 427,171,-213
 		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 18
+		AmmoCondition: ammo
+	-DiveOnAttack:
+	-SpawnedExplodes:
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 9
 	RenderSprites:
 		Image: kami.asian
 	SpawnActorOnDeath:
 		Actor: kami_chemical_husk.asian
+		RequiresCondition: airborne
 
 kami_asdf.asian:
 	Inherits: kami.asian
 	Valued:
-		Cost: 500
+		Cost: 50
 	Tooltip:
 		Name: Airstrike Kamikaze
 	Buildable:
 		Description: template_airstrike_slave.description
 	-CarrierSlave:
 	-AutoTarget:
-	-AmmoPool:
-	-WithAmmoPipsDecoration:
-	AttackAircraft:
-		-RequiresCondition:
-	Armament@PRIMARY:
-		Weapon: ASDFKamikazeTargeting
-		-PauseOnCondition:
-	DiveOnAttack:
-		Speed: 300
-		DiveCondition: diving
-	SpawnedExplodes:
-		Weapon: ASDFKamikazeExplosion
-		EmptyWeapon: ASDFKamikazeExplosion
-		RequiresCondition: diving
 	AirstrikeSlaveCA:
 	GivesExperienceToMaster:
 	RenderSprites:
 		Image: kami.asian
-	SpawnActorOnDeath:
-		Actor: kami_husk.asian
-		RequiresCondition: airborne && !diving
 
 #######################################
 # RA2 Asian Husks
@@ -360,7 +420,7 @@ kami_husk.asian:
 kami_chemical_husk.asian:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: Chemical Kamikaze
+		Name: Chemical Attack Plane
 	Aircraft:
 		TurnSpeed: 25
 		Speed: 160
@@ -399,6 +459,29 @@ phoenix_husk.asian:
 	RenderSprites:
 		Image: asianalliance_phoenix
 		PlayerPalette: playerra2
+
+harbinger_husk.asian:
+	Inherits: ^PlaneHusk
+	Inherits@Voxel: ^RenderVoxel
+	Tooltip:
+		Name: Harbinger
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 185
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: asianalliance_harbinger
+		PlayerPalette: playerra2
+	RenderVoxels:
+		Image: asianalliance_harbinger
+
 pelican_husk.asian:
 	Inherits: ^HelicopterHusk
 	Tooltip:

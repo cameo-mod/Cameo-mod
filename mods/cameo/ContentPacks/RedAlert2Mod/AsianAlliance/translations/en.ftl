@@ -1,6 +1,5 @@
 actor_aacarrier =
-   .description = Aircraft carrier that deploys 4 fighters
-      armed with machine guns.
+   .description = Aircraft carrier that deploys 4 kamikaze drones.
 
 actor_aagunb =
    .description = Fast gunboat armed with a cannon and a flak gun.
@@ -21,7 +20,11 @@ actor_aapelican =
       Can attack air.
 
 actor_aaphoenix =
-   .description = Multirole fighter-bomber.
+   .description = Multirole fighter-bomber armed with missiles.
+      Can attack air.
+
+actor_asianalliance_harbinger =
+   .description = Multirole fighter-bomber armed with plasma cannons.
       Can attack air.
 
 actor_aapulv =
@@ -66,6 +69,10 @@ actor_cgpnch =
    .description = Defense buildable on water.
       Can detect submarines.
        Strong vs Ships, Submarines
+
+actor_asianalliance_spitfire =
+   .description = Large rocket launcher.
+     Can attack air.
 
 actor_cgtnkr =
    .description = Fill with Oil Trucks to generate more power.

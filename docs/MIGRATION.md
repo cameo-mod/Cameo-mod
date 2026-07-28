@@ -155,12 +155,14 @@ commits and reported.
 | CABAL | DONE | DONE | — | DONE `68cdd5ebb`/`472209150` | DONE `68cdd5ebb` |
 | TS Shared | — | — | — | DONE `6835a04` | — |
 | Top-level Shared | — | — | — | DONE `e1b153d9c`/`472209150` | — |
-| TD GDI / TD Nod | rules packed (ids unrenamed) | DONE incl. weapons+sequences | — | — | — |
-| RA2Mod six, D2k four | rules packed (ids unrenamed) | DONE incl. weapons+sequences | — | — | — |
+| TD GDI / TD Nod | DONE (ids renamed to `td_gdi_*`/`td_nod_*`) | DONE incl. weapons+sequences | — | — | — |
+| RA2Mod six (original) | DONE (ids renamed to `asianalliance_*`, `steelconsortium_*`, `latinsyndicate_*`, `naxis_*`, `schwarzermond_*`, `futuretech_*`) | DONE incl. weapons+sequences | — | — | — |
+| D2k four (atreides/harkonnen/ixian/ordos) | PARTIAL (new-style `atreides_*` etc. for some actors; old-style dotted names like `combat_tank.atreides` remain) | DONE incl. weapons+sequences | — | — | — |
 | RA1 (allies/soviets/japan) | DONE incl. 52 legacy ids 2026-07-17 (RAE1→ra1_allies_rifleinfantry etc.; only `japan` unprefixed; map: rename_map_ra1_legacy.yaml) | DONE 2026-07-16 (yaml/ layout, registry-identical, boot-verified) | — | — | — |
 | RA2 (america/russia/yuri) | maps drafted | monolith | | | |
 | StarCraft (terran/zerg/protoss) | DONE (ids) | DONE 2026-07-17 (registry-identical, boot-verified) | — | — | — |
-| WC2 (humans/orcs) · TKM | DONE (ids) | DONE 2026-07-17 (registry-identical, boot-verified) | — | — | — |
+| WC2 (humans/orcs) | DONE (ids) | DONE 2026-07-17 (registry-identical, boot-verified) | — | — | — |
+| TKM | DONE (ids) | DONE 2026-07-18 (moved into `RedAlert2Mod/TKM/`) | — | — | — |
 | Outpost2 (eden/plymouth, WIP factions) | maps drafted (~compliant) | monolith/wrapper | | | |
 
 Proposal maps for every faction: `tools/rename/rename_map_<faction>.yaml`

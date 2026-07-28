@@ -42,6 +42,9 @@ from openpyxl.styles import Alignment, Font, PatternFill, Protection
 from openpyxl.utils import get_column_letter
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools/balance"))
+import formula  # noqa: E402
+
 LEDGER = ROOT / "docs/balance"
 MOD = ROOT / "mods/cameo"
 MOD_CONFIG = MOD / "mod.yaml"
@@ -158,14 +161,27 @@ def unit_rows(ws, theme, aid, u, section, row):
         if arm.get("requires"):
             wt.comment = Comment("fires when: " + str(arm.get("requires")),
                                  "balance-pipeline")
-        damages = [fnum(w.get("damage")) for w in arm.get("warheads", [])]
+        warheads = arm.get("warheads", [])
+        damages = [fnum(w.get("damage")) for w in warheads]
         damages = [x for x in damages if x is not None]
+        # Damage cell = per-shot TOTAL = SUM of the main offensive warheads
+        # (formula.spread_damage_sum) — the SAME quantity pricing uses, so the
+        # DPS cell below is consistent with the price. A weapon with only
+        # side warheads falls back to max. See BALANCE_PIPELINE.md §3.
+        total = formula.spread_damage_sum(warheads)
+        n_main = sum(1 for w in warheads if formula._is_main_spread(w))
         cdmg = ws.cell(row=row, column=COL["Damage"],
-                       value=max(damages) if damages else None)
+                       value=int(total) if total else (max(damages) if damages else None))
         if len(damages) > 1:
             cdmg.comment = Comment(
+                f"per-shot TOTAL across {n_main} main warhead(s).\n"
                 "raw warhead damages: " + ", ".join(str(int(x)) for x in damages)
-                + "\nimport scales all proportionally", "balance-pipeline")
+                + "\nediting this gives every main warhead the IDENTICAL value "
+                "total/N snapped to the 2000 grid (FriendlyFire + ExtraDamage "
+                "twins 50%, Percentage twins 1 per 2000; ExtraDamage excluded "
+                "from the total). Fine-tune the effective damage with the actor "
+                "FirepowerMultiplier.",
+                "balance-pipeline")
         ws.cell(row=row, column=COL["Reload"], value=fnum(arm.get("reloaddelay")))
         ws.cell(row=row, column=COL["Burst"], value=fnum(arm.get("burst")) or 1)
         ws.cell(row=row, column=COL["BurstDel"], value=fnum(arm.get("burstdelays")))

@@ -1,5 +1,10 @@
 # Baseline Audit — Findings by Bug Class
 
+> **Stale-date notice:** This file was generated from a baseline audit run.
+> File paths in the tables below reflect the pre-restructure directory layout
+> (e.g., `rules/vehicles.yaml` → now `yaml/vehicles.yaml` after the ContentPack
+> restructure). Regenerate via `tools/audit/run_all.sh` for current paths.
+
 _Generated from the `tools/audit` baseline run at this commit, curated per
 `docs/MASTER_REPORT.md` §4. Severity: **crash** (player-facing failure),
 **balance** (silently wrong stats/economy), **cosmetic** (visual/text),

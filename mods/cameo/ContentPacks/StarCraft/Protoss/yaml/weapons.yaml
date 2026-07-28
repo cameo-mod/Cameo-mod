@@ -861,6 +861,15 @@ UnitExplodeSmallProtoss:
 		Explosions: blue_big_frag
 		ImpactSounds: xplobig4.aud
 
+SCWorkerExplodeProtoss:
+	Inherits: UnitExplodeSmallProtoss
+	Warhead@Grenade: SpreadDamage
+		Damage: 12000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 6000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 6
+
 ScoutMG:
 	Inherits: ^Grenade
 	Inherits: ^HeavyCannon

@@ -9,6 +9,9 @@ protoss_probe:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@SHADOWS: ^Shadows
 	Inherits@shieldgenerator: ^ProtossPersonalShield
+	FireWarheadsOnDeath:
+		Weapon: SCWorkerExplodeProtoss
+		EmptyWeapon: SCWorkerExplodeProtoss
 	Tooltip:
 		Name: Protoss Probe
 	Buildable:

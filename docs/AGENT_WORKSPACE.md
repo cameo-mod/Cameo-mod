@@ -22,7 +22,7 @@ This repository is the shared source of truth for maintainers and every AI agent
 
 ## Required operating sequence
 
-1. Read `docs/LESSONS_LEARNED.md` first, then `docs/DESIGN.md`, `docs/audit/SUMMARY.md`, and the relevant section of `docs/Cameo_Knowledge_Base_Manual.md` before touching rules or assets.
+1. Read `docs/LESSONS_LEARNED.md` first, then `docs/DESIGN.md`, `docs/audit/SUMMARY.md`, and the relevant section of `docs/Cameo_Knowledge_Base_Manual.md` before touching rules or assets. **The canonical reading order is defined in `docs/README.md` — refer there if any conflict arises.**
 2. Record a newly discovered crash, regression, or suspected discrepancy in `docs/design/ROADMAP.md` before proposing a fix.
 3. Treat release builds, engine logs, resolved-ruleset diffs, and current audit output as evidence. Do not promote an old raw `.txt` result to a live finding without rerunning its audit.
 4. For refactors, compare `tools/audit/dump_resolved.py` output before and after. For content changes, run the targeted audit first and the full suite when practical.

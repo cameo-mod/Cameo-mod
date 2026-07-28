@@ -38,6 +38,8 @@ Crashes and player-visible regressions always jump the queue.
 | Faction BALANCE bias (how units differ within a class, source-cited) | `design/FACTION_IDENTITY.md` |
 | Original source-game unit stats (ground-truth matrix for relative balance) | `design/ORIGINAL_UNIT_STATS.md` |
 | Mod-synthesis balance overhaul plan (sources per faction, weapon/AA/spread laws, methodology) | `design/BALANCE_SYNTHESIS.md` |
+| Class-anchor decisions (maintainer-confirmed baselines + verifiers) | `balance/anchor_decisions_log.md` |
+| Upgrade intent registry (direction, coverage, phase, drawbacks) | `design/upgrades_intent.yaml` |
 | Document 1 — every source unit RAW, translated to Cameo naming + category (generated) | `design/ORIGINAL_UNITS_RAW.md` |
 | Engine / custom-trait / C# reference | `Cameo_Knowledge_Base_Manual.md` |
 | ContentPack migration runbook | `MIGRATION.md` |
@@ -50,6 +52,9 @@ Crashes and player-visible regressions always jump the queue.
 - `MASTER_REPORT.md` — long-form bug taxonomy (B1–B12) and roadmap analysis. Consult §9/§10/§13 when DESIGN.md is not enough. Historical analysis unless a section is deliberately promoted into DESIGN/ROADMAP.
 - `design/MEGAPLAN.md`, `design/MEGAPLAN_YAML_CLEANUP.md` — non-binding program indexes; defer to ROADMAP for live tasks.
 - `design/VISION.md` — north-star vision.
+- `design/cabal_rebuild_plan.md` — CABAL faction rebuild working plan (concept → actor mapping).
+- `design/schwarzer_mond_artwork_status.md` — Schwarzer Mond icon/artwork audit status.
+- `design/shattered_paradise_research.md` — TS authenticity research from Shattered Paradise mod.
 - `PROJECT_CONTEXT.md` — short orientation summary; the docs above are authoritative over it.
 
 ## Generated artifacts — do NOT hand-edit
@@ -60,6 +65,7 @@ These are produced by tooling and regenerate; editing them by hand is meaningles
 - `balance/*.json` — balance ledgers (source of truth for numbers), refreshed by `tools/balance/extract_stats.py`.
 - `balance/proposal_*.md`, `balance/membership_review.md` — per-class conversion proposals (`tools/balance/propose_class_rebalance.py`).
 - `factions/MATRIX.md` — generated faction matrix.
+- `balance/class_anchors.json` — class anchor registry (baselines + verifiers, maintained via `anchor_decisions_log.md`).
 
 ## `history/` — archived, non-authoritative
 

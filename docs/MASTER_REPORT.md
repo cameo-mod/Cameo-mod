@@ -1,5 +1,12 @@
 # CAMEO MOD — Master Technical, Balance & Roadmap Report
 
+> **Historical document.** This report is dated 2026-07-08 and reflects the
+> state of the repository at that time. Per `docs/README.md`, this is
+> historical analysis — not a live roadmap. Active work belongs in
+> `docs/design/ROADMAP.md`. Commit counts, PR counts, and release references
+> are stale. Consult this document for bug taxonomy (B1–B12) and structural
+> analysis, not for current task status.
+
 **Repository:** `cameo-mod/Cameo-mod` (fork of `Zeruel87/Cameo-mod`), OpenRA Mod SDK based
 **Report date:** 2026-07-08 · **Latest release analyzed:** Tournament Build 23 (`playtest-20260707`)
 **Intended audience:** Maintainers, contributors, and AI coding agents working on the repo
@@ -8,10 +15,10 @@
 
 ## 0. How to use this document
 
-This report is designed to be a *living reference*, committed to the repo (suggested path: `docs/MASTER_REPORT.md`) and linked from `CLAUDE.md` so every AI agent session loads it as context.
+This report was originally designed as a living reference; it is now a **historical document** (see notice above). The structural analysis and bug taxonomy remain useful, but all task status, roadmap, and operating instructions should be sourced from `docs/DESIGN.md`, `docs/design/ROADMAP.md`, and `docs/AGENT_WORKSPACE.md` instead.
 
-- **Humans:** Read §1 (summary), §12 (roadmap), and skim the section relevant to what you're working on.
-- **AI agents:** Before any task, read §10 (inheritance rules), §9 (naming rules), and §13 (operating guide). Run the relevant audit script from Appendix A before and after your change. Never violate the invariants in §10.3 — they are the constitution of this codebase.
+- **Humans:** Read §1 (summary) and skim the section relevant to what you're working on. §12 (roadmap) is stale — use `docs/design/ROADMAP.md` instead.
+- **AI agents:** §10 (inheritance rules), §9 (naming rules), and §13 (operating guide) may provide useful context, but the binding versions live in `docs/DESIGN.md` and `docs/AGENT_WORKSPACE.md`. When they disagree, the repository docs win.
 - **Confidence levels:** Findings are tagged **[VERIFIED]** (directly evidenced in the repository, changelogs, or release notes), **[INFERRED]** (strongly implied by verified evidence plus OpenRA architecture), or **[HYPOTHESIS]** (design/balance judgment that must be validated by playtesting or by running the audit scripts on a local checkout). GitHub blocks automated file-tree crawling, so line-level enumeration of every actor YAML must be produced locally with the Appendix A scripts — this document tells you *what to look for, why it matters, and how to find all of it automatically*.
 
 ---

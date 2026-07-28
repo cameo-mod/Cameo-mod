@@ -4,9 +4,10 @@ _The living work queue, resumable by any agent. Rule zero: crashes and
 bugs ALWAYS jump the queue. Ordering within a section: **quickest wins
 first, then by severity**. Effort: S < 1h, M = one session, L = multi-
 session. Every completed item gets its commit hash; every new order
-lands here first. Goal: **finish the CABAL faction**, then the dune
-factions, everything through the balance workbook. Faction reference:
-[FACTIONS.md](../FACTIONS.md)._
+lands here first. Goal: **mod-synthesis balance overhaul** (see ★ MAJOR
+PROGRAM below) — finish infantry classes, then vehicles/aircraft/defenses/
+naval. CABAL faction work is largely complete; remaining CABAL items are
+flagged inline. Faction reference: [FACTIONS.md](../FACTIONS.md)._
 
 > **Multi-agent repo.** Three contributors touch this tree: the
 > maintainer (AedisToru), **333ggg** (i333ggg@yandex.ru — works Starcraft
@@ -18,6 +19,15 @@ factions, everything through the balance workbook. Faction reference:
 > GDI), unrelated to CABAL.
 
 ---
+
+## 🔴 BUG — campaign maps vanish from editor + mission selector
+
+- [x] **FIXED** (`42ba6f34c`, 2026-07-27): Root cause was `LockFaction: Random`
+  (string) instead of `LockFaction: True` (boolean) in 6 map.yaml files — a
+  regression from commit `6ccb9a749`. OpenRA silently dropped maps with invalid
+  `LockFaction` values. Also fixed invalid fluent key `bot-campaign-ai.name` →
+  `CampaignAI` in delivery/deliverycoop rules.yaml and added missing
+  `bot_ai.campaign` fluent key to en.ftl.
 
 ## ★ MAJOR PROGRAM (2026-07-25): mod-synthesis balance overhaul — see [`BALANCE_SYNTHESIS.md`](BALANCE_SYNTHESIS.md)
 
@@ -317,12 +327,12 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   (rocketcyborg, hackercyborg, eliminator800) that had `ra2player` instead
   of `playerra2` as their death palette (mismatch with their
   `PlayerPalette: playerra2`).
-- [ ] **TS-only death palette audit** (Effort: M): The broken commit
-  `9579827e9` was reverted, but the original fixes in `a2b4de333` and
-  `b417c6f96` may have set wrong palette values for some TS actors. Need
-  a smarter audit script that only checks TS content packs and reports
-  mismatches between `DeathSequencePalette` and `PlayerPalette`. Do NOT
-  touch TD, D2k, RA1, RA2, TKM files.
+- [x] **TS-only death palette audit** (`54816b1f3`, 2026-07-27): Wrote
+  `tools/audit/audit_ts_death_palette.py` — checks all 56 YAML files in
+  TiberianSun ContentPacks for DeathSequencePalette vs PlayerPalette
+  mismatches. Found and fixed 2 issues: `cabal_cyborgreaper` and
+  `cabal_heavyreaper` were missing `DeathSequencePalette: playerra2`.
+  Audit now passes with 0 issues. Did NOT touch TD, D2k, RA1, RA2, TKM.
 
 - [x] **Shellmap boot crash: "No valid shellmaps available"** (`6a74333d5`):
   the fix-oramap.ps1 rename pass used CASE-INSENSITIVE replaces on map.yaml
@@ -1426,7 +1436,7 @@ All other factions have a single, thematically appropriate wall type.
 
 ### Backlog — Rank decorations & elite weapons (DESIGN §16, 2026-07-15)
 
-- [ ] **Fix TS Nod rank decoration** — 13 TS Nod actors were using
+- [x] **Fix TS Nod rank decoration** — 13 TS Nod actors were using
   `^GDIRankDecoration` instead of `^NodRankDecoration`. FIXED in this
   session. Also fixed 4 TS Forgotten actors in `defenses.yaml` and 2
   core `tiberiansun.yaml` Nod units (`ts_nod_attackcycle`,

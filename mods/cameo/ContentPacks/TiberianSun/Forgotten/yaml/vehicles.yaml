@@ -129,7 +129,7 @@ forgotten_scarabapc:
 
 forgotten_missilevan:
 	Inherits: ^Tank
-	Inherits@Template: ^ArtilleryTemplate
+	Inherits@Template: ^ArtilleryTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -1037,7 +1037,7 @@ forgotten_nomadbarracks:
 
 forgotten_mlrs:
 	Inherits: ^Tank
-	Inherits@Template: ^ArtilleryTemplate
+	Inherits@Template: ^ArtilleryTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -1103,12 +1103,11 @@ forgotten_mlrs:
 
 forgotten_m113adats:
 	Inherits: ^Tank
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^AntiAirVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
-	Inherits@EXT: ^ExternalConditions
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@ChemicalWeapons: ^ChemicalWeapons
 	Inherits@ChemicalFuel: ^ChemicalFuel

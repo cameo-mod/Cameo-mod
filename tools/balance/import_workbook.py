@@ -8,9 +8,14 @@ generated sheet): unit HP / Speed / TechTier / UnitClass / Special /
 Cost and weapon Damage / Reload / Burst / BurstDelays / Range /
 WeaponClass. Prints every change; nothing else in the ledger moves.
 
-Damage convention (BALANCE_PIPELINE §3): the sheet's Damage cell is
-max(warhead damages); if it changed, ALL of that weapon's warhead
-damages scale by the same ratio (rounded to int).
+Damage convention (BALANCE_PIPELINE §3): the sheet's Damage cell is the
+per-shot TOTAL = SUM of the main offensive warheads (formula.spread_damage_sum).
+When it changes, formula.distribute_damage() gives every main warhead the
+IDENTICAL value total/N snapped to the 2000-damage grid (FriendlyFire +
+ExtraDamage twins 50%, Percentage twins 1 per 2000; ExtraDamage excluded
+from the total); the effective output is fine-tuned with the actor
+FirepowerMultiplier. A single number can never again be broadcast
+identically onto every warhead (the 2026-07-22 over-damage bug).
 """
 from __future__ import annotations
 
@@ -22,6 +27,9 @@ import sys
 import openpyxl
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools/balance"))
+import formula  # noqa: E402
+
 LEDGER = ROOT / "docs/balance"
 FACTION_WB = ROOT / "docs/design/cameo_balance_by_faction.xlsx"
 TYPE_WB = ROOT / "docs/design/cameo_balance_by_type.xlsx"
@@ -109,19 +117,20 @@ def import_sheet(ws, units) -> tuple[bool, int, set[str]]:
                             changed_actors.add(actor)
                         continue
                     if field == "damage":
-                        damages = [fnum(w.get("damage")) for w in arm.get("warheads", [])]
-                        damages = [x for x in damages if x is not None]
-                        if not damages:
-                            continue
-                        old = max(damages)
-                        if old and v != old:
-                            ratio = v / old
-                            print(f"  {actor}/{slot_key}.damage: {old} -> {v} "
-                                  f"(scaling {len(damages)} warheads x{ratio:.4f})")
+                        # Sheet cell is the per-shot TOTAL (sum of main
+                        # warheads). Split a new total back across the
+                        # warheads via the ONE canonical splitter.
+                        warheads = arm.get("warheads", [])
+                        old_total = formula.spread_damage_sum(warheads)
+                        if old_total and abs(v - old_total) > 1e-9:
+                            new = formula.distribute_damage(v, warheads)
+                            print(f"  {actor}/{slot_key}.damage(total): "
+                                  f"{int(old_total)} -> {int(v)} "
+                                  f"(split across {len(new)} warhead(s))")
                             for w in arm["warheads"]:
-                                d0 = fnum(w.get("damage"))
-                                if d0 is not None:
-                                    w["damage"] = str(int(round(d0 * ratio)))
+                                tag = w.get("tag")
+                                if tag in new:
+                                    w["damage"] = str(int(new[tag]))
                             touched = True
                             changed_actors.add(actor)
                             changes += 1

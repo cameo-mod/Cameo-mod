@@ -24,6 +24,13 @@ Anchor spec: HP=20000, Speed=60, Range=5000, eff-DPS=60, Cost=100
 
 ## Uniqueness check
 
+> **Note:** This check was run with the original 4-field uniqueness
+> definition (HP, Speed, Range, effective DPS). The binding rule was
+> later expanded to 5 fields in `FORMULA_V2.md` §3d (2026-07-21):
+> HP, Speed, effective damage per shot, raw ReloadDelay, Range —
+> checked separately. Re-run with the 5-field definition before
+> applying.
+
 - All uniqueness checks passed (HP, Speed, Range, effective DPS).
 
 ## Out-of-scope units (maintainer decisions applied)

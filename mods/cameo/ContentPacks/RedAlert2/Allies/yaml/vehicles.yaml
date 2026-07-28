@@ -167,7 +167,7 @@ ra2_allies_grizzlytank:
 ra2_allies_tankdestroyer:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
-	Inherits@Template: ^LineBreakerTemplate
+	Inherits@Template: ^TankDestroyerTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@vo: ^AttackFrontalVoice

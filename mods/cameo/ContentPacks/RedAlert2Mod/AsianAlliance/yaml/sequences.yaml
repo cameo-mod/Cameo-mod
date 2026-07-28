@@ -538,6 +538,36 @@ asianalliance_plasmacannon:
 		Filename: asianalliance_plasmacannon_icon.shp
 		Offset: 0,0
 
+asianalliance_spitfire:
+	Defaults:
+		Offset: 0,-4
+	idle:
+		Filename: asianalliance_gghamm.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: asianalliance_gghamm.shp
+		Start: 1
+		ShadowStart: 4
+	critical-idle:
+		Filename: asianalliance_gghamm.shp
+		Start: 2
+		ShadowStart: 5
+	make:
+		Filename: asianalliance_gghammmk.shp
+		Length: 32
+		ShadowStart: 32
+	dead:
+		Filename: asianalliance_gghamm.shp
+		Start: 2
+		ShadowStart: 5
+	turret:
+		Filename: asianalliance_hammtur.shp
+		Facings: 32
+		ShadowStart: 32
+	icon:
+		Filename: asianalliance_hammicon.shp
+		Offset: 0,0
+
 asianalliance_chaostower:
 	Defaults:
 		Offset: 0,-3
@@ -1675,6 +1705,13 @@ asianalliance_pelican:
 				Length: 6
 	icon:
 		Filename: asianalliance_pelican_icon.shp
+
+asianalliance_harbinger:
+	Defaults:
+	idle:
+		Filename: shared_sprites|invisibleitem.shp
+	icon:
+		Filename: asianalliance_harbinger_icon.shp
 
 quasfrig.asian:
 	Defaults:

@@ -81,7 +81,7 @@ ra1_soviets_v1rockettruck:
 
 ra1_soviets_grad:
 	Inherits: ^Tank
-	Inherits@Template: ^ArtilleryTemplate
+	Inherits@Template: ^ArtilleryTankTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^TurretEMP
@@ -1141,7 +1141,7 @@ ra1_soviets_heatraytank:
 
 ra1_soviets_flaktruck:
 	Inherits: ^Vehicle
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^AntiAirVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
@@ -1400,7 +1400,6 @@ ra1_soviets_nukedemotruck:
 
 ra1_soviets_madtank:
 	Inherits: ^Tank
-	Inherits@Template: ^LineBreakerTemplate
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -1518,7 +1517,7 @@ ra1_soviets_stalinfist:
 
 ra1_soviets_gatlingtank:
 	Inherits: ^Vehicle
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^AntiAirVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove

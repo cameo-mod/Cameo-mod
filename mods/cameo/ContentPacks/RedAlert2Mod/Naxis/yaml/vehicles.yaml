@@ -116,9 +116,9 @@ naxis_halftrack:
 	ActorStatValues:
 		Upgrades: naxis_upgrade_massopticsintegration
 
-naxis_kbelwagen:
+naxis_kubelwagen:
 	Inherits: ^Tank
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^AntiAirVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@cargo: ^CargoVehicle
@@ -171,7 +171,7 @@ naxis_kbelwagen:
 
 wirbelwind.nax:
 	Inherits: ^Tank
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^AntiAirVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -603,7 +603,7 @@ naxis_grille:
 	ActorStatValues:
 		Upgrades: naxis_upgrade_tankarsenalrenovation, naxis_upgrade_massopticsintegration
 
-naxis_brummbr:
+naxis_brummbar:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -656,7 +656,7 @@ naxis_brummbr:
 
 naxis_sturmtiger:
 	Inherits: ^Tank
-	Inherits@Template: ^LineBreakerTemplate
+	Inherits@Template: ^ArtilleryTankTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -703,7 +703,7 @@ naxis_sturmtiger:
 
 naxis_hetzer:
 	Inherits: ^Tank
-	Inherits@Template: ^LineBreakerTemplate
+	Inherits@Template: ^TankDestroyerTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -757,7 +757,7 @@ naxis_hetzer:
 
 naxis_jagdpanzer:
 	Inherits: ^Tank
-	Inherits@Template: ^LineBreakerTemplate
+	Inherits@Template: ^TankDestroyerTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -1400,7 +1400,7 @@ naxis_imperialturbotank:
 panzer.nax:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
-	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@Template: ^LightTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice

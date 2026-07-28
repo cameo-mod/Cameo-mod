@@ -31,7 +31,7 @@ Players:
 		AllowBots: False
 		Playable: True
 		Required: True
-		LockFaction: Random
+		LockFaction: True
 		Faction: ra1_allies
 		LockColor: True
 		Color: 6D00A9
@@ -41,7 +41,7 @@ Players:
 	PlayerReference@ShadeIdle:
 		Name: ShadeIdle
 		Bot: campaign
-		LockFaction: Random
+		LockFaction: True
 		Faction: ra1_allies
 		LockColor: True
 		Color: 00009F
@@ -51,7 +51,7 @@ Players:
 	PlayerReference@ShadeActive:
 		Name: ShadeActive
 		Bot: hard
-		LockFaction: Random
+		LockFaction: True
 		Faction: ra1_allies
 		LockColor: True
 		Color: 00009F

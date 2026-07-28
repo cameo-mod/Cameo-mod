@@ -3390,7 +3390,7 @@ Player:
 	LoadGarrisonerBotModuleCA@Infantry:
 		RequiresCondition: genericbot && !easiestbot
 		PassengersPerScan: 6
-		GarrisonerUnit: td_gdi_minigunner, td_nod_minigunner, td_gdi_grenadier, td_gdi_rocketsoldier, td_nod_rocketsoldier, td_nod_flamethrower, td_nod_chemicalwarrior, e3chem, td_nod_lasertrooper, td_nod_blackhandflamer, td_nod_stealthsoldier, td_gdi_shotgunner, td_gdi_sonicmissilesoldier, td_gdi_heavysniper, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, japan_imperialscoutsman, ra1_soviets_rocketsoldier, japan_tankbuster, ra1_soviets_shocktrooper, ra1_soviets_mortarsoldier, japan_archermaiden, ra1_soviets_grenadier, ra1_soviets_flamethrower, japan_japaneseflamethrower, ra1_allies_alliedsniper, ra1_allies_machinegunner, ra1_soviets_firerocketsoldier, ra2_allies_gi, ra2ggi, ra2_allies_seal, ra2_soviets_conscript, ra2_soviets_teslatrooper, ra2_soviets_flaktrooper, ra2_soviets_desolator, ra2_allies_sniper, yuri_initiate, yuri_virus, asianalliance_asianmilitia, asianalliance_asiantankkiller, asianalliance_asianflametrooper, asianalliance_plasmatrooper, asianalliance_fanatic, asianalliance_veteranarcher, asianalliance_asdf, light_inf, heavy_inf.ixian, trooper, ixian_shockinfantry, ixian_storminfantry, steelconsortium_clonetrooper, steelconsortium_hoverboardgrenadier, steelconsortium_quantummissiletrooper, latinsyndicate_latinmilitia, latinsyndicate_latintankkiller, latinsyndicate_freedomfighter, latinsyndicate_latinflametrooper, latinsyndicate_narco, naxis_naxiriflesoldier, naxis_naxiriflerecruit, naxis_sssoldier, naxis_naximercenarysniper, naxis_panzerschreck, naxis_panzerfausttrooper, schwarzermond_lunarsoldier, schwarzermond_lunarrocket, schwarzermond_ubermensch, futuretech_enforcer, futuretech_javelinsoldier, terran_marine, terran_firebat, terran_marauder, terran_ghost, terran_madcap, terran_harakan, terran_specter, zerg_spithid, wc2_humans_elvenarcher, wc2_humans_elvenranger, wc2_orcs_trollaxethrower, wc2_orcs_trollberserker, tkm_rifleman, tkm_juggernaut, tkm_trooper, tkm_rocketeer, tkm_spetsnaz
+		GarrisonerUnit: td_gdi_minigunner, td_nod_minigunner, td_gdi_grenadier, td_gdi_rocketsoldier, td_nod_rocketsoldier, td_nod_flamethrower, td_nod_chemicalwarrior, e3chem, td_nod_lasertrooper, td_nod_blackhandflamer, td_nod_stealthsoldier, td_gdi_shotgunner, td_gdi_sonicmissilesoldier, td_gdi_heavysniper, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, japan_imperialscoutsman, ra1_soviets_rocketsoldier, japan_tankbuster, ra1_soviets_shocktrooper, ra1_soviets_mortarsoldier, japan_archermaiden, ra1_soviets_grenadier, ra1_soviets_flamethrower, japan_japaneseflamethrower, ra1_allies_alliedsniper, ra1_allies_machinegunner, ra1_soviets_firerocketsoldier, ra2_allies_gi, ra2ggi, ra2_allies_seal, ra2_soviets_conscript, ra2_soviets_teslatrooper, ra2_soviets_flaktrooper, ra2_soviets_desolator, ra2_allies_sniper, yuri_initiate, yuri_virus, asianalliance_asianmilitia, asianalliance_asiantankkiller, asianalliance_asianflametrooper, asianalliance_plasmatrooper, asianalliance_fanatic, asianalliance_veteranarcher, asianalliance_asdf, light_inf, heavy_inf.ixian, trooper, ixian_shockinfantry, ixian_storminfantry, steelconsortium_clonetrooper, steelconsortium_hoverboardgrenadier, steelconsortium_quantummissiletrooper, latinsyndicate_latinmilitia, latinsyndicate_tankkiller, latinsyndicate_freedomfighter, latinsyndicate_latinflametrooper, latinsyndicate_narco, naxis_naxiriflesoldier, naxis_naxiriflerecruit, naxis_sssoldier, naxis_naximercenarysniper, naxis_panzerschreck, naxis_panzerfausttrooper, schwarzermond_lunarsoldier, schwarzermond_lunarrocket, schwarzermond_ubermensch, futuretech_enforcer, futuretech_javelinsoldier, terran_marine, terran_firebat, terran_marauder, terran_ghost, terran_madcap, terran_harakan, terran_specter, zerg_spithid, wc2_humans_elvenarcher, wc2_humans_elvenranger, wc2_orcs_trollaxethrower, wc2_orcs_trollberserker, tkm_rifleman, tkm_juggernaut, tkm_trooper, tkm_rocketeer, tkm_spetsnaz
 	LoadCargoBotModule@Infantry:
 		RequiresCondition: genericbot
 		TransportTypesAndLoadRequirement:
@@ -3425,7 +3425,7 @@ Player:
 			miss: All
 			ramiss: All
 			fcom: All
-		PassengerTypes: td_gdi_minigunner, td_nod_minigunner, td_gdi_grenadier, td_gdi_rocketsoldier, td_nod_rocketsoldier, td_nod_flamethrower, td_nod_chemicalwarrior, e3chem, td_nod_lasertrooper, td_nod_blackhandflamer, td_nod_stealthsoldier, td_gdi_shotgunner, td_gdi_sonicmissilesoldier, td_gdi_heavysniper, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, japan_imperialscoutsman, ra1_soviets_rocketsoldier, japan_tankbuster, ra1_soviets_shocktrooper, ra1_soviets_mortarsoldier, japan_archermaiden, ra1_soviets_grenadier, ra1_soviets_flamethrower, japan_japaneseflamethrower, ra1_allies_alliedsniper, ra1_allies_machinegunner, ra1_soviets_firerocketsoldier, ra2_allies_gi, ra2ggi, ra2_allies_seal, ra2_soviets_conscript, ra2_soviets_teslatrooper, ra2_soviets_flaktrooper, ra2_soviets_desolator, ra2_allies_sniper, yuri_initiate, yuri_virus, asianalliance_asianmilitia, asianalliance_asiantankkiller, asianalliance_asianflametrooper, asianalliance_plasmatrooper, asianalliance_fanatic, asianalliance_veteranarcher, asianalliance_asdf, light_inf, heavy_inf.ixian, trooper, ixian_shockinfantry, ixian_storminfantry, steelconsortium_clonetrooper, steelconsortium_hoverboardgrenadier, steelconsortium_quantummissiletrooper, latinsyndicate_latinmilitia, latinsyndicate_latintankkiller, latinsyndicate_freedomfighter, latinsyndicate_latinflametrooper, latinsyndicate_narco, naxis_naxiriflesoldier, naxis_naxiriflerecruit, naxis_sssoldier, naxis_naximercenarysniper, naxis_panzerschreck, naxis_panzerfausttrooper, schwarzermond_lunarsoldier, schwarzermond_lunarrocket, schwarzermond_ubermensch, futuretech_enforcer, futuretech_javelinsoldier, terran_marine, terran_firebat, terran_marauder, terran_ghost, terran_madcap, terran_harakan, terran_specter, zerg_spithid, wc2_humans_elvenarcher, wc2_humans_elvenranger, wc2_orcs_trollaxethrower, wc2_orcs_trollberserker, tkm_rifleman, tkm_juggernaut, tkm_trooper, tkm_rocketeer, tkm_spetsnaz
+		PassengerTypes: td_gdi_minigunner, td_nod_minigunner, td_gdi_grenadier, td_gdi_rocketsoldier, td_nod_rocketsoldier, td_nod_flamethrower, td_nod_chemicalwarrior, e3chem, td_nod_lasertrooper, td_nod_blackhandflamer, td_nod_stealthsoldier, td_gdi_shotgunner, td_gdi_sonicmissilesoldier, td_gdi_heavysniper, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, japan_imperialscoutsman, ra1_soviets_rocketsoldier, japan_tankbuster, ra1_soviets_shocktrooper, ra1_soviets_mortarsoldier, japan_archermaiden, ra1_soviets_grenadier, ra1_soviets_flamethrower, japan_japaneseflamethrower, ra1_allies_alliedsniper, ra1_allies_machinegunner, ra1_soviets_firerocketsoldier, ra2_allies_gi, ra2ggi, ra2_allies_seal, ra2_soviets_conscript, ra2_soviets_teslatrooper, ra2_soviets_flaktrooper, ra2_soviets_desolator, ra2_allies_sniper, yuri_initiate, yuri_virus, asianalliance_asianmilitia, asianalliance_asiantankkiller, asianalliance_asianflametrooper, asianalliance_plasmatrooper, asianalliance_fanatic, asianalliance_veteranarcher, asianalliance_asdf, light_inf, heavy_inf.ixian, trooper, ixian_shockinfantry, ixian_storminfantry, steelconsortium_clonetrooper, steelconsortium_hoverboardgrenadier, steelconsortium_quantummissiletrooper, latinsyndicate_latinmilitia, latinsyndicate_tankkiller, latinsyndicate_freedomfighter, latinsyndicate_latinflametrooper, latinsyndicate_narco, naxis_naxiriflesoldier, naxis_naxiriflerecruit, naxis_sssoldier, naxis_naximercenarysniper, naxis_panzerschreck, naxis_panzerfausttrooper, schwarzermond_lunarsoldier, schwarzermond_lunarrocket, schwarzermond_ubermensch, futuretech_enforcer, futuretech_javelinsoldier, terran_marine, terran_firebat, terran_marauder, terran_ghost, terran_madcap, terran_harakan, terran_specter, zerg_spithid, wc2_humans_elvenarcher, wc2_humans_elvenranger, wc2_orcs_trollaxethrower, wc2_orcs_trollberserker, tkm_rifleman, tkm_juggernaut, tkm_trooper, tkm_rocketeer, tkm_spetsnaz
 		ValidTransportOwner: AlliedBot
 	LoadCargoBotModule@TankBunker:
 		RequiresCondition: genericbot
@@ -5307,7 +5307,7 @@ Player:
 			########### Units Syndicate
 			latinsyndicate_collectiontruck: 10
 			latinsyndicate_latinmilitia: 1
-			latinsyndicate_latintankkiller: 5
+			latinsyndicate_tankkiller: 5
 			latinsyndicate_latinflametrooper: 3
 			latinsyndicate_grenademonkey: 5
 			latinsyndicate_engineer: 1
@@ -5370,7 +5370,7 @@ Player:
 			naxis_maus: 1
 			naxis_ratte: 1
 			naxis_grille: 1
-			naxis_brummbr: 1
+			naxis_brummbar: 1
 			naxis_hetzer: 1
 			naxis_jagdpanzer: 1
 			naxis_oldtank: 1
@@ -5395,7 +5395,7 @@ Player:
 			assault.nax: 1
 			naxis_imperialturbotank: 1
 			naxis_bmwbike: 1
-			naxis_kbelwagen: 1
+			naxis_kubelwagen: 1
 			car.nax: 1
 			tuboat.nax: 1
 			muboat.nax: 1

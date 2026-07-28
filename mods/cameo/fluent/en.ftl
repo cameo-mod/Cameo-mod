@@ -302,6 +302,7 @@ bot_ai =
    .challenger = Challenger AI
    .unbeatable = Unbeatable AI
    .cameogod = Cameo God AI
+   .campaign = Campaign AI
 
 support-power-timer = { $player }'s { $support-power }: { $time }
 

@@ -1,9 +1,10 @@
 # OpenRA Cameo — Design Document
 
 _The distilled, binding design contract for this mod. Every AI agent session
-and every contributor reads this FIRST. The long-form analysis and roadmap
-live in [MASTER_REPORT.md](MASTER_REPORT.md); the machine-checkable state
-lives in [audit/](audit/) — this document is the rules themselves.
+and every contributor reads this FIRST. The long-form historical analysis
+lives in [MASTER_REPORT.md](MASTER_REPORT.md) (not a live roadmap — active
+work belongs in [design/ROADMAP.md](design/ROADMAP.md)); the machine-checkable
+state lives in [audit/](audit/) — this document is the rules themselves.
 Faction lore, gameplay profiles, and roster details live in
 [FACTIONS.md](FACTIONS.md)._
 
@@ -639,8 +640,9 @@ cheapest provider wins).
 1. **Read the ENTIRE DESIGN.md into your context before touching ANY yaml
    file.** Not a grep, not a search, not a summary — the full file, every
    session, every time. This is non-negotiable. Skipping this step causes
-   violations of stat rules (Speed steps of 5, HP steps, TurnSpeed formulas,
-   price quantization) that are all documented here. If you find yourself
+   violations of stat rules (Speed steps — 5 for vehicles/aircraft/ships,
+   1 for infantry, HP steps, TurnSpeed formulas, price quantization) that
+   are all documented here. If you find yourself
    about to edit a yaml file and you have not read this document in full
    this session, STOP and read it first.
 2. Read this document, then `docs/audit/SUMMARY.md` for current state.
@@ -836,14 +838,30 @@ steps so the house formulas stay integral:
   sibling unit. If many units of the same class converge on the same price,
   equally spread them across the available 100-grid slots first, then fall
   back to 10-grid only when necessary. Prices are outputs, never inputs.
-- **Damage: 2000-steps.** The HealthPercentageDamage twin is always
-  **1 per 2000** main damage (16000 -> Percentage 8); FriendlyFire twins
-  are always **50% damage and 50% spread**; all class warheads carry the
-  identical (even-spread) value.
+- **Damage: 2000-steps.** All main class warheads carry the **identical**
+  (even-spread) value `total ÷ N` on the 2000 grid — never unequal, never
+  off-grid; fine-tune the effective damage with the actor
+  `FirepowerMultiplier`, not by nudging Damage. Their twins are FIXED
+  fractions of that main value:
+  - **FriendlyFire** twins = always **50% damage** (and 50% spread).
+  - **ExtraDamage** twins = always **50%** of the main (any warhead type —
+    SpreadDamage or OpenToppedDamage; energy weapons trade area-of-effect
+    for this shield/bonus chip) but are **EXCLUDED from the damage total**.
+  - **HealthPercentageDamage (Percentage)** twin = always **1 per 2000**
+    main damage (16000 -> 8).
+  - The ONE code implementation is `formula.distribute_damage` /
+    `formula.spread_damage_sum`; guard `audit_warhead_split`.
+- **Only template-inherited warheads may exist.** Every `Warhead@X` on a
+  weapon must be one the weapon inherits from a `^`-template in
+  `weapons.yaml` (the main warhead is named after its template —
+  `Warhead@SmallArms`, `Warhead@TankDestroyerCannon`, …). The legacy
+  generic `Warhead@1Dam` is RETIRED — it was renamed to the per-template
+  warhead name; a bare `1Dam` (or stray non-template warhead) is a bug.
 - **HP: 2500-steps** for vehicles/aircraft/ships (self-heal HP/2500,
   repair HP/20); **1000-steps for infantry** (self-heal HP/1000);
   defenses may use either (their self-heal is a flat 10).
-- **Speed: steps of 5**.
+- **Speed: steps of 5** for vehicles, aircraft, and ships; **steps of 1**
+  for infantry (per `FORMULA_V2.md` and `LESSONS_LEARNED.md`).
 - **TurnSpeed (vehicles & fixed-weapon units):** units without a turret or
   with a forward-facing fixed weapon turn at **`TurnSpeed = 2 × Speed / 5`**;
   turreted units turn at **`TurnSpeed = Speed / 5`**. Infantry normally turns

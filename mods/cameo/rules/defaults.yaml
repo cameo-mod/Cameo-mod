@@ -905,8 +905,6 @@
 	Inherits@ModernFireControlSystems: ^ModernFireControlSystems
 	Inherits@Blitzkrieg: ^Blitzkrieg
 	Inherits@TiberiumAdaptability: ^TiberiumAdaptability
-	DamageMultiplier@VehicleBuffs:
-		Modifier: 90
 	ChangesHealth@SelfHealing:
 		Step: 10
 		Delay: 1
@@ -918,10 +916,6 @@
 	Inherits@upgrade: ^LightWeightArmorPlating
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
 	Inherits@NuclearShellsTeamUpgradeRA1: ^NuclearShellsTeamUpgradeRA1
-	DamageMultiplier@TankBuffs:
-		Modifier: 80
-	FirepowerMultiplier@TankBuffs:
-		Modifier: 125
 	RangeMultiplier@tankbunker:
 		Modifier: 150
 		RequiresCondition: tankbunkered
@@ -1487,10 +1481,6 @@
 	Inherits@VehicleBuffs: ^VehicleBuffs
 	Inherits@upgrade: ^LightWeightArmorPlating
 	Inherits@upgrade: ^AdvancedGuerillaTactics
-	DamageMultiplier@SupportVehicleBuff:
-		Modifier: 90
-	FirepowerMultiplier@SupportVehicleBuff:
-		Modifier: 110
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -1534,10 +1524,6 @@
 	Inherits@EXPERIENCE: ^GainsExperienceVehicle
 	Inherits@EXT: ^ExternalConditions
 	Inherits@TankBuffs: ^TankBuffs
-	FirepowerMultiplier@MainBattleTankBuff:
-		Modifier: 115
-	DamageMultiplier@MainBattleTankBuff:
-		Modifier: 85
 	Armor:
 		Type: Medium
 	RevealsShroud:
@@ -1555,8 +1541,6 @@
 	Inherits@EXT: ^ExternalConditions
 	Inherits@TankBuffs: ^TankBuffs
 	Inherits@Crushes: ^VehicleCrusher
-	DamageMultiplier@HighTechTankBuff:
-		Modifier: 75
 	Armor:
 		Type: Medium
 	RevealsShroud:
@@ -1576,10 +1560,6 @@
 	Inherits@Crushes: ^VehicleCrusher
 	ProducibleWithLevel@spyvehicles:
 		Prerequisites: vehicles.upgraded
-	DamageMultiplier@LineBreakerBuff:
-		Modifier: 70
-	FirepowerMultiplier@LineBreakerBuff:
-		Modifier: 140
 	Armor:
 		Type: Heavy
 	RevealsShroud:
@@ -1600,8 +1580,6 @@
 	Inherits@TankBuffs: ^TankBuffs
 	Inherits@VehicleBuffs: ^VehicleBuffs
 	Inherits@upgrade: ^AdvancedGuerillaTactics
-	FirepowerMultiplier@FireSupportBuff:
-		Modifier: 125
 	# TurnSpeedMultiplier@FireSupportBuff:
 	# 	Modifier: 200
 	Armor:
@@ -1663,8 +1641,6 @@
 	Inherits@snipe: ^DriverKillImmune
 	Targetable@Epic:
 		TargetTypes: Epic
-	DamageMultiplier@EpicBuff:
-		Modifier: 40
 	Armor:
 		Type: Superheavy
 	RevealsShroud:
@@ -1706,6 +1682,130 @@
 		Gravity: 30, 70
 		TurnRate: 2
 		Offset: 0,0,128
+
+^LightTankTemplate:
+	Inherits@EXPERIENCE: ^GainsExperienceVehicle
+	Inherits@EXT: ^ExternalConditions
+	Inherits@TankBuffs: ^TankBuffs
+	Armor:
+		Type: Medium
+	RevealsShroud:
+		Range: 6000
+	Buildable:
+		Description: Light tank.\n  Fast and cheap\n  Weak vs heavy Tanks
+		BuildPaletteOrder: 25
+		BuildDurationModifier: 50
+		IconPalette: cameo
+	TooltipExtras@LightTank:
+		Description: Light Tank
+
+^AntiAirVehicleTemplate:
+	Inherits@EXPERIENCE: ^GainsExperienceVehicle
+	Inherits@EXT: ^ExternalConditions
+	Inherits@VehicleBuffs: ^VehicleBuffs
+	Inherits@upgrade: ^LightWeightArmorPlating
+	Armor:
+		Type: Medium
+	RevealsShroud:
+		Range: 7000
+	AutoTargetPriority@AIR:
+		ValidTargets: Air
+		Priority: 30
+	Buildable:
+		Description: Mobile anti-air.\n  Strong vs Aircraft\n  Weak vs Ground
+		BuildPaletteOrder: 35
+		BuildDurationModifier: 50
+		IconPalette: cameo
+	TooltipExtras@AntiAir:
+		Description: Anti-Air Vehicle
+
+^TankDestroyerTemplate:
+	Inherits@EXPERIENCE: ^GainsExperienceVehicle
+	Inherits@EXT: ^ExternalConditions
+	Inherits@TankBuffs: ^TankBuffs
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7500
+	KeepsDistance:
+		Distance: 8
+	Buildable:
+		Description: Tank destroyer.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+		BuildPaletteOrder: 45
+		BuildDurationModifier: 50
+		IconPalette: cameo
+	TooltipExtras@TankDestroyer:
+		Description: Tank Destroyer
+
+^ArtilleryTankTemplate:
+	Inherits@EXPERIENCE: ^GainsExperienceVehicle
+	Inherits@EXT: ^ExternalConditions
+	Inherits@ArtilleryBuffs: ^ArtilleryBuffs
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@AntiInf: ^PrioritizeInfantry
+	WithMuzzleGlow:
+		Pitch: 113
+	AutoTargetPriority@INFANTRY:
+		ValidTargets: Infantry
+		Priority: 10
+	Armor:
+		Type: Medium
+	RenderRangeCircle:
+		RangeCircleType: vehicle
+	RevealsShroud:
+		Range: 9000
+	KeepsDistance:
+		Distance: 12
+	Buildable:
+		Description: Tanky turreted artillery.\n  Strong vs Buildings, Infantry\n  Weak vs Aircraft
+		BuildPaletteOrder: 55
+		BuildDurationModifier: 75
+		IconPalette: cameo
+	TooltipExtras@ArtilleryTank:
+		Description: Artillery Tank
+
+^DreadnoughtTemplate:
+	Inherits@EXPERIENCE: ^GainsExperienceVehicle
+	Inherits@EXT: ^ExternalConditions
+	Inherits@TankBuffs: ^TankBuffs
+	Inherits@Crushes: ^VehicleCrusher
+	Armor:
+		Type: Superheavy
+	RevealsShroud:
+		Range: 8000
+	KeepsDistance:
+		Distance: 8
+	Buildable:
+		Description: Heavy long-range assault walker.\n  Strong vs Vehicles, Buildings\n  Weak vs Infantry
+		BuildPaletteOrder: 90
+		BuildDurationModifier: 50
+		IconPalette: cameo
+	TooltipExtras@Dreadnought:
+		Description: Dreadnought
+
+^MissileVehicleTemplate:
+	Inherits@EXPERIENCE: ^GainsExperienceVehicle
+	Inherits@EXT: ^ExternalConditions
+	Inherits@VehicleBuffs: ^VehicleBuffs
+	Inherits@upgrade: ^AdvancedGuerillaTactics
+	# Dual-purpose: ONE weapon hits ground AND air (priced once, no air bonus). Air engagement comes
+	# from the weapon's ValidTargets + the actor's AutoTarget inherit — no air-preference node here, so
+	# it stays a neutral flexer (unlike ^AntiAirVehicleTemplate which prioritizes Air and gets a free
+	# +range/+damage air weapon). Sits exactly between FireSupport and AntiAir on the class ladder.
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 7000
+	KeepsDistance:
+		Distance: 8
+	Buildable:
+		Description: Mobile missile vehicle.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		BuildPaletteOrder: 42
+		BuildDurationModifier: 75
+		IconPalette: cameo
+	TooltipExtras@MissileVehicle:
+		Description: Missile Vehicle
 
 ^FighterTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceAircraft
@@ -1852,8 +1952,6 @@
 	Inherits@snipe: ^DriverKillImmune
 	Targetable@Epic:
 		TargetTypes: Epic
-	DamageMultiplier@EpicBuff:
-		Modifier: 50
 	Integrity:
 		MaxPercentageStrength: 200
 	Buildable:

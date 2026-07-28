@@ -1,6 +1,6 @@
 ra1_allies_alliedlighttank:
 	Inherits: ^Tank
-	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@Template: ^LightTankTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^TurretEMP
@@ -117,7 +117,7 @@ ra1_allies_alliedmediumtank:
 
 ra1_allies_alliedheavyaatank:
 	Inherits: ^Vehicle
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^AntiAirVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
@@ -398,7 +398,7 @@ ra1_allies_minelayer:
 
 ra1_allies_sheridanassaulttank:
 	Inherits: ^Tank
-	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@Template: ^LightTankTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -647,7 +647,7 @@ ra1_allies_alliedtigerheavytank:
 
 ra1_allies_alliedtankdestroyer:
 	Inherits: ^Tank
-	Inherits@Template: ^LineBreakerTemplate
+	Inherits@Template: ^TankDestroyerTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
