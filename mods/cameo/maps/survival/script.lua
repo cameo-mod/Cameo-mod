@@ -1149,46 +1149,14 @@ UnlockFactionUpgrades = function(mcvType, waveIdx)
 	end
 end
 
--- Build a small forward base around the deployed MCV position
-BuildBaseAfterDeploy = function(mcvType, owner, deployPos)
-	local buildings = FactionBuildings[mcvType]
-	if buildings == nil then return end
-
-	-- Building layout offsets relative to deploy position (in cells)
-	-- Layout: power plant adjacent, then refinery, barracks, warfactory in a ring
-	local layout = {
-		{ dx =  4, dy =  0, key = "power" },
-		{ dx = -4, dy =  0, key = "refinery" },
-		{ dx =  0, dy =  4, key = "barracks" },
-		{ dx =  0, dy = -4, key = "warfactory" },
-		{ dx =  4, dy =  4, key = nil },  -- extra power plant
-	}
-
-	local buildOrder = {}
-	for _, item in ipairs(layout) do
-		if item.key ~= nil and buildings[item.key] ~= nil then
-			table.insert(buildOrder, { type = buildings[item.key], dx = item.dx, dy = item.dy })
-		end
-	end
-	-- Add a second power plant if available
-	if buildings.power ~= nil then
-		table.insert(buildOrder, { type = buildings.power, dx = 4, dy = 4 })
-	end
-
-	-- Spawn buildings with delays to simulate construction
-	for i, b in ipairs(buildOrder) do
-		Trigger.AfterDelay(DateTime.Seconds(3 * i), function()
-			local pos = CPos.New(deployPos.X + b.dx, deployPos.Y + b.dy)
-			-- Clamp to map bounds
-			pos = CPos.New(
-				math.max(2, math.min(148, pos.X)),
-				math.max(2, math.min(148, pos.Y))
-			)
-			pcall(function()
-				Actor.Create(b.type, true, { Owner = owner, Location = pos })
-			end)
-		end)
-	end
+-- Give the AI a cash injection so it can build a base from the deployed MCV
+-- The AI bot modules (BaseBuilderBotModuleCA, UnitBuilderBotModuleCA, etc.) handle
+-- construction and unit production autonomously -- no scripted building spawns.
+GiveAICashInjection = function(owner, amount)
+	if owner == nil then return end
+	pcall(function()
+		owner.Cash = owner.Cash + amount
+	end)
 end
 
 SendMCV = function(faction, waveIdx)
@@ -1250,8 +1218,8 @@ SendMCV = function(faction, waveIdx)
 							-- Some MCVs use Build instead of Deploy
 							mcv.Build()
 						end
-						-- After deploy, build a forward base
-						BuildBaseAfterDeploy(faction.mcv, Foes[foeIdx], deployPos)
+						-- After deploy, give the AI a cash injection to kickstart base building
+						GiveAICashInjection(Foes[foeIdx], 5000)
 					end
 				end
 			end
@@ -2514,5 +2482,15 @@ Tick = function()
 	end
 	if DateTime.GameTime % 100 == 0 then
 		CheckVictory()
+	end
+	-- Periodic cash injection for AI Foe players so bot modules can keep building/producing
+	-- Every ~30 seconds (600 ticks), give each Foe cash scaled by wave index
+	if DateTime.GameTime % 600 == 0 and CurrentWaveIdx > 0 then
+		local amount = 1000 + CurrentWaveIdx * 200
+		for i = 1, 4 do
+			if Foes[i] ~= nil then
+				GiveAICashInjection(Foes[i], amount)
+			end
+		end
 	end
 end
