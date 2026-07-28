@@ -8,6 +8,9 @@ terran_scv:
 	Inherits@AutoRepair: ^PrioritizeRepair
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@SHADOWS: ^Shadows
+	FireWarheadsOnDeath:
+		Weapon: SCWorkerExplode
+		EmptyWeapon: SCWorkerExplode
 	#AutoTargetPriority@Repair:
 	#	ValidTargets: Repair, Repairing
 	#	ValidStances: Ally

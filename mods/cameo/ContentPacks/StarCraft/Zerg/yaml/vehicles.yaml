@@ -10,6 +10,9 @@ zerg_drone:
 	Inherits@ZergBurrow: ^ZergBurrow
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
+	FireWarheadsOnDeath:
+		Weapon: SCWorkerExplode
+		EmptyWeapon: SCWorkerExplode
 	Tooltip:
 		Name: Zerg Drone
 	Buildable:
