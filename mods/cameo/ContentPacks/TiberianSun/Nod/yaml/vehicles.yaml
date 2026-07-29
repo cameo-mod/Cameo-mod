@@ -603,7 +603,7 @@ ts_nod_ticktank:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^NodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@Voxel: ^RenderVoxel
+	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@EMP: ^FrontalEMP
 	Inherits@detect: ^EliteDetector
 	Inherits@vo: ^AttackFrontalVoice
