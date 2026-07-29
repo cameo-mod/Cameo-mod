@@ -103,7 +103,6 @@ zerg_sporemaw:
 	# WithIdleOverlay@Shadow:
 	# 	Offset: 0,0,-320
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	Voiced:
 		VoiceSet: SCHydraliskVoice
@@ -160,7 +159,6 @@ zerg_hermit:
 		InitialStance: AttackAnything
 	WithInfantryBody:
 	Passenger:
-		Weight: 4
 		CustomPipType: blue
 	Voiced:
 		VoiceSet: SCUltraliskVoice ##########
@@ -222,7 +220,6 @@ zerg_goremaw:
 		InitialStance: AttackAnything
 	WithInfantryBody:
 	Passenger:
-		Weight: 4
 		CustomPipType: blue
 	GrantConditionOnAttack@gatling:
 		RevokeDelay: 60
@@ -309,7 +306,6 @@ zerg_lurker:
 	Crushable:
 		RequiresCondition: undeployed
 	Passenger:
-		Weight: 4
 		CustomPipType: blue
 	Voiced:
 		VoiceSet: SCLurkerVoice

@@ -1,4 +1,4 @@
-﻿World:
+World:
 	FactionCA@orangestar:
 		Name: Orange Star AW
 		InternalName: orangestar
@@ -6409,7 +6409,6 @@ awconvoy:
 		Except: Unload, Stop
 		RequiresCondition: damagedslow
 	Passenger:
-		Weight: 6
 	Health:
 		HP: 11000
 	Repairable:
@@ -9287,7 +9286,6 @@ awradarvan:
 		Except: Unload, Stop
 		RequiresCondition: damagedslow
 	Passenger:
-		Weight: 6
 	Health:
 		HP: 24000
 	Repairable:
@@ -11438,7 +11436,6 @@ awcruiser:
 		DecorationBounds: 1621, 1621
 	Inherits@EXT: ^ExternalConditions
 	DeliversCash:
-		Payload: 500
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
@@ -11494,7 +11491,6 @@ awss:
 		DecorationBounds: 1536, 1536
 	Inherits@EXT: ^ExternalConditions
 	DeliversCash:
-		Payload: 475
 	DetectCloaked:
 		DetectionTypes: Underwater
 		Range: 2c0
@@ -11622,7 +11618,6 @@ awss3:
 		DecorationBounds: 1536, 1536
 	Inherits@EXT: ^ExternalConditions
 	DeliversCash:
-		Payload: 475
 	DetectCloaked:
 		DetectionTypes: Underwater
 		Range: 2c0
@@ -11665,7 +11660,6 @@ awbattleship:
 		DecorationBounds: 1621, 1621
 	Inherits@EXT: ^ExternalConditions
 	DeliversCash:
-		Payload: 500
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
@@ -11838,7 +11832,6 @@ awcarrier:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	DeliversCash:
-		Payload: 500
 	Voiced:
 		VoiceSet: AlliesNavalVoice
 	RenderSprites:

@@ -479,7 +479,6 @@ asianalliance_shinobi:
 	Voiced:
 		VoiceSet: AsianShinobiVoice
 	DeliversCash:
-		Payload: 60
 	Infiltrates:
 		Types: SpyInfiltrate
 		Notification: BuildingInfiltrated
@@ -568,7 +567,6 @@ asianalliance_engineer:
 		StandSequences: parachute
 		RequiresCondition: parachute
 	DeliversCash:
-		Payload: 250
 	RenderSprites:
 		Image: ra2_allies_engineer
 	ActorStatValues:
@@ -616,7 +614,6 @@ asianalliance_alligator:
 	Voiced:
 		VoiceSet: AsianCrocVoice
 	Passenger:
-		Weight: 2
 	Targetable@ra1_soviets_attackdog:
 		TargetTypes: DogImmune
 	RenderSprites:
@@ -732,7 +729,6 @@ asianalliance_asdf:
 	Voiced:
 		VoiceSet: AsianShinobiVoice
 	DeliversCash:
-		Payload: 600
 	ActorStatValues:
 		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_doctrine_modernizedinfantryequipment, asianalliance_upgrade_banzaimode
 

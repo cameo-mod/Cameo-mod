@@ -215,7 +215,6 @@
 	Passenger:
 		CargoType: Infantry
 		CustomPipType: green
-		Weight: 1
 	HiddenUnderFog:
 	ActorLostNotification:
 	Crushable:
@@ -421,7 +420,6 @@
 	SpeedMultiplier@DAMAGED:
 		Modifier: 60
 		RequiresCondition: d2kdamage
-	AttractsWorms:
 	Cloak@TDcloak:
 
 ^D2KTank:
@@ -1056,8 +1054,6 @@
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	AttractsWorms:
-		Intensity: 520
 	Cloak@TDcloak:
 		Palette: d2kcloak
 	Voiced:

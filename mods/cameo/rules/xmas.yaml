@@ -861,9 +861,6 @@ xmas_reindeer:
 		Range: 5c0
 	AttackFrontal:
 		FacingTolerance: 0
-	AttractsWorms:
-		Intensity: 300
-		RequiresCondition: !airborne
 	Targetable:
 		RequiresCondition: !airborne && !chronobeamed
 	Targetable@AIRBORNE:

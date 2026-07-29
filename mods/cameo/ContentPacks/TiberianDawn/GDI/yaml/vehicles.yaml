@@ -267,7 +267,6 @@ td_gdi_mammothtank:
 		Speed: 60
 		TurnSpeed: 12
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 225000
 	Repairable:
@@ -734,7 +733,6 @@ td_gdi_predatortank:
 		Speed: 70
 		TurnSpeed: 14
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 170000
 	Repairable:
@@ -834,7 +832,6 @@ td_gdi_mammothtankmkiii:
 		Speed: 55
 		TurnSpeed: 11
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 500000
 	Repairable:
@@ -1209,7 +1206,6 @@ td_gdi_defenserig:
 	RejectsMoveToAttack:
 		RequiresCondition: !(botmicro && !attacking) && deployed
 	Passenger:
-		Weight: 4
 		CustomPipType: blue
 		RequireForceMoveCondition: !undeployed
 	Carryable:

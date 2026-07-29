@@ -1501,7 +1501,6 @@ WIN98_MINE:
 	Voiced:
 		VoiceSet: RobotTankVoice
 	DeliversCash:
-		Payload: 75
 	Hovers:
 		RequiresCondition: !disabled && undeployed
 	Turreted:
@@ -1585,7 +1584,6 @@ WIN98_BITCOIN:
 	WithInfantryBody:
 		-DefaultAttackSequence:
 	DeliversCash:
-		Payload: 500
 		Type: NormalCash
 		PlayerExperience: 50
 		-Sounds:
@@ -1926,7 +1924,6 @@ WIN98_EMAIL_RAFT:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: win98uservoice
 
@@ -1979,6 +1976,5 @@ WIN98_BENCHY:
 		DecorationBounds: 1621, 1621
 	Inherits@EXT: ^ExternalConditions
 	DeliversCash:
-		Payload: 500
 	Voiced:
 		VoiceSet: win98uservoice

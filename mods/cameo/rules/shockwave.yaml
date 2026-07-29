@@ -3900,7 +3900,6 @@ susalockdownmlrs:
 	Mobile:
 		Speed: 68
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 35000
 	Repairable:
@@ -4002,7 +4001,6 @@ susashatterer:
 		Speed: 95
 		Locomotor: hover
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 40000
 	Hovers:
@@ -4220,7 +4218,6 @@ susaexosuit:
 		Sequence: turret7
 		RequiresCondition: ifv-lightsniper || ifv-hero || ifv-fremen
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	Voiced:
 		VoiceSet: BattlemasterTankVoice
@@ -4515,7 +4512,6 @@ susarailgunartillery:
 	Mobile:
 		Speed: 50
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 25000
 	Repairable:
@@ -5842,7 +5838,6 @@ susabradleyifv:
 		Speed: 95
 		Locomotor: tracked
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 44000
 	Repairable:
@@ -6076,7 +6071,6 @@ susamammoth:
 		TurnSpeed: 20
 	Passenger:
 		CargoType: Vehicle
-		Weight: 12
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
@@ -6424,7 +6418,6 @@ susastrykermedic:
 		Speed: 90
 		Locomotor: wheeled
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 50000
 	Repairable:
@@ -9913,7 +9906,6 @@ sglgrenadierterror:
 	Voiced:
 		VoiceSet: GLATerroristVoice
 	DeliversCash:
-		Payload: 60
 	Cloneable:
 		Types: NormalInfantry
 	-TakeCover:
@@ -9966,7 +9958,6 @@ sglscrapcrate:
 		Offset: 0,0,427
 		RequiresCondition: parachute
 	Passenger:
-		Weight: 1
 		CargoType: Scrapcrate
 sglsilo:
 	Inherits: ^BaseBuilding
@@ -10428,7 +10419,6 @@ sglbus:
 		Except: Unload, Stop
 		RequiresCondition: damagedslow
 	Passenger:
-		Weight: 6
 	Health:
 		HP: 75000
 	Repairable:
@@ -10776,7 +10766,6 @@ sgltrapdrop:
 		Offset: 0,0,427
 		RequiresCondition: parachute
 	Passenger:
-		Weight: 1
 		CargoType: Scrapcrate
 	WithCrateBody:
 		XmasImages: sgltrapdrop
@@ -15025,7 +15014,6 @@ schbattlefortress:
 	Mobile:
 		Speed: 42
 	Passenger:
-		Weight: 8
 	Health:
 		HP: 75000
 	Repairable:
@@ -15650,8 +15638,6 @@ schdevastator:
 		Delay: 115
 		RequiresCondition: overload
 		GrantsCondition: meltdown
-	AttractsWorms:
-		Intensity: 600
 	Selectable:
 		DecorationBounds: 1280, 1280, 0, 0
 	RenderSprites:

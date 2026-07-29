@@ -278,7 +278,6 @@ tkm_technicaltank:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 400
 	ActorStatValues:
 		Upgrades: tkm_upgrade_twinrocketsupgrade, tkm_upgrade_heavytitanplating
 	DamageMultiplier:
@@ -547,7 +546,6 @@ tkm_abrams:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 400
 	ActorStatValues:
 		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_heavytitanplating
 	DamageMultiplier:
@@ -640,7 +638,6 @@ tkm_t72m:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 400
 	ActorStatValues:
 		Upgrades: tkm_upgrade_pointdefensesystem
 	Selectable:
@@ -696,7 +693,6 @@ tkm_trenchtruck:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 400
 	Selectable:
 		Class: tkm_trenchtank
 	RenderSprites:
@@ -774,7 +770,6 @@ tkm_tornadoglauncher:
 		VoiceSet: TSVehicle
 	WithFacingSpriteBody:
 	DeliversCash:
-		Payload: 500
 	ActorStatValues:
 		Upgrades:
 	RenderSprites:
@@ -1060,7 +1055,6 @@ tkm_trenchtank:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 400
 	Selectable:
 		Class: tkm_trenchtank
 	ActorStatValues:
@@ -1125,7 +1119,6 @@ tkm_t30:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 400
 	ActorStatValues:
 		Upgrades: tkm_upgrade_heavytitanplating
 	DamageMultiplier:
@@ -1165,7 +1158,6 @@ tkm_battlebus:
 		Speed: 100
 		TurnSpeed: 20
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 50000
 	Repairable:

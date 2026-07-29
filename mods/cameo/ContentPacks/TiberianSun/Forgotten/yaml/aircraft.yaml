@@ -356,9 +356,6 @@ forgotten_cropplane:
 		Ammo: 1
 		ReloadCount: 1
 		AmmoCondition: ammo
-	# ReloadAmmoPool:
-	# 	Delay: 25
-	# 	Count: 1
 	SpawnActorOnDeath:
 		Actor: forgotten_cropplane_husk
 	WithAmmoPipsDecoration:
@@ -432,9 +429,6 @@ forgotten_locustbomber:
 		Ammo: 1
 		ReloadCount: 1
 		AmmoCondition: ammo
-	# ReloadAmmoPool:
-	# 	Delay: 25
-	# 	Count: 1
 	SpawnActorOnDeath:
 		Actor: forgotten_locustbomber_husk
 	WithAmmoPipsDecoration:

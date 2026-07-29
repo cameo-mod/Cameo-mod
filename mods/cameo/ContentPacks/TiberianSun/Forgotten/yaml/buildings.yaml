@@ -31,8 +31,6 @@ forgotten_constructionyard:
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@conyard: ^Conyard
-	Selectable:
-		Bounds: 3072, 2048
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -64,7 +62,7 @@ forgotten_constructionyard:
 	WithBuildingPlacedOverlay:
 		RequiresCondition: !build-incomplete
 	Selectable:
-		Bounds: 3072, 2560, 0, 0
+		Bounds: 3072, 2560
 	ProvidesPrerequisite@buildingname:
 	WithDeathAnimation:
 		DeathSequencePalette: player_rgba
@@ -116,7 +114,7 @@ forgotten_refinery:
 		Amount: -40
 	ProvidesPrerequisite@buildingname:
 	SelectionDecorations:
-	GivesBuildableArea: ##########
+	GivesBuildableArea
 		AreaTypes: building, cityi
 	WithResourceStoragePipsDecoration:
 		Position: BottomLeft
@@ -161,9 +159,9 @@ forgotten_crystalpowerextractor:
 	Power:
 		Amount: 160
 	ScalePowerWithHealth:
-	AcceptsDeliveredExperience: ##########
+	AcceptsDeliveredExperience
 	ProvidesPrerequisite@buildingname:
-		ValidTypes: building ##########
+		ValidTypes: building
 	WithDeathAnimation:
 		DeathSequencePalette: player_rgba
 		DeathPaletteIsPlayerPalette: true
@@ -207,7 +205,6 @@ forgotten_barracks:
 	ProductionQueue@INFANTRY:
 	Power:
 		Amount: -20
-	ProvidesPrerequisite@buildingname:
 	Selectable:
 		Bounds: 1280, 1024
 	WithDeathAnimation:
@@ -253,7 +250,6 @@ forgotten_warfactory:
 	ProductionQueue@VEHICLE:
 	Power:
 		Amount: -40
-	ProvidesPrerequisite@buildingname:
 	WithIdleOverlay@ROOF:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-roof
@@ -293,7 +289,7 @@ forgotten_servicedepot:
 	Power:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
-	GivesBuildableArea: ##########
+	GivesBuildableArea
 		AreaTypes: building, cityi
 	WithIdleOverlay@LIGHT:
 		RequiresCondition: !build-incomplete
@@ -439,8 +435,6 @@ forgotten_church:
 		BuildLimit: 1
 	Tooltip:
 		Name: actor_forgotten_church.name
-	Selectable:
-		Bounds: 2048, 2048
 	Building:
 		Footprint: xxx ===
 		Dimensions: 3,2
@@ -477,8 +471,6 @@ forgotten_chemicalplant:
 		BuildLimit: 1
 	Tooltip:
 		Name: actor_forgotten_chemicalplant.name
-	Selectable:
-		Bounds: 2048, 2048
 	Building:
 		Footprint: xxx ===
 		Dimensions: 3,2
@@ -522,20 +514,6 @@ forgotten_navalyard:
 		TargetTypes: Ground, Water, C4, Structure
 	RenderSprites:
 		PlayerPalette: player_rgba
-#######################################
-#######################################
-#######################################
-#######################################
-#######################################
-#######################################
-#######################################
-#######################################
-#######################################
-#######################################
-#######################################
-#######################################
-#######################################
-#######################################
 
 # tsntyard2:
 # 	Inherits: yrygyard

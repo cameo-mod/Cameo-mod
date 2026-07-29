@@ -151,7 +151,6 @@ ra2_soviets_rhinoheavytank:
 	Voiced:
 		VoiceSet: ra2sovietsVehicleVoice
 	DeliversCash:
-		Payload: 450
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -264,7 +263,6 @@ ra2_soviets_apocalypsetank:
 	Valued:
 		Cost: 1750
 	DeliversCash:
-		Payload: 500
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ra2_soviets_warfactory, ra2_soviets_battlelab
@@ -274,7 +272,6 @@ ra2_soviets_apocalypsetank:
 		Speed: 55
 		TurnSpeed: 11
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 350000
 	Repairable:
@@ -638,7 +635,6 @@ ra2_soviets_terrordrone:
 		Step: 4
 	Passenger:
 		CargoType: Infantry
-		Weight: 2
 	WithInfantryBody:
 		DefaultAttackSequence: jump
 		RequiresCondition: !jousting

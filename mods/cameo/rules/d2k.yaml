@@ -537,7 +537,6 @@
 # 	ProductionCostMultiplier@IXIANVEHICLES:
 # 		Prerequisites: faction.ixian
 # 		Multiplier: 120
-# 	AttractsWorms:
 # 		RequiresCondition: !faction.fremen
 # 	AttractsWorms@fremen:
 # 		Intensity: 0
@@ -4150,7 +4149,6 @@
 # 		SoundFiles: THUMPER1.WAV
 # 		Interval: 60
 # 		RequiresCondition: deployed
-# 	AttractsWorms:
 # 		Intensity: 1000
 # 		Falloff: 0, 0, 0, 100, 100, 100, 25, 11, 6, 4, 3, 2, 1, 0
 # 		RequiresCondition: deployed
@@ -5506,7 +5504,6 @@
 # 		EmptyWeapon: D2KUnitExplodeMed
 # 	Selectable:
 # 		Class: light_tank
-# 	AttractsWorms:
 # 		Intensity: 500
 # 	RenderSprites:
 # 	Cloak@TDcloak:
@@ -5654,7 +5651,6 @@
 # 		IsPlayerPalette: true
 # 		CloakedCondition: cloaked
 # 		PauseOnCondition: cloak-force-disabled || base-reveal
-# 	AttractsWorms:
 # 		Intensity: 1000
 # 	WithCargoPipsDecoration:
 # 		Position: BottomLeft
@@ -5733,7 +5729,6 @@
 # 		EmptyWeapon: D2KUnitExplodeMed
 # 	Selectable:
 # 		Class: d2k_basq
-# 	AttractsWorms:
 # 		Intensity: 500
 # 	RenderSprites:
 # 	Cloak@TDcloak:
@@ -5904,7 +5899,6 @@
 # 		EmptyWeapon: D2KUnitExplodeMed
 # 	RenderSprites:
 # 		PlayerPalette: player
-# 	AttractsWorms:
 # 		Intensity: 0
 # 	WithAmmoPipsDecoration:
 # 		Position: BottomLeft
@@ -6101,7 +6095,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeMed
 # 		EmptyWeapon: D2KUnitExplodeMed
-# 	AttractsWorms:
 # 		Intensity: 350
 # 	Voiced:
 # 		VoiceSet: EBFDOAPC
@@ -6166,7 +6159,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeMed
 # 		EmptyWeapon: D2KUnitExplodeMed
-# 	AttractsWorms:
 # 		Intensity: 350
 # 	Voiced:
 # 		VoiceSet: EBFDOAPC
@@ -7240,7 +7232,6 @@
 # 	WithHarvestOverlay:
 # 		Palette: effect50alpha
 # 	WithDockingAnimation:
-# 	AttractsWorms:
 # 		Intensity: 750
 # 	-RevealOnFire:
 # 	Voiced:
@@ -7294,7 +7285,6 @@
 # 	WithHarvestOverlay:
 # 		Palette: effect50alpha
 # 	WithDockingAnimation:
-# 	AttractsWorms:
 # 		Intensity: 750
 # 	-RevealOnFire:
 # 	Voiced:
@@ -7351,7 +7341,6 @@
 
 # 		Weapon: D2KUnitExplodeSmall
 # 		EmptyWeapon: D2KUnitExplodeSmall
-# 	AttractsWorms:
 # 		Intensity: 420
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
@@ -7463,7 +7452,6 @@
 # 		EmptyWeapon: D2KUnitExplodeSmall
 # 	Selectable:
 # 		Class: quad
-# 	AttractsWorms:
 # 		Intensity: 470
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
@@ -7511,7 +7499,6 @@
 # 		EmptyWeapon: D2KUnitExplodeSmall
 # 	Selectable:
 # 		Class: d2k_rocket_buggy
-# 	AttractsWorms:
 # 		Intensity: 420
 # 	Cloak@TDcloak:
 # 		Palette: cloak
@@ -7562,7 +7549,6 @@
 # 		EmptyWeapon: D2KUnitExplodeSmall
 # 	Selectable:
 # 		Class: d2k_transport_buggy
-# 	AttractsWorms:
 # 		Intensity: 460
 # 	Cloak@TDcloak:
 # 		Palette: cloak
@@ -7664,7 +7650,6 @@
 # 		EmptyWeapon: D2KUnitExplodeSmall
 # 	Selectable:
 # 		Class: d2k_combat_buggy
-# 	AttractsWorms:
 # 		Intensity: 420
 # 	Cloak@TDcloak:
 # 		Palette: cloak
@@ -7745,7 +7730,6 @@
 # 		InitialStanceAI: Defend
 # 	Selectable:
 # 		Class: siege_quad
-# 	AttractsWorms:
 # 		Intensity: 500
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
@@ -7906,7 +7890,6 @@
 # 		Actor: siege_tank.husk
 # 		OwnerType: InternalName
 # 		EffectiveOwnerFromOwner: true
-# 	AttractsWorms:
 # 		Intensity: 600
 # 	GrantConditionOnPrerequisite@ixian_upgrade_reinforcedbarrel:
 # 		Condition: ixian_upgrade_reinforcedbarrel
@@ -8183,7 +8166,6 @@
 # 		Delay: 40
 # 		Count: 1
 # 		ResetOnFire: true
-# 	AttractsWorms:
 # 		Intensity: 600
 # 	FirepowerMultiplier@ixian_upgrade_reinforcedbarrel:
 # 		Modifier: 150
@@ -8276,7 +8258,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeMed
 # 		EmptyWeapon: D2KUnitExplodeMed
-# 	AttractsWorms:
 # 		Intensity: 520
 # 	Cloak@TDcloak:
 # 	Voiced:
@@ -8336,7 +8317,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeMed
 # 		EmptyWeapon: D2KUnitExplodeMed
-# 	AttractsWorms:
 # 		Intensity: 600
 # 	Cloak@TDcloak:
 # 	RenderRangeCircle:
@@ -8419,7 +8399,6 @@
 # 		EmptyWeapon: D2KUnitExplodeMed
 # 	Selectable:
 # 		Class: missiletank
-# 	AttractsWorms:
 # 		Intensity: 600
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
@@ -8468,7 +8447,6 @@
 # 		EmptyWeapon: D2KUnitExplodeMed
 # 	Selectable:
 # 		Class: d2k_flame_tank
-# 	AttractsWorms:
 # 		Intensity: 400
 # 	Cloak@TDcloak:
 # 		Palette: cloak
@@ -8521,7 +8499,6 @@
 # 		Actor: sonic_tank.husk
 # 		OwnerType: InternalName
 # 		EffectiveOwnerFromOwner: true
-# 	AttractsWorms:
 # 		Intensity: 600
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
@@ -8598,7 +8575,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeMed
 # 		EmptyWeapon: D2KUnitExplodeMed
-# 	AttractsWorms:
 # 		Intensity: 350
 # 	Voiced:
 # 		VoiceSet: D2KLaserTankVoice
@@ -8662,7 +8638,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeMed
 # 		EmptyWeapon: D2KUnitExplodeMed
-# 	AttractsWorms:
 # 		Intensity: 350
 # 	Voiced:
 # 		VoiceSet: EBFDDeviator
@@ -8713,7 +8688,6 @@
 # 		LocalOffset: 175,0,-100
 # 	AttackFrontal:
 # 		FacingTolerance: 120
-# 	AttractsWorms:
 # 		Intensity: 300
 # 		RequiresCondition: !airborne
 # 	Hovers:
@@ -8872,7 +8846,6 @@
 # 		Delay: 180
 # 		RequiresCondition: overload
 # 		GrantsCondition: meltdown
-# 	AttractsWorms:
 # 		Intensity: 700
 # 	ChangesHealth:
 # 		Step: 50
@@ -8930,7 +8903,6 @@
 # 		Actor: d2k_tyrant.husk
 # 		OwnerType: InternalName
 # 		EffectiveOwnerFromOwner: true
-# 	AttractsWorms:
 # 		Intensity: 800
 # 	Selectable:
 # 		DecorationBounds: 1280, 1280, 0, 0
@@ -8991,7 +8963,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeSmall
 # 		EmptyWeapon: D2KUnitExplodeSmall
-# 	AttractsWorms:
 # 		Intensity: 420
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
@@ -9086,7 +9057,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeSmall
 # 		EmptyWeapon: D2KUnitExplodeSmall
-# 	AttractsWorms:
 # 		Intensity: 120
 # 	Cloak@TDcloak:
 # 		Palette: player_rgba
@@ -9164,7 +9134,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeSmall
 # 		EmptyWeapon: D2KUnitExplodeSmall
-# 	AttractsWorms:
 # 		Intensity: 420
 # 	Voiced:
 # 		VoiceSet: D2KRaider
@@ -9257,7 +9226,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeSmall
 # 		EmptyWeapon: D2KUnitExplodeSmall
-# 	AttractsWorms:
 # 		Intensity: 420
 # 	Cloak:
 # 		CloakSound: trans1.aud
@@ -9321,7 +9289,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeLarge
 # 		EmptyWeapon: D2KUnitExplodeLarge
-# 	AttractsWorms:
 # 		Intensity: 600
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
@@ -9371,7 +9338,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeMed
 # 		EmptyWeapon: D2KUnitExplodeMed
-# 	AttractsWorms:
 # 		Intensity: 520
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
@@ -9479,7 +9445,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeMed
 # 		EmptyWeapon: D2KUnitExplodeMed
-# 	AttractsWorms:
 # 		Intensity: 520
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
@@ -9536,7 +9501,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeMed
 # 		EmptyWeapon: D2KUnitExplodeMed
-# 	AttractsWorms:
 # 		Intensity: 520
 # 	Voiced:
 # 		VoiceSet: D2KCombatTank
@@ -9602,7 +9566,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeMed
 # 		EmptyWeapon: D2KUnitExplodeMed
-# 	AttractsWorms:
 # 		Intensity: 520
 # 	Voiced:
 # 		VoiceSet: D2KCombatTank
@@ -9717,7 +9680,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeLarge
 # 		EmptyWeapon: D2KUnitExplodeLarge
-# 	AttractsWorms:
 # 		Intensity: 600
 # 	Cloak@TDcloak:
 # 		Palette: cloak
@@ -9776,7 +9738,6 @@
 # 	Cloak:
 # 		IsPlayerPalette: true
 # 		Palette: player_rgba
-# 	AttractsWorms:
 # 		Intensity: 520
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
@@ -9834,7 +9795,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeMed
 # 		EmptyWeapon: D2KUnitExplodeMed
-# 	AttractsWorms:
 # 		Intensity: 520
 # 	Voiced:
 # 		VoiceSet: D2KCombatTank
@@ -11291,7 +11251,6 @@
 # 		Actor: d2k_mcv.husk
 # 		OwnerType: InternalName
 # 		EffectiveOwnerFromOwner: true
-# 	AttractsWorms:
 # 		Intensity: 700
 # 	ChangesHealth:
 # 		Step: 50
@@ -11960,7 +11919,6 @@
 # 		EmptyWeapon: D2KUnitExplodeMed
 # 	Selectable:
 # 		Class: apparition.ixian
-# 	AttractsWorms:
 # 		Intensity: 500
 # 	RenderSprites:
 # 		Image: apparition.ixian
@@ -12997,7 +12955,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeSmall
 # 		EmptyWeapon: D2KUnitExplodeSmall
-# 	AttractsWorms:
 # 		Intensity: 420
 # 	Cloak:
 # 		CloakSound: trans1.aud
@@ -13155,7 +13112,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeSmall
 # 		EmptyWeapon: D2KUnitExplodeSmall
-# 	AttractsWorms:
 # 		Intensity: 420
 # 	Voiced:
 # 		VoiceSet: D2KRaider
@@ -13271,7 +13227,6 @@
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeMed
 # 		EmptyWeapon: D2KUnitExplodeMed
-# 	AttractsWorms:
 # 		Intensity: 520
 # 	Voiced:
 # 		VoiceSet: D2KCombatTank
@@ -13580,7 +13535,6 @@
 # 		FacingTolerance: 0
 # 	FireWarheadsOnDeath:
 # 		Weapon: d2k_basq
-# 	AttractsWorms:
 # 		Intensity: 500
 # 	RenderSprites:
 # 		Image: apparition.ixian

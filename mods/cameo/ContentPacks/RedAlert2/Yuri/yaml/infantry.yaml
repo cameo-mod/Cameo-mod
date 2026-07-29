@@ -77,7 +77,6 @@ yuri_engineer:
 	RenderSprites:
 		Image: ra2_allies_engineer
 	DeliversCash:
-		Payload: 250
 
 yuri_initiate:
 	Inherits: ^Soldier
@@ -191,7 +190,6 @@ yuri_brute:
 	Voiced:
 		VoiceSet: BruteVoice
 	Passenger:
-		Weight: 2
 	-TakeCover:
 	Targetable@ra1_soviets_attackdog:
 		TargetTypes: DogImmune
@@ -278,7 +276,6 @@ yuri_virus:
 	Voiced:
 		VoiceSet: VirusVoice
 	DeliversCash:
-		Payload: 350
 	GrantConditionOnPrerequisite@viruscloud:
 		Condition: yuri_upgrade_meltingvirus
 		Prerequisites: yuri_upgrade_meltingvirus
@@ -373,7 +370,6 @@ yuri_clone:
 	ProximityCaptor@MC:
 		Types: Infantry
 	DeliversCash:
-		Payload: 400
 	IgnoresDisguise:
 	KeepsDistance:
 	RenderSprites:
@@ -542,7 +538,6 @@ yuri_yurix:
 	Voiced:
 		VoiceSet: YuriVoice
 	DeliversCash:
-		Payload: 600
 	IgnoresDisguise:
 	-DamagedByTerrain:
 	#-Cloneable:

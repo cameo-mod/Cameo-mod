@@ -441,7 +441,6 @@ TAENGINEER:
 	Voiced:
 		VoiceSet: TSEngineer
 	DeliversCash:
-		Payload: 250
 	RenderSprites:
 		Image: tsengineer
 #######################################
@@ -656,7 +655,6 @@ tarocketfist:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -869,7 +867,6 @@ taavatar:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	Passenger:
-		Weight: 4
 		CustomPipType: blue
 	Power:
 		Amount: 0
@@ -912,7 +909,6 @@ tamammoth:
 		Speed: 50
 		TurnSpeed: 32
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 350000
 	Repairable:
@@ -1017,7 +1013,6 @@ tabaneblade:
 		Speed: 68
 		TurnSpeed: 8
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 500000
 	Repairable:
@@ -1119,7 +1114,6 @@ tathumper:
 		Speed: 35
 		TurnSpeed: 12
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 320000
 	Repairable:

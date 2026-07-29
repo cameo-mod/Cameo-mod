@@ -45,7 +45,6 @@ ra1_allies_gunboat:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
@@ -117,7 +116,6 @@ ra1_allies_destroyer:
 	Selectable:
 		DecorationBounds: 2048, 2048
 	DeliversCash:
-		Payload: 500
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	DetectCloaked:
@@ -193,7 +191,6 @@ ra1_allies_cruiser:
 	WithSpriteTurret@SECONDARY:
 		Turret: secondary
 	DeliversCash:
-		Payload: 500
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
@@ -265,7 +262,6 @@ japan_japanesespeedboat:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	RenderSprites:
@@ -366,7 +362,6 @@ japan_yamatobattleship:
 		Turret: flak
 		Sequence: turret2
 	DeliversCash:
-		Payload: 500
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	RenderSprites:
@@ -409,7 +404,6 @@ japan_japanesecarrier:
 		Voice: Attack
 		PauseOnCondition: disabled
 	DeliversCash:
-		Payload: 450
 	CarrierMaster:
 		Actors: japan_zerofighter_slave, japan_zerofighter_slave, japan_zerofighter_slave, japan_zerofighter_slave
 		RearmTicks: 125
@@ -573,7 +567,6 @@ ra1_soviets_submarine:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	DeliversCash:
-		Payload: 475
 	Voiced:
 		VoiceSet: RussianVehicleVoice
 	Cloak@underwater:
@@ -628,7 +621,6 @@ ra1_soviets_missilesubmarine:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	DeliversCash:
-		Payload: 1000
 	Cloak@underwater:
 		CloakDelay: 100
 	Voiced:
@@ -677,7 +669,6 @@ ra1_navaltransport:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	DeliversCash:
-		Payload: 250
 	Cargo:
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 10
@@ -693,4 +684,3 @@ ra1_navaltransport:
 ####################################################################################################
 #		BUILDINGS
 ####################################################################################################
-

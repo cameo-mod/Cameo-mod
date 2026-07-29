@@ -74,7 +74,6 @@ futuretech_gunstrider:
 		QuantizedFacings: 32
 	-QuantizeFacingsFromSequence:
 	Passenger:
-		Weight: 4
 	Voiced:
 		VoiceSet: AsianAllianceRobotVoice
 	RenderSprites:
@@ -145,7 +144,6 @@ futuretech_plasmastrider:
 		QuantizedFacings: 32
 	-QuantizeFacingsFromSequence:
 	Passenger:
-		Weight: 4
 	Voiced:
 		VoiceSet: AsianAllianceRobotVoice
 	RenderSprites:
@@ -252,7 +250,6 @@ futuretech_robottank:
 		InitialHeight: 384
 		RequiresCondition: !disabled && robotcontrol
 	DeliversCash:
-		Payload: 300
 	-TemporaryOwnerManager:
 	Capturable:
 		Types: thiefproof
@@ -965,7 +962,6 @@ futuretech_futuretank:
 	Voiced:
 		VoiceSet: FutureTankVoice
 	DeliversCash:
-		Payload: 350
 	RenderSprites:
 		PlayerPalette: player_rgba
 	Targetable@ENERGIZER:

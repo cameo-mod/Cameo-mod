@@ -102,7 +102,6 @@ terran_vulture:
 	AttackFrontal:
 		FacingTolerance: 0
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	# AmmoPool@ammo:
 	# 	Ammo: 3
@@ -241,7 +240,6 @@ terran_siegetank:
 		DeploySounds: TankSiege.aud
 		UndeploySounds: TankSiege.aud
 	Passenger:
-		Weight: 4
 		CustomPipType: blue
 	IssueOrderToBot@AI:
 		OrderTrigger: Attack
@@ -359,7 +357,6 @@ terran_matador:
 		DeploySounds: TankSiege.aud
 		UndeploySounds: TankSiege.aud
 	Passenger:
-		Weight: 4
 		CustomPipType: blue
 	IssueOrderToBot@AI:
 		OrderTrigger: Attack
@@ -441,7 +438,6 @@ terran_cyclone:
 		Bounds: 1280, 1280
 		DecorationBounds: 1536, 1536
 	Passenger:
-		Weight: 2
 	Carryable:
 		RequiresCondition: !deployed
 	Voiced:
@@ -516,7 +512,6 @@ terran_goliath:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	Voiced:
 		VoiceSet: SCGoliathVoice
@@ -590,7 +585,6 @@ terran_goliathmk2:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	Voiced:
 		VoiceSet: SCGoliathVoice
@@ -718,7 +712,6 @@ terran_warhound:
 	# AutoTarget:
 	# 	InitialStanceAI: Defend
 	Passenger:
-		Weight: 4
 		CustomPipType: blue
 	Voiced:
 		VoiceSet: SCTyrVoice

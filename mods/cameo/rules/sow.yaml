@@ -1904,7 +1904,6 @@ sow_lt_cannon:
 		LocalOffset: 720,0,90
 		MuzzleSequence: muzzle
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	AttackTurreted:
@@ -1961,7 +1960,6 @@ sow_lt_flame:
 		LocalOffset: 720,0,90
 		MuzzleSequence: muzzle
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	AttackTurreted:
@@ -2012,7 +2010,6 @@ sow_lt_siege:
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament:
@@ -2069,7 +2066,6 @@ sow_lt_special:
 	Turreted:
 		TurnSpeed: 24
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament:
@@ -2126,7 +2122,6 @@ sow_lt_antiair:
 	Turreted:
 		TurnSpeed: 32
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	DetectCloaked:
@@ -2184,7 +2179,6 @@ sow_mt_cannon:
 	Turreted:
 		TurnSpeed: 24
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament@Muzzle1:
@@ -2240,7 +2234,6 @@ sow_mt_flame:
 	Turreted:
 		TurnSpeed: 24
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament:
@@ -2296,7 +2289,6 @@ sow_mt_siege:
 	Turreted:
 		TurnSpeed: 16
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament:
@@ -2352,7 +2344,6 @@ sow_mt_special:
 	Turreted:
 		TurnSpeed: 16
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament:
@@ -2410,7 +2401,6 @@ sow_mt_antiair:
 	Turreted:
 		TurnSpeed: 24
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	DetectCloaked:
@@ -2470,7 +2460,6 @@ sow_ht_cannon:
 	Turreted:
 		TurnSpeed: 16
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament:
@@ -2530,7 +2519,6 @@ sow_ht_flame:
 	Turreted:
 		TurnSpeed: 16
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament:
@@ -2590,7 +2578,6 @@ sow_ht_siege:
 	Turreted:
 		TurnSpeed: 12
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament:
@@ -2650,7 +2637,6 @@ sow_ht_special:
 	Turreted:
 		TurnSpeed: 12
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament:
@@ -2716,7 +2702,6 @@ sow_ht_antiair:
 	AutoTargetPriority:
 		ValidTargets: Air
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament:
@@ -2790,7 +2775,6 @@ sow_abc:
 	Armor:
 		Type: Heavy
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament:
@@ -3017,7 +3001,6 @@ sow_advancer:
 	#	EffectiveOwnerFromOwner: true
 	Inherits@EXT: ^ExternalConditions
 	Passenger:
-		Weight: 20
 	ActorLostNotification:
 		Notification: sowadvancerlost
 	DeathSounds:
@@ -3084,7 +3067,6 @@ sow_mech_avenger:
 	WithSpriteTurret:
 		TurnSpeed: 5
 	Passenger:
-		Weight: 20
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament:
@@ -3205,7 +3187,6 @@ sow_mech_kodiak:
 	WithSpriteTurret:
 		TurnSpeed: 5
 	Passenger:
-		Weight: 20
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament:
@@ -3317,7 +3298,6 @@ sow_mech_gatling:
 	WithSpriteTurret:
 		TurnSpeed: 3
 	Passenger:
-		Weight: 20
 	WithMuzzleOverlay:
 	Voiced:
 		VoiceSet: sowunitsounds
@@ -3439,7 +3419,6 @@ sow_mech_jaguar:
 	WithSpriteTurret:
 		TurnSpeed: 6
 	Passenger:
-		Weight: 20
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament:
@@ -3565,7 +3544,6 @@ sow_mech_achilles:
 	WithSpriteTurret:
 		TurnSpeed: 9
 	Passenger:
-		Weight: 20
 	Voiced:
 		VoiceSet: sowunitsounds
 	Armament:
@@ -3666,7 +3644,6 @@ sow_mcv:
 		Range: 7c0
 	RenderSprites:
 	Passenger:
-		Weight: 20
 	Voiced:
 		VoiceSet: sowunitsounds
 	Transforms:

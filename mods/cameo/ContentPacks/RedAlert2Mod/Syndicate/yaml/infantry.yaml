@@ -566,7 +566,6 @@ latinsyndicate_engineer:
 	RenderSprites:
 		Image: ra2_allies_engineer
 	DeliversCash:
-		Payload: 250
 
 latinsyndicate_terrorist:
 	Inherits: ^Soldier
@@ -612,7 +611,6 @@ latinsyndicate_terrorist:
 	Voiced:
 		VoiceSet: RA2TerroristVoice
 	DeliversCash:
-		Payload: 60
 	-TakeCover:
 	Captures:
 		CaptureTypes: bombcar

@@ -28,19 +28,19 @@ ts_gdi_upgrade_projectileimprovements:
 		Image: tsprojectileimprovementsicon
 	ProvidesPrerequisite:
 
-ts_gdi_upgrade_mechanicalreliability:
+ts_gdi_upgrade_fieldmaintenance:
 	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
-		Name: Mechanical Reliability
+		Name: Field Maintenance
 	Valued:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Upgrades
-		Description: upgrade_mechanicalreliability.description
-		Prerequisites: ~ts_gdi_radar, !ts_gdi_upgrade_mechanicalreliability
+		Description: upgrade_fieldmaintenance.description
+		Prerequisites: ~ts_gdi_radar, !ts_gdi_upgrade_fieldmaintenance
 	RenderSprites:
-		Image: mechanicalreliabilityicon
+		Image: fieldmaintenanceicon
 	ProvidesPrerequisite:
 
 ts_gdi_upgrade_ceramicarmor:

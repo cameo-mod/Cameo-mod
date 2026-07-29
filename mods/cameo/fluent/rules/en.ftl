@@ -2020,8 +2020,8 @@ upgrade_railgunweaponry =
       Increases damage for Railgun Commando and Mammoth Prototype.
       Equips Enforcer, Titan and RPG Tower with Railgun weapons.
 
-upgrade_mechanicalreliability =
-   .name = Mechanical Reliability
+upgrade_fieldmaintenance =
+   .name = Field Maintenance
    .description = Tech Upgrade (Only affects units of own faction)
       Increases Damage Resistance and Speed of all vehicles, tanks and aircraft by 10%.
       Also gives them additional health regeneration of 1% per second.

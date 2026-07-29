@@ -4,7 +4,7 @@ ts_gdi_mobileconstructionvehicle:
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@mcv: ^MCV
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Buildable:
 		Prerequisites: ~ts_gdi_warfactory, ts_gdi_servicedepot
 		Queue: Vehicle, RAVehicle
@@ -26,12 +26,12 @@ ts_gdi_mobileconstructionvehicle:
 		Image: tsmcv
 		Scale: 15
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_fieldmaintenance
 
 ts_gdi_tiberiumharvester:
 	Inherits: ^TDHARV
 	Inherits@Voxel: ^TSRenderVoxel
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Health:
 		HP: 150000
 	Harvester:
@@ -46,14 +46,13 @@ ts_gdi_tiberiumharvester:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 500
 	RenderSprites:
 		Image: ts_gdi_tiberiumharvester
 	WithHarvestOverlay@harvesting:
 		Sequence: harvesting
 		Palette: ra2effect
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_fieldmaintenance
 
 ts_gdi_pitbull:
 	Inherits: ^Vehicle
@@ -66,7 +65,7 @@ ts_gdi_pitbull:
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@EMP: ^TurretEMP
 	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -102,7 +101,7 @@ ts_gdi_pitbull:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_fieldmaintenance
 
 ts_gdi_amphibiousapc:
 	Inherits: ^Tank
@@ -115,7 +114,7 @@ ts_gdi_amphibiousapc:
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@cargo: ^CargoVehicle
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Valued:
 		Cost: 1640
 	Tooltip:
@@ -154,7 +153,6 @@ ts_gdi_amphibiousapc:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 400
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 6
@@ -176,7 +174,7 @@ ts_gdi_amphibiousapc:
 		Position: BottomLeft
 		RequiresSelection: true
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_fieldmaintenance
 
 ts_gdi_mobileemp:
 	Inherits: ^Tank
@@ -186,7 +184,7 @@ ts_gdi_mobileemp:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@EMP: ^TurretEMP
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Valued:
 		Cost: 1400
 	Tooltip:
@@ -218,14 +216,13 @@ ts_gdi_mobileemp:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 700
 	RenderVoxels:
 		Image: tsm_emp
 		Scale: 15
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_fieldmaintenance
 
 ts_gdi_titan:
 	Inherits: ^Tank
@@ -237,7 +234,7 @@ ts_gdi_titan:
 	Inherits@EMP: ^TurretEMP
 	Inherits@detect: ^EliteDetector
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Inherits@MechEngineering: ^MechEngineering
 	Inherits@RailgunWeaponry: ^RailgunWeaponry
 	Valued:
@@ -286,7 +283,6 @@ ts_gdi_titan:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 400
 	WithSpriteTurret:
 		Recoils: false
 	BodyOrientation:
@@ -302,7 +298,7 @@ ts_gdi_titan:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
+		Upgrades: ts_gdi_upgrade_fieldmaintenance, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
 
 ts_gdi_titanmkii:
 	Inherits: ^Tank
@@ -313,7 +309,7 @@ ts_gdi_titanmkii:
 	Inherits@EMP: ^TurretEMP
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Inherits@MechEngineering: ^MechEngineering
 	Inherits@RailgunWeaponry: ^RailgunWeaponry
 	Valued:
@@ -359,7 +355,6 @@ ts_gdi_titanmkii:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 400
 	WithSpriteTurret:
 		Recoils: true
 	WithFacingSpriteBody:
@@ -370,7 +365,7 @@ ts_gdi_titanmkii:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
+		Upgrades: ts_gdi_upgrade_fieldmaintenance, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
 
 ts_gdi_juggernautmkii:
 	Inherits: ^Tank
@@ -381,7 +376,7 @@ ts_gdi_juggernautmkii:
 	# Inherits@EMP: ^TurretEMP
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	# Inherits@vo: ^AttackTurretedVoice
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Inherits@MechEngineering: ^MechEngineering
 	Valued:
 		Cost: 2200
@@ -425,7 +420,6 @@ ts_gdi_juggernautmkii:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 400
 	# WithSpriteTurret:
 	# 	Recoils: true
 	WithFacingSpriteBody:
@@ -439,7 +433,7 @@ ts_gdi_juggernautmkii:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering
+		Upgrades: ts_gdi_upgrade_fieldmaintenance, ts_gdi_upgrade_mechengineering
 
 ts_gdi_juggernaut:
 	Inherits: ^Tank
@@ -451,7 +445,7 @@ ts_gdi_juggernaut:
 	Inherits@EMP: ^TurretEMP
 	Inherits@detect: ^EliteDetector
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Inherits@MechEngineering: ^MechEngineering
 	Inherits@deploy: ^LurkerMode
 	Inherits@bot: ^SiegeModeVehicle
@@ -543,7 +537,7 @@ ts_gdi_juggernaut:
 	Voiced:
 		VoiceSet: TSVehicle
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering
+		Upgrades: ts_gdi_upgrade_fieldmaintenance, ts_gdi_upgrade_mechengineering
 
 ts_gdi_hovermlrs:
 	Inherits: ^Tank
@@ -555,7 +549,7 @@ ts_gdi_hovermlrs:
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -592,7 +586,6 @@ ts_gdi_hovermlrs:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 450
 	Hovers:
 		RequiresCondition: !disabled
 	RenderVoxels:
@@ -600,7 +593,7 @@ ts_gdi_hovermlrs:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_fieldmaintenance
 
 ts_gdi_wolverine:
 	Inherits: ^Vehicle
@@ -611,7 +604,7 @@ ts_gdi_wolverine:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EXT: ^ExternalConditions
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Inherits@MechEngineering: ^MechEngineering
 	Inherits@SonicWeaponry: ^SonicWeaponry
 	Valued:
@@ -667,7 +660,7 @@ ts_gdi_wolverine:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_sonicweaponry
+		Upgrades: ts_gdi_upgrade_fieldmaintenance, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_sonicweaponry
 
 ts_gdi_wolverinemkii:
 	Inherits: ^Vehicle
@@ -678,7 +671,7 @@ ts_gdi_wolverinemkii:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EXT: ^ExternalConditions
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Inherits@MechEngineering: ^MechEngineering
 	Inherits@SonicWeaponry: ^SonicWeaponry
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -735,7 +728,7 @@ ts_gdi_wolverinemkii:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_sonicweaponry
+		Upgrades: ts_gdi_upgrade_fieldmaintenance, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_sonicweaponry
 
 ts_gdi_mammothprototype:
 	Inherits: ^Tank
@@ -751,7 +744,7 @@ ts_gdi_mammothprototype:
 	Inherits@snipe: ^DriverKillImmune
 	Inherits@ND: ^NotDevourable
 	# Inherits@announce: ^AnnounceGlobal
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Inherits@MechEngineering: ^MechEngineering
 	Inherits@RailgunWeaponry: ^RailgunWeaponry
 	Valued:
@@ -840,11 +833,9 @@ ts_gdi_mammothprototype:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 1500
 	RenderVoxels:
 		Scale: 15
 	Passenger:
-		Weight: 10
 	Capturable:
 		Types: thiefproof
 	RenderSprites:
@@ -852,7 +843,7 @@ ts_gdi_mammothprototype:
 	ProvidesPrerequisite@mkii:
 		Prerequisite: existingmkii
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
+		Upgrades: ts_gdi_upgrade_fieldmaintenance, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
 
 ts_gdi_mammothmkii:
 	Inherits: ^Tank
@@ -866,7 +857,7 @@ ts_gdi_mammothmkii:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@snipe: ^DriverKillImmune
 	Inherits@ND: ^NotDevourable
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Inherits@MechEngineering: ^MechEngineering
 	Inherits@RailgunWeaponry: ^RailgunWeaponry
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -935,9 +926,7 @@ ts_gdi_mammothmkii:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 1500
 	Passenger:
-		Weight: 10
 	Capturable:
 		Types: thiefproof
 	WithFacingSpriteBody:
@@ -962,7 +951,7 @@ ts_gdi_mammothmkii:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
+		Upgrades: ts_gdi_upgrade_fieldmaintenance, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
 
 ts_gdi_disruptor:
 	Inherits: ^Tank
@@ -973,7 +962,7 @@ ts_gdi_disruptor:
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Inherits@SonicWeaponry: ^SonicWeaponry
 	Valued:
 		Cost: 2400
@@ -1018,20 +1007,19 @@ ts_gdi_disruptor:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 650
 	RenderVoxels:
 		Scale: 15
 	-RangeMultiplier@usasearchndestroy:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_sonicweaponry
+		Upgrades: ts_gdi_upgrade_fieldmaintenance, ts_gdi_upgrade_sonicweaponry
 
 ts_gdi_mobilesensorarray:
 	Inherits: ^Tank
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@detect: ^GenericGroundDetector
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Valued:
 		Cost: 1100
 	Tooltip:
@@ -1054,7 +1042,6 @@ ts_gdi_mobilesensorarray:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 650
 	RenderVoxels:
 		Scale: 15
 	DetectCloaked:
@@ -1063,7 +1050,7 @@ ts_gdi_mobilesensorarray:
 		Image: ts_gdi_mobilesensorarray
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_fieldmaintenance
 
 #######################################
 # TS Forgotten Vehicles

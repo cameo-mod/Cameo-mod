@@ -961,7 +961,6 @@ mcv.imperium:
 	Voiced:
 		VoiceSet: DRIRigVoice
 	Passenger:
-		Weight: 1
 drihq.imperium:
 	Inherits: ^DRHQStats
 	Tooltip:
@@ -2007,7 +2006,6 @@ dramp:
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Infantry, plagued
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -2301,7 +2299,6 @@ drhostage:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 1
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -2784,7 +2781,6 @@ mcv.freedomguard:
 	Voiced:
 		VoiceSet: DRFGRigVoice
 	Passenger:
-		Weight: 1
 drfghq.freedomguard:
 	Inherits: ^DRHQStats
 	Tooltip:
@@ -4051,7 +4047,6 @@ drspid:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 1
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -4283,7 +4278,6 @@ drtnkh:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 1
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -4325,7 +4319,6 @@ drphasetnk:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -4376,7 +4369,6 @@ drphasetran:
 	Voiced:
 		VoiceSet: DRPhaseVoice
 	DeliversCash:
-		Payload: 0
 	Cargo:
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 10
@@ -4487,7 +4479,6 @@ drjack:
 		VoiceSet: DRFlakJackVoice
 	Passenger:
 		CargoType: Infantry
-		Weight: 2
 drquake:
 	Inherits: ^Vehicle
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -4832,7 +4823,6 @@ drfanboat:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
@@ -4893,7 +4883,6 @@ mcv.shadowhand:
 	Voiced:
 		VoiceSet: DRIRigVoice
 	Passenger:
-		Weight: 1
 drihq.shadowhand:
 	Inherits: ^DRHQStats
 	Tooltip:
@@ -5322,7 +5311,6 @@ drfury:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 3
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -5543,7 +5531,6 @@ mcv.xenite:
 	Voiced:
 		VoiceSet: DRFGRigVoice
 	Passenger:
-		Weight: 1
 drfghq.xenite:
 	Inherits: ^DRHQStats
 	Tooltip:
@@ -5884,7 +5871,6 @@ drgant:
 		Delay: 12
 		Count: 1
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	Wanders:
@@ -5953,7 +5939,6 @@ drgrendel:
 		Delay: 12
 		Count: 1
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	Wanders:
@@ -6024,7 +6009,6 @@ drgrider:
 		Delay: 12
 		Count: 1
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	ChangesHealth:
@@ -6284,7 +6268,6 @@ mcv.togran:
 	Voiced:
 		VoiceSet: DRIRigVoice
 	Passenger:
-		Weight: 1
 drihq.togran:
 	Inherits: ^DRHQStats
 	Tooltip:
@@ -6886,7 +6869,6 @@ drphasemine:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 1
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -7213,7 +7195,6 @@ drsonic:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 3
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -7411,7 +7392,6 @@ mcv2.aterrorist:
 	Voiced:
 		VoiceSet: DRConstructionBiotVoice
 	Passenger:
-		Weight: 1
 drterpower:
 	Inherits: drtpower
 	Buildable:
@@ -8502,7 +8482,6 @@ drghazi:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: DRGhaziVoice
 	RenderSprites:
@@ -8549,7 +8528,6 @@ drphunisher:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: DRPunisherVoice
 	RenderSprites:
@@ -9379,7 +9357,6 @@ drsalamander:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	ChangesHealth:
@@ -9428,7 +9405,6 @@ drassimilator:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	ChangesHealth:
@@ -9715,7 +9691,6 @@ drrouter:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 1
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -9754,7 +9729,6 @@ drmecha:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 1
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -10353,7 +10327,6 @@ mcv.descendants:
 	Voiced:
 		VoiceSet: DRFGRigVoice
 	Passenger:
-		Weight: 1
 drfghq.descendants:
 	Inherits: ^DRHQStats
 	Tooltip:

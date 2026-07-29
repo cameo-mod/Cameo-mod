@@ -144,7 +144,6 @@ zerg_hydralisk:
 		FacingTolerance: 0
 	WithMuzzleOverlay:
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	Voiced:
 		VoiceSet: SCHydraliskVoice
@@ -207,7 +206,6 @@ zerg_spithid:
 	# WithIdleOverlay@Shadow:
 	# 	Offset: 0,0,-320
 	Passenger:
-		Weight: 1
 	Voiced:
 		VoiceSet: SCHydraliskVoice
 	RenderSprites:
@@ -564,7 +562,6 @@ zerg_ultralisk:
 		InitialStance: AttackAnything
 	WithInfantryBody:
 	Passenger:
-		Weight: 4
 		CustomPipType: blue
 	Voiced:
 		VoiceSet: SCUltraliskVoice ##########

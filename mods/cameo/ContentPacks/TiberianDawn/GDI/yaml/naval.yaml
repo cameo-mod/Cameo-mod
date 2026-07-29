@@ -31,7 +31,6 @@ gdicarrier:
 	AttackFollow:
 		PauseOnCondition: disabled
 	DeliversCash:
-		Payload: 450
 	CarrierMaster:
 		Actors: A10Carrier, A10Carrier, A10Carrier
 		RearmTicks: 125
@@ -199,7 +198,6 @@ CNCCA:
 	WithSpriteTurret@SECONDARY:
 		Turret: secondary
 	DeliversCash:
-		Payload: 500
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -231,7 +229,6 @@ LST:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	DeliversCash:
-		Payload: 250
 	Cargo:
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 10

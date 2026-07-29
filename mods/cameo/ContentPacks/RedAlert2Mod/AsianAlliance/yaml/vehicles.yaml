@@ -366,7 +366,6 @@ asianalliance_droneminer:
 	Voiced:
 		VoiceSet: AsianDroneVoice
 	DeliversCash:
-		Payload: 225
 	RenderSprites:
 		PlayerPalette: playerra2
 	Mobile:
@@ -502,7 +501,6 @@ ptnk.asian:
 	Voiced:
 		VoiceSet: AsianPlasmaVoice
 	DeliversCash:
-		Payload: 600
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -823,7 +821,6 @@ asianalliance_pulverizermecha:
 		UseDeathTypeSuffix: false
 		DeathSequencePalette: playerra2
 	Passenger:
-		Weight: 4
 	Voiced:
 		VoiceSet: AsianAllianceRobotVoice
 	RenderSprites:
@@ -949,7 +946,6 @@ asianalliance_warturtle:
 	Targetable@Hover:
 		TargetTypes: Water, Ship
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 250000
 	Repairable:
@@ -990,7 +986,6 @@ asianalliance_warturtle:
 	Voiced:
 		VoiceSet: AsianAllianceVehicleVoice
 	DeliversCash:
-		Payload: 1000
 	RenderSprites:
 		Image: asianalliance_warturtle
 		PlayerPalette: playerra2

@@ -59,7 +59,7 @@ cabal_mobileconstructionvehicle:
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@mcv: ^MCV
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
@@ -179,7 +179,6 @@ cabal_tiberiumharvester:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 500
 	RenderVoxels:
 		Image: charv2
 	RenderSprites:
@@ -249,7 +248,6 @@ cabal_laserspider:
 	Voiced:
 		VoiceSet: TSCobra
 	DeliversCash:
-		Payload: 250
 	RenderSprites:
 		PlayerPalette: player_rgba
 	WithFacingSpriteBody:
@@ -304,7 +302,6 @@ cabal_mantis:
 	Voiced:
 		VoiceSet: TSCobra
 	DeliversCash:
-		Payload: 250
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithFacingSpriteBody:
@@ -357,7 +354,6 @@ cabal_manticore:
 	Voiced:
 		VoiceSet: TSReaper
 	DeliversCash:
-		Payload: 250
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithFacingSpriteBody:
@@ -418,7 +414,6 @@ cabal_artilleryspider:
 	Voiced:
 		VoiceSet: TSCABALVehicles
 	DeliversCash:
-		Payload: 250
 	RenderSprites:
 		PlayerPalette: player_rgba
 		Image: tsartspid
@@ -487,7 +482,6 @@ cabal_tarantula:
 	Voiced:
 		VoiceSet: TSCABALVehicles
 	DeliversCash:
-		Payload: 400
 	WithSpriteTurret:
 		Recoils: false
 	BodyOrientation:
@@ -547,7 +541,6 @@ cabal_scarabapc:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 400
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 6
@@ -697,7 +690,6 @@ cabal_beholder:
 		QuantizedFacings: 32
 	-QuantizeFacingsFromSequence:
 	Passenger:
-		Weight: 4
 	Selectable:
 		Bounds: 1536, 1536
 	Voiced:
@@ -750,7 +742,6 @@ cabal_spidercnc4:
 	Voiced:
 		VoiceSet: TSCobra
 	DeliversCash:
-		Payload: 250
 	RenderSprites:
 		Image: cabal_laserspider
 		PlayerPalette: player_rgba
@@ -1080,4 +1071,3 @@ cabal_ravager:
 		VoiceSet: TSCobra
 	RenderSprites:
 		PlayerPalette: playerra2
-

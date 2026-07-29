@@ -7,7 +7,7 @@ ts_gdi_orcafighter:
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
 	Inherits@CeramicArmor: ^CeramicArmor
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Inherits@SonicWeaponry: ^SonicWeaponry
 	Tooltip:
 		Name: Orca Fighter
@@ -70,7 +70,7 @@ ts_gdi_orcafighter:
 		RequiresSelection: True
 		PipCount: 4
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_sonicweaponry
+		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_fieldmaintenance, ts_gdi_upgrade_sonicweaponry
 
 ts_gdi_zoneorcafighter:
 	Inherits: ^Helicopter
@@ -80,7 +80,7 @@ ts_gdi_zoneorcafighter:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
 	Inherits@CeramicArmor: ^CeramicArmor
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Inherits@SonicWeaponry: ^SonicWeaponry
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Tooltip:
@@ -145,7 +145,7 @@ ts_gdi_zoneorcafighter:
 		RequiresSelection: True
 		PipCount: 4
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_sonicweaponry
+		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_fieldmaintenance, ts_gdi_upgrade_sonicweaponry
 
 ts_gdi_hammerhead:
 	Inherits: ^Helicopter
@@ -154,7 +154,7 @@ ts_gdi_hammerhead:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@decoration: ^GDIRankDecoration
 	Inherits@CeramicArmor: ^CeramicArmor
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@cargo: ^CargoAircraft
 	Valued:
@@ -240,7 +240,7 @@ ts_gdi_hammerhead:
 	SpawnActorOnDeath:
 		Actor: ts_gdi_orcafighter_husk
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_fieldmaintenance
 
 ts_gdi_orcabomber:
 	Inherits: ^Helicopter
@@ -251,7 +251,7 @@ ts_gdi_orcabomber:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@CeramicArmor: ^CeramicArmor
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Inherits@SonicWeaponry: ^SonicWeaponry
 	Valued:
 		Cost: 1900
@@ -319,13 +319,13 @@ ts_gdi_orcabomber:
 		RequiresSelection: True
 		PipCount: 10
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_sonicweaponry
+		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_fieldmaintenance, ts_gdi_upgrade_sonicweaponry
 
 ts_gdi_carryall:
 	Inherits: ^Helicopter
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@CeramicArmor: ^CeramicArmor
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Valued:
 		Cost: 750
 	Tooltip:
@@ -364,7 +364,7 @@ ts_gdi_carryall:
 	RenderVoxels:
 		Scale: 15
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_fieldmaintenance
 
 ts_gdi_kodiakcommandship:
 	Inherits: ^Helicopter
@@ -376,7 +376,7 @@ ts_gdi_kodiakcommandship:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceGlobal
 	Inherits@CeramicArmor: ^CeramicArmor
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Inherits@SonicWeaponry: ^SonicWeaponry
 	Tooltip:
 		Name: Kodiak Command Ship
@@ -442,7 +442,7 @@ ts_gdi_kodiakcommandship:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_sonicweaponry
+		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_fieldmaintenance, ts_gdi_upgrade_sonicweaponry
 	#IonCannonPower:
 	#	AllowMultiple: True
 	#	OrderName: GDIDropDod

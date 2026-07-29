@@ -1,4 +1,4 @@
-﻿TS70mm:
+TS70mm:
 	Inherits: ^TSCannonEffect
 	Inherits: ^MediumCannon
 	ReloadDelay: 24
@@ -591,6 +591,62 @@ TSBoatcannon:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 8
 		Spread: 400
+TSChemJuggerboat90mm:
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^MediumChemicalWeapon
+	ReloadDelay: 69
+	Range: 12834
+	MinRange: 2565
+	Burst: 2
+	BurstDelays: 3
+	Report: jugger1.aud
+	TargetActorCenter: true
+	Projectile: Bullet
+		Speed: 280
+		LaunchAngle: 165
+		Inaccuracy: 1c0
+		ContrailLength: 10
+		ContrailWidth: 0c32
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@3Eff: CreateEffect
+		ImpactSounds: expnew13.aud
+TSChemBoatcannon:
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
+	Inherits: ^MediumChemicalWeapon
+	ReloadDelay: 80
+	Burst: 2
+	BurstDelays: 3
+	Range: 8000
+	Report: trashcannon.wav
+	InvalidTargets: Underwater, Submarine
+	Projectile: Bullet
+		Blockable: false
+		Speed: 800
+		ContrailLength: 8
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 16000
+		Spread: 400
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 8
+		Spread: 400
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 4000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 4
 ####################################################################################################
 #		Tiberian Sun Energy Weapons
 ####################################################################################################

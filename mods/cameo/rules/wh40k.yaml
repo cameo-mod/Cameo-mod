@@ -1,4 +1,4 @@
-﻿World:
+World:
 	FactionCA@wh40kimperial:
 		Name: Imperial Guard WH40K
 		InternalName: imperialguard
@@ -2541,7 +2541,6 @@ wh40kgrenade:
 	Voiced:
 		VoiceSet: WH40KImperialGuardVoice
 	DeliversCash:
-		Payload: 125
 	Cloneable:
 		Types: NormalInfantry
 	GainsExperience:
@@ -2717,7 +2716,6 @@ wh40kogryn:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 2
 	-TakeCover:
 	GrantConditionOnPrerequisite@wh40kuppoweredbayonets:
 		Condition: wh40kuppoweredbayonets
@@ -2840,7 +2838,6 @@ wh40kbigguns:
 	Voiced:
 		VoiceSet: WH40KBigGunsVoice
 	DeliversCash:
-		Payload: 75
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	RenderSprites:
@@ -2937,7 +2934,6 @@ wh40kkars:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -3077,7 +3073,6 @@ wh40ktechpriest:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GivesBuildableArea:
 		AreaTypes: building
@@ -3116,7 +3111,6 @@ wh40kpsyker:
 	Voiced:
 		VoiceSet: WH40KPsykerVoice
 	DeliversCash:
-		Payload: 400
 	Cloneable:
 		Types: NormalInfantry
 	IgnoresDisguise:
@@ -3169,7 +3163,6 @@ wh40kpriest:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	ProximityExternalCondition@priestupgrade:
 		Range: 5c0
@@ -3371,7 +3364,6 @@ wh40kcommandsquad:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 wh40kcommandsquadtmobslave:
 	Inherits: wh40kcommandsquad
@@ -3571,7 +3563,6 @@ wh40kleman:
 		Speed: 72
 		TurnSpeed: 8
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 120000
 	Repairable:
@@ -3633,7 +3624,6 @@ wh40kchime:
 		TurnSpeed: 12
 		PauseOnCondition: notmobile || disabled
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 75000
 	Repairable:
@@ -3695,7 +3685,6 @@ wh40khellhound:
 		TurnSpeed: 12
 		RequireForceMoveCondition: deployed
 	Passenger:
-		Weight: 3
 		RequireForceMoveCondition: deployed
 	Health:
 		HP: 110000
@@ -3798,7 +3787,6 @@ wh40kbanewolf:
 		TurnSpeed: 12
 		RequireForceMoveCondition: deployed
 	Passenger:
-		Weight: 3
 		RequireForceMoveCondition: deployed
 	Health:
 		HP: 120000
@@ -4255,7 +4243,6 @@ wh40kbaneblade:
 		Speed: 68
 		TurnSpeed: 8
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 600000
 	Repairable:
@@ -5557,7 +5544,6 @@ wh40kmarine:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -5717,7 +5703,6 @@ wh40kscout:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -5861,7 +5846,6 @@ wh40kforcecmd:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 
 wh40kchaptain:
@@ -5914,7 +5898,6 @@ wh40kchaptain:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 wh40klibrarian:
 	Inherits: ^Soldier
@@ -5963,7 +5946,6 @@ wh40klibrarian:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 
 wh40kterminator1:
@@ -6014,7 +5996,6 @@ wh40kterminator1:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	PortableChrono:
 		ChargeDelay: 250
@@ -6069,7 +6050,6 @@ wh40kterminator2:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	PortableChrono:
 		ChargeDelay: 250
@@ -6172,7 +6152,6 @@ wh40kservitor:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GivesBuildableArea:
 		AreaTypes: building
@@ -6228,7 +6207,6 @@ wh40kapotecary:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 
 wh40kgrayknight:
@@ -6278,7 +6256,6 @@ wh40kgrayknight:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GrantConditionOnPrerequisite@wh40kfuriuscharge:
 		Condition: wh40kfuriuscharge
@@ -6386,7 +6363,6 @@ wh40kpredator:
 		Speed: 92
 		TurnSpeed: 16
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 75000
 	Repairable:
@@ -6539,7 +6515,6 @@ wh40krhino:
 		TurnSpeed: 12
 		PauseOnCondition: notmobile || disabled
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 72000
 	Repairable:
@@ -6604,7 +6579,6 @@ wh40kwhirl:
 		Speed: 72
 		TurnSpeed: 12
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 80000
 	Repairable:
@@ -6666,7 +6640,6 @@ wh40klandspeed:
 		TurnSpeed: 28
 		PauseOnCondition: notmobile || disabled
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 55000
 	Repairable:
@@ -6895,7 +6868,6 @@ wh40kdread:
 		Sequence: turret3
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 3
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -7003,7 +6975,6 @@ wh40kdreadh:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 3
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -7106,7 +7077,6 @@ wh40klandraider:
 		Speed: 77
 		TurnSpeed: 8
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 500000
 	Repairable:
@@ -8606,7 +8576,6 @@ wh40kgretchin:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -8709,7 +8678,6 @@ wh40kslugga:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -8801,7 +8769,6 @@ wh40kstormboyz:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -8861,7 +8828,6 @@ wh40kburna:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -8944,7 +8910,6 @@ wh40kshoota:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -9047,7 +9012,6 @@ wh40knob:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -9135,7 +9099,6 @@ wh40kbigmek:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 2
 	-TakeCover:
 	Power:
 		Amount: -20
@@ -9190,7 +9153,6 @@ wh40ktankbusta:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -9258,7 +9220,6 @@ wh40kflash:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -9362,7 +9323,6 @@ wh40kmaddok:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -9449,7 +9409,6 @@ wh40kmeganobz:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 2
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -9573,7 +9532,6 @@ wh40kwarboss:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 2
 	-TakeCover:
 	Power:
 		Amount: -50
@@ -10145,7 +10103,6 @@ wh40kwartrukk:
 		TurnSpeed: 16
 		PauseOnCondition: notmobile || disabled
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 60000
 	Repairable:
@@ -10207,7 +10164,6 @@ wh40kwartrakk:
 		TurnSpeed: 16
 		PauseOnCondition: notmobile || disabled
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 65000
 	Repairable:
@@ -10309,7 +10265,6 @@ wh40korcleman:
 		Speed: 60
 		TurnSpeed: 8
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 120000
 	Repairable:
@@ -10400,7 +10355,6 @@ wh40kkillakan:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 3
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -10514,7 +10468,6 @@ wh40ksquiggoth:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 5
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -10804,7 +10757,6 @@ wh40kchaospredator:
 		Speed: 92
 		TurnSpeed: 16
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 80000
 	Repairable:
@@ -10927,7 +10879,6 @@ wh40kchaosrhino:
 		TurnSpeed: 12
 		PauseOnCondition: notmobile || disabled
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 72000
 	Repairable:
@@ -11024,7 +10975,6 @@ wh40kdefiler:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 3
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -11220,7 +11170,6 @@ wh40kchaosmarine:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -11363,7 +11312,6 @@ wh40kcultist:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -11500,7 +11448,6 @@ wh40kdemon:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GrantConditionOnPrerequisite@wh40kdaemonfire:
 		Condition: wh40kdaemonfire
@@ -11582,7 +11529,6 @@ wh40kpossessed:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 2
 	-TakeCover:
 	Power:
 		Amount: -30
@@ -11636,7 +11582,6 @@ wh40kheretic:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GivesBuildableArea:
 		AreaTypes: building
@@ -11744,7 +11689,6 @@ wh40kraptor:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -11882,7 +11826,6 @@ wh40koliberator:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 3
 	-TakeCover:
 	Power:
 		Amount: -50	
@@ -11939,7 +11882,6 @@ wh40kbloodthirster:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 15
 	-TakeCover:
 	Power:
 		Amount: -100
@@ -11992,7 +11934,6 @@ wh40kprincedemon:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 15
 	-TakeCover:
 	Power:
 		Amount: -150
@@ -12043,7 +11984,6 @@ wh40ksorcerer:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 
 wh40kchaoslord:
@@ -12092,7 +12032,6 @@ wh40kchaoslord:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GrantConditionOnPrerequisite@wh40kdemonstrength:
 		Condition: wh40kdemonstrength
@@ -12146,7 +12085,6 @@ wh40kberserk:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GrantConditionOnPrerequisite@wh40kfuriuschargechaos:
 		Condition: wh40kfuriuschargechaos
@@ -13571,7 +13509,6 @@ wh40kguardian:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -14179,7 +14116,6 @@ wh40kfirewarrior:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -14267,7 +14203,6 @@ wh40kkroot:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -14353,7 +14288,6 @@ wh40kxv15:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -14553,7 +14487,6 @@ wh40khammerhead:
 		Speed: 100
 	Hovers:
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 120000
 	Repairable:
@@ -14727,7 +14660,6 @@ wh40kdronehard:
 		Speed: 100
 	Hovers:
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 120000
 	Repairable:

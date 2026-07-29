@@ -101,7 +101,6 @@ yuri_slaveminer:
 	Voiced:
 		VoiceSet: SlaveMinerVoice
 	DeliversCash:
-		Payload: 750
 	WithSpriteTurret:
 	Turreted:
 		TurnSpeed: 10
@@ -333,7 +332,6 @@ yuri_magnetron:
 		Speed: 65
 		TurnSpeed: 13
 	Passenger:
-		Weight: 3
 	Health:
 		HP: 65000
 	Repairable:
@@ -448,7 +446,6 @@ yuri_chaosdrone:
 	WithRangeCircle:
 		Range: 5000
 	DeliversCash:
-		Payload: 250
 	-TemporaryOwnerManager:
 	Capturable:
 		Types: thiefproof

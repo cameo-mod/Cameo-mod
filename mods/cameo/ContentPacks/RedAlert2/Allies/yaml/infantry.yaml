@@ -25,7 +25,6 @@ ra2_allies_attackdog:
 	Selectable:
 		Bounds: 512, 768, -48, -172
 	DeliversCash:
-		Payload: 100
 	SelectionDecorations:
 	Health:
 		HP: 5000
@@ -600,7 +599,6 @@ ra2_allies_engineer:
 		StandSequences: parachute
 		RequiresCondition: parachute
 	DeliversCash:
-		Payload: 250
 
 ra2_allies_tanyaii:
 	Inherits: ^Soldier

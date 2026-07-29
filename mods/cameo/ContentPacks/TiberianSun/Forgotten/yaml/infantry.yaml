@@ -41,21 +41,21 @@ forgotten_rocketinfantry:
 		Description: actor_forgotten_rocketinfantry.description
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~forgotten_barracks
-	Armament@PRIMARY: ##########
+	Armament@PRIMARY
 		Weapon: TSBazooka
 		LocalOffset: 256,43,341
 		FireDelay: 5
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED
 		Name: garrisoned
 		Weapon: TSBazooka
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
-	Armament@UPGRADE: ##########
+	Armament@UPGRADE
 		Weapon: TSChemBazooka
 		LocalOffset: 256,43,341
 		FireDelay: 5
 		RequiresCondition: forgotten_upgrade_chemicalweapons
-	Armament@GARRISONEDUPGRADE: ##########
+	Armament@GARRISONEDUPGRADE
 		Name: garrisoned
 		Weapon: TSChemBazooka
 		RequiresCondition: forgotten_upgrade_chemicalweapons
@@ -151,7 +151,7 @@ forgotten_mutantsniper:
 		IdleSequences: idle1,idle2
 	Voiced:
 		VoiceSet: TSUmagon
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED
 		Name: garrisoned
 		Weapon: TSSniper
 	Selectable:
@@ -227,11 +227,11 @@ forgotten_ghoststalker:
 		Weapon: GenericC4
 		LocalOffset: 128,0,256
 		Cursor: c4
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED
 		Name: garrisoned
 		Weapon: TSGhostGun
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
-	Armament@UPGRADEGARRISONED: ##########
+	Armament@UPGRADEGARRISONED
 		Name: garrisoned
 		Weapon: TSChemGhostGun
 		RequiresCondition: forgotten_upgrade_chemicalweapons
@@ -327,7 +327,7 @@ forgotten_mutant:
 	Voiced:
 		VoiceSet: TSInfantry
 	-DamagedByTerrain:
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED
 		Name: garrisoned
 		Weapon: forgotten_mutant_dualwield
 	RenderSprites:
@@ -404,7 +404,7 @@ forgotten_mutantsoldier:
 	# 	RequiresCondition: rank-elite
 	Voiced:
 		VoiceSet: TSUmagon
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED
 		Name: garrisoned
 		Weapon: forgotten_mutantsoldier_rifle
 	-DamagedByTerrain:
@@ -474,10 +474,10 @@ forgotten_mutantsergeant:
 	# ReloadAmmoPool:
 	# 	Delay: 100
 	# 	Count: 1
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED
 		Name: garrisoned
 		Weapon: TSSergGun
-	# Armament@GARRISONED2: ##########
+	# Armament@GARRISONED2
 	# 	Name: garrisoned
 	# 	Weapon: TSGrenadeG
 	ProximityExternalCondition@PropagandaEffect:
@@ -542,7 +542,7 @@ forgotten_zombiemutant:
 	Voiced:
 		VoiceSet: TSInfantry
 	-DamagedByTerrain:
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED
 		Name: garrisoned
 		Weapon: TSZombieAttack
 	RenderSprites:
@@ -594,7 +594,7 @@ forgotten_runnershotgal:
 	# 	RequiresCondition: rank-elite
 	Voiced:
 		VoiceSet: TSUmagon
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED
 		Name: garrisoned
 		Weapon: TSMutShotgun
 	-DamagedByTerrain:
@@ -653,12 +653,12 @@ forgotten_chemsprayinfantry:
 		IdleSequences: idle1,idle2
 	Voiced:
 		VoiceSet: TSWeed
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED
 		Name: garrisoned
 		Weapon: TSChemspray
 		MuzzleSequence: muzzle
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
-	Armament@GARRISONEDUPGRADE: ##########
+	Armament@GARRISONEDUPGRADE
 		Name: garrisoned
 		Weapon: TSChemsprayUP
 		MuzzleSequence: muzzle
@@ -719,11 +719,11 @@ forgotten_mutantmortarman:
 		FireDelay: 15
 	Voiced:
 		VoiceSet: TSGhost
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED
 		Name: garrisoned
 		Weapon: TSInfantryMortar
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
-	Armament@GARRISONEDUPGRADE: ##########
+	Armament@GARRISONEDUPGRADE
 		Name: garrisoned
 		Weapon: TSInfantryMortarChem
 		RequiresCondition: forgotten_upgrade_chemicalweapons
@@ -766,7 +766,7 @@ forgotten_visceroid:
 		LocalOffset: 384,0,0
 		MuzzleSequence: muzzle
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED
 		Name: garrisoned
 		Weapon: TSVisceroidSpray
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
@@ -775,7 +775,7 @@ forgotten_visceroid:
 		LocalOffset: 384,0,0
 		MuzzleSequence: muzzle
 		RequiresCondition: forgotten_upgrade_chemicalweapons
-	Armament@GARRISONEDUPGRADE: ##########
+	Armament@GARRISONEDUPGRADE
 		Name: garrisoned
 		Weapon: TSVisceroidSprayUP
 		RequiresCondition: forgotten_upgrade_chemicalweapons
@@ -853,7 +853,7 @@ forgotten_tiberianfiend:
 		Weapon: TSFiendShard
 		LocalOffset: 128,0,256
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED
 		Name: garrisoned
 		Weapon: TSFiendShard
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
@@ -861,7 +861,7 @@ forgotten_tiberianfiend:
 		Weapon: TSFiendShardUP
 		LocalOffset: 128,0,256
 		RequiresCondition: forgotten_upgrade_chemicalweapons
-	Armament@GARRISONEDUPGRADE: ##########
+	Armament@GARRISONEDUPGRADE
 		Name: garrisoned
 		Weapon: TSFiendShardUP
 		RequiresCondition: forgotten_upgrade_chemicalweapons
@@ -914,7 +914,7 @@ forgotten_viniferafiend:
 		Weapon: TSFiendShardBlue
 		LocalOffset: 128,0,256
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED
 		Name: garrisoned
 		Weapon: TSFiendShardBlue
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
@@ -922,7 +922,7 @@ forgotten_viniferafiend:
 		Weapon: TSFiendShardBlueUP
 		LocalOffset: 128,0,256
 		RequiresCondition: forgotten_upgrade_chemicalweapons
-	Armament@GARRISONEDUPGRADE: ##########
+	Armament@GARRISONEDUPGRADE
 		Name: garrisoned
 		Weapon: TSFiendShardBlueUP
 		RequiresCondition: forgotten_upgrade_chemicalweapons

@@ -547,7 +547,6 @@ naxis_ratte:
 	RenderSprites:
 		PlayerPalette: playerra2
 	Passenger:
-		Weight: 6
 	ActorStatValues:
 		Upgrades: naxis_upgrade_wunderwaffe, naxis_upgrade_massopticsintegration
 
@@ -1180,9 +1179,7 @@ naxis_nokana:
 	Voiced:
 		VoiceSet: NaxiBigTankVoice
 	DeliversCash:
-		Payload: 1500
 	Passenger:
-		Weight: 5
 	ActorStatValues:
 		Upgrades: naxis_upgrade_wunderwaffe, naxis_upgrade_massopticsintegration
 
@@ -1212,7 +1209,6 @@ naxis_oldtank:
 		Speed: 50
 		TurnSpeed: 12
 	Passenger:
-		Weight: 3
 	Health:
 		HP: 110000
 	Repairable:
@@ -1456,7 +1452,6 @@ panzer.nax:
 	Voiced:
 		VoiceSet: NaxiTankVoice
 	DeliversCash:
-		Payload: 350
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:

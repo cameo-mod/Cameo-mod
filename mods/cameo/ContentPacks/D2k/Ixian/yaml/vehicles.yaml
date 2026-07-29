@@ -74,8 +74,6 @@ ixian_spiceharvester:
 	WithHarvestOverlay:
 		Palette: effect50alpha
 	WithDockingAnimation:
-	AttractsWorms:
-		Intensity: 750
 	-RevealOnFire:
 	Voiced:
 		VoiceSet: D2KHarvester
@@ -145,8 +143,6 @@ ixian_ixsiegetank:
 		Delay: 40
 		Count: 1
 		ResetOnFire: true
-	AttractsWorms:
-		Intensity: 600
 	FirepowerMultiplier@ixian_upgrade_reinforcedbarrel:
 		Modifier: 150
 		RequiresCondition: ixian_upgrade_reinforcedbarrel
@@ -218,8 +214,6 @@ ixian_ixmissiletank:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	AttractsWorms:
-		Intensity: 600
 	Cloak@TDcloak:
 	RenderRangeCircle:
 	Voiced:
@@ -301,7 +295,6 @@ ixian_ixmissiletank:
 # 		EmptyWeapon: D2KUnitExplodeMed
 # 	Selectable:
 # 		Class: missiletank
-# 	AttractsWorms:
 # 		Intensity: 600
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
@@ -350,7 +343,6 @@ ixian_ixmissiletank:
 # 		EmptyWeapon: D2KUnitExplodeMed
 # 	Selectable:
 # 		Class: d2k_flame_tank
-# 	AttractsWorms:
 # 		Intensity: 400
 # 	Cloak@TDcloak:
 # 		Palette: cloak
@@ -403,7 +395,6 @@ ixian_ixmissiletank:
 # 		Actor: sonic_tank_husk.atreides
 # 		OwnerType: InternalName
 # 		EffectiveOwnerFromOwner: true
-# 	AttractsWorms:
 # 		Intensity: 600
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
@@ -486,8 +477,6 @@ rocket_raider.ixian:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeSmall
 		EmptyWeapon: D2KUnitExplodeSmall
-	AttractsWorms:
-		Intensity: 420
 	Voiced:
 		VoiceSet: D2KRaider
 	Cloak:
@@ -580,8 +569,6 @@ ixian_shockraider:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeSmall
 		EmptyWeapon: D2KUnitExplodeSmall
-	AttractsWorms:
-		Intensity: 420
 	Cloak:
 		CloakSound: trans1.aud
 		UncloakSound: appear1.aud
@@ -699,8 +686,6 @@ ixian_kodatank:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	AttractsWorms:
-		Intensity: 520
 	Voiced:
 		VoiceSet: D2KCombatTank
 	RenderSprites:
@@ -761,8 +746,6 @@ ixian_heavykodatank:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	AttractsWorms:
-		Intensity: 520
 	Voiced:
 		VoiceSet: D2KCombatTank
 	RenderSprites:
@@ -1018,8 +1001,6 @@ ixian_stormraider:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeSmall
 		EmptyWeapon: D2KUnitExplodeSmall
-	AttractsWorms:
-		Intensity: 420
 	Cloak:
 		CloakSound: trans1.aud
 		UncloakSound: appear1.aud
@@ -1092,8 +1073,6 @@ heavy_rocket_raider.ixian:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeSmall
 		EmptyWeapon: D2KUnitExplodeSmall
-	AttractsWorms:
-		Intensity: 420
 	Voiced:
 		VoiceSet: D2KRaider
 	Cloak:
@@ -1208,8 +1187,6 @@ ixian_ixcombatsiege:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	AttractsWorms:
-		Intensity: 520
 	Voiced:
 		VoiceSet: D2KCombatTank
 	ActorStatValues:
@@ -1299,7 +1276,6 @@ ixian_neocymek:
 	# AutoTarget:
 	# 	InitialStanceAI: Defend
 	Passenger:
-		Weight: 4
 		CustomPipType: blue
 	Voiced:
 		VoiceSet: D2KDuelistTank
@@ -1478,8 +1454,6 @@ apparition.ixian:
 		FacingTolerance: 0
 	FireWarheadsOnDeath:
 		Weapon: d2k_basq
-	AttractsWorms:
-		Intensity: 500
 	RenderSprites:
 		Image: apparition.ixian
 		Palette: cloak
@@ -1644,8 +1618,6 @@ duelist_tank.ixian:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	AttractsWorms:
-		Intensity: 520
 	Cloak@TDcloak:
 	Voiced:
 		VoiceSet: D2KDuelistTank

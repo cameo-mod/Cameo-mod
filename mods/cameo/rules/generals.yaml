@@ -3688,7 +3688,6 @@ glbbus:
 		Except: Unload, Stop
 		RequiresCondition: damagedslow
 	Passenger:
-		Weight: 6
 	Health:
 		HP: 75000
 	Repairable:
@@ -4934,7 +4933,6 @@ glworker:
 		DefaultAttackSequence: shoot
 	WithDockingAnimation:
 	DeliversCash:
-		Payload: 60
 	Cloneable:
 		Types: NormalInfantry
 	-DamagedByTerrain:
@@ -5515,7 +5513,6 @@ glgunboat:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: ScorpionTankVoice
 	Production:
@@ -7034,7 +7031,6 @@ CHHACKER:
 	Voiced:
 		VoiceSet: CHHackerVoice
 	DeliversCash:
-		Payload: 250
 	ExperienceTrickler:
 		Interval: 60
 		Amount: 300
@@ -7468,7 +7464,6 @@ choverlord:
 		Locomotor: heavytracked
 		Speed: 55
 	Passenger:
-		Weight: 6
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
@@ -8237,7 +8232,6 @@ chcrawl2:
 	Mobile:
 		Speed: 125
 	Passenger:
-		Weight: 6
 	Health:
 		HP: 45000
 	Repairable:
@@ -9382,7 +9376,6 @@ chflameboat:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: CHDragonTankVoice
 	GrantConditionOnPrerequisite@upbluefire:
@@ -9436,7 +9429,6 @@ chasub:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	DeliversCash:
-		Payload: 475
 	Cloak@underwater:
 		DetectionTypes: Underwater
 		InitialDelay: 0
@@ -10557,7 +10549,6 @@ usapala:
 	Mobile:
 		Speed: 60
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 100000
 	Repairable:
@@ -13269,7 +13260,6 @@ usagunboat:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: USAPaladinTankVoice
 	RenderSprites:
@@ -13349,7 +13339,6 @@ usabattleship:
 	WithSpriteTurret@SECONDARY:
 		Turret: secondary
 	DeliversCash:
-		Payload: 500
 	Voiced:
 		VoiceSet: USAPaladinTankVoice
 	GainsExperience:
@@ -13421,7 +13410,6 @@ usacarrier:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	DeliversCash:
-		Payload: 500
 	Voiced:
 		VoiceSet: AlliesNavalVoice
 	RenderSprites:

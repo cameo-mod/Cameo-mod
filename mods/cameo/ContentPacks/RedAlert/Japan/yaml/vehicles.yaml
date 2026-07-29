@@ -310,7 +310,6 @@ japan_oitank:
 		TurnSpeed: 10
 		Locomotor: heavytracked
 	Passenger:
-		Weight: 4
 	Turreted@PRIMARY:
 		Turret: primary
 		Offset: 650,250,24
@@ -496,7 +495,6 @@ japan_corewarfactory:
 	WithTextDecoration:
 		Text: Factory
 	Passenger:
-		Weight: 4
 
 japan_corerefinery:
 	Inherits: japan_corewarfactory
@@ -515,7 +513,6 @@ japan_corerefinery:
 	WithTextDecoration:
 		Text: Refinery
 	Passenger:
-		Weight: 4
 
 japan_corepowerplant:
 	Inherits: japan_corewarfactory
@@ -534,7 +531,6 @@ japan_corepowerplant:
 	WithTextDecoration:
 		Text: Power Plant
 	Passenger:
-		Weight: 3
 
 japan_corebarracks:
 	Inherits: japan_corewarfactory
@@ -553,7 +549,6 @@ japan_corebarracks:
 	WithTextDecoration:
 		Text: Barracks
 	Passenger:
-		Weight: 3
 
 japan_coreradar:
 	Inherits: japan_corewarfactory
@@ -572,7 +567,6 @@ japan_coreradar:
 	WithTextDecoration:
 		Text: Radar
 	Passenger:
-		Weight: 4
 
 japan_coreairfield:
 	Inherits: japan_corewarfactory
@@ -591,7 +585,6 @@ japan_coreairfield:
 	WithTextDecoration:
 		Text: Airfield
 	Passenger:
-		Weight: 4
 
 japan_coreservicedepot:
 	Inherits: japan_corewarfactory
@@ -610,7 +603,6 @@ japan_coreservicedepot:
 	WithTextDecoration:
 		Text: Service Depot
 	Passenger:
-		Weight: 4
 
 japan_coretechcenter:
 	Inherits: japan_corewarfactory
@@ -629,7 +621,6 @@ japan_coretechcenter:
 	WithTextDecoration:
 		Text: Tech Center
 	Passenger:
-		Weight: 4
 
 ###################################################
 #		Ships
@@ -1044,7 +1035,6 @@ japan_shogunexecutioner:
 		UseDeathTypeSuffix: false
 		DeathSequencePalette: playerra2
 	Passenger:
-		Weight: 4
 	Voiced:
 		VoiceSet: JapanShogunExecutioner
 		Volume: 10
@@ -1388,7 +1378,6 @@ japan_exorcistoitank:
 		TurnSpeed: 10
 		Locomotor: heavytracked
 	Passenger:
-		Weight: 4
 	Turreted@PRIMARY:
 		Turret: primary
 		Offset: 650,250,24

@@ -49,8 +49,6 @@ ordos_apc:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	AttractsWorms:
-		Intensity: 350
 	Voiced:
 		VoiceSet: EBFDOAPC
 	Cargo:
@@ -115,8 +113,6 @@ ordos_laboratorycrawler:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	AttractsWorms:
-		Intensity: 350
 	Voiced:
 		VoiceSet: EBFDOAPC
 	Cargo:
@@ -226,8 +222,6 @@ ordos_spiceharvester:
 	WithHarvestOverlay:
 		Palette: effect50alpha
 	WithDockingAnimation:
-	AttractsWorms:
-		Intensity: 750
 	-RevealOnFire:
 	Voiced:
 		VoiceSet: EBFDOHarvester
@@ -283,7 +277,6 @@ ordos_spiceharvester:
 
 # 		Weapon: D2KUnitExplodeSmall
 # 		EmptyWeapon: D2KUnitExplodeSmall
-# 	AttractsWorms:
 # 		Intensity: 420
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
@@ -395,7 +388,6 @@ ordos_spiceharvester:
 # 		EmptyWeapon: D2KUnitExplodeSmall
 # 	Selectable:
 # 		Class: quad
-# 	AttractsWorms:
 # 		Intensity: 470
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
@@ -443,7 +435,6 @@ ordos_spiceharvester:
 # 		EmptyWeapon: D2KUnitExplodeSmall
 # 	Selectable:
 # 		Class: d2k_rocket_buggy
-# 	AttractsWorms:
 # 		Intensity: 420
 # 	Cloak@TDcloak:
 # 		Palette: cloak
@@ -494,7 +485,6 @@ ordos_spiceharvester:
 # 		EmptyWeapon: D2KUnitExplodeSmall
 # 	Selectable:
 # 		Class: d2k_transport_buggy
-# 	AttractsWorms:
 # 		Intensity: 460
 # 	Cloak@TDcloak:
 # 		Palette: cloak
@@ -596,7 +586,6 @@ ordos_spiceharvester:
 # 		EmptyWeapon: D2KUnitExplodeSmall
 # 	Selectable:
 # 		Class: d2k_combat_buggy
-# 	AttractsWorms:
 # 		Intensity: 420
 # 	Cloak@TDcloak:
 # 		Palette: cloak
@@ -677,7 +666,6 @@ ordos_spiceharvester:
 # 		InitialStanceAI: Defend
 # 	Selectable:
 # 		Class: siege_quad
-# 	AttractsWorms:
 # 		Intensity: 500
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
@@ -882,7 +870,6 @@ ordos_cobratank:
 	Voiced:
 		VoiceSet: EBFDOrdosCobra
 	DeliversCash:
-		Payload: 350
 	RangeMultiplier@deployed:
 		Modifier: 160
 		RequiresCondition: deployed
@@ -980,7 +967,6 @@ ordos_pythontank:
 	Voiced:
 		VoiceSet: EBFDOrdosCobra
 	DeliversCash:
-		Payload: 350
 	RangeMultiplier@deployed:
 		Modifier: 160
 		RequiresCondition: deployed
@@ -1040,8 +1026,6 @@ ordos_lasertank:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	AttractsWorms:
-		Intensity: 350
 	Voiced:
 		VoiceSet: D2KLaserTankVoice
 	WithShadow:
@@ -1106,8 +1090,6 @@ ordos_deviatortank:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	AttractsWorms:
-		Intensity: 350
 	Voiced:
 		VoiceSet: EBFDDeviator
 	WithShadow:
@@ -1157,7 +1139,6 @@ ordos_deviatortank:
 # 		LocalOffset: 175,0,-100
 # 	AttackFrontal:
 # 		FacingTolerance: 120
-# 	AttractsWorms:
 # 		Intensity: 300
 # 		RequiresCondition: !airborne
 # 	Hovers:
@@ -1316,7 +1297,6 @@ ordos_deviatortank:
 # 		Delay: 180
 # 		RequiresCondition: overload
 # 		GrantsCondition: meltdown
-# 	AttractsWorms:
 # 		Intensity: 700
 # 	ChangesHealth:
 # 		Step: 50
@@ -1374,7 +1354,6 @@ ordos_deviatortank:
 # 		Actor: d2k_tyrant.husk
 # 		OwnerType: InternalName
 # 		EffectiveOwnerFromOwner: true
-# 	AttractsWorms:
 # 		Intensity: 800
 # 	Selectable:
 # 		DecorationBounds: 1280, 1280, 0, 0
@@ -1442,8 +1421,6 @@ ordos_raider:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeSmall
 		EmptyWeapon: D2KUnitExplodeSmall
-	AttractsWorms:
-		Intensity: 420
 	Voiced:
 		VoiceSet: D2KRaider
 	RenderSprites:
@@ -1536,8 +1513,6 @@ ordos_dustdrone:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeSmall
 		EmptyWeapon: D2KUnitExplodeSmall
-	AttractsWorms:
-		Intensity: 120
 	Cloak@TDcloak:
 		Palette: player_rgba
 	RenderSprites:
@@ -1612,8 +1587,6 @@ ordos_deviatorartillery:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeLarge
 		EmptyWeapon: D2KUnitExplodeLarge
-	AttractsWorms:
-		Intensity: 600
 	Cloak@TDcloak:
 		Palette: d2kcloak
 	Voiced:
@@ -1672,8 +1645,6 @@ ordos_combattank:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	AttractsWorms:
-		Intensity: 520
 	Voiced:
 		VoiceSet: D2KCombatTank
 	ActorStatValues:
@@ -1739,8 +1710,6 @@ ordos_heavycombattank:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	AttractsWorms:
-		Intensity: 520
 	Voiced:
 		VoiceSet: D2KCombatTank
 	RenderSprites:
@@ -1858,8 +1827,6 @@ ordos_heavyautoguntank:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeLarge
 		EmptyWeapon: D2KUnitExplodeLarge
-	AttractsWorms:
-		Intensity: 600
 	Cloak@TDcloak:
 		Palette: cloak
 	Voiced:
@@ -1918,8 +1885,6 @@ ordos_tankdestroyer:
 	Cloak:
 		IsPlayerPalette: true
 		Palette: player_rgba
-	AttractsWorms:
-		Intensity: 520
 	Cloak@TDcloak:
 		Palette: d2kcloak
 	ActorStatValues:
@@ -2235,7 +2200,6 @@ ordos_tankdestroyer:
 # 		Actor: d2k_mcv.husk
 # 		OwnerType: InternalName
 # 		EffectiveOwnerFromOwner: true
-# 	AttractsWorms:
 # 		Intensity: 700
 # 	ChangesHealth:
 # 		Step: 50
@@ -2904,7 +2868,6 @@ ordos_tankdestroyer:
 # 		EmptyWeapon: D2KUnitExplodeMed
 # 	Selectable:
 # 		Class: apparition.ixian
-# 	AttractsWorms:
 # 		Intensity: 500
 # 	RenderSprites:
 # 		Image: apparition.ixian

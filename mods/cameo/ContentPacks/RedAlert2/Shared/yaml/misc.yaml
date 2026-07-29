@@ -447,7 +447,6 @@ ra2shk.bot:
 	Voiced:
 		VoiceSet: RA2TeslaTrooperVoice
 	DeliversCash:
-		Payload: 250
 
 YRSLAV:
 	Inherits: ^Soldier
@@ -657,7 +656,6 @@ ra2lcrf:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	DeliversCash:
-		Payload: 450
 	Cargo:
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 15
@@ -695,7 +693,6 @@ ra2sapc:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	DeliversCash:
-		Payload: 450
 	Cargo:
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 15
@@ -733,7 +730,6 @@ yrhovr:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	DeliversCash:
-		Payload: 450
 	Cargo:
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 15
@@ -790,7 +786,6 @@ ra2sqd:
 		ValidTargets: SquidGrab
 		Priority: 10
 	DeliversCash:
-		Payload: 250
 	Cloak@underwater:
 		CloakDelay: 75
 		CloakSound: vnavupa.wav
@@ -1176,7 +1171,6 @@ ra2sub:
 	AcceptsDeliveredExperience:
 		ValidTypes: vehicle
 	DeliversCash:
-		Payload: 475
 	Cloak@underwater:
 		CloakDelay: 75
 		CloakSound: vnavupa.wav
@@ -1238,7 +1232,6 @@ ra2dred:
 		Voice: Attack
 		FacingTolerance: 0
 	DeliversCash:
-		Payload: 450
 	Voiced:
 		VoiceSet: SovietNavalVoice
 	WithFacingSpriteBody:
@@ -2180,7 +2173,6 @@ ra2sidewind:
 	Voiced:
 		VoiceSet: GGIVoice
 	DeliversCash:
-		Payload: 125
 	Voiced:
 		VoiceSet: TechConscriptVoice
 
@@ -2252,7 +2244,6 @@ ra2leopard:
 	Voiced:
 		VoiceSet: RA2AlliesVehicleVoice
 	DeliversCash:
-		Payload: 450
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -2334,7 +2325,6 @@ ra2_c_ifv:
 	Voiced:
 		VoiceSet: RA2AlliesVehicleVoice
 	DeliversCash:
-		Payload: 350
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -2396,7 +2386,6 @@ ra2_c_hum:
 	Voiced:
 		VoiceSet: RA2AlliesVehicleVoice
 	DeliversCash:
-		Payload: 350
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -2475,7 +2464,6 @@ ra2_c_abram:
 	Voiced:
 		VoiceSet: RA2AlliesVehicleVoice
 	DeliversCash:
-		Payload: 450
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -4312,7 +4300,6 @@ ra2shkhero:
 	Voiced:
 		VoiceSet: RA2TeslaTrooperVoice
 	DeliversCash:
-		Payload: 250
 	Selectable:
 		Class: ra2_soviets_teslatrooper
 	GrantConditionOnPrerequisite@EMPTesla:
@@ -5699,7 +5686,6 @@ yrrobo:
 		InitialHeight: 384
 		RequiresCondition: !disabled && robotcontrol
 	DeliversCash:
-		Payload: 300
 	-TemporaryOwnerManager:
 	Capturable:
 		Types: thiefproof
@@ -5711,4 +5697,3 @@ yrrobo:
 		RequiresCondition: disabled && !chronodisabled || !robotcontrol
 	RenderSprites:
 		PlayerPalette: playerra2
-

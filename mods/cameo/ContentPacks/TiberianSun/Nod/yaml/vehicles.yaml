@@ -4,7 +4,7 @@ ts_nod_mobileconstructionvehicle:
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@mcv: ^MCV
-	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@FieldMaintenance: ^FieldMaintenance
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~ts_nod_warfactory, ts_nod_servicedepot
@@ -26,7 +26,7 @@ ts_nod_mobileconstructionvehicle:
 		Image: tsmcvblack
 		Scale: 15
 	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_fieldmaintenance
 
 ts_nod_tiberiumharvester:
 	Inherits: ^TDHARV
@@ -46,7 +46,6 @@ ts_nod_tiberiumharvester:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 500
 	RenderVoxels:
 		Scale: 2
 		Image: dtruck
@@ -127,7 +126,6 @@ ts_nod_subterraneanapc:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 400
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
@@ -202,7 +200,6 @@ ts_nod_attackbuggy:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 250
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -262,7 +259,6 @@ ts_nod_stealthtank:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 250
 	WithRangeCircle@GenRangeUpgraded:
 		Range: 1512
 		RequiresCondition: ts_nod_upgrade_stealthfieldsimprovements
@@ -335,7 +331,6 @@ ts_nod_mobilerepairvehicle:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 250
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Vehicles
 	RenderSprites:
@@ -424,7 +419,6 @@ ts_nod_artillery:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 350
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -471,7 +465,6 @@ ts_nod_devilstongue:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 350
 	RenderVoxels:
 		Scale: 15
 	RenderSprites:
@@ -508,7 +501,6 @@ ts_nod_mobilestealthgenerator:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 650
 	RenderVoxels:
 		Scale: 15
 	ProximityExternalCondition@StealGen:
@@ -591,7 +583,6 @@ ts_nod_attackcycle:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 300
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -726,7 +717,6 @@ ts_nod_ticktank:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 350
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:

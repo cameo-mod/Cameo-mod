@@ -784,14 +784,26 @@ pin revert (never committed). **RESOLVED: `make.cmd all` fetched b89ae60 and reb
   descriptions" — separate issue, needs description text improvements.
 - [ ] **Survival map (unpacked at maps/survival/ by maintainer/tester —
   do NOT clobber; NFWRambo makes his own `survival 2` copy):
-  (a) BUG: game does not end when all waves are cleared — VERIFIED
-  2026-07-27: `CheckVictory` logic is correct (counts alive foes, has
-  3-min failsafe). Bug may have been fixed or is a runtime issue.
+  (a) BUG: game does not end when all waves are cleared — FIXED
+  2026-07-29: Implemented CA-style `InitObjectives` (speech notifications +
+  objective feedback), centralized `ResolveMission` function, `GameLost`
+  guards on ALL perpetual systems (verified zero unguarded), `PendingSpawns`
+  counter to prevent premature victory from async reinforcements, and coop
+  player elimination handling. Research documented in
+  `docs/design/mission_win_lose_research.md`.
   (b) difficulty dip waves 12–15 — ADDRESSED 2026-07-27: randomized
   wave system now pads waves with cheapest unit to meet minUnits floor.
   (c) maintainer idea: waves spawn with all upgrades ("elite force") —
   IMPLEMENTED: veteran levels scale with wave index (1 per 4 waves).
-  (d) pacing — current values PrepSeconds=120, WaveGapSeconds=60.
+  (d) pacing — UPDATED 2026-07-29: max game time capped at 60 min.
+  Prep 2.5-3.5 min (150-210s), wave gaps 35-135s (10% short/10% long/80%
+  normal). Worst case: 210 + 25*135 = 3585s < 3600s. Budget variance
+  reduced from -50%/+80% to -50%/+50% (0.5x-1.5x) to compensate for
+  higher max difficulty multiplier. Difficulty reworked from 5 tiers to
+  7: TRIVIAL 0.5x, EASY 0.75x, MEDIUM 1.0x, HARD 1.25x, BRUTAL 1.5x,
+  UNBEATABLE 1.75x, NIGHTMARE 2.0x. Min/max thresholds unchanged, 2 new
+  intermediate tiers (BRUTAL, UNBEATABLE) spread evenly between HARD and
+  NIGHTMARE. All taunt lines, hysteresis, and event commentary updated.
   (e) RANDOMIZED WAVES — IMPLEMENTED 2026-07-27: each wave now randomly
   picks a faction from a tier-appropriate pool (22 factions across T1-T4),
   fills an increasing budget with random units from that faction, and

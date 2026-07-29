@@ -116,6 +116,14 @@ forgotten_juggerboat:
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		LocalOffset: -200,-100,0, -200,100,0
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TSChemJuggerboat90mm
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: -200,-100,0, -200,100,0
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Armament@SECONDARY:
 		Name: secondary
 		Weapon: DepthCharge
@@ -128,7 +136,6 @@ forgotten_juggerboat:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: TSVehicle
 	RenderSprites:
@@ -177,6 +184,13 @@ forgotten_cannonboat:
 		LocalOffset: 200,-100,0, 200,100,0
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzle
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TSChemBoatcannon
+		LocalOffset: 200,-100,0, 200,100,0
+		LocalYaw: 64, -64
+		MuzzleSequence: muzzle
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Armament@DC1:
 		Weapon: DepthCharge
 		LocalOffset: 100,-100,0, 100,100,0
@@ -195,7 +209,6 @@ forgotten_cannonboat:
 	Selectable:
 		DecorationBounds: 2048, 2048
 	DeliversCash:
-		Payload: 500
 	Voiced:
 		VoiceSet: TSVehicle
 	DetectCloaked:
@@ -211,4 +224,3 @@ forgotten_cannonboat:
 ####################################################################################################
 #		BUILDINGS
 ####################################################################################################
-

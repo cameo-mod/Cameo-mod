@@ -4,7 +4,6 @@ forgotten_mobileconstructionvehicle:
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@mcv: ^MCV
-	Inherits@MechanicalReliability: ^MechanicalReliability
 	Buildable:
 		Description: actor_forgotten_mobileconstructionvehicle.description
 		Queue: Vehicle, RAVehicle
@@ -25,8 +24,6 @@ forgotten_mobileconstructionvehicle:
 	RenderVoxels:
 		Image: tsmcvgrey
 		Scale: 15
-	ActorStatValues:
-		Upgrades: ts_gdi_upgrade_mechanicalreliability
 
 forgotten_tiberiumharvester:
 	Inherits: ^TDHARV
@@ -49,7 +46,6 @@ forgotten_tiberiumharvester:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 500
 	RenderVoxels:
 		Image: gharv
 	RenderSprites:
@@ -111,7 +107,6 @@ forgotten_scarabapc:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 400
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
@@ -181,7 +176,6 @@ forgotten_missilevan:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 600
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -235,7 +229,6 @@ forgotten_raidercar:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 150
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -289,7 +282,6 @@ forgotten_bowler:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 175
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -352,7 +344,6 @@ forgotten_ruiner:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 175
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -412,7 +403,6 @@ forgotten_rattytank:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 300
 	RenderSprites:
 		PlayerPalette: player_rgba
 	# SpawnActorOnDeath:
@@ -477,7 +467,6 @@ forgotten_warriortank:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 400
 	RenderSprites:
 		PlayerPalette: player_rgba
 	# SpawnActorOnDeath:
@@ -542,7 +531,6 @@ forgotten_scoopertank:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 400
 	RenderSprites:
 		PlayerPalette: player_rgba
 	# SpawnActorOnDeath:
@@ -602,7 +590,6 @@ forgotten_closhtank:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 325
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -660,7 +647,6 @@ forgotten_flametank:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 250
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -695,7 +681,6 @@ forgotten_experimentalmammothtank:
 		Speed: 50
 		TurnSpeed: 10
 	Passenger:
-		Weight: 20
 	Health:
 		HP: 1000000
 	Repairable:
@@ -732,7 +717,6 @@ forgotten_experimentalmammothtank:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 900
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -767,7 +751,6 @@ forgotten_chemicalmammothtank:
 		Speed: 60
 		TurnSpeed: 12
 	Passenger:
-		Weight: 20
 	Health:
 		HP: 400000
 	Repairable:
@@ -796,7 +779,6 @@ forgotten_chemicalmammothtank:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 900
 	RenderSprites:
 		PlayerPalette: player_rgba
 	FirepowerMultiplier@forgotten_upgrade_chemicalweapons:
@@ -861,7 +843,6 @@ forgotten_tankkiller:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 350
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -943,7 +924,6 @@ forgotten_thumperbus:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 350
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -1017,7 +997,6 @@ forgotten_nomadbarracks:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 350
 	RenderSprites:
 		PlayerPalette: player_rgba
 	Exit@1:
@@ -1095,7 +1074,6 @@ forgotten_mlrs:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 350
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -1135,7 +1113,6 @@ forgotten_m113adats:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Repairable:
 	Armor:
 		Type: Light
 	Armament@PRIMARY:
@@ -1172,7 +1149,6 @@ forgotten_m113adats:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 350
 	WithSpriteTurret:
 	RenderSprites:
 		PlayerPalette: player_rgba
@@ -1203,7 +1179,7 @@ forgotten_apctruck:
 	Tooltip:
 		Name: actor_forgotten_apctruck.name
 	UpdatesPlayerStatistics:
-		OverrideActor: forgotten_m113adats
+		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~forgotten_warfactory
@@ -1237,7 +1213,6 @@ forgotten_apctruck:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
-		Payload: 350
 	WithSpriteTurret:
 	RenderSprites:
 		PlayerPalette: player_rgba
@@ -1246,7 +1221,3 @@ forgotten_apctruck:
 		RequiresSelection: true
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
-
-#######################################
-# TS CABAL Vehicles
-#######################################

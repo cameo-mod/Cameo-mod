@@ -46,8 +46,6 @@ siege_tank:
 		EmptyWeapon: D2KUnitExplodeMed
 	AutoTarget:
 		InitialStanceAI: Defend
-	AttractsWorms:
-		Intensity: 600
 	GrantConditionOnPrerequisite@ixian_upgrade_reinforcedbarrel:
 		Condition: ixian_upgrade_reinforcedbarrel
 		Prerequisites: ixian_upgrade_reinforcedbarrel

@@ -5530,7 +5530,6 @@ swhtnk:
 		Speed: 35
 		TurnSpeed: 12
 	Passenger:
-		Weight: 25
 	Health:
 		HP: 1000000
 	Repairable:
@@ -7493,7 +7492,6 @@ sw4tnk:
 		Speed: 45
 		TurnSpeed: 12
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 200000
 	Repairable:
@@ -7571,7 +7569,6 @@ swaa:
 		Speed: 80
 		TurnSpeed: 12
 	Passenger:
-		Weight: 2
 	Health:
 		HP: 50000
 	Repairable:
@@ -7624,7 +7621,6 @@ swjugger:
 		Speed: 40
 		TurnSpeed: 12
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 400000
 	Repairable:
@@ -8112,7 +8108,6 @@ swbantha2:
 	Passenger:
 		CargoType: BreedingAnimals
 		CustomPipType: blue
-		Weight: 1
 		CargoConditions:
 			swnurse: indoors
 			swnurser: indoors
@@ -8145,7 +8140,6 @@ swnerf:
 	Passenger:
 		CargoType: BreedingAnimals
 		CustomPipType: blue
-		Weight: 1
 		CargoConditions:
 			swnurse: indoors
 			swnurser: indoors
@@ -8595,7 +8589,6 @@ swjabbaparty:
 		Except: Unload, Stop
 		RequiresCondition: damagedslow
 	Passenger:
-		Weight: 10
 	Health:
 		HP: 100000
 	ChangesHealth:
