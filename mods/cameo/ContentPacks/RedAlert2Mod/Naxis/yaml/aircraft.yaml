@@ -31,7 +31,7 @@ naxis_interceptor:
 		PauseOnCondition: !ammo
 	Armament@Rockets:
 		Name: primary
-		Weapon: NaxPlaneRocketsE
+		Weapon: NaxPlaneRockets_elite
 		LocalOffset: 425,-350,-225, 425,350,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
@@ -140,13 +140,13 @@ naxis_bf109:
 		FacingTolerance: 100
 	Armament:
 		Name: primary
-		Weapon: NaxPlanegunE
+		Weapon: NaxPlanegun_elite
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
 	Armament@ELITE:
 		Name: primary
-		Weapon: NaxPlanegunE
+		Weapon: NaxPlanegun_elite
 		LocalOffset: 425,250,-225, 425,-250,-225, 425,150,-225, 425,-150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
@@ -226,14 +226,14 @@ naxis_me262:
 		FacingTolerance: 100
 	Armament@Rockets:
 		Name: primary
-		Weapon: NaxPlaneRocketsE
+		Weapon: NaxPlaneRockets_elite
 		LocalOffset: 425,-350,-225, 425,350,-225
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 5
 		PauseOnCondition: ammo < 5
 	Armament@RocketsELITE:
 		Name: primary
-		Weapon: NaxPlaneRocketsE
+		Weapon: NaxPlaneRockets_elite
 		LocalOffset: 425,350,-225, 425,-350,-225
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 5
@@ -241,13 +241,13 @@ naxis_me262:
 		RequiresCondition: rank-elite
 	Armament@MG:
 		Name: primary
-		Weapon: NaxPlanegunE
+		Weapon: NaxPlanegun_elite
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: ammo < 5
 	Armament@ELITE:
 		Name: primary
-		Weapon: NaxPlanegunE
+		Weapon: NaxPlanegun_elite
 		LocalOffset: 425,250,-225, 425,-250,-225, 425,150,-225, 425,-150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: ammo < 5
@@ -334,7 +334,7 @@ naxis_transportzeppelin:
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Name: primary
-		Weapon: NaxQuadCannonE
+		Weapon: NaxQuadCannon_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
@@ -348,7 +348,7 @@ naxis_transportzeppelin:
 		RequiresCondition: !rank-elite
 	Armament@eliteAA:
 		Name: primary
-		Weapon: NaxQuadCannonAAE
+		Weapon: NaxQuadCannonAA_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280

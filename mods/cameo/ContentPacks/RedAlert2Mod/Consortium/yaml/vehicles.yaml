@@ -57,7 +57,7 @@ steelconsortium_katytank:
 		RequiresCondition: !rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@ELITE:
 		Name: primary
-		Weapon: SteelKatyCannonsE
+		Weapon: SteelKatyCannons_elite
 		Recoil: 250
 		RecoilRecovery: 50
 		LocalOffset: 1250,-250,250, 1250,250,250
@@ -75,7 +75,7 @@ steelconsortium_katytank:
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeELITE:
 		Name: primary
-		Weapon: SteelKatyCannonsEMPE
+		Weapon: SteelKatyCannonsEMP_elite
 		Recoil: 250
 		RecoilRecovery: 50
 		LocalOffset: 1250,-250,250, 1250,250,250
@@ -152,7 +152,7 @@ steelconsortium_defenderbot:
 		LocalOffset: 300,200,1000, 300,-200,1000
 		RequiresCondition: !rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@PRIMARYELITE:
-		Weapon: SteelInfRailgunE
+		Weapon: SteelInfRailgun_elite
 		LocalOffset: 300,200,1000, 300,-200,1000
 		RequiresCondition: rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradePRIMARY:
@@ -160,7 +160,7 @@ steelconsortium_defenderbot:
 		LocalOffset: 300,200,1000, 300,-200,1000
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradePRIMARYELITE:
-		Weapon: SteelInfRailgunEMPE
+		Weapon: SteelInfRailgunEMP_elite
 		LocalOffset: 300,200,1000, 300,-200,1000
 		RequiresCondition: rank-elite && steelconsortium_upgrade_quantumweaponpower
 	AttackFrontal:
@@ -258,7 +258,7 @@ steelconsortium_stalker:
 		LocalOffset: 900,300,500
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@elite:
-		Weapon: SteelStalkerRailgunE
+		Weapon: SteelStalkerRailgun_elite
 		LocalOffset: 900,300,500
 		RequiresCondition: rank-elite
 	FirepowerMultiplier@steelconsortium_upgrade_quantumweaponpower:
@@ -848,7 +848,7 @@ steelconsortium_mako:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@ELITE:
-		Weapon: SteelMakoGunE
+		Weapon: SteelMakoGun_elite
 		LocalOffset: 500,200,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -860,7 +860,7 @@ steelconsortium_mako:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeELITE:
-		Weapon: SteelMakoGunEMPE
+		Weapon: SteelMakoGunEMP_elite
 		LocalOffset: 500,200,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -1245,7 +1245,7 @@ steelconsortium_megalodon:
 		Weapon: SteelMegaSwordEMP
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@elite:
-		Weapon: SteelMegaSwordE
+		Weapon: SteelMegaSword_elite
 		RequiresCondition: rank-elite
 	FirepowerMultiplier@steelconsortium_upgrade_quantumweaponpower:
 		Modifier: 125
@@ -1487,7 +1487,7 @@ steelconsortium_dagger:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: SteelDaggerCannonE
+		Weapon: SteelDaggerCannon_elite
 		LocalOffset: 450,0,150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect

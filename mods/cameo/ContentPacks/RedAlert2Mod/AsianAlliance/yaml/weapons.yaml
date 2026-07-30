@@ -334,7 +334,7 @@ AsianMaidenBow:
 		ValidTargets: Ground, Water, Air
 		ExplosionPalette: ra2effect
 
-AsianMaidenBowE:
+AsianMaidenBow_elite:
 	Inherits: AsianMaidenBow
 	Range: 7740
 	MinRange: 1550
@@ -359,7 +359,7 @@ AsianNinjaStar:
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect
 
-AsianNinjaStarE:
+AsianNinjaStar_elite:
 	Inherits: AsianNinjaStar
 	Range: 5560
 	Burst: 2
@@ -379,7 +379,7 @@ AsianCrocBite:
 		Damage: 8
 	-Warhead@Effect:
 
-AsianCrocBiteE:
+AsianCrocBite_elite:
 	Inherits: AsianCrocBite
 	Burst: 2
 	BurstDelays: 3
@@ -782,7 +782,7 @@ AsianChemical:
 		Weapon: RA2Cloud
 		InvalidTargets: Water
 
-AsianChemicalE:
+AsianChemical_elite:
 	Inherits: AsianChemical
 	Range: 10000
 	Burst: 2
@@ -932,7 +932,7 @@ AsianHowitzerCannon:
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
 
-AsianHowitzerCannonE:
+AsianHowitzerCannon_elite:
 	Inherits: AsianHowitzerCannon
 	Range: 20000
 	MinRange: 4000
@@ -1144,7 +1144,7 @@ AsianSinglePlasma:
 		Explosions: ra2_apoc_explosion
 		ImpactSounds: gexpapoa.wav
 
-AsianSinglePlasmaE:
+AsianSinglePlasma_elite:
 	Inherits: AsianSinglePlasma
 	Range: 5836
 	Burst: 2
@@ -1165,7 +1165,7 @@ AsianTwinPlasma:
 	Warhead@FireShrapnel: FireShrapnel
 		Amount: 2
 
-AsianTwinPlasmaE:
+AsianTwinPlasma_elite:
 	Inherits: AsianTwinPlasma
 	Range: 8888
 	Burst: 4
@@ -1384,7 +1384,7 @@ AsianFlamerTank:
 	BurstDelays: 3
 	Range: 3700
 
-AsianFlamerTankE:
+AsianFlamerTank_elite:
 	Inherits: AsianFlamerTank
 	Range: 4700
 	Burst: 12
@@ -1727,7 +1727,7 @@ AsianPelicanMissile:
 		Explosions: ra2_small_grey_explosion
 		ImpactSounds: gexpifva.wav
 
-AsianPelicanMissileE:
+AsianPelicanMissile_elite:
 	Inherits: AsianPelicanMissile
 	Range: 7100
 	Burst: 4

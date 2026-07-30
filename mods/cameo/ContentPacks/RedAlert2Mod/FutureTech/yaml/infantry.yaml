@@ -47,18 +47,18 @@ futuretech_enforcer:
 		Weapon: FutureEnforcerShotgunDeployed
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: FutureEnforcerShotgunE
+		Weapon: FutureEnforcerShotgun_elite
 		RequiresCondition: !deployed && rank-elite
 		LocalOffset: 128,0,256
 	Armament@ELITE2:
 		Name: deployed
-		Weapon: FutureEnforcerShotgunDeployedE
+		Weapon: FutureEnforcerShotgunDeployed_elite
 		RequiresCondition: deployed && rank-elite
 		LocalOffset: 128,0,256
 		Turret: deploy
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: FutureEnforcerShotgunDeployedE
+		Weapon: FutureEnforcerShotgunDeployed_elite
 		RequiresCondition: rank-elite
 	Armament@BOTAA:
 		Weapon: aadeploytargeting.8c0
@@ -173,18 +173,18 @@ futuretech_javelinsoldier:
 		Weapon: FutureJavelinRocketsDeployed
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: FutureJavelinRocketsE
+		Weapon: FutureJavelinRockets_elite
 		RequiresCondition: !deployed && rank-elite
 		LocalOffset: 128,0,256
 	Armament@ELITE2:
 		Name: deployed
-		Weapon: FutureJavelinRocketsDeployedE
+		Weapon: FutureJavelinRocketsDeployed_elite
 		RequiresCondition: deployed && rank-elite
 		LocalOffset: 128,0,256
 		Turret: deploy
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: FutureJavelinRocketsDeployedE
+		Weapon: FutureJavelinRocketsDeployed_elite
 		RequiresCondition: rank-elite
 	Armament@BOTAA:
 		Weapon: aadeploytargeting.8c0
@@ -410,7 +410,7 @@ futuretech_blackwidow:
 		RequiresCondition: !rank-elite
 		LocalOffset: 128,-16,256, 128,16,256
 	Armament@ELITE:
-		Weapon: BlackWidowPistolsE
+		Weapon: BlackWidowPistols_elite
 		RequiresCondition: rank-elite
 		LocalOffset: 128,-16,256, 128,16,256
 	Armament@GARRISONED:
@@ -419,7 +419,7 @@ futuretech_blackwidow:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: BlackWidowPistolsE
+		Weapon: BlackWidowPistols_elite
 		RequiresCondition: rank-elite
 	Armament@shipc4:
 		Weapon: SEALAttach
@@ -616,7 +616,7 @@ futuretech_scoutdroid:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: Future_Wheel_MGE
+		Weapon: Future_Wheel_MG_elite
 		LocalOffset: 200,200,600, 200,-200,600
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -687,7 +687,7 @@ futuretech_shotgundroid:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: ShotgunAttackRobotGunE
+		Weapon: ShotgunAttackRobotGun_elite
 		LocalOffset: 400,125,175
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -700,7 +700,7 @@ futuretech_shotgundroid:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: ShotgunAttackRobotGunE
+		Weapon: ShotgunAttackRobotGun_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -772,7 +772,7 @@ futuretech_cannondroid:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: CannonAttackRobotGunE
+		Weapon: CannonAttackRobotGun_elite
 		LocalOffset: 400,125,175
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -845,7 +845,7 @@ futuretech_missiledroid:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: MissileAttackRobotGunE
+		Weapon: MissileAttackRobotGun_elite
 		LocalOffset: 200,150,400, 200,-150,400
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect

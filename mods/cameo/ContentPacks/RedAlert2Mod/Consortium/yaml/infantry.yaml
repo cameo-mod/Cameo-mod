@@ -29,7 +29,7 @@ steelconsortium_clonetrooper:
 		Weapon: SteelCloneGun
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: SteelCloneGunE
+		Weapon: SteelCloneGun_elite
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
 		Name: garrisoned
@@ -39,7 +39,7 @@ steelconsortium_clonetrooper:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: SteelCloneGunE
+		Weapon: SteelCloneGun_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -47,7 +47,7 @@ steelconsortium_clonetrooper:
 		Weapon: SteelCloneGunResonance
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeELITE:
-		Weapon: SteelCloneGunEResonance
+		Weapon: SteelCloneGun_eliteResonance
 		RequiresCondition: rank-elite && steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
@@ -57,7 +57,7 @@ steelconsortium_clonetrooper:
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeGARRISONEDELITE:
 		Name: garrisoned
-		Weapon: SteelCloneGunEResonance
+		Weapon: SteelCloneGun_eliteResonance
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite && steelconsortium_upgrade_resonanceammo
@@ -108,7 +108,7 @@ steelconsortium_hoverboardgrenadier:
 		LocalOffset: 300,200,800
 		RequiresCondition: !rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@ELITE:
-		Weapon: SteelMakoGunE
+		Weapon: SteelMakoGun_elite
 		LocalOffset: 300,200,800
 		RequiresCondition: rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@GARRISONED:
@@ -119,7 +119,7 @@ steelconsortium_hoverboardgrenadier:
 		RequiresCondition: !rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: SteelMakoGunE
+		Weapon: SteelMakoGun_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite && !steelconsortium_upgrade_quantumweaponpower
@@ -128,7 +128,7 @@ steelconsortium_hoverboardgrenadier:
 		LocalOffset: 300,200,800
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeELITE:
-		Weapon: SteelMakoGunEMPE
+		Weapon: SteelMakoGunEMP_elite
 		LocalOffset: 300,200,800
 		RequiresCondition: rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeGARRISONED:
@@ -139,7 +139,7 @@ steelconsortium_hoverboardgrenadier:
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeGARRISONEDELITE:
 		Name: garrisoned
-		Weapon: SteelMakoGunEMPE
+		Weapon: SteelMakoGunEMP_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite && steelconsortium_upgrade_quantumweaponpower
@@ -205,7 +205,7 @@ steelconsortium_quantummissiletrooper:
 		LocalOffset: 384,64,384
 		RequiresCondition: !deployed && !rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@PRIMARYELITE:
-		Weapon: SteelInfRailgunE
+		Weapon: SteelInfRailgun_elite
 		LocalOffset: 384,64,384
 		RequiresCondition: !deployed && rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradePRIMARY:
@@ -213,7 +213,7 @@ steelconsortium_quantummissiletrooper:
 		LocalOffset: 384,64,384
 		RequiresCondition: !deployed && !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradePRIMARYELITE:
-		Weapon: SteelInfRailgunEMPE
+		Weapon: SteelInfRailgunEMP_elite
 		LocalOffset: 384,64,384
 		RequiresCondition: !deployed && rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@BOTAA:
@@ -228,7 +228,7 @@ steelconsortium_quantummissiletrooper:
 		RequiresCondition: deployed && !rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@DEPLOYEDELITE:
 		Name: deployed
-		Weapon: SteelInfRailgunE
+		Weapon: SteelInfRailgun_elite
 		Turret: deploy
 		LocalOffset: 384,64,384
 		RequiresCondition: deployed && rank-elite && !steelconsortium_upgrade_quantumweaponpower
@@ -240,7 +240,7 @@ steelconsortium_quantummissiletrooper:
 		RequiresCondition: deployed && !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeDEPLOYEDELITE:
 		Name: deployed
-		Weapon: SteelInfRailgunEMPE
+		Weapon: SteelInfRailgunEMP_elite
 		Turret: deploy
 		LocalOffset: 384,64,384
 		RequiresCondition: deployed && rank-elite && steelconsortium_upgrade_quantumweaponpower
@@ -250,7 +250,7 @@ steelconsortium_quantummissiletrooper:
 		RequiresCondition: !rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: SteelInfRailgunE
+		Weapon: SteelInfRailgun_elite
 		RequiresCondition: rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
@@ -258,7 +258,7 @@ steelconsortium_quantummissiletrooper:
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeGARRISONEDELITE:
 		Name: garrisoned
-		Weapon: SteelInfRailgunEMPE
+		Weapon: SteelInfRailgunEMP_elite
 		RequiresCondition: rank-elite && steelconsortium_upgrade_quantumweaponpower
 	AttackFrontal:
 		Armaments: primary, targeting
@@ -438,7 +438,7 @@ steelconsortium_steelrunner:
 		RequiresCondition: !rank-elite
 		LocalOffset: 128,0,256
 	Armament@ELITE:
-		Weapon: SteelRunnerPistolsE
+		Weapon: SteelRunnerPistols_elite
 		RequiresCondition: rank-elite
 		LocalOffset: 128,0,256
 	Armament@GARRISONED:
@@ -447,13 +447,13 @@ steelconsortium_steelrunner:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: SteelRunnerPistolsE
+		Weapon: SteelRunnerPistols_elite
 		RequiresCondition: rank-elite
 	Armament@UpgradePRIMARY:
 		Weapon: SteelRunnerPistolsResonance
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeELITE:
-		Weapon: SteelRunnerPistolsEResonance
+		Weapon: SteelRunnerPistols_eliteResonance
 		RequiresCondition: rank-elite && steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
@@ -463,7 +463,7 @@ steelconsortium_steelrunner:
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeGARRISONEDELITE:
 		Name: garrisoned
-		Weapon: SteelRunnerPistolsEResonance
+		Weapon: SteelRunnerPistols_eliteResonance
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite && steelconsortium_upgrade_resonanceammo

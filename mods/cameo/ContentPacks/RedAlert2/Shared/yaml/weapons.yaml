@@ -1299,7 +1299,7 @@ RA2BrutePunch:
 		Damage: 10
 	-Warhead@Effect:
 
-RA2BrutePunchE:
+RA2BrutePunch_elite:
 	Inherits: RA2BrutePunch
 	Burst: 2
 	BurstDelays: 3
@@ -1641,7 +1641,7 @@ MigMissiles_tesla:
 		AimChance: 100
 		AimTargetStances: Enemy, Neutral
 
-MigMissilesE:
+MigMissiles_elite:
 	Inherits: MigMissiles
 	Range: 8600
 	Burst: 8
@@ -1687,7 +1687,7 @@ MigMissiles_AA:
 		ValidTargets: Air
 
 MigMissiles_AA_ELITE:
-	Inherits: MigMissilesE
+	Inherits: MigMissiles_elite
 	ValidTargets: Air
 	Projectile: Missile
 		Speed: 500

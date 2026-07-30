@@ -653,7 +653,7 @@ tkm_sniper:
 		LocalOffset: 0,0,427
 	# 	RequiresCondition: !rank-elite
 	# Armament@ELITE:
-	# 	Weapon: RA2AWPE
+	# 	Weapon: RA2AWP_elite
 	# 	LocalOffset: 0,0,427
 	# 	RequiresCondition: rank-elite
 	Armament@GARRISONED:
@@ -662,7 +662,7 @@ tkm_sniper:
 	# 	RequiresCondition: !rank-elite
 	# Armament@GARRISONEDELITE:
 	# 	Name: garrisoned
-	# 	Weapon: RA2AWPE
+	# 	Weapon: RA2AWP_elite
 	# 	RequiresCondition: rank-elite
 	AttackFrontal:
 		FacingTolerance: 0
@@ -814,7 +814,7 @@ tkm_spetsnaz:
 	#	RequiresCondition: !rank-elite
 		LocalOffset: 128,0,256
 	# Armament@ELITE:
-	# 	Weapon: RA2MP5E
+	# 	Weapon: RA2MP5_elite
 	# 	RequiresCondition: rank-elite
 	# 	LocalOffset: 128,0,256
 	Armament@GARRISONED:
@@ -823,7 +823,7 @@ tkm_spetsnaz:
 	#	RequiresCondition: !rank-elite
 	# Armament@GARRISONEDELITE:
 	# 	Name: garrisoned
-	# 	Weapon: RA2MP5E
+	# 	Weapon: RA2MP5_elite
 	# 	RequiresCondition: rank-elite
 	Armament@shipc4:
 		Weapon: SEALAttach

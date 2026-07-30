@@ -487,7 +487,7 @@ ptnk.asian:
 		RecoilRecovery: 42
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: AsianTwinPlasmaE
+		Weapon: AsianTwinPlasma_elite
 		LocalOffset: 900,80,340, 900,-80,340
 		Recoil: 170
 		RecoilRecovery: 42
@@ -543,7 +543,7 @@ asianalliance_viper:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: AsianChemicalE
+		Weapon: AsianChemical_elite
 		LocalOffset: -400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -662,7 +662,7 @@ asianalliance_howitzer:
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
 		Name: primary
-		Weapon: AsianHowitzerCannonE
+		Weapon: AsianHowitzerCannon_elite
 		Recoil: 256
 		RecoilRecovery: 38
 		LocalOffset: 720,0,80
@@ -731,7 +731,7 @@ asianalliance_asianflametank:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: AsianFlamerTankE
+		Weapon: AsianFlamerTank_elite
 		LocalOffset: 300,0,200
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect

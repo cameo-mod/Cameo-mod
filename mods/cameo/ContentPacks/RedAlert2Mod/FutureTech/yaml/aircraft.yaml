@@ -42,7 +42,7 @@ futuretech_twister:
 		RequiresCondition: !rank-elite
 	Armament@PRIMARYELITE:
 		Name: primary
-		Weapon: SteelTwisterMissilesE
+		Weapon: SteelTwisterMissiles_elite
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225, 425,0,-225
 		LocalYaw: 100, -100, 50, -50, 0
 		PauseOnCondition: !ammo
@@ -223,7 +223,7 @@ futuretech_harbingergunship:
 		RequiresCondition: !rank-elite
 	Armament@PRIMARYELITE:
 		Name: primary
-		Weapon: FutureHarbingerCannonE
+		Weapon: FutureHarbingerCannon_elite
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225, 425,0,-225
 		LocalYaw: 100, -100, 50, -50, 0
 		RequiresCondition: rank-elite
@@ -235,7 +235,7 @@ futuretech_harbingergunship:
 		RequiresCondition: !rank-elite
 	Armament@AAELITE:
 		Name: primary
-		Weapon: HarbingerChaingunsE
+		Weapon: HarbingerChainguns_elite
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225, 425,0,-225
 		LocalYaw: 100, -100, 50, -50, 0
 		RequiresCondition: rank-elite

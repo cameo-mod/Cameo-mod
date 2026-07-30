@@ -183,7 +183,7 @@ yuri_brute:
 		Weapon: RA2BrutePunch
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: RA2BrutePunchE
+		Weapon: RA2BrutePunch_elite
 		RequiresCondition: rank-elite
 	AttackFrontal:
 		FacingTolerance: 0
@@ -250,7 +250,7 @@ yuri_virus:
 		LocalOffset: 0,0,427
 		RequiresCondition: !rank-elite && yuri_upgrade_corrosiveammo
 	Armament@ELITE:
-		Weapon: RA2VirusgunE
+		Weapon: RA2Virusgun_elite
 		LocalOffset: 0,0,427
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
@@ -267,7 +267,7 @@ yuri_virus:
 		RequiresCondition: !rank-elite && yuri_upgrade_corrosiveammo
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: RA2VirusgunE
+		Weapon: RA2Virusgun_elite
 		RequiresCondition: rank-elite
 	AttackFrontal:
 		FacingTolerance: 0
@@ -676,7 +676,7 @@ yuri_biotrooper:
 		LocalOffset: 0,0,427
 		RequiresCondition: !rank-elite && yuri_upgrade_corrosiveammo
 	Armament@ELITE:
-		Weapon: RA2ChemsprayE
+		Weapon: RA2Chemspray_elite
 		LocalOffset: 0,0,427
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
@@ -689,7 +689,7 @@ yuri_biotrooper:
 		RequiresCondition: !rank-elite && yuri_upgrade_corrosiveammo
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: RA2ChemsprayE
+		Weapon: RA2Chemspray_elite
 		RequiresCondition: rank-elite
 	WithInfantryBody:
 	AttackFrontal:

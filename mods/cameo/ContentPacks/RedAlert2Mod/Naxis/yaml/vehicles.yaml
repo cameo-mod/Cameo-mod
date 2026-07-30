@@ -214,7 +214,7 @@ wirbelwind.nax:
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Name: primary
-		Weapon: NaxQuadCannonE
+		Weapon: NaxQuadCannon_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
@@ -232,7 +232,7 @@ wirbelwind.nax:
 		RequiresCondition: !rank-elite
 	Armament@eliteAA:
 		Name: primary
-		Weapon: NaxQuadCannonAAE
+		Weapon: NaxQuadCannonAA_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
@@ -525,13 +525,13 @@ naxis_ratte:
 		RequiresCondition: rank-elite
 	Armament@AA1:
 		Name: secondary
-		Weapon: NaxQuadCannonAAE
+		Weapon: NaxQuadCannonAA_elite
 		Recoil: 100
 		RecoilRecovery: 20
 		LocalOffset: 1024,400,80, 1024,-400,80
 	Armament@AA2:
 		Name: secondary
-		Weapon: NaxQuadCannonAAE
+		Weapon: NaxQuadCannonAA_elite
 		Recoil: 100
 		RecoilRecovery: 20
 		LocalOffset: 1024,-400,80, 1024,400,80
@@ -586,7 +586,7 @@ naxis_grille:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@elite:
-		Weapon: NaxGrilleArtyE
+		Weapon: NaxGrilleArty_elite
 		LocalOffset: -400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -638,7 +638,7 @@ naxis_brummbar:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@elite:
-		Weapon: NaxBrummbarArtyE
+		Weapon: NaxBrummbarArty_elite
 		LocalOffset: -400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -1148,7 +1148,7 @@ naxis_nokana:
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 	Armament@RK:
-		Weapon: LatinBuggyRocketE
+		Weapon: LatinBuggyRocket_elite
 		LocalOffset: 400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect

@@ -424,7 +424,7 @@ ra2_soviets_v3rocketlauncher:
 		LocalOffset: -1024,0,512
 		RequiresCondition: !rank-elite
 	Armament@PRIMARYELITE:
-		Weapon: V3LaunchE
+		Weapon: V3Launch_elite
 		LocalOffset: -1024,0,512
 		RequiresCondition: rank-elite
 	MissileSpawnerMasterCA@1:
@@ -648,7 +648,7 @@ ra2_soviets_terrordrone:
 		Weapon: RA2DroneJump
 		RequiresCondition: !rank-elite
 	Armament@Elite:
-		Weapon: RA2DroneJumpE
+		Weapon: RA2DroneJump_elite
 		RequiresCondition: rank-elite
 	-InfectableCA:
 	AttackInfectCA:

@@ -32,7 +32,7 @@ latinsyndicate_mortarbike:
 		LocalOffset: 222,0,400
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: RA2MortarBikeE
+		Weapon: RA2MortarBike_elite
 		LocalOffset: 222,0,400
 		RequiresCondition: rank-elite
 	FirepowerMultiplier@Mortar:
@@ -198,7 +198,7 @@ latinsyndicate_raiderbuggy:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite && !latinsyndicate_upgrade_yuristolentechchainguns
 	Armament@Elite:
-		Weapon: LatinBuggyMGE
+		Weapon: LatinBuggyMG_elite
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -210,7 +210,7 @@ latinsyndicate_raiderbuggy:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite && latinsyndicate_upgrade_yuristolentechchainguns
 	Armament@GatlingElite:
-		Weapon: LatinBuggyChaingunE
+		Weapon: LatinBuggyChaingun_elite
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -222,7 +222,7 @@ latinsyndicate_raiderbuggy:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@RocketElite:
-		Weapon: LatinBuggyRocketE
+		Weapon: LatinBuggyRocket_elite
 		LocalOffset: 500,100,300, 500,-100,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -286,7 +286,7 @@ latinsyndicate_tortugatank:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite && !latinsyndicate_upgrade_yuristolentechchainguns
 	Armament@Elite:
-		Weapon: LatinBuggyMGE
+		Weapon: LatinBuggyMG_elite
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -298,7 +298,7 @@ latinsyndicate_tortugatank:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite && latinsyndicate_upgrade_yuristolentechchainguns
 	Armament@GatlingElite:
-		Weapon: LatinBuggyChaingunE
+		Weapon: LatinBuggyChaingun_elite
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -366,7 +366,7 @@ latinsyndicate_rushertank:
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Name: primary
-		Weapon: RA2Gren60mmE
+		Weapon: RA2Gren60mm_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
@@ -455,7 +455,7 @@ latinsyndicate_smokertank:
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Name: primary
-		Weapon: LatinSmokerCannonE
+		Weapon: LatinSmokerCannon_elite
 		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 1024,0,80
@@ -561,7 +561,7 @@ latinsyndicate_diablo:
 		RequiresCondition: !rank-elite
 	Armament@Elite:
 		Name: primary
-		Weapon: DiabloCannonE
+		Weapon: DiabloCannon_elite
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -678,7 +678,7 @@ latinsyndicate_latinapc:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@FlakELITE:
-		Weapon: RA2APCFlakCannonE
+		Weapon: RA2APCFlakCannon_elite
 		LocalOffset: 600,15,300, 600,-15,300
 		Recoil: 85
 		MuzzleSequence: muzzle
@@ -692,7 +692,7 @@ latinsyndicate_latinapc:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@FlakAAELITE:
-		Weapon: RA2APCFlakCannonAAE
+		Weapon: RA2APCFlakCannonAA_elite
 		LocalOffset: 600,15,300, 600,-15,300
 		Recoil: 85
 		MuzzleSequence: muzzle
@@ -706,7 +706,7 @@ latinsyndicate_latinapc:
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_upgrade_yuristolentechchainguns && !rank-elite
 	Armament@MachinegunELITE:
-		Weapon: RA2APCMachineGunE
+		Weapon: RA2APCMachineGun_elite
 		LocalOffset: 600,15,300, 600,-15,300
 		Recoil: 85
 		MuzzleSequence: muzzle
@@ -720,7 +720,7 @@ latinsyndicate_latinapc:
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_upgrade_yuristolentechchainguns && !rank-elite
 	Armament@MachinegunAAELITE:
-		Weapon: RA2APCMachineGunAAE
+		Weapon: RA2APCMachineGunAA_elite
 		LocalOffset: 600,15,300, 600,-15,300
 		Recoil: 85
 		MuzzleSequence: muzzle
@@ -734,7 +734,7 @@ latinsyndicate_latinapc:
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_doctrine_cartelrockets && !rank-elite
 	Armament@RocketsELITE:
-		Weapon: RA2APCRocketE
+		Weapon: RA2APCRocket_elite
 		LocalOffset: 600,-150,300, 600,150,300
 		Recoil: 85
 		MuzzleSequence: muzzle
@@ -748,7 +748,7 @@ latinsyndicate_latinapc:
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_doctrine_cartelrockets && !rank-elite
 	Armament@RocketsAAELITE:
-		Weapon: RA2APCRocketAAE
+		Weapon: RA2APCRocketAA_elite
 		LocalOffset: 600,-150,300, 600,150,300
 		Recoil: 85
 		MuzzleSequence: muzzle

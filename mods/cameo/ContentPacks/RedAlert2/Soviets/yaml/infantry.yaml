@@ -534,7 +534,7 @@ ra2_soviets_desolator:
 		LocalOffset: 256,43,341
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: RA2RadBeamWeaponE
+		Weapon: RA2RadBeamWeapon_elite
 		LocalOffset: 256,43,341
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
@@ -616,7 +616,7 @@ ra2_soviets_boris:
 		LocalOffset: 128,0,256
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: BorisAKME
+		Weapon: BorisAKM_elite
 		LocalOffset: 128,0,256
 		RequiresCondition: rank-elite
 	Armament@AntiBuilding:
@@ -635,7 +635,7 @@ ra2_soviets_boris:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: BorisAKME
+		Weapon: BorisAKM_elite
 		RequiresCondition: rank-elite
 	AttackFrontal:
 		FacingTolerance: 0

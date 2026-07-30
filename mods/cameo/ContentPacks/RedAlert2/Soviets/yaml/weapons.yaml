@@ -672,11 +672,11 @@ RA2DroneJump:
 		ValidTargets: Infantry
 		DamageTypes: DefaultDeath, DroneInfection
 
-RA2DroneJumpE:
+RA2DroneJump_elite:
 	Inherits: RA2DroneJump
 	ReloadDelay: 10
 
-RA2RadBeamWeaponE:
+RA2RadBeamWeapon_elite:
 	Inherits: RA2RadBeamWeapon
 	Range: 7444
 	Burst: 2
@@ -725,7 +725,7 @@ RA2MammothTusk_elite:
 	Range: 7100
 	Burst: 4
 
-V3LaunchE:
+V3Launch_elite:
 	ReloadDelay: 50
 	Range: 20000
 	MinRange: 4000
@@ -859,7 +859,7 @@ IvanBombAir:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		ValidTargets: Aircraft
 
-BorisAKME:
+BorisAKM_elite:
 	Inherits: BorisAKM
 	Range: 9167
 	Burst: 8

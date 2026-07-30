@@ -140,28 +140,28 @@ schwarzermond_spacezeppelin:
 		Step: 21
 	Armament:
 		Name: primary
-		Weapon: NaxiBeetleLaserE
+		Weapon: NaxiBeetleLaser_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
 		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@elite:
 		Name: primary
-		Weapon: NaxiBeetleLaserE
+		Weapon: NaxiBeetleLaser_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
 		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@AA:
 		Name: primary
-		Weapon: NaxiBeetleLaserAAE
+		Weapon: NaxiBeetleLaserAA_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
 		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@eliteAA:
 		Name: primary
-		Weapon: NaxiBeetleLaserAAE
+		Weapon: NaxiBeetleLaserAA_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
@@ -415,7 +415,7 @@ schwarzermond_haunebuii:
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
 		Name: primary
-		Weapon: NaxHaenebuQuadCannonE
+		Weapon: NaxHaenebuQuadCannon_elite
 		LocalOffset: 800,800,0, -800,800,0, -800,-800,0, 800,-800,0, 800,0,0, 0,800,0, -800,0,0, 0,-800,0
 		PauseOnCondition: !ammo
 		RequiresCondition: rank-elite
@@ -503,7 +503,7 @@ schwarzermond_haunebuiii:
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
 		Name: primary
-		Weapon: NaxHaenebuQuadCannonE
+		Weapon: NaxHaenebuQuadCannon_elite
 		LocalOffset: 800,800,0, -800,800,0, -800,-800,0, 800,-800,0, 800,0,0, 0,800,0, -800,0,0, 0,-800,0
 		PauseOnCondition: !ammo
 		RequiresCondition: rank-elite

@@ -67,7 +67,7 @@ steelconsortium_twister:
 		RequiresCondition: !rank-elite
 	Armament@PRIMARYELITE:
 		Name: primary
-		Weapon: SteelTwisterMissilesE
+		Weapon: SteelTwisterMissiles_elite
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225, 425,0,-225
 		LocalYaw: 100, -100, 50, -50, 0
 		PauseOnCondition: !ammo
@@ -391,7 +391,7 @@ steelconsortium_skyhammer:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@elite:
-		Weapon: SteelAirTurretE
+		Weapon: SteelAirTurret_elite
 		LocalOffset: 250,0,-250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -480,7 +480,7 @@ steelconsortium_cloudbreaker:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@PRIMARYELITE:
-		Weapon: SteelCruiserCannonsE
+		Weapon: SteelCruiserCannons_elite
 		LocalOffset: -150,-400,-25, -150,400,-25, -444,-400,-25, -444,400,-25
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -492,7 +492,7 @@ steelconsortium_cloudbreaker:
 		MuzzlePalette: ra2effect
 		RequiresCondition: steelconsortium_upgrade_quantumweaponpower && !rank-elite
 	Armament@CANNONELITE:
-		Weapon: SteelCruiserArtilleryE
+		Weapon: SteelCruiserArtillery_elite
 		LocalOffset: -150,-400,-25, -150,400,-25, -444,-400,-25, -444,400,-25
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect

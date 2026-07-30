@@ -454,7 +454,7 @@ SteelTwisterMissiles:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelTwisterMissilesE:
+SteelTwisterMissiles_elite:
 	Inherits: SteelTwisterMissiles
 	Range: 6000
 	Burst: 10
@@ -631,7 +631,7 @@ NaxGrilleArty:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 8
 
-NaxGrilleArtyE:
+NaxGrilleArty_elite:
 	Inherits: NaxGrilleArty
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 13333
@@ -1381,7 +1381,7 @@ LatinBuggyRocket:
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 
-LatinBuggyRocketE:
+LatinBuggyRocket_elite:
 	Inherits: LatinBuggyRocket
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 7000
