@@ -190,10 +190,12 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `^default.alien_mob` → `^default_alien_mob` mod-wide (76 files, 1183 replacements,
   commit `7f704c981`). `unit_upgrade` already fixed 2026-07-22. No dotted husk templates
   remain (all ground husks removed in prior commit). Boot-gate clean.
-- [ ] **Engine 910e50de migration** — the engine pin bump broke boot in places
-  the stricter parser now rejects. Fixed 2026-07-22: 4 template Description
-  indents (→ fluent keys), `unit_upgrade_template` (was `unit_upgrade.template`). Re-boot may
-  surface more; fix as found (master must always boot).
+- [x] **Engine 910e50de → 2cfb751694 migration** — engine pin updated to
+  `2cfb751694f13a41d4faedffbf9c0d1fad43d2e3` (2026-07-30). The stricter
+  parser issues from the earlier `910e50de` bump were fixed 2026-07-22
+  (4 template Description indents → fluent keys, `unit_upgrade_template`
+  rename). Current engine is clean; master boots. If a future engine bump
+  surfaces new parser rejections, fix as found (master must always boot).
 
 ## P0 — Crashes (always first)
 

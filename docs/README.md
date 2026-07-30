@@ -17,10 +17,13 @@ order below wins; fix the loser, never both.
 1. `CLAUDE.md` — mission, gates, memory rules (root).
 2. `LESSONS_LEARNED.md` — accumulated pitfalls, safe defaults.
 3. `AGENT_WORKSPACE.md` — mandatory workflow, evidence rules, commit gate.
-4. `DESIGN.md` — binding design contract (naming, stat formulas, tiers, content-pack layout, agent rules).
-5. `design/ROADMAP.md` — active work queue; pick from the top, record new bugs here.
-6. `audit/SUMMARY.md` — current known-issue state by bug class.
-7. Then the topic docs for your task (see the table).
+4. `PROJECT_CONTEXT.md` — short project orientation and current safety focus.
+5. `DESIGN.md` — binding design contract (naming, stat formulas, tiers, content-pack layout, agent rules).
+6. `design/ROADMAP.md` — active work queue; pick from the top, record new bugs here.
+7. `audit/SUMMARY.md` — current known-issue state by bug class.
+8. Then the topic docs for your task (see the table).
+
+The always-on rule file `.windsurf/rules/start-protocol.md` enforces this reading order, the boot-gate rule, and the engine update pipeline at the IDE level. If any document conflicts with it, the repository documents listed above win.
 
 Crashes and player-visible regressions always jump the queue.
 
