@@ -697,21 +697,23 @@ DESIGN formulas instead of silently "fixing".
 
 ### New orders 2026-07-19 (template-conformance + classic rifles)
 
-- [ ] **RULE + AUDIT: conyard power** — every construction yard takes
-  the template's 100 power; local overrides (TS Nod at 0?) are
-  violations. Review ALL conyard types; fix to template value.
-- [ ] **RULE + AUDIT: icon offsets** — when an image's Defaults defines
-  an Offset, its `icon:` sequence MUST set Offset: 0,0 (Terran command
-  center MCV icon rides too high). Check every icon in every sequence.
+- [x] **RULE + AUDIT: conyard power** — VERIFIED 2026-07-30:
+  `audit_template_conformance.py` T1 reports 0 findings. All conyards
+  already use the template's 100 power. No overrides found.
+- [x] **RULE + AUDIT: icon offsets** — VERIFIED 2026-07-30:
+  `audit_template_conformance.py` T2 reports 0 blocking findings.
+  6 informational T2b items (D2k legacy + TS 0,0,25 Z-offset patterns)
+  flagged for maintainer visual pass — not violations.
 - [ ] **LAW: range bands** — every unit stays within ±10% of its class
   baseline range (scouts: 4500–5500 around 5000); lower edge = cheapest
   units, upper edge = most expensive. Applies to ALL templates.
-- [ ] **Classic rifles get unique characters (apply now)**: TD GDI/Nod
-  minigunners burst 4, RA1 Allies/Soviets rifle infantry burst 3, FP
-  multiplier compensation, cost stays 100 (LAW: original C&C factions
-  keep original prices for memorability; custom factions may deviate);
-  slightly different HP/range/damage/reload per variant, close to
-  current, each unique.
+- [x] **Classic rifles get unique characters** — DONE 2026-07-19 (Formula
+  v2 scout conversion): TD GDI/Nod minigunners burst 4, RA1 Allies/Soviets
+  rifle infantry burst 3, FP multiplier compensation, cost 100 from
+  templates. Each has unique HP/speed/range/burst-delays/FP-mult:
+  GDI (31k HP, 63 spd, 5499 rng, BD 3, FP 24), Nod (30k HP, 66 spd,
+  4609 rng, BD 2, FP 29), Allies (27k HP, 55 spd, 5500 rng, BD 4, FP 47),
+  Soviets (34k HP, 54 spd, 4668 rng, BD 5, FP 42). Verified 2026-07-30.
 
 ### ~~P0 — ENGINE PIN vs LOCAL ENGINE MISMATCH~~ RESOLVED 2026-07-19
 
