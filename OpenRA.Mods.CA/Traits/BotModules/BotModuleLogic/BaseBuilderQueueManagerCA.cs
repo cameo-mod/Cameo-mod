@@ -378,19 +378,26 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Next is to build up a strong economy
-			if (!baseBuilder.HasAdequateRefineryCount() && !baseBuilder.HasMaxRefineries)
+			if (!baseBuilder.HasAdequateRefineryCount())
 			{
 				var refinery = GetProducibleBuilding(baseBuilder.Info.RefineryTypes, buildableThings);
-				if (refinery != null && HasSufficientPowerForActor(refinery))
-				{
-					AIUtils.BotDebug("{0} decided to build {1}: Priority override (refinery)", queue.Actor.Owner, refinery.Name);
-					return refinery;
-				}
 
-				if (power != null && refinery != null && !HasSufficientPowerForActor(refinery))
+				// RefineryLimit is shared across every faction the player owns, so always allow
+				// a faction's own first refinery through even if that global cap has already
+				// been reached by a different faction's construction yard.
+				if (refinery != null && !baseBuilder.HasMaxRefineriesFor(refinery))
 				{
-					AIUtils.BotDebug("{0} decided to build {1}: Priority override (would be low power)", queue.Actor.Owner, power.Name);
-					return power;
+					if (HasSufficientPowerForActor(refinery))
+					{
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override (refinery)", queue.Actor.Owner, refinery.Name);
+						return refinery;
+					}
+
+					if (power != null && !HasSufficientPowerForActor(refinery))
+					{
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override (would be low power)", queue.Actor.Owner, power.Name);
+						return power;
+					}
 				}
 			}
 
@@ -497,7 +504,7 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 				}
 
-				if (baseBuilder.Info.RefineryTypes.Contains(name) && baseBuilder.HasMaxRefineries)
+				if (baseBuilder.Info.RefineryTypes.Contains(name) && baseBuilder.HasMaxRefineriesFor(actorInfo))
 					continue;
 
 				// If we're considering to build a naval structure, check whether there is enough water inside the base perimeter
@@ -616,7 +623,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		(CPos? Location, CPos? BaseCenter, int Variant) ChooseBuildLocation(string actorType, bool distanceToBaseIsImportant, Actor producer, BuildingType type)
 		{
-			var baseCenter = baseBuilder.GetRandomBaseCenter();
+			var baseCenter = baseBuilder.GetBaseCenterForActor(world.Map.Rules.Actors[actorType]);
 
 			switch (type)
 			{

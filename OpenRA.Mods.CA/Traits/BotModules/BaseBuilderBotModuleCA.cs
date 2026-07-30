@@ -218,6 +218,49 @@ namespace OpenRA.Mods.CA.Traits
 			return randomConstructionYard?.Location ?? initialBaseCenter;
 		}
 
+		// Resolves the exact construction yard actor type that this building's Prerequisites
+		// (after inheritance flattening) requires, or null if it doesn't require one specific
+		// construction yard type (e.g. faction-agnostic shared buildings like ra1_powerplant
+		// which use a generic "~rafact" token satisfied by any RA1 construction yard).
+		public string GetRequiredConstructionYardType(ActorInfo actorInfo)
+		{
+			var bi = actorInfo.TraitInfoOrDefault<BuildableInfo>();
+			if (bi == null)
+				return null;
+
+			foreach (var prereq in bi.Prerequisites)
+			{
+				var name = prereq.Replace("~", string.Empty).Replace("!", string.Empty);
+				if (Info.ConstructionYardTypes.Contains(name))
+					return name;
+			}
+
+			return null;
+		}
+
+		// Anchor placement/expansion checks on a construction yard belonging to the same
+		// faction as the building being placed, rather than a random construction yard from
+		// any faction. This matters when the player owns construction yards from multiple
+		// factions at once (e.g. a stray enemy MCV of a different faction deployed into an
+		// existing base) - otherwise a crowded main base can starve a smaller secondary base
+		// of the same faction from ever finding room to build, since GetRandomBaseCenter()
+		// might repeatedly anchor searches on the wrong (unrelated) faction's construction yard.
+		public CPos GetBaseCenterForActor(ActorInfo actorInfo)
+		{
+			var conyardType = GetRequiredConstructionYardType(actorInfo);
+			if (conyardType != null)
+			{
+				var matchingConstructionYard = ConstructionYardBuildings.Actors
+					.Where(a => !a.IsDead && a.Info.Name == conyardType)
+					.RandomOrDefault(world.LocalRandom);
+
+				if (matchingConstructionYard != null)
+					return matchingConstructionYard.Location;
+			}
+
+			return GetRandomBaseCenter();
+		}
+
 		public CPos GetDefenseBaseCenter()
 		{
 			var defenceConstructionYard = DefenseCenter != null ? ConstructionYardBuildings.Actors.OrderBy(a => (DefenseCenter.Value - a.Location).LengthSquared)
@@ -623,23 +666,42 @@ namespace OpenRA.Mods.CA.Traits
 					world.IsCellBuildable(rallyPointLocation, rallyPointLocation, null, buildingInfo));
 		}
 
-		public bool HasMaxRefineries
+		// RefineryLimit (via BotLimits) is a single difficulty-scaled cap shared across every
+		// construction yard the player owns, regardless of faction. Without the candidate
+		// override below, a stray/secondary construction yard of a different faction than the
+		// player's main base could never get its own first refinery once the main base alone
+		// had already reached the global cap - starving that base's economy (and everything
+		// that depends on it) indefinitely. Passing the specific refinery actor being
+		// considered lets us always allow a faction's first refinery through.
+		public bool HasMaxRefineries => HasMaxRefineriesFor(null);
+
+		public bool HasMaxRefineriesFor(ActorInfo candidate)
 		{
-			get
+			if (candidate != null)
 			{
-				var currentRefineryCount = AIUtils.CountActorByCommonName(RefineryBuildings);
-
-				if (refineryLimit != 0 && currentRefineryCount >= refineryLimit)
-					return true;
-
-				foreach (var r in Info.RefineryTypes)
+				var conyardType = GetRequiredConstructionYardType(candidate);
+				if (conyardType != null)
 				{
-					if (BuildingsBeingProduced != null && BuildingsBeingProduced.ContainsKey(r))
-						currentRefineryCount += BuildingsBeingProduced[r];
-				}
+					var factionHasRefinery = RefineryBuildings.Actors.Any(a => !a.IsDead
+						&& GetRequiredConstructionYardType(a.Info) == conyardType);
 
-				return currentRefineryCount >= AIUtils.CountActorByCommonName(ConstructionYardBuildings) * Info.RefineriesPerBase + Info.MaxExtraRefineries;
+					if (!factionHasRefinery)
+						return false;
+				}
 			}
+
+			var currentRefineryCount = AIUtils.CountActorByCommonName(RefineryBuildings);
+
+			if (refineryLimit != 0 && currentRefineryCount >= refineryLimit)
+				return true;
+
+			foreach (var r in Info.RefineryTypes)
+			{
+				if (BuildingsBeingProduced != null && BuildingsBeingProduced.ContainsKey(r))
+					currentRefineryCount += BuildingsBeingProduced[r];
+			}
+
+			return currentRefineryCount >= AIUtils.CountActorByCommonName(ConstructionYardBuildings) * Info.RefineriesPerBase + Info.MaxExtraRefineries;
 		}
 
 		// Require at least one refinery, unless we can't build it.
