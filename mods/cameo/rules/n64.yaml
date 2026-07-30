@@ -1242,6 +1242,8 @@ N64NUK2GDI:
 	ScalePowerWithHealth:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: building ##########
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: N64NUKEGDI
 
 N64NUK2NOD:
 	Inherits: ^BaseBuilding

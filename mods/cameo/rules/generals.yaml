@@ -5913,6 +5913,8 @@ chpower2:
 		Amount: 500
 	RenderSprites:
 		Image: chpower2
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: chpower
 
 chbarracks:
 	Inherits: ^BaseBuilding

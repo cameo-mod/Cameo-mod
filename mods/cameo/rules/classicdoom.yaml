@@ -532,6 +532,8 @@ WOLFAPWR:
 		UseDeathTypeSuffix: false
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: building ##########
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: WOLFPOWR
 	WithIdleOverlay@BOX:
 		Sequence: box-overlay
 	WithIdleOverlay@BOX2:

@@ -214,6 +214,8 @@ WNUK2:
 		Name: Tall Windmill
 	ProvidesPrerequisite:
 		Prerequisite: wnuk2
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: wnuke
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: wnuke

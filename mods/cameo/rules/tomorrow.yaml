@@ -1682,6 +1682,8 @@ DTPOWER2:
 		UseDeathTypeSuffix: false
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: building ##########
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: DTPOWER
 
 DTPYLE:
 	Inherits: ^BaseBuilding
