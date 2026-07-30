@@ -164,7 +164,10 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
 - [ ] NEW BUILDING: RA1 Soviets Tier-4 dummy (forward-command-center sprite,
   placeholder `ra1_soviets_experimentaltechcenter`) unlocking the heavy-infantry
   shocktrooper; ladder T3=tech center, T4=experimental. (Needs a real name.)
-- [ ] Rocket troopers: raise td_nod + td_gdi to 300 (weak at 200).
+- [x] Rocket troopers: raise td_nod + td_gdi to 300 (weak at 200). DONE
+  2026-07-30: changed ^E3 template Cost from 200 to 300 in
+  ContentPacks/TiberianDawn/Shared/yaml/templates.yaml. RA1 rocket
+  soldiers already at 300 via ^RA1AlliesAlliedRocketSoldier.
 - [ ] Heavy-sniper verifier warhead recipe (yuri_virus/ts_nod_toxintrooper):
   sniper+chaingun+railgun templates, equal warheads; virus upgrade 1 = +light
   chemical, upgrade 2 = +medium chemical; spawned gas = special K+0.25 (1.25×).
