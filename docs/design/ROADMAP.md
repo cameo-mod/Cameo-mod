@@ -190,12 +190,13 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `^default.alien_mob` → `^default_alien_mob` mod-wide (76 files, 1183 replacements,
   commit `7f704c981`). `unit_upgrade` already fixed 2026-07-22. No dotted husk templates
   remain (all ground husks removed in prior commit). Boot-gate clean.
-- [x] **Engine 910e50de → 2cfb751694 migration** — engine pin updated to
-  `2cfb751694f13a41d4faedffbf9c0d1fad43d2e3` (2026-07-30). The stricter
-  parser issues from the earlier `910e50de` bump were fixed 2026-07-22
-  (4 template Description indents → fluent keys, `unit_upgrade_template`
-  rename). Current engine is clean; master boots. If a future engine bump
-  surfaces new parser rejections, fix as found (master must always boot).
+- [x] **Engine 910e50de → 2cfb751694 → ba153be0c6 migration** — engine pin
+  updated to `ba153be0c63b66a9e33b4ebd1f262768ff949e13` (2026-07-30, fixes
+  cargo pips showing 0). The stricter parser issues from the earlier
+  `910e50de` bump were fixed 2026-07-22 (4 template Description indents →
+  fluent keys, `unit_upgrade_template` rename). Current engine is clean;
+  master boots. If a future engine bump surfaces new parser rejections,
+  fix as found (master must always boot).
 
 ## P0 — Crashes (always first)
 
@@ -401,10 +402,16 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `ÜbermenschLaser(E)` → `UbermenschLaser(E)`, assets git-mv'd. RULE in
   DESIGN §1: Ü→u, Ö→o, Ä→a, ß→ss in ids; display names keep umlauts.
 
-- [ ] **BUG: cameo tileset palettes** — wrong palettes for ALL smudges,
-  craters and building bibs on the cameo tileset. Effort: M (tileset
-  palette wiring investigation). Reported by maintainer; got lost from
-  an earlier queue — do not lose again.
+- [x] **BUG: cameo tileset palettes** — FIXED 2026-07-30: root cause was
+  that CAMEO's `terrain` and `staticterrain` palettes used `temperat.pal`
+  while all CAMEO tile templates use `Palette: ra_temperat` and all
+  bib/smudge sprites (`.tem` files) were designed for `ra_temperat.pal`.
+  The `temperat.pal` and `ra_temperat.pal` are different palette files,
+  causing color mismatches on smudges, craters, and building bibs.
+  Fix: changed both `PaletteFromFile@terrain-cameo` and
+  `PaletteFromFile@staticterrain-cameo` in `rules/palettes.yaml` from
+  `temperat.pal` to `ra_temperat.pal`. Reported by maintainer; was lost
+  from an earlier queue.
 - [x] **SM promotion grid (maintainer's design, image 2026-07-17)** —
   3 columns x 4 ranks implemented in `SchwarzerMond/yaml/promotions.yaml`.
   [Übermensch/Laser Tank(rpl Beetle)/Crystal Tank/Parzival] |
@@ -1721,16 +1728,13 @@ All other factions have a single, thematically appropriate wall type.
 
 ## Starcraft Rank Decoration Fix
 
-- [ ] **SC-RANKS: Split alien rank decoration per Starcraft faction**
-  — commit `b95f5e7f3` applied `^AlienRankDecoration` to ALL Starcraft
-  factions (Terran, Protoss, Zerg). It should only apply to Zerg. Fix:
-  (a) Zerg actors keep `^AlienRankDecoration` with `alienrank` image.
-  (b) Create `^TerranRankDecoration` with a new `terranrank` spritesheet
-      (placeholder graphics OK) and wire to all Terran actors.
-  (c) Create `^ProtossRankDecoration` with a new `protossrank` spritesheet
-      (placeholder graphics OK) and wire to all Protoss actors.
-  Add new rank image sequences to `sequences/misc.yaml`.
-  Effort: M. See DESIGN.md §16.2 rank decoration table.
+- [x] **SC-RANKS: Split alien rank decoration per Starcraft faction**
+  — FIXED: commit `c3e3490f7` reverted the blanket `^AlienRankDecoration`,
+  commit `031c54d6b` created 3 separate decorations (`^ZergRankDecoration`
+  with `alienrank`, `^TerranRankDecoration` with `terranrank`,
+  `^ProtossRankDecoration` with `protossrank`). All use `alienranks.png`
+  as placeholder. 7 actors missing faction decorations fixed and
+  `audit_rank_decoration.py` reports 0 StarCraft issues.
 
 ## Weapon Suffix Standardization
 
