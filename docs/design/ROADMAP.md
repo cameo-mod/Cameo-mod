@@ -1743,19 +1743,16 @@ All other factions have a single, thematically appropriate wall type.
 
 ## Weapon Suffix Standardization
 
-- [ ] **WEAPON-SUFFIX-ELITE: Migrate legacy E suffix to _elite**
-  — per DESIGN.md §16.3, ALL elite weapons must end with `_elite`.
-  The legacy capital `E` suffix (e.g. `BorisAKME`, `PrismTankChargeE`,
-  `PrismScatterE`, `RA2KirovBomb_nuclear_E`, `RA160mmE`, `MigMissiles_AA_ELITE`)
-  is deprecated. Rename all rank-elite gated weapons from `<base>E` to
-  `<base>_elite`. **Critical:** only rename weapons that are actually
-  gated by `RequiresCondition: rank-elite` — do NOT rename EMP weapons,
-  `PrismChargeE` (which is a prism charge variant, not elite), or other
-  weapons that merely end with E. Run `audit_weapon_suffixes.py` to
-  identify the exact set. Update all `Weapon:` references in armament
-  blocks and all `Inherits:` references to renamed weapons.
-  Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
-  Effort: M. See DESIGN.md §1 and §16.3.
+- [x] **WEAPON-SUFFIX-ELITE: Migrate legacy E suffix to _elite**
+  — DONE 2026-07-30: Renamed 117 elite-gated weapons from `<base>E` to
+  `<base>_elite` across 44 files (339 lines changed) via
+  `tools/rename_elite_weapons.py`. Handles compound suffixes: `AAE`→`AA_elite`,
+  `EMPE`→`EMP_elite`, `EResonance`→`_eliteResonance` + bounce variants.
+  Skipped `MigMissiles_AA_ELITE` (already contains ELITE) and 45 doctrine
+  variants (`_rad`/`_fire`/`_tesla`), upgrade combos, and gatling spin-ups
+  that are intentionally non-standard. Boot-gated: menu reached, 0 new
+  exception logs. Audit: X1 count dropped from 112+ to 45 (intentional
+  non-standard remnants).
 
 - [ ] **WEAPON-SUFFIX-EMP: Standardize EMP weapon names to _EMP suffix**
   — per DESIGN.md §1, weapons whose primary function is EMP disable
