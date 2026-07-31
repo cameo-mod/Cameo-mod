@@ -1122,6 +1122,12 @@ actor_forgotten_apctruck =
       Strong vs Infantry
       Weak vs Tanks
 
+actor_forgotten_scarabapc =
+   .name = Scarab APC
+   .description = Armored personnel carrier that burrows underground.
+      Can carry infantry across any terrain undetected.
+      Unarmed
+
 actor_forgotten_missilevan =
    .name = Missile Van
    .description = Fragile van hurling missiles from extreme range.
