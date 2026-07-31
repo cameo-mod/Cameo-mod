@@ -58,6 +58,20 @@ and Siege Mammoth (RA1, verifier) share the same M-bucket + K or the 2.5× break
 
 **latinsyndicate_burrito → Artillery** (maintainer 2026-07-31): long range but CANNOT hit air ⇒ Artillery, not MissileVehicle.
 
+**⚠ PER-UNIT APPLICATION LAW (maintainer 2026-07-31 — do NOT misread the table):** the HP/Cost, DPS/Cost
+and A/B aggregates exist ONLY to compare the 13 BASELINE actors against each other and set the class
+center. They are **NOT per-unit targets** — members of a class must NOT all inherit the baseline's ratios;
+the GOAL is **MORE uniqueness between units of a class**. Application model:
+1. **2c sets ONLY the 13 baseline actors** (+ verifiers) to the exact table stats — the anchor per class.
+2. The **balance FORMULA** takes its weights from that class baseline actor.
+3. Each **member's stats** are then set by **SYNTHESIS** — an aggregate of **(a)** the OLD Cameo relative
+   values, **(b)** every relative stat from the cross-game/mod data-mining, and **(c)** deep reasoning on
+   where each unit sits relative to its class baseline. **RE-READ** the research before this pass:
+   `docs/design/ORIGINAL_UNIT_STATS.md`, `docs/design/BALANCE_SYNTHESIS.md`, the extracted-mod ledgers,
+   and memories [[cameo-balance-synthesis]] + [[cameo-source-library-scope]].
+This is a **massive, compute-intensive pass** and is the real "apply the class" work — the per-member
+spread, NOT a copy of the baseline ratios. `fit_class` then prices each synthesized member.
+
 ═══ (the 2026-07-28 table below is SUPERSEDED by the revision above; kept for baseline/verifier/armor refs) ═══
 
 ## The 13 vehicle classes — 2026-07-28 numbers (SUPERSEDED by REVISION above; armor/baseline/verifier cols still current)
