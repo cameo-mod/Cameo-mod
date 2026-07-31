@@ -11,7 +11,7 @@ RA2AsianShotgun:
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect
 
-RA2AsianShotgunE:
+RA2AsianShotgun_elite:
 	Inherits: RA2AsianShotgun
 	Range: 5567
 	Burst: 2
@@ -36,7 +36,7 @@ AsianGrenade:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 2
 
-AsianGrenadeE:
+AsianGrenade_elite:
 	Inherits: AsianGrenade
 	Range: 5567
 	Burst: 2

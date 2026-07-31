@@ -830,7 +830,7 @@ Lunar_GreenTigerCannon:
 		Damage: 2
 	Report: laser_cannon3_4.wav
 
-Lunar_GreenTigerCannonE:
+Lunar_GreenTigerCannon_elite:
 	Inherits: ^TeslaWeapon
 	Inherits@Cannon: LunarTigerCannon_elite
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
@@ -854,7 +854,7 @@ Lunar_GreenJadgDestroyer:
 		Damage: 15
 	Report: laser_cannon3_4.wav
 
-Lunar_GreenJadgDestroyerE:
+Lunar_GreenJadgDestroyer_elite:
 	Inherits: ^TeslaWeapon
 	Inherits@Cannon: LunarNaxiJadgDestroyer_elite
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
@@ -878,7 +878,7 @@ Lunar_GreenGrilleArty:
 		Damage: 8
 	Report: laser_cannon3_2.wav
 
-Lunar_GreenGrilleArtyE:
+Lunar_GreenGrilleArty_elite:
 	Inherits: ^TeslaWeapon
 	Inherits@Cannon: NaxGrilleArty_elite
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons

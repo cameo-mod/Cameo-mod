@@ -335,7 +335,7 @@ schwarzermond_lunartiger:
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_vrilpoweredweapons
 	Armament@elite-upgrade:
 		Name: primary
-		Weapon: Lunar_GreenTigerCannonE
+		Weapon: Lunar_GreenTigerCannon_elite
 		Recoil: 256
 		RecoilRecovery: 32
 		LocalOffset: 1500,0,0
@@ -408,7 +408,7 @@ schwarzermond_neojagdpanzer:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_vrilpoweredweapons
 	Armament@elite-upgrade:
-		Weapon: Lunar_GreenJadgDestroyerE
+		Weapon: Lunar_GreenJadgDestroyer_elite
 		LocalOffset: 400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -481,7 +481,7 @@ schwarzermond_lunargrille:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_vrilpoweredweapons
 	Armament@elite-upgrade:
-		Weapon: Lunar_GreenGrilleArtyE
+		Weapon: Lunar_GreenGrilleArty_elite
 		LocalOffset: 500,0,150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect

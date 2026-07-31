@@ -381,7 +381,7 @@ latinsyndicate_rushertank:
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_doctrine_cartelrockets && !rank-elite
 	Armament@AAE:
-		Weapon: LatinRusherRocketE
+		Weapon: LatinRusherRocket_elite
 		LocalOffset: 600,200,300, 600,-200,300
 		Recoil: 85
 		MuzzleSequence: muzzle
@@ -471,7 +471,7 @@ latinsyndicate_smokertank:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@GrenadePackE:
-		Weapon: RA2GrenadePackE
+		Weapon: RA2GrenadePack_elite
 		LocalOffset: 600,100,300, 600,200,300, 600,-100,300, 600,-200,300
 		Recoil: 128
 		RecoilRecovery: 32
@@ -486,7 +486,7 @@ latinsyndicate_smokertank:
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_doctrine_cartelrockets && !rank-elite
 	Armament@AAE:
-		Weapon: LatinSmokerRocketE
+		Weapon: LatinSmokerRocket_elite
 		LocalOffset: 600,200,300, 600,-200,300
 		Recoil: 85
 		MuzzleSequence: muzzle
@@ -831,7 +831,7 @@ latinsyndicate_narcohummer:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@AGE:
-		Weapon: RA2NarcoAKME
+		Weapon: RA2NarcoAKM_elite
 		LocalOffset: 600,0,300
 		Recoil: 85
 		MuzzleSequence: muzzle
@@ -915,7 +915,7 @@ latinsyndicate_carteltruck:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@AGE:
-		Weapon: RA2Narco60mmE
+		Weapon: RA2Narco60mm_elite
 		LocalOffset: 600,0,300
 		Recoil: 85
 		MuzzleSequence: muzzle

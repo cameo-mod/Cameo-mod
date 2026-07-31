@@ -168,7 +168,7 @@ RA2NarcoAKM:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 1
 
-RA2NarcoAKME:
+RA2NarcoAKM_elite:
 	Inherits: RA2NarcoAKM
 	Range: 6800
 	Burst: 2
@@ -186,7 +186,7 @@ RA2Narco60mm:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 8
 
-RA2Narco60mmE:
+RA2Narco60mm_elite:
 	Inherits: RA2Narco60mm
 	Range: 6800
 	Burst: 2
@@ -623,7 +623,7 @@ LatinRusherRocket:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 8
 
-LatinRusherRocketE:
+LatinRusherRocket_elite:
 	Inherits: LatinRusherRocket
 	Range: 6031
 	Projectile: Missile
@@ -730,7 +730,7 @@ RA2GrenadePack:
 		Range: 1310
 		ValidTargets: Ground, Water, Air
 
-RA2GrenadePackE:
+RA2GrenadePack_elite:
 	Inherits: RA2GrenadePack
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 7550
@@ -751,7 +751,7 @@ LatinSmokerRocket:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 12
 
-LatinSmokerRocketE:
+LatinSmokerRocket_elite:
 	Inherits: LatinSmokerRocket
 	Range: 7550
 	Projectile: Missile

@@ -211,13 +211,13 @@ ra2_soviets_flaktrack:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@AAE:
-		Weapon: RA2FlakTrackAAGunE
+		Weapon: RA2FlakTrackAAGun_elite
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
 	Armament@AGE:
-		Weapon: RA2FlakTrackGunE
+		Weapon: RA2FlakTrackGun_elite
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
