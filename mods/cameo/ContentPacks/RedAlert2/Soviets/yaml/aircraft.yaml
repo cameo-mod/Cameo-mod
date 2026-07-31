@@ -160,19 +160,19 @@ ra2_soviets_siegechopper:
 		Voice: DeployedAttack
 	Armament@DeployedEliteRad:
 		Name: deployed
-		Weapon: RA160mmE_elite_rad
+		Weapon: RA160mmE_rad_elite
 		LocalOffset: 410,0,650
 		RequiresCondition: rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed
 		Voice: DeployedAttack
 	Armament@DeployedEliteFire:
 		Name: deployed
-		Weapon: RA160mmE_elite_fire
+		Weapon: RA160mmE_fire_elite
 		LocalOffset: 410,0,650
 		RequiresCondition: rank-elite && ra2_soviets_doctrine_firemunitions && deployed
 		Voice: DeployedAttack
 	Armament@DeployedEliteTesla:
 		Name: deployed
-		Weapon: RA160mmE_elite_tesla
+		Weapon: RA160mmE_tesla_elite
 		LocalOffset: 410,0,650
 		RequiresCondition: rank-elite && ra2_soviets_doctrine_teslamunitions && deployed
 		Voice: DeployedAttack

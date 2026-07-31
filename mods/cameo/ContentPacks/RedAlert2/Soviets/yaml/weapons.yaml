@@ -245,21 +245,21 @@ RA2120mm_tesla:
 		AimChance: 100
 		AimTargetStances: Enemy, Neutral
 
-RA2120mm_elite_rad:
+RA2120mm_rad_elite:
 	Inherits: RA2120mm_rad
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 6374
 	Burst: 2
 	BurstDelays: 3
 
-RA2120mm_elite_fire:
+RA2120mm_fire_elite:
 	Inherits: RA2120mm_fire
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 6374
 	Burst: 2
 	BurstDelays: 3
 
-RA2120mm_elite_tesla:
+RA2120mm_tesla_elite:
 	Inherits: RA2120mm_tesla
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 6374
@@ -364,7 +364,7 @@ RA160mmE_elite:
 	Burst: 2
 	BurstDelays: 3
 
-RA160mmE_elite_rad:
+RA160mmE_rad_elite:
 	Inherits@rad: ^NuclearWarhead
 	Inherits: RA160mm_rad
 	Inherits@Elite: ^RA2EliteEffects
@@ -376,7 +376,7 @@ RA160mmE_elite_rad:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2nukesmall
 
-RA160mmE_elite_fire:
+RA160mmE_fire_elite:
 	Inherits: RA160mm_fire
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 12345
@@ -388,7 +388,7 @@ RA160mmE_elite_fire:
 		Weapon: AsianOilBombFragments
 		Amount: 2
 
-RA160mmE_elite_tesla:
+RA160mmE_tesla_elite:
 	Inherits: RA160mm_tesla
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 12345
@@ -489,21 +489,21 @@ RA2120xmm_elite:
 	Burst: 4
 	BurstDelays: 3
 
-RA2120xmm_elite_rad:
+RA2120xmm_rad_elite:
 	Inherits: RA2120xmm_rad
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 7992
 	Burst: 4
 	BurstDelays: 3
 
-RA2120xmm_elite_fire:
+RA2120xmm_fire_elite:
 	Inherits: RA2120xmm_fire
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 7992
 	Burst: 4
 	BurstDelays: 3
 
-RA2120xmm_elite_tesla:
+RA2120xmm_tesla_elite:
 	Inherits: RA2120xmm_tesla
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 7992

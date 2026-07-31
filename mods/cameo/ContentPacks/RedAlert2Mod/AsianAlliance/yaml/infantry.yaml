@@ -123,7 +123,7 @@ asianalliance_asiantankkiller:
 		RequiresCondition: rank-elite && !asianalliance_doctrine_modernizedinfantryequipment
 	Armament@PRIMARYELITEUpgrade:
 		Name: primary
-		Weapon: AsianTankKillerRocket_elite_upgrade
+		Weapon: AsianTankKillerRocket_upgrade_elite
 		LocalOffset: 128,0,256
 		RequiresCondition: rank-elite && asianalliance_doctrine_modernizedinfantryequipment
 	Armament@GARRISONED:
@@ -140,7 +140,7 @@ asianalliance_asiantankkiller:
 		RequiresCondition: rank-elite && !asianalliance_doctrine_modernizedinfantryequipment
 	Armament@GARRISONEDELITEUpgrade:
 		Name: garrisoned
-		Weapon: AsianTankKillerRocket_elite_upgrade
+		Weapon: AsianTankKillerRocket_upgrade_elite
 		RequiresCondition: rank-elite && asianalliance_doctrine_modernizedinfantryequipment
 	AttackFrontal:
 		FacingTolerance: 0

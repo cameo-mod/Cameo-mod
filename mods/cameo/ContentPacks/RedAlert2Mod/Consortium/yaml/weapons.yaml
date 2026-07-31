@@ -54,20 +54,20 @@ SteelCloneGunResonanceBounce2:
 SteelCloneGunResonance_elite:
 	Inherits: SteelCloneGun_elite
 	Warhead@shrapnel: FireShrapnel
-		Weapon: SteelCloneGunResonance_eliteBounce1
+		Weapon: SteelCloneGunResonanceBounce1_elite
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
 
-SteelCloneGunResonance_eliteBounce1:
+SteelCloneGunResonanceBounce1_elite:
 	Inherits: SteelCloneGunResonance_elite
 	Range: 3000
 	Warhead@shrapnel: FireShrapnel
-		Weapon: SteelCloneGunResonance_eliteBounce2
+		Weapon: SteelCloneGunResonanceBounce2_elite
 
-SteelCloneGunResonance_eliteBounce2:
+SteelCloneGunResonanceBounce2_elite:
 	Inherits: SteelCloneGunResonance_elite
 	Range: 2000
 	-Warhead@shrapnel:
@@ -754,20 +754,20 @@ SteelRunnerPistolsResonanceBounce2:
 SteelRunnerPistolsResonance_elite:
 	Inherits: SteelRunnerPistols_elite
 	Warhead@shrapnel: FireShrapnel
-		Weapon: SteelRunnerPistolsResonance_eliteBounce1
+		Weapon: SteelRunnerPistolsResonanceBounce1_elite
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
 
-SteelRunnerPistolsResonance_eliteBounce1:
+SteelRunnerPistolsResonanceBounce1_elite:
 	Inherits: SteelRunnerPistolsResonance_elite
 	Range: 3600
 	Warhead@shrapnel: FireShrapnel
-		Weapon: SteelRunnerPistolsResonance_eliteBounce2
+		Weapon: SteelRunnerPistolsResonanceBounce2_elite
 
-SteelRunnerPistolsResonance_eliteBounce2:
+SteelRunnerPistolsResonanceBounce2_elite:
 	Inherits: SteelRunnerPistolsResonance_elite
 	Range: 2400
 	-Warhead@shrapnel:
