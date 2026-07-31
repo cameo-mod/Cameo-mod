@@ -1659,12 +1659,12 @@ MigMissiles_elite:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 
-MigMissilesE_rad:
+MigMissiles_rad_elite:
 	Inherits: MigMissiles_rad
 	Range: 8600
 	Burst: 8
 
-MigMissilesE_fire:
+MigMissiles_fire_elite:
 	Inherits: MigMissiles_fire
 	Range: 8600
 	Burst: 8
@@ -1692,7 +1692,7 @@ MigMissiles_AA:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Air
 
-MigMissiles_AA_ELITE:
+MigMissiles_AA_elite:
 	Inherits: MigMissiles_elite
 	ValidTargets: Air
 	Projectile: Missile

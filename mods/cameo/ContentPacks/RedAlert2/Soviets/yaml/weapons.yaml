@@ -179,7 +179,7 @@ RA2KirovBomb_nuclear:
 		Level: 800
 		LayerName: ra2radiation
 
-RA2KirovBomb_nuclear_E:
+RA2KirovBomb_nuclear_elite:
 	Inherits: RA2KirovBomb_nuclear
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 100000
@@ -701,7 +701,7 @@ RA2RadEruptionWeapon:
 #		Mind Control
 ####################################################################################################
 
-MigMissilesE_tesla:
+MigMissiles_tesla_elite:
 	Inherits: MigMissiles_tesla
 	Range: 8600
 	Burst: 8
