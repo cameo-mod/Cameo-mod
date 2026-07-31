@@ -581,7 +581,7 @@ ts_nod_stealthgenerator:
 
 ts_nod_helipad:
 	Defaults:
-		Scale: 1.25
+		Scale: 1.5
 		Filename: ts_nod_helipad.shp
 		Offset: 0, -24, 0
 	idle:
@@ -657,7 +657,7 @@ ts_nod_tiberiumrefinery:
 ts_nod_tiberiumwastefacility:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Scale: 1.25
+		Scale: 1.5
 		Filename: ts_nod_tiberiumwastefacility.shp
 		Offset: 0, 0, 24
 	idle:
