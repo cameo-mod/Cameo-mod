@@ -1763,6 +1763,10 @@ All other factions have a single, thematically appropriate wall type.
   that are intentionally non-standard. Boot-gated: menu reached, 0 new
   exception logs. Audit: X1 count dropped from 112+ to 45 (intentional
   non-standard remnants).
+  **Follow-up** (2026-07-31): Renamed 17 remaining deprecated `E`-suffix
+  weapons missed by the first pass (33 replacements across 15 files) via
+  `tools/rename/rename_elite_E_suffix.py`. X4 dropped 19→2 (only `HE` =
+  High Explosive false positives remain). Boot-gated, O2=0, V3=0.
 
 - [x] **WEAPON-SUFFIX-EMP: Standardize EMP weapon names to _EMP suffix**
   — DONE 2026-07-31: Renamed 62 EMP weapons across 44 files (179 lines
