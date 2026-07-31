@@ -13,7 +13,54 @@ _This section SUPERSEDES all the iterative discussion below. A fresh session sho
 authoritative final state of the vehicle overhaul. Everything below the `═══` divider is iteration
 history / per-class rationale (still valid as reasoning, but the numbers here are the final ones)._
 
-## The 13 vehicle classes — FINAL numbers (all maintainer-confirmed, ALL stats unique per column)
+## ⚠ REVISION 2026-07-31 (maintainer re-tuning — PENDING "did it fix the problems?" confirmation)
+The maintainer re-opened the ladder on 2026-07-31 with a batch of speed/ratio edits. **This table
+SUPERSEDES the 2026-07-28 numbers below.** Costs unchanged. Ordered by composite Total = A+B (descending).
+
+Edits applied (in order): MBT spd→95 (mid of LightTank 125 & HighTech 65), HP/Cost→300, DPS/Cost→0.75 ·
+LightTank spd→125 · HighTech spd→65, HP/Cost→350, DPS/Cost→1.00 · Dreadnought DPS/Cost→1.25 ·
+TankDestroyer DPS/Cost→1.50 · Artillery spd→75 · LineBreaker spd→80 · AntiAir spd→110 · MissileVehicle spd→100.
+
+**⚠ interpretation flag:** "HP/Cost of the High Tech Tank to 1.0 and the dreadnought to 1.25 and Tank
+Destroyer 1.5" was read as **DPS/Cost** (literal HP/Cost 1.0 is impossible, and a later message set HighTech
+HP/Cost = 350). CONFIRM.
+
+| # | Class | Cost | HP | Spd | DPS | Range | HP/Cost | DPS/Cost | A=HP/C·Spd | B=DPS/C·Rng | A+B |
+|--|--|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| 1 | LineBreaker | 1600 | 800,000 | 80 | 1,600 | 2,500 | 500 | 1.00 | 40,000 | 2,500 | **42,500** |
+| 2 | LightTank | 400 | 100,000 | 125 | 200 | 5,000 | 250 | 0.50 | 31,250 | 2,500 | 33,750 |
+| 3 | MBT | 800 | 240,000 | 95 | 600 | 5,500 | 300 | 0.75 | 28,500 | 4,125 | 32,625 |
+| 4 | EpicVehicle | 10000 | 5,000,000 | 45 | 10,000 | 8,500 | 500 | 1.00 | 22,500 | 8,500 | 31,000 |
+| 5 | HighTechTank | 2000 | 700,000 | 65 | 2,000 | 6,500 | 350 | 1.00 | 22,750 | 6,500 | 29,250 |
+| 6 | Dreadnought | 3000 | 1,200,000 | 50 | 3,750 | 7,000 | 400 | 1.25 | 20,000 | 8,750 | 28,750 |
+| 7 | Scout | 300 | 30,000 | 200 | 450 | 4,500 | 100 | 1.50 | 20,000 | 6,750 | 26,750 |
+| 8 | ArtilleryTank | 700 | 140,000 | 85 | 525 | 12,000 | 200 | 0.75 | 17,000 | 9,000 | 26,000 |
+| 9 | TankDestroyer | 600 | 150,000 | 55 | 900 | 7,500 | 250 | 1.50 | 13,750 | 11,250 | 25,000 |
+| 10 | Artillery | 500 | 50,000 | 75 | 500 | 15,000 | 100 | 1.00 | 7,500 | 15,000 | 22,500 |
+| 11 | FireSupport | 1400 | 105,000 | 90 | 2,100 | 10,000 | 75 | 1.50 | 6,750 | 15,000 | 21,750 |
+| 12 | AntiAir | 1000 | 125,000 | 110 | 1,250 | 6,000 | 125 | 1.25 | 13,750 | 7,500 | 21,250 |
+| 13 | MissileVehicle | 1200 | 120,000 | 100 | 1,200 | 8,000 | 100 | 1.00 | 10,000 | 8,000 | 18,000 |
+
+All 5 base stats (HP/Spd/DPS/Range/Cost) remain UNIQUE per column ✓ (MBT HP 220k→240k).
+
+**Baseline actor change (HighTechTank):** baseline RA1 Soviet Mammoth → **TD GDI Mammoth Tank**
+(`td_gdi_mammothtank`); RA1 Soviet Mammoth (`ra1_soviets_mammothtank`) demoted to a **mid variant at
+Spd 60 / Cost 2500** (more HP/Range/FP); **Siege Mammoth stays verifier**. ⚠ CONFIRM TD Mammoth (baseline)
+and Siege Mammoth (RA1, verifier) share the same M-bucket + K or the 2.5× breaks — [[cameo-verifier-tier-k-match]].
+
+**Did it fix the earlier problems? — verdict:**
+- ✅ FireSupport no longer efficiency-dominated by MissileVehicle (FS 21,750 > MV 18,000).
+- ⚠ **LineBreaker re-introduced as top outlier**: spd 60→80 pushes A back to 40,000 → Total 42,500 (exactly
+  what the earlier spd-60 drop had fixed). Only drawback = short 2,500 range. Accept as intentional slow
+  super-juggernaut, OR pull speed to ~65–70.
+- ⚠ **MissileVehicle is now the composite FLOOR** (18,000, below AntiAir & FireSupport) — pure flexer, no
+  standout stat. Fine as identity but worth a small bump if it feels weak in play.
+
+**latinsyndicate_burrito → Artillery** (maintainer 2026-07-31): long range but CANNOT hit air ⇒ Artillery, not MissileVehicle.
+
+═══ (the 2026-07-28 table below is SUPERSEDED by the revision above; kept for baseline/verifier/armor refs) ═══
+
+## The 13 vehicle classes — 2026-07-28 numbers (SUPERSEDED by REVISION above; armor/baseline/verifier cols still current)
 
 | Class | HP | Spd | DPS | Range | Cost | HP/Cost | DPS/Cost | Armor | Baseline actor | Verifier (2×HP/2×DPS/2.5×cost, matched tier+K) |
 |---|--:|--:|--:|--:|--:|--:|--:|---|---|---|

@@ -20,6 +20,36 @@ flagged inline. Faction reference: [FACTIONS.md](../FACTIONS.md)._
 
 ---
 
+## ▶ ACTIVE — VEHICLE BALANCE APPLY + BACKLOG (2026-07-31)
+
+**Vehicle ladder DESIGN is being re-tuned** — latest table = `docs/balance/anchor_decisions_log.md`
+"⚠ REVISION 2026-07-31" (PENDING maintainer "did it fix the problems?" confirm). STRUCTURAL work DONE +
+committed: `^MissileVehicleTemplate` + 10 reassignments (missile-MLRS family + Nod bikes) + `EpicBuff`
+removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
+
+**Queue (priority order):**
+1. **[BLOCKED on maintainer confirm + `--confirm`] Apply VEHICLE stats** — once the REVISION table is
+   confirmed: baselines → `apply_balance --confirm` (fit_class scales members 0.5–4.0×, verifier 2.5×) →
+   armor normalization → self-heal Step → epic 4×HP + MonsterTank DPS→10000 → re-extract → audits + BOOT →
+   commit yaml+ledger. THEN **infantry** (build the same big class table first, then apply).
+2. **[L] Regression sweep** — review all commits since ~2026-07-24; hunt fluent/description-reference
+   breakages like the RA1-Soviet upgrade regression (broke in `53fb10725`, fixed `f68a01833`). Pattern:
+   renames that update Fluent keys but leave live `Buildable.Description` refs pointing at the old key.
+3. **[L] Repo cleanup** — audit duplicate/overlapping python scripts (multiple balance + rename scripts)
+   and docs; propose merge/generalize/delete plan. NO deletes without maintainer sign-off.
+4. **[M] New weapon templates** (AFTER vehicles) — kill warhead-mixing, **HARD LIMIT 2 inherits/weapon**
+   (special >2 only if justified, bar TBD); then weapon-class pipeline + unit↔weapon binding. Maintainer
+   names them + I propose. See [[cameo-weapon-structure-rules]].
+5. **Weapons-hygiene batch** — folds into #4 (also fix the duplicate `227mm` weapon def in
+   `weapons/tiberiandawn.yaml` vs `weapons/missiles.yaml`).
+
+**ENGINE workflow (Blackrobe 2026-07-31):** `cameo-mod/engine` is a git **submodule → origin
+`Cameo-mod/OpenRA`**, whose **main branch is `cameo-engine`**. Engine updates: branch off `cameo-engine`;
+**MIRROR changes both ways** (`cameo-engine` ↔ `cameo-mod/engine`); rebuild before the boot gate. Memory:
+`cameo-engine-submodule`.
+
+---
+
 ## 🔴 BUG — campaign maps vanish from editor + mission selector
 
 - [x] **FIXED** (`42ba6f34c`, 2026-07-27): Root cause was `LockFaction: Random`
