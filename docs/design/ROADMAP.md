@@ -841,6 +841,16 @@ pin revert (never committed). **RESOLVED: `make.cmd all` fetched b89ae60 and reb
   Taunts play at wave start, mid-wave (15-25s later), and final wave
   gets a third taunt. Lines reference faction lore, unit costs, memes,
   and internet culture. Database in maps/survival/generals.lua.**
+  (h) STARTING DEFENSES — IMPLEMENTED 2026-07-31: human players now
+  receive faction-specific power sources (~500 power) and defensive
+  turrets in 4-fold symmetric rings around their base. Turrets are
+  strictly own-faction and exclude garrisonable bunkers; the placement
+  budget targets ~10k cost per player, using the most expensive turrets
+  first and falling back to cheaper ones until the target is met.
+  `FactionTurrets`, `DefenseCosts`, and `FactionPowerPlantData` are
+  defined in `mods/cameo/maps/survival_work/script.lua`. Heavy support
+  starting army is wired but left disabled (`HeavySupport = false`) until
+  a map option is added.
 
 ### P1a — FORMULA V2 CLASS 1: SCOUT INFANTRY (maintainer 2026-07-18)
 
