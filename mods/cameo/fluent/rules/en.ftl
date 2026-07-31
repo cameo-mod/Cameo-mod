@@ -1,3 +1,8 @@
+lobby-option-heavy-support = Heavy Support
+lobby-option-heavy-support-desc = Grants each human player a small heavy starting army.
+lobby-option-enabled = Enabled
+lobby-option-disabled = Disabled
+
 power_ioncannon =
    .name = Ion Cannon
    .description = Initiate an Ion Cannon strike.
