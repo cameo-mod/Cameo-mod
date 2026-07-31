@@ -223,15 +223,29 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `^default.alien_mob` → `^default_alien_mob` mod-wide (76 files, 1183 replacements,
   commit `7f704c981`). `unit_upgrade` already fixed 2026-07-22. No dotted husk templates
   remain (all ground husks removed in prior commit). Boot-gate clean.
-- [x] **Engine 910e50de → 2cfb751694 → ba153be0c6 migration** — engine pin
-  updated to `ba153be0c63b66a9e33b4ebd1f262768ff949e13` (2026-07-30, fixes
-  cargo pips showing 0). The stricter parser issues from the earlier
-  `910e50de` bump were fixed 2026-07-22 (4 template Description indents →
-  fluent keys, `unit_upgrade_template` rename). Current engine is clean;
-  master boots. If a future engine bump surfaces new parser rejections,
-  fix as found (master must always boot).
+- [x] **Engine 910e50de → 2cfb751694 → ba153be0c6 → 1f71ccde9 migration** — engine pin
+  updated to `1f71ccde90c1194fe908702f2e915807b2f0f3fd` (2026-07-31, fixes
+  `InvalidOperationException` crash in `ClassicProductionQueueProperties` when
+  an actor with no production queue is produced via Lua). Previous pin
+  `ba153be0c6` (2026-07-30, fixes cargo pips showing 0). The stricter parser
+  issues from the earlier `910e50de` bump were fixed 2026-07-22 (4 template
+  Description indents → fluent keys, `unit_upgrade_template` rename). Current
+  engine is clean; master boots. If a future engine bump surfaces new parser
+  rejections, fix as found (master must always boot).
 
 ## P0 — Crashes (always first)
+
+- [x] **P0 CRASH: InvalidOperationException in ClassicProductionQueueProperties**
+  (2026-07-31, fixed): `System.InvalidOperationException: Sequence contains no
+  elements` at `ProductionProperties.cs:line 226` —
+  `GlobalProductionHandler` calls `.First()` on `BuildableInfo.Queue`,
+  crashing when an actor with no production queue is produced (e.g. via
+  Lua `Actor.Create` on survival maps). Engine fix in
+  `cameo-engine` commit `1f71ccde90`: replaced `.First()` with
+  `.FirstOrDefault()` + null guard in `GlobalProductionHandler`,
+  `Build()`, and `IsProducing()`. `mod.config` updated to
+  `1f71ccde90c1194fe908702f2e915807b2f0f3fd`. Boot-gate passed (menu
+  reached, 0 new exceptions).
 
 - [x] Voice-set rename crashes (`1616a26d2`); pink menu (`e956d2280`);
   boot crashes crab-junk/shadowteam/stale-DLL (`28ae47612`). LAW:
