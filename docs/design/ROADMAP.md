@@ -1754,20 +1754,14 @@ All other factions have a single, thematically appropriate wall type.
   exception logs. Audit: X1 count dropped from 112+ to 45 (intentional
   non-standard remnants).
 
-- [ ] **WEAPON-SUFFIX-EMP: Standardize EMP weapon names to _EMP suffix**
-  — per DESIGN.md §1, weapons whose primary function is EMP disable
-  must append `_EMP`. Current EMP weapons use inconsistent naming:
-  `SteelEmpBomb`, `TSEMPZapWeapon`, `TSEMPMine`, `TSMobileEMP`,
-  `TSCABALEMPDisable.anim`, `CorsairEMP`, `ScienceVesselEMP`,
-  `PortaTeslaEMP`, `TTankZapEMP`, `TeslaZapemp`, `edenEMP`,
-  `plymouthEMP`, `DREMPDevice`, `IxianEmpBomb`, `CHEMPBomb`,
-  `SUSAMLRSEMP`, `SUSAEMPMissileDefenderAG`, etc. Rename to
-  `<actor_prefix>_<descriptive>_EMP` pattern. **Do NOT confuse EMP
-  weapons with elite weapons** — the previous bulk rename (reverted)
-  made this mistake. EMP weapons are never gated by `rank-elite`.
-  Run `audit_weapon_suffixes.py` X2 section for the full list.
-  Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
-  Effort: M. See DESIGN.md §1.
+- [x] **WEAPON-SUFFIX-EMP: Standardize EMP weapon names to _EMP suffix**
+  — DONE 2026-07-31: Renamed 62 EMP weapons across 44 files (179 lines
+  changed) via `tools/rename_emp_weapons.py`. Handles: EMP suffix ->
+  _EMP, mid-name EMP -> _EMP_, compound EMPAA -> _EMP_AA, EMPulse ->
+  _EMP_Pulse, ArcTeslaFragment sub-variants. Case-insensitive global
+  replacement catches Weapon:, Weapons: list entries, and Inherits:
+  references. Skipped DREMPDeviceSound (audio VoiceSet) and EMPGrenade
+  (EMP is prefix). Boot-gated: menu reached, 0 new exception logs.
 
 - [ ] **WEAPON-SUFFIX-AA: Standardize anti-air weapon names to _AA suffix**
   — per DESIGN.md §1, weapons whose `ValidTargets` includes only `Air`
