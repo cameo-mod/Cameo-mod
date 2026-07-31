@@ -871,7 +871,7 @@ Nax120mmCorrosion:
 	Inherits: RA2120mm
 	Inherits@Corrosion: ^NaxOxidationShells
 
-Nax120mm_eliteCorrosion:
+Nax120mmCorrosion_elite:
 	Inherits: RA2120mm_elite
 	Inherits@Corrosion: ^NaxOxidationShells
 
@@ -1588,13 +1588,13 @@ RA2Robotmm_elite:
 		ImpactSounds: psahit00.aud
 		ExplosionPalette: effect
 	Warhead@Scatter: FireShrapnel
-		Weapon: RA2Robotmm_eliteScatter
+		Weapon: RA2RobotmmScatter_elite
 		Amount: 3
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water
 
-RA2Robotmm_eliteScatter:
+RA2RobotmmScatter_elite:
 	Inherits: RA2Robotmm_elite
 	Range: 2260
 	-Report:

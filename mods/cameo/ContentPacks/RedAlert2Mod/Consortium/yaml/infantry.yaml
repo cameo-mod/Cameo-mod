@@ -47,7 +47,7 @@ steelconsortium_clonetrooper:
 		Weapon: SteelCloneGunResonance
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeELITE:
-		Weapon: SteelCloneGun_eliteResonance
+		Weapon: SteelCloneGunResonance_elite
 		RequiresCondition: rank-elite && steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
@@ -57,7 +57,7 @@ steelconsortium_clonetrooper:
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeGARRISONEDELITE:
 		Name: garrisoned
-		Weapon: SteelCloneGun_eliteResonance
+		Weapon: SteelCloneGunResonance_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite && steelconsortium_upgrade_resonanceammo
@@ -453,7 +453,7 @@ steelconsortium_steelrunner:
 		Weapon: SteelRunnerPistolsResonance
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeELITE:
-		Weapon: SteelRunnerPistols_eliteResonance
+		Weapon: SteelRunnerPistolsResonance_elite
 		RequiresCondition: rank-elite && steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
@@ -463,7 +463,7 @@ steelconsortium_steelrunner:
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeGARRISONEDELITE:
 		Name: garrisoned
-		Weapon: SteelRunnerPistols_eliteResonance
+		Weapon: SteelRunnerPistolsResonance_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite && steelconsortium_upgrade_resonanceammo
