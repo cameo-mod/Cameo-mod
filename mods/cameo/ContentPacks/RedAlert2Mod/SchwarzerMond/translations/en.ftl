@@ -112,7 +112,7 @@ actor_schwarzermond_crystaltank =
 actor_schwarzermond_mars =
    .description = Mobile artillery platform. Long-range bombardment.
 
-actor_schwarzermond_m200bjagerline =
+actor_schwarzermond_komet =
    .description = Heavy tank destroyer and artillery unit.
 
 actor_schwarzermond_lasertank =

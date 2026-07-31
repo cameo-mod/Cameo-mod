@@ -721,7 +721,7 @@ schwarzermond_mars:
 		RequiresCondition: firing
 		Sequence: empty-turret
 		Name: reloading
-schwarzermond_m200bjagerline:
+schwarzermond_komet:
 	Inherits: ^Vehicle
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -740,7 +740,7 @@ schwarzermond_m200bjagerline:
 	Valued:
 		Cost: 2500
 	Tooltip:
-		Name: M-200B Jagerline
+		Name: Komet
 	Health:
 		HP: 70000
 	Repairable:
@@ -760,11 +760,11 @@ schwarzermond_m200bjagerline:
 		BobDistance: -64
 		InitialHeight: 384
 	Armament:
-		Weapon: Naxis_Jagerline
+		Weapon: Naxis_Komet
 		LocalOffset: 1000,333,1000, 1000,-333,1000, 1000,333,1000, 1000,-333,1000
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: Naxis_Jagerline_AA
+		Weapon: Naxis_Komet_AA
 		LocalOffset: 1000,333,1000, 1000,-333,1000, 1000,333,1000, 1000,-333,1000
 		MuzzleSequence: muzzle
 	FirepowerMultiplier@RANK-1:

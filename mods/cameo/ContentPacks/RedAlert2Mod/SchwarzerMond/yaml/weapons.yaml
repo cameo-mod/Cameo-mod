@@ -1051,7 +1051,7 @@ NaxisBradleyTarget:
 	Projectile: InstantHit
 		Inaccuracy: 1735
 
-Naxis_Jagerline:
+Naxis_Komet:
 	Inherits: ^FlakWeapon
 	Inherits: ^Grenade
 	Inherits: ^HeavyAAWeapon
@@ -1106,8 +1106,8 @@ Naxis_Jagerline:
 		ImpactSounds: kaboom25.aud
 		ValidTargets: Ground, Ship
 
-Naxis_Jagerline_AA:
-	Inherits: Naxis_Jagerline
+Naxis_Komet_AA:
+	Inherits: Naxis_Komet
 	ValidTargets: Air
 	Range: 11740
 	MinRange: 2350
