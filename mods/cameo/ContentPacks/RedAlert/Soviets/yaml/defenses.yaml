@@ -208,11 +208,11 @@ ra1_soviets_teslacoil:
 		LocalOffset: 0,0,896
 		RequiresCondition: !ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade1:
-		Weapon: TeslaZapEMP
+		Weapon: TeslaZap_EMP
 		LocalOffset: 0,0,896
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade2:
-		Weapon: TeslaZapEMPArc
+		Weapon: TeslaZap_EMP_Arc
 		LocalOffset: 0,0,896
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	FirepowerMultiplier@ra1_soviets_upgrade_reactoroverload:

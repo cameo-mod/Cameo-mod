@@ -1586,7 +1586,7 @@ USAPatriotMissAA:
 		Explosions: med_explosion_air
 		ImpactSounds: kaboom25.aud
 
-USAEMPPatriotMissAG:
+USA_EMP_PatriotMissAG:
 	Inherits: USAPatriotMissAG
 	Burst: 4
 	Projectile: MissileCA
@@ -1611,7 +1611,7 @@ USAEMPPatriotMissAG:
 		ImpactSounds: ptesto00.aud
 		ImpactActors: false
 
-USAEMPPatriotMissAA:
+USA_EMP_PatriotMissAA:
 	Inherits: USAPatriotMissAA
 	Burst: 4
 	Projectile: MissileCA
@@ -2192,7 +2192,7 @@ GECarpetNuke:
 		Level: 250
 		LayerName: genradiation
 
-CHEMPBomb:
+CH_EMP_Bomb:
 	ReloadDelay: 800
 	Range: 1024
 	Report: chute1.aud

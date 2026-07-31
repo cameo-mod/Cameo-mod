@@ -385,7 +385,7 @@ steelconsortium_skyhammer:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@Upgrade:
-		Weapon: SteelAirTurretEMP
+		Weapon: SteelAirTurret_EMP
 		LocalOffset: 250,0,-250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -574,7 +574,7 @@ cruiser_f.steel:
 		LocalYaw: 64, -64
 		PauseOnCondition: !ammo
 	Armament@Secondary:
-		Weapon: SteelMakoGunEMP
+		Weapon: SteelMakoGun_EMP
 		LocalOffset: 0,-256,0, 0,256,0
 		LocalYaw: 64, -64
 		PauseOnCondition: !ammo
@@ -642,7 +642,7 @@ scalpelQuantumCannon.steel:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !steelconsortium_upgrade_quantumweaponpower
 	Armament@Upgrade:
-		Weapon: SteelQuantumTurretRailEMP
+		Weapon: SteelQuantumTurretRail_EMP
 		LocalOffset: 200,0,0
 		MuzzleSequence: muzzle2
 		MuzzlePalette: ra2effect
@@ -668,7 +668,7 @@ scalpelAA.steel:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !steelconsortium_upgrade_quantumweaponpower
 	Armament@Upgrade:
-		Weapon: SteelScalpelRailgunEMPAA
+		Weapon: SteelScalpelRailgun_EMP_AA
 		LocalOffset: 200,-100,0, 200,100,0, 200,-200,0, 200,200,0
 		LocalYaw: 50, -50, 25, -25
 		MuzzleSequence: muzzle2

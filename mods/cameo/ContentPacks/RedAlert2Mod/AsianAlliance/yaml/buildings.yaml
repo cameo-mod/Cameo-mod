@@ -614,7 +614,7 @@ cgpnch.asian:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !asianalliance_upgrade_celestialpower
 	Armament@Upgrade:
-		Weapon: AsianPunisherAGEMP
+		Weapon: AsianPunisherAG_EMP
 		LocalOffset: 350,22,100, 350,-22,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -666,7 +666,7 @@ asianalliance_pulsar:
 		LocalOffset: 0,0,400
 		RequiresCondition: !asianalliance_upgrade_celestialpower
 	Armament@Upgrade:
-		Weapon: AsianPhotonCannonEMP
+		Weapon: AsianPhotonCannon_EMP
 		LocalOffset: 0,0,400
 		RequiresCondition: asianalliance_upgrade_celestialpower
 	AttackTurreted:

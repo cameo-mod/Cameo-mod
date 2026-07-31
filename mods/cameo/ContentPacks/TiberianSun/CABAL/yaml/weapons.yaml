@@ -96,7 +96,7 @@ DarkObeliskLaser:
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 
-TSCABALEMPDisable.anim:
+TSCABAL_EMP_Disable.anim:
 	ReloadDelay: 6
 	Range: 8000
 	ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
@@ -112,7 +112,7 @@ TSCABALEMPDisable.anim:
 		ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
 		Damage: 1
 
-TSCABALEMPDisable.end:
+TSCABAL_EMP_Disable.end:
 	Inherits: ^TeslaChargedWeapon
 	ReloadDelay: 8
 	Range: 8000

@@ -1287,7 +1287,7 @@ GENE6:
 		Prerequisites: upcarpetbomb
 		StartFullyCharged: true
 	AirstrikePower@EMP:
-		OrderName: CHEMPBomb
+		OrderName: CH_EMP_Bomb
 		Icon: chemp
 		ChargeInterval: 6000
 		Name: EM Pulse
@@ -1563,7 +1563,7 @@ usabomber.emp:
 		PauseOnCondition: !ammo
 		FacingTolerance: 8
 	Armament:
-		Weapon: CHEMPBomb
+		Weapon: CH_EMP_Bomb
 	AmmoPool:
 		Ammo: 1
 	Tooltip:
@@ -11332,9 +11332,9 @@ usapatriot2:
 	Buildable:
 		Prerequisites: usabarracks, ~techlevel.low, ~selectusasuper
 	Armament@NORMAL:
-		Weapon: USAEMPPatriotMissAG
+		Weapon: USA_EMP_PatriotMissAG
 	Armament@AA:
-		Weapon: USAEMPPatriotMissAA
+		Weapon: USA_EMP_PatriotMissAA
 	RenderSprites:
 		Image: usapatriot
 

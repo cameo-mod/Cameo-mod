@@ -159,7 +159,7 @@ ConsortiumMissileSystem:
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 
-ConsortiumMissileSystemEMP:
+ConsortiumMissileSystem_EMP:
 	Inherits: ConsortiumMissileSystem
 	Warhead@TeslaWeapon: SpreadDamage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -209,7 +209,7 @@ SteelQuantumCannon:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelQuantumCannonEMP:
+SteelQuantumCannon_EMP:
 	Inherits: ^TeslaWeapon
 	Inherits: SteelQuantumCannon
 	Warhead@TeslaWeapon: SpreadDamage
@@ -245,7 +245,7 @@ SteelQuantumCannonEMP:
 		Damage: 12000
 
 SteelQuantumCannon_elite:
-	Inherits: SteelQuantumCannonEMP
+	Inherits: SteelQuantumCannon_EMP
 	Range: 7000
 	Projectile: Railgun
 		BeamColor: 4488FFBB
@@ -431,7 +431,7 @@ SteelMakoGun_elite:
 	Burst: 2
 	BurstDelays: 3
 
-SteelMakoGunEMP:
+SteelMakoGun_EMP:
 	Inherits: ^LightChemicalWeapon
 	Inherits: ^TeslaWeapon
 	Inherits: SteelMakoGun
@@ -487,8 +487,8 @@ SteelMakoGunEMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 
-SteelMakoGunEMP_elite:
-	Inherits: SteelMakoGunEMP
+SteelMakoGun_EMP_elite:
+	Inherits: SteelMakoGun_EMP
 	Range: 7050
 	Burst: 2
 	BurstDelays: 3
@@ -827,7 +827,7 @@ SteelScalpelRailgunAA:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelInfRailgunEMP:
+SteelInfRailgun_EMP:
 	Inherits: ^Grenade
 	Inherits: ^MediumFlameWeapon
 	Inherits: ^MediumChemicalWeapon
@@ -940,13 +940,13 @@ SteelInfRailgunEMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 
-SteelInfRailgunEMP_elite:
-	Inherits: SteelInfRailgunEMP
+SteelInfRailgun_EMP_elite:
+	Inherits: SteelInfRailgun_EMP
 	Range: 9000
 	Burst: 4
 
-SteelScalpelRailgunEMPAA:
-	Inherits: SteelInfRailgunEMP_elite
+SteelScalpelRailgun_EMP_AA:
+	Inherits: SteelInfRailgun_EMP_elite
 	ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
 		Explosions: steel_blueexp
@@ -1046,7 +1046,7 @@ SteelMegaSword:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelMegaSwordEMP:
+SteelMegaSword_EMP:
 	Inherits: ^HeavyChemicalWeapon
 	Inherits: ^LaserWeapon
 	Inherits: ^TeslaWeapon
@@ -1087,7 +1087,7 @@ SteelMegaSwordEMP:
 
 SteelMegaSword_elite:
 	Inherits: ^RailgunWeapon
-	Inherits: SteelMegaSwordEMP
+	Inherits: SteelMegaSword_EMP
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1148,7 +1148,7 @@ SteelAirTurret:
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
 
-SteelAirTurretEMP:
+SteelAirTurret_EMP:
 	Inherits: ^TeslaWeapon
 	Inherits: SteelAirTurret
 	Warhead@TeslaWeapon: SpreadDamage
@@ -1184,7 +1184,7 @@ SteelAirTurretEMP:
 		Damage: 24000
 
 SteelAirTurret_elite:
-	Inherits: SteelAirTurretEMP
+	Inherits: SteelAirTurret_EMP
 	Range: 9000
 	Projectile: Railgun
 		BeamColor: 4488FFBB
@@ -1312,7 +1312,7 @@ SteelQuantumTurretRail:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelQuantumTurretRailEMP:
+SteelQuantumTurretRail_EMP:
 	Inherits: SteelQuantumTurretRail
 	Warhead@TeslaWeapon: SpreadDamage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1526,7 +1526,7 @@ SteelKatyCannons_elite:
 	Burst: 4
 	BurstDelays: 5
 
-SteelKatyCannonsEMP:
+SteelKatyCannons_EMP:
 	Inherits: ^TankDestroyerCannon
 	Inherits: ^TeslaWeapon
 	Inherits: SteelKatyCannons
@@ -1596,8 +1596,8 @@ SteelKatyCannonsEMP:
 		ValidTargets: Ground, Water, Air
 		ExplosionPalette: ra2effect
 
-SteelKatyCannonsEMP_elite:
-	Inherits: SteelKatyCannonsEMP
+SteelKatyCannons_EMP_elite:
+	Inherits: SteelKatyCannons_EMP
 	Range: 8250
 	MinRange: 1650
 	Burst: 4
@@ -1629,7 +1629,7 @@ SteelStalkerRailgun:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelStalkerRailgunEMP:
+SteelStalkerRailgun_EMP:
 	Inherits: ^TeslaWeapon
 	Inherits: SteelStalkerRailgun
 	Warhead@TeslaWeapon: SpreadDamage
@@ -1665,7 +1665,7 @@ SteelStalkerRailgunEMP:
 		Damage: 60000
 
 SteelStalkerRailgun_elite:
-	Inherits: SteelStalkerRailgunEMP
+	Inherits: SteelStalkerRailgun_EMP
 	Range: 10000
 	Projectile: Railgun
 		BeamColor: 4488FFBB

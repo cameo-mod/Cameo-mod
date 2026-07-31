@@ -588,7 +588,7 @@ AsianPhotonCannon:
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall, Husk
 
-AsianPhotonCannonEMP:
+AsianPhotonCannon_EMP:
 	Inherits: AsianPhotonCannon
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
@@ -606,7 +606,7 @@ AsianQuasarAG:
 		MaximumLaunchSpeed: 250
 		Inaccuracy: 500
 
-AsianQuasarAGEMP:
+AsianQuasarAG_EMP:
 	Inherits: AsianQuasarAG
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
@@ -624,7 +624,7 @@ AsianQuasarAA:
 		MinimumLaunchSpeed: 300
 		Inaccuracy: 250
 
-AsianQuasarAAEMP:
+AsianQuasarAA_EMP:
 	Inherits: AsianQuasarAA
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
@@ -642,7 +642,7 @@ AsianPunisherAG:
 		MinimumLaunchSpeed: 240
 		Inaccuracy: 240
 
-AsianPunisherAGEMP:
+AsianPunisherAG_EMP:
 	Inherits: AsianPunisherAG
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
@@ -662,7 +662,7 @@ AsianQuasarBoatAG:
 		MinimumLaunchSpeed: 200
 		Inaccuracy: 500
 
-AsianQuasarBoatAGEMP:
+AsianQuasarBoatAG_EMP:
 	Inherits: AsianQuasarBoatAG
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
@@ -682,7 +682,7 @@ AsianQuasarBoatAA:
 		MinimumLaunchSpeed: 250
 		Inaccuracy: 250
 
-AsianQuasarBoatAAEMP:
+AsianQuasarBoatAA_EMP:
 	Inherits: AsianQuasarBoatAA
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000

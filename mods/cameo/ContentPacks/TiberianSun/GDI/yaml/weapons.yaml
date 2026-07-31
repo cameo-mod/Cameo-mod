@@ -382,7 +382,7 @@ TSSonicZapWeaponSonic:
 		ValidRelationships: Neutral, Enemy
 	-Warhead@Effect:
 
-TSEMPZapWeapon:
+TS_EMP_ZapWeapon:
 	Inherits: ^TeslaWeapon
 	Inherits: TSSonicWeaponEffect
 	ReloadDelay: 60
@@ -417,7 +417,7 @@ TSEMPZapWeapon:
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
 
-TSEMPMine:
+TS_EMP_Mine:
 	Inherits: ^TeslaWeapon
 	Report: mineblo1.aud
 	Warhead@TeslaWeapon: SpreadDamage
@@ -813,7 +813,7 @@ TSBombSonic:
 		ValidTargets: Water
 		InvalidTargets: Vehicle
 
-TSMobileEMP:
+TSMobile_EMP:
 	Inherits: ^TeslaWeapon
 	Report: mobemp1.aud
 	Range: 1512

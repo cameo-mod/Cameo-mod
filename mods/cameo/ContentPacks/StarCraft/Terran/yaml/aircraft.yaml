@@ -923,7 +923,7 @@ terran_sciencevessel:
 		TargetRelationships: Enemy
 		PauseOnCondition: !deployed
 	Armament@EMP:
-		Weapon: ScienceVesselEMP
+		Weapon: ScienceVessel_EMP
 		LocalOffset: 1,0,11
 		TargetRelationships: Enemy
 		PauseOnCondition: !deployed

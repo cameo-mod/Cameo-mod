@@ -124,22 +124,22 @@ steelconsortium_hoverboardgrenadier:
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradePRIMARY:
-		Weapon: SteelMakoGunEMP
+		Weapon: SteelMakoGun_EMP
 		LocalOffset: 300,200,800
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeELITE:
-		Weapon: SteelMakoGunEMP_elite
+		Weapon: SteelMakoGun_EMP_elite
 		LocalOffset: 300,200,800
 		RequiresCondition: rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
-		Weapon: SteelMakoGunEMP
+		Weapon: SteelMakoGun_EMP
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeGARRISONEDELITE:
 		Name: garrisoned
-		Weapon: SteelMakoGunEMP_elite
+		Weapon: SteelMakoGun_EMP_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite && steelconsortium_upgrade_quantumweaponpower
@@ -209,11 +209,11 @@ steelconsortium_quantummissiletrooper:
 		LocalOffset: 384,64,384
 		RequiresCondition: !deployed && rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradePRIMARY:
-		Weapon: SteelInfRailgunEMP
+		Weapon: SteelInfRailgun_EMP
 		LocalOffset: 384,64,384
 		RequiresCondition: !deployed && !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradePRIMARYELITE:
-		Weapon: SteelInfRailgunEMP_elite
+		Weapon: SteelInfRailgun_EMP_elite
 		LocalOffset: 384,64,384
 		RequiresCondition: !deployed && rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@BOTAA:
@@ -234,13 +234,13 @@ steelconsortium_quantummissiletrooper:
 		RequiresCondition: deployed && rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeDEPLOYED:
 		Name: deployed
-		Weapon: SteelInfRailgunEMP
+		Weapon: SteelInfRailgun_EMP
 		Turret: deploy
 		LocalOffset: 384,64,384
 		RequiresCondition: deployed && !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeDEPLOYEDELITE:
 		Name: deployed
-		Weapon: SteelInfRailgunEMP_elite
+		Weapon: SteelInfRailgun_EMP_elite
 		Turret: deploy
 		LocalOffset: 384,64,384
 		RequiresCondition: deployed && rank-elite && steelconsortium_upgrade_quantumweaponpower
@@ -254,11 +254,11 @@ steelconsortium_quantummissiletrooper:
 		RequiresCondition: rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
-		Weapon: SteelInfRailgunEMP
+		Weapon: SteelInfRailgun_EMP
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeGARRISONEDELITE:
 		Name: garrisoned
-		Weapon: SteelInfRailgunEMP_elite
+		Weapon: SteelInfRailgun_EMP_elite
 		RequiresCondition: rank-elite && steelconsortium_upgrade_quantumweaponpower
 	AttackFrontal:
 		Armaments: primary, targeting

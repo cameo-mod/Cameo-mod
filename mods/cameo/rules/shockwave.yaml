@@ -3235,13 +3235,13 @@ susaempmissiledefender:
 		IconPalette: ra2
 		Description: Anti-tank/anti-aircraft infantry.\nHas to lock on to mobile targets before attacking.\nShots will disable vehicles hit\n  Strong vs Tanks, Aircraft\n  Weak vs Infantry
 	Armament@PRIMARY:
-		Weapon: SUSAEMPMissileDefenderAG
+		Weapon: SUSA_EMP_MissileDefenderAG
 	Armament@AntiStructure:
-		Weapon: SUSAEMPMissileDefenderStructure
+		Weapon: SUSA_EMP_MissileDefenderStructure
 	Armament@AA:
-		Weapon: SUSAEMPMissileDefenderAA
+		Weapon: SUSA_EMP_MissileDefenderAA
 	Armament@GARRISONED:
-		Weapon: SUSAEMPMissileDefenderGarrisoned
+		Weapon: SUSA_EMP_MissileDefenderGarrisoned
 
 susalasermissiledefender:
 	Inherits: susamissiledefender
@@ -3912,7 +3912,7 @@ susalockdownmlrs:
 		TurnSpeed: 20
 		Offset: -50,0,200
 	Armament@EMP:
-		Weapon: SUSAMLRSEMP
+		Weapon: SUSAMLRS_EMP
 		Name: primary
 		Recoil: 128
 		RecoilRecovery: 26
@@ -13185,7 +13185,7 @@ schhackvan.bot:
 	Cargo:
 		InitialUnits: CHHACKER, CHHACKER, CHHACKER, CHHACKER
 
-schempmig:
+SCH_EMP_Mig:
 	Inherits: ^RANeutralPlane
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -13215,7 +13215,7 @@ schempmig:
 		Range: 7c0
 		Type: GroundPosition
 	Armament@1:
-		Weapon: SCHEMPMig
+		Weapon: SCH_EMP_Mig
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
@@ -13246,7 +13246,7 @@ schempmig:
 	Contrail@2:
 		Offset: -598,683,0
 	SpawnActorOnDeath:
-		Actor: schempmig.husk
+		Actor: SCH_EMP_Mig.husk
 	LeavesTrails:
 		Offsets: -853,0,171
 		MovingInterval: 2
@@ -13274,7 +13274,7 @@ schempmig:
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
 
-schempmig.husk:
+SCH_EMP_Mig.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: EMP MiG
@@ -13294,7 +13294,7 @@ schempmig.husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: schempmig
+		Image: SCH_EMP_Mig
 
 schtiger:
 	Inherits: ^Helicopter

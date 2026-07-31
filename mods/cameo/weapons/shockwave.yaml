@@ -190,8 +190,8 @@ SUSATomahawk:
 		Speed: 180
 		RangeLimit: 45c0
 
-SUSAMLRSEMP:
-	Inherits: USAEMPPatriotMissAG
+SUSAMLRS_EMP:
+	Inherits: USA_EMP_PatriotMissAG
 	Burst: 7
 	Range: 10240
 	ReloadDelay: 200
@@ -1191,7 +1191,7 @@ SUSAArmorRangerMG:
 	Warhead@1Dam: SpreadDamage
 		Damage: 1150
 		
-SUSAEMPMissileDefenderAG:
+SUSA_EMP_MissileDefenderAG:
 	Inherits: USAMissileDefenderAG
 	ReloadDelay: 40
 	Warhead@2Ext: GrantExternalCondition
@@ -1200,7 +1200,7 @@ SUSAEMPMissileDefenderAG:
 		Range: 768
 		ValidTargets: Vehicle
 
-SUSAEMPMissileDefenderStructure:
+SUSA_EMP_MissileDefenderStructure:
 	Inherits: USAMissileDefenderStructure
 	ReloadDelay: 40
 	Warhead@2Con: GrantExternalCondition
@@ -1209,7 +1209,7 @@ SUSAEMPMissileDefenderStructure:
 		Duration: 80
 		Range: 768
 
-SUSAEMPMissileDefenderAA:
+SUSA_EMP_MissileDefenderAA:
 	Inherits: USAMissileDefenderAA
 	ReloadDelay: 40
 	Warhead@2Con: GrantExternalCondition
@@ -1219,7 +1219,7 @@ SUSAEMPMissileDefenderAA:
 		Duration: 80
 		Range: 768
 		
-SUSAEMPMissileDefenderGarrisoned:
+SUSA_EMP_MissileDefenderGarrisoned:
 	Inherits: USAMissileDefenderGarrisoned
 	Warhead@2Con: GrantExternalCondition
 		Condition: empdisable
@@ -2454,7 +2454,7 @@ SCHFlameTowerBlue:
 	Warhead@1Dam: SpreadDamage
 		Damage: 3000
 		
-SCHEMPMig:
+SCH_EMP_Mig:
 	Range: 1536
 	ReloadDelay: 40
 	Report: chute1.aud
