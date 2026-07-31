@@ -1,6 +1,6 @@
 # audit_outliers — systemic numeric drift (B9)
 
-(trait,field) distributions sampled: **18** — robust outliers (top 25 per field): **175**, selection bounds > 5120: **0**
+(trait,field) distributions sampled: **18** — robust outliers (top 25 per field): **181**, selection bounds > 5120: **0**
 
 
 ## Hard screen — Selectable bounds above the 5x5-cell maximum
@@ -12,16 +12,19 @@ _none found_
 
 | trait.field | actor | value | median | robust z |
 |---|---|---|---|---|
-| Aircraft.CruiseAltitude | INVISIBLEPLANE | 9000 | 2160 | 11.5 |
+| Aircraft.CruiseAltitude | TSDPOD | 16384 | 2500 | 18.7 |
+| Aircraft.CruiseAltitude | TSDPODE1 | 16384 | 2500 | 18.7 |
+| Aircraft.CruiseAltitude | TSDPODE2 | 16384 | 2500 | 18.7 |
+| Aircraft.CruiseAltitude | INVISIBLEPLANE | 9000 | 2500 | 8.8 |
 | Aircraft.TurnSpeed | japan_rocketangel_husk | 160 | 20 | 18.9 |
 | Aircraft.TurnSpeed | ra2rock.husk | 160 | 20 | 18.9 |
 | Aircraft.TurnSpeed | yrlunr.husk | 160 | 20 | 18.9 |
 | Aircraft.TurnSpeed | litt_husk.nax | 160 | 20 | 18.9 |
-| Aircraft.TurnSpeed | cabal_overkill_gunship_husk | 80 | 20 | 8.1 |
-| Aircraft.TurnSpeed | cabal_hunter_drone_carrier_husk | 80 | 20 | 8.1 |
-| Aircraft.TurnSpeed | cabal_hunter_drone_husk | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | cabal_overkillgunship_husk | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | cabal_hunterdronecarrier_husk | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | cabal_hunterdrone_husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | cabal_hunterkillermk1_husk | 80 | 20 | 8.1 |
-| Aircraft.TurnSpeed | cabal_cyborg_assassin_husk | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | cabal_cyborgassassin_husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | ts_nod_bansheefighter_husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | ts_nod_harpy_husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | ts_gdi_carryall | 80 | 20 | 8.1 |
@@ -36,8 +39,8 @@ _none found_
 | Aircraft.TurnSpeed | ra2beag.Husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | yuri_floatingdisk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | phoenix_husk.asian | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | harbinger_husk.asian | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | twister_husk.steel | 80 | 20 | 8.1 |
-| Aircraft.TurnSpeed | tkmdrone | 80 | 20 | 8.1 |
 | ChangesHealth.PercentageStep | wc2_orcs_deathknight | 83 | 1 | 55.3 |
 | ChangesHealth.Step | terran_marine | -2000 | 20 | 68.1 |
 | ChangesHealth.Step | terran_madcap | -2000 | 20 | 68.1 |
@@ -89,11 +92,14 @@ _none found_
 | Health.HP | cabal_core | 1000000 | 60000 | 15.9 |
 | Health.HP | cabal_constructionyard | 1000000 | 60000 | 15.9 |
 | Health.HP | cabal_avatar | 1000000 | 60000 | 15.9 |
-| Mobile.TurnSpeed | protoss_dragoon | 1023 | 20 | 96.6 |
-| Mobile.TurnSpeed | hole_small.nax2 | 255 | 20 | 22.6 |
-| Mobile.TurnSpeed | hole.nax2 | 255 | 20 | 22.6 |
-| Mobile.TurnSpeed | ra2_soviets_terrordrone | 200 | 20 | 17.3 |
-| Mobile.TurnSpeed | SCSPIDERMINE | 200 | 20 | 17.3 |
+| Mobile.TurnSpeed | protoss_dragoon | 1023 | 20 | 104.1 |
+| Mobile.TurnSpeed | hole_small.nax2 | 255 | 20 | 24.4 |
+| Mobile.TurnSpeed | hole.nax2 | 255 | 20 | 24.4 |
+| Mobile.TurnSpeed | ra2_soviets_terrordrone | 200 | 20 | 18.7 |
+| Mobile.TurnSpeed | SCSPIDERMINE | 200 | 20 | 18.7 |
+| Mobile.TurnSpeed | protoss_probe | 100 | 20 | 8.3 |
+| Mobile.TurnSpeed | zerg_drone | 100 | 20 | 8.3 |
+| Mobile.TurnSpeed | terran_scv | 100 | 20 | 8.3 |
 | Power.Amount | asianalliance_tankreactor | 2700 | -35 | 73.8 |
 | Power.Amount | wc2_humans_sunwell | 2500 | -35 | 68.4 |
 | Power.Amount | ra2_soviets_nuclearreactor | 2000 | -35 | 54.9 |
@@ -117,22 +123,22 @@ _none found_
 | Power.Amount | EDEN_SOLAR_ARRAY | 300 | -35 | 9.0 |
 | Power.Amount | PLYMOUTH_SOLARARRAY | 300 | -35 | 9.0 |
 | Power.Amount | zerg_behemoth | -360 | -35 | 8.8 |
-| Repairable.HpPerStep | japan_shogunexecutioner | 150000 | 4125 | 43.7 |
-| Repairable.HpPerStep | naxis_ratte | 100000 | 4125 | 28.7 |
-| Repairable.HpPerStep | ts_gdi_mammothmkii | 60000 | 4125 | 16.7 |
-| Repairable.HpPerStep | ra1_soviets_monstertank | 50000 | 4125 | 13.8 |
-| Repairable.HpPerStep | forgotten_experimentalmammothtank | 50000 | 4125 | 13.8 |
-| Repairable.HpPerStep | terran_phobos | 50000 | 4125 | 13.8 |
-| Repairable.HpPerStep | ts_gdi_kodiakcommandship | 45000 | 4125 | 12.3 |
-| Repairable.HpPerStep | latinsyndicate_tortugatank | 43750 | 4125 | 11.9 |
-| Repairable.HpPerStep | ts_gdi_mammothprototype | 40000 | 4125 | 10.8 |
-| Repairable.HpPerStep | japan_exorcistoitank | 37500 | 4125 | 10.0 |
-| Repairable.HpPerStep | protoss_starshipsovereign | 37500 | 4125 | 10.0 |
-| Repairable.HpPerStep | japan_oitank | 32500 | 4125 | 8.5 |
-| Repairable.HpPerStep | forgotten_nomadbarracks | 32500 | 4125 | 8.5 |
-| Repairable.HpPerStep | futuretech_futuretank | 32500 | 4125 | 8.5 |
-| Repairable.HpPerStep | ra1_soviets_siegemammothtank | 31250 | 4125 | 8.1 |
-| Repairable.HpPerStep | devastator | 31250 | 4125 | 8.1 |
+| Repairable.HpPerStep | japan_shogunexecutioner | 150000 | 4250 | 43.7 |
+| Repairable.HpPerStep | naxis_ratte | 100000 | 4250 | 28.7 |
+| Repairable.HpPerStep | ts_gdi_mammothmkii | 60000 | 4250 | 16.7 |
+| Repairable.HpPerStep | ra1_soviets_monstertank | 50000 | 4250 | 13.7 |
+| Repairable.HpPerStep | forgotten_experimentalmammothtank | 50000 | 4250 | 13.7 |
+| Repairable.HpPerStep | terran_phobos | 50000 | 4250 | 13.7 |
+| Repairable.HpPerStep | ts_gdi_kodiakcommandship | 45000 | 4250 | 12.2 |
+| Repairable.HpPerStep | latinsyndicate_tortugatank | 43750 | 4250 | 11.8 |
+| Repairable.HpPerStep | ts_gdi_mammothprototype | 40000 | 4250 | 10.7 |
+| Repairable.HpPerStep | japan_exorcistoitank | 37500 | 4250 | 10.0 |
+| Repairable.HpPerStep | protoss_starshipsovereign | 37500 | 4250 | 10.0 |
+| Repairable.HpPerStep | japan_oitank | 32500 | 4250 | 8.5 |
+| Repairable.HpPerStep | forgotten_nomadbarracks | 32500 | 4250 | 8.5 |
+| Repairable.HpPerStep | futuretech_futuretank | 32500 | 4250 | 8.5 |
+| Repairable.HpPerStep | ra1_soviets_siegemammothtank | 31250 | 4250 | 8.1 |
+| Repairable.HpPerStep | devastator | 31250 | 4250 | 8.1 |
 | RevealsShroud.Range | steelconsortium_bfg10000 | 25000 | 2048 | 20.2 |
 | RevealsShroud.Range | tkm_radartruck | 21500 | 2048 | 17.1 |
 | RevealsShroud.Range | ixian_ixprojector | 20000 | 2048 | 15.8 |
@@ -144,20 +150,20 @@ _none found_
 | RevealsShroud.Range | ra2_allies_patriotmissilesystem | 14150 | 2048 | 10.6 |
 | RevealsShroud.Range | asianalliance_pulsar | 14000 | 2048 | 10.5 |
 | RevealsShroud.Range | asianalliance_plasmacannon | 14000 | 2048 | 10.5 |
+| RevealsShroud.Range | asianalliance_spitfire | 14000 | 2048 | 10.5 |
 | RevealsShroud.Range | td_gdi_skyshield | 13800 | 2048 | 10.3 |
 | RevealsShroud.Range | ts_nod_samsite | 13176 | 2048 | 9.8 |
 | RevealsShroud.Range | ra2_soviets_flakcannon | 12936 | 2048 | 9.6 |
 | RevealsShroud.Range | ra1_soviets_samsite | 12790 | 2048 | 9.4 |
 | RevealsShroud.Range | td_nod_samsite | 12588 | 2048 | 9.3 |
 | RevealsShroud.Range | ts_gdi_samtower | 12440 | 2048 | 9.1 |
-| RevealsShroud.Range | cabal_hunter_drone_carrier | 12345 | 2048 | 9.0 |
+| RevealsShroud.Range | cabal_hunterdronecarrier | 12345 | 2048 | 9.0 |
 | RevealsShroud.Range | cabal_mothership | 12345 | 2048 | 9.0 |
 | RevealsShroud.Range | ts_gdi_kodiakcommandship | 12345 | 2048 | 9.0 |
 | RevealsShroud.Range | ra2_soviets_kirovairship | 12345 | 2048 | 9.0 |
 | RevealsShroud.Range | yuri_floatingdisk | 12345 | 2048 | 9.0 |
 | RevealsShroud.Range | steelconsortium_empressstation | 12345 | 2048 | 9.0 |
 | RevealsShroud.Range | steelconsortium_cloudbreaker | 12345 | 2048 | 9.0 |
-| RevealsShroud.Range | schwarzermond_haunebuii | 12345 | 2048 | 9.0 |
 | Selectable.Bounds | ra1_allies_reinforcementpad | 5120 | 1024 | 10.8 |
 | Selectable.Bounds | ra2ctind01 | 5120 | 1024 | 10.8 |
 | Selectable.Bounds | ra2ctmiam06 | 5120 | 1024 | 10.8 |
@@ -185,8 +191,8 @@ _none found_
 | Selectable.Bounds | td_nod_airstrip | 4096 | 1024 | 8.1 |
 | Valued.Cost | cabal_coredefender | 15000 | 1600 | 9.0 |
 | Valued.Cost | schwarzermond_dieglocke | 15000 | 1600 | 9.0 |
-| Valued.Cost | wc2_orcs_orcgoldmine_2 | 15000 | 1600 | 9.0 |
-| Valued.Cost | wc2_humans_humangoldmine_2 | 15000 | 1600 | 9.0 |
+| Valued.Cost | wc2_orcs_orcgoldmine_bot | 15000 | 1600 | 9.0 |
+| Valued.Cost | wc2_humans_humangoldmine_bot | 15000 | 1600 | 9.0 |
 
 
 _Outliers are leads, not verdicts: epic units are legitimately extreme. Scan for CLUSTERS of similar z-scores — those are unit systems using a stale scale convention._

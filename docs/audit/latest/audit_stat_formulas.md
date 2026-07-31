@@ -1,12 +1,13 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **788** across 1885 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **782** across 1909 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
-## F1 — Repairable.HpPerStep ≠ HP/20  (40)
+## F1 — Repairable.HpPerStep ≠ HP/20  (41)
 
 | actor | actual | expected |
 |---|---|---|
+| devastator | HpPerStep 31250 | expected 27500 (HP 550000/20) |
 | forgotten_scoopertank | HpPerStep 10000 | expected 12500 (HP 250000/20) |
 | futuretech_beehivedronecarrier | HpPerStep 6500 | expected 6250 (HP 125000/20) |
 | ixian_empbomber | HpPerStep 5555 | expected 5550 (HP 111000/20) |
@@ -49,13 +50,14 @@ Violations: **788** across 1885 roster actors (reference-clean units: gdiarcher,
 | ts_nod_subterraneanapc | HpPerStep 2637 | expected 875 (HP 17500/20) |
 
 
-## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (94)
+## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (96)
 
 | actor | actual | expected |
 |---|---|---|
 | asianalliance_pulverizermecha | Step 114 | expected 285 (HP 285000/1000) |
 | cabal_beholder | Step 50 | expected 125 (HP 125000/1000) |
 | combat_tank.harkonnen | Step 10 | expected 28 (HP 70000/2500) |
+| devastator | Step 250 | expected 220 (HP 550000/2500) |
 | eden_tiger_acidcloud | Step 10 | expected 24 (HP 60000/2500) |
 | forgotten_mutant | Step 36 | expected 45 (HP 45000/1000) |
 | forgotten_mutanthijacker | Step 10 | expected 25 (HP 25000/1000) |
@@ -81,6 +83,7 @@ Violations: **788** across 1885 roster actors (reference-clean units: gdiarcher,
 | japan_zerofighter | Step 30 | expected 12 (HP 30000/2500) |
 | latinsyndicate_nuketruck | Step 10 | expected 24 (HP 60000/2500) |
 | latinsyndicate_yakovlev | Step 40 | expected 16 (HP 40000/2500) |
+| missile_tank | Step 10 | expected 20 (HP 50000/2500) |
 | naxis_bf109 | Step 30 | expected 24 (HP 60000/2500) |
 | naxis_bmwbike | Step 33 | expected 9 (HP 22000/2500) |
 | naxis_coneheadsknights | Step 10 | expected 20 (HP 20000/1000) |
@@ -233,10 +236,11 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | zerg_drone | RegenAmount 10 | expected 36 (2 x SelfHealing 18) |
 
 
-## F5 — defense RevealsShroud.Range ≠ weapon range  (41)
+## F5 — defense RevealsShroud.Range ≠ weapon range  (43)
 
 | actor | actual | expected |
 |---|---|---|
+| asianalliance_spitfire | RevealsShroud 14000 | weapon range 12000 |
 | cabal_heavycabalobelisk | RevealsShroud 7168 | weapon range 12288 |
 | cabal_plasmaturret | RevealsShroud 7168 | weapon range 6487 |
 | eden_gp_emp | RevealsShroud 6144 | weapon range 5500 |
@@ -246,6 +250,7 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | forgotten_brokenscoopertankturret | RevealsShroud 7168 | weapon range 6404 |
 | forgotten_brokenwarriortankturret | RevealsShroud 7168 | weapon range 9483 |
 | forgotten_machineguntower | RevealsShroud 7168 | weapon range 6272 |
+| harkonnen_flameturret | RevealsShroud 7979 | weapon range 6742 |
 | latinsyndicate_latinsentrygun | RevealsShroud 6666 | weapon range 7777 |
 | naxis_flak88 | RevealsShroud 6666 | weapon range 13200 |
 | naxis_naxibunker | RevealsShroud 6666 | weapon range 12345 |
@@ -262,7 +267,7 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | steelconsortium_quantumcannon | RevealsShroud 8888 | weapon range 15000 |
 | td_nod_samsite | RevealsShroud 12588 | weapon range 12193 |
 | tkm_quadturretbunker | RevealsShroud 6720 | weapon range 11604 |
-| ts_gdi_empulsecannon | RevealsShroud 7168 | weapon range 10205 |
+| ts_gdi_empulsecannon | RevealsShroud 7168 | weapon range 40960 |
 | ts_gdi_rpgtower | RevealsShroud 7168 | weapon range 8544 |
 | ts_gdi_vulcantower | RevealsShroud 7168 | weapon range 6809 |
 | ts_nod_laserturret | RevealsShroud 7168 | weapon range 6992 |
@@ -275,15 +280,16 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | wc2_orcs_guardtower | RevealsShroud 5000 | weapon range 10500 |
 | wc2_orcs_orcwatchtower | RevealsShroud 5000 | weapon range 10500 |
 | yuri_psychictower | RevealsShroud 10000 | weapon range 8000 |
-| zerg_creepcolony_2 | RevealsShroud 5000 | weapon range 10160 |
+| zerg_creepcolony_defense | RevealsShroud 5000 | weapon range 10160 |
 | zerg_sporecolony | RevealsShroud 5000 | weapon range 10160 |
-| zerg_sunkencolony_2 | RevealsShroud 5000 | weapon range 10160 |
+| zerg_sunkencolony_defense | RevealsShroud 5000 | weapon range 10160 |
 
 
-## F6 — AA/advanced defense DetectCloaked.Range ≠ weapon range/2  (18)
+## F6 — AA/advanced defense DetectCloaked.Range ≠ weapon range/2  (19)
 
 | actor | actual | expected |
 |---|---|---|
+| asianalliance_spitfire | DetectCloaked 7000 | expected 6000 (range/2) |
 | cabal_heavycabalobelisk | DetectCloaked 2560 | expected 6144 (range/2) |
 | forgotten_brokenscoopertankturret | DetectCloaked 3072 | expected 3202 (range/2) |
 | forgotten_brokenwarriortankturret | DetectCloaked 3072 | expected 4741 (range/2) |
@@ -296,7 +302,7 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | steelconsortium_quantumcannon | DetectCloaked 4444 | expected 7500 (range/2) |
 | td_nod_samsite | DetectCloaked 6294 | expected 6096 (range/2) |
 | tkm_quadturretbunker | DetectCloaked 6000 | expected 5802 (range/2) |
-| ts_gdi_empulsecannon | DetectCloaked missing | expected 5102 |
+| ts_gdi_empulsecannon | DetectCloaked missing | expected 20480 |
 | ts_gdi_rpgtower | DetectCloaked 3072 | expected 4272 (range/2) |
 | ts_gdi_samtower | DetectCloaked 4096 | expected 6220 (range/2) |
 | ts_nod_obeliskoflight | DetectCloaked 5120 | expected 5217 (range/2) |
@@ -304,7 +310,7 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | yuri_psychictower | DetectCloaked 5000 | expected 4000 (range/2) |
 
 
-## F7 — defense Power.Amount ≠ -Cost/20  (92)
+## F7 — defense Power.Amount ≠ -Cost/20  (95)
 
 | actor | actual | expected |
 |---|---|---|
@@ -328,6 +334,9 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | forgotten_machineguntower | Power -20 | expected -30 (-Cost/20) |
 | forgotten_silo | Power -10 | expected -15 (-Cost/20) |
 | forgotten_veinhole | Power -150 | expected -500 (-Cost/20) |
+| harkonnen_flameturret | Power -50 | expected -60 (-Cost/20) |
+| harkonnen_palace | Power -200 | expected -500 (-Cost/20) |
+| harkonnen_storagesilo | Power -10 | expected -7 (-Cost/20) |
 | ixian_munitionssilo | Power -10 | expected -25 (-Cost/20) |
 | ixian_storagesilo | Power -10 | expected -7 (-Cost/20) |
 | ixian_supercomputer | Power -200 | expected -500 (-Cost/20) |
@@ -375,7 +384,7 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | tkm_tankturretbunker | Power -25 | expected -40 (-Cost/20) |
 | ts_gdi_rpgtower | Power -20 | expected -70 (-Cost/20) |
 | ts_gdi_samtower | Power -30 | expected -40 (-Cost/20) |
-| ts_gdi_upgradecenter | Power -200 | expected -500 (-Cost/20) |
+| ts_gdi_silo | Power -10 | expected -7 (-Cost/20) |
 | ts_gdi_vulcantower | Power -20 | expected -30 (-Cost/20) |
 | ts_nod_laserfence | Power -25 | expected -10 (-Cost/20) |
 | ts_nod_laserturret | Power -20 | expected -40 (-Cost/20) |
@@ -397,9 +406,9 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | yuri_geneticmutator | Power -200 | expected -250 (-Cost/20) |
 | yuri_psychicdominator | Power -200 | expected -500 (-Cost/20) |
 | yuri_tankbunker | Power missing | expected -50 |
-| zerg_creepcolony_2 | Power missing | expected -50 |
+| zerg_creepcolony_defense | Power missing | expected -50 |
 | zerg_sporecolony | Power missing | expected -62 |
-| zerg_sunkencolony_2 | Power missing | expected -62 |
+| zerg_sunkencolony_defense | Power missing | expected -62 |
 
 
 ## F8 — vehicle TurnSpeed ≠ Speed/5  (33)
@@ -497,7 +506,7 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | yuri_mastermind | Turreted 2000 vs Mobile 24 | must match |
 
 
-## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (45)
+## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (46)
 
 | actor | actual | expected |
 |---|---|---|
@@ -510,7 +519,8 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | japan_ballista | TurnSpeed 13 (Speed 65) | expected 26 = 2 x Speed/5 (turretless) |
 | latinsyndicate_burrito | TurnSpeed 16 (Speed 80) | expected 32 = 2 x Speed/5 (turretless) |
 | latinsyndicate_topolm | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
-| naxis_brummbr | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
+| missile_tank | TurnSpeed 80 (Speed 64) | expected 26 = 2 x Speed/5 (turretless) |
+| naxis_brummbar | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
 | naxis_grille | TurnSpeed 16 (Speed 80) | expected 32 = 2 x Speed/5 (turretless) |
 | naxis_nokana | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
 | naxis_oldtank | TurnSpeed 12 (Speed 50) | expected 20 = 2 x Speed/5 (turretless) |
@@ -524,8 +534,8 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | ra1_soviets_nuclearv2launcher | TurnSpeed 16 (Speed 80) | expected 32 = 2 x Speed/5 (turretless) |
 | ra1_soviets_v2rocketlauncher | TurnSpeed 17 (Speed 85) | expected 34 = 2 x Speed/5 (turretless) |
 | ra2_allies_battlefortress | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
-| ra2_allies_battlefortress_2 | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
-| ra2_allies_battlefortress_3 | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
+| ra2_allies_battlefortress_chrono | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
+| ra2_allies_battlefortress_empty | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
 | ra2_soviets_v3rocketlauncher | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
 | steelconsortium_dagger | TurnSpeed 20 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
 | steelconsortium_hammerheadartillerytank | TurnSpeed 20 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
@@ -548,44 +558,27 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | zerg_drone | TurnSpeed 100 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
 
 
-## F11 — turreted artillery missing/incorrect firing-slow (Archer pattern)  (36)
+## F11 — turreted artillery missing/incorrect firing-slow (Archer pattern)  (19)
 
 | actor | actual | expected |
 |---|---|---|
-| asianalliance_pulverizer | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| asianalliance_type89mlrs | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | eden_lynx_railgun | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | eden_lynx_thorshammer | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | eden_tiger_railgun | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | eden_tiger_thorshammer | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| forgotten_missilevan | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| forgotten_mlrs | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | forgotten_warriortank | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | futuretech_beehivedronecarrier | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | futuretech_energizer | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| ixian_ixcombatsiege | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| ixian_shockraider | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | ixian_stormraider | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | japan_nanodronebuggy | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| japan_waveforceartillery | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| ordos_cobratank | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| ordos_pythontank | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| ra1_soviets_grad | RevokeDelay 5 | expected 57 (ReloadDelay 115/2) |
 | ra1_soviets_heatraytank | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | ra1_soviets_teslatank | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | ra1_soviets_v1rockettruck | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | ra2_allies_prismtank | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | ra2_soviets_teslatank | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | schwarzermond_crystaltank | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| schwarzermond_lunargrille | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| schwarzermond_mars | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| td_gdi_mlrs | RevokeDelay 5 | expected 55 (ReloadDelay 111/2) |
 | td_nod_ssmlauncher | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| terran_cyclone | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | tkm_stryker | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| ts_gdi_hovermlrs | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| ts_gdi_juggernaut | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| ts_nod_artillery | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | yuri_magnetron | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | zerg_lurker | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 
@@ -609,13 +602,13 @@ _none found_
 _none found_
 
 
-## F15 — Light Support composition (Tier-1 only, ~2000, 5:1 inf:veh)  (68)
+## F15 — Light Support composition (Tier-1 only, ~2000, 5:1 inf:veh)  (72)
 
 | actor | actual | expected |
 |---|---|---|
-| td_gdi: defaultgdia | total cost 1300 | target ~2000 (±15%) |
-| td_gdi: defaultgdia | e3 (cost 200) x2 vs e1 (cost 100) x1 | pricier units must not outnumber cheaper ones |
-| td_nod: defaultnoda | total cost 1300 | target ~2000 (±15%) |
+| td_gdi: defaultgdia | total cost 1500 | target ~2000 (±15%) |
+| td_gdi: defaultgdia | e3 (cost 300) x2 vs e1 (cost 100) x1 | pricier units must not outnumber cheaper ones |
+| td_nod: defaultnoda | total cost 1500 | target ~2000 (±15%) |
 | td_nod: defaultnoda | td_nod_buggy | light support must be Tier-1 only (producer-building prereqs only) |
 | ra1_allies: defaultallies | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
 | ra1_soviets: defaultsoviet | total cost 3000 | target ~2000 (±15%) |
@@ -661,10 +654,14 @@ _none found_
 | tkm: defaulttstkm | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
 | ordos: ordos_L | total cost 3240 | target ~2000 (±15%) |
 | ordos: ordos_L | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
-| harkonnen: ixian_L | total cost 3300 | target ~2000 (±15%) |
-| harkonnen: ixian_L | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
-| ixian: ixian_only_L | total cost 3300 | target ~2000 (±15%) |
-| ixian: ixian_only_L | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| ixian: ixian_L | total cost 3300 | target ~2000 (±15%) |
+| ixian: ixian_L | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| atreides: atreides_L | total cost 3300 | target ~2000 (±15%) |
+| atreides: atreides_L | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| harkonnen: harkonnen_L | total cost 3300 | target ~2000 (±15%) |
+| harkonnen: harkonnen_L | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| corrino: corrino_L | total cost 3300 | target ~2000 (±15%) |
+| corrino: corrino_L | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
 | terran: defaultterran | total cost 4067 | target ~2000 (±15%) |
 | terran: defaultterran | terran_marine (cost 689) x3 vs terran_firebat (cost 500) x1 | pricier units must not outnumber cheaper ones |
 | terran: defaultterran | terran_marine (cost 689) x3 vs terran_medic (cost 600) x1 | pricier units must not outnumber cheaper ones |
@@ -683,19 +680,19 @@ _none found_
 | eden: defaulteden | eden_lynx_railgun (cost 900) x2 vs eden_scout (cost 300) x1 | pricier units must not outnumber cheaper ones |
 
 
-## F16 — Heavy Support composition (all tiers, ~10000, 5:1 inf:veh)  (111)
+## F16 — Heavy Support composition (all tiers, ~10000, 5:1 inf:veh)  (116)
 
 | actor | actual | expected |
 |---|---|---|
-| td_gdi: heavygdia | total cost 3000 | target ~10000 (±15%) |
+| td_gdi: heavygdia | total cost 3200 | target ~10000 (±15%) |
 | td_gdi: heavygdia | 6 infantry : 3 vehicles | want ~5 infantry per vehicle |
 | td_gdi: heavygdia | td_gdi_battletank (cost 900) x2 vs td_gdi_humvee (cost 400) x1 | pricier units must not outnumber cheaper ones |
 | td_gdi: heavygdia | all units are Tier 1 | heavy support should mix all tiers |
-| td_gdi: heavygdib | total cost 3600 | target ~10000 (±15%) |
+| td_gdi: heavygdib | total cost 3800 | target ~10000 (±15%) |
 | td_gdi: heavygdib | all units are Tier 1 | heavy support should mix all tiers |
-| td_nod: heavynoda | total cost 2800 | target ~10000 (±15%) |
+| td_nod: heavynoda | total cost 3000 | target ~10000 (±15%) |
 | td_nod: heavynoda | 6 infantry : 3 vehicles | want ~5 infantry per vehicle |
-| td_nod: heavynodb | total cost 2700 | target ~10000 (±15%) |
+| td_nod: heavynodb | total cost 3000 | target ~10000 (±15%) |
 | ra1_allies: heavyallies | total cost 3800 | target ~10000 (±15%) |
 | ra1_allies: heavyallies | 5 infantry : 5 vehicles | want ~5 infantry per vehicle |
 | ra1_allies: heavyallies | ra1_allies_alliedmediumtank (cost 700) x3 vs ra1_allies_alliedrocketsoldier (cost 300) x2 | pricier units must not outnumber cheaper ones |
@@ -776,10 +773,15 @@ _none found_
 | ordos: ordos_h | total cost 7040 | target ~10000 (±15%) |
 | ordos: ordos_h | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
 | ordos: ordos_h | all units are Tier 1 | heavy support should mix all tiers |
-| harkonnen: ixian_h | total cost 7100 | target ~10000 (±15%) |
-| harkonnen: ixian_h | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
-| ixian: ixian_only_h | total cost 7100 | target ~10000 (±15%) |
-| ixian: ixian_only_h | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
+| ixian: ixian_h | total cost 7100 | target ~10000 (±15%) |
+| ixian: ixian_h | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
+| atreides: atreides_h | total cost 7100 | target ~10000 (±15%) |
+| atreides: atreides_h | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
+| harkonnen: harkonnen_h | total cost 7100 | target ~10000 (±15%) |
+| harkonnen: harkonnen_h | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
+| harkonnen: harkonnen_h | all units are Tier 1 | heavy support should mix all tiers |
+| corrino: corrino_h | total cost 7100 | target ~10000 (±15%) |
+| corrino: corrino_h | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
 | terran: heavyterran | 4 infantry : 3 vehicles | want ~5 infantry per vehicle |
 | terran: heavyterran | terran_marine (cost 689) x2 vs terran_firebat (cost 500) x1 | pricier units must not outnumber cheaper ones |
 | terran: heavyterran | terran_marine (cost 689) x2 vs terran_medic (cost 600) x1 | pricier units must not outnumber cheaper ones |
@@ -800,10 +802,11 @@ _none found_
 | eden: heavyeden | eden_lynx_railgun (cost 900) x3 vs eden_scout (cost 300) x1 | pricier units must not outnumber cheaper ones |
 
 
-## F17 — fighter/bomber TurnSpeed ≠ Speed/15 (frontal: 2×)  (6)
+## F17 — fighter/bomber TurnSpeed ≠ Speed/15 (frontal: 2×)  (7)
 
 | actor | actual | expected |
 |---|---|---|
+| asianalliance_harbinger | TurnSpeed 16 (Speed 210) | expected 14 = Speed/15 |
 | forgotten_cropplane | TurnSpeed 64 (Speed 160) | expected 11 = Speed/15 |
 | ordos_airmine | TurnSpeed 8 (Speed 35) | expected 2 = Speed/15 |
 | ra1_soviets_supersonicnuclearbomber | TurnSpeed 15 (Speed 200) | expected 13 = Speed/15 |
@@ -876,44 +879,35 @@ _none found_
 | zerg_behemoth | TurnSpeed 12 (Speed 30) | expected 6 = Speed/5 |
 
 
-## F20 — AA support vehicle: air range ≠ 1.5 × ground range  (6)
+## F20 — AA support vehicle: air range ≠ 1.5 × ground range  (3)
 
 | actor | actual | expected |
 |---|---|---|
-| latinsyndicate_diablo | AA range 10450 vs ground 7300 | expected 10950 = 1.5 x ground range |
 | latinsyndicate_latinapc | AA range 9610 vs ground 6740 | expected 10110 = 1.5 x ground range |
 | ordos_laboratorycrawler | AA range 6500 vs ground 6500 | expected 9750 = 1.5 x ground range |
 | protoss_analogue | AA range 2000 vs ground 1500 | expected 2250 = 1.5 x ground range |
-| ra2_soviets_flaktrack | AA range 9292 vs ground 6528 | expected 9792 = 1.5 x ground range |
-| wirbelwind.nax | AA range 9052 vs ground 6368 | expected 9552 = 1.5 x ground range |
 
 
-## F22 — promotion tech gate ≠ unlocked unit's tech gate  (24)
+## F22 — promotion tech gate ≠ unlocked unit's tech gate  (18)
 
 | actor | actual | expected |
 |---|---|---|
-| futuretech: futuretech_cryolegionnaire | unit tech tier 7 | promotion futuretech_promotion_unlockcryolegionnaire tier 0 — must match |
-| futuretech: futuretech_futuretank | unit tech tier 7 | promotion futuretech_promotion_unlockfuturetank tier 0 — must match |
-| futuretech: futuretech_harbingergunship | unit tech tier 7 | promotion futuretech_promotion_unlockharbingergunship tier 0 — must match |
-| harkonnen: heavy_rocket_raider.ixian | unit tech tier 5 | promotion ixian_promotion_unlockheavyixraider tier 0 — must match |
-| harkonnen: ixian_ixprojector | unit tech tier 5 | promotion ixian_promotion_unlockixprojector tier 0 — must match |
-| harkonnen: ixian_ixsiegetank | unit tech tier 5 | promotion ixian_promotion_unlockixsiegetank tier 0 — must match |
-| harkonnen: ixian_neocymek | unit tech tier 5 | promotion ixian_promotion_unlockneocymek tier 0 — must match |
-| harkonnen: ixian_stormraider | unit tech tier 5 | promotion ixian_promotion_unlockstormraider tier 0 — must match |
-| ixian: heavy_rocket_raider.ixian | unit tech tier 5 | promotion ixian_promotion_unlockheavyixraider tier 0 — must match |
-| ixian: ixian_ixprojector | unit tech tier 5 | promotion ixian_promotion_unlockixprojector tier 0 — must match |
-| ixian: ixian_ixsiegetank | unit tech tier 5 | promotion ixian_promotion_unlockixsiegetank tier 0 — must match |
-| ixian: ixian_neocymek | unit tech tier 5 | promotion ixian_promotion_unlockneocymek tier 0 — must match |
-| ixian: ixian_stormraider | unit tech tier 5 | promotion ixian_promotion_unlockstormraider tier 0 — must match |
-| latinsyndicate: latinsyndicate_burrito | unit tech tier 5 | promotion latinsyndicate_promotion_unlockburritos tier 0 — must match |
-| latinsyndicate: latinsyndicate_lars | unit tech tier 5 | promotion latinsyndicate_promotion_unlocklars tier 0 — must match |
-| latinsyndicate: latinsyndicate_topolm | unit tech tier 5 | promotion latinsyndicate_promotion_unlocktopolm tier 0 — must match |
-| ordos: ordos_deviatortank | unit tech tier 5 | promotion ordos_promotion_unlockdeviatortank tier 0 — must match |
-| ordos: ordos_dustdrone | unit tech tier 5 | promotion ordos_promotion_unlockdustdrone tier 0 — must match |
-| ordos: ordos_laboratorycrawler | unit tech tier 5 | promotion ordos_promotion_unlocklaboratorycrawler tier 0 — must match |
-| ordos: ordos_lasertank | unit tech tier 5 | promotion ordos_promotion_unlocklasertank tier 0 — must match |
-| ordos: ordos_pythontank | unit tech tier 5 | promotion ordos_promotion_unlockpython tier 0 — must match |
-| ordos: ordos_stealthraider | unit tech tier 5 | promotion ordos_promotion_unlockstealthraider tier 0 — must match |
-| steelconsortium: steelconsortium_cloudbreaker | unit tech tier 5 | promotion steelconsortium_promotion_unlockcloudbreaker tier 0 — must match |
-| ts_gdi: ts_gdi_kodiakcommandship | unit tech tier 5 | promotion ts_gdi_promotion_unlockkodiak tier 0 — must match |
+| futuretech: futuretech_cryolegionnaire | unit tech tier 7 | promotion futuretech_promotion_cryolegionnaire tier 0 — must match |
+| futuretech: futuretech_futuretank | unit tech tier 7 | promotion futuretech_promotion_futuretank tier 0 — must match |
+| futuretech: futuretech_harbingergunship | unit tech tier 7 | promotion futuretech_promotion_harbingergunship tier 0 — must match |
+| ixian: heavy_rocket_raider.ixian | unit tech tier 5 | promotion ixian_promotion_heavyixraider tier 0 — must match |
+| ixian: ixian_ixprojector | unit tech tier 5 | promotion ixian_promotion_ixprojector tier 0 — must match |
+| ixian: ixian_ixsiegetank | unit tech tier 5 | promotion ixian_promotion_ixsiegetank tier 0 — must match |
+| ixian: ixian_neocymek | unit tech tier 5 | promotion ixian_promotion_neocymek tier 0 — must match |
+| ixian: ixian_stormraider | unit tech tier 5 | promotion ixian_promotion_stormraider tier 0 — must match |
+| latinsyndicate: latinsyndicate_burrito | unit tech tier 5 | promotion latinsyndicate_promotion_burritos tier 0 — must match |
+| latinsyndicate: latinsyndicate_lars | unit tech tier 5 | promotion latinsyndicate_promotion_lars tier 0 — must match |
+| latinsyndicate: latinsyndicate_topolm | unit tech tier 5 | promotion latinsyndicate_promotion_topolm tier 0 — must match |
+| ordos: ordos_deviatortank | unit tech tier 5 | promotion ordos_promotion_deviatortank tier 0 — must match |
+| ordos: ordos_dustdrone | unit tech tier 5 | promotion ordos_promotion_dustdrone tier 0 — must match |
+| ordos: ordos_laboratorycrawler | unit tech tier 5 | promotion ordos_promotion_laboratorycrawler tier 0 — must match |
+| ordos: ordos_lasertank | unit tech tier 5 | promotion ordos_promotion_lasertank tier 0 — must match |
+| ordos: ordos_pythontank | unit tech tier 5 | promotion ordos_promotion_python tier 0 — must match |
+| ordos: ordos_stealthraider | unit tech tier 5 | promotion ordos_promotion_stealthraider tier 0 — must match |
+| steelconsortium: steelconsortium_cloudbreaker | unit tech tier 5 | promotion steelconsortium_promotion_cloudbreaker tier 0 — must match |
 
