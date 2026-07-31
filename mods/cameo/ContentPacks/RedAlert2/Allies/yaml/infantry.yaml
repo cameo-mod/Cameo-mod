@@ -285,7 +285,7 @@ ra2_allies_guardiangi:
 		RequiresCondition: !deployed && rank-elite && ra2_allies_upgrade_elitegi
 		LocalOffset: 128,0,256
 	Armament@BOTAA:
-		Weapon: aadeploytargeting.8c0
+		Weapon: aadeploytargeting_8c0
 		Name: targeting
 		RequiresCondition: botmicro
 	Armament@DEPLOYED:

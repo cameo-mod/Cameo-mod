@@ -775,12 +775,12 @@ ixian_heavykodatank:
 # 		LocalOffset: 575, 0, 175
 # 		MuzzlePalette: d2keffect
 # 	Armament@MGround:
-# 		Weapon: d2k_APC.AG
+# 		Weapon: d2k_APC_AG
 # 		Name: secondary
 # 		LocalOffset: 575, 75, 175
 # 		PauseOnCondition: !ammo
 # 	Armament@MAA:
-# 		Weapon: d2k_APC.AA
+# 		Weapon: d2k_APC_AA
 # 		Name: aa
 # 		LocalOffset: 575, 75, 175
 # 		PauseOnCondition: !ammo
@@ -1345,11 +1345,11 @@ ixian_ixprojector:
 		ValidRelationships: Ally
 		Condition: d2kvordelproxy
 	Armament@Anim:
-		Weapon: empdisable.anim
+		Weapon: Ixian_EMP_charge
 		RequiresCondition: end_disable == 0
 		LocalOffset: -128,0,256
 	Armament@End:
-		Weapon: empdisable.end
+		Weapon: Ixian_EMP_disable
 		RequiresCondition: end_disable >= 1
 		LocalOffset: -128,0,256
 	GrantConditionOnAttack@End:

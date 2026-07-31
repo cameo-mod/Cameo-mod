@@ -527,7 +527,7 @@ Ixian_EMP_Bomb:
 		ImpactActors: false
 		AffectsParent: true
 
-EMPDisable.anim:
+Ixian_EMP_charge:
 	ReloadDelay: 3
 	Range: 20000
 	ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
@@ -543,7 +543,7 @@ EMPDisable.anim:
 		ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
 		Damage: 1
 
-EMPDisable.end:
+Ixian_EMP_disable:
 	Inherits: ^TeslaChargedWeapon
 	ReloadDelay: 4
 	Range: 20000
@@ -1390,7 +1390,7 @@ d2k_farasha_aa:
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
 
-farasha_drone.ixian:
+farasha_drone_ixian:
 	Inherits: ^LightFlameWeapon
 	Inherits: ^MediumChemicalWeapon
 	Inherits: d2k_laser

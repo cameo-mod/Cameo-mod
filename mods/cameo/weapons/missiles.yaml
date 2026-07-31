@@ -193,7 +193,7 @@ MammothMissiles:
 	Warhead@3Eff: CreateEffect
 		Explosions: med_frag
 
-227mm.stnk:
+227mm_stnk:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 70
 	Range: 7680
@@ -482,7 +482,7 @@ MammothTusk:
 		ImpactSounds: kaboom25.aud
 		ValidTargets: Air
 
-APCRocket.AA:
+APCRocket_AA:
     Inherits: MammothTusk
     Burst: 1
     ReloadDelay: 90

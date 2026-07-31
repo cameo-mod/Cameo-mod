@@ -461,7 +461,7 @@ ordos_spiceharvester:
 # 	UpdatesPlayerStatistics:
 # 		AddToArmyValue: true
 # 	Armament@deploy:
-# 		Weapon: deploytargeting.5c0
+# 		Weapon: deploytargeting_5c0
 # 		RequiresCondition: loaded
 # 	AutoTarget:
 # 		InitialStance: AttackAnything
@@ -1190,7 +1190,7 @@ ordos_deviatortank:
 # 		Weapon: D2K_Annihilator
 # 		LocalOffset: 350,0,0
 # 	Armament@aa:
-# 		Weapon: D2K_Annihilator.AA
+# 		Weapon: D2K_Annihilator_AA
 # 		LocalOffset: 100,-150,100, 100,150,100
 # 	Valued:
 # 		Cost: 2000
@@ -2719,7 +2719,7 @@ ordos_tankdestroyer:
 # 		Modifier: 200
 # 		RequiresCondition: deployed
 # 	Armament@Deploy:
-# 		Weapon: deploytargeting.10c0
+# 		Weapon: deploytargeting_10c0
 # 		Name: primary
 # 	AttackFrontal:
 # 		FacingTolerance: 0

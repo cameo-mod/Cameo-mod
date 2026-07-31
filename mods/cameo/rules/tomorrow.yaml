@@ -2904,7 +2904,7 @@ dtapc:
 		LocalOffset: 85,85,299, 85,-85,299
 		MuzzleSequence: muzzle
 	Armament@ROCKET:
-		Weapon: APCRocket.AA
+		Weapon: APCRocket_AA
 		LocalOffset: 85,125,299
 	AttackFrontal:
 		FacingTolerance: 0
@@ -3031,7 +3031,7 @@ tran.tomorrow.e3:
 	AttackAircraft:
 		FacingTolerance: 512
 	Armament:
-		Weapon: deploytargeting.5c0
+		Weapon: deploytargeting_5c0
 		RequiresCondition: botmicro && loaded
 	AutoDeployer:
 		DeployChance: 100
@@ -3419,13 +3419,13 @@ dtstnk:
 	Turreted:
 		TurnSpeed: 40
 	Armament@PRIMARY:
-		Weapon: 227mm.stnk
+		Weapon: 227mm_stnk
 		Recoil: 96
 		RecoilRecovery: 18
 		LocalOffset: 85,85,299, 85,-85,299
 		MuzzleSequence: muzzle
 	Armament@ROCKET:
-		Weapon: APCRocket.AA
+		Weapon: APCRocket_AA
 		LocalOffset: 85,125,299
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -3621,7 +3621,7 @@ dtapc2:
 		LocalOffset: 85,0,299
 		MuzzleSequence: muzzle
 	Armament@ROCKET:
-		Weapon: APCRocket.AA
+		Weapon: APCRocket_AA
 		LocalOffset: 85,125,299
 	MineImmune:
 	AttackFrontal:

@@ -5541,7 +5541,7 @@ swhtnk:
 	Turreted:
 		TurnSpeed: 12
 	Armament:
-		Weapon: deploytargeting.5c0
+		Weapon: deploytargeting_5c0
 		RequiresCondition: loaded
 	Armament@PRIMARY:
 		Weapon: SWATATLaser
@@ -6779,7 +6779,7 @@ swlaat.e1:
 		InitialUnits: swe1clone, swe1clone, swe1clone, swe1clone, swe1clone, swe1clone, swe1clone, swe3, swe3, swe3
 		LoadedCondition: loaded
 	Armament:
-		Weapon: deploytargeting.5c0
+		Weapon: deploytargeting_5c0
 		RequiresCondition: botmicro && loaded
 	AutoDeployer:
 		DeployChance: 100
@@ -6877,7 +6877,7 @@ swc17player:
 	Armament:
 		Weapon: InterceptorLauncherMonCalamari
 	Armament@Deploy:
-		Weapon: deploytargeting.5c0
+		Weapon: deploytargeting_5c0
 		RequiresCondition: loaded
 	Armament@AG1:
 		Weapon: SWMonCalamariLaser
@@ -6939,7 +6939,7 @@ swc17player.e1:
 		InitialUnits: sw3tnk, sw1tnkre, swarty4, swarty3, swquad, swbggy, swbike, swftnk, swe1, swe1, swe2, swe2, swe3, swe3, swe3
 		LoadedCondition: loaded
 	Armament@Deploy:
-		Weapon: deploytargeting.10c0
+		Weapon: deploytargeting_10c0
 		RequiresCondition: botmicro && loaded
 	AutoDeployer:
 		DeployChance: 100
@@ -7505,7 +7505,7 @@ sw4tnk:
 		TurnSpeed: 12
 		Offset: 72,0,64
 	Armament:
-		Weapon: deploytargeting.5c0
+		Weapon: deploytargeting_5c0
 		RequiresCondition: loaded
 	Armament@PRIMARY:
 		Weapon: SWATTELaser
@@ -7634,7 +7634,7 @@ swjugger:
 		TurnSpeed: 16
 		Offset: 762,0,52
 	Armament:
-		Weapon: deploytargeting.5c0
+		Weapon: deploytargeting_5c0
 		RequiresCondition: loaded
 	Armament@PRIMARY:
 		Weapon: SWATATLaser
@@ -8044,7 +8044,7 @@ swtran.e2:
 		InitialUnits: swe2, swe2, swe2, swe2, swe3troop, swe3troop, swe1troop, swe1troop, swe1troop, swe1troop
 		LoadedCondition: loaded
 	Armament:
-		Weapon: deploytargeting.5c0
+		Weapon: deploytargeting_5c0
 		RequiresCondition: botmicro && loaded
 	AutoDeployer:
 		DeployChance: 100
@@ -8067,7 +8067,7 @@ swtran.e1:
 		InitialUnits: swe1troop, swe1troop, swe1troop, swe1troop, swe1troop, swe1troop, swe1troop, swe1troop, swe1troop, swe1troop
 		LoadedCondition: loaded
 	Armament:
-		Weapon: deploytargeting.5c0
+		Weapon: deploytargeting_5c0
 		RequiresCondition: botmicro && loaded
 	AutoDeployer:
 		DeployChance: 100

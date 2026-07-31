@@ -1429,12 +1429,12 @@ ordos_leech:
 # 		LocalOffset: 575, 0, 175
 # 		MuzzlePalette: d2keffect
 # 	Armament@MGround:
-# 		Weapon: d2k_APC.AG
+# 		Weapon: d2k_APC_AG
 # 		Name: secondary
 # 		LocalOffset: 575, 75, 175
 # 		PauseOnCondition: !ammo
 # 	Armament@MAA:
-# 		Weapon: d2k_APC.AA
+# 		Weapon: d2k_APC_AA
 # 		Name: aa
 # 		LocalOffset: 575, 75, 175
 # 		PauseOnCondition: !ammo
@@ -1485,7 +1485,7 @@ ordos_leech:
 # 		Name: tertiary
 # 		Weapon: 80mm_H
 # 	Armament@deploy:
-# 		Weapon: deploytargeting.5c0
+# 		Weapon: deploytargeting_5c0
 # 		RequiresCondition: loaded
 # 	AutoTarget:
 # 		InitialStance: AttackAnything
@@ -1813,12 +1813,12 @@ ordos_leech:
 # 		Name: primary
 # 		MuzzlePalette: d2keffect
 # 	Armament@RGround:
-# 		Weapon: Rocket.stealth
+# 		Weapon: Rocket_stealth
 # 		Name: secondary
 # 		PauseOnCondition: !ammo
 # 		LocalOffset: 213,43,128, 213,-43,128
 # 	Armament@RAA:
-# 		Weapon: Rocket.stealthAA
+# 		Weapon: Rocket_stealth_AA
 # 		Name: aa
 # 		PauseOnCondition: !ammo
 # 		LocalOffset: 213,43,128, 213,-43,128
@@ -1932,12 +1932,12 @@ ordos_leech:
 # 		Image: d2k_apc
 # 		PlayerPalette: raplayer
 # 	Armament@MGround:
-# 		Weapon: d2k_APCo.AG
+# 		Weapon: d2k_APCo_AG
 # 		Name: secondary
 # 		LocalOffset: 768,75,90
 # 		PauseOnCondition: !ammo
 # 	Armament@MAA:
-# 		Weapon: d2k_APCo.AA
+# 		Weapon: d2k_APCo_AA
 # 		Name: aa
 # 		LocalOffset: 768,75,90
 # 		PauseOnCondition: !ammo
