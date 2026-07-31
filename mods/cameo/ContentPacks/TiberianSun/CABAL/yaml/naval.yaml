@@ -192,11 +192,11 @@ cabal_radar_cruiser:
 		TurnSpeed: 24
 		Offset: 512,0,0
 	Armament@Anim:
-		Weapon: TSCABAL_EMP_charge
+		Weapon: TSCABALCharge_EMP
 		RequiresCondition: end_disable == 0
 		LocalOffset: -128,0,256
 	Armament@End:
-		Weapon: TSCABAL_EMP_disable
+		Weapon: TSCABALDisable_EMP
 		RequiresCondition: end_disable >= 1
 		LocalOffset: -128,0,256
 	GrantConditionOnAttack@End:

@@ -13385,11 +13385,11 @@
 # 		ValidRelationships: Ally
 # 		Condition: d2kvordelproxy
 # 	Armament@Anim:
-# 		Weapon: Ixian_EMP_charge
+# 		Weapon: IxianCharge_EMP
 # 		RequiresCondition: end_disable == 0
 # 		LocalOffset: -128,0,256
 # 	Armament@End:
-# 		Weapon: Ixian_EMP_disable
+# 		Weapon: IxianDisable_EMP
 # 		RequiresCondition: end_disable >= 1
 # 		LocalOffset: -128,0,256
 # 	GrantConditionOnAttack@End:
@@ -13748,7 +13748,7 @@
 # 	Shielded:
 # 		RegenAmount: 76
 # 	Armament@PRIMARY:
-# 		Weapon: Ixian_EMP_Bomb
+# 		Weapon: IxianBomb_EMP
 # 		LocalOffset: 250,0,-250
 # 		PauseOnCondition: !ammo
 # 	AttackAircraft:

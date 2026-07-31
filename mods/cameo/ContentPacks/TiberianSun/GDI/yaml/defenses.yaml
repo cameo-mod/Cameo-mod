@@ -198,7 +198,7 @@ ts_gdi_empulsecannon:
 		RequiresCondition: !build-incomplete
 		Sequence: turret
 	Armament@PRIMARY:
-		Weapon: TS_EMP_PulseCannon
+		Weapon: TSPulseCannon_EMP
 		LocalOffset: 212,0,1768
 		LocalYaw: 0,100
 	AttackTurreted:

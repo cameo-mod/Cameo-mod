@@ -461,7 +461,7 @@ ResonanceDroneRepair:
 	ReloadDelay: 5
 	Range: 4500
 
-Ixian_EMP_Bomb:
+IxianBomb_EMP:
 	Inherits: ^MediumFlameWeapon
 	Inherits: ^HeavyBomb
 	Inherits: ^TeslaChargedWeapon
@@ -527,7 +527,7 @@ Ixian_EMP_Bomb:
 		ImpactActors: false
 		AffectsParent: true
 
-Ixian_EMP_charge:
+IxianCharge_EMP:
 	ReloadDelay: 3
 	Range: 20000
 	ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
@@ -543,7 +543,7 @@ Ixian_EMP_charge:
 		ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
 		Damage: 1
 
-Ixian_EMP_disable:
+IxianDisable_EMP:
 	Inherits: ^TeslaChargedWeapon
 	ReloadDelay: 4
 	Range: 20000

@@ -733,7 +733,7 @@ PortaTesla_EMP:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 
-PortaTesla_EMP_Arc:
+PortaTeslaArc_EMP:
 	Inherits: PortaTesla_EMP
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: PortaTeslaFragment
@@ -743,7 +743,7 @@ PortaTesla_EMP_Arc:
 		AimTargetStances: Enemy, Neutral
 
 PortaTeslaFragment:
-	Inherits: PortaTesla_EMP_Arc
+	Inherits: PortaTeslaArc_EMP
 	Range: 2326
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 10000
@@ -814,17 +814,17 @@ TTankZap_EMP:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 
-TTankZap_EMP_Arc:
+TTankZapArc_EMP:
 	Inherits: TTankZap_EMP
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TTankZap_EMP_ArcTeslaFragment1
+		Weapon: TTankZapArcTeslaFragment1_EMP
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TTankZap_EMP_ArcTeslaFragment1:
-	Inherits: TTankZap_EMP_Arc
+TTankZapArcTeslaFragment1_EMP:
+	Inherits: TTankZapArc_EMP
 	Range: 3650
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 20000
@@ -835,14 +835,14 @@ TTankZap_EMP_ArcTeslaFragment1:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TTankZap_EMP_ArcTeslaFragment2
+		Weapon: TTankZapArcTeslaFragment2_EMP
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TTankZap_EMP_ArcTeslaFragment2:
-	Inherits: TTankZap_EMP_ArcTeslaFragment1
+TTankZapArcTeslaFragment2_EMP:
+	Inherits: TTankZapArcTeslaFragment1_EMP
 	Range: 1825
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 10000
@@ -871,17 +871,17 @@ TTankZap2_EMP:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 
-TTankZap2_EMP_Arc:
+TTankZap2Arc_EMP:
 	Inherits: TTankZap2_EMP
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TTankZap2_EMP_ArcTeslaFragment1
+		Weapon: TTankZap2ArcTeslaFragment1_EMP
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TTankZap2_EMP_ArcTeslaFragment1:
-	Inherits: TTankZap2_EMP_Arc
+TTankZap2ArcTeslaFragment1_EMP:
+	Inherits: TTankZap2Arc_EMP
 	Range: 3325
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 20000
@@ -892,14 +892,14 @@ TTankZap2_EMP_ArcTeslaFragment1:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TTankZap2_EMP_ArcTeslaFragment2
+		Weapon: TTankZap2ArcTeslaFragment2_EMP
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TTankZap2_EMP_ArcTeslaFragment2:
-	Inherits: TTankZap2_EMP_ArcTeslaFragment1
+TTankZap2ArcTeslaFragment2_EMP:
+	Inherits: TTankZap2ArcTeslaFragment1_EMP
 	Range: 1663
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 10000
@@ -928,17 +928,17 @@ TeslaZap_EMP:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
 
-TeslaZap_EMP_Arc:
+TeslaZapArc_EMP:
 	Inherits: TeslaZap_EMP
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaZap_EMP_ArcTeslaFragment1
+		Weapon: TeslaZapArcTeslaFragment1_EMP
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TeslaZap_EMP_ArcTeslaFragment1:
-	Inherits: TeslaZap_EMP_Arc
+TeslaZapArcTeslaFragment1_EMP:
+	Inherits: TeslaZapArc_EMP
 	Range: 4660
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 16000
@@ -949,14 +949,14 @@ TeslaZap_EMP_ArcTeslaFragment1:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaZap_EMP_ArcTeslaFragment2
+		Weapon: TeslaZapArcTeslaFragment2_EMP
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TeslaZap_EMP_ArcTeslaFragment2:
-	Inherits: TeslaZap_EMP_ArcTeslaFragment1
+TeslaZapArcTeslaFragment2_EMP:
+	Inherits: TeslaZapArcTeslaFragment1_EMP
 	Range: 2330
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 8000

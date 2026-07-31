@@ -664,11 +664,11 @@ cabal_hackercyborg:
 		RegenInterval: 1
 		RegenAmount: 60
 	Armament@Anim:
-		Weapon: TSCABAL_EMP_charge
+		Weapon: TSCABALCharge_EMP
 		RequiresCondition: end_disable == 0
 		LocalOffset: -128,0,256
 	Armament@End:
-		Weapon: TSCABAL_EMP_disable
+		Weapon: TSCABALDisable_EMP
 		RequiresCondition: end_disable >= 1
 		LocalOffset: -128,0,256
 	GrantConditionOnAttack@End:

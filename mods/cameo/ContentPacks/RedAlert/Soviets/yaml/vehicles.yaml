@@ -531,7 +531,7 @@ ra1_soviets_heavyteslatank:
 		PauseOnCondition: pdammo < 8
 		RequiresCondition: !ra1_soviets_upgrade_teslaarcing
 	Armament@Arcing:
-		Weapon: TTankZap2_EMP_Arc
+		Weapon: TTankZap2Arc_EMP
 		LocalOffset: 50,0,200
 		AmmoUsage: 8
 		PauseOnCondition: pdammo < 8
@@ -1052,7 +1052,7 @@ ra1_soviets_teslatank:
 		LocalOffset: 0,0,213
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade2:
-		Weapon: TTankZap_EMP_Arc
+		Weapon: TTankZapArc_EMP
 		LocalOffset: 0,0,213
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	AttackFrontal:
