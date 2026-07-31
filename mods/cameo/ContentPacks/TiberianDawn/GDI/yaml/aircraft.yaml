@@ -233,7 +233,7 @@ A10Carrier:
 		LocalOffset: 0,-256,-43, 0,256,-43
 	Armament@AA:
 		Name: secondary
-		Weapon: A10CarrierMissiles
+		Weapon: A10CarrierMissiles_AA
 		LocalOffset: 0,-300,0, 0,300,0
 	AmmoPool:
 		Ammo: 16
@@ -315,14 +315,14 @@ td_gdi_firehawk:
 	ChangesHealth@SelfHealing:
 		Step: 72
 	Armament:
-		Weapon: FirehawkMissiles
+		Weapon: FirehawkMissiles_AA
 		LocalOffset: 0,-960,0, 0,960,0, 0,-480,0, 0,480,0
 		LocalYaw: 50, -50, 25, -25
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: !ammo
 	Armament@td_gdi_upgrade_advancedmissiletargeting:
-		Weapon: FirehawkMissiles
+		Weapon: FirehawkMissiles_AA
 		LocalOffset: 0,960,0, 0,-960,0, 0,480,0, 0,-480,0
 		LocalYaw: 50, -50, 25, -25
 		MuzzleSequence: muzzle

@@ -1446,7 +1446,7 @@ BTRMachineGun:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
 
-BTRMachineGunAA:
+BTRMachineGun_AA:
 	Inherits: BTRMachineGun
 	Range: 8181
 	ValidTargets: Air
@@ -1514,13 +1514,13 @@ BTRTeslaMachineGunArcFragment1:
 	Range: 2727
 	-Warhead@TeslaArc:
 
-BTRTeslaMachineGunAA:
+BTRTeslaMachineGun_AA:
 	Inherits: BTRTeslaMachineGun
 	Range: 8181
 	ValidTargets: Air
 
-BTRTeslaMachineGunArcAA:
-	Inherits: BTRTeslaMachineGunAA
+BTRTeslaMachineGunArc_AA:
+	Inherits: BTRTeslaMachineGun_AA
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: BTRTeslaMachineGunArcFragment1AA
 		Amount: 1
@@ -1529,7 +1529,7 @@ BTRTeslaMachineGunArcAA:
 		AimTargetStances: Enemy, Neutral
 
 BTRTeslaMachineGunArcFragment1AA:
-	Inherits: BTRTeslaMachineGunArcAA
+	Inherits: BTRTeslaMachineGunArc_AA
 	Range: 4090
 	-Warhead@TeslaArc:
 
@@ -3956,7 +3956,7 @@ RAGatlingTankCannon:
 		ValidTargets: Ground, Water
 		Damage: 1
 
-RAGatlingTankCannonAA:
+RAGatlingTankCannon_AA:
 	Inherits: RAGatlingTankCannon
 	Range: 7500
 	ValidTargets: Air
@@ -3989,7 +3989,7 @@ IncendiaryRAGatlingTankCannon:
 		ValidTargets: Ground, Water
 		Damage: 1
 
-IncendiaryRAGatlingTankCannonAA:
+IncendiaryRAGatlingTankCannon_AA:
 	Inherits: IncendiaryRAGatlingTankCannon
 	Range: 7500
 	ValidTargets: Air
@@ -4045,13 +4045,13 @@ TeslaRAGatlingTankCannonArcFragment1:
 	Range: 2500
 	-Warhead@TeslaArc:
 
-TeslaRAGatlingTankCannonAA:
+TeslaRAGatlingTankCannon_AA:
 	Inherits: TeslaRAGatlingTankCannon
 	Range: 7500
 	ValidTargets: Air
 
-TeslaRAGatlingTankCannonArcAA:
-	Inherits: TeslaRAGatlingTankCannonAA
+TeslaRAGatlingTankCannonArc_AA:
+	Inherits: TeslaRAGatlingTankCannon_AA
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: TeslaRAGatlingTankCannonArcFragment1AA
 		Amount: 1
@@ -4060,7 +4060,7 @@ TeslaRAGatlingTankCannonArcAA:
 		AimTargetStances: Enemy, Neutral
 
 TeslaRAGatlingTankCannonArcFragment1AA:
-	Inherits: TeslaRAGatlingTankCannonArcAA
+	Inherits: TeslaRAGatlingTankCannonArc_AA
 	Range: 3750
 	-Warhead@TeslaArc:
 

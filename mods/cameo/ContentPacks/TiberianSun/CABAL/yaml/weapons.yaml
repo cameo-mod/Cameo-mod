@@ -478,7 +478,7 @@ CabalReaperMissiles:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 4
 
-CabalReaperMissilesAA:
+CabalReaperMissiles_AA:
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^LightMissile
@@ -554,7 +554,7 @@ CabalHeavyReaperMissiles:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 6
 
-CabalHeavyReaperMissilesAA:
+CabalHeavyReaperMissiles_AA:
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumMissile

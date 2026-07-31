@@ -627,7 +627,7 @@ TSMammothTusk2:
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 
-TSMammothTusk2II:
+TSMammothTusk2II_AA:
 	Inherits@glow: ^ImpactGlow
 	Inherits: ^HeavyMissile
 	ValidTargets: Air

@@ -69,7 +69,7 @@ ZMutantPunch:
 		DamageTypes: Prone50Percent, TriggerProne, RippedApartDeath
 		ValidTargets: Ground, Water, Air
 
-ZBruteRock:
+ZBruteRock_AA:
 	Inherits: BikeRockets
 	Burst: 1
 	Report: galiatta.wav, galiattb.wav
@@ -655,7 +655,7 @@ ShockShell:
 		ImpactSounds: firebl3.aud
 		ValidTargets: Water
 
-EliminatorAA:
+Eliminator_AA:
 	Inherits: ^AACannon
 	ReloadDelay: 100
 	Range: 12288
@@ -746,7 +746,7 @@ TripodPlasmaPuff:
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
 
-TripodPlasmaballAA:
+TripodPlasmaball_AA:
 	Inherits: ^AntiAirMissile
 	ReloadDelay: 15
 	Range: 12288

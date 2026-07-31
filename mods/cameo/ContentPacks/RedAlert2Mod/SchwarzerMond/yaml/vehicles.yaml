@@ -128,7 +128,7 @@ schwarzermond_laserbeetle:
 		RequiresCondition: !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@AA:
 		Name: primary
-		Weapon: NaxiBeetleLaserAA_elite
+		Weapon: NaxiBeetleLaser_AA_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,1,80, 512,-1,80
@@ -146,7 +146,7 @@ schwarzermond_laserbeetle:
 		RequiresCondition: schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@AA_UP:
 		Name: primary
-		Weapon: Lunar_YellowBeetleLaserAA
+		Weapon: Lunar_YellowBeetleLaser_AA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,1,80, 512,-1,80
@@ -164,7 +164,7 @@ schwarzermond_laserbeetle:
 		RequiresCondition: schwarzermond_upgrade_amplifiedlens
 	Armament@AA_AMP:
 		Name: primary
-		Weapon: Lunar_AmplifiedBeetleLaserAA
+		Weapon: Lunar_AmplifiedBeetleLaser_AA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,1,80, 512,-1,80
@@ -857,7 +857,7 @@ schwarzermond_lasertank:
 		RequiresCondition: !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@AA:
 		Name: primary
-		Weapon: NaxiTank2LaserAA
+		Weapon: NaxiTank2Laser_AA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 850,150,-60, 850,-150,-60
@@ -875,7 +875,7 @@ schwarzermond_lasertank:
 		RequiresCondition: schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@AA_UP:
 		Name: primary
-		Weapon: Lunar_YellowTank2LaserAA
+		Weapon: Lunar_YellowTank2Laser_AA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 850,150,-60, 850,-150,-60
@@ -893,7 +893,7 @@ schwarzermond_lasertank:
 		RequiresCondition: schwarzermond_upgrade_amplifiedlens
 	Armament@AA_AMP:
 		Name: primary
-		Weapon: Lunar_AmplifiedTank2LaserAA
+		Weapon: Lunar_AmplifiedTank2Laser_AA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 850,150,-60, 850,-150,-60

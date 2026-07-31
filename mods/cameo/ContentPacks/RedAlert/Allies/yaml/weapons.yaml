@@ -237,7 +237,7 @@ RapierBombsCryo:
 		Range: 2500
 		ValidRelationships: Neutral, Enemy
 
-Aphid:
+Aphid_AA:
 	Inherits: ^ShrapnelWeapon
 	Inherits@glow: ^ImpactGlow
 	Inherits: ^HeavyMissile
@@ -277,8 +277,8 @@ Aphid:
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
 
-AphidCryo:
-	Inherits: Aphid
+AphidCryo_AA:
+	Inherits: Aphid_AA
 	Inherits: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -16000
@@ -685,7 +685,7 @@ HeavyAATankCannonAG:
 		ValidTargets: Ground, Water
 		Damage: 1
 
-HeavyAATankCannonAA:
+HeavyAATankCannon_AA:
 	Inherits: HeavyAATankCannonAG
 	Range: 7119
 	ValidTargets: Air

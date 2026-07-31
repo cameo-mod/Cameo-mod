@@ -47,7 +47,7 @@ LoveHeliAAGun:
 		ImpactSounds: bowhit.aud
 		Explosions: loveex1
 
-LovebowFireAAB:
+LovebowFireAAB_AA:
 	ReloadDelay: 25
 	Burst: 2
 	Range: 7680
@@ -115,8 +115,8 @@ CupidoAK47:
 		Spread: 512
 		Damage: 5120
 
-CupidoAK47AA:
-	Inherits: LovebowFireAAB
+CupidoAK47_AA:
+	Inherits: LovebowFireAAB_AA
 	Range: 12800
 	Burst: 2
 	ReloadDelay: 1

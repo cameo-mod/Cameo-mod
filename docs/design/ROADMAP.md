@@ -1763,19 +1763,33 @@ All other factions have a single, thematically appropriate wall type.
   references. Skipped DREMPDeviceSound (audio VoiceSet) and EMPGrenade
   (EMP is prefix). Boot-gated: menu reached, 0 new exception logs.
 
-- [ ] **WEAPON-SUFFIX-AA: Standardize anti-air weapon names to _AA suffix**
-  — per DESIGN.md §1, weapons whose `ValidTargets` includes only `Air`
-  must append `_AA`. Current AA weapons use inconsistent naming:
-  `SWLaserJetpackAA` (already correct), `TSGrenadeAA` (already correct),
-  but many others like `SWAWingGunAA`, `SWXWingGunAA`, `DTMissileCrawlerAA`,
-  `SCUDAA`, `ZToughMissileAA`, `FlakbusAA`, `SCTyrAA`, `SCDevourerAA`,
-  `ManifoldMGAA`, `SUSAGladiatorAA`, `SUSAAdvPatriotMissAA`, etc. that
-  already use `AA` but not `_AA` (missing underscore). Rename to use
-  `_AA` with underscore separator. Run `audit_weapon_suffixes.py` X3
-  section for the full list. Exclude dual-purpose weapons (those that
-  also target Ground/Water) and weapons with legacy AA keywords (Flak,
-  SAM, Interceptor, Patriot) from the rename.
-  Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
+- [x] **WEAPON-SUFFIX-AA: Standardize anti-air weapon names to _AA suffix**
+  (2026-07-31) — per corrected DESIGN.md §1 rule: `_AA` marks the
+  air-only sibling of a **dual-weapon actor** (an actor/template that
+  equips two separate weapons via different `Armament` traits — one
+  ground-capable, one air-only — e.g. an Anti-Air Tank). Standalone
+  AA-only weapons with no ground-capable sibling on the same actor (SAM
+  Sites, etc.) are intentionally excluded, as are single weapons whose
+  own `ValidTargets` already covers both Ground and Air.
+  **Renamed 111 weapons** via `tools/rename_aa_weapons.py`
+  (structurally-scoped exact-token replacement — top-level def key,
+  `*Weapon:`/`*Weapons:` fields, indexed superweapon lists,
+  block-context-gated `Inherits:` — never a blind substring match).
+  Verified: `audit_weapon_suffixes.py` X3 = 0, `audit_orphans.py`
+  dangling weapon refs = 0, `audit_inherits.py` V3 dangling = 0, rename
+  script is idempotent (second run finds nothing to do).
+  **Bugs found/fixed during this task** (see `docs/LESSONS_LEARNED.md`):
+  an earlier draft of the rename script did a blind file-wide
+  word-boundary substitution of bare weapon names, corrupting unrelated
+  Tooltip/Name/RequiresCondition/Prerequisite text and comments across
+  ~30 files (reverted via `git reset --hard` before merge, never
+  pushed); `AA_LEGACY_KEYWORDS` including bare `"aa"` silently excluded
+  every weapon that already contained "AA" without an underscore;
+  identical names reused across actor/weapon/sequence namespaces (e.g.
+  `sow_mech_avenger`, `d2k_aircraft_eater`) required block-type gating
+  before renaming `Inherits:` or top-level definition keys; many
+  weapons declare `ValidTargets` only on a `^Template` ancestor,
+  requiring Inherits-chain resolution.
   Effort: M. See DESIGN.md §1.
 
 ## Long-term goals

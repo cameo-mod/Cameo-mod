@@ -611,7 +611,7 @@ AsianQuasarAG_EMP:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 
-AsianQuasarAA:
+AsianQuasar_AA:
 	Inherits: AsianPhotonCannon
 	ValidTargets: Air
 	ReloadDelay: 33
@@ -624,8 +624,8 @@ AsianQuasarAA:
 		MinimumLaunchSpeed: 300
 		Inaccuracy: 250
 
-AsianQuasarAA_EMP:
-	Inherits: AsianQuasarAA
+AsianQuasar_EMP_AA:
+	Inherits: AsianQuasar_AA
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 
@@ -667,7 +667,7 @@ AsianQuasarBoatAG_EMP:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 
-AsianQuasarBoatAA:
+AsianQuasarBoat_AA:
 	Inherits: AsianPhotonCannon
 	ValidTargets: Air
 	ReloadDelay: 22
@@ -682,8 +682,8 @@ AsianQuasarBoatAA:
 		MinimumLaunchSpeed: 250
 		Inaccuracy: 250
 
-AsianQuasarBoatAA_EMP:
-	Inherits: AsianQuasarBoatAA
+AsianQuasarBoat_EMP_AA:
+	Inherits: AsianQuasarBoat_AA
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 
@@ -855,7 +855,7 @@ AsianQuasarBoatAG:
 		MinimumLaunchSpeed: 192
 		Inaccuracy: 512
 
-AsianQuasarBoatAA:
+AsianQuasarBoat_AA:
 	Inherits: AsianPhotonCannon
 	ValidTargets: Air
 	ReloadDelay: 22

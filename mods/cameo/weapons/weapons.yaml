@@ -4630,7 +4630,7 @@ deploytargeting_10c0:
 	Inherits: ^DeployTargeting
 	Range: 10000
 
-aadeploytargeting_8c0:
+aadeploytargeting_8c0_AA:
 	Inherits: ^AADeployTargeting
 	Range: 8000
 
@@ -5336,7 +5336,7 @@ Spit:
 		Weapon: RA2Cloud
 		InvalidTargets: Water
 
-SpitAA:
+Spit_AA:
 	Inherits: Spit
 	ValidTargets: Air
 	BurstDelays: 44
@@ -5735,7 +5735,7 @@ Short8Inch:
 	Range: 8704
 	Burst: 2
 
-bowFireAA:
+bowFire_AA:
 	ReloadDelay: 40
 	Range: 7680
 	Report: bowfire.aud
@@ -5775,7 +5775,7 @@ bowFireAA:
 			Concrete: 20
 
 bowFire:
-	Inherits: bowFireAA
+	Inherits: bowFire_AA
 	ReloadDelay: 40
 	Range: 5120
 	Report: bowfire.aud

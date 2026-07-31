@@ -1014,12 +1014,12 @@ steelconsortium_manta:
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 	Armament@AA1:
-		Weapon: SteelMantaAA
+		Weapon: SteelManta_AA
 		LocalOffset: 300,100,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 	Armament@AA2:
-		Weapon: SteelMantaAA
+		Weapon: SteelManta_AA
 		LocalOffset: 300,-100,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -1036,13 +1036,13 @@ steelconsortium_manta:
 		MuzzlePalette: ra2effect
 		RequiresCondition: steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeAA1:
-		Weapon: SteelMantaAAResonance
+		Weapon: SteelMantaAAResonance_AA
 		LocalOffset: 300,100,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeAA2:
-		Weapon: SteelMantaAAResonance
+		Weapon: SteelMantaAAResonance_AA
 		LocalOffset: 300,-100,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -1126,7 +1126,7 @@ steelconsortium_barracuda:
 		MuzzlePalette: ra2effect
 	Armament@AA1:
 		Name: primary
-		Weapon: SteelMantaHunterCannonsAA
+		Weapon: SteelMantaHunterCannons_AA
 		Recoil: 125
 		RecoilRecovery: 25
 		LocalOffset: 500,200,-150
@@ -1134,7 +1134,7 @@ steelconsortium_barracuda:
 		MuzzlePalette: ra2effect
 	Armament@AA2:
 		Name: primary
-		Weapon: SteelMantaHunterCannonsAA
+		Weapon: SteelMantaHunterCannons_AA
 		Recoil: 125
 		RecoilRecovery: 25
 		LocalOffset: 500,-200,-150
@@ -1160,7 +1160,7 @@ steelconsortium_barracuda:
 		RequiresCondition: steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeAA1:
 		Name: primary
-		Weapon: SteelMantaHunterCannonsAAResonance
+		Weapon: SteelMantaHunterCannonsAAResonance_AA
 		Recoil: 125
 		RecoilRecovery: 25
 		LocalOffset: 500,200,-150
@@ -1169,7 +1169,7 @@ steelconsortium_barracuda:
 		RequiresCondition: steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeAA2:
 		Name: primary
-		Weapon: SteelMantaHunterCannonsAAResonance
+		Weapon: SteelMantaHunterCannonsAAResonance_AA
 		Recoil: 125
 		RecoilRecovery: 25
 		LocalOffset: 500,-200,-150

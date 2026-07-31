@@ -979,7 +979,7 @@ GoliathMG:
 		ValidTargets: Ground, Water
 		Damage: 1
 
-GoliathRockets:
+GoliathRockets_AA:
 	Inherits: ^Chaingun
 	Inherits: ^FlakWeapon
 	Inherits: ^LightMissile
@@ -1095,7 +1095,7 @@ GoliathMk2Rockets:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 4
 
-WraithRockets:
+WraithRockets_AA:
 	Inherits: ^Chaingun
 	Inherits: ^FlakWeapon
 	Inherits: ^LightMissile

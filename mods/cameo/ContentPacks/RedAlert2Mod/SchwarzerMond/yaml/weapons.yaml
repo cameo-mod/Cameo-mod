@@ -76,7 +76,7 @@ NaxiBeetleLaser_elite:
 		Damage: 1
 		ValidTargets: Ground, Water
 
-NaxiBeetleLaserAA_elite:
+NaxiBeetleLaser_AA_elite:
 	Inherits: NaxiBeetleLaser_elite
 	Range: 9672
 	ValidTargets: Air
@@ -154,7 +154,7 @@ NaxiTank2Laser:
 		Damage: 1
 		ValidTargets: Ground, Water
 
-NaxiTank2LaserAA:
+NaxiTank2Laser_AA:
 	Inherits: NaxiTank2Laser
 	Range: 9750
 	ValidTargets: Air
@@ -943,8 +943,8 @@ Lunar_YellowBeetleLaser:
 	Projectile: LaserZap
 		Color: f3e021AA
 
-Lunar_YellowBeetleLaserAA:
-	Inherits: NaxiBeetleLaserAA_elite
+Lunar_YellowBeetleLaser_AA:
+	Inherits: NaxiBeetleLaser_AA_elite
 	Burst: 3
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -955,8 +955,8 @@ Lunar_AmplifiedBeetleLaser:
 	Projectile: LaserZap
 		Color: f3e021AA
 
-Lunar_AmplifiedBeetleLaserAA:
-	Inherits: NaxiBeetleLaserAA_elite
+Lunar_AmplifiedBeetleLaser_AA:
+	Inherits: NaxiBeetleLaser_AA_elite
 	Burst: 4
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -995,8 +995,8 @@ Lunar_YellowTank2Laser:
 	Projectile: LaserZap
 		Color: f3e021AA
 
-Lunar_YellowTank2LaserAA:
-	Inherits: NaxiTank2LaserAA
+Lunar_YellowTank2Laser_AA:
+	Inherits: NaxiTank2Laser_AA
 	Burst: 5
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -1007,8 +1007,8 @@ Lunar_AmplifiedTank2Laser:
 	Projectile: LaserZap
 		Color: f3e021AA
 
-Lunar_AmplifiedTank2LaserAA:
-	Inherits: NaxiTank2LaserAA
+Lunar_AmplifiedTank2Laser_AA:
+	Inherits: NaxiTank2Laser_AA
 	Burst: 6
 	Projectile: LaserZap
 		Color: f3e021AA

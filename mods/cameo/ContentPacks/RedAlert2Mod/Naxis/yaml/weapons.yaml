@@ -107,7 +107,7 @@ NaxiWW2Machinegun:
 		Damage: 2
 		ValidTargets: Ground, Water
 
-NaxiWW2MachinegunAA:
+NaxiWW2Machinegun_AA:
 	Inherits: NaxiWW2Machinegun
 	Range: 8355
 	ValidTargets: Air
@@ -138,7 +138,7 @@ NaxiWW2MachinegunSmall:
 		Damage: 1
 		ValidTargets: Ground, Water
 
-NaxiWW2MachinegunSmallAA:
+NaxiWW2MachinegunSmall_AA:
 	Inherits: NaxiWW2MachinegunSmall
 	Range: 8355
 	ValidTargets: Air
@@ -156,7 +156,7 @@ NaxiWW2MachinegunTop:
 	Range: 7555
 	Report: nax_mgun3.wav
 
-NaxiWW2MachinegunTopAA:
+NaxiWW2MachinegunTop_AA:
 	Inherits: NaxiWW2Machinegun
 	Range: 7555
 	Report: nax_mgun3.wav
@@ -844,7 +844,7 @@ NaxQuadCannon_elite:
 	Burst: 8
 	BurstDelays: 3
 
-NaxQuadCannonAA:
+NaxQuadCannon_AA:
 	Inherits: NaxQuadCannon
 	ValidTargets: Air
 	Range: 8052
@@ -871,8 +871,8 @@ NaxQuadCannonAA:
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
-NaxQuadCannonAA_elite:
-	Inherits: NaxQuadCannonAA
+NaxQuadCannon_AA_elite:
+	Inherits: NaxQuadCannon_AA
 	Range: 9052
 	Burst: 8
 	BurstDelays: 3
@@ -890,15 +890,15 @@ SkyMageCannon_elite:
 	Burst: 8
 	BurstDelays: 3
 
-SkyMageCannonAA:
-	Inherits: NaxQuadCannonAA
+SkyMageCannon_AA:
+	Inherits: NaxQuadCannon_AA
 	Range: 7500
 	ReloadDelay: 26
 	Burst: 6
 	BurstDelays: 4
 
-SkyMageCannonAA_elite:
-	Inherits: SkyMageCannonAA
+SkyMageCannon_AA_elite:
+	Inherits: SkyMageCannon_AA
 	Range: 8500
 	Burst: 8
 	BurstDelays: 3
@@ -908,11 +908,11 @@ NaxQuadCannonTargeting:
 	Range: 8888
 
 PortableFlak:
-	Inherits: NaxQuadCannonAA
+	Inherits: NaxQuadCannon_AA
 	Range: 8888
 
 PortableFlak_elite:
-	Inherits: NaxQuadCannonAA_elite
+	Inherits: NaxQuadCannon_AA_elite
 	Range: 9999
 
 NaxFlakAG:
@@ -934,7 +934,7 @@ NaxFlakAG:
 		Inaccuracy: 888
 
 NaxFlakAA:
-	Inherits: NaxQuadCannonAA
+	Inherits: NaxQuadCannon_AA
 	ReloadDelay: 88
 	Range: 13200
 	Burst: 8

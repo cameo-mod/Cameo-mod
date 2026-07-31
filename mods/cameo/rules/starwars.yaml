@@ -5823,7 +5823,7 @@ swheli:
 		PauseOnCondition: !ammo
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: SWAWingGunAA
+		Weapon: SWAWingGun_AA
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
@@ -5890,7 +5890,7 @@ swdroidheli:
 		PauseOnCondition: !ammo
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: SWAWingGunAA
+		Weapon: SWAWingGun_AA
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	Armament@THREE:
@@ -5969,7 +5969,7 @@ swxwing:
 		PauseOnCondition: !ammo
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: SWXWingGunAA
+		Weapon: SWXWingGun_AA
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	Armament@THREE:
@@ -6043,7 +6043,7 @@ swstarfighter:
 		PauseOnCondition: !ammo
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: SWXWingGunAA
+		Weapon: SWXWingGun_AA
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	Armament@THREE:
@@ -6118,7 +6118,7 @@ swstarfighterj:
 		PauseOnCondition: !ammo
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: SWJediStarFighterGunAA
+		Weapon: SWJediStarFighterGun_AA
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
@@ -6197,7 +6197,7 @@ swfalc:
 		PauseOnCondition: !ammo
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: SWJediStarFighterGunAA
+		Weapon: SWJediStarFighterGun_AA
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	Armament@THREE:
@@ -6887,11 +6887,11 @@ swc17player:
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	Armament@AA1:
 		Name: secondary
-		Weapon: SWMonCalamariLaserAA
+		Weapon: SWMonCalamariLaser_AA
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	Armament@AA2:
 		Name: secondary
-		Weapon: SWMonCalamariGunAA
+		Weapon: SWMonCalamariGun_AA
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	AutoTarget:
 		InitialStance: AttackAnything
@@ -6991,7 +6991,7 @@ swstard:
 		Weapon: SWStarDestroyerMissile
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	Armament@2:
-		Weapon: SWStarDestroyerMissileAA
+		Weapon: SWStarDestroyerMissile_AA
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	Armament@3:
 		Name: secondary
@@ -6999,7 +6999,7 @@ swstard:
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	Armament@4:
 		Name: secondary
-		Weapon: SWStarDestroyerGunAA
+		Weapon: SWStarDestroyerGun_AA
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	Armament@5:
 		Name: secondary
@@ -7007,7 +7007,7 @@ swstard:
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	Armament@6:
 		Name: secondary
-		Weapon: SWStarDestroyerLaserAA
+		Weapon: SWStarDestroyerLaser_AA
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	AutoTarget:
 		InitialStance: AttackAnything
@@ -7078,7 +7078,7 @@ swexecutor:
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: SWXWingGunAA
+		Weapon: SWXWingGun_AA
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	Armament@TREE:
 		Name: secondary
@@ -7162,7 +7162,7 @@ swaclamator:
 		Weapon: SWAclamatorMissile
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	Armament@2:
-		Weapon: SWAclamatorMissileAA
+		Weapon: SWAclamatorMissile_AA
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	Armament@3:
 		Name: secondary
@@ -7170,7 +7170,7 @@ swaclamator:
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	Armament@4:
 		Name: secondary
-		Weapon: SWAclamatorGunAA
+		Weapon: SWAclamatorGun_AA
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	Armament@5:
 		Name: secondary
@@ -7178,7 +7178,7 @@ swaclamator:
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	Armament@6:
 		Name: secondary
-		Weapon: SWAclamatorLaserAA
+		Weapon: SWAclamatorLaser_AA
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	AutoTarget:
 		InitialStance: AttackAnything
@@ -7286,7 +7286,7 @@ swintercepto2:
 		Range: 6c0
 		Type: GroundPosition
 	Armament@PRIMARY:
-		Weapon: SWXWingGunAA
+		Weapon: SWXWingGun_AA
 		LocalOffset: 200,0,0
 	Armament@SECONDARY:
 		Weapon: SWXWingGun
@@ -7333,7 +7333,7 @@ swintercepto3:
 		Range: 6c0
 		Type: GroundPosition
 	Armament@PRIMARY:
-		Weapon: SWAWingGunAA
+		Weapon: SWAWingGun_AA
 		LocalOffset: 200,0,0
 	Armament@SECONDARY:
 		Weapon: SWAWingGun
@@ -7385,7 +7385,7 @@ swdarty:
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
 	Armament@2:
-		Weapon: SWDroidRocketsAA
+		Weapon: SWDroidRockets_AA
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
 	AttackFrontal:

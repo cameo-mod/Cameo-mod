@@ -806,7 +806,7 @@ DiabloCannon_elite:
 	Burst: 2
 	BurstDelays: 3
 
-DiabloCannonAA:
+DiabloCannon_AA:
 	Inherits: DiabloCannon
 	ValidTargets: Air
 	Range: 9450
@@ -815,8 +815,8 @@ DiabloCannonAA:
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
-DiabloCannonAAE:
-	Inherits: DiabloCannonAA
+DiabloCannonAAE_AA:
+	Inherits: DiabloCannon_AA
 	Range: 10450
 	Burst: 2
 	BurstDelays: 3
@@ -1356,13 +1356,13 @@ RA2APCMachineGun_elite:
 	Burst: 8
 	BurstDelays: 2
 
-RA2APCMachineGunAA:
+RA2APCMachineGun_AA:
 	Inherits: RA2APCMachineGun
 	ValidTargets: Air
 	Range: 8610
 
-RA2APCMachineGunAA_elite:
-	Inherits: RA2APCMachineGunAA
+RA2APCMachineGun_AA_elite:
+	Inherits: RA2APCMachineGun_AA
 	Range: 9610
 	Burst: 8
 	BurstDelays: 2
@@ -1433,13 +1433,13 @@ RA2APCRocket_elite:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 
-RA2APCRocketAA:
+RA2APCRocket_AA:
 	Inherits: RA2APCRocket
 	ValidTargets: Air
 	Range: 8610
 
-RA2APCRocketAA_elite:
-	Inherits: RA2APCRocketAA
+RA2APCRocket_AA_elite:
+	Inherits: RA2APCRocket_AA
 	Range: 9610
 	Burst: 8
 	Projectile: Missile

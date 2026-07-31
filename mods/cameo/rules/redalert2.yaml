@@ -2607,7 +2607,7 @@ ra2_c_ifv:
 		RequiresCondition: rank-elite
 	Armament@AA:
 		Name: primary
-		Weapon: RA2GattlingMG1AA
+		Weapon: RA2GattlingMG1_AA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 1280,0,80
@@ -2616,7 +2616,7 @@ ra2_c_ifv:
 		RequiresCondition: !rank-elite
 	Armament@eliteAA:
 		Name: primary
-		Weapon: RA2GattlingMG2AA
+		Weapon: RA2GattlingMG2_AA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 1280,0,80
@@ -5820,7 +5820,7 @@ ra2_tractor_driveby:
 # 		RequiresCondition: !rank-elite && ra2_soviets_doctrine_nuclearmunitions
 # 	Armament@SECONDARY:
 # 		Name: secondary
-# 		Weapon: RA2MammothTusk
+# 		Weapon: RA2MammothTusk_AA
 # 		LocalOffset: -85,90,340, -85,-90,340
 # 		LocalYaw: -100, 100
 # 		Recoil: 10
@@ -5845,7 +5845,7 @@ ra2_tractor_driveby:
 # 		RequiresCondition: rank-elite && ra2_soviets_doctrine_nuclearmunitions
 # 	Armament@SECONDARYELITE:
 # 		Name: secondary
-# 		Weapon: RA2MammothTusk_elite
+# 		Weapon: RA2MammothTusk_AA_elite
 # 		LocalOffset: -85,90,340, -85,-90,340
 # 		LocalYaw: -100, 100
 # 		Recoil: 10
@@ -5926,7 +5926,7 @@ ra2_tractor_driveby:
 # 		RequiresCondition: !rank-elite && ra2_soviets_doctrine_nuclearmunitions
 # 	Armament@SECONDARY:
 # 		Name: secondary
-# 		Weapon: RA2MammothTusk
+# 		Weapon: RA2MammothTusk_AA
 # 		LocalOffset: -85,90,340, -85,-90,340
 # 		LocalYaw: -100, 100
 # 		Recoil: 10
@@ -5951,7 +5951,7 @@ ra2_tractor_driveby:
 # 		RequiresCondition: rank-elite && ra2_soviets_doctrine_nuclearmunitions
 # 	Armament@SECONDARYELITE:
 # 		Name: secondary
-# 		Weapon: RA2MammothTusk_elite
+# 		Weapon: RA2MammothTusk_AA_elite
 # 		LocalOffset: -85,90,340, -85,-90,340
 # 		LocalYaw: -100, 100
 # 		Recoil: 10

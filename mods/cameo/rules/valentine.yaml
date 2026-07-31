@@ -1147,7 +1147,7 @@ valentine_tower_ballista:
 	Armament:
 		Weapon: LovebowFireB
 	Armament@AA:
-		Weapon: LovebowFireAAB
+		Weapon: LovebowFireAAB_AA
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
@@ -1526,7 +1526,7 @@ loveballista:
 	RevealsShroud:
 		Range: 7c0
 	Armament:
-		Weapon: LovebowFireAAB
+		Weapon: LovebowFireAAB_AA
 		LocalOffset: -128, -170, 170, -128, 170, 170
 		LocalYaw: 100, -100
 	Armament@AA:
@@ -1591,7 +1591,7 @@ valovecraft:
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
 	Armament@AA:
-		Weapon: LovebowFireAAB
+		Weapon: LovebowFireAAB_AA
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
@@ -1768,7 +1768,7 @@ giantcupido:
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
 	Armament@AA:
-		Weapon: CupidoAK47AA
+		Weapon: CupidoAK47_AA
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
@@ -2531,7 +2531,7 @@ valentines_dd:
 		LocalYaw: 64, -64
 		PauseOnCondition: !ammo
 	Armament@AA:
-		Weapon: CupidoAK47AA
+		Weapon: CupidoAK47_AA
 		LocalOffset: 0,-100,0, 0,100,0
 		LocalYaw: 64, -64
 		PauseOnCondition: !ammo

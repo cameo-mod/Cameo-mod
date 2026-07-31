@@ -1010,7 +1010,7 @@ TSChemAdatsMissile:
 		InvalidTargets: Water
 
 TSChemAdatsMissileAA:
-	Inherits: TSAdatsMissileAA
+	Inherits: TSAdatsMissile_AA
 	Projectile: Missile
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75

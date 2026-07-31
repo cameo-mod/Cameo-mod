@@ -684,7 +684,7 @@ GLQuadCannonGround:
 		Explosions: piffs
 		ValidTargets: Ground, Water, Air
 
-GLQuadCannonAir:
+GLQuadCannonAir_AA:
 	Inherits: GLQuadCannonGround
 	ReloadDelay: 3
 	Range: 8960
@@ -1204,7 +1204,7 @@ CHGattlingTurret:
 			Heavy: 3
 			Concrete: 1
 
-CHGattlingTurretAA:
+CHGattlingTurret_AA:
 	Inherits: CHGattlingTurret
 	ValidTargets: Air
 	Range: 7175
@@ -1892,7 +1892,7 @@ USALaserCrusaderCannonUp:
 		Color: 66FFFF
 
 
-USALaserCannonAA:
+USALaserCannon_AA:
 	Inherits: ^AntiAirMissile
 	Burst: 4
 	BurstDelays: 6
@@ -2003,7 +2003,7 @@ USARaptorMissileAG:
 			Heavy: 150
 			Wood: 25
 
-USARaptorMissileAA:
+USARaptorMissile_AA:
 	Inherits: ^AntiAirMissile
 	ReloadDelay: 4
 	Range: 8192

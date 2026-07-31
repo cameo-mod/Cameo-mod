@@ -336,7 +336,7 @@ ra1_allies_rapierjumpjet:
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: Aphid
+		Weapon: Aphid_AA
 		LocalOffset: 0,-512,0, 0,512,0
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzle
@@ -344,7 +344,7 @@ ra1_allies_rapierjumpjet:
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@SECONDARYUpgrade:
 		Name: secondary
-		Weapon: AphidCryo
+		Weapon: AphidCryo_AA
 		LocalOffset: 0,-512,0, 0,512,0
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzle

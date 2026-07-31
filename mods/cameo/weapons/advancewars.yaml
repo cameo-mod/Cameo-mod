@@ -143,7 +143,7 @@ AWAntiTank:
 		Damage: 34000
 		Spread: 341
 	Warhead@2Dam: SpreadDamage
-AWArtilleryAA:
+AWArtillery_AA:
 	Inherits: AWLightCannon
 	Report: AWMinicannon.wav
 	ValidTargets: Air
@@ -351,7 +351,7 @@ AWLaserFlakCannonLow:
 	Inherits: AWLaserFlakCannon
 	ReloadDelay: 40
 	Burst: 2
-AWFighterMissileAA:
+AWFighterMissile_AA:
 	Inherits: Dragon
 	Report: AWFighterMiss.wav
 	Projectile: MissileCA
@@ -1112,7 +1112,7 @@ AWTalonGun:
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
 
-AWTalonGunAA:
+AWTalonGun_AA:
 	Inherits: ^AWBallisticWeapon
 	ValidTargets: Air
 	InvalidTargets: Ground

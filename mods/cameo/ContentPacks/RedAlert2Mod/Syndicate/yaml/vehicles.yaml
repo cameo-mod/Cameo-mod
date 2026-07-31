@@ -568,7 +568,7 @@ latinsyndicate_diablo:
 		RequiresCondition: rank-elite
 	Armament@AA:
 		Name: secondary
-		Weapon: DiabloCannonAA
+		Weapon: DiabloCannon_AA
 		LocalOffset: 600,0,300
 		Recoil: 85
 		MuzzleSequence: muzzle
@@ -576,7 +576,7 @@ latinsyndicate_diablo:
 		RequiresCondition: !rank-elite
 	Armament@AAE:
 		Name: secondary
-		Weapon: DiabloCannonAAE
+		Weapon: DiabloCannonAAE_AA
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -713,14 +713,14 @@ latinsyndicate_latinapc:
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_upgrade_yuristolentechchainguns && rank-elite
 	Armament@MachinegunAA:
-		Weapon: RA2APCMachineGunAA
+		Weapon: RA2APCMachineGun_AA
 		LocalOffset: 600,15,300, 600,-15,300
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_upgrade_yuristolentechchainguns && !rank-elite
 	Armament@MachinegunAAELITE:
-		Weapon: RA2APCMachineGunAA_elite
+		Weapon: RA2APCMachineGun_AA_elite
 		LocalOffset: 600,15,300, 600,-15,300
 		Recoil: 85
 		MuzzleSequence: muzzle
@@ -741,14 +741,14 @@ latinsyndicate_latinapc:
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_doctrine_cartelrockets && rank-elite
 	Armament@RocketsAA:
-		Weapon: RA2APCRocketAA
+		Weapon: RA2APCRocket_AA
 		LocalOffset: 600,-150,300, 600,150,300
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_doctrine_cartelrockets && !rank-elite
 	Armament@RocketsAAELITE:
-		Weapon: RA2APCRocketAA_elite
+		Weapon: RA2APCRocket_AA_elite
 		LocalOffset: 600,-150,300, 600,150,300
 		Recoil: 85
 		MuzzleSequence: muzzle

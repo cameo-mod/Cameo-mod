@@ -416,10 +416,10 @@ naxis_skymage:
 		Weapon: SkyMageCannon_elite
 		RequiresCondition: rank-elite
 	Armament@AA:
-		Weapon: SkyMageCannonAA
+		Weapon: SkyMageCannon_AA
 		RequiresCondition: !rank-elite
 	Armament@ELITEAA:
-		Weapon: SkyMageCannonAA_elite
+		Weapon: SkyMageCannon_AA_elite
 		RequiresCondition: rank-elite
 	AttackAircraft:
 		Voice: Attack
@@ -1171,7 +1171,7 @@ naxis_bmwbike:
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 	Armament@AA:
-		Weapon: NaxiWW2MachinegunSmallAA
+		Weapon: NaxiWW2MachinegunSmall_AA
 		LocalOffset: 300,10,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect

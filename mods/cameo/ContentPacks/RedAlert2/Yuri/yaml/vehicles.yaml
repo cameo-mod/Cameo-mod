@@ -177,19 +177,19 @@ yuri_gatlingtank:
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
 	Armament@1AA:
-		Weapon: RA2GattlingMG1AA
+		Weapon: RA2GattlingMG1_AA
 		RequiresCondition: !gatling
 		LocalOffset: 700,90,400, 700,-90,400
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 	Armament@2AA:
-		Weapon: RA2GattlingMG2AA
+		Weapon: RA2GattlingMG2_AA
 		RequiresCondition: gatling == 1
 		LocalOffset: 700,90,400, 700,-90,400
 		MuzzleSequence: muzzle-1
 		MuzzlePalette: ra2effect
 	Armament@3AA:
-		Weapon: RA2GattlingMG3AA
+		Weapon: RA2GattlingMG3_AA
 		RequiresCondition: gatling > 1
 		LocalOffset: 700,90,400, 700,-90,400
 		MuzzleSequence: muzzle-2

@@ -83,13 +83,13 @@ asianalliance_quasar:
 		MuzzlePalette: ra2effect
 		RequiresCondition: asianalliance_upgrade_celestialpower
 	Armament@AA:
-		Weapon: AsianQuasarAA
+		Weapon: AsianQuasar_AA
 		LocalOffset: -400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: !asianalliance_upgrade_celestialpower
 	Armament@UpgradeAA:
-		Weapon: AsianQuasarAA_EMP
+		Weapon: AsianQuasar_EMP_AA
 		LocalOffset: -400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect

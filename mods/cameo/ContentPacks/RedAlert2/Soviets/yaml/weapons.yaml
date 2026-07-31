@@ -12,7 +12,7 @@ RA2TURRETFLAKAA:
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
-SeaScorpionAA:
+SeaScorpion_AA:
 	Inherits: ^RA2FlakWeapon
 	Range: 13500
 	ReloadDelay: 17
@@ -706,7 +706,7 @@ MigMissilesE_tesla:
 	Range: 8600
 	Burst: 8
 
-RA2MammothTusk:
+RA2MammothTusk_AA:
 	Inherits: ^RA2MediumMissile
 	ValidTargets: Air
 	Range: 6100
@@ -720,8 +720,8 @@ RA2MammothTusk:
 		ValidTargets: Air
 		Damage: 8
 
-RA2MammothTusk_elite:
-	Inherits: RA2MammothTusk
+RA2MammothTusk_AA_elite:
+	Inherits: RA2MammothTusk_AA
 	Range: 7100
 	Burst: 4
 

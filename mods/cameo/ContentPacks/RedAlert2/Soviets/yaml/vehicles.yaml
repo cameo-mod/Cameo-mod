@@ -320,7 +320,7 @@ ra2_soviets_apocalypsetank:
 		RequiresCondition: !rank-elite && ra2_soviets_doctrine_teslamunitions
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: RA2MammothTusk
+		Weapon: RA2MammothTusk_AA
 		LocalOffset: -85,90,340, -85,-90,340
 		LocalYaw: -100, 100
 		Recoil: 10
@@ -363,7 +363,7 @@ ra2_soviets_apocalypsetank:
 		RequiresCondition: rank-elite && ra2_soviets_doctrine_teslamunitions
 	Armament@SECONDARYELITE:
 		Name: secondary
-		Weapon: RA2MammothTusk_elite
+		Weapon: RA2MammothTusk_AA_elite
 		LocalOffset: -85,90,340, -85,-90,340
 		LocalYaw: -100, 100
 		Recoil: 10

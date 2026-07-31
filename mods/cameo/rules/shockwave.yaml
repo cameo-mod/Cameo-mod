@@ -3239,7 +3239,7 @@ susaempmissiledefender:
 	Armament@AntiStructure:
 		Weapon: SUSA_EMP_MissileDefenderStructure
 	Armament@AA:
-		Weapon: SUSA_EMP_MissileDefenderAA
+		Weapon: SUSA_EMP_MissileDefender_AA
 	Armament@GARRISONED:
 		Weapon: SUSA_EMP_MissileDefenderGarrisoned
 
@@ -10253,7 +10253,7 @@ sglsparka:
 		MuzzleSequence: muzzle
 		LocalOffset: 600,64,0, 600,-64,0
 	Armament@2AA:
-		Weapon: SGLSparkaCannonAA
+		Weapon: SGLSparkaCannon_AA
 		MuzzleSequence: muzzle
 		LocalOffset: 600,64,200, 600,-64,200
 	AttackTurreted:
@@ -11190,7 +11190,7 @@ sglpython:
 		MuzzleSequence: muzzle
 		LocalOffset: 600,0,0
 	Armament@2AA:
-		Weapon: SGLPythonAA
+		Weapon: SGLPython_AA
 		Name: secondary
 		MuzzleSequence: muzzle
 		LocalOffset: 600,0,225
@@ -11914,7 +11914,7 @@ eglpickupquad:
 		MuzzleSequence: muzzle
 		LocalOffset: 128,128,200, 128,-128,200, 128,-128,43, 128,128,43
 	Armament@2AA:
-		Weapon: GLQuadCannonAir
+		Weapon: GLQuadCannonAir_AA
 		MuzzleSequence: muzzle
 		LocalOffset: 128,128,200, 128,-128,200, 128,-128,43, 128,128,43
 	AttackTurreted:
@@ -13334,7 +13334,7 @@ schtiger:
 		Weapon: SCHTigerGrenades
 		LocalOffset: 150,150,-150, 150,-150,-150
 	Armament@rockets:
-		Weapon: SCHTigerRockets
+		Weapon: SCHTigerRockets_AA
 		LocalOffset: 150,213,-120, 150,-213,-120
 	AutoTarget:
 		ScanRadius: 5
@@ -14357,7 +14357,7 @@ schtransporthelix:
 		RequiresCondition: gattlingaddon
 	Armament@GATTLINGAA:
 		Name: gattlingaa
-		Weapon: CHGattlingTurretAA
+		Weapon: CHGattlingTurret_AA
 		LocalOffset: 1200,0,-200
 		MuzzleSequence: muzzle
 		RequiresCondition: gattlingaddon
@@ -16249,7 +16249,7 @@ schsupportcrawler:
 		Weapon: SCHSupportCrawlerMissile
 		LocalOffset: 400,-350,-100, 400,350,-100
 	Armament@AA:
-		Weapon: SCHSupportCrawlerMissileAA
+		Weapon: SCHSupportCrawlerMissile_AA
 		LocalOffset: 400,-350,-100, 400,350,-100
 	Turreted:
 		TurnSpeed: 36

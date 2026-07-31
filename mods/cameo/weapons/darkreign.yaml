@@ -1175,7 +1175,7 @@ DRTNissileTurretAG:
 	Warhead@4EffWater: CreateEffect
 		Explosions: large_splash
 
-DRTNissileTurretAA:
+DRTNissileTurret_AA:
 	Inherits: DRMadWeapon
 	ReloadDelay: 240
 	Range: 9216
@@ -1204,8 +1204,8 @@ DRMissileTankAG:
 		Spread: 341
 		Damage: 3900
 
-DRMissileTankAA:
-	Inherits: DRTNissileTurretAA
+DRMissileTank_AA:
+	Inherits: DRTNissileTurret_AA
 	ReloadDelay: 180
 	Range: 7168
 	Burst: 1
