@@ -13,7 +13,39 @@ _This section SUPERSEDES all the iterative discussion below. A fresh session sho
 authoritative final state of the vehicle overhaul. Everything below the `═══` divider is iteration
 history / per-class rationale (still valid as reasoning, but the numbers here are the final ones)._
 
-## ⚠ REVISION 2026-07-31 (maintainer re-tuning — PENDING "did it fix the problems?" confirmation)
+## ★ LOCKED 2026-08-01 (maintainer-confirmed — THIS is the authoritative table; supersedes 2026-07-31 below)
+Re-tuned 2026-08-01: **epic on top** (HP 4M / DPS 20k), **A+B spread capped at ≤2.0× (actual 1.92×)**,
+**HP in clean 10k steps**, **DPS/Cost kept sane 0.5–1.5** (epic the sole 2.0 = 20k÷10k spec — the earlier
+"unique ×0.05" experiment produced insane 3.4 values, reverted). All 5 base stats UNIQUE. Ordered by A+B ↓
+(the maintainer's fixed order: epic, line_breaker, light_tank, mbt, high_tech, tank_destroyer, dreadnought,
+scout, anti_air, artillery_tank, artillery, fire_support, missile_veh). Written to `class_anchors.json` spec.
+
+| # | Class | Cost | HP | Spd | DPS | Range | HP/Cost | DPS/Cost | A=HP/C·Spd | B=DPS/C·Rng | A+B |
+|--|--|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| 1 | epic | 10000 | 4,000,000 | 60 | 20,000 | 8,500 | 400 | 2.00 | 24,000 | 17,000 | **41,000** |
+| 2 | line_breaker | 1600 | 750,000 | 80 | 1,600 | 2,500 | 469 | 1.00 | 37,500 | 2,500 | 40,000 |
+| 3 | light_tank | 400 | 100,000 | 125 | 200 | 5,000 | 250 | 0.50 | 31,250 | 2,500 | 33,750 |
+| 4 | mbt | 800 | 240,000 | 95 | 600 | 5,500 | 300 | 0.75 | 28,500 | 4,125 | 32,625 |
+| 5 | high_tech_tank | 2000 | 700,000 | 65 | 2,000 | 6,500 | 350 | 1.00 | 22,750 | 6,500 | 29,250 |
+| 6 | tank_destroyer | 600 | 150,000 | 70 | 900 | 7,500 | 250 | 1.50 | 17,500 | 11,250 | 28,750 |
+| 7 | dreadnought | 3000 | 1,150,000 | 50 | 3,750 | 7,000 | 383 | 1.25 | 19,167 | 8,750 | 27,917 |
+| 8 | scout_vehicle | 300 | 30,000 | 200 | 450 | 4,500 | 100 | 1.50 | 20,000 | 6,750 | 26,750 |
+| 9 | anti_air_vehicle | 1000 | 170,000 | 110 | 1,250 | 6,000 | 170 | 1.25 | 18,700 | 7,500 | 26,200 |
+| 10 | artillery_tank | 700 | 140,000 | 85 | 525 | 12,000 | 200 | 0.75 | 17,000 | 9,000 | 26,000 |
+| 11 | artillery | 500 | 60,000 | 75 | 500 | 15,000 | 120 | 1.00 | 9,000 | 15,000 | 24,000 |
+| 12 | fire_support | 1400 | 120,000 | 90 | 2,100 | 10,000 | 86 | 1.50 | 7,714 | 15,000 | 22,714 |
+| 13 | missile_vehicle | 1200 | 160,000 | 100 | 1,200 | 8,000 | 133 | 1.00 | 13,333 | 8,000 | 21,333 |
+
+**⚠ DPS restat DEFERRED** to the cannon/weapon rebuild ([[cameo-cannon-weapon-templates]]): current in-game
+DPS is confounded by warhead-mixing + two calc bugs (fit_class skips FirepowerMultiplier; versus_shield
+stale-preserved WC). HP/Speed/Cost/armor restat can proceed now. Armor targets (in class_anchors + templates):
+missile Light, anti_air Medium, tank_destroyer Heavy, high_tech + dreadnought Superheavy (fix
+`^HighTechTankTemplate` Medium→Superheavy + strip per-actor Armor overrides). Verifiers = 2×HP / 2×DPS /
+2.5×cost of these baselines, matched tier+K.
+
+═══════════════════════════════════════════════════════════════════════════════════════════════
+
+## ⚠ REVISION 2026-07-31 (SUPERSEDED by the 2026-08-01 LOCKED table above)
 The maintainer re-opened the ladder on 2026-07-31 with a batch of speed/ratio edits. **This table
 SUPERSEDES the 2026-07-28 numbers below.** Costs unchanged. Ordered by composite Total = A+B (descending).
 

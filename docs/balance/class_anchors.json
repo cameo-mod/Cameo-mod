@@ -4,13 +4,13 @@
   "anchor_actor": "latinsyndicate_diablo",
   "armor": "Medium",
   "comment": "Dedicated AA; keeps a SEPARATE FREE air weapon (+50% range/+100% dmg) priced only on the ground weapon. K note: gatling members = 1.25.",
-  "provisional": "2026-07-31 maintainer-confirmed stats; signed_off pending vehicle tagging + fit_class validation",
+  "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
   "reveals_shroud": 7000,
   "signed_off": false,
   "spec": {
    "cost0": 1000,
    "dps0": 1250,
-   "hp0": 125000,
+   "hp0": 170000,
    "range0_wdist": 6000,
    "speed0": 110
   },
@@ -38,13 +38,13 @@
   "anchor_actor": "ra1_allies_alliedartillery",
   "armor": "Light",
   "comment": "Long-range indirect siege. Verifier Brummbaer (T2, NOT V2 which is T3). latinsyndicate_burrito is Artillery too (long range, no air).",
-  "provisional": "2026-07-31 maintainer-confirmed stats; signed_off pending vehicle tagging + fit_class validation",
+  "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
   "reveals_shroud": 9000,
   "signed_off": false,
   "spec": {
    "cost0": 500,
    "dps0": 500,
-   "hp0": 50000,
+   "hp0": 60000,
    "range0_wdist": 15000,
    "speed0": 75
   },
@@ -56,7 +56,7 @@
   "anchor_actor": "ixian_ixcombatsiege",
   "armor": "Medium",
   "comment": "Tanky turreted artillery.",
-  "provisional": "2026-07-31 maintainer-confirmed stats; signed_off pending vehicle tagging + fit_class validation",
+  "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
   "reveals_shroud": 9000,
   "signed_off": false,
   "spec": {
@@ -105,13 +105,13 @@
   "anchor_actor": "terran_warhound",
   "armor": "Superheavy",
   "comment": "Heavy long-range assault walker.",
-  "provisional": "2026-07-31 maintainer-confirmed stats; signed_off pending vehicle tagging + fit_class validation",
+  "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
   "reveals_shroud": 8000,
   "signed_off": false,
   "spec": {
    "cost0": 3000,
    "dps0": 3750,
-   "hp0": 1200000,
+   "hp0": 1150000,
    "range0_wdist": 7000,
    "speed0": 50
   },
@@ -123,13 +123,13 @@
   "anchor_actor": "ra1_soviets_monstertank",
   "armor": "Superheavy",
   "comment": "BuildLimit 1, not band-limited. 4x raw HP (EpicBuff removed 43df39235). DPS = cannon+tusk summed (both ground+air, same eff-reload).",
-  "provisional": "2026-07-31 maintainer-confirmed stats; signed_off pending vehicle tagging + fit_class validation",
+  "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
   "reveals_shroud": 8000,
   "signed_off": false,
   "spec": {
    "cost0": 10000,
-   "dps0": 10000,
-   "hp0": 5000000,
+   "dps0": 20000,
+   "hp0": 4000000,
    "range0_wdist": 8500,
    "speed0": 60
   },
@@ -141,13 +141,13 @@
   "anchor_actor": "latinsyndicate_missiletruck",
   "armor": "Light",
   "comment": "Fragile long-range GROUND-ONLY siege sniper. Verifier TBD at curation (pure-ground T1/T2 K1.0). DPS DOUBLED so not dominated by missile_vehicle.",
-  "provisional": "2026-07-31 maintainer-confirmed stats; signed_off pending vehicle tagging + fit_class validation",
+  "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
   "reveals_shroud": 8000,
   "signed_off": false,
   "spec": {
    "cost0": 1400,
    "dps0": 2100,
-   "hp0": 105000,
+   "hp0": 120000,
    "range0_wdist": 10000,
    "speed0": 90
   },
@@ -223,7 +223,7 @@
   "anchor_actor": "td_gdi_mammothtank",
   "armor": "Superheavy",
   "comment": "Baseline = TD GDI Mammoth (2026-07-31, was RA1 Soviet Mammoth). RA1 Soviet Mammoth demoted to mid variant spd60/cost2500. Verifier Siege Mammoth (maintainer confirmed shares tier+K).",
-  "provisional": "2026-07-31 maintainer-confirmed stats; signed_off pending vehicle tagging + fit_class validation",
+  "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
   "reveals_shroud": 7000,
   "signed_off": false,
   "spec": {
@@ -241,7 +241,7 @@
   "anchor_actor": "ra1_allies_alliedlighttank",
   "armor": "Medium",
   "comment": "Cheap fast light cannon; weak vs heavy tanks.",
-  "provisional": "2026-07-31 maintainer-confirmed stats; signed_off pending vehicle tagging + fit_class validation",
+  "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
   "reveals_shroud": 6000,
   "signed_off": false,
   "spec": {
@@ -259,13 +259,13 @@
   "anchor_actor": "td_nod_flametank",
   "armor": "Superheavy",
   "comment": "Slow super-juggernaut, SHORTEST range 2500 (easiest to kite) -> intentionally the HIGHEST cost-effectiveness.",
-  "provisional": "2026-07-31 maintainer-confirmed stats; signed_off pending vehicle tagging + fit_class validation",
+  "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
   "reveals_shroud": 8000,
   "signed_off": false,
   "spec": {
    "cost0": 1600,
    "dps0": 1600,
-   "hp0": 800000,
+   "hp0": 750000,
    "range0_wdist": 2500,
    "speed0": 80
   },
@@ -277,7 +277,7 @@
   "anchor_actor": "tiger.nax",
   "armor": "Heavy",
   "comment": "Main battle tank. Tiger/King Tiger pair. NEW 2026-07-31 restat (was legacy Tiger 100k/100/200/5000 o0=p0=q0=800). Global-Tiger FALLBACK lives in formula.estimators(), NOT this entry, so this restat is safe.",
-  "provisional": "2026-07-31 maintainer-confirmed stats; signed_off pending vehicle tagging + fit_class validation",
+  "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
   "reveals_shroud": 6000,
   "signed_off": false,
   "spec": {
@@ -311,13 +311,13 @@
   "anchor_actor": "ts_gdi_hovermlrs",
   "armor": "Light",
   "comment": "ONE weapon hits ground AND air (priced once, no air bonus). The perfect all-rounder -> intentionally the LOWEST cost-effectiveness. Members: missile-MLRS family + Nod bikes (43df39235).",
-  "provisional": "2026-07-31 maintainer-confirmed stats; signed_off pending vehicle tagging + fit_class validation",
+  "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
   "reveals_shroud": 7000,
   "signed_off": false,
   "spec": {
    "cost0": 1200,
    "dps0": 1200,
-   "hp0": 120000,
+   "hp0": 160000,
    "range0_wdist": 8000,
    "speed0": 100
   },
@@ -391,7 +391,7 @@
   "anchor_actor": "td_nod_buggy",
   "armor": "Scout",
   "comment": "Fast recon. MG/autocannon. Never the AA (that's anti_air_vehicle).",
-  "provisional": "2026-07-31 maintainer-confirmed stats; signed_off pending vehicle tagging + fit_class validation",
+  "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
   "reveals_shroud": 8000,
   "signed_off": false,
   "spec": {
@@ -441,7 +441,7 @@
   "anchor_actor": "naxis_hetzer",
   "armor": "Heavy",
   "comment": "Frontal anti-tank, KeepsDistance. DPS/Cost 1.50.",
-  "provisional": "2026-07-31 maintainer-confirmed stats; signed_off pending vehicle tagging + fit_class validation",
+  "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
   "reveals_shroud": 7500,
   "signed_off": false,
   "spec": {
