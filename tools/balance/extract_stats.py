@@ -560,9 +560,14 @@ def build_ledgers(model: Model, only: str | None = None) -> dict[str, dict]:
                     # overwrite it.
                     if u["design"].get("subtype") != "SpecialForcesInfantry":
                         for arm in u.get("armaments", []):
-                            v = keep_wc.get(a, {}).get(arm["slot"])
-                            if v is not None:
-                                arm["design_weapon_class"] = v
+                            # Fresh auto-derivation (WeaponClass field -> versus_shield ->
+                            # sidecar) is self-correcting and AUTHORITATIVE. Only fall back to a
+                            # PRESERVED ledger value when nothing could be derived, so a stale WC
+                            # can never clobber the correct current one (2026-08-01 fix).
+                            if arm.get("design_weapon_class") is None:
+                                v = keep_wc.get(a, {}).get(arm["slot"])
+                                if v is not None:
+                                    arm["design_weapon_class"] = v
                     sec[a] = u
             if sec:
                 sections[section] = sec
