@@ -28,8 +28,6 @@ ra1_soviets_v1rockettruck:
 		HpPerStep: 1250
 	ChangesHealth@SelfHealing:
 		Step: 10
-	Armor:
-		Type: Light
 	Turreted:
 		TurnSpeed: 32
 		#Offset: -128,0,128
@@ -107,8 +105,6 @@ ra1_soviets_grad:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 15
 		Offset: -600,0,200
@@ -178,8 +174,6 @@ ra1_soviets_v2rocketlauncher:
 		HpPerStep: 1500
 	ChangesHealth@SelfHealing:
 		Step: 12
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 85
 		TurnSpeed: 17
@@ -255,8 +249,6 @@ ra1_soviets_nuclearv2launcher:
 		HpPerStep: 2000
 	ChangesHealth@SelfHealing:
 		Step: 16
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 80
 		TurnSpeed: 16
@@ -326,8 +318,6 @@ ra1_soviets_heavytank:
 		HpPerStep: 7500
 	ChangesHealth@SelfHealing:
 		Step: 60
-	Armor:
-		Type: Heavy
 	Mobile:
 		Speed: 70
 		TurnSpeed: 14
@@ -395,8 +385,6 @@ ra1_soviets_hammertank:
 		HpPerStep: 10500
 	ChangesHealth@SelfHealing:
 		Step: 84
-	Armor:
-		Type: Heavy
 	Mobile:
 		Speed: 60
 		TurnSpeed: 12
@@ -513,8 +501,6 @@ ra1_soviets_heavyteslatank:
 		HpPerStep: 7500
 	ChangesHealth@SelfHealing:
 		Step: 60
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 60
 		TurnSpeed: 12
@@ -615,8 +601,6 @@ ra1_soviets_kotinnucleartank:
 		HpPerStep: 12000
 	ChangesHealth@SelfHealing:
 		Step: 96
-	Armor:
-		Type: Heavy
 	Mobile:
 		Speed: 65
 		TurnSpeed: 13
@@ -693,8 +677,6 @@ ra1_soviets_mammothtank:
 		HpPerStep: 18750
 	ChangesHealth@SelfHealing:
 		Step: 150
-	Armor:
-		Type: Superheavy
 	Mobile:
 		Speed: 50
 		TurnSpeed: 10
@@ -833,8 +815,6 @@ ra1_soviets_siegemammothtank:
 		HpPerStep: 31250
 	ChangesHealth@SelfHealing:
 		Step: 250
-	Armor:
-		Type: Superheavy
 	Mobile:
 		Speed: 45
 		TurnSpeed: 9
@@ -1038,8 +1018,6 @@ ra1_soviets_teslatank:
 		HpPerStep: 2000
 	ChangesHealth@SelfHealing:
 		Step: 16
-	Armor:
-		Type: Light
 	Mobile:
 		Speed: 80
 		TurnSpeed: 32
@@ -1103,8 +1081,6 @@ ra1_soviets_heatraytank:
 		HpPerStep: 3000
 	ChangesHealth@SelfHealing:
 		Step: 24
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 60
 		TurnSpeed: 24
@@ -1426,8 +1402,6 @@ ra1_soviets_madtank:
 		HpPerStep: 15000
 	ChangesHealth@SelfHealing:
 		Step: 120
-	Armor:
-		Type: Heavy
 	Mobile:
 		RequiresCondition: !deployed
 		Speed: 60
@@ -1553,8 +1527,6 @@ ra1_soviets_gatlingtank:
 		HpPerStep: 3750
 	ChangesHealth@SelfHealing:
 		Step: 30
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -1713,8 +1685,6 @@ ra1_soviets_monstertank:
 		HpPerStep: 50000
 	ChangesHealth@SelfHealing:
 		Step: 400
-	Armor:
-		Type: Superheavy
 	Mobile:
 		Speed: 45
 		TurnSpeed: 9

@@ -284,8 +284,6 @@ cabal_mantis:
 		Speed: 120
 	Health:
 		HP: 35000
-	Armor:
-		Type: Scout
 	Repairable:
 		HpPerStep: 1750
 	ChangesHealth@SelfHealing:
@@ -458,8 +456,6 @@ cabal_tarantula:
 		HpPerStep: 5500
 	ChangesHealth@SelfHealing:
 		Step: 44
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 14
 		Offset: -500,0,0
@@ -673,8 +669,6 @@ cabal_beholder:
 		HpPerStep: 6250
 	ChangesHealth@SelfHealing:
 		Step: 50
-	Armor:
-		Type: Heavy
 	Armament@PRIMARY:
 		Weapon: CabalBeholderLaser
 		LocalOffset: 777,-222,-333, 777,222,-333

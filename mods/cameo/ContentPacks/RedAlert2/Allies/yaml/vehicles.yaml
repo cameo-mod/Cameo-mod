@@ -126,8 +126,6 @@ ra2_allies_grizzlytank:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 19
 	Armament:
@@ -197,8 +195,6 @@ ra2_allies_tankdestroyer:
 		HpPerStep: 7250
 	ChangesHealth@SelfHealing:
 		Step: 58
-	Armor:
-		Type: Heavy
 	Armament:
 		Name: primary
 		Weapon: RA2sabot
@@ -384,8 +380,6 @@ ra2_allies_prismtank:
 		HpPerStep: 3000
 	ChangesHealth@SelfHealing:
 		Step: 24
-	Armor:
-		Type: Light
 	Turreted:
 		TurnSpeed: 12 #3
 	Armament@Charge:
@@ -474,8 +468,6 @@ ra2_allies_miragetank:
 		HpPerStep: 6000
 	ChangesHealth@SelfHealing:
 		Step: 48
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 18
 	Armament:
@@ -563,8 +555,6 @@ ra2_allies_heavymiragetank:
 		HpPerStep: 12000
 	ChangesHealth@SelfHealing:
 		Step: 96
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 12
 	Armament:
@@ -653,8 +643,6 @@ ra2_allies_battlefortress:
 		HpPerStep: 16000
 	ChangesHealth@SelfHealing:
 		Step: 128
-	Armor:
-		Type: Heavy
 	#Turreted:
 	#	TurnSpeed: 1023
 	-QuantizeFacingsFromSequence:

@@ -241,8 +241,6 @@ ts_nod_stealthtank:
 		HpPerStep: 4000
 	ChangesHealth@SelfHealing:
 		Step: 32
-	Armor:
-		Type: Heavy
 	Armament@PRIMARY:
 		Weapon: TSStankTusk
 		LocalOffset: -153,-204,509, -153,204,509
@@ -375,8 +373,6 @@ ts_nod_artillery:
 		HpPerStep: 1500
 	ChangesHealth@SelfHealing:
 		Step: 12
-	Armor:
-		Type: Light
 	Turreted:
 		TurnSpeed: 24
 		InitialFacing: 384
@@ -455,8 +451,6 @@ ts_nod_devilstongue:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Heavy
 	Armament@PRIMARY:
 		Weapon: TSFireballLauncher
 	AttackFrontal:
@@ -623,8 +617,6 @@ ts_nod_ticktank:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Heavy
 	RevealOnFire:
 		ArmamentNames: primary, deployed
 	DamageMultiplier:

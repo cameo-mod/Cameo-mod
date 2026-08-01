@@ -200,8 +200,6 @@ ts_gdi_mobileemp:
 		TurnSpeed: 40
 	Health:
 		HP: 150000
-	Armor:
-		Type: Heavy
 	Repairable:
 		HpPerStep: 7500
 	ChangesHealth@SelfHealing:
@@ -256,8 +254,6 @@ ts_gdi_titan:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 15
 	Armament@PRIMARY:
@@ -331,8 +327,6 @@ ts_gdi_titanmkii:
 		HpPerStep: 6000
 	ChangesHealth@SelfHealing:
 		Step: 48
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 15
 		Offset: -45,0,392
@@ -397,8 +391,6 @@ ts_gdi_juggernautmkii:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armor:
-		Type: Medium
 	# Turreted:
 	# 	TurnSpeed: 14 #3
 	# 	Offset: -45,0,392
@@ -568,8 +560,6 @@ ts_gdi_hovermlrs:
 		HpPerStep: 1500
 	ChangesHealth@SelfHealing:
 		Step: 12
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 16
 	Armament:
@@ -628,8 +618,6 @@ ts_gdi_wolverine:
 		HpPerStep: 1500
 	ChangesHealth@SelfHealing:
 		Step: 12
-	Armor:
-		Type: Light
 	AttackFrontal:
 		FacingTolerance: 0
 	Armament@PRIMARY:
@@ -696,8 +684,6 @@ ts_gdi_wolverinemkii:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armor:
-		Type: Medium
 	AttackFrontal:
 		FacingTolerance: 0
 	Armament@PRIMARY:
@@ -777,8 +763,6 @@ ts_gdi_mammothprototype:
 		HpPerStep: 40000
 	ChangesHealth@SelfHealing:
 		Step: 320
-	Armor:
-		Type: Superheavy
 	Armament@RAILGUN:
 		Name: railgun
 		Weapon: TSMechRailgun
@@ -880,8 +864,6 @@ ts_gdi_mammothmkii:
 		HpPerStep: 60000
 	ChangesHealth@SelfHealing:
 		Step: 480
-	Armor:
-		Type: Superheavy
 	Armament@RAILGUN:
 		Name: railgun
 		Weapon: TSMechRailgunII
@@ -982,8 +964,6 @@ ts_gdi_disruptor:
 		HpPerStep: 12500
 	ChangesHealth@SelfHealing:
 		Step: 100
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 10
 	Armament@PRIMARY:

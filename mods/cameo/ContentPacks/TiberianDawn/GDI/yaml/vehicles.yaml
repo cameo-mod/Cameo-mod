@@ -180,8 +180,6 @@ td_gdi_battletank:
 		HpPerStep: 6250
 	ChangesHealth@SelfHealing:
 		Step: 50
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 16
 	Armament:
@@ -273,8 +271,6 @@ td_gdi_mammothtank:
 		HpPerStep: 11250
 	ChangesHealth@SelfHealing:
 		Step: 90
-	Armor:
-		Type: Heavy
 	WithSpriteTurret:
 	Turreted:
 		TurnSpeed: 12
@@ -428,8 +424,6 @@ td_gdi_mlrs:
 		HpPerStep: 1250
 	ChangesHealth@SelfHealing:
 		Step: 10
-	Armor:
-		Type: Light
 	Turreted:
 		TurnSpeed: 16
 		Offset: -256,0,128
@@ -496,8 +490,6 @@ td_gdi_archerartillery:
 		HpPerStep: 1750
 	ChangesHealth@SelfHealing:
 		Step: 14
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 14
 		Offset: -512,0,256
@@ -560,8 +552,6 @@ td_gdi_assaultapc:
 		HpPerStep: 12500
 	ChangesHealth@SelfHealing:
 		Step: 100
-	Armor:
-		Type: Heavy
 	RenderSprites:
 		Image: td_gdi_assaultapc
 	WithMuzzleOverlay:
@@ -739,8 +729,6 @@ td_gdi_predatortank:
 		HpPerStep: 8500
 	ChangesHealth@SelfHealing:
 		Step: 68
-	Armor:
-		Type: Heavy
 	WithSpriteTurret:
 	Turreted:
 		TurnSpeed: 14
@@ -838,8 +826,6 @@ td_gdi_mammothtankmkiii:
 		HpPerStep: 25000
 	ChangesHealth@SelfHealing:
 		Step: 200
-	Armor:
-		Type: Superheavy
 	WithSpriteTurret:
 	Turreted:
 		TurnSpeed: 11
@@ -923,8 +909,6 @@ td_gdi_exosuit:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armor:
-		Type: Medium
 	AttackFrontal:
 		FacingTolerance: 0
 	# Armament:

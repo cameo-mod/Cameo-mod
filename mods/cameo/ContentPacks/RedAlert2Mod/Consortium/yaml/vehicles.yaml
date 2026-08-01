@@ -34,8 +34,6 @@ steelconsortium_katytank:
 		HpPerStep: 13750
 	ChangesHealth@SelfHealing:
 		Step: 220
-	Armor:
-		Type: Superheavy
 	Shielded:
 		MaxPercentageStrength: 200
 		DamageRegenDelay: 125
@@ -420,8 +418,6 @@ cougar.steel:
 		HpPerStep: 1250
 	ChangesHealth@SelfHealing:
 		Step: 10
-	Armor:
-		Type: Light
 	Shielded:
 		MaxPercentageStrength: 200
 		InitialPercentageStrength: 200
@@ -547,8 +543,6 @@ oldqtnk.steel:
 		HpPerStep: 5625
 	ChangesHealth@SelfHealing:
 		Step: 45
-	Armor:
-		Type: Heavy
 	Shielded:
 		MaxPercentageStrength: 100
 		InitialPercentageStrength: 100
@@ -612,8 +606,6 @@ cobra.steel:
 		HpPerStep: 6500
 	ChangesHealth@SelfHealing:
 		Step: 130
-	Armor:
-		Type: Superheavy
 	Shielded:
 		MaxPercentageStrength: 50
 		InitialPercentageStrength: 50
@@ -839,8 +831,6 @@ steelconsortium_mako:
 		HpPerStep: 4750
 	ChangesHealth@SelfHealing:
 		Step: 38
-	Armor:
-		Type: Medium
 	Armament@PRIMARY:
 		Weapon: SteelMakoGun
 		LocalOffset: 500,200,0
@@ -918,8 +908,6 @@ steelconsortium_quantumtank:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 20
 	Armament:
@@ -1001,8 +989,6 @@ steelconsortium_manta:
 		HpPerStep: 2750
 	ChangesHealth@SelfHealing:
 		Step: 22
-	Armor:
-		Type: Medium
 	Armament@AG1:
 		Weapon: SteelMantaAG
 		LocalOffset: 300,100,0
@@ -1104,8 +1090,6 @@ steelconsortium_barracuda:
 		HpPerStep: 2000
 	ChangesHealth@SelfHealing:
 		Step: 16
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 12
 	Armament@AG1:
@@ -1236,8 +1220,6 @@ steelconsortium_megalodon:
 		HpPerStep: 22500
 	ChangesHealth@SelfHealing:
 		Step: 180
-	Armor:
-		Type: Superheavy
 	Armament@PRIMARY:
 		Weapon: SteelMegaSword
 		RequiresCondition: !rank-elite
@@ -1298,8 +1280,6 @@ steelconsortium_hammerheadartillerytank:
 		HpPerStep: 2625
 	ChangesHealth@SelfHealing:
 		Step: 21
-	Armor:
-		Type: Medium
 	Armament@Undeployed:
 		Weapon: HammerheadTankCannon
 		LocalOffset: 200,0,100
@@ -1407,8 +1387,6 @@ steelconsortium_poseidontank:
 		HpPerStep: 6250
 	ChangesHealth@SelfHealing:
 		Step: 50
-	Armor:
-		Type: Heavy
 	Armament@1:
 		Weapon: SteelFortressWeapons
 	RenderRangeCircle:
@@ -1478,8 +1456,6 @@ steelconsortium_dagger:
 		HpPerStep: 1250
 	ChangesHealth@SelfHealing:
 		Step: 10
-	Armor:
-		Type: Light
 	Armament@PRIMARY:
 		Weapon: SteelDaggerCannon
 		LocalOffset: 450,0,150

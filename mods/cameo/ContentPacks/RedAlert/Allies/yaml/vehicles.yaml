@@ -27,8 +27,6 @@ ra1_allies_alliedlighttank:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 120
 		TurnSpeed: 24
@@ -85,8 +83,6 @@ ra1_allies_alliedmediumtank:
 		HpPerStep: 4500
 	ChangesHealth@SelfHealing:
 		Step: 36
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 100
 		TurnSpeed: 20
@@ -144,8 +140,6 @@ ra1_allies_alliedheavyaatank:
 		HpPerStep: 6250
 	ChangesHealth@SelfHealing:
 		Step: 50
-	Armor:
-		Type: Heavy
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -242,8 +236,6 @@ ra1_allies_alliedartillery:
 		HpPerStep: 1000
 	ChangesHealth@SelfHealing:
 		Step: 8
-	Armor:
-		Type: Light
 	Mobile:
 		Speed: 60
 		TurnSpeed: 12
@@ -429,8 +421,6 @@ ra1_allies_sheridanassaulttank:
 		HpPerStep: 4250
 	ChangesHealth@SelfHealing:
 		Step: 34
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 17
 	Armament:
@@ -616,8 +606,6 @@ ra1_allies_alliedtigerheavytank:
 		HpPerStep: 8000
 	ChangesHealth@SelfHealing:
 		Step: 64
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 15
 		Offset: 0,0,0
@@ -674,8 +662,6 @@ ra1_allies_alliedtankdestroyer:
 		HpPerStep: 6000
 	ChangesHealth@SelfHealing:
 		Step: 48
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 60
 		TurnSpeed: 24
@@ -734,8 +720,6 @@ ra1_allies_chronotank:
 		HpPerStep: 3750
 	ChangesHealth@SelfHealing:
 		Step: 60
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 100
 		TurnSpeed: 40

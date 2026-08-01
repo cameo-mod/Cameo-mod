@@ -31,8 +31,6 @@ td_nod_specterartillery:
 		HpPerStep: 1125
 	ChangesHealth@SelfHealing:
 		Step: 9
-	Armor:
-		Type: Light
 	Armament:
 		Weapon: SpecterArtilleryShell
 		LocalOffset: 500,0,500
@@ -135,8 +133,6 @@ td_nod_artillery:
 		HpPerStep: 875
 	ChangesHealth@SelfHealing:
 		Step: 7
-	Armor:
-		Type: Light
 	Armament:
 		Weapon: ArtilleryShell
 		LocalOffset: 624,0,208
@@ -195,8 +191,6 @@ td_nod_flametank:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Heavy
 	Armament:
 		Weapon: BigFlamer
 		LocalOffset: 512,128,42, 512,-128,42
@@ -344,8 +338,6 @@ td_nod_lighttank:
 		HpPerStep: 4000
 	ChangesHealth@SelfHealing:
 		Step: 32
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 22
 	Armament:
@@ -406,8 +398,6 @@ td_nod_ssmlauncher:
 		HpPerStep: 1000
 	ChangesHealth@SelfHealing:
 		Step: 8
-	Armor:
-		Type: Light
 	Turreted:
 		TurnSpeed: 20
 		Offset: -128,0,128
@@ -481,8 +471,6 @@ td_nod_stealthtank:
 		HpPerStep: 1250
 	ChangesHealth@SelfHealing:
 		Step: 10
-	Armor:
-		Type: Light
 	Cloak:
 		InitialDelay: 100
 		CloakDelay: 50
@@ -628,8 +616,6 @@ td_nod_chemicalstealthtank:
 		HpPerStep: 4500
 	ChangesHealth@SelfHealing:
 		Step: 36
-	Armor:
-		Type: Medium
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: ~td_nod_airstrip, td_nod_templeofnod, ~td_nod_promotion_chemicalstealthtank
@@ -687,8 +673,6 @@ td_nod_chemicalssmlauncher:
 		HpPerStep: 1625
 	ChangesHealth@SelfHealing:
 		Step: 13
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -836,8 +820,6 @@ td_nod_lighttankmkii:
 		HpPerStep: 4000
 	ChangesHealth@SelfHealing:
 		Step: 32
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 20
 	AttackTurreted:
@@ -904,8 +886,6 @@ td_nod_flametankmkii:
 		Step: 80
 	Selectable:
 		DecorationBounds: 1280, 1280, 0, -128
-	Armor:
-		Type: Superheavy
 	Turreted:
 		TurnSpeed: 15
 	Armament:

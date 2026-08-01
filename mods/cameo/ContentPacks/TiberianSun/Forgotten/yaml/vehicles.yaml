@@ -155,8 +155,6 @@ forgotten_missilevan:
 		HpPerStep: 1750
 	ChangesHealth@SelfHealing:
 		Step: 14
-	Armor:
-		Type: Light
 	Turreted:
 		TurnSpeed: 15
 		Offset: -120,0,1
@@ -381,8 +379,6 @@ forgotten_rattytank:
 		HpPerStep: 3500
 	ChangesHealth@SelfHealing:
 		Step: 28
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 18
 	Armament@PRIMARY:
@@ -443,8 +439,6 @@ forgotten_warriortank:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 15
 	Armament@PRIMARY:
@@ -507,8 +501,6 @@ forgotten_scoopertank:
 		HpPerStep: 10000
 	ChangesHealth@SelfHealing:
 		Step: 80
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 13
 	AttackTurreted:
@@ -570,8 +562,6 @@ forgotten_closhtank:
 		HpPerStep: 6000
 	ChangesHealth@SelfHealing:
 		Step: 48
-	Armor:
-		Type: Heavy
 	Armament@PRIMARY:
 		Weapon: MutFlamer
 		Recoil: 128
@@ -628,8 +618,6 @@ forgotten_flametank:
 		HpPerStep: 10000
 	ChangesHealth@SelfHealing:
 		Step: 80
-	Armor:
-		Type: Heavy
 	Armament@PRIMARY:
 		Weapon: MutHFlamer
 		LocalOffset: 512,128,42, 512,-128,42
@@ -687,8 +675,6 @@ forgotten_experimentalmammothtank:
 		HpPerStep: 50000
 	ChangesHealth@SelfHealing:
 		Step: 400
-	Armor:
-		Type: Superheavy
 	Turreted:
 		TurnSpeed: 10
 	Armament@PRIMARY:
@@ -757,8 +743,6 @@ forgotten_chemicalmammothtank:
 		HpPerStep: 20000
 	ChangesHealth@SelfHealing:
 		Step: 160
-	Armor:
-		Type: Superheavy
 	Turreted:
 		TurnSpeed: 12
 	Armament@PRIMARY:
@@ -820,8 +804,6 @@ forgotten_tankkiller:
 		HpPerStep: 4250
 	ChangesHealth@SelfHealing:
 		Step: 34
-	Armor:
-		Type: Medium
 	Armament@PRIMARY:
 		Weapon: TSHighVelocity
 		Recoil: 128
@@ -882,8 +864,6 @@ forgotten_thumperbus:
 		HpPerStep: 10000
 	ChangesHealth@SelfHealing:
 		Step: 80
-	Armor:
-		Type: Heavy
 	Armament@PRIMARY:
 		Weapon: TSBusMortar
 		Recoil: 200
@@ -965,8 +945,6 @@ forgotten_nomadbarracks:
 	ChangesHealth@SelfHealing:
 		Step: 260
 	-Power:
-	Armor:
-		Type: Superheavy
 	Armament:
 		Weapon: TSNomadGun
 		Recoil: 128
@@ -1047,8 +1025,6 @@ forgotten_mlrs:
 		HpPerStep: 2000
 	ChangesHealth@SelfHealing:
 		Step: 16
-	Armor:
-		Type: Medium
 	Armament@PRIMARY:
 		Weapon: TSMLRSMissile
 		Recoil: 64
@@ -1113,8 +1089,6 @@ forgotten_m113adats:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armor:
-		Type: Light
 	Armament@PRIMARY:
 		Weapon: TSAdatsMissile
 		LocalOffset: 85,0,171

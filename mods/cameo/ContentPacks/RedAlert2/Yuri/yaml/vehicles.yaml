@@ -154,8 +154,6 @@ yuri_gatlingtank:
 		HpPerStep: 2250
 	ChangesHealth@SelfHealing:
 		Step: 18
-	Armor:
-		Type: Light
 	Turreted:
 		TurnSpeed: 36
 	Armament@1:
@@ -242,8 +240,6 @@ yuri_lashertank:
 		HpPerStep: 3500
 	ChangesHealth@SelfHealing:
 		Step: 28
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 23
 	Armament@PRIMARY:
@@ -338,8 +334,6 @@ yuri_magnetron:
 		HpPerStep: 3250
 	ChangesHealth@SelfHealing:
 		Step: 26
-	Armor:
-		Type: Light
 	Turreted:
 		TurnSpeed: 13
 	Armament@Normal:
@@ -488,8 +482,6 @@ yuri_mastermind:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 2000
 	Armament@PRIMARY:

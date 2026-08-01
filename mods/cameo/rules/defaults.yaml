@@ -1525,7 +1525,7 @@
 	Inherits@EXT: ^ExternalConditions
 	Inherits@TankBuffs: ^TankBuffs
 	Armor:
-		Type: Medium
+		Type: Heavy
 	RevealsShroud:
 		Range: 6000
 	Buildable:
@@ -1542,7 +1542,7 @@
 	Inherits@TankBuffs: ^TankBuffs
 	Inherits@Crushes: ^VehicleCrusher
 	Armor:
-		Type: Medium
+		Type: Superheavy
 	RevealsShroud:
 		Range: 7000
 	Buildable:
@@ -1561,7 +1561,7 @@
 	ProducibleWithLevel@spyvehicles:
 		Prerequisites: vehicles.upgraded
 	Armor:
-		Type: Heavy
+		Type: Superheavy
 	RevealsShroud:
 		Range: 8000
 	AutoTarget:

@@ -193,8 +193,6 @@ asianalliance_lynxtank:
 		HpPerStep: 6000
 	ChangesHealth@SelfHealing:
 		Step: 48
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 18
 	Voiced:
@@ -419,8 +417,6 @@ asianalliance_pulverizer:
 		HpPerStep: 4250
 	ChangesHealth@SelfHealing:
 		Step: 34
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 26
 	Armament@1:
@@ -476,8 +472,6 @@ ptnk.asian:
 		HpPerStep: 6500
 	ChangesHealth@SelfHealing:
 		Step: 52
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 10
 	Armament@PRIMARY:
@@ -534,8 +528,6 @@ asianalliance_viper:
 		HpPerStep: 1250
 	ChangesHealth@SelfHealing:
 		Step: 10
-	Armor:
-		Type: Light
 	Armament@PRIMARY:
 		Weapon: AsianChemical
 		LocalOffset: -400,0,300
@@ -594,8 +586,6 @@ asianalliance_type89mlrs:
 		HpPerStep: 2000
 	ChangesHealth@SelfHealing:
 		Step: 16
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 16
 		Offset: -256,0,128
@@ -647,8 +637,6 @@ asianalliance_howitzer:
 		HpPerStep: 2000
 	ChangesHealth@SelfHealing:
 		Step: 16
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 12
 	Armament:
@@ -722,8 +710,6 @@ asianalliance_asianflametank:
 		HpPerStep: 4250
 	ChangesHealth@SelfHealing:
 		Step: 34
-	Armor:
-		Type: Medium
 	Armament@AG:
 		Weapon: AsianFlamerTank
 		LocalOffset: 300,0,200
@@ -786,8 +772,6 @@ asianalliance_pulverizermecha:
 		HpPerStep: 14250
 	ChangesHealth@SelfHealing:
 		Step: 114
-	Armor:
-		Type: Superheavy
 	Armament@1:
 		Weapon: AsianPulverizerMechaGatling
 		LocalOffset: 800,300,600, 800,-300,600
@@ -857,8 +841,6 @@ asianalliance_railguntank:
 		HpPerStep: 8000
 	ChangesHealth@SelfHealing:
 		Step: 64
-	Armor:
-		Type: Medium
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: AsianRailTank
@@ -906,8 +888,6 @@ asianalliance_heavyrailguntank:
 		HpPerStep: 12500
 	ChangesHealth@SelfHealing:
 		Step: 100
-	Armor:
-		Type: Heavy
 	Armament@PRIMARY:
 		Weapon: AsianRailTank2
 		RequiresCondition: !rank-elite
@@ -952,8 +932,6 @@ asianalliance_warturtle:
 		HpPerStep: 12500
 	ChangesHealth@SelfHealing:
 		Step: 100
-	Armor:
-		Type: Medium
 	#Turreted:
 	#	TurnSpeed: 1023
 	-QuantizeFacingsFromSequence:

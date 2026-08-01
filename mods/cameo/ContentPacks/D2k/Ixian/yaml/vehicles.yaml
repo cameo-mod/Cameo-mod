@@ -116,8 +116,6 @@ ixian_ixsiegetank:
 		Name: Ix Siege Tank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-	Armor:
-		Type: Medium
 	Shielded:
 		RegenAmount: 48
 	Armament:
@@ -199,8 +197,6 @@ ixian_ixmissiletank:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armor:
-		Type: Light
 	Shielded:
 		RegenAmount: 40
 	Armament:
@@ -550,8 +546,6 @@ ixian_shockraider:
 		Step: 16
 	Shielded:
 		RegenAmount: 32
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 120
 		TurnSpeed: 48
@@ -609,8 +603,6 @@ ixian_mongoose:
 		HpPerStep: 3750
 	ChangesHealth@SelfHealing:
 		Step: 30
-	Armor:
-		Type: Medium
 	AutoTarget:
 	Armament@primary:
 		Weapon: MongooseRocket
@@ -664,8 +656,6 @@ ixian_kodatank:
 		HpPerStep: 3250
 	ChangesHealth@SelfHealing:
 		Step: 26
-	Armor:
-		Type: Medium
 	Shielded:
 		RegenAmount: 52
 	Mobile:
@@ -724,8 +714,6 @@ ixian_heavykodatank:
 		HpPerStep: 4750
 	ChangesHealth@SelfHealing:
 		Step: 38
-	Armor:
-		Type: Heavy
 	Shielded:
 		RegenAmount: 76
 	Mobile:
@@ -975,8 +963,6 @@ ixian_stormraider:
 		HpPerStep: 3000
 	ChangesHealth@SelfHealing:
 		Step: 24
-	Armor:
-		Type: Medium
 	Shielded:
 		RegenAmount: 48
 	Mobile:
@@ -1155,8 +1141,6 @@ ixian_ixcombatsiege:
 		HpPerStep: 4000
 	ChangesHealth@SelfHealing:
 		Step: 32
-	Armor:
-		Type: Medium
 	Shielded:
 		RegenAmount: 64
 	Mobile:
@@ -1224,8 +1208,6 @@ ixian_neocymek:
 		HpPerStep: 15000
 	ChangesHealth@SelfHealing:
 		Step: 120
-	Armor:
-		Type: Heavy
 	Shielded:
 		RegenAmount: 240
 	Armament@Cannon:
@@ -1316,8 +1298,6 @@ ixian_ixprojector:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Medium
 	Shielded:
 		InitialPercentageStrength: 100
 		MaxPercentageStrength: 100
@@ -1579,8 +1559,6 @@ duelist_tank.ixian:
 		HpPerStep: 12000
 	ChangesHealth@SelfHealing:
 		Step: 96
-	Armor:
-		Type: Heavy
 	Shielded:
 		RegenAmount: 158
 	Mobile:
