@@ -484,7 +484,7 @@ d2k_tyrant:
 			Concrete: 30
 
 	MinRange: 1230
-Rocket.stealth:
+Rocket_stealth:
 	Inherits: ^D2KMissile
 	ReloadDelay: 150
 	Report: d2k_buggy_rocket.wav
@@ -497,8 +497,8 @@ Rocket.stealth:
 		Damage: 12500
 
 	MinRange: 1845
-Rocket.stealthAA:
-	Inherits: Rocket.stealth
+Rocket_stealth_AA:
+	Inherits: Rocket_stealth
 	Burst: 2
 	BurstDelays: 15
 	Report: d2k_buggy_rocket.wav
@@ -521,31 +521,31 @@ Rocket.stealthAA:
 		ValidTargets: Air
 		Damage: 10000
 
-d2k_APC.AG:
-	Inherits: Rocket.stealth
+d2k_APC_AG:
+	Inherits: Rocket_stealth
 	Burst: 1
 	ReloadDelay: 175
 	Warhead@1Dam: SpreadDamage
 		Damage: 9000
 
 	MinRange: 1845
-d2k_APC.AA:
-	Inherits: Rocket.stealthAA
+d2k_APC_AA:
+	Inherits: Rocket_stealth_AA
 	Burst: 1
 	ReloadDelay: 175
 	Warhead@1Dam: SpreadDamage
 		Damage: 7500
 
-d2k_APCo.AG:
-	Inherits: Rocket.stealth
+d2k_APCo_AG:
+	Inherits: Rocket_stealth
 	Burst: 1
 	ReloadDelay: 175
 	Warhead@1Dam: SpreadDamage
 		Damage: 6000
 
 	MinRange: 1845
-d2k_APCo.AA:
-	Inherits: Rocket.stealthAA
+d2k_APCo_AA:
+	Inherits: Rocket_stealth_AA
 	Burst: 1
 	ReloadDelay: 175
 	Warhead@1Dam: SpreadDamage
@@ -571,7 +571,7 @@ D2K_Annihilator:
 			Concrete: 60
 		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath
 
-D2K_Annihilator.AA:
+D2K_Annihilator_AA:
 	Inherits: MammothTusk
 	Range: 10240
 	Burst: 6

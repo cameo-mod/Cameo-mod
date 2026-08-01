@@ -96,7 +96,7 @@ DarkObeliskLaser:
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 
-TSCABALEMPDisable.anim:
+TSCABALCharge_EMP:
 	ReloadDelay: 6
 	Range: 8000
 	ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
@@ -112,7 +112,7 @@ TSCABALEMPDisable.anim:
 		ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
 		Damage: 1
 
-TSCABALEMPDisable.end:
+TSCABALDisable_EMP:
 	Inherits: ^TeslaChargedWeapon
 	ReloadDelay: 8
 	Range: 8000
@@ -478,7 +478,7 @@ CabalReaperMissiles:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 4
 
-CabalReaperMissilesAA:
+CabalReaperMissiles_AA:
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^LightMissile
@@ -554,7 +554,7 @@ CabalHeavyReaperMissiles:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 6
 
-CabalHeavyReaperMissilesAA:
+CabalHeavyReaperMissiles_AA:
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumMissile
@@ -761,7 +761,7 @@ CabalHunterKillerLasers:
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Water, Air
 
-CabalHunterKillerLasersE:
+CabalHunterKillerLasers_elite:
 	Inherits: ^LaserWeapon
 	Inherits@2: ^RailgunWeapon
 	Inherits@3: ^HeavyMissile

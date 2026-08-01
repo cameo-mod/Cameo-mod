@@ -173,7 +173,7 @@ edenDefenceRailgun:
 	ReloadDelay: 50
 
 	MinRange: 1435
-edenEMP:
+eden_EMP:
 	Inherits: ^TeslaChargedWeapon
 	Inherits: ^TeslaWeapon
 	Inherits: ^MediumFlameWeapon
@@ -283,26 +283,26 @@ edenEMP:
 		ImpactActors: false
 		ValidTargets: Ground, Ship, Air
 
-edenEMPAA:
-	Inherits: edenEMP
+eden_EMP_AA:
+	Inherits: eden_EMP
 	Range: 8250
 	MinRange: 1650
 	ValidTargets: Air
 
-edenTigerEMP:
-	Inherits: edenEMP
+edenTiger_EMP:
+	Inherits: eden_EMP
 	ReloadDelay: 41
 	Range: 6000
 	MinRange: 1200
 
-edenTigerEMPAA:
-	Inherits: edenTigerEMP
+edenTiger_EMP_AA:
+	Inherits: edenTiger_EMP
 	Range: 9000
 	MinRange: 1800
 	ValidTargets: Air
 
-edenEMPGP:
-	Inherits: plymouthEMP
+eden_EMP_GP:
+	Inherits: plymouth_EMP
 	ReloadDelay: 30
 	Warhead@2Ext: GrantExternalCondition
 		Condition: empdisable
@@ -620,7 +620,7 @@ PLYMineExplosive:
 		ImpactSounds: gexpmina.wav, gexpminb.wav
 
 #Also used by Eden
-plymouthEMP:
+plymouth_EMP:
 	Inherits: ^TeslaChargedWeapon
 	Inherits: ^TeslaWeapon
 	Inherits: ^MediumFlameWeapon
@@ -730,15 +730,15 @@ plymouthEMP:
 		ImpactActors: false
 		ValidTargets: Ground, Ship
 
-plymouthEMPAA:
-	Inherits: plymouthEMP
+plymouth_EMP_AA:
+	Inherits: plymouth_EMP
 	Range: 8250
 	MinRange: 1650
 	ValidTargets: Air
 
 #Also used by Eden
-plymouthEMPTiger:
-	Inherits: plymouthEMP
+plymouth_EMP_Tiger:
+	Inherits: plymouth_EMP
 	ReloadDelay: 40
 	Warhead@2Ext: GrantExternalCondition
 		Condition: empdisable

@@ -22,18 +22,20 @@ The essential documents, in order:
    the required reading order.
 2. **`docs/AGENT_WORKSPACE.md`** — mandatory workflow, evidence rules,
    incident protocol, and commit gate.
-3. **`docs/DESIGN.md`** — the binding design contract (naming grammar, stat
+3. **`docs/PROJECT_CONTEXT.md`** — short project orientation and current
+   safety focus.
+4. **`docs/DESIGN.md`** — the binding design contract (naming grammar, stat
    formulas, tech tiers, content-pack layout, description scheme, agent
    operating rules). Read it before touching any yaml.
-4. **`docs/design/ROADMAP.md`** — active work queue; crashes always jump
+5. **`docs/design/ROADMAP.md`** — active work queue; crashes always jump
    the queue.
-5. **`docs/audit/SUMMARY.md`** — current known-issue state by bug class.
-6. `docs/Cameo_Knowledge_Base_Manual.md` — the ENGINE/CODE reference
+6. **`docs/audit/SUMMARY.md`** — current known-issue state by bug class.
+7. `docs/Cameo_Knowledge_Base_Manual.md` — the ENGINE/CODE reference
    (v.0.4): custom traits, assemblies (OpenRA.Mods.Cameo/CA),
    activities, bot modules, UI internals. Consult it for any C#-side
    question (it lists code-derived identifiers!); verify against source
    when in doubt — it is a contributor document, not the binding contract.
-7. `docs/MASTER_REPORT.md` — historical long-form analysis, bug taxonomy
+8. `docs/MASTER_REPORT.md` — historical long-form analysis, bug taxonomy
    (B1–B12); consult §9/§10/§13 when DESIGN.md is not enough. Not a live
    roadmap — active work belongs in ROADMAP.md.
 

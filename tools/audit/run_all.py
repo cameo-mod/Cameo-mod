@@ -5,6 +5,7 @@ Runs the full Cameo audit suite, writes one markdown report per audit to
 docs/audit/latest/, regenerates docs/factions/MATRIX.md, and exits non-zero
 if any blocking audit fails.
 """
+import os
 import pathlib
 import subprocess
 import sys
@@ -17,17 +18,28 @@ OUT.mkdir(parents=True, exist_ok=True)
 PYTHON = sys.executable
 failed = 0
 
+# Force child processes to emit UTF-8 regardless of the OS console codepage
+# (Windows defaults to cp1252, which corrupts §, —, etc. in audit output —
+# see LESSONS_LEARNED.md). Passing a file object directly as stdout= to
+# subprocess.run() writes raw bytes from the child at the OS level, bypassing
+# the parent file object's own encoding, so this must be set via env instead.
+CHILD_ENV = dict(os.environ, PYTHONIOENCODING="utf-8")
+
 AUDITS = [
     "inherits", "faction_leaks", "upgrades", "upgrade_coverage", "ai",
     "sequences", "metadata", "outliers", "orphans", "assets", "fluent",
     "power_budget", "stat_formulas", "weapon_uniqueness", "garrison_weapons",
     "asset_files", "promotion_gating", "min_range", "basebuilder_crates",
-    "buildable_order", "display_text", "rename_safety", "elite_naming",
+    "buildable_order", "display_text", "rename_safety",
     "missing_elite", "elite_gating", "rank_decoration", "dune_rank_decoration",
     "effect_warhead_names", "weapon_suffixes", "balance_sheet",
     "consistency_report", "packs", "balance_drift", "template_conformance",
-    "multiplier_modifiers", "nuclear_flash_bindings",
+    "multiplier_modifiers", "nuclear_flash_bindings", "ts_death_palette",
+    "warhead_split",
 ]
+# NOTE: "elite_naming" is intentionally excluded — audit_elite_naming.py is
+# deprecated, fully superseded by audit_weapon_suffixes.py X1 section
+# (same check: rank-elite gated armaments not ending _elite).
 
 EXTRAS = [
     ("createeffect_image", ROOT / "tools" / "audit_createeffect_image.py"),
@@ -42,13 +54,12 @@ def run(name, script, extra_args=None):
     err = OUT / f"{name}.err"
     cmd = [PYTHON, str(script)] + (extra_args or [])
     with md.open("w", encoding="utf-8") as out, err.open("w", encoding="utf-8") as e:
-        result = subprocess.run(cmd, cwd=ROOT, stdout=out, stderr=e, text=True)
+        result = subprocess.run(cmd, cwd=ROOT, stdout=out, stderr=e, text=True, env=CHILD_ENV)
     if result.returncode != 0:
         failed = 1
         print(f"   FAILED: {name} (exit {result.returncode})")
-    else:
-        if err.stat().st_size == 0:
-            err.unlink()
+    if err.stat().st_size == 0:
+        err.unlink()
 
 
 for a in AUDITS:
@@ -64,7 +75,7 @@ for name, script, dest in [
 ]:
     print(f"== {name}")
     with dest.open("w", encoding="utf-8") as out:
-        result = subprocess.run([PYTHON, str(script)], cwd=ROOT, stdout=out, text=True)
+        result = subprocess.run([PYTHON, str(script)], cwd=ROOT, stdout=out, text=True, env=CHILD_ENV)
     if result.returncode != 0:
         failed = 1
         print(f"   FAILED: {name} (exit {result.returncode})")

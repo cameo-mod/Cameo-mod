@@ -66,7 +66,7 @@ schwarzermond_dalek:
 		LocalOffset: 400,-200,200
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: DalekCannonE
+		Weapon: DalekCannon_elite
 		LocalOffset: 400,-200,200
 		RequiresCondition: rank-elite
 	FirepowerMultiplier@MultiWeapon:
@@ -119,7 +119,7 @@ schwarzermond_laserbeetle:
 		Offset: -4,0,5
 	Armament:
 		Name: primary
-		Weapon: NaxiBeetleLaserE
+		Weapon: NaxiBeetleLaser_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,1,80, 512,-1,80
@@ -128,7 +128,7 @@ schwarzermond_laserbeetle:
 		RequiresCondition: !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@AA:
 		Name: primary
-		Weapon: NaxiBeetleLaserAAE
+		Weapon: NaxiBeetleLaser_AA_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,1,80, 512,-1,80
@@ -146,7 +146,7 @@ schwarzermond_laserbeetle:
 		RequiresCondition: schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@AA_UP:
 		Name: primary
-		Weapon: Lunar_YellowBeetleLaserAA
+		Weapon: Lunar_YellowBeetleLaser_AA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,1,80, 512,-1,80
@@ -164,7 +164,7 @@ schwarzermond_laserbeetle:
 		RequiresCondition: schwarzermond_upgrade_amplifiedlens
 	Armament@AA_AMP:
 		Name: primary
-		Weapon: Lunar_AmplifiedBeetleLaserAA
+		Weapon: Lunar_AmplifiedBeetleLaser_AA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,1,80, 512,-1,80
@@ -231,7 +231,7 @@ schwarzermond_lunarpanzer:
 		RequiresCondition: !rank-elite && !schwarzermond_upgrade_vrilpoweredweapons
 	Armament@elite:
 		Name: primary
-		Weapon: LunarPanzerCannonE
+		Weapon: LunarPanzerCannon_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 1280,0,80
@@ -317,7 +317,7 @@ schwarzermond_lunartiger:
 		RequiresCondition: !rank-elite && !schwarzermond_upgrade_vrilpoweredweapons
 	Armament@elite:
 		Name: primary
-		Weapon: LunarTigerCannonE
+		Weapon: LunarTigerCannon_elite
 		Recoil: 256
 		RecoilRecovery: 32
 		LocalOffset: 1500,0,0
@@ -335,7 +335,7 @@ schwarzermond_lunartiger:
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_vrilpoweredweapons
 	Armament@elite-upgrade:
 		Name: primary
-		Weapon: Lunar_GreenTigerCannonE
+		Weapon: Lunar_GreenTigerCannon_elite
 		Recoil: 256
 		RecoilRecovery: 32
 		LocalOffset: 1500,0,0
@@ -396,7 +396,7 @@ schwarzermond_neojagdpanzer:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite && !schwarzermond_upgrade_vrilpoweredweapons
 	Armament@elite:
-		Weapon: LunarNaxiJadgDestroyerE
+		Weapon: LunarNaxiJadgDestroyer_elite
 		LocalOffset: 400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -408,7 +408,7 @@ schwarzermond_neojagdpanzer:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_vrilpoweredweapons
 	Armament@elite-upgrade:
-		Weapon: Lunar_GreenJadgDestroyerE
+		Weapon: Lunar_GreenJadgDestroyer_elite
 		LocalOffset: 400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -469,7 +469,7 @@ schwarzermond_lunargrille:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite && !schwarzermond_upgrade_vrilpoweredweapons
 	Armament@elite:
-		Weapon: NaxGrilleArtyE
+		Weapon: NaxGrilleArty_elite
 		LocalOffset: 500,0,150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -481,7 +481,7 @@ schwarzermond_lunargrille:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_vrilpoweredweapons
 	Armament@elite-upgrade:
-		Weapon: Lunar_GreenGrilleArtyE
+		Weapon: Lunar_GreenGrilleArty_elite
 		LocalOffset: 500,0,150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -541,7 +541,7 @@ schwarzermond_korruptesbiest:
 		LocalOffset: 500,300,400, 500,-300,400, 500,300,300, 500,-300,300
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: NaxCorrosionBeastE
+		Weapon: NaxCorrosionBeast_elite
 		LocalOffset: 500,300,400, 500,-300,400, 500,300,300, 500,-300,300
 		RequiresCondition: rank-elite
 	AttackFrontal:
@@ -603,7 +603,7 @@ schwarzermond_crystaltank:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: NaxCrystalLeechE
+		Weapon: NaxCrystalLeech_elite
 		LocalOffset: 400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -721,7 +721,7 @@ schwarzermond_mars:
 		RequiresCondition: firing
 		Sequence: empty-turret
 		Name: reloading
-schwarzermond_m200bjagerline:
+schwarzermond_komet:
 	Inherits: ^Vehicle
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -740,7 +740,7 @@ schwarzermond_m200bjagerline:
 	Valued:
 		Cost: 2500
 	Tooltip:
-		Name: M-200B Jagerline
+		Name: Komet
 	Health:
 		HP: 70000
 	Repairable:
@@ -760,11 +760,11 @@ schwarzermond_m200bjagerline:
 		BobDistance: -64
 		InitialHeight: 384
 	Armament:
-		Weapon: Naxis_Jagerline
+		Weapon: Naxis_Komet
 		LocalOffset: 1000,333,1000, 1000,-333,1000, 1000,333,1000, 1000,-333,1000
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: Naxis_Jagerline_AA
+		Weapon: Naxis_Komet_AA
 		LocalOffset: 1000,333,1000, 1000,-333,1000, 1000,333,1000, 1000,-333,1000
 		MuzzleSequence: muzzle
 	FirepowerMultiplier@RANK-1:
@@ -857,7 +857,7 @@ schwarzermond_lasertank:
 		RequiresCondition: !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@AA:
 		Name: primary
-		Weapon: NaxiTank2LaserAA
+		Weapon: NaxiTank2Laser_AA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 850,150,-60, 850,-150,-60
@@ -875,7 +875,7 @@ schwarzermond_lasertank:
 		RequiresCondition: schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@AA_UP:
 		Name: primary
-		Weapon: Lunar_YellowTank2LaserAA
+		Weapon: Lunar_YellowTank2Laser_AA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 850,150,-60, 850,-150,-60
@@ -893,7 +893,7 @@ schwarzermond_lasertank:
 		RequiresCondition: schwarzermond_upgrade_amplifiedlens
 	Armament@AA_AMP:
 		Name: primary
-		Weapon: Lunar_AmplifiedTank2LaserAA
+		Weapon: Lunar_AmplifiedTank2Laser_AA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 850,150,-60, 850,-150,-60

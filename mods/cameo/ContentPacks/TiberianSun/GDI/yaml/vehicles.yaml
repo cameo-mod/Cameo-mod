@@ -209,7 +209,7 @@ ts_gdi_mobileemp:
 	Turreted:
 	AttackTurreted:
 	Armament:
-		Weapon: TSMobileEMP
+		Weapon: TSMobile_EMP
 		MuzzleSequence: muzzle
 #	ReloadArmamentsBar:
 	WithVoxelBody:
@@ -889,7 +889,7 @@ ts_gdi_mammothmkii:
 		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
 	Armament@MISSILES:
 		Name: missiles
-		Weapon: TSMammothTusk2II
+		Weapon: TSMammothTusk2II_AA
 		LocalOffset: -420,-300,600, -420,300,600
 		LocalYaw: -100,100
 	Armament@UpgradeRAILGUN:

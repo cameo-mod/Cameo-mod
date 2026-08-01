@@ -3935,14 +3935,14 @@
 # 	Mobile:
 # 		Speed: 45
 # 	Armament:
-# 		Weapon: D2K_Rocket_Trooper_AAPowered
+# 		Weapon: D2K_Rocket_Trooper_AA
 # 		LocalOffset: 128,0,256
 # 	Armament@SECONDARY:
 # 		Weapon: D2K_Rocket_Trooper_AGOnly
 # 		LocalOffset: 128,0,256
 # 	Armament@garrisoned:
 # 		Name: garrisoned
-# 		Weapon: D2K_Rocket_Trooper_AAPowered
+# 		Weapon: D2K_Rocket_Trooper_AA
 # 	Armament@SECONDARYgarrisoned:
 # 		Name: garrisoned
 # 		Weapon: D2K_Rocket_Trooper_AGOnly
@@ -5484,12 +5484,12 @@
 # 		LocalOffset: 575, 0, 175
 # 		MuzzlePalette: d2keffect
 # 	Armament@MGround:
-# 		Weapon: d2k_APC.AG
+# 		Weapon: d2k_APC_AG
 # 		Name: secondary
 # 		LocalOffset: 575, 75, 175
 # 		PauseOnCondition: !ammo
 # 	Armament@MAA:
-# 		Weapon: d2k_APC.AA
+# 		Weapon: d2k_APC_AA
 # 		Name: aa
 # 		LocalOffset: 575, 75, 175
 # 		PauseOnCondition: !ammo
@@ -5540,7 +5540,7 @@
 # 		Name: tertiary
 # 		Weapon: 80mm_H
 # 	Armament@deploy:
-# 		Weapon: deploytargeting.5c0
+# 		Weapon: deploytargeting_5c0
 # 		RequiresCondition: loaded
 # 	AutoTarget:
 # 		InitialStance: AttackAnything
@@ -5868,12 +5868,12 @@
 # 		Name: primary
 # 		MuzzlePalette: d2keffect
 # 	Armament@RGround:
-# 		Weapon: Rocket.stealth
+# 		Weapon: Rocket_stealth
 # 		Name: secondary
 # 		PauseOnCondition: !ammo
 # 		LocalOffset: 213,43,128, 213,-43,128
 # 	Armament@RAA:
-# 		Weapon: Rocket.stealthAA
+# 		Weapon: Rocket_stealth_AA
 # 		Name: aa
 # 		PauseOnCondition: !ammo
 # 		LocalOffset: 213,43,128, 213,-43,128
@@ -5987,12 +5987,12 @@
 # 		Image: d2k_apc
 # 		PlayerPalette: raplayer
 # 	Armament@MGround:
-# 		Weapon: d2k_APCo.AG
+# 		Weapon: d2k_APCo_AG
 # 		Name: secondary
 # 		LocalOffset: 768,75,90
 # 		PauseOnCondition: !ammo
 # 	Armament@MAA:
-# 		Weapon: d2k_APCo.AA
+# 		Weapon: d2k_APCo_AA
 # 		Name: aa
 # 		LocalOffset: 768,75,90
 # 		PauseOnCondition: !ammo
@@ -7525,7 +7525,7 @@
 # 	UpdatesPlayerStatistics:
 # 		AddToArmyValue: true
 # 	Armament@deploy:
-# 		Weapon: deploytargeting.5c0
+# 		Weapon: deploytargeting_5c0
 # 		RequiresCondition: loaded
 # 	AutoTarget:
 # 		InitialStance: AttackAnything
@@ -8739,7 +8739,7 @@
 # 		Weapon: D2K_Annihilator
 # 		LocalOffset: 350,0,0
 # 	Armament@aa:
-# 		Weapon: D2K_Annihilator.AA
+# 		Weapon: D2K_Annihilator_AA
 # 		LocalOffset: 100,-150,100, 100,150,100
 # 	Valued:
 # 		Cost: 2000
@@ -9823,12 +9823,12 @@
 # 		LocalOffset: 575, 0, 175
 # 		MuzzlePalette: d2keffect
 # 	Armament@MGround:
-# 		Weapon: d2k_APC.AG
+# 		Weapon: d2k_APC_AG
 # 		Name: secondary
 # 		LocalOffset: 575, 75, 175
 # 		PauseOnCondition: !ammo
 # 	Armament@MAA:
-# 		Weapon: d2k_APC.AA
+# 		Weapon: d2k_APC_AA
 # 		Name: aa
 # 		LocalOffset: 575, 75, 175
 # 		PauseOnCondition: !ammo
@@ -11770,7 +11770,7 @@
 # 		Modifier: 200
 # 		RequiresCondition: deployed
 # 	Armament@Deploy:
-# 		Weapon: deploytargeting.10c0
+# 		Weapon: deploytargeting_10c0
 # 		Name: primary
 # 	AttackFrontal:
 # 		FacingTolerance: 0
@@ -13385,11 +13385,11 @@
 # 		ValidRelationships: Ally
 # 		Condition: d2kvordelproxy
 # 	Armament@Anim:
-# 		Weapon: empdisable.anim
+# 		Weapon: IxianCharge_EMP
 # 		RequiresCondition: end_disable == 0
 # 		LocalOffset: -128,0,256
 # 	Armament@End:
-# 		Weapon: empdisable.end
+# 		Weapon: IxianDisable_EMP
 # 		RequiresCondition: end_disable >= 1
 # 		LocalOffset: -128,0,256
 # 	GrantConditionOnAttack@End:
@@ -13748,7 +13748,7 @@
 # 	Shielded:
 # 		RegenAmount: 76
 # 	Armament@PRIMARY:
-# 		Weapon: IxianEmpBomb
+# 		Weapon: IxianBomb_EMP
 # 		LocalOffset: 250,0,-250
 # 		PauseOnCondition: !ammo
 # 	AttackAircraft:

@@ -4933,7 +4933,7 @@ awminicannon:
 		LocalOffset: 512,0,112
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: AWArtilleryAA
+		Weapon: AWArtillery_AA
 		LocalOffset: 512,0,112
 		MuzzleSequence: muzzle
 	AttackTurreted:
@@ -5019,7 +5019,7 @@ awtalon:
 		LocalOffset: 0,0,0
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: AWTalonGunAA
+		Weapon: AWTalonGun_AA
 		LocalOffset: 0,0,0
 		MuzzleSequence: muzzle
 	Armament@2:
@@ -5027,7 +5027,7 @@ awtalon:
 		LocalOffset: 0,0,0
 		MuzzleSequence: muzzle2
 	Armament@AA2:
-		Weapon: AWTalonGunAA
+		Weapon: AWTalonGun_AA
 		LocalOffset: 0,0,0
 		MuzzleSequence: muzzle2
 	AttackTurreted:
@@ -5134,7 +5134,7 @@ awfortress:
 		LocalOffset: -500,500,112, -500,-500,112, 500,-500,112, 500,500,112
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: AWArtilleryAA
+		Weapon: AWArtillery_AA
 		LocalOffset: 500,500,112, 500,500,112, 500,500,112, 500,500,112
 		MuzzleSequence: muzzle
 	AttackTurreted:
@@ -8600,7 +8600,7 @@ awaaarty2:
 	RevealsShroud:
 		Range: 5c0
 	Armament:
-		Weapon: AWArtilleryAA
+		Weapon: AWArtillery_AA
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
@@ -10443,7 +10443,7 @@ awfighter:
 		Range: 7c0
 		Type: GroundPosition
 	Armament:
-		Weapon: AWFighterMissileAA
+		Weapon: AWFighterMissile_AA
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
@@ -10632,7 +10632,7 @@ awattacker:
 		Range: 7c0
 		Type: GroundPosition
 	Armament:
-		Weapon: AWFighterMissileAA
+		Weapon: AWFighterMissile_AA
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
@@ -10989,7 +10989,7 @@ awstealth:
 		Range: 7c0
 		Type: GroundPosition
 	Armament:
-		Weapon: AWFighterMissileAA
+		Weapon: AWFighterMissile_AA
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
@@ -11607,7 +11607,7 @@ awss3:
 		Weapon: AWRockets
 		LocalOffset: 208,120,48
 	Armament@SECONDARY:
-		Weapon: AWFighterMissileAA
+		Weapon: AWFighterMissile_AA
 		LocalOffset: 208,-120,48
 	Targetable:
 		TargetTypes: Ground, Water, Ship, Submarine, Repair
@@ -12086,7 +12086,7 @@ awtcopter.e3:
 		InitialUnits: awe3, awe3, awe3, awe3, awe3
 		LoadedCondition: loaded
 	Armament:
-		Weapon: deploytargeting.5c0
+		Weapon: deploytargeting_5c0
 		RequiresCondition: botmicro && loaded
 	AutoDeployer:
 		DeployChance: 100

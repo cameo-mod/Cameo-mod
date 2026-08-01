@@ -3235,13 +3235,13 @@ susaempmissiledefender:
 		IconPalette: ra2
 		Description: Anti-tank/anti-aircraft infantry.\nHas to lock on to mobile targets before attacking.\nShots will disable vehicles hit\n  Strong vs Tanks, Aircraft\n  Weak vs Infantry
 	Armament@PRIMARY:
-		Weapon: SUSAEMPMissileDefenderAG
+		Weapon: SUSA_EMP_MissileDefenderAG
 	Armament@AntiStructure:
-		Weapon: SUSAEMPMissileDefenderStructure
+		Weapon: SUSA_EMP_MissileDefenderStructure
 	Armament@AA:
-		Weapon: SUSAEMPMissileDefenderAA
+		Weapon: SUSA_EMP_MissileDefender_AA
 	Armament@GARRISONED:
-		Weapon: SUSAEMPMissileDefenderGarrisoned
+		Weapon: SUSA_EMP_MissileDefenderGarrisoned
 
 susalasermissiledefender:
 	Inherits: susamissiledefender
@@ -3912,7 +3912,7 @@ susalockdownmlrs:
 		TurnSpeed: 20
 		Offset: -50,0,200
 	Armament@EMP:
-		Weapon: SUSAMLRSEMP
+		Weapon: SUSAMLRS_EMP
 		Name: primary
 		Recoil: 128
 		RecoilRecovery: 26
@@ -10253,7 +10253,7 @@ sglsparka:
 		MuzzleSequence: muzzle
 		LocalOffset: 600,64,0, 600,-64,0
 	Armament@2AA:
-		Weapon: SGLSparkaCannonAA
+		Weapon: SGLSparkaCannon_AA
 		MuzzleSequence: muzzle
 		LocalOffset: 600,64,200, 600,-64,200
 	AttackTurreted:
@@ -11190,7 +11190,7 @@ sglpython:
 		MuzzleSequence: muzzle
 		LocalOffset: 600,0,0
 	Armament@2AA:
-		Weapon: SGLPythonAA
+		Weapon: SGLPython_AA
 		Name: secondary
 		MuzzleSequence: muzzle
 		LocalOffset: 600,0,225
@@ -11914,7 +11914,7 @@ eglpickupquad:
 		MuzzleSequence: muzzle
 		LocalOffset: 128,128,200, 128,-128,200, 128,-128,43, 128,128,43
 	Armament@2AA:
-		Weapon: GLQuadCannonAir
+		Weapon: GLQuadCannonAir_AA
 		MuzzleSequence: muzzle
 		LocalOffset: 128,128,200, 128,-128,200, 128,-128,43, 128,128,43
 	AttackTurreted:
@@ -13185,7 +13185,7 @@ schhackvan.bot:
 	Cargo:
 		InitialUnits: CHHACKER, CHHACKER, CHHACKER, CHHACKER
 
-schempmig:
+SCH_EMP_Mig:
 	Inherits: ^RANeutralPlane
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -13215,7 +13215,7 @@ schempmig:
 		Range: 7c0
 		Type: GroundPosition
 	Armament@1:
-		Weapon: SCHEMPMig
+		Weapon: SCH_EMP_Mig
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
@@ -13246,7 +13246,7 @@ schempmig:
 	Contrail@2:
 		Offset: -598,683,0
 	SpawnActorOnDeath:
-		Actor: schempmig.husk
+		Actor: SCH_EMP_Mig.husk
 	LeavesTrails:
 		Offsets: -853,0,171
 		MovingInterval: 2
@@ -13274,7 +13274,7 @@ schempmig:
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
 
-schempmig.husk:
+SCH_EMP_Mig.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: EMP MiG
@@ -13294,7 +13294,7 @@ schempmig.husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: schempmig
+		Image: SCH_EMP_Mig
 
 schtiger:
 	Inherits: ^Helicopter
@@ -13334,7 +13334,7 @@ schtiger:
 		Weapon: SCHTigerGrenades
 		LocalOffset: 150,150,-150, 150,-150,-150
 	Armament@rockets:
-		Weapon: SCHTigerRockets
+		Weapon: SCHTigerRockets_AA
 		LocalOffset: 150,213,-120, 150,-213,-120
 	AutoTarget:
 		ScanRadius: 5
@@ -14357,7 +14357,7 @@ schtransporthelix:
 		RequiresCondition: gattlingaddon
 	Armament@GATTLINGAA:
 		Name: gattlingaa
-		Weapon: CHGattlingTurretAA
+		Weapon: CHGattlingTurret_AA
 		LocalOffset: 1200,0,-200
 		MuzzleSequence: muzzle
 		RequiresCondition: gattlingaddon
@@ -16249,7 +16249,7 @@ schsupportcrawler:
 		Weapon: SCHSupportCrawlerMissile
 		LocalOffset: 400,-350,-100, 400,350,-100
 	Armament@AA:
-		Weapon: SCHSupportCrawlerMissileAA
+		Weapon: SCHSupportCrawlerMissile_AA
 		LocalOffset: 400,-350,-100, 400,350,-100
 	Turreted:
 		TurnSpeed: 36

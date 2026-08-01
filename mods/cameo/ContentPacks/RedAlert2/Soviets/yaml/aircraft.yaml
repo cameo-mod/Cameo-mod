@@ -56,7 +56,7 @@ ra2_soviets_kirovairship:
 		LocalOffset: 256,0,-512
 		RequiresCondition: (rank-elite && !ra2_soviets_upgrade_kirovatomicbombs) || (!rank-elite && ra2_soviets_upgrade_kirovatomicbombs)
 	Armament@PRIMARYNuclearELITE:
-		Weapon: RA2KirovBomb_nuclear_E
+		Weapon: RA2KirovBomb_nuclear_elite
 		LocalOffset: 256,0,-512
 		RequiresCondition: rank-elite && ra2_soviets_upgrade_kirovatomicbombs
 	AttackAircraft:
@@ -126,7 +126,7 @@ ra2_soviets_siegechopper:
 		RequiresCondition: undeployed
 	WithMuzzleOverlay:
 	Armament@DeployTargeter:
-		Weapon: deploytargeting.5c0
+		Weapon: deploytargeting_5c0
 		RequiresCondition: botmicro
 	Armament@Deployed:
 		Name: deployed
@@ -160,19 +160,19 @@ ra2_soviets_siegechopper:
 		Voice: DeployedAttack
 	Armament@DeployedEliteRad:
 		Name: deployed
-		Weapon: RA160mmE_elite_rad
+		Weapon: RA160mmE_rad_elite
 		LocalOffset: 410,0,650
 		RequiresCondition: rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed
 		Voice: DeployedAttack
 	Armament@DeployedEliteFire:
 		Name: deployed
-		Weapon: RA160mmE_elite_fire
+		Weapon: RA160mmE_fire_elite
 		LocalOffset: 410,0,650
 		RequiresCondition: rank-elite && ra2_soviets_doctrine_firemunitions && deployed
 		Voice: DeployedAttack
 	Armament@DeployedEliteTesla:
 		Name: deployed
-		Weapon: RA160mmE_elite_tesla
+		Weapon: RA160mmE_tesla_elite
 		LocalOffset: 410,0,650
 		RequiresCondition: rank-elite && ra2_soviets_doctrine_teslamunitions && deployed
 		Voice: DeployedAttack
@@ -308,7 +308,7 @@ ra2_soviets_migbomber:
 		RequiresCondition: !rank-elite && ra2_soviets_doctrine_teslamunitions
 	Armament@PRIMARYELITE:
 		Name: primary
-		Weapon: MigMissilesE
+		Weapon: MigMissiles_elite
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 1
@@ -316,7 +316,7 @@ ra2_soviets_migbomber:
 		RequiresCondition: rank-elite  && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions
 	Armament@PRIMARYELITERad:
 		Name: primary
-		Weapon: MigMissilesE_rad
+		Weapon: MigMissiles_rad_elite
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 1
@@ -324,7 +324,7 @@ ra2_soviets_migbomber:
 		RequiresCondition: rank-elite && ra2_soviets_doctrine_nuclearmunitions
 	Armament@PRIMARYELITERad:
 		Name: primary
-		Weapon: MigMissilesE_fire
+		Weapon: MigMissiles_fire_elite
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 1
@@ -332,7 +332,7 @@ ra2_soviets_migbomber:
 		RequiresCondition: rank-elite && ra2_soviets_doctrine_firemunitions
 	Armament@PRIMARYELITERad:
 		Name: primary
-		Weapon: MigMissilesE_tesla
+		Weapon: MigMissiles_tesla_elite
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 1
@@ -348,7 +348,7 @@ ra2_soviets_migbomber:
 		RequiresCondition: !rank-elite
 	Armament@AAELITE:
 		Name: secondary
-		Weapon: MigMissiles_AA_ELITE
+		Weapon: MigMissiles_AA_elite
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 1

@@ -697,6 +697,8 @@ IOKNUK2:
 	ScalePowerWithHealth:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: building ##########
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: IOKNUKE
 	WithIdleOverlay@BOX:
 		Sequence: box-overlay
 	WithIdleOverlay@BOX2:

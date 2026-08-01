@@ -1,4 +1,4 @@
-﻿CHGuardRifle:
+CHGuardRifle:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
 	ReloadDelay: 55
@@ -2448,7 +2448,7 @@ ArmoredCarMG:
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 
-ArmoredCarMGAA:
+ArmoredCarMG_AA:
 	Inherits: ArmoredCarMG
 	Range: 7518
 	ValidTargets: Air
@@ -2496,5 +2496,5 @@ ArmoredCarMGWaveforce:
 ArmoredCarMGAAWaveforce:
 	Inherits: ^HeavyAAWeapon
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: ArmoredCarMGAA
+	Inherits: ArmoredCarMG_AA
 	Inherits: ^WaveforceBulletProjectile

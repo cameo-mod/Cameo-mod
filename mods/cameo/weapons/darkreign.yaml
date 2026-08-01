@@ -1175,7 +1175,7 @@ DRTNissileTurretAG:
 	Warhead@4EffWater: CreateEffect
 		Explosions: large_splash
 
-DRTNissileTurretAA:
+DRTNissileTurret_AA:
 	Inherits: DRMadWeapon
 	ReloadDelay: 240
 	Range: 9216
@@ -1204,8 +1204,8 @@ DRMissileTankAG:
 		Spread: 341
 		Damage: 3900
 
-DRMissileTankAA:
-	Inherits: DRTNissileTurretAA
+DRMissileTank_AA:
+	Inherits: DRTNissileTurret_AA
 	ReloadDelay: 180
 	Range: 7168
 	Burst: 1
@@ -1319,7 +1319,7 @@ DRVortexTankBlackholeDamage:
 			Wood: 100
 			Concrete: 100
 		DamageTypes: Prone100Percent, DefaultDeath
-DREMPDevice:
+DR_EMP_Device:
 	Inherits: DRGrendelRay
 	Report: gxgebwc0.wav
 	ReloadDelay: 800
@@ -1399,7 +1399,7 @@ DRMoleGun:
 			Heavy: 35
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 
-DRMoleGun.AA:
+DRMoleGun_AA:
 	Inherits: DRMoleGun
 	Range: 6144
 	ValidTargets: Air

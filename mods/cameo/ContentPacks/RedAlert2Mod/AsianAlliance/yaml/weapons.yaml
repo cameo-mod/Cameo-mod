@@ -11,7 +11,7 @@ RA2AsianShotgun:
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect
 
-RA2AsianShotgunE:
+RA2AsianShotgun_elite:
 	Inherits: RA2AsianShotgun
 	Range: 5567
 	Burst: 2
@@ -36,7 +36,7 @@ AsianGrenade:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 2
 
-AsianGrenadeE:
+AsianGrenade_elite:
 	Inherits: AsianGrenade
 	Range: 5567
 	Burst: 2
@@ -131,7 +131,7 @@ AsianTankKillerRocket_elite:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 
-AsianTankKillerRocket_elite_upgrade:
+AsianTankKillerRocket_upgrade_elite:
 	Inherits: AsianTankKillerRocket_elite
 	Projectile: Missile
 		Image: d2k_missile2
@@ -334,7 +334,7 @@ AsianMaidenBow:
 		ValidTargets: Ground, Water, Air
 		ExplosionPalette: ra2effect
 
-AsianMaidenBowE:
+AsianMaidenBow_elite:
 	Inherits: AsianMaidenBow
 	Range: 7740
 	MinRange: 1550
@@ -359,7 +359,7 @@ AsianNinjaStar:
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect
 
-AsianNinjaStarE:
+AsianNinjaStar_elite:
 	Inherits: AsianNinjaStar
 	Range: 5560
 	Burst: 2
@@ -379,7 +379,7 @@ AsianCrocBite:
 		Damage: 8
 	-Warhead@Effect:
 
-AsianCrocBiteE:
+AsianCrocBite_elite:
 	Inherits: AsianCrocBite
 	Burst: 2
 	BurstDelays: 3
@@ -588,7 +588,7 @@ AsianPhotonCannon:
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall, Husk
 
-AsianPhotonCannonEMP:
+AsianPhotonCannon_EMP:
 	Inherits: AsianPhotonCannon
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
@@ -606,12 +606,12 @@ AsianQuasarAG:
 		MaximumLaunchSpeed: 250
 		Inaccuracy: 500
 
-AsianQuasarAGEMP:
+AsianQuasarAG_EMP:
 	Inherits: AsianQuasarAG
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 
-AsianQuasarAA:
+AsianQuasar_AA:
 	Inherits: AsianPhotonCannon
 	ValidTargets: Air
 	ReloadDelay: 33
@@ -624,8 +624,8 @@ AsianQuasarAA:
 		MinimumLaunchSpeed: 300
 		Inaccuracy: 250
 
-AsianQuasarAAEMP:
-	Inherits: AsianQuasarAA
+AsianQuasar_EMP_AA:
+	Inherits: AsianQuasar_AA
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 
@@ -642,7 +642,7 @@ AsianPunisherAG:
 		MinimumLaunchSpeed: 240
 		Inaccuracy: 240
 
-AsianPunisherAGEMP:
+AsianPunisherAG_EMP:
 	Inherits: AsianPunisherAG
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
@@ -662,12 +662,12 @@ AsianQuasarBoatAG:
 		MinimumLaunchSpeed: 200
 		Inaccuracy: 500
 
-AsianQuasarBoatAGEMP:
+AsianQuasarBoatAG_EMP:
 	Inherits: AsianQuasarBoatAG
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 
-AsianQuasarBoatAA:
+AsianQuasarBoat_AA:
 	Inherits: AsianPhotonCannon
 	ValidTargets: Air
 	ReloadDelay: 22
@@ -682,8 +682,8 @@ AsianQuasarBoatAA:
 		MinimumLaunchSpeed: 250
 		Inaccuracy: 250
 
-AsianQuasarBoatAAEMP:
-	Inherits: AsianQuasarBoatAA
+AsianQuasarBoat_EMP_AA:
+	Inherits: AsianQuasarBoat_AA
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 
@@ -782,7 +782,7 @@ AsianChemical:
 		Weapon: RA2Cloud
 		InvalidTargets: Water
 
-AsianChemicalE:
+AsianChemical_elite:
 	Inherits: AsianChemical
 	Range: 10000
 	Burst: 2
@@ -855,7 +855,7 @@ AsianQuasarBoatAG:
 		MinimumLaunchSpeed: 192
 		Inaccuracy: 512
 
-AsianQuasarBoatAA:
+AsianQuasarBoat_AA:
 	Inherits: AsianPhotonCannon
 	ValidTargets: Air
 	ReloadDelay: 22
@@ -932,7 +932,7 @@ AsianHowitzerCannon:
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
 
-AsianHowitzerCannonE:
+AsianHowitzerCannon_elite:
 	Inherits: AsianHowitzerCannon
 	Range: 20000
 	MinRange: 4000
@@ -1144,7 +1144,7 @@ AsianSinglePlasma:
 		Explosions: ra2_apoc_explosion
 		ImpactSounds: gexpapoa.wav
 
-AsianSinglePlasmaE:
+AsianSinglePlasma_elite:
 	Inherits: AsianSinglePlasma
 	Range: 5836
 	Burst: 2
@@ -1165,7 +1165,7 @@ AsianTwinPlasma:
 	Warhead@FireShrapnel: FireShrapnel
 		Amount: 2
 
-AsianTwinPlasmaE:
+AsianTwinPlasma_elite:
 	Inherits: AsianTwinPlasma
 	Range: 8888
 	Burst: 4
@@ -1384,7 +1384,7 @@ AsianFlamerTank:
 	BurstDelays: 3
 	Range: 3700
 
-AsianFlamerTankE:
+AsianFlamerTank_elite:
 	Inherits: AsianFlamerTank
 	Range: 4700
 	Burst: 12
@@ -1727,7 +1727,7 @@ AsianPelicanMissile:
 		Explosions: ra2_small_grey_explosion
 		ImpactSounds: gexpifva.wav
 
-AsianPelicanMissileE:
+AsianPelicanMissile_elite:
 	Inherits: AsianPelicanMissile
 	Range: 7100
 	Burst: 4

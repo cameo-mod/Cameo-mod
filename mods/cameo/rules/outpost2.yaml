@@ -1273,7 +1273,7 @@ EDEN_GP_EMP:
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	Armament:
-		Weapon: edenEMPGP
+		Weapon: eden_EMP_GP
 		LocalOffset: 512,0,112
 		MuzzleSequence: muzzle
 	AttackTurreted:
@@ -1715,11 +1715,11 @@ EDEN_LYNX_EMP:
 		TurnSpeed: 17
 		Offset: -85,0,128
 	Armament@AG:
-		Weapon: edenEMP
+		Weapon: eden_EMP
 		LocalOffset: 256,43,341
 		FireDelay: 5
 	Armament@AA:
-		Weapon: edenEMPAA
+		Weapon: eden_EMP_AA
 		LocalOffset: 256,43,341
 		FireDelay: 5
 	AttackTurreted:
@@ -1758,11 +1758,11 @@ EDEN_TIGER_EMP:
 		TurnSpeed: 14
 		Offset: -85,0,128
 	Armament@AG:
-		Weapon: edenTigerEMP
+		Weapon: edenTiger_EMP
 		LocalOffset: 256,43,341
 		FireDelay: 5
 	Armament@AA:
-		Weapon: edenTigerEMPAA
+		Weapon: edenTiger_EMP_AA
 		LocalOffset: 256,43,341
 		FireDelay: 5
 	AttackTurreted:
@@ -2952,7 +2952,7 @@ PLYMOUTH_LYNX_EMP:
 		TurnSpeed: 10
 		Offset: -85,0,128
 	Armament:
-		Weapon: plymouthEMP
+		Weapon: plymouth_EMP
 		LocalOffset: 256,43,341
 		FireDelay: 5
 	AttackTurreted:
@@ -2983,7 +2983,7 @@ PLYMOUTH_TIGER_EMP:
 	Armor:
 		Type: Heavy
 	Armament:
-		Weapon: plymouthEMPTiger
+		Weapon: plymouth_EMP_Tiger
 		LocalOffset: 171,0,85
 	RenderSprites:
 		Scale: 0.75

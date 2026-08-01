@@ -347,7 +347,7 @@ chant:
 		Weapon: Spit
 		LocalOffset: 384,0,0
 	Armament@AA:
-		Weapon: SpitAA
+		Weapon: Spit_AA
 		LocalOffset: 384,0,0
 	FirepowerMultiplier:
 		Modifier: 200
@@ -680,7 +680,7 @@ tinynest2:
 		LocalOffset: 384,0,0
 		PauseOnCondition: lowpower || disabled
 	Armament@AA:
-		Weapon: SpitAA
+		Weapon: Spit_AA
 		LocalOffset: 384,0,0
 		PauseOnCondition: lowpower || disabled
 	AttackTurreted:
@@ -818,7 +818,7 @@ flyant:
 		Weapon: Spit
 		LocalOffset: 384,0,0
 	Armament@AA:
-		Weapon: SpitAA
+		Weapon: Spit_AA
 		LocalOffset: 384,0,0
 	AutoTarget:
 		ScanRadius: 15

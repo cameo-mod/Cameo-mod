@@ -105,7 +105,7 @@ spearFire:
 		ImpactSounds: bowhit.aud
 
 wc_tower_fire_aa:
-	Inherits: bowFireAA
+	Inherits: bowFire_AA
 	Range: 9728
 	Projectile: Missile
 		RangeLimit: 19c0

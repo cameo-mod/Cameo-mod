@@ -31,6 +31,16 @@ Consequently, it is useful historical evidence but is not a substitute for the r
 
 Severity: Low
 
+**RESOLVED 2026-07-30**: All entry documents now reference `docs/README.md` as
+the single canonical reading order source. The orders in `CLAUDE.md`,
+`LESSONS_LEARNED.md`, `AGENT_WORKSPACE.md`, `PROJECT_CONTEXT.md`, and
+`.windsurf/rules/start-protocol.md` are harmonized and all defer to README.md
+if any conflict arises. The order is: CLAUDE.md → LESSONS_LEARNED →
+AGENT_WORKSPACE → PROJECT_CONTEXT → DESIGN → ROADMAP → Knowledge Base Manual
+→ audit/SUMMARY.
+
+The original finding (kept for historical reference):
+
 The entry documents disagree about which file is read first:
 
 - `docs/README.md` says to read `PROJECT_CONTEXT.md`, then `AGENT_WORKSPACE.md`.

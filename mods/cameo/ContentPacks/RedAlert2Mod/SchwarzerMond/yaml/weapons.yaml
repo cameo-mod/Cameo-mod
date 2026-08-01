@@ -38,7 +38,7 @@ schwarzermond_lunarsoldier_rifle_elite:
 	Burst: 2
 	BurstDelays: 3
 
-NaxiBeetleLaserE:
+NaxiBeetleLaser_elite:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
 	Inherits: ^MediumMissile
@@ -76,8 +76,8 @@ NaxiBeetleLaserE:
 		Damage: 1
 		ValidTargets: Ground, Water
 
-NaxiBeetleLaserAAE:
-	Inherits: NaxiBeetleLaserE
+NaxiBeetleLaser_AA_elite:
+	Inherits: NaxiBeetleLaser_elite
 	Range: 9672
 	ValidTargets: Air
 	Warhead@SmallArms: SpreadDamage
@@ -109,7 +109,7 @@ LunarPanzerCannon:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 5
 
-LunarPanzerCannonE:
+LunarPanzerCannon_elite:
 	Inherits: LunarPanzerCannon
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 6121
@@ -154,7 +154,7 @@ NaxiTank2Laser:
 		Damage: 1
 		ValidTargets: Ground, Water
 
-NaxiTank2LaserAA:
+NaxiTank2Laser_AA:
 	Inherits: NaxiTank2Laser
 	Range: 9750
 	ValidTargets: Air
@@ -211,7 +211,7 @@ NaxiMP40Laser:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 
-NaxiMP40LaserE:
+NaxiMP40Laser_elite:
 	Inherits: NaxiMP40Laser
 	Range: 5384
 	Burst: 10
@@ -240,7 +240,7 @@ LunarNaxiJadgDestroyer:
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 15
 
-LunarNaxiJadgDestroyerE:
+LunarNaxiJadgDestroyer_elite:
 	Inherits: LunarNaxiJadgDestroyer
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 8379
@@ -278,7 +278,7 @@ LunarTigerCannon:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 2
 
-LunarTigerCannonE:
+LunarTigerCannon_elite:
 	Inherits: LunarTigerCannon
 	Range: 6105
 	Burst: 2
@@ -326,7 +326,7 @@ NaxHaenebuQuadCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-NaxHaenebuQuadCannonE:
+NaxHaenebuQuadCannon_elite:
 	Inherits: NaxHaenebuQuadCannon
 	Range: 7777
 	Burst: 7
@@ -377,7 +377,7 @@ DalekCannon:
 		ImpactSounds: psahit00.aud
 		ExplosionPalette: effect
 
-DalekCannonE:
+DalekCannon_elite:
 	Inherits: DalekCannon
 	Range: 9060
 	Projectile: Railgun
@@ -470,7 +470,7 @@ BlackHoleMaker:
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
 
-BlackHoleMakerE:
+BlackHoleMaker_elite:
 	Inherits: BlackHoleMaker
 	Range: 7414
 	Burst: 2
@@ -648,7 +648,7 @@ NaxCorrosionExpand3:
 		ValidTargets: corrodible
 		ValidRelationships: Enemy
 
-NaxCorrosionRocketTrooperE:
+NaxCorrosionRocketTrooper_elite:
 	Inherits: NaxCorrosionRocket
 	ReloadDelay: 50
 	Burst: 1
@@ -679,7 +679,7 @@ NaxCorrosionBeast:
 		Inaccuracy: 400
 
 	MinRange: 1595
-NaxCorrosionBeastE:
+NaxCorrosionBeast_elite:
 	Inherits: NaxCorrosionBeast
 	Range: 8984
 	Burst: 16
@@ -697,7 +697,7 @@ NaxCrystalLeech:
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 
-NaxCrystalLeechE:
+NaxCrystalLeech_elite:
 	Inherits: ^TeslaChargedWeapon
 	Range: 8420
 	Burst: 20
@@ -758,7 +758,7 @@ UbermenschLaser:
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 
-UbermenschLaserE:
+UbermenschLaser_elite:
 	Inherits: UbermenschLaser
 	Range: 6801
 	Burst: 4
@@ -830,9 +830,9 @@ Lunar_GreenTigerCannon:
 		Damage: 2
 	Report: laser_cannon3_4.wav
 
-Lunar_GreenTigerCannonE:
+Lunar_GreenTigerCannon_elite:
 	Inherits: ^TeslaWeapon
-	Inherits@Cannon: LunarTigerCannonE
+	Inherits@Cannon: LunarTigerCannon_elite
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
@@ -854,9 +854,9 @@ Lunar_GreenJadgDestroyer:
 		Damage: 15
 	Report: laser_cannon3_4.wav
 
-Lunar_GreenJadgDestroyerE:
+Lunar_GreenJadgDestroyer_elite:
 	Inherits: ^TeslaWeapon
-	Inherits@Cannon: LunarNaxiJadgDestroyerE
+	Inherits@Cannon: LunarNaxiJadgDestroyer_elite
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 30000
@@ -878,9 +878,9 @@ Lunar_GreenGrilleArty:
 		Damage: 8
 	Report: laser_cannon3_2.wav
 
-Lunar_GreenGrilleArtyE:
+Lunar_GreenGrilleArty_elite:
 	Inherits: ^TeslaWeapon
-	Inherits@Cannon: NaxGrilleArtyE
+	Inherits@Cannon: NaxGrilleArty_elite
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 16000
@@ -938,25 +938,25 @@ Lunar_AmplifiedLaserT:
 		Color: f3e021AA
 
 Lunar_YellowBeetleLaser:
-	Inherits: NaxiBeetleLaserE
+	Inherits: NaxiBeetleLaser_elite
 	Burst: 3
 	Projectile: LaserZap
 		Color: f3e021AA
 
-Lunar_YellowBeetleLaserAA:
-	Inherits: NaxiBeetleLaserAAE
+Lunar_YellowBeetleLaser_AA:
+	Inherits: NaxiBeetleLaser_AA_elite
 	Burst: 3
 	Projectile: LaserZap
 		Color: f3e021AA
 
 Lunar_AmplifiedBeetleLaser:
-	Inherits: NaxiBeetleLaserE
+	Inherits: NaxiBeetleLaser_elite
 	Burst: 4
 	Projectile: LaserZap
 		Color: f3e021AA
 
-Lunar_AmplifiedBeetleLaserAA:
-	Inherits: NaxiBeetleLaserAAE
+Lunar_AmplifiedBeetleLaser_AA:
+	Inherits: NaxiBeetleLaser_AA_elite
 	Burst: 4
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -970,8 +970,8 @@ Lunar_YellowMP40Laser:
 		ContrailEndColor: f3e021AA
 		Width: 25
 
-Lunar_YellowMP40LaserE:
-	Inherits: NaxiMP40LaserE
+Lunar_YellowMP40Laser_elite:
+	Inherits: NaxiMP40Laser_elite
 	Burst: 11
 	BurstDelays: 3
 
@@ -984,8 +984,8 @@ Lunar_AmplifiedMP40Laser:
 		ContrailEndColor: f3e021AA
 		Width: 25
 
-Lunar_AmplifiedMP40LaserE:
-	Inherits: NaxiMP40LaserE
+Lunar_AmplifiedMP40Laser_elite:
+	Inherits: NaxiMP40Laser_elite
 	Burst: 12
 	BurstDelays: 3
 
@@ -995,8 +995,8 @@ Lunar_YellowTank2Laser:
 	Projectile: LaserZap
 		Color: f3e021AA
 
-Lunar_YellowTank2LaserAA:
-	Inherits: NaxiTank2LaserAA
+Lunar_YellowTank2Laser_AA:
+	Inherits: NaxiTank2Laser_AA
 	Burst: 5
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -1007,8 +1007,8 @@ Lunar_AmplifiedTank2Laser:
 	Projectile: LaserZap
 		Color: f3e021AA
 
-Lunar_AmplifiedTank2LaserAA:
-	Inherits: NaxiTank2LaserAA
+Lunar_AmplifiedTank2Laser_AA:
+	Inherits: NaxiTank2Laser_AA
 	Burst: 6
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -1019,8 +1019,8 @@ Lunar_YellowUbermenschLaser:
 	Projectile: LaserZap
 		Color: f3e021AA
 
-Lunar_YellowUbermenschLaserE:
-	Inherits: UbermenschLaserE
+Lunar_YellowUbermenschLaser_elite:
+	Inherits: UbermenschLaser_elite
 	Burst: 5
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -1031,8 +1031,8 @@ Lunar_AmplifiedUbermenschLaser:
 	Projectile: LaserZap
 		Color: f3e021AA
 
-Lunar_AmplifiedUbermenschLaserE:
-	Inherits: UbermenschLaserE
+Lunar_AmplifiedUbermenschLaser_elite:
+	Inherits: UbermenschLaser_elite
 	Burst: 6
 	Projectile: LaserZap
 		Color: f3e021AA
@@ -1051,7 +1051,7 @@ NaxisBradleyTarget:
 	Projectile: InstantHit
 		Inaccuracy: 1735
 
-Naxis_Jagerline:
+Naxis_Komet:
 	Inherits: ^FlakWeapon
 	Inherits: ^Grenade
 	Inherits: ^HeavyAAWeapon
@@ -1106,8 +1106,8 @@ Naxis_Jagerline:
 		ImpactSounds: kaboom25.aud
 		ValidTargets: Ground, Ship
 
-Naxis_Jagerline_AA:
-	Inherits: Naxis_Jagerline
+Naxis_Komet_AA:
+	Inherits: Naxis_Komet
 	ValidTargets: Air
 	Range: 11740
 	MinRange: 2350

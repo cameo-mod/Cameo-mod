@@ -53,7 +53,7 @@
 | Specter | terran_specter | Damage 20000 vs game 348050 |
 | Virus | yuri_virus | Damage 24000 vs game 144075 |
 | ASDF | asianalliance_asdf | HP 40000 vs game 39000; Speed 60 vs game 58 |
-| Laser Commando | td_nod_lasercommando | Damage 12000 vs game 12625 |
+| Laser Commando | td_nod_lasercommando | Damage 12000 vs game 1625 |
 | Havoc | td_gdi_havoc | Damage 160000 vs game 220350 |
 | Tanya | ra1_allies_tanya | Damage 14000 vs game 31158 |
 | Exorcist | japan_exorcist | Damage 60000 vs game 678552; Reload 3 vs game 50 [multi-reload] |
@@ -98,10 +98,10 @@ ambiguous: Rifle Infantry -> ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry
 | Defender Bot | steelconsortium_defenderbot | Damage 32000 vs game 98400 |
 | Beholder | cabal_beholder | Damage 80000 vs game 95250 |
 | Tortuga Tank | latinsyndicate_tortugatank | Damage 40000 vs game 48150 |
-| Chrono Tank | ra1_allies_chronotank | Damage 80000 vs game 161200; Reload 63 vs game 69 |
+| Chrono Tank | ra1_allies_chronotank | Damage 80000 vs game 161200 |
 | Hermit | zerg_hermit | Damage 120000 vs game 60125 |
 | Idol | protoss_idol | Damage 134000 vs game 67500 |
-| Ratte | naxis_ratte | Damage 300000 vs game 428700 |
+| Ratte | naxis_ratte | Damage 300000 vs game 412700 |
 | Dalek | schwarzermond_dalek | Damage 300000 vs game 352700 |
 | Future Tank | futuretech_futuretank | Damage 300000 vs game 1502176 |
 
@@ -110,7 +110,7 @@ unmatched: Light Tank Mk2, Sheridan, Chi-Ha Medium Tank, Shrine Tank, Ix Combat 
 ambiguous: Lunar Tiger -> schwarzermond_lunartiger, schwarzermond_promotion_lunartiger | Quantum Tank -> steelconsortium_promotion_quantumtank, steelconsortium_quantumtank | Laser Tank -> ordos_lasertank, schwarzermond_lasertank, schwarzermond_promotion_lasertank | Katy Tank -> steelconsortium_katytank, steelconsortium_promotion_katytank
 
 
-## Vehicles: 98 matched, 45 mismatched, 50 unmatched, 9 ambiguous
+## Vehicles: 98 matched, 44 mismatched, 50 unmatched, 9 ambiguous
 
 | sheet unit | actor | mismatches |
 |---|---|---|
@@ -118,7 +118,6 @@ ambiguous: Lunar Tiger -> schwarzermond_lunartiger, schwarzermond_promotion_luna
 | Recon Ranger | ra1_allies_reconranger | Damage 32000 vs game 33240 |
 | Positron | protoss_positron | Damage 20000 vs game 40150 |
 | Flak Truck | ra1_soviets_flaktruck | Damage 4000 vs game 16100; Reload 15 vs game 10 |
-| Phase Transport | ra1_allies_phasetransport | Reload 60 vs game 66 |
 | Armored Car | japan_armoredcar | Damage 800 vs game 32050; Reload 4 vs game 8 |
 | Ix Raider | rocket_raider.ixian | Damage 6000 vs game 6750; Reload 25 vs game 5 |
 | Ordos Raider | ordos_raider | HP 35000 vs game 60000; Speed 135 vs game 180; Damage 16000 vs game 36000; Reload 53 vs game 24 |
@@ -131,7 +130,7 @@ ambiguous: Lunar Tiger -> schwarzermond_lunartiger, schwarzermond_promotion_luna
 | Yuri Gatling Tank | yuri_gatlingtank | Damage 3000 vs game 12050 |
 | Quasar | asianalliance_quasar | Damage 8000 vs game 39826 |
 | Diablo | latinsyndicate_diablo | Damage 8000 vs game 16050 |
-| Wirbelwind | wirbelwind.nax | Damage 48000 vs game 96300 |
+| Wirbelwind | wirbelwind.nax | Damage 48000 vs game 84300 |
 | Laser Beetle | schwarzermond_laserbeetle | Damage 16000 vs game 34500 |
 | Manta | steelconsortium_manta | HP 27500 vs game 55000; Damage 8000 vs game 32100 |
 | Barracuda | steelconsortium_barracuda | Damage 4000 vs game 20100 |
@@ -162,7 +161,7 @@ ambiguous: Lunar Tiger -> schwarzermond_lunartiger, schwarzermond_promotion_luna
 
 unmatched: IFV (default), Ordos Raider Buggy, IFV (MG), IFV (Rockets), IFV (HMG), IFV (Engineer), Syndicate Buggy (MG), Syndicate Buggy (Rockets), Syndicate Buggy (Chaingun), Scout Robot, APC (GDI), Nod Buggy Mk2, Humvee Mk2, APC (Allies), Japanese Hovercraft, Japanese Hovercraft (Flak), BTR, Heavy Ix Raider (Rockets), Heavy Ix Raider (Guns), Naxi Halftrack, RA2 Flak Track, Syndicate APC, Syndicate APC, Syndicate APC (Missiles), Soviet Gatling Tank, Experimental Exosuit, Ordos Tank Destroyer, RA2 Tank Destroyer, RA2 Tesla Tank, AA Plasma Tank ...
 
-ambiguous: Ranger -> ra1_allies_ranger, wc2_humans_upgrade_ranger | Battle Fortress -> ra2_allies_battlefortress, ra2_allies_battlefortress_2, ra2_allies_battlefortress_3 | Laser Tank -> ordos_lasertank, schwarzermond_lasertank, schwarzermond_promotion_lasertank | Laser Tank -> ordos_lasertank, schwarzermond_lasertank, schwarzermond_promotion_lasertank | Stealth Tank -> td_nod_stealthtank, ts_nod_stealthtank | Tesla Tank -> ra1_soviets_teslatank, ra2_soviets_teslatank | Ballista -> japan_ballista, wc2_humans_ballista | Ballista -> japan_ballista, wc2_humans_ballista | Siege Engine -> wc2_humans_siegeengine, wc2_orcs_siegeengine
+ambiguous: Ranger -> ra1_allies_ranger, wc2_humans_upgrade_ranger | Battle Fortress -> ra2_allies_battlefortress, ra2_allies_battlefortress_chrono, ra2_allies_battlefortress_empty | Laser Tank -> ordos_lasertank, schwarzermond_lasertank, schwarzermond_promotion_lasertank | Laser Tank -> ordos_lasertank, schwarzermond_lasertank, schwarzermond_promotion_lasertank | Stealth Tank -> td_nod_stealthtank, ts_nod_stealthtank | Tesla Tank -> ra1_soviets_teslatank, ra2_soviets_teslatank | Ballista -> japan_ballista, wc2_humans_ballista | Ballista -> japan_ballista, wc2_humans_ballista | Siege Engine -> wc2_humans_siegeengine, wc2_orcs_siegeengine
 
 
 ## Aircraft: 53 matched, 35 mismatched, 50 unmatched, 3 ambiguous
@@ -177,7 +176,7 @@ ambiguous: Ranger -> ra1_allies_ranger, wc2_humans_upgrade_ranger | Battle Fortr
 | Banshee | ordos_banshee | Damage 50000 vs game 100505 |
 | Night Hawk | ra2_allies_nighthawk | Damage 2000 vs game 4025 |
 | Cosmonaut | yuri_cosmonaut | Damage 6000 vs game 13625 |
-| Sky Mage | naxis_skymage | Damage 24000 vs game 96300 |
+| Sky Mage | naxis_skymage | Damage 24000 vs game 84300 |
 | Valkyrie | terran_valkyrie | Damage 64000 vs game 131840 |
 | Mutalisk | zerg_mutalisk | Damage 8000 vs game 32150 |
 | Devourer | zerg_devourer | Damage 20000 vs game 44150 |
@@ -210,11 +209,12 @@ unmatched: Hind, Kamov, Ix Drone, Wraith (Laser), Wraith (Rockets), Sun Dog (Las
 ambiguous: Rocketeer -> ra2_allies_rocketeer, tkm_rocketeer | Twister -> futuretech_twister, steelconsortium_twister | Wraith -> ordos_wraith, terran_wraith
 
 
-## Defenses: 25 matched, 9 mismatched, 31 unmatched, 7 ambiguous
+## Defenses: 25 matched, 10 mismatched, 31 unmatched, 7 ambiguous
 
 | sheet unit | actor | mismatches |
 |---|---|---|
 | Nod Laser Turret | td_nod_laserturret | Damage 24000 vs game 25250 |
+| Nod Gun Turret | td_nod_gunturret | Damage 24000 vs game 19100 |
 | Gatling Cannon | yuri_gatlingcannon | Damage 4000 vs game 36150 |
 | Missile Turret | terran_missileturret | HP 60000 vs game 200000; Damage 20000 vs game 40480; Reload 15 vs game 30 |
 | Ballista Tower | japan_ballistatower | Damage 160000 vs game 360500 |
@@ -222,9 +222,9 @@ ambiguous: Rocketeer -> ra2_allies_rocketeer, tkm_rocketeer | Twister -> futuret
 | Artillery Platform | ordos_artilleryplatform | Damage 48000 vs game 54625 |
 | Prism Tower | ra2_allies_prismtower | Reload 40 vs game 3 |
 | BFG 10000 | steelconsortium_bfg10000 | Damage 300000 vs game 1129588 |
-| Flak 88 | naxis_flak88 | Damage 48000 vs game 128400 |
+| Flak 88 | naxis_flak88 | Damage 48000 vs game 112400 |
 
 unmatched: MG Nest, Camo Pillbox (MG), Camo Pillbox (Rockets), Dune Machine Gun Turret, Ixian Gun Turret, RA2 Pillbox, AA Sentry Flamer, Multi Rocket System (normal), Javelin Rocket System, Frag Rocket System , Sigma Rocket System, Freezer Turret, AA Gun, AA Punisher, AA Pulsar, AA Hyperion , AA Defender, Consortium Anti Air Turret, Obelisk, Bastion, Lunar Naxi Laser Tower, Dune Rocket Turret, RA2 Tesla Coil, AA Rail Tower, AA Plasma Cannon, Freezer Turret, GDI Rig (Phalanx), GDI Rig (Railgun), GDI Rig (Missiles), Consortium Quantum Cannon ...
 
-ambiguous: Guard Tower -> wc2_humans_guardtower, wc2_orcs_guardtower | Pillbox -> cabal_pillbox, ra1_allies_pillbox, ra2_allies_pillbox | Sunken Colony -> zerg_sunkencolony, zerg_sunkencolony_2 | Sunken Colony -> zerg_sunkencolony, zerg_sunkencolony_2 | Cannon Tower -> wc2_humans_cannontower, wc2_orcs_cannontower | Spore Colony -> zerg_sporecolony, zerg_sporecolony_2 | Tesla Coil -> ra1_soviets_teslacoil, ra2_soviets_teslacoil
+ambiguous: Guard Tower -> wc2_humans_guardtower, wc2_orcs_guardtower | Pillbox -> cabal_pillbox, ra1_allies_pillbox, ra2_allies_pillbox | Sunken Colony -> zerg_sunkencolony, zerg_sunkencolony_defense | Sunken Colony -> zerg_sunkencolony, zerg_sunkencolony_defense | Cannon Tower -> wc2_humans_cannontower, wc2_orcs_cannontower | Spore Colony -> zerg_sporecolony, zerg_sporecolony_defense | Tesla Coil -> ra1_soviets_teslacoil, ra2_soviets_teslacoil
 

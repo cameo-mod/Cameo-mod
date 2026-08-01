@@ -242,6 +242,8 @@ ts_nod_advancedpowerplant:
 	WithDeathAnimation:
 		DeathSequencePalette: playerra2
 		DeathPaletteIsPlayerPalette: true
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: ts_nod_powerplant
 	RenderSprites:
 		PlayerPalette: playerra2
 

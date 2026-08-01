@@ -12,7 +12,7 @@ RA2TURRETFLAKAA:
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
-SeaScorpionAA:
+SeaScorpion_AA:
 	Inherits: ^RA2FlakWeapon
 	Range: 13500
 	ReloadDelay: 17
@@ -179,7 +179,7 @@ RA2KirovBomb_nuclear:
 		Level: 800
 		LayerName: ra2radiation
 
-RA2KirovBomb_nuclear_E:
+RA2KirovBomb_nuclear_elite:
 	Inherits: RA2KirovBomb_nuclear
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 100000
@@ -245,21 +245,21 @@ RA2120mm_tesla:
 		AimChance: 100
 		AimTargetStances: Enemy, Neutral
 
-RA2120mm_elite_rad:
+RA2120mm_rad_elite:
 	Inherits: RA2120mm_rad
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 6374
 	Burst: 2
 	BurstDelays: 3
 
-RA2120mm_elite_fire:
+RA2120mm_fire_elite:
 	Inherits: RA2120mm_fire
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 6374
 	Burst: 2
 	BurstDelays: 3
 
-RA2120mm_elite_tesla:
+RA2120mm_tesla_elite:
 	Inherits: RA2120mm_tesla
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 6374
@@ -364,7 +364,7 @@ RA160mmE_elite:
 	Burst: 2
 	BurstDelays: 3
 
-RA160mmE_elite_rad:
+RA160mmE_rad_elite:
 	Inherits@rad: ^NuclearWarhead
 	Inherits: RA160mm_rad
 	Inherits@Elite: ^RA2EliteEffects
@@ -376,7 +376,7 @@ RA160mmE_elite_rad:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2nukesmall
 
-RA160mmE_elite_fire:
+RA160mmE_fire_elite:
 	Inherits: RA160mm_fire
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 12345
@@ -388,7 +388,7 @@ RA160mmE_elite_fire:
 		Weapon: AsianOilBombFragments
 		Amount: 2
 
-RA160mmE_elite_tesla:
+RA160mmE_tesla_elite:
 	Inherits: RA160mm_tesla
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 12345
@@ -489,21 +489,21 @@ RA2120xmm_elite:
 	Burst: 4
 	BurstDelays: 3
 
-RA2120xmm_elite_rad:
+RA2120xmm_rad_elite:
 	Inherits: RA2120xmm_rad
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 7992
 	Burst: 4
 	BurstDelays: 3
 
-RA2120xmm_elite_fire:
+RA2120xmm_fire_elite:
 	Inherits: RA2120xmm_fire
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 7992
 	Burst: 4
 	BurstDelays: 3
 
-RA2120xmm_elite_tesla:
+RA2120xmm_tesla_elite:
 	Inherits: RA2120xmm_tesla
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 7992
@@ -672,11 +672,11 @@ RA2DroneJump:
 		ValidTargets: Infantry
 		DamageTypes: DefaultDeath, DroneInfection
 
-RA2DroneJumpE:
+RA2DroneJump_elite:
 	Inherits: RA2DroneJump
 	ReloadDelay: 10
 
-RA2RadBeamWeaponE:
+RA2RadBeamWeapon_elite:
 	Inherits: RA2RadBeamWeapon
 	Range: 7444
 	Burst: 2
@@ -701,12 +701,12 @@ RA2RadEruptionWeapon:
 #		Mind Control
 ####################################################################################################
 
-MigMissilesE_tesla:
+MigMissiles_tesla_elite:
 	Inherits: MigMissiles_tesla
 	Range: 8600
 	Burst: 8
 
-RA2MammothTusk:
+RA2MammothTusk_AA:
 	Inherits: ^RA2MediumMissile
 	ValidTargets: Air
 	Range: 6100
@@ -720,12 +720,12 @@ RA2MammothTusk:
 		ValidTargets: Air
 		Damage: 8
 
-RA2MammothTusk_elite:
-	Inherits: RA2MammothTusk
+RA2MammothTusk_AA_elite:
+	Inherits: RA2MammothTusk_AA
 	Range: 7100
 	Burst: 4
 
-V3LaunchE:
+V3Launch_elite:
 	ReloadDelay: 50
 	Range: 20000
 	MinRange: 4000
@@ -791,7 +791,7 @@ RA2FLAKAA_elite:
 	Burst: 2
 	BurstDelays: 3
 
-RA2FlakTrackGunE:
+RA2FlakTrackGun_elite:
 	Inherits: RA2FlakTrackGun
 	Range: 6528
 	Burst: 2
@@ -827,7 +827,7 @@ RA2FlakTrackAAGun:
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
-RA2FlakTrackAAGunE:
+RA2FlakTrackAAGun_elite:
 	Inherits: RA2FlakTrackAAGun
 	Range: 9292
 	Burst: 2
@@ -859,7 +859,7 @@ IvanBombAir:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		ValidTargets: Aircraft
 
-BorisAKME:
+BorisAKM_elite:
 	Inherits: BorisAKM
 	Range: 9167
 	Burst: 8

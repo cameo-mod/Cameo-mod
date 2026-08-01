@@ -414,11 +414,11 @@ TAMUTCOMMANDO:
 	UpdatesPlayerStatistics:
 		OverrideActor: forgotten_ghoststalker
 	Armament@PRIMARY:
-		Weapon: MutAPRifleE
+		Weapon: MutAPRifle_elite
 		LocalOffset: 256,43,256
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: MutAPRifleE
+		Weapon: MutAPRifle_elite
 	Voiced:
 		VoiceSet: BruteVoice
 	GrantConditionOnPrerequisite@taupbarbaric:
@@ -5614,7 +5614,7 @@ tanodgattling:
 		Weapon: CHGattlingTurret
 		LocalOffset: 410,0,700
 	Armament@AA:
-		Weapon: CHGattlingTurretAA
+		Weapon: CHGattlingTurret_AA
 		LocalOffset: 410,0,700
 	AttackTurreted:
 	WithSpriteTurret:

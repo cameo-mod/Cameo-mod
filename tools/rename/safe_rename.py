@@ -1,12 +1,21 @@
 #!/usr/bin/env python3
-"""Safe rename applicator with dry-run support.
+"""Safe rename applicator with dry-run support and validation.
 
 Replaces actor IDs (whole-word, boundary-safe) across all YAML/FTL/Lua files
 under mods/cameo, loose map files, and .oramap zips. Protects audio voice
 set lines. Optionally renames asset files via git mv.
 
+Key safety features:
+  - Two-pass replacement: Fluent key references first (e.g. old_key.description
+    -> new_key.description), then standalone IDs. This ensures YAML
+    Buildable.Description fields are always updated alongside FTL keys.
+  - Pre-flight validation: warns if old names don't exist in the codebase.
+  - Post-rename validation: scans for dangling references to old names and
+    reports them as ERRORS. Refuses to apply unless --force is given.
+  - FTL attribute awareness: handles key.attribute patterns in YAML/FTL.
+
 Usage:
-  python tools/rename/safe_rename.py tools/rename/rename_map_<faction>.yaml [--dry-run] [--no-files]
+  python tools/rename/safe_rename.py tools/rename/rename_map_<faction>.yaml [--dry-run] [--no-files] [--force]
 """
 
 from __future__ import annotations
@@ -44,24 +53,55 @@ def load_map(path: pathlib.Path) -> tuple[dict[str, str], dict[str, str]]:
 
 
 def build_replacer(actors: dict[str, str]):
+    """Build a two-pass replacer.
+
+    Pass 1: Replace standalone identifiers (boundary excludes [A-Za-z0-9_.]).
+            This handles actor IDs, weapon names, trait references, etc.
+
+    Pass 2: Replace Fluent key references in the form `old_key.attribute`
+            where `.attribute` is a Fluent attribute like `.description`
+            or `.name`. The key part is replaced, the attribute suffix is
+            preserved. This fixes YAML Buildable.Description fields that
+            reference FTL keys.
+    """
     lower = {k.lower(): v.lower() for k, v in actors.items()}
     if not lower:
         def sub(text: str) -> tuple[str, int]:
             return text, 0
         return sub
     alts = sorted(lower, key=len, reverse=True)
-    rx = re.compile(
+
+    # Pass 1: standalone identifiers (dot is a boundary)
+    rx1 = re.compile(
         r"(?<![A-Za-z0-9_.])(" + "|".join(re.escape(a) for a in alts) +
         r")(?![A-Za-z0-9_.])", re.IGNORECASE)
+
+    # Pass 2: Fluent key references — old_key followed by .attribute
+    # The attribute suffix is typically .description, .name, .tooltip, etc.
+    # We only match if the old_key is immediately followed by a dot and
+    # a lowercase letter (Fluent attribute convention).
+    rx2 = re.compile(
+        r"(?<![A-Za-z0-9_.])(" + "|".join(re.escape(a) for a in alts) +
+        r")(\.[a-z][A-Za-z0-9_]*)", re.IGNORECASE)
 
     def sub(text: str) -> tuple[str, int]:
         n = 0
 
-        def repl(mo: re.Match) -> str:
+        def repl1(mo: re.Match) -> str:
             nonlocal n
             n += 1
             return lower[mo.group(1).lower()]
-        return rx.sub(repl, text), n
+
+        def repl2(mo: re.Match) -> str:
+            nonlocal n
+            n += 1
+            return lower[mo.group(1).lower()] + mo.group(2)
+
+        # Pass 2 first (more specific), then Pass 1
+        text, n2 = rx2.subn(repl2, text)
+        text, n1 = rx1.subn(repl1, text)
+        n = n1 + n2
+        return text, n
     return sub
 
 
@@ -77,11 +117,74 @@ def audio_voice_keys() -> set[str]:
     return keys
 
 
+def collect_all_text() -> str:
+    """Collect all searchable text for pre-flight validation."""
+    chunks: list[str] = []
+    for pat in ("**/*.yaml", "**/*.ftl", "**/*.lua"):
+        for p in MOD.glob(pat):
+            if p.is_file() and (MOD / "audio") not in p.parents:
+                try:
+                    chunks.append(p.read_text(encoding="utf-8-sig", errors="replace"))
+                except Exception:
+                    pass
+    # Also scan .oramap contents
+    for zpath in sorted(MOD.glob("maps/**/*.oramap")):
+        try:
+            with zipfile.ZipFile(zpath) as zf:
+                for info in zf.infolist():
+                    if info.filename.lower().endswith((".yaml", ".lua", ".txt")):
+                        chunks.append(zf.read(info.filename).decode("utf-8-sig", errors="replace"))
+        except Exception:
+            pass
+    return "\n".join(chunks)
+
+
+def validate_prerename(actors: dict[str, str], all_text: str) -> list[str]:
+    """Check that old names actually exist in the codebase."""
+    warnings: list[str] = []
+    for old in sorted(actors):
+        if old.lower() not in all_text.lower():
+            warnings.append(f"WARN: old name '{old}' not found in any file")
+    return warnings
+
+
+def validate_postrename(actors: dict[str, str], all_text: str) -> list[str]:
+    """Scan for dangling references to old names after replacement.
+
+    Checks both standalone identifiers (Pass 1 pattern) and Fluent key
+    references (Pass 2 pattern — old_key.attribute). This catches the
+    exact class of bug that caused the RA1 Soviet regression where
+    FTL keys were renamed but YAML Buildable.Description references
+    were not.
+    """
+    errors: list[str] = []
+    for old in sorted(actors, key=len, reverse=True):
+        # Pass 1: standalone identifier
+        rx1 = re.compile(
+            r"(?<![A-Za-z0-9_.])" + re.escape(old) +
+            r"(?![A-Za-z0-9_.])", re.IGNORECASE)
+        # Pass 2: Fluent key reference (old_key.attribute)
+        rx2 = re.compile(
+            r"(?<![A-Za-z0-9_.])" + re.escape(old) +
+            r"(\.[a-z][A-Za-z0-9_]*)", re.IGNORECASE)
+        for rx, label in [(rx1, "standalone"), (rx2, "fluent-key")]:
+            m = rx.search(all_text)
+            if m:
+                idx = m.start()
+                start = max(0, idx - 30)
+                end = min(len(all_text), idx + len(old) + 30)
+                context = all_text[start:end].replace("\n", " ").strip()
+                errors.append(f"ERROR: old name '{old}' ({label}) still found: ...{context}...")
+    return errors
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Safe rename applicator")
+    parser = argparse.ArgumentParser(description="Safe rename applicator with validation")
     parser.add_argument("map_path", type=pathlib.Path)
     parser.add_argument("--dry-run", action="store_true", help="Show changes without writing")
     parser.add_argument("--no-files", action="store_true", help="Skip asset file renames")
+    parser.add_argument("--force", action="store_true",
+                        help="Apply even if post-rename validation finds errors")
     args = parser.parse_args()
 
     actors, files = load_map(args.map_path)
@@ -97,6 +200,35 @@ def main() -> int:
     if clashes:
         print(f"NOTE: these ids also name audio voice sets; audio files and "
               f"VoiceSet lines are protected: {', '.join(clashes)}")
+
+    # Pre-flight validation: check old names exist
+    print("\n--- Pre-flight validation ---")
+    all_text_before = collect_all_text()
+    pre_warnings = validate_prerename(actors, all_text_before)
+    if pre_warnings:
+        for w in pre_warnings:
+            print(f"  {w}")
+        print(f"  ({len(pre_warnings)} warnings)")
+    else:
+        print("  All old names found in codebase. OK.")
+
+    # Pre-write validation: simulate replacement and check for dangling refs
+    print("\n--- Pre-write validation (simulated) ---")
+    simulated, _ = sub(all_text_before)
+    pre_errors = validate_postrename(actors, simulated)
+    if pre_errors:
+        print(f"  FOUND {len(pre_errors)} ERRORS — old names still referenced after rename:")
+        for e in pre_errors[:20]:
+            print(f"  {e}")
+        if len(pre_errors) > 20:
+            print(f"  ... and {len(pre_errors) - 20} more")
+        print("\n  These references will NOT be updated by the rename.")
+        print("  Fix them manually or add them to the rename map.")
+        if not args.force:
+            print("  Use --force to apply anyway.")
+            return 1
+    else:
+        print("  No dangling references found. OK.")
 
     # ---- text replacement across the tree --------------------------------- #
     n_files = n_hits = 0
@@ -138,6 +270,8 @@ def main() -> int:
             n_files += 1
             n_hits += n + fn
     print(f"text: {n_hits} replacements in {n_files} files")
+
+    # (Pre-write validation already done above — no need to repeat here)
 
     # ---- .oramap zips ------------------------------------------------------ #
     n_maps = 0
@@ -227,6 +361,21 @@ def main() -> int:
 
     if args.dry_run:
         print("\n[DRY RUN] No files were modified. Re-run without --dry-run to apply.")
+    else:
+        # Post-rename validation on actual files
+        print("\n--- Post-rename validation ---")
+        all_text_after = collect_all_text()
+        post_errors = validate_postrename(actors, all_text_after)
+        if post_errors:
+            print(f"  FOUND {len(post_errors)} ERRORS — old names still referenced:")
+            for e in post_errors[:20]:
+                print(f"  {e}")
+            if len(post_errors) > 20:
+                print(f"  ... and {len(post_errors) - 20} more")
+            print("\n  WARNING: Some references were not updated. Manual fix needed.")
+            return 1
+        else:
+            print("  All references updated. OK.")
     return 0
 
 

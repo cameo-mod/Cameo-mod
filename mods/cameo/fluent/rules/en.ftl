@@ -1,3 +1,8 @@
+lobby-option-heavy-support = Heavy Support
+lobby-option-heavy-support-desc = Grants each human player a small heavy starting army.
+lobby-option-enabled = Enabled
+lobby-option-disabled = Disabled
+
 power_ioncannon =
    .name = Ion Cannon
    .description = Initiate an Ion Cannon strike.
@@ -1116,6 +1121,12 @@ actor_forgotten_apctruck =
       Its cannon reaches ground and air targets.
       Strong vs Infantry
       Weak vs Tanks
+
+actor_forgotten_scarabapc =
+   .name = Scarab APC
+   .description = Armored personnel carrier that burrows underground.
+      Can carry infantry across any terrain undetected.
+      Unarmed
 
 actor_forgotten_missilevan =
    .name = Missile Van

@@ -792,7 +792,7 @@ FutureEnforcerShotgun:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
 
-FutureEnforcerShotgunE:
+FutureEnforcerShotgun_elite:
 	Inherits: FutureEnforcerShotgun
 	Range: 4000
 	Burst: 2
@@ -803,7 +803,7 @@ FutureEnforcerShotgunDeployed:
 	ReloadDelay: 65
 	Range: 6150
 
-FutureEnforcerShotgunDeployedE:
+FutureEnforcerShotgunDeployed_elite:
 	Inherits: FutureEnforcerShotgunDeployed
 	Range: 7150
 	Burst: 2
@@ -858,7 +858,7 @@ FutureJavelinRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-FutureJavelinRocketsE:
+FutureJavelinRockets_elite:
 	Inherits: FutureJavelinRockets
 	Range: 7000
 	Burst: 2
@@ -868,7 +868,7 @@ FutureJavelinRocketsDeployed:
 	Inherits: FutureJavelinRockets
 	Range: 7500
 
-FutureJavelinRocketsDeployedE:
+FutureJavelinRocketsDeployed_elite:
 	Inherits: FutureJavelinRocketsDeployed
 	Range: 8500
 	Burst: 2
@@ -891,7 +891,7 @@ Future_Wheel_MG:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
 
-Future_Wheel_MGE:
+Future_Wheel_MG_elite:
 	Inherits: Future_Wheel_MG
 	Inherits: ^SteelChaingun
 	Range: 6806
@@ -937,7 +937,7 @@ ShotgunAttackRobotGun:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
 
-ShotgunAttackRobotGunE:
+ShotgunAttackRobotGun_elite:
 	Inherits: ShotgunAttackRobotGun
 	Inherits: ^SteelChaingun
 	Range: 5110
@@ -976,7 +976,7 @@ CannonAttackRobotGun:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-CannonAttackRobotGunE:
+CannonAttackRobotGun_elite:
 	Inherits: CannonAttackRobotGun
 	Range: 7000
 	Burst: 2
@@ -1002,7 +1002,7 @@ MissileAttackRobotGun:
 		Explosions: ra2_small_grey_explosion
 		ImpactSounds: gexpifva.wav
 
-MissileAttackRobotGunE:
+MissileAttackRobotGun_elite:
 	Inherits: MissileAttackRobotGun
 	Range: 9000
 	Burst: 4
@@ -1103,7 +1103,7 @@ FutureMechPlasma:
 		ValidTargets: Ground, Water, Air
 		ExplosionPalette: ra2effect
 
-FutureMechPlasmaE:
+FutureMechPlasma_elite:
 	Inherits: FutureMechPlasma
 	Range: 8000
 	Burst: 4
@@ -1121,7 +1121,7 @@ GuardianTankCannon:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 6
 
-GuardianTankCannonE:
+GuardianTankCannon_elite:
 	Inherits: GuardianTankCannon
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 8820
@@ -1145,7 +1145,7 @@ Future_MBT_DebuffLaser:
 		ValidTargets: Ground, Water, Structure, wall
 	Warhead@Validation: TargetDamage
 
-Future_MBT_DebuffLaserE:
+Future_MBT_DebuffLaser_elite:
 	Inherits: Future_MBT_DebuffLaser
 	Range: 8820
 
@@ -1246,7 +1246,7 @@ FutureTankCannons:
 		ImpactSounds: AUFutur_Wea1FireV3a.wav,AUFutur_Wea1FireV3b.wav,AUFutur_Wea1FireV3c.wav,AUFutur_Wea1FireV3d.wav,AUFutur_Wea1FireV3e.wav
 		ValidTargets: Ground, Water, Air
 
-FutureTankCannonsE:
+FutureTankCannons_elite:
 	Inherits: FutureTankCannons
 	Range: 8500
 	Burst: 4
@@ -1335,7 +1335,7 @@ FutureHarbingerCannon:
 		Explosions: scblueexplosion
 		ImpactSounds: AUGunship_cannonExplo1A.wav,AUGunship_cannonExplo1B.wav,AUGunship_cannonExplo1C.wav,AUGunship_cannonExplo1D.wav,AUGunship_cannonExplo1E.wav,AUGunship_cannonExplo1F.wav,AUGunship_cannonExplo1G.wav,AUGunship_cannonExplo1H.wav,AUGunship_cannonExplo2A.wav,AUGunship_cannonExplo2B.wav,AUGunship_cannonExplo2C.wav,AUGunship_cannonExplo2D.wav,AUGunship_cannonExplo2E.wav,AUGunship_cannonExplo2F.wav,AUGunship_cannonExplo2G.wav,AUGunship_cannonExplo2H.wav
 
-FutureHarbingerCannonE:
+FutureHarbingerCannon_elite:
 	Inherits: FutureHarbingerCannon
 	Range: 7030
 	Burst: 4
@@ -1350,7 +1350,7 @@ HarbingerChainguns:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		Damage: 6
 
-HarbingerChaingunsE:
+HarbingerChainguns_elite:
 	Inherits: HarbingerChainguns
 	Range: 7030
 	Burst: 2
@@ -1377,7 +1377,7 @@ BlackWidowPistols:
 	Warhead@SniperWeaponPercentage: HealthPercentageDamage
 		Damage: 5
 
-BlackWidowPistolsE:
+BlackWidowPistols_elite:
 	Inherits: BlackWidowPistols
 	Range: 6000
 	Burst: 8
@@ -1410,7 +1410,7 @@ OrionRailgun:
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
 
-OrionRailgunE:
+OrionRailgun_elite:
 	Inherits: OrionRailgun
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 9000

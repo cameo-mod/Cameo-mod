@@ -183,15 +183,27 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
     `ra1_tesla_tank_zap_EMP`. This suffix identifies weapons whose
     primary function is to disable vehicles via EMP effect. It is
     primarily used by Steel Consortium but may appear on other factions.
-  - **AA weapon variants** append `_AA`: `ra2_allies_ifv_missile_AA`,
-    `SWAWingGun_AA`. This suffix identifies anti-air weapons — weapons
-    whose `ValidTargets` include `Air`.
+  - **AA weapon variants** append `_AA`: `RA2HoverMissile_AA`,
+    `SWAWingGun_AA`. This suffix marks the air-only sibling of a
+    **dual-weapon actor** — an actor/template that equips two separate
+    weapons via different `Armament` traits, one ground-capable (e.g.
+    `RA2HoverMissile`, `ValidTargets: Ground, Water`) and one air-only
+    (e.g. `RA2HoverMissile_AA`, `ValidTargets: Air`), typically the
+    latter `Inherits:` the former. An Anti-Air Tank with both a ground
+    cannon and an AA missile is the canonical example.
+    **Do NOT** apply `_AA` to a weapon just because its own `ValidTargets`
+    happens to be `Air`-only — a standalone AA-only weapon used by a
+    dedicated AA unit/structure with no ground-capable sibling on the
+    same actor (e.g. a SAM Site) stays unsuffixed. A single weapon whose
+    own `ValidTargets` already covers both `Ground` and `Air` (one
+    combined weapon, not two) also does not get `_AA`.
   - **Upgraded weapon variants** append `_upgraded` or the upgrade name:
     `cabal_artilleryspider_shell_upgraded`.
-  - **Combined suffixes** follow this order: `<weapon_name>_AA_EMP_elite`
+  - **Combined suffixes** follow this order:
+    `<base_name>_<doctrine/upgrade/variant>_EMP_AA_elite`
     (e.g. an elite EMP anti-air weapon). The base descriptive name comes
-    first, then capability tags (`_AA`, `_EMP`), then the rank tier
-    (`_elite`) last.
+    first, then doctrine/upgrade/variant suffixes, then `_EMP`, then
+    `_AA`, then the rank tier (`_elite`) last.
   - **Migration**: per faction via `tools/rename/rename_map_<faction>.yaml`
     + `tools/rename/apply.py`, verified with
     `tools/audit/dump_resolved.py` before/after diffs (must be empty).

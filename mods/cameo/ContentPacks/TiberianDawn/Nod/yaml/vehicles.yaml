@@ -758,7 +758,7 @@ td_nod_buggymkii:
 		AmmoUsage: 0
 		PauseOnCondition: ammo < 3
 	Armament@AA:
-		Weapon: MachineGunBuggy2AA
+		Weapon: MachineGunBuggy2_AA
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		AmmoUsage: 0
@@ -771,7 +771,7 @@ td_nod_buggymkii:
 		PauseOnCondition: ammo < 3
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	Armament@LaserAA:
-		Weapon: LaserBuggy2AA
+		Weapon: LaserBuggy2_AA
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		AmmoUsage: 0

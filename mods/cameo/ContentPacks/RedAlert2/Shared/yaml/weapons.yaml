@@ -346,12 +346,12 @@ RA2HoverMissile_elite:
 		Explosions: ra2_medium_grey_explosion
 		ImpactSounds: gexp15a.wav
 
-RA2HoverMissileAA:
+RA2HoverMissile_AA:
 	Inherits: RA2HoverMissile
 	ValidTargets: Air
 	Range: 8640
 
-RA2HoverMissileAA_elite:
+RA2HoverMissile_AA_elite:
 	Inherits: RA2HoverMissile_elite
 	ValidTargets: Air
 	Range: 9640
@@ -439,12 +439,12 @@ RA2ThunderboltMissile_elite:
 		Explosions: ra2_medium_grey_explosion
 		ImpactSounds: gexp15a.wav
 
-RA2ThunderboltMissileAA:
+RA2ThunderboltMissile_AA:
 	Inherits: RA2ThunderboltMissile
 	ValidTargets: Air
 	Range: 8640
 
-RA2ThunderboltMissileAA_elite:
+RA2ThunderboltMissile_AA_elite:
 	Inherits: RA2ThunderboltMissile_elite
 	ValidTargets: Air
 	Range: 9640
@@ -519,12 +519,12 @@ RA2MultiHoverMissile_elite:
 		Explosions: ra2_medium_grey_explosion
 		ImpactSounds: gexp15a.wav
 
-RA2MultiHoverMissileAA:
+RA2MultiHoverMissile_AA:
 	Inherits: RA2MultiHoverMissile
 	ValidTargets: Air
 	Range: 9255
 
-RA2MultiHoverMissileAA_elite:
+RA2MultiHoverMissile_AA_elite:
 	Inherits: RA2MultiHoverMissile_elite
 	ValidTargets: Air
 	Range: 10255
@@ -596,12 +596,12 @@ RA2MultiThunderboltMissile_elite:
 		Explosions: ra2_medium_grey_explosion
 		ImpactSounds: gexp15a.wav
 
-RA2MultiThunderboltMissileAA:
+RA2MultiThunderboltMissile_AA:
 	Inherits: RA2MultiThunderboltMissile
 	ValidTargets: Air
 	Range: 9255
 
-RA2MultiThunderboltMissileAA_elite:
+RA2MultiThunderboltMissile_AA_elite:
 	Inherits: RA2MultiThunderboltMissile_elite
 	ValidTargets: Air
 	Range: 10255
@@ -1299,7 +1299,7 @@ RA2BrutePunch:
 		Damage: 10
 	-Warhead@Effect:
 
-RA2BrutePunchE:
+RA2BrutePunch_elite:
 	Inherits: RA2BrutePunch
 	Burst: 2
 	BurstDelays: 3
@@ -1641,7 +1641,7 @@ MigMissiles_tesla:
 		AimChance: 100
 		AimTargetStances: Enemy, Neutral
 
-MigMissilesE:
+MigMissiles_elite:
 	Inherits: MigMissiles
 	Range: 8600
 	Burst: 8
@@ -1653,12 +1653,12 @@ MigMissilesE:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 
-MigMissilesE_rad:
+MigMissiles_rad_elite:
 	Inherits: MigMissiles_rad
 	Range: 8600
 	Burst: 8
 
-MigMissilesE_fire:
+MigMissiles_fire_elite:
 	Inherits: MigMissiles_fire
 	Range: 8600
 	Burst: 8
@@ -1686,8 +1686,8 @@ MigMissiles_AA:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Air
 
-MigMissiles_AA_ELITE:
-	Inherits: MigMissilesE
+MigMissiles_AA_elite:
+	Inherits: MigMissiles_elite
 	ValidTargets: Air
 	Projectile: Missile
 		Speed: 500
@@ -2260,7 +2260,7 @@ RA2GattlingMG1:
 		ValidTargets: Ground, Water
 		Damage: 1
 
-RA2GattlingMG1AA:
+RA2GattlingMG1_AA:
 	Inherits: RA2GattlingMG1
 	Range: 6750
 	ValidTargets: Air
@@ -2283,7 +2283,7 @@ RA2GattlingMG2:
 	Report: vgatlo5a.wav, vgatlo5b.wav
 	ReloadDelay: 4
 
-RA2GattlingMG2AA:
+RA2GattlingMG2_AA:
 	Inherits: RA2GattlingMG2
 	Range: 7500
 	ValidTargets: Air

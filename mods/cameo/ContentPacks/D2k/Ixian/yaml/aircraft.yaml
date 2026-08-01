@@ -296,7 +296,7 @@ ixian_empbomber:
 	Shielded:
 		RegenAmount: 76
 	Armament@PRIMARY:
-		Weapon: IxianEmpBomb
+		Weapon: IxianBomb_EMP
 		LocalOffset: 250,0,-250
 		PauseOnCondition: !ammo
 	AttackAircraft:
@@ -467,7 +467,7 @@ ixian_farasha:
 		RepulsionSpeed: 32
 	CarrierMaster:
 		ArmamentNames: primary
-		Actors: farasha_drone.ixian, farasha_drone.ixian, farasha_drone.ixian, farasha_drone.ixian, farasha_drone.ixian
+		Actors: farasha_drone_ixian, farasha_drone_ixian, farasha_drone_ixian, farasha_drone_ixian, farasha_drone_ixian
 		RearmTicks: 25
 		RespawnTicks: 75
 		InstaRepair: true
@@ -578,7 +578,7 @@ heavydrone_husk.ixian:
 		Image: ixian_empbomber
 		PlayerPalette: player_rgba
 
-farasha_drone.ixian:
+farasha_drone_ixian:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -615,7 +615,7 @@ farasha_drone.ixian:
 		MaxPercentageStrength: 100
 		RegenAmount: 20
 	Armament@PRIMARY:
-		Weapon: farasha_drone.ixian
+		Weapon: farasha_drone_ixian
 		LocalOffset: 150,0,0
 	AttackAircraft:
 		FacingTolerance: 40
@@ -645,6 +645,6 @@ farasha_drone_husk.ixian:
 		TurnSpeed: 20
 		Speed: 260
 	RenderSprites:
-		Image: farasha_drone.ixian
+		Image: farasha_drone_ixian
 	FallsToEarth:
 		Explosion: D2KUnitExplodeSmall

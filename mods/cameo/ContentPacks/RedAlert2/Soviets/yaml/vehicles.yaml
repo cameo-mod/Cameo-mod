@@ -117,7 +117,7 @@ ra2_soviets_rhinoheavytank:
 		RequiresCondition: rank-elite  && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions
 	Armament@PRIMARYELITERad:
 		Name: primary
-		Weapon: RA2120mm_elite_rad
+		Weapon: RA2120mm_rad_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
@@ -126,7 +126,7 @@ ra2_soviets_rhinoheavytank:
 		RequiresCondition: rank-elite && ra2_soviets_doctrine_nuclearmunitions
 	Armament@PRIMARYELITEFire:
 		Name: primary
-		Weapon: RA2120mm_elite_fire
+		Weapon: RA2120mm_fire_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
@@ -135,7 +135,7 @@ ra2_soviets_rhinoheavytank:
 		RequiresCondition: rank-elite && ra2_soviets_doctrine_firemunitions
 	Armament@PRIMARYELITETesla:
 		Name: primary
-		Weapon: RA2120mm_elite_tesla
+		Weapon: RA2120mm_tesla_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
@@ -211,13 +211,13 @@ ra2_soviets_flaktrack:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@AAE:
-		Weapon: RA2FlakTrackAAGunE
+		Weapon: RA2FlakTrackAAGun_elite
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
 	Armament@AGE:
-		Weapon: RA2FlakTrackGunE
+		Weapon: RA2FlakTrackGun_elite
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -320,7 +320,7 @@ ra2_soviets_apocalypsetank:
 		RequiresCondition: !rank-elite && ra2_soviets_doctrine_teslamunitions
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: RA2MammothTusk
+		Weapon: RA2MammothTusk_AA
 		LocalOffset: -85,90,340, -85,-90,340
 		LocalYaw: -100, 100
 		Recoil: 10
@@ -336,7 +336,7 @@ ra2_soviets_apocalypsetank:
 		RequiresCondition: rank-elite  && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions
 	Armament@PRIMARYELITERad:
 		Name: primary
-		Weapon: RA2120xmm_elite_rad
+		Weapon: RA2120xmm_rad_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
@@ -345,7 +345,7 @@ ra2_soviets_apocalypsetank:
 		RequiresCondition: rank-elite && ra2_soviets_doctrine_nuclearmunitions
 	Armament@PRIMARYELITEFire:
 		Name: primary
-		Weapon: RA2120xmm_elite_fire
+		Weapon: RA2120xmm_fire_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
@@ -354,7 +354,7 @@ ra2_soviets_apocalypsetank:
 		RequiresCondition: rank-elite && ra2_soviets_doctrine_firemunitions
 	Armament@PRIMARYELITETesla:
 		Name: primary
-		Weapon: RA2120xmm_elite_tesla
+		Weapon: RA2120xmm_tesla_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
@@ -363,7 +363,7 @@ ra2_soviets_apocalypsetank:
 		RequiresCondition: rank-elite && ra2_soviets_doctrine_teslamunitions
 	Armament@SECONDARYELITE:
 		Name: secondary
-		Weapon: RA2MammothTusk_elite
+		Weapon: RA2MammothTusk_AA_elite
 		LocalOffset: -85,90,340, -85,-90,340
 		LocalYaw: -100, 100
 		Recoil: 10
@@ -424,7 +424,7 @@ ra2_soviets_v3rocketlauncher:
 		LocalOffset: -1024,0,512
 		RequiresCondition: !rank-elite
 	Armament@PRIMARYELITE:
-		Weapon: V3LaunchE
+		Weapon: V3Launch_elite
 		LocalOffset: -1024,0,512
 		RequiresCondition: rank-elite
 	MissileSpawnerMasterCA@1:
@@ -648,7 +648,7 @@ ra2_soviets_terrordrone:
 		Weapon: RA2DroneJump
 		RequiresCondition: !rank-elite
 	Armament@Elite:
-		Weapon: RA2DroneJumpE
+		Weapon: RA2DroneJump_elite
 		RequiresCondition: rank-elite
 	-InfectableCA:
 	AttackInfectCA:

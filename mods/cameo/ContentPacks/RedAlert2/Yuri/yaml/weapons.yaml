@@ -666,7 +666,7 @@ RA2GattlingMG3:
 	Report: vgatlo8a.wav, vgatlo8b.wav
 	ReloadDelay: 2
 
-RA2GattlingMG3AA:
+RA2GattlingMG3_AA:
 	Inherits: RA2GattlingMG3
 	Range: 8250
 	ValidTargets: Air
@@ -822,7 +822,7 @@ RA2Virusgun3:
 		Count: 1, 4
 		Duration: 200
 
-RA2VirusgunE:
+RA2Virusgun_elite:
 	Inherits: RA2Virusgun3
 	Range: 11111
 	Warhead@Cloud: SpawnSmokeParticle
@@ -880,7 +880,7 @@ RA2Chemspray2:
 		Count: 1, 4
 		Duration: 200
 
-RA2ChemsprayE:
+RA2Chemspray_elite:
 	Inherits: RA2Chemspray2
 	Range: 5840
 

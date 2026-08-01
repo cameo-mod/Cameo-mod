@@ -5450,7 +5450,7 @@ drempdisable:
 		Range: 7c0
 		Type: GroundPosition
 	Armament@PRIMARY:
-		Weapon: DREMPDevice
+		Weapon: DR_EMP_Device
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
@@ -6701,7 +6701,7 @@ drtmissile:
 		RecoilRecovery: 34
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: DRTNissileTurretAA
+		Weapon: DRTNissileTurret_AA
 		Recoil: 171
 		RecoilRecovery: 34
 		MuzzleSequence: muzzle
@@ -8314,7 +8314,7 @@ drmtnk:
 		Weapon: DRMissileTankAG
 		LocalOffset: 200,2,170, 200,-2,170
 	Armament@G2:
-		Weapon: DRMissileTankAA
+		Weapon: DRMissileTank_AA
 		LocalOffset: 200,2,170, 200,-2,170
 	AttackTurreted:
 	WithSpriteTurret:
@@ -9064,7 +9064,7 @@ drbattery:
 		RecoilRecovery: 34
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: DRTNissileTurretAA
+		Weapon: DRTNissileTurret_AA
 		Recoil: 171
 		RecoilRecovery: 34
 		MuzzleSequence: muzzle
@@ -9552,7 +9552,7 @@ drmole:
 		Weapon: DRMoleGun
 		LocalOffset: 200,1,170, 200,-1,170
 	Armament@G2:
-		Weapon: DRMoleGun.AA
+		Weapon: DRMoleGun_AA
 		LocalOffset: 200,1,170, 200,-1,170
 	AttackTurreted:
 	WithSpriteTurret:

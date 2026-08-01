@@ -126,7 +126,7 @@ asianalliance_pelican:
 		PauseOnCondition: ammo < 2
 		AmmoUsage: 2
 	Armament@PRIMARYELITE:
-		Weapon: AsianPelicanMissileE
+		Weapon: AsianPelicanMissile_elite
 		LocalOffset: 85,-213,-85, 85,213,-85
 		MuzzleSequence: muzzle
 		RequiresCondition: rank-elite

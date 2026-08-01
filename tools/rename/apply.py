@@ -59,18 +59,35 @@ def build_replacer(actors: dict[str, str]):
             return text, 0
         return sub
     alts = sorted(lower, key=len, reverse=True)
-    rx = re.compile(
+
+    # Pass 1: standalone identifiers (dot is a boundary)
+    rx1 = re.compile(
         r"(?<![A-Za-z0-9_.])(" + "|".join(re.escape(a) for a in alts) +
         r")(?![A-Za-z0-9_.])", re.IGNORECASE)
+
+    # Pass 2: Fluent key references — old_key followed by .attribute
+    rx2 = re.compile(
+        r"(?<![A-Za-z0-9_.])(" + "|".join(re.escape(a) for a in alts) +
+        r")(\.[a-z][A-Za-z0-9_]*)", re.IGNORECASE)
 
     def sub(text: str) -> tuple[str, int]:
         n = 0
 
-        def repl(mo: re.Match) -> str:
+        def repl1(mo: re.Match) -> str:
             nonlocal n
             n += 1
             return lower[mo.group(1).lower()]
-        return rx.sub(repl, text), n
+
+        def repl2(mo: re.Match) -> str:
+            nonlocal n
+            n += 1
+            return lower[mo.group(1).lower()] + mo.group(2)
+
+        # Pass 2 first (more specific), then Pass 1
+        text, n2 = rx2.subn(repl2, text)
+        text, n1 = rx1.subn(repl1, text)
+        n = n1 + n2
+        return text, n
     return sub
 
 

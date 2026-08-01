@@ -34,7 +34,7 @@ RocketsAMT:
 	Inherits: Rockets
 	Inherits: ^AMTProjectile
 
-td_gdi_commando_sniperE:
+td_gdi_commando_sniper_elite:
 	Inherits: ^RailgunWeapon
 	Inherits: td_gdi_commando_sniper
 	Projectile: Bullet
@@ -74,7 +74,7 @@ APCGun:
 		ValidTargets: Ground, Water
 		Damage: 1
 
-APCGunAA:
+APCGun_AA:
 	Inherits: APCGun
 	Range: 8502
 	ValidTargets: Air
@@ -138,7 +138,7 @@ BoxerCannonAG:
 		ValidTargets: Ground, Water
 		Damage: 1
 
-BoxerCannonAA:
+BoxerCannon_AA:
 	Inherits: BoxerCannonAG
 	Range: 7290
 	ValidTargets: Air
@@ -542,7 +542,7 @@ NapalmA10Carrier:
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
 
-A10CarrierMissiles:
+A10CarrierMissiles_AA:
 	Inherits: ^HeavyMissile
 	Inherits@glow: ^ImpactGlow
 	ValidTargets: Air
@@ -967,7 +967,7 @@ MachineGunHumvee2:
 		ValidTargets: Ground, Water
 		Damage: 1
 
-MachineGunHumvee2AA:
+MachineGunHumvee2_AA:
 	Inherits: MachineGunHumvee2
 	Range: 8397
 	ValidTargets: Air
@@ -995,7 +995,7 @@ MachineGunHumvee2AP:
 		ValidTargets: Ground, Water
 		Damage: 1
 
-MachineGunHumvee2APAA:
+MachineGunHumvee2AP_AA:
 	Inherits: MachineGunHumvee2AP
 	Range: 8397
 	ValidTargets: Air
@@ -1017,7 +1017,7 @@ RocketsHumvee2:
 		ValidTargets: Ground, Water
 		Damage: 8
 
-RocketsHumvee2AA:
+RocketsHumvee2_AA:
 	Inherits: RocketsHumvee2
 	Range: 8397
 	ValidTargets: Air
@@ -1037,7 +1037,7 @@ RocketsHumvee2AMT:
 		ValidTargets: Ground, Water
 		Damage: 8
 
-RocketsHumvee2AMTAA:
+RocketsHumvee2AMT_AA:
 	Inherits: RocketsHumvee2AMT
 	Range: 8397
 	ValidTargets: Air
@@ -1579,7 +1579,7 @@ CommandoM16:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 2
 
-FirehawkMissiles:
+FirehawkMissiles_AA:
 	Inherits: ^HeavyMissile
 	Inherits@glow: ^ImpactGlow
 	ValidTargets: Air

@@ -36,7 +36,7 @@ NaxBrummbarArty:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 7
 
-NaxBrummbarArtyE:
+NaxBrummbarArty_elite:
 	Inherits: NaxBrummbarArty
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 15000
@@ -107,7 +107,7 @@ NaxiWW2Machinegun:
 		Damage: 2
 		ValidTargets: Ground, Water
 
-NaxiWW2MachinegunAA:
+NaxiWW2Machinegun_AA:
 	Inherits: NaxiWW2Machinegun
 	Range: 8355
 	ValidTargets: Air
@@ -138,7 +138,7 @@ NaxiWW2MachinegunSmall:
 		Damage: 1
 		ValidTargets: Ground, Water
 
-NaxiWW2MachinegunSmallAA:
+NaxiWW2MachinegunSmall_AA:
 	Inherits: NaxiWW2MachinegunSmall
 	Range: 8355
 	ValidTargets: Air
@@ -156,7 +156,7 @@ NaxiWW2MachinegunTop:
 	Range: 7555
 	Report: nax_mgun3.wav
 
-NaxiWW2MachinegunTopAA:
+NaxiWW2MachinegunTop_AA:
 	Inherits: NaxiWW2Machinegun
 	Range: 7555
 	Report: nax_mgun3.wav
@@ -176,7 +176,7 @@ NaxiWW2Machinegunner:
 	BurstDelays: 5
 	Report: nax_mgun3.wav
 
-NaxiWW2MachinegunnerE:
+NaxiWW2Machinegunner_elite:
 	Inherits: NaxiWW2Machinegunner
 	Range: 9970
 	Report: nax_mgun3.wav
@@ -190,7 +190,7 @@ NaxiWW2MachinegunnerTargeting:
 	Inherits: ^DeployTargeting
 	Range: 8970
 
-NaxiRifleE:
+NaxiRifle_elite:
 	Inherits: NaxiRifle
 	Range: 6621
 	Burst: 2
@@ -278,7 +278,7 @@ NaxiRifleCons:
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 2
 
-NaxiRifleConsE:
+NaxiRifleCons_elite:
 	Inherits: NaxiRifleCons
 	Range: 6501
 	Burst: 2
@@ -394,7 +394,7 @@ LunarNaxiDroneMissile:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
-NaxiMP40E:
+NaxiMP40_elite:
 	Inherits: NaxiMP40
 	Range: 5000
 	Burst: 20
@@ -410,7 +410,7 @@ NaxiFlamerTroop:
 	Burst: 3
 	BurstDelays: 3
 
-NaxiFlamerTroopE:
+NaxiFlamerTroop_elite:
 	Inherits: NaxiFlamerTroop
 	Range: 5830
 	Burst: 6
@@ -440,7 +440,7 @@ NaxiSniper:
 	Warhead@SniperWeaponPercentage: HealthPercentageDamage
 		Damage: 12
 
-NaxiSniperE:
+NaxiSniper_elite:
 	Inherits: NaxiSniper
 	Range: 8888
 	Burst: 2
@@ -513,7 +513,7 @@ NaxiShrek:
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 
-NaxiShrekE:
+NaxiShrek_elite:
 	Inherits: NaxiShrek
 	Range: 7805
 	Burst: 2
@@ -594,7 +594,7 @@ NaxiShrekCons:
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 
-NaxiShrekConsE:
+NaxiShrekCons_elite:
 	Inherits: NaxiShrekCons
 	Range: 6512
 	Burst: 2
@@ -683,7 +683,7 @@ NaxiAntiTankCannon:
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 7
 
-NaxiAntiTankCannonE:
+NaxiAntiTankCannon_elite:
 	Inherits: NaxiAntiTankCannon
 	Range: 8361
 	Burst: 2
@@ -838,13 +838,13 @@ NaxQuadCannon:
 		ValidTargets: Ground, Water
 		Damage: 1
 
-NaxQuadCannonE:
+NaxQuadCannon_elite:
 	Inherits: NaxQuadCannon
 	Range: 6368
 	Burst: 8
 	BurstDelays: 3
 
-NaxQuadCannonAA:
+NaxQuadCannon_AA:
 	Inherits: NaxQuadCannon
 	ValidTargets: Air
 	Range: 8052
@@ -871,8 +871,8 @@ NaxQuadCannonAA:
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
-NaxQuadCannonAAE:
-	Inherits: NaxQuadCannonAA
+NaxQuadCannon_AA_elite:
+	Inherits: NaxQuadCannon_AA
 	Range: 9052
 	Burst: 8
 	BurstDelays: 3
@@ -884,21 +884,21 @@ SkyMageCannon:
 	Burst: 6
 	BurstDelays: 4
 
-SkyMageCannonE:
+SkyMageCannon_elite:
 	Inherits: SkyMageCannon
 	Range: 6000
 	Burst: 8
 	BurstDelays: 3
 
-SkyMageCannonAA:
-	Inherits: NaxQuadCannonAA
+SkyMageCannon_AA:
+	Inherits: NaxQuadCannon_AA
 	Range: 7500
 	ReloadDelay: 26
 	Burst: 6
 	BurstDelays: 4
 
-SkyMageCannonAAE:
-	Inherits: SkyMageCannonAA
+SkyMageCannon_AA_elite:
+	Inherits: SkyMageCannon_AA
 	Range: 8500
 	Burst: 8
 	BurstDelays: 3
@@ -908,11 +908,11 @@ NaxQuadCannonTargeting:
 	Range: 8888
 
 PortableFlak:
-	Inherits: NaxQuadCannonAA
+	Inherits: NaxQuadCannon_AA
 	Range: 8888
 
-PortableFlakE:
-	Inherits: NaxQuadCannonAAE
+PortableFlak_elite:
+	Inherits: NaxQuadCannon_AA_elite
 	Range: 9999
 
 NaxFlakAG:
@@ -934,7 +934,7 @@ NaxFlakAG:
 		Inaccuracy: 888
 
 NaxFlakAA:
-	Inherits: NaxQuadCannonAA
+	Inherits: NaxQuadCannon_AA
 	ReloadDelay: 88
 	Range: 13200
 	Burst: 8
@@ -951,7 +951,7 @@ NaxFlakAA:
 		Width: 44
 		Inaccuracy: 888
 
-NaxPlanegunE:
+NaxPlanegun_elite:
 	Inherits: ^Grenade
 	Inherits: ^HeavyCannon
 	Inherits: ^RA2Chaingun
@@ -993,7 +993,7 @@ NaxPlanegunE:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-NaxPlaneRocketsE:
+NaxPlaneRockets_elite:
 	Inherits: ^MediumMissile
 	Inherits: ^D2KRocket
 	ReloadDelay: 100
@@ -1157,7 +1157,7 @@ Nax120mmAssault_elite:
 	Burst: 2
 	BurstDelays: 3
 
-NaxiAlienPistolE:
+NaxiAlienPistol_elite:
 	Inherits: NaxiAlienPistol
 	Range: 3500
 	Burst: 4

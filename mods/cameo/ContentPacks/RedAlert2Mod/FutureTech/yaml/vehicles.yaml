@@ -120,7 +120,7 @@ futuretech_plasmastrider:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: FutureMechPlasmaE
+		Weapon: FutureMechPlasma_elite
 		LocalOffset: 100,190,800, 100,-190,800
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -325,7 +325,7 @@ futuretech_guardiantank:
 		RequiresCondition: !deployed && !rank-elite
 	Armament@elite:
 		Name: primary
-		Weapon: GuardianTankCannonE
+		Weapon: GuardianTankCannon_elite
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 1720,0,440
@@ -339,7 +339,7 @@ futuretech_guardiantank:
 		RequiresCondition: deployed && !rank-elite
 	Armament@debuffelite:
 		Name: primary
-		Weapon: Future_MBT_DebuffLaserE
+		Weapon: Future_MBT_DebuffLaser_elite
 		LocalOffset: 160,0,700
 		RequiresCondition: deployed && rank-elite
 	AttackTurreted:
@@ -638,7 +638,7 @@ futuretech_oriontank:
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Name: primary
-		Weapon: OrionRailgunE
+		Weapon: OrionRailgun_elite
 		Recoil: 200
 		RecoilRecovery: 45
 		LocalOffset: 1000,0,325
@@ -943,7 +943,7 @@ futuretech_futuretank:
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Name: primary
-		Weapon: FutureTankCannonsE
+		Weapon: FutureTankCannons_elite
 		LocalOffset: 400,400,400, 400,-400,400
 		Recoil: 128
 		RecoilRecovery: 38

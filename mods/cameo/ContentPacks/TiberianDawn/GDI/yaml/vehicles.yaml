@@ -72,7 +72,7 @@ td_gdi_apc:
 		MuzzleSequence: muzzle
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: APCGunAA
+		Weapon: APCGun_AA
 		Recoil: 96
 		RecoilRecovery: 18
 		LocalOffset: 85,85,299, 85,-85,299
@@ -371,7 +371,7 @@ td_gdi_boxer:
 		LocalOffset: 800,80,400, 800,-80,400
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: BoxerCannonAA
+		Weapon: BoxerCannon_AA
 		Recoil: 85
 		LocalOffset: 800,80,400, 800,-80,400
 		MuzzleSequence: muzzle
@@ -590,7 +590,7 @@ td_gdi_assaultapc:
 		MuzzleSequence: muzzle
 		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@AA:
-		Weapon: MachineGunHumvee2AA
+		Weapon: MachineGunHumvee2_AA
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
@@ -600,7 +600,7 @@ td_gdi_assaultapc:
 		MuzzleSequence: muzzle
 		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	Armament@UpgradeAA:
-		Weapon: MachineGunHumvee2APAA
+		Weapon: MachineGunHumvee2AP_AA
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
@@ -655,7 +655,7 @@ td_gdi_humveemkii:
 		MuzzleSequence: muzzle
 		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@AA:
-		Weapon: MachineGunHumvee2AA
+		Weapon: MachineGunHumvee2_AA
 		LocalOffset: 175,0,50
 		MuzzleSequence: muzzle
 		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
@@ -665,7 +665,7 @@ td_gdi_humveemkii:
 		MuzzleSequence: muzzle
 		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	Armament@UpgradeAA:
-		Weapon: MachineGunHumvee2APAA
+		Weapon: MachineGunHumvee2AP_AA
 		LocalOffset: 175,0,50
 		MuzzleSequence: muzzle
 		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
@@ -675,7 +675,7 @@ td_gdi_humveemkii:
 		MuzzleSequence: muzzle
 		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@RocketsAA:
-		Weapon: RocketsHumvee2AA
+		Weapon: RocketsHumvee2_AA
 		LocalOffset: 150,50,50
 		MuzzleSequence: muzzle
 		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
@@ -685,7 +685,7 @@ td_gdi_humveemkii:
 		MuzzleSequence: muzzle
 		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargetingAA:
-		Weapon: RocketsHumvee2AMTAA
+		Weapon: RocketsHumvee2AMT_AA
 		LocalOffset: 150,50,50
 		MuzzleSequence: muzzle
 		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
@@ -940,7 +940,7 @@ td_gdi_exosuit:
 	# 	LocalOffset: -200, 200, 200, -200, -200, 200
 	# 	LocalYaw: 100, -100
 	# Armament@ROCKET:
-	# 	Weapon: APCRocket.AA
+	# 	Weapon: APCRocket_AA
 	# 	LocalOffset: -200, 200, 200, -200, -200, 200
 	QuantizeFacingsFromSequence:
 		Sequence: stand

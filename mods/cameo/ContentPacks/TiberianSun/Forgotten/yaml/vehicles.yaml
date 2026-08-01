@@ -1121,7 +1121,7 @@ forgotten_m113adats:
 		MuzzleSequence: muzzle
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@SECONDARY:
-		Weapon: TSAdatsMissileAA
+		Weapon: TSAdatsMissile_AA
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
@@ -1131,7 +1131,7 @@ forgotten_m113adats:
 		MuzzleSequence: muzzle
 		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Armament@UPGRADEAA:
-		Weapon: TSAdatsMissileAA
+		Weapon: TSAdatsMissile_AA
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 		RequiresCondition: forgotten_upgrade_chemicalweapons

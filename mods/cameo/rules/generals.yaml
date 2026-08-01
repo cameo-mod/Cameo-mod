@@ -1287,7 +1287,7 @@ GENE6:
 		Prerequisites: upcarpetbomb
 		StartFullyCharged: true
 	AirstrikePower@EMP:
-		OrderName: CHEMPBomb
+		OrderName: CH_EMP_Bomb
 		Icon: chemp
 		ChargeInterval: 6000
 		Name: EM Pulse
@@ -1563,7 +1563,7 @@ usabomber.emp:
 		PauseOnCondition: !ammo
 		FacingTolerance: 8
 	Armament:
-		Weapon: CHEMPBomb
+		Weapon: CH_EMP_Bomb
 	AmmoPool:
 		Ammo: 1
 	Tooltip:
@@ -4526,7 +4526,7 @@ glquad:
 		MuzzleSequence: muzzle
 		LocalOffset: 128,128,200, 128,-128,200, 128,-128,43, 128,128,43
 	Armament@2AA:
-		Weapon: GLQuadCannonAir
+		Weapon: GLQuadCannonAir_AA
 		MuzzleSequence: muzzle
 		LocalOffset: 128,128,200, 128,-128,200, 128,-128,43, 128,128,43
 	AttackTurreted:
@@ -5913,6 +5913,8 @@ chpower2:
 		Amount: 500
 	RenderSprites:
 		Image: chpower2
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: chpower
 
 chbarracks:
 	Inherits: ^BaseBuilding
@@ -6018,7 +6020,7 @@ chgattling:
 		Recoil: 10
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: CHGattlingTurretAA
+		Weapon: CHGattlingTurret_AA
 		LocalOffset: -85,120,340, -85,-120,340
 		LocalYaw: -100, 100
 		Recoil: 10
@@ -7546,7 +7548,7 @@ choverlord:
 		RequiresCondition: addongattling
 	Armament@GATTLINGAA:
 		Name: secondary
-		Weapon: CHGattlingTurretAA
+		Weapon: CHGattlingTurret_AA
 		LocalOffset: -85,120,340, -85,-120,340
 		LocalYaw: -100, 100
 		Recoil: 10
@@ -9119,7 +9121,7 @@ chhelix:
 		PauseOnCondition: !ammo
 		RequiresCondition: gattlingaddon
 	Armament@GATTLINGAA:
-		Weapon: CHGattlingTurretAA
+		Weapon: CHGattlingTurret_AA
 		LocalOffset: 85,-213,-85, 85,213,-85
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
@@ -11330,9 +11332,9 @@ usapatriot2:
 	Buildable:
 		Prerequisites: usabarracks, ~techlevel.low, ~selectusasuper
 	Armament@NORMAL:
-		Weapon: USAEMPPatriotMissAG
+		Weapon: USA_EMP_PatriotMissAG
 	Armament@AA:
-		Weapon: USAEMPPatriotMissAA
+		Weapon: USA_EMP_PatriotMissAA
 	RenderSprites:
 		Image: usapatriot
 
@@ -11374,7 +11376,7 @@ usalasertur:
 		Recoil: 10
 		RequiresCondition: !upsusafocusingcrystal
 	Armament@AA:
-		Weapon: USALaserCannonAA
+		Weapon: USALaserCannon_AA
 		LocalOffset: 500,120,340, 500,-120,340
 		LocalYaw: -100, 100
 		Recoil: 10
@@ -11386,7 +11388,7 @@ usalasertur:
 		Recoil: 10
 		RequiresCondition: upsusafocusingcrystal
 	Armament@AAUP:
-		Weapon: SUSALaserCannonAAUp
+		Weapon: SUSALaserCannonAAUp_AA
 		LocalOffset: 500,120,340, 500,-120,340
 		LocalYaw: -100, 100
 		Recoil: 10
@@ -12271,7 +12273,7 @@ usaraptor:
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
 	Armament@AA:
-		Weapon: USARaptorMissileAA
+		Weapon: USARaptorMissile_AA
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
@@ -13452,7 +13454,7 @@ usaraptorcarrier:
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 	Armament@AA:
-		Weapon: USARaptorMissileAA
+		Weapon: USARaptorMissile_AA
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 	AttackAircraft:

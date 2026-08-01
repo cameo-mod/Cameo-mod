@@ -277,15 +277,15 @@ ra2_allies_guardiangi:
 		RequiresCondition: !deployed && !rank-elite && ra2_allies_upgrade_elitegi
 		LocalOffset: 128,0,256
 	Armament@ELITE:
-		Weapon: GuardianGIMGE
+		Weapon: GuardianGIMG_elite
 		RequiresCondition: !deployed && rank-elite && !ra2_allies_upgrade_elitegi
 		LocalOffset: 128,0,256
 	Armament@ELITE2:
-		Weapon: GuardianGIMG2E
+		Weapon: GuardianGIMG2_elite
 		RequiresCondition: !deployed && rank-elite && ra2_allies_upgrade_elitegi
 		LocalOffset: 128,0,256
 	Armament@BOTAA:
-		Weapon: aadeploytargeting.8c0
+		Weapon: aadeploytargeting_8c0_AA
 		Name: targeting
 		RequiresCondition: botmicro
 	Armament@DEPLOYED:
@@ -498,7 +498,7 @@ ra2_allies_sniper:
 		LocalOffset: 0,0,427
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: RA2AWPE
+		Weapon: RA2AWP_elite
 		LocalOffset: 0,0,427
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
@@ -507,7 +507,7 @@ ra2_allies_sniper:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: RA2AWPE
+		Weapon: RA2AWP_elite
 		RequiresCondition: rank-elite
 	FirepowerMultiplier@ra2_allies_upgrade_infiltratorstraining:
 		Modifier: 200
@@ -638,7 +638,7 @@ ra2_allies_tanyaii:
 		RequiresCondition: !rank-elite
 		LocalOffset: 128,0,256
 	Armament@ELITE:
-		Weapon: RA2DoublePistolsE
+		Weapon: RA2DoublePistols_elite
 		RequiresCondition: rank-elite
 		LocalOffset: 128,0,256
 	Armament@c4:
@@ -659,7 +659,7 @@ ra2_allies_tanyaii:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: RA2DoublePistolsE
+		Weapon: RA2DoublePistols_elite
 		RequiresCondition: rank-elite
 	FirepowerMultiplier@ra2_allies_upgrade_infiltratorstraining:
 		Modifier: 200
@@ -715,7 +715,7 @@ ra2_allies_seal:
 		RequiresCondition: !rank-elite
 		LocalOffset: 128,0,256
 	Armament@ELITE:
-		Weapon: RA2MP5E
+		Weapon: RA2MP5_elite
 		RequiresCondition: rank-elite
 		LocalOffset: 128,0,256
 	Armament@GARRISONED:
@@ -724,7 +724,7 @@ ra2_allies_seal:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: RA2MP5E
+		Weapon: RA2MP5_elite
 		RequiresCondition: rank-elite
 	Armament@shipc4:
 		Weapon: SEALAttach

@@ -184,12 +184,12 @@ protoss_scout:
 		Name: primary
 		PauseOnCondition: !ammo
 	Armament@SECONDARY1:
-		Weapon: ScoutRockets
+		Weapon: ScoutRockets_AA
 		LocalOffset: 400,400,0
 		Name: secondary
 		PauseOnCondition: !ammo
 	Armament@SECONDARY2:
-		Weapon: ScoutRockets
+		Weapon: ScoutRockets_AA
 		LocalOffset: 400,-400,0
 		Name: secondary
 		PauseOnCondition: !ammo
@@ -471,7 +471,7 @@ protoss_corsair:
 	Shielded:
 		RegenAmount: 100
 	Armament@PRIMARY:
-		Weapon: CorsairEMP
+		Weapon: Corsair_EMP
 		LocalOffset: 400,0,0
 		Name: primary
 	Armament@SECONDARY1:

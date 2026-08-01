@@ -245,7 +245,7 @@ latinsyndicate_latinflametrooper:
 		LocalOffset: 128,0,256
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: SyndicateFireballLauncherE
+		Weapon: SyndicateFireballLauncher_elite
 		LocalOffset: 128,0,256
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
@@ -256,7 +256,7 @@ latinsyndicate_latinflametrooper:
 		MuzzlePalette: ra2effect
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: SyndicateFireballLauncherE
+		Weapon: SyndicateFireballLauncher_elite
 		RequiresCondition: rank-elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -312,7 +312,7 @@ latinsyndicate_narco:
 		PauseOnCondition: ammo < 7
 		RequiresCondition: !rank-elite
 	Armament@GrenadeELITE:
-		Weapon: NarcoGrenadeE
+		Weapon: NarcoGrenade_elite
 		LocalOffset: 250,0,400
 		AmmoUsage: 7
 		PauseOnCondition: ammo < 7
@@ -324,7 +324,7 @@ latinsyndicate_narco:
 		PauseOnCondition: ammo < 7
 		RequiresCondition: !rank-elite
 	Armament@PistolELITE:
-		Weapon: RA2NarcoPistolsE
+		Weapon: RA2NarcoPistols_elite
 		LocalOffset: 128,0,256
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 7
@@ -337,7 +337,7 @@ latinsyndicate_narco:
 		RequiresCondition: !rank-elite
 	Armament@GrenadeGARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NarcoGrenadeE
+		Weapon: NarcoGrenade_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -349,7 +349,7 @@ latinsyndicate_narco:
 		RequiresCondition: !rank-elite
 	Armament@PistolGARRISONEDELITE:
 		Name: garrisoned
-		Weapon: RA2NarcoPistolsE
+		Weapon: RA2NarcoPistols_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -416,7 +416,7 @@ latinsyndicate_freedomfighter:
 		LocalOffset: 128,0,256
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: RA2FreedomAK47E
+		Weapon: RA2FreedomAK47_elite
 		LocalOffset: 128,0,256
 		RequiresCondition: rank-elite
 	Armament@ROCKET:
@@ -425,7 +425,7 @@ latinsyndicate_freedomfighter:
 		Name: secondary
 		RequiresCondition: !rank-elite
 	Armament@ROCKETELITE:
-		Weapon: RA2FreedomRocketE
+		Weapon: RA2FreedomRocket_elite
 		LocalOffset: 250,0,400
 		Name: secondary
 		RequiresCondition: rank-elite
@@ -437,7 +437,7 @@ latinsyndicate_freedomfighter:
 		MuzzlePalette: ra2effect
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: RA2FreedomAK47E
+		Weapon: RA2FreedomAK47_elite
 		RequiresCondition: rank-elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -447,7 +447,7 @@ latinsyndicate_freedomfighter:
 		RequiresCondition: !rank-elite
 	Armament@RocketGARRISONEDELITE:
 		Name: garrisoned
-		Weapon: RA2FreedomRocketE
+		Weapon: RA2FreedomRocket_elite
 		RequiresCondition: rank-elite
 	FirepowerMultiplier@DualWeapon:
 		Modifier: 50

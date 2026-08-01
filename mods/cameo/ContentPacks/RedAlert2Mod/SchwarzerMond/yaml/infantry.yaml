@@ -33,7 +33,7 @@ schwarzermond_ubermensch:
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE:
-		Weapon: UbermenschLaserE
+		Weapon: UbermenschLaser_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONED:
@@ -42,14 +42,14 @@ schwarzermond_ubermensch:
 		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: UbermenschLaserE
+		Weapon: UbermenschLaser_elite
 		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@PRIMARY_UP:
 		Weapon: Lunar_YellowUbermenschLaser
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE_UP:
-		Weapon: Lunar_YellowUbermenschLaserE
+		Weapon: Lunar_YellowUbermenschLaser_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONED_UP:
@@ -58,14 +58,14 @@ schwarzermond_ubermensch:
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONEDELITE_UP:
 		Name: garrisoned
-		Weapon: Lunar_YellowUbermenschLaserE
+		Weapon: Lunar_YellowUbermenschLaser_elite
 		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@PRIMARY_AMP:
 		Weapon: Lunar_AmplifiedUbermenschLaser
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE_AMP:
-		Weapon: Lunar_AmplifiedUbermenschLaserE
+		Weapon: Lunar_AmplifiedUbermenschLaser_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONED_AMP:
@@ -74,7 +74,7 @@ schwarzermond_ubermensch:
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONEDELITE_AMP:
 		Name: garrisoned
-		Weapon: Lunar_AmplifiedUbermenschLaserE
+		Weapon: Lunar_AmplifiedUbermenschLaser_elite
 		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
 	AttackFrontal:
 		FacingTolerance: 0
@@ -117,7 +117,7 @@ schwarzermond_parzival:
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: BlackHoleMakerE
+		Weapon: BlackHoleMaker_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
@@ -128,7 +128,7 @@ schwarzermond_parzival:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: BlackHoleMakerE
+		Weapon: BlackHoleMaker_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -183,7 +183,7 @@ schwarzermond_noidmgarmor:
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE:
-		Weapon: NaxiMP40LaserE
+		Weapon: NaxiMP40Laser_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@PRIMARY_UP:
@@ -191,7 +191,7 @@ schwarzermond_noidmgarmor:
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE_UP:
-		Weapon: Lunar_YellowMP40LaserE
+		Weapon: Lunar_YellowMP40Laser_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@PRIMARY_AMP:
@@ -199,7 +199,7 @@ schwarzermond_noidmgarmor:
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE_AMP:
-		Weapon: Lunar_AmplifiedMP40LaserE
+		Weapon: Lunar_AmplifiedMP40Laser_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
 	AttackFrontal:
@@ -261,7 +261,7 @@ schwarzermond_noidharvester:
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: NaxiMP40LaserE
+		Weapon: NaxiMP40Laser_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite
 	AttackFrontal:
@@ -494,20 +494,20 @@ schwarzermond_lunarrocket:
 	ChangesHealth@SelfHealing:
 		Step: 18
 	Armament@PRIMARY:
-		Weapon: NaxCorrosionRocketTrooperE
+		Weapon: NaxCorrosionRocketTrooper_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: NaxCorrosionRocketTrooperE
+		Weapon: NaxCorrosionRocketTrooper_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: NaxCorrosionRocketTrooperE
+		Weapon: NaxCorrosionRocketTrooper_elite
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NaxCorrosionRocketTrooperE
+		Weapon: NaxCorrosionRocketTrooper_elite
 		RequiresCondition: rank-elite
 	AttackFrontal:
 		FacingTolerance: 0

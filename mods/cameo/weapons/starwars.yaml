@@ -99,7 +99,7 @@ SWAWingGun:
 			Concrete: 25
 		DamageTypes: Prone80Percent, TriggerProne, RippedApartDeath
 
-SWAWingGunAA:
+SWAWingGun_AA:
 	Inherits: SWAWingGun
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -111,8 +111,8 @@ SWXWingGun:
 	Burst: 4
 	Range: 6149
 
-SWXWingGunAA:
-	Inherits: SWAWingGunAA
+SWXWingGun_AA:
+	Inherits: SWAWingGun_AA
 	Burst: 4
 	Range: 6149
 
@@ -122,8 +122,8 @@ SWJediStarFighterGun:
 	Burst: 8
 	Range: 7173
 
-SWJediStarFighterGunAA:
-	Inherits: SWXWingGunAA
+SWJediStarFighterGun_AA:
+	Inherits: SWXWingGun_AA
 	Burst: 8
 	Range: 7173
 
@@ -150,7 +150,7 @@ SWMonCalamariGun:
 			Heavy: 40
 			Concrete: 10
 
-SWMonCalamariGunAA:
+SWMonCalamariGun_AA:
 	Inherits: SWMonCalamariGun
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -169,7 +169,7 @@ SWAclamatorGun:
 		Damage: 4000
 		Spread: 400
 
-SWAclamatorGunAA:
+SWAclamatorGun_AA:
 	Inherits: SWAclamatorGun
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -188,7 +188,7 @@ SWStarDestroyerGun:
 		Damage: 5000
 		Spread: 500
 
-SWStarDestroyerGunAA:
+SWStarDestroyerGun_AA:
 	Inherits: SWStarDestroyerGun
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -311,7 +311,7 @@ SWCloneBazookaG:
 	Range: 7168
 
 SWPatriot:
-	Inherits: SWDroidRocketsAA
+	Inherits: SWDroidRockets_AA
 	ReloadDelay: 50
 	Burst: 5
 	BurstDelays: 5
@@ -469,7 +469,7 @@ SWAclamatorMissile:
 	Warhead@4EffAir: CreateEffect
 		Explosions: small_building
 
-SWAclamatorMissileAA:
+SWAclamatorMissile_AA:
 	Inherits: SWAclamatorMissile
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -496,7 +496,7 @@ SWStarDestroyerMissile:
 	Warhead@4EffAir: CreateEffect
 		Explosions: small_building
 
-SWStarDestroyerMissileAA:
+SWStarDestroyerMissile_AA:
 	Inherits: SWStarDestroyerMissile
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -635,8 +635,8 @@ SWATATLaser:
 		Spread: 128
 		Damage: 12345
 
-deploytargeting.10c0:
-	Inherits: deploytargeting.5c0
+deploytargeting_10c0:
+	Inherits: deploytargeting_5c0
 	Range: 10240
 
 InterceptorLauncherMonCalamari:
@@ -672,7 +672,7 @@ SWMonCalamariLaser:
 		Spread: 400
 		Damage: 4000
 
-SWMonCalamariLaserAA:
+SWMonCalamariLaser_AA:
 	Inherits: SWMonCalamariLaser
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -693,7 +693,7 @@ SWAclamatorLaser:
 		Spread: 500
 		Damage: 5000
 
-SWAclamatorLaserAA:
+SWAclamatorLaser_AA:
 	Inherits: SWAclamatorLaser
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -714,7 +714,7 @@ SWStarDestroyerLaser:
 		Spread: 600
 		Damage: 6000
 
-SWStarDestroyerLaserAA:
+SWStarDestroyerLaser_AA:
 	Inherits: SWStarDestroyerLaser
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -973,7 +973,7 @@ SWDroidRockets:
 		ImpactSounds: swlaser.aud
 		Explosions: drlaserexp
 
-SWDroidRocketsAA:
+SWDroidRockets_AA:
 	Inherits: SWDroidRockets
 	ValidTargets: Air
 	Projectile: MissileCA

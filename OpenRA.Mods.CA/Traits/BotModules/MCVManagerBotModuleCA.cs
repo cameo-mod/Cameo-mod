@@ -145,9 +145,9 @@ namespace OpenRA.Mods.CA.Traits
 				var unitBuilder = requestUnitProduction.FirstEnabledTraitOrDefault();
 				if (unitBuilder != null && Info.McvTypes.Count > 0 && ShouldBuildMCV())
 				{
-					var mcvType = Info.McvTypes.Random(world.LocalRandom);
-					if (unitBuilder.RequestedProductionCount(bot, mcvType) == 0)
-						unitBuilder.RequestUnitProduction(bot, mcvType);
+					var mcvInfo = AIUtils.GetBuildableInfoByCommonName(Info.McvTypes, player);
+					if (mcvInfo != null && unitBuilder.RequestedProductionCount(bot, mcvInfo.Name) == 0)
+						unitBuilder.RequestUnitProduction(bot, mcvInfo.Name);
 				}
 			}
 		}

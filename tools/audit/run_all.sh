@@ -20,15 +20,22 @@ OUT="docs/audit/latest"
 mkdir -p "$OUT" docs/factions
 failed=0
 
+# Force child processes to emit UTF-8 regardless of OS console codepage
+# (Windows git-bash defaults to cp1252, which corrupts §, —, etc.)
+export PYTHONIOENCODING=utf-8
+
+# NOTE: "elite_naming" is intentionally excluded — audit_elite_naming.py is
+# deprecated, fully superseded by audit_weapon_suffixes.py X1 section
+# (same check: rank-elite gated armaments not ending _elite).
 for a in inherits faction_leaks upgrades upgrade_coverage ai sequences \
          metadata outliers orphans assets fluent power_budget stat_formulas \
          weapon_uniqueness garrison_weapons asset_files promotion_gating min_range \
          basebuilder_crates buildable_order display_text rename_safety \
-         elite_naming missing_elite elite_gating rank_decoration \
+         missing_elite elite_gating rank_decoration \
          dune_rank_decoration effect_warhead_names weapon_suffixes \
          balance_sheet consistency_report packs balance_drift \
          template_conformance multiplier_modifiers nuclear_flash_bindings \
-         warhead_split; do
+         ts_death_palette warhead_split; do
   echo "== audit_$a"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" \
     || failed=1

@@ -261,9 +261,10 @@ The following files/areas were checked and found clean:
 These rules were cross-referenced across multiple documents and confirmed
 to be in agreement:
 
-1. **Weapon suffix ordering**: `<weapon_name>_AA_EMP_elite` — base name
-   first, then capability tags (`_AA`, `_EMP`), then rank tier (`_elite`)
-   last. Consistent across DESIGN.md §1, §16.3, and ROADMAP WPN-MIGRATE.
+1. **Weapon suffix ordering**: `<base_name>_<doctrine/upgrade/variant>_EMP_AA_elite`
+   — base name first, then doctrine/upgrade/variant suffixes, then `_EMP`,
+   then `_AA`, then rank tier (`_elite`) last. Consistent across DESIGN.md
+   §1, §16.3, and ROADMAP weapon suffix standardization entries.
 
 2. **Elite weapons are RA2-only**: DESIGN.md §16.3 "Every RA2-styled actor
    with a primary armament must have an elite weapon." ROADMAP E1 now
@@ -290,8 +291,10 @@ to be in agreement:
 
 7. **SC rank decorations**: `^AlienRankDecoration` should only apply to
    Zerg. Terran and Protoss need separate decorations. Commit `b95f5e7f3`
-   incorrectly applied it to all SC factions. ROADMAP SC-RANKS fix entry
-   is `[ ]` (pending).
+   incorrectly applied it to all SC factions. FIXED: commit `c3e3490f7`
+   reverted the blanket application; commit `031c54d6b` created 3 separate
+   decorations (`^ZergRankDecoration`, `^TerranRankDecoration`,
+   `^ProtossRankDecoration`). ROADMAP SC-RANKS is `[x]` (done).
 
 8. **Schwarzer Mond 1-burst**: 1-burst weapons DO benefit from +1-burst
    upgrade steps (1→2→3 progression). DESIGN.md §18.4 and ROADMAP
@@ -302,6 +305,6 @@ to be in agreement:
    Now consistent across DESIGN.md §1, MASTER_REPORT §9.1, and
    `backlog_weapon_rename.md`.
 
-10. **Audit suite completeness**: 32 audit scripts total (30 in
-    `tools/audit/` + 2 in `tools/`). All now included in `run_all.sh`.
-    README.md table now lists all of them.
+10. **Audit suite completeness**: 37 audit scripts total (35 in
+    `tools/audit/` + 2 in `tools/`). All included in both `run_all.py`
+    and `run_all.sh`. README.md table lists all of them.

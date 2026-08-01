@@ -202,7 +202,7 @@ naxis_naxiflamer:
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: NaxiFlamerTroopE
+		Weapon: NaxiFlamerTroop_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
@@ -213,7 +213,7 @@ naxis_naxiflamer:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NaxiFlamerTroopE
+		Weapon: NaxiFlamerTroop_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -258,7 +258,7 @@ naxis_naximercenarysniper:
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: NaxiSniperE
+		Weapon: NaxiSniper_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
@@ -269,7 +269,7 @@ naxis_naximercenarysniper:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NaxiSniperE
+		Weapon: NaxiSniper_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -310,7 +310,7 @@ naxis_panzerschreck:
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: NaxiShrekE
+		Weapon: NaxiShrek_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
@@ -321,7 +321,7 @@ naxis_panzerschreck:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONED_E:
 		Name: garrisoned
-		Weapon: NaxiShrekE
+		Weapon: NaxiShrek_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -362,7 +362,7 @@ naxis_panzerfausttrooper:
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: NaxiShrekConsE
+		Weapon: NaxiShrekCons_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
@@ -373,7 +373,7 @@ naxis_panzerfausttrooper:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NaxiShrekConsE
+		Weapon: NaxiShrekCons_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -413,13 +413,13 @@ naxis_skymage:
 		Weapon: SkyMageCannon
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: SkyMageCannonE
+		Weapon: SkyMageCannon_elite
 		RequiresCondition: rank-elite
 	Armament@AA:
-		Weapon: SkyMageCannonAA
+		Weapon: SkyMageCannon_AA
 		RequiresCondition: !rank-elite
 	Armament@ELITEAA:
-		Weapon: SkyMageCannonAAE
+		Weapon: SkyMageCannon_AA_elite
 		RequiresCondition: rank-elite
 	AttackAircraft:
 		Voice: Attack
@@ -495,7 +495,7 @@ naxis_slaveoverseer:
 		TargetRelationships: Enemy
 		ForceTargetRelationships: None
 	Armament@ELITE:
-		Weapon: NaxiRifleE
+		Weapon: NaxiRifle_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite
 		TargetRelationships: Enemy
@@ -508,7 +508,7 @@ naxis_slaveoverseer:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NaxiRifleE
+		Weapon: NaxiRifle_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -676,7 +676,7 @@ frank.nax:
 		Weapon: RA2BrutePunch
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: RA2BrutePunchE
+		Weapon: RA2BrutePunch_elite
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
 		Name: garrisoned
@@ -739,7 +739,7 @@ naxis_naximachinegunners:
 		RequiresCondition: (deployed || undeployed) && !rank-elite
 	Armament@DEPLOYEDELITE:
 		Name: deployed
-		Weapon: NaxiWW2MachinegunnerE
+		Weapon: NaxiWW2Machinegunner_elite
 		Turret: deploy
 		LocalOffset: 384,64,384
 		PauseOnCondition: !deployed || deploying
@@ -750,7 +750,7 @@ naxis_naximachinegunners:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NaxiWW2MachinegunnerE
+		Weapon: NaxiWW2Machinegunner_elite
 		RequiresCondition: rank-elite
 	AttackTurreted:
 		Voice: Attack
@@ -854,7 +854,7 @@ naxis_portableflak:
 		RequiresCondition: (deployed || undeployed) && !rank-elite
 	Armament@DEPLOYEDELITE:
 		Name: deployed
-		Weapon: PortableFlakE
+		Weapon: PortableFlak_elite
 		Turret: deploy
 		LocalOffset: 384,64,384
 		PauseOnCondition: !deployed || deploying
@@ -865,7 +865,7 @@ naxis_portableflak:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: PortableFlakE
+		Weapon: PortableFlak_elite
 		RequiresCondition: rank-elite
 	AttackTurreted:
 		Voice: Attack
@@ -950,7 +950,7 @@ undead.nax:
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: NaxiRifleE
+		Weapon: NaxiRifle_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
@@ -961,7 +961,7 @@ undead.nax:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NaxiRifleE
+		Weapon: NaxiRifle_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -1010,7 +1010,7 @@ naxis_coneheadsknights:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NaxiRifleConsE
+		Weapon: NaxiRifleCons_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -1119,7 +1119,7 @@ naxis_antitankcannon:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: NaxiAntiTankCannonE
+		Weapon: NaxiAntiTankCannon_elite
 		LocalOffset: 300,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -1171,7 +1171,7 @@ naxis_bmwbike:
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 	Armament@AA:
-		Weapon: NaxiWW2MachinegunSmallAA
+		Weapon: NaxiWW2MachinegunSmall_AA
 		LocalOffset: 300,10,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -1242,7 +1242,7 @@ alien.nax:
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: NaxiAlienPistolE
+		Weapon: NaxiAlienPistol_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
@@ -1253,7 +1253,7 @@ alien.nax:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NaxiAlienPistolE
+		Weapon: NaxiAlienPistol_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite

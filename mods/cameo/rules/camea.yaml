@@ -1044,7 +1044,7 @@ TRAN.camea:
 		InitialUnits: e1, e1, td_gdi_grenadier, td_gdi_grenadier, td_nod_flamethrower, td_nod_flamethrower, td_nod_chemicalwarrior, td_nod_chemicalwarrior, ra1_soviets_flamethrower, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_shocktrooper
 		LoadedCondition: loaded
 	Armament:
-		Weapon: deploytargeting.5c0
+		Weapon: deploytargeting_5c0
 		RequiresCondition: botmicro && loaded
 	AutoDeployer:
 		DeployChance: 100

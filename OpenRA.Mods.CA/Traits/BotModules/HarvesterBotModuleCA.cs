@@ -228,15 +228,18 @@ namespace OpenRA.Mods.CA.Traits
 			var unitBuilder = requestUnitProduction.FirstEnabledTraitOrDefault();
 			if (unitBuilder != null && Info.HarvesterTypes.Count > 0)
 			{
-				var harvInfo = AIUtils.GetInfoByCommonName(Info.HarvesterTypes, player);
 				var numHarvesters = AIUtils.CountActorByCommonName(harvestersIndex);
 
 				if ((harvesterLimit > 0 && numHarvesters >= harvesterLimit) || numHarvesters >= Info.MaxHarvesters)
 					return;
 
 				var harvCountTooLow = numHarvesters < AIUtils.CountActorByCommonName(refineries) * Info.HarvestersPerRefinery + Info.AdditionalHarvesters;
-				if (harvCountTooLow && unitBuilder.RequestedProductionCount(bot, harvInfo.Name) == 0)
-					unitBuilder.RequestUnitProduction(bot, harvInfo.Name);
+				if (harvCountTooLow)
+				{
+					var harvInfo = AIUtils.GetBuildableInfoByCommonName(Info.HarvesterTypes, player);
+					if (harvInfo != null && unitBuilder.RequestedProductionCount(bot, harvInfo.Name) == 0)
+						unitBuilder.RequestUnitProduction(bot, harvInfo.Name);
+				}
 			}
 		}
 

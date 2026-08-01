@@ -20,6 +20,36 @@ flagged inline. Faction reference: [FACTIONS.md](../FACTIONS.md)._
 
 ---
 
+## ▶ ACTIVE — VEHICLE BALANCE APPLY + BACKLOG (2026-07-31)
+
+**Vehicle ladder DESIGN is being re-tuned** — latest table = `docs/balance/anchor_decisions_log.md`
+"⚠ REVISION 2026-07-31" (PENDING maintainer "did it fix the problems?" confirm). STRUCTURAL work DONE +
+committed: `^MissileVehicleTemplate` + 10 reassignments (missile-MLRS family + Nod bikes) + `EpicBuff`
+removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
+
+**Queue (priority order):**
+1. **[BLOCKED on maintainer confirm + `--confirm`] Apply VEHICLE stats** — once the REVISION table is
+   confirmed: baselines → `apply_balance --confirm` (fit_class scales members 0.5–4.0×, verifier 2.5×) →
+   armor normalization → self-heal Step → epic 4×HP + MonsterTank DPS→10000 → re-extract → audits + BOOT →
+   commit yaml+ledger. THEN **infantry** (build the same big class table first, then apply).
+2. **[L] Regression sweep** — review all commits since ~2026-07-24; hunt fluent/description-reference
+   breakages like the RA1-Soviet upgrade regression (broke in `53fb10725`, fixed `f68a01833`). Pattern:
+   renames that update Fluent keys but leave live `Buildable.Description` refs pointing at the old key.
+3. **[L] Repo cleanup** — audit duplicate/overlapping python scripts (multiple balance + rename scripts)
+   and docs; propose merge/generalize/delete plan. NO deletes without maintainer sign-off.
+4. **[M] New weapon templates** (AFTER vehicles) — kill warhead-mixing, **HARD LIMIT 2 inherits/weapon**
+   (special >2 only if justified, bar TBD); then weapon-class pipeline + unit↔weapon binding. Maintainer
+   names them + I propose. See [[cameo-weapon-structure-rules]].
+5. **Weapons-hygiene batch** — folds into #4 (also fix the duplicate `227mm` weapon def in
+   `weapons/tiberiandawn.yaml` vs `weapons/missiles.yaml`).
+
+**ENGINE workflow (Blackrobe 2026-07-31):** `cameo-mod/engine` is a git **submodule → origin
+`Cameo-mod/OpenRA`**, whose **main branch is `cameo-engine`**. Engine updates: branch off `cameo-engine`;
+**MIRROR changes both ways** (`cameo-engine` ↔ `cameo-mod/engine`); rebuild before the boot gate. Memory:
+`cameo-engine-submodule`.
+
+---
+
 ## 🔴 BUG — campaign maps vanish from editor + mission selector
 
 - [x] **FIXED** (`42ba6f34c`, 2026-07-27): Root cause was `LockFaction: Random`
@@ -164,7 +194,10 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
 - [ ] NEW BUILDING: RA1 Soviets Tier-4 dummy (forward-command-center sprite,
   placeholder `ra1_soviets_experimentaltechcenter`) unlocking the heavy-infantry
   shocktrooper; ladder T3=tech center, T4=experimental. (Needs a real name.)
-- [ ] Rocket troopers: raise td_nod + td_gdi to 300 (weak at 200).
+- [x] Rocket troopers: raise td_nod + td_gdi to 300 (weak at 200). DONE
+  2026-07-30: changed ^E3 template Cost from 200 to 300 in
+  ContentPacks/TiberianDawn/Shared/yaml/templates.yaml. RA1 rocket
+  soldiers already at 300 via ^RA1AlliesAlliedRocketSoldier.
 - [ ] Heavy-sniper verifier warhead recipe (yuri_virus/ts_nod_toxintrooper):
   sniper+chaingun+railgun templates, equal warheads; virus upgrade 1 = +light
   chemical, upgrade 2 = +medium chemical; spawned gas = special K+0.25 (1.25×).
@@ -190,10 +223,13 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `^default.alien_mob` → `^default_alien_mob` mod-wide (76 files, 1183 replacements,
   commit `7f704c981`). `unit_upgrade` already fixed 2026-07-22. No dotted husk templates
   remain (all ground husks removed in prior commit). Boot-gate clean.
-- [ ] **Engine 910e50de migration** — the engine pin bump broke boot in places
-  the stricter parser now rejects. Fixed 2026-07-22: 4 template Description
-  indents (→ fluent keys), `unit_upgrade_template` (was `unit_upgrade.template`). Re-boot may
-  surface more; fix as found (master must always boot).
+- [x] **Engine 910e50de → 2cfb751694 → ba153be0c6 migration** — engine pin
+  updated to `ba153be0c63b66a9e33b4ebd1f262768ff949e13` (2026-07-30, fixes
+  cargo pips showing 0). The stricter parser issues from the earlier
+  `910e50de` bump were fixed 2026-07-22 (4 template Description indents →
+  fluent keys, `unit_upgrade_template` rename). Current engine is clean;
+  master boots. If a future engine bump surfaces new parser rejections,
+  fix as found (master must always boot).
 
 ## P0 — Crashes (always first)
 
@@ -399,10 +435,16 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `ÜbermenschLaser(E)` → `UbermenschLaser(E)`, assets git-mv'd. RULE in
   DESIGN §1: Ü→u, Ö→o, Ä→a, ß→ss in ids; display names keep umlauts.
 
-- [ ] **BUG: cameo tileset palettes** — wrong palettes for ALL smudges,
-  craters and building bibs on the cameo tileset. Effort: M (tileset
-  palette wiring investigation). Reported by maintainer; got lost from
-  an earlier queue — do not lose again.
+- [x] **BUG: cameo tileset palettes** — FIXED 2026-07-30: root cause was
+  that CAMEO's `terrain` and `staticterrain` palettes used `temperat.pal`
+  while all CAMEO tile templates use `Palette: ra_temperat` and all
+  bib/smudge sprites (`.tem` files) were designed for `ra_temperat.pal`.
+  The `temperat.pal` and `ra_temperat.pal` are different palette files,
+  causing color mismatches on smudges, craters, and building bibs.
+  Fix: changed both `PaletteFromFile@terrain-cameo` and
+  `PaletteFromFile@staticterrain-cameo` in `rules/palettes.yaml` from
+  `temperat.pal` to `ra_temperat.pal`. Reported by maintainer; was lost
+  from an earlier queue.
 - [x] **SM promotion grid (maintainer's design, image 2026-07-17)** —
   3 columns x 4 ranks implemented in `SchwarzerMond/yaml/promotions.yaml`.
   [Übermensch/Laser Tank(rpl Beetle)/Crystal Tank/Parzival] |
@@ -688,21 +730,23 @@ DESIGN formulas instead of silently "fixing".
 
 ### New orders 2026-07-19 (template-conformance + classic rifles)
 
-- [ ] **RULE + AUDIT: conyard power** — every construction yard takes
-  the template's 100 power; local overrides (TS Nod at 0?) are
-  violations. Review ALL conyard types; fix to template value.
-- [ ] **RULE + AUDIT: icon offsets** — when an image's Defaults defines
-  an Offset, its `icon:` sequence MUST set Offset: 0,0 (Terran command
-  center MCV icon rides too high). Check every icon in every sequence.
+- [x] **RULE + AUDIT: conyard power** — VERIFIED 2026-07-30:
+  `audit_template_conformance.py` T1 reports 0 findings. All conyards
+  already use the template's 100 power. No overrides found.
+- [x] **RULE + AUDIT: icon offsets** — VERIFIED 2026-07-30:
+  `audit_template_conformance.py` T2 reports 0 blocking findings.
+  6 informational T2b items (D2k legacy + TS 0,0,25 Z-offset patterns)
+  flagged for maintainer visual pass — not violations.
 - [ ] **LAW: range bands** — every unit stays within ±10% of its class
   baseline range (scouts: 4500–5500 around 5000); lower edge = cheapest
   units, upper edge = most expensive. Applies to ALL templates.
-- [ ] **Classic rifles get unique characters (apply now)**: TD GDI/Nod
-  minigunners burst 4, RA1 Allies/Soviets rifle infantry burst 3, FP
-  multiplier compensation, cost stays 100 (LAW: original C&C factions
-  keep original prices for memorability; custom factions may deviate);
-  slightly different HP/range/damage/reload per variant, close to
-  current, each unique.
+- [x] **Classic rifles get unique characters** — DONE 2026-07-19 (Formula
+  v2 scout conversion): TD GDI/Nod minigunners burst 4, RA1 Allies/Soviets
+  rifle infantry burst 3, FP multiplier compensation, cost 100 from
+  templates. Each has unique HP/speed/range/burst-delays/FP-mult:
+  GDI (31k HP, 63 spd, 5499 rng, BD 3, FP 24), Nod (30k HP, 66 spd,
+  4609 rng, BD 2, FP 29), Allies (27k HP, 55 spd, 5500 rng, BD 4, FP 47),
+  Soviets (34k HP, 54 spd, 4668 rng, BD 5, FP 42). Verified 2026-07-30.
 
 ### ~~P0 — ENGINE PIN vs LOCAL ENGINE MISMATCH~~ RESOLVED 2026-07-19
 
@@ -827,6 +871,16 @@ pin revert (never committed). **RESOLVED: `make.cmd all` fetched b89ae60 and reb
   Taunts play at wave start, mid-wave (15-25s later), and final wave
   gets a third taunt. Lines reference faction lore, unit costs, memes,
   and internet culture. Database in maps/survival/generals.lua.**
+  (h) STARTING DEFENSES — IMPLEMENTED 2026-07-31: human players now
+  receive faction-specific power sources (~500 power) and defensive
+  turrets in 4-fold symmetric rings around their base. Turrets are
+  strictly own-faction and exclude garrisonable bunkers; the placement
+  budget targets ~10k cost per player, using the most expensive turrets
+  first and falling back to cheaper ones until the target is met.
+  `FactionTurrets`, `DefenseCosts`, and `FactionPowerPlantData` are
+  defined in `mods/cameo/maps/survival_work/script.lua`. Heavy support
+  starting army is wired but left disabled (`HeavySupport = false`) until
+  a map option is added.
 
 ### P1a — FORMULA V2 CLASS 1: SCOUT INFANTRY (maintainer 2026-07-18)
 
@@ -1719,61 +1773,67 @@ All other factions have a single, thematically appropriate wall type.
 
 ## Starcraft Rank Decoration Fix
 
-- [ ] **SC-RANKS: Split alien rank decoration per Starcraft faction**
-  — commit `b95f5e7f3` applied `^AlienRankDecoration` to ALL Starcraft
-  factions (Terran, Protoss, Zerg). It should only apply to Zerg. Fix:
-  (a) Zerg actors keep `^AlienRankDecoration` with `alienrank` image.
-  (b) Create `^TerranRankDecoration` with a new `terranrank` spritesheet
-      (placeholder graphics OK) and wire to all Terran actors.
-  (c) Create `^ProtossRankDecoration` with a new `protossrank` spritesheet
-      (placeholder graphics OK) and wire to all Protoss actors.
-  Add new rank image sequences to `sequences/misc.yaml`.
-  Effort: M. See DESIGN.md §16.2 rank decoration table.
+- [x] **SC-RANKS: Split alien rank decoration per Starcraft faction**
+  — FIXED: commit `c3e3490f7` reverted the blanket `^AlienRankDecoration`,
+  commit `031c54d6b` created 3 separate decorations (`^ZergRankDecoration`
+  with `alienrank`, `^TerranRankDecoration` with `terranrank`,
+  `^ProtossRankDecoration` with `protossrank`). All use `alienranks.png`
+  as placeholder. 7 actors missing faction decorations fixed and
+  `audit_rank_decoration.py` reports 0 StarCraft issues.
 
 ## Weapon Suffix Standardization
 
-- [ ] **WEAPON-SUFFIX-ELITE: Migrate legacy E suffix to _elite**
-  — per DESIGN.md §16.3, ALL elite weapons must end with `_elite`.
-  The legacy capital `E` suffix (e.g. `BorisAKME`, `PrismTankChargeE`,
-  `PrismScatterE`, `RA2KirovBomb_nuclear_E`, `RA160mmE`, `MigMissiles_AA_ELITE`)
-  is deprecated. Rename all rank-elite gated weapons from `<base>E` to
-  `<base>_elite`. **Critical:** only rename weapons that are actually
-  gated by `RequiresCondition: rank-elite` — do NOT rename EMP weapons,
-  `PrismChargeE` (which is a prism charge variant, not elite), or other
-  weapons that merely end with E. Run `audit_weapon_suffixes.py` to
-  identify the exact set. Update all `Weapon:` references in armament
-  blocks and all `Inherits:` references to renamed weapons.
-  Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
-  Effort: M. See DESIGN.md §1 and §16.3.
+- [x] **WEAPON-SUFFIX-ELITE: Migrate legacy E suffix to _elite**
+  — DONE 2026-07-30: Renamed 117 elite-gated weapons from `<base>E` to
+  `<base>_elite` across 44 files (339 lines changed) via
+  `tools/rename_elite_weapons.py`. Handles compound suffixes: `AAE`→`AA_elite`,
+  `EMPE`→`EMP_elite`, `EResonance`→`_eliteResonance` + bounce variants.
+  Skipped `MigMissiles_AA_ELITE` (already contains ELITE) and 45 doctrine
+  variants (`_rad`/`_fire`/`_tesla`), upgrade combos, and gatling spin-ups
+  that are intentionally non-standard. Boot-gated: menu reached, 0 new
+  exception logs. Audit: X1 count dropped from 112+ to 45 (intentional
+  non-standard remnants).
+  **Follow-up** (2026-07-31): Renamed 17 remaining deprecated `E`-suffix
+  weapons missed by the first pass (33 replacements across 15 files) via
+  `tools/rename/rename_elite_E_suffix.py`. X4 dropped 19→2 (only `HE` =
+  High Explosive false positives remain). Boot-gated, O2=0, V3=0.
 
-- [ ] **WEAPON-SUFFIX-EMP: Standardize EMP weapon names to _EMP suffix**
-  — per DESIGN.md §1, weapons whose primary function is EMP disable
-  must append `_EMP`. Current EMP weapons use inconsistent naming:
-  `SteelEmpBomb`, `TSEMPZapWeapon`, `TSEMPMine`, `TSMobileEMP`,
-  `TSCABALEMPDisable.anim`, `CorsairEMP`, `ScienceVesselEMP`,
-  `PortaTeslaEMP`, `TTankZapEMP`, `TeslaZapemp`, `edenEMP`,
-  `plymouthEMP`, `DREMPDevice`, `IxianEmpBomb`, `CHEMPBomb`,
-  `SUSAMLRSEMP`, `SUSAEMPMissileDefenderAG`, etc. Rename to
-  `<actor_prefix>_<descriptive>_EMP` pattern. **Do NOT confuse EMP
-  weapons with elite weapons** — the previous bulk rename (reverted)
-  made this mistake. EMP weapons are never gated by `rank-elite`.
-  Run `audit_weapon_suffixes.py` X2 section for the full list.
-  Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
-  Effort: M. See DESIGN.md §1.
+- [x] **WEAPON-SUFFIX-EMP: Standardize EMP weapon names to _EMP suffix**
+  — DONE 2026-07-31: Renamed 62 EMP weapons across 44 files (179 lines
+  changed) via `tools/rename_emp_weapons.py`. Handles: EMP suffix ->
+  _EMP, mid-name EMP -> _EMP_, compound EMPAA -> _EMP_AA, EMPulse ->
+  _EMP_Pulse, ArcTeslaFragment sub-variants. Case-insensitive global
+  replacement catches Weapon:, Weapons: list entries, and Inherits:
+  references. Skipped DREMPDeviceSound (audio VoiceSet) and EMPGrenade
+  (EMP is prefix). Boot-gated: menu reached, 0 new exception logs.
 
-- [ ] **WEAPON-SUFFIX-AA: Standardize anti-air weapon names to _AA suffix**
-  — per DESIGN.md §1, weapons whose `ValidTargets` includes only `Air`
-  must append `_AA`. Current AA weapons use inconsistent naming:
-  `SWLaserJetpackAA` (already correct), `TSGrenadeAA` (already correct),
-  but many others like `SWAWingGunAA`, `SWXWingGunAA`, `DTMissileCrawlerAA`,
-  `SCUDAA`, `ZToughMissileAA`, `FlakbusAA`, `SCTyrAA`, `SCDevourerAA`,
-  `ManifoldMGAA`, `SUSAGladiatorAA`, `SUSAAdvPatriotMissAA`, etc. that
-  already use `AA` but not `_AA` (missing underscore). Rename to use
-  `_AA` with underscore separator. Run `audit_weapon_suffixes.py` X3
-  section for the full list. Exclude dual-purpose weapons (those that
-  also target Ground/Water) and weapons with legacy AA keywords (Flak,
-  SAM, Interceptor, Patriot) from the rename.
-  Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
+- [x] **WEAPON-SUFFIX-AA: Standardize anti-air weapon names to _AA suffix**
+  (2026-07-31) — per corrected DESIGN.md §1 rule: `_AA` marks the
+  air-only sibling of a **dual-weapon actor** (an actor/template that
+  equips two separate weapons via different `Armament` traits — one
+  ground-capable, one air-only — e.g. an Anti-Air Tank). Standalone
+  AA-only weapons with no ground-capable sibling on the same actor (SAM
+  Sites, etc.) are intentionally excluded, as are single weapons whose
+  own `ValidTargets` already covers both Ground and Air.
+  **Renamed 111 weapons** via `tools/rename_aa_weapons.py`
+  (structurally-scoped exact-token replacement — top-level def key,
+  `*Weapon:`/`*Weapons:` fields, indexed superweapon lists,
+  block-context-gated `Inherits:` — never a blind substring match).
+  Verified: `audit_weapon_suffixes.py` X3 = 0, `audit_orphans.py`
+  dangling weapon refs = 0, `audit_inherits.py` V3 dangling = 0, rename
+  script is idempotent (second run finds nothing to do).
+  **Bugs found/fixed during this task** (see `docs/LESSONS_LEARNED.md`):
+  an earlier draft of the rename script did a blind file-wide
+  word-boundary substitution of bare weapon names, corrupting unrelated
+  Tooltip/Name/RequiresCondition/Prerequisite text and comments across
+  ~30 files (reverted via `git reset --hard` before merge, never
+  pushed); `AA_LEGACY_KEYWORDS` including bare `"aa"` silently excluded
+  every weapon that already contained "AA" without an underscore;
+  identical names reused across actor/weapon/sequence namespaces (e.g.
+  `sow_mech_avenger`, `d2k_aircraft_eater`) required block-type gating
+  before renaming `Inherits:` or top-level definition keys; many
+  weapons declare `ValidTargets` only on a `^Template` ancestor,
+  requiring Inherits-chain resolution.
   Effort: M. See DESIGN.md §1.
 
 ## Long-term goals

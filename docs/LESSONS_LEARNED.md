@@ -11,13 +11,14 @@ This is the central, repository-owned record of hard-won lessons, safe defaults,
 **The canonical reading order is defined in `docs/README.md`.** The list below
 is provided for convenience; if it disagrees with README.md, README.md wins.
 
-1. `docs/LESSONS_LEARNED.md` (this file) — safe defaults and pitfalls.
-2. `docs/AGENT_WORKSPACE.md` — source-of-truth map, operating sequence, incident protocol, commit gate.
-3. `docs/PROJECT_CONTEXT.md` — short project orientation and current safety focus.
-4. `docs/DESIGN.md` — binding rules and conventions (read the relevant sections, especially before modifying YAML, assets, naming, weapons, balance, or descriptions).
-5. `docs/design/ROADMAP.md` — current work queue and P0 items.
-6. `docs/Cameo_Knowledge_Base_Manual.md` — engine and custom-trait reference, as needed.
-7. `docs/audit/SUMMARY.md` — known issue classes and current audit status.
+1. `CLAUDE.md` (repo root) — project instructions, loaded every session.
+2. `docs/LESSONS_LEARNED.md` (this file) — safe defaults and pitfalls.
+3. `docs/AGENT_WORKSPACE.md` — source-of-truth map, operating sequence, incident protocol, commit gate.
+4. `docs/PROJECT_CONTEXT.md` — short project orientation and current safety focus.
+5. `docs/DESIGN.md` — binding rules and conventions (read the relevant sections, especially before modifying YAML, assets, naming, weapons, balance, or descriptions).
+6. `docs/design/ROADMAP.md` — current work queue and P0 items.
+7. `docs/Cameo_Knowledge_Base_Manual.md` — engine and custom-trait reference, as needed.
+8. `docs/audit/SUMMARY.md` — known issue classes and current audit status.
 
 Do not modify rules, assets, or balance numbers until these documents are in context. When this document and `DESIGN.md` conflict with code or old notes, the repository documents win unless an audit baseline explicitly defers the fix.
 
@@ -32,6 +33,8 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
 - [YAML lint cleanup header-removal bug (2026-07-24)](#yaml-lint-cleanup-header-removal-bug-2026-07-24)
 - [Superweapon documentation audit (2026-07-25)](#superweapon-documentation-audit-2026-07-25)
+- [Engine update pipeline and Smart App Control findings (2026-07-30, updated with deep research)](#engine-update-pipeline-and-smart-app-control-findings-2026-07-30-updated-with-deep-research)
+- [Loose-extracted .oramap maps must always be repacked before finishing a task (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
 
 ---
 
@@ -285,3 +288,102 @@ SpeedMultiplier@myupgrade:
 - **WIP faction superweapons exist in `rules/` YAML**: Warzone 2100, Worms, Win98, Warcraft 1, and WH40K all have superweapon traits in `rules/*.yaml` (not yet migrated to ContentPacks). These should be documented in FACTIONS.md only when the factions become active.
 - **Outpost 2 superweapon is in `rules/outpost2.yaml`, not ContentPacks**: The Supernova Missile uses `NukePower` with `supernova_missile_super` weapon, charge 9000, on `EDEN_OBSERVATORY` and `PLYMOUTH_OBSERVATORY`. FACTIONS.md was already correct for this.
 - **Audit raw data location**: `docs/audit/latest/superweapon_audit.yaml` contains the full cross-reference with all primary/secondary superweapons, support powers, critical findings, and WIP faction discoveries.
+
+### Engine update pipeline and Smart App Control findings (2026-07-30, updated with deep research)
+
+#### The canonical engine update pipeline (binding, uniform process)
+
+The engine lives in TWO places that must stay in sync. Follow these steps IN ORDER for every engine change:
+
+1. **Edit** engine C# source only in the local dev clone of the engine repository (the `cameo-engine` clone of `https://github.com/cameo-mod/OpenRA`, branch `cameo-engine`).
+2. **Commit and push** to `origin/cameo-engine`. Check `git status` for stray entries before committing (see the nested-clone pitfall below).
+3. **Get the full commit hash** with `git rev-parse cameo-engine` — never hand-type or truncate/pad a hash.
+4. **Update `mod.config`** in the mod repository: set `ENGINE_VERSION="<full-40-char-hash>"`. The engine pin lives in `mod.config`, NOT `mod.yaml`.
+5. **Run `make all`** (Windows: `make.cmd all`). Because `engine/VERSION` no longer matches, the SDK deletes `engine/`, downloads the source zip for the pinned commit from GitHub, and rebuilds everything.
+6. **Verify**: `engine/VERSION` must contain the new hash; the build must have 0 errors.
+7. **Boot-gate with `launch-game.cmd`** before committing the `mod.config` change (see AGENT_WORKSPACE.md git rules). Recreate any custom `engine/glsl/` shaders after the fetch (they are wiped).
+8. **Commit `mod.config`** together with the change's docs updates.
+
+Key facts verified 2026-07-30:
+
+- `fetch-engine.sh` downloads a GitHub **source** zipball (never pre-built binaries) and stamps `engine/VERSION`. All `engine/bin/*.dll` files are always locally compiled and unsigned.
+- Building ONLY `OpenRA.Mods.CA.csproj` still touches `engine/bin/OpenRA.dll` (project references + shared output dir). There is no build scoping that avoids rewriting engine binaries.
+- GitHub zipballs do NOT include submodule/gitlink content — a gitlink in the engine repo appears as an empty folder in the fetched `engine/` copy.
+
+#### Nested-clone gitlink pitfall (2026-07-30)
+
+- Commits `bd15085df2`..`15797c874b` on `cameo-engine` accidentally contained an orphaned gitlink `OpenRA` (mode 160000, no `.gitmodules` entry) — a full nested clone of the same repo had been created inside the working tree and swept up by a broad `git add`. Removed in `2cfb751694`.
+- **Never run `git clone` inside a repository working tree.** Before committing, check `git status` for unexpected single-name directory entries; `git ls-files -s <name>` showing mode `160000` without a `.gitmodules` entry is an accidental gitlink.
+
+#### Smart App Control and locally built engine binaries (2026-07-30, updated with deep research)
+
+**What SAC is**: Windows 11 Smart App Control (SAC) is a WDAC-based feature that blocks untrusted binaries. It trusts binaries that are either (a) signed by a CA in Microsoft's Trusted Root Program, or (b) have positive cloud reputation via the Intelligent Security Graph (ISG). Unsigned binaries with no cloud reputation are blocked.
+
+**Why local builds get blocked**: All `engine/bin/*.dll` files are locally compiled and unsigned. Every compile embeds a fresh MVID (Module Version ID, a GUID), producing a new file hash even if the source code is identical. The ISG can never have cloud reputation for a just-built binary hash. **This is independent of any code change** (proven via `git stash` + clean `make all` + launch → identical block).
+
+**The block mechanism (verified via Code Integrity event logs)**:
+- SAC's WDAC policy ID is `{0283ac0f-fff1-49ae-ada1-8a933130cad6}` (`VerifiedAndReputableDesktop`).
+- Block events: `Microsoft-Windows-CodeIntegrity/Operational` Event ID 3033 (audit) + 3077 (enforcement block), reason "did not meet the Enterprise signing level requirements".
+- The ISG cloud verdict is **asynchronous**: the first launch of a fresh build may succeed because the verdict hasn't arrived yet. Subsequent launches are blocked after the ISG returns "unknown" for the new hash.
+- There is NO per-app exception, registry allowlist, or `Unblock-File` workaround. MOTW removal does not help — SAC is reputation-based, not MOTW-based.
+
+**The EA (Extended Attribute) cache mechanism (key discovery 2026-07-30)**:
+- WDAC uses NTFS Extended Attributes (EAs) to cache trust decisions on binaries. When a binary passes WDAC evaluation, an EA (120 bytes) is written to the file. On subsequent launches, WDAC checks the EA and reuses the cached result — **no cloud query, no Code Integrity event, no block**.
+- The ISG (part of Microsoft Defender) runs **independently of SAC's WDAC policy**. When SAC is off, Defender's ISG can still evaluate binaries and write trust EAs. When SAC is re-enabled, WDAC finds the cached EAs and allows the binary without re-evaluating.
+- **Verified on this machine**: SAC was briefly turned off → game launched once → ISG wrote EAs to all loaded DLLs → SAC re-enabled → game launches successfully with ZERO Code Integrity events (cache hits are not logged). DLLs not loaded during gameplay (`OpenRA.Server.dll`, `OpenRA.Utility.dll`) have 0 bytes EAs and would still be blocked if loaded.
+- **EA persistence**: EAs can be invalidated by (1) reboot if the SAC policy has `Enabled:Invalidate EAs on Reboot`, (2) ISG periodic re-query returning "unknown", or (3) recompilation (new MVID = new hash = no cached EA).
+
+**SAC registry values** (kernel-protected, cannot be edited while Windows is running):
+- `HKLM\SYSTEM\CurrentControlSet\Control\CI\Policy\VerifiedAndReputablePolicyState`: 0 = Off, 1 = Enforcement, 2 = Evaluation.
+- `HKLM\SYSTEM\CurrentControlSet\Control\CI\Protected\VerifiedAndReputablePolicyStateMinValueSeen`: tracks the minimum value ever set (prevents downgrade attacks). Must also be set when changing modes via WinRE.
+- The `CI\Policy` key is kernel-protected — even Administrator cannot modify it while Windows is running. Use WinRE (see below) or Windows Settings.
+
+**Four options for developers (corrected from earlier "only three")**:
+
+1. **EA cache workaround** (current, accidental): Turn SAC off → launch game once (ISG writes EAs) → re-enable SAC. EAs persist until invalidated. **Not reliable** — breaks on recompilation and possibly on reboot. Use only as a short-term stopgap.
+
+2. **SAC Evaluation mode** (Microsoft-documented testing mode): SAC stays active, evaluates all binaries, logs audit events to Event Viewer, but **does not block**. This is NOT "turning off SAC" — the evaluation engine still runs. Set via WinRE (see below). Can switch back to Enforcement via Windows Settings. **Recommended for development.**
+
+3. **VM / SAC-free machine**: Develop and boot-gate on a machine where SAC is not enforcing. SAC is off by default in Windows Sandbox and fresh VMs.
+
+4. **Code signing**: Sign builds with a certificate from a CA in Microsoft's Trusted Root Program (e.g., Azure Trusted Signing, ~$9.99/month). Signed binaries pass SAC even in Enforcement mode, permanently. This is the only permanent solution for Enforcement mode.
+
+**How to set SAC to Evaluation mode via WinRE** (the `CI\Policy` key is kernel-protected, so WinRE is required):
+1. Settings > System > Recovery > "Restart now" (Advanced startup).
+2. Troubleshoot > Advanced options > Command Prompt.
+3. Run `regedit`, click HKEY_LOCAL_MACHINE, then File > Load Hive.
+4. Browse to `C:\Windows\System32\config\SYSTEM`, name it `OFFLINE`.
+5. Set `OFFLINE\ControlSet001\Control\CI\Policy\VerifiedAndReputablePolicyState` to `2`.
+6. Set `OFFLINE\ControlSet001\Control\CI\Protected\VerifiedAndReputablePolicyStateMinValueSeen` to `2`.
+7. Select `OFFLINE` node, File > Unload Hive (critical — do not skip).
+8. Close regedit, type `exit`, reboot.
+9. Verify: `Get-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\CI\Policy" -Name VerifiedAndReputablePolicyState` should show `2`.
+10. To return to Enforcement: Windows Settings > Privacy & security > Windows Security > App & browser control > Smart App Control settings > On.
+
+**Boot-gate implication**: With the EA cache workaround or Evaluation mode, local boot-gating IS possible. If SAC is in Enforcement mode AND the EAs have been invalidated (e.g., after a rebuild), the boot-gate will fail. In that case, record the SAC state explicitly in the commit/PR description, use one of the four options above to enable testing, and do NOT silently skip or claim the boot-gate passed.
+
+## Bulk YAML rename scripts: safety lessons (2026-07-31)
+
+Applies to any script that renames a weapon/actor/condition identifier across the whole mod tree (see `tools/rename_aa_weapons.py`, `tools/rename_emp_weapons.py`).
+
+- **Never do a blind file-wide word-boundary substitution of a bare identifier.** An early draft renamed `Dragon` → `Dragon_AA` via `re.sub(r'\bDragon\b', ...)` across every YAML file. This also mangled unrelated `Tooltip: Name: Way of the Dragon`, a Warcraft2 `Dragon Roost` building name, and a commented-out `# Image: DRAGON` sprite reference — none of which are weapon references. The same bug hit `Spore` (a Zerg building's `RequiresCondition`/`Armament Name:` field coincidentally shares the literal string with the weapon name). **Root cause of the corruption class**: identifiers in this codebase are reused across completely different namespaces (weapon names, condition names, armament trait `Name:` identifiers, tooltip display text, sprite/image names), so any substring or bare-identifier match is unsafe. Always match on the **exact YAML field** (`Weapon:`, `Weapons:`, `Inherits:`, the top-level definition key) with an **exact full-token value comparison**, never a regex substring/word-boundary match against arbitrary line content.
+- **The same literal name can be a weapon, an actor, AND a sequence.** E.g. `sow_mech_avenger` is simultaneously an actor id (`rules/sow.yaml`), a weapon (`weapons/sow.yaml`), and a sequence (`sequences/sow.yaml`); `d2k_aircraft_eater` is both a weapon and a (commented-out) actor + sequence. Renaming the top-level definition key, or an `Inherits:` value, requires first classifying **which specific block** the identifier belongs to (`is_weapon_definition_body`-style marker-key heuristics) — do not rename just because the name string matches; verify the containing block is actually a weapon.
+- **Comments use `#` BEFORE the indentation tabs in this codebase** (e.g. `# \t\tWeapon: Foo`), not after. A regex anchored `^\t+#` will silently skip every commented-out field, which then goes stale (references the old, now-nonexistent name) if the comment is ever restored. Match `^(#\s*)?\t+` (or the reverse order) to catch both stylings. Per explicit user instruction: commented-out weapon/actor definitions and their internal `Weapon:`/`Inherits:` references SHOULD be kept in sync with a rename (so re-enabling old commented-out content doesn't silently reference a stale name) — but a comment that merely *mentions* a name in prose or an unrelated field (`# Image: DRAGON`, `# Class: d2k_aircraft_eater`) must NOT be touched.
+- **`ValidTargets` is frequently declared only on a `^Template` ancestor**, not on the concrete weapon (e.g. `TSMechRailgun: Inherits: ^RailgunWeapon` with no direct `ValidTargets:` line). Any audit/rename logic that reasons about a weapon's targets must resolve `ValidTargets` through the full `Inherits:` chain, not just read the weapon's own body. When even the chain resolves to nothing (some helper/sub-weapons truly never declare it), treat it as **unknown**, not as a default — guessing "ground" or "air" for unresolved cases risks false positives; a missed rename (false negative) is the safe failure direction.
+- **Duplicate weapon definitions with the same name exist across legacy and migrated files** (e.g. `MammothTusk` differs between `weapons/missiles.yaml` and `ContentPacks/RedAlert/Shared/yaml/weapons.yaml`). A `name -> data` dict keyed purely by weapon name is not reliable when multiple non-identical bodies share a name; last-write-wins depends on filesystem walk order. This didn't corrupt the AA-suffix task specifically (both duplicate bodies happened to be dual-purpose and excluded either way), but it's a latent correctness risk for any future name-keyed weapon analysis. Flagged as legacy-file cleanup debt, not fixed in this pass.
+- **A naming-convention exclusion keyword list must not include a substring of the very marker it's trying to detect.** `AA_LEGACY_KEYWORDS` originally included the bare string `"aa"` to avoid re-flagging compliant names — but that silently excluded every weapon that already contained "AA" without the required underscore (`SWAWingGunAA`, `RA2HoverMissileAA_elite`), which is exactly the case the rule needs to catch and fix. Use precise legacy keywords (`flak`, `sam`, `interceptor`, `patriot`, ...) instead of a substring that overlaps the target pattern.
+- **The actual `_AA` suffix rule is about paired weapons on one actor, not a weapon's own `ValidTargets`.** Corrected DESIGN.md §1: `_AA` marks the air-only sibling of a **dual-weapon actor/template** — one `Armament` trait equips a ground-capable weapon, another equips an air-only weapon (typically `Inherits:` from the ground one), e.g. an Anti-Air Tank. A standalone AA-only weapon on a single-weapon actor (a SAM Site, a dedicated AA turret) does **not** get `_AA` — there's nothing to disambiguate it from. A single weapon whose own `ValidTargets` already spans both `Ground` and `Air` (one combined weapon, not two) also doesn't get `_AA`. Verify by finding actors/templates with ≥2 `Armament` traits where at least one referenced weapon is air-only and at least one other is ground-capable — only the air-only one(s) qualify. This is the same "dual-weapon unit" pattern already documented in [Dual-weapon units](#dual-weapon-units) for balance purposes, applied here to naming.
+- **After any bulk structural rename, verify with the existing audits, not just eyeballing a diff sample**: `tools/audit/audit_orphans.py` (dangling weapon refs must stay 0), `tools/audit/audit_inherits.py` (dangling inherit targets must stay 0), and re-running the rename script itself should report nothing left to do (idempotency check). A clean `git diff --stat` with exactly N insertions / N deletions (1:1 line replacement, no stray additions) is also a fast sanity signal that the script only ever replaced tokens in place.
+
+## Loose-extracted .oramap maps must always be repacked before finishing a task (2026-07-31)
+
+`.oramap` files are zip archives; editing a map means extracting it to a loose folder, editing `map.yaml`/`rules.yaml`/`*.lua`/etc., then **repacking it back into the same `.oramap`**. Found `mods/cameo/maps/survival_extracted/` sitting untracked in the tree with real, dated design edits in `script.lua` (2026-07-29: `RandomEventUnitScale` halving chaos/random-event spawn counts, simplified `SpawnAIBase` to MCV-only) that were **never repacked** — `survival.oramap` in the tree was a stale pre-2026-07-29 build the whole time, meaning the actual shipped map silently lacked the intended difficulty tuning.
+
+- **Always repack and delete the extraction folder in the same session as the edit.** Never leave a loose `*_extracted/` (or similarly named) folder next to its `.oramap` — OpenRA does not merge them; whichever one the engine picks up (the `.oramap`, per the packaging docs in `Cameo_Knowledge_Base_Manual.md` §"Package the map as an `.oramap`") is the only one that's actually live in-game, silently shadowing any edits left in the loose folder.
+- **Use `tools/repack-oramap.ps1 -dir <extracted_dir> -oramap <target.oramap>`, then always validate with `./utility.cmd cameo --check-yaml <absolute path to .oramap>`** before trusting the repack. Compare the error/warning counts against a `check-yaml` run on the untouched original — identical counts confirm no regression; a new `"Not a valid map"` / `InvalidDataException` means the repack corrupted the zip structure.
+- **Bug fixed in `tools/repack-oramap.ps1`**: it computed each zip entry's relative path as `$f.FullName.Substring($dir.Length + 1)`, but `Get-ChildItem`'s `.FullName` is always an absolute path while `$dir` was whatever string the caller passed in. Calling the script with a **relative** `-dir` (e.g. `mods/cameo/maps/survival_extracted` instead of the full `C:\...\survival_extracted`) silently produced zip entries with a garbage prefix baked in (e.g. `/Cameo-mod/mods/cameo/maps/survival_extracted/script.lua` instead of `script.lua`), which OpenRA's `Map` loader rejects outright as `"Not a valid map"` with no indication of why. Fixed by resolving both `-dir` and `-oramap` to absolute paths via `Resolve-Path` before computing the substring. **Always pass either path style now — the script normalizes internally — but still validate with `check-yaml` after every repack**, since a silent zip-entry corruption has no compile-time signal.
+
+## OpenRA Lua `Map` API: there is no `Map.Contains` (2026-07-31)
+
+The `Map` global exposed to map Lua does **not** define a `Contains` method. Calling `Map.Contains(pos)` raises `Fatal Lua Error: Table 'Map' does not define a property 'Contains'`. To validate whether a `CPos` is inside the map, check against `Map.TopLeft`/`Map.BottomRight` world positions, or simply wrap `Actor.Create` in `pcall()` and let a position outside the visible map fail safely. In `mods/cameo/maps/survival_work/script.lua`, `SpawnBuildingForPlayer` now relies on `pcall(Actor.Create, ...)` to skip off-map cells instead of a non-existent `Map.Contains` guard.
+- **A second, unrelated loose/packaged duplicate was found and left for maintainer review**: `mods/cameo/maps/hegemony-or-survival/` (a tracked loose folder, committed in `4877a61b7`) sits alongside `mods/cameo/maps/hegemony-or-survival.oramap` with the same `Title:` and identical `map.bin`, differing only in `MapFormat` (11 packaged vs. 12 loose) and a regenerated `map.png` thumbnail — consistent with an incidental map-editor re-save rather than deliberate content edits. Unlike the `survival` case there was no design-intent comment or dated diff to justify carrying the edit forward, so this was **not** unilaterally resolved; flagged for the maintainer to decide which copy is canonical and delete the other (or confirm both are intentionally tracked, e.g. as an editable source + shippable package pair).

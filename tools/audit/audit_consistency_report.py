@@ -183,11 +183,11 @@ check_file_contains("docs/MASTER_REPORT.md", "_upgraded",
     "14c: MASTER_REPORT variant _upgraded")
 
 # 15. backlog_weapon_rename.md has new variant markers
-check_file_contains("docs/backlog_weapon_rename.md",
+check_file_contains("docs/history/backlog_weapon_rename.md",
     "_EMP", "15a: backlog_weapon_rename _EMP")
-check_file_contains("docs/backlog_weapon_rename.md",
+check_file_contains("docs/history/backlog_weapon_rename.md",
     "_AA", "15b: backlog_weapon_rename _AA")
-check_file_contains("docs/backlog_weapon_rename.md",
+check_file_contains("docs/history/backlog_weapon_rename.md",
     "_upgraded", "15c: backlog_weapon_rename _upgraded")
 
 # 16. audit README.md has the newer audit scripts
@@ -214,9 +214,9 @@ check_file_contains("tools/audit/run_all.sh",
 
 # ── Category 6: Cross-document consistency invariants ────────────────
 
-# Suffix ordering: _AA_EMP_elite (capability tags before rank tier)
-check_file_contains("docs/DESIGN.md", "_AA_EMP_elite",
-    "C1: DESIGN.md suffix ordering _AA_EMP_elite")
+# Suffix ordering: _EMP_AA_elite (EMP before AA, elite always last)
+check_file_contains("docs/DESIGN.md", "_EMP_AA_elite",
+    "C1: DESIGN.md suffix ordering _EMP_AA_elite")
 
 # ra1_soviets (plural) in DESIGN.md
 check_file_contains("docs/DESIGN.md", "ra1_soviets",

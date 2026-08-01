@@ -573,11 +573,11 @@ ra1_soviets_shocktrooper:
 		LocalOffset: 427,0,341
 		RequiresCondition: !ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade1:
-		Weapon: PortaTeslaEMP
+		Weapon: PortaTesla_EMP
 		LocalOffset: 427,0,341
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade2:
-		Weapon: PortaTeslaEMPArc
+		Weapon: PortaTeslaArc_EMP
 		LocalOffset: 427,0,341
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	Armament@GARRISONED:
@@ -586,11 +586,11 @@ ra1_soviets_shocktrooper:
 		RequiresCondition: !ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade1GARRISONED:
 		Name: garrisoned
-		Weapon: PortaTeslaEMP
+		Weapon: PortaTesla_EMP
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade2GARRISONED:
 		Name: garrisoned
-		Weapon: PortaTeslaEMPArc
+		Weapon: PortaTeslaArc_EMP
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	TakeCover:
 		ProneOffset: 227,0,-245

@@ -91,6 +91,25 @@ namespace OpenRA.Mods.CA
 			return owner.World.Map.Rules.Actors.Where(k => names.Contains(k.Key)).Random(owner.World.LocalRandom).Value;
 		}
 
+		// Common-name sets (e.g. HarvesterTypes) are shared across every faction in the mod, so a
+		// plain random pick from `names` is overwhelmingly likely to select a type the owner can't
+		// currently produce (wrong faction), silently failing the production request. Restrict the
+		// pick to types that are actually buildable by one of the owner's current production queues.
+		public static ActorInfo GetBuildableInfoByCommonName(HashSet<string> names, Player owner)
+		{
+			var buildable = owner.World.ActorsWithTrait<ProductionQueue>()
+				.Where(a => a.Actor.Owner == owner && a.Trait.Enabled)
+				.SelectMany(a => a.Trait.BuildableItems())
+				.Where(a => names.Contains(a.Name))
+				.Distinct()
+				.ToList();
+
+			if (buildable.Count > 0)
+				return buildable.Random(owner.World.LocalRandom);
+
+			return GetInfoByCommonName(names, owner);
+		}
+
 		public static void BotDebug(string s, params object[] args)
 		{
 			if (Game.Settings.Debug.BotDebug)

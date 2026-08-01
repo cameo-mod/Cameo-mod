@@ -1,6 +1,6 @@
 # Weapon uniqueness (DESIGN.md §10 — faction identity)
 
-damaging armament weapons checked: 1394; W1 same-faction 34, W2 cross-faction 34, W3 carrier-only 101
+damaging armament weapons checked: 1400; W1 same-faction 34, W2 cross-faction 34, W3 carrier-only 101
 
 
 ## W1 — same faction, distinct actors, identical weapon (34)
@@ -10,28 +10,28 @@ damaging armament weapons checked: 1394; W1 same-faction 34, W2 cross-faction 34
 | asianflamerturret | asianalliance | asianalliance_asianflametrooper, asianalliance_asiansentryflamer |
 | asianrailtank2 | asianalliance | asianalliance_heavyrailguntank, asianalliance_railguntank |
 | bcyamatocannon | terran | terran_battlecruiser, terran_phobos |
-| cabalengineerrepairbeam | cabal | cabal_engineer, cabal_repair_drone |
+| cabalengineerrepairbeam | cabal | cabal_engineer, cabal_repairdrone |
 | d2k_apc_rocket | ordos | ordos_apc, ordos_dustdrone |
 | d2k_apc_rocket_aa | ordos | ordos_banshee, ordos_laboratorycrawler |
 | d2k_bazooka2 | harkonnen, ixian, ordos | heavy_rocket_raider.ixian, rocket_raider.ixian |
-| d2k_rocket_trooper | harkonnen, ixian, ordos | ixian_rockettrooper, ordos_rockettrooper, trooper |
+| d2k_rocket_trooper | ixian, ordos | ixian_rockettrooper, ordos_rockettrooper, trooper |
 | futuremicrotorpedos | futuretech | futuretech_phalanxwip, futuretech_riptideacv |
 | incendiaryyakchaingun | ra1_soviets | ra1_soviets_nuclearyak, ra1_soviets_yakscoutplane |
 | jimraynormachinegun | terran | terran_jimraynor, terran_pythean |
 | laboratory_bioball | ordos | ordos_banshee, ordos_laboratorycrawler |
-| light_inf_lmg | harkonnen, ixian, ordos | ixian_lightinfantry, light_inf, ordos_lightinfantry |
-| light_inf_lmg_upgrade | harkonnen, ixian | ixian_lightinfantry, light_inf |
+| light_inf_lmg | ixian, ordos | ixian_lightinfantry, light_inf, ordos_lightinfantry |
+| light_inf_lmg_upgrade | ixian | ixian_lightinfantry, light_inf |
 | medicheal | terran | terran_medic, terran_medivac |
 | naxgrillearty | naxis | naxis_grille, naxis_naxibunker, naxis_shoekarn |
 | naxiantitankcannon | naxis | naxis_antitankcannon, naxis_oldtank |
 | naxijadgdestroyer | naxis | naxis_imperialturbotank, naxis_jagdpanzer |
 | naxmauscannon | naxis | naxis_maus, naxis_nokana |
-| naxplanegune | naxis | naxis_bf109, naxis_me262 |
-| naxquadcannonaae | naxis | naxis_naxibunker, naxis_ratte |
+| naxplanegun_elite | naxis | naxis_bf109, naxis_me262 |
+| naxquadcannon_aa_elite | naxis | naxis_naxibunker, naxis_ratte |
 | pdlaserbike | td_nod | td_nod_chemicalattackbike, td_nod_reconbike |
 | rocketsra | ra1_soviets | ra1_allies_alliedrocketsoldier, ra1_soviets_rocketsoldier |
-| spore | zerg | zerg_creepcolony, zerg_creepcolony_2, zerg_sporecolony, zerg_sunkencolony_2 |
-| tentacle | zerg | zerg_creepcolony, zerg_creepcolony_2, zerg_sporecolony, zerg_sunkencolony_2 |
+| spore_aa | zerg | zerg_creepcolony, zerg_creepcolony_defense, zerg_sporecolony, zerg_sunkencolony_defense |
+| tentacle | zerg | zerg_creepcolony, zerg_creepcolony_defense, zerg_sporecolony, zerg_sunkencolony_defense |
 | tkmmedicheal | tkm | tkm_battlebus, tkm_medictruck |
 | wc2_tower_arrow | wc2_humans, wc2_orcs | wc2_humans_cannontower, wc2_humans_guardtower, wc2_humans_humanscouttower, wc2_orcs_cannontower, wc2_orcs_guardtower, wc2_orcs_orcwatchtower |
 | wc2arrowfire | wc2_humans | wc2_humans_elvenarcher, wc2_humans_elvenranger |
@@ -54,7 +54,7 @@ damaging armament weapons checked: 1394; W1 same-faction 34, W2 cross-faction 34
 | blackhawkcannon | 3 | latinsyndicate, ra2_allies, ra2_soviets | latinsyndicate_hindtransport, ra2_allies_nighthawk, ra2_soviets_transportkirov |
 | d2k_rocket_trooper | 3 | harkonnen, ixian, ordos | ixian_rockettrooper, ordos_rockettrooper, trooper |
 | light_inf_lmg | 3 | harkonnen, ixian, ordos | ixian_lightinfantry, light_inf, ordos_lightinfantry |
-| ra220mmrapid | 3 | ra2_allies, ra2_soviets, yuri | ra2_allies_battlefortress, ra2_allies_battlefortress_2, ra2_allies_battlefortress_3, ra2_soviets_warminer, yuri_slaveminer, yuri_slaveminer_2 |
+| ra220mmrapid | 3 | ra2_allies, ra2_soviets, yuri | ra2_allies_battlefortress, ra2_allies_battlefortress_chrono, ra2_allies_battlefortress_empty, ra2_soviets_warminer, yuri_slaveminer, yuri_slaveminer_deployed |
 | sealattach | 3 | futuretech, ra2_allies, tkm | futuretech_blackwidow, ra2_allies_seal, tkm_spetsnaz |
 | tsengineerpistol | 3 | forgotten, ts_gdi, ts_nod | forgotten_engineer, ts_gdi_engineer, ts_nod_engineer |
 | bigflamer | 2 | ra1_soviets, td_nod | ra1_soviets_gorynychtank, td_nod_flametank |
@@ -72,7 +72,7 @@ damaging armament weapons checked: 1394; W1 same-faction 34, W2 cross-faction 34
 | scvrepair | 2 | protoss, terran | protoss_analogue, terran_scv |
 | siegeenginecannon | 2 | wc2_humans, wc2_orcs | wc2_humans_siegeengine, wc2_orcs_siegeengine |
 | steeltwistermissiles | 2 | futuretech, steelconsortium | futuretech_twister, steelconsortium_twister |
-| steeltwistermissilese | 2 | futuretech, steelconsortium | futuretech_twister, steelconsortium_twister |
+| steeltwistermissiles_elite | 2 | futuretech, steelconsortium | futuretech_twister, steelconsortium_twister |
 | syndicatefireballlauncher | 2 | latinsyndicate, naxis | latinsyndicate_latinflametrooper, naxis_nokana |
 | td_gdi_commando_sniper | 2 | td_gdi, td_nod | td_gdi_commando, td_nod_commando |
 | ts_nod_mobilerepairvehicle | 2 | plymouth, ts_nod | plymouth_spider, ts_nod_mobilerepairvehicle |
@@ -96,31 +96,31 @@ damaging armament weapons checked: 1394; W1 same-faction 34, W2 cross-faction 34
 | ifvchronobeam | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | incendiarychaingun | ra1_soviets_hindattackhelicopter, ra1_soviets_kamovattackhelicopter |
 | latinbuggychaingun | latinsyndicate_raiderbuggy, latinsyndicate_tortugatank |
-| latinbuggychaingune | latinsyndicate_raiderbuggy, latinsyndicate_tortugatank |
+| latinbuggychaingun_elite | latinsyndicate_raiderbuggy, latinsyndicate_tortugatank |
 | latinbuggymg | latinsyndicate_raiderbuggy, latinsyndicate_tortugatank |
-| latinbuggymge | latinsyndicate_raiderbuggy, latinsyndicate_tortugatank |
-| latinbuggyrockete | latinsyndicate_raiderbuggy, naxis_nokana |
+| latinbuggymg_elite | latinsyndicate_raiderbuggy, latinsyndicate_tortugatank |
+| latinbuggyrocket_elite | latinsyndicate_raiderbuggy, naxis_nokana |
 | lightsniper | futuretech_salamanderifv, ra1_allies_alliedsniper, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | lunar_amplifiedbeetlelaser | schwarzermond_laserbeetle, schwarzermond_spacezeppelin |
-| lunar_amplifiedbeetlelaseraa | schwarzermond_laserbeetle, schwarzermond_spacezeppelin |
+| lunar_amplifiedbeetlelaser_aa | schwarzermond_laserbeetle, schwarzermond_spacezeppelin |
 | lunar_yellowbeetlelaser | schwarzermond_laserbeetle, schwarzermond_spacezeppelin |
-| lunar_yellowbeetlelaseraa | schwarzermond_laserbeetle, schwarzermond_spacezeppelin |
+| lunar_yellowbeetlelaser_aa | schwarzermond_laserbeetle, schwarzermond_spacezeppelin |
 | machinegunhumvee2 | td_gdi_assaultapc, td_gdi_humveemkii |
-| machinegunhumvee2aa | td_gdi_assaultapc, td_gdi_humveemkii |
+| machinegunhumvee2_aa | td_gdi_assaultapc, td_gdi_humveemkii |
 | machinegunhumvee2ap | td_gdi_assaultapc, td_gdi_humveemkii |
-| machinegunhumvee2apaa | td_gdi_assaultapc, td_gdi_humveemkii |
+| machinegunhumvee2ap_aa | td_gdi_assaultapc, td_gdi_humveemkii |
 | migmissiles | latinsyndicate_mig21, ra2_soviets_migbomber |
 | migmissiles_aa | latinsyndicate_mig21, ra2_soviets_migbomber |
 | migmissiles_aa_elite | latinsyndicate_mig21, ra2_soviets_migbomber |
-| migmissilese | latinsyndicate_mig21, ra2_soviets_migbomber |
-| naxgrilleartye | naxis_grille, schwarzermond_lunargrille |
-| naxibeetlelaseraae | schwarzermond_laserbeetle, schwarzermond_spacezeppelin |
-| naxibeetlelasere | schwarzermond_laserbeetle, schwarzermond_spacezeppelin |
+| migmissiles_elite | latinsyndicate_mig21, ra2_soviets_migbomber |
+| naxgrillearty_elite | naxis_grille, schwarzermond_lunargrille |
+| naxibeetlelaser_aa_elite | schwarzermond_laserbeetle, schwarzermond_spacezeppelin |
+| naxibeetlelaser_elite | schwarzermond_laserbeetle, schwarzermond_spacezeppelin |
 | naximp40laser | schwarzermond_noidharvester, schwarzermond_noidmgarmor |
-| naximp40lasere | schwarzermond_noidharvester, schwarzermond_noidmgarmor |
+| naximp40laser_elite | schwarzermond_noidharvester, schwarzermond_noidmgarmor |
 | naxquadcannon | naxis_transportzeppelin, wirbelwind.nax |
-| naxquadcannonaa | naxis_transportzeppelin, wirbelwind.nax |
-| naxquadcannone | naxis_transportzeppelin, wirbelwind.nax |
+| naxquadcannon_aa | naxis_transportzeppelin, wirbelwind.nax |
+| naxquadcannon_elite | naxis_transportzeppelin, wirbelwind.nax |
 | oiflamer | japan_exorcistoitank, japan_oitank |
 | oiplasmaflamer | japan_exorcistoitank, japan_oitank |
 | oismallcannon | japan_exorcistoitank, japan_oitank |
@@ -133,40 +133,40 @@ damaging armament weapons checked: 1394; W1 same-faction 34, W2 cross-faction 34
 | ra2doublepistolsifv | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | ra2flaktrackgun | ra2_soviets_flaktrack, ra2_soviets_seascorpion |
 | ra2gattlingmg1 | yuri_gatlingcannon, yuri_gatlingtank |
-| ra2gattlingmg1aa | yuri_gatlingcannon, yuri_gatlingtank |
+| ra2gattlingmg1_aa | yuri_gatlingcannon, yuri_gatlingtank |
 | ra2gattlingmg2 | yuri_gatlingcannon, yuri_gatlingtank |
-| ra2gattlingmg2aa | yuri_gatlingcannon, yuri_gatlingtank |
+| ra2gattlingmg2_aa | yuri_gatlingcannon, yuri_gatlingtank |
 | ra2gattlingmg3 | yuri_gatlingcannon, yuri_gatlingtank |
-| ra2gattlingmg3aa | yuri_gatlingcannon, yuri_gatlingtank |
+| ra2gattlingmg3_aa | yuri_gatlingcannon, yuri_gatlingtank |
 | ra2hovermissile | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
+| ra2hovermissile_aa | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
+| ra2hovermissile_aa_elite | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | ra2hovermissile_elite | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
-| ra2hovermissileaa | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
-| ra2hovermissileaa_elite | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | ra2miragegun | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair, ra2_allies_miragetank |
 | ra2multihovermissile | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
+| ra2multihovermissile_aa | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
+| ra2multihovermissile_aa_elite | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | ra2multihovermissile_elite | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
-| ra2multihovermissileaa | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
-| ra2multihovermissileaa_elite | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | ra2multithunderboltmissile | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
+| ra2multithunderboltmissile_aa | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
+| ra2multithunderboltmissile_aa_elite | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | ra2multithunderboltmissile_elite | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
-| ra2multithunderboltmissileaa | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
-| ra2multithunderboltmissileaa_elite | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | ra2radbeamweapon | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair, ra2_soviets_desolator |
 | ra2thunderboltmissile | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
+| ra2thunderboltmissile_aa | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
+| ra2thunderboltmissile_aa_elite | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | ra2thunderboltmissile_elite | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
-| ra2thunderboltmissileaa | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
-| ra2thunderboltmissileaa_elite | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | sandmarinetuskcryo | tkm_bigshiee, tkm_sandmarine |
 | sandmarinetuskfire | tkm_bigshiee, tkm_sandmarine |
 | sandmarinetusktwin | tkm_bigshiee, tkm_sandmarine |
 | steelinfrailgun | steelconsortium_defenderbot, steelconsortium_quantummissiletrooper |
-| steelinfrailgune | steelconsortium_defenderbot, steelconsortium_quantummissiletrooper |
-| steelinfrailgunemp | steelconsortium_defenderbot, steelconsortium_quantummissiletrooper |
-| steelinfrailgunempe | steelconsortium_defenderbot, steelconsortium_quantummissiletrooper |
+| steelinfrailgun_elite | steelconsortium_defenderbot, steelconsortium_quantummissiletrooper |
+| steelinfrailgun_emp | steelconsortium_defenderbot, steelconsortium_quantummissiletrooper |
+| steelinfrailgun_emp_elite | steelconsortium_defenderbot, steelconsortium_quantummissiletrooper |
 | steelmakogun | steelconsortium_hoverboardgrenadier, steelconsortium_mako |
-| steelmakogune | steelconsortium_hoverboardgrenadier, steelconsortium_mako |
-| steelmakogunemp | steelconsortium_hoverboardgrenadier, steelconsortium_mako |
-| steelmakogunempe | steelconsortium_hoverboardgrenadier, steelconsortium_mako |
+| steelmakogun_elite | steelconsortium_hoverboardgrenadier, steelconsortium_mako |
+| steelmakogun_emp | steelconsortium_hoverboardgrenadier, steelconsortium_mako |
+| steelmakogun_emp_elite | steelconsortium_hoverboardgrenadier, steelconsortium_mako |
 | swgbigredlaserg | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | swgreenlaserg | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | swlaserg | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |

@@ -1,6 +1,6 @@
-# audit_multiplier_modifiers — *Multiplier Modifier integer percent check
+# audit_multiplier_modifiers â€” *Multiplier Modifier integer percent check
 
-*Multiplier trait families seen: 1893
+*Multiplier trait families seen: 1878
 
 | trait family |
 |---|
@@ -131,7 +131,6 @@
 | `DamageMultiplier@DARKSWARM` |
 | `DamageMultiplier@DamageReduction` |
 | `DamageMultiplier@DefenseBuffs` |
-| `DamageMultiplier@EpicBuff` |
 | `DamageMultiplier@FAKE` |
 | `DamageMultiplier@FIRECALL` |
 | `DamageMultiplier@FORCESHIELD` |
@@ -157,7 +156,6 @@
 | `DamageMultiplier@HeavyInfantryBuff` |
 | `DamageMultiplier@HelicopterBuff` |
 | `DamageMultiplier@HeroBuff` |
-| `DamageMultiplier@HighTechTankBuff` |
 | `DamageMultiplier@HordeEffect` |
 | `DamageMultiplier@HordeEffect2` |
 | `DamageMultiplier@INVINCIBLE` |
@@ -167,10 +165,8 @@
 | `DamageMultiplier@KamikazeCritical` |
 | `DamageMultiplier@KamikazeHeavy` |
 | `DamageMultiplier@Light` |
-| `DamageMultiplier@LineBreakerBuff` |
 | `DamageMultiplier@MAYORCALL` |
 | `DamageMultiplier@METALFACTORY` |
-| `DamageMultiplier@MainBattleTankBuff` |
 | `DamageMultiplier@Medium` |
 | `DamageMultiplier@MeleeBuff` |
 | `DamageMultiplier@OMUpg` |
@@ -198,7 +194,6 @@
 | `DamageMultiplier@Secondary` |
 | `DamageMultiplier@Shield` |
 | `DamageMultiplier@SpellCard` |
-| `DamageMultiplier@SupportVehicleBuff` |
 | `DamageMultiplier@Swarmling1` |
 | `DamageMultiplier@Swarmling10` |
 | `DamageMultiplier@Swarmling2` |
@@ -209,7 +204,6 @@
 | `DamageMultiplier@Swarmling7` |
 | `DamageMultiplier@Swarmling8` |
 | `DamageMultiplier@Swarmling9` |
-| `DamageMultiplier@TankBuffs` |
 | `DamageMultiplier@TransportHelicopterBuff` |
 | `DamageMultiplier@Underwater` |
 | `DamageMultiplier@Unity1` |
@@ -222,7 +216,6 @@
 | `DamageMultiplier@Unity7` |
 | `DamageMultiplier@Unity8` |
 | `DamageMultiplier@Unity9` |
-| `DamageMultiplier@VehicleBuffs` |
 | `DamageMultiplier@WC2HShieldUpg` |
 | `DamageMultiplier@WC2HShieldUpg2` |
 | `DamageMultiplier@WC2OShieldUpg` |
@@ -423,7 +416,7 @@
 | `DamageMultiplier@terran_upgrade_vehicleplatinglevel2` |
 | `DamageMultiplier@tkm_upgrade_heavytitanplating` |
 | `DamageMultiplier@ts_gdi_upgrade_ceramicarmor` |
-| `DamageMultiplier@ts_gdi_upgrade_mechanicalreliability` |
+| `DamageMultiplier@ts_gdi_upgrade_fieldmaintenance` |
 | `DamageMultiplier@ts_gdi_upgrade_mechengineering` |
 | `DamageMultiplier@ts_gdi_upgrade_seretraining` |
 | `DamageMultiplier@ts_nod_upgrade_mobilityspecialization` |
@@ -576,7 +569,6 @@
 | `FirepowerMultiplier@FRENZY2` |
 | `FirepowerMultiplier@FRENZY3` |
 | `FirepowerMultiplier@FighterBuff` |
-| `FirepowerMultiplier@FireSupportBuff` |
 | `FirepowerMultiplier@FirepowerIncrease` |
 | `FirepowerMultiplier@FirerateCompensation` |
 | `FirepowerMultiplier@Flakpower1down` |
@@ -605,14 +597,12 @@
 | `FirepowerMultiplier@KamikazeCritical` |
 | `FirepowerMultiplier@KamikazeHeavy` |
 | `FirepowerMultiplier@Light` |
-| `FirepowerMultiplier@LineBreakerBuff` |
 | `FirepowerMultiplier@Load1` |
 | `FirepowerMultiplier@Load2` |
 | `FirepowerMultiplier@Load3` |
 | `FirepowerMultiplier@Load4` |
 | `FirepowerMultiplier@Load5` |
 | `FirepowerMultiplier@MAYORCALL` |
-| `FirepowerMultiplier@MainBattleTankBuff` |
 | `FirepowerMultiplier@Medium` |
 | `FirepowerMultiplier@MeleeBuff` |
 | `FirepowerMultiplier@MissileSubBuff` |
@@ -650,7 +640,6 @@
 | `FirepowerMultiplier@SplashDamage` |
 | `FirepowerMultiplier@StormEffect` |
 | `FirepowerMultiplier@SupportInfantryBuff` |
-| `FirepowerMultiplier@SupportVehicleBuff` |
 | `FirepowerMultiplier@Swarmling1` |
 | `FirepowerMultiplier@Swarmling10` |
 | `FirepowerMultiplier@Swarmling2` |
@@ -663,7 +652,6 @@
 | `FirepowerMultiplier@Swarmling9` |
 | `FirepowerMultiplier@TAxeUpg` |
 | `FirepowerMultiplier@TAxeUpg2` |
-| `FirepowerMultiplier@TankBuffs` |
 | `FirepowerMultiplier@TankHunter` |
 | `FirepowerMultiplier@TripleBeam` |
 | `FirepowerMultiplier@TripleShot` |
@@ -839,12 +827,12 @@
 | `FirepowerMultiplier@taupbatteringram` |
 | `FirepowerMultiplier@taupheatcannon` |
 | `FirepowerMultiplier@td_gdi_minigunner` |
+| `FirepowerMultiplier@td_gdi_upgrade_a10airstrike` |
 | `FirepowerMultiplier@td_gdi_upgrade_advancedmissiletargeting` |
 | `FirepowerMultiplier@td_gdi_upgrade_armorpiercingbullets` |
 | `FirepowerMultiplier@td_gdi_upgrade_cuttingedgeequipment` |
 | `FirepowerMultiplier@td_gdi_upgrade_highvelocitycannons` |
 | `FirepowerMultiplier@td_gdi_upgrade_longrangesensors` |
-| `FirepowerMultiplier@td_gdi_upgrade_unlocka10airstrike` |
 | `FirepowerMultiplier@td_nod_minigunner` |
 | `FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics` |
 | `FirepowerMultiplier@td_nod_upgrade_elementalwarfare` |
@@ -1017,7 +1005,6 @@
 | `ProductionCostMultiplier@DuneFactoryUpgrade` |
 | `ProductionCostMultiplier@DuneHeavyFactoryUpgrade` |
 | `ProductionCostMultiplier@DuneLightFactoryUpgrade` |
-| `ProductionCostMultiplier@IXIANVEHICLES` |
 | `ProductionCostMultiplier@Industrial` |
 | `ProductionCostMultiplier@IndustrialPlant` |
 | `ProductionCostMultiplier@LatinIndustrialMethods` |
@@ -1036,7 +1023,6 @@
 | `ProductionCostMultiplier@brutalbotplayer` |
 | `ProductionCostMultiplier@cameogodbotplayer` |
 | `ProductionCostMultiplier@challengerbotplayer` |
-| `ProductionCostMultiplier@corrino` |
 | `ProductionCostMultiplier@d2k_wind_trap_upgrade` |
 | `ProductionCostMultiplier@dualproduction` |
 | `ProductionCostMultiplier@dune` |
@@ -1765,7 +1751,6 @@
 | `SpeedMultiplier@naxis_upgrade_blitzkrieg` |
 | `SpeedMultiplier@naxis_upgrade_ostfrontexperience` |
 | `SpeedMultiplier@naxis_upgrade_tankarsenalrenovation` |
-| `SpeedMultiplier@ordos-stealth-bonus` |
 | `SpeedMultiplier@ordos_upgrade_biologicalwarfare` |
 | `SpeedMultiplier@ordos_upgrade_hoverdrive` |
 | `SpeedMultiplier@pb` |
@@ -1819,7 +1804,7 @@
 | `SpeedMultiplier@td_nod_upgrade_guerillatactics` |
 | `SpeedMultiplier@td_nod_upgrade_tiberiuminfusion` |
 | `SpeedMultiplier@ts_gdi_upgrade_ceramicarmor` |
-| `SpeedMultiplier@ts_gdi_upgrade_mechanicalreliability` |
+| `SpeedMultiplier@ts_gdi_upgrade_fieldmaintenance` |
 | `SpeedMultiplier@ts_gdi_upgrade_mechengineering` |
 | `SpeedMultiplier@ts_gdi_upgrade_seretraining` |
 | `SpeedMultiplier@ts_nod_upgrade_advancedtiberiumrefinement` |

@@ -665,10 +665,10 @@ schwarzermond_mars:
 	icon:
 		Filename: schwarzermond_mars_icon.png
 
-schwarzermond_m200bjagerline:
+schwarzermond_komet:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: schwarzermond_m200bjagerline_nax2_aatank.shp
+		Filename: schwarzermond_komet_nax2_aatank.shp
 		Scale: 0.8
 	idle:
 		Filename: shared_sprites|invisibleitem.shp
@@ -680,7 +680,7 @@ schwarzermond_m200bjagerline:
 		Facings: 64
 		Offset: 0,20
 	icon:
-		Filename: schwarzermond_m200bjagerline_icon.png
+		Filename: schwarzermond_komet_icon.png
 
 schwarzermond_noidmgarmor:
 	Defaults:

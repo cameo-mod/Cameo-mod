@@ -1010,7 +1010,7 @@ TSChemAdatsMissile:
 		InvalidTargets: Water
 
 TSChemAdatsMissileAA:
-	Inherits: TSAdatsMissileAA
+	Inherits: TSAdatsMissile_AA
 	Projectile: Missile
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
@@ -1106,7 +1106,7 @@ TSVeinholeSmoke:
 	Warhead@Effect: CreateEffect
 		Explosions: chemball
 
-TSEMPLimpetBomb:
+TSLimpetBomb_EMP:
 	ReloadDelay: 50
 	Range: 1536
 	ValidTargets: Vehicle
@@ -1262,7 +1262,7 @@ TSEngineerPistol:
 	Warhead@SniperWeaponPercentage: HealthPercentageDamage
 		Damage: 10
 
-TSSniperE:
+TSSniper_elite:
 	Inherits: TSSniper
 	ReloadDelay: 45
 	Range: 8704
@@ -1289,7 +1289,7 @@ forgotten_mutant_dualwield_elite:
 	Burst: 4
 	Range: 5120
 
-MutAPRifleE:
+MutAPRifle_elite:
 	Inherits: MutAPRifle
 	ReloadDelay: 30
 	Range: 6144

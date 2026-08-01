@@ -169,7 +169,7 @@ latinsyndicate_latinempradar:
 		Names:
 			1: Emp Disable
 		Weapons:
-			1: SteelEmpBomb
+			1: Support_EMP_Bomb
 		Descriptions:
 			1: power_ioncannon.description
 		BeginChargeSpeechNotification: IonCannonCharging
@@ -586,7 +586,7 @@ latinsyndicate_latinsentrygun:
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: LatinSentryMGE
+		Weapon: LatinSentryMG_elite
 		LocalOffset: 500,128,100, 500,-128,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect

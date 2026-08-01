@@ -454,7 +454,7 @@ SteelTwisterMissiles:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelTwisterMissilesE:
+SteelTwisterMissiles_elite:
 	Inherits: SteelTwisterMissiles
 	Range: 6000
 	Burst: 10
@@ -467,7 +467,7 @@ SteelTwisterMissilesE:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 
-SteelEmpBomb:
+Support_EMP_Bomb:
 	Inherits: ^TeslaWeapon
 	Inherits: ^TeslaChargedWeapon
 	Report: mobemp1.aud
@@ -631,7 +631,7 @@ NaxGrilleArty:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 8
 
-NaxGrilleArtyE:
+NaxGrilleArty_elite:
 	Inherits: NaxGrilleArty
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 13333
@@ -871,7 +871,7 @@ Nax120mmCorrosion:
 	Inherits: RA2120mm
 	Inherits@Corrosion: ^NaxOxidationShells
 
-Nax120mm_eliteCorrosion:
+Nax120mmCorrosion_elite:
 	Inherits: RA2120mm_elite
 	Inherits@Corrosion: ^NaxOxidationShells
 
@@ -1381,7 +1381,7 @@ LatinBuggyRocket:
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 
-LatinBuggyRocketE:
+LatinBuggyRocket_elite:
 	Inherits: LatinBuggyRocket
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 7000
@@ -1588,13 +1588,13 @@ RA2Robotmm_elite:
 		ImpactSounds: psahit00.aud
 		ExplosionPalette: effect
 	Warhead@Scatter: FireShrapnel
-		Weapon: RA2Robotmm_eliteScatter
+		Weapon: RA2RobotmmScatter_elite
 		Amount: 3
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water
 
-RA2Robotmm_eliteScatter:
+RA2RobotmmScatter_elite:
 	Inherits: RA2Robotmm_elite
 	Range: 2260
 	-Report:

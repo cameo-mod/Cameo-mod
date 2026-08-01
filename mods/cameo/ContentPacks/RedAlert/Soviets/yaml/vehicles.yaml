@@ -525,13 +525,13 @@ ra1_soviets_heavyteslatank:
 		TurnSpeed: 12
 		Offset: -110,0,90
 	Armament:
-		Weapon: TTankZap2EMP
+		Weapon: TTankZap2_EMP
 		LocalOffset: 50,0,200
 		AmmoUsage: 8
 		PauseOnCondition: pdammo < 8
 		RequiresCondition: !ra1_soviets_upgrade_teslaarcing
 	Armament@Arcing:
-		Weapon: TTankZap2EMPArc
+		Weapon: TTankZap2Arc_EMP
 		LocalOffset: 50,0,200
 		AmmoUsage: 8
 		PauseOnCondition: pdammo < 8
@@ -1048,11 +1048,11 @@ ra1_soviets_teslatank:
 		LocalOffset: 0,0,213
 		RequiresCondition: !ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade1:
-		Weapon: TTankZapEMP
+		Weapon: TTankZap_EMP
 		LocalOffset: 0,0,213
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade2:
-		Weapon: TTankZapEMPArc
+		Weapon: TTankZapArc_EMP
 		LocalOffset: 0,0,213
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	AttackFrontal:
@@ -1260,7 +1260,7 @@ ra1_soviets_btr80:
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: BTRMachineGunAA
+		Weapon: BTRMachineGun_AA
 		Recoil: 85
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
@@ -1277,13 +1277,13 @@ ra1_soviets_btr80:
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade1AA:
-		Weapon: BTRTeslaMachineGunAA
+		Weapon: BTRTeslaMachineGun_AA
 		Recoil: 85
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade2AA:
-		Weapon: BTRTeslaMachineGunArcAA
+		Weapon: BTRTeslaMachineGunArc_AA
 		Recoil: 85
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
@@ -1568,7 +1568,7 @@ ra1_soviets_gatlingtank:
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@AA:
-		Weapon: RAGatlingTankCannonAA
+		Weapon: RAGatlingTankCannon_AA
 		Recoil: 85
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
@@ -1580,7 +1580,7 @@ ra1_soviets_gatlingtank:
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@UpgradeAA:
-		Weapon: IncendiaryRAGatlingTankCannonAA
+		Weapon: IncendiaryRAGatlingTankCannon_AA
 		Recoil: 85
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
@@ -1598,13 +1598,13 @@ ra1_soviets_gatlingtank:
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade1AA:
-		Weapon: TeslaRAGatlingTankCannonAA
+		Weapon: TeslaRAGatlingTankCannon_AA
 		Recoil: 85
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade2AA:
-		Weapon: TeslaRAGatlingTankCannonArcAA
+		Weapon: TeslaRAGatlingTankCannonArc_AA
 		Recoil: 85
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle

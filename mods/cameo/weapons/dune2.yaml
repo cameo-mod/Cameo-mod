@@ -79,7 +79,7 @@ Dune2MissileTank:
 	Report: dune2longlaser.aud
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: dunepoff.aud
-Dune2MissileTankAA:
+Dune2MissileTank_AA:
 	Inherits: TowerAAMissile
 	ReloadDelay: 40
 	Burst: 2
@@ -88,10 +88,10 @@ Dune2MissileTankAA:
 		ImpactSounds: dunepoff.aud, dune2splash.aud, dune2cannon.aud
 
 Dune2QuadAA:
-	Inherits: Dune2MissileTankAA
+	Inherits: Dune2MissileTank_AA
 	ReloadDelay: 120
 Dune2SardaAA:
-	Inherits: Dune2MissileTankAA
+	Inherits: Dune2MissileTank_AA
 	ReloadDelay: 120
 	Burst: 1
 Dune2Artillery:

@@ -1,10 +1,8 @@
 #!/usr/bin/env python
-"""Find elite weapons that don't follow _elite naming, only for rank-elite gated armaments.
+"""DEPRECATED: Use audit_weapon_suffixes.py X1 instead.
 
-Per DESIGN.md §16.3: ALL elite weapons must end with _elite.
-The legacy E suffix is deprecated and must be migrated.
-EMP weapons (which may contain 'EMP' in the name) are NOT elite weapons
-and are never flagged because this audit only checks rank-elite gated armaments.
+This script duplicates the X1 check in audit_weapon_suffixes.py.
+Kept for backward compatibility — will be removed in a future cleanup.
 """
 import os, re, sys
 

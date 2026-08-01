@@ -143,7 +143,7 @@ cabal_heavycabalobelisk:
 		Sequence: idle
 	Armament@PRIMARY:
 		Weapon: TSCABALObeliskLaserFire
-		LocalOffset: 0,112,1733
+		LocalOffset: 0,111,1111
 	AttackCharges:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
@@ -213,7 +213,7 @@ cabal_obeliskofdarkness:
 	WithSpriteBody:
 	Armament:
 		Weapon: DarkObeliskLaser
-		LocalOffset: -128,-43,1600
+		LocalOffset: -160,-54,2000
 	AttackCharges:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled

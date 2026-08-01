@@ -230,7 +230,7 @@ zbio:
 		TurnSpeed: 120
 		InitialFacing: 0
 	Armament@AA:
-		Weapon: SpitAA
+		Weapon: Spit_AA
 		LocalOffset: 384,0,0
 	RenderRangeCircle:
 	DetectCloaked:
@@ -947,7 +947,7 @@ zmutant.infect:
 	Armament:
 		Weapon: ZMutantPunch
 	Armament@AA:
-		Weapon: ZBruteRock
+		Weapon: ZBruteRock_AA
 	RenderSprites:
 		Image: tnkzombie
 		
@@ -1072,7 +1072,7 @@ spitter:
 		Weapon: Spit
 		LocalOffset: 384,0,0
 	Armament@AA:
-		Weapon: SpitAA
+		Weapon: Spit_AA
 		LocalOffset: 384,0,0
 	-WithMuzzleOverlay:
 	-DamagedByTerrain:

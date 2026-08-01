@@ -3688,7 +3688,7 @@ BuildingExplode:
 		SmudgeType: Crater
 		Delay: 1
 
-Napalm.Crate:
+Napalm_Crate:
 	Inherits: ^DamagingExplosionHE
 	Warhead@Grenade: SpreadDamage
 		Spread: 170
@@ -4622,15 +4622,15 @@ MADTankTargeting:
 	Warhead@1Dam: TargetDamage
 		ValidTargets: Air
 
-deploytargeting.5c0:
+deploytargeting_5c0:
 	Inherits: ^DeployTargeting
 	Range: 5000
 
-deploytargeting.10c0:
+deploytargeting_10c0:
 	Inherits: ^DeployTargeting
 	Range: 10000
 
-aadeploytargeting.8c0:
+aadeploytargeting_8c0_AA:
 	Inherits: ^AADeployTargeting
 	Range: 8000
 
@@ -4745,7 +4745,7 @@ BloomExplosion:
 		DamageCalculationType: ClosestTargetablePosition
 		AffectsParent: true
 
-TSEMPulseCannon:
+TSPulseCannon_EMP:
 	ReloadDelay: 100
 	Range: 40c0
 	Report: plsecan2.aud
@@ -5336,7 +5336,7 @@ Spit:
 		Weapon: RA2Cloud
 		InvalidTargets: Water
 
-SpitAA:
+Spit_AA:
 	Inherits: Spit
 	ValidTargets: Air
 	BurstDelays: 44
@@ -5735,7 +5735,7 @@ Short8Inch:
 	Range: 8704
 	Burst: 2
 
-bowFireAA:
+bowFire_AA:
 	ReloadDelay: 40
 	Range: 7680
 	Report: bowfire.aud
@@ -5775,7 +5775,7 @@ bowFireAA:
 			Concrete: 20
 
 bowFire:
-	Inherits: bowFireAA
+	Inherits: bowFire_AA
 	ReloadDelay: 40
 	Range: 5120
 	Report: bowfire.aud

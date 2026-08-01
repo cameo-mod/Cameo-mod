@@ -728,13 +728,13 @@ SiegeMortarThermobaricExplode:
 	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 
-PortaTeslaEMP:
+PortaTesla_EMP:
 	Inherits: PortaTesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 
-PortaTeslaEMPArc:
-	Inherits: PortaTeslaEMP
+PortaTeslaArc_EMP:
+	Inherits: PortaTesla_EMP
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: PortaTeslaFragment
 		Amount: 1
@@ -743,7 +743,7 @@ PortaTeslaEMPArc:
 		AimTargetStances: Enemy, Neutral
 
 PortaTeslaFragment:
-	Inherits: PortaTeslaEMPArc
+	Inherits: PortaTeslaArc_EMP
 	Range: 2326
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 10000
@@ -809,22 +809,22 @@ PointDefenseTesla:
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
 
-TTankZapEMP:
+TTankZap_EMP:
 	Inherits: TTankZap
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 
-TTankZapEMPArc:
-	Inherits: TTankZapEMP
+TTankZapArc_EMP:
+	Inherits: TTankZap_EMP
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TTankZapEMPArcTeslaFragment1
+		Weapon: TTankZapArcTeslaFragment1_EMP
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TTankZapEMPArcTeslaFragment1:
-	Inherits: TTankZapEMPArc
+TTankZapArcTeslaFragment1_EMP:
+	Inherits: TTankZapArc_EMP
 	Range: 3650
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 20000
@@ -835,14 +835,14 @@ TTankZapEMPArcTeslaFragment1:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TTankZapEMPArcTeslaFragment2
+		Weapon: TTankZapArcTeslaFragment2_EMP
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TTankZapEMPArcTeslaFragment2:
-	Inherits: TTankZapEMPArcTeslaFragment1
+TTankZapArcTeslaFragment2_EMP:
+	Inherits: TTankZapArcTeslaFragment1_EMP
 	Range: 1825
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 10000
@@ -866,22 +866,22 @@ TTankZap2:
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		Damage: 20
 
-TTankZap2EMP:
+TTankZap2_EMP:
 	Inherits: TTankZap2
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 
-TTankZap2EMPArc:
-	Inherits: TTankZap2EMP
+TTankZap2Arc_EMP:
+	Inherits: TTankZap2_EMP
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TTankZap2EMPArcTeslaFragment1
+		Weapon: TTankZap2ArcTeslaFragment1_EMP
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TTankZap2EMPArcTeslaFragment1:
-	Inherits: TTankZap2EMPArc
+TTankZap2ArcTeslaFragment1_EMP:
+	Inherits: TTankZap2Arc_EMP
 	Range: 3325
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 20000
@@ -892,14 +892,14 @@ TTankZap2EMPArcTeslaFragment1:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TTankZap2EMPArcTeslaFragment2
+		Weapon: TTankZap2ArcTeslaFragment2_EMP
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TTankZap2EMPArcTeslaFragment2:
-	Inherits: TTankZap2EMPArcTeslaFragment1
+TTankZap2ArcTeslaFragment2_EMP:
+	Inherits: TTankZap2ArcTeslaFragment1_EMP
 	Range: 1663
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 10000
@@ -923,22 +923,22 @@ TeslaZap:
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 16
 
-TeslaZapEMP:
+TeslaZap_EMP:
 	Inherits: TeslaZap
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
 
-TeslaZapEMPArc:
-	Inherits: TeslaZapEMP
+TeslaZapArc_EMP:
+	Inherits: TeslaZap_EMP
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaZapEMPArcTeslaFragment1
+		Weapon: TeslaZapArcTeslaFragment1_EMP
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TeslaZapEMPArcTeslaFragment1:
-	Inherits: TeslaZapEMPArc
+TeslaZapArcTeslaFragment1_EMP:
+	Inherits: TeslaZapArc_EMP
 	Range: 4660
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 16000
@@ -949,14 +949,14 @@ TeslaZapEMPArcTeslaFragment1:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaZapEMPArcTeslaFragment2
+		Weapon: TeslaZapArcTeslaFragment2_EMP
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TeslaZapEMPArcTeslaFragment2:
-	Inherits: TeslaZapEMPArcTeslaFragment1
+TeslaZapArcTeslaFragment2_EMP:
+	Inherits: TeslaZapArcTeslaFragment1_EMP
 	Range: 2330
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 8000
@@ -1446,7 +1446,7 @@ BTRMachineGun:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
 
-BTRMachineGunAA:
+BTRMachineGun_AA:
 	Inherits: BTRMachineGun
 	Range: 8181
 	ValidTargets: Air
@@ -1514,13 +1514,13 @@ BTRTeslaMachineGunArcFragment1:
 	Range: 2727
 	-Warhead@TeslaArc:
 
-BTRTeslaMachineGunAA:
+BTRTeslaMachineGun_AA:
 	Inherits: BTRTeslaMachineGun
 	Range: 8181
 	ValidTargets: Air
 
-BTRTeslaMachineGunArcAA:
-	Inherits: BTRTeslaMachineGunAA
+BTRTeslaMachineGunArc_AA:
+	Inherits: BTRTeslaMachineGun_AA
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: BTRTeslaMachineGunArcFragment1AA
 		Amount: 1
@@ -1529,7 +1529,7 @@ BTRTeslaMachineGunArcAA:
 		AimTargetStances: Enemy, Neutral
 
 BTRTeslaMachineGunArcFragment1AA:
-	Inherits: BTRTeslaMachineGunArcAA
+	Inherits: BTRTeslaMachineGunArc_AA
 	Range: 4090
 	-Warhead@TeslaArc:
 
@@ -3956,7 +3956,7 @@ RAGatlingTankCannon:
 		ValidTargets: Ground, Water
 		Damage: 1
 
-RAGatlingTankCannonAA:
+RAGatlingTankCannon_AA:
 	Inherits: RAGatlingTankCannon
 	Range: 7500
 	ValidTargets: Air
@@ -3989,7 +3989,7 @@ IncendiaryRAGatlingTankCannon:
 		ValidTargets: Ground, Water
 		Damage: 1
 
-IncendiaryRAGatlingTankCannonAA:
+IncendiaryRAGatlingTankCannon_AA:
 	Inherits: IncendiaryRAGatlingTankCannon
 	Range: 7500
 	ValidTargets: Air
@@ -4045,13 +4045,13 @@ TeslaRAGatlingTankCannonArcFragment1:
 	Range: 2500
 	-Warhead@TeslaArc:
 
-TeslaRAGatlingTankCannonAA:
+TeslaRAGatlingTankCannon_AA:
 	Inherits: TeslaRAGatlingTankCannon
 	Range: 7500
 	ValidTargets: Air
 
-TeslaRAGatlingTankCannonArcAA:
-	Inherits: TeslaRAGatlingTankCannonAA
+TeslaRAGatlingTankCannonArc_AA:
+	Inherits: TeslaRAGatlingTankCannon_AA
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: TeslaRAGatlingTankCannonArcFragment1AA
 		Amount: 1
@@ -4060,7 +4060,7 @@ TeslaRAGatlingTankCannonArcAA:
 		AimTargetStances: Enemy, Neutral
 
 TeslaRAGatlingTankCannonArcFragment1AA:
-	Inherits: TeslaRAGatlingTankCannonArcAA
+	Inherits: TeslaRAGatlingTankCannonArc_AA
 	Range: 3750
 	-Warhead@TeslaArc:
 

@@ -109,7 +109,7 @@ RA2NarcoPistol:
 		ValidTargets: Ground, Water, Garrisoned, Air
 		Damage: 10
 
-RA2NarcoPistolsE:
+RA2NarcoPistols_elite:
 	Inherits: RA2NarcoPistol
 	Range: 7300
 	Burst: 2
@@ -140,7 +140,7 @@ NarcoGrenade:
 		AimChance: 33
 		AimTargetStances: Enemy, Neutral
 
-NarcoGrenadeE:
+NarcoGrenade_elite:
 	Inherits: NarcoGrenade
 	Range: 7300
 	Burst: 2
@@ -168,7 +168,7 @@ RA2NarcoAKM:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 1
 
-RA2NarcoAKME:
+RA2NarcoAKM_elite:
 	Inherits: RA2NarcoAKM
 	Range: 6800
 	Burst: 2
@@ -186,7 +186,7 @@ RA2Narco60mm:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 8
 
-RA2Narco60mmE:
+RA2Narco60mm_elite:
 	Inherits: RA2Narco60mm
 	Range: 6800
 	Burst: 2
@@ -234,7 +234,7 @@ RA2FreedomAK47:
 	Warhead@Effect1: CreateEffect
 		Explosions: ra2_piff
 
-RA2FreedomAK47E:
+RA2FreedomAK47_elite:
 	Inherits: RA2FreedomAK47
 	Range: 8130
 	Burst: 10
@@ -276,7 +276,7 @@ RA2FreedomRocket:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 30
 
-RA2FreedomRocketE:
+RA2FreedomRocket_elite:
 	Inherits: RA2FreedomRocket
 	Range: 8130
 	Projectile: Missile
@@ -302,7 +302,7 @@ RA2FreedomRocketE:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 60
 
-SyndicateFireballLauncherE:
+SyndicateFireballLauncher_elite:
 	Inherits: SyndicateFireballLauncher
 	Range: 6666
 	Burst: 8
@@ -602,7 +602,7 @@ RA2Gren60mm:
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 1
 
-RA2Gren60mmE:
+RA2Gren60mm_elite:
 	Inherits: RA2Gren60mm
 	Range: 6031
 	Burst: 2
@@ -623,7 +623,7 @@ LatinRusherRocket:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 8
 
-LatinRusherRocketE:
+LatinRusherRocket_elite:
 	Inherits: LatinRusherRocket
 	Range: 6031
 	Projectile: Missile
@@ -680,7 +680,7 @@ LatinSmokerCannon:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 1
 
-LatinSmokerCannonE:
+LatinSmokerCannon_elite:
 	Inherits: LatinSmokerCannon
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 7550
@@ -730,7 +730,7 @@ RA2GrenadePack:
 		Range: 1310
 		ValidTargets: Ground, Water, Air
 
-RA2GrenadePackE:
+RA2GrenadePack_elite:
 	Inherits: RA2GrenadePack
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 7550
@@ -751,7 +751,7 @@ LatinSmokerRocket:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 12
 
-LatinSmokerRocketE:
+LatinSmokerRocket_elite:
 	Inherits: LatinSmokerRocket
 	Range: 7550
 	Projectile: Missile
@@ -800,13 +800,13 @@ DiabloCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-DiabloCannonE:
+DiabloCannon_elite:
 	Inherits: DiabloCannon
 	Range: 7300
 	Burst: 2
 	BurstDelays: 3
 
-DiabloCannonAA:
+DiabloCannon_AA:
 	Inherits: DiabloCannon
 	ValidTargets: Air
 	Range: 9450
@@ -815,8 +815,8 @@ DiabloCannonAA:
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
-DiabloCannonAAE:
-	Inherits: DiabloCannonAA
+DiabloCannonAAE_AA:
+	Inherits: DiabloCannon_AA
 	Range: 10450
 	Burst: 2
 	BurstDelays: 3
@@ -896,7 +896,7 @@ RA2MortarBike:
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
 
-RA2MortarBikeE:
+RA2MortarBike_elite:
 	Inherits: RA2MortarBike
 	Range: 8500
 	Burst: 2
@@ -933,7 +933,7 @@ LatinBuggyMG:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
-LatinBuggyMGE:
+LatinBuggyMG_elite:
 	Inherits: LatinBuggyMG
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 7000
@@ -983,7 +983,7 @@ LatinBuggyChaingun:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-LatinBuggyChaingunE:
+LatinBuggyChaingun_elite:
 	Inherits: LatinBuggyChaingun
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 7000
@@ -1033,7 +1033,7 @@ YakovlevCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-YakovlevCannonE:
+YakovlevCannon_elite:
 	Inherits: ^TankDestroyerCannon
 	Inherits: ^FlakWeapon
 	Inherits: ^HeavyCannon
@@ -1114,7 +1114,7 @@ LatinSentryMG:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-LatinSentryMGE:
+LatinSentryMG_elite:
 	Inherits: LatinSentryMG
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 7777
@@ -1297,7 +1297,7 @@ RA2APCFlakCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-RA2APCFlakCannonE:
+RA2APCFlakCannon_elite:
 	Inherits: RA2APCFlakCannon
 	Range: 6740
 	Burst: 2
@@ -1312,7 +1312,7 @@ RA2APCFlakCannonAA:
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
-RA2APCFlakCannonAAE:
+RA2APCFlakCannonAA_elite:
 	Inherits: RA2APCFlakCannonAA
 	Range: 9610
 	Burst: 2
@@ -1349,20 +1349,20 @@ RA2APCMachineGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-RA2APCMachineGunE:
+RA2APCMachineGun_elite:
 	Inherits: RA2APCMachineGun
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 6740
 	Burst: 8
 	BurstDelays: 2
 
-RA2APCMachineGunAA:
+RA2APCMachineGun_AA:
 	Inherits: RA2APCMachineGun
 	ValidTargets: Air
 	Range: 8610
 
-RA2APCMachineGunAAE:
-	Inherits: RA2APCMachineGunAA
+RA2APCMachineGun_AA_elite:
+	Inherits: RA2APCMachineGun_AA
 	Range: 9610
 	Burst: 8
 	BurstDelays: 2
@@ -1421,7 +1421,7 @@ RA2APCRocket:
 		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 		ValidTargets: Ground, Water, Air
 
-RA2APCRocketE:
+RA2APCRocket_elite:
 	Inherits: RA2APCRocket
 	Range: 6740
 	Burst: 8
@@ -1433,13 +1433,13 @@ RA2APCRocketE:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 
-RA2APCRocketAA:
+RA2APCRocket_AA:
 	Inherits: RA2APCRocket
 	ValidTargets: Air
 	Range: 8610
 
-RA2APCRocketAAE:
-	Inherits: RA2APCRocketAA
+RA2APCRocket_AA_elite:
+	Inherits: RA2APCRocket_AA
 	Range: 9610
 	Burst: 8
 	Projectile: Missile

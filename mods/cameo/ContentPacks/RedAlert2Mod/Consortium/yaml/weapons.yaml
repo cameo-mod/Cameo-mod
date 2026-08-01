@@ -24,7 +24,7 @@
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-SteelCloneGunE:
+SteelCloneGun_elite:
 	Inherits: SteelCloneGun
 	Range: 6000
 	Burst: 2
@@ -51,24 +51,24 @@ SteelCloneGunResonanceBounce2:
 	Range: 1250
 	-Warhead@shrapnel:
 
-SteelCloneGunEResonance:
-	Inherits: SteelCloneGunE
+SteelCloneGunResonance_elite:
+	Inherits: SteelCloneGun_elite
 	Warhead@shrapnel: FireShrapnel
-		Weapon: SteelCloneGunEResonanceBounce1
+		Weapon: SteelCloneGunResonanceBounce1_elite
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
 
-SteelCloneGunEResonanceBounce1:
-	Inherits: SteelCloneGunEResonance
+SteelCloneGunResonanceBounce1_elite:
+	Inherits: SteelCloneGunResonance_elite
 	Range: 3000
 	Warhead@shrapnel: FireShrapnel
-		Weapon: SteelCloneGunEResonanceBounce2
+		Weapon: SteelCloneGunResonanceBounce2_elite
 
-SteelCloneGunEResonanceBounce2:
-	Inherits: SteelCloneGunEResonance
+SteelCloneGunResonanceBounce2_elite:
+	Inherits: SteelCloneGunResonance_elite
 	Range: 2000
 	-Warhead@shrapnel:
 
@@ -159,7 +159,7 @@ ConsortiumMissileSystem:
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 
-ConsortiumMissileSystemEMP:
+ConsortiumMissileSystem_EMP:
 	Inherits: ConsortiumMissileSystem
 	Warhead@TeslaWeapon: SpreadDamage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -209,7 +209,7 @@ SteelQuantumCannon:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelQuantumCannonEMP:
+SteelQuantumCannon_EMP:
 	Inherits: ^TeslaWeapon
 	Inherits: SteelQuantumCannon
 	Warhead@TeslaWeapon: SpreadDamage
@@ -245,7 +245,7 @@ SteelQuantumCannonEMP:
 		Damage: 12000
 
 SteelQuantumCannon_elite:
-	Inherits: SteelQuantumCannonEMP
+	Inherits: SteelQuantumCannon_EMP
 	Range: 7000
 	Projectile: Railgun
 		BeamColor: 4488FFBB
@@ -272,12 +272,12 @@ SteelQuantumCannon_elite:
 		ImpactSounds: psahit00.aud
 		ExplosionPalette: effect
 	Warhead@Scatter: FireShrapnel
-		Weapon: SteelQuantumCannon_eliteScatter
+		Weapon: SteelQuantumCannonScatter_elite
 		Amount: 3
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
 
-SteelQuantumCannon_eliteScatter:
+SteelQuantumCannonScatter_elite:
 	Inherits: SteelQuantumCannon_elite
 	Range: 3500
 	-Report:
@@ -425,13 +425,13 @@ SteelMakoGun:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelMakoGunE:
+SteelMakoGun_elite:
 	Inherits: SteelMakoGun
 	Range: 7050
 	Burst: 2
 	BurstDelays: 3
 
-SteelMakoGunEMP:
+SteelMakoGun_EMP:
 	Inherits: ^LightChemicalWeapon
 	Inherits: ^TeslaWeapon
 	Inherits: SteelMakoGun
@@ -487,8 +487,8 @@ SteelMakoGunEMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 
-SteelMakoGunEMPE:
-	Inherits: SteelMakoGunEMP
+SteelMakoGun_EMP_elite:
+	Inherits: SteelMakoGun_EMP
 	Range: 7050
 	Burst: 2
 	BurstDelays: 3
@@ -536,7 +536,7 @@ SteelMantaAG:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-SteelMantaAA:
+SteelManta_AA:
 	Inherits: SteelMantaAG
 	Report: steel_chaingunfire.wav
 	Range: 9999
@@ -567,8 +567,8 @@ SteelMantaAGResonanceBounce2:
 	Range: 2222
 	-Warhead@shrapnel:
 
-SteelMantaAAResonance:
-	Inherits: SteelMantaAA
+SteelMantaAAResonance_AA:
+	Inherits: SteelManta_AA
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelMantaAAResonanceBounce1
 		Amount: 1
@@ -578,13 +578,13 @@ SteelMantaAAResonance:
 		ValidTargets: Ground, Water, Air
 
 SteelMantaAAResonanceBounce1:
-	Inherits: SteelMantaAAResonance
+	Inherits: SteelMantaAAResonance_AA
 	Range: 3333
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelMantaAAResonanceBounce2
 
 SteelMantaAAResonanceBounce2:
-	Inherits: SteelMantaAAResonance
+	Inherits: SteelMantaAAResonance_AA
 	Range: 2222
 	-Warhead@shrapnel:
 
@@ -618,7 +618,7 @@ SteelMantaHunterCannons:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-SteelMantaHunterCannonsAA:
+SteelMantaHunterCannons_AA:
 	Inherits: ^SteelMediumMissile
 	Inherits: SteelMantaHunterCannons
 	Range: 12000
@@ -653,8 +653,8 @@ SteelMantaHunterCannonsResonanceBounce2:
 	Range: 2222
 	-Warhead@shrapnel:
 
-SteelMantaHunterCannonsAAResonance:
-	Inherits: SteelMantaHunterCannonsAA
+SteelMantaHunterCannonsAAResonance_AA:
+	Inherits: SteelMantaHunterCannons_AA
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelMantaHunterCannonsAAResonanceBounce1
 		Amount: 1
@@ -664,13 +664,13 @@ SteelMantaHunterCannonsAAResonance:
 		ValidTargets: Ground, Water, Air
 
 SteelMantaHunterCannonsAAResonanceBounce1:
-	Inherits: SteelMantaHunterCannonsAAResonance
+	Inherits: SteelMantaHunterCannonsAAResonance_AA
 	Range: 3333
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelMantaHunterCannonsAAResonanceBounce2
 
 SteelMantaHunterCannonsAAResonanceBounce2:
-	Inherits: SteelMantaHunterCannonsAAResonance
+	Inherits: SteelMantaHunterCannonsAAResonance_AA
 	Range: 2222
 	-Warhead@shrapnel:
 
@@ -725,7 +725,7 @@ SteelRunnerPistols:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 
-SteelRunnerPistolsE:
+SteelRunnerPistols_elite:
 	Inherits: SteelRunnerPistols
 	Range: 7200
 	Burst: 4
@@ -751,24 +751,24 @@ SteelRunnerPistolsResonanceBounce2:
 	Range: 1550
 	-Warhead@shrapnel:
 
-SteelRunnerPistolsEResonance:
-	Inherits: SteelRunnerPistolsE
+SteelRunnerPistolsResonance_elite:
+	Inherits: SteelRunnerPistols_elite
 	Warhead@shrapnel: FireShrapnel
-		Weapon: SteelRunnerPistolsEResonanceBounce1
+		Weapon: SteelRunnerPistolsResonanceBounce1_elite
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
 
-SteelRunnerPistolsEResonanceBounce1:
-	Inherits: SteelRunnerPistolsEResonance
+SteelRunnerPistolsResonanceBounce1_elite:
+	Inherits: SteelRunnerPistolsResonance_elite
 	Range: 3600
 	Warhead@shrapnel: FireShrapnel
-		Weapon: SteelRunnerPistolsEResonanceBounce2
+		Weapon: SteelRunnerPistolsResonanceBounce2_elite
 
-SteelRunnerPistolsEResonanceBounce2:
-	Inherits: SteelRunnerPistolsEResonance
+SteelRunnerPistolsResonanceBounce2_elite:
+	Inherits: SteelRunnerPistolsResonance_elite
 	Range: 2400
 	-Warhead@shrapnel:
 
@@ -814,20 +814,20 @@ SteelInfRailgun:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelInfRailgunE:
+SteelInfRailgun_elite:
 	Inherits: SteelInfRailgun
 	Range: 9000
 	Burst: 4
 
 SteelScalpelRailgunAA:
-	Inherits: SteelInfRailgunE
+	Inherits: SteelInfRailgun_elite
 	ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelInfRailgunEMP:
+SteelInfRailgun_EMP:
 	Inherits: ^Grenade
 	Inherits: ^MediumFlameWeapon
 	Inherits: ^MediumChemicalWeapon
@@ -940,13 +940,13 @@ SteelInfRailgunEMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 
-SteelInfRailgunEMPE:
-	Inherits: SteelInfRailgunEMP
+SteelInfRailgun_EMP_elite:
+	Inherits: SteelInfRailgun_EMP
 	Range: 9000
 	Burst: 4
 
-SteelScalpelRailgunEMPAA:
-	Inherits: SteelInfRailgunEMPE
+SteelScalpelRailgun_EMP_AA:
+	Inherits: SteelInfRailgun_EMP_elite
 	ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
 		Explosions: steel_blueexp
@@ -1046,7 +1046,7 @@ SteelMegaSword:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelMegaSwordEMP:
+SteelMegaSword_EMP:
 	Inherits: ^HeavyChemicalWeapon
 	Inherits: ^LaserWeapon
 	Inherits: ^TeslaWeapon
@@ -1085,9 +1085,9 @@ SteelMegaSwordEMP:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelMegaSwordE:
+SteelMegaSword_elite:
 	Inherits: ^RailgunWeapon
-	Inherits: SteelMegaSwordEMP
+	Inherits: SteelMegaSword_EMP
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1148,7 +1148,7 @@ SteelAirTurret:
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
 
-SteelAirTurretEMP:
+SteelAirTurret_EMP:
 	Inherits: ^TeslaWeapon
 	Inherits: SteelAirTurret
 	Warhead@TeslaWeapon: SpreadDamage
@@ -1183,8 +1183,8 @@ SteelAirTurretEMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 
-SteelAirTurretE:
-	Inherits: SteelAirTurretEMP
+SteelAirTurret_elite:
+	Inherits: SteelAirTurret_EMP
 	Range: 9000
 	Projectile: Railgun
 		BeamColor: 4488FFBB
@@ -1217,7 +1217,7 @@ SteelAirTurretE:
 		AimTargetStances: Enemy, Neutral
 
 SteelAirTurretEScatter:
-	Inherits: SteelAirTurretE
+	Inherits: SteelAirTurret_elite
 	Range: 4500
 	-Report:
 	Projectile: LaserZap
@@ -1312,7 +1312,7 @@ SteelQuantumTurretRail:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelQuantumTurretRailEMP:
+SteelQuantumTurretRail_EMP:
 	Inherits: SteelQuantumTurretRail
 	Warhead@TeslaWeapon: SpreadDamage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1519,14 +1519,14 @@ SteelKatyCannons:
 		ValidTargets: Ground, Water, Air
 		ExplosionPalette: ra2effect
 
-SteelKatyCannonsE:
+SteelKatyCannons_elite:
 	Inherits: SteelKatyCannons
 	Range: 8250
 	MinRange: 1650
 	Burst: 4
 	BurstDelays: 5
 
-SteelKatyCannonsEMP:
+SteelKatyCannons_EMP:
 	Inherits: ^TankDestroyerCannon
 	Inherits: ^TeslaWeapon
 	Inherits: SteelKatyCannons
@@ -1596,8 +1596,8 @@ SteelKatyCannonsEMP:
 		ValidTargets: Ground, Water, Air
 		ExplosionPalette: ra2effect
 
-SteelKatyCannonsEMPE:
-	Inherits: SteelKatyCannonsEMP
+SteelKatyCannons_EMP_elite:
+	Inherits: SteelKatyCannons_EMP
 	Range: 8250
 	MinRange: 1650
 	Burst: 4
@@ -1629,7 +1629,7 @@ SteelStalkerRailgun:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelStalkerRailgunEMP:
+SteelStalkerRailgun_EMP:
 	Inherits: ^TeslaWeapon
 	Inherits: SteelStalkerRailgun
 	Warhead@TeslaWeapon: SpreadDamage
@@ -1664,8 +1664,8 @@ SteelStalkerRailgunEMP:
 		ValidTargets: Ground, Water
 		Damage: 60000
 
-SteelStalkerRailgunE:
-	Inherits: SteelStalkerRailgunEMP
+SteelStalkerRailgun_elite:
+	Inherits: SteelStalkerRailgun_EMP
 	Range: 10000
 	Projectile: Railgun
 		BeamColor: 4488FFBB
@@ -1698,7 +1698,7 @@ SteelStalkerRailgunE:
 		AimTargetStances: Enemy, Neutral
 
 SteelStalkerRailgunEScatter:
-	Inherits: SteelStalkerRailgunE
+	Inherits: SteelStalkerRailgun_elite
 	Range: 5000
 	-Report:
 	Projectile: LaserZap
@@ -1887,7 +1887,7 @@ SteelDaggerCannon:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelDaggerCannonE:
+SteelDaggerCannon_elite:
 	Inherits: SteelDaggerCannon
 	Range: 25000
 	MinRange: 5000
@@ -1920,7 +1920,7 @@ SteelCruiserArtillery:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SteelCruiserArtilleryE:
+SteelCruiserArtillery_elite:
 	Inherits: SteelCruiserArtillery
 	Range: 8000
 	MinRange: 1600
@@ -1970,7 +1970,7 @@ SteelCruiserCannons:
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 
-SteelCruiserCannonsE:
+SteelCruiserCannons_elite:
 	Inherits: SteelCruiserCannons
 	Range: 8000
 	Burst: 2

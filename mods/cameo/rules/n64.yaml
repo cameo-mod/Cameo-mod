@@ -1242,6 +1242,8 @@ N64NUK2GDI:
 	ScalePowerWithHealth:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: building ##########
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: N64NUKEGDI
 
 N64NUK2NOD:
 	Inherits: ^BaseBuilding
@@ -2285,7 +2287,7 @@ N64STNK:
 		Condition: cloak-force-disabled
 		ValidDamageStates: Critical
 	Armament:
-		Weapon: 227mm.stnk
+		Weapon: 227mm_stnk
 		LocalOffset: 213,43,128, 213,-43,128
 	AttackFrontal:
 		FacingTolerance: 0

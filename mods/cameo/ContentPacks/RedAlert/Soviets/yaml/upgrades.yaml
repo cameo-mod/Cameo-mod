@@ -107,7 +107,7 @@ ra1_soviets_upgrade_hazmatsuits:
 	Tooltip:
 		Name: Hazmat Suits
 	Buildable:
-		Description: ra_upgrade_hazmatsuits.description
+		Description: ra1_soviets_upgrade_hazmatsuits.description
 		Prerequisites: ~ra1_soviets_techcenter, !ra1_soviets_upgrade_hazmatsuits
 	RenderSprites:
 		Image: ra1_soviets_upgrade_hazmatsuits
@@ -117,7 +117,7 @@ ra1_soviets_upgrade_vengeance:
 	Tooltip:
 		Name: Vengeance
 	Buildable:
-		Description: ra_upgrade_vengeance.description
+		Description: ra1_soviets_upgrade_vengeance.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_conscription, !ra1_soviets_upgrade_vengeance
 	RenderSprites:
 		Image: ra1_soviets_upgrade_vengeance
@@ -127,7 +127,7 @@ ra1_soviets_upgrade_menofsteel:
 	Tooltip:
 		Name: Men Of Steel
 	Buildable:
-		Description: ra_upgrade_menofsteel.description
+		Description: ra1_soviets_upgrade_menofsteel.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_conscription, !ra1_soviets_upgrade_menofsteel
 	RenderSprites:
 		Image: ra1_soviets_upgrade_menofsteel
@@ -139,7 +139,7 @@ ra1_soviets_upgrade_massproduction:
 	Tooltip:
 		Name: Mass Production
 	Buildable:
-		Description: ra_upgrade_massproduction.description
+		Description: ra1_soviets_upgrade_massproduction.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_industrialefficiency, !ra1_soviets_upgrade_massproduction
 	RenderSprites:
 		Image: ra1_soviets_upgrade_massproduction
@@ -149,7 +149,7 @@ ra1_soviets_upgrade_wareconomy:
 	Tooltip:
 		Name: War Economy
 	Buildable:
-		Description: ra_upgrade_wareconomy.description
+		Description: ra1_soviets_upgrade_wareconomy.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_industrialefficiency, !ra1_soviets_upgrade_wareconomy
 	RenderSprites:
 		Image: ra1_soviets_upgrade_wareconomy
@@ -161,7 +161,7 @@ ra1_soviets_upgrade_incendiarybullets:
 	Tooltip:
 		Name: Incendiary Bullets
 	Buildable:
-		Description: ra_upgrade_incendiarybullets.description
+		Description: ra1_soviets_upgrade_incendiarybullets.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_inferno, !ra1_soviets_upgrade_incendiarybullets
 	RenderSprites:
 		Image: ra1_soviets_upgrade_incendiarybullets
@@ -171,7 +171,7 @@ ra1_soviets_upgrade_scorchedearth:
 	Tooltip:
 		Name: Scorched Earth
 	Buildable:
-		Description: ra_upgrade_scorchedearth.description
+		Description: ra1_soviets_upgrade_scorchedearth.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_inferno, !ra1_soviets_upgrade_scorchedearth
 	RenderSprites:
 		Image: ra1_soviets_upgrade_scorchedearth
@@ -183,7 +183,7 @@ ra1_soviets_upgrade_teslaarcing:
 	Tooltip:
 		Name: Tesla Arcing
 	Buildable:
-		Description: ra_upgrade_teslaarcing.description
+		Description: ra1_soviets_upgrade_teslaarcing.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_teslaandexperimentaltech, !ra1_soviets_upgrade_teslaarcing
 	RenderSprites:
 		Image: ra1_soviets_upgrade_teslaarcing
@@ -193,7 +193,7 @@ ra1_soviets_upgrade_teslarockets:
 	Tooltip:
 		Name: Tesla Rockets
 	Buildable:
-		Description: ra_upgrade_teslarockets.description
+		Description: ra1_soviets_upgrade_teslarockets.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_teslaandexperimentaltech, !ra1_soviets_upgrade_teslarockets
 	RenderSprites:
 		Image: ra1_soviets_upgrade_teslarockets
@@ -203,7 +203,7 @@ ra1_soviets_upgrade_reactoroverload:
 	Tooltip:
 		Name: Reactor Overload
 	Buildable:
-		Description: ra_upgrade_reactoroverload.description
+		Description: ra1_soviets_upgrade_reactoroverload.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_teslaandexperimentaltech, !ra1_soviets_upgrade_reactoroverload
 	RenderSprites:
 		Image: ra1_soviets_upgrade_reactoroverload
@@ -215,7 +215,7 @@ ra1_soviets_upgrade_autoloaders:
 	Tooltip:
 		Name: Autoloaders
 	Buildable:
-		Description: ra_upgrade_autoloaders.description
+		Description: ra1_soviets_upgrade_autoloaders.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_heavyarmor, !ra1_soviets_upgrade_autoloaders
 	RenderSprites:
 		Image: ra1_soviets_upgrade_autoloaders
@@ -225,7 +225,7 @@ ra1_soviets_upgrade_highexplosiverockets:
 	Tooltip:
 		Name: High Explosive Rockets
 	Buildable:
-		Description: ra_upgrade_highexplosiverockets.description
+		Description: ra1_soviets_upgrade_highexplosiverockets.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_heavyarmor, !ra1_soviets_upgrade_highexplosiverockets
 	RenderSprites:
 		Image: ra1_soviets_upgrade_highexplosiverockets
@@ -235,7 +235,7 @@ ra1_soviets_upgrade_stalinium:
 	Tooltip:
 		Name: Stalinium
 	Buildable:
-		Description: ra_upgrade_stalinium.description
+		Description: ra1_soviets_upgrade_stalinium.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_heavyarmor, !ra1_soviets_upgrade_stalinium
 	RenderSprites:
 		Image: ra1_soviets_upgrade_stalinium
@@ -247,7 +247,7 @@ ra1_soviets_upgrade_unstableisotopes:
 	Tooltip:
 		Name: Unstable Isotopes
 	Buildable:
-		Description: ra_upgrade_unstableisotopes.description
+		Description: ra1_soviets_upgrade_unstableisotopes.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_nuclearwar, !ra1_soviets_upgrade_unstableisotopes
 	RenderSprites:
 		Image: ra1_soviets_upgrade_unstableisotopes
@@ -257,7 +257,7 @@ ra1_soviets_upgrade_thermonuclearrockets:
 	Tooltip:
 		Name: Thermonuclear Rockets
 	Buildable:
-		Description: ra_upgrade_nuclearrockets.description
+		Description: ra1_soviets_upgrade_thermonuclearrockets.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_nuclearwar, !ra1_soviets_upgrade_thermonuclearrockets
 	RenderSprites:
 		Image: ra1_soviets_upgrade_thermonuclearrockets
@@ -267,7 +267,7 @@ ra1_soviets_upgrade_nucleartankshells:
 	Tooltip:
 		Name: Nuclear Tank Shells
 	Buildable:
-		Description: ra_upgrade_nuclearshells.description
+		Description: ra1_soviets_upgrade_nucleartankshells.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_nuclearwar, !ra1_soviets_upgrade_nucleartankshells
 	RenderSprites:
 		Image: ra1_soviets_upgrade_nucleartankshells
@@ -279,7 +279,7 @@ ra1_soviets_upgrade_afterburners:
 	Tooltip:
 		Name: Afterburners
 	Buildable:
-		Description: ra_upgrade_afterburners.description
+		Description: ra1_soviets_upgrade_afterburners.description
 		Prerequisites: ~ra1_soviets_radardome, !ra1_soviets_upgrade_afterburners
 	RenderSprites:
 		Image: ra1_soviets_upgrade_afterburners
@@ -309,7 +309,7 @@ ra1_soviets_upgrade_shtoradefensesystem:
 	Tooltip:
 		Name: Shtora Defense System Upgrade
 	Buildable:
-		Description: ra_upgrade_shtoradefensesystem.description
+		Description: ra1_soviets_upgrade_shtoradefensesystem.description
 		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_hammertank, !ra1_soviets_upgrade_shtoradefensesystem
 	RenderSprites:
 		Image: ra1_soviets_upgrade_shtoradefensesystem

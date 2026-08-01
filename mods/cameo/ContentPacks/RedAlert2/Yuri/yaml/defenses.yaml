@@ -370,21 +370,21 @@ yuri_gatlingcannon:
 		MuzzlePalette: ra2effect
 	Armament@1AA:
 		Name: secondary
-		Weapon: RA2GattlingMG1AA
+		Weapon: RA2GattlingMG1_AA
 		PauseOnCondition: gatling
 		LocalOffset: 500,140,400, 500,-150,400
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 	Armament@2AA:
 		Name: secondary
-		Weapon: RA2GattlingMG2AA
+		Weapon: RA2GattlingMG2_AA
 		PauseOnCondition: gatling != 1
 		LocalOffset: 500,140,400, 500,-150,400
 		MuzzleSequence: muzzle-1
 		MuzzlePalette: ra2effect
 	Armament@3AA:
 		Name: secondary
-		Weapon: RA2GattlingMG3AA
+		Weapon: RA2GattlingMG3_AA
 		PauseOnCondition: gatling < 2
 		LocalOffset: 500,140,400, 500,-150,400
 		MuzzleSequence: muzzle-2
