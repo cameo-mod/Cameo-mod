@@ -29,6 +29,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		public readonly int InitialAttackDelay = 0;
 
+		[Desc("Prioritize the first barracks before the first refinery for configured factions.")]
+		public readonly bool PrioritizeBarracksBeforeRefinery = false;
+
 		public override object Create(ActorInitializer init) { return new BotLimits(init.Self, this); }
 	}
 
