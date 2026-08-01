@@ -28,10 +28,22 @@ committed: `^MissileVehicleTemplate` + 10 reassignments (missile-MLRS family + N
 removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
 
 **Queue (priority order):**
+0. **[DONE 2026-08-01, `59c77f444`] Armor normalization** — armor is now a per-CLASS property (single
+   source in `^<Class>Template`). Fixed 3 templates (MBT→Heavy, HighTechTank→Superheavy,
+   LineBreaker→Superheavy) + stripped 215 flat per-actor `Armor: Type:` overrides + dropped stale Medium
+   from `^CombatTank`. Verified 273/274 class vehicles resolve to class armor; boot-gated. **OPEN items
+   left for later:** (a) `wc2_humans_paladin` is tagged `line_breaker` but is a vehicle inheriting the
+   *infantry* `wc2_humans_knight` — suspected mis-tag, resolves Medium not Superheavy; re-classify in a
+   tagging pass. (b) 4 conditional-armor actors intentionally KEPT their `Armor: RequiresCondition:`
+   deploy/shield swaps and were NOT normalized: `terran_siegetank` (Heavy), `terran_matador` (Medium),
+   `td_gdi_defenserig` (Superheavy — already correct), `cabal_ravager` (Plate) — decide per-unit whether
+   the base-state armor should match class.
 1. **[BLOCKED on maintainer confirm + `--confirm`] Apply VEHICLE stats** — once the REVISION table is
    confirmed: baselines → `apply_balance --confirm` (fit_class scales members 0.5–4.0×, verifier 2.5×) →
-   armor normalization → self-heal Step → epic 4×HP + MonsterTank DPS→10000 → re-extract → audits + BOOT →
-   commit yaml+ledger. THEN **infantry** (build the same big class table first, then apply).
+   self-heal Step → epic 4×HP + MonsterTank DPS→10000 → re-extract → audits + BOOT →
+   commit yaml+ledger. THEN **infantry** (build the same big class table first, then apply). NOTE: the
+   HP/Speed/Cost/DPS restat of the 13 baselines + per-member synthesis is still pending here; DPS/range
+   are blocked on the weapon/cannon rebuild (#4).
 2. **[L] Regression sweep** — review all commits since ~2026-07-24; hunt fluent/description-reference
    breakages like the RA1-Soviet upgrade regression (broke in `53fb10725`, fixed `f68a01833`). Pattern:
    renames that update Fluent keys but leave live `Buildable.Description` refs pointing at the old key.
