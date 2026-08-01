@@ -450,7 +450,7 @@ td_nod_ssmlauncher:
 
 td_nod_stealthtank:
 	Inherits: ^Vehicle
-	Inherits@Template: ^FireSupportTemplate
+	Inherits@Template: ^MissileVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
@@ -460,7 +460,6 @@ td_nod_stealthtank:
 	Inherits@cloak: ^CloakedVehicle
 	Inherits@cloakanim: ^TiberiumCloakAnimation
 	Inherits@GuerillaTactics: ^GuerillaTactics
-	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
 	Valued:

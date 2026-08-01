@@ -560,7 +560,6 @@ cabal_scarabapc:
 
 cabal_berserker:
 	Inherits: ^Soldier
-	Inherits@Template: ^LineBreakerTemplate
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@DualArmor: ^TSCyborgDualArmorHeavy
 	Inherits@Cyborg: ^TSCyborgs

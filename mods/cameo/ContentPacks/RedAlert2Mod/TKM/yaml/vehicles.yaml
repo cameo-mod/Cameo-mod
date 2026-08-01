@@ -428,7 +428,7 @@ tkm_zaza:
 		PlayerPalette: player_rgba
 tkm_stryker:
 	Inherits: ^Vehicle
-	Inherits@Template: ^FireSupportTemplate
+	Inherits@Template: ^MissileVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP

@@ -655,7 +655,7 @@ naxis_brummbar:
 
 naxis_sturmtiger:
 	Inherits: ^Tank
-	Inherits@Template: ^ArtilleryTankTemplate
+	Inherits@Template: ^DreadnoughtTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -1113,7 +1113,7 @@ naxis_shoekarn:
 
 naxis_nokana:
 	Inherits: ^Tank
-	Inherits@Template: ^FireSupportTemplate
+	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove

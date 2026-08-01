@@ -1468,7 +1468,7 @@ ordos_stealthraider:
 		Upgrades: ordos_upgrade_lasercartridges
 ordos_dustdrone:
 	Inherits@D2KV: ^D2KVehicle
-	Inherits@Template: ^FireSupportTemplate
+	Inherits@Template: ^MissileVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
