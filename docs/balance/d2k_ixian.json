@@ -4,13 +4,13 @@
  "schema": 2,
  "sections": {
   "aircraft": {
-   "farasha_drone.ixian": {
+   "farasha_drone_ixian": {
     "armaments": [
      {
       "burst": "5",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "2500",
       "reloaddelay": "25",
@@ -67,8 +67,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "farasha_drone.ixian",
-      "weapon_class_source": "template",
+      "weapon": "farasha_drone_ixian",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -83,10 +83,9 @@
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Valued.Cost",
-     "v": "1000"
+     "v": "240"
     },
     "design": {
-     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
      "subtype": "Bomber",
@@ -195,7 +194,7 @@
        }
       ],
       "weapon": "ixian_airdrone",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LightChemicalWeapon",
@@ -254,7 +253,7 @@
        }
       ],
       "weapon": "d2k_air_drone_guns",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^D2KMissile",
        "^SmallArms",
@@ -320,7 +319,7 @@
        }
       ],
       "weapon": "d2k_air_drone_guns_upgrade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^D2KMissile",
@@ -424,8 +423,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IxianEmpBomb",
-      "weapon_class_source": "template",
+      "weapon": "IxianBomb_EMP",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^HeavyBomb",
@@ -568,7 +567,7 @@
        }
       ],
       "weapon": "ixian_farasha",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyFlameWeapon",
@@ -636,7 +635,7 @@
        }
       ],
       "weapon": "d2k_farasha_aa",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyFlameWeapon",
@@ -751,7 +750,7 @@
        }
       ],
       "weapon": "IxRailgunDroneBullet",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^TankDestroyerCannon",
@@ -831,7 +830,7 @@
        }
       ],
       "weapon": "ResonanceDroneRepair",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -1038,7 +1037,7 @@
        }
       ],
       "weapon": "110mm_Gun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -1236,7 +1235,7 @@
        }
       ],
       "weapon": "HMG_turret",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1290,7 +1289,7 @@
        }
       ],
       "weapon": "HMG_turret_upgrade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -1556,7 +1555,7 @@
        }
       ],
       "weapon": "D2K_TowerMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -1724,7 +1723,7 @@
        }
       ],
       "weapon": "d2kStormLasher",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon"
@@ -1909,7 +1908,7 @@
        }
       ],
       "weapon": "RashinanGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -1996,7 +1995,7 @@
        }
       ],
       "weapon": "RashinanGun_upgrade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon",
@@ -2067,7 +2066,7 @@
        }
       ],
       "weapon": "RashinanGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -2155,7 +2154,7 @@
        }
       ],
       "weapon": "RashinanGun_upgrade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon",
@@ -2243,7 +2242,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -2296,7 +2295,7 @@
        }
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -2340,7 +2339,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -2394,7 +2393,7 @@
        }
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -2493,7 +2492,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -2546,7 +2545,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -2623,7 +2622,7 @@
        }
       ],
       "weapon": "D2K_ShockGunInf",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -2657,7 +2656,7 @@
        }
       ],
       "weapon": "D2K_ShockGunInf",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -2749,7 +2748,7 @@
        }
       ],
       "weapon": "D2K_StormGunInf",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon"
@@ -2800,7 +2799,7 @@
        }
       ],
       "weapon": "D2K_StormGunInf",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon"
@@ -2894,7 +2893,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper1",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -2956,7 +2955,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon",
@@ -3009,7 +3008,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper1",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -3072,7 +3071,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon",
@@ -3703,7 +3702,7 @@
        }
       ],
       "weapon": "d2k_basq",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3775,7 +3774,7 @@
        }
       ],
       "weapon": "d2k_basq_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3910,7 +3909,7 @@
        }
       ],
       "weapon": "DuelistTankCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^Grenade",
@@ -4007,7 +4006,7 @@
        }
       ],
       "weapon": "HMG_Duelist",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^Grenade",
@@ -4138,7 +4137,7 @@
        }
       ],
       "weapon": "HMG_Duelist_upgrade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon",
        "^HeavyMissile",
@@ -4164,7 +4163,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "high_tech_tank",
      "special": 1.0,
      "subtype": "HighTechTank",
      "tech_tier": 0.75,
@@ -4228,7 +4227,7 @@
        }
       ],
       "weapon": "D2K_Bazooka2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^D2KMissile"
       ]
@@ -4270,7 +4269,7 @@
        }
       ],
       "weapon": "RaiderGuns",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -4324,7 +4323,7 @@
        }
       ],
       "weapon": "RaiderGuns_upgrade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -4429,7 +4428,7 @@
        }
       ],
       "weapon": "HeavyIxianCombatTankCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -4447,7 +4446,7 @@
      "v": "1100"
     },
     "design": {
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": null,
      "subtype": "MainBattleTank",
      "tech_tier": null,
@@ -4537,7 +4536,7 @@
        }
       ],
       "weapon": "D2K_155mm3",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4556,9 +4555,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery_tank",
      "special": 1.0,
-     "subtype": "FireSupport",
+     "subtype": "ArtilleryTank",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -4578,7 +4577,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "9000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
@@ -4647,7 +4646,7 @@
        }
       ],
       "weapon": "mtank_pri2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -4666,9 +4665,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "missile_vehicle",
      "special": 1.25,
-     "subtype": "FireSupport",
+     "subtype": "MissileVehicle",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -4688,7 +4687,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "7000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
@@ -4717,7 +4716,7 @@
         "type": "TargetDamage"
        }
       ],
-      "weapon": "empdisable.anim",
+      "weapon": "IxianCharge_EMP",
       "weapon_class_source": "template",
       "weapon_types": []
      },
@@ -4749,7 +4748,7 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "empdisable.end",
+      "weapon": "IxianDisable_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon"
@@ -4771,7 +4770,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "epic_vehicle",
      "special": null,
      "subtype": "EpicVehicle",
      "tech_tier": null,
@@ -4880,7 +4879,7 @@
        }
       ],
       "weapon": "D2K_155mm2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -4900,7 +4899,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery",
      "special": 1.25,
      "subtype": "Artillery",
      "tech_tier": 1.0,
@@ -4981,7 +4980,7 @@
        }
       ],
       "weapon": "IxianCombatTankCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -4999,7 +4998,7 @@
      "v": "800"
     },
     "design": {
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": null,
      "subtype": "MainBattleTank",
      "tech_tier": null,
@@ -5198,7 +5197,7 @@
        }
       ],
       "weapon": "MongooseRocket",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5222,7 +5221,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": 1.0,
      "subtype": "MainBattleTank",
      "tech_tier": 1.0,
@@ -5303,7 +5302,7 @@
        }
       ],
       "weapon": "D2K_StormGunCymek",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon"
@@ -5373,7 +5372,7 @@
        }
       ],
       "weapon": "D2K_RocketsCymek",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -5393,9 +5392,9 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "dreadnought",
      "special": 1.25,
-     "subtype": "LineBreaker",
+     "subtype": "Dreadnought",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -5478,7 +5477,7 @@
        }
       ],
       "weapon": "D2K_ShockGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon"
@@ -5496,9 +5495,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "light_tank",
      "special": 1.25,
-     "subtype": "FireSupport",
+     "subtype": "LightTank",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -5519,7 +5518,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "6000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
@@ -5624,7 +5623,7 @@
        }
       ],
       "weapon": "D2K_ShockGun2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon"
@@ -5674,7 +5673,7 @@
        }
       ],
       "weapon": "D2K_StormGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon"
@@ -5692,7 +5691,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "fire_support",
      "special": 1.5,
      "subtype": "FireSupport",
      "tech_tier": 0.75,
@@ -5757,7 +5756,7 @@
        }
       ],
       "weapon": "D2K_Bazooka2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^D2KMissile"
       ]

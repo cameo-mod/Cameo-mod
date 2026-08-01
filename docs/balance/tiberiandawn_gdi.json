@@ -32,7 +32,7 @@
        }
       ],
       "weapon": "Vulcan",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -77,7 +77,7 @@
        }
       ],
       "weapon": "Napalm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon"
@@ -143,7 +143,7 @@
        }
       ],
       "weapon": "VulcanA10Carrier",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -188,7 +188,7 @@
        }
       ],
       "weapon": "NapalmA10Carrier",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon"
@@ -221,8 +221,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "A10CarrierMissiles",
-      "weapon_class_source": "template",
+      "weapon": "A10CarrierMissiles_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow"
@@ -236,7 +236,7 @@
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Valued.Cost",
-     "v": "2000"
+     "v": "270"
     },
     "design": {
      "category": "Aircraft",
@@ -291,7 +291,7 @@
        }
       ],
       "weapon": "GDIRigPDLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -326,7 +326,7 @@
        }
       ],
       "weapon": "GDIRigDroneRepair",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -430,8 +430,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FirehawkMissiles",
-      "weapon_class_source": "template",
+      "weapon": "FirehawkMissiles_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow"
@@ -464,8 +464,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FirehawkMissiles",
-      "weapon_class_source": "template",
+      "weapon": "FirehawkMissiles_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow"
@@ -539,7 +539,7 @@
        }
       ],
       "weapon": "FirehawkBomb",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^NuclearWarhead",
@@ -684,7 +684,7 @@
        }
       ],
       "weapon": "OrcaMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
@@ -779,7 +779,7 @@
        }
       ],
       "weapon": "OrcaMissilesAMT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
@@ -1014,7 +1014,7 @@
        }
       ],
       "weapon": "TowerMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^Grenade",
@@ -1122,7 +1122,7 @@
        }
       ],
       "weapon": "TowerMissileAMT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^Grenade",
@@ -1321,7 +1321,7 @@
        }
       ],
       "weapon": "HighV",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1353,7 +1353,7 @@
        }
       ],
       "weapon": "HighVAP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -1557,7 +1557,7 @@
        }
       ],
       "weapon": "SkyshieldCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^LightMissile",
@@ -1709,7 +1709,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -1741,7 +1741,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -1772,7 +1772,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun_ap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -1804,7 +1804,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun_ap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -1870,7 +1870,7 @@
        }
       ],
       "weapon": "Rockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -1900,7 +1900,7 @@
        }
       ],
       "weapon": "Rockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -1930,7 +1930,7 @@
        }
       ],
       "weapon": "RocketsAMT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^AMTProjectile"
@@ -1962,7 +1962,7 @@
        }
       ],
       "weapon": "RocketsAMT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^AMTProjectile"
@@ -1976,7 +1976,7 @@
     "buildable": false,
     "cost": {
      "src": "inherited",
-     "v": "200"
+     "v": "300"
     },
     "design": {
      "category": "Infantry",
@@ -2062,7 +2062,7 @@
        }
       ],
       "weapon": "td_gdi_commando_sniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2092,7 +2092,7 @@
        }
       ],
       "weapon": "td_gdi_commando_sniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2136,8 +2136,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_commando_sniperE",
-      "weapon_class_source": "template",
+      "weapon": "td_gdi_commando_sniper_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^SniperWeapon"
@@ -2183,8 +2183,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_commando_sniperE",
-      "weapon_class_source": "template",
+      "weapon": "td_gdi_commando_sniper_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^SniperWeapon"
@@ -2357,7 +2357,7 @@
        }
       ],
       "weapon": "EMPGrenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^TeslaWeapon",
@@ -2490,7 +2490,7 @@
        }
       ],
       "weapon": "EMPGrenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^TeslaWeapon",
@@ -2577,7 +2577,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade"
       ]
@@ -2611,7 +2611,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade"
       ]
@@ -2692,7 +2692,7 @@
        }
       ],
       "weapon": "CommandoSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon",
        "^Chaingun"
@@ -2732,7 +2732,7 @@
        }
       ],
       "weapon": "CommandoRocketLauncher",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -2783,7 +2783,7 @@
        }
       ],
       "weapon": "CommandoGrenadeLauncher",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^Grenade",
@@ -2826,7 +2826,7 @@
        }
       ],
       "weapon": "CommandoM16",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon",
        "^Chaingun"
@@ -2867,7 +2867,7 @@
        }
       ],
       "weapon": "CommandoSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon",
        "^Chaingun"
@@ -2908,7 +2908,7 @@
        }
       ],
       "weapon": "CommandoRocketLauncher",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -2960,7 +2960,7 @@
        }
       ],
       "weapon": "CommandoGrenadeLauncher",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^Grenade",
@@ -3004,7 +3004,7 @@
        }
       ],
       "weapon": "CommandoM16",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon",
        "^Chaingun"
@@ -3138,7 +3138,7 @@
        }
       ],
       "weapon": "GDISniperRifle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -3208,7 +3208,7 @@
        }
       ],
       "weapon": "GDISniperRifle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -3285,7 +3285,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3317,7 +3317,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3348,7 +3348,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun_ap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -3380,7 +3380,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun_ap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -3468,7 +3468,7 @@
        }
       ],
       "weapon": "OfficerMachineGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3512,7 +3512,7 @@
        }
       ],
       "weapon": "OfficerMachineGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3544,7 +3544,7 @@
        }
       ],
       "weapon": "OfficerMachineGunAP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -3576,7 +3576,7 @@
        }
       ],
       "weapon": "OfficerMachineGunAP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -3653,7 +3653,7 @@
        }
       ],
       "weapon": "Rockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -3683,7 +3683,7 @@
        }
       ],
       "weapon": "Rockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -3713,7 +3713,7 @@
        }
       ],
       "weapon": "RocketsAMT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^AMTProjectile"
@@ -3745,7 +3745,7 @@
        }
       ],
       "weapon": "RocketsAMT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^AMTProjectile"
@@ -3759,7 +3759,7 @@
     "buildable": true,
     "cost": {
      "src": "inherited",
-     "v": "200"
+     "v": "300"
     },
     "design": {
      "category": "Infantry",
@@ -3829,7 +3829,7 @@
        }
       ],
       "weapon": "td_gdi_shotgunner_shotgun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3872,7 +3872,7 @@
        }
       ],
       "weapon": "td_gdi_shotgunner_shotgun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -4008,7 +4008,7 @@
        }
       ],
       "weapon": "MissileSoldierWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LightChemicalWeapon",
@@ -4101,7 +4101,7 @@
        }
       ],
       "weapon": "MissileSoldierWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LightChemicalWeapon",
@@ -4182,7 +4182,7 @@
        }
       ],
       "weapon": "GDIBattleshipRailgun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -4216,7 +4216,7 @@
        }
       ],
       "weapon": "GDIBattleshipRailgun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -4293,7 +4293,7 @@
        }
       ],
       "weapon": "GunboatMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -4325,7 +4325,7 @@
        }
       ],
       "weapon": "GunboatMissileAMT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^AMTProjectile"
@@ -4359,7 +4359,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade"
       ]
@@ -4392,7 +4392,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade"
       ]
@@ -5093,7 +5093,7 @@
        }
       ],
       "weapon": "APCGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon"
@@ -5132,8 +5132,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "APCGunAA",
-      "weapon_class_source": "template",
+      "weapon": "APCGun_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon"
@@ -5264,7 +5264,7 @@
        }
       ],
       "weapon": "ArcherArtilleryShell",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^HeavyCannon",
@@ -5285,9 +5285,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery_tank",
      "special": 1.0,
-     "subtype": "Artillery",
+     "subtype": "ArtilleryTank",
      "tech_tier": 0.75,
      "unit_class": 0.5
     },
@@ -5345,7 +5345,7 @@
        }
       ],
       "weapon": "MachineGunHumvee2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5375,8 +5375,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunHumvee2AA",
-      "weapon_class_source": "template",
+      "weapon": "MachineGunHumvee2_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5407,7 +5407,7 @@
        }
       ],
       "weapon": "MachineGunHumvee2AP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -5437,8 +5437,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunHumvee2APAA",
-      "weapon_class_source": "template",
+      "weapon": "MachineGunHumvee2AP_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -5455,7 +5455,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "line_breaker",
      "special": 1.0,
      "subtype": "LineBreaker",
      "tech_tier": 0.75,
@@ -5514,7 +5514,7 @@
        }
       ],
       "weapon": "120mm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -5544,7 +5544,7 @@
        }
       ],
       "weapon": "120mmHV",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^HVProjectile"
@@ -5574,7 +5574,7 @@
        }
       ],
       "weapon": "M1A1Missiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -5604,7 +5604,7 @@
        }
       ],
       "weapon": "M1A1MissilesAMT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^AMTProjectile"
@@ -5635,7 +5635,7 @@
        }
       ],
       "weapon": "M1A1MachineGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -5652,7 +5652,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": 1.0,
      "subtype": "MainBattleTank",
      "tech_tier": 1.0,
@@ -5774,7 +5774,7 @@
        }
       ],
       "weapon": "BoxerCannonAG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^LightMissile",
@@ -5861,8 +5861,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BoxerCannonAA",
-      "weapon_class_source": "template",
+      "weapon": "BoxerCannon_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^LightMissile",
@@ -5953,7 +5953,7 @@
        }
       ],
       "weapon": "GDIRigPDLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -5987,7 +5987,7 @@
        }
       ],
       "weapon": "GDIRigPDLaserTower",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -6024,7 +6024,7 @@
        }
       ],
       "weapon": "GDIRigDroneTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -6061,7 +6061,7 @@
        }
       ],
       "weapon": "GDIRigDroneTargetingTower",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -6150,7 +6150,7 @@
        }
       ],
       "weapon": "GDIRigPhalanx",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^SmallArms",
@@ -6240,7 +6240,7 @@
        }
       ],
       "weapon": "GDIRigPhalanxTower",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^SmallArms",
@@ -6280,7 +6280,7 @@
        }
       ],
       "weapon": "GDIRigRailgun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -6350,7 +6350,7 @@
        }
       ],
       "weapon": "GDIRigMissilePod",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^Grenade",
@@ -6420,7 +6420,7 @@
        }
       ],
       "weapon": "GDIRigMissilePodAMT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^Grenade",
@@ -6445,7 +6445,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "epic_vehicle",
      "special": null,
      "subtype": "EpicVehicle",
      "tech_tier": null,
@@ -6510,7 +6510,7 @@
        }
       ],
       "weapon": "ExosuitRailgun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -6527,7 +6527,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "fire_support",
      "special": null,
      "subtype": "FireSupport",
      "tech_tier": null,
@@ -6593,7 +6593,7 @@
        }
       ],
       "weapon": "MachineGunH",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -6624,7 +6624,7 @@
        }
       ],
       "weapon": "MachineGunAPH",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -6641,7 +6641,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": 1.0,
      "subtype": "ScoutVehicle",
      "tech_tier": 1.0,
@@ -6701,7 +6701,7 @@
        }
       ],
       "weapon": "MachineGunHumvee2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -6732,7 +6732,7 @@
        }
       ],
       "weapon": "MachineGunHumvee2AP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -6762,8 +6762,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunHumvee2AA",
-      "weapon_class_source": "template",
+      "weapon": "MachineGunHumvee2_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -6793,8 +6793,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunHumvee2APAA",
-      "weapon_class_source": "template",
+      "weapon": "MachineGunHumvee2AP_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -6823,7 +6823,7 @@
        }
       ],
       "weapon": "RocketsHumvee2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -6851,8 +6851,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsHumvee2AA",
-      "weapon_class_source": "template",
+      "weapon": "RocketsHumvee2_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -6893,7 +6893,7 @@
        }
       ],
       "weapon": "RocketsHumvee2AMT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^LightMissile",
@@ -6933,8 +6933,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsHumvee2AMTAA",
-      "weapon_class_source": "template",
+      "weapon": "RocketsHumvee2AMT_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^LightMissile",
@@ -6953,7 +6953,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": null,
      "subtype": "ScoutVehicle",
      "tech_tier": null,
@@ -7018,7 +7018,7 @@
        }
       ],
       "weapon": "120mmDual",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon"
       ]
@@ -7050,7 +7050,7 @@
        }
       ],
       "weapon": "120mmDualHV",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^HVProjectile"
@@ -7084,7 +7084,7 @@
        }
       ],
       "weapon": "MammothMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow"
@@ -7118,7 +7118,7 @@
        }
       ],
       "weapon": "MammothMissilesAMT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow",
@@ -7137,7 +7137,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "high_tech_tank",
      "special": 1.0,
      "subtype": "HighTechTank",
      "tech_tier": 0.75,
@@ -7198,7 +7198,7 @@
        }
       ],
       "weapon": "MammothTank3Cannons",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon"
       ]
@@ -7230,7 +7230,7 @@
        }
       ],
       "weapon": "MammothTank3CannonsHV",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^HVProjectile"
@@ -7264,7 +7264,7 @@
        }
       ],
       "weapon": "MammothTank3Missiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow"
@@ -7298,7 +7298,7 @@
        }
       ],
       "weapon": "MammothTank3MissilesAMT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow",
@@ -7317,7 +7317,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "high_tech_tank",
      "special": null,
      "subtype": "HighTechTank",
      "tech_tier": null,
@@ -7417,7 +7417,7 @@
        }
       ],
       "weapon": "227mm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^Grenade",
@@ -7488,7 +7488,7 @@
        }
       ],
       "weapon": "227mmAMT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^Grenade",
@@ -7509,9 +7509,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "missile_vehicle",
      "special": 1.0,
-     "subtype": "FireSupport",
+     "subtype": "MissileVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -7530,7 +7530,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "7000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Mobile.Speed",
@@ -7615,7 +7615,7 @@
        }
       ],
       "weapon": "GDIPredatorTankCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -7645,7 +7645,7 @@
        }
       ],
       "weapon": "GDIPredatorTankCannonHV",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^HVProjectile"
@@ -7676,7 +7676,7 @@
        }
       ],
       "weapon": "GDIPredatorTankMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -7707,7 +7707,7 @@
        }
       ],
       "weapon": "GDIPredatorTankMissilesAMT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^AMTProjectile"
@@ -7738,7 +7738,7 @@
        }
       ],
       "weapon": "GDIPredatorMachineGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -7769,7 +7769,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": 1.25,
      "subtype": "MainBattleTank",
      "tech_tier": 1.0,

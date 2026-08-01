@@ -40,7 +40,7 @@
        }
       ],
       "weapon": "BlackHawkCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -152,7 +152,7 @@
        }
       ],
       "weapon": "MigMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -216,8 +216,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissilesE",
-      "weapon_class_source": "template",
+      "weapon": "MigMissiles_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -282,7 +282,7 @@
        }
       ],
       "weapon": "MigMissiles_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -302,7 +302,7 @@
       "requires": "rank-elite",
       "slot": "Armament@AAELITE",
       "versus_templates": [
-       "MigMissilesE"
+       "MigMissiles_elite"
       ],
       "warheads": [
        {
@@ -346,8 +346,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissiles_AA_ELITE",
-      "weapon_class_source": "template",
+      "weapon": "MigMissiles_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -458,7 +458,7 @@
        }
       ],
       "weapon": "YakovlevCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -524,8 +524,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakovlevCannonE",
-      "weapon_class_source": "template",
+      "weapon": "YakovlevCannon_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -591,8 +591,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakovlevCannonE",
-      "weapon_class_source": "template",
+      "weapon": "YakovlevCannon_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -876,7 +876,7 @@
        }
       ],
       "weapon": "LatinAADefenderCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^RA2FlakWeapon"
@@ -918,7 +918,7 @@
        }
       ],
       "weapon": "LatinAADefenderCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^RA2FlakWeapon"
@@ -1052,7 +1052,7 @@
        }
       ],
       "weapon": "LatinSentryMG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2SmallArms",
@@ -1104,8 +1104,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSentryMGE",
-      "weapon_class_source": "template",
+      "weapon": "LatinSentryMG_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2SmallArms",
@@ -1646,7 +1646,7 @@
        }
       ],
       "weapon": "RA2FreedomAK47",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -1698,8 +1698,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomAK47E",
-      "weapon_class_source": "template",
+      "weapon": "RA2FreedomAK47_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -1758,7 +1758,7 @@
        }
       ],
       "weapon": "RA2FreedomRocket",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^ShrapnelWeapon",
@@ -1814,8 +1814,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomRocketE",
-      "weapon_class_source": "template",
+      "weapon": "RA2FreedomRocket_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^ShrapnelWeapon",
@@ -1871,7 +1871,7 @@
        }
       ],
       "weapon": "RA2FreedomAK47",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -1924,8 +1924,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomAK47E",
-      "weapon_class_source": "template",
+      "weapon": "RA2FreedomAK47_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -1984,7 +1984,7 @@
        }
       ],
       "weapon": "RA2FreedomRocket",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^ShrapnelWeapon",
@@ -2040,8 +2040,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomRocketE",
-      "weapon_class_source": "template",
+      "weapon": "RA2FreedomRocket_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^ShrapnelWeapon",
@@ -2156,7 +2156,7 @@
        }
       ],
       "weapon": "LatinMonkeyGrenade1",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2220,7 +2220,7 @@
        }
       ],
       "weapon": "LatinMonkeyGrenade2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2284,7 +2284,7 @@
        }
       ],
       "weapon": "LatinMonkeyGrenade3",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2349,7 +2349,7 @@
        }
       ],
       "weapon": "LatinMonkeyGrenade1",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2414,7 +2414,7 @@
        }
       ],
       "weapon": "LatinMonkeyGrenade2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2479,7 +2479,7 @@
        }
       ],
       "weapon": "LatinMonkeyGrenade3",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2590,7 +2590,7 @@
        }
       ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -2657,8 +2657,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SyndicateFireballLauncherE",
-      "weapon_class_source": "template",
+      "weapon": "SyndicateFireballLauncher_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -2729,7 +2729,7 @@
        }
       ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -2797,8 +2797,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SyndicateFireballLauncherE",
-      "weapon_class_source": "template",
+      "weapon": "SyndicateFireballLauncher_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -2873,7 +2873,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_ak47",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -2904,7 +2904,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_ak47_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -2986,7 +2986,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3070,7 +3070,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3105,7 +3105,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_ak47",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -3137,7 +3137,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_ak47_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -3220,7 +3220,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3305,7 +3305,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3357,167 +3357,6 @@
      "v": "51"
     }
    },
-   "latinsyndicate_latintankkiller": {
-    "armaments": [
-     {
-      "armament_name": "primary",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": true,
-      "range": "6666",
-      "reloaddelay": "66",
-      "requires": "!rank-elite",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^RA2LightMissile"
-      ],
-      "warheads": [
-       {
-        "damage": "26000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "13",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "LatinTankKillerRocket",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": false,
-      "range": "6666",
-      "reloaddelay": "66",
-      "requires": "!rank-elite",
-      "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "^RA2LightMissile"
-      ],
-      "warheads": [
-       {
-        "damage": "26000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "13",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "LatinTankKillerRocket",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": true,
-      "range": "7777",
-      "reloaddelay": "66",
-      "requires": "rank-elite",
-      "slot": "Armament@PRIMARYE",
-      "versus_templates": [
-       "LatinTankKillerRocket"
-      ],
-      "warheads": [
-       {
-        "damage": "52000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "26",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "LatinTankKillerRocket_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": false,
-      "range": "7777",
-      "reloaddelay": "66",
-      "requires": "rank-elite",
-      "slot": "Armament@GARRISONEDE",
-      "versus_templates": [
-       "LatinTankKillerRocket"
-      ],
-      "warheads": [
-       {
-        "damage": "52000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "26",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "LatinTankKillerRocket_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
-     }
-    ],
-    "armor": {
-     "src": "inherited",
-     "v": "Flak"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Valued.Cost",
-     "v": "270"
-    },
-    "design": {
-     "category": "Infantry",
-     "class_anchor": null,
-     "special": 1.0,
-     "subtype": "AntiTankAntiAirInfantry",
-     "tech_tier": 1.0,
-     "unit_class": 0.5
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Health.HP",
-     "v": "13000"
-    },
-    "name": "Latin Tank Killer",
-    "prerequisites": [
-     "~latinsyndicate_combatbarracks"
-    ],
-    "queue": [
-     "Infantry",
-     "RAInfantry"
-    ],
-    "sight": {
-     "src": "inherited",
-     "v": "6500"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Mobile.Speed",
-     "v": "53"
-    }
-   },
    "latinsyndicate_narco": {
     "armaments": [
      {
@@ -3549,7 +3388,7 @@
        }
       ],
       "weapon": "NarcoGrenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade"
       ]
@@ -3584,8 +3423,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NarcoGrenadeE",
-      "weapon_class_source": "template",
+      "weapon": "NarcoGrenade_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade"
       ]
@@ -3614,7 +3453,7 @@
        }
       ],
       "weapon": "RA2NarcoPistol",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3644,8 +3483,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2NarcoPistolsE",
-      "weapon_class_source": "template",
+      "weapon": "RA2NarcoPistols_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3680,7 +3519,7 @@
        }
       ],
       "weapon": "NarcoGrenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade"
       ]
@@ -3716,8 +3555,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NarcoGrenadeE",
-      "weapon_class_source": "template",
+      "weapon": "NarcoGrenade_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade"
       ]
@@ -3747,7 +3586,7 @@
        }
       ],
       "weapon": "RA2NarcoPistol",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3778,8 +3617,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2NarcoPistolsE",
-      "weapon_class_source": "template",
+      "weapon": "RA2NarcoPistols_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3828,6 +3667,166 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Mobile.Speed",
      "v": "70"
+    }
+   },
+   "latinsyndicate_tankkiller": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6666",
+      "reloaddelay": "66",
+      "requires": "!rank-elite",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RA2LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "26000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "13",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "LatinTankKillerRocket",
+      "weapon_class_source": "versus_shield",
+      "weapon_types": [
+       "^RA2LightMissile"
+      ]
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "6666",
+      "reloaddelay": "66",
+      "requires": "!rank-elite",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^RA2LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "26000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "13",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "LatinTankKillerRocket",
+      "weapon_class_source": "versus_shield",
+      "weapon_types": [
+       "^RA2LightMissile"
+      ]
+     },
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "7777",
+      "reloaddelay": "66",
+      "requires": "rank-elite",
+      "slot": "Armament@PRIMARYE",
+      "versus_templates": [
+       "LatinTankKillerRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "52000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "26",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "LatinTankKillerRocket_elite",
+      "weapon_class_source": "versus_shield",
+      "weapon_types": [
+       "^RA2LightMissile"
+      ]
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "7777",
+      "reloaddelay": "66",
+      "requires": "rank-elite",
+      "slot": "Armament@GARRISONEDE",
+      "versus_templates": [
+       "LatinTankKillerRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "52000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "26",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "LatinTankKillerRocket_elite",
+      "weapon_class_source": "versus_shield",
+      "weapon_types": [
+       "^RA2LightMissile"
+      ]
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Valued.Cost",
+     "v": "270"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Health.HP",
+     "v": "13000"
+    },
+    "name": "Latin Tank Killer",
+    "prerequisites": [
+     "~latinsyndicate_combatbarracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Mobile.Speed",
+     "v": "53"
     }
    },
    "latinsyndicate_terrorist": {
@@ -3953,7 +3952,7 @@
        }
       ],
       "weapon": "Rammax_Sabot",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^LaserWeapon",
@@ -4018,7 +4017,7 @@
        }
       ],
       "weapon": "Rammax_Sabot",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^LaserWeapon",
@@ -4124,7 +4123,7 @@
        }
       ],
       "weapon": "RA2AkulaRockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^RA2Grenade",
@@ -4231,7 +4230,7 @@
        }
       ],
       "weapon": "LatinSentryMG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2SmallArms",
@@ -4283,8 +4282,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSentryMGE",
-      "weapon_class_source": "template",
+      "weapon": "LatinSentryMG_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2SmallArms",
@@ -4991,7 +4990,7 @@
        }
       ],
       "weapon": "RA2RBurritoRocket",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2Grenade",
        "^ShrapnelWeapon",
@@ -5086,7 +5085,7 @@
        }
       ],
       "weapon": "RA2RBurritoRocket",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2Grenade",
        "^ShrapnelWeapon",
@@ -5107,7 +5106,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery",
      "special": 1.0,
      "subtype": "Artillery",
      "tech_tier": 0.75,
@@ -5171,7 +5170,7 @@
        }
       ],
       "weapon": "RA2Narco60mm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -5201,8 +5200,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Narco60mmE",
-      "weapon_class_source": "template",
+      "weapon": "RA2Narco60mm_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -5219,7 +5218,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "line_breaker",
      "special": 1.0,
      "subtype": "LineBreaker",
      "tech_tier": 0.75,
@@ -5424,7 +5423,7 @@
        }
       ],
       "weapon": "DiabloCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -5488,8 +5487,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DiabloCannonE",
-      "weapon_class_source": "template",
+      "weapon": "DiabloCannon_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -5551,8 +5550,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DiabloCannonAA",
-      "weapon_class_source": "template",
+      "weapon": "DiabloCannon_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -5572,7 +5571,7 @@
       "requires": "rank-elite",
       "slot": "Armament@AAE",
       "versus_templates": [
-       "DiabloCannonAA"
+       "DiabloCannon_AA"
       ],
       "warheads": [
        {
@@ -5616,8 +5615,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DiabloCannonAAE",
-      "weapon_class_source": "template",
+      "weapon": "DiabloCannonAAE_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -5637,9 +5636,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "anti_air_vehicle",
      "special": 1.0,
-     "subtype": "SupportVehicle",
+     "subtype": "AntiAirVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -5657,7 +5656,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "7000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.Speed",
@@ -5740,7 +5739,7 @@
        }
       ],
       "weapon": "RA2LarsRocket",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^D2KRocket",
        "^HeavyAAWeapon",
@@ -5820,7 +5819,7 @@
        }
       ],
       "weapon": "RA2LarsRocket",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^D2KRocket",
        "^HeavyAAWeapon",
@@ -5841,9 +5840,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "missile_vehicle",
      "special": 1.0,
-     "subtype": "FireSupport",
+     "subtype": "MissileVehicle",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -5868,7 +5867,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "7000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.Speed",
@@ -5938,7 +5937,7 @@
        }
       ],
       "weapon": "RA2APCFlakCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -6001,8 +6000,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCFlakCannonE",
-      "weapon_class_source": "template",
+      "weapon": "RA2APCFlakCannon_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -6064,7 +6063,7 @@
        }
       ],
       "weapon": "RA2APCFlakCannonAA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -6127,8 +6126,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCFlakCannonAAE",
-      "weapon_class_source": "template",
+      "weapon": "RA2APCFlakCannonAA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -6173,7 +6172,7 @@
        }
       ],
       "weapon": "RA2APCMachineGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -6214,8 +6213,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCMachineGunE",
-      "weapon_class_source": "template",
+      "weapon": "RA2APCMachineGun_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -6256,8 +6255,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCMachineGunAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2APCMachineGun_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -6274,7 +6273,7 @@
       "requires": "latinsyndicate_upgrade_yuristolentechchainguns && rank-elite",
       "slot": "Armament@MachinegunAAELITE",
       "versus_templates": [
-       "RA2APCMachineGunAA"
+       "RA2APCMachineGun_AA"
       ],
       "warheads": [
        {
@@ -6298,8 +6297,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCMachineGunAAE",
-      "weapon_class_source": "template",
+      "weapon": "RA2APCMachineGun_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -6364,7 +6363,7 @@
        }
       ],
       "weapon": "RA2APCRocket",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -6427,8 +6426,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCRocketE",
-      "weapon_class_source": "template",
+      "weapon": "RA2APCRocket_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -6491,8 +6490,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCRocketAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2APCRocket_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -6511,7 +6510,7 @@
       "requires": "latinsyndicate_doctrine_cartelrockets && rank-elite",
       "slot": "Armament@RocketsAAELITE",
       "versus_templates": [
-       "RA2APCRocketAA"
+       "RA2APCRocket_AA"
       ],
       "warheads": [
        {
@@ -6555,8 +6554,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCRocketAAE",
-      "weapon_class_source": "template",
+      "weapon": "RA2APCRocket_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -6685,7 +6684,7 @@
        }
       ],
       "weapon": "RA2RTruckRocket",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2Grenade",
        "^LightFlameWeapon",
@@ -6768,7 +6767,7 @@
        }
       ],
       "weapon": "RA2RTruckRocket",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2Grenade",
        "^LightFlameWeapon",
@@ -6788,7 +6787,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "fire_support",
      "special": null,
      "subtype": "FireSupport",
      "tech_tier": null,
@@ -6928,7 +6927,7 @@
        }
       ],
       "weapon": "RA2MortarBike",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -7034,8 +7033,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MortarBikeE",
-      "weapon_class_source": "template",
+      "weapon": "RA2MortarBike_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -7133,7 +7132,7 @@
        }
       ],
       "weapon": "RA2NarcoAKM",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7174,8 +7173,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2NarcoAKME",
-      "weapon_class_source": "template",
+      "weapon": "RA2NarcoAKM_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7257,7 +7256,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "epic_vehicle",
      "special": null,
      "subtype": "EpicVehicle",
      "tech_tier": null,
@@ -7329,7 +7328,7 @@
        }
       ],
       "weapon": "LatinBuggyMG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7370,8 +7369,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyMGE",
-      "weapon_class_source": "template",
+      "weapon": "LatinBuggyMG_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7434,7 +7433,7 @@
        }
       ],
       "weapon": "LatinBuggyChaingun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -7495,8 +7494,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyChaingunE",
-      "weapon_class_source": "template",
+      "weapon": "LatinBuggyChaingun_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -7571,7 +7570,7 @@
        }
       ],
       "weapon": "LatinBuggyRocket",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -7644,8 +7643,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyRocketE",
-      "weapon_class_source": "template",
+      "weapon": "LatinBuggyRocket_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -7751,7 +7750,7 @@
        }
       ],
       "weapon": "RA2Gren60mm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2HeavyCannon",
        "^RA2MediumCannon",
@@ -7804,8 +7803,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Gren60mmE",
-      "weapon_class_source": "template",
+      "weapon": "RA2Gren60mm_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2HeavyCannon",
        "^RA2MediumCannon",
@@ -7836,7 +7835,7 @@
        }
       ],
       "weapon": "LatinRusherRocket",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -7864,8 +7863,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinRusherRocketE",
-      "weapon_class_source": "template",
+      "weapon": "LatinRusherRocket_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -7882,9 +7881,9 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "light_tank",
      "special": 1.0,
-     "subtype": "MainBattleTank",
+     "subtype": "LightTank",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -8011,7 +8010,7 @@
        }
       ],
       "weapon": "LatinSmokerCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumFlameWeapon",
@@ -8113,8 +8112,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSmokerCannonE",
-      "weapon_class_source": "template",
+      "weapon": "LatinSmokerCannon_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumFlameWeapon",
@@ -8178,7 +8177,7 @@
        }
       ],
       "weapon": "RA2GrenadePack",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^Grenade",
@@ -8236,8 +8235,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GrenadePackE",
-      "weapon_class_source": "template",
+      "weapon": "RA2GrenadePack_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^Grenade",
@@ -8269,7 +8268,7 @@
        }
       ],
       "weapon": "LatinSmokerRocket",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -8297,8 +8296,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSmokerRocketE",
-      "weapon_class_source": "template",
+      "weapon": "LatinSmokerRocket_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -8315,7 +8314,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": 1.0,
      "subtype": "MainBattleTank",
      "tech_tier": 1.0,
@@ -8517,7 +8516,7 @@
        }
       ],
       "weapon": "RA2TOPOLCuba",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^NuclearWarhead",
        "^HeavyBomb",
@@ -8543,7 +8542,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "epic_vehicle",
      "special": 1.0,
      "subtype": "EpicVehicle",
      "tech_tier": 0.75,
@@ -8615,7 +8614,7 @@
        }
       ],
       "weapon": "LatinBuggyMG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -8656,8 +8655,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyMGE",
-      "weapon_class_source": "template",
+      "weapon": "LatinBuggyMG_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -8720,7 +8719,7 @@
        }
       ],
       "weapon": "LatinBuggyChaingun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -8781,8 +8780,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyChaingunE",
-      "weapon_class_source": "template",
+      "weapon": "LatinBuggyChaingun_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -8802,7 +8801,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "line_breaker",
      "special": 1.0,
      "subtype": "LineBreaker",
      "tech_tier": 0.5,
@@ -8921,7 +8920,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -8939,7 +8938,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": null,
      "subtype": "ScoutVehicle",
      "tech_tier": null,
@@ -9050,7 +9049,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -9068,7 +9067,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": null,
      "subtype": "ScoutVehicle",
      "tech_tier": null,

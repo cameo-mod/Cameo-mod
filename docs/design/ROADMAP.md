@@ -42,6 +42,12 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    names them + I propose. See [[cameo-weapon-structure-rules]].
 5. **Weapons-hygiene batch** — folds into #4 (also fix the duplicate `227mm` weapon def in
    `weapons/tiberiandawn.yaml` vs `weapons/missiles.yaml`).
+6. **[L] Actor-to-actor inheritance audit (DEFERRED, maintainer 2026-07-31)** — prefer `^Templates`
+   over `Inherits: <actor>` for ContentPack self-containment. **199 existing instances reviewed &
+   deemed fine/grandfathered** (116 = RA2 civ-terrain `ra2ct*`; ~83 variant/husk: `*mkii`←base,
+   `ifv_*`←ifv, `E1`←minigunner, badger family, WC2 towers). NOT a must-fix — do it as its own pass
+   later; resolution = inline (cross-pack/one-off) or hoist to `^Template` (same-pack). Memory:
+   [[cameo-no-actor-inheritance]]. Audit cmd in the memory. Don't stop pipeline work for it.
 
 **ENGINE workflow (Blackrobe 2026-07-31):** `cameo-mod/engine` is a git **submodule → origin
 `Cameo-mod/OpenRA`**, whose **main branch is `cameo-engine`**. Engine updates: branch off `cameo-engine`;

@@ -35,7 +35,7 @@
        }
       ],
       "weapon": "RA2KirovBomb",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb"
       ]
@@ -86,7 +86,7 @@
        }
       ],
       "weapon": "RA2KirovBomb_rad",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyBomb",
@@ -122,7 +122,7 @@
        }
       ],
       "weapon": "RA2KirovBomb_fire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb"
       ]
@@ -172,7 +172,7 @@
        }
       ],
       "weapon": "RA2KirovBomb_tesla",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^HeavyBomb"
@@ -218,7 +218,7 @@
        }
       ],
       "weapon": "RA2KirovBomb_nuclear",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^NuclearWarhead",
        "^HeavyBomb"
@@ -262,8 +262,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2KirovBomb_nuclear_E",
-      "weapon_class_source": "template",
+      "weapon": "RA2KirovBomb_nuclear_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^NuclearWarhead",
        "^HeavyBomb"
@@ -372,7 +372,7 @@
        }
       ],
       "weapon": "MigMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -470,7 +470,7 @@
        }
       ],
       "weapon": "MigMissiles_rad",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon",
@@ -538,7 +538,7 @@
        }
       ],
       "weapon": "MigMissiles_fire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -603,7 +603,7 @@
        }
       ],
       "weapon": "MigMissiles_tesla",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -667,8 +667,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissilesE",
-      "weapon_class_source": "template",
+      "weapon": "MigMissiles_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -732,8 +732,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissilesE_tesla",
-      "weapon_class_source": "template",
+      "weapon": "MigMissiles_tesla_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -798,7 +798,7 @@
        }
       ],
       "weapon": "MigMissiles_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -818,7 +818,7 @@
       "requires": "rank-elite",
       "slot": "Armament@AAELITE",
       "versus_templates": [
-       "MigMissilesE"
+       "MigMissiles_elite"
       ],
       "warheads": [
        {
@@ -862,8 +862,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissiles_AA_ELITE",
-      "weapon_class_source": "template",
+      "weapon": "MigMissiles_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -948,7 +948,7 @@
        }
       ],
       "weapon": "BlackHawkCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -967,7 +967,7 @@
        "^DeployTargeting"
       ],
       "warheads": [],
-      "weapon": "deploytargeting.5c0",
+      "weapon": "deploytargeting_5c0",
       "weapon_class_source": "template",
       "weapon_types": [
        "^DeployTargeting"
@@ -1020,7 +1020,7 @@
        }
       ],
       "weapon": "RA160mm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade"
@@ -1105,7 +1105,7 @@
        }
       ],
       "weapon": "RA160mm_rad",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -1160,7 +1160,7 @@
        }
       ],
       "weapon": "RA160mm_fire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade"
@@ -1212,7 +1212,7 @@
        }
       ],
       "weapon": "RA160mm_tesla",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade"
@@ -1267,7 +1267,7 @@
        }
       ],
       "weapon": "RA160mmE_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade",
@@ -1361,8 +1361,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA160mmE_elite_rad",
-      "weapon_class_source": "template",
+      "weapon": "RA160mmE_rad_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^NuclearWarhead",
        "^LightChemicalWeapon",
@@ -1419,8 +1419,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA160mmE_elite_fire",
-      "weapon_class_source": "template",
+      "weapon": "RA160mmE_fire_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade",
@@ -1473,8 +1473,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA160mmE_elite_tesla",
-      "weapon_class_source": "template",
+      "weapon": "RA160mmE_tesla_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade",
@@ -1562,7 +1562,7 @@
        }
       ],
       "weapon": "BlackHawkCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2123,7 +2123,7 @@
        }
       ],
       "weapon": "RA2TURRETFLAKAA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -2293,7 +2293,7 @@
        }
       ],
       "weapon": "RA2vulcan",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2678,7 +2678,7 @@
        }
       ],
       "weapon": "BorisAKM",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2719,8 +2719,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BorisAKME",
-      "weapon_class_source": "template",
+      "weapon": "BorisAKM_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2762,7 +2762,7 @@
        }
       ],
       "weapon": "BorisAKM2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2824,7 +2824,7 @@
        }
       ],
       "weapon": "BorisAKM",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2866,8 +2866,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BorisAKME",
-      "weapon_class_source": "template",
+      "weapon": "BorisAKM_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2943,7 +2943,7 @@
        }
       ],
       "weapon": "ra2_soviets_conscript_carbine",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -2974,7 +2974,7 @@
        }
       ],
       "weapon": "ra2_soviets_conscript_carbine_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -3015,7 +3015,7 @@
        }
       ],
       "weapon": "RA2vulcan3",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3167,7 +3167,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -3202,8 +3202,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2RadBeamWeaponE",
-      "weapon_class_source": "template",
+      "weapon": "RA2RadBeamWeapon_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -3237,7 +3237,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -3384,7 +3384,7 @@
        }
       ],
       "weapon": "RA2CRFlakGuyGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3414,7 +3414,7 @@
        }
       ],
       "weapon": "RA2FLAKAA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3444,7 +3444,7 @@
        }
       ],
       "weapon": "RA2CRFlakGuyGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3474,7 +3474,7 @@
        }
       ],
       "weapon": "RA2FLAKAA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3506,7 +3506,7 @@
        }
       ],
       "weapon": "RA2CRFlakGuyGun_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3538,7 +3538,7 @@
        }
       ],
       "weapon": "RA2FLAKAA_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3570,7 +3570,7 @@
        }
       ],
       "weapon": "RA2CRFlakGuyGun_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3602,7 +3602,7 @@
        }
       ],
       "weapon": "RA2FLAKAA_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3944,8 +3944,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SeaScorpionAA",
-      "weapon_class_source": "template",
+      "weapon": "SeaScorpion_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -4011,7 +4011,7 @@
        }
       ],
       "weapon": "RA2FlakTrackGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -4578,7 +4578,7 @@
        }
       ],
       "weapon": "RA2120xmm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -4686,7 +4686,7 @@
        }
       ],
       "weapon": "RA2120xmm_rad",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -4749,7 +4749,7 @@
        }
       ],
       "weapon": "RA2120xmm_fire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -4808,7 +4808,7 @@
        }
       ],
       "weapon": "RA2120xmm_tesla",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -4840,8 +4840,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MammothTusk",
-      "weapon_class_source": "template",
+      "weapon": "RA2MammothTusk_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -4899,7 +4899,7 @@
        }
       ],
       "weapon": "RA2120xmm_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -5004,8 +5004,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120xmm_elite_rad",
-      "weapon_class_source": "template",
+      "weapon": "RA2120xmm_rad_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -5069,8 +5069,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120xmm_elite_fire",
-      "weapon_class_source": "template",
+      "weapon": "RA2120xmm_fire_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -5130,8 +5130,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120xmm_elite_tesla",
-      "weapon_class_source": "template",
+      "weapon": "RA2120xmm_tesla_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -5150,7 +5150,7 @@
       "requires": "rank-elite",
       "slot": "Armament@SECONDARYELITE",
       "versus_templates": [
-       "RA2MammothTusk"
+       "RA2MammothTusk_AA"
       ],
       "warheads": [
        {
@@ -5164,8 +5164,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MammothTusk_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2MammothTusk_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -5182,7 +5182,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "high_tech_tank",
      "special": 1.0,
      "subtype": "HighTechTank",
      "tech_tier": 0.75,
@@ -5281,7 +5281,7 @@
        }
       ],
       "weapon": "RA2FlakTrackAAGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -5351,7 +5351,7 @@
        }
       ],
       "weapon": "RA2FlakTrackGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -5419,8 +5419,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FlakTrackAAGunE",
-      "weapon_class_source": "template",
+      "weapon": "RA2FlakTrackAAGun_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -5488,8 +5488,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FlakTrackGunE",
-      "weapon_class_source": "template",
+      "weapon": "RA2FlakTrackGun_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -5500,7 +5500,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Light"
+     "v": "Medium"
     },
     "buildable": true,
     "cost": {
@@ -5509,9 +5509,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "anti_air_vehicle",
      "special": 1.0,
-     "subtype": "SupportVehicle",
+     "subtype": "AntiAirVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
@@ -5534,7 +5534,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "7000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.Speed",
@@ -5620,7 +5620,7 @@
        }
       ],
       "weapon": "RA2120mm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -5667,7 +5667,7 @@
        }
       ],
       "weapon": "RA2120mm_rad",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^RA2MediumCannon",
@@ -5699,7 +5699,7 @@
        }
       ],
       "weapon": "RA2120mm_fire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -5729,7 +5729,7 @@
        }
       ],
       "weapon": "RA2120mm_tesla",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -5762,7 +5762,7 @@
        }
       ],
       "weapon": "RA2120mm_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -5810,8 +5810,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120mm_elite_rad",
-      "weapon_class_source": "template",
+      "weapon": "RA2120mm_rad_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^RA2MediumCannon",
@@ -5846,8 +5846,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120mm_elite_fire",
-      "weapon_class_source": "template",
+      "weapon": "RA2120mm_fire_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -5880,8 +5880,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120mm_elite_tesla",
-      "weapon_class_source": "template",
+      "weapon": "RA2120mm_tesla_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -5899,7 +5899,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": 1.0,
      "subtype": "MainBattleTank",
      "tech_tier": 1.0,
@@ -5970,7 +5970,7 @@
         "type": "TargetDamage"
        }
       ],
-      "weapon": "RA2DroneJumpE",
+      "weapon": "RA2DroneJump_elite",
       "weapon_class_source": "template",
       "weapon_types": []
      }
@@ -5986,7 +5986,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": null,
      "subtype": "ScoutVehicle",
      "tech_tier": null,
@@ -6139,7 +6139,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "fire_support",
      "special": null,
      "subtype": "FireSupport",
      "tech_tier": null,
@@ -6200,7 +6200,7 @@
       "slot": "Armament@PRIMARYELITE",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "V3LaunchE",
+      "weapon": "V3Launch_elite",
       "weapon_class_source": "template",
       "weapon_types": []
      }
@@ -6216,7 +6216,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery",
      "special": 1.0,
      "subtype": "Artillery",
      "tech_tier": 1.0,
@@ -6288,7 +6288,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"

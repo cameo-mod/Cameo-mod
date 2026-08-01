@@ -125,7 +125,7 @@
        }
       ],
       "weapon": "JapanSuperBomb",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -220,8 +220,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlanegunE",
-      "weapon_class_source": "template",
+      "weapon": "NaxPlanegun_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -281,8 +281,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlanegunE",
-      "weapon_class_source": "template",
+      "weapon": "NaxPlanegun_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -391,7 +391,7 @@
        }
       ],
       "weapon": "NaxiInterceptorGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^FlakWeapon",
@@ -435,8 +435,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlaneRocketsE",
-      "weapon_class_source": "template",
+      "weapon": "NaxPlaneRockets_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^D2KRocket"
@@ -450,7 +450,7 @@
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Valued.Cost",
-     "v": "1000"
+     "v": "200"
     },
     "design": {
      "category": "Aircraft",
@@ -517,8 +517,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlaneRocketsE",
-      "weapon_class_source": "template",
+      "weapon": "NaxPlaneRockets_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^D2KRocket"
@@ -561,8 +561,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlaneRocketsE",
-      "weapon_class_source": "template",
+      "weapon": "NaxPlaneRockets_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^D2KRocket"
@@ -620,8 +620,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlanegunE",
-      "weapon_class_source": "template",
+      "weapon": "NaxPlanegun_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -681,8 +681,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlanegunE",
-      "weapon_class_source": "template",
+      "weapon": "NaxPlanegun_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -801,7 +801,7 @@
        }
       ],
       "weapon": "NaxQuadCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -870,8 +870,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonE",
-      "weapon_class_source": "template",
+      "weapon": "NaxQuadCannon_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -940,8 +940,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonAA",
-      "weapon_class_source": "template",
+      "weapon": "NaxQuadCannon_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -961,7 +961,7 @@
       "requires": "rank-elite",
       "slot": "Armament@eliteAA",
       "versus_templates": [
-       "NaxQuadCannonAA"
+       "NaxQuadCannon_AA"
       ],
       "warheads": [
        {
@@ -1010,8 +1010,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonAAE",
-      "weapon_class_source": "template",
+      "weapon": "NaxQuadCannon_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -1330,7 +1330,7 @@
       "reloaddelay": "88",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "NaxQuadCannonAA"
+       "NaxQuadCannon_AA"
       ],
       "warheads": [
        {
@@ -1380,7 +1380,7 @@
        }
       ],
       "weapon": "NaxFlakAA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -1448,7 +1448,7 @@
        }
       ],
       "weapon": "NaxFlakAG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -1632,7 +1632,7 @@
        }
       ],
       "weapon": "NaxGrilleArty",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -1675,7 +1675,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunTop",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1692,7 +1692,7 @@
       "requires": "aa",
       "slot": "Armament@aa",
       "versus_templates": [
-       "NaxQuadCannonAA"
+       "NaxQuadCannon_AA"
       ],
       "warheads": [
        {
@@ -1741,8 +1741,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonAAE",
-      "weapon_class_source": "template",
+      "weapon": "NaxQuadCannon_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -1969,7 +1969,7 @@
        }
       ],
       "weapon": "NaxiRifleT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2176,7 +2176,7 @@
        }
       ],
       "weapon": "NaxiAlienPistol",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -2223,8 +2223,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiAlienPistolE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiAlienPistol_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -2273,7 +2273,7 @@
        }
       ],
       "weapon": "NaxiAlienPistol",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -2321,8 +2321,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiAlienPistolE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiAlienPistol_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -2585,7 +2585,7 @@
        }
       ],
       "weapon": "RA2BrutePunch",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2620,8 +2620,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2BrutePunchE",
-      "weapon_class_source": "template",
+      "weapon": "RA2BrutePunch_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2655,7 +2655,7 @@
        }
       ],
       "weapon": "RA2BrutePunch",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2738,7 +2738,7 @@
        }
       ],
       "weapon": "NaxiAntiTankCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon"
@@ -2779,8 +2779,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiAntiTankCannonE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiAntiTankCannon_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon"
@@ -2866,7 +2866,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunSmall",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2906,8 +2906,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2MachinegunSmallAA",
-      "weapon_class_source": "template",
+      "weapon": "NaxiWW2MachinegunSmall_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2987,7 +2987,7 @@
        }
       ],
       "weapon": "wc2gruntslice",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3017,7 +3017,7 @@
        }
       ],
       "weapon": "NaxiRifleCons",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3048,8 +3048,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleConsE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiRifleCons_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3127,7 +3127,7 @@
        }
       ],
       "weapon": "NaxiFlamerTroop",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -3162,8 +3162,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiFlamerTroopE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiFlamerTroop_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -3200,7 +3200,7 @@
        }
       ],
       "weapon": "NaxiFlamerTroop",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -3236,8 +3236,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiFlamerTroopE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiFlamerTroop_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -3341,7 +3341,7 @@
        }
       ],
       "weapon": "NaxiWW2Machinegunner",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3383,8 +3383,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2MachinegunnerE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiWW2Machinegunner_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3427,7 +3427,7 @@
        }
       ],
       "weapon": "NaxiWW2Machinegunner",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3469,8 +3469,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2MachinegunnerE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiWW2Machinegunner_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3542,7 +3542,7 @@
        }
       ],
       "weapon": "NaxiSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3572,8 +3572,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiSniperE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiSniper_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3603,7 +3603,7 @@
        }
       ],
       "weapon": "NaxiSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3634,8 +3634,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiSniperE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiSniper_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3706,7 +3706,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3737,7 +3737,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3767,7 +3767,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3799,7 +3799,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3874,7 +3874,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3905,7 +3905,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3935,7 +3935,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3967,7 +3967,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -4112,7 +4112,7 @@
        }
       ],
       "weapon": "NaxiShrekCons",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4212,8 +4212,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrekConsE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiShrekCons_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4318,7 +4318,7 @@
        }
       ],
       "weapon": "NaxiShrekCons",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4419,8 +4419,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrekConsE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiShrekCons_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4565,7 +4565,7 @@
        }
       ],
       "weapon": "NaxiShrek",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4665,8 +4665,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrekE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiShrek_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4771,7 +4771,7 @@
        }
       ],
       "weapon": "NaxiShrek",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4872,8 +4872,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrekE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiShrek_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4957,7 +4957,7 @@
       "requires": "(deployed || undeployed) && !rank-elite",
       "slot": "Armament@Deployed",
       "versus_templates": [
-       "NaxQuadCannonAA"
+       "NaxQuadCannon_AA"
       ],
       "warheads": [
        {
@@ -5007,7 +5007,7 @@
        }
       ],
       "weapon": "PortableFlak",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5027,7 +5027,7 @@
       "requires": "(deployed || undeployed) && rank-elite",
       "slot": "Armament@DEPLOYEDELITE",
       "versus_templates": [
-       "NaxQuadCannonAAE"
+       "NaxQuadCannon_AA_elite"
       ],
       "warheads": [
        {
@@ -5076,8 +5076,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PortableFlakE",
-      "weapon_class_source": "template",
+      "weapon": "PortableFlak_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5097,7 +5097,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "NaxQuadCannonAA"
+       "NaxQuadCannon_AA"
       ],
       "warheads": [
        {
@@ -5147,7 +5147,7 @@
        }
       ],
       "weapon": "PortableFlak",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5167,7 +5167,7 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxQuadCannonAAE"
+       "NaxQuadCannon_AA_elite"
       ],
       "warheads": [
        {
@@ -5216,8 +5216,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PortableFlakE",
-      "weapon_class_source": "template",
+      "weapon": "PortableFlak_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5327,7 +5327,7 @@
        }
       ],
       "weapon": "SkyMageCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5395,8 +5395,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SkyMageCannonE",
-      "weapon_class_source": "template",
+      "weapon": "SkyMageCannon_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5415,7 +5415,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@AA",
       "versus_templates": [
-       "NaxQuadCannonAA"
+       "NaxQuadCannon_AA"
       ],
       "warheads": [
        {
@@ -5464,8 +5464,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SkyMageCannonAA",
-      "weapon_class_source": "template",
+      "weapon": "SkyMageCannon_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5484,7 +5484,7 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITEAA",
       "versus_templates": [
-       "SkyMageCannonAA"
+       "SkyMageCannon_AA"
       ],
       "warheads": [
        {
@@ -5533,8 +5533,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SkyMageCannonAAE",
-      "weapon_class_source": "template",
+      "weapon": "SkyMageCannon_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5617,7 +5617,7 @@
        }
       ],
       "weapon": "RA2Shovel",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -5651,7 +5651,7 @@
        }
       ],
       "weapon": "RA2Shovel",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -5736,7 +5736,7 @@
        }
       ],
       "weapon": "NaxiRifle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5766,8 +5766,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiRifle_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5797,7 +5797,7 @@
        }
       ],
       "weapon": "NaxiRifle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5828,8 +5828,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiRifle_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5913,7 +5913,7 @@
        }
       ],
       "weapon": "naxis_sssoldier_smg",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -5955,7 +5955,7 @@
        }
       ],
       "weapon": "naxis_sssoldier_smg_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -5999,7 +5999,7 @@
        }
       ],
       "weapon": "naxis_sssoldier_smg",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -6042,7 +6042,7 @@
        }
       ],
       "weapon": "naxis_sssoldier_smg_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -6119,7 +6119,7 @@
        }
       ],
       "weapon": "NaxiRifle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -6149,8 +6149,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiRifle_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -6180,7 +6180,7 @@
        }
       ],
       "weapon": "NaxiRifle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -6211,8 +6211,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleE",
-      "weapon_class_source": "template",
+      "weapon": "NaxiRifle_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -6314,7 +6314,7 @@
        }
       ],
       "weapon": "NaxiMissileUboat",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyBomb",
@@ -6413,7 +6413,7 @@
        }
       ],
       "weapon": "8Inch",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^Grenade"
@@ -6461,7 +6461,7 @@
        }
       ],
       "weapon": "8Inch",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^Grenade"
@@ -6508,7 +6508,7 @@
        }
       ],
       "weapon": "8Inch",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^Grenade"
@@ -6555,7 +6555,7 @@
        }
       ],
       "weapon": "8Inch",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^Grenade"
@@ -6648,7 +6648,7 @@
        }
       ],
       "weapon": "AsianSmallTorpedo",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2Grenade",
        "^RA2HeavyMissile"
@@ -7253,7 +7253,7 @@
        }
       ],
       "weapon": "Nax120mmAssault",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -7286,7 +7286,7 @@
        }
       ],
       "weapon": "Nax120mmAssault_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -7354,7 +7354,7 @@
        }
       ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -7373,7 +7373,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": null,
      "subtype": "MainBattleTank",
      "tech_tier": null,
@@ -7450,7 +7450,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunTop",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7492,8 +7492,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2MachinegunTopAA",
-      "weapon_class_source": "template",
+      "weapon": "NaxiWW2MachinegunTop_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7544,7 +7544,7 @@
      "v": "17"
     }
    },
-   "naxis_brummbr": {
+   "naxis_brummbar": {
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
@@ -7609,7 +7609,7 @@
        }
       ],
       "weapon": "NaxBrummbarArty",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyCannon",
@@ -7679,8 +7679,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxBrummbarArtyE",
-      "weapon_class_source": "template",
+      "weapon": "NaxBrummbarArty_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyCannon",
@@ -7700,12 +7700,11 @@
      "v": "1100"
     },
     "design": {
-     "category": "Vehicles",
-     "class_anchor": null,
-     "special": 1.0,
+     "class_anchor": "artillery",
+     "special": null,
      "subtype": "Artillery",
-     "tech_tier": 1.0,
-     "unit_class": 0.5
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
@@ -7781,7 +7780,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery",
      "special": 1.0,
      "subtype": "Artillery",
      "tech_tier": 1.0,
@@ -7852,7 +7851,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -7960,7 +7959,7 @@
        }
       ],
       "weapon": "NaxGrilleArty",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -8024,8 +8023,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxGrilleArtyE",
-      "weapon_class_source": "template",
+      "weapon": "NaxGrilleArty_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -8045,7 +8044,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery",
      "special": 1.0,
      "subtype": "Artillery",
      "tech_tier": 1.0,
@@ -8116,7 +8115,7 @@
        }
       ],
       "weapon": "NaxiWW2Machinegun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -8156,8 +8155,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2MachinegunAA",
-      "weapon_class_source": "template",
+      "weapon": "NaxiWW2Machinegun_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -8243,7 +8242,7 @@
        }
       ],
       "weapon": "NaxiHetzerDestroyer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon"
@@ -8286,7 +8285,7 @@
        }
       ],
       "weapon": "NaxiHetzerDestroyer_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon",
@@ -8305,9 +8304,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "tank_destroyer",
      "special": 1.0,
-     "subtype": "LineBreaker",
+     "subtype": "TankDestroyer",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -8327,7 +8326,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "7500"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.Speed",
@@ -8390,7 +8389,7 @@
        }
       ],
       "weapon": "NaxiJadgDestroyer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -8422,7 +8421,7 @@
        }
       ],
       "weapon": "Nax120mmAssault",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -8455,7 +8454,7 @@
        }
       ],
       "weapon": "Nax120mmAssault_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -8473,7 +8472,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "fire_support",
      "special": null,
      "subtype": "FireSupport",
      "tech_tier": null,
@@ -8558,7 +8557,7 @@
        }
       ],
       "weapon": "NaxiJadgDestroyer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -8617,7 +8616,7 @@
        }
       ],
       "weapon": "NaxiJadgDestroyer_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -8637,9 +8636,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "tank_destroyer",
      "special": 1.0,
-     "subtype": "LineBreaker",
+     "subtype": "TankDestroyer",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -8659,7 +8658,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "7500"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.Speed",
@@ -8670,7 +8669,117 @@
      "v": "20"
     }
    },
-   "naxis_kbelwagen": {
+   "naxis_kingtigerheavytank": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5000",
+      "reloaddelay": "50",
+      "requires": "!rank-elite",
+      "slot": "Armament",
+      "versus_templates": [
+       "^RA2MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "KingNaxTigerCannon",
+      "weapon_class_source": "versus_shield",
+      "weapon_types": [
+       "^RA2MediumCannon"
+      ]
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "50",
+      "requires": "rank-elite",
+      "slot": "Armament@elite",
+      "versus_templates": [
+       "KingNaxTigerCannon",
+       "^RA2EliteEffects"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "KingNaxTigerCannon_elite",
+      "weapon_class_source": "versus_shield",
+      "weapon_types": [
+       "^RA2MediumCannon",
+       "^RA2EliteEffects"
+      ]
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "category": "Tanks",
+     "class_anchor": "mbt",
+     "special": 1.0,
+     "subtype": "MainBattleTank",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "King Tiger Heavy Tank",
+    "prerequisites": [
+     "~naxis_warfactory",
+     "~naxis_promotion_generationiitanks"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "100"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "20"
+    }
+   },
+   "naxis_kubelwagen": {
     "armaments": [
      {
       "burst": "6",
@@ -8708,7 +8817,7 @@
        }
       ],
       "weapon": "NaxiWW2KübelwagenMachinegun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -8725,12 +8834,11 @@
      "v": "850"
     },
     "design": {
-     "category": "Vehicles",
-     "class_anchor": null,
-     "special": 1.0,
-     "subtype": "SupportVehicle",
-     "tech_tier": 1.0,
-     "unit_class": 1.25
+     "class_anchor": "anti_air_vehicle",
+     "special": null,
+     "subtype": "AntiAirVehicle",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
@@ -8746,7 +8854,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "7000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.Speed",
@@ -8755,116 +8863,6 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "23"
-    }
-   },
-   "naxis_kingtigerheavytank": {
-    "armaments": [
-     {
-      "armament_name": "primary",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "5000",
-      "reloaddelay": "50",
-      "requires": "!rank-elite",
-      "slot": "Armament",
-      "versus_templates": [
-       "^RA2MediumCannon"
-      ],
-      "warheads": [
-       {
-        "damage": "20000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "KingNaxTigerCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "6000",
-      "reloaddelay": "50",
-      "requires": "rank-elite",
-      "slot": "Armament@elite",
-      "versus_templates": [
-       "KingNaxTigerCannon",
-       "^RA2EliteEffects"
-      ],
-      "warheads": [
-       {
-        "damage": "20000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "KingNaxTigerCannon_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
-     }
-    ],
-    "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Armor.Type",
-     "v": "Heavy"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
-     "v": "2000"
-    },
-    "design": {
-     "category": "Tanks",
-     "class_anchor": null,
-     "special": 1.0,
-     "subtype": "MainBattleTank",
-     "tech_tier": 1.0,
-     "unit_class": 1.0
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
-     "v": "200000"
-    },
-    "name": "King Tiger Heavy Tank",
-    "prerequisites": [
-     "~naxis_warfactory",
-     "~naxis_promotion_generationiitanks"
-    ],
-    "queue": [
-     "Vehicle",
-     "RAVehicle"
-    ],
-    "sight": {
-     "src": "inherited",
-     "v": "6000"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "100"
-    },
-    "turn_speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
-     "v": "20"
     }
    },
    "naxis_maus": {
@@ -8965,7 +8963,7 @@
        }
       ],
       "weapon": "NaxMausCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -9069,7 +9067,7 @@
        }
       ],
       "weapon": "NaxMausCannon_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -9092,7 +9090,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "high_tech_tank",
      "special": 1.0,
      "subtype": "HighTechTank",
      "tech_tier": 0.75,
@@ -9270,7 +9268,7 @@
        }
       ],
       "weapon": "NaxMausCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -9344,8 +9342,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyRocketE",
-      "weapon_class_source": "template",
+      "weapon": "LatinBuggyRocket_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -9415,7 +9413,7 @@
        }
       ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -9438,9 +9436,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "epic_vehicle",
      "special": null,
-     "subtype": "FireSupport",
+     "subtype": "EpicVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -9500,7 +9498,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "fire_support",
      "special": null,
      "subtype": "FireSupport",
      "tech_tier": null,
@@ -9569,7 +9567,7 @@
        }
       ],
       "weapon": "NaxiAntiTankCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon"
@@ -9587,7 +9585,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "line_breaker",
      "special": null,
      "subtype": "LineBreaker",
      "tech_tier": null,
@@ -9676,7 +9674,7 @@
        }
       ],
       "weapon": "NaxRatteCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyBomb",
@@ -9737,7 +9735,7 @@
        }
       ],
       "weapon": "NaxRatteCannon_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyBomb",
@@ -9756,7 +9754,7 @@
       "reloaddelay": "47",
       "slot": "Armament@AA1",
       "versus_templates": [
-       "NaxQuadCannonAA"
+       "NaxQuadCannon_AA"
       ],
       "warheads": [
        {
@@ -9805,8 +9803,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonAAE",
-      "weapon_class_source": "template",
+      "weapon": "NaxQuadCannon_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -9825,7 +9823,7 @@
       "reloaddelay": "47",
       "slot": "Armament@AA2",
       "versus_templates": [
-       "NaxQuadCannonAA"
+       "NaxQuadCannon_AA"
       ],
       "warheads": [
        {
@@ -9874,8 +9872,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonAAE",
-      "weapon_class_source": "template",
+      "weapon": "NaxQuadCannon_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -9899,7 +9897,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "epic_vehicle",
      "special": 1.0,
      "subtype": "EpicVehicle",
      "tech_tier": 0.75,
@@ -9959,7 +9957,7 @@
        }
       ],
       "weapon": "RA2120mm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -9992,7 +9990,7 @@
        }
       ],
       "weapon": "RA2120mm_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -10055,7 +10053,7 @@
        }
       ],
       "weapon": "NaxGrilleArty",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -10113,7 +10111,7 @@
        }
       ],
       "weapon": "NaxShoeRocket",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^RA2Grenade",
@@ -10132,7 +10130,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "high_tech_tank",
      "special": null,
      "subtype": "HighTechTank",
      "tech_tier": null,
@@ -10218,7 +10216,7 @@
        }
       ],
       "weapon": "NaxSturmArty",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^RA2MediumCannon",
@@ -10237,9 +10235,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "dreadnought",
      "special": null,
-     "subtype": "LineBreaker",
+     "subtype": "Dreadnought",
      "tech_tier": null,
      "unit_class": null
     },
@@ -10297,7 +10295,7 @@
        }
       ],
       "weapon": "RA2105mm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -10330,7 +10328,7 @@
        }
       ],
       "weapon": "RA2105mm_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -10348,9 +10346,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "light_tank",
      "special": null,
-     "subtype": "MainBattleTank",
+     "subtype": "LightTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -10407,7 +10405,7 @@
        }
       ],
       "weapon": "NaxTigerCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -10440,7 +10438,7 @@
        }
       ],
       "weapon": "NaxTigerCannon_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -10458,7 +10456,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": 1.0,
      "subtype": "MainBattleTank",
      "tech_tier": 1.0,
@@ -10557,7 +10555,7 @@
        }
       ],
       "weapon": "NaxQuadCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -10626,8 +10624,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonE",
-      "weapon_class_source": "template",
+      "weapon": "NaxQuadCannon_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -10696,8 +10694,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonAA",
-      "weapon_class_source": "template",
+      "weapon": "NaxQuadCannon_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -10717,7 +10715,7 @@
       "requires": "rank-elite",
       "slot": "Armament@eliteAA",
       "versus_templates": [
-       "NaxQuadCannonAA"
+       "NaxQuadCannon_AA"
       ],
       "warheads": [
        {
@@ -10766,8 +10764,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonAAE",
-      "weapon_class_source": "template",
+      "weapon": "NaxQuadCannon_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -10787,9 +10785,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "anti_air_vehicle",
      "special": 1.0,
-     "subtype": "SupportVehicle",
+     "subtype": "AntiAirVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -10808,7 +10806,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "7000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.Speed",

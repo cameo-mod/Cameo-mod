@@ -60,7 +60,7 @@
        }
       ],
       "weapon": "BlackEagleMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyBomb",
@@ -119,7 +119,7 @@
        }
       ],
       "weapon": "BlackEagleMissiles_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyBomb",
@@ -251,7 +251,7 @@
        }
       ],
       "weapon": "BlackEagleThunderboltMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -381,7 +381,7 @@
        }
       ],
       "weapon": "BlackEagleThunderboltMissiles_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -534,7 +534,7 @@
        }
       ],
       "weapon": "HarrierMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^Grenade",
@@ -637,7 +637,7 @@
        }
       ],
       "weapon": "HarrierMissiles_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^Grenade",
@@ -727,7 +727,7 @@
        }
       ],
       "weapon": "BlackHawkCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1386,7 +1386,7 @@
        }
       ],
       "weapon": "RA2GrandCannonWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^HeavyBomb",
@@ -1460,7 +1460,7 @@
        }
       ],
       "weapon": "RA2Patriot",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -1546,7 +1546,7 @@
        }
       ],
       "weapon": "RA2PatriotThunderboltMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -1675,7 +1675,7 @@
        }
       ],
       "weapon": "RA2Prism",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -2051,7 +2051,7 @@
        }
       ],
       "weapon": "ra2_allies_gi_mg",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -2082,7 +2082,7 @@
        }
       ],
       "weapon": "ra2_allies_gi_para",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2Chaingun"
       ]
@@ -2113,7 +2113,7 @@
        }
       ],
       "weapon": "ra2_allies_gi_para",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2Chaingun"
       ]
@@ -2154,7 +2154,7 @@
        }
       ],
       "weapon": "RA2vulcan2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2243,7 +2243,7 @@
        }
       ],
       "weapon": "GuardianGIMG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2275,7 +2275,7 @@
        }
       ],
       "weapon": "GuardianGIMG2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2Chaingun"
       ]
@@ -2315,8 +2315,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GuardianGIMGE",
-      "weapon_class_source": "template",
+      "weapon": "GuardianGIMG_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2347,8 +2347,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GuardianGIMG2E",
-      "weapon_class_source": "template",
+      "weapon": "GuardianGIMG2_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2Chaingun"
       ]
@@ -2367,7 +2367,7 @@
        "^AADeployTargeting"
       ],
       "warheads": [],
-      "weapon": "aadeploytargeting.8c0",
+      "weapon": "aadeploytargeting_8c0_AA",
       "weapon_class_source": "template",
       "weapon_types": [
        "^AADeployTargeting"
@@ -2398,7 +2398,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -2428,7 +2428,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -2458,7 +2458,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -2488,7 +2488,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -2629,7 +2629,7 @@
        }
       ],
       "weapon": "ra2roktgun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -2709,7 +2709,7 @@
        }
       ],
       "weapon": "RA2MP5",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2739,8 +2739,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MP5E",
-      "weapon_class_source": "template",
+      "weapon": "RA2MP5_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2772,7 +2772,7 @@
        }
       ],
       "weapon": "RA2MP5",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2803,8 +2803,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MP5E",
-      "weapon_class_source": "template",
+      "weapon": "RA2MP5_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2896,7 +2896,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2924,8 +2924,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2AWPE",
-      "weapon_class_source": "template",
+      "weapon": "RA2AWP_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2955,7 +2955,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2984,8 +2984,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2AWPE",
-      "weapon_class_source": "template",
+      "weapon": "RA2AWP_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3058,7 +3058,7 @@
        }
       ],
       "weapon": "RA2DoublePistols",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3088,8 +3088,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2DoublePistolsE",
-      "weapon_class_source": "template",
+      "weapon": "RA2DoublePistols_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3153,7 +3153,7 @@
        }
       ],
       "weapon": "RA2DoublePistols",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3184,8 +3184,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2DoublePistolsE",
-      "weapon_class_source": "template",
+      "weapon": "RA2DoublePistols_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3262,8 +3262,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Medusa",
-      "weapon_class_source": "template",
+      "weapon": "RA2Medusa_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -3279,7 +3279,7 @@
       "requires": "upra2aegismissiles",
       "slot": "Armament@AG",
       "versus_templates": [
-       "RA2Medusa"
+       "RA2Medusa_AA"
       ],
       "warheads": [
        {
@@ -3294,7 +3294,7 @@
        }
       ],
       "weapon": "RA2MedusaAG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -3902,7 +3902,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3920,7 +3920,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "line_breaker",
      "special": null,
      "subtype": "LineBreaker",
      "tech_tier": null,
@@ -3988,7 +3988,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -4005,7 +4005,7 @@
      "v": "4000"
     },
     "design": {
-     "class_anchor": null,
+     "class_anchor": "line_breaker",
      "special": null,
      "subtype": "LineBreaker",
      "tech_tier": null,
@@ -4073,7 +4073,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -4090,7 +4090,7 @@
      "v": "4000"
     },
     "design": {
-     "class_anchor": null,
+     "class_anchor": "line_breaker",
      "special": null,
      "subtype": "LineBreaker",
      "tech_tier": null,
@@ -4196,7 +4196,7 @@
        }
       ],
       "weapon": "RA2105mm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -4229,7 +4229,7 @@
        }
       ],
       "weapon": "RA2105mm_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -4247,7 +4247,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": 1.0,
      "subtype": "MainBattleTank",
      "tech_tier": 1.0,
@@ -4358,7 +4358,7 @@
        }
       ],
       "weapon": "RA2HeavyMirageGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^ShrapnelWeapon",
@@ -4439,7 +4439,7 @@
        }
       ],
       "weapon": "RA2HeavyMirageGun_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^ShrapnelWeapon",
@@ -4460,7 +4460,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "high_tech_tank",
      "special": 1.0,
      "subtype": "HighTechTank",
      "tech_tier": 0.75,
@@ -4532,7 +4532,7 @@
        }
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -4586,7 +4586,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -4651,7 +4651,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -4680,7 +4680,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4711,7 +4711,7 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4823,7 +4823,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -4888,7 +4888,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -4924,7 +4924,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade"
       ]
@@ -5104,7 +5104,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -5138,7 +5138,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -5172,7 +5172,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -5240,7 +5240,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -5374,7 +5374,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -5417,7 +5417,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -5460,7 +5460,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -5502,8 +5502,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HoverMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2HoverMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -5545,8 +5545,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HoverMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2HoverMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -5633,7 +5633,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -5720,7 +5720,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -5806,8 +5806,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2ThunderboltMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2ThunderboltMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -5893,8 +5893,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2ThunderboltMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2ThunderboltMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -5965,7 +5965,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -6033,8 +6033,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiHoverMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiHoverMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -6102,8 +6102,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiHoverMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiHoverMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -6216,7 +6216,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -6329,7 +6329,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -6441,8 +6441,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiThunderboltMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiThunderboltMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -6554,8 +6554,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiThunderboltMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiThunderboltMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -6596,7 +6596,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -6625,7 +6625,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -6642,7 +6642,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": null,
      "subtype": "ScoutVehicle",
      "tech_tier": null,
@@ -6712,7 +6712,7 @@
        }
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -6766,7 +6766,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -6831,7 +6831,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -6860,7 +6860,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -6891,7 +6891,7 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -7003,7 +7003,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -7068,7 +7068,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -7104,7 +7104,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade"
       ]
@@ -7284,7 +7284,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -7318,7 +7318,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -7352,7 +7352,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -7420,7 +7420,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -7554,7 +7554,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -7597,7 +7597,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7640,7 +7640,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7682,8 +7682,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HoverMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2HoverMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7725,8 +7725,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HoverMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2HoverMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7813,7 +7813,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -7900,7 +7900,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -7986,8 +7986,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2ThunderboltMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2ThunderboltMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8073,8 +8073,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2ThunderboltMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2ThunderboltMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8145,7 +8145,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -8213,8 +8213,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiHoverMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiHoverMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -8282,8 +8282,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiHoverMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiHoverMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -8396,7 +8396,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8509,7 +8509,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8621,8 +8621,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiThunderboltMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiThunderboltMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8734,8 +8734,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiThunderboltMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiThunderboltMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8776,7 +8776,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -8805,7 +8805,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -8822,7 +8822,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": null,
      "subtype": "ScoutVehicle",
      "tech_tier": null,
@@ -8894,7 +8894,7 @@
        }
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -8948,7 +8948,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -9013,7 +9013,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -9042,7 +9042,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -9073,7 +9073,7 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -9185,7 +9185,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -9250,7 +9250,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -9286,7 +9286,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade"
       ]
@@ -9466,7 +9466,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -9500,7 +9500,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -9534,7 +9534,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -9602,7 +9602,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -9736,7 +9736,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -9779,7 +9779,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -9822,7 +9822,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -9864,8 +9864,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HoverMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2HoverMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -9907,8 +9907,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HoverMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2HoverMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -9995,7 +9995,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10082,7 +10082,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10168,8 +10168,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2ThunderboltMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2ThunderboltMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10255,8 +10255,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2ThunderboltMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2ThunderboltMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10327,7 +10327,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -10395,8 +10395,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiHoverMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiHoverMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -10464,8 +10464,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiHoverMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiHoverMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -10578,7 +10578,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10691,7 +10691,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10803,8 +10803,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiThunderboltMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiThunderboltMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10916,8 +10916,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiThunderboltMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiThunderboltMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10958,7 +10958,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -10987,7 +10987,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -11004,7 +11004,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": null,
      "subtype": "ScoutVehicle",
      "tech_tier": null,
@@ -11076,7 +11076,7 @@
        }
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -11130,7 +11130,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -11195,7 +11195,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -11224,7 +11224,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -11255,7 +11255,7 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -11367,7 +11367,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -11432,7 +11432,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -11468,7 +11468,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade"
       ]
@@ -11648,7 +11648,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -11682,7 +11682,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -11716,7 +11716,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -11784,7 +11784,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -11918,7 +11918,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -11961,7 +11961,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -12004,7 +12004,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -12046,8 +12046,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HoverMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2HoverMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -12089,8 +12089,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HoverMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2HoverMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -12177,7 +12177,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12264,7 +12264,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12350,8 +12350,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2ThunderboltMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2ThunderboltMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12437,8 +12437,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2ThunderboltMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2ThunderboltMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12509,7 +12509,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -12577,8 +12577,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiHoverMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiHoverMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -12646,8 +12646,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiHoverMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiHoverMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -12760,7 +12760,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12873,7 +12873,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12985,8 +12985,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiThunderboltMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiThunderboltMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -13098,8 +13098,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiThunderboltMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiThunderboltMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -13140,7 +13140,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -13169,7 +13169,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -13186,7 +13186,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": null,
      "subtype": "ScoutVehicle",
      "tech_tier": null,
@@ -13257,7 +13257,7 @@
        }
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -13311,7 +13311,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -13376,7 +13376,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -13405,7 +13405,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -13436,7 +13436,7 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -13548,7 +13548,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -13613,7 +13613,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -13649,7 +13649,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade"
       ]
@@ -13829,7 +13829,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -13863,7 +13863,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -13897,7 +13897,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -13965,7 +13965,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -14099,7 +14099,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -14142,7 +14142,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -14185,7 +14185,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -14227,8 +14227,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HoverMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2HoverMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -14270,8 +14270,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HoverMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2HoverMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -14358,7 +14358,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -14445,7 +14445,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -14531,8 +14531,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2ThunderboltMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2ThunderboltMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -14618,8 +14618,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2ThunderboltMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2ThunderboltMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -14690,7 +14690,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -14758,8 +14758,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiHoverMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiHoverMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -14827,8 +14827,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiHoverMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiHoverMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -14941,7 +14941,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -15054,7 +15054,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -15166,8 +15166,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiThunderboltMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiThunderboltMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -15279,8 +15279,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiThunderboltMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiThunderboltMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -15321,7 +15321,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -15350,7 +15350,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -15367,7 +15367,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": null,
      "subtype": "ScoutVehicle",
      "tech_tier": null,
@@ -15438,7 +15438,7 @@
        }
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -15492,7 +15492,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -15557,7 +15557,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -15586,7 +15586,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -15617,7 +15617,7 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -15729,7 +15729,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -15794,7 +15794,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -15830,7 +15830,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade"
       ]
@@ -16010,7 +16010,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -16044,7 +16044,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -16078,7 +16078,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -16146,7 +16146,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -16280,7 +16280,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -16323,7 +16323,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -16366,7 +16366,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -16408,8 +16408,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HoverMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2HoverMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -16451,8 +16451,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HoverMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2HoverMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -16539,7 +16539,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -16626,7 +16626,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -16712,8 +16712,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2ThunderboltMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2ThunderboltMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -16799,8 +16799,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2ThunderboltMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2ThunderboltMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -16871,7 +16871,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -16939,8 +16939,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiHoverMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiHoverMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -17008,8 +17008,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiHoverMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiHoverMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -17122,7 +17122,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -17235,7 +17235,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -17347,8 +17347,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiThunderboltMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiThunderboltMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -17460,8 +17460,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiThunderboltMissileAA_elite",
-      "weapon_class_source": "template",
+      "weapon": "RA2MultiThunderboltMissile_AA_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -17502,7 +17502,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -17531,7 +17531,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -17548,7 +17548,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": null,
      "subtype": "ScoutVehicle",
      "tech_tier": null,
@@ -17640,7 +17640,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -17705,7 +17705,7 @@
        }
       ],
       "weapon": "RA2MirageGun_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -17725,7 +17725,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "high_tech_tank",
      "special": 1.0,
      "subtype": "HighTechTank",
      "tech_tier": 0.75,
@@ -17790,7 +17790,7 @@
        "PrismTankCharge"
       ],
       "warheads": [],
-      "weapon": "PrismTankChargeE",
+      "weapon": "PrismTankCharge_elite",
       "weapon_class_source": "template",
       "weapon_types": []
      },
@@ -17855,7 +17855,7 @@
        }
       ],
       "weapon": "RA2Comet",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -17921,7 +17921,7 @@
        }
       ],
       "weapon": "RA2Comet_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -17940,7 +17940,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "fire_support",
      "special": 1.25,
      "subtype": "FireSupport",
      "tech_tier": 1.0,
@@ -17999,7 +17999,7 @@
        }
       ],
       "weapon": "RA2sabot",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2TankDestroyerCannon"
       ]
@@ -18030,7 +18030,7 @@
        }
       ],
       "weapon": "RA2sabot_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2TankDestroyerCannon",
        "^RA2EliteEffects"
@@ -18048,9 +18048,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "tank_destroyer",
      "special": null,
-     "subtype": "LineBreaker",
+     "subtype": "TankDestroyer",
      "tech_tier": null,
      "unit_class": null
     },
@@ -18068,7 +18068,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "7500"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml#Mobile.Speed",

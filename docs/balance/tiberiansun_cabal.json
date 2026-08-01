@@ -36,7 +36,7 @@
        }
       ],
       "weapon": "CabalWaspLaserStriker",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -122,7 +122,7 @@
        }
       ],
       "weapon": "CabalOverkillDroneLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^LaserWeapon"
@@ -136,7 +136,7 @@
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
-     "v": "500"
+     "v": "50"
     },
     "design": {
      "class_anchor": null,
@@ -241,7 +241,7 @@
        }
       ],
       "weapon": "CabalOverkillLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -327,7 +327,7 @@
        }
       ],
       "weapon": "CabalHunterKillerLasers",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon",
        "^MediumMissile"
@@ -423,7 +423,7 @@
        }
       ],
       "weapon": "TSHellfireTwin",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
@@ -528,8 +528,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalHunterKillerLasersE",
-      "weapon_class_source": "template",
+      "weapon": "CabalHunterKillerLasers_elite",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon",
        "^RailgunWeapon",
@@ -626,7 +626,7 @@
        }
       ],
       "weapon": "TSHellfireTwin",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
@@ -706,7 +706,7 @@
        }
       ],
       "weapon": "CabalHunterKillerHeavyLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -812,7 +812,7 @@
        }
       ],
       "weapon": "CabalMothershipRockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyMissile",
@@ -897,7 +897,7 @@
        }
       ],
       "weapon": "CabalWaspLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -972,7 +972,7 @@
        }
       ],
       "weapon": "CabalWaspLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -984,8 +984,8 @@
     },
     "buildable": false,
     "cost": {
-     "src": "inherited",
-     "v": "600"
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
+     "v": "270"
     },
     "design": {
      "class_anchor": null,
@@ -999,6 +999,11 @@
      "v": "25000"
     },
     "name": "Orb Drone",
+    "prerequisites": [
+     "~cabal_cyborgfactory",
+     "cabal_radar",
+     "!cabal_promotion_cyborgassassin"
+    ],
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -1038,7 +1043,7 @@
        }
       ],
       "weapon": "CabalOverkillGunshipLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -1071,7 +1076,7 @@
        }
       ],
       "weapon": "CabalOverkillGunshipLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -1148,7 +1153,7 @@
        }
       ],
       "weapon": "CabalEngineerRepairBeam",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -1682,7 +1687,7 @@
        }
       ],
       "weapon": "TSCABALObeliskLaserFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LaserWeapon",
@@ -1786,7 +1791,7 @@
        }
       ],
       "weapon": "DarkObeliskLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -1903,7 +1908,7 @@
        }
       ],
       "weapon": "TSCABALPlasmaFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^LaserWeapon",
@@ -2107,7 +2112,7 @@
        }
       ],
       "weapon": "CabalAscendedRockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -2200,7 +2205,7 @@
        }
       ],
       "weapon": "CabalAscendedRockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -2313,7 +2318,7 @@
        }
       ],
       "weapon": "CabalCommandoPlasma",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumFlameWeapon",
@@ -2424,7 +2429,7 @@
        }
       ],
       "weapon": "CabalCommandoPlasmaNeutron",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumFlameWeapon",
@@ -2491,7 +2496,7 @@
        }
       ],
       "weapon": "CabalCommandoPlasma",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumFlameWeapon",
@@ -2603,7 +2608,7 @@
        }
       ],
       "weapon": "CabalCommandoPlasmaNeutron",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumFlameWeapon",
@@ -2720,7 +2725,7 @@
        }
       ],
       "weapon": "CabalCommandoPlasmaMk2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumFlameWeapon",
@@ -2831,7 +2836,7 @@
        }
       ],
       "weapon": "CabalCommandoPlasmaMk2Neutron",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumFlameWeapon",
@@ -2898,7 +2903,7 @@
        }
       ],
       "weapon": "CabalCommandoPlasmaMk2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumFlameWeapon",
@@ -3010,7 +3015,7 @@
        }
       ],
       "weapon": "CabalCommandoPlasmaMk2Neutron",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumFlameWeapon",
@@ -3105,7 +3110,7 @@
        }
       ],
       "weapon": "CabalCyborgChaingun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3146,7 +3151,7 @@
        }
       ],
       "weapon": "CabalCyborgChaingun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3234,7 +3239,7 @@
        }
       ],
       "weapon": "TSDevoutChainguns",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3277,7 +3282,7 @@
        }
       ],
       "weapon": "TSDevoutChainguns",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3368,7 +3373,7 @@
        }
       ],
       "weapon": "CabalDissolverSpray",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^TankDestroyerCannon"
@@ -3443,7 +3448,7 @@
        }
       ],
       "weapon": "CabalEliminatorGatling",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -3472,7 +3477,7 @@
        }
       ],
       "weapon": "CabalEliminatorGatling",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -3572,7 +3577,7 @@
        }
       ],
       "weapon": "CabalEngineerRepairBeam",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -3694,7 +3699,7 @@
        }
       ],
       "weapon": "TSCABALEnlightedLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LaserWeapon",
@@ -3791,7 +3796,7 @@
        }
       ],
       "weapon": "TSCABALEnlightedLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LaserWeapon",
@@ -3862,7 +3867,7 @@
         "type": "TargetDamage"
        }
       ],
-      "weapon": "TSCABALempdisable.anim",
+      "weapon": "TSCABALCharge_EMP",
       "weapon_class_source": "template",
       "weapon_types": []
      },
@@ -3894,7 +3899,7 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSCABALempdisable.end",
+      "weapon": "TSCABALDisable_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon"
@@ -4003,7 +4008,7 @@
        }
       ],
       "weapon": "CabalRocketCyborgRockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -4048,7 +4053,7 @@
        }
       ],
       "weapon": "CabalRocketCyborgRocketsUpgraded",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -4093,7 +4098,7 @@
        }
       ],
       "weapon": "CabalRocketCyborgRockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -4176,7 +4181,7 @@
        }
       ],
       "weapon": "CabalLaserBoatLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -4209,7 +4214,7 @@
        }
       ],
       "weapon": "CabalLaserBoatLaserAA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -4243,7 +4248,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade"
       ]
@@ -4269,7 +4274,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Health.HP",
      "v": "60000"
     },
-    "name": "Laser Boat",
+    "name": "Laser Hydroboat",
     "prerequisites": [
      "~cabal_navalyard"
     ],
@@ -4283,11 +4288,53 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Mobile.Speed",
-     "v": "120"
+     "v": "110"
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Mobile.TurnSpeed",
-     "v": "24"
+     "v": "16"
+    }
+   },
+   "cabal_lcraft": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Ship",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Landing Craft",
+    "prerequisites": [
+     "~cabal_navalyard"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#RevealsShroud.Range",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "12"
     }
    },
    "cabal_plasmasub": {
@@ -4347,7 +4394,7 @@
        }
       ],
       "weapon": "CabalSubmarinePlasma",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumFlameWeapon",
@@ -4420,7 +4467,7 @@
         "type": "TargetDamage"
        }
       ],
-      "weapon": "TSCABALempdisable.anim",
+      "weapon": "TSCABALCharge_EMP",
       "weapon_class_source": "template",
       "weapon_types": []
      },
@@ -4452,7 +4499,7 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSCABALempdisable.end",
+      "weapon": "TSCABALDisable_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon"
@@ -4464,10 +4511,6 @@
      "v": "Medium"
     },
     "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Valued.Cost",
-     "v": "2500"
-    },
     "design": {
      "class_anchor": null,
      "special": null,
@@ -4479,7 +4522,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Health.HP",
      "v": "200000"
     },
-    "name": "CABAL Sensor Cruiser",
+    "name": "CABAL Hacker Cruiser",
     "prerequisites": [
      "~cabal_navalyard",
      "cabal_techcenter"
@@ -5252,7 +5295,7 @@
        }
       ],
       "weapon": "CabalArtilleryWalkerShell",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5392,7 +5435,7 @@
        }
       ],
       "weapon": "CabalArtilleryWalkerShellUpgraded",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5416,7 +5459,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery",
      "special": 1.25,
      "subtype": "Artillery",
      "tech_tier": 1.0,
@@ -5478,7 +5521,7 @@
        }
       ],
       "weapon": "CabalAvatarLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -5511,7 +5554,7 @@
        }
       ],
       "weapon": "CabalAvatarLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -5528,7 +5571,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "high_tech_tank",
      "special": 1.0,
      "subtype": "HighTechTank",
      "tech_tier": 0.75,
@@ -5636,7 +5679,7 @@
        }
       ],
       "weapon": "CabalBeholderLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^TeslaWeapon",
@@ -5656,7 +5699,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "line_breaker",
      "special": 1.25,
      "subtype": "LineBreaker",
      "tech_tier": 0.75,
@@ -5721,7 +5764,7 @@
        }
       ],
       "weapon": "CabalBerserkerBlades",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -5744,7 +5787,7 @@
      "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
-     "subtype": "LineBreaker",
+     "subtype": "HeroInfantry",
      "tech_tier": 0.5,
      "unit_class": 1.0
     },
@@ -5839,7 +5882,7 @@
        }
       ],
       "weapon": "CabalCoreDefenderLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -5872,7 +5915,7 @@
        }
       ],
       "weapon": "CabalCoreDefenderLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -5893,7 +5936,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "epic_vehicle",
      "special": 1.0,
      "subtype": "EpicVehicle",
      "tech_tier": 1.0,
@@ -5997,7 +6040,7 @@
        }
       ],
       "weapon": "CabalReaperMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -6074,8 +6117,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalReaperMissilesAA",
-      "weapon_class_source": "template",
+      "weapon": "CabalReaperMissiles_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -6231,7 +6274,7 @@
        }
       ],
       "weapon": "CabalHeavyReaperMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -6308,8 +6351,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalHeavyReaperMissilesAA",
-      "weapon_class_source": "template",
+      "weapon": "CabalHeavyReaperMissiles_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -6410,7 +6453,7 @@
        }
       ],
       "weapon": "CabalSpiderLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -6427,7 +6470,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "fire_support",
      "special": 1.0,
      "subtype": "FireSupport",
      "tech_tier": 1.0,
@@ -6491,7 +6534,7 @@
        }
       ],
       "weapon": "CabalManticoreLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -6561,7 +6604,7 @@
        }
       ],
       "weapon": "CabalManticoreMissilesAA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^CabalManticoreMissiles"
       ]
@@ -6651,7 +6694,7 @@
        }
       ],
       "weapon": "CabalMantisGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^LaserWeapon"
@@ -6669,7 +6712,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "fire_support",
      "special": 1.0,
      "subtype": "FireSupport",
      "tech_tier": 1.0,
@@ -6779,7 +6822,7 @@
        }
       ],
       "weapon": "CabalRavagerPlasma",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -6813,7 +6856,7 @@
        }
       ],
       "weapon": "CabalRavagerPlasmaNeutron",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -6830,9 +6873,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "light_tank",
      "special": 1.0,
-     "subtype": "LineBreaker",
+     "subtype": "LightTank",
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
@@ -6850,7 +6893,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "6000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
@@ -6935,7 +6978,7 @@
        }
       ],
       "weapon": "CabalSpiderCnc4Laser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -6952,7 +6995,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "fire_support",
      "special": 1.0,
      "subtype": "FireSupport",
      "tech_tier": 1.0,
@@ -7010,7 +7053,7 @@
        }
       ],
       "weapon": "CabalTarantulaCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -7040,7 +7083,7 @@
        }
       ],
       "weapon": "TS120mm_bluenuke",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TSCannonEffect",
        "^MediumCannon"
@@ -7058,7 +7101,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": 1.0,
      "subtype": "MainBattleTank",
      "tech_tier": 1.0,
@@ -7179,7 +7222,7 @@
        }
       ],
       "weapon": "CabalLegionGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^LaserWeapon"
@@ -7197,7 +7240,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": 1.0,
      "subtype": "MainBattleTank",
      "tech_tier": 1.0,
