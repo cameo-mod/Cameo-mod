@@ -51,7 +51,19 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    and docs; propose merge/generalize/delete plan. NO deletes without maintainer sign-off.
 4. **[M] New weapon templates** (AFTER vehicles) — kill warhead-mixing, **HARD LIMIT 2 inherits/weapon**
    (special >2 only if justified, bar TBD); then weapon-class pipeline + unit↔weapon binding. Maintainer
-   names them + I propose. See [[cameo-weapon-structure-rules]].
+   names them + I propose. See [[cameo-weapon-structure-rules]] + [[cameo-weapon-ordering-law]].
+   IN PROGRESS 2026-08-01/02: two-level ordering law recorded (ARMOR_SYSTEM "PROFILE construction");
+   `gen_weapon_template.py` rebuilt to construct all orders; full weapon-type matrix in
+   `docs/design/WEAPON_TYPE_SYSTEM.md` §12 (unified `^<Family>_<Level>` naming; Bullet/CannonAP/CannonHE/
+   MissileAP/HE/AA/Flak/Laser/Prism/Flame/Chemical/Melee/Arrow/Magic/Demolition/Concussion/Sonic +
+   Railgun/Tesla/Nuclear heavy-only). Awaiting sign-off → splice + sidecar + boot-gate → then repoint.
+4b. **[L, FUTURE] 3-WAY weapon-template split** (maintainer 2026-08-02) — decompose every weapon into
+   THREE independent composable templates: (1) WARHEAD/weapon-class (Versus+damage — the §12 families
+   already ARE this layer, projectile/effect-agnostic by design), (2) PROJECTILE (speed/homing — so a
+   fast projectile can carry a heavy warhead), (3) EFFECTS (impact/muzzle/trail/sound). MASSIVE:
+   retrofitting thousands of inline weapons + the 2-inherit rule must widen to 3 (warhead+projectile+
+   effects). Best folded INTO the repoint pass (#4) rather than a separate sweep, since that already
+   touches every weapon. Not quick — deferred.
 5. **Weapons-hygiene batch** — folds into #4 (also fix the duplicate `227mm` weapon def in
    `weapons/tiberiandawn.yaml` vs `weapons/missiles.yaml`).
 6. **[L] Actor-to-actor inheritance audit (DEFERRED, maintainer 2026-07-31)** — prefer `^Templates`
@@ -264,6 +276,15 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `Build()`, and `IsProducing()`. `mod.config` updated to
   `1f71ccde90c1194fe908702f2e915807b2f0f3fd`. Boot-gate passed (menu
   reached, 0 new exceptions).
+- [x] **P0 CRASH: InvalidOperationException in InfectCA.OnEnterComplete**
+  (2026-08-02, map Terra Cotta): `Attempted to get trait from destroyed
+  object (ra2dron 521 (not in world))` at `TraitDictionary.CheckDestroyed`
+  called from `World.Remove` → `InfectCA.OnEnterComplete` frame-end task.
+  The infector actor (`self`) was already disposed by the time the
+  frame-end task ran, so `w.Remove(self)` crashed when iterating
+  `INotifyRemovedFromWorld` traits. Fix: added `self.IsDead` guard before
+  `w.Remove(self)` in `OpenRA.Mods.Cameo/Activities/InfectCA.cs` — if
+  dead, revoke `BeingInfectedCondition` on target and return early.
 
 - [x] Voice-set rename crashes (`1616a26d2`); pink menu (`e956d2280`);
   boot crashes crab-junk/shadowteam/stale-DLL (`28ae47612`). LAW:
