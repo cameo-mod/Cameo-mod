@@ -4,9 +4,9 @@ OrdosCombatTankCannon:
 	ReloadDelay: 44
 	Projectile: Bullet
 		Speed: 523
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 4
 
 HeavyOrdosCombatTankCannon:
@@ -15,9 +15,9 @@ HeavyOrdosCombatTankCannon:
 	ReloadDelay: 40
 	Projectile: Bullet
 		Speed: 600
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 5
 
 HeavyOrdosCombatTankRockets:
@@ -88,9 +88,9 @@ HeavyOrdosCombatTankRockets:
 		Damage: 7000
 	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 7
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 14000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 7
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 14000
@@ -113,9 +113,9 @@ HeavyOrdosCombatTankRockets:
 		ContrailEndWidth: 25
 		ContrailStartColor: FFFF88FF
 		ContrailEndColor: FF884422
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 30000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 30000
@@ -257,9 +257,9 @@ D2K_155mm_turret:
 		Damage: 12000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 12000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 5625
@@ -302,9 +302,9 @@ Dune_SiegeMortar:
 		Damage: 5000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 10000
@@ -351,10 +351,10 @@ D2K_Rocket_Trooper_AGOnly:
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 5
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 10000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 5
 
@@ -694,11 +694,11 @@ Laboratory_Bioball:
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
@@ -949,10 +949,10 @@ HMGo_upgrade:
 		Width: 55
 		ZOffset: 2047
 		Color: 00ffbb
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
@@ -1318,10 +1318,10 @@ LMG_ordos_upgrade:
 		ZOffset: 2047
 		Color: 00ffbb
 	ValidTargets: Ground, Water, Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 
 light_inf_lmg_ordos_upgrade:
@@ -1334,16 +1334,16 @@ light_inf_lmg_ordos_upgrade:
 		ZOffset: 2047
 		Color: 00ffbb
 	ValidTargets: Ground, Water
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@LaserWeapon: SpreadDamage

@@ -57,16 +57,18 @@ TS120mmRail:
 
 TS120mmTal:
 	Inherits: ^TSCannonEffect
-	Inherits: ^MediumCannon
+	Inherits@wh: ^CannonHE_Medium
+	Inherits@proj: ^ProjectileShell_Medium
+	Inherits@fx: ^EffectCannon_Medium
 	ReloadDelay: 50
 	Range: 6201
 	Projectile: Bullet
 		Speed: 850
 		Blockable: false
 		LaunchAngle: 0
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 24000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 12
 
 TS120mmTalRail:
@@ -906,10 +908,10 @@ TSJumpCannon:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
 

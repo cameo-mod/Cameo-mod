@@ -1,11 +1,13 @@
 TS70mm:
 	Inherits: ^TSCannonEffect
-	Inherits: ^MediumCannon
+	Inherits@wh: ^CannonHE_Medium
+	Inherits@proj: ^ProjectileShell_Medium
+	Inherits@fx: ^EffectCannon_Medium
 	ReloadDelay: 24
 	Range: 5566
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 2
 
 TS70mmChem:
@@ -147,14 +149,16 @@ TSChem120mmx:
 
 TSScoopDual:
 	Inherits: ^TSCannonEffect
-	Inherits: ^MediumCannon
+	Inherits@wh: ^CannonHE_Medium
+	Inherits@proj: ^ProjectileShell_Medium
+	Inherits@fx: ^EffectCannon_Medium
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 2
 	Range: 6224
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 20000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 10
 
 TSScoopDualChem:
@@ -247,14 +251,16 @@ TSScoopDualTurChem:
 
 TSHighVelocity:
 	Inherits: ^TSCannonEffect
-	Inherits: ^TankDestroyerCannon
+	Inherits@wh: ^CannonAP_Light
+	Inherits@proj: ^ProjectileShell_Light
+	Inherits@fx: ^EffectCannon_Light
 	ReloadDelay: 90
 	Range: 7701
 	Projectile: Bullet
 		Speed: 850
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 30000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
 		Damage: 15
 
 TSHighVelocityChem:
@@ -288,14 +294,16 @@ TSHighVelocityChem:
 
 TSHighVelocity2:
 	Inherits: ^TSCannonEffect
-	Inherits: ^TankDestroyerCannon
+	Inherits@wh: ^CannonAP_Light
+	Inherits@proj: ^ProjectileShell_Light
+	Inherits@fx: ^EffectCannon_Light
 	ReloadDelay: 55
 	Range: 8207
 	Projectile: Bullet
 		Speed: 850
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 40000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
 		Damage: 20
 
 TSHighVelocity2Chem:
@@ -329,14 +337,16 @@ TSHighVelocity2Chem:
 
 TSHighVelocityTur:
 	Inherits: ^TSCannonEffect
-	Inherits: ^TankDestroyerCannon
+	Inherits@wh: ^CannonAP_Light
+	Inherits@proj: ^ProjectileShell_Light
+	Inherits@fx: ^EffectCannon_Light
 	ReloadDelay: 30
 	Range: 9483
 	Projectile: Bullet
 		Speed: 1280
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 48000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
 		Damage: 24
 
 TSBusMortar:

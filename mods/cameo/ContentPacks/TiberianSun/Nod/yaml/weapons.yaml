@@ -467,19 +467,19 @@ TSHarpyMultiClaw:
 	TargetActorCenter: true
 	Projectile: Bullet
 		Inaccuracy: 1024
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 0
 		ValidTargets: Ground, Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 0
 		ValidTargets: Ground, Air
 
 TSHarpyAOEClaw:
 	Inherits: TSHarpyClaw
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Spread: 300
 		Falloff: 100, 50, 25
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Spread: 300
 		Falloff: 100, 50, 25
 
@@ -519,10 +519,10 @@ TSLaserHarpyMultiClaw:
 	Projectile: LaserZap
 		Inaccuracy: 1024
 		TrackTarget: false
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 0
 		ValidTargets: Ground, Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 0
 		ValidTargets: Ground, Air
 	Warhead@LaserWeapon: SpreadDamage
@@ -534,10 +534,10 @@ TSLaserHarpyMultiClaw:
 
 TSLaserHarpyAOEClaw:
 	Inherits: TSLaserHarpyClaw
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Spread: 300
 		Falloff: 100, 50, 25
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Spread: 300
 		Falloff: 100, 50, 25
 	Warhead@LaserWeapon: SpreadDamage

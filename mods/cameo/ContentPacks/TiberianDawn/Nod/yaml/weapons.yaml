@@ -240,15 +240,17 @@ PDLaserBike:
 	Range: 6000
 
 70mm:
-	Inherits: ^MediumCannon
+	Inherits@wh: ^CannonHE_Medium
+	Inherits@proj: ^ProjectileShell_Medium
+	Inherits@fx: ^EffectCannon_Medium
 	ReloadDelay: 45
 	Range: 4993
 	Report: tnkfire3.aud
 	Projectile: Bullet
 		Speed: 499
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 6000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
@@ -837,17 +839,17 @@ MachineGunBuggy2_AA:
 	Inherits: MachineGunBuggy2
 	Range: 7911
 	ValidTargets: Air
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Air
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Air
 
 LaserBuggy2:

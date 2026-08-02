@@ -80,9 +80,9 @@ APCGun_AA:
 	Inherits: APCGun
 	Range: 8502
 	ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Air
@@ -144,9 +144,9 @@ BoxerCannon_AA:
 	Inherits: BoxerCannonAG
 	Range: 7290
 	ValidTargets: Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Air
@@ -158,13 +158,13 @@ BoxerCannon_AA:
 		ValidTargets: Air
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Air
@@ -284,30 +284,34 @@ MachineGunAPH:
 		Damage: 3
 
 120mm:
-	Inherits: ^MediumCannon
+	Inherits@wh: ^CannonHE_Medium
+	Inherits@proj: ^ProjectileShell_Medium
+	Inherits@fx: ^EffectCannon_Medium
 	ReloadDelay: 72
 	Range: 5438
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 543
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
 120mmHV:
-	Inherits: ^MediumCannon
+	Inherits@wh: ^CannonHE_Medium
+	Inherits@proj: ^ProjectileShell_Medium
+	Inherits@fx: ^EffectCannon_Medium
 	Inherits: ^HVProjectile
 	ReloadDelay: 72
 	Range: 5438
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 1086
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 16000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -342,7 +346,9 @@ M1A1MachineGun:
 		Damage: 1
 
 120mmDual:
-	Inherits: ^HeavyCannon
+	Inherits@wh: ^CannonHE_Heavy
+	Inherits@proj: ^ProjectileShell_Heavy
+	Inherits@fx: ^EffectCannon_Heavy
 	ReloadDelay: 72
 	Burst: 2
 	BurstDelays: 8
@@ -350,13 +356,15 @@ M1A1MachineGun:
 	Report: tnkfire6.aud
 	Projectile: Bullet
 		Speed: 614
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 8000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
 		Damage: 4
 
 120mmDualHV:
-	Inherits: ^HeavyCannon
+	Inherits@wh: ^CannonHE_Heavy
+	Inherits@proj: ^ProjectileShell_Heavy
+	Inherits@fx: ^EffectCannon_Heavy
 	Inherits: ^HVProjectile
 	ReloadDelay: 72
 	Burst: 2
@@ -365,9 +373,9 @@ M1A1MachineGun:
 	Report: tnkfire6.aud
 	Projectile: Bullet
 		Speed: 1228
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 16000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
 		Damage: 8
 
 MammothMissiles:
@@ -890,13 +898,13 @@ EMPGrenadeExplode:
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 4000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 4000
@@ -985,13 +993,13 @@ MachineGunHumvee2_AA:
 	Inherits: MachineGunHumvee2
 	Range: 8397
 	ValidTargets: Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Air
 
 MachineGunHumvee2AP:
@@ -1015,9 +1023,9 @@ MachineGunHumvee2AP_AA:
 	Inherits: MachineGunHumvee2AP
 	Range: 8397
 	ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Air
 
 RocketsHumvee2:
@@ -1107,30 +1115,34 @@ TDShotgun:
 		Damage: 1
 
 GDIPredatorTankCannon:
-	Inherits: ^MediumCannon
+	Inherits@wh: ^CannonHE_Medium
+	Inherits@proj: ^ProjectileShell_Medium
+	Inherits@fx: ^EffectCannon_Medium
 	ReloadDelay: 70
 	Range: 5880
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 588
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
 GDIPredatorTankCannonHV:
-	Inherits: ^MediumCannon
+	Inherits@wh: ^CannonHE_Medium
+	Inherits@proj: ^ProjectileShell_Medium
+	Inherits@fx: ^EffectCannon_Medium
 	Inherits: ^HVProjectile
 	ReloadDelay: 70
 	Range: 5880
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 1176
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 16000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -1187,7 +1199,9 @@ GDIPredatorBlueLaser:
 	Warhead@Validation: TargetDamage
 
 MammothTank3Cannons:
-	Inherits: ^HeavyCannon
+	Inherits@wh: ^CannonHE_Heavy
+	Inherits@proj: ^ProjectileShell_Heavy
+	Inherits@fx: ^EffectCannon_Heavy
 	ReloadDelay: 102
 	Burst: 2
 	BurstDelays: 8
@@ -1195,13 +1209,15 @@ MammothTank3Cannons:
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 634
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 12000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
 		Damage: 6
 
 MammothTank3CannonsHV:
-	Inherits: ^HeavyCannon
+	Inherits@wh: ^CannonHE_Heavy
+	Inherits@proj: ^ProjectileShell_Heavy
+	Inherits@fx: ^EffectCannon_Heavy
 	Inherits: ^HVProjectile
 	ReloadDelay: 102
 	Burst: 2
@@ -1210,9 +1226,9 @@ MammothTank3CannonsHV:
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 1268
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 24000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
 		Damage: 12
 
 MammothTank3Missiles:

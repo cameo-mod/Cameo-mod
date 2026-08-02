@@ -52,6 +52,10 @@ TRIPLE = {
 }
 STAY = {"SniperWeapon", "ToxicWeapon", "HealingWeapon", "RepairWeapon"}
 ALL_OLD = set(TRIPLE) | STAY  # for mixed detection
+# the NEW warhead templates count as warhead-carrying too, so mixed-detection is
+# ORDER-INDEPENDENT: once family A is converted (a weapon now inherits ^A_new), an
+# A+B cross-family weapon is still seen as 2-warhead when family B runs → stays Phase B.
+NEW_WARHEADS = {t[0] for t in TRIPLE.values()}
 
 TOP = re.compile(r"^(﻿?)(\^?[\w.]+):\s*$")
 INH = re.compile(r"^(\t+)Inherits(@[\w.]+)?:\s*\^(\w+)\s*(?:#.*)?$")
@@ -92,7 +96,7 @@ def build_wh_closure():
                     if m:
                         pars.add(m.group(3))
                 tmpl_parents.setdefault(bare, set()).update(pars)
-    carrying = set(ALL_OLD)
+    carrying = set(ALL_OLD) | NEW_WARHEADS
     changed = True
     while changed:
         changed = False
@@ -134,27 +138,42 @@ def retrofit(targets, apply):
                 if name.startswith("^") and bare in ALL_OLD:
                     continue  # never touch an old base template DEFINITION block
                 whs = wh_inherits(lines, s, e, carrying)
-                if len(whs) != 1:
-                    if len(whs) >= 2 and any(o[1] in targets for o in whs):
-                        skipped_mixed += 1
+                direct = {o[1] for o in whs}  # bare names of direct warhead-carrying inherits
+                if len(whs) == 1 and whs[0][1] in targets:
+                    # --- CONVERT this single-inherit block ---
+                    idx, old, indent = whs[0]
+                    wh, proj, fx = TRIPLE[old]
+                    repl = [f"{indent}Inherits@wh: ^{wh}"]
+                    if proj:
+                        repl.append(f"{indent}Inherits@proj: ^{proj}")
+                    repl.append(f"{indent}Inherits@fx: ^{fx}")
+                    edits[idx] = repl
+                    # rename warhead override/removal KEYS (preserve values): both `Warhead@Old:`
+                    # and `-Warhead@Old:` removals, incl. Percentage/FriendlyFire/ExtraDamage twins.
+                    for i in range(s, e):
+                        lines[i] = re.sub(rf"^(\s*)(-?)Warhead@{old}(Percentage|FriendlyFire|ExtraDamage)?:",
+                                          rf"\1\2Warhead@{wh}\3:", lines[i])
+                    per_old[old] += 1
+                    converted += 1
+                    file_touched = True
                     continue
-                idx, old, indent = whs[0]
-                if old not in targets:  # single, but an intermediate/other-family base → skip
-                    continue
-                wh, proj, fx = TRIPLE[old]
-                repl = [f"{indent}Inherits@wh: ^{wh}"]
-                if proj:
-                    repl.append(f"{indent}Inherits@proj: ^{proj}")
-                repl.append(f"{indent}Inherits@fx: ^{fx}")
-                edits[idx] = repl
-                # rename warhead override KEYS within this block (preserve values)
-                for i in range(s, e):
-                    lines[i] = re.sub(rf"^(\s*)Warhead@{old}(Percentage|FriendlyFire)?:",
-                                      rf"\1Warhead@{wh}\2:", lines[i])
-                per_old[old] += 1
-                converted += 1
-                file_touched = True
-            if edits:
+                if len(whs) >= 2 and any(o in targets for o in direct):
+                    skipped_mixed += 1
+                # --- REPAIR a SKIPPED block: a Warhead@T ref survives only if the block inherits
+                # the ^T BASE directly (base kept until Phase 4). If it flowed through a now-
+                # converted intermediate (e.g. DevBullet -> ^D2K_Cannon), @T is gone -> rename it,
+                # else `-Warhead@T` / `Warhead@T` orphans and crashes boot.
+                for T in targets:
+                    if T in direct:
+                        continue
+                    wh = TRIPLE[T][0]
+                    for i in range(s, e):
+                        n = re.sub(rf"^(\s*)(-?)Warhead@{T}(Percentage|FriendlyFire|ExtraDamage)?:",
+                                   rf"\1\2Warhead@{wh}\3:", lines[i])
+                        if n != lines[i]:
+                            lines[i] = n
+                            file_touched = True
+            if file_touched:
                 out = []
                 for i, ln in enumerate(lines):
                     out.append("\n".join(edits[i]) if i in edits else ln)

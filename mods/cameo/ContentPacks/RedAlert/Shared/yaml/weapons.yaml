@@ -651,9 +651,9 @@ APCGunAllies_AA:
 	Inherits: APCGunAllies
 	Range: 8967
 	ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Air
@@ -706,7 +706,7 @@ ZeroFighterChainGunWaveforce:
 		-LaunchAngle:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@RailgunWeapon: SpreadDamage
@@ -1879,17 +1879,19 @@ DepthCharge:
 		ValidTargets: Submarine, Ship, Underwater
 
 2Inch:
-	Inherits: ^TankDestroyerCannon
+	Inherits@wh: ^CannonAP_Light
+	Inherits@proj: ^ProjectileShell_Light
+	Inherits@fx: ^EffectCannon_Light
 	ReloadDelay: 30
 	Range: 6000
 	Report: cannon2.aud
 	InvalidTargets: Underwater, Submarine
 	Projectile: Bullet
 		Speed: 600
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 30000
 		Spread: 300
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
 		Damage: 15
 		Spread: 300
 

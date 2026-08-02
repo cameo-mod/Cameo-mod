@@ -718,9 +718,9 @@ NaxiMP40:
 		Damage: 2000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 1
 
 NaxSturmArty:
@@ -745,9 +745,9 @@ NaxSturmArty:
 		Damage: 30000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 14
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 30000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 14
 	Warhead@Grenade: SpreadDamage
 		Damage: 20000
@@ -897,10 +897,10 @@ NaxiAlienPistol:
 	Burst: 2
 	BurstDelays: 3
 	ValidTargets: Ground, Water
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@TeslaWeapon: SpreadDamage
@@ -1172,9 +1172,9 @@ NaxisBlackBombSmaller:
 		Damage: 25000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 25000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@Effect: CreateEffect
 		Explosions: ra2nuke
@@ -1210,9 +1210,9 @@ Lunar_Green105mm:
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Range: 5000
 	ReloadDelay: 50
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 8000

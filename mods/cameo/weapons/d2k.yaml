@@ -118,7 +118,9 @@ Debris4:
 ################################
 
 ^D2K_Cannon:
-	Inherits: ^MediumCannon
+	Inherits@wh: ^CannonHE_Medium
+	Inherits@proj: ^ProjectileShell_Medium
+	Inherits@fx: ^EffectCannon_Medium
 	Report: MEDTANK1.WAV
 	Projectile: Bullet
 		Speed: 640
@@ -135,7 +137,7 @@ Debris4:
 		ExplosionPalette: effect75alpha
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1000
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 8000
 
 80mm_A:
@@ -197,8 +199,8 @@ Emperor_Sardaukar_E:
 
 DevBullet:
 	Inherits: ^D2K_Cannon
-	-Warhead@MediumCannon:
-	-Warhead@MediumCannonPercentage:
+	-Warhead@CannonHE_Medium:
+	-Warhead@CannonHE_MediumPercentage:
 	ReloadDelay: 100
 	Range: 6666
 	Report: TANKHVY1.WAV
@@ -274,9 +276,9 @@ D2K_155mm:
 		Damage: 12000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 12000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 5625
@@ -2211,7 +2213,9 @@ d2k_sard_crossbow:
 ###################################################
 
 ^OCannon:
-	Inherits: ^MediumCannon
+	Inherits@wh: ^CannonHE_Medium
+	Inherits@proj: ^ProjectileShell_Medium
+	Inherits@fx: ^EffectCannon_Medium
 	ReloadDelay: 50
 	Range: 4096
 	Report: MEDTANK1.WAV
@@ -2219,9 +2223,9 @@ d2k_sard_crossbow:
 		Speed: 562
 		Inaccuracy: 380
 		Image: 120mm
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 5350
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
