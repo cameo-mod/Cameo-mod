@@ -259,3 +259,51 @@ end so partial retrofits keep booting.
 Single canonical tool; one family per commit (small, boot-gated, revertible); damage-preservation is
 an invariant checked by resolver-diff; **each agent in its own git worktree/branch** (the durable fix
 for the collision). Memory: `cameo-multi-agent-repo`, `cameo-weapon-structure-rules`.
+
+---
+
+# ═══ PROGRESS + RESUME (2026-08-03) ═══
+
+**Done (each boot-gated + committed):** Bullet family (`126f44e87`), Report→projectile
+(`3c7dd7477`), Cannon family + tool hardening (`bfc349bb7`). Tool = `retrofit_weapon_family.py`
+(canonical). It now handles: intermediate closure (skip base+intermediate mixes), skipped-block
+`-Warhead@<Old>` repair (converted-intermediate children like `DevBullet`→`^D2K_Cannon`),
+ORDER-INDEPENDENT mixed-detection (closure seeded with NEW warheads so A+B mixes stay Phase B),
+BOM-safe, Report in the PROJECTILE layer, damage always preserved.
+
+**RESUME — Phase 2 remaining families** (one commit each: `--old <names>` → self-check → boot → commit):
+`LightMissile,MediumMissile,HeavyMissile` + `FlakWeapon,HeavyAAWeapon` → then
+`LightFlameWeapon,MediumFlameWeapon,HeavyFlameWeapon` + `LightChemicalWeapon,MediumChemicalWeapon,HeavyChemicalWeapon`
+→ `Grenade,ShrapnelWeapon,HeavyBomb` → `SwordWeapon,ArrowWeapon,MagicWeapon` → `NuclearWarhead` →
+**ENERGY LAST** (Laser/Railgun/Tesla/TeslaCharged — BLOCKED on the ExtraDamage decision below).
+Standard self-check after each: 0 orphaned old keys, 0 layer conflicts, 0 Damage changes, boots.
+
+## OPEN DESIGN #1 — ExtraDamage rework (maintainer wants suggestions first)
+ExtraDamage = the compensation energy weapons get for their very small spread (~100, single-target)
+vs AoE weapons' large spread (multi-target). The current old-template values are ad-hoc (Tesla Shield
+300/heavy-favoring; Laser Shield 100/else-1). Needs a principled scaling. **My 3 options:**
+1. **Fixed-fraction + anti-shield concentration** — ExtraDamage = 50% of main (the DESIGN twin law),
+   Versus concentrated on Shield. Simple; role = anti-shield; not tied to spread math.
+2. **Spread-deficit scaling (most principled)** — reference spread = 400 ("1.0 area"); area ≈ (spread/400)²
+   capped; ExtraDamage% = (1 − area) × K, concentrated on shields. A 100-spread weapon (~0.06 area) gets
+   ~0.94K extra; a 400-spread gets ~0. Total effective output becomes spread-independent → "makes sense".
+3. **Tiered (pragmatic)** — 3 spread bands → full / half / no ExtraDamage; concentrate on shields.
+**Recommendation:** principle of #2, delivered via #3's tiers now (exact per-weapon spread formula is
+the later rebalance). Energy weapons → tight spread (~100) + defined anti-shield ExtraDamage.
+
+## OPEN DESIGN #2 — storage/loading architecture (maintainer, confirmed understanding)
+- **Warheads = central/universal** (artwork-independent). Stay in `weapons/weapons.yaml`. ✓ where they are.
+- **Projectiles + effects = per-game.** The GENERIC/classic ones (from the old central templates =
+  TD+RA1 shared artwork: bullets, cannon shells, missiles+trails) stay in a **GLOBAL shared** location =
+  they double as the **FALLBACK** effect/projectile for any faction without its own art yet. (So my
+  current central `^Projectile*`/`^Effect*` library is CORRECT as the global fallback.)
+- **Per-game overrides** (RA2 has its own piff/explosion; TS has unique effects, not wired yet) →
+  that game's `Shared/yaml/`, loaded by the dynamic faction loader only when a faction of that game plays.
+- **Faction-UNIQUE** projectile/effect → that faction's yaml (loaded only with that faction).
+- Goal: load only what a lobby needs. **DEEP RESEARCH TODO:** map unit → weapon → projectile/trail/
+  impact/sound (from the extracted OpenRA repo) to drive the relocation, and split the RA2-style
+  intermediates into RA2-shared projectile+effect (warhead stays central).
+
+## OPEN DESIGN #3 — full spread + falloff rebalance (LATER, maintainer)
+`Damage × Spread ≈ constant`, unique spreads, small-spread ⇒ unique effect, + falloff-damage pass.
+Deferred to after the retrofit; folds into the vehicle DPS restat (Phase 5).
