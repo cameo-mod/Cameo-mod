@@ -6316,6 +6316,17 @@ SpiceExplosion:
 			Spaceship: 10
 		UpdatesUnitStatistics: false
 
+# Shared visual projectile used by ejected gun casings.
+generic_bullet_casing:
+	Range: 1c0
+	Projectile: Bullet
+		Speed: 48
+		Blockable: false
+		LaunchAngle: 100
+		Image: generic_bullet_casing
+		Sequences: idle
+		Palette: d2keffect
+
 ^LightConcussion:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
