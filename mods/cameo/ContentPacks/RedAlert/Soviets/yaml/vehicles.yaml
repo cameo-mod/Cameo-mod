@@ -335,14 +335,14 @@ ra1_soviets_heavytank:
 		TurnSpeed: 14
 	Armament:
 		Weapon: 105mm
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_nucleartankshells
 	Armament@Upgrade:
 		Weapon: 105mmThermobaric
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
@@ -404,21 +404,21 @@ ra1_soviets_hammertank:
 		TurnSpeed: 12
 	Armament:
 		Weapon: HammerTankCannon
-		Recoil: 150
+		Recoil: 75
 		RecoilRecovery: 25
 		LocalOffset: 1100,100,100, 1100,-100,100
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_nucleartankshells
 	Armament@Upgrade:
 		Weapon: HammerTankCannonThermobaric
-		Recoil: 150
+		Recoil: 75
 		RecoilRecovery: 25
 		LocalOffset: 1100,100,100, 1100,-100,100
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_nucleartankshells
 	Armament@shtora:
 		Weapon: ShtoraLaser
-		Recoil: 20
+		Recoil: 10
 		RecoilRecovery: 10
 		LocalOffset: 0,200,50
 		MuzzleSequence: muzzle
@@ -624,14 +624,14 @@ ra1_soviets_kotinnucleartank:
 		TurnSpeed: 13
 	Armament:
 		Weapon: KotinCannon
-		Recoil: 150
+		Recoil: 75
 		RecoilRecovery: 25
 		LocalOffset: 1100,100,200, 1100,-100,200
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_nucleartankshells
 	Armament@Upgrade:
 		Weapon: KotinCannonThermobaric
-		Recoil: 150
+		Recoil: 75
 		RecoilRecovery: 25
 		LocalOffset: 1100,100,200, 1100,-100,200
 		MuzzleSequence: muzzle
@@ -705,28 +705,28 @@ ra1_soviets_mammothtank:
 	Armament@PRIMARY:
 		Weapon: ra120mm
 		LocalOffset: 900,180,340, 900,-180,340
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@PRIMARYTargetingComputer:
 		Weapon: ra120mmTargetingComputer
 		LocalOffset: 900,180,340, 900,-180,340
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_nucleartankshells && ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@Upgrade:
 		Weapon: ra120mmThermobaric
 		LocalOffset: 900,180,340, 900,-180,340
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@UpgradeTargetingComputer:
 		Weapon: ra120mmThermobaricTargetingComputer
 		LocalOffset: 900,180,340, 900,-180,340
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_nucleartankshells && ra1_soviets_promotion_mammothtanktargetingcomputer
@@ -735,7 +735,7 @@ ra1_soviets_mammothtank:
 		Weapon: MammothTusk
 		LocalOffset: -85,384,340, -85,-384,340
 		LocalYaw: -50,50
-		Recoil: 50
+		Recoil: 25
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_mammothtanktargetingcomputer
@@ -744,7 +744,7 @@ ra1_soviets_mammothtank:
 		Weapon: MammothTuskTargetingComputer
 		LocalOffset: -85,384,340, -85,-384,340
 		LocalYaw: -50,50
-		Recoil: 50
+		Recoil: 25
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_mammothtanktargetingcomputer
@@ -753,7 +753,7 @@ ra1_soviets_mammothtank:
 		Weapon: MammothTuskTesla
 		LocalOffset: -85,384,340, -85,-384,340
 		LocalYaw: -50,50
-		Recoil: 50
+		Recoil: 25
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_teslarockets && !ra1_soviets_promotion_mammothtanktargetingcomputer
@@ -762,7 +762,7 @@ ra1_soviets_mammothtank:
 		Weapon: MammothTuskTeslaTargetingComputer
 		LocalOffset: -85,384,340, -85,-384,340
 		LocalYaw: -50,50
-		Recoil: 50
+		Recoil: 25
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_mammothtanktargetingcomputer
@@ -771,7 +771,7 @@ ra1_soviets_mammothtank:
 		Weapon: MammothTuskThermobaric
 		LocalOffset: -85,384,340, -85,-384,340
 		LocalYaw: -50,50
-		Recoil: 50
+		Recoil: 25
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_mammothtanktargetingcomputer
@@ -780,7 +780,7 @@ ra1_soviets_mammothtank:
 		Weapon: MammothTuskThermobaricTargetingComputer
 		LocalOffset: -85,384,340, -85,-384,340
 		LocalYaw: -50,50
-		Recoil: 50
+		Recoil: 25
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_mammothtanktargetingcomputer
@@ -845,7 +845,7 @@ ra1_soviets_siegemammothtank:
 	Armament@PRIMARY:
 		Weapon: ra120mm2
 		LocalOffset: 960,144,272, 960,-144,272
-		Recoil: 140
+		Recoil: 70
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
@@ -853,7 +853,7 @@ ra1_soviets_siegemammothtank:
 	Armament@PRIMARYTargetingComputer:
 		Weapon: ra120mm2TargetingComputer
 		LocalOffset: 960,144,272, 960,-144,272
-		Recoil: 140
+		Recoil: 70
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
@@ -861,7 +861,7 @@ ra1_soviets_siegemammothtank:
 	Armament@Upgrade:
 		Weapon: ra120mm2Thermobaric
 		LocalOffset: 960,144,272, 960,-144,272
-		Recoil: 140
+		Recoil: 70
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
@@ -869,7 +869,7 @@ ra1_soviets_siegemammothtank:
 	Armament@UpgradeTargetingComputer:
 		Weapon: ra120mm2ThermobaricTargetingComputer
 		LocalOffset: 960,144,272, 960,-144,272
-		Recoil: 140
+		Recoil: 70
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
@@ -879,7 +879,7 @@ ra1_soviets_siegemammothtank:
 		Weapon: MammothTusk2
 		LocalOffset: -68,307,272, -68,-307,272
 		LocalYaw: -50,50
-		Recoil: 40
+		Recoil: 20
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
@@ -889,7 +889,7 @@ ra1_soviets_siegemammothtank:
 		Weapon: MammothTusk2TargetingComputer
 		LocalOffset: -68,307,272, -68,-307,272
 		LocalYaw: -50,50
-		Recoil: 40
+		Recoil: 20
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
@@ -899,7 +899,7 @@ ra1_soviets_siegemammothtank:
 		Weapon: MammothTusk2Thermobaric
 		LocalOffset: -68,307,272, -68,-307,272
 		LocalYaw: -50,50
-		Recoil: 40
+		Recoil: 20
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
@@ -909,7 +909,7 @@ ra1_soviets_siegemammothtank:
 		Weapon: MammothTusk2ThermobaricTargetingComputer
 		LocalOffset: -68,307,272, -68,-307,272
 		LocalYaw: -50,50
-		Recoil: 40
+		Recoil: 20
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
@@ -1178,12 +1178,12 @@ ra1_soviets_flaktruck:
 		Offset: -298,0,298
 	Armament@AA:
 		Weapon: FLAK-23-AA
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 512,0,192
 		MuzzleSequence: muzzle
 	Armament@AG:
 		Weapon: FLAK-23-AG
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 512,0,192
 		MuzzleSequence: muzzle
 	AttackTurreted:
@@ -1256,35 +1256,35 @@ ra1_soviets_btr80:
 	AttackTurreted:
 	Armament:
 		Weapon: BTRMachineGun
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 	Armament@AA:
 		Weapon: BTRMachineGun_AA
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 	Armament@TeslaUpgrade1:
 		Weapon: BTRTeslaMachineGun
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade2:
 		Weapon: BTRTeslaMachineGunArc
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade1AA:
 		Weapon: BTRTeslaMachineGun_AA
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade2AA:
 		Weapon: BTRTeslaMachineGunArc_AA
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
@@ -1563,49 +1563,49 @@ ra1_soviets_gatlingtank:
 		Offset: -128,0,0
 	Armament@AG:
 		Weapon: RAGatlingTankCannon
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@AA:
 		Weapon: RAGatlingTankCannon_AA
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@UpgradeAG:
 		Weapon: IncendiaryRAGatlingTankCannon
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@UpgradeAA:
 		Weapon: IncendiaryRAGatlingTankCannon_AA
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@TeslaUpgrade1:
 		Weapon: TeslaRAGatlingTankCannon
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade2:
 		Weapon: TeslaRAGatlingTankCannonArc
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade1AA:
 		Weapon: TeslaRAGatlingTankCannon_AA
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade2AA:
 		Weapon: TeslaRAGatlingTankCannonArc_AA
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
@@ -1723,7 +1723,7 @@ ra1_soviets_monstertank:
 		TurnSpeed: 9
 	Armament@PRIMARY:
 		Weapon: MonsterTank120mm
-		Recoil: 250
+		Recoil: 125
 		RecoilRecovery: 25
 		LocalOffset: 1600,350,350, 1600,-350,350
 		MuzzleSequence: muzzle
@@ -1732,7 +1732,7 @@ ra1_soviets_monstertank:
 		RequiresCondition: !ra1_soviets_doctrine_inferno
 	Armament@Upgrade:
 		Weapon: MonsterTank120mmThermobaric
-		Recoil: 250
+		Recoil: 125
 		RecoilRecovery: 25
 		LocalOffset: 1600,350,350, 1600,-350,350
 		MuzzleSequence: muzzle
@@ -1741,7 +1741,7 @@ ra1_soviets_monstertank:
 		RequiresCondition: ra1_soviets_doctrine_inferno
 	Armament@SECONDARY:
 		Weapon: MonsterTankTusk
-		Recoil: 100
+		Recoil: 50
 		RecoilRecovery: 25
 		LocalOffset: -400,-500,300, -400,500,300
 		LocalYaw: 60, -60
@@ -1749,7 +1749,7 @@ ra1_soviets_monstertank:
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets
 	Armament@TeslaSECONDARY:
 		Weapon: MonsterTankTuskTesla
-		Recoil: 100
+		Recoil: 50
 		RecoilRecovery: 25
 		LocalOffset: -400,-500,300, -400,500,300
 		LocalYaw: 60, -60
@@ -1757,7 +1757,7 @@ ra1_soviets_monstertank:
 		RequiresCondition: ra1_soviets_upgrade_teslarockets
 	Armament@NukeSECONDARY:
 		Weapon: MonsterTankTuskThermobaric
-		Recoil: 100
+		Recoil: 50
 		RecoilRecovery: 25
 		LocalOffset: -400,-500,300, -400,500,300
 		LocalYaw: 60, -60

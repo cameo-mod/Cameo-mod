@@ -48,13 +48,13 @@ forgotten_lcraft:
 		VoiceSet: TSVehicle
 	Armament@PRIMARY:
 		Weapon: TSVanMissile
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		LocalOffset: 0,121,271, 0,-121,271
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSChemVanMissile
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		LocalOffset: 0,121,271, 0,-121,271
 		RequiresCondition: forgotten_upgrade_chemicalweapons
@@ -106,20 +106,20 @@ forgotten_juggerboat:
 		Offset: 512,0,0
 	Armament@AA:
 		Weapon: TSJuggerFlakAA_boat
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		LocalOffset: -200,-100,0, -200,100,0
 	Armament@AG:
 		Weapon: TSJuggerboat90mm
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		LocalOffset: -200,-100,0, -200,100,0
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSChemJuggerboat90mm
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		LocalOffset: -200,-100,0, -200,100,0

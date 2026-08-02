@@ -1634,7 +1634,7 @@ ordos_combattank:
 		TurnSpeed: 17
 	Armament:
 		Weapon: OrdosCombatTankCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 32
 		LocalOffset: 256,0,0
 		MuzzleSequence: muzzle
@@ -1691,7 +1691,7 @@ ordos_heavycombattank:
 		TurnSpeed: 15
 	Armament:
 		Weapon: HeavyOrdosCombatTankCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 32
 		LocalOffset: 256,0,0
 		MuzzleSequence: muzzle

@@ -73,7 +73,7 @@ ra2_soviets_rhinoheavytank:
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: RA2120mm
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
@@ -82,7 +82,7 @@ ra2_soviets_rhinoheavytank:
 	Armament@PRIMARYRad:
 		Name: primary
 		Weapon: RA2120mm_rad
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
@@ -91,7 +91,7 @@ ra2_soviets_rhinoheavytank:
 	Armament@PRIMARYFire:
 		Name: primary
 		Weapon: RA2120mm_fire
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
@@ -100,7 +100,7 @@ ra2_soviets_rhinoheavytank:
 	Armament@PRIMARYTesla:
 		Name: primary
 		Weapon: RA2120mm_tesla
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
@@ -109,7 +109,7 @@ ra2_soviets_rhinoheavytank:
 	Armament@PRIMARYELITE:
 		Name: primary
 		Weapon: RA2120mm_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle-2
@@ -118,7 +118,7 @@ ra2_soviets_rhinoheavytank:
 	Armament@PRIMARYELITERad:
 		Name: primary
 		Weapon: RA2120mm_rad_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle-2
@@ -127,7 +127,7 @@ ra2_soviets_rhinoheavytank:
 	Armament@PRIMARYELITEFire:
 		Name: primary
 		Weapon: RA2120mm_fire_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle-2
@@ -136,7 +136,7 @@ ra2_soviets_rhinoheavytank:
 	Armament@PRIMARYELITETesla:
 		Name: primary
 		Weapon: RA2120mm_tesla_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle-2
@@ -199,26 +199,26 @@ ra2_soviets_flaktrack:
 	Armament@AA:
 		Weapon: RA2FlakTrackAAGun
 		LocalOffset: 600,0,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@AG:
 		Weapon: RA2FlakTrackGun
 		LocalOffset: 600,0,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@AAE:
 		Weapon: RA2FlakTrackAAGun_elite
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
 	Armament@AGE:
 		Weapon: RA2FlakTrackGun_elite
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -285,7 +285,7 @@ ra2_soviets_apocalypsetank:
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: RA2120xmm
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
@@ -294,7 +294,7 @@ ra2_soviets_apocalypsetank:
 	Armament@PRIMARYRad:
 		Name: primary
 		Weapon: RA2120xmm_rad
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
@@ -303,7 +303,7 @@ ra2_soviets_apocalypsetank:
 	Armament@PRIMARYFire:
 		Name: primary
 		Weapon: RA2120xmm_fire
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
@@ -312,7 +312,7 @@ ra2_soviets_apocalypsetank:
 	Armament@PRIMARYTesla:
 		Name: primary
 		Weapon: RA2120xmm_tesla
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
@@ -323,12 +323,12 @@ ra2_soviets_apocalypsetank:
 		Weapon: RA2MammothTusk_AA
 		LocalOffset: -85,90,340, -85,-90,340
 		LocalYaw: -100, 100
-		Recoil: 10
+		Recoil: 5
 		RequiresCondition: !rank-elite
 	Armament@PRIMARYELITE:
 		Name: primary
 		Weapon: RA2120xmm_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle-2
@@ -337,7 +337,7 @@ ra2_soviets_apocalypsetank:
 	Armament@PRIMARYELITERad:
 		Name: primary
 		Weapon: RA2120xmm_rad_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle-2
@@ -346,7 +346,7 @@ ra2_soviets_apocalypsetank:
 	Armament@PRIMARYELITEFire:
 		Name: primary
 		Weapon: RA2120xmm_fire_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle-2
@@ -355,7 +355,7 @@ ra2_soviets_apocalypsetank:
 	Armament@PRIMARYELITETesla:
 		Name: primary
 		Weapon: RA2120xmm_tesla_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle-2
@@ -366,7 +366,7 @@ ra2_soviets_apocalypsetank:
 		Weapon: RA2MammothTusk_AA_elite
 		LocalOffset: -85,90,340, -85,-90,340
 		LocalYaw: -100, 100
-		Recoil: 10
+		Recoil: 5
 		RequiresCondition: rank-elite
 	FirepowerMultiplier@ra2_soviets_doctrine_nuclearmunitions:
 		Modifier: 125
@@ -514,19 +514,19 @@ ra2_soviets_teslatank:
 	Armament@PRIMARY:
 		Weapon: RA2TankBolt
 		LocalOffset: 600,200,200, 600,-200,200
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		RequiresCondition: (!ra2_soviets_upgrade_teslaoverload && !rank-elite)
 	Armament@PRIMARY2:
 		Weapon: RA2TankBolt2
 		LocalOffset: 600,200,200, 600,-200,200
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)
 	Armament@PRIMARY3:
 		Weapon: RA2TankBolt3
 		LocalOffset: 600,200,200, 600,-200,200
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && rank-elite)
 	AttackTurreted:

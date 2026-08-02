@@ -75,12 +75,12 @@ cabal_lazerboat:
 	Armament@PRIMARY:
 		Weapon: CabalLaserBoatLaser
 		LocalOffset: 350,-5,10, 350,5,10
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 	Armament@AA:
 		Weapon: CabalLaserBoatLaserAA
 		LocalOffset: 350,-5,10, 350,5,10
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 	Armament@SECONDARY:
 		Name: secondary

@@ -358,7 +358,7 @@ latinsyndicate_rushertank:
 	Armament:
 		Name: primary
 		Weapon: RA2Gren60mm
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
@@ -367,7 +367,7 @@ latinsyndicate_rushertank:
 	Armament@elite:
 		Name: primary
 		Weapon: RA2Gren60mm_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle-2
@@ -376,14 +376,14 @@ latinsyndicate_rushertank:
 	Armament@AA:
 		Weapon: LatinRusherRocket
 		LocalOffset: 600,200,300, 600,-200,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_doctrine_cartelrockets && !rank-elite
 	Armament@AAE:
 		Weapon: LatinRusherRocket_elite
 		LocalOffset: 600,200,300, 600,-200,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_doctrine_cartelrockets && rank-elite
@@ -447,7 +447,7 @@ latinsyndicate_smokertank:
 	Armament:
 		Name: primary
 		Weapon: LatinSmokerCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 32
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
@@ -456,7 +456,7 @@ latinsyndicate_smokertank:
 	Armament@elite:
 		Name: primary
 		Weapon: LatinSmokerCannon_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 32
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
@@ -465,7 +465,7 @@ latinsyndicate_smokertank:
 	Armament@GrenadePack:
 		Weapon: RA2GrenadePack
 		LocalOffset: 600,100,300, 600,200,300, 600,-100,300, 600,-200,300
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 32
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
@@ -473,7 +473,7 @@ latinsyndicate_smokertank:
 	Armament@GrenadePackE:
 		Weapon: RA2GrenadePack_elite
 		LocalOffset: 600,100,300, 600,200,300, 600,-100,300, 600,-200,300
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 32
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
@@ -481,14 +481,14 @@ latinsyndicate_smokertank:
 	Armament@AA:
 		Weapon: LatinSmokerRocket
 		LocalOffset: 600,200,300, 600,-200,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_doctrine_cartelrockets && !rank-elite
 	Armament@AAE:
 		Weapon: LatinSmokerRocket_elite
 		LocalOffset: 600,200,300, 600,-200,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_doctrine_cartelrockets && rank-elite
@@ -553,7 +553,7 @@ latinsyndicate_diablo:
 	Armament:
 		Name: primary
 		Weapon: DiabloCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
@@ -562,7 +562,7 @@ latinsyndicate_diablo:
 	Armament@Elite:
 		Name: primary
 		Weapon: DiabloCannon_elite
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -570,14 +570,14 @@ latinsyndicate_diablo:
 		Name: secondary
 		Weapon: DiabloCannon_AA
 		LocalOffset: 600,0,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@AAE:
 		Name: secondary
 		Weapon: DiabloCannonAAE_AA
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -673,84 +673,84 @@ latinsyndicate_latinapc:
 	Armament@Flak:
 		Weapon: RA2APCFlakCannon
 		LocalOffset: 600,15,300, 600,-15,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@FlakELITE:
 		Weapon: RA2APCFlakCannon_elite
 		LocalOffset: 600,15,300, 600,-15,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
 	Armament@FlakAA:
 		Weapon: RA2APCFlakCannonAA
 		LocalOffset: 600,15,300, 600,-15,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@FlakAAELITE:
 		Weapon: RA2APCFlakCannonAA_elite
 		LocalOffset: 600,15,300, 600,-15,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
 	Armament@Machinegun:
 		Weapon: RA2APCMachineGun
 		LocalOffset: 600,15,300, 600,-15,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_upgrade_yuristolentechchainguns && !rank-elite
 	Armament@MachinegunELITE:
 		Weapon: RA2APCMachineGun_elite
 		LocalOffset: 600,15,300, 600,-15,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_upgrade_yuristolentechchainguns && rank-elite
 	Armament@MachinegunAA:
 		Weapon: RA2APCMachineGun_AA
 		LocalOffset: 600,15,300, 600,-15,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_upgrade_yuristolentechchainguns && !rank-elite
 	Armament@MachinegunAAELITE:
 		Weapon: RA2APCMachineGun_AA_elite
 		LocalOffset: 600,15,300, 600,-15,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_upgrade_yuristolentechchainguns && rank-elite
 	Armament@Rockets:
 		Weapon: RA2APCRocket
 		LocalOffset: 600,-150,300, 600,150,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_doctrine_cartelrockets && !rank-elite
 	Armament@RocketsELITE:
 		Weapon: RA2APCRocket_elite
 		LocalOffset: 600,-150,300, 600,150,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_doctrine_cartelrockets && rank-elite
 	Armament@RocketsAA:
 		Weapon: RA2APCRocket_AA
 		LocalOffset: 600,-150,300, 600,150,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_doctrine_cartelrockets && !rank-elite
 	Armament@RocketsAAELITE:
 		Weapon: RA2APCRocket_AA_elite
 		LocalOffset: 600,-150,300, 600,150,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: latinsyndicate_doctrine_cartelrockets && rank-elite
@@ -826,14 +826,14 @@ latinsyndicate_narcohummer:
 	Armament@AG:
 		Weapon: RA2NarcoAKM
 		LocalOffset: 600,0,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@AGE:
 		Weapon: RA2NarcoAKM_elite
 		LocalOffset: 600,0,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -910,14 +910,14 @@ latinsyndicate_carteltruck:
 	Armament@AG:
 		Weapon: RA2Narco60mm
 		LocalOffset: 600,0,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@AGE:
 		Weapon: RA2Narco60mm_elite
 		LocalOffset: 600,0,300
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite

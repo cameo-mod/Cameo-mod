@@ -142,7 +142,7 @@ ts_gdi_amphibiousapc:
 		TurnSpeed: 20
 	Armament:
 		Weapon: TSAAPCCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
@@ -262,14 +262,14 @@ ts_gdi_titan:
 		TurnSpeed: 15
 	Armament@PRIMARY:
 		Weapon: TS120mm
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 32
 		LocalOffset: 800, 300, 700
 		MuzzleSequence: muzzle
 		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
 	Armament@Upgrade:
 		Weapon: TS120mmRail
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 32
 		LocalOffset: 800, 300, 700
 		MuzzleSequence: muzzle
@@ -338,14 +338,14 @@ ts_gdi_titanmkii:
 		Offset: -45,0,392
 	Armament@PRIMARY:
 		Weapon: TS120mmTal
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 32
 		LocalOffset: 800, 300, 700
 		MuzzleSequence: muzzle
 		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
 	Armament@Upgrade:
 		Weapon: TS120mmTalRail
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 32
 		LocalOffset: 800, 300, 700
 		MuzzleSequence: muzzle
@@ -988,12 +988,12 @@ ts_gdi_disruptor:
 		TurnSpeed: 10
 	Armament@PRIMARY:
 		Weapon: TSSonicZapWeapon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
 	Armament@Upgrade:
 		Weapon: TSSonicZapWeaponSonic
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		RequiresCondition: ts_gdi_upgrade_sonicweaponry
 	AttackTurreted:

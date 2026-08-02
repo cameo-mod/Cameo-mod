@@ -120,7 +120,7 @@ schwarzermond_laserbeetle:
 	Armament:
 		Name: primary
 		Weapon: NaxiBeetleLaser_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle
@@ -129,7 +129,7 @@ schwarzermond_laserbeetle:
 	Armament@AA:
 		Name: primary
 		Weapon: NaxiBeetleLaser_AA_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle
@@ -138,7 +138,7 @@ schwarzermond_laserbeetle:
 	Armament@UP:
 		Name: primary
 		Weapon: Lunar_YellowBeetleLaser
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle
@@ -147,7 +147,7 @@ schwarzermond_laserbeetle:
 	Armament@AA_UP:
 		Name: primary
 		Weapon: Lunar_YellowBeetleLaser_AA
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle
@@ -156,7 +156,7 @@ schwarzermond_laserbeetle:
 	Armament@AMP:
 		Name: primary
 		Weapon: Lunar_AmplifiedBeetleLaser
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle
@@ -165,7 +165,7 @@ schwarzermond_laserbeetle:
 	Armament@AA_AMP:
 		Name: primary
 		Weapon: Lunar_AmplifiedBeetleLaser_AA
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle
@@ -223,7 +223,7 @@ schwarzermond_lunarpanzer:
 	Armament:
 		Name: primary
 		Weapon: LunarPanzerCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle
@@ -232,7 +232,7 @@ schwarzermond_lunarpanzer:
 	Armament@elite:
 		Name: primary
 		Weapon: LunarPanzerCannon_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle-2
@@ -241,7 +241,7 @@ schwarzermond_lunarpanzer:
 	Armament@upgraded:
 		Name: primary
 		Weapon: Lunar_Green105mm
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle
@@ -250,7 +250,7 @@ schwarzermond_lunarpanzer:
 	Armament@upgraded-elite:
 		Name: primary
 		Weapon: Lunar_Green105mm_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle-2
@@ -309,7 +309,7 @@ schwarzermond_lunartiger:
 	Armament:
 		Name: primary
 		Weapon: LunarTigerCannon
-		Recoil: 256
+		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 1500,0,0
 		MuzzleSequence: muzzle
@@ -318,7 +318,7 @@ schwarzermond_lunartiger:
 	Armament@elite:
 		Name: primary
 		Weapon: LunarTigerCannon_elite
-		Recoil: 256
+		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 1500,0,0
 		MuzzleSequence: muzzle-2
@@ -327,7 +327,7 @@ schwarzermond_lunartiger:
 	Armament@-upgrade:
 		Name: primary
 		Weapon: Lunar_GreenTigerCannon
-		Recoil: 256
+		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 1500,0,0
 		MuzzleSequence: muzzle
@@ -336,7 +336,7 @@ schwarzermond_lunartiger:
 	Armament@elite-upgrade:
 		Name: primary
 		Weapon: Lunar_GreenTigerCannon_elite
-		Recoil: 256
+		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 1500,0,0
 		MuzzleSequence: muzzle-2
@@ -849,7 +849,7 @@ schwarzermond_lasertank:
 	Armament:
 		Name: primary
 		Weapon: NaxiTank2Laser
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 850,150,-60, 850,-150,-60
 		MuzzleSequence: muzzle
@@ -858,7 +858,7 @@ schwarzermond_lasertank:
 	Armament@AA:
 		Name: primary
 		Weapon: NaxiTank2Laser_AA
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 850,150,-60, 850,-150,-60
 		MuzzleSequence: muzzle
@@ -867,7 +867,7 @@ schwarzermond_lasertank:
 	Armament@UP:
 		Name: primary
 		Weapon: Lunar_YellowTank2Laser
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 850,150,-60, 850,-150,-60
 		MuzzleSequence: muzzle
@@ -876,7 +876,7 @@ schwarzermond_lasertank:
 	Armament@AA_UP:
 		Name: primary
 		Weapon: Lunar_YellowTank2Laser_AA
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 850,150,-60, 850,-150,-60
 		MuzzleSequence: muzzle
@@ -885,7 +885,7 @@ schwarzermond_lasertank:
 	Armament@AMP:
 		Name: primary
 		Weapon: Lunar_AmplifiedTank2Laser
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 850,150,-60, 850,-150,-60
 		MuzzleSequence: muzzle
@@ -894,7 +894,7 @@ schwarzermond_lasertank:
 	Armament@AA_AMP:
 		Name: primary
 		Weapon: Lunar_AmplifiedTank2Laser_AA
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 850,150,-60, 850,-150,-60
 		MuzzleSequence: muzzle
