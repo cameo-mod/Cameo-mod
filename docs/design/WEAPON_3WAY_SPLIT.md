@@ -13,18 +13,27 @@ of each layer (warhead may be 1–2):
 ```
 SomeWeapon:
     Inherits@wh:   ^Bullet_Light      # 1–2 WARHEAD templates (Versus + damage + % + FF twin)
-    Inherits@proj: ^ProjBullet         # 1 PROJECTILE template
-    Inherits@fx:   ^FxBullet           # 1 EFFECT template (impact FX + shield + concrete + smudge/specials)
+    Inherits@proj: ^ProjectileBullet_Light   # 1 PROJECTILE template
+    Inherits@fx:   ^EffectBullet_Light        # 1 EFFECT template (impact FX + shield + smudge/specials)
     ReloadDelay: 20                     # per-weapon: cadence
-    Range: 4608                          # per-weapon: range
+    Range: 4608                          # per-weapon: range (beautiful ranges preserved)
     Report: gun8.aud                     # per-weapon: sound
-    Warhead@Bullet_Light:                # per-weapon: DAMAGE MAGNITUDE override only
-        Damage: 3000
+    Warhead@Bullet_Light:                # main-damage override — ON THE 2000-GRID, all mains identical
+        Damage: 4000                     # multiple of 2000; twins auto (FF 50%, % = 1-per-2000)
 ```
 
+**DAMAGE LAW (DESIGN.md §nice-number, do NOT violate):** main `Damage` is ALWAYS a
+**multiple of 2000** (`total ÷ N`, all N mains identical), **never off-grid, never
+hand-nudged**. Effective damage is fine-tuned ONLY by a single **unconditional
+`FirepowerMultiplier` named after the actor, on the unit itself** — never by editing
+`Damage`. The retrofit is therefore **purely structural**: it renames the damage key
+and PRESERVES the weapon's existing on-grid value verbatim; it invents NO numbers. The
+2000-grid re-quantise + per-actor FirepowerMultiplier are the **restat's** job (the
+balance pipeline: `extract_stats` → workbook → `apply_balance --confirm`).
+
 - **Layer 1 WARHEAD** = the 55-template library (`gen_weapon_template.py`, committed
-  `fa0947ae5`) — pure Versus/damage/% , FX/projectile-agnostic by design. TODO: add the
-  **FriendlyFire twin** for AoE families + the **ExtraDamage twin** for energy families.
+  `fa0947ae5`/`956cf1ecb`) — pure Versus/damage/%/FF, FX/projectile-agnostic by design.
+  FF twin (AoE) done; ExtraDamage twin (energy) handled per-weapon in the energy retrofit.
 - **Layer 2 PROJECTILE** = the `Projectile:` block only.
 - **Layer 3 EFFECT** = all the non-damage warheads: CreateEffect impact visuals
   (@Effect/@EffectAir/@EffectWater), @ShieldHit + @ShieldHitEffect, LeaveSmudge craters,
@@ -110,6 +119,30 @@ must NOT strip these. Known so far (more to be defined; confirm each before keep
 
 Everything else: the 2-cap is strict. Build a concrete allow-list (unit/weapon ids) before
 the kill-mixing pass. See memory `cameo-weapon-structure-rules`.
+
+## Retrofit specifics + weapon assignments (maintainer 2026-08-02)
+
+- **Intermediate templates.** Some weapons inherit a per-faction INTERMEDIATE
+  (`^RA2Chaingun` → `^Chaingun`, `^RA2SmallArms` → `^SmallArms`), not the base directly.
+  The retrofit must repoint these intermediates too (or the concrete weapons under them),
+  so the whole chain lands on the new families.
+- **Bullet_Heavy → the Pulverizer mecha** (Asian Alliance). Today `AsianPulverizerGatling`
+  / `AsianPulverizerMechaGatling` stitch `^HeavyCannon + ^SmallArms + ^RA2Chaingun`
+  (+ Chem + Missile) — a MIXED weapon → **Phase B**. Collapse it to the clean heavy-bullet
+  identity `^Bullet_Heavy` (a heavy gatling). Bullet_Heavy has no old-template source, so
+  the Pulverizer is its intended first home.
+- **Energy families** (Laser/Railgun/Tesla/Magic) = **small spread → single target**, and
+  their upside is the **ExtraDamage chip vs shields** (50% of main, excluded from total).
+  Large-AoE weapons have big spread and NO such chip — that is the intended trade.
+
+## SPREAD REBALANCE — a future balance task (maintainer 2026-08-02, reason later)
+
+Spreads are currently placeholders (generator: 400/600/800/1000 by level). New law to work
+out later: **every weapon's spread must be UNIQUE, but balanced so `Damage × Spread ≈ constant`**
+(an inverse trade — high-damage = tight spread, low-damage = wide spread). A weapon with a
+**small spread MUST carry a unique extra effect** to justify it (energy's +vs-shield chip is
+the model; a plain small-spread weapon is under-powered). Do NOT hand-tune spreads yet — this
+is a dedicated pass folded into the restat. Tracked in ROADMAP.
 
 ## Naming — AWAITING MAINTAINER (proposals above)
 

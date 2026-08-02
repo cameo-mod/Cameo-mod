@@ -75,12 +75,21 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    - ✅ **Layer 2 (PROJECTILE) + Layer 3 (EFFECT) libraries BUILT + SPLICED + BOOT-GATED 2026-08-02** —
      `gen_projectiles.py` (24 `^Projectile<Family>_<Level>`) + `gen_effects.py` (27 `^Effect<Family>_<Level>`),
      extracted verbatim from the 30 old full-stack templates, additive/0-usage above the divider. Boot OK.
-   - **NEXT: extend `gen_weapon_template.py`** — add the FriendlyFire twin (AoE families) + ExtraDamage twin
-     (energy: Laser/Railgun/Tesla/Magic) to the warhead layer; re-splice. Then **retrofit** weapons to
-     `Inherits@wh + @proj + @fx` (437 single-inherit first, then the 609 MIXED = the kill-warhead-mixing
-     pass, each ≤2 warheads), rewriting `Warhead@<Old>` override keys → new warhead key; resolver-diff +
-     boot-gate per family. Then delete the 30 orphaned old templates + their `weapon_classes.yaml` rows.
-   This unblocks the vehicle DPS/range restat (#1).
+   - ✅ **Warhead FF twins BUILT + BOOT-GATED 2026-08-02** (`956cf1ecb`) — 19 FriendlyFire twins for the
+     7 AoE families (Demolition/Concussion/Flame/Chemical/Nuclear/Sonic/Melee). ExtraDamage twin (energy)
+     stays per-weapon (bespoke +vs-shield). All 3 layers now exist (55 wh + 24 proj + 27 fx).
+   - **NEXT: the RETROFIT (purely STRUCTURAL — no damage invented).** Repoint weapons to
+     `Inherits@wh + @proj + @fx`, renaming `Warhead@<Old>` keys → new key while **PRESERVING each
+     weapon's existing on-grid `Damage` verbatim** (damage law = 2000-grid, all mains identical, fine-tune
+     ONLY via one unconditional actor `FirepowerMultiplier` — DESIGN.md §nice-number). Handle INTERMEDIATE
+     templates (`^RA2Chaingun`→`^Chaingun`). Pilot = **SmallArms→Bullet_Light + Chaingun→Bullet_Medium**,
+     boot-gate, then roll out; energy families in a small ExtraDamage-aware pass; **609 MIXED = Phase B**
+     kill-mixing (≤2 warheads, honor the exception allow-list — Dune 3-cannon, Siege Tank/Engine).
+     **Bullet_Heavy → the Pulverizer mecha** (Asian Alliance, currently mixed → Phase B). Then delete the
+     30 orphaned old templates + their `weapon_classes.yaml` rows. This unblocks the vehicle DPS restat (#1).
+   - **[FUTURE, reason later] SPREAD REBALANCE** (maintainer 2026-08-02) — spreads must be UNIQUE per weapon
+     but balanced so **`Damage × Spread ≈ constant`** (inverse trade); a small spread MUST carry a unique
+     extra effect (energy's +vs-shield chip is the model). Folded into the restat; do NOT hand-tune yet.
 4b. **[L, FUTURE] 3-WAY weapon-template split** (maintainer 2026-08-02) — decompose every weapon into
    THREE independent composable templates: (1) WARHEAD/weapon-class (Versus+damage — the §12 families
    already ARE this layer, projectile/effect-agnostic by design), (2) PROJECTILE (speed/homing — so a
