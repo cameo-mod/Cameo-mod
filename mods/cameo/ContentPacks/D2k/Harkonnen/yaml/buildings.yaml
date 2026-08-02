@@ -280,6 +280,8 @@ harkonnen_autogunturret:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@gat: ^GatlingSpeedUpTurretBehavior
+	Armor:
+		Type: Concrete
 	Tooltip:
 		Name: Harkonnen Autogun Turret
 	Valued:
@@ -410,6 +412,8 @@ harkonnen_rocketturret:
 	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Armor:
+		Type: Concrete
 	Buildable:
 		Prerequisites: ~harkonnen_constructionyard, harkonnen_outpost
 	Valued:
