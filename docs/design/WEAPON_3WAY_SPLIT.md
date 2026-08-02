@@ -97,6 +97,20 @@ The **ExtraDamage** twin (Laser/Railgun/Tesla/Magic/Sniper — an OpenToppedDama
    ≤2 warheads — the "kill warhead-mixing" pass). Resolver-diff + boot-gate per family.
 4. **[cleanup]** Delete the 30 orphaned old templates; drop their `weapon_classes.yaml` rows.
 
+## The 2-warhead cap + its EXCEPTION allow-list (maintainer 2026-08-02)
+
+The kill-mixing pass reduces every weapon to **≤2 warhead inherits** — EXCEPT a
+maintainer-curated allow-list of units kept multi-warhead for uniqueness. Retrofit
+must NOT strip these. Known so far (more to be defined; confirm each before keeping):
+- **Dune combat tanks** — Ixian combat tank / Koda tank / Ordos combat tank / **any D2k
+  combat tank** = **3 cannon warheads** (Cannon Light + Medium + Heavy), their signature
+  (vs the single Medium cannon of other medium tanks).
+- **Terran Siege Tank** (`SiegeTankSiegeCannon`) + **Warcraft Siege Engine**
+  (`SiegeEngineCannon`) = keep ALL AoE warheads + others combined = a unique shared explosion.
+
+Everything else: the 2-cap is strict. Build a concrete allow-list (unit/weapon ids) before
+the kill-mixing pass. See memory `cameo-weapon-structure-rules`.
+
 ## Naming — AWAITING MAINTAINER (proposals above)
 
 Per the project rule "maintainer names the templates, I propose." Prefixes `^Proj*` / `^Fx*`

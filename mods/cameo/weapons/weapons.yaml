@@ -3248,7 +3248,6 @@ DefuseKit:
 # Repoint of real weapons onto these families is a SEPARATE pass;
 # old bespoke templates (^Grenade/^ShrapnelWeapon/^HeavyBomb/etc.)
 # stay until then.
-####################################################################
 ###### Bullet: INF > VEH+AIR+BLD (light, air=True) ######
 ^Bullet_Light:
 	ValidTargets: Ground, Water, Air
@@ -4802,6 +4801,32 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Flame_LightFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 500
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			HAZMAT: 25
+			Shield: 110
+			None: 100
+			Wood: 94
+			Flak: 88
+			Steel: 82
+			Plate: 76
+			Concrete: 70
+			Heroic: 64
+			Scout: 58
+			Light: 52
+			Medium: 46
+			Heavy: 40
+			Superheavy: 34
+			Fighter: 28
+			Bomber: 22
+			Helicopter: 16
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Flame_LightPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -4858,6 +4883,32 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Flame_MediumFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 500
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			HAZMAT: 25
+			Shield: 125
+			None: 100
+			Wood: 95
+			Flak: 90
+			Steel: 85
+			Plate: 80
+			Concrete: 75
+			Heroic: 70
+			Scout: 65
+			Light: 60
+			Medium: 55
+			Heavy: 50
+			Superheavy: 45
+			Fighter: 40
+			Bomber: 35
+			Helicopter: 30
+			Spaceship: 25
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Flame_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -4896,6 +4947,32 @@ DefuseKit:
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
 			HAZMAT: 50
+			Shield: 140
+			None: 100
+			Wood: 96
+			Flak: 92
+			Steel: 88
+			Plate: 84
+			Concrete: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Flame_HeavyFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 500
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			HAZMAT: 25
 			Shield: 140
 			None: 100
 			Wood: 96
@@ -4971,6 +5048,32 @@ DefuseKit:
 			Bomber: 16
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Chemical_LightFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 500
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			HAZMAT: 25
+			Shield: 110
+			Superheavy: 100
+			Heroic: 94
+			Heavy: 88
+			Plate: 82
+			Medium: 76
+			Flak: 70
+			Light: 64
+			None: 58
+			Scout: 52
+			Concrete: 46
+			Steel: 40
+			Wood: 34
+			Spaceship: 28
+			Helicopter: 22
+			Bomber: 16
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Chemical_LightPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -5027,6 +5130,32 @@ DefuseKit:
 			Bomber: 30
 			Fighter: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Chemical_MediumFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 500
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			HAZMAT: 25
+			Shield: 125
+			Superheavy: 100
+			Heroic: 95
+			Heavy: 90
+			Plate: 85
+			Medium: 80
+			Flak: 75
+			Light: 70
+			None: 65
+			Scout: 60
+			Concrete: 55
+			Steel: 50
+			Wood: 45
+			Spaceship: 40
+			Helicopter: 35
+			Bomber: 30
+			Fighter: 25
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Chemical_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -5065,6 +5194,32 @@ DefuseKit:
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
 			HAZMAT: 50
+			Shield: 140
+			Superheavy: 100
+			Heroic: 96
+			Heavy: 92
+			Plate: 88
+			Medium: 84
+			Flak: 80
+			Light: 76
+			None: 72
+			Scout: 68
+			Concrete: 64
+			Steel: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Chemical_HeavyFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 500
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			HAZMAT: 25
 			Shield: 140
 			Superheavy: 100
 			Heroic: 96
@@ -5140,6 +5295,32 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Melee_LightFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground
+		Spread: 200
+		Damage: 500
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			HAZMAT: 25
+			Shield: 110
+			None: 100
+			Flak: 94
+			Plate: 88
+			Heroic: 82
+			Scout: 76
+			Light: 70
+			Medium: 64
+			Heavy: 58
+			Superheavy: 52
+			Wood: 46
+			Steel: 40
+			Concrete: 34
+			Fighter: 28
+			Bomber: 22
+			Helicopter: 16
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Melee_LightPercentage: HealthPercentageDamage
 		ValidTargets: Ground
 		Spread: 200
@@ -5196,6 +5377,32 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Melee_MediumFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground
+		Spread: 300
+		Damage: 500
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			HAZMAT: 25
+			Shield: 125
+			None: 100
+			Flak: 95
+			Plate: 90
+			Heroic: 85
+			Scout: 80
+			Light: 75
+			Medium: 70
+			Heavy: 65
+			Superheavy: 60
+			Wood: 55
+			Steel: 50
+			Concrete: 45
+			Fighter: 40
+			Bomber: 35
+			Helicopter: 30
+			Spaceship: 25
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Melee_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground
 		Spread: 300
@@ -5234,6 +5441,32 @@ DefuseKit:
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
 			HAZMAT: 50
+			Shield: 140
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Scout: 84
+			Light: 80
+			Medium: 76
+			Heavy: 72
+			Superheavy: 68
+			Wood: 64
+			Steel: 60
+			Concrete: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Melee_HeavyFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground
+		Spread: 400
+		Damage: 500
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			HAZMAT: 25
 			Shield: 140
 			None: 100
 			Flak: 96
@@ -5644,6 +5877,32 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Demolition_LightFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 500
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			HAZMAT: 25
+			Shield: 110
+			Wood: 100
+			Steel: 94
+			Concrete: 88
+			None: 82
+			Flak: 76
+			Plate: 70
+			Heroic: 64
+			Scout: 58
+			Light: 52
+			Medium: 46
+			Heavy: 40
+			Superheavy: 34
+			Fighter: 28
+			Bomber: 22
+			Helicopter: 16
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Demolition_LightPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -5700,6 +5959,32 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Demolition_MediumFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 500
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			HAZMAT: 25
+			Shield: 125
+			Wood: 100
+			Steel: 95
+			Concrete: 90
+			None: 85
+			Flak: 80
+			Plate: 75
+			Heroic: 70
+			Scout: 65
+			Light: 60
+			Medium: 55
+			Heavy: 50
+			Superheavy: 45
+			Fighter: 40
+			Bomber: 35
+			Helicopter: 30
+			Spaceship: 25
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Demolition_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -5738,6 +6023,32 @@ DefuseKit:
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
 			HAZMAT: 50
+			Shield: 140
+			Wood: 100
+			Steel: 96
+			Concrete: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Demolition_HeavyFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 500
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			HAZMAT: 25
 			Shield: 140
 			Wood: 100
 			Steel: 96
@@ -5813,6 +6124,32 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Concussion_LightFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 500
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			HAZMAT: 25
+			Shield: 110
+			Scout: 100
+			None: 94
+			Wood: 88
+			Light: 82
+			Flak: 76
+			Steel: 70
+			Medium: 64
+			Plate: 58
+			Concrete: 52
+			Heavy: 46
+			Heroic: 40
+			Superheavy: 34
+			Fighter: 28
+			Bomber: 22
+			Helicopter: 16
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Concussion_LightPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -5851,6 +6188,32 @@ DefuseKit:
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
 			HAZMAT: 50
+			Shield: 125
+			Scout: 100
+			None: 95
+			Wood: 90
+			Light: 85
+			Flak: 80
+			Steel: 75
+			Medium: 70
+			Plate: 65
+			Concrete: 60
+			Heavy: 55
+			Heroic: 50
+			Superheavy: 45
+			Fighter: 40
+			Bomber: 35
+			Helicopter: 30
+			Spaceship: 25
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Concussion_MediumFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 500
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			HAZMAT: 25
 			Shield: 125
 			Scout: 100
 			None: 95
@@ -5925,6 +6288,32 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Concussion_HeavyFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 500
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			HAZMAT: 25
+			Shield: 140
+			Scout: 100
+			None: 96
+			Wood: 92
+			Light: 88
+			Flak: 84
+			Steel: 80
+			Medium: 76
+			Plate: 72
+			Concrete: 68
+			Heavy: 64
+			Heroic: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Concussion_HeavyPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -5961,6 +6350,31 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1000
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 45
+			Bomber: 45
+			Concrete: 45
+			Fighter: 45
+			Flak: 45
+			Heavy: 45
+			Helicopter: 45
+			Heroic: 45
+			Light: 45
+			Medium: 45
+			None: 45
+			Plate: 45
+			Scout: 45
+			Spaceship: 45
+			Steel: 45
+			Superheavy: 45
+			Wood: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Sonic_LightFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 500
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
 			Shield: 45
@@ -6036,6 +6450,31 @@ DefuseKit:
 			Superheavy: 55
 			Wood: 55
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Sonic_MediumFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 500
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			Shield: 55
+			Bomber: 55
+			Concrete: 55
+			Fighter: 55
+			Flak: 55
+			Heavy: 55
+			Helicopter: 55
+			Heroic: 55
+			Light: 55
+			Medium: 55
+			None: 55
+			Plate: 55
+			Scout: 55
+			Spaceship: 55
+			Steel: 55
+			Superheavy: 55
+			Wood: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Sonic_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -6071,6 +6510,31 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 1000
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 65
+			Bomber: 65
+			Concrete: 65
+			Fighter: 65
+			Flak: 65
+			Heavy: 65
+			Helicopter: 65
+			Heroic: 65
+			Light: 65
+			Medium: 65
+			None: 65
+			Plate: 65
+			Scout: 65
+			Spaceship: 65
+			Steel: 65
+			Superheavy: 65
+			Wood: 65
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Sonic_HeavyFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 500
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
 			Shield: 65
@@ -6301,6 +6765,32 @@ DefuseKit:
 		Falloff: 100, 50, 20, 8, 3
 		Versus:
 			HAZMAT: 50
+			Shield: 155
+			Concrete: 100
+			Steel: 97
+			Wood: 94
+			Superheavy: 91
+			Heavy: 88
+			Medium: 85
+			Light: 82
+			Scout: 79
+			Spaceship: 76
+			Helicopter: 73
+			Bomber: 70
+			Fighter: 67
+			Heroic: 64
+			Plate: 61
+			Flak: 58
+			None: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Nuclear_SuperFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water, Air
+		Spread: 500
+		Damage: 500
+		Falloff: 100, 50, 20, 8, 3
+		Versus:
+			HAZMAT: 25
 			Shield: 155
 			Concrete: 100
 			Steel: 97

@@ -142,14 +142,16 @@ def valid_targets(hits_air, ground_only=False):
     return "Ground" if ground_only else "Ground, Water"
 
 
-def family(name, order16, vt, levels, *, mode=None, damage=1000,
+def family(name, order16, vt, levels, *, mode=None, aoe=False, damage=1000,
            spreads=(400, 600, 800, 1000),
            falloffs=("100, 50, 33, 25, 20", "100, 50, 30, 18, 10",
                      "100, 50, 25, 10, 5", "100, 50, 20, 8, 3"),
            damage_types="Prone75Percent, TriggerProne, ExplosionDeath",
            hazmat=50, reload=25, rng=5120):
     """mode: None = sloped (from order16); 'flat' = Sonic (uniform flat, small %);
-    'pct' = Magic (tiny uniform flat + LARGE uniform % of max HP)."""
+    'pct' = Magic (tiny uniform flat + LARGE uniform % of max HP).
+    aoe: True = add the FriendlyFire twin (AoE rule — half spread, half damage,
+    ValidRelationships: Ally, same Versus). See cameo-weapon-differentiation §13.4."""
     blocks = []
     allr = sorted(CANON16)
     for level in levels:
@@ -172,7 +174,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=1000,
             pct = table(order16, 1, ptop, pfloor, ptop + pfloor)
             hz = hazmat
         tag = f"{name}_{level}"
-        b = [f"^{tag}:",
+        main_wh = [f"^{tag}:",
              f"\tValidTargets: {vt}",
              f"\tReloadDelay: {reload}",
              f"\tRange: {rng}",
@@ -185,8 +187,19 @@ def family(name, order16, vt, levels, *, mode=None, damage=1000,
              f"\t\tFalloff: {falloffs[li]}",
              f"\t\tVersus:",
              emit_versus(main, hazmat=hz),
-             f"\t\tDamageTypes: {damage_types}",
-             f"\tWarhead@{tag}Percentage: HealthPercentageDamage",
+             f"\t\tDamageTypes: {damage_types}"]
+        ff_wh = []
+        if aoe:  # AoE FriendlyFire twin: half spread, half damage, Ally-only, same Versus
+            ff_wh = [f"\tWarhead@{tag}FriendlyFire: SpreadDamage",
+             f"\t\tValidRelationships: Ally",
+             f"\t\tValidTargets: {vt}",
+             f"\t\tSpread: {spreads[li] // 2}",
+             f"\t\tDamage: {damage // 2}",
+             f"\t\tFalloff: {falloffs[li]}",
+             f"\t\tVersus:",
+             emit_versus(main, hazmat=(hz // 2 if hz else None)),
+             f"\t\tDamageTypes: {damage_types}"]
+        pct_wh = [f"\tWarhead@{tag}Percentage: HealthPercentageDamage",
              f"\t\tValidTargets: {vt}",
              f"\t\tSpread: {spreads[li] // 2}",
              f"\t\tDamage: {pct_damage}",
@@ -194,7 +207,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=1000,
              f"\t\tVersus:",
              emit_versus(pct),
              f"\t\tUpdatesUnitStatistics: false"]
-        blocks.append("\n".join(b))
+        blocks.append("\n".join(main_wh + ff_wh + pct_wh))
     return "\n\n".join(blocks)
 
 
@@ -209,6 +222,12 @@ def macro_summary(blocks):
 
 
 SPECIAL_MODE = {"FLAT": "flat", "PCT": "pct"}
+
+# AoE (splash) families get the FriendlyFire twin (½ spread, ½ damage, Ally-only).
+# Direct-fire (Bullet/Cannon/Missile/Flak/Laser/Prism/Arrow/Railgun/Tesla) and the
+# targeted Magic %-equalizer do NOT. Matches the old-template precedent
+# (Grenade/Shrapnel/Flame/Chem/Sword had FF) + the AoE-FF rule (§13.4).
+AOE_FAMILIES = {"Demolition", "Concussion", "Flame", "Chemical", "Nuclear", "Sonic", "Melee"}
 
 
 if __name__ == "__main__":
@@ -241,12 +260,13 @@ if __name__ == "__main__":
         if wanted and nm.lower() not in wanted:
             continue
         vt = valid_targets(air, ground_only=(nm == "Melee"))
+        aoe = nm in AOE_FAMILIES
         if isinstance(bl, str) and bl in SPECIAL_MODE:
             print(f"###### {nm}: {macro_summary(bl)} ######")
-            print(family(nm, None, vt, lv, mode=SPECIAL_MODE[bl]))
+            print(family(nm, None, vt, lv, mode=SPECIAL_MODE[bl], aoe=aoe))
             print()
             continue
         order = build_order(bl, d)
         print(f"###### {nm}: {macro_summary(bl)} ({d}, air={air}) ######")
-        print(family(nm, order, vt, lv))
+        print(family(nm, order, vt, lv, aoe=aoe))
         print()
