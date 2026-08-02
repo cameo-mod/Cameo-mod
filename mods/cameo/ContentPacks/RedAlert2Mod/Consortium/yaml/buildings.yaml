@@ -634,6 +634,7 @@ steelconsortium_quantumcannon:
 steelconsortium_bfg10000:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
+	-WithTurretSearchlight:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@EMP: ^DefenseTurretedEMP
