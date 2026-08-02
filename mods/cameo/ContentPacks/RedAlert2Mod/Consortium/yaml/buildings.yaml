@@ -455,12 +455,18 @@ steelconsortium_consortiumsentryturret:
 		LocalOffset: 400,0,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 200,0,100
+		CasingTargetOffset: 0,-600,0
 	Armament@Upgrade:
 		Name: primary
 		Weapon: SteelVulcanResonance
 		LocalOffset: 400,0,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 200,0,100
+		CasingTargetOffset: 0,-600,0
 		RequiresCondition: steelconsortium_upgrade_resonanceammo
 	-RenderRangeCircle:
 	RenderRangeCircleCA:

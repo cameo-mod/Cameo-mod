@@ -354,6 +354,9 @@ yuri_gatlingcannon:
 		LocalOffset: 500,140,400, 500,-150,400
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 250,140,400, 250,-150,400
+		CasingTargetOffset: 0,740,0, 0,-750,0
 	Armament@2:
 		Name: primary
 		Weapon: RA2GattlingMG2
@@ -361,6 +364,9 @@ yuri_gatlingcannon:
 		LocalOffset: 500,140,400, 500,-150,400
 		MuzzleSequence: muzzle-1
 		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 250,140,400, 250,-150,400
+		CasingTargetOffset: 0,740,0, 0,-750,0
 	Armament@3:
 		Name: primary
 		Weapon: RA2GattlingMG3
@@ -368,6 +374,9 @@ yuri_gatlingcannon:
 		LocalOffset: 500,140,400, 500,-150,400
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 250,140,400, 250,-150,400
+		CasingTargetOffset: 0,740,0, 0,-750,0
 	Armament@1AA:
 		Name: secondary
 		Weapon: RA2GattlingMG1_AA
@@ -375,6 +384,9 @@ yuri_gatlingcannon:
 		LocalOffset: 500,140,400, 500,-150,400
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 250,140,400, 250,-150,400
+		CasingTargetOffset: 0,740,0, 0,-750,0
 	Armament@2AA:
 		Name: secondary
 		Weapon: RA2GattlingMG2_AA
@@ -382,6 +394,9 @@ yuri_gatlingcannon:
 		LocalOffset: 500,140,400, 500,-150,400
 		MuzzleSequence: muzzle-1
 		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 250,140,400, 250,-150,400
+		CasingTargetOffset: 0,740,0, 0,-750,0
 	Armament@3AA:
 		Name: secondary
 		Weapon: RA2GattlingMG3_AA
@@ -389,6 +404,9 @@ yuri_gatlingcannon:
 		LocalOffset: 500,140,400, 500,-150,400
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 250,140,400, 250,-150,400
+		CasingTargetOffset: 0,740,0, 0,-750,0
 	RangeMultiplier@GatlingBuff:
 		Modifier: 150
 	-RenderRangeCircle:

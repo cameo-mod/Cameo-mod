@@ -585,7 +585,10 @@ ordos_autogunturret:
 		HP: 75000
 	Armament:
 		Weapon: ordos_autogunturret
-		LocalOffset: 500,-150,400, 500,150,400
+		LocalOffset: 600,-100,500, 600,100,500
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 300,-100,500, 300,100,500
+		CasingTargetOffset: 0,-900,0, 0,900,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
 	WithSpriteTurret:
