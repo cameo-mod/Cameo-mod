@@ -144,7 +144,118 @@ out later: **every weapon's spread must be UNIQUE, but balanced so `Damage × Sp
 the model; a plain small-spread weapon is under-powered). Do NOT hand-tune spreads yet — this
 is a dedicated pass folded into the restat. Tracked in ROADMAP.
 
-## Naming — AWAITING MAINTAINER (proposals above)
+## Naming — RESOLVED (maintainer 2026-08-02)
 
-Per the project rule "maintainer names the templates, I propose." Prefixes `^Proj*` / `^Fx*`
-and the family names above are my proposals — easily renamed before anything inherits them.
+Layers are `^Projectile<Family>_<Level>` and `^Effect<Family>_<Level>` (spelled out, separate
+L/M/H templates, zero per-weapon overrides). Both libraries are BUILT + committed (`0a6649039`).
+
+---
+
+# ═══ CONVERSION RUNBOOK — convert ALL weapons to the 3-inherit model ═══
+_(maintainer-requested full plan, 2026-08-02. The other agent is halted; this is the single
+authoritative path. One canonical retrofit tool; one family per commit; every step boot-gated.)_
+
+## The invariants (never violated — these are what the v1 blind script broke)
+1. **Structural only.** A retrofit renames inherits + warhead keys; it PRESERVES every existing
+   on-grid `Damage` verbatim and invents no numbers. (2000-grid + FirepowerMultiplier = the restat.)
+2. **≤2 warhead inherits** per weapon (the cap is on warheads). Direct-fire = 1; energy/upgrade = 2;
+   the **exception allow-list** (Dune 3-cannon combat tanks; Terran Siege Tank + WC Siege Engine) is
+   the ONLY place >2 is allowed.
+3. **Exactly one** `@proj` and one `@fx` per weapon (except bombs = no `@proj`). >1 = the v1 bug.
+4. **Single-inherit first; mixed weapons are Phase B** (per-weapon collapse, maintainer-directed).
+5. Resolver-diff (structural) + audits + **boot-gate** + scoped commit **per family**.
+
+## The master triple-map (old template → warhead / projectile / effect)
+| Old | Warhead | Projectile | Effect | Notes |
+|---|---|---|---|---|
+| SmallArms | Bullet_Light | ProjectileBullet_Light | EffectBullet_Light | ✅ v3 |
+| Chaingun | Bullet_Medium | ProjectileBullet_Medium | EffectBullet_Medium | ✅ v3 |
+| TankDestroyerCannon | CannonAP_Light | ProjectileShell_Light | EffectCannon_Light | |
+| MediumCannon | CannonHE_Medium | ProjectileShell_Medium | EffectCannon_Medium | |
+| HeavyCannon | CannonHE_Heavy | ProjectileShell_Heavy | EffectCannon_Heavy | |
+| LightMissile | MissileAP_Light | ProjectileMissile_Light | EffectMissile_Light | |
+| MediumMissile | MissileAP_Medium | ProjectileMissile_Medium | EffectMissile_Medium | |
+| HeavyMissile | MissileAP_Heavy | ProjectileMissile_Heavy | EffectMissile_Heavy | |
+| FlakWeapon | Flak_Medium | ProjectileFlak_Medium | EffectFlak_Medium | |
+| HeavyAAWeapon | MissileAA_Heavy | ProjectileFlak_Heavy | EffectFlak_Heavy | |
+| LightFlameWeapon | Flame_Light | ProjectileFlame_Light | EffectFlame_Light | AoE (FF twin) |
+| MediumFlameWeapon | Flame_Medium | ProjectileFlame_Medium | EffectFlame_Medium | AoE |
+| HeavyFlameWeapon | Flame_Heavy | ProjectileFlame_Heavy | EffectFlame_Heavy | AoE |
+| LightChemicalWeapon | Chemical_Light | ProjectileChem_Light | EffectChem_Light | AoE |
+| MediumChemicalWeapon | Chemical_Medium | ProjectileChem_Medium | EffectChem_Medium | AoE |
+| HeavyChemicalWeapon | Chemical_Heavy | ProjectileChem_Heavy | EffectChem_Heavy | AoE |
+| Grenade | Demolition_Light | ProjectileGrenade_Light | EffectExplosion_Light | AoE |
+| ShrapnelWeapon | Concussion_Medium | *(none — inline/lobbed)* | EffectExplosion_Medium | AoE, no proj |
+| HeavyBomb | Demolition_Heavy | *(none — dropped)* | EffectExplosion_Heavy | AoE, no proj |
+| NuclearWarhead | Nuclear_Super | *(none — dropped)* | EffectNuclear_Super | AoE, no proj |
+| SwordWeapon | Melee_Medium | ProjectileMelee_Medium | EffectMelee_Medium | AoE |
+| ArrowWeapon | Arrow_Light | ProjectileArrow_Light | EffectArrow_Light | |
+| MagicWeapon | Magic_Heavy | ProjectileMagic_Heavy | EffectMagic_Heavy | %-equalizer |
+| LaserWeapon | Laser_Heavy | ProjectileLaser_Heavy | EffectLaser_Heavy | **+ ExtraDamage** |
+| RailgunWeapon | Railgun_Heavy | ProjectileRailgun_Heavy | EffectRailgun_Heavy | **+ ExtraDamage** |
+| TeslaWeapon | Tesla_Heavy | ProjectileLightning_Heavy | EffectTesla_Heavy | **+ ExtraDamage + EMP** |
+| TeslaChargedWeapon | TeslaCharged_Super | ProjectileLightning_Super | EffectTesla_Super | **+ ExtraDamage + EMP** |
+| SniperWeapon / ToxicWeapon / HealingWeapon / RepairWeapon | — STAY (special, not converted) | | | |
+
+**Intermediate templates** (a faction sub-template that inherits a base + overrides only
+projectile/effect, never the warhead — e.g. `^RA2SmallArms`, `^RA2Chaingun`, `^RA2MG`, `^TSMG`,
+`^SteelChaingun`, `^RA2FlakWeapon`): convert the intermediate itself to `@wh` (the base's new
+warhead) + `@proj`/`@fx` = the STANDARD family layer, and fold its bespoke projectile/effect
+overrides into the intermediate body (they merge by key). v3 already did this for the RA2 bullet
+pair. Every concrete weapon under the intermediate then inherits it unchanged — no per-weapon edit.
+
+## PHASE 0 — establish a clean, verified baseline  ← DO FIRST
+- The v3 bullet retrofit sits UNCOMMITTED (130 weapons/templates, 0 conflicts, dual-inherit skipped).
+- **Verify it as if it were mine:** resolver-diff a sample (structural only — same resolved damage);
+  run audits (warhead_split, template_conformance, yaml_lint, weapon_uniqueness); **boot-gate**;
+  spot-check every category (single SA, single CG, RA2 intermediate, a skipped dual/mixed weapon).
+- If clean → **commit it** as "retrofit: Bullet family (SmallArms/Chaingun)". If any defect → fix or
+  discard (my `stash@{0}` holds the v1; the v3 tooling is `tools/archive/retrofit_v3.py`).
+- **Adopt ONE canonical retrofit tool** (`tools/balance/retrofit_weapon_family.py`, authored/owned by
+  me) driven by the triple-map above + the categorizer, so every remaining family is done identically.
+
+## PHASE 1 — finish the layer libraries (prerequisites for later families)
+- **Energy ExtraDamage:** add the bespoke `Warhead@<fam>ExtraDamage` (+ `@EMPUnit` for Tesla) — kept
+  per-weapon/per-family (Tesla = +vs-Shield/heavy, Laser = anti-shield-only). These are NOT uniform;
+  extract verbatim into the Laser/Railgun/Tesla effect templates or a `^*ExtraDamage` warhead mixin.
+- **New-level proj/fx with no old source** (Bullet_Heavy, CannonAP_Medium/Heavy, MissileHE*, Prism*,
+  Sonic*): generate their projectile/effect by cloning the nearest family sibling; only needed once a
+  real weapon targets that level (e.g. Bullet_Heavy for the Pulverizer in Phase B).
+
+## PHASE 2 — single-inherit retrofit, FAMILY BY FAMILY (one commit each, boot-gated)
+Order (safest/most-numerous first), ~437 weapons total:
+1. ✅ Bullet (SmallArms 40 + Chaingun 26) — v3, Phase 0.
+2. Cannon (TankDestroyer 6 → AP, MediumCannon 28 + HeavyCannon 13 → HE).
+3. Missile (Light 12 + Medium 17 + Heavy 16 → AP) + Flak (11) + HeavyAA (2 → MissileAA).
+4. Flame (L12/M20/H4) + Chemical (L5/M10/H7).  [AoE — FF twins]
+5. Explosions: Grenade 13 → Demolition_Light, Shrapnel 12 → Concussion_Medium, HeavyBomb 16 →
+   Demolition_Heavy (no `@proj`).
+6. Melee (Sword 32) + Arrow (5) + Magic (3).
+7. Energy (Laser 34, Railgun 17, Tesla 50, TeslaCharged 20) — needs Phase-1 ExtraDamage.
+8. Nuclear (6, no `@proj`).
+Per family: `retrofit_weapon_family.py --family X` (dry-run) → review → apply → resolver-diff →
+audits → boot-gate → `git add <changed weapons.yaml> && commit "retrofit: <family>"`.
+
+## PHASE 3 — mixed-weapon collapse (Phase B, ~609 weapons, maintainer-directed)
+Each mixed weapon → ONE (or exception ≤2) warhead identity. NOT mechanical — a design call per weapon.
+- Categorize by dominant role (the biggest-damage / defining warhead) → propose one family → you sign
+  off in batches. Rewrite to the single-family 3-inherit form.
+- **Exception allow-list kept:** Dune combat tanks = Cannon L+M+H (3); Terran Siege Tank
+  (`SiegeTankSiegeCannon`) + WC Siege Engine (`SiegeEngineCannon`) = combined AoE; **Pulverizer**
+  gatling → `Bullet_Medium`, **Pulverizer Mecha** → `Bullet_Heavy`.
+
+## PHASE 4 — cleanup
+When `grep -c 'Inherits.*\^<Old>'` = 0 for a family's old template, DELETE that `^Old:` block from
+`weapons/weapons.yaml` + its `weapon_classes.yaml` row. Resolver-diff empty + boot-gate. Batch at the
+end so partial retrofits keep booting.
+
+## PHASE 5 — spread rebalance + DPS/range restat (the balance pipeline, now UNBLOCKED)
+- **Spread rebalance:** `Damage × Spread ≈ constant`, unique per weapon, small-spread ⇒ unique effect.
+- **Vehicle DPS/range restat:** now every unit is on its correct weapon family, so the deferred DPS
+  half of the 2026-08-01 anchor table can be applied — `extract_stats` → `fit_class` → workbook →
+  `apply_balance --confirm` (maintainer order) → boot. Unblocks ROADMAP #1.
+
+## Guard rails (post-incident)
+Single canonical tool; one family per commit (small, boot-gated, revertible); damage-preservation is
+an invariant checked by resolver-diff; **each agent in its own git worktree/branch** (the durable fix
+for the collision). Memory: `cameo-multi-agent-repo`, `cameo-weapon-structure-rules`.
