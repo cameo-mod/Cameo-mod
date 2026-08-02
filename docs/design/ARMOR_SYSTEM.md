@@ -17,11 +17,15 @@ Every damage weapon's Versus table is fully determined by two choices:
 
 ## LEVEL — the step law (main SpreadDamage warhead)
 
-| level | step | runs 100 → | Shield (special) |
-|---|---|---|---|
-| **Light** | **6** | **10** | **110** |
-| **Medium** | **5** | **25** | **125** |
-| **Heavy** | **4** | **40** | **140** |
+| level | step | runs 100 → | Shield (special) | WC (K) |
+|---|---|---|---|---|
+| **Light** | **6** | **10** | **110** | 0.75 |
+| **Medium** | **5** | **25** | **125** | 1.00 |
+| **Heavy** | **4** | **40** | **140** | 1.25 |
+| **Super** | **3** | **55** | **155** | **1.50** |
+
+`Super` (step 3) is the CONFIRMED superweapon band (maintainer 2026-08-02) for **Nuclear** and
+**charged Tesla** — one notch above Heavy in both flatness and WeaponClass.
 
 - 16 non-Shield armor types, so 100 down in 15 steps to the floor:
   light 100,94,88,…,10 · medium 100,95,…,25 · heavy 100,96,…,40.
@@ -34,8 +38,8 @@ Every damage weapon's Versus table is fully determined by two choices:
   drops to 10% vs its worst target (hard specialist).
 - DESIGN §12 notes the ladder extends to steps 3/2/1 for
   superheavy/superweapon bands — the L/M/H (6/5/4) triple is the
-  standard set; confirm the heavier bands with the maintainer before
-  using them.
+  standard set. **Step 3 = `Super` (floor 55, WC 1.5) is CONFIRMED** (Nuclear +
+  charged Tesla, 2026-08-02); steps 2/1 remain unused — confirm before using.
 
 ## The PERCENTAGE warhead (HealthPercentageDamage) — its own scale
 
@@ -47,12 +51,23 @@ warhead that ALSO ladders down by step 1, in a level-dependent window:
 | Light | 16 → 1 | **17** |
 | Medium | 20 → 5 | **25** |
 | Heavy | 25 → 10 | **35** |
+| Super | 30 → 15 | **45** |
 
 Same armor ORDER as the main warhead; step always 1. Shield obeys the
-SAME `top + floor` law (16+1, 20+5, 25+10). Confirmed against every
-heavy-class weapon in the file (HeavyMissile/HeavyBomb/Laser/Railgun/
-Tesla/Heavy Flame+Chemical all show Shield% 35). This is the "extra %
-of max-HP" chip damage that keeps high-HP targets killable.
+SAME `top + floor` law.
+
+**IMPORTANT — the % table is a SHAPE, not the actual damage (corrected 2026-08-02).**
+The HealthPercentageDamage twin's real magnitude is set by its **`Damage` field =
+mainFlatDamage / 2000** (the "1 per 2000" law, `formula.py`; memory
+`cameo-weapon-structure-rules`), and the table above only *shapes* that base across
+armors. So the % is a **modest chip PROPORTIONAL to the flat damage** — NOT a flat
+16–30% of max HP. And because values are **integers rounded down**, a small base ×
+a low Versus **rounds to 0** → **natural hard immunity** for a weapon against the
+targets it is bad against (this is what makes RPS counters real, no floor-zeroing
+needed). The % naturally peaks on the weapon's best target, so anti-tank profiles
+auto-earn a tank-sized HP chip while anti-infantry profiles get ~0 % (flat dominates).
+The flat-vs-% RATIO is a whole ORTHOGONAL design axis (anti-small ↔ anti-big) — see
+`WEAPON_TYPE_SYSTEM.md` §13 (Sonic = flat-equalizer, Magic = %-equalizer).
 
 ## PROFILE — the standard armor orderings (which type is at 100)
 
@@ -68,6 +83,42 @@ Spaceship, Superheavy. The profile picks the descending order:
 | **AP / anti-heavy** | Superheavy, Heavy, Medium, Light… (inverted) | heavy + superheavy | ^TankDestroyerCannon (light-step, AP order) |
 | **anti-structure** | Wood, Concrete… | buildings | ^HeavyBomb |
 | **AA** | Fighter, Bomber, Spaceship, Helicopter… | aircraft | ^FlakWeapon (medium) |
+
+## PROFILE construction — the TWO-LEVEL ordering law (maintainer 2026-08-01)
+
+**This is the authoritative way to build every order — the profile table above
+is just a summary of it.** An order is DERIVED, never hand-typed, from two
+decisions, so it is impossible to introduce the sub-ladder bugs the legacy
+tables have (e.g. `^HeavyBomb` ran buildings `Wood > Concrete > Steel`, and
+AP weapons ran infantry `None → Heroic`).
+
+1. **MACRO-TYPE PRIORITY** — rank which unit TYPE the weapon is strongest
+   against, best→worst: **Infantry / Vehicle / Building / Aircraft.** Types may
+   be TIED = *combined* (interleaved) when the weapon is equally good vs several.
+2. **LIGHT↔HEAVY DIRECTION** — within EVERY type, better vs light or heavy armor?
+   Applied to the fixed **armor SUB-LADDERS (lightest → heaviest):**
+   - Infantry: **None < Flak < Plate < Heroic**
+   - Vehicle: **Scout < Light < Medium < Heavy < Superheavy**
+   - Building: **Wood < Steel < Concrete**
+   - Aircraft: **Fighter < Bomber < Helicopter < Spaceship**
+
+   anti-**LIGHT** (HE, flame, bullets, arrows) → `None > … > Heroic`;
+   anti-**HEAVY** (AP, tesla, railgun, chemical, missiles) → `Heroic > … > None`.
+   **HE deals more to None than to Plate; AP deals more to Plate than to None.**
+
+**Order = concatenate the macro blocks in priority order; inside each block emit
+the sub-ladder in the chosen direction; interleave tied blocks round-robin with the
+LONGEST sub-ladder LEADING** (so categories alternate evenly). inf(4)+veh(5) heavy =
+`Superheavy Heroic Heavy Plate Medium Flak Light None Scout` (vehicle leads, 5>4);
+all-4 combined = 5→4→4→3 (`V I A B …`). Ties keep the listed order.
+LEVEL (Light/Medium/Heavy = step 6/5/4) only changes the falloff slope — **ONE
+order per weapon TYPE, shared by all L/M/H versions.** `tools/balance/
+gen_weapon_template.py` holds the per-type matrix (macro blocks + direction +
+hits_air) and generates the whole table; `--orders` prints every order.
+Combined examples: Concussion = all 3 ground types (light); Chemical =
+infantry+vehicle (heavy); Flame = infantry+building (light); MissileAA =
+air→vehicle (heavy); Flak = air→infantry (light). Full matrix + the current
+weapon-type set: `docs/design/WEAPON_TYPE_SYSTEM.md`.
 
 ## Consequences for the new templates (MEGAPLAN §3)
 
@@ -88,7 +139,10 @@ flatter). So:
   exceptions, not part of the step ladder.
 - The step 3/2/1 superheavy/superweapon bands (heavy-% Shield now
   confirmed = 35 via the top+floor law).
-- Which profiles need a friendly-fire warhead variant (halved values).
+- Friendly-fire variant — RULE (maintainer 2026-08-02): **every AoE weapon** deals
+  reduced friendly fire = **HALF radius + HALF damage** (a `*FriendlyFire` twin at 50%
+  damage / smaller spread). Single-target/hitscan weapons have none. See
+  `WEAPON_TYPE_SYSTEM.md` §13.4.
 
 ## The two explosion families (maintainer decision 2026-07-19)
 

@@ -52,11 +52,24 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
 4. **[M] New weapon templates** (AFTER vehicles) — kill warhead-mixing, **HARD LIMIT 2 inherits/weapon**
    (special >2 only if justified, bar TBD); then weapon-class pipeline + unit↔weapon binding. Maintainer
    names them + I propose. See [[cameo-weapon-structure-rules]] + [[cameo-weapon-ordering-law]].
-   IN PROGRESS 2026-08-01/02: two-level ordering law recorded (ARMOR_SYSTEM "PROFILE construction");
-   `gen_weapon_template.py` rebuilt to construct all orders; full weapon-type matrix in
-   `docs/design/WEAPON_TYPE_SYSTEM.md` §12 (unified `^<Family>_<Level>` naming; Bullet/CannonAP/CannonHE/
-   MissileAP/HE/AA/Flak/Laser/Prism/Flame/Chemical/Melee/Arrow/Magic/Demolition/Concussion/Sonic +
-   Railgun/Tesla/Nuclear heavy-only). Awaiting sign-off → splice + sidecar + boot-gate → then repoint.
+   DESIGNED + SIGNED OFF 2026-08-01/02 (survives /compact via docs+memory): two-level ordering law
+   (ARMOR_SYSTEM "PROFILE construction" + `cameo-weapon-ordering-law`); 4-dimensional differentiation
+   model + flat/% orthogonal axis + Super tier + AoE-FF rule + CORRECTED %-warhead
+   (WEAPON_TYPE_SYSTEM §13 + `cameo-weapon-differentiation`). `gen_weapon_template.py` rebuilt —
+   **55 templates**, unified `^<Family>_<Level>` naming, modes sloped/FLAT(Sonic)/PCT(Magic):
+   Bullet/CannonAP/CannonHE/MissileAP/HE/AA/Flak/Laser/Prism/Flame/Chemical/Melee/Arrow/Demolition/
+   Concussion/Sonic (L/M/H) + Railgun/Tesla (Heavy) + TeslaCharged/Nuclear (Super, WC1.5) +
+   Magic (%-equalizer, ground-only). ✅ **SPLICED + BOOT-GATED 2026-08-02**: the 55 templates now live
+   ABOVE the `DO NOT INHERIT` divider in `weapons.yaml` (replacing the 6 stale provisional
+   `^*Demolition`/`^*Concussion`, which carried the old `Wood>Concrete>Steel` building bug); the 55
+   `^<Family>_<Level>` WeaponClass scalars are recorded in `docs/balance/weapon_classes.yaml`. Verified:
+   key-set diff = only 6 provisional removed / 55 added, rest byte-identical; all weapon audits green;
+   game reached main menu (`PostWorldLoaded`, no new exception log). Old bespoke templates
+   (`^Grenade`/`^ShrapnelWeapon`/`^HeavyBomb`/`^SmallArms`/etc.) intentionally KEPT until repoint.
+   **NEXT: the repoint pass** — real weapons → new families per §13.3 binding matrix + per-weapon
+   effects (projectile/impact/muzzle/sound), via the pair-rename law (base+variants together),
+   resolver-diffed, boot-gated. This unblocks the vehicle DPS/range restat (#1). Fold the 3-way split
+   (#4b) INTO this pass.
 4b. **[L, FUTURE] 3-WAY weapon-template split** (maintainer 2026-08-02) — decompose every weapon into
    THREE independent composable templates: (1) WARHEAD/weapon-class (Versus+damage — the §12 families
    already ARE this layer, projectile/effect-agnostic by design), (2) PROJECTILE (speed/homing — so a
