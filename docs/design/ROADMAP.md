@@ -66,10 +66,21 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    key-set diff = only 6 provisional removed / 55 added, rest byte-identical; all weapon audits green;
    game reached main menu (`PostWorldLoaded`, no new exception log). Old bespoke templates
    (`^Grenade`/`^ShrapnelWeapon`/`^HeavyBomb`/`^SmallArms`/etc.) intentionally KEPT until repoint.
-   **NEXT: the repoint pass** — real weapons → new families per §13.3 binding matrix + per-weapon
-   effects (projectile/impact/muzzle/sound), via the pair-rename law (base+variants together),
-   resolver-diffed, boot-gated. This unblocks the vehicle DPS/range restat (#1). Fold the 3-way split
-   (#4b) INTO this pass.
+   **REPOINT REFRAMED AS THE FULL 3-WAY SPLIT (#4b), maintainer 2026-08-02.** A bare reparent onto the
+   warhead-only families is UNSAFE: survey found 392/437 single-inherit weapons override a warhead by the
+   OLD key (`Warhead@SmallArms:` → orphaned/double-fire) + 253 rely on the old template's bundled FX (go
+   silent). Root cause: old templates are FULL-STACK; the 55 new families are warhead-only BY DESIGN. So
+   the repoint = build the projectile + effect layers first, then retrofit weapons to the 4-inherit model.
+   Progress (docs: `WEAPON_3WAY_SPLIT.md`):
+   - ✅ **Layer 2 (PROJECTILE) + Layer 3 (EFFECT) libraries BUILT + SPLICED + BOOT-GATED 2026-08-02** —
+     `gen_projectiles.py` (24 `^Projectile<Family>_<Level>`) + `gen_effects.py` (27 `^Effect<Family>_<Level>`),
+     extracted verbatim from the 30 old full-stack templates, additive/0-usage above the divider. Boot OK.
+   - **NEXT: extend `gen_weapon_template.py`** — add the FriendlyFire twin (AoE families) + ExtraDamage twin
+     (energy: Laser/Railgun/Tesla/Magic) to the warhead layer; re-splice. Then **retrofit** weapons to
+     `Inherits@wh + @proj + @fx` (437 single-inherit first, then the 609 MIXED = the kill-warhead-mixing
+     pass, each ≤2 warheads), rewriting `Warhead@<Old>` override keys → new warhead key; resolver-diff +
+     boot-gate per family. Then delete the 30 orphaned old templates + their `weapon_classes.yaml` rows.
+   This unblocks the vehicle DPS/range restat (#1).
 4b. **[L, FUTURE] 3-WAY weapon-template split** (maintainer 2026-08-02) — decompose every weapon into
    THREE independent composable templates: (1) WARHEAD/weapon-class (Versus+damage — the §12 families
    already ARE this layer, projectile/effect-agnostic by design), (2) PROJECTILE (speed/homing — so a
