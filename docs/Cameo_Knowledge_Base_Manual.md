@@ -1,8 +1,8 @@
-﻿# Cameo Knowledge Base Manual v.0.4
+﻿# Cameo Knowledge Base Manual v.0.5
 
-> **Version note:** Manual v.0.4 — this edition focuses on engine architecture and code reference (Parts 0–10, Appendices A–P). In addition to the v.0.3.1 content (ContentPack migration, RA2 weapons migration, YAML lint cleanup, PascalCase enforcement, cross-faction inheritance fixes, ~disabled policy, balance pipeline, TKM self-containment, NuclearFlashRenderer shader), cross-references to project governance, binding design rules, balance system details, lessons learned, audit status, faction lore, long-term vision, and agent handoff logs now point directly to their authoritative source documents rather than being mirrored as appendices. See `docs/README.md` for the canonical reading order and document map. All engine/code content has been cross-checked against the live codebase as of 2026-07-24.
+> **Version note:** Manual v.0.5 — this edition focuses on engine architecture and code reference (Parts 0–10, Appendices A–P). In addition to the v.0.3.1 content (ContentPack migration, RA2 weapons migration, YAML lint cleanup, PascalCase enforcement, cross-faction inheritance fixes, ~disabled policy, balance pipeline, TKM self-containment, NuclearFlashRenderer shader), cross-references to project governance, binding design rules, balance system details, lessons learned, audit status, faction lore, long-term vision, and agent handoff logs now point directly to their authoritative source documents rather than being mirrored as appendices. See `docs/README.md` for the canonical reading order and document map. All engine/code content has been cross-checked against the live codebase as of 2026-08-02.
 >
-> **Key changes since v.0.2 (2026-07-16):**
+> **Key changes in v.0.4 (2026-07-24):**
 > - All faction **rules** now loaded via `Include:` entries in `mod.yaml` (not direct `Rules:` entries). Faction sequences and weapons are partially migrated — some are loaded via ContentPacks, others remain direct entries in `mod.yaml`.
 > - `mod.yaml` no longer loads faction **rules** for `redalert.yaml`, `tiberiansun.yaml`, `redalert2.yaml`, `redalert2mod.yaml`, `d2k.yaml`, `starcraft.yaml`, `warcraft2.yaml` directly — these are loaded via ContentPack `content.yaml` manifests. Some sequences and weapons files (e.g., `redalert2mod.yaml`, `d2k.yaml`, `starcraft.yaml`, `warcraft2.yaml`) are still loaded directly in their respective `mod.yaml` sections.
 > - Inheritance templates renamed to PascalCase (e.g., `^Sidebarjapan` → `^SidebarJapan`)
@@ -11,7 +11,16 @@
 > - `ProductionCostMultiplier` and `ProductionTimeMultiplier` use `Prerequisites:` not `RequiresCondition:`
 > - Balance pipeline tools operational (`tools/balance/`)
 > - 39 ContentPack `content.yaml` manifests across 11 themes
-> - Engine pin updated to `2949af8`
+>
+> **Key changes in v.0.5 (2026-08-02):**
+> - Engine pin updated from `2949af8` to `1f71ccde90c1194fe908702f2e915807b2f0f3fd`
+> - 55 weapon-class templates (`^<Family>_<Level>`) spliced into `weapons.yaml`, replacing 6 stale provisional templates
+> - Projectile (24 `^Projectile<Family>_<Level>`) and effect (27 `^Effect<Family>_<Level>`) template libraries built and spliced
+> - `InfectCA.OnEnterComplete` crash fix: added `self.IsDead` guard before `w.Remove(self)` in frame-end task
+> - File counts updated to current tree: rules 61, weapons 49, sequences 57, tilesets 21, maps 362, bits 28,503 in 59 sub-directories
+> - `OpenRA.Mods.Cameo` class count updated from 190+ to 280+
+> - Branch name corrected from `main` to `master` throughout
+> - Stale `mod.yaml` line references updated (Assemblies: line 336, ContentPacks mount: line 13, LoadScreen: line 453)
 
 This single-file edition combines the Cameo Knowledge Base Manual chapters into one document. It is the canonical version for reading, printing, or feeding to an AI for review.
 
@@ -225,7 +234,7 @@ Like OpenRA itself, Cameo is **data-driven**:
 
 This manual is a **companion** to the [OpenRA Knowledge Base Manual v.5](https://github.com/Renegade1993/OpenRA-Knowledge-Base-Manual). It does not duplicate the OpenRA engine documentation. Instead, it documents the layers that Cameo adds on top of OpenRA, and flags the places where Cameo diverges from the upstream engine or bundled mods.
 
-> **Version note:** This manual is current as of 2026-07-24 and reflects the Cameo source at the `master` branch. The OpenRA engine pinned by this mod is identified in `mod.config` as `ENGINE_VERSION="2949af8"`, with the engine source fetched from a Cameo-maintained fork (`https://github.com/cameo-mod/OpenRA`). File paths and class names may change in newer Cameo or OpenRA versions, so always cross-check with the provided source tree.
+> **Version note:** This manual is current as of 2026-08-02 and reflects the Cameo source at the `master` branch. The OpenRA engine pinned by this mod is identified in `mod.config` as `ENGINE_VERSION="1f71ccde90c1194fe908702f2e915807b2f0f3fd"`, with the engine source fetched from a Cameo-maintained fork (`https://github.com/cameo-mod/OpenRA`). File paths and class names may change in newer Cameo or OpenRA versions, so always cross-check with the provided source tree.
 
 ## How this manual relates to the OpenRA manual
 
