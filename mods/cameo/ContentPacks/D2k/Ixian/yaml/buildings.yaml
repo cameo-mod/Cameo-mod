@@ -697,6 +697,8 @@ ixian_rocketturret:
 	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Armor:
+		Type: Concrete
 	Buildable:
 		Queue: Defence, RADefence
 		Prerequisites: ~ixian_constructionyard, ixian_outpost
@@ -1102,6 +1104,8 @@ ixian_stormlasher:
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
+	Armor:
+		Type: Concrete
 	Buildable:
 		Queue: Defence, RADefence
 		Prerequisites: ~ixian_constructionyard, ~ixian_promotion_stormlasher, ixian_ixresearchcenter

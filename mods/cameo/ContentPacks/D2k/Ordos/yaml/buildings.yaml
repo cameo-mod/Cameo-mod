@@ -494,6 +494,8 @@ ordos_artilleryplatform:
 	Inherits@shape: ^1x1Shape
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	-WithTurretSearchlight:
+	Armor:
+		Type: Concrete
 	Tooltip:
 		Name: Artillery Platform
 	Valued:
@@ -567,6 +569,8 @@ ordos_autogunturret:
 	Inherits@gat: ^GatlingSpeedUpTurretBehavior
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Inherits@RapidFireArmorPiercingBelts: ^Ordos_RapidFireArmorPiercingBelts
+	Armor:
+		Type: Concrete
 	Tooltip:
 		Name: Autogun Turret
 	Valued:
