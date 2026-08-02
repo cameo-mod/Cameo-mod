@@ -56,13 +56,6 @@ mods/cameo/bits/ra2/tileset/tweakpng.exe
 __pycache__/
 *.pyc
 
-# Session helper scripts (root-level)
-/check_*.py
-/gen_*.py
-/inventory_*.py
-/rename_old_*.py
-/fix_*.py
-/study_*.py
-
-# Audit runner artifacts (generated, not source)
+# Working files (generated, not source)
+check-yaml-output.txt
 docs/audit/latest/*.err

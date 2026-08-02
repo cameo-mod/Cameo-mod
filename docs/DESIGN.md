@@ -1402,7 +1402,7 @@ Weapons whose primary function is EMP disable (e.g. `SteelEmpBomb`,
 variants. EMP weapons use the `_EMP` suffix (see §1), not `_elite`.
 The previous bulk rename (reverted) incorrectly treated EMP weapons as
 elite weapons — this must never happen again. The audit script
-(`audit_elite_naming.py`) only checks weapons gated by
+(`audit_weapon_suffixes.py` X1 section) only checks weapons gated by
 `RequiresCondition: rank-elite`, so EMP weapons are never flagged.
 
 **Audit rules** (`audit_elite_weapons.py`, TODO):

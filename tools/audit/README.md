@@ -42,7 +42,6 @@ suite can gate CI.
 | `audit_buildable_order.py` | §5 | build palette ordering and tech tier inference |
 | `audit_display_text.py` | B7 | display names containing raw actor IDs or stale references |
 | `audit_rename_safety.py` | §9.1 | pre-rename safety checks (shared assets, voice sets) |
-| `audit_elite_naming.py` | §16.3 | elite weapons not following `_elite` suffix convention |
 | `audit_missing_elite.py` | §16.3 | RA2-styled actors (`^GainsExperienceRA2`) missing elite armaments |
 | `audit_elite_gating.py` | §16.3 | elite armaments missing `RequiresCondition: rank-elite` |
 | `audit_rank_decoration.py` | §16.2 | `^GainsExperienceTD` actors missing/wrong `^*RankDecoration` |

@@ -1691,7 +1691,7 @@ All other factions have a single, thematically appropriate wall type.
   `RA2KirovBomb_nuclear_Elite`→`RA2KirovBomb_nuclear_E`, `CuteKirovBombElite`→`CuteKirovBombE`.
   Remaining 44 are doctrine variants (`_rad`/`_fire`/`_tesla`), upgrade combos,
   or gatling spin-ups — intentionally non-standard. Audit tool:
-  `tools/audit/audit_elite_naming.py`.
+  `tools/audit/audit_weapon_suffixes.py` (X1 section).
   **NOTE (2026-07-16):** The `E` suffix convention has been superseded —
   ALL elite weapons must now use `_elite` per DESIGN.md §16.3. The renames
   done here will need to be re-done as `<base>_elite` in WEAPON-SUFFIX-ELITE.
@@ -1881,7 +1881,7 @@ All other factions have a single, thematically appropriate wall type.
   non-standard remnants).
   **Follow-up** (2026-07-31): Renamed 17 remaining deprecated `E`-suffix
   weapons missed by the first pass (33 replacements across 15 files) via
-  `tools/rename/rename_elite_E_suffix.py`. X4 dropped 19→2 (only `HE` =
+  `tools/archive/rename_elite_E_suffix.py` (one-time, archived). X4 dropped 19→2 (only `HE` =
   High Explosive false positives remain). Boot-gated, O2=0, V3=0.
 
 - [x] **WEAPON-SUFFIX-EMP: Standardize EMP weapon names to _EMP suffix**
