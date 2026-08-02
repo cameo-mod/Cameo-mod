@@ -1,4 +1,4 @@
-﻿####################################################################################################
+####################################################################################################
 #		Red Alert 2 Asian Alliance
 ####################################################################################################
 
@@ -639,7 +639,9 @@ NaxGrilleArty_elite:
 	BurstDelays: 3
 
 NaxiRifle:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 75
 	Range: 5621
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
@@ -653,9 +655,9 @@ NaxiRifle:
 		ContrailLength: 20
 		Speed: 10000
 		Width: 50
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 6000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 3
 
 NaxLaserT:

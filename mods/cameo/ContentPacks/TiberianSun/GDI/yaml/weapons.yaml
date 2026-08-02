@@ -1,4 +1,4 @@
-﻿TS30mm:
+TS30mm:
 	Inherits: ^MediumMissile
 	Inherits: ^FlakWeapon
 	ReloadDelay: 26
@@ -952,7 +952,9 @@ TSAssaultCannonSonic:
 		Damage: 1
 
 TSAssaultCannonTal:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ReloadDelay: 40
 	Burst: 2
 	BurstDelays: 2
@@ -961,10 +963,10 @@ TSAssaultCannonTal:
 	Projectile: Bullet
 		Speed: 2000
 		Inaccuracy: 200
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 4
 
@@ -1074,15 +1076,17 @@ KodiakAAGuns:
 		Damage: 3
 
 TSHammerheadGun:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ReloadDelay: 6
 	Range: 5451
 	Report: cygun1.aud
 	ValidTargets: Ground, Water
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water
 
@@ -1106,7 +1110,9 @@ TSAAPCCannon:
 	ValidTargets: Ground, Water, Air
 
 TSMechMGII:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ReloadDelay: 8
 	Range: 7002
 	Report: aacanon3.aud
@@ -1120,10 +1126,10 @@ TSMechMGII:
 		ContrailLength: 10
 		Speed: 10000
 	ValidTargets: Ground, Water
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 16000
 		ValidTargets: Ground, Water
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Ground, Water
 

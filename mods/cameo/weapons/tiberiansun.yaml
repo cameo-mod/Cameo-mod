@@ -1,4 +1,4 @@
-﻿####################################################################################################
+####################################################################################################
 #		Tiberian Sun Ballisitc
 ####################################################################################################
 
@@ -1150,26 +1150,30 @@ TSLocustBomb:
 		SmudgeType: Crater
 
 ^TSMG:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 20
 	Range: 4000
 	Report: gun8.aud
 	Projectile: Bullet
 		Speed: 2000
 		Inaccuracy: 200
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 1
 
 TSMinigun:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 12
 	Range: 4062
 	Report: infgun3.aud, gostgun1.aud, slvkgun1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 1
 
 TSM1Carbine:
@@ -1273,15 +1277,17 @@ TSSniper_elite:
 			Heavy: 20
 
 forgotten_mutant_dualwield:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 18
 	Burst: 2
 	Range: 5219
 	Report: infgun3.aud, slvkgun1.aud
 	ValidTargets: Ground, Water
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 1
 
 forgotten_mutant_dualwield_elite:

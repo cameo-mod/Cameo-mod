@@ -1,5 +1,7 @@
-﻿tkm_rifleman_rifle:
-	Inherits: ^SmallArms
+tkm_rifleman_rifle:
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 75
 	Range: 5042
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
@@ -13,12 +15,14 @@
 		ContrailLength: 20
 		Speed: 10000
 		Width: 50
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 6000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 4
 tkm_rifleman_semiautorifle:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 25
 	Range: 5500
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
@@ -32,9 +36,9 @@ tkm_rifleman_semiautorifle:
 		ContrailLength: 20
 		Speed: 10000
 		Width: 50
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 10000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 5
 tkm_juggernaut:
 	Inherits: ^RA2Chaingun
@@ -156,26 +160,30 @@ tkmdronesummon:
 		Delay: 15
 		ValidTargets: Air, Ground, Water
 tkmm16:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 16
 	Range: 5385
 	Report: mgun2.aud
 	Burst: 5
 	BurstDelays: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 1
 tkm_trooper_ak:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 31
 	Range: 5191
 	Report: mgun2.aud
 	Burst: 5
 	BurstDelays: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 1
 tkmakap:
 	Inherits: ^RA2Grenade

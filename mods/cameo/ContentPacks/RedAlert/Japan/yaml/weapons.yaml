@@ -977,16 +977,18 @@ THMiss:
 		ImpactActors: false
 
 M60mgJapan:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 15
 	Burst: 5
 	BurstDelays: 5
 	Range: 5004
 	Report: pillbox1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 2
 
 M60mgWaveforce:

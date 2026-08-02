@@ -200,7 +200,9 @@ NaxiRifle_elite:
 		ContrailStartColor: FFAA55
 
 naxis_naxiriflesoldier_rifle:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 50
 	Range: 5000
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
@@ -214,9 +216,9 @@ naxis_naxiriflesoldier_rifle:
 		ContrailLength: 20
 		Speed: 10000
 		Width: 50
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 2
 
 naxis_naxiriflesoldier_rifle_elite:
@@ -229,14 +231,16 @@ naxis_naxiriflesoldier_rifle_elite:
 		ContrailStartColor: FFAA55
 
 naxis_naxiriflerecruit_rifle:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 100
 	Range: 5227
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
 	ValidTargets: Ground, Water
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 8000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 2
 
 naxis_naxiriflerecruit_rifle_elite:
@@ -246,7 +250,9 @@ naxis_naxiriflerecruit_rifle_elite:
 	BurstDelays: 3
 
 NaxiRifleT:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 50
 	Range: 8100
 	Burst: 2
@@ -262,20 +268,22 @@ NaxiRifleT:
 		ContrailLength: 33
 		Speed: 6666
 		Width: 55
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 32000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 16
 
 NaxiRifleCons:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 100
 	Range: 5501
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
 	ValidTargets: Ground, Water, Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 2
 
 NaxiRifleCons_elite:

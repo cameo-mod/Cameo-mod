@@ -4,7 +4,9 @@
 ####################################################################################################
 
 ^RA2SmallArms:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piff
@@ -14,7 +16,9 @@
 		ExplosionPalette: ra2effect
 
 ^RA2Chaingun:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect

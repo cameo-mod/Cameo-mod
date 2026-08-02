@@ -1,17 +1,19 @@
 
 
 XCOMCarbine:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	Range: 4775
 	ReloadDelay: 4
 	Burst: 5
 	BurstDelays: 2
 	Report: gun11.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -247,7 +249,9 @@ XCOMRocketLauncher:
 		ValidTargets: Ground
 
 XCOMAWP:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 75
 	Range: 13000
 	Report: isniatta.wav
@@ -261,10 +265,10 @@ XCOMAWP:
 		ContrailLength: 33
 		Speed: 6000
 		Width: 50
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 100000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 50
 

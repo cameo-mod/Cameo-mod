@@ -1,4 +1,4 @@
-﻿TSAux155mm:
+TSAux155mm:
 	Inherits: TS155mm
 	Warhead@3: FireShrapnel
 		Weapon: TS155mmFrag
@@ -428,20 +428,24 @@ TSShadowTeamTargeting:
 		ValidRelationships: Enemy
 
 TSRaiderCannon:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 2
 	Range: 4787
 	Report: chaingn1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 6000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 3
 
 TSHarpyClaw:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ReloadDelay: 24
 	Burst: 5
 	BurstDelays: 0
@@ -449,10 +453,10 @@ TSHarpyClaw:
 	Report: cygun1.aud
 	SoundVolume: 0.25
 	ValidTargets: Ground, Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Air
 

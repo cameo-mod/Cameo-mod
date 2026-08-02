@@ -1,4 +1,4 @@
-﻿CryoLightSniper:
+CryoLightSniper:
 	Inherits: LightSniper
 	Inherits: ^CryoMissileProjectile
 	Projectile: Bullet
@@ -13,16 +13,18 @@
 		Amount: -30000
 
 M60mg:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 10
 	Burst: 4
 	BurstDelays: 5
 	Range: 4359
 	Report: pillbox1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 2
 
 RATurretGun:

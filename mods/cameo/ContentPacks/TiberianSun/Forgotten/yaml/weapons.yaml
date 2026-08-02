@@ -1886,16 +1886,18 @@ TSMutVulcanTurret:
 		Damage: 1
 
 TSRaiderCarCannon:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 2
 	Range: 4475
 	Report: chaingn1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 2
 
 TSBowlerCannon:
@@ -1915,7 +1917,9 @@ TSBowlerCannon:
 		Damage: 1
 
 TSWaspClaw:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ReloadDelay: 18
 	Burst: 2
 	BurstDelays: 0
@@ -1923,10 +1927,10 @@ TSWaspClaw:
 	Report: cygun1.aud
 	SoundVolume: 0.50
 	ValidTargets: Ground, Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Air
 
@@ -1950,7 +1954,9 @@ TSMutApcCannon:
 	ValidTargets: Ground, Water, Air
 
 TSNomadGun:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ReloadDelay: 6
 	Range: 8301
 	Report: aacanon3.aud
@@ -1964,10 +1970,10 @@ TSNomadGun:
 		ContrailLength: 10
 		Speed: 10000
 	ValidTargets: Ground, Water
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 8000
 		ValidTargets: Ground, Water
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 4
 		ValidTargets: Ground, Water
 
@@ -2041,13 +2047,15 @@ TSChemGhostGun:
 		Damage: 5
 
 MutAPRifle:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 8
 	Range: 5146
 	Report: jumpjet1.aud, gostgun1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 2
 
 TSSergGun:
@@ -2073,12 +2081,14 @@ TSSergGun:
 # same range/speed must price at exactly 250% (O 1.5x, P 2x, Q 4x).
 # MutAPRifle stays for its other users.
 forgotten_mutantsoldier_rifle:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 50
 	Range: 5000
 	ValidTargets: Ground, Water
 	Report: mgun2.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 8000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 4

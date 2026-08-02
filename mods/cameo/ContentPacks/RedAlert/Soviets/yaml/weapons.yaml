@@ -1534,15 +1534,17 @@ BTRTeslaMachineGunArcFragment1AA:
 	-Warhead@TeslaArc:
 
 ChainGun:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 8
 	Range: 5528
 	Report: gun13.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -1924,7 +1926,9 @@ KamovTeslaArcFragment2:
 	-Warhead@TeslaArc:
 
 YakChainGun:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 100
 	Range: 7000
@@ -1932,10 +1936,10 @@ YakChainGun:
 	Burst: 8
 	BurstDelays: 3
 	Report: gun13.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
@@ -3944,15 +3948,17 @@ Nike:
 		ValidTargets: Air
 
 RAGatlingTankCannon:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 5000
 	Report: gun13.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -4108,16 +4114,18 @@ MADTankDetonate:
 # CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): Soviet
 # rifle infantry â€” burst 3, heavier thump, close range. Incendiary pair.
 ra1_soviets_rifleinfantry_carbine:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 50
 	Range: 4668
 	ValidTargets: Ground, Water
 	Burst: 3
 	BurstDelays: 5
 	Report: gun11.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 1
 
 ra1_soviets_rifleinfantry_carbine_incendiary:

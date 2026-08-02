@@ -1,4 +1,4 @@
-﻿td_gdi_commando_sniper:
+td_gdi_commando_sniper:
 	Inherits: ^SniperWeapon
 	Report: ramgun2.aud
 	ReloadDelay: 25
@@ -11,14 +11,16 @@
 		Damage: 20
 
 M16AP:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 15
 	Range: 4445
 	Report: mgun2.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 2
 
 GrenadeExplode:
@@ -253,28 +255,32 @@ ArcherArtilleryShell:
 	-Warhead@Effect:
 
 MachineGunH:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 9
 	Burst: 3
 	BurstDelays: 6
 	Range: 4792
 	Report: mgun11.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 6000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 3
 
 MachineGunAPH:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ReloadDelay: 9
 	Burst: 3
 	BurstDelays: 6
 	Range: 4792
 	Report: mgun11.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 6000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 3
 
 120mm:
@@ -323,14 +329,16 @@ M1A1MissilesAMT:
 	Inherits: ^AMTProjectile
 
 M1A1MachineGun:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	Burst: 4
 	ReloadDelay: 68
 	Range: 5400
 	Report: mgun11.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 1
 
 120mmDual:
@@ -446,7 +454,9 @@ OrcaMissilesAMT:
 	Inherits: ^AMTProjectile
 
 Vulcan:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	Range: 10000
 	ReloadDelay: 100
 	Burst: 10
@@ -456,11 +466,11 @@ Vulcan:
 	ReloadDelay: 125
 	Report: gun5.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		Spread: 600
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		Spread: 600
@@ -494,7 +504,9 @@ Napalm:
 		GlowFadeInFrames: 12
 
 VulcanA10Carrier:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	Range: 5000
 	Burst: 10
 	BurstDelays: 2
@@ -503,12 +515,12 @@ VulcanA10Carrier:
 	ReloadDelay: 125
 	Report: gun5.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		Spread: 300
 		ValidRelationships: Neutral, Enemy
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		Spread: 300
@@ -953,17 +965,19 @@ GDISniperRifle:
 		ImpactSounds: xplos.aud
 
 MachineGunHumvee2:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ValidTargets: Ground, Water
 	ReloadDelay: 30
 	Burst: 4
 	BurstDelays: 4
 	Range: 5598
 	Report: mgun11.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -981,17 +995,19 @@ MachineGunHumvee2_AA:
 		ValidTargets: Air
 
 MachineGunHumvee2AP:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 30
 	Burst: 4
 	BurstDelays: 4
 	Range: 5598
 	Report: mgun11.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -1136,14 +1152,16 @@ GDIPredatorTankMissilesAMT:
 	Inherits: ^AMTProjectile
 
 GDIPredatorMachineGun:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	Burst: 4
 	ReloadDelay: 70
 	Range: 5880
 	Report: mgun11.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 1
 
 GDIPredatorBlueLaser:
@@ -1251,17 +1269,19 @@ OfficerMachineGun:
 		Damage: 1
 
 OfficerMachineGunAP:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ValidTargets: Ground, Air, Water
 	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 4
 	Range: 4888
 	Report: mgun11.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
 
@@ -1800,29 +1820,33 @@ TDIonCannonDamage:
 # minigunner â€” burst 4, disciplined cadence. Paired AP variant per the
 # base+upgrade rename law. M16/M16AP stay for their other users.
 td_gdi_minigunner_minigun:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 50
 	Range: 5499
 	ValidTargets: Ground, Water
 	Burst: 4
 	BurstDelays: 3
 	Report: mgun2.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 1
 
 td_gdi_minigunner_minigun_ap:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 45
 	Range: 4600
 	Burst: 4
 	BurstDelays: 3
 	Report: mgun2.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 2
 
 # CLOSE-COMBAT BASELINE WEAPON (Formula v2, 2026-07-19): defines the

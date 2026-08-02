@@ -1,4 +1,4 @@
-﻿OrdosCombatTankCannon:
+OrdosCombatTankCannon:
 	Inherits: ^D2K_Cannon
 	Range: 5230
 	ReloadDelay: 44
@@ -922,7 +922,9 @@ SaboDeath:
 			Concrete: 75
 
 HMGo:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 8
 	Burst: 9
 	BurstDelays: 2
@@ -930,10 +932,10 @@ HMGo:
 	-Report:
 	StartBurstReport: hmgo1.wav, hmgo2.wav
 	ValidTargets: Ground, Water, Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
@@ -967,16 +969,18 @@ HMGo_upgrade:
 		Damage: 1
 
 d2kChainGun:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ReloadDelay: 60
 	Burst: 5
 	BurstDelays: 2
 	Range: 6184
 	Report: MGUN2.WAV
 	StartBurstReport: MGUN2.WAV
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 2
 
 d2kChainGun_upgrade:
@@ -1128,15 +1132,17 @@ D2KAAMineExplosion:
 		ExplosionPalette: effect75alpha
 
 d2kCarryallChainGun:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 1
 	Range: 4000
 	StartBurstReport: MGUN2.WAV
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 2
 
 ordos_airmine:

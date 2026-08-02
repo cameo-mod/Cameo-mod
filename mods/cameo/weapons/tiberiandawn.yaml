@@ -1,4 +1,4 @@
-﻿^AMTProjectile:
+^AMTProjectile:
 	Projectile: Missile
 		MaximumLaunchSpeed: 400
 		MinimumLaunchSpeed: 400
@@ -35,13 +35,15 @@ TDBuildingExplode:
 		Delay: 0
 
 M16:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 17
 	Range: 3916
 	Report: mgun2.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 1
 
 Grenade:
@@ -254,7 +256,9 @@ FlametankExplode:
 		ValidTargets: Ground, Ship
 
 HighVAP:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 22
 	Burst: 4
@@ -262,9 +266,9 @@ HighVAP:
 	Range: 6720
 	-Report:
 	StartBurstReport: gun8.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		Damage: 2
 
 ChemTibAtomic:

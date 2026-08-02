@@ -417,15 +417,17 @@ TSDevoutChainguns:
 		ValidTargets: Ground, Water, Air
 
 CabalEliminatorGatling:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	Report: chaingn1.aud
 	ReloadDelay: 5
 	Range: 5857
 	ValidTargets: Ground, Water, Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16
 	Warhead@Effect: CreateEffect

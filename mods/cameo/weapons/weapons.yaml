@@ -7072,6 +7072,7 @@ DefuseKit:
 # edit rows. Additive/0-usage until the weapon retrofit inherits them.
 ####################################################################
 ^EffectArrow_Light:
+	Report: dune2smalllaser.aud
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -7092,6 +7093,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectBullet_Light:
+	Report: gun8.aud
 	Warhead@Effect: CreateEffect
 		Explosions: piff
 		ValidTargets: Ground, Ship, Air
@@ -7109,6 +7111,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectBullet_Medium:
+	Report: gun8.aud
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ValidTargets: Ground, Ship, Air
@@ -7128,6 +7131,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectCannon_Light:
+	Report: cannon1.aud
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7166,6 +7170,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectCannon_Medium:
+	Report: tnkfire6.aud
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7204,6 +7209,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectCannon_Heavy:
+	Report: tnkfire6.aud
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7242,6 +7248,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectChem_Light:
+	Report: flamer2.aud
 	Warhead@Effect: CreateEffect
 		Explosions: chemball
 		ImpactSounds: firebl3.aud
@@ -7257,6 +7264,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectChem_Medium:
+	Report: flamer2.aud
 	Warhead@Effect: CreateEffect
 		Explosions: med_tibnapalm
 		ImpactSounds: xplobig6.aud
@@ -7275,6 +7283,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectChem_Heavy:
+	Report: flamer2.aud
 	Warhead@Effect: CreateEffect
 		Explosions: big_tibnapalm
 		ImpactSounds: xplobig6.aud
@@ -7293,6 +7302,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectExplosion_Light:
+	Report: M203.aud
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7324,6 +7334,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectExplosion_Medium:
+	Report: M203.aud
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7400,6 +7411,7 @@ DefuseKit:
 		Damage: 250
 
 ^EffectFlak_Medium:
+	Report: aacanon3.aud
 	Warhead@Effect: CreateEffect
 		Explosions: flak_explosion_ground
 		ImpactSounds: xplos.aud
@@ -7424,6 +7436,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectFlak_Heavy:
+	Report: aacanon3.aud
 	Warhead@Effect: CreateEffect
 		Explosions: flak_explosion_ground
 		ImpactSounds: xplos.aud
@@ -7564,6 +7577,7 @@ DefuseKit:
 		InternalOwner: Neutral
 
 ^EffectLaser_Heavy:
+	Report: obelray1.aud
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7591,6 +7605,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectMagic_Heavy:
+	Report: 2100rotlsr.wav
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7621,6 +7636,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectMissile_Light:
+	Report: bazook1.aud
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7654,6 +7670,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectMissile_Medium:
+	Report: bazook1.aud
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7687,6 +7704,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectMissile_Heavy:
+	Report: missile6.aud
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7720,6 +7738,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectNuclear_Super:
+	Report: nukemisl.aud
 	Warhead@Smudge1: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall
@@ -7751,6 +7770,7 @@ DefuseKit:
 		Damage: 1000
 
 ^EffectRailgun_Heavy:
+	Report: bigggun1.aud
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
@@ -7767,6 +7787,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectTesla_Heavy:
+	Report: tesla1.aud
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
@@ -7780,6 +7801,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^EffectTesla_Super:
+	Report: tesla1.aud
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 2000
 	Warhead@ShieldHit: GrantExternalCondition

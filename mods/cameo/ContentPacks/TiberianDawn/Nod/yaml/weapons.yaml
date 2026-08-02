@@ -170,16 +170,18 @@ ArtilleryShellUpgrade:
 	-Warhead@Effect:
 
 MachineGun:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 10
 	Burst: 3
 	BurstDelays: 5
 	Range: 4540
 	Report: mgun11.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 2
 
 FireballLauncherBuggy:
@@ -410,17 +412,19 @@ StealthTankMissilesShrapnel:
 		InvalidTargets: Water
 
 HeliGun:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Burst: 4
 	BurstDelays: 2
 	Range: 4501
 	Report: gun5.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
@@ -1485,16 +1489,18 @@ CorvetteDragon:
 # CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): Nod
 # minigunner â€” burst 4, snappier rattle, shorter reach. Laser pair.
 td_nod_minigunner_minigun:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 50
 	Range: 4609
 	ValidTargets: Ground, Water
 	Burst: 4
 	BurstDelays: 2
 	Report: mgun2.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 1
 
 td_nod_minigunner_minigun_laser:

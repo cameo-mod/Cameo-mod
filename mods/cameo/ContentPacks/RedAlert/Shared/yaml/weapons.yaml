@@ -1,4 +1,4 @@
-﻿^CryoMissileProjectile:
+^CryoMissileProjectile:
 	TargetActorCenter: true
 	Projectile: Missile
 		TrailImage: blue_smokey
@@ -78,13 +78,15 @@ OreExplosion:
 		Size: 1,1
 
 M1Carbine:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 20
 	Range: 4655
 	Report: gun11.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 1
 
 CryoM1Carbine:
@@ -677,7 +679,9 @@ RAVulcan:
 		Damage: 1
 
 ZeroFighterChainGun:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Bullet_Medium
+	Inherits@proj: ^ProjectileBullet_Medium
+	Inherits@fx: ^EffectBullet_Medium
 	ValidTargets: Ground, Water, Air
 	Range: 6615
 	MinRange: 1325
@@ -686,10 +690,10 @@ ZeroFighterChainGun:
 	BurstDelays: 4
 	Report: gun13.aud
 	TargetActorCenter: true
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 
@@ -2142,16 +2146,18 @@ ra1_allies_chronovortex:
 # CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): Allied
 # rifle infantry â€” burst 3, accurate, longest scout reach. Cryo pair.
 ra1_allies_rifleinfantry_carbine:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Bullet_Light
+	Inherits@proj: ^ProjectileBullet_Light
+	Inherits@fx: ^EffectBullet_Light
 	ReloadDelay: 50
 	Range: 5500
 	ValidTargets: Ground, Water
 	Burst: 3
 	BurstDelays: 4
 	Report: gun11.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_LightPercentage: HealthPercentageDamage
 		Damage: 1
 
 ra1_allies_rifleinfantry_carbine_cryo:
