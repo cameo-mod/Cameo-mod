@@ -100,7 +100,7 @@ Player:
 			SWCNova: 50
 			SWPMin: 50
 			SWCMin: 50
-			Spice: 20
+			Spice: 75
 			SCGas: 20
 			SCGas2: 20
 			SCGas3: 20
@@ -424,7 +424,7 @@ Player:
 		SpeedUp: True
 		LowPowerModifier: 400
 		ReadyAudio: NewOptions
-		ReadyTextNotification: New upgrade is now available.
+		ReadyTextNotification: New upgrade has been deployed.
 		QueuedAudio: Upgrading
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
@@ -437,7 +437,7 @@ Player:
 		SpeedUp: True
 		LowPowerModifier: 400
 		ReadyAudio: NewOptions
-		ReadyTextNotification: New technology is now available.
+		ReadyTextNotification: New technology has been researched.
 		QueuedAudio: Upgrading
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
