@@ -50,14 +50,14 @@ Maintainer escalated the scope (2026-08-03): **every central-template main warhe
   on energy/special weapons, NOT in the templates.
 - **`_FriendlyFire` twin is DELETED** everywhere — folded into AreaDamage's FF fields.
 
-**FF vs ExtraDamage — the small-vs-big-spread axis (maintainer intent):**
-- **Big-spread AoE weapons** (Flame, Chemical, Demolition, Concussion, Sonic, Melee/Sword, Magic,
-  Nuclear, and the HE splashers) get **friendly fire** (safer to use near your own units) →
-  `FriendlyFireDamage: 50`.
-- **Small-spread / precise / energy weapons** (Bullet, CannonAP, MissileAP, Laser, Prism, Railgun,
-  Tesla, Arrow) get **no FF** (`FriendlyFireDamage: 0`) and instead carry an **ExtraDamage** bonus
-  to compensate for their smaller area — BUT see §3: today's ExtraDamage does NOT actually deliver
-  general compensation, so this intent needs the formula, not (only) the chip.
+**Friendly fire — UNIVERSAL (maintainer 2026-08-03, supersedes the earlier small/big-spread split):**
+EVERY template's main warhead is AreaDamage with baked FF `FriendlyFireDamage: 50` + `FriendlyFireSpread: 50`
+(50% damage within 50% radius). This INCLUDES precise / energy / AA weapons — at 50%/50% the ally
+damage is minor for thin-spread weapons, and the maintainer chose it over a pile of per-weapon
+overrides. Even **aircraft AA missiles keep FF** (fighter self-splash is acceptable at 50%/50%; NO
+fighter-AA override). `ValidRelationships` opens to `Ally, Neutral, Enemy` so the trait can apply FF.
+The energy **ExtraDamage** chips (§3) are a SEPARATE mechanic (thematic anti-class bonus), independent
+of FF; "compensate small spread" belongs in the formula (§4), not the chip.
 
 Scope confirmed for the AoE/FF families: **Flame, Chemical, Demolition, Concussion, Sonic,
 Melee(=Sword), Nuclear, +Magic** (maintainer added Magic; Magic is the %-equalizer, ground-only —
@@ -102,9 +102,10 @@ genuinely different profiles** (so "they all work differently per warhead" — c
   - **Laser** → anti-INFANTRY (light-focused): `None 200, Flak 175, Plate 150, Heroic 125, Shield 100,
     Scout 75, Light 50, Medium 25, Heavy 10, Superheavy 10, buildings 10, air 10`. (Laser main still
     hits air; the chip is the ground anti-infantry burn — best vs LIGHT infantry `None`.)
-  - **Railgun** → anti-BUILDING + superheavy (siege): `Wood 200, Steel 175, Concrete 150, Superheavy 125,
-    Heavy 100, Medium 75, Light 50, Scout 25, infantry 10, air 10`. NOTE: Shield UNLISTED by maintainer
-    → set to 10 (kinetic ≠ anti-shield; the railgun MAIN still does Shield 140). Confirm if oversight.
+  - **Railgun** → anti-BUILDING + superheavy (siege): `Concrete 200, Steel 175, Wood 150, Superheavy 125,
+    Heavy 100, Medium 75, Light 50, Scout 25, infantry 10, air 10, Shield 10`. Building order is
+    toughest-first (Concrete > Steel > Wood). Shield 10 CONFIRMED (kinetic ≠ anti-shield; the railgun
+    MAIN still does Shield 140).
   - **Tesla** → anti-INFANTRY (armor-focused) + shield (KEEP): `Shield 300, Heroic 200, Plate 175,
     Flak 150, None 125, Superheavy 100, Heavy 75, Medium 50, Light 25, Scout 10, buildings 10, air 10`.
   - Laser vs Tesla are INVERTED on the infantry ladder (Laser best vs None/light, Tesla best vs
@@ -182,3 +183,44 @@ split the *template* responsibilities.
 
 Everything after step 1 is boot-gated per commit; scoped `git add`; the C# needs a rebuild before
 the boot gate (`cameo-launch-before-commit`).
+
+## 8. The universal conversion CASCADES to retrofitted weapons (discovered + reverted 2026-08-03)
+
+Splicing all 55 templates to AreaDamage **crashes the boot** — because ~hundreds of weapons across
+~50 files were ALREADY retrofitted onto these `^Warhead_*` templates (Phase-2) and override the
+inherited warheads in ways that clash with the new type. Attempted, boot-gated (crashed), REVERTED to
+the known-good Nuclear-pilot state. The three clash classes:
+
+1. **`-Warhead@X_FriendlyFire:` REMOVAL nodes** (e.g. `RedAlert2/Yuri/weapons.yaml:853` removing
+   `Warhead@Chemical_Medium_FriendlyFire`) → `no elements with key ... to remove` at ResolveInherits.
+   The template no longer provides the twin (baked in), so the removal is invalid. **This is the FIRST
+   crash hit** (fails during inherit resolution, before field-loading).
+2. **`Warhead@X: SpreadDamage` main RESTATEMENTS** (e.g. `CHFlame` → `Warhead@Flame_Medium: SpreadDamage`).
+   MiniYaml keeps the child's `SpreadDamage` type but inherits the template's AreaDamage-only fields
+   (`FriendlyFireDamage`/`FriendlyFireSpread`) → FieldLoader "unknown field on SpreadDamageWarhead"
+   crash. (Not reached before #1, but would follow.)
+3. **`Warhead@X_FriendlyFire: SpreadDamage` REDEFINITIONS** (~150) → become STANDALONE double-FF
+   warheads (the main's baked FF + this leftover twin). Not a crash, but wrong (double ally damage).
+
+**Resolution-awareness is mandatory.** Some `Warhead@X` keys are defined by LOCAL templates, NOT the
+`^Warhead_*` family — e.g. `Warhead@Demolition_Light` on `^DamagingExplosionHE` (which inherits
+`^Explosion`, defines its OWN twin). Weapons like `RockExplode` inherit those and their removals stay
+VALID → must NOT be touched. The sweep only acts on a `Warhead@X` node when the weapon's resolved
+`@wh`/inherit chain provides that key from a `^Warhead_*` template (not a closer local template).
+
+**Staged sweep plan (the correct next operation — one boot-gated unit):**
+1. Resolution-aware script (PROVIDES graph, like the earlier retrofit repairs): for every weapon whose
+   `Warhead@X` resolves to a `^Warhead_*` template — (a) delete `-Warhead@X_FriendlyFire:` removal
+   lines; (b) delete `Warhead@X_FriendlyFire: …` twin blocks; (c) strip ` SpreadDamage` from the
+   `Warhead@X:` main override → bare (inherits the AreaDamage type). Dry-run counts first.
+2. Re-apply the generator changes (main → `AreaDamage`; `ValidRelationships: Ally, Neutral, Enemy`;
+   add `FriendlyFireDamage: 50` + `FriendlyFireSpread: 50`; remove the FF twin; naming `^Warhead_{tag}`
+   + `Warhead@{tag}_Percentage`; `AREA_RINGS = {Nuclear: ticks5/delay6/max4000/5,4,3,2,1}`;
+   `AA_ENEMY_ONLY = set()` — universal FF). These 4-ish edits are documented here + were verified to
+   regenerate the Nuclear pilot byte-for-byte.
+3. Regenerate + splice the 55 templates (anchor-based region replace, spot-check one template diff).
+4. **Boot-gate.** 5. Pipeline: `spread_damage_sum` / `audit_warhead_split` recognize `AreaDamage`.
+6. Commit generator + weapons + the weapon sweep TOGETHER.
+
+Until then: the Nuclear pilot (committed `851537a03`) is the ONLY live `AreaDamage`; the 55 templates
+stay `SpreadDamage`; the generator is reverted to `SpreadDamage` so it stays consistent with the file.
