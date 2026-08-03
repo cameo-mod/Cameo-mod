@@ -13,23 +13,26 @@ TSArtyTargeting:
 	Warhead@Dummy: Dummy
 
 TS155mmFrag:
-	Inherits: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Explosion_Medium
 	Projectile: Bullet
 		Speed: 128
 		LaunchAngle: 175
 		ContrailLength: 3
 		ContrailWidth: 0c16
 	Range: 3500
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium: SpreadDamage
 		Damage: 30000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
 		Damage: 15000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	-Report:
 
 TSCadreGrenade:
-	Inherits: ^Grenade
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Explosion_Light
 	ReloadDelay: 124
 	Range: 6623
 	Report: M203.aud
@@ -38,17 +41,19 @@ TSCadreGrenade:
 		LaunchAngle: 66
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 36000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 18000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 18
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 
 TSRaiderGrenade:
-	Inherits: ^Grenade
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Explosion_Light
 	ReloadDelay: 52
 	Range: 4787
 	Report: M203.aud
@@ -57,11 +62,11 @@ TSRaiderGrenade:
 		LaunchAngle: 66
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 36000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 18000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 18
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud

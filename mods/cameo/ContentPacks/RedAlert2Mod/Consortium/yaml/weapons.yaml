@@ -407,11 +407,11 @@ SteelMakoGun:
 		Damage: 1000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 2000
@@ -1804,13 +1804,13 @@ HammerheadArtillery:
 		ContrailLength: 33
 		ContrailStartWidth: 111
 		ContrailEndWidth: 33
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Spread: 1111
 		Damage: 11111
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Spread: 1111
 		Damage: 11111
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Spread: 1111
 		Damage: 11
 	Warhead@HeavyBomb: SpreadDamage
@@ -1867,13 +1867,13 @@ SteelDaggerCannon:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@CannonHE_Heavy: SpreadDamage
@@ -1905,11 +1905,11 @@ SteelCruiserArtillery:
 		Inaccuracy: 1000
 		Speed: 200
 		ContrailLength: 20
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 16000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 8000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 16000

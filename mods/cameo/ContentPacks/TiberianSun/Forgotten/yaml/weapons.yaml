@@ -562,7 +562,8 @@ TSJuggerFlakAA_boat:
 		ImpactSounds: expnew13.aud
 
 TSJuggerboat90mm:
-	Inherits: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Explosion_Medium
 	ReloadDelay: 69
 	Range: 12834
 	MinRange: 2565
@@ -576,11 +577,11 @@ TSJuggerboat90mm:
 		Inaccuracy: 1c0
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium: SpreadDamage
 		Damage: 20000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
 		Damage: 10000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
@@ -695,7 +696,8 @@ TSChemBazooka:
 		InvalidTargets: Water
 
 TSVanMissile:
-	Inherits: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Explosion_Medium
 	ValidTargets: Ground, Water
 	Report: missile6.aud
 	ReloadDelay: 32
@@ -711,11 +713,11 @@ TSVanMissile:
 		Palette: d2keffect
 		TrailImage: large_trail
 		LaunchAngle: 60
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium: SpreadDamage
 		Damage: 24000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
 		Damage: 12000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 12
 
 TSChemVanMissile:
@@ -760,7 +762,8 @@ TSChemVanMissile:
 		InvalidTargets: Water
 
 TSMLRSMissile:
-	Inherits: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Explosion_Medium
 	ValidTargets: Ground, Water
 	Report: missile6.aud
 	ReloadDelay: 34
@@ -776,11 +779,11 @@ TSMLRSMissile:
 		Palette: d2keffect
 		TrailImage: large_trail
 		LaunchAngle: 165
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium: SpreadDamage
 		Damage: 24000
 	WWarhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 12000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 12
 
 TSChemMLRSMissile:
@@ -1728,7 +1731,8 @@ TSVisceroidSprayUP:
 		InvalidTargets: Water
 
 TSCropBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	ReloadDelay: 50
 	Range: 1250
 	TargetActorCenter: true
@@ -1737,10 +1741,10 @@ TSCropBomb:
 		Acceleration: 0, 0, -8
 		Image: 120mm
 		Shadow: true
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: SpreadDamage
 		ValidTargets: Ground, Ship
 		Damage: 120000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Ship
 		Damage: 60
 	Warhead@2Eff: CreateEffect

@@ -159,7 +159,9 @@ XCOMShardGun:
 		Damage: 1
 
 XCOMGrenade1:
-	Inherits: ^Grenade
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Explosion_Light
 	ReloadDelay: 48
 	Range: 4775
 	Report: toss1.aud
@@ -171,11 +173,11 @@ XCOMGrenade1:
 		ContrailEndWidth: 22
 		ContrailStartColor: FFBB88FF
 		ContrailEndColor: FF884422
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 60000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 30000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 30
 
 XCOMGrenade2:

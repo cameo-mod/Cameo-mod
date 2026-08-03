@@ -769,7 +769,8 @@ UbermenschLaser_elite:
 	BurstDelays: 3
 
 NaxiCowDrop:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	ReloadDelay: 50
 	Range: 2000
 	Report: vflolo5a.wav, vflolo5b.wav
@@ -781,17 +782,17 @@ NaxiCowDrop:
 		Palette: playerra2
 		IsPlayerPalette: true
 		Shadow: True
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: SpreadDamage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Ship
 		Damage: 10000
 		Spread: 1000
-	Warhead@HeavyBombFriendlyFire: SpreadDamage
+	Warhead@Demolition_Heavy_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		Damage: 1000
 		Spread: 500
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidRelationships: Neutral, Enemy
 		Damage: 10
 		Spread: 1000

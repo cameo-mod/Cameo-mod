@@ -611,11 +611,11 @@ RA2GrandCannonWeapon:
 		Damage: 25000
 	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 25
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 50000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 25000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 25
 	Warhead@EffectWater: CreateEffect
 		Explosions: large_splash

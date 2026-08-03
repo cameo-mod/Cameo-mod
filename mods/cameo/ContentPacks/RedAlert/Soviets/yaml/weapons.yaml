@@ -1216,7 +1216,8 @@ SCUD:
 		Damage: 30
 
 SCUDThermobaric:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	Inherits: SCUD
 	Projectile: Bullet
 		ContrailStartWidth: 100
@@ -1235,9 +1236,9 @@ SCUDThermobaric:
 		Damage: 20000
 	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 20
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: SpreadDamage
 		Damage: 40000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Damage: 20
 
 SCUDTesla:

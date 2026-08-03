@@ -26,7 +26,9 @@
 #######################################
 
 Debris:
-	Inherits: ^Grenade
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Explosion_Light
 	ReloadDelay: 60
 	Range: 2816
 	Report: d2khc.wav
@@ -40,13 +42,13 @@ Debris:
 		Shadow: true
 		BounceCount: 3
 		BounceRangeModifier: 20
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 16000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 8000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 8
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Smudge: LeaveSmudge
@@ -70,11 +72,11 @@ Debris2:
 		TrailImage: small_trail
 		TrailPalette: effect75alpha
 		TrailInterval: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 16000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 8000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Flame_Light: SpreadDamage
 		Damage: 16000

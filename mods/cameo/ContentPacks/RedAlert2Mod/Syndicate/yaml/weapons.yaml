@@ -44,11 +44,11 @@ latinsyndicate_latinmilitia_molotov:
 		Damage: 1000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@FireShrapnel: FireShrapnel
 		InvalidTargets: FireImmune
@@ -116,7 +116,9 @@ RA2NarcoPistols_elite:
 	BurstDelays: 3
 
 NarcoGrenade:
-	Inherits: ^Grenade
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Explosion_Light
 	ReloadDelay: 77
 	Range: 5701
 	Report: M203.aud
@@ -128,11 +130,11 @@ NarcoGrenade:
 		ContrailStartColor: FF884488
 		ContrailEndColor: FFFFFF44
 		ContrailEndColorUsePlayerColor: true
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 70000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 35000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 35
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment2
@@ -468,13 +470,13 @@ RA2RBurritoRocket:
 		Palette: d2keffect
 		TrailImage: large_trail
 		LaunchAngle: 120
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -1500,13 +1502,13 @@ RA2AkulaRockets:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 4
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 4000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 4
 	Warhead@MissileAP_Medium: SpreadDamage

@@ -8044,15 +8044,17 @@ DefuseKit:
 ###############################################
 
 ^Explosion:
-	Inherits: ^Grenade
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Explosion_Light
 	-Report:
 	ValidTargets: Ground, Water, Air
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 20000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
@@ -8078,11 +8080,11 @@ DefuseKit:
 
 ^DamagingExplosion:
 	Inherits: ^Explosion
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 40000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 20000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 20
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud

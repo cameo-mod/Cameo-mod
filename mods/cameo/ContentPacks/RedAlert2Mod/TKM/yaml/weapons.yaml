@@ -58,7 +58,7 @@ tkmjuggap:
 	Range: 4792
 	Report: mgun11.aud
 	ValidTargets: Ground, Water
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArms: SpreadDamage
@@ -198,7 +198,7 @@ tkmakap:
 	Warhead@SmallArms: SpreadDamage
 		Burst: 3
 		Damage: 6000
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
@@ -811,7 +811,8 @@ TKMMedicHeal:
 		Spread: 1024
 		Damage: -1
 tkmkatyushalalauncherrockets:
-	Inherits: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Explosion_Medium
 	ReloadDelay: 157
 	Burst: 8
 	BurstDelays: 4
@@ -830,13 +831,13 @@ tkmkatyushalalauncherrockets:
 		MaximumLaunchSpeed: 125
 		MinimumLaunchSpeed: 125
 		Acceleration: 5
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 20000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 10000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 10
 	Warhead@Effect: CreateEffect
@@ -1604,16 +1605,17 @@ HueyFireMissiles:
 		Damage: 500
 
 TKMDroneExplode:
-	Inherits: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Explosion_Medium
 	-Report:
 	ValidTargets: Ground, Water
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 20000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 20
 

@@ -1134,7 +1134,8 @@ TSLimpetBomb_EMP:
 		Range: 1536
 
 TSLocustBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	ReloadDelay: 38
 	Burst: 5
 	BurstDelays: 3
@@ -1145,10 +1146,10 @@ TSLocustBomb:
 		Acceleration: 0, 0, -8
 		Image: 120mm
 		Shadow: true
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: SpreadDamage
 		ValidTargets: Ground, Ship
 		Damage: 180000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Ship
 		Damage: 90
 	Warhead@2Eff: CreateEffect

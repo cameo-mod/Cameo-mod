@@ -716,13 +716,13 @@ AsianChemical:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		TrailInterval: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -947,16 +947,17 @@ AsianHowitzerCannon_elite:
 		Spread: 2500
 
 AsianOilBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	Range: 2000
 	ReloadDelay: 100
 	Projectile: InstantExplode
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: SpreadDamage
 		Spread: 1500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 100000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Spread: 1500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 50
@@ -972,16 +973,17 @@ AsianOilBomb:
 		AimTargetStances: Enemy, Neutral
 
 AsianSmallOilBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	Range: 2000
 	ReloadDelay: 100
 	Projectile: InstantExplode
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: SpreadDamage
 		Spread: 1000
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 40000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Spread: 1000
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 20
@@ -1865,19 +1867,19 @@ AsianSubmarineBomb:
 		Damage: 25
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Spread: 2500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 50000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Spread: 1250
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 25000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Spread: 2500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 25
@@ -2012,11 +2014,11 @@ ASDFKamikazeExplosion:
 	Inherits: ^HeavyBomb
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^RA2Grenade
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 10000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 5000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 10000
@@ -2233,13 +2235,13 @@ AsianMLRS:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@MissileAP_Medium: SpreadDamage

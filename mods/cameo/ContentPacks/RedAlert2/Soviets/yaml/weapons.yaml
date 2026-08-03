@@ -27,7 +27,8 @@ SeaScorpion_AA:
 		ValidTargets: Air
 
 RA2KirovBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	ReloadDelay: 50
 	Range: 2500
 	Report: vkiratta.wav
@@ -39,17 +40,17 @@ RA2KirovBomb:
 		Palette: playerra2
 		IsPlayerPalette: true
 		Shadow: True
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: SpreadDamage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Ship
 		Damage: 80000
 		Spread: 800
-	Warhead@HeavyBombFriendlyFire: SpreadDamage
+	Warhead@Demolition_Heavy_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		Damage: 40000
 		Spread: 400
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidRelationships: Neutral, Enemy
 		Damage: 40
 		Spread: 4000
@@ -79,13 +80,13 @@ RA2KirovBomb_rad:
 	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		Damage: 24
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: SpreadDamage
 		Damage: 48000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyBombFriendlyFire: SpreadDamage
+	Warhead@Demolition_Heavy_FriendlyFire: SpreadDamage
 		Damage: 24000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Damage: 24
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Radiation: CreateTintedCells
@@ -138,11 +139,11 @@ RA2KirovBomb_tesla:
 		Damage: 40000
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		Damage: 40
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: SpreadDamage
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyBombFriendlyFire: SpreadDamage
+	Warhead@Demolition_Heavy_FriendlyFire: SpreadDamage
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect1: CreateEffect
 		Delay: 0
@@ -183,15 +184,15 @@ RA2KirovBomb_nuclear:
 
 RA2KirovBomb_nuclear_elite:
 	Inherits: RA2KirovBomb_nuclear
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: SpreadDamage
 		Damage: 100000
 		Spread: 1000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyBombFriendlyFire: SpreadDamage
+	Warhead@Demolition_Heavy_FriendlyFire: SpreadDamage
 		Damage: 50000
 		Spread: 500
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidRelationships: Neutral, Enemy
 		Damage: 50
 		Spread: 5000
@@ -296,11 +297,11 @@ RA160mm:
 		Damage: 30000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 30
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 60000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 30000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 30
 
 RA160mm_rad:

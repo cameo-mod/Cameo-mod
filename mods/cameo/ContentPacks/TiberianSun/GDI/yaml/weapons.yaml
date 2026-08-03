@@ -130,7 +130,8 @@ TSRPGTowerRail:
 		Damage: 8
 
 TSJugg90mm:
-	Inherits: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Explosion_Medium
 	ReloadDelay: 69
 	Range: 12834
 	MinRange: 2565
@@ -144,11 +145,11 @@ TSJugg90mm:
 		Inaccuracy: 1c0
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium: SpreadDamage
 		Damage: 30000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
 		Damage: 15000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
@@ -163,7 +164,8 @@ TSJuggTargeting:
 	Warhead@Dummy: Dummy
 
 TSJugg120mm:
-	Inherits: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Explosion_Medium
 	ReloadDelay: 64
 	Range: 12860
 	MinRange: 2570
@@ -177,11 +179,11 @@ TSJugg120mm:
 		Inaccuracy: 1c0
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium: SpreadDamage
 		Damage: 40000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
 		Damage: 20000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 20
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud

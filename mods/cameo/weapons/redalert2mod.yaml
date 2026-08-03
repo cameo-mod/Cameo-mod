@@ -179,11 +179,11 @@ AsianSmallTorpedo:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 12000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 6000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@MissileAP_Heavy: SpreadDamage
 		Damage: 12000
@@ -628,11 +628,11 @@ NaxGrilleArty:
 		Damage: 8000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 8
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 16000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 8000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 8
 
 NaxGrilleArty_elite:
@@ -753,11 +753,11 @@ NaxSturmArty:
 		Damage: 30000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 14
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 20000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 10000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 14
 
 NaxDefensivePlaneTarget:
@@ -1123,16 +1123,17 @@ MeteorFlameFragment:
 		ValidTargets: Ground, Water
 
 NaxisBlackBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	Range: 2000
 	ReloadDelay: 100
 	Projectile: InstantExplode
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: SpreadDamage
 		Spread: 1500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 100000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Spread: 1500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 50
@@ -1292,13 +1293,13 @@ RA2RTruckRocket:
 		Palette: d2keffect
 		TrailImage: large_trail
 		LaunchAngle: 77
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@LightFlameWeapon: SpreadDamage
@@ -1493,15 +1494,15 @@ LatinBuggyRocket_elite:
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		Spread: 4000
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		Spread: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		Spread: 4000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		Spread: 8000

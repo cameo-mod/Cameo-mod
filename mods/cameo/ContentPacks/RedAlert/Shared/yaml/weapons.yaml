@@ -1070,7 +1070,8 @@ JapanSuperBomb:
 		Damage: 5
 
 JapanCarrierFighterBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	ReloadDelay: 5
 	Range: 3000
 	Report: vkiratta.wav
@@ -1080,10 +1081,10 @@ JapanCarrierFighterBomb:
 		Acceleration: 0, 0, -10
 		Image: Dragon
 		Shadow: True
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 
@@ -1857,20 +1858,22 @@ TorpTubeThermobaric:
 		InvalidTargets: Ship, Structure, Bridge
 
 DepthCharge:
-	Inherits: ^Grenade
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Explosion_Light
 	ReloadDelay: 60
 	Range: 6000
 	ValidTargets: Underwater, Submarine
 	Projectile: Bullet
 		Speed: 125
 		Image: BOMB
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 60000
 		ValidTargets: Submarine, Ship, Underwater
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 30000
 		ValidTargets: Submarine, Ship, Underwater
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 30
 		ValidTargets: Submarine, Ship, Underwater
 	Warhead@EffectWater: CreateEffect

@@ -1934,7 +1934,9 @@ ArtilleryExplode:
 		ImpactSounds: kaboom22.aud
 
 BuggyGrenade:
-	Inherits: ^Grenade
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Explosion_Light
 	ReloadDelay: 60
 	Range: 5184
 	Report: M203.aud
@@ -1945,11 +1947,11 @@ BuggyGrenade:
 		ContrailLength: 11
 		ContrailStartWidth: 99
 		ContrailEndWidth: 33
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 60000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 30000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 30
 
 BuggyPlasmaGrenade:
@@ -1992,7 +1994,8 @@ BuggyPlasmaGrenade:
 		Explosions: purple_plasma
 
 JapaneseHeavyBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 100
 	Burst: 4
@@ -2008,10 +2011,10 @@ JapaneseHeavyBomb:
 		Blockable: false
 		Image: DRAGON
 		Shadow: True
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: SpreadDamage
 		ValidTargets: Ground, Ship
 		Damage: 20000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Ship
 		Damage: 10
 	Warhead@Effect1: CreateEffect

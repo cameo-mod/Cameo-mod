@@ -211,7 +211,8 @@ SheridanVulcan:
 		Damage: 1
 
 RapierBombs:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	ReloadDelay: 60
 	Range: 2000
 	Burst: 4
@@ -223,10 +224,10 @@ RapierBombs:
 		Acceleration: 0, 0, -10
 		Image: BOMBLET
 		Shadow: True
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: SpreadDamage
 		ValidTargets: Ground, Ship
 		Damage: 10000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Ship
 		Damage: 5
 
