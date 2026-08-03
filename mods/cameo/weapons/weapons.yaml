@@ -6757,40 +6757,24 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Nuclear_Super: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	# PILOT (2026-08-03): converted SpreadDamage -> AreaDamage. Friendly fire baked in
+	# (FriendlyFireDamage/Spread 50 = the retired _FriendlyFire twin), plus the nuclear
+	# shockwave: 5 ticks, expanding 0 -> MaxRadius, decreasing TickDamage (small area/hot
+	# first -> wide area/weak). Damage 1000 is the TOTAL summed over the 5 ticks.
+	Warhead@Nuclear_Super: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
 		ValidTargets: Ground, Water, Air
 		Spread: 1000
 		Damage: 1000
 		Falloff: 100, 50, 20, 8, 3
+		Ticks: 5
+		TickDelay: 6
+		MaxRadius: 4000
+		TickDamage: 5, 4, 3, 2, 1
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Versus:
 			HAZMAT: 50
-			Shield: 155
-			Concrete: 100
-			Steel: 97
-			Wood: 94
-			Superheavy: 91
-			Heavy: 88
-			Medium: 85
-			Light: 82
-			Scout: 79
-			Spaceship: 76
-			Helicopter: 73
-			Bomber: 70
-			Fighter: 67
-			Heroic: 64
-			Plate: 61
-			Flak: 58
-			None: 55
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Nuclear_Super_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water, Air
-		Spread: 500
-		Damage: 500
-		Falloff: 100, 50, 20, 8, 3
-		Versus:
-			HAZMAT: 25
 			Shield: 155
 			Concrete: 100
 			Steel: 97
