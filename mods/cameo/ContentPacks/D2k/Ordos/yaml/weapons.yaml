@@ -978,7 +978,7 @@ d2kChainGun:
 	Burst: 5
 	BurstDelays: 2
 	Range: 6184
-	Report: MGUN2.WAV
+	-Report:
 	StartBurstReport: MGUN2.WAV
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
@@ -989,6 +989,7 @@ d2kChainGun_upgrade:
 	Inherits: ^LaserWeapon
 	Inherits@2: d2kChainGun
 	Report: LaserTankAttack.wav
+	-StartBurstReport:
 	-Projectile:
 	Projectile: LaserZap
 		Width: 55
