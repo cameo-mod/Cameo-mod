@@ -3,11 +3,14 @@
 #		Red Alert 2 Weapon Templates
 ####################################################################################################
 
-^RA2SmallArms:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@proj: ^Projectile_Bullet_Light
-	Inherits@fx: ^Effect_Bullet_Light
-	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
+## RA2 per-game EFFECT templates (extracted from the inline explosions that used to
+## sit on the RA2 weapon bases). Each inherits the generic ^Effect_<fam> and swaps the
+## impact for the RA2 look (ra2_piff / ra2_piffs on ra2effect). RA2 bases inherit these
+## via @fx instead of inlining. Naming: ^Effect_<Fam>_<Level>_RA2 (game = last section).
+## PILOT: only Bullet_Light/Medium done here; the rest of the RA2 set follows once the
+## naming/shape is confirmed. Later these relocate to the RA2 Shared pack.
+^Effect_Bullet_Light_RA2:
+	Inherits: ^Effect_Bullet_Light
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piff
 		ExplosionPalette: ra2effect
@@ -15,16 +18,25 @@
 		Explosions: ra2_piff
 		ExplosionPalette: ra2effect
 
-^RA2Chaingun:
-	Inherits@wh: ^Warhead_Bullet_Medium
-	Inherits@proj: ^Projectile_Bullet_Medium
-	Inherits@fx: ^Effect_Bullet_Medium
+^Effect_Bullet_Medium_RA2:
+	Inherits: ^Effect_Bullet_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect
 	Warhead@EffectAir: CreateEffect
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect
+
+^RA2SmallArms:
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light_RA2
+	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
+
+^RA2Chaingun:
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 
 ^RA2FlakWeapon:
 	Inherits@wh: ^Warhead_Flak_Medium
