@@ -1668,18 +1668,20 @@ AsianTankMine:
 AsianChaosMine:
 	Inherits: AsianChaosTurret
 	Inherits: AsianTankMine
-	Inherits@2: ^HeavyChemicalWeapon
-	Warhead@HeavyChemicalWeapon: SpreadDamage
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@proj: ^Projectile_Chem_Heavy
+	Inherits@fx: ^Effect_Chem_Heavy
+	Warhead@Chemical_Heavy: SpreadDamage
 		Spread: 1250
 		Falloff: 125, 100, 75, 50, 25
 		Damage: 125000
 		InvalidTargets: Mine
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Heavy_FriendlyFire: SpreadDamage
 		Spread: 625
 		Falloff: 125, 100, 75, 50, 25
 		Damage: 25000
 		InvalidTargets: Mine
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		Spread: 2500
 		Falloff: 125, 100, 75, 50, 25
 		InvalidTargets: Mine

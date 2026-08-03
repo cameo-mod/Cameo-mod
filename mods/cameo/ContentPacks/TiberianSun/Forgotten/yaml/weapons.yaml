@@ -2008,7 +2008,9 @@ TSSniper:
 		Damage: 5
 
 TSGhostGun:
-	Inherits: ^LightChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Chem_Light
+	Inherits@fx: ^Effect_Chem_Light
 	ReloadDelay: 25
 	Range: 9557
 	Report: silencer.aud
@@ -2025,11 +2027,11 @@ TSGhostGun:
 		Width: 100
 		Speed: 10000
 		Inaccuracy: 0
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Light: SpreadDamage
 		Damage: 20000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Light_FriendlyFire: SpreadDamage
 		Damage: 10000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 
 TSChemGhostGun:

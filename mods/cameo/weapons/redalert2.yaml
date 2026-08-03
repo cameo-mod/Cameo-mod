@@ -1405,20 +1405,22 @@ IonPulseDischarge:
 ####################################################################################################
 
 RA2RadBeamWeapon:
-	Inherits: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
 	Range: 6444
 	ReloadDelay: 45
 	Report: idesat1a.wav
 	Projectile: RadBeam
 		Amplitude: 120
 		WaveLength: 360
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Medium: SpreadDamage
 		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, RadiationDeath
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
 		Damage: 15000
 		DamageTypes: Prone100Percent, TriggerProne, RadiationDeath
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	-Warhead@Effect:
 

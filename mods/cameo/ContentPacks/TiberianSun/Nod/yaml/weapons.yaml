@@ -552,7 +552,9 @@ TSLaserHarpyAOEClaw:
 		Falloff: 100, 50, 25
 
 TSToxinRifle:
-	Inherits: ^LightChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Chem_Light
+	Inherits@fx: ^Effect_Chem_Light
 	ReloadDelay: 54
 	Burst: 3
 	BurstDelays: 3
@@ -571,10 +573,10 @@ TSToxinRifle:
 		Width: 100
 		Speed: 10000
 		Inaccuracy: 0
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Light: SpreadDamage
 		Damage: 16000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Light_FriendlyFire: SpreadDamage
 		Damage: 8000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 8
 	-Warhead@Effect:

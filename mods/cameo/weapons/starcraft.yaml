@@ -132,17 +132,19 @@ SCSpiderEngage:
 	Range: 1536
 
 SCSPIDEREXPLOSION:
-	Inherits: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
 	-Report:
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Medium: SpreadDamage
 		Damage: 80000
 		Spread: 2048
 		Falloff: 100, 25, 0
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
 		Damage: 40000
 		Spread: 2048
 		Falloff: 100, 25, 0
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 40
 		Spread: 2048
 		Falloff: 100, 25, 0

@@ -97,24 +97,28 @@ Flamethrower:
 		Amount: 10000
 
 Chemspray:
-	Inherits: ^LightChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Chem_Light
+	Inherits@fx: ^Effect_Chem_Light
 	ReloadDelay: 48
 	Range: 3414
 	Report: flamer2.aud
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Light: SpreadDamage
 		Damage: 48000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Light_FriendlyFire: SpreadDamage
 		Damage: 24000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 24
 
 TiberiumExplosion:
-	Inherits: ^MediumChemicalWeapon
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
+	Warhead@Chemical_Medium: SpreadDamage
 		Damage: 40000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
 		Damage: 20000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 20
 	Warhead@Resource: CreateResource
 		AddsResourceType: Tiberium

@@ -65,16 +65,18 @@ RA2KirovBomb:
 	-Warhead@Effect2:
 
 RA2KirovBomb_rad:
-	Inherits: ^HeavyChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@proj: ^Projectile_Chem_Heavy
+	Inherits@fx: ^Effect_Chem_Heavy
 	Inherits: RA2KirovBomb
 	Inherits@rad: ^RA2RadShell
-	Warhead@HeavyChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Heavy: SpreadDamage
 		Damage: 48000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Heavy_FriendlyFire: SpreadDamage
 		Damage: 24000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		Damage: 24
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@HeavyBomb: SpreadDamage
@@ -215,14 +217,16 @@ RA2KirovBomb_nuclear_elite:
 		LayerName: ra2radiation
 
 RA2120mm_rad:
-	Inherits: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
 	Inherits: RA2120mm
 	Inherits@rad: ^RA2RadShell
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Medium: SpreadDamage
 		Damage: 6000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
 		Damage: 3000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 6000

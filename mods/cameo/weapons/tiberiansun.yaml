@@ -889,19 +889,21 @@ TSSAPCMissiles:
 		ValidTargets: Ground, Water, Air
 
 TSSAPCCoreMissiles:
-	Inherits: ^LightChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Chem_Light
+	Inherits@fx: ^Effect_Chem_Light
 	Inherits: TSSAPCMissiles
 	Projectile: Missile
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Light: SpreadDamage
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Light_FriendlyFire: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 4
 		ValidTargets: Ground, Water, Air
 

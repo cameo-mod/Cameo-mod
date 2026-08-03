@@ -712,19 +712,21 @@ NaxCrystalLeech_elite:
 		Damage: 1
 
 NaxDieGlocke:
-	Inherits: ^HeavyChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@proj: ^Projectile_Chem_Heavy
+	Inherits@fx: ^Effect_Chem_Heavy
 	Range: 2500
 	ReloadDelay: 60
 	ValidTargets: Ground, Water, Air
 	Projectile: InstantHit
 	TargetActorCenter: true
-	Warhead@HeavyChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Heavy: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Heavy_FriendlyFire: SpreadDamage
 		Damage: 5000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Effect: CreateEffect

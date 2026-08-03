@@ -1455,7 +1455,9 @@ CabalAscendedRockets:
 		Damage: 3
 
 CabalRavagerPlasma:
-	Inherits: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
 	ReloadDelay: 30
 	Range: 3000
 	Report: plasma_robot_shoot.aud
@@ -1464,17 +1466,19 @@ CabalRavagerPlasma:
 		Blockable: false
 		Shadow: false
 		Image: cabal_greenplasma
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Medium: SpreadDamage
 		Damage: 32000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
 		Damage: 16000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 16
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
 CabalWidowPlasma:
-	Inherits: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
 	ReloadDelay: 30
 	Range: 5938
 	Report: plasma_robot_shoot.aud
@@ -1483,11 +1487,11 @@ CabalWidowPlasma:
 		Blockable: false
 		Shadow: false
 		Image: cabal_greenplasma
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Medium: SpreadDamage
 		Damage: 32000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
 		Damage: 16000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 16
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
@@ -2167,7 +2171,9 @@ CabalCommandoPlasmaMk2Neutron:
 		ImpactSounds: expnew12.aud
 
 CabalRavagerPlasmaNeutron:
-	Inherits: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
 	ReloadDelay: 30
 	Range: 3000
 	Report: plasma_robot_shoot.aud
@@ -2176,11 +2182,11 @@ CabalRavagerPlasmaNeutron:
 		Blockable: false
 		Shadow: false
 		Image: cabal_plasmabullet
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Medium: SpreadDamage
 		Damage: 32000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
 		Damage: 16000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 16
 	Warhead@Effect: CreateEffect
 		Explosions: magicnuke_small

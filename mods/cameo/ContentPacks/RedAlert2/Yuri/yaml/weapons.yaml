@@ -834,7 +834,9 @@ RA2Virusgun_elite:
 		Duration: 250
 
 RA2Chemspray:
-	Inherits: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
 	ReloadDelay: 50
 	Burst: 6
 	BurstDelays: 4
@@ -845,11 +847,11 @@ RA2Chemspray:
 		Image: ra2txgasg
 		Inaccuracy: 555
 		Palette: ra2effect
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Medium: SpreadDamage
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	-Warhead@MediumChemicalWeaponFriendlyFire:
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	-Warhead@Chemical_Medium_FriendlyFire:
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	-Warhead@Effect:
@@ -865,13 +867,15 @@ RA2Chemspray:
 		InvalidTargets: Water
 
 RA2Chemspray2:
-	Inherits: ^HeavyChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@proj: ^Projectile_Chem_Heavy
+	Inherits@fx: ^Effect_Chem_Heavy
 	Inherits: RA2Chemspray
-	Warhead@HeavyChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Heavy: SpreadDamage
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	-Warhead@HeavyChemicalWeaponFriendlyFire:
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+	-Warhead@Chemical_Heavy_FriendlyFire:
+	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Condition: GrantExternalCondition

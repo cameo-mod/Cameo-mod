@@ -90,23 +90,25 @@ NodTurretLaser:
 
 SmallTiberiumExplosion:
 	Inherits: Chemspray
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Light: SpreadDamage
 		Damage: 24000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Light_FriendlyFire: SpreadDamage
 		Damage: 12000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 12
 	Warhead@Resource: CreateResource
 		AddsResourceType: Tiberium
 		Size: 0,0
 
 BigTiberiumExplosion:
-	Inherits: ^HeavyChemicalWeapon
-	Warhead@HeavyChemicalWeapon: SpreadDamage
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@proj: ^Projectile_Chem_Heavy
+	Inherits@fx: ^Effect_Chem_Heavy
+	Warhead@Chemical_Heavy: SpreadDamage
 		Damage: 50000
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Heavy_FriendlyFire: SpreadDamage
 		Damage: 25000
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		Damage: 25
 	Warhead@Resource: CreateResource
 		AddsResourceType: Tiberium

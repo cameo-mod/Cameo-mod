@@ -1220,7 +1220,9 @@ ordos_lasertank:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 
 d2k_chemgun:
-	Inherits: ^LightChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Chem_Light
+	Inherits@fx: ^Effect_Chem_Light
 	ReloadDelay: 75
 	Range: 5177
 	Report: chemtrooper_att.wav
@@ -1228,11 +1230,11 @@ d2k_chemgun:
 		Amplitude: 150
 		WaveLength: 300
 		Color: 88FF00
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Light: SpreadDamage
 		Damage: 30000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Light_FriendlyFire: SpreadDamage
 		Damage: 15000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
