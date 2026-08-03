@@ -1929,7 +1929,9 @@ DepthCharge:
 		ImpactSounds: kaboom15.aud
 
 Stinger:
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Missile_Heavy
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 27
 	Range: 8000
@@ -1942,11 +1944,11 @@ Stinger:
 		Speed: 500
 		MinimumLaunchAngle: 50
 		Acceleration: 5
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Underwater
 		Damage: 10000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Underwater
 		Damage: 5

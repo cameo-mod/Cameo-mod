@@ -67,13 +67,15 @@ Grenade:
 		Damage: 8
 
 Rockets:
-	Inherits: ^LightMissile
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Missile_Light
 	ReloadDelay: 63
 	Range: 6368
 	Report: bazook1.aud
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		Damage: 18000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 9
 
 Flamethrower:

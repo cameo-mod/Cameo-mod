@@ -393,11 +393,11 @@ LunarNaxiDroneMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -514,10 +514,10 @@ NaxiShrek:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 
@@ -595,10 +595,10 @@ NaxiShrekCons:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 
@@ -1024,9 +1024,9 @@ NaxPlaneRockets_elite:
 		Damage: 10000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		Damage: 10000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 
 NaxiInterceptorGun:
@@ -1108,10 +1108,10 @@ NaxShoeRocket:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 4
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 4
 
@@ -1209,10 +1209,10 @@ NaxiMissileUboat:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Ground, Water, Air
 

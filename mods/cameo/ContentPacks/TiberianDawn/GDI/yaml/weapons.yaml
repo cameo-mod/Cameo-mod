@@ -317,13 +317,15 @@ MachineGunAPH:
 		Explosions: small_poof
 
 M1A1Missiles:
-	Inherits: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_Missile_Medium
 	ReloadDelay: 72
 	Range: 5400
 	Report: rocket1.aud
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
@@ -379,7 +381,9 @@ M1A1MachineGun:
 		Damage: 8
 
 MammothMissiles:
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Missile_Heavy
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 68
 	Burst: 2
@@ -388,9 +392,9 @@ MammothMissiles:
 	Report: rocket1.aud
 	Projectile: Missile
 		Image: DRAGON
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		Damage: 8000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
@@ -563,7 +567,9 @@ NapalmA10Carrier:
 		GlowFadeInFrames: 12
 
 A10CarrierMissiles_AA:
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Missile_Heavy
 	Inherits@glow: ^ImpactGlow
 	ValidTargets: Air
 	ReloadDelay: 100
@@ -589,11 +595,11 @@ A10CarrierMissiles_AA:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 		ContrailStartColor: FF8800AA
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		ValidTargets: Air
 		Damage: 12000
 		ValidRelationships: Neutral, Enemy
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 6
 		ValidRelationships: Neutral, Enemy
@@ -1029,15 +1035,17 @@ MachineGunHumvee2AP_AA:
 		ValidTargets: Air
 
 RocketsHumvee2:
-	Inherits: ^LightMissile
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Missile_Light
 	ReloadDelay: 84
 	Range: 5598
 	Report: bazook1.aud
 	ValidTargets: Ground, Water
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 16000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 8
 
@@ -1045,19 +1053,21 @@ RocketsHumvee2_AA:
 	Inherits: RocketsHumvee2
 	Range: 8397
 	ValidTargets: Air
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 RocketsHumvee2AMT:
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Missile_Heavy
 	Inherits: RocketsHumvee2
 	Inherits: ^AMTProjectile
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 16000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 8
 
@@ -1065,13 +1075,13 @@ RocketsHumvee2AMT_AA:
 	Inherits: RocketsHumvee2AMT
 	Range: 8397
 	ValidTargets: Air
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		ValidTargets: Air
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 TDShotgun:
@@ -1148,13 +1158,15 @@ GDIPredatorTankCannonHV:
 		Explosions: small_poof
 
 GDIPredatorTankMissiles:
-	Inherits: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_Missile_Medium
 	ReloadDelay: 70
 	Range: 5880
 	Report: rocket1.aud
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
@@ -1232,7 +1244,9 @@ MammothTank3CannonsHV:
 		Damage: 12
 
 MammothTank3Missiles:
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Missile_Heavy
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 98
 	Burst: 2
@@ -1241,9 +1255,9 @@ MammothTank3Missiles:
 	Report: rocket1.aud
 	Projectile: Missile
 		Image: DRAGON
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		Damage: 12000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
@@ -1616,7 +1630,9 @@ CommandoM16:
 		Damage: 2
 
 FirehawkMissiles_AA:
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Missile_Heavy
 	Inherits@glow: ^ImpactGlow
 	ValidTargets: Air
 	ReloadDelay: 50
@@ -1643,10 +1659,10 @@ FirehawkMissiles_AA:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 		ContrailStartColor: FF8800AA
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		ValidTargets: Air
 		Damage: 20000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 10
 	Warhead@EffectAir: CreateEffect
@@ -1716,7 +1732,9 @@ GDIBattleshipRailgun:
 		Damage: 25
 
 GunboatMissile:
-	Inherits: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_Missile_Medium
 	ReloadDelay: 33
 	Range: 6666
 	Burst: 2
@@ -1731,10 +1749,10 @@ GunboatMissile:
 		VerticalRateOfTurn: 50
 		Acceleration: 5
 		AllowSnapping: true
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 18000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 9
 

@@ -2232,7 +2232,9 @@ YakNuclearBomb:
 		ImpactActors: true
 
 Maverick:
-	Inherits: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_Missile_Medium
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 4
@@ -2250,9 +2252,9 @@ Maverick:
 		ContrailStartColor: 996633
 		TrailInterval: 1
 		TrailDelay: 1
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 40000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 20
 
 TeslaMaverick:
@@ -2281,11 +2283,11 @@ TeslaMaverick:
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		ValidRelationships: Neutral, Enemy
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 	Warhead@EMPUnit: AffectsIntegrity
@@ -2385,11 +2387,11 @@ ThermobaricMaverick:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		ValidRelationships: Neutral, Enemy
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 	Warhead@Effect: CreateEffect

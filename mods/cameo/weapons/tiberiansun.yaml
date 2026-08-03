@@ -718,14 +718,16 @@ ts_nod_mobilerepairvehicle:
 		Damage: 5
 
 TSBazooka:
-	Inherits: ^LightMissile
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Missile_Light
 	Report: rketinf1.aud
 	ReloadDelay: 52
 	Range: 6694
 	Projectile: Missile
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		Damage: 24000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 12
 
 TSBazookaG:

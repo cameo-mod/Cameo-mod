@@ -181,10 +181,10 @@ AsianSmallTorpedo:
 		Damage: 6000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		Damage: 12000
 		ValidTargets: Water, Underwater, Bridge, Structure
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:
@@ -437,11 +437,11 @@ SteelTwisterMissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -1313,10 +1313,10 @@ RA2RTruckRocket:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -1366,16 +1366,16 @@ LatinBuggyRocket:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@Effect: CreateEffect
@@ -1511,11 +1511,11 @@ LatinBuggyRocket_elite:
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		Spread: 2000
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		Spread: 1000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		Spread: 1000

@@ -43,7 +43,9 @@
 		ImpactSounds: bflaattc.wav, bflaattd.wav, bflaattb.wav, bflaatta.wav
 
 ^RA2LightMissile:
-	Inherits: ^LightMissile
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Missile_Light
 	Projectile: Missile
 		Image: ra2_dragon
 		-TrailImage:
@@ -63,7 +65,9 @@
 		InvalidTargets: Ship, Structure, Bridge
 
 ^RA2MediumMissile:
-	Inherits: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_Missile_Medium
 	Projectile: Missile
 		Image: patriot
 		-TrailImage:
@@ -83,7 +87,9 @@
 		InvalidTargets: Ship, Structure, Bridge
 
 ^RA2HeavyMissile:
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Missile_Heavy
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_clsn
 		ExplosionPalette: tseffect
@@ -208,9 +214,9 @@ RA2GIRocketsG:
 		HorizontalRateOfTurn: 128
 		VerticalRateOfTurn: 128
 		Acceleration: 5
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		Damage: 24000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 12
 
 RA2GIRocketsG_elite:
@@ -331,11 +337,11 @@ RA2HoverMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -1518,10 +1524,10 @@ RA2HornetMissile:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 	-Warhead@Effect1:
@@ -1533,7 +1539,7 @@ RA2GIRockets:
 		HorizontalRateOfTurn: 10
 		Speed: 400
 		Acceleration: 1
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		Damage: 3700
 
 MigMissiles:
@@ -1574,9 +1580,9 @@ MigMissiles:
 		Damage: 8000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		Damage: 4
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	-Warhead@Effect1:
 	Warhead@Effect: CreateEffect
@@ -1774,10 +1780,10 @@ RA2SCUD:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 15
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 30000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 15
 	Warhead@Effect: CreateEffect
@@ -1909,10 +1915,10 @@ YRBoomerSCUD:
 		Image: MISSILE
 		TrailImage: bomb
 		RangeLimit: 20000
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 	Warhead@Grenade: SpreadDamage
@@ -1962,10 +1968,10 @@ RA2TorpTube:
 		Damage: 9000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 9
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		Damage: 18000
 		ValidTargets: Water, Underwater, Bridge, Structure
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 9
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:

@@ -184,7 +184,9 @@ TSStankTibTusk:
 		ValidTargets: Ground, Water, Air
 
 TSNODRedEye:
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Missile_Heavy
 	ReloadDelay: 50
 	Range: 13176
 	Report: rocket2.aud
@@ -199,10 +201,10 @@ TSNODRedEye:
 		Acceleration: 5
 		AllowSnapping: true
 		CloseEnough: 500
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		Damage: 12000
 		Spread: 500
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
 		Spread: 500
 	Warhead@2Eff: CreateEffect
@@ -213,10 +215,10 @@ TSNODTibRedEye:
 	Inherits: TSNODRedEye
 	Projectile: Missile
 		TrailImage: spittrail
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		Damage: 18000
 		Spread: 500
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 9
 		Spread: 500
 

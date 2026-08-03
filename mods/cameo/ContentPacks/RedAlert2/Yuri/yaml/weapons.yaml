@@ -644,10 +644,10 @@ YRBoomerTorpedo:
 		Damage: 10000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		Damage: 20000
 		ValidTargets: Water, Underwater, Bridge, Structure
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:
@@ -796,7 +796,9 @@ RA2Virusgun2:
 		Duration: 150
 
 RA2Virusgun3:
-	Inherits: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_Missile_Medium
 	Inherits: RA2Virusgun2
 	Projectile: Bullet
 		Image: bhreddragon
@@ -804,11 +806,11 @@ RA2Virusgun3:
 		TrailImage: green_smokey
 		TrailInterval: 1
 		TrailDelay: 1
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath

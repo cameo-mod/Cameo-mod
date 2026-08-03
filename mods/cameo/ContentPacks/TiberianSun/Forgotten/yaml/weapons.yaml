@@ -881,7 +881,9 @@ TSMammothTuskChem:
 
 TSMammothTusk:
 	Inherits@glow: ^ImpactGlow
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Missile_Heavy
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Speed: 500
@@ -897,10 +899,10 @@ TSMammothTusk:
 	Burst: 2
 	BurstDelays: 8
 	Report: misl1.aud
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		Damage: 60000
 		ValidTargets: Ground, Water, Air
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 30
 		ValidTargets: Ground, Water, Air
 	Warhead@EffectAir: CreateEffect

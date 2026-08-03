@@ -97,13 +97,15 @@ HueyGun:
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 HueyMissiles:
-	Inherits: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_Missile_Medium
 	ReloadDelay: 14
 	Range: 4783
 	Report: bazook1.aud
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@MediumMissile: HealthPercentageDamage
+	Warhead@MissileAP_Medium: HealthPercentageDamage
 		Damage: 4
 tkmtechnicalmgap:
 	Inherits: tkmjuggap
@@ -117,14 +119,16 @@ tkmtechnicalmgap:
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
 tkmtwinrockets:
-	Inherits: ^LightMissile
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Missile_Light
 	ReloadDelay: 64
 	Range: 7214
 	Burst: 2
 	Report: bazook1.aud
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		Damage: 18000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 9
 tkmtwinrocketstechnicaltank:
 	Inherits: tkmtwinrockets
@@ -297,26 +301,32 @@ tkmm203:
 	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 tkmrockets:
-	Inherits: ^LightMissile
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Missile_Light
 	ReloadDelay: 64
 	Range: 6214
 	Report: bazook1.aud
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		Damage: 18000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 9
 as42rockets:
-	Inherits: ^LightMissile
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Missile_Light
 	ReloadDelay: 30
 	Range: 6379
 	Report: bazook1.aud
 	Projectile: Missile
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		Damage: 20000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 tkmcryorockets:
-	Inherits: ^LightMissile
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Missile_Light
 	ReloadDelay: 64
 	Range: 6214
 	Report: bazook1.aud
@@ -328,9 +338,9 @@ tkmcryorockets:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		ContrailLength: 15
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		Damage: 18000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 9
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 12000
@@ -488,19 +498,23 @@ TKMAATurretCannon:
 		ValidTargets: Air
 		Damage: 1
 tkmstrykerrockets:
-	Inherits: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_Missile_Medium
 	ReloadDelay: 60
 	Range: 7880
 	Report: bazook1.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 24000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 12
 		ValidTargets: Ground, Water, Air
 tkmstrykercryorockets:
-	Inherits: ^LightMissile
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Missile_Light
 	ReloadDelay: 63
 	Range: 5000
 	Burst: 2
@@ -514,10 +528,10 @@ tkmstrykercryorockets:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		ContrailLength: 15
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		Damage: 12000
 		ValidTargets: Ground, Water, Air
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 9
 		ValidTargets: Ground, Water, Air
 	Warhead@CryoFreeze: GrantExternalCondition
@@ -931,7 +945,9 @@ BigShieeTusk:
 		Damage: 20
 SandmarineTuskTwin:
 	Inherits: SandmarineTusk
-	Inherits: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_Missile_Medium
 	ReloadDelay: 54
 	Burst: 8
 	BurstDelays: 3
@@ -965,10 +981,10 @@ SandmarineTuskTwin:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 4000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 2
 SandmarineTuskCryo:
@@ -1023,10 +1039,10 @@ ViperMissiles:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Ground, Water, Air
 ViperMissilesTwin:

@@ -553,15 +553,17 @@ TSZoneRailgunRail:
 		ValidTargets: Ground, Water
 
 PitbullRockets:
-	Inherits: ^LightMissile
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Missile_Light
 	ReloadDelay: 55
 	Burst: 2
 	BurstDelays: 5
 	Range: 6379
 	Report: rketinf1.aud
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		Damage: 20000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 
 TSHoverMissile:
@@ -604,7 +606,9 @@ TSHoverMissile:
 
 TSMammothTusk2:
 	Inherits@glow: ^ImpactGlow
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Missile_Heavy
 	ValidTargets: Air
 	Projectile: Missile
 		Speed: 500
@@ -620,10 +624,10 @@ TSMammothTusk2:
 	Burst: 2
 	BurstDelays: 8
 	Report: misl1.aud
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		Damage: 42000
 		ValidTargets: Air
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 21
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
@@ -631,7 +635,9 @@ TSMammothTusk2:
 
 TSMammothTusk2II_AA:
 	Inherits@glow: ^ImpactGlow
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Missile_Heavy
 	ValidTargets: Air
 	Projectile: Missile
 		Speed: 500
@@ -649,10 +655,10 @@ TSMammothTusk2II_AA:
 	BurstDelays: 8
 	Projectile: Missile
 		TrailImage: large_trail
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		Damage: 60000
 		ValidTargets: Air
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 30
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
@@ -709,7 +715,9 @@ TSZoneHellfireSonic:
 	Range: 6138
 
 TSGDIRedEye:
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Missile_Heavy
 	ReloadDelay: 30
 	Range: 12440
 	Report: rocket2.aud
@@ -724,10 +732,10 @@ TSGDIRedEye:
 		Acceleration: 5
 		AllowSnapping: true
 		CloseEnough: 500
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: SpreadDamage
 		Damage: 8000
 		Spread: 500
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 4
 		Spread: 500
 	Warhead@2Eff: CreateEffect

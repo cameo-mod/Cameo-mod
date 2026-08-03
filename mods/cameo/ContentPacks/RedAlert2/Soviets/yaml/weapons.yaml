@@ -713,10 +713,10 @@ RA2MammothTusk_AA:
 	ReloadDelay: 68
 	Report: vapoat2a.wav, vapoat2b.wav, vapoat2c.wav
 	Burst: 2
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		ValidTargets: Air
 		Damage: 16000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 8
 
