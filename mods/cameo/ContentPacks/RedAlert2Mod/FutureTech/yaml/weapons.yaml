@@ -1341,13 +1341,15 @@ FutureHarbingerCannon_elite:
 	Burst: 4
 
 HarbingerChainguns:
-	Inherits: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ReloadDelay: 9
 	Range: 6030
 	Report: AUGunsh_wea1Firea.wav,AUGunsh_wea1Fireb.wav,AUGunsh_wea1Firec.wav
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		Damage: 12000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 
 HarbingerChainguns_elite:

@@ -27,7 +27,9 @@
 		ExplosionPalette: ra2effect
 
 ^RA2FlakWeapon:
-	Inherits: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_flak_explosion_ground
 		ExplosionPalette: ra2unit
@@ -2197,10 +2199,10 @@ RA2FlakTrackGun:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 

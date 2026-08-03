@@ -718,10 +718,10 @@ RA2GrenadePack:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Condition: GrantExternalCondition
@@ -793,10 +793,10 @@ DiabloCannon:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -1140,9 +1140,9 @@ LatinAADefenderCannon:
 		Damage: 2000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@EffectAir: CreateEffect
 		Explosions: ra2_flak_puff_AA
@@ -1290,10 +1290,10 @@ RA2APCFlakCannon:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 

@@ -146,10 +146,10 @@ ConsortiumMissileSystem:
 	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@MissileAP_Medium: SpreadDamage
@@ -523,10 +523,10 @@ SteelMantaAG:
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
@@ -605,10 +605,10 @@ SteelMantaHunterCannons:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
@@ -791,10 +791,10 @@ SteelInfRailgun:
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Bullet_Medium: SpreadDamage

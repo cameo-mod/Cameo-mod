@@ -2016,14 +2016,16 @@ YamatoCannon:
 		ImpactSounds: kaboom15.aud
 
 YamatoFlak:
-	Inherits: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ValidTargets: Air
 	ReloadDelay: 4
 	Range: 12500
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 1
 	Warhead@Effect: CreateEffect

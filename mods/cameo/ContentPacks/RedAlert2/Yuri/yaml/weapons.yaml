@@ -767,15 +767,17 @@ RA2Virusgun:
 		InvalidTargets: Water
 
 RA2Virusgun2:
-	Inherits: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	Inherits: RA2Virusgun
 	ValidTargets: Ground, Ship, Garrisoned
 	-InvalidTargets:
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath

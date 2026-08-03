@@ -910,10 +910,10 @@ TSJumpCannon:
 	ReloadDelay: 25
 	Range: 5090
 	Report: jumpjet1.aud
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
 	Warhead@Bullet_Medium: SpreadDamage
@@ -1070,7 +1070,9 @@ TSVulcanGunSonic:
 		Damage: 2
 
 KodiakAAGuns:
-	Inherits: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ValidTargets: Air
 	ReloadDelay: 4
 	Range: 8450
@@ -1078,10 +1080,10 @@ KodiakAAGuns:
 	Projectile: Bullet
 		Speed: 2000
 		Inaccuracy: 200
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		ValidTargets: Air
 		Damage: 6000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 3
 

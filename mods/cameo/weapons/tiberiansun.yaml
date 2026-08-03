@@ -66,15 +66,17 @@
 		InvalidTargets: Ship, Structure, Bridge
 
 TS25mmDep:
-	Inherits: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ReloadDelay: 8
 	Range: 6679
 	Report: chaingn1.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 

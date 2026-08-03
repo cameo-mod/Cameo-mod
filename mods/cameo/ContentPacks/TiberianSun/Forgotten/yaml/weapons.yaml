@@ -521,24 +521,28 @@ TS120mmxChem:
 		InvalidTargets: Water
 
 TSJuggerFlakAA:
-	Inherits: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	Report: jugger1.aud
 	ReloadDelay: 28
 	Burst: 3
 	BurstDelays: 1
 	Range: 11234
 	ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		Damage: 10000
 		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: expnew13.aud
 TSJuggerFlakAA_boat:
-	Inherits: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	Report: jugger1.aud
 	Range: 12834
 	MinRange: 2245
@@ -547,10 +551,10 @@ TSJuggerFlakAA_boat:
 	BurstDelays: 3
 	Range: 11234
 	ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		Damage: 10000
 		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect

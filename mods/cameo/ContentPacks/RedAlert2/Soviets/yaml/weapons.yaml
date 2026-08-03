@@ -3,9 +3,9 @@ RA2TURRETFLAKAA:
 	Range: 12936
 	ReloadDelay: 15
 	ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@EffectAir: CreateEffect
 		Explosions: ra2_flak_puff_AA
@@ -17,9 +17,9 @@ SeaScorpion_AA:
 	Range: 13500
 	ReloadDelay: 17
 	ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@EffectAir: CreateEffect
 		Explosions: ra2_flak_puff_AA
@@ -756,10 +756,10 @@ RA2CRFlakGuyGun:
 	ReloadDelay: 17
 	Range: 5627
 	ValidTargets: Ground, Water
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 16000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 4
 
@@ -774,10 +774,10 @@ RA2FLAKAA:
 	ReloadDelay: 26
 	Range: 7834
 	ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium: SpreadDamage
 		Damage: 8000
 		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
