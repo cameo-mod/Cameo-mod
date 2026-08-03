@@ -724,9 +724,9 @@ RA2MedusaAG:
 	Range: 9000
 	InvalidTargets: Underwater, Submarine
 	ValidTargets: Ground, Water
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		ValidTargets: Ground, Water
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 
 RA2M60:

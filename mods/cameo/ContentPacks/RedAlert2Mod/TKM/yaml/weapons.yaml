@@ -110,7 +110,7 @@ HueyMissiles:
 tkmtechnicalmgap:
 	Inherits: tkmjuggap
 	ValidTargets: Ground, Water
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Bullet_Light: SpreadDamage

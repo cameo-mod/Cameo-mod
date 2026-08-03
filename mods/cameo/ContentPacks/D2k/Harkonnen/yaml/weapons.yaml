@@ -80,10 +80,10 @@ ExplosiveDebris:
 		LaunchAngle: 150, 220
 		Inaccuracy: 2c512
 		BounceCount: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 3000
 		Spread: 1c562
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 1500
 		Spread: 1c562
 	Warhead@Effect: CreateEffect

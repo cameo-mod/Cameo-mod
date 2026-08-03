@@ -665,9 +665,9 @@ NaxCorrosionRocketTrooper_elite:
 		Damage: 4000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 	MinRange: 1210
@@ -900,7 +900,7 @@ Lunar_GreenSturmArty:
 	Inherits@Cannon: NaxSturmArty
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Report: laser_cannon3_4.wav
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 10000
 schwarzermond_lunarsoldier_rifle_yellow:
 	Inherits: schwarzermond_lunarsoldier_rifle

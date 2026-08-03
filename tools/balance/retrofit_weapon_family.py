@@ -217,33 +217,41 @@ def retrofit(targets, apply):
                 out.append("\n".join(edits[i]) if i in edits else ln)
             filelines[p] = "\n".join(out).split("\n")
 
-    # ---- build post-conversion resolution map, then PASS 2 repair ----
-    provides, parents = build_provides(filelines)
+    # ---- PASS 2 repair, iterated to a FIXPOINT ----
+    # provides must be rebuilt after each sweep: renaming an intermediate's own key
+    # changes what its grandchildren see (a one-shot pass leaves grandchildren with a
+    # stale old key that becomes a stray second warhead). Loop until no rename fires.
     repaired = 0
-    for p in files:
-        lines = filelines[p]
-        for (s, e, name) in parse_blocks(lines):
-            bare = name.lstrip("^")
-            if bare in converted_names:
-                continue  # own keys already renamed in pass 1
-            if name.startswith("^") and bare in ALL_OLD:
-                continue
-            parprov = set()
-            for q in parents.get(bare, []):
-                parprov |= provides.get(q, set())
-            for T in targets:
-                wh = TRIPLE[T][0]
-                for i in range(s, e):
-                    m = re.match(rf"^(\s*)(-?)Warhead@{re.escape(T)}{SUFFIX}?:(.*)$", lines[i])
-                    if not m:
-                        continue
-                    suf = m.group(3) or ""
-                    oldkey = T + suf
-                    newkey = wh + ("_" + suf if suf else "")
-                    # rename ONLY if the parent chain lost the old key but gained the new one
-                    if oldkey not in parprov and newkey in parprov:
-                        lines[i] = f"{m.group(1)}{m.group(2)}Warhead@{newkey}:{m.group(4)}"
-                        repaired += 1
+    while True:
+        provides, parents = build_provides(filelines)
+        pass_fixes = 0
+        for p in files:
+            lines = filelines[p]
+            for (s, e, name) in parse_blocks(lines):
+                bare = name.lstrip("^")
+                if bare in converted_names:
+                    continue  # own keys already renamed in pass 1
+                if name.startswith("^") and bare in ALL_OLD:
+                    continue
+                parprov = set()
+                for q in parents.get(bare, []):
+                    parprov |= provides.get(q, set())
+                for T in targets:
+                    wh = TRIPLE[T][0]
+                    for i in range(s, e):
+                        m = re.match(rf"^(\s*)(-?)Warhead@{re.escape(T)}{SUFFIX}?:(.*)$", lines[i])
+                        if not m:
+                            continue
+                        suf = m.group(3) or ""
+                        oldkey = T + suf
+                        newkey = wh + ("_" + suf if suf else "")
+                        # rename ONLY if the parent chain lost the old key but gained the new one
+                        if oldkey not in parprov and newkey in parprov:
+                            lines[i] = f"{m.group(1)}{m.group(2)}Warhead@{newkey}:{m.group(4)}"
+                            pass_fixes += 1
+        repaired += pass_fixes
+        if pass_fixes == 0:
+            break
 
     changed_files = 0
     for p in files:

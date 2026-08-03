@@ -8091,19 +8091,19 @@ DefuseKit:
 
 ^DamagingExplosionHE:
 	Inherits: ^Explosion
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 60000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 30000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 30
 	Warhead@Effect: CreateEffect
 
 RockExplode:
 	Inherits: ^DamagingExplosionHE
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@GrenadePercentage:
+	-Warhead@Demolition_Light:
+	-Warhead@Demolition_Light_FriendlyFire:
+	-Warhead@Demolition_Light_Percentage:
 	Warhead@Effect2: CreateEffect
 		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
 		ImpactActors: false
@@ -8265,7 +8265,7 @@ BuildingExplode:
 
 Napalm_Crate:
 	Inherits: ^DamagingExplosionHE
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Spread: 170
 		Damage: 5000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
@@ -10244,7 +10244,7 @@ ThermobaricFlame:
 		Damage: 2000
 		Versus:
 			Wood: 20
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Spread: 125
 RA2IMP:
 	ReloadDelay: 85

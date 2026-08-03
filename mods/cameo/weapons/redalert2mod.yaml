@@ -380,7 +380,7 @@ SteelHoverMissile_elite:
 	# DAMAGE, not burst 4->6. Burst reverted; base warheads doubled.
 	Warhead@ArrowWeapon: SpreadDamage
 		Damage: 8000
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		Damage: 8000
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_medium_grey_explosion

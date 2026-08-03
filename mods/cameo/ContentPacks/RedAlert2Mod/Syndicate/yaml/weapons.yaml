@@ -80,9 +80,9 @@ LatinTankKillerRocket:
 LatinTankKillerRocket_elite:
 	Inherits: LatinTankKillerRocket
 	Range: 7777
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: SpreadDamage
 		Damage: 52000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 26
 	Projectile: Missile
 		Image: red_dragon
@@ -299,9 +299,9 @@ RA2FreedomRocket_elite:
 		Damage: 60000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 60
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 120000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 60
 
 SyndicateFireballLauncher_elite:
@@ -636,9 +636,9 @@ LatinRusherRocket_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 32000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 16
 
 LatinSmokerCannon:
@@ -764,9 +764,9 @@ LatinSmokerRocket_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 48000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 24
 
 DiabloCannon:

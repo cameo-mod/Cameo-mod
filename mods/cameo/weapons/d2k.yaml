@@ -95,11 +95,11 @@ Debris3:
 	Projectile: Bullet
 		Image: shrapnel3
 		TrailImage: small_trail2
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 4000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Flame_Light: SpreadDamage
 		Damage: 8000
