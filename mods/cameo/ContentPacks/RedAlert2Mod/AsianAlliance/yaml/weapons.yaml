@@ -144,7 +144,9 @@ AsianTankKillerRocket_upgrade_elite:
 		AimTargetStances: Enemy, Neutral
 
 AsianTankKillerRocketShrapnel:
-	Inherits: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	Burst: 3
 	Range: 3333
 	ValidTargets: Ground, Water, Air
@@ -160,20 +162,20 @@ AsianTankKillerRocketShrapnel:
 		Acceleration: 3
 		RangeLimit: 33333
 		Inaccuracy: 333
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 2000
@@ -1404,11 +1406,11 @@ AsianFlamerTroop2:
 
 AsianFlamerTroopExplode:
 	Inherits: AsianFlamerTurret
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		Damage: 12000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		Damage: 6000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 12000

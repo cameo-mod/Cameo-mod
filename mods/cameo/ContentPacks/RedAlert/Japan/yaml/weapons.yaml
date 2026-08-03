@@ -166,7 +166,9 @@ PlasmaFlamer:
 		Explosions: blue_small_napalm
 
 HeavyFlamer:
-	Inherits: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	ReloadDelay: 60
 	Burst: 30
 	BurstDelays: 1
@@ -178,11 +180,11 @@ HeavyFlamer:
 		Image: fb3
 		LaunchAngle: 90
 		Inaccuracy: 900
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 2000
@@ -1861,7 +1863,9 @@ OIBigPlasmaCannon:
 		Explosions: purple_plasma
 
 OIFlamer:
-	Inherits: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	ReloadDelay: 60
 	Burst: 20
 	BurstDelays: 1
@@ -1873,11 +1877,11 @@ OIFlamer:
 		Image: fb3
 		LaunchAngle: 62
 		Inaccuracy: 850
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 OIPlasmaFlamer:

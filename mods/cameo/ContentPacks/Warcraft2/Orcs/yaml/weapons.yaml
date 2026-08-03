@@ -194,20 +194,22 @@ wc2catapultFire:
 # Death Knight basic attack
 
 wc2deathknightFire:
-	Inherits: ^HeavyFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Heavy
+	Inherits@proj: ^Projectile_Flame_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	Inherits: wc2mageFire
 	Report: wc2_touchdrk.aud
 	Projectile:
 		Image: wc2_effect_death_knight_attack
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@Flame_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Heavy_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary

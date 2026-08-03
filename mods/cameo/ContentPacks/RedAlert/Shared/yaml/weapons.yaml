@@ -66,12 +66,14 @@
 		Damage: 1
 
 OreExplosion:
-	Inherits: ^MediumFlameWeapon
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
+	Warhead@Flame_Medium: SpreadDamage
 		Damage: 40000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Damage: 20000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 20
 	Warhead@Resource: CreateResource
 		AddsResourceType: Ore
@@ -267,7 +269,9 @@ DragunovSniper:
 		Damage: 4
 
 Flamer:
-	Inherits: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 35
 	Burst: 15
 	BurstDelays: 1
@@ -279,11 +283,11 @@ Flamer:
 		Image: fb3
 		LaunchAngle: 60
 		Inaccuracy: 850
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 2000

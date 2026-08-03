@@ -223,7 +223,9 @@ TSNODTibRedEye:
 		Spread: 500
 
 TSFireballLauncher:
-	Inherits: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	ReloadDelay: 52
 	Range: 4250
 	Burst: 5
@@ -235,11 +237,11 @@ TSFireballLauncher:
 		Palette: tseffect
 		Inaccuracy: 384
 		LaunchAngle: 0
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Damage: 4000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 8000

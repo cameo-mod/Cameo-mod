@@ -60,7 +60,9 @@ Debris:
 		Damage: 300
 
 Debris2:
-	Inherits: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	Inherits: Debris
 	Projectile: Bullet
 		Image: shrapnel2
@@ -74,11 +76,11 @@ Debris2:
 		Damage: 8000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 8
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		Damage: 16000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		Damage: 8000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_small_napalm
@@ -97,11 +99,11 @@ Debris3:
 		Damage: 4000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 4
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		Damage: 8000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		Damage: 4000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 1350
@@ -1889,13 +1891,13 @@ PhoenixRocketShrapnel:
 		Acceleration: 3
 		RangeLimit: 33333
 		Inaccuracy: 333
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 

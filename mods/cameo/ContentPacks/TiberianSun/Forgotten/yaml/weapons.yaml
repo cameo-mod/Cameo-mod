@@ -1286,15 +1286,17 @@ TSAdatsMissile_AA:
 		ValidTargets: Air
 
 MutFlamer:
-	Inherits: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	ReloadDelay: 50
 	Range: 2386
 	Report: flamtnk1.aud
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium: SpreadDamage
 		Damage: 28000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Damage: 14000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 14
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 28000

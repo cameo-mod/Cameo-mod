@@ -23,14 +23,16 @@ AsianHowitzerSplash:
 		ValidTargets: Ground, Water, Air
 
 AsianFlameFragment:
-	Inherits: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 20
 	Range: 2000
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 2000
@@ -67,13 +69,13 @@ AsianOilBombFragments:
 		ContrailEndColor: FFFFFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailLength: 7
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		Damage: 4000
 		Falloff: 100, 50, 25, 12, 6, 3, 1
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		Damage: 2000
 		Falloff: 100, 50, 25, 12, 6, 3, 1
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 		Falloff: 100, 50, 25, 12, 6, 3, 1
 	Warhead@Effect: CreateEffect
@@ -85,7 +87,9 @@ AsianOilBombFragments:
 		AimTargetStances: Enemy, Neutral
 
 AsianFlamerTurret:
-	Inherits: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	ValidTargets: Ground, Water
 	ReloadDelay: 30
 	Burst: 6
@@ -97,11 +101,11 @@ AsianFlamerTurret:
 		LaunchAngle: 10, 20
 		Image: tsflameall
 		Palette: tseffect
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		Damage: 4000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		Damage: 2000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 4000
@@ -1095,14 +1099,16 @@ NaxiMeteor:
 		AimTargetStances: Enemy, Neutral
 
 MeteorFlameFragment:
-	Inherits: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 20
 	Range: 2000
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Aliens: SpawnActorOrWeapon
 		Actors: alien.nax

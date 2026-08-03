@@ -79,15 +79,17 @@ Rockets:
 		Damage: 9
 
 Flamethrower:
-	Inherits: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 60
 	Range: 2085
 	Report: flamer2.aud
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		Damage: 20000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		Damage: 10000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 20000
@@ -162,17 +164,19 @@ ArtilleryShell:
 		ImpactSounds: xplosml2.aud
 
 BigFlamer:
-	Inherits: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	Burst: 2
 	BurstDelays: 10
 	ReloadDelay: 50
 	Range: 2390
 	Report: flamer2.aud
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium: SpreadDamage
 		Damage: 14000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Damage: 7000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 7
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 14000
@@ -185,12 +189,14 @@ BigFlamer:
 		FadeInFrames: 12
 
 FlametankExplode:
-	Inherits: ^MediumFlameWeapon
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
+	Warhead@Flame_Medium: SpreadDamage
 		Damage: 28000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Damage: 14000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 14
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 28000

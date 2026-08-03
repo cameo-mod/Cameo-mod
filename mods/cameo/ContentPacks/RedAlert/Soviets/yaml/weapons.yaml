@@ -1,15 +1,17 @@
 IncendiaryM1Carbine:
-	Inherits: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	Inherits: M1Carbine
 	Inherits: ^IncendiaryBulletProjectile
 	ValidTargets: Ground, Water, Air
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Light: SpreadDamage
@@ -385,7 +387,9 @@ FireRocketsThermobaricExplode:
 		Damage: 1
 
 FireballLauncher:
-	Inherits: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	ReloadDelay: 30
 	Range: 6742
 	Report: firebl3.aud
@@ -395,11 +399,11 @@ FireballLauncher:
 		Image: FB1
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium: SpreadDamage
 		Damage: 18000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Damage: 9000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 9
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 18000
@@ -450,7 +454,9 @@ FireballLauncherThermobaric:
 		GlowFadeInFrames: 12
 
 FireballGun:
-	Inherits: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	ReloadDelay: 24
 	Range: 5004
 	Report: flamer2.aud
@@ -460,11 +466,11 @@ FireballGun:
 		Image: FB1
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Damage: 4000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 8000
@@ -478,11 +484,11 @@ FireballGun:
 
 FireballGunExplode:
 	Inherits: FireballGun
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Damage: 2000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 4000
@@ -2521,13 +2527,15 @@ ThermobaricNuclearMaverick:
 		Explosions: small_poof
 
 105mmThermobaric:
-	Inherits: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	Inherits: 105mm
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium: SpreadDamage
 		Damage: 6000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Damage: 3000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 6000
@@ -3203,13 +3211,15 @@ MonsterTank120mm:
 		ImpactActors: true
 
 MonsterTank120mmThermobaric:
-	Inherits: ^HeavyFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Heavy
+	Inherits@proj: ^Projectile_Flame_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	Inherits: MonsterTank120mm
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@Flame_Heavy: SpreadDamage
 		Damage: 40000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Heavy_FriendlyFire: SpreadDamage
 		Damage: 20000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
 		Damage: 20
 
 MonsterTankTusk:
@@ -3640,14 +3650,16 @@ VolkovMagneticWeaponNuclearShells:
 		ImpactActors: true
 
 VolkovMagneticWeaponIncendiary:
-	Inherits: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	Inherits: VolkovMagneticWeapon
 	Inherits: ^IncendiaryBulletProjectile
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Damage: 5000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
 VolkovMagneticWeaponIncendiaryTesla:
@@ -4133,17 +4145,19 @@ ra1_soviets_rifleinfantry_carbine:
 		Damage: 1
 
 ra1_soviets_rifleinfantry_carbine_incendiary:
-	Inherits: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	Inherits: ra1_soviets_rifleinfantry_carbine
 	Inherits: ^IncendiaryBulletProjectile
 	ValidTargets: Ground, Water
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Bullet_Light: SpreadDamage

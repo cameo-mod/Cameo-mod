@@ -9405,20 +9405,22 @@ CHFlameRadiation:
 		Size: 1
 
 CHFlame:
-	Inherits: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	Projectile: InstantExplode
 	ReloadDelay: 11
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium: SpreadDamage
 		Spread: 250
 		Falloff: 100, 75, 50, 25
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Spread: 125
 		Falloff: 100, 75, 50, 25
 		Damage: 1000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Spread: 250
 		Falloff: 100, 75, 50, 25
 		Damage: 1
@@ -9435,7 +9437,7 @@ CHFlameBlue:
 			Medium: 80
 			Heavy: 75
 			Concrete: 20
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Spread: 125
 GLTunnelWeap:
 	Inherits: MachineGun

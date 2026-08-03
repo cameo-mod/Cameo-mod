@@ -23,11 +23,11 @@ M16Laser:
 
 FlamethrowerExplode:
 	Inherits: Flamethrower
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		Damage: 10000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		Damage: 5000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 10000
@@ -185,7 +185,9 @@ MachineGun:
 		Damage: 2
 
 FireballLauncherBuggy:
-	Inherits: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 10
 	Burst: 3
 	BurstDelays: 5
@@ -196,11 +198,11 @@ FireballLauncherBuggy:
 		Image: tsflameall
 		Inaccuracy: 555
 		Palette: tseffect
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 BikeRockets:
@@ -371,7 +373,9 @@ StealthTankMissilesBlackMarket:
 		AimTargetStances: Enemy, Neutral
 
 StealthTankMissilesShrapnel:
-	Inherits: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	Burst: 3
 	Range: 3333
 	ValidTargets: Ground, Water, Air
@@ -387,20 +391,20 @@ StealthTankMissilesShrapnel:
 		Acceleration: 3
 		RangeLimit: 33333
 		Inaccuracy: 333
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 2000
@@ -1002,17 +1006,19 @@ PDLaserLTNK2:
 	Range: 4903
 
 BigFlamer2:
-	Inherits: ^HeavyFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Heavy
+	Inherits@proj: ^Projectile_Flame_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	Burst: 2
 	BurstDelays: 10
 	ReloadDelay: 54
 	Range: 2534
 	Report: flamer2.aud
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@Flame_Heavy: SpreadDamage
 		Damage: 20000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Heavy_FriendlyFire: SpreadDamage
 		Damage: 10000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
 		Amount: 20000
@@ -1025,12 +1031,14 @@ BigFlamer2:
 		FadeInFrames: 12
 
 FlametankExplode2:
-	Inherits: ^HeavyFlameWeapon
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Inherits@wh: ^Warhead_Flame_Heavy
+	Inherits@proj: ^Projectile_Flame_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
+	Warhead@Flame_Heavy: SpreadDamage
 		Damage: 40000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Heavy_FriendlyFire: SpreadDamage
 		Damage: 20000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
 		Damage: 20
 	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
 		Amount: 40000
@@ -1083,7 +1091,9 @@ BlackHandLaser:
 		Damage: 4
 
 BlackHandFlamer:
-	Inherits: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	ReloadDelay: 46
 	Burst: 6
 	BurstDelays: 4
@@ -1094,11 +1104,11 @@ BlackHandFlamer:
 		Image: tsflameall
 		Inaccuracy: 555
 		Palette: tseffect
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Damage: 2000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 4000
@@ -1106,12 +1116,14 @@ BlackHandFlamer:
 		Amount: 2000
 
 BlackHandFlamerExplode:
-	Inherits: ^MediumFlameWeapon
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
+	Warhead@Flame_Medium: SpreadDamage
 		Damage: 12000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		Damage: 6000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 12000

@@ -426,11 +426,11 @@ NaxiFlamerTroop_elite:
 
 NaxiFlamerTroopExplode:
 	Inherits: AsianFlamerTurret
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light: SpreadDamage
 		Damage: 6000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		Damage: 3000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 6000
