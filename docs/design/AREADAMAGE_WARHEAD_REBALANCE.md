@@ -236,3 +236,40 @@ VALID → must NOT be touched. The sweep only acts on a `Warhead@X` node when th
 
 Until then: the Nuclear pilot (committed `851537a03`) is the ONLY live `AreaDamage`; the 55 templates
 stay `SpreadDamage`; the generator is reverted to `SpreadDamage` so it stays consistent with the file.
+
+## 9. AreaDamagePercentage + AtomicCore = the first real in-game proof (2026-08-04)
+
+The Nuclear pilot (`^Warhead_Nuclear_Super`) is an ABSTRACT `^`-template → **never
+instantiated** → the AreaDamage trait was compiled but NEVER actually constructed at
+runtime (the "pilot boot" was a false pass). AtomicCore is the first concrete instantiation.
+
+**`AreaDamagePercentage` warhead (BUILT + BOOTS, uncommitted).** `OpenRA.Mods.Cameo/Warheads/
+AreaDamagePercentageWarhead.cs` — a one-method subclass of `AreaDamageWarhead` overriding
+`InflictDamage` to deal a **percentage of the victim's max HP** (mirrors `HealthPercentageDamage`).
+It REUSES the entire ring/tick/baked-FF spatial pass; its `Falloff` collapses a whole STACK of
+concentric `HealthPercentageDamage` rings into ONE smooth % gradient. Degrades to a single-hit
+%-with-falloff at `Ticks:1`/`MaxRadius:0`.
+
+**AtomicCore / Atomic / RA2Atomic converted (uncommitted, boot-gated to menu).**
+- AtomicCore now `Inherits@nuke: ^Warhead_Nuclear_Super` and uses that AreaDamage nuke **as-is**
+  (maintainer: "no override — superweapons ignore ReloadDelay"). Its 6 stacked `SpreadDamage`
+  rings deleted; its 10 `NuclearMissilePercentage` rings → **one** `AreaDamagePercentage`
+  (`Spread 1000, Damage 100, Falloff 100..0`, radiation/fire types, `UpdatesUnitStatistics: false`).
+  Tesla-shield layers + effects/smudge/shake/flash kept.
+- `RA2Atomic` (inherits Atomic) re-skinned the 6 rings with `RadiationDeath`; consolidated onto a
+  single `Warhead@Nuclear_Super:` override carrying the radiation DamageTypes.
+
+**⚠ Cascade lesson — the empty-type warhead boot crash.** Deleting `Warhead@X` from a `^template`
+orphans any CHILD weapon with a **bare** `Warhead@X:` override (it relied on inheriting the type).
+The bare override then resolves to an **empty type** → the engine builds the abstract base `Warhead`
+→ `GetConstructor([])` null → **NullReferenceException in `ObjectCreator.CreateBasic`** during
+`LoadDefaults` — and the stack **names no weapon**. Here `RA2Atomic`'s bare `Warhead@1Dam_impact:`
+crashed every boot until fixed. Guard: `scratchpad/find_empty_warhead.py` resolves all 37 live
+weapon files and names the offending weapon (0 = safe); `check-yaml` reproduces it fast without a
+full boot. **Run the empty-type scan after ANY template warhead deletion/rename.** (Memory:
+`cameo-empty-warhead-crash`.)
+
+**Build/deploy fact (memory `cameo-dll-deploy-engine-bin`):** `dotnet build` → `engine/bin`
+(gitignored, what the running `engine/bin/OpenRA.exe` loads). `mods/cameo/OpenRA.Mods.Cameo.dll`
+is a git-TRACKED copy that does NOT auto-update (was a month stale) — refresh it from engine/bin
+only for release/commit.

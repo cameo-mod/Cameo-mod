@@ -1,4 +1,4 @@
-^AnyWeapon:
+﻿^AnyWeapon:
 
 
 ###############################################
@@ -6757,20 +6757,21 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	# PILOT (2026-08-03): converted SpreadDamage -> AreaDamage. Friendly fire baked in
-	# (FriendlyFireDamage/Spread 50 = the retired _FriendlyFire twin), plus the nuclear
-	# shockwave: 5 ticks, expanding 0 -> MaxRadius, decreasing TickDamage (small area/hot
-	# first -> wide area/weak). Damage 1000 is the TOTAL summed over the 5 ticks.
+	# Nuclear superweapon warhead (2026-08-04): AreaDamage (flat) + AreaDamagePercentage (% of
+	# max HP), BOTH a 10-ring expanding shockwave (Ticks 10) with a linear Falloff 100->10 and
+	# the SAME 16-armor Versus order. The center is hit by all 10 rings, so center total =
+	# Damage x Versus/100 (geometry-independent). The WEAPON sets ONLY Damage + MaxRadius; all
+	# shape lives here. % Damage 25 = 25% of max HP at Concrete. e.g. AtomicCore = 500000 flat +
+	# 25% -> 500k + 250k = 750k (75%) on a 1,000,000-HP Concrete construction yard.
 	Warhead@Nuclear_Super: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		ValidTargets: Ground, Water, Air
 		Spread: 1000
-		Damage: 1000
-		Falloff: 100, 50, 20, 8, 3
-		Ticks: 5
-		TickDelay: 6
+		Damage: 2000
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Ticks: 10
+		TickDelay: 3
 		MaxRadius: 4000
-		TickDamage: 5, 4, 3, 2, 1
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Versus:
@@ -6793,29 +6794,33 @@ DefuseKit:
 			Flak: 58
 			None: 55
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
+	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 500
+		Spread: 1000
 		Damage: 1
-		Falloff: 100, 50, 20, 8, 3
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Ticks: 10
+		TickDelay: 3
+		MaxRadius: 4000
 		Versus:
-			Shield: 45
-			Concrete: 30
-			Steel: 29
-			Wood: 28
-			Superheavy: 27
-			Heavy: 26
-			Medium: 25
-			Light: 24
-			Scout: 23
-			Spaceship: 22
-			Helicopter: 21
-			Bomber: 20
-			Fighter: 19
-			Heroic: 18
-			Plate: 17
-			Flak: 16
-			None: 15
+			HAZMAT: 50
+			Shield: 155
+			Concrete: 100
+			Steel: 97
+			Wood: 94
+			Superheavy: 91
+			Heavy: 88
+			Medium: 85
+			Light: 82
+			Scout: 79
+			Spaceship: 76
+			Helicopter: 73
+			Bomber: 70
+			Fighter: 67
+			Heroic: 64
+			Plate: 61
+			Flak: 58
+			None: 55
 		UpdatesUnitStatistics: false
 
 ####################################################################
@@ -8540,6 +8545,7 @@ Pistol:
 ^AtomicCore:
 	Inherits: ^TeslaChargedWeapon
 	Inherits: ^TeslaWeapon
+	Inherits@nuke: ^Warhead_Nuclear_Super
 	ValidTargets: Ground, Air
 	Report: nukemisl.aud
 	Warhead@TeslaChargedWeapon: SpreadDamage
@@ -8578,32 +8584,6 @@ Pistol:
 		Spread: 1000
 		Damage: 100000
 		Delay: 5
-	Warhead@1Dam_impact: SpreadDamage
-		Spread: 1000
-		Damage: 20000
-		Falloff: 1000, 500, 250, 125, 50, 25, 5, 0
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 0
-		ValidTargets: Ground, Water, Air
-		AffectsParent: true
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Effect: CreateEffect
 		Explosions: nuke_explosion
 		ImpactSounds: nukexplo.aud
@@ -8626,32 +8606,6 @@ Pistol:
 		Scale: 2.0
 		FadeFrames: 120
 		FadeInFrames: 0
-	Warhead@4Dam_areanuke1: SpreadDamage
-		Spread: 2000
-		Damage: 17500
-		Falloff: 1000, 500, 250, 125, 50, 25, 0
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 3
-		ValidTargets: Ground, Water, Underwater, Air
-		AffectsParent: true
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@4Res_areanukea: DestroyResource
 		Size: 3
 		Delay: 3
@@ -8665,32 +8619,6 @@ Pistol:
 		ImpactSounds: xplobig4.aud
 		Delay: 3
 		ImpactActors: false
-	Warhead@7Dam_areanuke2: SpreadDamage
-		Spread: 3000
-		Damage: 15000
-		Falloff: 1000, 500, 250, 125, 50, 0
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 6
-		ValidTargets: Ground, Water, Underwater, Air
-		AffectsParent: true
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@8Res_areanukeb: DestroyResource
 		Size: 6
 		Delay: 6
@@ -8700,31 +8628,6 @@ Pistol:
 		InvalidTargets: Vehicle, Structure, wall
 		Size: 7
 		Delay: 6
-	Warhead@8Dam_areanuke2: SpreadDamage
-		Spread: 4000
-		Damage: 12500
-		Falloff: 1000, 500, 250, 125, 0
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 9
-		ValidTargets: Ground, Water, Underwater, Air
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@11Res_areanukec: DestroyResource
 		Size: 9
 		Delay: 9
@@ -8734,307 +8637,15 @@ Pistol:
 		InvalidTargets: Vehicle, Structure, wall
 		Size: 9
 		Delay: 9
-	Warhead@10Dam_areanuke3: SpreadDamage
-		Spread: 5000
-		Damage: 10000
-		Falloff: 1000, 500, 250, 0
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 12
-		ValidTargets: Ground, Water, Underwater, Air
-		AffectsParent: true
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@11Dam_areanuke3: SpreadDamage
-		Spread: 6000
-		Damage: 7500
-		Falloff: 1000, 500, 0
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 15
-		ValidTargets: Ground, Water, Underwater, Air
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@NuclearMissilePercentage1: HealthPercentageDamage
-		ValidTargets: Vehicle, Water, Air
-		Spread: 10000
-		Damage: 10
-		AffectsParent: True
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 18
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@NuclearMissilePercentage2: HealthPercentageDamage
-		ValidTargets: Vehicle, Water, Air
-		Spread: 9000
-		Damage: 10
-		AffectsParent: True
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 18
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@NuclearMissilePercentage3: HealthPercentageDamage
-		ValidTargets: Vehicle, Water, Air
-		Spread: 8000
-		Damage: 10
-		AffectsParent: True
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 18
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@NuclearMissilePercentage4: HealthPercentageDamage
-		ValidTargets: Vehicle, Water, Air
-		Spread: 7000
-		Damage: 10
-		AffectsParent: True
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 18
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@NuclearMissilePercentage5: HealthPercentageDamage
-		ValidTargets: Vehicle, Water, Air
-		Spread: 6000
-		Damage: 10
-		AffectsParent: True
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 18
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@NuclearMissilePercentage6: HealthPercentageDamage
-		ValidTargets: Vehicle, Water, Air
-		Spread: 5000
-		Damage: 10
-		AffectsParent: True
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 18
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@NuclearMissilePercentage7: HealthPercentageDamage
-		ValidTargets: Vehicle, Water, Air
-		Spread: 4000
-		Damage: 10
-		AffectsParent: True
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 18
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@NuclearMissilePercentage8: HealthPercentageDamage
-		ValidTargets: Vehicle, Water, Air
-		Spread: 3000
-		Damage: 10
-		AffectsParent: True
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 18
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@NuclearMissilePercentage9: HealthPercentageDamage
-		ValidTargets: Vehicle, Water, Air
-		Spread: 2000
-		Damage: 10
-		AffectsParent: True
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 18
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@NuclearMissilePercentage10: HealthPercentageDamage
-		ValidTargets: Vehicle, Water, Air
-		Spread: 1000
-		Damage: 10
-		AffectsParent: True
-		Versus:
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		Delay: 18
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	# AtomicCore only sets the superweapon Damage + MaxRadius; the 10-ring shockwave,
+	# Falloff, 25% and Versus all come from ^Warhead_Nuclear_Super. 500k flat + 25% =
+	# 750k (75%) on a 1,000,000-HP Concrete construction yard.
+	Warhead@Nuclear_Super:
+		Damage: 500000
+		MaxRadius: 10000
+	Warhead@Nuclear_Super_Percentage:
+		Damage: 25
+		MaxRadius: 10000
 	Warhead@13Shake: ShakeScreen
 		Duration: 20
 		Intensity: 5
