@@ -72,8 +72,9 @@ the sheer count (~20 factions × dozens of units; ~8 source games of art). Weapo
 | **W1. Energy families** | Laser/Railgun/Tesla/TeslaCharged 3-way — BLOCKED on ExtraDamage rework decision | ~0.5 (after decision) |
 | **W2. Per-game/faction art** | projectile+effect templates for ~8 games + ~20 faction uniques (RA2 effects 2/9 done; projectiles 0; TS/others 0) | 4–8 |
 | **W3. Bundle dissolution** | ^RA2SmallArms-style bundles → atomic 3-inherit, rewire hundreds of weapons across ~20 bases | 2–3 |
-| **W4. Mixed collapse (Phase 3)** | ~609 mixed weapons incl. ^TSDefaultMissile per-tier — maintainer-directed | 3–5 |
+| **W4. Mixed collapse + `1Dam` retirement (Phase 3)** | ~609 mixed weapons incl. ^TSDefaultMissile per-tier, PLUS **297 live weapons still on the deprecated `Warhead@1Dam` inline pattern** (DESIGN.md §870 — retired; a bare 1Dam is a bug). Each must be reassigned to the correct `^Warhead_*` template (per-weapon tier/profile judgment); moving onto a template removes its inline `1Dam` + `Versus` together. Maintainer-directed. | 4–7 |
 | **W5. Old-template deletion (Phase 4) + migration cleanup** | delete legacy `^SmallArms…` + dead central RA1/RA2/xcom files | ~1 |
+| **C1. Expanding-damage C# trait** | new warhead trait (min→max radius, N ticks, per-tick delay, single template Versus) to replace the ~10-stacked-warhead nuke/cluster bandaid; then migrate nuke/area weapons onto it. Nuke/cluster custom keys are EXEMPT from the Versus/1Dam rule until this exists. See memory cameo-expanding-damage-trait. | 1–2 |
 | **U1. Unit-class templates** | vehicles DONE; infantry (4 templates + members), defense/aircraft/naval classes | 3–6 |
 | **B1. Balance synthesis/research** | class anchors from aggregated mods (MO/CnCR/RV/SP/DTA/CA…) + ORIGINAL_UNIT_STATS + BALANCE_SYNTHESIS; vehicles anchored, rest TODO | 2–4 |
 | **B2. Apply balance (THE bulk)** | restat every unit+weapon via formula → ledgers → `apply_balance --confirm` → boot, per faction; hundreds of units, each maintainer-signed | 8–15 |
