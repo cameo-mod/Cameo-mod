@@ -2,6 +2,14 @@
 # ONLY central class templates ABOVE the 'DO NOT INHERIT BELOW THIS LINE' divider in
 # weapons.yaml may carry WeaponClass (maintainer rule); pack weapons inherit it.
 # RESTORED from git 04de392b3; NOT engine-loaded => the InvalidWeaponField lint can't strip it.
+#
+# LAW (Tier<->WeaponClass, maintainer 2026-08-03; see memory cameo-tier-weaponclass-law
+# and docs/design/GAME_SPECIFIC_WEAPON_BASES.md): scale Light=0.75, Medium=1.0,
+# Heavy=1.25, Super=1.5. Unit Tech Tier drives it: T1->Light, T2->Medium, T3+->Heavy,
+# super-weapon units->1.5. Between-tier units MIX the two adjacent levels; specialized
+# single-purpose units may be higher tier yet keep a light weapon (case-by-case).
+# Warhead budget = TYPES x LEVELS (1 normal / 2 hybrid-or-between-tier / 4 only for a
+# between-tier lore hybrid). Twins never count. Promote into DESIGN.md sec.4 later.
 
 ^SmallArms: 0.75
 ^SniperWeapon: 0.75

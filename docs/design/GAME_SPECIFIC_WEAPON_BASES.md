@@ -55,9 +55,13 @@ Used by 5 weapons; each **overrides the projectile art per unit** (`Image: tsnod
 `TrailImage: black_smokey`, …), so TS missiles are unit-specific art, not one shared sprite.
 
 **Decomposition (target shape):**
-- `@wh: ^Warhead_MissileAP_<lvl>` — collapse the Medium+Light blend to **one** warhead.
-  *Which profile/level replaces the blend is a balance decision* → Phase 3, and per
-  `cameo-warhead-change-permission` needs explicit maintainer sign-off.
+- `@wh:` — resolve **per user by unit tier**, NOT one global warhead (maintainer,
+  2026-08-03). Per the Tier↔WeaponClass law (memory `cameo-tier-weaponclass-law`,
+  `weapon_classes.yaml` header): T1→`^Warhead_MissileAP_Light`, T2→`_Medium`,
+  T3+→`_Heavy`; a **between-tier** unit keeps *both* adjacent levels (the Medium+Light
+  stack is a legitimate between-T1/T2 weapon, not merely a hack). Warhead budget =
+  TYPES×LEVELS (≤2, or 4 only for a between-tier lore hybrid). Warhead changes still
+  need sign-off per `cameo-warhead-change-permission`.
 - `@proj: ^Projectile_Missile_<lvl>` carrying `Report: missile6.aud`; each unit keeps its
   own `Image`/`TrailImage` override (or gets a faction projectile). Lives in **TS Shared**.
 - `@fx:` central `^Effect_Missile_<lvl>` unless the unit has a special explosion, in which
@@ -133,13 +137,15 @@ them to the `^Projectile_*` / `^Effect_*` grammar and move the assets into the g
 
 ## §5 — Maintainer decisions required
 
-1. **`^TSDefaultMissile` collapse** — which single `^Warhead_MissileAP_<lvl>` (and level)
-   replaces the Medium+Light blend for each of its 5 users? (Phase 3, warhead permission.)
+1. **`^TSDefaultMissile` collapse** — ✅ RESOLVED (2026-08-03): **per-user by unit tier**
+   under the Tier↔WeaponClass law (§1). Applied unit-by-unit in Phase 3.
 2. **Per-game effect extraction** — approve extracting inline game explosions (§3) into
    `^Effect_<family>_<game>` templates in each game's `Shared/` folder. Naming: confirm
-   `^Effect_Bullet_RA2` vs `^Effect_Bullet_Ra2` (game suffix casing).
-3. **PROJECTILE-base relocation order** — which game's Shared projectile/effect pack to
-   build first (recommend RA2, the largest and most inlined).
+   the game-suffix casing (`^Effect_Bullet_RA2` matching the existing `^RA2…` base prefix
+   vs `_Ra2`) and whether the game variant carries a level (`^Effect_Bullet_Light_RA2`).
+   *(Explanation in progress with the maintainer.)*
+3. **PROJECTILE-base relocation order** — ✅ RESOLVED (2026-08-03): **RA2 first** (largest,
+   most inlined).
 
 None of these block the remaining Phase-2 family retrofits (Flame/Chem/Explosions/Melee/
 Arrow/Magic/Nuclear): those convert single-inherit blocks and correctly leave every base
