@@ -212,7 +212,19 @@ VALID → must NOT be touched. The sweep only acts on a `Warhead@X` node when th
 1. Resolution-aware script (PROVIDES graph, like the earlier retrofit repairs): for every weapon whose
    `Warhead@X` resolves to a `^Warhead_*` template — (a) delete `-Warhead@X_FriendlyFire:` removal
    lines; (b) delete `Warhead@X_FriendlyFire: …` twin blocks; (c) strip ` SpreadDamage` from the
-   `Warhead@X:` main override → bare (inherits the AreaDamage type). Dry-run counts first.
+   `Warhead@X:` main override → bare (inherits the AreaDamage type); (d) if that main override also
+   restates `ValidRelationships: Neutral, Enemy`, strip it too (so the template's `Ally, Neutral, Enemy`
+   + baked FF stands). Dry-run counts first.
+
+   **No separate per-weapon AA FF override exists to remove** (maintainer asked 2026-08-03): AA damage
+   weapons just inherit the template's enemy-only default, so the universal AreaDamage+FF conversion
+   (plus step (d)) gives them FF automatically. The `ValidRelationships: Enemy` overrides that DO exist
+   in the tree are on **condition warheads** (snare / lock-on / corroded `GrantExternalCondition`) —
+   correctly enemy-only, MUST NOT be touched.
+
+   **Reduce the MissileAA template spread** (maintainer 2026-08-03): so the now-universal FF on anti-air
+   is well-contained (fighters can dodge the 50%/50% ally splash). Add a per-family spread override for
+   `MissileAA` in the generator, tighter than the default `400/600/800` (e.g. ~`250/350/450` — tune).
 2. Re-apply the generator changes (main → `AreaDamage`; `ValidRelationships: Ally, Neutral, Enemy`;
    add `FriendlyFireDamage: 50` + `FriendlyFireSpread: 50`; remove the FF twin; naming `^Warhead_{tag}`
    + `Warhead@{tag}_Percentage`; `AREA_RINGS = {Nuclear: ticks5/delay6/max4000/5,4,3,2,1}`;
