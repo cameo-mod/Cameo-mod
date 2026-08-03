@@ -201,5 +201,43 @@ original TS/RA2 factions deliberately fall back to the original-game look.
 | **SP** | fully split `^RifleDamage`/`^RifleWeapon`/`^Small_Bang` | the pure 3-way ideal; many named templates |
 | **CABAL (cameo)** | per-faction combined proj+fx template, inherited last | faction identity in one place; but merges `@proj`+`@fx` |
 
-**Open questions to resolve before building anything are in the handoff to the
-maintainer (not decided here).**
+---
+
+## PART 6 — DECISIONS (maintainer, 2026-08-03) + launch-angle finding
+
+**Locked invariant.** Every weapon inherits **exactly ONE `@proj` + exactly ONE
+`@fx`**, plus its warhead(s) mixed under the TYPES×LEVELS budget (1/2/4, see
+`cameo-tier-weaponclass-law`). No weapon carries two projectile or two effect inherits.
+
+**Granularity — SPLIT everything.** Projectile and effect are always separate templates
+(`^Projectile_<fam>_<scope>` + `^Effect_<fam>_<scope>`), never combined. `^CabalMissile`
+(the proj+fx bundle) is therefore **split** into `^Projectile_Missile_Cabal` +
+`^Effect_Missile_Cabal`.
+
+**Three-tier scope.**
+- **Central** = global classic fallback (factions with no own art).
+- **Per-game shared** = ORIGINAL factions of a game share it. Confirmed: **TS GDI + Nod
+  share the same original TS art** → one `_TS` set; likewise RA2 Allies + Soviets → `_RA2`.
+- **Per-faction unique** = crossover / custom factions get their OWN art. Confirmed
+  unique: **Forgotten, CABAL** (and similar). CABAL blue trail stays, just split.
+
+**Minimize inlining.** The template is the default; a weapon overrides it only when
+*absolutely necessary*. The current good inline art (Guardian GI launch, elite red
+trails, contrail colours) is preserved by folding the common case into templates and
+leaving only true exceptions inline. **Move cameo's projectiles/effects closer to RV/SP.**
+
+**Launch-angle investigation (answered).** RA2 sets a launch angle at 108 sites with no
+dominant value (0,5,25,30,45,50,60,64,66,70,75,83,96,100,111,120,125,128,180,200,222,255…).
+It CANNOT be one global value — but it clusters into **launch STYLES = projectile
+subtypes**:
+| Style | angle band | subtype template | examples |
+|---|---|---|---|
+| Vertical VLS homing | ~200–255 (min=max) | `^Projectile_Missile_<scope>` | Guardian GI (200), most homing SAMs |
+| Ballistic arc | ~111–128 | `^Projectile_BallisticMissile_<scope>` | V3, Dreadnought, Boomer, artillery |
+| Direct / low | ~0–75 | direct variant or inline override | flat-fire rockets |
+So launch angle **moves into the projectile template per launch-style**, with a canonical
+angle each; only genuine oddballs override. Guardian GI's 200 = the Vertical-VLS default.
+
+**Sequence unchanged:** RA2 first, then TS; projectile templates → effect templates →
+dissolve game bundles onto `@wh`(central) + `@proj` + `@fx`. Mechanical Phase-2 family
+retrofits continue in parallel (they don't touch this layer).
