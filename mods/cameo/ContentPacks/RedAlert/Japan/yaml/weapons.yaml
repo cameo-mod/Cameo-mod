@@ -236,14 +236,16 @@ HeavyPlasmaFlamer:
 		Explosions: blue_building_napalm
 
 SamuraiBlade:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 20
 	Range: 1637
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		Damage: 5000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
 SamuraiBladeCharged:
@@ -271,7 +273,9 @@ SamuraiBladeCharged:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 JapanMaidenBow:
-	Inherits: ^ArrowWeapon
+	Inherits@wh: ^Warhead_Arrow_Light
+	Inherits@proj: ^Projectile_Arrow_Light
+	Inherits@fx: ^Effect_Arrow_Light
 	ReloadDelay: 100
 	Range: 7500
 	MinRange: 1500
@@ -294,9 +298,9 @@ JapanMaidenBow:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@ArrowWeapon: SpreadDamage
+	Warhead@Arrow_Light: SpreadDamage
 		Damage: 40000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage: HealthPercentageDamage
 		Damage: 20
 	Warhead@Effect: CreateEffect
 		ValidRelationships: Neutral, Enemy
@@ -313,11 +317,11 @@ JapanMaidenBowEnergized:
 	Inherits: JapanMaidenBow
 	Projectile: Missile
 		ContrailStartColor: FFCC77
-	Warhead@ArrowWeapon: SpreadDamage
+	Warhead@Arrow_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -402,9 +406,9 @@ BallistaSingleShotAir:
 	Range: 9214
 	ReloadDelay: 200
 	ValidTargets: Air
-	Warhead@ArrowWeapon: SpreadDamage
+	Warhead@Arrow_Light: SpreadDamage
 		Damage: 160000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage: HealthPercentageDamage
 		Damage: 80
 
 	MinRange: 1845
@@ -2104,22 +2108,24 @@ ExecutionerDeath:
 	SoundVolume: 10
 
 ExecutionerSword:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 300
 	Report: JUShoEx_swordSwipea.wav, JUShoEx_swordSwipeb.wav, JUShoEx_swordSwipec.wav, JUShoEx_swordSwiped.wav, JUShoEx_swordSwipee.wav, JUShoEx_swordSwipef.wav
 	SoundVolume: 10
 	Range: 3000
 	ValidTargets: Ground, Water, Air
 	Projectile: InstantExplode
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 6000
 		Damage: 600000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 3000
 		Damage: 300000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 3000
 		Damage: 300

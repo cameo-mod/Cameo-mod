@@ -1607,7 +1607,6 @@ HueyFireMissiles:
 TKMDroneExplode:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Explosion_Medium
-	-Report:
 	ValidTargets: Ground, Water
 	Warhead@Concussion_Medium: SpreadDamage
 		ValidTargets: Ground, Water

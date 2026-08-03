@@ -571,15 +571,17 @@ IxianDisable_EMP:
 		ValidTargets: Ground, Ship
 
 d2k_munitions_explosion:
-	Inherits: ^MagicWeapon
-	Warhead@MagicWeapon: SpreadDamage
+	Inherits@wh: ^Warhead_Magic_Heavy
+	Inherits@proj: ^Projectile_Magic_Heavy
+	Inherits@fx: ^Effect_Magic_Heavy
+	Warhead@Magic_Heavy: SpreadDamage
 		Delay: 20
 		Damage: 40000
 		Spread: 2000
 		Falloff: 100, 50, 25, 0
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+	Warhead@Magic_Heavy_Percentage: HealthPercentageDamage
 		Delay: 20
 		Damage: 20
 		Spread: 2000

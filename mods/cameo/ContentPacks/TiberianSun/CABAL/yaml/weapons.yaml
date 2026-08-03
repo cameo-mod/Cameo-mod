@@ -337,7 +337,9 @@ TSHSeekerLaunch:
 		ValidTargets: Ground, Water, Air
 
 eliminator_blades:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 25
 	Range: 2048
 	Burst: 2
@@ -345,11 +347,11 @@ eliminator_blades:
 	Report: pzehit00.aud
 	Projectile: Bullet
 		Speed: 1c682
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium: SpreadDamage
 		Damage: 12000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		Damage: 6000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@Effect: CreateEffect
 		Explosions: poof
@@ -357,7 +359,9 @@ eliminator_blades:
 		ValidTargets: Ground, Water
 
 CabalBerserkerBlades:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 30
 	Range: 2048
 	Burst: 3
@@ -365,11 +369,11 @@ CabalBerserkerBlades:
 	Report: pzehit00.aud
 	Projectile: Bullet
 		Speed: 1c682
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium: SpreadDamage
 		Damage: 74000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		Damage: 37000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 37
 	Warhead@Effect: CreateEffect
 		Explosions: poof

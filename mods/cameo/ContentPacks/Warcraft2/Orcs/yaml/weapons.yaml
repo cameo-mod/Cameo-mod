@@ -1,14 +1,16 @@
 wc2gruntslice2:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 18
 	Range: 1600
 	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 	Projectile: InstantHit
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium: SpreadDamage
 		Damage: 24000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		Damage: 12000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 12
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
@@ -34,16 +36,18 @@ wc2axeFirespear:
 		ImpactSounds: wc2_axe.aud
 
 wc2ogrepunch:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 20
 	Range: 1660
 	Report: wc2_punch.aud
 	Projectile: InstantHit
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium: SpreadDamage
 		Damage: 30000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		Damage: 15000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_punch.aud

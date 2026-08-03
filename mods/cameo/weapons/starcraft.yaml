@@ -40,15 +40,17 @@ GhostSniperBunker:
 		Range: 10c0 #8c0
 
 SCBROODLING:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	Report: zerglinghit.wav
 	ReloadDelay: 6
 	Range: 1200
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -220,16 +222,18 @@ Scarab:
 		InvalidTargets: Vehicle, Structure, wall, Husk
 
 ^WorkerAttack:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	Range: 1500
 	ReloadDelay: 25
 	Report: repair11.aud
 	TargetActorCenter: True
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		Damage: 5000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
 SCVAttack:

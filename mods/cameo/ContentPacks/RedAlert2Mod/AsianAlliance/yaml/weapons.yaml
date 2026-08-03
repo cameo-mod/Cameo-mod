@@ -237,16 +237,18 @@ RA2AsianShotgunFanatic3:
 	BurstDelays: 3
 
 AsianSamuraiSword1:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 40
 	Report: aa_samu_kil1.wav
 	Range: 1579
 	Projectile: InstantHit
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium: SpreadDamage
 		Damage: 20000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		Damage: 10000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
 
 AsianSamuraiSword2:
@@ -344,18 +346,20 @@ AsianMaidenBow_elite:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Spread: 125
 AsianNinjaStar:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	InvalidTargets: Structure, wall, Husk
 	Report: toss1.aud
 	ReloadDelay: 25
 	Range: 4560
 	Projectile: Bullet
 		Speed: 456
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium: SpreadDamage
 		Damage: 20000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		Damage: 10000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piffs
@@ -368,16 +372,18 @@ AsianNinjaStar_elite:
 	BurstDelays: 3
 
 AsianCrocBite:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 39
 	Report: galiatta.wav, galiattb.wav
 	Range: 1345
 	Projectile: InstantHit
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium: SpreadDamage
 		Damage: 16000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		Damage: 8000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 	-Warhead@Effect:
 

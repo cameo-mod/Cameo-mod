@@ -557,18 +557,20 @@ Wraith_ToxinMissiles:
 
 	MinRange: 1675
 contaminator_attack:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 20
 	Report: contaminator_attack_2.wav
 	Range: 2000
 	Projectile: InstantHit
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		Damage: 5000
 		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
 

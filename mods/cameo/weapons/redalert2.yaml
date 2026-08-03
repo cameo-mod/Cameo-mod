@@ -1011,7 +1011,9 @@ IFVChronoBeam:
 		Damage: 600
 
 SonicZap:
-	Inherits: ^MagicWeapon
+	Inherits@wh: ^Warhead_Magic_Heavy
+	Inherits@proj: ^Projectile_Magic_Heavy
+	Inherits@fx: ^Effect_Magic_Heavy
 	ReloadDelay: 60
 	Range: 6000
 	Report: vdolatta.wav
@@ -1026,7 +1028,7 @@ SonicZap:
 		BeyondTargetRange: 256
 		Blockable: true
 		Color: 55FFFF55
-	Warhead@MagicWeapon: SpreadDamage
+	Warhead@Magic_Heavy: SpreadDamage
 		Range: 0, 32
 		Falloff: 100, 50
 		Damage: 2000
@@ -1034,7 +1036,7 @@ SonicZap:
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Water, Underwater
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+	Warhead@Magic_Heavy_Percentage: HealthPercentageDamage
 		Range: 0, 32
 		Falloff: 100, 50
 		Damage: 1
@@ -1311,15 +1313,17 @@ RA2DroneSparks:
 		ExplosionPalette: ra2effect
 
 RA2BrutePunch:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 37
 	Report: ibruattb.wav, ibruattc.wav, ibruattd.wav, ibruatte.wav, ibruattf.wav #ibruatta.wav
 	Range: 1616
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium: SpreadDamage
 		Damage: 20000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		Damage: 10000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
 	-Warhead@Effect:
 
@@ -1347,15 +1351,17 @@ SquidGrab:
 	Projectile: InstantHit
 
 RA2Shovel:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 30
 	Report: isl1atta.wav
 	Range: 1500
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 IonPulseDischarge:
