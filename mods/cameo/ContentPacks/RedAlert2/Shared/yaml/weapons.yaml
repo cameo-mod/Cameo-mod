@@ -2039,13 +2039,6 @@ RA2TorpTube_elite:
 	Warhead@Bullet_Light: SpreadDamage
 		Spread: 200
 		Damage: 2000
-		Versus:
-			None: 100
-			Light: 55
-			Medium: 40
-			Heavy: 25
-			Wood: 85
-			Concrete: 70
 
 ra2_soviets_conscript_carbine:
 	Inherits: ^RA2SmallArms
@@ -2566,10 +2559,6 @@ RA2MODTrackMG:
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 3000
 		ValidTargets: Ground, Air
-		Versus:
-			Heavy: 20
-			Wood: 20
-			Concrete: 10
 
 RA2MODHIFVMG:
 	Inherits: RA2M60
