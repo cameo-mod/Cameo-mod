@@ -3600,7 +3600,8 @@ VolkovMagneticWeaponTeslaFragment2:
 	-Warhead@TeslaArc:
 
 VolkovMagneticWeaponNuclearShells:
-	Inherits: ^NuclearWarhead
+	Inherits@wh: ^Warhead_Nuclear_Super
+	Inherits@fx: ^Effect_Nuclear_Super
 	Inherits: VolkovMagneticWeapon
 	ReloadDelay: 40
 	Burst: 1
@@ -3639,10 +3640,10 @@ VolkovMagneticWeaponNuclearShells:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@NuclearWarhead: SpreadDamage
+	Warhead@Nuclear_Super: SpreadDamage
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
+	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
 		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Effect: CreateEffect
@@ -4088,7 +4089,8 @@ TeslaRAGatlingTankCannonArcFragment1AA:
 	-Warhead@TeslaArc:
 
 MADTankDetonate:
-	Inherits: ^NuclearWarhead
+	Inherits@wh: ^Warhead_Nuclear_Super
+	Inherits@fx: ^Effect_Nuclear_Super
 	InvalidTargets: MADTank, Infantry
 	Warhead@Damage: HealthPercentageDamage
 		Spread: 12500
@@ -4096,13 +4098,13 @@ MADTankDetonate:
 		AffectsParent: true
 		Delay: 1
 		InvalidTargets: Infantry
-	Warhead@NuclearWarhead: SpreadDamage
+	Warhead@Nuclear_Super: SpreadDamage
 		Spread: 1250
 		Damage: 75000
 		Delay: 2
 		AffectsParent: true
 		InvalidTargets: Infantry
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
+	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
 		Spread: 15000
 		Damage: 15
 		Delay: 3

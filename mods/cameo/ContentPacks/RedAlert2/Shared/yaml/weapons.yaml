@@ -1864,14 +1864,15 @@ RA2SCUD_tesla:
 		AimTargetStances: Enemy, Neutral
 
 RA2SCUDELITE:
-	Inherits: ^NuclearWarhead
+	Inherits@wh: ^Warhead_Nuclear_Super
+	Inherits@fx: ^Effect_Nuclear_Super
 	Inherits: RA2SCUD
 	ReloadDelay: 160
 	Range: 24000
-	Warhead@NuclearWarhead: SpreadDamage
+	Warhead@Nuclear_Super: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 30000
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
+	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 15
 	Warhead@Effect: CreateEffect

@@ -159,13 +159,14 @@ RA2KirovBomb_tesla:
 		AimTargetStances: Enemy, Neutral
 
 RA2KirovBomb_nuclear:
-	Inherits@rad: ^NuclearWarhead
+	Inherits@wh: ^Warhead_Nuclear_Super
+	Inherits@fx: ^Effect_Nuclear_Super
 	Inherits: RA2KirovBomb
-	Warhead@NuclearWarhead: SpreadDamage
+	Warhead@Nuclear_Super: SpreadDamage
 		Damage: 80000
 		Spread: 800
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
+	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
 		Damage: 40
 		Spread: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
@@ -197,11 +198,11 @@ RA2KirovBomb_nuclear_elite:
 		Damage: 50
 		Spread: 5000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@NuclearWarhead: SpreadDamage
+	Warhead@Nuclear_Super: SpreadDamage
 		Damage: 100000
 		Spread: 1000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
+	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
 		Damage: 50
 		Spread: 5000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
@@ -370,13 +371,14 @@ RA160mmE_elite:
 	BurstDelays: 3
 
 RA160mmE_rad_elite:
-	Inherits@rad: ^NuclearWarhead
+	Inherits@wh: ^Warhead_Nuclear_Super
+	Inherits@fx: ^Effect_Nuclear_Super
 	Inherits: RA160mm_rad
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 12345
-	Warhead@NuclearWarhead: SpreadDamage
+	Warhead@Nuclear_Super: SpreadDamage
 		Damage: 36000
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
+	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
 		Damage: 18
 	Warhead@Effect: CreateEffect
 		Explosions: ra2nukesmall
