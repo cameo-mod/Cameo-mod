@@ -331,7 +331,7 @@ JapanMaidenBowEnergized:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -432,7 +432,7 @@ BallistaSingleShotAirEnergized:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -977,9 +977,9 @@ THMiss:
 		ImpactActors: false
 
 M60mgJapan:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 15
 	Burst: 5
@@ -988,7 +988,7 @@ M60mgJapan:
 	Report: pillbox1.aud
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 M60mgWaveforce:
@@ -997,7 +997,7 @@ M60mgWaveforce:
 	Inherits: ^WaveforceBulletProjectile
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 ZeroFighterArrows:
@@ -1148,7 +1148,7 @@ JHindPlasmaCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1369,7 +1369,7 @@ HovercraftPlasmaCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1377,7 +1377,7 @@ HovercraftPlasmaCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1409,7 +1409,7 @@ HovercraftPlasmaCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1417,7 +1417,7 @@ HovercraftPlasmaCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1480,7 +1480,7 @@ JapaneseHovercraftFlakAA:
 	ValidTargets: Air
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Air
@@ -1498,9 +1498,9 @@ JapaneseHovercraftFlakAAkWaveforce:
 	Inherits: ^WaveforceBulletProjectile
 
 Type89Cannon:
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 52
 	Range: 5243
 	Report: cannon1.aud
@@ -1508,7 +1508,7 @@ Type89Cannon:
 		Speed: 524
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -1539,7 +1539,7 @@ Type89PlasmaCannon:
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -1739,9 +1739,9 @@ WaveforceCannon:
 		ValidTargets: Air
 
 OISmallCannon:
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 45
 	Range: 5394
 	Report: cannon1.aud
@@ -1749,7 +1749,7 @@ OISmallCannon:
 		Speed: 539
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -1803,9 +1803,9 @@ OISmallPlasmaCannon:
 		Explosions: blue_building
 
 OIBigCannon:
-	Inherits@wh: ^CannonHE_Heavy
-	Inherits@proj: ^ProjectileShell_Heavy
-	Inherits@fx: ^EffectCannon_Heavy
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cannon_Heavy
 	ReloadDelay: 55
 	Range: 5394
 	Report: tank5.aud
@@ -1813,7 +1813,7 @@ OIBigCannon:
 		Speed: 539
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 24000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 12
 	Warhead@Effect: CreateEffect
 		Explosions: poof
@@ -2466,11 +2466,11 @@ ArmoredCarMG_AA:
 		ValidTargets: Air
 	Warhead@CannonAP_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Air
@@ -2480,7 +2480,7 @@ ArmoredCarMG_AA:
 		ValidTargets: Air
 	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Air
@@ -2492,7 +2492,7 @@ ArmoredCarMG_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 ArmoredCarMGWaveforce:

@@ -57,9 +57,9 @@ TS120mmRail:
 
 TS120mmTal:
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 50
 	Range: 6201
 	Projectile: Bullet
@@ -68,7 +68,7 @@ TS120mmTal:
 		LaunchAngle: 0
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 24000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 12
 
 TS120mmTalRail:
@@ -911,7 +911,7 @@ TSJumpCannon:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
 
@@ -954,9 +954,9 @@ TSAssaultCannonSonic:
 		Damage: 1
 
 TSAssaultCannonTal:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 40
 	Burst: 2
 	BurstDelays: 2
@@ -968,7 +968,7 @@ TSAssaultCannonTal:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 4
 
@@ -1078,9 +1078,9 @@ KodiakAAGuns:
 		Damage: 3
 
 TSHammerheadGun:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 6
 	Range: 5451
 	Report: cygun1.aud
@@ -1088,7 +1088,7 @@ TSHammerheadGun:
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water
 
@@ -1112,9 +1112,9 @@ TSAAPCCannon:
 	ValidTargets: Ground, Water, Air
 
 TSMechMGII:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 8
 	Range: 7002
 	Report: aacanon3.aud
@@ -1131,7 +1131,7 @@ TSMechMGII:
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 16000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Ground, Water
 

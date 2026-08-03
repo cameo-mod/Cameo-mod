@@ -226,7 +226,7 @@ RA2120mm_rad:
 		Damage: 3
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 6000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
 
 RA2120mm_fire:
@@ -421,7 +421,7 @@ RA2120xmm:
 		Damage: 2
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_apoc_explosion
@@ -453,7 +453,7 @@ RA2120xmm_rad:
 		Damage: 1
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 2000
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 2000
@@ -463,7 +463,7 @@ RA2120xmm_rad:
 		Damage: 1
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 2000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 
 RA2120xmm_fire:
@@ -744,11 +744,11 @@ RA2vulcan:
 	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 RA2CRFlakGuyGun:
@@ -806,7 +806,7 @@ RA2FlakTrackAAGun:
 		-LaunchAngle:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Air
@@ -816,7 +816,7 @@ RA2FlakTrackAAGun:
 		ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Air

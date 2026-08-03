@@ -13,9 +13,9 @@ OP2bombchassisTargeting:
 ####################################################################################################
 
 edenMachineGun:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 11
 	Burst: 3
@@ -24,13 +24,13 @@ edenMachineGun:
 	Report: mgun11.aud
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 plymouthMachineGun:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 20
 	Burst: 7
@@ -39,7 +39,7 @@ plymouthMachineGun:
 	Report: mgun11.aud
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 edenMobileLaser:
@@ -85,9 +85,9 @@ edenMobileLaser:
 		Damage: 1
 
 edenMobileLaserTiger:
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	Inherits: edenMobileLaser
 	ReloadDelay: 16
 	Range: 7030
@@ -102,7 +102,7 @@ edenMobileLaserTiger:
 	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -499,7 +499,7 @@ plymouthStickyTiger:
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@MediumCannon: SpreadDamage
@@ -536,13 +536,13 @@ plymouthStickyDefence:
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@MediumChemicalWeapon: SpreadDamage

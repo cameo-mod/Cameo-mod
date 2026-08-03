@@ -4,9 +4,9 @@
 ####################################################################################################
 
 ^RA2SmallArms:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piff
@@ -16,9 +16,9 @@
 		ExplosionPalette: ra2effect
 
 ^RA2Chaingun:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect
@@ -100,9 +100,9 @@
 		InvalidTargets: Ship, Structure, Bridge
 
 ^RA2TankDestroyerCannon:
-	Inherits@wh: ^CannonAP_Light
-	Inherits@proj: ^ProjectileShell_Light
-	Inherits@fx: ^EffectCannon_Light
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Cannon_Light
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_small_explosion
 		ExplosionPalette: ra2effect
@@ -113,9 +113,9 @@
 		ImpactSounds: gexpwasa.wav
 
 ^RA2MediumCannon:
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_medium_explosion
 		ExplosionPalette: ra2effect
@@ -126,9 +126,9 @@
 		ImpactSounds: gexpwasa.wav
 
 ^RA2HeavyCannon:
-	Inherits@wh: ^CannonHE_Heavy
-	Inherits@proj: ^ProjectileShell_Heavy
-	Inherits@fx: ^EffectCannon_Heavy
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cannon_Heavy
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_explosion
 		ExplosionPalette: ra2effect
@@ -253,7 +253,7 @@ RA2105mm:
 		Speed: 528
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 
 RA2105mm_elite:
@@ -271,7 +271,7 @@ RA2sabot:
 		Speed: 1408
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 80000
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 40
 
 RA2sabot_elite:
@@ -280,7 +280,7 @@ RA2sabot_elite:
 	Range: 8040
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 160000
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 80
 
 RA2MirageGun:
@@ -309,7 +309,7 @@ RA2MirageGun:
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	Warhead@Effect:
@@ -908,7 +908,7 @@ RA2120mm:
 		Speed: 514
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
 RA2120mm_elite:
@@ -931,7 +931,7 @@ RA2155mm:
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 16000
 		Spread: 400
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
 		Spread: 400
 
@@ -2021,7 +2021,7 @@ ra2_soviets_conscript_carbine:
 	Report: iconatta.wav, iconattb.wav, iconattc.wav, iconattd.wav, iconatte.wav
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 ra2_soviets_conscript_carbine_elite:
@@ -2054,13 +2054,13 @@ BlackHawkCannon:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 
@@ -2110,13 +2110,13 @@ RA2CRM60:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -2146,7 +2146,7 @@ RA2CRM60H:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SniperWeapon: SpreadDamage
@@ -2274,7 +2274,7 @@ RA2GattlingMG1:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -2285,13 +2285,13 @@ RA2GattlingMG1_AA:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
 		Damage: 4000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 2
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 2
 
@@ -2308,13 +2308,13 @@ RA2GattlingMG2_AA:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
 		Damage: 4000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 2
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 2
 
@@ -2378,13 +2378,13 @@ RA220mmrapid:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 2
 
@@ -2838,15 +2838,15 @@ SealBomb:
 	Inherits: TanyaBomb
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 20000
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 20000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 20000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@Grenade: SpreadDamage
 		Damage: 20000
@@ -2878,13 +2878,13 @@ BorisAKM:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 2
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 4000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 2
 

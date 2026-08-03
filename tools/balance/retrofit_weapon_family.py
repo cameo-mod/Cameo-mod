@@ -5,11 +5,22 @@
 Converts SINGLE-inherit weapons/intermediates from an old full-stack warhead
 template to the 3-inherit model (@wh + @proj + @fx), STRUCTURALLY:
   - only blocks whose ONLY old-warhead-template inherit is the target old
-    template (mixed = 2+ old templates of ANY family are SKIPPED → Phase B);
+    template (mixed = 2+ old templates of ANY family are SKIPPED -> Phase B);
   - the old template DEFINITION block (^SmallArms:) is never touched;
   - PRESERVES every Damage verbatim — only Inherits lines + Warhead@ KEY names
-    change (Warhead@<Old> / <Old>Percentage / <Old>FriendlyFire → new key);
+    change (Warhead@<Old> / <Old>Percentage / <Old>FriendlyFire -> new key);
+  - naming (docs/design/WEAPON_3WAY_SPLIT.md underscore-section law):
+    @wh -> ^Warhead_<Family>_<Level>, @proj -> ^Projectile_<Fam>_<Lvl>,
+    @fx -> ^Effect_<Fam>_<Lvl>; the warhead KEY keeps the bare profile name
+    (Warhead@Bullet_Light), twin keys gain an underscore (Bullet_Light_Percentage).
   - BOM-safe (utf-8-sig); LF output.
+
+The skipped-block REPAIR is resolution-based: a leftover `Warhead@T` / `-Warhead@T`
+in a non-converted block is renamed to the new key ONLY when the block's resolved
+parent chain no longer provides `Warhead@T` but does provide the new key (i.e. T
+flowed through a now-converted intermediate). A `-Warhead@T` that still resolves
+against an UNCONVERTED provider (e.g. a mixed double-base template like
+^TSDefaultMissile) is left untouched — renaming it would orphan the removal.
 
 Usage:
   retrofit_weapon_family.py --old SmallArms,Chaingun            # dry run (report)
@@ -20,45 +31,47 @@ import argparse, os, re, sys
 
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..", "mods", "cameo")
 
-# old template -> (warhead, projectile|None, effect)
+# old template -> (warhead KEY base, projectile template|None, effect template)
 TRIPLE = {
-    "SmallArms": ("Bullet_Light", "ProjectileBullet_Light", "EffectBullet_Light"),
-    "Chaingun": ("Bullet_Medium", "ProjectileBullet_Medium", "EffectBullet_Medium"),
-    "TankDestroyerCannon": ("CannonAP_Light", "ProjectileShell_Light", "EffectCannon_Light"),
-    "MediumCannon": ("CannonHE_Medium", "ProjectileShell_Medium", "EffectCannon_Medium"),
-    "HeavyCannon": ("CannonHE_Heavy", "ProjectileShell_Heavy", "EffectCannon_Heavy"),
-    "LightMissile": ("MissileAP_Light", "ProjectileMissile_Light", "EffectMissile_Light"),
-    "MediumMissile": ("MissileAP_Medium", "ProjectileMissile_Medium", "EffectMissile_Medium"),
-    "HeavyMissile": ("MissileAP_Heavy", "ProjectileMissile_Heavy", "EffectMissile_Heavy"),
-    "FlakWeapon": ("Flak_Medium", "ProjectileFlak_Medium", "EffectFlak_Medium"),
-    "HeavyAAWeapon": ("MissileAA_Heavy", "ProjectileFlak_Heavy", "EffectFlak_Heavy"),
-    "LightFlameWeapon": ("Flame_Light", "ProjectileFlame_Light", "EffectFlame_Light"),
-    "MediumFlameWeapon": ("Flame_Medium", "ProjectileFlame_Medium", "EffectFlame_Medium"),
-    "HeavyFlameWeapon": ("Flame_Heavy", "ProjectileFlame_Heavy", "EffectFlame_Heavy"),
-    "LightChemicalWeapon": ("Chemical_Light", "ProjectileChem_Light", "EffectChem_Light"),
-    "MediumChemicalWeapon": ("Chemical_Medium", "ProjectileChem_Medium", "EffectChem_Medium"),
-    "HeavyChemicalWeapon": ("Chemical_Heavy", "ProjectileChem_Heavy", "EffectChem_Heavy"),
-    "Grenade": ("Demolition_Light", "ProjectileGrenade_Light", "EffectExplosion_Light"),
-    "ShrapnelWeapon": ("Concussion_Medium", None, "EffectExplosion_Medium"),
-    "HeavyBomb": ("Demolition_Heavy", None, "EffectExplosion_Heavy"),
-    "NuclearWarhead": ("Nuclear_Super", None, "EffectNuclear_Super"),
-    "SwordWeapon": ("Melee_Medium", "ProjectileMelee_Medium", "EffectMelee_Medium"),
-    "ArrowWeapon": ("Arrow_Light", "ProjectileArrow_Light", "EffectArrow_Light"),
-    "MagicWeapon": ("Magic_Heavy", "ProjectileMagic_Heavy", "EffectMagic_Heavy"),
-    "LaserWeapon": ("Laser_Heavy", "ProjectileLaser_Heavy", "EffectLaser_Heavy"),
-    "RailgunWeapon": ("Railgun_Heavy", "ProjectileRailgun_Heavy", "EffectRailgun_Heavy"),
-    "TeslaWeapon": ("Tesla_Heavy", "ProjectileLightning_Heavy", "EffectTesla_Heavy"),
-    "TeslaChargedWeapon": ("TeslaCharged_Super", "ProjectileLightning_Super", "EffectTesla_Super"),
+    "SmallArms": ("Bullet_Light", "Projectile_Bullet_Light", "Effect_Bullet_Light"),
+    "Chaingun": ("Bullet_Medium", "Projectile_Bullet_Medium", "Effect_Bullet_Medium"),
+    "TankDestroyerCannon": ("CannonAP_Light", "Projectile_Shell_Light", "Effect_Cannon_Light"),
+    "MediumCannon": ("CannonHE_Medium", "Projectile_Shell_Medium", "Effect_Cannon_Medium"),
+    "HeavyCannon": ("CannonHE_Heavy", "Projectile_Shell_Heavy", "Effect_Cannon_Heavy"),
+    "LightMissile": ("MissileAP_Light", "Projectile_Missile_Light", "Effect_Missile_Light"),
+    "MediumMissile": ("MissileAP_Medium", "Projectile_Missile_Medium", "Effect_Missile_Medium"),
+    "HeavyMissile": ("MissileAP_Heavy", "Projectile_Missile_Heavy", "Effect_Missile_Heavy"),
+    "FlakWeapon": ("Flak_Medium", "Projectile_Flak_Medium", "Effect_Flak_Medium"),
+    "HeavyAAWeapon": ("MissileAA_Heavy", "Projectile_Flak_Heavy", "Effect_Flak_Heavy"),
+    "LightFlameWeapon": ("Flame_Light", "Projectile_Flame_Light", "Effect_Flame_Light"),
+    "MediumFlameWeapon": ("Flame_Medium", "Projectile_Flame_Medium", "Effect_Flame_Medium"),
+    "HeavyFlameWeapon": ("Flame_Heavy", "Projectile_Flame_Heavy", "Effect_Flame_Heavy"),
+    "LightChemicalWeapon": ("Chemical_Light", "Projectile_Chem_Light", "Effect_Chem_Light"),
+    "MediumChemicalWeapon": ("Chemical_Medium", "Projectile_Chem_Medium", "Effect_Chem_Medium"),
+    "HeavyChemicalWeapon": ("Chemical_Heavy", "Projectile_Chem_Heavy", "Effect_Chem_Heavy"),
+    "Grenade": ("Demolition_Light", "Projectile_Grenade_Light", "Effect_Explosion_Light"),
+    "ShrapnelWeapon": ("Concussion_Medium", None, "Effect_Explosion_Medium"),
+    "HeavyBomb": ("Demolition_Heavy", None, "Effect_Explosion_Heavy"),
+    "NuclearWarhead": ("Nuclear_Super", None, "Effect_Nuclear_Super"),
+    "SwordWeapon": ("Melee_Medium", "Projectile_Melee_Medium", "Effect_Melee_Medium"),
+    "ArrowWeapon": ("Arrow_Light", "Projectile_Arrow_Light", "Effect_Arrow_Light"),
+    "MagicWeapon": ("Magic_Heavy", "Projectile_Magic_Heavy", "Effect_Magic_Heavy"),
+    "LaserWeapon": ("Laser_Heavy", "Projectile_Laser_Heavy", "Effect_Laser_Heavy"),
+    "RailgunWeapon": ("Railgun_Heavy", "Projectile_Railgun_Heavy", "Effect_Railgun_Heavy"),
+    "TeslaWeapon": ("Tesla_Heavy", "Projectile_Lightning_Heavy", "Effect_Tesla_Heavy"),
+    "TeslaChargedWeapon": ("TeslaCharged_Super", "Projectile_Lightning_Super", "Effect_Tesla_Super"),
 }
 STAY = {"SniperWeapon", "ToxicWeapon", "HealingWeapon", "RepairWeapon"}
 ALL_OLD = set(TRIPLE) | STAY  # for mixed detection
 # the NEW warhead templates count as warhead-carrying too, so mixed-detection is
-# ORDER-INDEPENDENT: once family A is converted (a weapon now inherits ^A_new), an
-# A+B cross-family weapon is still seen as 2-warhead when family B runs → stays Phase B.
-NEW_WARHEADS = {t[0] for t in TRIPLE.values()}
+# ORDER-INDEPENDENT: once family A is converted (a weapon now inherits ^Warhead_A),
+# an A+B cross-family weapon is still seen as 2-warhead when family B runs -> Phase B.
+NEW_WARHEADS = {"Warhead_" + t[0] for t in TRIPLE.values()}
 
 TOP = re.compile(r"^(﻿?)(\^?[\w.]+):\s*$")
 INH = re.compile(r"^(\t+)Inherits(@[\w.]+)?:\s*\^(\w+)\s*(?:#.*)?$")
+INH_ANY = re.compile(r"^(\t+)Inherits(@[\w.]+)?:\s*\^?([\w.]+)\s*(?:#.*)?$")
+SUFFIX = "(Percentage|FriendlyFire|ExtraDamage)"
 
 
 def parse_blocks(lines):
@@ -76,7 +89,7 @@ def parse_blocks(lines):
 
 
 def build_wh_closure():
-    """Every warhead-CARRYING template = the 30 bases + every INTERMEDIATE that
+    """Every warhead-CARRYING template = the bases + every INTERMEDIATE that
     inherits one (transitively). Needed so a base+intermediate mix (e.g.
     ^SmallArms + ^RA2Chaingun) is detected as MIXED, not single. Returns the set
     of bare template names."""
@@ -117,75 +130,135 @@ def wh_inherits(lines, s, e, carrying):
     return out
 
 
+def rename_key_line(line, old, wh):
+    """rename `Warhead@<old>[suffix]:` / `-Warhead@<old>[suffix]:` -> new key,
+    inserting an underscore before the twin suffix (Bullet_Light_Percentage)."""
+    return re.sub(
+        rf"^(\s*)(-?)Warhead@{re.escape(old)}{SUFFIX}?:",
+        lambda m: f"{m.group(1)}{m.group(2)}Warhead@{wh}" + (f"_{m.group(3)}" if m.group(3) else "") + ":",
+        line)
+
+
+def build_provides(filelines):
+    """resolved warhead-KEY set each template provides, over the POST-conversion
+    graph. provides[t] = (union of parents' provides - own removals) | own defs."""
+    own_defs, own_removes, parents = {}, {}, {}
+    for _p, lines in filelines.items():
+        for (s, e, name) in parse_blocks(lines):
+            bare = name.lstrip("^")
+            pd = own_defs.setdefault(bare, set())
+            pr = own_removes.setdefault(bare, set())
+            par = parents.setdefault(bare, [])
+            for i in range(s, e):
+                m = INH_ANY.match(lines[i])
+                if m:
+                    par.append(m.group(3))
+                md = re.match(r"^\s*Warhead@([\w.]+):", lines[i])
+                if md:
+                    pd.add(md.group(1))
+                mr = re.match(r"^\s*-Warhead@([\w.]+):", lines[i])
+                if mr:
+                    pr.add(mr.group(1))
+    provides = {n: set() for n in own_defs}
+    for _ in range(64):  # fixpoint (inheritance depth is small)
+        changed = False
+        for n in own_defs:
+            acc = set()
+            for q in parents.get(n, []):
+                acc |= provides.get(q, set())
+            acc = (acc - own_removes[n]) | own_defs[n]
+            if acc != provides[n]:
+                provides[n] = acc
+                changed = True
+        if not changed:
+            break
+    return provides, parents
+
+
 def retrofit(targets, apply):
     carrying = build_wh_closure()
-    changed_files = 0
-    converted = 0
+    files = [os.path.join(dp, fn) for dp, _, fs in os.walk(ROOT)
+             for fn in fs if fn.endswith(".yaml")]
+    originals = {p: open(p, encoding="utf-8-sig").read() for p in files}
+    filelines = {p: originals[p].split("\n") for p in files}
+    converted_names = set()
     per_old = {t: 0 for t in targets}
+    converted = 0
     skipped_mixed = 0
-    for dp, _, fs in os.walk(ROOT):
-        for fn in fs:
-            if not fn.endswith(".yaml"):
+
+    # ---- PASS 1: convert single-inherit blocks (in-memory) ----
+    for p in files:
+        lines = filelines[p]
+        blocks = parse_blocks(lines)
+        edits = {}  # lineidx -> replacement list (Inherits expansion)
+        for (s, e, name) in blocks:
+            bare = name.lstrip("^")
+            if name.startswith("^") and bare in ALL_OLD:
+                continue  # never touch an old base template DEFINITION block
+            whs = wh_inherits(lines, s, e, carrying)
+            if len(whs) == 1 and whs[0][1] in targets:
+                idx, old, indent = whs[0]
+                wh, proj, fx = TRIPLE[old]
+                repl = [f"{indent}Inherits@wh: ^Warhead_{wh}"]
+                if proj:
+                    repl.append(f"{indent}Inherits@proj: ^{proj}")
+                repl.append(f"{indent}Inherits@fx: ^{fx}")
+                edits[idx] = repl
+                for i in range(s, e):
+                    lines[i] = rename_key_line(lines[i], old, wh)
+                per_old[old] += 1
+                converted += 1
+                converted_names.add(bare)
+            elif len(whs) >= 2 and any(o[1] in targets for o in whs):
+                skipped_mixed += 1
+        if edits:
+            out = []
+            for i, ln in enumerate(lines):
+                out.append("\n".join(edits[i]) if i in edits else ln)
+            filelines[p] = "\n".join(out).split("\n")
+
+    # ---- build post-conversion resolution map, then PASS 2 repair ----
+    provides, parents = build_provides(filelines)
+    repaired = 0
+    for p in files:
+        lines = filelines[p]
+        for (s, e, name) in parse_blocks(lines):
+            bare = name.lstrip("^")
+            if bare in converted_names:
+                continue  # own keys already renamed in pass 1
+            if name.startswith("^") and bare in ALL_OLD:
                 continue
-            p = os.path.join(dp, fn)
-            raw = open(p, encoding="utf-8-sig").read()  # BOM-safe
-            lines = raw.split("\n")
-            blocks = parse_blocks(lines)
-            edits = {}  # lineidx -> replacement list (or [] to delete); key-rename via in-place
-            file_touched = False
-            for (s, e, name) in blocks:
-                bare = name.lstrip("^")
-                if name.startswith("^") and bare in ALL_OLD:
-                    continue  # never touch an old base template DEFINITION block
-                whs = wh_inherits(lines, s, e, carrying)
-                direct = {o[1] for o in whs}  # bare names of direct warhead-carrying inherits
-                if len(whs) == 1 and whs[0][1] in targets:
-                    # --- CONVERT this single-inherit block ---
-                    idx, old, indent = whs[0]
-                    wh, proj, fx = TRIPLE[old]
-                    repl = [f"{indent}Inherits@wh: ^{wh}"]
-                    if proj:
-                        repl.append(f"{indent}Inherits@proj: ^{proj}")
-                    repl.append(f"{indent}Inherits@fx: ^{fx}")
-                    edits[idx] = repl
-                    # rename warhead override/removal KEYS (preserve values): both `Warhead@Old:`
-                    # and `-Warhead@Old:` removals, incl. Percentage/FriendlyFire/ExtraDamage twins.
-                    for i in range(s, e):
-                        lines[i] = re.sub(rf"^(\s*)(-?)Warhead@{old}(Percentage|FriendlyFire|ExtraDamage)?:",
-                                          rf"\1\2Warhead@{wh}\3:", lines[i])
-                    per_old[old] += 1
-                    converted += 1
-                    file_touched = True
-                    continue
-                if len(whs) >= 2 and any(o in targets for o in direct):
-                    skipped_mixed += 1
-                # --- REPAIR a SKIPPED block: a Warhead@T ref survives only if the block inherits
-                # the ^T BASE directly (base kept until Phase 4). If it flowed through a now-
-                # converted intermediate (e.g. DevBullet -> ^D2K_Cannon), @T is gone -> rename it,
-                # else `-Warhead@T` / `Warhead@T` orphans and crashes boot.
-                for T in targets:
-                    if T in direct:
+            parprov = set()
+            for q in parents.get(bare, []):
+                parprov |= provides.get(q, set())
+            for T in targets:
+                wh = TRIPLE[T][0]
+                for i in range(s, e):
+                    m = re.match(rf"^(\s*)(-?)Warhead@{re.escape(T)}{SUFFIX}?:(.*)$", lines[i])
+                    if not m:
                         continue
-                    wh = TRIPLE[T][0]
-                    for i in range(s, e):
-                        n = re.sub(rf"^(\s*)(-?)Warhead@{T}(Percentage|FriendlyFire|ExtraDamage)?:",
-                                   rf"\1\2Warhead@{wh}\3:", lines[i])
-                        if n != lines[i]:
-                            lines[i] = n
-                            file_touched = True
-            if file_touched:
-                out = []
-                for i, ln in enumerate(lines):
-                    out.append("\n".join(edits[i]) if i in edits else ln)
-                newtext = "\n".join(out)
-                if apply:
-                    open(p, "w", encoding="utf-8", newline="\n").write(newtext)
-                changed_files += 1
+                    suf = m.group(3) or ""
+                    oldkey = T + suf
+                    newkey = wh + ("_" + suf if suf else "")
+                    # rename ONLY if the parent chain lost the old key but gained the new one
+                    if oldkey not in parprov and newkey in parprov:
+                        lines[i] = f"{m.group(1)}{m.group(2)}Warhead@{newkey}:{m.group(4)}"
+                        repaired += 1
+
+    changed_files = 0
+    for p in files:
+        newtext = "\n".join(filelines[p])
+        if newtext != originals[p]:
+            changed_files += 1
+            if apply:
+                open(p, "w", encoding="utf-8", newline="\n").write(newtext)
+
     mode = "APPLIED" if apply else "DRY RUN"
     print(f"[{mode}] converted {converted} single-inherit blocks across {changed_files} files")
     for t in targets:
-        print(f"    ^{t} -> ^{TRIPLE[t][0]}: {per_old[t]}")
+        print(f"    ^{t} -> ^Warhead_{TRIPLE[t][0]}: {per_old[t]}")
     print(f"    skipped (mixed, 2+ warhead templates incl. a target): {skipped_mixed} -> Phase B")
+    print(f"    resolution-based key repairs in skipped/child blocks: {repaired}")
     print(f"    warhead-carrying templates in closure: {len(carrying)} (bases + intermediates)")
 
 

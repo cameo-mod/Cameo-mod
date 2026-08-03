@@ -6,7 +6,7 @@ OrdosCombatTankCannon:
 		Speed: 523
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 
 HeavyOrdosCombatTankCannon:
@@ -17,7 +17,7 @@ HeavyOrdosCombatTankCannon:
 		Speed: 600
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
 HeavyOrdosCombatTankRockets:
@@ -90,7 +90,7 @@ HeavyOrdosCombatTankRockets:
 		Damage: 7
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 14000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 7
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 14000
@@ -115,7 +115,7 @@ HeavyOrdosCombatTankRockets:
 		ContrailEndColor: FF884422
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 30000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 30000
@@ -259,7 +259,7 @@ D2K_155mm_turret:
 		Damage: 6
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 12000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 5625
@@ -304,7 +304,7 @@ Dune_SiegeMortar:
 		Damage: 5
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 10000
@@ -354,7 +354,7 @@ D2K_Rocket_Trooper_AGOnly:
 	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 10000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 5
 
@@ -698,7 +698,7 @@ Laboratory_Bioball:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
@@ -922,9 +922,9 @@ SaboDeath:
 			Concrete: 75
 
 HMGo:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 8
 	Burst: 9
 	BurstDelays: 2
@@ -935,7 +935,7 @@ HMGo:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
@@ -952,7 +952,7 @@ HMGo_upgrade:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
@@ -969,9 +969,9 @@ HMGo_upgrade:
 		Damage: 1
 
 d2kChainGun:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 60
 	Burst: 5
 	BurstDelays: 2
@@ -980,7 +980,7 @@ d2kChainGun:
 	StartBurstReport: MGUN2.WAV
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 d2kChainGun_upgrade:
@@ -1132,9 +1132,9 @@ D2KAAMineExplosion:
 		ExplosionPalette: effect75alpha
 
 d2kCarryallChainGun:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 1
@@ -1142,7 +1142,7 @@ d2kCarryallChainGun:
 	StartBurstReport: MGUN2.WAV
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 ordos_airmine:
@@ -1321,7 +1321,7 @@ LMG_ordos_upgrade:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 
 light_inf_lmg_ordos_upgrade:
@@ -1337,13 +1337,13 @@ light_inf_lmg_ordos_upgrade:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@LaserWeapon: SpreadDamage

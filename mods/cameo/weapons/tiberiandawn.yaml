@@ -35,15 +35,15 @@ TDBuildingExplode:
 		Delay: 0
 
 M16:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 17
 	Range: 3916
 	Report: mgun2.aud
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 Grenade:
@@ -256,9 +256,9 @@ FlametankExplode:
 		ValidTargets: Ground, Ship
 
 HighVAP:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 22
 	Burst: 4
@@ -268,7 +268,7 @@ HighVAP:
 	StartBurstReport: gun8.aud
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 ChemTibAtomic:

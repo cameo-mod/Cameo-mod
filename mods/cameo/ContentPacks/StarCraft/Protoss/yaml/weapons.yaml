@@ -69,7 +69,7 @@ PositronBounce1:
 	Range: 2522
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 4000
@@ -83,11 +83,11 @@ PositronBounce1:
 		Damage: 2
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 4000
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@shrapnel: FireShrapnel
 		Weapon: PositronBounce2
@@ -97,7 +97,7 @@ PositronBounce2:
 	Range: 1261
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 2000
@@ -111,11 +111,11 @@ PositronBounce2:
 		Damage: 1
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 2000
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	-Warhead@shrapnel:
 
@@ -244,19 +244,19 @@ GladiusCannon:
 	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@CannonAP_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@Effect: CreateEffect
@@ -588,7 +588,7 @@ CorsairFlash:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -913,7 +913,7 @@ ScoutMG:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -1051,7 +1051,7 @@ ManifoldMG:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -1070,11 +1070,11 @@ ManifoldMG_AA:
 		ValidTargets: Air
 	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Air
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
 		ValidTargets: Air
@@ -1131,7 +1131,7 @@ AtreusMG:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect

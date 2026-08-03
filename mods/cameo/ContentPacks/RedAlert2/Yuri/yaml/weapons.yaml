@@ -55,7 +55,7 @@ RA2LasherCannon:
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
@@ -219,15 +219,15 @@ RA2LasherToxicMortar_elite:
 		Damage: 2
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 4000
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: ra2radbang
@@ -272,7 +272,7 @@ RA2LasherLaser_elite:
 		SecondaryBeamWidth: 36
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 16000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 16000
@@ -673,13 +673,13 @@ RA2GattlingMG3_AA:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
 		Damage: 4000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 2
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 2
 
@@ -702,13 +702,13 @@ RA2GattlingInf:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 8000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 8000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 
@@ -906,7 +906,7 @@ RA2CosmonautLaser:
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Bullet_Light: SpreadDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@FlakWeapon: SpreadDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
@@ -914,7 +914,7 @@ RA2CosmonautLaser:
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Bullet_Medium: SpreadDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 2000

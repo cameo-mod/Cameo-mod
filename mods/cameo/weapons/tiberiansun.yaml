@@ -105,14 +105,14 @@ TSLaser25mmDep:
 
 TS90mm:
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 26
 	Range: 5319
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 6000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
 
 TS90mmDep:
@@ -149,9 +149,9 @@ TSLaser90mmDep:
 
 TS120mm:
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 44
 	Range: 6201
 	Projectile: Bullet
@@ -160,14 +160,14 @@ TS120mm:
 		LaunchAngle: 0
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 12000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 
 TS120mm_bluenuke:
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 44
 	Range: 6201
 	Projectile: Bullet
@@ -176,7 +176,7 @@ TS120mm_bluenuke:
 		LaunchAngle: 0
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 24000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@3Eff: CreateEffect
 		Explosions: magicnuke_med
@@ -432,9 +432,9 @@ TS152mm:
 			Heavy: 150
 
 MammothTankCannon:
-	Inherits@wh: ^CannonHE_Heavy
-	Inherits@proj: ^ProjectileShell_Heavy
-	Inherits@fx: ^EffectCannon_Heavy
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cannon_Heavy
 	ReloadDelay: 102
 	BurstDelays: 8
 	Range: 6340
@@ -443,7 +443,7 @@ MammothTankCannon:
 		Speed: 634
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 12000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
 
 ^TSLaserEffect:
@@ -1158,9 +1158,9 @@ TSLocustBomb:
 		SmudgeType: Crater
 
 ^TSMG:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 20
 	Range: 4000
 	Report: gun8.aud
@@ -1169,19 +1169,19 @@ TSLocustBomb:
 		Inaccuracy: 200
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 TSMinigun:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 12
 	Range: 4062
 	Report: infgun3.aud, gostgun1.aud, slvkgun1.aud
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 TSM1Carbine:
@@ -1285,9 +1285,9 @@ TSSniper_elite:
 			Heavy: 20
 
 forgotten_mutant_dualwield:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 18
 	Burst: 2
 	Range: 5219
@@ -1295,7 +1295,7 @@ forgotten_mutant_dualwield:
 	ValidTargets: Ground, Water
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 forgotten_mutant_dualwield_elite:

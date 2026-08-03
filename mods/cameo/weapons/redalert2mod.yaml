@@ -639,9 +639,9 @@ NaxGrilleArty_elite:
 	BurstDelays: 3
 
 NaxiRifle:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 75
 	Range: 5621
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
@@ -657,7 +657,7 @@ NaxiRifle:
 		Width: 50
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 6000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
 
 NaxLaserT:
@@ -720,7 +720,7 @@ NaxiMP40:
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 NaxSturmArty:
@@ -747,7 +747,7 @@ NaxSturmArty:
 		Damage: 14
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 30000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 14
 	Warhead@Grenade: SpreadDamage
 		Damage: 20000
@@ -900,7 +900,7 @@ NaxiAlienPistol:
 	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@TeslaWeapon: SpreadDamage
@@ -1174,7 +1174,7 @@ NaxisBlackBombSmaller:
 		Damage: 10
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 25000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@Effect: CreateEffect
 		Explosions: ra2nuke
@@ -1212,7 +1212,7 @@ Lunar_Green105mm:
 	ReloadDelay: 50
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 8000

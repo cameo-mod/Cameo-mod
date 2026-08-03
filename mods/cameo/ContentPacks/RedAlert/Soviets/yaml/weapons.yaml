@@ -15,7 +15,7 @@ IncendiaryM1Carbine:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -719,7 +719,7 @@ SiegeMortarThermobaricExplode:
 		Damage: 1
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 2000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@HeavyFlameWeapon: SpreadDamage
 		Damage: 2000
@@ -1452,11 +1452,11 @@ BTRMachineGun_AA:
 	ValidTargets: Air
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 BTRTeslaMachineGun:
@@ -1534,9 +1534,9 @@ BTRTeslaMachineGunArcFragment1AA:
 	-Warhead@TeslaArc:
 
 ChainGun:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 8
 	Range: 5528
@@ -1544,7 +1544,7 @@ ChainGun:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -1926,9 +1926,9 @@ KamovTeslaArcFragment2:
 	-Warhead@TeslaArc:
 
 YakChainGun:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 100
 	Range: 7000
@@ -1939,7 +1939,7 @@ YakChainGun:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
@@ -2501,9 +2501,9 @@ ThermobaricNuclearMaverick:
 		ImpactActors: false
 
 105mm:
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 76
 	Range: 5469
 	Burst: 2
@@ -2513,7 +2513,7 @@ ThermobaricNuclearMaverick:
 		Speed: 546
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -2529,7 +2529,7 @@ ThermobaricNuclearMaverick:
 		Damage: 3
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 6000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
@@ -2575,11 +2575,11 @@ HammerTankCannonThermobaric:
 		Damage: 2
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
@@ -2680,11 +2680,11 @@ KotinCannonThermobaric:
 		Damage: 2
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@Radiation: CreateTintedCells
 		InvalidTargets: RadiationImmmune
@@ -3469,7 +3469,7 @@ VolkovMagneticWeaponTesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -3528,7 +3528,7 @@ VolkovMagneticWeaponTeslaFragment1:
 	Report: shktrop1.aud
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@MediumChemicalWeapon: SpreadDamage
 		Damage: 4000
@@ -3562,7 +3562,7 @@ VolkovMagneticWeaponTeslaFragment2:
 	Range: 1415
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 2000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@MediumChemicalWeapon: SpreadDamage
 		Damage: 2000
@@ -3605,7 +3605,7 @@ VolkovMagneticWeaponNuclearShells:
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MediumChemicalWeapon: SpreadDamage
@@ -3662,7 +3662,7 @@ VolkovMagneticWeaponIncendiaryTesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -3733,7 +3733,7 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 	Report: shktrop1.aud
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@MediumChemicalWeapon: SpreadDamage
 		Damage: 4000
@@ -3773,7 +3773,7 @@ VolkovMagneticWeaponIncendiaryTeslaFragment2:
 	Range: 1415
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 2000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@MediumChemicalWeapon: SpreadDamage
 		Damage: 2000
@@ -3832,7 +3832,7 @@ VolkovMagneticWeaponIncendiaryNuclearShells:
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MediumChemicalWeapon: SpreadDamage
@@ -3950,9 +3950,9 @@ Nike:
 		ValidTargets: Air
 
 RAGatlingTankCannon:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 5000
@@ -3960,7 +3960,7 @@ RAGatlingTankCannon:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -3970,7 +3970,7 @@ RAGatlingTankCannon_AA:
 	ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 IncendiaryRAGatlingTankCannon:
@@ -4009,7 +4009,7 @@ IncendiaryRAGatlingTankCannon_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 TeslaRAGatlingTankCannon:
@@ -4116,9 +4116,9 @@ MADTankDetonate:
 # CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): Soviet
 # rifle infantry â€” burst 3, heavier thump, close range. Incendiary pair.
 ra1_soviets_rifleinfantry_carbine:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
 	Range: 4668
 	ValidTargets: Ground, Water
@@ -4127,7 +4127,7 @@ ra1_soviets_rifleinfantry_carbine:
 	Report: gun11.aud
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 ra1_soviets_rifleinfantry_carbine_incendiary:
@@ -4147,6 +4147,6 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1

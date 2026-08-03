@@ -8,7 +8,7 @@ SteelCloneGun:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@MediumMissile: SpreadDamage
@@ -20,7 +20,7 @@ SteelCloneGun:
 	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -82,15 +82,15 @@ SteelVulcan:
 	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 2000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Report: pulseturretfire.wav
 	Warhead@Effect: CreateEffect
@@ -419,7 +419,7 @@ SteelMakoGun:
 		Damage: 1
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		ExplosionPalette: ra2effect
@@ -462,7 +462,7 @@ SteelMakoGun_EMP:
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@LightChemicalWeapon: SpreadDamage
@@ -520,7 +520,7 @@ SteelMantaAG:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
@@ -532,7 +532,7 @@ SteelMantaAG:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -614,7 +614,7 @@ SteelMantaHunterCannons:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -800,7 +800,7 @@ SteelInfRailgun:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@LightMissile: SpreadDamage
@@ -924,7 +924,7 @@ SteelInfRailgun_EMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -982,7 +982,7 @@ SteelFighterRailgun:
 	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -1260,7 +1260,7 @@ SteelFortressWeapons:
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 14000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 7
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
@@ -1305,7 +1305,7 @@ SteelQuantumTurretRail:
 		Damage: 1
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 2000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
@@ -1342,7 +1342,7 @@ SteelQuantumTurretRail_EMP:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@CannonHE_Heavy: SpreadDamage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water, Air
@@ -1510,7 +1510,7 @@ SteelKatyCannons:
 		Damage: 5
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 10000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@Effect: CreateEffect
 		Explosions: aa_pulsexp
@@ -1583,7 +1583,7 @@ SteelKatyCannons_EMP:
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1773,7 +1773,7 @@ WhiteRabbitGatling:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
 
@@ -1786,7 +1786,7 @@ HammerheadTankCannon:
 		Speed: 515
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 24000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 12
 
 HammerheadArtillery:
@@ -1822,7 +1822,7 @@ HammerheadArtillery:
 	Warhead@CannonHE_Medium: SpreadDamage
 		Spread: 1111
 		Damage: 11111
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Spread: 1111
 		Damage: 11
 	Warhead@Effect1: CreateEffect
@@ -1879,7 +1879,7 @@ SteelDaggerCannon:
 	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -1913,7 +1913,7 @@ SteelCruiserArtillery:
 		Damage: 8
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 16000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
@@ -1966,7 +1966,7 @@ SteelCruiserCannons:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 
@@ -1995,13 +1995,13 @@ SteelCargoshipCannons:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 

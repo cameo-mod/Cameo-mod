@@ -3249,7 +3249,7 @@ DefuseKit:
 # old bespoke templates (^Grenade/^ShrapnelWeapon/^HeavyBomb/etc.)
 # stay until then.
 ###### Bullet: INF > VEH+AIR+BLD (light, air=True) ######
-^Bullet_Light:
+^Warhead_Bullet_Light:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -3280,7 +3280,7 @@ DefuseKit:
 			Spaceship: 16
 			Superheavy: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -3305,7 +3305,7 @@ DefuseKit:
 			Superheavy: 1
 		UpdatesUnitStatistics: false
 
-^Bullet_Medium:
+^Warhead_Bullet_Medium:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -3336,7 +3336,7 @@ DefuseKit:
 			Spaceship: 30
 			Superheavy: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
@@ -3361,7 +3361,7 @@ DefuseKit:
 			Superheavy: 5
 		UpdatesUnitStatistics: false
 
-^Bullet_Heavy:
+^Warhead_Bullet_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -3392,7 +3392,7 @@ DefuseKit:
 			Spaceship: 44
 			Superheavy: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Bullet_HeavyPercentage: HealthPercentageDamage
+	Warhead@Bullet_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
@@ -3418,7 +3418,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### CannonAP: VEH > BLD > INF > AIR (heavy, air=False) ######
-^CannonAP_Light:
+^Warhead_CannonAP_Light:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -3449,7 +3449,7 @@ DefuseKit:
 			Bomber: 16
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -3474,7 +3474,7 @@ DefuseKit:
 			Fighter: 1
 		UpdatesUnitStatistics: false
 
-^CannonAP_Medium:
+^Warhead_CannonAP_Medium:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -3505,7 +3505,7 @@ DefuseKit:
 			Bomber: 30
 			Fighter: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonAP_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -3530,7 +3530,7 @@ DefuseKit:
 			Fighter: 5
 		UpdatesUnitStatistics: false
 
-^CannonAP_Heavy:
+^Warhead_CannonAP_Heavy:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -3561,7 +3561,7 @@ DefuseKit:
 			Bomber: 44
 			Fighter: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonAP_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -3587,7 +3587,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### CannonHE: VEH+BLD > INF > AIR (light, air=False) ######
-^CannonHE_Light:
+^Warhead_CannonHE_Light:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -3618,7 +3618,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonHE_LightPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -3643,7 +3643,7 @@ DefuseKit:
 			Spaceship: 1
 		UpdatesUnitStatistics: false
 
-^CannonHE_Medium:
+^Warhead_CannonHE_Medium:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -3674,7 +3674,7 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -3699,7 +3699,7 @@ DefuseKit:
 			Spaceship: 5
 		UpdatesUnitStatistics: false
 
-^CannonHE_Heavy:
+^Warhead_CannonHE_Heavy:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -3730,7 +3730,7 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -3756,7 +3756,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### MissileAP: VEH > AIR > BLD > INF (heavy, air=True) ######
-^MissileAP_Light:
+^Warhead_MissileAP_Light:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -3787,7 +3787,7 @@ DefuseKit:
 			Flak: 16
 			None: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAP_LightPercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -3812,7 +3812,7 @@ DefuseKit:
 			None: 1
 		UpdatesUnitStatistics: false
 
-^MissileAP_Medium:
+^Warhead_MissileAP_Medium:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -3843,7 +3843,7 @@ DefuseKit:
 			Flak: 30
 			None: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAP_MediumPercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
@@ -3868,7 +3868,7 @@ DefuseKit:
 			None: 5
 		UpdatesUnitStatistics: false
 
-^MissileAP_Heavy:
+^Warhead_MissileAP_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -3899,7 +3899,7 @@ DefuseKit:
 			Flak: 44
 			None: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAP_HeavyPercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
@@ -3925,7 +3925,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### MissileHE: VEH+BLD > AIR > INF (light, air=True) ######
-^MissileHE_Light:
+^Warhead_MissileHE_Light:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -3956,7 +3956,7 @@ DefuseKit:
 			Plate: 16
 			Heroic: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileHE_LightPercentage: HealthPercentageDamage
+	Warhead@MissileHE_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -3981,7 +3981,7 @@ DefuseKit:
 			Heroic: 1
 		UpdatesUnitStatistics: false
 
-^MissileHE_Medium:
+^Warhead_MissileHE_Medium:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -4012,7 +4012,7 @@ DefuseKit:
 			Plate: 30
 			Heroic: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileHE_MediumPercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
@@ -4037,7 +4037,7 @@ DefuseKit:
 			Heroic: 5
 		UpdatesUnitStatistics: false
 
-^MissileHE_Heavy:
+^Warhead_MissileHE_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -4068,7 +4068,7 @@ DefuseKit:
 			Plate: 44
 			Heroic: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@MissileHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
@@ -4094,7 +4094,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### MissileAA: AIR > VEH > BLD > INF (heavy, air=True) ######
-^MissileAA_Light:
+^Warhead_MissileAA_Light:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -4125,7 +4125,7 @@ DefuseKit:
 			Flak: 16
 			None: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAA_LightPercentage: HealthPercentageDamage
+	Warhead@MissileAA_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -4150,7 +4150,7 @@ DefuseKit:
 			None: 1
 		UpdatesUnitStatistics: false
 
-^MissileAA_Medium:
+^Warhead_MissileAA_Medium:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -4181,7 +4181,7 @@ DefuseKit:
 			Flak: 30
 			None: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAA_MediumPercentage: HealthPercentageDamage
+	Warhead@MissileAA_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
@@ -4206,7 +4206,7 @@ DefuseKit:
 			None: 5
 		UpdatesUnitStatistics: false
 
-^MissileAA_Heavy:
+^Warhead_MissileAA_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -4237,7 +4237,7 @@ DefuseKit:
 			Flak: 44
 			None: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAA_HeavyPercentage: HealthPercentageDamage
+	Warhead@MissileAA_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
@@ -4263,7 +4263,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### Flak: AIR > INF > VEH > BLD (light, air=True) ######
-^Flak_Light:
+^Warhead_Flak_Light:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -4294,7 +4294,7 @@ DefuseKit:
 			Steel: 16
 			Concrete: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Flak_LightPercentage: HealthPercentageDamage
+	Warhead@Flak_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -4319,7 +4319,7 @@ DefuseKit:
 			Concrete: 1
 		UpdatesUnitStatistics: false
 
-^Flak_Medium:
+^Warhead_Flak_Medium:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -4350,7 +4350,7 @@ DefuseKit:
 			Steel: 30
 			Concrete: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Flak_MediumPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
@@ -4375,7 +4375,7 @@ DefuseKit:
 			Concrete: 5
 		UpdatesUnitStatistics: false
 
-^Flak_Heavy:
+^Warhead_Flak_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -4406,7 +4406,7 @@ DefuseKit:
 			Steel: 44
 			Concrete: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Flak_HeavyPercentage: HealthPercentageDamage
+	Warhead@Flak_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
@@ -4432,7 +4432,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### Laser: VEH+INF+AIR+BLD (heavy, air=True) ######
-^Laser_Light:
+^Warhead_Laser_Light:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -4463,7 +4463,7 @@ DefuseKit:
 			Fighter: 16
 			Scout: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Laser_LightPercentage: HealthPercentageDamage
+	Warhead@Laser_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -4488,7 +4488,7 @@ DefuseKit:
 			Scout: 1
 		UpdatesUnitStatistics: false
 
-^Laser_Medium:
+^Warhead_Laser_Medium:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -4519,7 +4519,7 @@ DefuseKit:
 			Fighter: 30
 			Scout: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Laser_MediumPercentage: HealthPercentageDamage
+	Warhead@Laser_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
@@ -4544,7 +4544,7 @@ DefuseKit:
 			Scout: 5
 		UpdatesUnitStatistics: false
 
-^Laser_Heavy:
+^Warhead_Laser_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -4575,7 +4575,7 @@ DefuseKit:
 			Fighter: 44
 			Scout: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Laser_HeavyPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
@@ -4601,7 +4601,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### Prism: VEH+INF+BLD > AIR (light, air=False) ######
-^Prism_Light:
+^Warhead_Prism_Light:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -4632,7 +4632,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Prism_LightPercentage: HealthPercentageDamage
+	Warhead@Prism_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -4657,7 +4657,7 @@ DefuseKit:
 			Spaceship: 1
 		UpdatesUnitStatistics: false
 
-^Prism_Medium:
+^Warhead_Prism_Medium:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -4688,7 +4688,7 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Prism_MediumPercentage: HealthPercentageDamage
+	Warhead@Prism_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -4713,7 +4713,7 @@ DefuseKit:
 			Spaceship: 5
 		UpdatesUnitStatistics: false
 
-^Prism_Heavy:
+^Warhead_Prism_Heavy:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -4744,7 +4744,7 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Prism_HeavyPercentage: HealthPercentageDamage
+	Warhead@Prism_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -4770,7 +4770,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### Flame: INF+BLD > VEH > AIR (light, air=False) ######
-^Flame_Light:
+^Warhead_Flame_Light:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -4801,7 +4801,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Flame_LightFriendlyFire: SpreadDamage
+	Warhead@Flame_Light_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -4827,7 +4827,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Flame_LightPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -4852,7 +4852,7 @@ DefuseKit:
 			Spaceship: 1
 		UpdatesUnitStatistics: false
 
-^Flame_Medium:
+^Warhead_Flame_Medium:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -4883,7 +4883,7 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Flame_MediumFriendlyFire: SpreadDamage
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -4909,7 +4909,7 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Flame_MediumPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -4934,7 +4934,7 @@ DefuseKit:
 			Spaceship: 5
 		UpdatesUnitStatistics: false
 
-^Flame_Heavy:
+^Warhead_Flame_Heavy:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -4965,7 +4965,7 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Flame_HeavyFriendlyFire: SpreadDamage
+	Warhead@Flame_Heavy_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -4991,7 +4991,7 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Flame_HeavyPercentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -5017,7 +5017,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### Chemical: INF+VEH > BLD > AIR (heavy, air=False) ######
-^Chemical_Light:
+^Warhead_Chemical_Light:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -5048,7 +5048,7 @@ DefuseKit:
 			Bomber: 16
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Chemical_LightFriendlyFire: SpreadDamage
+	Warhead@Chemical_Light_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -5074,7 +5074,7 @@ DefuseKit:
 			Bomber: 16
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Chemical_LightPercentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -5099,7 +5099,7 @@ DefuseKit:
 			Fighter: 1
 		UpdatesUnitStatistics: false
 
-^Chemical_Medium:
+^Warhead_Chemical_Medium:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -5130,7 +5130,7 @@ DefuseKit:
 			Bomber: 30
 			Fighter: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Chemical_MediumFriendlyFire: SpreadDamage
+	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -5156,7 +5156,7 @@ DefuseKit:
 			Bomber: 30
 			Fighter: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Chemical_MediumPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -5181,7 +5181,7 @@ DefuseKit:
 			Fighter: 5
 		UpdatesUnitStatistics: false
 
-^Chemical_Heavy:
+^Warhead_Chemical_Heavy:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -5212,7 +5212,7 @@ DefuseKit:
 			Bomber: 44
 			Fighter: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Chemical_HeavyFriendlyFire: SpreadDamage
+	Warhead@Chemical_Heavy_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -5238,7 +5238,7 @@ DefuseKit:
 			Bomber: 44
 			Fighter: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Chemical_HeavyPercentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -5264,7 +5264,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### Melee: INF > VEH > BLD > AIR (light, air=False) ######
-^Melee_Light:
+^Warhead_Melee_Light:
 	ValidTargets: Ground
 	ReloadDelay: 25
 	Range: 5120
@@ -5295,7 +5295,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Melee_LightFriendlyFire: SpreadDamage
+	Warhead@Melee_Light_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground
 		Spread: 200
@@ -5321,7 +5321,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Melee_LightPercentage: HealthPercentageDamage
+	Warhead@Melee_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground
 		Spread: 200
 		Damage: 1
@@ -5346,7 +5346,7 @@ DefuseKit:
 			Spaceship: 1
 		UpdatesUnitStatistics: false
 
-^Melee_Medium:
+^Warhead_Melee_Medium:
 	ValidTargets: Ground
 	ReloadDelay: 25
 	Range: 5120
@@ -5377,7 +5377,7 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Melee_MediumFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground
 		Spread: 300
@@ -5403,7 +5403,7 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Melee_MediumPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground
 		Spread: 300
 		Damage: 1
@@ -5428,7 +5428,7 @@ DefuseKit:
 			Spaceship: 5
 		UpdatesUnitStatistics: false
 
-^Melee_Heavy:
+^Warhead_Melee_Heavy:
 	ValidTargets: Ground
 	ReloadDelay: 25
 	Range: 5120
@@ -5459,7 +5459,7 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Melee_HeavyFriendlyFire: SpreadDamage
+	Warhead@Melee_Heavy_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground
 		Spread: 400
@@ -5485,7 +5485,7 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Melee_HeavyPercentage: HealthPercentageDamage
+	Warhead@Melee_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground
 		Spread: 400
 		Damage: 1
@@ -5511,7 +5511,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### Arrow: INF > AIR > VEH > BLD (light, air=True) ######
-^Arrow_Light:
+^Warhead_Arrow_Light:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -5542,7 +5542,7 @@ DefuseKit:
 			Steel: 16
 			Concrete: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Arrow_LightPercentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -5567,7 +5567,7 @@ DefuseKit:
 			Concrete: 1
 		UpdatesUnitStatistics: false
 
-^Arrow_Medium:
+^Warhead_Arrow_Medium:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -5598,7 +5598,7 @@ DefuseKit:
 			Steel: 30
 			Concrete: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Arrow_MediumPercentage: HealthPercentageDamage
+	Warhead@Arrow_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
@@ -5623,7 +5623,7 @@ DefuseKit:
 			Concrete: 5
 		UpdatesUnitStatistics: false
 
-^Arrow_Heavy:
+^Warhead_Arrow_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -5654,7 +5654,7 @@ DefuseKit:
 			Steel: 44
 			Concrete: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Arrow_HeavyPercentage: HealthPercentageDamage
+	Warhead@Arrow_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
@@ -5680,7 +5680,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### Magic: PCT (%-equalizer) ######
-^Magic_Light:
+^Warhead_Magic_Light:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -5710,7 +5710,7 @@ DefuseKit:
 			Superheavy: 20
 			Wood: 20
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Magic_LightPercentage: HealthPercentageDamage
+	Warhead@Magic_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 4
@@ -5735,7 +5735,7 @@ DefuseKit:
 			Wood: 100
 		UpdatesUnitStatistics: false
 
-^Magic_Medium:
+^Warhead_Magic_Medium:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -5765,7 +5765,7 @@ DefuseKit:
 			Superheavy: 20
 			Wood: 20
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Magic_MediumPercentage: HealthPercentageDamage
+	Warhead@Magic_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 6
@@ -5790,7 +5790,7 @@ DefuseKit:
 			Wood: 100
 		UpdatesUnitStatistics: false
 
-^Magic_Heavy:
+^Warhead_Magic_Heavy:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -5820,7 +5820,7 @@ DefuseKit:
 			Superheavy: 20
 			Wood: 20
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Magic_HeavyPercentage: HealthPercentageDamage
+	Warhead@Magic_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 9
@@ -5846,7 +5846,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### Demolition: BLD > INF > VEH > AIR (light, air=False) ######
-^Demolition_Light:
+^Warhead_Demolition_Light:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -5877,7 +5877,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Demolition_LightFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -5903,7 +5903,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Demolition_LightPercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -5928,7 +5928,7 @@ DefuseKit:
 			Spaceship: 1
 		UpdatesUnitStatistics: false
 
-^Demolition_Medium:
+^Warhead_Demolition_Medium:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -5959,7 +5959,7 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Demolition_MediumFriendlyFire: SpreadDamage
+	Warhead@Demolition_Medium_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -5985,7 +5985,7 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Demolition_MediumPercentage: HealthPercentageDamage
+	Warhead@Demolition_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -6010,7 +6010,7 @@ DefuseKit:
 			Spaceship: 5
 		UpdatesUnitStatistics: false
 
-^Demolition_Heavy:
+^Warhead_Demolition_Heavy:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -6041,7 +6041,7 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Demolition_HeavyFriendlyFire: SpreadDamage
+	Warhead@Demolition_Heavy_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -6067,7 +6067,7 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Demolition_HeavyPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -6093,7 +6093,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### Concussion: INF+VEH+BLD > AIR (light, air=False) ######
-^Concussion_Light:
+^Warhead_Concussion_Light:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -6124,7 +6124,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Concussion_LightFriendlyFire: SpreadDamage
+	Warhead@Concussion_Light_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -6150,7 +6150,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Concussion_LightPercentage: HealthPercentageDamage
+	Warhead@Concussion_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -6175,7 +6175,7 @@ DefuseKit:
 			Spaceship: 1
 		UpdatesUnitStatistics: false
 
-^Concussion_Medium:
+^Warhead_Concussion_Medium:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -6206,7 +6206,7 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Concussion_MediumFriendlyFire: SpreadDamage
+	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -6232,7 +6232,7 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Concussion_MediumPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -6257,7 +6257,7 @@ DefuseKit:
 			Spaceship: 5
 		UpdatesUnitStatistics: false
 
-^Concussion_Heavy:
+^Warhead_Concussion_Heavy:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -6288,7 +6288,7 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Concussion_HeavyFriendlyFire: SpreadDamage
+	Warhead@Concussion_Heavy_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -6314,7 +6314,7 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Concussion_HeavyPercentage: HealthPercentageDamage
+	Warhead@Concussion_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -6340,7 +6340,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### Sonic: FLAT (ignores armor) ######
-^Sonic_Light:
+^Warhead_Sonic_Light:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -6370,7 +6370,7 @@ DefuseKit:
 			Superheavy: 45
 			Wood: 45
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Sonic_LightFriendlyFire: SpreadDamage
+	Warhead@Sonic_Light_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -6395,7 +6395,7 @@ DefuseKit:
 			Superheavy: 45
 			Wood: 45
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Sonic_LightPercentage: HealthPercentageDamage
+	Warhead@Sonic_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -6420,7 +6420,7 @@ DefuseKit:
 			Wood: 5
 		UpdatesUnitStatistics: false
 
-^Sonic_Medium:
+^Warhead_Sonic_Medium:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -6450,7 +6450,7 @@ DefuseKit:
 			Superheavy: 55
 			Wood: 55
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Sonic_MediumFriendlyFire: SpreadDamage
+	Warhead@Sonic_Medium_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -6475,7 +6475,7 @@ DefuseKit:
 			Superheavy: 55
 			Wood: 55
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Sonic_MediumPercentage: HealthPercentageDamage
+	Warhead@Sonic_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -6500,7 +6500,7 @@ DefuseKit:
 			Wood: 8
 		UpdatesUnitStatistics: false
 
-^Sonic_Heavy:
+^Warhead_Sonic_Heavy:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -6530,7 +6530,7 @@ DefuseKit:
 			Superheavy: 65
 			Wood: 65
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Sonic_HeavyFriendlyFire: SpreadDamage
+	Warhead@Sonic_Heavy_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -6555,7 +6555,7 @@ DefuseKit:
 			Superheavy: 65
 			Wood: 65
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Sonic_HeavyPercentage: HealthPercentageDamage
+	Warhead@Sonic_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -6581,7 +6581,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### Railgun: VEH > INF > BLD > AIR (heavy, air=False) ######
-^Railgun_Heavy:
+^Warhead_Railgun_Heavy:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -6612,7 +6612,7 @@ DefuseKit:
 			Bomber: 44
 			Fighter: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Railgun_HeavyPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -6638,7 +6638,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### Tesla: INF+VEH > BLD > AIR (heavy, air=False) ######
-^Tesla_Heavy:
+^Warhead_Tesla_Heavy:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -6669,7 +6669,7 @@ DefuseKit:
 			Bomber: 44
 			Fighter: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Tesla_HeavyPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -6695,7 +6695,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### TeslaCharged: INF+VEH > BLD > AIR (heavy, air=False) ######
-^TeslaCharged_Super:
+^Warhead_TeslaCharged_Super:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -6726,7 +6726,7 @@ DefuseKit:
 			Bomber: 58
 			Fighter: 55
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@TeslaCharged_SuperPercentage: HealthPercentageDamage
+	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 500
 		Damage: 1
@@ -6752,7 +6752,7 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### Nuclear: BLD > VEH > AIR > INF (heavy, air=True) ######
-^Nuclear_Super:
+^Warhead_Nuclear_Super:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -6783,7 +6783,7 @@ DefuseKit:
 			Flak: 58
 			None: 55
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Nuclear_SuperFriendlyFire: SpreadDamage
+	Warhead@Nuclear_Super_FriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water, Air
 		Spread: 500
@@ -6809,7 +6809,7 @@ DefuseKit:
 			Flak: 58
 			None: 55
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Nuclear_SuperPercentage: HealthPercentageDamage
+	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 500
 		Damage: 1
@@ -6840,7 +6840,7 @@ DefuseKit:
 # extracted verbatim from the old full-stack central templates. DO NOT hand-
 # edit rows. Additive/0-usage until the weapon retrofit inherits them.
 ####################################################################
-^ProjectileArrow_Light:
+^Projectile_Arrow_Light:
 	Report: dune2smalllaser.aud
 	Projectile: Missile
 		Inaccuracy: 0
@@ -6848,7 +6848,7 @@ DefuseKit:
 		VerticalRateOfTurn: 40
 		PointDefenseTypes: Missile
 
-^ProjectileBullet_Light:
+^Projectile_Bullet_Light:
 	Report: gun8.aud
 	Projectile: Bullet
 		Image: 50CAL
@@ -6862,7 +6862,7 @@ DefuseKit:
 		Speed: 2000
 		Inaccuracy: 100
 
-^ProjectileBullet_Medium:
+^Projectile_Bullet_Medium:
 	Report: gun8.aud
 	Projectile: Bullet
 		Image: 50CAL
@@ -6876,22 +6876,22 @@ DefuseKit:
 		Speed: 4000
 		Inaccuracy: 200
 
-^ProjectileChem_Light:
+^Projectile_Chem_Light:
 	Report: flamer2.aud
 	Projectile: Bullet
 		Speed: 3500
 
-^ProjectileChem_Medium:
+^Projectile_Chem_Medium:
 	Report: flamer2.aud
 	Projectile: Bullet
 		Speed: 3500
 
-^ProjectileChem_Heavy:
+^Projectile_Chem_Heavy:
 	Report: flamer2.aud
 	Projectile: Bullet
 		Speed: 3500
 
-^ProjectileFlak_Medium:
+^Projectile_Flak_Medium:
 	Report: aacanon3.aud
 	Projectile: Bullet
 		Image: 50CAL
@@ -6905,7 +6905,7 @@ DefuseKit:
 		Speed: 10000
 		Inaccuracy: 250
 
-^ProjectileFlak_Heavy:
+^Projectile_Flak_Heavy:
 	Report: aacanon3.aud
 	Projectile: Bullet
 		Image: 50CAL
@@ -6919,19 +6919,19 @@ DefuseKit:
 		Speed: 7500
 		Inaccuracy: 500
 
-^ProjectileFlame_Light:
+^Projectile_Flame_Light:
 	Projectile: Bullet
 		Speed: 3000
 
-^ProjectileFlame_Medium:
+^Projectile_Flame_Medium:
 	Projectile: Bullet
 		Speed: 3000
 
-^ProjectileFlame_Heavy:
+^Projectile_Flame_Heavy:
 	Projectile: Bullet
 		Speed: 3000
 
-^ProjectileGrenade_Light:
+^Projectile_Grenade_Light:
 	Report: M203.aud
 	Projectile: Bullet
 		Speed: 150
@@ -6940,7 +6940,7 @@ DefuseKit:
 		Inaccuracy: 400
 		Image: BOMB
 
-^ProjectileLaser_Heavy:
+^Projectile_Laser_Heavy:
 	Report: obelray1.aud
 	Projectile: LaserZap
 		Width: 100
@@ -6948,16 +6948,16 @@ DefuseKit:
 		ZOffset: 3000
 		Blockable: false
 
-^ProjectileLightning_Heavy:
+^Projectile_Lightning_Heavy:
 	Report: tesla1.aud
 	Projectile: LightningZap
 
-^ProjectileLightning_Super:
+^Projectile_Lightning_Super:
 	Report: tesla1.aud
 	Projectile: LightningZap
 		Image: litning2
 
-^ProjectileMagic_Heavy:
+^Projectile_Magic_Heavy:
 	Report: 2100rotlsr.wav
 	Projectile: Missile
 		HorizontalRateOfTurn: 33
@@ -6978,10 +6978,10 @@ DefuseKit:
 		ContrailEndColor: FFFFFF
 		Blockable: false
 
-^ProjectileMelee_Medium:
+^Projectile_Melee_Medium:
 	Projectile: InstantHit
 
-^ProjectileMissile_Light:
+^Projectile_Missile_Light:
 	Report: bazook1.aud
 	Projectile: Missile
 		Arm: 0
@@ -7004,7 +7004,7 @@ DefuseKit:
 		RangeLimit: 20000
 		PointDefenseTypes: Missile
 
-^ProjectileMissile_Medium:
+^Projectile_Missile_Medium:
 	Report: bazook1.aud
 	Projectile: Missile
 		Arm: 0
@@ -7027,7 +7027,7 @@ DefuseKit:
 		RangeLimit: 25000
 		PointDefenseTypes: Missile
 
-^ProjectileMissile_Heavy:
+^Projectile_Missile_Heavy:
 	Report: missile6.aud
 	Projectile: Missile
 		Arm: 0
@@ -7050,7 +7050,7 @@ DefuseKit:
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
 
-^ProjectileRailgun_Heavy:
+^Projectile_Railgun_Heavy:
 	Report: bigggun1.aud
 	Projectile: Railgun
 		Duration: 16
@@ -7061,7 +7061,7 @@ DefuseKit:
 		ZOffset: 2048
 		HitAnim:
 
-^ProjectileShell_Light:
+^Projectile_Shell_Light:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Image: 120MM
@@ -7069,7 +7069,7 @@ DefuseKit:
 		Inaccuracy: 150
 		Shadow: true
 
-^ProjectileShell_Medium:
+^Projectile_Shell_Medium:
 	Report: tnkfire6.aud
 	Projectile: Bullet
 		Image: 120MM
@@ -7077,7 +7077,7 @@ DefuseKit:
 		Inaccuracy: 300
 		Shadow: true
 
-^ProjectileShell_Heavy:
+^Projectile_Shell_Heavy:
 	Report: tnkfire6.aud
 	Projectile: Bullet
 		Image: 120MM
@@ -7091,7 +7091,7 @@ DefuseKit:
 # extracted verbatim from the old full-stack central templates. DO NOT hand-
 # edit rows. Additive/0-usage until the weapon retrofit inherits them.
 ####################################################################
-^EffectArrow_Light:
+^Effect_Arrow_Light:
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -7111,7 +7111,7 @@ DefuseKit:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
-^EffectBullet_Light:
+^Effect_Bullet_Light:
 	Warhead@Effect: CreateEffect
 		Explosions: piff
 		ValidTargets: Ground, Ship, Air
@@ -7128,7 +7128,7 @@ DefuseKit:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
-^EffectBullet_Medium:
+^Effect_Bullet_Medium:
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ValidTargets: Ground, Ship, Air
@@ -7147,7 +7147,7 @@ DefuseKit:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
-^EffectCannon_Light:
+^Effect_Cannon_Light:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7185,7 +7185,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^EffectCannon_Medium:
+^Effect_Cannon_Medium:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7223,7 +7223,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^EffectCannon_Heavy:
+^Effect_Cannon_Heavy:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7261,7 +7261,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^EffectChem_Light:
+^Effect_Chem_Light:
 	Warhead@Effect: CreateEffect
 		Explosions: chemball
 		ImpactSounds: firebl3.aud
@@ -7276,7 +7276,7 @@ DefuseKit:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
-^EffectChem_Medium:
+^Effect_Chem_Medium:
 	Warhead@Effect: CreateEffect
 		Explosions: med_tibnapalm
 		ImpactSounds: xplobig6.aud
@@ -7294,7 +7294,7 @@ DefuseKit:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
-^EffectChem_Heavy:
+^Effect_Chem_Heavy:
 	Warhead@Effect: CreateEffect
 		Explosions: big_tibnapalm
 		ImpactSounds: xplobig6.aud
@@ -7312,7 +7312,7 @@ DefuseKit:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
-^EffectExplosion_Light:
+^Effect_Explosion_Light:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7343,7 +7343,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^EffectExplosion_Medium:
+^Effect_Explosion_Medium:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7374,7 +7374,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^EffectExplosion_Heavy:
+^Effect_Explosion_Heavy:
 	Warhead@Smudge1: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7419,7 +7419,7 @@ DefuseKit:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 250
 
-^EffectFlak_Medium:
+^Effect_Flak_Medium:
 	Warhead@Effect: CreateEffect
 		Explosions: flak_explosion_ground
 		ImpactSounds: xplos.aud
@@ -7443,7 +7443,7 @@ DefuseKit:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
-^EffectFlak_Heavy:
+^Effect_Flak_Heavy:
 	Warhead@Effect: CreateEffect
 		Explosions: flak_explosion_ground
 		ImpactSounds: xplos.aud
@@ -7467,7 +7467,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^EffectFlame_Light:
+^Effect_Flame_Light:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		Chance: 15
@@ -7505,7 +7505,7 @@ DefuseKit:
 		OwnerType: InternalName
 		InternalOwner: Neutral
 
-^EffectFlame_Medium:
+^Effect_Flame_Medium:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall
@@ -7544,7 +7544,7 @@ DefuseKit:
 		OwnerType: InternalName
 		InternalOwner: Neutral
 
-^EffectFlame_Heavy:
+^Effect_Flame_Heavy:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall
@@ -7583,7 +7583,7 @@ DefuseKit:
 		OwnerType: InternalName
 		InternalOwner: Neutral
 
-^EffectLaser_Heavy:
+^Effect_Laser_Heavy:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7610,7 +7610,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^EffectMagic_Heavy:
+^Effect_Magic_Heavy:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7628,7 +7628,7 @@ DefuseKit:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
-^EffectMelee_Medium:
+^Effect_Melee_Medium:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: pzehit00.aud
 	Warhead@ShieldHit: GrantExternalCondition
@@ -7640,7 +7640,7 @@ DefuseKit:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
-^EffectMissile_Light:
+^Effect_Missile_Light:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7673,7 +7673,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^EffectMissile_Medium:
+^Effect_Missile_Medium:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7706,7 +7706,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^EffectMissile_Heavy:
+^Effect_Missile_Heavy:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7739,7 +7739,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^EffectNuclear_Super:
+^Effect_Nuclear_Super:
 	Warhead@Smudge1: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall
@@ -7770,7 +7770,7 @@ DefuseKit:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1000
 
-^EffectRailgun_Heavy:
+^Effect_Railgun_Heavy:
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
@@ -7786,7 +7786,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^EffectTesla_Heavy:
+^Effect_Tesla_Heavy:
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
@@ -7799,7 +7799,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^EffectTesla_Super:
+^Effect_Tesla_Super:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 2000
 	Warhead@ShieldHit: GrantExternalCondition

@@ -428,9 +428,9 @@ TSShadowTeamTargeting:
 		ValidRelationships: Enemy
 
 TSRaiderCannon:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 20
 	Burst: 4
@@ -439,13 +439,13 @@ TSRaiderCannon:
 	Report: chaingn1.aud
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 6000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
 
 TSHarpyClaw:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 24
 	Burst: 5
 	BurstDelays: 0
@@ -456,7 +456,7 @@ TSHarpyClaw:
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Air
 
@@ -470,7 +470,7 @@ TSHarpyMultiClaw:
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 0
 		ValidTargets: Ground, Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 0
 		ValidTargets: Ground, Air
 
@@ -479,7 +479,7 @@ TSHarpyAOEClaw:
 	Warhead@Bullet_Medium: SpreadDamage
 		Spread: 300
 		Falloff: 100, 50, 25
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Spread: 300
 		Falloff: 100, 50, 25
 
@@ -522,7 +522,7 @@ TSLaserHarpyMultiClaw:
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 0
 		ValidTargets: Ground, Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 0
 		ValidTargets: Ground, Air
 	Warhead@LaserWeapon: SpreadDamage
@@ -537,7 +537,7 @@ TSLaserHarpyAOEClaw:
 	Warhead@Bullet_Medium: SpreadDamage
 		Spread: 300
 		Falloff: 100, 50, 25
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Spread: 300
 		Falloff: 100, 50, 25
 	Warhead@LaserWeapon: SpreadDamage

@@ -5,7 +5,7 @@ RA2AsianShotgun:
 	Report: aa_sshtgatt.wav
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 6000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piffs
@@ -33,7 +33,7 @@ AsianGrenade:
 		Damage: 2
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 AsianGrenade_elite:
@@ -49,7 +49,7 @@ asianalliance_asianmilitia_shotgun:
 	Report: aa_sshtgatt.wav
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 6000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piffs
@@ -77,7 +77,7 @@ asianalliance_asianmilitia_grenade:
 		Damage: 2
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 asianalliance_asianmilitia_grenade_elite:
@@ -212,11 +212,11 @@ RA2AsianShotgunFanatic1:
 		Damage: 1
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piffs
@@ -441,7 +441,7 @@ AsianLynxTankCannon:
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
@@ -464,13 +464,13 @@ AsianLynxMG:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -496,7 +496,7 @@ AsianKamikazeChaingun:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -823,7 +823,7 @@ AsianChemicalBombs:
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Effect: CreateEffect
@@ -892,11 +892,11 @@ AsianHowitzerCannon:
 		Inaccuracy: 320
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 20000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 20000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
@@ -1028,7 +1028,7 @@ AsianPulverizerGatling:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 
@@ -1132,7 +1132,7 @@ AsianSinglePlasma:
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@FireShrapnel: FireShrapnel
@@ -1651,7 +1651,7 @@ AsianTankMine:
 		Falloff: 125, 100, 75, 50, 25
 		Damage: 125000
 		InvalidTargets: Mine
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Spread: 2500
 		Falloff: 125, 100, 75, 50, 25
 		Damage: 25
@@ -1755,19 +1755,19 @@ AsianPelicanMG:
 	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -1789,7 +1789,7 @@ AAGunBoatCannon:
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 16000
 		Spread: 400
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
 		Spread: 400
 
@@ -1966,13 +1966,13 @@ ASDFGun:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -2097,11 +2097,11 @@ AsianSniperAP:
 		Damage: 8
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 16000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 16000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 16000
@@ -2109,7 +2109,7 @@ AsianSniperAP:
 		Damage: 8
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 16000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
@@ -2156,7 +2156,7 @@ AsianSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
@@ -2166,7 +2166,7 @@ AsianSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
@@ -2186,7 +2186,7 @@ AsianSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16

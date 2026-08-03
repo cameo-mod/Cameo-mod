@@ -33,7 +33,7 @@ NaxBrummbarArty:
 		Damage: 7
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 14000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 7
 
 NaxBrummbarArty_elite:
@@ -65,13 +65,13 @@ NaxiWW2KübelwagenMachinegun:
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 
@@ -97,13 +97,13 @@ NaxiWW2Machinegun:
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water
 
@@ -113,11 +113,11 @@ NaxiWW2Machinegun_AA:
 	ValidTargets: Air
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 NaxiWW2MachinegunSmall:
@@ -128,13 +128,13 @@ NaxiWW2MachinegunSmall:
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water
 
@@ -144,11 +144,11 @@ NaxiWW2MachinegunSmall_AA:
 	ValidTargets: Air
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 NaxiWW2MachinegunTop:
@@ -165,7 +165,7 @@ NaxiWW2MachinegunTop_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 NaxiWW2Machinegunner:
@@ -200,9 +200,9 @@ NaxiRifle_elite:
 		ContrailStartColor: FFAA55
 
 naxis_naxiriflesoldier_rifle:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
 	Range: 5000
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
@@ -218,7 +218,7 @@ naxis_naxiriflesoldier_rifle:
 		Width: 50
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 naxis_naxiriflesoldier_rifle_elite:
@@ -231,16 +231,16 @@ naxis_naxiriflesoldier_rifle_elite:
 		ContrailStartColor: FFAA55
 
 naxis_naxiriflerecruit_rifle:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 100
 	Range: 5227
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
 	ValidTargets: Ground, Water
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 8000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 naxis_naxiriflerecruit_rifle_elite:
@@ -250,9 +250,9 @@ naxis_naxiriflerecruit_rifle_elite:
 	BurstDelays: 3
 
 NaxiRifleT:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
 	Range: 8100
 	Burst: 2
@@ -270,20 +270,20 @@ NaxiRifleT:
 		Width: 55
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 32000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 16
 
 NaxiRifleCons:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 100
 	Range: 5501
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
 	ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 NaxiRifleCons_elite:
@@ -629,7 +629,7 @@ NaxiHetzerDestroyer:
 		Damage: 10
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 20000
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 
 NaxiHetzerDestroyer_elite:
@@ -659,7 +659,7 @@ NaxiJadgDestroyer:
 		Damage: 10
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 20000
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 
 NaxiJadgDestroyer_elite:
@@ -688,7 +688,7 @@ NaxiAntiTankCannon:
 		Damage: 7
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 14000
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 7
 
 NaxiAntiTankCannon_elite:
@@ -750,7 +750,7 @@ NaxMausCannon:
 		Damage: 5
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
 NaxMausCannon_elite:
@@ -796,7 +796,7 @@ NaxRatteCannon:
 		Damage: 25
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 50000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 25
 
 NaxRatteCannon_elite:
@@ -868,7 +868,7 @@ NaxQuadCannon_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Air
@@ -997,7 +997,7 @@ NaxPlanegun_elite:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -1124,7 +1124,7 @@ NaxTigerCannon:
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
 NaxTigerCannon_elite:
@@ -1143,7 +1143,7 @@ KingNaxTigerCannon:
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 20000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
 
 KingNaxTigerCannon_elite:

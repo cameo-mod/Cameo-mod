@@ -78,15 +78,15 @@ OreExplosion:
 		Size: 1,1
 
 M1Carbine:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 20
 	Range: 4655
 	Report: gun11.aud
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 CryoM1Carbine:
@@ -653,7 +653,7 @@ APCGunAllies_AA:
 	ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Air
@@ -679,9 +679,9 @@ RAVulcan:
 		Damage: 1
 
 ZeroFighterChainGun:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
 	Range: 6615
 	MinRange: 1325
@@ -693,7 +693,7 @@ ZeroFighterChainGun:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 
@@ -706,7 +706,7 @@ ZeroFighterChainGunWaveforce:
 		-LaunchAngle:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@RailgunWeapon: SpreadDamage
@@ -1879,9 +1879,9 @@ DepthCharge:
 		ValidTargets: Submarine, Ship, Underwater
 
 2Inch:
-	Inherits@wh: ^CannonAP_Light
-	Inherits@proj: ^ProjectileShell_Light
-	Inherits@fx: ^EffectCannon_Light
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Cannon_Light
 	ReloadDelay: 30
 	Range: 6000
 	Report: cannon2.aud
@@ -1891,7 +1891,7 @@ DepthCharge:
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 30000
 		Spread: 300
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 15
 		Spread: 300
 
@@ -2148,9 +2148,9 @@ ra1_allies_chronovortex:
 # CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): Allied
 # rifle infantry â€” burst 3, accurate, longest scout reach. Cryo pair.
 ra1_allies_rifleinfantry_carbine:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
 	Range: 5500
 	ValidTargets: Ground, Water
@@ -2159,7 +2159,7 @@ ra1_allies_rifleinfantry_carbine:
 	Report: gun11.aud
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 ra1_allies_rifleinfantry_carbine_cryo:

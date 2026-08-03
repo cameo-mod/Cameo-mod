@@ -13,7 +13,7 @@
 		Damage: 5
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 10000
@@ -38,7 +38,7 @@ IxianCombatTankCannon:
 		Damage: 2
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 HeavyIxianCombatTankCannon:
@@ -59,7 +59,7 @@ HeavyIxianCombatTankCannon:
 		Damage: 3
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 6000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
 
 DuelistTankCannon:
@@ -110,7 +110,7 @@ DuelistTankCannon:
 		Damage: 7
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 14000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 7
 	-Warhead@Effect1:
 	-Warhead@Effect2:
@@ -277,7 +277,7 @@ D2K_Rocket_Trooper2:
 	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 
@@ -451,7 +451,7 @@ IxRailgunDroneBullet:
 	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 
@@ -667,13 +667,13 @@ RashinanGun_upgrade:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -701,9 +701,9 @@ RaiderGuns:
 		Damage: 1
 
 RaiderGuns_upgrade:
-	Inherits@wh: ^CannonHE_Heavy
-	Inherits@proj: ^ProjectileShell_Heavy
-	Inherits@fx: ^EffectCannon_Heavy
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cannon_Heavy
 	Inherits: RaiderGuns
 	Inherits: ^HeavyMachineGunProjectile
 	Projectile: Bullet
@@ -712,19 +712,19 @@ RaiderGuns_upgrade:
 	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -752,9 +752,9 @@ HMG_turret:
 		Damage: 1
 
 HMG_turret_upgrade:
-	Inherits@wh: ^CannonHE_Heavy
-	Inherits@proj: ^ProjectileShell_Heavy
-	Inherits@fx: ^EffectCannon_Heavy
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cannon_Heavy
 	Inherits: HMG_turret
 	Inherits: ^HeavyMachineGunProjectile
 	ReloadDelay: 33
@@ -767,19 +767,19 @@ HMG_turret_upgrade:
 	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -1246,28 +1246,28 @@ d2k_air_drone_guns:
 
 	MinRange: 1300
 d2k_air_drone_guns_upgrade:
-	Inherits@wh: ^CannonHE_Heavy
-	Inherits@proj: ^ProjectileShell_Heavy
-	Inherits@fx: ^EffectCannon_Heavy
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cannon_Heavy
 	Inherits: d2k_air_drone_guns
 	Inherits: ^HeavyMachineGunProjectile
 	ValidTargets: Ground, Water, Air
 	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -1516,7 +1516,7 @@ d2k_basq_AA:
 		ValidTargets: Air
 	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Air
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 # d2k_guild_teleport:

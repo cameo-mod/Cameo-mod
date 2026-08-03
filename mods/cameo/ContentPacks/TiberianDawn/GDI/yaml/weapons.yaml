@@ -11,16 +11,16 @@ td_gdi_commando_sniper:
 		Damage: 20
 
 M16AP:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 15
 	Range: 4445
 	Report: mgun2.aud
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 GrenadeExplode:
@@ -82,7 +82,7 @@ APCGun_AA:
 	ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Air
@@ -146,7 +146,7 @@ BoxerCannon_AA:
 	ValidTargets: Air
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Air
@@ -160,11 +160,11 @@ BoxerCannon_AA:
 		ValidTargets: Air
 	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Air
@@ -255,9 +255,9 @@ ArcherArtilleryShell:
 	-Warhead@Effect:
 
 MachineGunH:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 9
 	Burst: 3
@@ -266,13 +266,13 @@ MachineGunH:
 	Report: mgun11.aud
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 6000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
 
 MachineGunAPH:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 9
 	Burst: 3
 	BurstDelays: 6
@@ -280,13 +280,13 @@ MachineGunAPH:
 	Report: mgun11.aud
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 6000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
 
 120mm:
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 72
 	Range: 5438
 	Report: tnkfire4.aud
@@ -294,15 +294,15 @@ MachineGunAPH:
 		Speed: 543
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
 120mmHV:
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	Inherits: ^HVProjectile
 	ReloadDelay: 72
 	Range: 5438
@@ -311,7 +311,7 @@ MachineGunAPH:
 		Speed: 1086
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 16000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -333,22 +333,22 @@ M1A1MissilesAMT:
 	Inherits: ^AMTProjectile
 
 M1A1MachineGun:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	Burst: 4
 	ReloadDelay: 68
 	Range: 5400
 	Report: mgun11.aud
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 120mmDual:
-	Inherits@wh: ^CannonHE_Heavy
-	Inherits@proj: ^ProjectileShell_Heavy
-	Inherits@fx: ^EffectCannon_Heavy
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cannon_Heavy
 	ReloadDelay: 72
 	Burst: 2
 	BurstDelays: 8
@@ -358,13 +358,13 @@ M1A1MachineGun:
 		Speed: 614
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 8000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 4
 
 120mmDualHV:
-	Inherits@wh: ^CannonHE_Heavy
-	Inherits@proj: ^ProjectileShell_Heavy
-	Inherits@fx: ^EffectCannon_Heavy
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cannon_Heavy
 	Inherits: ^HVProjectile
 	ReloadDelay: 72
 	Burst: 2
@@ -375,7 +375,7 @@ M1A1MachineGun:
 		Speed: 1228
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 16000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
 
 MammothMissiles:
@@ -462,9 +462,9 @@ OrcaMissilesAMT:
 	Inherits: ^AMTProjectile
 
 Vulcan:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	Range: 10000
 	ReloadDelay: 100
 	Burst: 10
@@ -478,7 +478,7 @@ Vulcan:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		Spread: 600
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		Spread: 600
@@ -512,9 +512,9 @@ Napalm:
 		GlowFadeInFrames: 12
 
 VulcanA10Carrier:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	Range: 5000
 	Burst: 10
 	BurstDelays: 2
@@ -528,7 +528,7 @@ VulcanA10Carrier:
 		Damage: 6000
 		Spread: 300
 		ValidRelationships: Neutral, Enemy
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		Spread: 300
@@ -900,11 +900,11 @@ EMPGrenadeExplode:
 		Damage: 2
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 4000
@@ -973,9 +973,9 @@ GDISniperRifle:
 		ImpactSounds: xplos.aud
 
 MachineGunHumvee2:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ValidTargets: Ground, Water
 	ReloadDelay: 30
 	Burst: 4
@@ -985,7 +985,7 @@ MachineGunHumvee2:
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -995,17 +995,17 @@ MachineGunHumvee2_AA:
 	ValidTargets: Air
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 MachineGunHumvee2AP:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 30
 	Burst: 4
@@ -1015,7 +1015,7 @@ MachineGunHumvee2AP:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -1025,7 +1025,7 @@ MachineGunHumvee2AP_AA:
 	ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 RocketsHumvee2:
@@ -1115,9 +1115,9 @@ TDShotgun:
 		Damage: 1
 
 GDIPredatorTankCannon:
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 70
 	Range: 5880
 	Report: tnkfire4.aud
@@ -1125,15 +1125,15 @@ GDIPredatorTankCannon:
 		Speed: 588
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
 GDIPredatorTankCannonHV:
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	Inherits: ^HVProjectile
 	ReloadDelay: 70
 	Range: 5880
@@ -1142,7 +1142,7 @@ GDIPredatorTankCannonHV:
 		Speed: 1176
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 16000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -1164,16 +1164,16 @@ GDIPredatorTankMissilesAMT:
 	Inherits: ^AMTProjectile
 
 GDIPredatorMachineGun:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	Burst: 4
 	ReloadDelay: 70
 	Range: 5880
 	Report: mgun11.aud
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 GDIPredatorBlueLaser:
@@ -1199,9 +1199,9 @@ GDIPredatorBlueLaser:
 	Warhead@Validation: TargetDamage
 
 MammothTank3Cannons:
-	Inherits@wh: ^CannonHE_Heavy
-	Inherits@proj: ^ProjectileShell_Heavy
-	Inherits@fx: ^EffectCannon_Heavy
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cannon_Heavy
 	ReloadDelay: 102
 	Burst: 2
 	BurstDelays: 8
@@ -1211,13 +1211,13 @@ MammothTank3Cannons:
 		Speed: 634
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 12000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
 
 MammothTank3CannonsHV:
-	Inherits@wh: ^CannonHE_Heavy
-	Inherits@proj: ^ProjectileShell_Heavy
-	Inherits@fx: ^EffectCannon_Heavy
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cannon_Heavy
 	Inherits: ^HVProjectile
 	ReloadDelay: 102
 	Burst: 2
@@ -1228,7 +1228,7 @@ MammothTank3CannonsHV:
 		Speed: 1268
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 24000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 12
 
 MammothTank3Missiles:
@@ -1285,9 +1285,9 @@ OfficerMachineGun:
 		Damage: 1
 
 OfficerMachineGunAP:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Air, Water
 	ReloadDelay: 20
 	Burst: 4
@@ -1297,7 +1297,7 @@ OfficerMachineGunAP:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
 
@@ -1836,9 +1836,9 @@ TDIonCannonDamage:
 # minigunner â€” burst 4, disciplined cadence. Paired AP variant per the
 # base+upgrade rename law. M16/M16AP stay for their other users.
 td_gdi_minigunner_minigun:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
 	Range: 5499
 	ValidTargets: Ground, Water
@@ -1847,13 +1847,13 @@ td_gdi_minigunner_minigun:
 	Report: mgun2.aud
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 td_gdi_minigunner_minigun_ap:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 45
 	Range: 4600
@@ -1862,7 +1862,7 @@ td_gdi_minigunner_minigun_ap:
 	Report: mgun2.aud
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 # CLOSE-COMBAT BASELINE WEAPON (Formula v2, 2026-07-19): defines the

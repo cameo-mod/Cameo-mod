@@ -319,7 +319,7 @@ TSVulcanTower:
 	Report: chaingn1.aud
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
@@ -417,9 +417,9 @@ TSDevoutChainguns:
 		ValidTargets: Ground, Water, Air
 
 CabalEliminatorGatling:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	Report: chaingn1.aud
 	ReloadDelay: 5
 	Range: 5857
@@ -427,7 +427,7 @@ CabalEliminatorGatling:
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16
 	Warhead@Effect: CreateEffect
@@ -436,15 +436,15 @@ CabalEliminatorGatling:
 		ValidTargets: Ground, Water, Air
 
 CabalTarantulaCannon:
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	Report: tsgun4.aud
 	ReloadDelay: 48
 	Range: 5278
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 16000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 
 

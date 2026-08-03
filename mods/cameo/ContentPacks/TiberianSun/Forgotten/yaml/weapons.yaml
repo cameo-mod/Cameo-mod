@@ -1,13 +1,13 @@
 TS70mm:
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 24
 	Range: 5566
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 TS70mmChem:
@@ -149,16 +149,16 @@ TSChem120mmx:
 
 TSScoopDual:
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^CannonHE_Medium
-	Inherits@proj: ^ProjectileShell_Medium
-	Inherits@fx: ^EffectCannon_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 2
 	Range: 6224
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 20000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
 
 TSScoopDualChem:
@@ -251,16 +251,16 @@ TSScoopDualTurChem:
 
 TSHighVelocity:
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^CannonAP_Light
-	Inherits@proj: ^ProjectileShell_Light
-	Inherits@fx: ^EffectCannon_Light
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Cannon_Light
 	ReloadDelay: 90
 	Range: 7701
 	Projectile: Bullet
 		Speed: 850
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 30000
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 15
 
 TSHighVelocityChem:
@@ -294,16 +294,16 @@ TSHighVelocityChem:
 
 TSHighVelocity2:
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^CannonAP_Light
-	Inherits@proj: ^ProjectileShell_Light
-	Inherits@fx: ^EffectCannon_Light
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Cannon_Light
 	ReloadDelay: 55
 	Range: 8207
 	Projectile: Bullet
 		Speed: 850
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 40000
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 20
 
 TSHighVelocity2Chem:
@@ -337,16 +337,16 @@ TSHighVelocity2Chem:
 
 TSHighVelocityTur:
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^CannonAP_Light
-	Inherits@proj: ^ProjectileShell_Light
-	Inherits@fx: ^EffectCannon_Light
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Cannon_Light
 	ReloadDelay: 30
 	Range: 9483
 	Projectile: Bullet
 		Speed: 1280
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 48000
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 24
 
 TSBusMortar:
@@ -1896,9 +1896,9 @@ TSMutVulcanTurret:
 		Damage: 1
 
 TSRaiderCarCannon:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 20
 	Burst: 4
@@ -1907,7 +1907,7 @@ TSRaiderCarCannon:
 	Report: chaingn1.aud
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 TSBowlerCannon:
@@ -1927,9 +1927,9 @@ TSBowlerCannon:
 		Damage: 1
 
 TSWaspClaw:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 18
 	Burst: 2
 	BurstDelays: 0
@@ -1940,7 +1940,7 @@ TSWaspClaw:
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Air
 
@@ -1964,9 +1964,9 @@ TSMutApcCannon:
 	ValidTargets: Ground, Water, Air
 
 TSNomadGun:
-	Inherits@wh: ^Bullet_Medium
-	Inherits@proj: ^ProjectileBullet_Medium
-	Inherits@fx: ^EffectBullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 6
 	Range: 8301
 	Report: aacanon3.aud
@@ -1983,7 +1983,7 @@ TSNomadGun:
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 8000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 		ValidTargets: Ground, Water
 
@@ -2057,15 +2057,15 @@ TSChemGhostGun:
 		Damage: 5
 
 MutAPRifle:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 8
 	Range: 5146
 	Report: jumpjet1.aud, gostgun1.aud
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 TSSergGun:
@@ -2091,14 +2091,14 @@ TSSergGun:
 # same range/speed must price at exactly 250% (O 1.5x, P 2x, Q 4x).
 # MutAPRifle stays for its other users.
 forgotten_mutantsoldier_rifle:
-	Inherits@wh: ^Bullet_Light
-	Inherits@proj: ^ProjectileBullet_Light
-	Inherits@fx: ^EffectBullet_Light
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
 	Range: 5000
 	ValidTargets: Ground, Water
 	Report: mgun2.aud
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 8000
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 4

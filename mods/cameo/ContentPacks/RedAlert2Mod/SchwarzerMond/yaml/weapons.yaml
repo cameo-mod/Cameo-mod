@@ -16,7 +16,7 @@ schwarzermond_lunarsoldier_rifle:
 	Warhead@Bullet_Light: SpreadDamage
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
 	Warhead@Chaingun: SpreadDamage
@@ -82,11 +82,11 @@ NaxiBeetleLaser_AA_elite:
 	ValidTargets: Air
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Air
@@ -106,7 +106,7 @@ LunarPanzerCannon:
 		Speed: 512
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
 LunarPanzerCannon_elite:
@@ -160,11 +160,11 @@ NaxiTank2Laser_AA:
 	ValidTargets: Air
 	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_LightPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Air
@@ -200,11 +200,11 @@ NaxiMP40Laser:
 		Damage: 1
 	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@Bullet_MediumPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 2000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 2000
@@ -237,7 +237,7 @@ LunarNaxiJadgDestroyer:
 		Damage: 15
 	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 30000
-	Warhead@CannonAP_LightPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 15
 
 LunarNaxiJadgDestroyer_elite:
@@ -275,7 +275,7 @@ LunarTigerCannon:
 		Damage: 2
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 LunarTigerCannon_elite:
@@ -479,9 +479,9 @@ BlackHoleMaker_elite:
 		Color: FF8844
 
 NaxiBlackholeShoot:
-	Inherits@wh: ^CannonHE_Heavy
-	Inherits@proj: ^ProjectileShell_Heavy
-	Inherits@fx: ^EffectCannon_Heavy
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cannon_Heavy
 	Range: 5000
 	ReloadDelay: 5
 	Projectile: InstantHit
@@ -493,7 +493,7 @@ NaxiBlackholeShoot:
 	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@CannonHE_HeavyPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -751,7 +751,7 @@ UbermenschLaser:
 	ValidTargets: Ground, Water
 	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@CannonHE_MediumPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
