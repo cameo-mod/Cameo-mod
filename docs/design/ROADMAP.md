@@ -28,6 +28,15 @@ committed: `^MissileVehicleTemplate` + 10 reassignments (missile-MLRS family + N
 removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
 
 **Queue (priority order):**
+- **[P0 RESOLVED 2026-08-04] Empty-warhead-type NRE on load** — two typeless `Warhead@` nodes
+  (`RA2MirageGun` `Warhead@Effect:` in `mods/cameo/weapons/redalert2.yaml`,
+  `TSSAPCMissiles` `Warhead@GrenadeFriendlyFire:` in `mods/cameo/weapons/tiberiansun.yaml`)
+  crashed boot (`NullReferenceException` in `WeaponInfo.LoadWarheads`, abstract `Warhead` base
+  instantiated). Fixed by giving each node its concrete type (`CreateEffect` / `SpreadDamage`).
+  New regression audit `tools/audit/audit_empty_warheads.py` sweeps the full resolved ruleset
+  (4,202 weapons incl. `^templates`): 0 remaining. Boot-gate PASSED (menu `PostWorldLoaded`,
+  no new exception log). `--check-yaml` does NOT catch this class — run the audit after bulk
+  warhead edits. See `docs/audit/SUMMARY.md` § "Empty warhead type NRE (2026-08-04)".
 0. **[DONE 2026-08-01, `59c77f444`] Armor normalization** — armor is now a per-CLASS property (single
    source in `^<Class>Template`). Fixed 3 templates (MBT→Heavy, HighTechTank→Superheavy,
    LineBreaker→Superheavy) + stripped 215 flat per-actor `Armor: Type:` overrides + dropped stale Medium
@@ -66,6 +75,11 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    key-set diff = only 6 provisional removed / 55 added, rest byte-identical; all weapon audits green;
    game reached main menu (`PostWorldLoaded`, no new exception log). Old bespoke templates
    (`^Grenade`/`^ShrapnelWeapon`/`^HeavyBomb`/`^SmallArms`/etc.) intentionally KEPT until repoint.
+   **GENERATOR RECONCILED 2026-08-04** (A1 of BALANCE_MEGAPLAN) — `gen_weapon_template.py` now emits
+   `^Warhead_<Family>_<Level>` naming + `AreaDamage` main + universal baked FF (`Ally, Neutral, Enemy` +
+   `FriendlyFireDamage/Spread 50`) + `_Percentage` suffix, matching the swept/converted templates in
+   `weapons.yaml`. Regenerating is now a no-op diff against the file. Fixed `AOE_FAMILIES` `NameError`
+   (leftover from removed `aoe` param). Spot-verified Bullet + Tesla templates match byte-for-byte.
    **REPOINT REFRAMED AS THE FULL 3-WAY SPLIT (#4b), maintainer 2026-08-02.** A bare reparent onto the
    warhead-only families is UNSAFE: survey found 392/437 single-inherit weapons override a warhead by the
    OLD key (`Warhead@SmallArms:` → orphaned/double-fire) + 253 rely on the old template's bundled FX (go

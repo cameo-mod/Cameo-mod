@@ -35,6 +35,7 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - [Superweapon documentation audit (2026-07-25)](#superweapon-documentation-audit-2026-07-25)
 - [Engine update pipeline and Smart App Control findings (2026-07-30, updated with deep research)](#engine-update-pipeline-and-smart-app-control-findings-2026-07-30-updated-with-deep-research)
 - [Loose-extracted .oramap maps must always be repacked before finishing a task (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
+- [Empty warhead type = boot NRE; check-yaml does not catch it (2026-08-04)](#empty-warhead-type--boot-nre-check-yaml-does-not-catch-it-2026-08-04)
 
 ---
 
@@ -310,18 +311,6 @@ Key facts verified 2026-07-30:
 - Building ONLY `OpenRA.Mods.CA.csproj` still touches `engine/bin/OpenRA.dll` (project references + shared output dir). There is no build scoping that avoids rewriting engine binaries.
 - GitHub zipballs do NOT include submodule/gitlink content — a gitlink in the engine repo appears as an empty folder in the fetched `engine/` copy.
 
-#### Nested-clone gitlink pitfall (2026-07-30)
-
-- Commits `bd15085df2`..`15797c874b` on `cameo-engine` accidentally contained an orphaned gitlink `OpenRA` (mode 160000, no `.gitmodules` entry) — a full nested clone of the same repo had been created inside the working tree and swept up by a broad `git add`. Removed in `2cfb751694`.
-- **Never run `git clone` inside a repository working tree.** Before committing, check `git status` for unexpected single-name directory entries; `git ls-files -s <name>` showing mode `160000` without a `.gitmodules` entry is an accidental gitlink.
-
-#### Smart App Control and locally built engine binaries (2026-07-30, updated with deep research)
-
-**What SAC is**: Windows 11 Smart App Control (SAC) is a WDAC-based feature that blocks untrusted binaries. It trusts binaries that are either (a) signed by a CA in Microsoft's Trusted Root Program, or (b) have positive cloud reputation via the Intelligent Security Graph (ISG). Unsigned binaries with no cloud reputation are blocked.
-
-**Why local builds get blocked**: All `engine/bin/*.dll` files are locally compiled and unsigned. Every compile embeds a fresh MVID (Module Version ID, a GUID), producing a new file hash even if the source code is identical. The ISG can never have cloud reputation for a just-built binary hash. **This is independent of any code change** (proven via `git stash` + clean `make all` + launch → identical block).
-
-**The block mechanism (verified via Code Integrity event logs)**:
 - SAC's WDAC policy ID is `{0283ac0f-fff1-49ae-ada1-8a933130cad6}` (`VerifiedAndReputableDesktop`).
 - Block events: `Microsoft-Windows-CodeIntegrity/Operational` Event ID 3033 (audit) + 3077 (enforcement block), reason "did not meet the Enterprise signing level requirements".
 - The ISG cloud verdict is **asynchronous**: the first launch of a fresh build may succeed because the verdict hasn't arrived yet. Subsequent launches are blocked after the ISG returns "unknown" for the new hash.
@@ -405,3 +394,11 @@ The 3-way weapon-template split requires retrofitting weapons from the old full-
 - **Dual-inherit weapons must be skipped in Phase A.** Weapons inheriting from BOTH `^SmallArms` and `^Chaingun` (e.g. `HMG_turret`, `TSTurretLaserFire`) have ambiguous warhead key mappings and require special handling in Phase B. The script correctly skips them.
 - **Intermediate templates are repointed, not their children.** Templates like `^RA2SmallArms`, `^RA2Chaingun`, `^RA2MG`, `^TSMG`, `^SteelChaingun` inherit from `^SmallArms`/`^Chaingun` and were repointed directly. Their concrete weapon children (e.g. `ra2_soviets_conscript_carbine`) inherit from the intermediate template and were NOT directly modified — correct behavior.
 - **Warhead key renaming is selective.** The script only renames `Warhead@SmallArms:` and `Warhead@Chaingun:` (and their `Percentage` variants), NOT custom warhead keys like `Warhead@TSMG:`. This is correct — custom keys are weapon-specific and don't follow the template name pattern.
+
+## Empty warhead type = boot NRE; check-yaml does not catch it (2026-08-04)
+
+A `Warhead@X:` line with **no value** is a boot crash, not a lint warning. `WeaponInfo.LoadWarheads` runs for **every** top-level weapon node in the resolved ruleset — including unused `^templates` — and calls `Game.CreateObject<IWarhead>(node.Value.Value + "Warhead")`. An empty value parses to `null`, so the lookup resolves to the abstract `Warhead` base class and `ObjectCreator.CreateBasic` throws `NullReferenceException` during `Ruleset.LoadDefaults`; the game never reaches the main menu.
+
+- **Why inheritance doesn't save you**: `MiniYaml.MergePartial` falls back to the parent value only when a **same-key** ancestor carries one (`overrideNodes.Value ?? existingNodes.Value`). Both crash sites (`RA2MirageGun` `Warhead@Effect:` in `mods/cameo/weapons/redalert2.yaml`, `TSSAPCMissiles` `Warhead@GrenadeFriendlyFire:` in `mods/cameo/weapons/tiberiansun.yaml`) had no same-key ancestor, so nothing rescued the null. Fix = give the node its concrete type (`CreateEffect` / `SpreadDamage`), don't leave the line dangling "to be filled in".
+- **`utility --check-yaml` does NOT catch this class** — typeless warhead nodes lint clean. The permanent guard is `python tools/balance/run_with_guard.py tools/audit/audit_empty_warheads.py`, which resolves the full manifest weapon set via `miniyaml.Ruleset` and flags any resolved node whose key starts with `Warhead` but has no type (plus empty `Projectile:` as a suspect). **Run it after any bulk warhead/weapon edit** (retrofits, key renames, template repointing). Post-fix sweep: 4,202 weapons, 0 findings; boot-gate passed.
+- **Same crash class, other keys**: any engine-loaded node keyed by class name behaves this way. `Projectile:` with no value is the adjacent suspect (flagged by the same audit); trait nodes are safe because they carry their type in the key name itself.
