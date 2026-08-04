@@ -3254,8 +3254,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Bullet_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Bullet_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1000
@@ -3310,8 +3312,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Bullet_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Bullet_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 600
 		Damage: 1000
@@ -3366,8 +3370,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Bullet_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Bullet_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 800
 		Damage: 1000
@@ -3423,8 +3429,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@CannonAP_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@CannonAP_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1000
@@ -3479,8 +3487,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@CannonAP_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@CannonAP_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 1000
@@ -3535,8 +3545,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@CannonAP_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@CannonAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 1000
@@ -3592,8 +3604,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@CannonHE_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@CannonHE_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1000
@@ -3648,8 +3662,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@CannonHE_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@CannonHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 1000
@@ -3704,8 +3720,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@CannonHE_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@CannonHE_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 1000
@@ -3761,8 +3779,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@MissileAP_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@MissileAP_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1000
@@ -3817,8 +3837,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@MissileAP_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@MissileAP_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 600
 		Damage: 1000
@@ -3873,8 +3895,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@MissileAP_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 800
 		Damage: 1000
@@ -3930,8 +3954,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@MissileHE_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@MissileHE_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1000
@@ -3986,8 +4012,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@MissileHE_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@MissileHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 600
 		Damage: 1000
@@ -4042,8 +4070,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@MissileHE_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@MissileHE_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 800
 		Damage: 1000
@@ -4099,8 +4129,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@MissileAA_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@MissileAA_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1000
@@ -4155,8 +4187,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@MissileAA_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@MissileAA_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 600
 		Damage: 1000
@@ -4211,8 +4245,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@MissileAA_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@MissileAA_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 800
 		Damage: 1000
@@ -4268,8 +4304,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Flak_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Flak_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1000
@@ -4324,8 +4362,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Flak_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Flak_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 600
 		Damage: 1000
@@ -4380,8 +4420,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Flak_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Flak_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 800
 		Damage: 1000
@@ -4437,8 +4479,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Laser_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Laser_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1000
@@ -4493,8 +4537,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Laser_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Laser_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 600
 		Damage: 1000
@@ -4549,8 +4595,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Laser_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Laser_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 800
 		Damage: 1000
@@ -4606,8 +4654,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Prism_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Prism_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1000
@@ -4662,8 +4712,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Prism_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Prism_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 1000
@@ -4718,8 +4770,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Prism_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Prism_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 1000
@@ -4775,40 +4829,16 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Flame_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Flame_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1000
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
 			HAZMAT: 50
-			Shield: 110
-			None: 100
-			Wood: 94
-			Flak: 88
-			Steel: 82
-			Plate: 76
-			Concrete: 70
-			Heroic: 64
-			Scout: 58
-			Light: 52
-			Medium: 46
-			Heavy: 40
-			Superheavy: 34
-			Fighter: 28
-			Bomber: 22
-			Helicopter: 16
-			Spaceship: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Flame_Light_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 200
-		Damage: 500
-		Falloff: 100, 50, 33, 25, 20
-		Versus:
-			HAZMAT: 25
 			Shield: 110
 			None: 100
 			Wood: 94
@@ -4857,40 +4887,16 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Flame_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Flame_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 1000
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
 			HAZMAT: 50
-			Shield: 125
-			None: 100
-			Wood: 95
-			Flak: 90
-			Steel: 85
-			Plate: 80
-			Concrete: 75
-			Heroic: 70
-			Scout: 65
-			Light: 60
-			Medium: 55
-			Heavy: 50
-			Superheavy: 45
-			Fighter: 40
-			Bomber: 35
-			Helicopter: 30
-			Spaceship: 25
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 300
-		Damage: 500
-		Falloff: 100, 50, 30, 18, 10
-		Versus:
-			HAZMAT: 25
 			Shield: 125
 			None: 100
 			Wood: 95
@@ -4939,40 +4945,16 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Flame_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Flame_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 1000
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
 			HAZMAT: 50
-			Shield: 140
-			None: 100
-			Wood: 96
-			Flak: 92
-			Steel: 88
-			Plate: 84
-			Concrete: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Flame_Heavy_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 400
-		Damage: 500
-		Falloff: 100, 50, 25, 10, 5
-		Versus:
-			HAZMAT: 25
 			Shield: 140
 			None: 100
 			Wood: 96
@@ -5022,40 +5004,16 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Chemical_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Chemical_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1000
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
 			HAZMAT: 50
-			Shield: 110
-			Superheavy: 100
-			Heroic: 94
-			Heavy: 88
-			Plate: 82
-			Medium: 76
-			Flak: 70
-			Light: 64
-			None: 58
-			Scout: 52
-			Concrete: 46
-			Steel: 40
-			Wood: 34
-			Spaceship: 28
-			Helicopter: 22
-			Bomber: 16
-			Fighter: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Chemical_Light_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 200
-		Damage: 500
-		Falloff: 100, 50, 33, 25, 20
-		Versus:
-			HAZMAT: 25
 			Shield: 110
 			Superheavy: 100
 			Heroic: 94
@@ -5104,40 +5062,16 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Chemical_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Chemical_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 1000
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
 			HAZMAT: 50
-			Shield: 125
-			Superheavy: 100
-			Heroic: 95
-			Heavy: 90
-			Plate: 85
-			Medium: 80
-			Flak: 75
-			Light: 70
-			None: 65
-			Scout: 60
-			Concrete: 55
-			Steel: 50
-			Wood: 45
-			Spaceship: 40
-			Helicopter: 35
-			Bomber: 30
-			Fighter: 25
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 300
-		Damage: 500
-		Falloff: 100, 50, 30, 18, 10
-		Versus:
-			HAZMAT: 25
 			Shield: 125
 			Superheavy: 100
 			Heroic: 95
@@ -5186,40 +5120,16 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Chemical_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Chemical_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 1000
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
 			HAZMAT: 50
-			Shield: 140
-			Superheavy: 100
-			Heroic: 96
-			Heavy: 92
-			Plate: 88
-			Medium: 84
-			Flak: 80
-			Light: 76
-			None: 72
-			Scout: 68
-			Concrete: 64
-			Steel: 60
-			Wood: 56
-			Spaceship: 52
-			Helicopter: 48
-			Bomber: 44
-			Fighter: 40
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Chemical_Heavy_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 400
-		Damage: 500
-		Falloff: 100, 50, 25, 10, 5
-		Versus:
-			HAZMAT: 25
 			Shield: 140
 			Superheavy: 100
 			Heroic: 96
@@ -5269,40 +5179,16 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Melee_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Melee_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground
 		Spread: 400
 		Damage: 1000
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
 			HAZMAT: 50
-			Shield: 110
-			None: 100
-			Flak: 94
-			Plate: 88
-			Heroic: 82
-			Scout: 76
-			Light: 70
-			Medium: 64
-			Heavy: 58
-			Superheavy: 52
-			Wood: 46
-			Steel: 40
-			Concrete: 34
-			Fighter: 28
-			Bomber: 22
-			Helicopter: 16
-			Spaceship: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Melee_Light_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground
-		Spread: 200
-		Damage: 500
-		Falloff: 100, 50, 33, 25, 20
-		Versus:
-			HAZMAT: 25
 			Shield: 110
 			None: 100
 			Flak: 94
@@ -5351,40 +5237,16 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Melee_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Melee_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground
 		Spread: 600
 		Damage: 1000
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
 			HAZMAT: 50
-			Shield: 125
-			None: 100
-			Flak: 95
-			Plate: 90
-			Heroic: 85
-			Scout: 80
-			Light: 75
-			Medium: 70
-			Heavy: 65
-			Superheavy: 60
-			Wood: 55
-			Steel: 50
-			Concrete: 45
-			Fighter: 40
-			Bomber: 35
-			Helicopter: 30
-			Spaceship: 25
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground
-		Spread: 300
-		Damage: 500
-		Falloff: 100, 50, 30, 18, 10
-		Versus:
-			HAZMAT: 25
 			Shield: 125
 			None: 100
 			Flak: 95
@@ -5433,40 +5295,16 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Melee_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Melee_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground
 		Spread: 800
 		Damage: 1000
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
 			HAZMAT: 50
-			Shield: 140
-			None: 100
-			Flak: 96
-			Plate: 92
-			Heroic: 88
-			Scout: 84
-			Light: 80
-			Medium: 76
-			Heavy: 72
-			Superheavy: 68
-			Wood: 64
-			Steel: 60
-			Concrete: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Melee_Heavy_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground
-		Spread: 400
-		Damage: 500
-		Falloff: 100, 50, 25, 10, 5
-		Versus:
-			HAZMAT: 25
 			Shield: 140
 			None: 100
 			Flak: 96
@@ -5516,8 +5354,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Arrow_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Arrow_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1000
@@ -5572,8 +5412,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Arrow_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Arrow_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 600
 		Damage: 1000
@@ -5628,8 +5470,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Arrow_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Arrow_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 800
 		Damage: 1000
@@ -5685,8 +5529,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Magic_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Magic_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1000
@@ -5740,8 +5586,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Magic_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Magic_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 1000
@@ -5795,8 +5643,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Magic_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Magic_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 1000
@@ -5851,40 +5701,16 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Demolition_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Demolition_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1000
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
 			HAZMAT: 50
-			Shield: 110
-			Wood: 100
-			Steel: 94
-			Concrete: 88
-			None: 82
-			Flak: 76
-			Plate: 70
-			Heroic: 64
-			Scout: 58
-			Light: 52
-			Medium: 46
-			Heavy: 40
-			Superheavy: 34
-			Fighter: 28
-			Bomber: 22
-			Helicopter: 16
-			Spaceship: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 200
-		Damage: 500
-		Falloff: 100, 50, 33, 25, 20
-		Versus:
-			HAZMAT: 25
 			Shield: 110
 			Wood: 100
 			Steel: 94
@@ -5933,40 +5759,16 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Demolition_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Demolition_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 1000
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
 			HAZMAT: 50
-			Shield: 125
-			Wood: 100
-			Steel: 95
-			Concrete: 90
-			None: 85
-			Flak: 80
-			Plate: 75
-			Heroic: 70
-			Scout: 65
-			Light: 60
-			Medium: 55
-			Heavy: 50
-			Superheavy: 45
-			Fighter: 40
-			Bomber: 35
-			Helicopter: 30
-			Spaceship: 25
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Demolition_Medium_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 300
-		Damage: 500
-		Falloff: 100, 50, 30, 18, 10
-		Versus:
-			HAZMAT: 25
 			Shield: 125
 			Wood: 100
 			Steel: 95
@@ -6015,40 +5817,16 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Demolition_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Demolition_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 1000
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
 			HAZMAT: 50
-			Shield: 140
-			Wood: 100
-			Steel: 96
-			Concrete: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Demolition_Heavy_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 400
-		Damage: 500
-		Falloff: 100, 50, 25, 10, 5
-		Versus:
-			HAZMAT: 25
 			Shield: 140
 			Wood: 100
 			Steel: 96
@@ -6098,40 +5876,16 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Concussion_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Concussion_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1000
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
 			HAZMAT: 50
-			Shield: 110
-			Scout: 100
-			None: 94
-			Wood: 88
-			Light: 82
-			Flak: 76
-			Steel: 70
-			Medium: 64
-			Plate: 58
-			Concrete: 52
-			Heavy: 46
-			Heroic: 40
-			Superheavy: 34
-			Fighter: 28
-			Bomber: 22
-			Helicopter: 16
-			Spaceship: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Concussion_Light_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 200
-		Damage: 500
-		Falloff: 100, 50, 33, 25, 20
-		Versus:
-			HAZMAT: 25
 			Shield: 110
 			Scout: 100
 			None: 94
@@ -6180,40 +5934,16 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Concussion_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Concussion_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 1000
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
 			HAZMAT: 50
-			Shield: 125
-			Scout: 100
-			None: 95
-			Wood: 90
-			Light: 85
-			Flak: 80
-			Steel: 75
-			Medium: 70
-			Plate: 65
-			Concrete: 60
-			Heavy: 55
-			Heroic: 50
-			Superheavy: 45
-			Fighter: 40
-			Bomber: 35
-			Helicopter: 30
-			Spaceship: 25
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 300
-		Damage: 500
-		Falloff: 100, 50, 30, 18, 10
-		Versus:
-			HAZMAT: 25
 			Shield: 125
 			Scout: 100
 			None: 95
@@ -6262,40 +5992,16 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Concussion_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Concussion_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 1000
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
 			HAZMAT: 50
-			Shield: 140
-			Scout: 100
-			None: 96
-			Wood: 92
-			Light: 88
-			Flak: 84
-			Steel: 80
-			Medium: 76
-			Plate: 72
-			Concrete: 68
-			Heavy: 64
-			Heroic: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Concussion_Heavy_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 400
-		Damage: 500
-		Falloff: 100, 50, 25, 10, 5
-		Versus:
-			HAZMAT: 25
 			Shield: 140
 			Scout: 100
 			None: 96
@@ -6345,36 +6051,13 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Sonic_Light: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Sonic_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1000
-		Falloff: 100, 50, 33, 25, 20
-		Versus:
-			Shield: 45
-			Bomber: 45
-			Concrete: 45
-			Fighter: 45
-			Flak: 45
-			Heavy: 45
-			Helicopter: 45
-			Heroic: 45
-			Light: 45
-			Medium: 45
-			None: 45
-			Plate: 45
-			Scout: 45
-			Spaceship: 45
-			Steel: 45
-			Superheavy: 45
-			Wood: 45
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Sonic_Light_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 200
-		Damage: 500
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
 			Shield: 45
@@ -6425,36 +6108,13 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Sonic_Medium: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Sonic_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 1000
-		Falloff: 100, 50, 30, 18, 10
-		Versus:
-			Shield: 55
-			Bomber: 55
-			Concrete: 55
-			Fighter: 55
-			Flak: 55
-			Heavy: 55
-			Helicopter: 55
-			Heroic: 55
-			Light: 55
-			Medium: 55
-			None: 55
-			Plate: 55
-			Scout: 55
-			Spaceship: 55
-			Steel: 55
-			Superheavy: 55
-			Wood: 55
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Sonic_Medium_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 300
-		Damage: 500
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
 			Shield: 55
@@ -6505,36 +6165,13 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Sonic_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Sonic_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 1000
-		Falloff: 100, 50, 25, 10, 5
-		Versus:
-			Shield: 65
-			Bomber: 65
-			Concrete: 65
-			Fighter: 65
-			Flak: 65
-			Heavy: 65
-			Helicopter: 65
-			Heroic: 65
-			Light: 65
-			Medium: 65
-			None: 65
-			Plate: 65
-			Scout: 65
-			Spaceship: 65
-			Steel: 65
-			Superheavy: 65
-			Wood: 65
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Sonic_Heavy_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 400
-		Damage: 500
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
 			Shield: 65
@@ -6586,8 +6223,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Railgun_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Railgun_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 1000
@@ -6643,8 +6282,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@Tesla_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Tesla_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 1000
@@ -6700,8 +6341,10 @@ DefuseKit:
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@TeslaCharged_Super: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@TeslaCharged_Super: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Spread: 1000
 		Damage: 1000
