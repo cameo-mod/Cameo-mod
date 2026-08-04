@@ -24,90 +24,16 @@ M16AP:
 		Damage: 2
 
 HighV:
-	ValidTargets: Ground, Water, Air
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 22
+	Range: 6720
 	Burst: 4
 	BurstDelays: 2
-	Range: 6720
-	TargetActorCenter: true
 	Report: gun8.aud
-	Projectile: Bullet
-		Image: 50CAL
-		ContrailZOffset: 4000
-		ContrailStartColor: 88888888
-		ContrailEndColor: 44444444
-		ContrailStartWidth: 30
-		ContrailEndWidth: 60
-		ContrailLength: 6
-		Speed: 2000
-		Inaccuracy: 100
-	Warhead@Bullet_Light: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Spread: 400
+	Warhead@Bullet_Light:
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
-		Versus:
-			HAZMAT: 50
-			Shield: 110
-			None: 100
-			Flak: 94
-			Plate: 88
-			Heroic: 82
-			Scout: 76
-			Fighter: 70
-			Wood: 64
-			Light: 58
-			Bomber: 52
-			Steel: 46
-			Medium: 40
-			Helicopter: 34
-			Concrete: 28
-			Heavy: 22
-			Spaceship: 16
-			Superheavy: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 200
-		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		UpdatesUnitStatistics: false
-	Warhead@Effect: CreateEffect
-		Explosions: piff
-		ValidTargets: Ground, Ship, Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piff
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 3
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-		ValidTargets: Shielded
 
 GrenadeExplode:
 	Inherits: Grenade
