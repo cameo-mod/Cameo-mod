@@ -45,7 +45,8 @@ done
 # Audits that live in tools/ rather than tools/audit/
 for a in createeffect_image:tools/audit_createeffect_image.py \
          ce_image_usage:tools/audit_ce_image_usage.py \
-         empty_warhead:tools/audit/find_empty_warhead.py; do
+         empty_warhead:tools/audit/find_empty_warhead.py \
+         gen_sync:tools/balance/verify_generator_sync.py; do
   name="${a%%:*}"
   script="${a##*:}"
   echo "== $name"
