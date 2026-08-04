@@ -461,6 +461,9 @@ naxis_rifletower:
 		LocalOffset: 300,1,700, 300,-1,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 150,1,700, 150,-1,700
+		CasingTargetOffset: 0,601,0, 0,-601,0
 	WithMuzzleOverlay:
 	BodyOrientation:
 		QuantizedFacings: 16
@@ -513,11 +516,17 @@ naxis_flak88:
 		LocalOffset: 888,44,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 444,44,700
+		CasingTargetOffset: 0,644,0
 	Armament@AA:
 		Weapon: NaxFlakAG
 		LocalOffset: 888,44,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 444,44,700
+		CasingTargetOffset: 0,644,0
 	WithMuzzleOverlay:
 	BodyOrientation:
 		QuantizedFacings: 16

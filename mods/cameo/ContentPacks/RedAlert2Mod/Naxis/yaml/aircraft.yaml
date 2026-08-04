@@ -328,28 +328,28 @@ naxis_transportzeppelin:
 	Armament:
 		Name: primary
 		Weapon: NaxQuadCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Name: primary
 		Weapon: NaxQuadCannon_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
 		RequiresCondition: rank-elite
 	Armament@AA:
 		Name: primary
 		Weapon: NaxQuadCannon_AA
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
 		RequiresCondition: !rank-elite
 	Armament@eliteAA:
 		Name: primary
 		Weapon: NaxQuadCannon_AA_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
 		RequiresCondition: rank-elite

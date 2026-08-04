@@ -202,7 +202,7 @@ wirbelwind.nax:
 	Armament:
 		Name: primary
 		Weapon: NaxQuadCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
 		MuzzleSequence: muzzle
@@ -211,7 +211,7 @@ wirbelwind.nax:
 	Armament@elite:
 		Name: primary
 		Weapon: NaxQuadCannon_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
 		MuzzleSequence: muzzle-2
@@ -220,7 +220,7 @@ wirbelwind.nax:
 	Armament@AA:
 		Name: primary
 		Weapon: NaxQuadCannon_AA
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
 		MuzzleSequence: muzzle
@@ -229,7 +229,7 @@ wirbelwind.nax:
 	Armament@eliteAA:
 		Name: primary
 		Weapon: NaxQuadCannon_AA_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
 		MuzzleSequence: muzzle-2
@@ -308,7 +308,7 @@ tiger.nax:
 	Armament:
 		Name: primary
 		Weapon: NaxTigerCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
@@ -317,7 +317,7 @@ tiger.nax:
 	Armament@elite:
 		Name: primary
 		Weapon: NaxTigerCannon_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle-2
@@ -369,7 +369,7 @@ naxis_kingtigerheavytank:
 	Armament:
 		Name: primary
 		Weapon: KingNaxTigerCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
@@ -378,7 +378,7 @@ naxis_kingtigerheavytank:
 	Armament@elite:
 		Name: primary
 		Weapon: KingNaxTigerCannon_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle-2
@@ -431,7 +431,7 @@ naxis_maus:
 	Armament:
 		Name: primary
 		Weapon: NaxMausCannon
-		Recoil: 256
+		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 1500,0,300
 		MuzzleSequence: muzzle
@@ -440,7 +440,7 @@ naxis_maus:
 	Armament@elite:
 		Name: primary
 		Weapon: NaxMausCannon_elite
-		Recoil: 256
+		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 1500,0,300
 		MuzzleSequence: muzzle-2
@@ -496,7 +496,7 @@ naxis_ratte:
 	Armament:
 		Name: primary
 		Weapon: NaxRatteCannon
-		Recoil: 500
+		Recoil: 250
 		RecoilRecovery: 50
 		LocalOffset: 2000,250,500, 2000,-250,500
 		MuzzleSequence: muzzle
@@ -505,7 +505,7 @@ naxis_ratte:
 	Armament@elite:
 		Name: primary
 		Weapon: NaxRatteCannon_elite
-		Recoil: 500
+		Recoil: 250
 		RecoilRecovery: 50
 		LocalOffset: 2000,250,500, 2000,-250,500
 		MuzzleSequence: muzzle
@@ -514,13 +514,13 @@ naxis_ratte:
 	Armament@AA1:
 		Name: secondary
 		Weapon: NaxQuadCannon_AA_elite
-		Recoil: 100
+		Recoil: 50
 		RecoilRecovery: 20
 		LocalOffset: 1024,400,80, 1024,-400,80
 	Armament@AA2:
 		Name: secondary
 		Weapon: NaxQuadCannon_AA_elite
-		Recoil: 100
+		Recoil: 50
 		RecoilRecovery: 20
 		LocalOffset: 1024,-400,80, 1024,400,80
 	AttackTurreted:
@@ -1037,7 +1037,7 @@ naxis_shoekarn:
 	Armament:
 		Name: primary
 		Weapon: RA2120mm
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
@@ -1046,7 +1046,7 @@ naxis_shoekarn:
 	Armament@elite:
 		Name: primary
 		Weapon: RA2120mm_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle-2
@@ -1264,7 +1264,7 @@ assault.nax:
 	Armament:
 		Name: primary
 		Weapon: Nax120mmAssault
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
@@ -1273,7 +1273,7 @@ assault.nax:
 	Armament@elite:
 		Name: primary
 		Weapon: Nax120mmAssault_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle-2
@@ -1332,7 +1332,7 @@ naxis_imperialturbotank:
 	Armament:
 		Name: primary
 		Weapon: Nax120mmAssault
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,-100,80
 		MuzzleSequence: muzzle
@@ -1341,7 +1341,7 @@ naxis_imperialturbotank:
 	Armament@elite:
 		Name: primary
 		Weapon: Nax120mmAssault_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,-100,80
 		MuzzleSequence: muzzle-2
@@ -1394,7 +1394,7 @@ panzer.nax:
 	Armament:
 		Name: primary
 		Weapon: RA2105mm
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle
@@ -1403,7 +1403,7 @@ panzer.nax:
 	Armament@elite:
 		Name: primary
 		Weapon: RA2105mm_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle-2
@@ -1457,7 +1457,7 @@ car.nax:
 	Armament:
 		Name: primary
 		Weapon: NaxiWW2MachinegunTop
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle
@@ -1466,7 +1466,7 @@ car.nax:
 	Armament@AA:
 		Name: primary
 		Weapon: NaxiWW2MachinegunTop_AA
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle

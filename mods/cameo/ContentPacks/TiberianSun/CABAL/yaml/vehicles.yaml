@@ -238,7 +238,7 @@ cabal_laserspider:
 	Armament@PRIMARY:
 		Weapon: CabalSpiderLaser
 		LocalOffset: 350,-30,250, 350,30,250
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
@@ -289,7 +289,7 @@ cabal_mantis:
 	Armament@PRIMARY:
 		Weapon: CabalMantisGun
 		LocalOffset: 350,-30,250, 350,30,250
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
@@ -393,14 +393,14 @@ cabal_artilleryspider:
 	Armament@PRIMARY:
 		Weapon: CabalArtilleryWalkerShell
 		LocalOffset: 300,0,1500
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@Upgraded:
 		Weapon: CabalArtilleryWalkerShellUpgraded
 		LocalOffset: 300,0,1500
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
@@ -456,14 +456,14 @@ cabal_tarantula:
 		Offset: -500,0,0
 	Armament@PRIMARY:
 		Weapon: CabalTarantulaCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 32
 		LocalOffset: 500, 0, 250
 		MuzzleSequence: muzzle
 		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@Upgraded:
 		Weapon: TS120mm_bluenuke
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 32
 		LocalOffset: 500, 0, 250
 		MuzzleSequence: muzzle
@@ -719,7 +719,7 @@ cabal_spidercnc4:
 	Armament@PRIMARY:
 		Weapon: CabalSpiderCnc4Laser
 		LocalOffset: 350,-30,250, 350,30,250
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
@@ -890,7 +890,7 @@ cabal_widow:
 	Armament@PRIMARY:
 		Weapon: CabalLegionGun
 		LocalOffset: 350,-30,250, 350,30,250
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:

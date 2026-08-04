@@ -25,13 +25,14 @@ namespace OpenRA.Mods.Cameo.Warheads
 		public readonly float Radius = 0.55f;
 		public readonly float Brightness = 1.15f;
 		public readonly float Darkness = 0.4f;
+		public readonly float MinimumExposure = 0.45f;
 
 		public override bool IsValidAgainst(Actor victim, Actor firedBy) => true;
 
 		public override void DoImpact(in Target target, WarheadArgs args)
 		{
 			args.SourceActor.World.WorldActor.TraitOrDefault<NuclearFlashRenderer>()
-				?.Enable(target.CenterPosition, Color, Duration, Radius, Brightness, Darkness);
+				?.Enable(target.CenterPosition, Color, Duration, Radius, Brightness, Darkness, MinimumExposure);
 		}
 	}
 }

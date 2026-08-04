@@ -122,7 +122,7 @@ ixian_ixsiegetank:
 		Weapon: D2K_155mm2
 		PauseOnCondition: !ammo
 		LocalOffset: 600,0,600
-		Recoil: 150
+		Recoil: 75
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
@@ -665,7 +665,7 @@ ixian_kodatank:
 		TurnSpeed: 13
 	Armament:
 		Weapon: IxianCombatTankCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 32
 		LocalOffset: 256,0,0
 		MuzzleSequence: muzzle
@@ -723,7 +723,7 @@ ixian_heavykodatank:
 		TurnSpeed: 12
 	Armament:
 		Weapon: HeavyIxianCombatTankCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 32
 		LocalOffset: 256,0,0
 		MuzzleSequence: muzzle
@@ -1151,7 +1151,7 @@ ixian_ixcombatsiege:
 		Offset: 0,0,0
 	Armament:
 		Weapon: D2K_155mm3
-		Recoil: 150
+		Recoil: 75
 		RecoilRecovery: 19
 		LocalOffset: 256,0,320
 		MuzzleSequence: muzzle
@@ -1419,14 +1419,14 @@ apparition.ixian:
 	Armament:
 		Name: primary
 		Weapon: d2k_basq
-		Recoil: 65
+		Recoil: 33
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		LocalOffset: 600, 0, 175
 	Armament@aa:
 		Name: secondary
 		Weapon: d2k_basq_AA
-		Recoil: 65
+		Recoil: 33
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		LocalOffset: 600, 0, 175
@@ -1569,7 +1569,7 @@ duelist_tank.ixian:
 		Offset: 0,0,0
 	Armament:
 		Weapon: DuelistTankCannon
-		Recoil: 150
+		Recoil: 75
 		RecoilRecovery: 15
 		LocalOffset: 256,0,320
 		MuzzleSequence: muzzle

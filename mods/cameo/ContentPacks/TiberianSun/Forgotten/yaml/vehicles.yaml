@@ -158,13 +158,13 @@ forgotten_missilevan:
 		Offset: -120,0,1
 	Armament@PRIMARY:
 		Weapon: TSVanMissile
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		LocalOffset: 0,121,271, 0,-121,271
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSChemVanMissile
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		LocalOffset: 0,121,271, 0,-121,271
 		RequiresCondition: forgotten_upgrade_chemicalweapons
@@ -212,7 +212,7 @@ forgotten_raidercar:
 		Offset: 0,0,1
 	Armament:
 		Weapon: TSRaiderCarCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		LocalOffset: 0,121,271, 0,-121,271
 		MuzzleSequence: muzzle
@@ -264,7 +264,7 @@ forgotten_bowler:
 		Offset: -200,0,25
 	Armament:
 		Weapon: TSBowlerCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		LocalOffset: 0,121,271, 0,-121,271
 		MuzzleSequence: muzzle
@@ -318,14 +318,14 @@ forgotten_ruiner:
 		Offset: 0,0,1
 	Armament@PRIMARY:
 		Weapon: TSRuinerMissile
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		LocalOffset: 0,121,271, 0,-121,271
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 		MuzzleSequence: muzzle
 	Armament@UPGRADE:
 		Weapon: TSChemRuinerMissile
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		LocalOffset: 0,121,271, 0,-121,271
 		RequiresCondition: forgotten_upgrade_chemicalweapons
@@ -377,13 +377,13 @@ forgotten_rattytank:
 		TurnSpeed: 18
 	Armament@PRIMARY:
 		Weapon: TS70mm
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TS70mmChem
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 		RequiresCondition: forgotten_upgrade_chemicalweapons
@@ -436,14 +436,14 @@ forgotten_warriortank:
 		TurnSpeed: 15
 	Armament@PRIMARY:
 		Weapon: TSHighVelocity2
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		LocalOffset: 768,0,90
 		MuzzleSequence: muzzle
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSHighVelocity2Chem
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		LocalOffset: 768,0,90
 		MuzzleSequence: muzzle
@@ -499,14 +499,14 @@ forgotten_scoopertank:
 	WithSpriteTurret:
 	Armament@PRIMARY:
 		Weapon: TSScoopDual
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSScoopDualChem
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
@@ -555,13 +555,13 @@ forgotten_closhtank:
 		Step: 48
 	Armament@PRIMARY:
 		Weapon: MutFlamer
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: MutFlamerChem
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 		RequiresCondition: forgotten_upgrade_chemicalweapons
@@ -669,14 +669,14 @@ forgotten_experimentalmammothtank:
 	Armament@PRIMARY:
 		Weapon: TS120mmx
 		LocalOffset: 900,85,340, 900,-85,340
-		Recoil: 170
+		Recoil: 85
 		RecoilRecovery: 42
 		MuzzleSequence: muzzle
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSChem120mmx
 		LocalOffset: 900,85,340, 900,-85,340
-		Recoil: 170
+		Recoil: 85
 		RecoilRecovery: 42
 		MuzzleSequence: muzzle
 		RequiresCondition: forgotten_upgrade_chemicalweapons
@@ -685,7 +685,7 @@ forgotten_experimentalmammothtank:
 		Weapon: TSMammothTusk
 		LocalOffset: -85,90,340, -85,-90,340
 		LocalYaw: -100, 100
-		Recoil: 10
+		Recoil: 5
 	WithMuzzleOverlay:
 	AttackTurreted:
 	WithSpriteTurret:
@@ -736,7 +736,7 @@ forgotten_chemicalmammothtank:
 	Armament@PRIMARY:
 		Weapon: TS120mmxChem
 		LocalOffset: 900,85,340, 900,-85,340
-		Recoil: 170
+		Recoil: 85
 		RecoilRecovery: 42
 		MuzzleSequence: muzzle
 	Armament@SECONDARY:
@@ -744,7 +744,7 @@ forgotten_chemicalmammothtank:
 		Weapon: TSMammothTuskChem
 		LocalOffset: -85,-90,340
 		LocalYaw: -100, 100
-		Recoil: 10
+		Recoil: 5
 	WithMuzzleOverlay:
 	AttackTurreted:
 	WithSpriteTurret:
@@ -793,14 +793,14 @@ forgotten_tankkiller:
 		Step: 34
 	Armament@PRIMARY:
 		Weapon: TSHighVelocity
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSHighVelocityChem
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
@@ -852,14 +852,14 @@ forgotten_thumperbus:
 		Step: 80
 	Armament@PRIMARY:
 		Weapon: TSBusMortar
-		Recoil: 200
+		Recoil: 100
 		RecoilRecovery: 20
 		LocalOffset: 1200,0,600
 		MuzzleSequence: muzzle
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSBusMortarChem
-		Recoil: 200
+		Recoil: 100
 		RecoilRecovery: 20
 		LocalOffset: 1200,0,600
 		MuzzleSequence: muzzle
@@ -932,7 +932,7 @@ forgotten_nomadbarracks:
 	-Power:
 	Armament:
 		Weapon: TSNomadGun
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
@@ -1011,14 +1011,14 @@ forgotten_mlrs:
 		Step: 16
 	Armament@PRIMARY:
 		Weapon: TSMLRSMissile
-		Recoil: 64
+		Recoil: 32
 		RecoilRecovery: 32
 		LocalOffset: 0,121,271, 0,-121,271
 		MuzzleSequence: muzzle
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSChemMLRSMissile
-		Recoil: 64
+		Recoil: 32
 		RecoilRecovery: 32
 		LocalOffset: 0,121,271, 0,-121,271
 		MuzzleSequence: muzzle

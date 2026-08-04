@@ -280,6 +280,8 @@ harkonnen_autogunturret:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@gat: ^GatlingSpeedUpTurretBehavior
+	Armor:
+		Type: Concrete
 	Tooltip:
 		Name: Harkonnen Autogun Turret
 	Valued:
@@ -290,6 +292,12 @@ harkonnen_autogunturret:
 		HP: 75000
 	Armament:
 		Weapon: harkonnen_autogunturret
+		LocalOffset: 600,-100,500, 600,100,500
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 100,-100,500, 100,100,500
+		CasingTargetOffset: 0,-900,0, 0,900,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
 	WithSpriteTurret:
 		Palette: player
 		IsPlayerPalette: True
@@ -410,6 +418,8 @@ harkonnen_rocketturret:
 	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Armor:
+		Type: Concrete
 	Buildable:
 		Prerequisites: ~harkonnen_constructionyard, harkonnen_outpost
 	Valued:

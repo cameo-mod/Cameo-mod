@@ -18,7 +18,7 @@ using OpenRA.Traits;
 namespace OpenRA.Mods.Cameo.Traits
 {
 	[TraitLocation(SystemActors.World | SystemActors.EditorWorld)]
-	[Desc("Renders a camera-relative nuclear exposure flash that brightens toward the blast and darkens the surrounding world.")]
+	[Desc("Renders a nuclear exposure flash with edge-projected off-screen glow and readable global underexposure.")]
 	public class NuclearFlashRendererInfo : TraitInfo
 	{
 		public override object Create(ActorInitializer init) { return new NuclearFlashRenderer(); }
@@ -33,11 +33,12 @@ namespace OpenRA.Mods.Cameo.Traits
 		float radius;
 		float brightness;
 		float darkness;
+		float minimumExposure;
 
 		public NuclearFlashRenderer()
 			: base("nuclearflash", PostProcessPassType.AfterWorld) { }
 
-		public void Enable(WPos position, Color color, int duration, float radius, float brightness, float darkness)
+		public void Enable(WPos position, Color color, int duration, float radius, float brightness, float darkness, float minimumExposure)
 		{
 			this.position = position;
 			this.color = color;
@@ -45,6 +46,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			this.radius = radius;
 			this.brightness = brightness;
 			this.darkness = darkness;
+			this.minimumExposure = Math.Clamp(minimumExposure, 0f, 1f);
 			remainingTicks = this.duration;
 		}
 
@@ -68,10 +70,15 @@ namespace OpenRA.Mods.Cameo.Traits
 			var x = (float)(screen.X - topLeft.X) * downscale;
 			var y = (float)(screen.Y - topLeft.Y) * downscale;
 
-			// Keep off-screen blasts directional without allowing a distant world position to move the
-			// light so far away that no spill reaches the viewport.
-			x = Math.Clamp(x, -fbWidth * 0.2f, fbWidth * 1.2f);
-			y = Math.Clamp(y, -fbHeight * 0.2f, fbHeight * 1.2f);
+			// Project off-screen blasts onto the nearest edge or corner, centering their glow there.
+			// The full-screen underexposure remains unchanged and still communicates the brighter-than-sun
+			// event, while the concentrated edge spill indicates direction without becoming a screen-wide haze.
+			var offscreen = x < 0f || x > fbWidth || y < 0f || y > fbHeight;
+			if (offscreen)
+			{
+				x = Math.Clamp(x, 0f, fbWidth);
+				y = Math.Clamp(y, 0f, fbHeight);
+			}
 
 			var linear = (float)remainingTicks / duration;
 			var strength = linear * linear * (3f - 2f * linear);
@@ -81,6 +88,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			shader.SetVec("LightColor", color.R / 255f, color.G / 255f, color.B / 255f);
 			shader.SetVec("Brightness", brightness * strength);
 			shader.SetVec("Darkness", darkness * strength);
+			shader.SetVec("MinimumExposure", minimumExposure);
 		}
 	}
 }

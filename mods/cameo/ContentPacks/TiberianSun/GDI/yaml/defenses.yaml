@@ -33,6 +33,9 @@ ts_gdi_vulcantower:
 	Armament@PRIMARY:
 		Weapon: TSVulcanGun
 		LocalOffset: 300,60,600
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 150,60,600
+		CasingTargetOffset: 0,660,0
 		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
 	Armament@Upgrade:
 		Weapon: TSVulcanGunSonic

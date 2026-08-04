@@ -172,21 +172,21 @@ ts_nod_attackbuggy:
 	Armament@PRIMARY:
 		Weapon: TSRaiderCannon
 		LocalOffset: 0,-30,250, 0,30,250
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
 	Armament@UPGRADE:
 		Weapon: TSLaserRaiderCannon
 		LocalOffset: 0,-30,250, 0,30,250
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 24
 		MuzzleSequence: muzzle
 		RequiresCondition: ts_nod_upgrade_tiberiumlenses
 	Armament@SECONDARY:
 		Weapon: TSRaiderGrenade
 		LocalOffset: 0,-30,250, 0,30,250
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 		RequiresCondition: ts_nod_upgrade_auxiliaryweapon

@@ -420,11 +420,17 @@ td_nod_gunturret:
 		Weapon: TurretGun
 		LocalOffset: 512,0,112
 		MuzzleSequence: muzzle
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 256,0,112
+		CasingTargetOffset: 0,-600,0
 		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
 	Armament@Upgrade:
 		Weapon: TurretGunBlackMarket
 		LocalOffset: 512,0,112
 		MuzzleSequence: muzzle
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 256,0,112
+		CasingTargetOffset: 0,-600,0
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
