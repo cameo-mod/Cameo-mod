@@ -983,7 +983,9 @@ d2kChainGun:
 		Damage: 2
 
 d2kChainGun_upgrade:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@2: d2kChainGun
 	Report: LaserTankAttack.wav
 	-StartBurstReport:
@@ -992,9 +994,9 @@ d2kChainGun_upgrade:
 		Width: 55
 		ZOffset: 2047
 		Color: 00ffbb
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 4000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 
 HMGstealth:
@@ -1281,7 +1283,9 @@ d2k_chemgun:
 # 		Delay: 10
 
 HMGstealth_upgrade:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@2: HMGstealth
 	Report: LaserTankAttack.wav
 	-Projectile:
@@ -1289,13 +1293,15 @@ HMGstealth_upgrade:
 		Width: 55
 		ZOffset: 2047
 		Color: 00ffbb
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 
 d2kCarryallChainGun_upgrade:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@2: d2kCarryallChainGun
 	Report: LaserTankAttack.wav
 	-Projectile:
@@ -1303,13 +1309,15 @@ d2kCarryallChainGun_upgrade:
 		Width: 55
 		ZOffset: 2047
 		Color: 00ffbb
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 
 LMG_ordos_upgrade:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@2: LMG
 	Report: LaserTankAttack.wav
 	-Projectile:
@@ -1325,7 +1333,9 @@ LMG_ordos_upgrade:
 		ValidTargets: Ground, Water, Air
 
 light_inf_lmg_ordos_upgrade:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@2: light_inf_lmg
 	Report: LaserTankAttack.wav
 	-Projectile:
@@ -1346,9 +1356,9 @@ light_inf_lmg_ordos_upgrade:
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1

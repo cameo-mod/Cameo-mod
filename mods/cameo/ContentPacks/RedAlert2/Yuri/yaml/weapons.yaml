@@ -280,7 +280,9 @@ RA2LasherLaser_elite:
 		Damage: 8
 
 RA2DiskLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 40
 	Range: 6840
 	Report: vfloatta.wav
@@ -295,10 +297,10 @@ RA2DiskLaser:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF88
 		UsePlayerColor: false
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 24000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 12
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 
@@ -310,9 +312,9 @@ RA2DiskLaser_elite:
 		Duration: 20
 		Color: BB88AA
 		SecondaryBeamWidth: 40
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 48000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 24
 
 RA2DiskDrain:
@@ -381,12 +383,12 @@ RA2Magnet:
 		Duration: 100
 		Color: FF55F505
 		-HitAnim:
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Range: 0, 32
 		Falloff: 100, 100
 		Damage: 2000
 		ValidTargets: Vehicle, Structure
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Range: 0, 32
 		Falloff: 100, 100
 		Damage: 1
@@ -402,10 +404,10 @@ RA2MagnetAA:
 	Inherits: RA2Magnet
 	ValidTargets: Vehicle, Air, Structure
 	InvalidTargets: Paratrooper
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		ValidTargets: Vehicle, Air, Structure
 		InvalidTargets: Paratrooper
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Vehicle, Air, Structure
 		InvalidTargets: Paratrooper
 	Warhead@Condition: GrantExternalCondition
@@ -422,10 +424,10 @@ RA2MagnetAA_elite:
 	Inherits: RA2Magnet_elite
 	ValidTargets: Vehicle, Air, Structure
 	InvalidTargets: Paratrooper
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		ValidTargets: Vehicle, Air, Structure
 		InvalidTargets: Paratrooper
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Vehicle, Air, Structure
 		InvalidTargets: Paratrooper
 	Warhead@Condition: GrantExternalCondition

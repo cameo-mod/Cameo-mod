@@ -62,7 +62,9 @@ CabalReaperTrapAir:
 		ValidTargets: Air
 
 DarkObeliskLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Report: obelcor3.aud
 	Range: 12288
 	ReloadDelay: 50
@@ -82,11 +84,11 @@ DarkObeliskLaser:
 		SourceFlareSize: 64, 72
 		SourceFlareWidth: 2.5
 		SourceFlareCoreSize: 5
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 36000
 		Spread: 250
 		ValidTargets: Air
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 18
 		Spread: 500
 		Delay: 5
@@ -805,7 +807,9 @@ CabalHunterKillerLasers_elite:
 		ValidTargets: Ground, Water, Air
 
 CabalHunterKillerHeavyLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Report: obelcor3.aud
 	ReloadDelay: 26
 	Range: 6170
@@ -817,16 +821,18 @@ CabalHunterKillerHeavyLaser:
 		SecondaryBeamWidth: 36
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 2A2A55DD
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 20000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_m
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 CabalSpiderLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Report: obelmod1.aud
 	ReloadDelay: 90
 	Range: 6147
@@ -838,9 +844,9 @@ CabalSpiderLaser:
 		SecondaryBeamWidth: 42
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 3D3D77FF
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 44000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 22
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
@@ -848,7 +854,9 @@ CabalSpiderLaser:
 		ValidTargets: Ground, Ship
 
 CabalSpiderCnc4Laser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Report: obelmod1.aud
 	ReloadDelay: 80
 	Range: 7000
@@ -860,16 +868,18 @@ CabalSpiderCnc4Laser:
 		SecondaryBeamWidth: 42
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 3D3D77FF
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 44000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 22
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 CabalLaserBoatLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Report: obelmod1.aud
 	ReloadDelay: 90
 	Range: 6147
@@ -881,16 +891,18 @@ CabalLaserBoatLaser:
 		SecondaryBeamWidth: 42
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 3D3D77FF
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 40000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 22
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 CabalLaserBoatLaserAA:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Report: obelmod1.aud
 	ReloadDelay: 90
 	Range: 7000
@@ -903,11 +915,11 @@ CabalLaserBoatLaserAA:
 		SecondaryBeamWidth: 42
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 3D3D77FF
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 36000
 		Spread: 250
 		ValidTargets: Air
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 18
 		Spread: 500
 		Delay: 5
@@ -1054,7 +1066,9 @@ CabalSubmarinePlasma:
 		ImpactSounds: expnew09.aud
 
 CabalCoreDefenderLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Report: corefir1.aud
 	ReloadDelay: 70
 	Range: 6332
@@ -1066,16 +1080,18 @@ CabalCoreDefenderLaser:
 		SecondaryBeamWidth: 50
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 5555AAFF
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 160000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 80
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 CabalAvatarLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Report: corefir1.aud
 	ReloadDelay: 70
 	Range: 6332
@@ -1087,9 +1103,9 @@ CabalAvatarLaser:
 		SecondaryBeamWidth: 25
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 5555AAFF
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 80000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 40
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
@@ -1344,7 +1360,9 @@ CabalMothershipRockets:
 		ValidTargets: Air
 
 CabalWaspLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Report: lastur1.aud
 	ReloadDelay: 20
 	Range: 6420
@@ -1358,10 +1376,10 @@ CabalWaspLaser:
 		SecondaryBeamZOffset: 3000
 		SecondaryBeamColor: 444488FF
 	ValidTargets: Ground, Water, Air
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
 	Warhead@LaserExtraDamage: SpreadDamage
@@ -1373,7 +1391,9 @@ CabalWaspLaser:
 		ValidTargets: Ground, Water, Air
 
 CabalWaspLaserStriker:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Report: lastur1.aud
 	ReloadDelay: 18
 	Range: 6309
@@ -1389,10 +1409,10 @@ CabalWaspLaserStriker:
 		SecondaryBeamZOffset: 3000
 		SecondaryBeamColor: 444488FF
 	ValidTargets: Ground, Water, Air
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
 	Warhead@LaserExtraDamage: SpreadDamage
@@ -1493,7 +1513,9 @@ CabalWidowPlasma:
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
 CabalManticoreLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Burst: 2
 	BurstDelays: 3
 	ReloadDelay: 30
@@ -1507,9 +1529,9 @@ CabalManticoreLaser:
 		SecondaryBeamWidth: 30
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 222244CC
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 10000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_s
@@ -2266,7 +2288,9 @@ CabalOverkillCharge:
 		ValidTargets: Ground, Water, Air
 
 CabalOverkillGunshipLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 40
 	Range: 6000
 	Projectile: LaserZap
@@ -2278,11 +2302,11 @@ CabalOverkillGunshipLaser:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 2A2A55DD
 		TrackTarget: false
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 12500
 		Spread: 256
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
@@ -2291,7 +2315,9 @@ CabalOverkillGunshipLaser:
 		ValidTargets: Ground, Water, Air
 
 CabalOverkillLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 50
 	Range: 6400
 	Burst: 50
@@ -2307,10 +2333,10 @@ CabalOverkillLaser:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 2A2A55DD
 		TrackTarget: false
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect

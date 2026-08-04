@@ -1275,7 +1275,9 @@ d2k_air_drone_guns_upgrade:
 
 	MinRange: 1300
 d2k_laser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 25
 	Range: 7500
 	Burst: 5
@@ -1286,10 +1288,10 @@ d2k_laser:
 		Width: 50
 		ZOffset: 2047
 		Color: FF0000
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 
@@ -1436,12 +1438,12 @@ farasha_drone_ixian:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Air
 		Damage: 1

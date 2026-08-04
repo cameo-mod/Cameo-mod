@@ -1445,12 +1445,12 @@ AAHyperionMagnet:
 		Duration: 100
 		Color: FF55F505
 		-HitAnim:
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Range: 0, 32
 		Falloff: 100, 100
 		Damage: 2000
 		ValidTargets: Air
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Range: 0, 32
 		Falloff: 100, 100
 		Damage: 1

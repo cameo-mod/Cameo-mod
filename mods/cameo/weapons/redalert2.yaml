@@ -180,7 +180,9 @@
 		ExplosionPalette: ra2effect
 
 ^RA2LaserWeapon:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	-Warhead@Effect:
 
 ^RA2RailgunWeapon:

@@ -1323,7 +1323,9 @@ GDIRigDroneTargeting:
 	Burst: 1
 
 GDIRigPDLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ValidTargets: Ground, Water, Air, Missile, BulletAS, BallisticMissile
 	ValidRelationships: Enemy, Neutral
 	ReloadDelay: 25
@@ -1340,9 +1342,9 @@ GDIRigPDLaser:
 		SecondaryBeamColor: ff000033
 		Blockable: true
 		-HitAnim:
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 
 GDIRigDroneRepair:

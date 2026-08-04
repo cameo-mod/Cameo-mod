@@ -522,7 +522,9 @@ Dragon:
 		Explosions: small_building
 
 LaserObelisk:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 96
 	Range: 9600
 	Projectile: LaserZap
@@ -541,9 +543,9 @@ LaserObelisk:
 		SourceFlareSize: 64, 72
 		SourceFlareWidth: 2.5
 		SourceFlareCoreSize: 5
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 96000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 48
 	# Warhead@Effect: CreateEffect
 	# 	-ImpactSounds:
@@ -1329,7 +1331,9 @@ VenomLaser:
 		Damage: 1
 
 NodCommandoLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 8
 	Report: vpalwe2d.aud
 	ValidTargets: Ground, Air, Missile, BulletAS, BallisticMissile
@@ -1348,7 +1352,7 @@ NodCommandoLaser:
 		-HitAnim:
 		ValidTargets: Ground, Air, Missile, BulletAS, BallisticMissile
 		Damage: 12000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Missile, BulletAS, BallisticMissile
 		Damage: 6
 	Warhead@Effect: CreateEffect
@@ -1454,12 +1458,14 @@ NodTorpTubeBlackMarket:
 		InvalidTargets: Ship, Structure, Bridge
 
 CorvetteLaserObelisk:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 90
 	Range: 9550
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 120000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 60
 
 CorvetteDragon:

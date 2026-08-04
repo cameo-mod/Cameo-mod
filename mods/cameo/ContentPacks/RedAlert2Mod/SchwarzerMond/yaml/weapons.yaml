@@ -25,10 +25,10 @@ schwarzermond_lunarsoldier_rifle:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
 
@@ -206,9 +206,9 @@ NaxiMP40Laser:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 
 NaxiMP40Laser_elite:
@@ -442,7 +442,9 @@ DalekCannonScatterE:
 	Range: 4530
 
 BlackHoleMaker:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 60
 	Range: 6414
 	Projectile: KKNDLaser
@@ -456,9 +458,9 @@ BlackHoleMaker:
 		SegmentLength: 350
 		Inaccuracy: 128
 	ValidTargets: Ground, Water, Air
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 60000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 30
 	Warhead@1Actor: SpawnActor
 		Actors: hole_small.nax2

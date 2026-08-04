@@ -191,7 +191,9 @@ MatadorFlamer:
 		Amount: 1000
 
 MatadorLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ValidTargets: Ground, Water, Air
 	Report: TPhFi100.aud
 	ReloadDelay: 39
@@ -200,10 +202,10 @@ MatadorLaser:
 		Speed: 1000
 		ContrailLength: 5
 		ContrailStartColorUsePlayerColor: true
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16
 
@@ -1139,7 +1141,9 @@ WraithRockets_AA:
 		Damage: 1
 
 WraithLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ValidTargets: Ground, Water
 	Report: TPhFi100.aud
 	ReloadDelay: 32
@@ -1148,10 +1152,10 @@ WraithLaser:
 		Speed: 1015
 		ContrailLength: 5
 		ContrailStartColorUsePlayerColor: true
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 16000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 8
 
@@ -1197,7 +1201,9 @@ SunDogRockets:
 		Damage: 1
 
 SunDogLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ValidTargets: Ground, Water, Air
 	Report: TPhFi100.aud
 	ReloadDelay: 39
@@ -1206,10 +1212,10 @@ SunDogLaser:
 		Speed: 1212
 		ContrailLength: 5
 		ContrailStartColorUsePlayerColor: true
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 

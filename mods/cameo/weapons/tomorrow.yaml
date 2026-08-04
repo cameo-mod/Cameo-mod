@@ -1,5 +1,7 @@
 DTMiniLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 33
 	Range: 5675
 	Report: dtdinoatk1.aud
