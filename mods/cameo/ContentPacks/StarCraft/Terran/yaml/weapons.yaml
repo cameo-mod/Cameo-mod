@@ -101,10 +101,8 @@ FirebatF:
 		Image: tsflameall
 		Inaccuracy: 680
 		Palette: tseffect
-	Warhead@Flame_Medium: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 2000
-	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
-		Damage: 1000
 	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
@@ -337,7 +335,7 @@ SCTyr:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
@@ -391,7 +389,7 @@ SCTyrAA:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
@@ -974,7 +972,7 @@ GoliathMG:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1017,7 +1015,7 @@ GoliathRockets_AA:
 		Damage: 6000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 3
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 6000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 3
@@ -1054,7 +1052,7 @@ GoliathMk2MG:
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1092,7 +1090,7 @@ GoliathMk2Rockets:
 		Damage: 8000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 4
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 8000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 4
@@ -1135,7 +1133,7 @@ WraithRockets_AA:
 		Damage: 2000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 2000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1193,7 +1191,7 @@ SunDogRockets:
 		Damage: 2000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 2000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1250,7 +1248,7 @@ ValkyrieRockets:
 		Damage: 2000
 	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 2000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1329,7 +1327,7 @@ WyvernRockets:
 	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -1588,7 +1586,7 @@ MissileTurret:
 		Damage: 4000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 4000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2

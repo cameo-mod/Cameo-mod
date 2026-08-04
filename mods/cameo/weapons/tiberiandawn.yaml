@@ -41,7 +41,7 @@ M16:
 	ReloadDelay: 17
 	Range: 3916
 	Report: mgun2.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -61,10 +61,8 @@ Grenade:
 		ContrailEndWidth: 22
 		ContrailStartColor: FFFF88FF
 		ContrailEndColor: FF884422
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 16000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 8000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 8
 
@@ -75,7 +73,7 @@ Rockets:
 	ReloadDelay: 63
 	Range: 6368
 	Report: bazook1.aud
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 18000
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 9
@@ -87,10 +85,8 @@ Flamethrower:
 	ReloadDelay: 60
 	Range: 2085
 	Report: flamer2.aud
-	Warhead@Flame_Light: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 20000
-	Warhead@Flame_Light_FriendlyFire: SpreadDamage
-		Damage: 10000
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
@@ -105,10 +101,8 @@ Chemspray:
 	ReloadDelay: 48
 	Range: 3414
 	Report: flamer2.aud
-	Warhead@Chemical_Light: SpreadDamage
+	Warhead@Chemical_Light:
 		Damage: 48000
-	Warhead@Chemical_Light_FriendlyFire: SpreadDamage
-		Damage: 24000
 	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 24
 
@@ -116,10 +110,8 @@ TiberiumExplosion:
 	Inherits@wh: ^Warhead_Chemical_Medium
 	Inherits@proj: ^Projectile_Chem_Medium
 	Inherits@fx: ^Effect_Chem_Medium
-	Warhead@Chemical_Medium: SpreadDamage
+	Warhead@Chemical_Medium:
 		Damage: 40000
-	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
-		Damage: 20000
 	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 20
 	Warhead@Resource: CreateResource
@@ -178,10 +170,8 @@ BigFlamer:
 	ReloadDelay: 50
 	Range: 2390
 	Report: flamer2.aud
-	Warhead@Flame_Medium: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 14000
-	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
-		Damage: 7000
 	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 7
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
@@ -198,10 +188,8 @@ FlametankExplode:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
-	Warhead@Flame_Medium: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 28000
-	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
-		Damage: 14000
 	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 14
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
@@ -280,7 +268,7 @@ HighVAP:
 	Range: 6720
 	-Report:
 	StartBurstReport: gun8.aud
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2

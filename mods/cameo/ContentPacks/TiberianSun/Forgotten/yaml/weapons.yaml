@@ -5,7 +5,7 @@ TS70mm:
 	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 24
 	Range: 5566
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -156,7 +156,7 @@ TSScoopDual:
 	Burst: 2
 	BurstDelays: 2
 	Range: 6224
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 20000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
@@ -258,7 +258,7 @@ TSHighVelocity:
 	Range: 7701
 	Projectile: Bullet
 		Speed: 850
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 30000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 15
@@ -301,7 +301,7 @@ TSHighVelocity2:
 	Range: 8207
 	Projectile: Bullet
 		Speed: 850
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 40000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 20
@@ -344,7 +344,7 @@ TSHighVelocityTur:
 	Range: 9483
 	Projectile: Bullet
 		Speed: 1280
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 48000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 24
@@ -530,7 +530,7 @@ TSJuggerFlakAA:
 	BurstDelays: 1
 	Range: 11234
 	ValidTargets: Air
-	Warhead@Flak_Medium: SpreadDamage
+	Warhead@Flak_Medium:
 		Damage: 10000
 		ValidTargets: Air
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
@@ -551,7 +551,7 @@ TSJuggerFlakAA_boat:
 	BurstDelays: 3
 	Range: 11234
 	ValidTargets: Air
-	Warhead@Flak_Medium: SpreadDamage
+	Warhead@Flak_Medium:
 		Damage: 10000
 		ValidTargets: Air
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
@@ -577,10 +577,8 @@ TSJuggerboat90mm:
 		Inaccuracy: 1c0
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@Concussion_Medium: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 20000
-	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
-		Damage: 10000
 	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@3Eff: CreateEffect
@@ -713,10 +711,8 @@ TSVanMissile:
 		Palette: d2keffect
 		TrailImage: large_trail
 		LaunchAngle: 60
-	Warhead@Concussion_Medium: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 24000
-	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
-		Damage: 12000
 	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 12
 
@@ -779,7 +775,7 @@ TSMLRSMissile:
 		Palette: d2keffect
 		TrailImage: large_trail
 		LaunchAngle: 165
-	Warhead@Concussion_Medium: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 24000
 	WWarhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 12000
@@ -906,7 +902,7 @@ TSMammothTusk:
 	Burst: 2
 	BurstDelays: 8
 	Report: misl1.aud
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 60000
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -1295,10 +1291,8 @@ MutFlamer:
 	ReloadDelay: 50
 	Range: 2386
 	Report: flamtnk1.aud
-	Warhead@Flame_Medium: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 28000
-	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
-		Damage: 14000
 	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 14
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
@@ -1616,10 +1610,8 @@ TSZombieAttack:
 	Range: 1127
 	Report: vicer1.aud
 	Projectile: InstantHit
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 16000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 8000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 
@@ -1743,7 +1735,7 @@ TSCropBomb:
 		Acceleration: 0, 0, -8
 		Image: 120mm
 		Shadow: true
-	Warhead@Demolition_Heavy: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 120000
 	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
@@ -1919,7 +1911,7 @@ TSRaiderCarCannon:
 	BurstDelays: 2
 	Range: 4475
 	Report: chaingn1.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -1951,7 +1943,7 @@ TSWaspClaw:
 	Report: cygun1.aud
 	SoundVolume: 0.50
 	ValidTargets: Ground, Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1994,7 +1986,7 @@ TSNomadGun:
 		ContrailLength: 10
 		Speed: 10000
 	ValidTargets: Ground, Water
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 8000
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -2033,10 +2025,8 @@ TSGhostGun:
 		Width: 100
 		Speed: 10000
 		Inaccuracy: 0
-	Warhead@Chemical_Light: SpreadDamage
+	Warhead@Chemical_Light:
 		Damage: 20000
-	Warhead@Chemical_Light_FriendlyFire: SpreadDamage
-		Damage: 10000
 	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 
@@ -2079,7 +2069,7 @@ MutAPRifle:
 	ReloadDelay: 8
 	Range: 5146
 	Report: jumpjet1.aud, gostgun1.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -2114,7 +2104,7 @@ forgotten_mutantsoldier_rifle:
 	Range: 5000
 	ValidTargets: Ground, Water
 	Report: mgun2.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 8000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 4

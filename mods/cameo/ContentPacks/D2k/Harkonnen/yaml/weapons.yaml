@@ -16,10 +16,8 @@ HarkonnenFlameTurret:
 		LaunchAngle: 10, 20
 		Image: tsflameall
 		Palette: tseffect
-	Warhead@Flame_Medium: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 25135
-	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
-		Damage: 12568
 	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
@@ -65,11 +63,8 @@ ExplosiveDebris:
 		LaunchAngle: 150, 220
 		Inaccuracy: 2c512
 		BounceCount: 1
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 3000
-		Spread: 1c562
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 1500
 		Spread: 1c562
 	Warhead@Effect: CreateEffect
 		Explosions: large_explosion

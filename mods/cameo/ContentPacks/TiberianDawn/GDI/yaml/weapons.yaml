@@ -18,7 +18,7 @@ M16AP:
 	ReloadDelay: 15
 	Range: 4445
 	Report: mgun2.aud
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -264,7 +264,7 @@ MachineGunH:
 	BurstDelays: 6
 	Range: 4792
 	Report: mgun11.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 6000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
@@ -278,7 +278,7 @@ MachineGunAPH:
 	BurstDelays: 6
 	Range: 4792
 	Report: mgun11.aud
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 6000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
@@ -292,7 +292,7 @@ MachineGunAPH:
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 543
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
@@ -309,7 +309,7 @@ MachineGunAPH:
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 1086
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 16000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
@@ -323,7 +323,7 @@ M1A1Missiles:
 	ReloadDelay: 72
 	Range: 5400
 	Report: rocket1.aud
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 8000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
@@ -342,7 +342,7 @@ M1A1MachineGun:
 	ReloadDelay: 68
 	Range: 5400
 	Report: mgun11.aud
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -358,7 +358,7 @@ M1A1MachineGun:
 	Report: tnkfire6.aud
 	Projectile: Bullet
 		Speed: 614
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 8000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 4
@@ -375,7 +375,7 @@ M1A1MachineGun:
 	Report: tnkfire6.aud
 	Projectile: Bullet
 		Speed: 1228
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 16000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
@@ -392,7 +392,7 @@ MammothMissiles:
 	Report: rocket1.aud
 	Projectile: Missile
 		Image: DRAGON
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 8000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 4
@@ -478,7 +478,7 @@ Vulcan:
 	ReloadDelay: 125
 	Report: gun5.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		Spread: 600
@@ -527,11 +527,10 @@ VulcanA10Carrier:
 	ReloadDelay: 125
 	Report: gun5.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		Spread: 300
-		ValidRelationships: Neutral, Enemy
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
@@ -595,10 +594,9 @@ A10CarrierMissiles_AA:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 		ContrailStartColor: FF8800AA
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 		Damage: 12000
-		ValidRelationships: Neutral, Enemy
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 6
@@ -988,7 +986,7 @@ MachineGunHumvee2:
 	BurstDelays: 4
 	Range: 5598
 	Report: mgun11.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -999,7 +997,7 @@ MachineGunHumvee2_AA:
 	Inherits: MachineGunHumvee2
 	Range: 8397
 	ValidTargets: Air
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Air
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -1018,7 +1016,7 @@ MachineGunHumvee2AP:
 	BurstDelays: 4
 	Range: 5598
 	Report: mgun11.aud
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1029,7 +1027,7 @@ MachineGunHumvee2AP_AA:
 	Inherits: MachineGunHumvee2AP
 	Range: 8397
 	ValidTargets: Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -1042,7 +1040,7 @@ RocketsHumvee2:
 	Range: 5598
 	Report: bazook1.aud
 	ValidTargets: Ground, Water
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water
 		Damage: 16000
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
@@ -1053,7 +1051,7 @@ RocketsHumvee2_AA:
 	Inherits: RocketsHumvee2
 	Range: 8397
 	ValidTargets: Air
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Air
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -1064,7 +1062,7 @@ RocketsHumvee2AMT:
 	Inherits@fx: ^Effect_Missile_Heavy
 	Inherits: RocketsHumvee2
 	Inherits: ^AMTProjectile
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 16000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -1075,11 +1073,11 @@ RocketsHumvee2AMT_AA:
 	Inherits: RocketsHumvee2AMT
 	Range: 8397
 	ValidTargets: Air
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Air
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -1133,7 +1131,7 @@ GDIPredatorTankCannon:
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 588
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
@@ -1150,7 +1148,7 @@ GDIPredatorTankCannonHV:
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 1176
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 16000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
@@ -1164,7 +1162,7 @@ GDIPredatorTankMissiles:
 	ReloadDelay: 70
 	Range: 5880
 	Report: rocket1.aud
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 8000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
@@ -1183,7 +1181,7 @@ GDIPredatorMachineGun:
 	ReloadDelay: 70
 	Range: 5880
 	Report: mgun11.aud
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1221,7 +1219,7 @@ MammothTank3Cannons:
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 634
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 12000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
@@ -1238,7 +1236,7 @@ MammothTank3CannonsHV:
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 1268
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 24000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 12
@@ -1255,7 +1253,7 @@ MammothTank3Missiles:
 	Report: rocket1.aud
 	Projectile: Missile
 		Image: DRAGON
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 12000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
@@ -1308,7 +1306,7 @@ OfficerMachineGunAP:
 	BurstDelays: 4
 	Range: 4888
 	Report: mgun11.aud
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1659,7 +1657,7 @@ FirehawkMissiles_AA:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 		ContrailStartColor: FF8800AA
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 		Damage: 20000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -1749,7 +1747,7 @@ GunboatMissile:
 		VerticalRateOfTurn: 50
 		Acceleration: 5
 		AllowSnapping: true
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water
 		Damage: 18000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
@@ -1863,7 +1861,7 @@ td_gdi_minigunner_minigun:
 	Burst: 4
 	BurstDelays: 3
 	Report: mgun2.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1878,7 +1876,7 @@ td_gdi_minigunner_minigun_ap:
 	Burst: 4
 	BurstDelays: 3
 	Report: mgun2.aud
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2

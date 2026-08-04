@@ -42,11 +42,8 @@ Debris:
 		Shadow: true
 		BounceCount: 3
 		BounceRangeModifier: 20
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 16000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 8000
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 8
@@ -72,16 +69,12 @@ Debris2:
 		TrailImage: small_trail
 		TrailPalette: effect75alpha
 		TrailInterval: 1
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 16000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 8000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 8
-	Warhead@Flame_Light: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 16000
-	Warhead@Flame_Light_FriendlyFire: SpreadDamage
-		Damage: 8000
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
@@ -95,16 +88,12 @@ Debris3:
 	Projectile: Bullet
 		Image: shrapnel3
 		TrailImage: small_trail2
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 8000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 4000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 4
-	Warhead@Flame_Light: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 8000
-	Warhead@Flame_Light_FriendlyFire: SpreadDamage
-		Damage: 4000
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@4Concrete: DamagesConcrete
@@ -141,7 +130,7 @@ Debris4:
 		ExplosionPalette: effect75alpha
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1000
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
 
 80mm_A:
@@ -280,7 +269,7 @@ D2K_155mm:
 		Damage: 12000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 12000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
@@ -423,7 +412,7 @@ D2K_Rocket_Trooper:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -1893,12 +1882,9 @@ PhoenixRocketShrapnel:
 		Acceleration: 3
 		RangeLimit: 33333
 		Inaccuracy: 333
-	Warhead@Flame_Light: SpreadDamage
+	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flame_Light_FriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -1975,11 +1961,10 @@ ixian_airdrone:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		ValidRelationships: Neutral, Enemy
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -2229,7 +2214,7 @@ d2k_sard_crossbow:
 		Speed: 562
 		Inaccuracy: 380
 		Image: 120mm
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 5350
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4

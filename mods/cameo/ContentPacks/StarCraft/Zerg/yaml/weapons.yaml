@@ -6,10 +6,8 @@ ZerglingClaw:
 	SoundVolume: 3
 	ReloadDelay: 11
 	Range: 1350
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 2000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 1000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -22,10 +20,8 @@ TalonClaw:
 	Report: zerglinghit.wav
 	ReloadDelay: 15
 	Range: 1680
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 6000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 3000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@Effect: CreateEffect
@@ -39,12 +35,9 @@ GorekrakenClaw:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 15
 	Range: 1448
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 14000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 7000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 7
@@ -60,12 +53,9 @@ ShriekStinger:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 11
 	Range: 1150
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -296,12 +286,9 @@ CorruptorSpore:
 		ContrailLength: 10
 		Width: 100
 		AllowSnapping: true
-	Warhead@Chemical_Medium: SpreadDamage
+	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
 	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -472,12 +459,9 @@ SCScourgeExplosion:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 25
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Air
 		Damage: 50000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		ValidTargets: Air
-		Damage: 25000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 25
@@ -948,10 +932,8 @@ UltraliskHusk:
 	Report: zulatt00.aud,zulatt01.aud,zulatt02.aud
 	ReloadDelay: 15
 	Range: 1600
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 40000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 20000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 20
 	Warhead@Effect: CreateEffect
@@ -964,10 +946,8 @@ GoremawClaw:
 	Report: zulatt00.aud,zulatt01.aud,zulatt02.aud
 	ReloadDelay: 30
 	Range: 1250
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 30000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 15000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@Effect: CreateEffect
@@ -1160,10 +1140,8 @@ zerg_kerrigan:
 	ReloadDelay: 20
 	Report: zlrkfir1.aud,zlrkfir2.aud
 	TargetActorCenter: True
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 40000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 20000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 20
 
@@ -1281,10 +1259,8 @@ DefilerPlague:
 	Range: 9000
 	Projectile: Bullet
 		Speed: 900
-	Warhead@Chemical_Heavy: SpreadDamage
+	Warhead@Chemical_Heavy:
 		Damage: 30000
-	Warhead@Chemical_Heavy_FriendlyFire: SpreadDamage
-		Damage: 15000
 	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		Damage: 15
 	#Warhead@2: GrantExternalCondition

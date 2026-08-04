@@ -317,7 +317,7 @@ TSVulcanTower:
 	ReloadDelay: 26
 	Range: 6144
 	Report: chaingn1.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -347,10 +347,8 @@ eliminator_blades:
 	Report: pzehit00.aud
 	Projectile: Bullet
 		Speed: 1c682
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 12000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 6000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@Effect: CreateEffect
@@ -369,10 +367,8 @@ CabalBerserkerBlades:
 	Report: pzehit00.aud
 	Projectile: Bullet
 		Speed: 1c682
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 74000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 37000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 37
 	Warhead@Effect: CreateEffect
@@ -428,7 +424,7 @@ CabalEliminatorGatling:
 	ReloadDelay: 5
 	Range: 5857
 	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -446,7 +442,7 @@ CabalTarantulaCannon:
 	Report: tsgun4.aud
 	ReloadDelay: 48
 	Range: 5278
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 16000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
@@ -1470,10 +1466,8 @@ CabalRavagerPlasma:
 		Blockable: false
 		Shadow: false
 		Image: cabal_greenplasma
-	Warhead@Chemical_Medium: SpreadDamage
+	Warhead@Chemical_Medium:
 		Damage: 32000
-	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
-		Damage: 16000
 	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 16
 	Warhead@Effect: CreateEffect
@@ -1491,10 +1485,8 @@ CabalWidowPlasma:
 		Blockable: false
 		Shadow: false
 		Image: cabal_greenplasma
-	Warhead@Chemical_Medium: SpreadDamage
+	Warhead@Chemical_Medium:
 		Damage: 32000
-	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
-		Damage: 16000
 	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 16
 	Warhead@Effect: CreateEffect
@@ -2186,10 +2178,8 @@ CabalRavagerPlasmaNeutron:
 		Blockable: false
 		Shadow: false
 		Image: cabal_plasmabullet
-	Warhead@Chemical_Medium: SpreadDamage
+	Warhead@Chemical_Medium:
 		Damage: 32000
-	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
-		Damage: 16000
 	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 16
 	Warhead@Effect: CreateEffect

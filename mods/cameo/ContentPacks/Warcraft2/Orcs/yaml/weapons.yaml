@@ -6,10 +6,8 @@ wc2gruntslice2:
 	Range: 1600
 	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 	Projectile: InstantHit
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 24000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 12000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 12
 	Warhead@Effect: CreateEffect
@@ -43,10 +41,8 @@ wc2ogrepunch:
 	Range: 1660
 	Report: wc2_punch.aud
 	Projectile: InstantHit
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 30000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 15000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@Effect: CreateEffect
@@ -205,19 +201,15 @@ wc2deathknightFire:
 	Report: wc2_touchdrk.aud
 	Projectile:
 		Image: wc2_effect_death_knight_attack
-	Warhead@Flame_Heavy: SpreadDamage
+	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Flame_Heavy_FriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Effect:
+	Warhead@Effect: CreateEffect
 		Image: wc2_effect_death_knight_attack
 
 # Primary deathcoil projectile

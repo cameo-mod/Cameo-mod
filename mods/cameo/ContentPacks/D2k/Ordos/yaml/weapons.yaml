@@ -4,7 +4,7 @@ OrdosCombatTankCannon:
 	ReloadDelay: 44
 	Projectile: Bullet
 		Speed: 523
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
@@ -15,7 +15,7 @@ HeavyOrdosCombatTankCannon:
 	ReloadDelay: 40
 	Projectile: Bullet
 		Speed: 600
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
@@ -59,7 +59,7 @@ HeavyOrdosCombatTankRockets:
 		Damage: 2000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 2000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -88,7 +88,7 @@ HeavyOrdosCombatTankRockets:
 		Damage: 7000
 	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 7
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 14000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 7
@@ -113,7 +113,7 @@ HeavyOrdosCombatTankRockets:
 		ContrailEndWidth: 25
 		ContrailStartColor: FFFF88FF
 		ContrailEndColor: FF884422
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 30000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
@@ -257,7 +257,7 @@ D2K_155mm_turret:
 		Damage: 12000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 12000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
@@ -302,7 +302,7 @@ Dune_SiegeMortar:
 		Damage: 5000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
@@ -351,7 +351,7 @@ D2K_Rocket_Trooper_AGOnly:
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 5
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water
 		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
@@ -384,7 +384,7 @@ D2K_Rocket_Trooper_AA:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 5
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 		Damage: 10000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -416,7 +416,7 @@ D2K_APC_Rocket:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -465,7 +465,7 @@ DeviatorMissile:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -564,11 +564,8 @@ contaminator_attack:
 	Report: contaminator_attack_2.wav
 	Range: 2000
 	Projectile: InstantHit
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 10000
-		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 5000
 		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
@@ -854,7 +851,7 @@ facedancer_grenade:
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageCalculationType: ClosestTargetablePosition
@@ -934,7 +931,7 @@ HMGo:
 	-Report:
 	StartBurstReport: hmgo1.wav, hmgo2.wav
 	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -951,7 +948,7 @@ HMGo_upgrade:
 		Width: 55
 		ZOffset: 2047
 		Color: 00ffbb
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -980,7 +977,7 @@ d2kChainGun:
 	Range: 6184
 	-Report:
 	StartBurstReport: MGUN2.WAV
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -1067,7 +1064,7 @@ autogun_tank:
 	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -1143,7 +1140,7 @@ d2kCarryallChainGun:
 	BurstDelays: 1
 	Range: 4000
 	StartBurstReport: MGUN2.WAV
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -1233,10 +1230,8 @@ d2k_chemgun:
 		Amplitude: 150
 		WaveLength: 300
 		Color: 88FF00
-	Warhead@Chemical_Light: SpreadDamage
+	Warhead@Chemical_Light:
 		Damage: 30000
-	Warhead@Chemical_Light_FriendlyFire: SpreadDamage
-		Damage: 15000
 	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@Cloud: SpawnSmokeParticle

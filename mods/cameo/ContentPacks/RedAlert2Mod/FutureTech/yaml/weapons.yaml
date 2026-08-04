@@ -7,13 +7,13 @@ ACV_Machinegun:
 	BurstDelays: 2
 	Range: 5555
 	Report: AUACV_mgFireA.wav, AUACV_mgFireB.wav, AUACV_mgFireC.wav, AUACV_mgFireD.wav
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -39,13 +39,13 @@ Future_Cryocopter_Rocket:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
@@ -324,13 +324,11 @@ FutureMicrotorpedos:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 6000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 3000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 6000
 		ValidTargets: Water, Underwater, Bridge, Structure
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -549,7 +547,7 @@ Future_MultiMissile:
 		Damage: 4000
 	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 4000
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -601,7 +599,7 @@ Future_MultiMissile_Javelin:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -851,7 +849,7 @@ FutureJavelinRockets:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -882,11 +880,11 @@ Future_Wheel_MG:
 	BurstDelays: 2
 	Range: 5806
 	Report: heavy_mgun1_3.wav
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -932,7 +930,7 @@ ShotgunAttackRobotGun:
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -968,7 +966,7 @@ CannonAttackRobotGun:
 		Damage: 2000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 2000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -994,7 +992,7 @@ MissileAttackRobotGun:
 		Damage: 12000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 12000
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 6
@@ -1052,7 +1050,7 @@ FutureMechGatling:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1092,7 +1090,7 @@ FutureMechPlasma:
 		Damage: 5000
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 10000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
@@ -1116,7 +1114,7 @@ GuardianTankCannon:
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 	Projectile: Bullet
 		Speed: 782
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 12000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
@@ -1230,7 +1228,7 @@ FutureTankCannons:
 		ValidTargets: Ground, Water, Air
 		Damage: 50
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 100000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1347,7 +1345,7 @@ HarbingerChainguns:
 	ReloadDelay: 9
 	Range: 6030
 	Report: AUGunsh_wea1Firea.wav,AUGunsh_wea1Fireb.wav,AUGunsh_wea1Firec.wav
-	Warhead@Flak_Medium: SpreadDamage
+	Warhead@Flak_Medium:
 		Damage: 12000
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
@@ -1403,7 +1401,7 @@ OrionRailgun:
 		Damage: 30000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		Damage: 15
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 30000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 15
@@ -1427,7 +1425,7 @@ OrionRailgun_elite:
 		Damage: 60000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		Damage: 30
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 60000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 30

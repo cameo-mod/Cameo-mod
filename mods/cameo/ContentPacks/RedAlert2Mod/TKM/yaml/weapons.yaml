@@ -15,7 +15,7 @@ tkm_rifleman_rifle:
 		ContrailLength: 20
 		Speed: 10000
 		Width: 50
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 6000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 4
@@ -36,7 +36,7 @@ tkm_rifleman_semiautorifle:
 		ContrailLength: 20
 		Speed: 10000
 		Width: 50
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 10000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 5
@@ -45,7 +45,7 @@ tkm_juggernaut:
 	ReloadDelay: 8
 	Range: 4490
 	Report: mgun11.aud
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -58,7 +58,7 @@ tkmjuggap:
 	Range: 4792
 	Report: mgun11.aud
 	ValidTargets: Ground, Water
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArms: SpreadDamage
@@ -74,7 +74,7 @@ tkmbunkmg:
 	Burst: 4
 	BurstDelays: 3
 	Report: mgun11.aud
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -92,7 +92,7 @@ HueyGun:
 		Damage: 2000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -103,14 +103,14 @@ HueyMissiles:
 	ReloadDelay: 14
 	Range: 4783
 	Report: bazook1.aud
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 8000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 tkmtechnicalmgap:
 	Inherits: tkmjuggap
 	ValidTargets: Ground, Water
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Bullet_Light: SpreadDamage
@@ -126,7 +126,7 @@ tkmtwinrockets:
 	Range: 7214
 	Burst: 2
 	Report: bazook1.aud
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 18000
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 9
@@ -172,7 +172,7 @@ tkmm16:
 	Report: mgun2.aud
 	Burst: 5
 	BurstDelays: 1
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -185,7 +185,7 @@ tkm_trooper_ak:
 	Report: mgun2.aud
 	Burst: 5
 	BurstDelays: 1
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -198,7 +198,7 @@ tkmakap:
 	Warhead@SmallArms: SpreadDamage
 		Burst: 3
 		Damage: 6000
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
@@ -208,7 +208,7 @@ tkmkord:
 	ReloadDelay: 10
 	Range: 6195
 	Report: mgun2.aud
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -248,7 +248,7 @@ tkmtechmg:
 	ReloadDelay: 6
 	Range: 4153
 	Report: mgun2.aud
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -266,10 +266,8 @@ ThermoF:
 		Image: tsflameall
 		Inaccuracy: 680
 		Palette: tseffect
-	Warhead@Flame_Medium: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 2000
-	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
-		Damage: 1000
 	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
@@ -309,7 +307,7 @@ tkmrockets:
 	ReloadDelay: 64
 	Range: 6214
 	Report: bazook1.aud
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 18000
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 9
@@ -321,7 +319,7 @@ as42rockets:
 	Range: 6379
 	Report: bazook1.aud
 	Projectile: Missile
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 20000
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 10
@@ -340,7 +338,7 @@ tkmcryorockets:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		ContrailLength: 15
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 18000
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 9
@@ -417,7 +415,7 @@ tkmltgun:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 524
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
@@ -438,7 +436,7 @@ tkm2a46gun:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 524
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
@@ -507,7 +505,7 @@ tkmstrykerrockets:
 	Range: 7880
 	Report: bazook1.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 24000
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
@@ -530,7 +528,7 @@ tkmstrykercryorockets:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		ContrailLength: 15
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 12000
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
@@ -557,7 +555,7 @@ tkmstrykermg:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -831,12 +829,9 @@ tkmkatyushalalauncherrockets:
 		MaximumLaunchSpeed: 125
 		MinimumLaunchSpeed: 125
 		Acceleration: 5
-	Warhead@Concussion_Medium: SpreadDamage
+	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water
 		Damage: 20000
-	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 10000
 	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 10
@@ -984,7 +979,7 @@ SandmarineTuskTwin:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 2
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
@@ -1042,7 +1037,7 @@ ViperMissiles:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
@@ -1264,7 +1259,7 @@ tkmm16ap:
 	Report: mgun2.aud
 	Burst: 5
 	BurstDelays: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1342,7 +1337,7 @@ tkmt72cannon:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 546
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 20000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
@@ -1366,7 +1361,7 @@ tkmabramscannon:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 546
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 20000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
@@ -1401,7 +1396,7 @@ tkmquadcannonmg:
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1487,7 +1482,7 @@ tkmrh120gun:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 524
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 12000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
@@ -1608,12 +1603,9 @@ TKMDroneExplode:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Explosion_Medium
 	ValidTargets: Ground, Water
-	Warhead@Concussion_Medium: SpreadDamage
+	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 20000
 	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 20

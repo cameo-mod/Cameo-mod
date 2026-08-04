@@ -28,10 +28,8 @@ AsianFlameFragment:
 	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 20
 	Range: 2000
-	Warhead@Flame_Light: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 2000
-	Warhead@Flame_Light_FriendlyFire: SpreadDamage
-		Damage: 1000
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
@@ -69,11 +67,8 @@ AsianOilBombFragments:
 		ContrailEndColor: FFFFFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailLength: 7
-	Warhead@Flame_Light: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 4000
-		Falloff: 100, 50, 25, 12, 6, 3, 1
-	Warhead@Flame_Light_FriendlyFire: SpreadDamage
-		Damage: 2000
 		Falloff: 100, 50, 25, 12, 6, 3, 1
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -101,10 +96,8 @@ AsianFlamerTurret:
 		LaunchAngle: 10, 20
 		Image: tsflameall
 		Palette: tseffect
-	Warhead@Flame_Light: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 4000
-	Warhead@Flame_Light_FriendlyFire: SpreadDamage
-		Damage: 2000
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
@@ -179,13 +172,11 @@ AsianSmallTorpedo:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 12000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 6000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 12000
 		ValidTargets: Water, Underwater, Bridge, Structure
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -380,7 +371,7 @@ SteelHoverMissile_elite:
 	# DAMAGE, not burst 4->6. Burst reverted; base warheads doubled.
 	Warhead@ArrowWeapon: SpreadDamage
 		Damage: 8000
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 8000
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_medium_grey_explosion
@@ -441,10 +432,9 @@ SteelTwisterMissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		ValidRelationships: Neutral, Enemy
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -628,10 +618,8 @@ NaxGrilleArty:
 		Damage: 8000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 8
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 16000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 8000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 8
 
@@ -659,7 +647,7 @@ NaxiRifle:
 		ContrailLength: 20
 		Speed: 10000
 		Width: 50
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 6000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
@@ -722,7 +710,7 @@ NaxiMP40:
 		Damage: 2000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -749,14 +737,12 @@ NaxSturmArty:
 		Damage: 30000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 14
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 30000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 14
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 20000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 10000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 14
 
@@ -901,7 +887,7 @@ NaxiAlienPistol:
 	Burst: 2
 	BurstDelays: 3
 	ValidTargets: Ground, Water
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
@@ -1104,10 +1090,8 @@ MeteorFlameFragment:
 	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 20
 	Range: 2000
-	Warhead@Flame_Light: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 2000
-	Warhead@Flame_Light_FriendlyFire: SpreadDamage
-		Damage: 1000
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Aliens: SpawnActorOrWeapon
@@ -1128,7 +1112,7 @@ NaxisBlackBomb:
 	Range: 2000
 	ReloadDelay: 100
 	Projectile: InstantExplode
-	Warhead@Demolition_Heavy: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Spread: 1500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 100000
@@ -1179,7 +1163,7 @@ NaxisBlackBombSmaller:
 		Damage: 25000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 25000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
@@ -1217,7 +1201,7 @@ Lunar_Green105mm:
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Range: 5000
 	ReloadDelay: 50
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
@@ -1293,12 +1277,9 @@ RA2RTruckRocket:
 		Palette: d2keffect
 		TrailImage: large_trail
 		LaunchAngle: 77
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -1320,7 +1301,7 @@ RA2RTruckRocket:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
@@ -1373,13 +1354,13 @@ LatinBuggyRocket:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
@@ -1494,14 +1475,10 @@ LatinBuggyRocket_elite:
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		Spread: 4000
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		Spread: 8000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
-		Spread: 4000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
@@ -1518,7 +1495,7 @@ LatinBuggyRocket_elite:
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		Spread: 2000
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		Spread: 1000

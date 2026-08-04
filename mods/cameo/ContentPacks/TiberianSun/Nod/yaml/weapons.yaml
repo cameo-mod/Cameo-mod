@@ -21,10 +21,8 @@ TS155mmFrag:
 		ContrailLength: 3
 		ContrailWidth: 0c16
 	Range: 3500
-	Warhead@Concussion_Medium: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 30000
-	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
-		Damage: 15000
 	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 
@@ -40,10 +38,8 @@ TSCadreGrenade:
 		LaunchAngle: 66
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 36000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 18000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 18
 	Warhead@3Eff: CreateEffect
@@ -61,10 +57,8 @@ TSRaiderGrenade:
 		LaunchAngle: 66
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 36000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 18000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 18
 	Warhead@3Eff: CreateEffect
@@ -205,7 +199,7 @@ TSNODRedEye:
 		Acceleration: 5
 		AllowSnapping: true
 		CloseEnough: 500
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 12000
 		Spread: 500
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -219,7 +213,7 @@ TSNODTibRedEye:
 	Inherits: TSNODRedEye
 	Projectile: Missile
 		TrailImage: spittrail
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 18000
 		Spread: 500
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -241,10 +235,8 @@ TSFireballLauncher:
 		Palette: tseffect
 		Inaccuracy: 384
 		LaunchAngle: 0
-	Warhead@Flame_Medium: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 8000
-	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
-		Damage: 4000
 	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
@@ -445,7 +437,7 @@ TSRaiderCannon:
 	BurstDelays: 2
 	Range: 4787
 	Report: chaingn1.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 6000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
@@ -461,7 +453,7 @@ TSHarpyClaw:
 	Report: cygun1.aud
 	SoundVolume: 0.25
 	ValidTargets: Ground, Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -475,7 +467,7 @@ TSHarpyMultiClaw:
 	TargetActorCenter: true
 	Projectile: Bullet
 		Inaccuracy: 1024
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 0
 		ValidTargets: Ground, Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -484,7 +476,7 @@ TSHarpyMultiClaw:
 
 TSHarpyAOEClaw:
 	Inherits: TSHarpyClaw
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Spread: 300
 		Falloff: 100, 50, 25
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -577,10 +569,8 @@ TSToxinRifle:
 		Width: 100
 		Speed: 10000
 		Inaccuracy: 0
-	Warhead@Chemical_Light: SpreadDamage
+	Warhead@Chemical_Light:
 		Damage: 16000
-	Warhead@Chemical_Light_FriendlyFire: SpreadDamage
-		Damage: 8000
 	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 8
 	-Warhead@Effect:

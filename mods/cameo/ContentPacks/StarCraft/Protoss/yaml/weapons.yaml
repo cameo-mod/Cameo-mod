@@ -313,10 +313,8 @@ psi_blades:
 	Burst: 2
 	BurstDelays: 6
 	Range: 1335
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 8000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 4000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
@@ -330,10 +328,8 @@ psi_spear:
 	SoundVolume: 3
 	ReloadDelay: 26
 	Range: 1337
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 32000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 16000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 16
 	Warhead@Effect: CreateEffect
@@ -498,7 +494,7 @@ ScoutRockets_AA:
 		Damage: 2000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 2000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -511,10 +507,8 @@ WarpBlade:
 	Range: 1600
 	Report: uzefir00.wav
 	SoundVolume: 3
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 20000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 10000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -528,10 +522,8 @@ WarpBladeAmaranth:
 	Range: 1840
 	Report: uzefir00.wav
 	SoundVolume: 3
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 30000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 15000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@Effect: CreateEffect
@@ -546,10 +538,8 @@ ZeratulSlice:
 	Report: zlrkfir1.aud,zlrkfir2.aud
 	SoundVolume: 3
 	TargetActorCenter: True
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 64000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 32000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 32
 	Warhead@Effect: CreateEffect
@@ -595,7 +585,7 @@ CorsairFlash:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -873,10 +863,8 @@ UnitExplodeSmallProtoss:
 
 SCWorkerExplodeProtoss:
 	Inherits: UnitExplodeSmallProtoss
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 12000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 6000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 6
 
@@ -920,7 +908,7 @@ ScoutMG:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1058,7 +1046,7 @@ ManifoldMG:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1082,7 +1070,7 @@ ManifoldMG_AA:
 		ValidTargets: Air
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -1138,7 +1126,7 @@ AtreusMG:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage

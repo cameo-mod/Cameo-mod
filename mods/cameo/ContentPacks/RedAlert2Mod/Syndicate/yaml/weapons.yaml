@@ -5,7 +5,7 @@ latinsyndicate_latinmilitia_ak47:
 	Burst: 3
 	BurstDelays: 4
 	Report: vwaratta.wav, vwarattb.wav
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -44,10 +44,8 @@ latinsyndicate_latinmilitia_molotov:
 		Damage: 1000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 2000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 1000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@FireShrapnel: FireShrapnel
@@ -72,7 +70,7 @@ LatinTankKillerRocket:
 		MinimumLaunchAngle: 222
 		MaximumLaunchAngle: 222
 		Acceleration: 6
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 26000
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 13
@@ -80,7 +78,7 @@ LatinTankKillerRocket:
 LatinTankKillerRocket_elite:
 	Inherits: LatinTankKillerRocket
 	Range: 7777
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 52000
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 26
@@ -130,10 +128,8 @@ NarcoGrenade:
 		ContrailStartColor: FF884488
 		ContrailEndColor: FFFFFF44
 		ContrailEndColorUsePlayerColor: true
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 70000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 35000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 35
 	Warhead@FireShrapnel: FireShrapnel
@@ -157,13 +153,13 @@ RA2NarcoAKM:
 	ValidTargets: Ground, Water, Air, Garrisoned
 	Range: 5800
 	ReloadDelay: 10
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -183,7 +179,7 @@ RA2Narco60mm:
 	Projectile: Bullet
 		Speed: 580
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 16000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
@@ -271,7 +267,7 @@ RA2FreedomRocket:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 30
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 60000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
@@ -299,7 +295,7 @@ RA2FreedomRocket_elite:
 		Damage: 60000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 60
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 120000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 60
@@ -470,12 +466,9 @@ RA2RBurritoRocket:
 		Palette: d2keffect
 		TrailImage: large_trail
 		LaunchAngle: 120
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -503,7 +496,7 @@ RA2RBurritoRocket:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -547,7 +540,7 @@ RA2LarsRocket:
 		MaximumLaunchSpeed: 125
 		MinimumLaunchSpeed: 125
 		Acceleration: 10
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -571,7 +564,7 @@ RA2LarsRocket:
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
@@ -591,15 +584,15 @@ RA2Gren60mm:
 	Projectile: Bullet
 		Speed: 503
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 2000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 2000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -620,7 +613,7 @@ LatinRusherRocket:
 		Speed: 800
 		MinimumLaunchAngle: 60
 		ContrailLength: 35
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 16000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
@@ -636,7 +629,7 @@ LatinRusherRocket_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 32000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 16
@@ -673,11 +666,11 @@ LatinSmokerCannon:
 		Damage: 1000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 2000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -720,7 +713,7 @@ RA2GrenadePack:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Flak_Medium: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
@@ -748,7 +741,7 @@ LatinSmokerRocket:
 		Speed: 800
 		MinimumLaunchAngle: 60
 		ContrailLength: 35
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 24000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 12
@@ -764,7 +757,7 @@ LatinSmokerRocket_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 48000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 24
@@ -795,7 +788,7 @@ DiabloCannon:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Flak_Medium: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
@@ -922,13 +915,13 @@ LatinBuggyMG:
 		ContrailLength: 8
 		Speed: 3000
 		Width: 100
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -972,13 +965,13 @@ LatinBuggyChaingun:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1028,7 +1021,7 @@ YakovlevCannon:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1071,7 +1064,7 @@ YakovlevCannon_elite:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1103,13 +1096,13 @@ LatinSentryMG:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1142,7 +1135,7 @@ LatinAADefenderCannon:
 		Damage: 2000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Flak_Medium: SpreadDamage
+	Warhead@Flak_Medium:
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1292,7 +1285,7 @@ RA2APCFlakCannon:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Flak_Medium: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
@@ -1338,13 +1331,13 @@ RA2APCMachineGun:
 		ContrailLength: 8
 		Speed: 3000
 		Width: 100
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1411,7 +1404,7 @@ RA2APCRocket:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
@@ -1502,16 +1495,13 @@ RA2AkulaRockets:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 4
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
-		Damage: 4000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 4
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage

@@ -13,7 +13,7 @@ schwarzermond_lunarsoldier_rifle:
 		ContrailStartColor: ff2d2d
 		ContrailEndColor: f55105
 		Width: 25
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -104,7 +104,7 @@ LunarPanzerCannon:
 	Report: vgriatta.wav, vgriattb.wav, vgriattc.wav
 	Projectile: Bullet
 		Speed: 512
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
@@ -198,7 +198,7 @@ NaxiMP40Laser:
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -235,7 +235,7 @@ LunarNaxiJadgDestroyer:
 		Damage: 15000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 15
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 30000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 15
@@ -273,7 +273,7 @@ LunarTigerCannon:
 		Damage: 2000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -319,7 +319,7 @@ NaxHaenebuQuadCannon:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Flak_Medium: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
@@ -490,7 +490,7 @@ NaxiBlackholeShoot:
 		ImpactActors: false
 		AirThreshold: 10000
 		ValidTargets: Air, Ground, Water
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
@@ -558,10 +558,9 @@ NaxCorrosionRocket:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		ValidRelationships: Neutral, Enemy
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -665,7 +664,7 @@ NaxCorrosionRocketTrooper_elite:
 		Damage: 4000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 4000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -720,11 +719,8 @@ NaxDieGlocke:
 	ValidTargets: Ground, Water, Air
 	Projectile: InstantHit
 	TargetActorCenter: true
-	Warhead@Chemical_Heavy: SpreadDamage
+	Warhead@Chemical_Heavy:
 		Damage: 10000
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@Chemical_Heavy_FriendlyFire: SpreadDamage
-		Damage: 5000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
@@ -751,7 +747,7 @@ UbermenschLaser:
 	Burst: 2
 	BurstDelays: 3
 	ValidTargets: Ground, Water
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -782,16 +778,10 @@ NaxiCowDrop:
 		Palette: playerra2
 		IsPlayerPalette: true
 		Shadow: True
-	Warhead@Demolition_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 10000
 		Spread: 1000
-	Warhead@Demolition_Heavy_FriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		Damage: 1000
-		Spread: 500
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidRelationships: Neutral, Enemy
 		Damage: 10
@@ -900,8 +890,6 @@ Lunar_GreenSturmArty:
 	Inherits@Cannon: NaxSturmArty
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Report: laser_cannon3_4.wav
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 10000
 schwarzermond_lunarsoldier_rifle_yellow:
 	Inherits: schwarzermond_lunarsoldier_rifle
 	Burst: 2

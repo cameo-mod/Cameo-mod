@@ -11,7 +11,7 @@
 		Damage: 10000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
@@ -36,7 +36,7 @@ IxianCombatTankCannon:
 		Damage: 4000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -57,7 +57,7 @@ HeavyIxianCombatTankCannon:
 		Damage: 6000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 3
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 6000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
@@ -108,7 +108,7 @@ DuelistTankCannon:
 		Damage: 14000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 7
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 14000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 7
@@ -235,7 +235,7 @@ D2K_Bazooka2:
 		TrailImage: bazooka_trail2
 		TrailPalette: effect75alpha
 		TrailInterval: 1
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 6000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 3
@@ -274,7 +274,7 @@ D2K_Rocket_Trooper2:
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
@@ -306,7 +306,7 @@ D2K_Rocket_Trooper1:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -355,7 +355,7 @@ D2K_TowerMissile:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -399,7 +399,7 @@ mtank_pri2:
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -448,7 +448,7 @@ IxRailgunDroneBullet:
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
@@ -574,7 +574,7 @@ d2k_munitions_explosion:
 	Inherits@wh: ^Warhead_Magic_Heavy
 	Inherits@proj: ^Projectile_Magic_Heavy
 	Inherits@fx: ^Effect_Magic_Heavy
-	Warhead@Magic_Heavy: SpreadDamage
+	Warhead@Magic_Heavy:
 		Delay: 20
 		Damage: 40000
 		Spread: 2000
@@ -711,7 +711,7 @@ RaiderGuns_upgrade:
 	Projectile: Bullet
 		Inaccuracy: 120
 	ValidTargets: Ground, Water, Air
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
@@ -766,7 +766,7 @@ HMG_turret_upgrade:
 	Projectile: Bullet
 		Inaccuracy: 120
 	ValidTargets: Ground, Water, Air
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
@@ -1206,7 +1206,7 @@ D2K_RocketsCymek:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
@@ -1227,7 +1227,7 @@ d2k_air_drone_guns:
 	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -1254,7 +1254,7 @@ d2k_air_drone_guns_upgrade:
 	Inherits: d2k_air_drone_guns
 	Inherits: ^HeavyMachineGunProjectile
 	ValidTargets: Ground, Water, Air
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
@@ -1608,7 +1608,7 @@ MongooseRocket:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage

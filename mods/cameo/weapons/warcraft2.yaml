@@ -14,10 +14,8 @@ wc2footmanslice:
 	Range: 1333
 	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 	Projectile: InstantHit
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 12000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 6000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@Effect: CreateEffect
@@ -612,10 +610,8 @@ wc2gruntslice:
 	Range: 1555
 	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 	Projectile: InstantHit
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 16000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 8000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect

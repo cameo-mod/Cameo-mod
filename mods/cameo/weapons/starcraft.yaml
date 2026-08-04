@@ -5,10 +5,8 @@ Flamethrower:
 	ReloadDelay: 60
 	Range: 2085
 	Report: flamer2.aud
-	Warhead@Flame_Light: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 20000
-	Warhead@Flame_Light_FriendlyFire: SpreadDamage
-		Damage: 10000
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
@@ -46,10 +44,8 @@ SCBROODLING:
 	Report: zerglinghit.wav
 	ReloadDelay: 6
 	Range: 1200
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 2000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 1000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -87,12 +83,9 @@ SCScourgeDroneExplosion:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -138,12 +131,8 @@ SCSPIDEREXPLOSION:
 	Inherits@proj: ^Projectile_Chem_Medium
 	Inherits@fx: ^Effect_Chem_Medium
 	-Report:
-	Warhead@Chemical_Medium: SpreadDamage
+	Warhead@Chemical_Medium:
 		Damage: 80000
-		Spread: 2048
-		Falloff: 100, 25, 0
-	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
-		Damage: 40000
 		Spread: 2048
 		Falloff: 100, 25, 0
 	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
@@ -179,10 +168,8 @@ SCVRepair:
 
 SCWorkerExplode:
 	Inherits: UnitExplodeSmall
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 12000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 6000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 6
 
@@ -229,10 +216,8 @@ Scarab:
 	ReloadDelay: 25
 	Report: repair11.aud
 	TargetActorCenter: True
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 10000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 5000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 

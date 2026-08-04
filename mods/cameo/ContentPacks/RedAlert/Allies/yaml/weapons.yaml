@@ -22,7 +22,7 @@ M60mg:
 	BurstDelays: 5
 	Range: 4359
 	Report: pillbox1.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -57,7 +57,7 @@ zsu_23:
 	BurstDelays: 2
 	Range: 11412
 	ValidTargets: Air
-	Warhead@Flak_Medium: SpreadDamage
+	Warhead@Flak_Medium:
 		Damage: 4000
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -224,7 +224,7 @@ RapierBombs:
 		Acceleration: 0, 0, -10
 		Image: BOMBLET
 		Shadow: True
-	Warhead@Demolition_Heavy: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 10000
 	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
@@ -375,7 +375,7 @@ ReconRangerRecoillessGun:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -595,7 +595,7 @@ ChronoTuskCryo:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 515
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4

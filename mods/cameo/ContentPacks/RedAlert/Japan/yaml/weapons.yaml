@@ -180,10 +180,8 @@ HeavyFlamer:
 		Image: fb3
 		LaunchAngle: 90
 		Inaccuracy: 900
-	Warhead@Flame_Medium: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 2000
-	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
-		Damage: 1000
 	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
@@ -241,10 +239,8 @@ SamuraiBlade:
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 20
 	Range: 1637
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 10000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		Damage: 5000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
@@ -298,7 +294,7 @@ JapanMaidenBow:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@Arrow_Light: SpreadDamage
+	Warhead@Arrow_Light:
 		Damage: 40000
 	Warhead@Arrow_Light_Percentage: HealthPercentageDamage
 		Damage: 20
@@ -317,7 +313,7 @@ JapanMaidenBowEnergized:
 	Inherits: JapanMaidenBow
 	Projectile: Missile
 		ContrailStartColor: FFCC77
-	Warhead@Arrow_Light: SpreadDamage
+	Warhead@Arrow_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -406,7 +402,7 @@ BallistaSingleShotAir:
 	Range: 9214
 	ReloadDelay: 200
 	ValidTargets: Air
-	Warhead@Arrow_Light: SpreadDamage
+	Warhead@Arrow_Light:
 		Damage: 160000
 	Warhead@Arrow_Light_Percentage: HealthPercentageDamage
 		Damage: 80
@@ -428,7 +424,7 @@ BallistaSingleShotAirEnergized:
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -444,7 +440,7 @@ BallistaSingleShotAirEnergized:
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Arrow_Light: SpreadDamage
+	Warhead@Arrow_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -994,7 +990,7 @@ M60mgJapan:
 	BurstDelays: 5
 	Range: 5004
 	Report: pillbox1.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -1003,7 +999,7 @@ M60mgWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits: M60mgJapan
 	Inherits: ^WaveforceBulletProjectile
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1514,7 +1510,7 @@ Type89Cannon:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 524
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
@@ -1755,7 +1751,7 @@ OISmallCannon:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 539
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
@@ -1819,7 +1815,7 @@ OIBigCannon:
 	Report: tank5.aud
 	Projectile: Bullet
 		Speed: 539
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 24000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 12
@@ -1881,10 +1877,8 @@ OIFlamer:
 		Image: fb3
 		LaunchAngle: 62
 		Inaccuracy: 850
-	Warhead@Flame_Medium: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 2000
-	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
-		Damage: 1000
 	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
@@ -1951,10 +1945,8 @@ BuggyGrenade:
 		ContrailLength: 11
 		ContrailStartWidth: 99
 		ContrailEndWidth: 33
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 60000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 30000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 30
 
@@ -2015,7 +2007,7 @@ JapaneseHeavyBomb:
 		Blockable: false
 		Image: DRAGON
 		Shadow: True
-	Warhead@Demolition_Heavy: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 20000
 	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
@@ -2117,14 +2109,10 @@ ExecutionerSword:
 	Range: 3000
 	ValidTargets: Ground, Water, Air
 	Projectile: InstantExplode
-	Warhead@Melee_Medium: SpreadDamage
+	Warhead@Melee_Medium:
 		ValidTargets: Ground, Water, Air
 		Spread: 6000
 		Damage: 600000
-	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 3000
-		Damage: 300000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 3000

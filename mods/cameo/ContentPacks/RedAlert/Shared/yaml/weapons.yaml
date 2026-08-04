@@ -69,10 +69,8 @@ OreExplosion:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
-	Warhead@Flame_Medium: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 40000
-	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
-		Damage: 20000
 	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 20
 	Warhead@Resource: CreateResource
@@ -86,7 +84,7 @@ M1Carbine:
 	ReloadDelay: 20
 	Range: 4655
 	Report: gun11.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -283,10 +281,8 @@ Flamer:
 		Image: fb3
 		LaunchAngle: 60
 		Inaccuracy: 850
-	Warhead@Flame_Light: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 2000
-	Warhead@Flame_Light_FriendlyFire: SpreadDamage
-		Damage: 1000
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
@@ -694,7 +690,7 @@ ZeroFighterChainGun:
 	BurstDelays: 4
 	Report: gun13.aud
 	TargetActorCenter: true
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1081,7 +1077,7 @@ JapanCarrierFighterBomb:
 		Acceleration: 0, 0, -10
 		Image: Dragon
 		Shadow: True
-	Warhead@Demolition_Heavy: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
@@ -1867,11 +1863,8 @@ DepthCharge:
 	Projectile: Bullet
 		Speed: 125
 		Image: BOMB
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 60000
-		ValidTargets: Submarine, Ship, Underwater
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 30000
 		ValidTargets: Submarine, Ship, Underwater
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 30
@@ -1895,7 +1888,7 @@ DepthCharge:
 	InvalidTargets: Underwater, Submarine
 	Projectile: Bullet
 		Speed: 600
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 30000
 		Spread: 300
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
@@ -1951,7 +1944,7 @@ Stinger:
 		Speed: 500
 		MinimumLaunchAngle: 50
 		Acceleration: 5
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Underwater
 		Damage: 10000
@@ -2029,7 +2022,7 @@ YamatoFlak:
 	ValidTargets: Air
 	ReloadDelay: 4
 	Range: 12500
-	Warhead@Flak_Medium: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
@@ -2168,7 +2161,7 @@ ra1_allies_rifleinfantry_carbine:
 	Burst: 3
 	BurstDelays: 4
 	Report: gun11.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1

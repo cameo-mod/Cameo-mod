@@ -8038,11 +8038,8 @@ DefuseKit:
 	Inherits@fx: ^Effect_Explosion_Light
 	-Report:
 	ValidTargets: Ground, Water, Air
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 20000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 10000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@Smudge: LeaveSmudge
@@ -8069,10 +8066,8 @@ DefuseKit:
 
 ^DamagingExplosion:
 	Inherits: ^Explosion
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 40000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 20000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 20
 	Warhead@Effect: CreateEffect
@@ -8080,10 +8075,8 @@ DefuseKit:
 
 ^DamagingExplosionHE:
 	Inherits: ^Explosion
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 60000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 30000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 30
 	Warhead@Effect: CreateEffect
@@ -8091,7 +8084,6 @@ DefuseKit:
 RockExplode:
 	Inherits: ^DamagingExplosionHE
 	-Warhead@Demolition_Light:
-	-Warhead@Demolition_Light_FriendlyFire:
 	-Warhead@Demolition_Light_Percentage:
 	Warhead@Effect2: CreateEffect
 		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
@@ -8254,7 +8246,7 @@ BuildingExplode:
 
 Napalm_Crate:
 	Inherits: ^DamagingExplosionHE
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Spread: 170
 		Damage: 5000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
@@ -9005,15 +8997,10 @@ CHFlame:
 	Inherits@fx: ^Effect_Flame_Medium
 	Projectile: InstantExplode
 	ReloadDelay: 11
-	Warhead@Flame_Medium: SpreadDamage
+	Warhead@Flame_Medium:
 		Spread: 250
 		Falloff: 100, 75, 50, 25
 		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
-		Spread: 125
-		Falloff: 100, 75, 50, 25
-		Damage: 1000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Spread: 250
@@ -9032,8 +9019,6 @@ CHFlameBlue:
 			Medium: 80
 			Heavy: 75
 			Concrete: 20
-	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
-		Spread: 125
 GLTunnelWeap:
 	Inherits: MachineGun
 	Burst: 9
@@ -9837,8 +9822,6 @@ ThermobaricFlame:
 		Damage: 2000
 		Versus:
 			Wood: 20
-	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
-		Spread: 125
 RA2IMP:
 	ReloadDelay: 85
 	Range: 5120

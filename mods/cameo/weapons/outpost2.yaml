@@ -22,7 +22,7 @@ edenMachineGun:
 	BurstDelays: 4
 	Range: 4235
 	Report: mgun11.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -37,7 +37,7 @@ plymouthMachineGun:
 	BurstDelays: 3
 	Range: 4400
 	Report: mgun11.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -99,7 +99,7 @@ edenMobileLaserTiger:
 		SecondaryBeamWidth: 32
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage

@@ -52,7 +52,7 @@ RA2LasherCannon:
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
@@ -638,13 +638,11 @@ YRBoomerTorpedo:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 20000
-	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
-		Damage: 10000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 20000
 		ValidTargets: Water, Underwater, Bridge, Structure
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -676,7 +674,7 @@ RA2GattlingMG3_AA:
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 2
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Air
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -699,13 +697,13 @@ RA2GattlingInf:
 		ContrailLength: 5
 		Speed: 10000
 		Width: 75
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Air, Water
 		Damage: 8000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 8000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -773,7 +771,7 @@ RA2Virusgun2:
 	Inherits: RA2Virusgun
 	ValidTargets: Ground, Ship, Garrisoned
 	-InvalidTargets:
-	Warhead@Flak_Medium: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
@@ -808,7 +806,7 @@ RA2Virusgun3:
 		TrailImage: green_smokey
 		TrailInterval: 1
 		TrailDelay: 1
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
@@ -847,10 +845,9 @@ RA2Chemspray:
 		Image: ra2txgasg
 		Inaccuracy: 555
 		Palette: ra2effect
-	Warhead@Chemical_Medium: SpreadDamage
+	Warhead@Chemical_Medium:
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	-Warhead@Chemical_Medium_FriendlyFire:
 	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
@@ -871,10 +868,9 @@ RA2Chemspray2:
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Chem_Heavy
 	Inherits: RA2Chemspray
-	Warhead@Chemical_Heavy: SpreadDamage
+	Warhead@Chemical_Heavy:
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	-Warhead@Chemical_Heavy_FriendlyFire:
 	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
@@ -920,7 +916,7 @@ RA2CosmonautLaser:
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath

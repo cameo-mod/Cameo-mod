@@ -66,7 +66,7 @@ TS120mmTal:
 		Speed: 850
 		Blockable: false
 		LaunchAngle: 0
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 24000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 12
@@ -145,10 +145,8 @@ TSJugg90mm:
 		Inaccuracy: 1c0
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@Concussion_Medium: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 30000
-	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
-		Damage: 15000
 	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@3Eff: CreateEffect
@@ -179,10 +177,8 @@ TSJugg120mm:
 		Inaccuracy: 1c0
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@Concussion_Medium: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 40000
-	Warhead@Concussion_Medium_FriendlyFire: SpreadDamage
-		Damage: 20000
 	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 20
 	Warhead@3Eff: CreateEffect
@@ -563,7 +559,7 @@ PitbullRockets:
 	BurstDelays: 5
 	Range: 6379
 	Report: rketinf1.aud
-	Warhead@MissileAP_Light: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 20000
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 10
@@ -626,7 +622,7 @@ TSMammothTusk2:
 	Burst: 2
 	BurstDelays: 8
 	Report: misl1.aud
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 42000
 		ValidTargets: Air
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -657,7 +653,7 @@ TSMammothTusk2II_AA:
 	BurstDelays: 8
 	Projectile: Missile
 		TrailImage: large_trail
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 60000
 		ValidTargets: Air
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -734,7 +730,7 @@ TSGDIRedEye:
 		Acceleration: 5
 		AllowSnapping: true
 		CloseEnough: 500
-	Warhead@MissileAP_Heavy: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 8000
 		Spread: 500
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
@@ -912,13 +908,13 @@ TSJumpCannon:
 	ReloadDelay: 25
 	Range: 5090
 	Report: jumpjet1.aud
-	Warhead@Flak_Medium: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -975,7 +971,7 @@ TSAssaultCannonTal:
 	Projectile: Bullet
 		Speed: 2000
 		Inaccuracy: 200
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1082,7 +1078,7 @@ KodiakAAGuns:
 	Projectile: Bullet
 		Speed: 2000
 		Inaccuracy: 200
-	Warhead@Flak_Medium: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 6000
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
@@ -1097,7 +1093,7 @@ TSHammerheadGun:
 	Range: 5451
 	Report: cygun1.aud
 	ValidTargets: Ground, Water
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1140,7 +1136,7 @@ TSMechMGII:
 		ContrailLength: 10
 		Speed: 10000
 	ValidTargets: Ground, Water
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 16000
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
