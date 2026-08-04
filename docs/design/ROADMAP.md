@@ -42,6 +42,10 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
   12 stale `ValidRelationships: Neutral, Enemy` blocks. `extract_stats.py` refreshed
   32 `docs/balance/*.json` ledgers. Boot-gated `MenuPostProcessEffect.PostWorldLoaded`,
   no new `exception-*.log`.
+- **2026-08-04:** audit quick-fix bundle — added `MinimumExposure: 0.45` to `RAAtomic` and
+  `CabalMagicNuke`; corrected `MinRange` for `RA2REVENANTAA`/`RA28Inch`; renamed `DropPodExplode`
+  `Warhead@1Eff` to `Warhead@Effect`; fixed `TSDPOD` render image (`tsdpod` → `tsdroppod`) and
+  `sietch_creep_disabled` image (`sietch_creep_disabled` → `sietch`). Boot-gated, no new exceptions.
 0. **[DONE 2026-08-01, `59c77f444`] Armor normalization** — armor is now a per-CLASS property (single
    source in `^<Class>Template`). Fixed 3 templates (MBT→Heavy, HighTechTank→Superheavy,
    LineBreaker→Superheavy) + stripped 215 flat per-actor `Armor: Type:` overrides + dropped stale Medium

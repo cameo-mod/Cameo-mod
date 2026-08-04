@@ -1271,7 +1271,7 @@ TSIonbeam:
 		StayTicks: 39
 
 DropPodExplode:
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: tspodring
 		ExplosionPalette: tseffect
 		ValidTargets: Ground, Air, Water
