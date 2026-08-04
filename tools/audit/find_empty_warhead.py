@@ -94,3 +94,7 @@ print(f"EMPTY-TYPE warheads (would NRE at CreateBasic): {len(bad)}\n")
 for name, key in sorted(bad):
     # which file defines this weapon?
     print(f"  {name:32s} Warhead@{key}")
+
+# Blocking audit: any empty-type warhead crashes the boot (see the memory
+# cameo-empty-warhead-crash). Exit non-zero so run_all.sh flags it red.
+sys.exit(1 if bad else 0)
