@@ -97,42 +97,41 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.3333333333333333,
+      "design_weapon_class": 1.1875,
       "pricing": true,
       "range": "2500",
       "reloaddelay": "50",
       "requires": "!rank-elite && ra2_soviets_doctrine_teslamunitions && !ra2_soviets_upgrade_kirovatomicbombs",
       "slot": "Armament@PRIMARYTesla",
       "versus_templates": [
-       "^TeslaChargedWeapon",
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super",
        "RA2KirovBomb"
       ],
       "warheads": [
        {
-        "damage": "80000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "40000",
-        "tag": "TeslaChargedExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "40",
-        "tag": "TeslaChargedWeaponPercentage",
+        "tag": "TeslaCharged_Super_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "40",
         "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "RA2KirovBomb_tesla",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaChargedWeapon",
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super",
        "^Warhead_Demolition_Heavy",
        "^Effect_Explosion_Heavy"
       ]
@@ -2122,29 +2121,28 @@
       "requires": "((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && (!ra2_soviets_upgrade_teslaoverload && !rank-elite)",
       "slot": "Armament",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "64000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "32",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "32",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2CoilBolt",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -2160,25 +2158,22 @@
       ],
       "warheads": [
        {
-        "damage": "64000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "32",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "32",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2CoilBolt2",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -2194,64 +2189,60 @@
       ],
       "warheads": [
        {
-        "damage": "64000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "32",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "32",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2CoilBolt3",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8842",
       "reloaddelay": "3",
       "requires": "((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && (!ra2_soviets_upgrade_teslaoverload && !rank-elite)",
       "slot": "Armament@Charged1",
       "versus_templates": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ],
       "warheads": [
        {
-        "damage": "64000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "32",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "32",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2OPCoilBolt1",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8842",
       "reloaddelay": "3",
@@ -2262,30 +2253,27 @@
       ],
       "warheads": [
        {
-        "damage": "64000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "32",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "32",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2OPCoilBolt2",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8842",
       "reloaddelay": "3",
@@ -2296,25 +2284,22 @@
       ],
       "warheads": [
        {
-        "damage": "64000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "32",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "32",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2OPCoilBolt3",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      }
     ],
@@ -3308,29 +3293,28 @@
       "requires": "(!ra2_soviets_upgrade_teslaoverload && !rank-elite)",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "24000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "12",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "12000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "12",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2PortaTesla",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -3346,25 +3330,22 @@
       ],
       "warheads": [
        {
-        "damage": "24000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "12",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "12000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "12",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2PortaTesla2",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -3380,25 +3361,22 @@
       ],
       "warheads": [
        {
-        "damage": "24000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "12",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "12000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "12",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2PortaTesla3",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -3430,29 +3408,28 @@
       "requires": "(!ra2_soviets_upgrade_teslaoverload && !rank-elite)",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "24000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "12",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "12000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "12",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2PortaTesla",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -3469,25 +3446,22 @@
       ],
       "warheads": [
        {
-        "damage": "24000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "12",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "12000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "12",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2PortaTesla2",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -3504,25 +3478,22 @@
       ],
       "warheads": [
        {
-        "damage": "24000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "12",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "12000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "12",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2PortaTesla3",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      }
     ],
@@ -5562,29 +5533,28 @@
       "requires": "(!ra2_soviets_upgrade_teslaoverload && !rank-elite)",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "12000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "6",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2TankBolt",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -5602,25 +5572,22 @@
       ],
       "warheads": [
        {
-        "damage": "12000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "6",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2TankBolt2",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -5638,25 +5605,22 @@
       ],
       "warheads": [
        {
-        "damage": "12000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "6",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2TankBolt3",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      }
     ],

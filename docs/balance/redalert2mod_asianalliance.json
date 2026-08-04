@@ -1470,23 +1470,13 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "AAHyperionMagnet",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LaserWeapon"
       ]
@@ -1929,29 +1919,23 @@
       "reloaddelay": "10",
       "slot": "Armament",
       "versus_templates": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        {
-        "damage": "30000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "AsianRailgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      }
     ],
@@ -2473,31 +2457,23 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.1,
       "pricing": true,
       "range": "5935",
       "reloaddelay": "16",
       "requires": "asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^RailgunWeapon",
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy",
        "ASDFGun"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2511,9 +2487,11 @@
        }
       ],
       "weapon": "ASDFGun2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon",
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ]
@@ -2573,31 +2551,23 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.1,
       "pricing": false,
       "range": "5935",
       "reloaddelay": "16",
       "requires": "asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^RailgunWeapon",
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy",
        "ASDFGun"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2611,9 +2581,11 @@
        }
       ],
       "weapon": "ASDFGun2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon",
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ]
@@ -2674,23 +2646,15 @@
       "reloaddelay": "100",
       "slot": "Armament@lockdown",
       "versus_templates": [
-       "^TeslaChargedWeapon",
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super",
        "AsianSniperAP"
       ],
       "warheads": [
        {
-        "damage": "32000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "16000",
-        "tag": "TeslaChargedExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "16",
-        "tag": "TeslaChargedWeaponPercentage",
+        "tag": "TeslaCharged_Super_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2772,12 +2736,19 @@
         "damage": "16",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "AsianSniperLockdown",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaChargedWeapon",
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super",
        "^MediumMissile",
        "^HeavyCannon",
        "^SmallArms",
@@ -7559,25 +7530,17 @@
       ],
       "warheads": [
        {
-        "damage": "36000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "18",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "AsianRailTank2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      },
      {
@@ -7594,25 +7557,17 @@
       ],
       "warheads": [
        {
-        "damage": "48000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "24",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "AsianRailTank3",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      }
     ],
@@ -8836,29 +8791,23 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        {
-        "damage": "24000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "AsianRailTank",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      },
      {
@@ -8875,25 +8824,17 @@
       ],
       "warheads": [
        {
-        "damage": "36000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "18",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "AsianRailTank2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      }
     ],

@@ -26,8 +26,7 @@ WraithDroneLaser:
 		Speed: 1000
 		ContrailLength: 5
 		ContrailStartColorUsePlayerColor: true
-	Warhead@Laser_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
@@ -115,8 +114,7 @@ InterceptorCannon:
 		Speed: 1500
 		ContrailLength: 5
 		ContrailStartColorUsePlayerColor: true
-	Warhead@Laser_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage

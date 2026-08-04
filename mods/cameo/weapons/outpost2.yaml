@@ -322,7 +322,7 @@ edenMobileThorsHammer:
 	Inherits@fx: ^Effect_Tesla_Heavy
 	ReloadDelay: 33
 	Report: thor.wav
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 6000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 3000

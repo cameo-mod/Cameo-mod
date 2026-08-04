@@ -297,7 +297,7 @@ RA2DiskLaser:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF88
 		UsePlayerColor: false
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 24000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
@@ -312,7 +312,7 @@ RA2DiskLaser_elite:
 		Duration: 20
 		Color: BB88AA
 		SecondaryBeamWidth: 40
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 48000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 24
@@ -383,7 +383,7 @@ RA2Magnet:
 		Duration: 100
 		Color: FF55F505
 		-HitAnim:
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Range: 0, 32
 		Falloff: 100, 100
 		Damage: 2000
@@ -404,7 +404,7 @@ RA2MagnetAA:
 	Inherits: RA2Magnet
 	ValidTargets: Vehicle, Air, Structure
 	InvalidTargets: Paratrooper
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		ValidTargets: Vehicle, Air, Structure
 		InvalidTargets: Paratrooper
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
@@ -424,7 +424,7 @@ RA2MagnetAA_elite:
 	Inherits: RA2Magnet_elite
 	ValidTargets: Vehicle, Air, Structure
 	InvalidTargets: Paratrooper
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		ValidTargets: Vehicle, Air, Structure
 		InvalidTargets: Paratrooper
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage

@@ -994,7 +994,7 @@ d2kChainGun_upgrade:
 		Width: 55
 		ZOffset: 2047
 		Color: 00ffbb
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 4000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -1293,7 +1293,7 @@ HMGstealth_upgrade:
 		Width: 55
 		ZOffset: 2047
 		Color: 00ffbb
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 2000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1309,7 +1309,7 @@ d2kCarryallChainGun_upgrade:
 		Width: 55
 		ZOffset: 2047
 		Color: 00ffbb
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 2000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1356,7 +1356,7 @@ light_inf_lmg_ordos_upgrade:
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage

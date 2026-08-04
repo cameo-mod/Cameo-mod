@@ -37,6 +37,11 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
   (4,202 weapons incl. `^templates`): 0 remaining. Boot-gate PASSED (menu `PostWorldLoaded`,
   no new exception log). `--check-yaml` does NOT catch this class — run the audit after bulk
   warhead edits. See `docs/audit/SUMMARY.md` § "Empty warhead type NRE (2026-08-04)".
+- **2026-08-04:** `sweep_areadamage.py --apply` converted 134 main-warhead `SpreadDamage`
+  overrides to bare inheritance (now `AreaDamage`) across 23 `weapons.yaml` files; stripped
+  12 stale `ValidRelationships: Neutral, Enemy` blocks. `extract_stats.py` refreshed
+  32 `docs/balance/*.json` ledgers. Boot-gated `MenuPostProcessEffect.PostWorldLoaded`,
+  no new `exception-*.log`.
 0. **[DONE 2026-08-01, `59c77f444`] Armor normalization** — armor is now a per-CLASS property (single
    source in `^<Class>Template`). Fixed 3 templates (MBT→Heavy, HighTechTank→Superheavy,
    LineBreaker→Superheavy) + stripped 215 flat per-actor `Armor: Type:` overrides + dropped stale Medium

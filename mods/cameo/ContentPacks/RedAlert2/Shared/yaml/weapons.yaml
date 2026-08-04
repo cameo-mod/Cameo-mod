@@ -1101,7 +1101,7 @@ TeslaFragmentLarge:
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	Range: 3333
-	Warhead@TeslaCharged_Super: SpreadDamage
+	Warhead@TeslaCharged_Super:
 		Damage: 16000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 8000
@@ -1264,7 +1264,7 @@ RA2PortaTesla:
 	Range: 5222
 	ReloadDelay: 100
 	Report: itesatta.wav
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 24000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 12000
@@ -1298,7 +1298,7 @@ TeslaFragment:
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Range: 2074
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 8000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 4000
@@ -1313,7 +1313,7 @@ TeslaFragment2:
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Range: 3111
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 12000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 6000
@@ -2664,7 +2664,7 @@ LightningBolt:
 	Projectile: InstantHit
 	-Report:
 	ValidTargets: Ground, Water, Air
-	Warhead@TeslaCharged_Super: SpreadDamage
+	Warhead@TeslaCharged_Super:
 		Spread: 1000
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 24000

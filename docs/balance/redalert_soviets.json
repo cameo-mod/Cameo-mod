@@ -2031,7 +2031,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": 1.125,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -2039,35 +2039,34 @@
       "requires": "ra1_soviets_upgrade_teslarockets",
       "slot": "Armament@TeslaUpgrade1",
       "versus_templates": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "Maverick"
       ],
       "warheads": [
        {
-        "damage": "16000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "8",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "TeslaMaverick",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_Missile_Medium"
@@ -2077,7 +2076,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": 1.125,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -2085,35 +2084,34 @@
       "requires": "ra1_soviets_upgrade_teslarockets",
       "slot": "Armament@TeslaUpgrade2",
       "versus_templates": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "Maverick"
       ],
       "warheads": [
        {
-        "damage": "16000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "8",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "TeslaMaverick",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_Missile_Medium"
@@ -4427,29 +4425,28 @@
       "requires": "!ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "32000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "16",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "16000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "16",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TeslaZap",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -4465,25 +4462,22 @@
       ],
       "warheads": [
        {
-        "damage": "32000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "16",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "16000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "16",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TeslaZap_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -4499,25 +4493,22 @@
       ],
       "warheads": [
        {
-        "damage": "32000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "16",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "16000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "16",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TeslaZapArc_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      }
     ],
@@ -6859,29 +6850,28 @@
       "requires": "!ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "10",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "10000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PortaTesla",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -6897,25 +6887,22 @@
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "10",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "10000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PortaTesla_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -6931,25 +6918,22 @@
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "10",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "10000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PortaTeslaArc_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -6962,29 +6946,28 @@
       "requires": "!ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "10",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "10000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PortaTesla",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -7001,25 +6984,22 @@
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "10",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "10000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PortaTesla_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -7036,25 +7016,22 @@
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "10",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "10000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PortaTeslaArc_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      }
     ],
@@ -7177,7 +7154,9 @@
       "slot": "Armament@Tesla",
       "versus_templates": [
        "VolkovMagneticWeapon",
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
@@ -7221,18 +7200,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7244,6 +7213,11 @@
         "damage": "4",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "VolkovMagneticWeaponTesla",
@@ -7252,7 +7226,9 @@
        "^HeavyCannon",
        "^MediumChemicalWeapon",
        "^Grenade",
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -7703,7 +7679,9 @@
       "slot": "Armament@GARRISONEDTesla",
       "versus_templates": [
        "VolkovMagneticWeapon",
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
@@ -7747,18 +7725,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7770,6 +7738,11 @@
         "damage": "4",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "VolkovMagneticWeaponTesla",
@@ -7778,7 +7751,9 @@
        "^HeavyCannon",
        "^MediumChemicalWeapon",
        "^Grenade",
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -8210,29 +8185,28 @@
       "requires": "!ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "32000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "16",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "16000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "16",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ZapperPortaTesla",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -8248,25 +8222,22 @@
       ],
       "warheads": [
        {
-        "damage": "32000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "16",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "16000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "16",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ZapperPortaTeslaArc",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -8279,29 +8250,28 @@
       "requires": "!ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "32000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "16",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "16000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "16",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ZapperPortaTesla",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -8318,25 +8288,22 @@
       ],
       "warheads": [
        {
-        "damage": "32000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "16",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "16000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "16",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ZapperPortaTeslaArc",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      }
     ],
@@ -10137,29 +10104,28 @@
       "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@TeslaUpgrade1",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "1",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TeslaRAGatlingTankCannon",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -10175,25 +10141,22 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "1",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TeslaRAGatlingTankCannonArc",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -10209,25 +10172,22 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "1",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TeslaRAGatlingTankCannon_AA",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -10243,25 +10203,22 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "1",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TeslaRAGatlingTankCannonArc_AA",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      }
     ],
@@ -11304,34 +11261,33 @@
       "reloaddelay": "10",
       "slot": "Armament@pointdefense",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "10000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "5",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "5000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PointDefenseTesla",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6650",
       "reloaddelay": "80",
@@ -11342,30 +11298,27 @@
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "20",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "20000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TTankZap2_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6650",
       "reloaddelay": "80",
@@ -11376,25 +11329,22 @@
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "20",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "20000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TTankZap2Arc_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      }
     ],
@@ -14269,29 +14219,28 @@
       "requires": "!ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "20",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "20000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TTankZap",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -14307,25 +14256,22 @@
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "20",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "20000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TTankZap_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -14341,25 +14287,22 @@
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "20",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "20000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TTankZapArc_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      }
     ],
@@ -14682,23 +14625,15 @@
       "requires": "ra1_soviets_upgrade_teslarockets",
       "slot": "Armament@Tesla",
       "versus_templates": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "SCUD"
       ],
       "warheads": [
        {
-        "damage": "30000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -14725,12 +14660,19 @@
         "damage": "15",
         "tag": "HeavyFlameWeaponPercentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "SCUDTesla",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^HeavyMissile",
        "^HeavyFlameWeapon"
       ]

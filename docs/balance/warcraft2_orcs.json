@@ -2165,7 +2165,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.3125,
+      "design_weapon_class": 1.2,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
@@ -2184,19 +2184,14 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2deathknightFire",
@@ -2205,13 +2200,15 @@
        "^Warhead_Flame_Heavy",
        "^Projectile_Flame_Heavy",
        "^Effect_Flame_Heavy",
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.3125,
+      "design_weapon_class": 1.2,
       "pricing": false,
       "range": "8000",
       "reloaddelay": "40",
@@ -2229,19 +2226,14 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2deathknightFire",
@@ -2250,13 +2242,15 @@
        "^Warhead_Flame_Heavy",
        "^Projectile_Flame_Heavy",
        "^Effect_Flame_Heavy",
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      },
      {
       "armament_name": "deathcoil",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.3125,
+      "design_weapon_class": 1.2,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
@@ -2272,19 +2266,14 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2deathknightDeathCoil",
@@ -2293,12 +2282,14 @@
        "^Warhead_Flame_Heavy",
        "^Projectile_Flame_Heavy",
        "^Effect_Flame_Heavy",
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.3125,
+      "design_weapon_class": 1.2,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
@@ -2314,19 +2305,14 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2deathknightDeathCoilScatter_Left",
@@ -2335,12 +2321,14 @@
        "^Warhead_Flame_Heavy",
        "^Projectile_Flame_Heavy",
        "^Effect_Flame_Heavy",
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.3125,
+      "design_weapon_class": 1.2,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
@@ -2356,19 +2344,14 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2deathknightDeathCoilScatter_Right",
@@ -2377,7 +2360,9 @@
        "^Warhead_Flame_Heavy",
        "^Projectile_Flame_Heavy",
        "^Effect_Flame_Heavy",
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      },
      {

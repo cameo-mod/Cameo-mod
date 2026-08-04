@@ -189,36 +189,35 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.125,
       "minrange": "1100",
       "pricing": true,
       "range": "5500",
       "reloaddelay": "250",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ],
       "warheads": [
        {
-        "damage": "5000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "5",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2500",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "Corsair_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      },
      {
@@ -2676,29 +2675,28 @@
       "reloaddelay": "64",
       "slot": "Armament@1",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PsiStorm",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -2710,29 +2708,28 @@
       "reloaddelay": "64",
       "slot": "Armament@2",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PsiStorm",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -2744,29 +2741,28 @@
       "reloaddelay": "64",
       "slot": "Armament@3",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PsiStorm",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -2778,29 +2774,28 @@
       "reloaddelay": "64",
       "slot": "Armament@4",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PsiStorm",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -2812,29 +2807,28 @@
       "reloaddelay": "64",
       "slot": "Armament@5",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PsiStorm",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -2846,29 +2840,28 @@
       "reloaddelay": "64",
       "slot": "Armament@6",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PsiStorm",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -2880,29 +2873,28 @@
       "reloaddelay": "64",
       "slot": "Armament@7",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PsiStorm",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -2914,29 +2906,28 @@
       "reloaddelay": "64",
       "slot": "Armament@8",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PsiStorm",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      }
     ],
@@ -4231,35 +4222,34 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "3152",
       "reloaddelay": "20",
       "slot": "Armament",
       "versus_templates": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ],
       "warheads": [
        {
-        "damage": "30000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "15",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "15000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "15",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "PsionicShockwave",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      }
     ],

@@ -43,7 +43,7 @@
       "burst": "12",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "minrange": "1325",
       "pricing": true,
       "range": "6615",
@@ -58,19 +58,9 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1000",
@@ -536,7 +526,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "8",
@@ -549,19 +539,9 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1000",
@@ -793,7 +773,7 @@
       "burst": "12",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "minrange": "1325",
       "pricing": true,
       "range": "6615",
@@ -808,19 +788,9 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1000",
@@ -1645,7 +1615,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6696",
       "reloaddelay": "25",
@@ -1658,19 +1628,9 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4000",
@@ -2578,6 +2538,11 @@
       ],
       "warheads": [
        {
+        "damage": "1",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "4000",
         "tag": "RailgunWeapon",
         "type": "SpreadDamage"
@@ -2638,6 +2603,11 @@
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
+       {
+        "damage": "1",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "4000",
         "tag": "RailgunWeapon",
@@ -4316,7 +4286,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "5012",
       "reloaddelay": "8",
@@ -4340,19 +4310,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -4458,7 +4418,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "7518",
       "reloaddelay": "8",
@@ -4482,19 +4442,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -6646,7 +6596,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4876",
       "reloaddelay": "8",
@@ -6659,19 +6609,9 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -6745,7 +6685,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7314",
       "reloaddelay": "8",
@@ -6758,19 +6698,9 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -7868,7 +7798,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5004",
       "reloaddelay": "15",
@@ -7881,19 +7811,9 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -7902,7 +7822,7 @@
        }
       ],
       "weapon": "M60mgWaveforce",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^Warhead_Bullet_Light",

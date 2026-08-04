@@ -481,7 +481,7 @@ Future_CoilerAgressive:
 	Range: 7500
 	ReloadDelay: 125
 	Report: itesatta.wav
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 50000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 25000
@@ -964,7 +964,7 @@ CannonAttackRobotGun:
 		Damage: 1000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 2000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1

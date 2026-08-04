@@ -1183,9 +1183,8 @@ VonSniperLockdown:
 		ContrailEndWidth: 150
 		ContrailStartColor: 4488FF
 		ContrailEndColor: 22446688
-	Warhead@TeslaCharged_Super: SpreadDamage
+	Warhead@TeslaCharged_Super:
 		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedExtraDamage: SpreadDamage

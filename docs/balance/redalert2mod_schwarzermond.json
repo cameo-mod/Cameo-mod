@@ -2320,24 +2320,16 @@
       "requires": "schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@PRIMARY_UP",
       "versus_templates": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "NaxSturmArty",
        "^LunarNaxisUpgradedCannons"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2364,7 +2356,9 @@
       "weapon": "Lunar_GreenSturmArty",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^HeavyBomb",
        "^RA2MediumCannon",
        "^RA2Grenade",
@@ -2994,19 +2988,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle",
@@ -3049,19 +3033,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_elite",
@@ -3104,19 +3078,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
@@ -3159,19 +3123,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
@@ -3214,19 +3168,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
@@ -3269,19 +3213,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite",
@@ -3325,19 +3259,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle",
@@ -3381,19 +3305,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_elite",
@@ -3437,19 +3351,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
@@ -3493,19 +3397,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
@@ -3549,19 +3443,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
@@ -3605,19 +3489,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite",
@@ -3680,7 +3554,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
@@ -3733,19 +3607,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -3772,7 +3636,7 @@
       "burst": "10",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
@@ -3823,19 +3687,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -3911,7 +3765,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
@@ -3964,19 +3818,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -4003,7 +3847,7 @@
       "burst": "10",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
@@ -4054,19 +3898,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -4093,7 +3927,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
@@ -4144,19 +3978,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -4183,7 +4007,7 @@
       "burst": "11",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
@@ -4234,19 +4058,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -4273,7 +4087,7 @@
       "burst": "7",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
@@ -4324,19 +4138,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -4363,7 +4167,7 @@
       "burst": "12",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
@@ -4414,19 +4218,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
@@ -4505,29 +4299,23 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^LaserWeapon"
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        {
-        "damage": "60000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "BlackHoleMaker",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^LaserWeapon"
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ]
      },
      {
@@ -4545,25 +4333,17 @@
       ],
       "warheads": [
        {
-        "damage": "60000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "BlackHoleMaker_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^LaserWeapon"
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ]
      },
      {
@@ -4576,29 +4356,23 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^LaserWeapon"
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        {
-        "damage": "60000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "BlackHoleMaker",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^LaserWeapon"
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ]
      },
      {
@@ -4617,25 +4391,17 @@
       ],
       "warheads": [
        {
-        "damage": "60000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "BlackHoleMaker_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^LaserWeapon"
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ]
      }
     ],
@@ -5776,65 +5542,63 @@
       "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "1",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "NaxCrystalLeech",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
       "burst": "20",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8420",
       "reloaddelay": "25",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "1",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "NaxCrystalLeech_elite",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      }
     ],
@@ -5929,19 +5693,9 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "100000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "50",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "DalekCannon",
@@ -5995,19 +5749,9 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "200000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "100",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "DalekCannon_elite",
@@ -7541,24 +7285,16 @@
       "requires": "!rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@upgraded",
       "versus_templates": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "NaxGrilleArty",
        "^LunarNaxisUpgradedCannons"
       ],
       "warheads": [
        {
-        "damage": "16000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7590,12 +7326,19 @@
         "damage": "8",
         "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "Lunar_GreenGrilleArty",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^HeavyCannon",
        "^ShrapnelWeapon",
        "^RA2Grenade",
@@ -7614,24 +7357,16 @@
       "requires": "rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@elite-upgrade",
       "versus_templates": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "NaxGrilleArty_elite",
        "^LunarNaxisUpgradedCannons"
       ],
       "warheads": [
        {
-        "damage": "16000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7663,12 +7398,19 @@
         "damage": "8",
         "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "Lunar_GreenGrilleArty_elite",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^HeavyCannon",
        "^ShrapnelWeapon",
        "^RA2Grenade",
@@ -8061,24 +7803,16 @@
       "requires": "!rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@-upgrade",
       "versus_templates": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "LunarTigerCannon",
        "^LunarNaxisUpgradedCannons"
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -8125,12 +7859,19 @@
         "damage": "2",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "Lunar_GreenTigerCannon",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^LightChemicalWeapon",
        "^HeavyBomb",
        "^MediumFlameWeapon",
@@ -8150,24 +7891,16 @@
       "requires": "rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@elite-upgrade",
       "versus_templates": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "LunarTigerCannon_elite",
        "^LunarNaxisUpgradedCannons"
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -8214,12 +7947,19 @@
         "damage": "2",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "Lunar_GreenTigerCannon_elite",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^LightChemicalWeapon",
        "^HeavyBomb",
        "^MediumFlameWeapon",
@@ -8509,24 +8249,16 @@
       "requires": "!rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@AG-upgraded",
       "versus_templates": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "LunarNaxiJadgDestroyer",
        "^LunarNaxisUpgradedCannons"
       ],
       "warheads": [
        {
-        "damage": "30000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -8558,12 +8290,19 @@
         "damage": "15",
         "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "Lunar_GreenJadgDestroyer",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^HeavyCannon",
        "^ShrapnelWeapon",
        "^RA2TankDestroyerCannon",
@@ -8581,24 +8320,16 @@
       "requires": "rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@elite-upgrade",
       "versus_templates": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "LunarNaxiJadgDestroyer_elite",
        "^LunarNaxisUpgradedCannons"
       ],
       "warheads": [
        {
-        "damage": "30000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -8630,12 +8361,19 @@
         "damage": "15",
         "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "Lunar_GreenJadgDestroyer_elite",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^HeavyCannon",
        "^ShrapnelWeapon",
        "^RA2TankDestroyerCannon",

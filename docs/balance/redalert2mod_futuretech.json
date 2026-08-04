@@ -1999,7 +1999,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
@@ -2038,19 +2038,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2071,7 +2061,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "25",
@@ -2107,19 +2097,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -5065,29 +5045,28 @@
       "reloaddelay": "125",
       "slot": "Armament@Agressive",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "50000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "25",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "25000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "Future_CoilerAgressive",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {
@@ -6480,19 +6459,9 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "8000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "RA2Robotmm",
@@ -6547,19 +6516,9 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "8000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "weapon": "RA2Robotmm_elite",
@@ -6832,29 +6791,28 @@
       "requires": "ifv-tesla",
       "slot": "Armament@tesla",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "20",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "20000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TTankZap",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      },
      {

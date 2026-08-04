@@ -442,7 +442,7 @@ RA2Prism:
 	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@Effects: RA2PrismBeam
 	Report: bpriat1a.wav
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 32000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
@@ -463,7 +463,7 @@ PrismScatter:
 		SecondaryBeamWidth: 48
 		Duration: 24
 		-HitAnim:
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 4000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -480,7 +480,7 @@ PrismScatter2:
 		Width: 64
 		SecondaryBeamWidth: 32
 		Duration: 12
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 2000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -489,7 +489,7 @@ PrismScatter2:
 PrismScatterE:
 	Inherits: PrismScatter
 	Range: 5000
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 6000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 3
@@ -536,7 +536,7 @@ RA2Comet:
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 10
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 20000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage

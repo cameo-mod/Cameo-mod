@@ -25,7 +25,7 @@ schwarzermond_lunarsoldier_rifle:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
@@ -206,7 +206,7 @@ NaxiMP40Laser:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 2000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -360,7 +360,7 @@ DalekCannon:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 50
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 100000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
@@ -394,7 +394,7 @@ DalekCannon_elite:
 		Damage: 200000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 100
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 200000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		Damage: 100
@@ -424,7 +424,7 @@ DalekCannonScatter:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 25
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 50000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
@@ -458,7 +458,7 @@ BlackHoleMaker:
 		SegmentLength: 350
 		Inaccuracy: 128
 	ValidTargets: Ground, Water, Air
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 60000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 30
@@ -695,7 +695,7 @@ NaxCrystalLeech:
 	Range: 7420
 	Burst: 10
 	BurstDelays: 1
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 2000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 1000
@@ -709,7 +709,7 @@ NaxCrystalLeech_elite:
 	Range: 8420
 	Burst: 20
 	BurstDelays: 1
-	Warhead@TeslaCharged_Super: SpreadDamage
+	Warhead@TeslaCharged_Super:
 		Damage: 2000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 1000
@@ -825,7 +825,7 @@ Lunar_GreenTigerCannon:
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: LunarTigerCannon
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
@@ -839,7 +839,7 @@ Lunar_GreenTigerCannon_elite:
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: LunarTigerCannon_elite
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
@@ -853,7 +853,7 @@ Lunar_GreenJadgDestroyer:
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: LunarNaxiJadgDestroyer
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 30000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 15000
@@ -867,7 +867,7 @@ Lunar_GreenJadgDestroyer_elite:
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: LunarNaxiJadgDestroyer_elite
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 30000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 15000
@@ -881,7 +881,7 @@ Lunar_GreenGrilleArty:
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: NaxGrilleArty
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 16000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 8000
@@ -895,7 +895,7 @@ Lunar_GreenGrilleArty_elite:
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: NaxGrilleArty_elite
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 16000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 8000

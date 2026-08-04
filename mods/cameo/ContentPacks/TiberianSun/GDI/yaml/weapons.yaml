@@ -402,9 +402,8 @@ TSZapWeapon_EMP:
 		Blockable: false
 		TrackTarget: true
 		Color: F5F5F545
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 2000
-		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 1000
@@ -424,9 +423,8 @@ TSMine_EMP:
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Report: mineblo1.aud
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 10000
-		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 5000
@@ -458,7 +456,7 @@ TSMechRailgun:
 	Report: railuse5.aud
 	Projectile: Railgun
 		BeamColor: 00FFFF88
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@RailgunPercentage: HealthPercentageDamage
@@ -482,7 +480,7 @@ TSMechRailgunII:
 	Report: railuse5.aud
 	Projectile: Railgun
 		BeamColor: 00FFFF88
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 80000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@RailgunPercentage: HealthPercentageDamage
@@ -513,7 +511,7 @@ TSCommandoRailgun:
 	ValidTargets: Ground, Water, Air
 	Projectile: Railgun
 		BeamColor: 00FFFF88
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 		ValidTargets: Ground, Water, Air
@@ -540,7 +538,7 @@ TSZoneRailgun:
 	ValidTargets: Ground, Water
 	Projectile: Railgun
 		BeamColor: 00FFFF88
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 		ValidTargets: Ground, Water
@@ -553,7 +551,7 @@ TSZoneRailgunRail:
 	Inherits: TSZoneRailgun
 	Projectile: Railgun
 		BeamColor: FFFF44
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 60000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 		ValidTargets: Ground, Water
@@ -841,7 +839,7 @@ TSMobile_EMP:
 	Range: 1512
 	ReloadDelay: 200
 	Projectile: InstantExplode
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 64000

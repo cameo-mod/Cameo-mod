@@ -3158,23 +3158,15 @@
       "requires": "!ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "20",
@@ -3183,9 +3175,11 @@
        }
       ],
       "weapon": "TSCommandoRailgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      },
      {
@@ -3203,19 +3197,9 @@
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "20",
@@ -3224,9 +3208,11 @@
        }
       ],
       "weapon": "TSCommandoRailgunRail",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      },
      {
@@ -3241,23 +3227,15 @@
       "requires": "!ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "20",
@@ -3266,9 +3244,11 @@
        }
       ],
       "weapon": "TSCommandoRailgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      },
      {
@@ -3287,19 +3267,9 @@
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "20",
@@ -3308,9 +3278,11 @@
        }
       ],
       "weapon": "TSCommandoRailgunRail",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      }
     ],
@@ -3607,23 +3579,15 @@
       "requires": "!ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "20",
@@ -3632,9 +3596,11 @@
        }
       ],
       "weapon": "TSZoneRailgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      },
      {
@@ -3650,19 +3616,9 @@
       ],
       "warheads": [
        {
-        "damage": "60000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "30",
@@ -3671,9 +3627,11 @@
        }
       ],
       "weapon": "TSZoneRailgunRail",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      },
      {
@@ -3686,23 +3644,15 @@
       "requires": "!ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "20",
@@ -3711,9 +3661,11 @@
        }
       ],
       "weapon": "TSZoneRailgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      },
      {
@@ -3730,19 +3682,9 @@
       ],
       "warheads": [
        {
-        "damage": "60000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "30",
@@ -3751,9 +3693,11 @@
        }
       ],
       "weapon": "TSZoneRailgunRail",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      }
     ],
@@ -4739,23 +4683,15 @@
       "requires": "!ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@RAILGUN",
       "versus_templates": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        {
-        "damage": "80000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "40",
@@ -4764,9 +4700,11 @@
        }
       ],
       "weapon": "TSMechRailgunII",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      },
      {
@@ -4817,19 +4755,9 @@
       ],
       "warheads": [
        {
-        "damage": "80000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "40",
@@ -4838,9 +4766,11 @@
        }
       ],
       "weapon": "TSMechRailgunRailII",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      },
      {
@@ -4935,23 +4865,15 @@
       "requires": "!ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@RAILGUN",
       "versus_templates": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "20",
@@ -4960,9 +4882,11 @@
        }
       ],
       "weapon": "TSMechRailgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      },
      {
@@ -5013,19 +4937,9 @@
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "20",
@@ -5034,9 +4948,11 @@
        }
       ],
       "weapon": "TSMechRailgunRail",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
-       "^RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ]
      }
     ],
@@ -5147,29 +5063,28 @@
       "reloaddelay": "200",
       "slot": "Armament",
       "versus_templates": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        {
-        "damage": "64000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "32",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "32",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSMobile_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
       ]
      }
     ],

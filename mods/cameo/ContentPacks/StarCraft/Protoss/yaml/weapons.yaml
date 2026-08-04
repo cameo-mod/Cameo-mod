@@ -344,14 +344,13 @@ PsiStorm:
 	Range: 6400
 	-Report:
 	Projectile: InstantHit
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
 		Delay: 2
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 200
 		Damage: 8000
 		AffectsParent: True
-		ValidRelationships: Enemy, Neutral
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Delay: 4
@@ -388,7 +387,7 @@ PsionicShockwave:
 	Range: 3152
 	Report: parfir00.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@TeslaCharged_Super: SpreadDamage
+	Warhead@TeslaCharged_Super:
 		Damage: 30000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 15000
@@ -612,7 +611,7 @@ Corsair_EMP:
 		Blockable: false
 		LaunchAngle: 175
 		Image: tspulsball
-	Warhead@TeslaCharged_Super: SpreadDamage
+	Warhead@TeslaCharged_Super:
 		ValidTargets: Vehicle, Defense
 		Falloff: 100, 75, 50, 25
 		Damage: 5000

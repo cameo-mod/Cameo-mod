@@ -1854,70 +1854,68 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_2 && !mageslow_upg) || (FSD_cond_3 && !magepolymorph_upg) || (FSD_cond_4 && !mageblizzard_upg)",
       "slot": "Armament",
       "versus_templates": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2mageFire",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "8000",
       "reloaddelay": "40",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2mageFire",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      },
      {
@@ -2985,36 +2983,35 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)",
       "slot": "Armament",
       "versus_templates": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2mageFire",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      },
      {
@@ -3102,36 +3099,35 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)",
       "slot": "Armament",
       "versus_templates": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2mageFire",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      },
      {
@@ -3656,70 +3652,68 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_2 && !mageslow_upg) || (FSD_cond_3 && !magepolymorph_upg) || (FSD_cond_4 && !mageblizzard_upg)",
       "slot": "Armament",
       "versus_templates": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2mageFire",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "8000",
       "reloaddelay": "40",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2mageFire",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^TeslaChargedWeapon"
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
       ]
      },
      {

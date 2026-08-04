@@ -1313,10 +1313,9 @@ AsianRailgun:
 	Report: railuse5.aud
 	Projectile: Railgun
 		BeamColor: F8B62184
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 30000
-		ValidRelationships: Enemy, Neutral
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 15
@@ -1338,7 +1337,7 @@ AsianRailTank:
 		BeamWidth: 96
 		HelixRadius: 64
 		HelixThickness: 32
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 24000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
@@ -1358,7 +1357,7 @@ AsianRailTank2:
 		BeamWidth: 128
 		HelixRadius: 96
 		HelixThickness: 48
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 36000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		Damage: 18
@@ -1372,7 +1371,7 @@ AsianRailTank3:
 		BeamWidth: 160
 		HelixRadius: 128
 		HelixThickness: 64
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 48000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		Damage: 24
@@ -1449,7 +1448,7 @@ AAHyperionMagnet:
 		Duration: 100
 		Color: FF55F505
 		-HitAnim:
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Range: 0, 32
 		Falloff: 100, 100
 		Damage: 2000
@@ -1970,7 +1969,7 @@ ASDFGun2:
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
 	Inherits@2: ASDFGun
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
@@ -2117,9 +2116,8 @@ AsianSniperLockdown:
 		ContrailEndWidth: 150
 		ContrailStartColor: 4488FF
 		ContrailEndColor: 22446688
-	Warhead@TeslaCharged_Super: SpreadDamage
+	Warhead@TeslaCharged_Super:
 		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedExtraDamage: SpreadDamage

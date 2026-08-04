@@ -543,7 +543,7 @@ LaserObelisk:
 		SourceFlareSize: 64, 72
 		SourceFlareWidth: 2.5
 		SourceFlareCoreSize: 5
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 96000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 48
@@ -1463,7 +1463,7 @@ CorvetteLaserObelisk:
 	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 90
 	Range: 9550
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 120000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 60

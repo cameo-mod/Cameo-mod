@@ -60,7 +60,7 @@
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
@@ -299,7 +299,7 @@ PortaTesla:
 	ReloadDelay: 40
 	Range: 4652
 	Report: shktrop1.aud
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 20000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 10000
@@ -313,7 +313,7 @@ TTankZap:
 	ReloadDelay: 80
 	Range: 7300
 	Report: tesla1.aud
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 40000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 20000
@@ -715,7 +715,7 @@ ZeroFighterChainGunWaveforce:
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage

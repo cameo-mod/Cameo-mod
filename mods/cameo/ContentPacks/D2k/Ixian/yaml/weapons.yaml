@@ -1060,7 +1060,7 @@ D2K_ShockGunInf:
 	Projectile: Railgun
 		BeamColor: 33FFEE
 		BeamWidth: 33
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Range: 0, 25, 50, 100
 		Falloff: 100, 50, 25, 0
@@ -1292,7 +1292,7 @@ d2k_laser:
 		Width: 50
 		ZOffset: 2047
 		Color: FF0000
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
@@ -1442,8 +1442,7 @@ farasha_drone_ixian:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@Laser_Heavy: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath

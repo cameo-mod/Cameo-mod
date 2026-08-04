@@ -214,7 +214,7 @@ SteelQuantumCannon_EMP:
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@2: SteelQuantumCannon
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -253,7 +253,7 @@ SteelQuantumCannon_elite:
 		BeamColor: 4488FFBB
 		BeamWidth: 128
 		Duration: 24
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 12000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 6000
@@ -413,7 +413,7 @@ SteelMakoGun:
 		Damage: 2000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 2000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -450,7 +450,7 @@ SteelMakoGun_EMP:
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
@@ -782,7 +782,7 @@ SteelInfRailgun:
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Speed: 1000
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
@@ -901,7 +901,7 @@ SteelInfRailgun_EMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -970,7 +970,7 @@ SteelFighterRailgun:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
@@ -1087,7 +1087,7 @@ SteelMegaSword_elite:
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
 	Inherits@2: SteelMegaSword_EMP
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
@@ -1152,7 +1152,7 @@ SteelAirTurret_EMP:
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@2: SteelAirTurret
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1191,7 +1191,7 @@ SteelAirTurret_elite:
 		BeamColor: 4488FFBB
 		BeamWidth: 128
 		Duration: 24
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 24000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 12000
@@ -1635,7 +1635,7 @@ SteelStalkerRailgun_EMP:
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@2: SteelStalkerRailgun
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1674,7 +1674,7 @@ SteelStalkerRailgun_elite:
 		BeamColor: 4488FFBB
 		BeamWidth: 192
 		Duration: 24
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 60000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 30000

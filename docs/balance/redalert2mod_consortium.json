@@ -10,7 +10,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "80",
@@ -39,19 +39,9 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -86,7 +76,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
@@ -149,19 +139,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -223,7 +203,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
@@ -234,19 +214,9 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -265,7 +235,7 @@
        }
       ],
       "weapon": "SteelScalpelRailgunAA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -277,7 +247,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.95,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
@@ -373,19 +343,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1250,23 +1210,15 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "SteelAirTurret"
       ],
       "warheads": [
        {
-        "damage": "16000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1298,12 +1250,19 @@
         "damage": "1000",
         "tag": "RailgunExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "SteelAirTurret_EMP",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^LaserWeapon",
        "^RailgunWeapon"
       ]
@@ -1321,18 +1280,8 @@
       ],
       "warheads": [
        {
-        "damage": "24000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1364,12 +1313,19 @@
         "damage": "1000",
         "tag": "RailgunExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "SteelAirTurret_elite",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^LaserWeapon",
        "^RailgunWeapon"
       ]
@@ -3514,7 +3470,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
@@ -3548,19 +3504,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3581,7 +3527,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
@@ -3612,19 +3558,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3644,7 +3580,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6050",
       "reloaddelay": "25",
@@ -3678,19 +3614,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3712,7 +3638,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "7050",
       "reloaddelay": "25",
@@ -3743,19 +3669,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3774,7 +3690,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
@@ -3837,19 +3753,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3872,7 +3778,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
@@ -3933,19 +3839,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3967,7 +3863,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "6050",
       "reloaddelay": "25",
@@ -4030,19 +3926,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4066,7 +3952,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "7050",
       "reloaddelay": "25",
@@ -4127,19 +4013,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4209,7 +4085,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "48",
@@ -4223,19 +4099,9 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4254,7 +4120,7 @@
        }
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -4266,7 +4132,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
@@ -4277,19 +4143,9 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4308,7 +4164,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -4320,7 +4176,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.95,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
@@ -4422,19 +4278,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4471,7 +4317,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.95,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
@@ -4567,19 +4413,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4637,7 +4473,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "48",
@@ -4651,19 +4487,9 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4682,7 +4508,7 @@
        }
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -4695,7 +4521,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
@@ -4706,19 +4532,9 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4737,7 +4553,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -4750,7 +4566,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.95,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
@@ -4852,19 +4668,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4902,7 +4708,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.95,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
@@ -4998,19 +4804,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -5048,7 +4844,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "8000",
       "reloaddelay": "48",
@@ -5062,19 +4858,9 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -5093,7 +4879,7 @@
        }
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -5106,7 +4892,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "9000",
       "reloaddelay": "48",
@@ -5117,19 +4903,9 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -5148,7 +4924,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -5161,7 +4937,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.95,
       "pricing": false,
       "range": "8000",
       "reloaddelay": "50",
@@ -5263,19 +5039,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -5313,7 +5079,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.95,
       "pricing": false,
       "range": "9000",
       "reloaddelay": "50",
@@ -5409,19 +5175,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -7093,18 +6849,8 @@
       ],
       "warheads": [
        {
-        "damage": "12000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7136,12 +6882,19 @@
         "damage": "1000",
         "tag": "RailgunExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "SteelQuantumCannon_elite",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^LaserWeapon",
        "^RailgunWeapon"
       ]
@@ -7795,7 +7548,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "48",
@@ -7809,19 +7562,9 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -7840,7 +7583,7 @@
        }
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -7852,7 +7595,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
@@ -7863,19 +7606,9 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -7894,7 +7627,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -7906,7 +7639,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.95,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
@@ -8008,19 +7741,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -8057,7 +7780,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.95,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
@@ -8153,19 +7876,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -8726,7 +8439,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
@@ -8760,19 +8473,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -8793,7 +8496,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
@@ -8824,19 +8527,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -8855,7 +8548,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
@@ -8918,19 +8611,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -8953,7 +8636,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
@@ -9014,19 +8697,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -9625,24 +9298,16 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "^RailgunWeapon",
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy",
        "SteelMegaSword_EMP"
       ],
       "warheads": [
        {
-        "damage": "30000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "30000",
@@ -9693,7 +9358,9 @@
       "weapon": "SteelMegaSword_elite",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^RailgunWeapon",
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy",
        "^HeavyChemicalWeapon",
        "^LaserWeapon",
        "^TeslaWeapon"
@@ -9878,23 +9545,15 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "SteelQuantumCannon"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -9926,12 +9585,19 @@
         "damage": "1000",
         "tag": "RailgunExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "SteelQuantumCannon_EMP",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^LaserWeapon",
        "^RailgunWeapon"
       ]
@@ -9950,18 +9616,8 @@
       ],
       "warheads": [
        {
-        "damage": "12000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -9993,12 +9649,19 @@
         "damage": "1000",
         "tag": "RailgunExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "SteelQuantumCannon_elite",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^LaserWeapon",
        "^RailgunWeapon"
       ]
@@ -10109,23 +9772,15 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "SteelStalkerRailgun"
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "20",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -10157,12 +9812,19 @@
         "damage": "1000",
         "tag": "RailgunExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "SteelStalkerRailgun_EMP",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^LaserWeapon",
        "^RailgunWeapon"
       ]
@@ -10180,18 +9842,8 @@
       ],
       "warheads": [
        {
-        "damage": "60000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -10223,12 +9875,19 @@
         "damage": "1000",
         "tag": "RailgunExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "SteelStalkerRailgun_elite",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^LaserWeapon",
        "^RailgunWeapon"
       ]

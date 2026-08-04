@@ -123,7 +123,7 @@ RA2KirovBomb_tesla:
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	Inherits@2: RA2KirovBomb
-	Warhead@TeslaCharged_Super: SpreadDamage
+	Warhead@TeslaCharged_Super:
 		Damage: 80000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 40000
@@ -502,7 +502,7 @@ RA2CoilBolt:
 	Range: 8842
 	ReloadDelay: 3
 	Report: btesat1a.wav
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 64000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 32000
@@ -536,7 +536,7 @@ RA2OPCoilBolt1:
 	Range: 8842
 	ReloadDelay: 3
 	Report: btesat2a.wav
-	Warhead@TeslaCharged_Super: SpreadDamage
+	Warhead@TeslaCharged_Super:
 		Damage: 64000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 32000
@@ -571,7 +571,7 @@ TeslaFragmentWeak:
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Range: 1555
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 6000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 3000
@@ -589,7 +589,7 @@ RA2TankBolt:
 	Burst: 2
 	BurstDelays: 5
 	Report: vtesatta.wav, vtesattb.wav
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 12000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 6000
@@ -622,7 +622,7 @@ TeslaTankFragment:
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Range: 2500
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
@@ -637,7 +637,7 @@ TeslaTankFragment2:
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Range: 3750
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 6000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 3000

@@ -59,7 +59,7 @@ td_gdi_commando_sniper_elite:
 		ContrailStartWidth: 40
 		ContrailEndWidth: 80
 		ContrailLength: 40
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 20000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
@@ -1272,7 +1272,7 @@ ExosuitRailgun:
 	BurstDelays: 5
 	Range: 6806
 	Burst: 2
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 20000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
@@ -1348,7 +1348,7 @@ GDIRigPDLaser:
 		SecondaryBeamColor: ff000033
 		Blockable: true
 		-HitAnim:
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 2000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1441,7 +1441,7 @@ GDIRigRailgun:
 	ValidRelationships: Enemy, Neutral
 	ReloadDelay: 95
 	Range: 9350
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 160000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
@@ -1729,7 +1729,7 @@ GDIBattleshipRailgun:
 	Inherits@fx: ^Effect_Railgun_Heavy
 	ReloadDelay: 100
 	Range: 10000
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 50000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage

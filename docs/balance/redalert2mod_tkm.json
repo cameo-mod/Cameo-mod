@@ -2976,23 +2976,15 @@
       "reloaddelay": "100",
       "slot": "Armament@lockdown",
       "versus_templates": [
-       "^TeslaChargedWeapon",
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super",
        "VonSniperAP"
       ],
       "warheads": [
        {
-        "damage": "32000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "16000",
-        "tag": "TeslaChargedExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "16",
-        "tag": "TeslaChargedWeaponPercentage",
+        "tag": "TeslaCharged_Super_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3074,12 +3066,19 @@
         "damage": "16",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "weapon": "VonSniperLockdown",
       "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^TeslaChargedWeapon",
+       "^Warhead_TeslaCharged_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super",
        "^MediumMissile",
        "^HeavyCannon",
        "^SmallArms",

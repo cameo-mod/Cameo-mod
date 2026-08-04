@@ -1557,7 +1557,7 @@ RA2Robotmm:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 4
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
@@ -1597,7 +1597,7 @@ RA2RobotmmScatter_elite:
 		Damage: 4000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@Railgun_Heavy: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 4000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2

@@ -376,7 +376,7 @@ wc2mageFire:
 	Projectile: Bullet
 		Speed: 640
 		Image: wc2_lightng
-	Warhead@TeslaCharged_Super: SpreadDamage
+	Warhead@TeslaCharged_Super:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
