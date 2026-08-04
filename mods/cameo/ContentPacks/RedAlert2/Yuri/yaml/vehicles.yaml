@@ -44,12 +44,12 @@ yuri_slaveminer:
 	ProvidesPrerequisite:
 		Prerequisite: yuri_slaveminer_deployed
 	Valued:
-		Cost: 2000
+		Cost: 2500
 	Tooltip:
 		Name: Slave Miner
 	Buildable:
 		BuildPaletteOrder: 10
-		BuildDuration: 500
+		BuildDuration: 750
 		BuildDurationModifier: 100
 		Prerequisites: ~yuri_warfactory
 		Queue: Vehicle, RAVehicle
@@ -100,7 +100,6 @@ yuri_slaveminer:
 		Prerequisite: yuri_slaveminer_deployed
 	Voiced:
 		VoiceSet: SlaveMinerVoice
-	DeliversCash:
 	WithSpriteTurret:
 	Turreted:
 		TurnSpeed: 10
@@ -154,8 +153,6 @@ yuri_gatlingtank:
 		HpPerStep: 2250
 	ChangesHealth@SelfHealing:
 		Step: 18
-	Armor:
-		Type: Light
 	Turreted:
 		TurnSpeed: 36
 	Armament@1:
@@ -242,8 +239,6 @@ yuri_lashertank:
 		HpPerStep: 3500
 	ChangesHealth@SelfHealing:
 		Step: 28
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 23
 	Armament@PRIMARY:
@@ -338,8 +333,6 @@ yuri_magnetron:
 		HpPerStep: 3250
 	ChangesHealth@SelfHealing:
 		Step: 26
-	Armor:
-		Type: Light
 	Turreted:
 		TurnSpeed: 13
 	Armament@Normal:
@@ -445,7 +438,6 @@ yuri_chaosdrone:
 		RequiresCondition: !disabled
 	WithRangeCircle:
 		Range: 5000
-	DeliversCash:
 	-TemporaryOwnerManager:
 	Capturable:
 		Types: thiefproof
@@ -488,8 +480,6 @@ yuri_mastermind:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 2000
 	Armament@PRIMARY:

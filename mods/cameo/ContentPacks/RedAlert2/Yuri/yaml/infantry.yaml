@@ -76,7 +76,6 @@ yuri_engineer:
 		RequiresCondition: parachute
 	RenderSprites:
 		Image: ra2_allies_engineer
-	DeliversCash:
 
 yuri_initiate:
 	Inherits: ^Soldier
@@ -275,7 +274,6 @@ yuri_virus:
 		ValidTargets: Infantry
 	Voiced:
 		VoiceSet: VirusVoice
-	DeliversCash:
 	GrantConditionOnPrerequisite@viruscloud:
 		Condition: yuri_upgrade_meltingvirus
 		Prerequisites: yuri_upgrade_meltingvirus
@@ -369,7 +367,6 @@ yuri_clone:
 		VoiceSet: YuriVoice
 	ProximityCaptor@MC:
 		Types: Infantry
-	DeliversCash:
 	IgnoresDisguise:
 	KeepsDistance:
 	RenderSprites:
@@ -537,7 +534,6 @@ yuri_yurix:
 		ValidTypes: infantry
 	Voiced:
 		VoiceSet: YuriVoice
-	DeliversCash:
 	IgnoresDisguise:
 	-DamagedByTerrain:
 	#-Cloneable:

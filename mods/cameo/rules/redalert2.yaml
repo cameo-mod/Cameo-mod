@@ -752,7 +752,6 @@ ra2shk.bot:
 		Prerequisites: upemptesla
 	Voiced:
 		VoiceSet: RA2TeslaTrooperVoice
-	DeliversCash:
 
 YRSLAV:
 	Inherits: ^Soldier
@@ -961,7 +960,6 @@ ra2lcrf:
 		Range: 7500
 	Selectable:
 		DecorationBounds: 1536, 1536
-	DeliversCash:
 	Cargo:
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 15
@@ -998,7 +996,6 @@ ra2sapc:
 		Range: 7500
 	Selectable:
 		DecorationBounds: 1536, 1536
-	DeliversCash:
 	Cargo:
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 15
@@ -1035,7 +1032,6 @@ yrhovr:
 		Range: 7500
 	Selectable:
 		DecorationBounds: 1536, 1536
-	DeliversCash:
 	Cargo:
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 15
@@ -1091,7 +1087,6 @@ ra2sqd:
 	AutoTargetPriority@SQUIDGRAB:
 		ValidTargets: SquidGrab
 		Priority: 10
-	DeliversCash:
 	Cloak@underwater:
 		CloakDelay: 75
 		CloakSound: vnavupa.wav
@@ -1476,7 +1471,6 @@ ra2sub:
 		DecorationBounds: 1536, 1536
 	AcceptsDeliveredExperience:
 		ValidTypes: vehicle
-	DeliversCash:
 	Cloak@underwater:
 		CloakDelay: 75
 		CloakSound: vnavupa.wav
@@ -1537,7 +1531,6 @@ ra2dred:
 	AttackFrontal:
 		Voice: Attack
 		FacingTolerance: 0
-	DeliversCash:
 	Voiced:
 		VoiceSet: SovietNavalVoice
 	WithFacingSpriteBody:
@@ -2478,7 +2471,6 @@ ra2sidewind:
 		FacingTolerance: 2
 	Voiced:
 		VoiceSet: GGIVoice
-	DeliversCash:
 	Voiced:
 		VoiceSet: TechConscriptVoice
 
@@ -2549,7 +2541,6 @@ ra2leopard:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: RA2AlliesVehicleVoice
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -2630,7 +2621,6 @@ ra2_c_ifv:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: RA2AlliesVehicleVoice
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -2691,7 +2681,6 @@ ra2_c_hum:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: RA2AlliesVehicleVoice
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -2769,7 +2758,6 @@ ra2_c_abram:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: RA2AlliesVehicleVoice
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -4744,7 +4732,6 @@ ra2shkhero:
 		Image: ra2_soviets_teslatrooper
 	Voiced:
 		VoiceSet: RA2TeslaTrooperVoice
-	DeliversCash:
 	Selectable:
 		Class: ra2_soviets_teslatrooper
 	GrantConditionOnPrerequisite@EMPTesla:
@@ -6350,7 +6337,6 @@ yrrobo:
 		BobDistance: -64
 		InitialHeight: 384
 		RequiresCondition: !disabled && robotcontrol
-	DeliversCash:
 	-TemporaryOwnerManager:
 	Capturable:
 		Types: thiefproof

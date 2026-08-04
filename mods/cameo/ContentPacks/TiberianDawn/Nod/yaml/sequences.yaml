@@ -685,7 +685,7 @@ td_nod_chemicalwarrior:
 
 td_nod_blackhandflamer:
 	Inherits: ^BasicInfantryTibsun
-	Inherits: ^InfantryOverlays
+	Inherits@2: ^InfantryOverlays
 	Inherits@attack: ^BasicInfantryAttackTibsun
 	Defaults:
 		Filename: td_nod_promotion_blackhandflamer_tsblackhandflamer.shp

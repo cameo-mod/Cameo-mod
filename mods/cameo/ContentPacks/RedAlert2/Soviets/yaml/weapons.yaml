@@ -3,9 +3,9 @@ RA2TURRETFLAKAA:
 	Range: 12936
 	ReloadDelay: 15
 	ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		Damage: 10000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@EffectAir: CreateEffect
 		Explosions: ra2_flak_puff_AA
@@ -17,9 +17,9 @@ SeaScorpion_AA:
 	Range: 13500
 	ReloadDelay: 17
 	ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		Damage: 8000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@EffectAir: CreateEffect
 		Explosions: ra2_flak_puff_AA
@@ -27,7 +27,8 @@ SeaScorpion_AA:
 		ValidTargets: Air
 
 RA2KirovBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	ReloadDelay: 50
 	Range: 2500
 	Report: vkiratta.wav
@@ -39,17 +40,11 @@ RA2KirovBomb:
 		Palette: playerra2
 		IsPlayerPalette: true
 		Shadow: True
-	Warhead@HeavyBomb: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 80000
 		Spread: 800
-	Warhead@HeavyBombFriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		Damage: 40000
-		Spread: 400
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidRelationships: Neutral, Enemy
 		Damage: 40
 		Spread: 4000
@@ -65,25 +60,21 @@ RA2KirovBomb:
 	-Warhead@Effect2:
 
 RA2KirovBomb_rad:
-	Inherits: ^HeavyChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@proj: ^Projectile_Chem_Heavy
+	Inherits@fx: ^Effect_Chem_Heavy
 	Inherits: RA2KirovBomb
 	Inherits@rad: ^RA2RadShell
-	Warhead@HeavyChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Heavy:
 		Damage: 48000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 24000
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		Damage: 24
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 48000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyBombFriendlyFire: SpreadDamage
-		Damage: 24000
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Damage: 24
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Radiation: CreateTintedCells
@@ -129,18 +120,16 @@ RA2KirovBomb_fire:
 
 RA2KirovBomb_tesla:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: RA2KirovBomb
+	Inherits@2: RA2KirovBomb
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		Damage: 80000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 40000
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		Damage: 40
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyBombFriendlyFire: SpreadDamage
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect1: CreateEffect
 		Delay: 0
@@ -156,13 +145,14 @@ RA2KirovBomb_tesla:
 		AimTargetStances: Enemy, Neutral
 
 RA2KirovBomb_nuclear:
-	Inherits@rad: ^NuclearWarhead
+	Inherits@wh: ^Warhead_Nuclear_Super
+	Inherits@fx: ^Effect_Nuclear_Super
 	Inherits: RA2KirovBomb
-	Warhead@NuclearWarhead: SpreadDamage
+	Warhead@Nuclear_Super:
 		Damage: 80000
 		Spread: 800
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
+	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
 		Damage: 40
 		Spread: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
@@ -181,24 +171,20 @@ RA2KirovBomb_nuclear:
 
 RA2KirovBomb_nuclear_elite:
 	Inherits: RA2KirovBomb_nuclear
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 100000
 		Spread: 1000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyBombFriendlyFire: SpreadDamage
-		Damage: 50000
-		Spread: 500
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidRelationships: Neutral, Enemy
 		Damage: 50
 		Spread: 5000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@NuclearWarhead: SpreadDamage
+	Warhead@Nuclear_Super:
 		Damage: 100000
 		Spread: 1000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
+	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
 		Damage: 50
 		Spread: 5000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
@@ -215,18 +201,18 @@ RA2KirovBomb_nuclear_elite:
 		LayerName: ra2radiation
 
 RA2120mm_rad:
-	Inherits: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
 	Inherits: RA2120mm
 	Inherits@rad: ^RA2RadShell
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Medium:
 		Damage: 6000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 6000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
 
 RA2120mm_fire:
@@ -268,7 +254,7 @@ RA2120mm_tesla_elite:
 
 RA160mm:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2Grenade
+	Inherits@2: ^RA2Grenade
 	ReloadDelay: 88
 	Range: 11111
 	MinRange: 2222
@@ -292,17 +278,15 @@ RA160mm:
 		Damage: 30000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 30
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 60000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 30000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 30
 
 RA160mm_rad:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: RA160mm
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: RA160mm
 	Inherits@rad: ^RA2RadShell
 	Projectile: Bullet
 		ContrailStartColor: 88BB66
@@ -326,11 +310,9 @@ RA160mm_rad:
 		Damage: 18000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 18
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 36000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 18000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 18
 
 RA160mm_fire:
@@ -365,13 +347,14 @@ RA160mmE_elite:
 	BurstDelays: 3
 
 RA160mmE_rad_elite:
-	Inherits@rad: ^NuclearWarhead
+	Inherits@wh: ^Warhead_Nuclear_Super
+	Inherits@fx: ^Effect_Nuclear_Super
 	Inherits: RA160mm_rad
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 12345
-	Warhead@NuclearWarhead: SpreadDamage
+	Warhead@Nuclear_Super:
 		Damage: 36000
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
+	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
 		Damage: 18
 	Warhead@Effect: CreateEffect
 		Explosions: ra2nukesmall
@@ -400,8 +383,8 @@ RA160mmE_tesla_elite:
 
 RA2120xmm:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2HeavyCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2HeavyCannon
 	Range: 6992
 	ReloadDelay: 63
 	Burst: 2
@@ -419,9 +402,9 @@ RA2120xmm:
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 4000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_apoc_explosion
@@ -429,9 +412,9 @@ RA2120xmm:
 
 RA2120xmm_rad:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: RA2120xmm
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyChemicalWeapon
+	Inherits@4: RA2120xmm
 	Inherits@rad: ^RA2RadShell
 	Warhead@LightChemicalWeapon: SpreadDamage
 		Damage: 2000
@@ -451,9 +434,9 @@ RA2120xmm_rad:
 		Damage: 1000
 	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 2000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 2000
@@ -461,9 +444,9 @@ RA2120xmm_rad:
 		Damage: 1000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 
 RA2120xmm_fire:
@@ -713,10 +696,10 @@ RA2MammothTusk_AA:
 	ReloadDelay: 68
 	Report: vapoat2a.wav, vapoat2b.wav, vapoat2c.wav
 	Burst: 2
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Air
 		Damage: 16000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 8
 
@@ -735,29 +718,31 @@ V3Launch_elite:
 
 RA2vulcan:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
-	ReloadDelay: 18
+	ReloadDelay: 14
 	Range: 6577
-	Burst: 4
+	Burst: 3
 	BurstDelays: 3
 	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
-	-Warhead@SmallArmsPercentage:
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Bullet_Medium:
 		Damage: 2000
-	-Warhead@ChaingunPercentage:
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		Damage: 1
 
 RA2CRFlakGuyGun:
 	Inherits: RA2FLAKAG
 	ReloadDelay: 17
 	Range: 5627
 	ValidTargets: Ground, Water
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 16000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 4
 
@@ -772,10 +757,10 @@ RA2FLAKAA:
 	ReloadDelay: 26
 	Range: 7834
 	ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		Damage: 8000
 		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
@@ -797,14 +782,14 @@ RA2FlakTrackGun_elite:
 
 RA2FlakTrackAAGun:
 	Inherits: RA2FlakTrackGun
-	Inherits: ^RA2FlakWeapon
+	Inherits@2: ^RA2FlakWeapon
 	ValidTargets: Air
 	Range: 8292
 	Projectile: Bullet
 		-LaunchAngle:
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Air
@@ -812,13 +797,13 @@ RA2FlakTrackAAGun:
 		ValidTargets: Air
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
 		Explosions: ra2_flak_puff_AA

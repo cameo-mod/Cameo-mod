@@ -1,4 +1,4 @@
-﻿####################################################################################################
+####################################################################################################
 #		Tiberian Sun Ballisitc
 ####################################################################################################
 
@@ -66,22 +66,24 @@
 		InvalidTargets: Ship, Structure, Bridge
 
 TS25mmDep:
-	Inherits: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ReloadDelay: 8
 	Range: 6679
 	Report: chaingn1.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 
 TSLaser25mmDep:
 	Inherits: ^FlakWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	Projectile: LaserZap
 		Width: 36
 		Duration: 8
@@ -105,12 +107,14 @@ TSLaser25mmDep:
 
 TS90mm:
 	Inherits: ^TSCannonEffect
-	Inherits: ^MediumCannon
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 26
 	Range: 5319
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 6000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
 
 TS90mmDep:
@@ -124,8 +128,8 @@ TS90mmDep:
 
 TSLaser90mm:
 	Inherits: ^MediumCannon
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	Projectile: LaserZap
 		Width: 72
 		SecondaryBeamWidth: 36
@@ -147,38 +151,42 @@ TSLaser90mmDep:
 
 TS120mm:
 	Inherits: ^TSCannonEffect
-	Inherits: ^MediumCannon
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 44
 	Range: 6201
 	Projectile: Bullet
 		Speed: 850
 		Blockable: false
 		LaunchAngle: 0
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 12000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 
 TS120mm_bluenuke:
 	Inherits: ^TSCannonEffect
-	Inherits: ^MediumCannon
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 44
 	Range: 6201
 	Projectile: Bullet
 		Speed: 850
 		Blockable: false
 		LaunchAngle: 0
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 24000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@3Eff: CreateEffect
 		Explosions: magicnuke_med
 
 TSHighVelocityTurChem:
 	Inherits: ^TSCannonEffect
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^TankDestroyerCannon
 	ReloadDelay: 30
 	Range: 9483
 	Projectile: Bullet
@@ -224,7 +232,7 @@ TSHighVelocityTurChem:
 
 TS155mm:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^HeavyBomb
 	ReloadDelay: 135
 	Range: 13083
 	MinRange: 2615
@@ -272,7 +280,7 @@ TS155mm_bluenuke:
 
 TSGrenade:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumCannon
+	Inherits@2: ^MediumCannon
 	ReloadDelay: 50
 	Range: 6151
 	Report: toss1.aud
@@ -310,10 +318,10 @@ TSGrenade:
 
 TSGrenadeSonic:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumCannon
-	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^TSSonicGrenade
+	Inherits@2: ^MediumCannon
+	Inherits@3: ^TeslaWeapon
+	Inherits@4: ^MagicWeapon
+	Inherits@5: ^TSSonicGrenade
 	ReloadDelay: 50
 	Range: 6151
 	Report: toss1.aud
@@ -426,16 +434,18 @@ TS152mm:
 			Heavy: 150
 
 MammothTankCannon:
-	Inherits: ^HeavyCannon
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cannon_Heavy
 	ReloadDelay: 102
 	BurstDelays: 8
 	Range: 6340
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 634
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 12000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
 
 ^TSLaserEffect:
@@ -471,8 +481,8 @@ MammothTankCannon:
 
 TSTurretLaser:
 	Inherits: ^Chaingun
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	ReloadDelay: 25
 	Range: 6487
 	Report: lastur1.aud
@@ -501,8 +511,8 @@ TSCABALPlasmaFire:
 
 TSLaserTurretLaser:
 	Inherits: ^Chaingun
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	ReloadDelay: 20
 	Range: 6992
 	Report: lastur1.aud
@@ -532,8 +542,8 @@ TSLaserTurretLaser:
 
 TurretLaserFragment:
 	Inherits: ^Chaingun
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	-Report:
 	Range: 2500
 	Projectile: LaserZap
@@ -553,8 +563,8 @@ TurretLaserFragment:
 
 TSObeliskLaserFire:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	ReloadDelay: 60
 	Range: 10199
 	Report: obelray1.aud
@@ -590,8 +600,8 @@ TSObeliskLaserFire:
 
 TSLaserObeliskLaserFire:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	ReloadDelay: 32
 	-Warhead@Effect:
 	-Warhead@EffectAir:
@@ -633,8 +643,8 @@ TSLaserObeliskLaserFire:
 
 ObeliskLaserFragment:
 	Inherits: ^Chaingun
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	Range: 4000
 	-Warhead@Effect:
 	-Warhead@EffectAir:
@@ -696,7 +706,7 @@ ts_nod_mobilerepairvehicle:
 
 ^TSDefaultMissile:
 	Inherits: ^MediumMissile
-	Inherits: ^LightMissile
+	Inherits@2: ^LightMissile
 	ReloadDelay: 50
 	Range: 6643
 	Report: missile6.aud
@@ -710,14 +720,16 @@ ts_nod_mobilerepairvehicle:
 		Damage: 5
 
 TSBazooka:
-	Inherits: ^LightMissile
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Missile_Light
 	Report: rketinf1.aud
 	ReloadDelay: 52
 	Range: 6694
 	Projectile: Missile
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 24000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 12
 
 TSBazookaG:
@@ -782,7 +794,7 @@ TSMammothTusk_elite:
 
 TSBikeMissile:
 	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^MediumMissile
 	Range: 6554
 	Burst: 2
 	BurstDelays: 5
@@ -806,9 +818,9 @@ TSBikeMissile:
 
 TSBikeTibMissile:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^MediumMissile
 	Range: 6554
 	Burst: 2
 	BurstDelays: 5
@@ -851,7 +863,7 @@ TSBikeTibMissile:
 
 TSSAPCMissiles:
 	Inherits: ^Grenade
-	Inherits: ^LightMissile
+	Inherits@2: ^LightMissile
 	Range: 5300
 	Burst: 2
 	BurstDelays: 2
@@ -863,7 +875,7 @@ TSSAPCMissiles:
 	Warhead@Grenade: SpreadDamage
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
-	Warhead@GrenadeFriendlyFire:
+	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
 	Warhead@GrenadePercentage: HealthPercentageDamage
@@ -877,19 +889,18 @@ TSSAPCMissiles:
 		ValidTargets: Ground, Water, Air
 
 TSSAPCCoreMissiles:
-	Inherits: ^LightChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Chem_Light
+	Inherits@fx: ^Effect_Chem_Light
 	Inherits: TSSAPCMissiles
 	Projectile: Missile
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Light:
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-		ValidTargets: Ground, Water, Air
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 4
 		ValidTargets: Ground, Water, Air
 
@@ -903,11 +914,11 @@ TSDragon:
 
 TSHellfire:
 	Inherits: ^HeavyCannon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^TankDestroyerCannon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^Grenade
+	Inherits@5: ^HeavyMissile
+	Inherits@6: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 32
 	Range: 5740
@@ -965,8 +976,8 @@ TSRedEye2:
 
 TSChemAdatsMissile:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^LightMissile
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^LightMissile
 	Range: 5606
 	Burst: 4
 	BurstDelays: 2
@@ -1120,7 +1131,8 @@ TSLimpetBomb_EMP:
 		Range: 1536
 
 TSLocustBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	ReloadDelay: 38
 	Burst: 5
 	BurstDelays: 3
@@ -1131,10 +1143,10 @@ TSLocustBomb:
 		Acceleration: 0, 0, -8
 		Image: 120mm
 		Shadow: true
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 180000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Ship
 		Damage: 90
 	Warhead@2Eff: CreateEffect
@@ -1150,26 +1162,30 @@ TSLocustBomb:
 		SmudgeType: Crater
 
 ^TSMG:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 20
 	Range: 4000
 	Report: gun8.aud
 	Projectile: Bullet
 		Speed: 2000
 		Inaccuracy: 200
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 TSMinigun:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 12
 	Range: 4062
 	Report: infgun3.aud, gostgun1.aud, slvkgun1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 TSM1Carbine:
@@ -1193,7 +1209,7 @@ TSVulcan2:
 
 TSAssaultCannon:
 	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 33
 	Burst: 2
 	BurstDelays: 2
@@ -1217,8 +1233,8 @@ TSAssaultCannon:
 
 TSLaserRaiderCannon:
 	Inherits: ^SmallArms
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	Projectile: LaserZap
 		Width: 36
 		Duration: 8
@@ -1273,15 +1289,17 @@ TSSniper_elite:
 			Heavy: 20
 
 forgotten_mutant_dualwield:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 18
 	Burst: 2
 	Range: 5219
 	Report: infgun3.aud, slvkgun1.aud
 	ValidTargets: Ground, Water
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 forgotten_mutant_dualwield_elite:

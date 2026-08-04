@@ -105,3 +105,11 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 - Installed `@agentclientprotocol/claude-agent-acp@0.59.0` globally via `npm`.
 - Verified `node -v`, `npx -v`, `claude-agent-acp --version`, and `npx -y @agentclientprotocol/claude-agent-acp@0.59.0 --version` all work.
 **Next:** Restart Devin Desktop/Windsurf so the IDE process picks up the updated `PATH`, then enable the Claude agent again.
+
+## 2026-08-04 — Balance ledger re-extract
+
+- Refreshed 32 per-faction JSON ledgers from the current resolved ruleset (`python tools/balance/extract_stats.py`).
+- Drift check: 0 drifted.
+- Multiplier audit: 0 non-integer `Modifier` values (run with `PYTHONIOENCODING=utf-8`).
+- Boot-gate: reached main menu (`PostWorldLoaded`), no new `exception-*.log` files.
+- Committed updated ledgers + current uncommitted YAML rule sync (Yuri Slave Miner cost/build duration, `^SwarmlingGrinderTemplate` Valued default).

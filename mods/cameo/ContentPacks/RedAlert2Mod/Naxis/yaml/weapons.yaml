@@ -1,8 +1,8 @@
 NaxBrummbarArty:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^RA2MediumCannon
 	ReloadDelay: 140
 	Range: 14000
 	MinRange: 2800
@@ -31,9 +31,9 @@ NaxBrummbarArty:
 		Damage: 7000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 7
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 14000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 7
 
 NaxBrummbarArty_elite:
@@ -45,7 +45,7 @@ NaxBrummbarArty_elite:
 
 NaxiWW2KübelwagenMachinegun:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
 	ReloadDelay: 80
 	Burst: 6
@@ -62,22 +62,22 @@ NaxiWW2KübelwagenMachinegun:
 		Speed: 10000
 		Width: 100
 		Inaccuracy: 400
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 
 NaxiWW2Machinegun:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
 	ReloadDelay: 60
 	Burst: 6
@@ -94,16 +94,16 @@ NaxiWW2Machinegun:
 		Speed: 10000
 		Width: 100
 		Inaccuracy: 400
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water
 
@@ -111,13 +111,13 @@ NaxiWW2Machinegun_AA:
 	Inherits: NaxiWW2Machinegun
 	Range: 8355
 	ValidTargets: Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Air
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 NaxiWW2MachinegunSmall:
@@ -125,16 +125,16 @@ NaxiWW2MachinegunSmall:
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
 	ReloadDelay: 60
 	Burst: 3
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 		ValidTargets: Ground, Water
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 		ValidTargets: Ground, Water
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water
 
@@ -142,13 +142,13 @@ NaxiWW2MachinegunSmall_AA:
 	Inherits: NaxiWW2MachinegunSmall
 	Range: 8355
 	ValidTargets: Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Air
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 NaxiWW2MachinegunTop:
@@ -161,11 +161,11 @@ NaxiWW2MachinegunTop_AA:
 	Range: 7555
 	Report: nax_mgun3.wav
 	ValidTargets: Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 NaxiWW2Machinegunner:
@@ -200,7 +200,9 @@ NaxiRifle_elite:
 		ContrailStartColor: FFAA55
 
 naxis_naxiriflesoldier_rifle:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
 	Range: 5000
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
@@ -214,9 +216,9 @@ naxis_naxiriflesoldier_rifle:
 		ContrailLength: 20
 		Speed: 10000
 		Width: 50
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 naxis_naxiriflesoldier_rifle_elite:
@@ -229,14 +231,16 @@ naxis_naxiriflesoldier_rifle_elite:
 		ContrailStartColor: FFAA55
 
 naxis_naxiriflerecruit_rifle:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 100
 	Range: 5227
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
 	ValidTargets: Ground, Water
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 8000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 naxis_naxiriflerecruit_rifle_elite:
@@ -246,7 +250,9 @@ naxis_naxiriflerecruit_rifle_elite:
 	BurstDelays: 3
 
 NaxiRifleT:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
 	Range: 8100
 	Burst: 2
@@ -262,20 +268,22 @@ NaxiRifleT:
 		ContrailLength: 33
 		Speed: 6666
 		Width: 55
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 32000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 16
 
 NaxiRifleCons:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 100
 	Range: 5501
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
 	ValidTargets: Ground, Water, Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 NaxiRifleCons_elite:
@@ -289,9 +297,9 @@ NaxiRifleCons_elite:
 
 LunarNaxiDroneLaser:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^MediumMissile
-	Inherits: ^LaserWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^LaserWeapon
 	Range: 5760
 	ReloadDelay: 100
 	Burst: 4
@@ -319,11 +327,11 @@ LunarNaxiDroneLaser:
 
 LunarNaxiDroneMissile:
 	Inherits: ^HeavyMissile
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^ArrowWeapon
-	Inherits: ^RA2LightMissile
+	Inherits@2: ^HeavyAAWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^ArrowWeapon
+	Inherits@6: ^RA2LightMissile
 	Range: 5760
 	ReloadDelay: 100
 	Burst: 2
@@ -385,11 +393,11 @@ LunarNaxiDroneMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -418,11 +426,9 @@ NaxiFlamerTroop_elite:
 
 NaxiFlamerTroopExplode:
 	Inherits: AsianFlamerTurret
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 6000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 6000
@@ -448,11 +454,11 @@ NaxiSniper_elite:
 
 NaxiShrek:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^Grenade
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: ^Grenade
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^MediumChemicalWeapon
+	Inherits@6: ^RA2MediumMissile
 	ReloadDelay: 124
 	Range: 6805
 	ValidTargets: Ground, Water
@@ -506,10 +512,10 @@ NaxiShrek:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 
@@ -529,11 +535,11 @@ NaxiShrek_elite:
 
 NaxiShrekCons:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^Grenade
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: ^Grenade
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^MediumChemicalWeapon
+	Inherits@6: ^RA2MediumMissile
 	ReloadDelay: 135
 	Range: 5512
 	ValidTargets: Ground, Water
@@ -587,10 +593,10 @@ NaxiShrekCons:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 
@@ -610,7 +616,7 @@ NaxiShrekCons_elite:
 
 NaxiHetzerDestroyer:
 	Inherits: ^MediumCannon
-	Inherits: ^RA2TankDestroyerCannon
+	Inherits@2: ^RA2TankDestroyerCannon
 	ReloadDelay: 80
 	Range: 7132
 	Projectile: Bullet
@@ -619,9 +625,9 @@ NaxiHetzerDestroyer:
 		Damage: 20000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 20000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 
 NaxiHetzerDestroyer_elite:
@@ -633,8 +639,8 @@ NaxiHetzerDestroyer_elite:
 
 NaxiJadgDestroyer:
 	Inherits: ^HeavyCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2TankDestroyerCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2TankDestroyerCannon
 	ReloadDelay: 90
 	Range: 7396
 	Projectile: Bullet
@@ -649,9 +655,9 @@ NaxiJadgDestroyer:
 		Damage: 10000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 20000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 
 NaxiJadgDestroyer_elite:
@@ -663,7 +669,7 @@ NaxiJadgDestroyer_elite:
 
 NaxiAntiTankCannon:
 	Inherits: ^MediumCannon
-	Inherits: ^RA2TankDestroyerCannon
+	Inherits@2: ^RA2TankDestroyerCannon
 	ReloadDelay: 75
 	Range: 7361
 	Report: nax_hotwizer.wav
@@ -678,9 +684,9 @@ NaxiAntiTankCannon:
 		Damage: 14000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 7
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 14000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 7
 
 NaxiAntiTankCannon_elite:
@@ -691,11 +697,11 @@ NaxiAntiTankCannon_elite:
 
 NaxMausCannon:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^HeavyBomb
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^RA2MediumCannon
 	ReloadDelay: 99
 	Report: aa_bgart.wav
 	Range: 6666
@@ -740,9 +746,9 @@ NaxMausCannon:
 		Damage: 10000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
 NaxMausCannon_elite:
@@ -754,8 +760,8 @@ NaxMausCannon_elite:
 
 NaxRatteCannon:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^RA2MediumCannon
 	ReloadDelay: 145
 	Report: aa_bgart.wav
 	Range: 6110
@@ -786,9 +792,9 @@ NaxRatteCannon:
 		Damage: 50000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 25
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 50000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 25
 
 NaxRatteCannon_elite:
@@ -800,9 +806,9 @@ NaxRatteCannon_elite:
 
 NaxQuadCannon:
 	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^Chaingun
-	Inherits: ^RA2FlakWeapon
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^Chaingun
+	Inherits@4: ^RA2FlakWeapon
 	ValidTargets: Ground, Water
 	ReloadDelay: 47
 	Burst: 6
@@ -831,10 +837,10 @@ NaxQuadCannon:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -858,13 +864,13 @@ NaxQuadCannon_AA:
 		ValidTargets: Air
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
 		Explosions: ra2_flak_puff_AA
@@ -953,8 +959,8 @@ NaxFlakAA:
 
 NaxPlanegun_elite:
 	Inherits: ^Grenade
-	Inherits: ^HeavyCannon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^RA2Chaingun
 	ReloadDelay: 127
 	Burst: 10
 	BurstDelays: 2
@@ -986,16 +992,16 @@ NaxPlanegun_elite:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 NaxPlaneRockets_elite:
 	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^D2KRocket
 	ReloadDelay: 100
 	Burst: 2
 	BurstDelays: 9
@@ -1016,16 +1022,16 @@ NaxPlaneRockets_elite:
 		Damage: 10000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 10000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 
 NaxiInterceptorGun:
 	Inherits: ^HeavyCannon
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
-	Inherits: ^SmallArms
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^Chaingun
+	Inherits@4: ^SmallArms
 	ReloadDelay: 100
 	Burst: 4
 	BurstDelays: 3
@@ -1060,8 +1066,8 @@ NaxiInterceptorGun:
 
 NaxShoeRocket:
 	Inherits: ^HeavyBomb
-	Inherits: ^RA2Grenade
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^RA2Grenade
+	Inherits@3: ^RA2MediumMissile
 	Report: vaegatta.wav, vaegattb.wav
 	ReloadDelay: 250
 	Range: 12000
@@ -1091,19 +1097,16 @@ NaxShoeRocket:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 4
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
-		Damage: 4000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 4
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 4
 
@@ -1114,9 +1117,9 @@ NaxTigerCannon:
 	Projectile: Bullet
 		Speed: 500
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
 NaxTigerCannon_elite:
@@ -1133,9 +1136,9 @@ KingNaxTigerCannon:
 	Projectile: Bullet
 		Speed: 500
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 20000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
 
 KingNaxTigerCannon_elite:
@@ -1165,8 +1168,8 @@ NaxiAlienPistol_elite:
 
 NaxiMissileUboat:
 	Inherits: ^Grenade
-	Inherits: ^HeavyBomb
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^RA2MediumMissile
 	ReloadDelay: 125
 	Burst: 2
 	BurstDelays: 6
@@ -1201,10 +1204,10 @@ NaxiMissileUboat:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Ground, Water, Air
 

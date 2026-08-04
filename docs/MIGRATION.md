@@ -124,7 +124,7 @@ global `ai.yaml` into each ContentPack's `ai.yaml`.
 1. RENAME   python tools/rename/curate_map.py <faction> [--slugtag <tag>]
             # stops and asks design if display names collide (DESIGN.md §1)
             python tools/audit/dump_resolved.py --faction <f> > before.json
-            python tools/rename/apply.py tools/rename/rename_map_<f>.yaml
+            python tools/rename/safe_rename.py tools/rename/rename_map_<f>.yaml
             # verify: map before.json through the map, diff resolved trees
             # -> MUST be empty; zero old ids; assets on disk.  Commit.
 2. SPLIT    python tools/packs/split_faction.py --theme <T> --faction <F> \
@@ -173,7 +173,7 @@ Proposal maps for every faction: `tools/rename/rename_map_<faction>.yaml`
 - Names: one lowercase group, RA1 baseline; tooltip <-> id in sync; unique
   tooltips per faction; **new display names are design's pick — propose
   options first** (blue fiend -> "Vinifera Fiend").
-- Voice sets & shared namespaces are never renamed with a unit (apply.py
+- Voice sets & shared namespaces are never renamed with a unit (safe_rename.py
   protects them; `tsmedic` collision caught live).
 - Pack layout: rules split per actor type; exactly ONE weapons.yaml and ONE
   sequences.yaml per faction.

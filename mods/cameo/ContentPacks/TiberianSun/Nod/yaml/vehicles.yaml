@@ -45,7 +45,6 @@ ts_nod_tiberiumharvester:
 	WithDockingAnimation:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderVoxels:
 		Scale: 2
 		Image: dtruck
@@ -125,7 +124,6 @@ ts_nod_subterraneanapc:
 		Class: ts_nod_subterraneanapc
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
@@ -199,7 +197,6 @@ ts_nod_attackbuggy:
 	Selectable:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -241,8 +238,6 @@ ts_nod_stealthtank:
 		HpPerStep: 4000
 	ChangesHealth@SelfHealing:
 		Step: 32
-	Armor:
-		Type: Heavy
 	Armament@PRIMARY:
 		Weapon: TSStankTusk
 		LocalOffset: -153,-204,509, -153,204,509
@@ -258,7 +253,6 @@ ts_nod_stealthtank:
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	WithRangeCircle@GenRangeUpgraded:
 		Range: 1512
 		RequiresCondition: ts_nod_upgrade_stealthfieldsimprovements
@@ -330,7 +324,6 @@ ts_nod_mobilerepairvehicle:
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Vehicles
 	RenderSprites:
@@ -375,8 +368,6 @@ ts_nod_artillery:
 		HpPerStep: 1500
 	ChangesHealth@SelfHealing:
 		Step: 12
-	Armor:
-		Type: Light
 	Turreted:
 		TurnSpeed: 24
 		InitialFacing: 384
@@ -418,7 +409,6 @@ ts_nod_artillery:
 		RequiresCondition: !undeployed
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -455,8 +445,6 @@ ts_nod_devilstongue:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Heavy
 	Armament@PRIMARY:
 		Weapon: TSFireballLauncher
 	AttackFrontal:
@@ -464,7 +452,6 @@ ts_nod_devilstongue:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderVoxels:
 		Scale: 15
 	RenderSprites:
@@ -500,7 +487,6 @@ ts_nod_mobilestealthgenerator:
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderVoxels:
 		Scale: 15
 	ProximityExternalCondition@StealGen:
@@ -582,7 +568,6 @@ ts_nod_attackcycle:
 		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -623,8 +608,6 @@ ts_nod_ticktank:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Heavy
 	RevealOnFire:
 		ArmamentNames: primary, deployed
 	DamageMultiplier:
@@ -716,7 +699,6 @@ ts_nod_ticktank:
 		Voice: Move
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:

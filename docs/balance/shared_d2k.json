@@ -130,6 +130,68 @@
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "156"
     }
+   },
+   "frigate": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Armor.Type",
+     "v": "Spaceship"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Aircraft",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Health.HP",
+     "v": "500000"
+    },
+    "name": "Frigate",
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "189"
+    }
+   },
+   "frigate.paradrop": {
+    "armor": {
+     "src": "inherited",
+     "v": "Spaceship"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Aircraft",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "name": "Frigate",
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "189"
+    }
    }
   },
   "buildings": {
@@ -434,7 +496,7 @@
        }
       ],
       "weapon": "HMG_fremen",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -453,13 +515,8 @@
       ],
       "warheads": [
        {
-        "damage": "1000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -543,7 +600,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -551,7 +608,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "20",
@@ -596,7 +653,7 @@
        }
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -640,7 +697,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -649,7 +706,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "20",
@@ -694,7 +751,7 @@
        }
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -784,18 +841,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -837,18 +889,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -1082,7 +1129,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "74",
@@ -1135,18 +1182,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "12000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "D2K_155mm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -1156,7 +1198,7 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml#Armor.Type",
+     "src": "inherited",
      "v": "Light"
     },
     "buildable": false,
@@ -1166,7 +1208,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery",
      "special": null,
      "subtype": "Artillery",
      "tech_tier": null,

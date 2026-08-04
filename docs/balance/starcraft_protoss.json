@@ -9,7 +9,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4280",
       "reloaddelay": "25",
@@ -60,7 +60,7 @@
        }
       ],
       "weapon": "ArbiterCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^HeavyCannon",
@@ -189,7 +189,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.5,
       "minrange": "1100",
       "pricing": true,
       "range": "5500",
@@ -215,7 +215,7 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CorsairEMP",
+      "weapon": "Corsair_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon"
@@ -224,7 +224,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "65",
@@ -272,18 +272,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "CorsairFlash",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -294,7 +289,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "65",
@@ -342,18 +337,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "CorsairFlash",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -404,7 +394,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0555555555555556,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5077",
       "reloaddelay": "36",
@@ -534,7 +524,7 @@
        }
       ],
       "weapon": "EpigraphMG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ArrowWeapon",
@@ -550,7 +540,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0555555555555556,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5077",
       "reloaddelay": "36",
@@ -680,7 +670,7 @@
        }
       ],
       "weapon": "EpigraphMG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ArrowWeapon",
@@ -743,7 +733,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "80",
@@ -855,10 +845,40 @@
         "damage": "5",
         "tag": "TankDestroyerCannonPercentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "CannonHE_Heavy",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "CannonHE_Medium",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "CannonAP_Light",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "CannonAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "GladiusCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -959,7 +979,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "32",
@@ -1007,18 +1027,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ScoutMG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -1029,7 +1044,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "32",
@@ -1077,18 +1092,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ScoutMG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -1153,18 +1163,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ScoutRockets",
-      "weapon_class_source": "template",
+      "weapon": "ScoutRockets_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1230,18 +1235,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ScoutRockets",
-      "weapon_class_source": "template",
+      "weapon": "ScoutRockets_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1333,7 +1333,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": 0.95,
       "pricing": true,
       "range": "8475",
       "reloaddelay": "10",
@@ -1419,7 +1419,7 @@
        }
       ],
       "weapon": "StarshipSovereignBeam",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -1486,7 +1486,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": 0.95,
       "pricing": true,
       "range": "6474",
       "reloaddelay": "6",
@@ -1572,7 +1572,7 @@
        }
       ],
       "weapon": "VoidRayBeam",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -2098,7 +2098,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
@@ -2124,7 +2124,7 @@
        }
       ],
       "weapon": "Heal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -2271,7 +2271,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8228",
       "reloaddelay": "28",
@@ -2325,7 +2325,7 @@
        }
       ],
       "weapon": "PhotonCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^HeavyCannon",
@@ -2375,7 +2375,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "40",
@@ -2417,7 +2417,7 @@
        }
       ],
       "weapon": "GlaveCanon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon"
@@ -2426,7 +2426,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5250",
       "reloaddelay": "40",
@@ -2468,7 +2468,7 @@
        }
       ],
       "weapon": "GlaveCanon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon"
@@ -2517,35 +2517,29 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1840",
       "reloaddelay": "20",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "30000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "WarpBladeAmaranth",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -2592,35 +2586,29 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1600",
       "reloaddelay": "25",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "WarpBlade",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -2682,7 +2670,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2716,7 +2704,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2750,7 +2738,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2784,7 +2772,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2818,7 +2806,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2852,7 +2840,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2886,7 +2874,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2920,7 +2908,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2994,35 +2982,29 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1337",
       "reloaddelay": "26",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "32000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "16000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "16",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "psi_spear",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -3071,7 +3053,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0416666666666667,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
@@ -3157,7 +3139,7 @@
        }
       ],
       "weapon": "PatriarchShoot",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3172,7 +3154,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0416666666666667,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
@@ -3258,7 +3240,7 @@
        }
       ],
       "weapon": "PatriarchShoot",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3318,35 +3300,29 @@
       "burst": "2",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1335",
       "reloaddelay": "30",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "psi_blades",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -3393,35 +3369,29 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1445",
       "reloaddelay": "24",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "64000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "32000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "32",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ZeratulSlice",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -4156,7 +4126,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "25",
@@ -4166,18 +4136,8 @@
       ],
       "warheads": [
        {
-        "damage": "10000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -4192,7 +4152,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "5",
@@ -4218,7 +4178,7 @@
        }
       ],
       "weapon": "SCVRepair",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -4271,7 +4231,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "3152",
       "reloaddelay": "20",
@@ -4304,8 +4264,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
+     "src": "inherited",
+     "v": "Superheavy"
     },
     "buildable": true,
     "cost": {
@@ -4314,7 +4274,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "line_breaker",
      "special": 1.25,
      "subtype": "LineBreaker",
      "tech_tier": 0.75,
@@ -4351,7 +4311,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "28",
@@ -4410,18 +4370,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "AtreusMG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4433,7 +4388,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Medium"
+     "v": "Superheavy"
     },
     "buildable": true,
     "cost": {
@@ -4442,7 +4397,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "high_tech_tank",
      "special": 1.0,
      "subtype": "HighTechTank",
      "tech_tier": 0.75,
@@ -4478,7 +4433,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "40",
@@ -4529,7 +4484,7 @@
        }
       ],
       "weapon": "DragoonCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^HeavyCannon",
@@ -4539,8 +4494,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
+     "src": "inherited",
+     "v": "Heavy"
     },
     "buildable": true,
     "cost": {
@@ -4549,7 +4504,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": 1.0,
      "subtype": "MainBattleTank",
      "tech_tier": 1.0,
@@ -4626,7 +4581,7 @@
        }
       ],
       "weapon": "WaveforceCannonChargedLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^RailgunWeapon"
@@ -4634,7 +4589,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9343",
       "reloaddelay": "120",
@@ -4671,7 +4626,7 @@
        }
       ],
       "weapon": "WaveforceCannonDistortedBeam1",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyCannon"
@@ -4721,7 +4676,7 @@
        }
       ],
       "weapon": "WaveforceCannonDistortedBeam2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -4729,8 +4684,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
+     "src": "inherited",
+     "v": "Superheavy"
     },
     "build_limit": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Buildable.BuildLimit",
@@ -4743,7 +4698,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "epic_vehicle",
      "special": 1.25,
      "subtype": "EpicVehicle",
      "tech_tier": 0.75,
@@ -4784,7 +4739,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4780",
       "reloaddelay": "20",
@@ -4821,18 +4776,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ManifoldMG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4841,7 +4791,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -4876,18 +4826,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ManifoldMGAA",
-      "weapon_class_source": "template",
+      "weapon": "ManifoldMG_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4989,7 +4934,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": 0.85,
       "pricing": true,
       "range": "5044",
       "reloaddelay": "30",
@@ -5059,7 +5004,7 @@
        }
       ],
       "weapon": "PositronGrenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon",
@@ -5070,8 +5015,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Armor.Type",
-     "v": "Light"
+     "src": "inherited",
+     "v": "Scout"
     },
     "buildable": true,
     "cost": {
@@ -5080,7 +5025,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": 2.0,
      "subtype": "ScoutVehicle",
      "tech_tier": 1.0,
@@ -5121,7 +5066,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "25",
@@ -5131,18 +5076,8 @@
       ],
       "warheads": [
        {
-        "damage": "10000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -5263,7 +5198,7 @@
        }
       ],
       "weapon": "ScarabLaunch",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^ShrapnelWeapon",
@@ -5294,8 +5229,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Armor.Type",
-     "v": "Heavy"
+     "src": "inherited",
+     "v": "Light"
     },
     "buildable": true,
     "cost": {
@@ -5304,7 +5239,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "fire_support",
      "special": 1.0,
      "subtype": "FireSupport",
      "tech_tier": 1.0,

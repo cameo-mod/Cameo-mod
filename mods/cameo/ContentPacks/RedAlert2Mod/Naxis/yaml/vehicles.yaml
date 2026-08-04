@@ -146,8 +146,6 @@ naxis_kubelwagen:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armor:
-		Type: Light
 	Armament@AG:
 		Weapon: NaxiWW2KübelwagenMachinegun
 		LocalOffset: 300,10,300
@@ -198,8 +196,6 @@ wirbelwind.nax:
 		HpPerStep: 4375
 	ChangesHealth@SelfHealing:
 		Step: 35
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 34 #3
 		Offset: -4,0,5
@@ -306,8 +302,6 @@ tiger.nax:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 20 #3
 		Offset: -4,0,5
@@ -369,8 +363,6 @@ naxis_kingtigerheavytank:
 		HpPerStep: 10000
 	ChangesHealth@SelfHealing:
 		Step: 80
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 20 #3
 		Offset: -4,0,5
@@ -433,8 +425,6 @@ naxis_maus:
 		HpPerStep: 30000
 	ChangesHealth@SelfHealing:
 		Step: 240
-	Armor:
-		Type: Superheavy
 	Turreted:
 		TurnSpeed: 12 #3
 		Offset: -160,0,5
@@ -500,8 +490,6 @@ naxis_ratte:
 		HpPerStep: 100000
 	ChangesHealth@SelfHealing:
 		Step: 800
-	Armor:
-		Type: Superheavy
 	Turreted:
 		TurnSpeed: 7
 		Offset: 100,0,5
@@ -655,7 +643,7 @@ naxis_brummbar:
 
 naxis_sturmtiger:
 	Inherits: ^Tank
-	Inherits@Template: ^ArtilleryTankTemplate
+	Inherits@Template: ^DreadnoughtTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -682,8 +670,6 @@ naxis_sturmtiger:
 		HpPerStep: 2000
 	ChangesHealth@SelfHealing:
 		Step: 100
-	Armor:
-		Type: Heavy
 	Armament@AG:
 		Weapon: NaxSturmArty
 		LocalOffset: -400,0,300
@@ -729,8 +715,6 @@ naxis_hetzer:
 		HpPerStep: 3750
 	ChangesHealth@SelfHealing:
 		Step: 30
-	Armor:
-		Type: Medium
 	Armament@AG:
 		Weapon: NaxiHetzerDestroyer
 		LocalOffset: 300,0,300
@@ -783,8 +767,6 @@ naxis_jagdpanzer:
 		HpPerStep: 6250
 	ChangesHealth@SelfHealing:
 		Step: 50
-	Armor:
-		Type: Heavy
 	Armament@AG:
 		Weapon: NaxiJadgDestroyer
 		LocalOffset: 400,0,300
@@ -902,8 +884,6 @@ naxis_donnerschlag:
 		HpPerStep: 4000
 	ChangesHealth@SelfHealing:
 		Step: 32
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
@@ -1000,8 +980,6 @@ naxis_nop03sarubia:
 		HP: 62500
 	Repairable:
 		HpPerStep: 3125
-	Armor:
-		Type: Medium
 	Armament@AG:
 		Weapon: NaxisSarubianTarget
 		LocalOffset: 400,0,300
@@ -1053,8 +1031,6 @@ naxis_shoekarn:
 		HpPerStep: 10000
 	ChangesHealth@SelfHealing:
 		Step: 80
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 15 #3
 		Offset: -4,0,5
@@ -1113,7 +1089,7 @@ naxis_shoekarn:
 
 naxis_nokana:
 	Inherits: ^Tank
-	Inherits@Template: ^FireSupportTemplate
+	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -1140,8 +1116,6 @@ naxis_nokana:
 		HP: 450000
 	Repairable:
 		HpPerStep: 3125
-	Armor:
-		Type: Heavy
 	Armament@AG:
 		Weapon: NaxMausCannon
 		LocalOffset: 400,0,300
@@ -1178,7 +1152,6 @@ naxis_nokana:
 		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: NaxiBigTankVoice
-	DeliversCash:
 	Passenger:
 	ActorStatValues:
 		Upgrades: naxis_upgrade_wunderwaffe, naxis_upgrade_massopticsintegration
@@ -1215,8 +1188,6 @@ naxis_oldtank:
 		HpPerStep: 7875
 	ChangesHealth@SelfHealing:
 		Step: 63
-	Armor:
-		Type: Medium
 	#Turreted:
 	#	TurnSpeed: 1023
 	-QuantizeFacingsFromSequence:
@@ -1287,8 +1258,6 @@ assault.nax:
 		HpPerStep: 6500
 	ChangesHealth@SelfHealing:
 		Step: 52
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 16 #3
 		Offset: -4,0,5
@@ -1355,8 +1324,6 @@ naxis_imperialturbotank:
 		HP: 82500
 	Repairable:
 		HpPerStep: 3125
-	Armor:
-		Type: Medium
 	Armament@AG:
 		Weapon: NaxiJadgDestroyer
 		LocalOffset: 1024,100,300
@@ -1422,8 +1389,6 @@ panzer.nax:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 20 #3
 	Armament:
@@ -1451,7 +1416,6 @@ panzer.nax:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: NaxiTankVoice
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:

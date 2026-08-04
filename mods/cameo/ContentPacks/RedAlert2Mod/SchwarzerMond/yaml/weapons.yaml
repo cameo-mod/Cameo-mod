@@ -1,4 +1,4 @@
-﻿schwarzermond_lunarsoldier_rifle:
+schwarzermond_lunarsoldier_rifle:
 	# SF VERIFIER weapon (maintainer 2026-07-20): SmallArms + Chaingun +
 	# Laser triad, 4000 each = 12000 @ reload 50 = 240 DPS (WC 1.0), exactly
 	# 2x the japan baseline (6000@50, 120). Range 6000, air-capable.
@@ -13,10 +13,10 @@
 		ContrailStartColor: ff2d2d
 		ContrailEndColor: f55105
 		Width: 25
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
 	Warhead@Chaingun: SpreadDamage
@@ -40,9 +40,9 @@ schwarzermond_lunarsoldier_rifle_elite:
 
 NaxiBeetleLaser_elite:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^MediumMissile
-	Inherits: ^LaserWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^LaserWeapon
 	Range: 6448
 	ReloadDelay: 60
 	Burst: 2
@@ -80,13 +80,13 @@ NaxiBeetleLaser_AA_elite:
 	Inherits: NaxiBeetleLaser_elite
 	Range: 9672
 	ValidTargets: Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Air
@@ -104,9 +104,9 @@ LunarPanzerCannon:
 	Report: vgriatta.wav, vgriattb.wav, vgriattc.wav
 	Projectile: Bullet
 		Speed: 512
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
 LunarPanzerCannon_elite:
@@ -118,9 +118,9 @@ LunarPanzerCannon_elite:
 
 NaxiTank2Laser:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^MediumMissile
-	Inherits: ^LaserWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^LaserWeapon
 	Range: 6500
 	ReloadDelay: 52
 	Burst: 4
@@ -158,13 +158,13 @@ NaxiTank2Laser_AA:
 	Inherits: NaxiTank2Laser
 	Range: 9750
 	ValidTargets: Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Air
@@ -177,8 +177,8 @@ NaxiTank2Laser_AA:
 
 NaxiMP40Laser:
 	Inherits: NaxiMP40
-	Inherits: ^SmallArms
-	Inherits: ^RA2LaserWeapon
+	Inherits@2: ^SmallArms
+	Inherits@3: ^RA2LaserWeapon
 	Report: vpriatta.wav
 	Range: 4384
 	ReloadDelay: 100
@@ -198,13 +198,13 @@ NaxiMP40Laser:
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 2000
@@ -219,8 +219,8 @@ NaxiMP40Laser_elite:
 
 LunarNaxiJadgDestroyer:
 	Inherits: ^HeavyCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2TankDestroyerCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2TankDestroyerCannon
 	ReloadDelay: 90
 	Range: 7379
 	Projectile: Bullet
@@ -235,9 +235,9 @@ LunarNaxiJadgDestroyer:
 		Damage: 15000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 15
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 30000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 15
 
 LunarNaxiJadgDestroyer_elite:
@@ -249,9 +249,9 @@ LunarNaxiJadgDestroyer_elite:
 
 LunarTigerCannon:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^RA2MediumCannon
 	ReloadDelay: 80
 	Report: trashcannon.wav
 	Range: 5105
@@ -273,9 +273,9 @@ LunarTigerCannon:
 		Damage: 2000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 LunarTigerCannon_elite:
@@ -286,8 +286,8 @@ LunarTigerCannon_elite:
 
 NaxHaenebuQuadCannon:
 	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^RA2FlakWeapon
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^RA2FlakWeapon
 	ReloadDelay: 66
 	Range: 6666
 	Burst: 6
@@ -319,10 +319,10 @@ NaxHaenebuQuadCannon:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -336,8 +336,8 @@ NaxHaenebuQuadCannon_elite:
 
 DalekCannon:
 	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^RA2RailgunWeapon
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^RA2RailgunWeapon
 	ReloadDelay: 76
 	Range: 8060
 	Report: vrobatta.wav
@@ -479,7 +479,9 @@ BlackHoleMaker_elite:
 		Color: FF8844
 
 NaxiBlackholeShoot:
-	Inherits: ^HeavyCannon
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cannon_Heavy
 	Range: 5000
 	ReloadDelay: 5
 	Projectile: InstantHit
@@ -488,10 +490,10 @@ NaxiBlackholeShoot:
 		ImpactActors: false
 		AirThreshold: 10000
 		ValidTargets: Air, Ground, Water
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -517,8 +519,8 @@ BlackHoleSuck:
 
 NaxCorrosionRocket:
 	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^RA2MediumMissile
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 2
@@ -556,11 +558,10 @@ NaxCorrosionRocket:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		ValidRelationships: Neutral, Enemy
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -663,9 +664,9 @@ NaxCorrosionRocketTrooper_elite:
 		Damage: 4000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 4000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 	MinRange: 1210
@@ -710,19 +711,18 @@ NaxCrystalLeech_elite:
 		Damage: 1
 
 NaxDieGlocke:
-	Inherits: ^HeavyChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@proj: ^Projectile_Chem_Heavy
+	Inherits@fx: ^Effect_Chem_Heavy
 	Range: 2500
 	ReloadDelay: 60
 	ValidTargets: Ground, Water, Air
 	Projectile: InstantHit
 	TargetActorCenter: true
-	Warhead@HeavyChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Heavy:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Effect: CreateEffect
@@ -747,9 +747,9 @@ UbermenschLaser:
 	Burst: 2
 	BurstDelays: 3
 	ValidTargets: Ground, Water
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
@@ -765,7 +765,8 @@ UbermenschLaser_elite:
 	BurstDelays: 3
 
 NaxiCowDrop:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	ReloadDelay: 50
 	Range: 2000
 	Report: vflolo5a.wav, vflolo5b.wav
@@ -777,17 +778,11 @@ NaxiCowDrop:
 		Palette: playerra2
 		IsPlayerPalette: true
 		Shadow: True
-	Warhead@HeavyBomb: SpreadDamage
-		ValidRelationships: Neutral, Enemy
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 10000
 		Spread: 1000
-	Warhead@HeavyBombFriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		Damage: 1000
-		Spread: 500
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidRelationships: Neutral, Enemy
 		Damage: 10
 		Spread: 1000
@@ -895,8 +890,6 @@ Lunar_GreenSturmArty:
 	Inherits@Cannon: NaxSturmArty
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Report: laser_cannon3_4.wav
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 10000
 schwarzermond_lunarsoldier_rifle_yellow:
 	Inherits: schwarzermond_lunarsoldier_rifle
 	Burst: 2
@@ -1053,9 +1046,9 @@ NaxisBradleyTarget:
 
 Naxis_Komet:
 	Inherits: ^FlakWeapon
-	Inherits: ^Grenade
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^MediumMissile
+	Inherits@2: ^Grenade
+	Inherits@3: ^HeavyAAWeapon
+	Inherits@4: ^MediumMissile
 	ValidTargets: Ground, Water
 	ReloadDelay: 60
 	Range: 7825

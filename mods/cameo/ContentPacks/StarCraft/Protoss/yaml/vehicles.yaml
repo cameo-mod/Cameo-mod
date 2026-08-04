@@ -71,8 +71,6 @@ protoss_dragoon:
 		Step: 30
 	Shielded:
 		RegenAmount: 60
-	Armor:
-		Type: Medium
 	Armament:
 		Weapon: DragoonCannon
 		FireDelay: 3
@@ -289,8 +287,6 @@ protoss_idol:
 		Step: 140
 	Shielded:
 		RegenAmount: 280
-	Armor:
-		Type: Medium
 	Armament@Upgrade1: ##########
 		Weapon: WaveforceCannonChargedLaser
 		Recoil: 128
@@ -382,8 +378,6 @@ protoss_reaver:
 		Step: 110
 	Shielded:
 		RegenAmount: 220
-	Armor:
-		Type: Heavy
 	Armament@primary:
 		Name: primary
 		Weapon: ScarabLaunch
@@ -465,8 +459,6 @@ protoss_archon:
 		Step: 140
 	Shielded:
 		RegenAmount: 280
-	Armor:
-		Type: Medium
 	Targetable:
 		TargetTypes: Ground, Vehicle, Infantry
 	RevealsShroud:
@@ -634,8 +626,6 @@ protoss_positron:
 		Step: 24
 	Shielded:
 		RegenAmount: 48
-	Armor:
-		Type: Light
 	Armament:
 		Weapon: PositronGrenade
 		LocalOffset: 600,0,0

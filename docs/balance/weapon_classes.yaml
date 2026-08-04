@@ -2,6 +2,14 @@
 # ONLY central class templates ABOVE the 'DO NOT INHERIT BELOW THIS LINE' divider in
 # weapons.yaml may carry WeaponClass (maintainer rule); pack weapons inherit it.
 # RESTORED from git 04de392b3; NOT engine-loaded => the InvalidWeaponField lint can't strip it.
+#
+# LAW (Tier<->WeaponClass, maintainer 2026-08-03; see memory cameo-tier-weaponclass-law
+# and docs/design/GAME_SPECIFIC_WEAPON_BASES.md): scale Light=0.75, Medium=1.0,
+# Heavy=1.25, Super=1.5. Unit Tech Tier drives it: T1->Light, T2->Medium, T3+->Heavy,
+# super-weapon units->1.5. Between-tier units MIX the two adjacent levels; specialized
+# single-purpose units may be higher tier yet keep a light weapon (case-by-case).
+# Warhead budget = TYPES x LEVELS (1 normal / 2 hybrid-or-between-tier / 4 only for a
+# between-tier lore hybrid). Twins never count. Promote into DESIGN.md sec.4 later.
 
 ^SmallArms: 0.75
 ^SniperWeapon: 0.75
@@ -34,3 +42,60 @@
 ^ToxicWeapon: 0.5
 ^HealingWeapon: 1.5
 ^RepairWeapon: 1.5
+
+# --- NEW two-level template library (2026-08-02, gen_weapon_template.py) ---
+^Warhead_Bullet_Light: 0.75
+^Warhead_Bullet_Medium: 1.0
+^Warhead_Bullet_Heavy: 1.25
+^Warhead_CannonAP_Light: 0.75
+^Warhead_CannonAP_Medium: 1.0
+^Warhead_CannonAP_Heavy: 1.25
+^Warhead_CannonHE_Light: 0.75
+^Warhead_CannonHE_Medium: 1.0
+^Warhead_CannonHE_Heavy: 1.25
+^Warhead_MissileAP_Light: 0.75
+^Warhead_MissileAP_Medium: 1.0
+^Warhead_MissileAP_Heavy: 1.25
+^Warhead_MissileHE_Light: 0.75
+^Warhead_MissileHE_Medium: 1.0
+^Warhead_MissileHE_Heavy: 1.25
+^Warhead_MissileAA_Light: 0.75
+^Warhead_MissileAA_Medium: 1.0
+^Warhead_MissileAA_Heavy: 1.25
+^Warhead_Flak_Light: 0.75
+^Warhead_Flak_Medium: 1.0
+^Warhead_Flak_Heavy: 1.25
+^Warhead_Laser_Light: 0.75
+^Warhead_Laser_Medium: 1.0
+^Warhead_Laser_Heavy: 1.25
+^Warhead_Prism_Light: 0.75
+^Warhead_Prism_Medium: 1.0
+^Warhead_Prism_Heavy: 1.25
+^Warhead_Flame_Light: 0.75
+^Warhead_Flame_Medium: 1.0
+^Warhead_Flame_Heavy: 1.25
+^Warhead_Chemical_Light: 0.75
+^Warhead_Chemical_Medium: 1.0
+^Warhead_Chemical_Heavy: 1.25
+^Warhead_Melee_Light: 0.75
+^Warhead_Melee_Medium: 1.0
+^Warhead_Melee_Heavy: 1.25
+^Warhead_Arrow_Light: 0.75
+^Warhead_Arrow_Medium: 1.0
+^Warhead_Arrow_Heavy: 1.25
+^Warhead_Magic_Light: 0.75
+^Warhead_Magic_Medium: 1.0
+^Warhead_Magic_Heavy: 1.25
+^Warhead_Demolition_Light: 0.75
+^Warhead_Demolition_Medium: 1.0
+^Warhead_Demolition_Heavy: 1.25
+^Warhead_Concussion_Light: 0.75
+^Warhead_Concussion_Medium: 1.0
+^Warhead_Concussion_Heavy: 1.25
+^Warhead_Sonic_Light: 0.75
+^Warhead_Sonic_Medium: 1.0
+^Warhead_Sonic_Heavy: 1.25
+^Warhead_Railgun_Heavy: 1.25
+^Warhead_Tesla_Heavy: 1.25
+^Warhead_TeslaCharged_Super: 1.5
+^Warhead_Nuclear_Super: 1.5

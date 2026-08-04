@@ -178,7 +178,6 @@ cabal_tiberiumharvester:
 	WithDockingAnimation:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderVoxels:
 		Image: charv2
 	RenderSprites:
@@ -247,7 +246,6 @@ cabal_laserspider:
 		FacingTolerance: 512
 	Voiced:
 		VoiceSet: TSCobra
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	WithFacingSpriteBody:
@@ -284,8 +282,6 @@ cabal_mantis:
 		Speed: 120
 	Health:
 		HP: 35000
-	Armor:
-		Type: Scout
 	Repairable:
 		HpPerStep: 1750
 	ChangesHealth@SelfHealing:
@@ -301,7 +297,6 @@ cabal_mantis:
 		FacingTolerance: 512
 	Voiced:
 		VoiceSet: TSCobra
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithFacingSpriteBody:
@@ -353,7 +348,6 @@ cabal_manticore:
 		FacingTolerance: 512
 	Voiced:
 		VoiceSet: TSReaper
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithFacingSpriteBody:
@@ -413,7 +407,6 @@ cabal_artilleryspider:
 	WithMuzzleOverlay:
 	Voiced:
 		VoiceSet: TSCABALVehicles
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 		Image: tsartspid
@@ -458,8 +451,6 @@ cabal_tarantula:
 		HpPerStep: 5500
 	ChangesHealth@SelfHealing:
 		Step: 44
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 14
 		Offset: -500,0,0
@@ -481,7 +472,6 @@ cabal_tarantula:
 	WithMuzzleOverlay:
 	Voiced:
 		VoiceSet: TSCABALVehicles
-	DeliversCash:
 	WithSpriteTurret:
 		Recoils: false
 	BodyOrientation:
@@ -540,7 +530,6 @@ cabal_scarabapc:
 		RequiresCondition: !submerged
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 6
@@ -560,7 +549,6 @@ cabal_scarabapc:
 
 cabal_berserker:
 	Inherits: ^Soldier
-	Inherits@Template: ^LineBreakerTemplate
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@DualArmor: ^TSCyborgDualArmorHeavy
 	Inherits@Cyborg: ^TSCyborgs
@@ -674,8 +662,6 @@ cabal_beholder:
 		HpPerStep: 6250
 	ChangesHealth@SelfHealing:
 		Step: 50
-	Armor:
-		Type: Heavy
 	Armament@PRIMARY:
 		Weapon: CabalBeholderLaser
 		LocalOffset: 777,-222,-333, 777,222,-333
@@ -741,7 +727,6 @@ cabal_spidercnc4:
 		FacingTolerance: 512
 	Voiced:
 		VoiceSet: TSCobra
-	DeliversCash:
 	RenderSprites:
 		Image: cabal_laserspider
 		PlayerPalette: player_rgba

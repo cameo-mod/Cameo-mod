@@ -244,14 +244,14 @@ Player:
 
 ^WC2HumanBuilding:
 	Inherits: ^BaseBuilding
-	Inherits: ^WC2Building
+	Inherits@2: ^WC2Building
 	-WithDeathAnimation:
 	AmbientSound:
 		SoundFiles: pswrkdon.aud
 
 ^WC2OrcBuilding:
 	Inherits: ^BaseBuilding
-	Inherits: ^WC2Building
+	Inherits@2: ^WC2Building
 	-WithDeathAnimation:
 	AmbientSound:
 		SoundFiles: owrkdone.aud

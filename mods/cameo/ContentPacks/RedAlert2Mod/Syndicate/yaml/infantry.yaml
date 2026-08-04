@@ -565,7 +565,6 @@ latinsyndicate_engineer:
 		RequiresCondition: parachute
 	RenderSprites:
 		Image: ra2_allies_engineer
-	DeliversCash:
 
 latinsyndicate_terrorist:
 	Inherits: ^Soldier
@@ -610,7 +609,6 @@ latinsyndicate_terrorist:
 	WithInfantryBody:
 	Voiced:
 		VoiceSet: RA2TerroristVoice
-	DeliversCash:
 	-TakeCover:
 	Captures:
 		CaptureTypes: bombcar

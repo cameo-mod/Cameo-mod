@@ -11,7 +11,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5010",
       "reloaddelay": "120",
@@ -226,7 +226,7 @@
        }
       ],
       "weapon": "wc2dragonFireVisible",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -250,7 +250,7 @@
       "burst": "3",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5010",
       "reloaddelay": "120",
@@ -451,7 +451,7 @@
        }
       ],
       "weapon": "wc2dragonFireExplosion",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -1127,7 +1127,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
@@ -1176,7 +1176,7 @@
        }
       ],
       "weapon": "wc2_tower_arrow",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -1186,7 +1186,7 @@
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": 1.0,
       "minrange": "2100",
       "pricing": true,
       "range": "10500",
@@ -1403,7 +1403,7 @@
        }
       ],
       "weapon": "wc2cannontowerFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -1462,7 +1462,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
@@ -1511,7 +1511,7 @@
        }
       ],
       "weapon": "wc2_tower_arrow",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -1521,7 +1521,7 @@
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": 1.0,
       "minrange": "2100",
       "pricing": true,
       "range": "10500",
@@ -1738,7 +1738,7 @@
        }
       ],
       "weapon": "wc2cannontowerFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -1797,7 +1797,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
@@ -1846,7 +1846,7 @@
        }
       ],
       "weapon": "wc2_tower_arrow",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -1856,7 +1856,7 @@
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": 1.0,
       "minrange": "2100",
       "pricing": true,
       "range": "10500",
@@ -2073,7 +2073,7 @@
        }
       ],
       "weapon": "wc2cannontowerFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -2165,30 +2165,22 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.3125,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_2 && !deathknighthaste_upg) || (FSD_cond_3 && !deathknightdeathanddecay_upg) || (FSD_cond_4 && !deathknightraisedead_upg)",
       "slot": "Armament",
       "versus_templates": [
-       "^HeavyFlameWeapon",
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy",
        "wc2mageFire"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "HeavyFlameWeaponPercentage",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2210,36 +2202,30 @@
       "weapon": "wc2deathknightFire",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^HeavyFlameWeapon",
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy",
        "^TeslaChargedWeapon"
       ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.3125,
       "pricing": false,
       "range": "8000",
       "reloaddelay": "40",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^HeavyFlameWeapon",
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy",
        "wc2mageFire"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "HeavyFlameWeaponPercentage",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2261,14 +2247,16 @@
       "weapon": "wc2deathknightFire",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^HeavyFlameWeapon",
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy",
        "^TeslaChargedWeapon"
       ]
      },
      {
       "armament_name": "deathcoil",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.3125,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
@@ -2279,18 +2267,8 @@
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "HeavyFlameWeaponPercentage",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2312,13 +2290,15 @@
       "weapon": "wc2deathknightDeathCoil",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^HeavyFlameWeapon",
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy",
        "^TeslaChargedWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.3125,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
@@ -2329,18 +2309,8 @@
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "HeavyFlameWeaponPercentage",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2362,13 +2332,15 @@
       "weapon": "wc2deathknightDeathCoilScatter_Left",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^HeavyFlameWeapon",
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy",
        "^TeslaChargedWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.3125,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
@@ -2379,18 +2351,8 @@
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "HeavyFlameWeaponPercentage",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2412,7 +2374,9 @@
       "weapon": "wc2deathknightDeathCoilScatter_Right",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^HeavyFlameWeapon",
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy",
        "^TeslaChargedWeapon"
       ]
      },
@@ -2524,35 +2488,29 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1555",
       "reloaddelay": "18",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "16000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2gruntslice",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -2604,7 +2562,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6445",
       "reloaddelay": "38",
@@ -2680,7 +2638,7 @@
        }
       ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -2693,7 +2651,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "6445",
       "reloaddelay": "38",
@@ -2769,7 +2727,7 @@
        }
       ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -2826,36 +2784,30 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1660",
       "reloaddelay": "20",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !ogremagebloodlust_upg) || (FSD_cond_4 && !ogremagerunes_upg)",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "30000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2ogrepunch",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      },
      {
@@ -2924,7 +2876,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Heavy"
+     "v": "Superheavy"
     },
     "buildable": true,
     "cost": {
@@ -2969,7 +2921,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6445",
       "reloaddelay": "38",
@@ -3045,7 +2997,7 @@
        }
       ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -3058,7 +3010,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "6445",
       "reloaddelay": "38",
@@ -3134,7 +3086,7 @@
        }
       ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -3188,7 +3140,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6445",
       "reloaddelay": "38",
@@ -3264,7 +3216,7 @@
        }
       ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -3277,7 +3229,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "6445",
       "reloaddelay": "38",
@@ -3353,7 +3305,7 @@
        }
       ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -3408,7 +3360,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.0714285714285714,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7711",
       "reloaddelay": "40",
@@ -3519,7 +3471,7 @@
        }
       ],
       "weapon": "wc2axeFirespear",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon",
        "^HeavyMissile",
@@ -3535,7 +3487,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.0714285714285714,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "7711",
       "reloaddelay": "40",
@@ -3646,7 +3598,7 @@
        }
       ],
       "weapon": "wc2axeFirespear",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon",
        "^HeavyMissile",
@@ -3702,35 +3654,29 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1600",
       "reloaddelay": "18",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "24000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2gruntslice2",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -4437,7 +4383,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": 1.0,
       "minrange": "2680",
       "pricing": true,
       "range": "13400",
@@ -4507,7 +4453,7 @@
        }
       ],
       "weapon": "wc2catapultFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -4527,7 +4473,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery",
      "special": 1.0,
      "subtype": "Artillery",
      "tech_tier": 1.0,
@@ -4579,7 +4525,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
@@ -4590,31 +4536,23 @@
       ],
       "warheads": [
        {
-        "damage": "12000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2demolitionsquadMelee",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
     "armor": {
      "src": "inherited",
-     "v": "Heavy"
+     "v": "Superheavy"
     },
     "buildable": true,
     "cost": {
@@ -4623,7 +4561,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "line_breaker",
      "special": null,
      "subtype": "LineBreaker",
      "tech_tier": null,
@@ -4701,36 +4639,30 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1660",
       "reloaddelay": "20",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !ogremagebloodlust_upg) || (FSD_cond_4 && !ogremagerunes_upg)",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "30000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2ogrepunch",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      },
      {
@@ -4799,7 +4731,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Heavy"
+     "v": "Superheavy"
     },
     "buildable": true,
     "cost": {
@@ -4808,7 +4740,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "line_breaker",
      "special": null,
      "subtype": "LineBreaker",
      "tech_tier": null,
@@ -4845,7 +4777,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
@@ -4855,25 +4787,17 @@
       ],
       "warheads": [
        {
-        "damage": "12000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "wc2peasantsmack",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -4924,7 +4848,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.3269230769230769,
+      "design_weapon_class": 1.0,
       "minrange": "2240",
       "pricing": true,
       "range": "11200",
@@ -5129,7 +5053,7 @@
        }
       ],
       "weapon": "SiegeEngineCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^NuclearWarhead",
        "^LightMissile",
@@ -5149,8 +5073,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
+     "src": "inherited",
+     "v": "Light"
     },
     "buildable": true,
     "cost": {
@@ -5159,7 +5083,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery",
      "special": null,
      "subtype": "Artillery",
      "tech_tier": null,

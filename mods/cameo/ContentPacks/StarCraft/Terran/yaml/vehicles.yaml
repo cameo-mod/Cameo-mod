@@ -93,8 +93,6 @@ terran_vulture:
 		HpPerStep: 3750
 	ChangesHealth@SelfHealing:
 		Step: 30
-	Armor:
-		Type: Light
 	Armament:
 		Weapon: VultureGrenade
 		LocalOffset: 600,0,0
@@ -405,8 +403,6 @@ terran_cyclone:
 		HpPerStep: 4500
 	ChangesHealth@SelfHealing:
 		Step: 36
-	Armor:
-		Type: Light
 	Turreted:
 		TurnSpeed: 46
 		Offset: -16,0,64
@@ -486,8 +482,6 @@ terran_goliath:
 		HpPerStep: 6250
 	ChangesHealth@SelfHealing:
 		Step: 50
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 36
 		Offset: 0,0,0
@@ -559,8 +553,6 @@ terran_goliathmk2:
 		HpPerStep: 8750
 	ChangesHealth@SelfHealing:
 		Step: 70
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 30
 		Offset: 0,0,0
@@ -630,8 +622,6 @@ terran_warhound:
 		HpPerStep: 15000
 	ChangesHealth@SelfHealing:
 		Step: 120
-	Armor:
-		Type: Heavy
 	Armament@Cannon:
 		Name: primary
 		Weapon: SCTyr

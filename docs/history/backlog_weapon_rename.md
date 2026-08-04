@@ -2,6 +2,8 @@
 
 > Status: **Paused**. Higher-priority crash/bug fixes are being addressed first.
 > This document captures the research and tooling so the next agent can pick up exactly where this session left off.
+>
+> **Note (2026-08-02):** `tools/rename/apply.py` is deprecated; use `tools/rename/safe_rename.py` instead. References to `apply.py` below are historical — substitute `safe_rename.py` when resuming this work.
 
 ## Goal
 

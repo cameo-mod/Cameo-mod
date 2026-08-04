@@ -247,8 +247,8 @@ The following files/areas were checked and found clean:
   DESIGN.md §1 and §16.3
 - DESIGN.md §8 CreateEffect rules — match actual audit tool references
 - DESIGN.md §16.2 rank decoration table — consistent with audit script
-- `audit_elite_naming.py` — already checks `_elite` only (fixed in prior
-  session)
+- `audit_weapon_suffixes.py` X1 — checks `_elite` only (replaced deprecated
+  `audit_elite_naming.py`)
 - `audit_weapon_suffixes.py` — checks `_elite`, `_EMP`, `_AA` correctly
 - `audit_effect_warhead_names.py` — canonical name checking is correct
 - `audit_buildable_order.py` — tier model comment already clarifies scope
@@ -286,8 +286,8 @@ to be in agreement:
 6. **Death palette rule**: `DeathSequencePalette` must match
    `RenderSprites PlayerPalette` per unit. Only TS units need fixing.
    `ra2player` and `playerra2` are DIFFERENT palettes. The broken commit
-   `9579827e9` was reverted. ROADMAP has a pending TS-only death palette
-   audit item.
+   `9579827e9` was reverted. The TS-only death palette audit was completed
+   (`54816b1f3`, 2026-07-27) — 2 mismatches found and fixed.
 
 7. **SC rank decorations**: `^AlienRankDecoration` should only apply to
    Zerg. Terran and Protoss need separate decorations. Commit `b95f5e7f3`

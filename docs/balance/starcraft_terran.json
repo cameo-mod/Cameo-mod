@@ -9,7 +9,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.6388888888888888,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6800",
       "reloaddelay": "38",
@@ -138,7 +138,7 @@
        }
       ],
       "weapon": "BCLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^NuclearWarhead",
        "^RailgunWeapon",
@@ -154,7 +154,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.6388888888888888,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6800",
       "reloaddelay": "38",
@@ -200,12 +200,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
+        "damage": "4000",
         "tag": "HeavyCannon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "8",
+        "damage": "2",
         "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
@@ -273,10 +273,20 @@
         "damage": "600",
         "tag": "LaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "CannonHE_Heavy",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "BCYamatoCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^NuclearWarhead",
        "^RailgunWeapon",
@@ -373,7 +383,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -399,7 +409,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -451,7 +461,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.21875,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "80",
@@ -569,7 +579,7 @@
        }
       ],
       "weapon": "PhobosLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^HeavyMissile",
@@ -584,7 +594,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.6388888888888888,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6800",
       "reloaddelay": "38",
@@ -630,12 +640,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
+        "damage": "4000",
         "tag": "HeavyCannon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "8",
+        "damage": "2",
         "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
@@ -703,10 +713,20 @@
         "damage": "600",
         "tag": "LaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "CannonHE_Heavy",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "BCYamatoCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^NuclearWarhead",
        "^RailgunWeapon",
@@ -802,7 +822,7 @@
        }
       ],
       "weapon": "JimRaynorMachineGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon"
@@ -858,7 +878,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "5",
@@ -884,7 +904,7 @@
        }
       ],
       "weapon": "RavenRepair",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -961,7 +981,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "360",
@@ -986,7 +1006,7 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ScienceVesselEMP",
+      "weapon": "ScienceVessel_EMP",
       "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon"
@@ -1035,7 +1055,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6060",
       "reloaddelay": "39",
@@ -1061,7 +1081,7 @@
        }
       ],
       "weapon": "SunDogLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -1122,18 +1142,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "SunDogRockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1198,18 +1213,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "SunDogRockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1312,18 +1322,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ValkyrieRockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^MediumMissile",
@@ -1378,18 +1383,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ValkyrieRockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^MediumMissile",
@@ -1447,7 +1447,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5076",
       "reloaddelay": "32",
@@ -1473,7 +1473,7 @@
        }
       ],
       "weapon": "WraithLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -1534,18 +1534,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "WraithRockets",
-      "weapon_class_source": "template",
+      "weapon": "WraithRockets_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1610,18 +1605,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "WraithRockets",
-      "weapon_class_source": "template",
+      "weapon": "WraithRockets_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1773,18 +1763,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "WyvernRockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -1897,18 +1882,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "WyvernRockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -2528,18 +2508,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "MissileTurret",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -2604,18 +2579,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "MissileTurret",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -2664,7 +2634,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
@@ -2724,7 +2694,7 @@
        }
       ],
       "weapon": "NaxLaserT",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -2782,29 +2752,23 @@
       "reloaddelay": "28",
       "slot": "Armament@1",
       "versus_templates": [
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "FirebatF",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ]
      },
      {
@@ -2817,29 +2781,23 @@
       "reloaddelay": "28",
       "slot": "Armament@2",
       "versus_templates": [
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "FirebatF",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ]
      },
      {
@@ -2853,29 +2811,23 @@
       "reloaddelay": "28",
       "slot": "Armament@GARRISONED1",
       "versus_templates": [
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "FirebatF",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ]
      },
      {
@@ -2889,29 +2841,23 @@
       "reloaddelay": "28",
       "slot": "Armament@GARRISONED2",
       "versus_templates": [
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "FirebatF",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ]
      }
     ],
@@ -2999,22 +2945,22 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "20000",
+        "damage": "2000",
         "tag": "HeavyCannon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
+        "damage": "1",
         "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "20000",
+        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
+        "damage": "1",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
@@ -3029,18 +2975,48 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "20000",
+        "damage": "2000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
+        "damage": "1",
         "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "CannonHE_Heavy",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "Bullet_Light",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "Bullet_Medium",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "GhostSniperLockdown",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^MediumMissile",
@@ -3117,7 +3093,7 @@
        }
       ],
       "weapon": "GhostSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -3194,7 +3170,7 @@
        }
       ],
       "weapon": "GhostSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -3296,7 +3272,7 @@
        }
       ],
       "weapon": "HarakanF",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3348,7 +3324,7 @@
        }
       ],
       "weapon": "HarakanF",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3401,7 +3377,7 @@
        }
       ],
       "weapon": "HarakanF",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3454,7 +3430,7 @@
        }
       ],
       "weapon": "HarakanF",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3543,7 +3519,7 @@
        }
       ],
       "weapon": "JimRaynorMachineGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon"
@@ -3586,7 +3562,7 @@
        }
       ],
       "weapon": "JimRaynorMachineGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon"
@@ -3682,7 +3658,7 @@
        }
       ],
       "weapon": "MadcapGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -3735,7 +3711,7 @@
        }
       ],
       "weapon": "MadcapGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -3791,7 +3767,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7010",
       "reloaddelay": "60",
@@ -3834,7 +3810,7 @@
        }
       ],
       "weapon": "MarauderMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -3844,7 +3820,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "7010",
       "reloaddelay": "60",
@@ -3887,7 +3863,7 @@
        }
       ],
       "weapon": "MarauderMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -3982,7 +3958,7 @@
        }
       ],
       "weapon": "MarineMG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -4037,7 +4013,7 @@
        }
       ],
       "weapon": "MarineMG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -4093,7 +4069,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -4161,7 +4137,7 @@
        }
       ],
       "weapon": "MedicFlare",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^FlakWeapon",
@@ -4170,7 +4146,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -4196,7 +4172,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -4204,7 +4180,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6000",
       "reloaddelay": "60",
@@ -4272,7 +4248,7 @@
        }
       ],
       "weapon": "MedicFlare",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^FlakWeapon",
@@ -4343,7 +4319,7 @@
        }
       ],
       "weapon": "ReaperPistols",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4371,14 +4347,14 @@
        }
       ],
       "weapon": "ReaperPistols",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.0,
       "minrange": "875",
       "pricing": true,
       "range": "4375",
@@ -4432,7 +4408,7 @@
        }
       ],
       "weapon": "ReaperGrenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4463,7 +4439,7 @@
        }
       ],
       "weapon": "ReaperPistols",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4492,7 +4468,7 @@
        }
       ],
       "weapon": "ReaperPistols",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4500,7 +4476,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.0,
       "minrange": "875",
       "pricing": false,
       "range": "4375",
@@ -4554,7 +4530,7 @@
        }
       ],
       "weapon": "ReaperGrenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4640,22 +4616,22 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "40000",
+        "damage": "4000",
         "tag": "HeavyCannon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "4",
+        "damage": "2",
         "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "40000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "4",
+        "damage": "2",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
@@ -4670,18 +4646,48 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "40000",
+        "damage": "4000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
        {
-        "damage": "4",
+        "damage": "2",
         "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "CannonHE_Heavy",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "Bullet_Light",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "Bullet_Medium",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "SpecterSniperLockdown",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^MediumMissile",
@@ -4758,7 +4764,7 @@
        }
       ],
       "weapon": "SpecterSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -4835,7 +4841,7 @@
        }
       ],
       "weapon": "SpecterSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -5720,7 +5726,7 @@
        }
       ],
       "weapon": "CycloneRockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -5762,7 +5768,7 @@
        }
       ],
       "weapon": "CycloneRocketsLockOn",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -5770,7 +5776,7 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Armor.Type",
+     "src": "inherited",
      "v": "Light"
     },
     "buildable": true,
@@ -5780,9 +5786,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "missile_vehicle",
      "special": 1.25,
-     "subtype": "FireSupport",
+     "subtype": "MissileVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -5801,7 +5807,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "7000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.Speed",
@@ -5818,7 +5824,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "16",
@@ -5855,18 +5861,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "GoliathMG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -5877,7 +5878,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "16",
@@ -5914,18 +5915,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "GoliathMG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -5988,18 +5984,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "6000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GoliathRockets",
-      "weapon_class_source": "template",
+      "weapon": "GoliathRockets_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -6064,18 +6055,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "6000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GoliathRockets",
-      "weapon_class_source": "template",
+      "weapon": "GoliathRockets_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -6086,8 +6072,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
+     "src": "inherited",
+     "v": "Superheavy"
     },
     "buildable": true,
     "cost": {
@@ -6096,7 +6082,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "high_tech_tank",
      "special": 1.0,
      "subtype": "HighTechTank",
      "tech_tier": 0.75,
@@ -6139,7 +6125,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "6479",
       "reloaddelay": "34",
@@ -6187,18 +6173,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "GoliathMk2MG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -6210,7 +6191,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "6479",
       "reloaddelay": "34",
@@ -6258,18 +6239,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "GoliathMk2MG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -6322,18 +6298,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "GoliathMk2Rockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile",
@@ -6386,18 +6357,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "GoliathMk2Rockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile",
@@ -6407,8 +6373,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
+     "src": "inherited",
+     "v": "Superheavy"
     },
     "buildable": true,
     "cost": {
@@ -6417,7 +6383,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "high_tech_tank",
      "special": 1.0,
      "subtype": "HighTechTank",
      "tech_tier": 0.75,
@@ -6519,7 +6485,7 @@
        }
       ],
       "weapon": "MatadorFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -6529,7 +6495,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6590",
       "reloaddelay": "39",
@@ -6556,7 +6522,7 @@
        }
       ],
       "weapon": "MatadorLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -6573,7 +6539,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": 1.0,
      "subtype": "MainBattleTank",
      "tech_tier": 1.0,
@@ -6656,7 +6622,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "25",
@@ -6666,18 +6632,8 @@
       ],
       "warheads": [
        {
-        "damage": "10000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -6692,7 +6648,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "5",
@@ -6718,7 +6674,7 @@
        }
       ],
       "weapon": "SCVRepair",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -6774,7 +6730,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6114",
       "reloaddelay": "37",
@@ -6818,7 +6774,7 @@
        }
       ],
       "weapon": "SiegeTankCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumCannon",
@@ -6828,7 +6784,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.3269230769230769,
+      "design_weapon_class": 1.0,
       "minrange": "2355",
       "pricing": true,
       "range": "11775",
@@ -7034,7 +6990,7 @@
        }
       ],
       "weapon": "SiegeTankSiegeCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^NuclearWarhead",
        "^LightMissile",
@@ -7064,9 +7020,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery_tank",
      "special": null,
-     "subtype": "MainBattleTank",
+     "subtype": "ArtilleryTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7084,7 +7040,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "6000"
+     "v": "9000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.Speed",
@@ -7099,7 +7055,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": 0.85,
       "pricing": true,
       "range": "4800",
       "reloaddelay": "25",
@@ -7169,7 +7125,7 @@
        }
       ],
       "weapon": "VultureGrenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon",
@@ -7180,8 +7136,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Armor.Type",
-     "v": "Light"
+     "src": "inherited",
+     "v": "Medium"
     },
     "buildable": true,
     "cost": {
@@ -7190,9 +7146,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "light_tank",
      "special": 1.0,
-     "subtype": "ScoutVehicle",
+     "subtype": "LightTank",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -7210,7 +7166,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "10000"
+     "v": "6000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.Speed",
@@ -7228,7 +7184,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "7156",
       "reloaddelay": "44",
@@ -7281,18 +7237,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "SCTyr",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^Chaingun",
@@ -7305,7 +7256,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7156",
       "reloaddelay": "84",
@@ -7353,18 +7304,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "SCTyrAA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -7374,8 +7320,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Armor.Type",
-     "v": "Heavy"
+     "src": "inherited",
+     "v": "Superheavy"
     },
     "buildable": true,
     "cost": {
@@ -7384,9 +7330,9 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "dreadnought",
      "special": 1.0,
-     "subtype": "LineBreaker",
+     "subtype": "Dreadnought",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },

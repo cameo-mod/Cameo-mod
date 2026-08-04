@@ -46,9 +46,14 @@ def unit_inputs(u):
     hp = fnum((u.get("hp") or {}).get("v"))
     speed = fnum((u.get("speed") or {}).get("v") or (u.get("speed_air") or {}).get("v"))
     d = u.get("design") or {}
+    # Unconditional per-actor FirepowerMultiplier scales EFFECTIVE damage output;
+    # balance prices on effective DPS = raw x FP-mult (cameo-firepower-mult-in-dps). Default 1.0.
+    fp = fnum((u.get("firepower_multiplier") or {}).get("v")) or 1.0
     total_dps, best_range = 0.0, 0.0
     for arm in u.get("armaments", []):
         if not arm.get("pricing", True):
+            continue
+        if arm.get("requires"):   # upgrade-gated / conditional weapon -> NOT part of BASE dps
             continue
         dmg = formula.spread_damage_sum(arm.get("warheads", []))  # SUM law, chips excluded
         reload_ = fnum(arm.get("reloaddelay"))
@@ -59,6 +64,7 @@ def unit_inputs(u):
                                  int(fnum(arm.get("burst")) or 1),
                                  fnum(arm.get("burstdelays")))
         best_range = max(best_range, fnum(arm.get("range")) or 0.0)
+    total_dps *= fp   # apply the actor-level FirepowerMultiplier to effective DPS
     if hp is None or speed is None or total_dps == 0:
         return None
     return (hp, speed, best_range, total_dps,

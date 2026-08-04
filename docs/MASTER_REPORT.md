@@ -396,18 +396,18 @@ file name        :=  same as the asset's owning actor id, plus suffixes
 icon file        :=  <actor_id>_icon.<ext>
 ```
 
-- **`game`** — required ONLY when the same faction name exists in multiple source games. Registry of game prefixes (fixed, lowercase): `td`, `ts`, `ra1`, `ra2` (+ future prefixes as collisions appear). Examples: `td_gdi_*` vs `ts_gdi_*`; `ra1_soviets_*` vs `ra2_soviets_*`. Every faction that exists once (yuri, cabal, forgotten, steel_consortium, futuretech, schwarzer_mond, latin_syndicate, asianalliance, japan, naxis, tkm, atreides, harkonnen, ordos, ixian, terran, zerg, protoss, humans, orcs…) omits the game prefix; a prefix is added the day a collision actually appears, not preemptively.
-- **`faction`** — the canonical faction slug from the registry (§9.2). Never abbreviate ad hoc; never two spellings (this kills the Consortium/Steel Consortium drift — use full words, `steel_consortium`; abbreviations are how drift starts).
+- **`game`** — required ONLY when the same faction name exists in multiple source games. Registry of game prefixes (fixed, lowercase): `td`, `ts`, `ra1`, `ra2` (+ future prefixes as collisions appear). Examples: `td_gdi_*` vs `ts_gdi_*`; `ra1_soviets_*` vs `ra2_soviets_*`. Every faction that exists once (yuri, cabal, forgotten, steelconsortium, futuretech, schwarzermond, latinsyndicate, asianalliance, japan, naxis, tkm, atreides, harkonnen, ordos, ixian, terran, zerg, protoss, humans, orcs…) omits the game prefix; a prefix is added the day a collision actually appears, not preemptively.
+- **`faction`** — the canonical faction slug from the registry (§9.2). Never abbreviate ad hoc; never two spellings (this kills the Consortium/Steel Consortium drift — use full words, `steelconsortium`; abbreviations are how drift starts).
 - **`upgrade|promotion|doctrine`** — full words, only on tech-tree items: `upgrade` for cash research, `promotion` for rank-gated unlocks, `doctrine` for mutually-exclusive doctrine picks. Team-proxy dummies append `_proxy_actor` (existing RA1 convention).
 - **`name`** — the unit's display-ish name as ONE lowercase group without separators (RA1 baseline: `heatraytank`, `nuclearshells`): `titan`, `slaveminer`, `skyhammer`, `ghoststalker`.
 - **`variant`** — optional: `_mk2`, `_elite`, `_husk`, `_water` (movement variants), `_ai` (AI-only variants — historical "Special Bot variants" should be explicit), `_sp`, `_r4`, `_wild`, `_EMP` (EMP weapons), `_AA` (anti-air weapons), `_upgraded` (upgrade variants), plus dotted variants (`.husk`) and paradrop twins (`para`). See DESIGN.md §1 for the full list.
-- **Tooltip consistency** — the id's name group derives from the Tooltip Name and both must stay in sync: when an id is disambiguated, the Tooltip is renamed too, so no two actors of a faction share a display name (audit_metadata M1 enforces). New display names are a design decision — propose options and let design pick (e.g. the blue Tiberian Fiend became "Vinifera Fiend"). Shared cross-actor namespaces (voice sets, shared sprites) are never renamed with a unit; tools/rename/apply.py protects audio files and VoiceSet lines.
+- **Tooltip consistency** — the id's name group derives from the Tooltip Name and both must stay in sync: when an id is disambiguated, the Tooltip is renamed too, so no two actors of a faction share a display name (audit_metadata M1 enforces). New display names are a design decision — propose options and let design pick (e.g. the blue Tiberian Fiend became "Vinifera Fiend"). Shared cross-actor namespaces (voice sets, shared sprites) are never renamed with a unit; tools/rename/safe_rename.py protects audio files and VoiceSet lines.
 
 **Examples**
 ```
 ts_gdi_titan                ts_gdi_titan_husk
 ts_nod_obelisk              cabal_obeliskofdarkness
-yuri_slaveminer             steel_consortium_skyhammer
+yuri_slaveminer             steelconsortium_skyhammer
 forgotten_ghoststalker      ra2_allies_upgrade_chromiumionplating
 protoss_adept               ordos_raider
 cabal_upgrade_darkarmament  forgotten_promotion_bowler
@@ -450,7 +450,7 @@ Renaming actors breaks: map files (actor IDs are baked into every `.oramap`), Lu
 
 1. **Freeze window.** Do renames only in a dedicated window between playtests, never mixed with balance changes.
 2. **Build the map, once:** `tools/rename/rename_map.yaml` — old_id → new_id, generated per faction folder as it's migrated.
-3. **Mechanical apply:** `tools/rename/apply.py` rewrites rules/weapons/sequences/ai/Fluent + renames asset files (`git mv`) + rewrites every map in `maps/` (unpack `.oramap` zips, string-replace actor IDs in `map.yaml`/binary where applicable, repack) + Lua scripts. Everything in one commit per faction.
+3. **Mechanical apply:** `tools/rename/apply.py` _(now deprecated; replaced by `tools/rename/safe_rename.py` — see MIGRATION.md)_ rewrites rules/weapons/sequences/ai/Fluent + renames asset files (`git mv`) + rewrites every map in `maps/` (unpack `.oramap` zips, string-replace actor IDs in `map.yaml`/binary where applicable, repack) + Lua scripts. Everything in one commit per faction.
 4. **Compatibility shim (temporary):** OpenRA supports rule aliasing poorly, so instead keep a `legacy_aliases.yaml` consumed by a small custom trait/utility update rule that maps old→new when loading *third-party* maps; drop it at 1.0.
 5. **Verify:** full audit suite + smoke tests + load every shipped map headlessly.
 6. **Order:** migrate faction-by-faction, starting with the *newest, cleanest* faction (Forgotten — likely already close to compliant) to bed in the tooling, then one faction per build. Do **not** attempt a big-bang rename of the whole tree.

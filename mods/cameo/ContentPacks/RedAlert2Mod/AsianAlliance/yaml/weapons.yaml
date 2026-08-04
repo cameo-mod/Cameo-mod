@@ -3,9 +3,9 @@ RA2AsianShotgun:
 	ReloadDelay: 52
 	Range: 4567
 	Report: aa_sshtgatt.wav
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 6000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piffs
@@ -19,7 +19,7 @@ RA2AsianShotgun_elite:
 
 AsianGrenade:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^RA2MediumCannon
 	ReloadDelay: 92
 	Range: 4567
 	Report: vlasatta.wav
@@ -31,9 +31,9 @@ AsianGrenade:
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 AsianGrenade_elite:
@@ -47,9 +47,9 @@ asianalliance_asianmilitia_shotgun:
 	ReloadDelay: 50
 	Range: 4500
 	Report: aa_sshtgatt.wav
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 6000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piffs
@@ -63,7 +63,7 @@ asianalliance_asianmilitia_shotgun_elite:
 
 asianalliance_asianmilitia_grenade:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^RA2MediumCannon
 	ReloadDelay: 92
 	Range: 4500
 	Report: vlasatta.wav
@@ -75,9 +75,9 @@ asianalliance_asianmilitia_grenade:
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 asianalliance_asianmilitia_grenade_elite:
@@ -95,9 +95,9 @@ AsianTankKillerRocket:
 		MinimumLaunchAngle: 200
 		MaximumLaunchAngle: 200
 		Acceleration: 5
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 34000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 17
 
 AsianTankKillerRocket_upgrade:
@@ -118,9 +118,9 @@ AsianTankKillerRocket_upgrade:
 AsianTankKillerRocket_elite:
 	Inherits: AsianTankKillerRocket
 	Range: 7460
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 68000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 34
 	Projectile: Missile
 		Image: red_dragon
@@ -144,7 +144,9 @@ AsianTankKillerRocket_upgrade_elite:
 		AimTargetStances: Enemy, Neutral
 
 AsianTankKillerRocketShrapnel:
-	Inherits: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	Burst: 3
 	Range: 3333
 	ValidTargets: Ground, Water, Air
@@ -160,20 +162,15 @@ AsianTankKillerRocketShrapnel:
 		Acceleration: 3
 		RangeLimit: 33333
 		Inaccuracy: 333
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 2000
@@ -192,9 +189,9 @@ AsianTankKillerRocketShrapnel:
 
 RA2AsianShotgunFanatic1:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2SmallArms
+	Inherits@4: ^RA2Chaingun
 	ReloadDelay: 50
 	Range: 5000
 	Report: aa_sshtgatt.wav
@@ -210,13 +207,13 @@ RA2AsianShotgunFanatic1:
 		Damage: 1000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piffs
@@ -235,16 +232,16 @@ RA2AsianShotgunFanatic3:
 	BurstDelays: 3
 
 AsianSamuraiSword1:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 40
 	Report: aa_samu_kil1.wav
 	Range: 1579
 	Projectile: InstantHit
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 20000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
 
 AsianSamuraiSword2:
@@ -259,8 +256,8 @@ AsianSamuraiSword3:
 
 AsianMaidenBow:
 	Inherits: AsianPhotonCannon
-	Inherits: ^Grenade
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^Grenade
+	Inherits@3: ^ArrowWeapon
 	ReloadDelay: 68
 	Range: 6740
 	MinRange: 1350
@@ -342,18 +339,18 @@ AsianMaidenBow_elite:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Spread: 125
 AsianNinjaStar:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	InvalidTargets: Structure, wall, Husk
 	Report: toss1.aud
 	ReloadDelay: 25
 	Range: 4560
 	Projectile: Bullet
 		Speed: 456
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 20000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piffs
@@ -366,16 +363,16 @@ AsianNinjaStar_elite:
 	BurstDelays: 3
 
 AsianCrocBite:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 39
 	Report: galiatta.wav, galiattb.wav
 	Range: 1345
 	Projectile: InstantHit
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 16000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 	-Warhead@Effect:
 
@@ -386,11 +383,11 @@ AsianCrocBite_elite:
 
 AsianLynxTankCannon:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^LightFlameWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^RA2MediumCannon
 	ReloadDelay: 55
 	Range: 5357
 	Report: vlasatta.wav
@@ -438,10 +435,10 @@ AsianLynxTankCannon:
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
@@ -454,23 +451,23 @@ AsianLynxTankCannon_elite:
 
 AsianLynxMG:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 51
 	Burst: 3
 	BurstDelays: 2
 	Range: 5357
 	Report: vifvat2a.wav, vifvat2b.wav, vifvat2c.wav
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -482,7 +479,7 @@ AsianLynxMG_elite:
 
 AsianKamikazeChaingun:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 12
 	Burst: 3
@@ -490,21 +487,21 @@ AsianKamikazeChaingun:
 	Range: 7000
 	MinRange: 1400
 	Report: vifvat2a.wav, vifvat2b.wav, vifvat2c.wav
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 AsianPhotonCannon:
 	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^TeslaWeapon
+	Inherits@4: ^MagicWeapon
 	ReloadDelay: 13
 	Range: 14000
 	Report: dragbull.aud
@@ -689,11 +686,11 @@ AsianQuasarBoat_EMP_AA:
 
 AsianChemical:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2Grenade
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyChemicalWeapon
+	Inherits@4: ^HeavyBomb
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^RA2Grenade
 	ValidTargets: Ground, Water
 	ReloadDelay: 60
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
@@ -714,13 +711,10 @@ AsianChemical:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		TrailInterval: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -790,7 +784,7 @@ AsianChemical_elite:
 
 AsianChemicalBombs:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^RA2MediumCannon
 	ValidTargets: Ground, Water
 	ReloadDelay: 8
 	Report: vflaat1a.wav, vflaat1b.wav
@@ -820,10 +814,10 @@ AsianChemicalBombs:
 	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Effect: CreateEffect
@@ -870,7 +864,7 @@ AsianQuasarBoat_AA:
 
 AsianHowitzerCannon:
 	Inherits: ^RA2MediumCannon
-	Inherits: ^RA2HeavyCannon
+	Inherits@2: ^RA2HeavyCannon
 	ReloadDelay: 160
 	Report: aa_bgart.wav
 	Range: 16000
@@ -890,13 +884,13 @@ AsianHowitzerCannon:
 		ContrailEndWidth: 20
 		TrailInterval: 1
 		Inaccuracy: 320
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 20000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 20000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
@@ -945,16 +939,17 @@ AsianHowitzerCannon_elite:
 		Spread: 2500
 
 AsianOilBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	Range: 2000
 	ReloadDelay: 100
 	Projectile: InstantExplode
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Spread: 1500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 100000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Spread: 1500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 50
@@ -970,16 +965,17 @@ AsianOilBomb:
 		AimTargetStances: Enemy, Neutral
 
 AsianSmallOilBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	Range: 2000
 	ReloadDelay: 100
 	Projectile: InstantExplode
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Spread: 1000
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 40000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Spread: 1000
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 20
@@ -998,8 +994,8 @@ AsianSmallOilBomb:
 
 AsianPulverizerGatling:
 	Inherits: ^HeavyCannon
-	Inherits: ^SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^SmallArms
+	Inherits@3: ^RA2Chaingun
 	Report: aa_pulvat2a.wav, aa_pulvat2b.wav, aa_pulvat2c.wav
 	Range: 5517
 	ReloadDelay: 12
@@ -1025,17 +1021,17 @@ AsianPulverizerGatling:
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 
 AsianPulverizerMechaGatling:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumMissile
-	Inherits: AsianPulverizerGatling
+	Inherits@2: ^MediumMissile
+	Inherits@3: AsianPulverizerGatling
 	Range: 7020
 	ReloadDelay: 15
 	Warhead@MediumChemicalWeapon: SpreadDamage
@@ -1056,13 +1052,13 @@ AsianPulverizerMechaGatling:
 
 AsianSinglePlasma:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^RA2HeavyCannon
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^MediumCannon
+	Inherits@6: ^ShrapnelWeapon
+	Inherits@7: ^HeavyBomb
+	Inherits@8: ^RA2HeavyCannon
 	Range: 5190
 	ReloadDelay: 34
 	Report: aa_plasfire.wav
@@ -1129,10 +1125,10 @@ AsianSinglePlasma:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@FireShrapnel: FireShrapnel
@@ -1193,13 +1189,13 @@ AsianTurretPlasma:
 
 AsianHarbingerPlasma:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^MediumCannon
+	Inherits@6: ^ShrapnelWeapon
+	Inherits@7: ^HeavyBomb
+	Inherits@8: ^RA2MediumMissile
 	Range: 7777
 	Burst: 2
 	BurstDelays: 5
@@ -1289,11 +1285,11 @@ AsianHarbingerPlasma:
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumMissile: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1404,11 +1400,9 @@ AsianFlamerTroop2:
 
 AsianFlamerTroopExplode:
 	Inherits: AsianFlamerTurret
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 12000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 6000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 12000
@@ -1646,12 +1640,12 @@ AsianMineSpawner2:
 AsianTankMine:
 	Inherits: ^RA2TankDestroyerCannon
 	Projectile: InstantExplode
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Spread: 1250
 		Falloff: 125, 100, 75, 50, 25
 		Damage: 125000
 		InvalidTargets: Mine
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Spread: 2500
 		Falloff: 125, 100, 75, 50, 25
 		Damage: 25
@@ -1665,19 +1659,16 @@ AsianTankMine:
 
 AsianChaosMine:
 	Inherits: AsianChaosTurret
-	Inherits: AsianTankMine
-	Inherits@2: ^HeavyChemicalWeapon
-	Warhead@HeavyChemicalWeapon: SpreadDamage
+	Inherits@2: AsianTankMine
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@proj: ^Projectile_Chem_Heavy
+	Inherits@fx: ^Effect_Chem_Heavy
+	Warhead@Chemical_Heavy:
 		Spread: 1250
 		Falloff: 125, 100, 75, 50, 25
 		Damage: 125000
 		InvalidTargets: Mine
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		Spread: 625
-		Falloff: 125, 100, 75, 50, 25
-		Damage: 25000
-		InvalidTargets: Mine
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		Spread: 2500
 		Falloff: 125, 100, 75, 50, 25
 		InvalidTargets: Mine
@@ -1695,8 +1686,8 @@ AsianChaosMine:
 
 AsianPelicanMissile:
 	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^RA2MediumMissile
 	ReloadDelay: 25
 	Burst: 2
 	BurstDelays: 2
@@ -1717,10 +1708,10 @@ AsianPelicanMissile:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Effect: CreateEffect
@@ -1744,30 +1735,30 @@ AsianPelicanMissile_elite:
 
 AsianPelicanMG:
 	Inherits: ^RA2HeavyCannon
-	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2SmallArms
+	Inherits@3: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 18
 	Burst: 4
 	BurstDelays: 3
 	Range: 6100
 	Report: vifvat2a.wav, vifvat2b.wav, vifvat2c.wav
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -1786,10 +1777,10 @@ AAGunBoatCannon:
 		Blockable: false
 		Speed: 800
 		ContrailLength: 8
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 16000
 		Spread: 400
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
 		Spread: 400
 
@@ -1807,11 +1798,11 @@ AAGunBoatFlak:
 	BurstDelays: 3
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: Underwater, Submarine
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 	Warhead@EffectAir: CreateEffect
 		Explosions: ra2_flak_puff_AA
@@ -1845,7 +1836,7 @@ TsunamiCarrierTarget:
 
 AsianSubmarineBomb:
 	Inherits: ^HeavyBomb
-	Inherits: ^RA2Grenade
+	Inherits@2: ^RA2Grenade
 	Range: 2500
 	ReloadDelay: 100
 	Projectile: InstantExplode
@@ -1861,19 +1852,13 @@ AsianSubmarineBomb:
 		Damage: 25
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Spread: 2500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 50000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Spread: 1250
-		Falloff: 100, 75, 50, 25, 0
-		Damage: 25000
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		ValidTargets: Ground, Water, Ship, Submarine, Underwater
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Spread: 2500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 25
@@ -1890,8 +1875,8 @@ AsianSubmarineBomb:
 
 AsianPhoenixRocket:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^Grenade
-	Inherits: ^RA2HeavyMissile
+	Inherits@2: ^Grenade
+	Inherits@3: ^RA2HeavyMissile
 	ReloadDelay: 65
 	Range: 6500
 	MinRange: 1300
@@ -1926,10 +1911,10 @@ AsianPhoenixRocket:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 	Warhead@Effect: CreateEffect
@@ -1955,7 +1940,7 @@ AsianPhoenixRocket_elite:
 
 ASDFGun:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	Report: varmatta.wav, varmattb.wav
 	Range: 5935
 	ReloadDelay: 16
@@ -1963,22 +1948,22 @@ ASDFGun:
 	BurstDelays: 2
 	InvalidTargets: Structure, Bridge, wall
 	ValidTargets: Ground, Water, Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 ASDFGun2:
 	Inherits: ^RailgunWeapon
-	Inherits: ASDFGun
+	Inherits@2: ASDFGun
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -2006,13 +1991,11 @@ ASDFKamikazeTargeting:
 
 ASDFKamikazeExplosion:
 	Inherits: ^HeavyBomb
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2Grenade
-	Warhead@Grenade: SpreadDamage
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2Grenade
+	Warhead@Demolition_Light:
 		Damage: 10000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 5000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 10000
@@ -2031,10 +2014,10 @@ ASDFKamikazeExplosion:
 
 AsianSniper:
 	Inherits: ^MediumMissile
-	Inherits: ^HeavyCannon
-	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^SmallArms
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^Chaingun
 	ReloadDelay: 25
 	Range: 9455
 	Report: TGhFir00.aud
@@ -2095,21 +2078,21 @@ AsianSniperAP:
 		Damage: 16000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 8
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: SpreadDamage
 		Damage: 16000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 16000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 16000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		Damage: 8
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 16000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
@@ -2117,7 +2100,7 @@ AsianSniperAP:
 
 AsianSniperLockdown:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: AsianSniperAP
+	Inherits@2: AsianSniperAP
 	ValidTargets: Vehicle, Air, Shielded
 	InvalidTargets: lockdowned
 	ReloadDelay: 100
@@ -2151,22 +2134,22 @@ AsianSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
@@ -2181,12 +2164,12 @@ AsianSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
@@ -2199,9 +2182,9 @@ AsianSniperLockdown:
 
 AsianMLRS:
 	Inherits: ^HeavyMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2Grenade
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^RA2Grenade
+	Inherits@4: ^RA2MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 8500
@@ -2229,19 +2212,16 @@ AsianMLRS:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -2265,19 +2245,16 @@ AsianSpitfireRockets:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -2302,7 +2279,7 @@ AsianKamikazeImpactTargeting:
 # ride the upgrade pass (pair law: all three dedicated).
 asianalliance_fanatic_shotgun:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 70
 	Range: 3500
 	Burst: 10

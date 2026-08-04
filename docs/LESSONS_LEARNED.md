@@ -17,8 +17,8 @@ is provided for convenience; if it disagrees with README.md, README.md wins.
 4. `docs/PROJECT_CONTEXT.md` — short project orientation and current safety focus.
 5. `docs/DESIGN.md` — binding rules and conventions (read the relevant sections, especially before modifying YAML, assets, naming, weapons, balance, or descriptions).
 6. `docs/design/ROADMAP.md` — current work queue and P0 items.
-7. `docs/Cameo_Knowledge_Base_Manual.md` — engine and custom-trait reference, as needed.
-8. `docs/audit/SUMMARY.md` — known issue classes and current audit status.
+7. `docs/audit/SUMMARY.md` — known issue classes and current audit status.
+8. `docs/Cameo_Knowledge_Base_Manual.md` — engine and custom-trait reference, as needed.
 
 Do not modify rules, assets, or balance numbers until these documents are in context. When this document and `DESIGN.md` conflict with code or old notes, the repository documents win unless an audit baseline explicitly defers the fix.
 
@@ -35,6 +35,7 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - [Superweapon documentation audit (2026-07-25)](#superweapon-documentation-audit-2026-07-25)
 - [Engine update pipeline and Smart App Control findings (2026-07-30, updated with deep research)](#engine-update-pipeline-and-smart-app-control-findings-2026-07-30-updated-with-deep-research)
 - [Loose-extracted .oramap maps must always be repacked before finishing a task (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
+- [Empty warhead type = boot NRE; check-yaml does not catch it (2026-08-04)](#empty-warhead-type--boot-nre-check-yaml-does-not-catch-it-2026-08-04)
 
 ---
 
@@ -310,18 +311,6 @@ Key facts verified 2026-07-30:
 - Building ONLY `OpenRA.Mods.CA.csproj` still touches `engine/bin/OpenRA.dll` (project references + shared output dir). There is no build scoping that avoids rewriting engine binaries.
 - GitHub zipballs do NOT include submodule/gitlink content — a gitlink in the engine repo appears as an empty folder in the fetched `engine/` copy.
 
-#### Nested-clone gitlink pitfall (2026-07-30)
-
-- Commits `bd15085df2`..`15797c874b` on `cameo-engine` accidentally contained an orphaned gitlink `OpenRA` (mode 160000, no `.gitmodules` entry) — a full nested clone of the same repo had been created inside the working tree and swept up by a broad `git add`. Removed in `2cfb751694`.
-- **Never run `git clone` inside a repository working tree.** Before committing, check `git status` for unexpected single-name directory entries; `git ls-files -s <name>` showing mode `160000` without a `.gitmodules` entry is an accidental gitlink.
-
-#### Smart App Control and locally built engine binaries (2026-07-30, updated with deep research)
-
-**What SAC is**: Windows 11 Smart App Control (SAC) is a WDAC-based feature that blocks untrusted binaries. It trusts binaries that are either (a) signed by a CA in Microsoft's Trusted Root Program, or (b) have positive cloud reputation via the Intelligent Security Graph (ISG). Unsigned binaries with no cloud reputation are blocked.
-
-**Why local builds get blocked**: All `engine/bin/*.dll` files are locally compiled and unsigned. Every compile embeds a fresh MVID (Module Version ID, a GUID), producing a new file hash even if the source code is identical. The ISG can never have cloud reputation for a just-built binary hash. **This is independent of any code change** (proven via `git stash` + clean `make all` + launch → identical block).
-
-**The block mechanism (verified via Code Integrity event logs)**:
 - SAC's WDAC policy ID is `{0283ac0f-fff1-49ae-ada1-8a933130cad6}` (`VerifiedAndReputableDesktop`).
 - Block events: `Microsoft-Windows-CodeIntegrity/Operational` Event ID 3033 (audit) + 3077 (enforcement block), reason "did not meet the Enterprise signing level requirements".
 - The ISG cloud verdict is **asynchronous**: the first launch of a fresh build may succeed because the verdict hasn't arrived yet. Subsequent launches are blocked after the ISG returns "unknown" for the new hash.
@@ -387,3 +376,29 @@ Applies to any script that renames a weapon/actor/condition identifier across th
 
 The `Map` global exposed to map Lua does **not** define a `Contains` method. Calling `Map.Contains(pos)` raises `Fatal Lua Error: Table 'Map' does not define a property 'Contains'`. To validate whether a `CPos` is inside the map, check against `Map.TopLeft`/`Map.BottomRight` world positions, or simply wrap `Actor.Create` in `pcall()` and let a position outside the visible map fail safely. In `mods/cameo/maps/survival_work/script.lua`, `SpawnBuildingForPlayer` now relies on `pcall(Actor.Create, ...)` to skip off-map cells instead of a non-existent `Map.Contains` guard.
 - **A second, unrelated loose/packaged duplicate was found and left for maintainer review**: `mods/cameo/maps/hegemony-or-survival/` (a tracked loose folder, committed in `4877a61b7`) sits alongside `mods/cameo/maps/hegemony-or-survival.oramap` with the same `Title:` and identical `map.bin`, differing only in `MapFormat` (11 packaged vs. 12 loose) and a regenerated `map.png` thumbnail — consistent with an incidental map-editor re-save rather than deliberate content edits. Unlike the `survival` case there was no design-intent comment or dated diff to justify carrying the edit forward, so this was **not** unilaterally resolved; flagged for the maintainer to decide which copy is canonical and delete the other (or confirm both are intentionally tracked, e.g. as an editable source + shippable package pair).
+
+## ClassicProductionQueueProperties crash on actors with no queue (2026-07-31)
+
+`ClassicProductionQueueProperties.GlobalProductionHandler` (engine `ProductionProperties.cs:226`) called `.First()` on `BuildableInfo.Queue`, crashing with `System.InvalidOperationException: Sequence contains no elements` when an actor with no production queue assigned was produced (e.g. via Lua `Actor.Create` on survival maps like "Crazy Survival Alpha"). The same bug existed in `Build()` (line 246) and `IsProducing()` (line 293).
+
+- **Fix**: replaced all three `.First()` calls with `.FirstOrDefault()` + null guard. Engine commit `1f71ccde90` on `cameo-engine` branch. `mod.config` updated to `1f71ccde90c1194fe908702f2e915807b2f0f3fd`.
+- **Root cause**: the `GlobalProductionHandler` fires for ALL actors produced by any player (it's hooked into `OnOtherProducedInternal`), not just actors explicitly built via production queues. Any actor spawned without a `BuildableInfo.Queue` entry (common in Lua scripts that use `Actor.Create` directly) would trigger the crash.
+- **Lesson**: engine code that handles production events must be defensive against actors that aren't part of the classic production system, since map scripts can create arbitrary actors outside the production queue framework.
+
+## Weapon template retrofit — Phase A lessons (2026-08-02)
+
+The 3-way weapon-template split requires retrofitting weapons from the old full-stack templates (`^SmallArms`, `^Chaingun`) to the new 3-layer system (`^Bullet_Light`/`^ProjectileBullet_Light`/`^EffectBullet_Light`, `^Bullet_Medium`/`^ProjectileBullet_Medium`/`^EffectBullet_Medium`). Script: `tools/archive/retrofit_v3.py`.
+
+- **Missing `Report` field causes `-Report:` lint errors.** Old templates (`^SmallArms`, `^Chaingun`) carried `Report: gun8.aud`; the new warhead-only templates (`^Bullet_Light`, `^Bullet_Medium`) did not. When a child weapon has `-Report:` (removal node) but the parent template lacks the field, `check-yaml` flags it. Fix: add `Report: gun8.aud` to the new templates to match the old defaults. Always check for fields that child weapons attempt to remove (`-FieldName:`) when creating replacement templates — the new template must carry any inherited field that children override or remove.
+- **Warhead key renaming must happen in the same pass as inherit repointing.** The first script version (`retrofit_v2.py`) classified weapons for warhead key renaming BEFORE repointing inherits, then repointed in a separate step. After repointing, the classification no longer held (the weapon no longer inherited from `^SmallArms`), causing missed warhead key renames. Fix (`retrofit_v3.py`): rename warhead keys and repoint inherits in a single pass per weapon.
+- **Dual-inherit weapons must be skipped in Phase A.** Weapons inheriting from BOTH `^SmallArms` and `^Chaingun` (e.g. `HMG_turret`, `TSTurretLaserFire`) have ambiguous warhead key mappings and require special handling in Phase B. The script correctly skips them.
+- **Intermediate templates are repointed, not their children.** Templates like `^RA2SmallArms`, `^RA2Chaingun`, `^RA2MG`, `^TSMG`, `^SteelChaingun` inherit from `^SmallArms`/`^Chaingun` and were repointed directly. Their concrete weapon children (e.g. `ra2_soviets_conscript_carbine`) inherit from the intermediate template and were NOT directly modified — correct behavior.
+- **Warhead key renaming is selective.** The script only renames `Warhead@SmallArms:` and `Warhead@Chaingun:` (and their `Percentage` variants), NOT custom warhead keys like `Warhead@TSMG:`. This is correct — custom keys are weapon-specific and don't follow the template name pattern.
+
+## Empty warhead type = boot NRE; check-yaml does not catch it (2026-08-04)
+
+A `Warhead@X:` line with **no value** is a boot crash, not a lint warning. `WeaponInfo.LoadWarheads` runs for **every** top-level weapon node in the resolved ruleset — including unused `^templates` — and calls `Game.CreateObject<IWarhead>(node.Value.Value + "Warhead")`. An empty value parses to `null`, so the lookup resolves to the abstract `Warhead` base class and `ObjectCreator.CreateBasic` throws `NullReferenceException` during `Ruleset.LoadDefaults`; the game never reaches the main menu.
+
+- **Why inheritance doesn't save you**: `MiniYaml.MergePartial` falls back to the parent value only when a **same-key** ancestor carries one (`overrideNodes.Value ?? existingNodes.Value`). Both crash sites (`RA2MirageGun` `Warhead@Effect:` in `mods/cameo/weapons/redalert2.yaml`, `TSSAPCMissiles` `Warhead@GrenadeFriendlyFire:` in `mods/cameo/weapons/tiberiansun.yaml`) had no same-key ancestor, so nothing rescued the null. Fix = give the node its concrete type (`CreateEffect` / `SpreadDamage`), don't leave the line dangling "to be filled in".
+- **`utility --check-yaml` does NOT catch this class** — typeless warhead nodes lint clean. The permanent guard is `python tools/balance/run_with_guard.py tools/audit/audit_empty_warheads.py`, which resolves the full manifest weapon set via `miniyaml.Ruleset` and flags any resolved node whose key starts with `Warhead` but has no type (plus empty `Projectile:` as a suspect). **Run it after any bulk warhead/weapon edit** (retrofits, key renames, template repointing). Post-fix sweep: 4,202 weapons, 0 findings; boot-gate passed.
+- **Same crash class, other keys**: any engine-loaded node keyed by class name behaves this way. `Projectile:` with no value is the adjacent suspect (flagged by the same audit); trait nodes are safe because they carry their type in the key name itself.

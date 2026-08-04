@@ -1,29 +1,29 @@
-﻿ACV_Machinegun:
+ACV_Machinegun:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 21
 	Burst: 4
 	BurstDelays: 2
 	Range: 5555
 	Report: AUACV_mgFireA.wav, AUACV_mgFireB.wav, AUACV_mgFireC.wav, AUACV_mgFireD.wav
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 
 Future_Cryocopter_Rocket:
 	Inherits: ^Grenade
-	Inherits: ^D2KRocket
-	Inherits: ^SteelMediumMissile
+	Inherits@2: ^D2KRocket
+	Inherits@3: ^SteelMediumMissile
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 4
@@ -39,16 +39,16 @@ Future_Cryocopter_Rocket:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 	Warhead@PhysicalStateCryo1: ApplyPhysicalState
@@ -84,11 +84,11 @@ Future_Cryocopter_Rocket:
 
 Future_Cryocopter_Cryo:
 	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^TeslaWeapon
+	Inherits@6: ^LaserWeapon
 	ValidTargets: Ground, Water
 	ReloadDelay: 8
 	Range: 5200
@@ -186,11 +186,11 @@ Future_Turret_Cryo:
 
 CryoLegionnaireAttack:
 	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^TeslaWeapon
+	Inherits@6: ^LaserWeapon
 	Range: 7000
 	ReloadDelay: 30
 	Report: AUCryoc_wea1impact2La.wav, AUCryoc_wea1impact2Lb.wav, AUCryoc_wea1impact2Lc.wav, AUCryoc_wea1impact2Ld.wav
@@ -300,7 +300,7 @@ CryoLegionnaireAttack:
 
 FutureMicrotorpedos:
 	Inherits: ^RA2Grenade
-	Inherits: ^RA2HeavyMissile
+	Inherits@2: ^RA2HeavyMissile
 	ReloadDelay: 240
 	Range: 12000
 	Burst: 4
@@ -324,16 +324,14 @@ FutureMicrotorpedos:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 6000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 3000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 6000
 		ValidTargets: Water, Underwater, Bridge, Structure
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:
@@ -348,11 +346,11 @@ FutureMicrotorpedos:
 
 AthenaLaser:
 	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^TeslaWeapon
+	Inherits@6: ^LaserWeapon
 	Range: 16000
 	ReloadDelay: 1
 	ValidTargets: Ground, Water
@@ -539,7 +537,7 @@ Future_CoilerFriendFrag2:
 
 Future_MultiMissile:
 	Inherits: ^ArrowWeapon
-	Inherits: ^RA2LightMissile
+	Inherits@2: ^RA2LightMissile
 	ReloadDelay: 24
 	Burst: 3
 	BurstDelays: 4
@@ -549,9 +547,9 @@ Future_MultiMissile:
 		Damage: 4000
 	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 4000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_small_grey_explosion
@@ -559,10 +557,10 @@ Future_MultiMissile:
 
 Future_MultiMissile_Javelin:
 	Inherits: ^LightMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^D2KRocket
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^D2KRocket
 	ReloadDelay: 32
 	Burst: 3
 	BurstDelays: 4
@@ -601,18 +599,18 @@ Future_MultiMissile_Javelin:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 Future_MultiMissile_Frag:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^LightMissile
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^LightChemicalWeapon
+	Inherits@4: ^LightMissile
 	ReloadDelay: 56
 	Burst: 3
 	BurstDelays: 4
@@ -674,10 +672,10 @@ Future_MultiMissile_Frag:
 
 Future_MultiMissile_Sigma:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumMissile
+	Inherits@2: ^MagicWeapon
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^MediumMissile
 	ReloadDelay: 50
 	Burst: 3
 	BurstDelays: 6
@@ -754,11 +752,11 @@ Future_MultiMissile_Sigma:
 
 FutureEnforcerShotgun:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^MediumCannon
+	Inherits@5: ^SmallArms
+	Inherits@6: ^Chaingun
 	ReloadDelay: 40
 	Range: 3000
 	Report: DSDSHTGN.wav
@@ -811,10 +809,10 @@ FutureEnforcerShotgunDeployed_elite:
 
 FutureJavelinRockets:
 	Inherits: ^LightMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^D2KRocket
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^D2KRocket
 	ReloadDelay: 25
 	Range: 6000
 	Projectile: Missile
@@ -851,10 +849,10 @@ FutureJavelinRockets:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -876,34 +874,34 @@ FutureJavelinRocketsDeployed_elite:
 
 Future_Wheel_MG:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 40
 	Burst: 4
 	BurstDelays: 2
 	Range: 5806
 	Report: heavy_mgun1_3.wav
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 Future_Wheel_MG_elite:
 	Inherits: Future_Wheel_MG
-	Inherits: ^SteelChaingun
+	Inherits@2: ^SteelChaingun
 	Range: 6806
 	Burst: 8
 
 ShotgunAttackRobotGun:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^MediumCannon
+	Inherits@5: ^SmallArms
+	Inherits@6: ^RA2Chaingun
 	ReloadDelay: 55
 	Range: 4110
 	Report: laser_cannon3_3.wav
@@ -932,23 +930,23 @@ ShotgunAttackRobotGun:
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 ShotgunAttackRobotGun_elite:
 	Inherits: ShotgunAttackRobotGun
-	Inherits: ^SteelChaingun
+	Inherits@2: ^SteelChaingun
 	Range: 5110
 	Burst: 2
 	BurstDelays: 3
 
 CannonAttackRobotGun:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^RA2RailgunWeapon
-	Inherits: ^SteelMediumCannon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^RA2RailgunWeapon
+	Inherits@4: ^SteelMediumCannon
 	Range: 6000
 	ReloadDelay: 25
 	Report: steel_quantumfire.wav
@@ -968,9 +966,9 @@ CannonAttackRobotGun:
 		Damage: 2000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 2000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		ExplosionPalette: ra2effect
@@ -984,7 +982,7 @@ CannonAttackRobotGun_elite:
 
 MissileAttackRobotGun:
 	Inherits: ^MediumMissile
-	Inherits: ^SteelLightMissile
+	Inherits@2: ^SteelLightMissile
 	Range: 8000
 	ReloadDelay: 65
 	Burst: 2
@@ -994,9 +992,9 @@ MissileAttackRobotGun:
 		Damage: 12000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 12000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_small_grey_explosion
@@ -1017,9 +1015,9 @@ MissileAttackRobotGun_elite:
 
 FutureMechGatling:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^LightMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^LightMissile
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^RA2Chaingun
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
 	ReloadDelay: 12
 	Range: 8300
@@ -1052,17 +1050,17 @@ FutureMechGatling:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 FutureMechPlasma:
 	Inherits: ^Grenade
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^SteelHeavyCannon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^SteelHeavyCannon
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 10
@@ -1092,9 +1090,9 @@ FutureMechPlasma:
 		Damage: 5000
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 10000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@Effect: CreateEffect
 		Explosions: aa_pulsexp
@@ -1116,9 +1114,9 @@ GuardianTankCannon:
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 	Projectile: Bullet
 		Speed: 782
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 12000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 
 GuardianTankCannon_elite:
@@ -1151,11 +1149,11 @@ Future_MBT_DebuffLaser_elite:
 
 FutureTankCannons:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^SteelHeavyCannon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^TeslaWeapon
+	Inherits@5: ^MagicWeapon
+	Inherits@6: ^SteelHeavyCannon
 	ReloadDelay: 65
 	Burst: 2
 	BurstDelays: 10
@@ -1230,11 +1228,11 @@ FutureTankCannons:
 		ValidTargets: Ground, Water, Air
 		Damage: 50
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 100000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 50
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1254,15 +1252,15 @@ FutureTankCannons_elite:
 
 FutureHarbingerCannon:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^TeslaChargedWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^HeavyCannon
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^TeslaChargedWeapon
+	Inherits@5: ^TeslaWeapon
+	Inherits@6: ^MagicWeapon
+	Inherits@7: ^LaserWeapon
+	Inherits@8: ^RailgunWeapon
+	Inherits@9: ^HeavyMissile
+	Inherits@10: ^HeavyCannon
 	ReloadDelay: 70
 	Range: 6030
 	Burst: 2
@@ -1341,13 +1339,15 @@ FutureHarbingerCannon_elite:
 	Burst: 4
 
 HarbingerChainguns:
-	Inherits: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ReloadDelay: 9
 	Range: 6030
 	Report: AUGunsh_wea1Firea.wav,AUGunsh_wea1Fireb.wav,AUGunsh_wea1Firec.wav
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		Damage: 12000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 
 HarbingerChainguns_elite:
@@ -1384,7 +1384,7 @@ BlackWidowPistols_elite:
 
 OrionRailgun:
 	Inherits: ^RailgunWeapon
-	Inherits: ^RA2HeavyCannon
+	Inherits@2: ^RA2HeavyCannon
 	Range: 7500
 	ReloadDelay: 60
 	Report: AUFTank_neutImpaSmaa.wav, AUFTank_neutImpaSmab.wav, AUFTank_neutImpaSmac.wav, AUFTank_neutImpaSmad.wav, AUFTank_neutImpaSmae.wav
@@ -1401,9 +1401,9 @@ OrionRailgun:
 		Damage: 30000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		Damage: 15
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 30000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_explosion
@@ -1425,9 +1425,9 @@ OrionRailgun_elite:
 		Damage: 60000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		Damage: 30
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 60000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 30
 
 BeehiveCarrierTarget:

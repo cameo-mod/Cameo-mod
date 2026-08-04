@@ -51,7 +51,6 @@ Interceptor = Interceptor
 Medic = Medic
 Music = Music
 Pillbox = Pillbox
-ra1_soviets_attackdog = ra1_soviets_attackdog
 Radar = Radar
 Restaurant = Restaurant
 Rocketeer = Rocketeer

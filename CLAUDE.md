@@ -31,19 +31,22 @@ The essential documents, in order:
    the queue.
 6. **`docs/audit/SUMMARY.md`** — current known-issue state by bug class.
 7. `docs/Cameo_Knowledge_Base_Manual.md` — the ENGINE/CODE reference
-   (v.0.4): custom traits, assemblies (OpenRA.Mods.Cameo/CA),
+   (v.0.5): custom traits, assemblies (OpenRA.Mods.Cameo/CA),
    activities, bot modules, UI internals. Consult it for any C#-side
    question (it lists code-derived identifiers!); verify against source
    when in doubt — it is a contributor document, not the binding contract.
 8. `docs/MASTER_REPORT.md` — historical long-form analysis, bug taxonomy
    (B1–B12); consult §9/§10/§13 when DESIGN.md is not enough. Not a live
-   roadmap — active work belongs in ROADMAP.md.
+   roadmap — active work belongs in ROADMAP.md. (Listed here as essential
+   for context; `docs/README.md` classifies it as reference/historical —
+   both are correct: read it for background, but don't treat it as binding.)
 
 ## Tooling
 
 - `tools/audit/run_all.sh` — full audit suite (run before/after changes;
   single checks: `python tools/audit/audit_<name>.py`).
-- `tools/rename/apply.py` + `rename_map_<faction>.yaml` — naming migration.
+- `tools/rename/safe_rename.py` + `rename_map_<faction>.yaml` — naming migration
+  (replaces the deprecated `apply.py`).
 - `tools/packs/split_faction.py` — ContentPack extraction.
 - `tools/audit/dump_resolved.py` — resolved-ruleset snapshots; refactors
   must diff empty.

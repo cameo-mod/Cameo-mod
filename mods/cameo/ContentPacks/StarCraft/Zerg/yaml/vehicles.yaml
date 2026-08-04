@@ -144,8 +144,6 @@ zerg_hermit:
 		HP: 375000
 	ChangesHealth@SelfHealing:
 		Step: 150
-	Armor:
-		Type: Superheavy
 	Armament:
 		Weapon: HermitShoot
 		FireDelay: 3
@@ -208,8 +206,6 @@ zerg_goremaw:
 		HP: 150000
 	ChangesHealth@SelfHealing:
 		Step: 60
-	Armor:
-		Type: Medium
 	Armament:
 		Weapon: GoremawClaw
 		FireDelay: 3
@@ -271,8 +267,6 @@ zerg_lurker:
 		HP: 125000
 	ChangesHealth@SelfHealing:
 		Step: 50
-	Armor:
-		Type: Heavy
 	-HitShape:
 	HitShape:
 	GrantConditionOnDeploy:

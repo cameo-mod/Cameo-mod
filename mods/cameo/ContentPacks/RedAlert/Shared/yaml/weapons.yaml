@@ -1,4 +1,4 @@
-﻿^CryoMissileProjectile:
+^CryoMissileProjectile:
 	TargetActorCenter: true
 	Projectile: Missile
 		TrailImage: blue_smokey
@@ -66,30 +66,32 @@
 		Damage: 1
 
 OreExplosion:
-	Inherits: ^MediumFlameWeapon
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
+	Warhead@Flame_Medium:
 		Damage: 40000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 20000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 20
 	Warhead@Resource: CreateResource
 		AddsResourceType: Ore
 		Size: 1,1
 
 M1Carbine:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 20
 	Range: 4655
 	Report: gun11.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 CryoM1Carbine:
 	Inherits: M1Carbine
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 0
@@ -142,7 +144,7 @@ VengeanceActivator3:
 
 ConscriptMolotov:
 	Inherits: ^Grenade
-	Inherits: ^LightFlameWeapon
+	Inherits@2: ^LightFlameWeapon
 	ReloadDelay: 50
 	Range: 5725
 	Report: toss1.aud
@@ -205,7 +207,7 @@ ConscriptMolotovExplode:
 
 RocketsRA:
 	Inherits: ^MediumMissile
-	Inherits: ^LightMissile
+	Inherits@2: ^LightMissile
 	ReloadDelay: 50
 	Range: 6643
 	Report: missile6.aud
@@ -220,17 +222,17 @@ RocketsRA:
 
 RocketsRACryo:
 	Inherits: RocketsRA
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -20000
 		Range: 300
 
 DragunovSniper:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^RailgunWeapon
-	Inherits: ^LightMissile
-	Inherits: ^HeavyCannon
-	Inherits: ^FlakWeapon
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^HeavyCannon
+	Inherits@5: ^FlakWeapon
 	ReloadDelay: 85
 	Range: 5804
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -265,7 +267,9 @@ DragunovSniper:
 		Damage: 4
 
 Flamer:
-	Inherits: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 35
 	Burst: 15
 	BurstDelays: 1
@@ -277,11 +281,9 @@ Flamer:
 		Image: fb3
 		LaunchAngle: 60
 		Inaccuracy: 850
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 2000
@@ -519,7 +521,7 @@ MagicOrbSpreaderProjectile2:
 
 MagicOrb:
 	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
+	Inherits@2: ^MagicWeapon
 	Inherits@EMP: ^EMPDamage
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
 	Burst: 8
@@ -573,7 +575,7 @@ MagicOrb:
 
 MagicOrb2:
 	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
+	Inherits@2: ^MagicWeapon
 	Inherits@EMP: ^EMPDamage
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
 	Burst: 8
@@ -627,7 +629,7 @@ MagicOrb2:
 
 APCGunAllies:
 	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^FlakWeapon
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 5978
@@ -649,9 +651,9 @@ APCGunAllies_AA:
 	Inherits: APCGunAllies
 	Range: 8967
 	ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Air
@@ -660,7 +662,7 @@ APCGunAllies_AA:
 
 RAVulcan:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 48
 	Burst: 5
@@ -677,7 +679,9 @@ RAVulcan:
 		Damage: 1
 
 ZeroFighterChainGun:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
 	Range: 6615
 	MinRange: 1325
@@ -686,23 +690,23 @@ ZeroFighterChainGun:
 	BurstDelays: 4
 	Report: gun13.aud
 	TargetActorCenter: true
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 
 ZeroFighterChainGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: ^Grenade
-	Inherits: ZeroFighterChainGun
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: ^Grenade
+	Inherits@3: ZeroFighterChainGun
+	Inherits@4: ^WaveforceBulletProjectile
 	Projectile: Bullet
 		-LaunchAngle:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@RailgunWeapon: SpreadDamage
@@ -720,7 +724,7 @@ ZeroFighterChainGunWaveforce:
 
 TigerCannon:
 	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^MediumCannon
 	ReloadDelay: 60
 	Range: 5915
 	Report: cannon1.aud
@@ -740,12 +744,12 @@ TigerCannon:
 
 25mmWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: 25mm
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: 25mm
+	Inherits@3: ^WaveforceBulletProjectile
 
 WaveforceCannonChargedLaser:
 	Inherits: ^HeavyMissile
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	ReloadDelay: 120
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -791,7 +795,7 @@ WaveforceCannonChargedLaser:
 
 WaveforceCannonDistortedBeam1:
 	Inherits: ^TeslaWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^HeavyCannon
 	ReloadDelay: 120
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -841,7 +845,7 @@ WaveforceCannonDistortedBeam1:
 
 WaveforceCannonDistortedBeam2:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^HeavyFlameWeapon
 	ReloadDelay: 120
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -895,9 +899,9 @@ WaveforceCannonDistortedBeam2:
 
 ra120mm:
 	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^MediumCannon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^TankDestroyerCannon
 	ValidTargets: Ground, Water, Vehicle, Structure
 	ReloadDelay: 95
 	Burst: 2
@@ -931,9 +935,9 @@ ra120mm:
 
 MammothTusk:
 	Inherits: ^Grenade
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyMissile
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^HeavyMissile
 	Inherits@glow: ^ImpactGlow
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 91
@@ -977,7 +981,7 @@ MammothTusk:
 
 ParaBomb:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^HeavyFlameWeapon
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 8
 	Range: 5000
@@ -1005,10 +1009,10 @@ ParaBomb:
 
 JapanSuperBomb:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumChemicalWeapon
+	Inherits@4: ^MediumFlameWeapon
+	Inherits@5: ^HeavyBomb
 	ReloadDelay: 5
 	Range: 3000
 	Report: vkiratta.wav
@@ -1062,7 +1066,8 @@ JapanSuperBomb:
 		Damage: 5
 
 JapanCarrierFighterBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	ReloadDelay: 5
 	Range: 3000
 	Report: vkiratta.wav
@@ -1072,10 +1077,10 @@ JapanCarrierFighterBomb:
 		Acceleration: 0, 0, -10
 		Image: Dragon
 		Shadow: True
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 
@@ -1093,7 +1098,6 @@ RAAtomic:
 		Radius: 0.35
 		Brightness: 1.3
 		Darkness: 0.85
-		MinimumExposure: 0.45
 	Warhead@Effect: CreateEffect
 		ImpactSounds: kaboom1.aud
 	Warhead@Effect2: CreateEffect
@@ -1403,7 +1407,7 @@ BarrelExplode:
 
 ATMine:
 	Inherits: ^DamagingExplosionHE
-	Inherits: ^HeavyMissile
+	Inherits@2: ^HeavyMissile
 	Report: mineblo1.aud
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water
@@ -1757,7 +1761,7 @@ NanoReturn:
 
 TorpTube:
 	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
+	Inherits@2: ^HeavyMissile
 	ReloadDelay: 100
 	Range: 10000
 	Report: torpedo1.aud
@@ -1804,7 +1808,7 @@ TorpTube:
 
 TorpTubeThermobaric:
 	Inherits: ^NuclearWarhead
-	Inherits: ^HeavyMissile
+	Inherits@2: ^HeavyMissile
 	ReloadDelay: 100
 	Range: 10000
 	Report: torpedo1.aud
@@ -1850,20 +1854,19 @@ TorpTubeThermobaric:
 		InvalidTargets: Ship, Structure, Bridge
 
 DepthCharge:
-	Inherits: ^Grenade
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Explosion_Light
 	ReloadDelay: 60
 	Range: 6000
 	ValidTargets: Underwater, Submarine
 	Projectile: Bullet
 		Speed: 125
 		Image: BOMB
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 60000
 		ValidTargets: Submarine, Ship, Underwater
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 30000
-		ValidTargets: Submarine, Ship, Underwater
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 30
 		ValidTargets: Submarine, Ship, Underwater
 	Warhead@EffectWater: CreateEffect
@@ -1876,23 +1879,25 @@ DepthCharge:
 		ValidTargets: Submarine, Ship, Underwater
 
 2Inch:
-	Inherits: ^TankDestroyerCannon
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Cannon_Light
 	ReloadDelay: 30
 	Range: 6000
 	Report: cannon2.aud
 	InvalidTargets: Underwater, Submarine
 	Projectile: Bullet
 		Speed: 600
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 30000
 		Spread: 300
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 15
 		Spread: 300
 
 8Inch:
 	Inherits: ^HeavyBomb
-	Inherits: ^Grenade
+	Inherits@2: ^Grenade
 	ReloadDelay: 250
 	Range: 15000
 	MinRange: 3000
@@ -1924,7 +1929,9 @@ DepthCharge:
 		ImpactSounds: kaboom15.aud
 
 Stinger:
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Missile_Heavy
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 27
 	Range: 8000
@@ -1937,11 +1944,11 @@ Stinger:
 		Speed: 500
 		MinimumLaunchAngle: 50
 		Acceleration: 5
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Underwater
 		Damage: 10000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Underwater
 		Damage: 5
@@ -1950,14 +1957,14 @@ Stinger:
 
 StingerCryo:
 	Inherits: Stinger
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -10000
 		Range: 400
 
 JapanSpeedBoatGun:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: Underwater, Submarine
 	ReloadDelay: 4
@@ -1974,12 +1981,12 @@ JapanSpeedBoatGun:
 
 JapanSpeedBoatGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: JapanSpeedBoatGun
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: JapanSpeedBoatGun
+	Inherits@3: ^WaveforceBulletProjectile
 
 YamatoCannon:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyCannon
+	Inherits@2: ^HeavyCannon
 	ReloadDelay: 125
 	Range: 12500
 	MinRange: 2500
@@ -2009,14 +2016,16 @@ YamatoCannon:
 		ImpactSounds: kaboom15.aud
 
 YamatoFlak:
-	Inherits: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ValidTargets: Air
 	ReloadDelay: 4
 	Range: 12500
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -2035,7 +2044,7 @@ ChronoVortexInit:
 
 ra1_allies_chronovortex:
 	Inherits: ^HeavyBomb
-	Inherits: ^MagicWeapon
+	Inherits@2: ^MagicWeapon
 	ReloadDelay: 5
 	Range: 1250
 	ValidTargets: Ground, Water
@@ -2143,21 +2152,23 @@ ra1_allies_chronovortex:
 # CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): Allied
 # rifle infantry â€” burst 3, accurate, longest scout reach. Cryo pair.
 ra1_allies_rifleinfantry_carbine:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
 	Range: 5500
 	ValidTargets: Ground, Water
 	Burst: 3
 	BurstDelays: 4
 	Report: gun11.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 ra1_allies_rifleinfantry_carbine_cryo:
 	Inherits: ra1_allies_rifleinfantry_carbine
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 0

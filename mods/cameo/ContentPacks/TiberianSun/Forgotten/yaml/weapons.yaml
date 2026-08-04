@@ -1,17 +1,19 @@
 TS70mm:
 	Inherits: ^TSCannonEffect
-	Inherits: ^MediumCannon
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 24
 	Range: 5566
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 TS70mmChem:
 	Inherits: ^TSCannonEffect
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumCannon
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^MediumCannon
 	ReloadDelay: 24
 	Range: 5566
 	Warhead@MediumCannon: SpreadDamage
@@ -37,8 +39,8 @@ TS70mmChem:
 
 TS70mmTur:
 	Inherits: ^TSCannonEffect
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^TankDestroyerCannon
+	Inherits@3: ^MediumCannon
 	ReloadDelay: 10
 	Range: 6574
 	Projectile: Bullet
@@ -56,9 +58,9 @@ TS70mmTur:
 
 TS70mmTurChem:
 	Inherits: ^TSCannonEffect
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^MediumCannon
 	ReloadDelay: 10
 	Range: 6574
 	Projectile: Bullet
@@ -92,8 +94,8 @@ TS70mmTurChem:
 
 TS120mmx:
 	Inherits: ^TSCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumCannon
 	Range: 5677
 	ReloadDelay: 52
 	Burst: 2
@@ -111,9 +113,9 @@ TS120mmx:
 
 TSChem120mmx:
 	Inherits: ^TSCannon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumCannon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^MediumCannon
 	Range: 5677
 	ReloadDelay: 52
 	Burst: 2
@@ -147,20 +149,22 @@ TSChem120mmx:
 
 TSScoopDual:
 	Inherits: ^TSCannonEffect
-	Inherits: ^MediumCannon
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 2
 	Range: 6224
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 20000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
 
 TSScoopDualChem:
 	Inherits: ^TSCannonEffect
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumCannon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^MediumCannon
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 2
@@ -188,8 +192,8 @@ TSScoopDualChem:
 
 TSScoopDualTur:
 	Inherits: ^TSCannonEffect
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyCannon
 	ReloadDelay: 48
 	Burst: 2
 	BurstDelays: 2
@@ -209,9 +213,9 @@ TSScoopDualTur:
 
 TSScoopDualTurChem:
 	Inherits: ^TSCannonEffect
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^HeavyCannon
 	ReloadDelay: 48
 	Burst: 2
 	BurstDelays: 2
@@ -247,20 +251,22 @@ TSScoopDualTurChem:
 
 TSHighVelocity:
 	Inherits: ^TSCannonEffect
-	Inherits: ^TankDestroyerCannon
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Cannon_Light
 	ReloadDelay: 90
 	Range: 7701
 	Projectile: Bullet
 		Speed: 850
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 30000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 15
 
 TSHighVelocityChem:
 	Inherits: ^TSCannonEffect
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^TankDestroyerCannon
 	ReloadDelay: 90
 	Range: 7701
 	Projectile: Bullet
@@ -288,20 +294,22 @@ TSHighVelocityChem:
 
 TSHighVelocity2:
 	Inherits: ^TSCannonEffect
-	Inherits: ^TankDestroyerCannon
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Cannon_Light
 	ReloadDelay: 55
 	Range: 8207
 	Projectile: Bullet
 		Speed: 850
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 40000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 20
 
 TSHighVelocity2Chem:
 	Inherits: ^TSCannonEffect
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^TankDestroyerCannon
 	ReloadDelay: 55
 	Range: 8207
 	Projectile: Bullet
@@ -329,19 +337,21 @@ TSHighVelocity2Chem:
 
 TSHighVelocityTur:
 	Inherits: ^TSCannonEffect
-	Inherits: ^TankDestroyerCannon
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Cannon_Light
 	ReloadDelay: 30
 	Range: 9483
 	Projectile: Bullet
 		Speed: 1280
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 48000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 24
 
 TSBusMortar:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^HeavyBomb
 	ReloadDelay: 120
 	Range: 7850
 	TargetActorCenter: true
@@ -368,9 +378,9 @@ TSBusMortar:
 
 TSBusMortarChem:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyChemicalWeapon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^MediumChemicalWeapon
+	Inherits@4: ^HeavyChemicalWeapon
 	ReloadDelay: 120
 	Range: 7850
 	TargetActorCenter: true
@@ -419,8 +429,8 @@ TSBusMortarChem:
 
 TSInfantryMortar:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^TSCannonEffect
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^TSCannonEffect
 	ReloadDelay: 88
 	Range: 10830
 	MinRange: 2165
@@ -477,8 +487,8 @@ TSInfantryMortarChem:
 
 TS120mmxChem:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^TSCannonEffect
+	Inherits@2: ^HeavyChemicalWeapon
+	Inherits@3: ^TSCannonEffect
 	ReloadDelay: 60
 	Range: 6172
 	Burst: 2
@@ -511,24 +521,28 @@ TS120mmxChem:
 		InvalidTargets: Water
 
 TSJuggerFlakAA:
-	Inherits: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	Report: jugger1.aud
 	ReloadDelay: 28
 	Burst: 3
 	BurstDelays: 1
 	Range: 11234
 	ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		Damage: 10000
 		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: expnew13.aud
 TSJuggerFlakAA_boat:
-	Inherits: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	Report: jugger1.aud
 	Range: 12834
 	MinRange: 2245
@@ -537,10 +551,10 @@ TSJuggerFlakAA_boat:
 	BurstDelays: 3
 	Range: 11234
 	ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		Damage: 10000
 		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
@@ -548,7 +562,8 @@ TSJuggerFlakAA_boat:
 		ImpactSounds: expnew13.aud
 
 TSJuggerboat90mm:
-	Inherits: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Explosion_Medium
 	ReloadDelay: 69
 	Range: 12834
 	MinRange: 2565
@@ -562,11 +577,9 @@ TSJuggerboat90mm:
 		Inaccuracy: 1c0
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 20000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
@@ -574,7 +587,7 @@ TSJuggerboat90mm:
 	# 	Explosions: artillery_explosion
 TSBoatcannon:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^HeavyBomb
 	ReloadDelay: 80
 	Burst: 2
 	BurstDelays: 3
@@ -593,7 +606,7 @@ TSBoatcannon:
 		Spread: 400
 TSChemJuggerboat90mm:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumChemicalWeapon
+	Inherits@2: ^MediumChemicalWeapon
 	ReloadDelay: 69
 	Range: 12834
 	MinRange: 2565
@@ -623,8 +636,8 @@ TSChemJuggerboat90mm:
 		ImpactSounds: expnew13.aud
 TSChemBoatcannon:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumChemicalWeapon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^MediumChemicalWeapon
 	ReloadDelay: 80
 	Burst: 2
 	BurstDelays: 3
@@ -653,7 +666,7 @@ TSChemBoatcannon:
 
 TSChemBazooka:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^LightMissile
+	Inherits@2: ^LightMissile
 	Report: rketinf1.aud
 	ReloadDelay: 52
 	Range: 6694
@@ -681,7 +694,8 @@ TSChemBazooka:
 		InvalidTargets: Water
 
 TSVanMissile:
-	Inherits: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Explosion_Medium
 	ValidTargets: Ground, Water
 	Report: missile6.aud
 	ReloadDelay: 32
@@ -697,16 +711,14 @@ TSVanMissile:
 		Palette: d2keffect
 		TrailImage: large_trail
 		LaunchAngle: 60
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 24000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 12000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 12
 
 TSChemVanMissile:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^ShrapnelWeapon
+	Inherits@2: ^ShrapnelWeapon
 	ValidTargets: Ground, Water
 	Report: missile6.aud
 	ReloadDelay: 32
@@ -746,7 +758,8 @@ TSChemVanMissile:
 		InvalidTargets: Water
 
 TSMLRSMissile:
-	Inherits: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Explosion_Medium
 	ValidTargets: Ground, Water
 	Report: missile6.aud
 	ReloadDelay: 34
@@ -762,16 +775,16 @@ TSMLRSMissile:
 		Palette: d2keffect
 		TrailImage: large_trail
 		LaunchAngle: 165
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 24000
 	WWarhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 12000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 12
 
 TSChemMLRSMissile:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^ShrapnelWeapon
+	Inherits@2: ^ShrapnelWeapon
 	ValidTargets: Ground, Water
 	Report: missile6.aud
 	ReloadDelay: 34
@@ -812,7 +825,7 @@ TSChemMLRSMissile:
 
 TSMammothTuskChem:
 	Inherits: ^HeavyMissile
-	Inherits: ^HeavyChemicalWeapon
+	Inherits@2: ^HeavyChemicalWeapon
 	Range: 6172
 	ReloadDelay: 48
 	Report: misl1.aud
@@ -871,7 +884,9 @@ TSMammothTuskChem:
 
 TSMammothTusk:
 	Inherits@glow: ^ImpactGlow
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Missile_Heavy
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Speed: 500
@@ -887,10 +902,10 @@ TSMammothTusk:
 	Burst: 2
 	BurstDelays: 8
 	Report: misl1.aud
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 60000
 		ValidTargets: Ground, Water, Air
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 30
 		ValidTargets: Ground, Water, Air
 	Warhead@EffectAir: CreateEffect
@@ -898,7 +913,7 @@ TSMammothTusk:
 
 TSRuinerMissile:
 	Inherits: ^Grenade
-	Inherits: ^MediumMissile
+	Inherits@2: ^MediumMissile
 	Range: 5919
 	ReloadDelay: 50
 	Report: misl1.aud
@@ -920,9 +935,9 @@ TSRuinerMissile:
 
 TSChemRuinerMissile:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^Grenade
-	Inherits: ^MediumMissile
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^Grenade
+	Inherits@4: ^MediumMissile
 	Range: 5919
 	ReloadDelay: 50
 	Report: misl1.aud
@@ -976,11 +991,11 @@ TSChemRuinerMissile:
 
 TSApacheMissile:
 	Inherits: ^HeavyCannon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^TankDestroyerCannon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^Grenade
+	Inherits@5: ^HeavyMissile
+	Inherits@6: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 15
 	Range: 4688
@@ -1030,12 +1045,12 @@ TSApacheMissile:
 
 TSChemApacheMissile:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^Grenade
+	Inherits@6: ^HeavyMissile
+	Inherits@7: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 15
 	Range: 4688
@@ -1106,11 +1121,11 @@ TSChemApacheMissile:
 
 TSCobraMissile:
 	Inherits: ^HeavyCannon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^TankDestroyerCannon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^Grenade
+	Inherits@5: ^HeavyMissile
+	Inherits@6: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 12
 	Range: 5052
@@ -1160,12 +1175,12 @@ TSCobraMissile:
 
 TSChemCobraMissile:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^Grenade
+	Inherits@6: ^HeavyMissile
+	Inherits@7: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 12
 	Range: 5052
@@ -1236,7 +1251,7 @@ TSChemCobraMissile:
 
 TSAdatsMissile:
 	Inherits: ^FlakWeapon
-	Inherits: ^LightMissile
+	Inherits@2: ^LightMissile
 	Range: 5606
 	Burst: 4
 	BurstDelays: 2
@@ -1270,15 +1285,15 @@ TSAdatsMissile_AA:
 		ValidTargets: Air
 
 MutFlamer:
-	Inherits: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	ReloadDelay: 50
 	Range: 2386
 	Report: flamtnk1.aud
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 28000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 14000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 14
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 28000
@@ -1287,7 +1302,7 @@ MutFlamer:
 
 MutFlamerChem:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
+	Inherits@2: ^MediumChemicalWeapon
 	ReloadDelay: 50
 	Range: 2386
 	Report: flamtnk1.aud
@@ -1320,7 +1335,7 @@ MutFlamerChem:
 
 MutHFlamer:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^HeavyFlameWeapon
 	ReloadDelay: 65
 	Range: 2425
 	Report: flamtnk1.aud
@@ -1347,9 +1362,9 @@ MutHFlamer:
 
 MutHFlamerChem:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyChemicalWeapon
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: ^MediumChemicalWeapon
+	Inherits@4: ^HeavyChemicalWeapon
 	ReloadDelay: 65
 	Range: 2425
 	Report: flamtnk1.aud
@@ -1398,7 +1413,7 @@ MutHFlamerChem:
 
 TSFiendShard:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
+	Inherits@2: ^MediumChemicalWeapon
 	ReloadDelay: 36
 	Burst: 3
 	BurstDelays: 2
@@ -1429,8 +1444,8 @@ TSFiendShard:
 
 TSFiendShardUP:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyChemicalWeapon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyChemicalWeapon
 	ReloadDelay: 36
 	Burst: 3
 	BurstDelays: 2
@@ -1477,9 +1492,9 @@ TSFiendShardUP:
 
 TSFiendShardBlue:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^LightChemicalWeapon
+	Inherits@4: ^MediumChemicalWeapon
 	ReloadDelay: 36
 	Burst: 3
 	BurstDelays: 2
@@ -1522,11 +1537,11 @@ TSFiendShardBlue:
 
 TSFiendShardBlueUP:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^LightChemicalWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^HeavyChemicalWeapon
+	Inherits@6: ^HeavyBomb
 	ReloadDelay: 36
 	Burst: 3
 	BurstDelays: 2
@@ -1588,16 +1603,16 @@ TSFiendShardBlueUP:
 		ValidTargets: Ground, Air
 
 TSZombieAttack:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 20
 	Range: 1127
 	Report: vicer1.aud
 	Projectile: InstantHit
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 16000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 
 TSSmoke:
@@ -1605,7 +1620,7 @@ TSSmoke:
 
 TSChemspray:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
+	Inherits@2: ^MediumChemicalWeapon
 	ReloadDelay: 55
 	Range: 3183
 	Warhead@LightChemicalWeapon: SpreadDamage
@@ -1623,8 +1638,8 @@ TSChemspray:
 
 TSChemsprayUP:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyChemicalWeapon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyChemicalWeapon
 	ReloadDelay: 55
 	Range: 3183
 	Warhead@LightChemicalWeapon: SpreadDamage
@@ -1658,7 +1673,7 @@ TSChemsprayUP:
 
 TSVisceroidSpray:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
+	Inherits@2: ^MediumChemicalWeapon
 	ReloadDelay: 25
 	Range: 1618
 	Warhead@LightChemicalWeapon: SpreadDamage
@@ -1676,8 +1691,8 @@ TSVisceroidSpray:
 
 TSVisceroidSprayUP:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyChemicalWeapon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyChemicalWeapon
 	ReloadDelay: 25
 	Range: 1618
 	Warhead@LightChemicalWeapon: SpreadDamage
@@ -1710,7 +1725,8 @@ TSVisceroidSprayUP:
 		InvalidTargets: Water
 
 TSCropBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	ReloadDelay: 50
 	Range: 1250
 	TargetActorCenter: true
@@ -1719,10 +1735,10 @@ TSCropBomb:
 		Acceleration: 0, 0, -8
 		Image: 120mm
 		Shadow: true
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 120000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Ship
 		Damage: 60
 	Warhead@2Eff: CreateEffect
@@ -1739,7 +1755,7 @@ TSCropBomb:
 
 TSCropBombChem:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyChemicalWeapon
+	Inherits@2: ^HeavyChemicalWeapon
 	ReloadDelay: 50
 	Range: 1250
 	TargetActorCenter: true
@@ -1784,7 +1800,7 @@ TSCropBombChem:
 
 TSLocustBombChem:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyChemicalWeapon
+	Inherits@2: ^HeavyChemicalWeapon
 	ReloadDelay: 38
 	Burst: 5
 	BurstDelays: 3
@@ -1831,11 +1847,11 @@ TSLocustBombChem:
 
 TSMutShotgun:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^MediumCannon
+	Inherits@5: ^SmallArms
+	Inherits@6: ^Chaingun
 	ReloadDelay: 32
 	Range: 3112
 	Report: DSDSHTGN.wav
@@ -1871,7 +1887,7 @@ TSMutShotgun:
 
 TSMutVulcanTurret:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 6
 	Range: 6272
@@ -1886,21 +1902,23 @@ TSMutVulcanTurret:
 		Damage: 1
 
 TSRaiderCarCannon:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 2
 	Range: 4475
 	Report: chaingn1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 TSBowlerCannon:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 5
 	Range: 6603
@@ -1915,7 +1933,9 @@ TSBowlerCannon:
 		Damage: 1
 
 TSWaspClaw:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 18
 	Burst: 2
 	BurstDelays: 0
@@ -1923,16 +1943,16 @@ TSWaspClaw:
 	Report: cygun1.aud
 	SoundVolume: 0.50
 	ValidTargets: Ground, Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Air
 
 TSMutApcCannon:
 	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^FlakWeapon
 	ReloadDelay: 12
 	Range: 6147
 	ValidTargets: Ground, Water, Air
@@ -1950,7 +1970,9 @@ TSMutApcCannon:
 	ValidTargets: Ground, Water, Air
 
 TSNomadGun:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 6
 	Range: 8301
 	Report: aacanon3.aud
@@ -1964,10 +1986,10 @@ TSNomadGun:
 		ContrailLength: 10
 		Speed: 10000
 	ValidTargets: Ground, Water
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 8000
 		ValidTargets: Ground, Water
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 		ValidTargets: Ground, Water
 
@@ -1984,7 +2006,9 @@ TSSniper:
 		Damage: 5
 
 TSGhostGun:
-	Inherits: ^LightChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Chem_Light
+	Inherits@fx: ^Effect_Chem_Light
 	ReloadDelay: 25
 	Range: 9557
 	Report: silencer.aud
@@ -2001,16 +2025,14 @@ TSGhostGun:
 		Width: 100
 		Speed: 10000
 		Inaccuracy: 0
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Light:
 		Damage: 20000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 
 TSChemGhostGun:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
+	Inherits@2: ^MediumChemicalWeapon
 	ReloadDelay: 25
 	Range: 9557
 	Report: silencer.aud
@@ -2041,18 +2063,20 @@ TSChemGhostGun:
 		Damage: 5
 
 MutAPRifle:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 8
 	Range: 5146
 	Report: jumpjet1.aud, gostgun1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 TSSergGun:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 8
 	Range: 5611
 	Report: cygun1.aud
@@ -2073,12 +2097,14 @@ TSSergGun:
 # same range/speed must price at exactly 250% (O 1.5x, P 2x, Q 4x).
 # MutAPRifle stays for its other users.
 forgotten_mutantsoldier_rifle:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
 	Range: 5000
 	ValidTargets: Ground, Water
 	Report: mgun2.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 8000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 4

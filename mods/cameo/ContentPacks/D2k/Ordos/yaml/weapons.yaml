@@ -1,12 +1,12 @@
-﻿OrdosCombatTankCannon:
+OrdosCombatTankCannon:
 	Inherits: ^D2K_Cannon
 	Range: 5230
 	ReloadDelay: 44
 	Projectile: Bullet
 		Speed: 523
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 
 HeavyOrdosCombatTankCannon:
@@ -15,17 +15,17 @@ HeavyOrdosCombatTankCannon:
 	ReloadDelay: 40
 	Projectile: Bullet
 		Speed: 600
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
 HeavyOrdosCombatTankRockets:
 	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^D2KRocket
 	ReloadDelay: 70
 	Range: 6000
 	Burst: 2
@@ -59,16 +59,16 @@ HeavyOrdosCombatTankRockets:
 		Damage: 2000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 2000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 
 120mm_td:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^D2K_Cannon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^D2K_Cannon
+	Inherits@4: ^TankDestroyerCannon
 	ReloadDelay: 72
 	Range: 8500
 	Report: d2ktd.wav
@@ -88,9 +88,9 @@ HeavyOrdosCombatTankRockets:
 		Damage: 7000
 	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 7
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 14000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 7
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 14000
@@ -99,9 +99,9 @@ HeavyOrdosCombatTankRockets:
 
 120mm_cobra:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^D2K_Cannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^D2K_Cannon
 	ReloadDelay: 80
 	Range: 7640
 	Report: KobraAttack.wav
@@ -113,9 +113,9 @@ HeavyOrdosCombatTankRockets:
 		ContrailEndWidth: 25
 		ContrailStartColor: FFFF88FF
 		ContrailEndColor: FF884422
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 30000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 30000
@@ -169,10 +169,10 @@ HeavyOrdosCombatTankRockets:
 
 eye_bomberguy:
 	Inherits: ^Grenade
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^HeavyBomb
 	ReloadDelay: 125
 	Range: 3905
 	Report: 15_UA05.wav, 15_UA00.wav, 15_UA01.wav
@@ -227,9 +227,9 @@ eye_bomberguy:
 
 D2K_155mm_turret:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^D2K_Cannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^D2K_Cannon
 	ReloadDelay: 74
 	Range: 10000
 	Report: MORTAR1.WAV
@@ -257,9 +257,9 @@ D2K_155mm_turret:
 		Damage: 12000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 12000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 5625
@@ -270,9 +270,9 @@ D2K_155mm_turret:
 
 Dune_SiegeMortar:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
-	Inherits: ^D2K_Cannon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^Grenade
+	Inherits@3: ^D2K_Cannon
+	Inherits@4: ^TankDestroyerCannon
 	ReloadDelay: 80
 	Range: 9920
 	MinRange: 1985
@@ -302,9 +302,9 @@ Dune_SiegeMortar:
 		Damage: 5000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 10000
@@ -320,8 +320,8 @@ Dune_SiegeMortar:
 
 D2K_Rocket_Trooper_AGOnly:
 	Inherits: ^Grenade
-	Inherits: ^RailgunWeapon
-	Inherits: ^D2K_Cannon
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^D2K_Cannon
 	ReloadDelay: 50
 	Range: 6252
 	Report: ROCKET1.WAV
@@ -351,17 +351,17 @@ D2K_Rocket_Trooper_AGOnly:
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 5
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water
 		Damage: 10000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 5
 
 D2K_Rocket_Trooper_AA:
 	Inherits: ^LightMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^D2KRocket
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^D2KRocket
 	ReloadDelay: 75
 	Range: 9716
 	ValidTargets: Air
@@ -384,17 +384,17 @@ D2K_Rocket_Trooper_AA:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 5
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 		Damage: 10000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 5
 
 D2K_APC_Rocket:
 	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^MediumMissile
+	Inherits@3: ^D2KRocket
 	ReloadDelay: 42
 	Range: 6500
 	Projectile: Missile
@@ -416,10 +416,10 @@ D2K_APC_Rocket:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 
@@ -429,9 +429,9 @@ D2K_APC_Rocket_AA:
 
 DeviatorMissile:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumMissile
-	Inherits: ^D2KMissile
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^D2KMissile
 	ReloadDelay: 98
 	Range: 7070
 	Report: MISSLE1.WAV
@@ -465,10 +465,10 @@ DeviatorMissile:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@Effect: CreateEffect
@@ -490,8 +490,8 @@ DeviatorMissile:
 	MinRange: 1415
 DeviatorMissile_Artillery:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: DeviatorMissile
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: DeviatorMissile
 	ReloadDelay: 150
 	Burst: 3
 	BurstDelays: 25
@@ -557,18 +557,17 @@ Wraith_ToxinMissiles:
 
 	MinRange: 1675
 contaminator_attack:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 20
 	Report: contaminator_attack_2.wav
 	Range: 2000
 	Projectile: InstantHit
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 10000
 		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
 
@@ -587,8 +586,8 @@ LeechJump:
 
 d2k_grenade:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyCannon
 	ReloadDelay: 60
 	Range: 6000
 	MinRange: 1200
@@ -651,8 +650,8 @@ d2k_grenade:
 
 Laboratory_Bioball:
 	Inherits: d2k_grenade
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^MediumChemicalWeapon
 	ReloadDelay: 42
 	Range: 6500
 	MinRange: 1300
@@ -694,11 +693,11 @@ Laboratory_Bioball:
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
@@ -747,14 +746,14 @@ Laboratory_Bioball:
 
 facedancer_grenade:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^D2KMissile
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^HeavyCannon
+	Inherits@7: ^LightMissile
+	Inherits@8: ^MediumMissile
+	Inherits@9: ^D2KMissile
 	ReloadDelay: 90
 	Range: 7250
 	MinRange: 1450
@@ -852,11 +851,11 @@ facedancer_grenade:
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageCalculationType: ClosestTargetablePosition
@@ -922,7 +921,9 @@ SaboDeath:
 			Concrete: 75
 
 HMGo:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 8
 	Burst: 9
 	BurstDelays: 2
@@ -930,16 +931,16 @@ HMGo:
 	-Report:
 	StartBurstReport: hmgo1.wav, hmgo2.wav
 	ValidTargets: Ground, Water, Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
 HMGo_upgrade:
 	Inherits: ^LaserWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	Inherits@2: HMGo
 	Report: LaserTankAttack.wav
 	-Projectile:
@@ -947,10 +948,10 @@ HMGo_upgrade:
 		Width: 55
 		ZOffset: 2047
 		Color: 00ffbb
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
@@ -967,22 +968,25 @@ HMGo_upgrade:
 		Damage: 1
 
 d2kChainGun:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 60
 	Burst: 5
 	BurstDelays: 2
 	Range: 6184
-	Report: MGUN2.WAV
+	-Report:
 	StartBurstReport: MGUN2.WAV
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 d2kChainGun_upgrade:
 	Inherits: ^LaserWeapon
 	Inherits@2: d2kChainGun
 	Report: LaserTankAttack.wav
+	-StartBurstReport:
 	-Projectile:
 	Projectile: LaserZap
 		Width: 55
@@ -995,7 +999,7 @@ d2kChainGun_upgrade:
 
 HMGstealth:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 33
 	Burst: 4
 	BurstDelays: 2
@@ -1018,8 +1022,8 @@ HMGstealth:
 
 ordos_autogunturret:
 	Inherits: ^HeavyCannon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
 	ReloadDelay: 22
 	Burst: 4
 	BurstDelays: 2
@@ -1045,17 +1049,14 @@ ordos_autogunturret:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Ricochet: CreateEffect
-		ImpactSounds: 2100richet1.wav, 2100richet2.wav
-		ValidTargets: Ground, Water, Air
 
 autogun_tank:
 	Inherits: ^D2KMissile
-	Inherits: ^HeavyCannon
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^HeavyAAWeapon
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^MediumMissile
+	Inherits@6: ^Chaingun
 	ReloadDelay: 24
 	Burst: 4
 	BurstDelays: 2
@@ -1063,10 +1064,10 @@ autogun_tank:
 	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Air
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@HeavyCannon: SpreadDamage
@@ -1131,15 +1132,17 @@ D2KAAMineExplosion:
 		ExplosionPalette: effect75alpha
 
 d2kCarryallChainGun:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 1
 	Range: 4000
 	StartBurstReport: MGUN2.WAV
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 ordos_airmine:
@@ -1172,9 +1175,9 @@ ordos_airmine:
 	MinRange: 410
 ordos_lasertank:
 	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^RailgunWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^MediumMissile
+	Inherits@3: ^RailgunWeapon
+	Inherits@4: ^LaserWeapon
 	ReloadDelay: 55
 	Range: 7275
 	Report: LaserTankAttack.wav
@@ -1217,7 +1220,9 @@ ordos_lasertank:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 
 d2k_chemgun:
-	Inherits: ^LightChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Chem_Light
+	Inherits@fx: ^Effect_Chem_Light
 	ReloadDelay: 75
 	Range: 5177
 	Report: chemtrooper_att.wav
@@ -1225,11 +1230,9 @@ d2k_chemgun:
 		Amplitude: 150
 		WaveLength: 300
 		Color: 88FF00
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Light:
 		Damage: 30000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 15000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
@@ -1315,10 +1318,10 @@ LMG_ordos_upgrade:
 		ZOffset: 2047
 		Color: 00ffbb
 	ValidTargets: Ground, Water, Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 
 light_inf_lmg_ordos_upgrade:
@@ -1331,16 +1334,16 @@ light_inf_lmg_ordos_upgrade:
 		ZOffset: 2047
 		Color: 00ffbb
 	ValidTargets: Ground, Water
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@LaserWeapon: SpreadDamage

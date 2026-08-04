@@ -442,7 +442,7 @@ World:
 		Factions: rubinelle, awwill, awlin, awbrenner, awisabella
 		BaseActor: mcv.rubinelle
 		SupportActors: awe1rb, awe1rb, awe1rb, awe1rb, awe1rb, awe1rb, awe1rb, awe1rb, awrecon, awaa, awltnk, awltnk
-		
+
 	StartingUnits@mcvonlyids:
 		Class: none
 		ClassName: MCV Only
@@ -528,7 +528,7 @@ World:
 		Factions: flaites
 		BaseActor: mcv.flaite
 		SupportActors: 315rtroop, 315rtroop, 315rtroop, 315rtroop, 315rtroop2, 315rtroop2, 315htrak, 315vulk, 315mtnk, 315mtnk
-		
+
 Player:
 	ExternalCondition@BuildingsOwned:
 		Condition: BuildingsOwned
@@ -1014,7 +1014,7 @@ Player:
 		Multiplier: 80
 		Prerequisites: selectcolin
 	FirepowerMultiplier@selectcolin:
-		Prerequisites: selectcolin
+		RequiresCondition: selectcolin
 		Modifier: 80
 	DamageMultiplier@selectcolin:
 		RequiresCondition: selectcolin || selectgrimm
@@ -1148,7 +1148,7 @@ Player:
 		Modifier: 120
 	ProducibleWithLevel@selectjess:
 		Prerequisites: selectjess
-		InitialLevels: 1	
+		InitialLevels: 1
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -1387,7 +1387,7 @@ Player:
 
 ########################################################
 #	MCV Market
-########################################################  
+########################################################
 
 MMAWORANGEMCV:
 	Inherits@MCV: mcv.orange
@@ -1396,7 +1396,7 @@ MMAWORANGEMCV:
 	Buildable:
 		BuildPaletteOrder: 200
 		Prerequisites: !mmorangestar
-	
+
 MMAWBLUEMOON:
 	Inherits@MCV: mcv.bluemoon
 	Tooltip:
@@ -1412,7 +1412,7 @@ MMAWYELLOWCOMET:
 	Buildable:
 		BuildPaletteOrder: 220
 		Prerequisites: !mmyellowcomet
-	
+
 MMAWGREENEARTH:
 	Inherits@MCV: mcv.greenearth
 	Tooltip:
@@ -1420,7 +1420,7 @@ MMAWGREENEARTH:
 	Buildable:
 		BuildPaletteOrder: 230
 		Prerequisites: !mmgreenearth
-	
+
 MMAWBLACKHOLE:
 	Inherits@MCV: mcv.blackhole
 	Tooltip:
@@ -1431,8 +1431,8 @@ MMAWBLACKHOLE:
 
 ########################################################
 #	AW Commanders
-########################################################                                                                                
-#	Orange Star             
+########################################################
+#	Orange Star
 selectandy:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
@@ -1597,7 +1597,7 @@ selectredstar:
 		Prerequisite: selectredstar
 	ProvidesPrerequisite@3:
 		Prerequisite: awclassicunit
-#	Blue Moon           
+#	Blue Moon
 selectolaf:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
@@ -1704,7 +1704,7 @@ selectwhitemoon:
 		Prerequisite: awbcopter2unlock
 	ProvidesPrerequisite@8:
 		Prerequisite: unlockawbggy
-#	Yellow Comet              
+#	Yellow Comet
 selectkanbei:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
@@ -1783,7 +1783,7 @@ selectgrimm:
 		Prerequisite: awselected
 	ProvidesPrerequisite@2:
 		Prerequisite: selectgrimm
-#	Green Earth            
+#	Green Earth
 selecteagle:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
@@ -1864,7 +1864,7 @@ selectjavier:
 		Prerequisite: awselected
 	ProvidesPrerequisite@2:
 		Prerequisite: selectjavier
-#	Black Hole & Bolt Guard                         
+#	Black Hole & Bolt Guard
 selectflak:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
@@ -2330,7 +2330,7 @@ selectcaulder:
 		Prerequisite: unlockawdevastator2
 ########################################################
 #	AW HQ & MCV
-########################################################          
+########################################################
 hq.orange:
 	GrantExternalConditionToOwner@BuildingsOwned:
 		Condition: BuildingsOwned
@@ -4601,7 +4601,7 @@ mcv.alliedn:
 		Image: awapc
 ########################################################
 #	AW Cities
-########################################################       
+########################################################
 awcity:
 	GrantExternalConditionToOwner@CitiesOwned:
 		Condition: CitiesOwned
@@ -4734,7 +4734,7 @@ awcity:
 		DockAngle: 256
 		DockOffset: 1,2
 	StoresResources:
-		Capacity: 5000 #2000                     
+		Capacity: 5000 #2000
 	GrantConditionOnPrerequisite@numberofcities2:
 		Prerequisites: numberofcities2
 		Condition: numberofcities2
@@ -4822,7 +4822,7 @@ awupgradecity:
 	Interactable:
 	KillsSelf:
 		RemoveInstead: True
-		
+
 awcitybm:
 	Inherits: awcity
 	Buildable:
@@ -4855,7 +4855,7 @@ awcityids:
 		Image: awcityids
 ########################################################
 #	AW Defence
-########################################################            
+########################################################
 awpipe:
 	Inherits: ^Wall
 	Valued:
@@ -4897,7 +4897,7 @@ awpipe:
 	DamageMultiplier@awupwall:
 		Modifier: 25
 		RequiresCondition: awupwall
-		
+
 awminicannon:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -5863,7 +5863,7 @@ awyard.lazurian:
 		Image: awyard
 ########################################################
 #	AW Hi Tech Buildings
-########################################################                        
+########################################################
 awlab:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
@@ -6278,7 +6278,7 @@ blackonyx.beam:
 	-WithMakeAnimation@4:
 	-WithDeathAnimation@3:
 	-WithDeathAnimation@4:
-	
+
 awstabilizer:
 	Inherits: ^BaseBuilding
 	HitShape:
@@ -6312,7 +6312,7 @@ awstabilizer:
 
 ########################################################
 #	AW Ground Units
-########################################################                                
+########################################################
 awdozer:
 	Inherits: ^Tank
 	Inherits@selection: ^SelectableEconomicUnit
@@ -7004,7 +7004,7 @@ awmtnk2:
 			awtasha: awmtnkids
 			awforsythe: awmtnkids
 			awgage: awmtnkids
-				
+
 awctnk:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -7283,7 +7283,7 @@ awdevastator:
 		DecorationBounds: 1280, 1280
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########              
+		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: AWTrackedVoiced
 	ProductionCostMultiplier@rubinelle:
@@ -8189,7 +8189,7 @@ awaa:
 		RequiresCondition: rank-veteran >= 4
 	FreeActor@Srank:
 		RequiresCondition: rank-veteran >= 4
-		Actor: awhaa	
+		Actor: awhaa
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -8355,7 +8355,7 @@ awapc:
 			awforsythe: awapcids
 			awgage: awapcids
 	Voiced:
-		VoiceSet: AWTrackedVoiced	
+		VoiceSet: AWTrackedVoiced
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -8363,7 +8363,6 @@ awapc:
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
-
 
 awarty:
 	Inherits: ^Tank
@@ -8643,7 +8642,7 @@ awaaarty2.famicon:
 		Prerequisites: ~selectredstar
 	RenderSprites:
 		Image: awaaarty2
-		
+
 awrocketl:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -8759,7 +8758,7 @@ awrocketl:
 			awforsythe: awrocketlids
 			awgage: awrocketlids
 	Voiced:
-		VoiceSet: AWWheeledVoiced	
+		VoiceSet: AWWheeledVoiced
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -8860,12 +8859,11 @@ awaaarty:
 			awkindle: awaaartybh
 			awkoal: awaaartybh
 	Voiced:
-		VoiceSet: AWWheeledVoiced	
+		VoiceSet: AWWheeledVoiced
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 6
-
 
 awntnk:
 	Inherits: ^Tank
@@ -9177,7 +9175,7 @@ awftnk:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Voiced:
-		VoiceSet: AWTrackedVoiced	
+		VoiceSet: AWTrackedVoiced
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -9510,7 +9508,7 @@ awrepairtnk:
 	RenderSprites:
 		Image: awrepairtnk
 	Voiced:
-		VoiceSet: AWTrackedVoiced	
+		VoiceSet: AWTrackedVoiced
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -9768,9 +9766,9 @@ awbombercozero:
 		Image: awbomber
 	Armament:
 		Weapon: GLToxinBombPurple
-########################################################     
+########################################################
 #	AW Infantry
-########################################################               
+########################################################
 awe1:
 	Inherits: ^Soldier
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -10163,7 +10161,7 @@ awangrymob3:
 
 ########################################################
 #	AW Aircraft
-########################################################            
+########################################################
 awduster:
 	Inherits: ^RAPlane
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -10269,7 +10267,7 @@ awduster:
 		CargoType: AWCarrier
 	ProductionCostMultiplier@selectbeast:
 		Multiplier: 80
-		Prerequisites: selectbeast	
+		Prerequisites: selectbeast
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -10390,9 +10388,9 @@ awhydro:
 			awtasha: awhydroids
 			awforsythe: awhydroids
 			awgage: awhydroids
-			
+
 	Passenger:
-		CargoType: AWCarrier	
+		CargoType: AWCarrier
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -10541,7 +10539,7 @@ awfighter:
 			awforsythe: awfighterids
 			awgage: awfighterids
 	Passenger:
-		CargoType: AWCarrier	
+		CargoType: AWCarrier
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -10683,7 +10681,7 @@ awattacker:
 			orangestar: awattacker
 			bluemoon: awattackerbm
 	Passenger:
-		CargoType: AWCarrier	
+		CargoType: AWCarrier
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -10846,14 +10844,13 @@ awbomber:
 			awgage: awbomberids
 	ProducibleWithLevel:
 		Prerequisites: selecteagle
-		InitialLevels: 1	
+		InitialLevels: 1
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 4
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
-
 
 awbomber.husk:
 	Inherits: ^PlaneHusk
@@ -10957,14 +10954,13 @@ awblackbomb:
 	Explodes:
 		Weapon: AWBlackBombExplode
 		EmptyWeapon: AWBlackBombExplode
-		RequiresCondition: !frozen	
+		RequiresCondition: !frozen
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 4
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
-
 
 awstealth:
 	Inherits: ^RAPlane
@@ -11042,13 +11038,12 @@ awstealth:
 		PauseOnCondition: cloak-force-disabled || base-reveal
 		IsPlayerPalette: True
 	Passenger:
-		CargoType: AWCarrier	
+		CargoType: AWCarrier
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
-
 
 awstealth.husk:
 	Inherits: ^PlaneHusk
@@ -11288,7 +11283,6 @@ awkirov:
 			awwaylon: awkirovnra
 			awdavis: awkirovnra
 
-
 awtcopter:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -11392,7 +11386,7 @@ awtcopter:
 		RequiresSelection: True
 ########################################################
 #	AW Naval
-########################################################          
+########################################################
 awcruiser:
 	Inherits: ^BoatUnit
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -11435,7 +11429,6 @@ awcruiser:
 	Selectable:
 		DecorationBounds: 1621, 1621
 	Inherits@EXT: ^ExternalConditions
-	DeliversCash:
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
@@ -11490,7 +11483,6 @@ awss:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Inherits@EXT: ^ExternalConditions
-	DeliversCash:
 	DetectCloaked:
 		DetectionTypes: Underwater
 		Range: 2c0
@@ -11617,7 +11609,6 @@ awss3:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Inherits@EXT: ^ExternalConditions
-	DeliversCash:
 	DetectCloaked:
 		DetectionTypes: Underwater
 		Range: 2c0
@@ -11659,7 +11650,6 @@ awbattleship:
 	Selectable:
 		DecorationBounds: 1621, 1621
 	Inherits@EXT: ^ExternalConditions
-	DeliversCash:
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
@@ -11831,7 +11821,6 @@ awcarrier:
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
-	DeliversCash:
 	Voiced:
 		VoiceSet: AlliesNavalVoice
 	RenderSprites:
@@ -11980,7 +11969,7 @@ awpiperunner:
 
 ########################################################
 #	AW Upgrades
-########################################################            
+########################################################
 awupduster:
 	Inherits: ^UpgradeTemplate
 	Tooltip:

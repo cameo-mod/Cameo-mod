@@ -13,36 +13,40 @@ OP2bombchassisTargeting:
 ####################################################################################################
 
 edenMachineGun:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 11
 	Burst: 3
 	BurstDelays: 4
 	Range: 4235
 	Report: mgun11.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 plymouthMachineGun:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 20
 	Burst: 7
 	BurstDelays: 3
 	Range: 4400
 	Report: mgun11.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 edenMobileLaser:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^LaserWeapon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 29
 	Range: 5280
@@ -81,7 +85,9 @@ edenMobileLaser:
 		Damage: 1
 
 edenMobileLaserTiger:
-	Inherits: ^MediumCannon
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	Inherits: edenMobileLaser
 	ReloadDelay: 16
 	Range: 7030
@@ -93,10 +99,10 @@ edenMobileLaserTiger:
 		SecondaryBeamWidth: 32
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -107,11 +113,11 @@ edenMobileDefenceLaser:
 
 edenRailgun:
 	Inherits: ^RailgunWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^LightChemicalWeapon
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^MediumCannon
+	Inherits@6: ^HeavyCannon
 	ReloadDelay: 80
 	Range: 7000
 	MinRange: 1400
@@ -175,13 +181,13 @@ edenDefenceRailgun:
 	MinRange: 1435
 eden_EMP:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyMissile
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^HeavyCannon
+	Inherits@6: ^MediumCannon
+	Inherits@7: ^MediumMissile
+	Inherits@8: ^HeavyMissile
 	ReloadDelay: 45
 	Range: 5500
 	MinRange: 1100
@@ -432,7 +438,7 @@ plymouthDefenceRPG:
 	MinRange: 1435
 plymouthSticky:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^TankDestroyerCannon
 	ValidTargets: Infantry, Vehicle
 	InvalidTargets: StickyFoamed
 	ReloadDelay: 90
@@ -478,8 +484,8 @@ plymouthSticky:
 
 plymouthStickyTiger:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumCannon
-	Inherits: plymouthSticky
+	Inherits@2: ^MediumCannon
+	Inherits@3: plymouthSticky
 	ReloadDelay: 45
 	Warhead@LightChemicalWeapon: SpreadDamage
 		Damage: 4000
@@ -490,10 +496,10 @@ plymouthStickyTiger:
 	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@MediumCannon: SpreadDamage
@@ -514,8 +520,8 @@ plymouthStickyTiger:
 
 plymouthStickyDefence:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyCannon
-	Inherits: plymouthStickyTiger
+	Inherits@2: ^HeavyCannon
+	Inherits@3: plymouthStickyTiger
 	ReloadDelay: 65
 	Range: 6656
 	Warhead@LightChemicalWeapon: SpreadDamage
@@ -527,16 +533,16 @@ plymouthStickyDefence:
 	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@MediumChemicalWeapon: SpreadDamage
@@ -622,13 +628,13 @@ PLYMineExplosive:
 #Also used by Eden
 plymouth_EMP:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyMissile
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^HeavyCannon
+	Inherits@6: ^MediumCannon
+	Inherits@7: ^MediumMissile
+	Inherits@8: ^HeavyMissile
 	ReloadDelay: 45
 	Range: 5500
 	MinRange: 1100

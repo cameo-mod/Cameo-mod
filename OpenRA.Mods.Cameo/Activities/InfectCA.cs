@@ -62,6 +62,12 @@ namespace OpenRA.Mods.CA.Activities
 				if (infectable == null || infectable.IsTraitDisabled || (infectable.Info.InfectorLimit > 0 && infectable.Infectors.Count >= infectable.Info.InfectorLimit))
 					return;
 
+				if (self.IsDead)
+				{
+					infectable.RevokeInfectingCondition(targetActor, self);
+					return;
+				}
+
 				w.Remove(self);
 
 				infectable.Infectors.Add(new InfectorCA(self, infector, info));
@@ -77,7 +83,7 @@ namespace OpenRA.Mods.CA.Activities
 				jousting = false;
 				infector.RevokeJoustCondition(self);
 			}
-			
+
 			if (target.Type != TargetType.Actor)
 				return;
 

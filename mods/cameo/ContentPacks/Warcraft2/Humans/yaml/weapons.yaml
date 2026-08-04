@@ -1,14 +1,14 @@
 wc2footmanslice2:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 15
 	Range: 1533
 	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 	Projectile: InstantHit
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 18000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 9000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 9
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
@@ -17,8 +17,8 @@ wc2footmanslice2:
 
 wc2_dwarf_Rifle:
 	Inherits: ^RailgunWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^MediumMissile
+	Inherits@3: ^TankDestroyerCannon
 	ReloadDelay: 60
 	Range: 6936
 	Report: aacanon3.aud
@@ -57,16 +57,16 @@ wc2_dwarf_Rifle:
 # 2-12 WC2 damage. 8 Base, 4 Pierce.
 
 wc2knightslice:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 12
 	Range: 1420
 	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 	Projectile: InstantHit
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 16000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
@@ -269,8 +269,8 @@ wc2paladinexorcism:
 
 wc2ballistaFire:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
 	ReloadDelay: 180
 	Range: 14450
 	MinRange: 2890
@@ -303,9 +303,9 @@ wc2ballistaFire:
 
 MortarTeamArtilleryShell:
 	Inherits: ^MediumCannon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^ShrapnelWeapon
 	ReloadDelay: 200
 	Range: 12000
 	MinRange: 2400
@@ -363,9 +363,9 @@ MortarTeamArtilleryShell:
 
 wc2gryphonFireVisible:
 	Inherits: ^LightMissile
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^TeslaChargedWeapon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^TeslaChargedWeapon
 	ReloadDelay: 100
 	Range: 4444
 	Report: wc2_axe.aud
@@ -436,14 +436,14 @@ wc2gryphonFireVisible:
 
 wc2mageFireballVisible:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumMissile
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^MediumCannon
+	Inherits@3: ^HeavyCannon
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^HeavyBomb
+	Inherits@7: ^MediumMissile
+	Inherits@8: ^Chaingun
+	Inherits@9: ^FlakWeapon
 	ReloadDelay: 80
 	Range: 8000
 	FirstBurstTargetOffset: 3072,0,0

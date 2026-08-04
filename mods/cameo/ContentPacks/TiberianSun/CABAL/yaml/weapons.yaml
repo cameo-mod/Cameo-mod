@@ -317,9 +317,9 @@ TSVulcanTower:
 	ReloadDelay: 26
 	Range: 6144
 	Report: chaingn1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
@@ -337,7 +337,9 @@ TSHSeekerLaunch:
 		ValidTargets: Ground, Water, Air
 
 eliminator_blades:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 25
 	Range: 2048
 	Burst: 2
@@ -345,11 +347,9 @@ eliminator_blades:
 	Report: pzehit00.aud
 	Projectile: Bullet
 		Speed: 1c682
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 12000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 6000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@Effect: CreateEffect
 		Explosions: poof
@@ -357,7 +357,9 @@ eliminator_blades:
 		ValidTargets: Ground, Water
 
 CabalBerserkerBlades:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 30
 	Range: 2048
 	Burst: 3
@@ -365,11 +367,9 @@ CabalBerserkerBlades:
 	Report: pzehit00.aud
 	Projectile: Bullet
 		Speed: 1c682
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 74000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 37000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 37
 	Warhead@Effect: CreateEffect
 		Explosions: poof
@@ -417,15 +417,17 @@ TSDevoutChainguns:
 		ValidTargets: Ground, Water, Air
 
 CabalEliminatorGatling:
-	Inherits: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	Report: chaingn1.aud
 	ReloadDelay: 5
 	Range: 5857
 	ValidTargets: Ground, Water, Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16
 	Warhead@Effect: CreateEffect
@@ -434,13 +436,15 @@ CabalEliminatorGatling:
 		ValidTargets: Ground, Water, Air
 
 CabalTarantulaCannon:
-	Inherits: ^MediumCannon
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	Report: tsgun4.aud
 	ReloadDelay: 48
 	Range: 5278
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 16000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 
 
@@ -619,9 +623,9 @@ CabalHeavyReaperTrap:
 
 CabalArtilleryWalkerShell:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumCannon
+	Inherits@4: ^HeavyCannon
 	Report: tnkfire2.aud
 	ReloadDelay: 64
 	Range: 11580
@@ -664,13 +668,13 @@ CabalArtilleryWalkerShell:
 
 CabalArtilleryWalkerShellUpgraded:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^TeslaChargedWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumCannon
+	Inherits@4: ^HeavyCannon
+	Inherits@5: ^MediumChemicalWeapon
+	Inherits@6: ^TeslaChargedWeapon
+	Inherits@7: ^MagicWeapon
+	Inherits@8: ^RailgunWeapon
 	Report: tnkfire2.aud
 	ReloadDelay: 64
 	Range: 11580
@@ -1451,7 +1455,9 @@ CabalAscendedRockets:
 		Damage: 3
 
 CabalRavagerPlasma:
-	Inherits: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
 	ReloadDelay: 30
 	Range: 3000
 	Report: plasma_robot_shoot.aud
@@ -1460,17 +1466,17 @@ CabalRavagerPlasma:
 		Blockable: false
 		Shadow: false
 		Image: cabal_greenplasma
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Medium:
 		Damage: 32000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 16000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 16
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
 CabalWidowPlasma:
-	Inherits: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
 	ReloadDelay: 30
 	Range: 5938
 	Report: plasma_robot_shoot.aud
@@ -1479,11 +1485,9 @@ CabalWidowPlasma:
 		Blockable: false
 		Shadow: false
 		Image: cabal_greenplasma
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Medium:
 		Damage: 32000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 16000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 16
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
@@ -2061,7 +2065,6 @@ CabalMagicNuke:
 		Radius: 0.35
 		Brightness: 1.3
 		Darkness: 0.85
-		MinimumExposure: 0.45
 	Warhead@Effect: CreateEffect
 		Explosions: magicnuke
 		ImpactSounds: nukexplo.aud
@@ -2164,7 +2167,9 @@ CabalCommandoPlasmaMk2Neutron:
 		ImpactSounds: expnew12.aud
 
 CabalRavagerPlasmaNeutron:
-	Inherits: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
 	ReloadDelay: 30
 	Range: 3000
 	Report: plasma_robot_shoot.aud
@@ -2173,11 +2178,9 @@ CabalRavagerPlasmaNeutron:
 		Blockable: false
 		Shadow: false
 		Image: cabal_plasmabullet
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Medium:
 		Damage: 32000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 16000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 16
 	Warhead@Effect: CreateEffect
 		Explosions: magicnuke_small
@@ -2185,9 +2188,9 @@ CabalRavagerPlasmaNeutron:
 
 CabalBeholderLaser:
 	Inherits: ^HeavyCannon
-	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: ^RailgunWeapon
+	Inherits@4: ^LaserWeapon
 	Report: obelcor3.aud
 	ReloadDelay: 50
 	Range: 2500

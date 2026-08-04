@@ -28,10 +28,31 @@ committed: `^MissileVehicleTemplate` + 10 reassignments (missile-MLRS family + N
 removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
 
 **Queue (priority order):**
+- **[P0 RESOLVED 2026-08-04] Empty-warhead-type NRE on load** — two typeless `Warhead@` nodes
+  (`RA2MirageGun` `Warhead@Effect:` in `mods/cameo/weapons/redalert2.yaml`,
+  `TSSAPCMissiles` `Warhead@GrenadeFriendlyFire:` in `mods/cameo/weapons/tiberiansun.yaml`)
+  crashed boot (`NullReferenceException` in `WeaponInfo.LoadWarheads`, abstract `Warhead` base
+  instantiated). Fixed by giving each node its concrete type (`CreateEffect` / `SpreadDamage`).
+  New regression audit `tools/audit/audit_empty_warheads.py` sweeps the full resolved ruleset
+  (4,202 weapons incl. `^templates`): 0 remaining. Boot-gate PASSED (menu `PostWorldLoaded`,
+  no new exception log). `--check-yaml` does NOT catch this class — run the audit after bulk
+  warhead edits. See `docs/audit/SUMMARY.md` § "Empty warhead type NRE (2026-08-04)".
+0. **[DONE 2026-08-01, `59c77f444`] Armor normalization** — armor is now a per-CLASS property (single
+   source in `^<Class>Template`). Fixed 3 templates (MBT→Heavy, HighTechTank→Superheavy,
+   LineBreaker→Superheavy) + stripped 215 flat per-actor `Armor: Type:` overrides + dropped stale Medium
+   from `^CombatTank`. Verified 273/274 class vehicles resolve to class armor; boot-gated. **OPEN items
+   left for later:** (a) `wc2_humans_paladin` is tagged `line_breaker` but is a vehicle inheriting the
+   *infantry* `wc2_humans_knight` — suspected mis-tag, resolves Medium not Superheavy; re-classify in a
+   tagging pass. (b) 4 conditional-armor actors intentionally KEPT their `Armor: RequiresCondition:`
+   deploy/shield swaps and were NOT normalized: `terran_siegetank` (Heavy), `terran_matador` (Medium),
+   `td_gdi_defenserig` (Superheavy — already correct), `cabal_ravager` (Plate) — decide per-unit whether
+   the base-state armor should match class.
 1. **[BLOCKED on maintainer confirm + `--confirm`] Apply VEHICLE stats** — once the REVISION table is
    confirmed: baselines → `apply_balance --confirm` (fit_class scales members 0.5–4.0×, verifier 2.5×) →
-   armor normalization → self-heal Step → epic 4×HP + MonsterTank DPS→10000 → re-extract → audits + BOOT →
-   commit yaml+ledger. THEN **infantry** (build the same big class table first, then apply).
+   self-heal Step → epic 4×HP + MonsterTank DPS→10000 → re-extract → audits + BOOT →
+   commit yaml+ledger. THEN **infantry** (build the same big class table first, then apply). NOTE: the
+   HP/Speed/Cost/DPS restat of the 13 baselines + per-member synthesis is still pending here; DPS/range
+   are blocked on the weapon/cannon rebuild (#4).
 2. **[L] Regression sweep** — review all commits since ~2026-07-24; hunt fluent/description-reference
    breakages like the RA1-Soviet upgrade regression (broke in `53fb10725`, fixed `f68a01833`). Pattern:
    renames that update Fluent keys but leave live `Buildable.Description` refs pointing at the old key.
@@ -39,12 +60,75 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    and docs; propose merge/generalize/delete plan. NO deletes without maintainer sign-off.
 4. **[M] New weapon templates** (AFTER vehicles) — kill warhead-mixing, **HARD LIMIT 2 inherits/weapon**
    (special >2 only if justified, bar TBD); then weapon-class pipeline + unit↔weapon binding. Maintainer
-   names them + I propose. See [[cameo-weapon-structure-rules]].
+   names them + I propose. See [[cameo-weapon-structure-rules]] + [[cameo-weapon-ordering-law]].
+   DESIGNED + SIGNED OFF 2026-08-01/02 (survives /compact via docs+memory): two-level ordering law
+   (ARMOR_SYSTEM "PROFILE construction" + `cameo-weapon-ordering-law`); 4-dimensional differentiation
+   model + flat/% orthogonal axis + Super tier + AoE-FF rule + CORRECTED %-warhead
+   (WEAPON_TYPE_SYSTEM §13 + `cameo-weapon-differentiation`). `gen_weapon_template.py` rebuilt —
+   **55 templates**, unified `^<Family>_<Level>` naming, modes sloped/FLAT(Sonic)/PCT(Magic):
+   Bullet/CannonAP/CannonHE/MissileAP/HE/AA/Flak/Laser/Prism/Flame/Chemical/Melee/Arrow/Demolition/
+   Concussion/Sonic (L/M/H) + Railgun/Tesla (Heavy) + TeslaCharged/Nuclear (Super, WC1.5) +
+   Magic (%-equalizer, ground-only). ✅ **SPLICED + BOOT-GATED 2026-08-02**: the 55 templates now live
+   ABOVE the `DO NOT INHERIT` divider in `weapons.yaml` (replacing the 6 stale provisional
+   `^*Demolition`/`^*Concussion`, which carried the old `Wood>Concrete>Steel` building bug); the 55
+   `^<Family>_<Level>` WeaponClass scalars are recorded in `docs/balance/weapon_classes.yaml`. Verified:
+   key-set diff = only 6 provisional removed / 55 added, rest byte-identical; all weapon audits green;
+   game reached main menu (`PostWorldLoaded`, no new exception log). Old bespoke templates
+   (`^Grenade`/`^ShrapnelWeapon`/`^HeavyBomb`/`^SmallArms`/etc.) intentionally KEPT until repoint.
+   **GENERATOR RECONCILED 2026-08-04** (A1 of BALANCE_MEGAPLAN) — `gen_weapon_template.py` now emits
+   `^Warhead_<Family>_<Level>` naming + `AreaDamage` main + universal baked FF (`Ally, Neutral, Enemy` +
+   `FriendlyFireDamage/Spread 50`) + `_Percentage` suffix, matching the swept/converted templates in
+   `weapons.yaml`. Regenerating is now a no-op diff against the file. Fixed `AOE_FAMILIES` `NameError`
+   (leftover from removed `aoe` param). Spot-verified Bullet + Tesla templates match byte-for-byte.
+   **REPOINT REFRAMED AS THE FULL 3-WAY SPLIT (#4b), maintainer 2026-08-02.** A bare reparent onto the
+   warhead-only families is UNSAFE: survey found 392/437 single-inherit weapons override a warhead by the
+   OLD key (`Warhead@SmallArms:` → orphaned/double-fire) + 253 rely on the old template's bundled FX (go
+   silent). Root cause: old templates are FULL-STACK; the 55 new families are warhead-only BY DESIGN. So
+   the repoint = build the projectile + effect layers first, then retrofit weapons to the 4-inherit model.
+   Progress (docs: `WEAPON_3WAY_SPLIT.md`):
+   - ✅ **Layer 2 (PROJECTILE) + Layer 3 (EFFECT) libraries BUILT + SPLICED + BOOT-GATED 2026-08-02** —
+     `gen_projectiles.py` (24 `^Projectile<Family>_<Level>`) + `gen_effects.py` (27 `^Effect<Family>_<Level>`),
+     extracted verbatim from the 30 old full-stack templates, additive/0-usage above the divider. Boot OK.
+   - ✅ **Warhead FF twins BUILT + BOOT-GATED 2026-08-02** (`956cf1ecb`) — 19 FriendlyFire twins for the
+     7 AoE families (Demolition/Concussion/Flame/Chemical/Nuclear/Sonic/Melee). ExtraDamage twin (energy)
+     stays per-weapon (bespoke +vs-shield). All 3 layers now exist (55 wh + 24 proj + 27 fx).
+   - **RETROFIT Phase A (SmallArms/Chaingun pilot) — IN PROGRESS 2026-08-02.** Repoint weapons to
+     `Inherits@wh + @proj + @fx`, renaming `Warhead@<Old>` keys → new key while **PRESERVING each
+     weapon's existing on-grid `Damage` verbatim** (damage law = 2000-grid, all mains identical, fine-tune
+     ONLY via one unconditional actor `FirepowerMultiplier` — DESIGN.md §nice-number). Handle INTERMEDIATE
+     templates (`^RA2Chaingun`→`^Chaingun`). Pilot = **SmallArms→Bullet_Light + Chaingun→Bullet_Medium**,
+     boot-gate, then roll out; energy families in a small ExtraDamage-aware pass; **609 MIXED = Phase B**
+     kill-mixing (≤2 warheads, honor the exception allow-list — Dune 3-cannon, Siege Tank/Engine).
+     **Bullet_Heavy → the Pulverizer mecha** (Asian Alliance, currently mixed → Phase B). Then delete the
+     30 orphaned old templates + their `weapon_classes.yaml` rows. This unblocks the vehicle DPS restat (#1).
+     **Phase A progress (2026-08-02):** `tools/archive/retrofit_v3.py` repointed ~130 single-inherit
+     weapons from `^SmallArms`→`^Bullet_Light`/`^ProjectileBullet_Light`/`^EffectBullet_Light` and
+     `^Chaingun`→`^Bullet_Medium`/`^ProjectileBullet_Medium`/`^EffectBullet_Medium`, including intermediate
+     templates (`^RA2SmallArms`, `^RA2Chaingun`, `^RA2MG`, `^TSMG`, `^SteelChaingun`). Warhead override
+     keys renamed (`Warhead@SmallArms`→`Warhead@Bullet_Light`, `Warhead@Chaingun`→`Warhead@Bullet_Medium`,
+     etc.). Dual-inherit weapons skipped (Phase B). `Report: gun8.aud` added to `^Bullet_Light` and
+     `^Bullet_Medium` to preserve default sound from old templates. `check-yaml` verified: no new
+     retrofit-related errors. **REMAINING:** boot-gate, then roll out to remaining weapon families.
+   - **[FUTURE, reason later] SPREAD REBALANCE** (maintainer 2026-08-02) — spreads must be UNIQUE per weapon
+     but balanced so **`Damage × Spread ≈ constant`** (inverse trade); a small spread MUST carry a unique
+     extra effect (energy's +vs-shield chip is the model). Folded into the restat; do NOT hand-tune yet.
+4b. **[L, FUTURE] 3-WAY weapon-template split** (maintainer 2026-08-02) — decompose every weapon into
+   THREE independent composable templates: (1) WARHEAD/weapon-class (Versus+damage — the §12 families
+   already ARE this layer, projectile/effect-agnostic by design), (2) PROJECTILE (speed/homing — so a
+   fast projectile can carry a heavy warhead), (3) EFFECTS (impact/muzzle/trail/sound). MASSIVE:
+   retrofitting thousands of inline weapons + the 2-inherit rule must widen to 3 (warhead+projectile+
+   effects). Best folded INTO the repoint pass (#4) rather than a separate sweep, since that already
+   touches every weapon. Not quick — deferred.
 5. **Weapons-hygiene batch** — folds into #4 (also fix the duplicate `227mm` weapon def in
    `weapons/tiberiandawn.yaml` vs `weapons/missiles.yaml`).
+6. **[L] Actor-to-actor inheritance audit (DEFERRED, maintainer 2026-07-31)** — prefer `^Templates`
+   over `Inherits: <actor>` for ContentPack self-containment. **199 existing instances reviewed &
+   deemed fine/grandfathered** (116 = RA2 civ-terrain `ra2ct*`; ~83 variant/husk: `*mkii`←base,
+   `ifv_*`←ifv, `E1`←minigunner, badger family, WC2 towers). NOT a must-fix — do it as its own pass
+   later; resolution = inline (cross-pack/one-off) or hoist to `^Template` (same-pack). Memory:
+   [[cameo-no-actor-inheritance]]. Audit cmd in the memory. Don't stop pipeline work for it.
 
-**ENGINE workflow (Blackrobe 2026-07-31):** `cameo-mod/engine` is a git **submodule → origin
-`Cameo-mod/OpenRA`**, whose **main branch is `cameo-engine`**. Engine updates: branch off `cameo-engine`;
+**ENGINE workflow (Blackrobe 2026-07-31):** `cameo-mod/engine` is a git **submodule (a working clone of `origin Cameo-mod/OpenRA`)**, whose **main branch is `cameo-engine`** — i.e. the "cameo-engine dev clone" referenced in `.windsurf/rules/start-protocol.md`. Engine updates: branch off `cameo-engine`;
 **MIRROR changes both ways** (`cameo-engine` ↔ `cameo-mod/engine`); rebuild before the boot gate. Memory:
 `cameo-engine-submodule`.
 
@@ -223,15 +307,38 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `^default.alien_mob` → `^default_alien_mob` mod-wide (76 files, 1183 replacements,
   commit `7f704c981`). `unit_upgrade` already fixed 2026-07-22. No dotted husk templates
   remain (all ground husks removed in prior commit). Boot-gate clean.
-- [x] **Engine 910e50de → 2cfb751694 → ba153be0c6 migration** — engine pin
-  updated to `ba153be0c63b66a9e33b4ebd1f262768ff949e13` (2026-07-30, fixes
-  cargo pips showing 0). The stricter parser issues from the earlier
-  `910e50de` bump were fixed 2026-07-22 (4 template Description indents →
-  fluent keys, `unit_upgrade_template` rename). Current engine is clean;
-  master boots. If a future engine bump surfaces new parser rejections,
-  fix as found (master must always boot).
+- [x] **Engine 910e50de → 2cfb751694 → ba153be0c6 → 1f71ccde9 migration** — engine pin
+  updated to `1f71ccde90c1194fe908702f2e915807b2f0f3fd` (2026-07-31, fixes
+  `InvalidOperationException` crash in `ClassicProductionQueueProperties` when
+  an actor with no production queue is produced via Lua). Previous pin
+  `ba153be0c6` (2026-07-30, fixes cargo pips showing 0). The stricter parser
+  issues from the earlier `910e50de` bump were fixed 2026-07-22 (4 template
+  Description indents → fluent keys, `unit_upgrade_template` rename). Current
+  engine is clean; master boots. If a future engine bump surfaces new parser
+  rejections, fix as found (master must always boot).
 
 ## P0 — Crashes (always first)
+
+- [x] **P0 CRASH: InvalidOperationException in ClassicProductionQueueProperties**
+  (2026-07-31, fixed): `System.InvalidOperationException: Sequence contains no
+  elements` at `ProductionProperties.cs:line 226` —
+  `GlobalProductionHandler` calls `.First()` on `BuildableInfo.Queue`,
+  crashing when an actor with no production queue is produced (e.g. via
+  Lua `Actor.Create` on survival maps). Engine fix in
+  `cameo-engine` commit `1f71ccde90`: replaced `.First()` with
+  `.FirstOrDefault()` + null guard in `GlobalProductionHandler`,
+  `Build()`, and `IsProducing()`. `mod.config` updated to
+  `1f71ccde90c1194fe908702f2e915807b2f0f3fd`. Boot-gate passed (menu
+  reached, 0 new exceptions).
+- [x] **P0 CRASH: InvalidOperationException in InfectCA.OnEnterComplete**
+  (2026-08-02, map Terra Cotta): `Attempted to get trait from destroyed
+  object (ra2dron 521 (not in world))` at `TraitDictionary.CheckDestroyed`
+  called from `World.Remove` → `InfectCA.OnEnterComplete` frame-end task.
+  The infector actor (`self`) was already disposed by the time the
+  frame-end task ran, so `w.Remove(self)` crashed when iterating
+  `INotifyRemovedFromWorld` traits. Fix: added `self.IsDead` guard before
+  `w.Remove(self)` in `OpenRA.Mods.Cameo/Activities/InfectCA.cs` — if
+  dead, revoke `BeingInfectedCondition` on target and return early.
 
 - [x] Voice-set rename crashes (`1616a26d2`); pink menu (`e956d2280`);
   boot crashes crab-junk/shadowteam/stale-DLL (`28ae47612`). LAW:
@@ -594,7 +701,7 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   (design 2026-07-17): `ActorStatValues.Upgrades` maximum expanded from 5 to 10.
   Every unit must list all faction upgrades that affect it; team upgrades from
   other factions must never appear. Applied to `ra1_soviets_monstertank`.
-- [x] **RULE: Promotion-unit prerequisite formula** — documented in DESIGN.md §18:
+- [x] **RULE: Promotion-unit prerequisite formula** — documented in DESIGN.md §15:
   `Buildable.Prerequisites: ~productionbuilding, techbuilding, ~promotion`.
   The `~promotion` token hides the unit until the promotion is bought; tech
   buildings disable but do not hide. Applied the `~promotion` change to ~144
@@ -610,7 +717,7 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
 - [x] **All-faction promotion construction-yard gates restored** — corrected an
   earlier mistake: promotion actors MUST keep their `~constructionyard`
   prerequisite. Re-added `~constructionyard` to all promotion actors across all
-  factions and updated `tools/audit/audit_promotion_gating.py` and DESIGN.md §18
+  factions and updated `tools/audit/audit_promotion_gating.py` and DESIGN.md §15
   to enforce this rule. Promotion-units themselves still use
   `~productionbuilding, techbuilding, ~promotion`.
 - [x] **Yuri Mastermind turret attack** — added missing `AttackTurreted:` trait to
@@ -1605,7 +1712,7 @@ All other factions have a single, thematically appropriate wall type.
   `RA2KirovBomb_nuclear_Elite`→`RA2KirovBomb_nuclear_E`, `CuteKirovBombElite`→`CuteKirovBombE`.
   Remaining 44 are doctrine variants (`_rad`/`_fire`/`_tesla`), upgrade combos,
   or gatling spin-ups — intentionally non-standard. Audit tool:
-  `tools/audit/audit_elite_naming.py`.
+  `tools/audit/audit_weapon_suffixes.py` (X1 section).
   **NOTE (2026-07-16):** The `E` suffix convention has been superseded —
   ALL elite weapons must now use `_elite` per DESIGN.md §16.3. The renames
   done here will need to be re-done as `<base>_elite` in WEAPON-SUFFIX-ELITE.
@@ -1715,7 +1822,7 @@ All other factions have a single, thematically appropriate wall type.
   (d) Combine sub-images unique to one actor are renamed to
       `<actor_id>_<descriptive_suffix>.<ext>`,
   (e) inherited template defaults are left untouched.
-  Use `tools/rename/rename_map_<faction>.yaml` + `tools/rename/apply.py`.
+  Use `tools/rename/rename_map_<faction>.yaml` + `tools/rename/safe_rename.py`.
   Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
   Update `.oramap` files with `tools/fix-oramap.ps1` if needed.
   Effort: L (multi-session, ~18,500 asset files across all factions).
@@ -1733,7 +1840,7 @@ All other factions have a single, thematically appropriate wall type.
   PascalCase `^` names. Elite variants append `_elite`, EMP variants
   append `_EMP`, AA variants append `_AA`, upgraded variants append
   `_upgraded`. Weapons shared across factions (in Shared/ packs) stay as-is.
-  Use `tools/rename/rename_map_<faction>.yaml` + `tools/rename/apply.py`.
+  Use `tools/rename/rename_map_<faction>.yaml` + `tools/rename/safe_rename.py`.
   Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
   Effort: L (multi-session). See DESIGN.md §1 "Weapon names must include
   the full actor id as a prefix".
@@ -1795,7 +1902,7 @@ All other factions have a single, thematically appropriate wall type.
   non-standard remnants).
   **Follow-up** (2026-07-31): Renamed 17 remaining deprecated `E`-suffix
   weapons missed by the first pass (33 replacements across 15 files) via
-  `tools/rename/rename_elite_E_suffix.py`. X4 dropped 19→2 (only `HE` =
+  `tools/archive/rename_elite_E_suffix.py` (one-time, archived). X4 dropped 19→2 (only `HE` =
   High Explosive false positives remain). Boot-gated, O2=0, V3=0.
 
 - [x] **WEAPON-SUFFIX-EMP: Standardize EMP weapon names to _EMP suffix**

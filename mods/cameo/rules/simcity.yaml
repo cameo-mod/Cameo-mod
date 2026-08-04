@@ -132,7 +132,7 @@ SimCityBuildingLevelUp:
 
 CITYMCV:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^Vehicle
+	Inherits@2: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@EXT: ^ExternalConditions
 	Inherits@mcv: ^MCV
@@ -186,7 +186,7 @@ CITYMCV.bot:
 
 CITYHARVESTER:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^Vehicle
+	Inherits@2: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@EXT: ^ExternalConditions
 	Inherits@harv: ^Harvester
@@ -260,8 +260,6 @@ CITYTRUCKXXL:
 		Cost: 2000
 	Tooltip:
 		Name: Money Truck XXL
-	DeliversCash:
-		PlayerExperience: 50
 	SpawnActorOnDeath:
 		Actor: moneycrate.large
 	ProducibleWithLevel:
@@ -271,7 +269,7 @@ CITYTRUCKXXL:
 
 CITYAMBULANCE:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^Vehicle
+	Inherits@2: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@MAYORCALL: ^ExternalConditionsMayorCall
 	Inherits@EMP: ^TurretEMP
@@ -317,7 +315,7 @@ CITYAMBULANCE:
 
 CITYFIRETRUCK:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^Tank
+	Inherits@2: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@MAYORCALL: ^ExternalConditionsMayorCall
@@ -376,7 +374,7 @@ CITYFIRETRUCK:
 		RequiresSelection: true
 CITYPOLICECAR:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^Tank
+	Inherits@2: ^Tank
 	Inherits@GAINSEXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@MAYORCALL: ^ExternalConditionsMayorCall
@@ -484,7 +482,7 @@ CITYMAYOR:
 	GrantExternalConditionToOwner@BuildingsOwned:
 		Condition: BuildingsOwned
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQ: ^CPQCondition
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -585,7 +583,7 @@ CITYMAYOR:
 
 CITYR:
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@shape: ^2x2Shape
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -629,7 +627,7 @@ CITYR:
 
 CITYC:
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@shape: ^2x2Shape
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -687,7 +685,7 @@ CITYC:
 
 CITYI:
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@shape: ^2x2Shape
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -743,7 +741,7 @@ CITYI:
 
 CITYFD:
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@FIRECALL: ^FireCall
@@ -831,7 +829,7 @@ CITYFD:
 
 CITYPD:
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@POLICECALL: ^PoliceCall
@@ -981,7 +979,7 @@ CITYHARBOR:
 
 CITYCOAL:
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@power: ^PowerPlant
 	AcceptsDeliveredExperience:
 		ValidTypes: building
@@ -1009,10 +1007,9 @@ CITYCOAL:
 	Power:
 		Amount: 100
 	
-
 CITYNUKE:
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@power: ^PowerPlant
 	AcceptsDeliveredExperience:
 		ValidTypes: building
@@ -1040,7 +1037,6 @@ CITYNUKE:
 	Power:
 		Amount: 300
 	
-
 CITYAIRPORT:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1222,7 +1218,6 @@ CITYLIBRARY:
 	Power:
 		Amount: -10
 	
-
 CITYBANK:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1356,7 +1351,6 @@ CITYSTADIUM:
 	RevealsShroud:
 		Range: 4c0
 	
-
 CITYEXPO:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1383,7 +1377,6 @@ CITYEXPO:
 	RevealsShroud:
 		Range: 4c0
 	
-
 CITYSTATION:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1470,7 +1463,6 @@ CITYMARIO:
 	RevealsShroud:
 		Range: 4c0
 	
-
 CITYCASINO:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1530,7 +1522,6 @@ CITYCASINO:
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 50
 	
-
 CITYWINDMILL:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1556,7 +1547,6 @@ CITYWINDMILL:
 	RevealsShroud:
 		Range: 4c0
 	
-
 CITYAMUSE:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1582,7 +1572,6 @@ CITYAMUSE:
 	RevealsShroud:
 		Range: 4c0
 	
-
 CITYZOO:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1647,7 +1636,7 @@ CITYZOO:
 
 CITYFIREFIGHTER:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^CITYINFANTRY
+	Inherits@2: ^CITYINFANTRY
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@MAYORCALL: ^ExternalConditionsMayorCall
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -1688,7 +1677,7 @@ CITYFIREFIGHTER:
 		VoiceSet: FireFighterVoice
 CITYPOLICEOFFICER:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^CITYINFANTRY
+	Inherits@2: ^CITYINFANTRY
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@MAYORCALL: ^ExternalConditionsMayorCall
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -2043,7 +2032,7 @@ CITYSWAT:
 		
 CITYSWAT1:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^CITYINFANTRY
+	Inherits@2: ^CITYINFANTRY
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@BPV: ^SimCity_BPV
@@ -2112,7 +2101,7 @@ CITYSWATS:
 
 CITYSWATGL:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^CITYINFANTRY
+	Inherits@2: ^CITYINFANTRY
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@BPV: ^SimCity_BPV

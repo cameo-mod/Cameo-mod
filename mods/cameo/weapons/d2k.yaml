@@ -26,7 +26,9 @@
 #######################################
 
 Debris:
-	Inherits: ^Grenade
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Explosion_Light
 	ReloadDelay: 60
 	Range: 2816
 	Report: d2khc.wav
@@ -40,13 +42,10 @@ Debris:
 		Shadow: true
 		BounceCount: 3
 		BounceRangeModifier: 20
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 16000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 8000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 8
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Smudge: LeaveSmudge
@@ -60,7 +59,9 @@ Debris:
 		Damage: 300
 
 Debris2:
-	Inherits: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	Inherits: Debris
 	Projectile: Bullet
 		Image: shrapnel2
@@ -68,17 +69,13 @@ Debris2:
 		TrailImage: small_trail
 		TrailPalette: effect75alpha
 		TrailInterval: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 16000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 8
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 16000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_small_napalm
@@ -91,17 +88,13 @@ Debris3:
 	Projectile: Bullet
 		Image: shrapnel3
 		TrailImage: small_trail2
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 4
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 8000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 1350
@@ -118,7 +111,9 @@ Debris4:
 ################################
 
 ^D2K_Cannon:
-	Inherits: ^MediumCannon
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	Report: MEDTANK1.WAV
 	Projectile: Bullet
 		Speed: 640
@@ -135,7 +130,7 @@ Debris4:
 		ExplosionPalette: effect75alpha
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1000
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
 
 80mm_A:
@@ -197,8 +192,8 @@ Emperor_Sardaukar_E:
 
 DevBullet:
 	Inherits: ^D2K_Cannon
-	-Warhead@MediumCannon:
-	-Warhead@MediumCannonPercentage:
+	-Warhead@CannonHE_Medium:
+	-Warhead@CannonHE_Medium_Percentage:
 	ReloadDelay: 100
 	Range: 6666
 	Report: TANKHVY1.WAV
@@ -244,9 +239,9 @@ PlasBullet:
 
 D2K_155mm:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^D2K_Cannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^D2K_Cannon
 	ReloadDelay: 74
 	Range: 10000
 	Report: MORTAR1.WAV
@@ -274,9 +269,9 @@ D2K_155mm:
 		Damage: 12000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 12000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 5625
@@ -294,7 +289,9 @@ D2K_SiegeQuad:
 		Speed: 228
 
 ^D2KRocket:
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Missile_Heavy
 	ReloadDelay: 50
 	Range: 5000
 	Report: ROCKET1.WAV
@@ -392,8 +389,8 @@ D2K_Rocket_Buggy:
 
 D2K_Rocket_Trooper:
 	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^MediumMissile
+	Inherits@3: ^D2KRocket
 	ReloadDelay: 64
 	Range: 6185
 	Projectile: Missile
@@ -415,10 +412,10 @@ D2K_Rocket_Trooper:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 
@@ -765,9 +762,9 @@ facedancer_attack:
 
 LeechSpit:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^LightMissile
+	Inherits@3: ^SmallArms
+	Inherits@4: ^ArrowWeapon
 	ReloadDelay: 30
 	Range: 5230
 	Report: tx_leech_attack_confirm_1.wav
@@ -1289,7 +1286,7 @@ D2K_Personal_Shield_Impact:
 
 LMG:
 	Inherits: ^Chaingun
-	Inherits: ^SmallArms
+	Inherits@2: ^SmallArms
 	ReloadDelay: 20
 	Range: 4448
 	Report: gun11.aud
@@ -1304,7 +1301,7 @@ LMG:
 
 light_inf_lmg:
 	Inherits: ^Chaingun
-	Inherits: ^SmallArms
+	Inherits@2: ^SmallArms
 	ReloadDelay: 20
 	Range: 5475
 	Report: gun11.aud
@@ -1319,9 +1316,9 @@ light_inf_lmg:
 
 LMG_upgrade:
 	Inherits: ^HeavyCannon
-	Inherits: ^Chaingun
-	Inherits: ^SmallArms
-	Inherits: ^HeavyMachineGunProjectile
+	Inherits@2: ^Chaingun
+	Inherits@3: ^SmallArms
+	Inherits@4: ^HeavyMachineGunProjectile
 	ReloadDelay: 20
 	Range: 4448
 	Report: gun11.aud
@@ -1347,9 +1344,9 @@ LMG_upgrade:
 
 light_inf_lmg_upgrade:
 	Inherits: ^HeavyCannon
-	Inherits: ^Chaingun
-	Inherits: ^SmallArms
-	Inherits: ^HeavyMachineGunProjectile
+	Inherits@2: ^Chaingun
+	Inherits@3: ^SmallArms
+	Inherits@4: ^HeavyMachineGunProjectile
 	ReloadDelay: 20
 	Range: 4500
 	Report: gun11.aud
@@ -1516,7 +1513,7 @@ Fremen_RPG:
 	MinRange: 975
 HMG:
 	Inherits: ^Chaingun
-	Inherits: ^SmallArms
+	Inherits@2: ^SmallArms
 	ReloadDelay: 20
 	Range: 3072
 	Report: 20MMGUN1.WAV
@@ -1885,23 +1882,20 @@ PhoenixRocketShrapnel:
 		Acceleration: 3
 		RangeLimit: 33333
 		Inaccuracy: 333
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 ixian_airdrone:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyBomb
-	Inherits: ^D2KMissile
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^HeavyBomb
+	Inherits@6: ^D2KMissile
 	ReloadDelay: 132
 	Range: 6500
 	Burst: 4
@@ -1967,12 +1961,11 @@ ixian_airdrone:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		ValidRelationships: Neutral, Enemy
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -2211,7 +2204,9 @@ d2k_sard_crossbow:
 ###################################################
 
 ^OCannon:
-	Inherits: ^MediumCannon
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 50
 	Range: 4096
 	Report: MEDTANK1.WAV
@@ -2219,9 +2214,9 @@ d2k_sard_crossbow:
 		Speed: 562
 		Inaccuracy: 380
 		Image: 120mm
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 5350
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
@@ -2950,7 +2945,7 @@ oDebris4:
 
 PulseMissile:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^TeslaWeapon
+	Inherits@2: ^TeslaWeapon
 	ValidTargets: Ground, Air
 	Report: nukemisl.aud
 	Warhead@TeslaChargedWeapon: SpreadDamage

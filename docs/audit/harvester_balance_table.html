@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cameo Mod — Harvester Balance Table (Corrected)</title>
+<style>
+  @page { size: landscape; margin: 12mm; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 11px; color: #1a1a1a; margin: 0; padding: 20px; background: #f5f5f5; }
+  h1 { font-size: 22px; margin: 0 0 4px 0; color: #333; }
+  .subtitle { color: #666; font-size: 12px; margin-bottom: 12px; }
+  .meta-box { background: #e8eef7; border: 1px solid #b0c4de; border-radius: 4px; padding: 10px 15px; margin-bottom: 15px; font-size: 11px; line-height: 1.7; }
+  .meta-box strong { color: #2c3e50; }
+  table { border-collapse: collapse; width: 100%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+  th, td { border: 1px solid #ccc; padding: 4px 6px; text-align: center; white-space: nowrap; }
+  th { background: #4a90d9; color: #fff; font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.3px; }
+  th.actor-col { text-align: left; min-width: 220px; }
+  td.actor-col { text-align: left; font-family: 'Consolas', monospace; font-size: 10px; }
+  tr:nth-child(even) { background: #f9f9f9; }
+  tr:hover { background: #e3f0ff; }
+  .best { background: #d4edda !important; font-weight: bold; }
+  .worst { background: #f8d7da !important; }
+  .section-title { font-size: 14px; margin: 20px 0 8px 0; color: #555; border-bottom: 2px solid #4a90d9; padding-bottom: 3px; }
+  .notes { font-size: 10px; line-height: 1.6; margin-top: 15px; color: #444; }
+  .notes li { margin-bottom: 4px; }
+  .notes strong { color: #2c3e50; }
+  .formula { font-family: 'Consolas', monospace; background: #f0f0f0; padding: 1px 4px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<h1>Cameo Mod &mdash; Harvester Balance Table (Corrected)</h1>
+<div class="subtitle">Sorted by Cash/Tick/Cost (descending). Generated 2026-08-03. Formulas verified from engine C# source.</div>
+
+<div class="meta-box">
+<strong>Corrected Formulas (from engine source):</strong><br>
+<span class="formula">FullyLoadedSpeed</span> is a <strong>percentage of base Speed</strong>, not an absolute speed value.<br>
+&emsp;&emsp;<span class="formula">Harvester.cs:284: GetSpeedModifier() = 100 - (100 - FullyLoadedSpeed) * Fullness / 100</span><br>
+&emsp;&emsp;When empty: modifier = 100 (100% of Speed). When full: modifier = FullyLoadedSpeed (e.g. 100 = no slowdown).<br>
+&emsp;&emsp;Effective speed = Speed &times; terrainSpeed% &times; speedModifier%<br>
+<span class="formula">T_load</span> = Cap &times; (BaleLoadDelay + 1) &mdash; each bale: 1 tick harvest + BaleLoadDelay wait (HarvestResource.cs:95-103)<br>
+<span class="formula">T_unload</span> = ceil(Cap / BaleUnloadAmount) &times; BaleUnloadDelay + 1 &mdash; first batch immediate, then delay per batch (Harvester.cs:176-202)<br>
+<span class="formula">T_travel</span> = D &times; 1024 / MovementSpeedForCell &mdash; progress per tick = effective speed (Move.cs:471)<br>
+<span class="formula">T_cycle</span> = T_load + T_travel_out + T_unload + T_travel_ret<br>
+<span class="formula">Cash/Trip</span> = Cap &times; RV (RV=25) &nbsp;|&nbsp; <span class="formula">Cash/Tick</span> = Cash/Trip &divide; T_cycle &nbsp;|&nbsp; <span class="formula">Cash/Tick/Cost</span> = Cash/Tick &divide; Cost<br>
+<br>
+<strong>Parameters:</strong> D = 20 cells | RV = 25 | Terrain = Clear (80% for tracked/wheeled, 90% for foot/swimsuit/chem/hover)<br>
+Chrono miners: T_travel_ret = 0 (teleport via ChronoResourceDelivery)
+</div>
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th class="actor-col">Actor</th>
+  <th>Faction</th>
+  <th>Cost</th>
+  <th>Cap</th>
+  <th>BLD</th>
+  <th>BUD</th>
+  <th>BUA</th>
+  <th>Spd</th>
+  <th>FLS%</th>
+  <th>Loco</th>
+  <th>EffSpd<br>(out)</th>
+  <th>EffSpd<br>(ret)</th>
+  <th>T_load</th>
+  <th>T_unload</th>
+  <th>T_trav<br>(out)</th>
+  <th>T_trav<br>(ret)</th>
+  <th>T_cycle</th>
+  <th>Cash/<br>Trip</th>
+  <th>Cash/<br>Tick</th>
+  <th>Cash/Tick<br>/Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="best"><td>1</td><td class="actor-col">schwarzermond_noidharvester</td><td>Schwarzer Mond</td><td>500</td><td>100</td><td>5</td><td>1</td><td>1</td><td>50</td><td>100%</td><td>chem</td><td>45</td><td>45</td><td>600</td><td>101</td><td>455.1</td><td>455.1</td><td>1611.2</td><td>2500</td><td>1.55</td><td>0.00310</td></tr>
+<tr><td>2</td><td class="actor-col">ixian_spiceharvester</td><td>D2k Ixians</td><td>500</td><td>45</td><td>4</td><td>1</td><td>1</td><td>45</td><td>100%</td><td>tracked</td><td>36</td><td>36</td><td>225</td><td>46</td><td>568.9</td><td>568.9</td><td>1408.8</td><td>1125</td><td>0.80</td><td>0.00160</td></tr>
+<tr><td>3</td><td class="actor-col">ordos_spiceharvester</td><td>D2k Ordos</td><td>500</td><td>45</td><td>4</td><td>1</td><td>1</td><td>45</td><td>100%</td><td>tracked</td><td>36</td><td>36</td><td>225</td><td>46</td><td>568.9</td><td>568.9</td><td>1408.8</td><td>1125</td><td>0.80</td><td>0.00160</td></tr>
+<tr><td>4</td><td class="actor-col">latinsyndicate_collectiontruck</td><td>Latin Syndicate</td><td>1000</td><td>32</td><td>3</td><td>2</td><td>1</td><td>115</td><td>100%</td><td>tracked</td><td>92</td><td>92</td><td>128</td><td>65</td><td>222.6</td><td>222.6</td><td>638.2</td><td>800</td><td>1.25</td><td>0.00125</td></tr>
+<tr><td>5</td><td class="actor-col">futuretech_prospectormk2</td><td>FutureTech</td><td>1200</td><td>32</td><td>4</td><td>2</td><td>1</td><td>120</td><td>100%</td><td>hover</td><td>108</td><td>108</td><td>160</td><td>65</td><td>189.6</td><td>189.6</td><td>604.3</td><td>800</td><td>1.32</td><td>0.00110</td></tr>
+<tr><td>6</td><td class="actor-col">steelconsortium_consortiumminer</td><td>Steel Consortium</td><td>1000</td><td>24</td><td>2</td><td>1</td><td>1</td><td>100</td><td>100%</td><td>hover</td><td>90</td><td>90</td><td>72</td><td>25</td><td>227.6</td><td>227.6</td><td>552.1</td><td>600</td><td>1.09</td><td>0.00109</td></tr>
+<tr><td>7</td><td class="actor-col">futuretech_prospector</td><td>FutureTech</td><td>1000</td><td>32</td><td>4</td><td>2</td><td>1</td><td>100</td><td>100%</td><td>tracked</td><td>80</td><td>80</td><td>160</td><td>65</td><td>256.0</td><td>256.0</td><td>737.0</td><td>800</td><td>1.09</td><td>0.00109</td></tr>
+<tr><td>8</td><td class="actor-col">ra2_allies_chronominer (chrono)</td><td>RA2 Allies</td><td>1000</td><td>16</td><td>4</td><td>2</td><td>1</td><td>100</td><td>100%</td><td>tracked</td><td>80</td><td>teleport</td><td>80</td><td>33</td><td>256.0</td><td>0.0</td><td>369.0</td><td>400</td><td>1.08</td><td>0.00108</td></tr>
+<tr><td>9</td><td class="actor-col">ra1_allies_alliedoretruck</td><td>RA1 Allies</td><td>1000</td><td>30</td><td>3</td><td>1</td><td>1</td><td>90</td><td>100%</td><td>tracked</td><td>72</td><td>72</td><td>120</td><td>31</td><td>284.4</td><td>284.4</td><td>719.9</td><td>750</td><td>1.04</td><td>0.00104</td></tr>
+<tr><td>10</td><td class="actor-col">ra1_soviets_oretruck</td><td>RA1 Soviets</td><td>1000</td><td>30</td><td>3</td><td>1</td><td>1</td><td>90</td><td>100%</td><td>tracked</td><td>72</td><td>72</td><td>120</td><td>31</td><td>284.4</td><td>284.4</td><td>719.9</td><td>750</td><td>1.04</td><td>0.00104</td></tr>
+<tr><td>11</td><td class="actor-col">tkm_templateharvesterraname</td><td>TKM</td><td>1000</td><td>30</td><td>3</td><td>1</td><td>1</td><td>90</td><td>100%</td><td>tracked</td><td>72</td><td>72</td><td>120</td><td>31</td><td>284.4</td><td>284.4</td><td>719.9</td><td>750</td><td>1.04</td><td>0.00104</td></tr>
+<tr><td>12</td><td class="actor-col">ra1_soviets_heavyindustrialminer</td><td>RA1 Soviets</td><td>1200</td><td>40</td><td>2</td><td>1</td><td>1</td><td>80</td><td>100%</td><td>tracked</td><td>64</td><td>64</td><td>120</td><td>41</td><td>320.0</td><td>320.0</td><td>801.0</td><td>1000</td><td>1.25</td><td>0.00104</td></tr>
+<tr><td>13</td><td class="actor-col">td_gdi_tiberiumharvester</td><td>TD GDI</td><td>1000</td><td>45</td><td>4</td><td>1</td><td>1</td><td>60</td><td>100%</td><td>tracked</td><td>48</td><td>48</td><td>225</td><td>46</td><td>426.7</td><td>426.7</td><td>1124.3</td><td>1125</td><td>1.00</td><td>0.00100</td></tr>
+<tr><td>14</td><td class="actor-col">td_nod_tiberiumharvester</td><td>TD Nod</td><td>1000</td><td>45</td><td>4</td><td>1</td><td>1</td><td>60</td><td>100%</td><td>tracked</td><td>48</td><td>48</td><td>225</td><td>46</td><td>426.7</td><td>426.7</td><td>1124.3</td><td>1125</td><td>1.00</td><td>0.00100</td></tr>
+<tr><td>15</td><td class="actor-col">ts_gdi_tiberiumharvester</td><td>TS GDI</td><td>1000</td><td>45</td><td>4</td><td>1</td><td>1</td><td>60</td><td>100%</td><td>tracked</td><td>48</td><td>48</td><td>225</td><td>46</td><td>426.7</td><td>426.7</td><td>1124.3</td><td>1125</td><td>1.00</td><td>0.00100</td></tr>
+<tr><td>16</td><td class="actor-col">ts_nod_tiberiumharvester</td><td>TS Nod</td><td>1000</td><td>45</td><td>4</td><td>1</td><td>1</td><td>60</td><td>100%</td><td>tracked</td><td>48</td><td>48</td><td>225</td><td>46</td><td>426.7</td><td>426.7</td><td>1124.3</td><td>1125</td><td>1.00</td><td>0.00100</td></tr>
+<tr><td>17</td><td class="actor-col">cabal_tiberiumharvester</td><td>CABAL</td><td>1000</td><td>45</td><td>4</td><td>1</td><td>1</td><td>60</td><td>100%</td><td>tracked</td><td>48</td><td>48</td><td>225</td><td>46</td><td>426.7</td><td>426.7</td><td>1124.3</td><td>1125</td><td>1.00</td><td>0.00100</td></tr>
+<tr><td>18</td><td class="actor-col">forgotten_tiberiumharvester</td><td>Forgotten</td><td>1000</td><td>45</td><td>4</td><td>1</td><td>1</td><td>60</td><td>100%</td><td>tracked</td><td>48</td><td>48</td><td>225</td><td>46</td><td>426.7</td><td>426.7</td><td>1124.3</td><td>1125</td><td>1.00</td><td>0.00100</td></tr>
+<tr><td>19</td><td class="actor-col">asianalliance_droneminer</td><td>Asian Alliance</td><td>250</td><td>4</td><td>4</td><td>4</td><td>1</td><td>125</td><td>100%</td><td>chem</td><td>112</td><td>112</td><td>20</td><td>17</td><td>182.9</td><td>182.9</td><td>402.7</td><td>100</td><td>0.25</td><td>0.00099</td></tr>
+<tr><td>20</td><td class="actor-col">japan_japaneseoretruck</td><td>RA1 Japan</td><td>1000</td><td>20</td><td>2</td><td>1</td><td>1</td><td>120</td><td>100%</td><td>tracked</td><td>96</td><td>96</td><td>60</td><td>21</td><td>213.3</td><td>213.3</td><td>507.7</td><td>500</td><td>0.98</td><td>0.00098</td></tr>
+<tr><td>21</td><td class="actor-col">td_nod_stealthharvester</td><td>TD Nod</td><td>1000</td><td>30</td><td>2</td><td>1</td><td>1</td><td>75</td><td>100%</td><td>tracked</td><td>60</td><td>60</td><td>90</td><td>31</td><td>341.3</td><td>341.3</td><td>803.7</td><td>750</td><td>0.93</td><td>0.00093</td></tr>
+<tr><td>22</td><td class="actor-col">YRSLAV</td><td>RA2 Yuri</td><td>250</td><td>8</td><td>8</td><td>4</td><td>1</td><td>60</td><td>80%</td><td>chem</td><td>54</td><td>43</td><td>72</td><td>33</td><td>379.3</td><td>476.3</td><td>960.5</td><td>200</td><td>0.21</td><td>0.00083</td></tr>
+<tr><td>23</td><td class="actor-col">naxis_slave</td><td>Naxis</td><td>250</td><td>8</td><td>8</td><td>4</td><td>1</td><td>60</td><td>80%</td><td>chem</td><td>54</td><td>43</td><td>72</td><td>33</td><td>379.3</td><td>476.3</td><td>960.5</td><td>200</td><td>0.21</td><td>0.00083</td></tr>
+<tr><td>24</td><td class="actor-col">tkmworker</td><td>TKM</td><td>250</td><td>8</td><td>8</td><td>4</td><td>1</td><td>60</td><td>80%</td><td>chem</td><td>54</td><td>43</td><td>72</td><td>33</td><td>379.3</td><td>476.3</td><td>960.5</td><td>200</td><td>0.21</td><td>0.00083</td></tr>
+<tr><td>25</td><td class="actor-col">ra2_soviets_warminer</td><td>RA2 Soviets</td><td>1200</td><td>32</td><td>2</td><td>2</td><td>1</td><td>75</td><td>100%</td><td>tracked</td><td>60</td><td>60</td><td>96</td><td>65</td><td>341.3</td><td>341.3</td><td>843.7</td><td>800</td><td>0.95</td><td>0.00079</td></tr>
+<tr><td>26</td><td class="actor-col">wc2_humans_militiapeasant</td><td>WC2 Humans</td><td>300</td><td>4</td><td>4</td><td>1</td><td>2</td><td>90</td><td>75%</td><td>foot</td><td>81</td><td>60</td><td>20</td><td>3</td><td>252.8</td><td>341.3</td><td>617.2</td><td>100</td><td>0.16</td><td>0.00054</td></tr>
+<tr><td>27</td><td class="actor-col">protoss_probe</td><td>SC Protoss</td><td>500</td><td>5</td><td>5</td><td>1</td><td>5</td><td>100</td><td>100%</td><td>swimsuit</td><td>90</td><td>90</td><td>30</td><td>2</td><td>227.6</td><td>227.6</td><td>487.1</td><td>125</td><td>0.26</td><td>0.00051</td></tr>
+<tr><td>28</td><td class="actor-col">zerg_drone</td><td>SC Zerg</td><td>500</td><td>5</td><td>5</td><td>1</td><td>5</td><td>100</td><td>100%</td><td>swimsuit</td><td>90</td><td>90</td><td>30</td><td>2</td><td>227.6</td><td>227.6</td><td>487.1</td><td>125</td><td>0.26</td><td>0.00051</td></tr>
+<tr><td>29</td><td class="actor-col">terran_scv</td><td>SC Terran</td><td>500</td><td>5</td><td>5</td><td>1</td><td>5</td><td>100</td><td>100%</td><td>swimsuit</td><td>90</td><td>90</td><td>30</td><td>2</td><td>227.6</td><td>227.6</td><td>487.1</td><td>125</td><td>0.26</td><td>0.00051</td></tr>
+<tr><td>30</td><td class="actor-col">wc2_humans_peasant</td><td>WC2 Humans</td><td>500</td><td>8</td><td>8</td><td>1</td><td>2</td><td>80</td><td>50%</td><td>foot</td><td>72</td><td>36</td><td>72</td><td>5</td><td>284.4</td><td>568.9</td><td>930.3</td><td>200</td><td>0.21</td><td>0.00043</td></tr>
+<tr class="worst"><td>31</td><td class="actor-col">wc2_orcs_peon</td><td>WC2 Orcs</td><td>500</td><td>8</td><td>8</td><td>1</td><td>2</td><td>80</td><td>50%</td><td>foot</td><td>72</td><td>36</td><td>72</td><td>5</td><td>284.4</td><td>568.9</td><td>930.3</td><td>200</td><td>0.21</td><td>0.00043</td></tr>
+</tbody>
+</table>
+
+<div class="section-title">Key Corrections from Engine Source</div>
+<ul class="notes">
+<li><strong>FullyLoadedSpeed is a percentage</strong> (Harvester.cs:284-287), not an absolute speed. When FullyLoadedSpeed=100 (inherited from ^Harvester in defaults.yaml), the harvester moves at <strong>100% of its base Speed</strong> even when full &mdash; no slowdown. The engine default is 85%.</li>
+<li><strong>Load time includes +1 tick per bale</strong> for the actual harvest action (HarvestResource.cs:95-103). Each bale: 1 tick to harvest + BaleLoadDelay ticks wait. T_load = Cap &times; (BaleLoadDelay + 1).</li>
+<li><strong>Unload time includes +1 tick</strong> for the final IsEmpty check (Harvester.cs:176-202). First batch is immediate, then BaleUnloadDelay per batch. T_unload = ceil(Cap/BUA) &times; BaleUnloadDelay + 1.</li>
+<li><strong>Travel time uses terrain speed</strong> from the locomotor (Mobile.cs:756-761). Tracked=80%, foot=90%, chem=90%, swimsuit=90%, hover=90% on Clear terrain.</li>
+<li><strong>Movement is progress-based</strong> (Move.cs:471): each tick adds MovementSpeedForCell to progress; cell completes when progress &ge; 1024. T_travel = D &times; 1024 / eff_speed.</li>
+</ul>
+
+<div class="section-title">Key Finding: Asian Alliance Drone Miner vs Schwarzer Mond Noid Harvester</div>
+<div class="notes">
+<p>Asian Alliance refinery spawns <strong>4 drone miners</strong> free; Schwarzer Mond refinery spawns <strong>2 noid harvesters</strong> free.</p>
+<p>Total income per refinery (per tick):</p>
+<ul>
+<li><strong>Asian Alliance:</strong> Cash/Tick &times; 4 drones</li>
+<li><strong>Schwarzer Mond:</strong> Cash/Tick &times; 2 noids</li>
+</ul>
+<p>The noid's bottleneck: Cap=100 with BaleLoadDelay=5 means T_load = 100 &times; 6 = 600 ticks of stationary harvesting per cycle.</p>
+<p><strong>Corrections from YAML verification:</strong></p>
+<ul>
+<li><strong>chem locomotor</strong> Clear terrain speed = 90% (not 80% as previously assumed).</li>
+<li><strong>TS harvesters</strong> capacity = 45 (not 35). Harvester.Capacity is not a real engine field; StoresResources.Capacity from ^TDHARV is used.</li>
+<li><strong>Noid Harvester</strong>: Speed=50, Cap=100, BLD=5, BUD=1, locomotor=chem (all corrected from YAML).</li>
+<li><strong>Asian Alliance Drone Miner</strong>: Cap=4, locomotor=chem (second Mobile block overrides).</li>
+<li><strong>Steel Consortium Miner</strong>: locomotor=hover (second Mobile block overrides).</li>
+<li><strong>RA1 Heavy Industrial Miner</strong>: locomotor=tracked (inherits from ^RAHARV, not heavytracked).</li>
+</ul>
+</div>
+
+</body>
+</html>

@@ -275,8 +275,6 @@ latinsyndicate_tortugatank:
 		HpPerStep: 43750
 	ChangesHealth@SelfHealing:
 		Step: 350
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 9
 	Armament:
@@ -350,8 +348,6 @@ latinsyndicate_rushertank:
 		HpPerStep: 3750
 	ChangesHealth@SelfHealing:
 		Step: 30
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 23 #3
 		Offset: -100,0,5
@@ -439,8 +435,6 @@ latinsyndicate_smokertank:
 		HpPerStep: 13000
 	ChangesHealth@SelfHealing:
 		Step: 104
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 21 #3
 		Offset: -100,0,5
@@ -545,8 +539,6 @@ latinsyndicate_diablo:
 		HpPerStep: 2250
 	ChangesHealth@SelfHealing:
 		Step: 18
-	Armor:
-		Type: Light
 	Turreted:
 		TurnSpeed: 36
 		Offset: -100,0,5
@@ -902,8 +894,6 @@ latinsyndicate_carteltruck:
 		HpPerStep: 8375
 	ChangesHealth@SelfHealing:
 		Step: 67
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 14
 		Offset: -1,0,4
@@ -979,8 +969,6 @@ latinsyndicate_missiletruck:
 		HpPerStep: 1500
 	ChangesHealth@SelfHealing:
 		Step: 12
-	Armor:
-		Type: Light
 	Mobile:
 		Speed: 75
 		TurnSpeed: 30
@@ -1052,8 +1040,6 @@ latinsyndicate_burrito:
 		HpPerStep: 1750
 	ChangesHealth@SelfHealing:
 		Step: 14
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 80
 		TurnSpeed: 16
@@ -1123,8 +1109,6 @@ latinsyndicate_lars:
 		HpPerStep: 2375
 	ChangesHealth@SelfHealing:
 		Step: 19
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 70
 		TurnSpeed: 28
@@ -1296,8 +1280,6 @@ latinsyndicate_nuketruck:
 	Inherits@flamerup: ^LatinFlameUpgrades
 	Health:
 		HP: 60000
-	Armor:
-		Type: Light
 	Mobile:
 		Speed: 100
 	RevealsShroud:
@@ -1375,8 +1357,6 @@ latinsyndicate_topolm:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15

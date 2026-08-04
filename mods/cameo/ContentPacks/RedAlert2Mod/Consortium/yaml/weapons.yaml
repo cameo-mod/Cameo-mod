@@ -1,26 +1,26 @@
-﻿SteelCloneGun:
+SteelCloneGun:
 	Inherits: ^SteelHeavyCannon
-	Inherits: ^SteelMediumMissile
-	Inherits: ^SteelSmallArms
+	Inherits@2: ^SteelMediumMissile
+	Inherits@3: ^SteelSmallArms
 	ReloadDelay: 25
 	Range: 6463
 	ValidTargets: Ground, Water, Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -74,23 +74,23 @@ SteelCloneGunResonanceBounce2_elite:
 
 SteelVulcan:
 	Inherits: ^SteelHeavyCannon
-	Inherits: ^SteelSmallArms
-	Inherits: ^SteelChaingun
+	Inherits@2: ^SteelSmallArms
+	Inherits@3: ^SteelChaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 6666
 	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Report: pulseturretfire.wav
 	Warhead@Effect: CreateEffect
@@ -119,9 +119,9 @@ SteelVulcanResonanceBounce2:
 
 ConsortiumMissileSystem:
 	Inherits: ^TeslaWeapon
-	Inherits: ^ArrowWeapon
-	Inherits: ^RA2FlakWeapon
-	Inherits: ^SteelMediumMissile
+	Inherits@2: ^ArrowWeapon
+	Inherits@3: ^RA2FlakWeapon
+	Inherits@4: ^SteelMediumMissile
 	ReloadDelay: 60
 	Range: 12000
 	Burst: 2
@@ -146,16 +146,16 @@ ConsortiumMissileSystem:
 	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 
@@ -171,20 +171,20 @@ ConsortiumMissileSystem_EMP:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 12000
 
 SteelQuantumCannon:
 	Inherits: ^LaserWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	Range: 6000
 	ReloadDelay: 65
 	Report: steel_quantumfire.wav
@@ -211,7 +211,7 @@ SteelQuantumCannon:
 
 SteelQuantumCannon_EMP:
 	Inherits: ^TeslaWeapon
-	Inherits: SteelQuantumCannon
+	Inherits@2: SteelQuantumCannon
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -321,9 +321,9 @@ superbfg10kCannonDummy:
 
 bfg10kCannon:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^MagicWeapon
+	Inherits@3: ^LaserWeapon
+	Inherits@4: ^RailgunWeapon
 	Range: 25000
 	ReloadDelay: 750
 	Report: bfg10kfiringsound.wav
@@ -395,9 +395,9 @@ superbfg10kCannon:
 
 SteelMakoGun:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^RA2Grenade
-	Inherits: ^RA2RailgunWeapon
-	Inherits: ^SteelMediumCannon
+	Inherits@2: ^RA2Grenade
+	Inherits@3: ^RA2RailgunWeapon
+	Inherits@4: ^SteelMediumCannon
 	Range: 6050
 	ReloadDelay: 25
 	Report: steel_quantumfire.wav
@@ -407,19 +407,17 @@ SteelMakoGun:
 		Damage: 1000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 2000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 2000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		ExplosionPalette: ra2effect
@@ -433,8 +431,8 @@ SteelMakoGun_elite:
 
 SteelMakoGun_EMP:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: SteelMakoGun
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: SteelMakoGun
 	Warhead@MediumFlameWeapon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -444,13 +442,10 @@ SteelMakoGun_EMP:
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@RailgunWeapon: SpreadDamage
@@ -459,10 +454,10 @@ SteelMakoGun_EMP:
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@LightChemicalWeapon: SpreadDamage
@@ -495,9 +490,9 @@ SteelMakoGun_EMP_elite:
 
 SteelMantaAG:
 	Inherits: ^SteelLightMissile
-	Inherits: ^SteelSmallArms
-	Inherits: ^RA2FlakWeapon
-	Inherits: ^SteelChaingun
+	Inherits@2: ^SteelSmallArms
+	Inherits@3: ^RA2FlakWeapon
+	Inherits@4: ^SteelChaingun
 	ReloadDelay: 20
 	Range: 6666
 	ValidTargets: Ground, Water
@@ -511,28 +506,28 @@ SteelMantaAG:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -590,7 +585,7 @@ SteelMantaAAResonanceBounce2:
 
 SteelMantaHunterCannons:
 	Inherits: ^RA2FlakWeapon
-	Inherits: ^SteelChaingun
+	Inherits@2: ^SteelChaingun
 	Range: 8000
 	ReloadDelay: 8
 	ValidTargets: Ground, Water
@@ -605,30 +600,30 @@ SteelMantaHunterCannons:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 SteelMantaHunterCannons_AA:
 	Inherits: ^SteelMediumMissile
-	Inherits: SteelMantaHunterCannons
+	Inherits@2: SteelMantaHunterCannons
 	Range: 12000
 	ReloadDelay: 12
 	Report: steel_chaingunfire.wav
 	ValidTargets: Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -676,8 +671,8 @@ SteelMantaHunterCannonsAAResonanceBounce2:
 
 SteelRunnerPistols:
 	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^RailgunWeapon
 	Report: steel_chaingunfire.wav
 	ReloadDelay: 8
 	Burst: 2
@@ -774,9 +769,9 @@ SteelRunnerPistolsResonanceBounce2_elite:
 
 SteelInfRailgun:
 	Inherits: ^RA2RailgunWeapon
-	Inherits: ^RA2FlakWeapon
-	Inherits: ^SteelChaingun
-	Inherits: ^SteelLightMissile
+	Inherits@2: ^RA2FlakWeapon
+	Inherits@3: ^SteelChaingun
+	Inherits@4: ^SteelLightMissile
 	Range: 8000
 	ReloadDelay: 48
 	Burst: 2
@@ -791,22 +786,22 @@ SteelInfRailgun:
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Effect: CreateEffect
@@ -829,12 +824,12 @@ SteelScalpelRailgunAA:
 
 SteelInfRailgun_EMP:
 	Inherits: ^Grenade
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumCannon
-	Inherits: ^TeslaWeapon
-	Inherits: SteelInfRailgun
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^MediumChemicalWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^MediumCannon
+	Inherits@6: ^TeslaWeapon
+	Inherits@7: SteelInfRailgun
 	ReloadDelay: 50
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -912,27 +907,27 @@ SteelInfRailgun_EMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -955,10 +950,10 @@ SteelScalpelRailgun_EMP_AA:
 
 SteelFighterRailgun:
 	Inherits: ^LaserWeapon
-	Inherits: ^RA2RailgunWeapon
-	Inherits: ^SteelMediumCannon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^SteelLightMissile
+	Inherits@2: ^RA2RailgunWeapon
+	Inherits@3: ^SteelMediumCannon
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^SteelLightMissile
 	Range: 7000
 	ReloadDelay: 80
 	Burst: 2
@@ -979,10 +974,10 @@ SteelFighterRailgun:
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -991,10 +986,10 @@ SteelFighterRailgun:
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -1009,8 +1004,8 @@ SteelFighterRailgun:
 
 SteelMegaSword:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^SwordWeapon
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^SwordWeapon
 	ReloadDelay: 24
 	Report: megasword.wav
 	Range: 1600
@@ -1048,8 +1043,8 @@ SteelMegaSword:
 
 SteelMegaSword_EMP:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^TeslaWeapon
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TeslaWeapon
 	ReloadDelay: 16
 	Report: megasword.wav
 	Range: 2400
@@ -1087,7 +1082,7 @@ SteelMegaSword_EMP:
 
 SteelMegaSword_elite:
 	Inherits: ^RailgunWeapon
-	Inherits: SteelMegaSword_EMP
+	Inherits@2: SteelMegaSword_EMP
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1123,7 +1118,7 @@ SteelMegaSword_elite:
 
 SteelAirTurret:
 	Inherits: ^LaserWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	Range: 8000
 	ReloadDelay: 60
 	Report: steel_quantumfire.wav
@@ -1150,7 +1145,7 @@ SteelAirTurret:
 
 SteelAirTurret_EMP:
 	Inherits: ^TeslaWeapon
-	Inherits: SteelAirTurret
+	Inherits@2: SteelAirTurret
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -1258,9 +1253,9 @@ SteelFortressWeapons:
 		ContrailStartColor: 77CCFFAA
 		ContrailLength: 35
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 14000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 7
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
@@ -1269,11 +1264,11 @@ SteelFortressWeapons:
 
 SteelQuantumTurretRail:
 	Inherits: ^TeslaWeapon
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^SteelHeavyCannon
+	Inherits@2: ^HeavyChemicalWeapon
+	Inherits@3: ^HeavyFlameWeapon
+	Inherits@4: ^LaserWeapon
+	Inherits@5: ^RailgunWeapon
+	Inherits@6: ^SteelHeavyCannon
 	Range: 8888
 	ReloadDelay: 38
 	Report: steel_quantumfire.wav
@@ -1303,9 +1298,9 @@ SteelQuantumTurretRail:
 		Damage: 2000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
@@ -1340,9 +1335,9 @@ SteelQuantumTurretRail_EMP:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water, Air
@@ -1370,7 +1365,7 @@ SteelInspectorIonCannon:
 
 SteelInspectorIonCannonDamage:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^TeslaWeapon
+	Inherits@2: ^TeslaWeapon
 	ValidTargets: Ground, Water
 	AirThreshold: 10000
 	Warhead@TeslaChargedWeapon: SpreadDamage
@@ -1449,7 +1444,7 @@ SteelInspectorIonCannonDamage:
 
 SteelHoverMissile:
 	Inherits: ^ArrowWeapon
-	Inherits: ^SteelLightMissile
+	Inherits@2: ^SteelLightMissile
 	Burst: 4
 	BurstDelays: 4
 	Range: 6666
@@ -1463,11 +1458,11 @@ SteelHoverMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -1477,8 +1472,8 @@ SteelHoverMissile:
 
 SteelKatyCannons:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^SteelHeavyCannon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^SteelHeavyCannon
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 10
@@ -1508,9 +1503,9 @@ SteelKatyCannons:
 		Damage: 5000
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 10000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@Effect: CreateEffect
 		Explosions: aa_pulsexp
@@ -1528,8 +1523,8 @@ SteelKatyCannons_elite:
 
 SteelKatyCannons_EMP:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^TeslaWeapon
-	Inherits: SteelKatyCannons
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: SteelKatyCannons
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 10
@@ -1580,10 +1575,10 @@ SteelKatyCannons_EMP:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1605,7 +1600,7 @@ SteelKatyCannons_EMP_elite:
 
 SteelStalkerRailgun:
 	Inherits: ^LaserWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	Range: 9000
 	ReloadDelay: 103
 	Report: bigggun1.aud
@@ -1631,7 +1626,7 @@ SteelStalkerRailgun:
 
 SteelStalkerRailgun_EMP:
 	Inherits: ^TeslaWeapon
-	Inherits: SteelStalkerRailgun
+	Inherits@2: SteelStalkerRailgun
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 40000
@@ -1729,10 +1724,10 @@ SteelStalkerRailgunEScatter:
 
 WhiteRabbitGatling:
 	Inherits: ^HeavyCannon
-	Inherits: ^SmallArms
-	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^SmallArms
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^RA2Chaingun
 	Report: aa_pulvat2a.wav, aa_pulvat2b.wav, aa_pulvat2c.wav
 	Range: 6000
 	ReloadDelay: 10
@@ -1770,10 +1765,10 @@ WhiteRabbitGatling:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
 
@@ -1784,15 +1779,15 @@ HammerheadTankCannon:
 	Report: vgriatta.wav, vgriattb.wav, vgriattc.wav
 	Projectile: Bullet
 		Speed: 515
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 24000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 12
 
 HammerheadArtillery:
 	Inherits: ^RA2Grenade
-	Inherits: ^HeavyBomb
-	Inherits: ^SteelMediumCannon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^SteelMediumCannon
 	ReloadDelay: 111
 	Range: 11111
 	MinRange: 2220
@@ -1804,13 +1799,10 @@ HammerheadArtillery:
 		ContrailLength: 33
 		ContrailStartWidth: 111
 		ContrailEndWidth: 33
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Spread: 1111
 		Damage: 11111
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Spread: 1111
-		Damage: 11111
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Spread: 1111
 		Damage: 11
 	Warhead@HeavyBomb: SpreadDamage
@@ -1819,10 +1811,10 @@ HammerheadArtillery:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Spread: 1111
 		Damage: 11
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Spread: 1111
 		Damage: 11111
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Spread: 1111
 		Damage: 11
 	Warhead@Effect1: CreateEffect
@@ -1834,9 +1826,9 @@ HammerheadArtillery:
 
 SteelDaggerCannon:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2Grenade
-	Inherits: ^SteelHeavyCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2Grenade
+	Inherits@4: ^SteelHeavyCannon
 	Range: 20000
 	MinRange: 4000
 	ReloadDelay: 50
@@ -1867,19 +1859,16 @@ SteelDaggerCannon:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -1895,7 +1884,7 @@ SteelDaggerCannon_elite:
 
 SteelCruiserArtillery:
 	Inherits: ^SteelMediumCannon
-	Inherits: ^RA2Grenade
+	Inherits@2: ^RA2Grenade
 	ReloadDelay: 20
 	Range: 7000
 	MinRange: 1400
@@ -1905,15 +1894,13 @@ SteelCruiserArtillery:
 		Inaccuracy: 1000
 		Speed: 200
 		ContrailLength: 20
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 16000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 8
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 16000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
@@ -1929,9 +1916,9 @@ SteelCruiserArtillery_elite:
 
 SteelCruiserCannons:
 	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
-	Inherits: ^SteelChaingun
+	Inherits@2: ^SmallArms
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^SteelChaingun
 	ReloadDelay: 5
 	ValidTargets: Ground, Air, Water
 	Range: 7000
@@ -1963,10 +1950,10 @@ SteelCruiserCannons:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 
@@ -1978,7 +1965,7 @@ SteelCruiserCannons_elite:
 
 SteelCargoshipCannons:
 	Inherits: ^SteelSmallArms
-	Inherits: ^SteelChaingun
+	Inherits@2: ^SteelChaingun
 	ReloadDelay: 3
 	ValidTargets: Ground, Air, Water
 	Range: 4750
@@ -1992,16 +1979,16 @@ SteelCargoshipCannons:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 

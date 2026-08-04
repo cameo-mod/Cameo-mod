@@ -1,13 +1,13 @@
 Flamethrower:
-	Inherits: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 60
 	Range: 2085
 	Report: flamer2.aud
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 20000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 20000
@@ -38,15 +38,15 @@ GhostSniperBunker:
 		Range: 10c0 #8c0
 
 SCBROODLING:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	Report: zerglinghit.wav
 	ReloadDelay: 6
 	Range: 1200
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 2000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -64,8 +64,8 @@ ScourgeDroneExplosion:
 
 SCScourgeDroneExplosion:
 	Inherits: ^HeavyBomb
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2Grenade
 	-Report:
 	ValidTargets: Ground, Water, Air
 	Warhead@HeavyBomb: SpreadDamage
@@ -83,13 +83,10 @@ SCScourgeDroneExplosion:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	-Warhead@Effect1:
@@ -130,17 +127,15 @@ SCSpiderEngage:
 	Range: 1536
 
 SCSPIDEREXPLOSION:
-	Inherits: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
 	-Report:
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Medium:
 		Damage: 80000
 		Spread: 2048
 		Falloff: 100, 25, 0
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 40000
-		Spread: 2048
-		Falloff: 100, 25, 0
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 40
 		Spread: 2048
 		Falloff: 100, 25, 0
@@ -173,11 +168,9 @@ SCVRepair:
 
 SCWorkerExplode:
 	Inherits: UnitExplodeSmall
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 12000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 6000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 6
 
 RavenTurretSpawner:
@@ -216,16 +209,16 @@ Scarab:
 		InvalidTargets: Vehicle, Structure, wall, Husk
 
 ^WorkerAttack:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	Range: 1500
 	ReloadDelay: 25
 	Report: repair11.aud
 	TargetActorCenter: True
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 10000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
 SCVAttack:

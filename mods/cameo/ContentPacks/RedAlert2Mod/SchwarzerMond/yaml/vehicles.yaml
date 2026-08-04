@@ -216,8 +216,6 @@ schwarzermond_lunarpanzer:
 		HpPerStep: 4500
 	ChangesHealth@SelfHealing:
 		Step: 36
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 20 #3
 	Armament:
@@ -263,7 +261,6 @@ schwarzermond_lunarpanzer:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: NaxiLunarTankVoice
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 schwarzermond_lunartiger:
@@ -302,8 +299,6 @@ schwarzermond_lunartiger:
 		HpPerStep: 8000
 	ChangesHealth@SelfHealing:
 		Step: 64
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 20 #3
 	Armament:
@@ -349,7 +344,6 @@ schwarzermond_lunartiger:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: NaxiLunarTankVoice
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 schwarzermond_neojagdpanzer:
@@ -387,8 +381,6 @@ schwarzermond_neojagdpanzer:
 		HpPerStep: 22500
 	ChangesHealth@SelfHealing:
 		Step: 180
-	Armor:
-		Type: Superheavy
 	Armament@AG:
 		Weapon: LunarNaxiJadgDestroyer
 		LocalOffset: 400,0,300
@@ -460,8 +452,6 @@ schwarzermond_lunargrille:
 		HpPerStep: 3125
 	ChangesHealth@SelfHealing:
 		Step: 25
-	Armor:
-		Type: Medium
 	Armament@AG:
 		Weapon: NaxGrilleArty
 		LocalOffset: 500,0,150
@@ -534,8 +524,6 @@ schwarzermond_korruptesbiest:
 		HpPerStep: 12000
 	ChangesHealth@SelfHealing:
 		Step: 96
-	Armor:
-		Type: Heavy
 	Armament@PRIMARY:
 		Weapon: NaxCorrosionBeast
 		LocalOffset: 500,300,400, 500,-300,400, 500,300,300, 500,-300,300
@@ -594,8 +582,6 @@ schwarzermond_crystaltank:
 		HpPerStep: 20000
 	ChangesHealth@SelfHealing:
 		Step: 160
-	Armor:
-		Type: Medium
 	Armament@AG:
 		Weapon: NaxCrystalLeech
 		LocalOffset: 400,0,300
@@ -669,8 +655,6 @@ schwarzermond_mars:
 		HpPerStep: 1750
 	ChangesHealth@SelfHealing:
 		Step: 14
-	Armor:
-		Type: Medium
 	Mobile:
 		Locomotor: hover
 		Speed: 70

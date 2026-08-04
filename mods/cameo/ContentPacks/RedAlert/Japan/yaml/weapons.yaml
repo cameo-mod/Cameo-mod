@@ -1,6 +1,6 @@
 CHGuardRifle:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 55
 	Range: 5547
 	ValidTargets: Ground, Water, Air
@@ -49,13 +49,13 @@ japan_imperialscoutsman_rifle:
 # upgraded variant with it). Waveforce flavor rides the baseline stats.
 japan_imperialscoutsman_rifle_waveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: japan_imperialscoutsman_rifle
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: japan_imperialscoutsman_rifle
+	Inherits@3: ^WaveforceBulletProjectile
 
 TankBusterBeamCannon:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^MediumCannon
+	Inherits@3: ^RailgunWeapon
 	ReloadDelay: 96
 	Range: 5190
 	Report: JUTankB_weapFire1a.wav, JUTankB_weapFire1b.wav, JUTankB_weapFire1c.wav, JUTankB_weapFire1d.wav, JUTankB_weapFire1e.wav, JUTankB_weapFire1f.wav, JUTankB_weapFire1g.wav, JUTankB_weapFire1h.wav
@@ -86,8 +86,8 @@ TankBusterBeamCannon:
 
 TankBusterBeamCannonCharged:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyCannon
 	ReloadDelay: 96
 	Range: 5190
 	Report: JUTankB_weapFire1a.wav, JUTankB_weapFire1b.wav, JUTankB_weapFire1c.wav, JUTankB_weapFire1d.wav, JUTankB_weapFire1e.wav, JUTankB_weapFire1f.wav, JUTankB_weapFire1g.wav, JUTankB_weapFire1h.wav
@@ -128,7 +128,7 @@ TankBusterBeamCannonCharged:
 
 PlasmaFlamer:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
+	Inherits@2: ^MediumChemicalWeapon
 	ReloadDelay: 35
 	Burst: 15
 	BurstDelays: 1
@@ -166,7 +166,9 @@ PlasmaFlamer:
 		Explosions: blue_small_napalm
 
 HeavyFlamer:
-	Inherits: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	ReloadDelay: 60
 	Burst: 30
 	BurstDelays: 1
@@ -178,11 +180,9 @@ HeavyFlamer:
 		Image: fb3
 		LaunchAngle: 90
 		Inaccuracy: 900
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 2000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 2000
@@ -196,7 +196,7 @@ HeavyFlamer:
 
 HeavyPlasmaFlamer:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^HeavyFlameWeapon
 	ReloadDelay: 60
 	Burst: 30
 	BurstDelays: 1
@@ -234,19 +234,19 @@ HeavyPlasmaFlamer:
 		Explosions: blue_building_napalm
 
 SamuraiBlade:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 20
 	Range: 1637
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 10000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
 SamuraiBladeCharged:
 	Inherits: ^TeslaWeapon
-	Inherits: ^SwordWeapon
+	Inherits@2: ^SwordWeapon
 	ReloadDelay: 20
 	Range: 1637
 	Warhead@TeslaWeapon: SpreadDamage
@@ -269,7 +269,9 @@ SamuraiBladeCharged:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 JapanMaidenBow:
-	Inherits: ^ArrowWeapon
+	Inherits@wh: ^Warhead_Arrow_Light
+	Inherits@proj: ^Projectile_Arrow_Light
+	Inherits@fx: ^Effect_Arrow_Light
 	ReloadDelay: 100
 	Range: 7500
 	MinRange: 1500
@@ -292,9 +294,9 @@ JapanMaidenBow:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@ArrowWeapon: SpreadDamage
+	Warhead@Arrow_Light:
 		Damage: 40000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage: HealthPercentageDamage
 		Damage: 20
 	Warhead@Effect: CreateEffect
 		ValidRelationships: Neutral, Enemy
@@ -304,18 +306,18 @@ JapanMaidenBow:
 
 JapanMaidenBowEnergized:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^TeslaWeapon
-	Inherits: JapanMaidenBow
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^TeslaWeapon
+	Inherits@6: JapanMaidenBow
 	Projectile: Missile
 		ContrailStartColor: FFCC77
-	Warhead@ArrowWeapon: SpreadDamage
+	Warhead@Arrow_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -327,11 +329,11 @@ JapanMaidenBowEnergized:
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -400,14 +402,16 @@ BallistaSingleShotAir:
 	Range: 9214
 	ReloadDelay: 200
 	ValidTargets: Air
-	Warhead@ArrowWeapon: SpreadDamage
+	Warhead@Arrow_Light:
 		Damage: 160000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage: HealthPercentageDamage
 		Damage: 80
 
 	MinRange: 1845
 BallistaSingleShotAirEnergized:
-	Inherits: ^LightMissile
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Missile_Light
 	Inherits: JapanMaidenBowEnergized
 	Range: 9214
 	ReloadDelay: 200
@@ -420,27 +424,27 @@ BallistaSingleShotAirEnergized:
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ArrowWeapon: SpreadDamage
+	Warhead@Arrow_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -499,9 +503,9 @@ BallistaSingleShotAirEnergized:
 	MinRange: 1845
 BallistaMultiShot:
 	Inherits: ^Grenade
-	Inherits: ^LightFlameWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^LightFlameWeapon
+	Inherits@3: ^LightChemicalWeapon
+	Inherits@4: ^ArrowWeapon
 	ReloadDelay: 176
 	Range: 13515
 	MinRange: 2705
@@ -565,9 +569,9 @@ BallistaMultiShot:
 
 BallistaMultiShotEnergized:
 	Inherits: ^TeslaWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^MediumChemicalWeapon
+	Inherits@4: ^ArrowWeapon
 	ReloadDelay: 176
 	Range: 13515
 	MinRange: 2705
@@ -641,11 +645,11 @@ BallistaTowerMultiShotEnergized:
 	MinRange: 1845
 RocketAngelRockets:
 	Inherits: ^TeslaWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^Grenade
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^Grenade
+	Inherits@6: ^ArrowWeapon
 	ReloadDelay: 34
 	Burst: 4
 	BurstDelays: 2
@@ -750,7 +754,7 @@ RocketAngelRockets:
 
 Hakureiring:
 	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
+	Inherits@2: ^MagicWeapon
 	Inherits@EMP: ^EMPDamage
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
 	InvalidTargets: Epic, Psionic, Monster
@@ -977,25 +981,27 @@ THMiss:
 		ImpactActors: false
 
 M60mgJapan:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 15
 	Burst: 5
 	BurstDelays: 5
 	Range: 5004
 	Report: pillbox1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 M60mgWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: M60mgJapan
-	Inherits: ^WaveforceBulletProjectile
-	Warhead@SmallArms: SpreadDamage
+	Inherits@2: M60mgJapan
+	Inherits@3: ^WaveforceBulletProjectile
+	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 ZeroFighterArrows:
@@ -1047,7 +1053,7 @@ ZeroFighterArrowsEnergized:
 
 JHindChainGun:
 	Inherits: ^Grenade
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 8
 	Range: 3053
@@ -1069,14 +1075,14 @@ JHindChainGun:
 
 JHindChainGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: JHindChainGun
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: JHindChainGun
+	Inherits@3: ^WaveforceBulletProjectile
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 500
 
 JHindCannon:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^TankDestroyerCannon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 32
 	Range: 3053
@@ -1101,8 +1107,8 @@ JHindCannon:
 
 JHindPlasmaCannon:
 	Inherits: ^TeslaWeapon
-	Inherits: ^MediumMissile
-	Inherits: JHindCannon
+	Inherits@2: ^MediumMissile
+	Inherits@3: JHindCannon
 	Projectile: Bullet
 		Speed: 610
 		ContrailStartColor: 8844FFAA
@@ -1142,11 +1148,11 @@ JHindPlasmaCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1159,7 +1165,7 @@ JHindPlasmaCannon:
 
 JHindArrows:
 	Inherits: ^MediumMissile
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^ArrowWeapon
 	ReloadDelay: 128
 	Range: 3053
 	Report: dune2smalllaser.aud
@@ -1195,8 +1201,8 @@ JHindArrows:
 
 JHindArrowsEnergized:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: JHindArrows
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: JHindArrows
 	Projectile: Missile
 		ContrailStartColor: FFCC77
 	Warhead@ArrowWeapon: SpreadDamage
@@ -1253,8 +1259,8 @@ JHindArrowsEnergized:
 
 155mm:
 	Inherits: ^HeavyCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^Grenade
 	ReloadDelay: 80
 	Range: 13350
 	MinRange: 2670
@@ -1291,11 +1297,11 @@ JHindArrowsEnergized:
 
 HovercraftCannon:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^Grenade
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^MediumCannon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 4876
@@ -1356,26 +1362,26 @@ HovercraftCannon:
 
 HovercraftPlasmaCannon:
 	Inherits: ^TeslaWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^HeavyCannon
-	Inherits: HovercraftCannon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^HeavyCannon
+	Inherits@4: HovercraftCannon
 	Report: WaveforceCannon.wav
 	Projectile: Missile
 		Speed: 974
 		ContrailStartColor: 8844FFAA
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1403,19 +1409,19 @@ HovercraftPlasmaCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1454,7 +1460,7 @@ HovercraftPlasmaCannon:
 
 JapaneseHovercraftFlak:
 	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
+	Inherits@2: ^FlakWeapon
 	ReloadDelay: 8
 	Range: 4876
 	Report: gun20.aud
@@ -1476,9 +1482,9 @@ JapaneseHovercraftFlakAA:
 	Inherits: JapaneseHovercraftFlak
 	Range: 7314
 	ValidTargets: Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Air
@@ -1487,32 +1493,34 @@ JapaneseHovercraftFlakAA:
 
 JapaneseHovercraftFlakWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: JapaneseHovercraftFlak
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: JapaneseHovercraftFlak
+	Inherits@3: ^WaveforceBulletProjectile
 
 JapaneseHovercraftFlakAAkWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: JapaneseHovercraftFlakAA
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: JapaneseHovercraftFlakAA
+	Inherits@3: ^WaveforceBulletProjectile
 
 Type89Cannon:
-	Inherits: ^MediumCannon
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 52
 	Range: 5243
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 524
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
 Type89PlasmaCannon:
 	Inherits: ^TeslaWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^TankDestroyerCannon
+	Inherits@3: ^HeavyCannon
 	ReloadDelay: 52
 	Range: 5243
 	Report: WaveforceCannon.wav
@@ -1532,10 +1540,10 @@ Type89PlasmaCannon:
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -1549,7 +1557,7 @@ Type89PlasmaCannon:
 
 Type97Cannon:
 	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^MediumCannon
 	ReloadDelay: 56
 	Range: 5692
 	Report: cannon1.aud
@@ -1569,8 +1577,8 @@ Type97Cannon:
 
 Type97PlasmaCannon:
 	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^HeavyCannon
 	ReloadDelay: 56
 	Range: 5692
 	Report: WaveforceCannon.wav
@@ -1608,11 +1616,11 @@ Type97PlasmaCannon:
 
 ShrineTankCannon:
 	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^MediumCannon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumFlameWeapon
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^MagicWeapon
+	Inherits@4: ^MediumCannon
+	Inherits@5: ^MediumChemicalWeapon
+	Inherits@6: ^MediumFlameWeapon
 	ReloadDelay: 50
 	Range: 6370
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
@@ -1693,7 +1701,7 @@ ShrineTankCannon:
 
 WaveforceCannon:
 	Inherits: ^HeavyMissile
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	ReloadDelay: 60
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -1735,24 +1743,26 @@ WaveforceCannon:
 		ValidTargets: Air
 
 OISmallCannon:
-	Inherits: ^MediumCannon
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 45
 	Range: 5394
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 539
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
 OISmallPlasmaCannon:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: ^RailgunWeapon
+	Inherits@4: ^HeavyCannon
 	ReloadDelay: 45
 	Range: 5394
 	Report: cannon1.aud
@@ -1797,15 +1807,17 @@ OISmallPlasmaCannon:
 		Explosions: blue_building
 
 OIBigCannon:
-	Inherits: ^HeavyCannon
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cannon_Heavy
 	ReloadDelay: 55
 	Range: 5394
 	Report: tank5.aud
 	Projectile: Bullet
 		Speed: 539
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 24000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 12
 	Warhead@Effect: CreateEffect
 		Explosions: poof
@@ -1813,8 +1825,8 @@ OIBigCannon:
 
 OIBigPlasmaCannon:
 	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^HeavyCannon
 	ReloadDelay: 55
 	Range: 5394
 	Report: tank5.aud
@@ -1851,7 +1863,9 @@ OIBigPlasmaCannon:
 		Explosions: purple_plasma
 
 OIFlamer:
-	Inherits: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	ReloadDelay: 60
 	Burst: 20
 	BurstDelays: 1
@@ -1863,16 +1877,14 @@ OIFlamer:
 		Image: fb3
 		LaunchAngle: 62
 		Inaccuracy: 850
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 2000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 OIPlasmaFlamer:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^HeavyFlameWeapon
 	ReloadDelay: 60
 	Burst: 20
 	BurstDelays: 1
@@ -1920,7 +1932,9 @@ ArtilleryExplode:
 		ImpactSounds: kaboom22.aud
 
 BuggyGrenade:
-	Inherits: ^Grenade
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Explosion_Light
 	ReloadDelay: 60
 	Range: 5184
 	Report: M203.aud
@@ -1931,17 +1945,15 @@ BuggyGrenade:
 		ContrailLength: 11
 		ContrailStartWidth: 99
 		ContrailEndWidth: 33
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 60000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 30000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 30
 
 BuggyPlasmaGrenade:
 	Inherits: ^HeavyBomb
-	Inherits: ^ShrapnelWeapon
-	Inherits: BuggyGrenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: BuggyGrenade
 	Projectile: Bullet
 		Speed: 333
 		ContrailStartColor: FF4488AA
@@ -1978,7 +1990,8 @@ BuggyPlasmaGrenade:
 		Explosions: purple_plasma
 
 JapaneseHeavyBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 100
 	Burst: 4
@@ -1994,10 +2007,10 @@ JapaneseHeavyBomb:
 		Blockable: false
 		Image: DRAGON
 		Shadow: True
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 20000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Ship
 		Damage: 10
 	Warhead@Effect1: CreateEffect
@@ -2006,8 +2019,8 @@ JapaneseHeavyBomb:
 
 JapanesePlasmaBomb:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: ^HeavyBomb
 	ReloadDelay: 100
 	Burst: 4
 	BurstDelays: 5
@@ -2055,7 +2068,7 @@ JapanesePlasmaBomb:
 
 JHighV:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Burst: 5
@@ -2074,8 +2087,8 @@ JHighV:
 
 JHighVWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: JHighV
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: JHighV
+	Inherits@3: ^WaveforceBulletProjectile
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
@@ -2087,22 +2100,20 @@ ExecutionerDeath:
 	SoundVolume: 10
 
 ExecutionerSword:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 300
 	Report: JUShoEx_swordSwipea.wav, JUShoEx_swordSwipeb.wav, JUShoEx_swordSwipec.wav, JUShoEx_swordSwiped.wav, JUShoEx_swordSwipee.wav, JUShoEx_swordSwipef.wav
 	SoundVolume: 10
 	Range: 3000
 	ValidTargets: Ground, Water, Air
 	Projectile: InstantExplode
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		ValidTargets: Ground, Water, Air
 		Spread: 6000
 		Damage: 600000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 3000
-		Damage: 300000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 3000
 		Damage: 300
@@ -2115,8 +2126,8 @@ ExecutionerSword:
 
 NanoArtilleryAG:
 	Inherits: ^HeavyCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^Grenade
 	ReloadDelay: 77
 	Range: 7777
 	MinRange: 1555
@@ -2196,8 +2207,8 @@ NanoReturnHeal:
 
 NanoSmokeAG:
 	Inherits: ^MagicWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^LightFlameWeapon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^LightFlameWeapon
 	ValidTargets: Infantry, Vehicle, Building
 	ReloadDelay: 33
 	Range: 3333
@@ -2278,7 +2289,7 @@ WaveArtilleryShell:
 
 WaveArtilleryImpact:
 	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	Projectile: InstantHit
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water
@@ -2381,13 +2392,13 @@ WaveTurretImpact:
 
 ArmoredCarMG:
 	Inherits: ^ArrowWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^SmallArms
-	Inherits: ^Grenade
-	Inherits: ^MediumCannon
-	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^TankDestroyerCannon
+	Inherits@3: ^SmallArms
+	Inherits@4: ^Grenade
+	Inherits@5: ^MediumCannon
+	Inherits@6: ^MediumMissile
+	Inherits@7: ^FlakWeapon
+	Inherits@8: ^Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 8
 	Range: 5012
@@ -2456,13 +2467,13 @@ ArmoredCarMG_AA:
 		ValidTargets: Air
 	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Air
@@ -2470,9 +2481,9 @@ ArmoredCarMG_AA:
 		ValidTargets: Air
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Air
@@ -2482,19 +2493,19 @@ ArmoredCarMG_AA:
 		ValidTargets: Air
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 ArmoredCarMGWaveforce:
 	Inherits: ^HeavyAAWeapon
-	Inherits: ^WaveforceBulletWarhead
-	Inherits: ArmoredCarMG
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: ^WaveforceBulletWarhead
+	Inherits@3: ArmoredCarMG
+	Inherits@4: ^WaveforceBulletProjectile
 
 ArmoredCarMGAAWaveforce:
 	Inherits: ^HeavyAAWeapon
-	Inherits: ^WaveforceBulletWarhead
-	Inherits: ArmoredCarMG_AA
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: ^WaveforceBulletWarhead
+	Inherits@3: ArmoredCarMG_AA
+	Inherits@4: ^WaveforceBulletProjectile

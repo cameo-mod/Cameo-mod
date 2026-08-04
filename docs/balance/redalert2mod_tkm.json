@@ -29,18 +29,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "HueyGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^RA2Chaingun"
@@ -55,29 +50,28 @@
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@Missiles",
       "versus_templates": [
-       "^MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Missile_Medium"
       ],
       "warheads": [
        {
         "damage": "4",
-        "tag": "MediumMissile",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "HueyMissiles",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Missile_Medium"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": 1.0,
       "minrange": "1105",
       "pricing": true,
       "range": "5528",
@@ -143,7 +137,7 @@
        }
       ],
       "weapon": "HueyCryoMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -154,7 +148,7 @@
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": 1.0,
       "minrange": "1105",
       "pricing": true,
       "range": "5528",
@@ -220,7 +214,7 @@
        }
       ],
       "weapon": "HueyTwinMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -231,7 +225,7 @@
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": 1.0,
       "minrange": "1105",
       "pricing": true,
       "range": "5528",
@@ -297,7 +291,7 @@
        }
       ],
       "weapon": "HueyTwinMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -382,18 +376,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ViperMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2MediumMissile"
@@ -430,18 +419,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ViperMissilesCryo",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2MediumMissile",
@@ -478,18 +462,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ViperMissilesTwin",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2MediumMissile"
@@ -499,7 +478,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.8333333333333334,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
@@ -527,13 +506,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -563,7 +537,7 @@
        }
       ],
       "weapon": "ViperMissilesFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2MediumMissile",
@@ -665,25 +639,16 @@
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "20",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TKMDroneExplosion",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^ShrapnelWeapon"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Explosion_Medium"
       ]
      }
     ],
@@ -1086,7 +1051,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7496",
       "reloaddelay": "41",
@@ -1098,13 +1063,8 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1119,7 +1079,7 @@
        }
       ],
       "weapon": "tkmbunkmg",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2Chaingun",
        "^SmallArms"
@@ -1136,24 +1096,23 @@
       "requires": "td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "HighVAP",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ]
      }
     ],
@@ -1228,7 +1187,7 @@
        }
       ],
       "weapon": "TKMAATurretCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon"
@@ -1274,7 +1233,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8683",
       "reloaddelay": "28",
@@ -1306,7 +1265,7 @@
        }
       ],
       "weapon": "tkmturretcannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon"
@@ -1384,7 +1343,7 @@
        }
       ],
       "weapon": "FlakbusAA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon"
@@ -1458,7 +1417,7 @@
        }
       ],
       "weapon": "tkmtrenchdepcannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyCannon"
@@ -1532,7 +1491,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
@@ -1559,7 +1518,7 @@
        }
       ],
       "weapon": "Heal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -1567,7 +1526,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
@@ -1594,7 +1553,7 @@
        }
       ],
       "weapon": "Heal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -1603,7 +1562,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
@@ -1630,7 +1589,7 @@
        }
       ],
       "weapon": "Repair",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -1640,7 +1599,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
@@ -1667,7 +1626,7 @@
        }
       ],
       "weapon": "Repair",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -1726,13 +1685,8 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -1746,7 +1700,7 @@
       "burst": "3",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4792",
       "reloaddelay": "9",
@@ -1758,18 +1712,8 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1784,7 +1728,7 @@
        }
       ],
       "weapon": "tkmjuggap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2Grenade",
        "^SmallArms"
@@ -1804,13 +1748,8 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -1825,7 +1764,7 @@
       "burst": "3",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "4792",
       "reloaddelay": "9",
@@ -1837,18 +1776,8 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1863,7 +1792,7 @@
        }
       ],
       "weapon": "tkmjuggap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2Grenade",
        "^SmallArms"
@@ -1923,24 +1852,23 @@
       "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmm16",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      },
      {
@@ -1958,13 +1886,8 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -1986,24 +1909,23 @@
       "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmm16",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      },
      {
@@ -2022,13 +1944,8 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -2089,24 +2006,23 @@
       "requires": "!tkm_upgrade_semiautoriflesupgrade",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "6000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkm_rifleman_rifle",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      },
      {
@@ -2118,24 +2034,23 @@
       "requires": "tkm_upgrade_semiautoriflesupgrade",
       "slot": "Armament@PRIMARYUPGRADE",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "10000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkm_rifleman_semiautorifle",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      },
      {
@@ -2147,24 +2062,23 @@
       "reloaddelay": "75",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "6000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkm_rifleman_rifle",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      }
     ],
@@ -2224,24 +2138,23 @@
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ],
       "warheads": [
        {
-        "damage": "18000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "9",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmrockets",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ]
      },
      {
@@ -2253,24 +2166,23 @@
       "requires": "tkm_upgrade_cryorocketsupgrade",
       "slot": "Armament@PRIMARYNATO",
       "versus_templates": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ],
       "warheads": [
        {
-        "damage": "18000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "9",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmcryorockets",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ]
      },
      {
@@ -2283,24 +2195,23 @@
       "requires": "tkm_upgrade_twinrocketsupgrade",
       "slot": "Armament@PRIMARYBEREZKA",
       "versus_templates": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ],
       "warheads": [
        {
-        "damage": "18000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "9",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmtwinrockets",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ]
      },
      {
@@ -2343,7 +2254,7 @@
        }
       ],
       "weapon": "tkmfirerockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightMissile"
@@ -2359,24 +2270,23 @@
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ],
       "warheads": [
        {
-        "damage": "18000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "9",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "Rockets",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ]
      },
      {
@@ -2389,24 +2299,23 @@
       "requires": "tkm_upgrade_cryorocketsupgrade",
       "slot": "Armament@GARRISONEDTITAN",
       "versus_templates": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ],
       "warheads": [
        {
-        "damage": "18000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "9",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmcryorockets",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ]
      },
      {
@@ -2420,24 +2329,23 @@
       "requires": "tkm_upgrade_twinrocketsupgrade",
       "slot": "Armament@GARRISONEDBEREZKA",
       "versus_templates": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ],
       "warheads": [
        {
-        "damage": "18000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "9",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmtwinrockets",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ]
      },
      {
@@ -2481,7 +2389,7 @@
        }
       ],
       "weapon": "tkmfirerockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightMissile"
@@ -2551,7 +2459,7 @@
        }
       ],
       "weapon": "tkmawp",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2580,7 +2488,7 @@
        }
       ],
       "weapon": "tkmawp",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2653,7 +2561,7 @@
        }
       ],
       "weapon": "tkmsmg",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2684,7 +2592,7 @@
        }
       ],
       "weapon": "tkmsmg",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2759,29 +2667,23 @@
       "reloaddelay": "32",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ThermoF",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ]
      },
      {
@@ -2795,29 +2697,23 @@
       "reloaddelay": "32",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ThermoF",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ]
      }
     ],
@@ -2873,24 +2769,23 @@
       "reloaddelay": "31",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkm_trooper_ak",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      },
      {
@@ -2904,24 +2799,23 @@
       "reloaddelay": "31",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkm_trooper_ak",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      },
      {
@@ -2969,7 +2863,7 @@
        }
       ],
       "weapon": "tkm_trooper_gp25",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^LightFlameWeapon"
@@ -3021,7 +2915,7 @@
        }
       ],
       "weapon": "tkm_trooper_gp25",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^LightFlameWeapon"
@@ -3112,22 +3006,22 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "32000",
+        "damage": "6000",
         "tag": "HeavyCannon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "16",
+        "damage": "3",
         "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "32000",
+        "damage": "6000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "16",
+        "damage": "3",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
@@ -3142,18 +3036,48 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "32000",
+        "damage": "6000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
        {
-        "damage": "16",
+        "damage": "3",
         "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "CannonHE_Heavy",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "Bullet_Light",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "Bullet_Medium",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "VonSniperLockdown",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^MediumMissile",
@@ -3231,7 +3155,7 @@
        }
       ],
       "weapon": "VonSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -3263,22 +3187,22 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
+        "damage": "6000",
         "tag": "HeavyCannon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "8",
+        "damage": "3",
         "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
+        "damage": "6000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "8",
+        "damage": "3",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
@@ -3293,18 +3217,48 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
+        "damage": "6000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
        {
-        "damage": "8",
+        "damage": "3",
         "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "CannonHE_Heavy",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "Bullet_Light",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "Bullet_Medium",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "VonSniperAP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -3382,7 +3336,7 @@
        }
       ],
       "weapon": "VonSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -3415,22 +3369,22 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
+        "damage": "6000",
         "tag": "HeavyCannon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "8",
+        "damage": "3",
         "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
+        "damage": "6000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "8",
+        "damage": "3",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
@@ -3445,18 +3399,48 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
+        "damage": "6000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
        {
-        "damage": "8",
+        "damage": "3",
         "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "CannonHE_Heavy",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "Bullet_Light",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "Bullet_Medium",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "VonSniperAP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -3534,7 +3518,7 @@
        }
       ],
       "weapon": "VanSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3563,7 +3547,7 @@
        }
       ],
       "weapon": "VanSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3618,69 +3602,57 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "30",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2Shovel",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "1500",
       "reloaddelay": "30",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "RA2Shovel",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -4375,30 +4347,29 @@
       "reloaddelay": "46",
       "slot": "Armament@cannon",
       "versus_templates": [
-       "^MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Cannon_Medium"
       ],
       "warheads": [
        {
-        "damage": "12000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmrh120gun",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Cannon_Medium"
       ]
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
+     "src": "inherited",
+     "v": "Heavy"
     },
     "buildable": true,
     "cost": {
@@ -4407,7 +4378,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": null,
      "subtype": "MainBattleTank",
      "tech_tier": null,
@@ -4451,24 +4422,23 @@
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@Missiles",
       "versus_templates": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "as42rockets",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ]
      },
      {
@@ -4480,24 +4450,23 @@
       "requires": "tkm_upgrade_cryorocketsupgrade",
       "slot": "Armament@PRIMARYNATO",
       "versus_templates": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ],
       "warheads": [
        {
-        "damage": "18000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "9",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmcryorockets",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ]
      },
      {
@@ -4510,24 +4479,23 @@
       "requires": "tkm_upgrade_twinrocketsupgrade",
       "slot": "Armament@PRIMARYBEREZKA",
       "versus_templates": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ],
       "warheads": [
        {
-        "damage": "18000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "9",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmtwinrockets",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ]
      },
      {
@@ -4570,7 +4538,7 @@
        }
       ],
       "weapon": "tkmfirerockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightMissile"
@@ -4588,7 +4556,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": null,
      "subtype": "ScoutVehicle",
      "tech_tier": null,
@@ -4623,7 +4591,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "4831",
       "reloaddelay": "5",
@@ -4649,15 +4617,15 @@
        }
       ],
       "weapon": "TKMMedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
+     "src": "inherited",
+     "v": "Superheavy"
     },
     "buildable": true,
     "cost": {
@@ -4666,7 +4634,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "line_breaker",
      "special": null,
      "subtype": "LineBreaker",
      "tech_tier": null,
@@ -4743,7 +4711,7 @@
        }
       ],
       "weapon": "BigShieeTusk",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon"
@@ -4791,7 +4759,7 @@
        }
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -4840,7 +4808,7 @@
        }
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -4851,7 +4819,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
@@ -4859,7 +4827,9 @@
       "slot": "Armament@PRIMARYBEREZKA",
       "versus_templates": [
        "SandmarineTusk",
-       "^MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Missile_Medium"
       ],
       "warheads": [
        {
@@ -4888,13 +4858,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -4924,28 +4889,30 @@
        },
        {
         "damage": "4000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "SandmarineTuskTwin",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
-       "^MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Missile_Medium"
       ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
@@ -4953,7 +4920,9 @@
       "slot": "Armament@SECONDARYBEREZKA",
       "versus_templates": [
        "SandmarineTusk",
-       "^MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Missile_Medium"
       ],
       "warheads": [
        {
@@ -4982,13 +4951,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -5018,21 +4982,23 @@
        },
        {
         "damage": "4000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "SandmarineTuskTwin",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
-       "^MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Missile_Medium"
       ]
      },
      {
@@ -5103,7 +5069,7 @@
        }
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -5179,7 +5145,7 @@
        }
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -5226,7 +5192,7 @@
        }
       ],
       "weapon": "bigshieemortar",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^MediumFlameWeapon"
@@ -5234,7 +5200,7 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "src": "inherited",
      "v": "Superheavy"
     },
     "build_limit": {
@@ -5248,7 +5214,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "epic_vehicle",
      "special": null,
      "subtype": "EpicVehicle",
      "tech_tier": null,
@@ -5315,7 +5281,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery",
      "special": null,
      "subtype": "Artillery",
      "tech_tier": null,
@@ -5350,8 +5316,8 @@
    },
    "tkm_flakbus": {
     "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
-     "v": "Heavy"
+     "src": "inherited",
+     "v": "Medium"
     },
     "buildable": true,
     "cost": {
@@ -5360,9 +5326,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "anti_air_vehicle",
      "special": null,
-     "subtype": "SupportVehicle",
+     "subtype": "AntiAirVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5382,7 +5348,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "7000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
@@ -5397,7 +5363,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "4831",
       "reloaddelay": "5",
@@ -5423,7 +5389,7 @@
        }
       ],
       "weapon": "TKMMedicHeal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -5555,7 +5521,7 @@
        }
       ],
       "weapon": "TKMQuadCannonAG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon"
@@ -5594,7 +5560,7 @@
        }
       ],
       "weapon": "TKMQuadCannonAA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon"
@@ -5712,7 +5678,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -5738,7 +5704,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -5831,7 +5797,7 @@
        }
       ],
       "weapon": "SandmarineTusk",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon"
@@ -5879,7 +5845,7 @@
        }
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -5928,7 +5894,7 @@
        }
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -5939,7 +5905,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
@@ -5947,7 +5913,9 @@
       "slot": "Armament@PRIMARYBEREZKA",
       "versus_templates": [
        "SandmarineTusk",
-       "^MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Missile_Medium"
       ],
       "warheads": [
        {
@@ -5976,13 +5944,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6012,28 +5975,30 @@
        },
        {
         "damage": "4000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "SandmarineTuskTwin",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
-       "^MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Missile_Medium"
       ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
@@ -6041,7 +6006,9 @@
       "slot": "Armament@SECONDARYBEREZKA",
       "versus_templates": [
        "SandmarineTusk",
-       "^MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Missile_Medium"
       ],
       "warheads": [
        {
@@ -6070,13 +6037,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6106,21 +6068,23 @@
        },
        {
         "damage": "4000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "SandmarineTuskTwin",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
-       "^MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Missile_Medium"
       ]
      },
      {
@@ -6191,7 +6155,7 @@
        }
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -6267,7 +6231,7 @@
        }
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -6314,7 +6278,7 @@
        }
       ],
       "weapon": "sandmarinemortar",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^MediumFlameWeapon"
@@ -6322,7 +6286,7 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "src": "inherited",
      "v": "Superheavy"
     },
     "build_limit": {
@@ -6336,7 +6300,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "epic_vehicle",
      "special": null,
      "subtype": "EpicVehicle",
      "tech_tier": null,
@@ -6384,13 +6348,8 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -6409,24 +6368,23 @@
       "requires": "!tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@missile",
       "versus_templates": [
-       "^MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Missile_Medium"
       ],
       "warheads": [
        {
-        "damage": "24000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmstrykerrockets",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Missile_Medium"
       ]
      },
      {
@@ -6469,7 +6427,7 @@
        }
       ],
       "weapon": "tkmstrykerfirerockets",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumMissile"
@@ -6477,7 +6435,7 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "src": "inherited",
      "v": "Light"
     },
     "buildable": true,
@@ -6487,9 +6445,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "missile_vehicle",
      "special": null,
-     "subtype": "FireSupport",
+     "subtype": "MissileVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6509,7 +6467,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "7000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
@@ -6561,7 +6519,7 @@
        }
       ],
       "weapon": "t30shell",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^RailgunWeapon"
@@ -6569,7 +6527,7 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "src": "inherited",
      "v": "Superheavy"
     },
     "build_limit": {
@@ -6583,7 +6541,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "epic_vehicle",
      "special": null,
      "subtype": "EpicVehicle",
      "tech_tier": null,
@@ -6650,24 +6608,23 @@
       "reloaddelay": "42",
       "slot": "Armament",
       "versus_templates": [
-       "^MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Cannon_Medium"
       ],
       "warheads": [
        {
-        "damage": "10000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkm2a46gun",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Cannon_Medium"
       ]
      },
      {
@@ -6682,13 +6639,8 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -6700,8 +6652,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
+     "src": "inherited",
+     "v": "Heavy"
     },
     "buildable": true,
     "cost": {
@@ -6710,7 +6662,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": null,
      "subtype": "MainBattleTank",
      "tech_tier": null,
@@ -6758,13 +6710,8 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -6778,7 +6725,7 @@
       "burst": "3",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4792",
       "reloaddelay": "9",
@@ -6789,18 +6736,8 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6812,10 +6749,20 @@
         "damage": "3",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "Bullet_Light",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmtechnicalmgap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RA2Grenade",
        "^SmallArms"
@@ -6833,7 +6780,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": null,
      "subtype": "ScoutVehicle",
      "tech_tier": null,
@@ -6874,24 +6821,23 @@
       "reloaddelay": "42",
       "slot": "Armament@cannon",
       "versus_templates": [
-       "^MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Cannon_Medium"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmltgun",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Cannon_Medium"
       ]
      },
      {
@@ -6908,26 +6854,23 @@
       ],
       "warheads": [
        {
-        "damage": "18000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "9",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmtwinrocketstechnicaltank",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ]
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
+     "src": "inherited",
+     "v": "Heavy"
     },
     "buildable": true,
     "cost": {
@@ -6936,7 +6879,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": null,
      "subtype": "MainBattleTank",
      "tech_tier": null,
@@ -7028,29 +6971,21 @@
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^ShrapnelWeapon"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Explosion_Medium"
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmkatyushalalauncherrockets",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^ShrapnelWeapon"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Explosion_Medium"
       ]
      },
      {
@@ -7069,18 +7004,8 @@
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -7088,7 +7013,8 @@
       "weapon_class_source": "template",
       "weapon_types": [
        "^CryoMissileProjectile",
-       "^ShrapnelWeapon"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Explosion_Medium"
       ]
      },
      {
@@ -7106,32 +7032,23 @@
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmkatyushalalauncherrocketstwin",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^ShrapnelWeapon"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Explosion_Medium"
       ]
      },
      {
       "burst": "8",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "14000",
       "reloaddelay": "157",
@@ -7169,33 +7086,24 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "20000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "tkmkatyushalalauncherrocketsfire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightMissile",
-       "^ShrapnelWeapon"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Explosion_Medium"
       ]
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
+     "src": "inherited",
+     "v": "Light"
     },
     "buildable": true,
     "cost": {
@@ -7204,7 +7112,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery",
      "special": null,
      "subtype": "Artillery",
      "tech_tier": null,
@@ -7277,7 +7185,7 @@
        }
       ],
       "weapon": "tkmtrenchcannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyCannon"
@@ -7285,7 +7193,7 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "src": "inherited",
      "v": "Heavy"
     },
     "build_duration": {
@@ -7299,7 +7207,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": null,
      "subtype": "MainBattleTank",
      "tech_tier": null,
@@ -7418,7 +7326,7 @@
        }
       ],
       "weapon": "TKMZazaCannonAG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon"
@@ -7457,7 +7365,7 @@
        }
       ],
       "weapon": "TKMZazaCannonAA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon"

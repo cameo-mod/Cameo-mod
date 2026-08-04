@@ -65,8 +65,6 @@ ra2_soviets_rhinoheavytank:
 		HpPerStep: 6500
 	ChangesHealth@SelfHealing:
 		Step: 52
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 17
 		Offset: -100,0,5
@@ -150,7 +148,6 @@ ra2_soviets_rhinoheavytank:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: ra2sovietsVehicleVoice
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -262,7 +259,6 @@ ra2_soviets_apocalypsetank:
 		Name: Apocalypse Tank
 	Valued:
 		Cost: 1750
-	DeliversCash:
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ra2_soviets_warfactory, ra2_soviets_battlelab
@@ -278,8 +274,6 @@ ra2_soviets_apocalypsetank:
 		HpPerStep: 17500
 	ChangesHealth@SelfHealing:
 		Step: 140
-	Armor:
-		Type: Superheavy
 	Turreted:
 		TurnSpeed: 11
 	Armament@PRIMARY:
@@ -414,8 +408,6 @@ ra2_soviets_v3rocketlauncher:
 		HpPerStep: 1875
 	ChangesHealth@SelfHealing:
 		Step: 15
-	Armor:
-		Type: Light
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -507,8 +499,6 @@ ra2_soviets_teslatank:
 		HpPerStep: 3750
 	ChangesHealth@SelfHealing:
 		Step: 30
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 15
 	Armament@PRIMARY:

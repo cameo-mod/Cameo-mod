@@ -3,7 +3,9 @@
 	ReloadDelay: 55
 
 HarkonnenFlameTurret:
-	Inherits: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	ReloadDelay: 50
 	Burst: 5
 	BurstDelays: 3
@@ -14,26 +16,9 @@ HarkonnenFlameTurret:
 		LaunchAngle: 10, 20
 		Image: tsflameall
 		Palette: tseffect
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 25135
-		Versus:
-			HAZMAT: 75
-			Shield: 100
-			None: 150
-			Flak: 140
-			Plate: 130
-			Heroic: 110
-			Wood: 80
-			Concrete: 75
-			Steel: 75
-			Scout: 100
-			Light: 100
-			Medium: 100
-			Heavy: 100
-			Superheavy: 90
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 12568
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 8378
@@ -78,11 +63,8 @@ ExplosiveDebris:
 		LaunchAngle: 150, 220
 		Inaccuracy: 2c512
 		BounceCount: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 3000
-		Spread: 1c562
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 1500
 		Spread: 1c562
 	Warhead@Effect: CreateEffect
 		Explosions: large_explosion

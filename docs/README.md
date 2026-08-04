@@ -58,6 +58,9 @@ Crashes and player-visible regressions always jump the queue.
 - `design/cabal_rebuild_plan.md` — CABAL faction rebuild working plan (concept → actor mapping).
 - `design/schwarzer_mond_artwork_status.md` — Schwarzer Mond icon/artwork audit status.
 - `design/shattered_paradise_research.md` — TS authenticity research from Shattered Paradise mod.
+- `design/WEAPON_3WAY_SPLIT.md` — weapon template 3-way split (warhead/projectile/effect) migration plan and progress.
+- `design/WEAPON_TYPE_SYSTEM.md` — weapon type classification system (damage types, delivery methods, warhead categories).
+- `design/mission_win_lose_research.md` — mission win/lose condition research for campaign design.
 - `PROJECT_CONTEXT.md` — short orientation summary; the docs above are authoritative over it.
 
 ## Generated artifacts — do NOT hand-edit
@@ -75,3 +78,5 @@ These are produced by tooling and regenerate; editing them by hand is meaningles
 Dated session logs, one-off reports, and superseded recommendations live in `history/`.
 They record *what happened*, never *what is true now*. Anything still relevant has
 been promoted into the authoritative docs above.
+
+- `DEVELOPMENT_LOG.md` (repo root) — multi-agent development log; historical session record.

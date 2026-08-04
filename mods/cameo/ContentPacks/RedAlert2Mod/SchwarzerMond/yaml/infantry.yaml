@@ -245,9 +245,9 @@ schwarzermond_noidharvester:
 		Queue: Infantry, RAInfantry
 		Description: actor_aamecha.description
 	Mobile:
-		Speed: 40
-		TurnSpeed: 16
-		Locomotor: tracked
+		Speed: 50
+		TurnSpeed: 20
+		Locomotor: chem
 	Health:
 		HP: 75000
 	Repairable:
@@ -283,18 +283,17 @@ schwarzermond_noidharvester:
 		Sequence: harvesting
 		Palette: ra2effect
 	Harvester:
-		BaleLoadDelay: 6
-		BaleUnloadDelay: 6
+		BaleLoadDelay: 5
+		BaleUnloadDelay: 1
 	DockClientManager:
 		OccupancyCostModifier: 0
 	StoresResources:
-		Capacity: 90
+		Capacity: 50
 	WithStoresResourcesPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
-		PipCount: 9
-	Mobile:
-		Locomotor: chem
+		PipCount: 10
+
 schwarzermond_engineeringarmor:
 	Inherits: ^Walker
 	Inherits@Crypto: ^NaxiCryptofascism

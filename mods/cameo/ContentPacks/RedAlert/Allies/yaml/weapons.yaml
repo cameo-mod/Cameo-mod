@@ -1,6 +1,6 @@
-﻿CryoLightSniper:
+CryoLightSniper:
 	Inherits: LightSniper
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 0
@@ -13,21 +13,23 @@
 		Amount: -30000
 
 M60mg:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 10
 	Burst: 4
 	BurstDelays: 5
 	Range: 4359
 	Report: pillbox1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
 RATurretGun:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^HeavyCannon
 	ReloadDelay: 40
 	Range: 7685
 	Report: turret1.aud
@@ -47,22 +49,24 @@ RATurretGun:
 		Explosions: small_poof
 
 zsu_23:
-	Inherits: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ReloadDelay: 14
 	Burst: 2
 	BurstDelays: 2
 	Range: 11412
 	ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
 Hellfire:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyMissile
+	Inherits@2: ^HeavyMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 6540
@@ -86,16 +90,16 @@ Hellfire:
 
 HellfireCryo:
 	Inherits: Hellfire
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -16000
 		Range: 400
 
 ChainGunMH60:
 	Inherits: ^SmallArms
-	Inherits: ^Grenade
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^Grenade
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 6
 	Range: 3375
@@ -130,7 +134,7 @@ ChainGunMH60:
 
 AlliedTankDestroyerCannon:
 	Inherits: ^MediumCannon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^TankDestroyerCannon
 	ReloadDelay: 60
 	Range: 6819
 	Report: tank5.aud
@@ -147,7 +151,7 @@ AlliedTankDestroyerCannon:
 
 SheridanCannon:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^MediumCannon
 	ReloadDelay: 64
 	Range: 5023
 	Report: cannon2.aud
@@ -164,7 +168,7 @@ SheridanCannon:
 
 SheridanMissiles:
 	Inherits: ^MediumMissile
-	Inherits: ^LightMissile
+	Inherits@2: ^LightMissile
 	ReloadDelay: 64
 	Range: 5023
 	ValidTargets: Ground, Water, Air
@@ -183,14 +187,14 @@ SheridanMissiles:
 
 SheridanMissilesCryo:
 	Inherits: SheridanMissiles
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -48000
 		Range: 300
 
 SheridanVulcan:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 58
 	Range: 5023
 	Burst: 4
@@ -207,7 +211,8 @@ SheridanVulcan:
 		Damage: 1
 
 RapierBombs:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Explosion_Heavy
 	ReloadDelay: 60
 	Range: 2000
 	Burst: 4
@@ -219,16 +224,16 @@ RapierBombs:
 		Acceleration: 0, 0, -10
 		Image: BOMBLET
 		Shadow: True
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 10000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Ship
 		Damage: 5
 
 RapierBombsCryo:
 	Inherits: RapierBombs
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Projectile: GravityBomb
 	Warhead@Effect: CreateEffect
 		Explosions: cryo_artillery
@@ -279,20 +284,20 @@ Aphid_AA:
 
 AphidCryo_AA:
 	Inherits: Aphid_AA
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -16000
 		Range: 400
 
 ReconRangerRecoillessGun:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^RailgunWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^Chaingun
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^RailgunWeapon
+	Inherits@7: ^MediumMissile
+	Inherits@8: ^D2KRocket
 	ReloadDelay: 64
 	Range: 4925
 	Report: missile6.aud
@@ -370,10 +375,10 @@ ReconRangerRecoillessGun:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Effect: CreateEffect
@@ -382,7 +387,7 @@ ReconRangerRecoillessGun:
 
 CryoReconRangerRecoillessGun:
 	Inherits: ReconRangerRecoillessGun
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 0
@@ -396,9 +401,9 @@ CryoReconRangerRecoillessGun:
 
 APTusk:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^Grenade
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
+	Inherits@2: ^Grenade
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^MediumMissile
 	ReloadDelay: 51
 	Burst: 4
 	BurstDelays: 3
@@ -434,17 +439,17 @@ APTusk:
 
 APTuskCryo:
 	Inherits: APTusk
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -16000
 		Range: 300
 
 ChronoTusk:
 	Inherits: ^Grenade
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^Chaingun
+	Inherits@4: ^HeavyMissile
+	Inherits@5: ^MediumMissile
 	ReloadDelay: 54
 	Burst: 4
 	BurstDelays: 3
@@ -487,14 +492,14 @@ ChronoTusk:
 
 ChronoTuskCryo:
 	Inherits: ChronoTusk
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -20000
 		Range: 400
 
 155mmCryo:
 	Inherits: 155mm
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Projectile: Bullet
 		ContrailStartWidth: 125
 		ContrailLength: 50
@@ -518,11 +523,11 @@ ChronoTuskCryo:
 
 25mm:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^LightFlameWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^MediumCannon
 	ReloadDelay: 37
 	Range: 4720
 	Report: cannon2.aud
@@ -582,15 +587,17 @@ ChronoTuskCryo:
 		ImpactSounds: xplos.aud
 
 90mm:
-	Inherits: ^MediumCannon
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cannon_Medium
 	ReloadDelay: 47
 	Range: 5159
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 515
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -653,9 +660,9 @@ Colt45:
 
 HeavyAATankCannonAG:
 	Inherits: ^LightMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^SmallArms
+	Inherits@4: ^Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 4746
@@ -697,13 +704,13 @@ HeavyAATankCannon_AA:
 		ValidTargets: Air
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 RadarJammer:

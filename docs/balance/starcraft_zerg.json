@@ -8,7 +8,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.0416666666666667,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5230",
       "reloaddelay": "60",
@@ -104,7 +104,7 @@
        }
       ],
       "weapon": "BehemothShoot",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -163,7 +163,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "60",
@@ -189,7 +189,7 @@
        }
       ],
       "weapon": "BroodweaverLeech",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -243,29 +243,23 @@
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [
-       "^MediumChemicalWeapon"
+       "^Warhead_Chemical_Medium",
+       "^Projectile_Chem_Medium",
+       "^Effect_Chem_Medium"
       ],
       "warheads": [
        {
-        "damage": "10000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "MediumChemicalWeaponPercentage",
+        "tag": "Chemical_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "CorruptorSpore",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^MediumChemicalWeapon"
+       "^Warhead_Chemical_Medium",
+       "^Projectile_Chem_Medium",
+       "^Effect_Chem_Medium"
       ]
      }
     ],
@@ -373,7 +367,7 @@
        }
       ],
       "weapon": "SCDevourerAA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SwordWeapon",
        "^MediumChemicalWeapon",
@@ -423,7 +417,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.9583333333333334,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5850",
       "reloaddelay": "60",
@@ -519,7 +513,7 @@
        }
       ],
       "weapon": "DreadshroudSpore",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumMissile",
@@ -572,35 +566,29 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1448",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "14000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "7",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "GorekrakenClaw",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -646,7 +634,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "60",
@@ -699,7 +687,7 @@
        }
       ],
       "weapon": "GuardianShoot",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -812,7 +800,7 @@
        }
       ],
       "weapon": "MutaliskSpore",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SwordWeapon",
        "^MediumChemicalWeapon",
@@ -905,7 +893,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5480",
       "reloaddelay": "78",
@@ -942,7 +930,7 @@
        }
       ],
       "weapon": "QueenSpine",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^ArrowWeapon"
@@ -990,7 +978,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "25",
@@ -1025,23 +1013,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "50000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "25",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ScourgeExplosion",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^ShrapnelWeapon",
@@ -1698,7 +1676,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.1666666666666667,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
@@ -1763,7 +1741,7 @@
        }
       ],
       "weapon": "Tentacle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -1817,8 +1795,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Spore",
-      "weapon_class_source": "template",
+      "weapon": "Spore_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^Chaingun",
@@ -1864,7 +1842,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.1666666666666667,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
@@ -1929,7 +1907,7 @@
        }
       ],
       "weapon": "Tentacle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -1983,8 +1961,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Spore",
-      "weapon_class_source": "template",
+      "weapon": "Spore_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^Chaingun",
@@ -2029,7 +2007,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.1666666666666667,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
@@ -2094,7 +2072,7 @@
        }
       ],
       "weapon": "Tentacle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -2148,8 +2126,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Spore",
-      "weapon_class_source": "template",
+      "weapon": "Spore_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^Chaingun",
@@ -2195,7 +2173,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.1666666666666667,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
@@ -2260,7 +2238,7 @@
        }
       ],
       "weapon": "Tentacle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -2314,8 +2292,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Spore",
-      "weapon_class_source": "template",
+      "weapon": "Spore_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumMissile",
        "^Chaingun",
@@ -2368,29 +2346,23 @@
       "reloaddelay": "175",
       "slot": "Armament",
       "versus_templates": [
-       "^HeavyChemicalWeapon"
+       "^Warhead_Chemical_Heavy",
+       "^Projectile_Chem_Heavy",
+       "^Effect_Chem_Heavy"
       ],
       "warheads": [
        {
-        "damage": "30000",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "HeavyChemicalWeaponPercentage",
+        "tag": "Chemical_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "DefilerPlague",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^HeavyChemicalWeapon"
+       "^Warhead_Chemical_Heavy",
+       "^Projectile_Chem_Heavy",
+       "^Effect_Chem_Heavy"
       ]
      }
     ],
@@ -2498,7 +2470,7 @@
        }
       ],
       "weapon": "HydraSpit",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^LightMissile",
@@ -2568,7 +2540,7 @@
        }
       ],
       "weapon": "HydraSpit",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^LightMissile",
@@ -2681,35 +2653,29 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "2225",
       "reloaddelay": "20",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "20",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "zerg_kerrigan",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -2758,35 +2724,29 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1150",
       "reloaddelay": "11",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ShriekStinger",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -2875,7 +2835,7 @@
        }
       ],
       "weapon": "SpithidSpit",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -2928,7 +2888,7 @@
        }
       ],
       "weapon": "SpithidSpit",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -2978,7 +2938,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.03125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8561",
       "reloaddelay": "80",
@@ -3096,7 +3056,7 @@
        }
       ],
       "weapon": "SwarmlingShoot",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^MediumFlameWeapon",
@@ -3152,35 +3112,29 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1680",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "6000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TalonClaw",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -3226,35 +3180,29 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1600",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "20",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "UltraliskHusk",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -3303,35 +3251,29 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1350",
       "reloaddelay": "11",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "ZerglingClaw",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -4048,7 +3990,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "25",
@@ -4058,18 +4000,8 @@
       ],
       "warheads": [
        {
-        "damage": "10000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -4129,41 +4061,35 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1250",
       "reloaddelay": "30",
       "slot": "Armament",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "30000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "GoremawClaw",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
+     "src": "inherited",
+     "v": "Superheavy"
     },
     "buildable": true,
     "cost": {
@@ -4172,7 +4098,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "high_tech_tank",
      "special": 1.25,
      "subtype": "HighTechTank",
      "tech_tier": 0.75,
@@ -4256,7 +4182,7 @@
       "burst": "5",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.0416666666666667,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7120",
       "reloaddelay": "30",
@@ -4342,7 +4268,7 @@
        }
       ],
       "weapon": "HermitShoot",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4354,7 +4280,7 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Armor.Type",
+     "src": "inherited",
      "v": "Superheavy"
     },
     "build_limit": {
@@ -4368,7 +4294,7 @@
     },
     "design": {
      "category": "Tanks",
-     "class_anchor": null,
+     "class_anchor": "epic_vehicle",
      "special": 1.0,
      "subtype": "EpicVehicle",
      "tech_tier": 0.75,
@@ -4440,8 +4366,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Armor.Type",
-     "v": "Heavy"
+     "src": "inherited",
+     "v": "Light"
     },
     "buildable": true,
     "cost": {
@@ -4450,7 +4376,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "fire_support",
      "special": 1.25,
      "subtype": "FireSupport",
      "tech_tier": 1.0,
@@ -4486,7 +4412,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7740",
       "reloaddelay": "40",
@@ -4605,7 +4531,7 @@
        }
       ],
       "weapon": "SporemawShoot",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -4621,7 +4547,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "7740",
       "reloaddelay": "40",
@@ -4740,7 +4666,7 @@
        }
       ],
       "weapon": "SporemawShoot",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -4765,7 +4691,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "fire_support",
      "special": 1.0,
      "subtype": "FireSupport",
      "tech_tier": 1.0,

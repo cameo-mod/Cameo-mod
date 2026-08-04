@@ -765,7 +765,6 @@ ordos_spiceharvester:
 # 		RequiresSelection: true
 # 		PipCount: 12
 
-
 # mg_quad_tleilaxu.bot:
 # 	Inherits: mg_quad_tleilaxu
 # 	Buildable:
@@ -803,8 +802,6 @@ ordos_cobratank:
 		Step: 18
 	Shielded:
 		RegenAmount: 36
-	Armor:
-		Type: Heavy
 	Mobile:
 		Speed: 45
 		TurnSpeed: 18
@@ -869,7 +866,6 @@ ordos_cobratank:
 		RequireForceMoveCondition: !undeployed
 	Voiced:
 		VoiceSet: EBFDOrdosCobra
-	DeliversCash:
 	RangeMultiplier@deployed:
 		Modifier: 160
 		RequiresCondition: deployed
@@ -908,8 +904,6 @@ ordos_pythontank:
 		Step: 28
 	Shielded:
 		RegenAmount: 56
-	Armor:
-		Type: Heavy
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
@@ -966,7 +960,6 @@ ordos_pythontank:
 		Voice: Move
 	Voiced:
 		VoiceSet: EBFDOrdosCobra
-	DeliversCash:
 	RangeMultiplier@deployed:
 		Modifier: 160
 		RequiresCondition: deployed
@@ -1007,8 +1000,6 @@ ordos_lasertank:
 		Step: 42
 	Shielded:
 		RegenAmount: 84
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 105
 		TurnSpeed: 21
@@ -1068,8 +1059,6 @@ ordos_deviatortank:
 		Step: 34
 	Shielded:
 		RegenAmount: 68
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 115
 		TurnSpeed: 23
@@ -1468,7 +1457,7 @@ ordos_stealthraider:
 		Upgrades: ordos_upgrade_lasercartridges
 ordos_dustdrone:
 	Inherits@D2KV: ^D2KVehicle
-	Inherits@Template: ^FireSupportTemplate
+	Inherits@Template: ^MissileVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
@@ -1500,8 +1489,6 @@ ordos_dustdrone:
 		Step: 13
 	Shielded:
 		RegenAmount: 26
-	Armor:
-		Type: Light
 	Mobile:
 		Speed: 145
 		TurnSpeed: 58
@@ -1566,8 +1553,6 @@ ordos_deviatorartillery:
 		Step: 22
 	Shielded:
 		RegenAmount: 44
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 55
 		TurnSpeed: 22
@@ -1625,8 +1610,6 @@ ordos_combattank:
 		Step: 34
 	Shielded:
 		RegenAmount: 68
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 85
 		TurnSpeed: 17
@@ -1682,8 +1665,6 @@ ordos_heavycombattank:
 		Step: 46
 	Shielded:
 		RegenAmount: 92
-	Armor:
-		Type: Heavy
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -1754,8 +1735,6 @@ ordos_combatautoguntank:
 		Step: 38
 	Shielded:
 		RegenAmount: 48
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 80
 		TurnSpeed: 16
@@ -1805,8 +1784,6 @@ ordos_heavyautoguntank:
 		Step: 64
 	Shielded:
 		RegenAmount: 96
-	Armor:
-		Type: Heavy
 	Mobile:
 		Speed: 75
 		TurnSpeed: 30
@@ -1856,8 +1833,6 @@ ordos_tankdestroyer:
 		Prerequisites: ~ordos_heavy_vehicle_production, ordos_ixresearchcenter
 		Description: Fast stealth tank with powerful long range cannon\n  Strong vs Tanks\n  Weak vs Infantry
 		IconPalette: windows256
-	Armor:
-		Type: Medium
 	Armament:
 		Weapon: 120mm_td
 		LocalOffset: 750,0,0
@@ -2471,7 +2446,6 @@ ordos_tankdestroyer:
 # 		VoiceSet: D2KVordelVoice
 # 	-FireWarheadsOnDeath:
 
-
 # trike_vordel_2:
 # 	Inherits: trike_vordel
 # 	Inherits@absorbed: ^D2KVordelAbsorbed
@@ -2508,7 +2482,6 @@ ordos_tankdestroyer:
 # 	Voiced:
 # 		VoiceSet: D2KVordelVoice
 # 	-FireWarheadsOnDeath:
-
 
 # quad_vordel_2:
 # 	Inherits: quad_vordel

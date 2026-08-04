@@ -8,7 +8,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.1,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4688",
       "reloaddelay": "15",
@@ -95,7 +95,7 @@
        }
       ],
       "weapon": "TSApacheMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
@@ -107,7 +107,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4688",
       "reloaddelay": "15",
@@ -210,7 +210,7 @@
        }
       ],
       "weapon": "TSChemApacheMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^HeavyCannon",
@@ -345,7 +345,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.1,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5052",
       "reloaddelay": "12",
@@ -432,7 +432,7 @@
        }
       ],
       "weapon": "TSCobraMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
@@ -444,7 +444,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5052",
       "reloaddelay": "12",
@@ -547,7 +547,7 @@
        }
       ],
       "weapon": "TSChemCobraMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^HeavyCannon",
@@ -609,24 +609,21 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^HeavyBomb"
+       "^Warhead_Demolition_Heavy",
+       "^Effect_Explosion_Heavy"
       ],
       "warheads": [
        {
-        "damage": "120000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "60",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSCropBomb",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^HeavyBomb"
+       "^Warhead_Demolition_Heavy",
+       "^Effect_Explosion_Heavy"
       ]
      },
      {
@@ -669,7 +666,7 @@
        }
       ],
       "weapon": "TSCropBombChem",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyChemicalWeapon"
@@ -729,24 +726,21 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^HeavyBomb"
+       "^Warhead_Demolition_Heavy",
+       "^Effect_Explosion_Heavy"
       ],
       "warheads": [
        {
-        "damage": "180000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "90",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSLocustBomb",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^HeavyBomb"
+       "^Warhead_Demolition_Heavy",
+       "^Effect_Explosion_Heavy"
       ]
      },
      {
@@ -791,7 +785,7 @@
        }
       ],
       "weapon": "TSLocustBombChem",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyChemicalWeapon"
@@ -850,24 +844,23 @@
       "reloaddelay": "18",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSWaspClaw",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ]
      }
     ],
@@ -1389,7 +1382,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6574",
       "reloaddelay": "10",
@@ -1423,7 +1416,7 @@
        }
       ],
       "weapon": "TS70mmTur",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TSCannonEffect",
        "^TankDestroyerCannon",
@@ -1432,7 +1425,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.8333333333333334,
       "pricing": true,
       "range": "6574",
       "reloaddelay": "10",
@@ -1482,7 +1475,7 @@
        }
       ],
       "weapon": "TS70mmTurChem",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TSCannonEffect",
        "^LightChemicalWeapon",
@@ -1571,7 +1564,7 @@
        }
       ],
       "weapon": "TSScoopDualTur",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TSCannonEffect",
        "^ShrapnelWeapon",
@@ -1637,7 +1630,7 @@
        }
       ],
       "weapon": "TSScoopDualTurChem",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TSCannonEffect",
        "^MediumChemicalWeapon",
@@ -1685,24 +1678,21 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9483",
       "reloaddelay": "30",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^TSCannonEffect",
-       "^TankDestroyerCannon"
+       "^Warhead_CannonAP_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_Cannon_Light"
       ],
       "warheads": [
        {
-        "damage": "48000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "24",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -1710,7 +1700,9 @@
       "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
-       "^TankDestroyerCannon"
+       "^Warhead_CannonAP_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_Cannon_Light"
       ]
      }
     ],
@@ -1761,24 +1753,23 @@
       "reloaddelay": "28",
       "slot": "Armament",
       "versus_templates": [
-       "^FlakWeapon"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
       "warheads": [
        {
-        "damage": "10000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSJuggerFlakAA",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^FlakWeapon"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ]
      }
     ],
@@ -1853,7 +1844,7 @@
        }
       ],
       "weapon": "TSMutVulcanTurret",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -2026,7 +2017,7 @@
        }
       ],
       "weapon": "TSChemspray",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -2093,7 +2084,7 @@
        }
       ],
       "weapon": "TSChemsprayUp",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -2146,7 +2137,7 @@
        }
       ],
       "weapon": "TSChemspray",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -2214,7 +2205,7 @@
        }
       ],
       "weapon": "TSChemsprayUP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -2320,7 +2311,7 @@
        }
       ],
       "weapon": "TSEngineerPistol",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2349,7 +2340,7 @@
        }
       ],
       "weapon": "TSEngineerPistol",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2404,29 +2395,23 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^LightChemicalWeapon"
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "LightChemicalWeaponPercentage",
+        "tag": "Chemical_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSGhostGun",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightChemicalWeapon"
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
       ]
      },
      {
@@ -2474,7 +2459,7 @@
        }
       ],
       "weapon": "TSChemGhostGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -2504,29 +2489,23 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^LightChemicalWeapon"
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "LightChemicalWeaponPercentage",
+        "tag": "Chemical_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSGhostGun",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightChemicalWeapon"
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
       ]
      },
      {
@@ -2575,7 +2554,7 @@
        }
       ],
       "weapon": "TSChemGhostGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -2637,29 +2616,23 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^LightChemicalWeapon"
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "LightChemicalWeaponPercentage",
+        "tag": "Chemical_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSGhostGun",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightChemicalWeapon"
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
       ]
      },
      {
@@ -2707,7 +2680,7 @@
        }
       ],
       "weapon": "TSChemGhostGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -2737,29 +2710,23 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^LightChemicalWeapon"
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "LightChemicalWeaponPercentage",
+        "tag": "Chemical_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSGhostGun",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightChemicalWeapon"
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
       ]
      },
      {
@@ -2808,7 +2775,7 @@
        }
       ],
       "weapon": "TSChemGhostGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -2857,29 +2824,23 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^LightChemicalWeapon"
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "LightChemicalWeaponPercentage",
+        "tag": "Chemical_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSGhostGun",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightChemicalWeapon"
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
       ]
      },
      {
@@ -2927,7 +2888,7 @@
        }
       ],
       "weapon": "TSChemGhostGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -2943,29 +2904,23 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^LightChemicalWeapon"
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "LightChemicalWeaponPercentage",
+        "tag": "Chemical_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSGhostGun",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightChemicalWeapon"
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
       ]
      },
      {
@@ -3014,7 +2969,7 @@
        }
       ],
       "weapon": "TSChemGhostGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -3063,24 +3018,23 @@
       "reloaddelay": "18",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      },
      {
@@ -3093,24 +3047,23 @@
       "reloaddelay": "18",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      }
     ],
@@ -3169,24 +3122,23 @@
       "reloaddelay": "18",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      },
      {
@@ -3199,24 +3151,23 @@
       "reloaddelay": "18",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      }
     ],
@@ -3262,24 +3213,23 @@
       "reloaddelay": "18",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      },
      {
@@ -3292,24 +3242,23 @@
       "reloaddelay": "18",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      }
     ],
@@ -3439,7 +3388,7 @@
        }
       ],
       "weapon": "TSInfantryMortar",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb",
@@ -3518,7 +3467,7 @@
        }
       ],
       "weapon": "TSInfantryMortarChem",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb",
@@ -3570,7 +3519,7 @@
        }
       ],
       "weapon": "TSInfantryMortar",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb",
@@ -3650,7 +3599,7 @@
        }
       ],
       "weapon": "TSInfantryMortarChem",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb",
@@ -3735,7 +3684,7 @@
        }
       ],
       "weapon": "TSSergGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3776,7 +3725,7 @@
        }
       ],
       "weapon": "TSSergGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3852,7 +3801,7 @@
        }
       ],
       "weapon": "TSSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3881,7 +3830,7 @@
        }
       ],
       "weapon": "TSSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3951,7 +3900,7 @@
        }
       ],
       "weapon": "TSSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3980,7 +3929,7 @@
        }
       ],
       "weapon": "TSSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4042,7 +3991,7 @@
        }
       ],
       "weapon": "TSSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4071,7 +4020,7 @@
        }
       ],
       "weapon": "TSSniper",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4118,24 +4067,23 @@
       "reloaddelay": "50",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "forgotten_mutantsoldier_rifle",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      },
      {
@@ -4147,24 +4095,23 @@
       "reloaddelay": "50",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "forgotten_mutantsoldier_rifle",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      }
     ],
@@ -4222,24 +4169,23 @@
       "reloaddelay": "50",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "forgotten_mutantsoldier_rifle",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      },
      {
@@ -4251,24 +4197,23 @@
       "reloaddelay": "50",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "forgotten_mutantsoldier_rifle",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      }
     ],
@@ -4314,24 +4259,23 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ],
       "warheads": [
        {
-        "damage": "24000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSBazooka",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ]
      },
      {
@@ -4344,24 +4288,23 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ],
       "warheads": [
        {
-        "damage": "24000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSBazooka",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ]
      },
      {
@@ -4404,7 +4347,7 @@
        }
       ],
       "weapon": "TSChemBazooka",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^LightMissile"
@@ -4451,7 +4394,7 @@
        }
       ],
       "weapon": "TSChemBazooka",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^LightMissile"
@@ -4500,7 +4443,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "3112",
       "reloaddelay": "32",
@@ -4586,7 +4529,7 @@
        }
       ],
       "weapon": "TSMutShotgun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4599,7 +4542,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "3112",
       "reloaddelay": "32",
@@ -4685,7 +4628,7 @@
        }
       ],
       "weapon": "TSMutShotgun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4785,7 +4728,7 @@
        }
       ],
       "weapon": "TSFiendShard",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -4839,7 +4782,7 @@
        }
       ],
       "weapon": "TSFiendShard",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -4908,7 +4851,7 @@
        }
       ],
       "weapon": "TSFiendShardUP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -4979,7 +4922,7 @@
        }
       ],
       "weapon": "TSFiendShardUP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -5076,7 +5019,7 @@
        }
       ],
       "weapon": "TSFiendShard",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -5130,7 +5073,7 @@
        }
       ],
       "weapon": "TSFiendShard",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -5199,7 +5142,7 @@
        }
       ],
       "weapon": "TSFiendShardUP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -5270,7 +5213,7 @@
        }
       ],
       "weapon": "TSFiendShardUP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -5322,7 +5265,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6096",
       "reloaddelay": "36",
@@ -5397,7 +5340,7 @@
        }
       ],
       "weapon": "TSFiendShardBlue",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5410,7 +5353,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "6096",
       "reloaddelay": "36",
@@ -5485,7 +5428,7 @@
        }
       ],
       "weapon": "TSFiendShardBlue",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5497,7 +5440,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.0416666666666667,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6096",
       "reloaddelay": "36",
@@ -5599,7 +5542,7 @@
        }
       ],
       "weapon": "TSFiendShardBlueUP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5614,7 +5557,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.0416666666666667,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6096",
       "reloaddelay": "36",
@@ -5716,7 +5659,7 @@
        }
       ],
       "weapon": "TSFiendShardBlueUP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5814,7 +5757,7 @@
        }
       ],
       "weapon": "TSVisceroidSpray",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -5866,7 +5809,7 @@
        }
       ],
       "weapon": "TSVisceroidSpray",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -5933,7 +5876,7 @@
        }
       ],
       "weapon": "TSVisceroidSprayUP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -6002,7 +5945,7 @@
        }
       ],
       "weapon": "TSVisceroidSprayUP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -6045,69 +5988,57 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1127",
       "reloaddelay": "20",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "16000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSZombieAttack",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "1127",
       "reloaddelay": "20",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        {
-        "damage": "16000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "SwordWeaponPercentage",
+        "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSZombieAttack",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SwordWeapon"
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
       ]
      }
     ],
@@ -6179,6 +6110,7 @@
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
+      "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament",
       "versus_templates": [
        "^ShrapnelWeapon",
@@ -6212,76 +6144,129 @@
        }
       ],
       "weapon": "TSBoatcannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb"
       ]
      },
      {
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "80",
+      "requires": "forgotten_upgrade_chemicalweapons",
+      "slot": "Armament@UPGRADE",
+      "versus_templates": [
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumChemicalWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSChemBoatcannon",
+      "weapon_class_source": "versus_shield",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumChemicalWeapon"
+      ]
+     },
+     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.8333333333333334,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
       "slot": "Armament@DC1",
       "versus_templates": [
-       "^Grenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Explosion_Light"
       ],
       "warheads": [
        {
-        "damage": "60000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "DepthCharge",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^Grenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Explosion_Light"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.8333333333333334,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
       "slot": "Armament@DC2",
       "versus_templates": [
-       "^Grenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Explosion_Light"
       ],
       "warheads": [
        {
-        "damage": "60000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "DepthCharge",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^Grenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Explosion_Light"
       ]
      }
     ],
@@ -6341,24 +6326,23 @@
       "reloaddelay": "69",
       "slot": "Armament@AA",
       "versus_templates": [
-       "^FlakWeapon"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
       "warheads": [
        {
-        "damage": "10000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSJuggerFlakAA_boat",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^FlakWeapon"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ]
      },
      {
@@ -6370,9 +6354,40 @@
       "pricing": true,
       "range": "12834",
       "reloaddelay": "69",
+      "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^ShrapnelWeapon"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Explosion_Medium"
+      ],
+      "warheads": [
+       {
+        "damage": "15",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSJuggerboat90mm",
+      "weapon_class_source": "template",
+      "weapon_types": [
+       "^Warhead_Concussion_Medium",
+       "^Effect_Explosion_Medium"
+      ]
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "2565",
+      "pricing": true,
+      "range": "12834",
+      "reloaddelay": "69",
+      "requires": "forgotten_upgrade_chemicalweapons",
+      "slot": "Armament@UPGRADE",
+      "versus_templates": [
+       "^ShrapnelWeapon",
+       "^MediumChemicalWeapon"
       ],
       "warheads": [
        {
@@ -6389,46 +6404,56 @@
         "damage": "15",
         "tag": "ShrapnelWeaponPercentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSJuggerboat90mm",
-      "weapon_class_source": "template",
+      "weapon": "TSChemJuggerboat90mm",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^ShrapnelWeapon"
+       "^ShrapnelWeapon",
+       "^MediumChemicalWeapon"
       ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.8333333333333334,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Grenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Explosion_Light"
       ],
       "warheads": [
        {
-        "damage": "60000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "DepthCharge",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^Grenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Explosion_Light"
       ]
      }
     ],
@@ -6487,29 +6512,21 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^ShrapnelWeapon"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Explosion_Medium"
       ],
       "warheads": [
        {
-        "damage": "24000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSVanMissile",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^ShrapnelWeapon"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Explosion_Medium"
       ]
      },
      {
@@ -6559,7 +6576,7 @@
        }
       ],
       "weapon": "TSChemVanMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^ShrapnelWeapon"
@@ -7169,7 +7186,7 @@
        }
       ],
       "weapon": "TSMutApcCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon"
@@ -7254,7 +7271,7 @@
        }
       ],
       "weapon": "TSBowlerCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -7272,7 +7289,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": null,
      "subtype": "ScoutVehicle",
      "tech_tier": null,
@@ -7348,7 +7365,7 @@
        }
       ],
       "weapon": "TS120mmxChem",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyChemicalWeapon",
@@ -7397,7 +7414,7 @@
        }
       ],
       "weapon": "TSMammothTuskChem",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyChemicalWeapon"
@@ -7405,7 +7422,7 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
+     "src": "inherited",
      "v": "Superheavy"
     },
     "build_limit": {
@@ -7419,7 +7436,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "epic_vehicle",
      "special": null,
      "subtype": "EpicVehicle",
      "tech_tier": null,
@@ -7463,29 +7480,23 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        {
-        "damage": "28000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "14000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "14",
-        "tag": "MediumFlameWeaponPercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "MutFlamer",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ]
      },
      {
@@ -7533,7 +7544,7 @@
        }
       ],
       "weapon": "MutFlamerChem",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
@@ -7541,8 +7552,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
-     "v": "Heavy"
+     "src": "inherited",
+     "v": "Superheavy"
     },
     "buildable": true,
     "cost": {
@@ -7551,7 +7562,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "line_breaker",
      "special": null,
      "subtype": "LineBreaker",
      "tech_tier": null,
@@ -7634,7 +7645,7 @@
        }
       ],
       "weapon": "TS120mmx",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TSCannon",
        "^ShrapnelWeapon",
@@ -7705,7 +7716,7 @@
        }
       ],
       "weapon": "TSChem120mmx",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TSCannon",
        "^MediumChemicalWeapon",
@@ -7725,17 +7736,14 @@
       "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^ImpactGlow",
-       "^HeavyMissile"
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Heavy",
+       "^Effect_Missile_Heavy"
       ],
       "warheads": [
        {
-        "damage": "60000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -7743,12 +7751,14 @@
       "weapon_class_source": "template",
       "weapon_types": [
        "^ImpactGlow",
-       "^HeavyMissile"
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Heavy",
+       "^Effect_Missile_Heavy"
       ]
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
+     "src": "inherited",
      "v": "Superheavy"
     },
     "build_limit": {
@@ -7762,7 +7772,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "epic_vehicle",
      "special": null,
      "subtype": "EpicVehicle",
      "tech_tier": null,
@@ -7842,7 +7852,7 @@
        }
       ],
       "weapon": "MutHFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^HeavyFlameWeapon"
@@ -7925,7 +7935,7 @@
        }
       ],
       "weapon": "MutHFlamerChem",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^HeavyFlameWeapon",
@@ -7935,8 +7945,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
-     "v": "Heavy"
+     "src": "inherited",
+     "v": "Superheavy"
     },
     "buildable": true,
     "cost": {
@@ -7945,7 +7955,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "line_breaker",
      "special": null,
      "subtype": "LineBreaker",
      "tech_tier": null,
@@ -8017,7 +8027,7 @@
        }
       ],
       "weapon": "TSAdatsMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile"
@@ -8058,8 +8068,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSAdatsMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "TSAdatsMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile"
@@ -8102,7 +8112,7 @@
        }
       ],
       "weapon": "TSAdatsMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile"
@@ -8143,8 +8153,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSAdatsMissileAA",
-      "weapon_class_source": "template",
+      "weapon": "TSAdatsMissile_AA",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile"
@@ -8152,8 +8162,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
-     "v": "Light"
+     "src": "inherited",
+     "v": "Medium"
     },
     "buildable": true,
     "cost": {
@@ -8162,9 +8172,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "anti_air_vehicle",
      "special": null,
-     "subtype": "SupportVehicle",
+     "subtype": "AntiAirVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -8183,7 +8193,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "7000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.Speed",
@@ -8207,29 +8217,21 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^ShrapnelWeapon"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Explosion_Medium"
       ],
       "warheads": [
        {
-        "damage": "24000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSVanMissile",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^ShrapnelWeapon"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Explosion_Medium"
       ]
      },
      {
@@ -8279,7 +8281,7 @@
        }
       ],
       "weapon": "TSChemVanMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^ShrapnelWeapon"
@@ -8287,8 +8289,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
-     "v": "Light"
+     "src": "inherited",
+     "v": "Medium"
     },
     "buildable": true,
     "cost": {
@@ -8297,9 +8299,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery_tank",
      "special": null,
-     "subtype": "Artillery",
+     "subtype": "ArtilleryTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -8343,29 +8345,21 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^ShrapnelWeapon"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Explosion_Medium"
       ],
       "warheads": [
        {
-        "damage": "24000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSMLRSMissile",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^ShrapnelWeapon"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Explosion_Medium"
       ]
      },
      {
@@ -8415,7 +8409,7 @@
        }
       ],
       "weapon": "TSChemMLRSMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^ShrapnelWeapon"
@@ -8423,7 +8417,7 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
+     "src": "inherited",
      "v": "Medium"
     },
     "buildable": true,
@@ -8433,9 +8427,9 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "artillery_tank",
      "special": null,
-     "subtype": "Artillery",
+     "subtype": "ArtilleryTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -8524,29 +8518,28 @@
       "reloaddelay": "6",
       "slot": "Armament",
       "versus_templates": [
-       "^Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSNomadGun",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ]
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
+     "src": "inherited",
      "v": "Superheavy"
     },
     "build_limit": {
@@ -8560,7 +8553,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "epic_vehicle",
      "special": null,
      "subtype": "EpicVehicle",
      "tech_tier": null,
@@ -8604,24 +8597,23 @@
       "reloaddelay": "20",
       "slot": "Armament",
       "versus_templates": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "TSRaiderCarCannon",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ]
      }
     ],
@@ -8636,7 +8628,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": null,
      "subtype": "ScoutVehicle",
      "tech_tier": null,
@@ -8680,17 +8672,14 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^TSCannonEffect",
-       "^MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Cannon_Medium"
       ],
       "warheads": [
        {
-        "damage": "4000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -8698,7 +8687,9 @@
       "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
-       "^MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Cannon_Medium"
       ]
      },
      {
@@ -8742,7 +8733,7 @@
        }
       ],
       "weapon": "TS70mmChem",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TSCannonEffect",
        "^LightChemicalWeapon",
@@ -8751,8 +8742,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
+     "src": "inherited",
+     "v": "Heavy"
     },
     "buildable": true,
     "cost": {
@@ -8761,7 +8752,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": null,
      "subtype": "MainBattleTank",
      "tech_tier": null,
@@ -8796,7 +8787,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5919",
       "reloaddelay": "50",
@@ -8834,7 +8825,7 @@
        }
       ],
       "weapon": "TSRuinerMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^MediumMissile"
@@ -8842,7 +8833,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5919",
       "reloaddelay": "50",
@@ -8912,7 +8903,7 @@
        }
       ],
       "weapon": "TSChemRuinerMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -8932,7 +8923,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "scout_vehicle",
      "special": null,
      "subtype": "ScoutVehicle",
      "tech_tier": null,
@@ -8969,7 +8960,7 @@
       "burst": "2",
       "burstdelays": "2",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5300",
       "reloaddelay": "18",
@@ -9006,7 +8997,7 @@
        }
       ],
       "weapon": "TSSAPCMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^Grenade",
        "^LightMissile"
@@ -9016,29 +9007,21 @@
       "burst": "2",
       "burstdelays": "2",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5300",
       "reloaddelay": "18",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^LightChemicalWeapon",
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light",
        "TSSAPCMissiles"
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "LightChemicalWeaponPercentage",
+        "tag": "Chemical_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -9068,9 +9051,11 @@
        }
       ],
       "weapon": "TSSAPCCoreMissiles",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
-       "^LightChemicalWeapon",
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light",
        "^Grenade",
        "^LightMissile"
       ]
@@ -9133,17 +9118,14 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^TSCannonEffect",
-       "^MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Cannon_Medium"
       ],
       "warheads": [
        {
-        "damage": "20000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -9151,7 +9133,9 @@
       "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
-       "^MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Cannon_Medium"
       ]
      },
      {
@@ -9197,7 +9181,7 @@
        }
       ],
       "weapon": "TSScoopDualChem",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TSCannonEffect",
        "^MediumChemicalWeapon",
@@ -9206,8 +9190,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
-     "v": "Heavy"
+     "src": "inherited",
+     "v": "Superheavy"
     },
     "buildable": true,
     "cost": {
@@ -9216,7 +9200,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "high_tech_tank",
      "special": null,
      "subtype": "HighTechTank",
      "tech_tier": null,
@@ -9253,7 +9237,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7701",
       "reloaddelay": "90",
@@ -9261,17 +9245,14 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^TSCannonEffect",
-       "^TankDestroyerCannon"
+       "^Warhead_CannonAP_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_Cannon_Light"
       ],
       "warheads": [
        {
-        "damage": "30000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -9279,7 +9260,9 @@
       "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
-       "^TankDestroyerCannon"
+       "^Warhead_CannonAP_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_Cannon_Light"
       ]
      },
      {
@@ -9323,7 +9306,7 @@
        }
       ],
       "weapon": "TSHighVelocityChem",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TSCannonEffect",
        "^LightChemicalWeapon",
@@ -9332,8 +9315,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
+     "src": "inherited",
+     "v": "Light"
     },
     "buildable": true,
     "cost": {
@@ -9342,7 +9325,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "fire_support",
      "special": null,
      "subtype": "FireSupport",
      "tech_tier": null,
@@ -9417,7 +9400,7 @@
        }
       ],
       "weapon": "TSBusMortar",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb"
@@ -9495,7 +9478,7 @@
        }
       ],
       "weapon": "TSBusMortarChem",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb",
@@ -9505,8 +9488,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
-     "v": "Heavy"
+     "src": "inherited",
+     "v": "Superheavy"
     },
     "buildable": true,
     "cost": {
@@ -9515,7 +9498,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "line_breaker",
      "special": null,
      "subtype": "LineBreaker",
      "tech_tier": null,
@@ -9599,7 +9582,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8207",
       "reloaddelay": "55",
@@ -9607,17 +9590,14 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^TSCannonEffect",
-       "^TankDestroyerCannon"
+       "^Warhead_CannonAP_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_Cannon_Light"
       ],
       "warheads": [
        {
-        "damage": "40000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "20",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -9625,7 +9605,9 @@
       "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
-       "^TankDestroyerCannon"
+       "^Warhead_CannonAP_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_Cannon_Light"
       ]
      },
      {
@@ -9674,7 +9656,7 @@
        }
       ],
       "weapon": "TSHighVelocity2Chem",
-      "weapon_class_source": "template",
+      "weapon_class_source": "versus_shield",
       "weapon_types": [
        "^TSCannonEffect",
        "^LightChemicalWeapon",
@@ -9683,8 +9665,8 @@
      }
     ],
     "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
+     "src": "inherited",
+     "v": "Light"
     },
     "buildable": true,
     "cost": {
@@ -9693,7 +9675,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "fire_support",
      "special": null,
      "subtype": "FireSupport",
      "tech_tier": null,

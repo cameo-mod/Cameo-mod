@@ -56,8 +56,6 @@ futuretech_gunstrider:
 		HpPerStep: 16000
 	ChangesHealth@SelfHealing:
 		Step: 128
-	Armor:
-		Type: Heavy
 	Armament:
 		Weapon: FutureMechGatling
 		LocalOffset: 200,300,500, 200,-300,500
@@ -111,8 +109,6 @@ futuretech_plasmastrider:
 		HpPerStep: 12000
 	ChangesHealth@SelfHealing:
 		Step: 96
-	Armor:
-		Type: Heavy
 	Armament@PRIMARY:
 		Weapon: FutureMechPlasma
 		LocalOffset: 100,190,800, 100,-190,800
@@ -214,8 +210,6 @@ futuretech_robottank:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 26 #3
 	Armament:
@@ -249,7 +243,6 @@ futuretech_robottank:
 		BobDistance: -64
 		InitialHeight: 384
 		RequiresCondition: !disabled && robotcontrol
-	DeliversCash:
 	-TemporaryOwnerManager:
 	Capturable:
 		Types: thiefproof
@@ -294,8 +287,6 @@ futuretech_guardiantank:
 		HpPerStep: 5750
 	ChangesHealth@SelfHealing:
 		Step: 46
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 17
 		Offset: -40,0,0
@@ -529,8 +520,6 @@ futuretech_beehivedronecarrier:
 		HpPerStep: 6500
 	ChangesHealth@SelfHealing:
 		Step: 52
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 12
 		Offset: 0,0,0
@@ -607,8 +596,6 @@ futuretech_oriontank:
 		HpPerStep: 9000
 	ChangesHealth@SelfHealing:
 		Step: 72
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 12
 		Offset: -40,0,0
@@ -799,8 +786,6 @@ futuretech_athenacannon:
 		HP: 62500
 	Repairable:
 		HpPerStep: 3125
-	Armor:
-		Type: Medium
 	Armament@AG:
 		Name: athena-beam
 		Weapon: AthenaLaser
@@ -862,8 +847,6 @@ futuretech_energizer:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armor:
-		Type: Light
 	Mobile:
 		Speed: 50
 		TurnSpeed: 20
@@ -927,8 +910,6 @@ futuretech_futuretank:
 		HpPerStep: 32500
 	ChangesHealth@SelfHealing:
 		Step: 260
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 9 #3
 		Offset: 75,0,1
@@ -961,7 +942,6 @@ futuretech_futuretank:
 		Sequence: turret
 	Voiced:
 		VoiceSet: FutureTankVoice
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	Targetable@ENERGIZER:

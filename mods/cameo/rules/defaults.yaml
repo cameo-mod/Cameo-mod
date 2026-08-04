@@ -872,7 +872,7 @@
 
 ^GlobalBuffs:
 	Inherits: ^GPSSatelliteSupport
-	Inherits: ^WayOfTheDragon
+	Inherits@2: ^WayOfTheDragon
 	# FirepowerMultiplier@GlobalBuffs:
 	# 	Modifier: 85
 	FirepowerMultiplier@GlobalBuffs:
@@ -1525,7 +1525,7 @@
 	Inherits@EXT: ^ExternalConditions
 	Inherits@TankBuffs: ^TankBuffs
 	Armor:
-		Type: Medium
+		Type: Heavy
 	RevealsShroud:
 		Range: 6000
 	Buildable:
@@ -1542,7 +1542,7 @@
 	Inherits@TankBuffs: ^TankBuffs
 	Inherits@Crushes: ^VehicleCrusher
 	Armor:
-		Type: Medium
+		Type: Superheavy
 	RevealsShroud:
 		Range: 7000
 	Buildable:
@@ -1561,7 +1561,7 @@
 	ProducibleWithLevel@spyvehicles:
 		Prerequisites: vehicles.upgraded
 	Armor:
-		Type: Heavy
+		Type: Superheavy
 	RevealsShroud:
 		Range: 8000
 	AutoTarget:
@@ -2343,6 +2343,11 @@
 		DeathType: SwarmlingSpawn
 	ActorStatValues:
 		Stats: Armor, Sight, Speed
+	Valued:
+		Cost: 0
+	DeliversCash:
+		Type: GrinderCash
+		Sounds: bgrinda.wav
 	WithIdleOverlay@shield1:
 		Sequence: shield-complete
 		StartSequence: shield-starts
@@ -2451,9 +2456,6 @@
 		RequiresCondition: !parachute
 	DamagedByTintedCells@tib:
 		RequiresCondition: !parachute
-	DeliversCash:
-		Type: GrinderCash
-		Sounds: bgrinda.wav
 	CaptureManager:
 		BeingCapturedCondition: being-captured
 	Capturable:
@@ -2525,9 +2527,6 @@
 		Locomotor: tracked
 	Tooltip:
 		GenericName: Tank
-	DeliversCash:
-		Type: GrinderCash
-		Sounds: bgrinda.wav
 
 # Shared muzzle-glow tuning for cannon/td_nod_gunturret units Ã¢â‚¬â€ inherited by ^Tank and by cannon defence
 # turrets so both use identical values. Geometry/fades fall back to the trait defaults;
@@ -2560,9 +2559,6 @@
 		PauseOnCondition: disabled
 	Tooltip:
 		GenericName: Boat
-	DeliversCash:
-		Type: GrinderCash
-		Sounds: bgrinda.wav
 	Targetable:
 		TargetTypes: Ground, Water, Ship
 	Passenger:
@@ -3282,9 +3278,6 @@
 	PhysicalStateAura@EnemyProximity:
 		FalloffAmounts: 1, 2, 3, 4, 5
 	EdibleByLeap:
-	DeliversCash:
-		Type: GrinderCash
-		Sounds: bgrinda.wav
 	Cloneable:
 		Types: NormalInfantry
 	CaptureManager:
@@ -4698,7 +4691,7 @@
 
 ^Defense:
 	Inherits: ^BaseBuilding
-	Inherits: ^BasicDefense
+	Inherits@2: ^BasicDefense
 	-GivesBuildableArea:
 	-CommandBarBlacklist:
 	-AcceptsDeliveredCash:
@@ -5777,7 +5770,7 @@
 		Prerequisites: global_conscription_buff
 		Multiplier: 75
 	FirepowerMultiplier@global_conscription_buff:
-		Prerequisites: global_conscription_buff
+		RequiresCondition: global_conscription_buff
 		Modifier: 110
 	SpeedMultiplier@global_conscription_buff:
 		RequiresCondition: global_conscription_buff
@@ -6716,7 +6709,6 @@ CPQDEBUGDUMMY:
 		HarvestFacings: 8
 		SearchFromProcRadius: 50
 		SearchFromHarvesterRadius: 25
-		MaxUnloadQueue: 25
 	StoresPlayerResources:
 		Capacity: 50
 		Resources: Tiberium, BlueTiberium, RedTiberium, GoldTiberium, Ore, Gems, RA2Copper, RA2Silver, RA2Ore, RA2Gems, SCMinerals, GESupplies, SWPCarbon, SWRCarbon, SWDCarbon, SWPNova, SWCNova, SWPMin, SWCMin, Spice, SCGas, SCGas2, SCGas3, SCMineralsChunk, SCRMinerals, DRWater, DRTaelon, D2Spice, D2SpiceDense, SWFarms, OP2Ore2, OP2Ore
@@ -7048,8 +7040,6 @@ CPQDEBUGDUMMY:
 	Passenger:
 		Voice: Move
 	Guard:
-		Voice: Move
-	DeliversCash:
 		Voice: Move
 
 ^AttackFrontalVoice:
@@ -9844,9 +9834,6 @@ CPQDEBUGDUMMY:
 	Tooltip:
 		Name: Civilian Vehicle
 		GenericName: Civilian Vehicle
-	DeliversCash:
-		Type: GrinderCash
-		Sounds: bgrinda.wav
 	-ChangesHealth@DRIVER_DEAD:
 	-Capturable@DRIVER_DEAD:
 	Crushable:

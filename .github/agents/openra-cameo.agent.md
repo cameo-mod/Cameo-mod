@@ -8,7 +8,7 @@ argument-hint: Describe the feature to implement or bug to fix. E.g. "Add a new 
 
 ```
 Cameo-mod/
-  engine/                   # OpenRA engine submodule (do not edit unless necessary)
+  engine/                   # OpenRA engine (fetched via fetch-engine.sh, .gitignored — NOT a submodule)
     OpenRA.Mods.AS/          # Adventure Stories traits (BaseSpawnerMaster lives here)
     OpenRA.Mods.Common/      # Core traits: ProductionQueue, Production, TechTree, Buildable
     mods/common/             # Engine-provided hotkeys, chrome layouts, fluent strings
@@ -91,15 +91,11 @@ Current `Adjacent: 5` on `SCHATCHERY` (updated from 4). Palette uses `TileSet.Te
 ---
 
 ## engine ↔ OpenRA Synchronisation
-The `Cameo-mod/engine/` directory is a git submodule that tracks a fork of this OpenRA repo. Engine-side C# fixes must be applied to **both** locations:
-1. `Cameo-mod/engine/<path>` — the submodule (built when running the Cameo mod).
-2. `OpenRA/<path>` — this standalone repo (used for OpenRA's own builds and tests).
+The `Cameo-mod/engine/` directory is fetched by `fetch-engine.sh` from the `cameo-mod/OpenRA` fork, pinned to the commit hash in `mod.config` (`ENGINE_VERSION`). It is `.gitignored` — NOT a git submodule. Engine-side C# changes follow the canonical engine update pipeline (see `docs/LESSONS_LEARNED.md` § "The canonical engine update pipeline"):
 
-After editing engine files in either location, verify the change compiles in both:
-```powershell
-# From Cameo-mod root
-dotnet build engine/OpenRA.Mods.Common/OpenRA.Mods.Common.csproj --configuration Release --verbosity minimal
-# From OpenRA root
-dotnet build OpenRA.Mods.Common/OpenRA.Mods.Common.csproj --configuration Release --verbosity minimal
-```
-Do not rely on the submodule and the standalone repo staying in sync automatically — always propagate changes manually to both.
+1. Edit engine C# only in the `cameo-engine` dev clone (branch `cameo-engine`).
+2. Commit + push to `origin/cameo-engine`.
+3. `git rev-parse cameo-engine` for the full 40-char hash.
+4. Set `ENGINE_VERSION` in `mod.config` (NOT `mod.yaml`).
+5. `make.cmd all` to re-fetch + rebuild; verify `engine/VERSION` matches.
+6. Boot-gate with `launch-game.cmd`, then commit `mod.config` with updated docs.

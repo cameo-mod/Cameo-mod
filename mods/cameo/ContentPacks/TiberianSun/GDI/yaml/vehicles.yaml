@@ -45,7 +45,6 @@ ts_gdi_tiberiumharvester:
 	WithDockingAnimation:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		Image: ts_gdi_tiberiumharvester
 	WithHarvestOverlay@harvesting:
@@ -152,7 +151,6 @@ ts_gdi_amphibiousapc:
 		Class: ts_gdi_amphibiousapc
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 6
@@ -200,8 +198,6 @@ ts_gdi_mobileemp:
 		TurnSpeed: 40
 	Health:
 		HP: 150000
-	Armor:
-		Type: Heavy
 	Repairable:
 		HpPerStep: 7500
 	ChangesHealth@SelfHealing:
@@ -215,7 +211,6 @@ ts_gdi_mobileemp:
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderVoxels:
 		Image: tsm_emp
 		Scale: 15
@@ -256,8 +251,6 @@ ts_gdi_titan:
 		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
 		Step: 40
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 15
 	Armament@PRIMARY:
@@ -282,7 +275,6 @@ ts_gdi_titan:
 		LocalOffset: 0,51,256
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	WithSpriteTurret:
 		Recoils: false
 	BodyOrientation:
@@ -331,8 +323,6 @@ ts_gdi_titanmkii:
 		HpPerStep: 6000
 	ChangesHealth@SelfHealing:
 		Step: 48
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 15
 		Offset: -45,0,392
@@ -354,7 +344,6 @@ ts_gdi_titanmkii:
 	WithMuzzleOverlay:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	WithSpriteTurret:
 		Recoils: true
 	WithFacingSpriteBody:
@@ -369,7 +358,7 @@ ts_gdi_titanmkii:
 
 ts_gdi_juggernautmkii:
 	Inherits: ^Tank
-	Inherits@Template: ^ArtilleryTankTemplate
+	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^GDIRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -397,8 +386,6 @@ ts_gdi_juggernautmkii:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armor:
-		Type: Medium
 	# Turreted:
 	# 	TurnSpeed: 14 #3
 	# 	Offset: -45,0,392
@@ -419,7 +406,6 @@ ts_gdi_juggernautmkii:
 		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	# WithSpriteTurret:
 	# 	Recoils: true
 	WithFacingSpriteBody:
@@ -568,8 +554,6 @@ ts_gdi_hovermlrs:
 		HpPerStep: 1500
 	ChangesHealth@SelfHealing:
 		Step: 12
-	Armor:
-		Type: Medium
 	Turreted:
 		TurnSpeed: 16
 	Armament:
@@ -585,7 +569,6 @@ ts_gdi_hovermlrs:
 	WithVoxelTurret:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	Hovers:
 		RequiresCondition: !disabled
 	RenderVoxels:
@@ -628,8 +611,6 @@ ts_gdi_wolverine:
 		HpPerStep: 1500
 	ChangesHealth@SelfHealing:
 		Step: 12
-	Armor:
-		Type: Light
 	AttackFrontal:
 		FacingTolerance: 0
 	Armament@PRIMARY:
@@ -696,8 +677,6 @@ ts_gdi_wolverinemkii:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armor:
-		Type: Medium
 	AttackFrontal:
 		FacingTolerance: 0
 	Armament@PRIMARY:
@@ -777,8 +756,6 @@ ts_gdi_mammothprototype:
 		HpPerStep: 40000
 	ChangesHealth@SelfHealing:
 		Step: 320
-	Armor:
-		Type: Superheavy
 	Armament@RAILGUN:
 		Name: railgun
 		Weapon: TSMechRailgun
@@ -832,7 +809,6 @@ ts_gdi_mammothprototype:
 		TickRate: 1
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderVoxels:
 		Scale: 15
 	Passenger:
@@ -880,8 +856,6 @@ ts_gdi_mammothmkii:
 		HpPerStep: 60000
 	ChangesHealth@SelfHealing:
 		Step: 480
-	Armor:
-		Type: Superheavy
 	Armament@RAILGUN:
 		Name: railgun
 		Weapon: TSMechRailgunII
@@ -925,7 +899,6 @@ ts_gdi_mammothmkii:
 		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	Passenger:
 	Capturable:
 		Types: thiefproof
@@ -982,8 +955,6 @@ ts_gdi_disruptor:
 		HpPerStep: 12500
 	ChangesHealth@SelfHealing:
 		Step: 100
-	Armor:
-		Type: Heavy
 	Turreted:
 		TurnSpeed: 10
 	Armament@PRIMARY:
@@ -1006,7 +977,6 @@ ts_gdi_disruptor:
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderVoxels:
 		Scale: 15
 	-RangeMultiplier@usasearchndestroy:
@@ -1041,7 +1011,6 @@ ts_gdi_mobilesensorarray:
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderVoxels:
 		Scale: 15
 	DetectCloaked:

@@ -1,27 +1,29 @@
 
 
 XCOMCarbine:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	Range: 4775
 	ReloadDelay: 4
 	Burst: 5
 	BurstDelays: 2
 	Report: gun11.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 XCOMShotgun:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^MediumCannon
+	Inherits@5: ^SmallArms
+	Inherits@6: ^Chaingun
 	ReloadDelay: 20
 	Range: 3000
 	Report: DSDSHTGN.wav
@@ -71,14 +73,14 @@ XCOMShotgun:
 
 XCOMShardGun:
 	Inherits: ^RailgunWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^HeavyMissile
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^HeavyMissile
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^TankDestroyerCannon
+	Inherits@7: ^MediumCannon
+	Inherits@8: ^SmallArms
+	Inherits@9: ^Chaingun
 	ReloadDelay: 25
 	Range: 5000
 	Burst: 5
@@ -157,7 +159,9 @@ XCOMShardGun:
 		Damage: 1
 
 XCOMGrenade1:
-	Inherits: ^Grenade
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Explosion_Light
 	ReloadDelay: 48
 	Range: 4775
 	Report: toss1.aud
@@ -169,11 +173,11 @@ XCOMGrenade1:
 		ContrailEndWidth: 22
 		ContrailStartColor: FFBB88FF
 		ContrailEndColor: FF884422
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: SpreadDamage
 		Damage: 60000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 30000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 30
 
 XCOMGrenade2:
@@ -186,7 +190,7 @@ XCOMGrenade3:
 
 XCOMChainGun:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 16
 	ValidTargets: Ground, Air, Water
 	Range: 5000
@@ -200,16 +204,16 @@ XCOMChainGun:
 		ContrailLength: 5
 		Speed: 10000
 		Width: 75
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 10000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 5
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 10000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 5
 
@@ -218,7 +222,9 @@ XCOMChainGun2:
 	ValidTargets: Infantry
 
 XCOMRocketLauncher:
-	Inherits: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_Missile_Medium
 	ReloadDelay: 75
 	Range: 7500
 	MinRange: 750
@@ -234,10 +240,10 @@ XCOMRocketLauncher:
 		ContrailStartColor: 5500ff
 		ContrailEndColor: FFFFFF
 		ContrailEndColorUsePlayerColor: true
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 150000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 75
 	Warhead@Effect: CreateEffect
@@ -247,7 +253,9 @@ XCOMRocketLauncher:
 		ValidTargets: Ground
 
 XCOMAWP:
-	Inherits: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 75
 	Range: 13000
 	Report: isniatta.wav
@@ -261,10 +269,10 @@ XCOMAWP:
 		ContrailLength: 33
 		Speed: 6000
 		Width: 50
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 100000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 50
 

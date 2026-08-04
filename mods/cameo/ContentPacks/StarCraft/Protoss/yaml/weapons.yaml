@@ -13,10 +13,10 @@ ArbiterStasis:
 
 PositronGrenade:
 	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
-	Inherits: ^Grenade
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^Grenade
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^MediumCannon
 	ReloadDelay: 30
 	Range: 5044
 	Report: tvuFir00.aud
@@ -67,9 +67,9 @@ PositronGrenade:
 PositronBounce1:
 	Inherits: PositronGrenade
 	Range: 2522
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 4000
@@ -81,13 +81,13 @@ PositronBounce1:
 		Damage: 2000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@shrapnel: FireShrapnel
 		Weapon: PositronBounce2
@@ -95,9 +95,9 @@ PositronBounce1:
 PositronBounce2:
 	Inherits: PositronGrenade
 	Range: 1261
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 2000
@@ -109,13 +109,13 @@ PositronBounce2:
 		Damage: 1000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 2000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 	-Warhead@shrapnel:
 
@@ -130,9 +130,9 @@ InterceptorLauncher:
 
 PhotonCannon:
 	Inherits: ^FlakWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^MediumCannon
+	Inherits@4: ^TankDestroyerCannon
 	ReloadDelay: 28
 	Range: 8228
 	Report: tphfi201.wav, tgofi200.wav
@@ -185,10 +185,10 @@ DragoonCannon:
 
 GladiusCannon:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: PhotonCannon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyFlameWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: PhotonCannon
 	ReloadDelay: 80
 	Range: 10000
 	Projectile: Missile
@@ -241,22 +241,22 @@ GladiusCannon:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@Effect: CreateEffect
@@ -275,7 +275,7 @@ ArbiterCannon:
 
 GlaveCanon:
 	Inherits: ^Grenade
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	ReloadDelay: 40
 	Range: 5250
 	Report: tphfi201.wav, tgofi200.wav
@@ -304,33 +304,33 @@ GlaveCanon:
 		Damage: 4
 
 psi_blades:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	Report: pzehit00.aud
 	SoundVolume: 3
 	ReloadDelay: 30
 	Burst: 2
 	BurstDelays: 6
 	Range: 1335
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 8000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
 psi_spear:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	Report: pzehit00.aud
 	SoundVolume: 3
 	ReloadDelay: 26
 	Range: 1337
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 32000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 16000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 16
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -396,9 +396,9 @@ PsionicShockwave:
 
 ScarabLaunch:
 	Inherits: ^HeavyBomb
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumMissile
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyCannon
+	Inherits@4: ^MediumMissile
 	ValidTargets: Ground, Water
 	ReloadDelay: 90
 	Range: 7777
@@ -460,10 +460,10 @@ ScarabLaunchDummy:
 
 ScoutRockets_AA:
 	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^D2KRocket
 	Report: HKMISSLE.aud
 	ReloadDelay: 40
 	Range: 4500
@@ -494,62 +494,62 @@ ScoutRockets_AA:
 		Damage: 2000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 2000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 
 WarpBlade:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 25
 	Range: 1600
 	Report: uzefir00.wav
 	SoundVolume: 3
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 20000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
 WarpBladeAmaranth:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 20
 	Range: 1840
 	Report: uzefir00.wav
 	SoundVolume: 3
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 30000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 15000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
 ZeratulSlice:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	Range: 1445
 	ReloadDelay: 24
 	Report: zlrkfir1.aud,zlrkfir2.aud
 	SoundVolume: 3
 	TargetActorCenter: True
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 64000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 32000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 32
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
 CorsairFlash:
 	Inherits: ^Grenade
-	Inherits: ^HeavyCannon
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^RA2Chaingun
 	Report: sc_corsair_attack.aud
 	ValidTargets: Air
 	Range: 5500
@@ -585,10 +585,10 @@ CorsairFlash:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -638,11 +638,11 @@ Corsair_EMP:
 
 VoidRayBeam:
 	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^TeslaWeapon
+	Inherits@6: ^LaserWeapon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 6
 	Range: 6474
@@ -731,11 +731,11 @@ VoidRayBeam:
 
 StarshipSovereignBeam:
 	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^TeslaWeapon
+	Inherits@6: ^LaserWeapon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 10
 	Range: 8475
@@ -863,18 +863,16 @@ UnitExplodeSmallProtoss:
 
 SCWorkerExplodeProtoss:
 	Inherits: UnitExplodeSmallProtoss
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 12000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 6000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 6
 
 ScoutMG:
 	Inherits: ^Grenade
-	Inherits: ^HeavyCannon
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^RA2Chaingun
 	Report: blastgn2.aud
 	ValidTargets: Ground, Water
 	Range: 4500
@@ -910,10 +908,10 @@ ScoutMG:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -921,15 +919,15 @@ ScoutMG:
 
 EpigraphMG:
 	Inherits: ^Grenade
-	Inherits: ^ArrowWeapon
-	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^ArrowWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^HeavyMissile
+	Inherits@6: ^MediumChemicalWeapon
+	Inherits@7: ^HeavyAAWeapon
+	Inherits@8: ^HeavyCannon
+	Inherits@9: ^FlakWeapon
+	Inherits@10: ^Chaingun
 	Report: blastgn2.aud
 	ValidTargets: Ground, Water, Air
 	Range: 5077
@@ -1017,8 +1015,8 @@ EpigraphMG:
 
 ManifoldMG:
 	Inherits: ^Grenade
-	Inherits: ^HeavyCannon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^RA2Chaingun
 	Report: blastgn2.aud
 	ValidTargets: Ground, Water
 	Range: 4780
@@ -1048,10 +1046,10 @@ ManifoldMG:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -1068,23 +1066,23 @@ ManifoldMG_AA:
 		ValidTargets: Air
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: SpreadDamage
 		ValidTargets: Air
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
 		ValidTargets: Air
 
 AtreusMG:
 	Inherits: ^Grenade
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^RA2Chaingun
 	Report: blastgn2.aud
 	ValidTargets: Ground, Water, Air
 	Range: 4500
@@ -1128,10 +1126,10 @@ AtreusMG:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -1140,11 +1138,11 @@ AtreusMG:
 
 PatriarchShoot:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumMissile
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^Chaingun
+	Inherits@6: ^FlakWeapon
 	Range: 5000
 	ReloadDelay: 75
 	Burst: 2

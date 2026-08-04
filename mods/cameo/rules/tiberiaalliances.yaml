@@ -163,7 +163,6 @@ Player:
 		RequiresCondition: levelupgrade3
 		Modifier: 85
 
-
 #######################################
 # TA Infantry
 #######################################
@@ -440,7 +439,6 @@ TAENGINEER:
 		Queue: Infantry, RAInfantry
 	Voiced:
 		VoiceSet: TSEngineer
-	DeliversCash:
 	RenderSprites:
 		Image: tsengineer
 #######################################
@@ -1917,7 +1915,6 @@ taupbarbaric2:
 	ProvidesPrerequisite:
 		Prerequisite: taupbarbaric2
 
-
 taupbarbaric:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
@@ -2633,7 +2630,6 @@ Addonspower3:
 		Image: tanodpower
 	ProvidesPrerequisite@upgradename:
 	
-
 Addonsacum1:
 	Interactable:
 	ScriptTriggers:
@@ -2860,7 +2856,6 @@ Addonsweap3:
 	RenderSprites:
 		Image: tanodweap
 	ProvidesPrerequisite@upgradename:
-
 
 Addonshq1:
 	Interactable:
@@ -3199,7 +3194,6 @@ Addonsgattling3:
 	RenderSprites:
 		Image: tanodgattling
 	ProvidesPrerequisite@upgradename:
-
 
 #######################################
 # TA Building Upgrades MUTANT

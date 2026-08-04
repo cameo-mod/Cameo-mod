@@ -328,7 +328,7 @@ latinsyndicate_spycenter:
 
 latinsyndicate_defensebureau:
 	Inherits: ^RA2Building
-	Inherits: ^BasicDefense
+	Inherits@2: ^BasicDefense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
 	Inherits@cashtricklerlimit: ^CashTricklerLimited

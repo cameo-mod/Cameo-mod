@@ -3013,7 +3013,7 @@ sow_advancer:
 
 sow_advancer_husk:
 	Inherits: ^HelicopterHusk
-	Inherits: ^SowResize
+	Inherits@2: ^SowResize
 	Tooltip:
 		GenericName: Destroyed Advancer
 	FallsToEarth:
@@ -4030,7 +4030,7 @@ hte_unlock:
 		
 sowfighter:
 	Inherits: ^RANeutralPlane
-	Inherits: ^SowResize
+	Inherits@2: ^SowResize
 	RenderSprites:
 	Huntable:
 	-UpdatesPlayerStatistics:
@@ -4150,7 +4150,7 @@ sowasteroid:
 		
 sowtripler:
 	Inherits: ^RANeutralPlane
-	Inherits: ^SowResize
+	Inherits@2: ^SowResize
 	Huntable:
 	-UpdatesPlayerStatistics:
 	AttackBomberCA:
@@ -4217,7 +4217,7 @@ sowtripler:
 
 sowtripler_husk:
 	Inherits: ^HelicopterHusk
-	Inherits: ^SowResize
+	Inherits@2: ^SowResize
 	Tooltip:
 		GenericName: Destroyed Tripler
 	FallsToEarth:
@@ -4228,7 +4228,7 @@ sowtripler_husk:
 		
 sowbomber:
 	Inherits: ra1_badger_bomber
-	Inherits: ^SowResize
+	Inherits@2: ^SowResize
 	AmbientSound:
 		SoundFiles: sowhercules.aud
 		Interval: 0
@@ -4293,7 +4293,7 @@ sowbomber:
 
 sowfighter_husk:
 	Inherits: ^PlaneHusk
-	Inherits: ^SowResize
+	Inherits@2: ^SowResize
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 333
@@ -4308,7 +4308,7 @@ sowfighter_husk:
 		
 sowbomber_husk:
 	Inherits: ^PlaneHusk
-	Inherits: ^SowResize
+	Inherits@2: ^SowResize
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 100

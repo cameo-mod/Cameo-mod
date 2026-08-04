@@ -249,13 +249,8 @@
       ],
       "warheads": [
        {
-        "damage": "8000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -268,7 +263,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Medium"
+     "v": "Heavy"
     },
     "buildable": true,
     "cost": {
@@ -277,7 +272,7 @@
     },
     "design": {
      "category": "Vehicles",
-     "class_anchor": null,
+     "class_anchor": "mbt",
      "special": null,
      "subtype": "MainBattleTank",
      "tech_tier": null,

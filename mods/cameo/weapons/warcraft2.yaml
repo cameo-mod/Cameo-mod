@@ -1,4 +1,4 @@
-﻿# Warcraft 2 weapons
+# Warcraft 2 weapons
 
 ####################################################################################################
 #		WEAPONS wc2_humans
@@ -7,16 +7,16 @@
 # 2-9 WC2 damage. 6 Base, 3 Pierce.
 
 wc2footmanslice:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 15
 	Range: 1333
 	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 	Projectile: InstantHit
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 12000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 6000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
@@ -29,11 +29,11 @@ wc2peasantsmack:
 
 wc2arrowFire:
 	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
-	Inherits: ^MediumCannon
-	Inherits: ^Grenade
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^MediumCannon
+	Inherits@4: ^Grenade
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^ArrowWeapon
 	ReloadDelay: 25
 	Range: 6973
 	Report: wc2_bowfire.aud
@@ -92,9 +92,9 @@ wc2arrowFire:
 
 wc2highArrowFire:
 	Inherits: ^LaserWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^HeavyAAWeapon
-	Inherits: wc2arrowFire
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^HeavyAAWeapon
+	Inherits@4: wc2arrowFire
 	ReloadDelay: 35
 	Range: 7487
 	Report: wc2_bowfire.aud
@@ -131,19 +131,19 @@ wc2highArrowFire:
 
 SiegeEngineCannon:
 	Inherits: ^NuclearWarhead
-	Inherits: ^LightMissile
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^LightMissile
+	Inherits@3: ^LightChemicalWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^HeavyChemicalWeapon
+	Inherits@6: ^LightFlameWeapon
+	Inherits@7: ^MediumFlameWeapon
+	Inherits@8: ^HeavyFlameWeapon
+	Inherits@9: ^Grenade
+	Inherits@10: ^ShrapnelWeapon
+	Inherits@11: ^HeavyBomb
+	Inherits@12: ^HeavyCannon
+	Inherits@13: ^MediumCannon
+	Inherits@14: ^TankDestroyerCannon
 	Report: TTaFi200.aud
 	ReloadDelay: 100
 	Range: 11200
@@ -287,14 +287,14 @@ wc2demolitionsquadTrigger:
 
 wc2demolitionsquadExplode:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumMissile
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^MediumCannon
+	Inherits@3: ^HeavyCannon
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^HeavyBomb
+	Inherits@7: ^MediumMissile
+	Inherits@8: ^Chaingun
+	Inherits@9: ^FlakWeapon
 	ValidTargets: Ground, Water
 	Projectile: InstantHit
 		Blockable: false
@@ -497,9 +497,9 @@ wc2mageBlizzard_Spread:
 
 wc2mageBlizzard_Projectile:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^LightFlameWeapon
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^LightChemicalWeapon
+	Inherits@4: ^LightFlameWeapon
 	Report: wc2_firehit.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
@@ -562,8 +562,8 @@ wc2mageBlizzard_Projectile:
 
 wc2_tower_arrow:
 	Inherits: ^RailgunWeapon
-	Inherits: ^Chaingun
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^ArrowWeapon
 	ReloadDelay: 34
 	Range: 8750
 	Report: wc2_bowfire.aud
@@ -603,16 +603,16 @@ wc2_tower_arrow:
 ####################################################################################################
 
 wc2gruntslice:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 18
 	Range: 1555
 	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 	Projectile: InstantHit
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 16000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
@@ -643,20 +643,20 @@ wc2_tower_axe:
 
 wc2cannontowerFire:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumMissile
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^HeavyFlameWeapon
+	Inherits@6: ^HeavyChemicalWeapon
+	Inherits@7: ^TankDestroyerCannon
+	Inherits@8: ^MediumCannon
+	Inherits@9: ^HeavyCannon
+	Inherits@10: ^Grenade
+	Inherits@11: ^ShrapnelWeapon
+	Inherits@12: ^HeavyBomb
+	Inherits@13: ^MediumMissile
+	Inherits@14: ^Chaingun
+	Inherits@15: ^FlakWeapon
 	ReloadDelay: 90
 	Range: 10500
 	MinRange: 2100

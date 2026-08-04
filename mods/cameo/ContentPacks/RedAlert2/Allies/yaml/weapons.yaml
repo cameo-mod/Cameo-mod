@@ -9,18 +9,18 @@ RA2Patriot:
 	Projectile: Missile
 		Speed: 600
 		MinimumLaunchAngle: 60
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 10000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 
 RA2PatriotThunderboltMissile:
 	Inherits: ^HeavyMissile
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^ArrowWeapon
-	Inherits: ^RA2LightMissile
+	Inherits@2: ^HeavyAAWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^ArrowWeapon
+	Inherits@6: ^RA2LightMissile
 	ReloadDelay: 30
 	Range: 14150
 	Burst: 2
@@ -81,22 +81,22 @@ RA2PatriotThunderboltMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 HarrierMissiles:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^Grenade
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^Grenade
+	Inherits@3: ^HeavyChemicalWeapon
+	Inherits@4: ^HeavyAAWeapon
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^RA2MediumMissile
 	ReloadDelay: 104
 	Burst: 4
 	BurstDelays: 2
@@ -172,12 +172,11 @@ HarrierMissiles:
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
@@ -199,8 +198,8 @@ HarrierMissiles_elite:
 
 BlackEagleMissiles:
 	Inherits: ^Grenade
-	Inherits: ^HeavyBomb
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^RA2MediumMissile
 	ReloadDelay: 50
 	Burst: 4
 	BurstDelays: 2
@@ -236,10 +235,10 @@ BlackEagleMissiles:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Ground, Water, Air
 
@@ -257,14 +256,14 @@ BlackEagleMissiles_elite:
 
 BlackEagleThunderboltMissiles:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^HeavyMissile
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^ArrowWeapon
-	Inherits: ^RA2LightMissile
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^HeavyMissile
+	Inherits@5: ^HeavyAAWeapon
+	Inherits@6: ^MediumMissile
+	Inherits@7: ^FlakWeapon
+	Inherits@8: ^ArrowWeapon
+	Inherits@9: ^RA2LightMissile
 	ReloadDelay: 50
 	Burst: 4
 	BurstDelays: 2
@@ -359,11 +358,11 @@ BlackEagleThunderboltMissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -500,8 +499,8 @@ PrismScatterE:
 
 RA2Comet:
 	Inherits: ^Grenade
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^RA2LaserWeapon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^RA2LaserWeapon
 	InvalidTargets: PrismTowerChargeable
 	ReloadDelay: 125
 	Range: 11111
@@ -562,11 +561,11 @@ RA2Comet_elite:
 
 RA2GrandCannonWeapon:
 	Inherits: ^HeavyCannon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^RA2Grenade
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^LightChemicalWeapon
+	Inherits@6: ^RA2Grenade
 	ReloadDelay: 200
 	Report: bgraatta.wav
 	Range: 11800
@@ -611,11 +610,9 @@ RA2GrandCannonWeapon:
 		Damage: 25000
 	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 25
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 50000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 25
 	Warhead@EffectWater: CreateEffect
 		Explosions: large_splash
@@ -635,9 +632,9 @@ RA2MirageGun_elite:
 
 RA2HeavyMirageGun:
 	Inherits: ^RailgunWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^RA2TankDestroyerCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumChemicalWeapon
+	Inherits@4: ^RA2TankDestroyerCannon
 	ReloadDelay: 51
 	Range: 6112
 	Report: vmiratta.wav
@@ -666,16 +663,15 @@ RA2HeavyMirageGun:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@Effect:
+	Warhead@Effect: CreateEffect
 		Explosions: ra2_iron_fx
-		-ImpactSounds:
-	Warhead@EffectWater:
+		ImpactSounds:
 
 RA2HeavyMirageGun_elite:
 	Inherits: RA2HeavyMirageGun
@@ -712,10 +708,10 @@ RA2Medusa_AA:
 		Speed: 600
 		MinimumLaunchAngle: 60
 		ContrailLength: 35
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Air
 		Damage: 30000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 15
 
@@ -724,9 +720,9 @@ RA2MedusaAG:
 	Range: 9000
 	InvalidTargets: Underwater, Submarine
 	ValidTargets: Ground, Water
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 
 RA2M60:
@@ -736,9 +732,9 @@ RA2M60:
 	Burst: 3
 	BurstDelays: 2
 	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 ra2_allies_gi_mg:
@@ -748,9 +744,9 @@ ra2_allies_gi_mg:
 	Burst: 3
 	BurstDelays: 2
 	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 ra2_allies_gi_para:
@@ -761,9 +757,9 @@ ra2_allies_gi_para:
 	Burst: 3
 	BurstDelays: 3
 	Report: igiat2a.wav, igiat2b.wav, igiat2c.wav, igiat2d.wav
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 RA2vulcan2:
@@ -774,20 +770,20 @@ RA2vulcan2:
 
 GuardianGIMG:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 20
 	Range: 4762
 	Burst: 3
 	BurstDelays: 2
 	Report: vblhatta.wav, vblhattb.wav
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 RA2para:
@@ -798,16 +794,16 @@ RA2para:
 	Burst: 3
 	BurstDelays: 3
 	Report: igiat2a.wav, igiat2b.wav, igiat2c.wav, igiat2d.wav
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 GuardianGIMG2:
 	Inherits: RA2para
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
 GuardianGIMG_elite:
@@ -865,9 +861,9 @@ RA2MP5_elite:
 
 ra2roktgun:
 	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^SmallArms
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^RA2Chaingun
 	ReloadDelay: 14
 	Range: 5000
 	Report: irocatta.wav
@@ -890,10 +886,10 @@ ra2roktgun:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 	-Warhead@EffectAir:

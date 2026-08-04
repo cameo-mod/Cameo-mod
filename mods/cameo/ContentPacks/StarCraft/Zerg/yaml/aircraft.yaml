@@ -627,7 +627,7 @@ zerg_gorekraken:
 
 zerg_behemoth:
 	Inherits: ^AirZerg
-	Inherits: ^Helicopter
+	Inherits@2: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@Epic: ^EpicAirUnitTemplate
 	Inherits@exp: ^GainsExperienceTD

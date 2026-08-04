@@ -247,8 +247,6 @@ tkm_technicaltank:
 		HpPerStep: 3500
 	ChangesHealth@SelfHealing:
 		Step: 35
-	Armor:
-		Type: Medium
 	RevealsShroud:
 		Range: 6c0
 	Turreted:
@@ -277,7 +275,6 @@ tkm_technicaltank:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	ActorStatValues:
 		Upgrades: tkm_upgrade_twinrocketsupgrade, tkm_upgrade_heavytitanplating
 	DamageMultiplier:
@@ -428,7 +425,7 @@ tkm_zaza:
 		PlayerPalette: player_rgba
 tkm_stryker:
 	Inherits: ^Vehicle
-	Inherits@Template: ^FireSupportTemplate
+	Inherits@Template: ^MissileVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
@@ -453,8 +450,6 @@ tkm_stryker:
 		HpPerStep: 1375
 	ChangesHealth@SelfHealing:
 		Step: 80
-	Armor:
-		Type: Light
 	Turreted:
 		TurnSpeed: 21
 		Offset: -350,0,325
@@ -519,8 +514,6 @@ tkm_abrams:
 		HpPerStep: 4800
 	ChangesHealth@SelfHealing:
 		Step: 48
-	Armor:
-		Type: Medium
 	RevealsShroud:
 		Range: 6c0
 	Turreted:
@@ -545,7 +538,6 @@ tkm_abrams:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	ActorStatValues:
 		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_heavytitanplating
 	DamageMultiplier:
@@ -604,8 +596,6 @@ tkm_t72m:
 		HP: 100000
 	Repairable:
 		HpPerStep: 2637
-	Armor:
-		Type: Medium
 	RevealsShroud:
 		Range: 6c0
 	Turreted:
@@ -637,7 +627,6 @@ tkm_t72m:
 		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	ActorStatValues:
 		Upgrades: tkm_upgrade_pointdefensesystem
 	Selectable:
@@ -692,7 +681,6 @@ tkm_trenchtruck:
 		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	Selectable:
 		Class: tkm_trenchtank
 	RenderSprites:
@@ -721,8 +709,6 @@ tkm_tornadoglauncher:
 		HpPerStep: 1750
 	ChangesHealth@SelfHealing:
 		Step: 14
-	Armor:
-		Type: Medium
 	Mobile:
 		Speed: 80
 		TurnSpeed: 16
@@ -769,7 +755,6 @@ tkm_tornadoglauncher:
 	Voiced:
 		VoiceSet: TSVehicle
 	WithFacingSpriteBody:
-	DeliversCash:
 	ActorStatValues:
 		Upgrades:
 	RenderSprites:
@@ -1028,8 +1013,6 @@ tkm_trenchtank:
 		Locomotor: tracked
 		Speed: 65
 		TurnSpeed: 13
-	Armor:
-		Type: Heavy
 	Health:
 		HP: 200000
 	Repairable:
@@ -1054,7 +1037,6 @@ tkm_trenchtank:
 		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	Selectable:
 		Class: tkm_trenchtank
 	ActorStatValues:
@@ -1096,8 +1078,6 @@ tkm_t30:
 		HP: 400000
 	Repairable:
 		HpPerStep: 2637
-	Armor:
-		Type: Superheavy
 	RevealsShroud:
 		Range: 6c0
 	Turreted:
@@ -1118,7 +1098,6 @@ tkm_t30:
 		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	ActorStatValues:
 		Upgrades: tkm_upgrade_heavytitanplating
 	DamageMultiplier:
@@ -1164,8 +1143,6 @@ tkm_battlebus:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armor:
-		Type: Medium
 	#Turreted:
 	#	TurnSpeed: 1023
 	-QuantizeFacingsFromSequence:
@@ -1304,8 +1281,6 @@ tkm_sandmarine:
 		HpPerStep: 6000
 	ChangesHealth@SelfHealing:
 		Step: 48
-	Armor:
-		Type: Superheavy
 	Cargo:
 		InitialUnits:
 		Types: Infantry, Hacker, Fremen, Vehicle
@@ -1458,8 +1433,6 @@ tkm_flakbus:
 		HpPerStep: 1375
 	ChangesHealth@SelfHealing:
 		Step: 10
-	Armor:
-		Type: Heavy
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
@@ -1508,8 +1481,6 @@ tkm_bigshiee:
 		HpPerStep: 6000
 	ChangesHealth@SelfHealing:
 		Step: 48
-	Armor:
-		Type: Superheavy
 	#Turreted:
 	#	TurnSpeed: 1023
 	Armament@PRIMARY:
