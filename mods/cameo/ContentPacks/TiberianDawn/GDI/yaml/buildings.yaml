@@ -349,11 +349,17 @@ td_gdi_guardtower:
 		Weapon: HighV
 		LocalOffset: 256,0,256
 		MuzzleSequence: muzzle
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 128,0,256
+		CasingTargetOffset: 0,-600,0
 		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@Upgrade:
 		Weapon: HighVAP
 		LocalOffset: 256,0,256
 		MuzzleSequence: muzzle
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 128,0,256
+		CasingTargetOffset: 0,-600,0
 		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
@@ -406,6 +412,9 @@ td_gdi_skyshield:
 		Weapon: SkyshieldCannon
 		LocalOffset: 850,80,750, 800,-80,750
 		MuzzleSequence: muzzle
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 425,80,750, 400,-80,750
+		CasingTargetOffset: 0,680,0, 0,-680,0
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled

@@ -587,12 +587,18 @@ ixian_machinegunturret:
 		LocalOffset: 256,0,576
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 128,0,576
+		CasingTargetOffset: 0,-600,0
 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 	Armament@Upgrade: ##########
 		Weapon: HMG_turret_upgrade
 		LocalOffset: 256,0,576
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 128,0,576
+		CasingTargetOffset: 0,-600,0
 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 	Replacement:
 		ReplaceableTypes: Tower
@@ -659,6 +665,9 @@ ixian_gunturret:
 		LocalOffset: 512,0,432
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 256,0,432
+		CasingTargetOffset: 0,-600,0
 	Replacement:
 		ReplaceableTypes: Tower
 	WithWallSpriteBody:
@@ -697,6 +706,8 @@ ixian_rocketturret:
 	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Armor:
+		Type: Concrete
 	Buildable:
 		Queue: Defence, RADefence
 		Prerequisites: ~ixian_constructionyard, ixian_outpost
@@ -1102,6 +1113,8 @@ ixian_stormlasher:
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
+	Armor:
+		Type: Concrete
 	Buildable:
 		Queue: Defence, RADefence
 		Prerequisites: ~ixian_constructionyard, ~ixian_promotion_stormlasher, ixian_ixresearchcenter

@@ -40,6 +40,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Tells the AI what building types are considered infantry production facilities.")]
 		public readonly FrozenSet<string> BarracksTypes = FrozenSet<string>.Empty;
 
+		[Desc("Factions that may prioritize their first barracks before their first refinery when enabled by BotLimits.")]
+		public readonly FrozenSet<string> BarracksBeforeRefineryFactions = FrozenSet<string>.Empty;
+
 		[Desc("Tells the AI what building types are considered anti-air defenses.")]
 		public readonly FrozenSet<string> AntiAirTypes = FrozenSet<string>.Empty;
 
@@ -292,6 +295,15 @@ namespace OpenRA.Mods.CA.Traits
 		int checkBestResourceLocationTicks;
 		int sellRefineryTick;
 		bool firstTick = true;
+		bool openingBarracksPriorityCompleted;
+		bool openingStartingCashCaptured;
+		bool openingBarracksCostCommitted;
+		bool openingRefineryCostCommitted;
+		int openingStartingCash;
+		int openingPowerCommittedCost;
+		int openingBarracksCommittedCost;
+		int openingRefineryCommittedCost;
+		int openingDefenseCommittedCost;
 
 		readonly BaseBuilderQueueManagerCA[] builders;
 		int currentBuilderIndex = 0;
@@ -362,9 +374,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		protected override void TraitEnabled(Actor self)
 		{
-			botLimits = self.Owner.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
-			if (botLimits != null)
-				refineryLimit = botLimits.Info.RefineryLimit;
+			RefreshBotLimits();
 
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
 			assignRallyPointsTicks = world.LocalRandom.Next(0, Info.AssignRallyPointsInterval);
@@ -388,9 +398,20 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			if (firstTick)
 			{
+				// Conditional traits are initialized after INotifyCreated, so resolve difficulty limits again here.
+				RefreshBotLimits();
+				if (!openingStartingCashCaptured)
+				{
+					openingStartingCash = playerResources.GetCashAndResources();
+					openingStartingCashCaptured = true;
+				}
+
 				ResourceMapModule = bot.Player.PlayerActor.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
 				firstTick = false;
 			}
+
+			if (!openingBarracksPriorityCompleted && AIUtils.CountActorByCommonName(barracksBuildings) > 0)
+				openingBarracksPriorityCompleted = true;
 
 			if (RelocationHoldConyard != null &&
 				(!RelocationHoldConyard.IsInWorld || RelocationHoldConyard.IsDead ||
@@ -512,6 +533,15 @@ namespace OpenRA.Mods.CA.Traits
 				SellUselessRefinery(bot);
 				sellRefineryTick = Info.SellRefineryInterval;
 			}
+		}
+
+		void RefreshBotLimits()
+		{
+			botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
+			refineryLimit = botLimits?.Info.RefineryLimit ?? 0;
+
+			foreach (var builder in builders)
+				builder.SetBotLimits(botLimits);
 		}
 
 		void IBotRespondToAttack.RespondToAttack(IBot bot, Actor self, AttackInfo e)
@@ -723,6 +753,84 @@ namespace OpenRA.Mods.CA.Traits
 			Info.ProductionTypes.Count == 0 ||
 			AIUtils.CountActorByCommonName(ProductionBuildings) > 0;
 
+		public bool HasCompletedPowerPlant() => AIUtils.CountActorByCommonName(powerBuildings) > 0;
+
+		public bool OpeningBarracksPriorityCompleted => openingBarracksPriorityCompleted;
+
+		public bool HasBuiltOrQueuedBarracks() =>
+			AIUtils.CountActorByCommonName(barracksBuildings) > 0 || CountQueuedBuildings(Info.BarracksTypes) > 0;
+
+		public bool HasQueuedBarracks() => CountQueuedBuildings(Info.BarracksTypes) > 0;
+
+		public bool HasQueuedPowerPlant() => CountQueuedBuildings(Info.PowerTypes) > 0;
+
+		public bool CanTrainOpeningDefense =>
+			UsesBarracksFirstOpening && openingRefineryCostCommitted && !HasMinimalRefineryCount() && HasQueuedRefinery();
+
+		bool UsesBarracksFirstOpening => botLimits != null && botLimits.Info.PrioritizeBarracksBeforeRefinery
+			&& Info.BarracksBeforeRefineryFactions.Contains(player.Faction.InternalName);
+
+		bool HasQueuedRefinery() => CountQueuedBuildings(Info.RefineryTypes) > 0;
+
+		public void RecordOpeningStructureQueued(ProductionQueue queue, ActorInfo actorInfo)
+		{
+			if (!UsesBarracksFirstOpening || openingRefineryCostCommitted)
+				return;
+
+			var cost = queue.GetProductionCost(actorInfo);
+			if (Info.PowerTypes.Contains(actorInfo.Name))
+				openingPowerCommittedCost += cost;
+			else if (Info.BarracksTypes.Contains(actorInfo.Name) && !openingBarracksCostCommitted)
+			{
+				openingBarracksCommittedCost = cost;
+				openingBarracksCostCommitted = true;
+			}
+			else if (Info.RefineryTypes.Contains(actorInfo.Name) && openingBarracksPriorityCompleted)
+			{
+				// Custom maps may start with opening structures already present instead of producing them.
+				if (openingPowerCommittedCost == 0)
+					openingPowerCommittedCost = powerBuildings.Actors.Where(a => !a.IsDead)
+						.Sum(a => queue.GetProductionCost(a.Info));
+
+				if (!openingBarracksCostCommitted)
+				{
+					var barracks = barracksBuildings.Actors.FirstOrDefault(a => !a.IsDead);
+					if (barracks != null)
+					{
+						openingBarracksCommittedCost = queue.GetProductionCost(barracks.Info);
+						openingBarracksCostCommitted = true;
+					}
+				}
+
+				openingRefineryCommittedCost = cost;
+				openingRefineryCostCommitted = true;
+				AIUtils.BotDebug("AI: {0} reserved {1} of {2} starting credits for the opening economy; {3} remain for early defense.",
+					player, OpeningStructureCommittedCost, openingStartingCash, OpeningDefenseBudget);
+			}
+		}
+
+		public bool TryCommitOpeningDefenseCost(int cost)
+		{
+			if (!CanTrainOpeningDefense || cost <= 0 || openingDefenseCommittedCost + cost > OpeningDefenseBudget)
+				return false;
+
+			openingDefenseCommittedCost += cost;
+			return true;
+		}
+
+		int OpeningStructureCommittedCost =>
+			openingPowerCommittedCost + openingBarracksCommittedCost + openingRefineryCommittedCost;
+
+		int OpeningDefenseBudget => Math.Max(0, openingStartingCash - OpeningStructureCommittedCost);
+
+		int CountQueuedBuildings(IReadOnlySet<string> buildingTypes) =>
+			Info.BuildingQueues.Concat(Info.DefenseQueues)
+				.Distinct()
+				.SelectMany(category => AIUtils.FindQueues(player, category))
+				.Distinct()
+				.SelectMany(queue => queue.AllQueued())
+				.Count(item => buildingTypes.Contains(item.Item));
+
 		void SellUselessRefinery(IBot bot)
 		{
 			// Sell one refinery each time. Perserve at least one refinery
@@ -762,7 +870,16 @@ namespace OpenRA.Mods.CA.Traits
 			return new List<MiniYamlNode>()
 			{
 				new("InitialBaseCenter", FieldSaver.FormatValue(initialBaseCenter)),
-				new("DefenseCenter", FieldSaver.FormatValue(DefenseCenter))
+				new("DefenseCenter", FieldSaver.FormatValue(DefenseCenter)),
+				new("OpeningBarracksPriorityCompleted", FieldSaver.FormatValue(openingBarracksPriorityCompleted)),
+				new("OpeningStartingCashCaptured", FieldSaver.FormatValue(openingStartingCashCaptured)),
+				new("OpeningStartingCash", FieldSaver.FormatValue(openingStartingCash)),
+				new("OpeningPowerCommittedCost", FieldSaver.FormatValue(openingPowerCommittedCost)),
+				new("OpeningBarracksCommittedCost", FieldSaver.FormatValue(openingBarracksCommittedCost)),
+				new("OpeningBarracksCostCommitted", FieldSaver.FormatValue(openingBarracksCostCommitted)),
+				new("OpeningRefineryCommittedCost", FieldSaver.FormatValue(openingRefineryCommittedCost)),
+				new("OpeningRefineryCostCommitted", FieldSaver.FormatValue(openingRefineryCostCommitted)),
+				new("OpeningDefenseCommittedCost", FieldSaver.FormatValue(openingDefenseCommittedCost))
 			};
 		}
 
@@ -778,6 +895,49 @@ namespace OpenRA.Mods.CA.Traits
 			var defenseCenterNode = data.NodeWithKeyOrDefault("DefenseCenter");
 			if (defenseCenterNode != null)
 				DefenseCenter = FieldLoader.GetValue<CPos>("DefenseCenter", defenseCenterNode.Value.Value);
+
+			var openingBarracksPriorityCompletedNode = data.NodeWithKeyOrDefault("OpeningBarracksPriorityCompleted");
+			if (openingBarracksPriorityCompletedNode != null)
+				openingBarracksPriorityCompleted = FieldLoader.GetValue<bool>("OpeningBarracksPriorityCompleted",
+					openingBarracksPriorityCompletedNode.Value.Value);
+
+			var openingStartingCashCapturedNode = data.NodeWithKeyOrDefault("OpeningStartingCashCaptured");
+			if (openingStartingCashCapturedNode != null)
+				openingStartingCashCaptured = FieldLoader.GetValue<bool>("OpeningStartingCashCaptured",
+					openingStartingCashCapturedNode.Value.Value);
+
+			var openingStartingCashNode = data.NodeWithKeyOrDefault("OpeningStartingCash");
+			if (openingStartingCashNode != null)
+				openingStartingCash = FieldLoader.GetValue<int>("OpeningStartingCash", openingStartingCashNode.Value.Value);
+
+			var openingPowerCommittedCostNode = data.NodeWithKeyOrDefault("OpeningPowerCommittedCost");
+			if (openingPowerCommittedCostNode != null)
+				openingPowerCommittedCost = FieldLoader.GetValue<int>("OpeningPowerCommittedCost", openingPowerCommittedCostNode.Value.Value);
+
+			var openingBarracksCommittedCostNode = data.NodeWithKeyOrDefault("OpeningBarracksCommittedCost");
+			if (openingBarracksCommittedCostNode != null)
+				openingBarracksCommittedCost = FieldLoader.GetValue<int>("OpeningBarracksCommittedCost",
+					openingBarracksCommittedCostNode.Value.Value);
+
+			var openingBarracksCostCommittedNode = data.NodeWithKeyOrDefault("OpeningBarracksCostCommitted");
+			if (openingBarracksCostCommittedNode != null)
+				openingBarracksCostCommitted = FieldLoader.GetValue<bool>("OpeningBarracksCostCommitted",
+					openingBarracksCostCommittedNode.Value.Value);
+
+			var openingRefineryCommittedCostNode = data.NodeWithKeyOrDefault("OpeningRefineryCommittedCost");
+			if (openingRefineryCommittedCostNode != null)
+				openingRefineryCommittedCost = FieldLoader.GetValue<int>("OpeningRefineryCommittedCost",
+					openingRefineryCommittedCostNode.Value.Value);
+
+			var openingRefineryCostCommittedNode = data.NodeWithKeyOrDefault("OpeningRefineryCostCommitted");
+			if (openingRefineryCostCommittedNode != null)
+				openingRefineryCostCommitted = FieldLoader.GetValue<bool>("OpeningRefineryCostCommitted",
+					openingRefineryCostCommittedNode.Value.Value);
+
+			var openingDefenseCommittedCostNode = data.NodeWithKeyOrDefault("OpeningDefenseCommittedCost");
+			if (openingDefenseCommittedCostNode != null)
+				openingDefenseCommittedCost = FieldLoader.GetValue<int>("OpeningDefenseCommittedCost",
+					openingDefenseCommittedCostNode.Value.Value);
 		}
 
 		void INotifyActorDisposing.Disposing(Actor self)

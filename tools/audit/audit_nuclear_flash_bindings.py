@@ -17,6 +17,7 @@ EXPECTED = {
 		"Radius": "0.35",
 		"Brightness": "1.3",
 		"Darkness": "0.85",
+		"MinimumExposure": "0.45",
 	},
 	"PulseMissile": {
 		"Color": "32C8FF",
@@ -24,6 +25,7 @@ EXPECTED = {
 		"Radius": "0.35",
 		"Brightness": "1.3",
 		"Darkness": "0.85",
+		"MinimumExposure": "0.45",
 	},
 	"CabalMagicNuke": {
 		"Color": "32C8FF",
@@ -31,6 +33,7 @@ EXPECTED = {
 		"Radius": "0.35",
 		"Brightness": "1.3",
 		"Darkness": "0.85",
+		"MinimumExposure": "0.45",
 	},
 }
 
@@ -38,6 +41,31 @@ LAUNCHERS = {
 	"RAAtomic": "ra1_soviets_missilesilo",
 	"PulseMissile": "ixian_supercomputer",
 	"CabalMagicNuke": "cabal_core",
+}
+
+SOURCE_CONTRACTS = {
+	"OpenRA.Mods.Cameo/Traits/World/NuclearFlashRenderer.cs": {
+		"edge-projected renderer description":
+			"Renders a nuclear exposure flash with edge-projected off-screen glow and readable global underexposure.",
+		"off-screen detection":
+			"var offscreen = x < 0f || x > fbWidth || y < 0f || y > fbHeight;",
+		"nearest-edge horizontal projection":
+			"x = Math.Clamp(x, 0f, fbWidth);",
+		"nearest-edge vertical projection":
+			"y = Math.Clamp(y, 0f, fbHeight);",
+		"full-radius edge or corner glow":
+			'shader.SetVec("LightRadius", Math.Min(fbWidth, fbHeight) * radius);',
+		"full-strength edge or corner glow":
+			'shader.SetVec("Brightness", brightness * strength);',
+		"minimum exposure shader binding":
+			'shader.SetVec("MinimumExposure", minimumExposure);',
+	},
+	"engine/glsl/postprocess_nuclearflash.frag": {
+		"global readable underexposure":
+			"float retainedExposure = max(1.0 - Darkness, MinimumExposure);",
+		"non-saturating directional glow":
+			"float flashStrength = 1.0 - exp(-Brightness * lightFalloff);",
+	},
 }
 
 
@@ -48,6 +76,12 @@ def location(node) -> str:
 def main() -> int:
 	ruleset = Ruleset(ROOT)
 	failures: list[str] = []
+
+	for relative_path, contracts in SOURCE_CONTRACTS.items():
+		source = (ROOT / relative_path).read_text(encoding="utf-8")
+		for description, required_text in contracts.items():
+			if required_text not in source:
+				failures.append(f"{relative_path}: missing {description}")
 
 	world = ruleset.resolve("World")
 	if world is None or not any(c.key == "NuclearFlashRenderer" for c in world.children):

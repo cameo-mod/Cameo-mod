@@ -131,7 +131,7 @@ ra2_allies_grizzlytank:
 	Armament:
 		Name: primary
 		Weapon: RA2105mm
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle
@@ -140,7 +140,7 @@ ra2_allies_grizzlytank:
 	Armament@elite:
 		Name: primary
 		Weapon: RA2105mm_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle-2
@@ -385,7 +385,7 @@ ra2_allies_prismtank:
 		#Name: secondary
 		Weapon: PrismTankCharge
 		LocalOffset: 410,0,650
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		TargetRelationships: Ally
 		ForceTargetRelationships: Ally
@@ -394,7 +394,7 @@ ra2_allies_prismtank:
 		#Name: secondary
 		Weapon: PrismTankCharge_elite
 		LocalOffset: 410,0,650
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		TargetRelationships: Ally
 		ForceTargetRelationships: Ally
@@ -403,7 +403,7 @@ ra2_allies_prismtank:
 		#Name: primary
 		Weapon: RA2Comet
 		LocalOffset: 410,0,650
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		TargetRelationships: Enemy
 		RequiresCondition: !rank-elite
@@ -411,7 +411,7 @@ ra2_allies_prismtank:
 		#Name: primary
 		Weapon: RA2Comet_elite
 		LocalOffset: 410,0,650
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		TargetRelationships: Enemy
 		RequiresCondition: rank-elite
@@ -473,7 +473,7 @@ ra2_allies_miragetank:
 		Name: primary
 		Weapon: RA2MirageGun
 		LocalOffset: 512,0,128
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		RequiresCondition: !rank-elite
 		MuzzleSequence: muzzle
@@ -482,7 +482,7 @@ ra2_allies_miragetank:
 		Name: primary
 		Weapon: RA2MirageGun_elite
 		LocalOffset: 512,0,128
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 26
 		RequiresCondition: rank-elite
 		MuzzleSequence: muzzle
@@ -560,7 +560,7 @@ ra2_allies_heavymiragetank:
 		Name: primary
 		Weapon: RA2HeavyMirageGun
 		LocalOffset: 1024,0,128
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 16
 		RequiresCondition: !rank-elite
 		MuzzleSequence: muzzle
@@ -569,7 +569,7 @@ ra2_allies_heavymiragetank:
 		Name: primary
 		Weapon: RA2HeavyMirageGun_elite
 		LocalOffset: 1024,0,128
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 16
 		RequiresCondition: rank-elite
 		MuzzleSequence: muzzle

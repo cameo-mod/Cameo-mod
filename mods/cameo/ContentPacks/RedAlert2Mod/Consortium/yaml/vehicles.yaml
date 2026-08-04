@@ -47,7 +47,7 @@ steelconsortium_katytank:
 	Armament:
 		Name: primary
 		Weapon: SteelKatyCannons
-		Recoil: 250
+		Recoil: 125
 		RecoilRecovery: 50
 		LocalOffset: 1250,-250,250, 1250,250,250
 		MuzzleSequence: muzzle
@@ -56,7 +56,7 @@ steelconsortium_katytank:
 	Armament@ELITE:
 		Name: primary
 		Weapon: SteelKatyCannons_elite
-		Recoil: 250
+		Recoil: 125
 		RecoilRecovery: 50
 		LocalOffset: 1250,-250,250, 1250,250,250
 		MuzzleSequence: muzzle
@@ -65,7 +65,7 @@ steelconsortium_katytank:
 	Armament@Upgrade:
 		Name: primary
 		Weapon: SteelKatyCannons_EMP
-		Recoil: 250
+		Recoil: 125
 		RecoilRecovery: 50
 		LocalOffset: 1250,-250,250, 1250,250,250
 		MuzzleSequence: muzzle
@@ -74,7 +74,7 @@ steelconsortium_katytank:
 	Armament@UpgradeELITE:
 		Name: primary
 		Weapon: SteelKatyCannons_EMP_elite
-		Recoil: 250
+		Recoil: 125
 		RecoilRecovery: 50
 		LocalOffset: 1250,-250,250, 1250,250,250
 		MuzzleSequence: muzzle
@@ -558,7 +558,7 @@ oldqtnk.steel:
 	Armament:
 		Name: primary
 		Weapon: SteelQuantumCannon_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 600,-200,300
 		MuzzleSequence: muzzle
@@ -913,7 +913,7 @@ steelconsortium_quantumtank:
 	Armament:
 		Name: primary
 		Weapon: SteelQuantumCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1000,0,100
 		MuzzleSequence: muzzle
@@ -922,7 +922,7 @@ steelconsortium_quantumtank:
 	Armament@Upgrade:
 		Name: primary
 		Weapon: SteelQuantumCannon_EMP
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1000,0,100
 		MuzzleSequence: muzzle
@@ -931,7 +931,7 @@ steelconsortium_quantumtank:
 	Armament@elite:
 		Name: primary
 		Weapon: SteelQuantumCannon_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1000,0,100
 		MuzzleSequence: muzzle
@@ -1095,7 +1095,7 @@ steelconsortium_barracuda:
 	Armament@AG1:
 		Name: primary
 		Weapon: SteelMantaHunterCannons
-		Recoil: 125
+		Recoil: 63
 		RecoilRecovery: 25
 		LocalOffset: 500,200,-150
 		MuzzleSequence: muzzle
@@ -1103,7 +1103,7 @@ steelconsortium_barracuda:
 	Armament@AG2:
 		Name: primary
 		Weapon: SteelMantaHunterCannons
-		Recoil: 125
+		Recoil: 63
 		RecoilRecovery: 25
 		LocalOffset: 500,-200,-150
 		MuzzleSequence: muzzle
@@ -1111,7 +1111,7 @@ steelconsortium_barracuda:
 	Armament@AA1:
 		Name: primary
 		Weapon: SteelMantaHunterCannons_AA
-		Recoil: 125
+		Recoil: 63
 		RecoilRecovery: 25
 		LocalOffset: 500,200,-150
 		MuzzleSequence: muzzle
@@ -1119,7 +1119,7 @@ steelconsortium_barracuda:
 	Armament@AA2:
 		Name: primary
 		Weapon: SteelMantaHunterCannons_AA
-		Recoil: 125
+		Recoil: 63
 		RecoilRecovery: 25
 		LocalOffset: 500,-200,-150
 		MuzzleSequence: muzzle
@@ -1127,7 +1127,7 @@ steelconsortium_barracuda:
 	Armament@UpgradeAG1:
 		Name: primary
 		Weapon: SteelMantaHunterCannonsResonance
-		Recoil: 125
+		Recoil: 63
 		RecoilRecovery: 25
 		LocalOffset: 500,200,-150
 		MuzzleSequence: muzzle
@@ -1136,7 +1136,7 @@ steelconsortium_barracuda:
 	Armament@UpgradeAG2:
 		Name: primary
 		Weapon: SteelMantaHunterCannonsResonance
-		Recoil: 125
+		Recoil: 63
 		RecoilRecovery: 25
 		LocalOffset: 500,-200,-150
 		MuzzleSequence: muzzle
@@ -1145,7 +1145,7 @@ steelconsortium_barracuda:
 	Armament@UpgradeAA1:
 		Name: primary
 		Weapon: SteelMantaHunterCannonsAAResonance_AA
-		Recoil: 125
+		Recoil: 63
 		RecoilRecovery: 25
 		LocalOffset: 500,200,-150
 		MuzzleSequence: muzzle
@@ -1154,7 +1154,7 @@ steelconsortium_barracuda:
 	Armament@UpgradeAA2:
 		Name: primary
 		Weapon: SteelMantaHunterCannonsAAResonance_AA
-		Recoil: 125
+		Recoil: 63
 		RecoilRecovery: 25
 		LocalOffset: 500,-200,-150
 		MuzzleSequence: muzzle
