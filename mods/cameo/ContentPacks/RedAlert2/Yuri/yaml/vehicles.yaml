@@ -44,12 +44,12 @@ yuri_slaveminer:
 	ProvidesPrerequisite:
 		Prerequisite: yuri_slaveminer_deployed
 	Valued:
-		Cost: 2000
+		Cost: 2500
 	Tooltip:
 		Name: Slave Miner
 	Buildable:
 		BuildPaletteOrder: 10
-		BuildDuration: 500
+		BuildDuration: 750
 		BuildDurationModifier: 100
 		Prerequisites: ~yuri_warfactory
 		Queue: Vehicle, RAVehicle
