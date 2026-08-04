@@ -8,22 +8,32 @@ the memory index + `docs/design/AREADAMAGE_WARHEAD_REBALANCE.md` (the full desig
 
 ## 0. TL;DR — exactly where we are
 
-- **Branch:** `fix/production-queue-crash`. **Last commit `1b638bf28`** (nuclear AreaDamage +
-  AreaDamagePercentage + AtomicCore 75%-CY superweapon). **The tree BOOTS to menu.**
+- **Branch:** `fix/production-queue-crash`. **Last commit `48245737e`** (generator reconcile +
+  sync guard). **The tree BOOTS to a stable menu** (`MenuPostProcessEffect.PostWorldLoaded`, alive
+  25s+ past load, no new exception log).
 - **The C# is DONE** (both warheads built, deployed, boot-proven in-game via AtomicCore).
 - **The UNIVERSAL CONVERSION IS DONE + COMMITTED + BOOTS** (2026-08-04): sweep `3dac92ee8`
   (559 weapons), 54-template flip `b2fbc372f`. EVERY live weapon main is now `AreaDamage` with
   universal baked FF (`Ally, Neutral, Enemy` + `FriendlyFireDamage/Spread 50`); all `_FriendlyFire`
   twins retired (0 left); `^Warhead_Nuclear_Super` preserved. Pipeline audits recognize AreaDamage
-  (`7b62a5414`). **Last commit at handoff: `b2fbc372f`.**
-- **⚠ REMAINING (top priority): GENERATOR DRIFT.** The 54 templates were flipped by a one-shot
-  script (`scratchpad/convert_templates.py`), NOT the generator. `tools/balance/gen_weapon_template.py`
-  still emits `SpreadDamage` + old `^{tag}`/`{tag}Percentage` naming. **Update it to match the file**
-  (Section 3c) so the next regenerate+splice is a no-op diff. Until then, DO NOT regenerate+splice
-  (it would revert the conversion). Verify with `tools/audit/dump_resolved.py` / a diff.
-- **Also remaining:** MissileAA spread reduction (never applied); add `find_empty_warhead.py` to
-  `run_all.sh`; then the balance items (Section 6). Old design docs (§2/§7 below) describe the
-  pre-conversion plan — treat §0 as the source of truth for status.
+  (`7b62a5414`). Empty-warhead guard is in `run_all.sh` (`b6a58b76d`).
+- **✅ GENERATOR DRIFT — RESOLVED (`48245737e`).** `tools/balance/gen_weapon_template.py` now emits
+  `AreaDamage` mains + baked universal FF + `^Warhead_<Family>_<Level>` naming + `Warhead@<tag>_Percentage`,
+  drops the `_FriendlyFire` twin, and excludes hand-tuned `^Warhead_Nuclear_Super` (`HAND_TUNED`).
+  New guard `tools/balance/verify_generator_sync.py` (wired into `run_all.sh` as `gen_sync`) regenerates
+  the families and diffs them block-for-block against `weapons.yaml`: **drift = 0** across all 54 shared
+  templates → **a regenerate+splice is now a verified no-op** (safe to regenerate). Section 3c is DONE.
+- **NEXT (remaining):** (1) **MissileAA spread reduction** — never applied; do it in the generator
+  (add a per-family `spreads` override for `MissileAA`, then regenerate — do NOT hand-edit the yaml;
+  the exact reduced value is a maintainer call). (2) Then the balance items (Section 6 / BALANCE_MEGAPLAN
+  Phases A2→G). Old design docs (§2/§7 below) describe the pre-conversion plan — treat §0 as truth.
+- **⚠ Two PRE-EXISTING content issues surfaced by `--check-yaml` (NOT from warhead work, non-blocking —
+  the game still boots):** `mammothbunker.husk` missing `ArmamentInfo` (its `WithSpriteTurret` needs an
+  `Armament`); `rules.yaml:8 ShortGameEnabled` no longer exists on `MapOptions` (engine drift); plus
+  benign voice-set gaps (Move/Guard/Action) and a `DeliversCash`/`Valued` unresolved. Flag to maintainer.
+- **⚠ First game launch of a cold session threw a logless post-menu "fatal error" ~18s in (voxel sheet
+  overflow on the busy menu shellmap); the SECOND launch reached a stable menu.** Intermittent runtime/
+  render issue, not a content crash — if a boot gate "crashes" post-menu with no exception log, relaunch.
 - **⚠ The maintainer has ~73 files of unrelated uncommitted WIP** (faction rebalances, docs,
   CLAUDE.md, harvester tool, `noid_resolved.json`). **NEVER `git add -A`. Scoped adds only.**
 
