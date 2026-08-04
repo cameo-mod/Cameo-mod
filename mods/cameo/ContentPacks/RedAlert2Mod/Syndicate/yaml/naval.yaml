@@ -29,14 +29,14 @@ triton.latin:
 		Type: Light
 	Armament@PRIMARY:
 		Weapon: LatinSentryMG
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		LocalOffset: 512,0,256
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
 		Weapon: LatinSentryMG_elite
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		LocalOffset: 512,0,256
@@ -167,14 +167,14 @@ rammax.latin:
 		Type: Medium
 	Armament@PRIMARY:
 		Weapon: Rammax_Sabot
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		LocalOffset: 512,0,256
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
 		Weapon: Rammax_Sabot
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		LocalOffset: 512,0,256

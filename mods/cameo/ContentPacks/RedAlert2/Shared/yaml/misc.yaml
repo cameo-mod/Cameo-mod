@@ -1205,7 +1205,7 @@ ra2dred:
 		Type: Superheavy
 	Armament@AG:
 		Weapon: DreadnoughtLaunch
-		Recoil: 85
+		Recoil: 43
 		Damage: 2500
 		ReloadDelay: 125
 	MissileSpawnerMasterCA:
@@ -2204,7 +2204,7 @@ ra2leopard:
 	Armament:
 		Name: primary
 		Weapon: RA2120mm
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
@@ -2213,7 +2213,7 @@ ra2leopard:
 	Armament@elite:
 		Name: primary
 		Weapon: RA2120mm_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle-2
@@ -2222,7 +2222,7 @@ ra2leopard:
 	Armament@machinegun:
 		Name: primary
 		Weapon: RA2GattlingMG1
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,8,80
 		MuzzleSequence: muzzle-3
@@ -2275,7 +2275,7 @@ ra2_c_ifv:
 	Armament:
 		Name: primary
 		Weapon: RA2GattlingMG1
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,0,80
 		MuzzleSequence: muzzle
@@ -2284,7 +2284,7 @@ ra2_c_ifv:
 	Armament@elite:
 		Name: primary
 		Weapon: RA2GattlingMG2
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,0,80
 		MuzzleSequence: muzzle-2
@@ -2293,7 +2293,7 @@ ra2_c_ifv:
 	Armament@AA:
 		Name: primary
 		Weapon: RA2GattlingMG1_AA
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle
@@ -2302,7 +2302,7 @@ ra2_c_ifv:
 	Armament@eliteAA:
 		Name: primary
 		Weapon: RA2GattlingMG2_AA
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle-2
@@ -2353,7 +2353,7 @@ ra2_c_hum:
 	Armament:
 		Name: primary
 		Weapon: RA2GattlingMG1
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,0,80
 		MuzzleSequence: muzzle
@@ -2362,7 +2362,7 @@ ra2_c_hum:
 	Armament@elite:
 		Name: primary
 		Weapon: RA2GattlingMG2
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,0,80
 		MuzzleSequence: muzzle-2
@@ -2421,7 +2421,7 @@ ra2_c_abram:
 	Armament:
 		Name: primary
 		Weapon: RA2120mm
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
@@ -2430,7 +2430,7 @@ ra2_c_abram:
 	Armament@elite:
 		Name: primary
 		Weapon: RA2120mm_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle-2
@@ -2439,7 +2439,7 @@ ra2_c_abram:
 	Armament@machinegun:
 		Name: primary
 		Weapon: RA2GattlingMG1
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 512,8,80
 		MuzzleSequence: muzzle-3
@@ -5644,7 +5644,7 @@ yrrobo:
 	Armament:
 		Name: primary
 		Weapon: RA2Robotmm
-		Recoil: 85
+		Recoil: 43
 		RecoilRecovery: 25
 		LocalOffset: 800,0,-250
 		MuzzleSequence: muzzle
@@ -5653,7 +5653,7 @@ yrrobo:
 	Armament@elite:
 		Name: primary
 		Weapon: RA2Robotmm_elite
-		Recoil: 85
+		Recoil: 43
 		RecoilRecovery: 25
 		LocalOffset: 800,0,-250
 		MuzzleSequence: muzzle-2

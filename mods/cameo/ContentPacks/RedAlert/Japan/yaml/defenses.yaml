@@ -97,6 +97,9 @@ japan_japanesemgnest:
 		Weapon: JHighV
 		LocalOffset: 768,0,512
 		MuzzleSequence: muzzle
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 384,0,512
+		CasingTargetOffset: 0,-600,0
 		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@Upgrade: ##########
 		Name: primary

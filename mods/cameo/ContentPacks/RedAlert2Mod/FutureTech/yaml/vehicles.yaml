@@ -215,7 +215,7 @@ futuretech_robottank:
 	Armament:
 		Name: primary
 		Weapon: RA2Robotmm
-		Recoil: 85
+		Recoil: 43
 		RecoilRecovery: 25
 		LocalOffset: 800,0,-250
 		MuzzleSequence: muzzle
@@ -224,7 +224,7 @@ futuretech_robottank:
 	Armament@elite:
 		Name: primary
 		Weapon: RA2Robotmm_elite
-		Recoil: 85
+		Recoil: 43
 		RecoilRecovery: 25
 		LocalOffset: 800,0,-250
 		MuzzleSequence: muzzle-2
@@ -308,7 +308,7 @@ futuretech_guardiantank:
 	Armament:
 		Name: primary
 		Weapon: GuardianTankCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1720,0,440
 		MuzzleSequence: muzzle
@@ -317,7 +317,7 @@ futuretech_guardiantank:
 	Armament@elite:
 		Name: primary
 		Weapon: GuardianTankCannon_elite
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1720,0,440
 		MuzzleSequence: muzzle-2
@@ -396,7 +396,7 @@ futuretech_riptideacv:
 	Armament@AG:
 		Weapon: ACV_Machinegun
 		LocalOffset: 150,0,0
-		Recoil: 85
+		Recoil: 43
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 	GrantConditionOnTerrain:
@@ -617,7 +617,7 @@ futuretech_oriontank:
 	Armament:
 		Name: primary
 		Weapon: OrionRailgun
-		Recoil: 200
+		Recoil: 100
 		RecoilRecovery: 45
 		LocalOffset: 1000,0,325
 		MuzzleSequence: muzzle
@@ -626,7 +626,7 @@ futuretech_oriontank:
 	Armament@elite:
 		Name: primary
 		Weapon: OrionRailgun_elite
-		Recoil: 200
+		Recoil: 100
 		RecoilRecovery: 45
 		LocalOffset: 1000,0,325
 		MuzzleSequence: muzzle-2
@@ -917,7 +917,7 @@ futuretech_futuretank:
 		Name: primary
 		Weapon: FutureTankCannons
 		LocalOffset: 400,400,400, 400,-400,400
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
@@ -926,7 +926,7 @@ futuretech_futuretank:
 		Name: primary
 		Weapon: FutureTankCannons_elite
 		LocalOffset: 400,400,400, 400,-400,400
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect

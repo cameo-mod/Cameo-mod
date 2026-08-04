@@ -494,6 +494,8 @@ ordos_artilleryplatform:
 	Inherits@shape: ^1x1Shape
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	-WithTurretSearchlight:
+	Armor:
+		Type: Concrete
 	Tooltip:
 		Name: Artillery Platform
 	Valued:
@@ -521,7 +523,7 @@ ordos_artilleryplatform:
 	Armament:
 		Weapon: D2K_155mm_turret
 		LocalOffset: 512,0,640
-		Recoil: 150
+		Recoil: 75
 		RecoilRecovery: 19
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
@@ -567,6 +569,8 @@ ordos_autogunturret:
 	Inherits@gat: ^GatlingSpeedUpTurretBehavior
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Inherits@RapidFireArmorPiercingBelts: ^Ordos_RapidFireArmorPiercingBelts
+	Armor:
+		Type: Concrete
 	Tooltip:
 		Name: Autogun Turret
 	Valued:
@@ -581,7 +585,10 @@ ordos_autogunturret:
 		HP: 75000
 	Armament:
 		Weapon: ordos_autogunturret
-		LocalOffset: 500,-150,400, 500,150,400
+		LocalOffset: 600,-100,500, 600,100,500
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 100,-100,500, 100,100,500
+		CasingTargetOffset: 0,-900,0, 0,900,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
 	WithSpriteTurret:

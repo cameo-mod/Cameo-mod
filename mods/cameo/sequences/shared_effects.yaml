@@ -3,6 +3,16 @@
 #	independent of which faction art bundles a match loads.
 ####################################################################################################
 
+generic_bullet_casing:
+	Defaults:
+	idle:
+		Filename: generic_bullet_casing.png
+		Length: 4
+		Tick: 80
+		Scale: 1
+		Offset: -1,-1,0
+		ZOffset: 1023
+
 # from redalert2.yaml
 ra2_allies_chronominer:
 	Defaults:
