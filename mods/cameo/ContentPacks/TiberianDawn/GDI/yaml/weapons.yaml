@@ -24,16 +24,18 @@ M16AP:
 		Damage: 2
 
 HighV:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@proj: ^Projectile_Bullet_Light
-	Inherits@fx: ^Effect_Bullet_Light
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 22
 	Range: 6720
 	Burst: 4
 	BurstDelays: 2
 	Report: gun8.aud
-	Warhead@Bullet_Light:
+	Warhead@Bullet_Medium:
 		Damage: 2000
+	Warhead@Bullet_Medium_Percentage:
+		Damage: 1
 
 GrenadeExplode:
 	Inherits: Grenade
