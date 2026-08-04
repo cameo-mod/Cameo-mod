@@ -113,3 +113,15 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 - Multiplier audit: 0 non-integer `Modifier` values (run with `PYTHONIOENCODING=utf-8`).
 - Boot-gate: reached main menu (`PostWorldLoaded`), no new `exception-*.log` files.
 - Committed updated ledgers + current uncommitted YAML rule sync (Yuri Slave Miner cost/build duration, `^SwarmlingGrinderTemplate` Valued default).
+
+## 2026-08-04 — extract_stats design_weapon_class fix + HighV NRE
+
+- `tools/balance/extract_stats.py`:
+  - Removed all remaining `Versus: Shield` heuristics for `design_weapon_class`.
+  - `design_weapon_class` is now derived only from `weapon_classes.yaml` sidecar + keyword fallback.
+  - Any weapon mixing more than two warhead-class templates returns `design_weapon_class: null` and `weapon_class_source: illegal_mix` (or `allowlist_mix` for deliberate Dune combat-tank / siege exceptions).
+  - Dummy weapons with no damage warheads are marked `extraction_note: no_damage_warheads` and `pricing: false` so they do not feed the balance formula.
+  - Re-extracted all 32 `docs/balance/*.json` ledgers; `extract_stats.py --check` reports 0 drifted.
+- `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml`:
+  - `HighV` `Warhead@Bullet_Medium_Percentage` was missing its warhead type, causing the weapon to be dropped from the ruleset and `td_gdi_guardtower` to fail at boot (`Weapons Ruleset does not contain an entry 'highv'`). Set it to `HealthPercentageDamage` to match `M16AP`.
+- Boot-gate: reached main menu (`PostWorldLoaded`); no new `exception-*.log` files.

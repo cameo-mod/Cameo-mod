@@ -9,7 +9,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4280",
       "reloaddelay": "25",
@@ -60,7 +60,7 @@
        }
       ],
       "weapon": "ArbiterCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^FlakWeapon",
        "^HeavyCannon",
@@ -74,14 +74,14 @@
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "minrange": "855",
-      "pricing": true,
+      "pricing": false,
       "range": "4280",
       "reloaddelay": "250",
       "slot": "Armament@2",
       "versus_templates": [],
       "warheads": [],
       "weapon": "ArbiterStasis",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -135,14 +135,14 @@
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "10000",
       "reloaddelay": "100",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
       "weapon": "InterceptorLauncher",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -223,7 +223,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "65",
@@ -277,7 +277,7 @@
        }
       ],
       "weapon": "CorsairFlash",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -288,7 +288,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "65",
@@ -342,7 +342,7 @@
        }
       ],
       "weapon": "CorsairFlash",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -393,7 +393,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5077",
       "reloaddelay": "36",
@@ -523,7 +523,7 @@
        }
       ],
       "weapon": "EpigraphMG",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ArrowWeapon",
@@ -539,7 +539,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5077",
       "reloaddelay": "36",
@@ -669,7 +669,7 @@
        }
       ],
       "weapon": "EpigraphMG",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ArrowWeapon",
@@ -732,7 +732,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "80",
@@ -877,7 +877,7 @@
        }
       ],
       "weapon": "GladiusCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -978,7 +978,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "32",
@@ -1032,7 +1032,7 @@
        }
       ],
       "weapon": "ScoutMG",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -1043,7 +1043,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "32",
@@ -1097,7 +1097,7 @@
        }
       ],
       "weapon": "ScoutMG",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -1108,7 +1108,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "40",
@@ -1168,7 +1168,7 @@
        }
       ],
       "weapon": "ScoutRockets_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1180,7 +1180,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "40",
@@ -1240,7 +1240,7 @@
        }
       ],
       "weapon": "ScoutRockets_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1332,7 +1332,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8475",
       "reloaddelay": "10",
@@ -1418,7 +1418,7 @@
        }
       ],
       "weapon": "StarshipSovereignBeam",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -1485,7 +1485,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6474",
       "reloaddelay": "6",
@@ -1571,7 +1571,7 @@
        }
       ],
       "weapon": "VoidRayBeam",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -2097,7 +2097,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
@@ -2123,7 +2123,7 @@
        }
       ],
       "weapon": "Heal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -2270,7 +2270,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8228",
       "reloaddelay": "28",
@@ -2324,7 +2324,7 @@
        }
       ],
       "weapon": "PhotonCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^FlakWeapon",
        "^HeavyCannon",
@@ -2416,7 +2416,7 @@
        }
       ],
       "weapon": "GlaveCanon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon"
@@ -2467,7 +2467,7 @@
        }
       ],
       "weapon": "GlaveCanon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon"
@@ -2516,7 +2516,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1840",
       "reloaddelay": "20",
@@ -2534,7 +2534,7 @@
        }
       ],
       "weapon": "WarpBladeAmaranth",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -2585,7 +2585,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1600",
       "reloaddelay": "25",
@@ -2603,7 +2603,7 @@
        }
       ],
       "weapon": "WarpBlade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -2656,20 +2656,20 @@
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "6400",
       "reloaddelay": "64",
       "slot": "Armament@Effect",
       "versus_templates": [],
       "warheads": [],
       "weapon": "PsiStormCosmetic",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2692,7 +2692,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -2702,7 +2702,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2725,7 +2725,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -2735,7 +2735,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2758,7 +2758,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -2768,7 +2768,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2791,7 +2791,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -2801,7 +2801,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2824,7 +2824,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -2834,7 +2834,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2857,7 +2857,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -2867,7 +2867,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2890,7 +2890,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -2900,7 +2900,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2923,7 +2923,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -2973,7 +2973,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1337",
       "reloaddelay": "26",
@@ -2991,7 +2991,7 @@
        }
       ],
       "weapon": "psi_spear",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -3044,7 +3044,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
@@ -3130,7 +3130,7 @@
        }
       ],
       "weapon": "PatriarchShoot",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3145,7 +3145,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
@@ -3231,7 +3231,7 @@
        }
       ],
       "weapon": "PatriarchShoot",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3291,7 +3291,7 @@
       "burst": "2",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1335",
       "reloaddelay": "30",
@@ -3309,7 +3309,7 @@
        }
       ],
       "weapon": "psi_blades",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -3360,7 +3360,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1445",
       "reloaddelay": "24",
@@ -3378,7 +3378,7 @@
        }
       ],
       "weapon": "ZeratulSlice",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -4117,7 +4117,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "25",
@@ -4133,7 +4133,7 @@
        }
       ],
       "weapon": "SCVAttack",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^WorkerAttack"
       ]
@@ -4143,7 +4143,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "5",
@@ -4169,7 +4169,7 @@
        }
       ],
       "weapon": "SCVRepair",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -4301,7 +4301,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "28",
@@ -4366,7 +4366,7 @@
        }
       ],
       "weapon": "AtreusMG",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4423,7 +4423,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "40",
@@ -4474,7 +4474,7 @@
        }
       ],
       "weapon": "DragoonCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^FlakWeapon",
        "^HeavyCannon",
@@ -4571,7 +4571,7 @@
        }
       ],
       "weapon": "WaveforceCannonChargedLaser",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^RailgunWeapon"
@@ -4616,7 +4616,7 @@
        }
       ],
       "weapon": "WaveforceCannonDistortedBeam1",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyCannon"
@@ -4666,7 +4666,7 @@
        }
       ],
       "weapon": "WaveforceCannonDistortedBeam2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -4729,7 +4729,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4780",
       "reloaddelay": "20",
@@ -4772,7 +4772,7 @@
        }
       ],
       "weapon": "ManifoldMG",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4781,7 +4781,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -4822,7 +4822,7 @@
        }
       ],
       "weapon": "ManifoldMG_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4924,7 +4924,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 0.85,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5044",
       "reloaddelay": "30",
@@ -4994,7 +4994,7 @@
        }
       ],
       "weapon": "PositronGrenade",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon",
@@ -5056,7 +5056,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "25",
@@ -5072,7 +5072,7 @@
        }
       ],
       "weapon": "ProbeAttack",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^WorkerAttack"
       ]
@@ -5129,7 +5129,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "90",
@@ -5188,7 +5188,7 @@
        }
       ],
       "weapon": "ScarabLaunch",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyBomb",
        "^ShrapnelWeapon",
@@ -5214,7 +5214,7 @@
        }
       ],
       "weapon": "ScarabLaunchDummy",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],

@@ -10,7 +10,7 @@
       "burst": "10",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1290",
       "pricing": true,
       "range": "6460",
@@ -28,7 +28,7 @@
        }
       ],
       "weapon": "ArmoredYakChainGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -40,7 +40,7 @@
       "burst": "10",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1290",
       "pricing": true,
       "range": "6460",
@@ -58,7 +58,7 @@
        }
       ],
       "weapon": "ArmoredYakChainGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -107,7 +107,7 @@
        }
       ],
       "weapon": "IncendiaryArmoredYakChainGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -157,7 +157,7 @@
        }
       ],
       "weapon": "IncendiaryArmoredYakChainGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -208,7 +208,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
@@ -273,7 +273,7 @@
        }
       ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -283,7 +283,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
@@ -348,7 +348,7 @@
        }
       ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -358,7 +358,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
@@ -423,7 +423,7 @@
        }
       ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -433,7 +433,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
@@ -514,7 +514,7 @@
        }
       ],
       "weapon": "HindMissilesThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -525,7 +525,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
@@ -606,7 +606,7 @@
        }
       ],
       "weapon": "HindMissilesThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -617,7 +617,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
@@ -698,7 +698,7 @@
        }
       ],
       "weapon": "HindMissilesThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -709,7 +709,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
@@ -769,7 +769,7 @@
        }
       ],
       "weapon": "HindMissilesNuclear",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumFlameWeapon",
@@ -779,7 +779,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
@@ -839,7 +839,7 @@
        }
       ],
       "weapon": "HindMissilesNuclear",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumFlameWeapon",
@@ -849,7 +849,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
@@ -909,7 +909,7 @@
        }
       ],
       "weapon": "HindMissilesNuclear",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumFlameWeapon",
@@ -919,7 +919,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
@@ -938,7 +938,7 @@
        }
       ],
       "weapon": "ChainGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -948,7 +948,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
@@ -967,7 +967,7 @@
        }
       ],
       "weapon": "ChainGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -1015,7 +1015,7 @@
        }
       ],
       "weapon": "IncendiaryChainGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -1064,7 +1064,7 @@
        }
       ],
       "weapon": "IncendiaryChainGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -1159,7 +1159,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "32",
@@ -1197,7 +1197,7 @@
        }
       ],
       "weapon": "KamovTesla",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TeslaWeapon"
@@ -1205,7 +1205,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "32",
@@ -1242,7 +1242,7 @@
        }
       ],
       "weapon": "KamovTeslaArc",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TeslaWeapon"
@@ -1250,7 +1250,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
@@ -1315,7 +1315,7 @@
        }
       ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -1325,7 +1325,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
@@ -1390,7 +1390,7 @@
        }
       ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -1400,7 +1400,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
@@ -1465,7 +1465,7 @@
        }
       ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -1475,7 +1475,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
@@ -1561,7 +1561,7 @@
        }
       ],
       "weapon": "KamovMissilesTesla",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -1572,7 +1572,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
@@ -1658,7 +1658,7 @@
        }
       ],
       "weapon": "KamovMissilesTesla",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -1669,7 +1669,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
@@ -1755,7 +1755,7 @@
        }
       ],
       "weapon": "KamovMissilesTesla",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -1766,7 +1766,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
@@ -1785,7 +1785,7 @@
        }
       ],
       "weapon": "ChainGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -1795,7 +1795,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
@@ -1814,7 +1814,7 @@
        }
       ],
       "weapon": "ChainGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -1862,7 +1862,7 @@
        }
       ],
       "weapon": "IncendiaryChainGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -1911,7 +1911,7 @@
        }
       ],
       "weapon": "IncendiaryChainGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -1969,7 +1969,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -1989,7 +1989,7 @@
        }
       ],
       "weapon": "Maverick",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
@@ -2000,7 +2000,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -2020,7 +2020,7 @@
        }
       ],
       "weapon": "Maverick",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
@@ -2031,7 +2031,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -2062,7 +2062,7 @@
        }
       ],
       "weapon": "TeslaMaverick",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -2076,7 +2076,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -2107,7 +2107,7 @@
        }
       ],
       "weapon": "TeslaMaverick",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -2121,7 +2121,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.1666666666666667,
+      "design_weapon_class": null,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -2177,7 +2177,7 @@
        }
       ],
       "weapon": "ThermobaricMaverick",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^NuclearWarhead",
        "^HeavyMissile",
@@ -2191,7 +2191,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.1666666666666667,
+      "design_weapon_class": null,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -2247,7 +2247,7 @@
        }
       ],
       "weapon": "ThermobaricMaverick",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^NuclearWarhead",
        "^HeavyMissile",
@@ -2302,7 +2302,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1250",
       "reloaddelay": "125",
@@ -2366,7 +2366,7 @@
        }
       ],
       "weapon": "YakNuclearBomb",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyChemicalWeapon",
@@ -2378,7 +2378,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2398,7 +2398,7 @@
        }
       ],
       "weapon": "YakChainGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -2410,7 +2410,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2430,7 +2430,7 @@
        }
       ],
       "weapon": "YakChainGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -2481,7 +2481,7 @@
        }
       ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -2533,7 +2533,7 @@
        }
       ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -2625,7 +2625,7 @@
        }
       ],
       "weapon": "NuclearMaverick",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^NuclearWarhead",
        "^HeavyMissile"
@@ -2635,7 +2635,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1580",
       "pricing": true,
       "range": "7890",
@@ -2685,7 +2685,7 @@
        }
       ],
       "weapon": "ThermobaricNuclearMaverick",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^NuclearWarhead",
@@ -2696,7 +2696,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2716,7 +2716,7 @@
        }
       ],
       "weapon": "YakChainGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -2727,7 +2727,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2747,7 +2747,7 @@
        }
       ],
       "weapon": "YakChainGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -2798,7 +2798,7 @@
        }
       ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -2849,7 +2849,7 @@
        }
       ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -2906,7 +2906,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "750",
       "reloaddelay": "50",
@@ -2970,7 +2970,7 @@
        }
       ],
       "weapon": "ParaBombNuke",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyChemicalWeapon",
@@ -3027,7 +3027,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1250",
       "reloaddelay": "125",
@@ -3096,7 +3096,7 @@
        }
       ],
       "weapon": "YakTeslaBomb",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyBomb",
@@ -3108,7 +3108,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -3147,7 +3147,7 @@
        }
       ],
       "weapon": "YakTeslaGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TeslaWeapon"
@@ -3157,7 +3157,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -3195,7 +3195,7 @@
        }
       ],
       "weapon": "YakTeslaGunArc",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TeslaWeapon"
@@ -3205,7 +3205,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -3225,7 +3225,7 @@
        }
       ],
       "weapon": "YakChainGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -3237,7 +3237,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -3257,7 +3257,7 @@
        }
       ],
       "weapon": "YakChainGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -3308,7 +3308,7 @@
        }
       ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -3360,7 +3360,7 @@
        }
       ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -3418,7 +3418,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1840",
       "reloaddelay": "110",
@@ -3487,7 +3487,7 @@
        }
       ],
       "weapon": "YakNapalm",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb",
@@ -3499,7 +3499,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -3519,7 +3519,7 @@
        }
       ],
       "weapon": "YakChainGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -3531,7 +3531,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -3551,7 +3551,7 @@
        }
       ],
       "weapon": "YakChainGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -3602,7 +3602,7 @@
        }
       ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -3654,7 +3654,7 @@
        }
       ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -4105,7 +4105,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6742",
       "reloaddelay": "30",
@@ -4124,7 +4124,7 @@
        }
       ],
       "weapon": "FireballLauncher",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -4176,7 +4176,7 @@
        }
       ],
       "weapon": "FireballLauncherThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -4311,7 +4311,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12790",
       "reloaddelay": "27",
@@ -4365,7 +4365,7 @@
        }
       ],
       "weapon": "Nike",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^FlakWeapon",
        "^HeavyMissile",
@@ -4418,7 +4418,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9320",
       "reloaddelay": "3",
@@ -4442,7 +4442,7 @@
        }
       ],
       "weapon": "TeslaZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -4451,7 +4451,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9320",
       "reloaddelay": "3",
@@ -4473,7 +4473,7 @@
        }
       ],
       "weapon": "TeslaZap_EMP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -4482,7 +4482,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9320",
       "reloaddelay": "3",
@@ -4504,7 +4504,7 @@
        }
       ],
       "weapon": "TeslaZapArc_EMP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -4587,7 +4587,7 @@
        }
       ],
       "weapon": "ra1_soviets_ak47conscript_rifle",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -4630,7 +4630,7 @@
        }
       ],
       "weapon": "ra1_soviets_ak47conscript_rifle",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -4699,7 +4699,7 @@
        }
       ],
       "weapon": "DogJaw",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -4767,7 +4767,7 @@
        }
       ],
       "weapon": "CommissarPistol",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4796,7 +4796,7 @@
        }
       ],
       "weapon": "CommissarPistol",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4859,7 +4859,7 @@
        }
       ],
       "weapon": "CyberneticDogJaw",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -4906,7 +4906,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5804",
       "reloaddelay": "85",
@@ -4976,7 +4976,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -4988,7 +4988,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5804",
       "reloaddelay": "85",
@@ -5058,7 +5058,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -5116,7 +5116,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6036",
       "reloaddelay": "53",
@@ -5176,7 +5176,7 @@
        }
       ],
       "weapon": "FireRockets",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^FlakWeapon",
        "^MediumMissile",
@@ -5187,7 +5187,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6036",
       "reloaddelay": "53",
@@ -5247,7 +5247,7 @@
        }
       ],
       "weapon": "FireRockets",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^FlakWeapon",
        "^MediumMissile",
@@ -5257,7 +5257,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6692",
       "reloaddelay": "58",
@@ -5376,7 +5376,7 @@
        }
       ],
       "weapon": "FireRocketsThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^HeavyMissile",
@@ -5391,7 +5391,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6692",
       "reloaddelay": "58",
@@ -5510,7 +5510,7 @@
        }
       ],
       "weapon": "FireRocketsThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^HeavyMissile",
@@ -5566,7 +5566,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5004",
       "reloaddelay": "24",
@@ -5585,7 +5585,7 @@
        }
       ],
       "weapon": "FireballGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -5595,7 +5595,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5004",
       "reloaddelay": "24",
@@ -5614,7 +5614,7 @@
        }
       ],
       "weapon": "FireballGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -5666,7 +5666,7 @@
        }
       ],
       "weapon": "FireballGunThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -5718,7 +5718,7 @@
        }
       ],
       "weapon": "FireballGunThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -5811,7 +5811,7 @@
        }
       ],
       "weapon": "GrenadeRA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^LightFlameWeapon"
@@ -5863,7 +5863,7 @@
        }
       ],
       "weapon": "GrenadeRA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^LightFlameWeapon"
@@ -5871,7 +5871,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5791",
       "reloaddelay": "40",
@@ -5945,7 +5945,7 @@
        }
       ],
       "weapon": "GrenadeThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
@@ -5956,7 +5956,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5791",
       "reloaddelay": "40",
@@ -6030,7 +6030,7 @@
        }
       ],
       "weapon": "GrenadeThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
@@ -6082,7 +6082,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "2165",
       "pricing": true,
       "range": "10830",
@@ -6158,7 +6158,7 @@
        }
       ],
       "weapon": "SiegeMortar",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^Grenade",
@@ -6169,7 +6169,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "2165",
       "pricing": false,
       "range": "10830",
@@ -6245,7 +6245,7 @@
        }
       ],
       "weapon": "SiegeMortar",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^Grenade",
@@ -6255,7 +6255,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2165",
       "pricing": true,
       "range": "10830",
@@ -6355,7 +6355,7 @@
        }
       ],
       "weapon": "SiegeMortarThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^HeavyFlameWeapon",
@@ -6368,7 +6368,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2165",
       "pricing": false,
       "range": "10830",
@@ -6468,7 +6468,7 @@
        }
       ],
       "weapon": "SiegeMortarThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^HeavyFlameWeapon",
@@ -6530,7 +6530,7 @@
       "burst": "3",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4668",
       "reloaddelay": "50",
@@ -6549,7 +6549,7 @@
        }
       ],
       "weapon": "ra1_soviets_rifleinfantry_carbine",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -6561,7 +6561,7 @@
       "burst": "3",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4668",
       "reloaddelay": "50",
@@ -6580,7 +6580,7 @@
        }
       ],
       "weapon": "ra1_soviets_rifleinfantry_carbine",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -6591,7 +6591,7 @@
       "burst": "3",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4668",
       "reloaddelay": "50",
@@ -6617,7 +6617,7 @@
        }
       ],
       "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -6633,7 +6633,7 @@
       "burst": "3",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4668",
       "reloaddelay": "50",
@@ -6659,7 +6659,7 @@
        }
       ],
       "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -6751,7 +6751,7 @@
        }
       ],
       "weapon": "RocketsRA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -6792,7 +6792,7 @@
        }
       ],
       "weapon": "RocketsRA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -6843,7 +6843,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4652",
       "reloaddelay": "40",
@@ -6867,7 +6867,7 @@
        }
       ],
       "weapon": "PortaTesla",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -6876,7 +6876,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4652",
       "reloaddelay": "40",
@@ -6898,7 +6898,7 @@
        }
       ],
       "weapon": "PortaTesla_EMP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -6907,7 +6907,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4652",
       "reloaddelay": "40",
@@ -6929,7 +6929,7 @@
        }
       ],
       "weapon": "PortaTeslaArc_EMP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -6939,7 +6939,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4652",
       "reloaddelay": "40",
@@ -6963,7 +6963,7 @@
        }
       ],
       "weapon": "PortaTesla",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -6973,7 +6973,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4652",
       "reloaddelay": "40",
@@ -6995,7 +6995,7 @@
        }
       ],
       "weapon": "PortaTesla_EMP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -7005,7 +7005,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4652",
       "reloaddelay": "40",
@@ -7027,7 +7027,7 @@
        }
       ],
       "weapon": "PortaTeslaArc_EMP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -7081,7 +7081,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5400",
       "reloaddelay": "15",
@@ -7135,7 +7135,7 @@
        }
       ],
       "weapon": "VolkovMagneticWeapon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumChemicalWeapon",
@@ -7146,7 +7146,7 @@
       "burst": "2",
       "burstdelays": "9",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5660",
       "reloaddelay": "30",
@@ -7221,7 +7221,7 @@
        }
       ],
       "weapon": "VolkovMagneticWeaponTesla",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumChemicalWeapon",
@@ -7235,7 +7235,7 @@
       "burst": "1",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1080",
       "pricing": true,
       "range": "5400",
@@ -7305,7 +7305,7 @@
        }
       ],
       "weapon": "VolkovMagneticWeaponNuclearShells",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Nuclear_Super",
        "^Effect_Nuclear_Super",
@@ -7318,7 +7318,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5400",
       "reloaddelay": "15",
@@ -7379,7 +7379,7 @@
        }
       ],
       "weapon": "VolkovMagneticWeaponIncendiary",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -7394,7 +7394,7 @@
       "burst": "2",
       "burstdelays": "9",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5660",
       "reloaddelay": "30",
@@ -7488,7 +7488,7 @@
        }
       ],
       "weapon": "VolkovMagneticWeaponIncendiaryTesla",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumChemicalWeapon",
@@ -7501,7 +7501,7 @@
       "burst": "1",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "minrange": "1080",
       "pricing": true,
       "range": "5400",
@@ -7591,7 +7591,7 @@
        }
       ],
       "weapon": "VolkovMagneticWeaponIncendiaryNuclearShells",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^NuclearWarhead",
@@ -7605,7 +7605,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5400",
       "reloaddelay": "15",
@@ -7659,7 +7659,7 @@
        }
       ],
       "weapon": "VolkovMagneticWeapon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumChemicalWeapon",
@@ -7671,7 +7671,7 @@
       "burst": "2",
       "burstdelays": "9",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5660",
       "reloaddelay": "30",
@@ -7746,7 +7746,7 @@
        }
       ],
       "weapon": "VolkovMagneticWeaponTesla",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumChemicalWeapon",
@@ -7761,7 +7761,7 @@
       "burst": "1",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1080",
       "pricing": false,
       "range": "5400",
@@ -7831,7 +7831,7 @@
        }
       ],
       "weapon": "VolkovMagneticWeaponNuclearShells",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Nuclear_Super",
        "^Effect_Nuclear_Super",
@@ -7845,7 +7845,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5400",
       "reloaddelay": "15",
@@ -7906,7 +7906,7 @@
        }
       ],
       "weapon": "VolkovMagneticWeaponIncendiary",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -7922,7 +7922,7 @@
       "burst": "2",
       "burstdelays": "9",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5660",
       "reloaddelay": "30",
@@ -8016,7 +8016,7 @@
        }
       ],
       "weapon": "VolkovMagneticWeaponIncendiaryTesla",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumChemicalWeapon",
@@ -8030,7 +8030,7 @@
       "burst": "1",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "minrange": "1080",
       "pricing": false,
       "range": "5400",
@@ -8120,7 +8120,7 @@
        }
       ],
       "weapon": "VolkovMagneticWeaponIncendiaryNuclearShells",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^NuclearWarhead",
@@ -8178,7 +8178,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "32",
@@ -8202,7 +8202,7 @@
        }
       ],
       "weapon": "ZapperPortaTesla",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -8211,7 +8211,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "32",
@@ -8233,7 +8233,7 @@
        }
       ],
       "weapon": "ZapperPortaTeslaArc",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -8243,7 +8243,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "32",
@@ -8267,7 +8267,7 @@
        }
       ],
       "weapon": "ZapperPortaTesla",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -8277,7 +8277,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "32",
@@ -8299,7 +8299,7 @@
        }
       ],
       "weapon": "ZapperPortaTeslaArc",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -9538,7 +9538,7 @@
        }
       ],
       "weapon": "BTRMachineGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -9579,7 +9579,7 @@
        }
       ],
       "weapon": "BTRMachineGun_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -9589,7 +9589,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5454",
       "reloaddelay": "20",
@@ -9627,7 +9627,7 @@
        }
       ],
       "weapon": "BTRTeslaMachineGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TeslaWeapon"
@@ -9637,7 +9637,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5454",
       "reloaddelay": "20",
@@ -9674,7 +9674,7 @@
        }
       ],
       "weapon": "BTRTeslaMachineGunArc",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TeslaWeapon"
@@ -9684,7 +9684,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
@@ -9721,7 +9721,7 @@
        }
       ],
       "weapon": "BTRTeslaMachineGun_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TeslaWeapon"
@@ -9731,7 +9731,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
@@ -9768,7 +9768,7 @@
        }
       ],
       "weapon": "BTRTeslaMachineGunArc_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TeslaWeapon"
@@ -9854,7 +9854,7 @@
        }
       ],
       "weapon": "FLAK-23-AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon"
@@ -9895,7 +9895,7 @@
        }
       ],
       "weapon": "FLAK-23-AG",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon"
@@ -9949,7 +9949,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "10",
@@ -9968,7 +9968,7 @@
        }
       ],
       "weapon": "RAGatlingTankCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -9977,7 +9977,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "10",
@@ -9994,7 +9994,7 @@
        }
       ],
       "weapon": "RAGatlingTankCannon_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -10042,7 +10042,7 @@
        }
       ],
       "weapon": "IncendiaryRAGatlingTankCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -10088,7 +10088,7 @@
        }
       ],
       "weapon": "IncendiaryRAGatlingTankCannon_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LightFlameWeapon",
@@ -10097,7 +10097,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "10",
@@ -10121,7 +10121,7 @@
        }
       ],
       "weapon": "TeslaRAGatlingTankCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -10130,7 +10130,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "10",
@@ -10152,7 +10152,7 @@
        }
       ],
       "weapon": "TeslaRAGatlingTankCannonArc",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -10161,7 +10161,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "10",
@@ -10183,7 +10183,7 @@
        }
       ],
       "weapon": "TeslaRAGatlingTankCannon_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -10192,7 +10192,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "10",
@@ -10214,7 +10214,7 @@
        }
       ],
       "weapon": "TeslaRAGatlingTankCannonArc_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -10272,7 +10272,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2390",
       "reloaddelay": "50",
@@ -10290,7 +10290,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -10385,7 +10385,7 @@
        }
       ],
       "weapon": "GradRockets",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon"
@@ -10395,7 +10395,7 @@
       "burst": "8",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "2765",
       "pricing": true,
       "range": "13820",
@@ -10460,7 +10460,7 @@
        }
       ],
       "weapon": "GradHeavyRockets",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^HeavyBomb",
@@ -10552,7 +10552,7 @@
        }
       ],
       "weapon": "HammerTankCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumCannon"
@@ -10562,7 +10562,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6825",
       "reloaddelay": "85",
@@ -10641,7 +10641,7 @@
        }
       ],
       "weapon": "HammerTankCannonThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyBomb",
        "^MediumFlameWeapon",
@@ -10651,7 +10651,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6825",
       "reloaddelay": "100",
@@ -10720,7 +10720,7 @@
        }
       ],
       "weapon": "ShtoraLaser",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^FlakWeapon",
@@ -10777,7 +10777,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8212",
       "reloaddelay": "8",
@@ -10835,7 +10835,7 @@
        }
       ],
       "weapon": "HeatRayBeam1",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LaserWeapon",
        "^MediumChemicalWeapon",
@@ -10844,7 +10844,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8212",
       "reloaddelay": "8",
@@ -10900,7 +10900,7 @@
        }
       ],
       "weapon": "HeatRayBeam2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LaserWeapon",
        "^MediumChemicalWeapon",
@@ -10909,7 +10909,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8212",
       "reloaddelay": "8",
@@ -10965,7 +10965,7 @@
        }
       ],
       "weapon": "HeatRayBeam3",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LaserWeapon",
        "^MediumChemicalWeapon",
@@ -10974,7 +10974,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8212",
       "reloaddelay": "8",
@@ -11030,7 +11030,7 @@
        }
       ],
       "weapon": "HeatRayBeam4",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LaserWeapon",
        "^MediumChemicalWeapon",
@@ -11141,7 +11141,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5469",
       "reloaddelay": "76",
@@ -11160,7 +11160,7 @@
        }
       ],
       "weapon": "105mm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -11171,7 +11171,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5469",
       "reloaddelay": "76",
@@ -11196,7 +11196,7 @@
        }
       ],
       "weapon": "105mmThermobaric",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -11255,7 +11255,7 @@
      {
       "armament_name": "pointdefense",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6650",
       "reloaddelay": "10",
@@ -11278,7 +11278,7 @@
        }
       ],
       "weapon": "PointDefenseTesla",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -11430,7 +11430,7 @@
        }
       ],
       "weapon": "KotinCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumCannon"
@@ -11440,7 +11440,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6427",
       "reloaddelay": "96",
@@ -11519,7 +11519,7 @@
        }
       ],
       "weapon": "KotinCannonThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyBomb",
        "^MediumFlameWeapon",
@@ -11577,7 +11577,7 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2500",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -11585,7 +11585,7 @@
       ],
       "warheads": [],
       "weapon": "MADTankTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -11642,7 +11642,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
@@ -11702,7 +11702,7 @@
        }
       ],
       "weapon": "ra120mm",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumCannon",
@@ -11714,7 +11714,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
@@ -11771,7 +11771,7 @@
        }
       ],
       "weapon": "ra120mmTargetingComputer",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumCannon",
@@ -11783,7 +11783,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
@@ -11832,7 +11832,7 @@
        }
       ],
       "weapon": "ra120mmThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^HeavyBomb",
@@ -11843,7 +11843,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
@@ -11890,7 +11890,7 @@
        }
       ],
       "weapon": "ra120mmThermobaricTargetingComputer",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^HeavyBomb",
@@ -11902,7 +11902,7 @@
       "burst": "2",
       "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "91",
@@ -11963,7 +11963,7 @@
        }
       ],
       "weapon": "MammothTusk",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -11977,7 +11977,7 @@
       "burst": "2",
       "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "91",
@@ -12034,7 +12034,7 @@
        }
       ],
       "weapon": "MammothTuskTargetingComputer",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -12048,7 +12048,7 @@
       "burst": "2",
       "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "91",
@@ -12118,7 +12118,7 @@
        }
       ],
       "weapon": "MammothTuskTesla",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^LightFlameWeapon",
@@ -12131,7 +12131,7 @@
       "burst": "2",
       "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "91",
@@ -12198,7 +12198,7 @@
        }
       ],
       "weapon": "MammothTuskTeslaTargetingComputer",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^LightFlameWeapon",
@@ -12211,7 +12211,7 @@
       "burst": "2",
       "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "91",
@@ -12335,7 +12335,7 @@
        }
       ],
       "weapon": "MammothTuskThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -12352,7 +12352,7 @@
       "burst": "2",
       "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "91",
@@ -12469,7 +12469,7 @@
        }
       ],
       "weapon": "MammothTuskThermobaricTargetingComputer",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -12613,7 +12613,7 @@
        }
       ],
       "weapon": "MonsterTank120mm",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^NuclearWarhead",
        "^HeavyCannon"
@@ -12623,7 +12623,7 @@
       "burst": "2",
       "burstdelays": "32",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7833",
       "reloaddelay": "103",
@@ -12663,7 +12663,7 @@
        }
       ],
       "weapon": "MonsterTank120mmThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Heavy",
        "^Projectile_Flame_Heavy",
@@ -12709,7 +12709,7 @@
        }
       ],
       "weapon": "MonsterTankTusk",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyMissile"
@@ -12719,7 +12719,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7833",
       "reloaddelay": "125",
@@ -12789,7 +12789,7 @@
        }
       ],
       "weapon": "MonsterTankTuskTesla",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^LightFlameWeapon",
@@ -12801,7 +12801,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7833",
       "reloaddelay": "125",
@@ -12925,7 +12925,7 @@
        }
       ],
       "weapon": "MonsterTankTuskThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -12995,7 +12995,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2510",
       "pricing": true,
       "range": "12550",
@@ -13212,7 +13212,7 @@
        }
       ],
       "weapon": "SCUDNUKE",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^MediumMissile",
@@ -13233,7 +13233,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2510",
       "pricing": true,
       "range": "12550",
@@ -13436,7 +13436,7 @@
        }
       ],
       "weapon": "SCUDNUKEThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^MediumMissile",
@@ -13506,13 +13506,13 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2000",
       "slot": "Armament@PRIMARY",
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -13617,7 +13617,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
@@ -13671,7 +13671,7 @@
        }
       ],
       "weapon": "ra120mm2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumFlameWeapon",
@@ -13682,7 +13682,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
@@ -13734,7 +13734,7 @@
        }
       ],
       "weapon": "ra120mm2TargetingComputer",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumFlameWeapon",
@@ -13745,7 +13745,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
@@ -13794,7 +13794,7 @@
        }
       ],
       "weapon": "ra120mm2Thermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^HeavyBomb",
@@ -13805,7 +13805,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
@@ -13852,7 +13852,7 @@
        }
       ],
       "weapon": "ra120mm2ThermobaricTargetingComputer",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^HeavyBomb",
@@ -13864,7 +13864,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
@@ -13919,7 +13919,7 @@
        }
       ],
       "weapon": "MammothTusk2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -13932,7 +13932,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
@@ -13984,7 +13984,7 @@
        }
       ],
       "weapon": "MammothTusk2TargetingComputer",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -13997,7 +13997,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
@@ -14046,7 +14046,7 @@
        }
       ],
       "weapon": "MammothTusk2Thermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^HeavyBomb",
@@ -14058,7 +14058,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
@@ -14105,7 +14105,7 @@
        }
       ],
       "weapon": "MammothTusk2ThermobaricTargetingComputer",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^HeavyBomb",
@@ -14212,7 +14212,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
@@ -14236,7 +14236,7 @@
        }
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -14245,7 +14245,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
@@ -14267,7 +14267,7 @@
        }
       ],
       "weapon": "TTankZap_EMP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -14276,7 +14276,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
@@ -14298,7 +14298,7 @@
        }
       ],
       "weapon": "TTankZapArc_EMP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -14394,7 +14394,7 @@
        }
       ],
       "weapon": "v1rockets",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^Grenade"
@@ -14404,7 +14404,7 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1920",
       "pricing": true,
       "range": "9595",
@@ -14459,7 +14459,7 @@
        }
       ],
       "weapon": "v1rocketsThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumMissile",
        "^Grenade",
@@ -14554,7 +14554,7 @@
        }
       ],
       "weapon": "SCUD",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyFlameWeapon"
@@ -14562,7 +14562,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "2822",
       "pricing": true,
       "range": "14110",
@@ -14607,7 +14607,7 @@
        }
       ],
       "weapon": "SCUDThermobaric",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Demolition_Heavy",
        "^Effect_Explosion_Heavy",
@@ -14617,7 +14617,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "2822",
       "pricing": true,
       "range": "14110",
@@ -14668,7 +14668,7 @@
        }
       ],
       "weapon": "SCUDTesla",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",

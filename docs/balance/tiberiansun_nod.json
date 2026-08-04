@@ -53,7 +53,7 @@
        }
       ],
       "weapon": "TSProton",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSEnergyBlast",
        "^MediumFlameWeapon",
@@ -107,7 +107,7 @@
       "burst": "5",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4882",
       "reloaddelay": "24",
@@ -126,7 +126,7 @@
        }
       ],
       "weapon": "TSHarpyClaw",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -137,7 +137,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4882",
       "reloaddelay": "24",
@@ -154,7 +154,7 @@
        }
       ],
       "weapon": "TSHarpyMultiClaw",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -165,7 +165,7 @@
       "burst": "5",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4882",
       "reloaddelay": "24",
@@ -182,7 +182,7 @@
        }
       ],
       "weapon": "TSHarpyAOEClaw",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -232,7 +232,7 @@
        }
       ],
       "weapon": "TSLaserHarpyClaw",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LaserWeapon",
@@ -290,7 +290,7 @@
        }
       ],
       "weapon": "TSLaserHarpyMultiClaw",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LaserWeapon",
@@ -338,7 +338,7 @@
        }
       ],
       "weapon": "TSLaserHarpyAOEClaw",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LaserWeapon",
@@ -882,7 +882,7 @@
        }
       ],
       "weapon": "TSTurretLaser",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LaserWeapon",
@@ -930,7 +930,7 @@
        }
       ],
       "weapon": "TSLaserTurretLaser",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LaserWeapon",
@@ -978,10 +978,10 @@
      {
       "armament_name": "superweapon",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "minrange": "3072",
-      "pricing": true,
+      "pricing": false,
       "range": "10238976",
       "reloaddelay": "50",
       "requires": "!ts_nod_tiberiumwastefacility",
@@ -991,7 +991,7 @@
       ],
       "warheads": [],
       "weapon": "TSTacticalMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TSDefaultMissile"
       ]
@@ -999,10 +999,10 @@
      {
       "armament_name": "superweapon",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "minrange": "3072",
-      "pricing": true,
+      "pricing": false,
       "range": "10238976",
       "reloaddelay": "50",
       "requires": "ts_nod_tiberiumwastefacility",
@@ -1012,7 +1012,7 @@
       ],
       "warheads": [],
       "weapon": "TSTacticalChemMissile",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TSDefaultMissile"
       ]
@@ -1106,7 +1106,7 @@
        }
       ],
       "weapon": "TSObeliskLaserFire",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LaserWeapon",
@@ -1154,7 +1154,7 @@
        }
       ],
       "weapon": "TSLaserObeliskLaserFire",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LaserWeapon",
@@ -1203,7 +1203,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "13176",
       "reloaddelay": "50",
@@ -1222,7 +1222,7 @@
        }
       ],
       "weapon": "TSNODRedEye",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
@@ -1233,7 +1233,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "13176",
       "reloaddelay": "50",
@@ -1250,7 +1250,7 @@
        }
       ],
       "weapon": "TSNODTibRedEye",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
@@ -1396,7 +1396,7 @@
        }
       ],
       "weapon": "ChamBlade",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1480,7 +1480,7 @@
        }
       ],
       "weapon": "elitecadregun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1490,7 +1490,7 @@
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6677",
       "reloaddelay": "50",
@@ -1540,7 +1540,7 @@
        }
       ],
       "weapon": "laserelitecadregun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -1586,7 +1586,7 @@
        }
       ],
       "weapon": "elitecadregun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1597,7 +1597,7 @@
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6677",
       "reloaddelay": "50",
@@ -1647,7 +1647,7 @@
        }
       ],
       "weapon": "laserelitecadregun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -1657,7 +1657,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6623",
       "reloaddelay": "124",
@@ -1676,7 +1676,7 @@
        }
       ],
       "weapon": "TSCadreGrenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -1686,7 +1686,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6623",
       "reloaddelay": "124",
@@ -1705,7 +1705,7 @@
        }
       ],
       "weapon": "TSCadreGrenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -1763,7 +1763,7 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "1536",
       "reloaddelay": "20",
       "slot": "Armament@defuse",
@@ -1773,7 +1773,7 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RemovesIvanBombs",
        "^RemovesTerrorDrone"
@@ -1783,14 +1783,14 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "1536",
       "reloaddelay": "100",
       "slot": "Armament@leechdisinfect",
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -1816,7 +1816,7 @@
        }
       ],
       "weapon": "TSEngineerPistol",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1845,7 +1845,7 @@
        }
       ],
       "weapon": "TSEngineerPistol",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1893,7 +1893,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4062",
       "reloaddelay": "12",
@@ -1912,7 +1912,7 @@
        }
       ],
       "weapon": "TSMinigun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -1922,7 +1922,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4062",
       "reloaddelay": "12",
@@ -1941,7 +1941,7 @@
        }
       ],
       "weapon": "TSMinigun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -1989,7 +1989,7 @@
        }
       ],
       "weapon": "TSLasergun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^LaserWeapon",
@@ -2038,7 +2038,7 @@
        }
       ],
       "weapon": "TSLasergun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^LaserWeapon",
@@ -2088,7 +2088,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6694",
       "reloaddelay": "52",
@@ -2107,7 +2107,7 @@
        }
       ],
       "weapon": "TSBazooka",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -2117,7 +2117,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6694",
       "reloaddelay": "52",
@@ -2136,7 +2136,7 @@
        }
       ],
       "weapon": "TSBazooka",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -2183,7 +2183,7 @@
        }
       ],
       "weapon": "TSTibBazooka",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^LightMissile"
@@ -2230,7 +2230,7 @@
        }
       ],
       "weapon": "TSTibBazooka",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^LightMissile"
@@ -2302,7 +2302,7 @@
        }
       ],
       "weapon": "TSShadowTeamPistols",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2333,7 +2333,7 @@
        }
       ],
       "weapon": "TSShadowTeamPistols",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2343,14 +2343,14 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@C4",
       "versus_templates": [],
       "warheads": [],
       "weapon": "TSShadowTeamAttach",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -2399,14 +2399,14 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "12000",
       "reloaddelay": "500",
       "slot": "Armament@PRIMARY",
       "versus_templates": [],
       "warheads": [],
       "weapon": "TSShadowTeamTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -2445,7 +2445,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4146",
       "reloaddelay": "20",
@@ -2531,7 +2531,7 @@
        }
       ],
       "weapon": "TSCommandoShotgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2544,7 +2544,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4146",
       "reloaddelay": "20",
@@ -2630,7 +2630,7 @@
        }
       ],
       "weapon": "TSCommandoShotgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2690,7 +2690,7 @@
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10293",
       "reloaddelay": "54",
@@ -2708,7 +2708,7 @@
        }
       ],
       "weapon": "TSToxinRifle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
@@ -2720,7 +2720,7 @@
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "10293",
       "reloaddelay": "54",
@@ -2738,7 +2738,7 @@
        }
       ],
       "weapon": "TSToxinRifle",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
@@ -3020,7 +3020,7 @@
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "minrange": "2615",
-      "pricing": true,
+      "pricing": false,
       "range": "13083",
       "reloaddelay": "33",
       "requires": "!deployed",
@@ -3028,7 +3028,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "TSArtyTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -3073,7 +3073,7 @@
        }
       ],
       "weapon": "TS155mm",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb"
@@ -3120,7 +3120,7 @@
        }
       ],
       "weapon": "TSAux155mm",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb"
@@ -3176,7 +3176,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4787",
       "reloaddelay": "20",
@@ -3195,7 +3195,7 @@
        }
       ],
       "weapon": "TSRaiderCannon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3245,7 +3245,7 @@
        }
       ],
       "weapon": "TSLaserRaiderCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^LaserWeapon",
@@ -3254,7 +3254,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4787",
       "reloaddelay": "52",
@@ -3273,7 +3273,7 @@
        }
       ],
       "weapon": "TSRaiderGrenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -3362,7 +3362,7 @@
        }
       ],
       "weapon": "TSBikeMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile"
@@ -3372,7 +3372,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6554",
       "reloaddelay": "40",
@@ -3437,7 +3437,7 @@
        }
       ],
       "weapon": "TSBikeTibMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -3494,7 +3494,7 @@
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4250",
       "reloaddelay": "52",
@@ -3512,7 +3512,7 @@
        }
       ],
       "weapon": "TSFireballLauncher",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -3617,7 +3617,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -3643,7 +3643,7 @@
        }
       ],
       "weapon": "ts_nod_mobilerepairvehicle",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -3780,7 +3780,7 @@
        }
       ],
       "weapon": "TSStankTusk",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumMissile"
@@ -3790,7 +3790,7 @@
       "burst": "2",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6385",
       "reloaddelay": "60",
@@ -3844,7 +3844,7 @@
        }
       ],
       "weapon": "TSStankTibTusk",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -3939,7 +3939,7 @@
        }
       ],
       "weapon": "TSSAPCMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^LightMissile"
@@ -3949,7 +3949,7 @@
       "burst": "2",
       "burstdelays": "2",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5300",
       "reloaddelay": "18",
@@ -3994,7 +3994,7 @@
        }
       ],
       "weapon": "TSSAPCCoreMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
@@ -4099,7 +4099,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5319",
       "reloaddelay": "26",
@@ -4119,7 +4119,7 @@
        }
       ],
       "weapon": "TS90mm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TSCannonEffect",
        "^Warhead_CannonHE_Medium",
@@ -4168,7 +4168,7 @@
        }
       ],
       "weapon": "TSLaser90mm",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^LaserWeapon",
@@ -4178,7 +4178,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6679",
       "reloaddelay": "22",
@@ -4195,7 +4195,7 @@
        }
       ],
       "weapon": "TS90mmDep",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TSCannonEffect",
        "^Warhead_CannonHE_Medium",
@@ -4243,7 +4243,7 @@
        }
       ],
       "weapon": "TSLaser90mmDep",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^LaserWeapon",
@@ -4253,7 +4253,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6679",
       "reloaddelay": "8",
@@ -4272,7 +4272,7 @@
        }
       ],
       "weapon": "TS25mmDep",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -4321,7 +4321,7 @@
        }
       ],
       "weapon": "TSLaser25mmDep",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^LaserWeapon",

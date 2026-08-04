@@ -187,6 +187,9 @@ _WEAPON_CLASS_IGNORE = {
 _UNMAPPED_WEAPON_TEMPLATES: set[str] = set()
 
 
+_MIX_ALLOWLIST = {"CombatTank", "SiegeTankSiegeCannon", "SiegeEngineCannon"}
+
+
 def weapon_class_from_types(types: list[str]) -> float | None:
     """Arithmetic mean of a weapon's resolved ^-class templates (DESIGN.md
     §WeaponClass), read from the authoritative sidecar.
@@ -195,6 +198,10 @@ def weapon_class_from_types(types: list[str]) -> float | None:
     utility templates stay blank instead of defaulting to 1. Any template not
     in the sidecar (and not ignored) is recorded in _UNMAPPED_WEAPON_TEMPLATES
     and given a keyword-based provisional value the check will flag.
+
+    Also returns None when more than two class templates are mixed, because
+    the 2-warhead cap (WEAPON_3WAY_SPLIT.md) forbids that unless the weapon
+    is on the maintainer allow-list (Dune combat tanks, Siege units).
     """
     vals = []
     for t in types:
@@ -220,45 +227,9 @@ def weapon_class_from_types(types: list[str]) -> float | None:
             vals.append(1.5)
     if not vals:
         return None
-    return sum(vals) / len(vals)
-
-
-# Versus-Shield → WeaponClass (ARMOR_SYSTEM.md, canonical Versus law):
-# the main SpreadDamage warhead's step (Light 6 / Medium 5 / Heavy 4) shows up
-# as Shield = 100 + floor = 110 / 125 / 140, and +15 shield = +0.25 class.
-# So the class is READABLE straight from the resolved Versus table — no hand-
-# maintained list can drift out of sync with the yaml.
-_SHIELD_TO_CLASS = {110: 0.75, 125: 1.0, 140: 1.25, 155: 1.5, 170: 1.75, 185: 2.0}
-
-
-def weapon_class_from_versus(resolved) -> float | None:
-    """Arithmetic mean of the class of every main SpreadDamage warhead, read
-    from its ``Versus: Shield`` value (110/125/140 → 0.75/1.0/1.25). Skips the
-    percentage / extra-damage / friendly-fire warheads (their own 17/25/35
-    Shield scale). Returns None when no main warhead exposes a recognised
-    Shield, so the caller can fall back to the sidecar."""
-    classes = []
-    for c in resolved.children:
-        if not c.key.startswith("Warhead@") or c.value != "SpreadDamage":
-            continue
-        tag = c.key.split("@", 1)[1].lower()
-        if tag.endswith(("extradamage", "percentage", "friendlyfire")):
-            continue
-        versus = child(c, "Versus")
-        if versus is None:
-            continue
-        shield = versus.get("Shield")
-        if shield is None:
-            continue
-        try:
-            cls = _SHIELD_TO_CLASS.get(int(float(shield)))
-        except (TypeError, ValueError):
-            continue
-        if cls is not None:
-            classes.append(cls)
-    if not classes:
+    if len(vals) > 2:
         return None
-    return sum(classes) / len(classes)
+    return sum(vals) / len(vals)
 
 
 def firepower_multiplier(resolved, local):
@@ -359,9 +330,8 @@ def weapon_entry(rs, wname: str) -> dict | None:
         out["versus_templates"] = [c.value for c in local.children
                                    if c.key == "Inherits" or c.key.startswith("Inherits@")]
     out["weapon_types"] = weapon_types(rs, wname)
-    # Priority: explicit WeaponClass field (rare — the lint strips it) →
-    # AUTOMATIC Versus-Shield law (self-correcting, ARMOR_SYSTEM.md) →
-    # sidecar-template fallback (records unmapped templates for the check).
+    # Priority: explicit WeaponClass field (rare - the lint strips it) -
+    # sidecar-template lookup (weapon_classes.yaml is the source of truth).
     wc = resolved.get("WeaponClass")
     parsed = None
     if wc is not None:
@@ -373,12 +343,16 @@ def weapon_entry(rs, wname: str) -> dict | None:
         out["design_weapon_class"] = parsed
         out["weapon_class_source"] = "WeaponClass"
     else:
-        vclass = weapon_class_from_versus(resolved)
-        if vclass is not None:
-            out["design_weapon_class"] = vclass
-            out["weapon_class_source"] = "versus_shield"
+        vclass = weapon_class_from_types(out["weapon_types"])
+        out["design_weapon_class"] = vclass
+        if vclass is None:
+            if not out["weapon_types"]:
+                out["weapon_class_source"] = "none"
+            else:
+                out["weapon_class_source"] = (
+                    "allowlist_mix" if any(a in wname for a in _MIX_ALLOWLIST) else "illegal_mix"
+                )
         else:
-            out["design_weapon_class"] = weapon_class_from_types(out["weapon_types"])
             out["weapon_class_source"] = "template"
     return out
 
@@ -460,7 +434,8 @@ def extract_actor(rs, key: str, section: str) -> dict | None:
             if c.get("Name"):
                 entry["armament_name"] = c.get("Name")
             arm_name = c.get("Name") or ""
-            entry["pricing"] = not ("garrison" in arm_name.lower())
+            entry["pricing"] = not ("garrison" in arm_name.lower()) and not (
+                entry.get("extraction_note") == "no_damage_warheads")
             arms.append(entry)
     if arms:
         u["armaments"] = arms
@@ -560,11 +535,15 @@ def build_ledgers(model: Model, only: str | None = None) -> dict[str, dict]:
                     # overwrite it.
                     if u["design"].get("subtype") != "SpecialForcesInfantry":
                         for arm in u.get("armaments", []):
-                            # Fresh auto-derivation (WeaponClass field -> versus_shield ->
-                            # sidecar) is self-correcting and AUTHORITATIVE. Only fall back to a
+                            # Fresh auto-derivation (WeaponClass field -> sidecar) is
+                            # self-correcting and AUTHORITATIVE. Only fall back to a
                             # PRESERVED ledger value when nothing could be derived, so a stale WC
                             # can never clobber the correct current one (2026-08-01 fix).
-                            if arm.get("design_weapon_class") is None:
+                            # A source of "illegal_mix" or "allowlist_mix" means the weapon violates
+                            # the 2-warhead cap (or is a deliberate exception); do NOT restore a stale
+                            # value.  "none" means the weapon has no class templates (dummy/utility).
+                            if (arm.get("design_weapon_class") is None and
+                                    arm.get("weapon_class_source") not in ("illegal_mix", "allowlist_mix", "none")):
                                 v = keep_wc.get(a, {}).get(arm["slot"])
                                 if v is not None:
                                     arm["design_weapon_class"] = v

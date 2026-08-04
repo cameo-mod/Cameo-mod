@@ -11,7 +11,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5200",
       "reloaddelay": "60",
@@ -49,7 +49,7 @@
        }
       ],
       "weapon": "Future_Cryocopter_Rocket",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^D2KRocket",
@@ -58,7 +58,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5200",
       "reloaddelay": "8",
@@ -144,7 +144,7 @@
        }
       ],
       "weapon": "Future_Cryocopter_Cryo",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -209,7 +209,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6030",
       "reloaddelay": "70",
@@ -365,7 +365,7 @@
        }
       ],
       "weapon": "FutureHarbingerCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -384,7 +384,7 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7030",
       "reloaddelay": "70",
@@ -531,7 +531,7 @@
        }
       ],
       "weapon": "FutureHarbingerCannon_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -548,7 +548,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6030",
       "reloaddelay": "9",
@@ -567,7 +567,7 @@
        }
       ],
       "weapon": "HarbingerChainguns",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -579,7 +579,7 @@
       "burst": "2",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7030",
       "reloaddelay": "9",
@@ -596,7 +596,7 @@
        }
       ],
       "weapon": "HarbingerChainguns_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -656,7 +656,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1000",
       "pricing": true,
       "range": "5000",
@@ -728,7 +728,7 @@
        }
       ],
       "weapon": "SteelTwisterMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -742,7 +742,7 @@
       "burst": "10",
       "burstdelays": "5",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1000",
       "pricing": true,
       "range": "6000",
@@ -810,7 +810,7 @@
        }
       ],
       "weapon": "SteelTwisterMissiles_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -862,7 +862,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1000",
       "pricing": true,
       "range": "5000",
@@ -906,7 +906,7 @@
        }
       ],
       "weapon": "RA2HornetMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^HeavyBomb",
@@ -1029,7 +1029,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7124",
       "reloaddelay": "8",
@@ -1110,7 +1110,7 @@
        }
       ],
       "weapon": "Future_Turret_Cryo",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -1278,7 +1278,7 @@
        }
       ],
       "weapon": "Future_MultiMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -1289,7 +1289,7 @@
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "32",
@@ -1355,7 +1355,7 @@
        }
       ],
       "weapon": "Future_MultiMissile_Javelin",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -1369,7 +1369,7 @@
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1660",
       "pricing": true,
       "range": "8300",
@@ -1440,7 +1440,7 @@
        }
       ],
       "weapon": "Future_MultiMissile_Frag",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
@@ -1453,7 +1453,7 @@
       "burst": "3",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
@@ -1534,7 +1534,7 @@
        }
       ],
       "weapon": "Future_MultiMissile_Sigma",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^MagicWeapon",
@@ -1837,7 +1837,7 @@
        }
       ],
       "weapon": "BlackWidowPistols",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1868,7 +1868,7 @@
        }
       ],
       "weapon": "BlackWidowPistols_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1900,7 +1900,7 @@
        }
       ],
       "weapon": "BlackWidowPistols",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1932,7 +1932,7 @@
        }
       ],
       "weapon": "BlackWidowPistols_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1942,7 +1942,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@shipc4",
@@ -1951,7 +1951,7 @@
       ],
       "warheads": [],
       "weapon": "SEALAttach",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -1999,7 +1999,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
@@ -2049,7 +2049,7 @@
        }
       ],
       "weapon": "CannonAttackRobotGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumFlameWeapon",
@@ -2061,7 +2061,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "25",
@@ -2108,7 +2108,7 @@
        }
       ],
       "weapon": "CannonAttackRobotGun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumFlameWeapon",
@@ -2166,7 +2166,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "30",
@@ -2252,7 +2252,7 @@
        }
       ],
       "weapon": "CryoLegionnaireAttack",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -2265,7 +2265,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7000",
       "reloaddelay": "30",
@@ -2351,7 +2351,7 @@
        }
       ],
       "weapon": "CryoLegionnaireAttack",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -2415,7 +2415,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3000",
       "reloaddelay": "40",
@@ -2502,7 +2502,7 @@
        }
       ],
       "weapon": "FutureEnforcerShotgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2515,7 +2515,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6150",
       "reloaddelay": "65",
@@ -2597,7 +2597,7 @@
        }
       ],
       "weapon": "FutureEnforcerShotgunDeployed",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2610,7 +2610,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6150",
       "reloaddelay": "65",
@@ -2692,7 +2692,7 @@
        }
       ],
       "weapon": "FutureEnforcerShotgunDeployed",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2706,7 +2706,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "40",
@@ -2788,7 +2788,7 @@
        }
       ],
       "weapon": "FutureEnforcerShotgun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2803,7 +2803,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7150",
       "reloaddelay": "65",
@@ -2885,7 +2885,7 @@
        }
       ],
       "weapon": "FutureEnforcerShotgunDeployed_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2900,7 +2900,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7150",
       "reloaddelay": "65",
@@ -2982,7 +2982,7 @@
        }
       ],
       "weapon": "FutureEnforcerShotgunDeployed_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2997,7 +2997,7 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "50",
       "requires": "botmicro",
@@ -3007,7 +3007,7 @@
       ],
       "warheads": [],
       "weapon": "aadeploytargeting_8c0_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^AADeployTargeting"
       ]
@@ -3057,7 +3057,7 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "1536",
       "reloaddelay": "20",
       "slot": "Armament@defuse",
@@ -3067,7 +3067,7 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RemovesIvanBombs",
        "^RemovesTerrorDrone"
@@ -3077,14 +3077,14 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "1536",
       "reloaddelay": "100",
       "slot": "Armament@leechdisinfect",
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -3130,7 +3130,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
@@ -3196,7 +3196,7 @@
        }
       ],
       "weapon": "FutureJavelinRockets",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -3208,7 +3208,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "25",
@@ -3270,7 +3270,7 @@
        }
       ],
       "weapon": "FutureJavelinRocketsDeployed",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -3282,7 +3282,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7500",
       "reloaddelay": "25",
@@ -3344,7 +3344,7 @@
        }
       ],
       "weapon": "FutureJavelinRocketsDeployed",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -3357,7 +3357,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "25",
@@ -3419,7 +3419,7 @@
        }
       ],
       "weapon": "FutureJavelinRockets_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -3433,7 +3433,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8500",
       "reloaddelay": "25",
@@ -3495,7 +3495,7 @@
        }
       ],
       "weapon": "FutureJavelinRocketsDeployed_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -3509,7 +3509,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "8500",
       "reloaddelay": "25",
@@ -3571,7 +3571,7 @@
        }
       ],
       "weapon": "FutureJavelinRocketsDeployed_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -3585,7 +3585,7 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "50",
       "requires": "botmicro",
@@ -3595,7 +3595,7 @@
       ],
       "warheads": [],
       "weapon": "aadeploytargeting_8c0_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^AADeployTargeting"
       ]
@@ -3645,7 +3645,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "65",
@@ -3673,7 +3673,7 @@
        }
       ],
       "weapon": "MissileAttackRobotGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^SteelLightMissile"
@@ -3683,7 +3683,7 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "65",
@@ -3710,7 +3710,7 @@
        }
       ],
       "weapon": "MissileAttackRobotGun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^SteelLightMissile"
@@ -3769,7 +3769,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -3795,7 +3795,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -3883,7 +3883,7 @@
       "burst": "8",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6806",
       "reloaddelay": "25",
@@ -3906,7 +3906,7 @@
        }
       ],
       "weapon": "Future_Wheel_MG_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun",
@@ -3961,7 +3961,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.85,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4110",
       "reloaddelay": "55",
@@ -4043,7 +4043,7 @@
        }
       ],
       "weapon": "ShotgunAttackRobotGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4057,7 +4057,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.85,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5110",
       "reloaddelay": "25",
@@ -4135,7 +4135,7 @@
        }
       ],
       "weapon": "ShotgunAttackRobotGun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4149,7 +4149,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.85,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4110",
       "reloaddelay": "55",
@@ -4231,7 +4231,7 @@
        }
       ],
       "weapon": "ShotgunAttackRobotGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4246,7 +4246,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.85,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5110",
       "reloaddelay": "25",
@@ -4324,7 +4324,7 @@
        }
       ],
       "weapon": "ShotgunAttackRobotGun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4814,7 +4814,7 @@
      {
       "armament_name": "athena-beam",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "minrange": "3200",
       "pricing": true,
       "range": "16000",
@@ -4902,7 +4902,7 @@
        }
       ],
       "weapon": "AthenaLaser",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -4918,14 +4918,14 @@
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "minrange": "3200",
-      "pricing": true,
+      "pricing": false,
       "range": "16000",
       "reloaddelay": "4",
       "slot": "Armament@VISUAL",
       "versus_templates": [],
       "warheads": [],
       "weapon": "AthenaVisualLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -4978,7 +4978,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "17500",
       "reloaddelay": "150",
       "slot": "Armament@PRIMARY",
@@ -4987,7 +4987,7 @@
       ],
       "warheads": [],
       "weapon": "BeehiveCarrierTarget",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -5039,7 +5039,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "125",
@@ -5062,7 +5062,7 @@
        }
       ],
       "weapon": "Future_CoilerAgressive",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -5074,7 +5074,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "7500",
       "reloaddelay": "125",
       "slot": "Armament@Support",
@@ -5083,7 +5083,7 @@
       ],
       "warheads": [],
       "weapon": "Future_CoilerFriendMain",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -5137,7 +5137,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": null,
       "minrange": "1500",
       "pricing": true,
       "range": "7500",
@@ -5235,7 +5235,7 @@
        }
       ],
       "weapon": "FutureTankCannons",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -5250,7 +5250,7 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0625,
+      "design_weapon_class": null,
       "minrange": "1500",
       "pricing": true,
       "range": "8500",
@@ -5343,7 +5343,7 @@
        }
       ],
       "weapon": "FutureTankCannons_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -5469,7 +5469,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "7820",
       "reloaddelay": "4",
       "requires": "deployed && !rank-elite",
@@ -5477,7 +5477,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "Future_MBT_DebuffLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -5485,7 +5485,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "8820",
       "reloaddelay": "4",
       "requires": "deployed && rank-elite",
@@ -5495,7 +5495,7 @@
       ],
       "warheads": [],
       "weapon": "Future_MBT_DebuffLaser_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -5545,7 +5545,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8300",
       "reloaddelay": "12",
@@ -5594,7 +5594,7 @@
        }
       ],
       "weapon": "FutureMechGatling",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LightMissile",
@@ -5732,7 +5732,7 @@
        }
       ],
       "weapon": "OrionRailgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^RA2HeavyCannon"
@@ -5774,7 +5774,7 @@
        }
       ],
       "weapon": "OrionRailgun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^RA2HeavyCannon",
@@ -5832,7 +5832,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1555",
       "pricing": true,
       "range": "7777",
@@ -5887,7 +5887,7 @@
        }
       ],
       "weapon": "RA2RTruckRocket",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2Grenade",
        "^LightFlameWeapon",
@@ -5899,7 +5899,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1555",
       "pricing": true,
       "range": "7777",
@@ -5955,7 +5955,7 @@
        }
       ],
       "weapon": "RA2RTruckRocket",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2Grenade",
        "^LightFlameWeapon",
@@ -6045,7 +6045,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -6095,7 +6095,7 @@
        }
       ],
       "weapon": "FutureMechPlasma",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumChemicalWeapon",
@@ -6106,7 +6106,7 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "8000",
@@ -6154,7 +6154,7 @@
        }
       ],
       "weapon": "FutureMechPlasma_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumChemicalWeapon",
@@ -6416,7 +6416,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5780",
       "reloaddelay": "48",
@@ -6465,7 +6465,7 @@
        }
       ],
       "weapon": "RA2Robotmm",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -6475,7 +6475,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6780",
       "reloaddelay": "48",
@@ -6522,7 +6522,7 @@
        }
       ],
       "weapon": "RA2Robotmm_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -6613,7 +6613,7 @@
       "burst": "6",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
@@ -6652,7 +6652,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -6683,14 +6683,14 @@
        }
       ],
       "weapon": "wc_tower_fire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -6717,7 +6717,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -6746,7 +6746,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -6777,14 +6777,14 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
@@ -6808,7 +6808,7 @@
        }
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -6817,7 +6817,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5804",
       "reloaddelay": "85",
@@ -6888,7 +6888,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -6948,7 +6948,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -6957,7 +6957,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6097",
       "reloaddelay": "42",
@@ -6976,7 +6976,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -6985,7 +6985,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "21",
@@ -7007,7 +7007,7 @@
        }
       ],
       "weapon": "DRPlasmaTankWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^DRPlasmaWeapon"
       ]
@@ -7041,7 +7041,7 @@
       "burst": "3",
       "burstdelays": "6",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1435",
       "pricing": true,
       "range": "7168",
@@ -7064,14 +7064,14 @@
        }
       ],
       "weapon": "USALaserCannonAG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^AntiGroundMissile"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "75",
@@ -7093,14 +7093,14 @@
        }
       ],
       "weapon": "SWGreenLaserG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MissileWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8192",
       "reloaddelay": "75",
@@ -7122,7 +7122,7 @@
        }
       ],
       "weapon": "SWGBigRedLaserG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MissileWeapon"
       ]
@@ -7131,7 +7131,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2390",
       "reloaddelay": "50",
@@ -7150,7 +7150,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -7159,7 +7159,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -7178,7 +7178,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -7187,7 +7187,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -7206,7 +7206,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -7217,7 +7217,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
@@ -7271,7 +7271,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -7283,7 +7283,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "7500",
       "reloaddelay": "1",
       "requires": "ifv-chrono",
@@ -7293,14 +7293,14 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoBeam",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "180",
       "requires": "ifv-chrono",
@@ -7310,26 +7310,26 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoSound",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2000",
       "requires": "ifv-demo",
       "slot": "Armament@ivan",
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2560",
       "reloaddelay": "25",
@@ -7346,7 +7346,7 @@
        }
       ],
       "weapon": "Fremen_L",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MG"
       ]
@@ -7373,12 +7373,12 @@
        }
       ],
       "weapon": "TSSonicZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -7405,7 +7405,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -7443,7 +7443,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7481,7 +7481,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7519,7 +7519,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7557,7 +7557,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7568,7 +7568,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
@@ -7639,7 +7639,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -7654,7 +7654,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
@@ -7721,7 +7721,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -7736,7 +7736,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "28",
@@ -7803,7 +7803,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -7818,7 +7818,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "28",
@@ -7885,7 +7885,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -7899,7 +7899,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -7951,7 +7951,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -7963,7 +7963,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -8015,7 +8015,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -8027,7 +8027,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -8079,7 +8079,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -8091,7 +8091,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
@@ -8187,7 +8187,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8203,7 +8203,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -8295,7 +8295,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8311,7 +8311,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -8403,7 +8403,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8419,7 +8419,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -8511,7 +8511,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8525,7 +8525,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -8552,7 +8552,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -8581,7 +8581,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]

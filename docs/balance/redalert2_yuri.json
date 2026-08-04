@@ -9,7 +9,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6840",
       "reloaddelay": "40",
@@ -28,7 +28,7 @@
        }
       ],
       "weapon": "RA2DiskLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -38,7 +38,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7840",
       "reloaddelay": "40",
@@ -55,7 +55,7 @@
        }
       ],
       "weapon": "RA2DiskLaser_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -108,7 +108,7 @@
        }
       ],
       "weapon": "RA2DiskDrain",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MagicWeapon",
        "^TeslaWeapon"
@@ -119,14 +119,14 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "125",
       "reloaddelay": "5",
       "slot": "Armament@Steal",
       "versus_templates": [],
       "warheads": [],
       "weapon": "RA2DiskSteal",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -176,14 +176,14 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "10000",
       "reloaddelay": "5",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
       "weapon": "SpyPlaneTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -610,7 +610,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
@@ -637,7 +637,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -646,7 +646,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "4",
@@ -672,7 +672,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -681,7 +681,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "2",
@@ -707,7 +707,7 @@
        }
       ],
       "weapon": "RA2GattlingMG3",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -716,7 +716,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6750",
       "reloaddelay": "6",
@@ -752,7 +752,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -761,7 +761,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "4",
@@ -797,7 +797,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -806,7 +806,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8250",
       "reloaddelay": "2",
@@ -842,7 +842,7 @@
        }
       ],
       "weapon": "RA2GattlingMG3_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -995,7 +995,7 @@
        }
       ],
       "weapon": "RA2TMindControl",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -1149,7 +1149,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4840",
       "reloaddelay": "50",
@@ -1168,7 +1168,7 @@
        }
       ],
       "weapon": "RA2Chemspray",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -1179,7 +1179,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4840",
       "reloaddelay": "50",
@@ -1204,7 +1204,7 @@
        }
       ],
       "weapon": "RA2Chemspray2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
@@ -1218,7 +1218,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5840",
       "reloaddelay": "50",
@@ -1240,7 +1240,7 @@
        }
       ],
       "weapon": "RA2Chemspray_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
@@ -1255,7 +1255,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4840",
       "reloaddelay": "50",
@@ -1274,7 +1274,7 @@
        }
       ],
       "weapon": "RA2Chemspray",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -1286,7 +1286,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4840",
       "reloaddelay": "50",
@@ -1311,7 +1311,7 @@
        }
       ],
       "weapon": "RA2Chemspray2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
@@ -1326,7 +1326,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5840",
       "reloaddelay": "50",
@@ -1348,7 +1348,7 @@
        }
       ],
       "weapon": "RA2Chemspray_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
@@ -1402,7 +1402,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1616",
       "reloaddelay": "37",
@@ -1421,7 +1421,7 @@
        }
       ],
       "weapon": "RA2BrutePunch",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -1432,7 +1432,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1616",
       "reloaddelay": "37",
@@ -1449,7 +1449,7 @@
        }
       ],
       "weapon": "RA2BrutePunch_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -1514,7 +1514,7 @@
        }
       ],
       "weapon": "RA2MindControl",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -1560,7 +1560,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4750",
       "reloaddelay": "11",
@@ -1638,7 +1638,7 @@
        }
       ],
       "weapon": "RA2CosmonautLaser",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RailgunWeapon",
        "^LaserWeapon",
@@ -1698,7 +1698,7 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "1536",
       "reloaddelay": "20",
       "slot": "Armament@defuse",
@@ -1708,7 +1708,7 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RemovesIvanBombs",
        "^RemovesTerrorDrone"
@@ -1718,14 +1718,14 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "1536",
       "reloaddelay": "100",
       "slot": "Armament@leechdisinfect",
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -1880,7 +1880,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4440",
       "reloaddelay": "15",
@@ -1940,7 +1940,7 @@
        }
       ],
       "weapon": "RA2PsychicJab",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -1951,7 +1951,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4440",
       "reloaddelay": "15",
@@ -2011,7 +2011,7 @@
        }
       ],
       "weapon": "RA2PsychicJab",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -2024,7 +2024,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5440",
       "reloaddelay": "15",
@@ -2081,7 +2081,7 @@
        }
       ],
       "weapon": "RA2PsychicJab_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -2094,7 +2094,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5440",
       "reloaddelay": "15",
@@ -2151,7 +2151,7 @@
        }
       ],
       "weapon": "RA2PsychicJab_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -2245,7 +2245,7 @@
        }
       ],
       "weapon": "RA2Virusgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^SniperWeapon"
@@ -2253,7 +2253,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "74",
@@ -2298,7 +2298,7 @@
        }
       ],
       "weapon": "RA2Virusgun2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -2309,7 +2309,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "74",
@@ -2359,7 +2359,7 @@
        }
       ],
       "weapon": "RA2Virusgun3",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
@@ -2373,7 +2373,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "11111",
       "reloaddelay": "74",
@@ -2420,7 +2420,7 @@
        }
       ],
       "weapon": "RA2Virusgun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
@@ -2473,7 +2473,7 @@
        }
       ],
       "weapon": "RA2Virusgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^SniperWeapon"
@@ -2482,7 +2482,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "9999",
       "reloaddelay": "74",
@@ -2527,7 +2527,7 @@
        }
       ],
       "weapon": "RA2Virusgun2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -2539,7 +2539,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "9999",
       "reloaddelay": "74",
@@ -2589,7 +2589,7 @@
        }
       ],
       "weapon": "RA2Virusgun3",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
@@ -2604,7 +2604,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "11111",
       "reloaddelay": "74",
@@ -2651,7 +2651,7 @@
        }
       ],
       "weapon": "RA2Virusgun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
@@ -2722,7 +2722,7 @@
        }
       ],
       "weapon": "RA2XMindControl",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -2745,7 +2745,7 @@
        }
       ],
       "weapon": "RA2XMindControlSplash",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -2768,7 +2768,7 @@
        }
       ],
       "weapon": "RA2XMindControlSplash2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -2860,7 +2860,7 @@
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "minrange": "3000",
-      "pricing": true,
+      "pricing": false,
       "range": "15000",
       "reloaddelay": "50",
       "slot": "Armament@LAUNCH",
@@ -2869,7 +2869,7 @@
       ],
       "warheads": [],
       "weapon": "BoomerLaunch",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -3740,14 +3740,14 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "5000",
       "reloaddelay": "125",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
       "weapon": "RA2Dronegas",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -3762,7 +3762,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "RA2Dronegas",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -3812,7 +3812,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
@@ -3840,7 +3840,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -3848,7 +3848,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "4",
@@ -3875,7 +3875,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -3883,7 +3883,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "2",
@@ -3910,7 +3910,7 @@
        }
       ],
       "weapon": "RA2GattlingMG3",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -3918,7 +3918,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6750",
       "reloaddelay": "6",
@@ -3955,7 +3955,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -3963,7 +3963,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "4",
@@ -4000,7 +4000,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -4008,7 +4008,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8250",
       "reloaddelay": "2",
@@ -4045,7 +4045,7 @@
        }
       ],
       "weapon": "RA2GattlingMG3_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -4104,7 +4104,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.85,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5201",
       "reloaddelay": "68",
@@ -4196,7 +4196,7 @@
        }
       ],
       "weapon": "RA2LasherCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4211,7 +4211,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.85,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6201",
       "reloaddelay": "68",
@@ -4299,7 +4299,7 @@
        }
       ],
       "weapon": "RA2LasherCannon_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4313,7 +4313,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "105",
@@ -4448,7 +4448,7 @@
        }
       ],
       "weapon": "RA2LasherToxicMortar",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4464,7 +4464,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "105",
@@ -4621,7 +4621,7 @@
        }
       ],
       "weapon": "RA2LasherToxicMortar_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4675,7 +4675,7 @@
        }
       ],
       "weapon": "RA2LasherLaser",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^LaserWeapon"
@@ -4731,7 +4731,7 @@
        }
       ],
       "weapon": "RA2LasherLaser_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^LaserWeapon"
@@ -4787,7 +4787,7 @@
       "burst": "100",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7032",
       "reloaddelay": "200",
@@ -4804,7 +4804,7 @@
        }
       ],
       "weapon": "RA2Magnet",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2LaserWeapon"
       ]
@@ -4814,7 +4814,7 @@
       "burst": "100",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7032",
       "reloaddelay": "200",
@@ -4831,7 +4831,7 @@
        }
       ],
       "weapon": "RA2MagnetAA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2LaserWeapon"
       ]
@@ -4841,7 +4841,7 @@
       "burst": "100",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8032",
       "reloaddelay": "200",
@@ -4858,7 +4858,7 @@
        }
       ],
       "weapon": "RA2Magnet_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2LaserWeapon"
       ]
@@ -4868,7 +4868,7 @@
       "burst": "100",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8032",
       "reloaddelay": "200",
@@ -4885,7 +4885,7 @@
        }
       ],
       "weapon": "RA2MagnetAA_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2LaserWeapon"
       ]
@@ -4953,7 +4953,7 @@
        }
       ],
       "weapon": "RA2SMindControl",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],

@@ -48,7 +48,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4444",
       "reloaddelay": "100",
@@ -112,7 +112,7 @@
        }
       ],
       "weapon": "wc2gryphonFireVisible",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^MediumFlameWeapon",
@@ -816,7 +816,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
@@ -865,7 +865,7 @@
        }
       ],
       "weapon": "wc2_tower_arrow",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -875,7 +875,7 @@
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2100",
       "pricing": true,
       "range": "10500",
@@ -1092,7 +1092,7 @@
        }
       ],
       "weapon": "wc2cannontowerFire",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -1151,7 +1151,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
@@ -1200,7 +1200,7 @@
        }
       ],
       "weapon": "wc2_tower_arrow",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -1210,7 +1210,7 @@
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2100",
       "pricing": true,
       "range": "10500",
@@ -1427,7 +1427,7 @@
        }
       ],
       "weapon": "wc2cannontowerFire",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -1486,7 +1486,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
@@ -1535,7 +1535,7 @@
        }
       ],
       "weapon": "wc2_tower_arrow",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -1545,7 +1545,7 @@
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2100",
       "pricing": true,
       "range": "10500",
@@ -1762,7 +1762,7 @@
        }
       ],
       "weapon": "wc2cannontowerFire",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -1921,7 +1921,7 @@
      {
       "armament_name": "fireball",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
@@ -2041,7 +2041,7 @@
        }
       ],
       "weapon": "wc2mageFireballVisible",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -2058,7 +2058,7 @@
       "burst": "5",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
@@ -2170,7 +2170,7 @@
        }
       ],
       "weapon": "wc2mageFireballExplosion",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -2201,7 +2201,7 @@
        }
       ],
       "weapon": "wc2mageSlow",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -2209,7 +2209,7 @@
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && magepolymorph_upg",
@@ -2217,7 +2217,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "wc2magePolymorph",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -2238,7 +2238,7 @@
        }
       ],
       "weapon": "wc2mageBlizzard",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -2284,7 +2284,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6936",
       "reloaddelay": "60",
@@ -2332,7 +2332,7 @@
        }
       ],
       "weapon": "wc2_dwarf_Rifle",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumMissile",
@@ -2342,7 +2342,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6936",
       "reloaddelay": "60",
@@ -2390,7 +2390,7 @@
        }
       ],
       "weapon": "wc2_dwarf_Rifle",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumMissile",
@@ -2445,7 +2445,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6973",
       "reloaddelay": "25",
@@ -2526,7 +2526,7 @@
        }
       ],
       "weapon": "wc2arrowFire",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -2539,7 +2539,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6973",
       "reloaddelay": "25",
@@ -2620,7 +2620,7 @@
        }
       ],
       "weapon": "wc2arrowFire",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -2680,7 +2680,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6973",
       "reloaddelay": "25",
@@ -2761,7 +2761,7 @@
        }
       ],
       "weapon": "wc2arrowFire",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -2774,7 +2774,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6973",
       "reloaddelay": "25",
@@ -2855,7 +2855,7 @@
        }
       ],
       "weapon": "wc2arrowFire",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -2909,7 +2909,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
@@ -2927,7 +2927,7 @@
        }
       ],
       "weapon": "wc2footmanslice",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -3032,7 +3032,7 @@
        }
       ],
       "weapon": "wc2priesthealing",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -3053,7 +3053,7 @@
        }
       ],
       "weapon": "wc2paladinexorcism",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -3148,7 +3148,7 @@
        }
       ],
       "weapon": "wc2paladinhealing",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -3169,7 +3169,7 @@
        }
       ],
       "weapon": "wc2paladinexorcism",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -3215,7 +3215,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7487",
       "reloaddelay": "35",
@@ -3329,7 +3329,7 @@
        }
       ],
       "weapon": "wc2highArrowFire",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LaserWeapon",
        "^HeavyMissile",
@@ -3345,7 +3345,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7487",
       "reloaddelay": "35",
@@ -3459,7 +3459,7 @@
        }
       ],
       "weapon": "wc2highArrowFire",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LaserWeapon",
        "^HeavyMissile",
@@ -3515,7 +3515,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1420",
       "reloaddelay": "12",
@@ -3534,7 +3534,7 @@
        }
       ],
       "weapon": "wc2knightslice",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -3559,7 +3559,7 @@
        }
       ],
       "weapon": "wc2paladinholyvision",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -3580,7 +3580,7 @@
        }
       ],
       "weapon": "wc2paladinhealing",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -3601,7 +3601,7 @@
        }
       ],
       "weapon": "wc2paladinexorcism",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -3719,7 +3719,7 @@
      {
       "armament_name": "fireball",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
@@ -3839,7 +3839,7 @@
        }
       ],
       "weapon": "wc2mageFireballVisible",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -3856,7 +3856,7 @@
       "burst": "5",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
@@ -3968,7 +3968,7 @@
        }
       ],
       "weapon": "wc2mageFireballExplosion",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -3999,7 +3999,7 @@
        }
       ],
       "weapon": "wc2mageSlow",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -4007,7 +4007,7 @@
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && magepolymorph_upg",
@@ -4015,7 +4015,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "wc2magePolymorph",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -4036,7 +4036,7 @@
        }
       ],
       "weapon": "wc2mageBlizzard",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -4082,7 +4082,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
@@ -4100,7 +4100,7 @@
        }
       ],
       "weapon": "wc2footmanslice",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -4154,7 +4154,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2400",
       "pricing": true,
       "range": "12000",
@@ -4224,7 +4224,7 @@
        }
       ],
       "weapon": "MortarTeamArtilleryShell",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -4235,7 +4235,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2400",
       "pricing": false,
       "range": "12000",
@@ -4305,7 +4305,7 @@
        }
       ],
       "weapon": "MortarTeamArtilleryShell",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -4357,7 +4357,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1533",
       "reloaddelay": "15",
@@ -4375,7 +4375,7 @@
        }
       ],
       "weapon": "wc2footmanslice2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5114,7 +5114,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2890",
       "pricing": true,
       "range": "14450",
@@ -5168,7 +5168,7 @@
        }
       ],
       "weapon": "wc2ballistaFire",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5227,19 +5227,19 @@
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "1536",
       "requires": "!cond_deployed",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
       "weapon": "wc2demolitionsquadTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
@@ -5256,7 +5256,7 @@
        }
       ],
       "weapon": "wc2demolitionsquadMelee",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5353,7 +5353,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1420",
       "reloaddelay": "12",
@@ -5372,7 +5372,7 @@
        }
       ],
       "weapon": "wc2knightslice",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5397,7 +5397,7 @@
        }
       ],
       "weapon": "wc2paladinholyvision",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -5418,7 +5418,7 @@
        }
       ],
       "weapon": "wc2paladinhealing",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -5439,7 +5439,7 @@
        }
       ],
       "weapon": "wc2paladinexorcism",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -5492,7 +5492,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
@@ -5508,7 +5508,7 @@
        }
       ],
       "weapon": "wc2peasantsmack",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5563,7 +5563,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2240",
       "pricing": true,
       "range": "11200",
@@ -5768,7 +5768,7 @@
        }
       ],
       "weapon": "SiegeEngineCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "allowlist_mix",
       "weapon_types": [
        "^NuclearWarhead",
        "^LightMissile",
@@ -5835,7 +5835,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1420",
       "reloaddelay": "12",
@@ -5854,7 +5854,7 @@
        }
       ],
       "weapon": "wc2knightslice",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5879,7 +5879,7 @@
        }
       ],
       "weapon": "wc2paladinholyvision",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -5900,7 +5900,7 @@
        }
       ],
       "weapon": "wc2paladinhealing",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -5921,7 +5921,7 @@
        }
       ],
       "weapon": "wc2paladinexorcism",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],

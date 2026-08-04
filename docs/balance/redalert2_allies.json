@@ -11,7 +11,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
@@ -55,7 +55,7 @@
        }
       ],
       "weapon": "BlackEagleMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^HeavyBomb",
@@ -67,7 +67,7 @@
       "burst": "8",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "50",
@@ -109,7 +109,7 @@
        }
       ],
       "weapon": "BlackEagleMissiles_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^HeavyBomb",
@@ -121,7 +121,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.03125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
@@ -236,7 +236,7 @@
        }
       ],
       "weapon": "BlackEagleThunderboltMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -254,7 +254,7 @@
       "burst": "8",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.03125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "50",
@@ -361,7 +361,7 @@
        }
       ],
       "weapon": "BlackEagleThunderboltMissiles_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -421,7 +421,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1110",
       "pricing": true,
       "range": "5555",
@@ -509,7 +509,7 @@
        }
       ],
       "weapon": "HarrierMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^Grenade",
@@ -524,7 +524,7 @@
       "burst": "8",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1110",
       "pricing": true,
       "range": "6666",
@@ -607,7 +607,7 @@
        }
       ],
       "weapon": "HarrierMissiles_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^Grenade",
@@ -1249,7 +1249,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "minrange": "2360",
       "pricing": true,
       "range": "11800",
@@ -1336,7 +1336,7 @@
        }
       ],
       "weapon": "RA2GrandCannonWeapon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^HeavyBomb",
@@ -1414,7 +1414,7 @@
       "burst": "2",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "14150",
       "reloaddelay": "30",
@@ -1486,7 +1486,7 @@
        }
       ],
       "weapon": "RA2PatriotThunderboltMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -1575,7 +1575,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "9630",
       "reloaddelay": "3",
       "requires": "ra2_allies_upgrade_prismlinking",
@@ -1583,12 +1583,12 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "PrismCharge",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9630",
       "reloaddelay": "3",
@@ -1607,7 +1607,7 @@
        }
       ],
       "weapon": "RA2Prism",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -1716,7 +1716,7 @@
        }
       ],
       "weapon": "DogJaw",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -1764,14 +1764,14 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "5000",
       "reloaddelay": "180",
       "slot": "Armament@sound",
       "versus_templates": [],
       "warheads": [],
       "weapon": "RA2ChronoTele",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -1779,7 +1779,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "5000",
       "reloaddelay": "1",
       "requires": "!rank-elite",
@@ -1787,7 +1787,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "ChronoBeam",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -1795,7 +1795,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "5000",
       "reloaddelay": "1",
       "requires": "rank-elite",
@@ -1805,7 +1805,7 @@
       ],
       "warheads": [],
       "weapon": "ChronoBeam_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -1821,7 +1821,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "ChronoBeam",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -1839,7 +1839,7 @@
       ],
       "warheads": [],
       "weapon": "ChronoBeam_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -1888,7 +1888,7 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "1536",
       "reloaddelay": "20",
       "slot": "Armament@defuse",
@@ -1898,7 +1898,7 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RemovesIvanBombs",
        "^RemovesTerrorDrone"
@@ -1908,14 +1908,14 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "1536",
       "reloaddelay": "100",
       "slot": "Armament@leechdisinfect",
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -2237,7 +2237,7 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "50",
       "requires": "botmicro",
@@ -2247,7 +2247,7 @@
       ],
       "warheads": [],
       "weapon": "aadeploytargeting_8c0_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^AADeployTargeting"
       ]
@@ -2434,7 +2434,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "14",
@@ -2483,7 +2483,7 @@
        }
       ],
       "weapon": "ra2roktgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -2563,7 +2563,7 @@
        }
       ],
       "weapon": "RA2MP5",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2594,7 +2594,7 @@
        }
       ],
       "weapon": "RA2MP5_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2626,7 +2626,7 @@
        }
       ],
       "weapon": "RA2MP5",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2658,7 +2658,7 @@
        }
       ],
       "weapon": "RA2MP5_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2668,7 +2668,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@shipc4",
@@ -2677,7 +2677,7 @@
       ],
       "warheads": [],
       "weapon": "SEALAttach",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -2750,7 +2750,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2779,7 +2779,7 @@
        }
       ],
       "weapon": "RA2AWP_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2809,7 +2809,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2839,7 +2839,7 @@
        }
       ],
       "weapon": "RA2AWP_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2912,7 +2912,7 @@
        }
       ],
       "weapon": "RA2DoublePistols",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2943,7 +2943,7 @@
        }
       ],
       "weapon": "RA2DoublePistols_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2953,7 +2953,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@c4",
@@ -2962,7 +2962,7 @@
       ],
       "warheads": [],
       "weapon": "TanyaAttach",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -2970,14 +2970,14 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@c4building",
       "versus_templates": [],
       "warheads": [],
       "weapon": "GenericC4",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -3007,7 +3007,7 @@
        }
       ],
       "weapon": "RA2DoublePistols",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3039,7 +3039,7 @@
        }
       ],
       "weapon": "RA2DoublePistols_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4092,7 +4092,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6112",
       "reloaddelay": "51",
@@ -4157,7 +4157,7 @@
        }
       ],
       "weapon": "RA2HeavyMirageGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RailgunWeapon",
        "^ShrapnelWeapon",
@@ -4170,7 +4170,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7112",
       "reloaddelay": "51",
@@ -4233,7 +4233,7 @@
        }
       ],
       "weapon": "RA2HeavyMirageGun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RailgunWeapon",
        "^ShrapnelWeapon",
@@ -4326,7 +4326,7 @@
       "burst": "6",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
@@ -4365,7 +4365,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -4396,14 +4396,14 @@
        }
       ],
       "weapon": "wc_tower_fire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -4430,7 +4430,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -4459,7 +4459,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4490,14 +4490,14 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
@@ -4521,7 +4521,7 @@
        }
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -4530,7 +4530,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5804",
       "reloaddelay": "85",
@@ -4601,7 +4601,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -4661,7 +4661,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -4670,7 +4670,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6097",
       "reloaddelay": "42",
@@ -4689,7 +4689,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -4698,7 +4698,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "21",
@@ -4720,7 +4720,7 @@
        }
       ],
       "weapon": "DRPlasmaTankWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^DRPlasmaWeapon"
       ]
@@ -4754,7 +4754,7 @@
       "burst": "3",
       "burstdelays": "6",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1435",
       "pricing": true,
       "range": "7168",
@@ -4777,14 +4777,14 @@
        }
       ],
       "weapon": "USALaserCannonAG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^AntiGroundMissile"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "75",
@@ -4806,14 +4806,14 @@
        }
       ],
       "weapon": "SWGreenLaserG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MissileWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8192",
       "reloaddelay": "75",
@@ -4835,7 +4835,7 @@
        }
       ],
       "weapon": "SWGBigRedLaserG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MissileWeapon"
       ]
@@ -4844,7 +4844,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2390",
       "reloaddelay": "50",
@@ -4863,7 +4863,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -4872,7 +4872,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -4891,7 +4891,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -4900,7 +4900,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -4919,7 +4919,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -4930,7 +4930,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
@@ -4984,7 +4984,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -4996,7 +4996,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "7500",
       "reloaddelay": "1",
       "requires": "ifv-chrono",
@@ -5006,14 +5006,14 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoBeam",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "180",
       "requires": "ifv-chrono",
@@ -5023,26 +5023,26 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoSound",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2000",
       "requires": "ifv-demo",
       "slot": "Armament@ivan",
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2560",
       "reloaddelay": "25",
@@ -5059,7 +5059,7 @@
        }
       ],
       "weapon": "Fremen_L",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MG"
       ]
@@ -5086,12 +5086,12 @@
        }
       ],
       "weapon": "TSSonicZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -5118,7 +5118,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -5156,7 +5156,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -5194,7 +5194,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -5232,7 +5232,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -5270,7 +5270,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -5281,7 +5281,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
@@ -5352,7 +5352,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -5367,7 +5367,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
@@ -5434,7 +5434,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -5449,7 +5449,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "28",
@@ -5516,7 +5516,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -5531,7 +5531,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "28",
@@ -5598,7 +5598,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -5612,7 +5612,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -5664,7 +5664,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -5676,7 +5676,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -5728,7 +5728,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -5740,7 +5740,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -5792,7 +5792,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -5804,7 +5804,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
@@ -5900,7 +5900,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -5916,7 +5916,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -6008,7 +6008,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -6024,7 +6024,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -6116,7 +6116,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -6132,7 +6132,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -6224,7 +6224,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -6238,7 +6238,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -6265,7 +6265,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -6294,7 +6294,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -6381,7 +6381,7 @@
       "burst": "6",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
@@ -6420,7 +6420,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -6451,14 +6451,14 @@
        }
       ],
       "weapon": "wc_tower_fire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -6485,7 +6485,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -6514,7 +6514,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -6545,14 +6545,14 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
@@ -6576,7 +6576,7 @@
        }
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -6585,7 +6585,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5804",
       "reloaddelay": "85",
@@ -6656,7 +6656,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -6716,7 +6716,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -6725,7 +6725,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6097",
       "reloaddelay": "42",
@@ -6744,7 +6744,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -6753,7 +6753,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "21",
@@ -6775,7 +6775,7 @@
        }
       ],
       "weapon": "DRPlasmaTankWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^DRPlasmaWeapon"
       ]
@@ -6809,7 +6809,7 @@
       "burst": "3",
       "burstdelays": "6",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1435",
       "pricing": true,
       "range": "7168",
@@ -6832,14 +6832,14 @@
        }
       ],
       "weapon": "USALaserCannonAG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^AntiGroundMissile"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "75",
@@ -6861,14 +6861,14 @@
        }
       ],
       "weapon": "SWGreenLaserG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MissileWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8192",
       "reloaddelay": "75",
@@ -6890,7 +6890,7 @@
        }
       ],
       "weapon": "SWGBigRedLaserG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MissileWeapon"
       ]
@@ -6899,7 +6899,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2390",
       "reloaddelay": "50",
@@ -6918,7 +6918,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -6927,7 +6927,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -6946,7 +6946,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -6955,7 +6955,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -6974,7 +6974,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -6985,7 +6985,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
@@ -7039,7 +7039,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -7051,7 +7051,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "7500",
       "reloaddelay": "1",
       "requires": "ifv-chrono",
@@ -7061,14 +7061,14 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoBeam",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "180",
       "requires": "ifv-chrono",
@@ -7078,26 +7078,26 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoSound",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2000",
       "requires": "ifv-demo",
       "slot": "Armament@ivan",
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2560",
       "reloaddelay": "25",
@@ -7114,7 +7114,7 @@
        }
       ],
       "weapon": "Fremen_L",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MG"
       ]
@@ -7141,12 +7141,12 @@
        }
       ],
       "weapon": "TSSonicZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -7173,7 +7173,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -7211,7 +7211,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7249,7 +7249,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7287,7 +7287,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7325,7 +7325,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7336,7 +7336,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
@@ -7407,7 +7407,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -7422,7 +7422,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
@@ -7489,7 +7489,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -7504,7 +7504,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "28",
@@ -7571,7 +7571,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -7586,7 +7586,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "28",
@@ -7653,7 +7653,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -7667,7 +7667,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -7719,7 +7719,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -7731,7 +7731,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -7783,7 +7783,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -7795,7 +7795,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -7847,7 +7847,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -7859,7 +7859,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
@@ -7955,7 +7955,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -7971,7 +7971,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -8063,7 +8063,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8079,7 +8079,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -8171,7 +8171,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8187,7 +8187,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -8279,7 +8279,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8293,7 +8293,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -8320,7 +8320,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -8349,7 +8349,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -8438,7 +8438,7 @@
       "burst": "6",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
@@ -8477,7 +8477,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -8508,14 +8508,14 @@
        }
       ],
       "weapon": "wc_tower_fire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -8542,7 +8542,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -8571,7 +8571,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -8602,14 +8602,14 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
@@ -8633,7 +8633,7 @@
        }
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -8642,7 +8642,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5804",
       "reloaddelay": "85",
@@ -8713,7 +8713,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -8773,7 +8773,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -8782,7 +8782,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6097",
       "reloaddelay": "42",
@@ -8801,7 +8801,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -8810,7 +8810,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "21",
@@ -8832,7 +8832,7 @@
        }
       ],
       "weapon": "DRPlasmaTankWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^DRPlasmaWeapon"
       ]
@@ -8866,7 +8866,7 @@
       "burst": "3",
       "burstdelays": "6",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1435",
       "pricing": true,
       "range": "7168",
@@ -8889,14 +8889,14 @@
        }
       ],
       "weapon": "USALaserCannonAG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^AntiGroundMissile"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "75",
@@ -8918,14 +8918,14 @@
        }
       ],
       "weapon": "SWGreenLaserG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MissileWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8192",
       "reloaddelay": "75",
@@ -8947,7 +8947,7 @@
        }
       ],
       "weapon": "SWGBigRedLaserG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MissileWeapon"
       ]
@@ -8956,7 +8956,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2390",
       "reloaddelay": "50",
@@ -8975,7 +8975,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -8984,7 +8984,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -9003,7 +9003,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -9012,7 +9012,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -9031,7 +9031,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -9042,7 +9042,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
@@ -9096,7 +9096,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -9108,7 +9108,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "7500",
       "reloaddelay": "1",
       "requires": "ifv-chrono",
@@ -9118,14 +9118,14 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoBeam",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "180",
       "requires": "ifv-chrono",
@@ -9135,26 +9135,26 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoSound",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2000",
       "requires": "ifv-demo",
       "slot": "Armament@ivan",
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2560",
       "reloaddelay": "25",
@@ -9171,7 +9171,7 @@
        }
       ],
       "weapon": "Fremen_L",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MG"
       ]
@@ -9198,12 +9198,12 @@
        }
       ],
       "weapon": "TSSonicZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -9230,7 +9230,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -9268,7 +9268,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -9306,7 +9306,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -9344,7 +9344,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -9382,7 +9382,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -9393,7 +9393,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
@@ -9464,7 +9464,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -9479,7 +9479,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
@@ -9546,7 +9546,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -9561,7 +9561,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "28",
@@ -9628,7 +9628,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -9643,7 +9643,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "28",
@@ -9710,7 +9710,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -9724,7 +9724,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -9776,7 +9776,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -9788,7 +9788,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -9840,7 +9840,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -9852,7 +9852,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -9904,7 +9904,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -9916,7 +9916,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
@@ -10012,7 +10012,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10028,7 +10028,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -10120,7 +10120,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10136,7 +10136,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -10228,7 +10228,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10244,7 +10244,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -10336,7 +10336,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10350,7 +10350,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -10377,7 +10377,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -10406,7 +10406,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -10495,7 +10495,7 @@
       "burst": "6",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
@@ -10534,7 +10534,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -10565,14 +10565,14 @@
        }
       ],
       "weapon": "wc_tower_fire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -10599,7 +10599,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -10628,7 +10628,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -10659,14 +10659,14 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
@@ -10690,7 +10690,7 @@
        }
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -10699,7 +10699,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5804",
       "reloaddelay": "85",
@@ -10770,7 +10770,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -10830,7 +10830,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -10839,7 +10839,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6097",
       "reloaddelay": "42",
@@ -10858,7 +10858,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -10867,7 +10867,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "21",
@@ -10889,7 +10889,7 @@
        }
       ],
       "weapon": "DRPlasmaTankWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^DRPlasmaWeapon"
       ]
@@ -10923,7 +10923,7 @@
       "burst": "3",
       "burstdelays": "6",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1435",
       "pricing": true,
       "range": "7168",
@@ -10946,14 +10946,14 @@
        }
       ],
       "weapon": "USALaserCannonAG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^AntiGroundMissile"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "75",
@@ -10975,14 +10975,14 @@
        }
       ],
       "weapon": "SWGreenLaserG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MissileWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8192",
       "reloaddelay": "75",
@@ -11004,7 +11004,7 @@
        }
       ],
       "weapon": "SWGBigRedLaserG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MissileWeapon"
       ]
@@ -11013,7 +11013,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2390",
       "reloaddelay": "50",
@@ -11032,7 +11032,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -11041,7 +11041,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -11060,7 +11060,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -11069,7 +11069,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -11088,7 +11088,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -11099,7 +11099,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
@@ -11153,7 +11153,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -11165,7 +11165,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "7500",
       "reloaddelay": "1",
       "requires": "ifv-chrono",
@@ -11175,14 +11175,14 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoBeam",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "180",
       "requires": "ifv-chrono",
@@ -11192,26 +11192,26 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoSound",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2000",
       "requires": "ifv-demo",
       "slot": "Armament@ivan",
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2560",
       "reloaddelay": "25",
@@ -11228,7 +11228,7 @@
        }
       ],
       "weapon": "Fremen_L",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MG"
       ]
@@ -11255,12 +11255,12 @@
        }
       ],
       "weapon": "TSSonicZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -11287,7 +11287,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -11325,7 +11325,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -11363,7 +11363,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -11401,7 +11401,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -11439,7 +11439,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -11450,7 +11450,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
@@ -11521,7 +11521,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -11536,7 +11536,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
@@ -11603,7 +11603,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -11618,7 +11618,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "28",
@@ -11685,7 +11685,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -11700,7 +11700,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "28",
@@ -11767,7 +11767,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -11781,7 +11781,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -11833,7 +11833,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -11845,7 +11845,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -11897,7 +11897,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -11909,7 +11909,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -11961,7 +11961,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -11973,7 +11973,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
@@ -12069,7 +12069,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12085,7 +12085,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -12177,7 +12177,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12193,7 +12193,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -12285,7 +12285,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12301,7 +12301,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -12393,7 +12393,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12407,7 +12407,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -12434,7 +12434,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -12463,7 +12463,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -12551,7 +12551,7 @@
       "burst": "6",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
@@ -12590,7 +12590,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -12621,14 +12621,14 @@
        }
       ],
       "weapon": "wc_tower_fire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -12655,7 +12655,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -12684,7 +12684,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -12715,14 +12715,14 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
@@ -12746,7 +12746,7 @@
        }
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -12755,7 +12755,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5804",
       "reloaddelay": "85",
@@ -12826,7 +12826,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -12886,7 +12886,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -12895,7 +12895,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6097",
       "reloaddelay": "42",
@@ -12914,7 +12914,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -12923,7 +12923,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "21",
@@ -12945,7 +12945,7 @@
        }
       ],
       "weapon": "DRPlasmaTankWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^DRPlasmaWeapon"
       ]
@@ -12979,7 +12979,7 @@
       "burst": "3",
       "burstdelays": "6",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1435",
       "pricing": true,
       "range": "7168",
@@ -13002,14 +13002,14 @@
        }
       ],
       "weapon": "USALaserCannonAG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^AntiGroundMissile"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "75",
@@ -13031,14 +13031,14 @@
        }
       ],
       "weapon": "SWGreenLaserG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MissileWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8192",
       "reloaddelay": "75",
@@ -13060,7 +13060,7 @@
        }
       ],
       "weapon": "SWGBigRedLaserG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MissileWeapon"
       ]
@@ -13069,7 +13069,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2390",
       "reloaddelay": "50",
@@ -13088,7 +13088,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -13097,7 +13097,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -13116,7 +13116,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -13125,7 +13125,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -13144,7 +13144,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -13155,7 +13155,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
@@ -13209,7 +13209,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -13221,7 +13221,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "7500",
       "reloaddelay": "1",
       "requires": "ifv-chrono",
@@ -13231,14 +13231,14 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoBeam",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "180",
       "requires": "ifv-chrono",
@@ -13248,26 +13248,26 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoSound",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2000",
       "requires": "ifv-demo",
       "slot": "Armament@ivan",
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2560",
       "reloaddelay": "25",
@@ -13284,7 +13284,7 @@
        }
       ],
       "weapon": "Fremen_L",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MG"
       ]
@@ -13311,12 +13311,12 @@
        }
       ],
       "weapon": "TSSonicZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -13343,7 +13343,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -13381,7 +13381,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -13419,7 +13419,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -13457,7 +13457,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -13495,7 +13495,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -13506,7 +13506,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
@@ -13577,7 +13577,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -13592,7 +13592,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
@@ -13659,7 +13659,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -13674,7 +13674,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "28",
@@ -13741,7 +13741,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -13756,7 +13756,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "28",
@@ -13823,7 +13823,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -13837,7 +13837,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -13889,7 +13889,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -13901,7 +13901,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -13953,7 +13953,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -13965,7 +13965,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -14017,7 +14017,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -14029,7 +14029,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
@@ -14125,7 +14125,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -14141,7 +14141,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -14233,7 +14233,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -14249,7 +14249,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -14341,7 +14341,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -14357,7 +14357,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -14449,7 +14449,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -14463,7 +14463,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -14490,7 +14490,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -14519,7 +14519,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -14607,7 +14607,7 @@
       "burst": "6",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
@@ -14646,7 +14646,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -14677,14 +14677,14 @@
        }
       ],
       "weapon": "wc_tower_fire",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -14711,7 +14711,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -14740,7 +14740,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -14771,14 +14771,14 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
@@ -14802,7 +14802,7 @@
        }
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -14811,7 +14811,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5804",
       "reloaddelay": "85",
@@ -14882,7 +14882,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -14942,7 +14942,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -14951,7 +14951,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6097",
       "reloaddelay": "42",
@@ -14970,7 +14970,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -14979,7 +14979,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "21",
@@ -15001,7 +15001,7 @@
        }
       ],
       "weapon": "DRPlasmaTankWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^DRPlasmaWeapon"
       ]
@@ -15035,7 +15035,7 @@
       "burst": "3",
       "burstdelays": "6",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1435",
       "pricing": true,
       "range": "7168",
@@ -15058,14 +15058,14 @@
        }
       ],
       "weapon": "USALaserCannonAG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^AntiGroundMissile"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "75",
@@ -15087,14 +15087,14 @@
        }
       ],
       "weapon": "SWGreenLaserG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MissileWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8192",
       "reloaddelay": "75",
@@ -15116,7 +15116,7 @@
        }
       ],
       "weapon": "SWGBigRedLaserG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MissileWeapon"
       ]
@@ -15125,7 +15125,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2390",
       "reloaddelay": "50",
@@ -15144,7 +15144,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -15153,7 +15153,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -15172,7 +15172,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -15181,7 +15181,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -15200,7 +15200,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -15211,7 +15211,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
@@ -15265,7 +15265,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -15277,7 +15277,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "7500",
       "reloaddelay": "1",
       "requires": "ifv-chrono",
@@ -15287,14 +15287,14 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoBeam",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "180",
       "requires": "ifv-chrono",
@@ -15304,26 +15304,26 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoSound",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2000",
       "requires": "ifv-demo",
       "slot": "Armament@ivan",
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2560",
       "reloaddelay": "25",
@@ -15340,7 +15340,7 @@
        }
       ],
       "weapon": "Fremen_L",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MG"
       ]
@@ -15367,12 +15367,12 @@
        }
       ],
       "weapon": "TSSonicZap",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -15399,7 +15399,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -15437,7 +15437,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -15475,7 +15475,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -15513,7 +15513,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -15551,7 +15551,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -15562,7 +15562,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
@@ -15633,7 +15633,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -15648,7 +15648,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
@@ -15715,7 +15715,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -15730,7 +15730,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "28",
@@ -15797,7 +15797,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -15812,7 +15812,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.05,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "28",
@@ -15879,7 +15879,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -15893,7 +15893,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -15945,7 +15945,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -15957,7 +15957,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -16009,7 +16009,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -16021,7 +16021,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -16073,7 +16073,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -16085,7 +16085,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
@@ -16181,7 +16181,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -16197,7 +16197,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -16289,7 +16289,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -16305,7 +16305,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -16397,7 +16397,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -16413,7 +16413,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0357142857142858,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -16505,7 +16505,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -16519,7 +16519,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -16546,7 +16546,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -16575,7 +16575,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -16679,7 +16679,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -16739,7 +16739,7 @@
        }
       ],
       "weapon": "RA2MirageGun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -16798,7 +16798,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "10000",
       "reloaddelay": "100",
       "requires": "!rank-elite",
@@ -16808,14 +16808,14 @@
       ],
       "warheads": [],
       "weapon": "PrismTankCharge",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "11111",
       "reloaddelay": "100",
       "requires": "rank-elite",
@@ -16825,7 +16825,7 @@
       ],
       "warheads": [],
       "weapon": "PrismTankCharge_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -16879,7 +16879,7 @@
        }
       ],
       "weapon": "RA2Comet",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -16935,7 +16935,7 @@
        }
       ],
       "weapon": "RA2Comet_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -16991,7 +16991,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7040",
       "reloaddelay": "160",
@@ -17008,7 +17008,7 @@
        }
       ],
       "weapon": "RA2sabot",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2TankDestroyerCannon"
       ]
@@ -17016,7 +17016,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8040",
       "reloaddelay": "160",
@@ -17034,7 +17034,7 @@
        }
       ],
       "weapon": "RA2sabot_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2TankDestroyerCannon",
        "^RA2EliteEffects"

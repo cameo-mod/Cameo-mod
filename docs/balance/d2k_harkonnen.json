@@ -10,7 +10,7 @@
       "burst": "26",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7700",
       "reloaddelay": "132",
@@ -51,7 +51,7 @@
        }
       ],
       "weapon": "harkonnen_autogunturret",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -168,7 +168,7 @@
       "burst": "5",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6742",
       "reloaddelay": "50",
@@ -186,7 +186,7 @@
        }
       ],
       "weapon": "HarkonnenFlameTurret",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -552,7 +552,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "minrange": "2135",
       "pricing": true,
       "range": "10684",
@@ -612,7 +612,7 @@
        }
       ],
       "weapon": "D2K_TowerMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -770,7 +770,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "55",
@@ -786,7 +786,7 @@
        }
       ],
       "weapon": "80mm_H",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^D2K_Cannon"
       ]
@@ -840,7 +840,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "100",
@@ -861,7 +861,7 @@
        }
       ],
       "weapon": "DevBullet",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^D2K_Cannon"
       ]
@@ -969,7 +969,7 @@
       "burst": "4",
       "burstdelays": "25",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "2050",
       "pricing": true,
       "range": "10240",
@@ -991,7 +991,7 @@
        }
       ],
       "weapon": "mtank_pri",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^D2KMissile"
       ]

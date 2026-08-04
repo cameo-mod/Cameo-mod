@@ -47,7 +47,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3375",
       "reloaddelay": "6",
@@ -106,7 +106,7 @@
        }
       ],
       "weapon": "ChainGunMH60",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -117,7 +117,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3375",
       "reloaddelay": "6",
@@ -176,7 +176,7 @@
        }
       ],
       "weapon": "ChainGunMH60",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -271,7 +271,7 @@
        }
       ],
       "weapon": "Hellfire",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyMissile"
@@ -318,7 +318,7 @@
        }
       ],
       "weapon": "HellfireCryo",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyMissile",
@@ -468,7 +468,7 @@
        }
       ],
       "weapon": "Aphid_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^ImpactGlow",
@@ -518,7 +518,7 @@
        }
       ],
       "weapon": "AphidCryo_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^ImpactGlow",
@@ -934,7 +934,7 @@
       "burst": "2",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "11412",
       "reloaddelay": "14",
@@ -952,7 +952,7 @@
        }
       ],
       "weapon": "zsu_23",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -1036,7 +1036,7 @@
        }
       ],
       "weapon": "RATurretGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyCannon"
@@ -1083,7 +1083,7 @@
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2035",
       "pricing": true,
       "range": "10185",
@@ -1136,7 +1136,7 @@
        }
       ],
       "weapon": "155mmBastion",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -1146,7 +1146,7 @@
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2035",
       "pricing": true,
       "range": "10185",
@@ -1199,7 +1199,7 @@
        }
       ],
       "weapon": "155mmBastionCryo",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -1434,7 +1434,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1464,7 +1464,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1494,7 +1494,7 @@
        }
       ],
       "weapon": "CryoLightSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon",
        "^CryoMissileProjectile"
@@ -1526,7 +1526,7 @@
        }
       ],
       "weapon": "CryoLightSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon",
        "^CryoMissileProjectile"
@@ -1610,7 +1610,7 @@
        }
       ],
       "weapon": "RAVulcan",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1653,7 +1653,7 @@
        }
       ],
       "weapon": "RAVulcan",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1711,20 +1711,20 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "10000",
       "slot": "Armament@Dummy",
       "versus_templates": [],
       "warheads": [],
       "weapon": "dummytargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
@@ -1750,7 +1750,7 @@
        }
       ],
       "weapon": "Repair",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -1760,7 +1760,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
@@ -1786,7 +1786,7 @@
        }
       ],
       "weapon": "Repair",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -1838,18 +1838,18 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "10000",
       "slot": "Armament@Dummy",
       "versus_templates": [],
       "warheads": [],
       "weapon": "dummytargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
@@ -1875,7 +1875,7 @@
        }
       ],
       "weapon": "Heal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -1883,7 +1883,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
@@ -1909,7 +1909,7 @@
        }
       ],
       "weapon": "Heal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -1973,7 +1973,7 @@
        }
       ],
       "weapon": "SilencedPPK",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SnipeWeapon"
       ]
@@ -2045,7 +2045,7 @@
        }
       ],
       "weapon": "Colt45",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2076,7 +2076,7 @@
        }
       ],
       "weapon": "Colt45",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2086,7 +2086,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@c4",
@@ -2095,7 +2095,7 @@
       ],
       "warheads": [],
       "weapon": "TanyaAttach",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -2103,14 +2103,14 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@c4building",
       "versus_templates": [],
       "warheads": [],
       "weapon": "GenericC4",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -2661,7 +2661,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2670",
       "pricing": true,
       "range": "13350",
@@ -2716,7 +2716,7 @@
        }
       ],
       "weapon": "155mm",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -2725,7 +2725,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2670",
       "pricing": true,
       "range": "13350",
@@ -2779,7 +2779,7 @@
        }
       ],
       "weapon": "155mmCryo",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -2835,7 +2835,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4746",
       "reloaddelay": "10",
@@ -2889,7 +2889,7 @@
        }
       ],
       "weapon": "HeavyAATankCannonAG",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -2899,7 +2899,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7119",
       "reloaddelay": "10",
@@ -2950,7 +2950,7 @@
        }
       ],
       "weapon": "HeavyAATankCannon_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -3011,7 +3011,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4720",
       "reloaddelay": "37",
@@ -3107,7 +3107,7 @@
        }
       ],
       "weapon": "25mm",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3170,7 +3170,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5159",
       "reloaddelay": "47",
@@ -3188,7 +3188,7 @@
        }
       ],
       "weapon": "90mm",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -3370,7 +3370,7 @@
        }
       ],
       "weapon": "AlliedTankDestroyerCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^TankDestroyerCannon"
@@ -3457,7 +3457,7 @@
        }
       ],
       "weapon": "TigerCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumCannon"
@@ -3513,7 +3513,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
@@ -3584,7 +3584,7 @@
        }
       ],
       "weapon": "ChronoTusk",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -3597,7 +3597,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
@@ -3668,7 +3668,7 @@
        }
       ],
       "weapon": "ChronoTusk",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -3681,7 +3681,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
@@ -3749,7 +3749,7 @@
        }
       ],
       "weapon": "ChronoTuskCryo",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -3763,7 +3763,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
@@ -3831,7 +3831,7 @@
        }
       ],
       "weapon": "ChronoTuskCryo",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -3940,13 +3940,13 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "10000",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
       "weapon": "dummytargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -4008,14 +4008,14 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "10000",
       "reloaddelay": "150",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
       "weapon": "RadarJammer",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -4077,7 +4077,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5038",
       "reloaddelay": "51",
@@ -4137,7 +4137,7 @@
        }
       ],
       "weapon": "APTusk",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^Grenade",
@@ -4149,7 +4149,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5038",
       "reloaddelay": "51",
@@ -4207,7 +4207,7 @@
        }
       ],
       "weapon": "APTuskCryo",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^Grenade",
@@ -4267,7 +4267,7 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4359",
       "reloaddelay": "10",
@@ -4285,7 +4285,7 @@
        }
       ],
       "weapon": "M60mg",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -4339,7 +4339,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.9642857142857143,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4925",
       "reloaddelay": "64",
@@ -4448,7 +4448,7 @@
        }
       ],
       "weapon": "ReconRangerRecoillessGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4462,7 +4462,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.9642857142857143,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4925",
       "reloaddelay": "64",
@@ -4565,7 +4565,7 @@
        }
       ],
       "weapon": "CryoReconRangerRecoillessGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4658,7 +4658,7 @@
        }
       ],
       "weapon": "SheridanCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon"
@@ -4699,7 +4699,7 @@
        }
       ],
       "weapon": "SheridanMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -4740,7 +4740,7 @@
        }
       ],
       "weapon": "SheridanMissilesCryo",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile",
@@ -4783,7 +4783,7 @@
        }
       ],
       "weapon": "SheridanVulcan",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"

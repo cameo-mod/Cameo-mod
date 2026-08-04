@@ -10,7 +10,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "80",
@@ -65,7 +65,7 @@
        }
       ],
       "weapon": "SteelFighterRailgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LaserWeapon",
        "^RA2RailgunWeapon",
@@ -76,7 +76,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
@@ -150,7 +150,7 @@
        }
       ],
       "weapon": "SteelMakoGun_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^TeslaWeapon",
@@ -203,7 +203,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
@@ -235,7 +235,7 @@
        }
       ],
       "weapon": "SteelScalpelRailgunAA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -247,7 +247,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
@@ -364,7 +364,7 @@
        }
       ],
       "weapon": "SteelScalpelRailgun_EMP_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -414,7 +414,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "20",
@@ -448,7 +448,7 @@
        }
       ],
       "weapon": "SteelMantaAG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -492,7 +492,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
@@ -589,7 +589,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRail",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -601,7 +601,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
@@ -693,7 +693,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRail_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -810,7 +810,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "5",
@@ -860,7 +860,7 @@
        }
       ],
       "weapon": "SteelCruiserCannons",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -872,7 +872,7 @@
       "burst": "2",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "5",
@@ -919,7 +919,7 @@
        }
       ],
       "weapon": "SteelCruiserCannons_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -1195,7 +1195,7 @@
        }
       ],
       "weapon": "SteelAirTurret",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^RailgunWeapon"
@@ -1203,7 +1203,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "60",
@@ -1258,7 +1258,7 @@
        }
       ],
       "weapon": "SteelAirTurret_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -1269,7 +1269,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "60",
@@ -1321,7 +1321,7 @@
        }
       ],
       "weapon": "SteelAirTurret_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -1377,7 +1377,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1000",
       "pricing": true,
       "range": "5000",
@@ -1449,7 +1449,7 @@
        }
       ],
       "weapon": "SteelTwisterMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -1463,7 +1463,7 @@
       "burst": "10",
       "burstdelays": "5",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1000",
       "pricing": true,
       "range": "6000",
@@ -1531,7 +1531,7 @@
        }
       ],
       "weapon": "SteelTwisterMissiles_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -1588,7 +1588,7 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "15000",
       "reloaddelay": "25",
       "requires": "steelconsortium_upgrade_scalpeldefenders",
@@ -1596,7 +1596,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "GLStingerTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -1604,7 +1604,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "60",
@@ -1654,7 +1654,7 @@
        }
       ],
       "weapon": "ConsortiumMissileSystem",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^ArrowWeapon",
@@ -1667,7 +1667,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "60",
@@ -1714,7 +1714,7 @@
        }
       ],
       "weapon": "ConsortiumMissileSystem_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^ArrowWeapon",
@@ -1763,19 +1763,19 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "25000",
       "reloaddelay": "750",
       "slot": "Armament@Dummy",
       "versus_templates": [],
       "warheads": [],
       "weapon": "bfg10kCannonDummy",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "25000",
       "reloaddelay": "750",
@@ -1849,7 +1849,7 @@
        }
       ],
       "weapon": "bfg10kCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^MagicWeapon",
@@ -1862,7 +1862,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "10238976",
       "reloaddelay": "750",
       "slot": "Armament@SuperDummy",
@@ -1871,13 +1871,13 @@
       ],
       "warheads": [],
       "weapon": "superbfg10kCannonDummy",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "armament_name": "superweapon",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10238976",
       "reloaddelay": "750",
@@ -1948,7 +1948,7 @@
        }
       ],
       "weapon": "superbfg10kCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^MagicWeapon",
@@ -2267,7 +2267,7 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "15000",
       "reloaddelay": "25",
       "requires": "steelconsortium_upgrade_scalpeldefenders",
@@ -2275,13 +2275,13 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "GLStingerTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
@@ -2309,7 +2309,7 @@
        }
       ],
       "weapon": "SteelVulcan",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelSmallArms",
@@ -2319,7 +2319,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
@@ -2346,7 +2346,7 @@
        }
       ],
       "weapon": "SteelVulcanResonance",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelSmallArms",
@@ -2524,7 +2524,7 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "15000",
       "reloaddelay": "25",
       "requires": "steelconsortium_upgrade_scalpeldefenders",
@@ -2532,13 +2532,13 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "GLStingerTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
@@ -2635,7 +2635,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRail",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -2648,7 +2648,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
@@ -2745,7 +2745,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRail",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -2758,7 +2758,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
@@ -2850,7 +2850,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRail_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -2863,7 +2863,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
@@ -2955,7 +2955,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRail_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -3045,7 +3045,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6463",
       "reloaddelay": "25",
@@ -3074,7 +3074,7 @@
        }
       ],
       "weapon": "SteelCloneGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3085,7 +3085,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
@@ -3112,7 +3112,7 @@
        }
       ],
       "weapon": "SteelCloneGun_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3122,7 +3122,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6463",
       "reloaddelay": "25",
@@ -3151,7 +3151,7 @@
        }
       ],
       "weapon": "SteelCloneGun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3163,7 +3163,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6000",
       "reloaddelay": "25",
@@ -3190,7 +3190,7 @@
        }
       ],
       "weapon": "SteelCloneGun_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3199,7 +3199,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6463",
       "reloaddelay": "25",
@@ -3226,7 +3226,7 @@
        }
       ],
       "weapon": "SteelCloneGunResonance",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3237,7 +3237,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
@@ -3264,7 +3264,7 @@
        }
       ],
       "weapon": "SteelCloneGunResonance_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3274,7 +3274,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6463",
       "reloaddelay": "25",
@@ -3301,7 +3301,7 @@
        }
       ],
       "weapon": "SteelCloneGunResonance",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3313,7 +3313,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6000",
       "reloaddelay": "25",
@@ -3340,7 +3340,7 @@
        }
       ],
       "weapon": "SteelCloneGunResonance_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3397,7 +3397,7 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "1536",
       "reloaddelay": "20",
       "slot": "Armament@defuse",
@@ -3407,7 +3407,7 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RemovesIvanBombs",
        "^RemovesTerrorDrone"
@@ -3417,14 +3417,14 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "1536",
       "reloaddelay": "100",
       "slot": "Armament@leechdisinfect",
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -3470,7 +3470,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
@@ -3515,7 +3515,7 @@
        }
       ],
       "weapon": "SteelMakoGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^RA2Grenade",
@@ -3527,7 +3527,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
@@ -3569,7 +3569,7 @@
        }
       ],
       "weapon": "SteelMakoGun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^RA2Grenade",
@@ -3580,7 +3580,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6050",
       "reloaddelay": "25",
@@ -3625,7 +3625,7 @@
        }
       ],
       "weapon": "SteelMakoGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^RA2Grenade",
@@ -3638,7 +3638,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7050",
       "reloaddelay": "25",
@@ -3680,7 +3680,7 @@
        }
       ],
       "weapon": "SteelMakoGun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^RA2Grenade",
@@ -3690,7 +3690,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
@@ -3764,7 +3764,7 @@
        }
       ],
       "weapon": "SteelMakoGun_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^TeslaWeapon",
@@ -3778,7 +3778,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
@@ -3850,7 +3850,7 @@
        }
       ],
       "weapon": "SteelMakoGun_EMP_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^TeslaWeapon",
@@ -3863,7 +3863,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6050",
       "reloaddelay": "25",
@@ -3937,7 +3937,7 @@
        }
       ],
       "weapon": "SteelMakoGun_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^TeslaWeapon",
@@ -3952,7 +3952,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7050",
       "reloaddelay": "25",
@@ -4024,7 +4024,7 @@
        }
       ],
       "weapon": "SteelMakoGun_EMP_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^TeslaWeapon",
@@ -4085,7 +4085,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "48",
@@ -4120,7 +4120,7 @@
        }
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -4132,7 +4132,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
@@ -4164,7 +4164,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -4176,7 +4176,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
@@ -4299,7 +4299,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -4317,7 +4317,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
@@ -4434,7 +4434,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_EMP_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -4453,7 +4453,7 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "50",
       "requires": "botmicro",
@@ -4463,7 +4463,7 @@
       ],
       "warheads": [],
       "weapon": "aadeploytargeting_8c0_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^AADeployTargeting"
       ]
@@ -4473,7 +4473,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "48",
@@ -4508,7 +4508,7 @@
        }
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -4521,7 +4521,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
@@ -4553,7 +4553,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -4566,7 +4566,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
@@ -4689,7 +4689,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -4708,7 +4708,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
@@ -4825,7 +4825,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_EMP_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -4844,7 +4844,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "8000",
       "reloaddelay": "48",
@@ -4879,7 +4879,7 @@
        }
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -4892,7 +4892,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "9000",
       "reloaddelay": "48",
@@ -4924,7 +4924,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -4937,7 +4937,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "8000",
       "reloaddelay": "50",
@@ -5060,7 +5060,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -5079,7 +5079,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "9000",
       "reloaddelay": "50",
@@ -5196,7 +5196,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_EMP_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -5256,7 +5256,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6200",
       "reloaddelay": "8",
@@ -5315,7 +5315,7 @@
        }
       ],
       "weapon": "SteelRunnerPistols",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -5326,7 +5326,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7200",
       "reloaddelay": "8",
@@ -5383,7 +5383,7 @@
        }
       ],
       "weapon": "SteelRunnerPistols_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -5395,7 +5395,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6200",
       "reloaddelay": "8",
@@ -5454,7 +5454,7 @@
        }
       ],
       "weapon": "SteelRunnerPistols",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -5466,7 +5466,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7200",
       "reloaddelay": "8",
@@ -5523,7 +5523,7 @@
        }
       ],
       "weapon": "SteelRunnerPistols_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -5534,7 +5534,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6200",
       "reloaddelay": "8",
@@ -5591,7 +5591,7 @@
        }
       ],
       "weapon": "SteelRunnerPistolsResonance",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -5602,7 +5602,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7200",
       "reloaddelay": "8",
@@ -5659,7 +5659,7 @@
        }
       ],
       "weapon": "SteelRunnerPistolsResonance_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -5671,7 +5671,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6200",
       "reloaddelay": "8",
@@ -5728,7 +5728,7 @@
        }
       ],
       "weapon": "SteelRunnerPistolsResonance",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -5740,7 +5740,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7200",
       "reloaddelay": "8",
@@ -5797,7 +5797,7 @@
        }
       ],
       "weapon": "SteelRunnerPistolsResonance_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -6381,7 +6381,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
@@ -6472,7 +6472,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRail_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -6484,7 +6484,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
@@ -6575,7 +6575,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRail_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -6634,7 +6634,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
@@ -6662,7 +6662,7 @@
        }
       ],
       "weapon": "SteelVulcan",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelSmallArms",
@@ -6747,7 +6747,7 @@
        }
       ],
       "weapon": "SteelHoverMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^SteelLightMissile"
@@ -6784,7 +6784,7 @@
        }
       ],
       "weapon": "SteelHoverMissile_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^SteelLightMissile"
@@ -6839,7 +6839,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "65",
@@ -6890,7 +6890,7 @@
        }
       ],
       "weapon": "SteelQuantumCannon_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -7011,7 +7011,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
@@ -7038,7 +7038,7 @@
        }
       ],
       "weapon": "SteelMantaHunterCannons_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelMediumMissile",
        "^RA2FlakWeapon",
@@ -7048,7 +7048,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
@@ -7075,7 +7075,7 @@
        }
       ],
       "weapon": "SteelMantaHunterCannons_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelMediumMissile",
        "^RA2FlakWeapon",
@@ -7147,7 +7147,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
@@ -7174,7 +7174,7 @@
        }
       ],
       "weapon": "SteelMantaHunterCannonsAAResonance_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelMediumMissile",
        "^RA2FlakWeapon",
@@ -7184,7 +7184,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
@@ -7211,7 +7211,7 @@
        }
       ],
       "weapon": "SteelMantaHunterCannonsAAResonance_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelMediumMissile",
        "^RA2FlakWeapon",
@@ -7368,7 +7368,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "4000",
       "pricing": true,
       "range": "20000",
@@ -7424,7 +7424,7 @@
        }
       ],
       "weapon": "SteelDaggerCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
@@ -7436,7 +7436,7 @@
       "burst": "8",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "5000",
       "pricing": true,
       "range": "25000",
@@ -7489,7 +7489,7 @@
        }
       ],
       "weapon": "SteelDaggerCannon_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
@@ -7548,7 +7548,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "48",
@@ -7583,7 +7583,7 @@
        }
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -7595,7 +7595,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
@@ -7627,7 +7627,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -7639,7 +7639,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
@@ -7762,7 +7762,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -7780,7 +7780,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
@@ -7897,7 +7897,7 @@
        }
       ],
       "weapon": "SteelInfRailgun_EMP_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -7984,7 +7984,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "2220",
       "pricing": true,
       "range": "11111",
@@ -8019,7 +8019,7 @@
        }
       ],
       "weapon": "HammerheadArtillery",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RA2Grenade",
        "^HeavyBomb",
@@ -8031,7 +8031,7 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "10000",
       "reloaddelay": "50",
       "requires": "botmicro",
@@ -8041,7 +8041,7 @@
       ],
       "warheads": [],
       "weapon": "deploytargeting_10c0",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^DeployTargeting"
       ]
@@ -8097,7 +8097,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1450",
       "pricing": true,
       "range": "7250",
@@ -8147,7 +8147,7 @@
        }
       ],
       "weapon": "SteelKatyCannons",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -8159,7 +8159,7 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1650",
       "pricing": true,
       "range": "8250",
@@ -8207,7 +8207,7 @@
        }
       ],
       "weapon": "SteelKatyCannons_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -8219,7 +8219,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "minrange": "1450",
       "pricing": true,
       "range": "7250",
@@ -8294,7 +8294,7 @@
        }
       ],
       "weapon": "SteelKatyCannons_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^TeslaWeapon",
@@ -8308,7 +8308,7 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.8333333333333334,
+      "design_weapon_class": null,
       "minrange": "1650",
       "pricing": true,
       "range": "8250",
@@ -8381,7 +8381,7 @@
        }
       ],
       "weapon": "SteelKatyCannons_EMP_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^TeslaWeapon",
@@ -8439,7 +8439,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
@@ -8484,7 +8484,7 @@
        }
       ],
       "weapon": "SteelMakoGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^RA2Grenade",
@@ -8496,7 +8496,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
@@ -8538,7 +8538,7 @@
        }
       ],
       "weapon": "SteelMakoGun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^RA2Grenade",
@@ -8548,7 +8548,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
@@ -8622,7 +8622,7 @@
        }
       ],
       "weapon": "SteelMakoGun_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^TeslaWeapon",
@@ -8636,7 +8636,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
@@ -8708,7 +8708,7 @@
        }
       ],
       "weapon": "SteelMakoGun_EMP_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^TeslaWeapon",
@@ -8766,7 +8766,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "20",
@@ -8800,7 +8800,7 @@
        }
       ],
       "weapon": "SteelMantaAG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -8810,7 +8810,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "20",
@@ -8844,7 +8844,7 @@
        }
       ],
       "weapon": "SteelMantaAG",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -8854,7 +8854,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "20",
@@ -8885,7 +8885,7 @@
        }
       ],
       "weapon": "SteelManta_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -8895,7 +8895,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "20",
@@ -8926,7 +8926,7 @@
        }
       ],
       "weapon": "SteelManta_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -8936,7 +8936,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "20",
@@ -8968,7 +8968,7 @@
        }
       ],
       "weapon": "SteelMantaAGResonance",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -8978,7 +8978,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "20",
@@ -9010,7 +9010,7 @@
        }
       ],
       "weapon": "SteelMantaAGResonance",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -9020,7 +9020,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "20",
@@ -9052,7 +9052,7 @@
        }
       ],
       "weapon": "SteelMantaAAResonance_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -9062,7 +9062,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "20",
@@ -9094,7 +9094,7 @@
        }
       ],
       "weapon": "SteelMantaAAResonance_AA",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -9155,7 +9155,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1600",
       "reloaddelay": "24",
@@ -9214,7 +9214,7 @@
        }
       ],
       "weapon": "SteelMegaSword",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^LaserWeapon",
@@ -9223,7 +9223,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2400",
       "reloaddelay": "16",
@@ -9282,7 +9282,7 @@
        }
       ],
       "weapon": "SteelMegaSword_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^LaserWeapon",
@@ -9291,7 +9291,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2400",
       "reloaddelay": "16",
@@ -9356,7 +9356,7 @@
        }
       ],
       "weapon": "SteelMegaSword_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -9529,7 +9529,7 @@
        }
       ],
       "weapon": "SteelQuantumCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^RailgunWeapon"
@@ -9538,7 +9538,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "65",
@@ -9593,7 +9593,7 @@
        }
       ],
       "weapon": "SteelQuantumCannon_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -9605,7 +9605,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "65",
@@ -9657,7 +9657,7 @@
        }
       ],
       "weapon": "SteelQuantumCannon_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -9757,7 +9757,7 @@
        }
       ],
       "weapon": "SteelStalkerRailgun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^RailgunWeapon"
@@ -9765,7 +9765,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "103",
@@ -9820,7 +9820,7 @@
        }
       ],
       "weapon": "SteelStalkerRailgun_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -9831,7 +9831,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "103",
@@ -9883,7 +9883,7 @@
        }
       ],
       "weapon": "SteelStalkerRailgun_elite",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -9947,14 +9947,14 @@
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "15000",
       "reloaddelay": "25",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
       "weapon": "GLStingerTargeting",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      }
     ],
@@ -10005,7 +10005,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -10065,7 +10065,7 @@
        }
       ],
       "weapon": "WhiteRabbitGatling",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",

@@ -9,7 +9,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6800",
       "reloaddelay": "38",
@@ -138,7 +138,7 @@
        }
       ],
       "weapon": "BCLaser",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^NuclearWarhead",
        "^RailgunWeapon",
@@ -154,7 +154,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6800",
       "reloaddelay": "38",
@@ -286,7 +286,7 @@
        }
       ],
       "weapon": "BCYamatoCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^NuclearWarhead",
        "^RailgunWeapon",
@@ -383,7 +383,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -409,7 +409,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -461,7 +461,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "80",
@@ -579,7 +579,7 @@
        }
       ],
       "weapon": "PhobosLaser",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^RailgunWeapon",
        "^HeavyMissile",
@@ -594,7 +594,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6800",
       "reloaddelay": "38",
@@ -726,7 +726,7 @@
        }
       ],
       "weapon": "BCYamatoCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^NuclearWarhead",
        "^RailgunWeapon",
@@ -822,7 +822,7 @@
        }
       ],
       "weapon": "JimRaynorMachineGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon"
@@ -878,7 +878,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "5",
@@ -904,7 +904,7 @@
        }
       ],
       "weapon": "RavenRepair",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -955,28 +955,28 @@
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "7500",
       "reloaddelay": "260",
       "slot": "Armament@IronCourtain",
       "versus_templates": [],
       "warheads": [],
       "weapon": "ScienceVesselDefenseMatrix",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "7500",
       "reloaddelay": "110",
       "slot": "Armament@Irradiate",
       "versus_templates": [],
       "warheads": [],
       "weapon": "ScienceVesselIrradiate",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -1054,7 +1054,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6060",
       "reloaddelay": "39",
@@ -1072,7 +1072,7 @@
        }
       ],
       "weapon": "SunDogLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -1081,7 +1081,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6060",
       "reloaddelay": "39",
@@ -1141,7 +1141,7 @@
        }
       ],
       "weapon": "SunDogRockets",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1152,7 +1152,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6060",
       "reloaddelay": "39",
@@ -1212,7 +1212,7 @@
        }
       ],
       "weapon": "SunDogRockets",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1272,7 +1272,7 @@
       "burst": "8",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7380",
       "reloaddelay": "67",
@@ -1321,7 +1321,7 @@
        }
       ],
       "weapon": "ValkyrieRockets",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^FlakWeapon",
        "^MediumMissile",
@@ -1333,7 +1333,7 @@
       "burst": "8",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0833333333333333,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7380",
       "reloaddelay": "67",
@@ -1382,7 +1382,7 @@
        }
       ],
       "weapon": "ValkyrieRockets",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^FlakWeapon",
        "^MediumMissile",
@@ -1440,7 +1440,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5076",
       "reloaddelay": "32",
@@ -1458,7 +1458,7 @@
        }
       ],
       "weapon": "WraithLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -1467,7 +1467,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5076",
       "reloaddelay": "24",
@@ -1527,7 +1527,7 @@
        }
       ],
       "weapon": "WraithRockets_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1538,7 +1538,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5076",
       "reloaddelay": "24",
@@ -1598,7 +1598,7 @@
        }
       ],
       "weapon": "WraithRockets_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1653,7 +1653,7 @@
       "burst": "4",
       "burstdelays": "15",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.1071428571428572,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "90",
@@ -1756,7 +1756,7 @@
        }
       ],
       "weapon": "WyvernRockets",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -1772,7 +1772,7 @@
       "burst": "4",
       "burstdelays": "15",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.1071428571428572,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "90",
@@ -1875,7 +1875,7 @@
        }
       ],
       "weapon": "WyvernRockets",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -2441,7 +2441,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "11626",
       "reloaddelay": "30",
@@ -2501,7 +2501,7 @@
        }
       ],
       "weapon": "MissileTurret",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -2512,7 +2512,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "11626",
       "reloaddelay": "30",
@@ -2572,7 +2572,7 @@
        }
       ],
       "weapon": "MissileTurret",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -2621,7 +2621,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
@@ -2681,7 +2681,7 @@
        }
       ],
       "weapon": "NaxLaserT",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -2733,7 +2733,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3400",
       "reloaddelay": "28",
@@ -2751,7 +2751,7 @@
        }
       ],
       "weapon": "FirebatF",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -2762,7 +2762,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3400",
       "reloaddelay": "28",
@@ -2780,7 +2780,7 @@
        }
       ],
       "weapon": "FirebatF",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -2792,7 +2792,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "3400",
       "reloaddelay": "28",
@@ -2810,7 +2810,7 @@
        }
       ],
       "weapon": "FirebatF",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -2822,7 +2822,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "3400",
       "reloaddelay": "28",
@@ -2840,7 +2840,7 @@
        }
       ],
       "weapon": "FirebatF",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -2896,7 +2896,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8428",
       "reloaddelay": "22",
@@ -3000,7 +3000,7 @@
        }
       ],
       "weapon": "GhostSniperLockdown",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_TeslaCharged_Super",
        "^Projectile_Lightning_Super",
@@ -3014,7 +3014,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8428",
       "reloaddelay": "22",
@@ -3079,7 +3079,7 @@
        }
       ],
       "weapon": "GhostSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -3091,7 +3091,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "8428",
       "reloaddelay": "22",
@@ -3156,7 +3156,7 @@
        }
       ],
       "weapon": "GhostSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -3258,7 +3258,7 @@
        }
       ],
       "weapon": "HarakanF",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3310,7 +3310,7 @@
        }
       ],
       "weapon": "HarakanF",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3363,7 +3363,7 @@
        }
       ],
       "weapon": "HarakanF",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3416,7 +3416,7 @@
        }
       ],
       "weapon": "HarakanF",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3505,7 +3505,7 @@
        }
       ],
       "weapon": "JimRaynorMachineGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon"
@@ -3548,7 +3548,7 @@
        }
       ],
       "weapon": "JimRaynorMachineGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon"
@@ -3601,7 +3601,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5542",
       "reloaddelay": "25",
@@ -3644,7 +3644,7 @@
        }
       ],
       "weapon": "MadcapGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -3654,7 +3654,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5542",
       "reloaddelay": "25",
@@ -3697,7 +3697,7 @@
        }
       ],
       "weapon": "MadcapGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -3753,7 +3753,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7010",
       "reloaddelay": "60",
@@ -3796,7 +3796,7 @@
        }
       ],
       "weapon": "MarauderMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -3806,7 +3806,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7010",
       "reloaddelay": "60",
@@ -3849,7 +3849,7 @@
        }
       ],
       "weapon": "MarauderMissiles",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -3901,7 +3901,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6105",
       "reloaddelay": "26",
@@ -3944,7 +3944,7 @@
        }
       ],
       "weapon": "MarineMG",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -3956,7 +3956,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6105",
       "reloaddelay": "26",
@@ -3999,7 +3999,7 @@
        }
       ],
       "weapon": "MarineMG",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -4055,7 +4055,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -4123,7 +4123,7 @@
        }
       ],
       "weapon": "MedicFlare",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^FlakWeapon",
@@ -4132,7 +4132,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -4158,7 +4158,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -4166,7 +4166,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6000",
       "reloaddelay": "60",
@@ -4234,7 +4234,7 @@
        }
       ],
       "weapon": "MedicFlare",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^FlakWeapon",
@@ -4305,7 +4305,7 @@
        }
       ],
       "weapon": "ReaperPistols",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4333,14 +4333,14 @@
        }
       ],
       "weapon": "ReaperPistols",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "875",
       "pricing": true,
       "range": "4375",
@@ -4394,7 +4394,7 @@
        }
       ],
       "weapon": "ReaperGrenade",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4425,7 +4425,7 @@
        }
       ],
       "weapon": "ReaperPistols",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4454,7 +4454,7 @@
        }
       ],
       "weapon": "ReaperPistols",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4462,7 +4462,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "875",
       "pricing": false,
       "range": "4375",
@@ -4516,7 +4516,7 @@
        }
       ],
       "weapon": "ReaperGrenade",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4566,7 +4566,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7922",
       "reloaddelay": "33",
@@ -4670,7 +4670,7 @@
        }
       ],
       "weapon": "SpecterSniperLockdown",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_TeslaCharged_Super",
        "^Projectile_Lightning_Super",
@@ -4684,7 +4684,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7922",
       "reloaddelay": "33",
@@ -4749,7 +4749,7 @@
        }
       ],
       "weapon": "SpecterSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -4761,7 +4761,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7922",
       "reloaddelay": "33",
@@ -4826,7 +4826,7 @@
        }
       ],
       "weapon": "SpecterSniper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -5711,7 +5711,7 @@
        }
       ],
       "weapon": "CycloneRockets",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -5753,7 +5753,7 @@
        }
       ],
       "weapon": "CycloneRocketsLockOn",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -5809,7 +5809,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "16",
@@ -5852,7 +5852,7 @@
        }
       ],
       "weapon": "GoliathMG",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -5863,7 +5863,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "16",
@@ -5906,7 +5906,7 @@
        }
       ],
       "weapon": "GoliathMG",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -5915,7 +5915,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "33",
@@ -5975,7 +5975,7 @@
        }
       ],
       "weapon": "GoliathRockets_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -5986,7 +5986,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9375,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "33",
@@ -6046,7 +6046,7 @@
        }
       ],
       "weapon": "GoliathRockets_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -6110,7 +6110,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6479",
       "reloaddelay": "34",
@@ -6164,7 +6164,7 @@
        }
       ],
       "weapon": "GoliathMk2MG",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -6176,7 +6176,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6479",
       "reloaddelay": "34",
@@ -6230,7 +6230,7 @@
        }
       ],
       "weapon": "GoliathMk2MG",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -6240,7 +6240,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6479",
       "reloaddelay": "40",
@@ -6289,7 +6289,7 @@
        }
       ],
       "weapon": "GoliathMk2Rockets",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile",
@@ -6299,7 +6299,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6479",
       "reloaddelay": "40",
@@ -6348,7 +6348,7 @@
        }
       ],
       "weapon": "GoliathMk2Rockets",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile",
@@ -6411,7 +6411,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5938",
       "reloaddelay": "18",
@@ -6470,7 +6470,7 @@
        }
       ],
       "weapon": "MatadorFlamer",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -6480,7 +6480,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6590",
       "reloaddelay": "39",
@@ -6499,7 +6499,7 @@
        }
       ],
       "weapon": "MatadorLaser",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -6601,7 +6601,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "25",
@@ -6617,7 +6617,7 @@
        }
       ],
       "weapon": "SCVAttack",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^WorkerAttack"
       ]
@@ -6627,7 +6627,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "5",
@@ -6653,7 +6653,7 @@
        }
       ],
       "weapon": "SCVRepair",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -6709,7 +6709,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6114",
       "reloaddelay": "37",
@@ -6753,7 +6753,7 @@
        }
       ],
       "weapon": "SiegeTankCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumCannon",
@@ -6763,7 +6763,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2355",
       "pricing": true,
       "range": "11775",
@@ -6969,7 +6969,7 @@
        }
       ],
       "weapon": "SiegeTankSiegeCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "allowlist_mix",
       "weapon_types": [
        "^NuclearWarhead",
        "^LightMissile",
@@ -7034,7 +7034,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.85,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4800",
       "reloaddelay": "25",
@@ -7104,7 +7104,7 @@
        }
       ],
       "weapon": "VultureGrenade",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon",
@@ -7163,7 +7163,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7156",
       "reloaddelay": "44",
@@ -7222,7 +7222,7 @@
        }
       ],
       "weapon": "SCTyr",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^Chaingun",
@@ -7235,7 +7235,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7156",
       "reloaddelay": "84",
@@ -7289,7 +7289,7 @@
        }
       ],
       "weapon": "SCTyrAA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",

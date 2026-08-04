@@ -10,7 +10,7 @@
       "burst": "5",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2500",
       "reloaddelay": "25",
@@ -58,7 +58,7 @@
        }
       ],
       "weapon": "farasha_drone_ixian",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -104,7 +104,7 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.95,
+      "design_weapon_class": null,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
@@ -181,7 +181,7 @@
        }
       ],
       "weapon": "ixian_airdrone",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LightChemicalWeapon",
@@ -235,7 +235,7 @@
        }
       ],
       "weapon": "d2k_air_drone_guns",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^D2KMissile",
        "^SmallArms",
@@ -246,7 +246,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
@@ -313,7 +313,7 @@
        }
       ],
       "weapon": "d2k_air_drone_guns_upgrade",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -367,7 +367,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1250",
       "reloaddelay": "250",
@@ -420,7 +420,7 @@
        }
       ],
       "weapon": "IxianBomb_EMP",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^HeavyBomb",
@@ -475,14 +475,14 @@
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "6400",
       "reloaddelay": "25",
       "slot": "Armament@drones",
       "versus_templates": [],
       "warheads": [],
       "weapon": "d2k_dronelauncher",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -490,14 +490,14 @@
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "pricing": true,
+      "pricing": false,
       "range": "6400",
       "reloaddelay": "125",
       "slot": "Armament@charge",
       "versus_templates": [],
       "warheads": [],
       "weapon": "d2k_farasha_charge",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -505,7 +505,7 @@
       "burst": "50",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "50",
@@ -563,7 +563,7 @@
        }
       ],
       "weapon": "ixian_farasha",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyFlameWeapon",
@@ -575,7 +575,7 @@
       "burst": "50",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "50",
@@ -631,7 +631,7 @@
        }
       ],
       "weapon": "d2k_farasha_aa",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyFlameWeapon",
@@ -687,7 +687,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6034",
       "reloaddelay": "24",
@@ -741,7 +741,7 @@
        }
       ],
       "weapon": "IxRailgunDroneBullet",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^FlakWeapon",
        "^TankDestroyerCannon",
@@ -795,7 +795,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "5",
@@ -821,7 +821,7 @@
        }
       ],
       "weapon": "ResonanceDroneRepair",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -1023,7 +1023,7 @@
        }
       ],
       "weapon": "110mm_Gun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -1221,7 +1221,7 @@
        }
       ],
       "weapon": "HMG_turret",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1231,7 +1231,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7394",
       "reloaddelay": "33",
@@ -1292,7 +1292,7 @@
        }
       ],
       "weapon": "HMG_turret_upgrade",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -1495,7 +1495,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.9166666666666666,
+      "design_weapon_class": null,
       "minrange": "2135",
       "pricing": true,
       "range": "10684",
@@ -1555,7 +1555,7 @@
        }
       ],
       "weapon": "D2K_TowerMissile",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -1723,7 +1723,7 @@
        }
       ],
       "weapon": "d2kStormLasher",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon"
@@ -1853,7 +1853,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3800",
       "reloaddelay": "69",
@@ -1908,7 +1908,7 @@
        }
       ],
       "weapon": "RashinanGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -1920,7 +1920,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3800",
       "reloaddelay": "69",
@@ -2015,7 +2015,7 @@
        }
       ],
       "weapon": "RashinanGun_upgrade",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon",
@@ -2031,7 +2031,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "3800",
       "reloaddelay": "69",
@@ -2086,7 +2086,7 @@
        }
       ],
       "weapon": "RashinanGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -2099,7 +2099,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "3800",
       "reloaddelay": "69",
@@ -2194,7 +2194,7 @@
        }
       ],
       "weapon": "RashinanGun_upgrade",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon",
@@ -2282,7 +2282,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -2290,7 +2290,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "20",
@@ -2335,7 +2335,7 @@
        }
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -2379,7 +2379,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -2388,7 +2388,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "20",
@@ -2433,7 +2433,7 @@
        }
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -2527,7 +2527,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -2575,7 +2575,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -2626,7 +2626,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5818",
       "reloaddelay": "45",
@@ -2644,7 +2644,7 @@
        }
       ],
       "weapon": "D2K_ShockGunInf",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -2654,7 +2654,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5818",
       "reloaddelay": "45",
@@ -2672,7 +2672,7 @@
        }
       ],
       "weapon": "D2K_ShockGunInf",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -2766,7 +2766,7 @@
        }
       ],
       "weapon": "D2K_StormGunInf",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon"
@@ -2817,7 +2817,7 @@
        }
       ],
       "weapon": "D2K_StormGunInf",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon"
@@ -2906,7 +2906,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper1",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -2963,7 +2963,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon",
@@ -3011,7 +3011,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper1",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -3069,7 +3069,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon",
@@ -3636,7 +3636,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3333",
       "reloaddelay": "25",
@@ -3700,7 +3700,7 @@
        }
       ],
       "weapon": "d2k_basq",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3711,7 +3711,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "25",
@@ -3772,7 +3772,7 @@
        }
       ],
       "weapon": "d2k_basq_AA",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3820,7 +3820,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -3902,7 +3902,7 @@
        }
       ],
       "weapon": "DuelistTankCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^Grenade",
@@ -3916,7 +3916,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -3999,7 +3999,7 @@
        }
       ],
       "weapon": "HMG_Duelist",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LightMissile",
        "^Grenade",
@@ -4013,7 +4013,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -4130,7 +4130,7 @@
        }
       ],
       "weapon": "HMG_Duelist_upgrade",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^LaserWeapon",
        "^HeavyMissile",
@@ -4198,7 +4198,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1280",
       "pricing": true,
       "range": "6400",
@@ -4215,7 +4215,7 @@
        }
       ],
       "weapon": "D2K_Bazooka2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^D2KMissile"
       ]
@@ -4257,7 +4257,7 @@
        }
       ],
       "weapon": "RaiderGuns",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -4267,7 +4267,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "40",
@@ -4328,7 +4328,7 @@
        }
       ],
       "weapon": "RaiderGuns_upgrade",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -4430,7 +4430,7 @@
        }
       ],
       "weapon": "HeavyIxianCombatTankCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -4485,7 +4485,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8686",
       "reloaddelay": "80",
@@ -4538,7 +4538,7 @@
        }
       ],
       "weapon": "D2K_155mm3",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4643,7 +4643,7 @@
        }
       ],
       "weapon": "mtank_pri2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -4714,7 +4714,7 @@
        }
       ],
       "weapon": "IxianCharge_EMP",
-      "weapon_class_source": "template",
+      "weapon_class_source": "none",
       "weapon_types": []
      },
      {
@@ -4811,7 +4811,7 @@
       "burst": "3",
       "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "120",
@@ -4880,7 +4880,7 @@
        }
       ],
       "weapon": "D2K_155mm2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -4976,7 +4976,7 @@
        }
       ],
       "weapon": "IxianCombatTankCannon",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -5080,7 +5080,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.9642857142857143,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6183",
       "reloaddelay": "64",
@@ -5188,7 +5188,7 @@
        }
       ],
       "weapon": "MongooseRocket",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5293,7 +5293,7 @@
        }
       ],
       "weapon": "D2K_StormGunCymek",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon"
@@ -5304,7 +5304,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6787",
       "reloaddelay": "60",
@@ -5358,7 +5358,7 @@
        }
       ],
       "weapon": "D2K_RocketsCymek",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -5463,7 +5463,7 @@
        }
       ],
       "weapon": "D2K_ShockGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon"
@@ -5609,7 +5609,7 @@
        }
       ],
       "weapon": "D2K_ShockGun2",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon"
@@ -5659,7 +5659,7 @@
        }
       ],
       "weapon": "D2K_StormGun",
-      "weapon_class_source": "versus_shield",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon"
@@ -5720,7 +5720,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1280",
       "pricing": true,
       "range": "6400",
@@ -5737,7 +5737,7 @@
        }
       ],
       "weapon": "D2K_Bazooka2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "illegal_mix",
       "weapon_types": [
        "^D2KMissile"
       ]

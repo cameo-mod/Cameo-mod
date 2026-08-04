@@ -87,6 +87,7 @@ Raw data: [`latest/superweapon_audit.yaml`](latest/superweapon_audit.yaml).
 
 - `RA2MirageGun` — `Warhead@Effect:` → set to `CreateEffect` (`mods/cameo/weapons/redalert2.yaml`)
 - `TSSAPCMissiles` — `Warhead@GrenadeFriendlyFire:` → set to `SpreadDamage` (`mods/cameo/weapons/tiberiansun.yaml`)
+- `HighV` — `Warhead@Bullet_Medium_Percentage:` → set to `HealthPercentageDamage` (`mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml`)
 
 **Mechanism**: An empty `Key:` line parses to a null value. The merge's null-fallback (`overrideNodes.Value ?? existingNodes.Value`) only rescues the node when a same-key ancestor has a value; these two nodes had none. The engine constructs `WeaponInfo` for **every** top-level weapon node — including unused `^templates` — so a typeless warhead anywhere in the resolved ruleset is a boot crash, and `LoadWarheads` then calls `Game.CreateObject<IWarhead>(null + "Warhead")`, which resolves to the abstract `Warhead` class and NREs.
 
