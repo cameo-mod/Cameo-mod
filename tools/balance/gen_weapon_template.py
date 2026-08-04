@@ -142,7 +142,7 @@ def valid_targets(hits_air, ground_only=False):
     return "Ground" if ground_only else "Ground, Water"
 
 
-def family(name, order16, vt, levels, *, mode=None, damage=1000,
+def family(name, order16, vt, levels, *, mode=None, damage=2000,
            spreads=(400, 600, 800, 1000),
            falloffs=("100, 50, 33, 25, 20", "100, 50, 30, 18, 10",
                      "100, 50, 25, 10, 5", "100, 50, 20, 8, 3"),
@@ -158,7 +158,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=1000,
     allr = sorted(CANON16)
     for level in levels:
         li = list(LEVELS).index(level)
-        pct_damage = 1
+        pct_damage = damage // 2000              # 1% chip per 2000 main flat damage
         if mode == "flat":                       # Sonic: ignores armor on FLAT
             fv, fp = FLAT_VALUES[level], FLAT_PCT[level]
             main = [("Shield", fv)] + [(a, fv) for a in allr]
