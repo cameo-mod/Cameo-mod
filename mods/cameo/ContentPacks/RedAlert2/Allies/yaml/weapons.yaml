@@ -16,11 +16,11 @@ RA2Patriot:
 
 RA2PatriotThunderboltMissile:
 	Inherits: ^HeavyMissile
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^ArrowWeapon
-	Inherits: ^RA2LightMissile
+	Inherits@2: ^HeavyAAWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^ArrowWeapon
+	Inherits@6: ^RA2LightMissile
 	ReloadDelay: 30
 	Range: 14150
 	Burst: 2
@@ -92,11 +92,11 @@ RA2PatriotThunderboltMissile:
 
 HarrierMissiles:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^Grenade
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^Grenade
+	Inherits@3: ^HeavyChemicalWeapon
+	Inherits@4: ^HeavyAAWeapon
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^RA2MediumMissile
 	ReloadDelay: 104
 	Burst: 4
 	BurstDelays: 2
@@ -198,8 +198,8 @@ HarrierMissiles_elite:
 
 BlackEagleMissiles:
 	Inherits: ^Grenade
-	Inherits: ^HeavyBomb
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^RA2MediumMissile
 	ReloadDelay: 50
 	Burst: 4
 	BurstDelays: 2
@@ -256,14 +256,14 @@ BlackEagleMissiles_elite:
 
 BlackEagleThunderboltMissiles:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^HeavyMissile
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^ArrowWeapon
-	Inherits: ^RA2LightMissile
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^HeavyMissile
+	Inherits@5: ^HeavyAAWeapon
+	Inherits@6: ^MediumMissile
+	Inherits@7: ^FlakWeapon
+	Inherits@8: ^ArrowWeapon
+	Inherits@9: ^RA2LightMissile
 	ReloadDelay: 50
 	Burst: 4
 	BurstDelays: 2
@@ -499,8 +499,8 @@ PrismScatterE:
 
 RA2Comet:
 	Inherits: ^Grenade
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^RA2LaserWeapon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^RA2LaserWeapon
 	InvalidTargets: PrismTowerChargeable
 	ReloadDelay: 125
 	Range: 11111
@@ -561,11 +561,11 @@ RA2Comet_elite:
 
 RA2GrandCannonWeapon:
 	Inherits: ^HeavyCannon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^RA2Grenade
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^LightChemicalWeapon
+	Inherits@6: ^RA2Grenade
 	ReloadDelay: 200
 	Report: bgraatta.wav
 	Range: 11800
@@ -632,9 +632,9 @@ RA2MirageGun_elite:
 
 RA2HeavyMirageGun:
 	Inherits: ^RailgunWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^RA2TankDestroyerCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumChemicalWeapon
+	Inherits@4: ^RA2TankDestroyerCannon
 	ReloadDelay: 51
 	Range: 6112
 	Report: vmiratta.wav
@@ -770,7 +770,7 @@ RA2vulcan2:
 
 GuardianGIMG:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 20
 	Range: 4762
@@ -861,9 +861,9 @@ RA2MP5_elite:
 
 ra2roktgun:
 	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^SmallArms
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^RA2Chaingun
 	ReloadDelay: 14
 	Range: 5000
 	Report: irocatta.wav

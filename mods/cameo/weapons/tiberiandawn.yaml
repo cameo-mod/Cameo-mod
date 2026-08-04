@@ -46,6 +46,8 @@ M16:
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
+
+
 Grenade:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -131,7 +133,7 @@ ra1_allies_alliedsniper:
 
 ArtilleryShell:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
+	Inherits@2: ^ShrapnelWeapon
 	ReloadDelay: 112
 	Range: 12345
 	MinRange: 2470
@@ -205,9 +207,9 @@ FlametankExplode:
 
 227mm:
 	Inherits: ^FlakWeapon
-	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^Grenade
+	Inherits@3: ^HeavyMissile
+	Inherits@4: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 111
 	Range: 9920
@@ -319,3 +321,5 @@ ChemTibAtomic:
 		AddsResourceType: Tiberium
 		Size: 10,10
 		Delay: 100
+
+

@@ -249,6 +249,9 @@ ra2_soviets_sentrygun:
 		LocalOffset: 350,128,400, 350,-128,400
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 175,128,400, 175,-128,400
+		CasingTargetOffset: 0,728,0, 0,-728,0
 	WithMuzzleOverlay:
 	BodyOrientation:
 		QuantizedFacings: 16

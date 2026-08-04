@@ -239,9 +239,9 @@ PlasBullet:
 
 D2K_155mm:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^D2K_Cannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^D2K_Cannon
 	ReloadDelay: 74
 	Range: 10000
 	Report: MORTAR1.WAV
@@ -389,8 +389,8 @@ D2K_Rocket_Buggy:
 
 D2K_Rocket_Trooper:
 	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^MediumMissile
+	Inherits@3: ^D2KRocket
 	ReloadDelay: 64
 	Range: 6185
 	Projectile: Missile
@@ -762,9 +762,9 @@ facedancer_attack:
 
 LeechSpit:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^LightMissile
+	Inherits@3: ^SmallArms
+	Inherits@4: ^ArrowWeapon
 	ReloadDelay: 30
 	Range: 5230
 	Report: tx_leech_attack_confirm_1.wav
@@ -1286,7 +1286,7 @@ D2K_Personal_Shield_Impact:
 
 LMG:
 	Inherits: ^Chaingun
-	Inherits: ^SmallArms
+	Inherits@2: ^SmallArms
 	ReloadDelay: 20
 	Range: 4448
 	Report: gun11.aud
@@ -1301,7 +1301,7 @@ LMG:
 
 light_inf_lmg:
 	Inherits: ^Chaingun
-	Inherits: ^SmallArms
+	Inherits@2: ^SmallArms
 	ReloadDelay: 20
 	Range: 5475
 	Report: gun11.aud
@@ -1316,9 +1316,9 @@ light_inf_lmg:
 
 LMG_upgrade:
 	Inherits: ^HeavyCannon
-	Inherits: ^Chaingun
-	Inherits: ^SmallArms
-	Inherits: ^HeavyMachineGunProjectile
+	Inherits@2: ^Chaingun
+	Inherits@3: ^SmallArms
+	Inherits@4: ^HeavyMachineGunProjectile
 	ReloadDelay: 20
 	Range: 4448
 	Report: gun11.aud
@@ -1344,9 +1344,9 @@ LMG_upgrade:
 
 light_inf_lmg_upgrade:
 	Inherits: ^HeavyCannon
-	Inherits: ^Chaingun
-	Inherits: ^SmallArms
-	Inherits: ^HeavyMachineGunProjectile
+	Inherits@2: ^Chaingun
+	Inherits@3: ^SmallArms
+	Inherits@4: ^HeavyMachineGunProjectile
 	ReloadDelay: 20
 	Range: 4500
 	Report: gun11.aud
@@ -1513,7 +1513,7 @@ Fremen_RPG:
 	MinRange: 975
 HMG:
 	Inherits: ^Chaingun
-	Inherits: ^SmallArms
+	Inherits@2: ^SmallArms
 	ReloadDelay: 20
 	Range: 3072
 	Report: 20MMGUN1.WAV
@@ -1891,11 +1891,11 @@ PhoenixRocketShrapnel:
 
 ixian_airdrone:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyBomb
-	Inherits: ^D2KMissile
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^HeavyBomb
+	Inherits@6: ^D2KMissile
 	ReloadDelay: 132
 	Range: 6500
 	Burst: 4
@@ -2945,7 +2945,7 @@ oDebris4:
 
 PulseMissile:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^TeslaWeapon
+	Inherits@2: ^TeslaWeapon
 	ValidTargets: Ground, Air
 	Report: nukemisl.aud
 	Warhead@TeslaChargedWeapon: SpreadDamage
@@ -3500,3 +3500,4 @@ PulseMissile:
 		Radius: 0.35
 		Brightness: 1.3
 		Darkness: 0.85
+		MinimumExposure: 0.45

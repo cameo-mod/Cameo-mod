@@ -1,4 +1,4 @@
-﻿^AnyWeapon:
+^AnyWeapon:
 
 
 ###############################################
@@ -279,6 +279,8 @@
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
+
+
 
 ^FlakWeapon:
 	ValidTargets: Ground, Water, Air
@@ -8179,7 +8181,7 @@ Pistol:
 
 ^AtomicCore:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^TeslaWeapon
+	Inherits@2: ^TeslaWeapon
 	Inherits@nuke: ^Warhead_Nuclear_Super
 	ValidTargets: Ground, Air
 	Report: nukemisl.aud
@@ -8294,7 +8296,7 @@ Atomic:
 
 IonCannon:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^TeslaWeapon
+	Inherits@2: ^TeslaWeapon
 	ValidTargets: Ground, Water, Air
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		ValidTargets: Shielded
@@ -8957,12 +8959,12 @@ LeechDisinfect:
 
 TSTurretLaserFire:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^HeavyCannon
-	Inherits: ^LightFlameWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaser
+	Inherits@2: ^Chaingun
+	Inherits@3: ^HeavyCannon
+	Inherits@4: ^LightFlameWeapon
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^LaserWeapon
+	Inherits@7: ^TSLaser
 	Burst: 2
 	BurstDelays: 40
 	ReloadDelay: 20
@@ -9930,3 +9932,5 @@ SpiceExplosion:
 		Spread: 1
 		InvalidTargets: Shielded
 		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+
+

@@ -66,8 +66,8 @@ TSRaiderGrenade:
 
 TSProton:
 	Inherits: ^TSEnergyBlast
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^LaserWeapon
 	Range: 5414
 	Burst: 4
 	BurstDelays: 3
@@ -99,7 +99,7 @@ TSProton:
 
 TSTibBazooka:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^LightMissile
+	Inherits@2: ^LightMissile
 	Report: rketinf1.aud
 	ReloadDelay: 52
 	Range: 6694
@@ -118,7 +118,7 @@ TSTibBazooka:
 
 TSStankTusk:
 	Inherits: ^MediumCannon
-	Inherits: ^MediumMissile
+	Inherits@2: ^MediumMissile
 	Range: 6385
 	Burst: 2
 	BurstDelays: 2
@@ -145,8 +145,8 @@ TSStankTusk:
 
 TSStankTibTusk:
 	Inherits: ^MediumCannon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumMissile
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^MediumMissile
 	Range: 6385
 	Burst: 2
 	BurstDelays: 2
@@ -246,8 +246,8 @@ TSFireballLauncher:
 
 TSLasergun:
 	Inherits: ^SmallArms
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	Projectile: LaserZap
 		Width: 12
 		Duration: 8
@@ -266,11 +266,11 @@ TSLasergun:
 
 TSCommandoShotgun:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^MediumCannon
+	Inherits@5: ^SmallArms
+	Inherits@6: ^Chaingun
 	ReloadDelay: 20
 	Range: 4146
 	Report: DSDSHTGN.wav
@@ -306,7 +306,7 @@ TSCommandoShotgun:
 
 elitecadregun:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 52
 	Burst: 5
 	BurstDelays: 2
@@ -324,9 +324,9 @@ elitecadregun:
 
 laserelitecadregun:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^Chaingun
+	Inherits@3: ^LaserWeapon
+	Inherits@4: ^TSLaserEffect
 	Projectile: LaserZap
 		Width: 36
 		Duration: 8
@@ -485,8 +485,8 @@ TSHarpyAOEClaw:
 
 TSLaserHarpyClaw:
 	Inherits: ^Chaingun
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	Projectile: LaserZap
 		Width: 36
 		Duration: 8

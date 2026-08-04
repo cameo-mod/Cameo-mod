@@ -44,9 +44,9 @@ plymouthMachineGun:
 
 edenMobileLaser:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^LaserWeapon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 29
 	Range: 5280
@@ -113,11 +113,11 @@ edenMobileDefenceLaser:
 
 edenRailgun:
 	Inherits: ^RailgunWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^LightChemicalWeapon
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^MediumCannon
+	Inherits@6: ^HeavyCannon
 	ReloadDelay: 80
 	Range: 7000
 	MinRange: 1400
@@ -181,13 +181,13 @@ edenDefenceRailgun:
 	MinRange: 1435
 eden_EMP:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyMissile
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^HeavyCannon
+	Inherits@6: ^MediumCannon
+	Inherits@7: ^MediumMissile
+	Inherits@8: ^HeavyMissile
 	ReloadDelay: 45
 	Range: 5500
 	MinRange: 1100
@@ -438,7 +438,7 @@ plymouthDefenceRPG:
 	MinRange: 1435
 plymouthSticky:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^TankDestroyerCannon
 	ValidTargets: Infantry, Vehicle
 	InvalidTargets: StickyFoamed
 	ReloadDelay: 90
@@ -484,8 +484,8 @@ plymouthSticky:
 
 plymouthStickyTiger:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumCannon
-	Inherits: plymouthSticky
+	Inherits@2: ^MediumCannon
+	Inherits@3: plymouthSticky
 	ReloadDelay: 45
 	Warhead@LightChemicalWeapon: SpreadDamage
 		Damage: 4000
@@ -520,8 +520,8 @@ plymouthStickyTiger:
 
 plymouthStickyDefence:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyCannon
-	Inherits: plymouthStickyTiger
+	Inherits@2: ^HeavyCannon
+	Inherits@3: plymouthStickyTiger
 	ReloadDelay: 65
 	Range: 6656
 	Warhead@LightChemicalWeapon: SpreadDamage
@@ -628,13 +628,13 @@ PLYMineExplosive:
 #Also used by Eden
 plymouth_EMP:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyMissile
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^HeavyCannon
+	Inherits@6: ^MediumCannon
+	Inherits@7: ^MediumMissile
+	Inherits@8: ^HeavyMissile
 	ReloadDelay: 45
 	Range: 5500
 	MinRange: 1100

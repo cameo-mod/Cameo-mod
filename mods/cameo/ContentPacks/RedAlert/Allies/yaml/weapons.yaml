@@ -1,6 +1,6 @@
 CryoLightSniper:
 	Inherits: LightSniper
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 0
@@ -29,7 +29,7 @@ M60mg:
 
 RATurretGun:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^HeavyCannon
 	ReloadDelay: 40
 	Range: 7685
 	Report: turret1.aud
@@ -66,7 +66,7 @@ zsu_23:
 
 Hellfire:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyMissile
+	Inherits@2: ^HeavyMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 6540
@@ -90,16 +90,16 @@ Hellfire:
 
 HellfireCryo:
 	Inherits: Hellfire
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -16000
 		Range: 400
 
 ChainGunMH60:
 	Inherits: ^SmallArms
-	Inherits: ^Grenade
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^Grenade
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 6
 	Range: 3375
@@ -134,7 +134,7 @@ ChainGunMH60:
 
 AlliedTankDestroyerCannon:
 	Inherits: ^MediumCannon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^TankDestroyerCannon
 	ReloadDelay: 60
 	Range: 6819
 	Report: tank5.aud
@@ -151,7 +151,7 @@ AlliedTankDestroyerCannon:
 
 SheridanCannon:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^MediumCannon
 	ReloadDelay: 64
 	Range: 5023
 	Report: cannon2.aud
@@ -168,7 +168,7 @@ SheridanCannon:
 
 SheridanMissiles:
 	Inherits: ^MediumMissile
-	Inherits: ^LightMissile
+	Inherits@2: ^LightMissile
 	ReloadDelay: 64
 	Range: 5023
 	ValidTargets: Ground, Water, Air
@@ -187,14 +187,14 @@ SheridanMissiles:
 
 SheridanMissilesCryo:
 	Inherits: SheridanMissiles
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -48000
 		Range: 300
 
 SheridanVulcan:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 58
 	Range: 5023
 	Burst: 4
@@ -233,7 +233,7 @@ RapierBombs:
 
 RapierBombsCryo:
 	Inherits: RapierBombs
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Projectile: GravityBomb
 	Warhead@Effect: CreateEffect
 		Explosions: cryo_artillery
@@ -284,20 +284,20 @@ Aphid_AA:
 
 AphidCryo_AA:
 	Inherits: Aphid_AA
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -16000
 		Range: 400
 
 ReconRangerRecoillessGun:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^RailgunWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^Chaingun
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^RailgunWeapon
+	Inherits@7: ^MediumMissile
+	Inherits@8: ^D2KRocket
 	ReloadDelay: 64
 	Range: 4925
 	Report: missile6.aud
@@ -387,7 +387,7 @@ ReconRangerRecoillessGun:
 
 CryoReconRangerRecoillessGun:
 	Inherits: ReconRangerRecoillessGun
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 0
@@ -401,9 +401,9 @@ CryoReconRangerRecoillessGun:
 
 APTusk:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^Grenade
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
+	Inherits@2: ^Grenade
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^MediumMissile
 	ReloadDelay: 51
 	Burst: 4
 	BurstDelays: 3
@@ -439,17 +439,17 @@ APTusk:
 
 APTuskCryo:
 	Inherits: APTusk
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -16000
 		Range: 300
 
 ChronoTusk:
 	Inherits: ^Grenade
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^Chaingun
+	Inherits@4: ^HeavyMissile
+	Inherits@5: ^MediumMissile
 	ReloadDelay: 54
 	Burst: 4
 	BurstDelays: 3
@@ -492,14 +492,14 @@ ChronoTusk:
 
 ChronoTuskCryo:
 	Inherits: ChronoTusk
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -20000
 		Range: 400
 
 155mmCryo:
 	Inherits: 155mm
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Projectile: Bullet
 		ContrailStartWidth: 125
 		ContrailLength: 50
@@ -523,11 +523,11 @@ ChronoTuskCryo:
 
 25mm:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^LightFlameWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^MediumCannon
 	ReloadDelay: 37
 	Range: 4720
 	Report: cannon2.aud
@@ -660,9 +660,9 @@ Colt45:
 
 HeavyAATankCannonAG:
 	Inherits: ^LightMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^SmallArms
+	Inherits@4: ^Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 4746

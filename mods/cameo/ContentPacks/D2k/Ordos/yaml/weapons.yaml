@@ -22,10 +22,10 @@ HeavyOrdosCombatTankCannon:
 
 HeavyOrdosCombatTankRockets:
 	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^D2KRocket
 	ReloadDelay: 70
 	Range: 6000
 	Burst: 2
@@ -66,9 +66,9 @@ HeavyOrdosCombatTankRockets:
 
 120mm_td:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^D2K_Cannon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^D2K_Cannon
+	Inherits@4: ^TankDestroyerCannon
 	ReloadDelay: 72
 	Range: 8500
 	Report: d2ktd.wav
@@ -99,9 +99,9 @@ HeavyOrdosCombatTankRockets:
 
 120mm_cobra:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^D2K_Cannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^D2K_Cannon
 	ReloadDelay: 80
 	Range: 7640
 	Report: KobraAttack.wav
@@ -169,10 +169,10 @@ HeavyOrdosCombatTankRockets:
 
 eye_bomberguy:
 	Inherits: ^Grenade
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^HeavyBomb
 	ReloadDelay: 125
 	Range: 3905
 	Report: 15_UA05.wav, 15_UA00.wav, 15_UA01.wav
@@ -227,9 +227,9 @@ eye_bomberguy:
 
 D2K_155mm_turret:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^D2K_Cannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^D2K_Cannon
 	ReloadDelay: 74
 	Range: 10000
 	Report: MORTAR1.WAV
@@ -270,9 +270,9 @@ D2K_155mm_turret:
 
 Dune_SiegeMortar:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
-	Inherits: ^D2K_Cannon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^Grenade
+	Inherits@3: ^D2K_Cannon
+	Inherits@4: ^TankDestroyerCannon
 	ReloadDelay: 80
 	Range: 9920
 	MinRange: 1985
@@ -320,8 +320,8 @@ Dune_SiegeMortar:
 
 D2K_Rocket_Trooper_AGOnly:
 	Inherits: ^Grenade
-	Inherits: ^RailgunWeapon
-	Inherits: ^D2K_Cannon
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^D2K_Cannon
 	ReloadDelay: 50
 	Range: 6252
 	Report: ROCKET1.WAV
@@ -360,8 +360,8 @@ D2K_Rocket_Trooper_AGOnly:
 
 D2K_Rocket_Trooper_AA:
 	Inherits: ^LightMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^D2KRocket
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^D2KRocket
 	ReloadDelay: 75
 	Range: 9716
 	ValidTargets: Air
@@ -393,8 +393,8 @@ D2K_Rocket_Trooper_AA:
 
 D2K_APC_Rocket:
 	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^MediumMissile
+	Inherits@3: ^D2KRocket
 	ReloadDelay: 42
 	Range: 6500
 	Projectile: Missile
@@ -429,9 +429,9 @@ D2K_APC_Rocket_AA:
 
 DeviatorMissile:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumMissile
-	Inherits: ^D2KMissile
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^D2KMissile
 	ReloadDelay: 98
 	Range: 7070
 	Report: MISSLE1.WAV
@@ -490,8 +490,8 @@ DeviatorMissile:
 	MinRange: 1415
 DeviatorMissile_Artillery:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: DeviatorMissile
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: DeviatorMissile
 	ReloadDelay: 150
 	Burst: 3
 	BurstDelays: 25
@@ -586,8 +586,8 @@ LeechJump:
 
 d2k_grenade:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyCannon
 	ReloadDelay: 60
 	Range: 6000
 	MinRange: 1200
@@ -650,8 +650,8 @@ d2k_grenade:
 
 Laboratory_Bioball:
 	Inherits: d2k_grenade
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^MediumChemicalWeapon
 	ReloadDelay: 42
 	Range: 6500
 	MinRange: 1300
@@ -746,14 +746,14 @@ Laboratory_Bioball:
 
 facedancer_grenade:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^D2KMissile
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^HeavyCannon
+	Inherits@7: ^LightMissile
+	Inherits@8: ^MediumMissile
+	Inherits@9: ^D2KMissile
 	ReloadDelay: 90
 	Range: 7250
 	MinRange: 1450
@@ -940,7 +940,7 @@ HMGo:
 
 HMGo_upgrade:
 	Inherits: ^LaserWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	Inherits@2: HMGo
 	Report: LaserTankAttack.wav
 	-Projectile:
@@ -999,7 +999,7 @@ d2kChainGun_upgrade:
 
 HMGstealth:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 33
 	Burst: 4
 	BurstDelays: 2
@@ -1022,8 +1022,8 @@ HMGstealth:
 
 ordos_autogunturret:
 	Inherits: ^HeavyCannon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
 	ReloadDelay: 22
 	Burst: 4
 	BurstDelays: 2
@@ -1049,14 +1049,17 @@ ordos_autogunturret:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+	Warhead@Ricochet: CreateEffect
+		ImpactSounds: 2100richet1.wav, 2100richet2.wav
+		ValidTargets: Ground, Water, Air
 
 autogun_tank:
 	Inherits: ^D2KMissile
-	Inherits: ^HeavyCannon
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^HeavyAAWeapon
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^MediumMissile
+	Inherits@6: ^Chaingun
 	ReloadDelay: 24
 	Burst: 4
 	BurstDelays: 2
@@ -1175,9 +1178,9 @@ ordos_airmine:
 	MinRange: 410
 ordos_lasertank:
 	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^RailgunWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^MediumMissile
+	Inherits@3: ^RailgunWeapon
+	Inherits@4: ^LaserWeapon
 	ReloadDelay: 55
 	Range: 7275
 	Report: LaserTankAttack.wav

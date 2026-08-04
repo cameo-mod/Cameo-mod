@@ -3,7 +3,7 @@ IncendiaryM1Carbine:
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
 	Inherits: M1Carbine
-	Inherits: ^IncendiaryBulletProjectile
+	Inherits@2: ^IncendiaryBulletProjectile
 	ValidTargets: Ground, Water, Air
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
@@ -20,7 +20,7 @@ IncendiaryM1Carbine:
 
 ra1_soviets_ak47conscript_rifle:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 11
 	Range: 4822
 	Burst: 3
@@ -51,7 +51,7 @@ CommissarPistol:
 
 GrenadeRA:
 	Inherits: ^Grenade
-	Inherits: ^LightFlameWeapon
+	Inherits@2: ^LightFlameWeapon
 	ReloadDelay: 40
 	Range: 5791
 	Report: toss1.aud
@@ -93,8 +93,8 @@ GrenadeRAExplode:
 
 GrenadeThermobaric:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: GrenadeRA
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: GrenadeRA
 	Projectile: Bullet
 		ContrailStartColor: FF8844FF
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -151,9 +151,9 @@ GrenadeThermobaricExplode:
 
 FireRockets:
 	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^LightFlameWeapon
-	Inherits: ^LightMissile
+	Inherits@2: ^MediumMissile
+	Inherits@3: ^LightFlameWeapon
+	Inherits@4: ^LightMissile
 	ReloadDelay: 53
 	Range: 6036
 	Report: missile6.aud
@@ -230,13 +230,13 @@ FireRocketsExplode:
 
 FireRocketsThermobaric:
 	Inherits: ^HeavyFlameWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^LightFlameWeapon
-	Inherits: ^LightMissile
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^MediumMissile
+	Inherits@7: ^LightFlameWeapon
+	Inherits@8: ^LightMissile
 	ReloadDelay: 58
 	Range: 6692
 	Report: missile6.aud
@@ -412,7 +412,7 @@ FireballLauncher:
 
 FireballLauncherThermobaric:
 	Inherits: ^HeavyFlameWeapon
-	Inherits: ^MediumFlameWeapon
+	Inherits@2: ^MediumFlameWeapon
 	ReloadDelay: 30
 	Range: 6742
 	Report: firebl3.aud
@@ -488,7 +488,7 @@ FireballGunExplode:
 
 FireballGunThermobaric:
 	Inherits: ^HeavyFlameWeapon
-	Inherits: ^MediumFlameWeapon
+	Inherits@2: ^MediumFlameWeapon
 	ReloadDelay: 24
 	Range: 5004
 	Report: flamer2.aud
@@ -549,9 +549,9 @@ FireballGunThermobaricExplode:
 
 SiegeMortar:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^LightFlameWeapon
+	Inherits@2: ^Grenade
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^LightFlameWeapon
 	ReloadDelay: 88
 	Range: 10830
 	MinRange: 2165
@@ -620,8 +620,8 @@ SiegeMortarExplode:
 
 SiegeMortarThermobaric:
 	Inherits: ^HeavyCannon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: SiegeMortar
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: SiegeMortar
 	Projectile: Bullet
 		TrailImage: smokey
 		TrailDelay: 1
@@ -967,8 +967,8 @@ TeslaZapArcTeslaFragment2_EMP:
 
 HeatRayBeam1:
 	Inherits: ^LaserWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^LightFlameWeapon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^LightFlameWeapon
 	Range: 8212
 	ReloadDelay: 8
 	Report: idesat1a.wav
@@ -1047,7 +1047,7 @@ HeatRayBeam4:
 
 v1rockets:
 	Inherits: ^MediumMissile
-	Inherits: ^Grenade
+	Inherits@2: ^Grenade
 	ReloadDelay: 115
 	Burst: 4
 	BurstDelays: 5
@@ -1077,8 +1077,8 @@ v1rockets:
 
 v1rocketsThermobaric:
 	Inherits: ^MediumMissile
-	Inherits: ^Grenade
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^Grenade
+	Inherits@3: ^HeavyFlameWeapon
 	ReloadDelay: 115
 	Burst: 4
 	BurstDelays: 5
@@ -1117,7 +1117,7 @@ v1rocketsThermobaric:
 
 GradRockets:
 	Inherits: ^HeavyMissile
-	Inherits: ^ShrapnelWeapon
+	Inherits@2: ^ShrapnelWeapon
 	ReloadDelay: 115
 	Burst: 8
 	BurstDelays: 5
@@ -1147,8 +1147,8 @@ GradRockets:
 
 GradHeavyRockets:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyBomb
-	Inherits: GradRockets
+	Inherits@2: ^HeavyBomb
+	Inherits@3: GradRockets
 	Projectile: Bullet
 		TrailImage: black_smokey
 		ContrailStartWidth: 100
@@ -1180,7 +1180,7 @@ GradHeavyRockets:
 
 SCUD:
 	Inherits: ^HeavyMissile
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^HeavyFlameWeapon
 	ReloadDelay: 120
 	Range: 14110
 	MinRange: 2822
@@ -1234,7 +1234,7 @@ SCUDThermobaric:
 
 SCUDTesla:
 	Inherits: ^TeslaWeapon
-	Inherits: SCUD
+	Inherits@2: SCUD
 	Projectile: Bullet
 		TrailImage: litning
 		ContrailStartWidth: 100
@@ -1274,20 +1274,20 @@ SCUDTesla:
 
 SCUDNUKE:
 	Inherits: ^HeavyMissile
-	Inherits: ^MediumMissile
-	Inherits: ^LightMissile
-	Inherits: ^HeavyBomb
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^LightFlameWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^FlakWeapon
-	Inherits: ^NuclearWarhead
+	Inherits@2: ^MediumMissile
+	Inherits@3: ^LightMissile
+	Inherits@4: ^HeavyBomb
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^Grenade
+	Inherits@7: ^HeavyChemicalWeapon
+	Inherits@8: ^MediumChemicalWeapon
+	Inherits@9: ^LightChemicalWeapon
+	Inherits@10: ^HeavyFlameWeapon
+	Inherits@11: ^MediumFlameWeapon
+	Inherits@12: ^LightFlameWeapon
+	Inherits@13: ^TankDestroyerCannon
+	Inherits@14: ^FlakWeapon
+	Inherits@15: ^NuclearWarhead
 	ReloadDelay: 158
 	Range: 12550
 	MinRange: 2510
@@ -1393,7 +1393,7 @@ SCUDNUKEThermobaric:
 
 FLAK-23-AG:
 	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^FlakWeapon
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Burst: 2
@@ -1428,7 +1428,7 @@ FLAK-23-AA:
 
 BTRMachineGun:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 20
 	Burst: 4
@@ -1459,7 +1459,7 @@ BTRMachineGun_AA:
 
 BTRTeslaMachineGun:
 	Inherits: ^LightMissile
-	Inherits: ^TeslaWeapon
+	Inherits@2: ^TeslaWeapon
 	ValidTargets: Ground, Water
 	ReloadDelay: 20
 	Burst: 4
@@ -1548,8 +1548,8 @@ ChainGun:
 
 IncendiaryChainGun:
 	Inherits: ^Chaingun
-	Inherits: ^LightFlameWeapon
-	Inherits: ^IncendiaryBulletProjectile
+	Inherits@2: ^LightFlameWeapon
+	Inherits@3: ^IncendiaryBulletProjectile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 8
 	Range: 5528
@@ -1572,9 +1572,9 @@ IncendiaryChainGun:
 
 HindMissiles:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumMissile
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyCannon
+	Inherits@4: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5528
@@ -1617,10 +1617,10 @@ HindMissiles:
 
 HindMissilesThermobaric:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumMissile
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^HeavyCannon
+	Inherits@5: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5528
@@ -1688,9 +1688,9 @@ HindMissilesThermobaric:
 
 HindMissilesNuclear:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^NuclearWarhead
-	Inherits: ^MediumMissile
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^NuclearWarhead
+	Inherits@4: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5528
@@ -1744,10 +1744,10 @@ HindMissilesNuclear:
 
 KamovMissilesTesla:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^MediumMissile
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^TeslaWeapon
+	Inherits@5: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5528
@@ -1838,7 +1838,7 @@ KamovMissilesTesla:
 
 KamovTesla:
 	Inherits: ^LightMissile
-	Inherits: ^TeslaWeapon
+	Inherits@2: ^TeslaWeapon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 32
 	Range: 5528
@@ -1950,8 +1950,8 @@ ArmoredYakChainGun:
 
 IncendiaryYakChainGun:
 	Inherits: ^Chaingun
-	Inherits: ^LightFlameWeapon
-	Inherits: ^IncendiaryBulletProjectile
+	Inherits@2: ^LightFlameWeapon
+	Inherits@3: ^IncendiaryBulletProjectile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 100
 	Range: 7000
@@ -1984,7 +1984,7 @@ IncendiaryArmoredYakChainGun:
 
 YakTeslaGun:
 	Inherits: ^LightMissile
-	Inherits: ^TeslaWeapon
+	Inherits@2: ^TeslaWeapon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 100
 	Range: 7000
@@ -2074,9 +2074,9 @@ YakTeslaArcFragment2:
 
 YakNapalm:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^HeavyFlameWeapon
 	ReloadDelay: 110
 	Range: 1840
 	Burst: 4
@@ -2119,9 +2119,9 @@ YakNapalm:
 
 YakTeslaBomb:
 	Inherits: ^TeslaWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^HeavyChemicalWeapon
+	Inherits@4: ^HeavyFlameWeapon
 	ReloadDelay: 125
 	Range: 1250
 	ValidTargets: Ground, Water
@@ -2181,9 +2181,9 @@ YakTeslaBomb:
 
 YakNuclearBomb:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^NuclearWarhead
+	Inherits@2: ^HeavyChemicalWeapon
+	Inherits@3: ^HeavyFlameWeapon
+	Inherits@4: ^NuclearWarhead
 	ReloadDelay: 125
 	Range: 1250
 	ValidTargets: Ground, Water
@@ -2220,9 +2220,11 @@ YakNuclearBomb:
 		Damage: 25
 	Warhead@NuclearWarhead: SpreadDamage
 		ValidTargets: Ground, Water
+		AffectsParent: false
 		Damage: 50000
 	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
+		AffectsParent: false
 		Damage: 25
 	Warhead@Effect: CreateEffect
 		Explosions: nuke_small
@@ -2257,7 +2259,7 @@ Maverick:
 
 TeslaMaverick:
 	Inherits: ^TeslaWeapon
-	Inherits: Maverick
+	Inherits@2: Maverick
 	Projectile: Missile
 		Acceleration: 5
 		MinimumLaunchAngle: 128
@@ -2348,9 +2350,9 @@ TeslaMaverickFragment2:
 
 ThermobaricMaverick:
 	Inherits: ^NuclearWarhead
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumFlameWeapon
-	Inherits: Maverick
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: Maverick
 	Projectile: Missile
 		Acceleration: 5
 		MinimumLaunchAngle: 128
@@ -2365,9 +2367,11 @@ ThermobaricMaverick:
 		TrailDelay: 1
 	Warhead@NuclearWarhead: SpreadDamage
 		ValidTargets: Ground, Water, Air
+		AffectsParent: false
 		Damage: 12000
 	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
+		AffectsParent: false
 		Damage: 6
 	Warhead@MediumFlameWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -2398,7 +2402,7 @@ ThermobaricMaverick:
 
 NuclearMaverick:
 	Inherits: ^NuclearWarhead
-	Inherits: ^HeavyMissile
+	Inherits@2: ^HeavyMissile
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 4
@@ -2421,9 +2425,11 @@ NuclearMaverick:
 		TrailDelay: 1
 	Warhead@NuclearWarhead: SpreadDamage
 		ValidTargets: Ground, Water, Air
+		AffectsParent: false
 		Damage: 20000
 	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
+		AffectsParent: false
 		Damage: 10
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -2439,8 +2445,8 @@ NuclearMaverick:
 
 ThermobaricNuclearMaverick:
 	Inherits: ^HeavyFlameWeapon
-	Inherits: ^NuclearWarhead
-	Inherits: ^HeavyMissile
+	Inherits@2: ^NuclearWarhead
+	Inherits@3: ^HeavyMissile
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 4
@@ -2473,9 +2479,11 @@ ThermobaricNuclearMaverick:
 		Damage: 7
 	Warhead@NuclearWarhead: SpreadDamage
 		ValidTargets: Ground, Water, Air
+		AffectsParent: false
 		Damage: 14000
 	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
+		AffectsParent: false
 		Damage: 7
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -2538,7 +2546,7 @@ ThermobaricNuclearMaverick:
 
 HammerTankCannon:
 	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^MediumCannon
 	ReloadDelay: 85
 	Range: 6825
 	Burst: 2
@@ -2559,8 +2567,8 @@ HammerTankCannon:
 
 HammerTankCannonThermobaric:
 	Inherits: ^HeavyBomb
-	Inherits: ^MediumFlameWeapon
-	Inherits: HammerTankCannon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: HammerTankCannon
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 4000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
@@ -2588,8 +2596,8 @@ HammerTankCannonThermobaric:
 
 ShtoraLaser:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^LaserWeapon
 	ReloadDelay: 100
 	Range: 6825
 	Report: vpalwe2d.aud
@@ -2636,7 +2644,7 @@ ShtoraLaser:
 
 KotinCannon:
 	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^MediumCannon
 	ReloadDelay: 96
 	Range: 6427
 	Burst: 2
@@ -2664,8 +2672,8 @@ KotinCannon:
 
 KotinCannonThermobaric:
 	Inherits: ^HeavyBomb
-	Inherits: ^MediumFlameWeapon
-	Inherits: KotinCannon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: KotinCannon
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 4000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
@@ -2703,8 +2711,8 @@ ra120mmTargetingComputer:
 
 ra120mmThermobaric:
 	Inherits: ^HeavyFlameWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^HeavyCannon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^HeavyCannon
 	ValidTargets: Ground, Water, Vehicle, Structure
 	ReloadDelay: 95
 	Burst: 2
@@ -2739,13 +2747,13 @@ MammothTuskTargetingComputer:
 
 MammothTuskThermobaric:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^Grenade
-	Inherits: ^FlakWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyMissile
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^HeavyFlameWeapon
+	Inherits@4: ^Grenade
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^ShrapnelWeapon
+	Inherits@7: ^MediumMissile
+	Inherits@8: ^HeavyMissile
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 91
 	Burst: 2
@@ -2845,9 +2853,9 @@ MammothTuskThermobaricTargetingComputer:
 
 MammothTuskTesla:
 	Inherits: ^Grenade
-	Inherits: ^LightFlameWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^HeavyMissile
+	Inherits@2: ^LightFlameWeapon
+	Inherits@3: ^TeslaWeapon
+	Inherits@4: ^HeavyMissile
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 91
 	Burst: 2
@@ -2998,8 +3006,8 @@ MammothTuskTeslaTargetingComputer:
 
 ra120mm2:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^HeavyCannon
 	ValidTargets: Ground, Water, Vehicle, Structure
 	ReloadDelay: 125
 	Burst: 2
@@ -3036,8 +3044,8 @@ ra120mm2TargetingComputer:
 
 ra120mm2Thermobaric:
 	Inherits: ^HeavyFlameWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^HeavyCannon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^HeavyCannon
 	ValidTargets: Ground, Water, Vehicle, Structure
 	ReloadDelay: 125
 	Burst: 2
@@ -3069,8 +3077,8 @@ ra120mm2ThermobaricTargetingComputer:
 
 MammothTusk2:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyMissile
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyMissile
 	Inherits@glow: ^ImpactGlow
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 125
@@ -3116,8 +3124,8 @@ MammothTusk2TargetingComputer:
 
 MammothTusk2Thermobaric:
 	Inherits: ^HeavyFlameWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^HeavyMissile
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^HeavyMissile
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 125
 	Burst: 2
@@ -3176,7 +3184,7 @@ MammothTusk2ThermobaricTargetingComputer:
 
 MonsterTank120mm:
 	Inherits: ^NuclearWarhead
-	Inherits: ^HeavyCannon
+	Inherits@2: ^HeavyCannon
 	ReloadDelay: 103
 	Burst: 2
 	BurstDelays: 32
@@ -3210,7 +3218,7 @@ MonsterTank120mmThermobaric:
 
 MonsterTankTusk:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyMissile
+	Inherits@2: ^HeavyMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 125
 	Burst: 4
@@ -3231,9 +3239,9 @@ MonsterTankTusk:
 
 MonsterTankTuskTesla:
 	Inherits: ^Grenade
-	Inherits: ^LightFlameWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^HeavyMissile
+	Inherits@2: ^LightFlameWeapon
+	Inherits@3: ^TeslaWeapon
+	Inherits@4: ^HeavyMissile
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 125
 	Burst: 4
@@ -3312,13 +3320,13 @@ MonsterTankTuskTesla:
 
 MonsterTankTuskThermobaric:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^Grenade
-	Inherits: ^FlakWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyMissile
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^HeavyFlameWeapon
+	Inherits@4: ^Grenade
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^ShrapnelWeapon
+	Inherits@7: ^MediumMissile
+	Inherits@8: ^HeavyMissile
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 125
 	Burst: 4
@@ -3414,8 +3422,8 @@ MonsterTankTuskThermobaric:
 
 VolkovMagneticWeapon:
 	Inherits: ^HeavyCannon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^Grenade
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^Grenade
 	ValidTargets: Ground, Water
 	ReloadDelay: 15
 	Range: 5400
@@ -3456,7 +3464,7 @@ VolkovMagneticWeapon:
 
 VolkovMagneticWeaponTesla:
 	Inherits: VolkovMagneticWeapon
-	Inherits: ^TeslaWeapon
+	Inherits@2: ^TeslaWeapon
 	ReloadDelay: 30
 	Range: 5660
 	Burst: 2
@@ -3641,7 +3649,7 @@ VolkovMagneticWeaponIncendiary:
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
 	Inherits: VolkovMagneticWeapon
-	Inherits: ^IncendiaryBulletProjectile
+	Inherits@2: ^IncendiaryBulletProjectile
 	Warhead@Flame_Medium:
 		Damage: 10000
 	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
@@ -3649,8 +3657,8 @@ VolkovMagneticWeaponIncendiary:
 
 VolkovMagneticWeaponIncendiaryTesla:
 	Inherits: VolkovMagneticWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^TeslaWeapon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^TeslaWeapon
 	ReloadDelay: 30
 	Range: 5660
 	Burst: 2
@@ -3804,8 +3812,8 @@ VolkovMagneticWeaponIncendiaryTeslaFragment2:
 
 VolkovMagneticWeaponIncendiaryNuclearShells:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^NuclearWarhead
-	Inherits: VolkovMagneticWeapon
+	Inherits@2: ^NuclearWarhead
+	Inherits@3: VolkovMagneticWeapon
 	ReloadDelay: 40
 	Burst: 1
 	MinRange: 1080
@@ -3865,9 +3873,9 @@ VolkovMagneticWeaponIncendiaryNuclearShells:
 
 ParaBombNuke:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^NuclearWarhead
+	Inherits@2: ^HeavyChemicalWeapon
+	Inherits@3: ^HeavyFlameWeapon
+	Inherits@4: ^NuclearWarhead
 	ReloadDelay: 50
 	Range: 750
 	Report: chute1.aud
@@ -3895,8 +3903,10 @@ ParaBombNuke:
 	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 50
 	Warhead@NuclearWarhead: SpreadDamage
+		AffectsParent: false
 		Damage: 100000
 	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
+		AffectsParent: false
 		Damage: 50
 	Warhead@Effect: CreateEffect
 		ImpactSounds: kaboom22.aud
@@ -3915,9 +3925,9 @@ CyberneticDogJaw:
 
 Nike:
 	Inherits: ^FlakWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumMissile
-	Inherits: ^LightMissile
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^LightMissile
 	ReloadDelay: 27
 	Range: 12790
 	Report: missile1.aud
@@ -3974,8 +3984,8 @@ RAGatlingTankCannon_AA:
 
 IncendiaryRAGatlingTankCannon:
 	Inherits: ^Chaingun
-	Inherits: ^LightFlameWeapon
-	Inherits: ^IncendiaryBulletProjectile
+	Inherits@2: ^LightFlameWeapon
+	Inherits@3: ^IncendiaryBulletProjectile
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 5000
@@ -4135,7 +4145,7 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
 	Inherits: ra1_soviets_rifleinfantry_carbine
-	Inherits: ^IncendiaryBulletProjectile
+	Inherits@2: ^IncendiaryBulletProjectile
 	ValidTargets: Ground, Water
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water

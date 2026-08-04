@@ -328,7 +328,7 @@ latinsyndicate_spycenter:
 
 latinsyndicate_defensebureau:
 	Inherits: ^RA2Building
-	Inherits: ^BasicDefense
+	Inherits@2: ^BasicDefense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
 	Inherits@cashtricklerlimit: ^CashTricklerLimited
@@ -584,12 +584,18 @@ latinsyndicate_latinsentrygun:
 		LocalOffset: 500,128,100, 500,-128,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 250,128,100, 250,-128,100
+		CasingTargetOffset: 0,728,0, 0,-728,0
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
 		Weapon: LatinSentryMG_elite
 		LocalOffset: 500,128,100, 500,-128,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 250,128,100, 250,-128,100
+		CasingTargetOffset: 0,728,0, 0,-728,0
 		RequiresCondition: rank-elite
 	WithMuzzleOverlay:
 	BodyOrientation:

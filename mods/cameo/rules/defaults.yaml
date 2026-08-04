@@ -872,7 +872,7 @@
 
 ^GlobalBuffs:
 	Inherits: ^GPSSatelliteSupport
-	Inherits: ^WayOfTheDragon
+	Inherits@2: ^WayOfTheDragon
 	# FirepowerMultiplier@GlobalBuffs:
 	# 	Modifier: 85
 	FirepowerMultiplier@GlobalBuffs:
@@ -4691,7 +4691,7 @@
 
 ^Defense:
 	Inherits: ^BaseBuilding
-	Inherits: ^BasicDefense
+	Inherits@2: ^BasicDefense
 	-GivesBuildableArea:
 	-CommandBarBlacklist:
 	-AcceptsDeliveredCash:

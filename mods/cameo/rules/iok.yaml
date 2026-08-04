@@ -710,7 +710,7 @@ IOKNUK2:
 
 iokblackmarket:
 	Inherits: OILB.Building
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@camo: ^BuildingCamoLevel2
 	Inherits@fort: ^GLAFortifiable

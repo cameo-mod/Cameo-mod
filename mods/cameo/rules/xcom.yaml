@@ -586,7 +586,7 @@ AutoSniperUpgrade:
 
 XCOMHQ:
 	Inherits: ^BaseBuilding
-	Inherits: ^BasicDefense
+	Inherits@2: ^BasicDefense
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@selection: ^AdvancedDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAll

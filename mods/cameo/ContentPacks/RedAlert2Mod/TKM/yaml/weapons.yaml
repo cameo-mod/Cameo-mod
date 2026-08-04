@@ -51,7 +51,7 @@ tkm_juggernaut:
 		Damage: 2
 tkmjuggap:
 	Inherits: ^RA2Grenade
-	Inherits: ^SmallArms
+	Inherits@2: ^SmallArms
 	ReloadDelay: 9
 	Burst: 3
 	BurstDelays: 6
@@ -68,7 +68,7 @@ tkmjuggap:
 		Damage: 3
 tkmbunkmg:
 	Inherits: ^RA2Chaingun
-	Inherits: ^SmallArms
+	Inherits@2: ^SmallArms
 	ReloadDelay: 41
 	Range: 7496
 	Burst: 4
@@ -84,7 +84,7 @@ tkmbunkmg:
 		Damage: 1
 HueyGun:
 	Inherits: ^FlakWeapon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 7
 	Range: 4783
 	Report: mgun11.aud
@@ -135,7 +135,7 @@ tkmtwinrocketstechnicaltank:
 	Range: 5243
 tkmfirerockets:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^LightMissile
+	Inherits@2: ^LightMissile
 	ReloadDelay: 64
 	Range: 6214
 	Report: bazook1.aud
@@ -191,7 +191,7 @@ tkm_trooper_ak:
 		Damage: 1
 tkmakap:
 	Inherits: ^RA2Grenade
-	Inherits: ^SmallArms
+	Inherits@2: ^SmallArms
 	ReloadDelay: 17
 	Range: 5621
 	Report: mgun2.aud
@@ -276,7 +276,7 @@ ThermoF:
 		Amount: 1000
 tkmm203:
 	Inherits: ^Grenade
-	Inherits: ^LightFlameWeapon
+	Inherits@2: ^LightFlameWeapon
 	ReloadDelay: 100
 	Range: 5621
 	Report: m203.wav
@@ -353,7 +353,7 @@ tkmcryorockets:
 		ValidTargets: Ground, Water, Air
 TKMQuadCannonAG:
 	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
+	Inherits@2: ^FlakWeapon
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 5253
 	ReloadDelay: 10
@@ -384,7 +384,7 @@ TKMQuadCannonAA:
 	Range: 7880
 tkmturretcannon:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^MediumCannon
 	ReloadDelay: 28
 	Range: 8683
 	Report: cannon1.aud
@@ -450,7 +450,7 @@ tkm2a46gun:
 		ImpactSounds: gexpwasa.wav
 TKMZazaCannonAG:
 	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
+	Inherits@2: ^FlakWeapon
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 5284
 	ReloadDelay: 8
@@ -481,7 +481,7 @@ TKMZazaCannonAA:
 	Range: 7926
 TKMAATurretCannon:
 	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
+	Inherits@2: ^FlakWeapon
 	ReloadDelay: 5
 	Range: 11604
 	ValidTargets: Air
@@ -563,7 +563,7 @@ tkmstrykermg:
 		Damage: 1
 t30shell:
 	Inherits: ^HeavyBomb
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	ReloadDelay: 80
 	Range: 22000
 	Report: t30cannon.wav
@@ -606,9 +606,9 @@ t30shell:
 	# 	AimTargetStances: Enemy, Neutral
 HueyCryoMissiles:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumMissile
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyCannon
+	Inherits@4: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5528
@@ -665,9 +665,9 @@ HueyCryoMissiles:
 		ImpactActors: false
 HueyTwinMissiles:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumMissile
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyCannon
+	Inherits@4: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Burst: 2
@@ -711,7 +711,7 @@ HueyTwinMissiles:
 		ImpactActors: false
 sandmarinemortar:
 	Inherits: ^HeavyBomb
-	Inherits: ^MediumFlameWeapon
+	Inherits@2: ^MediumFlameWeapon
 	ReloadDelay: 135
 	Range: 6464
 	Report: t30cannon.wav
@@ -748,7 +748,7 @@ sandmarinemortar:
 		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 bigshieemortar:
 	Inherits: ^HeavyBomb
-	Inherits: ^MediumFlameWeapon
+	Inherits@2: ^MediumFlameWeapon
 	ReloadDelay: 86
 	Range: 7238
 	Report: t30cannon.wav
@@ -845,7 +845,7 @@ tkmkatyushalalauncherrockets:
 		ImpactSounds: gexpwasa.wav
 tkmkatyushalalauncherrocketscryo:
 	Inherits: ^CryoMissileProjectile
-	Inherits: tkmkatyushalalauncherrockets
+	Inherits@2: tkmkatyushalalauncherrockets
 	Report: vintatta.wav
 	Range: 14000
 	Warhead@Effect: CreateEffect
@@ -858,8 +858,8 @@ tkmkatyushalalauncherrocketscryo:
 		ImpactSounds: gexpwasa.wav
 tkmkatyushalalauncherrocketsfire:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^LightMissile
-	Inherits: tkmkatyushalalauncherrockets
+	Inherits@2: ^LightMissile
+	Inherits@3: tkmkatyushalalauncherrockets
 	Report: vintatta.wav
 	Range: 14000
 	Projectile: Bullet
@@ -901,7 +901,7 @@ tkmkatyushalalauncherrocketstwin:
 	Burst: 16
 SandmarineTusk:
 	Inherits: ^HeavyMissile
-	Inherits: ^ShrapnelWeapon
+	Inherits@2: ^ShrapnelWeapon
 	ReloadDelay: 129
 	Burst: 3
 	BurstDelays: 3
@@ -922,7 +922,7 @@ SandmarineTusk:
 		Damage: 20
 BigShieeTusk:
 	Inherits: ^HeavyMissile
-	Inherits: ^ShrapnelWeapon
+	Inherits@2: ^ShrapnelWeapon
 	ReloadDelay: 83
 	Burst: 2
 	BurstDelays: 3
@@ -987,11 +987,11 @@ SandmarineTuskTwin:
 		Damage: 2
 SandmarineTuskCryo:
 	Inherits: SandmarineTusk
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 SandmarineTuskFire:
 	Inherits: SandmarineTusk
-	Inherits: ^LightFlameWeapon
-	Inherits: ^LightMissile
+	Inherits@2: ^LightFlameWeapon
+	Inherits@3: ^LightMissile
 	Projectile: Missile
 		TrailImage: fb2
 		TrailInterval: 1
@@ -1010,7 +1010,7 @@ SandmarineTuskFire:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 ViperMissiles:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^RA2MediumMissile
 	ReloadDelay: 50
 	Burst: 4
 	BurstDelays: 2
@@ -1048,11 +1048,11 @@ ViperMissilesTwin:
 	Burst: 8
 ViperMissilesCryo:
 	Inherits: ViperMissiles
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 ViperMissilesFire:
 	Inherits: ViperMissiles
-	Inherits: ^LightFlameWeapon
-	Inherits: ^LightMissile
+	Inherits@2: ^LightFlameWeapon
+	Inherits@3: ^LightMissile
 	Projectile: Missile
 		TrailImage: fb2
 		TrailInterval: 1
@@ -1088,10 +1088,10 @@ DronePodTruckLaser:
 		Damage: 1
 VonSniper:
 	Inherits: ^MediumMissile
-	Inherits: ^HeavyCannon
-	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^SmallArms
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^Chaingun
 	ReloadDelay: 25
 	Range: 7879
 	Report: TGhFir00.aud
@@ -1172,7 +1172,7 @@ VonSniperAP:
 		ImpactSounds: kaboom15.aud
 VonSniperLockdown:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: VonSniperAP
+	Inherits@2: VonSniperAP
 	ValidTargets: Vehicle, Air, Shielded
 	InvalidTargets: lockdowned
 	ReloadDelay: 100
@@ -1266,7 +1266,7 @@ tkmm16ap:
 
 tkm_trooper_gp25:
 	Inherits: ^Grenade
-	Inherits: ^LightFlameWeapon
+	Inherits@2: ^LightFlameWeapon
 	ReloadDelay: 80
 	Range: 5500
 	Report: m203.wav
@@ -1293,7 +1293,7 @@ tkm_trooper_gp25:
 
 tkmstrykerfirerockets:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumMissile
+	Inherits@2: ^MediumMissile
 	ReloadDelay: 60
 	Range: 7880
 	Report: bazook1.aud
@@ -1376,7 +1376,7 @@ tkmabramscannon:
 
 tkmquadcannonmg:
 	Inherits: ^SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 5000
 	ReloadDelay: 6
@@ -1405,9 +1405,9 @@ tkmquadcannonmg:
 
 HeavyAATankCannontkm:
 	Inherits: ^LightMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^SmallArms
+	Inherits@4: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 10
 	Range: 4746
@@ -1440,9 +1440,9 @@ HeavyAATankCannontkm:
 
 tkmheavyaaturret:
 	Inherits: ^LightMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^SmallArms
+	Inherits@4: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 10
 	Range: 10588
@@ -1497,7 +1497,7 @@ tkmrh120gun:
 
 tkmtrenchcannon:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^HeavyCannon
 	ReloadDelay: 75
 	Range: 9237
 	Report: cannon1.aud
@@ -1533,10 +1533,10 @@ TKMPDLaser:
 
 HueyFireMissiles:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumMissile
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyCannon
+	Inherits@4: ^LightFlameWeapon
+	Inherits@5: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5528
@@ -1626,7 +1626,7 @@ TKMDroneExplosion:
 
 FlakbusAA:
 	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
+	Inherits@2: ^FlakWeapon
 	ReloadDelay: 32
 	Range: 10929
 	Report: nax_aa2.wav

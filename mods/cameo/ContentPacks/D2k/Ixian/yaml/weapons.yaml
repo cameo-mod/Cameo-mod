@@ -1,7 +1,7 @@
 110mm_Gun:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^HeavyCannon
-	Inherits: ^D2K_Cannon
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^D2K_Cannon
 	ReloadDelay: 50
 	Range: 7979
 	Report: TURRET1.WAV
@@ -22,8 +22,8 @@
 
 IxianCombatTankCannon:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^HeavyCannon
-	Inherits: ^D2K_Cannon
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^D2K_Cannon
 	Range: 5555
 	ReloadDelay: 35
 	Projectile: Bullet
@@ -43,8 +43,8 @@ IxianCombatTankCannon:
 
 HeavyIxianCombatTankCannon:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^HeavyCannon
-	Inherits: ^D2K_Cannon
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^D2K_Cannon
 	Range: 6000
 	ReloadDelay: 40
 	Projectile: Bullet
@@ -64,11 +64,11 @@ HeavyIxianCombatTankCannon:
 
 DuelistTankCannon:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^Grenade
-	Inherits: ^HeavyBomb
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^HeavyCannon
-	Inherits: ^D2K_Cannon
+	Inherits@2: ^Grenade
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^HeavyCannon
+	Inherits@6: ^D2K_Cannon
 	Range: 7000
 	MinRange: 1400
 	ReloadDelay: 140
@@ -121,9 +121,9 @@ DuelistTankCannon:
 
 D2K_155mm2:
 	Inherits: ^Grenade
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^HeavyBomb
 	Range: 12000
 	Burst: 3
 	BurstDelays: 12
@@ -177,8 +177,8 @@ D2K_155mm2:
 
 D2K_155mm3:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
 	ReloadDelay: 80
 	Range: 8686
 	Report: MORTAR1.WAV
@@ -243,8 +243,8 @@ D2K_Bazooka2:
 	MinRange: 1280
 D2K_Rocket_Trooper2:
 	Inherits: ^Grenade
-	Inherits: ^RailgunWeapon
-	Inherits: ^D2K_Cannon
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^D2K_Cannon
 	ReloadDelay: 64
 	Range: 6502
 	Report: ROCKET1.WAV
@@ -283,8 +283,8 @@ D2K_Rocket_Trooper2:
 
 D2K_Rocket_Trooper1:
 	Inherits: ^LightMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^D2KRocket
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^D2KRocket
 	ReloadDelay: 64
 	Range: 6502
 	Projectile: Missile
@@ -315,9 +315,9 @@ D2K_Rocket_Trooper1:
 
 D2K_TowerMissile:
 	Inherits: ^Grenade
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^D2KMissile
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^D2KMissile
 	ReloadDelay: 42
 	Burst: 2
 	Range: 10684
@@ -365,8 +365,8 @@ D2K_TowerMissile:
 	MinRange: 2135
 mtank_pri2:
 	Inherits: ^Grenade
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^D2KMissile
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^D2KMissile
 	ReloadDelay: 5
 	Range: 10052
 	ValidTargets: Ground, Water, Air
@@ -411,9 +411,9 @@ mtank_pri2:
 	MinRange: 2010
 IxRailgunDroneBullet:
 	Inherits: ^FlakWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^RailgunWeapon
-	Inherits: ^D2K_Cannon
+	Inherits@2: ^TankDestroyerCannon
+	Inherits@3: ^RailgunWeapon
+	Inherits@4: ^D2K_Cannon
 	ReloadDelay: 24
 	Range: 6034
 	Report: bigggun1.aud
@@ -463,8 +463,8 @@ ResonanceDroneRepair:
 
 IxianBomb_EMP:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^TeslaChargedWeapon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^TeslaChargedWeapon
 	Range: 1250
 	ReloadDelay: 250
 	Report: vkiratta.wav
@@ -602,9 +602,9 @@ d2k_munitions_explosion:
 
 RashinanGun:
 	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^MediumMissile
+	Inherits@3: ^SmallArms
+	Inherits@4: ^Chaingun
 	ReloadDelay: 69
 	Range: 3800
 	Burst: 4
@@ -638,9 +638,9 @@ RashinanGun:
 
 RashinanGun_upgrade:
 	Inherits: ^HeavyMissile
-	Inherits: ^HeavyCannon
-	Inherits: RashinanGun
-	Inherits: ^HeavyMachineGunProjectile
+	Inherits@2: ^HeavyCannon
+	Inherits@3: RashinanGun
+	Inherits@4: ^HeavyMachineGunProjectile
 	ValidTargets: Ground, Water, Air
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -681,7 +681,7 @@ RashinanGun_upgrade:
 
 RaiderGuns:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 40
 	Burst: 4
 	BurstDelays: 2
@@ -707,7 +707,7 @@ RaiderGuns_upgrade:
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_Cannon_Heavy
 	Inherits: RaiderGuns
-	Inherits: ^HeavyMachineGunProjectile
+	Inherits@2: ^HeavyMachineGunProjectile
 	Projectile: Bullet
 		Inaccuracy: 120
 	ValidTargets: Ground, Water, Air
@@ -732,7 +732,7 @@ RaiderGuns_upgrade:
 
 HMG_turret:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 22
 	Burst: 4
 	BurstDelays: 2
@@ -758,7 +758,7 @@ HMG_turret_upgrade:
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_Cannon_Heavy
 	Inherits: HMG_turret
-	Inherits: ^HeavyMachineGunProjectile
+	Inherits@2: ^HeavyMachineGunProjectile
 	ReloadDelay: 33
 	Burst: 4
 	BurstDelays: 3
@@ -787,11 +787,11 @@ HMG_turret_upgrade:
 
 HMG_Duelist:
 	Inherits: ^LightMissile
-	Inherits: ^Grenade
-	Inherits: ^SmallArms
-	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^Grenade
+	Inherits@3: ^SmallArms
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^Chaingun
 	ReloadDelay: 64
 	Burst: 4
 	BurstDelays: 2
@@ -844,10 +844,10 @@ HMG_Duelist:
 
 HMG_Duelist_upgrade:
 	Inherits: ^LaserWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^HeavyCannon
-	Inherits: HMG_Duelist
-	Inherits: ^HeavyMachineGunProjectile
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^HeavyCannon
+	Inherits@4: HMG_Duelist
+	Inherits@5: ^HeavyMachineGunProjectile
 	ValidTargets: Ground, Water, Air
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -870,7 +870,7 @@ HMG_Duelist_upgrade:
 
 d2kStormLasher:
 	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
+	Inherits@2: ^MagicWeapon
 	Range: 11384
 	ReloadDelay: 250
 	-Projectile:
@@ -939,7 +939,7 @@ d2kStormLasher:
 
 D2K_ShockGun:
 	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	ReloadDelay: 100
 	Range: 7756
 	Report: bigggun1.aud
@@ -981,7 +981,7 @@ D2K_ShockGun2:
 
 D2K_StormGun:
 	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
+	Inherits@2: ^MagicWeapon
 	ReloadDelay: 100
 	Range: 7343
 	Report: bigggun1.aud
@@ -1068,7 +1068,7 @@ D2K_ShockGunInf:
 
 D2K_StormGunInf:
 	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	ReloadDelay: 66
 	Range: 6275
 	Projectile: Railgun
@@ -1115,7 +1115,7 @@ D2K_StormGunInf:
 
 D2K_StormGunCymek:
 	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	Range: 6787
 	ReloadDelay: 66
 	Burst: 2
@@ -1164,9 +1164,9 @@ D2K_StormGunCymek:
 
 D2K_RocketsCymek:
 	Inherits: ^Grenade
-	Inherits: ^FlakWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^HeavyMissile
+	Inherits@4: ^RA2MediumMissile
 	ReloadDelay: 60
 	Burst: 4
 	BurstDelays: 2
@@ -1218,8 +1218,8 @@ D2K_RocketsCymek:
 
 d2k_air_drone_guns:
 	Inherits: ^D2KMissile
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
 	ReloadDelay: 28
 	Burst: 4
 	BurstDelays: 2
@@ -1252,7 +1252,7 @@ d2k_air_drone_guns_upgrade:
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_Cannon_Heavy
 	Inherits: d2k_air_drone_guns
-	Inherits: ^HeavyMachineGunProjectile
+	Inherits@2: ^HeavyMachineGunProjectile
 	ValidTargets: Ground, Water, Air
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -1315,8 +1315,8 @@ d2k_farasha_charge:
 
 ixian_farasha:
 	Inherits: ^TeslaWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: ^RailgunWeapon
 	ReloadDelay: 50
 	Range: 6400
 	Burst: 50
@@ -1400,8 +1400,8 @@ d2k_farasha_aa:
 
 farasha_drone_ixian:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: d2k_laser
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: d2k_laser
 	ReloadDelay: 25
 	Range: 2500
 	Report: d2k_alfayrus.wav
@@ -1449,9 +1449,9 @@ farasha_drone_ixian:
 
 d2k_basq:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^HeavyCannon
 	ReloadDelay: 25
 	Range: 3333
 	Report: zhyfir00.aud
@@ -1542,13 +1542,13 @@ d2k_projections:
 
 MongooseRocket:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^RailgunWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^Chaingun
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^RailgunWeapon
+	Inherits@7: ^MediumMissile
+	Inherits@8: ^D2KRocket
 	ReloadDelay: 64
 	Range: 6183
 	Report: d2k_buggy_rocket.wav

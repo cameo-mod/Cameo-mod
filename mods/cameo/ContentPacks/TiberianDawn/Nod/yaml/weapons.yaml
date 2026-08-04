@@ -1,7 +1,7 @@
 M16Laser:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^LaserWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^LaserWeapon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 4983
@@ -34,11 +34,11 @@ FlamethrowerExplode:
 
 NodTurretLaser:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^HeavyCannon
-	Inherits: ^LightFlameWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^HeavyCannon
+	Inherits@4: ^LightFlameWeapon
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^LaserWeapon
 	Burst: 2
 	BurstDelays: 4
 	ReloadDelay: 20
@@ -110,11 +110,11 @@ BigTiberiumExplosion:
 
 ArtilleryShellUpgrade:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumChemicalWeapon
+	Inherits@4: ^MediumFlameWeapon
+	Inherits@5: ^MediumCannon
+	Inherits@6: ^HeavyBomb
 	ReloadDelay: 96
 	Range: 12345
 	MinRange: 2470
@@ -201,9 +201,9 @@ FireballLauncherBuggy:
 
 BikeRockets:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^LightMissile
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^LightMissile
 	Burst: 2
 	BurstDelays: 10
 	ReloadDelay: 55
@@ -267,10 +267,10 @@ LTNKMissiles:
 
 HonestJohn:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyMissile
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^HeavyFlameWeapon
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^HeavyMissile
 	ReloadDelay: 225
 	Burst: 2
 	BurstDelays: 25
@@ -445,9 +445,9 @@ HeliMissiles:
 
 TurretGun:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
-	Inherits: ^MediumCannon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^Grenade
+	Inherits@3: ^MediumCannon
+	Inherits@4: ^TankDestroyerCannon
 	ReloadDelay: 61
 	Range: 7711
 	Report: tnkfire6.aud
@@ -476,8 +476,8 @@ TurretGun:
 
 TurretGunBlackMarket:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyCannon
-	Inherits: TurretGun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: TurretGun
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 6000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
@@ -552,8 +552,8 @@ LaserObelisk:
 
 ChemRockets:
 	Inherits: ^Grenade
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^LightMissile
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^LightMissile
 	ReloadDelay: 54
 	Range: 6006
 	Report: bazook1.aud
@@ -622,9 +622,9 @@ ChemRocketsExplosion:
 
 ChemicalBikeRockets:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	Burst: 2
 	BurstDelays: 10
@@ -688,8 +688,8 @@ ChemicalBikeRocketsExplosion:
 
 ChemicalStealthTankMissiles:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumMissile
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 60
 	Range: 6962
@@ -749,9 +749,9 @@ ChemicalStealthTankExplosion:
 
 ChemicalHonestJohn:
 	Inherits: ^HeavyMissile
-	Inherits: ^HeavyBomb
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^HeavyChemicalWeapon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^HeavyFlameWeapon
+	Inherits@4: ^HeavyChemicalWeapon
 	ReloadDelay: 142
 	Range: 12345
 	MinRange: 2470
@@ -807,8 +807,8 @@ ChemicalHonestJohn:
 
 MachineGunBuggy2:
 	Inherits: ^HeavyCannon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
 	ReloadDelay: 60
 	Burst: 3
 	BurstDelays: 4
@@ -853,8 +853,8 @@ MachineGunBuggy2_AA:
 
 LaserBuggy2:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^LaserWeapon
+	Inherits@2: ^MediumMissile
+	Inherits@3: ^LaserWeapon
 	ReloadDelay: 60
 	Burst: 3
 	BurstDelays: 4
@@ -913,8 +913,8 @@ LaserBuggy2_AA:
 
 FireballLauncherBuggy2:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^MediumFlameWeapon
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: ^MediumFlameWeapon
 	ReloadDelay: 60
 	Burst: 3
 	BurstDelays: 4
@@ -946,7 +946,7 @@ FireballLauncherBuggy2:
 
 LightTank2Cannon:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumCannon
+	Inherits@2: ^MediumCannon
 	ReloadDelay: 35
 	Range: 4903
 	Report: tnkfire3.aud
@@ -968,7 +968,7 @@ LightTank2Cannon:
 
 LightTank2Missiles:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumMissile
+	Inherits@2: ^MediumMissile
 	ReloadDelay: 35
 	Range: 4903
 	Report: bazook1.aud
@@ -1113,10 +1113,10 @@ BlackHandFlamerExplode:
 
 BHRedDarts:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^Chaingun
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumMissile
+	Inherits@2: ^TankDestroyerCannon
+	Inherits@3: ^Chaingun
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^MediumMissile
 	ReloadDelay: 90
 	Burst: 4
 	BurstDelays: 5
@@ -1133,51 +1133,51 @@ BHRedDarts:
 		ContrailStartColor: ff0000
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 22000
+		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 22000
+		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TankDestroyerCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 22000
+		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 22000
+		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ShrapnelWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 22000
+		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 22000
+		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 22000
+		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
@@ -1192,7 +1192,7 @@ BHRedDarts:
 
 SpecterArtilleryShell:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
+	Inherits@2: ^ShrapnelWeapon
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 78
 	Range: 12640
@@ -1229,12 +1229,12 @@ SpecterArtilleryShell:
 
 SpecterArtilleryShellUpgrade:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
-	Inherits: SpecterArtilleryShell
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^MediumCannon
+	Inherits@6: ^HeavyCannon
+	Inherits@7: SpecterArtilleryShell
 	Projectile: Bullet
 		ContrailStartWidth: 111
 		ContrailEndWidth: 11
@@ -1285,9 +1285,9 @@ SpecterArtilleryShellUpgrade:
 
 VenomLaser:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
-	Inherits: ^LaserWeapon
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^Chaingun
+	Inherits@4: ^LaserWeapon
 	ReloadDelay: 18
 	Range: 4000
 	Report: vpalwe2d.aud
@@ -1359,7 +1359,7 @@ NodCommandoLaser:
 
 NodTorpTube:
 	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
+	Inherits@2: ^HeavyMissile
 	ReloadDelay: 64
 	Range: 8000
 	Burst: 2
@@ -1408,7 +1408,7 @@ NodTorpTube:
 
 NodTorpTubeBlackMarket:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyMissile
+	Inherits@2: ^HeavyMissile
 	ReloadDelay: 64
 	Range: 8000
 	Burst: 2
@@ -1508,8 +1508,8 @@ td_nod_minigunner_minigun:
 
 td_nod_minigunner_minigun_laser:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^LaserWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^LaserWeapon
 	ValidTargets: Ground, Water
 	ReloadDelay: 40
 	Range: 4500

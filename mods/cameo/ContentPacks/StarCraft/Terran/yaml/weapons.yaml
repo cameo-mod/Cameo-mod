@@ -1,7 +1,7 @@
 MarineMG:
 	Inherits: ^HeavyCannon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
 	ReloadDelay: 26
 	Range: 6105
 	Burst: 3
@@ -29,7 +29,7 @@ MarineMG:
 
 JimRaynorMachineGun:
 	Inherits: ^HeavyMissile
-	Inherits: ^HeavyCannon
+	Inherits@2: ^HeavyCannon
 	ReloadDelay: 12
 	Range: 7446
 	Burst: 5
@@ -62,8 +62,8 @@ JimRaynorMachineGun:
 
 MadcapGun:
 	Inherits: ^HeavyCannon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
 	ReloadDelay: 25
 	Range: 5542
 	Report: madcapshoot.wav
@@ -112,7 +112,7 @@ FirebatF:
 
 HarakanF:
 	Inherits: ^HeavyFlameWeapon
-	Inherits: ^MediumFlameWeapon
+	Inherits@2: ^MediumFlameWeapon
 	ReloadDelay: 47
 	Burst: 20
 	BurstDelays: 2
@@ -146,8 +146,8 @@ HarakanF:
 
 MatadorFlamer:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^HeavyFlameWeapon
 	ReloadDelay: 18
 	Burst: 13
 	BurstDelays: 2
@@ -209,7 +209,7 @@ MatadorLaser:
 
 CycloneRockets:
 	Inherits: ^MediumMissile
-	Inherits: ^LightMissile
+	Inherits@2: ^LightMissile
 	Report: cycloneshoot1.wav, cycloneshoot2.wav, cycloneshoot3.wav
 	ReloadDelay: 35
 	Range: 7320
@@ -255,8 +255,8 @@ CycloneRocketsLockOn:
 
 MarauderMissiles:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumMissile
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^MediumMissile
 	Range: 7010
 	ReloadDelay: 60
 	ValidTargets: Ground, Water
@@ -292,9 +292,9 @@ MarauderMissiles:
 
 SCTyr:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^Chaingun
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2HeavyCannon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^RA2HeavyCannon
 	ReloadDelay: 44
 	Range: 7156
 	Burst: 2
@@ -347,9 +347,9 @@ SCTyr:
 
 SCTyrAA:
 	Inherits: ^Grenade
-	Inherits: ^FlakWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^HeavyMissile
+	Inherits@4: ^RA2MediumMissile
 	ReloadDelay: 84
 	Burst: 4
 	BurstDelays: 2
@@ -416,8 +416,8 @@ ReaperPistols:
 
 ReaperGrenade:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyCannon
 	ValidTargets: Structure
 	ReloadDelay: 45
 	Range: 4375
@@ -474,10 +474,10 @@ ReaperGrenade:
 
 GhostSniper:
 	Inherits: ^MediumMissile
-	Inherits: ^HeavyCannon
-	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^SmallArms
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^Chaingun
 	ReloadDelay: 22
 	Range: 8428
 	Report: TGhFir00.aud
@@ -528,7 +528,7 @@ GhostSniper:
 
 GhostSniperLockdown:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: GhostSniper
+	Inherits@2: GhostSniper
 	ValidTargets: Vehicle, Air, Shielded
 	InvalidTargets: lockdowned
 	ReloadDelay: 22
@@ -610,10 +610,10 @@ GhostSniperLockdown:
 
 SpecterSniper:
 	Inherits: ^MediumMissile
-	Inherits: ^HeavyCannon
-	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^SmallArms
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^Chaingun
 	ReloadDelay: 33
 	Range: 7922
 	Report: TGhFir00.aud
@@ -664,7 +664,7 @@ SpecterSniper:
 
 SpecterSniperLockdown:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: SpecterSniper
+	Inherits@2: SpecterSniper
 	ValidTargets: Vehicle, Air, Shielded
 	InvalidTargets: lockdowned
 	ReloadDelay: 33
@@ -746,10 +746,10 @@ SpecterSniperLockdown:
 
 VultureGrenade:
 	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
-	Inherits: ^Grenade
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^Grenade
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^MediumCannon
 	ReloadDelay: 25
 	Range: 4800
 	Report: tvuFir00.aud
@@ -793,8 +793,8 @@ VultureGrenade:
 
 SiegeTankCannon:
 	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^MediumCannon
+	Inherits@3: ^TankDestroyerCannon
 	ReloadDelay: 37
 	Range: 6114
 	Report: TTaFir00.aud
@@ -815,19 +815,19 @@ SiegeTankCannon:
 
 SiegeTankSiegeCannon:
 	Inherits: ^NuclearWarhead
-	Inherits: ^LightMissile
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^LightMissile
+	Inherits@3: ^LightChemicalWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^HeavyChemicalWeapon
+	Inherits@6: ^LightFlameWeapon
+	Inherits@7: ^MediumFlameWeapon
+	Inherits@8: ^HeavyFlameWeapon
+	Inherits@9: ^Grenade
+	Inherits@10: ^ShrapnelWeapon
+	Inherits@11: ^HeavyBomb
+	Inherits@12: ^HeavyCannon
+	Inherits@13: ^MediumCannon
+	Inherits@14: ^TankDestroyerCannon
 	Report: TTaFi200.aud
 	ReloadDelay: 148
 	Range: 11775
@@ -949,8 +949,8 @@ SiegeTankSiegeCannon:
 	MinRange: 2355
 GoliathMG:
 	Inherits: ^Grenade
-	Inherits: ^HeavyCannon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	Range: 6000
 	ReloadDelay: 16
@@ -981,10 +981,10 @@ GoliathMG:
 
 GoliathRockets_AA:
 	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^D2KRocket
 	Range: 6000
 	ReloadDelay: 33
 	Report: HKMISSLE.aud
@@ -1022,9 +1022,9 @@ GoliathRockets_AA:
 
 GoliathMk2MG:
 	Inherits: ^Grenade
-	Inherits: ^HeavyCannon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 34
 	Range: 6479
@@ -1061,9 +1061,9 @@ GoliathMk2MG:
 
 GoliathMk2Rockets:
 	Inherits: ^FlakWeapon
-	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^LightMissile
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^D2KRocket
 	ReloadDelay: 40
 	Range: 6479
 	Report: HKMISSLE.aud
@@ -1097,10 +1097,10 @@ GoliathMk2Rockets:
 
 WraithRockets_AA:
 	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^D2KRocket
 	Report: TPhFi200.aud
 	ReloadDelay: 24
 	Range: 5076
@@ -1157,10 +1157,10 @@ WraithLaser:
 
 SunDogRockets:
 	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^D2KRocket
 	Report: TPhFi200.aud
 	ReloadDelay: 39
 	Range: 6060
@@ -1215,9 +1215,9 @@ SunDogLaser:
 
 ValkyrieRockets:
 	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^D2KRocket
+	Inherits@2: ^MediumMissile
+	Inherits@3: ^HeavyAAWeapon
+	Inherits@4: ^D2KRocket
 	Report: TPhFi200.aud
 	Range: 7380
 	ReloadDelay: 67
@@ -1255,13 +1255,13 @@ ValkyrieRockets:
 
 WyvernRockets:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^HeavyBomb
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^D2KRocket
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyCannon
+	Inherits@4: ^HeavyBomb
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^MediumMissile
+	Inherits@7: ^HeavyAAWeapon
+	Inherits@8: ^D2KRocket
 	Report: TPhFi200.aud
 	Range: 8000
 	ReloadDelay: 90
@@ -1336,14 +1336,14 @@ WyvernRockets:
 
 BCLaser:
 	Inherits: ^NuclearWarhead
-	Inherits: ^RailgunWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^HeavyCannon
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^HeavyMissile
+	Inherits@4: ^HeavyCannon
+	Inherits@5: ^HeavyAAWeapon
+	Inherits@6: ^HeavyBomb
+	Inherits@7: ^HeavyChemicalWeapon
+	Inherits@8: ^HeavyFlameWeapon
+	Inherits@9: ^LaserWeapon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 38
 	Range: 6800
@@ -1472,13 +1472,13 @@ BCYamatoCannon:
 
 PhobosLaser:
 	Inherits: ^RailgunWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^HeavyCannon
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^HeavyCannon
+	Inherits@4: ^HeavyAAWeapon
+	Inherits@5: ^HeavyBomb
+	Inherits@6: ^HeavyChemicalWeapon
+	Inherits@7: ^HeavyFlameWeapon
+	Inherits@8: ^LaserWeapon
 	ValidTargets: Ground, Water, Air
 	Range: 9000
 	ReloadDelay: 80
@@ -1552,10 +1552,10 @@ PhobosLaser:
 
 MissileTurret:
 	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^D2KRocket
 	Report: TPhFi200.aud
 	ReloadDelay: 30
 	Range: 11626
@@ -1608,8 +1608,8 @@ SCVULTURESUMMON:
 
 MedicFlare:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^LaserWeapon
 	ReloadDelay: 60
 	Range: 6000
 	Report: M203.aud

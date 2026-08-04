@@ -1,10 +1,10 @@
 RA2LasherCannon:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^LightFlameWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^RA2MediumCannon
 	ReloadDelay: 68
 	Range: 5201
 	Report: vlasatta.wav
@@ -68,14 +68,14 @@ RA2LasherCannon_elite:
 
 RA2LasherToxicMortar:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^LightChemicalWeapon
+	Inherits@5: ^MediumChemicalWeapon
+	Inherits@6: ^HeavyChemicalWeapon
+	Inherits@7: ^TankDestroyerCannon
+	Inherits@8: ^MediumCannon
+	Inherits@9: ^HeavyCannon
 	ReloadDelay: 105
 	Range: 9000
 	Report: vlasatta.wav
@@ -236,7 +236,7 @@ RA2LasherToxicMortar_elite:
 
 RA2LasherLaser:
 	Inherits: ^MediumCannon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^LaserWeapon
 	ReloadDelay: 81
 	Range: 7065
 	Report: vfloatta.wav
@@ -317,7 +317,7 @@ RA2DiskLaser_elite:
 
 RA2DiskDrain:
 	Inherits: ^MagicWeapon
-	Inherits: ^TeslaWeapon
+	Inherits@2: ^TeslaWeapon
 	ReloadDelay: 5
 	Range: 125
 	Report: vflolo5a.wav, vflolo5b.wav
@@ -434,9 +434,9 @@ RA2MagnetAA_elite:
 
 RA2PsychicJab:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^LightFlameWeapon
-	Inherits: ^FlakWeapon
+	Inherits@2: ^MediumCannon
+	Inherits@3: ^LightFlameWeapon
+	Inherits@4: ^FlakWeapon
 	ReloadDelay: 15
 	Range: 4440
 	Report: iiniatta.wav
@@ -613,7 +613,7 @@ BoomerLaunch:
 
 YRBoomerTorpedo:
 	Inherits: ^RA2Grenade
-	Inherits: ^RA2HeavyMissile
+	Inherits@2: ^RA2HeavyMissile
 	ReloadDelay: 176
 	Range: 15000
 	MinRange: 3000
@@ -683,7 +683,7 @@ RA2GattlingMG3_AA:
 
 RA2GattlingInf:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 15
 	ValidTargets: Ground, Air, Water
 	Range: 5531
@@ -712,7 +712,7 @@ RA2GattlingInf:
 
 RA2Virusgun:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^SniperWeapon
+	Inherits@2: ^SniperWeapon
 	ReloadDelay: 74
 	Range: 9999
 	Report: iviratta.wav
@@ -890,8 +890,8 @@ RA2Chemspray_elite:
 
 RA2CosmonautLaser:
 	Inherits: ^RailgunWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ra2roktgun
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ra2roktgun
 	Report: ilasatta.wav
 	ReloadDelay: 11
 	Range: 4750

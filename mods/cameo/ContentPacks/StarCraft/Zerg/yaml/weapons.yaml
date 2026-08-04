@@ -65,9 +65,9 @@ ShriekStinger:
 
 HydraSpit:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^LightMissile
+	Inherits@3: ^SmallArms
+	Inherits@4: ^ArrowWeapon
 	ReloadDelay: 15
 	Range: 5979
 	Report: zhyfir00.aud
@@ -115,8 +115,8 @@ HydraSpit:
 
 SpithidSpit:
 	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^SmallArms
+	Inherits@3: ^ArrowWeapon
 	ReloadDelay: 15
 	Range: 3855
 	Report: zhyfir00.aud
@@ -155,9 +155,9 @@ SpithidSpit:
 
 MutaliskSpore:
 	Inherits: ^SwordWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^SmallArms
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^SmallArms
+	Inherits@4: ^ArrowWeapon
 	ReloadDelay: 20
 	Range: 4444
 	Report: zmufir00.aud
@@ -306,11 +306,11 @@ CorruptorSpore:
 
 DreadshroudSpore:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^MediumMissile
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^MediumChemicalWeapon
+	Inherits@6: ^LaserWeapon
 	ReloadDelay: 60
 	Range: 5850
 	Report: zlufir00.aud
@@ -440,8 +440,8 @@ ScourgeExplosion:
 
 SCScourgeExplosion:
 	Inherits: ^HeavyBomb
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2Grenade
 	-Report:
 	ValidTargets: Air
 	Warhead@HeavyBomb: SpreadDamage
@@ -474,8 +474,8 @@ SCScourgeExplosion:
 
 GuardianShoot:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
 	ReloadDelay: 60
 	Range: 10000
 	Report: zgufir00.aud
@@ -521,14 +521,14 @@ GuardianShoot:
 
 SporemawShoot:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumMissile
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^MediumCannon
+	Inherits@3: ^HeavyCannon
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^HeavyBomb
+	Inherits@7: ^MediumMissile
+	Inherits@8: ^Chaingun
+	Inherits@9: ^FlakWeapon
 	ReloadDelay: 40
 	Range: 7740
 	Report: zlufir00.aud
@@ -635,11 +635,11 @@ HermitExplode:
 
 HermitShoot:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumMissile
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^Chaingun
+	Inherits@6: ^FlakWeapon
 	ReloadDelay: 30
 	Range: 7120
 	Burst: 5
@@ -757,13 +757,13 @@ BroodweaverLeech:
 
 SwarmlingShoot:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumMissile
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^Grenade
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^HeavyBomb
+	Inherits@6: ^MediumMissile
+	Inherits@7: ^Chaingun
+	Inherits@8: ^FlakWeapon
 	ReloadDelay: 80
 	Range: 8561
 	Report: zlufir00.aud
@@ -876,7 +876,7 @@ SwarmlingShoot:
 
 QueenSpine:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^ArrowWeapon
 	ReloadDelay: 78
 	Range: 5480
 	Report: zhyfir00.aud
@@ -981,7 +981,7 @@ LurkerSpines:
 
 LurkerSpinesImpact:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^SwordWeapon
+	Inherits@2: ^SwordWeapon
 	Projectile: InstantHit
 	Warhead@MediumChemicalWeapon: SpreadDamage
 		ValidTargets: Ground, Water
@@ -1020,8 +1020,8 @@ LurkerSpinesImpact:
 
 InfestedExplosion:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
 	Projectile: InstantHit
 	Warhead@Grenade: SpreadDamage
 		Damage: 50000
@@ -1046,11 +1046,11 @@ InfestedExplosion:
 
 BehemothShoot:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyMissile
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^HeavyBomb
 	ReloadDelay: 60
 	Range: 5230
 	Report: zgufir00.aud
@@ -1165,8 +1165,8 @@ SCQUEENSUMMON:
 
 Spore_AA:
 	Inherits: ^MediumMissile
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^FlakWeapon
 	ReloadDelay: 34
 	Range: 10160
 	Report: zlufir00.aud
@@ -1205,9 +1205,9 @@ Spore_AA:
 
 Tentacle:
 	Inherits: ^RailgunWeapon
-	Inherits: ^Chaingun
-	Inherits: ^HeavyCannon
-	Inherits: ^SwordWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^HeavyCannon
+	Inherits@4: ^SwordWeapon
 	ReloadDelay: 32
 	Range: 7680
 	Report: zlufir00.aud

@@ -13,10 +13,10 @@ ArbiterStasis:
 
 PositronGrenade:
 	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
-	Inherits: ^Grenade
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^Grenade
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^MediumCannon
 	ReloadDelay: 30
 	Range: 5044
 	Report: tvuFir00.aud
@@ -130,9 +130,9 @@ InterceptorLauncher:
 
 PhotonCannon:
 	Inherits: ^FlakWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^MediumCannon
+	Inherits@4: ^TankDestroyerCannon
 	ReloadDelay: 28
 	Range: 8228
 	Report: tphfi201.wav, tgofi200.wav
@@ -185,10 +185,10 @@ DragoonCannon:
 
 GladiusCannon:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: PhotonCannon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyFlameWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: PhotonCannon
 	ReloadDelay: 80
 	Range: 10000
 	Projectile: Missile
@@ -275,7 +275,7 @@ ArbiterCannon:
 
 GlaveCanon:
 	Inherits: ^Grenade
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	ReloadDelay: 40
 	Range: 5250
 	Report: tphfi201.wav, tgofi200.wav
@@ -396,9 +396,9 @@ PsionicShockwave:
 
 ScarabLaunch:
 	Inherits: ^HeavyBomb
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumMissile
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyCannon
+	Inherits@4: ^MediumMissile
 	ValidTargets: Ground, Water
 	ReloadDelay: 90
 	Range: 7777
@@ -460,10 +460,10 @@ ScarabLaunchDummy:
 
 ScoutRockets_AA:
 	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^D2KRocket
 	Report: HKMISSLE.aud
 	ReloadDelay: 40
 	Range: 4500
@@ -547,9 +547,9 @@ ZeratulSlice:
 
 CorsairFlash:
 	Inherits: ^Grenade
-	Inherits: ^HeavyCannon
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^RA2Chaingun
 	Report: sc_corsair_attack.aud
 	ValidTargets: Air
 	Range: 5500
@@ -638,11 +638,11 @@ Corsair_EMP:
 
 VoidRayBeam:
 	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^TeslaWeapon
+	Inherits@6: ^LaserWeapon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 6
 	Range: 6474
@@ -731,11 +731,11 @@ VoidRayBeam:
 
 StarshipSovereignBeam:
 	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^TeslaWeapon
+	Inherits@6: ^LaserWeapon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 10
 	Range: 8475
@@ -870,9 +870,9 @@ SCWorkerExplodeProtoss:
 
 ScoutMG:
 	Inherits: ^Grenade
-	Inherits: ^HeavyCannon
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^RA2Chaingun
 	Report: blastgn2.aud
 	ValidTargets: Ground, Water
 	Range: 4500
@@ -919,15 +919,15 @@ ScoutMG:
 
 EpigraphMG:
 	Inherits: ^Grenade
-	Inherits: ^ArrowWeapon
-	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^ArrowWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^HeavyMissile
+	Inherits@6: ^MediumChemicalWeapon
+	Inherits@7: ^HeavyAAWeapon
+	Inherits@8: ^HeavyCannon
+	Inherits@9: ^FlakWeapon
+	Inherits@10: ^Chaingun
 	Report: blastgn2.aud
 	ValidTargets: Ground, Water, Air
 	Range: 5077
@@ -1015,8 +1015,8 @@ EpigraphMG:
 
 ManifoldMG:
 	Inherits: ^Grenade
-	Inherits: ^HeavyCannon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^RA2Chaingun
 	Report: blastgn2.aud
 	ValidTargets: Ground, Water
 	Range: 4780
@@ -1079,10 +1079,10 @@ ManifoldMG_AA:
 
 AtreusMG:
 	Inherits: ^Grenade
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^RA2Chaingun
 	Report: blastgn2.aud
 	ValidTargets: Ground, Water, Air
 	Range: 4500
@@ -1138,11 +1138,11 @@ AtreusMG:
 
 PatriarchShoot:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumMissile
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^Chaingun
+	Inherits@6: ^FlakWeapon
 	Range: 5000
 	ReloadDelay: 75
 	Burst: 2

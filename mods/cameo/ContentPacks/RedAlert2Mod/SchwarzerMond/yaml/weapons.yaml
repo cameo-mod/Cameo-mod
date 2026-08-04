@@ -40,9 +40,9 @@ schwarzermond_lunarsoldier_rifle_elite:
 
 NaxiBeetleLaser_elite:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^MediumMissile
-	Inherits: ^LaserWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^LaserWeapon
 	Range: 6448
 	ReloadDelay: 60
 	Burst: 2
@@ -118,9 +118,9 @@ LunarPanzerCannon_elite:
 
 NaxiTank2Laser:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^MediumMissile
-	Inherits: ^LaserWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^LaserWeapon
 	Range: 6500
 	ReloadDelay: 52
 	Burst: 4
@@ -177,8 +177,8 @@ NaxiTank2Laser_AA:
 
 NaxiMP40Laser:
 	Inherits: NaxiMP40
-	Inherits: ^SmallArms
-	Inherits: ^RA2LaserWeapon
+	Inherits@2: ^SmallArms
+	Inherits@3: ^RA2LaserWeapon
 	Report: vpriatta.wav
 	Range: 4384
 	ReloadDelay: 100
@@ -219,8 +219,8 @@ NaxiMP40Laser_elite:
 
 LunarNaxiJadgDestroyer:
 	Inherits: ^HeavyCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2TankDestroyerCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2TankDestroyerCannon
 	ReloadDelay: 90
 	Range: 7379
 	Projectile: Bullet
@@ -249,9 +249,9 @@ LunarNaxiJadgDestroyer_elite:
 
 LunarTigerCannon:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^RA2MediumCannon
 	ReloadDelay: 80
 	Report: trashcannon.wav
 	Range: 5105
@@ -286,8 +286,8 @@ LunarTigerCannon_elite:
 
 NaxHaenebuQuadCannon:
 	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^RA2FlakWeapon
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^RA2FlakWeapon
 	ReloadDelay: 66
 	Range: 6666
 	Burst: 6
@@ -336,8 +336,8 @@ NaxHaenebuQuadCannon_elite:
 
 DalekCannon:
 	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^RA2RailgunWeapon
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^RA2RailgunWeapon
 	ReloadDelay: 76
 	Range: 8060
 	Report: vrobatta.wav
@@ -519,8 +519,8 @@ BlackHoleSuck:
 
 NaxCorrosionRocket:
 	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^RA2MediumMissile
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 2
@@ -1046,9 +1046,9 @@ NaxisBradleyTarget:
 
 Naxis_Komet:
 	Inherits: ^FlakWeapon
-	Inherits: ^Grenade
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^MediumMissile
+	Inherits@2: ^Grenade
+	Inherits@3: ^HeavyAAWeapon
+	Inherits@4: ^MediumMissile
 	ValidTargets: Ground, Water
 	ReloadDelay: 60
 	Range: 7825

@@ -363,7 +363,7 @@ drwaterl.freedom:
 		Actor: drfrigth.freedom
 drwaterextract.freedomguard:
 	Inherits: OILB.Building
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@2: ^CashTricklerMultipliers
 	Inherits@shape: ^2x2Shape
 	Inherits@lowpower: ^DisabledOverlay

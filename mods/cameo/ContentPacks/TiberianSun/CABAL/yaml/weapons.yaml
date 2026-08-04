@@ -623,9 +623,9 @@ CabalHeavyReaperTrap:
 
 CabalArtilleryWalkerShell:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumCannon
+	Inherits@4: ^HeavyCannon
 	Report: tnkfire2.aud
 	ReloadDelay: 64
 	Range: 11580
@@ -668,13 +668,13 @@ CabalArtilleryWalkerShell:
 
 CabalArtilleryWalkerShellUpgraded:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^TeslaChargedWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumCannon
+	Inherits@4: ^HeavyCannon
+	Inherits@5: ^MediumChemicalWeapon
+	Inherits@6: ^TeslaChargedWeapon
+	Inherits@7: ^MagicWeapon
+	Inherits@8: ^RailgunWeapon
 	Report: tnkfire2.aud
 	ReloadDelay: 64
 	Range: 11580
@@ -2065,6 +2065,7 @@ CabalMagicNuke:
 		Radius: 0.35
 		Brightness: 1.3
 		Darkness: 0.85
+		MinimumExposure: 0.45
 	Warhead@Effect: CreateEffect
 		Explosions: magicnuke
 		ImpactSounds: nukexplo.aud
@@ -2188,9 +2189,9 @@ CabalRavagerPlasmaNeutron:
 
 CabalBeholderLaser:
 	Inherits: ^HeavyCannon
-	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: ^RailgunWeapon
+	Inherits@4: ^LaserWeapon
 	Report: obelcor3.aud
 	ReloadDelay: 50
 	Range: 2500

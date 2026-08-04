@@ -1,6 +1,6 @@
 ^RA2Defense:
 	Inherits: ^RA2Building
-	Inherits: ^BasicDefense
+	Inherits@2: ^BasicDefense
 	Inherits@exp: ^GainsExperienceRA2
 	WithIdleOverlay@shrouded:
 		Image: shrouded_overlay

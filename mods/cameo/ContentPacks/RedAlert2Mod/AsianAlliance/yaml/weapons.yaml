@@ -19,7 +19,7 @@ RA2AsianShotgun_elite:
 
 AsianGrenade:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^RA2MediumCannon
 	ReloadDelay: 92
 	Range: 4567
 	Report: vlasatta.wav
@@ -63,7 +63,7 @@ asianalliance_asianmilitia_shotgun_elite:
 
 asianalliance_asianmilitia_grenade:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^RA2MediumCannon
 	ReloadDelay: 92
 	Range: 4500
 	Report: vlasatta.wav
@@ -189,9 +189,9 @@ AsianTankKillerRocketShrapnel:
 
 RA2AsianShotgunFanatic1:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2SmallArms
+	Inherits@4: ^RA2Chaingun
 	ReloadDelay: 50
 	Range: 5000
 	Report: aa_sshtgatt.wav
@@ -256,8 +256,8 @@ AsianSamuraiSword3:
 
 AsianMaidenBow:
 	Inherits: AsianPhotonCannon
-	Inherits: ^Grenade
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^Grenade
+	Inherits@3: ^ArrowWeapon
 	ReloadDelay: 68
 	Range: 6740
 	MinRange: 1350
@@ -383,11 +383,11 @@ AsianCrocBite_elite:
 
 AsianLynxTankCannon:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^LightFlameWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^RA2MediumCannon
 	ReloadDelay: 55
 	Range: 5357
 	Report: vlasatta.wav
@@ -451,7 +451,7 @@ AsianLynxTankCannon_elite:
 
 AsianLynxMG:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 51
 	Burst: 3
@@ -479,7 +479,7 @@ AsianLynxMG_elite:
 
 AsianKamikazeChaingun:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 12
 	Burst: 3
@@ -499,9 +499,9 @@ AsianKamikazeChaingun:
 
 AsianPhotonCannon:
 	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^TeslaWeapon
+	Inherits@4: ^MagicWeapon
 	ReloadDelay: 13
 	Range: 14000
 	Report: dragbull.aud
@@ -686,11 +686,11 @@ AsianQuasarBoat_EMP_AA:
 
 AsianChemical:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2Grenade
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyChemicalWeapon
+	Inherits@4: ^HeavyBomb
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^RA2Grenade
 	ValidTargets: Ground, Water
 	ReloadDelay: 60
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
@@ -784,7 +784,7 @@ AsianChemical_elite:
 
 AsianChemicalBombs:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^RA2MediumCannon
 	ValidTargets: Ground, Water
 	ReloadDelay: 8
 	Report: vflaat1a.wav, vflaat1b.wav
@@ -864,7 +864,7 @@ AsianQuasarBoat_AA:
 
 AsianHowitzerCannon:
 	Inherits: ^RA2MediumCannon
-	Inherits: ^RA2HeavyCannon
+	Inherits@2: ^RA2HeavyCannon
 	ReloadDelay: 160
 	Report: aa_bgart.wav
 	Range: 16000
@@ -994,8 +994,8 @@ AsianSmallOilBomb:
 
 AsianPulverizerGatling:
 	Inherits: ^HeavyCannon
-	Inherits: ^SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^SmallArms
+	Inherits@3: ^RA2Chaingun
 	Report: aa_pulvat2a.wav, aa_pulvat2b.wav, aa_pulvat2c.wav
 	Range: 5517
 	ReloadDelay: 12
@@ -1030,8 +1030,8 @@ AsianPulverizerGatling:
 
 AsianPulverizerMechaGatling:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumMissile
-	Inherits: AsianPulverizerGatling
+	Inherits@2: ^MediumMissile
+	Inherits@3: AsianPulverizerGatling
 	Range: 7020
 	ReloadDelay: 15
 	Warhead@MediumChemicalWeapon: SpreadDamage
@@ -1052,13 +1052,13 @@ AsianPulverizerMechaGatling:
 
 AsianSinglePlasma:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^RA2HeavyCannon
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^MediumCannon
+	Inherits@6: ^ShrapnelWeapon
+	Inherits@7: ^HeavyBomb
+	Inherits@8: ^RA2HeavyCannon
 	Range: 5190
 	ReloadDelay: 34
 	Report: aa_plasfire.wav
@@ -1189,13 +1189,13 @@ AsianTurretPlasma:
 
 AsianHarbingerPlasma:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^MediumCannon
+	Inherits@6: ^ShrapnelWeapon
+	Inherits@7: ^HeavyBomb
+	Inherits@8: ^RA2MediumMissile
 	Range: 7777
 	Burst: 2
 	BurstDelays: 5
@@ -1659,7 +1659,7 @@ AsianTankMine:
 
 AsianChaosMine:
 	Inherits: AsianChaosTurret
-	Inherits: AsianTankMine
+	Inherits@2: AsianTankMine
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Chem_Heavy
@@ -1686,8 +1686,8 @@ AsianChaosMine:
 
 AsianPelicanMissile:
 	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^RA2MediumMissile
 	ReloadDelay: 25
 	Burst: 2
 	BurstDelays: 2
@@ -1735,8 +1735,8 @@ AsianPelicanMissile_elite:
 
 AsianPelicanMG:
 	Inherits: ^RA2HeavyCannon
-	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2SmallArms
+	Inherits@3: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 18
 	Burst: 4
@@ -1836,7 +1836,7 @@ TsunamiCarrierTarget:
 
 AsianSubmarineBomb:
 	Inherits: ^HeavyBomb
-	Inherits: ^RA2Grenade
+	Inherits@2: ^RA2Grenade
 	Range: 2500
 	ReloadDelay: 100
 	Projectile: InstantExplode
@@ -1875,8 +1875,8 @@ AsianSubmarineBomb:
 
 AsianPhoenixRocket:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^Grenade
-	Inherits: ^RA2HeavyMissile
+	Inherits@2: ^Grenade
+	Inherits@3: ^RA2HeavyMissile
 	ReloadDelay: 65
 	Range: 6500
 	MinRange: 1300
@@ -1940,7 +1940,7 @@ AsianPhoenixRocket_elite:
 
 ASDFGun:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	Report: varmatta.wav, varmattb.wav
 	Range: 5935
 	ReloadDelay: 16
@@ -1963,7 +1963,7 @@ ASDFGun:
 
 ASDFGun2:
 	Inherits: ^RailgunWeapon
-	Inherits: ASDFGun
+	Inherits@2: ASDFGun
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1991,8 +1991,8 @@ ASDFKamikazeTargeting:
 
 ASDFKamikazeExplosion:
 	Inherits: ^HeavyBomb
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2Grenade
 	Warhead@Demolition_Light:
 		Damage: 10000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
@@ -2014,10 +2014,10 @@ ASDFKamikazeExplosion:
 
 AsianSniper:
 	Inherits: ^MediumMissile
-	Inherits: ^HeavyCannon
-	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^SmallArms
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^Chaingun
 	ReloadDelay: 25
 	Range: 9455
 	Report: TGhFir00.aud
@@ -2100,7 +2100,7 @@ AsianSniperAP:
 
 AsianSniperLockdown:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: AsianSniperAP
+	Inherits@2: AsianSniperAP
 	ValidTargets: Vehicle, Air, Shielded
 	InvalidTargets: lockdowned
 	ReloadDelay: 100
@@ -2182,9 +2182,9 @@ AsianSniperLockdown:
 
 AsianMLRS:
 	Inherits: ^HeavyMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2Grenade
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^RA2Grenade
+	Inherits@4: ^RA2MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 8500
@@ -2279,7 +2279,7 @@ AsianKamikazeImpactTargeting:
 # ride the upgrade pass (pair law: all three dedicated).
 asianalliance_fanatic_shotgun:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 70
 	Range: 3500
 	Burst: 10

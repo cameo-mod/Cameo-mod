@@ -254,7 +254,7 @@ tkm_technicaltank:
 		Offset: -160,0,400
 	Armament@cannon:
 		Weapon: tkmltgun
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
@@ -320,12 +320,12 @@ tkm_quadtruck:
 		Offset: -350,0,250
 	Armament@AG:
 		Weapon: TKMQuadCannonAG
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 	Armament@AA:
 		Weapon: TKMQuadCannonAA
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
@@ -370,12 +370,12 @@ tkm_zaza:
 		Offset: -160,0,500
 	Armament@AG:
 		Weapon: TKMZazaCannonAG
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 	Armament@AA:
 		Weapon: TKMZazaCannonAA
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 	FirepowerMultiplier@GattlingSpeed1:
@@ -521,7 +521,7 @@ tkm_abrams:
 		Offset: 0,0,300
 	Armament@cannon:
 		Weapon: tkmrh120gun
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
@@ -603,7 +603,7 @@ tkm_t72m:
 		Offset: 0,0,200
 	Armament:
 		Weapon: tkm2a46gun
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
@@ -1024,7 +1024,7 @@ tkm_trenchtank:
 		Offset: 75,0,425
 	Armament:
 		Weapon: tkmtrenchcannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
@@ -1085,7 +1085,7 @@ tkm_t30:
 		Offset: 0,0,400
 	Armament:
 		Weapon: t30shell
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 1600,85,90, 1600,-85,90
 		MuzzleSequence: muzzle

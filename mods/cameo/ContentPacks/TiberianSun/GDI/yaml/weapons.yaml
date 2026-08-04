@@ -1,6 +1,6 @@
 TS30mm:
 	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
+	Inherits@2: ^FlakWeapon
 	ReloadDelay: 26
 	Burst: 3
 	Range: 6125
@@ -16,8 +16,8 @@ TS30mm:
 
 TS30mmRail:
 	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^RailgunWeapon
 	Projectile: Railgun
 		Duration: 8
 		BeamWidth: 32
@@ -43,7 +43,7 @@ TS30mmRail:
 TS120mmRail:
 	# Inherits: ^TSCannon
 	Inherits: ^MediumCannon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	ReloadDelay: 44
 	Range: 6201
 	Warhead@MediumCannon: SpreadDamage
@@ -74,7 +74,7 @@ TS120mmTal:
 TS120mmTalRail:
 	# Inherits: ^TSCannon
 	Inherits: ^MediumCannon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	ReloadDelay: 50
 	Range: 6201
 	Warhead@MediumCannon: SpreadDamage
@@ -88,7 +88,7 @@ TS120mmTalRail:
 
 TSRPGTower:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^HeavyCannon
 	ReloadDelay: 46
 	Range: 8544
 	Report: glnch4.aud
@@ -110,8 +110,8 @@ TSRPGTower:
 
 TSRPGTowerRail:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^RailgunWeapon
 	ReloadDelay: 46
 	Range: 8544
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -188,10 +188,10 @@ TSJugg120mm:
 
 KodiakCannon:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^HeavyCannon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^HeavyMissile
+	Inherits@4: ^HeavyCannon
+	Inherits@5: ^HeavyBomb
 	Range: 9165
 	ReloadDelay: 92
 	Burst: 3
@@ -236,13 +236,13 @@ KodiakCannon:
 
 KodiakCannonSonic:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^HeavyCannon
-	Inherits: ^HeavyBomb
-	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^TSSonicGrenade
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^HeavyMissile
+	Inherits@4: ^HeavyCannon
+	Inherits@5: ^HeavyBomb
+	Inherits@6: ^TeslaWeapon
+	Inherits@7: ^MagicWeapon
+	Inherits@8: ^TSSonicGrenade
 	Range: 9165
 	ReloadDelay: 86
 	Burst: 3
@@ -316,8 +316,8 @@ TSSonicWeaponEffect:
 
 TSSonicZapWeapon:
 	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
-	Inherits: TSSonicWeaponEffect
+	Inherits@2: ^MagicWeapon
+	Inherits@3: TSSonicWeaponEffect
 	ReloadDelay: 60
 	Range: 4050
 	Projectile: AreaBeam
@@ -350,8 +350,8 @@ TSSonicZapWeapon:
 
 TSSonicZapWeaponSonic:
 	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
-	Inherits: TSSonicWeaponEffect
+	Inherits@2: ^MagicWeapon
+	Inherits@3: TSSonicWeaponEffect
 	ReloadDelay: 60
 	Range: 4050
 	Projectile: AreaBeam
@@ -384,7 +384,7 @@ TSSonicZapWeaponSonic:
 
 TSZapWeapon_EMP:
 	Inherits: ^TeslaWeapon
-	Inherits: TSSonicWeaponEffect
+	Inherits@2: TSSonicWeaponEffect
 	ReloadDelay: 60
 	Range: 10205
 	Report: plsecan2.aud
@@ -566,8 +566,8 @@ PitbullRockets:
 
 TSHoverMissile:
 	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^ShrapnelWeapon
+	Inherits@2: ^MediumMissile
+	Inherits@3: ^ShrapnelWeapon
 	ValidTargets: Ground, Water, Air
 	Report: missile6.aud
 	ReloadDelay: 60
@@ -664,9 +664,9 @@ TSMammothTusk2II_AA:
 
 TSHellfireSonic:
 	Inherits: TSHellfire
-	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^TSSonicGrenade
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: ^MagicWeapon
+	Inherits@4: ^TSSonicGrenade
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -742,7 +742,7 @@ TSGDIRedEye:
 
 TSBomb:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^HeavyBomb
 	ReloadDelay: 38
 	Burst: 5
 	BurstDelays: 3
@@ -780,9 +780,9 @@ TSBomb:
 
 TSBombSonic:
 	Inherits: ^HeavyBomb
-	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^TSSonicGrenade
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: ^MagicWeapon
+	Inherits@4: ^TSSonicGrenade
 	ReloadDelay: 38
 	Burst: 5
 	BurstDelays: 3
@@ -864,11 +864,11 @@ TSMobile_EMP:
 
 TSShotgun:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^MediumCannon
+	Inherits@5: ^SmallArms
+	Inherits@6: ^Chaingun
 	ReloadDelay: 46
 	Range: 4002
 	Report: DSDSHTGN.wav
@@ -904,7 +904,7 @@ TSShotgun:
 
 TSJumpCannon:
 	Inherits: ^RA2FlakWeapon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 25
 	Range: 5090
 	Report: jumpjet1.aud
@@ -923,10 +923,10 @@ TSJumpCannon:
 
 TSAssaultCannonSonic:
 	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
-	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^TSSonicGrenade
+	Inherits@2: ^Chaingun
+	Inherits@3: ^TeslaWeapon
+	Inherits@4: ^MagicWeapon
+	Inherits@5: ^TSSonicGrenade
 	ReloadDelay: 45
 	Burst: 2
 	BurstDelays: 2
@@ -980,9 +980,9 @@ TSAssaultCannonTal:
 
 TSAssaultCannonTalSonic:
 	Inherits: ^Chaingun
-	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^TSSonicGrenade
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: ^MagicWeapon
+	Inherits@4: ^TSSonicGrenade
 	ReloadDelay: 45
 	Burst: 2
 	BurstDelays: 2
@@ -1011,7 +1011,7 @@ TSAssaultCannonTalSonic:
 
 TSVulcanGun:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 48
 	Burst: 4
@@ -1029,10 +1029,10 @@ TSVulcanGun:
 
 TSVulcanGunSonic:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^TSSonicGrenade
+	Inherits@2: ^Chaingun
+	Inherits@3: ^TeslaWeapon
+	Inherits@4: ^MagicWeapon
+	Inherits@5: ^TSSonicGrenade
 	ValidTargets: Ground, Water
 	ReloadDelay: 66
 	Burst: 4
@@ -1102,7 +1102,7 @@ TSHammerheadGun:
 
 TSAAPCCannon:
 	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^FlakWeapon
 	ReloadDelay: 10
 	Range: 6263
 	ValidTargets: Ground, Water, Air

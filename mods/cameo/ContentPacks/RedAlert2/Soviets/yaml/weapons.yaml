@@ -120,7 +120,7 @@ RA2KirovBomb_fire:
 
 RA2KirovBomb_tesla:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: RA2KirovBomb
+	Inherits@2: RA2KirovBomb
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		Damage: 80000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
@@ -254,7 +254,7 @@ RA2120mm_tesla_elite:
 
 RA160mm:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2Grenade
+	Inherits@2: ^RA2Grenade
 	ReloadDelay: 88
 	Range: 11111
 	MinRange: 2222
@@ -285,8 +285,8 @@ RA160mm:
 
 RA160mm_rad:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: RA160mm
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: RA160mm
 	Inherits@rad: ^RA2RadShell
 	Projectile: Bullet
 		ContrailStartColor: 88BB66
@@ -383,8 +383,8 @@ RA160mmE_tesla_elite:
 
 RA2120xmm:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2HeavyCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2HeavyCannon
 	Range: 6992
 	ReloadDelay: 63
 	Burst: 2
@@ -412,9 +412,9 @@ RA2120xmm:
 
 RA2120xmm_rad:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: RA2120xmm
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyChemicalWeapon
+	Inherits@4: RA2120xmm
 	Inherits@rad: ^RA2RadShell
 	Warhead@LightChemicalWeapon: SpreadDamage
 		Damage: 2000
@@ -718,7 +718,7 @@ V3Launch_elite:
 
 RA2vulcan:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 14
 	Range: 6577
@@ -782,7 +782,7 @@ RA2FlakTrackGun_elite:
 
 RA2FlakTrackAAGun:
 	Inherits: RA2FlakTrackGun
-	Inherits: ^RA2FlakWeapon
+	Inherits@2: ^RA2FlakWeapon
 	ValidTargets: Air
 	Range: 8292
 	Projectile: Bullet

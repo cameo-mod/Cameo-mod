@@ -311,8 +311,8 @@ RA2sabot_elite:
 
 RA2MirageGun:
 	Inherits: ^RailgunWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^RA2TankDestroyerCannon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^RA2TankDestroyerCannon
 	ReloadDelay: 39
 	Range: 6031
 	Report: vmiratta.wav
@@ -344,7 +344,7 @@ RA2MirageGun:
 
 RA2HoverMissile:
 	Inherits: ^ArrowWeapon
-	Inherits: ^RA2LightMissile
+	Inherits@2: ^RA2LightMissile
 	Range: 5760
 	ReloadDelay: 28
 	Burst: 2
@@ -396,10 +396,10 @@ RA2HoverMissile_AA_elite:
 
 RA2ThunderboltMissile:
 	Inherits: ^HeavyMissile
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: RA2HoverMissile
+	Inherits@2: ^HeavyAAWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^FlakWeapon
+	Inherits@5: RA2HoverMissile
 	Projectile: Missile
 		Speed: 800
 		Arm: 2
@@ -489,7 +489,7 @@ RA2ThunderboltMissile_AA_elite:
 
 RA2MultiHoverMissile:
 	Inherits: ^MediumCannon
-	Inherits: ^MediumChemicalWeapon
+	Inherits@2: ^MediumChemicalWeapon
 	Inherits@2: RA2HoverMissile
 	Range: 6170
 	ReloadDelay: 20
@@ -569,10 +569,10 @@ RA2MultiHoverMissile_AA_elite:
 
 RA2MultiThunderboltMissile:
 	Inherits: ^HeavyMissile
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: RA2MultiHoverMissile
+	Inherits@2: ^HeavyAAWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^FlakWeapon
+	Inherits@5: RA2MultiHoverMissile
 	Projectile: Missile
 		Speed: 800
 		Arm: 2
@@ -1144,7 +1144,7 @@ RA2TeslaCoilCharge_cosmetic:
 
 TeslaArmorDischargeDummy:
 	Inherits: ^LightMissile
-	Inherits: ^TeslaWeapon
+	Inherits@2: ^TeslaWeapon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 1
 	Range: 4500
@@ -1515,8 +1515,8 @@ RA2PSIAtomicDamage:
 
 RA2HornetMissile:
 	Inherits: ^Grenade
-	Inherits: ^HeavyBomb
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^RA2MediumMissile
 	ReloadDelay: 3
 	Range: 5000
 	MinRange: 1000
@@ -1563,9 +1563,9 @@ RA2GIRockets:
 
 MigMissiles:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^HeavyAAWeapon
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^RA2MediumMissile
 	ReloadDelay: 50
 	Burst: 4
 	BurstDelays: 2
@@ -1611,8 +1611,8 @@ MigMissiles:
 
 MigMissiles_rad:
 	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: MigMissiles
+	Inherits@2: ^HeavyChemicalWeapon
+	Inherits@3: MigMissiles
 	Inherits@rad: ^RA2RadShell
 	Projectile: Missile
 		TrailImage: green_smokey
@@ -1762,8 +1762,8 @@ DreadnoughtLaunch:
 
 RA2SCUD:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^RA2Grenade
-	Inherits: ^RA2HeavyMissile
+	Inherits@2: ^RA2Grenade
+	Inherits@3: ^RA2HeavyMissile
 	ReloadDelay: 125
 	Range: 20000
 	MinRange: 4000
@@ -1808,9 +1808,9 @@ RA2SCUD:
 
 RA2SCUD_rad:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: RA2SCUD
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyChemicalWeapon
+	Inherits@4: RA2SCUD
 	Inherits@rad: ^RA2RadShell
 	Warhead@LightChemicalWeapon: SpreadDamage
 		Damage: 18000
@@ -1920,7 +1920,7 @@ DredMissile:
 
 YRBoomerSCUD:
 	Inherits: ^RA2Grenade
-	Inherits: ^RA2HeavyMissile
+	Inherits@2: ^RA2HeavyMissile
 	-Report:
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
@@ -1950,7 +1950,7 @@ YRBoomerSCUD:
 
 RA2TorpTube:
 	Inherits: ^RA2Grenade
-	Inherits: ^RA2HeavyMissile
+	Inherits@2: ^RA2HeavyMissile
 	ReloadDelay: 90
 	Range: 9000
 	Report: vbooat2a.wav
@@ -2036,7 +2036,7 @@ RA2vulcan3:
 
 BlackHawkCannon:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 3
 	ValidTargets: Ground, Air, Water
 	Range: 4750
@@ -2099,7 +2099,7 @@ RA2SKELETON:
 
 RA2CRM60:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 14
 	Burst: 4
@@ -2121,8 +2121,8 @@ RA2CRM60:
 
 RA2CRM60H:
 	Inherits: ^HeavyCannon
-	Inherits: ^RA2Chaingun
-	Inherits: ^SniperWeapon
+	Inherits@2: ^RA2Chaingun
+	Inherits@3: ^SniperWeapon
 	ValidTargets: Ground, Water, Air
 	Report: iseaatta.wav, iseaattb.wav
 	ReloadDelay: 10
@@ -2171,9 +2171,9 @@ RA2FLAKAG:
 
 RA2FlakTrackGun:
 	Inherits: ^SmallArms
-	Inherits: ^Grenade
-	Inherits: ^Chaingun
-	Inherits: RA2FLAKAG
+	Inherits@2: ^Grenade
+	Inherits@3: ^Chaingun
+	Inherits@4: RA2FLAKAG
 	ReloadDelay: 18
 	Range: 5528
 	ValidTargets: Ground, Water
@@ -2250,7 +2250,7 @@ RA2AWP:
 
 RA2GattlingMG1:
 	Inherits: ^SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 5000
 	ReloadDelay: 6
@@ -2369,7 +2369,7 @@ RA2VirusExplode:
 
 RA220mmrapid:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 15
 	Range: 5000
@@ -2460,8 +2460,8 @@ RA2DemoBomb:
 
 RA2Terrorist:
 	Inherits: ^HeavyBomb
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2Grenade
 	-Report:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 25
@@ -2711,8 +2711,8 @@ IvanAttach:
 
 IvanBomb:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
 	Warhead@Grenade: SpreadDamage
 		Damage: 30000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -2755,9 +2755,9 @@ TanyaAttach:
 
 TanyaBomb:
 	Inherits: IvanBomb
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^TankDestroyerCannon
+	Inherits@3: ^MediumCannon
+	Inherits@4: ^HeavyCannon
 	Warhead@TankDestroyerCannon: SpreadDamage
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
@@ -2845,7 +2845,7 @@ SealBomb:
 
 BorisAKM:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	Report: iboratta.wav, iborattb.wav
 	ValidTargets: Ground, Water
 	InvalidTargets: Structure, Bridge, wall

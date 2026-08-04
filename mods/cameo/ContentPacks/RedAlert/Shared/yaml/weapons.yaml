@@ -91,7 +91,7 @@ M1Carbine:
 
 CryoM1Carbine:
 	Inherits: M1Carbine
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 0
@@ -144,7 +144,7 @@ VengeanceActivator3:
 
 ConscriptMolotov:
 	Inherits: ^Grenade
-	Inherits: ^LightFlameWeapon
+	Inherits@2: ^LightFlameWeapon
 	ReloadDelay: 50
 	Range: 5725
 	Report: toss1.aud
@@ -207,7 +207,7 @@ ConscriptMolotovExplode:
 
 RocketsRA:
 	Inherits: ^MediumMissile
-	Inherits: ^LightMissile
+	Inherits@2: ^LightMissile
 	ReloadDelay: 50
 	Range: 6643
 	Report: missile6.aud
@@ -222,17 +222,17 @@ RocketsRA:
 
 RocketsRACryo:
 	Inherits: RocketsRA
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -20000
 		Range: 300
 
 DragunovSniper:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^RailgunWeapon
-	Inherits: ^LightMissile
-	Inherits: ^HeavyCannon
-	Inherits: ^FlakWeapon
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^HeavyCannon
+	Inherits@5: ^FlakWeapon
 	ReloadDelay: 85
 	Range: 5804
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -521,7 +521,7 @@ MagicOrbSpreaderProjectile2:
 
 MagicOrb:
 	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
+	Inherits@2: ^MagicWeapon
 	Inherits@EMP: ^EMPDamage
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
 	Burst: 8
@@ -575,7 +575,7 @@ MagicOrb:
 
 MagicOrb2:
 	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
+	Inherits@2: ^MagicWeapon
 	Inherits@EMP: ^EMPDamage
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
 	Burst: 8
@@ -629,7 +629,7 @@ MagicOrb2:
 
 APCGunAllies:
 	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^FlakWeapon
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 5978
@@ -662,7 +662,7 @@ APCGunAllies_AA:
 
 RAVulcan:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 48
 	Burst: 5
@@ -699,9 +699,9 @@ ZeroFighterChainGun:
 
 ZeroFighterChainGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: ^Grenade
-	Inherits: ZeroFighterChainGun
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: ^Grenade
+	Inherits@3: ZeroFighterChainGun
+	Inherits@4: ^WaveforceBulletProjectile
 	Projectile: Bullet
 		-LaunchAngle:
 		ValidTargets: Ground, Water, Air
@@ -724,7 +724,7 @@ ZeroFighterChainGunWaveforce:
 
 TigerCannon:
 	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^MediumCannon
 	ReloadDelay: 60
 	Range: 5915
 	Report: cannon1.aud
@@ -744,12 +744,12 @@ TigerCannon:
 
 25mmWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: 25mm
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: 25mm
+	Inherits@3: ^WaveforceBulletProjectile
 
 WaveforceCannonChargedLaser:
 	Inherits: ^HeavyMissile
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	ReloadDelay: 120
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -795,7 +795,7 @@ WaveforceCannonChargedLaser:
 
 WaveforceCannonDistortedBeam1:
 	Inherits: ^TeslaWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^HeavyCannon
 	ReloadDelay: 120
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -845,7 +845,7 @@ WaveforceCannonDistortedBeam1:
 
 WaveforceCannonDistortedBeam2:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^HeavyFlameWeapon
 	ReloadDelay: 120
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -899,9 +899,9 @@ WaveforceCannonDistortedBeam2:
 
 ra120mm:
 	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^MediumCannon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^TankDestroyerCannon
 	ValidTargets: Ground, Water, Vehicle, Structure
 	ReloadDelay: 95
 	Burst: 2
@@ -935,9 +935,9 @@ ra120mm:
 
 MammothTusk:
 	Inherits: ^Grenade
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyMissile
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^HeavyMissile
 	Inherits@glow: ^ImpactGlow
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 91
@@ -981,7 +981,7 @@ MammothTusk:
 
 ParaBomb:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^HeavyFlameWeapon
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 8
 	Range: 5000
@@ -1009,10 +1009,10 @@ ParaBomb:
 
 JapanSuperBomb:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumChemicalWeapon
+	Inherits@4: ^MediumFlameWeapon
+	Inherits@5: ^HeavyBomb
 	ReloadDelay: 5
 	Range: 3000
 	Report: vkiratta.wav
@@ -1098,6 +1098,7 @@ RAAtomic:
 		Radius: 0.35
 		Brightness: 1.3
 		Darkness: 0.85
+		MinimumExposure: 0.45
 	Warhead@Effect: CreateEffect
 		ImpactSounds: kaboom1.aud
 	Warhead@Effect2: CreateEffect
@@ -1407,7 +1408,7 @@ BarrelExplode:
 
 ATMine:
 	Inherits: ^DamagingExplosionHE
-	Inherits: ^HeavyMissile
+	Inherits@2: ^HeavyMissile
 	Report: mineblo1.aud
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water
@@ -1761,7 +1762,7 @@ NanoReturn:
 
 TorpTube:
 	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
+	Inherits@2: ^HeavyMissile
 	ReloadDelay: 100
 	Range: 10000
 	Report: torpedo1.aud
@@ -1808,7 +1809,7 @@ TorpTube:
 
 TorpTubeThermobaric:
 	Inherits: ^NuclearWarhead
-	Inherits: ^HeavyMissile
+	Inherits@2: ^HeavyMissile
 	ReloadDelay: 100
 	Range: 10000
 	Report: torpedo1.aud
@@ -1897,7 +1898,7 @@ DepthCharge:
 
 8Inch:
 	Inherits: ^HeavyBomb
-	Inherits: ^Grenade
+	Inherits@2: ^Grenade
 	ReloadDelay: 250
 	Range: 15000
 	MinRange: 3000
@@ -1957,14 +1958,14 @@ Stinger:
 
 StingerCryo:
 	Inherits: Stinger
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -10000
 		Range: 400
 
 JapanSpeedBoatGun:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: Underwater, Submarine
 	ReloadDelay: 4
@@ -1981,12 +1982,12 @@ JapanSpeedBoatGun:
 
 JapanSpeedBoatGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: JapanSpeedBoatGun
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: JapanSpeedBoatGun
+	Inherits@3: ^WaveforceBulletProjectile
 
 YamatoCannon:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyCannon
+	Inherits@2: ^HeavyCannon
 	ReloadDelay: 125
 	Range: 12500
 	MinRange: 2500
@@ -2044,7 +2045,7 @@ ChronoVortexInit:
 
 ra1_allies_chronovortex:
 	Inherits: ^HeavyBomb
-	Inherits: ^MagicWeapon
+	Inherits@2: ^MagicWeapon
 	ReloadDelay: 5
 	Range: 1250
 	ValidTargets: Ground, Water
@@ -2168,7 +2169,7 @@ ra1_allies_rifleinfantry_carbine:
 
 ra1_allies_rifleinfantry_carbine_cryo:
 	Inherits: ra1_allies_rifleinfantry_carbine
-	Inherits: ^CryoMissileProjectile
+	Inherits@2: ^CryoMissileProjectile
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 0

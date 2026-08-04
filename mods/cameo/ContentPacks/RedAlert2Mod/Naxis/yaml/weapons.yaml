@@ -1,8 +1,8 @@
 NaxBrummbarArty:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^RA2MediumCannon
 	ReloadDelay: 140
 	Range: 14000
 	MinRange: 2800
@@ -45,7 +45,7 @@ NaxBrummbarArty_elite:
 
 NaxiWW2KübelwagenMachinegun:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
 	ReloadDelay: 80
 	Burst: 6
@@ -77,7 +77,7 @@ NaxiWW2KübelwagenMachinegun:
 
 NaxiWW2Machinegun:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
 	ReloadDelay: 60
 	Burst: 6
@@ -297,9 +297,9 @@ NaxiRifleCons_elite:
 
 LunarNaxiDroneLaser:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^MediumMissile
-	Inherits: ^LaserWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^LaserWeapon
 	Range: 5760
 	ReloadDelay: 100
 	Burst: 4
@@ -327,11 +327,11 @@ LunarNaxiDroneLaser:
 
 LunarNaxiDroneMissile:
 	Inherits: ^HeavyMissile
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^ArrowWeapon
-	Inherits: ^RA2LightMissile
+	Inherits@2: ^HeavyAAWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^ArrowWeapon
+	Inherits@6: ^RA2LightMissile
 	Range: 5760
 	ReloadDelay: 100
 	Burst: 2
@@ -454,11 +454,11 @@ NaxiSniper_elite:
 
 NaxiShrek:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^Grenade
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: ^Grenade
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^MediumChemicalWeapon
+	Inherits@6: ^RA2MediumMissile
 	ReloadDelay: 124
 	Range: 6805
 	ValidTargets: Ground, Water
@@ -535,11 +535,11 @@ NaxiShrek_elite:
 
 NaxiShrekCons:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^Grenade
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: ^Grenade
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^MediumChemicalWeapon
+	Inherits@6: ^RA2MediumMissile
 	ReloadDelay: 135
 	Range: 5512
 	ValidTargets: Ground, Water
@@ -616,7 +616,7 @@ NaxiShrekCons_elite:
 
 NaxiHetzerDestroyer:
 	Inherits: ^MediumCannon
-	Inherits: ^RA2TankDestroyerCannon
+	Inherits@2: ^RA2TankDestroyerCannon
 	ReloadDelay: 80
 	Range: 7132
 	Projectile: Bullet
@@ -639,8 +639,8 @@ NaxiHetzerDestroyer_elite:
 
 NaxiJadgDestroyer:
 	Inherits: ^HeavyCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2TankDestroyerCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2TankDestroyerCannon
 	ReloadDelay: 90
 	Range: 7396
 	Projectile: Bullet
@@ -669,7 +669,7 @@ NaxiJadgDestroyer_elite:
 
 NaxiAntiTankCannon:
 	Inherits: ^MediumCannon
-	Inherits: ^RA2TankDestroyerCannon
+	Inherits@2: ^RA2TankDestroyerCannon
 	ReloadDelay: 75
 	Range: 7361
 	Report: nax_hotwizer.wav
@@ -697,11 +697,11 @@ NaxiAntiTankCannon_elite:
 
 NaxMausCannon:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^HeavyBomb
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^RA2MediumCannon
 	ReloadDelay: 99
 	Report: aa_bgart.wav
 	Range: 6666
@@ -760,8 +760,8 @@ NaxMausCannon_elite:
 
 NaxRatteCannon:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^RA2MediumCannon
 	ReloadDelay: 145
 	Report: aa_bgart.wav
 	Range: 6110
@@ -806,9 +806,9 @@ NaxRatteCannon_elite:
 
 NaxQuadCannon:
 	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^Chaingun
-	Inherits: ^RA2FlakWeapon
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^Chaingun
+	Inherits@4: ^RA2FlakWeapon
 	ValidTargets: Ground, Water
 	ReloadDelay: 47
 	Burst: 6
@@ -959,8 +959,8 @@ NaxFlakAA:
 
 NaxPlanegun_elite:
 	Inherits: ^Grenade
-	Inherits: ^HeavyCannon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^RA2Chaingun
 	ReloadDelay: 127
 	Burst: 10
 	BurstDelays: 2
@@ -1001,7 +1001,7 @@ NaxPlanegun_elite:
 
 NaxPlaneRockets_elite:
 	Inherits: ^MediumMissile
-	Inherits: ^D2KRocket
+	Inherits@2: ^D2KRocket
 	ReloadDelay: 100
 	Burst: 2
 	BurstDelays: 9
@@ -1029,9 +1029,9 @@ NaxPlaneRockets_elite:
 
 NaxiInterceptorGun:
 	Inherits: ^HeavyCannon
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
-	Inherits: ^SmallArms
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^Chaingun
+	Inherits@4: ^SmallArms
 	ReloadDelay: 100
 	Burst: 4
 	BurstDelays: 3
@@ -1066,8 +1066,8 @@ NaxiInterceptorGun:
 
 NaxShoeRocket:
 	Inherits: ^HeavyBomb
-	Inherits: ^RA2Grenade
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^RA2Grenade
+	Inherits@3: ^RA2MediumMissile
 	Report: vaegatta.wav, vaegattb.wav
 	ReloadDelay: 250
 	Range: 12000
@@ -1168,8 +1168,8 @@ NaxiAlienPistol_elite:
 
 NaxiMissileUboat:
 	Inherits: ^Grenade
-	Inherits: ^HeavyBomb
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^RA2MediumMissile
 	ReloadDelay: 125
 	Burst: 2
 	BurstDelays: 6

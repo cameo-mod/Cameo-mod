@@ -69,13 +69,22 @@ namespace OpenRA.Mods.CA.Traits
 			if (baseBuilder.Info.NavalProductionTypes.Count == 0)
 				waterState = WaterCheck.DontCheck;
 			limitBuildRadius = world.WorldActor.TraitOrDefault<MapBuildRadius>().BuildRadiusEnabled;
-			botLimits = p.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
-			if (botLimits != null)
+		}
+
+		public void SetBotLimits(BotLimits limits)
+		{
+			botLimits = limits;
+			if (botLimits == null)
 			{
-				productionTypeLimit = botLimits.Info.ProductionTypeLimit;
-				buildingDelayModifier = botLimits.Info.BuildingDelayModifier;
-				buildingIntervalModifier = botLimits.Info.BuildingIntervalModifier;
+				productionTypeLimit = 0;
+				buildingDelayModifier = 100;
+				buildingIntervalModifier = 100;
+				return;
 			}
+
+			productionTypeLimit = botLimits.Info.ProductionTypeLimit;
+			buildingDelayModifier = botLimits.Info.BuildingDelayModifier;
+			buildingIntervalModifier = botLimits.Info.BuildingIntervalModifier;
 		}
 
 		public void Tick(IBot bot)
@@ -204,6 +213,7 @@ namespace OpenRA.Mods.CA.Traits
 				if ((playerResources.GetCashAndResources() < minCashRequirement && !baseBuilder.Info.RefineryTypes.Contains(item.Name)) || itemQueuedThisTick)
 					return false;
 
+				baseBuilder.RecordOpeningStructureQueued(queue, item);
 				bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
 				itemQueuedThisTick = true;
 				SetBuildingInterval(item.Name);
@@ -365,16 +375,56 @@ namespace OpenRA.Mods.CA.Traits
 		ActorInfo ChooseBuildingToBuild(ProductionQueue queue)
 		{
 			var buildableThings = queue.BuildableItems();
+			var availableCash = playerResources.GetCashAndResources();
 
 			// This gets used quite a bit, so let's cache it here
 			var power = GetProducibleBuilding(baseBuilder.Info.PowerTypes, buildableThings,
 				a => a.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount));
+			var openingBarracksPolicyActive = botLimits != null && botLimits.Info.PrioritizeBarracksBeforeRefinery
+				&& baseBuilder.Info.BarracksBeforeRefineryFactions.Contains(player.Faction.InternalName)
+				&& !baseBuilder.OpeningBarracksPriorityCompleted;
+
+			// Wait for the queued opening structure to be placed before allowing another construction queue to proceed.
+			if (openingBarracksPolicyActive && (baseBuilder.HasQueuedPowerPlant() || baseBuilder.HasQueuedBarracks()))
+				return null;
 
 			// First priority is to get out of a low power situation
 			if (playerPower != null && playerPower.ExcessPower < minimumExcessPower && power != null && power.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount) > 0)
 			{
 					AIUtils.BotDebug("{0} decided to build {1}: Priority override (low power)", queue.Actor.Owner, power.Name);
 					return power;
+			}
+
+			if (openingBarracksPolicyActive && !baseBuilder.HasBuiltOrQueuedBarracks())
+			{
+				// Finish the opening power plant before starting the barracks.
+				if (!baseBuilder.HasCompletedPowerPlant())
+				{
+					if (!baseBuilder.HasQueuedPowerPlant() && power != null && queue.GetProductionCost(power) <= availableCash)
+					{
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override (opening power)", queue.Actor.Owner, power.Name);
+						return power;
+					}
+				}
+				else
+				{
+					var barracks = GetProducibleBuilding(baseBuilder.Info.BarracksTypes, buildableThings);
+
+					if (barracks != null && queue.GetProductionCost(barracks) <= availableCash)
+					{
+						if (HasSufficientPowerForActor(barracks))
+						{
+							AIUtils.BotDebug("{0} decided to build {1}: Priority override (opening barracks)", queue.Actor.Owner, barracks.Name);
+							return barracks;
+						}
+
+						if (power != null && queue.GetProductionCost(power) <= availableCash)
+						{
+							AIUtils.BotDebug("{0} decided to build {1}: Priority override (opening barracks would cause low power)", queue.Actor.Owner, power.Name);
+							return power;
+						}
+					}
+				}
 			}
 
 			// Next is to build up a strong economy
@@ -466,7 +516,7 @@ namespace OpenRA.Mods.CA.Traits
 				// Does this building have initial delay, if so have we passed it?
 				if (baseBuilder.Info.BuildingDelays != null &&
 					baseBuilder.Info.BuildingDelays.TryGetValue(name, out var delay) &&
-					delay * (buildingDelayModifier / 100) > world.WorldTick)
+					delay * buildingDelayModifier / 100 > world.WorldTick)
 					continue;
 
 				// Does this building have an interval which hasn't elapsed yet?

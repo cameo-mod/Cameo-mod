@@ -82,8 +82,8 @@ TS25mmDep:
 
 TSLaser25mmDep:
 	Inherits: ^FlakWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	Projectile: LaserZap
 		Width: 36
 		Duration: 8
@@ -128,8 +128,8 @@ TS90mmDep:
 
 TSLaser90mm:
 	Inherits: ^MediumCannon
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	Projectile: LaserZap
 		Width: 72
 		SecondaryBeamWidth: 36
@@ -185,8 +185,8 @@ TS120mm_bluenuke:
 
 TSHighVelocityTurChem:
 	Inherits: ^TSCannonEffect
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^TankDestroyerCannon
 	ReloadDelay: 30
 	Range: 9483
 	Projectile: Bullet
@@ -232,7 +232,7 @@ TSHighVelocityTurChem:
 
 TS155mm:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^HeavyBomb
 	ReloadDelay: 135
 	Range: 13083
 	MinRange: 2615
@@ -280,7 +280,7 @@ TS155mm_bluenuke:
 
 TSGrenade:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumCannon
+	Inherits@2: ^MediumCannon
 	ReloadDelay: 50
 	Range: 6151
 	Report: toss1.aud
@@ -318,10 +318,10 @@ TSGrenade:
 
 TSGrenadeSonic:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumCannon
-	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^TSSonicGrenade
+	Inherits@2: ^MediumCannon
+	Inherits@3: ^TeslaWeapon
+	Inherits@4: ^MagicWeapon
+	Inherits@5: ^TSSonicGrenade
 	ReloadDelay: 50
 	Range: 6151
 	Report: toss1.aud
@@ -481,8 +481,8 @@ MammothTankCannon:
 
 TSTurretLaser:
 	Inherits: ^Chaingun
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	ReloadDelay: 25
 	Range: 6487
 	Report: lastur1.aud
@@ -511,8 +511,8 @@ TSCABALPlasmaFire:
 
 TSLaserTurretLaser:
 	Inherits: ^Chaingun
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	ReloadDelay: 20
 	Range: 6992
 	Report: lastur1.aud
@@ -542,8 +542,8 @@ TSLaserTurretLaser:
 
 TurretLaserFragment:
 	Inherits: ^Chaingun
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	-Report:
 	Range: 2500
 	Projectile: LaserZap
@@ -563,8 +563,8 @@ TurretLaserFragment:
 
 TSObeliskLaserFire:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	ReloadDelay: 60
 	Range: 10199
 	Report: obelray1.aud
@@ -600,8 +600,8 @@ TSObeliskLaserFire:
 
 TSLaserObeliskLaserFire:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	ReloadDelay: 32
 	-Warhead@Effect:
 	-Warhead@EffectAir:
@@ -643,8 +643,8 @@ TSLaserObeliskLaserFire:
 
 ObeliskLaserFragment:
 	Inherits: ^Chaingun
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	Range: 4000
 	-Warhead@Effect:
 	-Warhead@EffectAir:
@@ -706,7 +706,7 @@ ts_nod_mobilerepairvehicle:
 
 ^TSDefaultMissile:
 	Inherits: ^MediumMissile
-	Inherits: ^LightMissile
+	Inherits@2: ^LightMissile
 	ReloadDelay: 50
 	Range: 6643
 	Report: missile6.aud
@@ -794,7 +794,7 @@ TSMammothTusk_elite:
 
 TSBikeMissile:
 	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^MediumMissile
 	Range: 6554
 	Burst: 2
 	BurstDelays: 5
@@ -818,9 +818,9 @@ TSBikeMissile:
 
 TSBikeTibMissile:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^LightMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^MediumMissile
 	Range: 6554
 	Burst: 2
 	BurstDelays: 5
@@ -863,7 +863,7 @@ TSBikeTibMissile:
 
 TSSAPCMissiles:
 	Inherits: ^Grenade
-	Inherits: ^LightMissile
+	Inherits@2: ^LightMissile
 	Range: 5300
 	Burst: 2
 	BurstDelays: 2
@@ -914,11 +914,11 @@ TSDragon:
 
 TSHellfire:
 	Inherits: ^HeavyCannon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^TankDestroyerCannon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^Grenade
+	Inherits@5: ^HeavyMissile
+	Inherits@6: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 32
 	Range: 5740
@@ -976,8 +976,8 @@ TSRedEye2:
 
 TSChemAdatsMissile:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^LightMissile
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^LightMissile
 	Range: 5606
 	Burst: 4
 	BurstDelays: 2
@@ -1209,7 +1209,7 @@ TSVulcan2:
 
 TSAssaultCannon:
 	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 33
 	Burst: 2
 	BurstDelays: 2
@@ -1233,8 +1233,8 @@ TSAssaultCannon:
 
 TSLaserRaiderCannon:
 	Inherits: ^SmallArms
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TSLaserEffect
 	Projectile: LaserZap
 		Width: 36
 		Duration: 8

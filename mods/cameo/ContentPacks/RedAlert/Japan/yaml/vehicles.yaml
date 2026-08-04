@@ -134,14 +134,14 @@ japan_igomediumtank:
 		TurnSpeed: 18
 	Armament:
 		Weapon: Type89Cannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 720,0,240
 		MuzzleSequence: muzzle
 		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade: ##########
 		Weapon: Type89PlasmaCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 720,0,320
 		MuzzleSequence: muzzle
@@ -197,7 +197,7 @@ japan_nanodronebuggy:
 		Offset: -250,0,0
 	Armament:
 		Weapon: NanoArtilleryAG
-		Recoil: 77
+		Recoil: 39
 		LocalOffset: 500,0,500
 		MuzzleSequence: muzzle
 	FirepowerMultiplier@Nanodrones:
@@ -324,7 +324,7 @@ japan_oitank:
 		Turret: main
 		Weapon: OIBigCannon
 		LocalOffset: 1200,0,600
-		Recoil: 350
+		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		RequiresCondition: !japan_upgrade_advancedplasmaweapons
@@ -332,7 +332,7 @@ japan_oitank:
 		Turret: main
 		Weapon: OIBigPlasmaCannon
 		LocalOffset: 1200,0,600
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		RequiresCondition: japan_upgrade_advancedplasmaweapons
@@ -340,7 +340,7 @@ japan_oitank:
 		Turret: primary
 		Weapon: OISmallCannon
 		LocalOffset: 600,0,400
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		RequiresCondition: !japan_upgrade_advancedplasmaweapons
@@ -348,7 +348,7 @@ japan_oitank:
 		Turret: secondary
 		Weapon: OISmallCannon
 		LocalOffset: 600,0,400
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		RequiresCondition: !japan_upgrade_advancedplasmaweapons
@@ -356,7 +356,7 @@ japan_oitank:
 		Turret: back
 		Weapon: OISmallCannon
 		LocalOffset: 600,0,400
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		RequiresCondition: !japan_upgrade_advancedplasmaweapons
@@ -364,7 +364,7 @@ japan_oitank:
 		Turret: primary
 		Weapon: OISmallPlasmaCannon
 		LocalOffset: 600,0,400
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		RequiresCondition: japan_upgrade_advancedplasmaweapons
@@ -372,7 +372,7 @@ japan_oitank:
 		Turret: secondary
 		Weapon: OISmallPlasmaCannon
 		LocalOffset: 600,0,400
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		RequiresCondition: japan_upgrade_advancedplasmaweapons
@@ -380,7 +380,7 @@ japan_oitank:
 		Turret: back
 		Weapon: OISmallPlasmaCannon
 		LocalOffset: 600,0,400
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		RequiresCondition: japan_upgrade_advancedplasmaweapons
@@ -749,25 +749,25 @@ japan_armoredcar:
 		Offset: -200,0,100
 	Armament@AG:
 		Weapon: ArmoredCarMG
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
 		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@AA:
 		Weapon: ArmoredCarMG_AA
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
 		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@UpgradeAG:
 		Weapon: ArmoredCarMGWaveforce
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
 		RequiresCondition: japan_upgrade_waveforcebullets
 	Armament@UpgradeAA:
 		Weapon: ArmoredCarMGAAWaveforce
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
 		RequiresCondition: japan_upgrade_waveforcebullets
@@ -860,14 +860,14 @@ japan_chihaheavytank:
 		TurnSpeed: 17
 	Armament:
 		Weapon: Type97Cannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 720,0,320
 		MuzzleSequence: muzzle
 		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade: ##########
 		Weapon: Type97PlasmaCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 720,0,320
 		MuzzleSequence: muzzle
@@ -938,14 +938,14 @@ japan_hovercraftflametank:
 		Offset: 0,0,0
 	Armament:
 		Weapon: HeavyFlamer
-		Recoil: 160
+		Recoil: 80
 		RecoilRecovery: 36
 		LocalOffset: 800,-120,160, 800,120,160
 		MuzzleSequence: muzzle
 		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade: ##########
 		Weapon: HeavyPlasmaFlamer
-		Recoil: 160
+		Recoil: 80
 		RecoilRecovery: 36
 		LocalOffset: 800,-120,160, 800,120,160
 		MuzzleSequence: muzzle
@@ -1145,7 +1145,7 @@ japan_shrineminitank:
 		TurnSpeed: 24
 	Armament:
 		Weapon: ShrineTankCannon
-		Recoil: 128
+		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 240,0,32
 		MuzzleSequence: muzzle
@@ -1200,21 +1200,21 @@ japan_waveforcetank:
 		TurnSpeed: 12
 	Armament:
 		Weapon: WaveforceCannon
-		Recoil: 256
+		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 1024,0,360
 		MuzzleSequence: muzzle
 		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade1: ##########
 		Weapon: WaveforceCannonChargedLaser
-		Recoil: 256
+		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 1024,0,360
 		MuzzleSequence: muzzle
 		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade2: ##########
 		Weapon: WaveforceCannonDistortedBeam1
-		Recoil: 256
+		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 1024,0,360
 		FireDelay: 1
@@ -1222,7 +1222,7 @@ japan_waveforcetank:
 		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade3: ##########
 		Weapon: WaveforceCannonDistortedBeam2
-		Recoil: 256
+		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 1024,0,360
 		FireDelay: 2
@@ -1292,7 +1292,7 @@ japan_waveforceartillery:
 		Offset: -12,0,33
 	Armament@AG:
 		Weapon: WaveArtilleryShell
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 512,0,192
 		MuzzleSequence: muzzle
 	FirepowerMultiplier@SplashCompensation:
@@ -1378,21 +1378,21 @@ japan_exorcistoitank:
 		Turret: main
 		Weapon: OIHakureiring
 		LocalOffset: 600,0,600
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 	Armament@AntiEpic:
 		Turret: main
 		Weapon: OIHakureiring2
 		LocalOffset: 600,0,600
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 	Armament@PRIMARY:
 		Turret: primary
 		Weapon: OISmallCannon
 		LocalOffset: 600,0,400
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		RequiresCondition: !japan_upgrade_advancedplasmaweapons
@@ -1400,7 +1400,7 @@ japan_exorcistoitank:
 		Turret: secondary
 		Weapon: OISmallCannon
 		LocalOffset: 600,0,400
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		RequiresCondition: !japan_upgrade_advancedplasmaweapons
@@ -1408,7 +1408,7 @@ japan_exorcistoitank:
 		Turret: back
 		Weapon: OISmallCannon
 		LocalOffset: 600,0,400
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		RequiresCondition: !japan_upgrade_advancedplasmaweapons
@@ -1416,7 +1416,7 @@ japan_exorcistoitank:
 		Turret: primary
 		Weapon: OISmallPlasmaCannon
 		LocalOffset: 600,0,400
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		RequiresCondition: japan_upgrade_advancedplasmaweapons
@@ -1424,7 +1424,7 @@ japan_exorcistoitank:
 		Turret: secondary
 		Weapon: OISmallPlasmaCannon
 		LocalOffset: 600,0,400
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		RequiresCondition: japan_upgrade_advancedplasmaweapons
@@ -1432,7 +1432,7 @@ japan_exorcistoitank:
 		Turret: back
 		Weapon: OISmallPlasmaCannon
 		LocalOffset: 600,0,400
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		RequiresCondition: japan_upgrade_advancedplasmaweapons

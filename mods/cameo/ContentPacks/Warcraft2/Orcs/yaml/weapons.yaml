@@ -152,9 +152,9 @@ wc2runesSuper:
 
 wc2catapultFire:
 	Inherits: ^Grenade
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^HeavyBomb
 	ReloadDelay: 240
 	Range: 13400
 	MinRange: 2680
@@ -337,8 +337,8 @@ wc2deathknightDeathAndDecay_Spread:
 
 wc2deathknightDeathAndDecay_Hit:
 	Inherits: ^HeavyCannon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^LightFlameWeapon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^LightFlameWeapon
 	ValidTargets: Ground, Water, Air
 	Projectile: InstantHit
 		Speed: 0c512
@@ -508,20 +508,20 @@ wc2deathanddecaySuper_Spread:
 
 wc2dragonFireVisible:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumMissile
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^HeavyFlameWeapon
+	Inherits@6: ^HeavyChemicalWeapon
+	Inherits@7: ^TankDestroyerCannon
+	Inherits@8: ^MediumCannon
+	Inherits@9: ^HeavyCannon
+	Inherits@10: ^Grenade
+	Inherits@11: ^ShrapnelWeapon
+	Inherits@12: ^HeavyBomb
+	Inherits@13: ^MediumMissile
+	Inherits@14: ^Chaingun
+	Inherits@15: ^FlakWeapon
 	Range: 5010
 	ReloadDelay: 120
 	Burst: 2

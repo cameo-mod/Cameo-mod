@@ -19,11 +19,11 @@ XCOMCarbine:
 
 XCOMShotgun:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^MediumCannon
+	Inherits@5: ^SmallArms
+	Inherits@6: ^Chaingun
 	ReloadDelay: 20
 	Range: 3000
 	Report: DSDSHTGN.wav
@@ -73,14 +73,14 @@ XCOMShotgun:
 
 XCOMShardGun:
 	Inherits: ^RailgunWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^HeavyMissile
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^HeavyMissile
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^TankDestroyerCannon
+	Inherits@7: ^MediumCannon
+	Inherits@8: ^SmallArms
+	Inherits@9: ^Chaingun
 	ReloadDelay: 25
 	Range: 5000
 	Burst: 5
@@ -190,7 +190,7 @@ XCOMGrenade3:
 
 XCOMChainGun:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 16
 	ValidTargets: Ground, Air, Water
 	Range: 5000

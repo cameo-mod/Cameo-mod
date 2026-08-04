@@ -1,6 +1,6 @@
 ACV_Machinegun:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 21
 	Burst: 4
@@ -22,8 +22,8 @@ ACV_Machinegun:
 
 Future_Cryocopter_Rocket:
 	Inherits: ^Grenade
-	Inherits: ^D2KRocket
-	Inherits: ^SteelMediumMissile
+	Inherits@2: ^D2KRocket
+	Inherits@3: ^SteelMediumMissile
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 4
@@ -84,11 +84,11 @@ Future_Cryocopter_Rocket:
 
 Future_Cryocopter_Cryo:
 	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^TeslaWeapon
+	Inherits@6: ^LaserWeapon
 	ValidTargets: Ground, Water
 	ReloadDelay: 8
 	Range: 5200
@@ -186,11 +186,11 @@ Future_Turret_Cryo:
 
 CryoLegionnaireAttack:
 	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^TeslaWeapon
+	Inherits@6: ^LaserWeapon
 	Range: 7000
 	ReloadDelay: 30
 	Report: AUCryoc_wea1impact2La.wav, AUCryoc_wea1impact2Lb.wav, AUCryoc_wea1impact2Lc.wav, AUCryoc_wea1impact2Ld.wav
@@ -300,7 +300,7 @@ CryoLegionnaireAttack:
 
 FutureMicrotorpedos:
 	Inherits: ^RA2Grenade
-	Inherits: ^RA2HeavyMissile
+	Inherits@2: ^RA2HeavyMissile
 	ReloadDelay: 240
 	Range: 12000
 	Burst: 4
@@ -346,11 +346,11 @@ FutureMicrotorpedos:
 
 AthenaLaser:
 	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Chaingun
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^TeslaWeapon
+	Inherits@6: ^LaserWeapon
 	Range: 16000
 	ReloadDelay: 1
 	ValidTargets: Ground, Water
@@ -537,7 +537,7 @@ Future_CoilerFriendFrag2:
 
 Future_MultiMissile:
 	Inherits: ^ArrowWeapon
-	Inherits: ^RA2LightMissile
+	Inherits@2: ^RA2LightMissile
 	ReloadDelay: 24
 	Burst: 3
 	BurstDelays: 4
@@ -557,10 +557,10 @@ Future_MultiMissile:
 
 Future_MultiMissile_Javelin:
 	Inherits: ^LightMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^D2KRocket
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^D2KRocket
 	ReloadDelay: 32
 	Burst: 3
 	BurstDelays: 4
@@ -608,9 +608,9 @@ Future_MultiMissile_Javelin:
 
 Future_MultiMissile_Frag:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^LightMissile
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^LightChemicalWeapon
+	Inherits@4: ^LightMissile
 	ReloadDelay: 56
 	Burst: 3
 	BurstDelays: 4
@@ -672,10 +672,10 @@ Future_MultiMissile_Frag:
 
 Future_MultiMissile_Sigma:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumMissile
+	Inherits@2: ^MagicWeapon
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^MediumMissile
 	ReloadDelay: 50
 	Burst: 3
 	BurstDelays: 6
@@ -752,11 +752,11 @@ Future_MultiMissile_Sigma:
 
 FutureEnforcerShotgun:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^MediumCannon
+	Inherits@5: ^SmallArms
+	Inherits@6: ^Chaingun
 	ReloadDelay: 40
 	Range: 3000
 	Report: DSDSHTGN.wav
@@ -809,10 +809,10 @@ FutureEnforcerShotgunDeployed_elite:
 
 FutureJavelinRockets:
 	Inherits: ^LightMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^D2KRocket
+	Inherits@2: ^FlakWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^D2KRocket
 	ReloadDelay: 25
 	Range: 6000
 	Projectile: Missile
@@ -874,7 +874,7 @@ FutureJavelinRocketsDeployed_elite:
 
 Future_Wheel_MG:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 40
 	Burst: 4
 	BurstDelays: 2
@@ -891,17 +891,17 @@ Future_Wheel_MG:
 
 Future_Wheel_MG_elite:
 	Inherits: Future_Wheel_MG
-	Inherits: ^SteelChaingun
+	Inherits@2: ^SteelChaingun
 	Range: 6806
 	Burst: 8
 
 ShotgunAttackRobotGun:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^MediumCannon
+	Inherits@5: ^SmallArms
+	Inherits@6: ^RA2Chaingun
 	ReloadDelay: 55
 	Range: 4110
 	Report: laser_cannon3_3.wav
@@ -937,16 +937,16 @@ ShotgunAttackRobotGun:
 
 ShotgunAttackRobotGun_elite:
 	Inherits: ShotgunAttackRobotGun
-	Inherits: ^SteelChaingun
+	Inherits@2: ^SteelChaingun
 	Range: 5110
 	Burst: 2
 	BurstDelays: 3
 
 CannonAttackRobotGun:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^RA2RailgunWeapon
-	Inherits: ^SteelMediumCannon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^RA2RailgunWeapon
+	Inherits@4: ^SteelMediumCannon
 	Range: 6000
 	ReloadDelay: 25
 	Report: steel_quantumfire.wav
@@ -982,7 +982,7 @@ CannonAttackRobotGun_elite:
 
 MissileAttackRobotGun:
 	Inherits: ^MediumMissile
-	Inherits: ^SteelLightMissile
+	Inherits@2: ^SteelLightMissile
 	Range: 8000
 	ReloadDelay: 65
 	Burst: 2
@@ -1015,9 +1015,9 @@ MissileAttackRobotGun_elite:
 
 FutureMechGatling:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^LightMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^LightMissile
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^RA2Chaingun
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
 	ReloadDelay: 12
 	Range: 8300
@@ -1059,8 +1059,8 @@ FutureMechGatling:
 
 FutureMechPlasma:
 	Inherits: ^Grenade
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^SteelHeavyCannon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^SteelHeavyCannon
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 10
@@ -1149,11 +1149,11 @@ Future_MBT_DebuffLaser_elite:
 
 FutureTankCannons:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^SteelHeavyCannon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^TeslaWeapon
+	Inherits@5: ^MagicWeapon
+	Inherits@6: ^SteelHeavyCannon
 	ReloadDelay: 65
 	Burst: 2
 	BurstDelays: 10
@@ -1252,15 +1252,15 @@ FutureTankCannons_elite:
 
 FutureHarbingerCannon:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^TeslaChargedWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^HeavyCannon
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^TeslaChargedWeapon
+	Inherits@5: ^TeslaWeapon
+	Inherits@6: ^MagicWeapon
+	Inherits@7: ^LaserWeapon
+	Inherits@8: ^RailgunWeapon
+	Inherits@9: ^HeavyMissile
+	Inherits@10: ^HeavyCannon
 	ReloadDelay: 70
 	Range: 6030
 	Burst: 2
@@ -1384,7 +1384,7 @@ BlackWidowPistols_elite:
 
 OrionRailgun:
 	Inherits: ^RailgunWeapon
-	Inherits: ^RA2HeavyCannon
+	Inherits@2: ^RA2HeavyCannon
 	Range: 7500
 	ReloadDelay: 60
 	Report: AUFTank_neutImpaSmaa.wav, AUFTank_neutImpaSmab.wav, AUFTank_neutImpaSmac.wav, AUFTank_neutImpaSmad.wav, AUFTank_neutImpaSmae.wav

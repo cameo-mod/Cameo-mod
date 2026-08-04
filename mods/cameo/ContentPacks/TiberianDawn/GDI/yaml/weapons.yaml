@@ -23,6 +23,92 @@ M16AP:
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 
+HighV:
+	ValidTargets: Ground, Water
+	ReloadDelay: 22
+	Burst: 4
+	BurstDelays: 2
+	Range: 6720
+	TargetActorCenter: true
+	Report: gun8.aud
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailZOffset: 4000
+		ContrailStartColor: 88888888
+		ContrailEndColor: 44444444
+		ContrailStartWidth: 30
+		ContrailEndWidth: 60
+		ContrailLength: 6
+		Speed: 2000
+		Inaccuracy: 100
+	Warhead@Bullet_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 400
+		Damage: 2000
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			HAZMAT: 50
+			Shield: 110
+			None: 100
+			Flak: 94
+			Plate: 88
+			Heroic: 82
+			Scout: 76
+			Fighter: 70
+			Wood: 64
+			Light: 58
+			Bomber: 52
+			Steel: 46
+			Medium: 40
+			Helicopter: 34
+			Concrete: 28
+			Heavy: 22
+			Spaceship: 16
+			Superheavy: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Fighter: 11
+			Wood: 10
+			Light: 9
+			Bomber: 8
+			Steel: 7
+			Medium: 6
+			Helicopter: 5
+			Concrete: 4
+			Heavy: 3
+			Spaceship: 2
+			Superheavy: 1
+		UpdatesUnitStatistics: false
+	Warhead@Effect: CreateEffect
+		Explosions: piff
+		ValidTargets: Ground, Ship, Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piff
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 3
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
 GrenadeExplode:
 	Inherits: Grenade
 	Warhead@Grenade: SpreadDamage
@@ -34,11 +120,11 @@ GrenadeExplode:
 
 RocketsAMT:
 	Inherits: Rockets
-	Inherits: ^AMTProjectile
+	Inherits@2: ^AMTProjectile
 
 td_gdi_commando_sniper_elite:
 	Inherits: ^RailgunWeapon
-	Inherits: td_gdi_commando_sniper
+	Inherits@2: td_gdi_commando_sniper
 	Projectile: Bullet
 		ContrailStartWidth: 40
 		ContrailEndWidth: 80
@@ -58,7 +144,7 @@ td_gdi_commando_sniper_elite:
 
 APCGun:
 	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^FlakWeapon
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 5668
@@ -91,11 +177,11 @@ APCGun_AA:
 
 BoxerCannonAG:
 	Inherits: ^SmallArms
-	Inherits: ^LightMissile
-	Inherits: ^Grenade
-	Inherits: ^MediumCannon
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^LightMissile
+	Inherits@3: ^Grenade
+	Inherits@4: ^MediumCannon
+	Inherits@5: ^Chaingun
+	Inherits@6: ^FlakWeapon
 	ValidTargets: Ground, Water
 	ReloadDelay: 11
 	Range: 4860
@@ -173,9 +259,9 @@ BoxerCannon_AA:
 
 SkyshieldCannon:
 	Inherits: ^SmallArms
-	Inherits: ^LightMissile
-	Inherits: ^Chaingun
-	Inherits: ^FlakWeapon
+	Inherits@2: ^LightMissile
+	Inherits@3: ^Chaingun
+	Inherits@4: ^FlakWeapon
 	ValidTargets: Air
 	ReloadDelay: 11
 	Range: 13800
@@ -207,10 +293,10 @@ SkyshieldCannon:
 
 ArcherArtilleryShell:
 	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^HeavyBomb
 	ReloadDelay: 140
 	Range: 14000
 	MinRange: 2800
@@ -332,7 +418,7 @@ M1A1Missiles:
 
 M1A1MissilesAMT:
 	Inherits: M1A1Missiles
-	Inherits: ^AMTProjectile
+	Inherits@2: ^AMTProjectile
 
 M1A1MachineGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -402,19 +488,19 @@ MammothMissiles:
 
 MammothMissilesAMT:
 	Inherits: MammothMissiles
-	Inherits: ^AMTProjectile
+	Inherits@2: ^AMTProjectile
 
 227mmAMT:
 	Inherits: 227mm
-	Inherits: ^AMTProjectile
+	Inherits@2: ^AMTProjectile
 
 OrcaMissiles:
 	Inherits: ^HeavyCannon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^TankDestroyerCannon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^Grenade
+	Inherits@5: ^HeavyMissile
+	Inherits@6: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5442
@@ -463,7 +549,7 @@ OrcaMissiles:
 
 OrcaMissilesAMT:
 	Inherits: OrcaMissiles
-	Inherits: ^AMTProjectile
+	Inherits@2: ^AMTProjectile
 
 Vulcan:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -489,7 +575,7 @@ Vulcan:
 
 Napalm:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^HeavyFlameWeapon
 	ReloadDelay: 2
 	Range: 2000
 	Report: flamer2.aud
@@ -539,7 +625,7 @@ VulcanA10Carrier:
 
 NapalmA10Carrier:
 	Inherits: ^HeavyBomb
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^HeavyFlameWeapon
 	ReloadDelay: 2
 	Range: 1000
 	Report: flamer2.aud
@@ -605,33 +691,16 @@ A10CarrierMissiles_AA:
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
 
-HighV:
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	ValidTargets: Ground, Water
-	ReloadDelay: 22
-	Burst: 4
-	BurstDelays: 2
-	Range: 6720
-	-Report:
-	StartBurstReport: gun8.aud
-	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 1
+
 
 TowerMissile:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^Grenade
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^HeavyAAWeapon
+	Inherits@6: ^HeavyMissile
+	Inherits@7: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Burst: 2
@@ -714,14 +783,14 @@ TowerMissile:
 
 TowerMissileAMT:
 	Inherits: TowerMissile
-	Inherits: ^AMTProjectile
+	Inherits@2: ^AMTProjectile
 
 MissileSoldierWeapon:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^HeavyMissile
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^RailgunWeapon
+	Inherits@5: ^HeavyMissile
 	ReloadDelay: 125
 	Range: 7500
 	MinRange: 1500
@@ -786,13 +855,13 @@ MissileSoldierWeapon:
 
 EMPGrenade:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
-	Inherits: ^MediumMissile
-	Inherits: ^HeavyMissile
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^HeavyCannon
+	Inherits@6: ^MediumCannon
+	Inherits@7: ^MediumMissile
+	Inherits@8: ^HeavyMissile
 	ReloadDelay: 111
 	Range: 5694
 	Report: toss1.aud
@@ -928,9 +997,9 @@ EMPGrenadeExplode:
 
 GDISniperRifle:
 	Inherits: ^SmallArms
-	Inherits: ^Grenade
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^Grenade
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^Chaingun
 	ReloadDelay: 75
 	Range: 8655
 	Report: silencer.aud
@@ -1061,7 +1130,7 @@ RocketsHumvee2AMT:
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Missile_Heavy
 	Inherits: RocketsHumvee2
-	Inherits: ^AMTProjectile
+	Inherits@2: ^AMTProjectile
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -1084,11 +1153,11 @@ RocketsHumvee2AMT_AA:
 
 TDShotgun:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^TankDestroyerCannon
+	Inherits@4: ^MediumCannon
+	Inherits@5: ^SmallArms
+	Inherits@6: ^Chaingun
 	ReloadDelay: 70
 	Range: 3125
 	Report: DSDSHTGN.wav
@@ -1171,7 +1240,7 @@ GDIPredatorTankMissiles:
 
 GDIPredatorTankMissilesAMT:
 	Inherits: GDIPredatorTankMissiles
-	Inherits: ^AMTProjectile
+	Inherits@2: ^AMTProjectile
 
 GDIPredatorMachineGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -1263,7 +1332,7 @@ MammothTank3Missiles:
 
 MammothTank3MissilesAMT:
 	Inherits: MammothTank3Missiles
-	Inherits: ^AMTProjectile
+	Inherits@2: ^AMTProjectile
 
 ExosuitRailgun:
 	Inherits: ^RailgunWeapon
@@ -1280,7 +1349,7 @@ ExosuitRailgun:
 
 OfficerMachineGun:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 20
 	Burst: 4
@@ -1360,11 +1429,11 @@ GDIRigDroneRepair:
 
 GDIRigPhalanx:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^SmallArms
-	Inherits: ^Grenade
-	Inherits: ^MediumCannon
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^SmallArms
+	Inherits@3: ^Grenade
+	Inherits@4: ^MediumCannon
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	ValidRelationships: Enemy, Neutral
 	ReloadDelay: 8
@@ -1445,9 +1514,9 @@ GDIRigRailgun:
 
 GDIRigMissilePod:
 	Inherits: ^FlakWeapon
-	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumMissile
+	Inherits@2: ^Grenade
+	Inherits@3: ^HeavyMissile
+	Inherits@4: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ValidRelationships: Enemy, Neutral
 	ReloadDelay: 45
@@ -1499,11 +1568,11 @@ GDIRigMissilePod:
 
 GDIRigMissilePodAMT:
 	Inherits: GDIRigMissilePod
-	Inherits: ^AMTProjectile
+	Inherits@2: ^AMTProjectile
 
 CommandoSniper:
 	Inherits: ^SniperWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: Structure
 	ReloadDelay: 100
@@ -1535,7 +1604,7 @@ CommandoSniper:
 
 CommandoRocketLauncher:
 	Inherits: ^MediumMissile
-	Inherits: ^LightMissile
+	Inherits@2: ^LightMissile
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: Structure
 	ReloadDelay: 100
@@ -1569,8 +1638,8 @@ CommandoRocketLauncher:
 
 CommandoGrenadeLauncher:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
-	Inherits: ^EMPDamage
+	Inherits@2: ^Grenade
+	Inherits@3: ^EMPDamage
 	ValidTargets: Ground, Water
 	InvalidTargets: Structure
 	ReloadDelay: 100
@@ -1597,7 +1666,7 @@ CommandoGrenadeLauncher:
 
 CommandoM16:
 	Inherits: ^SniperWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: Structure
 	ReloadDelay: 92
@@ -1669,9 +1738,9 @@ FirehawkMissiles_AA:
 
 FirehawkBomb:
 	Inherits: ^HeavyBomb
-	Inherits: ^NuclearWarhead
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumFlameWeapon
+	Inherits@2: ^NuclearWarhead
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^MediumFlameWeapon
 	ReloadDelay: 50
 	Range: 1250
 	Burst: 2
@@ -1756,7 +1825,7 @@ GunboatMissile:
 
 GunboatMissileAMT:
 	Inherits: GunboatMissile
-	Inherits: ^AMTProjectile
+	Inherits@2: ^AMTProjectile
 
 TDIonCannon:
 	Range: 12288
@@ -1888,7 +1957,7 @@ td_gdi_minigunner_minigun_ap:
 # TDShotgun stays for its vehicle/map users.
 td_gdi_shotgunner_shotgun:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 70
 	Range: 3500
 	Burst: 5

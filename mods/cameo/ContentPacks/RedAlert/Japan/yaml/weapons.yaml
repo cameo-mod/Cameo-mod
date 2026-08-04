@@ -1,6 +1,6 @@
 CHGuardRifle:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 55
 	Range: 5547
 	ValidTargets: Ground, Water, Air
@@ -49,13 +49,13 @@ japan_imperialscoutsman_rifle:
 # upgraded variant with it). Waveforce flavor rides the baseline stats.
 japan_imperialscoutsman_rifle_waveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: japan_imperialscoutsman_rifle
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: japan_imperialscoutsman_rifle
+	Inherits@3: ^WaveforceBulletProjectile
 
 TankBusterBeamCannon:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^MediumCannon
+	Inherits@3: ^RailgunWeapon
 	ReloadDelay: 96
 	Range: 5190
 	Report: JUTankB_weapFire1a.wav, JUTankB_weapFire1b.wav, JUTankB_weapFire1c.wav, JUTankB_weapFire1d.wav, JUTankB_weapFire1e.wav, JUTankB_weapFire1f.wav, JUTankB_weapFire1g.wav, JUTankB_weapFire1h.wav
@@ -86,8 +86,8 @@ TankBusterBeamCannon:
 
 TankBusterBeamCannonCharged:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyCannon
 	ReloadDelay: 96
 	Range: 5190
 	Report: JUTankB_weapFire1a.wav, JUTankB_weapFire1b.wav, JUTankB_weapFire1c.wav, JUTankB_weapFire1d.wav, JUTankB_weapFire1e.wav, JUTankB_weapFire1f.wav, JUTankB_weapFire1g.wav, JUTankB_weapFire1h.wav
@@ -128,7 +128,7 @@ TankBusterBeamCannonCharged:
 
 PlasmaFlamer:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
+	Inherits@2: ^MediumChemicalWeapon
 	ReloadDelay: 35
 	Burst: 15
 	BurstDelays: 1
@@ -196,7 +196,7 @@ HeavyFlamer:
 
 HeavyPlasmaFlamer:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^HeavyFlameWeapon
 	ReloadDelay: 60
 	Burst: 30
 	BurstDelays: 1
@@ -246,7 +246,7 @@ SamuraiBlade:
 
 SamuraiBladeCharged:
 	Inherits: ^TeslaWeapon
-	Inherits: ^SwordWeapon
+	Inherits@2: ^SwordWeapon
 	ReloadDelay: 20
 	Range: 1637
 	Warhead@TeslaWeapon: SpreadDamage
@@ -306,11 +306,11 @@ JapanMaidenBow:
 
 JapanMaidenBowEnergized:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^TeslaWeapon
-	Inherits: JapanMaidenBow
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^TeslaWeapon
+	Inherits@6: JapanMaidenBow
 	Projectile: Missile
 		ContrailStartColor: FFCC77
 	Warhead@Arrow_Light:
@@ -503,9 +503,9 @@ BallistaSingleShotAirEnergized:
 	MinRange: 1845
 BallistaMultiShot:
 	Inherits: ^Grenade
-	Inherits: ^LightFlameWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^LightFlameWeapon
+	Inherits@3: ^LightChemicalWeapon
+	Inherits@4: ^ArrowWeapon
 	ReloadDelay: 176
 	Range: 13515
 	MinRange: 2705
@@ -569,9 +569,9 @@ BallistaMultiShot:
 
 BallistaMultiShotEnergized:
 	Inherits: ^TeslaWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^MediumChemicalWeapon
+	Inherits@4: ^ArrowWeapon
 	ReloadDelay: 176
 	Range: 13515
 	MinRange: 2705
@@ -645,11 +645,11 @@ BallistaTowerMultiShotEnergized:
 	MinRange: 1845
 RocketAngelRockets:
 	Inherits: ^TeslaWeapon
-	Inherits: ^HeavyMissile
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^Grenade
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^HeavyMissile
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^Grenade
+	Inherits@6: ^ArrowWeapon
 	ReloadDelay: 34
 	Burst: 4
 	BurstDelays: 2
@@ -754,7 +754,7 @@ RocketAngelRockets:
 
 Hakureiring:
 	Inherits: ^TeslaWeapon
-	Inherits: ^MagicWeapon
+	Inherits@2: ^MagicWeapon
 	Inherits@EMP: ^EMPDamage
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
 	InvalidTargets: Epic, Psionic, Monster
@@ -997,8 +997,8 @@ M60mgJapan:
 
 M60mgWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: M60mgJapan
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: M60mgJapan
+	Inherits@3: ^WaveforceBulletProjectile
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -1053,7 +1053,7 @@ ZeroFighterArrowsEnergized:
 
 JHindChainGun:
 	Inherits: ^Grenade
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 8
 	Range: 3053
@@ -1075,14 +1075,14 @@ JHindChainGun:
 
 JHindChainGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: JHindChainGun
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: JHindChainGun
+	Inherits@3: ^WaveforceBulletProjectile
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 500
 
 JHindCannon:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
+	Inherits@2: ^TankDestroyerCannon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 32
 	Range: 3053
@@ -1107,8 +1107,8 @@ JHindCannon:
 
 JHindPlasmaCannon:
 	Inherits: ^TeslaWeapon
-	Inherits: ^MediumMissile
-	Inherits: JHindCannon
+	Inherits@2: ^MediumMissile
+	Inherits@3: JHindCannon
 	Projectile: Bullet
 		Speed: 610
 		ContrailStartColor: 8844FFAA
@@ -1165,7 +1165,7 @@ JHindPlasmaCannon:
 
 JHindArrows:
 	Inherits: ^MediumMissile
-	Inherits: ^ArrowWeapon
+	Inherits@2: ^ArrowWeapon
 	ReloadDelay: 128
 	Range: 3053
 	Report: dune2smalllaser.aud
@@ -1201,8 +1201,8 @@ JHindArrows:
 
 JHindArrowsEnergized:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: JHindArrows
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: JHindArrows
 	Projectile: Missile
 		ContrailStartColor: FFCC77
 	Warhead@ArrowWeapon: SpreadDamage
@@ -1259,8 +1259,8 @@ JHindArrowsEnergized:
 
 155mm:
 	Inherits: ^HeavyCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^Grenade
 	ReloadDelay: 80
 	Range: 13350
 	MinRange: 2670
@@ -1297,11 +1297,11 @@ JHindArrowsEnergized:
 
 HovercraftCannon:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^Grenade
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^MediumCannon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 4876
@@ -1362,9 +1362,9 @@ HovercraftCannon:
 
 HovercraftPlasmaCannon:
 	Inherits: ^TeslaWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^HeavyCannon
-	Inherits: HovercraftCannon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^HeavyCannon
+	Inherits@4: HovercraftCannon
 	Report: WaveforceCannon.wav
 	Projectile: Missile
 		Speed: 974
@@ -1460,7 +1460,7 @@ HovercraftPlasmaCannon:
 
 JapaneseHovercraftFlak:
 	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
+	Inherits@2: ^FlakWeapon
 	ReloadDelay: 8
 	Range: 4876
 	Report: gun20.aud
@@ -1493,13 +1493,13 @@ JapaneseHovercraftFlakAA:
 
 JapaneseHovercraftFlakWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: JapaneseHovercraftFlak
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: JapaneseHovercraftFlak
+	Inherits@3: ^WaveforceBulletProjectile
 
 JapaneseHovercraftFlakAAkWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: JapaneseHovercraftFlakAA
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: JapaneseHovercraftFlakAA
+	Inherits@3: ^WaveforceBulletProjectile
 
 Type89Cannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
@@ -1519,8 +1519,8 @@ Type89Cannon:
 
 Type89PlasmaCannon:
 	Inherits: ^TeslaWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^TankDestroyerCannon
+	Inherits@3: ^HeavyCannon
 	ReloadDelay: 52
 	Range: 5243
 	Report: WaveforceCannon.wav
@@ -1557,7 +1557,7 @@ Type89PlasmaCannon:
 
 Type97Cannon:
 	Inherits: ^HeavyCannon
-	Inherits: ^MediumCannon
+	Inherits@2: ^MediumCannon
 	ReloadDelay: 56
 	Range: 5692
 	Report: cannon1.aud
@@ -1577,8 +1577,8 @@ Type97Cannon:
 
 Type97PlasmaCannon:
 	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^HeavyCannon
 	ReloadDelay: 56
 	Range: 5692
 	Report: WaveforceCannon.wav
@@ -1616,11 +1616,11 @@ Type97PlasmaCannon:
 
 ShrineTankCannon:
 	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^MediumCannon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^MediumFlameWeapon
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^MagicWeapon
+	Inherits@4: ^MediumCannon
+	Inherits@5: ^MediumChemicalWeapon
+	Inherits@6: ^MediumFlameWeapon
 	ReloadDelay: 50
 	Range: 6370
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
@@ -1701,7 +1701,7 @@ ShrineTankCannon:
 
 WaveforceCannon:
 	Inherits: ^HeavyMissile
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	ReloadDelay: 60
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -1760,9 +1760,9 @@ OISmallCannon:
 
 OISmallPlasmaCannon:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: ^RailgunWeapon
+	Inherits@4: ^HeavyCannon
 	ReloadDelay: 45
 	Range: 5394
 	Report: cannon1.aud
@@ -1825,8 +1825,8 @@ OIBigCannon:
 
 OIBigPlasmaCannon:
 	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^HeavyCannon
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^HeavyCannon
 	ReloadDelay: 55
 	Range: 5394
 	Report: tank5.aud
@@ -1884,7 +1884,7 @@ OIFlamer:
 
 OIPlasmaFlamer:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^HeavyFlameWeapon
 	ReloadDelay: 60
 	Burst: 20
 	BurstDelays: 1
@@ -1952,8 +1952,8 @@ BuggyGrenade:
 
 BuggyPlasmaGrenade:
 	Inherits: ^HeavyBomb
-	Inherits: ^ShrapnelWeapon
-	Inherits: BuggyGrenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: BuggyGrenade
 	Projectile: Bullet
 		Speed: 333
 		ContrailStartColor: FF4488AA
@@ -2019,8 +2019,8 @@ JapaneseHeavyBomb:
 
 JapanesePlasmaBomb:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^HeavyFlameWeapon
+	Inherits@3: ^HeavyBomb
 	ReloadDelay: 100
 	Burst: 4
 	BurstDelays: 5
@@ -2068,7 +2068,7 @@ JapanesePlasmaBomb:
 
 JHighV:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Burst: 5
@@ -2087,8 +2087,8 @@ JHighV:
 
 JHighVWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: JHighV
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: JHighV
+	Inherits@3: ^WaveforceBulletProjectile
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
@@ -2126,8 +2126,8 @@ ExecutionerSword:
 
 NanoArtilleryAG:
 	Inherits: ^HeavyCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^Grenade
 	ReloadDelay: 77
 	Range: 7777
 	MinRange: 1555
@@ -2207,8 +2207,8 @@ NanoReturnHeal:
 
 NanoSmokeAG:
 	Inherits: ^MagicWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^LightFlameWeapon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^LightFlameWeapon
 	ValidTargets: Infantry, Vehicle, Building
 	ReloadDelay: 33
 	Range: 3333
@@ -2289,7 +2289,7 @@ WaveArtilleryShell:
 
 WaveArtilleryImpact:
 	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	Projectile: InstantHit
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water
@@ -2392,13 +2392,13 @@ WaveTurretImpact:
 
 ArmoredCarMG:
 	Inherits: ^ArrowWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^SmallArms
-	Inherits: ^Grenade
-	Inherits: ^MediumCannon
-	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^Chaingun
+	Inherits@2: ^TankDestroyerCannon
+	Inherits@3: ^SmallArms
+	Inherits@4: ^Grenade
+	Inherits@5: ^MediumCannon
+	Inherits@6: ^MediumMissile
+	Inherits@7: ^FlakWeapon
+	Inherits@8: ^Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 8
 	Range: 5012
@@ -2500,12 +2500,12 @@ ArmoredCarMG_AA:
 
 ArmoredCarMGWaveforce:
 	Inherits: ^HeavyAAWeapon
-	Inherits: ^WaveforceBulletWarhead
-	Inherits: ArmoredCarMG
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: ^WaveforceBulletWarhead
+	Inherits@3: ArmoredCarMG
+	Inherits@4: ^WaveforceBulletProjectile
 
 ArmoredCarMGAAWaveforce:
 	Inherits: ^HeavyAAWeapon
-	Inherits: ^WaveforceBulletWarhead
-	Inherits: ArmoredCarMG_AA
-	Inherits: ^WaveforceBulletProjectile
+	Inherits@2: ^WaveforceBulletWarhead
+	Inherits@3: ArmoredCarMG_AA
+	Inherits@4: ^WaveforceBulletProjectile

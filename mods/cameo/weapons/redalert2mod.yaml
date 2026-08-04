@@ -4,7 +4,7 @@
 
 AsianHowitzerSplash:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
+	Inherits@2: ^HeavyBomb
 	Projectile: InstantExplode
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 20000
@@ -148,7 +148,7 @@ AsianChaosSuperweapon:
 
 AsianSmallTorpedo:
 	Inherits: ^RA2Grenade
-	Inherits: ^RA2HeavyMissile
+	Inherits@2: ^RA2HeavyMissile
 	ReloadDelay: 120
 	Range: 12000
 	Burst: 2
@@ -379,10 +379,10 @@ SteelHoverMissile_elite:
 
 SteelTwisterMissiles:
 	Inherits: ^Grenade
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^HeavyAAWeapon
-	Inherits: ^SteelMediumMissile
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^HeavyAAWeapon
+	Inherits@5: ^SteelMediumMissile
 	ReloadDelay: 105
 	Burst: 5
 	BurstDelays: 5
@@ -463,7 +463,7 @@ SteelTwisterMissiles_elite:
 
 Support_EMP_Bomb:
 	Inherits: ^TeslaWeapon
-	Inherits: ^TeslaChargedWeapon
+	Inherits@2: ^TeslaChargedWeapon
 	Report: mobemp1.aud
 	Range: 25000
 	ReloadDelay: 250
@@ -597,8 +597,8 @@ SteelSupportSpawner4:
 
 NaxGrilleArty:
 	Inherits: ^HeavyCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2Grenade
 	ReloadDelay: 111
 	Range: 12345
 	MinRange: 2470
@@ -654,9 +654,9 @@ NaxiRifle:
 
 NaxLaserT:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^MediumMissile
-	Inherits: ^LaserWeapon
+	Inherits@2: ^Chaingun
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^LaserWeapon
 	ReloadDelay: 20
 	Range: 8181
 	Report: AWMinilaser.wav
@@ -682,8 +682,8 @@ NaxLaserT:
 
 NaxiMP40:
 	Inherits: ^Grenade
-	Inherits: ^HeavyCannon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^HeavyCannon
+	Inherits@3: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 75
 	Burst: 10
@@ -717,8 +717,8 @@ NaxiMP40:
 
 NaxSturmArty:
 	Inherits: ^HeavyBomb
-	Inherits: ^RA2MediumCannon
-	Inherits: ^RA2Grenade
+	Inherits@2: ^RA2MediumCannon
+	Inherits@3: ^RA2Grenade
 	ReloadDelay: 140
 	Range: 14000
 	MinRange: 2800
@@ -997,10 +997,10 @@ NaxiMeteorSpreader:
 
 NaxiMeteor:
 	Inherits: ^Grenade
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^NuclearWarhead
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^HeavyBomb
+	Inherits@5: ^NuclearWarhead
 	Report: vaegatta.wav, vaegattb.wav
 	Range: 10000
 	Projectile: NukeLaunch
@@ -1134,8 +1134,8 @@ NaxisBlackBomb:
 
 NaxisBlackBombSmaller:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^HeavyBomb
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^RA2MediumCannon
 	ReloadDelay: 141
 	Range: 6666
 	MinRange: 1335
@@ -1197,7 +1197,7 @@ NaxisBlackBombSmaller:
 
 Lunar_Green105mm:
 	Inherits: ^TeslaWeapon
-	Inherits: ^RA2MediumCannon
+	Inherits@2: ^RA2MediumCannon
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Range: 5000
 	ReloadDelay: 50
@@ -1215,8 +1215,8 @@ Lunar_Green105mm:
 
 SyndicateFireballLauncher:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^HeavyFlameWeapon
 	ReloadDelay: 44
 	Burst: 4
 	BurstDelays: 4
@@ -1260,9 +1260,9 @@ SyndicateFireballLauncher:
 
 RA2RTruckRocket:
 	Inherits: ^RA2Grenade
-	Inherits: ^LightFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^LightFlameWeapon
+	Inherits@3: ^ShrapnelWeapon
+	Inherits@4: ^RA2MediumMissile
 	ReloadDelay: 108
 	Burst: 8
 	BurstDelays: 3
@@ -1315,9 +1315,9 @@ RA2RTruckRocket:
 
 LatinBuggyRocket:
 	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^SteelLightMissile
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^SteelLightMissile
+	Inherits@4: ^RA2MediumMissile
 	ReloadDelay: 55
 	Range: 6000
 	Report: vintatta.wav
@@ -1450,9 +1450,9 @@ LatinBuggyRocket_elite:
 
 12MissilesSpawnerScud:
 	Inherits: ^HeavyBomb
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^RA2Grenade
-	Inherits: ^RA2HeavyMissile
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^RA2Grenade
+	Inherits@4: ^RA2HeavyMissile
 	Report: vaegatta.wav, vaegattb.wav
 	Range: 10000
 	Projectile: NukeLaunch
@@ -1531,8 +1531,8 @@ RA2TraitorPower:
 
 RA2Robotmm:
 	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^RA2RailgunWeapon
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^RA2RailgunWeapon
 	Range: 5780
 	ReloadDelay: 48
 	Report: vrobatta.wav
@@ -1612,7 +1612,7 @@ RA2RobotmmScatter_elite:
 # with its elite pair per the rename law.
 naxis_sssoldier_smg:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
+	Inherits@2: ^Chaingun
 	ReloadDelay: 75
 	Range: 4500
 	Burst: 10

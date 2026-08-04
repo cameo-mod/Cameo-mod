@@ -1,7 +1,7 @@
 SteelCloneGun:
 	Inherits: ^SteelHeavyCannon
-	Inherits: ^SteelMediumMissile
-	Inherits: ^SteelSmallArms
+	Inherits@2: ^SteelMediumMissile
+	Inherits@3: ^SteelSmallArms
 	ReloadDelay: 25
 	Range: 6463
 	ValidTargets: Ground, Water, Air
@@ -74,8 +74,8 @@ SteelCloneGunResonanceBounce2_elite:
 
 SteelVulcan:
 	Inherits: ^SteelHeavyCannon
-	Inherits: ^SteelSmallArms
-	Inherits: ^SteelChaingun
+	Inherits@2: ^SteelSmallArms
+	Inherits@3: ^SteelChaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 6666
@@ -119,9 +119,9 @@ SteelVulcanResonanceBounce2:
 
 ConsortiumMissileSystem:
 	Inherits: ^TeslaWeapon
-	Inherits: ^ArrowWeapon
-	Inherits: ^RA2FlakWeapon
-	Inherits: ^SteelMediumMissile
+	Inherits@2: ^ArrowWeapon
+	Inherits@3: ^RA2FlakWeapon
+	Inherits@4: ^SteelMediumMissile
 	ReloadDelay: 60
 	Range: 12000
 	Burst: 2
@@ -184,7 +184,7 @@ ConsortiumMissileSystem_EMP:
 
 SteelQuantumCannon:
 	Inherits: ^LaserWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	Range: 6000
 	ReloadDelay: 65
 	Report: steel_quantumfire.wav
@@ -211,7 +211,7 @@ SteelQuantumCannon:
 
 SteelQuantumCannon_EMP:
 	Inherits: ^TeslaWeapon
-	Inherits: SteelQuantumCannon
+	Inherits@2: SteelQuantumCannon
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -321,9 +321,9 @@ superbfg10kCannonDummy:
 
 bfg10kCannon:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^MagicWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^MagicWeapon
+	Inherits@3: ^LaserWeapon
+	Inherits@4: ^RailgunWeapon
 	Range: 25000
 	ReloadDelay: 750
 	Report: bfg10kfiringsound.wav
@@ -395,9 +395,9 @@ superbfg10kCannon:
 
 SteelMakoGun:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^RA2Grenade
-	Inherits: ^RA2RailgunWeapon
-	Inherits: ^SteelMediumCannon
+	Inherits@2: ^RA2Grenade
+	Inherits@3: ^RA2RailgunWeapon
+	Inherits@4: ^SteelMediumCannon
 	Range: 6050
 	ReloadDelay: 25
 	Report: steel_quantumfire.wav
@@ -431,8 +431,8 @@ SteelMakoGun_elite:
 
 SteelMakoGun_EMP:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^TeslaWeapon
-	Inherits: SteelMakoGun
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: SteelMakoGun
 	Warhead@MediumFlameWeapon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -490,9 +490,9 @@ SteelMakoGun_EMP_elite:
 
 SteelMantaAG:
 	Inherits: ^SteelLightMissile
-	Inherits: ^SteelSmallArms
-	Inherits: ^RA2FlakWeapon
-	Inherits: ^SteelChaingun
+	Inherits@2: ^SteelSmallArms
+	Inherits@3: ^RA2FlakWeapon
+	Inherits@4: ^SteelChaingun
 	ReloadDelay: 20
 	Range: 6666
 	ValidTargets: Ground, Water
@@ -585,7 +585,7 @@ SteelMantaAAResonanceBounce2:
 
 SteelMantaHunterCannons:
 	Inherits: ^RA2FlakWeapon
-	Inherits: ^SteelChaingun
+	Inherits@2: ^SteelChaingun
 	Range: 8000
 	ReloadDelay: 8
 	ValidTargets: Ground, Water
@@ -615,7 +615,7 @@ SteelMantaHunterCannons:
 
 SteelMantaHunterCannons_AA:
 	Inherits: ^SteelMediumMissile
-	Inherits: SteelMantaHunterCannons
+	Inherits@2: SteelMantaHunterCannons
 	Range: 12000
 	ReloadDelay: 12
 	Report: steel_chaingunfire.wav
@@ -671,8 +671,8 @@ SteelMantaHunterCannonsAAResonanceBounce2:
 
 SteelRunnerPistols:
 	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^RailgunWeapon
 	Report: steel_chaingunfire.wav
 	ReloadDelay: 8
 	Burst: 2
@@ -769,9 +769,9 @@ SteelRunnerPistolsResonanceBounce2_elite:
 
 SteelInfRailgun:
 	Inherits: ^RA2RailgunWeapon
-	Inherits: ^RA2FlakWeapon
-	Inherits: ^SteelChaingun
-	Inherits: ^SteelLightMissile
+	Inherits@2: ^RA2FlakWeapon
+	Inherits@3: ^SteelChaingun
+	Inherits@4: ^SteelLightMissile
 	Range: 8000
 	ReloadDelay: 48
 	Burst: 2
@@ -824,12 +824,12 @@ SteelScalpelRailgunAA:
 
 SteelInfRailgun_EMP:
 	Inherits: ^Grenade
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumCannon
-	Inherits: ^TeslaWeapon
-	Inherits: SteelInfRailgun
+	Inherits@2: ^MediumFlameWeapon
+	Inherits@3: ^MediumChemicalWeapon
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^MediumCannon
+	Inherits@6: ^TeslaWeapon
+	Inherits@7: SteelInfRailgun
 	ReloadDelay: 50
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -950,10 +950,10 @@ SteelScalpelRailgun_EMP_AA:
 
 SteelFighterRailgun:
 	Inherits: ^LaserWeapon
-	Inherits: ^RA2RailgunWeapon
-	Inherits: ^SteelMediumCannon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^SteelLightMissile
+	Inherits@2: ^RA2RailgunWeapon
+	Inherits@3: ^SteelMediumCannon
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^SteelLightMissile
 	Range: 7000
 	ReloadDelay: 80
 	Burst: 2
@@ -1004,8 +1004,8 @@ SteelFighterRailgun:
 
 SteelMegaSword:
 	Inherits: ^LightChemicalWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^SwordWeapon
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^SwordWeapon
 	ReloadDelay: 24
 	Report: megasword.wav
 	Range: 1600
@@ -1043,8 +1043,8 @@ SteelMegaSword:
 
 SteelMegaSword_EMP:
 	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^TeslaWeapon
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ^TeslaWeapon
 	ReloadDelay: 16
 	Report: megasword.wav
 	Range: 2400
@@ -1082,7 +1082,7 @@ SteelMegaSword_EMP:
 
 SteelMegaSword_elite:
 	Inherits: ^RailgunWeapon
-	Inherits: SteelMegaSword_EMP
+	Inherits@2: SteelMegaSword_EMP
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1118,7 +1118,7 @@ SteelMegaSword_elite:
 
 SteelAirTurret:
 	Inherits: ^LaserWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	Range: 8000
 	ReloadDelay: 60
 	Report: steel_quantumfire.wav
@@ -1145,7 +1145,7 @@ SteelAirTurret:
 
 SteelAirTurret_EMP:
 	Inherits: ^TeslaWeapon
-	Inherits: SteelAirTurret
+	Inherits@2: SteelAirTurret
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -1264,11 +1264,11 @@ SteelFortressWeapons:
 
 SteelQuantumTurretRail:
 	Inherits: ^TeslaWeapon
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^HeavyFlameWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^SteelHeavyCannon
+	Inherits@2: ^HeavyChemicalWeapon
+	Inherits@3: ^HeavyFlameWeapon
+	Inherits@4: ^LaserWeapon
+	Inherits@5: ^RailgunWeapon
+	Inherits@6: ^SteelHeavyCannon
 	Range: 8888
 	ReloadDelay: 38
 	Report: steel_quantumfire.wav
@@ -1365,7 +1365,7 @@ SteelInspectorIonCannon:
 
 SteelInspectorIonCannonDamage:
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^TeslaWeapon
+	Inherits@2: ^TeslaWeapon
 	ValidTargets: Ground, Water
 	AirThreshold: 10000
 	Warhead@TeslaChargedWeapon: SpreadDamage
@@ -1444,7 +1444,7 @@ SteelInspectorIonCannonDamage:
 
 SteelHoverMissile:
 	Inherits: ^ArrowWeapon
-	Inherits: ^SteelLightMissile
+	Inherits@2: ^SteelLightMissile
 	Burst: 4
 	BurstDelays: 4
 	Range: 6666
@@ -1472,8 +1472,8 @@ SteelHoverMissile:
 
 SteelKatyCannons:
 	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^SteelHeavyCannon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^SteelHeavyCannon
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 10
@@ -1523,8 +1523,8 @@ SteelKatyCannons_elite:
 
 SteelKatyCannons_EMP:
 	Inherits: ^TankDestroyerCannon
-	Inherits: ^TeslaWeapon
-	Inherits: SteelKatyCannons
+	Inherits@2: ^TeslaWeapon
+	Inherits@3: SteelKatyCannons
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 10
@@ -1600,7 +1600,7 @@ SteelKatyCannons_EMP_elite:
 
 SteelStalkerRailgun:
 	Inherits: ^LaserWeapon
-	Inherits: ^RailgunWeapon
+	Inherits@2: ^RailgunWeapon
 	Range: 9000
 	ReloadDelay: 103
 	Report: bigggun1.aud
@@ -1626,7 +1626,7 @@ SteelStalkerRailgun:
 
 SteelStalkerRailgun_EMP:
 	Inherits: ^TeslaWeapon
-	Inherits: SteelStalkerRailgun
+	Inherits@2: SteelStalkerRailgun
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 40000
@@ -1724,10 +1724,10 @@ SteelStalkerRailgunEScatter:
 
 WhiteRabbitGatling:
 	Inherits: ^HeavyCannon
-	Inherits: ^SmallArms
-	Inherits: ^MediumMissile
-	Inherits: ^FlakWeapon
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^SmallArms
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^RA2Chaingun
 	Report: aa_pulvat2a.wav, aa_pulvat2b.wav, aa_pulvat2c.wav
 	Range: 6000
 	ReloadDelay: 10
@@ -1786,8 +1786,8 @@ HammerheadTankCannon:
 
 HammerheadArtillery:
 	Inherits: ^RA2Grenade
-	Inherits: ^HeavyBomb
-	Inherits: ^SteelMediumCannon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^SteelMediumCannon
 	ReloadDelay: 111
 	Range: 11111
 	MinRange: 2220
@@ -1826,9 +1826,9 @@ HammerheadArtillery:
 
 SteelDaggerCannon:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2Grenade
-	Inherits: ^SteelHeavyCannon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2Grenade
+	Inherits@4: ^SteelHeavyCannon
 	Range: 20000
 	MinRange: 4000
 	ReloadDelay: 50
@@ -1884,7 +1884,7 @@ SteelDaggerCannon_elite:
 
 SteelCruiserArtillery:
 	Inherits: ^SteelMediumCannon
-	Inherits: ^RA2Grenade
+	Inherits@2: ^RA2Grenade
 	ReloadDelay: 20
 	Range: 7000
 	MinRange: 1400
@@ -1916,9 +1916,9 @@ SteelCruiserArtillery_elite:
 
 SteelCruiserCannons:
 	Inherits: ^LightMissile
-	Inherits: ^SmallArms
-	Inherits: ^FlakWeapon
-	Inherits: ^SteelChaingun
+	Inherits@2: ^SmallArms
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^SteelChaingun
 	ReloadDelay: 5
 	ValidTargets: Ground, Air, Water
 	Range: 7000
@@ -1965,7 +1965,7 @@ SteelCruiserCannons_elite:
 
 SteelCargoshipCannons:
 	Inherits: ^SteelSmallArms
-	Inherits: ^SteelChaingun
+	Inherits@2: ^SteelChaingun
 	ReloadDelay: 3
 	ValidTargets: Ground, Air, Water
 	Range: 4750

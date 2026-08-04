@@ -64,8 +64,8 @@ ScourgeDroneExplosion:
 
 SCScourgeDroneExplosion:
 	Inherits: ^HeavyBomb
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^RA2Grenade
 	-Report:
 	ValidTargets: Ground, Water, Air
 	Warhead@HeavyBomb: SpreadDamage
