@@ -221,6 +221,9 @@ ra1_allies_alliedgunturret:
 		Weapon: RATurretGun
 		LocalOffset: 512,0,112
 		MuzzleSequence: muzzle
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 256,0,112
+		CasingTargetOffset: 0,-600,0
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 	WithMuzzleOverlay:
@@ -270,6 +273,9 @@ ra1_allies_alliedaagun:
 		Weapon: zsu_23
 		LocalOffset: 520,150,450, 520,-150,450
 		MuzzleSequence: muzzle
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 260,150,450, 260,-150,450
+		CasingTargetOffset: 0,750,0, 0,-750,0
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled

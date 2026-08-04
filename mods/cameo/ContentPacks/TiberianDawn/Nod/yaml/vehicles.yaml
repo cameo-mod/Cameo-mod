@@ -342,13 +342,13 @@ td_nod_lighttank:
 		TurnSpeed: 22
 	Armament:
 		Weapon: 70mm
-		Recoil: 85
+		Recoil: 43
 		RecoilRecovery: 15
 		LocalOffset: 720,0,90
 		MuzzleSequence: muzzle
 	Armament@Missile:
 		Weapon: LTNKMissiles
-		Recoil: 64
+		Recoil: 32
 		RecoilRecovery: 32
 		LocalOffset: 250,125,125
 		MuzzleSequence: muzzle
@@ -825,13 +825,13 @@ td_nod_lighttankmkii:
 	AttackTurreted:
 	Armament:
 		Weapon: LightTank2Cannon
-		Recoil: 85
+		Recoil: 43
 		RecoilRecovery: 25
 		LocalOffset: 720,0,90
 		MuzzleSequence: muzzle
 	Armament@Missile:
 		Weapon: LightTank2Missiles
-		Recoil: 64
+		Recoil: 32
 		RecoilRecovery: 32
 		LocalOffset: 250,125,125
 		MuzzleSequence: muzzle

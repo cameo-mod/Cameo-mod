@@ -167,7 +167,7 @@ ra1_allies_cruiser:
 		Turret: primary
 		Weapon: 8Inch
 		LocalOffset: 480,-100,40, 480,100,40
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 	Armament@SECONDARY:
@@ -175,7 +175,7 @@ ra1_allies_cruiser:
 		Turret: secondary
 		Weapon: 8Inch
 		LocalOffset: 480,-100,40, 480,100,40
-		Recoil: 175
+		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 	AttackTurreted:
@@ -231,13 +231,13 @@ japan_japanesespeedboat:
 		Offset: 200,0,200
 	Armament@AG:
 		Weapon: JapanSpeedBoatGun
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
 		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@Upgrade:
 		Weapon: JapanSpeedBoatGunWaveforce
-		Recoil: 85
+		Recoil: 43
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
 		RequiresCondition: japan_upgrade_waveforcebullets
@@ -326,7 +326,7 @@ japan_yamatobattleship:
 		Turret: primary
 		Weapon: YamatoCannon
 		LocalOffset: 480,-100,40, 480,100,40
-		Recoil: 200
+		Recoil: 100
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 	Armament@SECONDARY:
@@ -334,14 +334,14 @@ japan_yamatobattleship:
 		Turret: secondary
 		Weapon: YamatoCannon
 		LocalOffset: 480,-100,40, 480,100,40
-		Recoil: 200
+		Recoil: 100
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 	Armament@AA:
 		Turret: flak
 		Weapon: YamatoFlak
 		LocalOffset: 240,-100,40, 240,100,40
-		Recoil: 50
+		Recoil: 25
 		RecoilRecovery: 10
 		MuzzleSequence: muzzle
 	AttackTurreted:

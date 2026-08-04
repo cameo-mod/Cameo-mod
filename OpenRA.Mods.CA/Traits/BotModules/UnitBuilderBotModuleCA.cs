@@ -29,6 +29,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Production queues AI uses for producing units.")]
 		public readonly string[] UnitQueues = { "VehicleSQ", "InfantrySQ", "AircraftSQ", "ShipSQ", "VehicleMQ", "InfantryMQ", "AircraftMQ", "ShipMQ" };
 
+		[Desc("Basic combat units that may be produced from the starting-cash surplus while the opening refinery is unfinished.")]
+		public readonly HashSet<string> OpeningDefenseUnitTypes = new HashSet<string>();
+
 		[Desc("What units to the AI should build.", "What relative share of the total army must be this type of unit.")]
 		public readonly Dictionary<string, int> UnitsToBuild = null;
 
@@ -86,10 +89,13 @@ namespace OpenRA.Mods.CA.Traits
 		int currentQueueIndex = 0;
 		PlayerResources playerResources;
 		BotLimits botLimits;
+		BaseBuilderBotModuleCA baseBuilder;
 
 		int ticks;
+		int openingDefenseTicks;
 		int unitDelayModifier = 100;
 		int unitIntervalModifier = 100;
+		bool firstTick = true;
 
 		public UnitBuilderBotModuleCA(Actor self, UnitBuilderBotModuleCAInfo info)
 			: base(info)
@@ -107,12 +113,19 @@ namespace OpenRA.Mods.CA.Traits
 			// for bot modules always to the Player actor.
 			requestPause = self.TraitsImplementing<IBotRequestPauseUnitProduction>().ToArray();
 			playerResources = self.Owner.PlayerActor.Trait<PlayerResources>();
-			botLimits = self.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
-			if (botLimits != null)
-			{
-				unitDelayModifier = botLimits.Info.UnitDelayModifier;
-				unitIntervalModifier = botLimits.Info.UnitIntervalModifier;
-			}
+		}
+
+		protected override void TraitEnabled(Actor self)
+		{
+			RefreshDifficultyTraits();
+		}
+
+		void RefreshDifficultyTraits()
+		{
+			botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
+			baseBuilder = player.PlayerActor.TraitsImplementing<BaseBuilderBotModuleCA>().FirstEnabledTraitOrDefault();
+			unitDelayModifier = botLimits?.Info.UnitDelayModifier ?? 100;
+			unitIntervalModifier = botLimits?.Info.UnitIntervalModifier ?? 100;
 		}
 
 		void IBotNotifyIdleBaseUnits.UpdatedIdleBaseUnits(List<UnitWposWrapper> idleUnits)
@@ -122,6 +135,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			if (firstTick)
+			{
+				RefreshDifficultyTraits();
+				firstTick = false;
+			}
+
 			// Decrement any active unit intervals, removing any that reach zero
 			foreach (KeyValuePair<string, int> i in activeUnitIntervals.ToList())
 			{
@@ -130,8 +149,19 @@ namespace OpenRA.Mods.CA.Traits
 					activeUnitIntervals.Remove(i.Key);
 			}
 
-			if (requestPause.Any(rp => rp.PauseUnitProduction))
+			var baseBuilderPause = requestPause.FirstOrDefault(rp => ReferenceEquals(rp, baseBuilder));
+			if (requestPause.Any(rp => !ReferenceEquals(rp, baseBuilderPause) && rp.PauseUnitProduction))
 				return;
+
+			if (baseBuilderPause != null && baseBuilderPause.PauseUnitProduction)
+			{
+				if (++openingDefenseTicks % (FeedbackTime + Info.UnitBuilderInterval) == 0)
+					TryBuildOpeningDefense(bot);
+
+				return;
+			}
+
+			openingDefenseTicks = 0;
 
 			ticks++;
 
@@ -163,6 +193,32 @@ namespace OpenRA.Mods.CA.Traits
 							break;
 					}
 				}
+			}
+		}
+
+		void TryBuildOpeningDefense(IBot bot)
+		{
+			if (baseBuilder == null || !baseBuilder.CanTrainOpeningDefense || Info.OpeningDefenseUnitTypes.Count == 0)
+				return;
+
+			foreach (var queue in Info.UnitQueues.SelectMany(category => AIUtils.FindQueues(player, category)).Distinct())
+			{
+				if (queue.AllQueued().Any())
+					continue;
+
+				var unit = queue.BuildableItems()
+					.FirstOrDefault(a => Info.OpeningDefenseUnitTypes.Contains(a.Name) && ShouldBuild(a.Name, false));
+				if (unit == null)
+					continue;
+
+				var cost = queue.GetProductionCost(unit);
+				if (playerResources.GetCashAndResources() < cost || !baseBuilder.TryCommitOpeningDefenseCost(cost))
+					return;
+
+				SetUnitInterval(unit.Name);
+				bot.QueueOrder(Order.StartProduction(queue.Actor, unit.Name, 1));
+				AIUtils.BotDebug("AI: {0} decided to build {1} from the opening defense budget.", player, unit.Name);
+				return;
 			}
 		}
 
