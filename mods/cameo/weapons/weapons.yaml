@@ -9932,3 +9932,11 @@ SpiceExplosion:
 		Spread: 1
 		InvalidTargets: Shielded
 		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+
+generic_bullet_casing:
+	Range: 2c0
+	ReloadDelay: 100
+	Projectile: Bullet
+		Image: generic_bullet_casing
+		Speed: 200
+	Warhead@1: CreateEffect
