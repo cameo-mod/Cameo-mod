@@ -10,7 +10,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6309",
       "reloaddelay": "18",
@@ -33,7 +33,7 @@
        }
       ],
       "weapon": "CabalWaspLaserStriker",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -178,7 +178,7 @@
      {
       "armament_name": "charge",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "125",
@@ -196,7 +196,7 @@
        }
       ],
       "weapon": "CabalOverkillCharge",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -208,7 +208,7 @@
       "burst": "50",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "50",
@@ -226,7 +226,7 @@
        }
       ],
       "weapon": "CabalOverkillLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -667,7 +667,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "26",
@@ -685,7 +685,7 @@
        }
       ],
       "weapon": "CabalHunterKillerHeavyLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -852,7 +852,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6420",
       "reloaddelay": "20",
@@ -875,7 +875,7 @@
        }
       ],
       "weapon": "CabalWaspLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -926,7 +926,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6420",
       "reloaddelay": "20",
@@ -949,7 +949,7 @@
        }
       ],
       "weapon": "CabalWaspLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -996,7 +996,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "40",
@@ -1014,7 +1014,7 @@
        }
       ],
       "weapon": "CabalOverkillGunshipLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -1023,7 +1023,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "40",
@@ -1041,7 +1041,7 @@
        }
       ],
       "weapon": "CabalOverkillGunshipLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -1732,7 +1732,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "12288",
       "reloaddelay": "50",
@@ -1750,7 +1750,7 @@
        }
       ],
       "weapon": "DarkObeliskLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -3388,7 +3388,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5857",
       "reloaddelay": "5",
@@ -3406,7 +3406,7 @@
        }
       ],
       "weapon": "CabalEliminatorGatling",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -3416,7 +3416,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5857",
       "reloaddelay": "5",
@@ -3434,7 +3434,7 @@
        }
       ],
       "weapon": "CabalEliminatorGatling",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -3832,7 +3832,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "8",
@@ -4118,7 +4118,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6147",
       "reloaddelay": "90",
@@ -4136,7 +4136,7 @@
        }
       ],
       "weapon": "CabalLaserBoatLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -4145,7 +4145,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "90",
@@ -4163,7 +4163,7 @@
        }
       ],
       "weapon": "CabalLaserBoatLaserAA",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -4173,7 +4173,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -4191,7 +4191,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -4418,7 +4418,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "8",
@@ -5448,7 +5448,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6332",
       "reloaddelay": "70",
@@ -5466,7 +5466,7 @@
        }
       ],
       "weapon": "CabalAvatarLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -5475,7 +5475,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6332",
       "reloaddelay": "70",
@@ -5493,7 +5493,7 @@
        }
       ],
       "weapon": "CabalAvatarLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -5679,7 +5679,7 @@
       "burst": "3",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "2048",
       "reloaddelay": "30",
@@ -5697,7 +5697,7 @@
        }
       ],
       "weapon": "CabalBerserkerBlades",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5791,7 +5791,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6332",
       "reloaddelay": "70",
@@ -5809,7 +5809,7 @@
        }
       ],
       "weapon": "CabalCoreDefenderLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -5818,7 +5818,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6332",
       "reloaddelay": "70",
@@ -5836,7 +5836,7 @@
        }
       ],
       "weapon": "CabalCoreDefenderLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -6350,7 +6350,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6147",
       "reloaddelay": "90",
@@ -6368,7 +6368,7 @@
        }
       ],
       "weapon": "CabalSpiderLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -6425,7 +6425,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5358",
       "reloaddelay": "30",
@@ -6443,7 +6443,7 @@
        }
       ],
       "weapon": "CabalManticoreLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -6706,7 +6706,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3000",
       "reloaddelay": "30",
@@ -6725,7 +6725,7 @@
        }
       ],
       "weapon": "CabalRavagerPlasma",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -6734,7 +6734,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3000",
       "reloaddelay": "30",
@@ -6753,7 +6753,7 @@
        }
       ],
       "weapon": "CabalRavagerPlasmaNeutron",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -6851,7 +6851,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "80",
@@ -6869,7 +6869,7 @@
        }
       ],
       "weapon": "CabalSpiderCnc4Laser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -6924,7 +6924,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5278",
       "reloaddelay": "48",
@@ -6943,7 +6943,7 @@
        }
       ],
       "weapon": "CabalTarantulaCannon",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -6952,7 +6952,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6201",
       "reloaddelay": "44",
@@ -6972,7 +6972,7 @@
        }
       ],
       "weapon": "TS120mm_bluenuke",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^Warhead_CannonHE_Medium",

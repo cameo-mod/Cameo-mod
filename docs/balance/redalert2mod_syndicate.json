@@ -3206,7 +3206,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5701",
       "reloaddelay": "77",
@@ -3225,7 +3225,7 @@
        }
       ],
       "weapon": "NarcoGrenade",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -3236,7 +3236,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7300",
       "reloaddelay": "77",
@@ -3253,7 +3253,7 @@
        }
       ],
       "weapon": "NarcoGrenade_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -3323,7 +3323,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5701",
       "reloaddelay": "77",
@@ -3342,7 +3342,7 @@
        }
       ],
       "weapon": "NarcoGrenade",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -3354,7 +3354,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "7300",
       "reloaddelay": "77",
@@ -3371,7 +3371,7 @@
        }
       ],
       "weapon": "NarcoGrenade_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",

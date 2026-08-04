@@ -208,6 +208,10 @@ def weapon_class_from_types(types: list[str]) -> float | None:
         name = t[1:] if t.startswith("^") else t
         if name in _WEAPON_CLASS_IGNORE:
             continue
+        # New split-warhead families: only the ^Warhead_* template carries the
+        # class; ^Projectile_* / ^Effect_* are visual/projectile components.
+        if name.startswith("Projectile_") or name.startswith("Effect_"):
+            continue
         if name in _WEAPON_CLASS_SIDECAR:
             vals.append(_WEAPON_CLASS_SIDECAR[name])
             continue

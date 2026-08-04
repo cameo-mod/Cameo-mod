@@ -43,7 +43,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4783",
       "reloaddelay": "14",
@@ -62,7 +62,7 @@
        }
       ],
       "weapon": "HueyMissiles",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
@@ -1089,7 +1089,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6720",
       "reloaddelay": "22",
@@ -1108,7 +1108,7 @@
        }
       ],
       "weapon": "HighVAP",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -1845,7 +1845,7 @@
       "burst": "5",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5385",
       "reloaddelay": "16",
@@ -1864,7 +1864,7 @@
        }
       ],
       "weapon": "tkmm16",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -1902,7 +1902,7 @@
       "burst": "5",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5385",
       "reloaddelay": "16",
@@ -1921,7 +1921,7 @@
        }
       ],
       "weapon": "tkmm16",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -1999,7 +1999,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5042",
       "reloaddelay": "75",
@@ -2018,7 +2018,7 @@
        }
       ],
       "weapon": "tkm_rifleman_rifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -2027,7 +2027,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "25",
@@ -2046,7 +2046,7 @@
        }
       ],
       "weapon": "tkm_rifleman_semiautorifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -2056,7 +2056,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5042",
       "reloaddelay": "75",
@@ -2074,7 +2074,7 @@
        }
       ],
       "weapon": "tkm_rifleman_rifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -2131,7 +2131,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6214",
       "reloaddelay": "64",
@@ -2150,7 +2150,7 @@
        }
       ],
       "weapon": "tkmrockets",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -2159,7 +2159,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6214",
       "reloaddelay": "64",
@@ -2178,7 +2178,7 @@
        }
       ],
       "weapon": "tkmcryorockets",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -2188,7 +2188,7 @@
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7214",
       "reloaddelay": "64",
@@ -2207,7 +2207,7 @@
        }
       ],
       "weapon": "tkmtwinrockets",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -2263,7 +2263,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6368",
       "reloaddelay": "63",
@@ -2282,7 +2282,7 @@
        }
       ],
       "weapon": "Rockets",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -2292,7 +2292,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6214",
       "reloaddelay": "64",
@@ -2311,7 +2311,7 @@
        }
       ],
       "weapon": "tkmcryorockets",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -2322,7 +2322,7 @@
       "armament_name": "garrisoned",
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "7214",
       "reloaddelay": "64",
@@ -2341,7 +2341,7 @@
        }
       ],
       "weapon": "tkmtwinrockets",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -2661,7 +2661,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3204",
       "reloaddelay": "32",
@@ -2679,7 +2679,7 @@
        }
       ],
       "weapon": "ThermoF",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -2691,7 +2691,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "3204",
       "reloaddelay": "32",
@@ -2709,7 +2709,7 @@
        }
       ],
       "weapon": "ThermoF",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -2781,7 +2781,7 @@
        }
       ],
       "weapon": "tkm_trooper_ak",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -2811,7 +2811,7 @@
        }
       ],
       "weapon": "tkm_trooper_ak",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3601,7 +3601,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "30",
@@ -3619,7 +3619,7 @@
        }
       ],
       "weapon": "RA2Shovel",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -3629,7 +3629,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "1500",
       "reloaddelay": "30",
@@ -3647,7 +3647,7 @@
        }
       ],
       "weapon": "RA2Shovel",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -4340,7 +4340,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5672",
       "reloaddelay": "46",
@@ -4358,7 +4358,7 @@
        }
       ],
       "weapon": "tkmrh120gun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -4414,7 +4414,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6379",
       "reloaddelay": "30",
@@ -4433,7 +4433,7 @@
        }
       ],
       "weapon": "as42rockets",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -4442,7 +4442,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6214",
       "reloaddelay": "64",
@@ -4461,7 +4461,7 @@
        }
       ],
       "weapon": "tkmcryorockets",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -4471,7 +4471,7 @@
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7214",
       "reloaddelay": "64",
@@ -4490,7 +4490,7 @@
        }
       ],
       "weapon": "tkmtwinrockets",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -6360,7 +6360,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7880",
       "reloaddelay": "60",
@@ -6379,7 +6379,7 @@
        }
       ],
       "weapon": "tkmstrykerrockets",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
@@ -6601,7 +6601,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6196",
       "reloaddelay": "42",
@@ -6619,7 +6619,7 @@
        }
       ],
       "weapon": "tkm2a46gun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -6814,7 +6814,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5316",
       "reloaddelay": "42",
@@ -6832,7 +6832,7 @@
        }
       ],
       "weapon": "tkmltgun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -6842,7 +6842,7 @@
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5243",
       "reloaddelay": "64",
@@ -6859,7 +6859,7 @@
        }
       ],
       "weapon": "tkmtwinrocketstechnicaltank",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",

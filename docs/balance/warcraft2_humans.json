@@ -1854,7 +1854,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
@@ -1888,7 +1888,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.5,
       "pricing": false,
       "range": "8000",
       "reloaddelay": "40",
@@ -2909,7 +2909,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
@@ -2927,7 +2927,7 @@
        }
       ],
       "weapon": "wc2footmanslice",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -2983,7 +2983,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
@@ -3099,7 +3099,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
@@ -3515,7 +3515,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1420",
       "reloaddelay": "12",
@@ -3534,7 +3534,7 @@
        }
       ],
       "weapon": "wc2knightslice",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -3652,7 +3652,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
@@ -3686,7 +3686,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.5,
       "pricing": false,
       "range": "8000",
       "reloaddelay": "40",
@@ -4082,7 +4082,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
@@ -4100,7 +4100,7 @@
        }
       ],
       "weapon": "wc2footmanslice",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -4357,7 +4357,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1533",
       "reloaddelay": "15",
@@ -4375,7 +4375,7 @@
        }
       ],
       "weapon": "wc2footmanslice2",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5239,7 +5239,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
@@ -5256,7 +5256,7 @@
        }
       ],
       "weapon": "wc2demolitionsquadMelee",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5353,7 +5353,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1420",
       "reloaddelay": "12",
@@ -5372,7 +5372,7 @@
        }
       ],
       "weapon": "wc2knightslice",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5492,7 +5492,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
@@ -5508,7 +5508,7 @@
        }
       ],
       "weapon": "wc2peasantsmack",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5835,7 +5835,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1420",
       "reloaddelay": "12",
@@ -5854,7 +5854,7 @@
        }
       ],
       "weapon": "wc2knightslice",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",

@@ -168,7 +168,7 @@
       "burst": "5",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6742",
       "reloaddelay": "50",
@@ -186,7 +186,7 @@
        }
       ],
       "weapon": "HarkonnenFlameTurret",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",

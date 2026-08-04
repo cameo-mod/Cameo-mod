@@ -2626,7 +2626,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5818",
       "reloaddelay": "45",
@@ -2644,7 +2644,7 @@
        }
       ],
       "weapon": "D2K_ShockGunInf",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -2654,7 +2654,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5818",
       "reloaddelay": "45",
@@ -2672,7 +2672,7 @@
        }
       ],
       "weapon": "D2K_ShockGunInf",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -4719,7 +4719,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "20000",
       "reloaddelay": "4",

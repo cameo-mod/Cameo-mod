@@ -838,7 +838,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4882",
       "reloaddelay": "18",
@@ -856,7 +856,7 @@
        }
       ],
       "weapon": "TSWaspClaw",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -1678,7 +1678,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9483",
       "reloaddelay": "30",
@@ -1697,7 +1697,7 @@
        }
       ],
       "weapon": "TSHighVelocityTur",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^Warhead_CannonAP_Light",
@@ -1747,7 +1747,7 @@
       "burst": "3",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "11234",
       "reloaddelay": "28",
@@ -1765,7 +1765,7 @@
        }
       ],
       "weapon": "TSJuggerFlakAA",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -2388,7 +2388,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9557",
       "reloaddelay": "25",
@@ -2407,7 +2407,7 @@
        }
       ],
       "weapon": "TSGhostGun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
@@ -2482,7 +2482,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "9557",
       "reloaddelay": "25",
@@ -2501,7 +2501,7 @@
        }
       ],
       "weapon": "TSGhostGun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
@@ -2609,7 +2609,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9557",
       "reloaddelay": "25",
@@ -2628,7 +2628,7 @@
        }
       ],
       "weapon": "TSGhostGun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
@@ -2703,7 +2703,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "9557",
       "reloaddelay": "25",
@@ -2722,7 +2722,7 @@
        }
       ],
       "weapon": "TSGhostGun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
@@ -2817,7 +2817,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9557",
       "reloaddelay": "25",
@@ -2836,7 +2836,7 @@
        }
       ],
       "weapon": "TSGhostGun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
@@ -2897,7 +2897,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "9557",
       "reloaddelay": "25",
@@ -2916,7 +2916,7 @@
        }
       ],
       "weapon": "TSGhostGun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
@@ -3012,7 +3012,7 @@
      {
       "burst": "2",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5219",
       "reloaddelay": "18",
@@ -3030,7 +3030,7 @@
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3041,7 +3041,7 @@
       "armament_name": "garrisoned",
       "burst": "2",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5219",
       "reloaddelay": "18",
@@ -3059,7 +3059,7 @@
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3116,7 +3116,7 @@
      {
       "burst": "2",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5219",
       "reloaddelay": "18",
@@ -3134,7 +3134,7 @@
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3145,7 +3145,7 @@
       "armament_name": "garrisoned",
       "burst": "2",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5219",
       "reloaddelay": "18",
@@ -3163,7 +3163,7 @@
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3207,7 +3207,7 @@
      {
       "burst": "2",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5219",
       "reloaddelay": "18",
@@ -3225,7 +3225,7 @@
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3236,7 +3236,7 @@
       "armament_name": "garrisoned",
       "burst": "2",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5219",
       "reloaddelay": "18",
@@ -3254,7 +3254,7 @@
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -4061,7 +4061,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -4079,7 +4079,7 @@
        }
       ],
       "weapon": "forgotten_mutantsoldier_rifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -4089,7 +4089,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "50",
@@ -4107,7 +4107,7 @@
        }
       ],
       "weapon": "forgotten_mutantsoldier_rifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -4163,7 +4163,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -4181,7 +4181,7 @@
        }
       ],
       "weapon": "forgotten_mutantsoldier_rifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -4191,7 +4191,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "50",
@@ -4209,7 +4209,7 @@
        }
       ],
       "weapon": "forgotten_mutantsoldier_rifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -4252,7 +4252,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6694",
       "reloaddelay": "52",
@@ -4271,7 +4271,7 @@
        }
       ],
       "weapon": "TSBazooka",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -4281,7 +4281,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6694",
       "reloaddelay": "52",
@@ -4300,7 +4300,7 @@
        }
       ],
       "weapon": "TSBazooka",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -5988,7 +5988,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1127",
       "reloaddelay": "20",
@@ -6006,7 +6006,7 @@
        }
       ],
       "weapon": "TSZombieAttack",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -6016,7 +6016,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "1127",
       "reloaddelay": "20",
@@ -6034,7 +6034,7 @@
        }
       ],
       "weapon": "TSZombieAttack",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -6217,7 +6217,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -6235,7 +6235,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -6244,7 +6244,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -6262,7 +6262,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -6319,7 +6319,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2245",
       "pricing": true,
       "range": "11234",
@@ -6338,7 +6338,7 @@
        }
       ],
       "weapon": "TSJuggerFlakAA_boat",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -6431,7 +6431,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -6449,7 +6449,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -7473,7 +7473,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "2386",
       "reloaddelay": "50",
@@ -7492,7 +7492,7 @@
        }
       ],
       "weapon": "MutFlamer",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -7729,7 +7729,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5677",
       "reloaddelay": "62",
@@ -7748,7 +7748,7 @@
        }
       ],
       "weapon": "TSMammothTusk",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ImpactGlow",
        "^Warhead_MissileAP_Heavy",
@@ -8512,7 +8512,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8301",
       "reloaddelay": "6",
@@ -8530,7 +8530,7 @@
        }
       ],
       "weapon": "TSNomadGun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -8591,7 +8591,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4475",
       "reloaddelay": "20",
@@ -8609,7 +8609,7 @@
        }
       ],
       "weapon": "TSRaiderCarCannon",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -8664,7 +8664,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5566",
       "reloaddelay": "24",
@@ -8684,7 +8684,7 @@
        }
       ],
       "weapon": "TS70mm",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^Warhead_CannonHE_Medium",
@@ -9110,7 +9110,7 @@
       "burst": "2",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6224",
       "reloaddelay": "60",
@@ -9130,7 +9130,7 @@
        }
       ],
       "weapon": "TSScoopDual",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^Warhead_CannonHE_Medium",
@@ -9237,7 +9237,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7701",
       "reloaddelay": "90",
@@ -9257,7 +9257,7 @@
        }
       ],
       "weapon": "TSHighVelocity",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^Warhead_CannonAP_Light",
@@ -9582,7 +9582,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8207",
       "reloaddelay": "55",
@@ -9602,7 +9602,7 @@
        }
       ],
       "weapon": "TSHighVelocity2",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^Warhead_CannonAP_Light",

@@ -125,3 +125,14 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 - `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml`:
   - `HighV` `Warhead@Bullet_Medium_Percentage` was missing its warhead type, causing the weapon to be dropped from the ruleset and `td_gdi_guardtower` to fail at boot (`Weapons Ruleset does not contain an entry 'highv'`). Set it to `HealthPercentageDamage` to match `M16AP`.
 - Boot-gate: reached main menu (`PostWorldLoaded`); no new `exception-*.log` files.
+
+## 2026-08-04 — extract_stats refine class-template detection
+
+- `tools/balance/extract_stats.py`:
+  - Treat `^Projectile_*` and `^Effect_*` split-family templates as non-class
+    components, leaving only `^Warhead_*` and legacy class templates as class
+    inputs. This removes false `illegal_mix` hits from the new 3-way warhead
+    split and lets `design_weapon_class` correctly reflect the weapon's real
+    class family.
+  - Re-extracted all 32 `docs/balance/*.json` ledgers; `extract_stats.py --check`
+    reports 0 drifted.

@@ -163,7 +163,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "2500",
       "reloaddelay": "60",
@@ -181,7 +181,7 @@
        }
       ],
       "weapon": "NaxDieGlocke",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
@@ -2484,7 +2484,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "5",
@@ -2502,7 +2502,7 @@
        }
       ],
       "weapon": "NaxiBlackholeShoot",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -2552,7 +2552,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "5",
@@ -2570,7 +2570,7 @@
        }
       ],
       "weapon": "NaxiBlackholeShoot",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -2994,7 +2994,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3039,7 +3039,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3084,7 +3084,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3129,7 +3129,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3174,7 +3174,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3219,7 +3219,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3265,7 +3265,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3311,7 +3311,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3357,7 +3357,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3403,7 +3403,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3449,7 +3449,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3495,7 +3495,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -4292,7 +4292,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6414",
       "reloaddelay": "60",
@@ -4311,7 +4311,7 @@
        }
       ],
       "weapon": "BlackHoleMaker",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -4322,7 +4322,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7414",
       "reloaddelay": "60",
@@ -4339,7 +4339,7 @@
        }
       ],
       "weapon": "BlackHoleMaker_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -4349,7 +4349,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6414",
       "reloaddelay": "60",
@@ -4368,7 +4368,7 @@
        }
       ],
       "weapon": "BlackHoleMaker",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -4380,7 +4380,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "7414",
       "reloaddelay": "60",
@@ -4397,7 +4397,7 @@
        }
       ],
       "weapon": "BlackHoleMaker_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -5535,7 +5535,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7420",
       "reloaddelay": "90",
@@ -5559,7 +5559,7 @@
        }
       ],
       "weapon": "NaxCrystalLeech",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -5570,7 +5570,7 @@
       "burst": "20",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "8420",
       "reloaddelay": "25",

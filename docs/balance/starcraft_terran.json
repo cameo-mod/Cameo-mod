@@ -981,7 +981,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "360",
@@ -1054,7 +1054,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6060",
       "reloaddelay": "39",
@@ -1072,7 +1072,7 @@
        }
       ],
       "weapon": "SunDogLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -1440,7 +1440,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5076",
       "reloaddelay": "32",
@@ -1458,7 +1458,7 @@
        }
       ],
       "weapon": "WraithLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -2733,7 +2733,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3400",
       "reloaddelay": "28",
@@ -2751,7 +2751,7 @@
        }
       ],
       "weapon": "FirebatF",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -2762,7 +2762,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3400",
       "reloaddelay": "28",
@@ -2780,7 +2780,7 @@
        }
       ],
       "weapon": "FirebatF",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -2792,7 +2792,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "3400",
       "reloaddelay": "28",
@@ -2810,7 +2810,7 @@
        }
       ],
       "weapon": "FirebatF",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -2822,7 +2822,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "3400",
       "reloaddelay": "28",
@@ -2840,7 +2840,7 @@
        }
       ],
       "weapon": "FirebatF",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -6480,7 +6480,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6590",
       "reloaddelay": "39",
@@ -6499,7 +6499,7 @@
        }
       ],
       "weapon": "MatadorLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",

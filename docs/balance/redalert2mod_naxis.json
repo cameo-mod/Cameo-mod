@@ -1858,7 +1858,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8100",
       "reloaddelay": "50",
@@ -1876,7 +1876,7 @@
        }
       ],
       "weapon": "NaxiRifleT",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -2267,7 +2267,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5222",
       "reloaddelay": "100",
@@ -2291,7 +2291,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -2300,7 +2300,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5222",
       "reloaddelay": "100",
@@ -2324,7 +2324,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -2334,7 +2334,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5222",
       "reloaddelay": "100",
@@ -2358,7 +2358,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -2368,7 +2368,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5222",
       "reloaddelay": "100",
@@ -2392,7 +2392,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -2443,7 +2443,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1616",
       "reloaddelay": "37",
@@ -2462,7 +2462,7 @@
        }
       ],
       "weapon": "RA2BrutePunch",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -2473,7 +2473,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1616",
       "reloaddelay": "37",
@@ -2490,7 +2490,7 @@
        }
       ],
       "weapon": "RA2BrutePunch_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -2500,7 +2500,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "1616",
       "reloaddelay": "37",
@@ -2518,7 +2518,7 @@
        }
       ],
       "weapon": "RA2BrutePunch",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -2796,7 +2796,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1555",
       "reloaddelay": "18",
@@ -2814,7 +2814,7 @@
        }
       ],
       "weapon": "wc2gruntslice",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -2824,7 +2824,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5501",
       "reloaddelay": "100",
@@ -2843,7 +2843,7 @@
        }
       ],
       "weapon": "NaxiRifleCons",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -2855,7 +2855,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6501",
       "reloaddelay": "100",
@@ -2872,7 +2872,7 @@
        }
       ],
       "weapon": "NaxiRifleCons_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -2925,7 +2925,7 @@
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4830",
       "reloaddelay": "60",
@@ -2942,7 +2942,7 @@
        }
       ],
       "weapon": "NaxiFlamerTroop",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -2953,7 +2953,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5830",
       "reloaddelay": "60",
@@ -2970,7 +2970,7 @@
        }
       ],
       "weapon": "NaxiFlamerTroop_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -2982,7 +2982,7 @@
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "4830",
       "reloaddelay": "60",
@@ -2999,7 +2999,7 @@
        }
       ],
       "weapon": "NaxiFlamerTroop",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -3011,7 +3011,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5830",
       "reloaddelay": "60",
@@ -3028,7 +3028,7 @@
        }
       ],
       "weapon": "NaxiFlamerTroop_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -3437,7 +3437,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5227",
       "reloaddelay": "100",
@@ -3456,7 +3456,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3467,7 +3467,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "100",
@@ -3484,7 +3484,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3494,7 +3494,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5227",
       "reloaddelay": "100",
@@ -3513,7 +3513,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3525,7 +3525,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6500",
       "reloaddelay": "100",
@@ -3542,7 +3542,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3597,7 +3597,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -3616,7 +3616,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3627,7 +3627,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "50",
@@ -3644,7 +3644,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3654,7 +3654,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "50",
@@ -3673,7 +3673,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3685,7 +3685,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6500",
       "reloaddelay": "50",
@@ -3702,7 +3702,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -5248,7 +5248,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "30",
@@ -5266,7 +5266,7 @@
        }
       ],
       "weapon": "RA2Shovel",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5276,7 +5276,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "1500",
       "reloaddelay": "30",
@@ -5294,7 +5294,7 @@
        }
       ],
       "weapon": "RA2Shovel",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5359,7 +5359,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5621",
       "reloaddelay": "75",
@@ -5378,7 +5378,7 @@
        }
       ],
       "weapon": "NaxiRifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -5389,7 +5389,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6621",
       "reloaddelay": "75",
@@ -5406,7 +5406,7 @@
        }
       ],
       "weapon": "NaxiRifle_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -5416,7 +5416,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5621",
       "reloaddelay": "75",
@@ -5435,7 +5435,7 @@
        }
       ],
       "weapon": "NaxiRifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -5447,7 +5447,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6621",
       "reloaddelay": "75",
@@ -5464,7 +5464,7 @@
        }
       ],
       "weapon": "NaxiRifle_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -5734,7 +5734,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5621",
       "reloaddelay": "75",
@@ -5753,7 +5753,7 @@
        }
       ],
       "weapon": "NaxiRifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -5764,7 +5764,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6621",
       "reloaddelay": "75",
@@ -5781,7 +5781,7 @@
        }
       ],
       "weapon": "NaxiRifle_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -5791,7 +5791,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5621",
       "reloaddelay": "75",
@@ -5810,7 +5810,7 @@
        }
       ],
       "weapon": "NaxiRifle",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -5822,7 +5822,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6621",
       "reloaddelay": "75",
@@ -5839,7 +5839,7 @@
        }
       ],
       "weapon": "NaxiRifle_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",

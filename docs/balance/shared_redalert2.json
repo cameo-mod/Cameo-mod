@@ -48,7 +48,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "30",
@@ -66,7 +66,7 @@
        }
       ],
       "weapon": "RA2Shovel",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -76,7 +76,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "1500",
       "reloaddelay": "30",
@@ -94,7 +94,7 @@
        }
       ],
       "weapon": "RA2Shovel",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -3696,7 +3696,7 @@
       "burst": "5",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "3000",
       "reloaddelay": "25",
@@ -3712,7 +3712,7 @@
        }
       ],
       "weapon": "RA2DepthCharge",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -3993,7 +3993,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -4016,7 +4016,7 @@
        }
       ],
       "weapon": "SonicZap",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Magic_Heavy",
        "^Projectile_Magic_Heavy",
@@ -4741,7 +4741,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5222",
       "reloaddelay": "100",
@@ -4765,7 +4765,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -4774,7 +4774,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5777",
       "reloaddelay": "100",
@@ -4796,7 +4796,7 @@
        }
       ],
       "weapon": "RA2PortaTesla2",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -4805,7 +4805,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6222",
       "reloaddelay": "100",
@@ -4827,7 +4827,7 @@
        }
       ],
       "weapon": "RA2PortaTesla3",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -4856,7 +4856,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5222",
       "reloaddelay": "100",
@@ -4880,7 +4880,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -4890,7 +4890,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5777",
       "reloaddelay": "100",
@@ -4912,7 +4912,7 @@
        }
       ],
       "weapon": "RA2PortaTesla2",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -4922,7 +4922,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6222",
       "reloaddelay": "100",
@@ -4944,7 +4944,7 @@
        }
       ],
       "weapon": "RA2PortaTesla3",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",

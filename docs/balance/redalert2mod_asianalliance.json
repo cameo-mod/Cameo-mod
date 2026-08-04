@@ -1186,7 +1186,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "30",
@@ -1204,7 +1204,7 @@
        }
       ],
       "weapon": "AsianFlamerTurret",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -1913,7 +1913,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9600",
       "reloaddelay": "10",
@@ -1931,7 +1931,7 @@
        }
       ],
       "weapon": "AsianRailgun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -2325,7 +2325,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1345",
       "reloaddelay": "39",
@@ -2344,7 +2344,7 @@
        }
       ],
       "weapon": "AsianCrocBite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -2355,7 +2355,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1345",
       "reloaddelay": "39",
@@ -2372,7 +2372,7 @@
        }
       ],
       "weapon": "AsianCrocBite_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -3169,7 +3169,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4444",
       "reloaddelay": "38",
@@ -3186,7 +3186,7 @@
        }
       ],
       "weapon": "AsianFlamerTroop",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -3198,7 +3198,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "34",
@@ -3215,7 +3215,7 @@
        }
       ],
       "weapon": "AsianFlamerTroop2",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -3227,7 +3227,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "30",
@@ -3246,7 +3246,7 @@
        }
       ],
       "weapon": "AsianFlamerTurret",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -3258,7 +3258,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "4444",
       "reloaddelay": "38",
@@ -3275,7 +3275,7 @@
        }
       ],
       "weapon": "AsianFlamerTroop",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -3287,7 +3287,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5555",
       "reloaddelay": "34",
@@ -3304,7 +3304,7 @@
        }
       ],
       "weapon": "AsianFlamerTroop2",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -3316,7 +3316,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6666",
       "reloaddelay": "30",
@@ -3335,7 +3335,7 @@
        }
       ],
       "weapon": "AsianFlamerTurret",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -4327,7 +4327,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1579",
       "reloaddelay": "40",
@@ -4346,7 +4346,7 @@
        }
       ],
       "weapon": "AsianSamuraiSword1",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -4357,7 +4357,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1579",
       "reloaddelay": "40",
@@ -4374,7 +4374,7 @@
        }
       ],
       "weapon": "AsianSamuraiSword2",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -4385,7 +4385,7 @@
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1579",
       "reloaddelay": "40",
@@ -4402,7 +4402,7 @@
        }
       ],
       "weapon": "AsianSamuraiSword3",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5023,7 +5023,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4560",
       "reloaddelay": "25",
@@ -5042,7 +5042,7 @@
        }
       ],
       "weapon": "AsianNinjaStar",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5053,7 +5053,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5560",
       "reloaddelay": "25",
@@ -5070,7 +5070,7 @@
        }
       ],
       "weapon": "AsianNinjaStar_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5080,7 +5080,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "4560",
       "reloaddelay": "25",
@@ -5099,7 +5099,7 @@
        }
       ],
       "weapon": "AsianNinjaStar",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5111,7 +5111,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5560",
       "reloaddelay": "25",
@@ -5128,7 +5128,7 @@
        }
       ],
       "weapon": "AsianNinjaStar_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5820,7 +5820,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -5838,7 +5838,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -5847,7 +5847,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -5866,7 +5866,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -7275,7 +7275,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "3700",
       "reloaddelay": "25",
@@ -7292,7 +7292,7 @@
        }
       ],
       "weapon": "AsianFlamerTank",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -7303,7 +7303,7 @@
       "burst": "12",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4700",
       "reloaddelay": "25",
@@ -7320,7 +7320,7 @@
        }
       ],
       "weapon": "AsianFlamerTank_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -7519,7 +7519,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "75",
@@ -7536,7 +7536,7 @@
        }
       ],
       "weapon": "AsianRailTank2",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -7546,7 +7546,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "11111",
       "reloaddelay": "90",
@@ -7563,7 +7563,7 @@
        }
       ],
       "weapon": "AsianRailTank3",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -8784,7 +8784,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "60",
@@ -8803,7 +8803,7 @@
        }
       ],
       "weapon": "AsianRailTank",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -8813,7 +8813,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "75",
@@ -8830,7 +8830,7 @@
        }
       ],
       "weapon": "AsianRailTank2",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",

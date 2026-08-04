@@ -548,7 +548,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6030",
       "reloaddelay": "9",
@@ -567,7 +567,7 @@
        }
       ],
       "weapon": "HarbingerChainguns",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -579,7 +579,7 @@
       "burst": "2",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7030",
       "reloaddelay": "9",
@@ -596,7 +596,7 @@
        }
       ],
       "weapon": "HarbingerChainguns_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -5039,7 +5039,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "125",
@@ -5062,7 +5062,7 @@
        }
       ],
       "weapon": "Future_CoilerAgressive",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -6784,7 +6784,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
@@ -6808,7 +6808,7 @@
        }
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -6957,7 +6957,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6097",
       "reloaddelay": "42",
@@ -6976,7 +6976,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -7131,7 +7131,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "2390",
       "reloaddelay": "50",
@@ -7150,7 +7150,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -7159,7 +7159,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -7178,7 +7178,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -7187,7 +7187,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -7206,7 +7206,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",

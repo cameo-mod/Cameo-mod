@@ -9,7 +9,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6840",
       "reloaddelay": "40",
@@ -28,7 +28,7 @@
        }
       ],
       "weapon": "RA2DiskLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -38,7 +38,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7840",
       "reloaddelay": "40",
@@ -55,7 +55,7 @@
        }
       ],
       "weapon": "RA2DiskLaser_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -1149,7 +1149,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4840",
       "reloaddelay": "50",
@@ -1168,7 +1168,7 @@
        }
       ],
       "weapon": "RA2Chemspray",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -1179,7 +1179,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4840",
       "reloaddelay": "50",
@@ -1204,7 +1204,7 @@
        }
       ],
       "weapon": "RA2Chemspray2",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
@@ -1218,7 +1218,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5840",
       "reloaddelay": "50",
@@ -1240,7 +1240,7 @@
        }
       ],
       "weapon": "RA2Chemspray_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
@@ -1255,7 +1255,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "4840",
       "reloaddelay": "50",
@@ -1274,7 +1274,7 @@
        }
       ],
       "weapon": "RA2Chemspray",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -1286,7 +1286,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "4840",
       "reloaddelay": "50",
@@ -1311,7 +1311,7 @@
        }
       ],
       "weapon": "RA2Chemspray2",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
@@ -1326,7 +1326,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "5840",
       "reloaddelay": "50",
@@ -1348,7 +1348,7 @@
        }
       ],
       "weapon": "RA2Chemspray_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
@@ -1402,7 +1402,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1616",
       "reloaddelay": "37",
@@ -1421,7 +1421,7 @@
        }
       ],
       "weapon": "RA2BrutePunch",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -1432,7 +1432,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1616",
       "reloaddelay": "37",
@@ -1449,7 +1449,7 @@
        }
       ],
       "weapon": "RA2BrutePunch_elite",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",

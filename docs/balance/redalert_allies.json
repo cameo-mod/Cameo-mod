@@ -934,7 +934,7 @@
       "burst": "2",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "11412",
       "reloaddelay": "14",
@@ -952,7 +952,7 @@
        }
       ],
       "weapon": "zsu_23",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -3170,7 +3170,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5159",
       "reloaddelay": "47",
@@ -3188,7 +3188,7 @@
        }
       ],
       "weapon": "90mm",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -4267,7 +4267,7 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4359",
       "reloaddelay": "10",
@@ -4285,7 +4285,7 @@
        }
       ],
       "weapon": "M60mg",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",

@@ -128,7 +128,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5451",
       "reloaddelay": "6",
@@ -146,7 +146,7 @@
        }
       ],
       "weapon": "TSHammerheadGun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -414,7 +414,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8450",
       "reloaddelay": "4",
@@ -432,7 +432,7 @@
        }
       ],
       "weapon": "KodiakAAGuns",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -1928,7 +1928,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "12440",
       "reloaddelay": "30",
@@ -1946,7 +1946,7 @@
        }
       ],
       "weapon": "TSGDIRedEye",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
@@ -2931,7 +2931,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4062",
       "reloaddelay": "12",
@@ -2949,7 +2949,7 @@
        }
       ],
       "weapon": "TSMinigun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -2959,7 +2959,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "4062",
       "reloaddelay": "12",
@@ -2977,7 +2977,7 @@
        }
       ],
       "weapon": "TSMinigun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3151,7 +3151,7 @@
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7563",
       "reloaddelay": "52",
@@ -3175,7 +3175,7 @@
        }
       ],
       "weapon": "TSCommandoRailgun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -3186,7 +3186,7 @@
       "burst": "5",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7563",
       "reloaddelay": "52",
@@ -3208,7 +3208,7 @@
        }
       ],
       "weapon": "TSCommandoRailgunRail",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -3220,7 +3220,7 @@
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "7563",
       "reloaddelay": "52",
@@ -3244,7 +3244,7 @@
        }
       ],
       "weapon": "TSCommandoRailgun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -3256,7 +3256,7 @@
       "burst": "5",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "7563",
       "reloaddelay": "52",
@@ -3278,7 +3278,7 @@
        }
       ],
       "weapon": "TSCommandoRailgunRail",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -3572,7 +3572,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6230",
       "reloaddelay": "60",
@@ -3596,7 +3596,7 @@
        }
       ],
       "weapon": "TSZoneRailgun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -3605,7 +3605,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6230",
       "reloaddelay": "60",
@@ -3627,7 +3627,7 @@
        }
       ],
       "weapon": "TSZoneRailgunRail",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -3637,7 +3637,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6230",
       "reloaddelay": "60",
@@ -3661,7 +3661,7 @@
        }
       ],
       "weapon": "TSZoneRailgun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -3671,7 +3671,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6230",
       "reloaddelay": "60",
@@ -3693,7 +3693,7 @@
        }
       ],
       "weapon": "TSZoneRailgunRail",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -4676,7 +4676,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8434",
       "reloaddelay": "112",
@@ -4700,7 +4700,7 @@
        }
       ],
       "weapon": "TSMechRailgunII",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -4712,7 +4712,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9388",
       "reloaddelay": "92",
@@ -4731,7 +4731,7 @@
        }
       ],
       "weapon": "TSMammothTusk2II_AA",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ImpactGlow",
        "^Warhead_MissileAP_Heavy",
@@ -4744,7 +4744,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8434",
       "reloaddelay": "72",
@@ -4766,7 +4766,7 @@
        }
       ],
       "weapon": "TSMechRailgunRailII",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -4776,7 +4776,7 @@
      {
       "armament_name": "mg",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7002",
       "reloaddelay": "8",
@@ -4794,7 +4794,7 @@
        }
       ],
       "weapon": "TSMechMGII",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -4858,7 +4858,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8409",
       "reloaddelay": "92",
@@ -4882,7 +4882,7 @@
        }
       ],
       "weapon": "TSMechRailgun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -4894,7 +4894,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9332",
       "reloaddelay": "92",
@@ -4913,7 +4913,7 @@
        }
       ],
       "weapon": "TSMammothTusk2",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ImpactGlow",
        "^Warhead_MissileAP_Heavy",
@@ -4926,7 +4926,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8409",
       "reloaddelay": "58",
@@ -4948,7 +4948,7 @@
        }
       ],
       "weapon": "TSMechRailgunRail",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -5057,7 +5057,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "1512",
       "reloaddelay": "200",
@@ -5080,7 +5080,7 @@
        }
       ],
       "weapon": "TSMobile_EMP",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -5181,7 +5181,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6379",
       "reloaddelay": "55",
@@ -5199,7 +5199,7 @@
        }
       ],
       "weapon": "PitbullRockets",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -5301,7 +5301,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6201",
       "reloaddelay": "44",
@@ -5321,7 +5321,7 @@
        }
       ],
       "weapon": "TS120mm",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^Warhead_CannonHE_Medium",
@@ -5423,7 +5423,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6201",
       "reloaddelay": "50",
@@ -5443,7 +5443,7 @@
        }
       ],
       "weapon": "TS120mmTal",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^Warhead_CannonHE_Medium",
@@ -5718,7 +5718,7 @@
       "burst": "2",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6520",
       "reloaddelay": "40",
@@ -5737,7 +5737,7 @@
        }
       ],
       "weapon": "TSAssaultCannonTal",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",

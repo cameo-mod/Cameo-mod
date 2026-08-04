@@ -10,7 +10,7 @@
       "burst": "4",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
@@ -29,7 +29,7 @@
        }
       ],
       "weapon": "d2kCarryallChainGun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -40,7 +40,7 @@
       "burst": "4",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
@@ -65,7 +65,7 @@
        }
       ],
       "weapon": "d2kCarryallChainGun_upgrade",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -121,7 +121,7 @@
       "burst": "4",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
@@ -140,7 +140,7 @@
        }
       ],
       "weapon": "d2kCarryallChainGun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -151,7 +151,7 @@
       "burst": "4",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
@@ -176,7 +176,7 @@
        }
       ],
       "weapon": "d2kCarryallChainGun_upgrade",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -743,7 +743,7 @@
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6184",
       "reloaddelay": "60",
@@ -762,7 +762,7 @@
        }
       ],
       "weapon": "d2kChainGun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -773,7 +773,7 @@
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6184",
       "reloaddelay": "60",
@@ -798,7 +798,7 @@
        }
       ],
       "weapon": "d2kChainGun_upgrade",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -1954,7 +1954,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5177",
       "reloaddelay": "75",
@@ -1972,7 +1972,7 @@
        }
       ],
       "weapon": "d2k_chemgun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
@@ -1982,7 +1982,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5177",
       "reloaddelay": "75",
@@ -2000,7 +2000,7 @@
        }
       ],
       "weapon": "d2k_chemgun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
@@ -2051,7 +2051,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "20",
@@ -2069,7 +2069,7 @@
        }
       ],
       "weapon": "contaminator_attack",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -2079,7 +2079,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "2000",
       "reloaddelay": "20",
@@ -2097,7 +2097,7 @@
        }
       ],
       "weapon": "contaminator_attack",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5494,7 +5494,7 @@
       "burst": "9",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "8",
@@ -5513,7 +5513,7 @@
        }
       ],
       "weapon": "HMGo",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",

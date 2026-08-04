@@ -11,7 +11,7 @@
       "burst": "12",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1325",
       "pricing": true,
       "range": "6615",
@@ -31,7 +31,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -43,7 +43,7 @@
       "burst": "12",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "1325",
       "pricing": true,
       "range": "6615",
@@ -84,7 +84,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGunWaveforce",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^Grenade",
@@ -742,7 +742,7 @@
       "burst": "12",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1325",
       "pricing": true,
       "range": "6615",
@@ -762,7 +762,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -773,7 +773,7 @@
       "burst": "12",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "1325",
       "pricing": true,
       "range": "6615",
@@ -814,7 +814,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGunWaveforce",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^Grenade",
@@ -1296,7 +1296,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1845",
       "pricing": true,
       "range": "9214",
@@ -1313,7 +1313,7 @@
        }
       ],
       "weapon": "BallistaSingleShotAir",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Arrow_Light",
        "^Projectile_Arrow_Light",
@@ -1809,7 +1809,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1500",
       "pricing": true,
       "range": "7500",
@@ -1829,7 +1829,7 @@
        }
       ],
       "weapon": "JapanMaidenBow",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Arrow_Light",
        "^Projectile_Arrow_Light",
@@ -1839,7 +1839,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1500",
       "pricing": false,
       "range": "7500",
@@ -1859,7 +1859,7 @@
        }
       ],
       "weapon": "JapanMaidenBow",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Arrow_Light",
        "^Projectile_Arrow_Light",
@@ -2704,7 +2704,7 @@
       "burst": "15",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "3603",
       "reloaddelay": "35",
@@ -2723,7 +2723,7 @@
        }
       ],
       "weapon": "Flamer",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -2735,7 +2735,7 @@
       "burst": "15",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "3603",
       "reloaddelay": "35",
@@ -2754,7 +2754,7 @@
        }
       ],
       "weapon": "Flamer",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -3072,7 +3072,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1637",
       "reloaddelay": "20",
@@ -3091,7 +3091,7 @@
        }
       ],
       "weapon": "SamuraiBlade",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -3101,7 +3101,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "1637",
       "reloaddelay": "20",
@@ -3120,7 +3120,7 @@
        }
       ],
       "weapon": "SamuraiBlade",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
@@ -5463,7 +5463,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -5482,7 +5482,7 @@
        }
       ],
       "weapon": "OISmallCannon",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -5491,7 +5491,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -5510,7 +5510,7 @@
        }
       ],
       "weapon": "OISmallCannon",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -5519,7 +5519,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -5538,7 +5538,7 @@
        }
       ],
       "weapon": "OISmallCannon",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -5789,7 +5789,7 @@
       "burst": "20",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -5808,7 +5808,7 @@
        }
       ],
       "weapon": "OIFlamer",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -5820,7 +5820,7 @@
       "burst": "20",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -5839,7 +5839,7 @@
        }
       ],
       "weapon": "OIFlamer",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -6007,7 +6007,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5184",
       "reloaddelay": "60",
@@ -6026,7 +6026,7 @@
        }
       ],
       "weapon": "BuggyGrenade",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -6153,7 +6153,7 @@
       "burst": "30",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -6172,7 +6172,7 @@
        }
       ],
       "weapon": "HeavyFlamer",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -6786,7 +6786,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5243",
       "reloaddelay": "52",
@@ -6805,7 +6805,7 @@
        }
       ],
       "weapon": "Type89Cannon",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -7137,7 +7137,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "55",
@@ -7156,7 +7156,7 @@
        }
       ],
       "weapon": "OIBigCannon",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -7228,7 +7228,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -7247,7 +7247,7 @@
        }
       ],
       "weapon": "OISmallCannon",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -7256,7 +7256,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -7275,7 +7275,7 @@
        }
       ],
       "weapon": "OISmallCannon",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -7284,7 +7284,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -7303,7 +7303,7 @@
        }
       ],
       "weapon": "OISmallCannon",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -7554,7 +7554,7 @@
       "burst": "20",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -7573,7 +7573,7 @@
        }
       ],
       "weapon": "OIFlamer",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -7585,7 +7585,7 @@
       "burst": "20",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -7604,7 +7604,7 @@
        }
       ],
       "weapon": "OIFlamer",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -7768,7 +7768,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5004",
       "reloaddelay": "15",
@@ -7787,7 +7787,7 @@
        }
       ],
       "weapon": "M60mgJapan",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -7798,7 +7798,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5004",
       "reloaddelay": "15",
@@ -7822,7 +7822,7 @@
        }
       ],
       "weapon": "M60mgWaveforce",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^Warhead_Bullet_Light",
@@ -7879,7 +7879,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3000",
       "reloaddelay": "300",
@@ -7897,7 +7897,7 @@
        }
       ],
       "weapon": "ExecutionerSword",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",

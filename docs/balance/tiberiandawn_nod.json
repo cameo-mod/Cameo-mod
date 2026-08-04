@@ -10,7 +10,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4501",
       "reloaddelay": "16",
@@ -28,7 +28,7 @@
        }
       ],
       "weapon": "HeliGun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -39,7 +39,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4501",
       "reloaddelay": "16",
@@ -58,7 +58,7 @@
        }
       ],
       "weapon": "HeliMissiles",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
@@ -871,7 +871,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9600",
       "reloaddelay": "96",
@@ -889,7 +889,7 @@
        }
       ],
       "weapon": "LaserObelisk",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -1187,7 +1187,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4988",
       "reloaddelay": "46",
@@ -1205,7 +1205,7 @@
        }
       ],
       "weapon": "BlackHandFlamer",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -1217,7 +1217,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "4988",
       "reloaddelay": "46",
@@ -1235,7 +1235,7 @@
        }
       ],
       "weapon": "BlackHandFlamer",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -1454,7 +1454,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "3414",
       "reloaddelay": "48",
@@ -1472,7 +1472,7 @@
        }
       ],
       "weapon": "Chemspray",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
@@ -1482,7 +1482,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "3414",
       "reloaddelay": "48",
@@ -1500,7 +1500,7 @@
        }
       ],
       "weapon": "Chemspray",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
@@ -1687,7 +1687,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "2085",
       "reloaddelay": "60",
@@ -1705,7 +1705,7 @@
        }
       ],
       "weapon": "Flamethrower",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -1715,7 +1715,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "2085",
       "reloaddelay": "60",
@@ -1733,7 +1733,7 @@
        }
       ],
       "weapon": "Flamethrower",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -1786,7 +1786,7 @@
      {
       "armament_name": "pointdefense",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6030",
       "reloaddelay": "8",
@@ -1804,7 +1804,7 @@
        }
       ],
       "weapon": "NodCommandoLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -1814,7 +1814,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6030",
       "reloaddelay": "8",
@@ -1832,7 +1832,7 @@
        }
       ],
       "weapon": "NodCommandoLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -1842,7 +1842,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6030",
       "reloaddelay": "8",
@@ -1860,7 +1860,7 @@
        }
       ],
       "weapon": "NodCommandoLaser",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -2095,7 +2095,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4609",
       "reloaddelay": "50",
@@ -2114,7 +2114,7 @@
        }
       ],
       "weapon": "td_nod_minigunner_minigun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -2126,7 +2126,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "4609",
       "reloaddelay": "50",
@@ -2145,7 +2145,7 @@
        }
       ],
       "weapon": "td_nod_minigunner_minigun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -2321,7 +2321,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6368",
       "reloaddelay": "63",
@@ -2339,7 +2339,7 @@
        }
       ],
       "weapon": "Rockets",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -2349,7 +2349,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6368",
       "reloaddelay": "63",
@@ -2367,7 +2367,7 @@
        }
       ],
       "weapon": "Rockets",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
@@ -2825,7 +2825,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9550",
       "reloaddelay": "90",
@@ -2843,7 +2843,7 @@
        }
       ],
       "weapon": "CorvetteLaserObelisk",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -2855,7 +2855,7 @@
       "burst": "2",
       "burstdelays": "7",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9550",
       "reloaddelay": "35",
@@ -2874,7 +2874,7 @@
        }
       ],
       "weapon": "CorvetteDragon",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
@@ -3804,7 +3804,7 @@
       "burst": "3",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4540",
       "reloaddelay": "10",
@@ -3822,7 +3822,7 @@
        }
       ],
       "weapon": "MachineGun",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -3833,7 +3833,7 @@
       "burst": "3",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4540",
       "reloaddelay": "10",
@@ -3852,7 +3852,7 @@
        }
       ],
       "weapon": "FireballLauncherBuggy",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
@@ -4635,7 +4635,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "2390",
       "reloaddelay": "50",
@@ -4653,7 +4653,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -4711,7 +4711,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "2534",
       "reloaddelay": "54",
@@ -4729,7 +4729,7 @@
        }
       ],
       "weapon": "BigFlamer2",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_Flame_Heavy",
        "^Projectile_Flame_Heavy",
@@ -4785,7 +4785,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4993",
       "reloaddelay": "45",
@@ -4803,7 +4803,7 @@
        }
       ],
       "weapon": "70mm",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -4812,7 +4812,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4993",
       "reloaddelay": "45",
@@ -4831,7 +4831,7 @@
        }
       ],
       "weapon": "LTNKMissiles",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
@@ -5659,7 +5659,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7432",
       "reloaddelay": "58",
@@ -5678,7 +5678,7 @@
        }
       ],
       "weapon": "StealthTankMissiles",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
@@ -5689,7 +5689,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7432",
       "reloaddelay": "58",
@@ -5706,7 +5706,7 @@
        }
       ],
       "weapon": "StealthTankMissilesBlackMarket",
-      "weapon_class_source": "illegal_mix",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
