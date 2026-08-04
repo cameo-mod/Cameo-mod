@@ -13,8 +13,8 @@ Before starting ANY task, load these documents into context IN THIS ORDER. Never
 4. `docs/PROJECT_CONTEXT.md` — project orientation.
 5. `docs/DESIGN.md` — binding rules (relevant sections) before touching YAML/assets/naming/balance.
 6. `docs/design/ROADMAP.md` — current work queue; P0 crashes jump the queue.
-7. `docs/Cameo_Knowledge_Base_Manual.md` — engine/trait reference as needed.
-8. `docs/audit/SUMMARY.md` — known issue classes.
+7. `docs/audit/SUMMARY.md` — known issue classes.
+8. `docs/Cameo_Knowledge_Base_Manual.md` — engine/trait reference as needed.
 
 If any document conflicts with chat memory or old notes, the repository documents win.
 

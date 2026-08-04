@@ -148,7 +148,6 @@ ra2_soviets_rhinoheavytank:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: ra2sovietsVehicleVoice
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -260,7 +259,6 @@ ra2_soviets_apocalypsetank:
 		Name: Apocalypse Tank
 	Valued:
 		Cost: 1750
-	DeliversCash:
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ra2_soviets_warfactory, ra2_soviets_battlelab

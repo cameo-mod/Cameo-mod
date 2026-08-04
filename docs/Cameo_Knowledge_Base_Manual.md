@@ -6095,7 +6095,7 @@ Cameo does not use a `RequiresVersion` field in `mod.yaml`. Instead, the engine 
 
 ```
 mod.config
-    ENGINE_VERSION="7ba39d9"
+    ENGINE_VERSION="1f71ccde90c1194fe908702f2e915807b2f0f3fd"
     AUTOMATIC_ENGINE_SOURCE="https://github.com/cameo-mod/OpenRA/archive/${ENGINE_VERSION}.zip"
     ENGINE_DIRECTORY="./engine"
     AUTOMATIC_ENGINE_MANAGEMENT="True"
@@ -6172,7 +6172,7 @@ ModelSequences:
 
 ### Relationship to the upstream OpenRA SDK
 
-Cameo uses the standard OpenRA Mod SDK structure: `mod.config` drives the build, `Makefile`/`make.ps1` compile the mod, `fetch-engine.sh` manages the engine dependency, and `launch-game.*`/`utility.*` wrap the engine binary. The main difference is that the engine is fetched from the `cameo-mod/OpenRA` fork rather than the upstream `OpenRA/OpenRA` repository, and the pinned commit is `7ba39d9`. The mod does not declare `RequiresMods` because it mounts the engine’s common mod (`^EngineDir|mods/common`) and official mod packages (`cnc`, `ra`, etc.) through the `FileSystem` section and the `SupportsMapsFrom` list.
+Cameo uses the standard OpenRA Mod SDK structure: `mod.config` drives the build, `Makefile`/`make.ps1` compile the mod, `fetch-engine.sh` manages the engine dependency, and `launch-game.*`/`utility.*` wrap the engine binary. The main difference is that the engine is fetched from the `cameo-mod/OpenRA` fork rather than the upstream `OpenRA/OpenRA` repository, and the pinned commit is `1f71ccde90c1194fe908702f2e915807b2f0f3fd`. The mod does not declare `RequiresMods` because it mounts the engine’s common mod (`^EngineDir|mods/common`) and official mod packages (`cnc`, `ra`, etc.) through the `FileSystem` section and the `SupportsMapsFrom` list.
 
 ## Interconnectivity
 ![Algorithms diagram](images/Part_03_Chapter_01_Mod_SDK-algorithm-diagram-or-pseudocode-flowchart-for-the-non-trivia-5983ed.svg)

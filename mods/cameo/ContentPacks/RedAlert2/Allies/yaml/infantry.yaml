@@ -24,7 +24,6 @@ ra2_allies_attackdog:
 		AddToArmyValue: true
 	Selectable:
 		Bounds: 512, 768, -48, -172
-	DeliversCash:
 	SelectionDecorations:
 	Health:
 		HP: 5000
@@ -598,7 +597,6 @@ ra2_allies_engineer:
 	WithInfantryBody@PARACHUTE:
 		StandSequences: parachute
 		RequiresCondition: parachute
-	DeliversCash:
 
 ra2_allies_tanyaii:
 	Inherits: ^Soldier

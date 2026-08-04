@@ -8364,7 +8364,6 @@ awapc:
 		Position: BottomLeft
 		RequiresSelection: True
 
-
 awarty:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -8865,7 +8864,6 @@ awaaarty:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 6
-
 
 awntnk:
 	Inherits: ^Tank
@@ -10854,7 +10852,6 @@ awbomber:
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
 
-
 awbomber.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -10965,7 +10962,6 @@ awblackbomb:
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
 
-
 awstealth:
 	Inherits: ^RAPlane
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -11048,7 +11044,6 @@ awstealth:
 		RequiresSelection: True
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
-
 
 awstealth.husk:
 	Inherits: ^PlaneHusk
@@ -11288,7 +11283,6 @@ awkirov:
 			awwaylon: awkirovnra
 			awdavis: awkirovnra
 
-
 awtcopter:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -11435,7 +11429,6 @@ awcruiser:
 	Selectable:
 		DecorationBounds: 1621, 1621
 	Inherits@EXT: ^ExternalConditions
-	DeliversCash:
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
@@ -11490,7 +11483,6 @@ awss:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Inherits@EXT: ^ExternalConditions
-	DeliversCash:
 	DetectCloaked:
 		DetectionTypes: Underwater
 		Range: 2c0
@@ -11617,7 +11609,6 @@ awss3:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Inherits@EXT: ^ExternalConditions
-	DeliversCash:
 	DetectCloaked:
 		DetectionTypes: Underwater
 		Range: 2c0
@@ -11659,7 +11650,6 @@ awbattleship:
 	Selectable:
 		DecorationBounds: 1621, 1621
 	Inherits@EXT: ^ExternalConditions
-	DeliversCash:
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
@@ -11831,7 +11821,6 @@ awcarrier:
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
-	DeliversCash:
 	Voiced:
 		VoiceSet: AlliesNavalVoice
 	RenderSprites:

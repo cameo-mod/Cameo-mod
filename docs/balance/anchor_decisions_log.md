@@ -1176,6 +1176,6 @@ umlaut vs actor id) found **only two ids that DROPPED the umlaut instead of tran
 - `naxis_kbelwagen` → **`naxis_kubelwagen`** (Kübelwagen)
 
 `schwarzermond_ubermensch` (Übermensch) is already correct (Ü→u); `frank.nax` is a codename (not
-name-derived). **To fix via `tools/rename/apply.py` + a `rename_map` (touches rules/sequences/weapons/
+name-derived). **To fix via `tools/rename/safe_rename.py` + a `rename_map` (touches rules/sequences/weapons/
 cameos/AI/fluent), then BOOT-GATE.** (Also the `frank.nax` display name "Übermutant" shows a mojibake
 `�` — check the source file encoding separately.)

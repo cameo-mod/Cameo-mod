@@ -10,7 +10,7 @@ The key scripts in this SDK are:
 | --------------------- | ------------------------ | ------------- |
 | make.cmd              | Makefile                 | Compiles the mod and fetches dependencies (including the OpenRA engine). |
 | launch-game.cmd       | launch-game.sh           | Launches the mod from the SDK directory. |
-| launch-server.cmd     | launch-server.sh         | Launches a dedicated server for the mod from the SDK directory. |
+| launch-dedicated.cmd  | launch-dedicated.sh      | Launches a dedicated server for the mod from the SDK directory. |
 | utility.cmd           | utility.sh               | Launches the OpenRA Utility for the mod. |
 | _(not available)_     | packaging/package-all.sh | Generates release installers for the mod. |
 

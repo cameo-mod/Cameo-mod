@@ -78,7 +78,7 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    - ✅ **Warhead FF twins BUILT + BOOT-GATED 2026-08-02** (`956cf1ecb`) — 19 FriendlyFire twins for the
      7 AoE families (Demolition/Concussion/Flame/Chemical/Nuclear/Sonic/Melee). ExtraDamage twin (energy)
      stays per-weapon (bespoke +vs-shield). All 3 layers now exist (55 wh + 24 proj + 27 fx).
-   - **NEXT: the RETROFIT (purely STRUCTURAL — no damage invented).** Repoint weapons to
+   - **RETROFIT Phase A (SmallArms/Chaingun pilot) — IN PROGRESS 2026-08-02.** Repoint weapons to
      `Inherits@wh + @proj + @fx`, renaming `Warhead@<Old>` keys → new key while **PRESERVING each
      weapon's existing on-grid `Damage` verbatim** (damage law = 2000-grid, all mains identical, fine-tune
      ONLY via one unconditional actor `FirepowerMultiplier` — DESIGN.md §nice-number). Handle INTERMEDIATE
@@ -87,6 +87,14 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
      kill-mixing (≤2 warheads, honor the exception allow-list — Dune 3-cannon, Siege Tank/Engine).
      **Bullet_Heavy → the Pulverizer mecha** (Asian Alliance, currently mixed → Phase B). Then delete the
      30 orphaned old templates + their `weapon_classes.yaml` rows. This unblocks the vehicle DPS restat (#1).
+     **Phase A progress (2026-08-02):** `tools/archive/retrofit_v3.py` repointed ~130 single-inherit
+     weapons from `^SmallArms`→`^Bullet_Light`/`^ProjectileBullet_Light`/`^EffectBullet_Light` and
+     `^Chaingun`→`^Bullet_Medium`/`^ProjectileBullet_Medium`/`^EffectBullet_Medium`, including intermediate
+     templates (`^RA2SmallArms`, `^RA2Chaingun`, `^RA2MG`, `^TSMG`, `^SteelChaingun`). Warhead override
+     keys renamed (`Warhead@SmallArms`→`Warhead@Bullet_Light`, `Warhead@Chaingun`→`Warhead@Bullet_Medium`,
+     etc.). Dual-inherit weapons skipped (Phase B). `Report: gun8.aud` added to `^Bullet_Light` and
+     `^Bullet_Medium` to preserve default sound from old templates. `check-yaml` verified: no new
+     retrofit-related errors. **REMAINING:** boot-gate, then roll out to remaining weapon families.
    - **[FUTURE, reason later] SPREAD REBALANCE** (maintainer 2026-08-02) — spreads must be UNIQUE per weapon
      but balanced so **`Damage × Spread ≈ constant`** (inverse trade); a small spread MUST carry a unique
      extra effect (energy's +vs-shield chip is the model). Folded into the restat; do NOT hand-tune yet.
@@ -106,8 +114,7 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    later; resolution = inline (cross-pack/one-off) or hoist to `^Template` (same-pack). Memory:
    [[cameo-no-actor-inheritance]]. Audit cmd in the memory. Don't stop pipeline work for it.
 
-**ENGINE workflow (Blackrobe 2026-07-31):** `cameo-mod/engine` is a git **submodule → origin
-`Cameo-mod/OpenRA`**, whose **main branch is `cameo-engine`**. Engine updates: branch off `cameo-engine`;
+**ENGINE workflow (Blackrobe 2026-07-31):** `cameo-mod/engine` is a git **submodule (a working clone of `origin Cameo-mod/OpenRA`)**, whose **main branch is `cameo-engine`** — i.e. the "cameo-engine dev clone" referenced in `.windsurf/rules/start-protocol.md`. Engine updates: branch off `cameo-engine`;
 **MIRROR changes both ways** (`cameo-engine` ↔ `cameo-mod/engine`); rebuild before the boot gate. Memory:
 `cameo-engine-submodule`.
 
@@ -680,7 +687,7 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   (design 2026-07-17): `ActorStatValues.Upgrades` maximum expanded from 5 to 10.
   Every unit must list all faction upgrades that affect it; team upgrades from
   other factions must never appear. Applied to `ra1_soviets_monstertank`.
-- [x] **RULE: Promotion-unit prerequisite formula** — documented in DESIGN.md §18:
+- [x] **RULE: Promotion-unit prerequisite formula** — documented in DESIGN.md §15:
   `Buildable.Prerequisites: ~productionbuilding, techbuilding, ~promotion`.
   The `~promotion` token hides the unit until the promotion is bought; tech
   buildings disable but do not hide. Applied the `~promotion` change to ~144
@@ -696,7 +703,7 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
 - [x] **All-faction promotion construction-yard gates restored** — corrected an
   earlier mistake: promotion actors MUST keep their `~constructionyard`
   prerequisite. Re-added `~constructionyard` to all promotion actors across all
-  factions and updated `tools/audit/audit_promotion_gating.py` and DESIGN.md §18
+  factions and updated `tools/audit/audit_promotion_gating.py` and DESIGN.md §15
   to enforce this rule. Promotion-units themselves still use
   `~productionbuilding, techbuilding, ~promotion`.
 - [x] **Yuri Mastermind turret attack** — added missing `AttackTurreted:` trait to
@@ -1801,7 +1808,7 @@ All other factions have a single, thematically appropriate wall type.
   (d) Combine sub-images unique to one actor are renamed to
       `<actor_id>_<descriptive_suffix>.<ext>`,
   (e) inherited template defaults are left untouched.
-  Use `tools/rename/rename_map_<faction>.yaml` + `tools/rename/apply.py`.
+  Use `tools/rename/rename_map_<faction>.yaml` + `tools/rename/safe_rename.py`.
   Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
   Update `.oramap` files with `tools/fix-oramap.ps1` if needed.
   Effort: L (multi-session, ~18,500 asset files across all factions).
@@ -1819,7 +1826,7 @@ All other factions have a single, thematically appropriate wall type.
   PascalCase `^` names. Elite variants append `_elite`, EMP variants
   append `_EMP`, AA variants append `_AA`, upgraded variants append
   `_upgraded`. Weapons shared across factions (in Shared/ packs) stay as-is.
-  Use `tools/rename/rename_map_<faction>.yaml` + `tools/rename/apply.py`.
+  Use `tools/rename/rename_map_<faction>.yaml` + `tools/rename/safe_rename.py`.
   Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
   Effort: L (multi-session). See DESIGN.md §1 "Weapon names must include
   the full actor id as a prefix".

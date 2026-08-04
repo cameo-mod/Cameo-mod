@@ -1382,7 +1382,6 @@ GENE6:
 	# 	Prerequisites: upfrenzy3
 	# 	StartFullyCharged: true
 
-
 upemergencyrepair1:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
@@ -1773,7 +1772,6 @@ selectglacamo:
 	ProvidesPrerequisite@8:
 		Prerequisite: uprebelcamo
 
-
 ##################################################
 #	GLA Common
 ##################################################
@@ -1830,7 +1828,6 @@ GLAMCV.bot:
 		Image: glmcv
 	Voiced:
 		VoiceSet: WorkerVoice
-
 
 GLA.Paradrop:
 	Inherits: ra1_badger
@@ -2052,7 +2049,6 @@ glanthraxbomber:
 		RequiresSelection: True
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
-
 
 glscrapcrate:
 	Inherits: ^Crate
@@ -2492,7 +2488,6 @@ glstorm:
 		Palette: placelinesegment
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: scudstorm
-
 
 glstorm.hole:
 	Inherits: GLAHole4x3
@@ -4932,7 +4927,6 @@ glworker:
 		IdleSequences: idle
 		DefaultAttackSequence: shoot
 	WithDockingAnimation:
-	DeliversCash:
 	Cloneable:
 		Types: NormalInfantry
 	-DamagedByTerrain:
@@ -5512,7 +5506,6 @@ glgunboat:
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
-	DeliversCash:
 	Voiced:
 		VoiceSet: ScorpionTankVoice
 	Production:
@@ -6046,7 +6039,6 @@ chgattling:
 		Amount: -10
 	Voiced:
 		VoiceSet: CHGatlingCannonVoice
-
 
 chbunker:
 	Inherits: ^Defense
@@ -6645,7 +6637,6 @@ chinternetcenter2:
 	Cargo:
 		InitialUnits: chhacker, chhacker, chhacker, chhacker, chhacker, chhacker, chhacker, chhacker
 
-
 chsilo:
 	Inherits: ^BaseBuilding
 	Inherits@IDISABLE: ^DisabledOverlay
@@ -7032,7 +7023,6 @@ CHHACKER:
 	-TakeCover:
 	Voiced:
 		VoiceSet: CHHackerVoice
-	DeliversCash:
 	ExperienceTrickler:
 		Interval: 60
 		Amount: 300
@@ -7102,8 +7092,6 @@ CHHACKER2:
 		Image: chhacker
 	Voiced:
 		VoiceSet: SuperHackerVoice
-
-
 
 chlotus:
 	Inherits: ^Soldier
@@ -9377,7 +9365,6 @@ chflameboat:
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
-	DeliversCash:
 	Voiced:
 		VoiceSet: CHDragonTankVoice
 	GrantConditionOnPrerequisite@upbluefire:
@@ -9430,7 +9417,6 @@ chasub:
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
-	DeliversCash:
 	Cloak@underwater:
 		DetectionTypes: Underwater
 		InitialDelay: 0
@@ -13261,7 +13247,6 @@ usagunboat:
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
-	DeliversCash:
 	Voiced:
 		VoiceSet: USAPaladinTankVoice
 	RenderSprites:
@@ -13340,7 +13325,6 @@ usabattleship:
 		Turret: primary
 	WithSpriteTurret@SECONDARY:
 		Turret: secondary
-	DeliversCash:
 	Voiced:
 		VoiceSet: USAPaladinTankVoice
 	GainsExperience:
@@ -13411,7 +13395,6 @@ usacarrier:
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
-	DeliversCash:
 	Voiced:
 		VoiceSet: AlliesNavalVoice
 	RenderSprites:

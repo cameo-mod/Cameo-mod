@@ -1500,7 +1500,6 @@ WIN98_MINE:
 	Inherits@EXT: ^ExternalConditions ##########
 	Voiced:
 		VoiceSet: RobotTankVoice
-	DeliversCash:
 	Hovers:
 		RequiresCondition: !disabled && undeployed
 	Turreted:
@@ -1583,10 +1582,6 @@ WIN98_BITCOIN:
 		Type: None
 	WithInfantryBody:
 		-DefaultAttackSequence:
-	DeliversCash:
-		Type: NormalCash
-		PlayerExperience: 50
-		-Sounds:
 	SpawnActorOnDeath:
 		Actor: moneycrate
 		OwnerType: InternalName
@@ -1923,7 +1918,6 @@ WIN98_EMAIL_RAFT:
 	RenderDetectionCircle:
 	Selectable:
 		DecorationBounds: 1536, 1536
-	DeliversCash:
 	Voiced:
 		VoiceSet: win98uservoice
 
@@ -1975,6 +1969,5 @@ WIN98_BENCHY:
 	Selectable:
 		DecorationBounds: 1621, 1621
 	Inherits@EXT: ^ExternalConditions
-	DeliversCash:
 	Voiced:
 		VoiceSet: win98uservoice

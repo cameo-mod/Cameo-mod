@@ -30,7 +30,6 @@ gdicarrier:
 		Type: Superheavy
 	AttackFollow:
 		PauseOnCondition: disabled
-	DeliversCash:
 	CarrierMaster:
 		Actors: A10Carrier, A10Carrier, A10Carrier
 		RearmTicks: 125
@@ -197,7 +196,6 @@ CNCCA:
 		Turret: primary
 	WithSpriteTurret@SECONDARY:
 		Turret: secondary
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -228,7 +226,6 @@ LST:
 		Range: 7500
 	Selectable:
 		DecorationBounds: 1536, 1536
-	DeliversCash:
 	Cargo:
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 10

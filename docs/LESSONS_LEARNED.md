@@ -17,8 +17,8 @@ is provided for convenience; if it disagrees with README.md, README.md wins.
 4. `docs/PROJECT_CONTEXT.md` — short project orientation and current safety focus.
 5. `docs/DESIGN.md` — binding rules and conventions (read the relevant sections, especially before modifying YAML, assets, naming, weapons, balance, or descriptions).
 6. `docs/design/ROADMAP.md` — current work queue and P0 items.
-7. `docs/Cameo_Knowledge_Base_Manual.md` — engine and custom-trait reference, as needed.
-8. `docs/audit/SUMMARY.md` — known issue classes and current audit status.
+7. `docs/audit/SUMMARY.md` — known issue classes and current audit status.
+8. `docs/Cameo_Knowledge_Base_Manual.md` — engine and custom-trait reference, as needed.
 
 Do not modify rules, assets, or balance numbers until these documents are in context. When this document and `DESIGN.md` conflict with code or old notes, the repository documents win unless an audit baseline explicitly defers the fix.
 
@@ -395,3 +395,13 @@ The `Map` global exposed to map Lua does **not** define a `Contains` method. Cal
 - **Fix**: replaced all three `.First()` calls with `.FirstOrDefault()` + null guard. Engine commit `1f71ccde90` on `cameo-engine` branch. `mod.config` updated to `1f71ccde90c1194fe908702f2e915807b2f0f3fd`.
 - **Root cause**: the `GlobalProductionHandler` fires for ALL actors produced by any player (it's hooked into `OnOtherProducedInternal`), not just actors explicitly built via production queues. Any actor spawned without a `BuildableInfo.Queue` entry (common in Lua scripts that use `Actor.Create` directly) would trigger the crash.
 - **Lesson**: engine code that handles production events must be defensive against actors that aren't part of the classic production system, since map scripts can create arbitrary actors outside the production queue framework.
+
+## Weapon template retrofit — Phase A lessons (2026-08-02)
+
+The 3-way weapon-template split requires retrofitting weapons from the old full-stack templates (`^SmallArms`, `^Chaingun`) to the new 3-layer system (`^Bullet_Light`/`^ProjectileBullet_Light`/`^EffectBullet_Light`, `^Bullet_Medium`/`^ProjectileBullet_Medium`/`^EffectBullet_Medium`). Script: `tools/archive/retrofit_v3.py`.
+
+- **Missing `Report` field causes `-Report:` lint errors.** Old templates (`^SmallArms`, `^Chaingun`) carried `Report: gun8.aud`; the new warhead-only templates (`^Bullet_Light`, `^Bullet_Medium`) did not. When a child weapon has `-Report:` (removal node) but the parent template lacks the field, `check-yaml` flags it. Fix: add `Report: gun8.aud` to the new templates to match the old defaults. Always check for fields that child weapons attempt to remove (`-FieldName:`) when creating replacement templates — the new template must carry any inherited field that children override or remove.
+- **Warhead key renaming must happen in the same pass as inherit repointing.** The first script version (`retrofit_v2.py`) classified weapons for warhead key renaming BEFORE repointing inherits, then repointed in a separate step. After repointing, the classification no longer held (the weapon no longer inherited from `^SmallArms`), causing missed warhead key renames. Fix (`retrofit_v3.py`): rename warhead keys and repoint inherits in a single pass per weapon.
+- **Dual-inherit weapons must be skipped in Phase A.** Weapons inheriting from BOTH `^SmallArms` and `^Chaingun` (e.g. `HMG_turret`, `TSTurretLaserFire`) have ambiguous warhead key mappings and require special handling in Phase B. The script correctly skips them.
+- **Intermediate templates are repointed, not their children.** Templates like `^RA2SmallArms`, `^RA2Chaingun`, `^RA2MG`, `^TSMG`, `^SteelChaingun` inherit from `^SmallArms`/`^Chaingun` and were repointed directly. Their concrete weapon children (e.g. `ra2_soviets_conscript_carbine`) inherit from the intermediate template and were NOT directly modified — correct behavior.
+- **Warhead key renaming is selective.** The script only renames `Warhead@SmallArms:` and `Warhead@Chaingun:` (and their `Percentage` variants), NOT custom warhead keys like `Warhead@TSMG:`. This is correct — custom keys are weapon-specific and don't follow the template name pattern.

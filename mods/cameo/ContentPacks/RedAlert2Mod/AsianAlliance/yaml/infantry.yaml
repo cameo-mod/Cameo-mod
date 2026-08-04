@@ -478,7 +478,6 @@ asianalliance_shinobi:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: AsianShinobiVoice
-	DeliversCash:
 	Infiltrates:
 		Types: SpyInfiltrate
 		Notification: BuildingInfiltrated
@@ -566,7 +565,6 @@ asianalliance_engineer:
 	WithInfantryBody@PARACHUTE:
 		StandSequences: parachute
 		RequiresCondition: parachute
-	DeliversCash:
 	RenderSprites:
 		Image: ra2_allies_engineer
 	ActorStatValues:
@@ -728,7 +726,6 @@ asianalliance_asdf:
 	KeepsDistance:
 	Voiced:
 		VoiceSet: AsianShinobiVoice
-	DeliversCash:
 	ActorStatValues:
 		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_doctrine_modernizedinfantryequipment, asianalliance_upgrade_banzaimode
 

@@ -243,7 +243,6 @@ futuretech_robottank:
 		BobDistance: -64
 		InitialHeight: 384
 		RequiresCondition: !disabled && robotcontrol
-	DeliversCash:
 	-TemporaryOwnerManager:
 	Capturable:
 		Types: thiefproof
@@ -943,7 +942,6 @@ futuretech_futuretank:
 		Sequence: turret
 	Voiced:
 		VoiceSet: FutureTankVoice
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	Targetable@ENERGIZER:

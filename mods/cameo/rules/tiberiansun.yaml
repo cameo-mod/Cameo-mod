@@ -444,7 +444,6 @@ TSENGINEER:
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: TSEngineerPistol
-	DeliversCash:
 	RenderSprites:
 		Image: tsengineer
 		PlayerPalette: playerra2
@@ -624,7 +623,6 @@ tsldrone:
 		Type: Light
 	Voiced:
 		VoiceSet: RobotTankVoice
-	DeliversCash:
 	Hovers:
 		RequiresCondition: !disabled && undeployed
 	Turreted:
@@ -796,7 +794,6 @@ tsaegis:
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
-	DeliversCash:
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle

@@ -45,7 +45,6 @@ forgotten_tiberiumharvester:
 	WithDockingAnimation:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderVoxels:
 		Image: gharv
 	RenderSprites:
@@ -106,7 +105,6 @@ forgotten_scarabapc:
 		Class: ts_nod_subterraneanapc
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
@@ -173,7 +171,6 @@ forgotten_missilevan:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -226,7 +223,6 @@ forgotten_raidercar:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -279,7 +275,6 @@ forgotten_bowler:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -341,7 +336,6 @@ forgotten_ruiner:
 	# 	InitialUnits: forgotten_mutant, forgotten_rocketinfantry
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -398,7 +392,6 @@ forgotten_rattytank:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	# SpawnActorOnDeath:
@@ -460,7 +453,6 @@ forgotten_warriortank:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	# SpawnActorOnDeath:
@@ -522,7 +514,6 @@ forgotten_scoopertank:
 	WithMuzzleOverlay:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	# SpawnActorOnDeath:
@@ -579,7 +570,6 @@ forgotten_closhtank:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -634,7 +624,6 @@ forgotten_flametank:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -702,7 +691,6 @@ forgotten_experimentalmammothtank:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -762,7 +750,6 @@ forgotten_chemicalmammothtank:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	FirepowerMultiplier@forgotten_upgrade_chemicalweapons:
@@ -824,7 +811,6 @@ forgotten_tankkiller:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -903,7 +889,6 @@ forgotten_thumperbus:
 		AllowMovement: true
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -974,7 +959,6 @@ forgotten_nomadbarracks:
 		AllowMovement: true
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	Exit@1:
@@ -1049,7 +1033,6 @@ forgotten_mlrs:
 		Sequence: aim
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -1122,7 +1105,6 @@ forgotten_m113adats:
 	# 	InitialUnits: forgotten_mutant,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_rocketinfantry
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	WithSpriteTurret:
 	RenderSprites:
 		PlayerPalette: player_rgba
@@ -1186,7 +1168,6 @@ forgotten_apctruck:
 		InitialUnits: forgotten_mutant,forgotten_mutant,forgotten_mutant,forgotten_rocketinfantry,forgotten_rocketinfantry,forgotten_rocketinfantry
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	WithSpriteTurret:
 	RenderSprites:
 		PlayerPalette: player_rgba

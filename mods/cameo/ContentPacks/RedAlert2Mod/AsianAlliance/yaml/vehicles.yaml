@@ -359,16 +359,18 @@ asianalliance_droneminer:
 		HpPerStep: 1250
 	ChangesHealth@SelfHealing:
 		Step: 10
+	Armor:
+		Type: Plate
 	WithHarvestAnimation:
 	WithDockingAnimation:
 	Voiced:
 		VoiceSet: AsianDroneVoice
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 	Mobile:
 		Speed: 125
 		TurnSpeed: 25
+		Locomotor: chem
 	Harvester:
 		BaleLoadDelay: 4
 		BaleUnloadDelay: 4
@@ -380,8 +382,6 @@ asianalliance_droneminer:
 		Position: BottomLeft
 		RequiresSelection: true
 		PipCount: 4
-	Mobile:
-		Locomotor: chem
 	WithHarvestOverlay@harvesting:
 		Sequence: harvesting
 		Palette: ra2effect
@@ -494,7 +494,6 @@ ptnk.asian:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: AsianPlasmaVoice
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -963,7 +962,6 @@ asianalliance_warturtle:
 		Class: asianalliance_warturtle
 	Voiced:
 		VoiceSet: AsianAllianceVehicleVoice
-	DeliversCash:
 	RenderSprites:
 		Image: asianalliance_warturtle
 		PlayerPalette: playerra2

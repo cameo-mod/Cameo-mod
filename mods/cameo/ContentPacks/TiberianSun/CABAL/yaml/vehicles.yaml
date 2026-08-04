@@ -178,7 +178,6 @@ cabal_tiberiumharvester:
 	WithDockingAnimation:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderVoxels:
 		Image: charv2
 	RenderSprites:
@@ -247,7 +246,6 @@ cabal_laserspider:
 		FacingTolerance: 512
 	Voiced:
 		VoiceSet: TSCobra
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	WithFacingSpriteBody:
@@ -299,7 +297,6 @@ cabal_mantis:
 		FacingTolerance: 512
 	Voiced:
 		VoiceSet: TSCobra
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithFacingSpriteBody:
@@ -351,7 +348,6 @@ cabal_manticore:
 		FacingTolerance: 512
 	Voiced:
 		VoiceSet: TSReaper
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithFacingSpriteBody:
@@ -411,7 +407,6 @@ cabal_artilleryspider:
 	WithMuzzleOverlay:
 	Voiced:
 		VoiceSet: TSCABALVehicles
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 		Image: tsartspid
@@ -477,7 +472,6 @@ cabal_tarantula:
 	WithMuzzleOverlay:
 	Voiced:
 		VoiceSet: TSCABALVehicles
-	DeliversCash:
 	WithSpriteTurret:
 		Recoils: false
 	BodyOrientation:
@@ -536,7 +530,6 @@ cabal_scarabapc:
 		RequiresCondition: !submerged
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 6
@@ -734,7 +727,6 @@ cabal_spidercnc4:
 		FacingTolerance: 512
 	Voiced:
 		VoiceSet: TSCobra
-	DeliversCash:
 	RenderSprites:
 		Image: cabal_laserspider
 		PlayerPalette: player_rgba

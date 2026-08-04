@@ -45,7 +45,6 @@ ts_gdi_tiberiumharvester:
 	WithDockingAnimation:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderSprites:
 		Image: ts_gdi_tiberiumharvester
 	WithHarvestOverlay@harvesting:
@@ -152,7 +151,6 @@ ts_gdi_amphibiousapc:
 		Class: ts_gdi_amphibiousapc
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 6
@@ -213,7 +211,6 @@ ts_gdi_mobileemp:
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderVoxels:
 		Image: tsm_emp
 		Scale: 15
@@ -278,7 +275,6 @@ ts_gdi_titan:
 		LocalOffset: 0,51,256
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	WithSpriteTurret:
 		Recoils: false
 	BodyOrientation:
@@ -348,7 +344,6 @@ ts_gdi_titanmkii:
 	WithMuzzleOverlay:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	WithSpriteTurret:
 		Recoils: true
 	WithFacingSpriteBody:
@@ -411,7 +406,6 @@ ts_gdi_juggernautmkii:
 		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	# WithSpriteTurret:
 	# 	Recoils: true
 	WithFacingSpriteBody:
@@ -575,7 +569,6 @@ ts_gdi_hovermlrs:
 	WithVoxelTurret:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	Hovers:
 		RequiresCondition: !disabled
 	RenderVoxels:
@@ -816,7 +809,6 @@ ts_gdi_mammothprototype:
 		TickRate: 1
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderVoxels:
 		Scale: 15
 	Passenger:
@@ -907,7 +899,6 @@ ts_gdi_mammothmkii:
 		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	Passenger:
 	Capturable:
 		Types: thiefproof
@@ -986,7 +977,6 @@ ts_gdi_disruptor:
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderVoxels:
 		Scale: 15
 	-RangeMultiplier@usasearchndestroy:
@@ -1021,7 +1011,6 @@ ts_gdi_mobilesensorarray:
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	RenderVoxels:
 		Scale: 15
 	DetectCloaked:

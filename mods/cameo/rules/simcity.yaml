@@ -260,8 +260,6 @@ CITYTRUCKXXL:
 		Cost: 2000
 	Tooltip:
 		Name: Money Truck XXL
-	DeliversCash:
-		PlayerExperience: 50
 	SpawnActorOnDeath:
 		Actor: moneycrate.large
 	ProducibleWithLevel:
@@ -1009,7 +1007,6 @@ CITYCOAL:
 	Power:
 		Amount: 100
 	
-
 CITYNUKE:
 	Inherits: SimCityBuildingLevelUp
 	Inherits: ^BaseBuilding
@@ -1040,7 +1037,6 @@ CITYNUKE:
 	Power:
 		Amount: 300
 	
-
 CITYAIRPORT:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1222,7 +1218,6 @@ CITYLIBRARY:
 	Power:
 		Amount: -10
 	
-
 CITYBANK:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1356,7 +1351,6 @@ CITYSTADIUM:
 	RevealsShroud:
 		Range: 4c0
 	
-
 CITYEXPO:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1383,7 +1377,6 @@ CITYEXPO:
 	RevealsShroud:
 		Range: 4c0
 	
-
 CITYSTATION:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1470,7 +1463,6 @@ CITYMARIO:
 	RevealsShroud:
 		Range: 4c0
 	
-
 CITYCASINO:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1530,7 +1522,6 @@ CITYCASINO:
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 50
 	
-
 CITYWINDMILL:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1556,7 +1547,6 @@ CITYWINDMILL:
 	RevealsShroud:
 		Range: 4c0
 	
-
 CITYAMUSE:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1582,7 +1572,6 @@ CITYAMUSE:
 	RevealsShroud:
 		Range: 4c0
 	
-
 CITYZOO:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity

@@ -765,7 +765,6 @@ ordos_spiceharvester:
 # 		RequiresSelection: true
 # 		PipCount: 12
 
-
 # mg_quad_tleilaxu.bot:
 # 	Inherits: mg_quad_tleilaxu
 # 	Buildable:
@@ -867,7 +866,6 @@ ordos_cobratank:
 		RequireForceMoveCondition: !undeployed
 	Voiced:
 		VoiceSet: EBFDOrdosCobra
-	DeliversCash:
 	RangeMultiplier@deployed:
 		Modifier: 160
 		RequiresCondition: deployed
@@ -962,7 +960,6 @@ ordos_pythontank:
 		Voice: Move
 	Voiced:
 		VoiceSet: EBFDOrdosCobra
-	DeliversCash:
 	RangeMultiplier@deployed:
 		Modifier: 160
 		RequiresCondition: deployed
@@ -2449,7 +2446,6 @@ ordos_tankdestroyer:
 # 		VoiceSet: D2KVordelVoice
 # 	-FireWarheadsOnDeath:
 
-
 # trike_vordel_2:
 # 	Inherits: trike_vordel
 # 	Inherits@absorbed: ^D2KVordelAbsorbed
@@ -2486,7 +2482,6 @@ ordos_tankdestroyer:
 # 	Voiced:
 # 		VoiceSet: D2KVordelVoice
 # 	-FireWarheadsOnDeath:
-
 
 # quad_vordel_2:
 # 	Inherits: quad_vordel

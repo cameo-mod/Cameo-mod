@@ -137,7 +137,7 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
     template's own default filename (e.g., `ra2gi.shp`) is a shared
     baseline and is NOT renamed.
   - **Migration approach**: per faction, curated via
-    `tools/rename/rename_map_<faction>.yaml` + `tools/rename/apply.py`,
+    `tools/rename/rename_map_<faction>.yaml` + `tools/rename/safe_rename.py`,
     verified with `tools/audit/dump_resolved.py` before/after diffs
     (must be empty). A pre-flight audit script must build a complete
     cross-reference of which filenames are used by which actors to
@@ -157,7 +157,7 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
   all TargetTypes definitions + 345 weapon refs are lowercase; treat
   it as engine-adjacent vocabulary, never capitalize).
 - **Cross-actor namespaces are sacred**: voice sets, notifications, shared
-  art are NEVER renamed with a unit. `tools/rename/apply.py` protects
+  art are NEVER renamed with a unit. `tools/rename/safe_rename.py` protects
   audio files and `VoiceSet:` lines structurally.
 - **Weapon names must include the full actor id as a prefix**
   (design 2026-07-16): weapon ids follow the pattern
@@ -205,13 +205,13 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
     first, then doctrine/upgrade/variant suffixes, then `_EMP`, then
     `_AA`, then the rank tier (`_elite`) last.
   - **Migration**: per faction via `tools/rename/rename_map_<faction>.yaml`
-    + `tools/rename/apply.py`, verified with
+    + `tools/rename/safe_rename.py`, verified with
     `tools/audit/dump_resolved.py` before/after diffs (must be empty).
     Weapons shared across multiple factions (in theme Shared/ packs) stay
     as-is and are NOT renamed after any single actor.
 
 Migration is per faction via `tools/rename/rename_map_<faction>.yaml`
-(curated, reviewed) + `tools/rename/apply.py`, proven behavior-preserving
+(curated, reviewed) + `tools/rename/safe_rename.py`, proven behavior-preserving
 with `tools/audit/dump_resolved.py` before/after diffs (must be empty).
 
 ## 2. Content pack layout
@@ -990,11 +990,17 @@ Superheavy/Superweapon) with per-rank percentage columns starting at
 in-yaml Versus tables; in the game they are realized once inside the
 weapon class templates and never re-derived per weapon.
 
-**Weapon construction law (design 2026-07-11).** The Versus tables live
-ONLY in the ~30 class templates of the central `weapons/weapons.yaml`
+**Weapon construction law (design 2026-07-11, updated 2026-08-02).** The
+Versus tables live ONLY in the class templates of the central
+`weapons/weapons.yaml`. The original ~30 full-stack templates
 (`^SmallArms ^Chaingun ^FlakWeapon ^MediumCannon ^HeavyMissile
-^LaserWeapon ^LightChemicalWeapon …`) and are **never modified without
-an explicit design order**. A new weapon:
+^LaserWeapon ^LightChemicalWeapon …`) are being supplemented by 55 new
+warhead-only families (`^Bullet_Light`, `^Bullet_Medium`, `^CannonAP_Light`,
+…) plus 24 projectile templates (`^ProjectileBullet_Light`, …) and 27
+effect templates (`^EffectBullet_Light`, …), for a total of ~85+ templates.
+All templates are **never modified without an explicit design order**.
+
+**Old 2-inherit model (still valid for unretrofitted weapons):**
 
 ```
 MyWeapon:
@@ -1013,6 +1019,28 @@ MyWeapon:
 
 Order the inherits so the template whose projectile/sound/feel you want
 comes LAST; the earlier inherits only contribute their warheads.
+
+**New 3-layer model (retrofitted weapons, 2026-08-02):** Weapons are
+repointed to a 4-inherit model using the new warhead-only families plus
+projectile and effect templates:
+
+```
+MyWeapon:
+	Inherits@wh: ^Bullet_Light          # warhead layer (Versus + damage)
+	Inherits@proj: ^ProjectileBullet_Light  # projectile layer (speed/homing)
+	Inherits@fx: ^EffectBullet_Light     # effect layer (impact/muzzle/trail/sound)
+	ReloadDelay: 50                       # own overrides beat every template
+	Range: 5000
+	Warhead@Bullet_Light: SpreadDamage
+		Damage: 8000
+```
+
+Each layer is independently composable: a fast projectile can carry a
+heavy warhead, a unique effect can be paired with any warhead family.
+The warhead key is named after the warhead template
+(`Warhead@Bullet_Light`, `Warhead@Bullet_Medium`, …). See
+`docs/design/ROADMAP.md` §4 and `docs/design/WEAPON_3WAY_SPLIT.md` for
+the full migration plan and progress.
 
 - **Mixed class warheads always carry the SAME Damage** (even spread;
   1,023 weapons comply, 49 violations flagged — mostly the imported
@@ -1423,7 +1451,7 @@ elite weapons — this must never happen again. The audit script
    must have `RequiresCondition: !rank-elite` (or equivalent) so the
    elite weapon replaces it, not stacks with it.
 
-## §17 — Dune 2000 to OpenRA Sprite Conversion
+## 17. Dune 2000 to OpenRA Sprite Conversion
 
 When converting individual Dune 2000 BMP frames to OpenRA PNG spritesheets,
 use the `tools/d2k_to_openra.py` script. This is the standard pipeline for
@@ -1479,7 +1507,7 @@ The strip height must equal `FrameSize_H`.
 - The script preserves saturation and value; only hue changes
 - Pixels outside the remap hue range are left untouched
 
-## §18 — Schwarzer Mond Faction Design
+## 18. Schwarzer Mond Faction Design
 
 ### 18.1 Faction identity
 

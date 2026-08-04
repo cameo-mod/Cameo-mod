@@ -215,10 +215,6 @@ op2_commonore_beacon_3bar:
 		Modifier: 88
 	Health:
 		HP: 7200
-	DeliversCash:
-		Type: NormalCash
-		PlayerExperience: 50
-		#-Sounds:
 	SpawnActorOnDeath:
 		Actor: moneycrate
 		OwnerType: InternalName
@@ -2338,7 +2334,6 @@ PLYMOUTH_SMELTER_RARE:
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_ADVANCED
 		Description: plymouth_smelter_rare.description
-
 
 # ####################################################################################################
 # #		DEFENCE PLYMOUTH

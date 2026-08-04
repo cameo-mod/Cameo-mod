@@ -4368,7 +4368,6 @@ drphasetran:
 		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: DRPhaseVoice
-	DeliversCash:
 	Cargo:
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 10
@@ -4620,7 +4619,6 @@ drskybike:
 		RequiresSelection: True
 		PipCount: 5
 
-
 droutrider:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -4822,7 +4820,6 @@ drfanboat:
 	RenderDetectionCircle:
 	Selectable:
 		DecorationBounds: 1536, 1536
-	DeliversCash:
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
@@ -5893,7 +5890,6 @@ drgant:
 	Selectable:
 		Bounds: 1024, 1024
 
-
 drgrendel:
 	Inherits@Test: ^Infantry
 	Inherits: ^Vehicle
@@ -5961,7 +5957,6 @@ drgrendel:
 	Selectable:
 		Bounds: 1024, 1024
 
-
 drgrider:
 	Inherits@Test: ^Infantry
 	Inherits: ^Vehicle
@@ -6027,7 +6022,6 @@ drgrider:
 		Range: 7c0
 	Selectable:
 		Bounds: 1024, 1024
-
 
 #Vehicle
 drrat2:
@@ -8481,7 +8475,6 @@ drghazi:
 	RenderDetectionCircle:
 	Selectable:
 		DecorationBounds: 1536, 1536
-	DeliversCash:
 	Voiced:
 		VoiceSet: DRGhaziVoice
 	RenderSprites:
@@ -8527,7 +8520,6 @@ drphunisher:
 	RenderDetectionCircle:
 	Selectable:
 		DecorationBounds: 1536, 1536
-	DeliversCash:
 	Voiced:
 		VoiceSet: DRPunisherVoice
 	RenderSprites:
@@ -9991,7 +9983,6 @@ drblazer:
 		RequiresSelection: True
 		PipCount: 5
 
-
 drbomber:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -10782,7 +10773,6 @@ drdissecator:
 		Sequence: smoke
 	SupportPowerChargeBar:
 
-
 drwaterextract:
 	Inherits: ^TechBuilding
 	Inherits@shape: ^3x2Shape
@@ -10819,7 +10809,6 @@ drwaterextract:
 		Amount: 3000
 	GivesCashOnCapture:
 		Amount: 3000
-
 
 drcivplant:
 	Inherits: ^TechBuilding
@@ -10858,7 +10847,6 @@ drcivplant:
 		Amount: 10
 	Power:
 		Amount: 250
-
 
 drshelter:
 	Inherits: ^CivBuilding
@@ -11276,7 +11264,6 @@ drsubterrean:
 		Palette: terrain
 	RenderSprites:
 
-
 drfarm:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x2Shape
@@ -11296,7 +11283,6 @@ drfarm:
 		Amount: 5
 	GivesCashOnCapture:
 		Amount: 5
-
 
 drfarm2:
 	Inherits: ^CivBuilding
@@ -11318,7 +11304,6 @@ drfarm2:
 	GivesCashOnCapture:
 		Amount: 5
 
-
 drfarm3:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x2Shape
@@ -11339,7 +11324,6 @@ drfarm3:
 	GivesCashOnCapture:
 		Amount: 5
 
-
 drrural:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x2Shape
@@ -11354,7 +11338,6 @@ drrural:
 	RenderSprites:
 		Palette: terrain
 	RenderSprites:
-
 
 drcomercial:
 	Inherits: ^CivBuilding
@@ -11371,7 +11354,6 @@ drcomercial:
 		Palette: terrain
 	RenderSprites:
 
-
 drctech:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x2Shape
@@ -11386,7 +11368,6 @@ drctech:
 	RenderSprites:
 		Palette: terrain
 	RenderSprites:
-
 
 drconcessionaire:
 	Inherits: ^CivBuilding
@@ -11403,7 +11384,6 @@ drconcessionaire:
 		Palette: terrain
 	RenderSprites:
 
-
 drtents:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x2Shape
@@ -11418,7 +11398,6 @@ drtents:
 	RenderSprites:
 		Palette: terrain
 	RenderSprites:
-
 
 drfgweap2:
 	Tooltip:

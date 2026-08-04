@@ -4428,7 +4428,6 @@ susapalalaser:
 		StartIfBelow: 100
 		DamageCooldown: 1
 
-
 susalaserranger:
 	Inherits: susaranger
 	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
@@ -4659,7 +4658,6 @@ susalaserstealth:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 1
-
 
 susalaserstealth.husk:
 	Inherits: ^PlaneHusk
@@ -5421,7 +5419,6 @@ susaacolytedrone:
 		Sequence: rotor
 	SpawnActorOnDeath:
 		Actor: susaacolytedrone.husk
-
 
 susaacolytedrone.husk:
 	Inherits: ^PlaneHusk
@@ -6578,7 +6575,6 @@ susavulcantank:
 	ProducibleWithLevel:
 	Inherits@ProducesDrones: ^ProducesDrones
 
-
 susaphalynx:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
@@ -6638,7 +6634,6 @@ susaphalynx:
 		Modifier: 50
 	-WithDeathAnimation:
 	-WithMakeAnimation:
-
 
 susablackwidow:
 	Inherits: usaraptor
@@ -7852,7 +7847,6 @@ sglairpad.hole:
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
 		IntoActor: sglairpad
-
 
 sglmoviledemo:
 	Inherits: ^Vehicle
@@ -9171,7 +9165,6 @@ sglscarab:
 		Count: 4
 		Sound: t28reload.wav
 
-
 sglradartank:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
@@ -9597,7 +9590,6 @@ sglbasilisk:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 
-
 sglhip:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -9905,7 +9897,6 @@ sglgrenadierterror:
 		RequiresCondition: triggered && !disabled
 	Voiced:
 		VoiceSet: GLATerroristVoice
-	DeliversCash:
 	Cloneable:
 		Types: NormalInfantry
 	-TakeCover:
@@ -10556,8 +10547,6 @@ sglcamel:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 
-
-
 sgldemomaura:
 	Inherits: glmaura
 	Valued:
@@ -10887,7 +10876,6 @@ sglstorm:
 		Palette: placelinesegment
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: sglscudstorm
-
 
 sglstorm.hole:
 	Inherits: GLAHole4x3
@@ -11448,7 +11436,6 @@ sglfrogssm.missiletox:
 		Weapon: GLASCUDTOXIN
 		EmptyWeapon: GLASCUDTOXIN
 
-
 upsglfrogssm:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
@@ -11847,7 +11834,6 @@ sglcobra:
 		Modifier: 75
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
-
 
 #########################################
 #           GLA Technical
@@ -16030,7 +16016,6 @@ schleanggattlingcannon:
 	RenderSprites:
 		Image: schnukegattlingcannon
 
-
 schleangtransporthelix:
 	Inherits: schtransporthelix
 	Buildable:
@@ -16147,7 +16132,6 @@ upschhammercannon:
 		Image: schhammercannon
 	ProvidesPrerequisite:
 		Prerequisite: upschhammercannon
-
 
 schanviltank:
 	Inherits: ^Tank

@@ -5,6 +5,8 @@ faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 
 ## Counts by bug class
 
+> **Note:** Counts below were generated from the baseline audit run. Significant work since then (weapon template splicing, renames, armor normalization, ContentPack migration) may have changed some counts. Re-run `tools/audit/run_all.sh` for current numbers.
+
 | class | what | count (live tree) | severity profile |
 |---|---|---|---|
 | B8 | crash-class content | **0** distinct (was 3+ — fixed 2026-07-14: ts_nod_ticktank voxel, magicnuke sequence, ra2_cgtbnkbb/ctoutpbb missing assets; 2026-07-15: CABAL CreateEffect Image: fields removed, impact animations consolidated in misc.yaml, map actors renamed; 2026-07-24: RA2 weapons migrated to ContentPack, Yuri weapons headers restored, Naxis Kübelwagen encoding fixed, nuclearflash shader created) | crash |
@@ -12,7 +14,7 @@ faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 | B2 | illegal inherits | **328** concrete→concrete, 24 cross-faction, 0 dangling | balance-risk |
 | B5 | AI wiring | **200** ids defined nowhere, 620 unloaded refs, 26 factions with unwired units | balance |
 | B3 | upgrade direction | 12 anti-buff combos (2 suspicious, 1 verify, rest intended drawbacks), 4 dead upgrades, 5 dead-wiring families on 300–1,042 actors each | balance |
-| B4 | upgrade coverage | 15 tracked upgrades, ~40 real uncovered combat slots (CABAL backup systems: legion+avatar fixed but backup actors still needed) | balance |
+| B4 | upgrade coverage | 15 tracked upgrades, ~40 real uncovered combat slots (CABAL backup systems: avatar+widow done; `cabal_legion` does not exist — was renamed/removed) | balance |
 | B6 | art/sequence refs | 11 missing images, 11 missing sequences, 542 orphan images | cosmetic→crash-risk |
 | B7 | metadata rot | 24 duplicate-tooltip groups, 0 missing tooltips | cosmetic |
 | B9 | numeric drift | bounds screen **clean** (TB23 fix held); 163 outlier leads | balance-minor |
@@ -68,3 +70,13 @@ Raw data: [`latest/superweapon_audit.yaml`](latest/superweapon_audit.yaml).
 **Outpost 2 verified**: Supernova Missile IS implemented in `rules/outpost2.yaml` (`NukePower`, charge 9000). FACTIONS.md was correct.
 
 **WIP faction superweapons discovered** (not in FACTIONS.md): Warzone 2100 (IonCannonPower + AirstrikePower + NukePower), Worms (Sheep Strike + Concrete Donkey), Win98 (Demo Disk Strike + Red Ring of Death), Warcraft 1 (Rain of Fire + Poison Cloud), WH40K (8 Deep Strike variants + Marauder Bomber + Inquisition).
+
+## War Economy SpeedMultiplier bug (2026-08-03)
+
+**FIXED**: `SpeedMultiplier@ra1_soviets_upgrade_wareconomy` in `ContentPacks/RedAlert/Shared/yaml/upgrades.yaml:134` used `Prerequisites` instead of `RequiresCondition`. Since `SpeedMultiplierInfo` has no `Prerequisites` field, the engine ignored it, making the trait **always active** at 110% — even without the War Economy upgrade researched.
+
+**Impact**: Every unit inheriting `^WarEconomyTeamUpgradeRA1` (all harvesters via `^HarvesterTemplate`, all refineries via `^Refinery`) got a permanent +10% speed boost. For the Noid Harvester (base speed 50), this produced a displayed speed of 55 instead of 50. When combined with the Gap Generator shroud effect (80%), the result was 50 × 80% × 110% = 44.
+
+**Fix**: Changed `Prerequisites` → `RequiresCondition` on line 135. The trait is now properly conditional on the `ra1_soviets_upgrade_wareconomy` condition granted by `GrantConditionOnPrerequisite`.
+
+**Audit**: Swept all YAML files for the same pattern (`SpeedMultiplier` with `Prerequisites` but no `RequiresCondition`) — no other instances found.

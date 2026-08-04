@@ -275,7 +275,6 @@ tkm_technicaltank:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	ActorStatValues:
 		Upgrades: tkm_upgrade_twinrocketsupgrade, tkm_upgrade_heavytitanplating
 	DamageMultiplier:
@@ -539,7 +538,6 @@ tkm_abrams:
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	ActorStatValues:
 		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_heavytitanplating
 	DamageMultiplier:
@@ -629,7 +627,6 @@ tkm_t72m:
 		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	ActorStatValues:
 		Upgrades: tkm_upgrade_pointdefensesystem
 	Selectable:
@@ -684,7 +681,6 @@ tkm_trenchtruck:
 		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	Selectable:
 		Class: tkm_trenchtank
 	RenderSprites:
@@ -759,7 +755,6 @@ tkm_tornadoglauncher:
 	Voiced:
 		VoiceSet: TSVehicle
 	WithFacingSpriteBody:
-	DeliversCash:
 	ActorStatValues:
 		Upgrades:
 	RenderSprites:
@@ -1042,7 +1037,6 @@ tkm_trenchtank:
 		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	Selectable:
 		Class: tkm_trenchtank
 	ActorStatValues:
@@ -1104,7 +1098,6 @@ tkm_t30:
 		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
-	DeliversCash:
 	ActorStatValues:
 		Upgrades: tkm_upgrade_heavytitanplating
 	DamageMultiplier:

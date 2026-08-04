@@ -286,8 +286,8 @@ to be in agreement:
 6. **Death palette rule**: `DeathSequencePalette` must match
    `RenderSprites PlayerPalette` per unit. Only TS units need fixing.
    `ra2player` and `playerra2` are DIFFERENT palettes. The broken commit
-   `9579827e9` was reverted. ROADMAP has a pending TS-only death palette
-   audit item.
+   `9579827e9` was reverted. The TS-only death palette audit was completed
+   (`54816b1f3`, 2026-07-27) — 2 mismatches found and fixed.
 
 7. **SC rank decorations**: `^AlienRankDecoration` should only apply to
    Zerg. Terran and Protoss need separate decorations. Commit `b95f5e7f3`

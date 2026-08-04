@@ -97,7 +97,7 @@ Align all actor names with DESIGN.md §1 naming convention: `[game_]faction_name
 ### 6.3 Constraints
 
 - **Compatibility**: All renames must be behavior-preserving — no stat, weapon, or prerequisite changes
-- **Tooling**: Use existing `tools/rename/rename_map_<faction>.yaml` + `tools/rename/apply.py` pipeline
+- **Tooling**: Use existing `tools/rename/rename_map_<faction>.yaml` + `tools/rename/safe_rename.py` pipeline
 - **Verification**: `dump_resolved.py` diff must be empty before and after
 - **Style**: One faction at a time, curated rename maps, reviewed before apply
 - **Asset safety**: Only rename asset files proven to be used by exactly one actor (DESIGN.md §1 shared file law)
@@ -261,7 +261,7 @@ FTL translation keys fixed manually for cabal actors.
 4. `grep_search` for old `_2`/`_3` suffix actor IDs — **0 hits** ✅
 5. Asset file scan for `*unlock*` on disk — **0 files** ✅
 6. .oramap zip scan for unlock references — **0 hits** ✅
-7. Full boot test — **TODO** (user to run)
+7. Full boot test — **PENDING** (user to run; all other verification passed)
 
 #### Step 7: Commit (DONE)
 Committed as `86eee6bca` (main rename) and `beb2bcd1f` (cargoplane fix). Pushed to `master`.

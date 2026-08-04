@@ -334,10 +334,9 @@ RA2MirageGun:
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@Effect:
+	Warhead@Effect: CreateEffect
 		Explosions: ra2_iron_fx
 		-ImpactSounds:
-	Warhead@EffectWater:
 
 RA2HoverMissile:
 	Inherits: ^ArrowWeapon
@@ -2531,7 +2530,7 @@ RA2Terrorist:
 RA2Atomic:
 	Inherits: Atomic
 	Report: snuklaun.wav
-	Warhead@1Dam_impact:
+	Warhead@1Dam_impact: SpreadDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath, Incendiary
 	Warhead@4Dam_areanuke1: SpreadDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath, Incendiary

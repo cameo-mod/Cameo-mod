@@ -100,7 +100,6 @@ yuri_slaveminer:
 		Prerequisite: yuri_slaveminer_deployed
 	Voiced:
 		VoiceSet: SlaveMinerVoice
-	DeliversCash:
 	WithSpriteTurret:
 	Turreted:
 		TurnSpeed: 10
@@ -439,7 +438,6 @@ yuri_chaosdrone:
 		RequiresCondition: !disabled
 	WithRangeCircle:
 		Range: 5000
-	DeliversCash:
 	-TemporaryOwnerManager:
 	Capturable:
 		Types: thiefproof

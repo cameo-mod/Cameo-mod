@@ -143,7 +143,6 @@ cabal_cyborginfantry:
 		DeathPaletteIsPlayerPalette: true
 		CrushedSequencePalette: ra2effect
 
-
 cabal_rocketcyborg:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
@@ -1003,7 +1002,6 @@ cabal_eliminator800:
 		DetectionTypes: Cloak, Hijacker
 	Voiced:
 		VoiceSet: TSE800
-	DeliversCash:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	ExternalCondition@EMP:

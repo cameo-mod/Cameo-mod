@@ -1,6 +1,6 @@
 # Incident: TD GDI Release-Regression Investigation
 
-**Status:** crash resolved (boot-verified 2026-07-17, ROADMAP §P0 CRASH) — the death palette commit (9579827e9) was reverted per user instructions. The `brik:` sequence crash was fixed by correcting references to existing TD filenames and boot-verified. The remaining open item is the **TS-only death palette audit** (ROADMAP, unchecked): the original palette fixes in `a2b4de333` and `b417c6f96` may have set wrong palette values for some TS actors; a smarter audit script is needed to check TS content packs specifically.
+**Status:** crash resolved (boot-verified 2026-07-17, ROADMAP §P0 CRASH) — the death palette commit (9579827e9) was reverted per user instructions. The `brik:` sequence crash was fixed by correcting references to existing TD filenames and boot-verified. The **TS-only death palette audit** was completed (`54816b1f3`, 2026-07-27): `tools/audit/audit_ts_death_palette.py` checked all 56 TS ContentPack YAML files and found/fixed 2 mismatches (`cabal_cyborgreaper`, `cabal_artilleryspider`).
 
 ## Evidence source
 
@@ -53,7 +53,7 @@ The release and current `player` palette definitions, vehicle/aircraft body trai
 
 ## Remaining next steps
 
-1. **TS-only death palette audit** (ROADMAP, unchecked): build a smarter audit script that only checks TS content packs and reports mismatches between `PlayerPalette` and `DeathSequencePalette` for TS actors. The original fixes in `a2b4de333` and `b417c6f96` may have set wrong palette values for some TS actors.
+1. ~~**TS-only death palette audit**~~ — DONE (`54816b1f3`, 2026-07-27). `audit_ts_death_palette.py` found and fixed 2 mismatches in TS ContentPacks.
 2. Run `audit_sequences.py` and record the current output in `docs/audit/latest/`.
 3. Compare GDI and Nod sequence key ownership and actor image resolution using the release build, with explicit checks for MCV, harvester, Firehawk, Construction Yard transform, and all GDI vehicle tooltips.
 4. Create a targeted reproducible map or in-game checklist before any palette change.

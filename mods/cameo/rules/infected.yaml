@@ -24,8 +24,6 @@ World:
 		BaseActor: bio
 		SupportActors: civzombie.infect, civzombie.infect, civzombie.infect, civzombie.infect, civzombie.infect, zombie1.infect, zombie1.infect, zombie1.infect, zombie1.infect, civzombie.infect, civzombie.infect, zombie1.infect, zombie2.infect, zombie2.infect, zombie1.infect, zombie1.infect, zombie2.infect, zombie2.infect, zombie2.infect
 
-
-
 Player:
 	ExternalCondition@ZombieHordesOwned:
 		Condition: ZombieHordesOwned
@@ -873,7 +871,6 @@ tnkzombie.infect:
 		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: BruteVoice
-	DeliversCash:
 	Cloneable:
 		Types: NormalInfantry
 	Passenger:

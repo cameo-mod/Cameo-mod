@@ -76,7 +76,6 @@ ra2_soviets_engineer:
 		RequiresCondition: parachute
 	RenderSprites:
 		Image: ra2_allies_engineer
-	DeliversCash:
 
 ra2_soviets_attackdog:
 	Inherits: ^DefaultInfantry
@@ -104,7 +103,6 @@ ra2_soviets_attackdog:
 		AddToArmyValue: true
 	Selectable:
 		Bounds: 512, 768, -48, -172
-	DeliversCash:
 	SelectionDecorations:
 	Health:
 		HP: 5000
@@ -397,7 +395,6 @@ ra2_soviets_crazyivan:
 		Weapon: IvanBomb
 		EmptyWeapon: IvanBomb
 		RequiresCondition: !disabled
-	DeliversCash:
 	Captures:
 		CaptureTypes: bombcar
 		PlayerExperience: 50
@@ -488,7 +485,6 @@ ra2_soviets_teslatrooper:
 		DefaultAttackSequence: shoot
 	Voiced:
 		VoiceSet: RA2TeslaTrooperVoice
-	DeliversCash:
 	Selectable:
 		Class: ra2_soviets_teslatrooper
 	GrantConditionOnPrerequisite@EMPTesla:
@@ -573,7 +569,6 @@ ra2_soviets_desolator:
 		BodyNames: dot
 	Voiced:
 		VoiceSet: RA2DesolatorVoice
-	DeliversCash:
 	-DamagedByTintedCells@rad:
 	GrantExternalConditionToTransport:
 		Condition: ifv-chem

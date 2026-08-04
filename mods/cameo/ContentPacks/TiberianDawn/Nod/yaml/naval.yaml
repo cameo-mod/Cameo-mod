@@ -44,7 +44,6 @@ CNCSS:
 		FacingTolerance: 0
 	Selectable:
 		DecorationBounds: 1536, 1536
-	DeliversCash:
 	Voiced:
 		VoiceSet: VehicleVoice
 	Cloak@underwater:
@@ -95,7 +94,6 @@ ssmsub:
 		FacingTolerance: 0
 	Selectable:
 		DecorationBounds: 1536, 1536
-	DeliversCash:
 	Cloak@underwater:
 		CloakDelay: 100
 	Voiced:
@@ -190,7 +188,6 @@ nodlasercorvette:
 	WithSpriteTurret@SECONDARY:
 		Turret: secondary
 		Palette: ra_temperat
-	DeliversCash:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -221,7 +218,6 @@ CNCRSS:
 		TargetTypes: Ground, Water, Ship, Submarine
 	Selectable:
 		DecorationBounds: 1536, 1536
-	DeliversCash:
 	Cargo:
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 5

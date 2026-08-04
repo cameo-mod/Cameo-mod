@@ -2540,7 +2540,6 @@ wh40kgrenade:
 		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: WH40KImperialGuardVoice
-	DeliversCash:
 	Cloneable:
 		Types: NormalInfantry
 	GainsExperience:
@@ -2837,7 +2836,6 @@ wh40kbigguns:
 		DeployTrigger: Attack
 	Voiced:
 		VoiceSet: WH40KBigGunsVoice
-	DeliversCash:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	RenderSprites:
@@ -3110,7 +3108,6 @@ wh40kpsyker:
 		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: WH40KPsykerVoice
-	DeliversCash:
 	Cloneable:
 		Types: NormalInfantry
 	IgnoresDisguise:
@@ -4565,7 +4562,6 @@ wh40kogrynmobslave_rank:
 		VoiceSet: WH40KOgrynVoice
 	Health:
 		HP: 15000
-
 
 wh40kcommisair_rank:
 	Inherits: wh40kcommisair
@@ -11116,8 +11112,6 @@ wh40kchaosrhino.e4:
 		DeployTicks: 0
 	RenderSprites:
 		Image: wh40kchaosrhino
-
-
 
 #######################################
 # Chaos Infantry
