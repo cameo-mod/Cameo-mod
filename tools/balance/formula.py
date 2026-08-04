@@ -49,7 +49,9 @@ def _is_main_spread(w, template_names=None) -> bool:
     `*Percentage` twins are NEVER main (ExtraDamage is ALWAYS excluded from
     the damage calculation). When ``template_names`` is None the template
     match is skipped (any non-twin SpreadDamage qualifies)."""
-    if (w.get("type") or "") != "SpreadDamage":
+    # AreaDamage is the Cameo drop-in for SpreadDamage (expanding rings + baked
+    # FF; at Ticks 1/MaxRadius 0 it is byte-identical) -> treat it as a main too.
+    if (w.get("type") or "") not in ("SpreadDamage", "AreaDamage"):
         return False
     tag = (w.get("tag") or "").lower()
     if tag.endswith(_TWIN_SUFFIXES):

@@ -110,11 +110,14 @@ weapon files> tools/balance/sweep_areadamage.py tools/audit/find_empty_warhead.p
 docs/design/AREADAMAGE_HANDOFF.md docs/design/AREADAMAGE_WARHEAD_REBALANCE.md`. **NEVER `-A`.**
 Commit message ends with `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`.
 
-### 3e. Pipeline (make hand-edits impossible to land silently again)
-`formula.spread_damage_sum` + `audit_warhead_split` (in `tools/audit/run_all.sh`) must treat
-`AreaDamage` exactly like `SpreadDamage` (sum its `Damage`; still skip `_Percentage`/`_ExtraDamage`;
-the `_FriendlyFire` twin is gone). One-line type-name additions. Also teach them
-`AreaDamagePercentage` == `HealthPercentageDamage`.
+### 3e. Pipeline recognition — DONE (this checkpoint)
+`formula._is_main_spread` + `audit_warhead_split.classify_warheads` now accept `AreaDamage` as a
+damage main alongside `SpreadDamage` (2-line gate changes; `python tools/balance/formula.py`
+self-test passes). `_Percentage`/`_ExtraDamage`/`_FriendlyFire` handling is SUFFIX-based so it
+already works; `AreaDamagePercentage` is correctly ignored by the audit (like HealthPercentageDamage).
+**STILL TODO:** add `python tools/audit/find_empty_warhead.py` to `tools/audit/run_all.sh` (fail on
+>0) so the empty-warhead guard runs with the suite, and confirm `audit_balance_drift` still reads the
+AreaDamage `Damage` correctly after the conversion.
 
 ---
 

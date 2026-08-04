@@ -48,7 +48,9 @@ def classify_warheads(resolved):
     SpreadDamage warheads; HealthPercentageDamage/`*Percentage` ignored."""
     mains, ff, extra = [], [], []
     for c in resolved.children:
-        if not c.key.startswith("Warhead@") or c.value != "SpreadDamage":
+        # AreaDamage is the Cameo drop-in for SpreadDamage (baked FF + rings);
+        # classify it identically. AreaDamagePercentage stays ignored like %.
+        if not c.key.startswith("Warhead@") or c.value not in ("SpreadDamage", "AreaDamage"):
             continue
         tag = c.key.split("@", 1)[1]
         low = tag.lower()
