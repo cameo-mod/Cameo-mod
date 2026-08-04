@@ -1049,9 +1049,6 @@ ordos_autogunturret:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Ricochet: CreateEffect
-		ImpactSounds: 2100richet1.wav, 2100richet2.wav
-		ValidTargets: Ground, Water, Air
 
 autogun_tank:
 	Inherits: ^D2KMissile

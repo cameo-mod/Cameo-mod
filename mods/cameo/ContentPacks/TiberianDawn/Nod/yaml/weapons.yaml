@@ -1133,51 +1133,51 @@ BHRedDarts:
 		ContrailStartColor: ff0000
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 22000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 22000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TankDestroyerCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 22000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 22000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ShrapnelWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 22000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 22000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 22000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
