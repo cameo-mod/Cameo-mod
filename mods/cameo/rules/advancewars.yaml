@@ -1014,7 +1014,7 @@ Player:
 		Multiplier: 80
 		Prerequisites: selectcolin
 	FirepowerMultiplier@selectcolin:
-		Prerequisites: selectcolin
+		RequiresCondition: selectcolin
 		Modifier: 80
 	DamageMultiplier@selectcolin:
 		RequiresCondition: selectcolin || selectgrimm

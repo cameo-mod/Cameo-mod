@@ -6,7 +6,7 @@
 		Prerequisites: ra1_soviets_doctrine_conscription
 		Multiplier: 75
 	FirepowerMultiplier@ra1_soviets_doctrine_conscription:
-		Prerequisites: ra1_soviets_doctrine_conscription
+		RequiresCondition: ra1_soviets_doctrine_conscription
 		Modifier: 110
 	DamageMultiplier@ra1_soviets_doctrine_conscription:
 		RequiresCondition: ra1_soviets_doctrine_conscription

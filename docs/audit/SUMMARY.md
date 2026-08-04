@@ -79,7 +79,7 @@ Raw data: [`latest/superweapon_audit.yaml`](latest/superweapon_audit.yaml).
 
 **Fix**: Changed `Prerequisites` → `RequiresCondition` on line 135. The trait is now properly conditional on the `ra1_soviets_upgrade_wareconomy` condition granted by `GrantConditionOnPrerequisite`.
 
-**Audit**: Swept all YAML files for the same pattern (`SpeedMultiplier` with `Prerequisites` but no `RequiresCondition`) — no other instances found.
+**Audit**: Swept all YAML files for the same pattern (`SpeedMultiplier` with `Prerequisites` but no `RequiresCondition`) — no other SpeedMultiplier instances found. **Superseded**: the bug class later proved to cover ALL conditional multipliers — see next section.
 
 ## Empty warhead type NRE (2026-08-04)
 
@@ -91,3 +91,17 @@ Raw data: [`latest/superweapon_audit.yaml`](latest/superweapon_audit.yaml).
 **Mechanism**: An empty `Key:` line parses to a null value. The merge's null-fallback (`overrideNodes.Value ?? existingNodes.Value`) only rescues the node when a same-key ancestor has a value; these two nodes had none. The engine constructs `WeaponInfo` for **every** top-level weapon node — including unused `^templates` — so a typeless warhead anywhere in the resolved ruleset is a boot crash, and `LoadWarheads` then calls `Game.CreateObject<IWarhead>(null + "Warhead")`, which resolves to the abstract `Warhead` class and NREs.
 
 **Audit**: New `tools/audit/audit_empty_warheads.py` resolves the full manifest weapon set via the shared `miniyaml.Ruleset` and flags any resolved node whose key starts with `Warhead` but has no type (plus empty `Projectile:` as a suspect). 4,202 weapons checked, 0 remaining findings. **`utility --check-yaml` does NOT catch this class** — run the audit after bulk warhead/weapon edits. Boot-gate passed after the fix.
+
+## Conditional-multiplier `Prerequisites:` sweep (2026-08-04, follow-up to War Economy bug)
+
+**FIXED**: The War Economy bug class was wider than `SpeedMultiplier`. Every `ConditionalTrait`-based multiplier (`FirepowerMultiplier`, `DamageMultiplier`, `SpeedMultiplier`, `RangeMultiplier`, `ReloadDelayMultiplier`, `InaccuracyMultiplier`, `RevealsShroudMultiplier`, `DetectCloakedMultiplier`, ...) has **no `Prerequisites` field** — a `Prerequisites:` line inside such a block is silently ignored by the loader, making the multiplier **always active**. (`ProductionCostMultiplier` / `ProductionTimeMultiplier` legitimately support `Prerequisites` and are unaffected.)
+
+Three more always-active `FirepowerMultiplier` instances were found and fixed (`Prerequisites:` → `RequiresCondition:`):
+
+- `FirepowerMultiplier@ra1_soviets_doctrine_conscription` (Modifier 110) — `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/templates.yaml`
+- `FirepowerMultiplier@global_conscription_buff` (Modifier 110) — `mods/cameo/rules/defaults.yaml`
+- `FirepowerMultiplier@selectcolin` (Modifier 80) — `mods/cameo/rules/advancewars.yaml`
+
+**Impact before fix**: Conscription gave +10% firepower permanently (not just while the doctrine was active); the same permanent-always-on behaviour applied to `global_conscription_buff` and Advance Wars CO Colin's firepower debuff.
+
+**Sweep method**: scanned every `*.yaml` under `mods/cameo` for a `Prerequisites:` line whose parent block is any `*Multiplier@` trait other than `Production*` — 0 remaining instances after the fixes. The UK-economy / France-siege / RA2 commando-doctrine templates from the earlier audit notes are not present on this branch; nothing else was actionable here.

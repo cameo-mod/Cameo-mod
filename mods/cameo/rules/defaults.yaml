@@ -5768,7 +5768,7 @@
 		Prerequisites: global_conscription_buff
 		Multiplier: 75
 	FirepowerMultiplier@global_conscription_buff:
-		Prerequisites: global_conscription_buff
+		RequiresCondition: global_conscription_buff
 		Modifier: 110
 	SpeedMultiplier@global_conscription_buff:
 		RequiresCondition: global_conscription_buff
