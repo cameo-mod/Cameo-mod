@@ -1489,7 +1489,9 @@ TSHSeekerTargeting:
 		ValidTargets: Ground, Water, Air
 
 ^TSIonBeam:
-	Inherits: ^TeslaChargedWeapon
+	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
 	ReloadDelay: 9999
 	AirThreshold: 8c0
 	ValidTargets: Ground, Water, Air

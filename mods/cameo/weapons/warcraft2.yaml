@@ -366,7 +366,9 @@ wc2demolitionsquadExplode:
 # 8-16 WC2 damage. 0 Base, 16 Pierce.
 
 wc2mageFire:
-	Inherits: ^TeslaChargedWeapon
+	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
 	ReloadDelay: 40
 	Range: 8000
 	Report: wc2_fireball.aud
@@ -374,13 +376,13 @@ wc2mageFire:
 	Projectile: Bullet
 		Speed: 640
 		Image: wc2_lightng
-	Warhead@TeslaChargedWeapon: SpreadDamage
+	Warhead@TeslaCharged_Super: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@Effect: CreateEffect

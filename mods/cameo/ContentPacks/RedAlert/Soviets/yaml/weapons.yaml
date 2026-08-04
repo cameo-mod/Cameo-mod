@@ -742,26 +742,28 @@ PortaTeslaArc_EMP:
 PortaTeslaFragment:
 	Inherits: PortaTeslaArc_EMP
 	Range: 2326
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 10000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 5000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
 	-Warhead@TeslaArc:
 
 ZapperPortaTesla:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ReloadDelay: 32
 	Range: 5000
 	Report: shktrop1.aud
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 32000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 16000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 16
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
@@ -778,29 +780,31 @@ ZapperPortaTeslaArc:
 ZapperPortaTeslaFragment:
 	Inherits: ZapperPortaTeslaArc
 	Range: 2500
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 16000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 8000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 	-Warhead@TeslaArc:
 
 PointDefenseTesla:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
 	ReloadDelay: 10
 	Range: 6650
 	Report: shktrop1.aud
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
 		Damage: 10000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
 		Damage: 5000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
 		Damage: 5
 	Warhead@TeslaExtraDamage: SpreadDamage
@@ -823,11 +827,11 @@ TTankZapArc_EMP:
 TTankZapArcTeslaFragment1_EMP:
 	Inherits: TTankZapArc_EMP
 	Range: 3650
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 20000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 10000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
@@ -841,26 +845,28 @@ TTankZapArcTeslaFragment1_EMP:
 TTankZapArcTeslaFragment2_EMP:
 	Inherits: TTankZapArcTeslaFragment1_EMP
 	Range: 1825
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 10000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 5000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
 	-Warhead@TeslaArc:
 
 TTankZap2:
-	Inherits: ^TeslaChargedWeapon
+	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
 	ReloadDelay: 80
 	Range: 6650
 	Report: tesla1.aud
-	Warhead@TeslaChargedWeapon: SpreadDamage
+	Warhead@TeslaCharged_Super: SpreadDamage
 		Damage: 40000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 20000
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
 		Damage: 20
 
 TTankZap2_EMP:
@@ -909,15 +915,17 @@ TTankZap2ArcTeslaFragment2_EMP:
 	-Warhead@TeslaArc:
 
 TeslaZap:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ReloadDelay: 3
 	Range: 9320
 	Report: tesla1.aud
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 32000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 16000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 16
 
 TeslaZap_EMP:
@@ -937,11 +945,11 @@ TeslaZapArc_EMP:
 TeslaZapArcTeslaFragment1_EMP:
 	Inherits: TeslaZapArc_EMP
 	Range: 4660
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 16000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 8000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
@@ -955,11 +963,11 @@ TeslaZapArcTeslaFragment1_EMP:
 TeslaZapArcTeslaFragment2_EMP:
 	Inherits: TeslaZapArcTeslaFragment1_EMP
 	Range: 2330
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 8000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 4000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
@@ -1233,7 +1241,9 @@ SCUDThermobaric:
 		Damage: 20
 
 SCUDTesla:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@2: SCUD
 	Projectile: Bullet
 		TrailImage: litning
@@ -1253,11 +1263,11 @@ SCUDTesla:
 		Damage: 15000
 	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 15
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 30000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 15000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 45000
@@ -2256,7 +2266,9 @@ Maverick:
 		Damage: 20
 
 TeslaMaverick:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@2: Maverick
 	Projectile: Missile
 		Acceleration: 5
@@ -2270,7 +2282,7 @@ TeslaMaverick:
 		ContrailEndColor: 33221100
 		TrailInterval: 1
 		TrailDelay: 1
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		ValidRelationships: Neutral, Enemy
@@ -2278,7 +2290,7 @@ TeslaMaverick:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		ValidRelationships: Neutral, Enemy
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 	Warhead@MissileAP_Medium:
@@ -2310,11 +2322,11 @@ TeslaMaverickFragment1:
 	Projectile: LightningZap
 		-Image:
 		-TrailImage:
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 8000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 4000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@MissileAP_Medium:
 		Damage: 8000
@@ -2332,11 +2344,11 @@ TeslaMaverickFragment1:
 TeslaMaverickFragment2:
 	Inherits: TeslaMaverickFragment1
 	Range: 1475
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@MissileAP_Medium:
 		Damage: 4000
@@ -3456,7 +3468,9 @@ VolkovMagneticWeapon:
 
 VolkovMagneticWeaponTesla:
 	Inherits: VolkovMagneticWeapon
-	Inherits@2: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ReloadDelay: 30
 	Range: 5660
 	Burst: 2
@@ -3495,7 +3509,7 @@ VolkovMagneticWeaponTesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -3503,7 +3517,7 @@ VolkovMagneticWeaponTesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -3540,11 +3554,11 @@ VolkovMagneticWeaponTeslaFragment1:
 		Damage: 2000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
@@ -3574,11 +3588,11 @@ VolkovMagneticWeaponTeslaFragment2:
 		Damage: 1000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 2000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 1000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
@@ -3752,11 +3766,11 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 		Damage: 2000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
@@ -3792,11 +3806,11 @@ VolkovMagneticWeaponIncendiaryTeslaFragment2:
 		Damage: 1000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 2000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 1000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
@@ -4012,12 +4026,14 @@ IncendiaryRAGatlingTankCannon_AA:
 		ValidTargets: Air
 
 TeslaRAGatlingTankCannon:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 5000
 	Report: shktrop1.aud
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -4025,7 +4041,7 @@ TeslaRAGatlingTankCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla

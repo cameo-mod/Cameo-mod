@@ -577,7 +577,9 @@ WH40KWartrakkMissile:
 	Warhead@1Dam: SpreadDamage
 		Damage: 10000
 WH40KBigmekTankZzap:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ValidTargets: Vehicle
 	InvalidTargets: Infantry
 	ReloadDelay: 200
@@ -742,7 +744,9 @@ Wh40kKrakMissiles:
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
 WH40KSkullprobeZap:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ValidTargets: Vehicle
 	InvalidTargets: Infantry
 	ReloadDelay: 200

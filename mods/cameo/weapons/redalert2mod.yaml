@@ -130,7 +130,9 @@ AsianChaosSuperweapon:
 		ValidRelationships: Enemy
 
 ^AsianIonBeam:
-	Inherits: ^TeslaChargedWeapon
+	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
 	ReloadDelay: 9999
 	AirThreshold: 8c0
 	ValidTargets: Ground, Water, Air
@@ -1555,10 +1557,10 @@ RA2Robotmm:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 4
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 4
 
@@ -1595,9 +1597,9 @@ RA2RobotmmScatter_elite:
 		Damage: 4000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		Damage: 4000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	-Warhead@Scatter:
 	Warhead@Effect: CreateEffect

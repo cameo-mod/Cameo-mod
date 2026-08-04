@@ -112,6 +112,9 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
      - **2026-08-04:** `tools/balance/retrofit_weapon_family.py --old LaserWeapon` repointed 34
        single-inherit weapons across 14 files to `^Warhead_Laser_Heavy`/`^Projectile_Laser_Heavy`/
        `^Effect_Laser_Heavy`; boot-gated with no new exception log.
+     - **2026-08-04:** `--old TeslaWeapon,TeslaChargedWeapon,RailgunWeapon` repointed 85
+       single-inherit weapons across 27 files to `^Warhead_Tesla_Heavy`, `^Warhead_TeslaCharged_Super`,
+       and `^Warhead_Railgun_Heavy` (plus matching projectile/effect layers); boot-gated clean.
    - **[FUTURE, reason later] SPREAD REBALANCE** (maintainer 2026-08-02) — spreads must be UNIQUE per weapon
      but balanced so **`Damage × Spread ≈ constant`** (inverse trade); a small spread MUST carry a unique
      extra effect (energy's +vs-shield chip is the model). Folded into the restat; do NOT hand-tune yet.

@@ -273,7 +273,9 @@ WolfenChronoDemons:
 		Actors: wolfdemon, wolfdemon, wolfdemon, wolfdemon, wolfdemon
 
 SpearofDestiny:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Range: 16384
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage

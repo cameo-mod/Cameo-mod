@@ -544,7 +544,9 @@ IxianCharge_EMP:
 		Damage: 1
 
 IxianDisable_EMP:
-	Inherits: ^TeslaChargedWeapon
+	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
 	ReloadDelay: 4
 	Range: 20000
 	ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
@@ -556,11 +558,11 @@ IxianDisable_EMP:
 		SecondaryBeam: true
 		SecondaryBeamWidth: 96
 		SecondaryBeamColor: FFFF8844
-	Warhead@TeslaChargedWeapon: TargetDamage
+	Warhead@TeslaCharged_Super: TargetDamage
 		Damage: 2000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 1000
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
@@ -1050,18 +1052,20 @@ D2K_StormGun:
 		Delay: 2
 
 D2K_ShockGunInf:
-	Inherits: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	ReloadDelay: 45
 	Range: 5818
 	Projectile: Railgun
 		BeamColor: 33FFEE
 		BeamWidth: 33
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Range: 0, 25, 50, 100
 		Falloff: 100, 50, 25, 0
 		Damage: 18000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 9

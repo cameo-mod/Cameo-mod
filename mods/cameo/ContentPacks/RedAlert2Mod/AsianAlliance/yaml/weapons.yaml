@@ -1305,17 +1305,19 @@ AsianHarbingerPlasma:
 		ImpactActors: false
 
 AsianRailgun:
-	Inherits: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	Range: 9600
 	ReloadDelay: 10
 	Report: railuse5.aud
 	Projectile: Railgun
 		BeamColor: F8B62184
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 30000
 		ValidRelationships: Enemy, Neutral
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 15
 		ValidRelationships: Enemy, Neutral
@@ -1325,7 +1327,9 @@ AsianRailgun:
 		ImpactSounds: gexp14a.wav
 
 AsianRailTank:
-	Inherits: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	Range: 8888
 	ReloadDelay: 60
 	Report: railuse5.aud
@@ -1334,10 +1338,10 @@ AsianRailTank:
 		BeamWidth: 96
 		HelixRadius: 64
 		HelixThickness: 32
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 24000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 12
 	Warhead@Effect: CreateEffect
@@ -1354,9 +1358,9 @@ AsianRailTank2:
 		BeamWidth: 128
 		HelixRadius: 96
 		HelixThickness: 48
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		Damage: 36000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		Damage: 18
 
 AsianRailTank3:
@@ -1368,9 +1372,9 @@ AsianRailTank3:
 		BeamWidth: 160
 		HelixRadius: 128
 		HelixThickness: 64
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		Damage: 48000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		Damage: 24
 
 AsianFlamerTank:
@@ -1962,12 +1966,14 @@ ASDFGun:
 		Damage: 1
 
 ASDFGun2:
-	Inherits: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	Inherits@2: ASDFGun
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -2099,7 +2105,9 @@ AsianSniperAP:
 		ImpactSounds: kaboom15.aud
 
 AsianSniperLockdown:
-	Inherits: ^TeslaChargedWeapon
+	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
 	Inherits@2: AsianSniperAP
 	ValidTargets: Vehicle, Air, Shielded
 	InvalidTargets: lockdowned
@@ -2109,7 +2117,7 @@ AsianSniperLockdown:
 		ContrailEndWidth: 150
 		ContrailStartColor: 4488FF
 		ContrailEndColor: 22446688
-	Warhead@TeslaChargedWeapon: SpreadDamage
+	Warhead@TeslaCharged_Super: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
@@ -2119,7 +2127,7 @@ AsianSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16

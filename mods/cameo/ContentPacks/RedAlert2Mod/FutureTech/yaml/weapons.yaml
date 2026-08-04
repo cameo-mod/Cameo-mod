@@ -475,15 +475,17 @@ AthenaVisualLaser:
 	Warhead@Validation: TargetDamage
 
 Future_CoilerAgressive:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Range: 7500
 	ReloadDelay: 125
 	Report: itesatta.wav
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 50000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 25000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 25
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: Future_CoilerFriendFrag1
@@ -962,9 +964,9 @@ CannonAttackRobotGun:
 		Damage: 1000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		Damage: 2000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@CannonHE_Medium:
 		Damage: 2000

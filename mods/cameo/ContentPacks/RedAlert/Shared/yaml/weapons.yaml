@@ -57,11 +57,13 @@
 		Width: 40
 
 ^WaveforceBulletWarhead:
-	Inherits: ^RailgunWeapon
-	Warhead@RailgunWeapon: SpreadDamage
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
+	Warhead@Railgun_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -291,27 +293,31 @@ Flamer:
 		Amount: 1000
 
 PortaTesla:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ReloadDelay: 40
 	Range: 4652
 	Report: shktrop1.aud
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 20000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 10000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
 
 TTankZap:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ReloadDelay: 80
 	Range: 7300
 	Report: tesla1.aud
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 40000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 20000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 20
 
 LightSniper:
@@ -709,10 +715,10 @@ ZeroFighterChainGunWaveforce:
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@GrenadeFriendlyFire: SpreadDamage

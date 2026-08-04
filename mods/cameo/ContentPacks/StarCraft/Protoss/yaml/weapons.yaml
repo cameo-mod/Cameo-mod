@@ -336,13 +336,15 @@ psi_spear:
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
 PsiStorm:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 64
 	Range: 6400
 	-Report:
 	Projectile: InstantHit
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Delay: 2
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
@@ -358,7 +360,7 @@ PsiStorm:
 		Damage: 4000
 		AffectsParent: True
 		ValidRelationships: Enemy, Neutral
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Delay: 6
 		Spread: 2000
@@ -379,16 +381,18 @@ PsiStormCosmetic:
 		ImpactSounds: ptesto00.aud
 
 PsionicShockwave:
-	Inherits: ^TeslaChargedWeapon
+	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
 	ReloadDelay: 20
 	Range: 3152
 	Report: parfir00.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@TeslaChargedWeapon: SpreadDamage
+	Warhead@TeslaCharged_Super: SpreadDamage
 		Damage: 30000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 15000
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@Effect: CreateEffect
 		Explosions: scaae
@@ -595,7 +599,9 @@ CorsairFlash:
 		Explosions: steel_bluepiffs
 
 Corsair_EMP:
-	Inherits: ^TeslaChargedWeapon
+	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
 	ReloadDelay: 250
 	Range: 5500
 	MinRange: 1100
@@ -606,7 +612,7 @@ Corsair_EMP:
 		Blockable: false
 		LaunchAngle: 175
 		Image: tspulsball
-	Warhead@TeslaChargedWeapon: SpreadDamage
+	Warhead@TeslaCharged_Super: SpreadDamage
 		ValidTargets: Vehicle, Defense
 		Falloff: 100, 75, 50, 25
 		Damage: 5000
@@ -616,7 +622,7 @@ Corsair_EMP:
 		Falloff: 100, 75, 50, 25
 		Damage: 2500
 		Spread: 500
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Vehicle, Defense
 		Falloff: 100, 75, 50, 25
 		Damage: 5

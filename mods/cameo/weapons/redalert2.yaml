@@ -174,7 +174,9 @@
 		Damage: 500
 
 ^RA2TeslaWeapon:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
@@ -186,7 +188,9 @@
 	-Warhead@Effect:
 
 ^RA2RailgunWeapon:
-	Inherits: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_small_bang
 		ExplosionPalette: ra2effect
@@ -1093,13 +1097,15 @@ RA2IFVRepair:
 	ReloadDelay: 50
 
 TeslaFragmentLarge:
-	Inherits: ^TeslaChargedWeapon
+	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
 	Range: 3333
-	Warhead@TeslaChargedWeapon: SpreadDamage
+	Warhead@TeslaCharged_Super: SpreadDamage
 		Damage: 16000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 8000
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
@@ -1253,15 +1259,17 @@ TeslaArmorDischargeFragment2:
 	-Warhead@TeslaArc: FireShrapnel
 
 RA2PortaTesla:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Range: 5222
 	ReloadDelay: 100
 	Report: itesatta.wav
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 24000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 12000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 12
 
 RA2PortaTesla2:
@@ -1286,27 +1294,31 @@ RA2PortaTesla3:
 		Weapon: TeslaFragment2
 
 TeslaFragment:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Range: 2074
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 8000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 4000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 
 TeslaFragment2:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Range: 3111
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 12000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 6000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 12000
@@ -2696,12 +2708,14 @@ StormCloud:
 		ValidTargets: Ground, Air, Water
 
 LightningBolt:
-	Inherits: ^TeslaChargedWeapon
+	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
 	Projectile: InstantHit
 	-Report:
 	Range: 1000
 	ValidTargets: Ground, Water, Air
-	Warhead@TeslaChargedWeapon: SpreadDamage
+	Warhead@TeslaCharged_Super: SpreadDamage
 		Spread: 1000
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 24000
@@ -2710,7 +2724,7 @@ LightningBolt:
 		Spread: 2000
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 24000
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Air, Ground, Water
 		Damage: 6
 	Warhead@TeslaChargedExtraDamage: SpreadDamage

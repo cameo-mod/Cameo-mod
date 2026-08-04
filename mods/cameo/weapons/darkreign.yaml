@@ -314,7 +314,9 @@ DRCycloneNeutron:
 		Explosions: drneutronexp
 
 DRTankHunterRay:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Report: gxthnwc0.wav
 	ReloadDelay: 28
 	Range: 3072

@@ -1,4 +1,4 @@
-﻿########################################################
+########################################################
 #	SW Meet CNC
 ########################################################
 
@@ -1055,7 +1055,9 @@ SWSithSword:
 	Projectile: LaserZap
 		Color: BF0000
 SWR2D2Tesla:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ReloadDelay: 70
 	Range: 1024
 	Warhead@1Dam: SpreadDamage

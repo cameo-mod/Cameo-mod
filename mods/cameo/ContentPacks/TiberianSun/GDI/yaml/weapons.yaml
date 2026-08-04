@@ -383,7 +383,9 @@ TSSonicZapWeaponSonic:
 	-Warhead@Effect:
 
 TSZapWeapon_EMP:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@2: TSSonicWeaponEffect
 	ReloadDelay: 60
 	Range: 10205
@@ -400,7 +402,7 @@ TSZapWeapon_EMP:
 		Blockable: false
 		TrackTarget: true
 		Color: F5F5F545
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
@@ -408,7 +410,7 @@ TSZapWeapon_EMP:
 		Damage: 1000
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
@@ -418,9 +420,11 @@ TSZapWeapon_EMP:
 		ValidTargets: Ground, Water
 
 TSMine_EMP:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Report: mineblo1.aud
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 10000
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
@@ -428,7 +432,7 @@ TSMine_EMP:
 		Damage: 5000
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
@@ -444,7 +448,9 @@ TSMine_EMP:
 		InvalidTargets: Structure, wall
 
 TSMechRailgun:
-	Inherits: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	Range: 8409
 	ReloadDelay: 92
 	Burst: 2
@@ -452,7 +458,7 @@ TSMechRailgun:
 	Report: railuse5.aud
 	Projectile: Railgun
 		BeamColor: 00FFFF88
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@RailgunPercentage: HealthPercentageDamage
@@ -466,7 +472,9 @@ TSMechRailgunRail:
 		BeamColor: FFFF44
 
 TSMechRailgunII:
-	Inherits: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	Range: 8434
 	ReloadDelay: 112
 	Burst: 2
@@ -474,7 +482,7 @@ TSMechRailgunII:
 	Report: railuse5.aud
 	Projectile: Railgun
 		BeamColor: 00FFFF88
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		Damage: 80000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@RailgunPercentage: HealthPercentageDamage
@@ -494,7 +502,9 @@ TSMechRailgunRailII:
 # 		BeamColor: FFFF44
 
 TSCommandoRailgun:
-	Inherits: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	Range: 7563
 	ReloadDelay: 52
 	Burst: 3
@@ -503,7 +513,7 @@ TSCommandoRailgun:
 	ValidTargets: Ground, Water, Air
 	Projectile: Railgun
 		BeamColor: 00FFFF88
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 		ValidTargets: Ground, Water, Air
@@ -521,14 +531,16 @@ TSCommandoRailgunRail:
 		BeamColor: FFFF44
 
 TSZoneRailgun:
-	Inherits: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	Range: 6230
 	ReloadDelay: 60
 	Report: railuse5.aud
 	ValidTargets: Ground, Water
 	Projectile: Railgun
 		BeamColor: 00FFFF88
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 		ValidTargets: Ground, Water
@@ -541,7 +553,7 @@ TSZoneRailgunRail:
 	Inherits: TSZoneRailgun
 	Projectile: Railgun
 		BeamColor: FFFF44
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		Damage: 60000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 		ValidTargets: Ground, Water
@@ -822,12 +834,14 @@ TSBombSonic:
 		InvalidTargets: Vehicle
 
 TSMobile_EMP:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Report: mobemp1.aud
 	Range: 1512
 	ReloadDelay: 200
 	Projectile: InstantExplode
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 64000
@@ -837,7 +851,7 @@ TSMobile_EMP:
 		Falloff: 100, 75, 50, 25
 		Damage: 32000
 		Spread: 813
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 32

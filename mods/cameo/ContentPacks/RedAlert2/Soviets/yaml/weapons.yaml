@@ -119,13 +119,15 @@ RA2KirovBomb_fire:
 		AimTargetStances: Enemy, Neutral
 
 RA2KirovBomb_tesla:
-	Inherits: ^TeslaChargedWeapon
+	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
 	Inherits@2: RA2KirovBomb
-	Warhead@TeslaChargedWeapon: SpreadDamage
+	Warhead@TeslaCharged_Super: SpreadDamage
 		Damage: 80000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 40000
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
 		Damage: 40
 	Warhead@Demolition_Heavy:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
@@ -494,15 +496,17 @@ RA2120xmm_tesla_elite:
 	BurstDelays: 3
 
 RA2CoilBolt:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Range: 8842
 	ReloadDelay: 3
 	Report: btesat1a.wav
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 64000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 32000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 32
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: TeslaFragmentWeak
@@ -526,15 +530,17 @@ RA2CoilBolt3:
 		Weapon: TeslaFragment2
 
 RA2OPCoilBolt1:
-	Inherits: ^TeslaChargedWeapon
+	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
 	Range: 8842
 	ReloadDelay: 3
 	Report: btesat2a.wav
-	Warhead@TeslaChargedWeapon: SpreadDamage
+	Warhead@TeslaCharged_Super: SpreadDamage
 		Damage: 64000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 32000
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
 		Damage: 32
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 32000
@@ -560,30 +566,34 @@ RA2OPCoilBolt3:
 		Weapon: TeslaFragmentLarge
 
 TeslaFragmentWeak:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Range: 1555
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 6000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 3000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 6000
 
 RA2TankBolt:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ReloadDelay: 55
 	Range: 7500
 	Burst: 2
 	BurstDelays: 5
 	Report: vtesatta.wav, vtesattb.wav
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 12000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 6000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
 
 RA2TankBolt2:
@@ -607,27 +617,31 @@ RA2TankBolt3:
 		Weapon: TeslaTankFragment2
 
 TeslaTankFragment:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Range: 2500
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
 
 TeslaTankFragment2:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Range: 3750
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 6000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 3000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 6000

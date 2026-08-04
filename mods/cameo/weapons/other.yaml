@@ -277,13 +277,17 @@ Flamer:
 		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath
 
 TeslaZap:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Warhead@1Dam: SpreadDamage
 		Versus:
 			Wood: 60
 
 PortaTesla:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ReloadDelay: 70
 	Range: 6144
 	Report: shktrop1.aud
@@ -294,7 +298,9 @@ PortaTesla:
 			Heavy: 60
 
 TTankZap:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ReloadDelay: 120
 	Range: 7168
 

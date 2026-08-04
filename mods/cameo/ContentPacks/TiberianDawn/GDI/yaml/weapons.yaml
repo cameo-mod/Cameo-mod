@@ -51,15 +51,17 @@ RocketsAMT:
 	Inherits@2: ^AMTProjectile
 
 td_gdi_commando_sniper_elite:
-	Inherits: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	Inherits@2: td_gdi_commando_sniper
 	Projectile: Bullet
 		ContrailStartWidth: 40
 		ContrailEndWidth: 80
 		ContrailLength: 40
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		Damage: 20000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@SniperWeapon: SpreadDamage
 		Damage: 20000
@@ -1263,15 +1265,17 @@ MammothTank3MissilesAMT:
 	Inherits@2: ^AMTProjectile
 
 ExosuitRailgun:
-	Inherits: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	ReloadDelay: 75
 	BurstDelays: 5
 	Range: 6806
 	Burst: 2
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 20000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 10
 
@@ -1430,15 +1434,17 @@ GDIRigPhalanxTower:
 	Range: 9350
 
 GDIRigRailgun:
-	Inherits: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	ValidTargets: Ground, Water, Air
 	ValidRelationships: Enemy, Neutral
 	ReloadDelay: 95
 	Range: 9350
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 160000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 80
 
@@ -1718,13 +1724,15 @@ FirehawkBomb:
 ##########################
 
 GDIBattleshipRailgun:
-	Inherits: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	ReloadDelay: 100
 	Range: 10000
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 50000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 25
 

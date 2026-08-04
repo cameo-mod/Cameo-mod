@@ -179,7 +179,9 @@ WaterThrower:
 		Duration: 10
 		
 Taser:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ReloadDelay: 100 #50
 	Range: 6656
 	Warhead@1Dam: SpreadDamage

@@ -360,10 +360,10 @@ DalekCannon:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 50
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 100000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 50
 	Warhead@Scatter: FireShrapnel
@@ -394,9 +394,9 @@ DalekCannon_elite:
 		Damage: 200000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 100
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		Damage: 200000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		Damage: 100
 	Warhead@Scatter: FireShrapnel
 		Weapon: DalekCannonScatterE
@@ -424,10 +424,10 @@ DalekCannonScatter:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 25
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 50000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 25
 	-Warhead@Scatter:
@@ -688,28 +688,32 @@ NaxCorrosionBeast_elite:
 	Burst: 16
 
 NaxCrystalLeech:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ReloadDelay: 90
 	Range: 7420
 	Burst: 10
 	BurstDelays: 1
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 2000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 1000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 
 NaxCrystalLeech_elite:
-	Inherits: ^TeslaChargedWeapon
+	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
 	Range: 8420
 	Burst: 20
 	BurstDelays: 1
-	Warhead@TeslaChargedWeapon: SpreadDamage
+	Warhead@TeslaCharged_Super: SpreadDamage
 		Damage: 2000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 1000
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
 		Damage: 1
 
 NaxDieGlocke:
@@ -816,79 +820,93 @@ Lunar_Green105mm_elite:
 	Report: laser_cannon2_2.wav
 
 Lunar_GreenTigerCannon:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: LunarTigerCannon
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Report: laser_cannon3_4.wav
 
 Lunar_GreenTigerCannon_elite:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: LunarTigerCannon_elite
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Report: laser_cannon3_4.wav
 
 Lunar_GreenJadgDestroyer:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: LunarNaxiJadgDestroyer
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 30000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 15000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 15
 	Report: laser_cannon3_4.wav
 
 Lunar_GreenJadgDestroyer_elite:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: LunarNaxiJadgDestroyer_elite
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 30000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 15000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 15
 	Report: laser_cannon3_4.wav
 
 Lunar_GreenGrilleArty:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: NaxGrilleArty
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 16000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 8000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
 	Report: laser_cannon3_2.wav
 
 Lunar_GreenGrilleArty_elite:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: NaxGrilleArty_elite
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		Damage: 16000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 8000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
 	Report: laser_cannon3_2.wav
 
 Lunar_GreenSturmArty:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: NaxSturmArty
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Report: laser_cannon3_4.wav
