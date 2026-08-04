@@ -4136,7 +4136,7 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 200
 		Damage: 1000
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
@@ -4161,7 +4161,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAA_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Spread: 200
+		Spread: 100
 		Damage: 1
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
@@ -4194,7 +4194,7 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 600
+		Spread: 300
 		Damage: 1000
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
@@ -4219,7 +4219,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAA_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 150
 		Damage: 1
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
@@ -4252,7 +4252,7 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 800
+		Spread: 400
 		Damage: 1000
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
@@ -4277,7 +4277,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAA_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 200
 		Damage: 1
 		Falloff: 100, 50, 25, 10, 5
 		Versus:

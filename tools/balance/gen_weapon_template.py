@@ -224,6 +224,12 @@ SPECIAL_MODE = {"FLAT": "flat", "PCT": "pct"}
 # cameo-expanding-damage-trait.
 HAND_TUNED = {"Nuclear"}
 
+# Per-family spread overrides. Default is (400, 600, 800, 1000) for
+# Light/Medium/Heavy/Super. Indices beyond a family's level count are ignored.
+FAMILY_SPREADS = {
+    "MissileAA": (200, 300, 400),
+}
+
 
 if __name__ == "__main__":
     argv = sys.argv[1:]
@@ -257,12 +263,13 @@ if __name__ == "__main__":
         if nm in HAND_TUNED:  # hand-authored; never regenerate (would revert)
             continue
         vt = valid_targets(air, ground_only=(nm == "Melee"))
+        spreads = FAMILY_SPREADS.get(nm, (400, 600, 800, 1000))
         if isinstance(bl, str) and bl in SPECIAL_MODE:
             print(f"###### {nm}: {macro_summary(bl)} ######")
-            print(family(nm, None, vt, lv, mode=SPECIAL_MODE[bl]))
+            print(family(nm, None, vt, lv, mode=SPECIAL_MODE[bl], spreads=spreads))
             print()
             continue
         order = build_order(bl, d)
         print(f"###### {nm}: {macro_summary(bl)} ({d}, air={air}) ######")
-        print(family(nm, order, vt, lv))
+        print(family(nm, order, vt, lv, spreads=spreads))
         print()

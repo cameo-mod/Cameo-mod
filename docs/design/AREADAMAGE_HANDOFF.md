@@ -23,10 +23,12 @@ the memory index + `docs/design/AREADAMAGE_WARHEAD_REBALANCE.md` (the full desig
   New guard `tools/balance/verify_generator_sync.py` (wired into `run_all.sh` as `gen_sync`) regenerates
   the families and diffs them block-for-block against `weapons.yaml`: **drift = 0** across all 54 shared
   templates → **a regenerate+splice is now a verified no-op** (safe to regenerate). Section 3c is DONE.
-- **NEXT (remaining):** (1) **MissileAA spread reduction** — never applied; do it in the generator
-  (add a per-family `spreads` override for `MissileAA`, then regenerate — do NOT hand-edit the yaml;
-  the exact reduced value is a maintainer call). (2) Then the balance items (Section 6 / BALANCE_MEGAPLAN
-  Phases A2→G). Old design docs (§2/§7 below) describe the pre-conversion plan — treat §0 as truth.
+- **✅ MissileAA spread reduction** — applied per-family `spreads` override in
+  `tools/balance/gen_weapon_template.py` (`MissileAA`: Light=200, Medium=300, Heavy=400),
+  regenerated the `^Warhead_MissileAA_*` blocks, spliced them into `mods/cameo/weapons/weapons.yaml`,
+  `verify_generator_sync.py` reports drift = 0, and the game boot-gates to menu.
+  **NEXT (remaining):** balance items (Section 6 / `BALANCE_MEGAPLAN.md` Phases A2→G).
+  Old design docs (§2/§7 below) describe the pre-conversion plan — treat §0 as truth.
 - **⚠ Two PRE-EXISTING content issues surfaced by `--check-yaml` (NOT from warhead work, non-blocking —
   the game still boots):** `mammothbunker.husk` missing `ArmamentInfo` (its `WithSpriteTurret` needs an
   `Armament`); `rules.yaml:8 ShortGameEnabled` no longer exists on `MapOptions` (engine drift); plus
