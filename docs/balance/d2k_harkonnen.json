@@ -9,16 +9,7 @@
      {
       "burst": "26",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "7700",
-      "reloaddelay": "132",
-      "slot": "Armament",
-      "versus_templates": [
-       "ordos_autogunturret"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyCannon",
@@ -50,13 +41,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "7700",
+      "reloaddelay": "132",
+      "slot": "Armament",
+      "versus_templates": [
+       "ordos_autogunturret"
+      ],
+      "warheads": [],
       "weapon": "harkonnen_autogunturret",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^SmallArms",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -167,6 +163,13 @@
      {
       "burst": "5",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "Flame_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -179,19 +182,10 @@
        "^Effect_Flame_Medium"
       ],
       "warheads": [
-       {
-        "damage": "4",
-        "tag": "Flame_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flame_Medium"
       ],
       "weapon": "HarkonnenFlameTurret",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Medium",
-       "^Projectile_Flame_Medium",
-       "^Effect_Flame_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -551,20 +545,7 @@
      {
       "burst": "2",
       "burstdelays": "5",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "2135",
-      "pricing": true,
-      "range": "10684",
-      "reloaddelay": "42",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Grenade",
-       "^MediumFlameWeapon",
-       "^FlakWeapon",
-       "^D2KMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -611,14 +592,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_TowerMissile",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2135",
+      "pricing": true,
+      "range": "10684",
+      "reloaddelay": "42",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^Grenade",
        "^MediumFlameWeapon",
        "^FlakWeapon",
        "^D2KMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_TowerMissile",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -769,8 +760,15 @@
    "combat_tank.harkonnen": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "55",
@@ -779,17 +777,10 @@
        "^D2K_Cannon"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "80mm_H",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^D2K_Cannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -839,16 +830,7 @@
    "devastator": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6666",
-      "reloaddelay": "100",
-      "slot": "Armament",
-      "versus_templates": [
-       "^D2K_Cannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "80000",
         "tag": "1Dam",
@@ -860,11 +842,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DevBullet",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6666",
+      "reloaddelay": "100",
+      "slot": "Armament",
+      "versus_templates": [
        "^D2K_Cannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "DevBullet",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -968,17 +959,7 @@
      {
       "burst": "4",
       "burstdelays": "25",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
-      "minrange": "2050",
-      "pricing": true,
-      "range": "10240",
-      "reloaddelay": "150",
-      "slot": "Armament",
-      "versus_templates": [
-       "^D2KMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "MissileAP_Heavy_Percentage",
@@ -990,11 +971,21 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "mtank_pri",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2050",
+      "pricing": true,
+      "range": "10240",
+      "reloaddelay": "150",
+      "slot": "Armament",
+      "versus_templates": [
        "^D2KMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "mtank_pri",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

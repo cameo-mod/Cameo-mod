@@ -136,7 +136,7 @@ def main():
                 smallarms_only = row["dmg_filter"] == "smallarms"
                 selected = []
                 old_total = 0
-                for w in arm.get("warheads", []):
+                for w in arm.get("damage_warheads", []):
                     if w.get("type") != "SpreadDamage":
                         continue
                     tag = (w.get("tag") or "").lower()

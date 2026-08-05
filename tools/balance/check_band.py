@@ -41,7 +41,7 @@ def unit_inputs(u):
         if not arm.get("pricing", True):
             continue
         st = arm.get("stats", arm)  # tolerate both nesting styles
-        dmg = formula.spread_damage_sum(st.get("warheads", arm.get("warheads", [])))
+        dmg = formula.spread_damage_sum(st.get("damage_warheads", arm.get("damage_warheads", [])))
         reload_ = fnum((st.get("reload_delay") or {}).get("v") if isinstance(st.get("reload_delay"), dict)
                        else st.get("reloaddelay") or (st.get("reload_delay")))
         if not dmg or not reload_:

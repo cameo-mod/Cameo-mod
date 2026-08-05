@@ -7,6 +7,7 @@
    "schwarzermond_blackbomb": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -16,8 +17,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -65,19 +65,7 @@
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1600",
-      "pricing": true,
-      "range": "8000",
-      "reloaddelay": "50",
-      "slot": "Armament",
-      "versus_templates": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^RA2MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -109,13 +97,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxCorrosionRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "1600",
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "50",
+      "slot": "Armament",
+      "versus_templates": [
        "^Grenade",
        "^HeavyMissile",
        "^RA2MediumMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "NaxCorrosionRocket",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -162,6 +160,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "Chemical_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -174,19 +179,10 @@
        "^Effect_Chem_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "5",
-        "tag": "Chemical_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Chemical_Heavy"
       ],
       "weapon": "NaxDieGlocke",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Heavy",
-       "^Projectile_Chem_Heavy",
-       "^Effect_Chem_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -239,19 +235,7 @@
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "3",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5760",
-      "reloaddelay": "100",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -298,34 +282,27 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "LunarNaxiDroneLaser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "9",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "100",
-      "slot": "Armament@Rockets",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^HeavyMissile",
-       "^HeavyAAWeapon",
+       "^SmallArms",
+       "^Chaingun",
        "^MediumMissile",
-       "^FlakWeapon",
-       "^ArrowWeapon",
-       "^RA2LightMissile"
+       "^LaserWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "LunarNaxiDroneLaser",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "9",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyMissile",
@@ -382,16 +359,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LunarNaxiDroneMissile",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "5760",
+      "reloaddelay": "100",
+      "slot": "Armament@Rockets",
+      "versus_templates": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
        "^MediumMissile",
        "^FlakWeapon",
        "^ArrowWeapon",
        "^RA2LightMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "LunarNaxiDroneMissile",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -431,8 +417,40 @@
       "armament_name": "primary",
       "burst": "6",
       "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "66",
@@ -444,6 +462,16 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "NaxHaenebuQuadCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "7",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -475,20 +503,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxHaenebuQuadCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "7",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "66",
@@ -498,44 +514,10 @@
        "NaxHaenebuQuadCannon"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "NaxHaenebuQuadCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -583,8 +565,40 @@
       "armament_name": "primary",
       "burst": "6",
       "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "66",
@@ -596,6 +610,16 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "NaxHaenebuQuadCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "7",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -627,20 +651,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxHaenebuQuadCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "7",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "66",
@@ -650,47 +662,20 @@
        "NaxHaenebuQuadCannon"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "NaxHaenebuQuadCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
+      "damage_warheads": [
+       {
+        "damage": "10",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -702,18 +687,10 @@
        "^Effect_Explosion_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "10",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "NaxiCowDrop",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Heavy",
-       "^Effect_Explosion_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -762,6 +739,53 @@
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -775,7 +799,15 @@
        "^MediumMissile",
        "^LaserWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "NaxiBeetleLaser_elite",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -822,19 +854,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiBeetleLaser_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -848,7 +867,15 @@
        "^MediumMissile",
        "^LaserWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "NaxiBeetleLaser_elite",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -895,19 +922,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiBeetleLaser_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -918,7 +932,15 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "NaxiBeetleLaser_AA_elite",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -965,19 +987,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiBeetleLaser_AA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -988,7 +997,15 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "NaxiBeetleLaser_AA_elite",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -1035,19 +1052,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiBeetleLaser_AA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "3",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1058,7 +1062,15 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Lunar_YellowBeetleLaser",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -1105,19 +1117,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowBeetleLaser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "3",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1128,7 +1127,15 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Lunar_YellowBeetleLaser",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -1175,19 +1182,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowBeetleLaser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "3",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1198,7 +1192,15 @@
       "versus_templates": [
        "NaxiBeetleLaser_AA_elite"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Lunar_YellowBeetleLaser_AA",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -1245,19 +1247,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowBeetleLaser_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "3",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1268,7 +1257,15 @@
       "versus_templates": [
        "NaxiBeetleLaser_AA_elite"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Lunar_YellowBeetleLaser_AA",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -1315,19 +1312,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowBeetleLaser_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1338,7 +1322,15 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Lunar_AmplifiedBeetleLaser",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -1385,19 +1377,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedBeetleLaser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1408,7 +1387,15 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Lunar_AmplifiedBeetleLaser",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -1455,19 +1442,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedBeetleLaser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1478,7 +1452,15 @@
       "versus_templates": [
        "NaxiBeetleLaser_AA_elite"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Lunar_AmplifiedBeetleLaser_AA",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -1525,19 +1507,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedBeetleLaser_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1548,61 +1517,9 @@
       "versus_templates": [
        "NaxiBeetleLaser_AA_elite"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "Lunar_AmplifiedBeetleLaser_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1656,6 +1573,7 @@
    "schwarzermond_airfield": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -1666,8 +1584,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "NaxDefensivePlaneTarget",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1861,6 +1778,53 @@
    "schwarzermond_lasertower": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1874,7 +1838,13 @@
        "^MediumMissile",
        "^LaserWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "NaxLaserT",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "2",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -1921,17 +1891,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxLaserT",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1942,7 +1901,13 @@
       "versus_templates": [
        "NaxLaserT"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Lunar_YellowLaserT",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -1989,17 +1954,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowLaserT",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "burst": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2010,61 +1964,9 @@
       "versus_templates": [
        "NaxLaserT"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "Lunar_AmplifiedLaserT",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2267,20 +2169,7 @@
    "schwarzermond_sturmcannon": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
-      "minrange": "2800",
-      "pricing": true,
-      "range": "14000",
-      "reloaddelay": "140",
-      "requires": "!schwarzermond_upgrade_vrilpoweredweapons",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^HeavyBomb",
-       "^RA2MediumCannon",
-       "^RA2Grenade"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "30000",
         "tag": "HeavyBomb",
@@ -2302,31 +2191,28 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxSturmArty",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^RA2MediumCannon",
-       "^RA2Grenade"
-      ]
-     },
-     {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.875,
       "minrange": "2800",
       "pricing": true,
       "range": "14000",
       "reloaddelay": "140",
-      "requires": "schwarzermond_upgrade_vrilpoweredweapons",
-      "slot": "Armament@PRIMARY_UP",
+      "requires": "!schwarzermond_upgrade_vrilpoweredweapons",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy",
-       "NaxSturmArty",
-       "^LunarNaxisUpgradedCannons"
+       "^HeavyBomb",
+       "^RA2MediumCannon",
+       "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "NaxSturmArty",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Tesla_Heavy_Percentage",
@@ -2353,17 +2239,28 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_GreenSturmArty",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "2800",
+      "pricing": true,
+      "range": "14000",
+      "reloaddelay": "140",
+      "requires": "schwarzermond_upgrade_vrilpoweredweapons",
+      "slot": "Armament@PRIMARY_UP",
+      "versus_templates": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "^Effect_Tesla_Heavy",
-       "^HeavyBomb",
-       "^RA2MediumCannon",
-       "^RA2Grenade",
+       "NaxSturmArty",
        "^LunarNaxisUpgradedCannons"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "Lunar_GreenSturmArty",
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -2483,6 +2380,13 @@
    "hole.nax2": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -2495,19 +2399,10 @@
        "^Effect_Cannon_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "NaxiBlackholeShoot",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_Cannon_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2551,6 +2446,13 @@
    "hole_small.nax2": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -2563,19 +2465,10 @@
        "^Effect_Cannon_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "NaxiBlackholeShoot",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_Cannon_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2622,16 +2515,7 @@
       "armament_name": "primary",
       "burst": "10",
       "burstdelays": "1",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
-      "pricing": true,
-      "range": "5000",
-      "reloaddelay": "50",
-      "slot": "Armament",
-      "versus_templates": [
-       "^RepairWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "-2000",
         "tag": "RepairWeapon",
@@ -2648,11 +2532,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2IFVRepair",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5000",
+      "reloaddelay": "50",
+      "slot": "Armament",
+      "versus_templates": [
        "^RepairWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "RA2IFVRepair",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2702,8 +2593,40 @@
      {
       "burst": "1",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1210",
       "pricing": true,
       "range": "6055",
@@ -2714,6 +2637,15 @@
        "NaxCorrosionRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "NaxCorrosionRocketTrooper_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "1",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -2745,19 +2677,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxCorrosionRocketTrooper_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "burst": "1",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1210",
       "pricing": true,
       "range": "6055",
@@ -2768,6 +2689,16 @@
        "NaxCorrosionRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "NaxCorrosionRocketTrooper_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "1",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -2799,20 +2730,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxCorrosionRocketTrooper_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "1",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1210",
       "pricing": false,
       "range": "6055",
@@ -2823,6 +2742,16 @@
        "NaxCorrosionRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "NaxCorrosionRocketTrooper_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "1",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -2854,20 +2783,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxCorrosionRocketTrooper_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "1",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1210",
       "pricing": false,
       "range": "6055",
@@ -2878,44 +2795,10 @@
        "NaxCorrosionRocket"
       ],
       "warheads": [
-       {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxCorrosionRocketTrooper_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2959,6 +2842,28 @@
    "schwarzermond_lunarsoldier": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -2972,6 +2877,16 @@
        "^RA2LaserWeapon"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "schwarzermond_lunarsoldier_rifle",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -2993,19 +2908,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "schwarzermond_lunarsoldier_rifle",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light",
-       "^Chaingun",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3017,6 +2919,16 @@
        "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "schwarzermond_lunarsoldier_rifle_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -3038,19 +2950,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "schwarzermond_lunarsoldier_rifle_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light",
-       "^Chaingun",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3062,6 +2961,16 @@
        "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -3083,19 +2992,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light",
-       "^Chaingun",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3107,6 +3003,16 @@
        "schwarzermond_lunarsoldier_rifle_elite"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -3128,19 +3034,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light",
-       "^Chaingun",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "burst": "3",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3152,6 +3045,16 @@
        "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "6",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -3173,19 +3076,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light",
-       "^Chaingun",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "burst": "6",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3197,6 +3087,15 @@
        "schwarzermond_lunarsoldier_rifle_elite"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -3218,18 +3117,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light",
-       "^Chaingun",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3243,6 +3130,17 @@
        "^RA2LaserWeapon"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "schwarzermond_lunarsoldier_rifle",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -3264,20 +3162,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "schwarzermond_lunarsoldier_rifle",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light",
-       "^Chaingun",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3289,6 +3173,17 @@
        "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "schwarzermond_lunarsoldier_rifle_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -3310,20 +3205,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "schwarzermond_lunarsoldier_rifle_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light",
-       "^Chaingun",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3335,6 +3216,17 @@
        "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -3356,20 +3248,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light",
-       "^Chaingun",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3381,6 +3259,17 @@
        "schwarzermond_lunarsoldier_rifle_elite"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -3402,20 +3291,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light",
-       "^Chaingun",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "3",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3427,6 +3302,17 @@
        "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -3448,20 +3334,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light",
-       "^Chaingun",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "6",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3473,36 +3345,11 @@
        "schwarzermond_lunarsoldier_rifle_elite"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light",
-       "^Chaingun",
-       "^RA2LaserWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3553,8 +3400,65 @@
      {
       "burst": "5",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "CannonHE_Heavy",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
@@ -3566,6 +3470,16 @@
        "^RA2LaserWeapon"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "NaxiMP40Laser",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -3622,21 +3536,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiMP40Laser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyCannon",
-       "^RA2Chaingun",
-       "^SmallArms",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "burst": "10",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
@@ -3646,71 +3547,11 @@
        "NaxiMP40Laser"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "CannonHE_Heavy",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "NaxiMP40Laser_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyCannon",
-       "^RA2Chaingun",
-       "^SmallArms",
-       "^RA2LaserWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3764,8 +3605,65 @@
      {
       "burst": "5",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "CannonHE_Heavy",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
@@ -3777,6 +3675,16 @@
        "^RA2LaserWeapon"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "NaxiMP40Laser",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -3833,21 +3741,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiMP40Laser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyCannon",
-       "^RA2Chaingun",
-       "^SmallArms",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "burst": "10",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
@@ -3857,6 +3752,16 @@
        "NaxiMP40Laser"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "NaxiMP40Laser_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "6",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -3913,21 +3818,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiMP40Laser_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyCannon",
-       "^RA2Chaingun",
-       "^SmallArms",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "burst": "6",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
@@ -3937,6 +3829,16 @@
        "NaxiMP40Laser"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "Lunar_YellowMP40Laser",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "11",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -3993,21 +3895,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_YellowMP40Laser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyCannon",
-       "^RA2Chaingun",
-       "^SmallArms",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "burst": "11",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
@@ -4017,6 +3906,16 @@
        "NaxiMP40Laser_elite"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "Lunar_YellowMP40Laser_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "7",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -4073,21 +3972,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_YellowMP40Laser_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyCannon",
-       "^RA2Chaingun",
-       "^SmallArms",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "burst": "7",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
@@ -4097,6 +3983,16 @@
        "NaxiMP40Laser"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "Lunar_AmplifiedMP40Laser",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "12",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -4153,21 +4049,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedMP40Laser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyCannon",
-       "^RA2Chaingun",
-       "^SmallArms",
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "burst": "12",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
@@ -4177,71 +4060,11 @@
        "NaxiMP40Laser_elite"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "CannonHE_Heavy",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "Lunar_AmplifiedMP40Laser_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyCannon",
-       "^RA2Chaingun",
-       "^SmallArms",
-       "^RA2LaserWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4291,6 +4114,13 @@
    "schwarzermond_parzival": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "30",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -4304,23 +4134,21 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "BlackHoleMaker",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "30",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BlackHoleMaker",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -4332,22 +4160,20 @@
        "BlackHoleMaker"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "BlackHoleMaker_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "30",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BlackHoleMaker_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": false,
@@ -4361,24 +4187,22 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "BlackHoleMaker",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "30",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BlackHoleMaker",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": false,
@@ -4390,19 +4214,10 @@
        "BlackHoleMaker"
       ],
       "warheads": [
-       {
-        "damage": "30",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "BlackHoleMaker_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4454,8 +4269,30 @@
      {
       "burst": "2",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5801",
       "reloaddelay": "30",
@@ -4465,6 +4302,15 @@
        "NaxiAlienPistol"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "UbermenschLaser",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -4486,19 +4332,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "UbermenschLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6801",
       "reloaddelay": "30",
@@ -4508,6 +4343,16 @@
        "UbermenschLaser"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "UbermenschLaser_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -4529,20 +4374,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "UbermenschLaser_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5801",
       "reloaddelay": "30",
@@ -4552,6 +4385,16 @@
        "NaxiAlienPistol"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "UbermenschLaser",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -4573,20 +4416,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "UbermenschLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6801",
       "reloaddelay": "30",
@@ -4596,6 +4427,15 @@
        "UbermenschLaser"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "UbermenschLaser_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -4617,19 +4457,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "UbermenschLaser_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "burst": "3",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5801",
       "reloaddelay": "30",
@@ -4639,6 +4468,15 @@
        "UbermenschLaser"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "Lunar_YellowUbermenschLaser",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "5",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -4660,19 +4498,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_YellowUbermenschLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "burst": "5",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6801",
       "reloaddelay": "30",
@@ -4682,6 +4509,16 @@
        "UbermenschLaser_elite"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "Lunar_YellowUbermenschLaser_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -4703,20 +4540,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_YellowUbermenschLaser_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "3",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5801",
       "reloaddelay": "30",
@@ -4726,6 +4551,16 @@
        "UbermenschLaser"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "Lunar_YellowUbermenschLaser",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "5",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -4747,20 +4582,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_YellowUbermenschLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "5",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6801",
       "reloaddelay": "30",
@@ -4770,6 +4593,15 @@
        "UbermenschLaser_elite"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "Lunar_YellowUbermenschLaser_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -4791,19 +4623,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_YellowUbermenschLaser_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5801",
       "reloaddelay": "30",
@@ -4813,6 +4634,15 @@
        "UbermenschLaser"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "Lunar_AmplifiedUbermenschLaser",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "6",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -4834,19 +4664,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedUbermenschLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "burst": "6",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6801",
       "reloaddelay": "30",
@@ -4856,6 +4675,16 @@
        "UbermenschLaser_elite"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "Lunar_AmplifiedUbermenschLaser_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -4877,20 +4706,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedUbermenschLaser_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5801",
       "reloaddelay": "30",
@@ -4900,6 +4717,16 @@
        "UbermenschLaser"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "Lunar_AmplifiedUbermenschLaser",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -4921,20 +4748,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedUbermenschLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "6",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6801",
       "reloaddelay": "30",
@@ -4944,34 +4759,10 @@
        "UbermenschLaser_elite"
       ],
       "warheads": [
-       {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Lunar_AmplifiedUbermenschLaser_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5534,6 +5325,18 @@
      {
       "burst": "10",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -5547,28 +5350,26 @@
        "^Effect_Tesla_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "NaxCrystalLeech",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "20",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.5,
       "pricing": true,
@@ -5582,24 +5383,10 @@
        "^Effect_Tesla_Super"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "TeslaCharged_Super_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "TeslaChargedExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_TeslaCharged_Super"
       ],
       "weapon": "NaxCrystalLeech_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_TeslaCharged_Super",
-       "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5649,19 +5436,7 @@
    "schwarzermond_dalek": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "8060",
-      "reloaddelay": "76",
-      "requires": "!rank-elite",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^TeslaWeapon",
-       "^LaserWeapon",
-       "^RA2RailgunWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "100000",
         "tag": "TeslaWeapon",
@@ -5698,26 +5473,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DalekCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "8060",
+      "reloaddelay": "76",
+      "requires": "!rank-elite",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^TeslaWeapon",
        "^LaserWeapon",
        "^RA2RailgunWeapon"
-      ]
-     },
-     {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "9060",
-      "reloaddelay": "76",
-      "requires": "rank-elite",
-      "slot": "Armament@ELITE",
-      "versus_templates": [
-       "DalekCannon"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "DalekCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "200000",
         "tag": "TeslaWeapon",
@@ -5754,13 +5529,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "9060",
+      "reloaddelay": "76",
+      "requires": "rank-elite",
+      "slot": "Armament@ELITE",
+      "versus_templates": [
+       "DalekCannon"
+      ],
+      "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
       "weapon": "DalekCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^LaserWeapon",
-       "^RA2RailgunWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5819,6 +5602,7 @@
    "schwarzermond_gravitycoretank": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -5829,8 +5613,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "GLStingerTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5882,6 +5665,53 @@
      {
       "burst": "2",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1565",
@@ -5895,7 +5725,14 @@
        "^HeavyAAWeapon",
        "^MediumMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Naxis_Komet",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "FlakWeapon",
@@ -5942,18 +5779,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Naxis_Komet",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^FlakWeapon",
-       "^Grenade",
-       "^HeavyAAWeapon",
-       "^MediumMissile"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "2350",
@@ -5964,61 +5789,9 @@
       "versus_templates": [
        "Naxis_Komet"
       ],
-      "warheads": [
-       {
-        "damage": "8000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "Naxis_Komet_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^FlakWeapon",
-       "^Grenade",
-       "^HeavyAAWeapon",
-       "^MediumMissile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6074,8 +5847,40 @@
      {
       "burst": "8",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1595",
       "pricing": true,
       "range": "7984",
@@ -6086,6 +5891,15 @@
        "NaxCorrosionRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "NaxCorrosionBeast",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "16",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -6117,19 +5931,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxCorrosionBeast",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "burst": "16",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1595",
       "pricing": true,
       "range": "8984",
@@ -6140,44 +5943,10 @@
        "NaxCorrosionBeast"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxCorrosionBeast_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6231,6 +6000,53 @@
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6244,7 +6060,15 @@
        "^MediumMissile",
        "^LaserWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "NaxiBeetleLaser_elite",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -6291,19 +6115,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiBeetleLaser_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6314,7 +6125,15 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "NaxiBeetleLaser_AA_elite",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -6361,19 +6180,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiBeetleLaser_AA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "3",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6384,7 +6190,15 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Lunar_YellowBeetleLaser",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -6431,19 +6245,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowBeetleLaser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "3",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6454,7 +6255,15 @@
       "versus_templates": [
        "NaxiBeetleLaser_AA_elite"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Lunar_YellowBeetleLaser_AA",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -6501,19 +6310,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowBeetleLaser_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6524,7 +6320,15 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Lunar_AmplifiedBeetleLaser",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -6571,19 +6375,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedBeetleLaser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6594,61 +6385,9 @@
       "versus_templates": [
        "NaxiBeetleLaser_AA_elite"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "Lunar_AmplifiedBeetleLaser_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6700,6 +6439,53 @@
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6713,7 +6499,15 @@
        "^MediumMissile",
        "^LaserWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "NaxiTank2Laser",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -6760,19 +6554,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiTank2Laser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6783,7 +6564,15 @@
       "versus_templates": [
        "NaxiTank2Laser"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "NaxiTank2Laser_AA",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "5",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -6830,19 +6619,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiTank2Laser_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "5",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6853,7 +6629,15 @@
       "versus_templates": [
        "NaxiTank2Laser"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Lunar_YellowTank2Laser",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "5",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -6900,19 +6684,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowTank2Laser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "5",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6923,7 +6694,15 @@
       "versus_templates": [
        "NaxiTank2Laser_AA"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Lunar_YellowTank2Laser_AA",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "6",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -6970,19 +6749,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowTank2Laser_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "6",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6993,7 +6759,15 @@
       "versus_templates": [
        "NaxiTank2Laser"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Lunar_AmplifiedTank2Laser",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "6",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -7040,19 +6814,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedTank2Laser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "6",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -7063,61 +6824,9 @@
       "versus_templates": [
        "NaxiTank2Laser_AA"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "Lunar_AmplifiedTank2Laser_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
-       "^LaserWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -7166,8 +6875,40 @@
    "schwarzermond_lunargrille": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "16000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -7180,6 +6921,15 @@
        "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "NaxGrilleArty",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "16000",
         "tag": "HeavyCannon",
@@ -7211,19 +6961,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxGrilleArty",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "2470",
       "pricing": true,
       "range": "13333",
@@ -7235,6 +6974,18 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "NaxGrilleArty_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "16000",
         "tag": "HeavyCannon",
@@ -7264,20 +7015,15 @@
         "damage": "8",
         "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxGrilleArty_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade",
-       "^RA2EliteEffects"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -7292,6 +7038,16 @@
        "^LunarNaxisUpgradedCannons"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "Lunar_GreenGrilleArty",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "8",
         "tag": "Tesla_Heavy_Percentage",
@@ -7333,23 +7089,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_GreenGrilleArty",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy",
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "13333",
@@ -7364,59 +7105,11 @@
        "^LunarNaxisUpgradedCannons"
       ],
       "warheads": [
-       {
-        "damage": "8",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "16000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "16000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "Lunar_GreenGrilleArty_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy",
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade",
-       "^RA2EliteEffects",
-       "^LunarNaxisUpgradedCannons"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7466,6 +7159,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7477,22 +7177,22 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "LunarPanzerCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "5",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LunarPanzerCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7505,23 +7205,37 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "LunarPanzerCannon_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
-        "damage": "5",
+        "damage": "8000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LunarPanzerCannon_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -7533,6 +7247,16 @@
        "^LunarNaxisUpgradedCannons"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "Lunar_Green105mm",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "TeslaWeapon",
@@ -7554,20 +7278,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_Green105mm",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "50",
@@ -7577,34 +7289,10 @@
        "Lunar_Green105mm"
       ],
       "warheads": [
-       {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Lunar_Green105mm_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7654,8 +7342,55 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5105",
       "reloaddelay": "80",
@@ -7668,6 +7403,16 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "LunarTigerCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "LightChemicalWeapon",
@@ -7714,21 +7459,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LunarTigerCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightChemicalWeapon",
-       "^HeavyBomb",
-       "^MediumFlameWeapon",
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6105",
       "reloaddelay": "80",
@@ -7738,6 +7470,19 @@
        "LunarTigerCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "LunarTigerCannon_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "4000",
         "tag": "LightChemicalWeapon",
@@ -7782,21 +7527,15 @@
         "damage": "2",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
-      "weapon": "LunarTigerCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightChemicalWeapon",
-       "^HeavyBomb",
-       "^MediumFlameWeapon",
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5105",
       "reloaddelay": "80",
@@ -7810,6 +7549,17 @@
        "^LunarNaxisUpgradedCannons"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "Lunar_GreenTigerCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Tesla_Heavy_Percentage",
@@ -7866,25 +7616,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_GreenTigerCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy",
-       "^LightChemicalWeapon",
-       "^HeavyBomb",
-       "^MediumFlameWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6105",
       "reloaddelay": "80",
@@ -7898,74 +7631,11 @@
        "^LunarNaxisUpgradedCannons"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Lunar_GreenTigerCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy",
-       "^LightChemicalWeapon",
-       "^HeavyBomb",
-       "^MediumFlameWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8017,6 +7687,7 @@
      {
       "burst": "4",
       "burstdelays": "10",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -8028,8 +7699,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "NaxisBradleyTarget",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -8133,8 +7803,40 @@
    "schwarzermond_neojagdpanzer": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "CannonAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7379",
       "reloaddelay": "90",
@@ -8146,6 +7848,15 @@
        "^RA2TankDestroyerCannon"
       ],
       "warheads": [
+       "^Warhead_CannonAP_Light"
+      ],
+      "weapon": "LunarNaxiJadgDestroyer",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "30000",
         "tag": "HeavyCannon",
@@ -8177,19 +7888,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LunarNaxiJadgDestroyer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2TankDestroyerCannon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8379",
       "reloaddelay": "90",
@@ -8200,6 +7900,18 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_CannonAP_Light"
+      ],
+      "weapon": "LunarNaxiJadgDestroyer_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "15",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "30000",
         "tag": "HeavyCannon",
@@ -8229,20 +7941,15 @@
         "damage": "15",
         "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
-      "weapon": "LunarNaxiJadgDestroyer_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2TankDestroyerCannon",
-       "^RA2EliteEffects"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7379",
       "reloaddelay": "90",
@@ -8256,6 +7963,16 @@
        "^LunarNaxisUpgradedCannons"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_CannonAP_Light"
+      ],
+      "weapon": "Lunar_GreenJadgDestroyer",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "15",
         "tag": "Tesla_Heavy_Percentage",
@@ -8297,23 +8014,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_GreenJadgDestroyer",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy",
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2TankDestroyerCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8379",
       "reloaddelay": "90",
@@ -8327,59 +8029,11 @@
        "^LunarNaxisUpgradedCannons"
       ],
       "warheads": [
-       {
-        "damage": "15",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "15",
-        "tag": "CannonAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_CannonAP_Light"
       ],
       "weapon": "Lunar_GreenJadgDestroyer_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy",
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2TankDestroyerCannon",
-       "^RA2EliteEffects",
-       "^LunarNaxisUpgradedCannons"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

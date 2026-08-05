@@ -46,6 +46,53 @@
    "ra1_allies_blackhawk": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -58,7 +105,13 @@
        "^FlakWeapon",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "ChainGunMH60",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "secondary",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -105,17 +158,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ChainGunMH60",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Grenade",
-       "^FlakWeapon",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -128,61 +170,9 @@
        "^FlakWeapon",
        "^Chaingun"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "ChainGunMH60",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Grenade",
-       "^FlakWeapon",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -231,8 +221,35 @@
    "ra1_allies_longbow": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "1310",
       "pricing": true,
       "range": "6540",
@@ -243,7 +260,12 @@
        "^ShrapnelWeapon",
        "^HeavyMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Hellfire",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "ShrapnelWeapon",
@@ -270,16 +292,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Hellfire",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^HeavyMissile"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "1310",
       "pricing": true,
       "range": "6540",
@@ -290,40 +304,9 @@
        "Hellfire",
        "^CryoMissileProjectile"
       ],
-      "warheads": [
-       {
-        "damage": "8000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "HellfireCryo",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^HeavyMissile",
-       "^CryoMissileProjectile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -370,6 +353,13 @@
      {
       "burst": "4",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -382,22 +372,21 @@
        "^Effect_Explosion_Heavy"
       ],
       "warheads": [
+       "^Warhead_Demolition_Heavy"
+      ],
+      "weapon": "RapierBombs",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "5",
         "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RapierBombs",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Heavy",
-       "^Effect_Explosion_Heavy"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -410,26 +399,44 @@
        "^CryoMissileProjectile"
       ],
       "warheads": [
-       {
-        "damage": "5",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "RapierBombsCryo",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Heavy",
-       "^Effect_Explosion_Heavy",
-       "^CryoMissileProjectile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "62",
@@ -440,7 +447,15 @@
        "^ImpactGlow",
        "^HeavyMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Aphid_AA",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "ShrapnelWeapon",
@@ -467,20 +482,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Aphid_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^ImpactGlow",
-       "^HeavyMissile"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "2",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "62",
@@ -490,41 +493,9 @@
        "Aphid_AA",
        "^CryoMissileProjectile"
       ],
-      "warheads": [
-       {
-        "damage": "8000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "AphidCryo_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^ImpactGlow",
-       "^HeavyMissile",
-       "^CryoMissileProjectile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -933,6 +904,13 @@
      {
       "burst": "2",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -945,19 +923,10 @@
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "zsu_23",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flak_Medium",
-       "^Projectile_Flak_Medium",
-       "^Effect_Flak_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -998,17 +967,7 @@
    "ra1_allies_alliedgunturret": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "7685",
-      "reloaddelay": "40",
-      "slot": "Armament",
-      "versus_templates": [
-       "^ShrapnelWeapon",
-       "^HeavyCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "ShrapnelWeapon",
@@ -1035,12 +994,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RATurretGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "7685",
+      "reloaddelay": "40",
+      "slot": "Armament",
+      "versus_templates": [
        "^ShrapnelWeapon",
        "^HeavyCannon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "RATurretGun",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1082,6 +1048,48 @@
     "armaments": [
      {
       "armament_name": "cannon",
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "2035",
@@ -1093,7 +1101,13 @@
       "versus_templates": [
        "155mm"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "155mmBastion",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "cannon",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "HeavyCannon",
@@ -1135,16 +1149,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "155mmBastion",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^Grenade"
-      ]
-     },
-     {
-      "armament_name": "cannon",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "2035",
@@ -1156,56 +1160,9 @@
       "versus_templates": [
        "155mmCryo"
       ],
-      "warheads": [
-       {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "155mmBastionCryo",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^CryoMissileProjectile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1411,8 +1368,20 @@
    "ra1_allies_alliedsniper": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9153",
       "reloaddelay": "100",
@@ -1421,7 +1390,13 @@
       "versus_templates": [
        "^SniperWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "LightSniper",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "30000",
         "tag": "SniperWeapon",
@@ -1433,16 +1408,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LightSniper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "9153",
       "reloaddelay": "100",
@@ -1451,7 +1418,12 @@
       "versus_templates": [
        "^SniperWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "LightSniper",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "30000",
         "tag": "SniperWeapon",
@@ -1463,15 +1435,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LightSniper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9153",
       "reloaddelay": "100",
@@ -1481,7 +1446,13 @@
        "LightSniper",
        "^CryoMissileProjectile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "CryoLightSniper",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "30000",
         "tag": "SniperWeapon",
@@ -1493,17 +1464,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CryoLightSniper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon",
-       "^CryoMissileProjectile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "9153",
       "reloaddelay": "100",
@@ -1513,24 +1475,9 @@
        "LightSniper",
        "^CryoMissileProjectile"
       ],
-      "warheads": [
-       {
-        "damage": "30000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15",
-        "tag": "SniperWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "CryoLightSniper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon",
-       "^CryoMissileProjectile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1577,8 +1524,30 @@
      {
       "burst": "5",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "48",
@@ -1587,7 +1556,15 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "RAVulcan",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "5",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "SmallArms",
@@ -1609,19 +1586,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RAVulcan",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "5",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6500",
       "reloaddelay": "48",
@@ -1630,34 +1596,9 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
-       {
-        "damage": "8000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "RAVulcan",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1708,6 +1649,7 @@
     "armaments": [
      {
       "armament_name": "dummy",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -1717,14 +1659,30 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "dummytargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "burst": "10",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "-2000",
+        "tag": "RepairWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraRepair",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "RepairWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
@@ -1732,7 +1690,15 @@
       "versus_templates": [
        "^RepairWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Repair",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "10",
+      "burstdelays": "1",
+      "damage_warheads": [
        {
         "damage": "-2000",
         "tag": "RepairWeapon",
@@ -1749,18 +1715,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Repair",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RepairWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "10",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
@@ -1768,28 +1724,9 @@
       "versus_templates": [
        "^RepairWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "-2000",
-        "tag": "RepairWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-1000",
-        "tag": "ExtraRepair",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-1",
-        "tag": "RepairWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "Repair",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RepairWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1835,6 +1772,7 @@
     "armaments": [
      {
       "armament_name": "dummy",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -1844,12 +1782,28 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "dummytargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "-2000",
+        "tag": "HealingWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraHealing",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "HealingWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
@@ -1857,7 +1811,13 @@
       "versus_templates": [
        "^HealingWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Heal",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "-2000",
         "tag": "HealingWeapon",
@@ -1874,16 +1834,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Heal",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HealingWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
@@ -1891,28 +1843,9 @@
       "versus_templates": [
        "^HealingWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "-2000",
-        "tag": "HealingWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-1000",
-        "tag": "ExtraHealing",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-1",
-        "tag": "HealingWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "Heal",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HealingWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1956,6 +1889,13 @@
    "ra1_allies_raspy": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "15000",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1965,18 +1905,9 @@
       "versus_templates": [
        "^SnipeWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "15000",
-        "tag": "1Dam",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "SilencedPPK",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SnipeWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2023,8 +1954,20 @@
      {
       "burst": "2",
       "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "7777",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "7",
@@ -2032,7 +1975,15 @@
       "versus_templates": [
        "^SniperWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Colt45",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "7777",
         "tag": "SniperWeapon",
@@ -2044,18 +1995,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Colt45",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7777",
       "reloaddelay": "7",
@@ -2063,26 +2004,13 @@
       "versus_templates": [
        "^SniperWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "7777",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "SniperWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "Colt45",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -2095,11 +2023,11 @@
       ],
       "warheads": [],
       "weapon": "TanyaAttach",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -2110,8 +2038,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "GenericC4",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2660,6 +2587,48 @@
    "ra1_allies_alliedartillery": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "2670",
@@ -2673,7 +2642,12 @@
        "^ShrapnelWeapon",
        "^Grenade"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "155mm",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "HeavyCannon",
@@ -2715,15 +2689,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "155mm",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^Grenade"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "2670",
@@ -2736,56 +2701,9 @@
        "155mm",
        "^CryoMissileProjectile"
       ],
-      "warheads": [
-       {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "155mmCryo",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^CryoMissileProjectile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2834,6 +2752,48 @@
    "ra1_allies_alliedheavyaatank": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2846,7 +2806,12 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "HeavyAATankCannonAG",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -2888,16 +2853,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HeavyAATankCannonAG",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2907,56 +2862,9 @@
       "versus_templates": [
        "HeavyAATankCannonAG"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "HeavyAATankCannon_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^SmallArms",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3010,21 +2918,7 @@
    "ra1_allies_alliedlighttank": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "4720",
-      "reloaddelay": "37",
-      "slot": "Armament",
-      "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -3106,16 +3000,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "25mm",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "4720",
+      "reloaddelay": "37",
+      "slot": "Armament",
+      "versus_templates": [
        "^Grenade",
        "^ShrapnelWeapon",
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
        "^TankDestroyerCannon",
        "^MediumCannon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "25mm",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3169,6 +3070,13 @@
    "ra1_allies_alliedmediumtank": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3181,19 +3089,10 @@
        "^Effect_Cannon_Medium"
       ],
       "warheads": [
-       {
-        "damage": "4",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "90mm",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3337,17 +3236,7 @@
    "ra1_allies_alliedtankdestroyer": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "6819",
-      "reloaddelay": "60",
-      "slot": "Armament",
-      "versus_templates": [
-       "^MediumCannon",
-       "^TankDestroyerCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "12000",
         "tag": "MediumCannon",
@@ -3369,12 +3258,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AlliedTankDestroyerCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6819",
+      "reloaddelay": "60",
+      "slot": "Armament",
+      "versus_templates": [
        "^MediumCannon",
        "^TankDestroyerCannon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "AlliedTankDestroyerCannon",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3424,17 +3320,7 @@
    "ra1_allies_alliedtigerheavytank": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "5915",
-      "reloaddelay": "60",
-      "slot": "Armament",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^MediumCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyCannon",
@@ -3456,12 +3342,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TigerCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5915",
+      "reloaddelay": "60",
+      "slot": "Armament",
+      "versus_templates": [
        "^HeavyCannon",
        "^MediumCannon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TigerCannon",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3512,6 +3405,63 @@
      {
       "burst": "4",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3526,7 +3476,14 @@
        "^HeavyMissile",
        "^MediumMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "ChronoTusk",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -3583,19 +3540,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ChronoTusk",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^HeavyMissile",
-       "^MediumMissile"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3610,7 +3554,14 @@
        "^HeavyMissile",
        "^MediumMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "ChronoTusk",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -3667,19 +3618,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ChronoTusk",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^HeavyMissile",
-       "^MediumMissile"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3691,7 +3629,14 @@
        "ChronoTusk",
        "^CryoMissileProjectile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "ChronoTuskCryo",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -3748,20 +3693,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ChronoTuskCryo",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^HeavyMissile",
-       "^MediumMissile",
-       "^CryoMissileProjectile"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3773,73 +3704,9 @@
        "ChronoTusk",
        "^CryoMissileProjectile"
       ],
-      "warheads": [
-       {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "ChronoTuskCryo",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^HeavyMissile",
-       "^MediumMissile",
-       "^CryoMissileProjectile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3937,6 +3804,7 @@
    "ra1_allies_mobilegapgenerator": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -3946,8 +3814,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "dummytargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4005,6 +3872,7 @@
    "ra1_allies_mobileradarjammer": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -4015,8 +3883,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "RadarJammer",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4076,6 +3943,53 @@
      {
       "burst": "4",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -4089,7 +4003,14 @@
        "^FlakWeapon",
        "^MediumMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "APTusk",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TankDestroyerCannon",
@@ -4136,18 +4057,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "APTusk",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^Grenade",
-       "^FlakWeapon",
-       "^MediumMissile"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -4159,62 +4068,9 @@
        "APTusk",
        "^CryoMissileProjectile"
       ],
-      "warheads": [
-       {
-        "damage": "4000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "APTuskCryo",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^Grenade",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^CryoMissileProjectile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4266,6 +4122,13 @@
      {
       "burst": "4",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -4278,19 +4141,10 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "M60mg",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4338,8 +4192,100 @@
    "ra1_allies_reconranger": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "4925",
       "reloaddelay": "64",
@@ -4356,6 +4302,13 @@
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "ReconRangerRecoillessGun",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -4447,22 +4400,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ReconRangerRecoillessGun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^Chaingun",
-       "^FlakWeapon",
-       "^TankDestroyerCannon",
-       "^RailgunWeapon",
-       "^MediumMissile",
-       "^D2KRocket"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "4925",
       "reloaddelay": "64",
@@ -4473,110 +4412,10 @@
        "^CryoMissileProjectile"
       ],
       "warheads": [
-       {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "CryoReconRangerRecoillessGun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^Chaingun",
-       "^FlakWeapon",
-       "^TankDestroyerCannon",
-       "^RailgunWeapon",
-       "^MediumMissile",
-       "^D2KRocket",
-       "^CryoMissileProjectile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4625,17 +4464,7 @@
    "ra1_allies_sheridanassaulttank": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "5023",
-      "reloaddelay": "64",
-      "slot": "Armament",
-      "versus_templates": [
-       "^TankDestroyerCannon",
-       "^MediumCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "TankDestroyerCannon",
@@ -4657,16 +4486,45 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SheridanCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5023",
+      "reloaddelay": "64",
+      "slot": "Armament",
+      "versus_templates": [
        "^TankDestroyerCannon",
        "^MediumCannon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "SheridanCannon",
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5023",
       "reloaddelay": "64",
@@ -4676,7 +4534,12 @@
        "^MediumMissile",
        "^LightMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "SheridanMissiles",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "MediumMissile",
@@ -4698,16 +4561,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SheridanMissiles",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumMissile",
-       "^LightMissile"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5023",
       "reloaddelay": "64",
@@ -4717,50 +4572,14 @@
        "SheridanMissiles",
        "^CryoMissileProjectile"
       ],
-      "warheads": [
-       {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "SheridanMissilesCryo",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumMissile",
-       "^LightMissile",
-       "^CryoMissileProjectile"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "5023",
-      "reloaddelay": "58",
-      "slot": "Armament@MG",
-      "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -4782,12 +4601,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SheridanVulcan",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5023",
+      "reloaddelay": "58",
+      "slot": "Armament@MG",
+      "versus_templates": [
        "^SmallArms",
        "^Chaingun"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "SheridanVulcan",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {

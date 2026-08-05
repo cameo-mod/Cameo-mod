@@ -10,6 +10,13 @@
       "armament_name": "secondary",
       "burst": "12",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "minrange": "1325",
@@ -24,39 +31,16 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "3",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "ZeroFighterChainGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
       "burst": "12",
       "burstdelays": "4",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "minrange": "1325",
-      "pricing": true,
-      "range": "6615",
-      "reloaddelay": "92",
-      "requires": "japan_upgrade_waveforcebullets",
-      "slot": "Armament@UpgradeGuns",
-      "versus_templates": [
-       "^WaveforceBulletWarhead",
-       "^Grenade",
-       "ZeroFighterChainGun",
-       "^WaveforceBulletProjectile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Railgun_Heavy_Percentage",
@@ -83,21 +67,38 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ZeroFighterChainGunWaveforce",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "minrange": "1325",
+      "pricing": true,
+      "range": "6615",
+      "reloaddelay": "92",
+      "requires": "japan_upgrade_waveforcebullets",
+      "slot": "Armament@UpgradeGuns",
+      "versus_templates": [
        "^WaveforceBulletWarhead",
        "^Grenade",
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium",
+       "ZeroFighterChainGun",
        "^WaveforceBulletProjectile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "ZeroFighterChainGunWaveforce",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "10",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -111,37 +112,16 @@
        "^ImpactGlow"
       ],
       "warheads": [
-       {
-        "damage": "10",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "JapaneseHeavyBomb",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Heavy",
-       "^Effect_Explosion_Heavy",
-       "^ImpactGlow"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "5",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6000",
-      "reloaddelay": "100",
-      "requires": "japan_upgrade_advancedplasmaweapons",
-      "slot": "Armament@UpgradeBombs",
-      "versus_templates": [
-       "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon",
-       "^HeavyBomb"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "HeavyChemicalWeapon",
@@ -183,13 +163,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JapanesePlasmaBomb",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "100",
+      "requires": "japan_upgrade_advancedplasmaweapons",
+      "slot": "Armament@UpgradeBombs",
+      "versus_templates": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon",
        "^HeavyBomb"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "JapanesePlasmaBomb",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -234,18 +222,7 @@
    "japan_skyhawk": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "3053",
-      "reloaddelay": "128",
-      "requires": "!japan_upgrade_energizedarrows",
-      "slot": "Armament@Missiles",
-      "versus_templates": [
-       "^MediumMissile",
-       "^ArrowWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "32000",
         "tag": "MediumMissile",
@@ -267,27 +244,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JHindArrows",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumMissile",
-       "^ArrowWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "128",
-      "requires": "japan_upgrade_energizedarrows",
-      "slot": "Armament@MissilesUpgrade",
+      "requires": "!japan_upgrade_energizedarrows",
+      "slot": "Armament@Missiles",
       "versus_templates": [
-       "^MediumFlameWeapon",
-       "^TeslaWeapon",
-       "JHindArrows"
+       "^MediumMissile",
+       "^ArrowWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "JHindArrows",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "16000",
         "tag": "MediumFlameWeapon",
@@ -339,28 +312,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JHindArrowsEnergized",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumFlameWeapon",
-       "^TeslaWeapon",
-       "^MediumMissile",
-       "^ArrowWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3053",
-      "reloaddelay": "32",
-      "requires": "!japan_upgrade_advancedplasmaweapons",
-      "slot": "Armament@Cannon",
+      "reloaddelay": "128",
+      "requires": "japan_upgrade_energizedarrows",
+      "slot": "Armament@MissilesUpgrade",
       "versus_templates": [
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon"
+       "^MediumFlameWeapon",
+       "^TeslaWeapon",
+       "JHindArrows"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "JHindArrowsEnergized",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "ShrapnelWeapon",
@@ -387,27 +356,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JHindCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "32",
-      "requires": "japan_upgrade_advancedplasmaweapons",
-      "slot": "Armament@CannonUpgrade",
+      "requires": "!japan_upgrade_advancedplasmaweapons",
+      "slot": "Armament@Cannon",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^MediumMissile",
-       "JHindCannon"
+       "^ShrapnelWeapon",
+       "^TankDestroyerCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "JHindCannon",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -469,28 +434,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JHindPlasmaCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3053",
-      "reloaddelay": "8",
-      "requires": "!japan_upgrade_waveforcebullets",
-      "slot": "Armament@ChainGun",
+      "reloaddelay": "32",
+      "requires": "japan_upgrade_advancedplasmaweapons",
+      "slot": "Armament@CannonUpgrade",
       "versus_templates": [
-       "^Grenade",
-       "^Chaingun"
+       "^TeslaWeapon",
+       "^MediumMissile",
+       "JHindCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "JHindPlasmaCannon",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -517,27 +478,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JHindChainGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Grenade",
-       "^Chaingun"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "8",
-      "requires": "japan_upgrade_waveforcebullets",
-      "slot": "Armament@ChainGunUpgrade",
+      "requires": "!japan_upgrade_waveforcebullets",
+      "slot": "Armament@ChainGun",
       "versus_templates": [
-       "^WaveforceBulletWarhead",
-       "JHindChainGun",
-       "^WaveforceBulletProjectile"
+       "^Grenade",
+       "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "JHindChainGun",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Railgun_Heavy_Percentage",
@@ -569,14 +526,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JHindChainGunWaveforce",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "3053",
+      "reloaddelay": "8",
+      "requires": "japan_upgrade_waveforcebullets",
+      "slot": "Armament@ChainGunUpgrade",
+      "versus_templates": [
        "^WaveforceBulletWarhead",
-       "^Grenade",
-       "^Chaingun",
+       "JHindChainGun",
        "^WaveforceBulletProjectile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "JHindChainGunWaveforce",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -623,18 +589,7 @@
      {
       "burst": "2",
       "burstdelays": "9",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "minrange": "1325",
-      "pricing": true,
-      "range": "6615",
-      "reloaddelay": "110",
-      "requires": "!japan_upgrade_energizedarrows",
-      "slot": "Armament@Missiles",
-      "versus_templates": [
-       "JHindArrows"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "18000",
         "tag": "MediumMissile",
@@ -656,28 +611,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ZeroFighterArrows",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumMissile",
-       "^ArrowWeapon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "9",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1325",
       "pricing": true,
       "range": "6615",
       "reloaddelay": "110",
-      "requires": "japan_upgrade_energizedarrows",
-      "slot": "Armament@MissilesUpgrade",
+      "requires": "!japan_upgrade_energizedarrows",
+      "slot": "Armament@Missiles",
       "versus_templates": [
-       "JHindArrowsEnergized"
+       "JHindArrows"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "ZeroFighterArrows",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "9",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "MediumFlameWeapon",
@@ -729,18 +681,31 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "1325",
+      "pricing": true,
+      "range": "6615",
+      "reloaddelay": "110",
+      "requires": "japan_upgrade_energizedarrows",
+      "slot": "Armament@MissilesUpgrade",
+      "versus_templates": [
+       "JHindArrowsEnergized"
+      ],
+      "warheads": [],
       "weapon": "ZeroFighterArrowsEnergized",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumFlameWeapon",
-       "^TeslaWeapon",
-       "^MediumMissile",
-       "^ArrowWeapon"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "burst": "12",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "minrange": "1325",
@@ -755,38 +720,15 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "3",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "ZeroFighterChainGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "12",
       "burstdelays": "4",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "minrange": "1325",
-      "pricing": true,
-      "range": "6615",
-      "reloaddelay": "92",
-      "requires": "japan_upgrade_waveforcebullets",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^WaveforceBulletWarhead",
-       "^Grenade",
-       "ZeroFighterChainGun",
-       "^WaveforceBulletProjectile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Railgun_Heavy_Percentage",
@@ -813,16 +755,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ZeroFighterChainGunWaveforce",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "minrange": "1325",
+      "pricing": true,
+      "range": "6615",
+      "reloaddelay": "92",
+      "requires": "japan_upgrade_waveforcebullets",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^WaveforceBulletWarhead",
        "^Grenade",
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium",
+       "ZeroFighterChainGun",
        "^WaveforceBulletProjectile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "ZeroFighterChainGunWaveforce",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1218,17 +1170,7 @@
      {
       "burst": "5",
       "burstdelays": "6",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1845",
-      "pricing": true,
-      "range": "9214",
-      "reloaddelay": "176",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "BallistaMultiShot"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "Grenade",
@@ -1285,16 +1227,28 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "1845",
+      "pricing": true,
+      "range": "9214",
+      "reloaddelay": "176",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "BallistaMultiShot"
+      ],
+      "warheads": [],
       "weapon": "BallistaTowerMultiShot",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^ArrowWeapon"
-      ]
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "80",
+        "tag": "Arrow_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "minrange": "1845",
@@ -1306,35 +1260,15 @@
        "JapanMaidenBow"
       ],
       "warheads": [
-       {
-        "damage": "80",
-        "tag": "Arrow_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Arrow_Light"
       ],
       "weapon": "BallistaSingleShotAir",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Arrow_Light",
-       "^Projectile_Arrow_Light",
-       "^Effect_Arrow_Light"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "5",
       "burstdelays": "6",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1845",
-      "pricing": true,
-      "range": "9214",
-      "reloaddelay": "176",
-      "requires": "japan_upgrade_energizedarrows",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "BallistaMultiShotEnergized"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "TeslaWeapon",
@@ -1391,31 +1325,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BallistaTowerMultiShotEnergized",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ArrowWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1845",
       "pricing": true,
       "range": "9214",
-      "reloaddelay": "200",
+      "reloaddelay": "176",
       "requires": "japan_upgrade_energizedarrows",
-      "slot": "Armament@UpgradeAIR",
+      "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Missile_Light",
-       "JapanMaidenBowEnergized"
+       "BallistaMultiShotEnergized"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "BallistaTowerMultiShotEnergized",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "10",
         "tag": "MissileAP_Light_Percentage",
@@ -1507,21 +1433,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BallistaSingleShotAirEnergized",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "minrange": "1845",
+      "pricing": true,
+      "range": "9214",
+      "reloaddelay": "200",
+      "requires": "japan_upgrade_energizedarrows",
+      "slot": "Armament@UpgradeAIR",
+      "versus_templates": [
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
        "^Effect_Missile_Light",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^MediumMissile",
-       "^TeslaWeapon",
-       "^Warhead_Arrow_Light",
-       "^Projectile_Arrow_Light",
-       "^Effect_Arrow_Light"
-      ]
+       "JapanMaidenBowEnergized"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Arrow_Light"
+      ],
+      "weapon": "BallistaSingleShotAirEnergized",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1570,18 +1501,7 @@
       "armament_name": "primary",
       "burst": "5",
       "burstdelays": "5",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "6696",
-      "reloaddelay": "25",
-      "requires": "!japan_upgrade_waveforcebullets",
-      "slot": "Armament",
-      "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "SmallArms",
@@ -1603,30 +1523,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JHighV",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6696",
+      "reloaddelay": "25",
+      "requires": "!japan_upgrade_waveforcebullets",
+      "slot": "Armament",
+      "versus_templates": [
        "^SmallArms",
        "^Chaingun"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "JHighV",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
       "burst": "5",
       "burstdelays": "5",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "6696",
-      "reloaddelay": "25",
-      "requires": "japan_upgrade_waveforcebullets",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^WaveforceBulletWarhead",
-       "JHighV",
-       "^WaveforceBulletProjectile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Railgun_Heavy_Percentage",
@@ -1653,14 +1569,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JHighVWaveforce",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6696",
+      "reloaddelay": "25",
+      "requires": "japan_upgrade_waveforcebullets",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^WaveforceBulletWarhead",
-       "^SmallArms",
-       "^Chaingun",
+       "JHighV",
        "^WaveforceBulletProjectile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "JHighVWaveforce",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1746,6 +1671,7 @@
    "japan_waveforceturret": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -1759,8 +1685,7 @@
       ],
       "warheads": [],
       "weapon": "WaveTurretShell",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1808,6 +1733,13 @@
    "japan_archermaiden": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "20",
+        "tag": "Arrow_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "minrange": "1500",
@@ -1822,22 +1754,20 @@
        "^Effect_Arrow_Light"
       ],
       "warheads": [
+       "^Warhead_Arrow_Light"
+      ],
+      "weapon": "JapanMaidenBow",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "20",
         "tag": "Arrow_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JapanMaidenBow",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Arrow_Light",
-       "^Projectile_Arrow_Light",
-       "^Effect_Arrow_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "minrange": "1500",
@@ -1852,23 +1782,101 @@
        "^Effect_Arrow_Light"
       ],
       "warheads": [
+       "^Warhead_Arrow_Light"
+      ],
+      "weapon": "JapanMaidenBow",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "20",
+        "damage": "6000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "3",
         "tag": "Arrow_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "CannonHE_Medium",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JapanMaidenBow",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Arrow_Light",
-       "^Projectile_Arrow_Light",
-       "^Effect_Arrow_Light"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1500",
       "pricing": true,
       "range": "7500",
@@ -1884,6 +1892,14 @@
        "JapanMaidenBow"
       ],
       "warheads": [
+       "^Warhead_Arrow_Light"
+      ],
+      "weapon": "JapanMaidenBowEnergized",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "MediumFlameWeapon",
@@ -1970,23 +1986,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JapanMaidenBowEnergized",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^MediumMissile",
-       "^TeslaWeapon",
-       "^Warhead_Arrow_Light",
-       "^Projectile_Arrow_Light",
-       "^Effect_Arrow_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1500",
       "pricing": false,
       "range": "7500",
@@ -2002,104 +2003,10 @@
        "JapanMaidenBow"
       ],
       "warheads": [
-       {
-        "damage": "6000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "Arrow_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "CannonHE_Medium",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Arrow_Light"
       ],
       "weapon": "JapanMaidenBowEnergized",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^MediumMissile",
-       "^TeslaWeapon",
-       "^Warhead_Arrow_Light",
-       "^Projectile_Arrow_Light",
-       "^Effect_Arrow_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2147,8 +2054,40 @@
      {
       "burst": "3",
       "burstdelays": "10",
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "30",
@@ -2158,59 +2097,14 @@
        "^MagicWeapon",
        "^EMPDamage"
       ],
-      "warheads": [
-       {
-        "damage": "10000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "Hakureiring",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^EMPDamage"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "burst": "1",
       "burstdelays": "10",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "6666",
-      "reloaddelay": "100",
-      "slot": "Armament@Special",
-      "versus_templates": [
-       "Hakureiring"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "120000",
         "tag": "TeslaWeapon",
@@ -2242,20 +2136,57 @@
         "type": "SpreadDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6666",
+      "reloaddelay": "100",
+      "slot": "Armament@Special",
+      "versus_templates": [
+       "Hakureiring"
+      ],
+      "warheads": [],
       "weapon": "Hakureiring2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^EMPDamage"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
       "burst": "3",
       "burstdelays": "10",
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6666",
       "reloaddelay": "30",
@@ -2265,60 +2196,15 @@
        "^MagicWeapon",
        "^EMPDamage"
       ],
-      "warheads": [
-       {
-        "damage": "10000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "Hakureiring",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^EMPDamage"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
       "burst": "1",
       "burstdelays": "10",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": false,
-      "range": "6666",
-      "reloaddelay": "100",
-      "slot": "Armament@GARRISONEDSpecial",
-      "versus_templates": [
-       "Hakureiring"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "120000",
         "tag": "TeslaWeapon",
@@ -2350,13 +2236,18 @@
         "type": "SpreadDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "6666",
+      "reloaddelay": "100",
+      "slot": "Armament@GARRISONEDSpecial",
+      "versus_templates": [
+       "Hakureiring"
+      ],
+      "warheads": [],
       "weapon": "Hakureiring2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^EMPDamage"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2407,6 +2298,43 @@
    "japan_imperialscoutsman": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -2419,7 +2347,13 @@
        "^Chaingun",
        "^SmallArms"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "japan_imperialscoutsman_rifle",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "RailgunWeapon",
@@ -2456,16 +2390,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "japan_imperialscoutsman_rifle",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RailgunWeapon",
-       "^Chaingun",
-       "^SmallArms"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -2478,7 +2402,17 @@
        "^Chaingun",
        "^SmallArms"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "japan_imperialscoutsman_rifle",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "4000",
         "tag": "RailgunWeapon",
@@ -2515,15 +2449,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "japan_imperialscoutsman_rifle",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RailgunWeapon",
-       "^Chaingun",
-       "^SmallArms"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -2537,6 +2462,14 @@
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "japan_imperialscoutsman_rifle_waveforce",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Railgun_Heavy_Percentage",
@@ -2578,18 +2511,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "japan_imperialscoutsman_rifle_waveforce",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^WaveforceBulletWarhead",
-       "^RailgunWeapon",
-       "^Chaingun",
-       "^SmallArms",
-       "^WaveforceBulletProjectile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -2603,56 +2524,10 @@
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "japan_imperialscoutsman_rifle_waveforce",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^WaveforceBulletWarhead",
-       "^RailgunWeapon",
-       "^Chaingun",
-       "^SmallArms",
-       "^WaveforceBulletProjectile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2703,6 +2578,13 @@
      {
       "burst": "15",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Flame_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -2716,24 +2598,22 @@
        "^Effect_Flame_Light"
       ],
       "warheads": [
+       "^Warhead_Flame_Light"
+      ],
+      "weapon": "Flamer",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "15",
+      "burstdelays": "1",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Flamer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "15",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -2747,25 +2627,48 @@
        "^Effect_Flame_Light"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flame_Light"
       ],
       "weapon": "Flamer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "15",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3603",
       "reloaddelay": "35",
@@ -2775,7 +2678,15 @@
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "PlasmaFlamer",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "15",
+      "burstdelays": "1",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MediumFlameWeapon",
@@ -2807,19 +2718,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PlasmaFlamer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "15",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "3603",
       "reloaddelay": "35",
@@ -2829,44 +2729,9 @@
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "PlasmaFlamer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2912,22 +2777,7 @@
      {
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "920",
-      "pricing": true,
-      "range": "4600",
-      "reloaddelay": "34",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^TeslaWeapon",
-       "^HeavyMissile",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^Grenade",
-       "^ArrowWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TeslaWeapon",
@@ -3009,16 +2859,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketAngelRockets",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "920",
+      "pricing": true,
+      "range": "4600",
+      "reloaddelay": "34",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^TeslaWeapon",
        "^HeavyMissile",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
        "^Grenade",
        "^ArrowWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "RocketAngelRockets",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3071,6 +2929,13 @@
    "japan_samurai": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3084,22 +2949,20 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "SamuraiBlade",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "5",
         "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SamuraiBlade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3113,23 +2976,46 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "SamuraiBlade",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
        {
         "damage": "5",
-        "tag": "Melee_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "SwordWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SamuraiBlade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1637",
       "reloaddelay": "20",
@@ -3139,7 +3025,13 @@
        "^TeslaWeapon",
        "^SwordWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "SamuraiBladeCharged",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "TeslaWeapon",
@@ -3171,17 +3063,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SamuraiBladeCharged",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^SwordWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "1637",
       "reloaddelay": "20",
@@ -3191,44 +3074,9 @@
        "^TeslaWeapon",
        "^SwordWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "10000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "SwordWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "SamuraiBladeCharged",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^SwordWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3273,6 +3121,43 @@
    "japan_tankbuster": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3284,7 +3169,13 @@
        "^MediumCannon",
        "^RailgunWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TankBusterBeamCannon",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "TankDestroyerCannon",
@@ -3321,16 +3212,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TankBusterBeamCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^RailgunWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -3342,52 +3223,53 @@
        "^MediumCannon",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "8000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "TankBusterBeamCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^RailgunWeapon"
-      ]
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3400,7 +3282,13 @@
        "^MediumChemicalWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TankBusterBeamCannonCharged",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "LightFlameWeapon",
@@ -3442,16 +3330,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TankBusterBeamCannonCharged",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyCannon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -3464,55 +3342,9 @@
        "^MediumChemicalWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
-       {
-        "damage": "8000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "TankBusterBeamCannonCharged",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyCannon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4056,6 +3888,93 @@
    "japan_armoredcar": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -4073,7 +3992,12 @@
        "^FlakWeapon",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "ArmoredCarMG",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "ArrowWeapon",
@@ -4160,20 +4084,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ArmoredCarMG",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^ArrowWeapon",
-       "^TankDestroyerCannon",
-       "^SmallArms",
-       "^Grenade",
-       "^MediumCannon",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^Chaingun"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -4184,7 +4094,27 @@
       "versus_templates": [
        "ArmoredCarMG"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "ArmoredCarMG_AA",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "ArrowWeapon",
@@ -4271,22 +4201,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ArmoredCarMG_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^ArrowWeapon",
-       "^TankDestroyerCannon",
-       "^SmallArms",
-       "^Grenade",
-       "^MediumCannon",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^Chaingun"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5012",
       "reloaddelay": "8",
@@ -4299,6 +4215,13 @@
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "ArmoredCarMGWaveforce",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "HeavyAAWeapon",
@@ -4400,25 +4323,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ArmoredCarMGWaveforce",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyAAWeapon",
-       "^WaveforceBulletWarhead",
-       "^ArrowWeapon",
-       "^TankDestroyerCannon",
-       "^SmallArms",
-       "^Grenade",
-       "^MediumCannon",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^WaveforceBulletProjectile"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7518",
       "reloaddelay": "8",
@@ -4431,122 +4337,10 @@
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
-       {
-        "damage": "1000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "ArmoredCarMGAAWaveforce",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyAAWeapon",
-       "^WaveforceBulletWarhead",
-       "^ArrowWeapon",
-       "^TankDestroyerCannon",
-       "^SmallArms",
-       "^Grenade",
-       "^MediumCannon",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^WaveforceBulletProjectile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4602,20 +4396,7 @@
      {
       "burst": "5",
       "burstdelays": "6",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "2705",
-      "pricing": true,
-      "range": "13515",
-      "reloaddelay": "176",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Grenade",
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^ArrowWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "Grenade",
@@ -4672,33 +4453,27 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BallistaMultiShot",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^ArrowWeapon"
-      ]
-     },
-     {
-      "burst": "5",
-      "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "2705",
       "pricing": true,
       "range": "13515",
       "reloaddelay": "176",
-      "requires": "japan_upgrade_energizedarrows",
-      "slot": "Armament@Upgrade",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
+       "^Grenade",
+       "^LightFlameWeapon",
+       "^LightChemicalWeapon",
        "^ArrowWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "BallistaMultiShot",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "5",
+      "burstdelays": "6",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "TeslaWeapon",
@@ -4755,14 +4530,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BallistaMultiShotEnergized",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "2705",
+      "pricing": true,
+      "range": "13515",
+      "reloaddelay": "176",
+      "requires": "japan_upgrade_energizedarrows",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^TeslaWeapon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
        "^ArrowWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "BallistaMultiShotEnergized",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4816,18 +4600,7 @@
    "japan_chihaheavytank": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "5692",
-      "reloaddelay": "56",
-      "requires": "!japan_upgrade_advancedplasmaweapons",
-      "slot": "Armament",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^MediumCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "HeavyCannon",
@@ -4849,27 +4622,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Type97Cannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^MediumCannon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "5692",
       "reloaddelay": "56",
-      "requires": "japan_upgrade_advancedplasmaweapons",
-      "slot": "Armament@Upgrade",
+      "requires": "!japan_upgrade_advancedplasmaweapons",
+      "slot": "Armament",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^RailgunWeapon",
-       "^HeavyCannon"
+       "^HeavyCannon",
+       "^MediumCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Type97Cannon",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -4911,13 +4680,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Type97PlasmaCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5692",
+      "reloaddelay": "56",
+      "requires": "japan_upgrade_advancedplasmaweapons",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^TeslaWeapon",
        "^RailgunWeapon",
        "^HeavyCannon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "Type97PlasmaCannon",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5360,16 +5137,7 @@
      {
       "burst": "3",
       "burstdelays": "10",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "5394",
-      "reloaddelay": "30",
-      "slot": "Armament@MAIN",
-      "versus_templates": [
-       "Hakureiring"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "TeslaWeapon",
@@ -5401,27 +5169,23 @@
         "type": "SpreadDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5394",
+      "reloaddelay": "30",
+      "slot": "Armament@MAIN",
+      "versus_templates": [
+       "Hakureiring"
+      ],
+      "warheads": [],
       "weapon": "OIHakureiring",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^EMPDamage"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "burst": "1",
       "burstdelays": "10",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "5394",
-      "reloaddelay": "100",
-      "slot": "Armament@AntiEpic",
-      "versus_templates": [
-       "Hakureiring2"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "120000",
         "tag": "TeslaWeapon",
@@ -5453,15 +5217,27 @@
         "type": "SpreadDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5394",
+      "reloaddelay": "100",
+      "slot": "Armament@AntiEpic",
+      "versus_templates": [
+       "Hakureiring2"
+      ],
+      "warheads": [],
       "weapon": "OIHakureiring2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^EMPDamage"
-      ]
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5475,21 +5251,19 @@
        "^Effect_Cannon_Medium"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "OISmallCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OISmallCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5503,21 +5277,19 @@
        "^Effect_Cannon_Medium"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "OISmallCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OISmallCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5531,21 +5303,69 @@
        "^Effect_Cannon_Medium"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "OISmallCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "4",
-        "tag": "CannonHE_Medium_Percentage",
+        "damage": "2000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OISmallCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -5559,7 +5379,12 @@
        "^RailgunWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "OISmallPlasmaCannon",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyChemicalWeapon",
@@ -5616,16 +5441,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyChemicalWeapon",
-       "^TeslaWeapon",
-       "^RailgunWeapon",
-       "^HeavyCannon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -5639,7 +5454,12 @@
        "^RailgunWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "OISmallPlasmaCannon",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyChemicalWeapon",
@@ -5696,16 +5516,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyChemicalWeapon",
-       "^TeslaWeapon",
-       "^RailgunWeapon",
-       "^HeavyCannon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -5719,75 +5529,20 @@
        "^RailgunWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyChemicalWeapon",
-       "^TeslaWeapon",
-       "^RailgunWeapon",
-       "^HeavyCannon"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "burst": "20",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Flame_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5801,24 +5556,22 @@
        "^Effect_Flame_Medium"
       ],
       "warheads": [
+       "^Warhead_Flame_Medium"
+      ],
+      "weapon": "OIFlamer",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "20",
+      "burstdelays": "1",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OIFlamer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Medium",
-       "^Projectile_Flame_Medium",
-       "^Effect_Flame_Medium"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "20",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5832,25 +5585,48 @@
        "^Effect_Flame_Medium"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Flame_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flame_Medium"
       ],
       "weapon": "OIFlamer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Medium",
-       "^Projectile_Flame_Medium",
-       "^Effect_Flame_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "20",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -5860,7 +5636,15 @@
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "OIPlasmaFlamer",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "20",
+      "burstdelays": "1",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyChemicalWeapon",
@@ -5892,19 +5676,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OIPlasmaFlamer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "20",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -5914,44 +5687,9 @@
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "OIPlasmaFlamer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6006,6 +5744,13 @@
    "japan_grenadebuggy": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "30",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -6019,34 +5764,13 @@
        "^Effect_Explosion_Light"
       ],
       "warheads": [
-       {
-        "damage": "30",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "BuggyGrenade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
-      ]
+      "weapon_class_source": "template"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5184",
-      "reloaddelay": "60",
-      "requires": "japan_upgrade_advancedplasmaweapons",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^HeavyBomb",
-       "^ShrapnelWeapon",
-       "BuggyGrenade"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "HeavyBomb",
@@ -6093,15 +5817,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BuggyPlasmaGrenade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "5184",
+      "reloaddelay": "60",
+      "requires": "japan_upgrade_advancedplasmaweapons",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^HeavyBomb",
        "^ShrapnelWeapon",
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
-      ]
+       "BuggyGrenade"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "BuggyPlasmaGrenade",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6152,6 +5884,13 @@
      {
       "burst": "30",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Flame_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -6165,35 +5904,15 @@
        "^Effect_Flame_Medium"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Flame_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flame_Medium"
       ],
       "weapon": "HeavyFlamer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Medium",
-       "^Projectile_Flame_Medium",
-       "^Effect_Flame_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "30",
       "burstdelays": "1",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "6000",
-      "reloaddelay": "60",
-      "requires": "japan_upgrade_advancedplasmaweapons",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyChemicalWeapon",
@@ -6225,12 +5944,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HeavyPlasmaFlamer",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "60",
+      "requires": "japan_upgrade_advancedplasmaweapons",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "HeavyPlasmaFlamer",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6280,22 +6007,7 @@
    "japan_hovercrafttransport": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "4876",
-      "reloaddelay": "25",
-      "requires": "!japan_upgrade_advancedplasmaweapons",
-      "slot": "Armament@cannon",
-      "versus_templates": [
-       "^SmallArms",
-       "^Chaingun",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -6367,32 +6079,27 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HovercraftCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "4876",
+      "reloaddelay": "25",
+      "requires": "!japan_upgrade_advancedplasmaweapons",
+      "slot": "Armament@cannon",
+      "versus_templates": [
        "^SmallArms",
        "^Chaingun",
        "^Grenade",
        "^ShrapnelWeapon",
        "^TankDestroyerCannon",
        "^MediumCannon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "HovercraftCannon",
+      "weapon_class_source": "none"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "4876",
-      "reloaddelay": "25",
-      "requires": "japan_upgrade_advancedplasmaweapons",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^TeslaWeapon",
-       "^HeavyBomb",
-       "^HeavyCannon",
-       "HovercraftCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TeslaWeapon",
@@ -6539,33 +6246,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HovercraftPlasmaCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "4876",
+      "reloaddelay": "25",
+      "requires": "japan_upgrade_advancedplasmaweapons",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^TeslaWeapon",
        "^HeavyBomb",
        "^HeavyCannon",
-       "^SmallArms",
-       "^Chaingun",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon"
-      ]
+       "HovercraftCannon"
+      ],
+      "warheads": [],
+      "weapon": "HovercraftPlasmaCannon",
+      "weapon_class_source": "none"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "4876",
-      "reloaddelay": "8",
-      "requires": "!japan_upgrade_waveforcebullets",
-      "slot": "Armament@flak",
-      "versus_templates": [
-       "^SmallArms",
-       "^FlakWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -6587,16 +6286,51 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JapaneseHovercraftFlak",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "4876",
+      "reloaddelay": "8",
+      "requires": "!japan_upgrade_waveforcebullets",
+      "slot": "Armament@flak",
+      "versus_templates": [
        "^SmallArms",
        "^FlakWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "JapaneseHovercraftFlak",
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "4876",
       "reloaddelay": "8",
@@ -6608,6 +6342,50 @@
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "JapaneseHovercraftFlakWaveforce",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "7314",
+      "reloaddelay": "8",
+      "requires": "!japan_upgrade_waveforcebullets",
+      "slot": "Armament@AA",
+      "versus_templates": [
+       "JapaneseHovercraftFlak"
+      ],
+      "warheads": [],
+      "weapon": "JapaneseHovercraftFlakAA",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Railgun_Heavy_Percentage",
@@ -6634,58 +6412,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JapaneseHovercraftFlakWaveforce",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^WaveforceBulletWarhead",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^WaveforceBulletProjectile"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "7314",
-      "reloaddelay": "8",
-      "requires": "!japan_upgrade_waveforcebullets",
-      "slot": "Armament@AA",
-      "versus_templates": [
-       "JapaneseHovercraftFlak"
-      ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "JapaneseHovercraftFlakAA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^FlakWeapon"
-      ]
-     },
-     {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7314",
       "reloaddelay": "8",
@@ -6697,40 +6425,10 @@
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "JapaneseHovercraftFlakAAkWaveforce",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^WaveforceBulletWarhead",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^WaveforceBulletProjectile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6785,6 +6483,13 @@
    "japan_igomediumtank": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -6798,34 +6503,13 @@
        "^Effect_Cannon_Medium"
       ],
       "warheads": [
-       {
-        "damage": "5",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Type89Cannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5243",
-      "reloaddelay": "52",
-      "requires": "japan_upgrade_advancedplasmaweapons",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^TeslaWeapon",
-       "^TankDestroyerCannon",
-       "^HeavyCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -6872,13 +6556,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Type89PlasmaCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5243",
+      "reloaddelay": "52",
+      "requires": "japan_upgrade_advancedplasmaweapons",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^TeslaWeapon",
        "^TankDestroyerCannon",
        "^HeavyCannon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "Type89PlasmaCannon",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -7022,19 +6714,7 @@
    "japan_nanodronebuggy": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1555",
-      "pricing": true,
-      "range": "7777",
-      "reloaddelay": "77",
-      "slot": "Armament",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^Grenade"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "7777",
         "tag": "HeavyCannon",
@@ -7076,13 +6756,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NanoArtilleryAG",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "1555",
+      "pricing": true,
+      "range": "7777",
+      "reloaddelay": "77",
+      "slot": "Armament",
+      "versus_templates": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
        "^Grenade"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "NanoArtilleryAG",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -7136,6 +6824,13 @@
    "japan_oitank": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "12",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -7149,34 +6844,13 @@
        "^Effect_Cannon_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "12",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "OIBigCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_Cannon_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5394",
-      "reloaddelay": "55",
-      "requires": "japan_upgrade_advancedplasmaweapons",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^TeslaWeapon",
-       "^RailgunWeapon",
-       "^HeavyCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "TeslaWeapon",
@@ -7218,15 +6892,30 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OIBigPlasmaCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5394",
+      "reloaddelay": "55",
+      "requires": "japan_upgrade_advancedplasmaweapons",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^TeslaWeapon",
        "^RailgunWeapon",
        "^HeavyCannon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "OIBigPlasmaCannon",
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7240,21 +6929,19 @@
        "^Effect_Cannon_Medium"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "OISmallCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OISmallCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7268,21 +6955,19 @@
        "^Effect_Cannon_Medium"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "OISmallCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OISmallCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7296,21 +6981,69 @@
        "^Effect_Cannon_Medium"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "OISmallCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "4",
-        "tag": "CannonHE_Medium_Percentage",
+        "damage": "2000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OISmallCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -7324,7 +7057,12 @@
        "^RailgunWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "OISmallPlasmaCannon",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyChemicalWeapon",
@@ -7381,16 +7119,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyChemicalWeapon",
-       "^TeslaWeapon",
-       "^RailgunWeapon",
-       "^HeavyCannon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -7404,7 +7132,12 @@
        "^RailgunWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "OISmallPlasmaCannon",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyChemicalWeapon",
@@ -7461,16 +7194,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyChemicalWeapon",
-       "^TeslaWeapon",
-       "^RailgunWeapon",
-       "^HeavyCannon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -7484,75 +7207,20 @@
        "^RailgunWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyChemicalWeapon",
-       "^TeslaWeapon",
-       "^RailgunWeapon",
-       "^HeavyCannon"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "burst": "20",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Flame_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7566,24 +7234,22 @@
        "^Effect_Flame_Medium"
       ],
       "warheads": [
+       "^Warhead_Flame_Medium"
+      ],
+      "weapon": "OIFlamer",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "20",
+      "burstdelays": "1",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OIFlamer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Medium",
-       "^Projectile_Flame_Medium",
-       "^Effect_Flame_Medium"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "20",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7597,25 +7263,48 @@
        "^Effect_Flame_Medium"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Flame_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flame_Medium"
       ],
       "weapon": "OIFlamer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Medium",
-       "^Projectile_Flame_Medium",
-       "^Effect_Flame_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "20",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -7625,7 +7314,15 @@
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "OIPlasmaFlamer",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "20",
+      "burstdelays": "1",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyChemicalWeapon",
@@ -7657,19 +7354,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OIPlasmaFlamer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "20",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -7679,44 +7365,9 @@
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "OIPlasmaFlamer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -7767,6 +7418,13 @@
      {
       "burst": "5",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -7780,36 +7438,15 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "M60mgJapan",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "5",
       "burstdelays": "5",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": true,
-      "range": "5004",
-      "reloaddelay": "15",
-      "requires": "japan_upgrade_waveforcebullets",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^WaveforceBulletWarhead",
-       "M60mgJapan",
-       "^WaveforceBulletProjectile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Railgun_Heavy_Percentage",
@@ -7821,15 +7458,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M60mgWaveforce",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5004",
+      "reloaddelay": "15",
+      "requires": "japan_upgrade_waveforcebullets",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^WaveforceBulletWarhead",
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light",
+       "M60mgJapan",
        "^WaveforceBulletProjectile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "M60mgWaveforce",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7878,6 +7524,13 @@
    "japan_shogunexecutioner": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7890,19 +7543,10 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
-       {
-        "damage": "300",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "ExecutionerSword",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7956,21 +7600,7 @@
    "japan_shrineminitank": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6370",
-      "reloaddelay": "50",
-      "slot": "Armament",
-      "versus_templates": [
-       "^TeslaWeapon",
-       "^RailgunWeapon",
-       "^MagicWeapon",
-       "^MediumCannon",
-       "^MediumChemicalWeapon",
-       "^MediumFlameWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -8057,16 +7687,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ShrineTankCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6370",
+      "reloaddelay": "50",
+      "slot": "Armament",
+      "versus_templates": [
        "^TeslaWeapon",
        "^RailgunWeapon",
        "^MagicWeapon",
        "^MediumCannon",
        "^MediumChemicalWeapon",
        "^MediumFlameWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "ShrineTankCannon",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -8114,6 +7751,7 @@
    "japan_waveforceartillery": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -8124,8 +7762,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "WaveArtilleryShell",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -8180,8 +7817,35 @@
    "japan_waveforcetank": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9343",
       "reloaddelay": "60",
@@ -8191,7 +7855,12 @@
        "^HeavyMissile",
        "^RailgunWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "WaveforceCannon",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "HeavyMissile",
@@ -8218,16 +7887,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "WaveforceCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyMissile",
-       "^RailgunWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9343",
       "reloaddelay": "120",
@@ -8237,53 +7898,12 @@
        "^HeavyMissile",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "10000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "WaveforceCannonChargedLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyMissile",
-       "^RailgunWeapon"
-      ]
+      "weapon_class_source": "none"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "9343",
-      "reloaddelay": "120",
-      "requires": "japan_upgrade_advancedplasmaweapons",
-      "slot": "Armament@Upgrade2",
-      "versus_templates": [
-       "^TeslaWeapon",
-       "^HeavyCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "TeslaWeapon",
@@ -8310,26 +7930,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "WaveforceCannonDistortedBeam1",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^HeavyCannon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9343",
       "reloaddelay": "120",
       "requires": "japan_upgrade_advancedplasmaweapons",
-      "slot": "Armament@Upgrade3",
+      "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon"
+       "^TeslaWeapon",
+       "^HeavyCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "WaveforceCannonDistortedBeam1",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "HeavyChemicalWeapon",
@@ -8361,12 +7978,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "WaveforceCannonDistortedBeam2",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "9343",
+      "reloaddelay": "120",
+      "requires": "japan_upgrade_advancedplasmaweapons",
+      "slot": "Armament@Upgrade3",
+      "versus_templates": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "WaveforceCannonDistortedBeam2",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {

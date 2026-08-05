@@ -238,8 +238,15 @@
    "combat_tank.atreides": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
@@ -248,17 +255,10 @@
        "^D2K_Cannon"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "80mm_A",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^D2K_Cannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

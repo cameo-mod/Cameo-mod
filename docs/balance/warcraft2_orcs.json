@@ -10,6 +10,198 @@
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -33,7 +225,15 @@
        "^Chaingun",
        "^FlakWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "wc2dragonFireVisible",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "3",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -225,30 +425,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2dragonFireVisible",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyFlameWeapon",
-       "^HeavyChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^HeavyCannon",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^MediumMissile",
-       "^Chaingun",
-       "^FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "3",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -258,217 +434,9 @@
       "versus_templates": [
        "wc2dragonFireVisible"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "wc2dragonFireExplosion",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyFlameWeapon",
-       "^HeavyChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^HeavyCannon",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^MediumMissile",
-       "^Chaingun",
-       "^FlakWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1126,19 +1094,7 @@
    "wc2_orcs_cannontower": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "8750",
-      "reloaddelay": "34",
-      "requires": "guard",
-      "slot": "Armament@guard",
-      "versus_templates": [
-       "^RailgunWeapon",
-       "^Chaingun",
-       "^ArrowWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "RailgunWeapon",
@@ -1175,42 +1131,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2_tower_arrow",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8750",
+      "reloaddelay": "34",
+      "requires": "guard",
+      "slot": "Armament@guard",
+      "versus_templates": [
        "^RailgunWeapon",
        "^Chaingun",
        "^ArrowWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "wc2_tower_arrow",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "cannon",
-      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
-      "minrange": "2100",
-      "pricing": true,
-      "range": "10500",
-      "reloaddelay": "90",
-      "requires": "cannon",
-      "slot": "Armament@cannon",
-      "versus_templates": [
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyFlameWeapon",
-       "^HeavyChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^HeavyCannon",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^MediumMissile",
-       "^Chaingun",
-       "^FlakWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "LightFlameWeapon",
@@ -1402,9 +1341,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2cannontowerFire",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "minrange": "2100",
+      "pricing": true,
+      "range": "10500",
+      "reloaddelay": "90",
+      "requires": "cannon",
+      "slot": "Armament@cannon",
+      "versus_templates": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
        "^MediumFlameWeapon",
@@ -1420,7 +1365,10 @@
        "^MediumMissile",
        "^Chaingun",
        "^FlakWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "wc2cannontowerFire",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1461,19 +1409,7 @@
    "wc2_orcs_guardtower": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "8750",
-      "reloaddelay": "34",
-      "requires": "guard",
-      "slot": "Armament@guard",
-      "versus_templates": [
-       "^RailgunWeapon",
-       "^Chaingun",
-       "^ArrowWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "RailgunWeapon",
@@ -1510,42 +1446,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2_tower_arrow",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8750",
+      "reloaddelay": "34",
+      "requires": "guard",
+      "slot": "Armament@guard",
+      "versus_templates": [
        "^RailgunWeapon",
        "^Chaingun",
        "^ArrowWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "wc2_tower_arrow",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "cannon",
-      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
-      "minrange": "2100",
-      "pricing": true,
-      "range": "10500",
-      "reloaddelay": "90",
-      "requires": "cannon",
-      "slot": "Armament@cannon",
-      "versus_templates": [
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyFlameWeapon",
-       "^HeavyChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^HeavyCannon",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^MediumMissile",
-       "^Chaingun",
-       "^FlakWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "LightFlameWeapon",
@@ -1737,9 +1656,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2cannontowerFire",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "minrange": "2100",
+      "pricing": true,
+      "range": "10500",
+      "reloaddelay": "90",
+      "requires": "cannon",
+      "slot": "Armament@cannon",
+      "versus_templates": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
        "^MediumFlameWeapon",
@@ -1755,7 +1680,10 @@
        "^MediumMissile",
        "^Chaingun",
        "^FlakWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "wc2cannontowerFire",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1796,19 +1724,7 @@
    "wc2_orcs_orcwatchtower": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "8750",
-      "reloaddelay": "34",
-      "requires": "guard",
-      "slot": "Armament@guard",
-      "versus_templates": [
-       "^RailgunWeapon",
-       "^Chaingun",
-       "^ArrowWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "RailgunWeapon",
@@ -1845,42 +1761,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2_tower_arrow",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8750",
+      "reloaddelay": "34",
+      "requires": "guard",
+      "slot": "Armament@guard",
+      "versus_templates": [
        "^RailgunWeapon",
        "^Chaingun",
        "^ArrowWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "wc2_tower_arrow",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "cannon",
-      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
-      "minrange": "2100",
-      "pricing": true,
-      "range": "10500",
-      "reloaddelay": "90",
-      "requires": "cannon",
-      "slot": "Armament@cannon",
-      "versus_templates": [
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyFlameWeapon",
-       "^HeavyChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^HeavyCannon",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^MediumMissile",
-       "^Chaingun",
-       "^FlakWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "LightFlameWeapon",
@@ -2072,9 +1971,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2cannontowerFire",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "minrange": "2100",
+      "pricing": true,
+      "range": "10500",
+      "reloaddelay": "90",
+      "requires": "cannon",
+      "slot": "Armament@cannon",
+      "versus_templates": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
        "^MediumFlameWeapon",
@@ -2090,7 +1995,10 @@
        "^MediumMissile",
        "^Chaingun",
        "^FlakWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "wc2cannontowerFire",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2164,6 +2072,23 @@
    "wc2_orcs_deathknight": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": 1.375,
       "pricing": true,
@@ -2178,6 +2103,15 @@
        "wc2mageFire"
       ],
       "warheads": [
+       "^Warhead_Flame_Heavy",
+       "^Warhead_TeslaCharged_Super"
+      ],
+      "weapon": "wc2deathknightFire",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "Flame_Heavy_Percentage",
@@ -2194,19 +2128,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2deathknightFire",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Heavy",
-       "^Projectile_Flame_Heavy",
-       "^Effect_Flame_Heavy",
-       "^Warhead_TeslaCharged_Super",
-       "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": 1.375,
       "pricing": false,
@@ -2220,6 +2141,15 @@
        "wc2mageFire"
       ],
       "warheads": [
+       "^Warhead_Flame_Heavy",
+       "^Warhead_TeslaCharged_Super"
+      ],
+      "weapon": "wc2deathknightFire",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deathcoil",
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "Flame_Heavy_Percentage",
@@ -2236,19 +2166,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2deathknightFire",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Heavy",
-       "^Projectile_Flame_Heavy",
-       "^Effect_Flame_Heavy",
-       "^Warhead_TeslaCharged_Super",
-       "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
-      ]
-     },
-     {
-      "armament_name": "deathcoil",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": 1.375,
       "pricing": true,
@@ -2260,6 +2177,14 @@
        "wc2deathknightFire"
       ],
       "warheads": [
+       "^Warhead_Flame_Heavy",
+       "^Warhead_TeslaCharged_Super"
+      ],
+      "weapon": "wc2deathknightDeathCoil",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "Flame_Heavy_Percentage",
@@ -2276,18 +2201,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2deathknightDeathCoil",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Heavy",
-       "^Projectile_Flame_Heavy",
-       "^Effect_Flame_Heavy",
-       "^Warhead_TeslaCharged_Super",
-       "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": 1.375,
       "pricing": true,
@@ -2299,6 +2212,14 @@
        "wc2deathknightDeathCoil"
       ],
       "warheads": [
+       "^Warhead_Flame_Heavy",
+       "^Warhead_TeslaCharged_Super"
+      ],
+      "weapon": "wc2deathknightDeathCoilScatter_Left",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "Flame_Heavy_Percentage",
@@ -2315,18 +2236,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2deathknightDeathCoilScatter_Left",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Heavy",
-       "^Projectile_Flame_Heavy",
-       "^Effect_Flame_Heavy",
-       "^Warhead_TeslaCharged_Super",
-       "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": 1.375,
       "pricing": true,
@@ -2338,35 +2247,21 @@
        "wc2deathknightDeathCoilScatter_Left"
       ],
       "warheads": [
-       {
-        "damage": "4",
-        "tag": "Flame_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaCharged_Super_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TeslaChargedExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_Flame_Heavy",
+       "^Warhead_TeslaCharged_Super"
       ],
       "weapon": "wc2deathknightDeathCoilScatter_Right",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Heavy",
-       "^Projectile_Flame_Heavy",
-       "^Effect_Flame_Heavy",
-       "^Warhead_TeslaCharged_Super",
-       "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "haste",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2375,19 +2270,19 @@
       "requires": "FSD_cond_2 && deathknighthaste_upg",
       "slot": "Armament@HASTE",
       "versus_templates": [],
-      "warheads": [
-       {
-        "damage": "1",
-        "tag": "1Dam",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "wc2deathknightHaste",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "deathanddecay",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "1Dam_impact",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2398,19 +2293,19 @@
       "versus_templates": [
        "wc2mageBlizzard"
       ],
-      "warheads": [
-       {
-        "damage": "1",
-        "tag": "1Dam_impact",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "wc2deathknightDeathAndDecay",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "raisedead",
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2419,16 +2314,9 @@
       "requires": "FSD_cond_4 && deathknightraisedead_upg",
       "slot": "Armament@RAISEDEAD",
       "versus_templates": [],
-      "warheads": [
-       {
-        "damage": "0",
-        "tag": "1Dam",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "wc2deathknightRaiseDead",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2472,6 +2360,13 @@
    "wc2_orcs_grunt": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -2484,19 +2379,10 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
-       {
-        "damage": "8",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "wc2gruntslice",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2546,6 +2432,73 @@
    "wc2_orcs_kodobeast": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2555,7 +2508,13 @@
       "versus_templates": [
        "wc2arrowFire"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "wc2axeFire",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "FlakWeapon",
@@ -2622,19 +2581,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2axeFire",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^FlakWeapon",
-       "^Chaingun",
-       "^MediumCannon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^ArrowWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2644,83 +2590,9 @@
       "versus_templates": [
        "wc2arrowFire"
       ],
-      "warheads": [
-       {
-        "damage": "4000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^FlakWeapon",
-       "^Chaingun",
-       "^MediumCannon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^ArrowWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2768,6 +2640,13 @@
    "wc2_orcs_ogre": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "15",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -2781,22 +2660,20 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
-       {
-        "damage": "15",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "wc2ogrepunch",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "eyeofkilrogg",
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2805,19 +2682,19 @@
       "requires": "FSD_cond_2",
       "slot": "Armament@EYEOFKILROGG",
       "versus_templates": [],
-      "warheads": [
+      "warheads": [],
+      "weapon": "wc2ogremageEyeOfKilrogg",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "bloodlust",
+      "damage_warheads": [
        {
-        "damage": "0",
+        "damage": "1",
         "tag": "1Dam",
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2ogremageEyeOfKilrogg",
-      "weapon_class_source": "none",
-      "weapon_types": []
-     },
-     {
-      "armament_name": "bloodlust",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2826,19 +2703,19 @@
       "requires": "FSD_cond_3 && ogremagebloodlust_upg",
       "slot": "Armament@BLOODLUST",
       "versus_templates": [],
-      "warheads": [
+      "warheads": [],
+      "weapon": "wc2ogremageBloodlust",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "runes",
+      "damage_warheads": [
        {
-        "damage": "1",
+        "damage": "0",
         "tag": "1Dam",
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2ogremageBloodlust",
-      "weapon_class_source": "none",
-      "weapon_types": []
-     },
-     {
-      "armament_name": "runes",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2847,16 +2724,9 @@
       "requires": "FSD_cond_4 && ogremagerunes_upg",
       "slot": "Armament@RUNES",
       "versus_templates": [],
-      "warheads": [
-       {
-        "damage": "0",
-        "tag": "1Dam",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "wc2ogremageRunes",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2905,6 +2775,73 @@
    "wc2_orcs_trollaxethrower": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2914,7 +2851,13 @@
       "versus_templates": [
        "wc2arrowFire"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "wc2axeFire",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "FlakWeapon",
@@ -2981,19 +2924,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2axeFire",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^FlakWeapon",
-       "^Chaingun",
-       "^MediumCannon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^ArrowWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -3003,83 +2933,9 @@
       "versus_templates": [
        "wc2arrowFire"
       ],
-      "warheads": [
-       {
-        "damage": "4000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^FlakWeapon",
-       "^Chaingun",
-       "^MediumCannon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^ArrowWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3124,6 +2980,73 @@
    "wc2_orcs_trollberserker": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3133,7 +3056,13 @@
       "versus_templates": [
        "wc2arrowFire"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "wc2axeFire",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "FlakWeapon",
@@ -3200,19 +3129,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2axeFire",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^FlakWeapon",
-       "^Chaingun",
-       "^MediumCannon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^ArrowWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -3222,83 +3138,9 @@
       "versus_templates": [
        "wc2arrowFire"
       ],
-      "warheads": [
-       {
-        "damage": "4000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^FlakWeapon",
-       "^Chaingun",
-       "^MediumCannon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^ArrowWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3344,6 +3186,108 @@
    "wc2_orcs_trollheadhunter": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3353,7 +3297,13 @@
       "versus_templates": [
        "wc2highArrowFire"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "wc2axeFirespear",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "LaserWeapon",
@@ -3455,22 +3405,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2axeFirespear",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LaserWeapon",
-       "^HeavyMissile",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^MediumCannon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^ArrowWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -3480,121 +3414,9 @@
       "versus_templates": [
        "wc2highArrowFire"
       ],
-      "warheads": [
-       {
-        "damage": "1000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "wc2axeFirespear",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LaserWeapon",
-       "^HeavyMissile",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^MediumCannon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^ArrowWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3638,6 +3460,13 @@
    "wc2_orcs_warcraft3grunt": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "12",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3650,19 +3479,10 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
-       {
-        "damage": "12",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "wc2gruntslice2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4367,20 +4187,7 @@
    "wc2_orcs_catapult": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "2680",
-      "pricing": true,
-      "range": "13400",
-      "reloaddelay": "240",
-      "slot": "Armament",
-      "versus_templates": [
-       "^Grenade",
-       "^MediumFlameWeapon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "30000",
         "tag": "Grenade",
@@ -4437,14 +4244,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2catapultFire",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "2680",
+      "pricing": true,
+      "range": "13400",
+      "reloaddelay": "240",
+      "slot": "Armament",
+      "versus_templates": [
        "^Grenade",
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
        "^HeavyBomb"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "wc2catapultFire",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4495,6 +4310,7 @@
     "armaments": [
      {
       "armament_name": "detonate",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -4505,10 +4321,16 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "wc2demolitionsquadTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "6",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -4520,19 +4342,10 @@
        "wc2footmanslice"
       ],
       "warheads": [
-       {
-        "damage": "6",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "wc2demolitionsquadMelee",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4623,6 +4436,13 @@
    "wc2_orcs_ogremage": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "15",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -4636,22 +4456,20 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
-       {
-        "damage": "15",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "wc2ogrepunch",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "eyeofkilrogg",
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -4660,19 +4478,19 @@
       "requires": "FSD_cond_2",
       "slot": "Armament@EYEOFKILROGG",
       "versus_templates": [],
-      "warheads": [
+      "warheads": [],
+      "weapon": "wc2ogremageEyeOfKilrogg",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "bloodlust",
+      "damage_warheads": [
        {
-        "damage": "0",
+        "damage": "1",
         "tag": "1Dam",
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2ogremageEyeOfKilrogg",
-      "weapon_class_source": "none",
-      "weapon_types": []
-     },
-     {
-      "armament_name": "bloodlust",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -4681,19 +4499,19 @@
       "requires": "FSD_cond_3 && ogremagebloodlust_upg",
       "slot": "Armament@BLOODLUST",
       "versus_templates": [],
-      "warheads": [
+      "warheads": [],
+      "weapon": "wc2ogremageBloodlust",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "runes",
+      "damage_warheads": [
        {
-        "damage": "1",
+        "damage": "0",
         "tag": "1Dam",
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2ogremageBloodlust",
-      "weapon_class_source": "none",
-      "weapon_types": []
-     },
-     {
-      "armament_name": "runes",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -4702,16 +4520,9 @@
       "requires": "FSD_cond_4 && ogremagerunes_upg",
       "slot": "Armament@RUNES",
       "versus_templates": [],
-      "warheads": [
-       {
-        "damage": "0",
-        "tag": "1Dam",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "wc2ogremageRunes",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4761,6 +4572,13 @@
    "wc2_orcs_peon": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "6",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -4771,19 +4589,10 @@
        "wc2footmanslice"
       ],
       "warheads": [
-       {
-        "damage": "6",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "wc2peasantsmack",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4832,30 +4641,7 @@
    "wc2_orcs_siegeengine": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
-      "minrange": "2240",
-      "pricing": true,
-      "range": "11200",
-      "reloaddelay": "100",
-      "slot": "Armament",
-      "versus_templates": [
-       "^NuclearWarhead",
-       "^LightMissile",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon",
-       "^LightFlameWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^HeavyCannon",
-       "^MediumCannon",
-       "^TankDestroyerCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "NuclearWarhead",
@@ -5037,9 +4823,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SiegeEngineCannon",
-      "weapon_class_source": "allowlist_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "minrange": "2240",
+      "pricing": true,
+      "range": "11200",
+      "reloaddelay": "100",
+      "slot": "Armament",
+      "versus_templates": [
        "^NuclearWarhead",
        "^LightMissile",
        "^LightChemicalWeapon",
@@ -5054,7 +4845,10 @@
        "^HeavyCannon",
        "^MediumCannon",
        "^TankDestroyerCannon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "SiegeEngineCannon",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {

@@ -63,7 +63,7 @@ def unit_dps(u, fp_factor: float):
     for arm in u.get("armaments", []):
         if not arm.get("pricing", True):
             continue
-        dmg = formula.spread_damage_sum(arm.get("warheads", []))  # SUM law, chips excluded
+        dmg = formula.spread_damage_sum(arm.get("damage_warheads", []))  # SUM law, chips excluded
         if not dmg:
             continue
         rd = fnum(arm.get("reloaddelay")) or 1

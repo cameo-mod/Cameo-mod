@@ -7,17 +7,7 @@
    "latinsyndicate_hindtransport": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "4750",
-      "reloaddelay": "3",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
@@ -29,12 +19,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BlackHawkCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "4750",
+      "reloaddelay": "3",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^RA2SmallArms",
        "^RA2Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "BlackHawkCannon",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -86,8 +86,45 @@
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -100,6 +137,16 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "MigMissiles",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "8",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyBomb",
@@ -136,21 +183,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissiles",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "8",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8600",
       "reloaddelay": "50",
@@ -160,6 +194,16 @@
        "MigMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "MigMissiles_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "4",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyBomb",
@@ -196,21 +240,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissiles_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "4",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -220,6 +251,16 @@
        "MigMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "MigMissiles_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "8",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyBomb",
@@ -256,21 +297,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissiles_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "8",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8600",
       "reloaddelay": "50",
@@ -280,50 +308,10 @@
        "MigMissiles_elite"
       ],
       "warheads": [
-       {
-        "damage": "8000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_AA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -371,8 +359,45 @@
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "888",
       "pricing": true,
       "range": "4444",
@@ -386,6 +411,14 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "YakovlevCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TankDestroyerCannon",
@@ -422,19 +455,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakovlevCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^FlakWeapon",
-       "^HeavyCannon",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1110",
       "pricing": true,
       "range": "5555",
@@ -448,6 +470,14 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "YakovlevCannon_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TankDestroyerCannon",
@@ -484,19 +514,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakovlevCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^FlakWeapon",
-       "^HeavyCannon",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1110",
       "pricing": true,
       "range": "5555",
@@ -510,50 +529,10 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "YakovlevCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^FlakWeapon",
-       "^HeavyCannon",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -798,6 +777,23 @@
      {
       "burst": "2",
       "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -809,6 +805,15 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "LatinAADefenderCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MediumMissile",
@@ -825,16 +830,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinAADefenderCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumMissile",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -846,28 +841,10 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "LatinAADefenderCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumMissile",
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -952,8 +929,30 @@
      {
       "burst": "3",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "30",
@@ -965,6 +964,16 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "LatinSentryMG",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyCannon",
@@ -986,19 +995,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSentryMG",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "3",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "30",
@@ -1008,34 +1006,11 @@
        "LatinSentryMG"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinSentryMG_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1199,6 +1174,7 @@
     "armaments": [
      {
       "burst": "4",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -1210,8 +1186,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "SMLLauncher",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1449,6 +1424,7 @@
    "latinsyndicate_engineer": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -1462,13 +1438,10 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RemovesIvanBombs",
-       "^RemovesTerrorDrone"
-      ]
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -1479,8 +1452,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1526,6 +1498,38 @@
      {
       "burst": "5",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1538,7 +1542,14 @@
        "^Chaingun",
        "^SniperWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "RA2FreedomAK47",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "HeavyCannon",
@@ -1570,17 +1581,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomAK47",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^Chaingun",
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "burst": "10",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1591,61 +1591,13 @@
       "versus_templates": [
        "RA2FreedomAK47"
       ],
-      "warheads": [
-       {
-        "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "SniperWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "RA2FreedomAK47_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^Chaingun",
-       "^SniperWeapon"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "7130",
-      "reloaddelay": "100",
-      "requires": "!rank-elite",
-      "slot": "Armament@ROCKET",
-      "versus_templates": [
-       "^FlakWeapon",
-       "^ShrapnelWeapon",
-       "^RA2MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "60000",
         "tag": "FlakWeapon",
@@ -1677,27 +1629,27 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "7130",
+      "reloaddelay": "100",
+      "requires": "!rank-elite",
+      "slot": "Armament@ROCKET",
+      "versus_templates": [
        "^FlakWeapon",
        "^ShrapnelWeapon",
        "^RA2MediumMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "RA2FreedomRocket",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "8130",
-      "reloaddelay": "100",
-      "requires": "rank-elite",
-      "slot": "Armament@ROCKETELITE",
-      "versus_templates": [
-       "RA2FreedomRocket"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "120000",
         "tag": "FlakWeapon",
@@ -1729,18 +1681,58 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "8130",
+      "reloaddelay": "100",
+      "requires": "rank-elite",
+      "slot": "Armament@ROCKETELITE",
+      "versus_templates": [
+       "RA2FreedomRocket"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
       "weapon": "RA2FreedomRocket_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^FlakWeapon",
-       "^ShrapnelWeapon",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "burst": "5",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -1753,7 +1745,15 @@
        "^Chaingun",
        "^SniperWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "RA2FreedomAK47",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "10",
+      "burstdelays": "1",
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "HeavyCannon",
@@ -1785,18 +1785,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomAK47",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^Chaingun",
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "10",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -1807,61 +1795,13 @@
       "versus_templates": [
        "RA2FreedomAK47"
       ],
-      "warheads": [
-       {
-        "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "SniperWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "RA2FreedomAK47_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^Chaingun",
-       "^SniperWeapon"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": false,
-      "range": "7130",
-      "reloaddelay": "100",
-      "requires": "!rank-elite",
-      "slot": "Armament@RocketGARRISONED",
-      "versus_templates": [
-       "^FlakWeapon",
-       "^ShrapnelWeapon",
-       "^RA2MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "60000",
         "tag": "FlakWeapon",
@@ -1893,27 +1833,27 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "7130",
+      "reloaddelay": "100",
+      "requires": "!rank-elite",
+      "slot": "Armament@RocketGARRISONED",
+      "versus_templates": [
        "^FlakWeapon",
        "^ShrapnelWeapon",
        "^RA2MediumMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "RA2FreedomRocket",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": false,
-      "range": "8130",
-      "reloaddelay": "100",
-      "requires": "rank-elite",
-      "slot": "Armament@RocketGARRISONEDELITE",
-      "versus_templates": [
-       "RA2FreedomRocket"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "120000",
         "tag": "FlakWeapon",
@@ -1945,13 +1885,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "8130",
+      "reloaddelay": "100",
+      "requires": "rank-elite",
+      "slot": "Armament@RocketGARRISONEDELITE",
+      "versus_templates": [
+       "RA2FreedomRocket"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
       "weapon": "RA2FreedomRocket_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^FlakWeapon",
-       "^ShrapnelWeapon",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2005,6 +1953,48 @@
    "latinsyndicate_grenademonkey": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1300",
@@ -2018,7 +2008,14 @@
        "^ShrapnelWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "LatinMonkeyGrenade1",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "Grenade",
@@ -2060,17 +2057,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinMonkeyGrenade1",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyCannon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1400",
@@ -2082,7 +2068,14 @@
       "versus_templates": [
        "LatinMonkeyGrenade1"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "LatinMonkeyGrenade2",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "Grenade",
@@ -2124,17 +2117,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinMonkeyGrenade2",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyCannon"
-      ]
-     },
-     {
-      "burst": "3",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1500",
@@ -2146,7 +2128,13 @@
       "versus_templates": [
        "LatinMonkeyGrenade2"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "LatinMonkeyGrenade3",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "Grenade",
@@ -2188,16 +2176,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinMonkeyGrenade3",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyCannon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1300",
@@ -2211,7 +2189,15 @@
        "^ShrapnelWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "LatinMonkeyGrenade1",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "Grenade",
@@ -2253,18 +2239,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinMonkeyGrenade1",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyCannon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1400",
@@ -2276,7 +2250,15 @@
       "versus_templates": [
        "LatinMonkeyGrenade1"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "LatinMonkeyGrenade2",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "Grenade",
@@ -2318,18 +2300,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinMonkeyGrenade2",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyCannon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "3",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1500",
@@ -2341,55 +2311,9 @@
       "versus_templates": [
        "LatinMonkeyGrenade2"
       ],
-      "warheads": [
-       {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "LatinMonkeyGrenade3",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyCannon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2435,6 +2359,53 @@
      {
       "burst": "4",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2447,7 +2418,14 @@
        "^MediumFlameWeapon",
        "^HeavyFlameWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "SyndicateFireballLauncher",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -2494,17 +2472,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon"
-      ]
-     },
-     {
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2515,7 +2482,15 @@
       "versus_templates": [
        "SyndicateFireballLauncher"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "SyndicateFireballLauncher_elite",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -2562,18 +2537,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SyndicateFireballLauncher_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2586,7 +2549,15 @@
        "^MediumFlameWeapon",
        "^HeavyFlameWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "SyndicateFireballLauncher",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -2633,18 +2604,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2655,60 +2614,9 @@
       "versus_templates": [
        "SyndicateFireballLauncher"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "SyndicateFireballLauncher_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2755,6 +2663,13 @@
      {
       "burst": "3",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -2766,21 +2681,21 @@
        "^RA2SmallArms"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "latinsyndicate_latinmilitia_ak47",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "6",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "latinsyndicate_latinmilitia_ak47",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms"
-      ]
-     },
-     {
-      "burst": "6",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -2792,21 +2707,66 @@
        "latinsyndicate_latinmilitia_ak47"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "latinsyndicate_latinmilitia_ak47_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
        {
         "damage": "1",
-        "tag": "Bullet_Light_Percentage",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "latinsyndicate_latinmilitia_ak47_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "93",
@@ -2819,6 +2779,15 @@
        "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "latinsyndicate_latinmilitia_molotov",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -2870,20 +2839,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "latinsyndicate_latinmilitia_molotov",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "93",
@@ -2893,70 +2850,22 @@
        "latinsyndicate_latinmilitia_molotov"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "burst": "3",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -2968,22 +2877,22 @@
        "^RA2SmallArms"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "latinsyndicate_latinmilitia_ak47",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "latinsyndicate_latinmilitia_ak47",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "6",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -2995,22 +2904,67 @@
        "latinsyndicate_latinmilitia_ak47"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "latinsyndicate_latinmilitia_ak47_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "93",
@@ -3023,6 +2977,16 @@
        "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "latinsyndicate_latinmilitia_molotov",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -3074,21 +3038,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "latinsyndicate_latinmilitia_molotov",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5500",
       "reloaddelay": "93",
@@ -3098,65 +3049,10 @@
        "latinsyndicate_latinmilitia_molotov"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3205,6 +3101,13 @@
    "latinsyndicate_narco": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "35",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3218,23 +3121,21 @@
        "^Effect_Explosion_Light"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "NarcoGrenade",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "35",
         "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NarcoGrenade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3246,23 +3147,26 @@
        "NarcoGrenade"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "NarcoGrenade_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "35",
-        "tag": "Demolition_Light_Percentage",
+        "damage": "20000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "SniperWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NarcoGrenade_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6300",
       "reloaddelay": "22",
@@ -3271,7 +3175,14 @@
       "versus_templates": [
        "^SniperWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "RA2NarcoPistol",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "SniperWeapon",
@@ -3283,17 +3194,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2NarcoPistol",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7300",
       "reloaddelay": "22",
@@ -3302,26 +3204,19 @@
       "versus_templates": [
        "RA2NarcoPistol"
       ],
-      "warheads": [
-       {
-        "damage": "20000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "SniperWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "RA2NarcoPistols_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "35",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3335,24 +3230,22 @@
        "^Effect_Explosion_Light"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "NarcoGrenade",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "35",
         "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NarcoGrenade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3364,24 +3257,27 @@
        "NarcoGrenade"
       ],
       "warheads": [
-       {
-        "damage": "35",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "NarcoGrenade_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6300",
       "reloaddelay": "22",
@@ -3390,7 +3286,15 @@
       "versus_templates": [
        "^SniperWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "RA2NarcoPistol",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "SniperWeapon",
@@ -3402,18 +3306,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2NarcoPistol",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7300",
       "reloaddelay": "22",
@@ -3422,23 +3316,9 @@
       "versus_templates": [
        "RA2NarcoPistol"
       ],
-      "warheads": [
-       {
-        "damage": "20000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "SniperWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "RA2NarcoPistols_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3490,6 +3370,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "13",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3501,20 +3388,20 @@
        "^RA2LightMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "LatinTankKillerRocket",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "13",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinTankKillerRocket",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3526,20 +3413,20 @@
        "^RA2LightMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "LatinTankKillerRocket",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
-        "damage": "13",
+        "damage": "26",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinTankKillerRocket",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3551,20 +3438,20 @@
        "LatinTankKillerRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "LatinTankKillerRocket_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "26",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinTankKillerRocket_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3576,17 +3463,10 @@
        "LatinTankKillerRocket"
       ],
       "warheads": [
-       {
-        "damage": "26",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "LatinTankKillerRocket_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3629,6 +3509,7 @@
    "latinsyndicate_terrorist": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -3640,8 +3521,7 @@
       ],
       "warheads": [],
       "weapon": "SuicideBomberTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3693,6 +3573,48 @@
    "rammax.latin": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3706,7 +3628,12 @@
        "^TeslaWeapon",
        "^TSLaserEffect"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Rammax_Sabot",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Chaingun",
@@ -3748,16 +3675,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Rammax_Sabot",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Chaingun",
-       "^LaserWeapon",
-       "^TeslaWeapon",
-       "^TSLaserEffect"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3771,56 +3688,9 @@
        "^TeslaWeapon",
        "^TSLaserEffect"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "Rammax_Sabot",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Chaingun",
-       "^LaserWeapon",
-       "^TeslaWeapon",
-       "^TSLaserEffect"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3870,19 +3740,7 @@
      {
       "burst": "8",
       "burstdelays": "15",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "24000",
-      "reloaddelay": "500",
-      "slot": "Armament@ARTILLERY",
-      "versus_templates": [
-       "^HeavyBomb",
-       "^RA2Grenade",
-       "^RA2MediumMissile",
-       "^RA2RadShell"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyBomb",
@@ -3904,14 +3762,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2AkulaRockets",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "24000",
+      "reloaddelay": "500",
+      "slot": "Armament@ARTILLERY",
+      "versus_templates": [
        "^HeavyBomb",
        "^RA2Grenade",
        "^RA2MediumMissile",
        "^RA2RadShell"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "RA2AkulaRockets",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3967,8 +3835,30 @@
      {
       "burst": "3",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "30",
@@ -3980,6 +3870,16 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "LatinSentryMG",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyCannon",
@@ -4001,19 +3901,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSentryMG",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "3",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "30",
@@ -4023,34 +3912,11 @@
        "LatinSentryMG"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinSentryMG_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4670,21 +4536,7 @@
      {
       "burst": "8",
       "burstdelays": "4",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "2400",
-      "pricing": true,
-      "range": "12000",
-      "reloaddelay": "122",
-      "slot": "Armament",
-      "versus_templates": [
-       "^RA2Grenade",
-       "^ShrapnelWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyBomb",
-       "^RA2HeavyMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Demolition_Light_Percentage",
@@ -4736,21 +4588,84 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2RBurritoRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "2400",
+      "pricing": true,
+      "range": "12000",
+      "reloaddelay": "122",
+      "slot": "Armament",
+      "versus_templates": [
        "^RA2Grenade",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
        "^HeavyBomb",
        "^RA2HeavyMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "RA2RBurritoRocket",
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2400",
       "pricing": true,
       "range": "12000",
@@ -4765,66 +4680,11 @@
        "^RA2HeavyMissile"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "RA2RBurritoRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RA2Grenade",
-       "^ShrapnelWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyBomb",
-       "^RA2HeavyMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4879,6 +4739,13 @@
    "latinsyndicate_carteltruck": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -4890,21 +4757,21 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "RA2Narco60mm",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "8",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Narco60mm",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -4916,17 +4783,10 @@
        "RA2Narco60mm"
       ],
       "warheads": [
-       {
-        "damage": "8",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "RA2Narco60mm_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5023,6 +4883,7 @@
    "latinsyndicate_demolitiontruck": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -5032,8 +4893,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5089,8 +4949,45 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6300",
       "reloaddelay": "16",
@@ -5103,6 +5000,16 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "DiabloCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -5139,21 +5046,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DiabloCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^TankDestroyerCannon",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7300",
       "reloaddelay": "16",
@@ -5163,6 +5057,14 @@
        "DiabloCannon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "DiabloCannon_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -5199,19 +5101,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DiabloCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^TankDestroyerCannon",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9450",
       "reloaddelay": "16",
@@ -5221,6 +5112,16 @@
        "DiabloCannon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "DiabloCannon_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -5257,21 +5158,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DiabloCannon_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^TankDestroyerCannon",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10450",
       "reloaddelay": "16",
@@ -5281,50 +5169,10 @@
        "DiabloCannon_AA"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "DiabloCannonAAE_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^TankDestroyerCannon",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5374,21 +5222,7 @@
      {
       "burst": "10",
       "burstdelays": "4",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "2025",
-      "pricing": true,
-      "range": "10130",
-      "reloaddelay": "139",
-      "slot": "Armament",
-      "versus_templates": [
-       "^D2KRocket",
-       "^HeavyAAWeapon",
-       "^LightMissile",
-       "^TankDestroyerCannon",
-       "^RA2MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "MissileAP_Heavy_Percentage",
@@ -5430,21 +5264,74 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2LarsRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "minrange": "2025",
+      "pricing": true,
+      "range": "10130",
+      "reloaddelay": "139",
+      "slot": "Armament",
+      "versus_templates": [
        "^D2KRocket",
        "^HeavyAAWeapon",
        "^LightMissile",
        "^TankDestroyerCannon",
        "^RA2MediumMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "RA2LarsRocket",
+      "weapon_class_source": "template"
      },
      {
       "burst": "10",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "2025",
       "pricing": true,
       "range": "10130",
@@ -5459,56 +5346,11 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2LarsRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^D2KRocket",
-       "^HeavyAAWeapon",
-       "^LightMissile",
-       "^TankDestroyerCannon",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5563,8 +5405,45 @@
    "latinsyndicate_latinapc": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5740",
       "reloaddelay": "12",
@@ -5577,6 +5456,15 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2APCFlakCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -5613,20 +5501,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCFlakCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^TankDestroyerCannon",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6740",
       "reloaddelay": "12",
@@ -5636,6 +5512,13 @@
        "RA2APCFlakCannon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2APCFlakCannon_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -5672,18 +5555,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCFlakCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^TankDestroyerCannon",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8610",
       "reloaddelay": "12",
@@ -5693,6 +5566,15 @@
        "RA2APCFlakCannon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2APCFlakCannonAA",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -5729,20 +5611,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCFlakCannonAA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^TankDestroyerCannon",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9610",
       "reloaddelay": "12",
@@ -5752,54 +5622,26 @@
        "RA2APCFlakCannonAA"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "RA2APCFlakCannonAA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^TankDestroyerCannon",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -5812,6 +5654,16 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2APCMachineGun",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -5823,16 +5675,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCMachineGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "8",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -5844,6 +5686,16 @@
        "RA2APCMachineGun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2APCMachineGun_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -5855,16 +5707,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCMachineGun_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -5876,6 +5718,16 @@
        "RA2APCMachineGun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2APCMachineGun_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -5887,16 +5739,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCMachineGun_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "8",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -5908,29 +5750,54 @@
        "RA2APCMachineGun_AA"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2APCMachineGun_AA_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5740",
       "reloaddelay": "53",
@@ -5943,6 +5810,15 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "RA2APCRocket",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyBomb",
@@ -5979,20 +5855,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6740",
       "reloaddelay": "53",
@@ -6002,6 +5866,15 @@
        "RA2APCRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "RA2APCRocket_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyBomb",
@@ -6038,20 +5911,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCRocket_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8610",
       "reloaddelay": "53",
@@ -6061,6 +5922,15 @@
        "RA2APCRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "RA2APCRocket_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyBomb",
@@ -6097,20 +5967,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCRocket_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9610",
       "reloaddelay": "53",
@@ -6120,50 +5978,10 @@
        "RA2APCRocket_AA"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2APCRocket_AA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6215,20 +6033,7 @@
      {
       "burst": "8",
       "burstdelays": "3",
-      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
-      "minrange": "1555",
-      "pricing": true,
-      "range": "7777",
-      "reloaddelay": "108",
-      "slot": "Armament",
-      "versus_templates": [
-       "^RA2Grenade",
-       "^LightFlameWeapon",
-       "^ShrapnelWeapon",
-       "^RA2MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Demolition_Light_Percentage",
@@ -6270,20 +6075,73 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2RTruckRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.875,
+      "minrange": "1555",
+      "pricing": true,
+      "range": "7777",
+      "reloaddelay": "108",
+      "slot": "Armament",
+      "versus_templates": [
        "^RA2Grenade",
        "^LightFlameWeapon",
        "^ShrapnelWeapon",
        "^RA2MediumMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "RA2RTruckRocket",
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "1555",
       "pricing": true,
       "range": "7777",
@@ -6297,55 +6155,11 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2RTruckRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RA2Grenade",
-       "^LightFlameWeapon",
-       "^ShrapnelWeapon",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6400,6 +6214,88 @@
    "latinsyndicate_mortarbike": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1500",
@@ -6416,7 +6312,14 @@
        "^MediumChemicalWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "RA2MortarBike",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "Grenade",
@@ -6498,20 +6401,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MortarBike",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyCannon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1500",
@@ -6523,98 +6412,9 @@
       "versus_templates": [
        "RA2MortarBike"
       ],
-      "warheads": [
-       {
-        "damage": "6000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "RA2MortarBike_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyCannon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6670,6 +6470,18 @@
    "latinsyndicate_narcohummer": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -6682,6 +6494,16 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2NarcoAKM",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
@@ -6693,16 +6515,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2NarcoAKM",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -6714,23 +6526,11 @@
        "RA2NarcoAKM"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2NarcoAKM_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6780,6 +6580,7 @@
    "latinsyndicate_nuketruck": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -6789,8 +6590,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6846,6 +6646,18 @@
      {
       "burst": "5",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -6858,6 +6670,16 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "LatinBuggyMG",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -6869,16 +6691,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyMG",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "10",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -6890,27 +6702,47 @@
        "LatinBuggyMG"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "LatinBuggyMG_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "2",
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2",
+        "damage": "1",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyMG_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "11",
@@ -6923,6 +6755,14 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "LatinBuggyChaingun",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TankDestroyerCannon",
@@ -6954,18 +6794,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyChaingun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^FlakWeapon",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "11",
@@ -6975,49 +6805,57 @@
        "LatinBuggyChaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "LatinBuggyChaingun_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
+        "damage": "10000",
+        "tag": "Grenade",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
+        "damage": "5000",
+        "tag": "GrenadeFriendlyFire",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "damage": "5",
+        "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
+        "damage": "10000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ShrapnelWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
+        "damage": "5",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyChaingun_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^FlakWeapon",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "55",
@@ -7030,6 +6868,16 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "LatinBuggyRocket",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "Grenade",
@@ -7071,20 +6919,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^SteelLightMissile",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "55",
@@ -7094,55 +6930,11 @@
        "LatinBuggyRocket"
       ],
       "warheads": [
-       {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "LatinBuggyRocket_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^SteelLightMissile",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7197,8 +6989,25 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5031",
       "reloaddelay": "38",
@@ -7210,6 +7019,18 @@
        "^RA2TankDestroyerCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_CannonAP_Light"
+      ],
+      "weapon": "RA2Gren60mm",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "CannonHE_Heavy_Percentage",
@@ -7226,20 +7047,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Gren60mm",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2HeavyCannon",
-       "^RA2MediumCannon",
-       "^RA2TankDestroyerCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6031",
       "reloaddelay": "38",
@@ -7249,31 +7058,21 @@
        "RA2Gren60mm"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_CannonAP_Light"
+      ],
+      "weapon": "RA2Gren60mm_elite",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "CannonAP_Light_Percentage",
+        "damage": "8",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Gren60mm_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2HeavyCannon",
-       "^RA2MediumCannon",
-       "^RA2TankDestroyerCannon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7285,19 +7084,19 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "LatinRusherRocket",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "8",
+        "damage": "16",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinRusherRocket",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumMissile"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7309,17 +7108,10 @@
        "LatinRusherRocket"
       ],
       "warheads": [
-       {
-        "damage": "16",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "LatinRusherRocket_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7369,8 +7161,75 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6550",
       "reloaddelay": "65",
@@ -7385,6 +7244,17 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "LatinSmokerCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "RailgunWeapon",
@@ -7451,23 +7321,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSmokerCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RailgunWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyBomb",
-       "^ShrapnelWeapon",
-       "^RA2HeavyCannon",
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7550",
       "reloaddelay": "65",
@@ -7478,89 +7333,49 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "LatinSmokerCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RailgunWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyBomb",
-       "^ShrapnelWeapon",
-       "^RA2HeavyCannon",
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6550",
       "reloaddelay": "110",
@@ -7572,6 +7387,15 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2GrenadePack",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyMissile",
@@ -7603,19 +7427,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GrenadePack",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyMissile",
-       "^Grenade",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "burst": "8",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7550",
       "reloaddelay": "110",
@@ -7626,47 +7439,19 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2GrenadePack_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Flak_Medium_Percentage",
+        "damage": "12",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GrenadePack_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyMissile",
-       "^Grenade",
-       "^RA2FlakWeapon",
-       "^RA2EliteEffects"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7678,19 +7463,19 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "LatinSmokerRocket",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "12",
+        "damage": "24",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSmokerRocket",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumMissile"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7702,17 +7487,10 @@
        "LatinSmokerRocket"
       ],
       "warheads": [
-       {
-        "damage": "24",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "LatinSmokerRocket_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7814,6 +7592,7 @@
    "latinsyndicate_topolm": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -7825,27 +7604,11 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "RA2TOPOLCubaTarget",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "6400",
-      "pricing": true,
-      "range": "32000",
-      "reloaddelay": "500",
-      "slot": "Armament@Launch",
-      "versus_templates": [
-       "^NuclearWarhead",
-       "^HeavyBomb",
-       "^MediumFlameWeapon",
-       "^ShrapnelWeapon",
-       "^LightChemicalWeapon",
-       "^Grenade"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "NuclearWarhead",
@@ -7927,16 +7690,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2TOPOLCuba",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "6400",
+      "pricing": true,
+      "range": "32000",
+      "reloaddelay": "500",
+      "slot": "Armament@Launch",
+      "versus_templates": [
        "^NuclearWarhead",
        "^HeavyBomb",
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
        "^LightChemicalWeapon",
        "^Grenade"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "RA2TOPOLCuba",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -7992,6 +7763,18 @@
      {
       "burst": "5",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -8004,6 +7787,16 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "LatinBuggyMG",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -8015,16 +7808,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyMG",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "10",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -8036,27 +7819,47 @@
        "LatinBuggyMG"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "LatinBuggyMG_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "2",
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2",
+        "damage": "1",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyMG_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "11",
@@ -8069,6 +7872,14 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "LatinBuggyChaingun",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TankDestroyerCannon",
@@ -8100,18 +7911,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyChaingun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^FlakWeapon",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "11",
@@ -8121,45 +7922,11 @@
        "LatinBuggyChaingun"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinBuggyChaingun_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^FlakWeapon",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8278,6 +8045,7 @@
    "scrapcar2_demo.latin": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -8287,8 +8055,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -8329,17 +8096,7 @@
    "scrapcar2_driveby.latin": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "5000",
-      "reloaddelay": "15",
-      "slot": "Armament",
-      "versus_templates": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -8351,12 +8108,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA220mmrapid",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "5000",
+      "reloaddelay": "15",
+      "slot": "Armament",
+      "versus_templates": [
        "^RA2SmallArms",
        "^RA2Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA220mmrapid",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8397,6 +8164,7 @@
    "scrapcar_demo.latin": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -8406,8 +8174,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -8448,17 +8215,7 @@
    "scrapcar_driveby.latin": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "5000",
-      "reloaddelay": "15",
-      "slot": "Armament",
-      "versus_templates": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -8470,12 +8227,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA220mmrapid",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "5000",
+      "reloaddelay": "15",
+      "slot": "Armament",
+      "versus_templates": [
        "^RA2SmallArms",
        "^RA2Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA220mmrapid",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

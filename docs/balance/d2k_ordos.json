@@ -9,6 +9,13 @@
      {
       "burst": "4",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -22,23 +29,26 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "d2kCarryallChainGun",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "d2kCarryallChainGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": true,
@@ -53,27 +63,11 @@
        "d2kCarryallChainGun"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "d2kCarryallChainGun_upgrade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -120,6 +114,13 @@
      {
       "burst": "4",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -133,23 +134,26 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "d2kCarryallChainGun",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "d2kCarryallChainGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": true,
@@ -164,27 +168,11 @@
        "d2kCarryallChainGun"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "d2kCarryallChainGun_upgrade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -234,17 +222,7 @@
      {
       "burst": "15",
       "burstdelays": "0",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "410",
-      "pricing": true,
-      "range": "2048",
-      "reloaddelay": "132",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "ixian_airdrone"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TankDestroyerCannon",
@@ -311,16 +289,21 @@
         "type": "SpreadDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "410",
+      "pricing": true,
+      "range": "2048",
+      "reloaddelay": "132",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "ixian_airdrone"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
       "weapon": "ordos_airmine",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^LightChemicalWeapon",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^HeavyBomb",
-       "^D2KMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -364,19 +347,7 @@
    "ordos_banshee": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1300",
-      "pricing": true,
-      "range": "6500",
-      "reloaddelay": "42",
-      "slot": "Armament",
-      "versus_templates": [
-       "d2k_grenade",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "Grenade",
@@ -458,19 +429,52 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Laboratory_Bioball",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyCannon",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "1300",
+      "pricing": true,
+      "range": "6500",
+      "reloaddelay": "42",
+      "slot": "Armament",
+      "versus_templates": [
+       "d2k_grenade",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "Laboratory_Bioball",
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
@@ -479,6 +483,13 @@
        "D2K_APC_Rocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_APC_Rocket_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "LightMissile",
@@ -505,17 +516,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KRocket"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
@@ -524,39 +526,10 @@
        "D2K_APC_Rocket"
       ],
       "warheads": [
-       {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KRocket"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -602,20 +575,7 @@
    "ordos_eyeinthesky": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "3905",
-      "reloaddelay": "125",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Grenade",
-       "^MediumChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "Grenade",
@@ -687,15 +647,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "eye_bomberguy",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "3905",
+      "reloaddelay": "125",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^Grenade",
        "^MediumChemicalWeapon",
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
        "^HeavyBomb"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "eye_bomberguy",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -742,6 +709,13 @@
      {
       "burst": "5",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -755,23 +729,26 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "d2kChainGun",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "5",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "d2kChainGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
-     },
-     {
-      "burst": "5",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": true,
@@ -786,27 +763,11 @@
        "d2kChainGun"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "d2kChainGun_upgrade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -853,17 +814,7 @@
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "25",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1675",
-      "pricing": true,
-      "range": "8370",
-      "reloaddelay": "125",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "DeviatorMissile_Artillery"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "ShrapnelWeapon",
@@ -935,16 +886,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "1675",
+      "pricing": true,
+      "range": "8370",
+      "reloaddelay": "125",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "DeviatorMissile_Artillery"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
       "weapon": "Wraith_ToxinMissiles",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^HeavyFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyCannon",
-       "^MediumMissile",
-       "^D2KMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -996,19 +952,7 @@
    "ordos_artilleryplatform": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "10000",
-      "reloaddelay": "74",
-      "slot": "Armament",
-      "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^D2K_Cannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "12000",
         "tag": "Grenade",
@@ -1055,14 +999,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_155mm_turret",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "74",
+      "slot": "Armament",
+      "versus_templates": [
        "^Grenade",
        "^ShrapnelWeapon",
        "^HeavyBomb",
        "^D2K_Cannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "D2K_155mm_turret",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1105,18 +1058,7 @@
      {
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "7700",
-      "reloaddelay": "22",
-      "slot": "Armament",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^SmallArms",
-       "^Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyCannon",
@@ -1148,13 +1090,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ordos_autogunturret",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "7700",
+      "reloaddelay": "22",
+      "slot": "Armament",
+      "versus_templates": [
        "^HeavyCannon",
        "^SmallArms",
        "^Chaingun"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "ordos_autogunturret",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1701,18 +1650,7 @@
    "ordos_antiairtrooper": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "9716",
-      "reloaddelay": "75",
-      "slot": "Armament",
-      "versus_templates": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^D2KRocket"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "LightMissile",
@@ -1739,15 +1677,61 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "9716",
+      "reloaddelay": "75",
+      "slot": "Armament",
+      "versus_templates": [
        "^LightMissile",
        "^FlakWeapon",
        "^D2KRocket"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_Rocket_Trooper_AA",
+      "weapon_class_source": "template"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -1760,64 +1744,14 @@
        "^D2K_Cannon"
       ],
       "warheads": [
-       {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "D2K_Rocket_Trooper_AGOnly",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Grenade",
-       "^RailgunWeapon",
-       "^D2K_Cannon"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": false,
-      "range": "9716",
-      "reloaddelay": "75",
-      "slot": "Armament@garrisoned",
-      "versus_templates": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^D2KRocket"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "LightMissile",
@@ -1844,28 +1778,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": false,
+      "range": "9716",
+      "reloaddelay": "75",
+      "slot": "Armament@garrisoned",
+      "versus_templates": [
        "^LightMissile",
        "^FlakWeapon",
        "^D2KRocket"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_Rocket_Trooper_AA",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": false,
-      "range": "6252",
-      "reloaddelay": "50",
-      "slot": "Armament@SECONDARYgarrisoned",
-      "versus_templates": [
-       "^Grenade",
-       "^RailgunWeapon",
-       "^D2K_Cannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "Grenade",
@@ -1902,13 +1834,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper_AGOnly",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "6252",
+      "reloaddelay": "50",
+      "slot": "Armament@SECONDARYgarrisoned",
+      "versus_templates": [
        "^Grenade",
        "^RailgunWeapon",
        "^D2K_Cannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "D2K_Rocket_Trooper_AGOnly",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1953,6 +1894,13 @@
    "ordos_chemicaltrooper": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "15",
+        "tag": "Chemical_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -1965,22 +1913,20 @@
        "^Effect_Chem_Light"
       ],
       "warheads": [
+       "^Warhead_Chemical_Light"
+      ],
+      "weapon": "d2k_chemgun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "15",
         "tag": "Chemical_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "d2k_chemgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Light",
-       "^Projectile_Chem_Light",
-       "^Effect_Chem_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -1993,19 +1939,10 @@
        "^Effect_Chem_Light"
       ],
       "warheads": [
-       {
-        "damage": "15",
-        "tag": "Chemical_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Chemical_Light"
       ],
       "weapon": "d2k_chemgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Light",
-       "^Projectile_Chem_Light",
-       "^Effect_Chem_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2050,6 +1987,13 @@
    "ordos_contaminator": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -2062,22 +2006,20 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "contaminator_attack",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "5",
         "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "contaminator_attack",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -2090,19 +2032,10 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
-       {
-        "damage": "5",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "contaminator_attack",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2147,8 +2080,115 @@
    "ordos_facedancer": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1450",
       "pricing": true,
       "range": "7250",
@@ -2166,6 +2206,14 @@
        "^D2KMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "facedancer_grenade",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "LightFlameWeapon",
@@ -2272,24 +2320,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "facedancer_grenade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyBomb",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyCannon",
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1450",
       "pricing": false,
       "range": "7250",
@@ -2307,125 +2339,10 @@
        "^D2KMissile"
       ],
       "warheads": [
-       {
-        "damage": "20000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "facedancer_grenade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyBomb",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyCannon",
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2474,6 +2391,13 @@
    "ordos_leech": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "100000",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2481,16 +2405,9 @@
       "reloaddelay": "30",
       "slot": "Armament@PRIMARY",
       "versus_templates": [],
-      "warheads": [
-       {
-        "damage": "100000",
-        "tag": "1Dam",
-        "type": "TargetDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "LeechJump",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2539,18 +2456,7 @@
    "ordos_lightinfantry": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "5475",
-      "reloaddelay": "20",
-      "requires": "!ordos_upgrade_lasercartridges",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Chaingun",
-       "^SmallArms"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Chaingun",
@@ -2572,16 +2478,71 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "light_inf_lmg",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5475",
+      "reloaddelay": "20",
+      "requires": "!ordos_upgrade_lasercartridges",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^Chaingun",
        "^SmallArms"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "light_inf_lmg",
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Bullet_Medium",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Bullet_Light",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5475",
       "reloaddelay": "20",
@@ -2594,6 +2555,53 @@
        "light_inf_lmg"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "light_inf_lmg_ordos_upgrade",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "5475",
+      "reloaddelay": "20",
+      "requires": "!ordos_upgrade_lasercartridges",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Chaingun",
+       "^SmallArms"
+      ],
+      "warheads": [],
+      "weapon": "light_inf_lmg",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Laser_Heavy_Percentage",
@@ -2640,62 +2648,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "light_inf_lmg_ordos_upgrade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
-       "^Chaingun",
-       "^SmallArms"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": false,
-      "range": "5475",
-      "reloaddelay": "20",
-      "requires": "!ordos_upgrade_lasercartridges",
-      "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "^Chaingun",
-       "^SmallArms"
-      ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "light_inf_lmg",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Chaingun",
-       "^SmallArms"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5475",
       "reloaddelay": "20",
@@ -2708,61 +2662,10 @@
        "light_inf_lmg"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Bullet_Medium",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "light_inf_lmg_ordos_upgrade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
-       "^Chaingun",
-       "^SmallArms"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2811,8 +2714,55 @@
    "ordos_mortartrooper": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1985",
       "pricing": true,
       "range": "9920",
@@ -2825,6 +2775,14 @@
        "^TankDestroyerCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "Dune_SiegeMortar",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "ShrapnelWeapon",
@@ -2871,19 +2829,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Dune_SiegeMortar",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^D2K_Cannon",
-       "^TankDestroyerCannon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1985",
       "pricing": false,
       "range": "9920",
@@ -2896,60 +2843,10 @@
        "^TankDestroyerCannon"
       ],
       "warheads": [
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Dune_SiegeMortar",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^D2K_Cannon",
-       "^TankDestroyerCannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2994,8 +2891,35 @@
    "ordos_rockettrooper": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6185",
       "reloaddelay": "64",
@@ -3006,6 +2930,14 @@
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_Rocket_Trooper",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "LightMissile",
@@ -3032,18 +2964,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KRocket"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6185",
       "reloaddelay": "64",
@@ -3054,39 +2976,10 @@
        "^D2KRocket"
       ],
       "warheads": [
-       {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KRocket"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3131,6 +3024,7 @@
    "ordos_saboteur": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -3141,8 +3035,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "GenericC4",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3771,18 +3664,7 @@
    "ordos_apc": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "6500",
-      "reloaddelay": "42",
-      "slot": "Armament",
-      "versus_templates": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KRocket"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "LightMissile",
@@ -3809,13 +3691,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_APC_Rocket",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6500",
+      "reloaddelay": "42",
+      "slot": "Armament",
+      "versus_templates": [
        "^LightMissile",
        "^MediumMissile",
        "^D2KRocket"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_APC_Rocket",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3866,8 +3757,55 @@
    "ordos_cobratank": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7640",
       "reloaddelay": "80",
@@ -3880,6 +3818,14 @@
        "^D2K_Cannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "120mm_cobra",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "damage_warheads": [
        {
         "damage": "30000",
         "tag": "Grenade",
@@ -3926,19 +3872,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "120mm_cobra",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^D2K_Cannon"
-      ]
-     },
-     {
-      "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7640",
       "reloaddelay": "80",
@@ -3948,60 +3883,10 @@
        "120mm_cobra"
       ],
       "warheads": [
-       {
-        "damage": "30000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "15",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "120mm_cobra_deploy",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^D2K_Cannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4054,17 +3939,7 @@
      {
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1245",
-      "pricing": true,
-      "range": "6220",
-      "reloaddelay": "24",
-      "slot": "Armament",
-      "versus_templates": [
-       "autogun_tank"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "MissileAP_Heavy_Percentage",
@@ -4121,16 +3996,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "1245",
+      "pricing": true,
+      "range": "6220",
+      "reloaddelay": "24",
+      "slot": "Armament",
+      "versus_templates": [
+       "autogun_tank"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
       "weapon": "autogun_tank_small",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^D2KMissile",
-       "^HeavyCannon",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4186,8 +4066,15 @@
    "ordos_combattank": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5230",
       "reloaddelay": "44",
@@ -4196,17 +4083,10 @@
        "^D2K_Cannon"
       ],
       "warheads": [
-       {
-        "damage": "4",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "OrdosCombatTankCannon",
-      "weapon_class_source": "allowlist_mix",
-      "weapon_types": [
-       "^D2K_Cannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4258,19 +4138,7 @@
      {
       "burst": "3",
       "burstdelays": "25",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "2005",
-      "pricing": true,
-      "range": "10025",
-      "reloaddelay": "150",
-      "slot": "Armament",
-      "versus_templates": [
-       "^ShrapnelWeapon",
-       "^HeavyFlameWeapon",
-       "DeviatorMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "ShrapnelWeapon",
@@ -4342,16 +4210,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DeviatorMissile_Artillery",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2005",
+      "pricing": true,
+      "range": "10025",
+      "reloaddelay": "150",
+      "slot": "Armament",
+      "versus_templates": [
        "^ShrapnelWeapon",
        "^HeavyFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyCannon",
-       "^MediumMissile",
-       "^D2KMissile"
-      ]
+       "DeviatorMissile"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "DeviatorMissile_Artillery",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4401,20 +4276,7 @@
    "ordos_deviatortank": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1415",
-      "pricing": true,
-      "range": "7070",
-      "reloaddelay": "98",
-      "slot": "Armament",
-      "versus_templates": [
-       "^MediumChemicalWeapon",
-       "^HeavyCannon",
-       "^MediumMissile",
-       "^D2KMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "MediumChemicalWeapon",
@@ -4456,14 +4318,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DeviatorMissile",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "1415",
+      "pricing": true,
+      "range": "7070",
+      "reloaddelay": "98",
+      "slot": "Armament",
+      "versus_templates": [
        "^MediumChemicalWeapon",
        "^HeavyCannon",
        "^MediumMissile",
        "^D2KMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "DeviatorMissile",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4514,18 +4386,7 @@
    "ordos_dustdrone": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "6500",
-      "reloaddelay": "42",
-      "slot": "Armament",
-      "versus_templates": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KRocket"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "LightMissile",
@@ -4552,13 +4413,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_APC_Rocket",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6500",
+      "reloaddelay": "42",
+      "slot": "Armament",
+      "versus_templates": [
        "^LightMissile",
        "^MediumMissile",
        "^D2KRocket"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_APC_Rocket",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4610,22 +4480,7 @@
      {
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1495",
-      "pricing": true,
-      "range": "7480",
-      "reloaddelay": "24",
-      "slot": "Armament",
-      "versus_templates": [
-       "^D2KMissile",
-       "^HeavyCannon",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "MissileAP_Heavy_Percentage",
@@ -4682,16 +4537,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "autogun_tank",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "1495",
+      "pricing": true,
+      "range": "7480",
+      "reloaddelay": "24",
+      "slot": "Armament",
+      "versus_templates": [
        "^D2KMissile",
        "^HeavyCannon",
        "^HeavyAAWeapon",
        "^FlakWeapon",
        "^MediumMissile",
        "^Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "autogun_tank",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4746,8 +4611,15 @@
    "ordos_heavycombattank": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "40",
@@ -4756,36 +4628,15 @@
        "^D2K_Cannon"
       ],
       "warheads": [
-       {
-        "damage": "5",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "HeavyOrdosCombatTankCannon",
-      "weapon_class_source": "allowlist_mix",
-      "weapon_types": [
-       "^D2K_Cannon"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "10",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6000",
-      "reloaddelay": "70",
-      "requires": "ordos_upgrade_heavycombattankrockets",
-      "slot": "Armament@Rockets",
-      "versus_templates": [
-       "^Chaingun",
-       "^FlakWeapon",
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KRocket"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Chaingun",
@@ -4832,15 +4683,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HeavyOrdosCombatTankRockets",
-      "weapon_class_source": "allowlist_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "70",
+      "requires": "ordos_upgrade_heavycombattankrockets",
+      "slot": "Armament@Rockets",
+      "versus_templates": [
        "^Chaingun",
        "^FlakWeapon",
        "^LightMissile",
        "^MediumMissile",
        "^D2KRocket"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "HeavyOrdosCombatTankRockets",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4890,19 +4751,7 @@
    "ordos_laboratorycrawler": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1300",
-      "pricing": true,
-      "range": "6500",
-      "reloaddelay": "42",
-      "slot": "Armament",
-      "versus_templates": [
-       "d2k_grenade",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "Grenade",
@@ -4984,19 +4833,52 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Laboratory_Bioball",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyCannon",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "1300",
+      "pricing": true,
+      "range": "6500",
+      "reloaddelay": "42",
+      "slot": "Armament",
+      "versus_templates": [
+       "d2k_grenade",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "Laboratory_Bioball",
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
@@ -5005,6 +4887,13 @@
        "D2K_APC_Rocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_APC_Rocket_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "LightMissile",
@@ -5031,17 +4920,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KRocket"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
@@ -5050,39 +4930,10 @@
        "D2K_APC_Rocket"
       ],
       "warheads": [
-       {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KRocket"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5133,19 +4984,7 @@
    "ordos_lasertank": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "7275",
-      "reloaddelay": "55",
-      "slot": "Armament",
-      "versus_templates": [
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^RailgunWeapon",
-       "^LaserWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "FlakWeapon",
@@ -5197,14 +5036,21 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "ordos_lasertank",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "7275",
+      "reloaddelay": "55",
+      "slot": "Armament",
+      "versus_templates": [
        "^FlakWeapon",
        "^MediumMissile",
        "^RailgunWeapon",
        "^LaserWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "ordos_lasertank",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5306,8 +5152,55 @@
      {
       "burst": "2",
       "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9380",
       "reloaddelay": "123",
@@ -5317,6 +5210,16 @@
        "120mm_cobra"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "120mm_python",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "burst": "2",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "30000",
         "tag": "Grenade",
@@ -5363,21 +5266,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "120mm_python",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^D2K_Cannon"
-      ]
-     },
-     {
-      "armament_name": "deployed",
-      "burst": "2",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9380",
       "reloaddelay": "123",
@@ -5387,60 +5277,10 @@
        "120mm_python"
       ],
       "warheads": [
-       {
-        "damage": "30000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "15",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "120mm_python_deploy",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^D2K_Cannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5493,6 +5333,13 @@
      {
       "burst": "9",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -5506,36 +5353,15 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "HMGo",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "9",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6000",
-      "reloaddelay": "8",
-      "requires": "ordos_upgrade_lasercartridges",
-      "slot": "Armament@damageLaser",
-      "versus_templates": [
-       "^LaserWeapon",
-       "^Chaingun",
-       "HMGo"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LaserWeapon",
@@ -5567,15 +5393,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HMGo_upgrade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "8",
+      "requires": "ordos_upgrade_lasercartridges",
+      "slot": "Armament@damageLaser",
+      "versus_templates": [
        "^LaserWeapon",
        "^Chaingun",
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+       "HMGo"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "HMGo_upgrade",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5676,18 +5510,7 @@
      {
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "4857",
-      "reloaddelay": "33",
-      "requires": "!ordos_upgrade_lasercartridges",
-      "slot": "Armament@damage",
-      "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -5709,30 +5532,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HMGstealth",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "4857",
       "reloaddelay": "33",
-      "requires": "ordos_upgrade_lasercartridges",
-      "slot": "Armament@damageLaser",
+      "requires": "!ordos_upgrade_lasercartridges",
+      "slot": "Armament@damage",
       "versus_templates": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
-       "HMGstealth"
+       "^SmallArms",
+       "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "HMGstealth",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Laser_Heavy_Percentage",
@@ -5759,15 +5577,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HMGstealth_upgrade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "4857",
+      "reloaddelay": "33",
+      "requires": "ordos_upgrade_lasercartridges",
+      "slot": "Armament@damageLaser",
+      "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
        "^Effect_Laser_Heavy",
-       "^SmallArms",
-       "^Chaingun"
-      ]
+       "HMGstealth"
+      ],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "HMGstealth_upgrade",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5817,19 +5644,7 @@
    "ordos_tankdestroyer": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "8500",
-      "reloaddelay": "72",
-      "slot": "Armament",
-      "versus_templates": [
-       "^MediumChemicalWeapon",
-       "^LightChemicalWeapon",
-       "^D2K_Cannon",
-       "^TankDestroyerCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "14000",
         "tag": "MediumChemicalWeapon",
@@ -5876,14 +5691,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "120mm_td",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "8500",
+      "reloaddelay": "72",
+      "slot": "Armament",
+      "versus_templates": [
        "^MediumChemicalWeapon",
        "^LightChemicalWeapon",
        "^D2K_Cannon",
        "^TankDestroyerCannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "120mm_td",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -7,6 +7,13 @@
    "ra2_soviets_kirovairship": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "40",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -19,20 +26,24 @@
        "^Effect_Explosion_Heavy"
       ],
       "warheads": [
+       "^Warhead_Demolition_Heavy"
+      ],
+      "weapon": "RA2KirovBomb",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "40",
+        "damage": "24",
+        "tag": "Chemical_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "24",
         "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2KirovBomb",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Heavy",
-       "^Effect_Explosion_Heavy"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -48,29 +59,20 @@
        "^RA2RadShell"
       ],
       "warheads": [
+       "^Warhead_Chemical_Heavy",
+       "^Warhead_Demolition_Heavy"
+      ],
+      "weapon": "RA2KirovBomb_rad",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "24",
-        "tag": "Chemical_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "24",
+        "damage": "40",
         "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2KirovBomb_rad",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Heavy",
-       "^Projectile_Chem_Heavy",
-       "^Effect_Chem_Heavy",
-       "^Warhead_Demolition_Heavy",
-       "^Effect_Explosion_Heavy",
-       "^RA2RadShell"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -82,34 +84,13 @@
        "RA2KirovBomb"
       ],
       "warheads": [
-       {
-        "damage": "40",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "RA2KirovBomb_fire",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Heavy",
-       "^Effect_Explosion_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.375,
-      "pricing": true,
-      "range": "2500",
-      "reloaddelay": "50",
-      "requires": "!rank-elite && ra2_soviets_doctrine_teslamunitions && !ra2_soviets_upgrade_kirovatomicbombs",
-      "slot": "Armament@PRIMARYTesla",
-      "versus_templates": [
-       "^Warhead_TeslaCharged_Super",
-       "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super",
-       "RA2KirovBomb"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "40",
         "tag": "TeslaCharged_Super_Percentage",
@@ -126,17 +107,39 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2KirovBomb_tesla",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.375,
+      "pricing": true,
+      "range": "2500",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && ra2_soviets_doctrine_teslamunitions && !ra2_soviets_upgrade_kirovatomicbombs",
+      "slot": "Armament@PRIMARYTesla",
+      "versus_templates": [
        "^Warhead_TeslaCharged_Super",
        "^Projectile_Lightning_Super",
        "^Effect_Tesla_Super",
-       "^Warhead_Demolition_Heavy",
-       "^Effect_Explosion_Heavy"
-      ]
+       "RA2KirovBomb"
+      ],
+      "warheads": [
+       "^Warhead_TeslaCharged_Super",
+       "^Warhead_Demolition_Heavy"
+      ],
+      "weapon": "RA2KirovBomb_tesla",
+      "weapon_class_source": "template"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "40",
+        "tag": "Nuclear_Super_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.375,
       "pricing": true,
@@ -150,27 +153,25 @@
        "RA2KirovBomb"
       ],
       "warheads": [
+       "^Warhead_Nuclear_Super",
+       "^Warhead_Demolition_Heavy"
+      ],
+      "weapon": "RA2KirovBomb_nuclear",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "40",
+        "damage": "50",
         "tag": "Nuclear_Super_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "40",
+        "damage": "50",
         "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2KirovBomb_nuclear",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Nuclear_Super",
-       "^Effect_Nuclear_Super",
-       "^Warhead_Demolition_Heavy",
-       "^Effect_Explosion_Heavy"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.375,
       "pricing": true,
@@ -182,25 +183,11 @@
        "RA2KirovBomb_nuclear"
       ],
       "warheads": [
-       {
-        "damage": "50",
-        "tag": "Nuclear_Super_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "50",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Nuclear_Super",
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "RA2KirovBomb_nuclear_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Nuclear_Super",
-       "^Effect_Nuclear_Super",
-       "^Warhead_Demolition_Heavy",
-       "^Effect_Explosion_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -249,20 +236,7 @@
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "7600",
-      "reloaddelay": "50",
-      "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
-      "slot": "Armament",
-      "versus_templates": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyBomb",
@@ -299,33 +273,30 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissiles",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "7600",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
+      "slot": "Armament",
+      "versus_templates": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
        "^FlakWeapon",
        "^RA2MediumMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "MigMissiles",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "7600",
-      "reloaddelay": "50",
-      "requires": "!rank-elite && ra2_soviets_doctrine_nuclearmunitions",
-      "slot": "Armament@rad",
-      "versus_templates": [
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon",
-       "MigMissiles",
-       "^RA2RadShell"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "MediumChemicalWeapon",
@@ -392,24 +363,68 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissiles_rad",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "7600",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && ra2_soviets_doctrine_nuclearmunitions",
+      "slot": "Armament@rad",
+      "versus_templates": [
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon",
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile",
+       "MigMissiles",
        "^RA2RadShell"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "MigMissiles_rad",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -419,6 +434,16 @@
        "MigMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "MigMissiles_fire",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyBomb",
@@ -455,21 +480,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissiles_fire",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "4",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -479,6 +491,16 @@
        "MigMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "MigMissiles_tesla",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "8",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyBomb",
@@ -515,21 +537,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissiles_tesla",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "8",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8600",
       "reloaddelay": "50",
@@ -539,6 +548,16 @@
        "MigMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "MigMissiles_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "8",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyBomb",
@@ -575,21 +594,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissiles_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "8",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8600",
       "reloaddelay": "50",
@@ -599,6 +605,16 @@
        "MigMissiles_tesla"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "MigMissiles_tesla_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "4",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyBomb",
@@ -635,21 +651,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissiles_tesla_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "4",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -659,6 +662,16 @@
        "MigMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "MigMissiles_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "8",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyBomb",
@@ -695,21 +708,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissiles_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "8",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8600",
       "reloaddelay": "50",
@@ -719,50 +719,10 @@
        "MigMissiles_elite"
       ],
       "warheads": [
-       {
-        "damage": "8000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_AA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -807,6 +767,18 @@
    "ra2_soviets_siegechopper": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -819,25 +791,14 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "BlackHawkCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -851,26 +812,11 @@
       ],
       "warheads": [],
       "weapon": "deploytargeting_5c0",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^DeployTargeting"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "deployed",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "minrange": "2222",
-      "pricing": true,
-      "range": "11111",
-      "reloaddelay": "88",
-      "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions && deployed",
-      "slot": "Armament@Deployed",
-      "versus_templates": [
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "60000",
         "tag": "ShrapnelWeapon",
@@ -892,30 +838,27 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA160mm",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
-      ]
-     },
-     {
-      "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "2222",
       "pricing": true,
       "range": "11111",
       "reloaddelay": "88",
-      "requires": "!rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed",
-      "slot": "Armament@DeployedRad",
+      "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions && deployed",
+      "slot": "Armament@Deployed",
       "versus_templates": [
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "RA160mm",
-       "^RA2RadShell"
+       "^ShrapnelWeapon",
+       "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "RA160mm",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "damage_warheads": [
        {
         "damage": "36000",
         "tag": "LightChemicalWeapon",
@@ -967,20 +910,52 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA160mm_rad",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "minrange": "2222",
+      "pricing": true,
+      "range": "11111",
+      "reloaddelay": "88",
+      "requires": "!rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed",
+      "slot": "Armament@DeployedRad",
+      "versus_templates": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade",
+       "RA160mm",
        "^RA2RadShell"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "RA160mm_rad",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
+      "damage_warheads": [
+       {
+        "damage": "60000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "minrange": "2222",
       "pricing": true,
       "range": "11111",
@@ -991,6 +966,14 @@
        "RA160mm"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "RA160mm_fire",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "damage_warheads": [
        {
         "damage": "60000",
         "tag": "ShrapnelWeapon",
@@ -1012,17 +995,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA160mm_fire",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
-      ]
-     },
-     {
-      "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "minrange": "2222",
       "pricing": true,
       "range": "11111",
@@ -1033,6 +1007,16 @@
        "RA160mm"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "RA160mm_tesla",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "60000",
         "tag": "ShrapnelWeapon",
@@ -1054,19 +1038,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA160mm_tesla",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
-      ]
-     },
-     {
-      "armament_name": "deployed",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "minrange": "2222",
       "pricing": true,
       "range": "12345",
@@ -1078,52 +1051,14 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "60000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "30",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mmE_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^RA2Grenade",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "2222",
-      "pricing": true,
-      "range": "12345",
-      "reloaddelay": "88",
-      "requires": "rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed",
-      "slot": "Armament@DeployedEliteRad",
-      "versus_templates": [
-       "^Warhead_Nuclear_Super",
-       "^Effect_Nuclear_Super",
-       "RA160mm_rad",
-       "^RA2EliteEffects"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "18",
         "tag": "Nuclear_Super_Percentage",
@@ -1180,23 +1115,53 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA160mmE_rad_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "minrange": "2222",
+      "pricing": true,
+      "range": "12345",
+      "reloaddelay": "88",
+      "requires": "rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed",
+      "slot": "Armament@DeployedEliteRad",
+      "versus_templates": [
        "^Warhead_Nuclear_Super",
        "^Effect_Nuclear_Super",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade",
-       "^RA2RadShell",
+       "RA160mm_rad",
        "^RA2EliteEffects"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Nuclear_Super",
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "RA160mmE_rad_elite",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
+      "damage_warheads": [
+       {
+        "damage": "60000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "minrange": "2222",
       "pricing": true,
       "range": "12345",
@@ -1208,6 +1173,14 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "RA160mmE_fire_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "damage_warheads": [
        {
         "damage": "60000",
         "tag": "ShrapnelWeapon",
@@ -1229,18 +1202,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA160mmE_fire_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^RA2Grenade",
-       "^RA2EliteEffects"
-      ]
-     },
-     {
-      "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "minrange": "2222",
       "pricing": true,
       "range": "12345",
@@ -1252,34 +1215,10 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "60000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "30",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mmE_tesla_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^RA2Grenade",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1329,17 +1268,7 @@
    "ra2_soviets_transportkirov": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "4750",
-      "reloaddelay": "3",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
@@ -1351,12 +1280,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BlackHawkCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "4750",
+      "reloaddelay": "3",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^RA2SmallArms",
        "^RA2Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "BlackHawkCannon",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1891,6 +1830,13 @@
    "ra2_soviets_flakcannon": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -1901,17 +1847,10 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
-       {
-        "damage": "5",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "RA2TURRETFLAKAA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2045,17 +1984,7 @@
      {
       "burst": "3",
       "burstdelays": "3",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "6577",
-      "reloaddelay": "14",
-      "slot": "Armament",
-      "versus_templates": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
@@ -2067,12 +1996,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2vulcan",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "6577",
+      "reloaddelay": "14",
+      "slot": "Armament",
+      "versus_templates": [
        "^RA2SmallArms",
        "^RA2Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2vulcan",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2113,6 +2052,18 @@
    "ra2_soviets_teslacoil": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "32",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -2126,6 +2077,13 @@
        "^Effect_Tesla_Heavy"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "RA2CoilBolt",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "32",
         "tag": "Tesla_Heavy_Percentage",
@@ -2137,15 +2095,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2CoilBolt",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -2157,6 +2106,13 @@
        "RA2CoilBolt"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "RA2CoilBolt2",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "32",
         "tag": "Tesla_Heavy_Percentage",
@@ -2168,15 +2124,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2CoilBolt2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -2188,26 +2135,24 @@
        "RA2CoilBolt2"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "RA2CoilBolt3",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "32",
-        "tag": "Tesla_Heavy_Percentage",
+        "tag": "TeslaCharged_Super_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
-        "tag": "TeslaExtraDamage",
+        "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2CoilBolt3",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.5,
       "pricing": true,
@@ -2221,6 +2166,13 @@
        "^Effect_Tesla_Super"
       ],
       "warheads": [
+       "^Warhead_TeslaCharged_Super"
+      ],
+      "weapon": "RA2OPCoilBolt1",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "32",
         "tag": "TeslaCharged_Super_Percentage",
@@ -2232,15 +2184,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2OPCoilBolt1",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_TeslaCharged_Super",
-       "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.5,
       "pricing": true,
@@ -2252,6 +2195,13 @@
        "RA2OPCoilBolt1"
       ],
       "warheads": [
+       "^Warhead_TeslaCharged_Super"
+      ],
+      "weapon": "RA2OPCoilBolt2",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "32",
         "tag": "TeslaCharged_Super_Percentage",
@@ -2263,15 +2213,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2OPCoilBolt2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_TeslaCharged_Super",
-       "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.5,
       "pricing": true,
@@ -2283,24 +2224,10 @@
        "RA2OPCoilBolt2"
       ],
       "warheads": [
-       {
-        "damage": "32",
-        "tag": "TeslaCharged_Super_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "32000",
-        "tag": "TeslaChargedExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_TeslaCharged_Super"
       ],
       "weapon": "RA2OPCoilBolt3",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_TeslaCharged_Super",
-       "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2343,6 +2270,13 @@
    "ra2_soviets_attackdog": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "100000",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2350,16 +2284,9 @@
       "reloaddelay": "10",
       "slot": "Armament",
       "versus_templates": [],
-      "warheads": [
-       {
-        "damage": "100000",
-        "tag": "1Dam",
-        "type": "TargetDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "DogJaw",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2405,6 +2332,18 @@
      {
       "burst": "4",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -2417,6 +2356,16 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "BorisAKM",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -2428,16 +2377,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BorisAKM",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "8",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -2449,6 +2388,16 @@
        "BorisAKM"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "BorisAKM_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -2460,16 +2409,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BorisAKM_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -2481,28 +2420,17 @@
        "BorisAKM"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "BorisAKM2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
       "burst": "3",
       "burstdelays": "15",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -2514,13 +2442,24 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "MigTarget",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
       "burst": "4",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": false,
@@ -2533,6 +2472,17 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "BorisAKM",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "8",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -2544,17 +2494,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BorisAKM",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "8",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": false,
@@ -2566,23 +2505,11 @@
        "BorisAKM"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "BorisAKM_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2631,6 +2558,13 @@
    "ra2_soviets_conscript": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -2642,21 +2576,21 @@
        "^RA2SmallArms"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "ra2_soviets_conscript_carbine",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra2_soviets_conscript_carbine",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -2668,32 +2602,16 @@
        "ra2_soviets_conscript_carbine"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "ra2_soviets_conscript_carbine_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "burst": "3",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": false,
-      "range": "5724",
-      "reloaddelay": "50",
-      "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "RA2vulcan2"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
@@ -2705,12 +2623,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": false,
+      "range": "5724",
+      "reloaddelay": "50",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "RA2vulcan2"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "RA2vulcan3",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2759,6 +2686,7 @@
    "ra2_soviets_crazyivan": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -2769,10 +2697,10 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "IvanAttach",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -2785,8 +2713,7 @@
       ],
       "warheads": [],
       "weapon": "IvanAttachAir",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2830,6 +2757,13 @@
    "ra2_soviets_desolator": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "15",
+        "tag": "Chemical_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -2843,23 +2777,21 @@
        "^Effect_Chem_Medium"
       ],
       "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
+      "weapon": "RA2RadBeamWeapon",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "15",
         "tag": "Chemical_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Medium",
-       "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -2871,22 +2803,20 @@
        "RA2RadBeamWeapon"
       ],
       "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
+      "weapon": "RA2RadBeamWeapon_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "15",
         "tag": "Chemical_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2RadBeamWeapon_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Medium",
-       "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -2899,19 +2829,10 @@
        "^Effect_Chem_Medium"
       ],
       "warheads": [
-       {
-        "damage": "15",
-        "tag": "Chemical_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Chemical_Medium"
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Medium",
-       "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2956,6 +2877,7 @@
    "ra2_soviets_engineer": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -2969,13 +2891,10 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RemovesIvanBombs",
-       "^RemovesTerrorDrone"
-      ]
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -2986,8 +2905,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3032,6 +2950,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3043,20 +2968,20 @@
        "RA2FLAKAG"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2CRFlakGuyGun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2CRFlakGuyGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3068,20 +2993,20 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2FLAKAA",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FLAKAA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3093,20 +3018,20 @@
        "RA2FLAKAG"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2CRFlakGuyGun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2CRFlakGuyGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3118,22 +3043,22 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2FLAKAA",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FLAKAA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3145,22 +3070,22 @@
        "RA2CRFlakGuyGun"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2CRFlakGuyGun_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2CRFlakGuyGun_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3172,22 +3097,22 @@
        "RA2FLAKAA"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2FLAKAA_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FLAKAA_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3199,22 +3124,22 @@
        "RA2CRFlakGuyGun"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2CRFlakGuyGun_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2CRFlakGuyGun_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3226,17 +3151,10 @@
        "RA2FLAKAA"
       ],
       "warheads": [
-       {
-        "damage": "4",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "RA2FLAKAA_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3285,6 +3203,18 @@
    "ra2_soviets_teslatrooper": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "12",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -3298,6 +3228,13 @@
        "^Effect_Tesla_Heavy"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "RA2PortaTesla",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "12",
         "tag": "Tesla_Heavy_Percentage",
@@ -3309,15 +3246,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2PortaTesla",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -3329,6 +3257,13 @@
        "RA2PortaTesla"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "RA2PortaTesla2",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "12",
         "tag": "Tesla_Heavy_Percentage",
@@ -3340,15 +3275,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2PortaTesla2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -3360,6 +3286,33 @@
        "RA2PortaTesla2"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "RA2PortaTesla3",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "-1",
+        "tag": "Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "3333",
+      "reloaddelay": "25",
+      "slot": "Armament@TeslaCoilCharge",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "RA2TeslaCoilCharge",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "12",
         "tag": "Tesla_Heavy_Percentage",
@@ -3371,35 +3324,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2PortaTesla3",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
-     },
-     {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "3333",
-      "reloaddelay": "25",
-      "slot": "Armament@TeslaCoilCharge",
-      "versus_templates": [],
-      "warheads": [
-       {
-        "damage": "-1",
-        "tag": "Percentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "RA2TeslaCoilCharge",
-      "weapon_class_source": "none",
-      "weapon_types": []
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": false,
@@ -3413,6 +3337,14 @@
        "^Effect_Tesla_Heavy"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "RA2PortaTesla",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "12",
         "tag": "Tesla_Heavy_Percentage",
@@ -3424,16 +3356,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2PortaTesla",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": false,
@@ -3445,6 +3367,14 @@
        "RA2PortaTesla"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "RA2PortaTesla2",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "12",
         "tag": "Tesla_Heavy_Percentage",
@@ -3456,16 +3386,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2PortaTesla2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": false,
@@ -3477,24 +3397,10 @@
        "RA2PortaTesla2"
       ],
       "warheads": [
-       {
-        "damage": "12",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "RA2PortaTesla3",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3540,6 +3446,13 @@
    "ra2_soviets_seascorpion": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3550,32 +3463,13 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
-       {
-        "damage": "4",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "SeaScorpion_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5528",
-      "reloaddelay": "18",
-      "slot": "Armament@AG",
-      "versus_templates": [
-       "^SmallArms",
-       "^Grenade",
-       "^Chaingun",
-       "RA2FLAKAG"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -3617,14 +3511,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FlakTrackGun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5528",
+      "reloaddelay": "18",
+      "slot": "Armament@AG",
+      "versus_templates": [
        "^SmallArms",
        "^Grenade",
        "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
+       "RA2FLAKAG"
+      ],
+      "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2FlakTrackGun",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4135,19 +4038,7 @@
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "5",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6992",
-      "reloaddelay": "63",
-      "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^RA2HeavyCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TankDestroyerCannon",
@@ -4179,20 +4070,117 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120xmm",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6992",
+      "reloaddelay": "63",
+      "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
        "^RA2HeavyCannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "RA2120xmm",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "CannonAP_Light",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6992",
       "reloaddelay": "63",
@@ -4206,51 +4194,16 @@
        "^RA2RadShell"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "RA2120xmm_rad",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TankDestroyerCannon",
@@ -4262,54 +4215,28 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
+        "damage": "2000",
         "tag": "ShrapnelWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1",
+        "damage": "2",
         "tag": "ShrapnelWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "1",
+        "damage": "2",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "CannonAP_Light",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120xmm_rad",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^RA2HeavyCannon",
-       "^RA2RadShell"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6992",
       "reloaddelay": "63",
@@ -4319,6 +4246,16 @@
        "RA2120xmm"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "RA2120xmm_fire",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TankDestroyerCannon",
@@ -4350,20 +4287,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120xmm_fire",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^RA2HeavyCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6992",
       "reloaddelay": "63",
@@ -4373,48 +4298,21 @@
        "RA2120xmm"
       ],
       "warheads": [
-       {
-        "damage": "4000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "RA2120xmm_tesla",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^RA2HeavyCannon"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
       "burst": "2",
+      "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -4426,34 +4324,16 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
-       {
-        "damage": "8",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2MammothTusk_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "3",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "7992",
-      "reloaddelay": "63",
-      "requires": "rank-elite  && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
-      "slot": "Armament@PRIMARYELITE",
-      "versus_templates": [
-       "RA2120xmm",
-       "^RA2EliteEffects"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TankDestroyerCannon",
@@ -4485,31 +4365,28 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120xmm_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^RA2HeavyCannon",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "7992",
+      "reloaddelay": "63",
+      "requires": "rank-elite  && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
+      "slot": "Armament@PRIMARYELITE",
+      "versus_templates": [
+       "RA2120xmm",
        "^RA2EliteEffects"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "RA2120xmm_elite",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "3",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "7992",
-      "reloaddelay": "63",
-      "requires": "rank-elite && ra2_soviets_doctrine_nuclearmunitions",
-      "slot": "Armament@PRIMARYELITERad",
-      "versus_templates": [
-       "RA2120xmm_rad",
-       "^RA2EliteEffects"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightChemicalWeapon",
@@ -4596,25 +4473,61 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120xmm_rad_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^RA2HeavyCannon",
-       "^RA2RadShell",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "7992",
+      "reloaddelay": "63",
+      "requires": "rank-elite && ra2_soviets_doctrine_nuclearmunitions",
+      "slot": "Armament@PRIMARYELITERad",
+      "versus_templates": [
+       "RA2120xmm_rad",
        "^RA2EliteEffects"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "RA2120xmm_rad_elite",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7992",
       "reloaddelay": "63",
@@ -4625,6 +4538,16 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "RA2120xmm_fire_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TankDestroyerCannon",
@@ -4656,21 +4579,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120xmm_fire_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^RA2HeavyCannon",
-       "^RA2EliteEffects"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7992",
       "reloaddelay": "63",
@@ -4681,49 +4591,21 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "4000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "RA2120xmm_tesla_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^RA2HeavyCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
       "burst": "4",
+      "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -4735,17 +4617,10 @@
        "RA2MammothTusk_AA"
       ],
       "warheads": [
-       {
-        "damage": "8",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2MammothTusk_AA_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4799,18 +4674,7 @@
    "ra2_soviets_flaktrack": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "8292",
-      "reloaddelay": "25",
-      "requires": "!rank-elite",
-      "slot": "Armament@AA",
-      "versus_templates": [
-       "RA2FlakTrackGun",
-       "^RA2FlakWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -4852,18 +4716,68 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FlakTrackAAGun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Grenade",
-       "^Chaingun",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "8292",
+      "reloaddelay": "25",
+      "requires": "!rank-elite",
+      "slot": "Armament@AA",
+      "versus_templates": [
+       "RA2FlakTrackGun",
        "^RA2FlakWeapon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2FlakTrackAAGun",
+      "weapon_class_source": "template"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "18",
@@ -4876,6 +4790,15 @@
        "RA2FLAKAG"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2FlakTrackGun",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -4917,20 +4840,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FlakTrackGun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Grenade",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9292",
       "reloaddelay": "25",
@@ -4940,6 +4851,15 @@
        "RA2FlakTrackAAGun"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2FlakTrackAAGun_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -4981,20 +4901,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FlakTrackAAGun_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Grenade",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6528",
       "reloaddelay": "18",
@@ -5004,55 +4912,10 @@
        "RA2FlakTrackGun"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "RA2FlakTrackGun_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Grenade",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5154,6 +5017,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5165,20 +5035,25 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "RA2120mm",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
-        "damage": "5",
+        "damage": "3",
+        "tag": "Chemical_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "3",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120mm",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5194,29 +5069,21 @@
        "^RA2RadShell"
       ],
       "warheads": [
+       "^Warhead_Chemical_Medium",
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "RA2120mm_rad",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
-        "damage": "3",
-        "tag": "Chemical_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "3",
+        "damage": "5",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120mm_rad",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Medium",
-       "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium",
-       "^RA2MediumCannon",
-       "^RA2RadShell"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5228,20 +5095,20 @@
        "RA2120mm"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "RA2120mm_fire",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
         "damage": "5",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120mm_fire",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5253,22 +5120,22 @@
        "RA2120mm"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "RA2120mm_tesla",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "5",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120mm_tesla",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5281,23 +5148,27 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "5",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "RA2120mm_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "Chemical_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5310,32 +5181,23 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "3",
-        "tag": "Chemical_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Chemical_Medium",
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "RA2120mm_rad_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Medium",
-       "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium",
-       "^RA2MediumCannon",
-       "^RA2RadShell",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5348,23 +5210,22 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "RA2120mm_fire_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "5",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120mm_fire_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5377,18 +5238,10 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "5",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "RA2120mm_tesla_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5436,6 +5289,13 @@
    "ra2_soviets_terrordrone": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "100000",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -5444,18 +5304,18 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [],
-      "warheads": [
+      "warheads": [],
+      "weapon": "RA2DroneJump",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "100000",
         "tag": "1Dam",
         "type": "TargetDamage"
        }
       ],
-      "weapon": "RA2DroneJump",
-      "weapon_class_source": "none",
-      "weapon_types": []
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -5466,16 +5326,9 @@
       "versus_templates": [
        "RA2DroneJump"
       ],
-      "warheads": [
-       {
-        "damage": "100000",
-        "tag": "1Dam",
-        "type": "TargetDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "RA2DroneJump_elite",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5525,6 +5378,18 @@
      {
       "burst": "2",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "6",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -5538,6 +5403,15 @@
        "^Effect_Tesla_Heavy"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "RA2TankBolt",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "6",
         "tag": "Tesla_Heavy_Percentage",
@@ -5549,17 +5423,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2TankBolt",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -5571,6 +5434,15 @@
        "RA2TankBolt"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "RA2TankBolt2",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "6",
         "tag": "Tesla_Heavy_Percentage",
@@ -5582,17 +5454,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2TankBolt2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -5604,24 +5465,10 @@
        "RA2TankBolt2"
       ],
       "warheads": [
-       {
-        "damage": "6",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "RA2TankBolt3",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5669,6 +5516,7 @@
    "ra2_soviets_v3rocketlauncher": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -5681,10 +5529,10 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "V3Launch",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -5697,8 +5545,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "V3Launch_elite",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5751,17 +5598,7 @@
    "ra2_soviets_warminer": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "5000",
-      "reloaddelay": "15",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -5773,12 +5610,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA220mmrapid",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "5000",
+      "reloaddelay": "15",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^RA2SmallArms",
        "^RA2Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA220mmrapid",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

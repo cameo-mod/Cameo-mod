@@ -127,6 +127,13 @@
    "ts_gdi_hammerhead": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -139,19 +146,10 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSHammerheadGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -199,21 +197,7 @@
       "armament_name": "primary",
       "burst": "3",
       "burstdelays": "4",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "9165",
-      "reloaddelay": "92",
-      "requires": "!ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^HeavyChemicalWeapon",
-       "^RailgunWeapon",
-       "^HeavyMissile",
-       "^HeavyCannon",
-       "^HeavyBomb"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyChemicalWeapon",
@@ -275,38 +259,29 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "KodiakCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyChemicalWeapon",
-       "^RailgunWeapon",
-       "^HeavyMissile",
-       "^HeavyCannon",
-       "^HeavyBomb"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "3",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "9165",
-      "reloaddelay": "86",
-      "requires": "ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@Upgrade",
+      "reloaddelay": "92",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^HeavyChemicalWeapon",
        "^RailgunWeapon",
        "^HeavyMissile",
        "^HeavyCannon",
-       "^HeavyBomb",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^TSSonicGrenade"
+       "^HeavyBomb"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "KodiakCannon",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyChemicalWeapon",
@@ -398,9 +373,14 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "KodiakCannonSonic",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "9165",
+      "reloaddelay": "86",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^HeavyChemicalWeapon",
        "^RailgunWeapon",
        "^HeavyMissile",
@@ -409,10 +389,20 @@
        "^TeslaWeapon",
        "^MagicWeapon",
        "^TSSonicGrenade"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "KodiakCannonSonic",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
+      "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -425,19 +415,10 @@
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       {
-        "damage": "3",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "KodiakAAGuns",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flak_Medium",
-       "^Projectile_Flak_Medium",
-       "^Effect_Flak_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -489,18 +470,7 @@
      {
       "burst": "5",
       "burstdelays": "3",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "1500",
-      "reloaddelay": "38",
-      "requires": "!ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^ShrapnelWeapon",
-       "^HeavyBomb"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "ShrapnelWeapon",
@@ -527,30 +497,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSBomb",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^HeavyBomb"
-      ]
-     },
-     {
-      "burst": "5",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "38",
-      "requires": "ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@Upgrade",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^HeavyBomb",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^TSSonicGrenade"
+       "^ShrapnelWeapon",
+       "^HeavyBomb"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TSBomb",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "5",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "HeavyBomb",
@@ -592,14 +557,22 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TSBombSonic",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "1500",
+      "reloaddelay": "38",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^HeavyBomb",
        "^TeslaWeapon",
        "^MagicWeapon",
        "^TSSonicGrenade"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TSBombSonic",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -649,22 +622,7 @@
    "ts_gdi_orcafighter": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5740",
-      "reloaddelay": "32",
-      "requires": "!ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "HeavyCannon",
@@ -736,32 +694,27 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSHellfire",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5740",
+      "reloaddelay": "32",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
        "^Grenade",
        "^HeavyMissile",
        "^MediumMissile"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TSHellfire",
+      "weapon_class_source": "none"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5120",
-      "reloaddelay": "25",
-      "requires": "ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "TSHellfire",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^TSSonicGrenade"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "HeavyCannon",
@@ -863,19 +816,22 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TSHellfireSonic",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "25",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "TSHellfire",
        "^TeslaWeapon",
        "^MagicWeapon",
        "^TSSonicGrenade"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TSHellfireSonic",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -920,17 +876,7 @@
    "ts_gdi_zoneorcafighter": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6138",
-      "reloaddelay": "28",
-      "requires": "!ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "TSHellfire"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "HeavyCannon",
@@ -1002,29 +948,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSZoneHellfire",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "6138",
       "reloaddelay": "28",
-      "requires": "ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@Upgrade",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "TSHellfireSonic"
+       "TSHellfire"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TSZoneHellfire",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "HeavyCannon",
@@ -1126,19 +1065,19 @@
         "type": "SpreadDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6138",
+      "reloaddelay": "28",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "TSHellfireSonic"
+      ],
+      "warheads": [],
       "weapon": "TSZoneHellfireSonic",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^TSSonicGrenade"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1687,14 +1626,7 @@
    "ts_gdi_empulsecannon": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "40c0",
-      "reloaddelay": "100",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "TeslaWeapon",
@@ -1726,9 +1658,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "40c0",
+      "reloaddelay": "100",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "TSPulseCannon_EMP",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1773,18 +1712,7 @@
    "ts_gdi_rpgtower": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "8544",
-      "reloaddelay": "46",
-      "requires": "!ts_gdi_upgrade_railgunweaponry",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^ShrapnelWeapon",
-       "^HeavyCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "16000",
         "tag": "ShrapnelWeapon",
@@ -1811,27 +1739,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSRPGTower",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^HeavyCannon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "8544",
       "reloaddelay": "46",
-      "requires": "ts_gdi_upgrade_railgunweaponry",
-      "slot": "Armament@Upgrade",
+      "requires": "!ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^ShrapnelWeapon",
-       "^HeavyCannon",
-       "^RailgunWeapon"
+       "^HeavyCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TSRPGTower",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "16000",
         "tag": "ShrapnelWeapon",
@@ -1878,13 +1802,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSRPGTowerRail",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8544",
+      "reloaddelay": "46",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^ShrapnelWeapon",
        "^HeavyCannon",
        "^RailgunWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TSRPGTowerRail",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1927,6 +1859,13 @@
      {
       "burst": "2",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -1939,19 +1878,10 @@
        "^Effect_Missile_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "4",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "TSGDIRedEye",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy",
-       "^Effect_Missile_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1994,18 +1924,7 @@
      {
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "6809",
-      "reloaddelay": "48",
-      "requires": "!ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "SmallArms",
@@ -2027,31 +1946,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSVulcanGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "6809",
-      "reloaddelay": "66",
-      "requires": "ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@Upgrade",
+      "reloaddelay": "48",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^SmallArms",
-       "^Chaingun",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^TSSonicGrenade"
+       "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TSVulcanGun",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "SmallArms",
@@ -2103,15 +2016,23 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TSVulcanGunSonic",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6809",
+      "reloaddelay": "66",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^SmallArms",
        "^Chaingun",
        "^TeslaWeapon",
        "^MagicWeapon",
        "^TSSonicGrenade"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TSVulcanGunSonic",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2154,18 +2075,7 @@
    "ts_gdi_discthrower": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "6151",
-      "reloaddelay": "50",
-      "requires": "!ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^ShrapnelWeapon",
-       "^MediumCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "12000",
         "tag": "ShrapnelWeapon",
@@ -2197,14 +2107,84 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TSGrenade",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6151",
+      "reloaddelay": "50",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^ShrapnelWeapon",
        "^MediumCannon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TSGrenade",
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumCannonFriendlyFire",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2219,7 +2199,61 @@
        "^MagicWeapon",
        "^TSSonicGrenade"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TSGrenadeSonic",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumCannonFriendlyFire",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "6656",
+      "reloaddelay": "45",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "TSGrenade"
+      ],
+      "warheads": [],
+      "weapon": "TSGrenadeG",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "12000",
         "tag": "ShrapnelWeapon",
@@ -2281,69 +2315,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TSGrenadeSonic",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^MediumCannon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^TSSonicGrenade"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": false,
-      "range": "6656",
-      "reloaddelay": "45",
-      "requires": "!ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "TSGrenade"
-      ],
-      "warheads": [
-       {
-        "damage": "12000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "MediumCannonFriendlyFire",
-        "type": "SpreadDamage"
-       }
-      ],
-      "weapon": "TSGrenadeG",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2358,77 +2329,9 @@
        "^MagicWeapon",
        "^TSSonicGrenade"
       ],
-      "warheads": [
-       {
-        "damage": "12000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "MediumCannonFriendlyFire",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "TSGrenadeSonic",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^MediumCannon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^TSSonicGrenade"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2472,6 +2375,7 @@
    "ts_gdi_engineer": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -2485,13 +2389,10 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RemovesIvanBombs",
-       "^RemovesTerrorDrone"
-      ]
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -2502,12 +2403,23 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4303",
       "reloaddelay": "25",
@@ -2515,7 +2427,13 @@
       "versus_templates": [
        "^SniperWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TSEngineerPistol",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "SniperWeapon",
@@ -2527,16 +2445,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSEngineerPistol",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4303",
       "reloaddelay": "25",
@@ -2544,23 +2454,9 @@
       "versus_templates": [
        "^SniperWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "20000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "SniperWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "TSEngineerPistol",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2606,8 +2502,30 @@
      {
       "burst": "3",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6125",
       "reloaddelay": "26",
@@ -2617,7 +2535,15 @@
        "^MediumMissile",
        "^FlakWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TS30mm",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "MediumMissile",
@@ -2639,19 +2565,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TS30mm",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "3",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6125",
       "reloaddelay": "26",
@@ -2661,9 +2576,16 @@
        "^MediumMissile",
        "^FlakWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TS30mm",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -2673,7 +2595,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
+        "damage": "2000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -2681,18 +2603,23 @@
         "damage": "1",
         "tag": "FlakWeaponPercentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
-      "weapon": "TS30mm",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon"
-      ]
-     },
-     {
-      "burst": "3",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2705,7 +2632,15 @@
        "^FlakWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TS30mmRail",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MediumMissile",
@@ -2742,18 +2677,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TS30mmRail",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^RailgunWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "3",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2766,50 +2689,9 @@
        "^FlakWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "TS30mmRail",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^RailgunWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2858,17 +2740,7 @@
    "ts_gdi_jumpjetinfantry": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "5090",
-      "reloaddelay": "25",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^RA2FlakWeapon",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Flak_Medium_Percentage",
@@ -2880,12 +2752,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSJumpCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5090",
+      "reloaddelay": "25",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^RA2FlakWeapon",
        "^RA2Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Flak_Medium",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "TSJumpCannon",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2930,6 +2812,13 @@
    "ts_gdi_lightinfantry": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -2942,22 +2831,20 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "TSMinigun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSMinigun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -2970,19 +2857,10 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "TSMinigun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3027,6 +2905,7 @@
     "armaments": [
      {
       "armament_name": "dummy",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -3036,12 +2915,28 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "dummytargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "-2000",
+        "tag": "HealingWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraHealing",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "HealingWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
@@ -3049,7 +2944,13 @@
       "versus_templates": [
        "^HealingWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "Heal",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "-2000",
         "tag": "HealingWeapon",
@@ -3066,16 +2967,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Heal",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HealingWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
@@ -3083,28 +2976,9 @@
       "versus_templates": [
        "^HealingWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "-2000",
-        "tag": "HealingWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-1000",
-        "tag": "ExtraHealing",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-1",
-        "tag": "HealingWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "Heal",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HealingWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3150,6 +3024,18 @@
      {
       "burst": "3",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -3163,6 +3049,15 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "TSCommandoRailgun",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "5",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Railgun_Heavy_Percentage",
@@ -3174,17 +3069,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSCommandoRailgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
-     },
-     {
-      "burst": "5",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -3196,6 +3080,16 @@
        "TSCommandoRailgun"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "TSCommandoRailgunRail",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Railgun_Heavy_Percentage",
@@ -3207,18 +3101,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSCommandoRailgunRail",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "3",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": false,
@@ -3232,6 +3114,16 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "TSCommandoRailgun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "5",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Railgun_Heavy_Percentage",
@@ -3243,18 +3135,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSCommandoRailgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "5",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": false,
@@ -3266,24 +3146,10 @@
        "TSCommandoRailgun"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "RailgunPercentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "TSCommandoRailgunRail",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3332,6 +3198,78 @@
    "ts_gdi_riottrooper": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3346,7 +3284,13 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TSShotgun",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -3418,19 +3362,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSShotgun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -3445,88 +3376,9 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
-       {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "TSShotgun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^SmallArms",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3571,6 +3423,18 @@
    "ts_gdi_zonetrooper": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -3584,37 +3448,13 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "RailgunPercentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "TSZoneRailgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "6230",
-      "reloaddelay": "60",
-      "requires": "ts_gdi_upgrade_railgunweaponry",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "TSZoneRailgun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Railgun_Heavy_Percentage",
@@ -3626,16 +3466,36 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6230",
+      "reloaddelay": "60",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "TSZoneRailgun"
+      ],
+      "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
       "weapon": "TSZoneRailgunRail",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": false,
@@ -3649,38 +3509,14 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "RailgunPercentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "TSZoneRailgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": false,
-      "range": "6230",
-      "reloaddelay": "60",
-      "requires": "ts_gdi_upgrade_railgunweaponry",
-      "slot": "Armament@UpgradeGARRISONED",
-      "versus_templates": [
-       "TSZoneRailgun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Railgun_Heavy_Percentage",
@@ -3692,13 +3528,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": false,
+      "range": "6230",
+      "reloaddelay": "60",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "TSZoneRailgun"
+      ],
+      "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
       "weapon": "TSZoneRailgunRail",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4163,17 +4007,7 @@
    "ts_gdi_amphibiousapc": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "6263",
-      "reloaddelay": "10",
-      "slot": "Armament",
-      "versus_templates": [
-       "^Chaingun",
-       "^FlakWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Chaingun",
@@ -4195,12 +4029,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSAAPCCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6263",
+      "reloaddelay": "10",
+      "slot": "Armament",
+      "versus_templates": [
        "^Chaingun",
        "^FlakWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TSAAPCCannon",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4248,19 +4089,7 @@
    "ts_gdi_disruptor": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "4050",
-      "reloaddelay": "60",
-      "requires": "!ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "TSSonicWeaponEffect"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TeslaWeapon",
@@ -4292,27 +4121,24 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TSSonicZapWeapon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^MagicWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4050",
       "reloaddelay": "60",
-      "requires": "ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@Upgrade",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^TeslaWeapon",
        "^MagicWeapon",
        "TSSonicWeaponEffect"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TSSonicZapWeapon",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TeslaWeapon",
@@ -4344,12 +4170,21 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TSSonicZapWeaponSonic",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "4050",
+      "reloaddelay": "60",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^TeslaWeapon",
-       "^MagicWeapon"
-      ]
+       "^MagicWeapon",
+       "TSSonicWeaponEffect"
+      ],
+      "warheads": [],
+      "weapon": "TSSonicZapWeaponSonic",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4400,18 +4235,7 @@
      {
       "burst": "2",
       "burstdelays": "8",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "8159",
-      "reloaddelay": "60",
-      "slot": "Armament",
-      "versus_templates": [
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "FlakWeapon",
@@ -4448,13 +4272,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSHoverMissile",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8159",
+      "reloaddelay": "60",
+      "slot": "Armament",
+      "versus_templates": [
        "^FlakWeapon",
        "^MediumMissile",
        "^ShrapnelWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TSHoverMissile",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4504,6 +4335,7 @@
     "armaments": [
      {
       "armament_name": "dummy",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -4515,13 +4347,19 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "TSJuggTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "deployed",
       "burst": "3",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "15",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "minrange": "2565",
@@ -4535,18 +4373,10 @@
        "^Effect_Explosion_Medium"
       ],
       "warheads": [
-       {
-        "damage": "15",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "TSJugg90mm",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Concussion_Medium",
-       "^Effect_Explosion_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4599,6 +4429,13 @@
       "armament_name": "primary",
       "burst": "3",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "20",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "minrange": "2570",
@@ -4611,18 +4448,10 @@
        "^Effect_Explosion_Medium"
       ],
       "warheads": [
-       {
-        "damage": "20",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "TSJugg120mm",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Concussion_Medium",
-       "^Effect_Explosion_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4675,6 +4504,18 @@
       "armament_name": "railgun",
       "burst": "2",
       "burstdelays": "8",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -4688,29 +4529,22 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "40",
-        "tag": "RailgunPercentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "TSMechRailgunII",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "missiles",
       "burst": "2",
       "burstdelays": "8",
+      "damage_warheads": [
+       {
+        "damage": "30",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -4724,36 +4558,16 @@
        "^Effect_Missile_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "30",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "TSMammothTusk2II_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ImpactGlow",
-       "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy",
-       "^Effect_Missile_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "railgun2",
       "burst": "2",
       "burstdelays": "8",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "8434",
-      "reloaddelay": "72",
-      "requires": "ts_gdi_upgrade_railgunweaponry",
-      "slot": "Armament@UpgradeRAILGUN",
-      "versus_templates": [
-       "TSMechRailgunII"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Railgun_Heavy_Percentage",
@@ -4765,16 +4579,31 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "8434",
+      "reloaddelay": "72",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@UpgradeRAILGUN",
+      "versus_templates": [
+       "TSMechRailgunII"
+      ],
+      "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
       "weapon": "TSMechRailgunRailII",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "mg",
+      "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -4787,19 +4616,10 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "8",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSMechMGII",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4857,6 +4677,18 @@
       "armament_name": "railgun",
       "burst": "2",
       "burstdelays": "8",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -4870,29 +4702,22 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "RailgunPercentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "TSMechRailgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "missiles",
       "burst": "2",
       "burstdelays": "8",
+      "damage_warheads": [
+       {
+        "damage": "21",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -4906,36 +4731,16 @@
        "^Effect_Missile_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "21",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "TSMammothTusk2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ImpactGlow",
-       "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy",
-       "^Effect_Missile_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "railgun",
       "burst": "2",
       "burstdelays": "8",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "8409",
-      "reloaddelay": "58",
-      "requires": "ts_gdi_upgrade_railgunweaponry",
-      "slot": "Armament@UpgradeRAILGUN",
-      "versus_templates": [
-       "TSMechRailgun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Railgun_Heavy_Percentage",
@@ -4947,13 +4752,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "8409",
+      "reloaddelay": "58",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@UpgradeRAILGUN",
+      "versus_templates": [
+       "TSMechRailgun"
+      ],
+      "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
       "weapon": "TSMechRailgunRail",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5056,6 +4869,18 @@
    "ts_gdi_mobileemp": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "32",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -5068,24 +4893,10 @@
        "^Effect_Tesla_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "32",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "32000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "TSMobile_EMP",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5180,6 +4991,13 @@
      {
       "burst": "2",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "10",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -5192,19 +5010,10 @@
        "^Effect_Missile_Light"
       ],
       "warheads": [
-       {
-        "damage": "10",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "PitbullRockets",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5300,6 +5109,13 @@
    "ts_gdi_titan": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "6",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5314,34 +5130,13 @@
        "^Effect_Cannon_Medium"
       ],
       "warheads": [
-       {
-        "damage": "6",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "TS120mm",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TSCannonEffect",
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "6201",
-      "reloaddelay": "44",
-      "requires": "ts_gdi_upgrade_railgunweaponry",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^MediumCannon",
-       "^RailgunWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "MediumCannon",
@@ -5368,12 +5163,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TS120mmRail",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6201",
+      "reloaddelay": "44",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^MediumCannon",
        "^RailgunWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TS120mmRail",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5422,6 +5225,13 @@
    "ts_gdi_titanmkii": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "12",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5436,34 +5246,13 @@
        "^Effect_Cannon_Medium"
       ],
       "warheads": [
-       {
-        "damage": "12",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "TS120mmTal",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TSCannonEffect",
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "6201",
-      "reloaddelay": "50",
-      "requires": "ts_gdi_upgrade_railgunweaponry",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^MediumCannon",
-       "^RailgunWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "18000",
         "tag": "MediumCannon",
@@ -5490,12 +5279,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TS120mmTalRail",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6201",
+      "reloaddelay": "50",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^MediumCannon",
        "^RailgunWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TS120mmTalRail",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5547,18 +5344,7 @@
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "6305",
-      "reloaddelay": "33",
-      "requires": "!ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^FlakWeapon",
-       "^Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "FlakWeapon",
@@ -5580,32 +5366,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSAssaultCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6305",
+      "reloaddelay": "33",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^FlakWeapon",
        "^Chaingun"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TSAssaultCannon",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6305",
-      "reloaddelay": "45",
-      "requires": "ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^FlakWeapon",
-       "^Chaingun",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^TSSonicGrenade"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "FlakWeapon",
@@ -5657,15 +5437,23 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TSAssaultCannonSonic",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6305",
+      "reloaddelay": "45",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^FlakWeapon",
        "^Chaingun",
        "^TeslaWeapon",
        "^MagicWeapon",
        "^TSSonicGrenade"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TSAssaultCannonSonic",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5717,6 +5505,13 @@
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5730,38 +5525,16 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "4",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSAssaultCannonTal",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6520",
-      "reloaddelay": "45",
-      "requires": "ts_gdi_upgrade_sonicweaponry",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^Chaingun",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^TSSonicGrenade"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "Chaingun",
@@ -5803,14 +5576,22 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TSAssaultCannonTalSonic",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6520",
+      "reloaddelay": "45",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^Chaingun",
        "^TeslaWeapon",
        "^MagicWeapon",
        "^TSSonicGrenade"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TSAssaultCannonTalSonic",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {

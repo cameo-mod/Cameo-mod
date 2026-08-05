@@ -285,11 +285,11 @@ def firepower_multiplier(resolved, local):
     return {"v": v, "src": src, "trait": preferred.key}
 
 
-def weapon_types(rs, wname: str, _seen=None) -> list[str]:
-    """Fully-resolved list of ^-prefixed class templates in the weapon's
-    inheritance chain (deduped, document order) — so the workbook shows
-    what a weapon actually DOES (^SmallArms, ^Chaingun, ^LaserWeapon,
-    ^Grenade, ^HeavyMissile…), following parent weapons too."""
+def warheads(rs, wname: str, _seen=None) -> list[str]:
+    """Resolved ^-prefixed warhead templates (^Warhead_*) in the weapon's
+    inheritance chain (deduped, document order). Other ^-parents are
+    recursed but not emitted, so the list records only the actual
+    new-split warhead carriers."""
     _seen = _seen if _seen is not None else set()
     if wname.lower() in _seen:
         return []
@@ -302,10 +302,14 @@ def weapon_types(rs, wname: str, _seen=None) -> list[str]:
         if c.key == "Inherits" or c.key.startswith("Inherits@"):
             parent = c.value
             if parent.startswith("^"):
-                if parent not in out:
+                if parent.startswith("^Warhead_") and parent not in out:
                     out.append(parent)
+                # recurse into every ^-parent to find nested ^Warhead_* carriers
+                for t in warheads(rs, parent, _seen):
+                    if t not in out:
+                        out.append(t)
             else:  # a parent weapon — recurse to pull its ^-templates
-                for t in weapon_types(rs, parent, _seen):
+                for t in warheads(rs, parent, _seen):
                     if t not in out:
                         out.append(t)
     return out
@@ -321,19 +325,19 @@ def weapon_entry(rs, wname: str) -> dict | None:
         v = resolved.get(field)
         if v is not None:
             out[field.lower()] = v
-    warheads = []
+    damage_warheads = []
     for c in resolved.children:
         if c.key.startswith("Warhead@") and c.value in ("SpreadDamage", "HealthPercentageDamage", "TargetDamage"):
             d = c.get("Damage")
             if d is not None:
-                warheads.append({"tag": c.key.split("@", 1)[1], "type": c.value, "damage": d})
-    out["warheads"] = warheads
-    if not warheads:
+                damage_warheads.append({"tag": c.key.split("@", 1)[1], "type": c.value, "damage": d})
+    out["damage_warheads"] = damage_warheads
+    if not damage_warheads:
         out["extraction_note"] = "no_damage_warheads"
     if local is not None:
         out["versus_templates"] = [c.value for c in local.children
                                    if c.key == "Inherits" or c.key.startswith("Inherits@")]
-    out["weapon_types"] = weapon_types(rs, wname)
+    out["warheads"] = warheads(rs, wname)
     # Priority: explicit WeaponClass field (rare - the lint strips it) -
     # sidecar-template lookup (weapon_classes.yaml is the source of truth).
     wc = resolved.get("WeaponClass")
@@ -347,10 +351,10 @@ def weapon_entry(rs, wname: str) -> dict | None:
         out["design_weapon_class"] = parsed
         out["weapon_class_source"] = "WeaponClass"
     else:
-        vclass = weapon_class_from_types(out["weapon_types"])
+        vclass = weapon_class_from_types(out["warheads"])
         out["design_weapon_class"] = vclass
         if vclass is None:
-            if not out["weapon_types"]:
+            if not out["warheads"]:
                 out["weapon_class_source"] = "none"
             else:
                 out["weapon_class_source"] = (

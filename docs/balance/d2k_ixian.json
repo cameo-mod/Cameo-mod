@@ -9,18 +9,7 @@
      {
       "burst": "5",
       "burstdelays": "0",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "2500",
-      "reloaddelay": "25",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "d2k_laser"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -57,15 +46,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "farasha_drone_ixian",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "2500",
+      "reloaddelay": "25",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+       "d2k_laser"
+      ],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "farasha_drone_ixian",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -103,22 +99,7 @@
      {
       "burst": "4",
       "burstdelays": "5",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
-      "minrange": "1300",
-      "pricing": true,
-      "range": "6500",
-      "reloaddelay": "132",
-      "slot": "Armament",
-      "versus_templates": [
-       "^TankDestroyerCannon",
-       "^LightChemicalWeapon",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^HeavyBomb",
-       "^D2KMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TankDestroyerCannon",
@@ -180,34 +161,31 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ixian_airdrone",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "1300",
+      "pricing": true,
+      "range": "6500",
+      "reloaddelay": "132",
+      "slot": "Armament",
+      "versus_templates": [
        "^TankDestroyerCannon",
        "^LightChemicalWeapon",
        "^FlakWeapon",
        "^MediumMissile",
        "^HeavyBomb",
        "^D2KMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "ixian_airdrone",
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "minrange": "1300",
-      "pricing": true,
-      "range": "6500",
-      "reloaddelay": "28",
-      "requires": "!ixian_upgrade_tungstenneedleguns",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^D2KMissile",
-       "^SmallArms",
-       "^Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "MissileAP_Heavy_Percentage",
@@ -234,33 +212,29 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "d2k_air_drone_guns",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^D2KMissile",
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
       "reloaddelay": "28",
-      "requires": "ixian_upgrade_tungstenneedleguns",
-      "slot": "Armament@Upgrade",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_Cannon_Heavy",
-       "d2k_air_drone_guns",
-       "^HeavyMachineGunProjectile"
+       "^D2KMissile",
+       "^SmallArms",
+       "^Chaingun"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "d2k_air_drone_guns",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "CannonHE_Heavy_Percentage",
@@ -312,17 +286,27 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "d2k_air_drone_guns_upgrade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "1300",
+      "pricing": true,
+      "range": "6500",
+      "reloaddelay": "28",
+      "requires": "ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_Cannon_Heavy",
-       "^D2KMissile",
-       "^SmallArms",
-       "^Chaingun",
+       "d2k_air_drone_guns",
        "^HeavyMachineGunProjectile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "d2k_air_drone_guns_upgrade",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -366,18 +350,7 @@
    "ixian_empbomber": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "1250",
-      "reloaddelay": "250",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^MediumFlameWeapon",
-       "^HeavyBomb",
-       "^TeslaChargedWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "30000",
         "tag": "MediumFlameWeapon",
@@ -419,13 +392,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IxianBomb_EMP",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "1250",
+      "reloaddelay": "250",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^MediumFlameWeapon",
        "^HeavyBomb",
        "^TeslaChargedWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "IxianBomb_EMP",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -472,6 +452,7 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -482,11 +463,11 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "d2k_dronelauncher",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "charge",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -497,13 +478,59 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "d2k_farasha_charge",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
       "burst": "50",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -515,7 +542,15 @@
        "^HeavyFlameWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "ixian_farasha",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "50",
+      "burstdelays": "1",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TeslaWeapon",
@@ -562,18 +597,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "ixian_farasha",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^HeavyFlameWeapon",
-       "^RailgunWeapon"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "50",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -583,60 +606,9 @@
       "versus_templates": [
        "ixian_farasha"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "d2k_farasha_aa",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^HeavyFlameWeapon",
-       "^RailgunWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -686,19 +658,7 @@
    "ixian_railgundrone": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6034",
-      "reloaddelay": "24",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^FlakWeapon",
-       "^TankDestroyerCannon",
-       "^RailgunWeapon",
-       "^D2K_Cannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "FlakWeapon",
@@ -740,14 +700,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IxRailgunDroneBullet",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6034",
+      "reloaddelay": "24",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^FlakWeapon",
        "^TankDestroyerCannon",
        "^RailgunWeapon",
        "^D2K_Cannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "IxRailgunDroneBullet",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -794,16 +763,7 @@
      {
       "burst": "10",
       "burstdelays": "1",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
-      "pricing": true,
-      "range": "4500",
-      "reloaddelay": "5",
-      "slot": "Armament@repair",
-      "versus_templates": [
-       "^RepairWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "-2000",
         "tag": "RepairWeapon",
@@ -820,11 +780,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ResonanceDroneRepair",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "4500",
+      "reloaddelay": "5",
+      "slot": "Armament@repair",
+      "versus_templates": [
        "^RepairWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "ResonanceDroneRepair",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -984,18 +951,7 @@
    "ixian_gunturret": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "7979",
-      "reloaddelay": "50",
-      "slot": "Armament",
-      "versus_templates": [
-       "^TankDestroyerCannon",
-       "^HeavyCannon",
-       "^D2K_Cannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "TankDestroyerCannon",
@@ -1022,13 +978,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "110mm_Gun",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "7979",
+      "reloaddelay": "50",
+      "slot": "Armament",
+      "versus_templates": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
        "^D2K_Cannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "110mm_Gun",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1187,18 +1152,7 @@
      {
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "7394",
-      "reloaddelay": "22",
-      "requires": "!ixian_upgrade_tungstenneedleguns",
-      "slot": "Armament",
-      "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -1220,31 +1174,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HMG_turret",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "7394",
-      "reloaddelay": "33",
-      "requires": "ixian_upgrade_tungstenneedleguns",
-      "slot": "Armament@Upgrade",
+      "reloaddelay": "22",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_Cannon_Heavy",
-       "HMG_turret",
-       "^HeavyMachineGunProjectile"
+       "^SmallArms",
+       "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "HMG_turret",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "CannonHE_Heavy_Percentage",
@@ -1291,16 +1239,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HMG_turret_upgrade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "7394",
+      "reloaddelay": "33",
+      "requires": "ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_Cannon_Heavy",
-       "^SmallArms",
-       "^Chaingun",
+       "HMG_turret",
        "^HeavyMachineGunProjectile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "HMG_turret_upgrade",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1494,20 +1451,7 @@
      {
       "burst": "2",
       "burstdelays": "5",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "2135",
-      "pricing": true,
-      "range": "10684",
-      "reloaddelay": "42",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Grenade",
-       "^MediumFlameWeapon",
-       "^FlakWeapon",
-       "^D2KMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -1554,14 +1498,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_TowerMissile",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2135",
+      "pricing": true,
+      "range": "10684",
+      "reloaddelay": "42",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^Grenade",
        "^MediumFlameWeapon",
        "^FlakWeapon",
        "^D2KMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_TowerMissile",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1680,17 +1634,7 @@
    "ixian_stormlasher": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "11384",
-      "reloaddelay": "250",
-      "slot": "Armament",
-      "versus_templates": [
-       "^TeslaWeapon",
-       "^MagicWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "150000",
         "tag": "TeslaWeapon",
@@ -1722,12 +1666,19 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "d2kStormLasher",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "11384",
+      "reloaddelay": "250",
+      "slot": "Armament",
+      "versus_templates": [
        "^TeslaWeapon",
        "^MagicWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "d2kStormLasher",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1852,6 +1803,48 @@
      {
       "burst": "4",
       "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1865,7 +1858,34 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "RashinanGun",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -1905,20 +1925,28 @@
         "damage": "1",
         "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Bullet_Medium",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Bullet_Light",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RashinanGun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1932,27 +1960,15 @@
        "RashinanGun",
        "^HeavyMachineGunProjectile"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
+      "warheads": [],
+      "weapon": "RashinanGun_upgrade",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -1992,44 +2008,8 @@
         "damage": "1",
         "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Bullet_Medium",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RashinanGun_upgrade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyMissile",
-       "^HeavyCannon",
-       "^LightMissile",
-       "^MediumMissile",
-       "^SmallArms",
-       "^Chaingun",
-       "^HeavyMachineGunProjectile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "4",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2043,75 +2023,15 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "RashinanGun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^SmallArms",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
       "burst": "4",
       "burstdelays": "0",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": false,
-      "range": "3800",
-      "reloaddelay": "69",
-      "requires": "ixian_upgrade_tungstenneedleguns",
-      "slot": "Armament@UpgradeGARRISONED",
-      "versus_templates": [
-       "^HeavyMissile",
-       "^HeavyCannon",
-       "RashinanGun",
-       "^HeavyMachineGunProjectile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyMissile",
@@ -2193,17 +2113,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RashinanGun_upgrade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "3800",
+      "reloaddelay": "69",
+      "requires": "ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
        "^HeavyMissile",
        "^HeavyCannon",
-       "^LightMissile",
-       "^MediumMissile",
-       "^SmallArms",
-       "^Chaingun",
+       "RashinanGun",
        "^HeavyMachineGunProjectile"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "RashinanGun_upgrade",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2248,18 +2173,7 @@
    "ixian_lightinfantry": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "5475",
-      "reloaddelay": "20",
-      "requires": "!ixian_upgrade_tungstenneedleguns",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Chaingun",
-       "^SmallArms"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Chaingun",
@@ -2281,14 +2195,54 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "light_inf_lmg",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5475",
+      "reloaddelay": "20",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^Chaingun",
        "^SmallArms"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "light_inf_lmg",
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2302,7 +2256,52 @@
        "^SmallArms",
        "^HeavyMachineGunProjectile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "light_inf_lmg_upgrade",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "5475",
+      "reloaddelay": "20",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Chaingun",
+       "^SmallArms"
+      ],
+      "warheads": [],
+      "weapon": "light_inf_lmg",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyCannon",
@@ -2334,59 +2333,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^Chaingun",
-       "^SmallArms",
-       "^HeavyMachineGunProjectile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": false,
-      "range": "5475",
-      "reloaddelay": "20",
-      "requires": "!ixian_upgrade_tungstenneedleguns",
-      "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "^Chaingun",
-       "^SmallArms"
-      ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "light_inf_lmg",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Chaingun",
-       "^SmallArms"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2400,46 +2346,9 @@
        "^SmallArms",
        "^HeavyMachineGunProjectile"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^Chaingun",
-       "^SmallArms",
-       "^HeavyMachineGunProjectile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2488,8 +2397,35 @@
    "ixian_rockettrooper": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6185",
       "reloaddelay": "64",
@@ -2500,6 +2436,14 @@
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_Rocket_Trooper",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "LightMissile",
@@ -2526,18 +2470,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KRocket"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6185",
       "reloaddelay": "64",
@@ -2548,39 +2482,10 @@
        "^D2KRocket"
       ],
       "warheads": [
-       {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KRocket"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2625,6 +2530,13 @@
    "ixian_shockinfantry": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "9",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -2637,22 +2549,20 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "D2K_ShockGunInf",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "9",
         "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_ShockGunInf",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": false,
@@ -2665,19 +2575,10 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "9",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "D2K_ShockGunInf",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2723,8 +2624,40 @@
    "ixian_storminfantry": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6275",
       "reloaddelay": "66",
@@ -2733,7 +2666,13 @@
        "^TeslaWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "D2K_StormGunInf",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "12000",
         "tag": "TeslaWeapon",
@@ -2765,17 +2704,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "D2K_StormGunInf",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RailgunWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6275",
       "reloaddelay": "66",
@@ -2784,44 +2714,9 @@
        "^TeslaWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "12000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "D2K_StormGunInf",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RailgunWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2867,18 +2762,7 @@
    "ixian_twinrockettrooper": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "6502",
-      "reloaddelay": "64",
-      "slot": "Armament",
-      "versus_templates": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^D2KRocket"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "LightMissile",
@@ -2905,15 +2789,61 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper1",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6502",
+      "reloaddelay": "64",
+      "slot": "Armament",
+      "versus_templates": [
        "^LightMissile",
        "^FlakWeapon",
        "^D2KRocket"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_Rocket_Trooper1",
+      "weapon_class_source": "template"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -2926,64 +2856,14 @@
        "^D2K_Cannon"
       ],
       "warheads": [
-       {
-        "damage": "8000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "D2K_Rocket_Trooper2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Grenade",
-       "^RailgunWeapon",
-       "^D2K_Cannon"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": false,
-      "range": "6502",
-      "reloaddelay": "64",
-      "slot": "Armament@garrisoned",
-      "versus_templates": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^D2KRocket"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "LightMissile",
@@ -3010,28 +2890,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper1",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^D2KRocket"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6502",
       "reloaddelay": "64",
-      "slot": "Armament@SECONDARYgarrisoned",
+      "slot": "Armament@garrisoned",
       "versus_templates": [
-       "^Grenade",
-       "^RailgunWeapon",
-       "^D2K_Cannon"
+       "^LightMissile",
+       "^FlakWeapon",
+       "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_Rocket_Trooper1",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "Grenade",
@@ -3068,13 +2946,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper2",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "6502",
+      "reloaddelay": "64",
+      "slot": "Armament@SECONDARYgarrisoned",
+      "versus_templates": [
        "^Grenade",
        "^RailgunWeapon",
        "^D2K_Cannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "D2K_Rocket_Trooper2",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3635,6 +3522,58 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3647,7 +3586,13 @@
        "^FlakWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "d2k_basq",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "secondary",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "LightFlameWeapon",
@@ -3699,17 +3644,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "d2k_basq",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^FlakWeapon",
-       "^HeavyCannon"
-      ]
-     },
-     {
-      "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3719,66 +3653,9 @@
       "versus_templates": [
        "d2k_basq"
       ],
-      "warheads": [
-       {
-        "damage": "8000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "d2k_basq_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^FlakWeapon",
-       "^HeavyCannon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3819,22 +3696,7 @@
    "duelist_tank.ixian": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1400",
-      "pricing": true,
-      "range": "7000",
-      "reloaddelay": "140",
-      "slot": "Armament",
-      "versus_templates": [
-       "^MediumFlameWeapon",
-       "^Grenade",
-       "^HeavyBomb",
-       "^TankDestroyerCannon",
-       "^HeavyCannon",
-       "^D2K_Cannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "14000",
         "tag": "MediumFlameWeapon",
@@ -3901,37 +3763,31 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DuelistTankCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "1400",
+      "pricing": true,
+      "range": "7000",
+      "reloaddelay": "140",
+      "slot": "Armament",
+      "versus_templates": [
        "^MediumFlameWeapon",
        "^Grenade",
        "^HeavyBomb",
        "^TankDestroyerCannon",
        "^HeavyCannon",
        "^D2K_Cannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "DuelistTankCannon",
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1400",
-      "pricing": true,
-      "range": "7000",
-      "reloaddelay": "64",
-      "requires": "!ixian_upgrade_tungstenneedleguns",
-      "slot": "Armament@Guns",
-      "versus_templates": [
-       "^LightMissile",
-       "^Grenade",
-       "^SmallArms",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -3998,36 +3854,30 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HMG_Duelist",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^Grenade",
-       "^SmallArms",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^Chaingun"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
       "reloaddelay": "64",
-      "requires": "ixian_upgrade_tungstenneedleguns",
-      "slot": "Armament@Upgrade",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@Guns",
       "versus_templates": [
-       "^LaserWeapon",
-       "^HeavyMissile",
-       "^HeavyCannon",
-       "HMG_Duelist",
-       "^HeavyMachineGunProjectile"
+       "^LightMissile",
+       "^Grenade",
+       "^SmallArms",
+       "^MediumMissile",
+       "^FlakWeapon",
+       "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "HMG_Duelist",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LaserWeapon",
@@ -4129,20 +3979,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HMG_Duelist_upgrade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "1400",
+      "pricing": true,
+      "range": "7000",
+      "reloaddelay": "64",
+      "requires": "ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^LaserWeapon",
        "^HeavyMissile",
        "^HeavyCannon",
-       "^LightMissile",
-       "^Grenade",
-       "^SmallArms",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^Chaingun",
+       "HMG_Duelist",
        "^HeavyMachineGunProjectile"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "HMG_Duelist_upgrade",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4197,8 +4051,15 @@
    "heavy_rocket_raider.ixian": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1280",
       "pricing": true,
       "range": "6400",
@@ -4208,33 +4069,15 @@
        "^D2KMissile"
       ],
       "warheads": [
-       {
-        "damage": "3",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Bazooka2",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^D2KMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "6400",
-      "reloaddelay": "40",
-      "requires": "!ixian_upgrade_tungstenneedleguns",
-      "slot": "Armament@Guns",
-      "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -4256,31 +4099,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RaiderGuns",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "40",
-      "requires": "ixian_upgrade_tungstenneedleguns",
-      "slot": "Armament@Upgrade",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@Guns",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_Cannon_Heavy",
-       "RaiderGuns",
-       "^HeavyMachineGunProjectile"
+       "^SmallArms",
+       "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "RaiderGuns",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "CannonHE_Heavy_Percentage",
@@ -4327,16 +4164,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RaiderGuns_upgrade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6400",
+      "reloaddelay": "40",
+      "requires": "ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_Cannon_Heavy",
-       "^SmallArms",
-       "^Chaingun",
+       "RaiderGuns",
        "^HeavyMachineGunProjectile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "RaiderGuns_upgrade",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4391,18 +4237,7 @@
    "ixian_heavykodatank": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "6000",
-      "reloaddelay": "40",
-      "slot": "Armament",
-      "versus_templates": [
-       "^TankDestroyerCannon",
-       "^HeavyCannon",
-       "^D2K_Cannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "TankDestroyerCannon",
@@ -4429,13 +4264,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HeavyIxianCombatTankCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "40",
+      "slot": "Armament",
+      "versus_templates": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
        "^D2K_Cannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "HeavyIxianCombatTankCannon",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4484,18 +4328,7 @@
    "ixian_ixcombatsiege": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "8686",
-      "reloaddelay": "80",
-      "slot": "Armament",
-      "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "Grenade",
@@ -4537,13 +4370,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_155mm3",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8686",
+      "reloaddelay": "80",
+      "slot": "Armament",
+      "versus_templates": [
        "^Grenade",
        "^ShrapnelWeapon",
        "^HeavyBomb"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "D2K_155mm3",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4593,19 +4433,7 @@
    "ixian_ixmissiletank": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "minrange": "2010",
-      "pricing": true,
-      "range": "10052",
-      "reloaddelay": "5",
-      "slot": "Armament",
-      "versus_templates": [
-       "^Grenade",
-       "^MediumFlameWeapon",
-       "^D2KMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "Grenade",
@@ -4642,13 +4470,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "mtank_pri2",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2010",
+      "pricing": true,
+      "range": "10052",
+      "reloaddelay": "5",
+      "slot": "Armament",
+      "versus_templates": [
        "^Grenade",
        "^MediumFlameWeapon",
        "^D2KMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "mtank_pri2",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4698,6 +4536,13 @@
    "ixian_ixprojector": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Damage",
+        "type": "TargetDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -4706,31 +4551,12 @@
       "requires": "end_disable == 0",
       "slot": "Armament@Anim",
       "versus_templates": [],
-      "warheads": [
-       {
-        "damage": "1",
-        "tag": "Damage",
-        "type": "TargetDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "IxianCharge_EMP",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
-      "pricing": true,
-      "range": "20000",
-      "reloaddelay": "4",
-      "requires": "end_disable >= 1",
-      "slot": "Armament@End",
-      "versus_templates": [
-       "^Warhead_TeslaCharged_Super",
-       "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TeslaCharged_Super",
@@ -4747,13 +4573,23 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "IxianDisable_EMP",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.5,
+      "pricing": true,
+      "range": "20000",
+      "reloaddelay": "4",
+      "requires": "end_disable >= 1",
+      "slot": "Armament@End",
+      "versus_templates": [
        "^Warhead_TeslaCharged_Super",
        "^Projectile_Lightning_Super",
        "^Effect_Tesla_Super"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_TeslaCharged_Super"
+      ],
+      "weapon": "IxianDisable_EMP",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4810,19 +4646,7 @@
      {
       "burst": "3",
       "burstdelays": "12",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "12000",
-      "reloaddelay": "120",
-      "slot": "Armament",
-      "versus_templates": [
-       "^Grenade",
-       "^MediumFlameWeapon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "12000",
         "tag": "Grenade",
@@ -4879,14 +4703,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_155mm2",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "12000",
+      "reloaddelay": "120",
+      "slot": "Armament",
+      "versus_templates": [
        "^Grenade",
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
        "^HeavyBomb"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "D2K_155mm2",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4937,18 +4768,7 @@
    "ixian_kodatank": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "5555",
-      "reloaddelay": "35",
-      "slot": "Armament",
-      "versus_templates": [
-       "^TankDestroyerCannon",
-       "^HeavyCannon",
-       "^D2K_Cannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TankDestroyerCannon",
@@ -4975,13 +4795,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IxianCombatTankCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5555",
+      "reloaddelay": "35",
+      "slot": "Armament",
+      "versus_templates": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
        "^D2K_Cannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "IxianCombatTankCannon",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5079,23 +4908,7 @@
    "ixian_mongoose": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6183",
-      "reloaddelay": "64",
-      "slot": "Armament@primary",
-      "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^Chaingun",
-       "^FlakWeapon",
-       "^TankDestroyerCannon",
-       "^RailgunWeapon",
-       "^MediumMissile",
-       "^D2KRocket"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -5187,9 +5000,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MongooseRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6183",
+      "reloaddelay": "64",
+      "slot": "Armament@primary",
+      "versus_templates": [
        "^Grenade",
        "^ShrapnelWeapon",
        "^Chaingun",
@@ -5198,7 +5015,12 @@
        "^RailgunWeapon",
        "^MediumMissile",
        "^D2KRocket"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "MongooseRocket",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5250,17 +5072,7 @@
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "0",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "6787",
-      "reloaddelay": "66",
-      "slot": "Armament@Cannon",
-      "versus_templates": [
-       "^TeslaWeapon",
-       "^RailgunWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "16000",
         "tag": "TeslaWeapon",
@@ -5292,30 +5104,25 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "D2K_StormGunCymek",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6787",
+      "reloaddelay": "66",
+      "slot": "Armament@Cannon",
+      "versus_templates": [
        "^TeslaWeapon",
        "^RailgunWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "D2K_StormGunCymek",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6787",
-      "reloaddelay": "60",
-      "slot": "Armament@Rockets",
-      "versus_templates": [
-       "^Grenade",
-       "^FlakWeapon",
-       "^HeavyMissile",
-       "^RA2MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "Grenade",
@@ -5357,14 +5164,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_RocketsCymek",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6787",
+      "reloaddelay": "60",
+      "slot": "Armament@Rockets",
+      "versus_templates": [
        "^Grenade",
        "^FlakWeapon",
        "^HeavyMissile",
        "^RA2MediumMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "D2K_RocketsCymek",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5420,17 +5236,7 @@
    "ixian_shockraider": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "7756",
-      "reloaddelay": "100",
-      "slot": "Armament@damage",
-      "versus_templates": [
-       "^TeslaWeapon",
-       "^RailgunWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "TeslaWeapon",
@@ -5462,12 +5268,19 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "D2K_ShockGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "7756",
+      "reloaddelay": "100",
+      "slot": "Armament@damage",
+      "versus_templates": [
        "^TeslaWeapon",
        "^RailgunWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "D2K_ShockGun",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5567,16 +5380,7 @@
    "ixian_stormraider": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "7343",
-      "reloaddelay": "100",
-      "slot": "Armament@damage",
-      "versus_templates": [
-       "D2K_ShockGun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "TeslaWeapon",
@@ -5608,25 +5412,21 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "D2K_ShockGun2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RailgunWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7343",
       "reloaddelay": "100",
-      "slot": "Armament@StormEffect",
+      "slot": "Armament@damage",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^MagicWeapon"
+       "D2K_ShockGun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "D2K_ShockGun2",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "40000",
         "tag": "TeslaWeapon",
@@ -5658,12 +5458,19 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "D2K_StormGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "7343",
+      "reloaddelay": "100",
+      "slot": "Armament@StormEffect",
+      "versus_templates": [
        "^TeslaWeapon",
        "^MagicWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "D2K_StormGun",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5719,8 +5526,15 @@
    "rocket_raider.ixian": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1280",
       "pricing": true,
       "range": "6400",
@@ -5730,17 +5544,10 @@
        "^D2KMissile"
       ],
       "warheads": [
-       {
-        "damage": "3",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Bazooka2",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^D2KMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

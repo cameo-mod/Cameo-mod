@@ -384,6 +384,7 @@
    "engineer": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -397,13 +398,10 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RemovesIvanBombs",
-       "^RemovesTerrorDrone"
-      ]
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -414,8 +412,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -459,16 +456,7 @@
    "fremen_creep": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "3072",
-      "reloaddelay": "20",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "HMG"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Chaingun",
@@ -495,25 +483,21 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "HMG_fremen",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Chaingun",
-       "^SmallArms"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
       "design_weapon_class": null,
-      "minrange": "975",
       "pricing": true,
-      "range": "4864",
-      "reloaddelay": "45",
-      "slot": "Armament@SECONDARY",
+      "range": "3072",
+      "reloaddelay": "20",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^D2KMissile"
+       "HMG"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "HMG_fremen",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "MissileAP_Heavy_Percentage",
@@ -525,11 +509,21 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Fremen_RPG",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "975",
+      "pricing": true,
+      "range": "4864",
+      "reloaddelay": "45",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
        "^D2KMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "Fremen_RPG",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -566,18 +560,7 @@
    "light_inf": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "5475",
-      "reloaddelay": "20",
-      "requires": "!ixian_upgrade_tungstenneedleguns",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Chaingun",
-       "^SmallArms"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Chaingun",
@@ -599,14 +582,54 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "light_inf_lmg",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5475",
+      "reloaddelay": "20",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^Chaingun",
        "^SmallArms"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "light_inf_lmg",
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -620,7 +643,52 @@
        "^SmallArms",
        "^HeavyMachineGunProjectile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "light_inf_lmg_upgrade",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "5475",
+      "reloaddelay": "20",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Chaingun",
+       "^SmallArms"
+      ],
+      "warheads": [],
+      "weapon": "light_inf_lmg",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyCannon",
@@ -652,59 +720,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^Chaingun",
-       "^SmallArms",
-       "^HeavyMachineGunProjectile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": false,
-      "range": "5475",
-      "reloaddelay": "20",
-      "requires": "!ixian_upgrade_tungstenneedleguns",
-      "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "^Chaingun",
-       "^SmallArms"
-      ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "light_inf_lmg",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Chaingun",
-       "^SmallArms"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -718,46 +733,9 @@
        "^SmallArms",
        "^HeavyMachineGunProjectile"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^Chaingun",
-       "^SmallArms",
-       "^HeavyMachineGunProjectile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -808,8 +786,35 @@
    "trooper": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6185",
       "reloaddelay": "64",
@@ -820,6 +825,14 @@
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_Rocket_Trooper",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "LightMissile",
@@ -846,18 +859,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KRocket"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6185",
       "reloaddelay": "64",
@@ -868,39 +871,10 @@
        "^D2KRocket"
       ],
       "warheads": [
-       {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KRocket"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1128,19 +1102,7 @@
    "siege_tank": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "10000",
-      "reloaddelay": "74",
-      "slot": "Armament",
-      "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^D2K_Cannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "12000",
         "tag": "Grenade",
@@ -1187,14 +1149,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_155mm",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "74",
+      "slot": "Armament",
+      "versus_templates": [
        "^Grenade",
        "^ShrapnelWeapon",
        "^HeavyBomb",
        "^D2K_Cannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "D2K_155mm",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -154,14 +154,14 @@ def unit_rows(ws, theme, aid, u, section, row):
         ws.cell(row=row, column=COL["Name"], value=arm.get("slot")).font = WEAPON_FONT
         # what the weapon DOES: its resolved ^-class templates (armor
         # profiles + effects) — e.g. "^SmallArms, ^Chaingun, ^LaserWeapon".
-        wtypes = arm.get("weapon_types") or arm.get("versus_templates") or []
+        wtypes = arm.get("warheads") or arm.get("versus_templates") or []
         wt = ws.cell(row=row, column=COL["WeaponTypes"],
                      value=", ".join(wtypes))
         wt.font = WEAPON_FONT
         if arm.get("requires"):
             wt.comment = Comment("fires when: " + str(arm.get("requires")),
                                  "balance-pipeline")
-        warheads = arm.get("warheads", [])
+        warheads = arm.get("damage_warheads", [])
         damages = [fnum(w.get("damage")) for w in warheads]
         damages = [x for x in damages if x is not None]
         # Damage cell = per-shot TOTAL = SUM of the main offensive warheads

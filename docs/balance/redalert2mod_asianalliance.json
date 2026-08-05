@@ -10,23 +10,7 @@
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "5",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "7777",
-      "reloaddelay": "60",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^MediumCannon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^RA2MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -128,9 +112,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianHarbingerPlasma",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "7777",
+      "reloaddelay": "60",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
        "^MediumFlameWeapon",
@@ -139,7 +127,12 @@
        "^ShrapnelWeapon",
        "^HeavyBomb",
        "^RA2MediumMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "AsianHarbingerPlasma",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -185,8 +178,40 @@
      {
       "burst": "2",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6100",
       "reloaddelay": "25",
@@ -198,6 +223,15 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "AsianPelicanMissile",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -229,19 +263,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianPelicanMissile",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7100",
       "reloaddelay": "25",
@@ -251,48 +274,31 @@
        "AsianPelicanMissile"
       ],
       "warheads": [
-       {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "AsianPelicanMissile_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -306,6 +312,17 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "AsianPelicanMG",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "CannonHE_Heavy_Percentage",
@@ -322,17 +339,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianPelicanMG",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RA2HeavyCannon",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -344,29 +350,12 @@
        "AsianPelicanMG"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianPelicanMG_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RA2HeavyCannon",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -413,8 +402,45 @@
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
@@ -427,6 +453,16 @@
        "^RA2HeavyMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "AsianPhoenixRocket",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "MediumFlameWeapon",
@@ -463,20 +499,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianPhoenixRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumFlameWeapon",
-       "^Grenade",
-       "^RA2HeavyMissile"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "4",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1500",
       "pricing": true,
       "range": "7500",
@@ -487,49 +511,10 @@
        "AsianPhoenixRocket"
       ],
       "warheads": [
-       {
-        "damage": "20000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "AsianPhoenixRocket_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumFlameWeapon",
-       "^Grenade",
-       "^RA2HeavyMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -574,6 +559,7 @@
    "bomber_minebomb.asian": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -584,8 +570,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "AsianMineBomb",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -622,6 +607,7 @@
    "bomber_minebomb2.asian": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -632,8 +618,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "AsianMineBomb2",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -670,6 +655,7 @@
    "kami.asian": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -680,8 +666,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "AsianKamikazeImpactTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -718,6 +703,7 @@
    "kami_asdf.asian": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -728,8 +714,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "AsianKamikazeImpactTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -768,6 +753,18 @@
      {
       "burst": "3",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "minrange": "1400",
@@ -780,36 +777,14 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianKamikazeChaingun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "3000",
-      "reloaddelay": "8",
-      "slot": "Armament@Secondary",
-      "versus_templates": [
-       "^HeavyChemicalWeapon",
-       "^RA2MediumCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyChemicalWeapon",
@@ -831,12 +806,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianChemicalBombs",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "3000",
+      "reloaddelay": "8",
+      "slot": "Armament@Secondary",
+      "versus_templates": [
        "^HeavyChemicalWeapon",
        "^RA2MediumCannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "AsianChemicalBombs",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1185,6 +1169,13 @@
      {
       "burst": "6",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Flame_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -1197,19 +1188,10 @@
        "^Effect_Flame_Light"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flame_Light"
       ],
       "weapon": "AsianFlamerTurret",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1371,6 +1353,7 @@
    "asianalliance_chaostower": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -1381,8 +1364,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "AsianChaosTurret",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1459,8 +1441,15 @@
       "armament_name": "primary",
       "burst": "100",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "200",
@@ -1469,17 +1458,10 @@
        "^RA2LaserWeapon"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "AAHyperionMagnet",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RA2LaserWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1565,17 +1547,7 @@
      {
       "burst": "2",
       "burstdelays": "6",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "2800",
-      "pricing": true,
-      "range": "14000",
-      "reloaddelay": "90",
-      "slot": "Armament",
-      "versus_templates": [
-       "AsianSinglePlasma"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -1677,18 +1649,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2800",
+      "pricing": true,
+      "range": "14000",
+      "reloaddelay": "90",
+      "slot": "Armament",
+      "versus_templates": [
+       "AsianSinglePlasma"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "AsianTurretPlasma",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^MediumCannon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^RA2HeavyCannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1728,6 +1703,58 @@
    "asianalliance_pulsar": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1741,7 +1768,12 @@
        "^TeslaWeapon",
        "^MagicWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "AsianPhotonCannon",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MediumMissile",
@@ -1793,16 +1825,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "AsianPhotonCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1813,66 +1835,9 @@
       "versus_templates": [
        "AsianPhotonCannon"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "AsianPhotonCannon_EMP",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1912,6 +1877,13 @@
    "asianalliance_railtower": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "15",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -1924,19 +1896,10 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "15",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "AsianRailgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1978,17 +1941,7 @@
      {
       "burst": "8",
       "burstdelays": "4",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "2400",
-      "pricing": true,
-      "range": "12000",
-      "reloaddelay": "90",
-      "slot": "Armament",
-      "versus_templates": [
-       "AsianMLRS"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "HeavyMissile",
@@ -2020,14 +1973,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "minrange": "2400",
+      "pricing": true,
+      "range": "12000",
+      "reloaddelay": "90",
+      "slot": "Armament",
+      "versus_templates": [
+       "AsianMLRS"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium"
+      ],
       "weapon": "AsianSpitfireRockets",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyMissile",
-       "^FlakWeapon",
-       "^RA2Grenade",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2102,6 +2063,58 @@
    "cgpnch.asian": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2112,7 +2125,12 @@
       "versus_templates": [
        "AsianPhotonCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "AsianPunisherAG",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MediumMissile",
@@ -2164,16 +2182,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "AsianPunisherAG",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2184,66 +2192,9 @@
       "versus_templates": [
        "AsianPunisherAG"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "AsianPunisherAG_EMP",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2324,6 +2275,13 @@
    "asianalliance_alligator": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -2337,23 +2295,21 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "AsianCrocBite",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "8",
         "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianCrocBite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -2365,19 +2321,10 @@
        "AsianCrocBite"
       ],
       "warheads": [
-       {
-        "damage": "8",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "AsianCrocBite_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2423,6 +2370,18 @@
      {
       "burst": "3",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -2435,6 +2394,21 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "ASDFGun",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
@@ -2446,16 +2420,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ASDFGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "3",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2470,6 +2434,68 @@
        "ASDFGun"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "ASDFGun2",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "armament_name": "secondary",
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "7250",
+      "reloaddelay": "100",
+      "requires": "canflare",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "ASDFKamikazeTargeting",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": false,
+      "range": "5935",
+      "reloaddelay": "16",
+      "requires": "!asianalliance_doctrine_modernizedinfantryequipment",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "ASDFGun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Railgun_Heavy_Percentage",
@@ -2486,70 +2512,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ASDFGun2",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "extraction_note": "no_damage_warheads",
-      "pricing": false,
-      "range": "7250",
-      "reloaddelay": "100",
-      "requires": "canflare",
-      "slot": "Armament@SECONDARY",
-      "versus_templates": [],
-      "warheads": [],
-      "weapon": "ASDFKamikazeTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "3",
-      "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": false,
-      "range": "5935",
-      "reloaddelay": "16",
-      "requires": "!asianalliance_doctrine_modernizedinfantryequipment",
-      "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "ASDFGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "3",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2564,31 +2526,12 @@
        "ASDFGun"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "ASDFGun2",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -2639,19 +2582,7 @@
    "asianalliance_asiancommando": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "9455",
-      "reloaddelay": "100",
-      "slot": "Armament@lockdown",
-      "versus_templates": [
-       "^Warhead_TeslaCharged_Super",
-       "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super",
-       "AsianSniperAP"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "16",
         "tag": "TeslaCharged_Super_Percentage",
@@ -2743,20 +2674,77 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "AsianSniperLockdown",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.5,
+      "pricing": true,
+      "range": "9455",
+      "reloaddelay": "100",
+      "slot": "Armament@lockdown",
+      "versus_templates": [
        "^Warhead_TeslaCharged_Super",
        "^Projectile_Lightning_Super",
        "^Effect_Tesla_Super",
-       "^MediumMissile",
-       "^HeavyCannon",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^Chaingun"
-      ]
+       "AsianSniperAP"
+      ],
+      "warheads": [
+       "^Warhead_TeslaCharged_Super"
+      ],
+      "weapon": "AsianSniperLockdown",
+      "weapon_class_source": "template"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2771,80 +2759,12 @@
        "^FlakWeapon",
        "^Chaingun"
       ],
-      "warheads": [
-       {
-        "damage": "6000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "AsianSniper",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^HeavyCannon",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "9455",
-      "reloaddelay": "50",
-      "requires": "asianalliance_doctrine_modernizedinfantryequipment",
-      "slot": "Armament@PRIMARYUPGRADE",
-      "versus_templates": [
-       "AsianSniper"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "16000",
         "tag": "MediumMissile",
@@ -2926,18 +2846,74 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "9455",
+      "reloaddelay": "50",
+      "requires": "asianalliance_doctrine_modernizedinfantryequipment",
+      "slot": "Armament@PRIMARYUPGRADE",
+      "versus_templates": [
+       "AsianSniper"
+      ],
+      "warheads": [],
       "weapon": "AsianSniperAP",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^HeavyCannon",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2952,81 +2928,13 @@
        "^FlakWeapon",
        "^Chaingun"
       ],
-      "warheads": [
-       {
-        "damage": "6000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "AsianSniper",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^HeavyCannon",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": false,
-      "range": "9455",
-      "reloaddelay": "50",
-      "requires": "asianalliance_doctrine_modernizedinfantryequipment",
-      "slot": "Armament@GARRISONEDUPGRADE",
-      "versus_templates": [
-       "AsianSniper"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "16000",
         "tag": "MediumMissile",
@@ -3108,15 +3016,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "9455",
+      "reloaddelay": "50",
+      "requires": "asianalliance_doctrine_modernizedinfantryequipment",
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "versus_templates": [
+       "AsianSniper"
+      ],
+      "warheads": [],
       "weapon": "AsianSniperAP",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^HeavyCannon",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3168,6 +3080,13 @@
       "armament_name": "primary",
       "burst": "6",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Flame_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3179,24 +3098,22 @@
        "AsianFlamerTurret"
       ],
       "warheads": [
+       "^Warhead_Flame_Light"
+      ],
+      "weapon": "AsianFlamerTroop",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "6",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianFlamerTroop",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "6",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3208,24 +3125,22 @@
        "AsianFlamerTroop"
       ],
       "warheads": [
+       "^Warhead_Flame_Light"
+      ],
+      "weapon": "AsianFlamerTroop2",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "6",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianFlamerTroop2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "6",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3239,24 +3154,22 @@
        "^Effect_Flame_Light"
       ],
       "warheads": [
+       "^Warhead_Flame_Light"
+      ],
+      "weapon": "AsianFlamerTurret",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianFlamerTurret",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "6",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3268,24 +3181,22 @@
        "AsianFlamerTurret"
       ],
       "warheads": [
+       "^Warhead_Flame_Light"
+      ],
+      "weapon": "AsianFlamerTroop",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianFlamerTroop",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "6",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3297,24 +3208,22 @@
        "AsianFlamerTroop"
       ],
       "warheads": [
+       "^Warhead_Flame_Light"
+      ],
+      "weapon": "AsianFlamerTroop2",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianFlamerTroop2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "6",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3328,19 +3237,10 @@
        "^Effect_Flame_Light"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flame_Light"
       ],
       "weapon": "AsianFlamerTurret",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3390,6 +3290,13 @@
    "asianalliance_asianmilitia": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3401,21 +3308,21 @@
        "^RA2SmallArms"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "asianalliance_asianmilitia_shotgun",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "3",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "asianalliance_asianmilitia_shotgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3427,19 +3334,34 @@
        "asianalliance_asianmilitia_shotgun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "asianalliance_asianmilitia_shotgun_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "3",
-        "tag": "Bullet_Light_Percentage",
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "asianalliance_asianmilitia_shotgun_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3452,6 +3374,15 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "asianalliance_asianmilitia_grenade",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "ShrapnelWeapon",
@@ -3473,16 +3404,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "asianalliance_asianmilitia_grenade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3494,6 +3415,66 @@
        "asianalliance_asianmilitia_grenade"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "asianalliance_asianmilitia_grenade_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "4500",
+      "reloaddelay": "50",
+      "requires": "!rank-elite",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^RA2SmallArms"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "asianalliance_asianmilitia_shotgun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "5500",
+      "reloaddelay": "50",
+      "requires": "rank-elite",
+      "slot": "Armament@GARRISONEDELITE",
+      "versus_templates": [
+       "asianalliance_asianmilitia_shotgun"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "asianalliance_asianmilitia_shotgun_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "ShrapnelWeapon",
@@ -3515,67 +3496,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "asianalliance_asianmilitia_grenade_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": false,
-      "range": "4500",
-      "reloaddelay": "50",
-      "requires": "!rank-elite",
-      "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "^RA2SmallArms"
-      ],
-      "warheads": [
-       {
-        "damage": "3",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "asianalliance_asianmilitia_shotgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": false,
-      "range": "5500",
-      "reloaddelay": "50",
-      "requires": "rank-elite",
-      "slot": "Armament@GARRISONEDELITE",
-      "versus_templates": [
-       "asianalliance_asianmilitia_shotgun"
-      ],
-      "warheads": [
-       {
-        "damage": "3",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "asianalliance_asianmilitia_shotgun_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3588,6 +3508,16 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "asianalliance_asianmilitia_grenade",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "ShrapnelWeapon",
@@ -3609,17 +3539,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "asianalliance_asianmilitia_grenade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3631,33 +3550,10 @@
        "asianalliance_asianmilitia_grenade"
       ],
       "warheads": [
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "asianalliance_asianmilitia_grenade_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^RA2MediumCannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3707,6 +3603,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "17",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3718,20 +3621,20 @@
        "^RA2LightMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "AsianTankKillerRocket",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
         "damage": "17",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianTankKillerRocket",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3743,20 +3646,20 @@
        "AsianTankKillerRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "AsianTankKillerRocket_upgrade",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
-        "damage": "17",
+        "damage": "34",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianTankKillerRocket_upgrade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3768,20 +3671,20 @@
        "AsianTankKillerRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "AsianTankKillerRocket_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
         "damage": "34",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianTankKillerRocket_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3793,20 +3696,20 @@
        "AsianTankKillerRocket_elite"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "AsianTankKillerRocket_upgrade_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
-        "damage": "34",
+        "damage": "17",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianTankKillerRocket_upgrade_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3818,20 +3721,20 @@
        "^RA2LightMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "AsianTankKillerRocket",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "17",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianTankKillerRocket",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3843,20 +3746,20 @@
        "AsianTankKillerRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "AsianTankKillerRocket_upgrade",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
-        "damage": "17",
+        "damage": "34",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianTankKillerRocket_upgrade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3868,20 +3771,20 @@
        "AsianTankKillerRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "AsianTankKillerRocket_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "34",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianTankKillerRocket_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3893,17 +3796,10 @@
        "AsianTankKillerRocket_elite"
       ],
       "warheads": [
-       {
-        "damage": "34",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "AsianTankKillerRocket_upgrade_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2LightMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3947,6 +3843,7 @@
    "asianalliance_engineer": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -3960,13 +3857,10 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RemovesIvanBombs",
-       "^RemovesTerrorDrone"
-      ]
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -3977,8 +3871,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4024,8 +3917,30 @@
      {
       "burst": "10",
       "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "70",
@@ -4035,7 +3950,14 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "asianalliance_fanatic_shotgun",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "13",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -4057,18 +3979,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "asianalliance_fanatic_shotgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "burst": "13",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "70",
@@ -4077,7 +3989,14 @@
       "versus_templates": [
        "asianalliance_fanatic_shotgun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "asianalliance_fanatic_shotgun_upgrade",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "20",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -4099,18 +4018,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "asianalliance_fanatic_shotgun_upgrade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "burst": "20",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "70",
@@ -4119,7 +4028,15 @@
       "versus_templates": [
        "asianalliance_fanatic_shotgun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "asianalliance_fanatic_shotgun_elite",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "10",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -4141,19 +4058,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "asianalliance_fanatic_shotgun_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "10",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "70",
@@ -4163,7 +4069,15 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "asianalliance_fanatic_shotgun",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "13",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -4185,19 +4099,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "asianalliance_fanatic_shotgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "13",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "70",
@@ -4206,7 +4109,15 @@
       "versus_templates": [
        "asianalliance_fanatic_shotgun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "asianalliance_fanatic_shotgun_upgrade",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "20",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -4228,19 +4139,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "asianalliance_fanatic_shotgun_upgrade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "20",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "70",
@@ -4249,34 +4149,9 @@
       "versus_templates": [
        "asianalliance_fanatic_shotgun"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "asianalliance_fanatic_shotgun_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4326,6 +4201,13 @@
    "asianalliance_japanesesamurai": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "10",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -4339,23 +4221,21 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "AsianSamuraiSword1",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10",
         "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianSamuraiSword1",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -4367,23 +4247,21 @@
        "AsianSamuraiSword1"
       ],
       "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "AsianSamuraiSword2",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10",
         "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianSamuraiSword2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
-     },
-     {
-      "burst": "3",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -4395,19 +4273,10 @@
        "AsianSamuraiSword1"
       ],
       "warheads": [
-       {
-        "damage": "10",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "AsianSamuraiSword3",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4454,8 +4323,110 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5190",
       "reloaddelay": "34",
@@ -4472,6 +4443,16 @@
        "^RA2HeavyCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "AsianSinglePlasma",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -4573,25 +4554,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianSinglePlasma",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^MediumCannon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^RA2HeavyCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5836",
       "reloaddelay": "34",
@@ -4601,6 +4565,14 @@
        "AsianSinglePlasma"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "AsianSinglePlasma_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -4702,23 +4674,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianSinglePlasma_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^MediumCannon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^RA2HeavyCannon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5190",
       "reloaddelay": "34",
@@ -4735,6 +4692,16 @@
        "^RA2HeavyCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "AsianSinglePlasma",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -4836,25 +4803,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianSinglePlasma",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^MediumCannon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^RA2HeavyCannon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5836",
       "reloaddelay": "34",
@@ -4864,119 +4814,10 @@
        "AsianSinglePlasma"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianSinglePlasma_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^MediumCannon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^RA2HeavyCannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5022,6 +4863,13 @@
    "asianalliance_shinobi": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "10",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5035,23 +4883,21 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "AsianNinjaStar",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10",
         "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianNinjaStar",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5063,22 +4909,20 @@
        "AsianNinjaStar"
       ],
       "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "AsianNinjaStar_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "10",
         "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianNinjaStar_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -5092,24 +4936,22 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "AsianNinjaStar",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10",
         "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianNinjaStar",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -5121,19 +4963,10 @@
        "AsianNinjaStar"
       ],
       "warheads": [
-       {
-        "damage": "10",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "AsianNinjaStar_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5180,6 +5013,83 @@
      {
       "burst": "3",
       "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1350",
@@ -5193,7 +5103,14 @@
        "^Grenade",
        "^ArrowWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "AsianMaidenBow",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "6",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MediumMissile",
@@ -5270,20 +5187,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianMaidenBow",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^Grenade",
-       "^ArrowWeapon"
-      ]
-     },
-     {
-      "burst": "6",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1550",
@@ -5295,7 +5198,15 @@
       "versus_templates": [
        "AsianMaidenBow"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "AsianMaidenBow_elite",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MediumMissile",
@@ -5372,21 +5283,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianMaidenBow_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^Grenade",
-       "^ArrowWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "3",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1350",
@@ -5400,7 +5296,15 @@
        "^Grenade",
        "^ArrowWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "AsianMaidenBow",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MediumMissile",
@@ -5477,21 +5381,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianMaidenBow",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^Grenade",
-       "^ArrowWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "6",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1550",
@@ -5503,93 +5392,9 @@
       "versus_templates": [
        "AsianMaidenBow"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "AsianMaidenBow_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^Grenade",
-       "^ArrowWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5638,6 +5443,13 @@
     "armaments": [
      {
       "armament_name": "secondary",
+      "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -5649,22 +5461,22 @@
        "^RA2HeavyCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "AAGunBoatCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "8",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AAGunBoatCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2HeavyCannon"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -5677,24 +5489,58 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "8",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AAGunBoatCannon_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2HeavyCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "18",
@@ -5704,6 +5550,15 @@
        "RA2FlakTrackGun"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "AAGunBoatFlak",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -5745,20 +5600,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AAGunBoatFlak",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Grenade",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "18",
@@ -5768,57 +5611,19 @@
        "AAGunBoatFlak"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "AAGunBoatFlak_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Flak_Medium_Percentage",
+        "damage": "30",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AAGunBoatFlak_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Grenade",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -5831,21 +5636,19 @@
        "^Effect_Explosion_Light"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "DepthCharge",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "30",
         "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DepthCharge",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -5859,19 +5662,10 @@
        "^Effect_Explosion_Light"
       ],
       "warheads": [
-       {
-        "damage": "30",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5919,6 +5713,7 @@
    "karrier.asian": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -5929,8 +5724,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "KamikazeCarrierTarget",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5980,6 +5774,7 @@
    "ksub.asian": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -5989,8 +5784,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "AsianDemoSubTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6040,17 +5834,7 @@
      {
       "burst": "2",
       "burstdelays": "8",
-      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "12000",
-      "reloaddelay": "120",
-      "slot": "Armament@Torp",
-      "versus_templates": [
-       "^RA2Grenade",
-       "^RA2HeavyMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "6",
         "tag": "Demolition_Light_Percentage",
@@ -6062,12 +5846,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianSmallTorpedo",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "12000",
+      "reloaddelay": "120",
+      "slot": "Armament@Torp",
+      "versus_templates": [
        "^RA2Grenade",
        "^RA2HeavyMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "AsianSmallTorpedo",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6117,6 +5911,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -6128,22 +5929,22 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "RA2120mm",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "5",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120mm",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -6156,18 +5957,10 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "5",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "RA2120mm_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6217,6 +6010,58 @@
      {
       "burst": "3",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6227,7 +6072,14 @@
       "versus_templates": [
        "AsianPhotonCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "AsianQuasarBoatAG",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MediumMissile",
@@ -6279,18 +6131,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "AsianQuasarBoatAG",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon"
-      ]
-     },
-     {
-      "burst": "3",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6301,7 +6141,14 @@
       "versus_templates": [
        "AsianQuasarBoatAG"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "AsianQuasarBoatAG_EMP",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MediumMissile",
@@ -6353,18 +6200,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "AsianQuasarBoatAG_EMP",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon"
-      ]
-     },
-     {
-      "burst": "3",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6375,7 +6210,14 @@
       "versus_templates": [
        "AsianPhotonCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "AsianQuasarBoat_AA",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MediumMissile",
@@ -6427,18 +6269,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "AsianQuasarBoat_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon"
-      ]
-     },
-     {
-      "burst": "3",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6449,66 +6279,9 @@
       "versus_templates": [
        "AsianQuasarBoat_AA"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "AsianQuasarBoat_EMP_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6557,6 +6330,7 @@
    "tsun.asian": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -6567,8 +6341,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "TsunamiCarrierTarget",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -7274,6 +7047,13 @@
      {
       "burst": "6",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Flame_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -7285,23 +7065,21 @@
        "AsianFlamerTurret"
       ],
       "warheads": [
+       "^Warhead_Flame_Light"
+      ],
+      "weapon": "AsianFlamerTank",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "12",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianFlamerTank",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
-      ]
-     },
-     {
-      "burst": "12",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -7313,19 +7091,10 @@
        "AsianFlamerTank"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flame_Light"
       ],
       "weapon": "AsianFlamerTank_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7518,6 +7287,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "18",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -7529,22 +7305,20 @@
        "AsianRailTank"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "AsianRailTank2",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
-        "damage": "18",
+        "damage": "24",
         "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianRailTank2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -7556,19 +7330,10 @@
        "AsianRailTank"
       ],
       "warheads": [
-       {
-        "damage": "24",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "AsianRailTank3",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7619,6 +7384,18 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "10",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "minrange": "3200",
@@ -7632,6 +7409,15 @@
        "^RA2HeavyCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "AsianHowitzerCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
         "damage": "10",
         "tag": "CannonHE_Medium_Percentage",
@@ -7643,15 +7429,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianHowitzerCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon",
-       "^RA2HeavyCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "minrange": "4000",
@@ -7664,23 +7441,11 @@
        "AsianHowitzerCannon"
       ],
       "warheads": [
-       {
-        "damage": "10",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianHowitzerCannon_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon",
-       "^RA2HeavyCannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7731,8 +7496,85 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5357",
       "reloaddelay": "55",
@@ -7747,6 +7589,16 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "AsianLynxTankCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -7823,23 +7675,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianLynxTankCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6357",
       "reloaddelay": "55",
@@ -7850,97 +7687,26 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "AsianLynxTankCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -7953,6 +7719,16 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "AsianLynxMG",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "6",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
@@ -7964,16 +7740,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianLynxMG",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "6",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -7986,24 +7752,11 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianLynxMG_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8051,6 +7804,7 @@
    "asianalliance_oiltruck": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -8060,8 +7814,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -8111,18 +7864,7 @@
    "asianalliance_pulverizer": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5517",
-      "reloaddelay": "12",
-      "slot": "Armament@1",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^SmallArms",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyCannon",
@@ -8149,17 +7891,53 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianPulverizerGatling",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5517",
+      "reloaddelay": "12",
+      "slot": "Armament@1",
+      "versus_templates": [
        "^HeavyCannon",
        "^SmallArms",
        "^RA2Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "AsianPulverizerGatling",
+      "weapon_class_source": "template"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5517",
       "reloaddelay": "12",
@@ -8171,39 +7949,10 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianPulverizerGatling",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8253,18 +8002,7 @@
    "asianalliance_pulverizermecha": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "7020",
-      "reloaddelay": "15",
-      "slot": "Armament@1",
-      "versus_templates": [
-       "^MediumChemicalWeapon",
-       "^MediumMissile",
-       "AsianPulverizerGatling"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MediumChemicalWeapon",
@@ -8316,19 +8054,78 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianPulverizerMechaGatling",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "7020",
+      "reloaddelay": "15",
+      "slot": "Armament@1",
+      "versus_templates": [
        "^MediumChemicalWeapon",
        "^MediumMissile",
-       "^HeavyCannon",
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
+       "AsianPulverizerGatling"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "AsianPulverizerMechaGatling",
+      "weapon_class_source": "template"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7020",
       "reloaddelay": "15",
@@ -8340,66 +8137,10 @@
        "AsianPulverizerGatling"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianPulverizerMechaGatling",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumChemicalWeapon",
-       "^MediumMissile",
-       "^HeavyCannon",
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8449,6 +8190,58 @@
    "asianalliance_quasar": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -8459,7 +8252,12 @@
       "versus_templates": [
        "AsianPhotonCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "AsianQuasarAG",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MediumMissile",
@@ -8511,16 +8309,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "AsianQuasarAG",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -8531,7 +8319,12 @@
       "versus_templates": [
        "AsianQuasarAG"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "AsianQuasarAG_EMP",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MediumMissile",
@@ -8583,16 +8376,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "AsianQuasarAG_EMP",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -8603,7 +8386,12 @@
       "versus_templates": [
        "AsianPhotonCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "AsianQuasar_AA",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MediumMissile",
@@ -8655,16 +8443,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "AsianQuasar_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -8675,66 +8453,9 @@
       "versus_templates": [
        "AsianQuasar_AA"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "AsianQuasar_EMP_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -8783,6 +8504,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "12",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -8796,22 +8524,20 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "AsianRailTank",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
-        "damage": "12",
+        "damage": "18",
         "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianRailTank",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -8823,19 +8549,10 @@
        "AsianRailTank"
       ],
       "warheads": [
-       {
-        "damage": "18",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "AsianRailTank2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8885,20 +8602,7 @@
    "asianalliance_type89mlrs": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1700",
-      "pricing": true,
-      "range": "8500",
-      "reloaddelay": "16",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^HeavyMissile",
-       "^FlakWeapon",
-       "^RA2Grenade",
-       "^RA2MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyMissile",
@@ -8930,14 +8634,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianMLRS",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "minrange": "1700",
+      "pricing": true,
+      "range": "8500",
+      "reloaddelay": "16",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^HeavyMissile",
        "^FlakWeapon",
        "^RA2Grenade",
        "^RA2MediumMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "AsianMLRS",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8987,8 +8702,85 @@
    "asianalliance_viper": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "60",
@@ -9003,6 +8795,15 @@
        "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "AsianChemical",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "LightChemicalWeapon",
@@ -9079,22 +8880,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianChemical",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon",
-       "^HeavyBomb",
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "60",
@@ -9104,92 +8891,10 @@
        "AsianChemical"
       ],
       "warheads": [
-       {
-        "damage": "4000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "AsianChemical_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon",
-       "^HeavyBomb",
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9238,17 +8943,7 @@
    "asianalliance_warturtle": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "4567",
-      "reloaddelay": "92",
-      "slot": "Armament",
-      "versus_templates": [
-       "^ShrapnelWeapon",
-       "^RA2MediumCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "ShrapnelWeapon",
@@ -9270,12 +8965,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianGrenade",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "4567",
+      "reloaddelay": "92",
+      "slot": "Armament",
+      "versus_templates": [
        "^ShrapnelWeapon",
        "^RA2MediumCannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "AsianGrenade",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9327,8 +9031,110 @@
      {
       "burst": "2",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "25",
@@ -9338,6 +9144,15 @@
        "AsianSinglePlasma"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "AsianTwinPlasma",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -9439,24 +9254,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianTwinPlasma",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^MediumCannon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^RA2HeavyCannon"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "25",
@@ -9466,119 +9265,10 @@
        "AsianTwinPlasma"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianTwinPlasma_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightFlameWeapon",
-       "^LightChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^MediumCannon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^RA2HeavyCannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -9,6 +9,18 @@
      {
       "burst": "2",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -21,24 +33,10 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalWaspLaserStriker",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -83,17 +81,7 @@
    "cabal_hunterdrone": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "4096",
-      "reloaddelay": "30",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^SmallArms",
-       "^LaserWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "SmallArms",
@@ -120,12 +108,19 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "CabalOverkillDroneLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "4096",
+      "reloaddelay": "30",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^SmallArms",
        "^LaserWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CabalOverkillDroneLaser",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -162,6 +157,7 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -172,11 +168,17 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "CabalOverkillDroneLauncher",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "charge",
+      "damage_warheads": [
+       {
+        "damage": "12",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -189,24 +191,22 @@
        "^Effect_Tesla_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "12",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "CabalOverkillCharge",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
       "burst": "50",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -219,19 +219,10 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalOverkillLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -276,17 +267,7 @@
    "cabal_hunterkillermk1": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "5318",
-      "reloaddelay": "24",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^LaserWeapon",
-       "^MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "LaserWeapon",
@@ -313,31 +294,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalHunterKillerLasers",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5318",
+      "reloaddelay": "24",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^LaserWeapon",
        "^MediumMissile"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CabalHunterKillerLasers",
+      "weapon_class_source": "none"
      },
      {
       "burst": "2",
       "burstdelays": "8",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5740",
-      "reloaddelay": "32",
-      "slot": "Armament@ROCKETS",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "HeavyCannon",
@@ -409,16 +383,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSHellfireTwin",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5740",
+      "reloaddelay": "32",
+      "slot": "Armament@ROCKETS",
+      "versus_templates": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
        "^Grenade",
        "^HeavyMissile",
        "^MediumMissile"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TSHellfireTwin",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -462,18 +443,7 @@
    "cabal_hunterkillermk1_elite": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6000",
-      "reloaddelay": "20",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^LaserWeapon",
-       "^RailgunWeapon",
-       "^HeavyMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "LaserWeapon",
@@ -515,32 +485,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalHunterKillerLasers_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "20",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^LaserWeapon",
        "^RailgunWeapon",
        "^HeavyMissile"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CabalHunterKillerLasers_elite",
+      "weapon_class_source": "none"
      },
      {
       "burst": "2",
       "burstdelays": "8",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5740",
-      "reloaddelay": "32",
-      "slot": "Armament@ROCKETS",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "HeavyCannon",
@@ -612,16 +575,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSHellfireTwin",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5740",
+      "reloaddelay": "32",
+      "slot": "Armament@ROCKETS",
+      "versus_templates": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
        "^Grenade",
        "^HeavyMissile",
        "^MediumMissile"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TSHellfireTwin",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -666,6 +636,13 @@
    "cabal_mothership": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "10",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -678,39 +655,15 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "10",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalHunterKillerHeavyLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1170",
-      "pricing": true,
-      "range": "5846",
-      "reloaddelay": "34",
-      "slot": "Armament@ROCKETS",
-      "versus_templates": [
-       "^TeslaWeapon",
-       "^HeavyMissile",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^Grenade",
-       "^ArrowWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "TeslaWeapon",
@@ -792,16 +745,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalMothershipRockets",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "1170",
+      "pricing": true,
+      "range": "5846",
+      "reloaddelay": "34",
+      "slot": "Armament@ROCKETS",
+      "versus_templates": [
        "^TeslaWeapon",
        "^HeavyMissile",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
        "^Grenade",
        "^ArrowWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CabalMothershipRockets",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -851,6 +812,18 @@
    "cabal_orbdrone": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -863,24 +836,10 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalWaspLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -925,6 +884,18 @@
    "cabal_orbdrone_slave": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -937,24 +908,10 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalWaspLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -995,6 +952,13 @@
    "cabal_overkillgunship": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -1007,21 +971,19 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "CabalOverkillGunshipLaser",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "5",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalOverkillGunshipLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -1034,19 +996,10 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "5",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalOverkillGunshipLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1093,16 +1046,7 @@
      {
       "burst": "10",
       "burstdelays": "1",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
-      "pricing": true,
-      "range": "6128",
-      "reloaddelay": "31",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^RepairWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "-1600",
         "tag": "RepairWeapon",
@@ -1119,11 +1063,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalEngineerRepairBeam",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6128",
+      "reloaddelay": "31",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^RepairWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CabalEngineerRepairBeam",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1170,6 +1121,7 @@
     "armaments": [
      {
       "armament_name": "superweapon",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -1181,8 +1133,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "TSHSeekerLaunch",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1583,20 +1534,7 @@
    "cabal_heavycabalobelisk": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "12288",
-      "reloaddelay": "90",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^TankDestroyerCannon",
-       "^LaserWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TSLaserEffect"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "70000",
         "tag": "TankDestroyerCannon",
@@ -1653,15 +1591,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSCABALObeliskLaserFire",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "12288",
+      "reloaddelay": "90",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^TankDestroyerCannon",
        "^LaserWeapon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
        "^TSLaserEffect"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "TSCABALObeliskLaserFire",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1731,6 +1676,13 @@
    "cabal_obeliskofdarkness": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "18",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -1743,19 +1695,10 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "18",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "DarkObeliskLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1832,16 +1775,7 @@
    "cabal_plasmaturret": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "6487",
-      "reloaddelay": "25",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "TSTurretLaser"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "Chaingun",
@@ -1868,13 +1802,18 @@
         "type": "SpreadDamage"
        }
       ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6487",
+      "reloaddelay": "25",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "TSTurretLaser"
+      ],
+      "warheads": [],
       "weapon": "TSCABALPlasmaFire",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Chaingun",
-       "^LaserWeapon",
-       "^TSLaserEffect"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1995,6 +1934,68 @@
      {
       "burst": "2",
       "burstdelays": "8",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2010,7 +2011,15 @@
        "^HeavyAAWeapon",
        "^CabalMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "CabalAscendedRockets",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "8",
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "LightMissile",
@@ -2072,22 +2081,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalAscendedRockets",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^HeavyMissile",
-       "^TankDestroyerCannon",
-       "^FlakWeapon",
-       "^HeavyAAWeapon",
-       "^CabalMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2103,79 +2096,9 @@
        "^HeavyAAWeapon",
        "^CabalMissile"
       ],
-      "warheads": [
-       {
-        "damage": "6000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "CabalAscendedRockets",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^HeavyMissile",
-       "^TankDestroyerCannon",
-       "^FlakWeapon",
-       "^HeavyAAWeapon",
-       "^CabalMissile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2224,19 +2147,7 @@
    "cabal_cyborgcommando": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5219",
-      "reloaddelay": "90",
-      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "50000",
         "tag": "HeavyCannon",
@@ -2278,15 +2189,110 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalCommandoPlasma",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5219",
+      "reloaddelay": "90",
+      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^HeavyCannon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CabalCommandoPlasma",
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "50000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2302,7 +2308,73 @@
        "^MagicWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "CabalCommandoPlasmaNeutron",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "50000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "5219",
+      "reloaddelay": "90",
+      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon"
+      ],
+      "warheads": [],
+      "weapon": "CabalCommandoPlasma",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "50000",
         "tag": "HeavyCannon",
@@ -2389,83 +2461,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "CabalCommandoPlasmaNeutron",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^RailgunWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": false,
-      "range": "5219",
-      "reloaddelay": "90",
-      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
-      "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
-      ],
-      "warheads": [
-       {
-        "damage": "50000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "CabalCommandoPlasma",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2481,103 +2476,9 @@
        "^MagicWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "50000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "CabalCommandoPlasmaNeutron",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^RailgunWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2631,19 +2532,7 @@
    "cabal_cyborgcommandov2": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6264",
-      "reloaddelay": "90",
-      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "50000",
         "tag": "HeavyCannon",
@@ -2685,15 +2574,110 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalCommandoPlasmaMk2",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6264",
+      "reloaddelay": "90",
+      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^HeavyCannon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CabalCommandoPlasmaMk2",
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "50000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2709,7 +2693,73 @@
        "^MagicWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "CabalCommandoPlasmaMk2Neutron",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "50000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "6264",
+      "reloaddelay": "90",
+      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon"
+      ],
+      "warheads": [],
+      "weapon": "CabalCommandoPlasmaMk2",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "50000",
         "tag": "HeavyCannon",
@@ -2796,83 +2846,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "CabalCommandoPlasmaMk2Neutron",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^RailgunWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": false,
-      "range": "6264",
-      "reloaddelay": "90",
-      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
-      "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
-      ],
-      "warheads": [
-       {
-        "damage": "50000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "CabalCommandoPlasmaMk2",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2888,103 +2861,9 @@
        "^MagicWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "50000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "CabalCommandoPlasmaMk2Neutron",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^RailgunWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3038,8 +2917,30 @@
    "cabal_cyborginfantry": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5800",
       "reloaddelay": "60",
@@ -3048,7 +2949,13 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "CabalCyborgChaingun",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "SmallArms",
@@ -3070,17 +2977,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalCyborgChaingun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5800",
       "reloaddelay": "60",
@@ -3089,34 +2987,9 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
-       {
-        "damage": "10000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "CabalCyborgChaingun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3167,8 +3040,30 @@
      {
       "burst": "2",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6200",
       "reloaddelay": "45",
@@ -3177,7 +3072,15 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TSDevoutChainguns",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "12000",
         "tag": "SmallArms",
@@ -3199,19 +3102,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSDevoutChainguns",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6200",
       "reloaddelay": "45",
@@ -3220,34 +3112,9 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
-       {
-        "damage": "12000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "TSDevoutChainguns",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3296,17 +3163,7 @@
    "cabal_dissolver": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": true,
-      "range": "5142",
-      "reloaddelay": "4",
-      "slot": "Armament",
-      "versus_templates": [
-       "^LightChemicalWeapon",
-       "^TankDestroyerCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightChemicalWeapon",
@@ -3333,12 +3190,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalDissolverSpray",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5142",
+      "reloaddelay": "4",
+      "slot": "Armament",
+      "versus_templates": [
        "^LightChemicalWeapon",
        "^TankDestroyerCannon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CabalDissolverSpray",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3387,6 +3251,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "16",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3399,22 +3270,20 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "CabalEliminatorGatling",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "16",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalEliminatorGatling",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3427,19 +3296,10 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "16",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "CabalEliminatorGatling",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3493,6 +3353,7 @@
     "armaments": [
      {
       "armament_name": "dummy",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -3502,23 +3363,13 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "dummytargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
       "burst": "10",
       "burstdelays": "1",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
-      "pricing": true,
-      "range": "6128",
-      "reloaddelay": "31",
-      "slot": "Armament@REPAIRBEAM",
-      "versus_templates": [
-       "^RepairWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "-1600",
         "tag": "RepairWeapon",
@@ -3535,11 +3386,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalEngineerRepairBeam",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6128",
+      "reloaddelay": "31",
+      "slot": "Armament@REPAIRBEAM",
+      "versus_templates": [
        "^RepairWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CabalEngineerRepairBeam",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3587,6 +3445,63 @@
    "cabal_enlighted": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "70000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "70000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "70000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "70000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3600,7 +3515,28 @@
        "^MediumChemicalWeapon",
        "^TSLaserEffect"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TSCABALEnlightedLaser",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "1536",
+      "slot": "Armament@Suicide",
+      "versus_templates": [
+       "DemoTruckTargeting"
+      ],
+      "warheads": [],
+      "weapon": "SuicideBomberTargeting",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "70000",
         "tag": "TankDestroyerCannon",
@@ -3657,33 +3593,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSCABALEnlightedLaser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^LaserWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TSLaserEffect"
-      ]
-     },
-     {
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": null,
-      "extraction_note": "no_damage_warheads",
-      "pricing": false,
-      "range": "1536",
-      "slot": "Armament@Suicide",
-      "versus_templates": [
-       "DemoTruckTargeting"
-      ],
-      "warheads": [],
-      "weapon": "SuicideBomberTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -3697,72 +3606,9 @@
        "^MediumChemicalWeapon",
        "^TSLaserEffect"
       ],
-      "warheads": [
-       {
-        "damage": "70000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "35",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "70000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "35",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "70000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "35000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "35",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "70000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "35000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "35",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "TSCABALEnlightedLaser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^LaserWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TSLaserEffect"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3811,6 +3657,13 @@
    "cabal_hackercyborg": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Damage",
+        "type": "TargetDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3819,31 +3672,12 @@
       "requires": "end_disable == 0",
       "slot": "Armament@Anim",
       "versus_templates": [],
-      "warheads": [
-       {
-        "damage": "1",
-        "tag": "Damage",
-        "type": "TargetDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "TSCABALCharge_EMP",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
-      "pricing": true,
-      "range": "8000",
-      "reloaddelay": "8",
-      "requires": "end_disable >= 1",
-      "slot": "Armament@End",
-      "versus_templates": [
-       "^Warhead_TeslaCharged_Super",
-       "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TeslaCharged_Super",
@@ -3860,16 +3694,33 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TSCABALDisable_EMP",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": 1.5,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "8",
+      "requires": "end_disable >= 1",
+      "slot": "Armament@End",
+      "versus_templates": [
        "^Warhead_TeslaCharged_Super",
        "^Projectile_Lightning_Super",
        "^Effect_Tesla_Super"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_TeslaCharged_Super"
+      ],
+      "weapon": "TSCABALDisable_EMP",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -3877,16 +3728,9 @@
       "reloaddelay": "50",
       "slot": "Armament@GARRISONED",
       "versus_templates": [],
-      "warheads": [
-       {
-        "damage": "0",
-        "tag": "1Dam",
-        "type": "TargetDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "TSRobotHackingControl",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3936,8 +3780,30 @@
      {
       "burst": "3",
       "burstdelays": "8",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8753",
       "reloaddelay": "52",
@@ -3948,7 +3814,14 @@
        "^MediumMissile",
        "^CabalMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "CabalRocketCyborgRockets",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "8",
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "LightMissile",
@@ -3970,19 +3843,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalRocketCyborgRockets",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^CabalMissile"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8753",
       "reloaddelay": "52",
@@ -3993,7 +3855,15 @@
        "^MediumMissile",
        "^CabalMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "CabalRocketCyborgRocketsUpgraded",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "8",
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "LightMissile",
@@ -4015,20 +3885,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalRocketCyborgRocketsUpgraded",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^CabalMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "3",
-      "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "8753",
       "reloaddelay": "52",
@@ -4038,35 +3896,9 @@
        "^MediumMissile",
        "^CabalMissile"
       ],
-      "warheads": [
-       {
-        "damage": "6000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "CabalRocketCyborgRockets",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^LightMissile",
-       "^MediumMissile",
-       "^CabalMissile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4117,6 +3949,13 @@
    "cabal_lazerboat": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "22",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -4129,21 +3968,19 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "CabalLaserBoatLaser",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "22",
+        "damage": "18",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalLaserBoatLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -4156,22 +3993,20 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "18",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalLaserBoatLaserAA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
+      "damage_warheads": [
+       {
+        "damage": "30",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -4184,19 +4019,10 @@
        "^Effect_Explosion_Light"
       ],
       "warheads": [
-       {
-        "damage": "30",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4285,18 +4111,7 @@
    "cabal_plasmasub": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "12000",
-      "reloaddelay": "45",
-      "slot": "Armament",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "25000",
         "tag": "HeavyCannon",
@@ -4338,13 +4153,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalSubmarinePlasma",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "12000",
+      "reloaddelay": "45",
+      "slot": "Armament",
+      "versus_templates": [
        "^HeavyCannon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CabalSubmarinePlasma",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4397,6 +4219,13 @@
    "cabal_radar_cruiser": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Damage",
+        "type": "TargetDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -4405,31 +4234,12 @@
       "requires": "end_disable == 0",
       "slot": "Armament@Anim",
       "versus_templates": [],
-      "warheads": [
-       {
-        "damage": "1",
-        "tag": "Damage",
-        "type": "TargetDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "TSCABALCharge_EMP",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
-      "pricing": true,
-      "range": "8000",
-      "reloaddelay": "8",
-      "requires": "end_disable >= 1",
-      "slot": "Armament@End",
-      "versus_templates": [
-       "^Warhead_TeslaCharged_Super",
-       "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TeslaCharged_Super",
@@ -4446,13 +4256,23 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TSCABALDisable_EMP",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": 1.5,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "8",
+      "requires": "end_disable >= 1",
+      "slot": "Armament@End",
+      "versus_templates": [
        "^Warhead_TeslaCharged_Super",
        "^Projectile_Lightning_Super",
        "^Effect_Tesla_Super"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_TeslaCharged_Super"
+      ],
+      "weapon": "TSCABALDisable_EMP",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5181,21 +5001,7 @@
    "cabal_artilleryspider": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "2315",
-      "pricing": true,
-      "range": "11580",
-      "reloaddelay": "64",
-      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumCannon",
-       "^HeavyCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "42000",
         "tag": "Grenade",
@@ -5247,35 +5053,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalArtilleryWalkerShell",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumCannon",
-       "^HeavyCannon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "2315",
       "pricing": true,
       "range": "11580",
       "reloaddelay": "64",
-      "requires": "cabal_upgrade_neutronnuclearcatalyst",
-      "slot": "Armament@Upgraded",
+      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Grenade",
        "^ShrapnelWeapon",
        "^MediumCannon",
-       "^HeavyCannon",
-       "^MediumChemicalWeapon",
-       "^TeslaChargedWeapon",
-       "^MagicWeapon",
-       "^RailgunWeapon"
+       "^HeavyCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "CabalArtilleryWalkerShell",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "42000",
         "tag": "Grenade",
@@ -5387,9 +5184,15 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "CabalArtilleryWalkerShellUpgraded",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "2315",
+      "pricing": true,
+      "range": "11580",
+      "reloaddelay": "64",
+      "requires": "cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@Upgraded",
+      "versus_templates": [
        "^Grenade",
        "^ShrapnelWeapon",
        "^MediumCannon",
@@ -5398,7 +5201,10 @@
        "^TeslaChargedWeapon",
        "^MagicWeapon",
        "^RailgunWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CabalArtilleryWalkerShellUpgraded",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5447,6 +5253,13 @@
    "cabal_avatar": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "40",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -5459,21 +5272,19 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "CabalAvatarLaser",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "40",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalAvatarLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -5486,19 +5297,10 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "40",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalAvatarLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5550,19 +5352,7 @@
      {
       "burst": "2",
       "burstdelays": "5",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "2500",
-      "reloaddelay": "50",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^TeslaWeapon",
-       "^RailgunWeapon",
-       "^LaserWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "HeavyCannon",
@@ -5619,14 +5409,21 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "CabalBeholderLaser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "2500",
+      "reloaddelay": "50",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^HeavyCannon",
        "^TeslaWeapon",
        "^RailgunWeapon",
        "^LaserWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CabalBeholderLaser",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5678,6 +5475,13 @@
      {
       "burst": "3",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "37",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5690,19 +5494,10 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
-       {
-        "damage": "37",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "CabalBerserkerBlades",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5790,6 +5585,13 @@
    "cabal_coredefender": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "80",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -5802,21 +5604,19 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "CabalCoreDefenderLaser",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "80",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalCoreDefenderLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -5829,19 +5629,10 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "80",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalCoreDefenderLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5897,6 +5688,58 @@
      {
       "burst": "2",
       "burstdelays": "12",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -5910,7 +5753,14 @@
        "^MediumMissile",
        "^CabalMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "CabalReaperMissiles",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "12",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "Grenade",
@@ -5962,19 +5812,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalReaperMissiles",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightMissile",
-       "^MediumMissile",
-       "^CabalMissile"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -5988,69 +5825,12 @@
        "^MediumMissile",
        "^CabalMissile"
       ],
-      "warheads": [
-       {
-        "damage": "8000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "CabalReaperMissiles_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightMissile",
-       "^MediumMissile",
-       "^CabalMissile"
-      ]
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -6061,10 +5841,10 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "CabalReaperTrapGround",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -6075,8 +5855,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "CabalReaperTrapAir",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6131,6 +5910,58 @@
      {
       "burst": "2",
       "burstdelays": "12",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6144,7 +5975,14 @@
        "^HeavyMissile",
        "^CabalMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "CabalHeavyReaperMissiles",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "12",
+      "damage_warheads": [
        {
         "damage": "12000",
         "tag": "Grenade",
@@ -6196,19 +6034,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalHeavyReaperMissiles",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumMissile",
-       "^HeavyMissile",
-       "^CabalMissile"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6222,69 +6047,12 @@
        "^HeavyMissile",
        "^CabalMissile"
       ],
-      "warheads": [
-       {
-        "damage": "12000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "CabalHeavyReaperMissiles_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumMissile",
-       "^HeavyMissile",
-       "^CabalMissile"
-      ]
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -6295,8 +6063,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "CabalHeavyReaperTrap",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6349,6 +6116,13 @@
    "cabal_laserspider": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "22",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -6361,19 +6135,10 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "22",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalSpiderLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6424,6 +6189,13 @@
      {
       "burst": "2",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -6436,33 +6208,15 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "5",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalManticoreLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "3",
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5358",
-      "reloaddelay": "30",
-      "slot": "Armament@SECONDARY",
-      "versus_templates": [
-       "^CabalManticoreMissiles"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "12000",
         "tag": "Grenade",
@@ -6514,11 +6268,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalManticoreMissilesAA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5358",
+      "reloaddelay": "30",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
        "^CabalManticoreMissiles"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CabalManticoreMissilesAA",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6567,17 +6328,7 @@
    "cabal_mantis": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "7082",
-      "reloaddelay": "40",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^SmallArms",
-       "^LaserWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "SmallArms",
@@ -6604,12 +6355,19 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "CabalMantisGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "7082",
+      "reloaddelay": "40",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^SmallArms",
        "^LaserWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CabalMantisGun",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6705,6 +6463,13 @@
    "cabal_ravager": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "16",
+        "tag": "Chemical_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -6718,21 +6483,19 @@
        "^Effect_Chem_Medium"
       ],
       "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
+      "weapon": "CabalRavagerPlasma",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "16",
         "tag": "Chemical_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalRavagerPlasma",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Medium",
-       "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -6746,19 +6509,10 @@
        "^Effect_Chem_Medium"
       ],
       "warheads": [
-       {
-        "damage": "16",
-        "tag": "Chemical_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Chemical_Medium"
       ],
       "weapon": "CabalRavagerPlasmaNeutron",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Medium",
-       "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6850,6 +6604,13 @@
    "cabal_spidercnc4": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "22",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -6862,19 +6623,10 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "22",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalSpiderCnc4Laser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6923,6 +6675,13 @@
    "cabal_tarantula": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -6936,21 +6695,19 @@
        "^Effect_Cannon_Medium"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "CabalTarantulaCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "8",
+        "damage": "6",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CabalTarantulaCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -6965,20 +6722,10 @@
        "^Effect_Cannon_Medium"
       ],
       "warheads": [
-       {
-        "damage": "6",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "TS120mm_bluenuke",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TSCannonEffect",
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7075,17 +6822,7 @@
    "cabal_widow": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "6813",
-      "reloaddelay": "40",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^SmallArms",
-       "^LaserWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "60000",
         "tag": "SmallArms",
@@ -7112,12 +6849,19 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "CabalLegionGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6813",
+      "reloaddelay": "40",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^SmallArms",
        "^LaserWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CabalLegionGun",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {

@@ -55,7 +55,7 @@ def unit_inputs(u):
             continue
         if arm.get("requires"):   # upgrade-gated / conditional weapon -> NOT part of BASE dps
             continue
-        dmg = formula.spread_damage_sum(arm.get("warheads", []))  # SUM law, chips excluded
+        dmg = formula.spread_damage_sum(arm.get("damage_warheads", []))  # SUM law, chips excluded
         reload_ = fnum(arm.get("reloaddelay"))
         if not dmg or not reload_:
             continue

@@ -39,20 +39,7 @@
    "horten_bomber.nax": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "3000",
-      "reloaddelay": "5",
-      "slot": "Armament",
-      "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyBomb"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "Grenade",
@@ -124,15 +111,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JapanSuperBomb",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "3000",
+      "reloaddelay": "5",
+      "slot": "Armament",
+      "versus_templates": [
        "^Grenade",
        "^ShrapnelWeapon",
        "^MediumChemicalWeapon",
        "^MediumFlameWeapon",
        "^HeavyBomb"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "JapanSuperBomb",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -172,18 +166,7 @@
       "armament_name": "primary",
       "burst": "10",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6090",
-      "reloaddelay": "127",
-      "slot": "Armament",
-      "versus_templates": [
-       "^Grenade",
-       "^HeavyCannon",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -215,20 +198,61 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlanegun_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6090",
+      "reloaddelay": "127",
+      "slot": "Armament",
+      "versus_templates": [
        "^Grenade",
        "^HeavyCannon",
        "^RA2Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "NaxPlanegun_elite",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "10",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "127",
@@ -240,44 +264,10 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxPlanegun_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyCannon",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -326,19 +316,7 @@
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "3",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6090",
-      "reloaddelay": "100",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^SmallArms"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "HeavyCannon",
@@ -380,30 +358,27 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiInterceptorGun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6090",
+      "reloaddelay": "100",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^HeavyCannon",
        "^FlakWeapon",
        "^Chaingun",
        "^SmallArms"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "NaxiInterceptorGun",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "9",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "6090",
-      "reloaddelay": "100",
-      "slot": "Armament@Rockets",
-      "versus_templates": [
-       "^MediumMissile",
-       "^D2KRocket"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "MediumMissile",
@@ -420,12 +395,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlaneRockets_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6090",
+      "reloaddelay": "100",
+      "slot": "Armament@Rockets",
+      "versus_templates": [
        "^MediumMissile",
        "^D2KRocket"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "NaxPlaneRockets_elite",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -470,17 +454,7 @@
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "9",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "6090",
-      "reloaddelay": "100",
-      "slot": "Armament@Rockets",
-      "versus_templates": [
-       "^MediumMissile",
-       "^D2KRocket"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "MediumMissile",
@@ -497,19 +471,45 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlaneRockets_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6090",
+      "reloaddelay": "100",
+      "slot": "Armament@Rockets",
+      "versus_templates": [
        "^MediumMissile",
        "^D2KRocket"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "NaxPlaneRockets_elite",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "9",
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
@@ -520,45 +520,16 @@
        "^D2KRocket"
       ],
       "warheads": [
-       {
-        "damage": "10000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "NaxPlaneRockets_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumMissile",
-       "^D2KRocket"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "10",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6090",
-      "reloaddelay": "127",
-      "slot": "Armament@MG",
-      "versus_templates": [
-       "^Grenade",
-       "^HeavyCannon",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -590,20 +561,61 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlanegun_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6090",
+      "reloaddelay": "127",
+      "slot": "Armament@MG",
+      "versus_templates": [
        "^Grenade",
        "^HeavyCannon",
        "^RA2Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "NaxPlanegun_elite",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "10",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "127",
@@ -615,44 +627,10 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxPlanegun_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyCannon",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -705,8 +683,50 @@
       "armament_name": "primary",
       "burst": "6",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5368",
       "reloaddelay": "47",
@@ -719,6 +739,16 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "NaxQuadCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -760,21 +790,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6368",
       "reloaddelay": "47",
@@ -784,6 +801,16 @@
        "NaxQuadCannon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "NaxQuadCannon_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "6",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -825,21 +852,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "6",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8052",
       "reloaddelay": "47",
@@ -849,6 +863,16 @@
        "NaxQuadCannon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "NaxQuadCannon_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -890,21 +914,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannon_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9052",
       "reloaddelay": "47",
@@ -914,55 +925,10 @@
        "NaxQuadCannon_AA"
       ],
       "warheads": [
-       {
-        "damage": "1000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "NaxQuadCannon_AA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1094,6 +1060,7 @@
    "naxis_airfield": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -1104,8 +1071,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "NaxDefensivePlaneTarget",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1268,8 +1234,50 @@
      {
       "burst": "8",
       "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "13200",
       "reloaddelay": "88",
@@ -1278,6 +1286,15 @@
        "NaxQuadCannon_AA"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "NaxFlakAA",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -1319,20 +1336,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxFlakAA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "burst": "8",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8800",
       "reloaddelay": "88",
@@ -1341,55 +1346,10 @@
        "NaxQuadCannon"
       ],
       "warheads": [
-       {
-        "damage": "1000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "NaxFlakAG",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1511,20 +1471,7 @@
    "naxis_naxibunker": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
-      "minrange": "2470",
-      "pricing": true,
-      "range": "12345",
-      "reloaddelay": "111",
-      "requires": "mortar",
-      "slot": "Armament@mortar",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "16000",
         "tag": "HeavyCannon",
@@ -1556,28 +1503,29 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxGrilleArty",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.75,
+      "minrange": "2470",
+      "pricing": true,
+      "range": "12345",
+      "reloaddelay": "111",
+      "requires": "mortar",
+      "slot": "Armament@mortar",
+      "versus_templates": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
        "^RA2Grenade"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "NaxGrilleArty",
+      "weapon_class_source": "template"
      },
      {
       "burst": "6",
       "burstdelays": "4",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "7555",
-      "reloaddelay": "60",
-      "requires": "mg",
-      "slot": "Armament@mg",
-      "versus_templates": [
-       "NaxiWW2Machinegun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -1589,27 +1537,27 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "7555",
+      "reloaddelay": "60",
+      "requires": "mg",
+      "slot": "Armament@mg",
+      "versus_templates": [
+       "NaxiWW2Machinegun"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "NaxiWW2MachinegunTop",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
       "burstdelays": "3",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "9052",
-      "reloaddelay": "47",
-      "requires": "aa",
-      "slot": "Armament@aa",
-      "versus_templates": [
-       "NaxQuadCannon_AA"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -1651,14 +1599,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "9052",
+      "reloaddelay": "47",
+      "requires": "aa",
+      "slot": "Armament@aa",
+      "versus_templates": [
+       "NaxQuadCannon_AA"
+      ],
+      "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
       "weapon": "NaxQuadCannon_AA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1857,6 +1812,13 @@
      {
       "burst": "2",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "16",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -1869,19 +1831,10 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       {
-        "damage": "16",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "NaxiRifleT",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2047,8 +2000,30 @@
      {
       "burst": "2",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "2777",
       "reloaddelay": "54",
@@ -2058,6 +2033,15 @@
        "Lunar_Green105mm"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "NaxiAlienPistol",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "TeslaWeapon",
@@ -2079,19 +2063,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiAlienPistol",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "54",
@@ -2101,6 +2074,16 @@
        "NaxiAlienPistol"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "NaxiAlienPistol_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "TeslaWeapon",
@@ -2122,20 +2105,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiAlienPistol_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "2777",
       "reloaddelay": "54",
@@ -2145,6 +2116,16 @@
        "Lunar_Green105mm"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "NaxiAlienPistol",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "TeslaWeapon",
@@ -2166,20 +2147,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiAlienPistol",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "54",
@@ -2189,34 +2158,10 @@
        "NaxiAlienPistol"
       ],
       "warheads": [
-       {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "NaxiAlienPistol_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^RA2MediumCannon",
-       "^LunarNaxisUpgradedCannons"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2266,6 +2211,18 @@
    "conehead2.nax": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "12",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -2279,6 +2236,13 @@
        "^Effect_Tesla_Heavy"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "RA2PortaTesla",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "12",
         "tag": "Tesla_Heavy_Percentage",
@@ -2290,15 +2254,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2PortaTesla",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -2312,6 +2267,14 @@
        "^Effect_Tesla_Heavy"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "RA2PortaTesla",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "12",
         "tag": "Tesla_Heavy_Percentage",
@@ -2323,16 +2286,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2PortaTesla",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": false,
@@ -2346,6 +2299,14 @@
        "^Effect_Tesla_Heavy"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "RA2PortaTesla",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "12",
         "tag": "Tesla_Heavy_Percentage",
@@ -2357,16 +2318,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2PortaTesla",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": false,
@@ -2380,24 +2331,10 @@
        "^Effect_Tesla_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "12",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "RA2PortaTesla",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2442,6 +2379,13 @@
    "frank.nax": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "10",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -2455,23 +2399,21 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "RA2BrutePunch",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10",
         "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2BrutePunch",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -2483,22 +2425,20 @@
        "RA2BrutePunch"
       ],
       "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "RA2BrutePunch_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "10",
         "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2BrutePunch_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -2511,19 +2451,10 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
-       {
-        "damage": "10",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "RA2BrutePunch",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2569,8 +2500,25 @@
    "naxis_antitankcannon": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "14000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "7",
+        "tag": "CannonAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7361",
       "reloaddelay": "75",
@@ -2581,6 +2529,15 @@
        "^RA2TankDestroyerCannon"
       ],
       "warheads": [
+       "^Warhead_CannonAP_Light"
+      ],
+      "weapon": "NaxiAntiTankCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "14000",
         "tag": "MediumCannon",
@@ -2597,18 +2554,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiAntiTankCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumCannon",
-       "^RA2TankDestroyerCannon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8361",
       "reloaddelay": "75",
@@ -2618,28 +2565,10 @@
        "NaxiAntiTankCannon"
       ],
       "warheads": [
-       {
-        "damage": "14000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "CannonAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonAP_Light"
       ],
       "weapon": "NaxiAntiTankCannon_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumCannon",
-       "^RA2TankDestroyerCannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2689,6 +2618,18 @@
      {
       "burst": "3",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -2699,6 +2640,16 @@
        "NaxiWW2Machinegun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "NaxiWW2MachinegunSmall",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
@@ -2710,16 +2661,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2MachinegunSmall",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "3",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -2730,23 +2671,11 @@
        "NaxiWW2MachinegunSmall"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2MachinegunSmall_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2795,6 +2724,13 @@
    "naxis_coneheadsknights": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -2807,22 +2743,20 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
-       {
-        "damage": "8",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "wc2gruntslice",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -2836,24 +2770,22 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "NaxiRifleCons",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleCons",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -2865,19 +2797,10 @@
        "NaxiRifleCons"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "NaxiRifleCons_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2924,6 +2847,13 @@
      {
       "burst": "3",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Flame_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -2935,23 +2865,21 @@
        "AsianFlamerTurret"
       ],
       "warheads": [
+       "^Warhead_Flame_Light"
+      ],
+      "weapon": "NaxiFlamerTroop",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "6",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiFlamerTroop",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
-      ]
-     },
-     {
-      "burst": "6",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -2963,24 +2891,22 @@
        "NaxiFlamerTroop"
       ],
       "warheads": [
+       "^Warhead_Flame_Light"
+      ],
+      "weapon": "NaxiFlamerTroop_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiFlamerTroop_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "3",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -2992,24 +2918,22 @@
        "AsianFlamerTurret"
       ],
       "warheads": [
+       "^Warhead_Flame_Light"
+      ],
+      "weapon": "NaxiFlamerTroop",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiFlamerTroop",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "6",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3021,19 +2945,10 @@
        "NaxiFlamerTroop"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flame_Light"
       ],
       "weapon": "NaxiFlamerTroop_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3079,6 +2994,7 @@
     "armaments": [
      {
       "armament_name": "dummy",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -3092,15 +3008,24 @@
       ],
       "warheads": [],
       "weapon": "NaxiWW2MachinegunnerTargeting",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^DeployTargeting"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "deployed",
       "burst": "10",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -3112,6 +3037,17 @@
        "NaxiWW2Machinegun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "NaxiWW2Machinegunner",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "burst": "20",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -3123,17 +3059,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2Machinegunner",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "deployed",
-      "burst": "20",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -3145,6 +3070,17 @@
        "NaxiWW2Machinegunner"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "NaxiWW2Machinegunner_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "10",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -3156,17 +3092,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2Machinegunner_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "10",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": false,
@@ -3178,6 +3103,17 @@
        "NaxiWW2Machinegun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "NaxiWW2Machinegunner",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "20",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -3189,17 +3125,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2Machinegunner",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "20",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": false,
@@ -3211,23 +3136,11 @@
        "NaxiWW2Machinegunner"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2Machinegunner_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3272,8 +3185,20 @@
    "naxis_naximercenarysniper": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "24000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "120",
@@ -3282,7 +3207,14 @@
       "versus_templates": [
        "^SniperWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "NaxiSniper",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "24000",
         "tag": "SniperWeapon",
@@ -3294,17 +3226,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiSniper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "120",
@@ -3313,7 +3236,13 @@
       "versus_templates": [
        "NaxiSniper"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "NaxiSniper_elite",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "24000",
         "tag": "SniperWeapon",
@@ -3325,16 +3254,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiSniper_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7777",
       "reloaddelay": "120",
@@ -3343,7 +3264,15 @@
       "versus_templates": [
        "^SniperWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "NaxiSniper",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "24000",
         "tag": "SniperWeapon",
@@ -3355,18 +3284,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiSniper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "8888",
       "reloaddelay": "120",
@@ -3375,23 +3294,9 @@
       "versus_templates": [
        "NaxiSniper"
       ],
-      "warheads": [
-       {
-        "damage": "24000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12",
-        "tag": "SniperWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "NaxiSniper_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3436,6 +3341,13 @@
    "naxis_naxiriflerecruit": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3449,23 +3361,21 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "naxis_naxiriflerecruit_rifle",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "naxis_naxiriflerecruit_rifle",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3477,22 +3387,20 @@
        "naxis_naxiriflerecruit_rifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "naxis_naxiriflerecruit_rifle_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "naxis_naxiriflerecruit_rifle_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3506,24 +3414,22 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "naxis_naxiriflerecruit_rifle",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "naxis_naxiriflerecruit_rifle",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3535,19 +3441,10 @@
        "naxis_naxiriflerecruit_rifle"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "naxis_naxiriflerecruit_rifle_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3596,6 +3493,13 @@
    "naxis_naxiriflesoldier": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3609,23 +3513,21 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "naxis_naxiriflesoldier_rifle",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "naxis_naxiriflesoldier_rifle",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3637,22 +3539,20 @@
        "naxis_naxiriflesoldier_rifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "naxis_naxiriflesoldier_rifle_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "naxis_naxiriflesoldier_rifle_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3666,24 +3566,22 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "naxis_naxiriflesoldier_rifle",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "naxis_naxiriflesoldier_rifle",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3695,19 +3593,10 @@
        "naxis_naxiriflesoldier_rifle"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "naxis_naxiriflesoldier_rifle_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3756,8 +3645,80 @@
    "naxis_panzerfausttrooper": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5512",
       "reloaddelay": "135",
@@ -3772,6 +3733,15 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "NaxiShrekCons",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "HeavyBomb",
@@ -3843,22 +3813,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrekCons",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyFlameWeapon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^MediumChemicalWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6512",
       "reloaddelay": "135",
@@ -3868,6 +3824,14 @@
        "NaxiShrekCons"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "NaxiShrekCons_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "HeavyBomb",
@@ -3939,21 +3903,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrekCons_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyFlameWeapon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^MediumChemicalWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5512",
       "reloaddelay": "135",
@@ -3968,6 +3919,16 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "NaxiShrekCons",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "HeavyBomb",
@@ -4039,23 +4000,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrekCons",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyFlameWeapon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^MediumChemicalWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6512",
       "reloaddelay": "135",
@@ -4065,87 +4011,10 @@
        "NaxiShrekCons"
       ],
       "warheads": [
-       {
-        "damage": "6000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxiShrekCons_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyFlameWeapon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^MediumChemicalWeapon",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4189,8 +4058,80 @@
    "naxis_panzerschreck": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6805",
       "reloaddelay": "124",
@@ -4205,6 +4146,15 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "NaxiShrek",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyBomb",
@@ -4276,22 +4226,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrek",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyFlameWeapon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^MediumChemicalWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7805",
       "reloaddelay": "124",
@@ -4301,6 +4237,14 @@
        "NaxiShrek"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "NaxiShrek_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyBomb",
@@ -4372,21 +4316,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrek_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyFlameWeapon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^MediumChemicalWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6805",
       "reloaddelay": "124",
@@ -4401,6 +4332,16 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "NaxiShrek",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyBomb",
@@ -4472,23 +4413,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrek",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyFlameWeapon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^MediumChemicalWeapon",
-       "^RA2MediumMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "7805",
       "reloaddelay": "124",
@@ -4498,87 +4424,10 @@
        "NaxiShrek"
       ],
       "warheads": [
-       {
-        "damage": "8000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxiShrek_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyFlameWeapon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^MediumChemicalWeapon",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4624,6 +4473,7 @@
     "armaments": [
      {
       "armament_name": "dummy",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -4637,17 +4487,56 @@
       ],
       "warheads": [],
       "weapon": "NaxQuadCannonTargeting",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^AADeployTargeting"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "deployed",
       "burst": "6",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "47",
@@ -4657,6 +4546,16 @@
        "NaxQuadCannon_AA"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "PortableFlak",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -4698,21 +4597,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PortableFlak",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "deployed",
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "47",
@@ -4722,6 +4608,16 @@
        "NaxQuadCannon_AA_elite"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "PortableFlak_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -4763,21 +4659,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PortableFlak_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "6",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "8888",
       "reloaddelay": "47",
@@ -4787,6 +4670,16 @@
        "NaxQuadCannon_AA"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "PortableFlak",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -4828,21 +4721,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PortableFlak",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "9999",
       "reloaddelay": "47",
@@ -4852,55 +4732,10 @@
        "NaxQuadCannon_AA_elite"
       ],
       "warheads": [
-       {
-        "damage": "1000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "PortableFlak_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4946,8 +4781,50 @@
      {
       "burst": "6",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "26",
@@ -4957,6 +4834,15 @@
        "NaxQuadCannon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "SkyMageCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -4998,20 +4884,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SkyMageCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "26",
@@ -5021,6 +4895,15 @@
        "SkyMageCannon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "SkyMageCannon_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "6",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -5062,20 +4945,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SkyMageCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "burst": "6",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "26",
@@ -5085,6 +4956,15 @@
        "NaxQuadCannon_AA"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "SkyMageCannon_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -5126,20 +5006,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SkyMageCannon_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8500",
       "reloaddelay": "26",
@@ -5149,55 +5017,10 @@
        "SkyMageCannon_AA"
       ],
       "warheads": [
-       {
-        "damage": "1000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "SkyMageCannon_AA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5247,6 +5070,13 @@
    "naxis_slave": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5259,22 +5089,20 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "RA2Shovel",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Shovel",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -5287,19 +5115,10 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "RA2Shovel",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5344,6 +5163,7 @@
    "naxis_slaveoverseer": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -5354,10 +5174,16 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "NaxiSlaveWhip",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -5371,23 +5197,21 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "NaxiRifle",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "3",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifle",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -5399,22 +5223,20 @@
        "NaxiRifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "NaxiRifle_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "3",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifle_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -5428,24 +5250,22 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "NaxiRifle",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "3",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifle",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -5457,19 +5277,10 @@
        "NaxiRifle"
       ],
       "warheads": [
-       {
-        "damage": "3",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "NaxiRifle_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5516,8 +5327,30 @@
      {
       "burst": "10",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "75",
@@ -5527,7 +5360,14 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "naxis_sssoldier_smg",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "20",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -5549,18 +5389,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "naxis_sssoldier_smg",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "burst": "20",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "75",
@@ -5569,7 +5399,15 @@
       "versus_templates": [
        "naxis_sssoldier_smg"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "naxis_sssoldier_smg_elite",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "10",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -5591,19 +5429,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "naxis_sssoldier_smg_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "10",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "75",
@@ -5613,7 +5440,15 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "naxis_sssoldier_smg",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "20",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -5635,19 +5470,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "naxis_sssoldier_smg",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "20",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "75",
@@ -5656,34 +5480,9 @@
       "versus_templates": [
        "naxis_sssoldier_smg"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "naxis_sssoldier_smg_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5733,6 +5532,13 @@
    "undead.nax": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -5746,23 +5552,21 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "NaxiRifle",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "3",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifle",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -5774,22 +5578,20 @@
        "NaxiRifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "NaxiRifle_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "3",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifle_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -5803,24 +5605,22 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "NaxiRifle",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "3",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifle",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -5832,19 +5632,10 @@
        "NaxiRifle"
       ],
       "warheads": [
-       {
-        "damage": "3",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "NaxiRifle_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5894,18 +5685,7 @@
      {
       "burst": "2",
       "burstdelays": "6",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "15000",
-      "reloaddelay": "125",
-      "slot": "Armament",
-      "versus_templates": [
-       "^Grenade",
-       "^HeavyBomb",
-       "^RA2MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "16000",
         "tag": "Grenade",
@@ -5937,13 +5717,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiMissileUboat",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "15000",
+      "reloaddelay": "125",
+      "slot": "Armament",
+      "versus_templates": [
        "^Grenade",
        "^HeavyBomb",
        "^RA2MediumMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "NaxiMissileUboat",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5998,8 +5787,35 @@
     "armaments": [
      {
       "burst": "2",
+      "damage_warheads": [
+       {
+        "damage": "40000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -6009,7 +5825,14 @@
        "^HeavyBomb",
        "^Grenade"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "8Inch",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "damage_warheads": [
        {
         "damage": "40000",
         "tag": "HeavyBomb",
@@ -6036,18 +5859,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "8Inch",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^Grenade"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -6057,7 +5870,13 @@
        "^HeavyBomb",
        "^Grenade"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "8Inch",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "2",
+      "damage_warheads": [
        {
         "damage": "40000",
         "tag": "HeavyBomb",
@@ -6084,17 +5903,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "8Inch",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^Grenade"
-      ]
-     },
-     {
-      "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -6104,7 +5914,13 @@
        "^HeavyBomb",
        "^Grenade"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "8Inch",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "2",
+      "damage_warheads": [
        {
         "damage": "40000",
         "tag": "HeavyBomb",
@@ -6131,17 +5947,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "8Inch",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^Grenade"
-      ]
-     },
-     {
-      "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -6151,39 +5958,9 @@
        "^HeavyBomb",
        "^Grenade"
       ],
-      "warheads": [
-       {
-        "damage": "40000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "40000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "8Inch",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^Grenade"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6234,17 +6011,7 @@
      {
       "burst": "2",
       "burstdelays": "8",
-      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "12000",
-      "reloaddelay": "120",
-      "slot": "Armament@Torp",
-      "versus_templates": [
-       "^RA2Grenade",
-       "^RA2HeavyMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "6",
         "tag": "Demolition_Light_Percentage",
@@ -6256,12 +6023,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianSmallTorpedo",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "12000",
+      "reloaddelay": "120",
+      "slot": "Armament@Torp",
+      "versus_templates": [
        "^RA2Grenade",
        "^RA2HeavyMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "AsianSmallTorpedo",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6839,6 +6616,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -6850,22 +6634,22 @@
        "RA2120mm"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "Nax120mmAssault",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "5",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Nax120mmAssault",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -6878,34 +6662,15 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "5",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Nax120mmAssault_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "4",
-      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5555",
-      "reloaddelay": "44",
-      "slot": "Armament@Flam",
-      "versus_templates": [
-       "^LightFlameWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -6952,13 +6717,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5555",
+      "reloaddelay": "44",
+      "slot": "Armament@Flam",
+      "versus_templates": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
        "^HeavyFlameWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "SyndicateFireballLauncher",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -7016,6 +6788,18 @@
       "armament_name": "primary",
       "burst": "6",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -7027,6 +6811,17 @@
        "NaxiWW2Machinegun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "NaxiWW2MachinegunTop",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "6",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -7038,17 +6833,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2MachinegunTop",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "6",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -7060,23 +6844,11 @@
        "NaxiWW2Machinegun"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2MachinegunTop_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7126,8 +6898,50 @@
    "naxis_brummbar": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "14000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "14000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "14000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "7",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2800",
       "pricing": true,
       "range": "14000",
@@ -7141,6 +6955,15 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "NaxBrummbarArty",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "14000",
         "tag": "HeavyBomb",
@@ -7182,20 +7005,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxBrummbarArty",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2800",
       "pricing": true,
       "range": "15000",
@@ -7207,56 +7018,10 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "14000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "14000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "14000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "NaxBrummbarArty_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyBomb",
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7306,6 +7071,7 @@
     "armaments": [
      {
       "armament_name": "athena-beam",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -7318,11 +7084,11 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "NaxisDonnerschlagTarget",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -7334,8 +7100,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "NaxisDonnerschlagTargetVisualLaser",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -7393,16 +7158,7 @@
       "armament_name": "primary",
       "burst": "10",
       "burstdelays": "1",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
-      "pricing": true,
-      "range": "5000",
-      "reloaddelay": "50",
-      "slot": "Armament",
-      "versus_templates": [
-       "^RepairWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "-2000",
         "tag": "RepairWeapon",
@@ -7419,11 +7175,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2IFVRepair",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5000",
+      "reloaddelay": "50",
+      "slot": "Armament",
+      "versus_templates": [
        "^RepairWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "RA2IFVRepair",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -7472,8 +7235,40 @@
    "naxis_grille": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "16000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -7486,6 +7281,15 @@
        "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "NaxGrilleArty",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "16000",
         "tag": "HeavyCannon",
@@ -7517,19 +7321,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxGrilleArty",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "2470",
       "pricing": true,
       "range": "13333",
@@ -7541,45 +7334,10 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "16000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "16000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7631,6 +7389,18 @@
      {
       "burst": "6",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -7642,6 +7412,16 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "NaxiWW2Machinegun",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "6",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -7653,16 +7433,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2Machinegun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "6",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -7673,23 +7443,11 @@
        "NaxiWW2Machinegun"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2Machinegun_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7737,8 +7495,25 @@
    "naxis_hetzer": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "CannonAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7132",
       "reloaddelay": "80",
@@ -7749,6 +7524,15 @@
        "^RA2TankDestroyerCannon"
       ],
       "warheads": [
+       "^Warhead_CannonAP_Light"
+      ],
+      "weapon": "NaxiHetzerDestroyer",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "MediumCannon",
@@ -7765,18 +7549,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiHetzerDestroyer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumCannon",
-       "^RA2TankDestroyerCannon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "80",
@@ -7787,29 +7561,10 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "20000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "CannonAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonAP_Light"
       ],
       "weapon": "NaxiHetzerDestroyer_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumCannon",
-       "^RA2TankDestroyerCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7859,18 +7614,7 @@
    "naxis_imperialturbotank": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "7396",
-      "reloaddelay": "90",
-      "slot": "Armament@AG",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2TankDestroyerCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "HeavyCannon",
@@ -7902,16 +7646,32 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiJadgDestroyer",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "7396",
+      "reloaddelay": "90",
+      "slot": "Armament@AG",
+      "versus_templates": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
        "^RA2TankDestroyerCannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonAP_Light"
+      ],
+      "weapon": "NaxiJadgDestroyer",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7923,22 +7683,22 @@
        "RA2120mm"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "Nax120mmAssault",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "5",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Nax120mmAssault",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7951,18 +7711,10 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "5",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Nax120mmAssault_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8011,8 +7763,40 @@
    "naxis_jagdpanzer": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "CannonAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7396",
       "reloaddelay": "90",
@@ -8024,6 +7808,15 @@
        "^RA2TankDestroyerCannon"
       ],
       "warheads": [
+       "^Warhead_CannonAP_Light"
+      ],
+      "weapon": "NaxiJadgDestroyer",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "HeavyCannon",
@@ -8055,19 +7848,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiJadgDestroyer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2TankDestroyerCannon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8396",
       "reloaddelay": "90",
@@ -8078,45 +7860,10 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "20000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "CannonAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonAP_Light"
       ],
       "weapon": "NaxiJadgDestroyer_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2TankDestroyerCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8167,6 +7914,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "10",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -8178,22 +7932,22 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "KingNaxTigerCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "KingNaxTigerCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -8206,18 +7960,10 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "10",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "KingNaxTigerCannon_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8268,17 +8014,7 @@
      {
       "burst": "6",
       "burstdelays": "4",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "5757",
-      "reloaddelay": "80",
-      "slot": "Armament@AG",
-      "versus_templates": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
@@ -8290,12 +8026,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2KübelwagenMachinegun",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "5757",
+      "reloaddelay": "80",
+      "slot": "Armament@AG",
+      "versus_templates": [
        "^RA2SmallArms",
        "^RA2Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "NaxiWW2KübelwagenMachinegun",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8343,8 +8089,80 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1335",
       "pricing": true,
       "range": "6666",
@@ -8360,6 +8178,16 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "NaxMausCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "LightChemicalWeapon",
@@ -8431,23 +8259,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxMausCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightChemicalWeapon",
-       "^HeavyFlameWeapon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^TankDestroyerCannon",
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1335",
       "pricing": true,
       "range": "7777",
@@ -8459,88 +8272,10 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "10000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "NaxMausCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightChemicalWeapon",
-       "^HeavyFlameWeapon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^TankDestroyerCannon",
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8639,22 +8374,7 @@
    "naxis_nokana": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1335",
-      "pricing": true,
-      "range": "6666",
-      "reloaddelay": "99",
-      "slot": "Armament@AG",
-      "versus_templates": [
-       "^LightChemicalWeapon",
-       "^HeavyFlameWeapon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^TankDestroyerCannon",
-       "^RA2MediumCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "LightChemicalWeapon",
@@ -8726,30 +8446,31 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxMausCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "1335",
+      "pricing": true,
+      "range": "6666",
+      "reloaddelay": "99",
+      "slot": "Armament@AG",
+      "versus_templates": [
        "^LightChemicalWeapon",
        "^HeavyFlameWeapon",
        "^ShrapnelWeapon",
        "^HeavyBomb",
        "^TankDestroyerCannon",
        "^RA2MediumCannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "NaxMausCannon",
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "3",
-      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "7000",
-      "reloaddelay": "55",
-      "slot": "Armament@RK",
-      "versus_templates": [
-       "LatinBuggyRocket"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "Grenade",
@@ -8791,30 +8512,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "7000",
+      "reloaddelay": "55",
+      "slot": "Armament@RK",
+      "versus_templates": [
+       "LatinBuggyRocket"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium"
+      ],
       "weapon": "LatinBuggyRocket_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^SteelLightMissile",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "4",
-      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5555",
-      "reloaddelay": "44",
-      "slot": "Armament@Flam",
-      "versus_templates": [
-       "^LightFlameWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -8861,13 +8578,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5555",
+      "reloaddelay": "44",
+      "slot": "Armament@Flam",
+      "versus_templates": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
        "^HeavyFlameWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "SyndicateFireballLauncher",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -8921,6 +8645,7 @@
    "naxis_nop03sarubia": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -8932,8 +8657,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "NaxisSarubianTarget",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -8983,17 +8707,7 @@
    "naxis_oldtank": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "7361",
-      "reloaddelay": "75",
-      "slot": "Armament",
-      "versus_templates": [
-       "^MediumCannon",
-       "^RA2TankDestroyerCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "14000",
         "tag": "MediumCannon",
@@ -9010,12 +8724,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiAntiTankCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "7361",
+      "reloaddelay": "75",
+      "slot": "Armament",
+      "versus_templates": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonAP_Light"
+      ],
+      "weapon": "NaxiAntiTankCannon",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9067,8 +8790,40 @@
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "10",
+      "damage_warheads": [
+       {
+        "damage": "50000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1220",
       "pricing": true,
       "range": "6110",
@@ -9081,6 +8836,16 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "NaxRatteCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "50000",
         "tag": "LightChemicalWeapon",
@@ -9112,20 +8877,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxRatteCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightChemicalWeapon",
-       "^HeavyBomb",
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1220",
       "pricing": true,
       "range": "7110",
@@ -9137,52 +8890,59 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "50000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "NaxRatteCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightChemicalWeapon",
-       "^HeavyBomb",
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
       "burst": "8",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9052",
       "reloaddelay": "47",
@@ -9191,6 +8951,16 @@
        "NaxQuadCannon_AA"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "NaxQuadCannon_AA_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -9232,21 +9002,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannon_AA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9052",
       "reloaddelay": "47",
@@ -9255,55 +9012,10 @@
        "NaxQuadCannon_AA"
       ],
       "warheads": [
-       {
-        "damage": "1000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "NaxQuadCannon_AA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9358,6 +9070,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -9369,22 +9088,22 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "RA2120mm",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "5",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120mm",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -9397,34 +9116,14 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "5",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "RA2120mm_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
-      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
-      "minrange": "2470",
-      "pricing": true,
-      "range": "12345",
-      "reloaddelay": "111",
-      "slot": "Armament@mortar",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "16000",
         "tag": "HeavyCannon",
@@ -9456,28 +9155,27 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxGrilleArty",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.75,
+      "minrange": "2470",
+      "pricing": true,
+      "range": "12345",
+      "reloaddelay": "111",
+      "slot": "Armament@mortar",
+      "versus_templates": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
        "^RA2Grenade"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "NaxGrilleArty",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "12000",
-      "reloaddelay": "250",
-      "slot": "Armament@scud",
-      "versus_templates": [
-       "^HeavyBomb",
-       "^RA2Grenade",
-       "^RA2MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "HeavyBomb",
@@ -9499,13 +9197,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxShoeRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "12000",
+      "reloaddelay": "250",
+      "slot": "Armament@scud",
+      "versus_templates": [
        "^HeavyBomb",
        "^RA2Grenade",
        "^RA2MediumMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "NaxShoeRocket",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9555,19 +9263,7 @@
    "naxis_sturmtiger": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
-      "minrange": "2800",
-      "pricing": true,
-      "range": "14000",
-      "reloaddelay": "140",
-      "slot": "Armament@AG",
-      "versus_templates": [
-       "^HeavyBomb",
-       "^RA2MediumCannon",
-       "^RA2Grenade"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "30000",
         "tag": "HeavyBomb",
@@ -9589,13 +9285,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxSturmArty",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.875,
+      "minrange": "2800",
+      "pricing": true,
+      "range": "14000",
+      "reloaddelay": "140",
+      "slot": "Armament@AG",
+      "versus_templates": [
        "^HeavyBomb",
        "^RA2MediumCannon",
        "^RA2Grenade"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "NaxSturmArty",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9646,6 +9353,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -9657,22 +9371,22 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "RA2105mm",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2105mm",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -9685,18 +9399,10 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "4",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "RA2105mm_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9746,6 +9452,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "5",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -9757,22 +9470,22 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "NaxTigerCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "5",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxTigerCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -9785,18 +9498,10 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "5",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "NaxTigerCannon_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9848,8 +9553,50 @@
       "armament_name": "primary",
       "burst": "6",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5368",
       "reloaddelay": "47",
@@ -9862,6 +9609,16 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "NaxQuadCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -9903,21 +9660,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6368",
       "reloaddelay": "47",
@@ -9927,6 +9671,16 @@
        "NaxQuadCannon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "NaxQuadCannon_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "6",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -9968,21 +9722,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "6",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8052",
       "reloaddelay": "47",
@@ -9992,6 +9733,16 @@
        "NaxQuadCannon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "NaxQuadCannon_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "Grenade",
@@ -10033,21 +9784,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannon_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9052",
       "reloaddelay": "47",
@@ -10057,55 +9795,10 @@
        "NaxQuadCannon_AA"
       ],
       "warheads": [
-       {
-        "damage": "1000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "NaxQuadCannon_AA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

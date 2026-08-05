@@ -120,14 +120,14 @@ def import_sheet(ws, units) -> tuple[bool, int, set[str]]:
                         # Sheet cell is the per-shot TOTAL (sum of main
                         # warheads). Split a new total back across the
                         # warheads via the ONE canonical splitter.
-                        warheads = arm.get("warheads", [])
+                        warheads = arm.get("damage_warheads", [])
                         old_total = formula.spread_damage_sum(warheads)
                         if old_total and abs(v - old_total) > 1e-9:
                             new = formula.distribute_damage(v, warheads)
                             print(f"  {actor}/{slot_key}.damage(total): "
                                   f"{int(old_total)} -> {int(v)} "
                                   f"(split across {len(new)} warhead(s))")
-                            for w in arm["warheads"]:
+                            for w in arm["damage_warheads"]:
                                 tag = w.get("tag")
                                 if tag in new:
                                     w["damage"] = str(int(new[tag]))

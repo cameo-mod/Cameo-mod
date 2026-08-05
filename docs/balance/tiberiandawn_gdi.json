@@ -10,6 +10,13 @@
       "armament_name": "gun",
       "burst": "10",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "6",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -22,33 +29,14 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "6",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "Vulcan",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "bombs",
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "2000",
-      "reloaddelay": "2",
-      "slot": "Armament@BOMBS",
-      "versus_templates": [
-       "^HeavyBomb",
-       "^HeavyFlameWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "HeavyBomb",
@@ -75,12 +63,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Napalm",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "2000",
+      "reloaddelay": "2",
+      "slot": "Armament@BOMBS",
+      "versus_templates": [
        "^HeavyBomb",
        "^HeavyFlameWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "Napalm",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -120,6 +115,13 @@
       "armament_name": "primary",
       "burst": "10",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -132,33 +134,14 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "3",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "VulcanA10Carrier",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "1000",
-      "reloaddelay": "2",
-      "slot": "Armament@BOMBS",
-      "versus_templates": [
-       "^HeavyBomb",
-       "^HeavyFlameWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "HeavyBomb",
@@ -185,17 +168,31 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NapalmA10Carrier",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "1000",
+      "reloaddelay": "2",
+      "slot": "Armament@BOMBS",
+      "versus_templates": [
        "^HeavyBomb",
        "^HeavyFlameWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "NapalmA10Carrier",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "6",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "1000",
@@ -210,20 +207,10 @@
        "^ImpactGlow"
       ],
       "warheads": [
-       {
-        "damage": "6",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "A10CarrierMissiles_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy",
-       "^Effect_Missile_Heavy",
-       "^ImpactGlow"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -261,6 +248,13 @@
     "armaments": [
      {
       "armament_name": "pointdefense",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -273,33 +267,15 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "GDIRigPDLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "1",
       "burstdelays": "1",
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
-      "pricing": true,
-      "range": "6000",
-      "reloaddelay": "5",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^RepairWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "-2000",
         "tag": "RepairWeapon",
@@ -316,11 +292,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIRigDroneRepair",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "5",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^RepairWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "GDIRigDroneRepair",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -398,6 +381,13 @@
      {
       "burst": "2",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "10",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "2500",
@@ -412,24 +402,21 @@
        "^ImpactGlow"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "FirehawkMissiles_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "10",
         "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FirehawkMissiles_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy",
-       "^Effect_Missile_Heavy",
-       "^ImpactGlow"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "2500",
@@ -445,37 +432,15 @@
        "^ImpactGlow"
       ],
       "warheads": [
-       {
-        "damage": "10",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "FirehawkMissiles_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy",
-       "^Effect_Missile_Heavy",
-       "^ImpactGlow"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "1250",
-      "reloaddelay": "50",
-      "slot": "Armament@BOMBS",
-      "versus_templates": [
-       "^HeavyBomb",
-       "^NuclearWarhead",
-       "^ShrapnelWeapon",
-       "^MediumFlameWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "HeavyBomb",
@@ -527,14 +492,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FirehawkBomb",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "1250",
+      "reloaddelay": "50",
+      "slot": "Armament@BOMBS",
+      "versus_templates": [
        "^HeavyBomb",
        "^NuclearWarhead",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "FirehawkBomb",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -585,6 +557,78 @@
    "td_gdi_orca": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -600,7 +644,12 @@
        "^HeavyMissile",
        "^MediumMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "OrcaMissiles",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyCannon",
@@ -672,18 +721,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OrcaMissiles",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -695,89 +732,9 @@
        "OrcaMissiles",
        "^AMTProjectile"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "OrcaMissilesAMT",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyCannon",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile",
-       "^AMTProjectile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -904,6 +861,88 @@
      {
       "burst": "2",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -920,7 +959,14 @@
        "^HeavyMissile",
        "^MediumMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "TowerMissile",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TankDestroyerCannon",
@@ -1002,21 +1048,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TowerMissile",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^FlakWeapon",
-       "^HeavyAAWeapon",
-       "^HeavyMissile",
-       "^MediumMissile"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1028,100 +1059,9 @@
        "TowerMissile",
        "^AMTProjectile"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "TowerMissileAMT",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^FlakWeapon",
-       "^HeavyAAWeapon",
-       "^HeavyMissile",
-       "^MediumMissile",
-       "^AMTProjectile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1276,6 +1216,13 @@
      {
       "burst": "4",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -1289,23 +1236,21 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "HighV",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -1319,19 +1264,10 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "HighVAP",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1477,19 +1413,7 @@
    "td_gdi_skyshield": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "13800",
-      "reloaddelay": "11",
-      "slot": "Armament",
-      "versus_templates": [
-       "^SmallArms",
-       "^LightMissile",
-       "^Chaingun",
-       "^FlakWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -1531,14 +1455,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SkyshieldCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "13800",
+      "reloaddelay": "11",
+      "slot": "Armament",
+      "versus_templates": [
        "^SmallArms",
        "^LightMissile",
        "^Chaingun",
        "^FlakWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "SkyshieldCannon",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1661,6 +1592,13 @@
      {
       "burst": "4",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -1674,24 +1612,22 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "td_gdi_minigunner_minigun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_minigunner_minigun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -1705,23 +1641,21 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "td_gdi_minigunner_minigun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -1735,24 +1669,22 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "td_gdi_minigunner_minigun_ap",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_minigunner_minigun_ap",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -1766,19 +1698,10 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "td_gdi_minigunner_minigun_ap",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1818,6 +1741,13 @@
    "E3": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "9",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -1831,22 +1761,20 @@
        "^Effect_Missile_Light"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "Rockets",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "9",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Rockets",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -1860,21 +1788,19 @@
        "^Effect_Missile_Light"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "Rockets",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "9",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Rockets",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -1887,23 +1813,20 @@
        "^AMTProjectile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "RocketsAMT",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "9",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsAMT",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Missile_Light",
-       "^AMTProjectile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -1916,20 +1839,10 @@
        "^AMTProjectile"
       ],
       "warheads": [
-       {
-        "damage": "9",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RocketsAMT",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Missile_Light",
-       "^AMTProjectile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1971,6 +1884,7 @@
     "armaments": [
      {
       "armament_name": "secondary",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -1983,11 +1897,11 @@
       ],
       "warheads": [],
       "weapon": "TanyaAttach",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -1998,12 +1912,23 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "GenericC4",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "40000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8086",
       "reloaddelay": "25",
@@ -2012,7 +1937,13 @@
       "versus_templates": [
        "^SniperWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "td_gdi_commando_sniper",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "40000",
         "tag": "SniperWeapon",
@@ -2024,16 +1955,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_commando_sniper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "8086",
       "reloaddelay": "25",
@@ -2042,27 +1965,30 @@
       "versus_templates": [
        "^SniperWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "td_gdi_commando_sniper",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "10",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
         "tag": "SniperWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "20",
+        "damage": "10",
         "tag": "SniperWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_commando_sniper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8086",
       "reloaddelay": "25",
@@ -2075,6 +2001,14 @@
        "td_gdi_commando_sniper"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "td_gdi_commando_sniper_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "10",
         "tag": "Railgun_Heavy_Percentage",
@@ -2091,19 +2025,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_commando_sniper_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy",
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "8086",
       "reloaddelay": "25",
@@ -2116,30 +2039,10 @@
        "td_gdi_commando_sniper"
       ],
       "warheads": [
-       {
-        "damage": "10",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "SniperWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "td_gdi_commando_sniper_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy",
-       "^SniperWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2189,6 +2092,108 @@
    "td_gdi_empgrenadier": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2205,7 +2210,13 @@
        "^MediumMissile",
        "^HeavyMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "EMPGrenade",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "TeslaChargedWeapon",
@@ -2307,21 +2318,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "EMPGrenade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TeslaChargedWeapon",
-       "^TeslaWeapon",
-       "^MediumFlameWeapon",
-       "^ShrapnelWeapon",
-       "^HeavyCannon",
-       "^MediumCannon",
-       "^MediumMissile",
-       "^HeavyMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2338,120 +2334,9 @@
        "^MediumMissile",
        "^HeavyMissile"
       ],
-      "warheads": [
-       {
-        "damage": "8000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TeslaChargedExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "EMPGrenade",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TeslaChargedWeapon",
-       "^TeslaWeapon",
-       "^MediumFlameWeapon",
-       "^ShrapnelWeapon",
-       "^HeavyCannon",
-       "^MediumCannon",
-       "^MediumMissile",
-       "^HeavyMissile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2501,6 +2386,13 @@
    "td_gdi_grenadier": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -2513,22 +2405,20 @@
        "^Effect_Explosion_Light"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "Grenade",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "8",
         "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Grenade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -2541,19 +2431,10 @@
        "^Effect_Explosion_Light"
       ],
       "warheads": [
-       {
-        "damage": "8",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2598,17 +2479,7 @@
    "td_gdi_havoc": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "7750",
-      "reloaddelay": "100",
-      "slot": "Armament@ra1_allies_alliedsniper",
-      "versus_templates": [
-       "^SniperWeapon",
-       "^Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "SniperWeapon",
@@ -2630,25 +2501,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommandoSniper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon",
-       "^Chaingun"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7750",
       "reloaddelay": "100",
-      "slot": "Armament@Rocket",
+      "slot": "Armament@ra1_allies_alliedsniper",
       "versus_templates": [
-       "^MediumMissile",
-       "^LightMissile"
+       "^SniperWeapon",
+       "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "CommandoSniper",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "MediumMissile",
@@ -2670,16 +2538,55 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommandoRocketLauncher",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "7750",
+      "reloaddelay": "100",
+      "slot": "Armament@Rocket",
+      "versus_templates": [
        "^MediumMissile",
        "^LightMissile"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CommandoRocketLauncher",
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7750",
       "reloaddelay": "100",
@@ -2689,51 +2596,37 @@
        "^Grenade",
        "^EMPDamage"
       ],
-      "warheads": [
-       {
-        "damage": "20000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "CommandoGrenadeLauncher",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^EMPDamage"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "burst": "5",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7750",
       "reloaddelay": "92",
@@ -2742,39 +2635,36 @@
        "^SniperWeapon",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "CommandoM16",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "20000",
         "tag": "SniperWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
+        "damage": "10",
         "tag": "SniperWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "20000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
+        "damage": "10",
         "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommandoM16",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7750",
       "reloaddelay": "100",
@@ -2783,48 +2673,13 @@
        "^SniperWeapon",
        "^Chaingun"
       ],
-      "warheads": [
-       {
-        "damage": "20000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "SniperWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "CommandoSniper",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": false,
-      "range": "7750",
-      "reloaddelay": "100",
-      "slot": "Armament@RocketGARRISONED",
-      "versus_templates": [
-       "^MediumMissile",
-       "^LightMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "MediumMissile",
@@ -2846,27 +2701,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommandoRocketLauncher",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumMissile",
-       "^LightMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7750",
       "reloaddelay": "100",
-      "slot": "Armament@GrenadeGARRISONED",
+      "slot": "Armament@RocketGARRISONED",
       "versus_templates": [
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^EMPDamage"
+       "^MediumMissile",
+       "^LightMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "CommandoRocketLauncher",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "20000",
         "tag": "ShrapnelWeapon",
@@ -2898,29 +2749,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommandoGrenadeLauncher",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "7750",
+      "reloaddelay": "100",
+      "slot": "Armament@GrenadeGARRISONED",
+      "versus_templates": [
        "^ShrapnelWeapon",
        "^Grenade",
        "^EMPDamage"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CommandoGrenadeLauncher",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
       "burst": "5",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": false,
-      "range": "7750",
-      "reloaddelay": "92",
-      "slot": "Armament@M16GARRISONED",
-      "versus_templates": [
-       "^SniperWeapon",
-       "^Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "SniperWeapon",
@@ -2942,15 +2790,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommandoM16",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "7750",
+      "reloaddelay": "92",
+      "slot": "Armament@M16GARRISONED",
+      "versus_templates": [
        "^SniperWeapon",
        "^Chaingun"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "CommandoM16",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -2961,8 +2817,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "GenericC4",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3017,6 +2872,53 @@
    "td_gdi_heavysniper": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -3029,7 +2931,13 @@
        "^FlakWeapon",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "GDISniperRifle",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "SmallArms",
@@ -3076,17 +2984,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDISniperRifle",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Grenade",
-       "^FlakWeapon",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -3099,61 +2996,9 @@
        "^FlakWeapon",
        "^Chaingun"
       ],
-      "warheads": [
-       {
-        "damage": "8000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "GDISniperRifle",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^Grenade",
-       "^FlakWeapon",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3201,6 +3046,13 @@
      {
       "burst": "4",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3214,24 +3066,22 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "td_gdi_minigunner_minigun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_minigunner_minigun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3245,23 +3095,21 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "td_gdi_minigunner_minigun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3275,24 +3123,22 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "td_gdi_minigunner_minigun_ap",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_minigunner_minigun_ap",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "4",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3306,19 +3152,10 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "td_gdi_minigunner_minigun_ap",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3369,8 +3206,30 @@
      {
       "burst": "4",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5596",
       "reloaddelay": "20",
@@ -3380,7 +3239,15 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "OfficerMachineGun",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "SmallArms",
@@ -3402,19 +3269,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OfficerMachineGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5596",
       "reloaddelay": "20",
@@ -3424,38 +3280,20 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
-       {
-        "damage": "8000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "OfficerMachineGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "burst": "4",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -3469,24 +3307,22 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "OfficerMachineGunAP",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OfficerMachineGunAP",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -3500,19 +3336,10 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "OfficerMachineGunAP",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3563,6 +3390,13 @@
    "td_gdi_rocketsoldier": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "9",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3576,22 +3410,20 @@
        "^Effect_Missile_Light"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "Rockets",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "9",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Rockets",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3605,21 +3437,19 @@
        "^Effect_Missile_Light"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "Rockets",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "9",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Rockets",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -3632,23 +3462,20 @@
        "^AMTProjectile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "RocketsAMT",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "9",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsAMT",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Missile_Light",
-       "^AMTProjectile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
@@ -3661,20 +3488,10 @@
        "^AMTProjectile"
       ],
       "warheads": [
-       {
-        "damage": "9",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RocketsAMT",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Missile_Light",
-       "^AMTProjectile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3721,8 +3538,30 @@
      {
       "burst": "5",
       "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "70",
@@ -3731,7 +3570,15 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "td_gdi_shotgunner_shotgun",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "5",
+      "burstdelays": "0",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -3753,19 +3600,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_shotgunner_shotgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "5",
-      "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "70",
@@ -3774,34 +3610,9 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "td_gdi_shotgunner_shotgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3851,6 +3662,73 @@
    "td_gdi_sonicmissilesoldier": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1500",
@@ -3865,7 +3743,13 @@
        "^RailgunWeapon",
        "^HeavyMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "MissileSoldierWeapon",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "TankDestroyerCannon",
@@ -3932,18 +3816,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MissileSoldierWeapon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^LightChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^RailgunWeapon",
-       "^HeavyMissile"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1500",
@@ -3958,82 +3830,9 @@
        "^RailgunWeapon",
        "^HeavyMissile"
       ],
-      "warheads": [
-       {
-        "damage": "10000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "MissileSoldierWeapon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^LightChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^RailgunWeapon",
-       "^HeavyMissile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4080,6 +3879,13 @@
    "CNCCA": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "25",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -4092,22 +3898,20 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "GDIBattleshipRailgun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "damage_warheads": [
        {
         "damage": "25",
         "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIBattleshipRailgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
-     },
-     {
-      "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -4120,19 +3924,10 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "25",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "GDIBattleshipRailgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4183,6 +3978,13 @@
      {
       "burst": "2",
       "burstdelays": "11",
+      "damage_warheads": [
+       {
+        "damage": "9",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -4196,23 +3998,21 @@
        "^Effect_Missile_Medium"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "GunboatMissile",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "11",
+      "damage_warheads": [
        {
         "damage": "9",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GunboatMissile",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Medium",
-       "^Projectile_Missile_Medium",
-       "^Effect_Missile_Medium"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "11",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -4225,22 +4025,19 @@
        "^AMTProjectile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "GunboatMissileAMT",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "9",
-        "tag": "MissileAP_Medium_Percentage",
+        "damage": "30",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GunboatMissileAMT",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Medium",
-       "^Projectile_Missile_Medium",
-       "^Effect_Missile_Medium",
-       "^AMTProjectile"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -4253,21 +4050,19 @@
        "^Effect_Explosion_Light"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "DepthCharge",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "30",
         "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DepthCharge",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -4280,19 +4075,10 @@
        "^Effect_Explosion_Light"
       ],
       "warheads": [
-       {
-        "damage": "30",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4383,6 +4169,7 @@
    "gdicarrier": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -4393,8 +4180,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "JapanCarrierTarget",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4957,8 +4743,30 @@
    "td_gdi_apc": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5668",
       "reloaddelay": "10",
@@ -4967,7 +4775,13 @@
        "^Chaingun",
        "^FlakWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "APCGun",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "secondary",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Chaingun",
@@ -4989,17 +4803,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "APCGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Chaingun",
-       "^FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8502",
       "reloaddelay": "10",
@@ -5007,34 +4812,9 @@
       "versus_templates": [
        "APCGun"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "APCGun_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Chaingun",
-       "^FlakWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5084,21 +4864,7 @@
    "td_gdi_archerartillery": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "2800",
-      "pricing": true,
-      "range": "14000",
-      "reloaddelay": "140",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^MediumCannon",
-       "^HeavyCannon",
-       "^MediumFlameWeapon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "14000",
         "tag": "MediumCannon",
@@ -5160,15 +4926,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ArcherArtilleryShell",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "2800",
+      "pricing": true,
+      "range": "14000",
+      "reloaddelay": "140",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^MediumCannon",
        "^HeavyCannon",
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
        "^HeavyBomb"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "ArcherArtilleryShell",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5219,6 +4993,13 @@
      {
       "burst": "4",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -5232,23 +5013,21 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "MachineGunHumvee2",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunHumvee2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -5260,23 +5039,21 @@
        "MachineGunHumvee2"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "MachineGunHumvee2_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5290,23 +5067,21 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "MachineGunHumvee2AP",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunHumvee2AP",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5318,19 +5093,10 @@
        "MachineGunHumvee2AP"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "MachineGunHumvee2AP_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5380,6 +5146,13 @@
    "td_gdi_battletank": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5393,21 +5166,19 @@
        "^Effect_Cannon_Medium"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "120mm",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "4",
+        "damage": "8",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "120mm",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5422,22 +5193,19 @@
        "^HVProjectile"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "120mmHV",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "8",
-        "tag": "CannonHE_Medium_Percentage",
+        "damage": "4",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "120mmHV",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium",
-       "^HVProjectile"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5451,21 +5219,19 @@
        "^Effect_Missile_Medium"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "M1A1Missiles",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M1A1Missiles",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Medium",
-       "^Projectile_Missile_Medium",
-       "^Effect_Missile_Medium"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5478,23 +5244,20 @@
        "^AMTProjectile"
       ],
       "warheads": [
-       {
-        "damage": "4",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "M1A1MissilesAMT",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Medium",
-       "^Projectile_Missile_Medium",
-       "^Effect_Missile_Medium",
-       "^AMTProjectile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5508,19 +5271,10 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "M1A1MachineGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5574,6 +5328,73 @@
    "td_gdi_boxer": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -5588,7 +5409,12 @@
        "^Chaingun",
        "^FlakWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "BoxerCannonAG",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -5655,18 +5481,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BoxerCannonAG",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^LightMissile",
-       "^Grenade",
-       "^MediumCannon",
-       "^Chaingun",
-       "^FlakWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -5676,83 +5490,9 @@
       "versus_templates": [
        "BoxerCannonAG"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "BoxerCannon_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^SmallArms",
-       "^LightMissile",
-       "^Grenade",
-       "^MediumCannon",
-       "^Chaingun",
-       "^FlakWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5807,6 +5547,13 @@
     "armaments": [
      {
       "armament_name": "pointdefense",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -5820,21 +5567,19 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "GDIRigPDLaser",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIRigPDLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -5846,26 +5591,34 @@
        "GDIRigPDLaser"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "GDIRigPDLaserTower",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "targeting",
       "burst": "1",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "-2000",
+        "tag": "RepairWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraRepair",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "RepairWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "5",
@@ -5874,7 +5627,15 @@
       "versus_templates": [
        "^RepairWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "GDIRigDroneTargeting",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "targetingdeployed",
+      "burst": "1",
+      "burstdelays": "1",
+      "damage_warheads": [
        {
         "damage": "-2000",
         "tag": "RepairWeapon",
@@ -5891,18 +5652,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIRigDroneTargeting",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RepairWeapon"
-      ]
-     },
-     {
-      "armament_name": "targetingdeployed",
-      "burst": "1",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "5",
@@ -5911,30 +5662,78 @@
       "versus_templates": [
        "GDIRigDroneTargeting"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "GDIRigDroneTargetingTower",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "-2000",
-        "tag": "RepairWeapon",
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "-1000",
-        "tag": "ExtraRepair",
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "-1",
-        "tag": "RepairWeaponPercentage",
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIRigDroneTargetingTower",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RepairWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -5950,7 +5749,13 @@
        "^FlakWeapon",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "GDIRigPhalanx",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "deployed",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "TankDestroyerCannon",
@@ -6017,19 +5822,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIRigPhalanx",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^SmallArms",
-       "^Grenade",
-       "^MediumCannon",
-       "^FlakWeapon",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6040,86 +5832,19 @@
       "versus_templates": [
        "GDIRigPhalanx"
       ],
-      "warheads": [
-       {
-        "damage": "4000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "GDIRigPhalanxTower",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^SmallArms",
-       "^Grenade",
-       "^MediumCannon",
-       "^FlakWeapon",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "deployed",
+      "damage_warheads": [
+       {
+        "damage": "80",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -6133,24 +5858,62 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "80",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "GDIRigRailgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
       "burst": "4",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6164,7 +5927,14 @@
        "^HeavyMissile",
        "^MediumMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "GDIRigMissilePod",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "FlakWeapon",
@@ -6211,18 +5981,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIRigMissilePod",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^FlakWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -6234,62 +5992,9 @@
        "GDIRigMissilePod",
        "^AMTProjectile"
       ],
-      "warheads": [
-       {
-        "damage": "8000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "GDIRigMissilePodAMT",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^FlakWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile",
-       "^AMTProjectile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6345,6 +6050,13 @@
      {
       "burst": "2",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "10",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -6357,19 +6069,10 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "10",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "ExosuitRailgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6426,6 +6129,13 @@
      {
       "burst": "3",
       "burstdelays": "6",
+      "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -6439,23 +6149,21 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       {
-        "damage": "3",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "MachineGunH",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
       "burstdelays": "6",
+      "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -6469,19 +6177,10 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "3",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "MachineGunAPH",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6532,6 +6231,13 @@
      {
       "burst": "4",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -6545,23 +6251,21 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "MachineGunHumvee2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -6575,23 +6279,21 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "MachineGunHumvee2AP",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -6603,23 +6305,21 @@
        "MachineGunHumvee2"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "MachineGunHumvee2_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -6631,21 +6331,19 @@
        "MachineGunHumvee2AP"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "MachineGunHumvee2AP_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
+        "damage": "8",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunHumvee2AP_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -6659,21 +6357,19 @@
        "^Effect_Missile_Light"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "RocketsHumvee2",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "8",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsHumvee2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -6685,21 +6381,24 @@
        "RocketsHumvee2"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "RocketsHumvee2_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "8",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsHumvee2_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -6715,6 +6414,14 @@
        "^AMTProjectile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "RocketsHumvee2AMT",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "8",
         "tag": "MissileAP_Heavy_Percentage",
@@ -6726,19 +6433,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsHumvee2AMT",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy",
-       "^Effect_Missile_Heavy",
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Missile_Light",
-       "^AMTProjectile"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -6750,28 +6444,11 @@
        "RocketsHumvee2AMT"
       ],
       "warheads": [
-       {
-        "damage": "8",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RocketsHumvee2AMT_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy",
-       "^Effect_Missile_Heavy",
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Missile_Light",
-       "^AMTProjectile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6827,6 +6504,13 @@
      {
       "burst": "2",
       "burstdelays": "8",
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -6840,23 +6524,21 @@
        "^Effect_Cannon_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "4",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "120mmDual",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_Cannon_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "8",
+      "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -6871,25 +6553,22 @@
        "^HVProjectile"
       ],
       "warheads": [
-       {
-        "damage": "8",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "120mmDualHV",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_Cannon_Heavy",
-       "^HVProjectile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "12",
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -6904,25 +6583,22 @@
        "^ImpactGlow"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "MammothMissiles",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "burstdelays": "12",
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothMissiles",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy",
-       "^Effect_Missile_Heavy",
-       "^ImpactGlow"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "2",
-      "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -6935,21 +6611,10 @@
        "^AMTProjectile"
       ],
       "warheads": [
-       {
-        "damage": "4",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "MammothMissilesAMT",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy",
-       "^Effect_Missile_Heavy",
-       "^ImpactGlow",
-       "^AMTProjectile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7001,6 +6666,13 @@
      {
       "burst": "2",
       "burstdelays": "8",
+      "damage_warheads": [
+       {
+        "damage": "6",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -7014,23 +6686,21 @@
        "^Effect_Cannon_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "6",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "MammothTank3Cannons",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_Cannon_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "8",
+      "damage_warheads": [
+       {
+        "damage": "12",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -7045,25 +6715,22 @@
        "^HVProjectile"
       ],
       "warheads": [
-       {
-        "damage": "12",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "MammothTank3CannonsHV",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_Cannon_Heavy",
-       "^HVProjectile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "12",
+      "damage_warheads": [
+       {
+        "damage": "6",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -7078,25 +6745,22 @@
        "^ImpactGlow"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "MammothTank3Missiles",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "burstdelays": "12",
+      "damage_warheads": [
        {
         "damage": "6",
         "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothTank3Missiles",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy",
-       "^Effect_Missile_Heavy",
-       "^ImpactGlow"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "2",
-      "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -7109,21 +6773,10 @@
        "^AMTProjectile"
       ],
       "warheads": [
-       {
-        "damage": "6",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "MammothTank3MissilesAMT",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy",
-       "^Effect_Missile_Heavy",
-       "^ImpactGlow",
-       "^AMTProjectile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7175,6 +6828,53 @@
      {
       "burst": "6",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": null,
       "minrange": "1985",
@@ -7189,7 +6889,14 @@
        "^HeavyMissile",
        "^MediumMissile"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "227mm",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "6",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "FlakWeapon",
@@ -7236,18 +6943,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "227mm",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^FlakWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile"
-      ]
-     },
-     {
-      "burst": "6",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1985",
@@ -7260,62 +6955,9 @@
        "227mm",
        "^AMTProjectile"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "227mmAMT",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^FlakWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile",
-       "^AMTProjectile"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -7412,6 +7054,13 @@
    "td_gdi_predatortank": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7425,21 +7074,19 @@
        "^Effect_Cannon_Medium"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "GDIPredatorTankCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "4",
+        "damage": "8",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIPredatorTankCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7454,23 +7101,20 @@
        "^HVProjectile"
       ],
       "warheads": [
-       {
-        "damage": "8",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "GDIPredatorTankCannonHV",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium",
-       "^HVProjectile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7484,22 +7128,20 @@
        "^Effect_Missile_Medium"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "GDIPredatorTankMissiles",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "damage_warheads": [
        {
         "damage": "4",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIPredatorTankMissiles",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Medium",
-       "^Projectile_Missile_Medium",
-       "^Effect_Missile_Medium"
-      ]
-     },
-     {
-      "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7512,23 +7154,20 @@
        "^AMTProjectile"
       ],
       "warheads": [
-       {
-        "damage": "4",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "GDIPredatorTankMissilesAMT",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_MissileAP_Medium",
-       "^Projectile_Missile_Medium",
-       "^Effect_Missile_Medium",
-       "^AMTProjectile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7542,21 +7181,13 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "GDIPredatorMachineGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -7567,8 +7198,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "GDIPredatorBlueLaser",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {

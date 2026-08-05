@@ -230,8 +230,8 @@ def main() -> int:
                         if "->" in res:
                             print(f"  {actor}/{wname}.{ykey} [{wfile}]: {res}")
                             changed += 1
-                    rwh = {w.get("tag"): w for w in rarm.get("warheads", [])}
-                    for w in arm.get("warheads", []):
+                    rwh = {w.get("tag"): w for w in rarm.get("damage_warheads", [])}
+                    for w in arm.get("damage_warheads", []):
                         if str(w.get("damage")) == str((rwh.get(w["tag"]) or {}).get("damage")):
                             continue
                         res = editor(wfile).set_warhead_damage(wname, w["tag"], w["damage"])

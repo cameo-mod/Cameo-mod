@@ -105,7 +105,7 @@ def spread_damages(arm: dict, smallarms_only: bool = False):
     SpreadDamage warheads. Thin wrapper over the ONE canonical reducer
     formula.spread_damage_sum (maintainer SUM law 2026-07-22) so the convention
     lives in a single place and MAX can never creep back in."""
-    return formula.spread_damage_sum(arm.get("warheads", []), smallarms_only=smallarms_only)
+    return formula.spread_damage_sum(arm.get("damage_warheads", []), smallarms_only=smallarms_only)
 
 
 def armament_dps(arm: dict, fp: float, base_only: bool = False, smallarms_only: bool = False, wc: float | None = None):
@@ -347,7 +347,7 @@ def load_class_rows(cls: str):
                 row["spd_step"] = 5 if row["vehicle_turnrate"] else 1
                 row["arm_rng"] = fnum(arm.get("range")) or 0
                 # offensive warheads on the primary weapon (2000-grid split target)
-                offensive = [w for w in arm.get("warheads", [])
+                offensive = [w for w in arm.get("damage_warheads", [])
                              if not str(w.get("tag", "")).lower().endswith(
                                  ("percentage", "extradamage", "friendlyfire"))]
                 row["n_wh"] = len(offensive) or 1

@@ -136,3 +136,25 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
     class family.
   - Re-extracted all 32 `docs/balance/*.json` ledgers; `extract_stats.py --check`
     reports 0 drifted.
+
+## 2026-08-04 — extract_stats warhead renames and RA2 Thunderbolt family 3-way split
+
+- `tools/balance/extract_stats.py`:
+  - Renamed the weapon-template output from `weapon_types` to `warheads`; it now
+    contains only resolved `^Warhead_*` templates (recursed through `^`-parents).
+  - Renamed the damage-node output from `warheads` to `damage_warheads`.
+  - Updated all balance-tool consumers (`build_workbook.py`, `_requantize_ledgers.py`,
+    `_patch_ledgers_from_reports.py`, `fit_class.py`, `import_workbook.py`,
+    `apply_balance.py`, `update_ranges.py`, `propose_class_rebalance.py`, `check_band.py`)
+    to use the new ledger keys.
+- `mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`:
+  - Converted `RA2ThunderboltMissile`, `RA2MultiHoverMissile`, and
+    `RA2MultiThunderboltMissile` to the new 3-way split: first and last `Inherits`
+    become the two `^Warhead_*` templates, the last also provides `^Projectile_*`
+    and `^Effect_*`; middle `Inherits` and re-added `Warhead@` overrides removed.
+- `mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml`:
+  - Converted `RA2PatriotThunderboltMissile` to the new 3-way split.
+- Re-extracted all 32 `docs/balance/*.json` ledgers; `extract_stats.py --check`
+  reports 0 drifted.
+- Boot-gate: reached main menu (`MenuPostProcessEffect.PostWorldLoaded`); no new
+  `exception-*.log` files.

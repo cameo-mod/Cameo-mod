@@ -8,6 +8,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "12",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -21,22 +28,20 @@
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "RA2DiskLaser",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
-        "damage": "12",
+        "damage": "24",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2DiskLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -48,34 +53,14 @@
        "RA2DiskLaser"
       ],
       "warheads": [
-       {
-        "damage": "24",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "RA2DiskLaser_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "125",
-      "reloaddelay": "5",
-      "requires": "yuri_upgrade_disksiphonattack",
-      "slot": "Armament@SECOND",
-      "versus_templates": [
-       "^MagicWeapon",
-       "^TeslaWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "MagicWeapon",
@@ -107,15 +92,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2DiskDrain",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "125",
+      "reloaddelay": "5",
+      "requires": "yuri_upgrade_disksiphonattack",
+      "slot": "Armament@SECOND",
+      "versus_templates": [
        "^MagicWeapon",
        "^TeslaWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "RA2DiskDrain",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -126,8 +120,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "RA2DiskSteal",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -173,6 +166,7 @@
    "yuriinvisibleplane": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -183,8 +177,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "SpyPlaneTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -609,8 +602,25 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
@@ -620,6 +630,14 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2GattlingMG1",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -636,17 +654,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG1",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "4",
@@ -655,6 +664,14 @@
        "RA2GattlingMG1"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2GattlingMG2",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -671,17 +688,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "2",
@@ -690,6 +698,14 @@
        "RA2GattlingMG1"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2GattlingMG3",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -701,22 +717,23 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "1",
+        "damage": "2",
         "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Bullet_Light",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG3",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6750",
       "reloaddelay": "6",
@@ -725,6 +742,14 @@
        "RA2GattlingMG1"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2GattlingMG1_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -751,17 +776,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG1_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "4",
@@ -770,6 +786,14 @@
        "RA2GattlingMG2"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2GattlingMG2_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -796,17 +820,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG2_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8250",
       "reloaddelay": "2",
@@ -815,38 +830,10 @@
        "RA2GattlingMG3"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG3_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -978,6 +965,13 @@
    "yuri_psychictower": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -987,16 +981,9 @@
       "versus_templates": [
        "RA2MindControl"
       ],
-      "warheads": [
-       {
-        "damage": "0",
-        "tag": "1Dam",
-        "type": "TargetDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "RA2TMindControl",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1037,17 +1024,7 @@
    "yuri_slaveminer_deployed": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "5000",
-      "reloaddelay": "15",
-      "slot": "Armament",
-      "versus_templates": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -1059,12 +1036,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA220mmrapid",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "5000",
+      "reloaddelay": "15",
+      "slot": "Armament",
+      "versus_templates": [
        "^RA2SmallArms",
        "^RA2Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA220mmrapid",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1148,6 +1135,13 @@
      {
       "burst": "6",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Chemical_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -1161,23 +1155,26 @@
        "^Effect_Chem_Medium"
       ],
       "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
+      "weapon": "RA2Chemspray",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "6",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Chemical_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2",
         "tag": "Chemical_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Chemspray",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Medium",
-       "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
-      ]
-     },
-     {
-      "burst": "6",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": true,
@@ -1192,6 +1189,16 @@
        "RA2Chemspray"
       ],
       "warheads": [
+       "^Warhead_Chemical_Heavy",
+       "^Warhead_Chemical_Medium"
+      ],
+      "weapon": "RA2Chemspray2",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "6",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Chemical_Heavy_Percentage",
@@ -1203,20 +1210,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Chemspray2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Heavy",
-       "^Projectile_Chem_Heavy",
-       "^Effect_Chem_Heavy",
-       "^Warhead_Chemical_Medium",
-       "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
-      ]
-     },
-     {
-      "burst": "6",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": true,
@@ -1228,32 +1221,23 @@
        "RA2Chemspray2"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Chemical_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
+       "^Warhead_Chemical_Heavy",
+       "^Warhead_Chemical_Medium"
+      ],
+      "weapon": "RA2Chemspray_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Chemical_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Chemspray_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Heavy",
-       "^Projectile_Chem_Heavy",
-       "^Effect_Chem_Heavy",
-       "^Warhead_Chemical_Medium",
-       "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "6",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
@@ -1267,24 +1251,27 @@
        "^Effect_Chem_Medium"
       ],
       "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
+      "weapon": "RA2Chemspray",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "Chemical_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2",
         "tag": "Chemical_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Chemspray",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Medium",
-       "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "6",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": false,
@@ -1299,6 +1286,17 @@
        "RA2Chemspray"
       ],
       "warheads": [
+       "^Warhead_Chemical_Heavy",
+       "^Warhead_Chemical_Medium"
+      ],
+      "weapon": "RA2Chemspray2",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Chemical_Heavy_Percentage",
@@ -1310,21 +1308,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Chemspray2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Heavy",
-       "^Projectile_Chem_Heavy",
-       "^Effect_Chem_Heavy",
-       "^Warhead_Chemical_Medium",
-       "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "6",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": false,
@@ -1336,27 +1319,11 @@
        "RA2Chemspray2"
       ],
       "warheads": [
-       {
-        "damage": "2",
-        "tag": "Chemical_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Chemical_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Chemical_Heavy",
+       "^Warhead_Chemical_Medium"
       ],
       "weapon": "RA2Chemspray_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Heavy",
-       "^Projectile_Chem_Heavy",
-       "^Effect_Chem_Heavy",
-       "^Warhead_Chemical_Medium",
-       "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1401,6 +1368,13 @@
    "yuri_brute": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "10",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -1414,23 +1388,21 @@
        "^Effect_Melee_Medium"
       ],
       "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "RA2BrutePunch",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10",
         "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2BrutePunch",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -1442,19 +1414,10 @@
        "RA2BrutePunch"
       ],
       "warheads": [
-       {
-        "damage": "10",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Melee_Medium"
       ],
       "weapon": "RA2BrutePunch_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1499,6 +1462,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1506,16 +1476,9 @@
       "reloaddelay": "75",
       "slot": "Armament@CONTROL",
       "versus_templates": [],
-      "warheads": [
-       {
-        "damage": "0",
-        "tag": "1Dam",
-        "type": "TargetDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "RA2MindControl",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1559,18 +1522,7 @@
    "yuri_cosmonaut": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "4750",
-      "reloaddelay": "11",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^RailgunWeapon",
-       "^LaserWeapon",
-       "ra2roktgun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "RailgunWeapon",
@@ -1637,16 +1589,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2CosmonautLaser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "4750",
+      "reloaddelay": "11",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^RailgunWeapon",
        "^LaserWeapon",
-       "^LightMissile",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^RA2Chaingun"
-      ]
+       "ra2roktgun"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2CosmonautLaser",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1695,6 +1653,7 @@
    "yuri_engineer": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -1708,13 +1667,10 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RemovesIvanBombs",
-       "^RemovesTerrorDrone"
-      ]
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -1725,8 +1681,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1770,6 +1725,18 @@
    "yuri_gatlingtrooper": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -1781,6 +1748,15 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2GattlingInf",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
@@ -1792,15 +1768,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingInf",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": false,
@@ -1812,23 +1779,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingInf",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1879,6 +1834,53 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -1892,7 +1894,13 @@
        "^LightFlameWeapon",
        "^FlakWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "RA2PsychicJab",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TankDestroyerCannon",
@@ -1939,17 +1947,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2PsychicJab",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^LightFlameWeapon",
-       "^FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -1963,7 +1960,15 @@
        "^LightFlameWeapon",
        "^FlakWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "RA2PsychicJab",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TankDestroyerCannon",
@@ -2010,19 +2015,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2PsychicJab",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^LightFlameWeapon",
-       "^FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2033,7 +2025,15 @@
       "versus_templates": [
        "RA2PsychicJab"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "RA2PsychicJab_elite",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TankDestroyerCannon",
@@ -2080,19 +2080,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2PsychicJab_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^LightFlameWeapon",
-       "^FlakWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2103,61 +2090,9 @@
       "versus_templates": [
        "RA2PsychicJab"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "RA2PsychicJab_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^LightFlameWeapon",
-       "^FlakWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2206,18 +2141,7 @@
    "yuri_virus": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "9999",
-      "reloaddelay": "74",
-      "requires": "!rank-elite && !yuri_upgrade_meltingvirus",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^HeavyChemicalWeapon",
-       "^SniperWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "12000",
         "tag": "HeavyChemicalWeapon",
@@ -2244,16 +2168,56 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Virusgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyChemicalWeapon",
-       "^SniperWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
+      "pricing": true,
+      "range": "9999",
+      "reloaddelay": "74",
+      "requires": "!rank-elite && !yuri_upgrade_meltingvirus",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^HeavyChemicalWeapon",
+       "^SniperWeapon"
+      ],
+      "warheads": [],
+      "weapon": "RA2Virusgun",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "6",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "74",
@@ -2266,6 +2230,18 @@
        "RA2Virusgun"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2Virusgun2",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "6",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "6",
         "tag": "Flak_Medium_Percentage",
@@ -2297,19 +2273,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Virusgun2",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_Flak_Medium",
-       "^Projectile_Flak_Medium",
-       "^Effect_Flak_Medium",
-       "^HeavyChemicalWeapon",
-       "^SniperWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "74",
@@ -2322,6 +2287,14 @@
        "RA2Virusgun2"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2Virusgun3",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "6",
         "tag": "MissileAP_Medium_Percentage",
@@ -2358,22 +2331,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Virusgun3",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_MissileAP_Medium",
-       "^Projectile_Missile_Medium",
-       "^Effect_Missile_Medium",
-       "^Warhead_Flak_Medium",
-       "^Projectile_Flak_Medium",
-       "^Effect_Flak_Medium",
-       "^HeavyChemicalWeapon",
-       "^SniperWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "11111",
       "reloaddelay": "74",
@@ -2383,11 +2342,59 @@
        "RA2Virusgun3"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2Virusgun_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
        {
         "damage": "6",
-        "tag": "MissileAP_Medium_Percentage",
+        "tag": "HeavyChemicalWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
+       {
+        "damage": "12000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "9999",
+      "reloaddelay": "74",
+      "requires": "!rank-elite && !yuri_upgrade_meltingvirus",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^HeavyChemicalWeapon",
+       "^SniperWeapon"
+      ],
+      "warheads": [],
+      "weapon": "RA2Virusgun",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "6",
         "tag": "Flak_Medium_Percentage",
@@ -2419,70 +2426,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Virusgun_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_MissileAP_Medium",
-       "^Projectile_Missile_Medium",
-       "^Effect_Missile_Medium",
-       "^Warhead_Flak_Medium",
-       "^Projectile_Flak_Medium",
-       "^Effect_Flak_Medium",
-       "^HeavyChemicalWeapon",
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
-      "pricing": false,
-      "range": "9999",
-      "reloaddelay": "74",
-      "requires": "!rank-elite && !yuri_upgrade_meltingvirus",
-      "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "^HeavyChemicalWeapon",
-       "^SniperWeapon"
-      ],
-      "warheads": [
-       {
-        "damage": "12000",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "SniperWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "RA2Virusgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^HeavyChemicalWeapon",
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
       "pricing": false,
       "range": "9999",
       "reloaddelay": "74",
@@ -2495,6 +2440,19 @@
        "RA2Virusgun"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2Virusgun2",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "6",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "6",
         "tag": "Flak_Medium_Percentage",
@@ -2526,20 +2484,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Virusgun2",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_Flak_Medium",
-       "^Projectile_Flak_Medium",
-       "^Effect_Flak_Medium",
-       "^HeavyChemicalWeapon",
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "9999",
       "reloaddelay": "74",
@@ -2552,6 +2498,15 @@
        "RA2Virusgun2"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "RA2Virusgun3",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "6",
         "tag": "MissileAP_Medium_Percentage",
@@ -2588,23 +2543,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Virusgun3",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_MissileAP_Medium",
-       "^Projectile_Missile_Medium",
-       "^Effect_Missile_Medium",
-       "^Warhead_Flak_Medium",
-       "^Projectile_Flak_Medium",
-       "^Effect_Flak_Medium",
-       "^HeavyChemicalWeapon",
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "11111",
       "reloaddelay": "74",
@@ -2614,54 +2554,11 @@
        "RA2Virusgun3"
       ],
       "warheads": [
-       {
-        "damage": "6",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "SniperWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "RA2Virusgun_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Warhead_MissileAP_Medium",
-       "^Projectile_Missile_Medium",
-       "^Effect_Missile_Medium",
-       "^Warhead_Flak_Medium",
-       "^Projectile_Flak_Medium",
-       "^Effect_Flak_Medium",
-       "^HeavyChemicalWeapon",
-       "^SniperWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2705,6 +2602,13 @@
    "yuri_yurix": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2714,19 +2618,19 @@
       "versus_templates": [
        "RA2MindControl"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "RA2XMindControl",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "secondary",
+      "damage_warheads": [
        {
         "damage": "0",
         "tag": "1Dam",
         "type": "TargetDamage"
        }
       ],
-      "weapon": "RA2XMindControl",
-      "weapon_class_source": "none",
-      "weapon_types": []
-     },
-     {
-      "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2737,19 +2641,19 @@
       "versus_templates": [
        "RA2MindControl"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "RA2XMindControlSplash",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "secondary",
+      "damage_warheads": [
        {
         "damage": "0",
         "tag": "1Dam",
         "type": "TargetDamage"
        }
       ],
-      "weapon": "RA2XMindControlSplash",
-      "weapon_class_source": "none",
-      "weapon_types": []
-     },
-     {
-      "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2760,16 +2664,9 @@
       "versus_templates": [
        "RA2XMindControlSplash"
       ],
-      "warheads": [
-       {
-        "damage": "0",
-        "tag": "1Dam",
-        "type": "TargetDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "RA2XMindControlSplash2",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2823,18 +2720,7 @@
       "armament_name": "secondary",
       "burst": "4",
       "burstdelays": "8",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "minrange": "3000",
-      "pricing": true,
-      "range": "15000",
-      "reloaddelay": "176",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^RA2Grenade",
-       "^RA2HeavyMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10",
         "tag": "Demolition_Light_Percentage",
@@ -2846,16 +2732,28 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YRBoomerTorpedo",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "3000",
+      "pricing": true,
+      "range": "15000",
+      "reloaddelay": "176",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^RA2Grenade",
        "^RA2HeavyMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "YRBoomerTorpedo",
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "8",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -2869,8 +2767,7 @@
       ],
       "warheads": [],
       "weapon": "BoomerLaunch",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3737,6 +3634,7 @@
    "yuri_chaosdrone": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -3747,11 +3645,11 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "RA2Dronegas",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -3762,8 +3660,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "RA2Dronegas",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3811,8 +3708,25 @@
    "yuri_gatlingtank": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
@@ -3823,6 +3737,13 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2GattlingMG1",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -3839,16 +3760,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG1",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "4",
@@ -3858,6 +3771,13 @@
        "RA2GattlingMG1"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2GattlingMG2",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -3874,16 +3794,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG2",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "2",
@@ -3893,6 +3805,13 @@
        "RA2GattlingMG1"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2GattlingMG3",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -3904,21 +3823,23 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "1",
+        "damage": "2",
         "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Bullet_Light",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG3",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6750",
       "reloaddelay": "6",
@@ -3928,6 +3849,13 @@
        "RA2GattlingMG1"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2GattlingMG1_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -3954,16 +3882,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG1_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "4",
@@ -3973,6 +3893,13 @@
        "RA2GattlingMG2"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2GattlingMG2_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "SmallArms",
@@ -3999,16 +3926,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG2_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8250",
       "reloaddelay": "2",
@@ -4018,38 +3937,10 @@
        "RA2GattlingMG3"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG3_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4103,8 +3994,85 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5201",
       "reloaddelay": "68",
@@ -4119,6 +4087,16 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "RA2LasherCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -4195,23 +4173,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2LasherCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6201",
       "reloaddelay": "68",
@@ -4222,115 +4185,14 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "RA2LasherCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "9000",
-      "reloaddelay": "105",
-      "requires": "yuri_doctrine_lashertoxicgasshells && !rank-elite",
-      "slot": "Armament@Toxic",
-      "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^HeavyCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -4447,9 +4309,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2LasherToxicMortar",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "9000",
+      "reloaddelay": "105",
+      "requires": "yuri_doctrine_lashertoxicgasshells && !rank-elite",
+      "slot": "Armament@Toxic",
+      "versus_templates": [
        "^Grenade",
        "^ShrapnelWeapon",
        "^HeavyBomb",
@@ -4459,21 +4326,14 @@
        "^TankDestroyerCannon",
        "^MediumCannon",
        "^HeavyCannon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "RA2LasherToxicMortar",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "10000",
-      "reloaddelay": "105",
-      "requires": "yuri_doctrine_lashertoxicgasshells && rank-elite",
-      "slot": "Armament@ToxicELITE",
-      "versus_templates": [
-       "RA2LasherToxicMortar"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -4620,34 +4480,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "105",
+      "requires": "yuri_doctrine_lashertoxicgasshells && rank-elite",
+      "slot": "Armament@ToxicELITE",
+      "versus_templates": [
+       "RA2LasherToxicMortar"
+      ],
+      "warheads": [],
       "weapon": "RA2LasherToxicMortar_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^HeavyCannon"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "7065",
-      "reloaddelay": "81",
-      "requires": "yuri_doctrine_lasherlasercannon && !rank-elite",
-      "slot": "Armament@Laser",
-      "versus_templates": [
-       "^MediumCannon",
-       "^LaserWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "MediumCannon",
@@ -4674,26 +4523,24 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2LasherLaser",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "7065",
+      "reloaddelay": "81",
+      "requires": "yuri_doctrine_lasherlasercannon && !rank-elite",
+      "slot": "Armament@Laser",
+      "versus_templates": [
        "^MediumCannon",
        "^LaserWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "RA2LasherLaser",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "8065",
-      "reloaddelay": "81",
-      "requires": "yuri_doctrine_lasherlasercannon && rank-elite",
-      "slot": "Armament@LaserELITE",
-      "versus_templates": [
-       "RA2LasherLaser"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "MediumCannon",
@@ -4730,12 +4577,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8065",
+      "reloaddelay": "81",
+      "requires": "yuri_doctrine_lasherlasercannon && rank-elite",
+      "slot": "Armament@LaserELITE",
+      "versus_templates": [
+       "RA2LasherLaser"
+      ],
+      "warheads": [],
       "weapon": "RA2LasherLaser_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumCannon",
-       "^LaserWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4786,8 +4640,15 @@
       "armament_name": "primary",
       "burst": "100",
       "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7032",
       "reloaddelay": "200",
@@ -4797,24 +4658,24 @@
        "^RA2LaserWeapon"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "RA2Magnet",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "100",
+      "burstdelays": "1",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Magnet",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "100",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7032",
       "reloaddelay": "200",
@@ -4824,24 +4685,24 @@
        "RA2Magnet"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "RA2MagnetAA",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "100",
+      "burstdelays": "1",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MagnetAA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "100",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8032",
       "reloaddelay": "200",
@@ -4851,24 +4712,24 @@
        "RA2Magnet"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "RA2Magnet_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "100",
+      "burstdelays": "1",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Magnet_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RA2LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "100",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8032",
       "reloaddelay": "200",
@@ -4878,17 +4739,10 @@
        "RA2Magnet_elite"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "RA2MagnetAA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RA2LaserWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4936,6 +4790,13 @@
    "yuri_mastermind": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -4945,16 +4806,9 @@
       "versus_templates": [
        "RA2MindControl"
       ],
-      "warheads": [
-       {
-        "damage": "0",
-        "tag": "1Dam",
-        "type": "TargetDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "RA2SMindControl",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5051,17 +4905,7 @@
    "yuri_slaveminer": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "5000",
-      "reloaddelay": "15",
-      "slot": "Armament@primary",
-      "versus_templates": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
@@ -5073,12 +4917,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA220mmrapid",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "5000",
+      "reloaddelay": "15",
+      "slot": "Armament@primary",
+      "versus_templates": [
        "^RA2SmallArms",
        "^RA2Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA220mmrapid",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

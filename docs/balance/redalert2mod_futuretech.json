@@ -10,18 +10,7 @@
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "4",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "5200",
-      "reloaddelay": "60",
-      "slot": "Armament@Rocket",
-      "versus_templates": [
-       "^Grenade",
-       "^D2KRocket",
-       "^SteelMediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "16000",
         "tag": "Grenade",
@@ -48,30 +37,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Future_Cryocopter_Rocket",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "pricing": true,
+      "range": "5200",
+      "reloaddelay": "60",
+      "slot": "Armament@Rocket",
+      "versus_templates": [
        "^Grenade",
        "^D2KRocket",
        "^SteelMediumMissile"
-      ]
-     },
-     {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5200",
-      "reloaddelay": "8",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^LightMissile",
-       "^SmallArms",
-       "^Chaingun",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^LaserWeapon"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "Future_Cryocopter_Rocket",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "LightMissile",
@@ -143,16 +128,23 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Future_Cryocopter_Cryo",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5200",
+      "reloaddelay": "8",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^LightMissile",
        "^SmallArms",
        "^Chaingun",
        "^FlakWeapon",
        "^TeslaWeapon",
        "^LaserWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "Future_Cryocopter_Cryo",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -208,6 +200,143 @@
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -227,7 +356,15 @@
        "^HeavyMissile",
        "^HeavyCannon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "FutureHarbingerCannon",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "HeavyChemicalWeapon",
@@ -364,25 +501,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureHarbingerCannon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon",
-       "^HeavyBomb",
-       "^TeslaChargedWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^LaserWeapon",
-       "^RailgunWeapon",
-       "^HeavyMissile",
-       "^HeavyCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "4",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -393,160 +511,19 @@
       "versus_templates": [
        "FutureHarbingerCannon"
       ],
-      "warheads": [
-       {
-        "damage": "4000",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaChargedExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "FutureHarbingerCannon_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon",
-       "^HeavyBomb",
-       "^TeslaChargedWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^LaserWeapon",
-       "^RailgunWeapon",
-       "^HeavyMissile",
-       "^HeavyCannon"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "6",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -560,24 +537,22 @@
        "^Effect_Flak_Medium"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "HarbingerChainguns",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "1",
+      "damage_warheads": [
        {
         "damage": "6",
         "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HarbingerChainguns",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flak_Medium",
-       "^Projectile_Flak_Medium",
-       "^Effect_Flak_Medium"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -589,19 +564,10 @@
        "HarbingerChainguns"
       ],
       "warheads": [
-       {
-        "damage": "6",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "HarbingerChainguns_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flak_Medium",
-       "^Projectile_Flak_Medium",
-       "^Effect_Flak_Medium"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -655,8 +621,65 @@
       "armament_name": "primary",
       "burst": "5",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1000",
       "pricing": true,
       "range": "5000",
@@ -671,6 +694,16 @@
        "^SteelMediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "SteelTwisterMissiles",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "10",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -727,22 +760,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelTwisterMissiles",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^MediumFlameWeapon",
-       "^FlakWeapon",
-       "^HeavyAAWeapon",
-       "^SteelMediumMissile"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "10",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1000",
       "pricing": true,
       "range": "6000",
@@ -753,71 +772,10 @@
        "SteelTwisterMissiles"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "SteelTwisterMissiles_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^MediumFlameWeapon",
-       "^FlakWeapon",
-       "^HeavyAAWeapon",
-       "^SteelMediumMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -861,19 +819,7 @@
    "landcarr_drone.futu": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1000",
-      "pricing": true,
-      "range": "5000",
-      "reloaddelay": "3",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Grenade",
-       "^HeavyBomb",
-       "^RA2MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -905,13 +851,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HornetMissile",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "1000",
+      "pricing": true,
+      "range": "5000",
+      "reloaddelay": "3",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
        "^Grenade",
        "^HeavyBomb",
        "^RA2MediumMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "RA2HornetMissile",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1028,16 +984,7 @@
    "futuretech_frostbiteturret": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "7124",
-      "reloaddelay": "8",
-      "slot": "Armament",
-      "versus_templates": [
-       "Future_Cryocopter_Cryo"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1000",
         "tag": "LightMissile",
@@ -1109,16 +1056,18 @@
         "type": "SpreadDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "7124",
+      "reloaddelay": "8",
+      "slot": "Armament",
+      "versus_templates": [
+       "Future_Cryocopter_Cryo"
+      ],
+      "warheads": [],
       "weapon": "Future_Turret_Cryo",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^SmallArms",
-       "^Chaingun",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^LaserWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1249,18 +1198,7 @@
       "armament_name": "primary",
       "burst": "3",
       "burstdelays": "4",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": true,
-      "range": "7410",
-      "reloaddelay": "24",
-      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono && !ifv-spy && !ifv-thief",
-      "slot": "Armament@primary",
-      "versus_templates": [
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "ArrowWeapon",
@@ -1277,32 +1215,28 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Future_MultiMissile",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "7410",
+      "reloaddelay": "24",
+      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono && !ifv-spy && !ifv-thief",
+      "slot": "Armament@primary",
+      "versus_templates": [
        "^ArrowWeapon",
        "^RA2LightMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "Future_MultiMissile",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "3",
       "burstdelays": "4",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "9000",
-      "reloaddelay": "32",
-      "requires": "ifv-miss",
-      "slot": "Armament@MISS",
-      "versus_templates": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon",
-       "^D2KRocket"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -1354,35 +1288,31 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Future_MultiMissile_Javelin",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "9000",
+      "reloaddelay": "32",
+      "requires": "ifv-miss",
+      "slot": "Armament@MISS",
+      "versus_templates": [
        "^LightMissile",
        "^FlakWeapon",
        "^MediumMissile",
        "^ShrapnelWeapon",
        "^D2KRocket"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "Future_MultiMissile_Javelin",
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "3",
       "burstdelays": "4",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "1660",
-      "pricing": true,
-      "range": "8300",
-      "reloaddelay": "56",
-      "requires": "ifv-mg || ifv-hmg || ifv-repair || ifv-ra1_allies_alliedsniper || ifv-flak || ifv-tesla || ifv-chem || ifv-fire || ifv-cannon || ifv-deso || ifv-demo || ifv-healer || ifv-chrono || ifv-spy || ifv-thief",
-      "slot": "Armament@FRAG",
-      "versus_templates": [
-       "^ShrapnelWeapon",
-       "^MediumFlameWeapon",
-       "^LightChemicalWeapon",
-       "^LightMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "ShrapnelWeapon",
@@ -1439,34 +1369,29 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Future_MultiMissile_Frag",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "1660",
+      "pricing": true,
+      "range": "8300",
+      "reloaddelay": "56",
+      "requires": "ifv-mg || ifv-hmg || ifv-repair || ifv-ra1_allies_alliedsniper || ifv-flak || ifv-tesla || ifv-chem || ifv-fire || ifv-cannon || ifv-deso || ifv-demo || ifv-healer || ifv-chrono || ifv-spy || ifv-thief",
+      "slot": "Armament@FRAG",
+      "versus_templates": [
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
        "^LightChemicalWeapon",
        "^LightMissile"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "Future_MultiMissile_Frag",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
       "burst": "3",
       "burstdelays": "6",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "9000",
-      "reloaddelay": "50",
-      "requires": "ifv-hero",
-      "slot": "Armament@Sigma",
-      "versus_templates": [
-       "^TeslaChargedWeapon",
-       "^MagicWeapon",
-       "^FlakWeapon",
-       "^ShrapnelWeapon",
-       "^MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "TeslaChargedWeapon",
@@ -1533,15 +1458,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Future_MultiMissile_Sigma",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "9000",
+      "reloaddelay": "50",
+      "requires": "ifv-hero",
+      "slot": "Armament@Sigma",
+      "versus_templates": [
        "^TeslaChargedWeapon",
        "^MagicWeapon",
        "^FlakWeapon",
        "^ShrapnelWeapon",
        "^MediumMissile"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "Future_MultiMissile_Sigma",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1814,8 +1747,20 @@
      {
       "burst": "2",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "16",
@@ -1824,7 +1769,14 @@
       "versus_templates": [
        "^SniperWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "BlackWidowPistols",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "SniperWeapon",
@@ -1836,17 +1788,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BlackWidowPistols",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "16",
@@ -1855,7 +1798,15 @@
       "versus_templates": [
        "BlackWidowPistols"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "BlackWidowPistols_elite",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "SniperWeapon",
@@ -1867,18 +1818,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BlackWidowPistols_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "9000",
       "reloaddelay": "16",
@@ -1887,7 +1828,15 @@
       "versus_templates": [
        "^SniperWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "BlackWidowPistols",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "8",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "SniperWeapon",
@@ -1899,18 +1848,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BlackWidowPistols",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "8",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6000",
       "reloaddelay": "16",
@@ -1919,26 +1858,13 @@
       "versus_templates": [
        "BlackWidowPistols"
       ],
-      "warheads": [
-       {
-        "damage": "10000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "SniperWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "BlackWidowPistols_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -1951,8 +1877,7 @@
       ],
       "warheads": [],
       "weapon": "SEALAttach",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -1998,8 +1923,45 @@
    "futuretech_cannondroid": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
@@ -2012,6 +1974,16 @@
        "^SteelMediumCannon"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "CannonAttackRobotGun",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TankDestroyerCannon",
@@ -2048,20 +2020,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CannonAttackRobotGun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^MediumFlameWeapon",
-       "^RA2RailgunWeapon",
-       "^SteelMediumCannon"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "25",
@@ -2071,50 +2031,11 @@
        "CannonAttackRobotGun"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "CannonAttackRobotGun_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TankDestroyerCannon",
-       "^MediumFlameWeapon",
-       "^RA2RailgunWeapon",
-       "^SteelMediumCannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2165,6 +2086,78 @@
    "futuretech_cryolegionnaire": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2179,7 +2172,13 @@
        "^TeslaWeapon",
        "^LaserWeapon"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "CryoLegionnaireAttack",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -2251,19 +2250,6 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "CryoLegionnaireAttack",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^SmallArms",
-       "^Chaingun",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^LaserWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2278,88 +2264,9 @@
        "^TeslaWeapon",
        "^LaserWeapon"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "CryoLegionnaireAttack",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^SmallArms",
-       "^Chaingun",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^LaserWeapon"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2414,6 +2321,78 @@
    "futuretech_enforcer": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2429,7 +2408,13 @@
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "FutureEnforcerShotgun",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "deployed",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -2501,19 +2486,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureEnforcerShotgun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2524,7 +2496,13 @@
       "versus_templates": [
        "FutureEnforcerShotgun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "FutureEnforcerShotgunDeployed",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -2596,19 +2574,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureEnforcerShotgunDeployed",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2619,7 +2584,14 @@
       "versus_templates": [
        "FutureEnforcerShotgun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "FutureEnforcerShotgunDeployed",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -2691,20 +2663,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureEnforcerShotgunDeployed",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2715,7 +2673,15 @@
       "versus_templates": [
        "FutureEnforcerShotgun"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "FutureEnforcerShotgun_elite",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "deployed",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -2787,21 +2753,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureEnforcerShotgun_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "deployed",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -2812,7 +2763,15 @@
       "versus_templates": [
        "FutureEnforcerShotgunDeployed"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "FutureEnforcerShotgunDeployed_elite",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -2884,21 +2843,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureEnforcerShotgunDeployed_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^SmallArms",
-       "^Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
@@ -2909,91 +2853,13 @@
       "versus_templates": [
        "FutureEnforcerShotgunDeployed"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "FutureEnforcerShotgunDeployed_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^SmallArms",
-       "^Chaingun"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "targeting",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -3007,10 +2873,7 @@
       ],
       "warheads": [],
       "weapon": "aadeploytargeting_8c0_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^AADeployTargeting"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3054,6 +2917,7 @@
    "futuretech_engineer": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -3067,13 +2931,10 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RemovesIvanBombs",
-       "^RemovesTerrorDrone"
-      ]
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -3084,8 +2945,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3129,8 +2989,60 @@
    "futuretech_javelinsoldier": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
@@ -3144,6 +3056,14 @@
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "FutureJavelinRockets",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -3195,20 +3115,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureJavelinRockets",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon",
-       "^D2KRocket"
-      ]
-     },
-     {
-      "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "25",
@@ -3218,6 +3126,14 @@
        "FutureJavelinRockets"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "FutureJavelinRocketsDeployed",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -3269,20 +3185,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureJavelinRocketsDeployed",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon",
-       "^D2KRocket"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "7500",
       "reloaddelay": "25",
@@ -3292,6 +3196,15 @@
        "FutureJavelinRockets"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "FutureJavelinRocketsDeployed",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -3343,21 +3256,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureJavelinRocketsDeployed",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon",
-       "^D2KRocket"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "25",
@@ -3367,6 +3267,16 @@
        "FutureJavelinRockets"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "FutureJavelinRockets_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -3418,22 +3328,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureJavelinRockets_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon",
-       "^D2KRocket"
-      ]
-     },
-     {
-      "armament_name": "deployed",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8500",
       "reloaddelay": "25",
@@ -3443,6 +3339,16 @@
        "FutureJavelinRocketsDeployed"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "FutureJavelinRocketsDeployed_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "LightMissile",
@@ -3494,22 +3400,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureJavelinRocketsDeployed_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon",
-       "^D2KRocket"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "8500",
       "reloaddelay": "25",
@@ -3519,69 +3411,14 @@
        "FutureJavelinRocketsDeployed"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "FutureJavelinRocketsDeployed_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon",
-       "^D2KRocket"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "targeting",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -3595,10 +3432,7 @@
       ],
       "warheads": [],
       "weapon": "aadeploytargeting_8c0_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^AADeployTargeting"
-      ]
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3644,8 +3478,25 @@
      {
       "burst": "2",
       "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "65",
@@ -3656,6 +3507,15 @@
        "^SteelLightMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "MissileAttackRobotGun",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "12000",
         "tag": "MediumMissile",
@@ -3672,18 +3532,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MissileAttackRobotGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumMissile",
-       "^SteelLightMissile"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "65",
@@ -3693,28 +3543,10 @@
        "MissileAttackRobotGun"
       ],
       "warheads": [
-       {
-        "damage": "12000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "MissileAttackRobotGun_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^MediumMissile",
-       "^SteelLightMissile"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3768,16 +3600,7 @@
       "armament_name": "primary",
       "burst": "10",
       "burstdelays": "1",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
-      "pricing": true,
-      "range": "5000",
-      "reloaddelay": "50",
-      "slot": "Armament",
-      "versus_templates": [
-       "^RepairWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "-2000",
         "tag": "RepairWeapon",
@@ -3794,11 +3617,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2IFVRepair",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5000",
+      "reloaddelay": "50",
+      "slot": "Armament",
+      "versus_templates": [
        "^RepairWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "RA2IFVRepair",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3849,6 +3679,18 @@
      {
       "burst": "4",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -3861,6 +3703,16 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "Future_Wheel_MG",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "2",
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
@@ -3872,18 +3724,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Future_Wheel_MG",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "8",
-      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6806",
       "reloaddelay": "25",
@@ -3894,24 +3736,11 @@
        "^SteelChaingun"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "Future_Wheel_MG_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun",
-       "^SteelChaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3960,8 +3789,75 @@
    "futuretech_shotgundroid": {
     "armaments": [
      {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4110",
       "reloaddelay": "55",
@@ -3976,6 +3872,15 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "ShotgunAttackRobotGun",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -4042,22 +3947,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ShotgunAttackRobotGun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5110",
       "reloaddelay": "25",
@@ -4068,6 +3959,14 @@
        "^SteelChaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "ShotgunAttackRobotGun_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -4134,22 +4033,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ShotgunAttackRobotGun_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^SmallArms",
-       "^RA2Chaingun",
-       "^SteelChaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "4110",
       "reloaddelay": "55",
@@ -4164,6 +4049,16 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "ShotgunAttackRobotGun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -4230,23 +4125,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ShotgunAttackRobotGun",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^SmallArms",
-       "^RA2Chaingun"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5110",
       "reloaddelay": "25",
@@ -4257,83 +4137,10 @@
        "^SteelChaingun"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "ShotgunAttackRobotGun_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^SmallArms",
-       "^RA2Chaingun",
-       "^SteelChaingun"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4813,23 +4620,7 @@
     "armaments": [
      {
       "armament_name": "athena-beam",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "minrange": "3200",
-      "pricing": true,
-      "range": "16000",
-      "reloaddelay": "1",
-      "requires": "athena-charged == 1",
-      "slot": "Armament@AG",
-      "versus_templates": [
-       "^LightMissile",
-       "^SmallArms",
-       "^Chaingun",
-       "^FlakWeapon",
-       "^TeslaWeapon",
-       "^LaserWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "32000",
         "tag": "LightMissile",
@@ -4901,19 +4692,29 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "AthenaLaser",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "3200",
+      "pricing": true,
+      "range": "16000",
+      "reloaddelay": "1",
+      "requires": "athena-charged == 1",
+      "slot": "Armament@AG",
+      "versus_templates": [
        "^LightMissile",
        "^SmallArms",
        "^Chaingun",
        "^FlakWeapon",
        "^TeslaWeapon",
        "^LaserWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "AthenaLaser",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -4925,8 +4726,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "AthenaVisualLaser",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -4975,6 +4775,7 @@
    "futuretech_beehivedronecarrier": {
     "armaments": [
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -4987,8 +4788,7 @@
       ],
       "warheads": [],
       "weapon": "BeehiveCarrierTarget",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5038,6 +4838,18 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "25",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -5050,27 +4862,14 @@
        "^Effect_Tesla_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "25",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "25000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "Future_CoilerAgressive",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "repair",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -5083,8 +4882,7 @@
       ],
       "warheads": [],
       "weapon": "Future_CoilerFriendMain",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5136,8 +4934,90 @@
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "10",
+      "damage_warheads": [
+       {
+        "damage": "100000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "100000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "100000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "100000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "100000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1500",
       "pricing": true,
       "range": "7500",
@@ -5153,6 +5033,16 @@
        "^SteelHeavyCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "FutureTankCannons",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "100000",
         "tag": "MediumFlameWeapon",
@@ -5234,23 +5124,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureTankCannons",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^SteelHeavyCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "4",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1500",
       "pricing": true,
       "range": "8500",
@@ -5261,97 +5136,10 @@
        "FutureTankCannons"
       ],
       "warheads": [
-       {
-        "damage": "100000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "100000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "100000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "100000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "100000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "FutureTankCannons_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^SteelHeavyCannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5412,6 +5200,13 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "6",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5423,22 +5218,22 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "GuardianTankCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
        {
         "damage": "6",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GuardianTankCannon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -5451,21 +5246,14 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       {
-        "damage": "6",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "GuardianTankCannon_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2MediumCannon",
-       "^RA2EliteEffects"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -5477,11 +5265,11 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "Future_MBT_DebuffLaser",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -5495,8 +5283,7 @@
       ],
       "warheads": [],
       "weapon": "Future_MBT_DebuffLaser_elite",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5544,19 +5331,7 @@
    "futuretech_gunstrider": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "8300",
-      "reloaddelay": "12",
-      "slot": "Armament",
-      "versus_templates": [
-       "^TankDestroyerCannon",
-       "^LightMissile",
-       "^FlakWeapon",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "TankDestroyerCannon",
@@ -5593,14 +5368,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureMechGatling",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "8300",
+      "reloaddelay": "12",
+      "slot": "Armament",
+      "versus_templates": [
        "^TankDestroyerCannon",
        "^LightMissile",
        "^FlakWeapon",
        "^RA2Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "FutureMechGatling",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5698,18 +5482,7 @@
     "armaments": [
      {
       "armament_name": "primary",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "7500",
-      "reloaddelay": "60",
-      "requires": "!rank-elite",
-      "slot": "Armament",
-      "versus_templates": [
-       "^RailgunWeapon",
-       "^RA2HeavyCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "30000",
         "tag": "RailgunWeapon",
@@ -5731,27 +5504,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OrionRailgun",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RailgunWeapon",
-       "^RA2HeavyCannon"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
-      "range": "9000",
+      "range": "7500",
       "reloaddelay": "60",
-      "requires": "rank-elite",
-      "slot": "Armament@elite",
+      "requires": "!rank-elite",
+      "slot": "Armament",
       "versus_templates": [
-       "OrionRailgun",
-       "^RA2EliteEffects"
+       "^RailgunWeapon",
+       "^RA2HeavyCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "OrionRailgun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
         "damage": "60000",
         "tag": "RailgunWeapon",
@@ -5773,13 +5545,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OrionRailgun_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RailgunWeapon",
-       "^RA2HeavyCannon",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "9000",
+      "reloaddelay": "60",
+      "requires": "rank-elite",
+      "slot": "Armament@elite",
+      "versus_templates": [
+       "OrionRailgun",
        "^RA2EliteEffects"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "OrionRailgun_elite",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5831,20 +5612,7 @@
      {
       "burst": "8",
       "burstdelays": "3",
-      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
-      "minrange": "1555",
-      "pricing": true,
-      "range": "7777",
-      "reloaddelay": "108",
-      "slot": "Armament",
-      "versus_templates": [
-       "^RA2Grenade",
-       "^LightFlameWeapon",
-       "^ShrapnelWeapon",
-       "^RA2MediumMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Demolition_Light_Percentage",
@@ -5886,20 +5654,73 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2RTruckRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.875,
+      "minrange": "1555",
+      "pricing": true,
+      "range": "7777",
+      "reloaddelay": "108",
+      "slot": "Armament",
+      "versus_templates": [
        "^RA2Grenade",
        "^LightFlameWeapon",
        "^ShrapnelWeapon",
        "^RA2MediumMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "RA2RTruckRocket",
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
       "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "1555",
       "pricing": true,
       "range": "7777",
@@ -5913,70 +5734,16 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2RTruckRocket",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^RA2Grenade",
-       "^LightFlameWeapon",
-       "^ShrapnelWeapon",
-       "^RA2MediumMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "8",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "12000",
-      "reloaddelay": "240",
-      "slot": "Armament@WATER",
-      "versus_templates": [
-       "^RA2Grenade",
-       "^RA2HeavyMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "6",
         "tag": "Demolition_Light_Percentage",
@@ -5988,12 +5755,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureMicrotorpedos",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "12000",
+      "reloaddelay": "240",
+      "slot": "Armament@WATER",
+      "versus_templates": [
        "^RA2Grenade",
        "^RA2HeavyMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "FutureMicrotorpedos",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6044,8 +5821,45 @@
      {
       "burst": "2",
       "burstdelays": "10",
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -6058,6 +5872,15 @@
        "^SteelHeavyCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "FutureMechPlasma",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "5",
+      "damage_warheads": [
        {
         "damage": "10000",
         "tag": "Grenade",
@@ -6094,19 +5917,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureMechPlasma",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^MediumChemicalWeapon",
-       "^SteelHeavyCannon"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1400",
       "pricing": true,
       "range": "8000",
@@ -6117,49 +5929,10 @@
        "FutureMechPlasma"
       ],
       "warheads": [
-       {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "FutureMechPlasma_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^Grenade",
-       "^MediumChemicalWeapon",
-       "^SteelHeavyCannon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6306,17 +6079,7 @@
      {
       "burst": "4",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "5555",
-      "reloaddelay": "21",
-      "slot": "Armament@AG",
-      "versus_templates": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
@@ -6328,28 +6091,27 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ACV_Machinegun",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "5555",
+      "reloaddelay": "21",
+      "slot": "Armament@AG",
+      "versus_templates": [
        "^RA2SmallArms",
        "^RA2Chaingun"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "ACV_Machinegun",
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "8",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "12000",
-      "reloaddelay": "240",
-      "requires": "inwater",
-      "slot": "Armament@WATER",
-      "versus_templates": [
-       "^RA2Grenade",
-       "^RA2HeavyMissile"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "6",
         "tag": "Demolition_Light_Percentage",
@@ -6361,12 +6123,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FutureMicrotorpedos",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "12000",
+      "reloaddelay": "240",
+      "requires": "inwater",
+      "slot": "Armament@WATER",
+      "versus_templates": [
        "^RA2Grenade",
        "^RA2HeavyMissile"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "FutureMicrotorpedos",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6415,8 +6188,45 @@
     "armaments": [
      {
       "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5780",
       "reloaddelay": "48",
@@ -6428,6 +6238,14 @@
        "^RA2RailgunWeapon"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "RA2Robotmm",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "TeslaWeapon",
@@ -6464,18 +6282,8 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Robotmm",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^LaserWeapon",
-       "^RA2RailgunWeapon"
-      ]
-     },
-     {
-      "armament_name": "primary",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6780",
       "reloaddelay": "48",
@@ -6485,49 +6293,10 @@
        "RA2Robotmm"
       ],
       "warheads": [
-       {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "RA2Robotmm_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^TeslaWeapon",
-       "^LaserWeapon",
-       "^RA2RailgunWeapon"
-      ]
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6579,6 +6348,18 @@
      {
       "burst": "4",
       "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -6591,40 +6372,16 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^RA2SmallArms",
-       "^RA2Chaingun"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "6",
       "burstdelays": "2",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "4692",
-      "reloaddelay": "10",
-      "requires": "ifv-hmg",
-      "slot": "Armament@hmg",
-      "versus_templates": [
-       "^HeavyCannon",
-       "^RA2Chaingun",
-       "^SniperWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "2000",
         "tag": "HeavyCannon",
@@ -6651,26 +6408,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2CRM60H",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "4692",
+      "reloaddelay": "10",
+      "requires": "ifv-hmg",
+      "slot": "Armament@hmg",
+      "versus_templates": [
        "^HeavyCannon",
        "^RA2Chaingun",
        "^SniperWeapon"
-      ]
-     },
-     {
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "8704",
-      "reloaddelay": "40",
-      "requires": "ifv-archer",
-      "slot": "Armament@archer",
-      "versus_templates": [
-       "bowFire"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "RA2CRM60H",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "2500",
         "tag": "1Dam",
@@ -6682,24 +6439,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8704",
+      "reloaddelay": "40",
+      "requires": "ifv-archer",
+      "slot": "Armament@archer",
+      "versus_templates": [
+       "bowFire"
+      ],
+      "warheads": [],
       "weapon": "wc_tower_fire",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
       "burst": "10",
       "burstdelays": "1",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
-      "pricing": true,
-      "range": "5000",
-      "reloaddelay": "50",
-      "requires": "ifv-repair",
-      "slot": "Armament@repair",
-      "versus_templates": [
-       "^RepairWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "-2000",
         "tag": "RepairWeapon",
@@ -6716,24 +6473,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2IFVRepair",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5000",
+      "reloaddelay": "50",
+      "requires": "ifv-repair",
+      "slot": "Armament@repair",
+      "versus_templates": [
        "^RepairWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "RA2IFVRepair",
+      "weapon_class_source": "none"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": true,
-      "range": "9153",
-      "reloaddelay": "100",
-      "requires": "ifv-lightsniper",
-      "slot": "Armament@lightsniper",
-      "versus_templates": [
-       "^SniperWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "30000",
         "tag": "SniperWeapon",
@@ -6745,26 +6500,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LightSniper",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "9153",
+      "reloaddelay": "100",
+      "requires": "ifv-lightsniper",
+      "slot": "Armament@lightsniper",
+      "versus_templates": [
        "^SniperWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "LightSniper",
+      "weapon_class_source": "none"
      },
      {
       "burst": "2",
       "burstdelays": "3",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": true,
-      "range": "8000",
-      "reloaddelay": "12",
-      "requires": "ifv-hero",
-      "slot": "Armament@hero",
-      "versus_templates": [
-       "RA2DoublePistols"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "14000",
         "tag": "SniperWeapon",
@@ -6776,13 +6529,33 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "12",
+      "requires": "ifv-hero",
+      "slot": "Armament@hero",
+      "versus_templates": [
+       "RA2DoublePistols"
+      ],
+      "warheads": [],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^SniperWeapon"
-      ]
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "20",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
@@ -6796,41 +6569,13 @@
        "^Effect_Tesla_Heavy"
       ],
       "warheads": [
-       {
-        "damage": "20",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       }
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ]
+      "weapon_class_source": "template"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5804",
-      "reloaddelay": "85",
-      "requires": "ifv-flak",
-      "slot": "Armament@flak",
-      "versus_templates": [
-       "^TankDestroyerCannon",
-       "^RailgunWeapon",
-       "^LightMissile",
-       "^HeavyCannon",
-       "^FlakWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "80000",
         "tag": "TankDestroyerCannon",
@@ -6887,30 +6632,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DragunovSniper",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5804",
+      "reloaddelay": "85",
+      "requires": "ifv-flak",
+      "slot": "Armament@flak",
+      "versus_templates": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
        "^LightMissile",
        "^HeavyCannon",
        "^FlakWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "DragunovSniper",
+      "weapon_class_source": "none"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
-      "pricing": true,
-      "range": "6031",
-      "reloaddelay": "39",
-      "requires": "ifv-cannon",
-      "slot": "Armament@cannon",
-      "versus_templates": [
-       "^RailgunWeapon",
-       "^MediumChemicalWeapon",
-       "^RA2TankDestroyerCannon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "8000",
         "tag": "RailgunWeapon",
@@ -6947,15 +6688,32 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MirageGun",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6031",
+      "reloaddelay": "39",
+      "requires": "ifv-cannon",
+      "slot": "Armament@cannon",
+      "versus_templates": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
        "^RA2TankDestroyerCannon"
-      ]
+      ],
+      "warheads": [
+       "^Warhead_CannonAP_Light"
+      ],
+      "weapon": "RA2MirageGun",
+      "weapon_class_source": "template"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -6969,32 +6727,13 @@
        "^Effect_Explosion_Light"
       ],
       "warheads": [
-       {
-        "damage": "8",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
-      ]
+      "weapon_class_source": "template"
      },
      {
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5120",
-      "reloaddelay": "21",
-      "requires": "ifv-plasma",
-      "slot": "Armament@plasma",
-      "versus_templates": [
-       "^DRPlasmaWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "3750",
         "tag": "1Dam",
@@ -7006,16 +6745,31 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "DRPlasmaTankWeapon",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "21",
+      "requires": "ifv-plasma",
+      "slot": "Armament@plasma",
+      "versus_templates": [
        "^DRPlasmaWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "DRPlasmaTankWeapon",
+      "weapon_class_source": "none"
      },
      {
       "burst": "6",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6144",
       "reloaddelay": "30",
@@ -7024,22 +6778,25 @@
       "versus_templates": [
        "SWLaser"
       ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "1Dam",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "SWLaserG",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^LightMG"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "burst": "3",
       "burstdelays": "6",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "minrange": "1435",
@@ -7051,36 +6808,12 @@
       "versus_templates": [
        "^AntiGroundMissile"
       ],
-      "warheads": [
-       {
-        "damage": "4000",
-        "tag": "1Dam",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Percentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "USALaserCannonAG",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^AntiGroundMissile"
-      ]
+      "weapon_class_source": "none"
      },
      {
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "7168",
-      "reloaddelay": "75",
-      "requires": "ifv-greelaser",
-      "slot": "Armament@greenlaser",
-      "versus_templates": [
-       "SWGreenLaser"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "5000",
         "tag": "1Dam",
@@ -7092,24 +6825,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SWGreenLaserG",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MissileWeapon"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
-      "range": "8192",
+      "range": "7168",
       "reloaddelay": "75",
-      "requires": "ifv-misslaser",
-      "slot": "Armament@misslaser",
+      "requires": "ifv-greelaser",
+      "slot": "Armament@greenlaser",
       "versus_templates": [
-       "SWrBigRedLaser"
+       "SWGreenLaser"
       ],
-      "warheads": [
+      "warheads": [],
+      "weapon": "SWGreenLaserG",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "1Dam",
@@ -7121,15 +6852,30 @@
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8192",
+      "reloaddelay": "75",
+      "requires": "ifv-misslaser",
+      "slot": "Armament@misslaser",
+      "versus_templates": [
+       "SWrBigRedLaser"
+      ],
+      "warheads": [],
       "weapon": "SWGBigRedLaserG",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MissileWeapon"
-      ]
+      "weapon_class_source": "none"
      },
      {
       "burst": "2",
       "burstdelays": "10",
+      "damage_warheads": [
+       {
+        "damage": "7",
+        "tag": "Flame_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7143,21 +6889,19 @@
        "^Effect_Flame_Medium"
       ],
       "warheads": [
+       "^Warhead_Flame_Medium"
+      ],
+      "weapon": "BigFlamer",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
-        "damage": "7",
-        "tag": "Flame_Medium_Percentage",
+        "damage": "15",
+        "tag": "Chemical_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BigFlamer",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Flame_Medium",
-       "^Projectile_Flame_Medium",
-       "^Effect_Flame_Medium"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7171,21 +6915,19 @@
        "^Effect_Chem_Medium"
       ],
       "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
+      "weapon": "RA2RadBeamWeapon",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "15",
         "tag": "Chemical_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Medium",
-       "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
-      ]
-     },
-     {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -7199,87 +6941,47 @@
        "^Effect_Chem_Medium"
       ],
       "warheads": [
-       {
-        "damage": "15",
-        "tag": "Chemical_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_Chemical_Medium"
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^Warhead_Chemical_Medium",
-       "^Projectile_Chem_Medium",
-       "^Effect_Chem_Medium"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
-      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileHE_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missile",
       "versus_templates": [
-       "^MediumCannon",
-       "^MediumChemicalWeapon",
-       "RA2HoverMissile"
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileHE_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileHE_Light"
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumCannon",
-       "^MediumChemicalWeapon",
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -7293,10 +6995,10 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoBeam",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -7310,10 +7012,10 @@
       ],
       "warheads": [],
       "weapon": "IFVChronoSound",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
@@ -7324,10 +7026,16 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "3000",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
       "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
@@ -7338,29 +7046,12 @@
       "versus_templates": [
        "M_HMG"
       ],
-      "warheads": [
-       {
-        "damage": "3000",
-        "tag": "1Dam",
-        "type": "SpreadDamage"
-       }
-      ],
+      "warheads": [],
       "weapon": "Fremen_L",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MG"
-      ]
+      "weapon_class_source": "none"
      },
      {
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6144",
-      "reloaddelay": "60",
-      "requires": "ifv-sonic",
-      "slot": "Armament@sonic",
-      "versus_templates": [],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "4000",
         "tag": "1Dam",
@@ -7372,22 +7063,20 @@
         "type": "SpreadDamage"
        }
       ],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6144",
+      "reloaddelay": "60",
+      "requires": "ifv-sonic",
+      "slot": "Armament@sonic",
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "TSSonicZap",
-      "weapon_class_source": "none",
-      "weapon_types": []
+      "weapon_class_source": "none"
      },
      {
-      "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.5,
-      "pricing": true,
-      "range": "6000",
-      "reloaddelay": "10",
-      "requires": "ifv-healer",
-      "slot": "Armament@heal",
-      "versus_templates": [
-       "^HealingWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "-2000",
         "tag": "HealingWeapon",
@@ -7404,16 +7093,41 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MedicHeal",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/starcraft.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "10",
+      "requires": "ifv-healer",
+      "slot": "Armament@heal",
+      "versus_templates": [
        "^HealingWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "MedicHeal",
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -7426,6 +7140,16 @@
        "^RA2LightMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "RA2HoverMissile",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "ArrowWeapon",
@@ -7442,17 +7166,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HoverMissile",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -7464,6 +7177,16 @@
        "RA2HoverMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "RA2HoverMissile_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "ArrowWeapon",
@@ -7480,17 +7203,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -7502,6 +7214,16 @@
        "RA2HoverMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "RA2HoverMissile_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "4",
+      "damage_warheads": [
        {
         "damage": "6000",
         "tag": "ArrowWeapon",
@@ -7518,17 +7240,6 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2HoverMissile_AA",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "armament_name": "primary",
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
@@ -7540,366 +7251,156 @@
        "RA2HoverMissile_elite"
       ],
       "warheads": [
-       {
-        "damage": "6000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
-      "weapon_class_source": "template",
-      "weapon_types": [
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "4",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "5760",
-      "reloaddelay": "28",
-      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles",
-      "slot": "Armament@primaryThunderbolt",
-      "versus_templates": [
-       "^HeavyMissile",
-       "^HeavyAAWeapon",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "RA2HoverMissile"
-      ],
-      "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
+      "damage_warheads": [
        {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ArrowWeaponPercentage",
+        "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "1",
-        "tag": "MissileAP_Light_Percentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "25",
+      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles",
+      "slot": "Armament@primaryThunderbolt",
+      "versus_templates": [
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_MissileHE_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
+      ],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_MissileHE_Light"
+      ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyMissile",
-       "^HeavyAAWeapon",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "4",
-      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "MissileHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileHE_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6760",
-      "reloaddelay": "28",
+      "reloaddelay": "25",
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteThunderbolt",
       "versus_templates": [
        "RA2ThunderboltMissile"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_MissileHE_Light"
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyMissile",
-       "^HeavyAAWeapon",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
-      "burst": "2",
-      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "MissileHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileHE_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8640",
-      "reloaddelay": "28",
+      "reloaddelay": "25",
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAAThunderbolt",
       "versus_templates": [
        "RA2ThunderboltMissile"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_MissileHE_Light"
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyMissile",
-       "^HeavyAAWeapon",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "4",
-      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "MissileHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileHE_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9640",
-      "reloaddelay": "28",
+      "reloaddelay": "25",
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAAThunderbolt",
       "versus_templates": [
        "RA2ThunderboltMissile_elite"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_MissileHE_Light"
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyMissile",
-       "^HeavyAAWeapon",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
-      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileHE_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -7909,61 +7410,28 @@
        "RA2MultiHoverMissile"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileHE_Light"
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumCannon",
-       "^MediumChemicalWeapon",
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
-      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileHE_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -7973,61 +7441,28 @@
        "RA2MultiHoverMissile"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileHE_Light"
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumCannon",
-       "^MediumChemicalWeapon",
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
-      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileHE_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -8037,504 +7472,139 @@
        "RA2MultiHoverMissile_elite"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileHE_Light"
+      ],
+      "weapon": "RA2MultiHoverMissile_AA_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ArrowWeaponPercentage",
+        "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "1",
-        "tag": "MissileAP_Light_Percentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^MediumCannon",
-       "^MediumChemicalWeapon",
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "6170",
-      "reloaddelay": "20",
+      "range": "5120",
+      "reloaddelay": "25",
       "requires": "ifv-miss && !rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileThunderbolt",
       "versus_templates": [
-       "^HeavyMissile",
-       "^HeavyAAWeapon",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "RA2MultiHoverMissile"
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_MissileHE_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Missile_Light"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_MissileHE_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyMissile",
-       "^HeavyAAWeapon",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^MediumCannon",
-       "^MediumChemicalWeapon",
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
-      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "MissileHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileHE_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7170",
-      "reloaddelay": "20",
+      "reloaddelay": "25",
       "requires": "ifv-miss && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteThunderbolt",
       "versus_templates": [
        "RA2MultiThunderboltMissile"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_MissileHE_Light"
+      ],
+      "weapon": "RA2MultiThunderboltMissile_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
        {
         "damage": "1",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ArrowWeaponPercentage",
+        "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "1",
-        "tag": "MissileAP_Light_Percentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyMissile",
-       "^HeavyAAWeapon",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^MediumCannon",
-       "^MediumChemicalWeapon",
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
-     },
-     {
-      "burst": "4",
-      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9255",
-      "reloaddelay": "20",
+      "reloaddelay": "25",
       "requires": "ifv-miss && !rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileAAThunderbolt",
       "versus_templates": [
        "RA2MultiThunderboltMissile"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_MissileHE_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyMissile",
-       "^HeavyAAWeapon",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^MediumCannon",
-       "^MediumChemicalWeapon",
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
-      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "MissileHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileHE_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10255",
-      "reloaddelay": "20",
+      "reloaddelay": "25",
       "requires": "ifv-miss && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteAAThunderbolt",
       "versus_templates": [
        "RA2MultiThunderboltMissile_elite"
       ],
       "warheads": [
-       {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       }
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_MissileHE_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "illegal_mix",
-      "weapon_types": [
-       "^HeavyMissile",
-       "^HeavyAAWeapon",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^MediumCannon",
-       "^MediumChemicalWeapon",
-       "^ArrowWeapon",
-       "^RA2LightMissile"
-      ]
+      "weapon_class_source": "template"
      },
      {
-      "defined_in": "mods/cameo/weapons/starcraft.yaml",
-      "design_weapon_class": 1.5,
-      "pricing": true,
-      "range": "6000",
-      "reloaddelay": "10",
-      "requires": "ifv-healer",
-      "slot": "Armament@healer",
-      "versus_templates": [
-       "^HealingWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "-2000",
         "tag": "HealingWeapon",
@@ -8551,24 +7621,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MedicHeal",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/weapons/starcraft.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "10",
+      "requires": "ifv-healer",
+      "slot": "Armament@healer",
+      "versus_templates": [
        "^HealingWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "MedicHeal",
+      "weapon_class_source": "none"
      },
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": true,
-      "range": "10000",
-      "reloaddelay": "54",
-      "requires": "ifv-ra1_allies_alliedsniper",
-      "slot": "Armament@ra1_allies_alliedsniper",
-      "versus_templates": [
-       "^SniperWeapon"
-      ],
-      "warheads": [
+      "damage_warheads": [
        {
         "damage": "44000",
         "tag": "SniperWeapon",
@@ -8580,11 +7648,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2AWP",
-      "weapon_class_source": "template",
-      "weapon_types": [
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "54",
+      "requires": "ifv-ra1_allies_alliedsniper",
+      "slot": "Armament@ra1_allies_alliedsniper",
+      "versus_templates": [
        "^SniperWeapon"
-      ]
+      ],
+      "warheads": [],
+      "weapon": "RA2AWP",
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
