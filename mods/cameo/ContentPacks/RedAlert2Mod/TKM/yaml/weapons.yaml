@@ -902,45 +902,49 @@ tkmkatyushalalauncherrocketstwin:
 	Inherits: tkmkatyushalalauncherrockets
 	Burst: 16
 SandmarineTusk:
-	Inherits: ^HeavyMissile
-	Inherits@2: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_MissileHE_Heavy
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Concussion_Medium
 	ReloadDelay: 129
 	Burst: 3
 	BurstDelays: 3
 	Range: 6464
 	Report: missile6.aud
 	ValidTargets: Ground, Water
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 20
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 20
 BigShieeTusk:
-	Inherits: ^HeavyMissile
-	Inherits@2: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_MissileHE_Heavy
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Concussion_Medium
 	ReloadDelay: 83
 	Burst: 2
 	BurstDelays: 3
 	Range: 7238
 	Report: missile6.aud
 	ValidTargets: Ground, Water
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 20
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 20
 SandmarineTuskTwin:

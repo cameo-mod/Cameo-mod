@@ -1113,21 +1113,23 @@ TSHammerheadGun:
 		ValidTargets: Ground, Water
 
 TSAAPCCannon:
-	Inherits: ^Chaingun
-	Inherits@2: ^FlakWeapon
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@wh2: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ReloadDelay: 10
 	Range: 6263
 	ValidTargets: Ground, Water, Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 	ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage:
 		Damage: 1
 	ValidTargets: Ground, Water, Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	ValidTargets: Ground, Water, Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		Damage: 1
 	ValidTargets: Ground, Water, Air
 

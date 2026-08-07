@@ -9290,28 +9290,18 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8118",
       "reloaddelay": "5",
@@ -9319,47 +9309,45 @@
       "versus_templates": [
        "FLAK-23-AG"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Flak_Medium"
+      ],
       "weapon": "FLAK-23-AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5412",
       "reloaddelay": "5",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Chaingun",
-       "^FlakWeapon"
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Flak_Medium"
+      ],
       "weapon": "FLAK-23-AG",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9785,33 +9773,18 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "2765",
       "pricing": true,
       "range": "13820",
@@ -9819,12 +9792,17 @@
       "requires": "!(ra1_soviets_upgrade_highexplosiverockets || ra1_soviets_upgrade_scorchedearth)",
       "slot": "Armament",
       "versus_templates": [
-       "^HeavyMissile",
-       "^ShrapnelWeapon"
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Missile_Heavy",
+       "^Effect_Concussion_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "GradRockets",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
@@ -9856,6 +9834,16 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "4",
+        "tag": "MissileHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "4000",
         "tag": "HeavyMissile",
         "type": "SpreadDamage"
@@ -9882,7 +9870,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "2765",
       "pricing": true,
       "range": "13820",
@@ -9894,9 +9882,12 @@
        "^HeavyBomb",
        "GradRockets"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "GradHeavyRockets",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

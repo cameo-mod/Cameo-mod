@@ -73,22 +73,24 @@ td_gdi_commando_sniper_elite:
 		Explosions: small_poof
 
 APCGun:
-	Inherits: ^Chaingun
-	Inherits@2: ^FlakWeapon
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@wh2: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 5668
 	Report: gun20.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 1
 

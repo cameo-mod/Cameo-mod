@@ -358,3 +358,17 @@ Avoid flame/chemical/sonic/energy dual-warhead clusters until a `PhysicalState`/
 - `Grenade + ShrapnelWeapon` — `Demolition_Light + Concussion_Medium`. **Done 2026-08-07:** `ArtilleryShell` (`weapons/tiberiandawn.yaml`) and `SpecterArtilleryShell` (TD Nod) converted. The converter now auto-strips `-Warhead@*` removal markers to avoid the same crash.
 - `MediumCannon + TankDestroyerCannon` — `CannonHE_Medium + CannonAP_Light`. **Done 2026-08-07:** `AlliedTankDestroyerCannon`, `SheridanCannon` (RA Allies) and `tkmturretcannon` (RA2Mod/TKM) converted.
 - `HeavyCannon + MediumCannon` — now done.
+
+### 14.6 Additional clusters completed 2026-08-07
+
+- `HeavyMissile + ShrapnelWeapon` → `MissileHE_Heavy + Concussion_Medium`:
+  `Hellfire`, `Aphid_AA` (RA Allies), `GradRockets` (RA Soviets),
+  `SandmarineTusk`, `BigShieeTusk` (RA2Mod/TKM). The missile family
+  always supplies `^Projectile_Missile_Heavy` because Shrapnel/Concussion
+  has no projectile template; `^Effect_*` follows the last listed old
+  inherit.
+- `Chaingun + FlakWeapon` → `Bullet_Medium + Flak_Medium`:
+  `APCGunAllies` (RA Shared), `FLAK-23-AG` (RA Soviets), `APCGun`
+  (TiberianDawn GDI), `TSMutApcCannon` (TS Forgotten), `TSAAPCCannon`
+  (TS GDI), plus one additional in `mods/cameo/weapons/tiberiansun.yaml`.
+  `Inherits@proj`/`Inherits@fx` follow the last listed old inherit.

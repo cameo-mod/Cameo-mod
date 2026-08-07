@@ -1126,8 +1126,10 @@ v1rocketsThermobaric:
 		Damage: 4
 
 GradRockets:
-	Inherits: ^HeavyMissile
-	Inherits@2: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_MissileHE_Heavy
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Concussion_Medium
 	ReloadDelay: 115
 	Burst: 8
 	BurstDelays: 5
@@ -1144,15 +1146,13 @@ GradRockets:
 		TrailInterval: 1
 		Speed: 300
 		LaunchAngle: 60
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileHE_Heavy:
 		Damage: 8000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Heavy_Percentage:
 		Damage: 4
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 8000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 4
 
 GradHeavyRockets:
@@ -1404,24 +1404,26 @@ SCUDNUKEThermobaric:
 		ContrailEndColor: 33221100
 
 FLAK-23-AG:
-	Inherits: ^Chaingun
-	Inherits@2: ^FlakWeapon
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@wh2: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Burst: 2
 	ReloadDelay: 5
 	Range: 5412
 	Report: gun20.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 1
 
