@@ -132,8 +132,10 @@ ra1_allies_alliedsniper:
 		Damage: 20
 
 ArtilleryShell:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Concussion_Medium
 	ReloadDelay: 112
 	Range: 12345
 	MinRange: 2470
@@ -147,17 +149,13 @@ ArtilleryShell:
 		ContrailEndWidth: 25
 		ContrailStartColor: FFFF88FF
 		ContrailEndColor: FF884422
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 16000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 8
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 16000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: poof

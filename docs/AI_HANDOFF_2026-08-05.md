@@ -355,6 +355,6 @@ Avoid flame/chemical/sonic/energy dual-warhead clusters until a `PhysicalState`/
 ### 14.5 Updated safest next targets
 
 - `Grenade + HeavyBomb` — `Demolition_Light + Demolition_Heavy` (no `PhysicalState`, but `Grenade` provides the projectile, `HeavyBomb` the heavy effect). **Done 2026-08-07:** `8Inch` (RA Shared) converted. Removal markers (`-Warhead@Effect2:` etc.) must be deleted if the new `^Effect_*` template no longer contains that key, otherwise boot fails with "no elements to remove".
-- `Grenade + ShrapnelWeapon` — `Demolition_Light + Concussion_Medium`.
+- `Grenade + ShrapnelWeapon` — `Demolition_Light + Concussion_Medium`. **Done 2026-08-07:** `ArtilleryShell` (`weapons/tiberiandawn.yaml`) and `SpecterArtilleryShell` (TD Nod) converted. The converter now auto-strips `-Warhead@*` removal markers to avoid the same crash.
 - `MediumCannon + TankDestroyerCannon` — `CannonHE_Medium + CannonAP_Light`.
 - `HeavyCannon + MediumCannon` — now done.

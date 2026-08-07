@@ -1193,8 +1193,10 @@ BHRedDarts:
 		ImpactSounds: makoexplose.wav
 
 SpecterArtilleryShell:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 78
 	Range: 12640
@@ -1213,17 +1215,13 @@ SpecterArtilleryShell:
 		ContrailEndColor: FFFFFF
 		ContrailEndColorUsePlayerColor: true
 		Image: bhreddragon
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 16000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 8
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 16000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion

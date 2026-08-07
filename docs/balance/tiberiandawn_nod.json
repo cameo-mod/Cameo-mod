@@ -3467,38 +3467,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -3506,12 +3486,17 @@
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament",
       "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon"
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Grenade_Light",
+       "^Effect_Concussion_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "ArtilleryShell",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -5040,38 +5025,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "2530",
       "pricing": true,
       "range": "12640",
@@ -5079,13 +5044,18 @@
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament",
       "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Grenade_Light",
+       "^Effect_Concussion_Medium",
        "^ImpactGlow"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "SpecterArtilleryShell",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -5160,6 +5130,16 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "8",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "4000",
         "tag": "Grenade",
         "type": "SpreadDamage"
@@ -5191,7 +5171,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "2530",
       "pricing": true,
       "range": "12640",
@@ -5207,9 +5187,12 @@
        "^HeavyCannon",
        "SpecterArtilleryShell"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "SpecterArtilleryShellUpgrade",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
