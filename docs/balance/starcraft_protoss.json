@@ -218,57 +218,30 @@
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "65",
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^FlakWeapon",
-       "^RA2Chaingun"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Medium"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "CorsairFlash",
       "weapon_class_source": "template"
@@ -278,57 +251,30 @@
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "65",
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^FlakWeapon",
-       "^RA2Chaingun"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Medium"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "CorsairFlash",
       "weapon_class_source": "template"
@@ -915,57 +861,30 @@
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "32",
       "slot": "Armament@PRIMARY1",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^FlakWeapon",
-       "^RA2Chaingun"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Medium"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "ScoutMG",
       "weapon_class_source": "template"
@@ -975,57 +894,30 @@
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "32",
       "slot": "Armament@PRIMARY2",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^FlakWeapon",
-       "^RA2Chaingun"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Medium"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "ScoutMG",
       "weapon_class_source": "template"
