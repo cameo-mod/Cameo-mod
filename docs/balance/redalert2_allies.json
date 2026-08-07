@@ -1220,13 +1220,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "50000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "25",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1291,14 +1286,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "minrange": "2360",
       "pricing": true,
       "range": "11800",
       "reloaddelay": "200",
       "slot": "Armament",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^HeavyBomb",
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
@@ -1306,6 +1303,7 @@
        "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA2GrandCannonWeapon",
@@ -4192,13 +4190,8 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -4218,18 +4211,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
       "requires": "ifv-hmg",
       "slot": "Armament@hmg",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^RA2Chaingun",
        "^SniperWeapon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60H",
@@ -5554,13 +5550,8 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -5580,18 +5571,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
       "requires": "ifv-hmg",
       "slot": "Armament@hmg",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^RA2Chaingun",
        "^SniperWeapon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60H",
@@ -6918,13 +6912,8 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6944,18 +6933,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
       "requires": "ifv-hmg",
       "slot": "Armament@hmg",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^RA2Chaingun",
        "^SniperWeapon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60H",
@@ -8282,13 +8274,8 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -8308,18 +8295,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
       "requires": "ifv-hmg",
       "slot": "Armament@hmg",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^RA2Chaingun",
        "^SniperWeapon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60H",
@@ -9645,13 +9635,8 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -9671,18 +9656,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
       "requires": "ifv-hmg",
       "slot": "Armament@hmg",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^RA2Chaingun",
        "^SniperWeapon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60H",
@@ -11008,13 +10996,8 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -11034,18 +11017,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
       "requires": "ifv-hmg",
       "slot": "Armament@hmg",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^RA2Chaingun",
        "^SniperWeapon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60H",

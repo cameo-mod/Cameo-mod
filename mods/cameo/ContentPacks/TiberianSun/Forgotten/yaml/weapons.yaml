@@ -11,14 +11,16 @@ TS70mm:
 		Damage: 2
 
 TS70mmChem:
-	Inherits: ^TSCannonEffect
-	Inherits@2: ^LightChemicalWeapon
-	Inherits@3: ^MediumCannon
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^TSCannonEffect
+	Inherits@5: ^LightChemicalWeapon
 	ReloadDelay: 24
 	Range: 5566
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 2
 	Warhead@LightChemicalWeapon: SpreadDamage
 		Damage: 2000
@@ -38,18 +40,20 @@ TS70mmChem:
 		InvalidTargets: Water
 
 TS70mmTur:
-	Inherits: ^TSCannonEffect
-	Inherits@2: ^TankDestroyerCannon
-	Inherits@3: ^MediumCannon
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^TSCannonEffect
+	Inherits@5: ^TankDestroyerCannon
 	ReloadDelay: 10
 	Range: 6574
 	Projectile: Bullet
 		Speed: 850
 		Blockable: false
 		LaunchAngle: 0
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 4000
@@ -57,19 +61,21 @@ TS70mmTur:
 		Damage: 2
 
 TS70mmTurChem:
-	Inherits: ^TSCannonEffect
-	Inherits@2: ^LightChemicalWeapon
-	Inherits@3: ^TankDestroyerCannon
-	Inherits@4: ^MediumCannon
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^TSCannonEffect
+	Inherits@5: ^LightChemicalWeapon
+	Inherits@6: ^TankDestroyerCannon
 	ReloadDelay: 10
 	Range: 6574
 	Projectile: Bullet
 		Speed: 850
 		Blockable: false
 		LaunchAngle: 0
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 4000
@@ -93,9 +99,11 @@ TS70mmTurChem:
 		InvalidTargets: Water
 
 TS120mmx:
-	Inherits: ^TSCannon
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^MediumCannon
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^TSCannon
+	Inherits@5: ^ShrapnelWeapon
 	Range: 5677
 	ReloadDelay: 52
 	Burst: 2
@@ -106,16 +114,18 @@ TS120mmx:
 		Damage: 15000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 15
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 30000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 15
 
 TSChem120mmx:
-	Inherits: ^TSCannon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^ShrapnelWeapon
-	Inherits@4: ^MediumCannon
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^TSCannon
+	Inherits@5: ^MediumChemicalWeapon
+	Inherits@6: ^ShrapnelWeapon
 	Range: 5677
 	ReloadDelay: 52
 	Burst: 2
@@ -126,9 +136,9 @@ TSChem120mmx:
 		Damage: 15000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 15
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 30000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 15
 	Warhead@MediumChemicalWeapon: SpreadDamage
 		Damage: 30000
@@ -162,16 +172,18 @@ TSScoopDual:
 		Damage: 10
 
 TSScoopDualChem:
-	Inherits: ^TSCannonEffect
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^MediumCannon
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^TSCannonEffect
+	Inherits@5: ^MediumChemicalWeapon
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 2
 	Range: 6224
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 20000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 10
 	Warhead@MediumChemicalWeapon: SpreadDamage
 		Damage: 10000
@@ -191,18 +203,20 @@ TSScoopDualChem:
 		InvalidTargets: Water
 
 TSScoopDualTur:
-	Inherits: ^TSCannonEffect
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^HeavyCannon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^TSCannonEffect
+	Inherits@5: ^ShrapnelWeapon
 	ReloadDelay: 48
 	Burst: 2
 	BurstDelays: 2
 	Range: 6404
 	Projectile: Bullet
 		Speed: 850
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 16000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 8
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 16000
@@ -212,19 +226,21 @@ TSScoopDualTur:
 		Damage: 8
 
 TSScoopDualTurChem:
-	Inherits: ^TSCannonEffect
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^ShrapnelWeapon
-	Inherits@4: ^HeavyCannon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^TSCannonEffect
+	Inherits@5: ^MediumChemicalWeapon
+	Inherits@6: ^ShrapnelWeapon
 	ReloadDelay: 48
 	Burst: 2
 	BurstDelays: 2
 	Range: 6404
 	Projectile: Bullet
 		Speed: 850
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 16000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 8
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 16000
@@ -989,20 +1005,22 @@ TSChemRuinerMissile:
 		InvalidTargets: Water
 
 TSApacheMissile:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^TankDestroyerCannon
-	Inherits@3: ^ShrapnelWeapon
-	Inherits@4: ^Grenade
-	Inherits@5: ^HeavyMissile
-	Inherits@6: ^MediumMissile
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^Grenade
+	Inherits@7: ^HeavyMissile
+	Inherits@8: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 15
 	Range: 4688
 	Report: orcamis1.aud
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -1043,23 +1061,25 @@ TSApacheMissile:
 		Damage: 2
 
 TSChemApacheMissile:
-	Inherits: ^MediumChemicalWeapon
-	Inherits@2: ^HeavyCannon
-	Inherits@3: ^TankDestroyerCannon
-	Inherits@4: ^ShrapnelWeapon
-	Inherits@5: ^Grenade
-	Inherits@6: ^HeavyMissile
-	Inherits@7: ^MediumMissile
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^ShrapnelWeapon
+	Inherits@7: ^Grenade
+	Inherits@8: ^HeavyMissile
+	Inherits@9: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 15
 	Range: 4688
 	Report: orcamis1.aud
 	Projectile: Missile
 		TrailImage: spittrail
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -1119,20 +1139,22 @@ TSChemApacheMissile:
 		InvalidTargets: Water
 
 TSCobraMissile:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^TankDestroyerCannon
-	Inherits@3: ^ShrapnelWeapon
-	Inherits@4: ^Grenade
-	Inherits@5: ^HeavyMissile
-	Inherits@6: ^MediumMissile
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^Grenade
+	Inherits@7: ^HeavyMissile
+	Inherits@8: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 12
 	Range: 5052
 	Report: orcamis1.aud
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -1173,23 +1195,25 @@ TSCobraMissile:
 		Damage: 2
 
 TSChemCobraMissile:
-	Inherits: ^MediumChemicalWeapon
-	Inherits@2: ^HeavyCannon
-	Inherits@3: ^TankDestroyerCannon
-	Inherits@4: ^ShrapnelWeapon
-	Inherits@5: ^Grenade
-	Inherits@6: ^HeavyMissile
-	Inherits@7: ^MediumMissile
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^ShrapnelWeapon
+	Inherits@7: ^Grenade
+	Inherits@8: ^HeavyMissile
+	Inherits@9: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 12
 	Range: 5052
 	Report: orcamis1.aud
 	Projectile: Missile
 		TrailImage: spittrail
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -1847,12 +1871,14 @@ TSLocustBombChem:
 		SmudgeType: Crater
 
 TSMutShotgun:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^TankDestroyerCannon
-	Inherits@4: ^MediumCannon
-	Inherits@5: ^SmallArms
-	Inherits@6: ^Chaingun
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^TankDestroyerCannon
+	Inherits@7: ^SmallArms
+	Inherits@8: ^Chaingun
 	ReloadDelay: 32
 	Range: 3112
 	Report: DSDSHTGN.wav
@@ -1873,9 +1899,9 @@ TSMutShotgun:
 		Damage: 4000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 2
 	Warhead@SmallArms: SpreadDamage
 		Damage: 4000

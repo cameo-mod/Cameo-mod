@@ -433,6 +433,13 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   TiberianDawn/Nod) converted to `Flame_Light + MissileAP_Medium`. The weapon
   keeps its local `Warhead@Effect` (`small_frag`) and inherits
   `^Projectile_Missile_Medium` because the missile side was the final `Inherits`.
+- **Single MediumCannon / HeavyCannon** (99 weapons across 28 files)
+  converted to the 3-way `^Warhead_CannonHE_*`, `^Projectile_Shell_*`,
+  `^Effect_CannonHE_*` split. This was the largest remaining single-family
+  cluster; the old `^MediumCannon` and `^HeavyCannon` full-stack templates
+  were replaced one-for-one. Existing addon inherits are kept after the
+  new 3-way inherits so they continue to override Projectile/Effect when
+  needed.
 - **Grenade + HeavyMissile** (`AsianPelicanMissile` in
   RedAlert2Mod/AsianAlliance, `NaxHaenebuQuadCannon` and `NaxCorrosionRocket`
   in RedAlert2Mod/SchwarzerMond, and `RA2GrenadePack` in

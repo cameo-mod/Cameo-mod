@@ -2434,6 +2434,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "4000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
@@ -2451,16 +2456,6 @@
        {
         "damage": "2",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2500,7 +2495,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6445",
       "reloaddelay": "38",
@@ -2508,13 +2503,20 @@
       "versus_templates": [
        "wc2arrowFire"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "4000",
         "tag": "FlakWeapon",
@@ -2533,16 +2535,6 @@
        {
         "damage": "2",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2582,7 +2574,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6445",
       "reloaddelay": "38",
@@ -2590,9 +2582,11 @@
       "versus_templates": [
        "wc2arrowFire"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2777,6 +2771,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "4000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
@@ -2794,16 +2793,6 @@
        {
         "damage": "2",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2843,7 +2832,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6445",
       "reloaddelay": "38",
@@ -2851,13 +2840,20 @@
       "versus_templates": [
        "wc2arrowFire"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "4000",
         "tag": "FlakWeapon",
@@ -2876,16 +2872,6 @@
        {
         "damage": "2",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2925,7 +2911,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6445",
       "reloaddelay": "38",
@@ -2933,9 +2919,11 @@
       "versus_templates": [
        "wc2arrowFire"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2982,6 +2970,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "4000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
@@ -2999,16 +2992,6 @@
        {
         "damage": "2",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3048,7 +3031,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6445",
       "reloaddelay": "38",
@@ -3056,13 +3039,20 @@
       "versus_templates": [
        "wc2arrowFire"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "4000",
         "tag": "FlakWeapon",
@@ -3081,16 +3071,6 @@
        {
         "damage": "2",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3130,7 +3110,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6445",
       "reloaddelay": "38",
@@ -3138,9 +3118,11 @@
       "versus_templates": [
        "wc2arrowFire"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3223,6 +3205,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "4000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
@@ -3240,16 +3227,6 @@
        {
         "damage": "2",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3289,7 +3266,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7711",
       "reloaddelay": "40",
@@ -3297,9 +3274,11 @@
       "versus_templates": [
        "wc2highArrowFire"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "wc2axeFirespear",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3340,6 +3319,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "4000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
@@ -3357,16 +3341,6 @@
        {
         "damage": "2",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3406,7 +3380,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "7711",
       "reloaddelay": "40",
@@ -3414,9 +3388,11 @@
       "versus_templates": [
        "wc2highArrowFire"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "wc2axeFirespear",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

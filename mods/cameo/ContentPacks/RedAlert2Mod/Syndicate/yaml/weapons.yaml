@@ -191,9 +191,11 @@ RA2Narco60mm_elite:
 	BurstDelays: 3
 
 RA2FreedomAK47:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^Chaingun
-	Inherits@3: ^SniperWeapon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^Chaingun
+	Inherits@5: ^SniperWeapon
 	ReloadDelay: 42
 	Range: 7130
 	Burst: 5
@@ -203,10 +205,10 @@ RA2FreedomAK47:
 	Projectile: Bullet
 		Inaccuracy: 30
 		InaccuracyType: PerCellIncrement
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 6000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 3
 	Warhead@Chaingun: SpreadDamage
@@ -340,9 +342,11 @@ SyndicateFireballLauncherExplode:
 		Amount: 2000
 
 LatinMonkeyGrenade1:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^HeavyCannon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
 	ReloadDelay: 60
 	Range: 6500
 	MinRange: 1300
@@ -384,11 +388,11 @@ LatinMonkeyGrenade1:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageCalculationType: ClosestTargetablePosition
@@ -815,12 +819,14 @@ DiabloCannonAAE_AA:
 	BurstDelays: 3
 
 RA2MortarBike:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^HeavyBomb
-	Inherits@4: ^LightFlameWeapon
-	Inherits@5: ^MediumChemicalWeapon
-	Inherits@6: ^HeavyCannon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^HeavyBomb
+	Inherits@7: ^LightFlameWeapon
+	Inherits@8: ^MediumChemicalWeapon
 	ReloadDelay: 67
 	Range: 7500
 	MinRange: 1500
@@ -878,10 +884,10 @@ RA2MortarBike:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
@@ -982,10 +988,12 @@ LatinBuggyChaingun_elite:
 	Range: 7000
 
 YakovlevCannon:
-	Inherits: ^TankDestroyerCannon
-	Inherits@2: ^FlakWeapon
-	Inherits@3: ^HeavyCannon
-	Inherits@4: ^RA2Chaingun
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^RA2Chaingun
 	ReloadDelay: 80
 	Burst: 4
 	BurstDelays: 5
@@ -1013,10 +1021,10 @@ YakovlevCannon:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium:
@@ -1027,10 +1035,12 @@ YakovlevCannon:
 		Damage: 1
 
 YakovlevCannon_elite:
-	Inherits: ^TankDestroyerCannon
-	Inherits@2: ^FlakWeapon
-	Inherits@3: ^HeavyCannon
-	Inherits@4: ^RA2Chaingun
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 5
 	Range: 5555
@@ -1056,10 +1066,10 @@ YakovlevCannon_elite:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium:
@@ -1070,9 +1080,11 @@ YakovlevCannon_elite:
 		Damage: 1
 
 LatinSentryMG:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^RA2SmallArms
-	Inherits@3: ^RA2Chaingun
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^RA2SmallArms
+	Inherits@5: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	Range: 6666
 	ReloadDelay: 30
@@ -1088,10 +1100,10 @@ LatinSentryMG:
 		ContrailLength: 9
 		Speed: 3333
 		Width: 111
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Light:

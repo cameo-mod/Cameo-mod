@@ -528,12 +528,14 @@ ChronoTuskCryo:
 	MinRange: 2035
 
 25mm:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^LightFlameWeapon
-	Inherits@4: ^MediumChemicalWeapon
-	Inherits@5: ^TankDestroyerCannon
-	Inherits@6: ^MediumCannon
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^LightFlameWeapon
+	Inherits@7: ^MediumChemicalWeapon
+	Inherits@8: ^TankDestroyerCannon
 	ReloadDelay: 37
 	Range: 4720
 	Report: cannon2.aud
@@ -583,10 +585,10 @@ ChronoTuskCryo:
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect

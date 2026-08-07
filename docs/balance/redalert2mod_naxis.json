@@ -294,13 +294,8 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -335,20 +330,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^FlakWeapon",
        "^Chaingun",
        "^SmallArms"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "NaxiInterceptorGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -1425,13 +1424,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1456,7 +1450,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -1464,11 +1458,14 @@
       "requires": "mortar",
       "slot": "Armament@mortar",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^ShrapnelWeapon",
        "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty",
@@ -2454,13 +2451,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "14000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "7",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2470,17 +2462,20 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7361",
       "reloaddelay": "75",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^MediumCannon",
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
        "^RA2TankDestroyerCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "NaxiAntiTankCannon",
@@ -2491,13 +2486,8 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "14000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "7",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2507,7 +2497,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8361",
       "reloaddelay": "75",
@@ -2517,6 +2507,7 @@
        "NaxiAntiTankCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "NaxiAntiTankCannon_elite",
@@ -6763,6 +6754,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "7",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "14000",
         "tag": "HeavyBomb",
         "type": "SpreadDamage"
@@ -6770,16 +6766,6 @@
        {
         "damage": "7",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "14000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6804,7 +6790,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "minrange": "2800",
       "pricing": true,
       "range": "14000",
@@ -6812,12 +6798,15 @@
       "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^HeavyBomb",
-       "^HeavyCannon",
        "^ShrapnelWeapon",
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "NaxBrummbarArty",
@@ -6828,6 +6817,11 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "7",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "14000",
         "tag": "HeavyBomb",
         "type": "SpreadDamage"
@@ -6835,16 +6829,6 @@
        {
         "damage": "7",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "14000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6869,7 +6853,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "minrange": "2800",
       "pricing": true,
       "range": "15000",
@@ -6881,6 +6865,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "NaxBrummbarArty_elite",
@@ -7100,13 +7085,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7131,7 +7111,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -7139,11 +7119,14 @@
       "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^ShrapnelWeapon",
        "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty",
@@ -7154,13 +7137,8 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7185,7 +7163,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "13333",
@@ -7197,6 +7175,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty_elite",
@@ -7360,13 +7339,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7376,17 +7350,20 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7132",
       "reloaddelay": "80",
       "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^MediumCannon",
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
        "^RA2TankDestroyerCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "NaxiHetzerDestroyer",
@@ -7397,13 +7374,8 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "20000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7413,7 +7385,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "80",
@@ -7424,6 +7396,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "NaxiHetzerDestroyer_elite",
@@ -7479,13 +7452,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7510,17 +7478,20 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7396",
       "reloaddelay": "90",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^ShrapnelWeapon",
        "^RA2TankDestroyerCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "NaxiJadgDestroyer",
@@ -7628,13 +7599,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7659,18 +7625,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7396",
       "reloaddelay": "90",
       "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^ShrapnelWeapon",
        "^RA2TankDestroyerCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "NaxiJadgDestroyer",
@@ -7681,13 +7650,8 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "20000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7712,7 +7676,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8396",
       "reloaddelay": "90",
@@ -7723,6 +7687,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "NaxiJadgDestroyer_elite",
@@ -8547,13 +8512,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "14000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "7",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -8563,16 +8523,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7361",
       "reloaddelay": "75",
       "slot": "Armament",
       "versus_templates": [
-       "^MediumCannon",
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
        "^RA2TankDestroyerCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "NaxiAntiTankCannon",
@@ -8963,13 +8926,8 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -8994,18 +8952,21 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
       "reloaddelay": "111",
       "slot": "Armament@mortar",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^ShrapnelWeapon",
        "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty",

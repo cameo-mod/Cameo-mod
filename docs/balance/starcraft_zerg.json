@@ -1638,6 +1638,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "3",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "6000",
         "tag": "RailgunWeapon",
         "type": "SpreadDamage"
@@ -1664,16 +1669,6 @@
        },
        {
         "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
         "tag": "SwordWeapon",
         "type": "SpreadDamage"
        },
@@ -1689,21 +1684,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^RailgunWeapon",
        "^Chaingun",
-       "^HeavyCannon",
        "^SwordWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "Tentacle",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "spore",
@@ -1795,6 +1794,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "3",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "6000",
         "tag": "RailgunWeapon",
         "type": "SpreadDamage"
@@ -1821,16 +1825,6 @@
        },
        {
         "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
         "tag": "SwordWeapon",
         "type": "SpreadDamage"
        },
@@ -1846,21 +1840,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^RailgunWeapon",
        "^Chaingun",
-       "^HeavyCannon",
        "^SwordWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "Tentacle",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "spore",
@@ -1951,6 +1949,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "3",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "6000",
         "tag": "RailgunWeapon",
         "type": "SpreadDamage"
@@ -1977,16 +1980,6 @@
        },
        {
         "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
         "tag": "SwordWeapon",
         "type": "SpreadDamage"
        },
@@ -2002,21 +1995,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^RailgunWeapon",
        "^Chaingun",
-       "^HeavyCannon",
        "^SwordWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "Tentacle",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "spore",
@@ -2108,6 +2105,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "3",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "6000",
         "tag": "RailgunWeapon",
         "type": "SpreadDamage"
@@ -2134,16 +2136,6 @@
        },
        {
         "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
         "tag": "SwordWeapon",
         "type": "SpreadDamage"
        },
@@ -2159,21 +2151,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^RailgunWeapon",
        "^Chaingun",
-       "^HeavyCannon",
        "^SwordWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "Tentacle",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "spore",

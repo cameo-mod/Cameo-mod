@@ -919,6 +919,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "5",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "10000",
         "tag": "TankDestroyerCannon",
         "type": "SpreadDamage"
@@ -929,33 +934,26 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "5",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7979",
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^TankDestroyerCannon",
-       "^HeavyCannon",
        "^D2K_Cannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "110mm_Gun",
@@ -1789,6 +1787,11 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "2000",
         "tag": "HeavyMissile",
         "type": "SpreadDamage"
@@ -1796,16 +1799,6 @@
        {
         "damage": "1",
         "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1860,21 +1853,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "3800",
       "reloaddelay": "69",
       "requires": "ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^HeavyMissile",
-       "^HeavyCannon",
        "RashidanGun",
        "^HeavyMachineGunProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "RashidanGun_upgrade",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -1945,6 +1942,11 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "2000",
         "tag": "HeavyMissile",
         "type": "SpreadDamage"
@@ -1952,16 +1954,6 @@
        {
         "damage": "1",
         "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2016,21 +2008,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "3800",
       "reloaddelay": "69",
       "requires": "ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^HeavyMissile",
-       "^HeavyCannon",
        "RashidanGun",
        "^HeavyMachineGunProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "RashidanGun_upgrade",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2110,13 +2106,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2141,21 +2132,25 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "20",
       "requires": "ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^Chaingun",
        "^SmallArms",
        "^HeavyMachineGunProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2195,13 +2190,8 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2226,21 +2216,25 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "20",
       "requires": "ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^Chaingun",
        "^SmallArms",
        "^HeavyMachineGunProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3416,6 +3410,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
+        "damage": "4",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "8000",
         "tag": "LightFlameWeapon",
         "type": "SpreadDamage"
@@ -3454,37 +3453,36 @@
         "damage": "4",
         "tag": "FlakWeaponPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "3333",
       "reloaddelay": "25",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
-       "^FlakWeapon",
-       "^HeavyCannon"
+       "^FlakWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "d2k_basq",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
       "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "8000",
         "tag": "LightFlameWeapon",
@@ -3524,20 +3522,10 @@
         "damage": "4",
         "tag": "FlakWeaponPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "25",
@@ -3545,9 +3533,11 @@
       "versus_templates": [
        "d2k_basq"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "d2k_basq_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3589,6 +3579,11 @@
     "armaments": [
      {
       "damage_warheads": [
+       {
+        "damage": "7",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "14000",
         "tag": "MediumFlameWeapon",
@@ -3640,37 +3635,30 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "14000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "7",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
       "reloaddelay": "140",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^MediumFlameWeapon",
        "^Grenade",
        "^HeavyBomb",
        "^TankDestroyerCannon",
-       "^HeavyCannon",
        "^D2K_Cannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "DuelistTankCannon",
@@ -3771,6 +3759,11 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "2000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
@@ -3793,16 +3786,6 @@
        {
         "damage": "1",
         "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3872,7 +3855,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -3880,15 +3863,19 @@
       "requires": "ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^LaserWeapon",
        "^HeavyMissile",
-       "^HeavyCannon",
        "HMG_Duelist",
        "^HeavyMachineGunProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "HMG_Duelist_upgrade",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4098,6 +4085,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "3",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "6000",
         "tag": "TankDestroyerCannon",
         "type": "SpreadDamage"
@@ -4108,33 +4100,26 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "3",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "40",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^TankDestroyerCannon",
-       "^HeavyCannon",
        "^D2K_Cannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "HeavyIxianCombatTankCannon",
@@ -4629,6 +4614,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "2",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "4000",
         "tag": "TankDestroyerCannon",
         "type": "SpreadDamage"
@@ -4639,33 +4629,26 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "2",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "35",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^TankDestroyerCannon",
-       "^HeavyCannon",
        "^D2K_Cannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "IxianCombatTankCannon",

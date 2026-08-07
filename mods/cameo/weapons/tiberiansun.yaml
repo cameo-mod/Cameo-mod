@@ -127,17 +127,19 @@ TS90mmDep:
 		LaunchAngle: 0
 
 TSLaser90mm:
-	Inherits: ^MediumCannon
-	Inherits@2: ^LaserWeapon
-	Inherits@3: ^TSLaserEffect
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^LaserWeapon
+	Inherits@5: ^TSLaserEffect
 	Projectile: LaserZap
 		Width: 72
 		SecondaryBeamWidth: 36
 	ReloadDelay: 32
 	Range: 5423
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 6000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 3
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 6000
@@ -278,8 +280,10 @@ TS155mm_bluenuke:
 		Explosions: magicnuke_med
 
 TSGrenade:
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^MediumCannon
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^ShrapnelWeapon
 	ReloadDelay: 50
 	Range: 6151
 	Report: toss1.aud
@@ -303,24 +307,26 @@ TSGrenade:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 6
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water
 		Damage: 12000
 	Warhead@MediumCannonFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 6000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 6
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 
 TSGrenadeSonic:
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^MediumCannon
-	Inherits@3: ^TeslaWeapon
-	Inherits@4: ^MagicWeapon
-	Inherits@5: ^TSSonicGrenade
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^TeslaWeapon
+	Inherits@6: ^MagicWeapon
+	Inherits@7: ^TSSonicGrenade
 	ReloadDelay: 50
 	Range: 6151
 	Report: toss1.aud
@@ -344,13 +350,13 @@ TSGrenadeSonic:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 6
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water
 		Damage: 12000
 	Warhead@MediumCannonFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 6000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 6
 	Warhead@TeslaWeapon: SpreadDamage
@@ -922,20 +928,22 @@ TSDragon:
 		Damage: 6000
 
 TSHellfire:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^TankDestroyerCannon
-	Inherits@3: ^ShrapnelWeapon
-	Inherits@4: ^Grenade
-	Inherits@5: ^HeavyMissile
-	Inherits@6: ^MediumMissile
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^Grenade
+	Inherits@7: ^HeavyMissile
+	Inherits@8: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 32
 	Range: 5740
 	Report: orcamis1.aud
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage

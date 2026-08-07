@@ -302,10 +302,12 @@ wc2ballistaFire:
 		ImpactSounds: explode.aud
 
 MortarTeamArtilleryShell:
-	Inherits: ^MediumCannon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^MediumFlameWeapon
-	Inherits@4: ^ShrapnelWeapon
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^MediumFlameWeapon
+	Inherits@6: ^ShrapnelWeapon
 	ReloadDelay: 200
 	Range: 12000
 	MinRange: 2400
@@ -323,10 +325,10 @@ MortarTeamArtilleryShell:
 		ContrailEndColor: FF884422
 		TrailImage: black_smokey
 		TrailPalette: effect75alpha
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 20000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumChemicalWeapon: SpreadDamage

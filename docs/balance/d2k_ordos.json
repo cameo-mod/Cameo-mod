@@ -349,6 +349,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "6",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "10000",
         "tag": "Grenade",
         "type": "SpreadDamage"
@@ -380,16 +385,6 @@
        },
        {
         "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
         "tag": "MediumFlameWeapon",
         "type": "SpreadDamage"
        },
@@ -417,15 +412,10 @@
         "damage": "6",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
@@ -436,9 +426,11 @@
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "Laboratory_Bioball",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -841,6 +833,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "5",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "10000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
@@ -853,16 +850,6 @@
        {
         "damage": "5",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -892,6 +879,7 @@
        "DeviatorMissile_Artillery"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "Wraith_ToxinMissiles",
@@ -1055,13 +1043,8 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1086,19 +1069,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7700",
       "reloaddelay": "22",
       "slot": "Armament",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "ordos_autogunturret",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2077,6 +2064,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "10",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "20000",
         "tag": "LightFlameWeapon",
         "type": "SpreadDamage"
@@ -2144,16 +2136,6 @@
        {
         "damage": "10",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2190,17 +2172,20 @@
       "reloaddelay": "90",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
        "^HeavyBomb",
        "^Grenade",
        "^ShrapnelWeapon",
-       "^HeavyCannon",
        "^LightMissile",
        "^MediumMissile",
        "^D2KMissile"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "facedancer_grenade",
@@ -2209,6 +2194,11 @@
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
+       {
+        "damage": "10",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "20000",
         "tag": "LightFlameWeapon",
@@ -2281,16 +2271,6 @@
        },
        {
         "damage": "20000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -2323,17 +2303,20 @@
       "reloaddelay": "90",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
        "^HeavyBomb",
        "^Grenade",
        "^ShrapnelWeapon",
-       "^HeavyCannon",
        "^LightMissile",
        "^MediumMissile",
        "^D2KMissile"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "facedancer_grenade",
@@ -3871,17 +3854,12 @@
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "MissileAP_Heavy_Percentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3936,6 +3914,7 @@
        "autogun_tank"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "autogun_tank_small",
@@ -4099,6 +4078,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "5",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "10000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
@@ -4111,16 +4095,6 @@
        {
         "damage": "5",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -4152,6 +4126,7 @@
        "DeviatorMissile"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "DeviatorMissile_Artillery",
@@ -4207,6 +4182,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "5",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "10000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
@@ -4219,16 +4199,6 @@
        {
         "damage": "5",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -4255,12 +4225,15 @@
       "reloaddelay": "98",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^MediumChemicalWeapon",
-       "^HeavyCannon",
        "^MediumMissile",
        "^D2KMissile"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "DeviatorMissile",
@@ -4412,17 +4385,12 @@
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "MissileAP_Heavy_Percentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -4474,14 +4442,17 @@
       "reloaddelay": "24",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^D2KMissile",
-       "^HeavyCannon",
        "^HeavyAAWeapon",
        "^FlakWeapon",
        "^MediumMissile",
        "^Chaingun"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "autogun_tank",
@@ -4682,6 +4653,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "6",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "10000",
         "tag": "Grenade",
         "type": "SpreadDamage"
@@ -4713,16 +4689,6 @@
        },
        {
         "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
         "tag": "MediumFlameWeapon",
         "type": "SpreadDamage"
        },
@@ -4750,15 +4716,10 @@
         "damage": "6",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
@@ -4769,9 +4730,11 @@
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "Laboratory_Bioball",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [

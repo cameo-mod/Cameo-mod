@@ -437,10 +437,12 @@ RA2MagnetAA_elite:
 		InvalidTargets: Paratrooper
 
 RA2PsychicJab:
-	Inherits: ^TankDestroyerCannon
-	Inherits@2: ^MediumCannon
-	Inherits@3: ^LightFlameWeapon
-	Inherits@4: ^FlakWeapon
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^LightFlameWeapon
+	Inherits@6: ^FlakWeapon
 	ReloadDelay: 15
 	Range: 4440
 	Report: iiniatta.wav
@@ -460,11 +462,11 @@ RA2PsychicJab:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary

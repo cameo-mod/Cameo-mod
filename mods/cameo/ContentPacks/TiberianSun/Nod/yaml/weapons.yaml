@@ -143,9 +143,11 @@ TSStankTusk:
 		ValidTargets: Ground, Water, Air
 
 TSStankTibTusk:
-	Inherits: ^MediumCannon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^MediumMissile
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^MediumMissile
 	Range: 6385
 	Burst: 2
 	BurstDelays: 2
@@ -170,13 +172,13 @@ TSStankTibTusk:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 5
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
 		ValidTargets: Ground, Water, Air
 	Warhead@MediumCannonFriendlyFire: SpreadDamage
 		Damage: 5000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 5
 		ValidTargets: Ground, Water, Air
 
@@ -264,12 +266,14 @@ TSLasergun:
 		Damage: 1
 
 TSCommandoShotgun:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^TankDestroyerCannon
-	Inherits@4: ^MediumCannon
-	Inherits@5: ^SmallArms
-	Inherits@6: ^Chaingun
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^TankDestroyerCannon
+	Inherits@7: ^SmallArms
+	Inherits@8: ^Chaingun
 	ReloadDelay: 20
 	Range: 4146
 	Report: DSDSHTGN.wav
@@ -290,9 +294,9 @@ TSCommandoShotgun:
 		Damage: 8000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 4
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 4
 	Warhead@SmallArms: SpreadDamage
 		Damage: 8000

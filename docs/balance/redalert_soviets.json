@@ -197,6 +197,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "2000",
         "tag": "Grenade",
         "type": "SpreadDamage"
@@ -228,16 +233,6 @@
        },
        {
         "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -248,24 +243,33 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@Missiles",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^Grenade",
        "^ShrapnelWeapon",
-       "^HeavyCannon",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -298,16 +302,6 @@
        },
        {
         "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -318,24 +312,33 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesRocketPod1",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^Grenade",
        "^ShrapnelWeapon",
-       "^HeavyCannon",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -368,16 +371,6 @@
        },
        {
         "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -388,24 +381,33 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesRocketPod2",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^Grenade",
        "^ShrapnelWeapon",
-       "^HeavyCannon",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -453,16 +455,6 @@
        },
        {
         "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -473,25 +465,34 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesHE",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^Grenade",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
-       "^HeavyCannon",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "HindMissilesThermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -539,16 +540,6 @@
        },
        {
         "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -559,25 +550,34 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_highexplosiverockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesHERocketPod1",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^Grenade",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
-       "^HeavyCannon",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "HindMissilesThermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -625,16 +625,6 @@
        },
        {
         "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -645,22 +635,26 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_highexplosiverockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesHERocketPod2",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^Grenade",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
-       "^HeavyCannon",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "HindMissilesThermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -1161,6 +1155,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "2000",
         "tag": "Grenade",
         "type": "SpreadDamage"
@@ -1192,16 +1191,6 @@
        },
        {
         "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -1212,24 +1201,33 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_teslarockets && !ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@Missiles",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^Grenade",
        "^ShrapnelWeapon",
-       "^HeavyCannon",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -1262,16 +1260,6 @@
        },
        {
         "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -1282,24 +1270,33 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesRocketPod1",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^Grenade",
        "^ShrapnelWeapon",
-       "^HeavyCannon",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -1332,16 +1329,6 @@
        },
        {
         "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -1352,21 +1339,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesRocketPod2",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^Grenade",
        "^ShrapnelWeapon",
-       "^HeavyCannon",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -5820,13 +5811,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -5906,7 +5892,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2165",
       "pricing": true,
       "range": "10830",
@@ -5914,25 +5900,24 @@
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^HeavyFlameWeapon",
        "SiegeMortar"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "SiegeMortarThermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6012,7 +5997,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2165",
       "pricing": false,
       "range": "10830",
@@ -6020,13 +6005,17 @@
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^HeavyFlameWeapon",
        "SiegeMortar"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "SiegeMortarThermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6590,13 +6579,8 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6631,33 +6615,32 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5400",
       "reloaddelay": "15",
       "requires": "!ra1_soviets_upgrade_incendiarybullets && !ra1_soviets_upgrade_teslaarcing && !ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^MediumChemicalWeapon",
        "^Grenade"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "VolkovMagneticWeapon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
+        "damage": "4",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6693,11 +6676,6 @@
        {
         "damage": "4",
         "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6720,6 +6698,7 @@
        "^Effect_Tesla_Heavy"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Tesla_Heavy"
       ],
       "weapon": "VolkovMagneticWeaponTesla",
@@ -6735,13 +6714,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
+        "damage": "20",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6773,15 +6747,10 @@
         "damage": "20",
         "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.375,
       "minrange": "1080",
       "pricing": true,
       "range": "5400",
@@ -6794,7 +6763,8 @@
        "VolkovMagneticWeapon"
       ],
       "warheads": [
-       "^Warhead_Nuclear_Super"
+       "^Warhead_Nuclear_Super",
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "VolkovMagneticWeaponNuclearShells",
       "weapon_class_source": "template"
@@ -6809,13 +6779,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6850,7 +6815,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5400",
       "reloaddelay": "15",
@@ -6864,7 +6829,8 @@
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Flame_Medium"
+       "^Warhead_Flame_Medium",
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "VolkovMagneticWeaponIncendiary",
       "weapon_class_source": "template"
@@ -6874,13 +6840,8 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
+        "damage": "4",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6942,15 +6903,10 @@
         "damage": "4",
         "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5660",
       "reloaddelay": "30",
@@ -6961,9 +6917,11 @@
        "^MediumFlameWeapon",
        "^TeslaWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "VolkovMagneticWeaponIncendiaryTesla",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "1",
@@ -6995,13 +6953,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
+        "damage": "20",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7033,15 +6986,10 @@
         "damage": "20",
         "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1080",
       "pricing": true,
       "range": "5400",
@@ -7053,9 +7001,11 @@
        "^NuclearWarhead",
        "VolkovMagneticWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "VolkovMagneticWeaponIncendiaryNuclearShells",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -7063,13 +7013,8 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7104,20 +7049,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5400",
       "reloaddelay": "15",
       "requires": "!ra1_soviets_upgrade_incendiarybullets && !ra1_soviets_upgrade_teslaarcing && !ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^MediumChemicalWeapon",
        "^Grenade"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "VolkovMagneticWeapon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -7125,13 +7074,8 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
+        "damage": "4",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7170,11 +7114,6 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "4000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
@@ -7194,6 +7133,7 @@
        "^Effect_Tesla_Heavy"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Tesla_Heavy"
       ],
       "weapon": "VolkovMagneticWeaponTesla",
@@ -7210,13 +7150,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
+        "damage": "20",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7248,15 +7183,10 @@
         "damage": "20",
         "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.375,
       "minrange": "1080",
       "pricing": false,
       "range": "5400",
@@ -7269,7 +7199,8 @@
        "VolkovMagneticWeapon"
       ],
       "warheads": [
-       "^Warhead_Nuclear_Super"
+       "^Warhead_Nuclear_Super",
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "VolkovMagneticWeaponNuclearShells",
       "weapon_class_source": "template"
@@ -7285,13 +7216,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7326,7 +7252,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "5400",
       "reloaddelay": "15",
@@ -7340,7 +7266,8 @@
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Flame_Medium"
+       "^Warhead_Flame_Medium",
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "VolkovMagneticWeaponIncendiary",
       "weapon_class_source": "template"
@@ -7351,13 +7278,8 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
+        "damage": "4",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7419,15 +7341,10 @@
         "damage": "4",
         "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5660",
       "reloaddelay": "30",
@@ -7438,9 +7355,11 @@
        "^MediumFlameWeapon",
        "^TeslaWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "VolkovMagneticWeaponIncendiaryTesla",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -7473,13 +7392,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "HeavyCannonPercentage",
+        "damage": "20",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7511,15 +7425,10 @@
         "damage": "20",
         "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1080",
       "pricing": false,
       "range": "5400",
@@ -7531,9 +7440,11 @@
        "^NuclearWarhead",
        "VolkovMagneticWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "VolkovMagneticWeaponIncendiaryNuclearShells",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -10937,6 +10848,11 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
+        "damage": "4",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "8000",
         "tag": "HeavyFlameWeapon",
         "type": "SpreadDamage"
@@ -10960,38 +10876,37 @@
         "damage": "4",
         "tag": "HeavyBombPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
       "requires": "ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^HeavyFlameWeapon",
-       "^HeavyBomb",
-       "^HeavyCannon"
+       "^HeavyBomb"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "ra120mmThermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "8",
       "damage_warheads": [
+       {
+        "damage": "4",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "8000",
         "tag": "HeavyFlameWeapon",
@@ -11016,20 +10931,10 @@
         "damage": "4",
         "tag": "HeavyBombPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
@@ -11038,9 +10943,11 @@
       "versus_templates": [
        "ra120mmThermobaric"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "ra120mmThermobaricTargetingComputer",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -11686,6 +11593,11 @@
       "burstdelays": "32",
       "damage_warheads": [
        {
+        "damage": "20",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "40000",
         "tag": "NuclearWarhead",
         "type": "SpreadDamage"
@@ -11694,32 +11606,26 @@
         "damage": "20",
         "tag": "NuclearWarheadPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "40000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7833",
       "reloaddelay": "103",
       "requires": "!ra1_soviets_doctrine_inferno",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^NuclearWarhead",
-       "^HeavyCannon"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
+       "^NuclearWarhead"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "MonsterTank120mm",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -11731,6 +11637,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "20",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "40000",
         "tag": "NuclearWarhead",
         "type": "SpreadDamage"
@@ -11738,16 +11649,6 @@
        {
         "damage": "20",
         "tag": "NuclearWarheadPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "40000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -11765,7 +11666,8 @@
        "MonsterTank120mm"
       ],
       "warheads": [
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "MonsterTank120mmThermobaric",
       "weapon_class_source": "template"
@@ -12662,6 +12564,11 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
+        "damage": "8",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "16000",
         "tag": "LightChemicalWeapon",
         "type": "SpreadDamage"
@@ -12690,38 +12597,37 @@
         "damage": "8",
         "tag": "MediumFlameWeaponPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "16000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
       "requires": "!ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^LightChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyCannon"
+       "^MediumFlameWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "ra120mm2",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "10",
       "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "16000",
         "tag": "LightChemicalWeapon",
@@ -12751,20 +12657,10 @@
         "damage": "8",
         "tag": "MediumFlameWeaponPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "16000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
@@ -12773,14 +12669,21 @@
       "versus_templates": [
        "ra120mm2"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "ra120mm2TargetingComputer",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "10",
       "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "16000",
         "tag": "HeavyFlameWeapon",
@@ -12805,38 +12708,37 @@
         "damage": "8",
         "tag": "HeavyBombPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "16000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
       "requires": "ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^HeavyFlameWeapon",
-       "^HeavyBomb",
-       "^HeavyCannon"
+       "^HeavyBomb"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "ra120mm2Thermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "10",
       "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "16000",
         "tag": "HeavyFlameWeapon",
@@ -12861,20 +12763,10 @@
         "damage": "8",
         "tag": "HeavyBombPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "16000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
@@ -12883,9 +12775,11 @@
       "versus_templates": [
        "ra120mm2Thermobaric"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "ra120mm2ThermobaricTargetingComputer",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",

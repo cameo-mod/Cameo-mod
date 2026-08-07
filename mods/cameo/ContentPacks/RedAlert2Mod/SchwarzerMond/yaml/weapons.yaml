@@ -218,16 +218,18 @@ NaxiMP40Laser_elite:
 	BurstDelays: 3
 
 LunarNaxiJadgDestroyer:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^RA2TankDestroyerCannon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^RA2TankDestroyerCannon
 	ReloadDelay: 90
 	Range: 7379
 	Projectile: Bullet
 		Speed: 737
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 30000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 15
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 30000

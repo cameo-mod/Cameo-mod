@@ -598,9 +598,11 @@ SteelSupportSpawner4:
 		ContrailEndWidth: 1
 
 NaxGrilleArty:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^RA2Grenade
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^RA2Grenade
 	ReloadDelay: 111
 	Range: 12345
 	MinRange: 2470
@@ -610,9 +612,9 @@ NaxGrilleArty:
 		Inaccuracy: 1234
 		Speed: 333
 		ContrailLength: 22
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 16000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 8
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 16000

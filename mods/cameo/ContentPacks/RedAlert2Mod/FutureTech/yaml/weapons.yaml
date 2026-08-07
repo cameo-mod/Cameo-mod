@@ -753,12 +753,14 @@ Future_MultiMissile_Sigma:
 		ValidTargets: Ground, Ship
 
 FutureEnforcerShotgun:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^TankDestroyerCannon
-	Inherits@4: ^MediumCannon
-	Inherits@5: ^SmallArms
-	Inherits@6: ^Chaingun
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^TankDestroyerCannon
+	Inherits@7: ^SmallArms
+	Inherits@8: ^Chaingun
 	ReloadDelay: 40
 	Range: 3000
 	Report: DSDSHTGN.wav
@@ -779,9 +781,9 @@ FutureEnforcerShotgun:
 		Damage: 2000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 2000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
@@ -898,12 +900,14 @@ Future_Wheel_MG_elite:
 	Burst: 8
 
 ShotgunAttackRobotGun:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^TankDestroyerCannon
-	Inherits@4: ^MediumCannon
-	Inherits@5: ^SmallArms
-	Inherits@6: ^RA2Chaingun
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^TankDestroyerCannon
+	Inherits@7: ^SmallArms
+	Inherits@8: ^RA2Chaingun
 	ReloadDelay: 55
 	Range: 4110
 	Report: laser_cannon3_3.wav
@@ -924,9 +928,9 @@ ShotgunAttackRobotGun:
 		Damage: 2000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 2000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
@@ -1253,16 +1257,18 @@ FutureTankCannons_elite:
 	BurstDelays: 5
 
 FutureHarbingerCannon:
-	Inherits: ^HeavyChemicalWeapon
-	Inherits@2: ^HeavyFlameWeapon
-	Inherits@3: ^HeavyBomb
-	Inherits@4: ^TeslaChargedWeapon
-	Inherits@5: ^TeslaWeapon
-	Inherits@6: ^MagicWeapon
-	Inherits@7: ^LaserWeapon
-	Inherits@8: ^RailgunWeapon
-	Inherits@9: ^HeavyMissile
-	Inherits@10: ^HeavyCannon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^HeavyChemicalWeapon
+	Inherits@5: ^HeavyFlameWeapon
+	Inherits@6: ^HeavyBomb
+	Inherits@7: ^TeslaChargedWeapon
+	Inherits@8: ^TeslaWeapon
+	Inherits@9: ^MagicWeapon
+	Inherits@10: ^LaserWeapon
+	Inherits@11: ^RailgunWeapon
+	Inherits@12: ^HeavyMissile
 	ReloadDelay: 70
 	Range: 6030
 	Burst: 2
@@ -1323,9 +1329,9 @@ FutureHarbingerCannon:
 		Damage: 4000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 4000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 2
 	Warhead@Effect1:
 		Explosions: blue_big_frag

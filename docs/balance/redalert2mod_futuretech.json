@@ -202,6 +202,11 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
+        "damage": "2",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "4000",
         "tag": "HeavyChemicalWeapon",
         "type": "SpreadDamage"
@@ -325,26 +330,19 @@
         "damage": "2",
         "tag": "HeavyMissilePercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6030",
       "reloaddelay": "70",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon",
        "^HeavyBomb",
@@ -353,18 +351,24 @@
        "^MagicWeapon",
        "^LaserWeapon",
        "^RailgunWeapon",
-       "^HeavyMissile",
-       "^HeavyCannon"
+       "^HeavyMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "FutureHarbingerCannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "5",
       "damage_warheads": [
+       {
+        "damage": "2",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "4000",
         "tag": "HeavyChemicalWeapon",
@@ -489,20 +493,10 @@
         "damage": "2",
         "tag": "HeavyMissilePercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7030",
       "reloaddelay": "70",
@@ -511,9 +505,11 @@
       "versus_templates": [
        "FutureHarbingerCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "FutureHarbingerCannon_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -2323,6 +2319,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "2000",
         "tag": "Grenade",
         "type": "SpreadDamage"
@@ -2364,16 +2365,6 @@
        },
        {
         "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2394,27 +2385,36 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3000",
       "reloaddelay": "40",
       "requires": "!deployed && !rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
        "^Grenade",
        "^ShrapnelWeapon",
        "^TankDestroyerCannon",
-       "^MediumCannon",
        "^SmallArms",
        "^Chaingun"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "FutureEnforcerShotgun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -2457,16 +2457,6 @@
        },
        {
         "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2487,7 +2477,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6150",
       "reloaddelay": "65",
@@ -2496,13 +2486,20 @@
       "versus_templates": [
        "FutureEnforcerShotgun"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "FutureEnforcerShotgunDeployed",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -2545,16 +2542,6 @@
        },
        {
         "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2575,7 +2562,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6150",
       "reloaddelay": "65",
@@ -2584,14 +2571,21 @@
       "versus_templates": [
        "FutureEnforcerShotgun"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "FutureEnforcerShotgunDeployed",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -2634,16 +2628,6 @@
        },
        {
         "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2664,7 +2648,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "40",
@@ -2673,15 +2657,22 @@
       "versus_templates": [
        "FutureEnforcerShotgun"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "FutureEnforcerShotgun_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
       "burst": "2",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -2724,16 +2715,6 @@
        },
        {
         "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2754,7 +2735,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7150",
       "reloaddelay": "65",
@@ -2763,15 +2744,22 @@
       "versus_templates": [
        "FutureEnforcerShotgunDeployed"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "FutureEnforcerShotgunDeployed_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -2814,16 +2802,6 @@
        },
        {
         "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2844,7 +2822,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "7150",
       "reloaddelay": "65",
@@ -2853,9 +2831,11 @@
       "versus_templates": [
        "FutureEnforcerShotgunDeployed"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "FutureEnforcerShotgunDeployed_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "targeting",
@@ -3791,6 +3771,11 @@
      {
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "2000",
         "tag": "Grenade",
         "type": "SpreadDamage"
@@ -3828,16 +3813,6 @@
        {
         "damage": "1",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3864,14 +3839,17 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
        "^Grenade",
        "^ShrapnelWeapon",
        "^TankDestroyerCannon",
-       "^MediumCannon",
        "^SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ShotgunAttackRobotGun",
@@ -3881,6 +3859,11 @@
       "burst": "2",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -3919,16 +3902,6 @@
        {
         "damage": "1",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3959,6 +3932,7 @@
        "^SteelChaingun"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ShotgunAttackRobotGun_elite",
@@ -3967,6 +3941,11 @@
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -4005,16 +3984,6 @@
        {
         "damage": "1",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -4041,14 +4010,17 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
        "^Grenade",
        "^ShrapnelWeapon",
        "^TankDestroyerCannon",
-       "^MediumCannon",
        "^SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ShotgunAttackRobotGun",
@@ -4059,6 +4031,11 @@
       "burst": "2",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "Grenade",
@@ -4097,16 +4074,6 @@
        {
         "damage": "1",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -4137,6 +4104,7 @@
        "^SteelChaingun"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ShotgunAttackRobotGun_elite",
@@ -6383,13 +6351,8 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6409,18 +6372,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
       "requires": "ifv-hmg",
       "slot": "Armament@hmg",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^RA2Chaingun",
        "^SniperWeapon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60H",

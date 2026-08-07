@@ -1,17 +1,19 @@
 MarineMG:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^SmallArms
-	Inherits@3: ^Chaingun
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^SmallArms
+	Inherits@5: ^Chaingun
 	ReloadDelay: 26
 	Range: 6105
 	Burst: 3
 	BurstDelays: 2
 	-Report:
 	ValidTargets: Ground, Water, Air
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
@@ -63,17 +65,19 @@ JimRaynorMachineGun:
 		Damage: 1
 
 MadcapGun:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^SmallArms
-	Inherits@3: ^Chaingun
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^SmallArms
+	Inherits@5: ^Chaingun
 	ReloadDelay: 25
 	Range: 5542
 	Report: madcapshoot.wav
 	ValidTargets: Ground, Water, Air
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
@@ -267,9 +271,11 @@ CycloneRocketsLockOn:
 	Range: 10000
 
 MarauderMissiles:
-	Inherits: ^TankDestroyerCannon
-	Inherits@2: ^HeavyCannon
-	Inherits@3: ^MediumMissile
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^MediumMissile
 	Range: 7010
 	ReloadDelay: 60
 	ValidTargets: Ground, Water
@@ -284,10 +290,10 @@ MarauderMissiles:
 		MaximumLaunchSpeed: 250
 		Acceleration: 10
 		ContrailEndColor: E60000
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 10000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 5
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -428,9 +434,11 @@ ReaperPistols:
 		Damage: 2
 
 ReaperGrenade:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^HeavyCannon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
 	ValidTargets: Structure
 	ReloadDelay: 45
 	Range: 4375
@@ -468,11 +476,11 @@ ReaperGrenade:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageCalculationType: ClosestTargetablePosition
@@ -486,11 +494,13 @@ ReaperGrenade:
 		ExplosionPalette: effect75alpha
 
 GhostSniper:
-	Inherits: ^MediumMissile
-	Inherits@2: ^HeavyCannon
-	Inherits@3: ^SmallArms
-	Inherits@4: ^FlakWeapon
-	Inherits@5: ^Chaingun
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^SmallArms
+	Inherits@6: ^FlakWeapon
+	Inherits@7: ^Chaingun
 	ReloadDelay: 22
 	Range: 8428
 	Report: TGhFir00.aud
@@ -511,10 +521,10 @@ GhostSniper:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
@@ -623,11 +633,13 @@ GhostSniperLockdown:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 SpecterSniper:
-	Inherits: ^MediumMissile
-	Inherits@2: ^HeavyCannon
-	Inherits@3: ^SmallArms
-	Inherits@4: ^FlakWeapon
-	Inherits@5: ^Chaingun
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^SmallArms
+	Inherits@6: ^FlakWeapon
+	Inherits@7: ^Chaingun
 	ReloadDelay: 33
 	Range: 7922
 	Report: TGhFir00.aud
@@ -648,10 +660,10 @@ SpecterSniper:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@SmallArms: SpreadDamage
@@ -760,11 +772,13 @@ SpecterSniperLockdown:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 VultureGrenade:
-	Inherits: ^SmallArms
-	Inherits@2: ^FlakWeapon
-	Inherits@3: ^Grenade
-	Inherits@4: ^TankDestroyerCannon
-	Inherits@5: ^MediumCannon
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^SmallArms
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^Grenade
+	Inherits@7: ^TankDestroyerCannon
 	ReloadDelay: 25
 	Range: 4800
 	Report: tvuFir00.aud
@@ -795,9 +809,9 @@ VultureGrenade:
 		Damage: 2000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 4000
@@ -1035,10 +1049,12 @@ GoliathRockets_AA:
 		Damage: 3
 
 GoliathMk2MG:
-	Inherits: ^Grenade
-	Inherits@2: ^HeavyCannon
-	Inherits@3: ^TankDestroyerCannon
-	Inherits@4: ^RA2Chaingun
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^Grenade
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 34
 	Range: 6479
@@ -1054,10 +1070,10 @@ GoliathMk2MG:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -1272,14 +1288,16 @@ ValkyrieRockets:
 		Damage: 1
 
 WyvernRockets:
-	Inherits: ^MediumFlameWeapon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^HeavyCannon
-	Inherits@4: ^HeavyBomb
-	Inherits@5: ^FlakWeapon
-	Inherits@6: ^MediumMissile
-	Inherits@7: ^HeavyAAWeapon
-	Inherits@8: ^D2KRocket
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^MediumFlameWeapon
+	Inherits@5: ^MediumChemicalWeapon
+	Inherits@6: ^HeavyBomb
+	Inherits@7: ^FlakWeapon
+	Inherits@8: ^MediumMissile
+	Inherits@9: ^HeavyAAWeapon
+	Inherits@10: ^D2KRocket
 	Report: TPhFi200.aud
 	Range: 8000
 	ReloadDelay: 90
@@ -1315,10 +1333,10 @@ WyvernRockets:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@HeavyBomb: SpreadDamage
@@ -1353,15 +1371,17 @@ WyvernRockets:
 		Damage: 1
 
 BCLaser:
-	Inherits: ^NuclearWarhead
-	Inherits@2: ^RailgunWeapon
-	Inherits@3: ^HeavyMissile
-	Inherits@4: ^HeavyCannon
-	Inherits@5: ^HeavyAAWeapon
-	Inherits@6: ^HeavyBomb
-	Inherits@7: ^HeavyChemicalWeapon
-	Inherits@8: ^HeavyFlameWeapon
-	Inherits@9: ^LaserWeapon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^NuclearWarhead
+	Inherits@5: ^RailgunWeapon
+	Inherits@6: ^HeavyMissile
+	Inherits@7: ^HeavyAAWeapon
+	Inherits@8: ^HeavyBomb
+	Inherits@9: ^HeavyChemicalWeapon
+	Inherits@10: ^HeavyFlameWeapon
+	Inherits@11: ^LaserWeapon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 38
 	Range: 6800
@@ -1389,10 +1409,10 @@ BCLaser:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@HeavyAAWeapon: SpreadDamage
@@ -1489,14 +1509,16 @@ BCYamatoCannon:
 		ImpactActors: false
 
 PhobosLaser:
-	Inherits: ^RailgunWeapon
-	Inherits@2: ^HeavyMissile
-	Inherits@3: ^HeavyCannon
-	Inherits@4: ^HeavyAAWeapon
-	Inherits@5: ^HeavyBomb
-	Inherits@6: ^HeavyChemicalWeapon
-	Inherits@7: ^HeavyFlameWeapon
-	Inherits@8: ^LaserWeapon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^RailgunWeapon
+	Inherits@5: ^HeavyMissile
+	Inherits@6: ^HeavyAAWeapon
+	Inherits@7: ^HeavyBomb
+	Inherits@8: ^HeavyChemicalWeapon
+	Inherits@9: ^HeavyFlameWeapon
+	Inherits@10: ^LaserWeapon
 	ValidTargets: Ground, Water, Air
 	Range: 9000
 	ReloadDelay: 80
@@ -1520,10 +1542,10 @@ PhobosLaser:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@HeavyAAWeapon: SpreadDamage

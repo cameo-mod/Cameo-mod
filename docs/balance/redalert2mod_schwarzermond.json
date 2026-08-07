@@ -6773,13 +6773,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6804,7 +6799,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -6812,11 +6807,14 @@
       "requires": "!rank-elite && !schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^ShrapnelWeapon",
        "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty",
@@ -6827,13 +6825,8 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6858,7 +6851,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "13333",
@@ -6870,6 +6863,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty_elite",
@@ -6883,13 +6877,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6919,7 +6908,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -6935,10 +6924,11 @@
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "Lunar_GreenGrilleArty",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -6950,13 +6940,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6986,7 +6971,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2470",
       "pricing": true,
       "range": "13333",
@@ -7002,10 +6987,11 @@
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "Lunar_GreenGrilleArty_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -7701,13 +7687,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "30000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7732,18 +7713,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7379",
       "reloaddelay": "90",
       "requires": "!rank-elite && !schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^ShrapnelWeapon",
        "^RA2TankDestroyerCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "LunarNaxiJadgDestroyer",
@@ -7754,13 +7738,8 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "30000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7785,7 +7764,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8379",
       "reloaddelay": "90",
@@ -7796,6 +7775,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "LunarNaxiJadgDestroyer_elite",
@@ -7809,13 +7789,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "30000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7845,7 +7820,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7379",
       "reloaddelay": "90",
@@ -7860,10 +7835,11 @@
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "Lunar_GreenJadgDestroyer",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -7875,13 +7851,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "30000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7911,7 +7882,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8379",
       "reloaddelay": "90",
@@ -7926,10 +7897,11 @@
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "Lunar_GreenJadgDestroyer_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

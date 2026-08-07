@@ -611,9 +611,11 @@ SiegeMortarExplode:
 		Damage: 2
 
 SiegeMortarThermobaric:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^HeavyFlameWeapon
-	Inherits@3: SiegeMortar
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^HeavyFlameWeapon
+	Inherits@5: SiegeMortar
 	Projectile: Bullet
 		TrailImage: smokey
 		TrailDelay: 1
@@ -657,10 +659,10 @@ SiegeMortarThermobaric:
 	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@HeavyFlameWeapon: SpreadDamage
@@ -1576,10 +1578,12 @@ IncendiaryChainGun:
 		Damage: 1
 
 HindMissiles:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^HeavyCannon
-	Inherits@4: ^MediumMissile
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5528
@@ -1602,10 +1606,10 @@ HindMissiles:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@MediumMissile: SpreadDamage
@@ -1621,11 +1625,13 @@ HindMissiles:
 		ImpactActors: false
 
 HindMissilesThermobaric:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^MediumFlameWeapon
-	Inherits@4: ^HeavyCannon
-	Inherits@5: ^MediumMissile
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^MediumFlameWeapon
+	Inherits@7: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5528
@@ -1671,10 +1677,10 @@ HindMissilesThermobaric:
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@MediumMissile: SpreadDamage
@@ -2710,9 +2716,11 @@ ra120mmTargetingComputer:
 	ValidTargets: Ground, Water
 
 ra120mmThermobaric:
-	Inherits: ^HeavyFlameWeapon
-	Inherits@2: ^HeavyBomb
-	Inherits@3: ^HeavyCannon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^HeavyFlameWeapon
+	Inherits@5: ^HeavyBomb
 	ValidTargets: Ground, Water, Vehicle, Structure
 	ReloadDelay: 95
 	Burst: 2
@@ -2731,9 +2739,9 @@ ra120mmThermobaric:
 		Damage: 8000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 4
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 8000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 4
 	-Warhead@Effect:
 
@@ -3005,9 +3013,11 @@ MammothTuskTeslaTargetingComputer:
 	ValidTargets: Ground, Water, Air
 
 ra120mm2:
-	Inherits: ^LightChemicalWeapon
-	Inherits@2: ^MediumFlameWeapon
-	Inherits@3: ^HeavyCannon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^LightChemicalWeapon
+	Inherits@5: ^MediumFlameWeapon
 	ValidTargets: Ground, Water, Vehicle, Structure
 	ReloadDelay: 125
 	Burst: 2
@@ -3028,9 +3038,9 @@ ra120mm2:
 		Damage: 8000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 8
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 16000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: small_building
@@ -3043,9 +3053,11 @@ ra120mm2TargetingComputer:
 	ValidTargets: Ground, Water
 
 ra120mm2Thermobaric:
-	Inherits: ^HeavyFlameWeapon
-	Inherits@2: ^HeavyBomb
-	Inherits@3: ^HeavyCannon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^HeavyFlameWeapon
+	Inherits@5: ^HeavyBomb
 	ValidTargets: Ground, Water, Vehicle, Structure
 	ReloadDelay: 125
 	Burst: 2
@@ -3064,9 +3076,9 @@ ra120mm2Thermobaric:
 		Damage: 16000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 8
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 16000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 8
 	-Warhead@Effect:
 
@@ -3183,8 +3195,10 @@ MammothTusk2ThermobaricTargetingComputer:
 	ValidTargets: Ground, Water, Air
 
 MonsterTank120mm:
-	Inherits: ^NuclearWarhead
-	Inherits@2: ^HeavyCannon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^NuclearWarhead
 	ReloadDelay: 103
 	Burst: 2
 	BurstDelays: 32
@@ -3197,9 +3211,9 @@ MonsterTank120mm:
 		Damage: 40000
 	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
 		Damage: 20
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 40000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 20
 	Warhead@Effect: CreateEffect
 		Explosions: nuke_small
@@ -3423,9 +3437,11 @@ MonsterTankTuskThermobaric:
 		ImpactSounds: firebl3.aud
 
 VolkovMagneticWeapon:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^Grenade
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^Grenade
 	ValidTargets: Ground, Water
 	ReloadDelay: 15
 	Range: 5400
@@ -3436,10 +3452,10 @@ VolkovMagneticWeapon:
 		Image: 50CAL
 		Speed: 5400
 		Inaccuracy: 540
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MediumChemicalWeapon: SpreadDamage

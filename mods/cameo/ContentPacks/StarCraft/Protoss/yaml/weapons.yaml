@@ -12,11 +12,13 @@ ArbiterStasis:
 		Duration: 125
 
 PositronGrenade:
-	Inherits: ^SmallArms
-	Inherits@2: ^FlakWeapon
-	Inherits@3: ^Grenade
-	Inherits@4: ^TankDestroyerCannon
-	Inherits@5: ^MediumCannon
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^SmallArms
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^Grenade
+	Inherits@7: ^TankDestroyerCannon
 	ReloadDelay: 30
 	Range: 5044
 	Report: tvuFir00.aud
@@ -45,9 +47,9 @@ PositronGrenade:
 		Damage: 4000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 1
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 8000
@@ -397,10 +399,12 @@ PsionicShockwave:
 		ValidTargets: Ground, Water, Air
 
 ScarabLaunch:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^HeavyCannon
-	Inherits@4: ^MediumMissile
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^HeavyBomb
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^MediumMissile
 	ValidTargets: Ground, Water
 	ReloadDelay: 90
 	Range: 7777
@@ -437,10 +441,10 @@ ScarabLaunch:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 25
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 50000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 25
 	Warhead@MediumMissile: SpreadDamage
@@ -548,10 +552,12 @@ ZeratulSlice:
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
 CorsairFlash:
-	Inherits: ^Grenade
-	Inherits@2: ^HeavyCannon
-	Inherits@3: ^FlakWeapon
-	Inherits@4: ^RA2Chaingun
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^Grenade
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^RA2Chaingun
 	Report: sc_corsair_attack.aud
 	ValidTargets: Air
 	Range: 5500
@@ -575,10 +581,10 @@ CorsairFlash:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Air
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
@@ -873,10 +879,12 @@ SCWorkerExplodeProtoss:
 		Damage: 6
 
 ScoutMG:
-	Inherits: ^Grenade
-	Inherits@2: ^HeavyCannon
-	Inherits@3: ^FlakWeapon
-	Inherits@4: ^RA2Chaingun
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^Grenade
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^RA2Chaingun
 	Report: blastgn2.aud
 	ValidTargets: Ground, Water
 	Range: 4500
@@ -900,10 +908,10 @@ ScoutMG:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
@@ -922,16 +930,18 @@ ScoutMG:
 		Explosions: steel_bluepiffs
 
 EpigraphMG:
-	Inherits: ^Grenade
-	Inherits@2: ^ArrowWeapon
-	Inherits@3: ^LightMissile
-	Inherits@4: ^MediumMissile
-	Inherits@5: ^HeavyMissile
-	Inherits@6: ^MediumChemicalWeapon
-	Inherits@7: ^HeavyAAWeapon
-	Inherits@8: ^HeavyCannon
-	Inherits@9: ^FlakWeapon
-	Inherits@10: ^Chaingun
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^Grenade
+	Inherits@5: ^ArrowWeapon
+	Inherits@6: ^LightMissile
+	Inherits@7: ^MediumMissile
+	Inherits@8: ^HeavyMissile
+	Inherits@9: ^MediumChemicalWeapon
+	Inherits@10: ^HeavyAAWeapon
+	Inherits@11: ^FlakWeapon
+	Inherits@12: ^Chaingun
 	Report: blastgn2.aud
 	ValidTargets: Ground, Water, Air
 	Range: 5077
@@ -992,10 +1002,10 @@ EpigraphMG:
 	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
@@ -1080,11 +1090,13 @@ ManifoldMG_AA:
 		ValidTargets: Air
 
 AtreusMG:
-	Inherits: ^Grenade
-	Inherits@2: ^HeavyCannon
-	Inherits@3: ^MediumMissile
-	Inherits@4: ^FlakWeapon
-	Inherits@5: ^RA2Chaingun
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^Grenade
+	Inherits@5: ^MediumMissile
+	Inherits@6: ^FlakWeapon
+	Inherits@7: ^RA2Chaingun
 	Report: blastgn2.aud
 	ValidTargets: Ground, Water, Air
 	Range: 4500
@@ -1110,10 +1122,10 @@ AtreusMG:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@MediumMissile: SpreadDamage

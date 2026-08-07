@@ -512,12 +512,14 @@ RA2Comet_elite:
 		AimTargetStances: Enemy, Neutral
 
 RA2GrandCannonWeapon:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^HeavyBomb
-	Inherits@3: ^MediumFlameWeapon
-	Inherits@4: ^ShrapnelWeapon
-	Inherits@5: ^LightChemicalWeapon
-	Inherits@6: ^RA2Grenade
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^HeavyBomb
+	Inherits@5: ^MediumFlameWeapon
+	Inherits@6: ^ShrapnelWeapon
+	Inherits@7: ^LightChemicalWeapon
+	Inherits@8: ^RA2Grenade
 	ReloadDelay: 200
 	Report: bgraatta.wav
 	Range: 11800
@@ -536,9 +538,9 @@ RA2GrandCannonWeapon:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		TrailInterval: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 50000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 25
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 50000

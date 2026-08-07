@@ -1,5 +1,3 @@
-
-
 XCOMCarbine:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -18,12 +16,14 @@ XCOMCarbine:
 		Damage: 1
 
 XCOMShotgun:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^TankDestroyerCannon
-	Inherits@4: ^MediumCannon
-	Inherits@5: ^SmallArms
-	Inherits@6: ^Chaingun
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^TankDestroyerCannon
+	Inherits@7: ^SmallArms
+	Inherits@8: ^Chaingun
 	ReloadDelay: 20
 	Range: 3000
 	Report: DSDSHTGN.wav
@@ -52,10 +52,10 @@ XCOMShotgun:
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@SmallArms: SpreadDamage

@@ -1204,10 +1204,12 @@ Spore_AA:
 		ValidTargets: Air
 
 Tentacle:
-	Inherits: ^RailgunWeapon
-	Inherits@2: ^Chaingun
-	Inherits@3: ^HeavyCannon
-	Inherits@4: ^SwordWeapon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^RailgunWeapon
+	Inherits@5: ^Chaingun
+	Inherits@6: ^SwordWeapon
 	ReloadDelay: 32
 	Range: 7680
 	Report: zlufir00.aud
@@ -1219,9 +1221,9 @@ Tentacle:
 		Damage: 6000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 3
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 6000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 3
 	Warhead@SwordWeapon: SpreadDamage
 		Damage: 6000

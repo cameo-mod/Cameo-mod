@@ -1,8 +1,10 @@
 NaxBrummbarArty:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^HeavyCannon
-	Inherits@3: ^ShrapnelWeapon
-	Inherits@4: ^RA2MediumCannon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^HeavyBomb
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^RA2MediumCannon
 	ReloadDelay: 140
 	Range: 14000
 	MinRange: 2800
@@ -21,9 +23,9 @@ NaxBrummbarArty:
 		Damage: 14000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 7
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 14000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 7
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 14000
@@ -615,15 +617,17 @@ NaxiShrekCons_elite:
 		ContrailEndColor: FFFFFF
 
 NaxiHetzerDestroyer:
-	Inherits: ^MediumCannon
-	Inherits@2: ^RA2TankDestroyerCannon
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^RA2TankDestroyerCannon
 	ReloadDelay: 80
 	Range: 7132
 	Projectile: Bullet
 		Speed: 713
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 20000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 10
 	Warhead@CannonAP_Light:
 		Damage: 20000
@@ -638,16 +642,18 @@ NaxiHetzerDestroyer_elite:
 	BurstDelays: 3
 
 NaxiJadgDestroyer:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^RA2TankDestroyerCannon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^ShrapnelWeapon
+	Inherits@5: ^RA2TankDestroyerCannon
 	ReloadDelay: 90
 	Range: 7396
 	Projectile: Bullet
 		Speed: 739
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 20000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 10
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 20000
@@ -668,8 +674,10 @@ NaxiJadgDestroyer_elite:
 	BurstDelays: 3
 
 NaxiAntiTankCannon:
-	Inherits: ^MediumCannon
-	Inherits@2: ^RA2TankDestroyerCannon
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^RA2TankDestroyerCannon
 	ReloadDelay: 75
 	Range: 7361
 	Report: nax_hotwizer.wav
@@ -680,9 +688,9 @@ NaxiAntiTankCannon:
 		ContrailWidth: 333
 		ContrailLength: 33
 		Speed: 3333
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 14000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 7
 	Warhead@CannonAP_Light:
 		Damage: 14000
@@ -1026,10 +1034,12 @@ NaxPlaneRockets_elite:
 		Damage: 5
 
 NaxiInterceptorGun:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^FlakWeapon
-	Inherits@3: ^Chaingun
-	Inherits@4: ^SmallArms
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^FlakWeapon
+	Inherits@5: ^Chaingun
+	Inherits@6: ^SmallArms
 	ReloadDelay: 100
 	Burst: 4
 	BurstDelays: 3
@@ -1045,9 +1055,9 @@ NaxiInterceptorGun:
 		ContrailLength: 20
 		Speed: 10000
 		Width: 50
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 6000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 3
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 6000

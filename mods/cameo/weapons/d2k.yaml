@@ -1319,18 +1319,20 @@ light_inf_lmg:
 		Damage: 1
 
 LMG_upgrade:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^Chaingun
-	Inherits@3: ^SmallArms
-	Inherits@4: ^HeavyMachineGunProjectile
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^Chaingun
+	Inherits@5: ^SmallArms
+	Inherits@6: ^HeavyMachineGunProjectile
 	ReloadDelay: 20
 	Range: 4448
 	Report: gun11.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
@@ -1347,18 +1349,20 @@ LMG_upgrade:
 		Damage: 1
 
 light_inf_lmg_upgrade:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^Chaingun
-	Inherits@3: ^SmallArms
-	Inherits@4: ^HeavyMachineGunProjectile
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^Chaingun
+	Inherits@5: ^SmallArms
+	Inherits@6: ^HeavyMachineGunProjectile
 	ReloadDelay: 20
 	Range: 4500
 	Report: gun11.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage

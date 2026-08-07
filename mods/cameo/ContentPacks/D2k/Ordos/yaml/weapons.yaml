@@ -428,10 +428,12 @@ D2K_APC_Rocket_AA:
 	ValidTargets: Air
 
 DeviatorMissile:
-	Inherits: ^MediumChemicalWeapon
-	Inherits@2: ^HeavyCannon
-	Inherits@3: ^MediumMissile
-	Inherits@4: ^D2KMissile
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^MediumMissile
+	Inherits@6: ^D2KMissile
 	ReloadDelay: 98
 	Range: 7070
 	Report: MISSLE1.WAV
@@ -453,10 +455,10 @@ DeviatorMissile:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@MediumMissile: SpreadDamage
@@ -585,9 +587,11 @@ LeechJump:
 		DamageTypes: DefaultDeath, DroneInfection
 
 d2k_grenade:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^HeavyCannon
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
 	ReloadDelay: 60
 	Range: 6000
 	MinRange: 1200
@@ -629,11 +633,11 @@ d2k_grenade:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageCalculationType: ClosestTargetablePosition
@@ -745,15 +749,17 @@ Laboratory_Bioball:
 		InvalidTargets: Water, Structure
 
 facedancer_grenade:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^HeavyBomb
-	Inherits@4: ^Grenade
-	Inherits@5: ^ShrapnelWeapon
-	Inherits@6: ^HeavyCannon
-	Inherits@7: ^LightMissile
-	Inherits@8: ^MediumMissile
-	Inherits@9: ^D2KMissile
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^LightFlameWeapon
+	Inherits@5: ^MediumChemicalWeapon
+	Inherits@6: ^HeavyBomb
+	Inherits@7: ^Grenade
+	Inherits@8: ^ShrapnelWeapon
+	Inherits@9: ^LightMissile
+	Inherits@10: ^MediumMissile
+	Inherits@11: ^D2KMissile
 	ReloadDelay: 90
 	Range: 7250
 	MinRange: 1450
@@ -827,11 +833,11 @@ facedancer_grenade:
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageCalculationType: ClosestTargetablePosition
@@ -1027,9 +1033,11 @@ HMGstealth:
 		Damage: 1
 
 ordos_autogunturret:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^SmallArms
-	Inherits@3: ^Chaingun
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^SmallArms
+	Inherits@5: ^Chaingun
 	ReloadDelay: 22
 	Burst: 4
 	BurstDelays: 2
@@ -1037,10 +1045,10 @@ ordos_autogunturret:
 	-Report:
 	StartBurstReport: autoguntrt.wav
 	ValidTargets: Ground, Water, Air
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
@@ -1057,12 +1065,14 @@ ordos_autogunturret:
 		Damage: 1
 
 autogun_tank:
-	Inherits: ^D2KMissile
-	Inherits@2: ^HeavyCannon
-	Inherits@3: ^HeavyAAWeapon
-	Inherits@4: ^FlakWeapon
-	Inherits@5: ^MediumMissile
-	Inherits@6: ^Chaingun
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^D2KMissile
+	Inherits@5: ^HeavyAAWeapon
+	Inherits@6: ^FlakWeapon
+	Inherits@7: ^MediumMissile
+	Inherits@8: ^Chaingun
 	ReloadDelay: 24
 	Burst: 4
 	BurstDelays: 2
@@ -1076,10 +1086,10 @@ autogun_tank:
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@HeavyAAWeapon: SpreadDamage

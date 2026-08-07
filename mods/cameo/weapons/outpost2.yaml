@@ -485,9 +485,11 @@ plymouthSticky:
 		ValidTargets: Ground, Water, Air
 
 plymouthStickyTiger:
-	Inherits: ^MediumChemicalWeapon
-	Inherits@2: ^MediumCannon
-	Inherits@3: plymouthSticky
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: plymouthSticky
 	ReloadDelay: 45
 	Warhead@LightChemicalWeapon: SpreadDamage
 		Damage: 4000
@@ -504,10 +506,10 @@ plymouthStickyTiger:
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@MediumChemicalWeapon: SpreadDamage
@@ -521,9 +523,11 @@ plymouthStickyTiger:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 
 plymouthStickyDefence:
-	Inherits: ^HeavyChemicalWeapon
-	Inherits@2: ^HeavyCannon
-	Inherits@3: plymouthStickyTiger
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^HeavyChemicalWeapon
+	Inherits@5: plymouthStickyTiger
 	ReloadDelay: 65
 	Range: 6656
 	Warhead@LightChemicalWeapon: SpreadDamage
@@ -556,10 +560,10 @@ plymouthStickyDefence:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@HeavyChemicalWeapon: SpreadDamage

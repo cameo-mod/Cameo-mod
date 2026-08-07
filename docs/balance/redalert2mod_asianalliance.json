@@ -12,6 +12,11 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "2000",
         "tag": "LightFlameWeapon",
         "type": "SpreadDamage"
@@ -73,16 +78,6 @@
        },
        {
         "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
        },
@@ -119,16 +114,19 @@
       "reloaddelay": "60",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
-       "^MediumCannon",
        "^ShrapnelWeapon",
        "^HeavyBomb",
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "AsianHarbingerPlasma",
@@ -1525,6 +1523,11 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "2000",
         "tag": "LightFlameWeapon",
         "type": "SpreadDamage"
@@ -1586,16 +1589,6 @@
        },
        {
         "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
        },
@@ -1626,7 +1619,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "minrange": "2800",
       "pricing": true,
       "range": "14000",
@@ -1636,6 +1629,7 @@
        "AsianSinglePlasma"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianTurretPlasma",
@@ -2565,6 +2559,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "16",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "32000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
@@ -2572,16 +2571,6 @@
        {
         "damage": "16",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2612,11 +2601,6 @@
        {
         "damage": "3",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "16",
-        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2636,7 +2620,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.375,
       "pricing": true,
       "range": "9455",
       "reloaddelay": "100",
@@ -2648,13 +2632,19 @@
        "AsianSniperAP"
       ],
       "warheads": [
-       "^Warhead_TeslaCharged_Super"
+       "^Warhead_TeslaCharged_Super",
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianSniperLockdown",
       "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "6000",
         "tag": "MediumMissile",
@@ -2663,16 +2653,6 @@
        {
         "damage": "3",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2707,25 +2687,34 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9455",
       "reloaddelay": "25",
       "requires": "!asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^MediumMissile",
-       "^HeavyCannon",
        "^SmallArms",
        "^FlakWeapon",
        "^Chaingun"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "AsianSniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "16000",
         "tag": "MediumMissile",
@@ -2734,16 +2723,6 @@
        {
         "damage": "8",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2774,11 +2753,6 @@
        {
         "damage": "3",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2793,7 +2767,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9455",
       "reloaddelay": "50",
@@ -2802,13 +2776,20 @@
       "versus_templates": [
        "AsianSniper"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "AsianSniperAP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
+       {
+        "damage": "3",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "6000",
         "tag": "MediumMissile",
@@ -2817,16 +2798,6 @@
        {
         "damage": "3",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2861,26 +2832,35 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "9455",
       "reloaddelay": "25",
       "requires": "!asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^MediumMissile",
-       "^HeavyCannon",
        "^SmallArms",
        "^FlakWeapon",
        "^Chaingun"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "AsianSniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
+       {
+        "damage": "8",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "16000",
         "tag": "MediumMissile",
@@ -2889,16 +2869,6 @@
        {
         "damage": "8",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "HeavyCannonPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2929,11 +2899,6 @@
        {
         "damage": "3",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2948,7 +2913,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "9455",
       "reloaddelay": "50",
@@ -2957,9 +2922,11 @@
       "versus_templates": [
        "AsianSniper"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "AsianSniperAP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4218,6 +4185,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "2000",
         "tag": "LightFlameWeapon",
         "type": "SpreadDamage"
@@ -4279,16 +4251,6 @@
        },
        {
         "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
        },
@@ -4319,23 +4281,26 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5190",
       "reloaddelay": "34",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
-       "^MediumCannon",
        "^ShrapnelWeapon",
        "^HeavyBomb",
        "^RA2HeavyCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianSinglePlasma",
@@ -4347,6 +4312,11 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "2000",
         "tag": "LightFlameWeapon",
         "type": "SpreadDamage"
@@ -4408,16 +4378,6 @@
        },
        {
         "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
        },
@@ -4448,7 +4408,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5836",
       "reloaddelay": "34",
@@ -4458,6 +4418,7 @@
        "AsianSinglePlasma"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianSinglePlasma_elite",
@@ -4466,6 +4427,11 @@
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "2000",
         "tag": "LightFlameWeapon",
@@ -4528,16 +4494,6 @@
        },
        {
         "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
        },
@@ -4568,23 +4524,26 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "5190",
       "reloaddelay": "34",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
-       "^MediumCannon",
        "^ShrapnelWeapon",
        "^HeavyBomb",
        "^RA2HeavyCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianSinglePlasma",
@@ -4596,6 +4555,11 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "2000",
         "tag": "LightFlameWeapon",
         "type": "SpreadDamage"
@@ -4657,16 +4621,6 @@
        },
        {
         "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
        },
@@ -4697,7 +4651,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "5836",
       "reloaddelay": "34",
@@ -4707,6 +4661,7 @@
        "AsianSinglePlasma"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianSinglePlasma_elite",
@@ -7759,13 +7714,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7785,17 +7735,20 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5517",
       "reloaddelay": "12",
       "slot": "Armament@1",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianPulverizerGatling",
@@ -7804,13 +7757,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7830,18 +7778,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5517",
       "reloaddelay": "12",
       "requires": "asianalliance_doctrine_heavypulverizerweapons",
       "slot": "Armament@2",
       "versus_templates": [
-       "^HeavyCannon",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianPulverizerGatling",
@@ -7922,13 +7873,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7948,7 +7894,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7020",
       "reloaddelay": "15",
@@ -7959,6 +7905,7 @@
        "AsianPulverizerGatling"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianPulverizerMechaGatling",
@@ -7992,13 +7939,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -8018,7 +7960,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7020",
       "reloaddelay": "15",
@@ -8030,6 +7972,7 @@
        "AsianPulverizerGatling"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianPulverizerMechaGatling",
@@ -8926,6 +8869,11 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "2000",
         "tag": "LightFlameWeapon",
         "type": "SpreadDamage"
@@ -8987,16 +8935,6 @@
        },
        {
         "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
        },
@@ -9027,7 +8965,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "25",
@@ -9037,6 +8975,7 @@
        "AsianSinglePlasma"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianTwinPlasma",
@@ -9047,6 +8986,11 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "2000",
         "tag": "LightFlameWeapon",
         "type": "SpreadDamage"
@@ -9108,16 +9052,6 @@
        },
        {
         "damage": "2000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
        },
@@ -9148,7 +9082,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "25",
@@ -9158,6 +9092,7 @@
        "AsianTwinPlasma"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianTwinPlasma_elite",
