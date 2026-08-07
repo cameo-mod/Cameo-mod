@@ -842,6 +842,27 @@ passed the boot-gate.
   `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
   `extract_stats.py` refreshed `d2k_ixian.json` and `d2k_ordos.json`.
 
+### 14.21 `Grenade + ShrapnelWeapon + TankDestroyerCannon` triple conversion (`51843225a`)
+
+- Converted 2 weapons in `ContentPacks/D2k/Ordos/yaml/weapons.yaml`:
+  `120mm_cobra` and `Dune_SiegeMortar`.
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_Demolition_Light
+  Inherits@wh2: ^Warhead_Concussion_Medium
+  Inherits@wh3: ^Warhead_CannonAP_Light
+  Inherits@proj: ^Projectile_Shell_Light
+  Inherits@fx: ^Effect_CannonAP_Light
+  Inherits@4: ^D2K_Cannon
+  ```
+- `Grenade` → `Demolition_Light`, `ShrapnelWeapon` → `Concussion_Medium`,
+  `TankDestroyerCannon` → `CannonAP_Light`. `_Percentage` variants
+  preserved. `*FriendlyFire` twins stripped. `^D2K_Cannon` and custom
+  `CannonHE_Medium` / `Warhead@Effect` / `Projectile` overrides preserved.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` reached
+  `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
+  `extract_stats.py` refreshed `docs/balance/d2k_ordos.json`.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
