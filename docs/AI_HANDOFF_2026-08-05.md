@@ -379,3 +379,22 @@ Avoid flame/chemical/sonic/energy dual-warhead clusters until a `PhysicalState`/
   `TS30mm` (TiberianSun GDI), `TKMAATurretCannon` and `FlakbusAA`
   (RA2Mod/TKM). `Inherits@proj`/`Inherits@fx` follow the last listed
   old inherit.
+
+### 14.7 Final effect-free dual-inherit sweep (2026-08-07)
+
+A generic converter processed the remaining 9 effect-free dual-inherit
+pairs in one pass, converting 13 weapons across 8 files:
+
+- `HeavyMissile + RailgunWeapon` → `MissileHE_Heavy + Railgun_Heavy` (2)
+- `HeavyBomb + HeavyMissile` → `Demolition_Heavy + MissileHE_Heavy` (2)
+- `Grenade + MediumMissile` → `Demolition_Light + MissileHE_Medium` (2)
+- `MediumCannon + RailgunWeapon` → `CannonHE_Medium + Railgun_Heavy` (2)
+- `FlakWeapon + LightMissile` → `Flak_Medium + MissileHE_Light` (1)
+- `HeavyBomb + HeavyCannon` → `Demolition_Heavy + CannonHE_Heavy` (1)
+- `HeavyCannon + HeavyMissile` → `CannonHE_Heavy + MissileHE_Heavy` (1)
+- `ShrapnelWeapon + TankDestroyerCannon` → `Concussion_Medium + CannonAP_Light` (1)
+- `MediumCannon + MediumMissile` → `CannonHE_Medium + MissileHE_Medium` (1)
+
+All 13 were boot-gated with `find_empty_warhead.py = 0` and `extract_stats.py`.
+Effect-heavy dual-inherit clusters (flame/chemical/sonic/energy/EMP) remain
+blocked until an effect-aware converter is built.

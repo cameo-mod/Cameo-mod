@@ -762,8 +762,10 @@ TigerCannon:
 	Inherits@3: ^WaveforceBulletProjectile
 
 WaveforceCannonChargedLaser:
-	Inherits: ^HeavyMissile
-	Inherits@2: ^RailgunWeapon
+	Inherits@wh: ^Warhead_MissileHE_Heavy
+	Inherits@wh2: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	ReloadDelay: 120
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -777,19 +779,19 @@ WaveforceCannonChargedLaser:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
 		Inaccuracy: 100
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1998,8 +2000,10 @@ JapanSpeedBoatGunWaveforce:
 	Inherits@3: ^WaveforceBulletProjectile
 
 YamatoCannon:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^HeavyCannon
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
 	ReloadDelay: 125
 	Range: 12500
 	MinRange: 2500
@@ -2016,17 +2020,14 @@ YamatoCannon:
 		ContrailEndWidth: 1
 		ContrailStartColor: FF9933
 		ContrailEndColor: FFFFFF
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 20000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 10
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 20000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 10
-	-Warhead@Effect2:
-		Explosions: building
-		ImpactSounds: kaboom15.aud
 
 YamatoFlak:
 	Inherits@wh: ^Warhead_Flak_Medium

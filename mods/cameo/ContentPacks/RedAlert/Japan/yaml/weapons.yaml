@@ -1083,27 +1083,26 @@ JHindChainGunWaveforce:
 		Damage: 500
 
 JHindCannon:
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^TankDestroyerCannon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@wh2: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 32
 	Range: 3053
 	Report: cannon2.aud
 	Projectile: Bullet
 		Speed: 305
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 
@@ -1706,8 +1705,10 @@ ShrineTankCannon:
 		ImpactSounds:
 
 WaveforceCannon:
-	Inherits: ^HeavyMissile
-	Inherits@2: ^RailgunWeapon
+	Inherits@wh: ^Warhead_MissileHE_Heavy
+	Inherits@wh2: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	ReloadDelay: 60
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -1722,16 +1723,16 @@ WaveforceCannon:
 		HelixAngleDeltaPerTick: 32
 		QuantizationCount: 64
 		Duration: 16
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@Effect: CreateEffect

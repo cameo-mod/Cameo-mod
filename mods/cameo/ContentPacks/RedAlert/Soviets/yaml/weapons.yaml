@@ -1056,8 +1056,10 @@ HeatRayBeam4:
 		QuantizationCount: 16
 
 v1rockets:
-	Inherits: ^MediumMissile
-	Inherits@2: ^Grenade
+	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@wh2: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Light
 	ReloadDelay: 115
 	Burst: 4
 	BurstDelays: 5
@@ -1074,15 +1076,13 @@ v1rockets:
 		TrailInterval: 1
 		Speed: 300
 		LaunchAngle: 60
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium:
 		Damage: 12000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage:
 		Damage: 6
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 12000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 6000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 6
 
 v1rocketsThermobaric:
@@ -3230,23 +3230,25 @@ MonsterTank120mmThermobaric:
 		Damage: 20
 
 MonsterTankTusk:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^HeavyMissile
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_MissileHE_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_MissileHE_Heavy
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 125
 	Burst: 4
 	BurstDelays: 3
 	Range: 7833
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 10
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 

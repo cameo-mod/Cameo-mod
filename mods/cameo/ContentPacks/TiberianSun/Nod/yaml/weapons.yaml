@@ -117,8 +117,10 @@ TSTibBazooka:
 		Damage: 12
 
 TSStankTusk:
-	Inherits: ^MediumCannon
-	Inherits@2: ^MediumMissile
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@wh2: ^Warhead_MissileHE_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_MissileHE_Medium
 	Range: 6385
 	Burst: 2
 	BurstDelays: 2
@@ -127,19 +129,16 @@ TSStankTusk:
 	Projectile: Missile
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium:
 		Damage: 10000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage:
 		Damage: 5
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumCannonFriendlyFire: SpreadDamage
-		Damage: 5000
-		ValidTargets: Ground, Water, Air
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 5
 		ValidTargets: Ground, Water, Air
 

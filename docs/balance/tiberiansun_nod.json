@@ -3555,45 +3555,35 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "MediumCannonFriendlyFire",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6385",
       "reloaddelay": "60",
       "requires": "!ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^MediumCannon",
-       "^MediumMissile"
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileHE_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileHE_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileHE_Medium"
+      ],
       "weapon": "TSStankTusk",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",

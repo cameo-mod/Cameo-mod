@@ -912,24 +912,23 @@ TSMammothTusk:
 		Explosions: small_building
 
 TSRuinerMissile:
-	Inherits: ^Grenade
-	Inherits@2: ^MediumMissile
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_MissileHE_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_MissileHE_Medium
 	Range: 5919
 	ReloadDelay: 50
 	Report: misl1.aud
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 18000
 		ValidTargets: Ground, Water, Air
-	Warhead@GrenadeFriendlyFire:
-		Damage: 9000
-		ValidTargets: Ground, Water, Air
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 9
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium:
 		Damage: 18000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage:
 		Damage: 9
 		ValidTargets: Ground, Water, Air
 
@@ -1250,24 +1249,26 @@ TSChemCobraMissile:
 		InvalidTargets: Water
 
 TSAdatsMissile:
-	Inherits: ^FlakWeapon
-	Inherits@2: ^LightMissile
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@wh2: ^Warhead_MissileHE_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileHE_Light
 	Range: 5606
 	Burst: 4
 	BurstDelays: 2
 	ReloadDelay: 54
 	Report: misl1.aud
 	ValidTargets: Ground, Water
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage:
 		Damage: 2
 		ValidTargets: Ground, Water
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileHE_Light:
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Light_Percentage:
 		Damage: 2
 		ValidTargets: Ground, Water
 

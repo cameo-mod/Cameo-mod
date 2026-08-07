@@ -7629,68 +7629,53 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5606",
       "reloaddelay": "54",
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^FlakWeapon",
-       "^LightMissile"
+       "^Warhead_Flak_Medium",
+       "^Warhead_MissileHE_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flak_Medium",
+       "^Warhead_MissileHE_Light"
+      ],
       "weapon": "TSAdatsMissile",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8409",
       "reloaddelay": "54",
@@ -7699,77 +7684,65 @@
       "versus_templates": [
        "TSAdatsMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flak_Medium",
+       "^Warhead_MissileHE_Light"
+      ],
       "weapon": "TSAdatsMissile_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5606",
       "reloaddelay": "54",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^FlakWeapon",
-       "^LightMissile"
+       "^Warhead_Flak_Medium",
+       "^Warhead_MissileHE_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flak_Medium",
+       "^Warhead_MissileHE_Light"
+      ],
       "weapon": "TSAdatsMissile",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8409",
       "reloaddelay": "54",
@@ -7778,9 +7751,12 @@
       "versus_templates": [
        "TSAdatsMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flak_Medium",
+       "^Warhead_MissileHE_Light"
+      ],
       "weapon": "TSAdatsMissile_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8391,45 +8367,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "18000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "9000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "9",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "18000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "9",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5919",
       "reloaddelay": "50",
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Grenade",
-       "^MediumMissile"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileHE_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileHE_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileHE_Medium"
+      ],
       "weapon": "TSRuinerMissile",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
