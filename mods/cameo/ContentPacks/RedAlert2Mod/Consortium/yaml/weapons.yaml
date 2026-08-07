@@ -183,8 +183,10 @@ ConsortiumMissileSystem_EMP:
 		Damage: 12000
 
 SteelQuantumCannon:
-	Inherits: ^LaserWeapon
-	Inherits@2: ^RailgunWeapon
+	Inherits: ^Warhead_Laser_Heavy
+	Inherits@2: ^Warhead_Railgun_Heavy
+	Inherits@3: ^Projectile_Railgun_Heavy
+	Inherits@4: ^Effect_Railgun_Heavy
 	Range: 6000
 	ReloadDelay: 65
 	Report: steel_quantumfire.wav
@@ -192,16 +194,16 @@ SteelQuantumCannon:
 	Projectile: Railgun
 		BeamColor: 00EEFF88
 		Railgun: 96
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 12000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 6
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 12000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 6
 	Warhead@Effect: CreateEffect

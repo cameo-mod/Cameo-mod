@@ -235,8 +235,10 @@ RA2LasherToxicMortar_elite:
 		ImpactSounds: vdemdiea.wav
 
 RA2LasherLaser:
-	Inherits: ^MediumCannon
-	Inherits@2: ^LaserWeapon
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Warhead_Laser_Heavy
+	Inherits@3: ^Projectile_Laser_Heavy
+	Inherits@4: ^Effect_Laser_Heavy
 	ReloadDelay: 81
 	Range: 7065
 	Report: vfloatta.wav
@@ -249,16 +251,16 @@ RA2LasherLaser:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF88
 		UsePlayerColor: false
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage:
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 

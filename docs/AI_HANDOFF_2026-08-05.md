@@ -423,6 +423,12 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   side for true `Projectile: Missile` weapons; `SCUD` kept its `Bullet: V2`
   and did not inherit `^Projectile_Missile_Heavy`. Local `Warhead@Effect`,
   `EffectAir`, and `Smudge` overrides preserved.
+- **LaserWeapon mixed pairs** (`RA2LasherLaser` `MediumCannon+LaserWeapon` and
+  `SteelQuantumCannon` `Railgun+LaserWeapon`) converted to
+  `CannonHE_Medium+Laser_Heavy` and `Railgun_Heavy+Laser_Heavy`. Both use
+  `^Projectile_Laser_Heavy` and `^Effect_Laser_Heavy`/`^Effect_Railgun_Heavy`;
+  local `LaserZap`/`Railgun` projectile overrides and custom `Warhead@Effect`
+  were preserved.
 - **HeavyBomb + MediumFlameWeapon** (`Demolition_Heavy + Flame_Medium`) converted
   5 weapons across 3 files (`sandmarinemortar`, `bigshieemortar` and three
   others). `Inherits@proj` was set to `^Projectile_Flame_Medium` and the
