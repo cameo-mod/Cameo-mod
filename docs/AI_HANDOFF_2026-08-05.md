@@ -650,6 +650,29 @@ passed the boot-gate.
 - Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` boot-gate pass;
   `extract_stats.py` refreshed 32 ledgers.
 
+### 14.12 `Grenade + ShrapnelWeapon` dual conversion (`9ac68d33`)
+
+- Converted 5 weapons: `LatinBuggyRocket` (`weapons/redalert2mod.yaml`),
+  `d2k_grenade` (`ContentPacks/D2k/Ordos`), `RA2AsianShotgunFanatic1`
+  (`ContentPacks/RedAlert2Mod/AsianAlliance`), `LatinMonkeyGrenade1`
+  (`ContentPacks/RedAlert2Mod/Syndicate`), `ReaperGrenade`
+  (`ContentPacks/StarCraft/Terran`).
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_Demolition_Light
+  Inherits@wh2: ^Warhead_Concussion_Medium
+  Inherits@proj: ^Projectile_Grenade_Light
+  Inherits@fx: ^Effect_Concussion_Medium
+  ```
+- `Grenade` → `Demolition_Light`, `ShrapnelWeapon` → `Concussion_Medium`,
+  `_Percentage` variants preserved. `*FriendlyFire` twins and old type tokens
+  stripped. Non-old addon inherits (`RA2SmallArms`, `RA2Chaingun`,
+  `SteelLightMissile`, `RA2MediumMissile`, custom `Warhead@FireShrapnel`) were
+  preserved.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` boot-gate pass
+  (`MenuPostProcessEffect.PostWorldLoaded` at `perf.log:503`); no new
+  `exception-*.log`; `extract_stats.py` refreshed 32 ledgers.
+
 ---
 
 ## 15. Live remaining-effort estimate (after this Devin session)
