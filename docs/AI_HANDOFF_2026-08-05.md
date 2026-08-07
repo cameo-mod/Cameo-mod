@@ -429,6 +429,10 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   `^Projectile_Laser_Heavy` and `^Effect_Laser_Heavy`/`^Effect_Railgun_Heavy`;
   local `LaserZap`/`Railgun` projectile overrides and custom `Warhead@Effect`
   were preserved.
+- **LightFlameWeapon + MediumMissile** (`LightTank2Missiles` in
+  TiberianDawn/Nod) converted to `Flame_Light + MissileAP_Medium`. The weapon
+  keeps its local `Warhead@Effect` (`small_frag`) and inherits
+  `^Projectile_Missile_Medium` because the missile side was the final `Inherits`.
 - **TeslaChargedWeapon + TeslaWeapon** converted 6 pure dual-inherit EMP/ion
   weapons to `Tesla_Heavy + TeslaCharged_Super` with `^Projectile_Lightning_Super`
   and `^Effect_Tesla_Super`. `PulseMissile` (D2k), `IonCannon`,

@@ -969,24 +969,23 @@ LightTank2Cannon:
 		ImpactSounds: xplos.aud
 
 LightTank2Missiles:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^MediumMissile
+	Inherits: ^Warhead_Flame_Light
+	Inherits@2: ^Warhead_MissileAP_Medium
+	Inherits@3: ^Projectile_Missile_Medium
+	Inherits@4: ^Effect_MissileAP_Medium
 	ReloadDelay: 35
 	Range: 4903
 	Report: bazook1.aud
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Effect: CreateEffect

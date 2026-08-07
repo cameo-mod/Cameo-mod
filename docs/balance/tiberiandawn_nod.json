@@ -4748,45 +4748,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4903",
       "reloaddelay": "35",
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Missile",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^MediumMissile"
+       "^Warhead_Flame_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light",
+       "^Warhead_MissileAP_Medium"
+      ],
       "weapon": "LightTank2Missiles",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
