@@ -1121,7 +1121,9 @@ KurtSniper:
 		Explosions: piff
 
 KurtGrenade:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ValidTargets: Structure, Bridge, wall
 	ReloadDelay: 70 #50
 	MinRange: 1024

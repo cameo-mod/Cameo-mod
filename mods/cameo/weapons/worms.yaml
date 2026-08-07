@@ -159,7 +159,9 @@ WormsRockets:
 			Heavy: 34
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 WormsGrenade:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	Projectile: Bullet
 		Image: wormgrenadeshp
 	Warhead@Effect: CreateEffect

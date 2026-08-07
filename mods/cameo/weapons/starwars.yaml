@@ -521,7 +521,9 @@ SWTurretGun:
 			Concrete: 50
 
 SWGrenade:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	Projectile: Bullet
 		Image: 2100rocket
 	Warhead@3Eff: CreateEffect

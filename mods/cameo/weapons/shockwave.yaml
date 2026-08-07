@@ -37,7 +37,9 @@ SUSALittleBirdMG:
 			Concrete: 4
 			
 SUSABurtonOICW:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	Range: 8704
 	MinRange: 512
 	ReloadDelay: 40
@@ -1549,7 +1551,9 @@ SUSAPopUpTurret:
 #        WEAPONS GLA
 ####################################  
 SGLScarabSmokers:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	Range: 7552
 	MinRange: 512
 	ReloadDelay: 300
@@ -1893,7 +1897,9 @@ SGLGadFlyMissile:
 		Explosions: ex_big_flash_blue
 
 SGLAngryMobMolotov:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ReloadDelay: 50
 	Projectile: Bullet
 		Image: 120MM
@@ -2511,7 +2517,9 @@ SCHTigerMG:
 			Concrete: 30
 			
 SCHTigerGrenades:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ValidTargets: Ground
 	Burst: 2
 	BurstDelays: 5
@@ -3188,7 +3196,9 @@ SCHNeutronMineSpawner:
 		Actors: schneutronminv
 
 SCHRadiationGrenade:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ReloadDelay: 200
 	Range: 7168
 	Report: toss1.aud

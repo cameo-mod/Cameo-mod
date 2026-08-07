@@ -34,7 +34,9 @@ RCTigerMG:
 		Damage: 450
 
 315Molotov:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ReloadDelay: 40
 	Warhead@1Dam: SpreadDamage
 		Spread: 341
@@ -55,7 +57,9 @@ RCTigerMG:
 	Range: 7168
 
 315Rocks:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ReloadDelay: 50
 	Burst: 3
 	Warhead@1Dam: SpreadDamage
@@ -69,7 +73,6 @@ RCTigerMG:
 			Heavy: 5
 			Concrete: 5
 		DamageTypes: Prone50Percent, TriggerProne
-	-Warhead@3Eff:
 
 315AAWeapon:
 	Inherits: ^LightMG
@@ -128,7 +131,9 @@ RCTigerMG:
 		ValidTargets: Air
 
 315Waterjet:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ReloadDelay: 50
 	Burst: 6
 	Warhead@1Dam: SpreadDamage
@@ -282,9 +287,10 @@ InfantryExplode:
 		Footprint: _x_ x_x _x_
 
 InfantryExplodeMeat:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	Range: 3072
-	-Report:
 	Projectile: Bullet
 		Speed: 90
 		Blockable: false
@@ -297,7 +303,6 @@ InfantryExplodeMeat:
 	Warhead@3Eff: CreateEffect
 		Explosions: inf_ketchup
 		ImpactSounds: DSXDTH1C.wav
-	-Warhead@2Smu:
 
 InfantryExplodeBlood:
 	Inherits: InfantryExplodeMeat

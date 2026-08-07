@@ -262,7 +262,9 @@ RATurretGun:
 			None: 60
 
 BuggyGrenade:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ReloadDelay: 21
 	Range: 4864
 	Report: M203.aud

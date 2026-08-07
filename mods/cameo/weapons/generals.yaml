@@ -227,7 +227,9 @@ GLAngryMobAk47:
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath, MakeScrapbox
 
 GLAngryMobMolotov:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ReloadDelay: 40
 	Projectile: Bullet
 		Image: 120MM
@@ -1467,11 +1469,12 @@ USARangerMGGarrison:
 		Damage: 1000
 
 USARangerFlashbang:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	Range: 7552
 	MinRange: 512
 	ReloadDelay: 125
-	-Report:
 	ValidTargets: Infantry, Garrisoned
 	Projectile: Bullet
 		Speed: 128

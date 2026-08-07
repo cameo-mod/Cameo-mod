@@ -841,7 +841,9 @@ WH40KTeleportHorrors:
 	Warhead@1Actor: SpawnActor
 		Actors: wh40kdemon, wh40kdemon, wh40kdemon, wh40kdemon, wh40kdemon, wh40kdemon, wh40kdemon, wh40kdemon
 WH40KHelltalonToxins:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	Range: 3072
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c0

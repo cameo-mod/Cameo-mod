@@ -2,7 +2,9 @@
 #		Tiberian Sun Ballisitc
 ####################################################################################################
 TASmokegrenade:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	Range: 7552
 	MinRange: 512
 	ReloadDelay: 210
@@ -30,7 +32,9 @@ TASmokegrenade:
 		ValidTargets: Structure
 		
 TAFlashbanggrenade:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	Range: 8576
 	MinRange: 512
 	ReloadDelay: 210

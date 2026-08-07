@@ -124,6 +124,11 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
      (`Flak_Medium+MissileHE_Medium`) plus the generic sweeps of
      effect-free dual pairs (13 + 3 + 1 = 17 weapons) converted and
      boot-gated. Total dual-inherit live weapons reduced by ~82.
+   - **Single-inherit sweep 2026-08-07:** 26 pure single-inherit effect-free
+     weapons (no `Inherits@2`/addons) across 15 files repointed to the 3-way
+     `wh/proj/fx` model. A broader attempt that included multi-addon `Steel`/
+     `RA2` weapons produced 46 empty-type warheads and was reverted before
+     boot. Strict single-inherit-only filter passed `find_empty_warhead.py = 0`.
    - **Effect-heavy clusters (flame/chemical/sonic/energy) are BLOCKED** until a `PhysicalState`/`GroundFire`/
      `EMP`/ExtraDamage-aware converter is built — see `docs/LESSONS_LEARNED.md` § "Effect-warhead merge safety".
      **Phase A progress (2026-08-02):** `tools/archive/retrofit_v3.py` repointed ~130 single-inherit

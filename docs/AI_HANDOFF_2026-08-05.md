@@ -404,5 +404,11 @@ template does not include `LaunchAngle`.
 A final effect-free dual `Grenade+RailgunWeapon` (`GlaveCanon`, StarCraft Protoss)
 was converted to `Demolition_Light+Railgun_Heavy`.
 
-Effect-heavy dual-inherit clusters (flame/chemical/sonic/energy/EMP) remain
-blocked until an effect-aware converter is built.
+### 14.8 Single-inherit effect-free sweep (2026-08-07)
+
+A conservative single-inherit converter repointed 26 pure single-inherit
+weapons (only one `Inherits:` tag, no other `Inherits@X` addons, and not
+starting with `^`) across 15 files. An initial overly-broad attempt that
+included multi-addon weapons produced 46 empty-type warheads and was
+reverted before boot. The stricter filter left zero empty warheads and
+passed the boot-gate.

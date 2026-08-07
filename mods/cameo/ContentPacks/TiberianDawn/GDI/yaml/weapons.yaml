@@ -38,12 +38,12 @@ HighV:
 		Damage: 1
 
 GrenadeExplode:
-	Inherits: Grenade
-	Warhead@Grenade: SpreadDamage
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
+	Warhead@Demolition_Light:
 		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 4
 
 RocketsAMT:

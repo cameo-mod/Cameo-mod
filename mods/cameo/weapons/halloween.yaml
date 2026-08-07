@@ -1,4 +1,4 @@
-﻿Halloween_ClownBalloon:
+Halloween_ClownBalloon:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 40
 	Range: 6144
@@ -32,7 +32,9 @@ Halloween_ClownHammer:
 		ImpactSounds: halloween_clown_hammer.wav
 
 Halloween_SmallRock:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ReloadDelay: 25
 	Range: 4096
 	Report: toss1.aud
@@ -41,7 +43,9 @@ Halloween_SmallRock:
 		Damage: 2500
 
 Halloween_BigRock:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ReloadDelay: 35
 	Range: 8192
 	Report: toss1.aud

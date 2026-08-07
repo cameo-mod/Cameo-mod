@@ -16,7 +16,9 @@ xmas_pickaxe:
 		DamageTypes: DefaultDeath
 
 xmas_grenade:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	Range: 7168
 	ReloadDelay: 60
 	Projectile: Bullet
