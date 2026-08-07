@@ -4113,9 +4113,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -4123,18 +4128,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5801",
       "reloaddelay": "30",
@@ -4144,6 +4149,7 @@
        "NaxiAlienPistol"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "UbermenschLaser",
@@ -4154,9 +4160,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -4164,18 +4175,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6801",
       "reloaddelay": "30",
@@ -4185,6 +4196,7 @@
        "UbermenschLaser"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "UbermenschLaser_elite",
@@ -4196,9 +4208,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -4206,18 +4223,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "5801",
       "reloaddelay": "30",
@@ -4227,6 +4244,7 @@
        "NaxiAlienPistol"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "UbermenschLaser",
@@ -4238,9 +4256,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -4248,18 +4271,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "6801",
       "reloaddelay": "30",
@@ -4269,6 +4292,7 @@
        "UbermenschLaser"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "UbermenschLaser_elite",
@@ -4279,9 +4303,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -4289,18 +4318,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5801",
       "reloaddelay": "30",
@@ -4310,6 +4339,7 @@
        "UbermenschLaser"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Lunar_YellowUbermenschLaser",
@@ -4320,9 +4350,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -4330,18 +4365,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6801",
       "reloaddelay": "30",
@@ -4351,6 +4386,7 @@
        "UbermenschLaser_elite"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Lunar_YellowUbermenschLaser_elite",
@@ -4362,9 +4398,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -4372,18 +4413,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "5801",
       "reloaddelay": "30",
@@ -4393,6 +4434,7 @@
        "UbermenschLaser"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Lunar_YellowUbermenschLaser",
@@ -4404,9 +4446,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -4414,18 +4461,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "6801",
       "reloaddelay": "30",
@@ -4435,6 +4482,7 @@
        "UbermenschLaser_elite"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Lunar_YellowUbermenschLaser_elite",
@@ -4445,9 +4493,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -4455,18 +4508,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5801",
       "reloaddelay": "30",
@@ -4476,6 +4529,7 @@
        "UbermenschLaser"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Lunar_AmplifiedUbermenschLaser",
@@ -4486,9 +4540,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -4496,18 +4555,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6801",
       "reloaddelay": "30",
@@ -4517,6 +4576,7 @@
        "UbermenschLaser_elite"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Lunar_AmplifiedUbermenschLaser_elite",
@@ -4528,9 +4588,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -4538,18 +4603,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "5801",
       "reloaddelay": "30",
@@ -4559,6 +4624,7 @@
        "UbermenschLaser"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Lunar_AmplifiedUbermenschLaser",
@@ -4570,9 +4636,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -4580,18 +4651,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "6801",
       "reloaddelay": "30",
@@ -4601,6 +4672,7 @@
        "UbermenschLaser_elite"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Lunar_AmplifiedUbermenschLaser_elite",
@@ -7016,39 +7088,37 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "4",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
       "requires": "!rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@upgraded",
       "versus_templates": [
-       "^TeslaWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
        "^RA2MediumCannon",
        "^LunarNaxisUpgradedCannons"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Lunar_Green105mm",
@@ -7060,28 +7130,23 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "4",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "50",
@@ -7091,6 +7156,7 @@
        "Lunar_Green105mm"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "Lunar_Green105mm_elite",

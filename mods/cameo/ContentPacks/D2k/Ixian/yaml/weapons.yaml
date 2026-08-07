@@ -962,8 +962,10 @@ d2kStormLasher:
 		Delay: 7
 
 D2K_ShockGun:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^RailgunWeapon
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Railgun_Heavy
+	Inherits@3: ^Projectile_Railgun_Heavy
+	Inherits@4: ^Effect_Railgun_Heavy
 	ReloadDelay: 100
 	Range: 7756
 	Report: bigggun1.aud
@@ -973,15 +975,15 @@ D2K_ShockGun:
 		DamageActorsInLine: false
 		BeamColor: 0088FFCC
 		BeamWidth: 100
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 20000
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage:
 		Damage: 10
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 20000
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
@@ -989,7 +991,7 @@ D2K_ShockGun:
 		Damage: 10000
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		Damage: 10
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
@@ -1093,23 +1095,25 @@ D2K_ShockGunInf:
 		Damage: 9
 
 D2K_StormGunInf:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^RailgunWeapon
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Railgun_Heavy
+	Inherits@3: ^Projectile_Railgun_Heavy
+	Inherits@4: ^Effect_Railgun_Heavy
 	ReloadDelay: 66
 	Range: 6275
 	Projectile: Railgun
 		BeamColor: 33FFEE
 		BeamWidth: 66
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Range: 0, 250, 500, 1000
 		Falloff: 100, 50, 25, 0
 		Damage: 12000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Spread: 1000
 		Damage: 6
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Range: 0, 250, 500, 1000
 		Falloff: 100, 50, 25, 0
@@ -1123,7 +1127,7 @@ D2K_StormGunInf:
 		Damage: 6000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		Spread: 1000
 		Damage: 6
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
@@ -1140,8 +1144,10 @@ D2K_StormGunInf:
 		ExplosionPalette: d2keffect
 
 D2K_StormGunCymek:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^RailgunWeapon
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Railgun_Heavy
+	Inherits@3: ^Projectile_Railgun_Heavy
+	Inherits@4: ^Effect_Railgun_Heavy
 	Range: 6787
 	ReloadDelay: 66
 	Burst: 2
@@ -1149,16 +1155,16 @@ D2K_StormGunCymek:
 	Projectile: Railgun
 		BeamColor: 33FFEE
 		BeamWidth: 66
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Range: 0, 250, 500, 1000
 		Falloff: 100, 50, 25, 0
 		Damage: 16000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Spread: 1000
 		Damage: 8
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Range: 0, 250, 500, 1000
 		Falloff: 100, 50, 25, 0
@@ -1172,7 +1178,7 @@ D2K_StormGunCymek:
 		Damage: 6000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		Spread: 1000
 		Damage: 8
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath

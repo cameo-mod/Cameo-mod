@@ -2494,97 +2494,77 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "6",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6275",
       "reloaddelay": "66",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^RailgunWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Railgun_Heavy"
+      ],
       "weapon": "D2K_StormGunInf",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "6",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6275",
       "reloaddelay": "66",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^RailgunWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Railgun_Heavy"
+      ],
       "weapon": "D2K_StormGunInf",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4894,49 +4874,39 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "8",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "16000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6787",
       "reloaddelay": "66",
       "slot": "Armament@Cannon",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^RailgunWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Railgun_Heavy"
+      ],
       "weapon": "D2K_StormGunCymek",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -5058,49 +5028,39 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "10",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "10000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7756",
       "reloaddelay": "100",
       "slot": "Armament@damage",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^RailgunWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Railgun_Heavy"
+      ],
       "weapon": "D2K_ShockGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5202,38 +5162,23 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "10",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "10000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7343",
       "reloaddelay": "100",
@@ -5241,9 +5186,12 @@
       "versus_templates": [
        "D2K_ShockGun"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Railgun_Heavy"
+      ],
       "weapon": "D2K_ShockGun2",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [

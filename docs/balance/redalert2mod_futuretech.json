@@ -5448,19 +5448,9 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "30000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "15",
@@ -5476,10 +5466,13 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^RailgunWeapon",
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy",
        "^RA2HeavyCannon"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "OrionRailgun",
@@ -5489,6 +5482,16 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
+        "damage": "15",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "60000",
         "tag": "RailgunWeapon",
         "type": "SpreadDamage"
@@ -5496,16 +5499,6 @@
        {
         "damage": "30",
         "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30",
-        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -5521,6 +5514,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "OrionRailgun_elite",

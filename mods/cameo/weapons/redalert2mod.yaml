@@ -1199,20 +1199,22 @@ NaxisBlackBombSmaller:
 		ImpactSounds: makoexplose.wav
 
 Lunar_Green105mm:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^RA2MediumCannon
-	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Projectile_Lightning_Heavy
+	Inherits@3: ^Effect_Tesla_Heavy
+	Inherits@4: ^RA2MediumCannon
+	Inherits@5: ^LunarNaxisUpgradedCannons
 	Range: 5000
 	ReloadDelay: 50
 	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 8000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 4000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		Damage: 4
 	Report: laser_cannon2_2.wav
 

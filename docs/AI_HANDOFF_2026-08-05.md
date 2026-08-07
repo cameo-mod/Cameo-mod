@@ -479,6 +479,12 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   TiberianDawn/Nod) converted to `Flame_Light + MissileAP_Medium`. The weapon
   keeps its local `Warhead@Effect` (`small_frag`) and inherits
   `^Projectile_Missile_Medium` because the missile side was the final `Inherits`.
+- **RailgunWeapon and/or TeslaWeapon** (`D2K_ShockGun`, `D2K_StormGunInf`,
+  `D2K_StormGunCymek` in D2k/Ixian, `OrionRailgun` in RedAlert2Mod/FutureTech,
+  `Lunar_Green105mm` in redalert2mod.yaml) converted to `^Warhead_Railgun_Heavy`,
+  `^Warhead_Tesla_Heavy`, `^Projectile_Railgun_Heavy` / `^Projectile_Lightning_Heavy`,
+  `^Effect_Railgun_Heavy` / `^Effect_Tesla_Heavy`. Custom `TeslaExtraDamage` and
+  similar non-template warheads were left untouched with their original type.
 - **Single TankDestroyerCannon** (`110mm_Gun`, `IxianCombatTankCannon`,
   `HeavyIxianCombatTankCannon` in D2k/Ixian, `TS70mmTur` in
   TiberianSun/Forgotten) converted to `^Warhead_CannonAP_Light`,

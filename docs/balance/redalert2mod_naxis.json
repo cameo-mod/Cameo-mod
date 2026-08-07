@@ -1951,9 +1951,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "8000",
@@ -1961,18 +1966,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "8000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "2777",
       "reloaddelay": "54",
@@ -1982,6 +1987,7 @@
        "Lunar_Green105mm"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "NaxiAlienPistol",
@@ -1992,9 +1998,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "8000",
@@ -2002,18 +2013,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "8000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "54",
@@ -2023,6 +2034,7 @@
        "NaxiAlienPistol"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "NaxiAlienPistol_elite",
@@ -2034,9 +2046,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "8000",
@@ -2044,18 +2061,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "8000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "2777",
       "reloaddelay": "54",
@@ -2065,6 +2082,7 @@
        "Lunar_Green105mm"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "NaxiAlienPistol",
@@ -2076,9 +2094,14 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "8000",
@@ -2086,18 +2109,18 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "8000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "CannonHE_Medium_Percentage",
+        "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "54",
@@ -2107,6 +2130,7 @@
        "NaxiAlienPistol"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "NaxiAlienPistol_elite",
