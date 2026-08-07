@@ -1054,24 +1054,22 @@ ZeroFighterArrowsEnergized:
 		Spread: 800
 
 JHindChainGun:
-	Inherits: ^Grenade
-	Inherits@2: ^Chaingun
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 8
 	Range: 3053
 	Report: gun13.aud
 	Projectile: Bullet
-		-LaunchAngle:
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 500
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -1165,8 +1163,10 @@ JHindPlasmaCannon:
 		Explosions: purple_plasma
 
 JHindArrows:
-	Inherits: ^MediumMissile
-	Inherits@2: ^ArrowWeapon
+	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@wh2: ^Warhead_Arrow_Light
+	Inherits@proj: ^Projectile_Arrow_Light
+	Inherits@fx: ^Effect_Arrow_Light
 	ReloadDelay: 128
 	Range: 3053
 	Report: dune2smalllaser.aud
@@ -1186,13 +1186,13 @@ JHindArrows:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium:
 		Damage: 32000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage:
 		Damage: 16
-	Warhead@ArrowWeapon: SpreadDamage
+	Warhead@Arrow_Light:
 		Damage: 32000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage:
 		Damage: 16
 	Warhead@Effect: CreateEffect
 		ValidRelationships: Neutral, Enemy

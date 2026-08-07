@@ -224,40 +224,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "32000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "16",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "32000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "16",
-        "tag": "ArrowWeaponPercentage",
+        "tag": "Arrow_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "128",
       "requires": "!japan_upgrade_energizedarrows",
       "slot": "Armament@Missiles",
       "versus_templates": [
-       "^MediumMissile",
-       "^ArrowWeapon"
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Arrow_Light",
+       "^Projectile_Arrow_Light",
+       "^Effect_Arrow_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Arrow_Light"
+      ],
       "weapon": "JHindArrows",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -292,13 +287,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
+        "damage": "16",
+        "tag": "MissileHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8",
-        "tag": "MediumMissilePercentage",
+        "damage": "16",
+        "tag": "Arrow_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -310,10 +305,20 @@
         "damage": "8",
         "tag": "ArrowWeaponPercentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "128",
@@ -324,9 +329,12 @@
        "^TeslaWeapon",
        "JHindArrows"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Arrow_Light"
+      ],
       "weapon": "JHindArrowsEnergized",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -436,45 +444,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "1000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "8",
       "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@ChainGun",
       "versus_templates": [
-       "^Grenade",
-       "^Chaingun"
+       "^Warhead_Demolition_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "JHindChainGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -484,33 +482,23 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "1000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
+        "damage": "1",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "500",
         "tag": "GrenadeFriendlyFire",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "8",
@@ -522,10 +510,12 @@
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy"
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_Demolition_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "JHindChainGunWaveforce",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -574,6 +564,16 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
+        "damage": "16",
+        "tag": "MissileHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16",
+        "tag": "Arrow_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "18000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
@@ -595,7 +595,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "1325",
       "pricing": true,
       "range": "6615",
@@ -605,9 +605,12 @@
       "versus_templates": [
        "JHindArrows"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Arrow_Light"
+      ],
       "weapon": "ZeroFighterArrows",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -644,13 +647,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
+        "damage": "16",
+        "tag": "MissileHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4",
-        "tag": "MediumMissilePercentage",
+        "damage": "16",
+        "tag": "Arrow_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -662,10 +665,20 @@
         "damage": "4",
         "tag": "ArrowWeaponPercentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "1325",
       "pricing": true,
       "range": "6615",
@@ -675,9 +688,12 @@
       "versus_templates": [
        "JHindArrowsEnergized"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Arrow_Light"
+      ],
       "weapon": "ZeroFighterArrowsEnergized",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "12",

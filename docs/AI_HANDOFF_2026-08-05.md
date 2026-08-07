@@ -354,7 +354,7 @@ Avoid flame/chemical/sonic/energy dual-warhead clusters until a `PhysicalState`/
 
 ### 14.5 Updated safest next targets
 
-- `Grenade + HeavyBomb` — `Demolition_Light + Demolition_Heavy` (no `PhysicalState`, but `Grenade` provides the projectile, `HeavyBomb` the heavy effect). **Done 2026-08-07:** `8Inch` (RA Shared) converted. Removal markers (`-Warhead@Effect2:` etc.) must be deleted if the new `^Effect_*` template no longer contains that key, otherwise boot fails with "no elements to remove".
+- `Grenade + HeavyBomb` — `Demolition_Light + Demolition_Heavy` (no `PhysicalState`, but `Grenade` provides the projectile, `HeavyBomb` the heavy effect). **Done 2026-08-07:** `8Inch` (RA Shared) converted. Removal markers (`-Warhead@Effect2:`, `-		-LaunchAngle:` etc.) must be deleted if the new `^Effect_*`/`^Projectile_*` template no longer contains that key, otherwise boot fails with "no elements to remove".
 - `Grenade + ShrapnelWeapon` — `Demolition_Light + Concussion_Medium`. **Done 2026-08-07:** `ArtilleryShell` (`weapons/tiberiandawn.yaml`) and `SpecterArtilleryShell` (TD Nod) converted. The converter now auto-strips `-Warhead@*` removal markers to avoid the same crash.
 - `MediumCannon + TankDestroyerCannon` — `CannonHE_Medium + CannonAP_Light`. **Done 2026-08-07:** `AlliedTankDestroyerCannon`, `SheridanCannon` (RA Allies) and `tkmturretcannon` (RA2Mod/TKM) converted.
 - `HeavyCannon + MediumCannon` — now done.
@@ -396,5 +396,11 @@ pairs in one pass, converting 13 weapons across 8 files:
 - `MediumCannon + MediumMissile` → `CannonHE_Medium + MissileHE_Medium` (1)
 
 All 13 were boot-gated with `find_empty_warhead.py = 0` and `extract_stats.py`.
+After the generic sweep, an additional 3 leftover effect-free pairs were
+converted (`Chaingun+Grenade`, `HeavyBomb+RailgunWeapon`, `ArrowWeapon+MediumMissile`).
+`JHindChainGun` required a manual fix: `-		-LaunchAngle:` nested under
+`Projectile: Bullet` had to be removed because the new `^Projectile_Bullet_Medium`
+template does not include `LaunchAngle`.
+
 Effect-heavy dual-inherit clusters (flame/chemical/sonic/energy/EMP) remain
 blocked until an effect-aware converter is built.

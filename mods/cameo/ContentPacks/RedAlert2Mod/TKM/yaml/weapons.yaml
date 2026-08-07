@@ -570,8 +570,10 @@ tkmstrykermg:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 t30shell:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	ReloadDelay: 80
 	Range: 22000
 	Report: t30cannon.wav
@@ -587,22 +589,20 @@ t30shell:
 		LaunchAngle: 50
 		MaximumLaunchSpeed: 125
 		Acceleration: 5
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 2
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Spread: 512
 		Damage: 40000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Spread: 512
 		Damage: 10
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_explosion
 		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav

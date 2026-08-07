@@ -6015,44 +6015,34 @@
      {
       "damage_warheads": [
        {
-        "damage": "40000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "40000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "10",
-        "tag": "RailgunWeaponPercentage",
+        "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "22000",
       "reloaddelay": "80",
       "slot": "Armament",
       "versus_templates": [
-       "^HeavyBomb",
-       "^RailgunWeapon"
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Railgun_Heavy"
+      ],
       "weapon": "t30shell",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
