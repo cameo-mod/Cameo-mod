@@ -1909,8 +1909,10 @@ DepthCharge:
 		Spread: 300
 
 8Inch:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^Grenade
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Light
 	ReloadDelay: 250
 	Range: 15000
 	MinRange: 3000
@@ -1927,20 +1929,14 @@ DepthCharge:
 		ContrailEndWidth: 1
 		ContrailStartColor: FF9933
 		ContrailEndColor: FFFFFF
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 40000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 20
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 40000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 20000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 20
-	-Warhead@Effect2:
-		Explosions: building
-		ImpactSounds: kaboom15.aud
-
 Stinger:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
