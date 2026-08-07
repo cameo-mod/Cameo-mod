@@ -6223,33 +6223,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -6261,13 +6246,19 @@
       "requires": "undeployed",
       "slot": "Armament",
       "versus_templates": [
-       "^HeavyCannon",
-       "^MediumCannon",
-       "^TankDestroyerCannon"
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_CannonAP_Light",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_CannonAP_Light"
+      ],
       "weapon": "SiegeTankCannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "deployed",

@@ -815,25 +815,27 @@ VultureGrenade:
 		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
 
 SiegeTankCannon:
-	Inherits: ^HeavyCannon
-	Inherits@2: ^MediumCannon
-	Inherits@3: ^TankDestroyerCannon
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@wh2: ^Warhead_CannonHE_Medium
+	Inherits@wh3: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
 	ReloadDelay: 37
 	Range: 6114
 	Report: TTaFir00.aud
 	Projectile: Bullet
 		Speed: 611
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 10000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 5
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage:
 		Damage: 5
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 10000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage:
 		Damage: 5
 
 SiegeTankSiegeCannon:
