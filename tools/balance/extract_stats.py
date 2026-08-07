@@ -187,7 +187,16 @@ _WEAPON_CLASS_IGNORE = {
 _UNMAPPED_WEAPON_TEMPLATES: set[str] = set()
 
 
-_MIX_ALLOWLIST = {"CombatTank", "SiegeTankSiegeCannon", "SiegeEngineCannon"}
+_MIX_ALLOWLIST = {
+    "CombatTank", "SiegeTankSiegeCannon", "SiegeEngineCannon",
+    # CABAL missile family (2026-08-05): deliberate two-theme x two-tier combos
+    # (Missile Light+Medium/Medium+Heavy combined with Demolition_Light +
+    # Concussion_Medium), up to 4 warhead inherits, per maintainer's
+    # "up to 4 warheads for two-theme combos" rule. See docs/LESSONS_LEARNED.md
+    # "Weapon 3-way split — effect/projectile pitfalls" (2026-08-05).
+    "CabalReaperMissiles", "CabalHeavyReaperMissiles", "CabalManticoreMissiles",
+    "CabalRocketCyborgRockets",
+}
 
 
 def weapon_class_from_types(types: list[str]) -> float | None:

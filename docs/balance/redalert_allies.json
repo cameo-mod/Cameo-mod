@@ -1527,38 +1527,43 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "8000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "48",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "RAVulcan",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -1567,38 +1572,43 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "8000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "6500",
       "reloaddelay": "48",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "RAVulcan",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4582,38 +4592,43 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5023",
       "reloaddelay": "58",
       "slot": "Armament@MG",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "SheridanVulcan",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -682,8 +682,10 @@ RashinanGun_upgrade:
 		Damage: 1
 
 RaiderGuns:
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 40
 	Burst: 4
 	BurstDelays: 2
@@ -691,16 +693,16 @@ RaiderGuns:
 	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -733,8 +735,10 @@ RaiderGuns_upgrade:
 		Damage: 1
 
 HMG_turret:
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 22
 	Burst: 4
 	BurstDelays: 2
@@ -742,16 +746,16 @@ HMG_turret:
 	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
 

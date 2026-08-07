@@ -667,21 +667,23 @@ APCGunAllies_AA:
 		ValidTargets: Air
 
 RAVulcan:
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 48
 	Burst: 5
 	BurstDelays: 3
 	Range: 6500
 	Report: gun13.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 8000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 ZeroFighterChainGun:
@@ -1970,20 +1972,22 @@ StingerCryo:
 		Range: 400
 
 JapanSpeedBoatGun:
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: Underwater, Submarine
 	ReloadDelay: 4
 	Range: 5750
 	Report: vgatlo5a.wav, vgatlo5b.wav
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 JapanSpeedBoatGunWaveforce:

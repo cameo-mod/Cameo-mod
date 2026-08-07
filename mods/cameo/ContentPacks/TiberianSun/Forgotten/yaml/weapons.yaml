@@ -1886,19 +1886,21 @@ TSMutShotgun:
 		Damage: 2
 
 TSMutVulcanTurret:
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 6
 	Range: 6272
 	Report: tsgun4.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 TSRaiderCarCannon:
@@ -1917,19 +1919,21 @@ TSRaiderCarCannon:
 		Damage: 2
 
 TSBowlerCannon:
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 5
 	Range: 6603
 	Report: chaingn1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 TSWaspClaw:
@@ -2075,19 +2079,21 @@ MutAPRifle:
 		Damage: 2
 
 TSSergGun:
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 8
 	Range: 5611
 	Report: cygun1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 8000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 8000
 		ValidTargets: Ground, Water
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water
 

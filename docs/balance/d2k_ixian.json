@@ -1155,39 +1155,44 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7394",
       "reloaddelay": "22",
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "HMG_turret",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -1200,22 +1205,12 @@
        },
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1227,20 +1222,10 @@
         "damage": "1",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7394",
       "reloaddelay": "33",
@@ -1254,10 +1239,12 @@
        "^HeavyMachineGunProjectile"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "HMG_turret_upgrade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -2176,39 +2163,44 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5475",
       "reloaddelay": "20",
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Chaingun",
-       "^SmallArms"
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light"
+      ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -2265,39 +2257,44 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "5475",
       "reloaddelay": "20",
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Chaingun",
-       "^SmallArms"
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light"
+      ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -4080,39 +4077,44 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "40",
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@Guns",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "RaiderGuns",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -4125,22 +4127,12 @@
        },
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -4152,20 +4144,10 @@
         "damage": "1",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "40",
@@ -4179,10 +4161,12 @@
        "^HeavyMachineGunProjectile"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "RaiderGuns_upgrade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

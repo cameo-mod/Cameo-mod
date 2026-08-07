@@ -4315,38 +4315,43 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4822",
       "reloaddelay": "11",
       "slot": "Armament",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "ra1_soviets_ak47conscript_rifle",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -4355,38 +4360,43 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "4822",
       "reloaddelay": "11",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "ra1_soviets_ak47conscript_rifle",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9064,38 +9074,43 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5454",
       "reloaddelay": "20",
       "slot": "Armament",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "BTRMachineGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -9103,27 +9118,27 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
@@ -9131,9 +9146,12 @@
       "versus_templates": [
        "BTRMachineGun"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "BTRMachineGun_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",

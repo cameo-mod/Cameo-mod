@@ -1927,39 +1927,44 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6809",
       "reloaddelay": "48",
       "requires": "!ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "TSVulcanGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",

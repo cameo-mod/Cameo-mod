@@ -1285,33 +1285,37 @@ D2K_Personal_Shield_Impact:
 		ValidTargets: PersonalShielded, PersonalShieldedSard, PersonalShieldedHeavy
 
 LMG:
-	Inherits: ^Chaingun
-	Inherits@2: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@wh2: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 20
 	Range: 4448
 	Report: gun11.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 light_inf_lmg:
-	Inherits: ^Chaingun
-	Inherits@2: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@wh2: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 20
 	Range: 5475
 	Report: gun11.aud
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 LMG_upgrade:
@@ -1512,8 +1516,10 @@ Fremen_RPG:
 
 	MinRange: 975
 HMG:
-	Inherits: ^Chaingun
-	Inherits@2: ^SmallArms
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@wh2: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 20
 	Range: 3072
 	Report: 20MMGUN1.WAV

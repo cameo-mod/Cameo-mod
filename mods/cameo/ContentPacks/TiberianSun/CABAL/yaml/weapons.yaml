@@ -407,18 +407,20 @@ CabalBerserkerBlades:
 		ValidTargets: Ground, Water
 
 CabalCyborgChaingun:
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	Report: cygun1.aud
 	ReloadDelay: 60
 	Range: 5800
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 10000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
@@ -426,20 +428,22 @@ CabalCyborgChaingun:
 		ValidTargets: Ground, Water, Air
 
 TSDevoutChainguns:
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	Report: cygun1.aud
 	ReloadDelay: 45
 	Burst: 2
 	BurstDelays: 3
 	Range: 6200
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 12000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 12000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@Effect: CreateEffect
 		Explosions: piffs

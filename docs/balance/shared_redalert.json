@@ -1665,39 +1665,44 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5750",
       "reloaddelay": "4",
       "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "JapanSpeedBoatGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -1708,27 +1713,27 @@
        },
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5750",
       "reloaddelay": "4",
@@ -1740,10 +1745,12 @@
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy"
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "JapanSpeedBoatGunWaveforce",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [

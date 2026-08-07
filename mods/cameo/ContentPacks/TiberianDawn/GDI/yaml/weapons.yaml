@@ -1280,21 +1280,23 @@ ExosuitRailgun:
 		Damage: 10
 
 OfficerMachineGun:
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 4
 	Range: 5596
 	Report: mgun11.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 8000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 8000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 
 OfficerMachineGunAP:
@@ -1894,8 +1896,10 @@ td_gdi_minigunner_minigun_ap:
 # SoundVolume 1/burst so the simultaneous shots aren't deafening.
 # TDShotgun stays for its vehicle/map users.
 td_gdi_shotgunner_shotgun:
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 70
 	Range: 3500
 	Burst: 5
@@ -1905,11 +1909,11 @@ td_gdi_shotgunner_shotgun:
 	SoundVolume: 0.2
 	Projectile: Bullet
 		Inaccuracy: 800
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1

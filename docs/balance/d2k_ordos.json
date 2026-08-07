@@ -2459,65 +2459,50 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5475",
       "reloaddelay": "20",
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Chaingun",
-       "^SmallArms"
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light"
+      ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
         "damage": "1",
         "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2542,7 +2527,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5475",
       "reloaddelay": "20",
@@ -2555,49 +2540,56 @@
        "light_inf_lmg"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy"
+       "^Warhead_Laser_Heavy",
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "light_inf_lmg_ordos_upgrade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
         "damage": "2000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "5475",
       "reloaddelay": "20",
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Chaingun",
-       "^SmallArms"
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light"
+      ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2605,26 +2597,6 @@
        {
         "damage": "1",
         "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2649,7 +2621,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5475",
       "reloaddelay": "20",
@@ -2662,10 +2634,12 @@
        "light_inf_lmg"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy"
+       "^Warhead_Laser_Heavy",
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light"
       ],
       "weapon": "light_inf_lmg_ordos_upgrade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -5513,39 +5487,44 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4857",
       "reloaddelay": "33",
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@damage",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "HMGstealth",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -5558,27 +5537,27 @@
        },
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4857",
       "reloaddelay": "33",
@@ -5591,10 +5570,12 @@
        "HMGstealth"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy"
+       "^Warhead_Laser_Heavy",
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "HMGstealth_upgrade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

@@ -2922,76 +2922,86 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "5",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "10000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "5",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5800",
       "reloaddelay": "60",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "CabalCyborgChaingun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
         "damage": "10000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "5",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "10000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "5",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "5800",
       "reloaddelay": "60",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "CabalCyborgChaingun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3045,38 +3055,43 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "6",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "12000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "6",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6200",
       "reloaddelay": "45",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "TSDevoutChainguns",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3085,38 +3100,43 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "6",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "12000",
-        "tag": "Chaingun",
+        "tag": "Bullet_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "6",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "6200",
       "reloaddelay": "45",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "TSDevoutChainguns",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5715,7 +5735,7 @@
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "CabalReaperMissiles",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "allowlist_mix"
      },
      {
       "burst": "2",
@@ -5763,7 +5783,7 @@
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "CabalReaperMissiles_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "allowlist_mix"
      },
      {
       "damage_warheads": [],
@@ -5889,7 +5909,7 @@
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "CabalHeavyReaperMissiles",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "allowlist_mix"
      },
      {
       "burst": "2",
@@ -5937,7 +5957,7 @@
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "CabalHeavyReaperMissiles_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "allowlist_mix"
      },
      {
       "damage_warheads": [],
@@ -6142,7 +6162,7 @@
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "CabalManticoreMissilesAA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "allowlist_mix"
      }
     ],
     "armor": {
