@@ -416,6 +416,13 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   `ParaBomb` (RedAlert/Shared). `Inherits@glow: ^ImpactGlow` on `ParaBomb`
   was preserved. No `Inherits@proj` was added because all three use
   `Projectile: GravityBomb` rather than the `Bullet` in `^Projectile_Flame_Heavy`.
+- **FlameWeapon + Missile** (light/medium/heavy) converted 7 weapons. Mapping:
+  `Light/MediumFlameWeapon -> Flame_Light/Medium`,
+  `Light/MediumMissile -> MissileAP_Light/Medium`,
+  `HeavyMissile -> MissileHE_Heavy`. `Projectile` inherited from the missile
+  side for true `Projectile: Missile` weapons; `SCUD` kept its `Bullet: V2`
+  and did not inherit `^Projectile_Missile_Heavy`. Local `Warhead@Effect`,
+  `EffectAir`, and `Smudge` overrides preserved.
 - **HeavyBomb + MediumFlameWeapon** (`Demolition_Heavy + Flame_Medium`) converted
   5 weapons across 3 files (`sandmarinemortar`, `bigshieemortar` and three
   others). `Inherits@proj` was set to `^Projectile_Flame_Medium` and the

@@ -457,6 +457,16 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Flame_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "16000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
@@ -475,50 +485,29 @@
         "damage": "8",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
-      "range": "5120",
-      "reloaddelay": "25",
+      "range": "6271",
+      "reloaddelay": "50",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
-       "ViperMissiles",
-       "^LightFlameWeapon",
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Flame_Light",
+       "ViperMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ViperMissilesFire",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -2120,45 +2109,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "damage": "9",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "18000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "9",
-        "tag": "LightMissilePercentage",
+        "damage": "2",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6214",
       "reloaddelay": "64",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Flame_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "tkmfirerockets",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2246,45 +2225,35 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "damage": "9",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "18000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "9",
-        "tag": "LightMissilePercentage",
+        "damage": "2",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6214",
       "reloaddelay": "64",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@GARRISONEDNATO",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Flame_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "tkmfirerockets",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4247,45 +4216,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "damage": "9",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "18000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "9",
-        "tag": "LightMissilePercentage",
+        "damage": "2",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6214",
       "reloaddelay": "64",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Flame_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "tkmfirerockets",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4678,6 +4637,16 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Flame_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "20",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
@@ -4686,57 +4655,46 @@
         "damage": "20",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
-      "range": "5120",
-      "reloaddelay": "25",
+      "range": "6464",
+      "reloaddelay": "129",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
-       "SandmarineTusk",
-       "^LightFlameWeapon",
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Flame_Light",
+       "SandmarineTusk"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "3",
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Flame_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "20",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
@@ -4745,51 +4703,30 @@
         "damage": "20",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
-      "range": "5120",
-      "reloaddelay": "25",
+      "range": "6464",
+      "reloaddelay": "129",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@SECONDARYTITAN",
       "versus_templates": [
-       "SandmarineTusk",
-       "^LightFlameWeapon",
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Flame_Light",
+       "SandmarineTusk"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -5626,6 +5563,16 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Flame_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "20",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
@@ -5634,57 +5581,46 @@
         "damage": "20",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
-      "range": "5120",
-      "reloaddelay": "25",
+      "range": "6464",
+      "reloaddelay": "129",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
-       "SandmarineTusk",
-       "^LightFlameWeapon",
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Flame_Light",
+       "SandmarineTusk"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "3",
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Flame_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "20",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
@@ -5693,51 +5629,30 @@
         "damage": "20",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
-      "range": "5120",
-      "reloaddelay": "25",
+      "range": "6464",
+      "reloaddelay": "129",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@SECONDARYTITAN",
       "versus_templates": [
-       "SandmarineTusk",
-       "^LightFlameWeapon",
-       "^LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Flame_Light",
+       "SandmarineTusk"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -5875,45 +5790,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "MediumFlameWeaponPercentage",
+        "damage": "12",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "24000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12",
-        "tag": "MediumMissilePercentage",
+        "damage": "3",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7880",
       "reloaddelay": "60",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@missilefire",
       "versus_templates": [
-       "^MediumFlameWeapon",
-       "^MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Flame_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Flame_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Flame_Medium"
+      ],
       "weapon": "tkmstrykerfirerockets",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6502,28 +6407,13 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "damage": "1",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "1000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightMissilePercentage",
+        "damage": "2",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6533,22 +6423,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "14000",
       "reloaddelay": "157",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^LightMissile",
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light",
+       "^Effect_Flame_Light",
        "tkmkatyushalalauncherrockets"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_Flame_Light",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "tkmkatyushalalauncherrocketsfire",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

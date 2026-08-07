@@ -2471,18 +2471,13 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "14000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "7",
+        "tag": "MissileHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "7",
-        "tag": "HeavyFlameWeaponPercentage",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2494,20 +2489,10 @@
         "damage": "7",
         "tag": "NuclearWarheadPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "14000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1580",
       "pricing": true,
       "range": "7890",
@@ -2515,13 +2500,18 @@
       "requires": "ra1_soviets_upgrade_highexplosiverockets",
       "slot": "Armament@HE",
       "versus_templates": [
-       "^HeavyFlameWeapon",
-       "^NuclearWarhead",
-       "^HeavyMissile"
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Missile_Heavy",
+       "^Effect_Flame_Heavy",
+       "^NuclearWarhead"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "ThermobaricNuclearMaverick",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
@@ -13563,33 +13553,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "60000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "60000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "HeavyFlameWeaponPercentage",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2822",
       "pricing": true,
       "range": "14110",
@@ -13597,18 +13572,32 @@
       "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_teslarockets",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^HeavyMissile",
-       "^HeavyFlameWeapon"
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_Flame_Heavy",
+       "^Effect_Flame_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "SCUD",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
         "damage": "20",
         "tag": "Demolition_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "MissileHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -13638,7 +13627,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "2822",
       "pricing": true,
       "range": "14110",
@@ -13651,16 +13640,28 @@
        "SCUD"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy"
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_Flame_Heavy"
       ],
       "weapon": "SCUDThermobaric",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
        {
         "damage": "15",
         "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "MissileHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -13695,7 +13696,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "2822",
       "pricing": true,
       "range": "14110",
@@ -13709,10 +13710,12 @@
        "SCUD"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy"
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_Flame_Heavy"
       ],
       "weapon": "SCUDTesla",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

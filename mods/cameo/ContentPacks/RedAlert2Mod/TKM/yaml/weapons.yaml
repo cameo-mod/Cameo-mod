@@ -134,18 +134,20 @@ tkmtwinrocketstechnicaltank:
 	Inherits: tkmtwinrockets
 	Range: 5243
 tkmfirerockets:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^LightMissile
+	Inherits: ^Warhead_MissileAP_Light
+	Inherits@2: ^Warhead_Flame_Light
+	Inherits@3: ^Projectile_Missile_Light
+	Inherits@4: ^Effect_Flame_Light
 	ReloadDelay: 64
 	Range: 6214
 	Report: bazook1.aud
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		Damage: 18000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage:
 		Damage: 9
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 4000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage:
 		Damage: 2
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
@@ -859,8 +861,9 @@ tkmkatyushalalauncherrocketscryo:
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpwasa.wav
 tkmkatyushalalauncherrocketsfire:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^LightMissile
+	Inherits: ^Warhead_MissileAP_Light
+	Inherits@2: ^Warhead_Flame_Light
+	Inherits@3: ^Effect_Flame_Light
 	Inherits@3: tkmkatyushalalauncherrockets
 	Report: vintatta.wav
 	Range: 14000
@@ -878,15 +881,11 @@ tkmkatyushalalauncherrocketsfire:
 		MaximumLaunchSpeed: 125
 		MinimumLaunchSpeed: 125
 		Acceleration: 5
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -995,22 +994,20 @@ SandmarineTuskCryo:
 	Inherits: SandmarineTusk
 	Inherits@2: ^CryoMissileProjectile
 SandmarineTuskFire:
+	Inherits: ^Warhead_MissileAP_Light
+	Inherits@2: ^Warhead_Flame_Light
+	Inherits@3: ^Projectile_Missile_Light
+	Inherits@4: ^Effect_Flame_Light
 	Inherits: SandmarineTusk
-	Inherits@2: ^LightFlameWeapon
-	Inherits@3: ^LightMissile
 	Projectile: Missile
 		TrailImage: fb2
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1056,22 +1053,20 @@ ViperMissilesCryo:
 	Inherits: ViperMissiles
 	Inherits@2: ^CryoMissileProjectile
 ViperMissilesFire:
+	Inherits: ^Warhead_MissileAP_Light
+	Inherits@2: ^Warhead_Flame_Light
+	Inherits@3: ^Projectile_Missile_Light
+	Inherits@4: ^Effect_Flame_Light
 	Inherits: ViperMissiles
-	Inherits@2: ^LightFlameWeapon
-	Inherits@3: ^LightMissile
 	Projectile: Missile
 		TrailImage: fb2
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1297,8 +1292,10 @@ tkm_trooper_gp25:
 		Damage: 3
 
 tkmstrykerfirerockets:
-	Inherits: ^MediumFlameWeapon
-	Inherits@2: ^MediumMissile
+	Inherits: ^Warhead_MissileAP_Medium
+	Inherits@2: ^Warhead_Flame_Medium
+	Inherits@3: ^Projectile_Missile_Medium
+	Inherits@4: ^Effect_Flame_Medium
 	ReloadDelay: 60
 	Range: 7880
 	Report: bazook1.aud
@@ -1306,16 +1303,16 @@ tkmstrykerfirerockets:
 	Projectile: Missile
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 24000
 		ValidTargets: Ground, Water, Trees, Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage:
 		Damage: 12
 		ValidTargets: Ground, Water, Trees, Air
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 6000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage:
 		Damage: 3
 		ValidTargets: Ground, Water, Air
 
