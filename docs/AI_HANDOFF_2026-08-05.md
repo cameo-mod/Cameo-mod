@@ -804,6 +804,25 @@ passed the boot-gate.
   `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
   `extract_stats.py` refreshed 32 ledgers.
 
+### 14.19 `FlakWeapon + Grenade` dual conversion (`6d90994a9`)
+
+- Converted 2 weapons in `ContentPacks/StarCraft/Protoss/yaml/weapons.yaml`:
+  `CorsairFlash` and `ScoutMG`.
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_Flak_Medium
+  Inherits@wh2: ^Warhead_Demolition_Light
+  Inherits@proj: ^Projectile_Flak_Medium
+  Inherits@fx: ^Effect_Flak_Medium
+  ```
+- `FlakWeapon` → `Flak_Medium`, `Grenade` → `Demolition_Light`. `_Percentage`
+  variants preserved. `^RA2Chaingun` and leftover `CannonHE_Heavy` /
+  `Bullet_Medium` warheads removed. Custom `Projectile` blue contrails and
+  `Warhead@Effect` (`steel_bluepiffs`) preserved.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` reached
+  `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
+  `extract_stats.py` refreshed `docs/balance/starcraft_protoss.json`.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
