@@ -1536,8 +1536,10 @@ RA2PSIAtomicDamage:
 ####################################################################################################
 
 RA2HornetMissile:
-	Inherits: ^Grenade
-	Inherits@2: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Demolition_Heavy
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@3: ^RA2MediumMissile
 	ReloadDelay: 3
 	Range: 5000
@@ -1550,19 +1552,16 @@ RA2HornetMissile:
 		ContrailLength: 25
 		ContrailStartWidth: 25
 		ContrailEndWidth: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium: AreaDamage
@@ -1571,8 +1570,6 @@ RA2HornetMissile:
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 
 RA2GIRockets:
 	Inherits: ^RA2LightMissile
@@ -3123,3 +3120,4 @@ RA2FlyingBody:
 		ExplosionPalette: ra2effect
 		ValidTargets: Ground
 		Delay: 0
+

@@ -675,6 +675,28 @@ passed the boot-gate.
 
 ---
 
+### 14.13 Re-attempted `Grenade + HeavyBomb` dual conversion (reverted)
+
+- Attempted 2026-08-08 on the `Grenade + HeavyBomb` dual cluster: `RA2HornetMissile`
+  (`weapons/redalert2.yaml` and `ContentPacks/RedAlert2/Shared`), `BlackEagleMissiles`
+  (`ContentPacks/RedAlert2/Allies`), `NaxiMissileUboat`
+  (`ContentPacks/RedAlert2Mod/Naxis`).
+- Wrote a conservative 2-family converter (`tools/balance/phase3_grenade_heavybomb.py`)
+  that produced `Inherits@wh: ^Warhead_Demolition_Light`,
+  `Inherits@wh2: ^Warhead_Demolition_Heavy`,
+  `Inherits@proj: ^Projectile_Grenade_Light`,
+  `Inherits@fx: ^Effect_Demolition_Heavy`, preserved `Inherits@3: ^RA2MediumMissile`,
+  renamed `Warhead@Grenade` / `@HeavyBomb` to `Demolition_Light` / `Demolition_Heavy`,
+  stripped `GrenadeFriendlyFire` twins and `-Warhead@...` removal markers.
+- `find_empty_warhead.py` passed (0) after conversion.
+- `launch-game.cmd` failed before the main menu with
+  `OpenRA.FieldLoader+MissingFieldsException: PhysicalStateName`
+  (`%APPDATA%\OpenRA\Logs\exception-2026-08-07T221200Z.log`). The crash occurs in
+  `WeaponInfo.LoadWarheads` on an `ApplyPhysicalState` node and is unrelated to the
+  four converted weapons.
+- YAMLS were reverted with `git checkout -- .`; no yaml committed. The converter was
+  left untracked for the next attempt.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)

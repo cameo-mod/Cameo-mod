@@ -1168,8 +1168,10 @@ NaxiAlienPistol_elite:
 	BurstDelays: 3
 
 NaxiMissileUboat:
-	Inherits: ^Grenade
-	Inherits@2: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Demolition_Heavy
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@3: ^RA2MediumMissile
 	ReloadDelay: 125
 	Burst: 2
@@ -1190,19 +1192,16 @@ NaxiMissileUboat:
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Acceleration: 10
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 8000
-		ValidTargets: Ground, Water, Air
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 8
 		ValidTargets: Ground, Water, Air
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 8
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium:
@@ -1254,3 +1253,4 @@ NaxisSarubianTarget:
 	MinRange: 1560
 	Projectile: InstantHit
 		Inaccuracy: 1000
+
