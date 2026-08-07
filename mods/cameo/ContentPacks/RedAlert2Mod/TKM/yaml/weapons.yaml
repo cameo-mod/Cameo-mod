@@ -716,8 +716,10 @@ HueyTwinMissiles:
 		ValidTargets: Ground, Ship
 		ImpactActors: false
 sandmarinemortar:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^MediumFlameWeapon
+	Inherits: ^Warhead_Demolition_Heavy
+	Inherits@2: ^Warhead_Flame_Medium
+	Inherits@3: ^Projectile_Flame_Medium
+	Inherits@4: ^Effect_Flame_Medium
 	ReloadDelay: 135
 	Range: 6464
 	Report: t30cannon.wav
@@ -731,30 +733,28 @@ sandmarinemortar:
 		ContrailEndWidth: 15
 		ContrailStartColor: FEDCBA98
 		ContrailEndColor: 87654321
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 120000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 60
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 120000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 60000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage:
 		Damage: 60
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 120000
 	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 60000
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_explosion
 		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 bigshieemortar:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^MediumFlameWeapon
+	Inherits: ^Warhead_Demolition_Heavy
+	Inherits@2: ^Warhead_Flame_Medium
+	Inherits@3: ^Projectile_Flame_Medium
+	Inherits@4: ^Effect_Flame_Medium
 	ReloadDelay: 86
 	Range: 7238
 	Report: t30cannon.wav
@@ -768,24 +768,20 @@ bigshieemortar:
 		ContrailEndWidth: 15
 		ContrailStartColor: FEDCBA98
 		ContrailEndColor: 87654321
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 80000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 40
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium:
 		Damage: 80000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 40000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage:
 		Damage: 40
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 80000
 	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 40000
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_explosion
 		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav

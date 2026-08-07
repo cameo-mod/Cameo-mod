@@ -1450,8 +1450,10 @@ LatinBuggyRocket_elite:
 		Delay: 23
 
 12MissilesSpawnerScud:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^MediumFlameWeapon
+	Inherits: ^Warhead_Demolition_Heavy
+	Inherits@2: ^Warhead_Flame_Medium
+	Inherits@3: ^Projectile_Flame_Medium
+	Inherits@4: ^Effect_Flame_Medium
 	Inherits@3: ^RA2Grenade
 	Inherits@4: ^RA2HeavyMissile
 	Report: vaegatta.wav, vaegattb.wav
@@ -1468,11 +1470,11 @@ LatinBuggyRocket_elite:
 		TrailDelay: 0
 		TrailInterval: 2
 		SkipAscent: true
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		Spread: 4000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		Spread: 4000
@@ -1484,15 +1486,11 @@ LatinBuggyRocket_elite:
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		Spread: 8000
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		Spread: 2000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
-		Spread: 1000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		Spread: 2000

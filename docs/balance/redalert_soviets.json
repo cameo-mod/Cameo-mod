@@ -9912,28 +9912,13 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "MediumFlameWeaponPercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -9948,23 +9933,27 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6825",
       "reloaddelay": "85",
       "requires": "ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^HeavyBomb",
-       "^MediumFlameWeapon",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium",
        "HammerTankCannon"
       ],
       "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Flame_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "HammerTankCannonThermobaric",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -10718,28 +10707,13 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "MediumFlameWeaponPercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -10754,23 +10728,27 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6427",
       "reloaddelay": "96",
       "requires": "ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^HeavyBomb",
-       "^MediumFlameWeapon",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium",
        "KotinCannon"
       ],
       "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Flame_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "KotinCannonThermobaric",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

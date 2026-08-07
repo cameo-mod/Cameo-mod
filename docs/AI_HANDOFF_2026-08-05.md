@@ -416,6 +416,10 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   `ParaBomb` (RedAlert/Shared). `Inherits@glow: ^ImpactGlow` on `ParaBomb`
   was preserved. No `Inherits@proj` was added because all three use
   `Projectile: GravityBomb` rather than the `Bullet` in `^Projectile_Flame_Heavy`.
+- **HeavyBomb + MediumFlameWeapon** (`Demolition_Heavy + Flame_Medium`) converted
+  5 weapons across 3 files (`sandmarinemortar`, `bigshieemortar` and three
+  others). `Inherits@proj` was set to `^Projectile_Flame_Medium` and the
+  weapons override `Speed`/`Inaccuracy`/`LaunchAngle` locally.
 
 ### 14.8 Single-inherit effect-free sweep (2026-08-07)
 
