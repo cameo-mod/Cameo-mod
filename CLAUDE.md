@@ -1,5 +1,42 @@
 # Cameo-mod
 
+## ⚡ START HERE — read before acting (the rest of this file is the full contract)
+
+**Don't trust, verify.** Before asserting anything is done / pending / blocked / missing,
+check the artifact itself — grep the data, `ls` the file (incl. `~/Downloads`), run the tool,
+boot-gate the tree. When a summary (ROADMAP line, handoff, memory, status table) disagrees with
+the artifact, **the artifact wins — then fix the stale summary.**
+
+**Must-read, in order:** this file → `docs/LESSONS_LEARNED.md` → `docs/AGENT_WORKSPACE.md` →
+`docs/design/ROADMAP.md` → `docs/design/BALANCE_PIPELINE_ESTIMATE.md`. For weapon work also:
+`docs/AI_HANDOFF_2026-08-05.md`, `docs/design/AREADAMAGE_HANDOFF.md`, `docs/design/WEAPON_3WAY_SPLIT.md`.
+
+**Ten hard rules** (rules 1–2 are enforced by hooks in `.claude/settings.json`):
+1. **Boot-gate every commit** of engine content — `launch-game.cmd` must reach the main menu
+   (`perf.log` ends `MenuPostProcessEffect.PostWorldLoaded`, no new `exception-*.log`). Snapshot the
+   log list + cutoff BEFORE launching; menu-proof is grepping `perf.log`, not its last line.
+2. **Scoped `git add <files>` only — never `-A` / `.` / `--all`.** The maintainer + Devin have live WIP.
+3. **Never hand-edit a balance number** — use the pipeline (`extract_stats` → ledger →
+   `apply_balance --confirm`; `--confirm` needs a maintainer order).
+4. **`Versus` lives ONLY in `^Warhead_*` templates.** Never change a warhead / `Burst` / `BurstDelays`
+   without explicit permission.
+5. **Weapon 3-way split:** preserve resolved behaviour (`Damage` verbatim, projectile fields — the
+   Frankenstein merge), `find_empty_warhead.py = 0`, boot-gate per batch. Verify a conversion with
+   `tools/audit/review_resolve_diff.py` (before/after resolve).
+6. **Multi-agent tree** (maintainer / Devin / you): **one owner per file-set.** Check a file's mtime
+   for a live agent before editing; re-verify others' commits before building on them; never
+   `git checkout -- .` or wide-add someone else's WIP.
+7. **Rebuild C# before boot** if `OpenRA.Mods.Cameo/` or `engine/` changed
+   (`DOTNET_ROLL_FORWARD=LatestMajor dotnet build -c Release --nologo -p:TargetPlatform=win-x64` → `engine/bin`).
+8. **Audit reports regenerate via `bash tools/audit/run_all.sh` only** (PowerShell `>` writes UTF-16).
+9. **Underscore-only naming** — no hyphens in ids / files / fluent keys.
+10. **Commit messages end with:** `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`
+
+**Work queue:** `docs/design/ROADMAP.md` (crashes jump the queue). **Effort estimate for the whole
+balance program:** `docs/design/BALANCE_PIPELINE_ESTIMATE.md`.
+
+---
+
 ## Mission & end goal (never lose sight of this)
 
 Cameo is the ultimate crossover RTS between the classic RTS games and will
