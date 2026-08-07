@@ -1105,8 +1105,8 @@ JHindCannon:
 		Damage: 4
 
 JHindPlasmaCannon:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^MediumMissile
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_MissileAP_Medium
 	Inherits@3: JHindCannon
 	Projectile: Bullet
 		Speed: 610
@@ -1115,7 +1115,7 @@ JHindPlasmaCannon:
 		ContrailWidth: 200
 		ContrailLength: 10
 		Width: 40
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1123,15 +1123,15 @@ JHindPlasmaCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla

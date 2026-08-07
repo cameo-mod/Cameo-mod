@@ -372,28 +372,13 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -405,6 +390,11 @@
         "damage": "2",
         "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        },
        {
         "damage": "4000",
@@ -423,23 +413,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "32",
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@CannonUpgrade",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^MediumMissile",
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_MissileAP_Medium",
        "JHindCannon"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "JHindPlasmaCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [

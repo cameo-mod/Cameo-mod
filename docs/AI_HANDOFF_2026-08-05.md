@@ -433,6 +433,11 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   TiberianDawn/Nod) converted to `Flame_Light + MissileAP_Medium`. The weapon
   keeps its local `Warhead@Effect` (`small_frag`) and inherits
   `^Projectile_Missile_Medium` because the missile side was the final `Inherits`.
+- **TeslaWeapon + MediumMissile** (`JHindPlasmaCannon` in RedAlert/Japan)
+  converted to `Tesla_Heavy + MissileAP_Medium` while keeping the `JHindCannon`
+  custom inherit. `Warhead@ShrapnelWeapon` and `Warhead@TeslaExtraDamage` kept
+  as standalone `SpreadDamage` nodes; the `JHindCannon` addon supplies the
+  `Projectile` and `Effect`.
 - **TeslaWeapon + RailgunWeapon** (`WaveArtilleryImpact` in RedAlert/Japan)
   converted to `Tesla_Heavy + Railgun_Heavy` with `^Effect_Railgun_Heavy` and
   `Projectile: InstantHit` preserved. `Warhead@TeslaExtraDamage` kept as a
