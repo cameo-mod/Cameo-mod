@@ -479,6 +479,11 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   TiberianDawn/Nod) converted to `Flame_Light + MissileAP_Medium`. The weapon
   keeps its local `Warhead@Effect` (`small_frag`) and inherits
   `^Projectile_Missile_Medium` because the missile side was the final `Inherits`.
+- **Single ArrowWeapon** (`RA2HoverMissile` in `weapons/redalert2.yaml`
+  and `ContentPacks/RedAlert2/Shared`, `Future_MultiMissile` in
+  RedAlert2Mod/FutureTech) converted to `^Warhead_Arrow_Light` while
+  keeping the `^RA2LightMissile` addon. No generic `^Projectile_Arrow_Light`
+  was added because the addon supplies the missile projectile and effect.
 - **SmallArms and/or Chaingun** (14 weapons across 8 files) converted
   to `Bullet_Light` / `Bullet_Medium`. Weapons with `^RA2Chaingun`,
   `^HeavyMachineGunProjectile`, `^D2KMissile` and similar addon inherits

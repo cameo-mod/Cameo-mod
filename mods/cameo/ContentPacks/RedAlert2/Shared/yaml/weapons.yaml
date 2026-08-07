@@ -348,7 +348,7 @@ RA2MirageGun:
 		-ImpactSounds:
 
 RA2HoverMissile:
-	Inherits: ^ArrowWeapon
+	Inherits: ^Warhead_Arrow_Light
 	Inherits@2: ^RA2LightMissile
 	Range: 5760
 	ReloadDelay: 28
@@ -356,11 +356,11 @@ RA2HoverMissile:
 	BurstDelays: 4
 	Report: vifvatta.wav
 	ValidTargets: Ground, Water
-	Warhead@ArrowWeapon: SpreadDamage
+	Warhead@Arrow_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath

@@ -538,16 +538,16 @@ Future_CoilerFriendFrag2:
 		Amount: 1
 
 Future_MultiMissile:
-	Inherits: ^ArrowWeapon
+	Inherits: ^Warhead_Arrow_Light
 	Inherits@2: ^RA2LightMissile
 	ReloadDelay: 24
 	Burst: 3
 	BurstDelays: 4
 	Range: 7410
 	Report: vifvatta.wav
-	Warhead@ArrowWeapon: SpreadDamage
+	Warhead@Arrow_Light:
 		Damage: 4000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage:
 		Damage: 2
 	Warhead@MissileAP_Light:
 		Damage: 4000

@@ -1196,13 +1196,8 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ArrowWeaponPercentage",
+        "tag": "Arrow_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1219,10 +1214,11 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono && !ifv-spy && !ifv-thief",
       "slot": "Armament@primary",
       "versus_templates": [
-       "^ArrowWeapon",
+       "^Warhead_Arrow_Light",
        "^RA2LightMissile"
       ],
       "warheads": [
+       "^Warhead_Arrow_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "Future_MultiMissile",
@@ -7079,13 +7075,8 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "ArrowWeaponPercentage",
+        "tag": "Arrow_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7102,10 +7093,11 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primary",
       "versus_templates": [
-       "^ArrowWeapon",
+       "^Warhead_Arrow_Light",
        "^RA2LightMissile"
       ],
       "warheads": [
+       "^Warhead_Arrow_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile",
@@ -7117,13 +7109,8 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "ArrowWeaponPercentage",
+        "tag": "Arrow_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7143,6 +7130,7 @@
        "RA2HoverMissile"
       ],
       "warheads": [
+       "^Warhead_Arrow_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_elite",
@@ -7154,13 +7142,8 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "ArrowWeaponPercentage",
+        "tag": "Arrow_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7180,6 +7163,7 @@
        "RA2HoverMissile"
       ],
       "warheads": [
+       "^Warhead_Arrow_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA",
@@ -7191,13 +7175,8 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "ArrowWeaponPercentage",
+        "tag": "Arrow_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7217,6 +7196,7 @@
        "RA2HoverMissile_elite"
       ],
       "warheads": [
+       "^Warhead_Arrow_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
