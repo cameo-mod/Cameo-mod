@@ -4590,44 +4590,24 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "2",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -4638,13 +4618,19 @@
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^RailgunWeapon",
-       "^HeavyCannon"
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "Type97PlasmaCannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -6745,44 +6731,24 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -6793,13 +6759,19 @@
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^RailgunWeapon",
-       "^HeavyCannon"
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "OIBigPlasmaCannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [

@@ -1581,9 +1581,11 @@ Type97Cannon:
 		ImpactSounds: xplosml2.aud
 
 Type97PlasmaCannon:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^RailgunWeapon
-	Inherits@3: ^HeavyCannon
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Railgun_Heavy
+	Inherits@3: ^Warhead_CannonHE_Heavy
+	Inherits@4: ^Projectile_Shell_Heavy
+	Inherits@5: ^Effect_CannonHE_Heavy
 	ReloadDelay: 56
 	Range: 5692
 	Report: WaveforceCannon.wav
@@ -1594,25 +1596,25 @@ Type97PlasmaCannon:
 		ContrailWidth: 250
 		ContrailLength: 15
 		Width: 50
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage:
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
@@ -1831,9 +1833,11 @@ OIBigCannon:
 		ImpactSounds: xplosml2.aud
 
 OIBigPlasmaCannon:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^RailgunWeapon
-	Inherits@3: ^HeavyCannon
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Railgun_Heavy
+	Inherits@3: ^Warhead_CannonHE_Heavy
+	Inherits@4: ^Projectile_Shell_Heavy
+	Inherits@5: ^Effect_CannonHE_Heavy
 	ReloadDelay: 55
 	Range: 5394
 	Report: tank5.aud
@@ -1844,25 +1848,25 @@ OIBigPlasmaCannon:
 		ContrailWidth: 300
 		ContrailLength: 15
 		Width: 60
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy:
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage:
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect

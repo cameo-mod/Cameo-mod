@@ -438,6 +438,11 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   custom inherit. `Warhead@ShrapnelWeapon` and `Warhead@TeslaExtraDamage` kept
   as standalone `SpreadDamage` nodes; the `JHindCannon` addon supplies the
   `Projectile` and `Effect`.
+- **Tesla + Railgun + HeavyCannon** (`OIBigPlasmaCannon` and
+  `Type97PlasmaCannon` in RedAlert/Japan) converted to
+  `Tesla_Heavy + Railgun_Heavy + CannonHE_Heavy` with `^Effect_CannonHE_Heavy`
+  and `^Projectile_Shell_Heavy` (corrected from a first-attempt typo
+  `^Projectile_CannonHE_Heavy`, which does not exist).
 - **TeslaWeapon + RailgunWeapon** (`WaveArtilleryImpact` in RedAlert/Japan)
   converted to `Tesla_Heavy + Railgun_Heavy` with `^Effect_Railgun_Heavy` and
   `Projectile: InstantHit` preserved. `Warhead@TeslaExtraDamage` kept as a
