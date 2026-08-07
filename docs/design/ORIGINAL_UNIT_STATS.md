@@ -696,8 +696,8 @@ us place a borrowed unit correctly instead of guessing, and lets us decide a fac
 | **Dawn of the Tiberium Age** | **TS engine** (HP & vs-armor ×10) | TD+RA1 crossover peer | ✅ **done** — Classic + Enhanced `[STAT ÷10]` |
 | **Combined Arms** (OpenRA) | **Cameo's exact engine** | direct crossover peer — *own power level, normalize* | ✅ **done** — de-homogenizes by role `[STAT peer]` |
 | **Shattered Paradise** (OpenRA) | **Cameo's exact engine** | TS-era peer (GDI/Nod/CABAL/Scrin/Mutant) | ✅ **done** — by role + faction `[STAT peer]` |
-| **CnC Reloaded 2.7.0** | Ares (RA2 **+ TS** combined) | RA2 **and** TS synthesis | ⏳ TODO — loose `Tools/Map Editor/rulesmd.ini` `[STAT]` |
-| **Romanov's Vengeance** | OpenRA (RA2 remake) | RA2 synthesis | ⏳ TODO — `mods/rv/rules` + `mods/rv/weapons` `[STAT]` |
+| **CnC Reloaded 2.7.0** | Ares (RA2 **+ TS** combined) | RA2 **and** TS synthesis | ✅ **done** — 325 units in `ORIGINAL_UNITS_RAW.md` (§CnC Reloaded), from `Downloads/CnCReloaded-2.7.0/Tools/Map Editor/rulesmd.ini` `[STAT]` |
+| **Romanov's Vengeance** | OpenRA (RA2 remake) | RA2 synthesis | ✅ **done** — 208 units in `ORIGINAL_UNITS_RAW.md` (§Romanov's Veng.), from `Downloads/Romanovs-Vengeance-master/mods/rv/rules`+`weapons` `[STAT]`. Remember: RV is a faithful remake → weight {vanilla+RV} as ~one vote |
 
 ## Identity / playstyle stubs (safe from lore + design knowledge; exact stats pending web)
 
