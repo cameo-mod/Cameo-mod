@@ -372,3 +372,6 @@ Avoid flame/chemical/sonic/energy dual-warhead clusters until a `PhysicalState`/
   (TiberianDawn GDI), `TSMutApcCannon` (TS Forgotten), `TSAAPCCannon`
   (TS GDI), plus one additional in `mods/cameo/weapons/tiberiansun.yaml`.
   `Inherits@proj`/`Inherits@fx` follow the last listed old inherit.
+- `SmallArms + FlakWeapon` → `Bullet_Light + Flak_Medium`:
+  3 weapons (RA Japan, RA2Mod/TKM). `Inherits@proj`/`Inherits@fx`
+  follow the last listed old inherit.

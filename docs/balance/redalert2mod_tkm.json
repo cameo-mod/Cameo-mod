@@ -5163,65 +5163,50 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5253",
       "reloaddelay": "10",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^SmallArms",
-       "^FlakWeapon"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Flak_Medium"
+      ],
       "weapon": "TKMQuadCannonAG",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7880",
       "reloaddelay": "10",
@@ -5229,9 +5214,12 @@
       "versus_templates": [
        "TKMQuadCannonAG"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Flak_Medium"
+      ],
       "weapon": "TKMQuadCannonAA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6814,65 +6802,50 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5284",
       "reloaddelay": "8",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^SmallArms",
-       "^FlakWeapon"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Flak_Medium"
+      ],
       "weapon": "TKMZazaCannonAG",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7926",
       "reloaddelay": "8",
@@ -6880,9 +6853,12 @@
       "versus_templates": [
        "TKMZazaCannonAG"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Flak_Medium"
+      ],
       "weapon": "TKMZazaCannonAA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -6208,40 +6208,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4876",
       "reloaddelay": "8",
       "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@flak",
       "versus_templates": [
-       "^SmallArms",
-       "^FlakWeapon"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Flak_Medium"
+      ],
       "weapon": "JapaneseHovercraftFlak",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -6251,28 +6246,18 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4876",
       "reloaddelay": "8",
@@ -6284,36 +6269,28 @@
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy"
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_Bullet_Light",
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "JapaneseHovercraftFlakWaveforce",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7314",
       "reloaddelay": "8",
@@ -6322,9 +6299,12 @@
       "versus_templates": [
        "JapaneseHovercraftFlak"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Flak_Medium"
+      ],
       "weapon": "JapaneseHovercraftFlakAA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -6334,28 +6314,18 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7314",
       "reloaddelay": "8",
@@ -6367,10 +6337,12 @@
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy"
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_Bullet_Light",
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "JapaneseHovercraftFlakAAkWaveforce",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

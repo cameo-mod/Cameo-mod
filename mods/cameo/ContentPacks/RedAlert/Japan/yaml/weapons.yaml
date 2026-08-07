@@ -1461,22 +1461,24 @@ HovercraftPlasmaCannon:
 		Explosions: blue_building
 
 JapaneseHovercraftFlak:
-	Inherits: ^SmallArms
-	Inherits@2: ^FlakWeapon
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ReloadDelay: 8
 	Range: 4876
 	Report: gun20.aud
 	ValidTargets: Ground, Water
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 1
 
