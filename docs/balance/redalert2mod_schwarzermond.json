@@ -67,28 +67,13 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -98,22 +83,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1600",
       "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [
-       "^Grenade",
-       "^HeavyMissile",
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
+       "^Effect_MissileAP_Heavy",
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxCorrosionRocket",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -419,28 +407,13 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -450,22 +423,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "66",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Grenade",
-       "^HeavyMissile",
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
+       "^Effect_MissileAP_Heavy",
        "^RA2FlakWeapon"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "NaxHaenebuQuadCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -473,28 +449,13 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -504,7 +465,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "66",
@@ -514,10 +475,12 @@
        "NaxHaenebuQuadCannon"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "NaxHaenebuQuadCannon_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -567,28 +530,13 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -598,22 +546,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "66",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Grenade",
-       "^HeavyMissile",
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
+       "^Effect_MissileAP_Heavy",
        "^RA2FlakWeapon"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "NaxHaenebuQuadCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -621,28 +572,13 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -652,7 +588,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "66",
@@ -662,10 +598,12 @@
        "NaxHaenebuQuadCannon"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "NaxHaenebuQuadCannon_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "secondary",
@@ -2595,6 +2533,21 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "1",
+        "tag": "Concussion_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "4000",
         "tag": "Grenade",
         "type": "SpreadDamage"
@@ -2618,15 +2571,10 @@
         "damage": "2",
         "tag": "HeavyMissilePercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1210",
       "pricing": true,
       "range": "6055",
@@ -2637,15 +2585,32 @@
        "NaxCorrosionRocket"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxCorrosionRocketTrooper_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "1",
       "burstdelays": "2",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Concussion_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -2670,15 +2635,10 @@
         "damage": "2",
         "tag": "HeavyMissilePercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1210",
       "pricing": true,
       "range": "6055",
@@ -2689,16 +2649,33 @@
        "NaxCorrosionRocket"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxCorrosionRocketTrooper_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
       "burst": "1",
       "burstdelays": "2",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Concussion_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -2723,15 +2700,10 @@
         "damage": "2",
         "tag": "HeavyMissilePercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1210",
       "pricing": false,
       "range": "6055",
@@ -2742,16 +2714,33 @@
        "NaxCorrosionRocket"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxCorrosionRocketTrooper_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
       "burst": "1",
       "burstdelays": "2",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "tag": "Concussion_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MissileAP_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
        {
         "damage": "4000",
         "tag": "Grenade",
@@ -2776,15 +2765,10 @@
         "damage": "2",
         "tag": "HeavyMissilePercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1210",
       "pricing": false,
       "range": "6055",
@@ -2795,10 +2779,12 @@
        "NaxCorrosionRocket"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxCorrosionRocketTrooper_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -5785,28 +5771,13 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -5816,7 +5787,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1595",
       "pricing": true,
       "range": "7984",
@@ -5827,38 +5798,25 @@
        "NaxCorrosionRocket"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxCorrosionBeast",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "16",
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -5868,7 +5826,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1595",
       "pricing": true,
       "range": "8984",
@@ -5879,10 +5837,12 @@
        "NaxCorrosionBeast"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxCorrosionBeast_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

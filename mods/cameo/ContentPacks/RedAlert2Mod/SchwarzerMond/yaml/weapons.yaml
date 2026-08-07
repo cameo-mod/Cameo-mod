@@ -285,9 +285,10 @@ LunarTigerCannon_elite:
 	BurstDelays: 3
 
 NaxHaenebuQuadCannon:
-	Inherits: ^Grenade
-	Inherits@2: ^HeavyMissile
-	Inherits@3: ^RA2FlakWeapon
+	Inherits: ^Warhead_Concussion_Light
+	Inherits@2: ^Warhead_MissileAP_Heavy
+	Inherits@3: ^Effect_MissileAP_Heavy
+	Inherits@4: ^RA2FlakWeapon
 	ReloadDelay: 66
 	Range: 6666
 	Burst: 6
@@ -304,19 +305,16 @@ NaxHaenebuQuadCannon:
 		Speed: 6000
 		Width: 50
 		Inaccuracy: 666
-	Warhead@Grenade: SpreadDamage
+	Warhead@Concussion_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Concussion_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Flak_Medium:
@@ -520,9 +518,10 @@ BlackHoleSuck:
 		ImpactSounds: nax_bh_slurp_01.wav, nax_bh_slurp_02.wav, nax_bh_slurp_03.wav
 
 NaxCorrosionRocket:
-	Inherits: ^Grenade
-	Inherits@2: ^HeavyMissile
-	Inherits@3: ^RA2MediumMissile
+	Inherits: ^Warhead_Concussion_Light
+	Inherits@2: ^Warhead_MissileAP_Heavy
+	Inherits@3: ^Effect_MissileAP_Heavy
+	Inherits@4: ^RA2MediumMissile
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 2
@@ -540,23 +539,19 @@ NaxCorrosionRocket:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@Grenade: SpreadDamage
+	Warhead@Concussion_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-		ValidRelationships: Neutral, Enemy
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Concussion_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy

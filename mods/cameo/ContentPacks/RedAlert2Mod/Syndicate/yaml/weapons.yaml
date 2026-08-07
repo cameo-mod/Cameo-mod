@@ -683,9 +683,10 @@ LatinSmokerCannon_elite:
 	BurstDelays: 3
 
 RA2GrenadePack:
-	Inherits: ^HeavyMissile
-	Inherits@2: ^Grenade
-	Inherits@3: ^RA2FlakWeapon
+	Inherits: ^Warhead_MissileAP_Heavy
+	Inherits@2: ^Warhead_Concussion_Light
+	Inherits@3: ^Effect_Concussion_Light
+	Inherits@4: ^RA2FlakWeapon
 	Report: vflaat1a.wav, vflaat1b.wav
 	ValidTargets: blindable
 	InvalidTargets: Air
@@ -698,19 +699,16 @@ RA2GrenadePack:
 		Speed: 655
 		LaunchAngle: 65
 		Inaccuracy: 655
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Concussion_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Concussion_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Flak_Medium:

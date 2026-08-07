@@ -433,6 +433,13 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   TiberianDawn/Nod) converted to `Flame_Light + MissileAP_Medium`. The weapon
   keeps its local `Warhead@Effect` (`small_frag`) and inherits
   `^Projectile_Missile_Medium` because the missile side was the final `Inherits`.
+- **Grenade + HeavyMissile** (`AsianPelicanMissile` in
+  RedAlert2Mod/AsianAlliance, `NaxHaenebuQuadCannon` and `NaxCorrosionRocket`
+  in RedAlert2Mod/SchwarzerMond, and `RA2GrenadePack` in
+  RedAlert2Mod/Syndicate) converted to `Concussion_Light + MissileAP_Heavy`
+  with `^Projectile_Missile_Heavy` and `^Effect_MissileAP_Heavy`. Local
+  `GrenadeFriendlyFire` nodes stripped because the warhead template now
+  supplies them.
 - **Grenade + HeavyCannon** (`GoliathMG` in StarCraft/Terran,
   `ManifoldMG` in StarCraft/Protoss, `NaxiMP40` in redalert2mod.yaml, and
   `NaxPlanegun_elite` in RedAlert2Mod/Naxis) converted to

@@ -1688,27 +1688,26 @@ AsianChaosMine:
 		InvalidTargets: Water
 
 AsianPelicanMissile:
-	Inherits: ^Grenade
-	Inherits@2: ^HeavyMissile
-	Inherits@3: ^RA2MediumMissile
+	Inherits: ^Warhead_Concussion_Light
+	Inherits@2: ^Warhead_MissileAP_Heavy
+	Inherits@3: ^Projectile_Missile_Heavy
+	Inherits@4: ^Effect_MissileAP_Heavy
+	Inherits@5: ^RA2MediumMissile
 	ReloadDelay: 25
 	Burst: 2
 	BurstDelays: 2
 	Range: 6100
 	Report: vifvatta.wav
-	Warhead@Grenade: SpreadDamage
+	Warhead@Concussion_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Concussion_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MissileAP_Medium:

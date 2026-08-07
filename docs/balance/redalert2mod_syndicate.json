@@ -7242,28 +7242,13 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7273,50 +7258,38 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6550",
       "reloaddelay": "110",
       "requires": "!rank-elite",
       "slot": "Armament@GrenadePack",
       "versus_templates": [
-       "^HeavyMissile",
-       "^Grenade",
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_Concussion_Light",
+       "^Effect_Concussion_Light",
        "^RA2FlakWeapon"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_Concussion_Light",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "RA2GrenadePack",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "8",
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7326,7 +7299,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7550",
       "reloaddelay": "110",
@@ -7337,10 +7310,12 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_Concussion_Light",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "RA2GrenadePack_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
