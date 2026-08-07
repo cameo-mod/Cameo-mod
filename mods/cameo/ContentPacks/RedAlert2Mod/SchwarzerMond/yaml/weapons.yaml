@@ -1,10 +1,10 @@
 schwarzermond_lunarsoldier_rifle:
+	Inherits: ^Warhead_Bullet_Medium
+	Inherits@2: NaxiRifle
+	Inherits@3: ^RA2LaserWeapon
 	# SF VERIFIER weapon (maintainer 2026-07-20): SmallArms + Chaingun +
 	# Laser triad, 4000 each = 12000 @ reload 50 = 240 DPS (WC 1.0), exactly
 	# 2x the japan baseline (6000@50, 120). Range 6000, air-capable.
-	Inherits: NaxiRifle
-	Inherits@cg: ^Chaingun
-	Inherits@laser: ^RA2LaserWeapon
 	ReloadDelay: 50
 	Range: 6000
 	Report: vpriatta.wav
@@ -19,10 +19,10 @@ schwarzermond_lunarsoldier_rifle:
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		Damage: 2
 		ValidTargets: Ground, Water, Air
 	Warhead@Laser_Heavy:
@@ -176,8 +176,8 @@ NaxiTank2Laser_AA:
 		ValidTargets: Air
 
 NaxiMP40Laser:
-	Inherits: NaxiMP40
-	Inherits@2: ^SmallArms
+	Inherits: ^Warhead_Bullet_Light
+	Inherits@2: NaxiMP40
 	Inherits@3: ^RA2LaserWeapon
 	Report: vpriatta.wav
 	Range: 4384
@@ -194,9 +194,9 @@ NaxiMP40Laser:
 		Damage: 1000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage:
 		Damage: 1
 	Warhead@Bullet_Medium:
 		Damage: 2000

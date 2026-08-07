@@ -1319,11 +1319,11 @@ light_inf_lmg:
 		Damage: 1
 
 LMG_upgrade:
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^Chaingun
-	Inherits@5: ^SmallArms
+	Inherits: ^Warhead_Bullet_Medium
+	Inherits@2: ^Warhead_Bullet_Light
+	Inherits@3: ^Warhead_CannonHE_Heavy
+	Inherits@4: ^Projectile_Shell_Heavy
+	Inherits@5: ^Effect_CannonHE_Heavy
 	Inherits@6: ^HeavyMachineGunProjectile
 	ReloadDelay: 20
 	Range: 4448
@@ -1335,25 +1335,25 @@ LMG_upgrade:
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 light_inf_lmg_upgrade:
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^Chaingun
-	Inherits@5: ^SmallArms
+	Inherits: ^Warhead_Bullet_Medium
+	Inherits@2: ^Warhead_Bullet_Light
+	Inherits@3: ^Warhead_CannonHE_Heavy
+	Inherits@4: ^Projectile_Shell_Heavy
+	Inherits@5: ^Effect_CannonHE_Heavy
 	Inherits@6: ^HeavyMachineGunProjectile
 	ReloadDelay: 20
 	Range: 4500
@@ -1365,16 +1365,16 @@ light_inf_lmg_upgrade:
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 

@@ -12,32 +12,22 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7700",
       "reloaddelay": "132",
@@ -46,10 +36,12 @@
        "ordos_autogunturret"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "harkonnen_autogunturret",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

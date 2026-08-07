@@ -1013,32 +1013,28 @@
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "Bullet_Medium_Percentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7496",
       "reloaddelay": "41",
       "requires": "!td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament",
       "versus_templates": [
-       "^RA2Chaingun",
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "tkmbunkmg",
@@ -1608,18 +1604,13 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "1",
-        "tag": "Demolition_Light_Percentage",
+        "damage": "3",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "6000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "SmallArmsPercentage",
+        "damage": "1",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -1631,10 +1622,11 @@
       "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
       "slot": "Armament@PRIMARYUPGRADE",
       "versus_templates": [
-       "^RA2Grenade",
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "tkmjuggap",
@@ -1671,18 +1663,13 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "1",
-        "tag": "Demolition_Light_Percentage",
+        "damage": "3",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "6000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "SmallArmsPercentage",
+        "damage": "1",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -1694,10 +1681,11 @@
       "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
-       "^RA2Grenade",
-       "^SmallArms"
+       "^Warhead_Bullet_Light",
+       "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "tkmjuggap",
@@ -6068,23 +6056,13 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "1",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "3",
         "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -6099,6 +6077,7 @@
        "tkmjuggap"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "tkmtechnicalmgap",

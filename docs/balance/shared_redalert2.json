@@ -676,13 +676,8 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -692,16 +687,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
       "slot": "Armament@machinegun",
       "versus_templates": [
-       "^SmallArms",
+       "^Warhead_Bullet_Light",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG1",
@@ -755,13 +751,8 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -771,17 +762,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^SmallArms",
+       "^Warhead_Bullet_Light",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG1",
@@ -791,13 +783,8 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -807,7 +794,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "4",
@@ -817,6 +804,7 @@
        "RA2GattlingMG1"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG2",
@@ -870,13 +858,8 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -886,17 +869,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^SmallArms",
+       "^Warhead_Bullet_Light",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG1",
@@ -906,13 +890,8 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -922,7 +901,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "4",
@@ -932,6 +911,7 @@
        "RA2GattlingMG1"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG2",
@@ -985,13 +965,8 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1001,17 +976,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^SmallArms",
+       "^Warhead_Bullet_Light",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG1",
@@ -1021,13 +997,8 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1037,7 +1008,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "4",
@@ -1047,6 +1018,7 @@
        "RA2GattlingMG1"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG2",
@@ -1056,28 +1028,18 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6750",
       "reloaddelay": "6",
@@ -1087,6 +1049,7 @@
        "RA2GattlingMG1"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG1_AA",
@@ -1096,28 +1059,18 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "damage": "2",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "4",
@@ -1127,6 +1080,7 @@
        "RA2GattlingMG2"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG2_AA",
@@ -4487,13 +4441,8 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -4503,16 +4452,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
       "slot": "Armament@machinegun",
       "versus_templates": [
-       "^SmallArms",
+       "^Warhead_Bullet_Light",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG1",

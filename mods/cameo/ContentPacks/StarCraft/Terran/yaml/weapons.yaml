@@ -1,9 +1,9 @@
 MarineMG:
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^SmallArms
-	Inherits@5: ^Chaingun
+	Inherits: ^Warhead_Bullet_Light
+	Inherits@2: ^Warhead_Bullet_Medium
+	Inherits@3: ^Warhead_CannonHE_Heavy
+	Inherits@4: ^Projectile_Shell_Heavy
+	Inherits@5: ^Effect_CannonHE_Heavy
 	ReloadDelay: 26
 	Range: 6105
 	Burst: 3
@@ -16,16 +16,16 @@ MarineMG:
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -65,11 +65,11 @@ JimRaynorMachineGun:
 		Damage: 1
 
 MadcapGun:
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^SmallArms
-	Inherits@5: ^Chaingun
+	Inherits: ^Warhead_Bullet_Light
+	Inherits@2: ^Warhead_Bullet_Medium
+	Inherits@3: ^Warhead_CannonHE_Heavy
+	Inherits@4: ^Projectile_Shell_Heavy
+	Inherits@5: ^Effect_CannonHE_Heavy
 	ReloadDelay: 25
 	Range: 5542
 	Report: madcapshoot.wav
@@ -80,16 +80,16 @@ MadcapGun:
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 

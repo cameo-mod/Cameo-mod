@@ -2831,17 +2831,12 @@
       "damage_warheads": [
        {
         "damage": "2",
-        "tag": "Bullet_Light_Percentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2858,16 +2853,17 @@
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Bullet_Medium",
        "NaxiRifle",
-       "^Chaingun",
        "^RA2LaserWeapon"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -2875,17 +2871,12 @@
       "damage_warheads": [
        {
         "damage": "2",
-        "tag": "Bullet_Light_Percentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2905,11 +2896,12 @@
        "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -2917,17 +2909,12 @@
       "damage_warheads": [
        {
         "damage": "2",
-        "tag": "Bullet_Light_Percentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2947,11 +2934,12 @@
        "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -2959,17 +2947,12 @@
       "damage_warheads": [
        {
         "damage": "2",
-        "tag": "Bullet_Light_Percentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2989,11 +2972,12 @@
        "schwarzermond_lunarsoldier_rifle_elite"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "3",
@@ -3001,17 +2985,12 @@
       "damage_warheads": [
        {
         "damage": "2",
-        "tag": "Bullet_Light_Percentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3031,11 +3010,12 @@
        "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "6",
@@ -3043,17 +3023,12 @@
       "damage_warheads": [
        {
         "damage": "2",
-        "tag": "Bullet_Light_Percentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3073,28 +3048,24 @@
        "schwarzermond_lunarsoldier_rifle_elite"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
         "damage": "2",
-        "tag": "Bullet_Light_Percentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3111,16 +3082,17 @@
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_Bullet_Medium",
        "NaxiRifle",
-       "^Chaingun",
        "^RA2LaserWeapon"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -3129,17 +3101,12 @@
       "damage_warheads": [
        {
         "damage": "2",
-        "tag": "Bullet_Light_Percentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3159,11 +3126,12 @@
        "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -3172,17 +3140,12 @@
       "damage_warheads": [
        {
         "damage": "2",
-        "tag": "Bullet_Light_Percentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3202,11 +3165,12 @@
        "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -3215,17 +3179,12 @@
       "damage_warheads": [
        {
         "damage": "2",
-        "tag": "Bullet_Light_Percentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3245,11 +3204,12 @@
        "schwarzermond_lunarsoldier_rifle_elite"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -3258,17 +3218,12 @@
       "damage_warheads": [
        {
         "damage": "2",
-        "tag": "Bullet_Light_Percentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3288,11 +3243,12 @@
        "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -3301,17 +3257,12 @@
       "damage_warheads": [
        {
         "damage": "2",
-        "tag": "Bullet_Light_Percentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3331,11 +3282,12 @@
        "schwarzermond_lunarsoldier_rifle_elite"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -3389,6 +3341,11 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
@@ -3400,16 +3357,6 @@
        {
         "damage": "1",
         "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3441,11 +3388,12 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Bullet_Light",
        "NaxiMP40",
-       "^SmallArms",
        "^RA2LaserWeapon"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Concussion_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",
@@ -3460,6 +3408,11 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
@@ -3471,16 +3424,6 @@
        {
         "damage": "1",
         "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3515,6 +3458,7 @@
        "NaxiMP40Laser"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Concussion_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",
@@ -3578,6 +3522,11 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
@@ -3589,16 +3538,6 @@
        {
         "damage": "1",
         "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3630,11 +3569,12 @@
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Bullet_Light",
        "NaxiMP40",
-       "^SmallArms",
        "^RA2LaserWeapon"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Concussion_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",
@@ -3649,6 +3589,11 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
@@ -3660,16 +3605,6 @@
        {
         "damage": "1",
         "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3704,6 +3639,7 @@
        "NaxiMP40Laser"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Concussion_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",
@@ -3718,6 +3654,11 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
@@ -3729,16 +3670,6 @@
        {
         "damage": "1",
         "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3773,6 +3704,7 @@
        "NaxiMP40Laser"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Concussion_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",
@@ -3787,6 +3719,11 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
@@ -3798,16 +3735,6 @@
        {
         "damage": "1",
         "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3842,6 +3769,7 @@
        "NaxiMP40Laser_elite"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Concussion_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",
@@ -3856,6 +3784,11 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
@@ -3867,16 +3800,6 @@
        {
         "damage": "1",
         "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3911,6 +3834,7 @@
        "NaxiMP40Laser"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Concussion_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",
@@ -3925,6 +3849,11 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
@@ -3936,16 +3865,6 @@
        {
         "damage": "1",
         "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3980,6 +3899,7 @@
        "NaxiMP40Laser_elite"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Concussion_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",

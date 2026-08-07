@@ -15,6 +15,49 @@
 
 ---
 
+## 1.5. Session summary — Devin (2026-08-07)
+
+This session continued the 3-way split of concrete weapons into
+`^Warhead_*`, `^Projectile_*`, `^Effect_*` templates. All work was
+boot-gated with `launch-game.cmd` and `find_empty_warhead.py`.
+
+Converted clusters:
+
+- **LightFlameWeapon + MediumMissile** (`LightTank2Missiles`)
+- **Triple-FlameWeapon** (`FireballLauncherBuggy2`, `MatadorFlamer`,
+  `MammothTuskThermobaric`) — added `PhysicalStateName: Temperature`
+  injection to avoid a `MissingFieldsException`
+- **TeslaWeapon + RailgunWeapon** (`WaveArtilleryImpact`)
+- **TeslaWeapon + MediumMissile** (`JHindPlasmaCannon`)
+- **Tesla + Railgun + HeavyCannon** (`OIBigPlasmaCannon`,
+  `Type97PlasmaCannon`) — corrected a first-attempt `^Projectile_CannonHE_Heavy`
+  typo to `^Projectile_Shell_Heavy`
+- **SmallArms + Chaingun** (`d2k_air_drone_guns`)
+- **Chaingun + LaserWeapon** (6 weapons)
+- **Grenade + HeavyCannon** (4 weapons)
+- **Grenade + HeavyMissile** (4 weapons)
+- **Single MediumCannon / HeavyCannon** (99 weapons across 28 YAML files)
+
+Total for the session: **~128 concrete weapons** plus the 99-cannon sweep.
+The only crash encountered was the triple-flame `PhysicalStateName` issue,
+which was fixed by injecting `Temperature` for any `ApplyPhysicalState` node
+lacking `PhysicalStateName`.
+
+Files the human is currently editing — do **not** touch without explicit
+confirm:
+- `mods/cameo/weapons/weapons.yaml`
+- `mods/cameo/weapons/tiberiandawn.yaml`
+- `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml`
+- `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml`
+- `mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml`
+- `mods/cameo/ContentPacks/RedAlert2/Consortium/yaml/weapons.yaml`
+- `mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml`
+- `mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml`
+- `mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml`
+- `mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml`
+
+---
+
 ## 2. What the previous AI (Claude/Opus) completed
 
 | Commit (examples) | What was done |
@@ -55,15 +98,18 @@ Commits in order:
 ## 4. Current repository state
 
 - **Branch:** `master`
-- **Last commit:** `6364775bb Fix: new-family main warheads must be AreaDamage, not SpreadDamage (AREADAMAGE_HANDOFF)`
-- **Working tree:** clean except two untracked helper scripts:
-  - `tools/audit/audit_damage_grid.py`
-  - `tools/balance/_requantize_ledgers.py`
-  These are from prior sessions; do not commit unless you know their purpose.
+- **Last commit:** `cbf72105f Weapon 3-way split: single MediumCannon and HeavyCannon (99 weapons)`
+- **Working tree:** clean.
 - **Boot-gate status:** passes.
 - **Empty-warhead audit:** `0`.
 - **Ledger count:** 32 ledgers, 2087 actors.
-- **Estimated weapons still on old templates:** `~609` mixed (from `WEAPON_3WAY_SPLIT.md` and `PROJECT_CONTEXT.md`). My own scan found `637` blocks with at least one old-template reference before this session; after the sessions' conversions the count is now closer to the 609 figure.
+- **Estimated weapons still on old templates (safe files only):** `396`
+  concrete weapons still inherit at least one old full-stack family. Of those:
+  - `94` can be converted immediately with existing 3-way templates.
+  - `115` involve `*ChemicalWeapon` and need `PhysicalState`/`Effect` templates.
+  - `251` reference old families that have **no 3-way warhead template yet**
+    (`SniperWeapon`, `HeavyBomb`, `ShrapnelWeapon`, `SteelChaingun`,
+    `LightArms`, `FlakWeapon`, `HeavyAAWeapon`).
 
 ---
 
@@ -433,6 +479,11 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   TiberianDawn/Nod) converted to `Flame_Light + MissileAP_Medium`. The weapon
   keeps its local `Warhead@Effect` (`small_frag`) and inherits
   `^Projectile_Missile_Medium` because the missile side was the final `Inherits`.
+- **SmallArms and/or Chaingun** (14 weapons across 8 files) converted
+  to `Bullet_Light` / `Bullet_Medium`. Weapons with `^RA2Chaingun`,
+  `^HeavyMachineGunProjectile`, `^D2KMissile` and similar addon inherits
+  kept the addon and did not add generic bullet Projectile/Effect because
+  the addon already provides them.
 - **Single MediumCannon / HeavyCannon** (99 weapons across 28 files)
   converted to the 3-way `^Warhead_CannonHE_*`, `^Projectile_Shell_*`,
   `^Effect_CannonHE_*` split. This was the largest remaining single-family
@@ -514,3 +565,61 @@ starting with `^`) across 15 files. An initial overly-broad attempt that
 included multi-addon weapons produced 46 empty-type warheads and was
 reverted before boot. The stricter filter left zero empty warheads and
 passed the boot-gate.
+
+---
+
+## 15. Live remaining-effort estimate (after this Devin session)
+
+### 15.1 What is still on old templates (safe files only)
+
+A scan of non-active YAML files found:
+
+| Category | Count | Notes |
+|---|---|---|
+| **Total weapons still using old full-stack families** | **396** | Excludes the 8 files the human is currently editing. |
+| 1 old family | 73 | Mostly single-inherit leftovers now. |
+| 2 old families | 115 | Dual mixes; easiest mechanical wins. |
+| 3 old families | 77 | Some are clean (e.g., `Tesla+Railgun+Cannon`), some bespoke. |
+| 4 old families | 131 | Exception-list territory; do not flatten without maintainer sign-off. |
+| **Mappable with existing 3-way templates (no chemical)** | **94** | Ready to convert now; ~40 dual, ~29 single, ~24 triple/quad. |
+| **Blocked by missing 3-way warhead templates** | **251** | `SniperWeapon` (20), `HeavyBomb`, `ShrapnelWeapon`, `SteelChaingun`, `LightArms`, `FlakWeapon`, `HeavyAAWeapon`, etc. |
+| **Blocked by chemical weapon interaction** | **115** | Old `*ChemicalWeapon` families with `ApplyPhysicalState` fields. Need a `PhysicalState`-aware converter or dedicated `^Chemical_*` templates. |
+
+### 15.2 Estimated effort to finish the weapon split
+
+Assumptions: one "session" = 4–6 hours, each cluster needs audit + boot + commit.
+
+| Work stream | Weapons / items | Optimistic | Most likely | Pessimistic | PERT E (hours) | Sessions |
+|---|---|---|---|---|---|---|
+| Convert 94 mappable clusters | 94 | 8 h | 16 h | 32 h | 17.3 | 3–5 |
+| Chemical + PhysicalState cluster converter | ~115 | 12 h | 24 h | 48 h | 26.0 | 4–8 |
+| Design / build missing 3-way templates | 7 families | 16 h | 32 h | 64 h | 34.7 | 6–12 |
+| Convert weapons using new templates | 251 | 16 h | 40 h | 80 h | 41.3 | 7–14 |
+| Bespoke 4-warhead exceptions + allowlist | 131 | 20 h | 40 h | 80 h | 43.3 | 7–14 |
+| Delete orphaned old templates (Phase 4) | 30 templates | 2 h | 4 h | 8 h | 4.3 | 1 |
+| **Subtotal: weapon 3-way split** | | **74 h** | **156 h** | **312 h** | **166 h** | **28–53** |
+
+### 15.3 Estimated effort to finish the balance pipeline
+
+The balance pipeline depends on a clean weapon layer.
+
+| Work stream | Optimistic | Most likely | Pessimistic | PERT E (hours) | Sessions |
+|---|---|---|---|---|---|
+| A1 Generator reconcile | 2 h | 4 h | 8 h | 4.3 | 1 |
+| A2 Cannon AP/HE rebuild | 4 h | 8 h | 16 h | 8.7 | 1–2 |
+| A4 Weapon tuning laws | 6 h | 12 h | 24 h | 13.0 | 2–3 |
+| Vehicle stats apply | 4 h | 8 h | 16 h | 8.7 | 1–2 |
+| Infantry anchors (C2) | 8 h | 16 h | 32 h | 17.3 | 3–5 |
+| Defense + aircraft anchors (C3) | 12 h | 24 h | 48 h | 26.0 | 4–8 |
+| Formula v2 (D1/D2) | 16 h | 32 h | 64 h | 34.7 | 6–12 |
+| Per-class/faction apply (F) | 20 h | 40 h | 80 h | 43.3 | 7–14 |
+| Discrepancy triage (G) | 12 h | 24 h | 48 h | 26.0 | 4–8 |
+| **Subtotal: balance pipeline** | **84 h** | **188 h** | **376 h** | **204 h** | **32–59** |
+
+### 15.4 Bottom line
+
+- **Weapon split alone:** ~28–53 sessions (most likely ~30).
+- **Balance pipeline alone:** ~32–59 sessions (most likely ~35).
+- **Critical path (split → balance apply):** ~60–90 sessions if done sequentially.
+- This is a multi-week / multi-month effort at one session per day. The two biggest levers are (1) batching mechanical clusters with scripts, and (2) deciding which 4-warhead exceptions are legitimate versus needing maintainer collapse.
+- **Do not start balance applies until the weapon split is structurally complete**; otherwise DPS/range numbers will shift under the ledger.

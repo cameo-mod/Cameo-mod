@@ -993,10 +993,10 @@ AsianSmallOilBomb:
 		AimTargetStances: Enemy, Neutral
 
 AsianPulverizerGatling:
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^SmallArms
+	Inherits: ^Warhead_Bullet_Light
+	Inherits@2: ^Warhead_CannonHE_Heavy
+	Inherits@3: ^Projectile_Shell_Heavy
+	Inherits@4: ^Effect_CannonHE_Heavy
 	Inherits@5: ^RA2Chaingun
 	Report: aa_pulvat2a.wav, aa_pulvat2b.wav, aa_pulvat2c.wav
 	Range: 5517
@@ -1017,10 +1017,10 @@ AsianPulverizerGatling:
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Air, Water
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage:
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 	Warhead@Bullet_Medium: AreaDamage

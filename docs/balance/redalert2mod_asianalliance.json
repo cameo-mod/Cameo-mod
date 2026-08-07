@@ -7715,17 +7715,12 @@
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7735,40 +7730,36 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5517",
       "reloaddelay": "12",
       "slot": "Armament@1",
       "versus_templates": [
+       "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianPulverizerGatling",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7778,25 +7769,26 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5517",
       "reloaddelay": "12",
       "requires": "asianalliance_doctrine_heavypulverizerweapons",
       "slot": "Armament@2",
       "versus_templates": [
+       "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianPulverizerGatling",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -7874,17 +7866,12 @@
        },
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7894,7 +7881,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7020",
       "reloaddelay": "15",
@@ -7905,11 +7892,12 @@
        "AsianPulverizerGatling"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianPulverizerMechaGatling",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -7940,17 +7928,12 @@
        },
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7960,7 +7943,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7020",
       "reloaddelay": "15",
@@ -7972,11 +7955,12 @@
        "AsianPulverizerGatling"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianPulverizerMechaGatling",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

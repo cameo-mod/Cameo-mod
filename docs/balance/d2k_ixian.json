@@ -2107,50 +2107,42 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "20",
       "requires": "ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^Chaingun",
-       "^SmallArms",
        "^HeavyMachineGunProjectile"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -2191,50 +2183,42 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "20",
       "requires": "ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^Chaingun",
-       "^SmallArms",
        "^HeavyMachineGunProjectile"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

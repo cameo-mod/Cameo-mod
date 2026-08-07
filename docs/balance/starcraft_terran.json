@@ -3384,96 +3384,80 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5542",
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^SmallArms",
-       "^Chaingun"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "MadcapGun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
         "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5542",
       "reloaddelay": "25",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^SmallArms",
-       "^Chaingun"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "MadcapGun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -3664,48 +3648,40 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6105",
       "reloaddelay": "26",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^SmallArms",
-       "^Chaingun"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "MarineMG",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -3714,48 +3690,40 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6105",
       "reloaddelay": "26",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^SmallArms",
-       "^Chaingun"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "MarineMG",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
