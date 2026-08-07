@@ -3784,84 +3784,70 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "6000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8753",
       "reloaddelay": "52",
       "requires": "!cabal_upgrade_darkarmament",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^LightMissile",
-       "^MediumMissile",
+       "^Warhead_MissileHE_Light",
+       "^Warhead_MissileHE_Medium",
        "^CabalMissileLight",
        "^CabalMissileEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Light",
+       "^Warhead_MissileHE_Medium"
+      ],
       "weapon": "CabalRocketCyborgRockets",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "6000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8753",
       "reloaddelay": "52",
       "requires": "cabal_upgrade_darkarmament",
       "slot": "Armament@Upgraded",
       "versus_templates": [
-       "^LightMissile",
-       "^MediumMissile",
+       "^Warhead_MissileHE_Light",
+       "^Warhead_MissileHE_Medium",
        "^CabalMissileLight",
        "^CabalMissileEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Light",
+       "^Warhead_MissileHE_Medium"
+      ],
       "weapon": "CabalRocketCyborgRocketsUpgraded",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3869,41 +3855,34 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "6000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "8753",
       "reloaddelay": "52",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^LightMissile",
-       "^MediumMissile",
+       "^Warhead_MissileHE_Light",
+       "^Warhead_MissileHE_Medium",
        "^CabalMissileLight",
        "^CabalMissileEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Light",
+       "^Warhead_MissileHE_Medium"
+      ],
       "weapon": "CabalRocketCyborgRockets",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5695,53 +5674,23 @@
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "GrenadePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "LightMissilePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "MediumMissilePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -5752,69 +5701,44 @@
       "reloaddelay": "24",
       "slot": "Armament",
       "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightMissile",
-       "^MediumMissile",
+       "^Warhead_MissileHE_Light",
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^CabalMissileLight",
        "^CabalMissileEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Light",
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "CabalReaperMissiles",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "GrenadePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "LightMissilePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "MediumMissilePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -5825,16 +5749,21 @@
       "reloaddelay": "24",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightMissile",
-       "^MediumMissile",
+       "^Warhead_MissileHE_Light",
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^CabalMissileLight",
        "^CabalMissileEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Light",
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "CabalReaperMissiles_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [],
@@ -5919,53 +5848,23 @@
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "GrenadePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "12000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "12000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "MediumMissilePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "12000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "HeavyMissilePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -5976,69 +5875,44 @@
       "reloaddelay": "30",
       "slot": "Armament",
       "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumMissile",
-       "^HeavyMissile",
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^CabalMissileLight",
        "^CabalMissileEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "CabalHeavyReaperMissiles",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "GrenadePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "12000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "12000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "MediumMissilePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "12000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "HeavyMissilePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -6049,16 +5923,21 @@
       "reloaddelay": "30",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumMissile",
-       "^HeavyMissile",
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^CabalMissileLight",
        "^CabalMissileEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Heavy",
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "CabalHeavyReaperMissiles_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [],
@@ -6227,53 +6106,23 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "GrenadePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "12000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "12000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "LightMissilePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "12000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "MediumMissilePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -6286,9 +6135,14 @@
       "versus_templates": [
        "^CabalManticoreMissiles"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Light",
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "CabalManticoreMissilesAA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

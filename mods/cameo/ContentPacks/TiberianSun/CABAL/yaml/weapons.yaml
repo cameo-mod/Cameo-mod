@@ -480,10 +480,10 @@ CabalTarantulaCannon:
 
 
 CabalReaperMissiles:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^LightMissile
-	Inherits@4: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileHE_Light
+	Inherits@wh2: ^Warhead_MissileHE_Medium
+	Inherits@wh3: ^Warhead_Demolition_Light
+	Inherits@wh4: ^Warhead_Concussion_Medium
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 24
@@ -501,32 +501,28 @@ CabalReaperMissiles:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileHE_Light: AreaDamage
 		Damage: 8000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Light_Percentage: HealthPercentageDamage
 		Damage: 4
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 8000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 4
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium: AreaDamage
 		Damage: 8000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 
 CabalReaperMissiles_AA:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^LightMissile
-	Inherits@4: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileHE_Light
+	Inherits@wh2: ^Warhead_MissileHE_Medium
+	Inherits@wh3: ^Warhead_Demolition_Light
+	Inherits@wh4: ^Warhead_Concussion_Medium
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 24
@@ -544,42 +540,36 @@ CabalReaperMissiles_AA:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileHE_Light: AreaDamage
 		Damage: 8000
 		ValidTargets: Air
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Light_Percentage: HealthPercentageDamage
 		Damage: 4
 		ValidTargets: Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 8000
 		ValidTargets: Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 		ValidTargets: Air
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 8000
 		ValidTargets: Air
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 4000
-		ValidTargets: Air
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 4
 		ValidTargets: Air
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium: AreaDamage
 		Damage: 8000
 		ValidTargets: Air
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-		ValidTargets: Air
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 		ValidTargets: Air
 
 CabalHeavyReaperMissiles:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^MediumMissile
-	Inherits@4: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@wh2: ^Warhead_MissileHE_Heavy
+	Inherits@wh3: ^Warhead_Demolition_Light
+	Inherits@wh4: ^Warhead_Concussion_Medium
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 30
@@ -598,32 +588,28 @@ CabalHeavyReaperMissiles:
 		Acceleration: 2
 		HomingActivationDelay: 3
 		RangeLimit: 30000
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 12000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileHE_Heavy: AreaDamage
 		Damage: 12000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 12000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 6000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium: AreaDamage
 		Damage: 12000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 6000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 
 CabalHeavyReaperMissiles_AA:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^MediumMissile
-	Inherits@4: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@wh2: ^Warhead_MissileHE_Heavy
+	Inherits@wh3: ^Warhead_Demolition_Light
+	Inherits@wh4: ^Warhead_Concussion_Medium
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 30
@@ -642,34 +628,28 @@ CabalHeavyReaperMissiles_AA:
 		Acceleration: 2
 		HomingActivationDelay: 3
 		RangeLimit: 30000
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 12000
 		ValidTargets: Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 		ValidTargets: Air
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileHE_Heavy: AreaDamage
 		Damage: 12000
 		ValidTargets: Air
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
 		ValidTargets: Air
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 12000
 		ValidTargets: Air
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 6000
-		ValidTargets: Air
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 6
 		ValidTargets: Air
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium: AreaDamage
 		Damage: 12000
 		ValidTargets: Air
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 6000
-		ValidTargets: Air
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 		ValidTargets: Air
 
@@ -1243,10 +1223,10 @@ CabalLegionGun:
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 ^CabalManticoreMissiles:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^LightMissile
-	Inherits@4: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileHE_Light
+	Inherits@wh2: ^Warhead_MissileHE_Medium
+	Inherits@wh3: ^Warhead_Demolition_Light
+	Inherits@wh4: ^Warhead_Concussion_Medium
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 30
@@ -1264,55 +1244,47 @@ CabalLegionGun:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileHE_Light: AreaDamage
 		Damage: 12000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Light_Percentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 12000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 12000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 6000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium: AreaDamage
 		Damage: 12000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 6000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
 
 CabalManticoreMissilesAA:
 	Inherits: ^CabalManticoreMissiles
 	Range: 5358
 	ValidTargets: Air
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileHE_Light: AreaDamage
 		ValidTargets: Air
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium: AreaDamage
 		ValidTargets: Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: AreaDamage
 		ValidTargets: Air
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium: AreaDamage
 		ValidTargets: Air
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Air
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Air
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 CabalRocketCyborgRockets:
-	Inherits: ^LightMissile
-	Inherits@2: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileHE_Light
+	Inherits@wh2: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	Burst: 3
@@ -1329,18 +1301,18 @@ CabalRocketCyborgRockets:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileHE_Light: AreaDamage
 		Damage: 6000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Light_Percentage: HealthPercentageDamage
 		Damage: 3
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 6000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
 
 CabalRocketCyborgRocketsUpgraded:
-	Inherits: ^LightMissile
-	Inherits@2: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileHE_Light
+	Inherits@wh2: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	Burst: 4
@@ -1357,13 +1329,13 @@ CabalRocketCyborgRocketsUpgraded:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileHE_Light: AreaDamage
 		Damage: 6000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Light_Percentage: HealthPercentageDamage
 		Damage: 3
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 6000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
 
 CabalMothershipRockets:
