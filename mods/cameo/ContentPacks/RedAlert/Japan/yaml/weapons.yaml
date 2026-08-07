@@ -411,7 +411,7 @@ BallistaSingleShotAir:
 BallistaSingleShotAirEnergized:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@fx: ^Effect_MissileAP_Light
 	Inherits: JapanMaidenBowEnergized
 	Range: 9214
 	ReloadDelay: 200

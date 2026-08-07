@@ -224,7 +224,7 @@ XCOMChainGun2:
 XCOMRocketLauncher:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_CannonAP_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
 	ReloadDelay: 75
 	Range: 7500
 	MinRange: 750

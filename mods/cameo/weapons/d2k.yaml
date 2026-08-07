@@ -291,7 +291,7 @@ D2K_SiegeQuad:
 ^D2KRocket:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_CannonAP_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	ReloadDelay: 50
 	Range: 5000
 	Report: ROCKET1.WAV

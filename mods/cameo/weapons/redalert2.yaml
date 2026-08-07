@@ -60,7 +60,7 @@
 ^RA2LightMissile:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@fx: ^Effect_MissileAP_Light
 	Projectile: Missile
 		Image: ra2_dragon
 		-TrailImage:
@@ -83,7 +83,7 @@
 ^RA2MediumMissile:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_CannonAP_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
 	Projectile: Missile
 		Image: patriot
 		-TrailImage:
@@ -106,7 +106,7 @@
 ^RA2HeavyMissile:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_CannonAP_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_clsn
 		ExplosionPalette: tseffect

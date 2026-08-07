@@ -335,7 +335,7 @@ MachineGunAPH:
 M1A1Missiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_CannonAP_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
 	ReloadDelay: 72
 	Range: 5400
 	Report: rocket1.aud
@@ -399,7 +399,7 @@ M1A1MachineGun:
 MammothMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_CannonAP_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 68
 	Burst: 2
@@ -584,7 +584,7 @@ NapalmA10Carrier:
 A10CarrierMissiles_AA:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_CannonAP_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	Inherits@glow: ^ImpactGlow
 	ValidTargets: Air
 	ReloadDelay: 100
@@ -1034,7 +1034,7 @@ MachineGunHumvee2AP_AA:
 RocketsHumvee2:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@fx: ^Effect_MissileAP_Light
 	ReloadDelay: 84
 	Range: 5598
 	Report: bazook1.aud
@@ -1058,7 +1058,7 @@ RocketsHumvee2_AA:
 RocketsHumvee2AMT:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_CannonAP_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	Inherits: RocketsHumvee2
 	Inherits@2: ^AMTProjectile
 	Warhead@MissileAP_Heavy:
@@ -1157,7 +1157,7 @@ GDIPredatorTankCannonHV:
 GDIPredatorTankMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_CannonAP_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
 	ReloadDelay: 70
 	Range: 5880
 	Report: rocket1.aud
@@ -1243,7 +1243,7 @@ MammothTank3CannonsHV:
 MammothTank3Missiles:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_CannonAP_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 98
 	Burst: 2
@@ -1635,7 +1635,7 @@ CommandoM16:
 FirehawkMissiles_AA:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_CannonAP_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	Inherits@glow: ^ImpactGlow
 	ValidTargets: Air
 	ReloadDelay: 50
@@ -1739,7 +1739,7 @@ GDIBattleshipRailgun:
 GunboatMissile:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_CannonAP_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
 	ReloadDelay: 33
 	Range: 6666
 	Burst: 2

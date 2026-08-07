@@ -99,7 +99,7 @@ HueyGun:
 HueyMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_CannonAP_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
 	ReloadDelay: 14
 	Range: 4783
 	Report: bazook1.aud
@@ -121,7 +121,7 @@ tkmtechnicalmgap:
 tkmtwinrockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@fx: ^Effect_MissileAP_Light
 	ReloadDelay: 64
 	Range: 7214
 	Burst: 2
@@ -303,7 +303,7 @@ tkmm203:
 tkmrockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@fx: ^Effect_MissileAP_Light
 	ReloadDelay: 64
 	Range: 6214
 	Report: bazook1.aud
@@ -314,7 +314,7 @@ tkmrockets:
 as42rockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@fx: ^Effect_MissileAP_Light
 	ReloadDelay: 30
 	Range: 6379
 	Report: bazook1.aud
@@ -326,7 +326,7 @@ as42rockets:
 tkmcryorockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@fx: ^Effect_MissileAP_Light
 	ReloadDelay: 64
 	Range: 6214
 	Report: bazook1.aud
@@ -500,7 +500,7 @@ TKMAATurretCannon:
 tkmstrykerrockets:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_CannonAP_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
 	ReloadDelay: 60
 	Range: 7880
 	Report: bazook1.aud
@@ -514,7 +514,7 @@ tkmstrykerrockets:
 tkmstrykercryorockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@fx: ^Effect_MissileAP_Light
 	ReloadDelay: 63
 	Range: 5000
 	Burst: 2
@@ -945,7 +945,7 @@ SandmarineTuskTwin:
 	Inherits: SandmarineTusk
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_CannonAP_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
 	ReloadDelay: 54
 	Burst: 8
 	BurstDelays: 3

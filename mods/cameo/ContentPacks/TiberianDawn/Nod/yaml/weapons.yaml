@@ -254,7 +254,7 @@ PDLaserBike:
 LTNKMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_CannonAP_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
 	ReloadDelay: 45
 	Range: 4993
 	Report: bazook1.aud
@@ -339,7 +339,7 @@ HonestJohn:
 StealthTankMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_CannonAP_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
 	ReloadDelay: 58
 	Burst: 2
 	BurstDelays: 8
@@ -430,7 +430,7 @@ HeliGun:
 HeliMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_CannonAP_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Burst: 4
@@ -1471,7 +1471,7 @@ CorvetteLaserObelisk:
 CorvetteDragon:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_CannonAP_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 35
 	Range: 9550

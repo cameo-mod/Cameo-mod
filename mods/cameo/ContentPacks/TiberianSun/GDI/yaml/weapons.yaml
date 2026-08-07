@@ -563,7 +563,7 @@ TSZoneRailgunRail:
 PitbullRockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@fx: ^Effect_MissileAP_Light
 	ReloadDelay: 55
 	Burst: 2
 	BurstDelays: 5
@@ -616,7 +616,7 @@ TSMammothTusk2:
 	Inherits@glow: ^ImpactGlow
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_CannonAP_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	ValidTargets: Air
 	Projectile: Missile
 		Speed: 500
@@ -645,7 +645,7 @@ TSMammothTusk2II_AA:
 	Inherits@glow: ^ImpactGlow
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_CannonAP_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	ValidTargets: Air
 	Projectile: Missile
 		Speed: 500
@@ -725,7 +725,7 @@ TSZoneHellfireSonic:
 TSGDIRedEye:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_CannonAP_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	ReloadDelay: 30
 	Range: 12440
 	Report: rocket2.aud
