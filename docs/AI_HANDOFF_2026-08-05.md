@@ -294,3 +294,44 @@ In order:
 If you are continuing the weapon split: open `mods/cameo/weapons/weapons.yaml`, confirm the new `^Warhead_*` / `^Projectile_*` / `^Effect_*` blocks are still present, then run the empty-warhead audit and inspect the next mixed-weapon cluster.
 
 If you are continuing balance: open `docs/balance/anchor_decisions_log.md` and confirm whether the maintainer has approved the REVISION table; if yes, proceed with `apply_balance.py --confirm` for vehicles after A1/A2/A4 land.
+
+---
+
+## 14. Session log — 2026-08-07 (continuing the 3-way split)
+
+### 14.1 Failed attempt: `HeavyFlame + MediumFlame` dual-flame retrofit
+
+- Attempted a mechanical conversion of all weapons with `^HeavyFlameWeapon` + `^MediumFlameWeapon` (17 weapons in 7 files).
+- Ran into `MiniYaml.Merge` duplicate `PhysicalStateName` boot crashes because flame weapons carry `ApplyPhysicalState` warheads (`PhysicalState*FlameWeapon` / `PhysicalState*FlameWeaponFriendlyFire`) and the new `^Effect_Flame_*` templates already provide `PhysicalStateName`, `ValidRelationships`, and `Range` for the same key.
+- Lesson: local `PhysicalState...` overrides must not duplicate fields that the `^Effect_*` template already provides. Effect-heavy families (flame/chemical/sonic) need a `PhysicalState`-aware converter that strips/merges those fields carefully, or they must keep the old effect template inheritance for the non-last tier.
+- Full working-tree revert executed; `master` remains boot-green.
+
+### 14.2 Successful attempt: `ShrapnelWeapon + HeavyCannon` → `Concussion_Medium + CannonHE_Heavy`
+
+- Converted 3 weapons: `RATurretGun` (RedAlert/Allies), `tkmtrenchcannon` (RedAlert2Mod/TKM), `TSRPGTower` (TiberianSun/GDI).
+- New shape:
+  ```yaml
+  Inherits@wh: ^Warhead_Concussion_Medium
+  Inherits@wh2: ^Warhead_CannonHE_Heavy
+  Inherits@proj: ^Projectile_Shell_Heavy
+  Inherits@fx: ^Effect_CannonHE_Heavy
+  Warhead@Concussion_Medium:
+  Warhead@Concussion_Medium_Percentage:
+  Warhead@CannonHE_Heavy:
+  Warhead@CannonHE_Heavy_Percentage:
+  ```
+- The `ShrapnelWeaponFriendlyFire` 50% twin was dropped (new `AreaDamage` baked FF replaces it).
+- `find_empty_warhead.py` = 0. Boot-gate passed (reached `MenuPostProcessEffect.PostWorldLoaded`, no new `exception-*.log`).
+- Ledgers refreshed via `extract_stats.py`.
+
+### 14.3 Current safest next targets
+
+Effect-free / low-effect dual-warhead clusters that should convert cleanly with the same pattern:
+- `HeavyBomb + ShrapnelWeapon` — already done.
+- `Grenade + HeavyBomb` — `Demolition_Light + Demolition_Heavy`.
+- `Grenade + ShrapnelWeapon` — `Demolition_Light + Concussion_Medium`.
+- `HeavyCannon + ShrapnelWeapon` — now done.
+- `MediumCannon + TankDestroyerCannon` — `CannonHE_Medium + CannonAP_Light`.
+- `HeavyCannon + MediumCannon` — `CannonHE_Heavy + CannonHE_Medium`.
+
+Avoid flame/chemical/sonic/energy dual-warhead clusters until a `PhysicalState`/`GroundFire`/`EMP` effect-aware converter is built.

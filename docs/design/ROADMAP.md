@@ -110,6 +110,13 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
      kill-mixing (≤2 warheads, honor the exception allow-list — Dune 3-cannon, Siege Tank/Engine).
      **Bullet_Heavy → the Pulverizer mecha** (Asian Alliance, currently mixed → Phase B). Then delete the
      30 orphaned old templates + their `weapon_classes.yaml` rows. This unblocks the vehicle DPS restat (#1).
+   - **RETROFIT mechanical clusters 2026-08-05/07** — `HeavyBomb+ShrapnelWeapon`
+     (`Demolition_Heavy+Concussion_Medium`), `LightMissile+MediumMissile` (`MissileHE_Light+MissileHE_Medium`),
+     `Grenade+HeavyMissile` (`Concussion_Light+MissileHE_Heavy`), `ShrapnelWeapon+HeavyCannon`
+     (`Concussion_Medium+CannonHE_Heavy`) converted and boot-gated. Total dual-inherit live weapons
+     reduced by ~40.
+   - **Effect-heavy clusters (flame/chemical/sonic/energy) are BLOCKED** until a `PhysicalState`/`GroundFire`/
+     `EMP`/ExtraDamage-aware converter is built — see `docs/LESSONS_LEARNED.md` § "Effect-warhead merge safety".
      **Phase A progress (2026-08-02):** `tools/archive/retrofit_v3.py` repointed ~130 single-inherit
      weapons from `^SmallArms`→`^Bullet_Light`/`^ProjectileBullet_Light`/`^EffectBullet_Light` and
      `^Chaingun`→`^Bullet_Medium`/`^ProjectileBullet_Medium`/`^EffectBullet_Medium`, including intermediate

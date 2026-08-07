@@ -1497,22 +1497,22 @@ tkmrh120gun:
 		ImpactSounds: gexpwasa.wav
 
 tkmtrenchcannon:
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^HeavyCannon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@wh2: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
 	ReloadDelay: 75
 	Range: 9237
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 850
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 20000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 10
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy:
 		Damage: 20000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 10
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_medium_clsn
