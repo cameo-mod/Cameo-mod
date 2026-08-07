@@ -3205,33 +3205,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "HeavyBombPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "2165",
       "pricing": true,
       "range": "10830",
@@ -3239,39 +3224,28 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium",
+       "^Effect_Demolition_Heavy",
        "^TSCannonEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "TSInfantryMortar",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "HeavyBombPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3306,7 +3280,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "2165",
       "pricing": true,
       "range": "10830",
@@ -3318,41 +3292,29 @@
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "TSInfantryMortarChem",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "HeavyBombPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "2165",
       "pricing": false,
       "range": "10830",
@@ -3360,40 +3322,29 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium",
+       "^Effect_Demolition_Heavy",
        "^TSCannonEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "TSInfantryMortar",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "HeavyBombPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3428,7 +3379,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "2165",
       "pricing": false,
       "range": "10830",
@@ -3440,9 +3391,12 @@
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "TSInfantryMortarChem",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -942,38 +942,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "50000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "25",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "50000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "25",
-        "tag": "Demolition_Light_Percentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "25",
@@ -982,7 +962,8 @@
        "SCScourgeExplosion"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light"
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "ScourgeExplosion",
       "weapon_class_source": "template"

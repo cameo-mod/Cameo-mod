@@ -6779,42 +6779,22 @@
       "damage_warheads": [
        {
         "damage": "7",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "7",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "7",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "14000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "14000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "2800",
       "pricing": true,
       "range": "14000",
@@ -6822,19 +6802,20 @@
       "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium",
+       "^Effect_Concussion_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^HeavyBomb",
-       "^ShrapnelWeapon",
-       "^RA2MediumCannon"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium",
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "NaxBrummbarArty",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -6842,42 +6823,22 @@
       "damage_warheads": [
        {
         "damage": "7",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "7",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "7",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "14000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "14000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "7",
-        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "2800",
       "pricing": true,
       "range": "15000",
@@ -6889,11 +6850,12 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium",
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "NaxBrummbarArty_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

@@ -1,10 +1,10 @@
 NaxBrummbarArty:
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^HeavyBomb
-	Inherits@5: ^ShrapnelWeapon
-	Inherits@6: ^RA2MediumCannon
 	ReloadDelay: 140
 	Range: 14000
 	MinRange: 2800
@@ -19,25 +19,18 @@ NaxBrummbarArty:
 		ContrailStartColor: AAAA4488
 		ContrailEndColor: 22222222
 		TrailImage: black_smokey
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 14000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 7
 	Warhead@CannonHE_Heavy:
 		Damage: 14000
 	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 7
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 14000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 7000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 7
-	Warhead@CannonHE_Medium:
-		Damage: 14000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
-		Damage: 7
-
 NaxBrummbarArty_elite:
 	Inherits: NaxBrummbarArty
 	Inherits@Elite: ^RA2EliteEffects

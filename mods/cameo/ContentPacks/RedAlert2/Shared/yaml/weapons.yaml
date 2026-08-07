@@ -2356,23 +2356,19 @@ RA2DemoBomb:
 		LayerName: ra2radiation
 
 RA2Terrorist:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^RA2Grenade
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
+	Inherits@3: ^Projectile_Grenade_Light
 	-Report:
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		Damage: 25
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 50000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 25
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Heavy:
 		Damage: 50000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 25
-	-Warhead@Effect1:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_terrorist_explosion
 		ExplosionPalette: ra2effect

@@ -445,8 +445,9 @@ TSBusMortarChem:
 		InvalidTargets: Water
 
 TSInfantryMortar:
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@3: ^TSCannonEffect
 	ReloadDelay: 88
 	Range: 10830
@@ -462,15 +463,13 @@ TSInfantryMortar:
 		ContrailEndWidth: 15
 		ContrailStartColor: AAAA4488
 		ContrailEndColor: 22222222
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 16000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 8
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 16000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 8
 
 TSInfantryMortarChem:

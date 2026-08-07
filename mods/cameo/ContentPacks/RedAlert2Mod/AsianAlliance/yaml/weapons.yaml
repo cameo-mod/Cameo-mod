@@ -2000,22 +2000,17 @@ ASDFKamikazeTargeting:
 		Condition: BorisFlare
 
 ASDFKamikazeExplosion:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^RA2Grenade
-	Warhead@Demolition_Light:
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
+	Inherits@3: ^Projectile_Grenade_Light
+	Warhead@Demolition_Heavy:
 		Damage: 10000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 5
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 10000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 5
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 10000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 5
 	Warhead@Effect: CreateEffect
 		Explosions: ivan_explosion

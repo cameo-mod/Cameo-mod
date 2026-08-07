@@ -439,34 +439,24 @@ ScourgeExplosion:
 		ImpactSounds: zavdth00.aud
 
 SCScourgeExplosion:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^RA2Grenade
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
+	Inherits@3: ^Projectile_Grenade_Light
 	-Report:
 	ValidTargets: Air
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Concussion_Medium:
 		ValidTargets: Air
 		Damage: 50000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		ValidTargets: Air
 		Damage: 25
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Air
 		Damage: 50000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Air
-		Damage: 25000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		ValidTargets: Air
 		Damage: 25
-	Warhead@Demolition_Light:
-		ValidTargets: Air
-		Damage: 50000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
-		ValidTargets: Air
-		Damage: 25
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: scscourgeexplosion
 		ValidTargets: Air
