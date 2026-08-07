@@ -701,6 +701,30 @@ passed the boot-gate.
   `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
   `extract_stats.py` refreshed 32 ledgers.
 
+### 14.14 `ShrapnelWeapon` single conversion (`5a0ca6634`)
+
+- Converted 10 weapons: `NaxGrilleArty` (`weapons/redalert2mod.yaml`),
+  `TSGrenade` (`weapons/tiberiansun.yaml`), `RA160mm`
+  (`ContentPacks/RedAlert2/Soviets`), `AsianGrenade` and
+  `asianalliance_asianmilitia_grenade` (`ContentPacks/RedAlert2Mod/AsianAlliance`),
+  `NaxiJadgDestroyer` (`ContentPacks/RedAlert2Mod/Naxis`),
+  `LunarNaxiJadgDestroyer` (`ContentPacks/RedAlert2Mod/SchwarzerMond`),
+  `ViperMissiles` (`ContentPacks/RedAlert2Mod/TKM`), `TS120mmx` and
+  `TSScoopDualTur` (`ContentPacks/TiberianSun/Forgotten`).
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_Concussion_Medium
+  Inherits@fx: ^Effect_Concussion_Medium
+  ```
+- `ShrapnelWeapon` → `Concussion_Medium`; no `Inherits@proj` because the
+  family has no projectile template. `*FriendlyFire` twins stripped, local
+  `Projectile` settings and non-old addons preserved.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` reached
+  `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
+  `extract_stats.py` refreshed 7 affected ledgers.
+- Note: the temporary `tools/convert_shrapnel.py` converter script was
+  committed with this change and should be removed in a follow-up cleanup.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
