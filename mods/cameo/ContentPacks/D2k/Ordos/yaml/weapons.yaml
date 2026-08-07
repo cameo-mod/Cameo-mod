@@ -98,9 +98,11 @@ HeavyOrdosCombatTankRockets:
 		Damage: 7
 
 120mm_cobra:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^TankDestroyerCannon
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@wh3: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	Inherits@4: ^D2K_Cannon
 	ReloadDelay: 80
 	Range: 7640
@@ -117,21 +119,17 @@ HeavyOrdosCombatTankRockets:
 		Damage: 30000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 30000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage:
 		Damage: 15
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 30000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 15000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 15
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 30000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 15000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 15
 
 120mm_cobra_deploy:
@@ -267,10 +265,12 @@ D2K_155mm_turret:
 		ExplosionPalette: effect75alpha
 
 Dune_SiegeMortar:
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^Grenade
-	Inherits@3: ^D2K_Cannon
-	Inherits@4: ^TankDestroyerCannon
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@wh3: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@4: ^D2K_Cannon
 	ReloadDelay: 80
 	Range: 9920
 	MinRange: 1985
@@ -288,25 +288,21 @@ Dune_SiegeMortar:
 		InaccuracyType: PerCellIncrement
 		Image: d2k_155mm
 		Palette: effect
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 10000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 5
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 10000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 5000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 5
 	Warhead@CannonHE_Medium:
 		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 10000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage:
 		Damage: 5
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_large_explosion
