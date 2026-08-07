@@ -447,23 +447,13 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -473,7 +463,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
@@ -482,31 +472,23 @@
        "D2K_APC_Rocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -516,7 +498,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
@@ -525,10 +507,12 @@
        "D2K_APC_Rocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -2789,23 +2773,13 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2815,43 +2789,37 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6185",
       "reloaddelay": "64",
       "slot": "Armament",
       "versus_templates": [
-       "^LightMissile",
-       "^MediumMissile",
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium",
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2861,21 +2829,25 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6185",
       "reloaddelay": "64",
       "slot": "Armament@garrisoned",
       "versus_templates": [
-       "^LightMissile",
-       "^MediumMissile",
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium",
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -3562,23 +3534,13 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3588,21 +3550,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
       "slot": "Armament",
       "versus_templates": [
-       "^LightMissile",
-       "^MediumMissile",
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium",
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_APC_Rocket",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -4274,23 +4240,13 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -4300,21 +4256,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
       "slot": "Armament",
       "versus_templates": [
-       "^LightMissile",
-       "^MediumMissile",
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium",
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_APC_Rocket",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -4735,23 +4695,13 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -4761,7 +4711,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
@@ -4770,31 +4720,23 @@
        "D2K_APC_Rocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -4804,7 +4746,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
@@ -4813,10 +4755,12 @@
        "D2K_APC_Rocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

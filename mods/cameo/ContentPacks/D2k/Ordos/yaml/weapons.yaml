@@ -390,9 +390,11 @@ D2K_Rocket_Trooper_AA:
 		Damage: 5
 
 D2K_APC_Rocket:
-	Inherits: ^LightMissile
-	Inherits@2: ^MediumMissile
-	Inherits@3: ^D2KRocket
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@wh2: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
+	Inherits: ^D2KRocket
 	ReloadDelay: 42
 	Range: 6500
 	Projectile: Missile
@@ -402,16 +404,16 @@ D2K_APC_Rocket:
 		MinimumLaunchSpeed: 222
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 22
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@MissileAP_Heavy:
@@ -420,7 +422,6 @@ D2K_APC_Rocket:
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-
 D2K_APC_Rocket_AA:
 	Inherits: D2K_APC_Rocket
 	ValidTargets: Air
