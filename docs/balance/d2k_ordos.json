@@ -1602,23 +1602,13 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "LightMissilePercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "FlakWeaponPercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1628,21 +1618,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9716",
       "reloaddelay": "75",
       "slot": "Armament",
       "versus_templates": [
-       "^LightMissile",
-       "^FlakWeapon",
+       "^Warhead_Flak_Medium",
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileAP_Light",
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium",
+       "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -1703,23 +1697,13 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "LightMissilePercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "FlakWeaponPercentage",
+        "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1729,21 +1713,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "9716",
       "reloaddelay": "75",
       "slot": "Armament@garrisoned",
       "versus_templates": [
-       "^LightMissile",
-       "^FlakWeapon",
+       "^Warhead_Flak_Medium",
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileAP_Light",
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium",
+       "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",

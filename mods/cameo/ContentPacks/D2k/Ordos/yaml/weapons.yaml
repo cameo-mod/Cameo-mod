@@ -357,9 +357,11 @@ D2K_Rocket_Trooper_AGOnly:
 		Damage: 5
 
 D2K_Rocket_Trooper_AA:
-	Inherits: ^LightMissile
-	Inherits@2: ^FlakWeapon
-	Inherits@3: ^D2KRocket
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@wh2: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileAP_Light
+	Inherits: ^D2KRocket
 	ReloadDelay: 75
 	Range: 9716
 	ValidTargets: Air
@@ -370,16 +372,16 @@ D2K_Rocket_Trooper_AA:
 		MinimumLaunchSpeed: 222
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 22
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Air
 		Damage: 10000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 5
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 10000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 5
 	Warhead@MissileAP_Heavy:
