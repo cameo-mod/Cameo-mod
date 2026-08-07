@@ -479,6 +479,12 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   TiberianDawn/Nod) converted to `Flame_Light + MissileAP_Medium`. The weapon
   keeps its local `Warhead@Effect` (`small_frag`) and inherits
   `^Projectile_Missile_Medium` because the missile side was the final `Inherits`.
+- **Single TankDestroyerCannon** (`110mm_Gun`, `IxianCombatTankCannon`,
+  `HeavyIxianCombatTankCannon` in D2k/Ixian, `TS70mmTur` in
+  TiberianSun/Forgotten) converted to `^Warhead_CannonAP_Light`,
+  `^Projectile_Shell_Light`, `^Effect_CannonAP_Light`. `D2K_Cannon` and
+  `^TSCannonEffect` addon inherits were preserved after the new 3-way
+  inherits so they continue to override Projectile/Effect.
 - **Single ArrowWeapon** (`RA2HoverMissile` in `weapons/redalert2.yaml`
   and `ContentPacks/RedAlert2/Shared`, `Future_MultiMissile` in
   RedAlert2Mod/FutureTech) converted to `^Warhead_Arrow_Light` while

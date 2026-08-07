@@ -44,7 +44,9 @@ TS70mmTur:
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
 	Inherits@4: ^TSCannonEffect
-	Inherits@5: ^TankDestroyerCannon
+	Inherits@5: ^Warhead_CannonAP_Light
+	Inherits@6: ^Projectile_Shell_Light
+	Inherits@7: ^Effect_CannonAP_Light
 	ReloadDelay: 10
 	Range: 6574
 	Projectile: Bullet
@@ -55,9 +57,9 @@ TS70mmTur:
 		Damage: 4000
 	Warhead@CannonHE_Medium_Percentage:
 		Damage: 2
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage:
 		Damage: 2
 
 TS70mmTurChem:

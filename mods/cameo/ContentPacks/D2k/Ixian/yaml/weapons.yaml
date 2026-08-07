@@ -2,16 +2,18 @@
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^TankDestroyerCannon
-	Inherits@5: ^D2K_Cannon
+	Inherits@4: ^Warhead_CannonAP_Light
+	Inherits@5: ^Projectile_Shell_Light
+	Inherits@6: ^Effect_CannonAP_Light
+	Inherits@7: ^D2K_Cannon
 	ReloadDelay: 50
 	Range: 7979
 	Report: TURRET1.WAV
 	Projectile: Bullet
 		Speed: 797
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 10000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage:
 		Damage: 5
 	Warhead@CannonHE_Medium:
 		Damage: 10000
@@ -26,15 +28,17 @@ IxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^TankDestroyerCannon
-	Inherits@5: ^D2K_Cannon
+	Inherits@4: ^Warhead_CannonAP_Light
+	Inherits@5: ^Projectile_Shell_Light
+	Inherits@6: ^Effect_CannonAP_Light
+	Inherits@7: ^D2K_Cannon
 	Range: 5555
 	ReloadDelay: 35
 	Projectile: Bullet
 		Speed: 555
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage:
 		Damage: 2
 	Warhead@CannonHE_Heavy:
 		Damage: 4000
@@ -49,15 +53,17 @@ HeavyIxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^TankDestroyerCannon
-	Inherits@5: ^D2K_Cannon
+	Inherits@4: ^Warhead_CannonAP_Light
+	Inherits@5: ^Projectile_Shell_Light
+	Inherits@6: ^Effect_CannonAP_Light
+	Inherits@7: ^D2K_Cannon
 	Range: 6000
 	ReloadDelay: 40
 	Projectile: Bullet
 		Speed: 600
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 6000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage:
 		Damage: 3
 	Warhead@CannonHE_Heavy:
 		Damage: 6000

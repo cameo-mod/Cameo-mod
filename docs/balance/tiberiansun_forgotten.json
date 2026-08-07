@@ -1344,18 +1344,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6574",
       "reloaddelay": "10",
@@ -1366,10 +1361,13 @@
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
        "^TSCannonEffect",
-       "^TankDestroyerCannon"
+       "^Warhead_CannonAP_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_CannonAP_Light"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_CannonAP_Light"
       ],
       "weapon": "TS70mmTur",
       "weapon_class_source": "template"
