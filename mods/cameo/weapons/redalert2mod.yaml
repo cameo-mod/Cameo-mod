@@ -3,18 +3,17 @@
 ####################################################################################################
 
 AsianHowitzerSplash:
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^HeavyBomb
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@wh2: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	Projectile: InstantExplode
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 20000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 10
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 20000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 10
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_verylarge_twlt
@@ -712,7 +711,7 @@ NaxiMP40:
 		Damage: 2000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1625,11 +1624,11 @@ naxis_sssoldier_smg:
 	Report: nax_mp40.wav
 	Projectile: Bullet
 		Inaccuracy: 600
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1

@@ -7,11 +7,11 @@ CHGuardRifle:
 	Range: 5547
 	ValidTargets: Ground, Water, Air
 	Report: iredweaa.wav, iredweab.wav, iredweac.wav, iredwead.wav
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1001,7 +1001,7 @@ M60mgWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: M60mgJapan
 	Inherits@3: ^WaveforceBulletProjectile
-	Warhead@Bullet_Light:
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -2080,11 +2080,11 @@ JHighV:
 	Range: 6696
 	-Report:
 	StartBurstReport: gun8.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2

@@ -350,8 +350,9 @@ TSHighVelocityTur:
 		Damage: 24
 
 TSBusMortar:
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^HeavyBomb
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@wh2: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 120
 	Range: 7850
 	TargetActorCenter: true
@@ -365,15 +366,13 @@ TSBusMortar:
 		ContrailStartColor: AAAA4488
 		ContrailEndColor: 22222222
 		TrailImage: black_smokey
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 32000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 16000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 16
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 32000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 16
 
 TSBusMortarChem:
@@ -586,8 +585,9 @@ TSJuggerboat90mm:
 	# Warhead@3Eff: CreateEffect
 	# 	Explosions: artillery_explosion
 TSBoatcannon:
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^HeavyBomb
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@wh2: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 80
 	Burst: 2
 	BurstDelays: 3
@@ -598,10 +598,10 @@ TSBoatcannon:
 		Blockable: false
 		Speed: 800
 		ContrailLength: 8
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 16000
 		Spread: 400
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 8
 		Spread: 400
 TSChemJuggerboat90mm:
@@ -1894,11 +1894,11 @@ TSMutVulcanTurret:
 	ReloadDelay: 6
 	Range: 6272
 	Report: tsgun4.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1927,11 +1927,11 @@ TSBowlerCannon:
 	ReloadDelay: 5
 	Range: 6603
 	Report: chaingn1.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -2086,11 +2086,11 @@ TSSergGun:
 	ReloadDelay: 8
 	Range: 5611
 	Report: cygun1.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 8000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 8000
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage

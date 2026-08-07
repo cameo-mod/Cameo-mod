@@ -996,7 +996,7 @@ MachineGunHumvee2_AA:
 	Inherits: MachineGunHumvee2
 	Range: 8397
 	ValidTargets: Air
-	Warhead@Bullet_Light:
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Air
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -1026,7 +1026,7 @@ MachineGunHumvee2AP_AA:
 	Inherits: MachineGunHumvee2AP
 	Range: 8397
 	ValidTargets: Air
-	Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -1290,11 +1290,11 @@ OfficerMachineGun:
 	BurstDelays: 4
 	Range: 5596
 	Report: mgun11.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 8000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 8000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1909,11 +1909,11 @@ td_gdi_shotgunner_shotgun:
 	SoundVolume: 0.2
 	Projectile: Bullet
 		Inaccuracy: 800
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1

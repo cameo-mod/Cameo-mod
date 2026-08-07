@@ -751,8 +751,9 @@ TSGDIRedEye:
 		ImpactActors: false
 
 TSBomb:
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^HeavyBomb
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@wh2: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 38
 	Burst: 5
 	BurstDelays: 3
@@ -763,19 +764,16 @@ TSBomb:
 		Acceleration: 0, 0, -10
 		Image: 120mm
 		Shadow: true
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Ship
 		Damage: 10000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Ship
-		Damage: 5000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		ValidTargets: Ground, Ship
 		Damage: 5
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 10000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		ValidTargets: Ground, Ship
 		Damage: 5
 	Warhead@Effect: CreateEffect
@@ -926,7 +924,7 @@ TSJumpCannon:
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
-	Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1032,11 +1030,11 @@ TSVulcanGun:
 	BurstDelays: 2
 	Range: 6809
 	-Report:
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2

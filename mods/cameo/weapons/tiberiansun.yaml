@@ -231,8 +231,9 @@ TSHighVelocityTurChem:
 		Explosions: artillery_explosion
 
 TS155mm:
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^HeavyBomb
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@wh2: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 135
 	Range: 13083
 	MinRange: 2615
@@ -242,15 +243,13 @@ TS155mm:
 		LaunchAngle: 165
 		ContrailLength: 30
 		ContrailWidth: 0c32
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 30000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 15000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 15
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 30000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 15
 	# Warhead@3Eff: CreateEffect
 	# 	Explosions: artillery_explosion

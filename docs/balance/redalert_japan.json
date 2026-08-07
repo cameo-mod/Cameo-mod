@@ -1503,19 +1503,9 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Bullet_Medium",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -1554,19 +1544,9 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Bullet_Medium",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -7458,6 +7438,11 @@
         "damage": "1",
         "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Bullet_Light",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",

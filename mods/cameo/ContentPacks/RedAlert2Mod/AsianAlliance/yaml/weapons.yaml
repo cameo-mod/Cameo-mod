@@ -3,7 +3,7 @@ RA2AsianShotgun:
 	ReloadDelay: 52
 	Range: 4567
 	Report: aa_sshtgatt.wav
-	Warhead@Bullet_Light:
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 6000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
@@ -47,7 +47,7 @@ asianalliance_asianmilitia_shotgun:
 	ReloadDelay: 50
 	Range: 4500
 	Report: aa_sshtgatt.wav
-	Warhead@Bullet_Light:
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 6000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
@@ -207,11 +207,11 @@ RA2AsianShotgunFanatic1:
 		Damage: 1000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Light:
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -458,13 +458,13 @@ AsianLynxMG:
 	BurstDelays: 2
 	Range: 5357
 	Report: vifvat2a.wav, vifvat2b.wav, vifvat2c.wav
-	Warhead@Bullet_Light:
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -487,10 +487,10 @@ AsianKamikazeChaingun:
 	Range: 7000
 	MinRange: 1400
 	Report: vifvat2a.wav, vifvat2b.wav, vifvat2c.wav
-	Warhead@Bullet_Light:
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1021,7 +1021,7 @@ AsianPulverizerGatling:
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
-	Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1752,13 +1752,13 @@ AsianPelicanMG:
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Light:
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1951,13 +1951,13 @@ ASDFGun:
 	BurstDelays: 2
 	InvalidTargets: Structure, Bridge, wall
 	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Light:
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -2297,11 +2297,11 @@ asianalliance_fanatic_shotgun:
 	SoundVolume: 0.1
 	Projectile: Bullet
 		Inaccuracy: 800
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1

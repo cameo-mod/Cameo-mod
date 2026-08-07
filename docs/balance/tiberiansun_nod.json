@@ -133,6 +133,11 @@
       "damage_warheads": [
        {
         "damage": "0",
+        "tag": "Bullet_Medium",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "0",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -157,6 +162,11 @@
       "burst": "5",
       "burstdelays": "0",
       "damage_warheads": [
+       {
+        "damage": "4000",
+        "tag": "Bullet_Medium",
+        "type": "SpreadDamage"
+       },
        {
         "damage": "2",
         "tag": "Bullet_Medium_Percentage",
@@ -1400,19 +1410,9 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "Bullet_Medium",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1503,19 +1503,9 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "Bullet_Medium",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2926,33 +2916,18 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "30000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "30000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "2615",
       "pricing": true,
       "range": "13083",
@@ -2960,44 +2935,33 @@
       "requires": "(deployed || undeployed) && !ts_nod_upgrade_auxiliaryweapon",
       "slot": "Armament@Deployed",
       "versus_templates": [
-       "^ShrapnelWeapon",
-       "^HeavyBomb"
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Demolition_Heavy",
+       "^Effect_Demolition_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Demolition_Heavy"
+      ],
       "weapon": "TS155mm",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "30000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "30000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "2615",
       "pricing": true,
       "range": "13083",
@@ -3007,9 +2971,12 @@
       "versus_templates": [
        "TS155mm"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Demolition_Heavy"
+      ],
       "weapon": "TSAux155mm",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

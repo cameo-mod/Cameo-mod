@@ -1750,19 +1750,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Bullet_Medium",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3509,19 +3499,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "Bullet_Medium",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3552,19 +3532,9 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "Bullet_Medium",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -5853,45 +5823,34 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "1000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament",
       "versus_templates": [
-       "^ShrapnelWeapon",
-       "^HeavyBomb"
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Demolition_Heavy",
+       "^Effect_Demolition_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Demolition_Heavy"
+      ],
       "weapon": "TSBoatcannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -6960,19 +6919,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Bullet_Medium",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -8993,45 +8942,34 @@
      {
       "damage_warheads": [
        {
-        "damage": "32000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "16000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "16",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "32000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "16",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7850",
       "reloaddelay": "120",
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^ShrapnelWeapon",
-       "^HeavyBomb"
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Demolition_Heavy",
+       "^Effect_Demolition_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Demolition_Heavy"
+      ],
       "weapon": "TSBusMortar",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [

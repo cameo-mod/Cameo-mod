@@ -11,7 +11,7 @@ IncendiaryM1Carbine:
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Light:
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -30,11 +30,11 @@ ra1_soviets_ak47conscript_rifle:
 	SoundVolume: 0.5
 	ValidTargets: Ground, Water
 	Report: conscriptak.wav
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1449,11 +1449,11 @@ BTRMachineGun:
 	BurstDelays: 4
 	Range: 5454
 	Report: mgun11.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -3984,7 +3984,7 @@ RAGatlingTankCannon_AA:
 	Inherits: RAGatlingTankCannon
 	Range: 7500
 	ValidTargets: Air
-	Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium: SpreadDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -4162,7 +4162,7 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Bullet_Light:
+	Warhead@Bullet_Light: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage

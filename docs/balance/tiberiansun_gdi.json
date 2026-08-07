@@ -472,45 +472,34 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "38",
       "requires": "!ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^ShrapnelWeapon",
-       "^HeavyBomb"
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Demolition_Heavy",
+       "^Effect_Demolition_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Demolition_Heavy"
+      ],
       "weapon": "TSBomb",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "5",
@@ -1926,19 +1915,9 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Bullet_Medium",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -2750,6 +2729,11 @@
         "damage": "2",
         "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Bullet_Medium",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",

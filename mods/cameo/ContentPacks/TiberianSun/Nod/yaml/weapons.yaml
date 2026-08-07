@@ -315,11 +315,11 @@ elitecadregun:
 	Report: cygun1.aud
 	Range: 6217
 	ValidTargets: Ground, Air
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 8000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 8000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -469,7 +469,7 @@ TSHarpyMultiClaw:
 	TargetActorCenter: true
 	Projectile: Bullet
 		Inaccuracy: 1024
-	Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium: SpreadDamage
 		Damage: 0
 		ValidTargets: Ground, Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -478,7 +478,7 @@ TSHarpyMultiClaw:
 
 TSHarpyAOEClaw:
 	Inherits: TSHarpyClaw
-	Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium: SpreadDamage
 		Spread: 300
 		Falloff: 100, 50, 25
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage

@@ -4314,19 +4314,9 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Bullet_Medium",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4359,19 +4349,9 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Bullet_Medium",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -6261,6 +6241,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "tag": "Bullet_Light",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
@@ -6296,6 +6281,11 @@
         "damage": "1",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Bullet_Light",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -9073,19 +9063,9 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Bullet_Medium",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -9525,6 +9505,11 @@
      },
      {
       "damage_warheads": [
+       {
+        "damage": "2000",
+        "tag": "Bullet_Medium",
+        "type": "SpreadDamage"
+       },
        {
         "damage": "1",
         "tag": "Bullet_Medium_Percentage",

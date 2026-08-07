@@ -347,7 +347,7 @@ TSVulcanTower:
 	ReloadDelay: 26
 	Range: 6144
 	Report: chaingn1.aud
-	Warhead@Bullet_Light:
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -414,11 +414,11 @@ CabalCyborgChaingun:
 	Report: cygun1.aud
 	ReloadDelay: 60
 	Range: 5800
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 10000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 10000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
@@ -437,11 +437,11 @@ TSDevoutChainguns:
 	Burst: 2
 	BurstDelays: 3
 	Range: 6200
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 12000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 12000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
