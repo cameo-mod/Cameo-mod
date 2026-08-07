@@ -129,7 +129,12 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
      `wh/proj/fx` model. A broader attempt that included multi-addon `Steel`/
      `RA2` weapons produced 46 empty-type warheads and was reverted before
      boot. Strict single-inherit-only filter passed `find_empty_warhead.py = 0`.
-   - **Effect-heavy clusters (flame/chemical/sonic/energy) are BLOCKED** until a `PhysicalState`/`GroundFire`/
+   - **Effect-heavy clusters (flame/chemical/sonic/energy) are now partially unblocked.**
+     The `Grenade+LightFlameWeapon` (`Demolition_Light+Flame_Light`) test cluster
+     converted cleanly by keeping local `PhysicalState` overrides minimal
+     (`Amount` only) and dropping `FriendlyFire` nodes that the new `^Warhead_*`
+     templates already provide. The remaining effect-heavy families can use the
+     same pattern once the converter is generalized.
      `EMP`/ExtraDamage-aware converter is built — see `docs/LESSONS_LEARNED.md` § "Effect-warhead merge safety".
      **Phase A progress (2026-08-02):** `tools/archive/retrofit_v3.py` repointed ~130 single-inherit
      weapons from `^SmallArms`→`^Bullet_Light`/`^ProjectileBullet_Light`/`^EffectBullet_Light` and

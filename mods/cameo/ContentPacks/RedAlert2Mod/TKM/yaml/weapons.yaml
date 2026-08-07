@@ -275,8 +275,10 @@ ThermoF:
 	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 1000
 tkmm203:
-	Inherits: ^Grenade
-	Inherits@2: ^LightFlameWeapon
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Warhead_Flame_Light
+	Inherits@3: ^Projectile_Grenade_Light
+	Inherits@4: ^Effect_Flame_Light
 	ReloadDelay: 100
 	Range: 5621
 	Report: m203.wav
@@ -288,17 +290,13 @@ tkmm203:
 		ContrailEndWidth: 22
 		ContrailStartColor: FF8888FF
 		ContrailEndColor: FFFFFF22
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 2
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 4000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage:
 		Damage: 2
 tkmrockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
@@ -1278,8 +1276,10 @@ tkmm16ap:
 		Damage: 1
 
 tkm_trooper_gp25:
-	Inherits: ^Grenade
-	Inherits@2: ^LightFlameWeapon
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Warhead_Flame_Light
+	Inherits@3: ^Projectile_Grenade_Light
+	Inherits@4: ^Effect_Flame_Light
 	ReloadDelay: 80
 	Range: 5500
 	Report: m203.wav
@@ -1291,17 +1291,13 @@ tkm_trooper_gp25:
 		ContrailEndWidth: 22
 		ContrailStartColor: FF8888FF
 		ContrailEndColor: FFFFFF22
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 6000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 3000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 3
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 6000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage:
 		Damage: 3
 
 tkmstrykerfirerockets:

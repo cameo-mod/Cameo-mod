@@ -403,6 +403,14 @@ converted (`Chaingun+Grenade`, `HeavyBomb+RailgunWeapon`, `ArrowWeapon+MediumMis
 template does not include `LaunchAngle`.
 A final effect-free dual `Grenade+RailgunWeapon` (`GlaveCanon`, StarCraft Protoss)
 was converted to `Demolition_Light+Railgun_Heavy`.
+- **First effect-heavy cluster test** (`Grenade+LightFlameWeapon` →
+  `Demolition_Light+Flame_Light`) converted 4 parent molotovs
+  (`ConscriptMolotov`, `GrenadeRA`, `tkmm203`, `tkm_trooper_gp25`) and 3
+  child weapons. The `PhysicalStateLightFlameWeapon` local overrides were
+  preserved (only `Amount` differs from `^Effect_Flame_Light`); `FriendlyFire`
+  warhead nodes were stripped because the `^Warhead_*` templates already
+  supply them. First attempt duplicated `Damage` under the new warhead key
+  because `FriendlyFire` children were not skipped; fixed and boot-gated.
 
 ### 14.8 Single-inherit effect-free sweep (2026-08-07)
 

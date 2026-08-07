@@ -5457,99 +5457,69 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5791",
       "reloaddelay": "40",
       "requires": "!ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament",
       "versus_templates": [
-       "^Grenade",
-       "^LightFlameWeapon"
+       "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Flame_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "GrenadeRA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5791",
       "reloaddelay": "40",
       "requires": "!ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Grenade",
-       "^LightFlameWeapon"
+       "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Flame_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "GrenadeRA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -5584,38 +5554,18 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5791",
       "reloaddelay": "40",
@@ -5626,9 +5576,12 @@
        "^MediumFlameWeapon",
        "GrenadeRA"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "GrenadeThermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -5664,38 +5617,18 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5791",
       "reloaddelay": "40",
@@ -5706,9 +5639,12 @@
        "^MediumFlameWeapon",
        "GrenadeRA"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "GrenadeThermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -145,8 +145,10 @@ VengeanceActivator3:
 		ValidRelationships: Ally
 
 ConscriptMolotov:
-	Inherits: ^Grenade
-	Inherits@2: ^LightFlameWeapon
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Warhead_Flame_Light
+	Inherits@3: ^Projectile_Grenade_Light
+	Inherits@4: ^Effect_Flame_Light
 	ReloadDelay: 50
 	Range: 5725
 	Report: toss1.aud
@@ -158,17 +160,13 @@ ConscriptMolotov:
 		ContrailEndWidth: 22
 		ContrailStartColor: FF8888FF
 		ContrailEndColor: FFFFFF22
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 4
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 8000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage:
 		Damage: 4
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 8000
@@ -187,17 +185,13 @@ ConscriptMolotov:
 
 ConscriptMolotovExplode:
 	Inherits: ConscriptMolotov
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 2
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flame_Light:
 		Damage: 4000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage:
 		Damage: 2
 	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
 		Amount: 4000

@@ -2696,33 +2696,13 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "6000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -2734,44 +2714,29 @@
       "requires": "tkm_upgrade_gp25upgrade",
       "slot": "Armament@gp25",
       "versus_templates": [
-       "^Grenade",
-       "^LightFlameWeapon"
+       "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Flame_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "tkm_trooper_gp25",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "6000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -2783,12 +2748,17 @@
       "requires": "tkm_upgrade_gp25upgrade",
       "slot": "Armament@GARRISONEDM203",
       "versus_templates": [
-       "^Grenade",
-       "^LightFlameWeapon"
+       "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Flame_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "tkm_trooper_gp25",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
