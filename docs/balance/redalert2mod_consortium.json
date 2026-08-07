@@ -1016,9 +1016,14 @@
      {
       "damage_warheads": [
        {
-        "damage": "100000",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
+        "damage": "50",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50",
+        "tag": "TeslaCharged_Super_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "50000",
@@ -1026,24 +1031,9 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "50",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "100000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "50000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "50",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "50000",
@@ -1057,7 +1047,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.375,
       "pricing": true,
       "range": "2500",
       "reloaddelay": "25",
@@ -1065,9 +1055,12 @@
       "versus_templates": [
        "SteelInspectorIonCannonDamage"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_TeslaCharged_Super"
+      ],
       "weapon": "SteelInspectorIonCannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

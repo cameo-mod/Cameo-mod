@@ -429,6 +429,12 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   `^Projectile_Laser_Heavy` and `^Effect_Laser_Heavy`/`^Effect_Railgun_Heavy`;
   local `LaserZap`/`Railgun` projectile overrides and custom `Warhead@Effect`
   were preserved.
+- **TeslaChargedWeapon + TeslaWeapon** converted 6 pure dual-inherit EMP/ion
+  weapons to `Tesla_Heavy + TeslaCharged_Super` with `^Projectile_Lightning_Super`
+  and `^Effect_Tesla_Super`. `PulseMissile` (D2k), `IonCannon`,
+  `Support_EMP_Bomb`, `SteelInspectorIonCannonDamage`, and others. Weapons with a
+  local `Projectile:` got only `^Effect_Tesla_Super` so their custom projectiles
+  stayed intact.
 - **TeslaWeapon + MagicWeapon** converted 9 weapons to
   `Tesla_Heavy + Magic_Heavy` with `^Effect_Magic_Heavy`. `RA2DiskDrain` was
   skipped because it uses `^TeslaWeapon` only for `DamageTypes`, not for a

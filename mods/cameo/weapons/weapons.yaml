@@ -8689,18 +8689,20 @@ Pistol:
 ###############################################
 
 ^AtomicCore:
-	Inherits: ^TeslaChargedWeapon
-	Inherits@2: ^TeslaWeapon
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_TeslaCharged_Super
+	Inherits@3: ^Projectile_Lightning_Super
+	Inherits@4: ^Effect_Tesla_Super
 	Inherits@nuke: ^Warhead_Nuclear_Super
 	ValidTargets: Ground, Air
 	Report: nukemisl.aud
-	Warhead@TeslaChargedWeapon: SpreadDamage
+	Warhead@TeslaCharged_Super:
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 1000
 		Damage: 100000
 		Delay: 0
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaCharged_Super_Percentage:
 		ValidTargets: Shielded
 		Falloff: 100, 0
 		Spread: 10000
@@ -8712,13 +8714,13 @@ Pistol:
 		Spread: 1000
 		Damage: 100000
 		Delay: 2
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 1000
 		Damage: 100000
 		Delay: 3
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		ValidTargets: Shielded
 		Falloff: 100, 0
 		Spread: 10000
@@ -8804,16 +8806,18 @@ Atomic:
 	Inherits: ^AtomicCore
 
 IonCannon:
-	Inherits: ^TeslaChargedWeapon
-	Inherits@2: ^TeslaWeapon
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_TeslaCharged_Super
+	Inherits@3: ^Projectile_Lightning_Super
+	Inherits@4: ^Effect_Tesla_Super
 	ValidTargets: Ground, Water, Air
-	Warhead@TeslaChargedWeapon: SpreadDamage
+	Warhead@TeslaCharged_Super:
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 1000
 		Damage: 100000
 		Delay: 0
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaCharged_Super_Percentage:
 		ValidTargets: Shielded
 		Falloff: 100, 0
 		Spread: 10000
@@ -8825,13 +8829,13 @@ IonCannon:
 		Spread: 1000
 		Damage: 100000
 		Delay: 2
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 1000
 		Damage: 100000
 		Delay: 3
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		ValidTargets: Shielded
 		Falloff: 100, 0
 		Spread: 10000

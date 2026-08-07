@@ -463,13 +463,14 @@ SteelTwisterMissiles_elite:
 		ContrailEndColor: FFFFFF
 
 Support_EMP_Bomb:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^TeslaChargedWeapon
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_TeslaCharged_Super
+	Inherits@3: ^Effect_Tesla_Super
 	Report: mobemp1.aud
 	Range: 25000
 	ReloadDelay: 250
 	Projectile: InstantExplode
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 10000
@@ -481,13 +482,13 @@ Support_EMP_Bomb:
 		Damage: 5000
 		Spread: 5000
 		InvalidTargets: Infantry
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 5
 		Spread: 10000
 		InvalidTargets: Infantry
-	Warhead@TeslaChargedWeapon: SpreadDamage
+	Warhead@TeslaCharged_Super:
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 10000
@@ -499,7 +500,7 @@ Support_EMP_Bomb:
 		Damage: 5000
 		Spread: 5000
 		InvalidTargets: Infantry
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaCharged_Super_Percentage:
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 5
