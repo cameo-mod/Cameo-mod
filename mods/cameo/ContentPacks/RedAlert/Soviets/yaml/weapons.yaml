@@ -2410,7 +2410,9 @@ ThermobaricMaverick:
 
 NuclearMaverick:
 	Inherits: ^NuclearWarhead
-	Inherits@2: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileHE_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_MissileHE_Heavy
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 4
@@ -2437,10 +2439,10 @@ NuclearMaverick:
 	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 	Warhead@Effect: CreateEffect
