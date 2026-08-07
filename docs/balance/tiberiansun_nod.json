@@ -3174,40 +3174,35 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "6000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6554",
       "reloaddelay": "40",
       "requires": "!ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^LightMissile",
-       "^MediumMissile"
+       "^Warhead_MissileHE_Light",
+       "^Warhead_MissileHE_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileHE_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Light",
+       "^Warhead_MissileHE_Medium"
+      ],
       "weapon": "TSBikeMissile",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",

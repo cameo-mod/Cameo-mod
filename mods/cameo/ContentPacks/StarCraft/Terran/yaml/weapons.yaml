@@ -210,8 +210,10 @@ MatadorLaser:
 		Damage: 16
 
 CycloneRockets:
-	Inherits: ^MediumMissile
-	Inherits@2: ^LightMissile
+	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@wh2: ^Warhead_MissileHE_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileHE_Light
 	Report: cycloneshoot1.wav, cycloneshoot2.wav, cycloneshoot3.wav
 	ReloadDelay: 35
 	Range: 7320
@@ -235,13 +237,13 @@ CycloneRockets:
 		TrailImage: bazooka_trail2
 		TrailPalette: effect75alpha
 		TrailInterval: 1
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium:
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage:
 		Damage: 1
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileHE_Light:
 		Damage: 2000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Light_Percentage:
 		Damage: 1
 	Warhead@Condition: GrantExternalCondition
 		Range: 200

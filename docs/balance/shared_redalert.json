@@ -866,105 +866,85 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6643",
       "reloaddelay": "50",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^MediumMissile",
-       "^LightMissile"
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Light"
+      ],
       "weapon": "RocketsRA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "6643",
       "reloaddelay": "50",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^MediumMissile",
-       "^LightMissile"
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Light"
+      ],
       "weapon": "RocketsRA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6643",
       "reloaddelay": "50",
@@ -974,36 +954,29 @@
        "RocketsRA",
        "^CryoMissileProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Light"
+      ],
       "weapon": "RocketsRACryo",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "6643",
       "reloaddelay": "50",
@@ -1013,9 +986,12 @@
        "RocketsRA",
        "^CryoMissileProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Light"
+      ],
       "weapon": "RocketsRACryo",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

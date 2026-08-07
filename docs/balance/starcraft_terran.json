@@ -5464,68 +5464,53 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7320",
       "reloaddelay": "35",
       "requires": "!lockedon",
       "slot": "Armament",
       "versus_templates": [
-       "^MediumMissile",
-       "^LightMissile"
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Light"
+      ],
       "weapon": "CycloneRockets",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "6",
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LightMissilePercentage",
+        "tag": "MissileHE_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "35",
@@ -5534,9 +5519,12 @@
       "versus_templates": [
        "CycloneRockets"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Light"
+      ],
       "weapon": "CycloneRocketsLockOn",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

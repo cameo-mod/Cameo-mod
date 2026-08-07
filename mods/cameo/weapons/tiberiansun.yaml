@@ -792,8 +792,10 @@ TSMammothTusk_elite:
 	Range: 9216
 
 TSBikeMissile:
-	Inherits: ^LightMissile
-	Inherits@2: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileHE_Light
+	Inherits@wh2: ^Warhead_MissileHE_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_MissileHE_Medium
 	Range: 6554
 	Burst: 2
 	BurstDelays: 5
@@ -802,16 +804,16 @@ TSBikeMissile:
 	Projectile: Missile
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileHE_Light:
 		Damage: 6000
 		ValidTargets: Ground, Water, Air
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Light_Percentage:
 		Damage: 3
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium:
 		Damage: 6000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage:
 		Damage: 3
 		ValidTargets: Ground, Water, Air
 
