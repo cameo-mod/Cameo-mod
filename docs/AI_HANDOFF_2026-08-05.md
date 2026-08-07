@@ -583,6 +583,30 @@ included multi-addon weapons produced 46 empty-type warheads and was
 reverted before boot. The stricter filter left zero empty warheads and
 passed the boot-gate.
 
+### 14.9 Re-attempted `HeavyFlame + MediumFlame` dual-flame cluster (reverted)
+
+- Re-tried the same cluster with a stricter scope: `HarakanF`,
+  `MutHFlamer`, `FireballLauncherThermobaric`, `FireballGunThermobaric`
+  (4 weapons, 3 files). The conversion correctly re-pointed the two flame
+  warheads to `^Warhead_Flame_Heavy` / `^Warhead_Flame_Medium` and used
+  `^Effect_Flame_Heavy` for the dominant heavy tier.
+- Boot still failed with `OpenRA.FieldLoader+MissingFieldsException:
+  PhysicalStateName`. Root cause: even though the converter added
+  `PhysicalStateName`, `ValidRelationships`, and `Range` to the dominant
+  `PhysicalStateHeavyFlameWeapon` local overrides, at least one of the four
+  weapons still resolved to an `ApplyPhysicalState` node lacking
+  `PhysicalStateName`. The exact offending node was not isolated before
+  revert.
+- Working tree fully reverted; `master` remains at `2fe7976d0` and
+  `find_empty_warhead.py = 0` + `launch-game.cmd` boot-gate pass.
+- **Finding to carry forward:** the `PhysicalState`-aware pattern in
+  `14.7` (Triple-FlameWeapon) succeeded by injecting `PhysicalStateName:
+  Temperature` into every kept local `ApplyPhysicalState` warhead. The
+  `Heavy+Medium` subset needs the same care, plus a method for
+  `PhysicalStateMediumFlameWeapon` nodes that the chosen `^Effect_Flame_Heavy`
+  does not provide; they must either be dropped or have their full required
+  fields injected before the `^MediumFlameWeapon` inherit is removed.
+
 ---
 
 ## 15. Live remaining-effort estimate (after this Devin session)
