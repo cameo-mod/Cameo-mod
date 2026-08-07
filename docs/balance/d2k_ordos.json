@@ -349,38 +349,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "6",
-        "tag": "CannonHE_Heavy_Percentage",
+        "damage": "5",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "5",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -412,10 +392,40 @@
         "damage": "6",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-5000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-5000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
@@ -427,10 +437,12 @@
        "^MediumChemicalWeapon"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "Laboratory_Bioball",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -4625,38 +4637,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "6",
-        "tag": "CannonHE_Heavy_Percentage",
+        "damage": "5",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "5",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "-5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -4688,10 +4680,40 @@
         "damage": "6",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-5000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-5000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
@@ -4703,10 +4725,12 @@
        "^MediumChemicalWeapon"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "Laboratory_Bioball",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [

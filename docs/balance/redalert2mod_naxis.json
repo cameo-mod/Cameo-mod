@@ -8286,33 +8286,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -8327,7 +8307,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "55",
@@ -8336,11 +8316,13 @@
        "LatinBuggyRocket"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "LatinBuggyRocket_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",

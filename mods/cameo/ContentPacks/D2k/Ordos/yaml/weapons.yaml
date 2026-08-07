@@ -585,11 +585,13 @@ LeechJump:
 		DamageTypes: DefaultDeath, DroneInfection
 
 d2k_grenade:
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^Grenade
-	Inherits@5: ^ShrapnelWeapon
 	ReloadDelay: 60
 	Range: 6000
 	MinRange: 1200
@@ -607,27 +609,19 @@ d2k_grenade:
 		ContrailEndColor: 33221100
 		ContrailStartWidth: 24
 		ContrailEndWidth: 12
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageCalculationType: ClosestTargetablePosition

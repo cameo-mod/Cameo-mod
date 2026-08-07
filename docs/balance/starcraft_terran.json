@@ -4047,59 +4047,43 @@
       "damage_warheads": [
        {
         "damage": "2",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "875",
       "pricing": true,
       "range": "4375",
       "reloaddelay": "45",
       "slot": "Armament@Grenade",
       "versus_templates": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Grenade_Light",
+       "^Effect_Concussion_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ReaperGrenade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -4160,59 +4144,43 @@
       "damage_warheads": [
        {
         "damage": "2",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "875",
       "pricing": false,
       "range": "4375",
       "reloaddelay": "45",
       "slot": "Armament@GARRISONEDGrenade",
       "versus_templates": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Grenade_Light",
+       "^Effect_Concussion_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ReaperGrenade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

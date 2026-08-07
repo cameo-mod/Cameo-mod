@@ -188,24 +188,22 @@ AsianTankKillerRocketShrapnel:
 		InvalidTargets: Water
 
 RA2AsianShotgunFanatic1:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@3: ^RA2SmallArms
 	Inherits@4: ^RA2Chaingun
 	ReloadDelay: 50
 	Range: 5000
 	Report: aa_sshtgatt.wav
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 1
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 1
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 2000

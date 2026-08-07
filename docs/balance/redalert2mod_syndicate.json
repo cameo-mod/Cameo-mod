@@ -1936,42 +1936,22 @@
       "damage_warheads": [
        {
         "damage": "5",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
@@ -1979,17 +1959,21 @@
       "requires": "(!latinsyndicate_upgrade_asianalliancestolentechhotfire && !rank-elite)",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Grenade_Light",
+       "^Effect_Concussion_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "LatinMonkeyGrenade1",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -1997,42 +1981,22 @@
       "damage_warheads": [
        {
         "damage": "5",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2043,10 +2007,12 @@
        "LatinMonkeyGrenade1"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "LatinMonkeyGrenade2",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "3",
@@ -2054,42 +2020,22 @@
       "damage_warheads": [
        {
         "damage": "5",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1500",
       "pricing": true,
       "range": "7500",
@@ -2100,52 +2046,34 @@
        "LatinMonkeyGrenade2"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "LatinMonkeyGrenade3",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
         "damage": "5",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1300",
       "pricing": false,
       "range": "6500",
@@ -2153,17 +2081,21 @@
       "requires": "(!latinsyndicate_upgrade_asianalliancestolentechhotfire && !rank-elite)",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Grenade_Light",
+       "^Effect_Concussion_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "LatinMonkeyGrenade1",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -2172,42 +2104,22 @@
       "damage_warheads": [
        {
         "damage": "5",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": false,
       "range": "7000",
@@ -2218,10 +2130,12 @@
        "LatinMonkeyGrenade1"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "LatinMonkeyGrenade2",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -2230,42 +2144,22 @@
       "damage_warheads": [
        {
         "damage": "5",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1500",
       "pricing": false,
       "range": "7500",
@@ -2276,10 +2170,12 @@
        "LatinMonkeyGrenade2"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "LatinMonkeyGrenade3",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -6668,33 +6564,13 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6709,57 +6585,41 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "55",
       "requires": "!rank-elite",
       "slot": "Armament@Rocket",
       "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Grenade_Light",
+       "^Effect_Concussion_Medium",
        "^SteelLightMissile",
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "LatinBuggyRocket",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6774,7 +6634,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "55",
@@ -6784,11 +6644,13 @@
        "LatinBuggyRocket"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "LatinBuggyRocket_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

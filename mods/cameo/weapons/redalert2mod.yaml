@@ -1326,8 +1326,10 @@ RA2RTruckRocket:
 		ValidTargets: Ground, Water, Air
 
 LatinBuggyRocket:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@3: ^SteelLightMissile
 	Inherits@4: ^RA2MediumMissile
 	ReloadDelay: 55
@@ -1348,22 +1350,16 @@ LatinBuggyRocket:
 		MaximumLaunchSpeed: 240
 		Acceleration: 12
 		ContrailEndColor: E60000
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@MissileAP_Light:
