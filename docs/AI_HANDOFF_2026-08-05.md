@@ -630,6 +630,26 @@ passed the boot-gate.
   `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
   `extract_stats.py` refreshed 32 ledgers.
 
+### 14.11 `HeavyBomb + ShrapnelWeapon` dual conversion (`fa5b6d11`)
+
+- Converted 7 file occurrences / 6 distinct IDs: `RA2Terrorist`
+  (`weapons/redalert2.yaml` + `ContentPacks/RedAlert2/Shared`),
+  `SCScourgeDroneExplosion`, `SCScourgeExplosion`, `ASDFKamikazeExplosion`,
+  `NaxBrummbarArty`, `TSInfantryMortar`.
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_Demolition_Heavy
+  Inherits@wh2: ^Warhead_Concussion_Medium
+  Inherits@fx: ^Effect_Demolition_Heavy  # or ^Effect_Concussion_Medium when Shrapnel was last
+  ```
+- `HeavyBomb` → `Demolition_Heavy`, `ShrapnelWeapon` → `Concussion_Medium`,
+  `_Percentage` variants preserved. `*FriendlyFire` twins and removal markers
+  stripped. Transitive `^RA2Grenade` was decomposed into
+  `Inherits: ^Projectile_Grenade_Light` where a projectile was still needed;
+  `^RA2MediumCannon` and its `CannonHE_Medium` overrides were removed.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` boot-gate pass;
+  `extract_stats.py` refreshed 32 ledgers.
+
 ---
 
 ## 15. Live remaining-effort estimate (after this Devin session)
