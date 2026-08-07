@@ -433,6 +433,11 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   TiberianDawn/Nod) converted to `Flame_Light + MissileAP_Medium`. The weapon
   keeps its local `Warhead@Effect` (`small_frag`) and inherits
   `^Projectile_Missile_Medium` because the missile side was the final `Inherits`.
+- **SmallArms + Chaingun** (`d2k_air_drone_guns` in D2k/Ixian) converted to
+  `Bullet_Light + Bullet_Medium` while preserving the `^D2KMissile` addon.
+  The addon is kept first so its `Warhead@MissileAP_Heavy` still applies;
+  `^Projectile_Bullet_Medium` and `^Effect_Bullet_Medium` override the
+  missile projectile/effect because they are inherited last.
 - **TeslaWeapon + MediumMissile** (`JHindPlasmaCannon` in RedAlert/Japan)
   converted to `Tesla_Heavy + MissileAP_Medium` while keeping the `JHindCannon`
   custom inherit. `Warhead@ShrapnelWeapon` and `Warhead@TeslaExtraDamage` kept

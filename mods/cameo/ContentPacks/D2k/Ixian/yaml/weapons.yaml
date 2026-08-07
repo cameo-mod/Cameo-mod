@@ -1226,8 +1226,10 @@ D2K_RocketsCymek:
 
 d2k_air_drone_guns:
 	Inherits: ^D2KMissile
-	Inherits@2: ^SmallArms
-	Inherits@3: ^Chaingun
+	Inherits@2: ^Warhead_Bullet_Light
+	Inherits@3: ^Warhead_Bullet_Medium
+	Inherits@4: ^Projectile_Bullet_Medium
+	Inherits@5: ^Effect_Bullet_Medium
 	ReloadDelay: 28
 	Burst: 4
 	BurstDelays: 2
@@ -1241,16 +1243,16 @@ d2k_air_drone_guns:
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
