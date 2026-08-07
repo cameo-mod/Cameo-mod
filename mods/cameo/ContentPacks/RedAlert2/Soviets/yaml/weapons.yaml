@@ -255,7 +255,8 @@ RA2120mm_tesla_elite:
 	BurstDelays: 3
 
 RA160mm:
-	Inherits: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@2: ^RA2Grenade
 	ReloadDelay: 88
 	Range: 11111
@@ -274,11 +275,9 @@ RA160mm:
 		TrailImage: black_smokey
 		TrailPalette: effect75alpha
 		TrailInterval: 1
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 60000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 30000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 30
 	Warhead@Demolition_Light:
 		Damage: 60000

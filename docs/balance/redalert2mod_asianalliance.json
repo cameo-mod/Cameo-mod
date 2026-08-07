@@ -3240,18 +3240,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3268,10 +3258,12 @@
       "requires": "asianalliance_doctrine_modernizedinfantryequipment && !rank-elite",
       "slot": "Armament@GRENADE",
       "versus_templates": [
-       "^ShrapnelWeapon",
+       "^Warhead_Concussion_Medium",
+       "^Effect_Concussion_Medium",
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "asianalliance_asianmilitia_grenade",
@@ -3282,18 +3274,8 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3313,6 +3295,7 @@
        "asianalliance_asianmilitia_grenade"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "asianalliance_asianmilitia_grenade_elite",
@@ -3374,18 +3357,8 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3402,10 +3375,12 @@
       "requires": "asianalliance_doctrine_modernizedinfantryequipment && !rank-elite",
       "slot": "Armament@GRENADEG",
       "versus_templates": [
-       "^ShrapnelWeapon",
+       "^Warhead_Concussion_Medium",
+       "^Effect_Concussion_Medium",
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "asianalliance_asianmilitia_grenade",
@@ -3417,18 +3392,8 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3448,6 +3413,7 @@
        "asianalliance_asianmilitia_grenade"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "asianalliance_asianmilitia_grenade_elite",
@@ -8765,18 +8731,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -8792,10 +8748,12 @@
       "reloaddelay": "92",
       "slot": "Armament",
       "versus_templates": [
-       "^ShrapnelWeapon",
+       "^Warhead_Concussion_Medium",
+       "^Effect_Concussion_Medium",
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "AsianGrenade",

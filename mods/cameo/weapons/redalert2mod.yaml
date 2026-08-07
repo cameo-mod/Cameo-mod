@@ -601,7 +601,8 @@ NaxGrilleArty:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@5: ^RA2Grenade
 	ReloadDelay: 111
 	Range: 12345
@@ -616,11 +617,9 @@ NaxGrilleArty:
 		Damage: 16000
 	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 8
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 16000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Demolition_Light:
 		Damage: 16000

@@ -1016,7 +1016,8 @@ SandmarineTuskFire:
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 ViperMissiles:
-	Inherits: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@2: ^RA2MediumMissile
 	ReloadDelay: 50
 	Burst: 4
@@ -1038,10 +1039,10 @@ ViperMissiles:
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Acceleration: 10
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium:

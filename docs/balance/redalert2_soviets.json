@@ -818,18 +818,8 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "60000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -839,7 +829,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "2222",
       "pricing": true,
       "range": "11111",
@@ -847,10 +837,12 @@
       "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions && deployed",
       "slot": "Armament@Deployed",
       "versus_templates": [
-       "^ShrapnelWeapon",
+       "^Warhead_Concussion_Medium",
+       "^Effect_Concussion_Medium",
        "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mm",
@@ -890,6 +882,16 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "30",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "18",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "36000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
@@ -903,15 +905,10 @@
         "damage": "18",
         "tag": "ShrapnelWeaponPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "18",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "2222",
       "pricing": true,
       "range": "11111",
@@ -925,6 +922,7 @@
        "^RA2RadShell"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mm_rad",
@@ -934,18 +932,8 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "60000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -955,7 +943,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "2222",
       "pricing": true,
       "range": "11111",
@@ -966,6 +954,7 @@
        "RA160mm"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mm_fire",
@@ -975,18 +964,8 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "60000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -996,7 +975,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "2222",
       "pricing": true,
       "range": "11111",
@@ -1007,6 +986,7 @@
        "RA160mm"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mm_tesla",
@@ -1018,18 +998,8 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "60000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1039,7 +1009,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "2222",
       "pricing": true,
       "range": "12345",
@@ -1051,6 +1021,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mmE_elite",
@@ -1095,6 +1066,16 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "30",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "18",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
         "damage": "36000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
@@ -1108,15 +1089,10 @@
         "damage": "18",
         "tag": "ShrapnelWeaponPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "18",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "2222",
       "pricing": true,
       "range": "12345",
@@ -1131,27 +1107,18 @@
       ],
       "warheads": [
        "^Warhead_Nuclear_Super",
+       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mmE_rad_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "60000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1161,7 +1128,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "2222",
       "pricing": true,
       "range": "12345",
@@ -1173,6 +1140,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mmE_fire_elite",
@@ -1182,18 +1150,8 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "60000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1203,7 +1161,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "2222",
       "pricing": true,
       "range": "12345",
@@ -1215,6 +1173,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mmE_tesla_elite",

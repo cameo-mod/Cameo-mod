@@ -1474,23 +1474,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6404",
       "reloaddelay": "48",
@@ -1501,10 +1491,12 @@
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^TSCannonEffect",
-       "^ShrapnelWeapon"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Concussion_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "TSScoopDualTur",
       "weapon_class_source": "template"
@@ -7208,18 +7200,8 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "30000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -7235,10 +7217,12 @@
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
        "^TSCannon",
-       "^ShrapnelWeapon"
+       "^Warhead_Concussion_Medium",
+       "^Effect_Concussion_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "TS120mmx",
       "weapon_class_source": "template"

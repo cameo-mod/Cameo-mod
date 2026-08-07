@@ -221,7 +221,8 @@ LunarNaxiJadgDestroyer:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@5: ^RA2TankDestroyerCannon
 	ReloadDelay: 90
 	Range: 7379
@@ -231,11 +232,9 @@ LunarNaxiJadgDestroyer:
 		Damage: 30000
 	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 15
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 30000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 15000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@CannonAP_Light:
 		Damage: 30000

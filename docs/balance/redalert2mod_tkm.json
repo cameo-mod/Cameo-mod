@@ -329,18 +329,8 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -357,10 +347,12 @@
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !uptitanarsenalupgrade",
       "slot": "Armament@BOMBS",
       "versus_templates": [
-       "^ShrapnelWeapon",
+       "^Warhead_Concussion_Medium",
+       "^Effect_Concussion_Medium",
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ViperMissiles",
@@ -371,18 +363,8 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -403,6 +385,7 @@
        "^CryoMissileProjectile"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ViperMissilesCryo",
@@ -413,18 +396,8 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -444,6 +417,7 @@
        "ViperMissiles"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ViperMissilesTwin",
@@ -464,18 +438,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -501,6 +465,7 @@
       "warheads": [
        "^Warhead_MissileAP_Light",
        "^Warhead_Flame_Light",
+       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ViperMissilesFire",

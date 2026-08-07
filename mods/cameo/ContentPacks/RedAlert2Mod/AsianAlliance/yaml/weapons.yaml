@@ -18,18 +18,17 @@ RA2AsianShotgun_elite:
 	BurstDelays: 3
 
 AsianGrenade:
-	Inherits: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@2: ^RA2MediumCannon
 	ReloadDelay: 92
 	Range: 4567
 	Report: vlasatta.wav
 	Projectile: Bullet
 		Speed: 456
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@CannonHE_Medium:
 		Damage: 4000
@@ -62,18 +61,17 @@ asianalliance_asianmilitia_shotgun_elite:
 	BurstDelays: 3
 
 asianalliance_asianmilitia_grenade:
-	Inherits: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@2: ^RA2MediumCannon
 	ReloadDelay: 92
 	Range: 4500
 	Report: vlasatta.wav
 	Projectile: Bullet
 		Speed: 456
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@CannonHE_Medium:
 		Damage: 4000
