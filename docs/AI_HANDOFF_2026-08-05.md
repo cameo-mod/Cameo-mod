@@ -607,6 +607,29 @@ passed the boot-gate.
   does not provide; they must either be dropped or have their full required
   fields injected before the `^MediumFlameWeapon` inherit is removed.
 
+### 14.10 `Grenade + HeavyBomb + ShrapnelWeapon` triple conversion (`4dc50762a`)
+
+- Converted 8 weapons in 7 files: `D2K_155mm` (`weapons/d2k.yaml`),
+  `IvanBomb` (`weapons/redalert2.yaml` and `ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`),
+  `D2K_155mm3` (`ContentPacks/D2k/Ixian`), `D2K_155mm_turret` (`ContentPacks/D2k/Ordos`),
+  `GuardianShoot` / `InfestedExplosion` (`ContentPacks/StarCraft/Zerg`),
+  `wc2ballistaFire` (`ContentPacks/Warcraft2/Humans`).
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_Demolition_Light
+  Inherits@wh2: ^Warhead_Demolition_Heavy
+  Inherits@wh3: ^Warhead_Concussion_Medium
+  Inherits@proj: ^Projectile_Grenade_Light
+  Inherits@fx: ^Effect_Demolition_Heavy
+  ```
+- `Grenade` → `Demolition_Light`, `HeavyBomb` → `Demolition_Heavy`,
+  `ShrapnelWeapon` → `Concussion_Medium`. `*FriendlyFire` twins and
+  `-Warhead@...` removal markers were stripped. Non-old addons such as
+  `^D2K_Cannon` were preserved after the new inherits.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` reached
+  `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
+  `extract_stats.py` refreshed 32 ledgers.
+
 ---
 
 ## 15. Live remaining-effort estimate (after this Devin session)
