@@ -3799,48 +3799,18 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyFlameWeaponPercentage",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -3852,13 +3822,18 @@
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^HeavyFlameWeapon",
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Light",
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Flame_Medium",
+       "^Effect_Flame_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light",
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Flame_Medium"
+      ],
       "weapon": "FireballLauncherBuggy2",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "3",

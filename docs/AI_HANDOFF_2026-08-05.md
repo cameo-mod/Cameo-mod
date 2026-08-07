@@ -433,6 +433,13 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   TiberianDawn/Nod) converted to `Flame_Light + MissileAP_Medium`. The weapon
   keeps its local `Warhead@Effect` (`small_frag`) and inherits
   `^Projectile_Missile_Medium` because the missile side was the final `Inherits`.
+- **Triple-FlameWeapon** (`FireballLauncherBuggy2`, `MatadorFlamer`,
+  `MammothTuskThermobaric`) converted Light+Medium+Heavy flame stacks to
+  three `^Warhead_Flame_*` inherits with `^Projectile_Flame_*` and
+  `^Effect_Flame_*` from the last old family. Any local `ApplyPhysicalState`
+  warhead missing `PhysicalStateName` had it injected (`Temperature`) because
+  the old families used to supply it and the new `^Effect` only covers one
+  tier.
 - **TeslaChargedWeapon + TeslaWeapon** converted 6 pure dual-inherit EMP/ion
   weapons to `Tesla_Heavy + TeslaCharged_Super` with `^Projectile_Lightning_Super`
   and `^Effect_Tesla_Super`. `PulseMissile` (D2k), `IonCannon`,

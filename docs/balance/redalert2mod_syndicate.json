@@ -2361,48 +2361,18 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyFlameWeaponPercentage",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -2414,61 +2384,36 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon"
+       "^Warhead_Flame_Light",
+       "^Warhead_Flame_Medium",
+       "^Warhead_Flame_Heavy",
+       "^Effect_Flame_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light",
+       "^Warhead_Flame_Medium",
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyFlameWeaponPercentage",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -2482,9 +2427,13 @@
       "versus_templates": [
        "SyndicateFireballLauncher"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light",
+       "^Warhead_Flame_Medium",
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "SyndicateFireballLauncher_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -2492,48 +2441,18 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyFlameWeaponPercentage",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -2545,13 +2464,18 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon"
+       "^Warhead_Flame_Light",
+       "^Warhead_Flame_Medium",
+       "^Warhead_Flame_Heavy",
+       "^Effect_Flame_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light",
+       "^Warhead_Flame_Medium",
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -2559,48 +2483,18 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumFlameWeaponPercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyFlameWeaponPercentage",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -2614,9 +2508,13 @@
       "versus_templates": [
        "SyndicateFireballLauncher"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light",
+       "^Warhead_Flame_Medium",
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "SyndicateFireballLauncher_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
