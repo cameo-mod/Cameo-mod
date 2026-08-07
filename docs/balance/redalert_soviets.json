@@ -198,208 +198,121 @@
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@Missiles",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumMissile"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesRocketPod1",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumMissile"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesRocketPod2",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumMissile"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -1156,208 +1069,121 @@
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_teslarockets && !ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@Missiles",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumMissile"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesRocketPod1",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumMissile"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesRocketPod2",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumMissile"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "HindMissiles",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [

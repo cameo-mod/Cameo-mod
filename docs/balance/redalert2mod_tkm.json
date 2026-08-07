@@ -70,52 +70,22 @@
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1105",
       "pricing": true,
       "range": "5528",
@@ -123,70 +93,41 @@
       "requires": "tkm_upgrade_cryorocketsupgrade",
       "slot": "Armament@PRIMARYNATO",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumMissile"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "HueyCryoMissiles",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1105",
       "pricing": true,
       "range": "5528",
@@ -194,70 +135,41 @@
       "requires": "tkm_upgrade_twinrocketsupgrade",
       "slot": "Armament@PRIMARYBEREZKA",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumMissile"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "HueyTwinMissiles",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MediumMissilePercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1105",
       "pricing": true,
       "range": "5528",
@@ -265,18 +177,19 @@
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumMissile"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "HueyTwinMissiles",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
