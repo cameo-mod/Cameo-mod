@@ -3218,39 +3218,34 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "12000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6819",
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
-       "^MediumCannon",
-       "^TankDestroyerCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_CannonAP_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_CannonAP_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_CannonAP_Light"
+      ],
       "weapon": "AlliedTankDestroyerCannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4441,39 +4436,34 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5023",
       "reloaddelay": "64",
       "slot": "Armament",
       "versus_templates": [
-       "^TankDestroyerCannon",
-       "^MediumCannon"
+       "^Warhead_CannonAP_Light",
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonAP_Light",
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "SheridanCannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [

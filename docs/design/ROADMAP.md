@@ -116,8 +116,9 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
      (`Concussion_Medium+CannonHE_Heavy`), `MediumCannon+HeavyCannon`
      (`CannonHE_Medium+CannonHE_Heavy`), `Grenade+HeavyBomb`
      (`Demolition_Light+Demolition_Heavy`), `Grenade+ShrapnelWeapon`
-     (`Demolition_Light+Concussion_Medium`) converted and boot-gated. Total dual-inherit live weapons
-     reduced by ~48.
+     (`Demolition_Light+Concussion_Medium`), `MediumCannon+TankDestroyerCannon`
+     (`CannonHE_Medium+CannonAP_Light`) converted and boot-gated. Total dual-inherit live weapons
+     reduced by ~51.
    - **Effect-heavy clusters (flame/chemical/sonic/energy) are BLOCKED** until a `PhysicalState`/`GroundFire`/
      `EMP`/ExtraDamage-aware converter is built — see `docs/LESSONS_LEARNED.md` § "Effect-warhead merge safety".
      **Phase A progress (2026-08-02):** `tools/archive/retrofit_v3.py` repointed ~130 single-inherit

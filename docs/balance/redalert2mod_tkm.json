@@ -1202,39 +1202,34 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "MediumCannonPercentage",
+        "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8683",
       "reloaddelay": "28",
       "slot": "Armament",
       "versus_templates": [
-       "^TankDestroyerCannon",
-       "^MediumCannon"
+       "^Warhead_CannonAP_Light",
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonAP_Light",
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "tkmturretcannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
