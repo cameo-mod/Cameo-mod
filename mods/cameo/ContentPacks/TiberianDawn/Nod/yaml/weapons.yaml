@@ -840,15 +840,15 @@ MachineGunBuggy2_AA:
 	Inherits: MachineGunBuggy2
 	Range: 7911
 	ValidTargets: Air
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Air
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -1362,8 +1362,10 @@ NodCommandoLaser:
 		ImpactActors: false
 
 NodTorpTube:
-	Inherits: ^Grenade
-	Inherits@2: ^HeavyMissile
+	Inherits@wh: ^Warhead_Concussion_Light
+	Inherits@wh2: ^Warhead_MissileHE_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_MissileHE_Heavy
 	ReloadDelay: 64
 	Range: 8000
 	Burst: 2
@@ -1387,16 +1389,14 @@ NodTorpTube:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	Warhead@Grenade: SpreadDamage
+	Warhead@Concussion_Light:
 		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Concussion_Light_Percentage:
 		Damage: 4
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileHE_Heavy:
 		Damage: 8000
 		ValidTargets: Water, Underwater, Bridge, Structure
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Heavy_Percentage:
 		Damage: 4
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:

@@ -668,13 +668,13 @@ RashidanGun_upgrade:
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -721,13 +721,13 @@ RaiderGuns_upgrade:
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -778,13 +778,13 @@ HMG_turret_upgrade:
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -1268,13 +1268,13 @@ d2k_air_drone_guns_upgrade:
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -1525,7 +1525,7 @@ d2k_basq_AA:
 		ValidTargets: Air
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Air
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Air

@@ -436,7 +436,7 @@ RA2120xmm_rad:
 		Damage: 1000
 	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light: AreaDamage
 		Damage: 2000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -801,7 +801,7 @@ RA2FlakTrackAAGun:
 	Range: 8292
 	Projectile: Bullet
 		-LaunchAngle:
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -811,7 +811,7 @@ RA2FlakTrackAAGun:
 		ValidTargets: Air
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air

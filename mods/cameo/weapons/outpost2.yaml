@@ -498,7 +498,7 @@ plymouthStickyTiger:
 	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light: AreaDamage
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
@@ -535,13 +535,13 @@ plymouthStickyDefence:
 	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light: AreaDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage

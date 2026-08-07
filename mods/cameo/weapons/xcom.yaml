@@ -10,7 +10,7 @@ XCOMCarbine:
 	BurstDelays: 2
 	Report: gun11.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -173,7 +173,7 @@ XCOMGrenade1:
 		ContrailEndWidth: 22
 		ContrailStartColor: FFBB88FF
 		ContrailEndColor: FF884422
-	Warhead@Demolition_Light: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 60000
 	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 30000
@@ -204,13 +204,13 @@ XCOMChainGun:
 		ContrailLength: 5
 		Speed: 10000
 		Width: 75
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 10000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 5
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 10000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -240,7 +240,7 @@ XCOMRocketLauncher:
 		ContrailStartColor: 5500ff
 		ContrailEndColor: FFFFFF
 		ContrailEndColorUsePlayerColor: true
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 150000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
@@ -269,7 +269,7 @@ XCOMAWP:
 		ContrailLength: 33
 		Speed: 6000
 		Width: 50
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 100000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage

@@ -80,11 +80,11 @@ NaxiBeetleLaser_AA_elite:
 	Inherits: NaxiBeetleLaser_elite
 	Range: 9672
 	ValidTargets: Air
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -158,11 +158,11 @@ NaxiTank2Laser_AA:
 	Inherits: NaxiTank2Laser
 	Range: 9750
 	ValidTargets: Air
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -202,7 +202,7 @@ NaxiMP40Laser:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1

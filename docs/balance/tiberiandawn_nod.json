@@ -2591,45 +2591,35 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "64",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Grenade",
-       "^HeavyMissile"
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileHE_Heavy",
+       "^Projectile_Missile_Heavy",
+       "^Effect_MissileHE_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileHE_Heavy"
+      ],
       "weapon": "NodTorpTube",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",

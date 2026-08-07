@@ -96,7 +96,7 @@ APCGun_AA:
 	Inherits: APCGun
 	Range: 8502
 	ValidTargets: Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -160,7 +160,7 @@ BoxerCannon_AA:
 	Inherits: BoxerCannonAG
 	Range: 7290
 	ValidTargets: Air
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -174,11 +174,11 @@ BoxerCannon_AA:
 		ValidTargets: Air
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -901,11 +901,11 @@ EMPGrenadeExplode:
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 4000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 4000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -996,11 +996,11 @@ MachineGunHumvee2_AA:
 	Inherits: MachineGunHumvee2
 	Range: 8397
 	ValidTargets: Air
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
@@ -1026,7 +1026,7 @@ MachineGunHumvee2AP_AA:
 	Inherits: MachineGunHumvee2AP
 	Range: 8397
 	ValidTargets: Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air

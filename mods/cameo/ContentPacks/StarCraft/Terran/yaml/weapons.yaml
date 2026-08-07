@@ -567,7 +567,7 @@ GhostSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 20000
@@ -577,7 +577,7 @@ GhostSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 20000
@@ -597,7 +597,7 @@ GhostSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 20000
@@ -704,7 +704,7 @@ SpecterSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 40000
@@ -714,7 +714,7 @@ SpecterSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 40000
@@ -734,7 +734,7 @@ SpecterSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 40000
@@ -1447,7 +1447,7 @@ BCYamatoCannon:
 		Damage: 16000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 8
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 16000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8

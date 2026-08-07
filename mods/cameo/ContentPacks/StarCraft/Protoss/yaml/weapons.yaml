@@ -67,7 +67,7 @@ PositronGrenade:
 PositronBounce1:
 	Inherits: PositronGrenade
 	Range: 2522
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -81,11 +81,11 @@ PositronBounce1:
 		Damage: 2000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 4000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light: AreaDamage
 		Damage: 4000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -95,7 +95,7 @@ PositronBounce1:
 PositronBounce2:
 	Inherits: PositronGrenade
 	Range: 1261
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -109,11 +109,11 @@ PositronBounce2:
 		Damage: 1000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 2000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light: AreaDamage
 		Damage: 2000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -241,19 +241,19 @@ GladiusCannon:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
@@ -1071,7 +1071,7 @@ ManifoldMG_AA:
 		ValidTargets: Air
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Air
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Air

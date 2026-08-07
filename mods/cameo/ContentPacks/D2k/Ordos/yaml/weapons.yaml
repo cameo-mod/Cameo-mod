@@ -693,7 +693,7 @@ Laboratory_Bioball:
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
@@ -948,7 +948,7 @@ HMGo_upgrade:
 		Width: 55
 		ZOffset: 2047
 		Color: 00ffbb
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -1328,7 +1328,7 @@ LMG_ordos_upgrade:
 		ZOffset: 2047
 		Color: 00ffbb
 	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1346,13 +1346,13 @@ light_inf_lmg_ordos_upgrade:
 		ZOffset: 2047
 		Color: 00ffbb
 	ValidTargets: Ground, Water
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage

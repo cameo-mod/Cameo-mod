@@ -217,15 +217,15 @@ RA2LasherToxicMortar_elite:
 		Damage: 2000
 	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light: AreaDamage
 		Damage: 4000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 4000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 4000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -270,7 +270,7 @@ RA2LasherLaser_elite:
 		Duration: 18
 		Color: BB88AA
 		SecondaryBeamWidth: 36
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 16000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
@@ -670,7 +670,7 @@ RA2GattlingMG3_AA:
 	Inherits: RA2GattlingMG3
 	Range: 8250
 	ValidTargets: Air
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -910,7 +910,7 @@ RA2CosmonautLaser:
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath

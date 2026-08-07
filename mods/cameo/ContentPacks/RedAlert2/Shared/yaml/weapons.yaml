@@ -2178,7 +2178,7 @@ RA2GattlingMG1_AA:
 	Inherits: RA2GattlingMG1
 	Range: 6750
 	ValidTargets: Air
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -2201,7 +2201,7 @@ RA2GattlingMG2_AA:
 	Inherits: RA2GattlingMG2
 	Range: 7500
 	ValidTargets: Air
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -2713,15 +2713,15 @@ SEALAttach:
 
 SealBomb:
 	Inherits: TanyaBomb
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light: AreaDamage
 		Damage: 20000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@CannonHE_Medium: SpreadDamage
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 20000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 20000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10

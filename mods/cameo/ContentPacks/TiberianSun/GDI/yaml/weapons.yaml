@@ -924,7 +924,7 @@ TSJumpCannon:
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage

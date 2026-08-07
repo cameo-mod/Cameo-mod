@@ -2723,45 +2723,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "HeavyMissilePercentage",
+        "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "100",
       "requires": "!ra1_soviets_doctrine_inferno",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Grenade",
-       "^HeavyMissile"
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileHE_Heavy",
+       "^Projectile_Missile_Heavy",
+       "^Effect_MissileHE_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_MissileHE_Heavy"
+      ],
       "weapon": "TorpTube",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [

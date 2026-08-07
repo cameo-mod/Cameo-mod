@@ -113,7 +113,7 @@ tkmtechnicalmgap:
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 6000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -967,7 +967,7 @@ SandmarineTuskTwin:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 2
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
@@ -1151,11 +1151,11 @@ VonSniperAP:
 		Damage: 16000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 8
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 16000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		Damage: 16000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 8
@@ -1163,7 +1163,7 @@ VonSniperAP:
 		Damage: 16000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		Damage: 8
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		Damage: 16000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
@@ -1207,7 +1207,7 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Heavy: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
@@ -1217,7 +1217,7 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
@@ -1237,7 +1237,7 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Medium: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
