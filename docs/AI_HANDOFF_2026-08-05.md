@@ -335,3 +335,28 @@ Effect-free / low-effect dual-warhead clusters that should convert cleanly with 
 - `HeavyCannon + MediumCannon` — `CannonHE_Heavy + CannonHE_Medium`.
 
 Avoid flame/chemical/sonic/energy dual-warhead clusters until a `PhysicalState`/`GroundFire`/`EMP` effect-aware converter is built.
+
+### 14.4 Completed in the same session: `MediumCannon + HeavyCannon` → `CannonHE_Medium + CannonHE_Heavy`
+
+- Converted 4 weapons: `Type97Cannon` (RA Japan), `TigerCannon` (RA Shared), `HammerTankCannon` and `KotinCannon` (RA Soviets).
+- New shape:
+  ```yaml
+  Inherits@wh: ^Warhead_CannonHE_Medium
+  Inherits@wh2: ^Warhead_CannonHE_Heavy
+  Inherits@proj: ^Projectile_Shell_Heavy
+  Inherits@fx: ^Effect_CannonHE_Heavy
+  Warhead@CannonHE_Medium:
+  Warhead@CannonHE_Medium_Percentage:
+  Warhead@CannonHE_Heavy:
+  Warhead@CannonHE_Heavy_Percentage:
+  ```
+- `find_empty_warhead.py` = 0. Boot-gate passed. Ledgers refreshed.
+
+### 14.5 Updated safest next targets
+
+- `Grenade + HeavyBomb` — `Demolition_Light + Demolition_Heavy` (no `PhysicalState`, but `Grenade` provides the projectile, `HeavyBomb` the heavy effect).
+- `Grenade + ShrapnelWeapon` — `Demolition_Light + Concussion_Medium`.
+- `MediumCannon + TankDestroyerCannon` — `CannonHE_Medium + CannonAP_Light`.
+- `HeavyCannon + MediumCannon` — now done.
+
+Avoid any cluster that mixes effect-heavy families (flame/chemical/sonic/energy) until an effect-aware converter exists.
