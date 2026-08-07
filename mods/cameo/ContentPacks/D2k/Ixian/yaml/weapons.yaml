@@ -707,7 +707,7 @@ RaiderGuns:
 RaiderGuns_upgrade:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
-	Inherits@fx: ^Effect_Cannon_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
 	Inherits: RaiderGuns
 	Inherits@2: ^HeavyMachineGunProjectile
 	Projectile: Bullet
@@ -758,7 +758,7 @@ HMG_turret:
 HMG_turret_upgrade:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
-	Inherits@fx: ^Effect_Cannon_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
 	Inherits: HMG_turret
 	Inherits@2: ^HeavyMachineGunProjectile
 	ReloadDelay: 33
@@ -1254,7 +1254,7 @@ d2k_air_drone_guns:
 d2k_air_drone_guns_upgrade:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
-	Inherits@fx: ^Effect_Cannon_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
 	Inherits: d2k_air_drone_guns
 	Inherits@2: ^HeavyMachineGunProjectile
 	ValidTargets: Ground, Water, Air

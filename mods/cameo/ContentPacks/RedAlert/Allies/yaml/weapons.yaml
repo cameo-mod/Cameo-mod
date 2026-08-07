@@ -212,7 +212,7 @@ SheridanVulcan:
 
 RapierBombs:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Explosion_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 60
 	Range: 2000
 	Burst: 4
@@ -589,7 +589,7 @@ ChronoTuskCryo:
 90mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 47
 	Range: 5159
 	Report: cannon1.aud

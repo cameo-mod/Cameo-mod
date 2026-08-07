@@ -161,7 +161,7 @@ XCOMShardGun:
 XCOMGrenade1:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Explosion_Light
+	Inherits@fx: ^Effect_Demolition_Light
 	ReloadDelay: 48
 	Range: 4775
 	Report: toss1.aud
@@ -224,7 +224,7 @@ XCOMChainGun2:
 XCOMRocketLauncher:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_Missile_Medium
+	Inherits@fx: ^Effect_CannonAP_Medium
 	ReloadDelay: 75
 	Range: 7500
 	MinRange: 750

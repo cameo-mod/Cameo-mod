@@ -99,7 +99,7 @@ HueyGun:
 HueyMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_Missile_Medium
+	Inherits@fx: ^Effect_CannonAP_Medium
 	ReloadDelay: 14
 	Range: 4783
 	Report: bazook1.aud
@@ -121,7 +121,7 @@ tkmtechnicalmgap:
 tkmtwinrockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_Missile_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 64
 	Range: 7214
 	Burst: 2
@@ -303,7 +303,7 @@ tkmm203:
 tkmrockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_Missile_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 64
 	Range: 6214
 	Report: bazook1.aud
@@ -314,7 +314,7 @@ tkmrockets:
 as42rockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_Missile_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 30
 	Range: 6379
 	Report: bazook1.aud
@@ -326,7 +326,7 @@ as42rockets:
 tkmcryorockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_Missile_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 64
 	Range: 6214
 	Report: bazook1.aud
@@ -409,7 +409,7 @@ tkmturretcannon:
 tkmltgun:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 42
 	Range: 5316
 	Report: cannon1.aud
@@ -430,7 +430,7 @@ tkmltgun:
 tkm2a46gun:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 42
 	Range: 6196
 	Report: cannon1.aud
@@ -500,7 +500,7 @@ TKMAATurretCannon:
 tkmstrykerrockets:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_Missile_Medium
+	Inherits@fx: ^Effect_CannonAP_Medium
 	ReloadDelay: 60
 	Range: 7880
 	Report: bazook1.aud
@@ -514,7 +514,7 @@ tkmstrykerrockets:
 tkmstrykercryorockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_Missile_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 63
 	Range: 5000
 	Burst: 2
@@ -810,7 +810,7 @@ TKMMedicHeal:
 		Damage: -1
 tkmkatyushalalauncherrockets:
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Explosion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	ReloadDelay: 157
 	Burst: 8
 	BurstDelays: 4
@@ -945,7 +945,7 @@ SandmarineTuskTwin:
 	Inherits: SandmarineTusk
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_Missile_Medium
+	Inherits@fx: ^Effect_CannonAP_Medium
 	ReloadDelay: 54
 	Burst: 8
 	BurstDelays: 3
@@ -1330,7 +1330,7 @@ VanSniper:
 tkmt72cannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 76
 	Range: 5469
 	Burst: 1
@@ -1354,7 +1354,7 @@ tkmt72cannon:
 tkmabramscannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 76
 	Range: 5469
 	Burst: 1
@@ -1477,7 +1477,7 @@ tkmheavyaaturret:
 tkmrh120gun:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 46
 	Range: 5672
 	Report: cannon1.aud
@@ -1602,7 +1602,7 @@ HueyFireMissiles:
 
 TKMDroneExplode:
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Explosion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	ValidTargets: Ground, Water
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water

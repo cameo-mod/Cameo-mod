@@ -4668,21 +4668,21 @@ DefuseKit:
 			HAZMAT: 50
 			Shield: 110
 			Scout: 100
-			None: 94
-			Wood: 88
+			Fighter: 94
+			None: 88
 			Light: 82
-			Flak: 76
-			Steel: 70
-			Medium: 64
-			Plate: 58
-			Concrete: 52
-			Heavy: 46
-			Heroic: 40
-			Superheavy: 34
-			Fighter: 28
-			Bomber: 22
-			Helicopter: 16
-			Spaceship: 10
+			Wood: 76
+			Bomber: 70
+			Flak: 64
+			Medium: 58
+			Steel: 52
+			Helicopter: 46
+			Plate: 40
+			Heavy: 34
+			Concrete: 28
+			Spaceship: 22
+			Heroic: 16
+			Superheavy: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Prism_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
@@ -4692,21 +4692,21 @@ DefuseKit:
 		Versus:
 			Shield: 17
 			Scout: 16
-			None: 15
-			Wood: 14
+			Fighter: 15
+			None: 14
 			Light: 13
-			Flak: 12
-			Steel: 11
-			Medium: 10
-			Plate: 9
-			Concrete: 8
-			Heavy: 7
-			Heroic: 6
-			Superheavy: 5
-			Fighter: 4
-			Bomber: 3
-			Helicopter: 2
-			Spaceship: 1
+			Wood: 12
+			Bomber: 11
+			Flak: 10
+			Medium: 9
+			Steel: 8
+			Helicopter: 7
+			Plate: 6
+			Heavy: 5
+			Concrete: 4
+			Spaceship: 3
+			Heroic: 2
+			Superheavy: 1
 		UpdatesUnitStatistics: false
 
 ^Warhead_Prism_Medium:
@@ -4726,21 +4726,21 @@ DefuseKit:
 			HAZMAT: 50
 			Shield: 125
 			Scout: 100
-			None: 95
-			Wood: 90
+			Fighter: 95
+			None: 90
 			Light: 85
-			Flak: 80
-			Steel: 75
-			Medium: 70
-			Plate: 65
-			Concrete: 60
-			Heavy: 55
-			Heroic: 50
-			Superheavy: 45
-			Fighter: 40
-			Bomber: 35
-			Helicopter: 30
-			Spaceship: 25
+			Wood: 80
+			Bomber: 75
+			Flak: 70
+			Medium: 65
+			Steel: 60
+			Helicopter: 55
+			Plate: 50
+			Heavy: 45
+			Concrete: 40
+			Spaceship: 35
+			Heroic: 30
+			Superheavy: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Prism_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
@@ -4750,21 +4750,21 @@ DefuseKit:
 		Versus:
 			Shield: 25
 			Scout: 20
-			None: 19
-			Wood: 18
+			Fighter: 19
+			None: 18
 			Light: 17
-			Flak: 16
-			Steel: 15
-			Medium: 14
-			Plate: 13
-			Concrete: 12
-			Heavy: 11
-			Heroic: 10
-			Superheavy: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
+			Wood: 16
+			Bomber: 15
+			Flak: 14
+			Medium: 13
+			Steel: 12
+			Helicopter: 11
+			Plate: 10
+			Heavy: 9
+			Concrete: 8
+			Spaceship: 7
+			Heroic: 6
+			Superheavy: 5
 		UpdatesUnitStatistics: false
 
 ^Warhead_Prism_Heavy:
@@ -4784,21 +4784,21 @@ DefuseKit:
 			HAZMAT: 50
 			Shield: 140
 			Scout: 100
-			None: 96
-			Wood: 92
+			Fighter: 96
+			None: 92
 			Light: 88
-			Flak: 84
-			Steel: 80
-			Medium: 76
-			Plate: 72
-			Concrete: 68
-			Heavy: 64
-			Heroic: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
+			Wood: 84
+			Bomber: 80
+			Flak: 76
+			Medium: 72
+			Steel: 68
+			Helicopter: 64
+			Plate: 60
+			Heavy: 56
+			Concrete: 52
+			Spaceship: 48
+			Heroic: 44
+			Superheavy: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Prism_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
@@ -4808,21 +4808,21 @@ DefuseKit:
 		Versus:
 			Shield: 35
 			Scout: 25
-			None: 24
-			Wood: 23
+			Fighter: 24
+			None: 23
 			Light: 22
-			Flak: 21
-			Steel: 20
-			Medium: 19
-			Plate: 18
-			Concrete: 17
-			Heavy: 16
-			Heroic: 15
-			Superheavy: 14
-			Fighter: 13
-			Bomber: 12
-			Helicopter: 11
-			Spaceship: 10
+			Wood: 21
+			Bomber: 20
+			Flak: 19
+			Medium: 18
+			Steel: 17
+			Helicopter: 16
+			Plate: 15
+			Heavy: 14
+			Concrete: 13
+			Spaceship: 12
+			Heroic: 11
+			Superheavy: 10
 		UpdatesUnitStatistics: false
 
 ###### Flame: INF+BLD > VEH > AIR (light, air=False) ######
@@ -6684,6 +6684,29 @@ DefuseKit:
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
 
+^Projectile_Missile_AA:
+	Report: rocket2.aud
+	Projectile: Missile
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 0
+		Image: MISSILE
+		Shadow: true
+		HorizontalRateOfTurn: 80
+		VerticalRateOfTurn: 80
+		TrailImage: smokey
+		TrailInterval: 1
+		ContrailLength: 8
+		MaximumLaunchSpeed: 600
+		MinimumLaunchSpeed: 600
+		Speed: 1200
+		CloseEnough: 600
+		Acceleration: 8
+		HomingActivationDelay: 0
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+
 ^Projectile_Railgun_Heavy:
 	Report: bigggun1.aud
 	Projectile: Railgun
@@ -6745,6 +6768,46 @@ DefuseKit:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
+^Effect_Arrow_Medium:
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Ground, Water
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 4
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^Effect_Arrow_Heavy:
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Ground, Water
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 5
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
 ^Effect_Bullet_Light:
 	Warhead@Effect: CreateEffect
 		Explosions: piff
@@ -6781,45 +6844,28 @@ DefuseKit:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
-^Effect_Cannon_Light:
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+^Effect_Bullet_Heavy:
 	Warhead@Effect: CreateEffect
-		Explosions: poof
-		ImpactSounds: xplosml2.aud
-		ValidTargets: Ground, Ship
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship, Air
 	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
-		Duration: 12
+		Duration: 5
 		Range: 1250
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
-		Damage: 100
+		Damage: 50
 	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
-^Effect_Cannon_Medium:
+^Effect_CannonAP_Light:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -6842,8 +6888,8 @@ DefuseKit:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
+		Explosions: small_explosion_air
+		ImpactSounds: kaboom12.aud
 		ImpactActors: false
 		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
@@ -6852,12 +6898,12 @@ DefuseKit:
 		Range: 1250
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
-		Damage: 150
+		Damage: 100
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^Effect_Cannon_Heavy:
+^Effect_CannonAP_Medium:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -6880,13 +6926,165 @@ DefuseKit:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: kaboom15.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
+^Effect_CannonAP_Heavy:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: big_frag
+		ImpactSounds: kaboom22.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
 		Explosions: big_explosion_air
+		ImpactSounds: kaboom22.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 12
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 200
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
+^Effect_CannonHE_Light:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_explosion
+		ImpactSounds: xplosml2.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactSounds: xplosml2.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 8
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
+^Effect_CannonHE_Medium:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: med_explosion
+		ImpactSounds: kaboom25.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
 		ImpactSounds: kaboom25.aud
 		ImpactActors: false
 		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
+^Effect_CannonHE_Heavy:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: large_explosion
+		ImpactSounds: xplobig4.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: xplobig4.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
@@ -6946,7 +7144,7 @@ DefuseKit:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
-^Effect_Explosion_Light:
+^Effect_Demolition_Light:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -6957,7 +7155,7 @@ DefuseKit:
 		SmudgeType: SandCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@Effect: CreateEffect
-		Explosions: poof
+		Explosions: small_poof
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship
 		ImpactActors: false
@@ -6977,7 +7175,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^Effect_Explosion_Medium:
+^Effect_Demolition_Medium:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -6989,7 +7187,7 @@ DefuseKit:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@Effect: CreateEffect
 		Explosions: poof
-		ImpactSounds: xplos.aud
+		ImpactSounds: siege_impact.aud
 		ValidTargets: Ground, Ship
 		ImpactActors: false
 	Warhead@EffectWater: CreateEffect
@@ -7008,7 +7206,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^Effect_Explosion_Heavy:
+^Effect_Demolition_Heavy:
 	Warhead@Smudge1: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7026,8 +7224,8 @@ DefuseKit:
 		Size: 2
 		Delay: 6
 	Warhead@Effect1: CreateEffect
-		Explosions: poof
-		ImpactSounds: siege_impact.aud
+		Explosions: building
+		ImpactSounds: kaboom22.aud
 		ImpactActors: false
 		ValidTargets: Ground, Ship
 	Warhead@Effect2: CreateEffect
@@ -7052,6 +7250,137 @@ DefuseKit:
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
 		Damage: 250
+
+^Effect_Concussion_Light:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
+^Effect_Concussion_Medium:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactSounds: siege_impact.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 12
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 175
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
+^Effect_Concussion_Heavy:
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Effect1: CreateEffect
+		Explosions: building
+		ImpactSounds: kaboom22.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2: CreateEffect
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 15
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 250
+
+^Effect_Flak_Light:
+	Warhead@Effect: CreateEffect
+		Explosions: flak_explosion_ground
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ValidTargets: Air
+		ImpactSounds: xplos.aud
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 4
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
 
 ^Effect_Flak_Medium:
 	Warhead@Effect: CreateEffect
@@ -7244,18 +7573,99 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^Effect_Magic_Heavy:
+^Effect_Magic_Light:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
-		ImpactSounds: xplos.aud
+		ImpactSounds: xplobig6.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 20
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^Effect_Magic_Medium:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: blue_big_frag
+		ImpactSounds: xplobig6.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 22
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^Effect_Magic_Heavy:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: blue_poof
+		ImpactSounds: xplobig6.aud
 		ImpactActors: false
 		ValidTargets: Ground, Ship
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 25
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^Effect_Sonic_Light:
+	Warhead@Effect: CreateEffect
+		Explosions: blue_small_fire
+		ImpactSounds: firebl3.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 6
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^Effect_Sonic_Medium:
+	Warhead@Effect: CreateEffect
+		Explosions: blue_building_napalm
+		ImpactSounds: firebl3.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 8
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
+^Effect_Sonic_Heavy:
+	Warhead@Effect: CreateEffect
+		Explosions: blue_building
+		ImpactSounds: kaboom22.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
 	Warhead@ShieldHitEffect: CreateEffect
@@ -7274,7 +7684,7 @@ DefuseKit:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
-^Effect_Missile_Light:
+^Effect_MissileHE_Light:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7288,12 +7698,12 @@ DefuseKit:
 		SmudgeType: SandCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@Effect: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Water
+		Explosions: small_explosion
+		ImpactSounds: xplosml2.aud
+		ValidTargets: Ground, Water, Ship
 	Warhead@EffectAir: CreateEffect
-		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
+		Explosions: small_explosion_air
+		ImpactSounds: xplosml2.aud
 		ImpactActors: false
 		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
@@ -7307,7 +7717,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^Effect_Missile_Medium:
+^Effect_MissileHE_Medium:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7321,12 +7731,12 @@ DefuseKit:
 		SmudgeType: RA2Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@Effect: CreateEffect
-		Explosions: med_frag
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Water
+		Explosions: med_explosion
+		ImpactSounds: kaboom25.aud
+		ValidTargets: Ground, Water, Ship
 	Warhead@EffectAir: CreateEffect
 		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
+		ImpactSounds: kaboom25.aud
 		ImpactActors: false
 		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
@@ -7340,7 +7750,7 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^Effect_Missile_Heavy:
+^Effect_MissileHE_Heavy:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -7354,12 +7764,12 @@ DefuseKit:
 		SmudgeType: RA2Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@Effect: CreateEffect
-		Explosions: big_frag
+		Explosions: large_explosion
 		ImpactSounds: xplobig4.aud
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Ship
 	Warhead@EffectAir: CreateEffect
 		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
+		ImpactSounds: xplobig4.aud
 		ImpactActors: false
 		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
@@ -7680,7 +8090,7 @@ DefuseKit:
 ^Explosion:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Explosion_Light
+	Inherits@fx: ^Effect_Demolition_Light
 	-Report:
 	ValidTargets: Ground, Water, Air
 	Warhead@Demolition_Light:

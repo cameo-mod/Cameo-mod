@@ -51,7 +51,7 @@ M16:
 Grenade:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Explosion_Light
+	Inherits@fx: ^Effect_Demolition_Light
 	ReloadDelay: 42
 	Range: 6097
 	Report: toss1.aud
@@ -71,7 +71,7 @@ Grenade:
 Rockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_Missile_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 63
 	Range: 6368
 	Report: bazook1.aud

@@ -69,7 +69,7 @@
 ^RA2LightMissile:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_Missile_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	Projectile: Missile
 		Image: ra2_dragon
 		-TrailImage:
@@ -91,7 +91,7 @@
 ^RA2MediumMissile:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_Missile_Medium
+	Inherits@fx: ^Effect_CannonAP_Medium
 	Projectile: Missile
 		Image: patriot
 		-TrailImage:
@@ -113,7 +113,7 @@
 ^RA2HeavyMissile:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_Missile_Heavy
+	Inherits@fx: ^Effect_CannonAP_Heavy
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_clsn
 		ExplosionPalette: tseffect
@@ -129,7 +129,7 @@
 ^RA2TankDestroyerCannon:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light
-	Inherits@fx: ^Effect_Cannon_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_small_explosion
 		ExplosionPalette: ra2effect
@@ -142,7 +142,7 @@
 ^RA2MediumCannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_medium_explosion
 		ExplosionPalette: ra2effect
@@ -155,7 +155,7 @@
 ^RA2HeavyCannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
-	Inherits@fx: ^Effect_Cannon_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_explosion
 		ExplosionPalette: ra2effect
@@ -168,7 +168,7 @@
 ^RA2Grenade:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Explosion_Light
+	Inherits@fx: ^Effect_Demolition_Light
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_bang
 		ExplosionPalette: ra2effect
@@ -404,7 +404,7 @@ RA2ThunderboltMissile:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_Missile_Light
+	Inherits@fx: ^Effect_MissileHE_Light
 	Projectile: Missile
 		Speed: 800
 		Arm: 2
@@ -448,7 +448,7 @@ RA2MultiHoverMissile:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_Missile_Light
+	Inherits@fx: ^Effect_MissileHE_Light
 	Range: 6170
 	ReloadDelay: 20
 	Burst: 4
@@ -493,7 +493,7 @@ RA2MultiThunderboltMissile:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_Missile_Light
+	Inherits@fx: ^Effect_MissileHE_Light
 	Projectile: Missile
 		Speed: 800
 		Arm: 2

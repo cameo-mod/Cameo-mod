@@ -87,7 +87,7 @@ edenMobileLaser:
 edenMobileLaserTiger:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits: edenMobileLaser
 	ReloadDelay: 16
 	Range: 7030

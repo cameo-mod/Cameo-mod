@@ -1073,7 +1073,7 @@ JapanSuperBomb:
 
 JapanCarrierFighterBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Explosion_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 5
 	Range: 3000
 	Report: vkiratta.wav
@@ -1863,7 +1863,7 @@ TorpTubeThermobaric:
 DepthCharge:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Explosion_Light
+	Inherits@fx: ^Effect_Demolition_Light
 	ReloadDelay: 60
 	Range: 6000
 	ValidTargets: Underwater, Submarine
@@ -1888,7 +1888,7 @@ DepthCharge:
 2Inch:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light
-	Inherits@fx: ^Effect_Cannon_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 30
 	Range: 6000
 	Report: cannon2.aud
@@ -1938,7 +1938,7 @@ DepthCharge:
 Stinger:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_Missile_Heavy
+	Inherits@fx: ^Effect_CannonAP_Heavy
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 27
 	Range: 8000

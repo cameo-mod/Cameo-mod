@@ -1216,7 +1216,7 @@ SCUD:
 
 SCUDThermobaric:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Explosion_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits: SCUD
 	Projectile: Bullet
 		ContrailStartWidth: 100
@@ -2242,7 +2242,7 @@ YakNuclearBomb:
 Maverick:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_Missile_Medium
+	Inherits@fx: ^Effect_CannonAP_Medium
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 4
@@ -2512,7 +2512,7 @@ ThermobaricNuclearMaverick:
 105mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 76
 	Range: 5469
 	Burst: 2

@@ -14,7 +14,7 @@ TSArtyTargeting:
 
 TS155mmFrag:
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Explosion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	Projectile: Bullet
 		Speed: 128
 		LaunchAngle: 175
@@ -29,7 +29,7 @@ TS155mmFrag:
 TSCadreGrenade:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Explosion_Light
+	Inherits@fx: ^Effect_Demolition_Light
 	ReloadDelay: 124
 	Range: 6623
 	Report: M203.aud
@@ -48,7 +48,7 @@ TSCadreGrenade:
 TSRaiderGrenade:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Explosion_Light
+	Inherits@fx: ^Effect_Demolition_Light
 	ReloadDelay: 52
 	Range: 4787
 	Report: M203.aud
@@ -184,7 +184,7 @@ TSStankTibTusk:
 TSNODRedEye:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_Missile_Heavy
+	Inherits@fx: ^Effect_CannonAP_Heavy
 	ReloadDelay: 50
 	Range: 13176
 	Report: rocket2.aud

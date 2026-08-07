@@ -1,9 +1,14 @@
-## CABAL missile projectile template. TS-authentic launch (near-vertical,
-## replicating Shattered Paradise's 255 = 90 degrees) with a turn rate fast
-## enough not to overshoot close targets (DESIGN 3), plus the blue smoke
-## trail that carries the CABAL colour identity. Every CABAL missile weapon
-## inherits this LAST so its projectile settings win.
-^CabalMissile:
+## CABAL missile projectile family (3-way split). TS-authentic launch
+## (near-vertical, replicating Shattered Paradise's 255 = 90 degrees) with a
+## turn rate fast enough not to overshoot close targets (DESIGN 3), plus the
+## purple smoke trail that carries the CABAL colour identity. Two variants:
+## ^CabalMissileLight (fast/agile, no contrail — the default CABAL missile
+## identity) and ^CabalMissileMedium (adds the orange Flak-style contrail,
+## reserved for weapons that deliberately combine the missile with a
+## flak/AA warhead, e.g. CabalAscendedRockets). Every CABAL missile weapon
+## inherits its `@proj` LAST so these bespoke fields win.
+^CabalMissileLight:
+	Inherits: ^Projectile_Missile_Light
 	Projectile: Missile
 		MinimumLaunchAngle: 255
 		MaximumLaunchAngle: 255
@@ -13,10 +18,31 @@
 		TerrainHeightAware: true
 		TrailImage: cabal_rockettrail
 		TrailInterval: 1
+
+^CabalMissileMedium:
+	Inherits: ^Projectile_Missile_Medium
+	Projectile: Missile
+		MinimumLaunchAngle: 255
+		MaximumLaunchAngle: 255
+		HorizontalRateOfTurn: 80
+		VerticalRateOfTurn: 80
+		CruiseAltitude: 6000
+		TerrainHeightAware: true
+		TrailImage: cabal_rockettrail
+		TrailInterval: 1
+		ContrailLength: 10
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+
+^CabalMissileEffect:
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_missileexplosion
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Ship, Air
+
 CabalReaperTrapGround:
 	Report: fireweb1.aud
 	ReloadDelay: 250
@@ -442,7 +468,7 @@ CabalEliminatorGatling:
 CabalTarantulaCannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	Report: tsgun4.aud
 	ReloadDelay: 48
 	Range: 5278
@@ -458,13 +484,23 @@ CabalReaperMissiles:
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^LightMissile
 	Inherits@4: ^MediumMissile
-	Inherits@5: ^CabalMissile
+	Inherits@proj: ^CabalMissileLight
+	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 24
 	Burst: 2
 	BurstDelays: 12
 	Range: 5785
 	ValidTargets: Ground, Water
 	Report: samshot1.aud
+	Projectile: Missile
+		Speed: 500
+		Inaccuracy: 100
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
 	Warhead@LightMissile: SpreadDamage
 		Damage: 8000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -491,13 +527,23 @@ CabalReaperMissiles_AA:
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^LightMissile
 	Inherits@4: ^MediumMissile
-	Inherits@5: ^CabalMissile
+	Inherits@proj: ^CabalMissileLight
+	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 24
 	Burst: 2
 	BurstDelays: 12
 	Range: 8680
 	ValidTargets: Air
 	Report: samshot1.aud
+	Projectile: Missile
+		Speed: 500
+		Inaccuracy: 100
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
 	Warhead@LightMissile: SpreadDamage
 		Damage: 8000
 		ValidTargets: Air
@@ -534,13 +580,24 @@ CabalHeavyReaperMissiles:
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumMissile
 	Inherits@4: ^HeavyMissile
-	Inherits@5: ^CabalMissile
+	Inherits@proj: ^CabalMissileLight
+	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 30
 	Burst: 2
 	BurstDelays: 12
 	Range: 6085
 	ValidTargets: Ground, Water
 	Report: samshot1.aud
+	Projectile: Missile
+		Speed: 400
+		Inaccuracy: 150
+		Image: MISSILE
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 12000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
@@ -567,13 +624,24 @@ CabalHeavyReaperMissiles_AA:
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumMissile
 	Inherits@4: ^HeavyMissile
-	Inherits@5: ^CabalMissile
+	Inherits@proj: ^CabalMissileLight
+	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 30
 	Burst: 2
 	BurstDelays: 12
 	Range: 9130
 	ValidTargets: Air
 	Report: samshot1.aud
+	Projectile: Missile
+		Speed: 400
+		Inaccuracy: 150
+		Image: MISSILE
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 12000
 		ValidTargets: Air
@@ -1179,13 +1247,23 @@ CabalLegionGun:
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^LightMissile
 	Inherits@4: ^MediumMissile
-	Inherits@5: ^CabalMissile
+	Inherits@proj: ^CabalMissileLight
+	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 30
 	Burst: 2
 	BurstDelays: 3
 	Range: 5358
 	ValidTargets: Ground, Water
 	Report: samshot1.aud
+	Projectile: Missile
+		Speed: 500
+		Inaccuracy: 100
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
 	Warhead@LightMissile: SpreadDamage
 		Damage: 12000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -1235,12 +1313,22 @@ CabalManticoreMissilesAA:
 CabalRocketCyborgRockets:
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumMissile
-	Inherits@3: ^CabalMissile
+	Inherits@proj: ^CabalMissileLight
+	Inherits@fx: ^CabalMissileEffect
 	Burst: 3
 	BurstDelays: 8
 	Report: rketinf1.aud
 	ReloadDelay: 52
 	Range: 8753
+	Projectile: Missile
+		Speed: 500
+		Inaccuracy: 100
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
 	Warhead@LightMissile: SpreadDamage
 		Damage: 6000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -1253,12 +1341,22 @@ CabalRocketCyborgRockets:
 CabalRocketCyborgRocketsUpgraded:
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumMissile
-	Inherits@3: ^CabalMissile
+	Inherits@proj: ^CabalMissileLight
+	Inherits@fx: ^CabalMissileEffect
 	Burst: 4
 	BurstDelays: 8
 	Report: rketinf1.aud
 	ReloadDelay: 52
 	Range: 8753
+	Projectile: Missile
+		Speed: 500
+		Inaccuracy: 100
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
 	Warhead@LightMissile: SpreadDamage
 		Damage: 6000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -1432,13 +1530,24 @@ CabalAscendedRockets:
 	Inherits@4: ^TankDestroyerCannon
 	Inherits@5: ^FlakWeapon
 	Inherits@6: ^HeavyAAWeapon
-	Inherits@7: ^CabalMissile
+	Inherits@proj: ^CabalMissileMedium
+	Inherits@fx: ^CabalMissileEffect
 	Burst: 2
 	BurstDelays: 8
 	Report: rketinf1.aud
 	ReloadDelay: 60
 	Range: 9000
 	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Speed: 7500
+		Inaccuracy: 500
+		Image: 50CAL
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000

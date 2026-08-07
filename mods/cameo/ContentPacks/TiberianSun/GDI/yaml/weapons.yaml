@@ -59,7 +59,7 @@ TS120mmTal:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 50
 	Range: 6201
 	Projectile: Bullet
@@ -131,7 +131,7 @@ TSRPGTowerRail:
 
 TSJugg90mm:
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Explosion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	ReloadDelay: 69
 	Range: 12834
 	MinRange: 2565
@@ -163,7 +163,7 @@ TSJuggTargeting:
 
 TSJugg120mm:
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Explosion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	ReloadDelay: 64
 	Range: 12860
 	MinRange: 2570
@@ -563,7 +563,7 @@ TSZoneRailgunRail:
 PitbullRockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_Missile_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 55
 	Burst: 2
 	BurstDelays: 5
@@ -616,7 +616,7 @@ TSMammothTusk2:
 	Inherits@glow: ^ImpactGlow
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_Missile_Heavy
+	Inherits@fx: ^Effect_CannonAP_Heavy
 	ValidTargets: Air
 	Projectile: Missile
 		Speed: 500
@@ -645,7 +645,7 @@ TSMammothTusk2II_AA:
 	Inherits@glow: ^ImpactGlow
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_Missile_Heavy
+	Inherits@fx: ^Effect_CannonAP_Heavy
 	ValidTargets: Air
 	Projectile: Missile
 		Speed: 500
@@ -725,7 +725,7 @@ TSZoneHellfireSonic:
 TSGDIRedEye:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_Missile_Heavy
+	Inherits@fx: ^Effect_CannonAP_Heavy
 	ReloadDelay: 30
 	Range: 12440
 	Report: rocket2.aud

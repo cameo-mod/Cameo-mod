@@ -2009,7 +2009,8 @@
        "^TankDestroyerCannon",
        "^FlakWeapon",
        "^HeavyAAWeapon",
-       "^CabalMissile"
+       "^CabalMissileMedium",
+       "^CabalMissileEffect"
       ],
       "warheads": [],
       "weapon": "CabalAscendedRockets",
@@ -2094,7 +2095,8 @@
        "^TankDestroyerCannon",
        "^FlakWeapon",
        "^HeavyAAWeapon",
-       "^CabalMissile"
+       "^CabalMissileMedium",
+       "^CabalMissileEffect"
       ],
       "warheads": [],
       "weapon": "CabalAscendedRockets",
@@ -3812,7 +3814,8 @@
       "versus_templates": [
        "^LightMissile",
        "^MediumMissile",
-       "^CabalMissile"
+       "^CabalMissileLight",
+       "^CabalMissileEffect"
       ],
       "warheads": [],
       "weapon": "CabalRocketCyborgRockets",
@@ -3853,7 +3856,8 @@
       "versus_templates": [
        "^LightMissile",
        "^MediumMissile",
-       "^CabalMissile"
+       "^CabalMissileLight",
+       "^CabalMissileEffect"
       ],
       "warheads": [],
       "weapon": "CabalRocketCyborgRocketsUpgraded",
@@ -3894,7 +3898,8 @@
       "versus_templates": [
        "^LightMissile",
        "^MediumMissile",
-       "^CabalMissile"
+       "^CabalMissileLight",
+       "^CabalMissileEffect"
       ],
       "warheads": [],
       "weapon": "CabalRocketCyborgRockets",
@@ -4016,7 +4021,7 @@
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -5751,7 +5756,8 @@
        "^ShrapnelWeapon",
        "^LightMissile",
        "^MediumMissile",
-       "^CabalMissile"
+       "^CabalMissileLight",
+       "^CabalMissileEffect"
       ],
       "warheads": [],
       "weapon": "CabalReaperMissiles",
@@ -5823,7 +5829,8 @@
        "^ShrapnelWeapon",
        "^LightMissile",
        "^MediumMissile",
-       "^CabalMissile"
+       "^CabalMissileLight",
+       "^CabalMissileEffect"
       ],
       "warheads": [],
       "weapon": "CabalReaperMissiles_AA",
@@ -5973,7 +5980,8 @@
        "^ShrapnelWeapon",
        "^MediumMissile",
        "^HeavyMissile",
-       "^CabalMissile"
+       "^CabalMissileLight",
+       "^CabalMissileEffect"
       ],
       "warheads": [],
       "weapon": "CabalHeavyReaperMissiles",
@@ -6045,7 +6053,8 @@
        "^ShrapnelWeapon",
        "^MediumMissile",
        "^HeavyMissile",
-       "^CabalMissile"
+       "^CabalMissileLight",
+       "^CabalMissileEffect"
       ],
       "warheads": [],
       "weapon": "CabalHeavyReaperMissiles_AA",
@@ -6692,7 +6701,7 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
+       "^Effect_CannonHE_Medium"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -6719,7 +6728,7 @@
        "^TSCannonEffect",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_Cannon_Medium"
+       "^Effect_CannonHE_Medium"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"

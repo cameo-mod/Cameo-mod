@@ -1381,31 +1381,24 @@
       "damage_warheads": [
        {
         "damage": "1",
-        "tag": "MissileHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MissileHE_Light_Percentage",
+        "tag": "MissileAA_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "14150",
       "reloaddelay": "30",
       "requires": "ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteThunderbolt",
       "versus_templates": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_Heavy",
+       "^Effect_CannonAP_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "RA2PatriotThunderboltMissile",
       "weapon_class_source": "template"
@@ -4540,7 +4533,7 @@
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -4787,7 +4780,7 @@
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -5097,7 +5090,7 @@
        "^Warhead_MissileHE_Heavy",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -5318,7 +5311,7 @@
        "^Warhead_MissileHE_Heavy",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -5902,7 +5895,7 @@
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -6149,7 +6142,7 @@
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -6459,7 +6452,7 @@
        "^Warhead_MissileHE_Heavy",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -6680,7 +6673,7 @@
        "^Warhead_MissileHE_Heavy",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -7266,7 +7259,7 @@
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -7513,7 +7506,7 @@
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -7823,7 +7816,7 @@
        "^Warhead_MissileHE_Heavy",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -8044,7 +8037,7 @@
        "^Warhead_MissileHE_Heavy",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -8630,7 +8623,7 @@
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -8877,7 +8870,7 @@
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -9187,7 +9180,7 @@
        "^Warhead_MissileHE_Heavy",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -9408,7 +9401,7 @@
        "^Warhead_MissileHE_Heavy",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -9993,7 +9986,7 @@
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -10240,7 +10233,7 @@
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -10550,7 +10543,7 @@
        "^Warhead_MissileHE_Heavy",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -10771,7 +10764,7 @@
        "^Warhead_MissileHE_Heavy",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -11356,7 +11349,7 @@
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
-       "^Effect_Explosion_Light"
+       "^Effect_Demolition_Light"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -11603,7 +11596,7 @@
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -11913,7 +11906,7 @@
        "^Warhead_MissileHE_Heavy",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -12134,7 +12127,7 @@
        "^Warhead_MissileHE_Heavy",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
-       "^Effect_Missile_Light"
+       "^Effect_MissileHE_Light"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",

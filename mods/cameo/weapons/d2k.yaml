@@ -28,7 +28,7 @@
 Debris:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Explosion_Light
+	Inherits@fx: ^Effect_Demolition_Light
 	ReloadDelay: 60
 	Range: 2816
 	Report: d2khc.wav
@@ -113,7 +113,7 @@ Debris4:
 ^D2K_Cannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	Report: MEDTANK1.WAV
 	Projectile: Bullet
 		Speed: 640
@@ -291,7 +291,7 @@ D2K_SiegeQuad:
 ^D2KRocket:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_Missile_Heavy
+	Inherits@fx: ^Effect_CannonAP_Heavy
 	ReloadDelay: 50
 	Range: 5000
 	Report: ROCKET1.WAV
@@ -2206,7 +2206,7 @@ d2k_sard_crossbow:
 ^OCannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 50
 	Range: 4096
 	Report: MEDTANK1.WAV

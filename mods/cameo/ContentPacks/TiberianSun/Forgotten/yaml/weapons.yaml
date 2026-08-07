@@ -2,7 +2,7 @@ TS70mm:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 24
 	Range: 5566
 	Warhead@CannonHE_Medium:
@@ -151,7 +151,7 @@ TSScoopDual:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 2
@@ -253,7 +253,7 @@ TSHighVelocity:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light
-	Inherits@fx: ^Effect_Cannon_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 90
 	Range: 7701
 	Projectile: Bullet
@@ -296,7 +296,7 @@ TSHighVelocity2:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light
-	Inherits@fx: ^Effect_Cannon_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 55
 	Range: 8207
 	Projectile: Bullet
@@ -339,7 +339,7 @@ TSHighVelocityTur:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light
-	Inherits@fx: ^Effect_Cannon_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 30
 	Range: 9483
 	Projectile: Bullet
@@ -563,7 +563,7 @@ TSJuggerFlakAA_boat:
 
 TSJuggerboat90mm:
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Explosion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	ReloadDelay: 69
 	Range: 12834
 	MinRange: 2565
@@ -695,7 +695,7 @@ TSChemBazooka:
 
 TSVanMissile:
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Explosion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	ValidTargets: Ground, Water
 	Report: missile6.aud
 	ReloadDelay: 32
@@ -759,7 +759,7 @@ TSChemVanMissile:
 
 TSMLRSMissile:
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Explosion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	ValidTargets: Ground, Water
 	Report: missile6.aud
 	ReloadDelay: 34
@@ -886,7 +886,7 @@ TSMammothTusk:
 	Inherits@glow: ^ImpactGlow
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_Missile_Heavy
+	Inherits@fx: ^Effect_CannonAP_Heavy
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Speed: 500
@@ -1726,7 +1726,7 @@ TSVisceroidSprayUP:
 
 TSCropBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Explosion_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 50
 	Range: 1250
 	TargetActorCenter: true

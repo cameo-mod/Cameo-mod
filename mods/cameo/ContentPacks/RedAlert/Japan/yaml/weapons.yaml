@@ -411,7 +411,7 @@ BallistaSingleShotAir:
 BallistaSingleShotAirEnergized:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_Missile_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	Inherits: JapanMaidenBowEnergized
 	Range: 9214
 	ReloadDelay: 200
@@ -1504,7 +1504,7 @@ JapaneseHovercraftFlakAAkWaveforce:
 Type89Cannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 52
 	Range: 5243
 	Report: cannon1.aud
@@ -1745,7 +1745,7 @@ WaveforceCannon:
 OISmallCannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 45
 	Range: 5394
 	Report: cannon1.aud
@@ -1809,7 +1809,7 @@ OISmallPlasmaCannon:
 OIBigCannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
-	Inherits@fx: ^Effect_Cannon_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
 	ReloadDelay: 55
 	Range: 5394
 	Report: tank5.aud
@@ -1934,7 +1934,7 @@ ArtilleryExplode:
 BuggyGrenade:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Explosion_Light
+	Inherits@fx: ^Effect_Demolition_Light
 	ReloadDelay: 60
 	Range: 5184
 	Report: M203.aud
@@ -1991,7 +1991,7 @@ BuggyPlasmaGrenade:
 
 JapaneseHeavyBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Explosion_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 100
 	Burst: 4

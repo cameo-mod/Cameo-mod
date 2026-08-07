@@ -109,7 +109,7 @@ TS90mm:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 26
 	Range: 5319
 	Warhead@CannonHE_Medium:
@@ -153,7 +153,7 @@ TS120mm:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 44
 	Range: 6201
 	Projectile: Bullet
@@ -169,7 +169,7 @@ TS120mm_bluenuke:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_Cannon_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 44
 	Range: 6201
 	Projectile: Bullet
@@ -436,7 +436,7 @@ TS152mm:
 MammothTankCannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
-	Inherits@fx: ^Effect_Cannon_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
 	ReloadDelay: 102
 	BurstDelays: 8
 	Range: 6340
@@ -722,7 +722,7 @@ ts_nod_mobilerepairvehicle:
 TSBazooka:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_Missile_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	Report: rketinf1.aud
 	ReloadDelay: 52
 	Range: 6694
@@ -1132,7 +1132,7 @@ TSLimpetBomb_EMP:
 
 TSLocustBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Explosion_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 38
 	Burst: 5
 	BurstDelays: 3

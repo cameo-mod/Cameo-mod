@@ -15,10 +15,9 @@ RA2Patriot:
 		Damage: 5
 
 RA2PatriotThunderboltMissile:
-	Inherits@wh: ^Warhead_MissileHE_Heavy
-	Inherits@wh2: ^Warhead_MissileHE_Light
-	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_Missile_Light
+	Inherits@wh: ^Warhead_MissileAA_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_CannonAP_Heavy
 	ReloadDelay: 30
 	Range: 14150
 	Burst: 2
