@@ -746,6 +746,27 @@ passed the boot-gate.
 - The temporary converter was kept in `C:\Users\AedisToru\AppData\Local\Temp`
   and deleted after use; no temporary script was committed.
 
+### 14.16 `LightMissile + MediumMissile` dual conversion (`0f033ae44`)
+
+- Converted 2 concrete weapons: `D2K_Rocket_Trooper` (`weapons/d2k.yaml`)
+  and `D2K_APC_Rocket` (`ContentPacks/D2k/Ordos`). `^TSDefaultMissile`
+  in `weapons/tiberiansun.yaml` is abstract and was correctly left alone.
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_MissileAP_Light
+  Inherits@wh2: ^Warhead_MissileAP_Medium
+  Inherits@proj: ^Projectile_Missile_Medium
+  Inherits@fx: ^Effect_MissileAP_Medium
+  Inherits: ^D2KRocket
+  ```
+- `LightMissile` → `MissileAP_Light`, `MediumMissile` → `MissileAP_Medium`,
+  `_Percentage` variants preserved. `^D2KRocket` addon preserved.
+  `Warhead@MissileAP_Heavy` custom warheads left untouched.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` reached
+  `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
+  `extract_stats.py` refreshed `d2k_ixian.json`, `d2k_ordos.json`,
+  `shared_d2k.json`.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
