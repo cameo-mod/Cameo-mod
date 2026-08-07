@@ -767,6 +767,22 @@ passed the boot-gate.
   `extract_stats.py` refreshed `d2k_ixian.json`, `d2k_ordos.json`,
   `shared_d2k.json`.
 
+### 14.17 `HeavyMissile` single conversion (`b7ce45c71`)
+
+- Converted 2 weapons: `RashidanGun_upgrade`
+  (`ContentPacks/D2k/Ixian/yaml/weapons.yaml`) and `NuclearMaverick`
+  (`ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`).
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_MissileHE_Heavy
+  Inherits@proj: ^Projectile_Missile_Heavy
+  Inherits@fx: ^Effect_MissileHE_Heavy
+  ```
+- `HeavyMissile` → `MissileHE_Heavy`; `_Percentage` variant preserved.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` reached
+  `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
+  `extract_stats.py` refreshed `d2k_ixian.json` and `redalert_soviets.json`.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
