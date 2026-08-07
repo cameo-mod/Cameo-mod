@@ -19,6 +19,7 @@ This repository is the shared source of truth for maintainers and every AI agent
 | Faction reference | `docs/FACTIONS.md`, `docs/factions/MATRIX.md` | Use for display-name, faction-role, roster, and documentation checks. |
 | Migration process | `docs/MIGRATION.md` | Use for naming, actor splits, asset movement, and Fluent migrations. |
 | External-agent historical evidence | `docs/history/LEGACY_DEVIN_CABAL.md` | Historical register only. No external output is current until rerun in this repository. |
+| Current multi-agent handoff | `docs/AI_HANDOFF_2026-08-05.md` | State, estimates, and next-step plan for the next agent; updated at session handoff. |
 
 ## Required operating sequence
 
