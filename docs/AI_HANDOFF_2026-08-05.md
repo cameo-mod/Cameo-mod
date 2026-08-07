@@ -783,6 +783,27 @@ passed the boot-gate.
   `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
   `extract_stats.py` refreshed `d2k_ixian.json` and `redalert_soviets.json`.
 
+### 14.18 `Grenade + MediumMissile + ShrapnelWeapon` triple conversion (`0404e1416`)
+
+- Converted 3 weapons: `HindMissiles`
+  (`ContentPacks/RedAlert/Soviets`), `HueyCryoMissiles` and
+  `HueyTwinMissiles` (`ContentPacks/RedAlert2Mod/TKM`).
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_Demolition_Light
+  Inherits@wh2: ^Warhead_MissileAP_Medium
+  Inherits@wh3: ^Warhead_Concussion_Medium
+  Inherits@proj: ^Projectile_Missile_Medium
+  Inherits@fx: ^Effect_MissileAP_Medium
+  ```
+- `Grenade` → `Demolition_Light`, `MediumMissile` → `MissileAP_Medium`,
+  `ShrapnelWeapon` → `Concussion_Medium`. `_Percentage` variants preserved.
+  `*_FriendlyFire` twins and leftover `CannonHE_Heavy` warheads stripped.
+  Custom `Warhead@CryoFreeze` and `Warhead@Effect` overrides preserved.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` reached
+  `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
+  `extract_stats.py` refreshed 32 ledgers.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
