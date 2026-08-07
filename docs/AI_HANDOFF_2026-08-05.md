@@ -411,6 +411,11 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   warhead nodes were stripped because the `^Warhead_*` templates already
   supply them. First attempt duplicated `Damage` under the new warhead key
   because `FriendlyFire` children were not skipped; fixed and boot-gated.
+- **HeavyBomb + HeavyFlameWeapon** (`Demolition_Heavy + Flame_Heavy`) converted
+  3 weapons: `Napalm` and `NapalmA10Carrier` (TiberianDawn/GDI) and
+  `ParaBomb` (RedAlert/Shared). `Inherits@glow: ^ImpactGlow` on `ParaBomb`
+  was preserved. No `Inherits@proj` was added because all three use
+  `Projectile: GravityBomb` rather than the `Bullet` in `^Projectile_Flame_Heavy`.
 
 ### 14.8 Single-inherit effect-free sweep (2026-08-07)
 

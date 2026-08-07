@@ -197,45 +197,34 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "20000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "HeavyFlameWeaponPercentage",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "8",
       "slot": "Armament",
       "versus_templates": [
-       "^HeavyBomb",
-       "^HeavyFlameWeapon",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Flame_Heavy",
+       "^Effect_Flame_Heavy",
        "^ImpactGlow"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "ParaBomb",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -336,45 +325,34 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "20000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "HeavyFlameWeaponPercentage",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "8",
       "slot": "Armament",
       "versus_templates": [
-       "^HeavyBomb",
-       "^HeavyFlameWeapon",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Flame_Heavy",
+       "^Effect_Flame_Heavy",
        "^ImpactGlow"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "ParaBomb",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

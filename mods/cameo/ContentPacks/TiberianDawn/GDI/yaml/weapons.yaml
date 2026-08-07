@@ -506,8 +506,9 @@ Vulcan:
 		Spread: 600
 
 Napalm:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^HeavyFlameWeapon
+	Inherits: ^Warhead_Demolition_Heavy
+	Inherits@2: ^Warhead_Flame_Heavy
+	Inherits@3: ^Effect_Flame_Heavy
 	ReloadDelay: 2
 	Range: 2000
 	Report: flamer2.aud
@@ -515,18 +516,14 @@ Napalm:
 	Projectile: GravityBomb
 		Image: BOMBLET
 		Shadow: true
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 6000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 3
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@Flame_Heavy:
 		Damage: 6000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage:
 		Damage: 3
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
@@ -556,8 +553,9 @@ VulcanA10Carrier:
 		ValidRelationships: Neutral, Enemy
 
 NapalmA10Carrier:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^HeavyFlameWeapon
+	Inherits: ^Warhead_Demolition_Heavy
+	Inherits@2: ^Warhead_Flame_Heavy
+	Inherits@3: ^Effect_Flame_Heavy
 	ReloadDelay: 2
 	Range: 1000
 	Report: flamer2.aud
@@ -565,18 +563,14 @@ NapalmA10Carrier:
 	Projectile: GravityBomb
 		Image: BOMBLET
 		Shadow: true
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 4000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 2
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@Flame_Heavy:
 		Damage: 4000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage:
 		Damage: 2
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5

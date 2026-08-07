@@ -990,8 +990,9 @@ MammothTusk:
 		ValidTargets: Ground
 
 ParaBomb:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^HeavyFlameWeapon
+	Inherits: ^Warhead_Demolition_Heavy
+	Inherits@2: ^Warhead_Flame_Heavy
+	Inherits@3: ^Effect_Flame_Heavy
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 8
 	Range: 5000
@@ -1002,15 +1003,13 @@ ParaBomb:
 		Velocity: 0, 0, -75
 		Acceleration: 0, 0, 0
 		Shadow: False
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 20000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 10
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@Flame_Heavy:
 		Damage: 20000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage:
 		Damage: 10
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
