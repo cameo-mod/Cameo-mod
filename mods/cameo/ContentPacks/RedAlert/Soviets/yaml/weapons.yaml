@@ -1463,8 +1463,10 @@ BTRMachineGun_AA:
 		ValidTargets: Air
 
 BTRTeslaMachineGun:
-	Inherits: ^LightMissile
-	Inherits@2: ^TeslaWeapon
+	Inherits: ^Warhead_MissileAP_Light
+	Inherits@2: ^Warhead_Tesla_Heavy
+	Inherits@3: ^Projectile_Lightning_Heavy
+	Inherits@4: ^Effect_Tesla_Heavy
 	ValidTargets: Ground, Water
 	ReloadDelay: 20
 	Burst: 4
@@ -1472,17 +1474,15 @@ BTRTeslaMachineGun:
 	Range: 5454
 	Report: shktrop1.aud
 	Projectile: LightningZap
-		-Image:
-		-TrailImage:
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1490,7 +1490,7 @@ BTRTeslaMachineGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1842,24 +1842,24 @@ KamovMissilesTesla:
 		ExplosionPalette: ra2effect
 
 KamovTesla:
-	Inherits: ^LightMissile
-	Inherits@2: ^TeslaWeapon
+	Inherits: ^Warhead_MissileAP_Light
+	Inherits@2: ^Warhead_Tesla_Heavy
+	Inherits@3: ^Projectile_Lightning_Heavy
+	Inherits@4: ^Effect_Tesla_Heavy
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 32
 	Range: 5528
 	Report: shktrop1.aud
 	Projectile: LightningZap
-		-Image:
-		-TrailImage:
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1867,7 +1867,7 @@ KamovTesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1988,8 +1988,10 @@ IncendiaryArmoredYakChainGun:
 	MinRange: 1290
 
 YakTeslaGun:
-	Inherits: ^LightMissile
-	Inherits@2: ^TeslaWeapon
+	Inherits: ^Warhead_MissileAP_Light
+	Inherits@2: ^Warhead_Tesla_Heavy
+	Inherits@3: ^Projectile_Lightning_Heavy
+	Inherits@4: ^Effect_Tesla_Heavy
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 100
 	Range: 7000
@@ -1997,17 +1999,15 @@ YakTeslaGun:
 	BurstDelays: 3
 	Report: shktrop1.aud
 	Projectile: LightningZap
-		-Image:
-		-TrailImage:
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -2015,7 +2015,7 @@ YakTeslaGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla

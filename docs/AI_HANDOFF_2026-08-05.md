@@ -429,6 +429,10 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   `^Projectile_Laser_Heavy` and `^Effect_Laser_Heavy`/`^Effect_Railgun_Heavy`;
   local `LaserZap`/`Railgun` projectile overrides and custom `Warhead@Effect`
   were preserved.
+- **LightMissile + TeslaWeapon** converted 5 weapons to
+  `MissileAP_Light + Tesla_Heavy` with `^Projectile_Lightning_Heavy` and
+  `^Effect_Tesla_Heavy`. Nested `Projectile: LightningZap` removal markers
+  (`-Image:`, `-TrailImage:`) were stripped to avoid NREs.
 - **HeavyBomb + MediumFlameWeapon** (`Demolition_Heavy + Flame_Medium`) converted
   5 weapons across 3 files (`sandmarinemortar`, `bigshieemortar` and three
   others). `Inherits@proj` was set to `^Projectile_Flame_Medium` and the

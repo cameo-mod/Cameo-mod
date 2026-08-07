@@ -1,4 +1,3 @@
-
 ####################################################################################################
 #		Red Alert 2 Weapon Templates
 ####################################################################################################
@@ -1151,24 +1150,23 @@ RA2TeslaCoilCharge_cosmetic:
 		NodeRadius: 0
 
 TeslaArmorDischargeDummy:
-	Inherits: ^LightMissile
-	Inherits@2: ^TeslaWeapon
+	Inherits: ^Warhead_MissileAP_Light
+	Inherits@2: ^Warhead_Tesla_Heavy
+	Inherits@3: ^Projectile_Lightning_Heavy
+	Inherits@4: ^Effect_Tesla_Heavy
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 1
 	Range: 4500
-	-Report:
 	Projectile: LightningZap
-		-Image: DRAGON
-		-TrailImage: smokey
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 0
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 0
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 0
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1176,7 +1174,7 @@ TeslaArmorDischargeDummy:
 		ValidTargets: Ground, Water, Air
 		Damage: 0
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 0
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
