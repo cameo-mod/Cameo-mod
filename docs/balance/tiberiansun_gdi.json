@@ -2478,40 +2478,35 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6125",
       "reloaddelay": "26",
       "requires": "!ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^MediumMissile",
-       "^FlakWeapon"
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Flak_Medium"
+      ],
       "weapon": "TS30mm",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2519,40 +2514,35 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6125",
       "reloaddelay": "26",
       "requires": "!ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^MediumMissile",
-       "^FlakWeapon"
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Flak_Medium"
+      ],
       "weapon": "TS30mm",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",

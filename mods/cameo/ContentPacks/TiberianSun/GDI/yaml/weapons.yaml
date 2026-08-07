@@ -1,17 +1,19 @@
 TS30mm:
-	Inherits: ^MediumMissile
-	Inherits@2: ^FlakWeapon
+	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@wh2: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ReloadDelay: 26
 	Burst: 3
 	Range: 6125
 	BurstDelays: 2
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium:
 		Damage: 8000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage:
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		Damage: 8000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage:
 		Damage: 1
 
 TS30mmRail:

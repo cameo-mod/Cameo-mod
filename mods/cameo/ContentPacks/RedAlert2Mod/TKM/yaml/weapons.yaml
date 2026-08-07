@@ -486,21 +486,23 @@ TKMZazaCannonAA:
 	Inherits: TKMZazaCannonAG
 	Range: 7926
 TKMAATurretCannon:
-	Inherits: ^MediumMissile
-	Inherits@2: ^FlakWeapon
+	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@wh2: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ReloadDelay: 5
 	Range: 11604
 	ValidTargets: Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium:
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage:
 		ValidTargets: Air
 		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage:
 		ValidTargets: Air
 		Damage: 1
 tkmstrykerrockets:
@@ -1636,8 +1638,10 @@ TKMDroneExplosion:
 		ImpactSounds: bazook1.aud
 
 FlakbusAA:
-	Inherits: ^MediumMissile
-	Inherits@2: ^FlakWeapon
+	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@wh2: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ReloadDelay: 32
 	Range: 10929
 	Report: nax_aa2.wav
@@ -1652,15 +1656,15 @@ FlakbusAA:
 		Width: 44
 		Inaccuracy: 2000
 	ValidTargets: Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium:
 		ValidTargets: Air
 		Damage: 16000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage:
 		ValidTargets: Air
 		Damage: 8
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 16000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage:
 		ValidTargets: Air
 		Damage: 8

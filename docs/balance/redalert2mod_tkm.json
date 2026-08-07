@@ -1127,39 +1127,34 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "11604",
       "reloaddelay": "5",
       "slot": "Armament@AA",
       "versus_templates": [
-       "^MediumMissile",
-       "^FlakWeapon"
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Flak_Medium"
+      ],
       "weapon": "TKMAATurretCannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1272,39 +1267,34 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10929",
       "reloaddelay": "32",
       "slot": "Armament",
       "versus_templates": [
-       "^MediumMissile",
-       "^FlakWeapon"
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_Flak_Medium"
+      ],
       "weapon": "FlakbusAA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
