@@ -705,122 +705,39 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "HeavyCannonPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "Magic_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "TSHellfire",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^TSSonicGrenade"
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy",
+       "^Effect_Magic_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy"
+      ],
       "weapon": "TSHellfireSonic",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -954,108 +871,23 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "HeavyCannonPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "Magic_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6138",
       "reloaddelay": "28",
@@ -1064,9 +896,12 @@
       "versus_templates": [
        "TSHellfireSonic"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy"
+      ],
       "weapon": "TSZoneHellfireSonic",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4050,100 +3885,76 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "1",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Magic_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "4050",
       "reloaddelay": "60",
       "requires": "!ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "TSSonicWeaponEffect"
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy",
+       "^Effect_Magic_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy"
+      ],
       "weapon": "TSSonicZapWeapon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "2",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Magic_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "4050",
       "reloaddelay": "60",
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "TSSonicWeaponEffect"
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy",
+       "^Effect_Magic_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy"
+      ],
       "weapon": "TSSonicZapWeaponSonic",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

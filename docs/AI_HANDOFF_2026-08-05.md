@@ -429,6 +429,12 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   `^Projectile_Laser_Heavy` and `^Effect_Laser_Heavy`/`^Effect_Railgun_Heavy`;
   local `LaserZap`/`Railgun` projectile overrides and custom `Warhead@Effect`
   were preserved.
+- **TeslaWeapon + MagicWeapon** converted 9 weapons to
+  `Tesla_Heavy + Magic_Heavy` with `^Effect_Magic_Heavy`. `RA2DiskDrain` was
+  skipped because it uses `^TeslaWeapon` only for `DamageTypes`, not for a
+  `Warhead@TeslaWeapon` node. `D2k` storm weapons and `TiberianSun` sonic-zap
+  weapons kept their local `Warhead@TeslaExtraDamage` / `EMPUnit` and
+  custom `Projectile: Bullet` fields.
 - **LightMissile + TeslaWeapon** converted 5 weapons to
   `MissileAP_Light + Tesla_Heavy` with `^Projectile_Lightning_Heavy` and
   `^Effect_Tesla_Heavy`. Nested `Projectile: LightningZap` removal markers

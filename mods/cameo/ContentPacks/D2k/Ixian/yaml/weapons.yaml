@@ -875,29 +875,29 @@ HMG_Duelist_upgrade:
 		Damage: 1
 
 d2kStormLasher:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^MagicWeapon
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Magic_Heavy
+	Inherits@3: ^Effect_Magic_Heavy
 	Range: 11384
 	ReloadDelay: 250
-	-Projectile:
 	Projectile: Bullet
 		Speed: 1250
 		Blockable: false
-	Warhead@MagicWeapon: SpreadDamage
+	Warhead@Magic_Heavy:
 		Damage: 150000
 		Spread: 750
 		Falloff: 100, 75, 50, 25
 		Delay: 10
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+	Warhead@Magic_Heavy_Percentage:
 		Damage: 75
 		Spread: 750
 		Falloff: 100, 75, 50, 25
 		Delay: 7
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 150000
 		Spread: 750
 		Falloff: 100, 75, 50, 25
@@ -911,7 +911,7 @@ d2kStormLasher:
 		Delay: 16
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		Damage: 75
 		Spread: 750
 		Falloff: 100, 75, 50, 25
@@ -986,30 +986,30 @@ D2K_ShockGun2:
 	Range: 7343
 
 D2K_StormGun:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^MagicWeapon
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Magic_Heavy
+	Inherits@3: ^Effect_Magic_Heavy
 	ReloadDelay: 100
 	Range: 7343
 	Report: bigggun1.aud
-	-Projectile:
 	Projectile: Bullet
 		Speed: 750
 		Blockable: false
-	Warhead@MagicWeapon: SpreadDamage
+	Warhead@Magic_Heavy:
 		Damage: 40000
 		Spread: 750
 		Falloff: 100, 75, 50, 25
 		Delay: 5
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+	Warhead@Magic_Heavy_Percentage:
 		Damage: 20
 		Spread: 750
 		Falloff: 100, 75, 50, 25
 		Delay: 2
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 40000
 		Spread: 750
 		Falloff: 100, 75, 50, 25
@@ -1023,7 +1023,7 @@ D2K_StormGun:
 		Delay: 11
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		Damage: 20
 		Spread: 750
 		Falloff: 100, 75, 50, 25

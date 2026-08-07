@@ -1593,49 +1593,38 @@
      {
       "damage_warheads": [
        {
-        "damage": "150000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "75",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "75",
+        "tag": "Magic_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "75000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "75",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "150000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "75",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "11384",
       "reloaddelay": "250",
       "slot": "Armament",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^MagicWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy",
+       "^Effect_Magic_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy"
+      ],
       "weapon": "d2kStormLasher",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5322,49 +5311,38 @@
      {
       "damage_warheads": [
        {
-        "damage": "40000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "20",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "Magic_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "20000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "40000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7343",
       "reloaddelay": "100",
       "slot": "Armament@StormEffect",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^MagicWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy",
+       "^Effect_Magic_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy"
+      ],
       "weapon": "D2K_StormGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

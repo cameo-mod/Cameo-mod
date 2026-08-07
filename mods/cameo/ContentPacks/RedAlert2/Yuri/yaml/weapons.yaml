@@ -320,8 +320,9 @@ RA2DiskLaser_elite:
 		Damage: 24
 
 RA2DiskDrain:
-	Inherits: ^MagicWeapon
-	Inherits@2: ^TeslaWeapon
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Magic_Heavy
+	Inherits@3: ^Effect_Magic_Heavy
 	ReloadDelay: 5
 	Range: 125
 	Report: vflolo5a.wav, vflolo5b.wav
@@ -334,15 +335,15 @@ RA2DiskDrain:
 		Range: 250
 		Duration: 5
 		Condition: diskdrain
-	Warhead@MagicWeapon: SpreadDamage
+	Warhead@Magic_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+	Warhead@Magic_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
@@ -350,11 +351,10 @@ RA2DiskDrain:
 		ValidTargets: Ground, Water
 		Damage: 1000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	-Warhead@Effect:
 
 RA2DiskSteal:
 	ReloadDelay: 5

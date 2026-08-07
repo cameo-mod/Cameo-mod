@@ -321,9 +321,9 @@ TSSonicWeaponEffect:
 		Color: 50F5FF45
 
 TSSonicZapWeapon:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^MagicWeapon
-	Inherits@3: TSSonicWeaponEffect
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Magic_Heavy
+	Inherits@3: ^Effect_Magic_Heavy
 	ReloadDelay: 60
 	Range: 4050
 	Projectile: AreaBeam
@@ -337,27 +337,26 @@ TSSonicZapWeapon:
 		Blockable: true
 		TrackTarget: true
 		Color: 50F5FF45
-	Warhead@MagicWeapon: SpreadDamage
+	Warhead@Magic_Heavy:
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+	Warhead@Magic_Heavy_Percentage:
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 1000
 		ValidRelationships: Neutral, Enemy
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
-	-Warhead@Effect:
 
 TSSonicZapWeaponSonic:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^MagicWeapon
-	Inherits@3: TSSonicWeaponEffect
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Magic_Heavy
+	Inherits@3: ^Effect_Magic_Heavy
 	ReloadDelay: 60
 	Range: 4050
 	Projectile: AreaBeam
@@ -371,22 +370,21 @@ TSSonicZapWeaponSonic:
 		Blockable: true
 		TrackTarget: true
 		Color: B4A7D645
-	Warhead@MagicWeapon: SpreadDamage
+	Warhead@Magic_Heavy:
 		Damage: 4000
 		ValidRelationships: Neutral, Enemy
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+	Warhead@Magic_Heavy_Percentage:
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 4000
 		ValidRelationships: Neutral, Enemy
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
-	-Warhead@Effect:
 
 TSZapWeapon_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -679,10 +677,9 @@ TSMammothTusk2II_AA:
 		Explosions: small_building
 
 TSHellfireSonic:
-	Inherits: TSHellfire
-	Inherits@2: ^TeslaWeapon
-	Inherits@3: ^MagicWeapon
-	Inherits@4: ^TSSonicGrenade
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Magic_Heavy
+	Inherits@3: ^Effect_Magic_Heavy
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -702,19 +699,19 @@ TSHellfireSonic:
 		HomingActivationDelay: 2
 		RangeLimit: 25000
 		PointDefenseTypes: Missile
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@MagicWeapon: SpreadDamage
+	Warhead@Magic_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+	Warhead@Magic_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 

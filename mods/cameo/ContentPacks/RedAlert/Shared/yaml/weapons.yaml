@@ -522,9 +522,9 @@ MagicOrbSpreaderProjectile2:
 		Amount: 8
 
 MagicOrb:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^MagicWeapon
-	Inherits@EMP: ^EMPDamage
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Magic_Heavy
+	Inherits@3: ^Effect_Magic_Heavy
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
 	Burst: 8
 	BurstDelays: 10
@@ -548,7 +548,7 @@ MagicOrb:
 		TrailSequences: idle1, idle2
 		TrailInterval: 1
 		ContrailLength: 0
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Spread: 1200
 		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -556,15 +556,15 @@ MagicOrb:
 		Spread: 1600
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		Spread: 800
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MagicWeapon: SpreadDamage
+	Warhead@Magic_Heavy:
 		Spread: 1200
 		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+	Warhead@Magic_Heavy_Percentage:
 		Spread: 800
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -576,9 +576,9 @@ MagicOrb:
 		ImpactSounds: thgun.wav
 
 MagicOrb2:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^MagicWeapon
-	Inherits@EMP: ^EMPDamage
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Magic_Heavy
+	Inherits@3: ^Effect_Magic_Heavy
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
 	Burst: 8
 	BurstDelays: 10
@@ -602,7 +602,7 @@ MagicOrb2:
 		TrailSequences: idle1, idle2
 		TrailInterval: 1
 		ContrailLength: 0
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Spread: 1600
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -610,15 +610,15 @@ MagicOrb2:
 		Spread: 2400
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		Spread: 1200
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MagicWeapon: SpreadDamage
+	Warhead@Magic_Heavy:
 		Spread: 1600
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+	Warhead@Magic_Heavy_Percentage:
 		Spread: 1200
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla

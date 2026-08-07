@@ -62,50 +62,39 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "MagicWeaponPercentage",
+        "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "1",
+        "tag": "Magic_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "125",
       "reloaddelay": "5",
       "requires": "yuri_upgrade_disksiphonattack",
       "slot": "Armament@SECOND",
       "versus_templates": [
-       "^MagicWeapon",
-       "^TeslaWeapon"
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy",
+       "^Effect_Magic_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy"
+      ],
       "weapon": "RA2DiskDrain",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",

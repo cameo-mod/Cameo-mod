@@ -2027,59 +2027,52 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "5",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "Magic_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "5000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "30",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^EMPDamage"
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy",
+       "^Effect_Magic_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy"
+      ],
       "weapon": "Hakureiring",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "1",
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "120000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "5",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "Magic_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "60000",
@@ -2087,6 +2080,11 @@
         "type": "SpreadDamage"
        },
        {
+        "damage": "120000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "60",
         "tag": "TeslaWeaponPercentage",
         "type": "HealthPercentageDamage"
@@ -2100,15 +2098,10 @@
         "damage": "60",
         "tag": "MagicWeaponPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "100",
@@ -2116,9 +2109,12 @@
       "versus_templates": [
        "Hakureiring"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy"
+      ],
       "weapon": "Hakureiring2",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2126,50 +2122,38 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "5",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "Magic_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "5000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6666",
       "reloaddelay": "30",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^EMPDamage"
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy",
+       "^Effect_Magic_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy"
+      ],
       "weapon": "Hakureiring",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2177,13 +2161,23 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "120000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "5",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "Magic_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "60000",
         "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "120000",
+        "tag": "TeslaWeapon",
         "type": "SpreadDamage"
        },
        {
@@ -2200,15 +2194,10 @@
         "damage": "60",
         "tag": "MagicWeaponPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6666",
       "reloaddelay": "100",
@@ -2216,9 +2205,12 @@
       "versus_templates": [
        "Hakureiring"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy"
+      ],
       "weapon": "Hakureiring2",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5105,38 +5097,23 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "5",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "Magic_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "5000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "30",
@@ -5144,22 +5121,35 @@
       "versus_templates": [
        "Hakureiring"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy"
+      ],
       "weapon": "OIHakureiring",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "1",
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "120000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "5",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "Magic_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "60000",
         "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "120000",
+        "tag": "TeslaWeapon",
         "type": "SpreadDamage"
        },
        {
@@ -5176,15 +5166,10 @@
         "damage": "60",
         "tag": "MagicWeaponPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "100",
@@ -5192,9 +5177,12 @@
       "versus_templates": [
        "Hakureiring2"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Magic_Heavy"
+      ],
       "weapon": "OIHakureiring2",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [

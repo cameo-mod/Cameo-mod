@@ -755,9 +755,9 @@ RocketAngelRockets:
 		ValidTargets: Air
 
 Hakureiring:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^MagicWeapon
-	Inherits@EMP: ^EMPDamage
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Magic_Heavy
+	Inherits@3: ^Effect_Magic_Heavy
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
 	InvalidTargets: Epic, Psionic, Monster
 	ReloadDelay: 30
@@ -787,7 +787,7 @@ Hakureiring:
 		ContrailEndColor: FFFFFF
 		CloseEnough: 333
 		AllowSnapping: true
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Air, Ground, Water
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -795,15 +795,15 @@ Hakureiring:
 		ValidTargets: Air, Ground, Water
 		Damage: 5000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		ValidTargets: Air, Ground, Water
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MagicWeapon: SpreadDamage
+	Warhead@Magic_Heavy:
 		ValidTargets: Air, Ground, Water
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+	Warhead@Magic_Heavy_Percentage:
 		ValidTargets: Air, Ground, Water
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
