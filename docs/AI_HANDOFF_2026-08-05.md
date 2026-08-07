@@ -401,6 +401,8 @@ converted (`Chaingun+Grenade`, `HeavyBomb+RailgunWeapon`, `ArrowWeapon+MediumMis
 `JHindChainGun` required a manual fix: `-		-LaunchAngle:` nested under
 `Projectile: Bullet` had to be removed because the new `^Projectile_Bullet_Medium`
 template does not include `LaunchAngle`.
+A final effect-free dual `Grenade+RailgunWeapon` (`GlaveCanon`, StarCraft Protoss)
+was converted to `Demolition_Light+Railgun_Heavy`.
 
 Effect-heavy dual-inherit clusters (flame/chemical/sonic/energy/EMP) remain
 blocked until an effect-aware converter is built.
