@@ -2297,10 +2297,11 @@ WaveArtilleryShell:
 		ValidTargets: Ground, Air
 
 WaveArtilleryImpact:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^RailgunWeapon
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Railgun_Heavy
+	Inherits@3: ^Effect_Railgun_Heavy
 	Projectile: InstantHit
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 10000
 		Spread: 333
@@ -2312,19 +2313,19 @@ WaveArtilleryImpact:
 		Spread: 666
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 5
 		Spread: 333
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeapon: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 10000
 		Spread: 333
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 5
 		Spread: 333
