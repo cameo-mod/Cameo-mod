@@ -1069,43 +1069,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "12000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "12000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
-        "tag": "HeavyBombPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1115,22 +1090,27 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "74",
       "slot": "Armament",
       "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
+       "^Warhead_Demolition_Light",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Heavy",
        "^D2K_Cannon"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "D2K_155mm",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

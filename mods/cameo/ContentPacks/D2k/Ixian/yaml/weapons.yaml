@@ -190,9 +190,11 @@ D2K_155mm2:
 		ImpactActors: false
 
 D2K_155mm3:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Demolition_Heavy
+	Inherits@wh3: ^Warhead_Concussion_Medium
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 80
 	Range: 8686
 	Report: MORTAR1.WAV
@@ -212,24 +214,18 @@ D2K_155mm3:
 		InaccuracyType: PerCellIncrement
 		Image: d2k_155mm
 		Palette: d2keffect
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 4
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 8000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 4
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 8000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 4
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_med_explosion
 		ImpactSounds: EXPLMD2.WAV

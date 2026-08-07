@@ -4912,43 +4912,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "30000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "30000",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "ShrapnelWeaponPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "30000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "HeavyBombPercentage",
+        "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -4960,13 +4935,19 @@
       "reloaddelay": "180",
       "slot": "Armament",
       "versus_templates": [
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb"
+       "^Warhead_Demolition_Light",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "wc2ballistaFire",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
