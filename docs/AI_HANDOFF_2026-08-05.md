@@ -725,6 +725,27 @@ passed the boot-gate.
 - Note: the temporary `tools/convert_shrapnel.py` converter script was
   committed with this change and should be removed in a follow-up cleanup.
 
+### 14.15 `HeavyCannon + MediumCannon + TankDestroyerCannon` triple conversion (`9a3668197`)
+
+- Converted 3 weapons: `TanyaBomb` (`weapons/redalert2.yaml` and
+  `ContentPacks/RedAlert2/Shared`), `SiegeTankCannon`
+  (`ContentPacks/StarCraft/Terran`).
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_CannonHE_Heavy
+  Inherits@wh2: ^Warhead_CannonHE_Medium
+  Inherits@wh3: ^Warhead_CannonAP_Light
+  Inherits@proj: ^Projectile_Shell_Heavy
+  Inherits@fx: ^Effect_CannonHE_Heavy
+  ```
+- `HeavyCannon` → `CannonHE_Heavy`, `MediumCannon` → `CannonHE_Medium`,
+  `TankDestroyerCannon` → `CannonAP_Light`. `_Percentage` variants preserved.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` reached
+  `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
+  `extract_stats.py` refreshed `docs/balance/starcraft_terran.json`.
+- The temporary converter was kept in `C:\Users\AedisToru\AppData\Local\Temp`
+  and deleted after use; no temporary script was committed.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
