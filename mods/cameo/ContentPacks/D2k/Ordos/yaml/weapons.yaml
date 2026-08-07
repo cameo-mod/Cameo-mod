@@ -939,9 +939,11 @@ HMGo:
 		Damage: 2
 
 HMGo_upgrade:
-	Inherits: ^LaserWeapon
-	Inherits@2: ^Chaingun
-	Inherits@2: HMGo
+	Inherits: ^Warhead_Laser_Heavy
+	Inherits@2: ^Warhead_Bullet_Medium
+	Inherits@3: ^Projectile_Bullet_Medium
+	Inherits@4: HMGo
+	Inherits@5: ^Effect_Bullet_Medium
 	Report: LaserTankAttack.wav
 	-Projectile:
 	Projectile: LaserZap
@@ -954,16 +956,16 @@ HMGo_upgrade:
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 

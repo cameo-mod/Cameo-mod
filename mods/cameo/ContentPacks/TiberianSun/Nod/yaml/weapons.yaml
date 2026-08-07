@@ -485,9 +485,11 @@ TSHarpyAOEClaw:
 		Falloff: 100, 50, 25
 
 TSLaserHarpyClaw:
-	Inherits: ^Chaingun
-	Inherits@2: ^LaserWeapon
-	Inherits@3: ^TSLaserEffect
+	Inherits: ^Warhead_Bullet_Medium
+	Inherits@2: ^Warhead_Laser_Heavy
+	Inherits@3: ^Projectile_Laser_Heavy
+	Inherits@4: ^TSLaserEffect
+	Inherits@5: ^Effect_Laser_Heavy
 	Projectile: LaserZap
 		Width: 36
 		Duration: 8
@@ -499,16 +501,16 @@ TSLaserHarpyClaw:
 	Report: cygun1.aud
 	SoundVolume: 0.25
 	ValidTargets: Ground, Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		Damage: 2
 		ValidTargets: Ground, Air
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 4000
 		ValidTargets: Ground, Air
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage:
 		Damage: 2
 		ValidTargets: Ground, Air
 

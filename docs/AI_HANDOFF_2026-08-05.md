@@ -433,6 +433,13 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   TiberianDawn/Nod) converted to `Flame_Light + MissileAP_Medium`. The weapon
   keeps its local `Warhead@Effect` (`small_frag`) and inherits
   `^Projectile_Missile_Medium` because the missile side was the final `Inherits`.
+- **Chaingun + LaserWeapon** (`TSTurretLaser`, `TSLaserTurretLaser`,
+  `TurretLaserFragment`, `ObeliskLaserFragment` in TiberianSun, and
+  `HMGo_upgrade` in D2k/Ordos) converted to `Bullet_Medium + Laser_Heavy`.
+  `^TSLaserEffect` addon is kept between `^Projectile_Laser_Heavy` and
+  `^Effect_Laser_Heavy` so its projectile color/zoffset overrides the
+  generic projectile, while the local `Projectile: LaserZap` and `Report`
+  still win.
 - **SmallArms + Chaingun** (`d2k_air_drone_guns` in D2k/Ixian) converted to
   `Bullet_Light + Bullet_Medium` while preserving the `^D2KMissile` addon.
   The addon is kept first so its `Warhead@MissileAP_Heavy` still applies;

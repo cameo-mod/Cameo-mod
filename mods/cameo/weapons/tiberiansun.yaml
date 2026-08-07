@@ -479,9 +479,11 @@ MammothTankCannon:
 		InvalidTargets: Vehicle, Building, wall
 
 TSTurretLaser:
-	Inherits: ^Chaingun
-	Inherits@2: ^LaserWeapon
-	Inherits@3: ^TSLaserEffect
+	Inherits: ^Warhead_Bullet_Medium
+	Inherits@2: ^Warhead_Laser_Heavy
+	Inherits@3: ^Projectile_Laser_Heavy
+	Inherits@4: ^TSLaserEffect
+	Inherits@5: ^Effect_Laser_Heavy
 	ReloadDelay: 25
 	Range: 6487
 	Report: lastur1.aud
@@ -493,13 +495,13 @@ TSTurretLaser:
 		GlowIntensity: 0.5
 		SecondaryBeamWidth: 48
 		-HitAnim:
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 10000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		Damage: 5
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 10000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage:
 		Damage: 5
 
 TSCABALPlasmaFire:
@@ -509,9 +511,11 @@ TSCABALPlasmaFire:
 		SecondaryBeamColor: 80C0FF
 
 TSLaserTurretLaser:
-	Inherits: ^Chaingun
-	Inherits@2: ^LaserWeapon
-	Inherits@3: ^TSLaserEffect
+	Inherits: ^Warhead_Bullet_Medium
+	Inherits@2: ^Warhead_Laser_Heavy
+	Inherits@3: ^Projectile_Laser_Heavy
+	Inherits@4: ^TSLaserEffect
+	Inherits@5: ^Effect_Laser_Heavy
 	ReloadDelay: 20
 	Range: 6992
 	Report: lastur1.aud
@@ -524,13 +528,13 @@ TSLaserTurretLaser:
 		SecondaryBeam: true
 		SecondaryBeamWidth: 48
 		-HitAnim:
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 16000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		Damage: 8
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 16000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage:
 		Damage: 8
 	Warhead@3: FireShrapnel
 		Weapon: TurretLaserFragment
@@ -540,9 +544,11 @@ TSLaserTurretLaser:
 		AimTargetStances: Enemy, Neutral
 
 TurretLaserFragment:
-	Inherits: ^Chaingun
-	Inherits@2: ^LaserWeapon
-	Inherits@3: ^TSLaserEffect
+	Inherits: ^Warhead_Bullet_Medium
+	Inherits@2: ^Warhead_Laser_Heavy
+	Inherits@3: ^Projectile_Laser_Heavy
+	Inherits@4: ^TSLaserEffect
+	Inherits@5: ^Effect_Laser_Heavy
 	-Report:
 	Range: 2500
 	Projectile: LaserZap
@@ -551,13 +557,13 @@ TurretLaserFragment:
 		SecondaryBeam: true
 		SecondaryBeamWidth: 12
 		-HitAnim:
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 8000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		Damage: 4
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 8000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage:
 		Damage: 4
 
 TSObeliskLaserFire:
@@ -641,9 +647,11 @@ TSLaserObeliskLaserFire:
 		AimTargetStances: Enemy, Neutral
 
 ObeliskLaserFragment:
-	Inherits: ^Chaingun
-	Inherits@2: ^LaserWeapon
-	Inherits@3: ^TSLaserEffect
+	Inherits: ^Warhead_Bullet_Medium
+	Inherits@2: ^Warhead_Laser_Heavy
+	Inherits@3: ^Projectile_Laser_Heavy
+	Inherits@4: ^TSLaserEffect
+	Inherits@5: ^Effect_Laser_Heavy
 	Range: 4000
 	-Warhead@Effect:
 	-Warhead@EffectAir:
@@ -652,13 +660,13 @@ ObeliskLaserFragment:
 		Duration: 38
 		SecondaryBeamWidth: 24
 		-HitAnim:
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 40000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage:
 		Damage: 20
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 40000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage:
 		Damage: 20
 
 TSLaserFence:

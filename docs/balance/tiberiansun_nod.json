@@ -184,59 +184,49 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4969",
       "reloaddelay": "25",
       "requires": "ts_nod_upgrade_tiberiumlenses && !ts_nod_upgrade_auxiliaryweapon",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Chaingun",
-       "^LaserWeapon",
-       "^TSLaserEffect"
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^TSLaserEffect",
+       "^Effect_Laser_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "TSLaserHarpyClaw",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
+        "damage": "0",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -248,20 +238,10 @@
         "damage": "0",
         "tag": "LaserWeaponPercentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "0",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4969",
       "reloaddelay": "25",
@@ -270,42 +250,30 @@
       "versus_templates": [
        "TSLaserHarpyClaw"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "TSLaserHarpyMultiClaw",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4969",
       "reloaddelay": "25",
@@ -314,9 +282,12 @@
       "versus_templates": [
        "TSLaserHarpyClaw"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "TSLaserHarpyAOEClaw",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -817,90 +788,70 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6487",
       "reloaddelay": "25",
       "requires": "!ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Chaingun",
-       "^LaserWeapon",
-       "^TSLaserEffect"
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^TSLaserEffect",
+       "^Effect_Laser_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "TSTurretLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "ChaingunPercentage",
+        "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6992",
       "reloaddelay": "20",
       "requires": "ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Chaingun",
-       "^LaserWeapon",
-       "^TSLaserEffect"
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^TSLaserEffect",
+       "^Effect_Laser_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "TSLaserTurretLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
