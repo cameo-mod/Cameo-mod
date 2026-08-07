@@ -3402,28 +3402,13 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3447,13 +3432,23 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
@@ -3465,39 +3460,26 @@
        "^RA2LaserWeapon"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "NaxiMP40Laser",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "10",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3521,13 +3503,23 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
@@ -3537,11 +3529,13 @@
        "NaxiMP40Laser"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "NaxiMP40Laser_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -3597,28 +3591,13 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3642,13 +3621,23 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
@@ -3660,39 +3649,26 @@
        "^RA2LaserWeapon"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "NaxiMP40Laser",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "10",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3716,13 +3692,23 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
@@ -3732,39 +3718,26 @@
        "NaxiMP40Laser"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "NaxiMP40Laser_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "6",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3788,13 +3761,23 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
@@ -3804,39 +3787,26 @@
        "NaxiMP40Laser"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "Lunar_YellowMP40Laser",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "11",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3860,13 +3830,23 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
@@ -3876,39 +3856,26 @@
        "NaxiMP40Laser_elite"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "Lunar_YellowMP40Laser_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "7",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3932,13 +3899,23 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
@@ -3948,39 +3925,26 @@
        "NaxiMP40Laser"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "Lunar_AmplifiedMP40Laser",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "12",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -4004,13 +3968,23 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
@@ -4020,11 +3994,13 @@
        "NaxiMP40Laser_elite"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "Lunar_AmplifiedMP40Laser_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

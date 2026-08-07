@@ -433,6 +433,11 @@ was converted to `Demolition_Light+Railgun_Heavy`.
   TiberianDawn/Nod) converted to `Flame_Light + MissileAP_Medium`. The weapon
   keeps its local `Warhead@Effect` (`small_frag`) and inherits
   `^Projectile_Missile_Medium` because the missile side was the final `Inherits`.
+- **Grenade + HeavyCannon** (`GoliathMG` in StarCraft/Terran,
+  `ManifoldMG` in StarCraft/Protoss, `NaxiMP40` in redalert2mod.yaml, and
+  `NaxPlanegun_elite` in RedAlert2Mod/Naxis) converted to
+  `Concussion_Light + CannonHE_Heavy` with `^Projectile_Shell_Heavy` and
+  `^Effect_CannonHE_Heavy`. Addon `^RA2Chaingun` preserved where present.
 - **Chaingun + LaserWeapon** (`TSTurretLaser`, `TSLaserTurretLaser`,
   `TurretLaserFragment`, `ObeliskLaserFragment` in TiberianSun, and
   `HMGo_upgrade` in D2k/Ordos) converted to `Bullet_Medium + Laser_Heavy`.

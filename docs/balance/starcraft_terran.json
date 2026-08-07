@@ -5522,28 +5522,13 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -5553,49 +5538,38 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "16",
       "slot": "Armament@G1",
       "versus_templates": [
-       "^Grenade",
-       "^HeavyCannon",
+       "^Warhead_Concussion_Light",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "GoliathMG",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "3",
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "GrenadePercentage",
+        "tag": "Concussion_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "HeavyCannonPercentage",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -5605,21 +5579,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "16",
       "slot": "Armament@G2",
       "versus_templates": [
-       "^Grenade",
-       "^HeavyCannon",
+       "^Warhead_Concussion_Light",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Concussion_Light",
+       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "GoliathMG",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
