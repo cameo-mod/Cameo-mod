@@ -823,6 +823,25 @@ passed the boot-gate.
   `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
   `extract_stats.py` refreshed `docs/balance/starcraft_protoss.json`.
 
+### 14.20 `FlakWeapon + LightMissile` dual conversion (`44466c5af`)
+
+- Converted 2 weapons: `D2K_Rocket_Trooper1`
+  (`ContentPacks/D2k/Ixian`) and `D2K_Rocket_Trooper_AA`
+  (`ContentPacks/D2k/Ordos`).
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_Flak_Medium
+  Inherits@wh2: ^Warhead_MissileAP_Light
+  Inherits@proj: ^Projectile_Missile_Light
+  Inherits@fx: ^Effect_MissileAP_Light
+  Inherits: ^D2KRocket
+  ```
+- `FlakWeapon` → `Flak_Medium`, `LightMissile` → `MissileAP_Light`.
+  `_Percentage` variants preserved. `^D2KRocket` addon preserved.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` reached
+  `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
+  `extract_stats.py` refreshed `d2k_ixian.json` and `d2k_ordos.json`.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
