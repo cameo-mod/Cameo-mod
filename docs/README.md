@@ -37,6 +37,7 @@ Crashes and player-visible regressions always jump the queue.
 | Balance program **phase-map** (what order, A→G, + verified current state) | `design/BALANCE_MEGAPLAN.md` |
 | Balance formula law (per-class, SUM, bands, uniqueness) | `design/FORMULA_V2.md` |
 | Spread / damage-falloff per-type profiles | `design/SPREAD_FALLOFF_PLAN.md` |
+| Physical-state / status-effect layer (heat/cryo/corrosion meters, EMP, sonic mark) | `design/PHYSICAL_STATE_SYSTEM.md` |
 | Balance machinery (ledger ⇄ workbook ⇄ gated apply, drift) | `design/BALANCE_PIPELINE.md` |
 | Armor / damage-type system | `design/ARMOR_SYSTEM.md` |
 | Faction identity, lore, playstyle (curated compendium) | `FACTIONS.md` |
