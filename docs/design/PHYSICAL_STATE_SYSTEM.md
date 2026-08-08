@@ -180,13 +180,43 @@ effect with a sound): the **looped shifting-blue Sonic** overlay, and the **armo
 green tint is just a colour trait. The traits (`WithPhysicalStateColoredOverlay` / `WithIdleOverlay`)
 reference an image+sequence, so the yaml wires with placeholders and the art drops in later.
 
-## 5. Build order (after sign-off)
-1. C#: `PhysicalStateName`/`PhysicalStateScale` on `AreaDamageWarhead` (+subclass). Build → `engine/bin`
-   (+ copy tracked dll), boot-gate.
-2. yaml: add `Corrosion` axis + (optional) `ArmorBreach` axis to defaults (mirror Temperature). boot-gate.
-3. yaml: generate `^Warhead_Cryo_*` + `^Warhead_Plasma_*`; add the §3 fields to family templates;
-   `CommandoDebuff → SonicDebuff` rename + bake into `^Warhead_Sonic_*`. boot-gate per batch.
-4. C# (optional): `PushWarhead` for knockback.
+## 5. Build STATUS + RESUME TRACKER (updated 2026-08-09 — ⭐ RESUME HERE after /compact)
+
+**DONE (committed, each boot-gated):**
+- ✅ C# damage-scaled `PhysicalStateName`/`PhysicalStateScale` on `AreaDamage` + `_Percentage` — `406261128`
+- ✅ C# MULTI-state `PhysicalStates` dict (one warhead → many meters) — `2e6d6968a`
+- ✅ Corrosion meter axis on `^Corrodible` (green tint 200→20000, DoT+slow+vuln 50→100%, hazmat-half,
+  `nax_corr_frag` pulse at max) — additive, INERT until fed — `ecf616978`
+- ✅ Family wiring LIVE: Flame +100 / Laser +75 / Chemical +100 (generator `FAMILY_PHYSICAL_STATE`) — `51148be5b`
+- ✅ Cryo family = `^Warhead_Cryo_*` inherits `^Warhead_Prism_*` + Temperature −100 (generator
+  `INHERIT_FAMILIES`) — `f97a3b77c`
+- ✅ Plasma family = avg(Flame,Chemical) Versus + Temperature 50 + Corrosion 50 (generator `BLEND_FAMILIES`
+  + `versus_override`/`physical_states`) — `2e6d6968a`. Inert until a weapon adopts `^Warhead_Plasma_*`.
+- (Temperature axis + framework were ALREADY built — see §0.)
+
+**TODO — resume queue (in order):**
+1. **BUILD 3 — Sonic:** global rename `CommandoDebuff → SonicDebuff` (defaults.yaml `^CommandoDebuff` +
+   every grant/require: GDI predator blue laser, Japan waveforce, commandos) + bake a short-duration
+   `GrantExternalCondition` into `^Warhead_Sonic_*` (all levels) so every sonic hit applies it; fold
+   Japan `^WaveforceBulletWarhead` weapons + the predator into Sonic. boot-gate.
+2. **BUILD 4 — new axes:** Armor Breach (new PhysicalState axis on defaults, mirror Temperature +
+   `DamageMultiplierProportional`, AP/Railgun feed it; grey overlay + breach-icon @100%); Hex (Magic →
+   −firepower/inaccuracy condition); Knockback = new C# `PushWarhead` in `OpenRA.Mods.Cameo/Warheads/`.
+3. **PIPELINE — cryo 75% tax:** wire the "cryo weapon = 0.75× effective damage" invariant (§3b) into
+   `extract_stats`/`fit_class`/`apply_balance` (a cryo tag → auto FirepowerMultiplier).
+4. **RETROFIT cryo-upgrade weapons** (RA1 Allies etc.): armament-swap to a variant that adds `^Warhead_Cryo_*`
+   (dual/triple, §3b) + the FP tax; replace the old manual `ApplyPhysicalState` rings.
+5. **MIGRATE** the Schwarzer Mond binary `corroded` → the Corrosion meter (Chemical/Plasma weapons feed
+   it via the wired templates). Convert generated `_Percentage` twins → `AreaDamagePercentage` so the
+   %-damage also feeds the meters (currently main-only). Verify overheat/corrosion DoT credits `firedBy`
+   for XP (`ChangesHealthProportionalToPhysicalState`).
+6. **ART** (artist): looped shifting-blue Sonic overlay + armor-breach breach-icon (PngSheet, §4b).
+7. Then the broader roadmap: faction damage-type binding, temporal signatures, spread/falloff per-type
+   curves, Railgun charge-delay, resume Phase B mixed-weapon collapse (~350, behavior-preserving).
+
+**Guardrails to keep:** boot-gate every commit (kill lingering OpenRA before a C# rebuild — it locks
+`engine/bin`); `verify_generator_sync` drift stays **1** (pre-existing `^Warhead_Sniper_Light`, not the
+generator's); scoped `git add`; the family PhysicalState goes on the MAIN warhead only (chip excluded).
 
 ## 6. Decisions (maintainer 2026-08-09) + what's still open
 DECIDED:
