@@ -32,7 +32,12 @@ the artifact, **the artifact wins — then fix the stale summary.**
    (`DOTNET_ROLL_FORWARD=LatestMajor dotnet build -c Release --nologo -p:TargetPlatform=win-x64` → `engine/bin`).
 8. **Audit reports regenerate via `bash tools/audit/run_all.sh` only** (PowerShell `>` writes UTF-16).
 9. **Underscore-only naming** — no hyphens in ids / files / fluent keys.
-10. **Commit messages end with:** `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`
+10. **Attribute the ACTUAL author in the commit trailer — never impersonate another agent.**
+    Claude Code commits end with `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`.
+    **Any OTHER agent (Devin, Cascade, etc.) must use its OWN `Co-Authored-By:` line** (e.g.
+    `Co-Authored-By: Devin AI <devin@cognition.ai>`) and must NOT append the Claude trailer — the
+    git author is a shared repo identity, so the trailer is the only provenance signal and a wrong
+    one pollutes history. If you are not Claude, do not sign as Claude.
 
 **Work queue:** `docs/design/ROADMAP.md` (crashes jump the queue). **Effort estimate for the whole
 balance program:** `docs/design/BALANCE_PIPELINE_ESTIMATE.md`.

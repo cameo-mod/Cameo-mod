@@ -4,6 +4,14 @@ Purpose: a principled, per-(damage-type × class) scheme for `Spread` and `Fallo
 projectile speed and air-capability. Draft for review — numbers are a starting proposal derived from
 the method; the METHOD is the point.
 
+> **✅ AUTHORING MODEL DECIDED (maintainer, 2026-08-08): FULL per-type physics curves.** Every damage
+> TYPE gets its OWN unique, physics-derived falloff curve — **§8 is the authoritative per-type spec**
+> (convex ~1/r for HE, very-convex for demolition, broad long-tail for concussion, concave zone for
+> flame, even wave for sonic, pinpoint `100,0` for kinetic/beam, expanding rings for nuclear). The
+> simpler alternatives kept below for reference only and NOT adopted: the single-knob `100,0`
+> everywhere (§1a) and the 3-shape menu {Linear/Punchy/Flat} (§1a table). Implementation: per-family
+> `spreads`/`falloffs` overrides in `gen_weapon_template.py` → `splice_templates.py` → boot-gate.
+
 ## 1. The engine mechanic (verified in `OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs`)
 
 - `Spread` (WDist) = the distance **between** falloff steps.
