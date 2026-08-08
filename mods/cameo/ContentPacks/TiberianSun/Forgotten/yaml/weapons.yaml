@@ -472,21 +472,14 @@ TSInfantryMortar:
 
 TSInfantryMortarChem:
 	Inherits: TSInfantryMortar
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^HeavyChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
 	Range: 10830
 	ReloadDelay: 88
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Medium:
 		Damage: 16000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 8
-	Warhead@HeavyChemicalWeapon: SpreadDamage
-		Damage: 16000
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1

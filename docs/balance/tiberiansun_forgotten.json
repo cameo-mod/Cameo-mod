@@ -3027,38 +3027,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "16000",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "HeavyChemicalWeaponPercentage",
+        "tag": "Chemical_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "2165",
       "pricing": true,
       "range": "10830",
@@ -3067,15 +3042,17 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "TSInfantryMortar",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon"
+       "^Warhead_Chemical_Medium",
+       "^Projectile_Chem_Medium",
+       "^Effect_Chem_Medium"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium"
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Chemical_Medium"
       ],
       "weapon": "TSInfantryMortarChem",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -3126,38 +3103,13 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "16000",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8",
-        "tag": "HeavyChemicalWeaponPercentage",
+        "tag": "Chemical_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "2165",
       "pricing": false,
       "range": "10830",
@@ -3166,15 +3118,17 @@
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
        "TSInfantryMortar",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon"
+       "^Warhead_Chemical_Medium",
+       "^Projectile_Chem_Medium",
+       "^Effect_Chem_Medium"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium"
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Chemical_Medium"
       ],
       "weapon": "TSInfantryMortarChem",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

@@ -1503,8 +1503,9 @@ MigMissiles:
 		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 
 MigMissiles_rad:
-	Inherits: ^MediumChemicalWeapon
-	Inherits@2: ^HeavyChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
 	Inherits@3: MigMissiles
 	Inherits@rad: ^RA2RadShell
 	Projectile: Missile
@@ -1513,17 +1514,9 @@ MigMissiles_rad:
 		ContrailStartColor: 00EE00
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Medium:
 		Damage: 4000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@HeavyChemicalWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10

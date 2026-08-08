@@ -5340,33 +5340,8 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "HeavyChemicalWeaponPercentage",
+        "tag": "Chemical_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -5413,12 +5388,14 @@
       "requires": "ra2_soviets_doctrine_nuclearmunitions",
       "slot": "Armament@rad",
       "versus_templates": [
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon",
+       "^Warhead_Chemical_Medium",
+       "^Projectile_Chem_Medium",
+       "^Effect_Chem_Medium",
        "MigMissiles",
        "^RA2RadShell"
       ],
       "warheads": [
+       "^Warhead_Chemical_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_rad",
