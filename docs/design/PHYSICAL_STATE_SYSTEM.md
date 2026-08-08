@@ -80,7 +80,8 @@ Then wire Chemical/Plasma to it via §1's field.
 |---|---|--:|---|
 | Flame (L/M/H) | Temperature | **+100** | + GroundFire linger |
 | Laser (Heavy) | Temperature | **+75** | overheat→pop; main-damage only (chip excluded by placement) |
-| **Prism (L/M/H)** | Temperature | **−100** | **PRISM IS THE CRYO WEAPON** (its "utility (cryo/scatter, K)", `AREADAMAGE_WARHEAD_REBALANCE.md §144`). Anti-LIGHT Versus already LOCKED (`Scout 100 › None 94 › … › Superheavy 34`), ground-only, thin scatter beam, no chip. **No separate `^Warhead_Cryo_*` family** — cryo attaches here. Freeze/shatter reuses the existing cold side. |
+| **Prism (L/M/H)** | – | – | anti-LIGHT scatter beam, Versus LOCKED (`Scout 100 › None 94 › … › Superheavy 34`), ground-only, thin spread, no chip. **NO cryo by default** — Prism Tank / Athena Cannon are pure prism. |
+| **Cryo (L/M/H)** — NEW | Temperature | **−100** | **inherits `^Warhead_Prism_<Level>`** and ONLY adds the cold scaling = "a prism beam that also freezes". Reuses Prism's anti-light Versus + scatter + thin spread; freeze/shatter uses the existing cold side. (So there IS a Cryo family, but it's a thin Prism child, not a from-scratch family.) |
 | Chemical (L/M/H) | Corrosion | **+100** | pure corrosion |
 | **Plasma (L/M/H)** — NEW | Temperature **+50** & Corrosion **+50** | | flagship Flame×Chem blend Versus |
 | Tesla | (EMP, separate) | – | keeps existing EMP |
@@ -129,7 +130,7 @@ can be wired with placeholders and the art dropped in. Heat/cryo already have th
 ## 6. Decisions (maintainer 2026-08-09) + what's still open
 DECIDED:
 1. **Corrosion peak** = DoT + slow + vuln (values in §2). Hazmat halves the DoT.
-2. **Cryo = the Prism family** (no new family); Prism anti-LIGHT Versus already locked, Temperature −100.
+2. **Cryo = a thin child of Prism** — `^Warhead_Cryo_*` inherits `^Warhead_Prism_*` and only adds Temperature −100; base Prism (Prism Tank / Athena Cannon) stays freeze-free. Prism anti-LIGHT Versus already locked.
 3. **New axes to build:** Armor Breach + Hex + Knockback (new C# `PushWarhead`) + the base wiring (Corrosion/Prism-cryo/Plasma/Sonic).
 4. **Sonic** = global `CommandoDebuff → SonicDebuff`, baked into `^Warhead_Sonic_*` (predator laser + waveforce keep applying it).
 5. **Every axis needs its own art** (§4b) — green pulsating corrosion overlay + armor-breach breach-icon are NEW assets.
