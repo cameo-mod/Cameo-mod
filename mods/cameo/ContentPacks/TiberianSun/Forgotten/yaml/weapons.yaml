@@ -500,27 +500,18 @@ TSInfantryMortarChem:
 		InvalidTargets: Water
 
 TS120mmxChem:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^HeavyChemicalWeapon
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@3: ^TSCannonEffect
 	ReloadDelay: 60
 	Range: 6172
 	Burst: 2
 	BurstDelays: 4
 	Report: tnkfire4.aud
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 20
-	Warhead@HeavyChemicalWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 40000
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 20000
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 20
 	Warhead@Cloud: SpawnSmokeParticle
@@ -1755,8 +1746,8 @@ TSCropBomb:
 		SmudgeType: Crater
 
 TSCropBombChem:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^HeavyChemicalWeapon
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 50
 	Range: 1250
 	TargetActorCenter: true
@@ -1765,18 +1756,12 @@ TSCropBombChem:
 		Acceleration: 0, 0, -8
 		Image: 120mm
 		Shadow: true
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 120000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Ship
 		Damage: 60
-	Warhead@HeavyChemicalWeapon: SpreadDamage
-		Damage: 60000
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 30000
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 30
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 10
 		Duration: 50
@@ -1800,8 +1785,8 @@ TSCropBombChem:
 		SmudgeType: Crater
 
 TSLocustBombChem:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^HeavyChemicalWeapon
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 38
 	Burst: 5
 	BurstDelays: 3
@@ -1812,18 +1797,12 @@ TSLocustBombChem:
 		Acceleration: 0, 0, -8
 		Image: 120mm
 		Shadow: true
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 180000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Ship
 		Damage: 90
-	Warhead@HeavyChemicalWeapon: SpreadDamage
-		Damage: 90000
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 45000
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 45
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 15
 		Duration: 50
