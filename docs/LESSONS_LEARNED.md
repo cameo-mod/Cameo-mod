@@ -36,6 +36,51 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - [Engine update pipeline and Smart App Control findings (2026-07-30, updated with deep research)](#engine-update-pipeline-and-smart-app-control-findings-2026-07-30-updated-with-deep-research)
 - [Loose-extracted .oramap maps must always be repacked before finishing a task (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
 - [Empty warhead type = boot NRE; check-yaml does not catch it (2026-08-04)](#empty-warhead-type--boot-nre-check-yaml-does-not-catch-it-2026-08-04)
+- [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
+
+---
+
+## 3-way split retrofits: two recurring child-weapon bugs (2026-08-08)
+
+Discovered during a deep review of conversion commits made 2026-08-07/08.
+Both are silent (no boot crash, no audit red) but corrupt gameplay. The
+canonical retrofit tool does NOT catch either; both require a manual
+post-conversion sweep of every weapon that inherits a CONVERTED parent.
+
+### Bug A — main warhead type left as `SpreadDamage` (should be bare)
+
+When a weapon's parent template was flipped from `SpreadDamage` to
+`AreaDamage` (the universal conversion, `3dac92ee8`), every concrete
+override of the main warhead key that still says `Warhead@X: SpreadDamage`
+RE-DECLARES the type, blocking the inherited `AreaDamage` and its baked
+friendly fire. The weapon fires `SpreadDamage` with NO friendly fire.
+
+**Detection:** `python tools/balance/sweep_areadamage.py` (dry-run) lists
+every `Warhead@X: SpreadDamage -> bare` candidate. The sweep is
+resolution-aware (only touches keys a weapon actually inherits from a
+`^Warhead_*` template) — apply with `--apply`. **Caveat:** the sweep
+misses some `@wh2` dual-inherit patterns; re-run the dry-run after
+applying and hand-fix any remaining `SpreadDamage -> bare` lines.
+
+### Bug B — child weapons keep OLD warhead keys (orphaned double-fire)
+
+When a parent weapon's `Warhead@<OldKey>` was renamed to
+`Warhead@<NewKey>` (e.g. `Warhead@TeslaWeapon` -> `Warhead@Tesla_Heavy`),
+every CHILD that inherits the parent and overrides the OLD key
+(`Warhead@TeslaWeapon: SpreadDamage\n  Damage: 4000`) now creates a NEW
+orphaned warhead node — the parent's new key fires AND the child's old
+key fires. **Result: double damage.**
+
+**Detection:** after converting a parent, grep every child (weapons that
+`Inherits: <ParentName>` or `Inherits: <ParentName>_elite`) for the OLD
+warhead key names. The subagent review pattern: `git show <commit>^:<file>`
+to see pre-conversion keys, then check every child of every converted
+parent for the same old keys.
+
+**Both bugs** are caused by the retrofit tool only editing the converted
+weapon itself, not its children. The fix is a post-conversion sweep:
+1. `sweep_areadamage.py --apply` (bug A);
+2. for each converted parent, grep its children for old keys (bug B).
 
 ---
 

@@ -347,7 +347,7 @@ DalekCannon:
 	Projectile: Railgun
 		BeamColor: 00EEFF88
 		BeamWidth: 128
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 100000
 	Warhead@TeslaExtraDamage: SpreadDamage
@@ -356,7 +356,7 @@ DalekCannon:
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 50
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 100000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
@@ -386,15 +386,15 @@ DalekCannon_elite:
 		BeamColor: 4488FFBB
 		BeamWidth: 192
 		Duration: 24
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy:
 		Damage: 200000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 100000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 100
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 200000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 100
 	Warhead@Railgun_Heavy:
 		Damage: 200000
@@ -417,13 +417,13 @@ DalekCannonScatter:
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 25000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 25
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 50000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 25
 	Warhead@Railgun_Heavy:
@@ -546,7 +546,6 @@ NaxCorrosionRocket:
 	Warhead@Concussion_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		ValidRelationships: Neutral, Enemy
 	Warhead@Concussion_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -554,7 +553,6 @@ NaxCorrosionRocket:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		ValidRelationships: Neutral, Enemy
 	Warhead@MissileAP_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 1

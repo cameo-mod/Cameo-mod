@@ -592,11 +592,11 @@ TSObeliskLaserFire:
 		SourceFlareSize: 64, 72
 		SourceFlareWidth: 2.5
 		SourceFlareCoreSize: 5
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 52000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 26
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 52000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 26
@@ -629,11 +629,11 @@ TSLaserObeliskLaserFire:
 	Range: 10435
 	Report: obelray1.aud
 	ValidTargets: Ground, Water
-	Warhead@CannonAP_Light: SpreadDamage
+	Warhead@CannonAP_Light:
 		Damage: 80000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 40
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 80000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 40
@@ -1264,11 +1264,11 @@ TSLaserRaiderCannon:
 	BurstDelays: 2
 	Range: 4964
 	Report: chaingn1.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 6000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 6000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 3

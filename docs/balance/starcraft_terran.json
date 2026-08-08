@@ -908,6 +908,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "1000",
+        "tag": "TeslaCharged_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "50000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
@@ -977,6 +982,11 @@
         "damage": "8",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -1347,6 +1357,11 @@
         "damage": "8",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -2754,6 +2769,11 @@
         "damage": "2",
         "tag": "TeslaCharged_Super_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaCharged_Super_ExtraDamage",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4229,6 +4249,11 @@
         "damage": "4",
         "tag": "TeslaCharged_Super_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaCharged_Super_ExtraDamage",
+        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -6001,6 +6026,11 @@
         "damage": "16",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",

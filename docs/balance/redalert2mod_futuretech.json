@@ -1936,6 +1936,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "1000",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
@@ -1994,6 +1999,11 @@
         "damage": "1",
         "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3445,11 +3455,6 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "tag": "MissileAP_Medium",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
@@ -3484,11 +3489,6 @@
       "burst": "4",
       "burstdelays": "5",
       "damage_warheads": [
-       {
-        "damage": "12000",
-        "tag": "MissileAP_Medium",
-        "type": "SpreadDamage"
-       },
        {
         "damage": "6",
         "tag": "MissileAP_Medium_Percentage",
@@ -4802,6 +4802,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "1000",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "25000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
@@ -5446,6 +5451,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "1000",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "15",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
@@ -5478,6 +5488,11 @@
         "damage": "15",
         "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        },
        {
         "damage": "30",
@@ -6141,100 +6156,105 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "TeslaExtraDamage",
+        "damage": "1000",
+        "tag": "Tesla_Heavy_ExtraDamage",
         "type": "SpreadDamage"
        },
        {
         "damage": "4",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
         "type": "SpreadDamage"
        },
        {
         "damage": "4",
         "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5780",
       "reloaddelay": "48",
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^TeslaWeapon",
-       "^LaserWeapon",
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy",
+       "^EMPDamage",
        "^RA2RailgunWeapon"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy"
       ],
       "weapon": "RA2Robotmm",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
+        "damage": "4",
+        "tag": "Tesla_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
-        "tag": "TeslaExtraDamage",
+        "damage": "1000",
+        "tag": "Tesla_Heavy_ExtraDamage",
         "type": "SpreadDamage"
        },
        {
         "damage": "4",
-        "tag": "TeslaWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
         "type": "SpreadDamage"
        },
        {
         "damage": "4",
         "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6780",
       "reloaddelay": "48",
@@ -6244,10 +6264,12 @@
        "RA2Robotmm"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy",
+       "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy"
       ],
       "weapon": "RA2Robotmm_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -6498,6 +6520,11 @@
         "damage": "20",
         "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        },
        {
         "damage": "20000",

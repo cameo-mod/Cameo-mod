@@ -2309,7 +2309,6 @@ WaveArtilleryImpact:
 		ValidTargets: Ground, Water
 		Damage: 10000
 		Spread: 333
-		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
@@ -2327,7 +2326,6 @@ WaveArtilleryImpact:
 		ValidTargets: Ground, Water
 		Damage: 10000
 		Spread: 333
-		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Railgun_Heavy_Percentage:
 		ValidTargets: Ground, Water

@@ -1845,7 +1845,7 @@ AsianSubmarineBomb:
 	Range: 2500
 	ReloadDelay: 100
 	Projectile: InstantExplode
-	Warhead@Demolition_Heavy: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Spread: 2500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 50000

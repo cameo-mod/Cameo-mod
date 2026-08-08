@@ -1137,7 +1137,7 @@ LatinAADefenderCannon:
 		ContrailLength: 16
 		Speed: 10000
 		Width: 200
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 2000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1495,7 +1495,7 @@ RA2AkulaRockets:
 		Falloff: 100, 80, 60, 40, 20
 		Level: 24
 		LayerName: ra2radiation
-	Warhead@Demolition_Heavy: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
 	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage

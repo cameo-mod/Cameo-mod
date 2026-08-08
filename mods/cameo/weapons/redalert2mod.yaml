@@ -1549,7 +1549,7 @@ RA2Robotmm:
 	Projectile: Railgun
 		BeamColor: 00EEFF88
 		Railgun: 96
-	Warhead@Tesla_Heavy: SpreadDamage
+	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@TeslaExtraDamage: SpreadDamage
@@ -1558,7 +1558,7 @@ RA2Robotmm:
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 4
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
@@ -1598,11 +1598,11 @@ RA2RobotmmScatter_elite:
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 4000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@Railgun_Heavy:
 		Damage: 4000

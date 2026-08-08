@@ -355,11 +355,6 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "MissileAP_Medium",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
@@ -434,11 +429,6 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "MissileAP_Medium",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
@@ -473,11 +463,6 @@
       "burst": "2",
       "burstdelays": "9",
       "damage_warheads": [
-       {
-        "damage": "10000",
-        "tag": "MissileAP_Medium",
-        "type": "SpreadDamage"
-       },
        {
         "damage": "5",
         "tag": "MissileAP_Medium_Percentage",
@@ -1957,6 +1942,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "1000",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
@@ -2002,6 +1992,11 @@
         "damage": "4",
         "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2052,6 +2047,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "1000",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
@@ -2098,6 +2098,11 @@
         "damage": "4",
         "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2192,6 +2197,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "1000",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "12000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
@@ -2221,6 +2231,11 @@
         "damage": "12",
         "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        },
        {
         "damage": "12000",
@@ -2255,6 +2270,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "1000",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "12000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
@@ -2285,6 +2305,11 @@
         "damage": "12",
         "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        },
        {
         "damage": "12000",
@@ -8883,11 +8908,6 @@
      {
       "armament_name": "secondary",
       "damage_warheads": [
-       {
-        "damage": "8000",
-        "tag": "Demolition_Heavy",
-        "type": "SpreadDamage"
-       },
        {
         "damage": "4",
         "tag": "Demolition_Heavy_Percentage",

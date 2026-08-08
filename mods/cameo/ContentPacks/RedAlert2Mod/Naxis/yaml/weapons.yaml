@@ -1018,7 +1018,7 @@ NaxPlaneRockets_elite:
 		ContrailStartColor: 996633
 		TrailInterval: 1
 		TrailDelay: 1
-	Warhead@MissileAP_Medium: SpreadDamage
+	Warhead@MissileAP_Medium:
 		Damage: 10000
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
@@ -1093,7 +1093,7 @@ NaxShoeRocket:
 		Explosions: ra2_terrorist_explosion
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
-	Warhead@Demolition_Heavy: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
 	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage

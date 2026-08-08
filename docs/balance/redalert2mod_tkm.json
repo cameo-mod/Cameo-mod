@@ -2647,6 +2647,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "1000",
+        "tag": "TeslaCharged_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "16",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
@@ -5714,6 +5719,11 @@
         "damage": "10",
         "tag": "Railgun_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",

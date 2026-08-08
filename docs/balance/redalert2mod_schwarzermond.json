@@ -5540,11 +5540,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "100000",
-        "tag": "Tesla_Heavy",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "50",
         "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
@@ -5552,11 +5547,6 @@
        {
         "damage": "1000",
         "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "100000",
-        "tag": "Laser_Heavy",
         "type": "SpreadDamage"
        },
        {
@@ -5611,12 +5601,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "100000",
-        "tag": "Tesla_Heavy",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50",
+        "damage": "100",
         "tag": "Tesla_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
@@ -5626,12 +5611,7 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "100000",
-        "tag": "Laser_Heavy",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50",
+        "damage": "100",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
@@ -5654,26 +5634,6 @@
         "damage": "100000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "200000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "100",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "200000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "100",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",

@@ -258,11 +258,11 @@ TSLasergun:
 	ReloadDelay: 18
 	Range: 4062
 	Report: infgun3.aud, gostgun1.aud, slvkgun1.aud
-	Warhead@Bullet_Light: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Laser_Heavy: SpreadDamage
+	Warhead@Laser_Heavy:
 		Damage: 2000
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1

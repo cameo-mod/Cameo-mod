@@ -192,6 +192,11 @@
         "damage": "2",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
@@ -228,6 +233,11 @@
         "damage": "2",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        },
        {
         "damage": "0",
@@ -270,6 +280,11 @@
         "damage": "2",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
@@ -796,6 +811,11 @@
         "damage": "5",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -830,6 +850,11 @@
         "damage": "8",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -980,24 +1005,19 @@
      {
       "damage_warheads": [
        {
-        "damage": "52000",
-        "tag": "CannonAP_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "26",
         "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "52000",
-        "tag": "Laser_Heavy",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "26",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -1024,24 +1044,19 @@
      {
       "damage_warheads": [
        {
-        "damage": "80000",
-        "tag": "CannonAP_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "40",
         "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "80000",
-        "tag": "Laser_Heavy",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "40",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -1808,24 +1823,19 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Laser_Heavy",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
@@ -1853,24 +1863,19 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
-        "tag": "Laser_Heavy",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
@@ -2991,24 +2996,19 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "tag": "Bullet_Light",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "6000",
-        "tag": "Laser_Heavy",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
