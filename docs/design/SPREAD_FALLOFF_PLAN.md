@@ -114,8 +114,8 @@ Pinpoint ≈ 0.4 cell (400) · Small ≈ 0.7 (700) · Medium ≈ 1.3 (1300) · L
 
 | type | role | air | speed | shape | radius (M) | **Spread (M)** | notes |
 |---|---|:--:|---|---|--:|--:|---|
-| CannonAP | pinpoint | – | med | Sharp | 500 | **250** | tank-killer; high Damage |
-| **CannonHE** | medium | – | med | Broad | 1600 | **400** | the swarm-clearer (ground bonus) |
+| CannonAP | pinpoint | – | fast (`range/5`) | Sharp | 500 | **250** | tank-killer; high Damage; fastest shell |
+| **CannonHE** | medium | – | med (`range/10`, ½ AP) | Broad | 1600 | **400** | the swarm-clearer (ground bonus); ≈2× AP spread |
 | MissileAP | pinpoint | ✓ | med | Sharp | 240 | **120** | anti-armor, hits air |
 | **MissileHE** | small | ✓ | med | Standard | 420 | **140** | << CannonHE (air penalty) |
 | MissileAA | pinpoint | ✓ | med | Sharp | 300 | **100–200** | dedicated AA (already decided) |
@@ -166,8 +166,8 @@ authoritative per-type spec and supersedes the starter numbers in §5.
 | type | real-world behaviour | shape | Falloff (illustrative) | radius (M) | projectile | air | what makes it unique |
 |---|---|---|---|--:|---|:--:|---|
 | Bullet | point impact | pinpoint | `100, 0` | ~100 | fast | ✓ | rapid single-target |
-| **CannonAP** | kinetic penetrator, focused | pinpoint | `100, 0` | ~120 | **fast** | – | anti-armor punch, **no splash**, fast shell |
-| **CannonHE** | HE shell overpressure (~1/r) | **convex** | `100, 50, 20, 0` | ~900 | **fast** | – | **REGULAR TANK gun** — fast shell + wide swarm blast (>> MissileHE). Slow shells belong to ARTILLERY (Demolition/Concussion); later CannonHE+Demolition = cannon-artillery |
+| **CannonAP** | kinetic penetrator, focused | pinpoint | `100, 0` | ~120 | **fastest (`range/5`)** | – | tank-destroyer — anti-armor punch, **no splash**, hyper-velocity shell |
+| **CannonHE** | HE shell overpressure (~1/r) | **convex** | `100, 50, 20, 0` | ~900 | **fast (`range/10`, ½ AP)** | – | **REGULAR TANK gun** — direct-fire shell + wide swarm blast (**≈2× AP spread**, >> MissileHE). Slower shells = ARTILLERY (CannonHE+Demolition/Concussion, slowest lob) |
 | MissileAP | shaped-charge jet | pinpoint | `100, 0` | ~100 | med | ✓ | focused anti-armor, hits air |
 | **MissileHE** | small HE warhead blast | convex, small | `100, 45, 15, 0` | ~450 | med | ✓ | modest blast, hits air — **<< CannonHE** |
 | MissileAA | proximity airburst | pinpoint | `100, 0` | ~150 | fast | ✓ | dedicated AA |
@@ -188,11 +188,18 @@ authoritative per-type spec and supersedes the starter numbers in §5.
 | **Nuclear** | fireball + blast + radiation | **expanding rings** | 10-ring (hand-tuned) | huge | slow | ✓ | expanding shockwave superweapon |
 
 ### How the three axes resolve per family
-- **Gameplay (the tank vs tank-destroyer law):** CannonAP = *fast shell + pinpoint + high single-target*
-  (the tank destroyer); CannonHE = *fast shell + wide convex blast* (the REGULAR TANK — clears swarms).
-  **Both tank guns are FAST.** SLOW projectiles are the ARTILLERY families (Demolition/Concussion); the
-  artillery weapons later COMBINE CannonHE+Demolition/Concussion (cannon artillery) or
-  MissileHE+Demolition/Concussion (rocket artillery) — that's where the slow arc + big blast lives.
+- **Gameplay (the tank vs tank-destroyer SPEED/SPREAD law — verified in
+  `AREADAMAGE_WARHEAD_REBALANCE.md §5` + `FORMULA_V2.md:64`):** projectile speed is set from range, and
+  the two tank guns are NOT equally fast:
+  - **CannonAP** (tank destroyer / gun turret) — speed = **`maxRange / 5`** (the FASTEST shell),
+    **pinpoint** spread, high single-target Damage. Hyper-velocity flat-trajectory penetrator.
+  - **CannonHE** (the REGULAR TANK) — speed = **`maxRange / 10`** (HALF of AP's speed, still a fast
+    direct-fire gun), and **≈ 2× the spread of the AP** — a bursting HE shell that clears swarms.
+  - **Hybrid** (50% CannonAP + 50% CannonHE) — speed = **`maxRange / 10 × 1.5`** (between the two).
+  - **Artillery** = **CannonHE + Demolition/Concussion** — the SLOWEST projectile of all (a lobbed arc),
+    the WIDEST spread. This is where the slow, telegraphed, huge-blast shell lives; rocket-artillery is
+    MissileHE + Demolition/Concussion. So the full ladder is
+    **speed: AP (/5) > HE (/10) > artillery (slow lob)** and **spread: AP (small) < HE (2× AP) < artillery (widest)**.
   Air-capable weapons (Missile/Flak/Laser/Bullet/Arrow) pay for hitting air with **smaller radius +
   lower Damage** than their ground-only counterparts; slow projectiles are repaid with **bigger radius
   + higher Damage** (they can be dodged/outrun). This is the `Damage × Spread ≈ const` trade (§2).
