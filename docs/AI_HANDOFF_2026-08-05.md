@@ -863,6 +863,29 @@ passed the boot-gate.
   `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
   `extract_stats.py` refreshed `docs/balance/d2k_ordos.json`.
 
+### 14.22 `HeavyBomb` single conversion (`57bd2d572`)
+
+- Converted 4 weapons: `NaxSturmArty` (`weapons/redalert2mod.yaml`),
+  `AsianSubmarineBomb` (`ContentPacks/RedAlert2Mod/AsianAlliance`),
+  `NaxShoeRocket` (`ContentPacks/RedAlert2Mod/Naxis`),
+  `RA2AkulaRockets` (`ContentPacks/RedAlert2Mod/Syndicate`).
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_Demolition_Heavy
+  Inherits@fx: ^Effect_Demolition_Heavy
+  ```
+- `HeavyBomb` → `Demolition_Heavy`; `_Percentage` variant preserved.
+  RA2* addons (`^RA2Grenade`, `^RA2MediumCannon`, `^RA2MediumMissile`,
+  `^RA2RadShell`) preserved. Local warheads from RA2* addons
+  (`Demolition_Light`, `CannonHE_Medium`, `MissileAP_Medium`) given
+  explicit `AreaDamage` type since the weapon's `Inherits@wh` overrides
+  the RA2* template's internal `@wh` tag. `-Warhead@Effect1` removal
+  markers stripped. Custom `Warhead@Radiation` and `Warhead@Effect`
+  preserved.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` reached
+  `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
+  `extract_stats.py` refreshed 32 ledgers.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
