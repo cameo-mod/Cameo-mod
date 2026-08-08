@@ -1077,10 +1077,15 @@ Phase B maintainer decisions.
 `docs/audit/latest/phase_b_survey.md` from the live resolved ruleset.
 Latest artifact counts (do not trust stale summaries):
 - **411 concrete weapons** still inherit at least one old full-stack family
-- **43** have a single old family (may be partial conversions or remaining
-  Phase A candidates — verify with `retrofit_weapon_family.py`)
+- **42** pure single old-family with no `Inherits@wh:` (mechanical Phase A
+  candidates IF the matching 3-way template exists)
+- **1** single old-family with `Inherits@wh:` (partial conversion, finish)
 - **368** are mixed old-family (true Phase B, maintainer sign-off required)
 - **253** unique mixed combinations
+
+SniperWeapon is the largest pure single block (20 weapons) but still
+lacks a `^Warhead_Sniper_*` 3-way template. Do not convert blocked
+families without creating/mapping the template first.
 
 The report groups by inherited old families, lists warhead keys + damage
 per weapon, and proposes a heuristic dominant-damage collapse target. It
