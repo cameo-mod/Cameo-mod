@@ -297,6 +297,27 @@ FAMILY_PHYSICAL_STATE = {
     # Plasma (Temperature 50 + Corrosion 50) needs two states on one warhead -> handled at family build.
 }
 
+# Inheriting families: a thin child that inherits a parent family template and overrides ONLY the main
+# warhead to add a PhysicalState (e.g. Cryo = Prism's anti-LIGHT beam + cold). Keeps the parent's Versus
+# + warhead key. {name: (parent, PhysicalStateName, PhysicalStateScale, levels)}.
+INHERIT_FAMILIES = {
+    "Cryo": ("Prism", "Temperature", -100, L3),   # a prism beam that also freezes (its "utility")
+}
+
+
+def emit_inherit_family(name, parent, psn, pss, levels):
+    """A thin child template: Inherits the parent family + overrides its main warhead to add the state."""
+    blocks = []
+    for level in levels:
+        ptag = f"{parent}_{level}"
+        blocks.append("\n".join([
+            f"^Warhead_{name}_{level}:",
+            f"\tInherits: ^Warhead_{ptag}",
+            f"\tWarhead@{ptag}:",
+            f"\t\tPhysicalStateName: {psn}",
+            f"\t\tPhysicalStateScale: {pss}"]))
+    return "\n\n".join(blocks)
+
 
 if __name__ == "__main__":
     argv = sys.argv[1:]
@@ -323,6 +344,11 @@ if __name__ == "__main__":
             continue
         for level in lv:
             print(f"#   ^Warhead_{nm}_{level}: {WC[level]}")
+    for nm, (parent, psn, pss, lv) in INHERIT_FAMILIES.items():
+        if wanted and nm.lower() not in wanted:
+            continue
+        for level in lv:
+            print(f"#   ^Warhead_{nm}_{level}: {WC[level]}  (inherits {parent})")
     print()
     for nm, (bl, d, air, lv) in WEAPONS.items():
         if wanted and nm.lower() not in wanted:
@@ -339,4 +365,10 @@ if __name__ == "__main__":
         order = build_order(bl, d)
         print(f"###### {nm}: {macro_summary(bl)} ({d}, air={air}) ######")
         print(family(nm, order, vt, lv, spreads=spreads))
+        print()
+    for nm, (parent, psn, pss, lv) in INHERIT_FAMILIES.items():
+        if wanted and nm.lower() not in wanted:
+            continue
+        print(f"###### {nm}: inherits {parent} + PhysicalState {psn} {pss} ######")
+        print(emit_inherit_family(nm, parent, psn, pss, lv))
         print()

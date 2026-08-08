@@ -106,6 +106,47 @@ Then wire Chemical/Plasma to it via §1's field.
 | Tesla | (EMP, separate) | – | keeps existing EMP |
 | Bullet/Cannon/Missile/Flak/Arrow/Demolition/Sonic/Prism/Magic/Melee | – | – | clean unless a §4 effect added |
 
+## 3b. Effect UPGRADES (cryo etc.) = DUAL warhead (maintainer 2026-08-09)
+
+When an upgrade adds an effect to an EXISTING weapon (e.g. RA1 Allied cryo projectiles upgrading the
+demo artillery), replace the old manual `ApplyPhysicalState` rings with the **dual model**: the upgrade
+swaps the armament (the JHind/waveforce `RequiresCondition` pattern) to a variant weapon that keeps the
+original warhead **and adds the real Cryo warhead** — both at ~50% damage:
+```
+DemoArtilleryCryo:
+    Inherits: DemoArtillery              # keeps Warhead@Demolition_Heavy (its Versus)
+    Inherits@cryo: ^Warhead_Cryo_Heavy   # adds the Cryo warhead (anti-LIGHT Versus + Temperature -100)
+    Warhead@Demolition_Heavy: { Damage: <50%>, PhysicalStateName: Temperature, PhysicalStateScale: -100 }
+    Warhead@Cryo_Heavy:       { Damage: <50%> }   # freeze via the family's baked -100
+```
+Rationale (maintainer): the point is NOT just to freeze — it's to **change the damage profile** so the
+upgraded weapon feels unique (demo blast + cryo's anti-light Versus + freeze). The added Cryo warhead's
+Versus is the real value (temperature alone would be redundant). Both warheads carry the −100 scaling so
+the whole weapon freezes. → this makes the **Cryo family a prerequisite** (BUILD 2b).
+
+⚠ **Combined weapons stack it further (maintainer 2026-08-09):** artillery is being reworked to
+**CannonHE + Demolition** (the slow big-blast combo), so a cryo upgrade makes Cryo the **THIRD** warhead
+(CannonHE + Demolition + Cryo). This exceeds the usual 2-warhead cap but is a justified exception (a
+combined artillery weapon + an upgrade) — the allow-list case in [[cameo-weapon-structure-rules]].
+
+**Damage model (maintainer 2026-08-09) — symmetric warheads + a FirepowerMultiplier penalty:**
+keep all members at the SAME damage (e.g. each 2000) and pay for the freeze by REDUCING net output.
+Worked example (artillery): base CannonHE 2000 + Demolition 2000 = **4000**. Add Cryo 2000 → symmetric
+**6000 raw** (+50%). Put **`FirepowerMultiplier: 50`** on the cryo-upgraded actor → 6000 × 0.5 = **3000
+effective = 75%** of the original 4000. So the cryo upgrade *lowers* damage to 75% — fair, because the
+freeze is very strong (immobilise + the cold-side +incoming-damage). Freeze buys the −25% damage.
+General rule: N symmetric members × D, then `FirepowerMultiplier` set so the effective total lands where
+the freeze/effect is priced (here 75%).
+
+**⚠ PIPELINE INVARIANT (maintainer 2026-08-09): a cryo weapon ALWAYS deals 75% of the damage the SAME
+weapon would deal without cryo.** Take the pipeline-balanced value X, then set a `FirepowerMultiplier`
+so the cryo weapon's EFFECTIVE damage = 0.75·X — the fixed "cryo tax" that pays for the freeze
+(immobilise + cold-side +incoming-damage). The FP *value* is computed from the raw: with a symmetric
+added cryo warhead the raw is 1.5·X, so FP = 0.75/1.5 = **50%**; a cryo weapon with no added warhead
+would use FP **75%**. This is a balance-pipeline rule to ENFORCE automatically (a cryo tag → the pipeline
+applies the 0.75× effective tax), so it can never be forgotten. TODO: wire the cryo tax into
+`extract_stats`/`fit_class`/`apply_balance`.
+
 ## 4. Other effects — what exists vs what's new
 - **Suppression:** partial already (infantry go prone for less damage). A Concussion suppression METER
   (−firepower/pin) would be a new Corrosion-style axis (yaml) — decide if worth it over existing prone.

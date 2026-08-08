@@ -4903,6 +4903,25 @@ DefuseKit:
 			Spaceship: 10
 		UpdatesUnitStatistics: false
 
+###### Cryo: inherits Prism + PhysicalState Temperature -100 ######
+^Warhead_Cryo_Light:
+	Inherits: ^Warhead_Prism_Light
+	Warhead@Prism_Light:
+		PhysicalStateName: Temperature
+		PhysicalStateScale: -100
+
+^Warhead_Cryo_Medium:
+	Inherits: ^Warhead_Prism_Medium
+	Warhead@Prism_Medium:
+		PhysicalStateName: Temperature
+		PhysicalStateScale: -100
+
+^Warhead_Cryo_Heavy:
+	Inherits: ^Warhead_Prism_Heavy
+	Warhead@Prism_Heavy:
+		PhysicalStateName: Temperature
+		PhysicalStateScale: -100
+
 ###### Flame: INF+BLD > VEH > AIR (light, air=False) ######
 ^Warhead_Flame_Light:
 	ValidTargets: Ground, Water
