@@ -241,7 +241,7 @@
        "^Warhead_MissileHE_Medium",
        "^Warhead_Arrow_Light"
       ],
-      "weapon": "JHindArrows",
+      "weapon": "SkyHawkArrows",
       "weapon_class_source": "template"
      },
      {
@@ -297,13 +297,13 @@
       "versus_templates": [
        "^MediumFlameWeapon",
        "^TeslaWeapon",
-       "JHindArrows"
+       "SkyHawkArrows"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium",
        "^Warhead_Arrow_Light"
       ],
-      "weapon": "JHindArrowsEnergized",
+      "weapon": "SkyHawkArrowsEnergized",
       "weapon_class_source": "template"
      },
      {
@@ -336,7 +336,7 @@
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light"
       ],
-      "weapon": "JHindCannon",
+      "weapon": "SkyHawkCannon",
       "weapon_class_source": "template"
      },
      {
@@ -382,7 +382,7 @@
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
        "^Warhead_MissileAP_Medium",
-       "JHindCannon"
+       "SkyHawkCannon"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
@@ -390,7 +390,7 @@
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light"
       ],
-      "weapon": "JHindPlasmaCannon",
+      "weapon": "SkyHawkPlasmaCannon",
       "weapon_class_source": "illegal_mix"
      },
      {
@@ -423,7 +423,7 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "JHindChainGun",
+      "weapon": "SkyHawkChainGun",
       "weapon_class_source": "template"
      },
      {
@@ -463,7 +463,7 @@
       "slot": "Armament@ChainGunUpgrade",
       "versus_templates": [
        "^WaveforceBulletWarhead",
-       "JHindChainGun",
+       "SkyHawkChainGun",
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
@@ -471,7 +471,7 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "JHindChainGunWaveforce",
+      "weapon": "SkyHawkChainGunWaveforce",
       "weapon_class_source": "illegal_mix"
      }
     ],
@@ -540,7 +540,7 @@
       "requires": "!japan_upgrade_energizedarrows",
       "slot": "Armament@Missiles",
       "versus_templates": [
-       "JHindArrows"
+       "SkyHawkArrows"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium",
@@ -603,7 +603,7 @@
       "requires": "japan_upgrade_energizedarrows",
       "slot": "Armament@MissilesUpgrade",
       "versus_templates": [
-       "JHindArrowsEnergized"
+       "SkyHawkArrowsEnergized"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium",
@@ -7230,7 +7230,7 @@
       "warheads": [
        "^Warhead_Bullet_Light"
       ],
-      "weapon": "M60mgJapan",
+      "weapon": "NambuMG",
       "weapon_class_source": "template"
      },
      {
@@ -7262,14 +7262,14 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^WaveforceBulletWarhead",
-       "M60mgJapan",
+       "NambuMG",
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
        "^Warhead_Bullet_Light"
       ],
-      "weapon": "M60mgWaveforce",
+      "weapon": "NambuMGWaveforce",
       "weapon_class_source": "template"
      }
     ],

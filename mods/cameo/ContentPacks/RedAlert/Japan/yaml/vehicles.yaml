@@ -78,12 +78,12 @@ japan_scoutcar:
 		TurnSpeed: 32
 		Offset: -256,0,256
 	Armament:
-		Weapon: M60mgJapan
+		Weapon: NambuMG
 		MuzzleSequence: muzzle
 		LocalOffset: 128,0,43
 		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@Upgrade: ##########
-		Weapon: M60mgWaveforce
+		Weapon: NambuMGWaveforce
 		MuzzleSequence: muzzle
 		LocalOffset: 128,0,43
 		RequiresCondition: japan_upgrade_waveforcebullets

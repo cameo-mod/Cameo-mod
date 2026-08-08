@@ -237,42 +237,42 @@ japan_skyhawk:
 	ChangesHealth@SelfHealing:
 		Step: 30
 	Armament@Missiles:
-		Weapon: JHindArrows
+		Weapon: SkyHawkArrows
 		LocalOffset: 85,-300,-85, 85,300,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
 		RequiresCondition: !japan_upgrade_energizedarrows
 	Armament@MissilesUpgrade:
-		Weapon: JHindArrowsEnergized
+		Weapon: SkyHawkArrowsEnergized
 		LocalOffset: 85,-300,-85, 85,300,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
 		RequiresCondition: japan_upgrade_energizedarrows
 	Armament@Cannon:
-		Weapon: JHindCannon
+		Weapon: SkyHawkCannon
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 4
 		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@CannonUpgrade:
-		Weapon: JHindPlasmaCannon
+		Weapon: SkyHawkPlasmaCannon
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 4
 		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@ChainGun:
-		Weapon: JHindChainGun
+		Weapon: SkyHawkChainGun
 		LocalOffset: 85,-200,-85, 85,200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 4
 		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@ChainGunUpgrade:
-		Weapon: JHindChainGunWaveforce
+		Weapon: SkyHawkChainGunWaveforce
 		LocalOffset: 85,-200,-85, 85,200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1

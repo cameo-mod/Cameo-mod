@@ -980,7 +980,7 @@ THMiss:
 		ImpactSounds: thmiss.wav
 		ImpactActors: false
 
-M60mgJapan:
+NambuMG:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
@@ -995,9 +995,9 @@ M60mgJapan:
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 
-M60mgWaveforce:
+NambuMGWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits@2: M60mgJapan
+	Inherits@2: NambuMG
 	Inherits@3: ^WaveforceBulletProjectile
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 2000
@@ -1005,7 +1005,7 @@ M60mgWaveforce:
 		Damage: 1
 
 ZeroFighterArrows:
-	Inherits: JHindArrows
+	Inherits: SkyHawkArrows
 	Range: 6615
 	MinRange: 1325
 	ReloadDelay: 110
@@ -1021,7 +1021,7 @@ ZeroFighterArrows:
 		Damage: 9
 
 ZeroFighterArrowsEnergized:
-	Inherits: JHindArrowsEnergized
+	Inherits: SkyHawkArrowsEnergized
 	Range: 6615
 	MinRange: 1325
 	ReloadDelay: 110
@@ -1051,7 +1051,7 @@ ZeroFighterArrowsEnergized:
 		Damage: 8000
 		Spread: 800
 
-JHindChainGun:
+SkyHawkChainGun:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1071,14 +1071,14 @@ JHindChainGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-JHindChainGunWaveforce:
+SkyHawkChainGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits@2: JHindChainGun
+	Inherits@2: SkyHawkChainGun
 	Inherits@3: ^WaveforceBulletProjectile
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 500
 
-JHindCannon:
+SkyHawkCannon:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light
@@ -1102,10 +1102,10 @@ JHindCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 
-JHindPlasmaCannon:
+SkyHawkPlasmaCannon:
 	Inherits: ^Warhead_Tesla_Heavy
 	Inherits@2: ^Warhead_MissileAP_Medium
-	Inherits@3: JHindCannon
+	Inherits@3: SkyHawkCannon
 	Projectile: Bullet
 		Speed: 610
 		ContrailStartColor: 8844FFAA
@@ -1156,7 +1156,7 @@ JHindPlasmaCannon:
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
 
-JHindArrows:
+SkyHawkArrows:
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_Arrow_Light
 	Inherits@proj: ^Projectile_Arrow_Light
@@ -1194,10 +1194,10 @@ JHindArrows:
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
 
-JHindArrowsEnergized:
+SkyHawkArrowsEnergized:
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^TeslaWeapon
-	Inherits@3: JHindArrows
+	Inherits@3: SkyHawkArrows
 	Projectile: Missile
 		ContrailStartColor: FFCC77
 	Warhead@Arrow_Light:
