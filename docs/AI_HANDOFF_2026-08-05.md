@@ -927,6 +927,31 @@ passed the boot-gate.
   `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
   `extract_stats.py` refreshed 32 ledgers.
 
+### 14.25 `LaserWeapon + SmallArms` dual conversion (`e74995943`)
+
+- Converted 2 weapons: `TSLaserRaiderCannon`
+  (`weapons/tiberiansun.yaml`) and `TSLasergun`
+  (`ContentPacks/TiberianSun/Nod/yaml/weapons.yaml`).
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_Bullet_Light
+  Inherits@wh2: ^Warhead_Laser_Heavy
+  Inherits@proj: ^Projectile_Laser_Heavy
+  Inherits@fx: ^Effect_Laser_Heavy
+  Inherits@3: ^TSLaserEffect
+  ```
+- `SmallArms` → `Bullet_Light`, `LaserWeapon` → `Laser_Heavy`.
+  `_Percentage` variants preserved. `^TSLaserEffect` addon preserved.
+  Local `Projectile` settings preserved verbatim.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` reached
+  `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
+  `extract_stats.py` refreshed 32 ledgers.
+- Note: the maintainer had live WIP in `weapons.yaml` and
+  `tools/balance/gen_weapon_template.py` (350+ lines of template changes)
+  plus a new untracked `tools/balance/splice_templates.py`. These were
+  NOT committed by this conversion — only the 3 affected files were
+  scoped-added.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
