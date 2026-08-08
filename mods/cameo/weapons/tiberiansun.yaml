@@ -571,15 +571,15 @@ TurretLaserFragment:
 		Damage: 4
 
 TSObeliskLaserFire:
-	Inherits: ^TankDestroyerCannon
-	Inherits@2: ^LaserWeapon
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@wh2: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@3: ^TSLaserEffect
 	ReloadDelay: 60
 	Range: 10199
 	Report: obelray1.aud
 	ValidTargets: Ground, Water
-	-Warhead@Effect:
-	-Warhead@EffectAir:
 	Projectile:
 		Width: 128
 		Duration: 38
@@ -592,13 +592,13 @@ TSObeliskLaserFire:
 		SourceFlareSize: 64, 72
 		SourceFlareWidth: 2.5
 		SourceFlareCoreSize: 5
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 52000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 26
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 52000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 26
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
@@ -608,12 +608,12 @@ TSObeliskLaserFire:
 		ImpactActors: false
 
 TSLaserObeliskLaserFire:
-	Inherits: ^TankDestroyerCannon
-	Inherits@2: ^LaserWeapon
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@wh2: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@3: ^TSLaserEffect
 	ReloadDelay: 32
-	-Warhead@Effect:
-	-Warhead@EffectAir:
 	Projectile: LaserZap
 		Width: 128
 		Duration: 38
@@ -629,13 +629,13 @@ TSLaserObeliskLaserFire:
 	Range: 10435
 	Report: obelray1.aud
 	ValidTargets: Ground, Water
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: SpreadDamage
 		Damage: 80000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 40
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 80000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 40
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm

@@ -981,89 +981,89 @@
       "damage_warheads": [
        {
         "damage": "52000",
-        "tag": "TankDestroyerCannon",
+        "tag": "CannonAP_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "26",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "52000",
-        "tag": "LaserWeapon",
+        "tag": "Laser_Heavy",
         "type": "SpreadDamage"
        },
        {
         "damage": "26",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10199",
       "reloaddelay": "60",
       "requires": "!ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^TankDestroyerCannon",
-       "^LaserWeapon",
+       "^Warhead_CannonAP_Light",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy",
        "^TSLaserEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonAP_Light",
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "TSObeliskLaserFire",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
         "damage": "80000",
-        "tag": "TankDestroyerCannon",
+        "tag": "CannonAP_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "40",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "CannonAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "80000",
-        "tag": "LaserWeapon",
+        "tag": "Laser_Heavy",
         "type": "SpreadDamage"
        },
        {
         "damage": "40",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10435",
       "reloaddelay": "32",
       "requires": "ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^TankDestroyerCannon",
-       "^LaserWeapon",
+       "^Warhead_CannonAP_Light",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy",
        "^TSLaserEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonAP_Light",
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "TSLaserObeliskLaserFire",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
