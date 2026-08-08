@@ -128,33 +128,13 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "HeavyChemicalWeaponPercentage",
+        "tag": "Chemical_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "10000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
-        "tag": "HeavyFlameWeaponPercentage",
+        "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -169,20 +149,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "100",
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@UpgradeBombs",
       "versus_templates": [
-       "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon",
+       "^Warhead_Chemical_Heavy",
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Chem_Heavy",
+       "^Effect_Flame_Heavy",
        "^HeavyBomb"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Heavy",
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "JapanesePlasmaBomb",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5540,6 +5525,11 @@
         "damage": "1",
         "tag": "Chemical_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -5551,11 +5541,13 @@
       "slot": "Armament@UpgradePRIMARYFlame",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
+       "^Warhead_Flame_Heavy",
        "^Projectile_Chem_Heavy",
-       "^Effect_Chem_Heavy"
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Chemical_Heavy"
+       "^Warhead_Chemical_Heavy",
+       "^Warhead_Flame_Heavy"
       ],
       "weapon": "OIPlasmaFlamer",
       "weapon_class_source": "template"
@@ -5569,6 +5561,11 @@
         "damage": "1",
         "tag": "Chemical_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -5580,11 +5577,13 @@
       "slot": "Armament@UpgradeSECONDARYFlame",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
+       "^Warhead_Flame_Heavy",
        "^Projectile_Chem_Heavy",
-       "^Effect_Chem_Heavy"
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Chemical_Heavy"
+       "^Warhead_Chemical_Heavy",
+       "^Warhead_Flame_Heavy"
       ],
       "weapon": "OIPlasmaFlamer",
       "weapon_class_source": "template"
@@ -5800,6 +5799,11 @@
         "damage": "1",
         "tag": "Chemical_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -5811,11 +5815,13 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
+       "^Warhead_Flame_Heavy",
        "^Projectile_Chem_Heavy",
-       "^Effect_Chem_Heavy"
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Chemical_Heavy"
+       "^Warhead_Chemical_Heavy",
+       "^Warhead_Flame_Heavy"
       ],
       "weapon": "HeavyPlasmaFlamer",
       "weapon_class_source": "template"
@@ -7090,6 +7096,11 @@
         "damage": "1",
         "tag": "Chemical_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -7101,11 +7112,13 @@
       "slot": "Armament@UpgradePRIMARYFlame",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
+       "^Warhead_Flame_Heavy",
        "^Projectile_Chem_Heavy",
-       "^Effect_Chem_Heavy"
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Chemical_Heavy"
+       "^Warhead_Chemical_Heavy",
+       "^Warhead_Flame_Heavy"
       ],
       "weapon": "OIPlasmaFlamer",
       "weapon_class_source": "template"
@@ -7119,6 +7132,11 @@
         "damage": "1",
         "tag": "Chemical_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -7130,11 +7148,13 @@
       "slot": "Armament@UpgradeSECONDARYFlame",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
+       "^Warhead_Flame_Heavy",
        "^Projectile_Chem_Heavy",
-       "^Effect_Chem_Heavy"
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Chemical_Heavy"
+       "^Warhead_Chemical_Heavy",
+       "^Warhead_Flame_Heavy"
       ],
       "weapon": "OIPlasmaFlamer",
       "weapon_class_source": "template"
@@ -7716,6 +7736,11 @@
         "damage": "5",
         "tag": "Chemical_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
@@ -7727,11 +7752,13 @@
       "slot": "Armament@Upgrade3",
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
+       "^Warhead_Flame_Heavy",
        "^Projectile_Chem_Heavy",
-       "^Effect_Chem_Heavy"
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Chemical_Heavy"
+       "^Warhead_Chemical_Heavy",
+       "^Warhead_Flame_Heavy"
       ],
       "weapon": "WaveforceCannonDistortedBeam2",
       "weapon_class_source": "template"

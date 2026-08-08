@@ -161,10 +161,8 @@ PlasmaFlamer:
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		PhysicalStateName: Temperature
 		Amount: 4000
 	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		PhysicalStateName: Temperature
 		Amount: 2000
 	Warhead@Effect: CreateEffect
 		Explosions: blue_small_napalm
@@ -189,10 +187,8 @@ HeavyFlamer:
 	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		PhysicalStateName: Temperature
 		Amount: 2000
 	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		PhysicalStateName: Temperature
 		Amount: 1000
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
@@ -202,8 +198,9 @@ HeavyFlamer:
 
 HeavyPlasmaFlamer:
 	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@wh2: ^Warhead_Flame_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
-	Inherits@fx: ^Effect_Chem_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	ReloadDelay: 60
 	Burst: 30
 	BurstDelays: 1
@@ -219,6 +216,12 @@ HeavyPlasmaFlamer:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Flame_Heavy:
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
@@ -1886,8 +1889,9 @@ OIFlamer:
 
 OIPlasmaFlamer:
 	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@wh2: ^Warhead_Flame_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
-	Inherits@fx: ^Effect_Chem_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	ReloadDelay: 60
 	Burst: 20
 	BurstDelays: 1
@@ -1903,6 +1907,12 @@ OIPlasmaFlamer:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Flame_Heavy:
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
@@ -2006,8 +2016,10 @@ JapaneseHeavyBomb:
 		ImpactSounds: kaboom15.aud
 
 JapanesePlasmaBomb:
-	Inherits: ^HeavyChemicalWeapon
-	Inherits@2: ^HeavyFlameWeapon
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@wh2: ^Warhead_Flame_Heavy
+	Inherits@proj: ^Projectile_Chem_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	Inherits@3: ^HeavyBomb
 	ReloadDelay: 100
 	Burst: 4
@@ -2024,22 +2036,16 @@ JapanesePlasmaBomb:
 		TrailInterval: 1
 		Blockable: false
 		Shadow: True
-	Warhead@HeavyChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Heavy:
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@Flame_Heavy:
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyBomb: SpreadDamage
