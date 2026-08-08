@@ -1071,6 +1071,22 @@ Phase B maintainer decisions.
 
 ## 15. Live remaining-effort estimate (after this Devin session)
 
+### 15.0 Phase B survey generated (`99e41f7c6`, 2026-08-08)
+
+`tools/audit/phase_b_survey.py` now produces
+`docs/audit/latest/phase_b_survey.md` from the live resolved ruleset.
+Latest artifact counts (do not trust stale summaries):
+- **411 concrete weapons** still inherit at least one old full-stack family
+- **43** have a single old family (may be partial conversions or remaining
+  Phase A candidates — verify with `retrofit_weapon_family.py`)
+- **368** are mixed old-family (true Phase B, maintainer sign-off required)
+- **253** unique mixed combinations
+
+The report groups by inherited old families, lists warhead keys + damage
+per weapon, and proposes a heuristic dominant-damage collapse target. It
+is input for the Phase 3 maintainer-directed collapse; do not convert
+mixed weapons without sign-off.
+
 ### 15.1 What is still on old templates (safe files only)
 
 A scan of non-active YAML files found:
