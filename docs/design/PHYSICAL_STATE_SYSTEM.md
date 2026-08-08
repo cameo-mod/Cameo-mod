@@ -110,14 +110,15 @@ used for Temperature's blue cold side) AND (b) **threshold artwork** at the extr
 |---|---|---|---|
 | Temperature hot | 🔴 red (bar exists) | overheat glow at max | red overlay exists; max-heat art TBD |
 | Temperature cold | 🔵 blue (`@CryoFreeze` overlay) | ❄ `frostspark` at `superfreeze` | **exists** |
-| **Corrosion** | 🟢 **green, pulsating** (scales with level) | pulsating green at max | **NEW art needed** |
-| **Armor Breach** | subtle plate-crack overlay | **icon overlay** — a bullet punching through armor plating, shown at 100% (when they take 200%) | **NEW art needed** — NOT just a colour |
+| **Corrosion** | 🟢 **green tint**, ever-increasing 200→20000 (`WithPhysicalStateColoredOverlay`, colour only) | the **existing pulsating corrosion effect**, played ONLY at 100% (20000) | **mostly EXISTS** — pulse effect exists; green tint is just the colour trait |
+| **Sonic** | 🔵 **looped, transparently-shifting blue** overlay (the sonic-mark visual) | — (on-hit, short duration) | **NEW art needed** — a looped shifting-blue overlay |
+| **Armor Breach** | very light **grey** scaling overlay | **breach icon** at 100% — a bullet punching through armor plating (when they take 200%) | **NEW art needed** — the breach icon; overlay is just grey colour |
 
 **New sprite art to create** (RGBA PngSheet per memory `cameo-custom-effects-pngsheet`; pair every new
-effect with a sound): the **green pulsating corrosion** overlay, and the **armor-breach breach-icon**
-(bullet-through-plating) for the 100% state. These are ART assets (maintainer/artist) — the traits
-(`WithPhysicalStateColoredOverlay` / `WithIdleOverlay`) just reference the image+sequence, so the yaml
-can be wired with placeholders and the art dropped in. Heat/cryo already have their overlays.
+effect with a sound): the **looped shifting-blue Sonic** overlay, and the **armor-breach breach-icon**
+(bullet-through-plating) for the 100% state. Corrosion's pulse already exists (play it at max) and its
+green tint is just a colour trait. The traits (`WithPhysicalStateColoredOverlay` / `WithIdleOverlay`)
+reference an image+sequence, so the yaml wires with placeholders and the art drops in later.
 
 ## 5. Build order (after sign-off)
 1. C#: `PhysicalStateName`/`PhysicalStateScale` on `AreaDamageWarhead` (+subclass). Build → `engine/bin`
@@ -135,6 +136,11 @@ DECIDED:
 4. **Sonic** = global `CommandoDebuff → SonicDebuff`, baked into `^Warhead_Sonic_*` (predator laser + waveforce keep applying it).
 5. **Every axis needs its own art** (§4b) — green pulsating corrosion overlay + armor-breach breach-icon are NEW assets.
 
+6. **Plasma Versus** = the **per-armor blend (average) of the Flame and Chemical ladders** (maintainer:
+   "as close as possible to the flame + chemical combo"). The generator computes it from the two
+   families — no hand-authoring. Plasma then applies +50% heat & +50% corrosion (§3). RESOLVED.
+
 STILL OPEN:
-- **Plasma Versus** — blended Flame×Chem: strong vs inf/light/med + structures, moderate vs heavy. Confirm the exact ladder.
-- **XP/kill attribution** of overheat/corrosion DoT — verify `ChangesHealthProportionalToPhysicalState` credits the original attacker (`firedBy`), not the trait/self, so flame/acid kills grant XP correctly. (Investigate in the build.)
+- **XP/kill attribution** of overheat/corrosion DoT — verify `ChangesHealthProportionalToPhysicalState`
+  credits the original attacker (`firedBy`), not the trait/self, so flame/acid kills grant XP. (Build.)
+- **Sonic + armor-breach art** (§4b) — new PngSheet assets (artist); yaml wires with placeholders.
