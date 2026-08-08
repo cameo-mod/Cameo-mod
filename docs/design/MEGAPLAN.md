@@ -1,5 +1,10 @@
 # MEGAPLAN — rebalance program index
 
+> **⚠ Superseded for sequencing (2026-08-08).** The authoritative ordered phase-map for the whole
+> balance program is now **`BALANCE_MEGAPLAN.md`** (Phases A→G + verified current state). This file
+> remains only as a thin conceptual index (the two-programs framing + the three pillars). For "what to
+> do in which order," read `BALANCE_MEGAPLAN.md`; for the live granular queue, read `ROADMAP.md`.
+
 _This is the non-binding index for balance-program sequencing. Canonical laws remain in the linked documents; active work remains in `ROADMAP.md`._
 
 ## 0. The goal

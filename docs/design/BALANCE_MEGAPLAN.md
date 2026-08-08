@@ -4,12 +4,20 @@ The single source of truth for **what order** to build the balance pipeline and 
 needs** to be complete. Written 2026-08-04. This does not replace the detailed docs — it **threads
 them** into one sequence so we never lose the order. Each phase links the doc that owns the detail.
 
+> **Authority note (2026-08-08):** THIS is the authoritative **phase-sequence map** for the balance
+> program (the strategic "what order, A→G"). It complements `ROADMAP.md`, which is the **live granular
+> task queue** (individual items + commit hashes; crashes jump it). When they disagree on *status*, the
+> artifact wins — verify, then fix both. This doc **supersedes** the older `MEGAPLAN.md` (kept as a thin
+> index) for program sequencing; `AREADAMAGE_HANDOFF.md` is now **historical** (its warhead conversion
+> is complete — see §1).
+>
 > Companion docs (do NOT duplicate — this indexes them): `BALANCE_PIPELINE.md` (the sanctioned
 > loop), `FORMULA_V2.md` (the laws), `BALANCE_SYNTHESIS.md` (synthesis laws), `ARMOR_SYSTEM.md` +
-> `WEAPON_TYPE_SYSTEM.md` + `WEAPON_3WAY_SPLIT.md` (weapon/armor grammar), `ORIGINAL_UNIT_STATS.md`
-> + `ORIGINAL_UNITS_RAW.md` + `GAME_SPECIFIC_WEAPON_BASES.md` + `FACTION_IDENTITY.md` (reference
-> material), `class_anchors.json` + `anchor_decisions_log.md` + `vehicle_class_decisions.md`
-> (anchors), `discrepancies.md` (Phase-3 triage), `AREADAMAGE_HANDOFF.md` (the in-flight warhead work).
+> `WEAPON_TYPE_SYSTEM.md` + `WEAPON_3WAY_SPLIT.md` (weapon/armor grammar), `SPREAD_FALLOFF_PLAN.md`
+> (per-type spread/falloff profiles), `AREADAMAGE_WARHEAD_REBALANCE.md` (warhead design + energy chips),
+> `ORIGINAL_UNIT_STATS.md` + `ORIGINAL_UNITS_RAW.md` + `GAME_SPECIFIC_WEAPON_BASES.md` +
+> `FACTION_IDENTITY.md` (reference material), `class_anchors.json` + `anchor_decisions_log.md` +
+> `vehicle_class_decisions.md` (anchors), `discrepancies.md` (Phase-3 triage).
 
 ---
 
@@ -40,16 +48,49 @@ them** into one sequence so we never lose the order. Each phase links the doc th
 
 ---
 
-## 1. Where we are (2026-08-04)
+## 1. Where we are (VERIFIED 2026-08-08 — supersedes the 2026-08-04 snapshot)
 
-- **Warheads: DONE.** Universal `AreaDamage` conversion committed (`b6a58b76d`) — every weapon main
-  is AreaDamage + baked 50/50 FF; 55 `^Warhead_*` templates; Nuclear superweapon hand-tuned.
-  ⚠ **generator drift** open (Phase A1). See `AREADAMAGE_HANDOFF.md`.
-- **Ledgers exist** (`docs/balance/*.json`, 28 factions) but many predate the current laws.
+**Phase A (weapon/warhead foundation) — the bulk of the STRUCTURE is done; tuning + collapse remain:**
+- **Warheads: DONE.** Universal `AreaDamage` conversion complete — every live weapon main is
+  `AreaDamage` + baked 50/50 FF (`Ally, Neutral, Enemy`); `_FriendlyFire` twins retired; Nuclear
+  superweapon hand-tuned; `AreaDamagePercentage` for %HP. C# built + boot-proven.
+- **A1 generator reconcile: ✅ DONE.** `gen_weapon_template.py` emits AreaDamage + baked FF +
+  `^Warhead_<Family>_<Level>` + `_Percentage`; guard `verify_generator_sync.py` (run_all.sh `gen_sync`)
+  reports **drift = 0** → regenerate is a verified no-op.
+- **A2 cannon templates: ✅ BUILT.** `^Warhead_CannonAP_{L/M/H}` + `^Warhead_CannonHE_{L/M/H}` exist
+  (weapons.yaml ~3429–3720), on the two-level ordering law. Repointing weapons onto them proceeds via
+  the Phase-B collapse.
+- **A3 projectile/effect libraries: ✅ BUILT.** `^Projectile_<Family>_<Level>` + `^Effect_<Family>_<Level>`
+  (`gen_effects.py`); weapons inherit them via the 3-way split.
+- **A4 weapon tuning — PARTLY done:** energy `_ExtraDamage` chips reworked (paid-for law) + thin energy
+  spread ✅ (`b068a94f6`); MissileAA spread reduction ✅. **OPEN:** per-type spread/falloff profiles
+  (DESIGNED in `SPREAD_FALLOFF_PLAN.md`, not yet applied — awaiting authoring-model pick), projectile-
+  speed / tank-shell rules (documented, not applied), Railgun charge-delay downside, the spread-pricing
+  formula term.
+- **Weapon 3-way split: Phase A DONE** (0 single-inherit weapons remain). **Phase B (mixed-family
+  collapse) IN PROGRESS** — Sniper family (21 weapons ✅ `fa1016d21`), Chemical 2-family group
+  (5 weapons ✅ `ac17eb827`); **~350+ mixed weapons in ~250 groups remain** (maintainer-directed,
+  dominant-damage heuristic in `docs/audit/latest/phase_b_survey.md`). This IS Phase A5 (retiring the
+  deprecated inline old-family damage keys) — same effort, one queue.
+- Guards green: `find_empty_warhead.py = 0`, `find_orphan_old_keys{,_multi}.py = 0 real`.
+
+**Phase B (reference material):**
+- **B2 extract CnCR + RV: ✅ DONE** (325 + 208 units in `ORIGINAL_UNITS_RAW.md`; sources in
+  `~/Downloads`). All Layer-2 mods extracted (DTA/CA/SP/MO/CnCR/RV); only Dune/Outpost2 stubs pending.
+  Remaining reference work = R4 synthesis into per-class targets (B1/B3).
+
+**Phase C (anchors):**
 - **Vehicle 13-class anchors LOCKED** (`class_anchors.json` + `anchor_decisions_log.md` "★ LOCKED
-  2026-08-01"). Infantry-class proposals drafted (`docs/balance/proposal_*_infantry.md`).
-- **Workbooks exist** (`cameo_armor_system.xlsx` legacy reference, `cameo_balance_v2.xlsx` workbench).
-- **Phase-3 discrepancy triage** open (`docs/balance/discrepancies.md`).
+  2026-08-01"); templates built + armor normalized per-class. RESTAT of baselines+members pending
+  (needs weapon DPS/range stable from A4).
+- Infantry-class proposals drafted (`docs/balance/proposal_*_infantry.md`); 4 new templates +
+  `^AntiTankAntiAir` split + scout-verifier tier fix pending, then lock.
+- Defense + aircraft anchors: not started.
+
+**Phases D–G:** `FORMULA_V2` has open terms (spread-pricing, AA/AoE pricing, per-class defense/infantry
+baselines). Ledgers exist (`docs/balance/*.json`, 28 factions) but many predate current laws. Workbooks
+exist (`cameo_armor_system.xlsx` legacy reference, `cameo_balance_v2.xlsx` workbench). Per-faction
+synthesize→apply (F) not started. Phase-3 discrepancy triage open (`docs/balance/discrepancies.md`).
 
 ---
 
@@ -246,13 +287,16 @@ apply_balance` round-trip is a no-op diff — the definition of a converged pipe
 
 ---
 
-## 12. Open-items checklist (tick as completed)
+## 12. Open-items checklist (verified 2026-08-08; tick as completed)
 
-- [ ] A1 generator reconcile (AreaDamage)  · [ ] A2 cannon rebuild  · [ ] A3 projectile/effect libs
-- [ ] A4 energy chips · MissileAA spread · projectile-speed rules · spread-pricing term · spread reduction
-- [ ] A5 retire 297 inline-damage weapons
-- [ ] B1 ORIGINAL_UNIT_STATS complete  · [ ] B2 extract CnCR + RV  · [ ] B3 faction-identity synthesis
-- [ ] D1 FORMULA_V2 missing terms  · [ ] D2 verifier laws wired into extract/fit
+- [x] A1 generator reconcile (AreaDamage, drift=0)  · [x] A2 cannon templates built  · [x] A3 projectile/effect libs
+- [x] A4 energy chips (paid-for) · [x] A4 MissileAA spread reduction
+- [ ] A4 per-type spread/falloff profiles (DESIGNED in SPREAD_FALLOFF_PLAN.md; pick authoring model → generate → boot)
+- [ ] A4 projectile-speed / tank-shell rules applied (AP `range/5`, HE `range/10` 2× spread, artillery slow lob)
+- [ ] A4 Railgun charge-delay downside (= 50% ReloadDelay, armament-level)  · [ ] A4 spread-pricing formula term
+- [ ] A5 / Phase B: collapse the ~350+ remaining mixed-family weapons (dominant-damage; retires inline old keys)
+- [ ] B1 ORIGINAL_UNIT_STATS complete  · [x] B2 extract CnCR + RV (done)  · [ ] B3 faction-identity synthesis
+- [ ] D1 FORMULA_V2 missing terms (spread-pricing, AA/AoE, per-class defense/infantry baselines)  · [ ] D2 verifier laws wired into extract/fit
 - [ ] C1 vehicle anchors restat  · [ ] C2 infantry anchors (4 templates + lock)  · [ ] C3 defense/aircraft anchors
 - [ ] E workbooks refreshed (or ledger-direct)
 - [ ] F per-class/faction synthesize -> fit -> apply -> audit -> boot -> commit (×all)

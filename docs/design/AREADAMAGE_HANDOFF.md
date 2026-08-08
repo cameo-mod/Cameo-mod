@@ -1,5 +1,13 @@
 # AreaDamage universal conversion — AGENT HANDOFF (2026-08-04)
 
+> **✅ HISTORICAL — this handoff's work is COMPLETE (as of 2026-08-08).** The universal AreaDamage
+> conversion, both C# warheads, the generator reconcile (A1), the MissileAA spread reduction, and the
+> energy-chip rework are all DONE and merged to `master` (the `fix/production-queue-crash` branch +
+> `48245737e` references below are stale — we are well past them). Keep this doc for the C# build/deploy
+> gotchas (§1, §5) and the design rationale, but for **remaining** work and current status read
+> **`BALANCE_MEGAPLAN.md` §1 + §12** (the live phase-map) and `ROADMAP.md` (the live queue). Do NOT
+> treat §0/§2/§3/§7 below as current state.
+
 Written by Claude (Opus 4.8) at a token/weekly limit, mid-operation. Another agent
 continues from here. **Read this top-to-bottom before touching anything.** Then read
 the memory index + `docs/design/AREADAMAGE_WARHEAD_REBALANCE.md` (the full design).

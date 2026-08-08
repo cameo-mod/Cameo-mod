@@ -33,8 +33,10 @@ Crashes and player-visible regressions always jump the queue.
 |---|---|
 | Mission, gates, memory, model/effort rules | `CLAUDE.md` (root) |
 | Binding rules: naming, stats, tiers, packs, descriptions | `DESIGN.md` |
-| Active work queue & ownership | `design/ROADMAP.md` |
+| Active work queue & ownership (live granular tasks + commit hashes) | `design/ROADMAP.md` |
+| Balance program **phase-map** (what order, A→G, + verified current state) | `design/BALANCE_MEGAPLAN.md` |
 | Balance formula law (per-class, SUM, bands, uniqueness) | `design/FORMULA_V2.md` |
+| Spread / damage-falloff per-type profiles | `design/SPREAD_FALLOFF_PLAN.md` |
 | Balance machinery (ledger ⇄ workbook ⇄ gated apply, drift) | `design/BALANCE_PIPELINE.md` |
 | Armor / damage-type system | `design/ARMOR_SYSTEM.md` |
 | Faction identity, lore, playstyle (curated compendium) | `FACTIONS.md` |
