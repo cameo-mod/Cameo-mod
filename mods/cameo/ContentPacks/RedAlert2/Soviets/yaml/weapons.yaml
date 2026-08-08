@@ -724,19 +724,17 @@ RA2vulcan:
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
-	ReloadDelay: 14
+	ReloadDelay: 18
 	Range: 6577
-	Burst: 3
+	Burst: 4
 	BurstDelays: 3
 	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
-		Damage: 1
+	-Warhead@Bullet_Light_Percentage:
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		Damage: 1
+	-Warhead@Bullet_Medium_Percentage:
 
 RA2CRFlakGuyGun:
 	Inherits: RA2FLAKAG

@@ -2201,9 +2201,11 @@ YakNuclearBomb:
 	Warhead@NuclearWarhead: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 50000
+		AffectsParent: false
 	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 25
+		AffectsParent: false
 	Warhead@Effect: CreateEffect
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
@@ -2347,9 +2349,11 @@ ThermobaricMaverick:
 	Warhead@NuclearWarhead: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
+		AffectsParent: false
 	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
+		AffectsParent: false
 	Warhead@MediumFlameWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -2405,9 +2409,11 @@ NuclearMaverick:
 	Warhead@NuclearWarhead: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
+		AffectsParent: false
 	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
+		AffectsParent: false
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
@@ -2456,9 +2462,11 @@ ThermobaricNuclearMaverick:
 	Warhead@NuclearWarhead: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 14000
+		AffectsParent: false
 	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 7
+		AffectsParent: false
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 14000
@@ -3885,8 +3893,10 @@ ParaBombNuke:
 		Damage: 50
 	Warhead@NuclearWarhead: SpreadDamage
 		Damage: 100000
+		AffectsParent: false
 	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
 		Damage: 50
+		AffectsParent: false
 	Warhead@Effect: CreateEffect
 		ImpactSounds: kaboom22.aud
 
