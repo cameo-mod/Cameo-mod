@@ -1024,6 +1024,26 @@ conversions MUST include a post-conversion sweep: (1)
 `sweep_areadamage.py --apply` for bug A; (2) grep every child of every
 converted parent for old warhead keys for bug B.
 
+### 14.29 Bug B closed codebase-wide (`d239feacd`, 2026-08-08)
+
+A comprehensive sweep with new `tools/audit/find_orphan_old_keys.py`
+found **107 orphaned old-key warheads** across 12 files — not just my
+4 commits, but all conversion commits from 2026-08-07/08. Fixed via
+`tools/balance/fix_orphan_old_keys.py --apply`:
+- 41 mains renamed (old key -> new key, type stripped to bare)
+- 41 percentages renamed
+- 25 FriendlyFire twin blocks deleted (FF baked into template mains)
+- 0 ExtraDamage orphans
+
+Detector is resolution-aware (only flags old keys where the converted
+parent has the corresponding new key — excludes 179 legitimate
+"child adds new warhead type" cases like chem variants). Re-run after
+any future conversion batch; exits 0 candidates when clean.
+
+**Bug B is now CLOSED across the codebase.** Bug A remains a
+per-conversion sweep need (`sweep_areadamage.py`). Both detectors are
+now in `tools/audit/` and `tools/balance/` for future use.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
