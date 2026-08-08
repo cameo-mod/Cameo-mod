@@ -886,6 +886,27 @@ passed the boot-gate.
   `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
   `extract_stats.py` refreshed 32 ledgers.
 
+### 14.23 `MediumMissile` single conversion (`41535ae47`)
+
+- Converted 3 weapons: `MissileAttackRobotGun`
+  (`ContentPacks/RedAlert2Mod/FutureTech`), `NaxPlaneRockets_elite`
+  (`ContentPacks/RedAlert2Mod/Naxis`), `LatinAADefenderCannon`
+  (`ContentPacks/RedAlert2Mod/Syndicate`).
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_MissileAP_Medium
+  Inherits@proj: ^Projectile_Missile_Medium
+  Inherits@fx: ^Effect_MissileAP_Medium
+  ```
+- `MediumMissile` → `MissileAP_Medium`; `_Percentage` variant preserved.
+  Already-split addons (`^SteelLightMissile`, `^D2KRocket`,
+  `^RA2FlakWeapon`) preserved. Local addon warheads (`MissileAP_Light`,
+  `MissileAP_Heavy`, `Flak_Medium`) given explicit `AreaDamage` type.
+  Custom `Warhead@Effect` / `Warhead@EffectAir` preserved.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` reached
+  `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
+  `extract_stats.py` refreshed 32 ledgers.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
