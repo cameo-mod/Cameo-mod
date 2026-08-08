@@ -998,7 +998,9 @@ NaxPlanegun_elite:
 		Damage: 1
 
 NaxPlaneRockets_elite:
-	Inherits: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
 	Inherits@2: ^D2KRocket
 	ReloadDelay: 100
 	Burst: 2
@@ -1016,11 +1018,11 @@ NaxPlaneRockets_elite:
 		ContrailStartColor: 996633
 		TrailInterval: 1
 		TrailDelay: 1
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 10000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@MissileAP_Heavy:
+	Warhead@MissileAP_Heavy: AreaDamage
 		Damage: 10000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5

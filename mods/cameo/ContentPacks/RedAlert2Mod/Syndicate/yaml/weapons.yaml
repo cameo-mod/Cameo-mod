@@ -1119,7 +1119,9 @@ LatinSentryMG_elite:
 	Range: 7777
 
 LatinAADefenderCannon:
-	Inherits: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
 	Inherits@2: ^RA2FlakWeapon
 	Range: 15000
 	ReloadDelay: 20
@@ -1135,11 +1137,11 @@ LatinAADefenderCannon:
 		ContrailLength: 16
 		Speed: 10000
 		Width: 200
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileAP_Medium: SpreadDamage
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Flak_Medium:
+	Warhead@Flak_Medium: AreaDamage
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 1

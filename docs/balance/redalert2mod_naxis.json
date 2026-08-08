@@ -356,12 +356,12 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "tag": "MediumMissile",
+        "tag": "MissileAP_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "5",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -371,16 +371,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
       "slot": "Armament@Rockets",
       "versus_templates": [
-       "^MediumMissile",
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium",
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "NaxPlaneRockets_elite",
@@ -432,12 +435,12 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "tag": "MediumMissile",
+        "tag": "MissileAP_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "5",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -447,16 +450,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
       "slot": "Armament@Rockets",
       "versus_templates": [
-       "^MediumMissile",
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium",
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "NaxPlaneRockets_elite",
@@ -469,12 +475,12 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "tag": "MediumMissile",
+        "tag": "MissileAP_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "5",
-        "tag": "MediumMissilePercentage",
+        "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -484,17 +490,20 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
       "requires": "rank-elite",
       "slot": "Armament@RocketsELITE",
       "versus_templates": [
-       "^MediumMissile",
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium",
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "NaxPlaneRockets_elite",
