@@ -167,7 +167,7 @@ authoritative per-type spec and supersedes the starter numbers in §5.
 |---|---|---|---|--:|---|:--:|---|
 | Bullet | point impact | pinpoint | `100, 0` | ~100 | fast | ✓ | rapid single-target |
 | **CannonAP** | kinetic penetrator, focused | pinpoint | `100, 0` | ~120 | **fast** | – | anti-armor punch, **no splash**, fast shell |
-| **CannonHE** | HE shell overpressure (~1/r) | **convex** | `100, 50, 20, 0` | ~1200 | **slow arc** | – | **wide swarm blast**, arcing slow shell |
+| **CannonHE** | HE shell overpressure (~1/r) | **convex** | `100, 50, 20, 0` | ~900 | **fast** | – | **REGULAR TANK gun** — fast shell + wide swarm blast (>> MissileHE). Slow shells belong to ARTILLERY (Demolition/Concussion); later CannonHE+Demolition = cannon-artillery |
 | MissileAP | shaped-charge jet | pinpoint | `100, 0` | ~100 | med | ✓ | focused anti-armor, hits air |
 | **MissileHE** | small HE warhead blast | convex, small | `100, 45, 15, 0` | ~450 | med | ✓ | modest blast, hits air — **<< CannonHE** |
 | MissileAA | proximity airburst | pinpoint | `100, 0` | ~150 | fast | ✓ | dedicated AA |
@@ -175,7 +175,8 @@ authoritative per-type spec and supersedes the starter numbers in §5.
 | **Demolition** | concentrated charge (~1/r²/1/r³) | **very convex** | `100, 45, 18, 6, 0` | ~1400 | **slow lob** | – | devastating center, **fast fade**; anti-bldg+inf |
 | **Concussion** | fragments fly outward, spread | **broad, long tail** | `100, 72, 50, 32, 18, 8, 0` | ~2100 | med | – | **widest thin frag field**, anti-inf swarm |
 | **Flame** | fire covers zone + lingers | **concave** + DoT | `100, 90, 78, 60, 0` | ~1200 | med | – | **sustained lethal zone** (GroundFire) |
-| **Chemical** | gas cloud diffuses (Gaussian) | **diffuse** + DoT | `100, 82, 64, 46, 30, 16, 6, 0` | ~2400 | med | – | **widest, drifting** cloud + DoT |
+| **Chemical** | short toxic **BLAST** (green — a recolored flame, ~22 ticks) | concave zone + brief DoT | `100, 88, 72, 50, 0` | ~1100 | med | – | green flame-like burst (≈ Flame recolored) — **NOT the gas cloud**; differs from Flame by armor profile + toxic DoT |
+| **Toxic** | drifting gas **CLOUD** (spawned, looping, long-lived) | persistent field | n/a — spawned `AnthraxCloud*` via `SpawnSmokeParticle` | wide, lingers | slow drift | – | **the real gas** — long-lived diffusing cloud; THIS is what "lingers/expands", already done via spawned particles |
 | **Sonic** | sound pressure wave (~1/r) | **near-linear even** | `100, 75, 50, 25, 0` | ~1600 | fast | – | even wave, **anti-swarm flat** damage |
 | Laser | focused directed energy | pinpoint | `100, 0` | ~80 | **instant** | ✓ | precise beam, hits air |
 | Prism | beam + refraction scatter | pinpoint, small | `100, 0` | ~150 | instant | – | scatter beam + utility |
@@ -188,7 +189,10 @@ authoritative per-type spec and supersedes the starter numbers in §5.
 
 ### How the three axes resolve per family
 - **Gameplay (the tank vs tank-destroyer law):** CannonAP = *fast shell + pinpoint + high single-target*
-  (the tank destroyer); CannonHE = *slow arcing shell + wide convex blast* (the tank — clears swarms).
+  (the tank destroyer); CannonHE = *fast shell + wide convex blast* (the REGULAR TANK — clears swarms).
+  **Both tank guns are FAST.** SLOW projectiles are the ARTILLERY families (Demolition/Concussion); the
+  artillery weapons later COMBINE CannonHE+Demolition/Concussion (cannon artillery) or
+  MissileHE+Demolition/Concussion (rocket artillery) — that's where the slow arc + big blast lives.
   Air-capable weapons (Missile/Flak/Laser/Bullet/Arrow) pay for hitting air with **smaller radius +
   lower Damage** than their ground-only counterparts; slow projectiles are repaid with **bigger radius
   + higher Damage** (they can be dodged/outrun). This is the `Damage × Spread ≈ const` trade (§2).
@@ -220,7 +224,8 @@ The AreaDamage warhead has three temporal modes (verified in `AreaDamageWarhead.
 | weapon | propagation | verdict |
 |---|---|---|
 | **Nuclear** | shockwave expands over seconds | **EXPAND** ✓ (done) |
-| **Chemical / gas** | gas diffuses over seconds | **EXPAND** (strong fit) + persists |
+| **Toxic (gas cloud)** | gas diffuses + lingers over seconds | already a **spawned looping cloud** (`SpawnSmokeParticle` → `AnthraxCloud*`) — that IS the linger; no AreaDamage ticks needed |
+| **Chemical (blast)** | short green burst (~22t, recolored flame) | **INSTANT** — it's an explosion, not the cloud |
 | **Flame** | fire spreads over seconds + burns | **LINGER** (GroundFire) ✓; optional small initial expand |
 | **Sonic** | sound wave ~343 m/s (real delay over a big radius) | optional **mild expand** (thematic, low priority) |
 | Demolition | blast wave ~km/s = instant at tick resolution | **INSTANT** (expand = pure visual flavor, not physics) |
@@ -228,9 +233,9 @@ The AreaDamage warhead has three temporal modes (verified in `AreaDamageWarhead.
 | CannonHE / MissileHE / AP / Bullet / Laser / Railgun / Tesla / Flak / Arrow / Magic | instant | **INSTANT** |
 
 **Recommendation:**
-- **Chemical → expanding cloud** (mode 3): gas whooshes out `MinRadius→MaxRadius`, then its spawned
-  cloud/DoT persists. The most physically apt after Nuclear, and gives Chemical a distinct *temporal*
-  signature (another uniqueness axis).
+- **Net: the AreaDamage EXPAND mode is essentially Nuclear-only.** The real lingering/diffusing gas is
+  the **Toxic** family, already implemented as a spawned looping `AnthraxCloud*` field — it doesn't
+  need AreaDamage ticks. **Chemical** is a short green blast (instant). So don't add expand to Chemical.
 - **Flame → keep the lingering `GroundFire`** for its DoT; optionally a small 2–3 tick expand for the
   initial fire spread.
 - **Sonic → optional mild expand** (a visible ripple) — flavor only, low priority.
