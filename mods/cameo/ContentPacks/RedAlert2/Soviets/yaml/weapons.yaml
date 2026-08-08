@@ -305,11 +305,9 @@ RA160mm_rad:
 		Damage: 18000
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 18
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 36000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 18000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 18
 	Warhead@Demolition_Light:
 		Damage: 36000
@@ -838,21 +836,17 @@ IvanAttachAir:
 
 IvanBombAir:
 	Inherits: IvanBomb
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Aircraft
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Aircraft
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium:
 		ValidTargets: Aircraft
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Aircraft
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Aircraft
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Aircraft
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Aircraft
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Aircraft
 
 BorisAKM_elite:

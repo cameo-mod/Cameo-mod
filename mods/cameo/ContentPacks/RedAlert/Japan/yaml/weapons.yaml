@@ -1017,9 +1017,9 @@ ZeroFighterArrows:
 		Damage: 18000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 9
-	Warhead@ArrowWeapon: SpreadDamage
+	Warhead@Arrow_Light:
 		Damage: 18000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage: HealthPercentageDamage
 		Damage: 9
 
 ZeroFighterArrowsEnergized:
@@ -1029,9 +1029,9 @@ ZeroFighterArrowsEnergized:
 	ReloadDelay: 110
 	Burst: 2
 	BurstDelays: 9
-	Warhead@ArrowWeapon: SpreadDamage
+	Warhead@Arrow_Light:
 		Damage: 8000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 8000
@@ -1135,15 +1135,11 @@ JHindPlasmaCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1206,11 +1202,11 @@ JHindArrowsEnergized:
 	Inherits@3: JHindArrows
 	Projectile: Missile
 		ContrailStartColor: FFCC77
-	Warhead@ArrowWeapon: SpreadDamage
+	Warhead@Arrow_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1489,9 +1485,9 @@ JapaneseHovercraftFlakAA:
 		ValidTargets: Air
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 
 JapaneseHovercraftFlakWaveforce:
@@ -1987,13 +1983,10 @@ BuggyPlasmaGrenade:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 10000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect

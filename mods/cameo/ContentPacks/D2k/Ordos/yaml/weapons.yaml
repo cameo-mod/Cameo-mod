@@ -664,27 +664,19 @@ Laboratory_Bioball:
 		ContrailEndColor: 33442211
 		ContrailStartWidth: 52
 		ContrailEndWidth: 13
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: -5000
-		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: -5000
-		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate

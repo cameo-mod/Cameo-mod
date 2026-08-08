@@ -1299,9 +1299,9 @@ TSAdatsMissile_AA:
 	Inherits: TSAdatsMissile
 	Range: 8409
 	ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Air

@@ -2650,28 +2650,22 @@ TanyaBomb:
 	Inherits@wh3: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 50000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 50
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 50000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 50
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 50
 	Warhead@Effect: CreateEffect
@@ -2718,21 +2712,17 @@ SealBomb:
 		Damage: 20000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 20000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 20000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 20000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
 
 BorisAKM:

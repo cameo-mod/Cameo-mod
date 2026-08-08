@@ -82,6 +82,16 @@ weapon itself, not its children. The fix is a post-conversion sweep:
 1. `sweep_areadamage.py --apply` (bug A);
 2. for each converted parent, grep its children for old keys (bug B).
 
+**Comprehensive sweep done 2026-08-08** (`tools/audit/find_orphan_old_keys.py`
++ `tools/balance/fix_orphan_old_keys.py --apply`): found and fixed **107
+orphaned old-key warheads** across 12 files (41 mains renamed, 41
+percentages renamed, 25 FriendlyFire twin blocks deleted). Detector is
+resolution-aware (only flags old keys where the converted parent has the
+corresponding new key — excludes legitimate "child adds new warhead
+type" cases). Re-run the detector after any future conversion batch;
+it exits 0 candidates when clean. Bug B is now CLOSED across the
+codebase.
+
 ---
 
 ## Latest lessons from the July 2026 infantry rebalance pass

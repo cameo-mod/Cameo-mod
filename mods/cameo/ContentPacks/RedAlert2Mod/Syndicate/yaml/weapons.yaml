@@ -426,17 +426,13 @@ LatinMonkeyGrenade3:
 
 LatinMonkeyGrenadeExplode:
 	Inherits: LatinMonkeyGrenade2
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 4000

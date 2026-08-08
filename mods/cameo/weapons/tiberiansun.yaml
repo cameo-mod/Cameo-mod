@@ -266,15 +266,13 @@ TS155mm_bluenuke:
 		LaunchAngle: 165
 		ContrailLength: 30
 		ContrailWidth: 0c32
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 60000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 30000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 30
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 60000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@3Eff: CreateEffect
 		Explosions: magicnuke_med
@@ -1041,9 +1039,9 @@ TSChemAdatsMissileAA:
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@Flak_Medium:
 		Damage: 6000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@LightMissile: SpreadDamage
 		Damage: 6000
