@@ -2690,8 +2690,9 @@ ra120mmThermobaric:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^HeavyFlameWeapon
-	Inherits@5: ^HeavyBomb
+	Inherits@wh: ^Warhead_Flame_Heavy
+	Inherits@proj: ^Projectile_Flame_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	ValidTargets: Ground, Water, Vehicle, Structure
 	ReloadDelay: 95
 	Burst: 2
@@ -2700,15 +2701,9 @@ ra120mmThermobaric:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 641
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@Flame_Heavy:
 		Damage: 8000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 4
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 8000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@CannonHE_Heavy:
 		Damage: 8000
@@ -3027,8 +3022,9 @@ ra120mm2Thermobaric:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^HeavyFlameWeapon
-	Inherits@5: ^HeavyBomb
+	Inherits@wh: ^Warhead_Flame_Heavy
+	Inherits@proj: ^Projectile_Flame_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	ValidTargets: Ground, Water, Vehicle, Structure
 	ReloadDelay: 125
 	Burst: 2
@@ -3037,15 +3033,9 @@ ra120mm2Thermobaric:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 666
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@Flame_Heavy:
 		Damage: 16000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 8
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 16000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
