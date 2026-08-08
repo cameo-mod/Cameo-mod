@@ -4509,6 +4509,8 @@ DefuseKit:
 			Fighter: 16
 			Scout: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 75
 	Warhead@Laser_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
@@ -4591,6 +4593,8 @@ DefuseKit:
 			Fighter: 30
 			Scout: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 75
 	Warhead@Laser_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
@@ -4673,6 +4677,8 @@ DefuseKit:
 			Fighter: 44
 			Scout: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 75
 	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
@@ -4931,6 +4937,8 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -4989,6 +4997,8 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -5047,6 +5057,8 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -5106,6 +5118,8 @@ DefuseKit:
 			Bomber: 16
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -5164,6 +5178,8 @@ DefuseKit:
 			Bomber: 30
 			Fighter: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -5222,6 +5238,8 @@ DefuseKit:
 			Bomber: 44
 			Fighter: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 400

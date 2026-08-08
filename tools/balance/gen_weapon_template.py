@@ -241,6 +241,9 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
              f"\t\tVersus:",
              emit_versus(main, hazmat=hz),
              f"\t\tDamageTypes: {damage_types}"]
+        if name in FAMILY_PHYSICAL_STATE:  # heat/cold/corrosion meter, scaled by main damage
+            psn, pss = FAMILY_PHYSICAL_STATE[name]
+            main_wh += [f"\t\tPhysicalStateName: {psn}", f"\t\tPhysicalStateScale: {pss}"]
         pct_wh = [f"\tWarhead@{tag}_Percentage: HealthPercentageDamage",
              f"\t\tValidTargets: {vt}",
              f"\t\tSpread: {main_spread // 2}",
@@ -280,6 +283,18 @@ HAND_TUNED = {"Nuclear"}
 # Light/Medium/Heavy/Super. Indices beyond a family's level count are ignored.
 FAMILY_SPREADS = {
     "MissileAA": (200, 300, 400),
+}
+
+# Per-family PhysicalState wiring (docs/design/PHYSICAL_STATE_SYSTEM.md): the MAIN AreaDamage warhead
+# adds `damage x Scale%` to a named meter on hit (Temperature = heat/cold, Corrosion = acid).
+# Emitted on the main warhead ONLY (the _ExtraDamage chip is auto-excluded; the HealthPercentageDamage
+# %-twin cannot carry the field until it is converted to AreaDamagePercentage — a later refinement).
+# Cryo is a separate thin child of Prism (Temperature -100), not listed here.
+FAMILY_PHYSICAL_STATE = {
+    "Flame":    ("Temperature", 100),   # heat -> overheat/pop
+    "Laser":    ("Temperature", 75),    # laser overheats (main only, chip excluded)
+    "Chemical": ("Corrosion", 100),     # acid -> corrosion meter
+    # Plasma (Temperature 50 + Corrosion 50) needs two states on one warhead -> handled at family build.
 }
 
 
