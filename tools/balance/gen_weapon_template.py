@@ -121,6 +121,53 @@ WEAPONS = {
 }
 
 
+# --- PAID-FOR ExtraDamage chips (AREADAMAGE_WARHEAD_REBALANCE.md §3 REVISION 2026-08-08) ---
+# Only energy weapons carry a chip, and only because each PAYS for it (K, a charge delay, or a
+# structural handicap). Chip = SpreadDamage, Damage = 50% of main, EXCLUDED from price (suffix
+# _ExtraDamage). Bespoke per-family Versus (NOT formula-generated). Armors omitted => floor 10.
+# Per-family floor for armors not listed in the chip ladder (buildings/air/Shield).
+CHIP_FLOOR = {"Laser": 9, "Railgun": 10, "Tesla": 10, "TeslaCharged": 10}
+CHIPS = {
+    # Laser: anti-LIGHT (inf+veh), reversed ladder — floor 9 (bldg/air), Superheavy 12, +3/step toward light.
+    # Pays for: thin energy spread + 4 air ladder-slots diluting its ground damage.
+    "Laser": {"Scout": 36, "None": 33, "Light": 30, "Flak": 27, "Medium": 24,
+              "Plate": 21, "Heavy": 18, "Heroic": 15, "Superheavy": 12},
+    # Railgun: anti-BUILDING + superheavy siege. Pays for: a charge delay (per-weapon, = 50% reload).
+    "Railgun": {"Concrete": 200, "Steel": 175, "Wood": 150, "Superheavy": 125, "Heavy": 100,
+                "Medium": 75, "Light": 50, "Scout": 25},
+    # Tesla: anti-armored-inf + shield (restored old TeslaExtraDamage). Pays for: K=1.25 (weak EMP).
+    "Tesla": {"REFLECTOR": 50, "Shield": 300, "Heroic": 200, "Plate": 175, "Flak": 150, "None": 125,
+              "Superheavy": 100, "Heavy": 75, "Medium": 50, "Light": 25},
+    # TeslaCharged: STRONGER (restored old TeslaChargedExtraDamage). Pays for: Super tier + K.
+    "TeslaCharged": {"REFLECTOR": 50, "Shield": 400, "Heroic": 300, "Plate": 275, "Flak": 250,
+                     "None": 225, "Superheavy": 200, "Heavy": 175, "Medium": 150, "Light": 125,
+                     "Scout": 100, "Steel": 75, "Concrete": 50, "Wood": 25},
+}
+CHIP_SPREAD = {"Tesla": 200, "TeslaCharged": 400, "Laser": 200, "Railgun": 200}
+# Energy mains thinned to near single-target = 50% of the chip spread (the "low spread" the
+# chip/utility compensates for). Prism has no chip -> nominal 100.
+ENERGY_THIN_SPREAD = {f: s // 2 for f, s in CHIP_SPREAD.items()}
+ENERGY_THIN_SPREAD["Prism"] = 100
+
+
+def emit_chip(tag, family_name, damage, vt):
+    """Emit the paid-for ExtraDamage chip (SpreadDamage, 50% of main, bespoke Versus)."""
+    d = CHIPS[family_name]
+    order = ["REFLECTOR", "Shield", "None", "Flak", "Plate", "Heroic",
+             "Scout", "Light", "Medium", "Heavy", "Superheavy",
+             "Wood", "Steel", "Concrete", "Fighter", "Bomber", "Helicopter", "Spaceship"]
+    rows = "\n".join(f"\t\t\t{a}: {d.get(a, CHIP_FLOOR[family_name])}" for a in order if a != "REFLECTOR" or "REFLECTOR" in d)
+    return "\n".join([
+        f"\tWarhead@{tag}_ExtraDamage: SpreadDamage",
+        f"\t\tValidTargets: {vt}",
+        f"\t\tSpread: {CHIP_SPREAD[family_name]}",
+        f"\t\tDamage: {damage // 2}",
+        f"\t\tFalloff: 100, 75, 50, 25",
+        f"\t\tVersus:",
+        rows,
+        f"\t\tDamageTypes: Prone75Percent, TriggerProne, ExplosionDeath"])
+
+
 def table(order16, step, top, floor, shield):
     rows = [("Shield", shield)]
     for i, a in enumerate(order16):
@@ -176,6 +223,8 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
             pct = table(order16, 1, ptop, pfloor, ptop + pfloor)
             hz = hazmat
         tag = f"{name}_{level}"
+        # Energy families are thinned to near single-target; the chip/utility pays for the low spread.
+        main_spread = ENERGY_THIN_SPREAD.get(name, spreads[li])
         main_wh = [f"^Warhead_{tag}:",
              f"\tValidTargets: {vt}",
              f"\tReloadDelay: {reload}",
@@ -186,7 +235,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
              f"\t\tFriendlyFireDamage: 50",
              f"\t\tFriendlyFireSpread: 50",
              f"\t\tValidTargets: {vt}",
-             f"\t\tSpread: {spreads[li]}",
+             f"\t\tSpread: {main_spread}",
              f"\t\tDamage: {damage}",
              f"\t\tFalloff: {falloffs[li]}",
              f"\t\tVersus:",
@@ -194,13 +243,16 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
              f"\t\tDamageTypes: {damage_types}"]
         pct_wh = [f"\tWarhead@{tag}_Percentage: HealthPercentageDamage",
              f"\t\tValidTargets: {vt}",
-             f"\t\tSpread: {spreads[li] // 2}",
+             f"\t\tSpread: {main_spread // 2}",
              f"\t\tDamage: {pct_damage}",
              f"\t\tFalloff: {falloffs[li]}",
              f"\t\tVersus:",
              emit_versus(pct),
              f"\t\tUpdatesUnitStatistics: false"]
-        blocks.append("\n".join(main_wh + pct_wh))
+        parts = main_wh + pct_wh
+        if name in CHIPS:  # paid-for ExtraDamage chip (energy families only)
+            parts.append(emit_chip(tag, name, damage, vt))
+        blocks.append("\n".join(parts))
     return "\n\n".join(blocks)
 
 
