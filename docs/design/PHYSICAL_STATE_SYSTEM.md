@@ -58,7 +58,26 @@ On impact, after computing per-target damage (post-falloff, post-Versus/armor) a
 That single field removes the need for separate per-weapon `ApplyPhysicalState` warheads and makes heat/
 cold/corrosion auto-scale with damage. **Everything else below is YAML config of existing traits.**
 
-## 2. Corrosion axis — ADD in yaml (mirror Temperature, no new C#)
+## 2. Corrosion axis — CONVERT the existing binary `corroded` into a meter (verified 2026-08-09)
+
+⚠ Corrosion is NOT greenfield: it already exists as a **binary `corroded` condition** (`defaults.yaml`
+~5495–5516) applied on/off by the Schwarzer Mond rockets — `DamageMultiplier@corroded 125`,
+`SpeedMultiplier@corroded 75`, `WithColoredOverlay@corroded 44FF4444` (green), `WithIdleOverlay@corroded`
+(`Image: explosion, Sequence: nax_corr_frag` = the pulse), `Targetable@corroded`. So BUILD 1 is a
+CONVERSION, reusing the existing art:
+1. Add `PhysicalState@Corrosion` meter (0–20000, `RelativeToHealth`, decay) on `^CryoFreezable` (the
+   shared Temperature home) + wherever else Temperature lives.
+2. Replace the fixed `@corroded` traits with **scaled** ones from 50%→100% (`ChangesHealthProportionalToPhysicalState`
+   DoT ~180 + a `@…Hazmat` half via `hazmatsuits`; `SlowsProportionalToPhysicalState` `OnlyPositiveValues`
+   to ~60%; `DamageMultiplierProportionalToPhysicalState` to +150%).
+3. Keep the art: `WithPhysicalStateColoredOverlay@Corrosion` green tint 200→20000; `WithIdleOverlay`
+   `nax_corr_frag` pulse gated on a `CorrosionMax` condition (meter == 20000).
+4. Migrate the Schwarzer Mond weapons from granting the binary `corroded` to feeding the Corrosion meter
+   (via the new `PhysicalStateScale`, or an `ApplyPhysicalState` warhead). Keep the old binary path until
+   migrated so nothing breaks mid-way.
+Boot-gate after each step. (The section below is the original greenfield sketch, superseded by this.)
+
+### (superseded greenfield sketch)
 
 Add a `PhysicalState@Corrosion` block to the same defaults (unipolar): `MinValue 0 / MaxValue 20000 /
 RelaxedValue 0`, `RelativeToHealth: true`, relaxation like Temperature. Bar 🟢 green (`PositiveColor 00C000`).

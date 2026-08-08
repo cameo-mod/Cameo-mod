@@ -5514,6 +5514,88 @@
 		Sequence: nax_corr_frag
 		StartSequence: nax_corr_frag
 		Palette: ra2effect
+	# --- Corrosion METER (physical-state axis). ADDITIVE + inert until a weapon feeds it via
+	# AreaDamage PhysicalStateName: Corrosion / PhysicalStateScale. Green tint 200->20000; effects
+	# ramp 50%->100% (Corroding); nax_corr_frag pulse at max. Binary `corroded` above kept until the
+	# Schwarzer Mond weapons are migrated onto the meter. See docs/design/PHYSICAL_STATE_SYSTEM.md.
+	PhysicalState@Corrosion:
+		Name: Corrosion
+		MaxValue: 20000
+		MinValue: 0
+		RelaxedValue: 0
+		RelativeToHealth: true
+		RelaxationLinear: 5
+		RelaxationScaled: 50
+		RelaxationInterval: 1
+		RelaxationDelay: 25
+		InitialValue: 0
+		ApplyDamageModifiers: true
+	PhysicalStateBar@CorrosionBar:
+		PhysicalStateName: Corrosion
+		PositiveColor: 00C000
+		NeutralColor: 808080
+		DisplayWhenRelaxed: false
+		ShowAbsoluteValues: false
+		RequiresCondition: !CorrosionDeadzone
+	GrantConditionOnPhysicalState@CorrosionDeadzone:
+		PhysicalStateName: Corrosion
+		Condition: CorrosionDeadzone
+		UpperValue: 200
+		LowerValue: 0
+	GrantConditionOnPhysicalState@Corroding:
+		PhysicalStateName: Corrosion
+		Condition: Corroding
+		UpperValue: 20000
+		LowerValue: 10000
+	GrantConditionOnPhysicalState@CorrosionMax:
+		PhysicalStateName: Corrosion
+		Condition: CorrosionMax
+		UpperValue: 20000
+		LowerValue: 20000
+	WithPhysicalStateColoredOverlay@Corrosion:
+		PhysicalStateName: Corrosion
+		MinColor: 44FF4422
+		MaxColor: 00FF0088
+		UpperValue: 20000
+		LowerValue: 200
+	ChangesHealthProportionalToPhysicalState@Corrosion:
+		PhysicalStateName: Corrosion
+		UsePercentageDamage: false
+		DamageAtMaximum: 180
+		DamageAtMinimum: 0
+		DamageThreshold: 0
+		DamageInterval: 1
+		RequiresCondition: Corroding && !hazmatsuits
+	ChangesHealthProportionalToPhysicalState@CorrosionHazmat:
+		PhysicalStateName: Corrosion
+		UsePercentageDamage: false
+		DamageAtMaximum: 90
+		DamageAtMinimum: 0
+		DamageThreshold: 0
+		DamageInterval: 1
+		RequiresCondition: Corroding && hazmatsuits
+	SlowsProportionalToPhysicalState@Corrosion:
+		PhysicalStateName: Corrosion
+		UseDeviationFromRelaxed: true
+		OnlyPositiveValues: true
+		SpeedModifierAtMinimum: 100
+		SpeedModifierAtMaximum: 60
+		TurnSpeedModifierAtMinimum: 100
+		TurnSpeedModifierAtMaximum: 60
+		RequiresCondition: Corroding
+	DamageMultiplierProportionalToPhysicalState@Corrosion:
+		PhysicalStateName: Corrosion
+		DamageMultiplierAtMinimum: 100
+		DamageMultiplierAtMaximum: 150
+		UseDeviationFromRelaxed: true
+		RequiresCondition: Corroding
+	WithIdleOverlay@CorrosionPulse:
+		RequiresCondition: CorrosionMax
+		Image: explosion
+		Sequence: nax_corr_frag
+		StartSequence: nax_corr_frag
+		Palette: ra2effect
+		IsDecoration: True
 
 ^AffectedByHealingField:
 	ExternalCondition@HealingField:
