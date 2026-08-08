@@ -50,6 +50,22 @@ array the generator emits:
 authoring that still lets flame/demo feel distinct. If you truly want ONE knob only, use `100, 0`
 everywhere and differentiate flame/demo purely by DoT + radius + Damage.
 
+## 1b. Shape vs radius — how the falloff values map to a curve
+
+Because damage interpolates **linearly between the points**, the *spacing* of the values IS the curve:
+
+- **Evenly-spaced values = a straight LINE.** `100, 0` and `100, 80, 60, 40, 20, 0` are the same
+  SHAPE (a linear cone); they differ only in RADIUS (`1·Spread` vs `5·Spread`). Same cone either way
+  if `Spread = radius/(N-1)`. Extra evenly-spaced points buy only finer radius granularity.
+- **Front-loaded values = CONVEX (concentrated).** `100, 50, 25, 0` = punchy core + moderate tail.
+  `100, 50, 25, 12, 6, 3, 1, 0` (halving) = sharp core + long thin tail. True `1/r²` = `100, 25, 11,
+  6, 4, 3` (= 100/n²) — real blast overpressure / radiation intensity. This is the "explosion" curve.
+- **Back-loaded values = CONCAVE (sustained then cliff).** `100, 95, 85, 65, 40, 0` stays lethal
+  across most of the radius then drops — a "zone" (fire, gas).
+
+**Two orthogonal knobs: RADIUS = (N-1)·Spread, and SHAPE = convex/linear/concave spacing.** Any shape
+at any radius. This is what makes per-weapon *physical* profiles possible.
+
 ## 2. Why spread must be traded steeply against damage
 
 The area a shot covers grows with the **square** of the radius: `area ∝ ((N-1)·S)²`. The total
@@ -138,3 +154,52 @@ Pinpoint ≈ 0.4 cell (400) · Small ≈ 0.7 (700) · Medium ≈ 1.3 (1300) · L
    assigned Spread, or stay a manual guardrail?
 4. Implementation is generator-driven (`gen_weapon_template.py` per-family `spreads`/`falloffs`
    overrides + `splice_templates.py`), then boot-gate — same path as the energy chips.
+
+## 8. Master per-type profiles — the 3-axis synthesis (gameplay × physics × uniqueness)
+
+**Method:** the real-world SPATIAL behaviour of each weapon picks its SHAPE (§1b); gameplay
+(projectile speed, air-capability) picks the RADIUS and, inversely, the Damage (§2); uniqueness is
+the check that no two profiles coincide. Falloff arrays below are illustrative curves of the named
+shape — RADIUS = (N-1)×Spread, and per-unit Damage moves inversely to Spread. This table is the
+authoritative per-type spec and supersedes the starter numbers in §5.
+
+| type | real-world behaviour | shape | Falloff (illustrative) | radius (M) | projectile | air | what makes it unique |
+|---|---|---|---|--:|---|:--:|---|
+| Bullet | point impact | pinpoint | `100, 0` | ~100 | fast | ✓ | rapid single-target |
+| **CannonAP** | kinetic penetrator, focused | pinpoint | `100, 0` | ~120 | **fast** | – | anti-armor punch, **no splash**, fast shell |
+| **CannonHE** | HE shell overpressure (~1/r) | **convex** | `100, 50, 20, 0` | ~1200 | **slow arc** | – | **wide swarm blast**, arcing slow shell |
+| MissileAP | shaped-charge jet | pinpoint | `100, 0` | ~100 | med | ✓ | focused anti-armor, hits air |
+| **MissileHE** | small HE warhead blast | convex, small | `100, 45, 15, 0` | ~450 | med | ✓ | modest blast, hits air — **<< CannonHE** |
+| MissileAA | proximity airburst | pinpoint | `100, 0` | ~150 | fast | ✓ | dedicated AA |
+| Flak | airburst fragmentation | convex, small | `100, 55, 25, 8, 0` | ~500 | fast | ✓ | anti-air + light flak cloud |
+| **Demolition** | concentrated charge (~1/r²/1/r³) | **very convex** | `100, 45, 18, 6, 0` | ~1400 | **slow lob** | – | devastating center, **fast fade**; anti-bldg+inf |
+| **Concussion** | fragments fly outward, spread | **broad, long tail** | `100, 72, 50, 32, 18, 8, 0` | ~2100 | med | – | **widest thin frag field**, anti-inf swarm |
+| **Flame** | fire covers zone + lingers | **concave** + DoT | `100, 90, 78, 60, 0` | ~1200 | med | – | **sustained lethal zone** (GroundFire) |
+| **Chemical** | gas cloud diffuses (Gaussian) | **diffuse** + DoT | `100, 82, 64, 46, 30, 16, 6, 0` | ~2400 | med | – | **widest, drifting** cloud + DoT |
+| **Sonic** | sound pressure wave (~1/r) | **near-linear even** | `100, 75, 50, 25, 0` | ~1600 | fast | – | even wave, **anti-swarm flat** damage |
+| Laser | focused directed energy | pinpoint | `100, 0` | ~80 | **instant** | ✓ | precise beam, hits air |
+| Prism | beam + refraction scatter | pinpoint, small | `100, 0` | ~150 | instant | – | scatter beam + utility |
+| Railgun | hypervelocity penetrator | pinpoint | `100, 0` | ~80 | instant | – | instant kinetic, no splash (+ charge delay) |
+| Tesla | electric arc / chain | pinpoint, small | `100, 0` | ~120 | instant | – | arc + EMP |
+| Magic | non-physical %HP | pinpoint | `100, 0` | ~120 | med | – | giant-killer (%HP), no splash |
+| Arrow | point impact | pinpoint | `100, 0` | ~100 | med | ✓ | single-target, hits air |
+| Melee | adjacent contact | point | `100` | ~0 | melee | – | adjacent only |
+| **Nuclear** | fireball + blast + radiation | **expanding rings** | 10-ring (hand-tuned) | huge | slow | ✓ | expanding shockwave superweapon |
+
+### How the three axes resolve per family
+- **Gameplay (the tank vs tank-destroyer law):** CannonAP = *fast shell + pinpoint + high single-target*
+  (the tank destroyer); CannonHE = *slow arcing shell + wide convex blast* (the tank — clears swarms).
+  Air-capable weapons (Missile/Flak/Laser/Bullet/Arrow) pay for hitting air with **smaller radius +
+  lower Damage** than their ground-only counterparts; slow projectiles are repaid with **bigger radius
+  + higher Damage** (they can be dodged/outrun). This is the `Damage × Spread ≈ const` trade (§2).
+- **Physics (the shape):** kinetic rounds (AP/Railgun/Bullet) = pinpoint; HE overpressure = convex,
+  falling ~1/r to 1/r²; a concentrated demolition charge = *very* convex (1/r³-ish, punchy center);
+  fragmentation throws frags OUTWARD = broad with a long tail; fire = a concave sustained zone with a
+  hard edge + burn DoT; gas = a Gaussian diffusing cloud (widest) + DoT; sound = an even ~1/r wave;
+  a nuke = an expanding multi-zone shockwave.
+- **Uniqueness (the check):** the eight AoE families are pairwise distinct on
+  `shape × radius × DoT × projectile-speed` — convex-medium-slow (CannonHE) ≠ convex-small-air
+  (MissileHE) ≠ very-convex-punchy (Demolition) ≠ broad-widest (Concussion) ≠ concave-DoT (Flame) ≠
+  diffuse-widest-DoT (Chemical) ≠ even-wave (Sonic) ≠ expanding (Nuclear). The pinpoint families are
+  distinguished by projectile speed (instant/fast/med), air-capability, their `Versus` profile, and
+  damage TYPE (Magic = %HP, Tesla = +EMP, Railgun = +charge/chip). No two weapons feel the same.

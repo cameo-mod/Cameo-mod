@@ -9,7 +9,9 @@ the artifact, **the artifact wins — then fix the stale summary.**
 
 **Must-read, in order:** this file → `docs/LESSONS_LEARNED.md` → `docs/AGENT_WORKSPACE.md` →
 `docs/design/ROADMAP.md` → `docs/design/BALANCE_PIPELINE_ESTIMATE.md`. For weapon work also:
-`docs/AI_HANDOFF_2026-08-05.md`, `docs/design/AREADAMAGE_HANDOFF.md`, `docs/design/WEAPON_3WAY_SPLIT.md`.
+`docs/AI_HANDOFF_2026-08-05.md`, `docs/design/AREADAMAGE_HANDOFF.md`, `docs/design/WEAPON_3WAY_SPLIT.md`,
+`docs/design/SPREAD_FALLOFF_PLAN.md` (Spread/Falloff balancing: radius=(N-1)×Spread, shape=value spacing,
+3-axis gameplay/physics/uniqueness).
 
 **Ten hard rules** (rules 1–2 are enforced by hooks in `.claude/settings.json`):
 1. **Boot-gate every commit** of engine content — `launch-game.cmd` must reach the main menu
