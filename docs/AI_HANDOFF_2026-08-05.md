@@ -1044,6 +1044,31 @@ any future conversion batch; exits 0 candidates when clean.
 per-conversion sweep need (`sweep_areadamage.py`). Both detectors are
 now in `tools/audit/` and `tools/balance/` for future use.
 
+### 14.30 Multi-variant child-shadow bug also closed (`d18bee808`,
+`d08730d33`, 2026-08-08)
+
+The one-to-one fixer missed multi-variant old keys (`LightMissile`,
+`MediumMissile`, `HeavyMissile`, etc.) because they can collapse into
+multiple new templates (`MissileHE_Light`, `MissileAP_Light`, etc.).
+A second detector (`find_orphan_old_keys_multi.py`) and fixer
+(`fix_orphan_old_keys_multi.py`) were added to catch children where the
+converted parent has exactly one matching new variant.
+
+Additional 7 fixed child weapons:
+- `TSChemAdatsMissileAA` (`LightMissile` -> `MissileHE_Light`, `d18bee808`)
+- `ZeroFighterArrows` / `ZeroFighterArrowsEnergized` (`MediumMissile` ->
+  `MissileHE_Medium`)
+- `JHindArrowsEnergized` (`MediumMissile` -> `MissileHE_Medium`)
+- `GradHeavyRockets` (`HeavyMissile` -> `MissileHE_Heavy`)
+- `SandmarineTuskTwin` (`HeavyMissile` -> `MissileHE_Heavy`)
+- `TSAdatsMissile_AA` (`LightMissile` -> `MissileHE_Light`)
+
+Combined with the one-to-one sweep, **all confident child-shadow bugs
+are now fixed.** The remaining `find_orphan_old_keys_multi.py`
+"suspicious" items are 0 (all unambiguous cases resolved). Ambiguous
+multi-variant cases (parent has multiple possible new variants) are
+Phase B maintainer decisions.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
