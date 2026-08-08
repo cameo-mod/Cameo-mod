@@ -907,6 +907,26 @@ passed the boot-gate.
   `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
   `extract_stats.py` refreshed 32 ledgers.
 
+### 14.24 `LaserWeapon + TankDestroyerCannon` dual conversion (`d7e02b8ab`)
+
+- Converted 2 weapons in `weapons/tiberiansun.yaml`: `TSObeliskLaserFire`
+  and `TSLaserObeliskLaserFire`.
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_CannonAP_Light
+  Inherits@wh2: ^Warhead_Laser_Heavy
+  Inherits@proj: ^Projectile_Laser_Heavy
+  Inherits@fx: ^Effect_Laser_Heavy
+  Inherits@3: ^TSLaserEffect
+  ```
+- `TankDestroyerCannon` → `CannonAP_Light`, `LaserWeapon` → `Laser_Heavy`.
+  `_Percentage` variants preserved. `-Warhead@Effect` /
+  `-Warhead@EffectAir` removal markers stripped (vestigial). `^TSLaserEffect`
+  addon preserved. Custom `Warhead@2Eff` and `Warhead@LaserArc` preserved.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` reached
+  `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
+  `extract_stats.py` refreshed 32 ledgers.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
