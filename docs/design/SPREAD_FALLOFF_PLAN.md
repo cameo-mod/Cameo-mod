@@ -203,3 +203,44 @@ authoritative per-type spec and supersedes the starter numbers in §5.
   diffuse-widest-DoT (Chemical) ≠ even-wave (Sonic) ≠ expanding (Nuclear). The pinpoint families are
   distinguished by projectile speed (instant/fast/med), air-capability, their `Versus` profile, and
   damage TYPE (Magic = %HP, Tesla = +EMP, Railgun = +charge/chip). No two weapons feel the same.
+
+## 9. Temporal modes — which weapons EXPAND or LINGER (not just instant)
+
+The AreaDamage warhead has three temporal modes (verified in `AreaDamageWarhead.cs`, fields
+`Ticks` / `TickDelay` / `MinRadius` / `MaxRadius` / `TickDamage`):
+1. **Instant** (`Ticks: 1`) — one hit = SpreadDamage. Default; correct for anything that resolves in
+   milliseconds.
+2. **Static DoT cloud** (`Ticks > 1`, `MaxRadius: 0`) — repeats every `TickDelay`, full falloff radius
+   each tick; a damage field lingering in place.
+3. **Expanding shockwave** (`Ticks > 1`, `MaxRadius > 0`) — the damaged radius grows
+   `MinRadius → MaxRadius` across the ticks (per-ring `TickDamage` weights); a wave propagating outward.
+
+**Physics test — expand only if it propagates slowly enough to read across a tick:**
+
+| weapon | propagation | verdict |
+|---|---|---|
+| **Nuclear** | shockwave expands over seconds | **EXPAND** ✓ (done) |
+| **Chemical / gas** | gas diffuses over seconds | **EXPAND** (strong fit) + persists |
+| **Flame** | fire spreads over seconds + burns | **LINGER** (GroundFire) ✓; optional small initial expand |
+| **Sonic** | sound wave ~343 m/s (real delay over a big radius) | optional **mild expand** (thematic, low priority) |
+| Demolition | blast wave ~km/s = instant at tick resolution | **INSTANT** (expand = pure visual flavor, not physics) |
+| Concussion | fragments ~1 km/s = instant | **INSTANT** |
+| CannonHE / MissileHE / AP / Bullet / Laser / Railgun / Tesla / Flak / Arrow / Magic | instant | **INSTANT** |
+
+**Recommendation:**
+- **Chemical → expanding cloud** (mode 3): gas whooshes out `MinRadius→MaxRadius`, then its spawned
+  cloud/DoT persists. The most physically apt after Nuclear, and gives Chemical a distinct *temporal*
+  signature (another uniqueness axis).
+- **Flame → keep the lingering `GroundFire`** for its DoT; optionally a small 2–3 tick expand for the
+  initial fire spread.
+- **Sonic → optional mild expand** (a visible ripple) — flavor only, low priority.
+- **Demolition / Concussion / all blasts / kinetic / beams → INSTANT.** A real explosion, frag burst,
+  or beam is faster than a game tick; "expanding" them is a visual gimmick, not physics, and costs
+  per-weapon complexity + per-shot work for no gameplay gain. A *dramatic* big-demo expand is a
+  deliberate VISUAL choice if you want it — flag it as such, don't dress it as physics.
+
+**Caveats:** (a) the warhead does expand OR a static cloud, not both — persistent linger for gas/fire
+is best left to the spawned cloud/`GroundFire` actor while the warhead does the initial (expanding)
+burst; (b) multi-tick warheads cost more per shot — reserve them for the few weapons where the effect
+actually reads on screen; (c) `TickDamage`/`TickDelay`/`MinRadius`/`MaxRadius` are tuned per weapon
+(like the hand-tuned `^Warhead_Nuclear_Super`).
