@@ -5284,6 +5284,190 @@ DefuseKit:
 			Fighter: 10
 		UpdatesUnitStatistics: false
 
+###### Plasma: blend of Flame+Chemical + PhysicalStates {'Temperature': 50, 'Corrosion': 50} ######
+^Warhead_Plasma_Light:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Plasma_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 2000
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			HAZMAT: 50
+			Shield: 110
+			None: 79
+			Flak: 79
+			Plate: 79
+			Heroic: 79
+			Scout: 55
+			Light: 58
+			Medium: 61
+			Heavy: 64
+			Superheavy: 67
+			Wood: 64
+			Steel: 61
+			Concrete: 58
+			Fighter: 19
+			Bomber: 19
+			Helicopter: 19
+			Spaceship: 19
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 50
+			Corrosion: 50
+	Warhead@Plasma_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			None: 12
+			Flak: 12
+			Plate: 12
+			Heroic: 12
+			Scout: 8
+			Light: 9
+			Medium: 9
+			Heavy: 10
+			Superheavy: 10
+			Wood: 10
+			Steel: 9
+			Concrete: 9
+			Fighter: 2
+			Bomber: 2
+			Helicopter: 2
+			Spaceship: 2
+		UpdatesUnitStatistics: false
+
+^Warhead_Plasma_Medium:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Plasma_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 600
+		Damage: 2000
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			HAZMAT: 50
+			Shield: 125
+			None: 82
+			Flak: 82
+			Plate: 82
+			Heroic: 82
+			Scout: 62
+			Light: 65
+			Medium: 67
+			Heavy: 70
+			Superheavy: 72
+			Wood: 70
+			Steel: 67
+			Concrete: 65
+			Fighter: 32
+			Bomber: 32
+			Helicopter: 32
+			Spaceship: 32
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 50
+			Corrosion: 50
+	Warhead@Plasma_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 1
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			Shield: 25
+			None: 16
+			Flak: 16
+			Plate: 16
+			Heroic: 16
+			Scout: 12
+			Light: 13
+			Medium: 13
+			Heavy: 14
+			Superheavy: 14
+			Wood: 14
+			Steel: 13
+			Concrete: 13
+			Fighter: 6
+			Bomber: 6
+			Helicopter: 6
+			Spaceship: 6
+		UpdatesUnitStatistics: false
+
+^Warhead_Plasma_Heavy:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Plasma_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 800
+		Damage: 2000
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			HAZMAT: 50
+			Shield: 140
+			None: 86
+			Flak: 86
+			Plate: 86
+			Heroic: 86
+			Scout: 70
+			Light: 72
+			Medium: 74
+			Heavy: 76
+			Superheavy: 78
+			Wood: 76
+			Steel: 74
+			Concrete: 72
+			Fighter: 46
+			Bomber: 46
+			Helicopter: 46
+			Spaceship: 46
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 50
+			Corrosion: 50
+	Warhead@Plasma_Heavy_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 1
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			None: 21
+			Flak: 21
+			Plate: 21
+			Heroic: 21
+			Scout: 17
+			Light: 18
+			Medium: 18
+			Heavy: 19
+			Superheavy: 19
+			Wood: 19
+			Steel: 18
+			Concrete: 18
+			Fighter: 11
+			Bomber: 11
+			Helicopter: 11
+			Spaceship: 11
+		UpdatesUnitStatistics: false
+
 ###### Melee: INF > VEH > BLD > AIR (light, air=False) ######
 ^Warhead_Melee_Light:
 	ValidTargets: Ground

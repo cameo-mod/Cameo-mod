@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using OpenRA.Effects;
@@ -71,6 +72,10 @@ namespace OpenRA.Mods.Cameo.Warheads
 			"-100 = full cold, 50 = half. 0 disables. Put on the main + _Percentage warheads, NOT the",
 			"_ExtraDamage chip, so the chip is excluded and the %-twin also feeds the meter.")]
 		public readonly int PhysicalStateScale = 0;
+
+		[Desc("Multiple PhysicalState changes on one warhead, {StateName: Scale%}, applied IN ADDITION to",
+			"the single PhysicalStateName/Scale above. For a blend, e.g. Plasma: Temperature: 50, Corrosion: 50.")]
+		public readonly Dictionary<string, int> PhysicalStates = new();
 
 		[Desc("Relative damage weight per tick. Length must equal Ticks (omit for an even split).",
 			"Weights are NORMALISED so the total across all ticks always equals the authored Damage,",
@@ -226,15 +231,24 @@ namespace OpenRA.Mods.Cameo.Warheads
 		// final effective damage (armor + falloff already baked into `damage`).
 		protected void ApplyPhysicalState(Actor victim, Actor firedBy, int damage)
 		{
-			if (string.IsNullOrEmpty(PhysicalStateName) || PhysicalStateScale == 0 || damage == 0)
+			if (damage == 0)
 				return;
 
-			var change = damage * PhysicalStateScale / 100;
+			if (!string.IsNullOrEmpty(PhysicalStateName) && PhysicalStateScale != 0)
+				ApplyOneState(victim, firedBy, PhysicalStateName, damage * PhysicalStateScale / 100);
+
+			foreach (var kv in PhysicalStates)
+				if (kv.Value != 0)
+					ApplyOneState(victim, firedBy, kv.Key, damage * kv.Value / 100);
+		}
+
+		static void ApplyOneState(Actor victim, Actor firedBy, string name, int change)
+		{
 			if (change == 0)
 				return;
 
 			var physicalState = victim.TraitsImplementing<PhysicalState>()
-				.FirstOrDefault(ps => ps.Name == PhysicalStateName);
+				.FirstOrDefault(ps => ps.Name == name);
 			physicalState?.ApplyChange(change, firedBy, true);
 		}
 

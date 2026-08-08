@@ -194,7 +194,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
            falloffs=("100, 50, 33, 25, 20", "100, 50, 30, 18, 10",
                      "100, 50, 25, 10, 5", "100, 50, 20, 8, 3"),
            damage_types="Prone75Percent, TriggerProne, ExplosionDeath",
-           hazmat=50, reload=25, rng=5120):
+           hazmat=50, reload=25, rng=5120, versus_override=None, physical_states=None):
     """mode: None = sloped (from order16); 'flat' = Sonic (uniform flat, small %);
     'pct' = Magic (tiny uniform flat + LARGE uniform % of max HP).
     Every main warhead is AreaDamage with baked UNIVERSAL friendly fire
@@ -206,7 +206,10 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
     for level in levels:
         li = list(LEVELS).index(level)
         pct_damage = damage // 2000              # 1% chip per 2000 main flat damage
-        if mode == "flat":                       # Sonic: ignores armor on FLAT
+        if versus_override is not None:          # blend family (e.g. Plasma = avg of Flame + Chemical)
+            main, pct = versus_override(level)
+            hz = hazmat
+        elif mode == "flat":                       # Sonic: ignores armor on FLAT
             fv, fp = FLAT_VALUES[level], FLAT_PCT[level]
             main = [("Shield", fv)] + [(a, fv) for a in allr]
             pct = [("Shield", fp)] + [(a, fp) for a in allr]
@@ -244,6 +247,9 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         if name in FAMILY_PHYSICAL_STATE:  # heat/cold/corrosion meter, scaled by main damage
             psn, pss = FAMILY_PHYSICAL_STATE[name]
             main_wh += [f"\t\tPhysicalStateName: {psn}", f"\t\tPhysicalStateScale: {pss}"]
+        if physical_states:  # multi-state blend (e.g. Plasma: Temperature 50 + Corrosion 50)
+            main_wh.append("\t\tPhysicalStates:")
+            main_wh += [f"\t\t\t{k}: {v}" for k, v in physical_states.items()]
         pct_wh = [f"\tWarhead@{tag}_Percentage: HealthPercentageDamage",
              f"\t\tValidTargets: {vt}",
              f"\t\tSpread: {main_spread // 2}",
@@ -319,6 +325,38 @@ def emit_inherit_family(name, parent, psn, pss, levels):
     return "\n\n".join(blocks)
 
 
+# Blend families: a NEW family whose Versus is the per-armor AVERAGE of parent families, plus a
+# multi-state. Plasma = Flame x Chemical Versus + Temperature 50 + Corrosion 50 ("as close as possible
+# to the flame + chemical combo"). {name: (parents, {StateName: Scale}, levels)}.
+BLEND_FAMILIES = {
+    "Plasma": (["Flame", "Chemical"], {"Temperature": 50, "Corrosion": 50}, L3),
+}
+# Fixed emission order for a blend (it has no single light/heavy direction).
+BLEND_ARMOR_ORDER = ["None", "Flak", "Plate", "Heroic", "Scout", "Light", "Medium", "Heavy",
+                     "Superheavy", "Wood", "Steel", "Concrete", "Fighter", "Bomber", "Helicopter", "Spaceship"]
+
+
+def _family_main_pct(pname, level):
+    """(main_dict, pct_dict) armor -> value for a standard family at a level (incl Shield)."""
+    bl, d, air, lv = WEAPONS[pname]
+    order = build_order(bl, d)
+    step, mfloor, ptop = LEVELS[level]
+    pfloor = ptop - 15
+    return (dict(table(order, step, 100, mfloor, 100 + mfloor)),
+            dict(table(order, 1, ptop, pfloor, ptop + pfloor)))
+
+
+def blend_versus(parents):
+    """-> function(level) -> (main_rows, pct_rows) averaging the parents' Versus per armor."""
+    def fn(level):
+        mains, pcts = zip(*(_family_main_pct(p, level) for p in parents))
+        n = len(parents)
+        keys = ["Shield"] + BLEND_ARMOR_ORDER
+        return ([(a, sum(m[a] for m in mains) // n) for a in keys],
+                [(a, sum(p[a] for p in pcts) // n) for a in keys])
+    return fn
+
+
 if __name__ == "__main__":
     argv = sys.argv[1:]
     if "--list" in argv:
@@ -349,6 +387,11 @@ if __name__ == "__main__":
             continue
         for level in lv:
             print(f"#   ^Warhead_{nm}_{level}: {WC[level]}  (inherits {parent})")
+    for nm, (parents, states, lv) in BLEND_FAMILIES.items():
+        if wanted and nm.lower() not in wanted:
+            continue
+        for level in lv:
+            print(f"#   ^Warhead_{nm}_{level}: {WC[level]}  (blend of {'+'.join(parents)})")
     print()
     for nm, (bl, d, air, lv) in WEAPONS.items():
         if wanted and nm.lower() not in wanted:
@@ -371,4 +414,11 @@ if __name__ == "__main__":
             continue
         print(f"###### {nm}: inherits {parent} + PhysicalState {psn} {pss} ######")
         print(emit_inherit_family(nm, parent, psn, pss, lv))
+        print()
+    for nm, (parents, states, lv) in BLEND_FAMILIES.items():
+        if wanted and nm.lower() not in wanted:
+            continue
+        vt = valid_targets(False)  # plasma is a ground weapon (like flame/chem)
+        print(f"###### {nm}: blend of {'+'.join(parents)} + PhysicalStates {states} ######")
+        print(family(nm, None, vt, lv, versus_override=blend_versus(parents), physical_states=states))
         print()
