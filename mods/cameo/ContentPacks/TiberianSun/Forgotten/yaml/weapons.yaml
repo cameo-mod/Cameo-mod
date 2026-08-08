@@ -1436,8 +1436,9 @@ MutHFlamerChem:
 		InvalidTargets: Water
 
 TSFiendShard:
-	Inherits: ^LightChemicalWeapon
-	Inherits@2: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Chem_Light
+	Inherits@fx: ^Effect_Chem_Light
 	ReloadDelay: 36
 	Burst: 3
 	BurstDelays: 2
@@ -1449,17 +1450,9 @@ TSFiendShard:
 		RangeLimit: 33333
 		Image: ra2txgasg
 		TrailImage: green_smokey
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Light:
 		Damage: 6000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 3
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 6000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@3Eff: CreateEffect
 		Explosions: sczhsplash
@@ -1643,23 +1636,15 @@ TSSmoke:
 	Inherits: ^ToxicWeapon
 
 TSChemspray:
-	Inherits: ^LightChemicalWeapon
-	Inherits@2: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Chem_Light
+	Inherits@fx: ^Effect_Chem_Light
 	ReloadDelay: 55
 	Range: 3183
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Light:
 		Damage: 32000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 16000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 16
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 32000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 16000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 16
-
 TSChemsprayUP:
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^MediumChemicalWeapon
@@ -1696,23 +1681,15 @@ TSChemsprayUP:
 		InvalidTargets: Water
 
 TSVisceroidSpray:
-	Inherits: ^LightChemicalWeapon
-	Inherits@2: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Chem_Light
+	Inherits@fx: ^Effect_Chem_Light
 	ReloadDelay: 25
 	Range: 1618
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Light:
 		Damage: 10000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 10000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 5
-
 TSVisceroidSprayUP:
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^MediumChemicalWeapon
@@ -2065,8 +2042,9 @@ TSGhostGun:
 		Damage: 10
 
 TSChemGhostGun:
-	Inherits: ^LightChemicalWeapon
-	Inherits@2: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Chem_Light
+	Inherits@fx: ^Effect_Chem_Light
 	ReloadDelay: 25
 	Range: 9557
 	Report: silencer.aud
@@ -2083,19 +2061,10 @@ TSChemGhostGun:
 		Width: 100
 		Speed: 10000
 		Inaccuracy: 0
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Light:
 		Damage: 20000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 10000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 5
-
 MutAPRifle:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light

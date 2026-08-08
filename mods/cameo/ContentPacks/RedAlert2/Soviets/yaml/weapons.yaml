@@ -285,25 +285,18 @@ RA160mm:
 		Damage: 30
 
 RA160mm_rad:
-	Inherits: ^LightChemicalWeapon
-	Inherits@2: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Chem_Light
+	Inherits@fx: ^Effect_Chem_Light
 	Inherits@3: RA160mm
 	Inherits@rad: ^RA2RadShell
 	Projectile: Bullet
 		ContrailStartColor: 88BB66
 		TrailImage: green_smokey
 		TrailPalette: effect
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Light:
 		Damage: 36000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 18000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 18
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 36000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 18000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
 		Damage: 18
 	Warhead@Concussion_Medium:
 		Damage: 36000

@@ -857,33 +857,8 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "36000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "18000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "18",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "36000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "18000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "18",
-        "tag": "MediumChemicalWeaponPercentage",
+        "tag": "Chemical_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -898,7 +873,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "2222",
       "pricing": true,
       "range": "11111",
@@ -906,17 +881,19 @@
       "requires": "!rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed",
       "slot": "Armament@DeployedRad",
       "versus_templates": [
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light",
        "RA160mm",
        "^RA2RadShell"
       ],
       "warheads": [
+       "^Warhead_Chemical_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mm_rad",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "deployed",
@@ -1026,33 +1003,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "36000",
-        "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "18000",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "18",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "36000",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "18000",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "18",
-        "tag": "MediumChemicalWeaponPercentage",
+        "tag": "Chemical_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -1082,6 +1034,7 @@
       ],
       "warheads": [
        "^Warhead_Nuclear_Super",
+       "^Warhead_Chemical_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
