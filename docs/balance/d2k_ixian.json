@@ -2675,34 +2675,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2711,17 +2686,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6502",
       "reloaddelay": "64",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Grenade",
-       "^RailgunWeapon",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light",
        "^D2K_Cannon"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "D2K_Rocket_Trooper2",
@@ -2771,34 +2748,9 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2807,17 +2759,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "6502",
       "reloaddelay": "64",
       "slot": "Armament@SECONDARYgarrisoned",
       "versus_templates": [
-       "^Grenade",
-       "^RailgunWeapon",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light",
        "^D2K_Cannon"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "D2K_Rocket_Trooper2",

@@ -252,8 +252,9 @@ D2K_Bazooka2:
 
 	MinRange: 1280
 D2K_Rocket_Trooper2:
-	Inherits: ^Grenade
-	Inherits@2: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Light
 	Inherits@3: ^D2K_Cannon
 	ReloadDelay: 64
 	Range: 6502
@@ -269,19 +270,10 @@ D2K_Rocket_Trooper2:
 		TrailImage: bazooka_trail2
 		TrailPalette: effect75alpha
 		TrailInterval: 1
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@CannonHE_Medium:
