@@ -1013,9 +1013,9 @@ ZeroFighterArrows:
 	ReloadDelay: 110
 	Burst: 2
 	BurstDelays: 9
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium:
 		Damage: 18000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 9
 	Warhead@Arrow_Light:
 		Damage: 18000
@@ -1033,9 +1033,9 @@ ZeroFighterArrowsEnergized:
 		Damage: 8000
 	Warhead@Arrow_Light_Percentage: HealthPercentageDamage
 		Damage: 4
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium:
 		Damage: 8000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@MediumFlameWeapon: SpreadDamage
 		Damage: 8000
@@ -1210,11 +1210,11 @@ JHindArrowsEnergized:
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@MissileHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla

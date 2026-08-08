@@ -956,10 +956,10 @@ SandmarineTuskTwin:
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 2
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 4000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileHE_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 2
 	Warhead@MissileAP_Medium:
