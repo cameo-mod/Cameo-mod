@@ -996,6 +996,34 @@ passed the boot-gate.
   (mixed-weapon collapse), which is maintainer-directed per the
   WEAPON_3WAY_SPLIT.md runbook (§PHASE 3).
 
+### 14.28 Post-conversion bug sweep — 3 bugs found + fixed (2026-08-08, `dcda19860`)
+
+A deep review of all 2026-08-07/08 conversion commits found three
+silent bugs (no boot crash, no audit red, but corrupt gameplay). All
+fixed and boot-gated:
+
+- **Bug A** — 18 weapons had `Warhead@X: SpreadDamage` on main warheads
+  overriding the inherited `AreaDamage` from `^Warhead_*` templates,
+  blocking the baked friendly fire. Fixed via `sweep_areadamage.py
+  --apply` + 1 manual fix (TSLasergun `@wh2` pattern the sweep missed).
+- **Bug B** — 3 child weapons (`RA2RobotmmScatter_elite`,
+  `DalekCannon_elite`, `DalekCannonScatter`) kept OLD warhead keys
+  (`Warhead@TeslaWeapon`/`Warhead@LaserWeapon`) after their parents
+  were converted to the new keys, creating orphaned double-fire
+  warheads. Renamed to match the new convention.
+- **Bug C** — `Syndicate/yaml/weapons.yaml` was wiped to 0 bytes
+  during the session (cause: likely IDE/file-watcher conflict, NOT the
+  sweep tool — the tool's write logic is sound). Restored from HEAD
+  (1478 lines). **~67 lines of maintainer WIP that were in the file
+  before the wipe are unrecoverable** — maintainer flagged.
+
+Lessons recorded in `docs/LESSONS_LEARNED.md` § "3-way split retrofits:
+two recurring child-weapon bugs (2026-08-08)". The retrofit tool only
+edits the converted weapon itself, not its children — future
+conversions MUST include a post-conversion sweep: (1)
+`sweep_areadamage.py --apply` for bug A; (2) grep every child of every
+converted parent for old warhead keys for bug B.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
