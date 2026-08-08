@@ -334,8 +334,11 @@ NaxHaenebuQuadCannon_elite:
 		Inaccuracy: 777
 
 DalekCannon:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^LaserWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@wh2: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Inherits@EMP: ^EMPDamage
 	Inherits@3: ^RA2RailgunWeapon
 	ReloadDelay: 76
 	Range: 8060
@@ -344,22 +347,22 @@ DalekCannon:
 	Projectile: Railgun
 		BeamColor: 00EEFF88
 		BeamWidth: 128
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 100000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 50000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 50
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 100000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 50
-	Warhead@Railgun_Heavy:
+	Warhead@Railgun_Heavy: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 100000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage

@@ -1536,8 +1536,11 @@ RA2TraitorPower:
 		ValidStances: Neutral, Enemy
 
 RA2Robotmm:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^LaserWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@wh2: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Inherits@EMP: ^EMPDamage
 	Inherits@3: ^RA2RailgunWeapon
 	Range: 5780
 	ReloadDelay: 48
@@ -1546,22 +1549,22 @@ RA2Robotmm:
 	Projectile: Railgun
 		BeamColor: 00EEFF88
 		Railgun: 96
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Tesla_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 4000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 4
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 4
-	Warhead@Railgun_Heavy:
+	Warhead@Railgun_Heavy: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
