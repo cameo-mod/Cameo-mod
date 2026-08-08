@@ -150,6 +150,10 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
      - **2026-08-04:** `--old TeslaWeapon,TeslaChargedWeapon,RailgunWeapon` repointed 85
        single-inherit weapons across 27 files to `^Warhead_Tesla_Heavy`, `^Warhead_TeslaCharged_Super`,
        and `^Warhead_Railgun_Heavy` (plus matching projectile/effect layers); boot-gated clean.
+     - **2026-08-08:** Sniper 3-way family built + `SniperWeapon` repointed 21 single-inherit
+       weapons across 16 files to `^Warhead_Sniper_Light`/`^Projectile_Sniper_Light`/`^Effect_Sniper_Light`;
+       sweep + boot-gated clean. Remaining 6 mixed Sniper children + all other old families are
+       Phase B (maintainer sign-off per `docs/design/WEAPON_3WAY_SPLIT.md` §PHASE 3).
    - **[FUTURE, reason later] SPREAD REBALANCE** (maintainer 2026-08-02) — spreads must be UNIQUE per weapon
      but balanced so **`Damage × Spread ≈ constant`** (inverse trade); a small spread MUST carry a unique
      extra effect (energy's +vs-shield chip is the model). Folded into the restat; do NOT hand-tune yet.
