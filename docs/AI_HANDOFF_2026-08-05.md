@@ -952,6 +952,34 @@ passed the boot-gate.
   NOT committed by this conversion — only the 3 affected files were
   scoped-added.
 
+### 14.26 `TeslaWeapon + LaserWeapon` dual conversion (`a3cab4500`)
+
+- Converted 2 weapons: `RA2Robotmm` (`weapons/redalert2mod.yaml`) and
+  `DalekCannon` (`ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml`).
+- New inherit shape per weapon:
+  ```yaml
+  Inherits@wh: ^Warhead_Tesla_Heavy
+  Inherits@wh2: ^Warhead_Laser_Heavy
+  Inherits@proj: ^Projectile_Lightning_Heavy
+  Inherits@fx: ^Effect_Tesla_Heavy
+  Inherits@EMP: ^EMPDamage
+  Inherits@3: ^RA2RailgunWeapon
+  ```
+- `TeslaWeapon` → `Tesla_Heavy`, `LaserWeapon` → `Laser_Heavy`.
+  `_Percentage` variants preserved. `Inherits@EMP: ^EMPDamage` preserved
+  from old `^TeslaWeapon` to maintain exact EMP target restrictions.
+  `^RA2RailgunWeapon` addon preserved (already split).
+  `Warhead@TeslaExtraDamage` (custom) preserved. `Warhead@Railgun_Heavy`
+  given explicit `AreaDamage` type. Local `Projectile: Railgun` settings
+  preserved verbatim.
+- Verification: `find_empty_warhead.py = 0`; `launch-game.cmd` reached
+  `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`;
+  `extract_stats.py` refreshed 32 ledgers.
+- Note: the SchwarzerMond ledger diff (334 lines) is larger than the yaml
+  diff (17 lines) because `extract_stats.py` picks up the maintainer's
+  live WIP in `weapons.yaml` (template changes affecting SchwarzerMond
+  weapons) in addition to this conversion's changes.
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
