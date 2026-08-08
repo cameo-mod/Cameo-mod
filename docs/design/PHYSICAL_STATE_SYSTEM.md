@@ -66,6 +66,10 @@ Reactions via the SAME proportional traits, gated on threshold conditions from `
 - from ~50%→100%: `ChangesHealthProportionalToPhysicalState` (DoT, higher/tick + shorter than a burn),
   `SlowsProportionalToPhysicalState`, `DamageMultiplierProportionalToPhysicalState` (+damage-taken).
 - This IS the Schwarzer Mond "corruption" effect (Korruptes Biest / Rocket Soldier) turned into a meter.
+- **Hazmat/reactive-armor reduction (maintainer 2026-08-09):** mirror the existing Temperature pattern —
+  `@Overheating` (DoT 100–150) has a reduced `@OverheatingHazmat` variant (DoT 25) gated on `hazmatsuits`.
+  Add the same for Corrosion: a `@CorrosionHazmat` variant at **half** the DoT gated on `hazmatsuits`,
+  and/or a corrosion-resistant armor type that halves it — exactly as hazmat/reactive armor halves heat.
 Then wire Chemical/Plasma to it via §1's field.
 
 ## 3. Family wiring (via §1 field, on main + _Percentage)

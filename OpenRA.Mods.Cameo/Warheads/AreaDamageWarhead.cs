@@ -63,6 +63,15 @@ namespace OpenRA.Mods.Cameo.Warheads
 		[Desc("Percentage of the tick radius within which allied actors can be hit (Cameo law: 50).")]
 		public readonly int FriendlyFireSpread = 50;
 
+		[Desc("Optional PhysicalState (e.g. Temperature, Corrosion) to change on hit, SCALED BY the damage",
+			"this warhead deals (unlike ApplyPhysicalStateWarhead's fixed Amount). Empty = off.")]
+		public readonly string PhysicalStateName = null;
+
+		[Desc("PhysicalState change = damage dealt x this percentage (signed): 100 = full heat/corrosion,",
+			"-100 = full cold, 50 = half. 0 disables. Put on the main + _Percentage warheads, NOT the",
+			"_ExtraDamage chip, so the chip is excluded and the %-twin also feeds the meter.")]
+		public readonly int PhysicalStateScale = 0;
+
 		[Desc("Relative damage weight per tick. Length must equal Ticks (omit for an even split).",
 			"Weights are NORMALISED so the total across all ticks always equals the authored Damage,",
 			"keeping the balance figure a single number. For the nuclear shockwave use a DECREASING",
@@ -201,6 +210,32 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 				InflictDamage(victim, firedBy, closestActiveShape, updatedWarheadArgs);
 			}
+		}
+
+		protected override void InflictDamage(Actor victim, Actor firedBy, HitShape shape, WarheadArgs args)
+		{
+			var damage = Util.ApplyPercentageModifiers(Damage, args.DamageModifiers.Append(DamageVersus(victim, shape, args)));
+			victim.InflictDamage(firedBy, new Damage(damage, DamageTypes, GetProjectileType(args)));
+			ApplyPhysicalState(victim, firedBy, damage);
+		}
+
+		// Scale a named PhysicalState by the damage just dealt (heat / cold / corrosion meters). Shared
+		// with the _Percentage subclass so both the flat main and the %HP twin feed the meter; the
+		// separate _ExtraDamage chip warhead never calls this, so it is excluded (maintainer rule).
+		// ApplyChange(..., true) lets the TARGET apply its own damage modifiers, so the meter tracks the
+		// final effective damage (armor + falloff already baked into `damage`).
+		protected void ApplyPhysicalState(Actor victim, Actor firedBy, int damage)
+		{
+			if (string.IsNullOrEmpty(PhysicalStateName) || PhysicalStateScale == 0 || damage == 0)
+				return;
+
+			var change = damage * PhysicalStateScale / 100;
+			if (change == 0)
+				return;
+
+			var physicalState = victim.TraitsImplementing<PhysicalState>()
+				.FirstOrDefault(ps => ps.Name == PhysicalStateName);
+			physicalState?.ApplyChange(change, firedBy, true);
 		}
 
 		int GetDamageFalloff(int distance)
