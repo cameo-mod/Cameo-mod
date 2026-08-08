@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 390
+Total concrete weapons on old families: 371
 Single old-family with new inherits (Phase B completion): 1
 Pure single old-family (mechanical Phase A candidates): 21
-Mixed old-family (Phase B maintainer sign-off): 368 in 253 groups
+Mixed old-family (Phase B maintainer sign-off): 349 in 247 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `AsianChemicalBombs` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | old: HeavyChemicalWeapon | HeavyChemicalWeapon=2000, HeavyChemicalWeaponFriendlyFire=1000, HeavyChemicalWeaponPercentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, Effect=0, Cloud=0
@@ -681,13 +681,6 @@ Mixed old-family (Phase B maintainer sign-off): 368 in 253 groups
 ### MediumMissile, RailgunWeapon, TankDestroyerCannon (1 weapons)
 - `wc2_dwarf_Rifle` (ContentPacks\Warcraft2\Humans\yaml\weapons.yaml) | dominant: RailgunWeapon(8000) | RailgunWeapon=8000, RailgunWeaponPercentage=4, MediumMissile=8000, MediumMissilePercentage=4, TankDestroyerCannon=8000, TankDestroyerCannonPercentage=4, Effect=0 | → collapse to RailgunWeapon
 
-### LightChemicalWeapon, MediumChemicalWeapon (5 weapons)
-- `RA160mm_rad` (ContentPacks\RedAlert2\Soviets\yaml\weapons.yaml) | dominant: LightChemicalWeapon(36000) | LightChemicalWeapon=36000, LightChemicalWeaponFriendlyFire=18000, LightChemicalWeaponPercentage=18, MediumChemicalWeapon=36000, MediumChemicalWeaponFriendlyFire=18000, MediumChemicalWeaponPercentage=18, Concussion_Medium=36000, Concussion_Medium_Percentage=18, Demolition_Light=36000, Demolition_Light_Percentage=18 | → collapse to LightChemicalWeapon
-- `TSChemGhostGun` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: LightChemicalWeapon(20000) | LightChemicalWeapon=20000, LightChemicalWeaponFriendlyFire=10000, LightChemicalWeaponPercentage=10, MediumChemicalWeapon=10000, MediumChemicalWeaponFriendlyFire=5000, MediumChemicalWeaponPercentage=5 | → collapse to LightChemicalWeapon
-- `TSChemspray` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: LightChemicalWeapon(32000) | LightChemicalWeapon=32000, LightChemicalWeaponFriendlyFire=16000, LightChemicalWeaponPercentage=16, MediumChemicalWeapon=32000, MediumChemicalWeaponFriendlyFire=16000, MediumChemicalWeaponPercentage=16 | → collapse to LightChemicalWeapon
-- `TSFiendShard` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: LightChemicalWeapon(6000) | LightChemicalWeapon=6000, LightChemicalWeaponFriendlyFire=3000, LightChemicalWeaponPercentage=3, MediumChemicalWeapon=6000, MediumChemicalWeaponFriendlyFire=3000, MediumChemicalWeaponPercentage=3, 3Eff=0 | → collapse to LightChemicalWeapon
-- `TSVisceroidSpray` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: LightChemicalWeapon(10000) | LightChemicalWeapon=10000, LightChemicalWeaponFriendlyFire=5000, LightChemicalWeaponPercentage=5, MediumChemicalWeapon=10000, MediumChemicalWeaponFriendlyFire=5000, MediumChemicalWeaponPercentage=5 | → collapse to LightChemicalWeapon
-
 ### LightChemicalWeapon, TankDestroyerCannon (5 weapons)
 - `CabalDissolverSpray` (ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml) | dominant: LightChemicalWeapon(2000) | LightChemicalWeapon=2000, LightChemicalWeaponPercentage=1, LightChemicalWeaponFriendlyFire=1000, TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, corroded=0, Effect=0 | → collapse to LightChemicalWeapon
 - `TS70mmTurChem` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: CannonHE_Medium(4000) | CannonHE_Medium=4000, CannonHE_Medium_Percentage=2, TankDestroyerCannon=4000, TankDestroyerCannonPercentage=2, LightChemicalWeapon=4000, LightChemicalWeaponFriendlyFire=2000, LightChemicalWeaponPercentage=2, Cloud=0 | → collapse to CannonHE_Medium
@@ -708,30 +701,15 @@ Mixed old-family (Phase B maintainer sign-off): 368 in 253 groups
 - `HarakanF` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | dominant: HeavyFlameWeapon(2000) | HeavyFlameWeapon=2000, HeavyFlameWeaponFriendlyFire=1000, HeavyFlameWeaponPercentage=1, MediumFlameWeapon=2000, MediumFlameWeaponFriendlyFire=1000, MediumFlameWeaponPercentage=1, PhysicalStateMediumFlameWeapon=0, PhysicalStateMediumFlameWeaponFriendlyFire=0, PhysicalStateHeavyFlameWeapon=0, PhysicalStateHeavyFlameWeaponFriendlyFire=0 | → collapse to HeavyFlameWeapon
 - `MutHFlamer` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: MediumFlameWeapon(20000) | MediumFlameWeapon=20000, MediumFlameWeaponFriendlyFire=10000, MediumFlameWeaponPercentage=10, PhysicalStateMediumFlameWeapon=0, PhysicalStateMediumFlameWeaponFriendlyFire=0, HeavyFlameWeapon=20000, HeavyFlameWeaponFriendlyFire=10000, HeavyFlameWeaponPercentage=10, PhysicalStateHeavyFlameWeapon=0, PhysicalStateHeavyFlameWeaponFriendlyFire=0 | → collapse to MediumFlameWeapon
 
-### Chaingun, LightFlameWeapon (3 weapons)
-- `IncendiaryChainGun` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: LightFlameWeapon(2000) | LightFlameWeapon=2000, LightFlameWeaponFriendlyFire=1000, LightFlameWeaponPercentage=1, Chaingun=2000, ChaingunPercentage=1 | → collapse to LightFlameWeapon
-- `IncendiaryRAGatlingTankCannon` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: LightFlameWeapon(2000) | LightFlameWeapon=2000, LightFlameWeaponFriendlyFire=1000, LightFlameWeaponPercentage=1, Chaingun=2000, ChaingunPercentage=1 | → collapse to LightFlameWeapon
-- `IncendiaryYakChainGun` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: LightFlameWeapon(4000) | LightFlameWeapon=4000, LightFlameWeaponFriendlyFire=2000, LightFlameWeaponPercentage=2, Chaingun=4000, ChaingunPercentage=2 | → collapse to LightFlameWeapon
-
 ### Chaingun, SniperWeapon (3 weapons)
 - `CommandoM16` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: SniperWeapon(4000) | SniperWeapon=4000, SniperWeaponExtraDamage=4000, SniperWeaponPercentage=2, Chaingun=4000, ChaingunPercentage=2 | → collapse to SniperWeapon
 - `CommandoSniper` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: SniperWeapon(20000) | SniperWeapon=20000, SniperWeaponExtraDamage=20000, SniperWeaponPercentage=10, Chaingun=20000, ChaingunPercentage=10, Effect=0 | → collapse to SniperWeapon
 - `RA2FreedomAK47` (ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml) | dominant: CannonHE_Heavy(6000) | CannonHE_Heavy=6000, CannonHE_Heavy_Percentage=3, Chaingun=6000, ChaingunPercentage=3, SniperWeapon=6000, SniperWeaponExtraDamage=6000, SniperWeaponPercentage=3, Effect=0, Effect1=0 | → collapse to CannonHE_Heavy
 
-### FlakWeapon, TankDestroyerCannon (3 weapons)
-- `LatinBuggyChaingun` (ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml) | dominant: TankDestroyerCannon(2000) | TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, Bullet_Light=2000, Bullet_Light_Percentage=1, Bullet_Medium=2000, Bullet_Medium_Percentage=1 | → collapse to TankDestroyerCannon
-- `YakovlevCannon` (ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml) | dominant: TankDestroyerCannon(2000) | TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, CannonHE_Heavy=2000, CannonHE_Heavy_Percentage=1, Bullet_Medium=2000, Bullet_Medium_Percentage=1 | → collapse to TankDestroyerCannon
-- `YakovlevCannon_elite` (ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml) | dominant: TankDestroyerCannon(2000) | TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, CannonHE_Heavy=2000, CannonHE_Heavy_Percentage=1, Bullet_Medium=2000, Bullet_Medium_Percentage=1 | → collapse to TankDestroyerCannon
-
 ### Grenade, MediumFlameWeapon (3 weapons)
 - `AsianPhoenixRocket` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | dominant: MediumFlameWeapon(20000) | MediumFlameWeapon=20000, MediumFlameWeaponFriendlyFire=10000, MediumFlameWeaponPercentage=10, Grenade=20000, GrenadeFriendlyFire=10000, GrenadePercentage=10, MissileAP_Heavy=20000, MissileAP_Heavy_Percentage=10, Effect=0 | → collapse to MediumFlameWeapon
 - `RA2Comet` (ContentPacks\RedAlert2\Allies\yaml\weapons.yaml) | dominant: Grenade(20000) | Grenade=20000, GrenadeFriendlyFire=10000, GrenadePercentage=10, MediumFlameWeapon=20000, MediumFlameWeaponFriendlyFire=10000, MediumFlameWeaponPercentage=10, Laser_Heavy=20000, Laser_Heavy_Percentage=10, 3=0 | → collapse to Grenade
 - `mtank_pri2` (ContentPacks\D2k\Ixian\yaml\weapons.yaml) | dominant: Grenade(8000) | Grenade=8000, GrenadeFriendlyFire=4000, GrenadePercentage=4, MediumFlameWeapon=8000, MediumFlameWeaponFriendlyFire=4000, MediumFlameWeaponPercentage=4, MissileAP_Heavy=8000, MissileAP_Heavy_Percentage=4, Effect=0 | → collapse to Grenade
-
-### HeavyBomb, HeavyChemicalWeapon (3 weapons)
-- `TS120mmxChem` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: HeavyBomb(40000) | HeavyBomb=40000, HeavyBombPercentage=20, HeavyChemicalWeapon=40000, HeavyChemicalWeaponFriendlyFire=20000, HeavyChemicalWeaponPercentage=20, Cloud=0 | → collapse to HeavyBomb
-- `TSCropBombChem` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: HeavyBomb(120000) | HeavyBomb=120000, HeavyBombPercentage=60, HeavyChemicalWeapon=60000, HeavyChemicalWeaponFriendlyFire=30000, HeavyChemicalWeaponPercentage=30, Cloud=0, 2Eff=0, 3EffWater=0, 4Smu=0 | → collapse to HeavyBomb
-- `TSLocustBombChem` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: HeavyBomb(180000) | HeavyBomb=180000, HeavyBombPercentage=90, HeavyChemicalWeapon=90000, HeavyChemicalWeaponFriendlyFire=45000, HeavyChemicalWeaponPercentage=45, Cloud=0, 2Eff=0, 3EffWater=0, 4Smu=0 | → collapse to HeavyBomb
 
 ### HeavyChemicalWeapon, HeavyFlameWeapon (3 weapons)
 - `HeavyPlasmaFlamer` (ContentPacks\RedAlert\Japan\yaml\weapons.yaml) | dominant: HeavyChemicalWeapon(2000) | HeavyChemicalWeapon=2000, HeavyChemicalWeaponFriendlyFire=1000, HeavyChemicalWeaponPercentage=1, HeavyFlameWeapon=2000, HeavyFlameWeaponFriendlyFire=1000, HeavyFlameWeaponPercentage=1, PhysicalStateHeavyFlameWeapon=0, PhysicalStateHeavyFlameWeaponFriendlyFire=0, Effect=0 | → collapse to HeavyChemicalWeapon
@@ -747,11 +725,6 @@ Mixed old-family (Phase B maintainer sign-off): 368 in 253 groups
 - `RA2CosmonautLaser` (ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml) | dominant: RailgunWeapon(2000) | LightMissile=0, LightMissilePercentage=0, Bullet_Light=0, Bullet_Light_Percentage=0, FlakWeapon=0, FlakWeaponPercentage=0, Bullet_Medium=0, Bullet_Medium_Percentage=0, RailgunWeapon=2000, RailgunWeaponPercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1, Smudge=0 | → collapse to RailgunWeapon
 - `SteelAirTurret` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | dominant: LaserWeapon(24000) | LaserWeapon=24000, LaserWeaponPercentage=12, RailgunWeapon=24000, RailgunWeaponPercentage=12, Effect=0 | → collapse to LaserWeapon
 - `SteelStalkerRailgun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | dominant: LaserWeapon(60000) | LaserWeapon=60000, LaserWeaponPercentage=30, RailgunWeapon=60000, RailgunWeaponPercentage=30, Effect=0 | → collapse to LaserWeapon
-
-### LaserWeapon, SmallArms (3 weapons)
-- `CabalLegionGun` (ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml) | dominant: SmallArms(60000) | SmallArms=60000, SmallArmsPercentage=30, LaserWeapon=60000, LaserWeaponPercentage=30, Effect=0, MissileHE_Light=12000, MissileHE_Light_Percentage=6, MissileHE_Medium=12000, MissileHE_Medium_Percentage=6, Demolition_Light=12000, Demolition_Light_Percentage=6, Concussion_Medium=12000, Concussion_Medium_Percentage=6 | → collapse to SmallArms
-- `CabalMantisGun` (ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml) | dominant: SmallArms(6000) | SmallArms=6000, SmallArmsPercentage=3, LaserWeapon=6000, LaserWeaponPercentage=3, Effect=0 | → collapse to SmallArms
-- `CabalOverkillDroneLaser` (ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml) | dominant: SmallArms(4000) | SmallArms=4000, SmallArmsPercentage=2, LaserWeapon=4000, LaserWeaponPercentage=2, Effect=0 | → collapse to SmallArms
 
 ### LightFlameWeapon, MediumChemicalWeapon (3 weapons)
 - `SteelKatyCannons` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | dominant: LightFlameWeapon(10000) | LightFlameWeapon=10000, LightFlameWeaponFriendlyFire=5000, LightFlameWeaponPercentage=5, MediumChemicalWeapon=10000, MediumChemicalWeaponFriendlyFire=5000, MediumChemicalWeaponPercentage=5, CannonHE_Heavy=10000, CannonHE_Heavy_Percentage=5, Effect=0 | → collapse to LightFlameWeapon
@@ -771,10 +744,6 @@ Mixed old-family (Phase B maintainer sign-off): 368 in 253 groups
 ### Grenade, MediumChemicalWeapon (2 weapons)
 - `FutureMechPlasma` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | dominant: Grenade(10000) | Grenade=10000, GrenadeFriendlyFire=5000, GrenadePercentage=5, MediumChemicalWeapon=10000, MediumChemicalWeaponFriendlyFire=5000, MediumChemicalWeaponPercentage=5, CannonHE_Heavy=10000, CannonHE_Heavy_Percentage=5, Effect=0 | → collapse to Grenade
 - `VolkovMagneticWeapon` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: CannonHE_Heavy(10000) | CannonHE_Heavy=10000, CannonHE_Heavy_Percentage=5, MediumChemicalWeapon=10000, MediumChemicalWeaponFriendlyFire=5000, MediumChemicalWeaponPercentage=5, Grenade=10000, GrenadeFriendlyFire=5000, GrenadePercentage=5, Effect=0 | → collapse to CannonHE_Heavy
-
-### Grenade, RailgunWeapon (2 weapons)
-- `D2K_Rocket_Trooper2` (ContentPacks\D2k\Ixian\yaml\weapons.yaml) | dominant: Grenade(8000) | Grenade=8000, GrenadeFriendlyFire=4000, GrenadePercentage=4, RailgunWeapon=8000, RailgunWeaponPercentage=4, CannonHE_Medium=8000, CannonHE_Medium_Percentage=4 | → collapse to Grenade
-- `D2K_Rocket_Trooper_AGOnly` (ContentPacks\D2k\Ordos\yaml\weapons.yaml) | dominant: Grenade(10000) | Grenade=10000, GrenadeFriendlyFire=5000, GrenadePercentage=5, RailgunWeapon=10000, RailgunWeaponPercentage=5, CannonHE_Medium=10000, CannonHE_Medium_Percentage=5 | → collapse to Grenade
 
 ### HeavyBomb, HeavyFlameWeapon (2 weapons)
 - `ra120mm2Thermobaric` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: HeavyFlameWeapon(16000) | HeavyFlameWeapon=16000, HeavyFlameWeaponFriendlyFire=8000, HeavyFlameWeaponPercentage=8, HeavyBomb=16000, HeavyBombPercentage=8, CannonHE_Heavy=16000, CannonHE_Heavy_Percentage=8 | → collapse to HeavyFlameWeapon
