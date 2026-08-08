@@ -3503,12 +3503,12 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "tag": "HeavyBomb",
+        "tag": "Demolition_Heavy",
         "type": "SpreadDamage"
        },
        {
         "damage": "4",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -3523,23 +3523,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "24000",
       "reloaddelay": "500",
       "slot": "Armament@ARTILLERY",
       "versus_templates": [
-       "^HeavyBomb",
+       "^Warhead_Demolition_Heavy",
+       "^Effect_Demolition_Heavy",
        "^RA2Grenade",
        "^RA2MediumMissile",
        "^RA2RadShell"
       ],
       "warheads": [
+       "^Warhead_Demolition_Heavy",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2AkulaRockets",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

@@ -8876,12 +8876,12 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "tag": "HeavyBomb",
+        "tag": "Demolition_Heavy",
         "type": "SpreadDamage"
        },
        {
         "damage": "4",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -8896,22 +8896,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "250",
       "slot": "Armament@scud",
       "versus_templates": [
-       "^HeavyBomb",
+       "^Warhead_Demolition_Heavy",
+       "^Effect_Demolition_Heavy",
        "^RA2Grenade",
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_Demolition_Heavy",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxShoeRocket",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -8963,13 +8965,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "30000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "14",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -8984,23 +8981,25 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "2800",
       "pricing": true,
       "range": "14000",
       "reloaddelay": "140",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^HeavyBomb",
+       "^Warhead_Demolition_Heavy",
+       "^Effect_Demolition_Heavy",
        "^RA2MediumCannon",
        "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxSturmArty",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

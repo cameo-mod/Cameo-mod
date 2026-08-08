@@ -2109,13 +2109,8 @@
      {
       "damage_warheads": [
        {
-        "damage": "30000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "14",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2130,7 +2125,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "2800",
       "pricing": true,
       "range": "14000",
@@ -2138,16 +2133,18 @@
       "requires": "!schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^HeavyBomb",
+       "^Warhead_Demolition_Heavy",
+       "^Effect_Demolition_Heavy",
        "^RA2MediumCannon",
        "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxSturmArty",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -2157,13 +2154,8 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "30000",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "14",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -2194,6 +2186,7 @@
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
+       "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Medium",
        "^Warhead_Demolition_Light"
       ],

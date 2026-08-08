@@ -718,7 +718,8 @@ NaxiMP40:
 		Damage: 1
 
 NaxSturmArty:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@2: ^RA2MediumCannon
 	Inherits@3: ^RA2Grenade
 	ReloadDelay: 140
@@ -735,15 +736,15 @@ NaxSturmArty:
 		ContrailEndColor: 88442222
 		TrailImage: black_smokey
 		TrailPalette: effect75alpha
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 30000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Damage: 14
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 30000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 14
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 20000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 14

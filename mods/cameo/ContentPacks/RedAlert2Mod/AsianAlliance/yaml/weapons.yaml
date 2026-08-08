@@ -1839,24 +1839,25 @@ TsunamiCarrierTarget:
 	Warhead@1Dam: TargetDamage
 
 AsianSubmarineBomb:
-	Inherits: ^HeavyBomb
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@2: ^RA2Grenade
 	Range: 2500
 	ReloadDelay: 100
 	Projectile: InstantExplode
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: SpreadDamage
 		Spread: 2500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 50000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Spread: 2500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 25
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Spread: 2500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 50000
