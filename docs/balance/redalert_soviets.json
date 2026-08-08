@@ -66,33 +66,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1290",
       "pricing": true,
       "range": "6460",
@@ -102,9 +82,11 @@
       "versus_templates": [
        "IncendiaryYakChainGun"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryArmoredYakChainGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -112,33 +94,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1290",
       "pricing": true,
       "range": "6460",
@@ -148,9 +110,11 @@
       "versus_templates": [
        "IncendiaryYakChainGun"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryArmoredYakChainGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -820,91 +784,57 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
-       "^Chaingun",
-       "^LightFlameWeapon",
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryChainGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "^Chaingun",
-       "^LightFlameWeapon",
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryChainGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1524,91 +1454,57 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
-       "^Chaingun",
-       "^LightFlameWeapon",
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryChainGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "^Chaingun",
-       "^LightFlameWeapon",
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryChainGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2113,33 +2009,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2147,13 +2023,16 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
-       "^Chaingun",
-       "^LightFlameWeapon",
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -2161,33 +2040,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2195,13 +2054,16 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "^Chaingun",
-       "^LightFlameWeapon",
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2400,33 +2262,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2434,46 +2276,29 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
-       "^Chaingun",
-       "^LightFlameWeapon",
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2481,13 +2306,16 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "^Chaingun",
-       "^LightFlameWeapon",
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2880,33 +2708,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2914,13 +2722,16 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
-       "^Chaingun",
-       "^LightFlameWeapon",
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -2928,33 +2739,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2962,13 +2753,16 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "^Chaingun",
-       "^LightFlameWeapon",
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3157,33 +2951,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -3191,13 +2965,16 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
-       "^Chaingun",
-       "^LightFlameWeapon",
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -3205,33 +2982,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -3239,13 +2996,16 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "^Chaingun",
-       "^LightFlameWeapon",
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryYakChainGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9183,77 +8943,40 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "10",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@UpgradeAG",
       "versus_templates": [
-       "^Chaingun",
-       "^LightFlameWeapon",
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryRAGatlingTankCannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "LightFlameWeaponPercentage",
+        "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "10",
@@ -9262,9 +8985,11 @@
       "versus_templates": [
        "IncendiaryRAGatlingTankCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Light"
+      ],
       "weapon": "IncendiaryRAGatlingTankCannon_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
