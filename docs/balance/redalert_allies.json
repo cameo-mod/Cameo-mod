@@ -1316,73 +1316,66 @@
      {
       "damage_warheads": [
        {
-        "damage": "30000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9153",
       "reloaddelay": "100",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "LightSniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "30000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "9153",
       "reloaddelay": "100",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "LightSniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "30000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9153",
       "reloaddelay": "100",
@@ -1392,26 +1385,23 @@
        "LightSniper",
        "^CryoMissileProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "CryoLightSniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "30000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "9153",
       "reloaddelay": "100",
@@ -1421,9 +1411,11 @@
        "LightSniper",
        "^CryoMissileProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "CryoLightSniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1892,28 +1884,27 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "7777",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "7",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "Colt45",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -1921,28 +1912,27 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "7777",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "7777",
       "reloaddelay": "7",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "Colt45",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",

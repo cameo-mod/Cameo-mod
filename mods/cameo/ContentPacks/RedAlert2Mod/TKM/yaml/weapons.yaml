@@ -215,18 +215,22 @@ tkmkord:
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 tkmawp:
-	Inherits: ^SniperWeapon
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
 	ReloadDelay: 55
 	Range: 10021
 	Report: isniatta.wav
-	Warhead@SniperWeapon: SpreadDamage
+	Warhead@Sniper_Light:
 		Damage: 44000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 44000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
 		Damage: 22
 tkmsmg:
-	Inherits: ^SniperWeapon
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
 	Report: iseaatta.wav, iseaattb.wav
 	ReloadDelay: 10
 	Range: 5750
@@ -239,11 +243,11 @@ tkmsmg:
 		ContrailEndWidth: 77
 		ContrailLength: 7
 		ContrailEndColorUsePlayerColor: false
-	Warhead@SniperWeapon: SpreadDamage
+	Warhead@Sniper_Light:
 		Damage: 2000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 2000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 tkmtechmg:
 	Inherits: ^RA2Chaingun
@@ -1298,15 +1302,17 @@ tkmstrykerfirerockets:
 		ValidTargets: Ground, Water, Air
 
 VanSniper:
-	Inherits: ^SniperWeapon
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
 	ReloadDelay: 30
 	Range: 12402
 	Report: isniatta.wav
-	Warhead@SniperWeapon: SpreadDamage
+	Warhead@Sniper_Light:
 		Damage: 80000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 80000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
 		Damage: 40
 
 tkmt72cannon:

@@ -419,17 +419,19 @@ SCTyrAA:
 		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 
 ReaperPistols:
-	Inherits: ^SniperWeapon
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
 	ValidTargets: Infantry, Vehicle, Ship, Monster, Garrisoned
 	ReloadDelay: 22
 	Range: 4375
-	Warhead@SniperWeapon: SpreadDamage
+	Warhead@Sniper_Light:
 		ValidTargets: Infantry, Vehicle, Ship, Monster, Garrisoned
 		Damage: 4000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		ValidTargets: Infantry, Vehicle, Ship, Monster, Garrisoned
 		Damage: 4000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Infantry, Vehicle, Ship, Monster, Garrisoned
 		Damage: 2
 

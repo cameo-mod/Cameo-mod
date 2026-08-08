@@ -2026,15 +2026,17 @@ TSNomadGun:
 		ValidTargets: Ground, Water
 
 TSSniper:
-	Inherits: ^SniperWeapon
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
 	ReloadDelay: 25
 	Range: 9557
 	Report: silencer.aud
-	Warhead@SniperWeapon: SpreadDamage
+	Warhead@Sniper_Light:
 		Damage: 10000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 10000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
 		Damage: 5
 
 TSGhostGun:

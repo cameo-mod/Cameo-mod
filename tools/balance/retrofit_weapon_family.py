@@ -60,8 +60,9 @@ TRIPLE = {
     "RailgunWeapon": ("Railgun_Heavy", "Projectile_Railgun_Heavy", "Effect_Railgun_Heavy"),
     "TeslaWeapon": ("Tesla_Heavy", "Projectile_Lightning_Heavy", "Effect_Tesla_Heavy"),
     "TeslaChargedWeapon": ("TeslaCharged_Super", "Projectile_Lightning_Super", "Effect_Tesla_Super"),
+    "SniperWeapon": ("Sniper_Light", "Projectile_Sniper_Light", "Effect_Sniper_Light"),
 }
-STAY = {"SniperWeapon", "ToxicWeapon", "HealingWeapon", "RepairWeapon"}
+STAY = {"ToxicWeapon", "HealingWeapon", "RepairWeapon"}
 ALL_OLD = set(TRIPLE) | STAY  # for mixed detection
 # the NEW warhead templates count as warhead-carrying too, so mixed-detection is
 # ORDER-INDEPENDENT: once family A is converted (a weapon now inherits ^Warhead_A),

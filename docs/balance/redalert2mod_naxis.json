@@ -3180,47 +3180,41 @@
      {
       "damage_warheads": [
        {
-        "damage": "24000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "120",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "NaxiSniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "24000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "120",
@@ -3229,37 +3223,38 @@
       "versus_templates": [
        "NaxiSniper"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "NaxiSniper_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "24000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "7777",
       "reloaddelay": "120",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "NaxiSniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3267,18 +3262,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "24000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "8888",
       "reloaddelay": "120",
@@ -3287,9 +3277,11 @@
       "versus_templates": [
        "NaxiSniper"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "NaxiSniper_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

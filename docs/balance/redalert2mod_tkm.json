@@ -2162,55 +2162,53 @@
      {
       "damage_warheads": [
        {
-        "damage": "44000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "22",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10021",
       "reloaddelay": "55",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "tkmawp",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "44000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "22",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "10021",
       "reloaddelay": "55",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "tkmawp",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2260,28 +2258,27 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5750",
       "reloaddelay": "10",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "tkmsmg",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2289,28 +2286,27 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5750",
       "reloaddelay": "10",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "tkmsmg",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -3070,55 +3066,53 @@
      {
       "damage_warheads": [
        {
-        "damage": "80000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "40",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "12402",
       "reloaddelay": "30",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "VanSniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "80000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "40",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "12402",
       "reloaddelay": "30",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "VanSniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

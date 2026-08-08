@@ -1367,7 +1367,9 @@ HarbingerChainguns_elite:
 	BurstDelays: 1
 
 BlackWidowPistols:
-	Inherits: ^SniperWeapon
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
 	Report: AUTanya_pistolFireA.wav, AUTanya_pistolFireB.wav, AUTanya_pistolFireC.wav, AUTanya_pistolFireD.wav, AUTanya_pistolFireE.wav, AUTanya_pistolFireF.wav, AUTanya_pistolFireG.wav, AUTanya_pistolFireH.wav, AUTanya_pistolFireI.wav
 	ReloadDelay: 16
 	Range: 9000
@@ -1380,11 +1382,11 @@ BlackWidowPistols:
 		ContrailEndWidth: 77
 		ContrailLength: 7
 		ContrailEndColorUsePlayerColor: false
-	Warhead@SniperWeapon: SpreadDamage
+	Warhead@Sniper_Light:
 		Damage: 10000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 10000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
 		Damage: 5
 
 BlackWidowPistols_elite:

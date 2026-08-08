@@ -2911,47 +2911,41 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6300",
       "reloaddelay": "22",
       "requires": "!rank-elite",
       "slot": "Armament@Pistol",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "RA2NarcoPistol",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "20000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7300",
       "reloaddelay": "22",
@@ -2960,9 +2954,11 @@
       "versus_templates": [
        "RA2NarcoPistol"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "RA2NarcoPistols_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3022,29 +3018,28 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "20000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6300",
       "reloaddelay": "22",
       "requires": "!rank-elite",
       "slot": "Armament@PistolGARRISONED",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "RA2NarcoPistol",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3052,18 +3047,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "20000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "7300",
       "reloaddelay": "22",
@@ -3072,9 +3062,11 @@
       "versus_templates": [
        "RA2NarcoPistol"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "RA2NarcoPistols_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

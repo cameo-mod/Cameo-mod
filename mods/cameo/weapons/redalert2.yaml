@@ -2250,7 +2250,9 @@ RA2FlakTrackGun:
 		Damage: 1
 
 RA2DoublePistols:
-	Inherits: ^SniperWeapon
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
 	Report: itanatta.wav, itanattb.wav
 	ReloadDelay: 12
 	Burst: 2
@@ -2263,33 +2265,35 @@ RA2DoublePistols:
 		ContrailEndWidth: 77
 		ContrailLength: 7
 		ContrailEndColorUsePlayerColor: false
-	Warhead@SniperWeapon: SpreadDamage
+	Warhead@Sniper_Light: SpreadDamage
 		Damage: 14000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 14000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
 		Damage: 7
 
 RA2DoublePistolsIFV:
 	Inherits: RA2DoublePistols
 	ValidTargets: Ground, Water, Air
-	Warhead@SniperWeapon: SpreadDamage
+	Warhead@Sniper_Light: SpreadDamage
 		ValidTargets: Ground, Water, Air
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		ValidTargets: Ground, Water, Air
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 
 RA2AWP:
-	Inherits: ^SniperWeapon
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
 	ReloadDelay: 54
 	Range: 10000
 	Report: isniatta.wav
-	Warhead@SniperWeapon: SpreadDamage
+	Warhead@Sniper_Light: SpreadDamage
 		Damage: 44000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 44000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
 		Damage: 22
 
 RA2GattlingMG1:

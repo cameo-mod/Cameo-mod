@@ -1900,57 +1900,55 @@
      {
       "damage_warheads": [
        {
-        "damage": "40000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "20",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8086",
       "reloaddelay": "25",
       "requires": "!td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "td_gdi_commando_sniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "40000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "20",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "8086",
       "reloaddelay": "25",
       "requires": "!td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SniperWeapon"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "td_gdi_commando_sniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -1965,18 +1963,13 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "20000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8086",
       "reloaddelay": "25",
@@ -1989,7 +1982,8 @@
        "td_gdi_commando_sniper"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy"
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_Sniper_Light"
       ],
       "weapon": "td_gdi_commando_sniper_elite",
       "weapon_class_source": "template"
@@ -2008,18 +2002,13 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "20000",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "SniperWeaponPercentage",
+        "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "8086",
       "reloaddelay": "25",
@@ -2032,7 +2021,8 @@
        "td_gdi_commando_sniper"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy"
+       "^Warhead_Railgun_Heavy",
+       "^Warhead_Sniper_Light"
       ],
       "weapon": "td_gdi_commando_sniper_elite",
       "weapon_class_source": "template"

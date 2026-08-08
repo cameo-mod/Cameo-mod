@@ -779,15 +779,17 @@ RA2AWP_elite:
 	Range: 12345
 	Projectile: Bullet
 		ContrailStartColor: FF0000FF
-	Warhead@SniperWeapon: SpreadDamage
+	Warhead@Sniper_Light:
 		Damage: 88000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 88000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
 		Damage: 44
 
 RA2MP5:
-	Inherits: ^SniperWeapon
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
 	Report: iseaatta.wav, iseaattb.wav
 	ReloadDelay: 10
 	Range: 6386
@@ -800,11 +802,11 @@ RA2MP5:
 		ContrailEndWidth: 77
 		ContrailLength: 7
 		ContrailEndColorUsePlayerColor: false
-	Warhead@SniperWeapon: SpreadDamage
+	Warhead@Sniper_Light:
 		Damage: 4000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 2000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
 RA2MP5_elite:

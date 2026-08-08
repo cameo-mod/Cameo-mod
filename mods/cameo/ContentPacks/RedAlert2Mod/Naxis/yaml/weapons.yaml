@@ -431,14 +431,16 @@ NaxiFlamerTroopExplode:
 		Amount: 3000
 
 NaxiSniper:
-	Inherits: ^SniperWeapon
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
 	ReloadDelay: 120
 	Range: 7777
-	Warhead@SniperWeapon: SpreadDamage
+	Warhead@Sniper_Light:
 		Damage: 24000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 24000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
 		Damage: 12
 
 NaxiSniper_elite:

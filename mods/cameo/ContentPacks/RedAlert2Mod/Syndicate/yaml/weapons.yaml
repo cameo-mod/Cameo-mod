@@ -92,18 +92,20 @@ LatinTankKillerRocket_elite:
 		ContrailEndColor: FFFFFF
 
 RA2NarcoPistol:
-	Inherits: ^SniperWeapon
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
 	ReloadDelay: 22
 	Range: 6300
 	Report: itanatta.wav, itanattb.wav
 	ValidTargets: Ground, Water, Garrisoned, Air
-	Warhead@SniperWeapon: SpreadDamage
+	Warhead@Sniper_Light:
 		ValidTargets: Ground, Water, Garrisoned, Air
 		Damage: 20000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		ValidTargets: Ground, Water, Garrisoned, Air
 		Damage: 20000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Garrisoned, Air
 		Damage: 10
 
