@@ -88,44 +88,27 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4096",
       "reloaddelay": "30",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms",
-       "^LaserWeapon"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
       "weapon": "CabalOverkillDroneLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6261,44 +6244,27 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7082",
       "reloaddelay": "40",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms",
-       "^LaserWeapon"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
       "weapon": "CabalMantisGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6760,44 +6726,27 @@
      {
       "damage_warheads": [
        {
-        "damage": "60000",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "60000",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6813",
       "reloaddelay": "40",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms",
-       "^LaserWeapon"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
       "weapon": "CabalLegionGun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -1175,8 +1175,9 @@ CabalEngineerRepairBeam:
 		Damage: -1600
 
 CabalMantisGun:
-	Inherits: ^SmallArms
-	Inherits@2: ^LaserWeapon
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 40
 	Report: lastur1.aud
 	Range: 7082
@@ -1188,21 +1189,18 @@ CabalMantisGun:
 		SecondaryBeamWidth: 30
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 222244CC
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 6000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 3
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 6000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 CabalLegionGun:
-	Inherits: ^SmallArms
-	Inherits@2: ^LaserWeapon
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 40
 	Report: lastur1.aud
 	Range: 6813
@@ -1214,13 +1212,9 @@ CabalLegionGun:
 		SecondaryBeamWidth: 40
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 222244CC
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 60000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 30
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 60000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 30
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_s
@@ -2437,8 +2431,9 @@ CabalOverkillLaser:
 		ValidTargets: Ground, Water, Air
 
 CabalOverkillDroneLaser:
-	Inherits: ^SmallArms
-	Inherits@2: ^LaserWeapon
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 30
 	Range: 4096
 	Projectile: LaserZap
@@ -2450,13 +2445,9 @@ CabalOverkillDroneLaser:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 222244CC
 	Report: lastur1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_s
