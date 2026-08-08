@@ -63,8 +63,10 @@ cold/corrosion auto-scale with damage. **Everything else below is YAML config of
 Add a `PhysicalState@Corrosion` block to the same defaults (unipolar): `MinValue 0 / MaxValue 20000 /
 RelaxedValue 0`, `RelativeToHealth: true`, relaxation like Temperature. Bar 🟢 green (`PositiveColor 00C000`).
 Reactions via the SAME proportional traits, gated on threshold conditions from `GrantConditionOnPhysicalState`:
-- from ~50%→100%: `ChangesHealthProportionalToPhysicalState` (DoT, higher/tick + shorter than a burn),
-  `SlowsProportionalToPhysicalState`, `DamageMultiplierProportionalToPhysicalState` (+damage-taken).
+- from 50%→100% ramp (maintainer 2026-08-09 — DoT + slow + vuln, the rounded "acid melts you"):
+  `ChangesHealthProportionalToPhysicalState` DoT up to **~180/tick, short/sharp**;
+  `SlowsProportionalToPhysicalState` down to **~60% speed**;
+  `DamageMultiplierProportionalToPhysicalState` up to **+150% damage taken**.
 - This IS the Schwarzer Mond "corruption" effect (Korruptes Biest / Rocket Soldier) turned into a meter.
 - **Hazmat/reactive-armor reduction (maintainer 2026-08-09):** mirror the existing Temperature pattern —
   `@Overheating` (DoT 100–150) has a reduced `@OverheatingHazmat` variant (DoT 25) gated on `hazmatsuits`.
@@ -78,7 +80,7 @@ Then wire Chemical/Plasma to it via §1's field.
 |---|---|--:|---|
 | Flame (L/M/H) | Temperature | **+100** | + GroundFire linger |
 | Laser (Heavy) | Temperature | **+75** | overheat→pop; main-damage only (chip excluded by placement) |
-| Cryo (L/M/H) — NEW | Temperature | **−100** | generated like Flame; freeze/shatter reuses existing cold side |
+| **Prism (L/M/H)** | Temperature | **−100** | **PRISM IS THE CRYO WEAPON** (its "utility (cryo/scatter, K)", `AREADAMAGE_WARHEAD_REBALANCE.md §144`). Anti-LIGHT Versus already LOCKED (`Scout 100 › None 94 › … › Superheavy 34`), ground-only, thin scatter beam, no chip. **No separate `^Warhead_Cryo_*` family** — cryo attaches here. Freeze/shatter reuses the existing cold side. |
 | Chemical (L/M/H) | Corrosion | **+100** | pure corrosion |
 | **Plasma (L/M/H)** — NEW | Temperature **+50** & Corrosion **+50** | | flagship Flame×Chem blend Versus |
 | Tesla | (EMP, separate) | – | keeps existing EMP |
@@ -97,6 +99,25 @@ Then wire Chemical/Plasma to it via §1's field.
   impact center). Feasible but a real addition; maintainer said "do it if possible" → build a
   `PushWarhead` in `OpenRA.Mods.Cameo/Warheads/`.
 
+## 4b. Visuals — every axis needs its OWN artwork (maintainer 2026-08-09)
+
+Each state needs (a) a **level-scaling coloured overlay** (`WithPhysicalStateColoredOverlay`, already
+used for Temperature's blue cold side) AND (b) **threshold artwork** at the extreme
+(`WithIdleOverlay`, like `@frostspark` on `superfreeze`). Not just a tint.
+
+| Axis | Scaling overlay | Threshold artwork | Asset status |
+|---|---|---|---|
+| Temperature hot | 🔴 red (bar exists) | overheat glow at max | red overlay exists; max-heat art TBD |
+| Temperature cold | 🔵 blue (`@CryoFreeze` overlay) | ❄ `frostspark` at `superfreeze` | **exists** |
+| **Corrosion** | 🟢 **green, pulsating** (scales with level) | pulsating green at max | **NEW art needed** |
+| **Armor Breach** | subtle plate-crack overlay | **icon overlay** — a bullet punching through armor plating, shown at 100% (when they take 200%) | **NEW art needed** — NOT just a colour |
+
+**New sprite art to create** (RGBA PngSheet per memory `cameo-custom-effects-pngsheet`; pair every new
+effect with a sound): the **green pulsating corrosion** overlay, and the **armor-breach breach-icon**
+(bullet-through-plating) for the 100% state. These are ART assets (maintainer/artist) — the traits
+(`WithPhysicalStateColoredOverlay` / `WithIdleOverlay`) just reference the image+sequence, so the yaml
+can be wired with placeholders and the art dropped in. Heat/cryo already have their overlays.
+
 ## 5. Build order (after sign-off)
 1. C#: `PhysicalStateName`/`PhysicalStateScale` on `AreaDamageWarhead` (+subclass). Build → `engine/bin`
    (+ copy tracked dll), boot-gate.
@@ -105,10 +126,14 @@ Then wire Chemical/Plasma to it via §1's field.
    `CommandoDebuff → SonicDebuff` rename + bake into `^Warhead_Sonic_*`. boot-gate per batch.
 4. C# (optional): `PushWarhead` for knockback.
 
-## 6. OPEN questions for maintainer (most of the earlier ones are ANSWERED by "already exists")
-1. **Corrosion peak values** (§2): DoT/tick, slow%, +damage% at 100%, and the ramp start (50%?). Propose:
-   DoT ≈ heavier than burn but short; slow to ~60%; +damage to ~150%. Confirm/adjust.
-2. **Cryo family Versus** — cold as its own damage type: anti-vehicle/structure lean? (its signature is the freeze).
-3. **Plasma Versus** — blended Flame×Chem: strong vs inf/light/med + structures, moderate vs heavy. Confirm.
-4. **Which new axes to actually add now:** Armor Breach (recommended), Hex, Knockback (new C#), Suppression meter?
-5. **Sonic rename** confirmed global `CommandoDebuff → SonicDebuff`? (predator laser + waveforce keep applying it.)
+## 6. Decisions (maintainer 2026-08-09) + what's still open
+DECIDED:
+1. **Corrosion peak** = DoT + slow + vuln (values in §2). Hazmat halves the DoT.
+2. **Cryo = the Prism family** (no new family); Prism anti-LIGHT Versus already locked, Temperature −100.
+3. **New axes to build:** Armor Breach + Hex + Knockback (new C# `PushWarhead`) + the base wiring (Corrosion/Prism-cryo/Plasma/Sonic).
+4. **Sonic** = global `CommandoDebuff → SonicDebuff`, baked into `^Warhead_Sonic_*` (predator laser + waveforce keep applying it).
+5. **Every axis needs its own art** (§4b) — green pulsating corrosion overlay + armor-breach breach-icon are NEW assets.
+
+STILL OPEN:
+- **Plasma Versus** — blended Flame×Chem: strong vs inf/light/med + structures, moderate vs heavy. Confirm the exact ladder.
+- **XP/kill attribution** of overheat/corrosion DoT — verify `ChangesHealthProportionalToPhysicalState` credits the original attacker (`firedBy`), not the trait/self, so flame/acid kills grant XP correctly. (Investigate in the build.)
