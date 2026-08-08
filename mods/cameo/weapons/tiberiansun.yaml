@@ -1249,8 +1249,10 @@ TSAssaultCannon:
 		Damage: 1
 
 TSLaserRaiderCannon:
-	Inherits: ^SmallArms
-	Inherits@2: ^LaserWeapon
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@3: ^TSLaserEffect
 	Projectile: LaserZap
 		Width: 36
@@ -1262,13 +1264,13 @@ TSLaserRaiderCannon:
 	BurstDelays: 2
 	Range: 4964
 	Report: chaingn1.aud
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: SpreadDamage
 		Damage: 6000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Laser_Heavy: SpreadDamage
 		Damage: 6000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 3
 
 TSPistola:

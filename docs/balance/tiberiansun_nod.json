@@ -1809,90 +1809,90 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "LaserWeapon",
+        "tag": "Laser_Heavy",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4062",
       "reloaddelay": "18",
       "requires": "ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^SmallArms",
-       "^LaserWeapon",
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy",
        "^TSLaserEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "TSLasergun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
         "damage": "2000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
-        "tag": "LaserWeapon",
+        "tag": "Laser_Heavy",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "4062",
       "reloaddelay": "18",
       "requires": "ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADEGARRISONED",
       "versus_templates": [
-       "^SmallArms",
-       "^LaserWeapon",
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy",
        "^TSLaserEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "TSLasergun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2992,45 +2992,45 @@
       "damage_warheads": [
        {
         "damage": "6000",
-        "tag": "SmallArms",
+        "tag": "Bullet_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
-        "tag": "SmallArmsPercentage",
+        "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
-        "tag": "LaserWeapon",
+        "tag": "Laser_Heavy",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
-        "tag": "LaserWeaponPercentage",
+        "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4964",
       "reloaddelay": "20",
       "requires": "ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^SmallArms",
-       "^LaserWeapon",
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy",
        "^TSLaserEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "TSLaserRaiderCannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
