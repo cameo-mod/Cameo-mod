@@ -124,6 +124,35 @@ genuinely different profiles** (so "they all work differently per warhead" — c
   that is inert vs most targets compensates nothing in general combat (§4). Separate the two ideas:
   ExtraDamage = deliberate anti-class RPS; spread compensation = pricing.
 
+### ★ REVISION 2026-08-08 (maintainer + reasoning pass — supersedes the "chip on Laser/Railgun/Magic per fixed thematic ladders + fallback delete-all" framing above)
+
+**Governing law (replaces "chip excluded from price, fallback delete all"):** a chip is allowed
+**only if it is PAID FOR** — never free power. The payment is one of: the K=1.25 multiplier, a
+weapon downside (charge delay), or a structural handicap (thin spread + wasted air-ladder slots).
+No handicap ⇒ no chip. This keeps every uniqueness source *accountable* (role = warhead class;
+combos = a second priced warhead; ability = K; delivery = projectile/effect layer).
+
+**Chips survive on exactly five weapons, each with its payment:**
+
+| weapon | chip | pays for it |
+|---|---|---|
+| **Tesla** | keep old `TeslaExtraDamage` (Shield 300, Heroic 200, None 125, Superheavy 100, Concrete 10) | K=1.25 (EMP weak, so K covers EMP+chip) — its *original* reason for existing |
+| **TeslaCharged** | keep old `TeslaChargedExtraDamage` — **STRONGER** (Shield 400, Heroic 300, None 225, Superheavy 200, Concrete 50) | Super tier + K |
+| **Sniper** | `SniperWeaponExtraDamage: OpenToppedDamage` | genuine engine mechanic (garrison passenger hit), not a Versus tweak |
+| **Laser** | **anti-LIGHT flat chip** = the Laser `%`-warhead Versus ladder REVERSED (anti-heavy→anti-light), materialised as SpreadDamage, restricted to infantry+vehicles (buildings/air ≈10), Damage = 50% of main (~5–12% effective) | thin energy spread + the 4 air slots pushing ground damage down |
+| **Railgun** | keep anti-building siege chip (Concrete 200 > Steel 175 > Wood 150 …) | a **charge delay** on every railgun (CannonAP fires instantly = the pure tank-killer, no chip) |
+| Prism / all non-energy | **NONE** | Prism = utility (cryo/scatter, K); others have no handicap |
+
+**Unified energy law:** every energy weapon = thin single-target spread + ONE paid compensation
+(a chip paid by K / charge-delay / air-handicap, OR utility for Prism). No energy weapon gets free power.
+
+**Magic vs Sonic — VERIFIED NOT REVERSED (2026-08-08, real HP).** With the current baselines
+(infantry 20–60k, MBT 100k, Mammoth 500–600k, Epic 1–5M), shots-to-kill proves the mirror:
+Sonic (flat) scales with HP → anti-low-HP / anti-swarm (2 shots vs infantry, 256 vs an epic);
+Magic (%HP) converges to ~11 shots regardless of HP/armor → anti-high-HP / giant-killer. The
+oppressive giant-killer belongs on the *rare* weapon (Magic), not the common Sonic. Keep as-is;
+they are damage-calculation TYPES, not chips. (Matches memory `cameo-weapon-differentiation`.)
+
 ## 4. Spread pricing + spread reduction (open formula work)
 
 - **How spread enters the balance formula (OPEN):** bigger spread = higher *potential* damage when
