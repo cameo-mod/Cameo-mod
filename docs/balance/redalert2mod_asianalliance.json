@@ -378,33 +378,8 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "20000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "GrenadePercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -414,7 +389,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
@@ -422,11 +397,13 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^MediumFlameWeapon",
-       "^Grenade",
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium",
        "^RA2HeavyMissile"
       ],
       "warheads": [
+       "^Warhead_Flame_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "AsianPhoenixRocket",
@@ -438,33 +415,8 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "20000",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "20000",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10",
-        "tag": "GrenadePercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -474,7 +426,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "minrange": "1500",
       "pricing": true,
       "range": "7500",
@@ -485,6 +437,7 @@
        "AsianPhoenixRocket"
       ],
       "warheads": [
+       "^Warhead_Flame_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "AsianPhoenixRocket_elite",

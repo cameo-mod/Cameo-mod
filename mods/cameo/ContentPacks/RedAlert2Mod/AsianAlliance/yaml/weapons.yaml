@@ -1879,8 +1879,9 @@ AsianSubmarineBomb:
 		ImpactSounds: gexpwasa.wav
 
 AsianPhoenixRocket:
-	Inherits: ^MediumFlameWeapon
-	Inherits@2: ^Grenade
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	Inherits@3: ^RA2HeavyMissile
 	ReloadDelay: 65
 	Range: 6500
@@ -1898,22 +1899,10 @@ AsianPhoenixRocket:
 		Speed: 650
 		HorizontalRateOfTurn: 30
 		Acceleration: 5
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@Flame_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 	Warhead@MissileAP_Heavy:

@@ -368,8 +368,9 @@ D2K_TowerMissile:
 
 	MinRange: 2135
 mtank_pri2:
-	Inherits: ^Grenade
-	Inherits@2: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Light
 	Inherits@3: ^D2KMissile
 	ReloadDelay: 5
 	Range: 10052
@@ -385,22 +386,10 @@ mtank_pri2:
 		Acceleration: 5
 		CloseEnough: 500
 		AllowSnapping: true
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-	Warhead@MediumFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@MissileAP_Heavy:

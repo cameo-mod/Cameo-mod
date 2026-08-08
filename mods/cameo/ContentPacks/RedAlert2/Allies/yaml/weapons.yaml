@@ -449,8 +449,9 @@ PrismScatterE:
 		AimTargetStances: Enemy, Neutral
 
 RA2Comet:
-	Inherits: ^Grenade
-	Inherits@2: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Light
 	Inherits@3: ^RA2LaserWeapon
 	InvalidTargets: PrismTowerChargeable
 	ReloadDelay: 125
@@ -467,22 +468,10 @@ RA2Comet:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFFFF
 		SecondaryBeamUsePlayerColor: false
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 20000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 10000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 10
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@MediumFlameWeapon: SpreadDamage
-		Damage: 20000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Laser_Heavy:
