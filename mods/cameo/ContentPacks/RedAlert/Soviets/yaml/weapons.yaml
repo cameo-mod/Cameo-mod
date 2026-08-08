@@ -1555,6 +1555,7 @@ ChainGun:
 
 IncendiaryChainGun:
 	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
 	Inherits@3: ^IncendiaryBulletProjectile
@@ -1567,6 +1568,10 @@ IncendiaryChainGun:
 		Damage: 2000
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Bullet_Medium:
+		Damage: 2000
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 HindMissiles:
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -1939,6 +1944,7 @@ ArmoredYakChainGun:
 
 IncendiaryYakChainGun:
 	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
 	Inherits@3: ^IncendiaryBulletProjectile
@@ -1954,6 +1960,10 @@ IncendiaryYakChainGun:
 		Damage: 4000
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@Bullet_Medium:
+		Damage: 4000
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
 IncendiaryArmoredYakChainGun:
 	Inherits: IncendiaryYakChainGun
@@ -2691,6 +2701,7 @@ ra120mmThermobaric:
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@wh: ^Warhead_Flame_Heavy
+	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@proj: ^Projectile_Flame_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
 	ValidTargets: Ground, Water, Vehicle, Structure
@@ -2704,6 +2715,10 @@ ra120mmThermobaric:
 	Warhead@Flame_Heavy:
 		Damage: 8000
 	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@Demolition_Heavy:
+		Damage: 8000
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@CannonHE_Heavy:
 		Damage: 8000
@@ -3023,6 +3038,7 @@ ra120mm2Thermobaric:
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@wh: ^Warhead_Flame_Heavy
+	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@proj: ^Projectile_Flame_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
 	ValidTargets: Ground, Water, Vehicle, Structure
@@ -3036,6 +3052,10 @@ ra120mm2Thermobaric:
 	Warhead@Flame_Heavy:
 		Damage: 16000
 	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@Demolition_Heavy:
+		Damage: 16000
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
@@ -3963,6 +3983,7 @@ RAGatlingTankCannon_AA:
 
 IncendiaryRAGatlingTankCannon:
 	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
 	Inherits@3: ^IncendiaryBulletProjectile
@@ -3975,6 +3996,10 @@ IncendiaryRAGatlingTankCannon:
 		Damage: 2000
 	Warhead@Flame_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
+		Damage: 1
+	Warhead@Bullet_Medium:
+		Damage: 2000
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 IncendiaryRAGatlingTankCannon_AA:
 	Inherits: IncendiaryRAGatlingTankCannon

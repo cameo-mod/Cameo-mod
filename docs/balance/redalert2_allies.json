@@ -12386,6 +12386,11 @@
        },
        {
         "damage": "10",
+        "tag": "Flame_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
@@ -12396,7 +12401,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "11111",
       "reloaddelay": "125",
@@ -12404,16 +12409,18 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Medium",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light",
        "^RA2LaserWeapon"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Medium",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "RA2Comet",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -12424,6 +12431,11 @@
        },
        {
         "damage": "10",
+        "tag": "Flame_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10",
         "tag": "Laser_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
@@ -12434,7 +12446,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12345",
       "reloaddelay": "125",
@@ -12445,10 +12457,11 @@
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Medium",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "RA2Comet_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

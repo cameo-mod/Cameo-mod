@@ -1176,6 +1176,7 @@ CabalEngineerRepairBeam:
 
 CabalMantisGun:
 	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 40
@@ -1193,12 +1194,17 @@ CabalMantisGun:
 		Damage: 6000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
+	Warhead@Laser_Heavy:
+		Damage: 6000
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		Damage: 3
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 CabalLegionGun:
 	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 40
@@ -1215,6 +1221,10 @@ CabalLegionGun:
 	Warhead@Bullet_Light:
 		Damage: 60000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		Damage: 30
+	Warhead@Laser_Heavy:
+		Damage: 60000
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 30
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_s
@@ -2432,6 +2442,7 @@ CabalOverkillLaser:
 
 CabalOverkillDroneLaser:
 	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 30
@@ -2448,6 +2459,10 @@ CabalOverkillDroneLaser:
 	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@Laser_Heavy:
+		Damage: 4000
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_s

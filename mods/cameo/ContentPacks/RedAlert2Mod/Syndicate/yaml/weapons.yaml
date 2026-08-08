@@ -933,6 +933,7 @@ LatinBuggyMG_elite:
 
 LatinBuggyChaingun:
 	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
 	Inherits@3: ^RA2SmallArms
@@ -955,6 +956,10 @@ LatinBuggyChaingun:
 		Damage: 2000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Flak_Medium:
+		Damage: 2000
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
@@ -979,6 +984,7 @@ YakovlevCannon:
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
 	Inherits@6: ^RA2Chaingun
@@ -1003,6 +1009,10 @@ YakovlevCannon:
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+	Warhead@Flak_Medium:
+		Damage: 2000
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+		Damage: 1
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1021,6 +1031,7 @@ YakovlevCannon_elite:
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
 	Inherits@6: ^RA2Chaingun
@@ -1042,6 +1053,10 @@ YakovlevCannon_elite:
 		Damage: 2000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Flak_Medium:
+		Damage: 2000
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air

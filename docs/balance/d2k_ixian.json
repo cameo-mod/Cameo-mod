@@ -2681,28 +2681,40 @@
        },
        {
         "damage": "4",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6502",
       "reloaddelay": "64",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^Warhead_Demolition_Light",
+       "^Warhead_Railgun_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light",
        "^D2K_Cannon"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
+       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "D2K_Rocket_Trooper2",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -2754,28 +2766,40 @@
        },
        {
         "damage": "4",
+        "tag": "Railgun_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6502",
       "reloaddelay": "64",
       "slot": "Armament@SECONDARYgarrisoned",
       "versus_templates": [
        "^Warhead_Demolition_Light",
+       "^Warhead_Railgun_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light",
        "^D2K_Cannon"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
+       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "D2K_Rocket_Trooper2",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -4192,12 +4216,17 @@
        },
        {
         "damage": "4",
+        "tag": "Flame_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
         "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "2010",
       "pricing": true,
       "range": "10052",
@@ -4205,16 +4234,18 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Medium",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light",
        "^D2KMissile"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "mtank_pri2",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

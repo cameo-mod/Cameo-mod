@@ -314,6 +314,7 @@ Dune_SiegeMortar:
 
 D2K_Rocket_Trooper_AGOnly:
 	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Light
 	Inherits@3: ^D2K_Cannon
@@ -336,6 +337,10 @@ D2K_Rocket_Trooper_AGOnly:
 		Damage: 10000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
+		Damage: 5
+	Warhead@Railgun_Heavy:
+		Damage: 10000
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water

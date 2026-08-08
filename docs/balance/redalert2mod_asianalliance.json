@@ -384,12 +384,17 @@
        },
        {
         "damage": "10",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10",
         "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
@@ -398,16 +403,18 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Flame_Medium",
+       "^Warhead_Demolition_Light",
        "^Projectile_Flame_Medium",
        "^Effect_Flame_Medium",
        "^RA2HeavyMissile"
       ],
       "warheads": [
        "^Warhead_Flame_Medium",
+       "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "AsianPhoenixRocket",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -421,12 +428,17 @@
        },
        {
         "damage": "10",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10",
         "tag": "MissileAP_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "1500",
       "pricing": true,
       "range": "7500",
@@ -438,10 +450,11 @@
       ],
       "warheads": [
        "^Warhead_Flame_Medium",
+       "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "AsianPhoenixRocket_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

@@ -372,6 +372,11 @@
        },
        {
         "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -389,6 +394,7 @@
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^Warhead_CannonAP_Light",
+       "^Warhead_Flak_Medium",
        "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light",
        "^RA2Chaingun"
@@ -396,6 +402,7 @@
       "warheads": [
        "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonAP_Light",
+       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "YakovlevCannon",
@@ -412,6 +419,11 @@
        {
         "damage": "1",
         "tag": "CannonAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -433,6 +445,7 @@
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^Warhead_CannonAP_Light",
+       "^Warhead_Flak_Medium",
        "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light",
        "^RA2Chaingun"
@@ -440,6 +453,7 @@
       "warheads": [
        "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonAP_Light",
+       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "YakovlevCannon_elite",
@@ -456,6 +470,11 @@
        {
         "damage": "1",
         "tag": "CannonAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -477,6 +496,7 @@
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^Warhead_CannonAP_Light",
+       "^Warhead_Flak_Medium",
        "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light",
        "^RA2Chaingun"
@@ -484,6 +504,7 @@
       "warheads": [
        "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonAP_Light",
+       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "YakovlevCannon_elite",
@@ -6413,6 +6434,11 @@
        },
        {
         "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
@@ -6431,6 +6457,7 @@
       "slot": "Armament@Gatling",
       "versus_templates": [
        "^Warhead_CannonAP_Light",
+       "^Warhead_Flak_Medium",
        "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light",
        "^RA2SmallArms",
@@ -6438,6 +6465,7 @@
       ],
       "warheads": [
        "^Warhead_CannonAP_Light",
+       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
@@ -6449,6 +6477,11 @@
        {
         "damage": "1",
         "tag": "CannonAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -6474,6 +6507,7 @@
       ],
       "warheads": [
        "^Warhead_CannonAP_Light",
+       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
@@ -7444,6 +7478,11 @@
        },
        {
         "damage": "1",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
@@ -7462,6 +7501,7 @@
       "slot": "Armament@Gatling",
       "versus_templates": [
        "^Warhead_CannonAP_Light",
+       "^Warhead_Flak_Medium",
        "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light",
        "^RA2SmallArms",
@@ -7469,6 +7509,7 @@
       ],
       "warheads": [
        "^Warhead_CannonAP_Light",
+       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
@@ -7480,6 +7521,11 @@
        {
         "damage": "1",
         "tag": "CannonAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -7505,6 +7551,7 @@
       ],
       "warheads": [
        "^Warhead_CannonAP_Light",
+       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],

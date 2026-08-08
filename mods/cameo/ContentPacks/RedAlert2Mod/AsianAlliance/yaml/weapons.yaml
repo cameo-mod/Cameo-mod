@@ -1880,6 +1880,7 @@ AsianSubmarineBomb:
 
 AsianPhoenixRocket:
 	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@wh2: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
 	Inherits@3: ^RA2HeavyMissile
@@ -1904,6 +1905,10 @@ AsianPhoenixRocket:
 		Damage: 20000
 	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
+		Damage: 10
+	Warhead@Demolition_Light:
+		Damage: 20000
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air

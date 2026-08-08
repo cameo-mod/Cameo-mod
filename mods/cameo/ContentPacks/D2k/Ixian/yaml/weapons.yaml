@@ -253,6 +253,7 @@ D2K_Bazooka2:
 	MinRange: 1280
 D2K_Rocket_Trooper2:
 	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Light
 	Inherits@3: ^D2K_Cannon
@@ -275,6 +276,10 @@ D2K_Rocket_Trooper2:
 		Damage: 8000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@Railgun_Heavy:
+		Damage: 8000
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water, Air
@@ -369,6 +374,7 @@ D2K_TowerMissile:
 	MinRange: 2135
 mtank_pri2:
 	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Light
 	Inherits@3: ^D2KMissile
@@ -391,6 +397,10 @@ mtank_pri2:
 		Damage: 8000
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@Flame_Medium:
+		Damage: 8000
+	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air

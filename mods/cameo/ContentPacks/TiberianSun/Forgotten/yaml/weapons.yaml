@@ -494,6 +494,7 @@ TSInfantryMortarChem:
 
 TS120mmxChem:
 	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_Chemical_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@3: ^TSCannonEffect
 	ReloadDelay: 60
@@ -506,6 +507,10 @@ TS120mmxChem:
 		Damage: 40000
 	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
+		Damage: 20
+	Warhead@Chemical_Heavy:
+		Damage: 40000
+	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
 		Damage: 20
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 5
@@ -1740,6 +1745,7 @@ TSCropBomb:
 
 TSCropBombChem:
 	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_Chemical_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 50
 	Range: 1250
@@ -1755,6 +1761,10 @@ TSCropBombChem:
 	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Ship
 		Damage: 60
+	Warhead@Chemical_Heavy:
+		Damage: 60000
+	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+		Damage: 30
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 10
 		Duration: 50
@@ -1779,6 +1789,7 @@ TSCropBombChem:
 
 TSLocustBombChem:
 	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_Chemical_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 38
 	Burst: 5
@@ -1796,6 +1807,10 @@ TSLocustBombChem:
 	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Ship
 		Damage: 90
+	Warhead@Chemical_Heavy:
+		Damage: 90000
+	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+		Damage: 45
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 15
 		Duration: 50

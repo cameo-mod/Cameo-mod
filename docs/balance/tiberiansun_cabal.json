@@ -91,21 +91,33 @@
         "damage": "2",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4096",
       "reloaddelay": "30",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy",
        "^Projectile_Bullet_Light",
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalOverkillDroneLaser",
       "weapon_class_source": "template"
@@ -6247,21 +6259,33 @@
         "damage": "3",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7082",
       "reloaddelay": "40",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy",
        "^Projectile_Bullet_Light",
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalMantisGun",
       "weapon_class_source": "template"
@@ -6729,21 +6753,33 @@
         "damage": "30",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6813",
       "reloaddelay": "40",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy",
        "^Projectile_Bullet_Light",
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light"
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalLegionGun",
       "weapon_class_source": "template"

@@ -69,10 +69,15 @@
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "1290",
       "pricing": true,
       "range": "6460",
@@ -83,7 +88,8 @@
        "IncendiaryYakChainGun"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryArmoredYakChainGun",
       "weapon_class_source": "template"
@@ -97,10 +103,15 @@
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "1290",
       "pricing": true,
       "range": "6460",
@@ -111,7 +122,8 @@
        "IncendiaryYakChainGun"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryArmoredYakChainGun",
       "weapon_class_source": "template"
@@ -787,10 +799,15 @@
         "damage": "1",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
@@ -798,12 +815,14 @@
       "slot": "Armament@Upgrade1",
       "versus_templates": [
        "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
        "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryChainGun",
       "weapon_class_source": "template"
@@ -815,10 +834,15 @@
         "damage": "1",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
@@ -826,12 +850,14 @@
       "slot": "Armament@Upgrade2",
       "versus_templates": [
        "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
        "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryChainGun",
       "weapon_class_source": "template"
@@ -1457,10 +1483,15 @@
         "damage": "1",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
@@ -1468,12 +1499,14 @@
       "slot": "Armament@Upgrade1",
       "versus_templates": [
        "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
        "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryChainGun",
       "weapon_class_source": "template"
@@ -1485,10 +1518,15 @@
         "damage": "1",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
@@ -1496,12 +1534,14 @@
       "slot": "Armament@Upgrade2",
       "versus_templates": [
        "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
        "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryChainGun",
       "weapon_class_source": "template"
@@ -2012,10 +2052,15 @@
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2024,12 +2069,14 @@
       "slot": "Armament@Upgrade1",
       "versus_templates": [
        "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
        "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryYakChainGun",
       "weapon_class_source": "template"
@@ -2043,10 +2090,15 @@
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2055,12 +2107,14 @@
       "slot": "Armament@Upgrade2",
       "versus_templates": [
        "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
        "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryYakChainGun",
       "weapon_class_source": "template"
@@ -2265,10 +2319,15 @@
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2277,12 +2336,14 @@
       "slot": "Armament@Upgrade1",
       "versus_templates": [
        "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
        "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryYakChainGun",
       "weapon_class_source": "template"
@@ -2295,10 +2356,15 @@
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2307,12 +2373,14 @@
       "slot": "Armament@Upgrade2",
       "versus_templates": [
        "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
        "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryYakChainGun",
       "weapon_class_source": "template"
@@ -2711,10 +2779,15 @@
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2723,12 +2796,14 @@
       "slot": "Armament@Upgrade1",
       "versus_templates": [
        "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
        "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryYakChainGun",
       "weapon_class_source": "template"
@@ -2742,10 +2817,15 @@
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2754,12 +2834,14 @@
       "slot": "Armament@Upgrade2",
       "versus_templates": [
        "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
        "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryYakChainGun",
       "weapon_class_source": "template"
@@ -2954,10 +3036,15 @@
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2966,12 +3053,14 @@
       "slot": "Armament@Upgrade1",
       "versus_templates": [
        "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
        "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryYakChainGun",
       "weapon_class_source": "template"
@@ -2985,10 +3074,15 @@
         "damage": "2",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2997,12 +3091,14 @@
       "slot": "Armament@Upgrade2",
       "versus_templates": [
        "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
        "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryYakChainGun",
       "weapon_class_source": "template"
@@ -8946,10 +9042,15 @@
         "damage": "1",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "10",
@@ -8957,12 +9058,14 @@
       "slot": "Armament@UpgradeAG",
       "versus_templates": [
        "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
        "^Effect_Flame_Light",
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryRAGatlingTankCannon",
       "weapon_class_source": "template"
@@ -8973,10 +9076,15 @@
         "damage": "1",
         "tag": "Flame_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "10",
@@ -8986,7 +9094,8 @@
        "IncendiaryRAGatlingTankCannon"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "IncendiaryRAGatlingTankCannon_AA",
       "weapon_class_source": "template"
@@ -10539,10 +10648,15 @@
         "damage": "4",
         "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
@@ -10553,15 +10667,17 @@
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy",
        "^Projectile_Flame_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "ra120mmThermobaric",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -10576,10 +10692,15 @@
         "damage": "4",
         "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
@@ -10590,10 +10711,11 @@
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "ra120mmThermobaricTargetingComputer",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "secondary",
@@ -12334,10 +12456,15 @@
         "damage": "8",
         "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
@@ -12348,15 +12475,17 @@
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy",
        "^Projectile_Flame_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "ra120mm2Thermobaric",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -12371,10 +12500,15 @@
         "damage": "8",
         "tag": "Flame_Heavy_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
@@ -12385,10 +12519,11 @@
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "ra120mm2ThermobaricTargetingComputer",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "secondary",
