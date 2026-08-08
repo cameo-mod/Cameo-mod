@@ -980,6 +980,22 @@ passed the boot-gate.
   live WIP in `weapons.yaml` (template changes affecting SchwarzerMond
   weapons) in addition to this conversion's changes.
 
+### 14.27 Phase A (single-inherit retrofit) — COMPLETE (verified 2026-08-08)
+
+- Ran `retrofit_weapon_family.py --old <family>` (dry-run) for all 19
+  old-template families: SmallArms, Chaingun, TankDestroyerCannon,
+  MediumCannon, HeavyCannon, LightMissile, MediumMissile, HeavyMissile,
+  FlakWeapon, HeavyAAWeapon, Grenade, ShrapnelWeapon, HeavyBomb,
+  LaserWeapon, RailgunWeapon, TeslaWeapon, TeslaChargedWeapon,
+  SwordWeapon, ArrowWeapon, MagicWeapon.
+- **Result: 0 single-inherit weapons remain across ALL 19 families.**
+  Every remaining old-template weapon (77 total) is a Phase B mixed
+  weapon (2+ old-family inherits) requiring a maintainer design call
+  per weapon on which warhead identity to collapse to.
+- Phase A is therefore COMPLETE. The next step is Phase B
+  (mixed-weapon collapse), which is maintainer-directed per the
+  WEAPON_3WAY_SPLIT.md runbook (§PHASE 3).
+
 ## 15. Live remaining-effort estimate (after this Devin session)
 
 ### 15.1 What is still on old templates (safe files only)
