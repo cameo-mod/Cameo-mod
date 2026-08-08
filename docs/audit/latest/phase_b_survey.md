@@ -1,9 +1,9 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 411
+Total concrete weapons on old families: 390
 Single old-family with new inherits (Phase B completion): 1
-Pure single old-family (mechanical Phase A candidates): 42
+Pure single old-family (mechanical Phase A candidates): 21
 Mixed old-family (Phase B maintainer sign-off): 368 in 253 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
@@ -11,43 +11,22 @@ Mixed old-family (Phase B maintainer sign-off): 368 in 253 groups
 - `HammerheadArtillery` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: HeavyBomb | Demolition_Light=11111, Demolition_Light_Percentage=11, HeavyBomb=11111, HeavyBombPercentage=11, CannonHE_Medium=11111, CannonHE_Medium_Percentage=11, Effect1=0, Effect2=0
 - `SteelHoverMissile` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: ArrowWeapon | ArrowWeapon=4000, ArrowWeaponPercentage=2, MissileAP_Light=4000, MissileAP_Light_Percentage=2, Effect=0
 - `SteelMakoGun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=2000, MediumFlameWeaponFriendlyFire=1000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Demolition_Light_Percentage=1, Railgun_Heavy=2000, Railgun_Heavy_Percentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, Effect=0
-- `BlackWidowPistols` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=10000, SniperWeaponExtraDamage=10000, SniperWeaponPercentage=5
 - `Future_Cryocopter_Rocket` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | old: Grenade | Grenade=16000, GrenadeFriendlyFire=8000, GrenadePercentage=8, MissileAP_Heavy=16000, MissileAP_Heavy_Percentage=8, MissileAP_Medium=16000, MissileAP_Medium_Percentage=8, PhysicalStateCryo1=0, PhysicalStateCryo2=0, PhysicalStateCryo3=0, Effect=0, EffectAir=0
-- `NaxiSniper` (ContentPacks\RedAlert2Mod\Naxis\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=24000, SniperWeaponExtraDamage=24000, SniperWeaponPercentage=12
-- `RA2NarcoPistol` (ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=20000, SniperWeaponExtraDamage=20000, SniperWeaponPercentage=10
 - `HueyGun` (ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml) | old: FlakWeapon | FlakWeapon=2000, FlakWeaponPercentage=1, Bullet_Medium=2000, Bullet_Medium_Percentage=1
-- `VanSniper` (ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=80000, SniperWeaponExtraDamage=80000, SniperWeaponPercentage=40
-- `tkmawp` (ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=44000, SniperWeaponExtraDamage=44000, SniperWeaponPercentage=22
-- `tkmsmg` (ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
-- `RA2MP5` (ContentPacks\RedAlert2\Allies\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=4000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
-- `RA2AWP` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=44000, SniperWeaponExtraDamage=44000, SniperWeaponPercentage=22
 - `RA2CRM60H` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, CannonHE_Heavy_Percentage=1, Bullet_Medium=2000, Bullet_Medium_Percentage=1, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
-- `RA2DoublePistols` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=14000, SniperWeaponExtraDamage=14000, SniperWeaponPercentage=7
 - `RA2SCUD` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=30000, MediumFlameWeaponFriendlyFire=15000, MediumFlameWeaponPercentage=15, Demolition_Light=30000, Demolition_Light_Percentage=15, MissileAP_Heavy=30000, MissileAP_Heavy_Percentage=15, Effect=0
-- `Colt45` (ContentPacks\RedAlert\Allies\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=7777, SniperWeaponExtraDamage=7777, SniperWeaponPercentage=3
 - `ArmoredCarMGAAWaveforce` (ContentPacks\RedAlert\Japan\yaml\weapons.yaml) | old: HeavyAAWeapon | 
 - `ArmoredCarMGWaveforce` (ContentPacks\RedAlert\Japan\yaml\weapons.yaml) | old: HeavyAAWeapon | 
 - `ATMine` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | old: HeavyMissile | HeavyMissile=50000, HeavyMissilePercentage=25, Effect=0, Smudge=0
-- `LightSniper` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=30000, SniperWeaponExtraDamage=30000, SniperWeaponPercentage=15
 - `ZeroFighterChainGunWaveforce` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | old: Grenade | Bullet_Medium_Percentage=2, Railgun_Heavy=4000, Railgun_Heavy_Percentage=2, GrenadeFriendlyFire=500, GrenadePercentage=2
-- `CommissarPistol` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=10000, SniperWeaponExtraDamage=10000, SniperWeaponPercentage=5
 - `MonsterTank120mm` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | old: NuclearWarhead | NuclearWarhead=40000, NuclearWarheadPercentage=20, CannonHE_Heavy=40000, CannonHE_Heavy_Percentage=20, Effect=0
 - `SiegeMortarThermobaric` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | old: HeavyFlameWeapon | ShrapnelWeapon=4000, ShrapnelWeaponFriendlyFire=2000, ShrapnelWeaponPercentage=2, Grenade=4000, GrenadeFriendlyFire=2000, GrenadePercentage=2, MediumFlameWeapon=4000, MediumFlameWeaponFriendlyFire=2000, MediumFlameWeaponPercentage=2, LightFlameWeapon=4000, LightFlameWeaponFriendlyFire=2000, LightFlameWeaponPercentage=2, CannonHE_Heavy=4000, CannonHE_Heavy_Percentage=2, HeavyFlameWeapon=4000, HeavyFlameWeaponFriendlyFire=2000, HeavyFlameWeaponPercentage=2, Effect=0
 - `ThermobaricNuclearMaverick` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | old: NuclearWarhead | Flame_Heavy=14000, Flame_Heavy_Percentage=7, NuclearWarhead=14000, NuclearWarheadPercentage=7, MissileHE_Heavy=14000, MissileHE_Heavy_Percentage=7, Effect=0, Effect2=0
-- `ReaperPistols` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=4000, SniperWeaponExtraDamage=4000, SniperWeaponPercentage=2
-- `td_gdi_commando_sniper` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=40000, SniperWeaponExtraDamage=40000, SniperWeaponPercentage=20
 - `TS70mmChem` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | old: LightChemicalWeapon | CannonHE_Medium=4000, CannonHE_Medium_Percentage=2, LightChemicalWeapon=2000, LightChemicalWeaponFriendlyFire=1000, LightChemicalWeaponPercentage=1, Cloud=0
 - `TSScoopDualChem` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | old: MediumChemicalWeapon | CannonHE_Medium=20000, CannonHE_Medium_Percentage=10, MediumChemicalWeapon=10000, MediumChemicalWeaponFriendlyFire=5000, MediumChemicalWeaponPercentage=5, Cloud=0
-- `TSSniper` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=10000, SniperWeaponExtraDamage=10000, SniperWeaponPercentage=5
-- `ChamBlade` (ContentPacks\TiberianSun\Nod\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=50000, SniperWeaponExtraDamage=50000, SniperWeaponPercentage=25
-- `TSShadowTeamPistols` (ContentPacks\TiberianSun\Nod\yaml\weapons.yaml) | old: SniperWeapon | SniperWeapon=7000, SniperWeaponExtraDamage=7000, SniperWeaponPercentage=5
-- `RA2AWP` (weapons\redalert2.yaml) | old: SniperWeapon | SniperWeapon=44000, SniperWeaponExtraDamage=44000, SniperWeaponPercentage=22
 - `RA2CRM60H` (weapons\redalert2.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, CannonHE_Heavy_Percentage=1, Bullet_Medium=2000, Bullet_Medium_Percentage=1, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
-- `RA2DoublePistols` (weapons\redalert2.yaml) | old: SniperWeapon | SniperWeapon=14000, SniperWeaponExtraDamage=14000, SniperWeaponPercentage=7
 - `RA2MultiHoverMissile` (weapons\redalert2.yaml) | old: MediumChemicalWeapon | ArrowWeapon=2000, ArrowWeaponPercentage=1, MissileAP_Light=2000, MissileAP_Light_Percentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, MediumChemicalWeapon=2000, MediumChemicalWeaponFriendlyFire=1000, MediumChemicalWeaponPercentage=1
 - `RA2SCUD` (weapons\redalert2.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=30000, MediumFlameWeaponFriendlyFire=15000, MediumFlameWeaponPercentage=15, Demolition_Light=30000, Demolition_Light_FriendlyFire=15000, Demolition_Light_Percentage=15, MissileAP_Heavy=30000, MissileAP_Heavy_Percentage=15, Effect=0
-- `ra1_allies_alliedsniper` (weapons\tiberiandawn.yaml) | old: SniperWeapon | SniperWeapon=40000, SniperWeaponExtraDamage=40000, SniperWeaponPercentage=20
-- `TSEngineerPistol` (weapons\tiberiansun.yaml) | old: SniperWeapon | SniperWeapon=20000, SniperWeaponExtraDamage=20000, SniperWeaponPercentage=10
 - `TSLaser90mm` (weapons\tiberiansun.yaml) | old: LaserWeapon | CannonHE_Medium=6000, CannonHE_Medium_Percentage=3, LaserWeapon=6000, LaserWeaponPercentage=3
 
 ## Single old-family with new inherits (finish conversion)

@@ -1092,6 +1092,32 @@ per weapon, and proposes a heuristic dominant-damage collapse target. It
 is input for the Phase 3 maintainer-directed collapse; do not convert
 mixed weapons without sign-off.
 
+## 16. Sniper family converted (`fa1016d21`, 2026-08-08)
+
+Created the 3-way Sniper template family in `mods/cameo/weapons/weapons.yaml`:
+- `^Warhead_Sniper_Light`
+- `^Projectile_Sniper_Light`
+- `^Effect_Sniper_Light`
+
+Updated `retrofit_weapon_family.py` (removed `SniperWeapon` from `STAY`,
+added it to `TRIPLE`). Converted 21 single-inherit SniperWeapon weapons
+across 16 files. 6 mixed SniperWeapon children remain for Phase B.
+
+Post-conversion verification:
+- `sweep_areadamage.py --apply` stripped 22 `SpreadDamage` re-declarations
+- `find_orphan_old_keys.py` = 0 real, `find_orphan_old_keys_multi.py` = 0
+  suspicious, `find_empty_warhead.py` = 0
+- Boot-gate passed (main menu, no new exception logs)
+- 32 ledgers refreshed
+
+A scan of the remaining old families found **0 additional convertible**
+single-inherit weapons; the 21 leftover pure single-list entries are
+partial conversions or mixed in the tool's stricter view. Mechanical Phase
+A is complete. Remaining old-family work is Phase B mixed-weapon collapse
+(390 concrete weapons, 368 mixed, 253 groups).
+
+## 15. Live remaining-effort estimate (after this Devin session)
+
 ### 15.1 What is still on old templates (safe files only)
 
 A scan of non-active YAML files found:
