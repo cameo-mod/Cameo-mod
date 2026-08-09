@@ -89,12 +89,8 @@ Flamethrower:
 	Report: flamer2.aud
 	Warhead@Flame_Light:
 		Damage: 20000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 10
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		Amount: 20000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 10000
 
 Chemspray:
 	Inherits@wh: ^Warhead_Chemical_Light
@@ -313,5 +309,4 @@ ChemTibAtomic:
 		AddsResourceType: Tiberium
 		Size: 10,10
 		Delay: 100
-
 

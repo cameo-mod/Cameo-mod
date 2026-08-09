@@ -383,12 +383,8 @@ StealthTankMissilesShrapnel:
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@Flame_Light:
-		Damage: 2000
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 2
