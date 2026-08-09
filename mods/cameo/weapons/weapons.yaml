@@ -5480,6 +5480,187 @@ DefuseKit:
 			Spaceship: 11
 		UpdatesUnitStatistics: false
 
+###### Thermobaric: blend of Demolition+Concussion+Flame + PhysicalStates {'Temperature': 100} ######
+^Warhead_Thermobaric_Light:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Thermobaric_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 2000
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			HAZMAT: 50
+			Shield: 110
+			None: 92
+			Flak: 80
+			Plate: 68
+			Heroic: 56
+			Scout: 72
+			Light: 62
+			Medium: 52
+			Heavy: 42
+			Superheavy: 34
+			Wood: 94
+			Steel: 82
+			Concrete: 70
+			Fighter: 28
+			Bomber: 22
+			Helicopter: 16
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 100
+	Warhead@Thermobaric_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			None: 14
+			Flak: 12
+			Plate: 10
+			Heroic: 8
+			Scout: 11
+			Light: 9
+			Medium: 8
+			Heavy: 6
+			Superheavy: 5
+			Wood: 15
+			Steel: 13
+			Concrete: 11
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		UpdatesUnitStatistics: false
+
+^Warhead_Thermobaric_Medium:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Thermobaric_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 600
+		Damage: 2000
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			HAZMAT: 50
+			Shield: 125
+			None: 93
+			Flak: 83
+			Plate: 73
+			Heroic: 63
+			Scout: 76
+			Light: 68
+			Medium: 60
+			Heavy: 51
+			Superheavy: 45
+			Wood: 95
+			Steel: 85
+			Concrete: 75
+			Fighter: 40
+			Bomber: 35
+			Helicopter: 30
+			Spaceship: 25
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 100
+	Warhead@Thermobaric_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 1
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			Shield: 25
+			None: 18
+			Flak: 16
+			Plate: 14
+			Heroic: 12
+			Scout: 15
+			Light: 13
+			Medium: 12
+			Heavy: 10
+			Superheavy: 9
+			Wood: 19
+			Steel: 17
+			Concrete: 15
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		UpdatesUnitStatistics: false
+
+^Warhead_Thermobaric_Heavy:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Thermobaric_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 800
+		Damage: 2000
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			HAZMAT: 50
+			Shield: 140
+			None: 94
+			Flak: 86
+			Plate: 78
+			Heroic: 70
+			Scout: 81
+			Light: 74
+			Medium: 68
+			Heavy: 61
+			Superheavy: 56
+			Wood: 96
+			Steel: 88
+			Concrete: 80
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 100
+	Warhead@Thermobaric_Heavy_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 1
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			None: 23
+			Flak: 21
+			Plate: 19
+			Heroic: 17
+			Scout: 20
+			Light: 18
+			Medium: 17
+			Heavy: 15
+			Superheavy: 14
+			Wood: 24
+			Steel: 22
+			Concrete: 20
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		UpdatesUnitStatistics: false
+
 ###### Melee: INF > VEH > BLD > AIR (light, air=False) ######
 ^Warhead_Melee_Light:
 	ValidTargets: Ground

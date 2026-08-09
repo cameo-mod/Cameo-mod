@@ -335,6 +335,10 @@ def emit_inherit_family(name, parent, psn, pss, levels):
 # to the flame + chemical combo"). {name: (parents, {StateName: Scale}, levels)}.
 BLEND_FAMILIES = {
     "Plasma": (["Flame", "Chemical"], {"Temperature": 50, "Corrosion": 50}, L3),
+    # Thermobaric = fuel-air incendiary blast: the per-armor AVERAGE of Demolition + Concussion +
+    # Flame ("demolition + concussion + fire"), plus full heat (Temperature 100). Collapses the
+    # thermobaric frankenstein weapons (Shrapnel+Demolition+MediumFlame+Flame_Light) onto one warhead.
+    "Thermobaric": (["Demolition", "Concussion", "Flame"], {"Temperature": 100}, L3),
 }
 # Fixed emission order for a blend (it has no single light/heavy direction).
 BLEND_ARMOR_ORDER = ["None", "Flak", "Plate", "Heroic", "Scout", "Light", "Medium", "Heavy",
