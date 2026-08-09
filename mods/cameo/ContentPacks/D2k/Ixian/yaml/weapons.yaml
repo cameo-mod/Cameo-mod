@@ -400,7 +400,7 @@ mtank_pri2:
 		Damage: 4
 	Warhead@Flame_Medium:
 		Damage: 8000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -1472,6 +1472,8 @@ farasha_drone_ixian:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	-Warhead@PhysicalStateLightFlameWeapon:
+	-Warhead@PhysicalStateLightFlameWeaponFriendlyFire:
 
 d2k_basq:
 	Inherits: ^Warhead_CannonHE_Heavy

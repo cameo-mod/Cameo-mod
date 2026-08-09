@@ -330,19 +330,6 @@ SyndicateFireballLauncherExplode:
 		Damage: 2000
 	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		Amount: 4000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 2000
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 4000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 2000
-	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
-		Amount: 4000
-	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 2000
-
 LatinMonkeyGrenade1:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium

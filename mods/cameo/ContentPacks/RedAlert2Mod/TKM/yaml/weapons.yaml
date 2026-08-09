@@ -274,12 +274,8 @@ ThermoF:
 		Palette: tseffect
 	Warhead@Flame_Medium:
 		Damage: 2000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 2000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 1000
 tkmm203:
 	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Warhead_Flame_Light
@@ -727,10 +723,6 @@ sandmarinemortar:
 		Damage: 120000
 	Warhead@Flame_Medium_Percentage:
 		Damage: 60
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 120000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 60000
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_explosion
 		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
@@ -762,10 +754,6 @@ bigshieemortar:
 		Damage: 80000
 	Warhead@Flame_Medium_Percentage:
 		Damage: 40
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 80000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 40000
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_explosion
 		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav

@@ -25,13 +25,8 @@ FlamethrowerExplode:
 	Inherits: Flamethrower
 	Warhead@Flame_Light:
 		Damage: 10000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 5
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		Amount: 10000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 5000
-
 NodTurretLaser:
 	Inherits: ^SmallArms
 	Inherits@2: ^Chaingun
@@ -90,7 +85,7 @@ SmallTiberiumExplosion:
 	Inherits: Chemspray
 	Warhead@Chemical_Light:
 		Damage: 24000
-	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
 		Damage: 12
 	Warhead@Resource: CreateResource
 		AddsResourceType: Tiberium
@@ -102,7 +97,7 @@ BigTiberiumExplosion:
 	Inherits@fx: ^Effect_Chem_Heavy
 	Warhead@Chemical_Heavy:
 		Damage: 50000
-	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		Damage: 25
 	Warhead@Resource: CreateResource
 		AddsResourceType: Tiberium
@@ -196,7 +191,7 @@ FireballLauncherBuggy:
 		Palette: tseffect
 	Warhead@Flame_Light:
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 
 BikeRockets:
@@ -393,12 +388,8 @@ StealthTankMissilesShrapnel:
 		Damage: 1
 	Warhead@Flame_Light:
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		Amount: 2000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 1000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 2
 		Duration: 12
@@ -1001,12 +992,8 @@ BigFlamer2:
 	Report: flamer2.aud
 	Warhead@Flame_Heavy:
 		Damage: 20000
-	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		Damage: 10
-	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
-		Amount: 20000
-	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 10000
 	Warhead@Glow: GlowImpact
 		Color: FF6600
 		Scale: 2.0
@@ -1019,12 +1006,8 @@ FlametankExplode2:
 	Inherits@fx: ^Effect_Flame_Heavy
 	Warhead@Flame_Heavy:
 		Damage: 40000
-	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		Damage: 20
-	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
-		Amount: 40000
-	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 20000
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
 		GlowScale: 2.0
@@ -1087,26 +1070,16 @@ BlackHandFlamer:
 		Palette: tseffect
 	Warhead@Flame_Medium:
 		Damage: 4000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 4000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 2000
-
 BlackHandFlamerExplode:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
 	Warhead@Flame_Medium:
 		Damage: 12000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 6
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 12000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 6000
-
 BHRedDarts:
 	Inherits: ^TeslaChargedWeapon
 	Inherits@2: ^TankDestroyerCannon

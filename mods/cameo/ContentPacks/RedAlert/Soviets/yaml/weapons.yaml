@@ -8,7 +8,7 @@ IncendiaryM1Carbine:
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Light: AreaDamage
@@ -115,6 +115,8 @@ GrenadeThermobaric:
 		Damage: 4000
 	Warhead@Flame_Light_Percentage:
 		Damage: 2
+	-Warhead@PhysicalStateMediumFlameWeapon:
+	-Warhead@PhysicalStateMediumFlameWeaponFriendlyFire:
 
 GrenadeThermobaricExplode:
 	Inherits: GrenadeThermobaric
@@ -392,12 +394,8 @@ FireballLauncher:
 		TrailDelay: 0
 	Warhead@Flame_Medium:
 		Damage: 18000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 9
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 18000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 9000
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
 		GlowScale: 1.5
@@ -457,12 +455,8 @@ FireballGun:
 		TrailDelay: 0
 	Warhead@Flame_Medium:
 		Damage: 8000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 8000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 4000
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
 		GlowScale: 1.5
@@ -473,13 +467,8 @@ FireballGunExplode:
 	Inherits: FireballGun
 	Warhead@Flame_Medium:
 		Damage: 4000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 4000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 2000
-
 FireballGunThermobaric:
 	Inherits: ^HeavyFlameWeapon
 	Inherits@2: ^MediumFlameWeapon
@@ -1566,7 +1555,7 @@ IncendiaryChainGun:
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium:
@@ -1958,7 +1947,7 @@ IncendiaryYakChainGun:
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Bullet_Medium:
@@ -2523,7 +2512,7 @@ ThermobaricNuclearMaverick:
 	Inherits: 105mm
 	Warhead@Flame_Medium:
 		Damage: 6000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@CannonHE_Medium:
 		Damage: 6000
@@ -2722,7 +2711,7 @@ ra120mmThermobaric:
 		Speed: 641
 	Warhead@Flame_Heavy:
 		Damage: 8000
-	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@Demolition_Heavy:
 		Damage: 8000
@@ -3059,7 +3048,7 @@ ra120mm2Thermobaric:
 		Speed: 666
 	Warhead@Flame_Heavy:
 		Damage: 16000
-	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Demolition_Heavy:
 		Damage: 16000
@@ -3216,7 +3205,7 @@ MonsterTank120mmThermobaric:
 	Inherits: MonsterTank120mm
 	Warhead@Flame_Heavy:
 		Damage: 40000
-	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		Damage: 20
 
 MonsterTankTusk:
@@ -3661,7 +3650,7 @@ VolkovMagneticWeaponIncendiary:
 	Inherits@2: ^IncendiaryBulletProjectile
 	Warhead@Flame_Medium:
 		Damage: 10000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 5
 
 VolkovMagneticWeaponIncendiaryTesla:
@@ -4004,7 +3993,7 @@ IncendiaryRAGatlingTankCannon:
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Bullet_Medium:
@@ -4017,7 +4006,7 @@ IncendiaryRAGatlingTankCannon_AA:
 	ValidTargets: Air
 	Warhead@Flame_Light:
 		ValidTargets: Air
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 TeslaRAGatlingTankCannon:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -4150,7 +4139,7 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Bullet_Light: AreaDamage

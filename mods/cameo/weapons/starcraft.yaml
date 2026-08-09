@@ -7,13 +7,8 @@ Flamethrower:
 	Report: flamer2.aud
 	Warhead@Flame_Light:
 		Damage: 20000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 10
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		Amount: 20000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 10000
-
 WraithDroneLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -127,7 +122,7 @@ SCSPIDEREXPLOSION:
 		Damage: 80000
 		Spread: 2048
 		Falloff: 100, 25, 0
-	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		Damage: 40
 		Spread: 2048
 		Falloff: 100, 25, 0

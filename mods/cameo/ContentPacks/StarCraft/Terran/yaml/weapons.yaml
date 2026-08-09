@@ -109,13 +109,8 @@ FirebatF:
 		Palette: tseffect
 	Warhead@Flame_Medium:
 		Damage: 2000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 2000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 1000
-
 HarakanF:
 	Inherits: ^HeavyFlameWeapon
 	Inherits@2: ^MediumFlameWeapon
@@ -178,31 +173,6 @@ MatadorFlamer:
 		Damage: 2000
 	Warhead@Flame_Heavy_Percentage:
 		Damage: 1
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Neutral, Enemy
-		Amount: 2000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Ally
-		Amount: 1000
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Neutral, Enemy
-		Amount: 2000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Ally
-		Amount: 1000
-	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Neutral, Enemy
-		Amount: 2000
-	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Ally
-		Amount: 1000
-
 MatadorLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy

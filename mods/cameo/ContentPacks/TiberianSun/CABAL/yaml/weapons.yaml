@@ -1579,7 +1579,7 @@ CabalRavagerPlasma:
 		Image: cabal_greenplasma
 	Warhead@Chemical_Medium:
 		Damage: 32000
-	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		Damage: 16
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
@@ -1598,7 +1598,7 @@ CabalWidowPlasma:
 		Image: cabal_greenplasma
 	Warhead@Chemical_Medium:
 		Damage: 32000
-	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		Damage: 16
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
@@ -2296,7 +2296,7 @@ CabalRavagerPlasmaNeutron:
 		Image: cabal_plasmabullet
 	Warhead@Chemical_Medium:
 		Damage: 32000
-	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		Damage: 16
 	Warhead@Effect: CreateEffect
 		Explosions: magicnuke_small

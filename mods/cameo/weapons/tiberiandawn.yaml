@@ -105,7 +105,7 @@ Chemspray:
 	Report: flamer2.aud
 	Warhead@Chemical_Light:
 		Damage: 48000
-	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
 		Damage: 24
 
 TiberiumExplosion:
@@ -114,7 +114,7 @@ TiberiumExplosion:
 	Inherits@fx: ^Effect_Chem_Medium
 	Warhead@Chemical_Medium:
 		Damage: 40000
-	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		Damage: 20
 	Warhead@Resource: CreateResource
 		AddsResourceType: Tiberium
@@ -174,12 +174,8 @@ BigFlamer:
 	Report: flamer2.aud
 	Warhead@Flame_Medium:
 		Damage: 14000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 7
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 14000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 7000
 	Warhead@Glow: GlowImpact
 		Color: FF6600
 		Scale: 1.5
@@ -192,12 +188,8 @@ FlametankExplode:
 	Inherits@fx: ^Effect_Flame_Medium
 	Warhead@Flame_Medium:
 		Damage: 28000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 14
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 28000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 14000
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
 		GlowScale: 2.0

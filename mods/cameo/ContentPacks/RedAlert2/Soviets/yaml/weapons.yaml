@@ -68,7 +68,7 @@ RA2KirovBomb_rad:
 	Warhead@Chemical_Heavy:
 		Damage: 48000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		Damage: 24
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Demolition_Heavy:
@@ -210,7 +210,7 @@ RA2120mm_rad:
 	Inherits@rad: ^RA2RadShell
 	Warhead@Chemical_Medium:
 		Damage: 6000
-	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@CannonHE_Medium:
 		Damage: 6000
@@ -296,7 +296,7 @@ RA160mm_rad:
 		TrailPalette: effect
 	Warhead@Chemical_Light:
 		Damage: 36000
-	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
 		Damage: 18
 	Warhead@Concussion_Medium:
 		Damage: 36000
