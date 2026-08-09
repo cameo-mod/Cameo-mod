@@ -5661,6 +5661,187 @@ DefuseKit:
 			Spaceship: 10
 		UpdatesUnitStatistics: false
 
+###### Quantum: blend of Railgun+Laser+Tesla + PhysicalStates {'Temperature': 25} ######
+^Warhead_Quantum_Light:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Quantum_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 2000
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			HAZMAT: 50
+			Shield: 110
+			None: 44
+			Flak: 58
+			Plate: 72
+			Heroic: 86
+			Scout: 46
+			Light: 58
+			Medium: 72
+			Heavy: 86
+			Superheavy: 100
+			Wood: 34
+			Steel: 46
+			Concrete: 58
+			Fighter: 12
+			Bomber: 24
+			Helicopter: 36
+			Spaceship: 48
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 25
+	Warhead@Quantum_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			None: 6
+			Flak: 9
+			Plate: 11
+			Heroic: 13
+			Scout: 7
+			Light: 9
+			Medium: 11
+			Heavy: 13
+			Superheavy: 16
+			Wood: 5
+			Steel: 7
+			Concrete: 9
+			Fighter: 1
+			Bomber: 3
+			Helicopter: 5
+			Spaceship: 7
+		UpdatesUnitStatistics: false
+
+^Warhead_Quantum_Medium:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Quantum_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 600
+		Damage: 2000
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			HAZMAT: 50
+			Shield: 125
+			None: 53
+			Flak: 65
+			Plate: 76
+			Heroic: 88
+			Scout: 55
+			Light: 65
+			Medium: 76
+			Heavy: 88
+			Superheavy: 100
+			Wood: 45
+			Steel: 55
+			Concrete: 65
+			Fighter: 26
+			Bomber: 36
+			Helicopter: 46
+			Spaceship: 56
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 25
+	Warhead@Quantum_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 1
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			Shield: 25
+			None: 10
+			Flak: 13
+			Plate: 15
+			Heroic: 17
+			Scout: 11
+			Light: 13
+			Medium: 15
+			Heavy: 17
+			Superheavy: 20
+			Wood: 9
+			Steel: 11
+			Concrete: 13
+			Fighter: 5
+			Bomber: 7
+			Helicopter: 9
+			Spaceship: 11
+		UpdatesUnitStatistics: false
+
+^Warhead_Quantum_Heavy:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Quantum_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 800
+		Damage: 2000
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			HAZMAT: 50
+			Shield: 140
+			None: 62
+			Flak: 72
+			Plate: 81
+			Heroic: 90
+			Scout: 64
+			Light: 72
+			Medium: 81
+			Heavy: 90
+			Superheavy: 100
+			Wood: 56
+			Steel: 64
+			Concrete: 72
+			Fighter: 41
+			Bomber: 49
+			Helicopter: 57
+			Spaceship: 65
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 25
+	Warhead@Quantum_Heavy_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 1
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			None: 15
+			Flak: 18
+			Plate: 20
+			Heroic: 22
+			Scout: 16
+			Light: 18
+			Medium: 20
+			Heavy: 22
+			Superheavy: 25
+			Wood: 14
+			Steel: 16
+			Concrete: 18
+			Fighter: 10
+			Bomber: 12
+			Helicopter: 14
+			Spaceship: 16
+		UpdatesUnitStatistics: false
+
 ###### Melee: INF > VEH > BLD > AIR (light, air=False) ######
 ^Warhead_Melee_Light:
 	ValidTargets: Ground

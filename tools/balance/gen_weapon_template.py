@@ -339,6 +339,10 @@ BLEND_FAMILIES = {
     # Flame ("demolition + concussion + fire"), plus full heat (Temperature 100). Collapses the
     # thermobaric frankenstein weapons (Shrapnel+Demolition+MediumFlame+Flame_Light) onto one warhead.
     "Thermobaric": (["Demolition", "Concussion", "Flame"], {"Temperature": 100}, L3),
+    # Quantum = high-tech energy blend: per-armor AVERAGE of Railgun + Laser + Tesla (Heavy-only
+    # parents extrapolated to L/M via the level step). Heat = Laser's 75 / 3 parents = 25 (only Laser
+    # contributes a meter; Plasma-consistent per-parent averaging). EMP/ExtraDamage stay per-weapon.
+    "Quantum": (["Railgun", "Laser", "Tesla"], {"Temperature": 25}, L3),
 }
 # Fixed emission order for a blend (it has no single light/heavy direction).
 BLEND_ARMOR_ORDER = ["None", "Flak", "Plate", "Heroic", "Scout", "Light", "Medium", "Heavy",
