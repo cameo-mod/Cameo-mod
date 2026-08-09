@@ -15,6 +15,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using OpenRA.Mods.AS.Traits;
 using OpenRA.Mods.Common;
+using OpenRA.Mods.Common.Activities;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -142,6 +143,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Try to build another production building if there is too much cash.")]
 		public readonly int NewProductionCashThreshold = 10000;
 
+		[Desc("Bot types allowed to use NewProductionCashThreshold. Empty enables it for all bots.")]
+		public readonly FrozenSet<string> NewProductionBotTypes = FrozenSet<string>.Empty;
+
+		[Desc("Cash retained when NewProductionBotTypes add excess production capacity.")]
+		public readonly int ExcessProductionRecoveryReserve = 0;
+
 		[Desc("Only queue construction of a new building when above this requirement.")]
 		public readonly int BuildingProductionMinCashRequirement = 1750;
 
@@ -215,7 +222,7 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		public CPos GetRandomBaseCenter()
 		{
-			var randomConstructionYard = ConstructionYardBuildings.Actors.Where(a => !a.IsDead)
+			var randomConstructionYard = ConstructionYardBuildings.Actors.Where(a => !a.IsDead && !IsExclusiveConstructionQueue(a))
 				.RandomOrDefault(world.LocalRandom);
 
 			return randomConstructionYard?.Location ?? initialBaseCenter;
@@ -254,7 +261,8 @@ namespace OpenRA.Mods.CA.Traits
 			if (conyardType != null)
 			{
 				var matchingConstructionYard = ConstructionYardBuildings.Actors
-					.Where(a => !a.IsDead && a.Info.Name == conyardType)
+					.Where(a => !a.IsDead && a.Info.Name == conyardType && !GetRequestedRefinery(a).HasValue &&
+						!IsExclusiveConstructionQueue(a))
 					.RandomOrDefault(world.LocalRandom);
 
 				if (matchingConstructionYard != null)
@@ -267,7 +275,7 @@ namespace OpenRA.Mods.CA.Traits
 		public CPos GetDefenseBaseCenter()
 		{
 			var defenceConstructionYard = DefenseCenter != null ? ConstructionYardBuildings.Actors.OrderBy(a => (DefenseCenter.Value - a.Location).LengthSquared)
-				.FirstOrDefault(a => !a.IsDead) : null;
+				.FirstOrDefault(a => !a.IsDead && !IsExclusiveConstructionQueue(a)) : null;
 
 			return defenceConstructionYard?.Location ?? GetRandomBaseCenter();
 		}
@@ -277,6 +285,8 @@ namespace OpenRA.Mods.CA.Traits
 		/// <Summary> Actor, ActorCount </Summary>
 		public Dictionary<string, int> BuildingsBeingProduced = [];
 		public IBotBaseExpansion[] BaseExpansionModules;
+		IBotExclusiveConstructionQueue[] exclusiveConstructionQueues;
+		IBotCashReservation cashReservation;
 		public ResourceMapBotModule ResourceMapModule;
 		public Actor RelocationHoldConyard { get; set; }
 
@@ -289,6 +299,105 @@ namespace OpenRA.Mods.CA.Traits
 		CPos initialBaseCenter;
 		public CPos? ResourceConyardCenter;
 		public Dictionary<Actor, (CPos ConyardLoc, CPos ResourceLoc)> RequestedRefineries = [];
+		readonly Dictionary<Actor, int> requestedRefineryPlacementTicks = [];
+		readonly Dictionary<Actor, uint> requestedRefineryStartActorIds = [];
+		readonly Dictionary<Actor, Actor> requestedPlacedRefineries = [];
+
+		public (Actor Requester, CPos ConyardLoc, CPos ResourceLoc)? GetRequestedRefinery(Actor producer)
+		{
+			Actor matchedRequester = null;
+			(CPos ConyardLoc, CPos ResourceLoc) matchedRequest = default;
+			foreach (var request in RequestedRefineries)
+			{
+				var replacement = request.Key;
+				while (replacement != null && replacement != producer)
+					replacement = replacement.ReplacedByActor;
+
+				if (replacement == producer)
+				{
+					matchedRequester = request.Key;
+					matchedRequest = request.Value;
+					break;
+				}
+			}
+
+			if (matchedRequester != null)
+			{
+				// Migrate the request from the mobile actor to its deployed replacement so the
+				// producer association remains durable across save/load.
+				if (matchedRequester != producer)
+				{
+					var hadPendingPlacement = requestedRefineryPlacementTicks.Remove(matchedRequester, out var pendingTick);
+					RequestedRefineries.Remove(matchedRequester);
+					RequestedRefineries[producer] = matchedRequest;
+					if (hadPendingPlacement)
+						requestedRefineryPlacementTicks[producer] = pendingTick;
+					if (requestedRefineryStartActorIds.Remove(matchedRequester, out var startActorId))
+						requestedRefineryStartActorIds[producer] = startActorId;
+					if (requestedPlacedRefineries.Remove(matchedRequester, out var placedRefinery))
+						requestedPlacedRefineries[producer] = placedRefinery;
+					matchedRequester = producer;
+				}
+
+				return (matchedRequester, matchedRequest.ConyardLoc, matchedRequest.ResourceLoc);
+			}
+
+			return null;
+		}
+
+		public bool IsExclusiveConstructionQueue(Actor producer) =>
+			exclusiveConstructionQueues != null && exclusiveConstructionQueues.Any(q => q.IsExclusiveConstructionQueue(producer));
+
+		public bool TryReserveExcessProductionCash(int cost) => cashReservation == null ||
+			cashReservation.TryReserveCash(cost, Info.ExcessProductionRecoveryReserve);
+
+		public bool IsRequestedRefineryPlacementPending(Actor producer)
+		{
+			var request = GetRequestedRefinery(producer);
+			if (!request.HasValue || !requestedRefineryPlacementTicks.TryGetValue(request.Value.Requester, out var tick))
+				return false;
+
+			if (requestedPlacedRefineries.ContainsKey(request.Value.Requester) || world.WorldTick - tick <= 250)
+				return true;
+
+			requestedRefineryPlacementTicks.Remove(request.Value.Requester);
+			return false;
+		}
+
+		public bool IsRequestedRefinerySatisfied(Actor producer)
+		{
+			var request = GetRequestedRefinery(producer);
+			if (!request.HasValue)
+				return false;
+
+			var requester = request.Value.Requester;
+			if (!requestedPlacedRefineries.TryGetValue(requester, out var refinery) || refinery.IsDead || !refinery.IsInWorld)
+			{
+				var startActorId = requestedRefineryStartActorIds.GetValueOrDefault(requester);
+				refinery = world.FindActorsInCircle(world.Map.CenterOfCell(request.Value.ResourceLoc), WDist.FromCells(20))
+					.Where(a => a.Owner == player && !a.IsDead && a.ActorID > startActorId && Info.RefineryTypes.Contains(a.Info.Name))
+					.OrderBy(a => a.ActorID).FirstOrDefault();
+				if (refinery == null)
+				{
+					requestedPlacedRefineries.Remove(requester);
+					return false;
+				}
+
+				requestedPlacedRefineries[requester] = refinery;
+			}
+
+			var requestStartActorId = requestedRefineryStartActorIds.GetValueOrDefault(requester);
+			return world.FindActorsInCircle(refinery.CenterPosition, WDist.FromCells(20))
+				.Any(a => a.Owner == player && !a.IsDead && a.ActorID > requestStartActorId &&
+					a.Info.HasTraitInfo<HarvesterInfo>() && a.CurrentActivity is FindAndDeliverResources);
+		}
+
+		public void MarkRequestedRefineryPlacementPending(Actor producer)
+		{
+			var request = GetRequestedRefinery(producer);
+			if (request.HasValue)
+				requestedRefineryPlacementTicks[request.Value.Requester] = world.WorldTick;
+		}
 
 		readonly Stack<TraitPair<RallyPoint>> rallyPoints = [];
 		int assignRallyPointsTicks;
@@ -362,6 +471,8 @@ namespace OpenRA.Mods.CA.Traits
 			pathFinder = self.World.WorldActor.TraitOrDefault<IPathFinder>();
 			positionsUpdatedModules = self.Owner.PlayerActor.TraitsImplementing<IBotPositionsUpdated>().ToArray();
 			BaseExpansionModules = self.Owner.PlayerActor.TraitsImplementing<IBotBaseExpansion>().ToArray();
+			exclusiveConstructionQueues = self.Owner.PlayerActor.TraitsImplementing<IBotExclusiveConstructionQueue>().ToArray();
+			cashReservation = self.Owner.PlayerActor.TraitsImplementing<IBotCashReservation>().FirstOrDefault();
 
 			var i = 0;
 
@@ -879,7 +990,16 @@ namespace OpenRA.Mods.CA.Traits
 				new("OpeningBarracksCostCommitted", FieldSaver.FormatValue(openingBarracksCostCommitted)),
 				new("OpeningRefineryCommittedCost", FieldSaver.FormatValue(openingRefineryCommittedCost)),
 				new("OpeningRefineryCostCommitted", FieldSaver.FormatValue(openingRefineryCostCommitted)),
-				new("OpeningDefenseCommittedCost", FieldSaver.FormatValue(openingDefenseCommittedCost))
+				new("OpeningDefenseCommittedCost", FieldSaver.FormatValue(openingDefenseCommittedCost)),
+				new("RequestedRefineryActors", FieldSaver.FormatValue(RequestedRefineries.Keys.Select(a => a.ActorID).ToArray())),
+				new("RequestedRefineryConyardLocations", FieldSaver.FormatValue(RequestedRefineries.Values.Select(r => r.ConyardLoc).ToArray())),
+				new("RequestedRefineryResourceLocations", FieldSaver.FormatValue(RequestedRefineries.Values.Select(r => r.ResourceLoc).ToArray())),
+				new("RequestedRefineryPendingActors", FieldSaver.FormatValue(requestedRefineryPlacementTicks.Keys.Select(a => a.ActorID).ToArray())),
+				new("RequestedRefineryPendingTicks", FieldSaver.FormatValue(requestedRefineryPlacementTicks.Values.ToArray())),
+				new("RequestedRefineryStartActors", FieldSaver.FormatValue(requestedRefineryStartActorIds.Keys.Select(a => a.ActorID).ToArray())),
+				new("RequestedRefineryStartIds", FieldSaver.FormatValue(requestedRefineryStartActorIds.Values.ToArray())),
+				new("RequestedPlacedRefineryRequesters", FieldSaver.FormatValue(requestedPlacedRefineries.Keys.Select(a => a.ActorID).ToArray())),
+				new("RequestedPlacedRefineries", FieldSaver.FormatValue(requestedPlacedRefineries.Values.Select(a => a.ActorID).ToArray()))
 			};
 		}
 
@@ -938,6 +1058,69 @@ namespace OpenRA.Mods.CA.Traits
 			if (openingDefenseCommittedCostNode != null)
 				openingDefenseCommittedCost = FieldLoader.GetValue<int>("OpeningDefenseCommittedCost",
 					openingDefenseCommittedCostNode.Value.Value);
+
+			var requestActorsNode = data.NodeWithKeyOrDefault("RequestedRefineryActors");
+			var requestConyardsNode = data.NodeWithKeyOrDefault("RequestedRefineryConyardLocations");
+			var requestResourcesNode = data.NodeWithKeyOrDefault("RequestedRefineryResourceLocations");
+			if (requestActorsNode != null && requestConyardsNode != null && requestResourcesNode != null)
+			{
+				var actorIds = FieldLoader.GetValue<uint[]>("RequestedRefineryActors", requestActorsNode.Value.Value);
+				var conyardLocations = FieldLoader.GetValue<CPos[]>("RequestedRefineryConyardLocations", requestConyardsNode.Value.Value);
+				var resourceLocations = FieldLoader.GetValue<CPos[]>("RequestedRefineryResourceLocations", requestResourcesNode.Value.Value);
+				RequestedRefineries.Clear();
+				for (var i = 0; i < Math.Min(actorIds.Length, Math.Min(conyardLocations.Length, resourceLocations.Length)); i++)
+				{
+					var requester = self.World.GetActorById(actorIds[i]);
+					if (requester != null)
+						RequestedRefineries[requester] = (conyardLocations[i], resourceLocations[i]);
+				}
+			}
+
+			var pendingActorsNode = data.NodeWithKeyOrDefault("RequestedRefineryPendingActors");
+			var pendingTicksNode = data.NodeWithKeyOrDefault("RequestedRefineryPendingTicks");
+			if (pendingActorsNode != null && pendingTicksNode != null)
+			{
+				var actorIds = FieldLoader.GetValue<uint[]>("RequestedRefineryPendingActors", pendingActorsNode.Value.Value);
+				var pendingTicks = FieldLoader.GetValue<int[]>("RequestedRefineryPendingTicks", pendingTicksNode.Value.Value);
+				requestedRefineryPlacementTicks.Clear();
+				for (var i = 0; i < Math.Min(actorIds.Length, pendingTicks.Length); i++)
+				{
+					var requester = self.World.GetActorById(actorIds[i]);
+					if (requester != null)
+						requestedRefineryPlacementTicks[requester] = pendingTicks[i];
+				}
+			}
+
+			var startActorsNode = data.NodeWithKeyOrDefault("RequestedRefineryStartActors");
+			var startIdsNode = data.NodeWithKeyOrDefault("RequestedRefineryStartIds");
+			if (startActorsNode != null && startIdsNode != null)
+			{
+				var actorIds = FieldLoader.GetValue<uint[]>("RequestedRefineryStartActors", startActorsNode.Value.Value);
+				var startIds = FieldLoader.GetValue<uint[]>("RequestedRefineryStartIds", startIdsNode.Value.Value);
+				requestedRefineryStartActorIds.Clear();
+				for (var i = 0; i < Math.Min(actorIds.Length, startIds.Length); i++)
+				{
+					var requester = self.World.GetActorById(actorIds[i]);
+					if (requester != null)
+						requestedRefineryStartActorIds[requester] = startIds[i];
+				}
+			}
+
+			var placedRequestersNode = data.NodeWithKeyOrDefault("RequestedPlacedRefineryRequesters");
+			var placedRefineriesNode = data.NodeWithKeyOrDefault("RequestedPlacedRefineries");
+			if (placedRequestersNode != null && placedRefineriesNode != null)
+			{
+				var requesterIds = FieldLoader.GetValue<uint[]>("RequestedPlacedRefineryRequesters", placedRequestersNode.Value.Value);
+				var refineryIds = FieldLoader.GetValue<uint[]>("RequestedPlacedRefineries", placedRefineriesNode.Value.Value);
+				requestedPlacedRefineries.Clear();
+				for (var i = 0; i < Math.Min(requesterIds.Length, refineryIds.Length); i++)
+				{
+					var requester = self.World.GetActorById(requesterIds[i]);
+					var refinery = self.World.GetActorById(refineryIds[i]);
+					if (requester != null && refinery != null)
+						requestedPlacedRefineries[requester] = refinery;
+				}
+			}
 		}
 
 		void INotifyActorDisposing.Disposing(Actor self)
@@ -951,7 +1134,27 @@ namespace OpenRA.Mods.CA.Traits
 		void IBotSuggestRefineryProduction.RequestLocation(CPos refineryLocation, CPos conyardLocation, Actor expandActor)
 		{
 			if (ResourceMapModule == null || ResourceMapModule.FindClosestIndiceFromCPos(refineryLocation).PlayerRefineryCount < Info.MaxRefineryPerIndice)
+			{
 				RequestedRefineries[expandActor] = (conyardLocation, refineryLocation);
+				requestedRefineryPlacementTicks.Remove(expandActor);
+				requestedRefineryStartActorIds[expandActor] = world.Actors.Select(a => a.ActorID).DefaultIfEmpty(0u).Max();
+				requestedPlacedRefineries.Remove(expandActor);
+			}
+		}
+
+		bool IBotSuggestRefineryProduction.IsRequestSatisfied(Actor expandActor) => IsRequestedRefinerySatisfied(expandActor);
+
+		void IBotSuggestRefineryProduction.CompleteRequest(Actor expandActor)
+		{
+			var request = GetRequestedRefinery(expandActor);
+			if (!request.HasValue)
+				return;
+
+			var requester = request.Value.Requester;
+			RequestedRefineries.Remove(requester);
+			requestedRefineryPlacementTicks.Remove(requester);
+			requestedRefineryStartActorIds.Remove(requester);
+			requestedPlacedRefineries.Remove(requester);
 		}
 	}
 }
