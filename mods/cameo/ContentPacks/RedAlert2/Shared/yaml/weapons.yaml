@@ -1326,7 +1326,7 @@ RA2RadBeamWeapon:
 	Warhead@Chemical_Medium:
 		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, RadiationDeath
-	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		Damage: 15
 	-Warhead@Effect:
 
@@ -1516,7 +1516,7 @@ MigMissiles_rad:
 		ContrailEndColor: FFFFFF
 	Warhead@Chemical_Medium:
 		Damage: 4000
-	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10

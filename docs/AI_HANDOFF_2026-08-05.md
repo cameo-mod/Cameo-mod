@@ -58,6 +58,44 @@ confirm:
 
 ---
 
+## 1.6. Session summary — Devin (2026-08-09)
+
+This session built the Devin enforcement infrastructure requested by the
+maintainer. No weapon conversions were attempted.
+
+**What was done (committed `35aac1ef3`):**
+
+- **4 reusable Devin skills** in `.devin/skills/`:
+  - `boot-gate`: full boot-gate procedure (launch, verify menu, check exceptions)
+  - `cluster-convert`: weapon 3-way split retrofit procedure with all rules,
+    mapping tables, post-conversion verification checklist, and child-sweep
+  - `run-audits`: audit suite runner (empty warheads, orphan keys, AreaDamage
+    sweep, generator sync, ledger refresh, phase_b_survey)
+  - `balance-pipeline`: sanctioned balance workflow (extract, propose, apply,
+    verify) with all hard rules (SUM law, damage grid, range steps, uniqueness)
+
+- **Devin CLI hooks** (`.devin/hooks.v1.json` + `tools/hooks/exec_guard.py`):
+  - PreToolUse exec guard: blocks `git add -A/--all/.` (scoped adds only)
+  - PreToolUse exec guard: blocks `git commit` of engine content without
+    a fresh boot-gate (perf.log must show `MenuPostProcessEffect.PostWorldLoaded`)
+  - Mirrors the existing `bash_guard.py` (`.claude/settings.json`) but uses
+    the Devin CLI hook format (decision/reason JSON, `DEVIN_PROJECT_DIR`)
+
+**Current state (verified 2026-08-09):**
+- Working tree: clean (after commit)
+- Boot-gate status: no new engine content committed; tools-only commit exempted
+- Empty-warhead audit: `0`
+- Orphaned old keys: `0` real
+- Phase B survey: 360 weapons on old families (21 pure Phase A, 337 mixed Phase B)
+
+**What's still blocked:**
+- Energy family conversions (Laser/Railgun/Tesla/TeslaCharged): blocked on
+  ExtraDamage rework design decision (see `WEAPON_3WAY_SPLIT.md` OPEN DESIGN #1)
+- Vehicle balance apply: blocked on maintainer anchor-table confirm
+- Physical-state TODO queue: maintained by Claude (BUILD 3 Sonic, BUILD 4 new axes)
+
+---
+
 ## 2. What the previous AI (Claude/Opus) completed
 
 | Commit (examples) | What was done |

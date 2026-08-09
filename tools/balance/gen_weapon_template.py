@@ -250,7 +250,9 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         if physical_states:  # multi-state blend (e.g. Plasma: Temperature 50 + Corrosion 50)
             main_wh.append("\t\tPhysicalStates:")
             main_wh += [f"\t\t\t{k}: {v}" for k, v in physical_states.items()]
-        pct_wh = [f"\tWarhead@{tag}_Percentage: HealthPercentageDamage",
+        percentage_state = FAMILY_PHYSICAL_STATE.get(name) if name in {"Flame", "Chemical"} else None
+        percentage_type = "AreaDamagePercentage" if percentage_state else "HealthPercentageDamage"
+        pct_wh = [f"\tWarhead@{tag}_Percentage: {percentage_type}",
              f"\t\tValidTargets: {vt}",
              f"\t\tSpread: {main_spread // 2}",
              f"\t\tDamage: {pct_damage}",
@@ -258,6 +260,9 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
              f"\t\tVersus:",
              emit_versus(pct),
              f"\t\tUpdatesUnitStatistics: false"]
+        if percentage_state:
+            psn, pss = percentage_state
+            pct_wh += [f"\t\tPhysicalStateName: {psn}", f"\t\tPhysicalStateScale: {pss}"]
         parts = main_wh + pct_wh
         if name in CHIPS:  # paid-for ExtraDamage chip (energy families only)
             parts.append(emit_chip(tag, name, damage, vt))
@@ -291,10 +296,10 @@ FAMILY_SPREADS = {
     "MissileAA": (200, 300, 400),
 }
 
-# Per-family PhysicalState wiring (docs/design/PHYSICAL_STATE_SYSTEM.md): the MAIN AreaDamage warhead
+# Per-family PhysicalState wiring (docs/design/PHYSICAL_STATE_SYSTEM.md): the main AreaDamage warhead
 # adds `damage x Scale%` to a named meter on hit (Temperature = heat/cold, Corrosion = acid).
-# Emitted on the main warhead ONLY (the _ExtraDamage chip is auto-excluded; the HealthPercentageDamage
-# %-twin cannot carry the field until it is converted to AreaDamagePercentage — a later refinement).
+# Flame and Chemical also emit meter-aware AreaDamagePercentage twins so their percentage damage
+# contributes to the same meter. The _ExtraDamage chip remains excluded.
 # Cryo is a separate thin child of Prism (Temperature -100), not listed here.
 FAMILY_PHYSICAL_STATE = {
     "Flame":    ("Temperature", 100),   # heat -> overheat/pop

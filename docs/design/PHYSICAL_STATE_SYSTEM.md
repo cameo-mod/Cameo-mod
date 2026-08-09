@@ -182,7 +182,7 @@ reference an image+sequence, so the yaml wires with placeholders and the art dro
 
 ## 5. Build STATUS + RESUME TRACKER (updated 2026-08-09 — ⭐ RESUME HERE after /compact)
 
-**DONE (committed, each boot-gated):**
+**DONE (committed work was boot-gated unless noted):**
 - ✅ C# damage-scaled `PhysicalStateName`/`PhysicalStateScale` on `AreaDamage` + `_Percentage` — `406261128`
 - ✅ C# MULTI-state `PhysicalStates` dict (one warhead → many meters) — `2e6d6968a`
 - ✅ Corrosion meter axis on `^Corrodible` (green tint 200→20000, DoT+slow+vuln 50→100%, hazmat-half,
@@ -192,6 +192,9 @@ reference an image+sequence, so the yaml wires with placeholders and the art dro
   `INHERIT_FAMILIES`) — `f97a3b77c`
 - ✅ Plasma family = avg(Flame,Chemical) Versus + Temperature 50 + Corrosion 50 (generator `BLEND_FAMILIES`
   + `versus_override`/`physical_states`) — `2e6d6968a`. Inert until a weapon adopts `^Warhead_Plasma_*`.
+- ✅ Flame/Chemical `_Percentage` twins use `AreaDamagePercentage` and feed the matching meter; active
+  fixed `ApplyPhysicalState` duplicates were removed, with `audit_physical_state_warheads` preventing
+  regressions (static-audited; runtime test pending).
 - (Temperature axis + framework were ALREADY built — see §0.)
 
 **TODO — resume queue (in order):**
@@ -207,16 +210,15 @@ reference an image+sequence, so the yaml wires with placeholders and the art dro
 4. **RETROFIT cryo-upgrade weapons** (RA1 Allies etc.): armament-swap to a variant that adds `^Warhead_Cryo_*`
    (dual/triple, §3b) + the FP tax; replace the old manual `ApplyPhysicalState` rings.
 5. **MIGRATE** the Schwarzer Mond binary `corroded` → the Corrosion meter (Chemical/Plasma weapons feed
-   it via the wired templates). Convert generated `_Percentage` twins → `AreaDamagePercentage` so the
-   %-damage also feeds the meters (currently main-only). Verify overheat/corrosion DoT credits `firedBy`
-   for XP (`ChangesHealthProportionalToPhysicalState`).
+   it via the wired templates). Verify overheat/corrosion DoT credits `firedBy` for XP
+   (`ChangesHealthProportionalToPhysicalState`).
 6. **ART** (artist): looped shifting-blue Sonic overlay + armor-breach breach-icon (PngSheet, §4b).
 7. Then the broader roadmap: faction damage-type binding, temporal signatures, spread/falloff per-type
    curves, Railgun charge-delay, resume Phase B mixed-weapon collapse (~350, behavior-preserving).
 
 **Guardrails to keep:** boot-gate every commit (kill lingering OpenRA before a C# rebuild — it locks
 `engine/bin`); `verify_generator_sync` drift stays **1** (pre-existing `^Warhead_Sniper_Light`, not the
-generator's); scoped `git add`; the family PhysicalState goes on the MAIN warhead only (chip excluded).
+generator's); scoped `git add`; family PhysicalState goes on the main and percentage warheads (chip excluded).
 
 ## 6. Decisions (maintainer 2026-08-09) + what's still open
 DECIDED:

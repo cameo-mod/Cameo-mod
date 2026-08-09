@@ -163,17 +163,9 @@ AsianTankKillerRocketShrapnel:
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Flame_Light:
-		Damage: 2000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		Amount: 2000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 1000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 2
 		Duration: 12
@@ -1407,13 +1399,8 @@ AsianFlamerTroopExplode:
 	Inherits: AsianFlamerTurret
 	Warhead@Flame_Light:
 		Damage: 12000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 6
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		Amount: 12000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 6000
-
 AsianChaosTurret:
 	Range: 5000
 	ReloadDelay: 125
@@ -1673,7 +1660,7 @@ AsianChaosMine:
 		Falloff: 125, 100, 75, 50, 25
 		Damage: 125000
 		InvalidTargets: Mine
-	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		Spread: 2500
 		Falloff: 125, 100, 75, 50, 25
 		InvalidTargets: Mine
@@ -1903,7 +1890,7 @@ AsianPhoenixRocket:
 	Warhead@Flame_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 	Warhead@Demolition_Light:

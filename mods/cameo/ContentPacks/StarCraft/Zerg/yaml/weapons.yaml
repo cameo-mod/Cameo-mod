@@ -289,7 +289,7 @@ CorruptorSpore:
 	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@Condition: GrantExternalCondition
@@ -1251,7 +1251,7 @@ DefilerPlague:
 		Speed: 900
 	Warhead@Chemical_Heavy:
 		Damage: 30000
-	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		Damage: 15
 	#Warhead@2: GrantExternalCondition
 	#	Range: 3c512

@@ -35,7 +35,7 @@ for a in inherits faction_leaks upgrades upgrade_coverage ai sequences \
          dune_rank_decoration effect_warhead_names weapon_suffixes \
          balance_sheet consistency_report packs balance_drift \
          template_conformance multiplier_modifiers nuclear_flash_bindings \
-         ts_death_palette warhead_split; do
+         ts_death_palette warhead_split physical_state_warheads; do
   echo "== audit_$a"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" \
     || failed=1

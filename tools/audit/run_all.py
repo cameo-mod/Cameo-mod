@@ -35,7 +35,7 @@ AUDITS = [
     "effect_warhead_names", "weapon_suffixes", "balance_sheet",
     "consistency_report", "packs", "balance_drift", "template_conformance",
     "multiplier_modifiers", "nuclear_flash_bindings", "ts_death_palette",
-    "warhead_split",
+    "warhead_split", "physical_state_warheads",
 ]
 # NOTE: "elite_naming" is intentionally excluded — audit_elite_naming.py is
 # deprecated, fully superseded by audit_weapon_suffixes.py X1 section

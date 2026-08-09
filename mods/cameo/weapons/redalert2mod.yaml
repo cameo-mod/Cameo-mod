@@ -29,12 +29,8 @@ AsianFlameFragment:
 	Range: 2000
 	Warhead@Flame_Light:
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		Amount: 2000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 1000
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment2
 		Amount: 1
@@ -69,7 +65,7 @@ AsianOilBombFragments:
 	Warhead@Flame_Light:
 		Damage: 4000
 		Falloff: 100, 50, 25, 12, 6, 3, 1
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 		Falloff: 100, 50, 25, 12, 6, 3, 1
 	Warhead@Effect: CreateEffect
@@ -97,12 +93,8 @@ AsianFlamerTurret:
 		Palette: tseffect
 	Warhead@Flame_Light:
 		Damage: 4000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		Amount: 4000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 2000
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_initfire
 		ExplosionPalette: ra2effect
@@ -1095,7 +1087,7 @@ MeteorFlameFragment:
 	Range: 2000
 	Warhead@Flame_Light:
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Aliens: SpawnActorOrWeapon
 		Actors: alien.nax
@@ -1245,31 +1237,6 @@ SyndicateFireballLauncher:
 		Damage: 2000
 	Warhead@Flame_Heavy_Percentage:
 		Damage: 1
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Neutral, Enemy
-		Amount: 2000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Ally
-		Amount: 1000
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Neutral, Enemy
-		Amount: 2000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Ally
-		Amount: 1000
-	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Neutral, Enemy
-		Amount: 2000
-	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Ally
-		Amount: 1000
-
 RA2RTruckRocket:
 	Inherits: ^RA2Grenade
 	Inherits@2: ^LightFlameWeapon

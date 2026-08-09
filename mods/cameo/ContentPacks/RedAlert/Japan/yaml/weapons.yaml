@@ -184,12 +184,8 @@ HeavyFlamer:
 		Inaccuracy: 900
 	Warhead@Flame_Medium:
 		Damage: 2000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 2000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 1000
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
 		GlowScale: 1.5
@@ -215,21 +211,15 @@ HeavyPlasmaFlamer:
 	Warhead@Chemical_Heavy:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Flame_Heavy:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		Amount: 4000
-	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		Amount: 2000
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building_napalm
 
@@ -1884,7 +1874,7 @@ OIFlamer:
 		Inaccuracy: 850
 	Warhead@Flame_Medium:
 		Damage: 2000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 
 OIPlasmaFlamer:
@@ -1906,13 +1896,13 @@ OIPlasmaFlamer:
 	Warhead@Chemical_Heavy:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Flame_Heavy:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
@@ -2039,13 +2029,13 @@ JapanesePlasmaBomb:
 	Warhead@Chemical_Heavy:
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Flame_Heavy:
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyBomb: SpreadDamage

@@ -205,7 +205,7 @@ wc2deathknightFire:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary

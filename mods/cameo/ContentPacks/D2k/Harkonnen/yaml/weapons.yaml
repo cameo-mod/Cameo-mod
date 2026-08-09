@@ -18,13 +18,8 @@ HarkonnenFlameTurret:
 		Palette: tseffect
 	Warhead@Flame_Medium:
 		Damage: 25135
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 8378
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 4189
-
 harkonnen_autogunturret:
 	Inherits: ordos_autogunturret
 	ReloadDelay: 132

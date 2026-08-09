@@ -423,13 +423,8 @@ NaxiFlamerTroopExplode:
 	Inherits: AsianFlamerTurret
 	Warhead@Flame_Light:
 		Damage: 6000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 3
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		Amount: 6000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 3000
-
 NaxiSniper:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light

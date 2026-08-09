@@ -73,7 +73,7 @@ OreExplosion:
 	Inherits@fx: ^Effect_Flame_Medium
 	Warhead@Flame_Medium:
 		Damage: 40000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 20
 	Warhead@Resource: CreateResource
 		AddsResourceType: Ore
@@ -168,10 +168,6 @@ ConscriptMolotov:
 		Damage: 8000
 	Warhead@Flame_Light_Percentage:
 		Damage: 4
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		Amount: 8000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 4000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
 		Duration: 40
@@ -193,10 +189,6 @@ ConscriptMolotovExplode:
 		Damage: 4000
 	Warhead@Flame_Light_Percentage:
 		Damage: 2
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		Amount: 4000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 2000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
 		Duration: 25
@@ -281,13 +273,8 @@ Flamer:
 		Inaccuracy: 850
 	Warhead@Flame_Light:
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		Amount: 2000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 1000
-
 PortaTesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
@@ -877,7 +864,7 @@ WaveforceCannonDistortedBeam2:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -885,7 +872,7 @@ WaveforceCannonDistortedBeam2:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla

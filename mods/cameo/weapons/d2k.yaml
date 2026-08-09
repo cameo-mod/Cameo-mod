@@ -75,7 +75,7 @@ Debris2:
 		Damage: 8
 	Warhead@Flame_Light:
 		Damage: 16000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_small_napalm
@@ -94,7 +94,7 @@ Debris3:
 		Damage: 4
 	Warhead@Flame_Light:
 		Damage: 8000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 1350
@@ -1894,7 +1894,7 @@ PhoenixRocketShrapnel:
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 

@@ -238,13 +238,8 @@ TSFireballLauncher:
 		LaunchAngle: 0
 	Warhead@Flame_Medium:
 		Damage: 8000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 8000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 4000
-
 TSLasergun:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
@@ -584,6 +579,6 @@ TSToxinRifle:
 		Inaccuracy: 0
 	Warhead@Chemical_Light:
 		Damage: 16000
-	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
 		Damage: 8
 	-Warhead@Effect:

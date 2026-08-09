@@ -4958,7 +4958,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@Flame_Light_Percentage: HealthPercentageDamage
+	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -4982,6 +4982,8 @@ DefuseKit:
 			Helicopter: 2
 			Spaceship: 1
 		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 
 ^Warhead_Flame_Medium:
 	ValidTargets: Ground, Water
@@ -5018,7 +5020,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -5042,6 +5044,8 @@ DefuseKit:
 			Helicopter: 6
 			Spaceship: 5
 		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 
 ^Warhead_Flame_Heavy:
 	ValidTargets: Ground, Water
@@ -5078,7 +5082,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@Flame_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -5102,6 +5106,8 @@ DefuseKit:
 			Helicopter: 11
 			Spaceship: 10
 		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 
 ###### Chemical: INF+VEH > BLD > AIR (heavy, air=False) ######
 ^Warhead_Chemical_Light:
@@ -5139,7 +5145,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -5163,6 +5169,8 @@ DefuseKit:
 			Bomber: 2
 			Fighter: 1
 		UpdatesUnitStatistics: false
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 
 ^Warhead_Chemical_Medium:
 	ValidTargets: Ground, Water
@@ -5199,7 +5207,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -5223,6 +5231,8 @@ DefuseKit:
 			Bomber: 6
 			Fighter: 5
 		UpdatesUnitStatistics: false
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 
 ^Warhead_Chemical_Heavy:
 	ValidTargets: Ground, Water
@@ -5259,7 +5269,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -5283,6 +5293,8 @@ DefuseKit:
 			Bomber: 11
 			Fighter: 10
 		UpdatesUnitStatistics: false
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 
 ###### Plasma: blend of Flame+Chemical + PhysicalStates {'Temperature': 50, 'Corrosion': 50} ######
 ^Warhead_Plasma_Light:
@@ -8032,16 +8044,6 @@ DefuseKit:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Neutral, Enemy
-		Amount: 800
-		Range: 800
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Ally
-		Amount: 400
-		Range: 400
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
@@ -8071,16 +8073,6 @@ DefuseKit:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Neutral, Enemy
-		Amount: 1200
-		Range: 1200
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Ally
-		Amount: 600
-		Range: 600
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
@@ -8110,16 +8102,6 @@ DefuseKit:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
-	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Neutral, Enemy
-		Amount: 1600
-		Range: 1600
-	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Ally
-		Amount: 800
-		Range: 800
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
@@ -9669,7 +9651,7 @@ CHFlame:
 		Falloff: 100, 75, 50, 25
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Spread: 250
 		Falloff: 100, 75, 50, 25
 		Damage: 1

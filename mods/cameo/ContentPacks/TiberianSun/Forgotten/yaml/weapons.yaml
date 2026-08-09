@@ -479,7 +479,7 @@ TSInfantryMortarChem:
 	ReloadDelay: 88
 	Warhead@Chemical_Medium:
 		Damage: 16000
-	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
@@ -510,7 +510,7 @@ TS120mmxChem:
 		Damage: 20
 	Warhead@Chemical_Heavy:
 		Damage: 40000
-	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		Damage: 20
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 5
@@ -1306,13 +1306,8 @@ MutFlamer:
 	Report: flamtnk1.aud
 	Warhead@Flame_Medium:
 		Damage: 28000
-	Warhead@Flame_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 14
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 28000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 14000
-
 MutFlamerChem:
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^MediumChemicalWeapon
@@ -1441,7 +1436,7 @@ TSFiendShard:
 		TrailImage: green_smokey
 	Warhead@Chemical_Light:
 		Damage: 6000
-	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@3Eff: CreateEffect
 		Explosions: sczhsplash
@@ -1632,7 +1627,7 @@ TSChemspray:
 	Range: 3183
 	Warhead@Chemical_Light:
 		Damage: 32000
-	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
 		Damage: 16
 TSChemsprayUP:
 	Inherits: ^LightChemicalWeapon
@@ -1677,7 +1672,7 @@ TSVisceroidSpray:
 	Range: 1618
 	Warhead@Chemical_Light:
 		Damage: 10000
-	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
 		Damage: 5
 TSVisceroidSprayUP:
 	Inherits: ^LightChemicalWeapon
@@ -1763,7 +1758,7 @@ TSCropBombChem:
 		Damage: 60
 	Warhead@Chemical_Heavy:
 		Damage: 60000
-	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		Damage: 30
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 10
@@ -1809,7 +1804,7 @@ TSLocustBombChem:
 		Damage: 90
 	Warhead@Chemical_Heavy:
 		Damage: 90000
-	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		Damage: 45
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 15
@@ -2025,7 +2020,7 @@ TSGhostGun:
 		Inaccuracy: 0
 	Warhead@Chemical_Light:
 		Damage: 20000
-	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
 		Damage: 10
 
 TSChemGhostGun:
@@ -2050,7 +2045,7 @@ TSChemGhostGun:
 		Inaccuracy: 0
 	Warhead@Chemical_Light:
 		Damage: 20000
-	Warhead@Chemical_Light_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
 		Damage: 10
 MutAPRifle:
 	Inherits@wh: ^Warhead_Bullet_Light

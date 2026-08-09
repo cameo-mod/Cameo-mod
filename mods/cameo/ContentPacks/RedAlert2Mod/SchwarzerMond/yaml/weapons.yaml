@@ -725,7 +725,7 @@ NaxDieGlocke:
 	Warhead@Chemical_Heavy:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@Chemical_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Effect: CreateEffect
