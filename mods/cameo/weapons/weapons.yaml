@@ -9568,7 +9568,7 @@ BloomExplosion:
 			Medium: 35
 			Heavy: 25
 			Concrete: 30
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, SpiceExplosion
 		DamageCalculationType: ClosestTargetablePosition
 		AffectsParent: true
 
@@ -10935,7 +10935,7 @@ SpiceExplosion:
 			Medium: 45
 			Heavy: 30
 			Concrete: 15
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, SpiceExplosion
 		DamageCalculationType: ClosestTargetablePosition
 		AffectsParent: true
 	Warhead@2Res: CreateResource
@@ -10956,9 +10956,11 @@ SpiceExplosion:
 		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
 
 generic_bullet_casing:
-	Range: 2c0
-	ReloadDelay: 100
+	Range: 1c0
 	Projectile: Bullet
+		Speed: 48
+		Blockable: false
+		LaunchAngle: 100
 		Image: generic_bullet_casing
-		Speed: 200
-	Warhead@1: CreateEffect
+		Sequences: idle
+		Palette: d2keffect
