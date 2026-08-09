@@ -7680,16 +7680,6 @@ DefuseKit:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Neutral, Enemy
-		Amount: 800
-		Range: 800
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Ally
-		Amount: 400
-		Range: 400
 
 ^Effect_Chem_Medium:
 	Warhead@Effect: CreateEffect
@@ -7708,16 +7698,6 @@ DefuseKit:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Neutral, Enemy
-		Amount: 1200
-		Range: 1200
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Ally
-		Amount: 600
-		Range: 600
 
 ^Effect_Chem_Heavy:
 	Warhead@Effect: CreateEffect
@@ -8189,16 +8169,6 @@ DefuseKit:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
-	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Neutral, Enemy
-		Amount: 1600
-		Range: 1600
-	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		ValidRelationships: Ally
-		Amount: 800
-		Range: 800
 
 ^Effect_Sonic_Light:
 	Warhead@Effect: CreateEffect
