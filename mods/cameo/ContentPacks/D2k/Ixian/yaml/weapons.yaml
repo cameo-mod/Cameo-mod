@@ -1046,41 +1046,27 @@ D2K_ShockGunInf:
 		Damage: 9
 
 D2K_StormGunInf:
-	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_Railgun_Heavy
-	Inherits@3: ^Projectile_Railgun_Heavy
-	Inherits@4: ^Effect_Railgun_Heavy
+	# Ixian storm infantry weapon. Wired to Storm blend (2026-08-10).
+	# Was Railgun 12k + Tesla 12k = 24k total → single Storm 24k. Keeps railgun beam visual.
+	Inherits@wh: ^Warhead_Storm_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	ReloadDelay: 66
 	Range: 6275
 	Projectile: Railgun
 		BeamColor: 33FFEE
 		BeamWidth: 66
-	Warhead@Railgun_Heavy:
+	Warhead@Storm_Heavy:
 		ValidTargets: Ground, Water
 		Range: 0, 250, 500, 1000
 		Falloff: 100, 50, 25, 0
-		Damage: 12000
-	Warhead@Railgun_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Spread: 1000
-		Damage: 6
-	Warhead@Tesla_Heavy:
-		ValidTargets: Ground, Water
-		Range: 0, 250, 500, 1000
-		Falloff: 100, 50, 25, 0
-		Damage: 12000
+		Damage: 24000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Storm_Heavy_Percentage:
 		ValidTargets: Ground, Water
-		Range: 0, 500, 1000, 2000
-		Falloff: 100, 50, 25, 0
-		Damage: 6000
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Tesla_Heavy_Percentage:
 		Spread: 1000
-		Damage: 6
+		Damage: 12
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1095,10 +1081,11 @@ D2K_StormGunInf:
 		ExplosionPalette: d2keffect
 
 D2K_StormGunCymek:
-	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_Railgun_Heavy
-	Inherits@3: ^Projectile_Railgun_Heavy
-	Inherits@4: ^Effect_Railgun_Heavy
+	# Ixian cymek storm weapon. Wired to Storm blend (2026-08-10).
+	# Was Railgun 16k + Tesla 16k = 32k total → single Storm 32k. Keeps railgun beam visual.
+	Inherits@wh: ^Warhead_Storm_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	Range: 6787
 	ReloadDelay: 66
 	Burst: 2
@@ -1106,32 +1093,17 @@ D2K_StormGunCymek:
 	Projectile: Railgun
 		BeamColor: 33FFEE
 		BeamWidth: 66
-	Warhead@Railgun_Heavy:
+	Warhead@Storm_Heavy:
 		ValidTargets: Ground, Water
 		Range: 0, 250, 500, 1000
 		Falloff: 100, 50, 25, 0
-		Damage: 16000
-	Warhead@Railgun_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Spread: 1000
-		Damage: 8
-	Warhead@Tesla_Heavy:
-		ValidTargets: Ground, Water
-		Range: 0, 250, 500, 1000
-		Falloff: 100, 50, 25, 0
-		Damage: 16000
+		Damage: 32000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Storm_Heavy_Percentage:
 		ValidTargets: Ground, Water
-		Range: 0, 500, 1000, 2000
-		Falloff: 100, 50, 25, 0
-		Damage: 6000
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Tesla_Heavy_Percentage:
 		Spread: 1000
-		Damage: 8
+		Damage: 16
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@EMPUnit: AffectsIntegrity

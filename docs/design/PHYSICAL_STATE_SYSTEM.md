@@ -236,3 +236,14 @@ STILL OPEN:
 - **XP/kill attribution** of overheat/corrosion DoT — verify `ChangesHealthProportionalToPhysicalState`
   credits the original attacker (`firedBy`), not the trait/self, so flame/acid kills grant XP. (Build.)
 - **Sonic + armor-breach art** (§4b) — new PngSheet assets (artist); yaml wires with placeholders.
+- **MagicDeath death type** (2026-08-10) — Magic weapons currently use `ElectricityDeath` as a placeholder.
+  A dedicated `MagicDeath` death type should be added: wire it to the existing `gendeath.shp` mutation
+  animation (Yuri Genetic Mutator's `mutate` explosion sequence) via a new `MagicDeathEffect` weapon
+  (like `MutateEffect` but WITHOUT the `SpawnActor` warhead — pure visual only). Implementation:
+  (1) add `MagicDeath: 8` to `^TDRAInfantry` `WithDeathAnimation.DeathTypes` in `defaults.yaml`,
+  (2) add `FireWarheadsOnDeath@MagicDeath` on `^Infantry` pointing to `MagicDeathEffect`,
+  (3) create `MagicDeathEffect` weapon (`Explosions: mutate`, `ExplosionPalette: playerra2`, no SpawnActor),
+  (4) replace `ElectricityDeath` with `MagicDeath` on all `^Warhead_Magic_*` and `^Warhead_Storm_*` templates.
+  The `gendeath.shp` animation already exists in `mods/cameo/bits/ra2/` and is already registered as the
+  `mutate` sequence in `sequences/misc.yaml`. Note: `PsychicDeath` (sequence 5) is reserved for Yuri
+  mind-control weapons and should NOT be reused for generic magic.
