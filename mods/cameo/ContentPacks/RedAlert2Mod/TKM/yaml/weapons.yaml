@@ -1145,7 +1145,7 @@ VonSniperAP:
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
 VonSniperLockdown:
-	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	Inherits@2: VonSniperAP
@@ -1157,7 +1157,7 @@ VonSniperLockdown:
 		ContrailEndWidth: 150
 		ContrailStartColor: 4488FF
 		ContrailEndColor: 22446688
-	Warhead@TeslaCharged_Super:
+	Warhead@Tesla_Super:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1166,7 +1166,7 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16

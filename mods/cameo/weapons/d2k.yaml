@@ -2954,12 +2954,12 @@ oDebris4:
 
 PulseMissile:
 	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_TeslaCharged_Super
+	Inherits@2: ^Warhead_Tesla_Super
 	Inherits@3: ^Projectile_Lightning_Super
 	Inherits@4: ^Effect_Tesla_Super
 	ValidTargets: Ground, Air
 	Report: nukemisl.aud
-	Warhead@TeslaCharged_Super:
+	Warhead@Tesla_Super:
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 1000
@@ -2971,7 +2971,7 @@ PulseMissile:
 		Spread: 2000
 		Damage: 50000
 		Delay: 1
-	Warhead@TeslaCharged_Super_Percentage:
+	Warhead@Tesla_Super_Percentage:
 		ValidTargets: Shielded
 		Falloff: 100, 0
 		Spread: 10000

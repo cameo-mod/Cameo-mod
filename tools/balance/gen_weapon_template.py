@@ -113,8 +113,7 @@ WEAPONS = {
     "Sonic":      ("FLAT", "flat", False, L3),
     # tier-locked (late-game only) -------------------------------------------
     "Railgun":     (["VEH", "INF", "BLD", "AIR"],       "heavy", False, ["Heavy"]),
-    "Tesla":       ([("INF", "VEH"), "BLD", "AIR"],     "heavy", False, L3),         # +bonus vs Shield; L/M/H (maintainer 2026-08-10)
-    "TeslaCharged":([("INF", "VEH"), "BLD", "AIR"],     "heavy", False, ["Super"]),  # Super tier + bigger Shield bonus
+    "Tesla":       ([("INF", "VEH"), "BLD", "AIR"],     "heavy", False, L3 + ["Super"]),  # 4-tier (L/M/H/Super); was TeslaCharged at Super
     # Nuclear = BUILDING-first heavy (levels structures+heavy units+air, weak vs inf) — distinct
     # from Chemical/Tesla (inf+veh). Super tier (step 3, WC 1.5). Maintainer 2026-08-02.
     "Nuclear":     (["BLD", "VEH", "AIR", "INF"],       "heavy", True,  ["Super"]),
@@ -126,7 +125,7 @@ WEAPONS = {
 # structural handicap). Chip = SpreadDamage, Damage = 50% of main, EXCLUDED from price (suffix
 # _ExtraDamage). Bespoke per-family Versus (NOT formula-generated). Armors omitted => floor 10.
 # Per-family floor for armors not listed in the chip ladder (buildings/air/Shield).
-CHIP_FLOOR = {"Laser": 9, "Railgun": 10, "Tesla": 10, "TeslaCharged": 10}
+CHIP_FLOOR = {"Laser": 9, "Railgun": 10, "Tesla": 10}
 CHIPS = {
     # Laser: anti-LIGHT (inf+veh), reversed ladder — floor 9 (bldg/air), Superheavy 12, +3/step toward light.
     # Pays for: thin energy spread + 4 air ladder-slots diluting its ground damage.
@@ -135,32 +134,41 @@ CHIPS = {
     # Railgun: anti-BUILDING + superheavy siege. Pays for: a charge delay (per-weapon, = 50% reload).
     "Railgun": {"Concrete": 200, "Steel": 175, "Wood": 150, "Superheavy": 125, "Heavy": 100,
                 "Medium": 75, "Light": 50, "Scout": 25},
-    # Tesla: anti-armored-inf + shield (restored old TeslaExtraDamage). Pays for: K=1.25 (weak EMP).
+    # Tesla L/M/H: anti-armored-inf + shield (restored old TeslaExtraDamage). Pays for: K=1.25 (weak EMP).
     "Tesla": {"REFLECTOR": 50, "Shield": 300, "Heroic": 200, "Plate": 175, "Flak": 150, "None": 125,
               "Superheavy": 100, "Heavy": 75, "Medium": 50, "Light": 25},
-    # TeslaCharged: STRONGER (restored old TeslaChargedExtraDamage). Pays for: Super tier + K.
-    "TeslaCharged": {"REFLECTOR": 50, "Shield": 400, "Heroic": 300, "Plate": 275, "Flak": 250,
-                     "None": 225, "Superheavy": 200, "Heavy": 175, "Medium": 150, "Light": 125,
-                     "Scout": 100, "Steel": 75, "Concrete": 50, "Wood": 25},
 }
-CHIP_SPREAD = {"Tesla": 200, "TeslaCharged": 400, "Laser": 200, "Railgun": 200}
+# Tesla_Super uses a STRONGER chip (was TeslaCharged), keyed by level. Pays for: Super tier + K.
+CHIPS_LEVEL = {
+    ("Tesla", "Super"): {"REFLECTOR": 50, "Shield": 400, "Heroic": 300, "Plate": 275, "Flak": 250,
+                         "None": 225, "Superheavy": 200, "Heavy": 175, "Medium": 150, "Light": 125,
+                         "Scout": 100, "Steel": 75, "Concrete": 50, "Wood": 25},
+}
+CHIP_SPREAD = {"Tesla": 200, "Laser": 200, "Railgun": 200}
+# Tesla_Super has wider chip spread (was TeslaCharged 400).
+CHIP_SPREAD_LEVEL = {("Tesla", "Super"): 400}
 # Energy mains thinned to near single-target = 50% of the chip spread (the "low spread" the
 # chip/utility compensates for). Prism has no chip -> nominal 100.
 ENERGY_THIN_SPREAD = {f: s // 2 for f, s in CHIP_SPREAD.items()}
 ENERGY_THIN_SPREAD["Prism"] = 100
+# Level-specific thin-spread (same rule: half the chip spread).
+ENERGY_THIN_SPREAD_LEVEL = {k: v // 2 for k, v in CHIP_SPREAD_LEVEL.items()}
 
 
-def emit_chip(tag, family_name, damage, vt):
-    """Emit the paid-for ExtraDamage chip (SpreadDamage, 50% of main, bespoke Versus)."""
-    d = CHIPS[family_name]
+def emit_chip(tag, family_name, damage, vt, level=None):
+    """Emit the paid-for ExtraDamage chip (SpreadDamage, 50% of main, bespoke Versus).
+    Uses CHIPS_LEVEL[(family, level)] if present, else CHIPS[family]."""
+    d = CHIPS_LEVEL.get((family_name, level), CHIPS[family_name])
+    floor = CHIP_FLOOR[family_name]
+    spread = CHIP_SPREAD_LEVEL.get((family_name, level), CHIP_SPREAD[family_name])
     order = ["REFLECTOR", "Shield", "None", "Flak", "Plate", "Heroic",
              "Scout", "Light", "Medium", "Heavy", "Superheavy",
              "Wood", "Steel", "Concrete", "Fighter", "Bomber", "Helicopter", "Spaceship"]
-    rows = "\n".join(f"\t\t\t{a}: {d.get(a, CHIP_FLOOR[family_name])}" for a in order if a != "REFLECTOR" or "REFLECTOR" in d)
+    rows = "\n".join(f"\t\t\t{a}: {d.get(a, floor)}" for a in order if a != "REFLECTOR" or "REFLECTOR" in d)
     return "\n".join([
         f"\tWarhead@{tag}_ExtraDamage: SpreadDamage",
         f"\t\tValidTargets: {vt}",
-        f"\t\tSpread: {CHIP_SPREAD[family_name]}",
+        f"\t\tSpread: {spread}",
         f"\t\tDamage: {damage // 2}",
         f"\t\tFalloff: 100, 75, 50, 25",
         f"\t\tVersus:",
@@ -228,7 +236,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
             hz = hazmat
         tag = f"{name}_{level}"
         # Energy families are thinned to near single-target; the chip/utility pays for the low spread.
-        main_spread = ENERGY_THIN_SPREAD.get(name, spreads[li])
+        main_spread = ENERGY_THIN_SPREAD_LEVEL.get((name, level), ENERGY_THIN_SPREAD.get(name, spreads[li]))
         main_wh = [f"^Warhead_{tag}:",
              f"\tValidTargets: {vt}",
              f"\tReloadDelay: {reload}",
@@ -272,7 +280,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
             pct_wh += [f"\t\tPhysicalStateName: {psn}", f"\t\tPhysicalStateScale: {pss}"]
         parts = main_wh + pct_wh
         if name in CHIPS:  # paid-for ExtraDamage chip (energy families only)
-            parts.append(emit_chip(tag, name, damage, vt))
+            parts.append(emit_chip(tag, name, damage, vt, level=level))
         blocks.append("\n".join(parts))
     return "\n\n".join(blocks)
 
@@ -323,9 +331,19 @@ FAMILY_PHYSICAL_STATE = {
 # HealthPercentageDamage that has no IntegrityScale field). The flat AffectsIntegrity warhead stays
 # UPGRADE-only (a concrete bonus on top), so no template emits it. See PHYSICAL_STATE_SYSTEM.md.
 FAMILY_INTEGRITY_SCALE = {
-    "Tesla": 100, "TeslaCharged": 100,   # pure Tesla = full shield-drain (the disable specialist)
+    "Tesla": 100,                          # pure Tesla = full shield-drain (the disable specialist)
     "Storm": 50,                          # Tesla+Magic -> 1/2
     "Quantum": 33,                        # Railgun+Laser+Tesla -> 1/3
+}
+
+# Per-family DamageTypes override. Every family that affects Integrity (has IntegrityScale) MUST carry
+# the `Tesla` DamageType so the Integrity trait's passive INotifyDamage drain fires. IntegrityScale
+# values already account for the passive drain stacking. `ElectricityDeath` = tesla death animation.
+# Families NOT listed use the default (Prone75Percent, TriggerProne, ExplosionDeath).
+FAMILY_DAMAGE_TYPES = {
+    "Tesla":   "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
+    "Quantum": "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
+    # Storm is handled at its own call site (Prone100Percent + Tesla).
 }
 
 # Inheriting families: a thin child that inherits a parent family template and overrides ONLY the main
@@ -399,15 +417,15 @@ def blend_versus(parents):
 
 
 # Storm = Ixian Tesla + Magic superweapon blend (maintainer 2026-08-10). The SUPER tier is the 3-way
-# AVERAGE of TeslaCharged main + its full ExtraDamage chip + the new Magic — for BOTH the flat main and
+# AVERAGE of Tesla_Super main + its full ExtraDamage chip + the new Magic — for BOTH the flat main and
 # the %-twin. Every lower tier is that SUPER profile SCALED by WC[level]/WC[Super]. The %-magnitude lives
 # in Versus (Damage stays the 1-per-2000 grid, so it scales with the weapon).
 STORM_LEVELS = ["Light", "Medium", "Heavy", "Super"]
 
 
 def storm_versus(level):
-    tc_main, tc_pct = _family_main_pct("TeslaCharged", "Super")
-    extra, ef = CHIPS["TeslaCharged"], CHIP_FLOOR["TeslaCharged"]
+    tc_main, tc_pct = _family_main_pct("Tesla", "Super")
+    extra, ef = CHIPS_LEVEL[("Tesla", "Super")], CHIP_FLOOR["Tesla"]
     keys = ["Shield"] + BLEND_ARMOR_ORDER
     base_main = {a: (tc_main[a] + extra.get(a, ef) + MAGIC_MAIN["Super"]) // 3 for a in keys}
     base_pct = {a: (tc_pct[a] + extra.get(a, ef) + MAGIC_PCT["Super"]) // 3 for a in keys}
@@ -468,8 +486,9 @@ if __name__ == "__main__":
             print()
             continue
         order = build_order(bl, d)
+        dt = FAMILY_DAMAGE_TYPES.get(nm)
         print(f"###### {nm}: {macro_summary(bl)} ({d}, air={air}) ######")
-        print(family(nm, order, vt, lv, spreads=spreads))
+        print(family(nm, order, vt, lv, spreads=spreads, **({"damage_types": dt} if dt else {})))
         print()
     for nm, (parent, psn, pss, lv) in INHERIT_FAMILIES.items():
         if wanted and nm.lower() not in wanted:
@@ -481,11 +500,13 @@ if __name__ == "__main__":
         if wanted and nm.lower() not in wanted:
             continue
         vt = valid_targets(False)  # plasma is a ground weapon (like flame/chem)
+        dt = FAMILY_DAMAGE_TYPES.get(nm)
         print(f"###### {nm}: blend of {'+'.join(parents)} + PhysicalStates {states} ######")
-        print(family(nm, None, vt, lv, versus_override=blend_versus(parents), physical_states=states))
+        print(family(nm, None, vt, lv, versus_override=blend_versus(parents), physical_states=states,
+                     **({"damage_types": dt} if dt else {})))
         print()
     if not wanted or "storm" in wanted:
-        print("###### Storm: TeslaCharged + Magic + TeslaChargedExtraDamage/5 (Super-anchored, scaled down) ######")
+        print("###### Storm: Tesla_Super + Magic + TeslaSuperExtraDamage/5 (Super-anchored, scaled down) ######")
         print(family("Storm", None, valid_targets(False), STORM_LEVELS,
                      versus_override=storm_versus, hazmat=None,
                      damage_types="Prone100Percent, TriggerProne, ElectricityDeath, Tesla"))

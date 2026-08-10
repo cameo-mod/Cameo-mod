@@ -381,18 +381,18 @@ PsiStormCosmetic:
 		ImpactSounds: ptesto00.aud
 
 PsionicShockwave:
-	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	ReloadDelay: 20
 	Range: 3152
 	Report: parfir00.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@TeslaCharged_Super:
+	Warhead@Tesla_Super:
 		Damage: 30000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 15000
-	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@Effect: CreateEffect
 		Explosions: scaae
@@ -586,7 +586,7 @@ CorsairFlash:
 		Explosions: steel_bluepiffs
 
 Corsair_EMP:
-	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	ReloadDelay: 250
@@ -599,7 +599,7 @@ Corsair_EMP:
 		Blockable: false
 		LaunchAngle: 175
 		Image: tspulsball
-	Warhead@TeslaCharged_Super:
+	Warhead@Tesla_Super:
 		ValidTargets: Vehicle, Defense
 		Falloff: 100, 75, 50, 25
 		Damage: 5000
@@ -609,7 +609,7 @@ Corsair_EMP:
 		Falloff: 100, 75, 50, 25
 		Damage: 2500
 		Spread: 500
-	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Vehicle, Defense
 		Falloff: 100, 75, 50, 25
 		Damage: 5

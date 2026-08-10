@@ -121,7 +121,7 @@ AsianChaosSuperweapon:
 		ValidRelationships: Enemy
 
 ^AsianIonBeam:
-	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	ReloadDelay: 9999
@@ -456,7 +456,7 @@ SteelTwisterMissiles_elite:
 
 Support_EMP_Bomb:
 	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_TeslaCharged_Super
+	Inherits@2: ^Warhead_Tesla_Super
 	Inherits@3: ^Effect_Tesla_Super
 	Report: mobemp1.aud
 	Range: 25000
@@ -480,7 +480,7 @@ Support_EMP_Bomb:
 		Damage: 5
 		Spread: 10000
 		InvalidTargets: Infantry
-	Warhead@TeslaCharged_Super:
+	Warhead@Tesla_Super:
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 10000
@@ -492,7 +492,7 @@ Support_EMP_Bomb:
 		Damage: 5000
 		Spread: 5000
 		InvalidTargets: Infantry
-	Warhead@TeslaCharged_Super_Percentage:
+	Warhead@Tesla_Super_Percentage:
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 5

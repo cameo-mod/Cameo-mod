@@ -1098,15 +1098,15 @@ RA2IFVRepair:
 	ReloadDelay: 50
 
 TeslaFragmentLarge:
-	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	Range: 3333
-	Warhead@TeslaCharged_Super:
+	Warhead@Tesla_Super:
 		Damage: 16000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 8000
-	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
@@ -2697,14 +2697,14 @@ StormCloud:
 		ValidTargets: Ground, Air, Water
 
 LightningBolt:
-	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	Projectile: InstantHit
 	-Report:
 	Range: 1000
 	ValidTargets: Ground, Water, Air
-	Warhead@TeslaCharged_Super:
+	Warhead@Tesla_Super:
 		Spread: 1000
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 24000
@@ -2713,7 +2713,7 @@ LightningBolt:
 		Spread: 2000
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 24000
-	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Air, Ground, Water
 		Damage: 6
 	Warhead@TeslaChargedExtraDamage: SpreadDamage

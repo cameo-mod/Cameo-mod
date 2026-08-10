@@ -700,17 +700,17 @@ NaxCrystalLeech:
 		Damage: 1
 
 NaxCrystalLeech_elite:
-	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	Range: 8420
 	Burst: 20
 	BurstDelays: 1
-	Warhead@TeslaCharged_Super:
+	Warhead@Tesla_Super:
 		Damage: 2000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 1000
-	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 1
 
 NaxDieGlocke:

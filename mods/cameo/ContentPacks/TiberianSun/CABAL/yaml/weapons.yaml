@@ -141,7 +141,7 @@ TSCABALCharge_EMP:
 		Damage: 1
 
 TSCABALDisable_EMP:
-	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	ReloadDelay: 8
@@ -156,11 +156,11 @@ TSCABALDisable_EMP:
 		SecondaryBeam: true
 		SecondaryBeamWidth: 96
 		SecondaryBeamColor: FFFF8844
-	Warhead@TeslaCharged_Super: TargetDamage
+	Warhead@Tesla_Super: TargetDamage
 		Damage: 2000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 1000
-	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 2000
@@ -1631,12 +1631,12 @@ CabalManticoreLaser:
 
 CabalMagicNuke:
 	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_TeslaCharged_Super
+	Inherits@2: ^Warhead_Tesla_Super
 	Inherits@3: ^Projectile_Lightning_Super
 	Inherits@4: ^Effect_Tesla_Super
 	ValidTargets: Ground, Air
 	Report: nukemisl.aud
-	Warhead@TeslaCharged_Super:
+	Warhead@Tesla_Super:
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 1000
@@ -1648,7 +1648,7 @@ CabalMagicNuke:
 		Spread: 2000
 		Damage: 50000
 		Delay: 1
-	Warhead@TeslaCharged_Super_Percentage:
+	Warhead@Tesla_Super_Percentage:
 		ValidTargets: Shielded
 		Falloff: 100, 0
 		Spread: 10000

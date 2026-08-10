@@ -119,15 +119,15 @@ RA2KirovBomb_fire:
 		AimTargetStances: Enemy, Neutral
 
 RA2KirovBomb_tesla:
-	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	Inherits@2: RA2KirovBomb
-	Warhead@TeslaCharged_Super:
+	Warhead@Tesla_Super:
 		Damage: 80000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 40000
-	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 40
 	Warhead@Demolition_Heavy:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
@@ -520,17 +520,17 @@ RA2CoilBolt3:
 		Weapon: TeslaFragment2
 
 RA2OPCoilBolt1:
-	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	Range: 8842
 	ReloadDelay: 3
 	Report: btesat2a.wav
-	Warhead@TeslaCharged_Super:
+	Warhead@Tesla_Super:
 		Damage: 64000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 32000
-	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 32
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 32000

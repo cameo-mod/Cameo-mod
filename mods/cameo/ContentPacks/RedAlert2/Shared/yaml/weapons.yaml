@@ -979,15 +979,15 @@ RA2IFVRepair:
 	ReloadDelay: 50
 
 TeslaFragmentLarge:
-	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	Range: 3333
-	Warhead@TeslaCharged_Super:
+	Warhead@Tesla_Super:
 		Damage: 16000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 8000
-	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
@@ -2532,7 +2532,7 @@ StormCloud:
 		ValidTargets: Ground, Air, Water
 
 LightningBolt:
-	# Wired to Storm blend (2026-08-10). Was TeslaCharged_Super 24k main + 24k extra → single 24k Storm.
+	# Wired to Storm blend (2026-08-10). Was Tesla_Super 24k main + 24k extra → single 24k Storm.
 	# Storm folds the Tesla extra-damage into its Versus profile; keeps lightning projectile/effect.
 	# (Also eliminates the old duplicate Warhead@TeslaChargedExtraDamage key — the 2nd silently shadowed the 1st.)
 	Inherits@wh: ^Warhead_Storm_Super

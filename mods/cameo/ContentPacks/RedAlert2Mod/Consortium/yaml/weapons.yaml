@@ -1373,19 +1373,19 @@ SteelInspectorIonCannon:
 
 SteelInspectorIonCannonDamage:
 	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_TeslaCharged_Super
+	Inherits@2: ^Warhead_Tesla_Super
 	Inherits@3: ^Projectile_Lightning_Super
 	Inherits@4: ^Effect_Tesla_Super
 	ValidTargets: Ground, Water
 	AirThreshold: 10000
-	Warhead@TeslaCharged_Super:
+	Warhead@Tesla_Super:
 		ValidTargets: Ground, Water
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 300
 		Damage: 100000
 		Delay: 0
 		AffectsParent: False
-	Warhead@TeslaCharged_Super_Percentage:
+	Warhead@Tesla_Super_Percentage:
 		ValidTargets: Ground, Water
 		Falloff: 100, 0
 		Spread: 4000

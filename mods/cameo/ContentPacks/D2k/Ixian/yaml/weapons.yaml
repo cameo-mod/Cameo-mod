@@ -547,7 +547,7 @@ IxianCharge_EMP:
 		Damage: 1
 
 IxianDisable_EMP:
-	Inherits@wh: ^Warhead_TeslaCharged_Super
+	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	ReloadDelay: 4
@@ -561,11 +561,11 @@ IxianDisable_EMP:
 		SecondaryBeam: true
 		SecondaryBeamWidth: 96
 		SecondaryBeamColor: FFFF8844
-	Warhead@TeslaCharged_Super: TargetDamage
+	Warhead@Tesla_Super: TargetDamage
 		Damage: 2000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 1000
-	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
