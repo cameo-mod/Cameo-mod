@@ -565,6 +565,7 @@ IxianDisable_EMP:
 		Damage: 2000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 1000
+		DamageTypes: Tesla
 	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1270,6 +1271,7 @@ ixian_farasha:
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 1000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
@@ -1308,6 +1310,7 @@ d2k_farasha_aa:
 		ValidTargets: Air
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Air
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@HeavyFlameWeapon: SpreadDamage

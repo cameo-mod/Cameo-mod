@@ -286,6 +286,7 @@ PortaTesla:
 		Damage: 20000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 10000
+		DamageTypes: Tesla
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
 
@@ -300,6 +301,7 @@ TTankZap:
 		Damage: 40000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 20000
+		DamageTypes: Tesla
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 20
 

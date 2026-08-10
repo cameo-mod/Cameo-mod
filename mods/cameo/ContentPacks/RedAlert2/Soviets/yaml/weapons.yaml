@@ -127,6 +127,7 @@ RA2KirovBomb_tesla:
 		Damage: 80000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 40000
+		DamageTypes: Tesla
 	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 40
 	Warhead@Demolition_Heavy:
@@ -496,6 +497,7 @@ RA2CoilBolt:
 		Damage: 64000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 32000
+		DamageTypes: Tesla
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 32
 	Warhead@TeslaArc: FireShrapnel
@@ -507,6 +509,8 @@ RA2CoilBolt:
 
 RA2CoilBolt2:
 	Inherits: RA2CoilBolt
+	Warhead@Tesla_Heavy:
+		IntegrityScale: 150
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 32000
 	Warhead@TeslaArc: FireShrapnel
@@ -530,6 +534,7 @@ RA2OPCoilBolt1:
 		Damage: 64000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 32000
+		DamageTypes: Tesla
 	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 32
 	Warhead@EMPUnit: AffectsIntegrity
@@ -543,6 +548,8 @@ RA2OPCoilBolt1:
 
 RA2OPCoilBolt2:
 	Inherits: RA2OPCoilBolt1
+	Warhead@Tesla_Super:
+		IntegrityScale: 150
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 64000
 	Warhead@TeslaArc: FireShrapnel
@@ -565,6 +572,7 @@ TeslaFragmentWeak:
 		Damage: 6000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 3000
+		DamageTypes: Tesla
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@EMPUnit: AffectsIntegrity
@@ -583,12 +591,15 @@ RA2TankBolt:
 		Damage: 12000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 6000
+		DamageTypes: Tesla
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
 
 RA2TankBolt2:
 	Inherits: RA2TankBolt
 	Range: 8000
+	Warhead@Tesla_Heavy:
+		IntegrityScale: 150
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 6000
 	Warhead@TeslaArc: FireShrapnel
@@ -614,8 +625,10 @@ TeslaTankFragment:
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@Tesla_Heavy:
 		Damage: 4000
+		IntegrityScale: 150
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
+		DamageTypes: Tesla
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@EMPUnit: AffectsIntegrity
@@ -629,8 +642,10 @@ TeslaTankFragment2:
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@Tesla_Heavy:
 		Damage: 6000
+		IntegrityScale: 150
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 3000
+		DamageTypes: Tesla
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@EMPUnit: AffectsIntegrity

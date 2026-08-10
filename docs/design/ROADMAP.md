@@ -28,6 +28,16 @@ committed: `^MissileVehicleTemplate` + 10 reassignments (missile-MLRS family + N
 removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
 
 **Queue (priority order):**
+- **[RESOLVED 2026-08-10, Devin] Upgraded Tesla weapons drained integrity at the same ratio as their
+  un-upgraded base** — RA1 Tesla Doctrine (`PortaTesla_EMP`/`TTankZap_EMP`/`TTankZap2_EMP`/
+  `TeslaZap_EMP`) and RA2 Tesla Overload (`RA2CoilBolt2`/`RA2OPCoilBolt2`/`RA2TankBolt2`/
+  `RA2PortaTesla2`) variants add extra HP damage via arc fragments but stayed at the same ~150%
+  integrity-drain ratio as the base weapon. Root cause + fix: see
+  `docs/design/EMP_INTEGRITY_SYSTEM.md` §3c (missing `DamageTypes: Tesla` on several
+  `TeslaExtraDamage` chips, and no `IntegrityScale` bump on upgraded main warheads/fragments).
+  Fixed by adding `DamageTypes: Tesla` to the affected chips + `IntegrityScale: 150` to the
+  upgraded variants and their fragments; generator updated to keep future templates in sync.
+  Boot-gated, `87512a045`. Always-on EMP weapons (not upgrade-gated) left untouched.
 - **[P0 RESOLVED 2026-08-04] Empty-warhead-type NRE on load** — two typeless `Warhead@` nodes
   (`RA2MirageGun` `Warhead@Effect:` in `mods/cameo/weapons/redalert2.yaml`,
   `TSSAPCMissiles` `Warhead@GrenadeFriendlyFire:` in `mods/cameo/weapons/tiberiansun.yaml`)

@@ -1106,6 +1106,7 @@ TeslaFragmentLarge:
 		Damage: 16000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 8000
+		DamageTypes: Tesla
 	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1234,6 +1235,7 @@ TeslaArmorDischargeFragment1:
 		Damage: 6000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 3000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1252,6 +1254,7 @@ TeslaArmorDischargeFragment2:
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1269,12 +1272,15 @@ RA2PortaTesla:
 		Damage: 24000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 12000
+		DamageTypes: Tesla
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 12
 
 RA2PortaTesla2:
 	Inherits: RA2PortaTesla
 	Range: 5777
+	Warhead@Tesla_Heavy:
+		IntegrityScale: 150
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 12000
 	Warhead@TeslaArc: FireShrapnel
@@ -1301,8 +1307,10 @@ TeslaFragment:
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@Tesla_Heavy:
 		Damage: 8000
+		IntegrityScale: 150
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 4000
+		DamageTypes: Tesla
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1316,8 +1324,10 @@ TeslaFragment2:
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@Tesla_Heavy:
 		Damage: 12000
+		IntegrityScale: 150
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 6000
+		DamageTypes: Tesla
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@EMPUnit: AffectsIntegrity
@@ -2713,6 +2723,7 @@ LightningBolt:
 		Spread: 2000
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 24000
+		DamageTypes: Tesla
 	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Air, Ground, Water
 		Damage: 6
@@ -2721,6 +2732,7 @@ LightningBolt:
 		Falloff: 100, 67, 33, 0
 		Spread: 3333
 		Damage: 66666
+		DamageTypes: Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: wclbolt1,wclbolt2,wclbolt3
 		ExplosionPalette: ra2effect

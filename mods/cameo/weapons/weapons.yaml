@@ -5721,6 +5721,8 @@ DefuseKit:
 			Bomber: 3
 			Helicopter: 5
 			Spaceship: 7
+		DamageTypes: Tesla
+		IntegrityScale: 33
 		UpdatesUnitStatistics: false
 
 ^Warhead_Quantum_Medium:
@@ -5782,6 +5784,8 @@ DefuseKit:
 			Bomber: 7
 			Helicopter: 9
 			Spaceship: 11
+		DamageTypes: Tesla
+		IntegrityScale: 33
 		UpdatesUnitStatistics: false
 
 ^Warhead_Quantum_Heavy:
@@ -5843,6 +5847,8 @@ DefuseKit:
 			Bomber: 12
 			Helicopter: 14
 			Spaceship: 16
+		DamageTypes: Tesla
+		IntegrityScale: 33
 		UpdatesUnitStatistics: false
 
 ###### FireMissile: blend of Flame+MissileHE + PhysicalStates {'Temperature': 50} ######
@@ -6445,6 +6451,8 @@ DefuseKit:
 			Bomber: 15
 			Helicopter: 15
 			Spaceship: 15
+		DamageTypes: Tesla
+		IntegrityScale: 50
 		UpdatesUnitStatistics: false
 
 ^Warhead_Storm_Medium:
@@ -6503,6 +6511,8 @@ DefuseKit:
 			Bomber: 20
 			Helicopter: 20
 			Spaceship: 20
+		DamageTypes: Tesla
+		IntegrityScale: 50
 		UpdatesUnitStatistics: false
 
 ^Warhead_Storm_Heavy:
@@ -6561,6 +6571,8 @@ DefuseKit:
 			Bomber: 25
 			Helicopter: 25
 			Spaceship: 25
+		DamageTypes: Tesla
+		IntegrityScale: 50
 		UpdatesUnitStatistics: false
 
 ^Warhead_Storm_Super:
@@ -6619,6 +6631,8 @@ DefuseKit:
 			Bomber: 30
 			Helicopter: 30
 			Spaceship: 31
+		DamageTypes: Tesla
+		IntegrityScale: 50
 		UpdatesUnitStatistics: false
 
 ###### FireCannon: blend of Flame+CannonHE + PhysicalStates {'Temperature': 50} ######
@@ -8044,6 +8058,8 @@ DefuseKit:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+		DamageTypes: Tesla
+		IntegrityScale: 100
 		UpdatesUnitStatistics: false
 	Warhead@Tesla_Light_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
@@ -8069,7 +8085,7 @@ DefuseKit:
 			Bomber: 10
 			Helicopter: 10
 			Spaceship: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
 
 ^Warhead_Tesla_Medium:
 	ValidTargets: Ground, Water
@@ -8128,6 +8144,8 @@ DefuseKit:
 			Helicopter: 7
 			Bomber: 6
 			Fighter: 5
+		DamageTypes: Tesla
+		IntegrityScale: 100
 		UpdatesUnitStatistics: false
 	Warhead@Tesla_Medium_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
@@ -8153,7 +8171,7 @@ DefuseKit:
 			Bomber: 10
 			Helicopter: 10
 			Spaceship: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
 
 ^Warhead_Tesla_Heavy:
 	ValidTargets: Ground, Water
@@ -8212,6 +8230,8 @@ DefuseKit:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+		DamageTypes: Tesla
+		IntegrityScale: 100
 		UpdatesUnitStatistics: false
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
@@ -8237,7 +8257,7 @@ DefuseKit:
 			Bomber: 10
 			Helicopter: 10
 			Spaceship: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
 
 ###### Tesla_Super: INF+VEH > BLD > AIR (heavy, air=False) ######
 ^Warhead_Tesla_Super:
@@ -8297,6 +8317,8 @@ DefuseKit:
 			Helicopter: 17
 			Bomber: 16
 			Fighter: 15
+		DamageTypes: Tesla
+		IntegrityScale: 100
 		UpdatesUnitStatistics: false
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
@@ -8322,7 +8344,7 @@ DefuseKit:
 			Bomber: 10
 			Helicopter: 10
 			Spaceship: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
 
 ###### Nuclear: BLD > VEH > AIR > INF (heavy, air=True) ######
 ^Warhead_Nuclear_Super:
@@ -10724,6 +10746,7 @@ Pistol:
 		Spread: 1000
 		Damage: 100000
 		Delay: 2
+		DamageTypes: Tesla
 	Warhead@Tesla_Heavy:
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
@@ -10742,6 +10765,7 @@ Pistol:
 		Spread: 1000
 		Damage: 100000
 		Delay: 5
+		DamageTypes: Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: nuke_explosion
 		ImpactSounds: nukexplo.aud
@@ -10839,6 +10863,7 @@ IonCannon:
 		Spread: 1000
 		Damage: 100000
 		Delay: 2
+		DamageTypes: Tesla
 	Warhead@Tesla_Heavy:
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
@@ -10857,6 +10882,7 @@ IonCannon:
 		Spread: 1000
 		Damage: 100000
 		Delay: 5
+		DamageTypes: Tesla
 	Warhead@IonCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Range: 0, 1000, 2500, 3333, 5000
@@ -11104,6 +11130,7 @@ TSPulseCannon_EMP:
 		Damage: 5000
 		Spread: 5000
 		InvalidTargets: Infantry
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
@@ -11122,6 +11149,7 @@ TSPulseCannon_EMP:
 		Damage: 5000
 		Spread: 5000
 		InvalidTargets: Infantry
+		DamageTypes: Tesla
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25

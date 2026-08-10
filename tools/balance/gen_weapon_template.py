@@ -157,7 +157,10 @@ ENERGY_THIN_SPREAD_LEVEL = {k: v // 2 for k, v in CHIP_SPREAD_LEVEL.items()}
 
 def emit_chip(tag, family_name, damage, vt, level=None):
     """Emit the paid-for ExtraDamage chip (SpreadDamage, 50% of main, bespoke Versus).
-    Uses CHIPS_LEVEL[(family, level)] if present, else CHIPS[family]."""
+    Uses CHIPS_LEVEL[(family, level)] if present, else CHIPS[family].
+    For integrity-affecting families, the chip carries Tesla in DamageTypes so the passive
+    INotifyDamage drain fires. SpreadDamage has no IntegrityScale field — the passive drain
+    from the Tesla DamageType is the only mechanism for the chip."""
     d = CHIPS_LEVEL.get((family_name, level), CHIPS[family_name])
     floor = CHIP_FLOOR[family_name]
     spread = CHIP_SPREAD_LEVEL.get((family_name, level), CHIP_SPREAD[family_name])
@@ -165,6 +168,9 @@ def emit_chip(tag, family_name, damage, vt, level=None):
              "Scout", "Light", "Medium", "Heavy", "Superheavy",
              "Wood", "Steel", "Concrete", "Fighter", "Bomber", "Helicopter", "Spaceship"]
     rows = "\n".join(f"\t\t\t{a}: {d.get(a, floor)}" for a in order if a != "REFLECTOR" or "REFLECTOR" in d)
+    dt = "Prone75Percent, TriggerProne, ExplosionDeath"
+    if family_name in FAMILY_INTEGRITY_SCALE:
+        dt += ", Tesla"
     return "\n".join([
         f"\tWarhead@{tag}_ExtraDamage: SpreadDamage",
         f"\t\tValidTargets: {vt}",
@@ -173,7 +179,7 @@ def emit_chip(tag, family_name, damage, vt, level=None):
         f"\t\tFalloff: 100, 75, 50, 25",
         f"\t\tVersus:",
         rows,
-        f"\t\tDamageTypes: Prone75Percent, TriggerProne, ExplosionDeath"])
+        f"\t\tDamageTypes: {dt}"])
 
 
 def table(order16, step, top, floor, shield):
@@ -259,13 +265,16 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         if physical_states:  # multi-state blend (e.g. Plasma: Temperature 50 + Corrosion 50)
             main_wh.append("\t\tPhysicalStates:")
             main_wh += [f"\t\t\t{k}: {v}" for k, v in physical_states.items()]
-        integ = FAMILY_INTEGRITY_SCALE.get(name)  # shield/EMP auto-drain (main only; %-twin has no field)
+        integ = FAMILY_INTEGRITY_SCALE.get(name)  # shield/EMP auto-drain
         if integ:
             main_wh.append(f"\t\tIntegrityScale: {integ}")
         percentage_state = FAMILY_PHYSICAL_STATE.get(name) if name in {"Flame", "Chemical"} else None
         # All %-twins use the Cameo AreaDamagePercentage warhead (unified 2026-08-10): same expanding-ring
         # spatial pass + baked-FF plumbing as the AreaDamage main, and it can carry PhysicalStateScale.
         # Behaviour-preserving drop-in for HealthPercentageDamage (no ValidRelationships: Ally => no FF).
+        # AreaDamagePercentage extends AreaDamageWarhead, so it inherits IntegrityScale. For integrity-
+        # affecting families, the %-twin MUST also drain integrity (otherwise HP dies before integrity
+        # depletes). The %-twin also carries DamageTypes: Tesla for the passive INotifyDamage drain.
         percentage_type = "AreaDamagePercentage"
         pct_wh = [f"\tWarhead@{tag}_Percentage: {percentage_type}",
              f"\t\tValidTargets: {vt}",
@@ -273,8 +282,11 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
              f"\t\tDamage: {pct_damage}",
              f"\t\tFalloff: {falloffs[li]}",
              f"\t\tVersus:",
-             emit_versus(pct),
-             f"\t\tUpdatesUnitStatistics: false"]
+             emit_versus(pct)]
+        if integ:
+            pct_wh.append(f"\t\tDamageTypes: Tesla")
+            pct_wh.append(f"\t\tIntegrityScale: {integ}")
+        pct_wh.append(f"\t\tUpdatesUnitStatistics: false")
         if percentage_state:
             psn, pss = percentage_state
             pct_wh += [f"\t\tPhysicalStateName: {psn}", f"\t\tPhysicalStateScale: {pss}"]
@@ -327,9 +339,11 @@ FAMILY_PHYSICAL_STATE = {
 # shield by `damage x Scale%` on hit, EXACTLY like PhysicalStateScale (auto-tracks the real post-armor
 # damage, so no flat EMP number is ever hand-set and the ordering can't drift). Tesla-content law:
 # Scale = round(100 x Tesla-parents / total-parents) -> pure Tesla 100, Storm (Tesla+Magic) 50,
-# Quantum (Railgun+Laser+Tesla) 33. Emitted on the MAIN AreaDamage warhead only (the %-twin is a plain
-# HealthPercentageDamage that has no IntegrityScale field). The flat AffectsIntegrity warhead stays
-# UPGRADE-only (a concrete bonus on top), so no template emits it. See PHYSICAL_STATE_SYSTEM.md.
+# Quantum (Railgun+Laser+Tesla) 33. Emitted on BOTH the main AreaDamage and the _Percentage
+# AreaDamagePercentage warheads (both extend AreaDamageWarhead and support IntegrityScale). The
+# _ExtraDamage chip (SpreadDamage) has no IntegrityScale field but carries Tesla in DamageTypes for
+# the passive INotifyDamage drain. The flat AffectsIntegrity warhead stays UPGRADE-only (a concrete
+# bonus on top), so no template emits it. See PHYSICAL_STATE_SYSTEM.md.
 FAMILY_INTEGRITY_SCALE = {
     "Tesla": 100,                          # pure Tesla = full shield-drain (the disable specialist)
     "Storm": 50,                          # Tesla+Magic -> 1/2
