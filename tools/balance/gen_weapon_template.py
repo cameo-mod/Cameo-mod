@@ -42,8 +42,8 @@ WC = {"Light": 0.75, "Medium": 1.0, "Heavy": 1.25, "Super": 1.5}
 FLAT_VALUES = {"Light": 45, "Medium": 55, "Heavy": 65}   # main SpreadDamage vs ALL armors
 FLAT_PCT = {"Light": 5, "Medium": 8, "Heavy": 10}        # its modest % chip
 # PCT / "%-equalizer" (Magic): tiny flat + a LARGE uniform % of max HP (ignores armor) = giant-killer.
-PCT_MAIN = 20                                            # token flat main (uniform vs all)
-PCT_VALUES = {"Light": 4, "Medium": 6, "Heavy": 9, "Super": 13}  # % of maxHP; encoded as Versus = val*100 (Damage stays the 1-per-2000 grid)
+MAGIC_MAIN = {"Light": 22, "Medium": 27, "Heavy": 32, "Super": 38}   # Magic flat = 1/2 Sonic flat (uniform)
+MAGIC_PCT  = {"Light": 25, "Medium": 40, "Heavy": 50, "Super": 65}   # Magic %-of-maxHP Versus = 5x Sonic %-chip (Damage stays 1-per-2000 grid)
 
 
 def block_seq(group, direction):
@@ -214,10 +214,11 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
             main = [("Shield", fv)] + [(a, fv) for a in allr]
             pct = [("Shield", fp)] + [(a, fp) for a in allr]
             hz = None
-        elif mode == "pct":                      # Magic: ignores armor on % of max HP
-            main = [("Shield", PCT_MAIN)] + [(a, PCT_MAIN) for a in allr]
-            pv = PCT_VALUES[level] * 100          # magnitude lives in VERSUS so it SCALES with the main;
-            pct = [("Shield", pv)] + [(a, pv) for a in allr]  # Damage stays the 1-per-2000 grid value (never fixed)
+        elif mode == "pct":                      # Magic: 1/2 Sonic flat + 5x Sonic %-of-maxHP (giant-killer)
+            mv = MAGIC_MAIN[level]
+            main = [("Shield", mv)] + [(a, mv) for a in allr]
+            pv = MAGIC_PCT[level]                 # %-magnitude in VERSUS (scales with main); Damage stays 1
+            pct = [("Shield", pv)] + [(a, pv) for a in allr]
             hz = None
         else:                                    # standard sloped profile
             step, mfloor, ptop = LEVELS[level]
@@ -349,10 +350,12 @@ BLEND_FAMILIES = {
     # contributes a meter; Plasma-consistent per-parent averaging). EMP/ExtraDamage stay per-weapon.
     "Quantum": (["Railgun", "Laser", "Tesla"], {"Temperature": 25}, L3),
     # Element + delivery blends (maintainer 2026-08-10): per-armor AVERAGE of the element family and the
-    # delivery family + the element's meter / 2 parents (50). HE delivery = area/anti-light, fits elements.
-    "FireMissile": (["Flame", "MissileHE"], {"Temperature": 50}, L3),
-    "ChemMissile": (["Chemical", "MissileHE"], {"Corrosion": 50}, L3),
-    "ChemCannon": (["Chemical", "CannonHE"], {"Corrosion": 50}, L3),
+    # delivery family + the element's meter / 2 parents (50). FIRE = anti-light -> pairs with HE delivery
+    # (better vs infantry/buildings); CHEMICAL = anti-armor -> pairs with AP delivery (better vs armor).
+    "FireCannon":  (["Flame", "CannonHE"],    {"Temperature": 50}, L3),
+    "FireMissile": (["Flame", "MissileHE"],   {"Temperature": 50}, L3),
+    "ChemCannon":  (["Chemical", "CannonAP"], {"Corrosion": 50}, L3),
+    "ChemMissile": (["Chemical", "MissileAP"],{"Corrosion": 50}, L3),
 }
 # Fixed emission order for a blend (it has no single light/heavy direction).
 BLEND_ARMOR_ORDER = ["None", "Flak", "Plate", "Heroic", "Scout", "Light", "Medium", "Heavy",
@@ -380,20 +383,19 @@ def blend_versus(parents):
     return fn
 
 
-# Storm = Ixian Tesla + Magic superweapon blend (maintainer 2026-08-10). NOT a plain per-armor average:
-# the SUPER tier flat = avg(TeslaCharged main, Magic 20 flat, TeslaCharged-ExtraDamage/5); the %-twin =
-# avg(TeslaCharged %-Versus, Magic-super %-Versus 1300). Every lower tier is that SUPER profile SCALED by
-# WC[level]/WC[Super]. The %-magnitude lives in Versus (Damage stays the 1-per-2000 grid, so it scales).
+# Storm = Ixian Tesla + Magic superweapon blend (maintainer 2026-08-10). The SUPER tier is the 3-way
+# AVERAGE of TeslaCharged main + its full ExtraDamage chip + the new Magic — for BOTH the flat main and
+# the %-twin. Every lower tier is that SUPER profile SCALED by WC[level]/WC[Super]. The %-magnitude lives
+# in Versus (Damage stays the 1-per-2000 grid, so it scales with the weapon).
 STORM_LEVELS = ["Light", "Medium", "Heavy", "Super"]
 
 
 def storm_versus(level):
     tc_main, tc_pct = _family_main_pct("TeslaCharged", "Super")
     extra, ef = CHIPS["TeslaCharged"], CHIP_FLOOR["TeslaCharged"]
-    magic_pct = PCT_VALUES["Super"] * 100          # 1300 = Magic-super giant-killer, encoded in Versus
     keys = ["Shield"] + BLEND_ARMOR_ORDER
-    base_main = {a: (tc_main[a] + PCT_MAIN + extra.get(a, ef) // 5) // 3 for a in keys}
-    base_pct = {a: (tc_pct[a] + magic_pct) // 2 for a in keys}
+    base_main = {a: (tc_main[a] + extra.get(a, ef) + MAGIC_MAIN["Super"]) // 3 for a in keys}
+    base_pct = {a: (tc_pct[a] + extra.get(a, ef) + MAGIC_PCT["Super"]) // 3 for a in keys}
     f = WC[level] / WC["Super"]                     # Super 1.0, Heavy .833, Medium .667, Light .5
     return ([(a, int(base_main[a] * f)) for a in keys],
             [(a, int(base_pct[a] * f)) for a in keys])
@@ -409,7 +411,7 @@ if __name__ == "__main__":
         for nm, (bl, d, air, lv) in WEAPONS.items():
             if isinstance(bl, str) and bl in SPECIAL_MODE:
                 extra = (", ".join(f"{x}:{FLAT_VALUES[x]}" for x in lv) if bl == "FLAT"
-                         else "% of maxHP " + ", ".join(f"{x}:{PCT_VALUES[x]}%" for x in lv))
+                         else "%-Versus " + ", ".join(f"{x}:{MAGIC_PCT[x]}" for x in lv))
                 print(f"\n{nm:11s} [{macro_summary(bl)}] air={air}\n   {extra}")
                 continue
             order = build_order(bl, d)

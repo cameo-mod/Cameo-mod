@@ -6023,7 +6023,7 @@ DefuseKit:
 			Spaceship: 12
 		UpdatesUnitStatistics: false
 
-###### ChemMissile: blend of Chemical+MissileHE + PhysicalStates {'Corrosion': 50} ######
+###### ChemMissile: blend of Chemical+MissileAP + PhysicalStates {'Corrosion': 50} ######
 ^Warhead_ChemMissile_Light:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
@@ -6040,22 +6040,22 @@ DefuseKit:
 		Versus:
 			HAZMAT: 50
 			Shield: 110
-			None: 43
-			Flak: 46
-			Plate: 49
-			Heroic: 52
-			Scout: 76
-			Light: 76
-			Medium: 76
-			Heavy: 76
-			Superheavy: 79
-			Wood: 64
-			Steel: 61
-			Concrete: 58
+			None: 34
+			Flak: 43
+			Plate: 52
+			Heroic: 61
+			Scout: 64
+			Light: 73
+			Medium: 82
+			Heavy: 91
+			Superheavy: 100
+			Wood: 34
+			Steel: 40
+			Concrete: 46
 			Fighter: 31
-			Bomber: 31
-			Helicopter: 31
-			Spaceship: 31
+			Bomber: 37
+			Helicopter: 43
+			Spaceship: 49
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 50
@@ -6066,22 +6066,22 @@ DefuseKit:
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
 			Shield: 17
-			None: 6
-			Flak: 7
-			Plate: 7
-			Heroic: 8
-			Scout: 12
-			Light: 12
-			Medium: 12
-			Heavy: 12
-			Superheavy: 12
-			Wood: 10
-			Steel: 9
-			Concrete: 9
+			None: 5
+			Flak: 6
+			Plate: 8
+			Heroic: 9
+			Scout: 10
+			Light: 11
+			Medium: 13
+			Heavy: 14
+			Superheavy: 16
+			Wood: 5
+			Steel: 6
+			Concrete: 7
 			Fighter: 4
-			Bomber: 4
-			Helicopter: 4
-			Spaceship: 4
+			Bomber: 5
+			Helicopter: 6
+			Spaceship: 7
 		UpdatesUnitStatistics: false
 
 ^Warhead_ChemMissile_Medium:
@@ -6100,22 +6100,22 @@ DefuseKit:
 		Versus:
 			HAZMAT: 50
 			Shield: 125
-			None: 52
-			Flak: 55
-			Plate: 57
-			Heroic: 60
-			Scout: 80
-			Light: 80
-			Medium: 80
-			Heavy: 80
-			Superheavy: 82
-			Wood: 70
-			Steel: 67
-			Concrete: 65
+			None: 45
+			Flak: 52
+			Plate: 60
+			Heroic: 67
+			Scout: 70
+			Light: 77
+			Medium: 85
+			Heavy: 92
+			Superheavy: 100
+			Wood: 45
+			Steel: 50
+			Concrete: 55
 			Fighter: 42
-			Bomber: 42
-			Helicopter: 42
-			Spaceship: 42
+			Bomber: 47
+			Helicopter: 52
+			Spaceship: 57
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 50
@@ -6126,22 +6126,22 @@ DefuseKit:
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
 			Shield: 25
-			None: 10
-			Flak: 11
-			Plate: 11
-			Heroic: 12
-			Scout: 16
-			Light: 16
-			Medium: 16
-			Heavy: 16
-			Superheavy: 16
-			Wood: 14
-			Steel: 13
-			Concrete: 13
+			None: 9
+			Flak: 10
+			Plate: 12
+			Heroic: 13
+			Scout: 14
+			Light: 15
+			Medium: 17
+			Heavy: 18
+			Superheavy: 20
+			Wood: 9
+			Steel: 10
+			Concrete: 11
 			Fighter: 8
-			Bomber: 8
-			Helicopter: 8
-			Spaceship: 8
+			Bomber: 9
+			Helicopter: 10
+			Spaceship: 11
 		UpdatesUnitStatistics: false
 
 ^Warhead_ChemMissile_Heavy:
@@ -6160,22 +6160,22 @@ DefuseKit:
 		Versus:
 			HAZMAT: 50
 			Shield: 140
-			None: 62
-			Flak: 64
-			Plate: 66
-			Heroic: 68
-			Scout: 84
-			Light: 84
-			Medium: 84
-			Heavy: 84
-			Superheavy: 86
-			Wood: 76
-			Steel: 74
-			Concrete: 72
+			None: 56
+			Flak: 62
+			Plate: 68
+			Heroic: 74
+			Scout: 76
+			Light: 82
+			Medium: 88
+			Heavy: 94
+			Superheavy: 100
+			Wood: 56
+			Steel: 60
+			Concrete: 64
 			Fighter: 54
-			Bomber: 54
-			Helicopter: 54
-			Spaceship: 54
+			Bomber: 58
+			Helicopter: 62
+			Spaceship: 66
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 50
@@ -6186,25 +6186,25 @@ DefuseKit:
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
 			Shield: 35
-			None: 15
-			Flak: 16
-			Plate: 16
-			Heroic: 17
-			Scout: 21
-			Light: 21
-			Medium: 21
-			Heavy: 21
-			Superheavy: 21
-			Wood: 19
-			Steel: 18
-			Concrete: 18
+			None: 14
+			Flak: 15
+			Plate: 17
+			Heroic: 18
+			Scout: 19
+			Light: 20
+			Medium: 22
+			Heavy: 23
+			Superheavy: 25
+			Wood: 14
+			Steel: 15
+			Concrete: 16
 			Fighter: 13
-			Bomber: 13
-			Helicopter: 13
-			Spaceship: 13
+			Bomber: 14
+			Helicopter: 15
+			Spaceship: 16
 		UpdatesUnitStatistics: false
 
-###### ChemCannon: blend of Chemical+CannonHE + PhysicalStates {'Corrosion': 50} ######
+###### ChemCannon: blend of Chemical+CannonAP + PhysicalStates {'Corrosion': 50} ######
 ^Warhead_ChemCannon_Light:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
@@ -6221,22 +6221,22 @@ DefuseKit:
 		Versus:
 			HAZMAT: 50
 			Shield: 110
-			None: 55
-			Flak: 58
-			Plate: 61
-			Heroic: 64
-			Scout: 76
-			Light: 76
-			Medium: 76
-			Heavy: 76
-			Superheavy: 79
-			Wood: 64
-			Steel: 61
+			None: 46
+			Flak: 55
+			Plate: 64
+			Heroic: 73
+			Scout: 64
+			Light: 73
+			Medium: 82
+			Heavy: 91
+			Superheavy: 100
+			Wood: 46
+			Steel: 52
 			Concrete: 58
-			Fighter: 19
-			Bomber: 19
-			Helicopter: 19
-			Spaceship: 19
+			Fighter: 10
+			Bomber: 16
+			Helicopter: 22
+			Spaceship: 28
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 50
@@ -6247,22 +6247,22 @@ DefuseKit:
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
 			Shield: 17
-			None: 8
-			Flak: 9
-			Plate: 9
-			Heroic: 10
-			Scout: 12
-			Light: 12
-			Medium: 12
-			Heavy: 12
-			Superheavy: 12
-			Wood: 10
-			Steel: 9
+			None: 7
+			Flak: 8
+			Plate: 10
+			Heroic: 11
+			Scout: 10
+			Light: 11
+			Medium: 13
+			Heavy: 14
+			Superheavy: 16
+			Wood: 7
+			Steel: 8
 			Concrete: 9
-			Fighter: 2
+			Fighter: 1
 			Bomber: 2
-			Helicopter: 2
-			Spaceship: 2
+			Helicopter: 3
+			Spaceship: 4
 		UpdatesUnitStatistics: false
 
 ^Warhead_ChemCannon_Medium:
@@ -6281,22 +6281,22 @@ DefuseKit:
 		Versus:
 			HAZMAT: 50
 			Shield: 125
-			None: 62
-			Flak: 65
-			Plate: 67
-			Heroic: 70
-			Scout: 80
-			Light: 80
-			Medium: 80
-			Heavy: 80
-			Superheavy: 82
-			Wood: 70
-			Steel: 67
+			None: 55
+			Flak: 62
+			Plate: 70
+			Heroic: 77
+			Scout: 70
+			Light: 77
+			Medium: 85
+			Heavy: 92
+			Superheavy: 100
+			Wood: 55
+			Steel: 60
 			Concrete: 65
-			Fighter: 32
-			Bomber: 32
-			Helicopter: 32
-			Spaceship: 32
+			Fighter: 25
+			Bomber: 30
+			Helicopter: 35
+			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 50
@@ -6307,22 +6307,22 @@ DefuseKit:
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
 			Shield: 25
-			None: 12
-			Flak: 13
-			Plate: 13
-			Heroic: 14
-			Scout: 16
-			Light: 16
-			Medium: 16
-			Heavy: 16
-			Superheavy: 16
-			Wood: 14
-			Steel: 13
+			None: 11
+			Flak: 12
+			Plate: 14
+			Heroic: 15
+			Scout: 14
+			Light: 15
+			Medium: 17
+			Heavy: 18
+			Superheavy: 20
+			Wood: 11
+			Steel: 12
 			Concrete: 13
-			Fighter: 6
+			Fighter: 5
 			Bomber: 6
-			Helicopter: 6
-			Spaceship: 6
+			Helicopter: 7
+			Spaceship: 8
 		UpdatesUnitStatistics: false
 
 ^Warhead_ChemCannon_Heavy:
@@ -6341,22 +6341,22 @@ DefuseKit:
 		Versus:
 			HAZMAT: 50
 			Shield: 140
-			None: 70
-			Flak: 72
-			Plate: 74
-			Heroic: 76
-			Scout: 84
-			Light: 84
-			Medium: 84
-			Heavy: 84
-			Superheavy: 86
-			Wood: 76
-			Steel: 74
+			None: 64
+			Flak: 70
+			Plate: 76
+			Heroic: 82
+			Scout: 76
+			Light: 82
+			Medium: 88
+			Heavy: 94
+			Superheavy: 100
+			Wood: 64
+			Steel: 68
 			Concrete: 72
-			Fighter: 46
-			Bomber: 46
-			Helicopter: 46
-			Spaceship: 46
+			Fighter: 40
+			Bomber: 44
+			Helicopter: 48
+			Spaceship: 52
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 50
@@ -6367,22 +6367,22 @@ DefuseKit:
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
 			Shield: 35
-			None: 17
-			Flak: 18
-			Plate: 18
-			Heroic: 19
-			Scout: 21
-			Light: 21
-			Medium: 21
-			Heavy: 21
-			Superheavy: 21
-			Wood: 19
-			Steel: 18
+			None: 16
+			Flak: 17
+			Plate: 19
+			Heroic: 20
+			Scout: 19
+			Light: 20
+			Medium: 22
+			Heavy: 23
+			Superheavy: 25
+			Wood: 16
+			Steel: 17
 			Concrete: 18
-			Fighter: 11
+			Fighter: 10
 			Bomber: 11
-			Helicopter: 11
-			Spaceship: 11
+			Helicopter: 12
+			Spaceship: 13
 		UpdatesUnitStatistics: false
 
 ###### Storm: TeslaCharged + Magic + TeslaChargedExtraDamage/5 (Super-anchored, scaled down) ######
@@ -6400,23 +6400,23 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
-			Shield: 42
-			None: 24
-			Flak: 25
-			Plate: 27
-			Heroic: 29
-			Scout: 19
-			Light: 21
-			Medium: 23
-			Heavy: 24
-			Superheavy: 26
-			Wood: 15
-			Steel: 17
-			Concrete: 17
-			Fighter: 12
-			Bomber: 13
-			Helicopter: 13
-			Spaceship: 14
+			Shield: 98
+			None: 57
+			Flak: 62
+			Plate: 67
+			Heroic: 72
+			Scout: 35
+			Light: 40
+			Medium: 46
+			Heavy: 51
+			Superheavy: 56
+			Wood: 21
+			Steel: 30
+			Concrete: 26
+			Fighter: 17
+			Bomber: 17
+			Helicopter: 18
+			Spaceship: 18
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Storm_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
@@ -6424,23 +6424,23 @@ DefuseKit:
 		Damage: 1
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
-			Shield: 336
-			None: 330
-			Flak: 331
-			Plate: 331
-			Heroic: 332
-			Scout: 330
-			Light: 331
-			Medium: 331
-			Heavy: 332
-			Superheavy: 332
-			Wood: 329
-			Steel: 330
-			Concrete: 330
-			Fighter: 328
-			Bomber: 329
-			Helicopter: 329
-			Spaceship: 329
+			Shield: 85
+			None: 52
+			Flak: 56
+			Plate: 61
+			Heroic: 65
+			Scout: 31
+			Light: 35
+			Medium: 40
+			Heavy: 44
+			Superheavy: 49
+			Wood: 18
+			Steel: 26
+			Concrete: 22
+			Fighter: 15
+			Bomber: 15
+			Helicopter: 15
+			Spaceship: 15
 		UpdatesUnitStatistics: false
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidRelationships: Neutral, Enemy
@@ -6460,23 +6460,23 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
-			Shield: 56
-			None: 32
-			Flak: 34
-			Plate: 36
-			Heroic: 39
-			Scout: 25
-			Light: 28
-			Medium: 30
-			Heavy: 32
-			Superheavy: 35
-			Wood: 20
-			Steel: 23
-			Concrete: 22
-			Fighter: 16
-			Bomber: 17
-			Helicopter: 18
-			Spaceship: 18
+			Shield: 131
+			None: 76
+			Flak: 82
+			Plate: 89
+			Heroic: 96
+			Scout: 47
+			Light: 54
+			Medium: 61
+			Heavy: 68
+			Superheavy: 74
+			Wood: 28
+			Steel: 40
+			Concrete: 35
+			Fighter: 22
+			Bomber: 23
+			Helicopter: 24
+			Spaceship: 24
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Storm_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
@@ -6484,23 +6484,23 @@ DefuseKit:
 		Damage: 1
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
-			Shield: 448
-			None: 440
-			Flak: 441
-			Plate: 442
-			Heroic: 442
-			Scout: 440
-			Light: 441
-			Medium: 442
-			Heavy: 442
-			Superheavy: 443
-			Wood: 439
-			Steel: 440
-			Concrete: 440
-			Fighter: 438
-			Bomber: 438
-			Helicopter: 438
-			Spaceship: 439
+			Shield: 113
+			None: 69
+			Flak: 75
+			Plate: 81
+			Heroic: 87
+			Scout: 41
+			Light: 47
+			Medium: 53
+			Heavy: 59
+			Superheavy: 65
+			Wood: 24
+			Steel: 35
+			Concrete: 30
+			Fighter: 20
+			Bomber: 20
+			Helicopter: 20
+			Spaceship: 20
 		UpdatesUnitStatistics: false
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidRelationships: Neutral, Enemy
@@ -6520,23 +6520,23 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
-			Shield: 70
-			None: 40
-			Flak: 42
-			Plate: 45
-			Heroic: 49
-			Scout: 31
-			Light: 35
-			Medium: 38
-			Heavy: 40
-			Superheavy: 44
-			Wood: 25
-			Steel: 29
-			Concrete: 28
-			Fighter: 20
-			Bomber: 21
-			Helicopter: 22
-			Spaceship: 23
+			Shield: 164
+			None: 95
+			Flak: 103
+			Plate: 111
+			Heroic: 120
+			Scout: 59
+			Light: 67
+			Medium: 76
+			Heavy: 85
+			Superheavy: 93
+			Wood: 35
+			Steel: 50
+			Concrete: 44
+			Fighter: 28
+			Bomber: 29
+			Helicopter: 30
+			Spaceship: 30
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Storm_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
@@ -6544,23 +6544,23 @@ DefuseKit:
 		Damage: 1
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
-			Shield: 560
-			None: 550
-			Flak: 551
-			Plate: 552
-			Heroic: 553
-			Scout: 550
-			Light: 551
-			Medium: 552
-			Heavy: 553
-			Superheavy: 554
-			Wood: 549
-			Steel: 550
-			Concrete: 550
-			Fighter: 547
-			Bomber: 548
-			Helicopter: 548
-			Spaceship: 549
+			Shield: 141
+			None: 86
+			Flak: 94
+			Plate: 101
+			Heroic: 109
+			Scout: 51
+			Light: 59
+			Medium: 66
+			Heavy: 74
+			Superheavy: 81
+			Wood: 30
+			Steel: 44
+			Concrete: 37
+			Fighter: 25
+			Bomber: 25
+			Helicopter: 25
+			Spaceship: 25
 		UpdatesUnitStatistics: false
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidRelationships: Neutral, Enemy
@@ -6580,23 +6580,23 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 20, 8, 3
 		Versus:
-			Shield: 85
-			None: 48
-			Flak: 51
-			Plate: 55
-			Heroic: 59
-			Scout: 38
-			Light: 42
-			Medium: 46
-			Heavy: 49
-			Superheavy: 53
-			Wood: 30
-			Steel: 35
-			Concrete: 34
-			Fighter: 25
-			Bomber: 26
-			Helicopter: 27
-			Spaceship: 28
+			Shield: 197
+			None: 114
+			Flak: 124
+			Plate: 134
+			Heroic: 145
+			Scout: 71
+			Light: 81
+			Medium: 92
+			Heavy: 102
+			Superheavy: 112
+			Wood: 43
+			Steel: 61
+			Concrete: 53
+			Fighter: 34
+			Bomber: 35
+			Helicopter: 36
+			Spaceship: 37
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Storm_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
@@ -6604,27 +6604,208 @@ DefuseKit:
 		Damage: 1
 		Falloff: 100, 50, 20, 8, 3
 		Versus:
-			Shield: 672
-			None: 661
-			Flak: 662
-			Plate: 663
-			Heroic: 664
-			Scout: 661
-			Light: 662
-			Medium: 663
-			Heavy: 664
-			Superheavy: 665
-			Wood: 659
-			Steel: 660
-			Concrete: 660
-			Fighter: 657
-			Bomber: 658
-			Helicopter: 658
-			Spaceship: 659
+			Shield: 170
+			None: 104
+			Flak: 113
+			Plate: 122
+			Heroic: 131
+			Scout: 62
+			Light: 71
+			Medium: 80
+			Heavy: 89
+			Superheavy: 98
+			Wood: 36
+			Steel: 53
+			Concrete: 45
+			Fighter: 30
+			Bomber: 30
+			Helicopter: 30
+			Spaceship: 31
 		UpdatesUnitStatistics: false
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidRelationships: Neutral, Enemy
 		Damage: 2000
+
+###### FireCannon: blend of Flame+CannonHE + PhysicalStates {'Temperature': 50} ######
+^Warhead_FireCannon_Light:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@FireCannon_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 2000
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			HAZMAT: 50
+			Shield: 110
+			None: 76
+			Flak: 67
+			Plate: 58
+			Heroic: 49
+			Scout: 79
+			Light: 70
+			Medium: 61
+			Heavy: 52
+			Superheavy: 46
+			Wood: 94
+			Steel: 82
+			Concrete: 70
+			Fighter: 28
+			Bomber: 22
+			Helicopter: 16
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 50
+	Warhead@FireCannon_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			None: 12
+			Flak: 10
+			Plate: 9
+			Heroic: 7
+			Scout: 12
+			Light: 11
+			Medium: 9
+			Heavy: 8
+			Superheavy: 7
+			Wood: 15
+			Steel: 13
+			Concrete: 11
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		UpdatesUnitStatistics: false
+
+^Warhead_FireCannon_Medium:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@FireCannon_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 600
+		Damage: 2000
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			HAZMAT: 50
+			Shield: 125
+			None: 80
+			Flak: 72
+			Plate: 65
+			Heroic: 57
+			Scout: 82
+			Light: 75
+			Medium: 67
+			Heavy: 60
+			Superheavy: 55
+			Wood: 95
+			Steel: 85
+			Concrete: 75
+			Fighter: 40
+			Bomber: 35
+			Helicopter: 30
+			Spaceship: 25
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 50
+	Warhead@FireCannon_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 1
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			Shield: 25
+			None: 16
+			Flak: 14
+			Plate: 13
+			Heroic: 11
+			Scout: 16
+			Light: 15
+			Medium: 13
+			Heavy: 12
+			Superheavy: 11
+			Wood: 19
+			Steel: 17
+			Concrete: 15
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		UpdatesUnitStatistics: false
+
+^Warhead_FireCannon_Heavy:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@FireCannon_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 800
+		Damage: 2000
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			HAZMAT: 50
+			Shield: 140
+			None: 84
+			Flak: 78
+			Plate: 72
+			Heroic: 66
+			Scout: 86
+			Light: 80
+			Medium: 74
+			Heavy: 68
+			Superheavy: 64
+			Wood: 96
+			Steel: 88
+			Concrete: 80
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 50
+	Warhead@FireCannon_Heavy_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 1
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			None: 21
+			Flak: 19
+			Plate: 18
+			Heroic: 16
+			Scout: 21
+			Light: 20
+			Medium: 18
+			Heavy: 17
+			Superheavy: 16
+			Wood: 24
+			Steel: 22
+			Concrete: 20
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		UpdatesUnitStatistics: false
 
 ###### Melee: INF > VEH > BLD > AIR (light, air=False) ######
 ^Warhead_Melee_Light:
@@ -6991,23 +7172,23 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
-			Shield: 20
-			Bomber: 20
-			Concrete: 20
-			Fighter: 20
-			Flak: 20
-			Heavy: 20
-			Helicopter: 20
-			Heroic: 20
-			Light: 20
-			Medium: 20
-			None: 20
-			Plate: 20
-			Scout: 20
-			Spaceship: 20
-			Steel: 20
-			Superheavy: 20
-			Wood: 20
+			Shield: 22
+			Bomber: 22
+			Concrete: 22
+			Fighter: 22
+			Flak: 22
+			Heavy: 22
+			Helicopter: 22
+			Heroic: 22
+			Light: 22
+			Medium: 22
+			None: 22
+			Plate: 22
+			Scout: 22
+			Spaceship: 22
+			Steel: 22
+			Superheavy: 22
+			Wood: 22
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Magic_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
@@ -7015,23 +7196,23 @@ DefuseKit:
 		Damage: 1
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
-			Shield: 400
-			Bomber: 400
-			Concrete: 400
-			Fighter: 400
-			Flak: 400
-			Heavy: 400
-			Helicopter: 400
-			Heroic: 400
-			Light: 400
-			Medium: 400
-			None: 400
-			Plate: 400
-			Scout: 400
-			Spaceship: 400
-			Steel: 400
-			Superheavy: 400
-			Wood: 400
+			Shield: 25
+			Bomber: 25
+			Concrete: 25
+			Fighter: 25
+			Flak: 25
+			Heavy: 25
+			Helicopter: 25
+			Heroic: 25
+			Light: 25
+			Medium: 25
+			None: 25
+			Plate: 25
+			Scout: 25
+			Spaceship: 25
+			Steel: 25
+			Superheavy: 25
+			Wood: 25
 		UpdatesUnitStatistics: false
 
 ^Warhead_Magic_Medium:
@@ -7048,23 +7229,23 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
-			Shield: 20
-			Bomber: 20
-			Concrete: 20
-			Fighter: 20
-			Flak: 20
-			Heavy: 20
-			Helicopter: 20
-			Heroic: 20
-			Light: 20
-			Medium: 20
-			None: 20
-			Plate: 20
-			Scout: 20
-			Spaceship: 20
-			Steel: 20
-			Superheavy: 20
-			Wood: 20
+			Shield: 27
+			Bomber: 27
+			Concrete: 27
+			Fighter: 27
+			Flak: 27
+			Heavy: 27
+			Helicopter: 27
+			Heroic: 27
+			Light: 27
+			Medium: 27
+			None: 27
+			Plate: 27
+			Scout: 27
+			Spaceship: 27
+			Steel: 27
+			Superheavy: 27
+			Wood: 27
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Magic_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
@@ -7072,23 +7253,23 @@ DefuseKit:
 		Damage: 1
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
-			Shield: 600
-			Bomber: 600
-			Concrete: 600
-			Fighter: 600
-			Flak: 600
-			Heavy: 600
-			Helicopter: 600
-			Heroic: 600
-			Light: 600
-			Medium: 600
-			None: 600
-			Plate: 600
-			Scout: 600
-			Spaceship: 600
-			Steel: 600
-			Superheavy: 600
-			Wood: 600
+			Shield: 40
+			Bomber: 40
+			Concrete: 40
+			Fighter: 40
+			Flak: 40
+			Heavy: 40
+			Helicopter: 40
+			Heroic: 40
+			Light: 40
+			Medium: 40
+			None: 40
+			Plate: 40
+			Scout: 40
+			Spaceship: 40
+			Steel: 40
+			Superheavy: 40
+			Wood: 40
 		UpdatesUnitStatistics: false
 
 ^Warhead_Magic_Heavy:
@@ -7105,23 +7286,23 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
-			Shield: 20
-			Bomber: 20
-			Concrete: 20
-			Fighter: 20
-			Flak: 20
-			Heavy: 20
-			Helicopter: 20
-			Heroic: 20
-			Light: 20
-			Medium: 20
-			None: 20
-			Plate: 20
-			Scout: 20
-			Spaceship: 20
-			Steel: 20
-			Superheavy: 20
-			Wood: 20
+			Shield: 32
+			Bomber: 32
+			Concrete: 32
+			Fighter: 32
+			Flak: 32
+			Heavy: 32
+			Helicopter: 32
+			Heroic: 32
+			Light: 32
+			Medium: 32
+			None: 32
+			Plate: 32
+			Scout: 32
+			Spaceship: 32
+			Steel: 32
+			Superheavy: 32
+			Wood: 32
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Magic_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
@@ -7129,23 +7310,23 @@ DefuseKit:
 		Damage: 1
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
-			Shield: 900
-			Bomber: 900
-			Concrete: 900
-			Fighter: 900
-			Flak: 900
-			Heavy: 900
-			Helicopter: 900
-			Heroic: 900
-			Light: 900
-			Medium: 900
-			None: 900
-			Plate: 900
-			Scout: 900
-			Spaceship: 900
-			Steel: 900
-			Superheavy: 900
-			Wood: 900
+			Shield: 50
+			Bomber: 50
+			Concrete: 50
+			Fighter: 50
+			Flak: 50
+			Heavy: 50
+			Helicopter: 50
+			Heroic: 50
+			Light: 50
+			Medium: 50
+			None: 50
+			Plate: 50
+			Scout: 50
+			Spaceship: 50
+			Steel: 50
+			Superheavy: 50
+			Wood: 50
 		UpdatesUnitStatistics: false
 
 ^Warhead_Magic_Super:
@@ -7162,23 +7343,23 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 20, 8, 3
 		Versus:
-			Shield: 20
-			Bomber: 20
-			Concrete: 20
-			Fighter: 20
-			Flak: 20
-			Heavy: 20
-			Helicopter: 20
-			Heroic: 20
-			Light: 20
-			Medium: 20
-			None: 20
-			Plate: 20
-			Scout: 20
-			Spaceship: 20
-			Steel: 20
-			Superheavy: 20
-			Wood: 20
+			Shield: 38
+			Bomber: 38
+			Concrete: 38
+			Fighter: 38
+			Flak: 38
+			Heavy: 38
+			Helicopter: 38
+			Heroic: 38
+			Light: 38
+			Medium: 38
+			None: 38
+			Plate: 38
+			Scout: 38
+			Spaceship: 38
+			Steel: 38
+			Superheavy: 38
+			Wood: 38
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Magic_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
@@ -7186,23 +7367,23 @@ DefuseKit:
 		Damage: 1
 		Falloff: 100, 50, 20, 8, 3
 		Versus:
-			Shield: 1300
-			Bomber: 1300
-			Concrete: 1300
-			Fighter: 1300
-			Flak: 1300
-			Heavy: 1300
-			Helicopter: 1300
-			Heroic: 1300
-			Light: 1300
-			Medium: 1300
-			None: 1300
-			Plate: 1300
-			Scout: 1300
-			Spaceship: 1300
-			Steel: 1300
-			Superheavy: 1300
-			Wood: 1300
+			Shield: 65
+			Bomber: 65
+			Concrete: 65
+			Fighter: 65
+			Flak: 65
+			Heavy: 65
+			Helicopter: 65
+			Heroic: 65
+			Light: 65
+			Medium: 65
+			None: 65
+			Plate: 65
+			Scout: 65
+			Spaceship: 65
+			Steel: 65
+			Superheavy: 65
+			Wood: 65
 		UpdatesUnitStatistics: false
 
 ###### Demolition: BLD > INF > VEH > AIR (light, air=False) ######
