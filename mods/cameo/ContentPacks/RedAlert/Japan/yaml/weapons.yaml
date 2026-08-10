@@ -743,9 +743,10 @@ RocketAngelRockets:
 		ValidTargets: Air
 
 Hakureiring:
-	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_Magic_Heavy
-	Inherits@3: ^Effect_Magic_Heavy
+	# Collapsed onto the new Magic %-equalizer (maintainer 2026-08-10). Was Tesla+Magic+EMP; the exorcist
+	# is a pure magic caster now. Damage 20000 = the old 10k+10k total, on-grid (%-twin auto = 10).
+	Inherits@wh: ^Warhead_Magic_Heavy
+	Inherits@fx: ^Effect_Magic_Heavy
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
 	InvalidTargets: Epic, Psionic, Monster
 	ReloadDelay: 30
@@ -775,28 +776,14 @@ Hakureiring:
 		ContrailEndColor: FFFFFF
 		CloseEnough: 333
 		AllowSnapping: true
-	Warhead@Tesla_Heavy:
-		ValidTargets: Air, Ground, Water
-		Damage: 10000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Air, Ground, Water
-		Damage: 5000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Tesla_Heavy_Percentage:
-		ValidTargets: Air, Ground, Water
-		Damage: 5
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Magic_Heavy:
 		ValidTargets: Air, Ground, Water
-		Damage: 10000
+		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Magic_Heavy_Percentage:
 		ValidTargets: Air, Ground, Water
-		Damage: 5
+		Damage: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 20000
 	Warhead@Effect: CreateEffect
 		Explosions: tsring
 		ExplosionPalette: tseffect
@@ -805,6 +792,8 @@ Hakureiring:
 # TODO "Hakureiring2" uses MCImmune like a placeholder, in the future will be replaced with Mind Controllers and Magic Monsters
 
 Hakureiring2:
+	# Anti-boss ability: targets Epic/Psionic/Monster only. Pure Magic (2026-08-10).
+	# Combined damage: was 120k Tesla + 120k Magic = 240k total → single 240k Magic.
 	Inherits: Hakureiring
 	-InvalidTargets:
 	ValidTargets: Epic, Psionic, Monster
@@ -825,18 +814,14 @@ Hakureiring2:
 		TrailSequences: trail
 		TrailInterval: 2
 		TrailDelay: 1
-	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 120000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 60000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		Damage: 60
-	Warhead@MagicWeapon: SpreadDamage
-		Damage: 120000
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		Damage: 60
-	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@Magic_Heavy:
 		Damage: 240000
+		ValidTargets: Air, Ground, Water
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Magic_Heavy_Percentage:
+		Damage: 120
+		ValidTargets: Air, Ground, Water
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactActors: false
 		Image: hakurei_giphy
@@ -845,62 +830,35 @@ Hakureiring2:
 		UsePlayerPalette: true
 		AirThreshold: 6400
 		ImpactSounds: thgun.wav
-	Warhead@Effect2: CreateEffect
-		Explosions: mobileemp_small
-		ExplosionPalette: ra2unit
-		ImpactSounds: mobemp1.aud
-		ImpactActors: false
-		AffectsParent: true
-		ValidTargets: Ground, Water, Air
 
 ## Unused
 
 ReimuDreamSeal:
+	# Unused super ability. Pure Magic (2026-08-10). Was 16k Tesla + 16k Magic = 32k total.
 	Inherits: Hakureiring2
 	ReloadDelay: 9999
 	Burst: 2
 	BurstDelays: 35
 	Range: 6400
 	Report: thbomb.wav
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Magic_Heavy:
 		Spread: 640
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Damage: 16000
-		ValidTargets: Infantry, Vehicle, Building, Aircraft
-		InvalidTargets: Epic
-		ValidRelationships: Enemy, Neutral
-		DamageTypes: PsychicDeath
-		Delay: 6
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		Spread: 320
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Damage: 8
-		ValidTargets: Infantry, Vehicle, Building, Aircraft
-		InvalidTargets: Epic
-		ValidRelationships: Enemy, Neutral
-		DamageTypes: PsychicDeath
-		Delay: 6
-	Warhead@MagicWeapon: SpreadDamage
-		Spread: 640
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Damage: 16000
-		ValidTargets: Infantry, Vehicle, Building, Aircraft
-		InvalidTargets: Epic
-		ValidRelationships: Enemy, Neutral
-		DamageTypes: PsychicDeath
-		Delay: 6
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		Spread: 320
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Damage: 8
-		ValidTargets: Infantry, Vehicle, Building, Aircraft
-		InvalidTargets: Epic
-		ValidRelationships: Enemy, Neutral
-		DamageTypes: PsychicDeath
-		Delay: 6
-	Warhead@EMPUnit: AffectsIntegrity
-		Spread: 1280
 		Damage: 32000
+		ValidTargets: Infantry, Vehicle, Building, Aircraft
+		InvalidTargets: Epic
+		ValidRelationships: Enemy, Neutral
+		DamageTypes: PsychicDeath
+		Delay: 6
+	Warhead@Magic_Heavy_Percentage:
+		Spread: 320
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Damage: 16
+		ValidTargets: Infantry, Vehicle, Building, Aircraft
+		InvalidTargets: Epic
+		ValidRelationships: Enemy, Neutral
+		DamageTypes: PsychicDeath
+		Delay: 6
 	Warhead@4BeamEff: FireRadius
 		ValidTargets: Ground, Water, Air
 		Weapon: ReimuYinYangDrone
@@ -947,20 +905,18 @@ ReimuYinYangDrone:
 		AirThreshold: 6400
 
 Hakureiring3:
+	# Spawned sub-weapon (from YinYangDrone shrapnel). Pure Magic (2026-08-10).
+	# Was 8k Tesla + 8k Magic = 16k total → single 16k Magic.
 	Inherits: Hakureiring
 	InvalidTargets: Ground
-	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 8000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 4000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		Damage: 4
-	Warhead@MagicWeapon: SpreadDamage
-		Damage: 8000
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		Damage: 4
-	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@Magic_Heavy:
 		Damage: 16000
+		ValidTargets: Air, Ground, Water
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Magic_Heavy_Percentage:
+		Damage: 8
+		ValidTargets: Air, Ground, Water
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 THMiss:
 	Warhead@Effect: CreateEffect
@@ -1606,12 +1562,10 @@ Type97PlasmaCannon:
 		Explosions: purple_plasma
 
 ShrineTankCannon:
-	Inherits: ^TeslaWeapon
-	Inherits@2: ^RailgunWeapon
-	Inherits@3: ^MagicWeapon
-	Inherits@4: ^MediumCannon
-	Inherits@5: ^MediumChemicalWeapon
-	Inherits@6: ^MediumFlameWeapon
+	# Shrine Minitank weapon — weaker version of Exorcist. Pure Magic (2026-08-10).
+	# Was Tesla 4k + Railgun 4k + Magic 4k + Cannon 4k + Chem 4k + Flame 4k = 24k total → single 24k Magic.
+	Inherits@wh: ^Warhead_Magic_Heavy
+	Inherits@fx: ^Effect_Magic_Heavy
 	ReloadDelay: 50
 	Range: 6370
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
@@ -1638,53 +1592,12 @@ ShrineTankCannon:
 		ContrailEndColor: FFFFFF
 		CloseEnough: 333
 		AllowSnapping: true
-	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 4000
+	Warhead@Magic_Heavy:
+		Damage: 24000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 2000
+	Warhead@Magic_Heavy_Percentage:
+		Damage: 12
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MagicWeapon: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		Damage: 2
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumFlameWeapon: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 12000
 	Warhead@Effect: CreateEffect
 		Explosions: tsring
 		ExplosionPalette: tseffect

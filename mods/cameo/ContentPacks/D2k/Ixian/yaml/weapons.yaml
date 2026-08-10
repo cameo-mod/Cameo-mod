@@ -884,47 +884,27 @@ HMG_Duelist_upgrade:
 		Damage: 1
 
 d2kStormLasher:
-	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_Magic_Heavy
-	Inherits@3: ^Effect_Magic_Heavy
+	# Ixian superweapon-class storm. Wired to Storm blend (2026-08-10).
+	# Was 150k Tesla + 150k Magic = 300k total → single 300k Storm.
+	Inherits@wh: ^Warhead_Storm_Heavy
+	Inherits@fx: ^Effect_Magic_Heavy
 	Range: 11384
 	ReloadDelay: 250
 	Projectile: Bullet
 		Speed: 1250
 		Blockable: false
-	Warhead@Magic_Heavy:
-		Damage: 150000
+	Warhead@Storm_Heavy:
+		Damage: 300000
 		Spread: 750
 		Falloff: 100, 75, 50, 25
 		Delay: 10
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Magic_Heavy_Percentage:
-		Damage: 75
+	Warhead@Storm_Heavy_Percentage:
+		Damage: 150
 		Spread: 750
 		Falloff: 100, 75, 50, 25
 		Delay: 7
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Tesla_Heavy:
-		Damage: 150000
-		Spread: 750
-		Falloff: 100, 75, 50, 25
-		Delay: 16
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 75000
-		Spread: 1500
-		Falloff: 100, 75, 50, 25
-		Delay: 16
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Tesla_Heavy_Percentage:
-		Damage: 75
-		Spread: 750
-		Falloff: 100, 75, 50, 25
-		Delay: 13
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@EMPUnit: AffectsIntegrity
@@ -997,48 +977,28 @@ D2K_ShockGun2:
 	Range: 7343
 
 D2K_StormGun:
-	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_Magic_Heavy
-	Inherits@3: ^Effect_Magic_Heavy
+	# Ixian vehicle-tier storm gun. Wired to Storm blend (2026-08-10).
+	# Was 40k Tesla + 40k Magic = 80k total → single 80k Storm.
+	Inherits@wh: ^Warhead_Storm_Heavy
+	Inherits@fx: ^Effect_Magic_Heavy
 	ReloadDelay: 100
 	Range: 7343
 	Report: bigggun1.aud
 	Projectile: Bullet
 		Speed: 750
 		Blockable: false
-	Warhead@Magic_Heavy:
-		Damage: 40000
+	Warhead@Storm_Heavy:
+		Damage: 80000
 		Spread: 750
 		Falloff: 100, 75, 50, 25
 		Delay: 5
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Magic_Heavy_Percentage:
-		Damage: 20
+	Warhead@Storm_Heavy_Percentage:
+		Damage: 40
 		Spread: 750
 		Falloff: 100, 75, 50, 25
 		Delay: 2
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Tesla_Heavy:
-		Damage: 40000
-		Spread: 750
-		Falloff: 100, 75, 50, 25
-		Delay: 11
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 20000
-		Spread: 1500
-		Falloff: 100, 75, 50, 25
-		Delay: 11
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Tesla_Heavy_Percentage:
-		Damage: 20
-		Spread: 750
-		Falloff: 100, 75, 50, 25
-		Delay: 8
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@EMPUnit: AffectsIntegrity

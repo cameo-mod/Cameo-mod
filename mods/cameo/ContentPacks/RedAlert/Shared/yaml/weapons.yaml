@@ -317,6 +317,7 @@ LightSniper:
 		Damage: 15
 
 ReimuYinYangOrb:
+	# Shrine super-orb projectile. Pure Magic (2026-08-10). Was 32k Tesla + 32k Magic = 64k total.
 	Inherits: Hakureiring2
 	Burst: 8
 	BurstDelays: 10
@@ -332,25 +333,13 @@ ReimuYinYangOrb:
 		MinimumLaunchSpeed: 128
 		LaunchAngle: 128
 		Acceleration: 0
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Magic_Heavy:
 		Spread: 320
-		Damage: 32000
+		Damage: 64000
 		ValidRelationships: Enemy, Neutral
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@Magic_Heavy_Percentage:
 		Spread: 160
-		Damage: 16
-		ValidRelationships: Enemy, Neutral
-	Warhead@MagicWeapon: SpreadDamage
-		Spread: 320
-		Damage: 32000
-		ValidRelationships: Enemy, Neutral
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		Spread: 160
-		Damage: 16
-		ValidRelationships: Enemy, Neutral
-	Warhead@EMPUnit: AffectsIntegrity
-		Spread: 2560
-		Damage: 256000
+		Damage: 32
 		ValidRelationships: Enemy, Neutral
 	Warhead@Effect: CreateEffect
 		ImpactSounds: thgun.wav
