@@ -113,7 +113,7 @@ WEAPONS = {
     "Sonic":      ("FLAT", "flat", False, L3),
     # tier-locked (late-game only) -------------------------------------------
     "Railgun":     (["VEH", "INF", "BLD", "AIR"],       "heavy", False, ["Heavy"]),
-    "Tesla":       ([("INF", "VEH"), "BLD", "AIR"],     "heavy", False, ["Heavy"]),  # +bonus vs Shield
+    "Tesla":       ([("INF", "VEH"), "BLD", "AIR"],     "heavy", False, L3),         # +bonus vs Shield; L/M/H (maintainer 2026-08-10)
     "TeslaCharged":([("INF", "VEH"), "BLD", "AIR"],     "heavy", False, ["Super"]),  # Super tier + bigger Shield bonus
     # Nuclear = BUILDING-first heavy (levels structures+heavy units+air, weak vs inf) — distinct
     # from Chemical/Tesla (inf+veh). Super tier (step 3, WC 1.5). Maintainer 2026-08-02.
@@ -336,13 +336,18 @@ def emit_inherit_family(name, parent, psn, pss, levels):
 BLEND_FAMILIES = {
     "Plasma": (["Flame", "Chemical"], {"Temperature": 50, "Corrosion": 50}, L3),
     # Thermobaric = fuel-air incendiary blast: the per-armor AVERAGE of Demolition + Concussion +
-    # Flame ("demolition + concussion + fire"), plus full heat (Temperature 100). Collapses the
-    # thermobaric frankenstein weapons (Shrapnel+Demolition+MediumFlame+Flame_Light) onto one warhead.
-    "Thermobaric": (["Demolition", "Concussion", "Flame"], {"Temperature": 100}, L3),
+    # Flame ("demolition + concussion + fire"). Heat = Flame 100 / 3 parents = 33 (per-parent-average
+    # rule, Plasma-consistent). Collapses the thermobaric frankenstein weapons onto one warhead.
+    "Thermobaric": (["Demolition", "Concussion", "Flame"], {"Temperature": 33}, L3),
     # Quantum = high-tech energy blend: per-armor AVERAGE of Railgun + Laser + Tesla (Heavy-only
     # parents extrapolated to L/M via the level step). Heat = Laser's 75 / 3 parents = 25 (only Laser
     # contributes a meter; Plasma-consistent per-parent averaging). EMP/ExtraDamage stay per-weapon.
     "Quantum": (["Railgun", "Laser", "Tesla"], {"Temperature": 25}, L3),
+    # Element + delivery blends (maintainer 2026-08-10): per-armor AVERAGE of the element family and the
+    # delivery family + the element's meter / 2 parents (50). HE delivery = area/anti-light, fits elements.
+    "FireMissile": (["Flame", "MissileHE"], {"Temperature": 50}, L3),
+    "ChemMissile": (["Chemical", "MissileHE"], {"Corrosion": 50}, L3),
+    "ChemCannon": (["Chemical", "CannonHE"], {"Corrosion": 50}, L3),
 }
 # Fixed emission order for a blend (it has no single light/heavy direction).
 BLEND_ARMOR_ORDER = ["None", "Flak", "Plate", "Heroic", "Scout", "Light", "Medium", "Heavy",
