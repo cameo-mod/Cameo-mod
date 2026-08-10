@@ -664,6 +664,31 @@ YRBoomerTorpedo:
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpwasa.wav
 
+^YuriGatlingCannonProjectileStreak:
+	Projectile: Bullet
+		Image:
+		ProjectileStreakLength: 1536
+		ProjectileStreakLengthVariation: 384
+		ProjectileStreakWidth: 32
+		ProjectileStreakColor: FFA32B
+		ContrailLength: 0
+
+YuriGatlingCannonMG1:
+	Inherits: RA2GattlingMG1
+	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+
+YuriGatlingCannonMG1_AA:
+	Inherits: RA2GattlingMG1_AA
+	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+
+YuriGatlingCannonMG2:
+	Inherits: RA2GattlingMG2
+	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+
+YuriGatlingCannonMG2_AA:
+	Inherits: RA2GattlingMG2_AA
+	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+
 RA2GattlingMG3:
 	Inherits: RA2GattlingMG1
 	Range: 5500
@@ -686,6 +711,14 @@ RA2GattlingMG3_AA:
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 2
+
+YuriGatlingCannonMG3:
+	Inherits: RA2GattlingMG3
+	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+
+YuriGatlingCannonMG3_AA:
+	Inherits: RA2GattlingMG3_AA
+	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
 
 RA2GattlingInf:
 	Inherits: ^RA2SmallArms

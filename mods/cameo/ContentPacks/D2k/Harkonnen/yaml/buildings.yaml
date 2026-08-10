@@ -295,7 +295,7 @@ harkonnen_autogunturret:
 		LocalOffset: 600,-100,500, 600,100,500
 		CasingWeapon: generic_bullet_casing
 		CasingSpawnLocalOffset: 100,-100,500, 100,100,500
-		CasingTargetOffset: 0,-900,0, 0,900,0
+		CasingTargetOffset: -900,-100,0, -900,100,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
 	WithSpriteTurret:
@@ -308,6 +308,8 @@ harkonnen_autogunturret:
 	BodyOrientation:
 		QuantizedFacings: 32
 	WithMuzzleOverlay:
+	WithMuzzleSmoke:
+		Weapons: harkonnen_autogunturret
 	WithSpriteBody:
 		Name: make
 		Sequence: invisible
