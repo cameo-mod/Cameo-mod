@@ -350,7 +350,8 @@ DalekCannon:
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 100000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		ValidTargets: Ground, Water
 		Damage: 50000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
@@ -388,7 +389,8 @@ DalekCannon_elite:
 		Duration: 24
 	Warhead@Tesla_Heavy:
 		Damage: 200000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 100000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 100
@@ -414,7 +416,8 @@ DalekCannonScatter:
 		-HitAnim:
 		ValidTargets: Ground, Water, Air
 		Damage: 50000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		ValidTargets: Ground, Water, Air
 		Damage: 25000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
@@ -694,7 +697,8 @@ NaxCrystalLeech:
 	BurstDelays: 1
 	Warhead@Tesla_Heavy:
 		Damage: 2000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 1000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -708,7 +712,8 @@ NaxCrystalLeech_elite:
 	BurstDelays: 1
 	Warhead@Tesla_Super:
 		Damage: 2000
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 1000
 	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -756,7 +761,8 @@ UbermenschLaser:
 		Damage: 2
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 2000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 2
@@ -824,7 +830,8 @@ Lunar_GreenTigerCannon:
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
 		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 2000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -838,7 +845,8 @@ Lunar_GreenTigerCannon_elite:
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
 		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 2000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -852,7 +860,8 @@ Lunar_GreenJadgDestroyer:
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
 		Damage: 30000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 15000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 15
@@ -866,7 +875,8 @@ Lunar_GreenJadgDestroyer_elite:
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
 		Damage: 30000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 15000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 15
@@ -880,7 +890,8 @@ Lunar_GreenGrilleArty:
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
 		Damage: 16000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 8000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
@@ -894,7 +905,8 @@ Lunar_GreenGrilleArty_elite:
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
 		Damage: 16000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 8000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8

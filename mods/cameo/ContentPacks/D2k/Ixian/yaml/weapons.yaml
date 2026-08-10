@@ -563,9 +563,9 @@ IxianDisable_EMP:
 		SecondaryBeamColor: FFFF8844
 	Warhead@Tesla_Super: TargetDamage
 		Damage: 2000
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
-		Damage: 1000
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 1000
 	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity

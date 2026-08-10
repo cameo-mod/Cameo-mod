@@ -135,6 +135,7 @@ Future_Cryocopter_Cryo:
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -252,6 +253,7 @@ CryoLegionnaireAttack:
 		ValidTargets: Ground, Water
 		Damage: 1000
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
@@ -399,6 +401,7 @@ AthenaLaser:
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16
@@ -483,7 +486,8 @@ Future_CoilerAgressive:
 	Report: itesatta.wav
 	Warhead@Tesla_Heavy:
 		Damage: 50000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 25000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 25
@@ -1307,12 +1311,14 @@ FutureHarbingerCannon:
 		Damage: 4000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 2000
+		DamageTypes: Tesla
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@MagicWeapon: SpreadDamage

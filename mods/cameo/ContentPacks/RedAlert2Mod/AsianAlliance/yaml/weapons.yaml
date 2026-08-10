@@ -552,7 +552,7 @@ AsianPhotonCannon:
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, Tesla
 		DamageCalculationType: ClosestTargetablePosition
 		ValidTargets: Ground, Water, Air
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
@@ -1512,7 +1512,8 @@ AsianTSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Spread: 6000
 		Damage: 6
 		Delay: 10
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Spread: 600
 		Damage: 6000
 		Delay: 11
@@ -1524,7 +1525,8 @@ AsianTSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Spread: 6000
 		Damage: 6
 		Delay: 13
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Spread: 600
 		Damage: 6000
 		Delay: 14
@@ -2100,7 +2102,7 @@ AsianSniperLockdown:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16000

@@ -137,6 +137,7 @@ ConsortiumMissileSystem:
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
@@ -220,7 +221,7 @@ SteelQuantumCannon_EMP:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -257,7 +258,8 @@ SteelQuantumCannon_elite:
 		Duration: 24
 	Warhead@Tesla_Heavy:
 		Damage: 12000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 6000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 6
@@ -289,7 +291,8 @@ SteelQuantumCannonScatter_elite:
 		Color: 00EEFF88
 		-HitAnim:
 		Damage: 2000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 1000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -353,6 +356,7 @@ bfg10kCannon:
 		Falloff: 100, 75, 50, 25
 		Spread: 2500
 		Damage: 125000
+		DamageTypes: Tesla
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Air
@@ -1158,7 +1162,7 @@ SteelAirTurret_EMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1195,7 +1199,8 @@ SteelAirTurret_elite:
 		Duration: 24
 	Warhead@Tesla_Heavy:
 		Damage: 24000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 12000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 12
@@ -1228,7 +1233,8 @@ SteelAirTurretEScatter:
 		Width: 64
 		-HitAnim:
 		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 2000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
@@ -1284,6 +1290,7 @@ SteelQuantumTurretRail:
 		Damage: 2000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 1000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@HeavyChemicalWeapon: SpreadDamage
@@ -1392,7 +1399,8 @@ SteelInspectorIonCannonDamage:
 		Damage: 50
 		Delay: 1
 		AffectsParent: False
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		ValidTargets: Ground, Water
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 200
@@ -1413,7 +1421,8 @@ SteelInspectorIonCannonDamage:
 		Damage: 50
 		Delay: 4
 		AffectsParent: False
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		ValidTargets: Ground, Water
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 200
@@ -1643,7 +1652,7 @@ SteelStalkerRailgun_EMP:
 		ValidTargets: Ground, Water
 		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1680,7 +1689,8 @@ SteelStalkerRailgun_elite:
 		Duration: 24
 	Warhead@Tesla_Heavy:
 		Damage: 60000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 30000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 30
@@ -1713,7 +1723,8 @@ SteelStalkerRailgunEScatter:
 		Width: 96
 		-HitAnim:
 		Damage: 10000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 5000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5

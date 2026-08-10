@@ -880,12 +880,14 @@ EMPGrenadeExplode:
 		Damage: 4000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Damage: 2000
+		DamageTypes: Tesla
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@MediumFlameWeapon: SpreadDamage
@@ -1842,13 +1844,15 @@ TDIonCannonDamage:
 		Spread: 300
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		Spread: 4000
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Spread: 300
 	Warhead@TeslaWeapon: SpreadDamage
 		Spread: 300
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Spread: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Spread: 300
 	Warhead@IonCannon: SpreadDamage
 		Range: 0, 600, 1200, 1800, 2400, 3000

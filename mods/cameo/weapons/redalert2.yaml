@@ -1104,9 +1104,8 @@ TeslaFragmentLarge:
 	Range: 3333
 	Warhead@Tesla_Super:
 		Damage: 16000
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		Damage: 8000
-		DamageTypes: Tesla
 	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@EMPUnit: AffectsIntegrity

@@ -731,9 +731,9 @@ PortaTeslaFragment:
 	Range: 2326
 	Warhead@Tesla_Heavy:
 		Damage: 10000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 5000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 5000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@EMPUnit: AffectsIntegrity
@@ -749,9 +749,9 @@ ZapperPortaTesla:
 	Report: shktrop1.aud
 	Warhead@Tesla_Heavy:
 		Damage: 32000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 16000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 16000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 16
 	Warhead@EMPUnit: AffectsIntegrity
@@ -771,9 +771,9 @@ ZapperPortaTeslaFragment:
 	Range: 2500
 	Warhead@Tesla_Heavy:
 		Damage: 16000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 8000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 8000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@EMPUnit: AffectsIntegrity
@@ -791,16 +791,13 @@ PointDefenseTesla:
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
 		Damage: 10000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
 		Damage: 5000
-		DamageTypes: Tesla
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
 		Damage: 5
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
-		DamageTypes: Tesla
 
 TTankZap_EMP:
 	Inherits: TTankZap
@@ -823,9 +820,9 @@ TTankZapArcTeslaFragment1_EMP:
 	Range: 3650
 	Warhead@Tesla_Heavy:
 		Damage: 20000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 10000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 10000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@EMPUnit: AffectsIntegrity
@@ -842,9 +839,9 @@ TTankZapArcTeslaFragment2_EMP:
 	Range: 1825
 	Warhead@Tesla_Heavy:
 		Damage: 10000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 5000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 5000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@EMPUnit: AffectsIntegrity
@@ -860,9 +857,9 @@ TTankZap2:
 	Report: tesla1.aud
 	Warhead@Tesla_Super:
 		Damage: 40000
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
-		Damage: 20000
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 20000
 	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 20
 
@@ -887,9 +884,9 @@ TTankZap2ArcTeslaFragment1_EMP:
 	Range: 3325
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 20000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 10000
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 10000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@EMPUnit: AffectsIntegrity
@@ -906,9 +903,9 @@ TTankZap2ArcTeslaFragment2_EMP:
 	Range: 1663
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 10000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 5000
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 5000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@EMPUnit: AffectsIntegrity
@@ -924,9 +921,9 @@ TeslaZap:
 	Report: tesla1.aud
 	Warhead@Tesla_Heavy:
 		Damage: 32000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 16000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 16000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 16
 
@@ -951,9 +948,9 @@ TeslaZapArcTeslaFragment1_EMP:
 	Range: 4660
 	Warhead@Tesla_Heavy:
 		Damage: 16000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 8000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 8000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@EMPUnit: AffectsIntegrity
@@ -970,9 +967,9 @@ TeslaZapArcTeslaFragment2_EMP:
 	Range: 2330
 	Warhead@Tesla_Heavy:
 		Damage: 8000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 4000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 4000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1268,9 +1265,9 @@ SCUDTesla:
 		Damage: 15
 	Warhead@Tesla_Heavy:
 		Damage: 30000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 15000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 15000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1499,7 +1496,7 @@ BTRTeslaMachineGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1864,7 +1861,7 @@ KamovTesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1899,9 +1896,9 @@ KamovTeslaArcFragment1:
 		Damage: 4
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 8000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 4000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 4000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@EMPUnit: AffectsIntegrity
@@ -1922,9 +1919,9 @@ KamovTeslaArcFragment2:
 		Damage: 4
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 2000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 2000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@EMPUnit: AffectsIntegrity
@@ -2010,7 +2007,7 @@ YakTeslaGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -2046,9 +2043,9 @@ YakTeslaArcFragment1:
 		Damage: 4
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 2000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 2000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@EMPUnit: AffectsIntegrity
@@ -2069,9 +2066,9 @@ YakTeslaArcFragment2:
 		Damage: 2
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 2000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 1000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 1000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@EMPUnit: AffectsIntegrity
@@ -2283,11 +2280,11 @@ TeslaMaverick:
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		ValidRelationships: Neutral, Enemy
-		DamageTypes: Tesla
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
@@ -2322,9 +2319,9 @@ TeslaMaverickFragment1:
 		-TrailImage:
 	Warhead@Tesla_Heavy:
 		Damage: 8000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 4000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 4000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@MissileAP_Medium:
@@ -2345,9 +2342,9 @@ TeslaMaverickFragment2:
 	Range: 1475
 	Warhead@Tesla_Heavy:
 		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 2000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 2000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@MissileAP_Medium:
@@ -3537,7 +3534,7 @@ VolkovMagneticWeaponTesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -3580,9 +3577,9 @@ VolkovMagneticWeaponTeslaFragment1:
 		Damage: 2
 	Warhead@Tesla_Heavy:
 		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 2000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 2000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@EMPUnit: AffectsIntegrity
@@ -3615,9 +3612,9 @@ VolkovMagneticWeaponTeslaFragment2:
 		Damage: 1
 	Warhead@Tesla_Heavy:
 		Damage: 2000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 1000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 1000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
@@ -3794,9 +3791,9 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 		Damage: 2
 	Warhead@Tesla_Heavy:
 		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 2000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 2000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@EMPUnit: AffectsIntegrity
@@ -3835,9 +3832,9 @@ VolkovMagneticWeaponIncendiaryTeslaFragment2:
 		Damage: 1
 	Warhead@Tesla_Heavy:
 		Damage: 2000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 1000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 1000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
@@ -4056,7 +4053,7 @@ TeslaRAGatlingTankCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla

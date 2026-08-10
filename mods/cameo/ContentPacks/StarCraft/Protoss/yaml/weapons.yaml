@@ -352,7 +352,8 @@ PsiStorm:
 		Spread: 200
 		Damage: 8000
 		AffectsParent: True
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		ValidTargets: Ground, Water, Air
 		Delay: 4
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
@@ -390,7 +391,8 @@ PsionicShockwave:
 	ValidTargets: Ground, Water, Air
 	Warhead@Tesla_Super:
 		Damage: 30000
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 15000
 	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 15
@@ -604,7 +606,8 @@ Corsair_EMP:
 		Falloff: 100, 75, 50, 25
 		Damage: 5000
 		Spread: 250
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		ValidTargets: Vehicle, Defense
 		Falloff: 100, 75, 50, 25
 		Damage: 2500
@@ -682,6 +685,7 @@ VoidRayBeam:
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -783,6 +787,7 @@ StarshipSovereignBeam:
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1

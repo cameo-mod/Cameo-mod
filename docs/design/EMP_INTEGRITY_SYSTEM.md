@@ -196,3 +196,29 @@ Now that Tesla/Storm/Quantum mains auto-scale integrity, the OLD flat EMP source
 - Sign your commits `Co-Authored-By: Devin AI <devin@cognition.ai>` — never the Claude trailer.
 - Full context: this file + `docs/design/PHYSICAL_STATE_SYSTEM.md` §5 + memory
   `cameo-physical-state-program`.
+
+## 6. Letter to Claude — 2026-08-10
+
+Hi Claude,
+
+We just finished the second half of the Tesla double-fire / integrity-drain fix. Quick handoff so you can pick up from here.
+
+### What we did
+- **Renamed 136 `Warhead@TeslaExtraDamage` / 41 `Warhead@TeslaChargedExtraDamage` local keys** to the template-matching `Warhead@Tesla_Heavy_ExtraDamage` / `Warhead@Tesla_Super_ExtraDamage` forms across the faction `weapons.yaml` files plus `mods/cameo/weapons/*.yaml`. This eliminates the "double-fire" where a child weapon inherited a new template chip (`Tesla_Heavy_ExtraDamage`) while still defining an old-key chip (`TeslaExtraDamage`), so both fired.
+- **Found and fixed a related regression**: several renamed standalone chips had `DamageTypes: Tesla` stripped because it looked redundant. It is not redundant — these chips do not inherit `^Warhead_Tesla_*_ExtraDamage` templates (none exist yet), so the `DamageTypes` line is the only way the extra-damage warhead triggers passive integrity drain. I restored `DamageTypes: Tesla` to **84** `Tesla_Heavy_ExtraDamage` / `Tesla_Super_ExtraDamage` blocks where it was missing.
+- **Left the inherited old-template `Warhead@TeslaExtraDamage`/`TeslaChargedExtraDamage` alone** for now: 89 / 20 weapons still carry them from templates like `^TeslaWeapon`, but they are not double-firing because no matching new chip is present. They are queued for the §4 flat-EMP cleanup pass, not this one.
+
+### Verification (all green)
+- `tools/audit/find_empty_warhead.py`: 0
+- `tools/audit/find_orphan_old_keys.py`: 0 real Bug B orphans
+- `check_teslaextradamage.py`: 0 double-fires
+- `check_tesla_charged_extra.py`: 0 double-fires
+- `launch-game.cmd` boot-gate: reached `MenuPostProcessEffect.PostWorldLoaded`, no new `exception-*.log`
+
+### Working-tree warning for the next agent
+The repo currently contains a lot of **unrelated work-in-progress** outside the Tesla scope: regenerated `docs/audit/latest/*` reports, `docs/factions/MATRIX.md` changes, the untracked `tools/audit/audit_damage_grid.py` / `tools/balance/_requantize_ledgers.py`, and many non-Tesla weapon tweaks in the same `weapons.yaml` files. **Do not use `git add -A` or `git add .` for the Tesla commit.** Scoped `git add` of the Tesla-affected `weapons.yaml` files only is required.
+
+### Next step
+The feature branch `fix/tesla-integrity-upgrade-drain` is clean enough to commit (with a scoped add). After that, the §4 "flat-EMP cleanup" can begin: strip legacy `Warhead@EMPUnit` from non-upgrade Tesla/Storm/Quantum weapons and remove the inherited old-key `TeslaExtraDamage`/`TeslaChargedExtraDamage` from templates when safe.
+
+— Devin

@@ -347,10 +347,10 @@ RA2DiskDrain:
 		ValidTargets: Ground, Water
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 1

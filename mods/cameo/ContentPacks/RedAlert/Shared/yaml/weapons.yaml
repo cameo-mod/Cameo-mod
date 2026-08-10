@@ -284,9 +284,9 @@ PortaTesla:
 	Report: shktrop1.aud
 	Warhead@Tesla_Heavy:
 		Damage: 20000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 10000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 10000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
 
@@ -299,9 +299,9 @@ TTankZap:
 	Report: tesla1.aud
 	Warhead@Tesla_Heavy:
 		Damage: 40000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 20000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
+		Damage: 20000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 20
 
@@ -532,7 +532,7 @@ MagicOrb:
 		Spread: 1200
 		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Spread: 1600
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -586,7 +586,7 @@ MagicOrb2:
 		Spread: 1600
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Spread: 2400
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla

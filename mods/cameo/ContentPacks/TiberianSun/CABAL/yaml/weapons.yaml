@@ -158,7 +158,8 @@ TSCABALDisable_EMP:
 		SecondaryBeamColor: FFFF8844
 	Warhead@Tesla_Super: TargetDamage
 		Damage: 2000
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 1000
 	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 1
@@ -1385,6 +1386,7 @@ CabalMothershipRockets:
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -1642,7 +1644,8 @@ CabalMagicNuke:
 		Spread: 1000
 		Damage: 100000
 		Delay: 0
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 2000
@@ -1654,12 +1657,6 @@ CabalMagicNuke:
 		Spread: 10000
 		Damage: 10
 		Delay: 2
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
-		ValidTargets: Shielded
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Spread: 1000
-		Damage: 100000
-		Delay: 3
 	Warhead@Tesla_Heavy:
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
@@ -1672,7 +1669,8 @@ CabalMagicNuke:
 		Spread: 10000
 		Damage: 10
 		Delay: 5
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 1000

@@ -300,6 +300,7 @@ KodiakCannonSonic:
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 4000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 4
@@ -350,7 +351,8 @@ TSSonicZapWeapon:
 		ValidRelationships: Neutral, Enemy
 	Warhead@Tesla_Heavy:
 		Damage: 2000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 1000
 		ValidRelationships: Neutral, Enemy
 	Warhead@Tesla_Heavy_Percentage:
@@ -381,7 +383,8 @@ TSSonicZapWeaponSonic:
 		ValidRelationships: Neutral, Enemy
 	Warhead@Tesla_Heavy:
 		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 	Warhead@Tesla_Heavy_Percentage:
@@ -411,7 +414,8 @@ TSZapWeapon_EMP:
 	Warhead@Tesla_Heavy:
 		Damage: 2000
 		ValidTargets: Ground, Water
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 1000
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
@@ -432,7 +436,8 @@ TSMine_EMP:
 	Warhead@Tesla_Heavy:
 		Damage: 10000
 		ValidTargets: Ground, Water
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Damage: 5000
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
@@ -704,7 +709,8 @@ TSHellfireSonic:
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Tesla_Heavy_Percentage:
@@ -818,6 +824,7 @@ TSBombSonic:
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Ship
 		Damage: 5000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Ship
 		Damage: 5
@@ -847,7 +854,8 @@ TSMobile_EMP:
 		Falloff: 100, 75, 50, 25
 		Damage: 64000
 		Spread: 813
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 32000
@@ -966,6 +974,7 @@ TSAssaultCannonSonic:
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 1000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
@@ -1016,6 +1025,7 @@ TSAssaultCannonTalSonic:
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 2
@@ -1076,6 +1086,7 @@ TSVulcanGunSonic:
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 2
@@ -1216,7 +1227,8 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Spread: 6000
 		Damage: 8
 		Delay: 108
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Spread: 600
 		Damage: 8000
 		Delay: 109
@@ -1228,7 +1240,8 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Spread: 6000
 		Damage: 6
 		Delay: 111
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		Spread: 600
 		Damage: 8000
 		Delay: 112

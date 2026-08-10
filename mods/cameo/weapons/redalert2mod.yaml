@@ -468,7 +468,7 @@ Support_EMP_Bomb:
 		Damage: 10000
 		Spread: 2500
 		InvalidTargets: Infantry
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 5000
@@ -486,7 +486,7 @@ Support_EMP_Bomb:
 		Damage: 10000
 		Spread: 2500
 		InvalidTargets: Infantry
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 5000
@@ -891,7 +891,7 @@ NaxiAlienPistol:
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
@@ -1204,7 +1204,7 @@ Lunar_Green105mm:
 		Damage: 4
 	Warhead@Tesla_Heavy:
 		Damage: 8000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Damage: 4000
 	Warhead@Tesla_Heavy_Percentage:
 		Damage: 4
@@ -1519,7 +1519,7 @@ RA2Robotmm:
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
@@ -1563,7 +1563,7 @@ RA2RobotmmScatter_elite:
 		Color: 00EEFF88
 		-HitAnim:
 		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Damage: 2000
 	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2

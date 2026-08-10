@@ -532,7 +532,7 @@ GhostSniperLockdown:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 20000
@@ -671,7 +671,7 @@ SpecterSniperLockdown:
 		ValidTargets: Ground, Water, Air
 		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 40000
@@ -1755,7 +1755,8 @@ ScienceVessel_EMP:
 	Warhead@Tesla_Super:
 		ValidTargets: Shielded
 		Damage: 100000
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
 		ValidTargets: Shielded
 		Damage: 50000
 	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
