@@ -43,7 +43,7 @@ FLAT_VALUES = {"Light": 45, "Medium": 55, "Heavy": 65}   # main SpreadDamage vs 
 FLAT_PCT = {"Light": 5, "Medium": 8, "Heavy": 10}        # its modest % chip
 # PCT / "%-equalizer" (Magic): tiny flat + a LARGE uniform % of max HP (ignores armor) = giant-killer.
 PCT_MAIN = 20                                            # token flat main (uniform vs all)
-PCT_VALUES = {"Light": 4, "Medium": 6, "Heavy": 9}       # % of max HP vs ALL armors (ground only)
+PCT_VALUES = {"Light": 4, "Medium": 6, "Heavy": 9, "Super": 13}  # % of maxHP; encoded as Versus = val*100 (Damage stays the 1-per-2000 grid)
 
 
 def block_seq(group, direction):
@@ -103,7 +103,7 @@ WEAPONS = {
     # Magic = %-EQUALIZER (maintainer 2026-08-02): ground-only, tiny flat + big uniform %
     # of max HP (ignores armor) = giant-killer (melts high-HP units, useless vs swarms).
     # The mirror of Sonic (Sonic = flat/anti-low-HP; Magic = %/anti-high-HP).
-    "Magic":      ("PCT", "pct", False, L3),
+    "Magic":      ("PCT", "pct", False, L3 + ["Super"]),
     # Demolition = BUILDINGS first, infantry second (maintainer 2026-08-02).
     "Demolition": (["BLD", "INF", "VEH", "AIR"],        "light", False, L3),
     "Concussion": ([("INF", "VEH", "BLD"), "AIR"],      "light", False, L3),
@@ -216,8 +216,8 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
             hz = None
         elif mode == "pct":                      # Magic: ignores armor on % of max HP
             main = [("Shield", PCT_MAIN)] + [(a, PCT_MAIN) for a in allr]
-            pct = [("Shield", 100)] + [(a, 100) for a in allr]  # uniform; magnitude via Damage
-            pct_damage = PCT_VALUES[level]
+            pv = PCT_VALUES[level] * 100          # magnitude lives in VERSUS so it SCALES with the main;
+            pct = [("Shield", pv)] + [(a, pv) for a in allr]  # Damage stays the 1-per-2000 grid value (never fixed)
             hz = None
         else:                                    # standard sloped profile
             step, mfloor, ptop = LEVELS[level]

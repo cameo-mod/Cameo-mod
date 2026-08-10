@@ -6771,26 +6771,26 @@ DefuseKit:
 	Warhead@Magic_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 200
-		Damage: 4
+		Damage: 1
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
-			Shield: 100
-			Bomber: 100
-			Concrete: 100
-			Fighter: 100
-			Flak: 100
-			Heavy: 100
-			Helicopter: 100
-			Heroic: 100
-			Light: 100
-			Medium: 100
-			None: 100
-			Plate: 100
-			Scout: 100
-			Spaceship: 100
-			Steel: 100
-			Superheavy: 100
-			Wood: 100
+			Shield: 400
+			Bomber: 400
+			Concrete: 400
+			Fighter: 400
+			Flak: 400
+			Heavy: 400
+			Helicopter: 400
+			Heroic: 400
+			Light: 400
+			Medium: 400
+			None: 400
+			Plate: 400
+			Scout: 400
+			Spaceship: 400
+			Steel: 400
+			Superheavy: 400
+			Wood: 400
 		UpdatesUnitStatistics: false
 
 ^Warhead_Magic_Medium:
@@ -6828,26 +6828,26 @@ DefuseKit:
 	Warhead@Magic_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 300
-		Damage: 6
+		Damage: 1
 		Falloff: 100, 50, 30, 18, 10
 		Versus:
-			Shield: 100
-			Bomber: 100
-			Concrete: 100
-			Fighter: 100
-			Flak: 100
-			Heavy: 100
-			Helicopter: 100
-			Heroic: 100
-			Light: 100
-			Medium: 100
-			None: 100
-			Plate: 100
-			Scout: 100
-			Spaceship: 100
-			Steel: 100
-			Superheavy: 100
-			Wood: 100
+			Shield: 600
+			Bomber: 600
+			Concrete: 600
+			Fighter: 600
+			Flak: 600
+			Heavy: 600
+			Helicopter: 600
+			Heroic: 600
+			Light: 600
+			Medium: 600
+			None: 600
+			Plate: 600
+			Scout: 600
+			Spaceship: 600
+			Steel: 600
+			Superheavy: 600
+			Wood: 600
 		UpdatesUnitStatistics: false
 
 ^Warhead_Magic_Heavy:
@@ -6885,26 +6885,83 @@ DefuseKit:
 	Warhead@Magic_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 400
-		Damage: 9
+		Damage: 1
 		Falloff: 100, 50, 25, 10, 5
 		Versus:
-			Shield: 100
-			Bomber: 100
-			Concrete: 100
-			Fighter: 100
-			Flak: 100
-			Heavy: 100
-			Helicopter: 100
-			Heroic: 100
-			Light: 100
-			Medium: 100
-			None: 100
-			Plate: 100
-			Scout: 100
-			Spaceship: 100
-			Steel: 100
-			Superheavy: 100
-			Wood: 100
+			Shield: 900
+			Bomber: 900
+			Concrete: 900
+			Fighter: 900
+			Flak: 900
+			Heavy: 900
+			Helicopter: 900
+			Heroic: 900
+			Light: 900
+			Medium: 900
+			None: 900
+			Plate: 900
+			Scout: 900
+			Spaceship: 900
+			Steel: 900
+			Superheavy: 900
+			Wood: 900
+		UpdatesUnitStatistics: false
+
+^Warhead_Magic_Super:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Magic_Super: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 1000
+		Damage: 2000
+		Falloff: 100, 50, 20, 8, 3
+		Versus:
+			Shield: 20
+			Bomber: 20
+			Concrete: 20
+			Fighter: 20
+			Flak: 20
+			Heavy: 20
+			Helicopter: 20
+			Heroic: 20
+			Light: 20
+			Medium: 20
+			None: 20
+			Plate: 20
+			Scout: 20
+			Spaceship: 20
+			Steel: 20
+			Superheavy: 20
+			Wood: 20
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Magic_Super_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 500
+		Damage: 1
+		Falloff: 100, 50, 20, 8, 3
+		Versus:
+			Shield: 1300
+			Bomber: 1300
+			Concrete: 1300
+			Fighter: 1300
+			Flak: 1300
+			Heavy: 1300
+			Helicopter: 1300
+			Heroic: 1300
+			Light: 1300
+			Medium: 1300
+			None: 1300
+			Plate: 1300
+			Scout: 1300
+			Spaceship: 1300
+			Steel: 1300
+			Superheavy: 1300
+			Wood: 1300
 		UpdatesUnitStatistics: false
 
 ###### Demolition: BLD > INF > VEH > AIR (light, air=False) ######
