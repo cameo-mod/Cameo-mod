@@ -33,7 +33,8 @@ HighV:
 	Range: 6720
 	Burst: 4
 	BurstDelays: 2
-	Report: gun8.aud
+	-Report:
+	StartBurstReport: gun8.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
