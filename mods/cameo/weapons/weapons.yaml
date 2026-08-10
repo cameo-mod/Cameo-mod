@@ -3263,7 +3263,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -3288,7 +3288,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 0
 		Versus:
 			Shield: 17
 			None: 16
@@ -3321,7 +3321,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -3346,7 +3346,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 0
 		Versus:
 			Shield: 25
 			None: 20
@@ -3379,7 +3379,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -3404,7 +3404,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 0
 		Versus:
 			Shield: 35
 			None: 25
@@ -3438,7 +3438,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -3463,7 +3463,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -3496,7 +3496,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -3521,7 +3521,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -3554,7 +3554,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -3579,7 +3579,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -3613,7 +3613,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -3638,7 +3638,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			Scout: 16
@@ -3671,7 +3671,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -3696,7 +3696,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			Scout: 20
@@ -3729,7 +3729,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -3754,7 +3754,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			Scout: 25
@@ -3788,7 +3788,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -3813,7 +3813,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -3846,7 +3846,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -3871,7 +3871,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -3904,7 +3904,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -3929,7 +3929,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -3963,7 +3963,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -3988,7 +3988,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			Scout: 16
@@ -4021,7 +4021,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -4046,7 +4046,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			Scout: 20
@@ -4079,7 +4079,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -4104,7 +4104,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			Scout: 25
@@ -4138,7 +4138,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -4163,7 +4163,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			Spaceship: 16
@@ -4196,7 +4196,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -4221,7 +4221,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 150
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			Spaceship: 20
@@ -4254,7 +4254,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -4279,7 +4279,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			Spaceship: 25
@@ -4313,7 +4313,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -4338,7 +4338,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			Fighter: 16
@@ -4371,7 +4371,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -4396,7 +4396,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			Fighter: 20
@@ -4429,7 +4429,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -4454,7 +4454,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			Fighter: 25
@@ -4488,7 +4488,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -4515,7 +4515,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -4572,7 +4572,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -4599,7 +4599,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -4656,7 +4656,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -4683,7 +4683,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -4741,7 +4741,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -4766,7 +4766,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			Scout: 16
@@ -4799,7 +4799,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -4824,7 +4824,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			Scout: 20
@@ -4857,7 +4857,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -4882,7 +4882,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			Scout: 25
@@ -4935,7 +4935,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -4962,7 +4962,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			None: 16
@@ -4997,7 +4997,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -5024,7 +5024,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			None: 20
@@ -5059,7 +5059,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -5086,7 +5086,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			None: 25
@@ -5122,7 +5122,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -5149,7 +5149,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -5184,7 +5184,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -5211,7 +5211,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -5246,7 +5246,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -5273,7 +5273,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -5309,7 +5309,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -5337,7 +5337,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			None: 12
@@ -5370,7 +5370,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -5398,7 +5398,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			None: 16
@@ -5431,7 +5431,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -5459,7 +5459,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			None: 21
@@ -5493,7 +5493,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -5520,7 +5520,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			None: 14
@@ -5553,7 +5553,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -5580,7 +5580,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			None: 18
@@ -5613,7 +5613,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -5640,7 +5640,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			None: 23
@@ -5674,7 +5674,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -5702,7 +5702,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			None: 6
@@ -5737,7 +5737,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -5765,7 +5765,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			None: 10
@@ -5800,7 +5800,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -5828,7 +5828,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			None: 15
@@ -5864,7 +5864,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -5891,7 +5891,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			None: 10
@@ -5924,7 +5924,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -5951,7 +5951,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			None: 14
@@ -5984,7 +5984,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -6011,7 +6011,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			None: 19
@@ -6045,7 +6045,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -6072,7 +6072,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			None: 5
@@ -6105,7 +6105,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -6132,7 +6132,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			None: 9
@@ -6165,7 +6165,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -6192,7 +6192,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			None: 14
@@ -6226,7 +6226,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -6253,7 +6253,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			None: 7
@@ -6286,7 +6286,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -6313,7 +6313,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			None: 11
@@ -6346,7 +6346,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -6373,7 +6373,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			None: 16
@@ -6407,7 +6407,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 98
 			None: 57
@@ -6432,7 +6432,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 85
 			None: 52
@@ -6467,7 +6467,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 131
 			None: 76
@@ -6492,7 +6492,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 113
 			None: 69
@@ -6527,7 +6527,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 164
 			None: 95
@@ -6552,7 +6552,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 141
 			None: 86
@@ -6587,7 +6587,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 1000
 		Damage: 2000
-		Falloff: 100, 50, 20, 8, 3
+		Falloff: 100, 40, 20, 10, 5, 0
 		Versus:
 			Shield: 197
 			None: 114
@@ -6612,7 +6612,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 500
 		Damage: 1
-		Falloff: 100, 50, 20, 8, 3
+		Falloff: 100, 40, 20, 10, 5, 0
 		Versus:
 			Shield: 170
 			None: 104
@@ -6648,7 +6648,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -6675,7 +6675,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			None: 12
@@ -6708,7 +6708,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -6735,7 +6735,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			None: 16
@@ -6768,7 +6768,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -6795,7 +6795,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			None: 21
@@ -6829,7 +6829,7 @@ DefuseKit:
 		ValidTargets: Ground
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -6854,7 +6854,7 @@ DefuseKit:
 		ValidTargets: Ground
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			None: 16
@@ -6887,7 +6887,7 @@ DefuseKit:
 		ValidTargets: Ground
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -6912,7 +6912,7 @@ DefuseKit:
 		ValidTargets: Ground
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			None: 20
@@ -6945,7 +6945,7 @@ DefuseKit:
 		ValidTargets: Ground
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -6970,7 +6970,7 @@ DefuseKit:
 		ValidTargets: Ground
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			None: 25
@@ -7004,7 +7004,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -7029,7 +7029,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			None: 16
@@ -7062,7 +7062,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -7087,7 +7087,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			None: 20
@@ -7120,7 +7120,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -7145,7 +7145,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			None: 25
@@ -7179,7 +7179,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 22
 			Bomber: 22
@@ -7203,7 +7203,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 25
 			Bomber: 25
@@ -7236,7 +7236,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 27
 			Bomber: 27
@@ -7260,7 +7260,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 40
 			Bomber: 40
@@ -7293,7 +7293,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 32
 			Bomber: 32
@@ -7317,7 +7317,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 50
 			Bomber: 50
@@ -7350,7 +7350,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 1000
 		Damage: 2000
-		Falloff: 100, 50, 20, 8, 3
+		Falloff: 100, 40, 20, 10, 5, 0
 		Versus:
 			Shield: 38
 			Bomber: 38
@@ -7374,7 +7374,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 500
 		Damage: 1
-		Falloff: 100, 50, 20, 8, 3
+		Falloff: 100, 40, 20, 10, 5, 0
 		Versus:
 			Shield: 65
 			Bomber: 65
@@ -7408,7 +7408,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -7433,7 +7433,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			Wood: 16
@@ -7466,7 +7466,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -7491,7 +7491,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			Wood: 20
@@ -7524,7 +7524,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -7549,7 +7549,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			Wood: 25
@@ -7583,7 +7583,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -7608,7 +7608,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			Scout: 16
@@ -7641,7 +7641,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -7666,7 +7666,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			Scout: 20
@@ -7699,7 +7699,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -7724,7 +7724,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			Scout: 25
@@ -7758,7 +7758,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 45
 			Bomber: 45
@@ -7782,7 +7782,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 5
 			Bomber: 5
@@ -7821,7 +7821,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 600
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 55
 			Bomber: 55
@@ -7845,7 +7845,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 8
 			Bomber: 8
@@ -7884,7 +7884,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 800
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 65
 			Bomber: 65
@@ -7908,7 +7908,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 10
 			Bomber: 10
@@ -7948,7 +7948,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -7973,7 +7973,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -8031,7 +8031,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 110
@@ -8057,7 +8057,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20
+		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -8117,7 +8117,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 125
@@ -8143,7 +8143,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 30, 18, 10
+		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -8203,7 +8203,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 140
@@ -8229,7 +8229,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5
+		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -8290,7 +8290,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 2000
-		Falloff: 100, 50, 20, 8, 3
+		Falloff: 100, 40, 20, 10, 5, 0
 		Versus:
 			HAZMAT: 50
 			Shield: 155
@@ -8316,7 +8316,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 1
-		Falloff: 100, 50, 20, 8, 3
+		Falloff: 100, 40, 20, 10, 5, 0
 		Versus:
 			Shield: 45
 			Superheavy: 30
@@ -8381,7 +8381,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 1000
 		Damage: 2000
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0
 		Ticks: 10
 		TickDelay: 3
 		MaxRadius: 4000
@@ -8411,7 +8411,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 1000
 		Damage: 1
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0
 		Ticks: 10
 		TickDelay: 3
 		MaxRadius: 4000

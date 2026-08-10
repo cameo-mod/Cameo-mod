@@ -203,10 +203,18 @@ def valid_targets(hits_air, ground_only=False):
     return "Ground" if ground_only else "Ground, Water"
 
 
+# Damage falloff profiles (maintainer 2026-08-11): 6-wide, ALL end in 0 so damage reaches 0 at the
+# outer ring. One profile per level (Light/Medium/Heavy/Super); higher tiers fall off STEEPER (more
+# concentrated). Radius = (len-1) x Spread; damage LERPs between points. Per-family overrides below.
+DEFAULT_FALLOFFS = ("100, 50, 33, 25, 20, 0", "100, 60, 30, 15, 5, 0",
+                    "100, 50, 25, 10, 5, 0", "100, 40, 20, 10, 5, 0")
+# Even / linear ramp (opt-in via FAMILY_FALLOFFS): equal steps to 0 = a flat line.
+EVEN_FALLOFFS = ("100, 80, 60, 40, 20, 0",) * 4
+
+
 def family(name, order16, vt, levels, *, mode=None, damage=2000,
            spreads=(400, 600, 800, 1000),
-           falloffs=("100, 50, 33, 25, 20", "100, 50, 30, 18, 10",
-                     "100, 50, 25, 10, 5", "100, 50, 20, 8, 3"),
+           falloffs=DEFAULT_FALLOFFS,
            damage_types="Prone75Percent, TriggerProne, ExplosionDeath",
            hazmat=50, reload=25, rng=5120, versus_override=None, physical_states=None):
     """mode: None = sloped (from order16); 'flat' = Sonic (uniform flat, small %);
@@ -324,6 +332,13 @@ HAND_TUNED = {"Nuclear"}
 # Light/Medium/Heavy/Super. Indices beyond a family's level count are ignored.
 FAMILY_SPREADS = {
     "MissileAA": (200, 300, 400),
+}
+
+# Per-family falloff overrides (default = DEFAULT_FALLOFFS, indexed by level). Bullets are a single
+# max-radius linear ramp (near single-target); EVEN_FALLOFFS is available for any family that wants a
+# flat line. Nuclear is HAND_TUNED (11-wide, hand-set in its yaml template).
+FAMILY_FALLOFFS = {
+    "Bullet": ("100, 0", "100, 0", "100, 0"),   # pure max-radius linear
 }
 
 # Per-family PhysicalState wiring (docs/design/PHYSICAL_STATE_SYSTEM.md): the main AreaDamage warhead
@@ -521,15 +536,16 @@ if __name__ == "__main__":
             continue
         vt = valid_targets(air, ground_only=(nm == "Melee"))
         spreads = FAMILY_SPREADS.get(nm, (400, 600, 800, 1000))
+        falloffs = FAMILY_FALLOFFS.get(nm, DEFAULT_FALLOFFS)
         if isinstance(bl, str) and bl in SPECIAL_MODE:
             print(f"###### {nm}: {macro_summary(bl)} ######")
-            print(family(nm, None, vt, lv, mode=SPECIAL_MODE[bl], spreads=spreads))
+            print(family(nm, None, vt, lv, mode=SPECIAL_MODE[bl], spreads=spreads, falloffs=falloffs))
             print()
             continue
         order = build_order(bl, d)
         dt = FAMILY_DAMAGE_TYPES.get(nm)
         print(f"###### {nm}: {macro_summary(bl)} ({d}, air={air}) ######")
-        print(family(nm, order, vt, lv, spreads=spreads, **({"damage_types": dt} if dt else {})))
+        print(family(nm, order, vt, lv, spreads=spreads, falloffs=falloffs, **({"damage_types": dt} if dt else {})))
         print()
     for nm, (parent, psn, pss, lv) in INHERIT_FAMILIES.items():
         if wanted and nm.lower() not in wanted:
