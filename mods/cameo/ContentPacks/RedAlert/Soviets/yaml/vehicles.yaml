@@ -339,6 +339,8 @@ ra1_soviets_heavytank:
 		RequiresCondition: ra1_soviets_upgrade_nucleartankshells
 	AttackTurreted:
 	WithMuzzleOverlay:
+	WithMuzzleSmoke:
+		Weapons: 105mm, 105mmThermobaric
 	WithSpriteTurret:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
