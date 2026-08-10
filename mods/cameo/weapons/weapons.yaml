@@ -3284,7 +3284,7 @@ DefuseKit:
 			Spaceship: 16
 			Superheavy: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -3342,7 +3342,7 @@ DefuseKit:
 			Spaceship: 30
 			Superheavy: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
@@ -3400,7 +3400,7 @@ DefuseKit:
 			Spaceship: 44
 			Superheavy: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Bullet_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
@@ -3459,7 +3459,7 @@ DefuseKit:
 			Bomber: 16
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -3517,7 +3517,7 @@ DefuseKit:
 			Bomber: 30
 			Fighter: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonAP_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -3575,7 +3575,7 @@ DefuseKit:
 			Bomber: 44
 			Fighter: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -3634,7 +3634,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonHE_Light_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -3692,7 +3692,7 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -3750,7 +3750,7 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -3809,7 +3809,7 @@ DefuseKit:
 			Flak: 16
 			None: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -3867,7 +3867,7 @@ DefuseKit:
 			Flak: 30
 			None: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
@@ -3925,7 +3925,7 @@ DefuseKit:
 			Flak: 44
 			None: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
@@ -3984,7 +3984,7 @@ DefuseKit:
 			Plate: 16
 			Heroic: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileHE_Light_Percentage: HealthPercentageDamage
+	Warhead@MissileHE_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -4042,7 +4042,7 @@ DefuseKit:
 			Plate: 30
 			Heroic: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
@@ -4100,7 +4100,7 @@ DefuseKit:
 			Plate: 44
 			Heroic: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
@@ -4159,7 +4159,7 @@ DefuseKit:
 			Flak: 16
 			None: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAA_Light_Percentage: HealthPercentageDamage
+	Warhead@MissileAA_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 1
@@ -4217,7 +4217,7 @@ DefuseKit:
 			Flak: 30
 			None: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAA_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileAA_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 150
 		Damage: 1
@@ -4275,7 +4275,7 @@ DefuseKit:
 			Flak: 44
 			None: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAA_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAA_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -4334,7 +4334,7 @@ DefuseKit:
 			Steel: 16
 			Concrete: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Flak_Light_Percentage: HealthPercentageDamage
+	Warhead@Flak_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -4392,7 +4392,7 @@ DefuseKit:
 			Steel: 30
 			Concrete: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
@@ -4450,7 +4450,7 @@ DefuseKit:
 			Steel: 44
 			Concrete: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Flak_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Flak_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
@@ -4511,7 +4511,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 75
-	Warhead@Laser_Light_Percentage: HealthPercentageDamage
+	Warhead@Laser_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
 		Damage: 1
@@ -4595,7 +4595,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 75
-	Warhead@Laser_Medium_Percentage: HealthPercentageDamage
+	Warhead@Laser_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
 		Damage: 1
@@ -4679,7 +4679,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 75
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
 		Damage: 1
@@ -4762,7 +4762,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Prism_Light_Percentage: HealthPercentageDamage
+	Warhead@Prism_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
@@ -4820,7 +4820,7 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Prism_Medium_Percentage: HealthPercentageDamage
+	Warhead@Prism_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
@@ -4878,7 +4878,7 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Prism_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Prism_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
@@ -5333,7 +5333,7 @@ DefuseKit:
 		PhysicalStates:
 			Temperature: 50
 			Corrosion: 50
-	Warhead@Plasma_Light_Percentage: HealthPercentageDamage
+	Warhead@Plasma_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -5394,7 +5394,7 @@ DefuseKit:
 		PhysicalStates:
 			Temperature: 50
 			Corrosion: 50
-	Warhead@Plasma_Medium_Percentage: HealthPercentageDamage
+	Warhead@Plasma_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -5455,7 +5455,7 @@ DefuseKit:
 		PhysicalStates:
 			Temperature: 50
 			Corrosion: 50
-	Warhead@Plasma_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Plasma_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -5516,7 +5516,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 33
-	Warhead@Thermobaric_Light_Percentage: HealthPercentageDamage
+	Warhead@Thermobaric_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -5576,7 +5576,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 33
-	Warhead@Thermobaric_Medium_Percentage: HealthPercentageDamage
+	Warhead@Thermobaric_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -5636,7 +5636,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 33
-	Warhead@Thermobaric_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Thermobaric_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -5697,7 +5697,8 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 25
-	Warhead@Quantum_Light_Percentage: HealthPercentageDamage
+		IntegrityScale: 33
+	Warhead@Quantum_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -5757,7 +5758,8 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 25
-	Warhead@Quantum_Medium_Percentage: HealthPercentageDamage
+		IntegrityScale: 33
+	Warhead@Quantum_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -5817,7 +5819,8 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 25
-	Warhead@Quantum_Heavy_Percentage: HealthPercentageDamage
+		IntegrityScale: 33
+	Warhead@Quantum_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -5878,7 +5881,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
-	Warhead@FireMissile_Light_Percentage: HealthPercentageDamage
+	Warhead@FireMissile_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -5938,7 +5941,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
-	Warhead@FireMissile_Medium_Percentage: HealthPercentageDamage
+	Warhead@FireMissile_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -5998,7 +6001,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
-	Warhead@FireMissile_Heavy_Percentage: HealthPercentageDamage
+	Warhead@FireMissile_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -6059,7 +6062,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 50
-	Warhead@ChemMissile_Light_Percentage: HealthPercentageDamage
+	Warhead@ChemMissile_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -6119,7 +6122,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 50
-	Warhead@ChemMissile_Medium_Percentage: HealthPercentageDamage
+	Warhead@ChemMissile_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -6179,7 +6182,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 50
-	Warhead@ChemMissile_Heavy_Percentage: HealthPercentageDamage
+	Warhead@ChemMissile_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -6240,7 +6243,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 50
-	Warhead@ChemCannon_Light_Percentage: HealthPercentageDamage
+	Warhead@ChemCannon_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -6300,7 +6303,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 50
-	Warhead@ChemCannon_Medium_Percentage: HealthPercentageDamage
+	Warhead@ChemCannon_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -6360,7 +6363,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Corrosion: 50
-	Warhead@ChemCannon_Heavy_Percentage: HealthPercentageDamage
+	Warhead@ChemCannon_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -6418,7 +6421,8 @@ DefuseKit:
 			Helicopter: 18
 			Spaceship: 18
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Storm_Light_Percentage: HealthPercentageDamage
+		IntegrityScale: 50
+	Warhead@Storm_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -6442,9 +6446,6 @@ DefuseKit:
 			Helicopter: 15
 			Spaceship: 15
 		UpdatesUnitStatistics: false
-	Warhead@EMPUnit: AffectsIntegrity
-		ValidRelationships: Neutral, Enemy
-		Damage: 500
 
 ^Warhead_Storm_Medium:
 	ValidTargets: Ground, Water
@@ -6478,7 +6479,8 @@ DefuseKit:
 			Helicopter: 24
 			Spaceship: 24
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Storm_Medium_Percentage: HealthPercentageDamage
+		IntegrityScale: 50
+	Warhead@Storm_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -6502,9 +6504,6 @@ DefuseKit:
 			Helicopter: 20
 			Spaceship: 20
 		UpdatesUnitStatistics: false
-	Warhead@EMPUnit: AffectsIntegrity
-		ValidRelationships: Neutral, Enemy
-		Damage: 1000
 
 ^Warhead_Storm_Heavy:
 	ValidTargets: Ground, Water
@@ -6538,7 +6537,8 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 30
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Storm_Heavy_Percentage: HealthPercentageDamage
+		IntegrityScale: 50
+	Warhead@Storm_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -6562,9 +6562,6 @@ DefuseKit:
 			Helicopter: 25
 			Spaceship: 25
 		UpdatesUnitStatistics: false
-	Warhead@EMPUnit: AffectsIntegrity
-		ValidRelationships: Neutral, Enemy
-		Damage: 1500
 
 ^Warhead_Storm_Super:
 	ValidTargets: Ground, Water
@@ -6598,7 +6595,8 @@ DefuseKit:
 			Helicopter: 36
 			Spaceship: 37
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Storm_Super_Percentage: HealthPercentageDamage
+		IntegrityScale: 50
+	Warhead@Storm_Super_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 500
 		Damage: 1
@@ -6622,9 +6620,6 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 31
 		UpdatesUnitStatistics: false
-	Warhead@EMPUnit: AffectsIntegrity
-		ValidRelationships: Neutral, Enemy
-		Damage: 2000
 
 ###### FireCannon: blend of Flame+CannonHE + PhysicalStates {'Temperature': 50} ######
 ^Warhead_FireCannon_Light:
@@ -6662,7 +6657,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
-	Warhead@FireCannon_Light_Percentage: HealthPercentageDamage
+	Warhead@FireCannon_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -6722,7 +6717,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
-	Warhead@FireCannon_Medium_Percentage: HealthPercentageDamage
+	Warhead@FireCannon_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -6782,7 +6777,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
-	Warhead@FireCannon_Heavy_Percentage: HealthPercentageDamage
+	Warhead@FireCannon_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -6841,7 +6836,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Melee_Light_Percentage: HealthPercentageDamage
+	Warhead@Melee_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground
 		Spread: 200
 		Damage: 1
@@ -6899,7 +6894,7 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground
 		Spread: 300
 		Damage: 1
@@ -6957,7 +6952,7 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Melee_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Melee_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground
 		Spread: 400
 		Damage: 1
@@ -7016,7 +7011,7 @@ DefuseKit:
 			Steel: 16
 			Concrete: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Arrow_Light_Percentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -7074,7 +7069,7 @@ DefuseKit:
 			Steel: 30
 			Concrete: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Arrow_Medium_Percentage: HealthPercentageDamage
+	Warhead@Arrow_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
@@ -7132,7 +7127,7 @@ DefuseKit:
 			Steel: 44
 			Concrete: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Arrow_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Arrow_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
@@ -7190,7 +7185,7 @@ DefuseKit:
 			Superheavy: 22
 			Wood: 22
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Magic_Light_Percentage: HealthPercentageDamage
+	Warhead@Magic_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -7247,7 +7242,7 @@ DefuseKit:
 			Superheavy: 27
 			Wood: 27
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Magic_Medium_Percentage: HealthPercentageDamage
+	Warhead@Magic_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -7304,7 +7299,7 @@ DefuseKit:
 			Superheavy: 32
 			Wood: 32
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Magic_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Magic_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -7361,7 +7356,7 @@ DefuseKit:
 			Superheavy: 38
 			Wood: 38
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Magic_Super_Percentage: HealthPercentageDamage
+	Warhead@Magic_Super_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 500
 		Damage: 1
@@ -7420,7 +7415,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -7478,7 +7473,7 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Demolition_Medium_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -7536,7 +7531,7 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -7595,7 +7590,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Concussion_Light_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -7653,7 +7648,7 @@ DefuseKit:
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -7711,7 +7706,7 @@ DefuseKit:
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Concussion_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -7769,7 +7764,7 @@ DefuseKit:
 			Superheavy: 45
 			Wood: 45
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Sonic_Light_Percentage: HealthPercentageDamage
+	Warhead@Sonic_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -7826,7 +7821,7 @@ DefuseKit:
 			Superheavy: 55
 			Wood: 55
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Sonic_Medium_Percentage: HealthPercentageDamage
+	Warhead@Sonic_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -7883,7 +7878,7 @@ DefuseKit:
 			Superheavy: 65
 			Wood: 65
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Sonic_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Sonic_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -7942,7 +7937,7 @@ DefuseKit:
 			Bomber: 44
 			Fighter: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
@@ -8025,7 +8020,8 @@ DefuseKit:
 			Bomber: 16
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Tesla_Light_Percentage: HealthPercentageDamage
+		IntegrityScale: 100
+	Warhead@Tesla_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
@@ -8108,7 +8104,8 @@ DefuseKit:
 			Bomber: 30
 			Fighter: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Tesla_Medium_Percentage: HealthPercentageDamage
+		IntegrityScale: 100
+	Warhead@Tesla_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
@@ -8191,7 +8188,8 @@ DefuseKit:
 			Bomber: 44
 			Fighter: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+		IntegrityScale: 100
+	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
@@ -8275,7 +8273,8 @@ DefuseKit:
 			Bomber: 58
 			Fighter: 55
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
+		IntegrityScale: 100
+	Warhead@TeslaCharged_Super_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 1

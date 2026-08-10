@@ -194,7 +194,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
            falloffs=("100, 50, 33, 25, 20", "100, 50, 30, 18, 10",
                      "100, 50, 25, 10, 5", "100, 50, 20, 8, 3"),
            damage_types="Prone75Percent, TriggerProne, ExplosionDeath",
-           hazmat=50, reload=25, rng=5120, versus_override=None, physical_states=None, emp=None):
+           hazmat=50, reload=25, rng=5120, versus_override=None, physical_states=None):
     """mode: None = sloped (from order16); 'flat' = Sonic (uniform flat, small %);
     'pct' = Magic (tiny uniform flat + LARGE uniform % of max HP).
     Every main warhead is AreaDamage with baked UNIVERSAL friendly fire
@@ -251,8 +251,14 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         if physical_states:  # multi-state blend (e.g. Plasma: Temperature 50 + Corrosion 50)
             main_wh.append("\t\tPhysicalStates:")
             main_wh += [f"\t\t\t{k}: {v}" for k, v in physical_states.items()]
+        integ = FAMILY_INTEGRITY_SCALE.get(name)  # shield/EMP auto-drain (main only; %-twin has no field)
+        if integ:
+            main_wh.append(f"\t\tIntegrityScale: {integ}")
         percentage_state = FAMILY_PHYSICAL_STATE.get(name) if name in {"Flame", "Chemical"} else None
-        percentage_type = "AreaDamagePercentage" if percentage_state else "HealthPercentageDamage"
+        # All %-twins use the Cameo AreaDamagePercentage warhead (unified 2026-08-10): same expanding-ring
+        # spatial pass + baked-FF plumbing as the AreaDamage main, and it can carry PhysicalStateScale.
+        # Behaviour-preserving drop-in for HealthPercentageDamage (no ValidRelationships: Ally => no FF).
+        percentage_type = "AreaDamagePercentage"
         pct_wh = [f"\tWarhead@{tag}_Percentage: {percentage_type}",
              f"\t\tValidTargets: {vt}",
              f"\t\tSpread: {main_spread // 2}",
@@ -267,11 +273,6 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         parts = main_wh + pct_wh
         if name in CHIPS:  # paid-for ExtraDamage chip (energy families only)
             parts.append(emit_chip(tag, name, damage, vt))
-        if emp and level in emp:  # EMP integrity damage (Tesla-style), per-tier Damage
-            parts.append("\n".join([
-                "\tWarhead@EMPUnit: AffectsIntegrity",
-                "\t\tValidRelationships: Neutral, Enemy",
-                f"\t\tDamage: {emp[level]}"]))
         blocks.append("\n".join(parts))
     return "\n\n".join(blocks)
 
@@ -314,6 +315,19 @@ FAMILY_PHYSICAL_STATE = {
     # Plasma (Temperature 50 + Corrosion 50) needs two states on one warhead -> handled at family build.
 }
 
+# Per-family Integrity (shield/EMP) auto-scale: the C# AreaDamage.IntegrityScale drains the victim's
+# shield by `damage x Scale%` on hit, EXACTLY like PhysicalStateScale (auto-tracks the real post-armor
+# damage, so no flat EMP number is ever hand-set and the ordering can't drift). Tesla-content law:
+# Scale = round(100 x Tesla-parents / total-parents) -> pure Tesla 100, Storm (Tesla+Magic) 50,
+# Quantum (Railgun+Laser+Tesla) 33. Emitted on the MAIN AreaDamage warhead only (the %-twin is a plain
+# HealthPercentageDamage that has no IntegrityScale field). The flat AffectsIntegrity warhead stays
+# UPGRADE-only (a concrete bonus on top), so no template emits it. See PHYSICAL_STATE_SYSTEM.md.
+FAMILY_INTEGRITY_SCALE = {
+    "Tesla": 100, "TeslaCharged": 100,   # pure Tesla = full shield-drain (the disable specialist)
+    "Storm": 50,                          # Tesla+Magic -> 1/2
+    "Quantum": 33,                        # Railgun+Laser+Tesla -> 1/3
+}
+
 # Inheriting families: a thin child that inherits a parent family template and overrides ONLY the main
 # warhead to add a PhysicalState (e.g. Cryo = Prism's anti-LIGHT beam + cold). Keeps the parent's Versus
 # + warhead key. {name: (parent, PhysicalStateName, PhysicalStateScale, levels)}.
@@ -347,7 +361,8 @@ BLEND_FAMILIES = {
     "Thermobaric": (["Demolition", "Concussion", "Flame"], {"Temperature": 33}, L3),
     # Quantum = high-tech energy blend: per-armor AVERAGE of Railgun + Laser + Tesla (Heavy-only
     # parents extrapolated to L/M via the level step). Heat = Laser's 75 / 3 parents = 25 (only Laser
-    # contributes a meter; Plasma-consistent per-parent averaging). EMP/ExtraDamage stay per-weapon.
+    # contributes a meter; Plasma-consistent per-parent averaging). EMP auto-scales via IntegrityScale
+    # 33 (Tesla = 1/3 parents, FAMILY_INTEGRITY_SCALE); the ExtraDamage chip stays per-weapon.
     "Quantum": (["Railgun", "Laser", "Tesla"], {"Temperature": 25}, L3),
     # Element + delivery blends (maintainer 2026-08-10): per-armor AVERAGE of the element family and the
     # delivery family + the element's meter / 2 parents (50). FIRE = anti-light -> pairs with HE delivery
@@ -473,6 +488,5 @@ if __name__ == "__main__":
         print("###### Storm: TeslaCharged + Magic + TeslaChargedExtraDamage/5 (Super-anchored, scaled down) ######")
         print(family("Storm", None, valid_targets(False), STORM_LEVELS,
                      versus_override=storm_versus, hazmat=None,
-                     damage_types="Prone100Percent, TriggerProne, ElectricityDeath, Tesla",
-                     emp={"Light": 500, "Medium": 1000, "Heavy": 1500, "Super": 2000}))
+                     damage_types="Prone100Percent, TriggerProne, ElectricityDeath, Tesla"))
         print()

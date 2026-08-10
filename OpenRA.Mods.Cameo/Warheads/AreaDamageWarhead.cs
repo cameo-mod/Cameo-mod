@@ -13,6 +13,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using OpenRA.Effects;
 using OpenRA.GameRules;
+using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Warheads;
@@ -76,6 +77,14 @@ namespace OpenRA.Mods.Cameo.Warheads
 		[Desc("Multiple PhysicalState changes on one warhead, {StateName: Scale%}, applied IN ADDITION to",
 			"the single PhysicalStateName/Scale above. For a blend, e.g. Plasma: Temperature: 50, Corrosion: 50.")]
 		public readonly Dictionary<string, int> PhysicalStates = new();
+
+		[Desc("Drain the victim's Integrity (shield/EMP) pool by the damage this warhead deals x this",
+			"percentage, SCALED exactly like PhysicalStateScale (auto-tracks the real post-armor/falloff",
+			"damage, so no flat EMP number is hand-set). Cameo Tesla-content law: Tesla 100, Storm 50,",
+			"Quantum 33 (Tesla-parents / total-parents). 0 = off. Put it on the main + _Percentage warheads,",
+			"NOT the _ExtraDamage chip. Stack a flat AffectsIntegrity warhead on top for upgrade bonuses,",
+			"or give the upgraded weapon a higher IntegrityScale so its bonus EMP scales too.")]
+		public readonly int IntegrityScale = 0;
 
 		[Desc("Relative damage weight per tick. Length must equal Ticks (omit for an even split).",
 			"Weights are NORMALISED so the total across all ticks always equals the authored Damage,",
@@ -222,6 +231,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 			var damage = Util.ApplyPercentageModifiers(Damage, args.DamageModifiers.Append(DamageVersus(victim, shape, args)));
 			victim.InflictDamage(firedBy, new Damage(damage, DamageTypes, GetProjectileType(args)));
 			ApplyPhysicalState(victim, firedBy, damage);
+			ApplyIntegrityScale(victim, firedBy, damage);
 		}
 
 		// Scale a named PhysicalState by the damage just dealt (heat / cold / corrosion meters). Shared
@@ -250,6 +260,26 @@ namespace OpenRA.Mods.Cameo.Warheads
 			var physicalState = victim.TraitsImplementing<PhysicalState>()
 				.FirstOrDefault(ps => ps.Name == name);
 			physicalState?.ApplyChange(change, firedBy, true);
+		}
+
+		// Drain the victim's Integrity (shield/EMP) pool proportional to the damage just dealt, the same
+		// way ApplyPhysicalState scales a heat/corrosion meter. Auto-tracks the final effective damage
+		// (armor + falloff already baked into `damage`), so the "EMP" self-adjusts with the weapon's
+		// output and never needs a hand-set number. Shared with the _Percentage subclass so both the flat
+		// main and the %HP twin drain the pool; the _ExtraDamage chip never calls this (excluded). No
+		// Integrity trait on the victim (most units have no shield) => a harmless no-op.
+		protected void ApplyIntegrityScale(Actor victim, Actor firedBy, int damage)
+		{
+			if (damage == 0 || IntegrityScale == 0)
+				return;
+
+			var change = damage * IntegrityScale / 100;
+			if (change == 0)
+				return;
+
+			victim.TraitsImplementing<Integrity>()
+				.FirstOrDefault(t => !t.IsTraitPaused && !t.IsTraitDisabled)
+				?.Regenerate(victim, -change);
 		}
 
 		int GetDamageFalloff(int distance)

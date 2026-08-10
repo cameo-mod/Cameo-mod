@@ -907,13 +907,7 @@ d2kStormLasher:
 		Delay: 7
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 300000
-		Spread: 2250
-		Falloff: 100, 75, 50, 25
-		Delay: 7
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		DamageCalculationType: ClosestTargetablePosition
+	# EMP auto-scales via the Storm template's IntegrityScale 50 (flat EMPUnit removed 2026-08-10).
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater
 		Delay: 13
@@ -933,10 +927,11 @@ d2kStormLasher:
 		Delay: 7
 
 D2K_ShockGun:
-	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_Railgun_Heavy
-	Inherits@3: ^Projectile_Railgun_Heavy
-	Inherits@4: ^Effect_Railgun_Heavy
+	# Wired to Storm blend (2026-08-10). Was Railgun 20k + Tesla 20k = 40k total -> single 40k Storm.
+	# EMP now auto-scales with damage via the Storm template's IntegrityScale 50 (no flat EMPUnit).
+	Inherits@wh: ^Warhead_Storm_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	ReloadDelay: 100
 	Range: 7756
 	Report: bigggun1.aud
@@ -946,29 +941,12 @@ D2K_ShockGun:
 		DamageActorsInLine: false
 		BeamColor: 0088FFCC
 		BeamWidth: 100
-	Warhead@Railgun_Heavy:
-		Damage: 20000
-		Falloff: 100, 75, 50, 25
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Railgun_Heavy_Percentage:
-		Damage: 10
-		Falloff: 100, 75, 50, 25
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Tesla_Heavy:
-		Damage: 20000
-		Falloff: 100, 75, 50, 25
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 10000
-		Falloff: 100, 75, 50, 25
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Tesla_Heavy_Percentage:
-		Damage: 10
-		Falloff: 100, 75, 50, 25
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@Storm_Heavy:
 		Damage: 40000
-		Spread: 1500
+		Falloff: 100, 75, 50, 25
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@Storm_Heavy_Percentage:
+		Damage: 20
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
 
@@ -1001,13 +979,7 @@ D2K_StormGun:
 		Delay: 2
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 80000
-		Spread: 1500
-		Falloff: 100, 75, 50, 25
-		Delay: 2
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		DamageCalculationType: ClosestTargetablePosition
+	# EMP auto-scales via the Storm template's IntegrityScale 50 (flat EMPUnit removed 2026-08-10).
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater
 		Delay: 8
@@ -1027,7 +999,9 @@ D2K_StormGun:
 		Delay: 2
 
 D2K_ShockGunInf:
-	Inherits@wh: ^Warhead_Railgun_Heavy
+	# Wired to Storm blend (2026-08-10). Was pure Railgun 18k -> single 18k Storm (shock/lightning family).
+	# EMP auto-scales via the Storm template's IntegrityScale 50.
+	Inherits@wh: ^Warhead_Storm_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
 	ReloadDelay: 45
@@ -1035,12 +1009,12 @@ D2K_ShockGunInf:
 	Projectile: Railgun
 		BeamColor: 33FFEE
 		BeamWidth: 33
-	Warhead@Railgun_Heavy:
+	Warhead@Storm_Heavy:
 		ValidTargets: Ground, Water
 		Range: 0, 25, 50, 100
 		Falloff: 100, 50, 25, 0
 		Damage: 18000
-	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Storm_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 9
@@ -1069,12 +1043,7 @@ D2K_StormGunInf:
 		Damage: 12
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 24000
-		Spread: 1000
-		Falloff: 100, 75, 50, 25
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		DamageCalculationType: ClosestTargetablePosition
+	# EMP auto-scales via the Storm template's IntegrityScale 50 (flat EMPUnit removed 2026-08-10).
 	Warhead@Effect2: CreateEffect
 		Explosions: d2k_munitions_explosion_small
 		ImpactSounds: d2k_munitions_explosion.wav
@@ -1106,12 +1075,7 @@ D2K_StormGunCymek:
 		Damage: 16
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 32000
-		Spread: 1000
-		Falloff: 100, 75, 50, 25
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		DamageCalculationType: ClosestTargetablePosition
+	# EMP auto-scales via the Storm template's IntegrityScale 50 (flat EMPUnit removed 2026-08-10).
 	Warhead@Effect2: CreateEffect
 		Explosions: d2k_munitions_explosion_small
 		ImpactSounds: d2k_munitions_explosion.wav

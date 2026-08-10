@@ -30,6 +30,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 			var damage = Util.ApplyPercentageModifiers(healthInfo.HP, args.DamageModifiers.Append(Damage, DamageVersus(victim, shape, args)));
 			victim.InflictDamage(firedBy, new Damage(damage, DamageTypes, GetProjectileType(args)));
 			ApplyPhysicalState(victim, firedBy, damage);
+			ApplyIntegrityScale(victim, firedBy, damage);
 		}
 	}
 }

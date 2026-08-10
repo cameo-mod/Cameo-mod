@@ -2532,29 +2532,25 @@ StormCloud:
 		ValidTargets: Ground, Air, Water
 
 LightningBolt:
-	Inherits@wh: ^Warhead_TeslaCharged_Super
+	# Wired to Storm blend (2026-08-10). Was TeslaCharged_Super 24k main + 24k extra → single 24k Storm.
+	# Storm folds the Tesla extra-damage into its Versus profile; keeps lightning projectile/effect.
+	# (Also eliminates the old duplicate Warhead@TeslaChargedExtraDamage key — the 2nd silently shadowed the 1st.)
+	Inherits@wh: ^Warhead_Storm_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	Projectile: InstantHit
 	-Report:
 	ValidTargets: Ground, Water, Air
-	Warhead@TeslaCharged_Super:
+	Warhead@Storm_Super:
 		Spread: 1000
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 24000
 		ValidTargets: Air, Ground, Water
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
-		Spread: 2000
+	Warhead@Storm_Super_Percentage:
+		Spread: 1000
 		Falloff: 100, 75, 50, 25, 0
-		Damage: 24000
-	Warhead@TeslaCharged_Super_Percentage: HealthPercentageDamage
+		Damage: 12
 		ValidTargets: Air, Ground, Water
-		Damage: 6
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
-		ValidTargets: Shielded
-		Falloff: 100, 67, 33, 0
-		Spread: 3333
-		Damage: 66666
 	Warhead@Effect: CreateEffect
 		Explosions: wclbolt1,wclbolt2,wclbolt3
 		ExplosionPalette: ra2effect
