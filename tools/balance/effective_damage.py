@@ -38,7 +38,11 @@ LEAD = 0.20             # engine leads/tracks -> real miss is ~20% of raw displa
 TARGET_SPEED = 100      # typical dodging vehicle speed (WDist/tick)
 SPEED_CAP = 10000       # ~10 cells/tick: at/above this a projectile is "basically instant"
 MIN_SPREAD = 100        # absolute floor: no weapon integrates below Spread 100 / Falloff 100,0
-INSTANT_PROJECTILES = {"InstantHit", "LaserZap", "Railgun", "InstantHitLine", "InstantHitAS"}
+# Instant hits ALWAYS hit center -> reliability 1.0 (maintainer 2026-08-11), no travel drift at any
+# range. A projectile with no Speed field is also instant (beams / support-power explosions). The
+# SPEED_CAP only tames actual moving projectiles.
+INSTANT_PROJECTILES = {"InstantHit", "LaserZap", "Railgun", "InstantHitLine", "InstantHitAS",
+                       "SupportPowerInstantExplode", "InstantExplode"}
 
 
 def parse_wdist(s) -> int:
@@ -138,22 +142,20 @@ def flat_damage_warheads(resolved):
     return out
 
 
-def weapon_sigma(resolved) -> float:
-    """Inaccuracy + travel drift, capped speed. Instant projectiles -> ~0 drift."""
+def weapon_reliability_ctx(resolved):
+    """(is_instant, sigma). Instant hits -> reliability forced to 1.0 by the caller (sigma unused)."""
     proj = resolved.child("Projectile")
     ptype = proj.value if proj is not None else None
+    speed = resolved.get("Projectile", "Speed")
+    if ptype in INSTANT_PROJECTILES or not speed:
+        return True, 0.0                       # instant hit -> always hits center
     inacc = resolved.get("Projectile", "Inaccuracy")
     inacc = parse_wdist(inacc) if inacc else 0
     rng = resolved.get("Range")
     rng = parse_wdist(rng) if rng else 0
-    speed = resolved.get("Projectile", "Speed")
-    if ptype in INSTANT_PROJECTILES or not speed:
-        eff_speed = SPEED_CAP
-    else:
-        eff_speed = min(parse_wdist(speed), SPEED_CAP)
-        eff_speed = max(eff_speed, 1)
+    eff_speed = max(min(parse_wdist(speed), SPEED_CAP), 1)
     drift = LEAD * TARGET_SPEED * rng / eff_speed if rng else 0.0
-    return inacc + drift
+    return False, inacc + drift
 
 
 def effective_damage(resolved):
@@ -161,7 +163,7 @@ def effective_damage(resolved):
     whs = flat_damage_warheads(resolved)
     if not whs:
         return None
-    sigma = weapon_sigma(resolved)
+    is_instant, sigma = weapon_reliability_ctx(resolved)
     eff = base_total = foot_total = 0.0
     rel_weighted = 0.0
     for _tag, wtype, base, node in whs:
@@ -172,7 +174,7 @@ def effective_damage(resolved):
             spread = max(parse_wdist(spread) if spread else MIN_SPREAD, MIN_SPREAD)
             fo, radii = falloff_and_radii(node, spread)
         fp = footprint_cells2(fo, radii)
-        rel = reliability(fo, radii, sigma)
+        rel = 1.0 if is_instant else reliability(fo, radii, sigma)
         contrib = base * (rel + SWARM_W * fp)
         eff += contrib
         base_total += base
