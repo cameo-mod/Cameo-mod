@@ -1149,7 +1149,7 @@ Future_MBT_DebuffLaser:
 		Width: 0c64
 		Color: 83B9FC
 	Warhead@2Con: GrantExternalCondition
-		Condition: CommandoDebuff
+		Condition: SonicDebuff
 		Duration: 22
 		Range: 172
 		ValidTargets: Ground, Water, Structure, wall

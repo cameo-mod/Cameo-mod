@@ -3876,7 +3876,7 @@
 	Inherits@bot: ^BotProductionBehavior
 	Inherits@mindcontrol: ^MindControllableStructure
 	Inherits@forceshield: ^ForceShieldable
-	Inherits@commandodebuff: ^CommandoDebuff
+	Inherits@sonicdebuff: ^SonicDebuff
 	Inherits@trap: ^BoobyTrappable
 	Inherits@base-reveal: ^Base-reveal
 	Inherits@bounty: ^GlobalBounty
@@ -6047,24 +6047,24 @@
 		Range: 7c0
 		Condition: CommandoCall
 
-^CommandoDebuff:
-	ExternalCondition@COMMANDODEBUFF:
-		Condition: CommandoDebuff
-	WithColoredOverlay@COMMANDODEBUFF:
-		RequiresCondition: CommandoDebuff
+^SonicDebuff:
+	ExternalCondition@SONICDEBUFF:
+		Condition: SonicDebuff
+	WithColoredOverlay@SONICDEBUFF:
+		RequiresCondition: SonicDebuff
 		Color: 0088FF40
 		Multiply: true
-	DamageMultiplier@COMMANDODEBUFF:
+	DamageMultiplier@SONICDEBUFF:
 		Modifier: 150
-		RequiresCondition: CommandoDebuff
-	SpeedMultiplier@COMMANDODEBUFF:
+		RequiresCondition: SonicDebuff
+	SpeedMultiplier@SONICDEBUFF:
 		Modifier: 75
-		RequiresCondition: CommandoDebuff
-	# WithDecoration@COMMANDODEBUFF:
+		RequiresCondition: SonicDebuff
+	# WithDecoration@SONICDEBUFF:
 	# 	Image: 2100commandodebuff
 	# 	Sequence: idle
 	# 	Position: Center
-	# 	RequiresCondition: CommandoDebuff
+	# 	RequiresCondition: SonicDebuff
 	# 	ValidRelationships: Enemy, Neutral, Ally
 
 ^CommandoCallable:
@@ -6450,7 +6450,7 @@
 	# 	BlinkPattern: Off, Off, On, Off
 
 ^ExternalConditions:
-	Inherits@commando: ^CommandoDebuff
+	Inherits@sonicdebuff: ^SonicDebuff
 	Inherits@defplague: ^DefilerPlague
 	Inherits@commando: ^CommandoCallable
 	Inherits@darkswarm: ^DarkSwarmable

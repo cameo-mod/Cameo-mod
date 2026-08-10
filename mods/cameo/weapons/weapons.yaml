@@ -7802,6 +7802,12 @@ DefuseKit:
 			Superheavy: 5
 			Wood: 5
 		UpdatesUnitStatistics: false
+	Warhead@Sonic_Light_Debuff: GrantExternalCondition
+		Condition: SonicDebuff
+		Duration: 50
+		Range: 800
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
 
 ^Warhead_Sonic_Medium:
 	ValidTargets: Ground, Water
@@ -7859,6 +7865,12 @@ DefuseKit:
 			Superheavy: 8
 			Wood: 8
 		UpdatesUnitStatistics: false
+	Warhead@Sonic_Medium_Debuff: GrantExternalCondition
+		Condition: SonicDebuff
+		Duration: 50
+		Range: 1200
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
 
 ^Warhead_Sonic_Heavy:
 	ValidTargets: Ground, Water
@@ -7916,6 +7928,12 @@ DefuseKit:
 			Superheavy: 10
 			Wood: 10
 		UpdatesUnitStatistics: false
+	Warhead@Sonic_Heavy_Debuff: GrantExternalCondition
+		Condition: SonicDebuff
+		Duration: 50
+		Range: 1600
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
 
 ###### Railgun: VEH > INF > BLD > AIR (heavy, air=False) ######
 ^Warhead_Railgun_Heavy:

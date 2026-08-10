@@ -1413,28 +1413,28 @@ IonPulseDischarge:
 		AffectsParent: true
 		ValidTargets: Ground, Water, Air
 	Warhead@Condition1: GrantExternalCondition
-		Condition: CommandoDebuff
+		Condition: SonicDebuff
 		Range: 10000
 		Duration: 10
 		Delay: 1
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
 	Warhead@Condition2: GrantExternalCondition
-		Condition: CommandoDebuff
+		Condition: SonicDebuff
 		Range: 8000
 		Duration: 20
 		Delay: 2
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
 	Warhead@Condition3: GrantExternalCondition
-		Condition: CommandoDebuff
+		Condition: SonicDebuff
 		Range: 6000
 		Duration: 30
 		Delay: 3
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
 	Warhead@Condition4: GrantExternalCondition
-		Condition: CommandoDebuff
+		Condition: SonicDebuff
 		Range: 4000
 		Duration: 40
 		Delay: 4

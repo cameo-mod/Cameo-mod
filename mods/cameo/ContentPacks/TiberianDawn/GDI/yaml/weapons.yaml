@@ -1202,7 +1202,7 @@ GDIPredatorBlueLaser:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFFFF
 	Warhead@2Con: GrantExternalCondition
-		Condition: CommandoDebuff
+		Condition: SonicDebuff
 		Duration: 22
 		Range: 222
 		ValidTargets: Ground, Water, Structure, wall

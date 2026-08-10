@@ -194,7 +194,7 @@ CommandoGun:
 		Width: 0c64
 		Color: 83B9FC
 	Warhead@2Con: GrantExternalCondition
-		Condition: CommandoDebuff
+		Condition: SonicDebuff
 		Duration: 13
 		Range: 172
 		ValidTargets: Ground, Water, Structure, wall
@@ -216,7 +216,7 @@ CommandoGunAA:
 		Width: 0c32
 		Color: 83B9FC
 	Warhead@2Con: GrantExternalCondition
-		Condition: CommandoDebuff
+		Condition: SonicDebuff
 		Duration: 13
 		Range: 172
 		ValidTargets: Ground, Water, Structure, wall

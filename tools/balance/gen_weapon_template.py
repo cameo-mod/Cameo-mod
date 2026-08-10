@@ -293,6 +293,9 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         parts = main_wh + pct_wh
         if name in CHIPS:  # paid-for ExtraDamage chip (energy families only)
             parts.append(emit_chip(tag, name, damage, vt, level=level))
+        if name in FAMILY_CONDITION:  # on-hit status mark (Sonic -> SonicDebuff)
+            cname, dmul, rmul = FAMILY_CONDITION[name]
+            parts.append(emit_condition(tag, cname, reload * dmul, main_spread * rmul, vt))
         blocks.append("\n".join(parts))
     return "\n\n".join(blocks)
 
@@ -359,6 +362,30 @@ FAMILY_DAMAGE_TYPES = {
     "Quantum": "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
     # Storm is handled at its own call site (Prone100Percent + Tesla).
 }
+
+# Per-family STATUS CONDITION (PHYSICAL_STATE_SYSTEM.md §6 decision 4). Some families mark the target
+# with a short external condition on every hit instead of (or as well as) filling a PhysicalState meter.
+# Sonic = `SonicDebuff` (^SonicDebuff in defaults.yaml: +50% incoming damage, -25% speed, blue tint) —
+# the resonance that softens what the beam is standing on. Both numbers are DERIVED, never hand-picked:
+#   Duration = duration_x_reload x ReloadDelay  -> continuous fire keeps the mark up, and it lapses a
+#              couple of shots after the beam stops (the maintainer's "short duration, on hit only").
+#   Range    = range_x_spread x the main warhead Spread -> the half-damage radius of the same blast.
+# {family: (condition, duration_x_reload, range_x_spread)}
+FAMILY_CONDITION = {
+    "Sonic": ("SonicDebuff", 2, 2),
+}
+
+
+def emit_condition(tag, cname, duration, rng, vt):
+    """Emit the on-hit status-condition warhead (never damages, so it is price-neutral)."""
+    return "\n".join([
+        f"\tWarhead@{tag}_Debuff: GrantExternalCondition",
+        f"\t\tCondition: {cname}",
+        f"\t\tDuration: {duration}",
+        f"\t\tRange: {rng}",
+        f"\t\tValidRelationships: Enemy, Neutral",
+        f"\t\tValidTargets: {vt}, Structure, wall"])
+
 
 # Inheriting families: a thin child that inherits a parent family template and overrides ONLY the main
 # warhead to add a PhysicalState (e.g. Cryo = Prism's anti-LIGHT beam + cold). Keeps the parent's Versus

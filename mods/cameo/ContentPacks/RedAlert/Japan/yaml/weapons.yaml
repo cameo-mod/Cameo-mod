@@ -2220,8 +2220,8 @@ WaveArtilleryImpact:
 		Spread: 333
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CommandoDebuff: GrantExternalCondition
-		Condition: CommandoDebuff
+	Warhead@SonicDebuff: GrantExternalCondition
+		Condition: SonicDebuff
 		Duration: 222
 		Range: 666
 		ValidRelationships: Enemy, Neutral
@@ -2283,7 +2283,7 @@ WaveTurretImpact:
 		Spread: 500
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CommandoDebuff: GrantExternalCondition
+	Warhead@SonicDebuff: GrantExternalCondition
 		Duration: 150
 		Range: 1500
 		ValidRelationships: Enemy, Neutral
