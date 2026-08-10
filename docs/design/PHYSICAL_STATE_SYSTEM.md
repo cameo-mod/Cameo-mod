@@ -405,6 +405,12 @@ reference an image+sequence, so the yaml wires with placeholders and the art dro
   drift stays 0. The predator laser / waveforce / IonPulse keep their own hand-tuned grants, now of the
   renamed condition. `5a14355e6`
 - (Temperature axis + framework were ALREADY built — see §0.)
+- ✅ **Upgraded-weapon IntegrityScale bump + missing chip `DamageTypes: Tesla`** (Devin, 2026-08-10,
+  `145c6861c`, PR `fix/tesla-integrity-upgrade-drain`) — fixed two bugs that kept RA1 Tesla Doctrine /
+  RA2 Tesla Overload upgrades draining integrity at the same ratio as their un-upgraded base weapon.
+  Full root-cause + fix write-up, plus a reply-letter with suggestions for the still-queued flat-EMP
+  cleanup, lives in `docs/design/EMP_INTEGRITY_SYSTEM.md` §3c and §6 — read those before touching the
+  flat-EMP sweep (§4 there) or the Quantum Tesla-typing decision (§2 there).
 
 **TODO — resume queue (in order):**
 1. **ADOPT the Sonic family** (needs a maintainer warhead order — rule 4): nothing inherits

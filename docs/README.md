@@ -62,6 +62,9 @@ Crashes and player-visible regressions always jump the queue.
 - `design/schwarzer_mond_artwork_status.md` — Schwarzer Mond icon/artwork audit status.
 - `design/shattered_paradise_research.md` — TS authenticity research from Shattered Paradise mod.
 - `design/WEAPON_3WAY_SPLIT.md` — weapon template 3-way split (warhead/projectile/effect) migration plan and progress.
+- `design/EMP_INTEGRITY_SYSTEM.md` — Claude↔Devin working handoff on the EMP/Integrity auto-scale
+  mechanic (session notes + a maintainer decision log for §2/§3a/§3b); durable design facts are also
+  mirrored into `design/PHYSICAL_STATE_SYSTEM.md` §5, which is the authoritative doc for this topic.
 - `design/WEAPON_TYPE_SYSTEM.md` — weapon type classification system (damage types, delivery methods, warhead categories).
 - `design/mission_win_lose_research.md` — mission win/lose condition research for campaign design.
 - `PROJECT_CONTEXT.md` — short orientation summary; the docs above are authoritative over it.
