@@ -96,6 +96,61 @@ maintainer. No weapon conversions were attempted.
 
 ---
 
+## 1.7. Letter to Claude — Devin, 2026-08-10
+
+Hi Claude,
+
+This is my handoff for the Tesla/EMP extra-damage cleanup and the surrounding session. I am leaving a local `master` commit with the Tesla work; the maintainer chose not to reset it onto a feature branch, so you will likely want to sort that out first.
+
+### What I did this session
+
+- Finished the `TeslaExtraDamage` / `TeslaChargedExtraDamage` rename. Local keys were renamed to `Tesla_Heavy_ExtraDamage` / `Tesla_Super_ExtraDamage` in all affected faction `weapons.yaml` files plus the global `mods/cameo/weapons/*.yaml` files.
+- Restored `DamageTypes: Tesla` to **84** standalone `Tesla_*_ExtraDamage` chips after the maintainer's hand-edit pass accidentally stripped them. Without this, the extra-damage warhead has no passive integrity drain because there is no `^Warhead_*_ExtraDamage` template to inherit it from.
+- Added a new `§6. Letter to Claude` to `docs/design/EMP_INTEGRITY_SYSTEM.md` with the operational handoff.
+- Committed the work as `14713d579` on `master` at the maintainer's instruction. **Note:** I intended to land it on the existing `fix/tesla-integrity-upgrade-drain` feature branch, but I did not check `git branch` before committing. The maintainer then explicitly told me not to rewrite history, so the commit remains on `master` and is **not pushed**.
+
+### Verification that passed
+
+- `tools/audit/find_empty_warhead.py` = 0
+- `tools/audit/find_orphan_old_keys.py` = 0 real orphans
+- `check_teslaextradamage.py` = 0 double-fires
+- `check_tesla_charged_extra.py` = 0 double-fires
+- All 119 `Tesla_Heavy_ExtraDamage` / `Tesla_Super_ExtraDamage` chips have `DamageTypes: Tesla`
+- `launch-game.cmd` boot-gate reached `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log`
+
+### Current working tree
+
+The commit consumed 25 files. What is **not** in the commit and should stay out of a Tesla commit:
+
+- `docs/audit/latest/*` (regenerated reports, including several untracked `.md` files)
+- `docs/factions/MATRIX.md`
+- `tools/audit/audit_damage_grid.py` (untracked)
+- `tools/balance/_requantize_ledgers.py` (untracked)
+- Various non-Tesla weapon tweaks mixed in the same `weapons.yaml` files that the maintainer kept uncommitted.
+
+### What to do next
+
+1. **Branch hygiene (P0 before anything else):** The `14713d579` commit is on `master`. Either leave it there and have the maintainer handle it, or — if the maintainer agrees — `git reset --soft HEAD~1` on `master`, checkout `fix/tesla-integrity-upgrade-drain` (or create it from the previous feature branch), and re-commit. **Do not force-push `master` if it has already been pushed anywhere.**
+2. **Flat-EMP cleanup:** The next logical work is `docs/design/EMP_INTEGRITY_SYSTEM.md` §4 — strip legacy `Warhead@EMPUnit` from non-upgrade Tesla/Storm/Quantum weapons and remove the inherited `TeslaExtraDamage`/`TeslaChargedExtraDamage` old keys from templates when safe. Before doing that, run the full audit suite (`bash tools/audit/run_all.sh`) to get current counts.
+3. **Continue with the Energy family conversion** once the maintainer confirms the ExtraDamage design in `docs/design/WEAPON_3WAY_SPLIT.md` OPEN DESIGN #1.
+4. **Vehicle balance** is still blocked on maintainer anchor-table confirmation; do not apply ledgers until they say go.
+
+### Instructions for you
+
+- Boot-gate every YAML commit. Snapshot `exception-*.log` timestamps before launching. Menu proof is `MenuPostProcessEffect.PostWorldLoaded` in `perf.log`.
+- Use `git add <files>` only. Never `git add -A`, `.`, or `--all`. The tree has live maintainer WIP.
+- Do not `git checkout -- .` or wide-revert. The `docs/audit/latest/*` and `docs/factions/MATRIX.md` changes are someone else's work.
+- `EMP_INTEGRITY_SYSTEM.md` §6 and this `§1.7` are now the canonical state for the Tesla work.
+- The temporary helper scripts are not in the repo; recreate them if needed from the logic described in `EMP_INTEGRITY_SYSTEM.md` §6.
+
+### One mistake I made
+
+I got focused on the rename and forgot to check `git branch --show-current` before `git commit`. The commit landed on `master` instead of the feature branch. I should have confirmed the branch as the first step after deciding to commit. I held the line on not committing the unrelated WIP, but the branch mistake shows that verification is not enough — branch state is also part of "no mistakes."
+
+— Devin
+
+---
+
 ## 2. What the previous AI (Claude/Opus) completed
 
 | Commit (examples) | What was done |
