@@ -96,6 +96,8 @@ ra1_allies_alliedmediumtank:
 		MuzzleSequence: muzzle
 	AttackTurreted:
 	WithMuzzleOverlay:
+	WithMuzzleSmoke:
+		Weapons: 90mm
 	WithSpriteTurret:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
@@ -251,6 +253,8 @@ ra1_allies_alliedartillery:
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	WithMuzzleOverlay:
+	WithMuzzleSmoke:
+		Weapons: 155mm, 155mmCryo
 	FireWarheadsOnDeath:
 		Weapon: ArtilleryExplode
 	Voiced:

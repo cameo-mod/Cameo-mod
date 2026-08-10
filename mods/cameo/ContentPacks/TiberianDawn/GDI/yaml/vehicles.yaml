@@ -220,6 +220,8 @@ td_gdi_battletank:
 		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	AttackTurreted:
 	WithMuzzleOverlay:
+	WithMuzzleSmoke:
+		Weapons: 120mm, 120mmHV
 	WithSpriteTurret:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode

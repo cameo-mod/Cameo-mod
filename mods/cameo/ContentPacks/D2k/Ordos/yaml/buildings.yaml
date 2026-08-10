@@ -601,6 +601,8 @@ ordos_autogunturret:
 	BodyOrientation:
 		QuantizedFacings: 32
 	WithMuzzleOverlay:
+	WithMuzzleSmoke:
+		Weapons: ordos_autogunturret
 	WithSpriteBody:
 		Name: make
 		Sequence: invisible
