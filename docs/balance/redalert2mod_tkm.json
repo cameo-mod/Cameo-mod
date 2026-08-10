@@ -10,16 +10,29 @@
       "damage_warheads": [
        {
         "damage": "2000",
+        "falloff": null,
+        "spread": "250",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "1",
+        "falloff": null,
+        "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 0",
+        "spread": "300",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -43,7 +56,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "4",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -69,17 +91,44 @@
      {
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -111,17 +160,44 @@
       "burst": "2",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -153,17 +229,44 @@
       "burst": "2",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -242,12 +345,30 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "16000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "8",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "16000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "8",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -276,12 +397,30 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "16000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "8",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "16000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "8",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -309,12 +448,30 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "16000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "8",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "16000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "8",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -341,22 +498,58 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "16000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "16000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "8",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -469,7 +662,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -890,12 +1092,30 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
+        "falloff": "100, 0",
+        "spread": "200",
+        "tag": "Bullet_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 0",
+        "spread": "300",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -923,7 +1143,16 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
+        "falloff": "100, 0",
+        "spread": "300",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -987,14 +1216,32 @@
      {
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "MissileHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -1057,14 +1304,32 @@
      {
       "damage_warheads": [
        {
-        "damage": "4",
-        "tag": "CannonAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "8000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "CannonAP_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "CannonAP_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -1127,14 +1392,32 @@
      {
       "damage_warheads": [
        {
-        "damage": "8",
-        "tag": "MissileHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "16000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "MissileHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "16000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -1189,14 +1472,32 @@
      {
       "damage_warheads": [
        {
-        "damage": "10",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "20000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -1282,16 +1583,22 @@
       "damage_warheads": [
        {
         "damage": "-2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "1000",
         "tag": "HealingWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "-1000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "500",
         "tag": "ExtraHealing",
         "type": "SpreadDamage"
        },
        {
         "damage": "-1",
+        "falloff": "100",
+        "spread": "5000",
         "tag": "HealingWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
@@ -1315,16 +1622,22 @@
       "damage_warheads": [
        {
         "damage": "-2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "1000",
         "tag": "HealingWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "-1000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "500",
         "tag": "ExtraHealing",
         "type": "SpreadDamage"
        },
        {
         "damage": "-1",
+        "falloff": "100",
+        "spread": "5000",
         "tag": "HealingWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
@@ -1349,16 +1662,22 @@
       "damage_warheads": [
        {
         "damage": "-2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "1000",
         "tag": "RepairWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "-1000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "500",
         "tag": "ExtraRepair",
         "type": "SpreadDamage"
        },
        {
         "damage": "-1",
+        "falloff": "100",
+        "spread": "5000",
         "tag": "RepairWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
@@ -1384,16 +1703,22 @@
       "damage_warheads": [
        {
         "damage": "-2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "1000",
         "tag": "RepairWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "-1000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "500",
         "tag": "ExtraRepair",
         "type": "SpreadDamage"
        },
        {
         "damage": "-1",
+        "falloff": "100",
+        "spread": "5000",
         "tag": "RepairWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
@@ -1456,7 +1781,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
+        "falloff": "100, 0",
+        "spread": "300",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -1482,14 +1816,32 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "3",
+        "falloff": "100, 0",
+        "spread": "200",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -1514,7 +1866,16 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
+        "falloff": "100, 0",
+        "spread": "300",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -1541,14 +1902,32 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "3",
+        "falloff": "100, 0",
+        "spread": "200",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -1617,7 +1996,16 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 0",
+        "spread": "200",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -1645,7 +2033,16 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 0",
+        "spread": "300",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -1672,7 +2069,16 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 0",
+        "spread": "200",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -1701,7 +2107,16 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 0",
+        "spread": "300",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -1767,7 +2182,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "4",
+        "falloff": "100, 0",
+        "spread": "200",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -1793,7 +2217,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "10000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "5",
+        "falloff": "100, 0",
+        "spread": "200",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -1820,7 +2253,16 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "4",
+        "falloff": "100, 0",
+        "spread": "200",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -1893,7 +2335,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "18000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "9",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -1919,7 +2370,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "18000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "9",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -1946,7 +2406,16 @@
       "burst": "2",
       "damage_warheads": [
        {
+        "damage": "18000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "9",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -1972,14 +2441,32 @@
      {
       "damage_warheads": [
        {
+        "damage": "18000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "9",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -2006,7 +2493,16 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
+        "damage": "18000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "9",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -2033,7 +2529,16 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
+        "damage": "18000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "9",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -2061,7 +2566,16 @@
       "burst": "2",
       "damage_warheads": [
        {
+        "damage": "18000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "9",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -2088,14 +2602,32 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
+        "damage": "18000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "9",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -2162,7 +2694,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "44000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "22",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "5",
         "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -2188,7 +2729,16 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
+        "damage": "44000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "22",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "5",
         "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -2258,7 +2808,16 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "5",
         "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -2286,7 +2845,16 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "5",
         "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -2373,9 +2941,18 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flame_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Flame_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -2401,9 +2978,18 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flame_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Flame_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -2471,7 +3057,16 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 0",
+        "spread": "200",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -2499,7 +3094,16 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 0",
+        "spread": "200",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -2524,14 +3128,32 @@
      {
       "damage_warheads": [
        {
-        "damage": "3",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Demolition_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -2558,14 +3180,32 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "3",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Demolition_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -2638,90 +3278,139 @@
      {
       "damage_warheads": [
        {
+        "damage": "32000",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "200",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "16",
-        "tag": "TeslaCharged_Super_Percentage",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "100",
+        "tag": "Tesla_Super_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "1000",
-        "tag": "TeslaCharged_Super_ExtraDamage",
+        "damage": "16000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
         "type": "SpreadDamage"
        },
        {
+        "damage": "32000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "16",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
+        "falloff": null,
+        "spread": "400",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
        {
         "damage": "16",
+        "falloff": null,
+        "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
+        "falloff": null,
+        "spread": "100",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
+        "falloff": null,
+        "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
+        "falloff": null,
+        "spread": "250",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "16",
+        "falloff": null,
+        "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
+        "falloff": null,
+        "spread": "200",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
+        "falloff": null,
+        "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "32000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "16",
+        "falloff": null,
+        "spread": null,
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "16",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "32000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
        },
        {
-        "damage": "16000",
-        "tag": "TeslaChargedExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "16",
+        "falloff": null,
+        "spread": null,
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.375,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7879",
       "reloaddelay": "100",
       "slot": "Armament@lockdown",
       "versus_templates": [
-       "^Warhead_TeslaCharged_Super",
+       "^Warhead_Tesla_Super",
        "^Projectile_Lightning_Super",
        "^Effect_Tesla_Super",
        "VonSniperAP"
       ],
       "warheads": [
-       "^Warhead_TeslaCharged_Super",
+       "^Warhead_Tesla_Super",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "VonSniperLockdown",
@@ -2730,47 +3419,72 @@
      {
       "damage_warheads": [
        {
+        "damage": "6000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "3",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
+        "falloff": null,
+        "spread": "400",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
+        "falloff": null,
+        "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
+        "falloff": null,
+        "spread": "100",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
+        "falloff": null,
+        "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
+        "falloff": null,
+        "spread": "250",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
+        "falloff": null,
+        "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
+        "falloff": null,
+        "spread": "200",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
+        "falloff": null,
+        "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        }
@@ -2800,57 +3514,100 @@
      {
       "damage_warheads": [
        {
+        "damage": "16000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "8",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "16000",
+        "falloff": null,
+        "spread": "400",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
        {
         "damage": "8",
+        "falloff": null,
+        "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
+        "falloff": null,
+        "spread": "100",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
+        "falloff": null,
+        "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "16000",
+        "falloff": null,
+        "spread": "250",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "8",
+        "falloff": null,
+        "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
+        "falloff": null,
+        "spread": "200",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
+        "falloff": null,
+        "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "16000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "8",
+        "falloff": null,
+        "spread": null,
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "16000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "8",
+        "falloff": null,
+        "spread": null,
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -2875,47 +3632,72 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
+        "damage": "6000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "3",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
+        "falloff": null,
+        "spread": "400",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
+        "falloff": null,
+        "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
+        "falloff": null,
+        "spread": "100",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
+        "falloff": null,
+        "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
+        "falloff": null,
+        "spread": "250",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
+        "falloff": null,
+        "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
+        "falloff": null,
+        "spread": "200",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
+        "falloff": null,
+        "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        }
@@ -2946,57 +3728,100 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
+        "damage": "16000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "8",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "16000",
+        "falloff": null,
+        "spread": "400",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
        {
         "damage": "8",
+        "falloff": null,
+        "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
+        "falloff": null,
+        "spread": "100",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
+        "falloff": null,
+        "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "16000",
+        "falloff": null,
+        "spread": "250",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "8",
+        "falloff": null,
+        "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
+        "falloff": null,
+        "spread": "200",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
        {
         "damage": "3",
+        "falloff": null,
+        "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "16000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "8",
+        "falloff": null,
+        "spread": null,
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "16000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "8",
+        "falloff": null,
+        "spread": null,
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -3066,7 +3891,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "80000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "40",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "5",
         "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -3092,7 +3926,16 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
+        "damage": "80000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "40",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "5",
         "tag": "Sniper_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -3165,7 +4008,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -3191,7 +4043,16 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Melee_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -3900,7 +4761,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "12000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "6",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -3972,7 +4842,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "20000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "10",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -3998,7 +4877,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "18000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "9",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -4025,7 +4913,16 @@
       "burst": "2",
       "damage_warheads": [
        {
+        "damage": "18000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "9",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -4051,14 +4948,32 @@
      {
       "damage_warheads": [
        {
+        "damage": "18000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "9",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -4130,16 +5045,22 @@
       "damage_warheads": [
        {
         "damage": "-2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "1024",
         "tag": "HealingWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "-1000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "1024",
         "tag": "ExtraHealing",
         "type": "SpreadDamage"
        },
        {
         "damage": "-1",
+        "falloff": "100",
+        "spread": "1024",
         "tag": "HealingWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
@@ -4209,14 +5130,32 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "20",
-        "tag": "MissileHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "MissileHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -4244,14 +5183,32 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "20",
-        "tag": "MissileHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "MissileHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -4277,14 +5234,32 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "20",
-        "tag": "MissileHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "MissileHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -4310,47 +5285,93 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "4000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
+        "falloff": null,
+        "spread": null,
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
        {
         "damage": "2000",
+        "falloff": null,
+        "spread": null,
         "tag": "GrenadeFriendlyFire",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
+        "falloff": null,
+        "spread": null,
         "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
+        "falloff": null,
+        "spread": null,
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
+        "falloff": null,
+        "spread": null,
         "tag": "FlakWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "4000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
+        "falloff": null,
+        "spread": null,
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -4381,47 +5402,93 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "4000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
+        "falloff": null,
+        "spread": null,
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
        {
         "damage": "2000",
+        "falloff": null,
+        "spread": null,
         "tag": "GrenadeFriendlyFire",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
+        "falloff": null,
+        "spread": null,
         "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
+        "falloff": null,
+        "spread": null,
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
+        "falloff": null,
+        "spread": null,
         "tag": "FlakWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "4000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
+        "falloff": null,
+        "spread": null,
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -4452,24 +5519,60 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "MissileHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -4500,24 +5603,60 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "MissileHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -4546,14 +5685,32 @@
      {
       "damage_warheads": [
        {
-        "damage": "40",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "80000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "40",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "80000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flame_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "40",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Flame_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -4631,6 +5788,8 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "falloff": null,
+        "spread": "3",
         "tag": "1Dam",
         "type": "SpreadDamage"
        }
@@ -4742,16 +5901,22 @@
       "damage_warheads": [
        {
         "damage": "-2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "1024",
         "tag": "HealingWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "-1000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "1024",
         "tag": "ExtraHealing",
         "type": "SpreadDamage"
        },
        {
         "damage": "-1",
+        "falloff": "100",
+        "spread": "1024",
         "tag": "HealingWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
@@ -4865,14 +6030,32 @@
      {
       "damage_warheads": [
        {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
+        "falloff": "100, 0",
+        "spread": "200",
+        "tag": "Bullet_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -4897,14 +6080,32 @@
      {
       "damage_warheads": [
        {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
+        "falloff": "100, 0",
+        "spread": "200",
+        "tag": "Bullet_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -5037,16 +6238,22 @@
       "damage_warheads": [
        {
         "damage": "-2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
         "tag": "RepairWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "-1000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "100",
         "tag": "ExtraRepair",
         "type": "SpreadDamage"
        },
        {
         "damage": "-1",
+        "falloff": "100",
+        "spread": "1000",
         "tag": "RepairWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
@@ -5115,14 +6322,32 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "20",
-        "tag": "MissileHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "MissileHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -5150,14 +6375,32 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "20",
-        "tag": "MissileHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "MissileHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -5183,14 +6426,32 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "20",
-        "tag": "MissileHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "MissileHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -5216,47 +6477,93 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "4000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
+        "falloff": null,
+        "spread": null,
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
        {
         "damage": "2000",
+        "falloff": null,
+        "spread": null,
         "tag": "GrenadeFriendlyFire",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
+        "falloff": null,
+        "spread": null,
         "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
+        "falloff": null,
+        "spread": null,
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
+        "falloff": null,
+        "spread": null,
         "tag": "FlakWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "4000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
+        "falloff": null,
+        "spread": null,
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -5287,47 +6594,93 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "4000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
+        "falloff": null,
+        "spread": null,
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
        {
         "damage": "2000",
+        "falloff": null,
+        "spread": null,
         "tag": "GrenadeFriendlyFire",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
+        "falloff": null,
+        "spread": null,
         "tag": "GrenadePercentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
+        "falloff": null,
+        "spread": null,
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
+        "falloff": null,
+        "spread": null,
         "tag": "FlakWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "4000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
+        "falloff": null,
+        "spread": null,
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -5358,24 +6711,60 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "MissileHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -5406,24 +6795,60 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "MissileHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -5452,14 +6877,32 @@
      {
       "damage_warheads": [
        {
-        "damage": "60",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "120000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "60",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "120000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flame_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "60",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Flame_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -5536,7 +6979,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 0",
+        "spread": "300",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -5559,7 +7011,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "24000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "12",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "MissileAP_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -5585,14 +7046,32 @@
      {
       "damage_warheads": [
        {
+        "damage": "24000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "12",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flame_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Flame_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -5665,17 +7144,37 @@
      {
       "damage_warheads": [
        {
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "512",
+        "tag": "Railgun_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "512",
         "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
        }
@@ -5756,6 +7255,8 @@
       "damage_warheads": [
        {
         "damage": "1",
+        "falloff": null,
+        "spread": "5",
         "tag": "1Dam",
         "type": "SpreadDamage"
        }
@@ -5777,7 +7278,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "10000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "5",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -5802,7 +7312,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 0",
+        "spread": "300",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -5872,7 +7391,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
+        "falloff": "100, 0",
+        "spread": "300",
         "tag": "Bullet_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -5898,14 +7426,32 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "3",
+        "falloff": "100, 0",
+        "spread": "200",
         "tag": "Bullet_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -5973,7 +7519,16 @@
      {
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "4",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -5999,7 +7554,16 @@
       "burst": "2",
       "damage_warheads": [
        {
+        "damage": "18000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "9",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -6118,7 +7682,16 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "20000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "10",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -6145,7 +7718,16 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "20000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "10",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -6172,7 +7754,16 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "20000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "10",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -6198,17 +7789,44 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
         "tag": "Flame_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Concussion_Medium_Percentage",
         "type": "HealthPercentageDamage"
        }
@@ -6283,14 +7901,32 @@
      {
       "damage_warheads": [
        {
-        "damage": "10",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "20000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -6416,14 +8052,32 @@
      {
       "damage_warheads": [
        {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
+        "falloff": "100, 0",
+        "spread": "200",
+        "tag": "Bullet_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -6448,14 +8102,32 @@
      {
       "damage_warheads": [
        {
-        "damage": "1",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
+        "falloff": "100, 0",
+        "spread": "200",
+        "tag": "Bullet_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
         "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
