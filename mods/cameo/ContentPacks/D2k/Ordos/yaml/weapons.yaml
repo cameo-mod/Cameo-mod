@@ -1016,7 +1016,7 @@ ordos_autogunturret:
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^Warhead_Bullet_Medium
 	Inherits@3: ^Warhead_CannonHE_Heavy
-	Inherits@4: ^Projectile_Shell_Heavy
+	Inherits@4: ^Projectile_Bullet_Medium
 	Inherits@5: ^Effect_CannonHE_Heavy
 	ReloadDelay: 22
 	Burst: 4
@@ -1025,6 +1025,18 @@ ordos_autogunturret:
 	-Report:
 	StartBurstReport: autoguntrt.wav
 	ValidTargets: Ground, Water, Air
+	Projectile: Bullet
+		-Image:
+		ProjectileStreakLength: 1536
+		ProjectileStreakLengthVariation: 384
+		ProjectileStreakWidth: 32
+		ProjectileStreakColor: FFA32B
+		ContrailLength: 0
+		Speed: 4000
+	Warhead@Effect:
+		Explosions: piffs
+	Warhead@EffectWater:
+		Explosions: water_piffs
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000

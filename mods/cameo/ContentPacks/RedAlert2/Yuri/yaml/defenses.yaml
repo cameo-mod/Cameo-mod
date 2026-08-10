@@ -349,7 +349,7 @@ yuri_gatlingcannon:
 		PauseOnCondition: lowpower || disabled
 	Armament@1:
 		Name: primary
-		Weapon: RA2GattlingMG1
+		Weapon: YuriGatlingCannonMG1
 		PauseOnCondition: gatling
 		LocalOffset: 500,140,400, 500,-150,400
 		MuzzleSequence: muzzle
@@ -359,7 +359,7 @@ yuri_gatlingcannon:
 		CasingTargetOffset: 0,740,0, 0,-750,0
 	Armament@2:
 		Name: primary
-		Weapon: RA2GattlingMG2
+		Weapon: YuriGatlingCannonMG2
 		PauseOnCondition: gatling != 1
 		LocalOffset: 500,140,400, 500,-150,400
 		MuzzleSequence: muzzle-1
@@ -369,7 +369,7 @@ yuri_gatlingcannon:
 		CasingTargetOffset: 0,740,0, 0,-750,0
 	Armament@3:
 		Name: primary
-		Weapon: RA2GattlingMG3
+		Weapon: YuriGatlingCannonMG3
 		PauseOnCondition: gatling < 2
 		LocalOffset: 500,140,400, 500,-150,400
 		MuzzleSequence: muzzle-2
@@ -379,7 +379,7 @@ yuri_gatlingcannon:
 		CasingTargetOffset: 0,740,0, 0,-750,0
 	Armament@1AA:
 		Name: secondary
-		Weapon: RA2GattlingMG1_AA
+		Weapon: YuriGatlingCannonMG1_AA
 		PauseOnCondition: gatling
 		LocalOffset: 500,140,400, 500,-150,400
 		MuzzleSequence: muzzle
@@ -389,7 +389,7 @@ yuri_gatlingcannon:
 		CasingTargetOffset: 0,740,0, 0,-750,0
 	Armament@2AA:
 		Name: secondary
-		Weapon: RA2GattlingMG2_AA
+		Weapon: YuriGatlingCannonMG2_AA
 		PauseOnCondition: gatling != 1
 		LocalOffset: 500,140,400, 500,-150,400
 		MuzzleSequence: muzzle-1
@@ -399,7 +399,7 @@ yuri_gatlingcannon:
 		CasingTargetOffset: 0,740,0, 0,-750,0
 	Armament@3AA:
 		Name: secondary
-		Weapon: RA2GattlingMG3_AA
+		Weapon: YuriGatlingCannonMG3_AA
 		PauseOnCondition: gatling < 2
 		LocalOffset: 500,140,400, 500,-150,400
 		MuzzleSequence: muzzle-2
@@ -416,7 +416,7 @@ yuri_gatlingcannon:
 		Armaments: secondary
 	WithMuzzleOverlay:
 	WithMuzzleSmoke:
-		Weapons: RA2GattlingMG1, RA2GattlingMG2, RA2GattlingMG3, RA2GattlingMG1_AA, RA2GattlingMG2_AA, RA2GattlingMG3_AA
+		Weapons: YuriGatlingCannonMG1, YuriGatlingCannonMG2, YuriGatlingCannonMG3, YuriGatlingCannonMG1_AA, YuriGatlingCannonMG2_AA, YuriGatlingCannonMG3_AA
 	BodyOrientation:
 		QuantizedFacings: 16
 	WithVoxelTurret:
