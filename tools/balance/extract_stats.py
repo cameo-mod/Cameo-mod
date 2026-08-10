@@ -31,6 +31,7 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/audit"))
 from cameo_model import Model  # noqa: E402
+import effective_damage as effmod  # noqa: E402
 
 OUT = ROOT / "docs/balance"
 PACKS = ROOT / "mods/cameo/ContentPacks"
@@ -349,6 +350,13 @@ def weapon_entry(rs, wname: str) -> dict | None:
     out["damage_warheads"] = damage_warheads
     if not damage_warheads:
         out["extraction_note"] = "no_damage_warheads"
+    ed = effmod.effective_damage(resolved)
+    if ed is not None:
+        out["effective_damage"] = round(ed[0], 2)
+        out["effective_base_total"] = ed[1]
+        out["effective_footprint_cells2"] = round(ed[2], 4)
+        out["effective_avg_reliability"] = round(ed[3], 4)
+        out["effective_sigma"] = round(ed[4], 2)
     if local is not None:
         out["versus_templates"] = [c.value for c in local.children
                                    if c.key == "Inherits" or c.key.startswith("Inherits@")]
