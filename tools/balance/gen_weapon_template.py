@@ -194,7 +194,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
            falloffs=("100, 50, 33, 25, 20", "100, 50, 30, 18, 10",
                      "100, 50, 25, 10, 5", "100, 50, 20, 8, 3"),
            damage_types="Prone75Percent, TriggerProne, ExplosionDeath",
-           hazmat=50, reload=25, rng=5120, versus_override=None, physical_states=None):
+           hazmat=50, reload=25, rng=5120, versus_override=None, physical_states=None, emp=None):
     """mode: None = sloped (from order16); 'flat' = Sonic (uniform flat, small %);
     'pct' = Magic (tiny uniform flat + LARGE uniform % of max HP).
     Every main warhead is AreaDamage with baked UNIVERSAL friendly fire
@@ -266,6 +266,11 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         parts = main_wh + pct_wh
         if name in CHIPS:  # paid-for ExtraDamage chip (energy families only)
             parts.append(emit_chip(tag, name, damage, vt))
+        if emp and level in emp:  # EMP integrity damage (Tesla-style), per-tier Damage
+            parts.append("\n".join([
+                "\tWarhead@EMPUnit: AffectsIntegrity",
+                "\t\tValidRelationships: Neutral, Enemy",
+                f"\t\tDamage: {emp[level]}"]))
         blocks.append("\n".join(parts))
     return "\n\n".join(blocks)
 
@@ -375,6 +380,25 @@ def blend_versus(parents):
     return fn
 
 
+# Storm = Ixian Tesla + Magic superweapon blend (maintainer 2026-08-10). NOT a plain per-armor average:
+# the SUPER tier flat = avg(TeslaCharged main, Magic 20 flat, TeslaCharged-ExtraDamage/5); the %-twin =
+# avg(TeslaCharged %-Versus, Magic-super %-Versus 1300). Every lower tier is that SUPER profile SCALED by
+# WC[level]/WC[Super]. The %-magnitude lives in Versus (Damage stays the 1-per-2000 grid, so it scales).
+STORM_LEVELS = ["Light", "Medium", "Heavy", "Super"]
+
+
+def storm_versus(level):
+    tc_main, tc_pct = _family_main_pct("TeslaCharged", "Super")
+    extra, ef = CHIPS["TeslaCharged"], CHIP_FLOOR["TeslaCharged"]
+    magic_pct = PCT_VALUES["Super"] * 100          # 1300 = Magic-super giant-killer, encoded in Versus
+    keys = ["Shield"] + BLEND_ARMOR_ORDER
+    base_main = {a: (tc_main[a] + PCT_MAIN + extra.get(a, ef) // 5) // 3 for a in keys}
+    base_pct = {a: (tc_pct[a] + magic_pct) // 2 for a in keys}
+    f = WC[level] / WC["Super"]                     # Super 1.0, Heavy .833, Medium .667, Light .5
+    return ([(a, int(base_main[a] * f)) for a in keys],
+            [(a, int(base_pct[a] * f)) for a in keys])
+
+
 if __name__ == "__main__":
     argv = sys.argv[1:]
     if "--list" in argv:
@@ -410,6 +434,9 @@ if __name__ == "__main__":
             continue
         for level in lv:
             print(f"#   ^Warhead_{nm}_{level}: {WC[level]}  (blend of {'+'.join(parents)})")
+    if not wanted or "storm" in wanted:
+        for level in STORM_LEVELS:
+            print(f"#   ^Warhead_Storm_{level}: {WC[level]}  (Tesla+Magic superweapon blend)")
     print()
     for nm, (bl, d, air, lv) in WEAPONS.items():
         if wanted and nm.lower() not in wanted:
@@ -439,4 +466,11 @@ if __name__ == "__main__":
         vt = valid_targets(False)  # plasma is a ground weapon (like flame/chem)
         print(f"###### {nm}: blend of {'+'.join(parents)} + PhysicalStates {states} ######")
         print(family(nm, None, vt, lv, versus_override=blend_versus(parents), physical_states=states))
+        print()
+    if not wanted or "storm" in wanted:
+        print("###### Storm: TeslaCharged + Magic + TeslaChargedExtraDamage/5 (Super-anchored, scaled down) ######")
+        print(family("Storm", None, valid_targets(False), STORM_LEVELS,
+                     versus_override=storm_versus, hazmat=None,
+                     damage_types="Prone100Percent, TriggerProne, ElectricityDeath, Tesla",
+                     emp={"Light": 500, "Medium": 1000, "Heavy": 1500, "Super": 2000}))
         print()

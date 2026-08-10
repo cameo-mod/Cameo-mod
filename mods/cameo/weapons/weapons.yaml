@@ -6385,6 +6385,247 @@ DefuseKit:
 			Spaceship: 11
 		UpdatesUnitStatistics: false
 
+###### Storm: TeslaCharged + Magic + TeslaChargedExtraDamage/5 (Super-anchored, scaled down) ######
+^Warhead_Storm_Light:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Storm_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 2000
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 42
+			None: 24
+			Flak: 25
+			Plate: 27
+			Heroic: 29
+			Scout: 19
+			Light: 21
+			Medium: 23
+			Heavy: 24
+			Superheavy: 26
+			Wood: 15
+			Steel: 17
+			Concrete: 17
+			Fighter: 12
+			Bomber: 13
+			Helicopter: 13
+			Spaceship: 14
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Storm_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 336
+			None: 330
+			Flak: 331
+			Plate: 331
+			Heroic: 332
+			Scout: 330
+			Light: 331
+			Medium: 331
+			Heavy: 332
+			Superheavy: 332
+			Wood: 329
+			Steel: 330
+			Concrete: 330
+			Fighter: 328
+			Bomber: 329
+			Helicopter: 329
+			Spaceship: 329
+		UpdatesUnitStatistics: false
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidRelationships: Neutral, Enemy
+		Damage: 500
+
+^Warhead_Storm_Medium:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Storm_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 600
+		Damage: 2000
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			Shield: 56
+			None: 32
+			Flak: 34
+			Plate: 36
+			Heroic: 39
+			Scout: 25
+			Light: 28
+			Medium: 30
+			Heavy: 32
+			Superheavy: 35
+			Wood: 20
+			Steel: 23
+			Concrete: 22
+			Fighter: 16
+			Bomber: 17
+			Helicopter: 18
+			Spaceship: 18
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Storm_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 1
+		Falloff: 100, 50, 30, 18, 10
+		Versus:
+			Shield: 448
+			None: 440
+			Flak: 441
+			Plate: 442
+			Heroic: 442
+			Scout: 440
+			Light: 441
+			Medium: 442
+			Heavy: 442
+			Superheavy: 443
+			Wood: 439
+			Steel: 440
+			Concrete: 440
+			Fighter: 438
+			Bomber: 438
+			Helicopter: 438
+			Spaceship: 439
+		UpdatesUnitStatistics: false
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+
+^Warhead_Storm_Heavy:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Storm_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 800
+		Damage: 2000
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 70
+			None: 40
+			Flak: 42
+			Plate: 45
+			Heroic: 49
+			Scout: 31
+			Light: 35
+			Medium: 38
+			Heavy: 40
+			Superheavy: 44
+			Wood: 25
+			Steel: 29
+			Concrete: 28
+			Fighter: 20
+			Bomber: 21
+			Helicopter: 22
+			Spaceship: 23
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Storm_Heavy_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 1
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 560
+			None: 550
+			Flak: 551
+			Plate: 552
+			Heroic: 553
+			Scout: 550
+			Light: 551
+			Medium: 552
+			Heavy: 553
+			Superheavy: 554
+			Wood: 549
+			Steel: 550
+			Concrete: 550
+			Fighter: 547
+			Bomber: 548
+			Helicopter: 548
+			Spaceship: 549
+		UpdatesUnitStatistics: false
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidRelationships: Neutral, Enemy
+		Damage: 1500
+
+^Warhead_Storm_Super:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Storm_Super: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 1000
+		Damage: 2000
+		Falloff: 100, 50, 20, 8, 3
+		Versus:
+			Shield: 85
+			None: 48
+			Flak: 51
+			Plate: 55
+			Heroic: 59
+			Scout: 38
+			Light: 42
+			Medium: 46
+			Heavy: 49
+			Superheavy: 53
+			Wood: 30
+			Steel: 35
+			Concrete: 34
+			Fighter: 25
+			Bomber: 26
+			Helicopter: 27
+			Spaceship: 28
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Storm_Super_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 500
+		Damage: 1
+		Falloff: 100, 50, 20, 8, 3
+		Versus:
+			Shield: 672
+			None: 661
+			Flak: 662
+			Plate: 663
+			Heroic: 664
+			Scout: 661
+			Light: 662
+			Medium: 663
+			Heavy: 664
+			Superheavy: 665
+			Wood: 659
+			Steel: 660
+			Concrete: 660
+			Fighter: 657
+			Bomber: 658
+			Helicopter: 658
+			Spaceship: 659
+		UpdatesUnitStatistics: false
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidRelationships: Neutral, Enemy
+		Damage: 2000
+
 ###### Melee: INF > VEH > BLD > AIR (light, air=False) ######
 ^Warhead_Melee_Light:
 	ValidTargets: Ground
