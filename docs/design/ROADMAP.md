@@ -28,6 +28,23 @@ committed: `^MissileVehicleTemplate` + 10 reassignments (missile-MLRS family + N
 removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
 
 **Queue (priority order):**
+- **[NEXT — needs a maintainer warhead order] Adopt the Sonic family.** `^Warhead_Sonic_*` now bakes
+  the `SonicDebuff` mark (`5a14355e6`), but **nothing inherits it**, so it is inert. Candidates:
+  TS GDI `TSSonicZapWeapon` / `TSSonicZapWeaponSonic` (the Disruptor — currently Tesla + Magic),
+  the sonic UPGRADE variants `TSVulcanGunSonic` / `TSAssaultCannonSonic` / `TSAssaultCannonTalSonic` /
+  `TSHellfireSonic` / `TSZoneHellfireSonic` / `TSBombSonic` / `TSGrenadeSonic` / `KodiakCannonSonic`
+  (all still on the legacy `^SmallArms` / `^Chaingun` / `^TeslaWeapon` / `^MagicWeapon` inline
+  templates = Phase B territory), and RA2 `SonicZap`. **Law:** an effect upgrade ADDS
+  `^Warhead_Sonic_*` as an extra warhead — it never replaces the base damage TYPE
+  (`PHYSICAL_STATE_SYSTEM.md` §3b, same shape as the cryo retrofit). Warhead changes need explicit
+  permission (CLAUDE.md rule 4), so this is queued, not done.
+- **[RESOLVED 2026-08-11] BUILD 3 — Sonic mark.** Global rename `CommandoDebuff → SonicDebuff`
+  (29 lines / 8 yaml files; the `2100commandodebuff` asset + palette + sequences keep their names,
+  `^CommandoCall`/`^CommandoCallable` untouched) and the mark baked into all three
+  `^Warhead_Sonic_*` levels by `gen_weapon_template.py` (`FAMILY_CONDITION` → a zero-damage
+  `Warhead@<tag>_Debuff: GrantExternalCondition`; `Duration = 2 × ReloadDelay` = 50 ticks,
+  `Range = 2 × Spread` = 800/1200/1600, Enemy/Neutral only). Generator drift stays 1, empty-warhead 0,
+  `audit_physical_state_warheads` PASS. Boot-gated, `5a14355e6`. Spec: `PHYSICAL_STATE_SYSTEM.md` §5.
 - **[RESOLVED 2026-08-10, Devin] Upgraded Tesla weapons drained integrity at the same ratio as their
   un-upgraded base** — RA1 Tesla Doctrine (`PortaTesla_EMP`/`TTankZap_EMP`/`TTankZap2_EMP`/
   `TeslaZap_EMP`) and RA2 Tesla Overload (`RA2CoilBolt2`/`RA2OPCoilBolt2`/`RA2TankBolt2`/

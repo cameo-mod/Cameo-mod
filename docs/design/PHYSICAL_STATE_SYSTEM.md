@@ -171,7 +171,7 @@ used for Temperature's blue cold side) AND (b) **threshold artwork** at the extr
 | Temperature hot | 🔴 red (bar exists) | overheat glow at max | red overlay exists; max-heat art TBD |
 | Temperature cold | 🔵 blue (`@CryoFreeze` overlay) | ❄ `frostspark` at `superfreeze` | **exists** |
 | **Corrosion** | 🟢 **green tint**, ever-increasing 200→20000 (`WithPhysicalStateColoredOverlay`, colour only) | the **existing pulsating corrosion effect**, played ONLY at 100% (20000) | **mostly EXISTS** — pulse effect exists; green tint is just the colour trait |
-| **Sonic** | 🔵 **looped, transparently-shifting blue** overlay (the sonic-mark visual) | — (on-hit, short duration) | **NEW art needed** — a looped shifting-blue overlay |
+| **Sonic** | 🔵 **looped, transparently-shifting blue** overlay (the sonic-mark visual) | — (on-hit, short duration) | **NEW art needed** — a looped shifting-blue overlay. PLACEHOLDER live now: `^SonicDebuff` uses a flat `WithColoredOverlay@SONICDEBUFF` (`0088FF40`, Multiply) — swap it for the looped overlay when the art lands. The commented-out `WithDecoration@SONICDEBUFF` in `^SonicDebuff` still points at the existing `2100commandodebuff` icon. |
 | **Armor Breach** | very light **grey** scaling overlay | **breach icon** at 100% — a bullet punching through armor plating (when they take 200%) | **NEW art needed** — the breach icon; overlay is just grey colour |
 
 **New sprite art to create** (RGBA PngSheet per memory `cameo-custom-effects-pngsheet`; pair every new
@@ -180,7 +180,7 @@ effect with a sound): the **looped shifting-blue Sonic** overlay, and the **armo
 green tint is just a colour trait. The traits (`WithPhysicalStateColoredOverlay` / `WithIdleOverlay`)
 reference an image+sequence, so the yaml wires with placeholders and the art drops in later.
 
-## 5. Build STATUS + RESUME TRACKER (updated 2026-08-09 — ⭐ RESUME HERE after /compact)
+## 5. Build STATUS + RESUME TRACKER (updated 2026-08-11 — ⭐ RESUME HERE after /compact)
 
 **DONE (committed work was boot-gated unless noted):**
 - ✅ C# damage-scaled `PhysicalStateName`/`PhysicalStateScale` on `AreaDamage` + `_Percentage` — `406261128`
@@ -195,13 +195,24 @@ reference an image+sequence, so the yaml wires with placeholders and the art dro
 - ✅ Flame/Chemical `_Percentage` twins use `AreaDamagePercentage` and feed the matching meter; active
   fixed `ApplyPhysicalState` duplicates were removed, with `audit_physical_state_warheads` preventing
   regressions (static-audited; runtime test pending).
+- ✅ **BUILD 3 — Sonic mark** — global rename `CommandoDebuff → SonicDebuff` (29 lines / 8 yaml files:
+  `^SonicDebuff` in defaults.yaml + the condition, `Warhead@` keys and both `Inherits@`; the
+  `2100commandodebuff` **asset**, its sequences and its palette keep their own names) + the mark BAKED
+  into all three `^Warhead_Sonic_*` levels by the generator (`FAMILY_CONDITION` → a
+  `Warhead@<tag>_Debuff: GrantExternalCondition`, both numbers DERIVED: `Duration = 2 × ReloadDelay` = 50
+  ticks, `Range = 2 × Spread` = 800/1200/1600 = the half-damage radius). Zero damage → price-neutral,
+  drift stays 1. The predator laser / waveforce / IonPulse keep their own hand-tuned grants, now of the
+  renamed condition. `5a14355e6`
 - (Temperature axis + framework were ALREADY built — see §0.)
 
 **TODO — resume queue (in order):**
-1. **BUILD 3 — Sonic:** global rename `CommandoDebuff → SonicDebuff` (defaults.yaml `^CommandoDebuff` +
-   every grant/require: GDI predator blue laser, Japan waveforce, commandos) + bake a short-duration
-   `GrantExternalCondition` into `^Warhead_Sonic_*` (all levels) so every sonic hit applies it; fold
-   Japan `^WaveforceBulletWarhead` weapons + the predator into Sonic. boot-gate.
+1. **ADOPT the Sonic family** (needs a maintainer warhead order — rule 4): nothing inherits
+   `^Warhead_Sonic_*` yet, so the baked mark is inert. Candidates are the TS GDI sonic weapons
+   (`TSSonicZapWeapon`/`…Sonic` = the Disruptor, currently Tesla+Magic; `TSVulcanGunSonic`,
+   `TSAssaultCannonSonic`, `TSHellfireSonic`, `TSBombSonic`, `TSGrenadeSonic` = sonic UPGRADE variants
+   still on the legacy `^SmallArms`/`^Chaingun`/`^TeslaWeapon`/`^MagicWeapon` inline templates) and RA2
+   `SonicZap`. Same shape as the cryo retrofit (§3b): the upgrade ADDS `^Warhead_Sonic_*` as a second
+   warhead rather than replacing the base one — never drop a damage TYPE.
 2. **BUILD 4 — new axes:** Armor Breach (new PhysicalState axis on defaults, mirror Temperature +
    `DamageMultiplierProportional`, AP/Railgun feed it; grey overlay + breach-icon @100%); Hex (Magic →
    −firepower/inaccuracy condition); Knockback = new C# `PushWarhead` in `OpenRA.Mods.Cameo/Warheads/`.
@@ -225,7 +236,7 @@ DECIDED:
 1. **Corrosion peak** = DoT + slow + vuln (values in §2). Hazmat halves the DoT.
 2. **Cryo = a thin child of Prism** — `^Warhead_Cryo_*` inherits `^Warhead_Prism_*` and only adds Temperature −100; base Prism (Prism Tank / Athena Cannon) stays freeze-free. Prism anti-LIGHT Versus already locked.
 3. **New axes to build:** Armor Breach + Hex + Knockback (new C# `PushWarhead`) + the base wiring (Corrosion/Prism-cryo/Plasma/Sonic).
-4. **Sonic** = global `CommandoDebuff → SonicDebuff`, baked into `^Warhead_Sonic_*` (predator laser + waveforce keep applying it).
+4. **Sonic** = global `CommandoDebuff → SonicDebuff`, baked into `^Warhead_Sonic_*` (predator laser + waveforce keep applying it). **BUILT `5a14355e6`** — the family templates now grant the mark themselves; the three hand-tuned grants (GDI predator laser 22/222, Japan waveforce 222/666 + 150/1500, RA2 `IonPulseDischarge`'s 4 expanding rings) were only renamed, not folded, because converting their warheads is a separate permission-gated change.
 5. **Every axis needs its own art** (§4b) — green pulsating corrosion overlay + armor-breach breach-icon are NEW assets.
 
 6. **Plasma Versus** = the **per-armor blend (average) of the Flame and Chemical ladders** (maintainer:
