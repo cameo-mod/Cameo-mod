@@ -11981,9 +11981,10 @@ SpiceExplosion:
 generic_bullet_casing:
 	Range: 1c0
 	Projectile: Bullet
-		Speed: 48
+		Speed: 24, 72
 		Blockable: false
-		LaunchAngle: 100
+		LaunchAngle: 55, 145
+		Inaccuracy: 384
 		Image: generic_bullet_casing
 		Sequences: idle
 		Palette: d2keffect
