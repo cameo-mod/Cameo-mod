@@ -34,7 +34,7 @@
 		Sequence: rank-veteran-1
 		Palette: effect
 		Position: BottomRight
-		Scale: 0.25
+		Scale: 0.50
 		ScaleWithZoom: True
 		RequiresCondition: rank-veteran == 1 && !rank-elite
 	WithDecoration@RANK-2:
@@ -42,7 +42,7 @@
 		Sequence: rank-veteran-2
 		Palette: effect
 		Position: BottomRight
-		Scale: 0.25
+		Scale: 0.50
 		ScaleWithZoom: True
 		RequiresCondition: rank-veteran == 2 && !rank-elite
 	WithDecoration@RANK-3:
@@ -50,7 +50,7 @@
 		Sequence: rank-veteran-3
 		Palette: effect
 		Position: BottomRight
-		Scale: 0.25
+		Scale: 0.50
 		ScaleWithZoom: True
 		RequiresCondition: rank-veteran == 3 && !rank-elite
 	WithDecoration@RANK-4:
@@ -58,7 +58,7 @@
 		Sequence: rank-veteran-4
 		Palette: effect
 		Position: BottomRight
-		Scale: 0.25
+		Scale: 0.50
 		ScaleWithZoom: True
 		RequiresCondition: rank-veteran == 4 && !rank-elite
 	WithDecoration@RANK-ELITE:
@@ -66,7 +66,7 @@
 		Sequence: rank-elite
 		Palette: effect
 		Position: BottomRight
-		Scale: 0.25
+		Scale: 0.50
 		ScaleWithZoom: True
 		RequiresCondition: rank-elite
 	DamageMultiplier@RANK-1:
