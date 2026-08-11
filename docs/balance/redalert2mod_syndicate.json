@@ -3185,67 +3185,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
        },
        {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Flame_Light_Percentage",
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -3259,7 +3210,7 @@
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
         "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
@@ -3270,12 +3221,13 @@
       "requires": "latinsyndicate_doctrine_eliteguerillas && !rank-elite",
       "slot": "Armament@Molotov",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
+       "^Warhead_Flame_Light",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
+       "^Warhead_Flame_Light",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov",
@@ -3286,67 +3238,18 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
        },
        {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Flame_Light_Percentage",
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -3360,7 +3263,7 @@
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
         "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
@@ -3374,6 +3277,7 @@
        "latinsyndicate_latinmilitia_molotov"
       ],
       "warheads": [
+       "^Warhead_Flame_Light",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov_elite",
@@ -3455,67 +3359,18 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
        },
        {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Flame_Light_Percentage",
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -3529,7 +3384,7 @@
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
         "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
@@ -3540,12 +3395,13 @@
       "requires": "latinsyndicate_doctrine_eliteguerillas && !rank-elite",
       "slot": "Armament@MolotovGARRISONED",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade"
+       "^Warhead_Flame_Light",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
+       "^Warhead_Flame_Light",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov",
@@ -3557,67 +3413,18 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
        },
        {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Flame_Light_Percentage",
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -3631,7 +3438,7 @@
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
         "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
@@ -3645,6 +3452,7 @@
        "latinsyndicate_latinmilitia_molotov"
       ],
       "warheads": [
+       "^Warhead_Flame_Light",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov_elite",

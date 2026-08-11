@@ -17,36 +17,23 @@ latinsyndicate_latinmilitia_ak47_elite:
 	BurstDelays: 3
 
 latinsyndicate_latinmilitia_molotov:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^ShrapnelWeapon
-	Inherits@4: ^RA2Grenade
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@wh2: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 93
 	Range: 4500
 	Report: vlasatta.wav
 	Projectile: Bullet
 		Speed: 400
-	Warhead@LightFlameWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 1
+	Warhead@Flame_Light:
+		Damage: 6000
+	Warhead@Flame_Light_Percentage:
+		Damage: 3
 	Warhead@Demolition_Light:
 		Damage: 2000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+		FriendlyFireDamage: 0
+	Warhead@Demolition_Light_Percentage:
 		Damage: 1
 	Warhead@FireShrapnel: FireShrapnel
 		InvalidTargets: FireImmune
