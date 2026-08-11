@@ -684,44 +684,19 @@ TSMammothTusk2II_AA:
 		Explosions: small_building
 
 TSHellfireSonic:
-	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_Magic_Heavy
-	Inherits@3: ^Effect_Magic_Heavy
-	Projectile: Missile
-		Arm: 0
-		Blockable: false
-		AllowSnapping: true
-		Inaccuracy: 200
-	# 	Image: DRAGON
-		Shadow: true
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-	# 	TrailImage: smokey
-	# 	TrailInterval: 1
-	# 	ContrailLength: 0
-		MaximumLaunchSpeed: 200
-		MinimumLaunchSpeed: 200
-		Speed: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-	Warhead@Tesla_Heavy:
+	Inherits@wh: ^Warhead_Sonic_Medium
+	Inherits@proj: ^Projectile_TS_Missile_Medium
+	Inherits@fx: ^Effect_Sonic_Medium
+	ReloadDelay: 60
+	Range: 6144
+	Report: orcamis1.aud
+	ValidTargets: Ground, Water, Air
+	Warhead@Sonic_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
+		Damage: 8000
+	Warhead@Sonic_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Tesla_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@Magic_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@Magic_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 4
 
 TSZoneHellfire:
 	Inherits: TSHellfire
@@ -730,8 +705,19 @@ TSZoneHellfire:
 
 TSZoneHellfireSonic:
 	Inherits: TSHellfireSonic
+	Inherits@wh: ^Warhead_Sonic_Heavy
+	Inherits@proj: ^Projectile_TS_Missile_Heavy
+	Inherits@fx: ^Effect_Sonic_Heavy
 	ReloadDelay: 28
 	Range: 6138
+	Report: orcamis1.aud
+	ValidTargets: Ground, Water, Air
+	Warhead@Sonic_Heavy: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@Sonic_Heavy_Percentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
 
 TSGDIRedEye:
 	Inherits@wh: ^Warhead_MissileAP_Heavy

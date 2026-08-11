@@ -892,61 +892,39 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
-        "tag": "Tesla_Heavy",
+        "damage": "8000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Sonic_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "Magic_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "Magic_Heavy_Percentage",
+        "damage": "4",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Sonic_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "effective_avg_reliability": 0.5416,
-      "effective_base_total": 10000.0,
-      "effective_damage": 12177.17,
-      "effective_footprint_cells2": 7.0307,
-      "effective_sigma": 404.8,
+      "design_weapon_class": 1.0,
+      "effective_avg_reliability": 0.783,
+      "effective_base_total": 8000.0,
+      "effective_damage": 14964.73,
+      "effective_footprint_cells2": 4.3503,
+      "effective_sigma": 488.2,
       "pricing": true,
-      "range": "5120",
-      "reloaddelay": "25",
+      "range": "6144",
+      "reloaddelay": "60",
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Magic_Heavy",
-       "^Effect_Magic_Heavy"
+       "^Warhead_Sonic_Medium",
+       "^Projectile_TS_Missile_Medium",
+       "^Effect_Sonic_Medium"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Magic_Heavy"
+       "^Warhead_Sonic_Medium"
       ],
       "weapon": "TSHellfireSonic",
       "weapon_class_source": "template"
@@ -1118,59 +1096,55 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
-        "tag": "Tesla_Heavy",
+        "damage": "8000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Sonic_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
+        "damage": "4",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Sonic_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "800",
-        "tag": "Magic_Heavy",
+        "tag": "Sonic_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "4",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "Magic_Heavy_Percentage",
+        "tag": "Sonic_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "effective_avg_reliability": 0.5173,
-      "effective_base_total": 10000.0,
-      "effective_damage": 11933.92,
-      "effective_footprint_cells2": 7.0307,
-      "effective_sigma": 445.52,
+      "design_weapon_class": 1.125,
+      "effective_avg_reliability": 0.8128,
+      "effective_base_total": 16000.0,
+      "effective_damage": 34487.75,
+      "effective_footprint_cells2": 10.7419,
+      "effective_sigma": 434.9,
       "pricing": true,
       "range": "6138",
       "reloaddelay": "28",
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "TSHellfireSonic"
+       "TSHellfireSonic",
+       "^Warhead_Sonic_Heavy",
+       "^Projectile_TS_Missile_Heavy",
+       "^Effect_Sonic_Heavy"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Magic_Heavy"
+       "^Warhead_Sonic_Medium",
+       "^Warhead_Sonic_Heavy"
       ],
       "weapon": "TSZoneHellfireSonic",
       "weapon_class_source": "template"

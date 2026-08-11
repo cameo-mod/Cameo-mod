@@ -36,6 +36,62 @@
 		ImpactActors: false
 		ValidTargets: Ground, Ship
 
+^Projectile_TS_Missile_Medium:
+	Report: bazook1.aud
+	Projectile: Missile
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		TerrainHeightAware: true
+		CruiseAltitude: 6000
+		MinimumLaunchAngle: 300
+		MaximumLaunchAngle: 300
+		Inaccuracy: 181
+		Image: DRAGON
+		Palette: ra
+		Shadow: true
+		HorizontalRateOfTurn: 40
+		VerticalRateOfTurn: 40
+		TrailImage: smokey
+		TrailInterval: 1
+		ContrailLength: 0
+		MaximumLaunchSpeed: 543
+		MinimumLaunchSpeed: 301
+		Speed: 400
+		CloseEnough: 200
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 15360
+		PointDefenseTypes: Missile
+
+^Projectile_TS_Missile_Heavy:
+	Report: missile6.aud
+	Projectile: Missile
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		TerrainHeightAware: true
+		CruiseAltitude: 6000
+		MinimumLaunchAngle: 300
+		MaximumLaunchAngle: 300
+		Inaccuracy: 128
+		Image: DRAGON
+		Palette: ra
+		Shadow: true
+		HorizontalRateOfTurn: 10
+		VerticalRateOfTurn: 40
+		TrailImage: smokey
+		TrailInterval: 1
+		ContrailLength: 0
+		MaximumLaunchSpeed: 213
+		MinimumLaunchSpeed: 301
+		Speed: 400
+		CloseEnough: 200
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 15360
+		PointDefenseTypes: Missile
+
 ^TSCannon:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 50
