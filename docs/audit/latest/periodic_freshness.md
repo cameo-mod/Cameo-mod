@@ -1,6 +1,6 @@
 # audit_periodic_freshness — mandatory recurring audits
 
-Registry: `docs/audit/periodic.json` — grace **7** days. OVERDUE: **0**, DUE: **0**
+Registry: `docs/audit/periodic.json` — grace **7** days. BROKEN: **0**, OVERDUE: **0**, DUE: **0**
 
 | id | title | cadence (d) | age (d) | due in (d) | state | owner |
 |---|---|---|---|---|---|---|

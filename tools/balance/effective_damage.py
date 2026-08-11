@@ -118,6 +118,20 @@ def reliability(fo, radii, sigma) -> float:
     return acc / (math.pi * sigma * sigma)
 
 
+def damage_value(raw):
+    """A warhead's `Damage` as an int, or None when the field is not numeric.
+
+    Non-numeric means an unresolved placeholder (an inherited value the resolver
+    could not fold), which this metric skips. Returning None keeps the reason
+    explicit instead of swallowing the parse error at the call site — see
+    `audit_error_handling.py` E2.
+    """
+    try:
+        return int(float(raw))
+    except (TypeError, ValueError):
+        return None
+
+
 def flat_damage_warheads(resolved):
     """Main + extra-damage flat warheads (exclude %-twin, FriendlyFire, EMP, effects)."""
     out = []
@@ -129,14 +143,8 @@ def flat_damage_warheads(resolved):
             continue
         if c.value not in ("AreaDamage", "SpreadDamage", "TargetDamage"):
             continue
-        d = c.get("Damage")
-        if d is None:
-            continue
-        try:
-            base = int(float(d))
-        except ValueError:
-            continue
-        if base <= 0:
+        base = damage_value(c.get("Damage"))
+        if base is None or base <= 0:
             continue
         out.append((tag, c.value, base, c))
     return out

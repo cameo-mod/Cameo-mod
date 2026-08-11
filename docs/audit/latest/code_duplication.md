@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **199** (min 5 statements), C# files: **325** (min 8 lines)
+Python files: **204** (min 5 statements), C# files: **325** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
@@ -49,7 +49,7 @@ Python files: **199** (min 5 statements), C# files: **325** (min 8 lines)
 
 | copies | fingerprint | sites |
 |---|---|---|
-| 5 | 28fac3656bc8fc3b | tools/audit/find_orphan_old_keys.py:20 CENTRAL; tools/audit/find_orphan_old_keys_multi.py:18 CENTRAL; tools/audit/phase_b_survey.py:15 CENTRAL; tools/balance/fix_orphan_old_keys.py:19 CENTRAL; tools/balance/fix_orphan_old_keys_multi.py:16 CENTRAL |
+| 5 | 28fac3656bc8fc3b | tools/audit/find_orphan_old_keys.py:20 CENTRAL; tools/audit/find_orphan_old_keys_multi.py:18 CENTRAL; tools/audit/weapon_families.py:23 CENTRAL; tools/balance/fix_orphan_old_keys.py:19 CENTRAL; tools/balance/fix_orphan_old_keys_multi.py:16 CENTRAL |
 | 2 | 153d4fc74c8cdd31 | tools/tilesets/build_ra_temperate_basalt_trees.py:20 ACTORS; tools/tilesets/build_volcanic_basalt_gimp_brushes.py:20 ACTORS |
 | 2 | 2665d6950cd4417a | tools/audit/find_orphan_old_keys.py:27 OLD_TO_NEW; tools/balance/fix_orphan_old_keys.py:25 OLD_TO_NEW |
 | 2 | 4979d18fd8f148a1 | tools/tilesets/detect_cliff_dark_noise.py:14 BLACK; tools/tilesets/process_ai_edge_mask.py:15 BLACK |

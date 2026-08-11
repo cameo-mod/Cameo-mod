@@ -45,11 +45,13 @@ CS_SOURCE_DIRS = ("OpenRA.Mods.Cameo",)
 PY_TEST_DIR = "tools/tests"
 PY_SOURCE_DIRS = ("tools/audit", "tools/balance", "tools/packs", "tools/rename")
 
-# Floors/ratchet measured 2026-08-10. Raise the floors as tests are added;
-# lower T3 as modules get covered.
+# Floors/ratchet re-measured 2026-08-11 (was 24/51/221 on 2026-08-10). Raise the
+# floors as tests are added; lower T3 as modules get covered. The counts only
+# consider git-TRACKED files (scanning.tracked_under), so a scratch script left in
+# tools/ can no longer move them.
 MIN_CS_TESTS = 24
-MIN_PY_TESTS = 51
-T3_BASELINE = 221
+MIN_PY_TESTS = 71
+T3_BASELINE = 220
 
 CS_TEST_ATTR = re.compile(r"^\s*\[(?:Test|TestCase|TestCaseSource)\b", re.MULTILINE)
 CS_TYPE = re.compile(r"^\s*(?:public|internal)\s+(?:sealed\s+|abstract\s+|static\s+|partial\s+)*"

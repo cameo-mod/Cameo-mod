@@ -238,8 +238,13 @@ AA-gating, rock-paper-scissors) are captured in `BALANCE_SYNTHESIS.md` + `ORIGIN
 
 ## Code health program
 
-Five recurring tracks run with a 7-day grace period; `run_all.sh` blocks when
-any track is overdue. Registry and procedures: [`docs/audit/PERIODIC.md`](../audit/PERIODIC.md)
+Five recurring tracks run with a 7-day grace period. Each track's *script* is a
+ratchet that blocks `run_all.sh` on a regression. Being merely **overdue** does
+NOT block the per-commit suite (it is reported loudly; `run_all.sh` passes
+`--warn-only`) — enforce the calendar with the strict
+`python tools/audit/audit_periodic_freshness.py` in a scheduled run. A **BROKEN**
+entry (registered script or evidence file missing) blocks unconditionally.
+Registry and procedures: [`docs/audit/PERIODIC.md`](../audit/PERIODIC.md)
 and [`docs/audit/periodic.json`](../audit/periodic.json).
 
 - **Code duplication** — `python tools/audit/audit_code_duplication.py`; every 30 days; baseline C1/C2/C3: **10/14/10**.

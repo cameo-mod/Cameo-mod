@@ -39,6 +39,7 @@ import sys
 
 from miniyaml import find_repo_root
 from report import h1, h2, table
+from scanning import tracked_under
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -137,9 +138,15 @@ def main() -> int:
     runner = (root / "tools/audit/run_all.sh")
     runner_text = runner.read_text(encoding="utf-8") if runner.exists() else ""
     r2: list[list[str]] = []
+    # Tracked files only (see scanning.tracked_under): an untracked scratch audit
+    # somebody is still writing is not yet part of the repo, so it must not turn
+    # this ratchet red for everyone else.
+    tracked = tracked_under(str(root / "tools/audit"))
     for path in sorted((root / "tools/audit").glob("audit_*.py")):
         name = path.stem.removeprefix("audit_")
         if name in R2_EXEMPT:
+            continue
+        if tracked is not None and str(path.resolve()) not in tracked:
             continue
         if not re.search(rf"(?<![\w-]){re.escape(name)}(?![\w-])", runner_text):
             r2.append([f"tools/audit/{path.name}", "not invoked by run_all.sh"])

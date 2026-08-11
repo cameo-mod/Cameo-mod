@@ -51,9 +51,9 @@ X5 suffix ordering violations: **0**
 ## X3 — AA-only weapons not following _AA convention
 | File | Line | Weapon | ValidTargets |
 |---|---|---|---|
-| ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 956 | CabalLaserBoatLaserAA | Air |
-| ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1272 | CabalManticoreMissilesAA | Air |
-| ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 621 | TSMammothTusk2 | Air |
+| ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 957 | CabalLaserBoatLaserAA | Air |
+| ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1273 | CabalManticoreMissilesAA | Air |
+| ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 626 | TSMammothTusk2 | Air |
 
 ## X4 — Weapons with deprecated E suffix (informational)
 | File | Line | Weapon |

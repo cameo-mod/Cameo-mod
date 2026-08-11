@@ -1,19 +1,21 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **287**, files touched: **523**
+Commits reviewed: **313**, files touched: **596**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
-| R1 | balance yaml edited without the ledger | 30 | yes |
+| R1 | balance yaml edited without the ledger | 32 | yes |
 | R2 | audit script never run by run_all.sh | 0 | yes |
-| R3 | commit without a Co-Authored-By trailer | 76 | yes |
-| R4 | engine/mod.config change (needs boot gate) | 6 | no |
+| R3 | commit without a Co-Authored-By trailer | 80 | yes |
+| R4 | engine/mod.config change (needs boot gate) | 8 | no |
 
 
-## R1 — hand-edited balance numbers (30)
+## R1 — hand-edited balance numbers (32)
 
 | commit | date | subject | fields |
 |---|---|---|---|
+| 5a14355e | 2026-08-11 | feat(physical-state): BUILD 3 — SonicDebuff rena | Range |
+| 14713d57 | 2026-08-11 | fix(tesla): rename extra-damage chips and restor | Damage |
 | 0d2cd6e8 | 2026-08-10 | feat(warhead): auto-scaling Integrity/EMP + unif | Damage, Spread |
 | 39995bba | 2026-08-10 | balance(weapons): wire D2K_StormGunInf/Cymek to  | Damage |
 | 4e9c3198 | 2026-08-10 | balance(weapons): collapse Exorcist family + Shr | Damage |
@@ -51,10 +53,14 @@ Commits reviewed: **287**, files touched: **523**
 _none found_
 
 
-## R3 — commits without provenance (76)
+## R3 — commits without provenance (80)
 
 | commit | date | author | problem |
 |---|---|---|---|
+| f2284b1c | 2026-08-11 | Blackrobe | no Co-Authored-By trailer |
+| 3ffb482c | 2026-08-11 | Blackrobe | no Co-Authored-By trailer |
+| 7155a0f1 | 2026-08-11 | AedisToru | no Co-Authored-By trailer |
+| 59ade89e | 2026-08-11 | AedisToru | no Co-Authored-By trailer |
 | 12bd3f5f | 2026-08-10 | Blackrobe | no Co-Authored-By trailer |
 | fefb19f6 | 2026-08-10 | Blackrobe | no Co-Authored-By trailer |
 | ea160f40 | 2026-08-10 | Blackrobe | no Co-Authored-By trailer |
@@ -133,10 +139,12 @@ _none found_
 | 983b17dd | 2026-07-28 | AedisToru | no Co-Authored-By trailer |
 
 
-## R4 — engine/config changes to re-verify (6)
+## R4 — engine/config changes to re-verify (8)
 
 | commit | date | note |
 |---|---|---|
+| 1d5d5e55 | 2026-08-11 | mod.config changed (rebuild + boot gate required) |
+| f2284b1c | 2026-08-11 | mod.config changed (rebuild + boot gate required) |
 | ea160f40 | 2026-08-10 | mod.config changed (rebuild + boot gate required) |
 | 5b9173cf | 2026-08-04 | mod.config changed (rebuild + boot gate required) |
 | 6e210c35 | 2026-08-01 | mod.config changed (rebuild + boot gate required) |
@@ -149,21 +157,21 @@ _none found_
 
 | file | commits touching it |
 |---|---|
-| docs/AI_HANDOFF_2026-08-05.md | 61 |
-| mods/cameo/weapons/weapons.yaml | 46 |
-| docs/design/ROADMAP.md | 40 |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 40 |
-| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 40 |
-| mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 35 |
-| mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 34 |
-| mods/cameo/weapons/redalert2.yaml | 34 |
-| mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml | 33 |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 32 |
-| mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml | 32 |
-| mods/cameo/weapons/redalert2mod.yaml | 31 |
-| docs/balance/redalert_soviets.json | 31 |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 30 |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 30 |
+| docs/AI_HANDOFF_2026-08-05.md | 62 |
+| mods/cameo/weapons/weapons.yaml | 49 |
+| docs/design/ROADMAP.md | 42 |
+| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 42 |
+| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 41 |
+| mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 37 |
+| mods/cameo/weapons/redalert2.yaml | 36 |
+| mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 36 |
+| mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml | 35 |
+| mods/cameo/weapons/tiberiansun.yaml | 34 |
+| docs/balance/redalert_soviets.json | 33 |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 33 |
+| mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml | 33 |
+| mods/cameo/weapons/redalert2mod.yaml | 32 |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 31 |
 
 
 ## Reviewer checklist (not machine-checkable)
@@ -177,5 +185,10 @@ _none found_
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-11**: 0 R1 and 0 R3 of 30/76 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-11**: 2 R1 and 4 R3 of 32/80 findings are in scope; the rest predate the gate.
+
+
+## FAIL
+
+- 2 R1, 0 R2, 4 R3 blocking finding(s)
 

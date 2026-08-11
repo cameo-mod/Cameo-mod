@@ -9,9 +9,23 @@ gate:
 |---|---|---|
 | ok | age <= cadence | — |
 | DUE | cadence < age <= cadence + grace (7 d) | listed in the report |
-| OVERDUE | age > cadence + grace, or the script/evidence file is gone | **run_all.sh exits 1** |
+| OVERDUE | age > cadence + grace | listed loudly; **exits 1 in the strict form** |
+| BROKEN | the script or its evidence file is gone | **always exits 1**, including `--warn-only` |
 
-The *scripted* part of each track runs on every `run_all.sh` and blocks
+**Two severities, on purpose (2026-08-11).** `run_all.sh` is the PER-COMMIT gate, so
+it invokes this audit with `--warn-only`: a *calendar* fact ("a scheduled scan is
+late") must never turn a commit red for a reason unrelated to that commit — that
+ambushes whoever happens to be working the day the timer expires. BROKEN is
+different: a registered script or evidence file is actually missing from the tree
+right now, so it blocks unconditionally.
+
+Enforce the calendar in a scheduled run (not the commit gate):
+
+```sh
+python tools/audit/audit_periodic_freshness.py     # no flag -> exit 1 when overdue
+```
+
+The *scripted* part of each track still runs on every `run_all.sh` and blocks
 immediately on a regression (each script is a ratchet: counts may fall, never
 rise). The *periodic* run below is the wider pass that a script cannot do —
 network queries, the real test suites, and human review of the report — and it

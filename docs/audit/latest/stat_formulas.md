@@ -827,7 +827,7 @@ _none found_
 | naxdieglocke | Warhead@Chemical_Heavy, Warhead@Chemical_Heavy_Percentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by schwarzermond_dieglocke) |
 | pdlaserbike | Warhead@1Dam | targets Air but no damage warhead hits Air (used by td_nod_chemicalattackbike, td_nod_reconbike) |
 | pdlaserltnk2 | Warhead@1Dam | targets Air but no damage warhead hits Air (used by td_nod_lighttankmkii) |
-| psionicshockwave | Warhead@Tesla_Super, Warhead@Tesla_Super_Percentage, Warhead@Tesla_Super_ExtraDamage, Warhead@TeslaChargedExtraDamage | targets Air but no damage warhead hits Air (used by protoss_archon) |
+| psionicshockwave | Warhead@Tesla_Super, Warhead@Tesla_Super_Percentage, Warhead@Tesla_Super_ExtraDamage | targets Air but no damage warhead hits Air (used by protoss_archon) |
 | sciencevesseldefensematrix | Warhead@1 | targets Air but no damage warhead hits Air (used by terran_sciencevessel) |
 | tkmpdlaser | Warhead@1Dam | targets Air but no damage warhead hits Air (used by tkm_t72m) |
 | tsassaultcannon | Warhead@Flak_Medium, Warhead@Flak_Medium_Percentage, Warhead@Bullet_Medium, Warhead@Bullet_Medium_Percentage | targets Air but no damage warhead hits Air (used by ts_gdi_wolverine) |
