@@ -1,12 +1,12 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **210**
+Files scanned: **213**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 2 | 2 |
-| E2 | handler discards the error | 30 | 30 |
-| E3 | open() without encoding= | 90 | 90 |
+| E2 | handler discards the error | 31 | 30 |
+| E3 | open() without encoding= | 91 | 90 |
 | E4 | subprocess call without check= | 9 | 9 |
 
 
@@ -18,7 +18,7 @@ Files scanned: **210**
 | tools/audit_createeffect_image.py | 19 | bare `except:` |
 
 
-## E2 — 30 finding(s)
+## E2 — 31 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -43,9 +43,10 @@ Files scanned: **210**
 | tools/audit_ce_image_usage.py | 29 | handler body discards the error |
 | tools/audit_createeffect_image.py | 19 | handler body discards the error |
 | tools/balance/extract_stats.py | 200 | handler body discards the error |
-| tools/balance/extract_stats.py | 687 | handler body discards the error |
-| tools/balance/formula.py | 141 | handler body discards the error |
+| tools/balance/extract_stats.py | 695 | handler body discards the error |
+| tools/balance/formula.py | 148 | handler body discards the error |
 | tools/balance/propose_class_rebalance.py | 269 | handler body discards the error |
+| tools/reference/extract_versus.py | 166 | handler body discards the error |
 | tools/rename/apply.py | 178 | handler body discards the error |
 | tools/rename/safe_rename.py | 128 | handler body discards the error |
 | tools/rename/safe_rename.py | 137 | handler body discards the error |
@@ -54,7 +55,7 @@ Files scanned: **210**
 | tools/tilesets/generate_volcanic_tileset.py | 814 | handler body discards the error |
 
 
-## E3 — 90 finding(s)
+## E3 — 91 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -68,6 +69,7 @@ Files scanned: **210**
 | tools/hooks/exec_guard.py | 69 | `perf.read_text()` without encoding= |
 | tools/make_syndicate_insignia.py | 41 | `Image.open()` without encoding= |
 | tools/make_syndicate_insignia.py | 63 | `Image.open()` without encoding= |
+| tools/reference/extract_mix_ini.py | 78 | `path.open()` without encoding= |
 | tools/tilesets/apply_ai_edge_correction.py | 34 | `Image.open()` without encoding= |
 | tools/tilesets/apply_ai_edge_correction.py | 78 | `Image.open()` without encoding= |
 | tools/tilesets/apply_dark_noise_cleanup.py | 79 | `Image.open()` without encoding= |
@@ -163,4 +165,10 @@ Files scanned: **210**
 | tools/balance/verify_generator_sync.py | 55 | `subprocess.run()` without check= |
 | tools/hooks/bash_guard.py | 49 | `subprocess.run()` without check= |
 | tools/hooks/exec_guard.py | 45 | `subprocess.run()` without check= |
+
+
+## FAIL
+
+- E2: 31 > baseline 30
+- E3: 91 > baseline 90
 

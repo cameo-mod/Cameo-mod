@@ -119,7 +119,12 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 				tickDamageTotal = TickDamage.Sum();
 			}
+
+			ValidateFields();
 		}
+
+		[Desc("Subclass validation hook, called once the base fields are checked.")]
+		protected virtual void ValidateFields() { }
 
 		protected override void DoImpact(WPos pos, Actor firedBy, WarheadArgs args)
 		{

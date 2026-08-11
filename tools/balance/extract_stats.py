@@ -386,6 +386,7 @@ def model_constants() -> dict:
                          "DENSITY": dict(tm.DENSITY),
                          "ENGAGEMENT": dict(tm.ENGAGEMENT),
                          "reference_hp": tm.reference_hp(),
+                         "reference_hp_measured": tm.measured_reference_hp(),
                          "armor_census": tm.armor_census()},
     }
 
@@ -493,13 +494,22 @@ def weapon_entry(rs, wname: str) -> dict | None:
         if c.key.startswith("Warhead@") and c.value in ("SpreadDamage", "HealthPercentageDamage", "AreaDamage", "AreaDamagePercentage", "TargetDamage"):
             d = c.get("Damage")
             if d is not None:
-                damage_warheads.append({
+                record = {
                     "tag": c.key.split("@", 1)[1],
                     "type": c.value,
                     "damage": d,
                     "spread": c.get("Spread"),
                     "falloff": c.get("Falloff"),
-                })
+                }
+                # The UNIT of a percentage twin's Damage (100 = whole percent,
+                # 1000 = per-mille). Recorded only when the node states it, so the
+                # ledger diff stays empty for every weapon still on the default —
+                # without it `distribute_damage` would write whole percent into a
+                # per-mille node and silently deal a tenth of the damage.
+                denominator = c.get("PercentageDenominator")
+                if denominator is not None:
+                    record["percentage_denominator"] = denominator
+                damage_warheads.append(record)
     out["damage_warheads"] = damage_warheads
     if not damage_warheads:
         out["extraction_note"] = "no_damage_warheads"

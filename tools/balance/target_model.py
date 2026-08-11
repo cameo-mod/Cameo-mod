@@ -100,7 +100,8 @@ def use_ruleset(rs: Ruleset) -> None:
     """
     global _INJECTED
     _INJECTED = rs
-    for fn in (_ruleset, _scan, armor_census, hp_by_macro, armor_weights, reference_hp):
+    for fn in (_ruleset, _scan, armor_census, hp_by_macro, armor_weights,
+               measured_reference_hp):
         fn.cache_clear()
 
 
@@ -212,12 +213,36 @@ def hp_by_macro() -> dict[str, int]:
     return {m: int(statistics.median(v)) if v else 0 for m, v in buckets.items()}
 
 
-@functools.lru_cache(maxsize=1)
+# Percentage damage is priced as if fired at an average BASELINE actor, not at the
+# roster median (maintainer ruling 2026-08-11). High-tech tanks, dreadnoughts and the
+# epics all sit well above 200 000 HP; everything else sits below it. Note the roster
+# already agrees where it matters most: the measured BUILDING median is 200 000 exactly.
+REFERENCE_HP = 200_000
+
+
 def reference_hp() -> int:
-    """Engagement-weighted reference max-HP: what one %-of-HP point is worth."""
+    """The DESIGN reference max-HP one %-of-HP point is priced against.
+
+    A design constant, deliberately NOT the measured median — see `measured_reference_hp`
+    for what the live roster actually is. The gap between the two is information, not
+    an error: the measured figure is dragged down by infantry (30 000 HP at 35%
+    engagement weight), and a %-warhead is not designed for the cheapest thing it can
+    hit. Pricing against the constant makes every %-twin ~2.7x more valuable in K.
+    """
+    return REFERENCE_HP
+
+
+@functools.lru_cache(maxsize=1)
+def measured_reference_hp() -> int:
+    """Engagement-weighted median max-HP of the LIVE roster — diagnostic only.
+
+    Reported alongside the design constant so drift in the roster stays visible: if
+    this ever climbs past `REFERENCE_HP`, the constant has stopped being the middle
+    it was chosen to be and wants a maintainer re-ruling.
+    """
     per = hp_by_macro()
     total = sum(ENGAGEMENT[m] * per.get(m, 0) for m in ENGAGEMENT)
-    return int(total) if total else 200_000
+    return int(total)
 
 
 def weighted_versus(versus: dict[str, float], weights: dict[str, float] | None = None) -> float:
@@ -279,5 +304,8 @@ if __name__ == "__main__":
     print("|---|---|---|")
     for macro, hp in hp_by_macro().items():
         print(f"| {macro} | {ENGAGEMENT[macro]*100:.0f}% | {hp:,} |")
-    print(f"\nreference HP (engagement-weighted): **{reference_hp():,}**")
+    print(f"\nreference HP (DESIGN constant, what %-damage is priced against): "
+          f"**{reference_hp():,}**")
+    print(f"measured reference HP (engagement-weighted roster median, diagnostic): "
+          f"{measured_reference_hp():,}")
     print(f"blob cap A_BLOB = {A_BLOB} cell², primary's own cell A_SELF = {A_SELF} cell²")

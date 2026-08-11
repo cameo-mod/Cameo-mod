@@ -150,15 +150,77 @@ def spread_damage_sum(warheads, smallarms_only: bool = False,
     return total
 
 
-DAMAGE_STEP = 2000
+# The flat-damage grid. 2000 until 2026-08-11, when the maintainer ordered it 10x finer
+# together with a 10x finer percentage twin, so the RATIO between them is unchanged and
+# both are simply more granular. The two grids are deliberately in lockstep:
+# 200 flat damage == 0.1 percentage point, so one step of either is one step of the other.
+DAMAGE_STEP = 200
+
+# Flat damage per ONE WHOLE PERCENT of the twin. This is the design ratio and it does NOT
+# change with DAMAGE_STEP — it is what keeps 16000 -> 8% true across the regrid.
+DAMAGE_PER_PERCENT = 2000
+
+# What a Damage value on a percentage warhead MEANS, as a denominator.
+#   100  = whole percent (stock HealthPercentageDamage, and AreaDamagePercentage's default)
+#   1000 = per-mille, 0.1% steps (AreaDamagePercentage with PercentageDenominator: 1000)
+PERCENT_DENOMINATOR = 100
+PERMILLE_DENOMINATOR = 1000
 
 
 def snap_damage_step(value: float, step: int = DAMAGE_STEP) -> int:
-    """Nearest multiple of the 2000-damage grid (DESIGN.md); a positive
+    """Nearest multiple of the flat-damage grid (DESIGN.md); a positive
     value never snaps below one step."""
     if value <= 0:
         return 0
     return max(step, int(round(value / step)) * step)
+
+
+def percentage_twin(per: float, denominator: int = PERCENT_DENOMINATOR) -> int:
+    """The `*Percentage` twin for a main Damage value, in the unit that node uses.
+
+    The design ratio never changes: **one whole percent per 2000 flat damage**, so
+    16000 damage is 8% of max health whatever the units. `denominator` says how the
+    node WRITES that percentage:
+
+        100  -> whole percent  (stock HealthPercentageDamage; 16000 -> 8)
+        1000 -> per-mille      (AreaDamagePercentage with PercentageDenominator: 1000;
+                                16000 -> 80, i.e. the same 8.0%, in 0.1% steps)
+
+    Passing the wrong denominator is a silent 10x error in either direction, which is
+    why it is threaded from the resolved node rather than assumed.
+
+    This used to be ``per // DAMAGE_STEP``, an integer division that made the twin a
+    step function of Damage: 2000 -> 1, **1999 -> 0**, 3500 -> 1 (same as 2000). A
+    twin of 0 is not "a little damage", it is HARD IMMUNITY — the percentage warhead
+    silently does nothing — and it arrived purely from rounding, at exactly the Damage
+    values a finer grid makes legal. Hence W15 lands before the grid moves.
+
+    Rounding is half-UP and explicit rather than ``round()``, whose banker's rounding
+    would send 5000 -> 2 while 7000 -> 4 (both .5 cases, rounded opposite ways). A live
+    warhead never rounds below 1: the engine's Damage field is an integer, so one unit
+    of the node's own denominator is the finest step it can express.
+    """
+    if per <= 0:
+        return 0
+    units_per_damage = denominator / (DAMAGE_PER_PERCENT * PERCENT_DENOMINATOR)
+    return max(1, int(per * units_per_damage + 0.5))
+
+
+def twin_denominator(warhead: dict) -> int:
+    """The unit a percentage twin's Damage is written in, from the ledger record.
+
+    Only `AreaDamagePercentage` can carry a `PercentageDenominator` — the stock
+    `HealthPercentageDamage` has no such field and is always whole percent. An
+    explicit value in the record wins; absence means the engine default.
+    """
+    value = warhead.get("percentage_denominator")
+    if value in (None, ""):
+        return PERCENT_DENOMINATOR
+    try:
+        value = int(value)
+    except (TypeError, ValueError):
+        return PERCENT_DENOMINATOR
+    return value if value > 0 else PERCENT_DENOMINATOR
 
 
 def distribute_damage(new_total, warheads, template_names=None) -> dict[str, int]:
@@ -176,7 +238,8 @@ def distribute_damage(new_total, warheads, template_names=None) -> dict[str, int
         weapons trade area-of-effect for a shield/bonus chip, so it is
         ALWAYS half the main — yet still EXCLUDED from the damage total.
       * each ``*Percentage`` HealthPercentageDamage twin = 1 per 2000 of D
-        (D // 2000, i.e. 16000 -> 8).
+        (16000 -> 8), via ``percentage_twin`` — rounded, never floored to
+        zero, so an off-grid D does not silently disable it.
 
     This is the ONE canonical way to write per-warhead Damage, so a single
     design number can NEVER again be broadcast identically onto every
@@ -200,8 +263,10 @@ def distribute_damage(new_total, warheads, template_names=None) -> dict[str, int
             # 50% twin — ExtraDamage may be SpreadDamage OR OpenToppedDamage
             # (e.g. SniperWeaponExtraDamage); the rule is type-agnostic.
             result[tag] = per // 2
-        elif low.endswith("percentage"):           # HealthPercentageDamage twin
-            result[tag] = per // DAMAGE_STEP
+        elif low.endswith("percentage"):           # %-of-max-health twin
+            # The node's own unit, never assumed: a stock HealthPercentageDamage writes
+            # whole percent, an AreaDamagePercentage may write per-mille.
+            result[tag] = percentage_twin(per, twin_denominator(w))
     return result
 
 
@@ -398,10 +463,25 @@ def _selftest() -> None:
     r = distribute_damage(16000, [wh("m", 4000), wh("mpercentage", 1, "HealthPercentageDamage")])
     assert r["m"] == 16000 and r["mpercentage"] == 8, r
 
-    # off-grid total snaps to the 2000 step; mains stay identical (fine-tune=FP)
+    # W15: the twin is continuous in Damage — never floored to a silent 0, and it
+    # keeps tracking Damage between grid points (the old // gave 1999->0, 3500->1).
+    assert percentage_twin(2000) == 1 and percentage_twin(1999) == 1
+    assert percentage_twin(3500) == 2 and percentage_twin(1) == 1
+    assert percentage_twin(0) == 0                      # no main damage, no twin
+    assert all(percentage_twin(d) >= percentage_twin(d - 100)
+               for d in range(100, 40000, 100))         # monotone
+
+    # ... and the SAME percentage in the finer unit: 16000 damage is 8% either way.
+    assert percentage_twin(16000, PERMILLE_DENOMINATOR) == 80
+    assert percentage_twin(DAMAGE_STEP, PERMILLE_DENOMINATOR) == 1   # grids in lockstep
+
+    # off-grid total snaps to the step; mains stay identical (fine-tune=FP)
     r = distribute_damage(9000, [wh("a", 2000), wh("b", 2000), wh("c", 2000)])
     assert len(set(r.values())) == 1, r                 # identical
-    assert all(v % 2000 == 0 for v in r.values()), r    # on the 2000 grid
+    assert all(v % DAMAGE_STEP == 0 for v in r.values()), r
+    # 9000/3 = 3000 lands EXACTLY on the 200 grid. The old 2000 grid had to snap it to
+    # 4000 and hand a 33% remainder to FirepowerMultiplier — that is what finer buys.
+    assert set(r.values()) == {3000}, r
 
     # Tiger anchor (DESIGN §12) still holds
     assert round(price(100000, 100, 5000, dps(10000, 50))) == 800

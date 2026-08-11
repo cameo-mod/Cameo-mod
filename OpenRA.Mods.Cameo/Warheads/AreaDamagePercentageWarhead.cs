@@ -24,10 +24,37 @@ namespace OpenRA.Mods.Cameo.Warheads
 		"false so it is not counted for unit damage stats.")]
 	public class AreaDamagePercentageWarhead : AreaDamageWarhead
 	{
+		[Desc("DENOMINATOR the Damage value is read against — NOT a multiplier (unlike the",
+			"IntegrityScale / PhysicalStateScale fields it sits next to, which scale UP).",
+			"100 = Damage is a whole percent of max health, the engine convention and the",
+			"default, so existing weapons are unaffected.",
+			"1000 = Damage is per-mille, i.e. 0.1% steps: Damage 80 removes 8.0% of max health.",
+			"The finer unit exists so a percentage twin can track its weapon's flat Damage",
+			"exactly instead of rounding to the nearest whole percent — on the 200-damage grid",
+			"one flat step is worth exactly one per-mille step (200 damage = 0.1%).")]
+		public readonly int PercentageDenominator = 100;
+
+		// Extends the BASE class's validation through its hook. Implementing
+		// IRulesetLoaded<WeaponInfo> here instead would REPLACE the base's explicit
+		// implementation, so `effectiveRange` would never be built and every ring would
+		// be empty — a silent break, not a compile error.
+		protected override void ValidateFields()
+		{
+			if (PercentageDenominator <= 0)
+				throw new YamlException("PercentageDenominator must be positive: 100 = Damage is "
+					+ "a whole percent of max health, 1000 = per-mille (0.1% steps).");
+		}
+
 		protected override void InflictDamage(Actor victim, Actor firedBy, HitShape shape, WarheadArgs args)
 		{
 			var healthInfo = victim.Info.TraitInfo<HealthInfo>();
 			var damage = Util.ApplyPercentageModifiers(healthInfo.HP, args.DamageModifiers.Append(Damage, DamageVersus(victim, shape, args)));
+
+			// ApplyPercentageModifiers already divided by 100 for the Damage modifier, so a
+			// finer unit only needs the remaining factor. Applied LAST, on the largest
+			// intermediate, so the extra division costs the least precision.
+			if (PercentageDenominator != 100)
+				damage = damage * 100 / PercentageDenominator;
 			victim.InflictDamage(firedBy, new Damage(damage, DamageTypes, GetProjectileType(args)));
 			ApplyPhysicalState(victim, firedBy, damage);
 			ApplyIntegrityScale(victim, firedBy, damage);
