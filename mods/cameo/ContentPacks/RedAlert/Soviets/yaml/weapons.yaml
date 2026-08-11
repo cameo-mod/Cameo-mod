@@ -358,10 +358,9 @@ FireballGunThermobaricExplode:
 		Amount: 1000
 
 SiegeMortar:
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^Grenade
-	Inherits@3: ^MediumFlameWeapon
-	Inherits@4: ^LightFlameWeapon
+	Inherits: ^Warhead_Thermobaric_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
 	ReloadDelay: 88
 	Range: 10830
 	MinRange: 2165
@@ -376,166 +375,59 @@ SiegeMortar:
 		ContrailEndWidth: 15
 		ContrailStartColor: FEDCBA98
 		ContrailEndColor: 87654321
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 8000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 4
-	Warhead@Grenade: SpreadDamage
-		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 4
-	Warhead@MediumFlameWeapon: SpreadDamage
-		Damage: 8000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 4
-	Warhead@LightFlameWeapon: SpreadDamage
-		Damage: 8000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+	Warhead@Thermobaric_Heavy:
+		Damage: 32000
+	Warhead@Thermobaric_Heavy_Percentage:
+		Damage: 16
 
 SiegeMortarExplode:
 	Inherits: SiegeMortar
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@Grenade: SpreadDamage
-		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@MediumFlameWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@LightFlameWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 2
+	Warhead@Thermobaric_Heavy:
+		Damage: 16000
+	Warhead@Thermobaric_Heavy_Percentage:
+		Damage: 8
 
 SiegeMortarThermobaric:
-	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits: ^Warhead_Thermobaric_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^HeavyFlameWeapon
-	Inherits@5: SiegeMortar
+	ReloadDelay: 88
+	Range: 10830
+	MinRange: 2165
+	Report: tnkfire2.aud
+	TargetActorCenter: true
 	Projectile: Bullet
+		Speed: 175
+		Inaccuracy: 750
+		LaunchAngle: 125
+		ContrailStartWidth: 60
+		ContrailEndWidth: 15
 		TrailImage: smokey
 		TrailDelay: 1
 		TrailInterval: 1
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 4000
+	Warhead@Thermobaric_Heavy:
+		Damage: 24000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
+	Warhead@Thermobaric_Heavy_Percentage:
+		Damage: 12
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Grenade: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumFlameWeapon: SpreadDamage
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		Damage: 4000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		Damage: 2000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		Damage: 2
-	Warhead@LightFlameWeapon: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@CannonHE_Heavy:
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyFlameWeapon: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: big_napalm
+		ImpactSounds: firebl3.aud
+		ImpactActors: false
 		GlowScale: 2.0
 		GlowFadeFrames: 60
 		GlowFadeInFrames: 12
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
 
 SiegeMortarThermobaricExplode:
 	Inherits: SiegeMortarThermobaric
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@Grenade: SpreadDamage
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@MediumFlameWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@LightFlameWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@CannonHE_Heavy: AreaDamage
-		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@HeavyFlameWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 1
+	Warhead@Thermobaric_Heavy:
+		Damage: 12000
+	Warhead@Thermobaric_Heavy_Percentage:
+		Damage: 6
 
 PortaTesla_EMP:
 	Inherits: PortaTesla
