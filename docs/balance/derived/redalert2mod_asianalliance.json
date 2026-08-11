@@ -1,0 +1,1723 @@
+{
+ "ledger": "redalert2mod_asianalliance",
+ "pack": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "asianalliance_harbinger": {
+    "armaments": [
+     {
+      "avg_versus": 0.6801,
+      "damage_total": 16000.0,
+      "eff_reload": 65.0,
+      "effective_damage": 25356.39,
+      "effective_dps": 484.33,
+      "effective_per_shot": 15740.73,
+      "footprint": 26.1797,
+      "k": 0.9838,
+      "reliability": 0.7667,
+      "sigma": 380.25,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianHarbingerPlasma"
+     }
+    ]
+   },
+   "asianalliance_pelican": {
+    "armaments": [
+     {
+      "avg_versus": 0.6473,
+      "damage_total": 12000.0,
+      "eff_reload": 27.0,
+      "effective_damage": 23677.91,
+      "effective_dps": 955.11,
+      "effective_per_shot": 12894.02,
+      "footprint": 13.4998,
+      "k": 1.0745,
+      "reliability": 0.8482,
+      "sigma": 344.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianPelicanMissile"
+     },
+     {
+      "avg_versus": 0.6473,
+      "damage_total": 12000.0,
+      "eff_reload": 31.0,
+      "effective_damage": 23467.24,
+      "effective_dps": 1644.14,
+      "effective_per_shot": 12742.08,
+      "footprint": 13.4998,
+      "k": 1.0618,
+      "reliability": 0.8306,
+      "sigma": 384.0,
+      "slot": "Armament@PRIMARYELITE",
+      "weapon": "AsianPelicanMissile_elite"
+     },
+     {
+      "avg_versus": 0.6738,
+      "damage_total": 6000.0,
+      "eff_reload": 27.0,
+      "effective_damage": 8304.6,
+      "effective_dps": 808.5,
+      "effective_per_shot": 5457.36,
+      "footprint": 6.9109,
+      "k": 0.9096,
+      "reliability": 0.8082,
+      "sigma": 230.5,
+      "slot": "Armament@MG",
+      "weapon": "AsianPelicanMG"
+     },
+     {
+      "avg_versus": 0.6738,
+      "damage_total": 6000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 8279.64,
+      "effective_dps": 1115.72,
+      "effective_per_shot": 5439.14,
+      "footprint": 6.9109,
+      "k": 0.9065,
+      "reliability": 0.804,
+      "sigma": 235.5,
+      "slot": "Armament@MGelite",
+      "weapon": "AsianPelicanMG_elite"
+     }
+    ]
+   },
+   "asianalliance_phoenix": {
+    "armaments": [
+     {
+      "avg_versus": 0.6629,
+      "damage_total": 60000.0,
+      "eff_reload": 67.0,
+      "effective_damage": 118231.02,
+      "effective_dps": 2168.08,
+      "effective_per_shot": 72630.65,
+      "footprint": 13.4998,
+      "k": 1.2105,
+      "reliability": 0.8455,
+      "sigma": 350.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianPhoenixRocket"
+     },
+     {
+      "avg_versus": 0.6629,
+      "damage_total": 60000.0,
+      "eff_reload": 71.0,
+      "effective_damage": 117420.9,
+      "effective_dps": 4058.7,
+      "effective_per_shot": 72041.88,
+      "footprint": 13.4998,
+      "k": 1.2007,
+      "reliability": 0.832,
+      "sigma": 380.77,
+      "slot": "Armament@PRIMARYELITE",
+      "weapon": "AsianPhoenixRocket_elite"
+     }
+    ]
+   },
+   "kami_chemical.asian": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 3239.38,
+      "effective_dps": 375.18,
+      "effective_per_shot": 2000.97,
+      "footprint": 0.5193,
+      "k": 0.5002,
+      "reliability": 0.7449,
+      "sigma": 235.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianKamikazeChaingun"
+     },
+     {
+      "avg_versus": 0.723,
+      "damage_total": 4000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 9328.64,
+      "effective_dps": 809.04,
+      "effective_per_shot": 6472.32,
+      "footprint": 11.6172,
+      "k": 1.6181,
+      "reliability": 0.88,
+      "sigma": 450.0,
+      "slot": "Armament@Secondary",
+      "weapon": "AsianChemicalBombs"
+     }
+    ]
+   }
+  },
+  "buildings": {
+   "asianalliance_asiansentryflamer": {
+    "armaments": [
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 4000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 5225.56,
+      "effective_dps": 412.99,
+      "effective_per_shot": 3097.46,
+      "footprint": 2.758,
+      "k": 0.7744,
+      "reliability": 0.6169,
+      "sigma": 634.86,
+      "slot": "Armament",
+      "weapon": "AsianFlamerTurret"
+     }
+    ]
+   },
+   "asianalliance_hyperionprojector": {
+    "armaments": [
+     {
+      "avg_versus": 0.5212,
+      "damage_total": 3000.0,
+      "eff_reload": 299.0,
+      "effective_damage": 3136.36,
+      "effective_dps": 564.87,
+      "effective_per_shot": 1688.96,
+      "footprint": 0.5424,
+      "k": 0.563,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Normal",
+      "weapon": "AAHyperionMagnet"
+     }
+    ]
+   },
+   "asianalliance_plasmacannon": {
+    "armaments": [
+     {
+      "avg_versus": 0.6967,
+      "damage_total": 16000.0,
+      "eff_reload": 96.0,
+      "effective_damage": 24012.34,
+      "effective_dps": 323.21,
+      "effective_per_shot": 15514.28,
+      "footprint": 28.221,
+      "k": 0.9696,
+      "reliability": 0.6189,
+      "sigma": 850.0,
+      "slot": "Armament",
+      "weapon": "AsianTurretPlasma"
+     }
+    ]
+   },
+   "asianalliance_pulsar": {
+    "armaments": [
+     {
+      "avg_versus": 0.6209,
+      "damage_total": 9888.0,
+      "eff_reload": 13.0,
+      "effective_damage": 8446.21,
+      "effective_dps": 267.63,
+      "effective_per_shot": 3479.16,
+      "footprint": 7.6538,
+      "k": 0.3519,
+      "reliability": 0.574,
+      "sigma": 706.33,
+      "slot": "Armament",
+      "weapon": "AsianPhotonCannon"
+     },
+     {
+      "avg_versus": 0.6209,
+      "damage_total": 9888.0,
+      "eff_reload": 13.0,
+      "effective_damage": 8446.21,
+      "effective_dps": 267.63,
+      "effective_per_shot": 3479.16,
+      "footprint": 7.6538,
+      "k": 0.3519,
+      "reliability": 0.574,
+      "sigma": 706.33,
+      "slot": "Armament@Upgrade",
+      "weapon": "AsianPhotonCannon_EMP"
+     }
+    ]
+   },
+   "asianalliance_railtower": {
+    "armaments": [
+     {
+      "avg_versus": 0.7517,
+      "damage_total": 31000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 31883.84,
+      "effective_dps": 2540.43,
+      "effective_per_shot": 25404.32,
+      "footprint": 0.6392,
+      "k": 0.8195,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "AsianRailgun"
+     }
+    ]
+   },
+   "asianalliance_spitfire": {
+    "armaments": [
+     {
+      "avg_versus": 0.6201,
+      "damage_total": 16000.0,
+      "eff_reload": 118.0,
+      "effective_damage": 12072.67,
+      "effective_dps": 381.65,
+      "effective_per_shot": 5629.41,
+      "footprint": 7.5302,
+      "k": 0.3518,
+      "reliability": 0.2839,
+      "sigma": 1400.0,
+      "slot": "Armament",
+      "weapon": "AsianSpitfireRockets"
+     }
+    ]
+   },
+   "cgpnch.asian": {
+    "armaments": [
+     {
+      "avg_versus": 0.6209,
+      "damage_total": 9888.0,
+      "eff_reload": 12.0,
+      "effective_damage": 9222.3,
+      "effective_dps": 332.35,
+      "effective_per_shot": 3988.15,
+      "footprint": 7.6538,
+      "k": 0.4033,
+      "reliability": 0.6525,
+      "sigma": 560.0,
+      "slot": "Armament",
+      "weapon": "AsianPunisherAG"
+     },
+     {
+      "avg_versus": 0.6209,
+      "damage_total": 9888.0,
+      "eff_reload": 12.0,
+      "effective_damage": 9222.3,
+      "effective_dps": 332.35,
+      "effective_per_shot": 3988.15,
+      "footprint": 7.6538,
+      "k": 0.4033,
+      "reliability": 0.6525,
+      "sigma": 560.0,
+      "slot": "Armament@Upgrade",
+      "weapon": "AsianPunisherAG_EMP"
+     }
+    ]
+   }
+  },
+  "infantry": {
+   "asianalliance_alligator": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 16000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 33401.09,
+      "effective_dps": 637.98,
+      "effective_per_shot": 24881.29,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianCrocBite"
+     },
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 16000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 33401.09,
+      "effective_dps": 1184.82,
+      "effective_per_shot": 24881.29,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@ELITE",
+      "weapon": "AsianCrocBite_elite"
+     }
+    ]
+   },
+   "asianalliance_asdf": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 3262.5,
+      "effective_dps": 302.6,
+      "effective_per_shot": 2017.34,
+      "footprint": 0.5193,
+      "k": 0.5043,
+      "reliability": 0.7507,
+      "sigma": 229.68,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ASDFGun"
+     },
+     {
+      "avg_versus": 0.6674,
+      "damage_total": 7000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 5277.01,
+      "effective_dps": 500.29,
+      "effective_per_shot": 3335.28,
+      "footprint": 1.1585,
+      "k": 0.4765,
+      "reliability": 0.6904,
+      "sigma": 229.68,
+      "slot": "Armament@Upgrade",
+      "weapon": "ASDFGun2"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 3262.5,
+      "effective_dps": 302.6,
+      "effective_per_shot": 2017.34,
+      "footprint": 0.5193,
+      "k": 0.5043,
+      "reliability": 0.7507,
+      "sigma": 229.68,
+      "slot": "Armament@GARRISONED",
+      "weapon": "ASDFGun"
+     },
+     {
+      "avg_versus": 0.6674,
+      "damage_total": 7000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 5277.01,
+      "effective_dps": 500.29,
+      "effective_per_shot": 3335.28,
+      "footprint": 1.1585,
+      "k": 0.4765,
+      "reliability": 0.6904,
+      "sigma": 229.68,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "ASDFGun2"
+     }
+    ]
+   },
+   "asianalliance_asiancommando": {
+    "armaments": [
+     {
+      "avg_versus": 0.8369,
+      "damage_total": 220000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 242656.16,
+      "effective_dps": 2084.54,
+      "effective_per_shot": 208454.21,
+      "footprint": 9.1924,
+      "k": 0.9475,
+      "reliability": 0.8094,
+      "sigma": 75.64,
+      "slot": "Armament@lockdown",
+      "weapon": "AsianSniperLockdown"
+     },
+     {
+      "avg_versus": 0.6413,
+      "damage_total": 30000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 34764.21,
+      "effective_dps": 889.44,
+      "effective_per_shot": 22236.11,
+      "footprint": 6.6637,
+      "k": 0.7412,
+      "reliability": 0.8256,
+      "sigma": 75.64,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianSniper"
+     },
+     {
+      "avg_versus": 0.7656,
+      "damage_total": 92000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 97960.33,
+      "effective_dps": 1534.47,
+      "effective_per_shot": 76723.6,
+      "footprint": 6.6837,
+      "k": 0.834,
+      "reliability": 0.7755,
+      "sigma": 75.64,
+      "slot": "Armament@PRIMARYUPGRADE",
+      "weapon": "AsianSniperAP"
+     },
+     {
+      "avg_versus": 0.6413,
+      "damage_total": 30000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 34764.21,
+      "effective_dps": 889.44,
+      "effective_per_shot": 22236.11,
+      "footprint": 6.6637,
+      "k": 0.7412,
+      "reliability": 0.8256,
+      "sigma": 75.64,
+      "slot": "Armament@GARRISONED",
+      "weapon": "AsianSniper"
+     },
+     {
+      "avg_versus": 0.7656,
+      "damage_total": 92000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 97960.33,
+      "effective_dps": 1534.47,
+      "effective_per_shot": 76723.6,
+      "footprint": 6.6837,
+      "k": 0.834,
+      "reliability": 0.7755,
+      "sigma": 75.64,
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "weapon": "AsianSniperAP"
+     }
+    ]
+   },
+   "asianalliance_asianflametrooper": {
+    "armaments": [
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 4000.0,
+      "eff_reload": 53.0,
+      "effective_damage": 5660.74,
+      "effective_dps": 383.53,
+      "effective_per_shot": 3387.86,
+      "footprint": 2.758,
+      "k": 0.847,
+      "reliability": 0.7257,
+      "sigma": 423.24,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianFlamerTroop"
+     },
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 4000.0,
+      "eff_reload": 49.0,
+      "effective_damage": 5422.85,
+      "effective_dps": 395.37,
+      "effective_per_shot": 3228.89,
+      "footprint": 2.758,
+      "k": 0.8072,
+      "reliability": 0.6662,
+      "sigma": 529.05,
+      "slot": "Armament@Upgrade",
+      "weapon": "AsianFlamerTroop2"
+     },
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 4000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 5225.56,
+      "effective_dps": 412.99,
+      "effective_per_shot": 3097.46,
+      "footprint": 2.758,
+      "k": 0.7744,
+      "reliability": 0.6169,
+      "sigma": 634.86,
+      "slot": "Armament@ELITE",
+      "weapon": "AsianFlamerTurret"
+     },
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 4000.0,
+      "eff_reload": 53.0,
+      "effective_damage": 5660.74,
+      "effective_dps": 383.53,
+      "effective_per_shot": 3387.86,
+      "footprint": 2.758,
+      "k": 0.847,
+      "reliability": 0.7257,
+      "sigma": 423.24,
+      "slot": "Armament@GARRISONED",
+      "weapon": "AsianFlamerTroop"
+     },
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 4000.0,
+      "eff_reload": 49.0,
+      "effective_damage": 5422.85,
+      "effective_dps": 395.37,
+      "effective_per_shot": 3228.89,
+      "footprint": 2.758,
+      "k": 0.8072,
+      "reliability": 0.6662,
+      "sigma": 529.05,
+      "slot": "Armament@GARRISONEDUpgrade",
+      "weapon": "AsianFlamerTroop2"
+     },
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 4000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 5225.56,
+      "effective_dps": 412.99,
+      "effective_per_shot": 3097.46,
+      "footprint": 2.758,
+      "k": 0.7744,
+      "reliability": 0.6169,
+      "sigma": 634.86,
+      "slot": "Armament@GARRISONEDE",
+      "weapon": "AsianFlamerTurret"
+     }
+    ]
+   },
+   "asianalliance_asianmilitia": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 6000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 5106.53,
+      "effective_dps": 61.73,
+      "effective_per_shot": 3086.7,
+      "footprint": 0.1598,
+      "k": 0.5144,
+      "reliability": 0.8111,
+      "sigma": 145.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "asianalliance_asianmilitia_shotgun"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 6000.0,
+      "eff_reload": 53.0,
+      "effective_damage": 5028.38,
+      "effective_dps": 114.48,
+      "effective_per_shot": 3033.76,
+      "footprint": 0.1598,
+      "k": 0.5056,
+      "reliability": 0.7981,
+      "sigma": 155.0,
+      "slot": "Armament@ELITE",
+      "weapon": "asianalliance_asianmilitia_shotgun_elite"
+     },
+     {
+      "avg_versus": 0.6909,
+      "damage_total": 8000.0,
+      "eff_reload": 92.0,
+      "effective_damage": 15318.58,
+      "effective_dps": 105.12,
+      "effective_per_shot": 9671.2,
+      "footprint": 8.7005,
+      "k": 1.2089,
+      "reliability": 0.8273,
+      "sigma": 497.37,
+      "slot": "Armament@GRENADE",
+      "weapon": "asianalliance_asianmilitia_grenade"
+     },
+     {
+      "avg_versus": 0.6909,
+      "damage_total": 8000.0,
+      "eff_reload": 95.0,
+      "effective_damage": 15196.95,
+      "effective_dps": 201.61,
+      "effective_per_shot": 9576.61,
+      "footprint": 8.7005,
+      "k": 1.1971,
+      "reliability": 0.8121,
+      "sigma": 541.23,
+      "slot": "Armament@GRENADEELITE",
+      "weapon": "asianalliance_asianmilitia_grenade_elite"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 6000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 5106.53,
+      "effective_dps": 61.73,
+      "effective_per_shot": 3086.7,
+      "footprint": 0.1598,
+      "k": 0.5144,
+      "reliability": 0.8111,
+      "sigma": 145.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "asianalliance_asianmilitia_shotgun"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 6000.0,
+      "eff_reload": 53.0,
+      "effective_damage": 5028.38,
+      "effective_dps": 114.48,
+      "effective_per_shot": 3033.76,
+      "footprint": 0.1598,
+      "k": 0.5056,
+      "reliability": 0.7981,
+      "sigma": 155.0,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "asianalliance_asianmilitia_shotgun_elite"
+     },
+     {
+      "avg_versus": 0.6909,
+      "damage_total": 8000.0,
+      "eff_reload": 92.0,
+      "effective_damage": 15318.58,
+      "effective_dps": 105.12,
+      "effective_per_shot": 9671.2,
+      "footprint": 8.7005,
+      "k": 1.2089,
+      "reliability": 0.8273,
+      "sigma": 497.37,
+      "slot": "Armament@GRENADEG",
+      "weapon": "asianalliance_asianmilitia_grenade"
+     },
+     {
+      "avg_versus": 0.6909,
+      "damage_total": 8000.0,
+      "eff_reload": 95.0,
+      "effective_damage": 15196.95,
+      "effective_dps": 201.61,
+      "effective_per_shot": 9576.61,
+      "footprint": 8.7005,
+      "k": 1.1971,
+      "reliability": 0.8121,
+      "sigma": 541.23,
+      "slot": "Armament@GRENADEGE",
+      "weapon": "asianalliance_asianmilitia_grenade_elite"
+     }
+    ]
+   },
+   "asianalliance_asiantankkiller": {
+    "armaments": [
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 34000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 50614.14,
+      "effective_dps": 263.22,
+      "effective_per_shot": 19741.13,
+      "footprint": 2.758,
+      "k": 0.5806,
+      "reliability": 0.7992,
+      "sigma": 308.4,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianTankKillerRocket"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 34000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 50614.14,
+      "effective_dps": 263.22,
+      "effective_per_shot": 19741.13,
+      "footprint": 2.758,
+      "k": 0.5806,
+      "reliability": 0.7992,
+      "sigma": 308.4,
+      "slot": "Armament@Upgrade",
+      "weapon": "AsianTankKillerRocket_upgrade"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 68000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 99460.43,
+      "effective_dps": 513.02,
+      "effective_per_shot": 38476.81,
+      "footprint": 2.758,
+      "k": 0.5658,
+      "reliability": 0.7732,
+      "sigma": 348.4,
+      "slot": "Armament@PRIMARYELITE",
+      "weapon": "AsianTankKillerRocket_elite"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 68000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 99460.43,
+      "effective_dps": 513.02,
+      "effective_per_shot": 38476.81,
+      "footprint": 2.758,
+      "k": 0.5658,
+      "reliability": 0.7732,
+      "sigma": 348.4,
+      "slot": "Armament@PRIMARYELITEUpgrade",
+      "weapon": "AsianTankKillerRocket_upgrade_elite"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 34000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 50614.14,
+      "effective_dps": 263.22,
+      "effective_per_shot": 19741.13,
+      "footprint": 2.758,
+      "k": 0.5806,
+      "reliability": 0.7992,
+      "sigma": 308.4,
+      "slot": "Armament@GARRISONED",
+      "weapon": "AsianTankKillerRocket"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 34000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 50614.14,
+      "effective_dps": 263.22,
+      "effective_per_shot": 19741.13,
+      "footprint": 2.758,
+      "k": 0.5806,
+      "reliability": 0.7992,
+      "sigma": 308.4,
+      "slot": "Armament@GARRISONEDUpgrade",
+      "weapon": "AsianTankKillerRocket_upgrade"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 68000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 99460.43,
+      "effective_dps": 513.02,
+      "effective_per_shot": 38476.81,
+      "footprint": 2.758,
+      "k": 0.5658,
+      "reliability": 0.7732,
+      "sigma": 348.4,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "AsianTankKillerRocket_elite"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 68000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 99460.43,
+      "effective_dps": 513.02,
+      "effective_per_shot": 38476.81,
+      "footprint": 2.758,
+      "k": 0.5658,
+      "reliability": 0.7732,
+      "sigma": 348.4,
+      "slot": "Armament@GARRISONEDELITEUpgrade",
+      "weapon": "AsianTankKillerRocket_upgrade_elite"
+     }
+    ]
+   },
+   "asianalliance_fanatic": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 1276.49,
+      "effective_dps": 96.49,
+      "effective_per_shot": 675.46,
+      "footprint": 0.5193,
+      "k": 0.1689,
+      "reliability": 0.2542,
+      "sigma": 817.5,
+      "slot": "Armament@PRIMARY",
+      "weapon": "asianalliance_fanatic_shotgun"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 1276.49,
+      "effective_dps": 125.44,
+      "effective_per_shot": 675.46,
+      "footprint": 0.5193,
+      "k": 0.1689,
+      "reliability": 0.2542,
+      "sigma": 817.5,
+      "slot": "Armament@Upgrade",
+      "weapon": "asianalliance_fanatic_shotgun_upgrade"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 1276.49,
+      "effective_dps": 192.99,
+      "effective_per_shot": 675.46,
+      "footprint": 0.5193,
+      "k": 0.1689,
+      "reliability": 0.2542,
+      "sigma": 817.5,
+      "slot": "Armament@ELITE",
+      "weapon": "asianalliance_fanatic_shotgun_elite"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 1276.49,
+      "effective_dps": 96.49,
+      "effective_per_shot": 675.46,
+      "footprint": 0.5193,
+      "k": 0.1689,
+      "reliability": 0.2542,
+      "sigma": 817.5,
+      "slot": "Armament@GARRISONED",
+      "weapon": "asianalliance_fanatic_shotgun"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 1276.49,
+      "effective_dps": 125.44,
+      "effective_per_shot": 675.46,
+      "footprint": 0.5193,
+      "k": 0.1689,
+      "reliability": 0.2542,
+      "sigma": 817.5,
+      "slot": "Armament@GARRISONEDUpgrade",
+      "weapon": "asianalliance_fanatic_shotgun_upgrade"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 1276.49,
+      "effective_dps": 192.99,
+      "effective_per_shot": 675.46,
+      "footprint": 0.5193,
+      "k": 0.1689,
+      "reliability": 0.2542,
+      "sigma": 817.5,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "asianalliance_fanatic_shotgun_elite"
+     }
+    ]
+   },
+   "asianalliance_japanesesamurai": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 20000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 41751.37,
+      "effective_dps": 777.54,
+      "effective_per_shot": 31101.61,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Sword1",
+      "weapon": "AsianSamuraiSword1"
+     },
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 20000.0,
+      "eff_reload": 43.0,
+      "effective_damage": 41751.37,
+      "effective_dps": 1446.59,
+      "effective_per_shot": 31101.61,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Sword2",
+      "weapon": "AsianSamuraiSword2"
+     },
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 20000.0,
+      "eff_reload": 46.0,
+      "effective_damage": 41751.37,
+      "effective_dps": 2028.37,
+      "effective_per_shot": 31101.61,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Sword3",
+      "weapon": "AsianSamuraiSword3"
+     }
+    ]
+   },
+   "asianalliance_plasmatrooper": {
+    "armaments": [
+     {
+      "avg_versus": 0.6967,
+      "damage_total": 16000.0,
+      "eff_reload": 34.0,
+      "effective_damage": 25043.5,
+      "effective_dps": 478.1,
+      "effective_per_shot": 16255.42,
+      "footprint": 28.221,
+      "k": 1.016,
+      "reliability": 0.6833,
+      "sigma": 650.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianSinglePlasma"
+     },
+     {
+      "avg_versus": 0.6967,
+      "damage_total": 16000.0,
+      "eff_reload": 37.0,
+      "effective_damage": 24916.44,
+      "effective_dps": 873.71,
+      "effective_per_shot": 16163.68,
+      "footprint": 28.221,
+      "k": 1.0102,
+      "reliability": 0.6754,
+      "sigma": 674.89,
+      "slot": "Armament@ELITE",
+      "weapon": "AsianSinglePlasma_elite"
+     },
+     {
+      "avg_versus": 0.6967,
+      "damage_total": 16000.0,
+      "eff_reload": 34.0,
+      "effective_damage": 25043.5,
+      "effective_dps": 478.1,
+      "effective_per_shot": 16255.42,
+      "footprint": 28.221,
+      "k": 1.016,
+      "reliability": 0.6833,
+      "sigma": 650.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "AsianSinglePlasma"
+     },
+     {
+      "avg_versus": 0.6967,
+      "damage_total": 16000.0,
+      "eff_reload": 37.0,
+      "effective_damage": 24916.44,
+      "effective_dps": 873.71,
+      "effective_per_shot": 16163.68,
+      "footprint": 28.221,
+      "k": 1.0102,
+      "reliability": 0.6754,
+      "sigma": 674.89,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "AsianSinglePlasma_elite"
+     }
+    ]
+   },
+   "asianalliance_shinobi": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 40362.06,
+      "effective_dps": 1198.2,
+      "effective_per_shot": 29955.02,
+      "footprint": 4.3503,
+      "k": 1.4978,
+      "reliability": 0.9305,
+      "sigma": 200.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianNinjaStar"
+     },
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 20000.0,
+      "eff_reload": 28.0,
+      "effective_damage": 40057.39,
+      "effective_dps": 2121.68,
+      "effective_per_shot": 29703.58,
+      "footprint": 4.3503,
+      "k": 1.4852,
+      "reliability": 0.9153,
+      "sigma": 243.86,
+      "slot": "Armament@ELITE",
+      "weapon": "AsianNinjaStar_elite"
+     },
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 40362.06,
+      "effective_dps": 1198.2,
+      "effective_per_shot": 29955.02,
+      "footprint": 4.3503,
+      "k": 1.4978,
+      "reliability": 0.9305,
+      "sigma": 200.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "AsianNinjaStar"
+     },
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 20000.0,
+      "eff_reload": 28.0,
+      "effective_damage": 40057.39,
+      "effective_dps": 2121.68,
+      "effective_per_shot": 29703.58,
+      "footprint": 4.3503,
+      "k": 1.4852,
+      "reliability": 0.9153,
+      "sigma": 243.86,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "AsianNinjaStar_elite"
+     }
+    ]
+   },
+   "asianalliance_veteranarcher": {
+    "armaments": [
+     {
+      "avg_versus": 0.6138,
+      "damage_total": 13888.0,
+      "eff_reload": 68.0,
+      "effective_damage": 13516.94,
+      "effective_dps": 268.2,
+      "effective_per_shot": 6079.16,
+      "footprint": 9.3391,
+      "k": 0.4377,
+      "reliability": 0.7131,
+      "sigma": 479.56,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianMaidenBow"
+     },
+     {
+      "avg_versus": 0.6138,
+      "damage_total": 13888.0,
+      "eff_reload": 68.0,
+      "effective_damage": 13170.2,
+      "effective_dps": 516.46,
+      "effective_per_shot": 5853.18,
+      "footprint": 9.3391,
+      "k": 0.4215,
+      "reliability": 0.6882,
+      "sigma": 524.0,
+      "slot": "Armament@ELITE",
+      "weapon": "AsianMaidenBow_elite"
+     },
+     {
+      "avg_versus": 0.6138,
+      "damage_total": 13888.0,
+      "eff_reload": 68.0,
+      "effective_damage": 13516.94,
+      "effective_dps": 268.2,
+      "effective_per_shot": 6079.16,
+      "footprint": 9.3391,
+      "k": 0.4377,
+      "reliability": 0.7131,
+      "sigma": 479.56,
+      "slot": "Armament@GARRISONED",
+      "weapon": "AsianMaidenBow"
+     },
+     {
+      "avg_versus": 0.6138,
+      "damage_total": 13888.0,
+      "eff_reload": 68.0,
+      "effective_damage": 13170.2,
+      "effective_dps": 516.46,
+      "effective_per_shot": 5853.18,
+      "footprint": 9.3391,
+      "k": 0.4215,
+      "reliability": 0.6882,
+      "sigma": 524.0,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "AsianMaidenBow_elite"
+     }
+    ]
+   }
+  },
+  "naval": {
+   "gunb.asian": {
+    "armaments": [
+     {
+      "avg_versus": 0.7412,
+      "damage_total": 16000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 15841.62,
+      "effective_dps": 238.19,
+      "effective_per_shot": 9527.55,
+      "footprint": 1.5979,
+      "k": 0.5955,
+      "reliability": 0.5906,
+      "sigma": 675.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AAGunBoatCannon"
+     },
+     {
+      "avg_versus": 0.7412,
+      "damage_total": 16000.0,
+      "eff_reload": 43.0,
+      "effective_damage": 15659.14,
+      "effective_dps": 436.27,
+      "effective_per_shot": 9379.79,
+      "footprint": 1.5979,
+      "k": 0.5862,
+      "reliability": 0.5792,
+      "sigma": 700.0,
+      "slot": "Armament@ELITE",
+      "weapon": "AAGunBoatCannon_elite"
+     },
+     {
+      "avg_versus": 0.6308,
+      "damage_total": 8000.0,
+      "eff_reload": 21.0,
+      "effective_damage": 7263.3,
+      "effective_dps": 409.43,
+      "effective_per_shot": 4299.02,
+      "footprint": 6.7427,
+      "k": 0.5374,
+      "reliability": 0.4865,
+      "sigma": 351.56,
+      "slot": "Armament@AA",
+      "weapon": "AAGunBoatFlak"
+     },
+     {
+      "avg_versus": 0.6308,
+      "damage_total": 8000.0,
+      "eff_reload": 27.0,
+      "effective_damage": 7092.05,
+      "effective_dps": 620.22,
+      "effective_per_shot": 4186.46,
+      "footprint": 6.7427,
+      "k": 0.5233,
+      "reliability": 0.4651,
+      "sigma": 390.62,
+      "slot": "Armament@EliteAA",
+      "weapon": "AAGunBoatFlak_elite"
+     },
+     {
+      "avg_versus": 0.6087,
+      "damage_total": 60000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 66364.59,
+      "effective_dps": 591.26,
+      "effective_per_shot": 35475.77,
+      "footprint": 2.758,
+      "k": 0.5913,
+      "reliability": 0.4166,
+      "sigma": 1360.0,
+      "slot": "Armament@AntiSub",
+      "weapon": "DepthCharge"
+     },
+     {
+      "avg_versus": 0.6087,
+      "damage_total": 60000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 66364.59,
+      "effective_dps": 591.26,
+      "effective_per_shot": 35475.77,
+      "footprint": 2.758,
+      "k": 0.5913,
+      "reliability": 0.4166,
+      "sigma": 1360.0,
+      "slot": "Armament@AntiSubElite",
+      "weapon": "DepthCharge"
+     }
+    ]
+   },
+   "lsub.asian": {
+    "armaments": [
+     {
+      "avg_versus": 0.6478,
+      "damage_total": 24000.0,
+      "eff_reload": 128.0,
+      "effective_damage": 41539.83,
+      "effective_dps": 357.67,
+      "effective_per_shot": 22891.0,
+      "footprint": 9.1496,
+      "k": 0.9538,
+      "reliability": 0.5871,
+      "sigma": 1000.0,
+      "slot": "Armament@Torp",
+      "weapon": "AsianSmallTorpedo"
+     }
+    ]
+   },
+   "panth.asian": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 19107.51,
+      "effective_dps": 207.2,
+      "effective_per_shot": 11188.75,
+      "footprint": 4.3503,
+      "k": 1.1189,
+      "reliability": 0.8232,
+      "sigma": 509.11,
+      "slot": "Armament",
+      "weapon": "RA2120mm"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 57.0,
+      "effective_damage": 18972.71,
+      "effective_dps": 388.99,
+      "effective_per_shot": 11086.18,
+      "footprint": 4.3503,
+      "k": 1.1086,
+      "reliability": 0.8097,
+      "sigma": 548.02,
+      "slot": "Armament@elite",
+      "weapon": "RA2120mm_elite"
+     }
+    ]
+   },
+   "quasfrig.asian": {
+    "armaments": [
+     {
+      "avg_versus": 0.6209,
+      "damage_total": 9888.0,
+      "eff_reload": 28.0,
+      "effective_damage": 8463.84,
+      "effective_dps": 374.0,
+      "effective_per_shot": 3490.69,
+      "footprint": 7.6538,
+      "k": 0.353,
+      "reliability": 0.5758,
+      "sigma": 703.15,
+      "slot": "Armament@AG",
+      "weapon": "AsianQuasarBoatAG"
+     },
+     {
+      "avg_versus": 0.6209,
+      "damage_total": 9888.0,
+      "eff_reload": 28.0,
+      "effective_damage": 8463.84,
+      "effective_dps": 374.0,
+      "effective_per_shot": 3490.69,
+      "footprint": 7.6538,
+      "k": 0.353,
+      "reliability": 0.5758,
+      "sigma": 703.15,
+      "slot": "Armament@UpgradeAG",
+      "weapon": "AsianQuasarBoatAG_EMP"
+     },
+     {
+      "avg_versus": 0.6209,
+      "damage_total": 9888.0,
+      "eff_reload": 28.0,
+      "effective_damage": 9902.8,
+      "effective_dps": 476.31,
+      "effective_per_shot": 4445.51,
+      "footprint": 7.6538,
+      "k": 0.4496,
+      "reliability": 0.7213,
+      "sigma": 441.15,
+      "slot": "Armament@AA",
+      "weapon": "AsianQuasarBoat_AA"
+     },
+     {
+      "avg_versus": 0.6209,
+      "damage_total": 9888.0,
+      "eff_reload": 28.0,
+      "effective_damage": 9902.8,
+      "effective_dps": 476.31,
+      "effective_per_shot": 4445.51,
+      "footprint": 7.6538,
+      "k": 0.4496,
+      "reliability": 0.7213,
+      "sigma": 441.15,
+      "slot": "Armament@UpgradeAA",
+      "weapon": "AsianQuasarBoat_EMP_AA"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "asianalliance_asianflametank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 4000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 5840.3,
+      "effective_dps": 526.29,
+      "effective_per_shot": 3508.58,
+      "footprint": 2.758,
+      "k": 0.8771,
+      "reliability": 0.7706,
+      "sigma": 352.38,
+      "slot": "Armament@AG",
+      "weapon": "AsianFlamerTank"
+     },
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 4000.0,
+      "eff_reload": 58.0,
+      "effective_damage": 5602.08,
+      "effective_dps": 692.81,
+      "effective_per_shot": 3348.59,
+      "footprint": 2.758,
+      "k": 0.8371,
+      "reliability": 0.711,
+      "sigma": 447.62,
+      "slot": "Armament@ELITE",
+      "weapon": "AsianFlamerTank_elite"
+     }
+    ]
+   },
+   "asianalliance_heavyrailguntank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7526,
+      "damage_total": 37000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 38033.64,
+      "effective_dps": 404.88,
+      "effective_per_shot": 30365.68,
+      "footprint": 0.6392,
+      "k": 0.8207,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianRailTank2"
+     },
+     {
+      "avg_versus": 0.7536,
+      "damage_total": 49000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 50333.25,
+      "effective_dps": 447.65,
+      "effective_per_shot": 40288.4,
+      "footprint": 0.6392,
+      "k": 0.8222,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@ELITE",
+      "weapon": "AsianRailTank3"
+     }
+    ]
+   },
+   "asianalliance_howitzer": {
+    "armaments": [
+     {
+      "avg_versus": 0.7088,
+      "damage_total": 40000.0,
+      "eff_reload": 160.0,
+      "effective_damage": 74073.5,
+      "effective_dps": 282.63,
+      "effective_per_shot": 45220.86,
+      "footprint": 10.7419,
+      "k": 1.1305,
+      "reliability": 0.5091,
+      "sigma": 1653.33,
+      "slot": "Armament",
+      "weapon": "AsianHowitzerCannon"
+     },
+     {
+      "avg_versus": 0.7088,
+      "damage_total": 40000.0,
+      "eff_reload": 160.0,
+      "effective_damage": 71460.13,
+      "effective_dps": 270.24,
+      "effective_per_shot": 43238.28,
+      "footprint": 10.7419,
+      "k": 1.081,
+      "reliability": 0.4438,
+      "sigma": 1986.67,
+      "slot": "Armament@ELITE",
+      "weapon": "AsianHowitzerCannon_elite"
+     }
+    ]
+   },
+   "asianalliance_lynxtank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6656,
+      "damage_total": 12000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 14085.53,
+      "effective_dps": 159.61,
+      "effective_per_shot": 8778.34,
+      "footprint": 14.7986,
+      "k": 0.7315,
+      "reliability": 0.5572,
+      "sigma": 500.26,
+      "slot": "Armament",
+      "weapon": "AsianLynxTankCannon"
+     },
+     {
+      "avg_versus": 0.6656,
+      "damage_total": 12000.0,
+      "eff_reload": 58.0,
+      "effective_damage": 13967.4,
+      "effective_dps": 299.92,
+      "effective_per_shot": 8697.62,
+      "footprint": 14.7986,
+      "k": 0.7248,
+      "reliability": 0.5473,
+      "sigma": 537.64,
+      "slot": "Armament@elite",
+      "weapon": "AsianLynxTankCannon_elite"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 3275.05,
+      "effective_dps": 110.52,
+      "effective_per_shot": 2026.23,
+      "footprint": 0.5193,
+      "k": 0.5066,
+      "reliability": 0.7538,
+      "sigma": 226.78,
+      "slot": "Armament@MG",
+      "weapon": "AsianLynxMG"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 61.0,
+      "effective_damage": 3253.34,
+      "effective_dps": 197.79,
+      "effective_per_shot": 2010.85,
+      "footprint": 0.5193,
+      "k": 0.5027,
+      "reliability": 0.7484,
+      "sigma": 231.78,
+      "slot": "Armament@MGelite",
+      "weapon": "AsianLynxMG_elite"
+     }
+    ]
+   },
+   "asianalliance_pulverizer": {
+    "armaments": [
+     {
+      "avg_versus": 0.6738,
+      "damage_total": 6000.0,
+      "eff_reload": 12.0,
+      "effective_damage": 8401.79,
+      "effective_dps": 460.71,
+      "effective_per_shot": 5528.49,
+      "footprint": 6.9109,
+      "k": 0.9214,
+      "reliability": 0.8244,
+      "sigma": 211.03,
+      "slot": "Armament@1",
+      "weapon": "AsianPulverizerGatling"
+     },
+     {
+      "avg_versus": 0.6738,
+      "damage_total": 6000.0,
+      "eff_reload": 12.0,
+      "effective_damage": 8401.79,
+      "effective_dps": 460.71,
+      "effective_per_shot": 5528.49,
+      "footprint": 6.9109,
+      "k": 0.9214,
+      "reliability": 0.8244,
+      "sigma": 211.03,
+      "slot": "Armament@2",
+      "weapon": "AsianPulverizerGatling"
+     }
+    ]
+   },
+   "asianalliance_pulverizermecha": {
+    "armaments": [
+     {
+      "avg_versus": 0.6621,
+      "damage_total": 10000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 13398.85,
+      "effective_dps": 575.31,
+      "effective_per_shot": 8629.58,
+      "footprint": 10.3004,
+      "k": 0.863,
+      "reliability": 0.8249,
+      "sigma": 214.04,
+      "slot": "Armament@1",
+      "weapon": "AsianPulverizerMechaGatling"
+     },
+     {
+      "avg_versus": 0.6621,
+      "damage_total": 10000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 13398.85,
+      "effective_dps": 575.31,
+      "effective_per_shot": 8629.58,
+      "footprint": 10.3004,
+      "k": 0.863,
+      "reliability": 0.8249,
+      "sigma": 214.04,
+      "slot": "Armament@2",
+      "weapon": "AsianPulverizerMechaGatling"
+     }
+    ]
+   },
+   "asianalliance_quasar": {
+    "armaments": [
+     {
+      "avg_versus": 0.6209,
+      "damage_total": 9888.0,
+      "eff_reload": 33.0,
+      "effective_damage": 8690.03,
+      "effective_dps": 110.24,
+      "effective_per_shot": 3637.93,
+      "footprint": 7.6538,
+      "k": 0.3679,
+      "reliability": 0.5987,
+      "sigma": 660.0,
+      "slot": "Armament@AG",
+      "weapon": "AsianQuasarAG"
+     },
+     {
+      "avg_versus": 0.6209,
+      "damage_total": 9888.0,
+      "eff_reload": 33.0,
+      "effective_damage": 8690.03,
+      "effective_dps": 110.24,
+      "effective_per_shot": 3637.93,
+      "footprint": 7.6538,
+      "k": 0.3679,
+      "reliability": 0.5987,
+      "sigma": 660.0,
+      "slot": "Armament@UpgradeAG",
+      "weapon": "AsianQuasarAG_EMP"
+     },
+     {
+      "avg_versus": 0.6209,
+      "damage_total": 9888.0,
+      "eff_reload": 33.0,
+      "effective_damage": 9612.31,
+      "effective_dps": 128.75,
+      "effective_per_shot": 4248.77,
+      "footprint": 7.6538,
+      "k": 0.4297,
+      "reliability": 0.6919,
+      "sigma": 490.0,
+      "slot": "Armament@AA",
+      "weapon": "AsianQuasar_AA"
+     },
+     {
+      "avg_versus": 0.6209,
+      "damage_total": 9888.0,
+      "eff_reload": 33.0,
+      "effective_damage": 9612.31,
+      "effective_dps": 128.75,
+      "effective_per_shot": 4248.77,
+      "footprint": 7.6538,
+      "k": 0.4297,
+      "reliability": 0.6919,
+      "sigma": 490.0,
+      "slot": "Armament@UpgradeAA",
+      "weapon": "AsianQuasar_EMP_AA"
+     }
+    ]
+   },
+   "asianalliance_railguntank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7505,
+      "damage_total": 25000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 25734.03,
+      "effective_dps": 340.72,
+      "effective_per_shot": 20442.96,
+      "footprint": 0.6392,
+      "k": 0.8177,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianRailTank"
+     },
+     {
+      "avg_versus": 0.7526,
+      "damage_total": 37000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 38033.64,
+      "effective_dps": 404.88,
+      "effective_per_shot": 30365.68,
+      "footprint": 0.6392,
+      "k": 0.8207,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@ELITE",
+      "weapon": "AsianRailTank2"
+     }
+    ]
+   },
+   "asianalliance_type89mlrs": {
+    "armaments": [
+     {
+      "avg_versus": 0.6201,
+      "damage_total": 8000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 6376.62,
+      "effective_dps": 191.15,
+      "effective_per_shot": 3058.45,
+      "footprint": 7.5302,
+      "k": 0.3823,
+      "reliability": 0.3264,
+      "sigma": 1166.67,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianMLRS"
+     }
+    ]
+   },
+   "asianalliance_viper": {
+    "armaments": [
+     {
+      "avg_versus": 0.6995,
+      "damage_total": 24000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 41896.22,
+      "effective_dps": 471.12,
+      "effective_per_shot": 28267.49,
+      "footprint": 24.8918,
+      "k": 1.1778,
+      "reliability": 0.7085,
+      "sigma": 850.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianChemical"
+     },
+     {
+      "avg_versus": 0.6995,
+      "damage_total": 24000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 41518.93,
+      "effective_dps": 889.11,
+      "effective_per_shot": 28006.9,
+      "footprint": 24.8918,
+      "k": 1.167,
+      "reliability": 0.6928,
+      "sigma": 900.0,
+      "slot": "Armament@ELITE",
+      "weapon": "AsianChemical_elite"
+     }
+    ]
+   },
+   "asianalliance_warturtle": {
+    "armaments": [
+     {
+      "avg_versus": 0.6909,
+      "damage_total": 8000.0,
+      "eff_reload": 92.0,
+      "effective_damage": 15310.43,
+      "effective_dps": 105.05,
+      "effective_per_shot": 9664.85,
+      "footprint": 8.7005,
+      "k": 1.2081,
+      "reliability": 0.8262,
+      "sigma": 500.31,
+      "slot": "Armament",
+      "weapon": "AsianGrenade"
+     }
+    ]
+   },
+   "ptnk.asian": {
+    "armaments": [
+     {
+      "avg_versus": 0.6967,
+      "damage_total": 16000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 25042.61,
+      "effective_dps": 1083.65,
+      "effective_per_shot": 16254.77,
+      "footprint": 28.221,
+      "k": 1.0159,
+      "reliability": 0.6833,
+      "sigma": 650.18,
+      "slot": "Armament@PRIMARY",
+      "weapon": "AsianTwinPlasma"
+     },
+     {
+      "avg_versus": 0.6967,
+      "damage_total": 16000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 24896.9,
+      "effective_dps": 1614.96,
+      "effective_per_shot": 16149.56,
+      "footprint": 28.221,
+      "k": 1.0093,
+      "reliability": 0.6742,
+      "sigma": 678.78,
+      "slot": "Armament@ELITE",
+      "weapon": "AsianTwinPlasma_elite"
+     }
+    ]
+   }
+  }
+ }
+}

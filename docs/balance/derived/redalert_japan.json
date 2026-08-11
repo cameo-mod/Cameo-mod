@@ -1,0 +1,1491 @@
+{
+ "ledger": "redalert_japan",
+ "pack": "mods/cameo/ContentPacks/RedAlert/Japan",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "japan_japanesebomber": {
+    "armaments": [
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 6000.0,
+      "eff_reload": 136.0,
+      "effective_damage": 5324.99,
+      "effective_dps": 299.8,
+      "effective_per_shot": 3397.75,
+      "footprint": 0.3595,
+      "k": 0.5663,
+      "reliability": 0.7976,
+      "sigma": 233.07,
+      "slot": "Armament@Guns",
+      "weapon": "ZeroFighterChainGun"
+     },
+     {
+      "avg_versus": 0.6916,
+      "damage_total": 12000.0,
+      "eff_reload": 136.0,
+      "effective_damage": 9780.32,
+      "effective_dps": 553.32,
+      "effective_per_shot": 6270.95,
+      "footprint": 3.3412,
+      "k": 0.5226,
+      "reliability": 0.7017,
+      "sigma": 233.07,
+      "slot": "Armament@UpgradeGuns",
+      "weapon": "ZeroFighterChainGunWaveforce"
+     },
+     {
+      "avg_versus": 0.7391,
+      "damage_total": 20000.0,
+      "eff_reload": 109.0,
+      "effective_damage": 45666.62,
+      "effective_dps": 1251.09,
+      "effective_per_shot": 34092.29,
+      "footprint": 6.3916,
+      "k": 1.7046,
+      "reliability": 0.6854,
+      "sigma": 980.0,
+      "slot": "Armament@Bombs",
+      "weapon": "JapaneseHeavyBomb"
+     },
+     {
+      "avg_versus": 0.7503,
+      "damage_total": 30000.0,
+      "eff_reload": 115.0,
+      "effective_damage": 67461.3,
+      "effective_dps": 1767.7,
+      "effective_per_shot": 50821.41,
+      "footprint": 18.7593,
+      "k": 1.694,
+      "reliability": 0.6854,
+      "sigma": 980.0,
+      "slot": "Armament@UpgradeBombs",
+      "weapon": "JapanesePlasmaBomb"
+     }
+    ]
+   },
+   "japan_skyhawk": {
+    "armaments": [
+     {
+      "avg_versus": 0.6026,
+      "damage_total": 64000.0,
+      "eff_reload": 128.0,
+      "effective_damage": 109254.29,
+      "effective_dps": 454.27,
+      "effective_per_shot": 58146.36,
+      "footprint": 7.1082,
+      "k": 0.9085,
+      "reliability": 0.8186,
+      "sigma": 363.52,
+      "slot": "Armament@Missiles",
+      "weapon": "SkyHawkArrows"
+     },
+     {
+      "avg_versus": 0.6776,
+      "damage_total": 72000.0,
+      "eff_reload": 128.0,
+      "effective_damage": 87964.24,
+      "effective_dps": 396.22,
+      "effective_per_shot": 50715.98,
+      "footprint": 10.2697,
+      "k": 0.7044,
+      "reliability": 0.6662,
+      "sigma": 363.52,
+      "slot": "Armament@MissilesUpgrade",
+      "weapon": "SkyHawkArrowsEnergized"
+     },
+     {
+      "avg_versus": 0.6569,
+      "damage_total": 16000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 27419.4,
+      "effective_dps": 513.46,
+      "effective_per_shot": 16430.71,
+      "footprint": 7.1082,
+      "k": 1.0269,
+      "reliability": 0.8252,
+      "sigma": 350.2,
+      "slot": "Armament@Cannon",
+      "weapon": "SkyHawkCannon"
+     },
+     {
+      "avg_versus": 0.6804,
+      "damage_total": 18000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 25997.57,
+      "effective_dps": 473.51,
+      "effective_per_shot": 15152.25,
+      "footprint": 12.0977,
+      "k": 0.8418,
+      "reliability": 0.7872,
+      "sigma": 250.1,
+      "slot": "Armament@CannonUpgrade",
+      "weapon": "SkyHawkPlasmaCannon"
+     },
+     {
+      "avg_versus": 0.6408,
+      "damage_total": 4000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 4904.53,
+      "effective_dps": 364.21,
+      "effective_per_shot": 2913.64,
+      "footprint": 3.1175,
+      "k": 0.7284,
+      "reliability": 0.8364,
+      "sigma": 215.26,
+      "slot": "Armament@ChainGun",
+      "weapon": "SkyHawkChainGun"
+     },
+     {
+      "avg_versus": 0.6678,
+      "damage_total": 7000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 6972.29,
+      "effective_dps": 534.18,
+      "effective_per_shot": 4273.47,
+      "footprint": 3.7567,
+      "k": 0.6105,
+      "reliability": 0.747,
+      "sigma": 215.26,
+      "slot": "Armament@ChainGunUpgrade",
+      "weapon": "SkyHawkChainGunWaveforce"
+     }
+    ]
+   },
+   "japan_zerofighter": {
+    "armaments": [
+     {
+      "avg_versus": 0.6026,
+      "damage_total": 36000.0,
+      "eff_reload": 119.0,
+      "effective_damage": 57034.05,
+      "effective_dps": 501.49,
+      "effective_per_shot": 29838.49,
+      "footprint": 7.1082,
+      "k": 0.8288,
+      "reliability": 0.6957,
+      "sigma": 641.8,
+      "slot": "Armament@Missiles",
+      "weapon": "ZeroFighterArrows"
+     },
+     {
+      "avg_versus": 0.6776,
+      "damage_total": 36000.0,
+      "eff_reload": 119.0,
+      "effective_damage": 39703.94,
+      "effective_dps": 376.34,
+      "effective_per_shot": 22392.06,
+      "footprint": 10.2697,
+      "k": 0.622,
+      "reliability": 0.5473,
+      "sigma": 641.8,
+      "slot": "Armament@MissilesUpgrade",
+      "weapon": "ZeroFighterArrowsEnergized"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 6000.0,
+      "eff_reload": 136.0,
+      "effective_damage": 5324.99,
+      "effective_dps": 299.8,
+      "effective_per_shot": 3397.75,
+      "footprint": 0.3595,
+      "k": 0.5663,
+      "reliability": 0.7976,
+      "sigma": 233.07,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ZeroFighterChainGun"
+     },
+     {
+      "avg_versus": 0.6916,
+      "damage_total": 12000.0,
+      "eff_reload": 136.0,
+      "effective_damage": 9780.32,
+      "effective_dps": 553.32,
+      "effective_per_shot": 6270.95,
+      "footprint": 3.3412,
+      "k": 0.5226,
+      "reliability": 0.7017,
+      "sigma": 233.07,
+      "slot": "Armament@Upgrade",
+      "weapon": "ZeroFighterChainGunWaveforce"
+     }
+    ]
+   }
+  },
+  "defenses": {
+   "japan_ballistatower": {
+    "armaments": [
+     {
+      "avg_versus": 0.6212,
+      "damage_total": 40000.0,
+      "eff_reload": 200.0,
+      "effective_damage": 14589.3,
+      "effective_dps": 159.09,
+      "effective_per_shot": 6363.7,
+      "footprint": 3.5814,
+      "k": 0.1591,
+      "reliability": 0.1409,
+      "sigma": 1969.84,
+      "slot": "Armament@PRIMARY",
+      "weapon": "BallistaTowerMultiShot"
+     },
+     {
+      "avg_versus": 0.5787,
+      "damage_total": 160000.0,
+      "eff_reload": 200.0,
+      "effective_damage": 220668.59,
+      "effective_dps": 638.12,
+      "effective_per_shot": 127624.95,
+      "footprint": 2.758,
+      "k": 0.7977,
+      "reliability": 0.6897,
+      "sigma": 484.92,
+      "slot": "Armament@AIR",
+      "weapon": "BallistaSingleShotAir"
+     },
+     {
+      "avg_versus": 0.6913,
+      "damage_total": 45000.0,
+      "eff_reload": 200.0,
+      "effective_damage": 20974.37,
+      "effective_dps": 290.91,
+      "effective_per_shot": 11636.55,
+      "footprint": 6.8226,
+      "k": 0.2586,
+      "reliability": 0.102,
+      "sigma": 3219.84,
+      "slot": "Armament@Upgrade",
+      "weapon": "BallistaTowerMultiShotEnergized"
+     },
+     {
+      "avg_versus": 0.7005,
+      "damage_total": 170000.0,
+      "eff_reload": 200.0,
+      "effective_damage": 179243.43,
+      "effective_dps": 535.68,
+      "effective_per_shot": 107135.63,
+      "footprint": 16.9305,
+      "k": 0.6302,
+      "reliability": 0.5643,
+      "sigma": 484.92,
+      "slot": "Armament@UpgradeAIR",
+      "weapon": "BallistaSingleShotAirEnergized"
+     }
+    ]
+   },
+   "japan_japanesemgnest": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 6491.97,
+      "effective_dps": 442.56,
+      "effective_per_shot": 3983.04,
+      "footprint": 0.5193,
+      "k": 0.4979,
+      "reliability": 0.7466,
+      "sigma": 233.48,
+      "slot": "Armament",
+      "weapon": "JHighV"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 13000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 9510.82,
+      "effective_dps": 676.75,
+      "effective_per_shot": 6090.76,
+      "footprint": 1.1585,
+      "k": 0.4685,
+      "reliability": 0.6736,
+      "sigma": 233.48,
+      "slot": "Armament@Upgrade",
+      "weapon": "JHighVWaveforce"
+     }
+    ]
+   }
+  },
+  "infantry": {
+   "japan_archermaiden": {
+    "armaments": [
+     {
+      "avg_versus": 0.5787,
+      "damage_total": 40000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 56736.9,
+      "effective_dps": 328.67,
+      "effective_per_shot": 32867.42,
+      "footprint": 2.758,
+      "k": 0.8217,
+      "reliability": 0.7289,
+      "sigma": 417.97,
+      "slot": "Armament@PRIMARY",
+      "weapon": "JapanMaidenBow"
+     },
+     {
+      "avg_versus": 0.5787,
+      "damage_total": 40000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 56736.9,
+      "effective_dps": 328.67,
+      "effective_per_shot": 32867.42,
+      "footprint": 2.758,
+      "k": 0.8217,
+      "reliability": 0.7289,
+      "sigma": 417.97,
+      "slot": "Armament@GARRISONED",
+      "weapon": "JapanMaidenBow"
+     },
+     {
+      "avg_versus": 0.7232,
+      "damage_total": 45000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 46859.59,
+      "effective_dps": 299.7,
+      "effective_per_shot": 29970.3,
+      "footprint": 14.1726,
+      "k": 0.666,
+      "reliability": 0.5779,
+      "sigma": 417.97,
+      "slot": "Armament@Upgrade",
+      "weapon": "JapanMaidenBowEnergized"
+     },
+     {
+      "avg_versus": 0.7232,
+      "damage_total": 45000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 46859.59,
+      "effective_dps": 299.7,
+      "effective_per_shot": 29970.3,
+      "footprint": 14.1726,
+      "k": 0.666,
+      "reliability": 0.5779,
+      "sigma": 417.97,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "JapanMaidenBowEnergized"
+     }
+    ]
+   },
+   "japan_exorcist": {
+    "armaments": [
+     {
+      "avg_versus": 0.32,
+      "damage_total": 20000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 47184.33,
+      "effective_dps": 1005.54,
+      "effective_per_shot": 16759.07,
+      "footprint": 6.3916,
+      "k": 0.838,
+      "reliability": 0.7613,
+      "sigma": 733.36,
+      "slot": "Armament@PRIMARY",
+      "weapon": "Hakureiring"
+     },
+     {
+      "avg_versus": 0.32,
+      "damage_total": 240000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 559380.67,
+      "effective_dps": 1972.57,
+      "effective_per_shot": 197257.35,
+      "footprint": 6.3916,
+      "k": 0.8219,
+      "reliability": 0.7329,
+      "sigma": 822.54,
+      "slot": "Armament@Special",
+      "weapon": "Hakureiring2"
+     },
+     {
+      "avg_versus": 0.32,
+      "damage_total": 20000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 47184.33,
+      "effective_dps": 1005.54,
+      "effective_per_shot": 16759.07,
+      "footprint": 6.3916,
+      "k": 0.838,
+      "reliability": 0.7613,
+      "sigma": 733.36,
+      "slot": "Armament@GARRISONED",
+      "weapon": "Hakureiring"
+     },
+     {
+      "avg_versus": 0.32,
+      "damage_total": 240000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 559380.67,
+      "effective_dps": 1972.57,
+      "effective_per_shot": 197257.35,
+      "footprint": 6.3916,
+      "k": 0.8219,
+      "reliability": 0.7329,
+      "sigma": 822.54,
+      "slot": "Armament@GARRISONEDSpecial",
+      "weapon": "Hakureiring2"
+     }
+    ]
+   },
+   "japan_imperialscoutsman": {
+    "armaments": [
+     {
+      "avg_versus": 0.6291,
+      "damage_total": 13000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 7054.71,
+      "effective_dps": 84.86,
+      "effective_per_shot": 4243.06,
+      "footprint": 0.362,
+      "k": 0.3264,
+      "reliability": 0.5292,
+      "sigma": 160.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "japan_imperialscoutsman_rifle"
+     },
+     {
+      "avg_versus": 0.6291,
+      "damage_total": 13000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 7054.71,
+      "effective_dps": 84.86,
+      "effective_per_shot": 4243.06,
+      "footprint": 0.362,
+      "k": 0.3264,
+      "reliability": 0.5292,
+      "sigma": 160.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "japan_imperialscoutsman_rifle"
+     },
+     {
+      "avg_versus": 0.6431,
+      "damage_total": 16000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 10444.57,
+      "effective_dps": 130.3,
+      "effective_per_shot": 6515.09,
+      "footprint": 1.0012,
+      "k": 0.4072,
+      "reliability": 0.6303,
+      "sigma": 130.0,
+      "slot": "Armament@Upgrade",
+      "weapon": "japan_imperialscoutsman_rifle_waveforce"
+     },
+     {
+      "avg_versus": 0.6431,
+      "damage_total": 16000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 10444.57,
+      "effective_dps": 130.3,
+      "effective_per_shot": 6515.09,
+      "footprint": 1.0012,
+      "k": 0.4072,
+      "reliability": 0.6303,
+      "sigma": 130.0,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "japan_imperialscoutsman_rifle_waveforce"
+     }
+    ]
+   },
+   "japan_japaneseflamethrower": {
+    "armaments": [
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 2000.0,
+      "eff_reload": 49.0,
+      "effective_damage": 2222.95,
+      "effective_dps": 394.09,
+      "effective_per_shot": 1287.35,
+      "footprint": 2.758,
+      "k": 0.6437,
+      "reliability": 0.422,
+      "sigma": 1330.4,
+      "slot": "Armament",
+      "weapon": "Flamer"
+     },
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 2000.0,
+      "eff_reload": 49.0,
+      "effective_damage": 2222.95,
+      "effective_dps": 394.09,
+      "effective_per_shot": 1287.35,
+      "footprint": 2.758,
+      "k": 0.6437,
+      "reliability": 0.422,
+      "sigma": 1330.4,
+      "slot": "Armament@GARRISONED",
+      "weapon": "Flamer"
+     },
+     {
+      "avg_versus": 0.7052,
+      "damage_total": 4000.0,
+      "eff_reload": 49.0,
+      "effective_damage": 5183.96,
+      "effective_dps": 1005.82,
+      "effective_per_shot": 3285.69,
+      "footprint": 5.8419,
+      "k": 0.8214,
+      "reliability": 0.5657,
+      "sigma": 1330.4,
+      "slot": "Armament@Upgrade",
+      "weapon": "PlasmaFlamer"
+     },
+     {
+      "avg_versus": 0.7052,
+      "damage_total": 4000.0,
+      "eff_reload": 49.0,
+      "effective_damage": 5183.96,
+      "effective_dps": 1005.82,
+      "effective_per_shot": 3285.69,
+      "footprint": 5.8419,
+      "k": 0.8214,
+      "reliability": 0.5657,
+      "sigma": 1330.4,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "PlasmaFlamer"
+     }
+    ]
+   },
+   "japan_rocketangel": {
+    "armaments": [
+     {
+      "avg_versus": 0.6785,
+      "damage_total": 13000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 12248.76,
+      "effective_dps": 736.1,
+      "effective_per_shot": 7360.96,
+      "footprint": 9.5247,
+      "k": 0.5662,
+      "reliability": 0.5862,
+      "sigma": 536.8,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RocketAngelRockets"
+     }
+    ]
+   },
+   "japan_samurai": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 10000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 20875.68,
+      "effective_dps": 777.54,
+      "effective_per_shot": 15550.8,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "SamuraiBlade"
+     },
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 10000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 20875.68,
+      "effective_dps": 777.54,
+      "effective_per_shot": 15550.8,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "SamuraiBlade"
+     },
+     {
+      "avg_versus": 0.7431,
+      "damage_total": 25000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 26210.41,
+      "effective_dps": 928.89,
+      "effective_per_shot": 18577.83,
+      "footprint": 0.7538,
+      "k": 0.7431,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Upgrade",
+      "weapon": "SamuraiBladeCharged"
+     },
+     {
+      "avg_versus": 0.7431,
+      "damage_total": 25000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 26210.41,
+      "effective_dps": 928.89,
+      "effective_per_shot": 18577.83,
+      "footprint": 0.7538,
+      "k": 0.7431,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "SamuraiBladeCharged"
+     }
+    ]
+   },
+   "japan_tankbuster": {
+    "armaments": [
+     {
+      "avg_versus": 0.6585,
+      "damage_total": 25000.0,
+      "eff_reload": 96.0,
+      "effective_damage": 25411.96,
+      "effective_dps": 171.49,
+      "effective_per_shot": 16463.49,
+      "footprint": 0.4244,
+      "k": 0.6585,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TankBusterBeamCannon"
+     },
+     {
+      "avg_versus": 0.6585,
+      "damage_total": 25000.0,
+      "eff_reload": 96.0,
+      "effective_damage": 25411.96,
+      "effective_dps": 171.49,
+      "effective_per_shot": 16463.49,
+      "footprint": 0.4244,
+      "k": 0.6585,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TankBusterBeamCannon"
+     },
+     {
+      "avg_versus": 0.6991,
+      "damage_total": 24000.0,
+      "eff_reload": 96.0,
+      "effective_damage": 19330.56,
+      "effective_dps": 133.7,
+      "effective_per_shot": 12834.87,
+      "footprint": 3.432,
+      "k": 0.5348,
+      "reliability": 0.5194,
+      "sigma": 307.6,
+      "slot": "Armament@Upgrade",
+      "weapon": "TankBusterBeamCannonCharged"
+     },
+     {
+      "avg_versus": 0.6991,
+      "damage_total": 24000.0,
+      "eff_reload": 96.0,
+      "effective_damage": 19330.56,
+      "effective_dps": 133.7,
+      "effective_per_shot": 12834.87,
+      "footprint": 3.432,
+      "k": 0.5348,
+      "reliability": 0.5194,
+      "sigma": 307.6,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "TankBusterBeamCannonCharged"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "japan_armoredcar": {
+    "armaments": [
+     {
+      "avg_versus": 0.6199,
+      "damage_total": 16000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 10353.03,
+      "effective_dps": 746.12,
+      "effective_per_shot": 5968.99,
+      "footprint": 3.1584,
+      "k": 0.3731,
+      "reliability": 0.5484,
+      "sigma": 225.06,
+      "slot": "Armament@AG",
+      "weapon": "ArmoredCarMG"
+     },
+     {
+      "avg_versus": 0.6199,
+      "damage_total": 16000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 10065.54,
+      "effective_dps": 723.57,
+      "effective_per_shot": 5788.55,
+      "footprint": 3.1584,
+      "k": 0.3618,
+      "reliability": 0.5304,
+      "sigma": 237.59,
+      "slot": "Armament@AA",
+      "weapon": "ArmoredCarMG_AA"
+     },
+     {
+      "avg_versus": 0.6349,
+      "damage_total": 20000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 13212.25,
+      "effective_dps": 976.35,
+      "effective_per_shot": 7810.82,
+      "footprint": 4.0473,
+      "k": 0.3905,
+      "reliability": 0.5693,
+      "sigma": 225.06,
+      "slot": "Armament@UpgradeAG",
+      "weapon": "ArmoredCarMGWaveforce"
+     },
+     {
+      "avg_versus": 0.6349,
+      "damage_total": 20000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 12866.59,
+      "effective_dps": 948.28,
+      "effective_per_shot": 7586.23,
+      "footprint": 4.0473,
+      "k": 0.3793,
+      "reliability": 0.552,
+      "sigma": 237.59,
+      "slot": "Armament@UpgradeAA",
+      "weapon": "ArmoredCarMGAAWaveforce"
+     }
+    ]
+   },
+   "japan_ballista": {
+    "armaments": [
+     {
+      "avg_versus": 0.6212,
+      "damage_total": 40000.0,
+      "eff_reload": 200.0,
+      "effective_damage": 13439.47,
+      "effective_dps": 141.07,
+      "effective_per_shot": 5642.96,
+      "footprint": 3.5814,
+      "k": 0.1411,
+      "reliability": 0.1122,
+      "sigma": 2305.86,
+      "slot": "Armament@PRIMARY",
+      "weapon": "BallistaMultiShot"
+     },
+     {
+      "avg_versus": 0.6913,
+      "damage_total": 45000.0,
+      "eff_reload": 200.0,
+      "effective_damage": 20285.83,
+      "effective_dps": 278.94,
+      "effective_per_shot": 11157.42,
+      "footprint": 6.8226,
+      "k": 0.2479,
+      "reliability": 0.0867,
+      "sigma": 3555.86,
+      "slot": "Armament@Upgrade",
+      "weapon": "BallistaMultiShotEnergized"
+     }
+    ]
+   },
+   "japan_chihaheavytank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7088,
+      "damage_total": 12000.0,
+      "eff_reload": 56.0,
+      "effective_damage": 25491.25,
+      "effective_dps": 287.7,
+      "effective_per_shot": 16111.04,
+      "footprint": 10.7419,
+      "k": 1.3426,
+      "reliability": 0.7815,
+      "sigma": 650.07,
+      "slot": "Armament",
+      "weapon": "Type97Cannon"
+     },
+     {
+      "avg_versus": 0.7432,
+      "damage_total": 15000.0,
+      "eff_reload": 56.0,
+      "effective_damage": 13810.53,
+      "effective_dps": 164.63,
+      "effective_per_shot": 9219.51,
+      "footprint": 7.6699,
+      "k": 0.6146,
+      "reliability": 0.4543,
+      "sigma": 550.04,
+      "slot": "Armament@Upgrade",
+      "weapon": "Type97PlasmaCannon"
+     }
+    ]
+   },
+   "japan_exorcistoitank": {
+    "armaments": [
+     {
+      "avg_versus": 0.32,
+      "damage_total": 20000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 47679.69,
+      "effective_dps": 1022.74,
+      "effective_per_shot": 17045.67,
+      "footprint": 6.3916,
+      "k": 0.8523,
+      "reliability": 0.7861,
+      "sigma": 656.96,
+      "slot": "Armament@MAIN",
+      "weapon": "OIHakureiring"
+     },
+     {
+      "avg_versus": 0.32,
+      "damage_total": 240000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 568183.81,
+      "effective_dps": 2022.39,
+      "effective_per_shot": 202238.94,
+      "footprint": 6.3916,
+      "k": 0.8427,
+      "reliability": 0.7695,
+      "sigma": 707.95,
+      "slot": "Armament@AntiEpic",
+      "weapon": "OIHakureiring2"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 8000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 15310.87,
+      "effective_dps": 199.33,
+      "effective_per_shot": 8969.95,
+      "footprint": 4.3503,
+      "k": 1.1212,
+      "reliability": 0.8263,
+      "sigma": 500.15,
+      "slot": "Armament@PRIMARY",
+      "weapon": "OISmallCannon"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 8000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 15310.87,
+      "effective_dps": 199.33,
+      "effective_per_shot": 8969.95,
+      "footprint": 4.3503,
+      "k": 1.1212,
+      "reliability": 0.8263,
+      "sigma": 500.15,
+      "slot": "Armament@SECONDARY",
+      "weapon": "OISmallCannon"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 8000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 15310.87,
+      "effective_dps": 199.33,
+      "effective_per_shot": 8969.95,
+      "footprint": 4.3503,
+      "k": 1.1212,
+      "reliability": 0.8263,
+      "sigma": 500.15,
+      "slot": "Armament@Back",
+      "weapon": "OISmallCannon"
+     },
+     {
+      "avg_versus": 0.6844,
+      "damage_total": 10000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 7980.64,
+      "effective_dps": 122.87,
+      "effective_per_shot": 5529.05,
+      "footprint": 8.3305,
+      "k": 0.5529,
+      "reliability": 0.4013,
+      "sigma": 550.07,
+      "slot": "Armament@UpgradePRIMARY",
+      "weapon": "OISmallPlasmaCannon"
+     },
+     {
+      "avg_versus": 0.6844,
+      "damage_total": 10000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 7980.64,
+      "effective_dps": 122.87,
+      "effective_per_shot": 5529.05,
+      "footprint": 8.3305,
+      "k": 0.5529,
+      "reliability": 0.4013,
+      "sigma": 550.07,
+      "slot": "Armament@UpgradeSECONDARY",
+      "weapon": "OISmallPlasmaCannon"
+     },
+     {
+      "avg_versus": 0.6844,
+      "damage_total": 10000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 7980.64,
+      "effective_dps": 122.87,
+      "effective_per_shot": 5529.05,
+      "footprint": 8.3305,
+      "k": 0.5529,
+      "reliability": 0.4013,
+      "sigma": 550.07,
+      "slot": "Armament@UpgradeBack",
+      "weapon": "OISmallPlasmaCannon"
+     },
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 2000.0,
+      "eff_reload": 79.0,
+      "effective_damage": 3199.31,
+      "effective_dps": 559.09,
+      "effective_per_shot": 2208.41,
+      "footprint": 4.3503,
+      "k": 1.1042,
+      "reliability": 0.5121,
+      "sigma": 1569.2,
+      "slot": "Armament@PRIMARYFlame",
+      "weapon": "OIFlamer"
+     },
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 2000.0,
+      "eff_reload": 79.0,
+      "effective_damage": 3199.31,
+      "effective_dps": 559.09,
+      "effective_per_shot": 2208.41,
+      "footprint": 4.3503,
+      "k": 1.1042,
+      "reliability": 0.5121,
+      "sigma": 1569.2,
+      "slot": "Armament@SECONDARYFlame",
+      "weapon": "OIFlamer"
+     },
+     {
+      "avg_versus": 0.7549,
+      "damage_total": 4000.0,
+      "eff_reload": 79.0,
+      "effective_damage": 8561.61,
+      "effective_dps": 1655.63,
+      "effective_per_shot": 6539.75,
+      "footprint": 12.7832,
+      "k": 1.6349,
+      "reliability": 0.5425,
+      "sigma": 1569.2,
+      "slot": "Armament@UpgradePRIMARYFlame",
+      "weapon": "OIPlasmaFlamer"
+     },
+     {
+      "avg_versus": 0.7549,
+      "damage_total": 4000.0,
+      "eff_reload": 79.0,
+      "effective_damage": 8561.61,
+      "effective_dps": 1655.63,
+      "effective_per_shot": 6539.75,
+      "footprint": 12.7832,
+      "k": 1.6349,
+      "reliability": 0.5425,
+      "sigma": 1569.2,
+      "slot": "Armament@UpgradeSECONDARYFlame",
+      "weapon": "OIPlasmaFlamer"
+     }
+    ]
+   },
+   "japan_grenadebuggy": {
+    "armaments": [
+     {
+      "avg_versus": 0.6087,
+      "damage_total": 60000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 76534.12,
+      "effective_dps": 700.9,
+      "effective_per_shot": 42053.9,
+      "footprint": 2.758,
+      "k": 0.7009,
+      "reliability": 0.5861,
+      "sigma": 711.35,
+      "slot": "Armament",
+      "weapon": "BuggyGrenade"
+     },
+     {
+      "avg_versus": 0.6872,
+      "damage_total": 60000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 111940.36,
+      "effective_dps": 1239.33,
+      "effective_per_shot": 74359.94,
+      "footprint": 13.5877,
+      "k": 1.2393,
+      "reliability": 0.7334,
+      "sigma": 711.35,
+      "slot": "Armament@Upgrade",
+      "weapon": "BuggyPlasmaGrenade"
+     }
+    ]
+   },
+   "japan_hovercraftflametank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 2000.0,
+      "eff_reload": 89.0,
+      "effective_damage": 3140.58,
+      "effective_dps": 729.77,
+      "effective_per_shot": 2164.98,
+      "footprint": 4.3503,
+      "k": 1.0825,
+      "reliability": 0.4827,
+      "sigma": 1700.0,
+      "slot": "Armament",
+      "weapon": "HeavyFlamer"
+     },
+     {
+      "avg_versus": 0.7549,
+      "damage_total": 4000.0,
+      "eff_reload": 89.0,
+      "effective_damage": 8455.32,
+      "effective_dps": 2174.92,
+      "effective_per_shot": 6452.25,
+      "footprint": 12.7832,
+      "k": 1.6131,
+      "reliability": 0.5159,
+      "sigma": 1700.0,
+      "slot": "Armament@Upgrade",
+      "weapon": "HeavyPlasmaFlamer"
+     }
+    ]
+   },
+   "japan_hovercrafttransport": {
+    "armaments": [
+     {
+      "avg_versus": 0.6563,
+      "damage_total": 12000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 7798.91,
+      "effective_dps": 196.44,
+      "effective_per_shot": 4910.9,
+      "footprint": 7.3584,
+      "k": 0.4092,
+      "reliability": 0.3433,
+      "sigma": 500.25,
+      "slot": "Armament@cannon",
+      "weapon": "HovercraftCannon"
+     },
+     {
+      "avg_versus": 0.7831,
+      "damage_total": 27000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 15728.88,
+      "effective_dps": 430.95,
+      "effective_per_shot": 10773.65,
+      "footprint": 14.126,
+      "k": 0.399,
+      "reliability": 0.326,
+      "sigma": 400.12,
+      "slot": "Armament@Upgrade",
+      "weapon": "HovercraftPlasmaCannon"
+     },
+     {
+      "avg_versus": 0.6031,
+      "damage_total": 4000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 5397.95,
+      "effective_dps": 403.84,
+      "effective_per_shot": 3230.69,
+      "footprint": 4.5101,
+      "k": 0.8077,
+      "reliability": 0.7857,
+      "sigma": 259.75,
+      "slot": "Armament@flak",
+      "weapon": "JapaneseHovercraftFlak"
+     },
+     {
+      "avg_versus": 0.6463,
+      "damage_total": 7000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 7212.22,
+      "effective_dps": 549.72,
+      "effective_per_shot": 4397.76,
+      "footprint": 5.1492,
+      "k": 0.6283,
+      "reliability": 0.6818,
+      "sigma": 274.38,
+      "slot": "Armament@Upgradeflak",
+      "weapon": "JapaneseHovercraftFlakWaveforce"
+     },
+     {
+      "avg_versus": 0.6031,
+      "damage_total": 4000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 5381.86,
+      "effective_dps": 402.51,
+      "effective_per_shot": 3220.04,
+      "footprint": 4.5101,
+      "k": 0.805,
+      "reliability": 0.7817,
+      "sigma": 264.63,
+      "slot": "Armament@AA",
+      "weapon": "JapaneseHovercraftFlakAA"
+     },
+     {
+      "avg_versus": 0.6463,
+      "damage_total": 7000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 7133.64,
+      "effective_dps": 542.68,
+      "effective_per_shot": 4341.41,
+      "footprint": 5.1492,
+      "k": 0.6202,
+      "reliability": 0.6705,
+      "sigma": 286.57,
+      "slot": "Armament@UpgradeAA",
+      "weapon": "JapaneseHovercraftFlakAAkWaveforce"
+     }
+    ]
+   },
+   "japan_igomediumtank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 52.0,
+      "effective_damage": 19138.7,
+      "effective_dps": 215.63,
+      "effective_per_shot": 11212.52,
+      "footprint": 4.3503,
+      "k": 1.1213,
+      "reliability": 0.8263,
+      "sigma": 500.11,
+      "slot": "Armament",
+      "weapon": "Type89Cannon"
+     },
+     {
+      "avg_versus": 0.7866,
+      "damage_total": 15000.0,
+      "eff_reload": 52.0,
+      "effective_damage": 2528.64,
+      "effective_dps": 32.51,
+      "effective_per_shot": 1690.26,
+      "footprint": 0.784,
+      "k": 0.1127,
+      "reliability": 0.1444,
+      "sigma": 550.06,
+      "slot": "Armament@Upgrade",
+      "weapon": "Type89PlasmaCannon"
+     }
+    ]
+   },
+   "japan_nanodronebuggy": {
+    "armaments": [
+     {
+      "avg_versus": 0.6988,
+      "damage_total": 23331.0,
+      "eff_reload": 77.0,
+      "effective_damage": 46660.69,
+      "effective_dps": 424.0,
+      "effective_per_shot": 32648.05,
+      "footprint": 17.5816,
+      "k": 1.3993,
+      "reliability": 0.5348,
+      "sigma": 1338.52,
+      "slot": "Armament",
+      "weapon": "NanoArtilleryAG"
+     }
+    ]
+   },
+   "japan_oitank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7412,
+      "damage_total": 24000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 57268.83,
+      "effective_dps": 699.5,
+      "effective_per_shot": 38472.66,
+      "footprint": 6.3916,
+      "k": 1.603,
+      "reliability": 0.7883,
+      "sigma": 650.15,
+      "slot": "Armament@MAIN",
+      "weapon": "OIBigCannon"
+     },
+     {
+      "avg_versus": 0.7482,
+      "damage_total": 29000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 26845.58,
+      "effective_dps": 328.29,
+      "effective_per_shot": 18056.09,
+      "footprint": 7.6699,
+      "k": 0.6226,
+      "reliability": 0.4479,
+      "sigma": 550.07,
+      "slot": "Armament@Upgrade",
+      "weapon": "OIBigPlasmaCannon"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 8000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 15310.87,
+      "effective_dps": 199.33,
+      "effective_per_shot": 8969.95,
+      "footprint": 4.3503,
+      "k": 1.1212,
+      "reliability": 0.8263,
+      "sigma": 500.15,
+      "slot": "Armament@PRIMARY",
+      "weapon": "OISmallCannon"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 8000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 15310.87,
+      "effective_dps": 199.33,
+      "effective_per_shot": 8969.95,
+      "footprint": 4.3503,
+      "k": 1.1212,
+      "reliability": 0.8263,
+      "sigma": 500.15,
+      "slot": "Armament@SECONDARY",
+      "weapon": "OISmallCannon"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 8000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 15310.87,
+      "effective_dps": 199.33,
+      "effective_per_shot": 8969.95,
+      "footprint": 4.3503,
+      "k": 1.1212,
+      "reliability": 0.8263,
+      "sigma": 500.15,
+      "slot": "Armament@Back",
+      "weapon": "OISmallCannon"
+     },
+     {
+      "avg_versus": 0.6844,
+      "damage_total": 10000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 7980.64,
+      "effective_dps": 122.87,
+      "effective_per_shot": 5529.05,
+      "footprint": 8.3305,
+      "k": 0.5529,
+      "reliability": 0.4013,
+      "sigma": 550.07,
+      "slot": "Armament@UpgradePRIMARY",
+      "weapon": "OISmallPlasmaCannon"
+     },
+     {
+      "avg_versus": 0.6844,
+      "damage_total": 10000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 7980.64,
+      "effective_dps": 122.87,
+      "effective_per_shot": 5529.05,
+      "footprint": 8.3305,
+      "k": 0.5529,
+      "reliability": 0.4013,
+      "sigma": 550.07,
+      "slot": "Armament@UpgradeSECONDARY",
+      "weapon": "OISmallPlasmaCannon"
+     },
+     {
+      "avg_versus": 0.6844,
+      "damage_total": 10000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 7980.64,
+      "effective_dps": 122.87,
+      "effective_per_shot": 5529.05,
+      "footprint": 8.3305,
+      "k": 0.5529,
+      "reliability": 0.4013,
+      "sigma": 550.07,
+      "slot": "Armament@UpgradeBack",
+      "weapon": "OISmallPlasmaCannon"
+     },
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 2000.0,
+      "eff_reload": 79.0,
+      "effective_damage": 3199.31,
+      "effective_dps": 559.09,
+      "effective_per_shot": 2208.41,
+      "footprint": 4.3503,
+      "k": 1.1042,
+      "reliability": 0.5121,
+      "sigma": 1569.2,
+      "slot": "Armament@PRIMARYFlame",
+      "weapon": "OIFlamer"
+     },
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 2000.0,
+      "eff_reload": 79.0,
+      "effective_damage": 3199.31,
+      "effective_dps": 559.09,
+      "effective_per_shot": 2208.41,
+      "footprint": 4.3503,
+      "k": 1.1042,
+      "reliability": 0.5121,
+      "sigma": 1569.2,
+      "slot": "Armament@SECONDARYFlame",
+      "weapon": "OIFlamer"
+     },
+     {
+      "avg_versus": 0.7549,
+      "damage_total": 4000.0,
+      "eff_reload": 79.0,
+      "effective_damage": 8561.61,
+      "effective_dps": 1655.63,
+      "effective_per_shot": 6539.75,
+      "footprint": 12.7832,
+      "k": 1.6349,
+      "reliability": 0.5425,
+      "sigma": 1569.2,
+      "slot": "Armament@UpgradePRIMARYFlame",
+      "weapon": "OIPlasmaFlamer"
+     },
+     {
+      "avg_versus": 0.7549,
+      "damage_total": 4000.0,
+      "eff_reload": 79.0,
+      "effective_damage": 8561.61,
+      "effective_dps": 1655.63,
+      "effective_per_shot": 6539.75,
+      "footprint": 12.7832,
+      "k": 1.6349,
+      "reliability": 0.5425,
+      "sigma": 1569.2,
+      "slot": "Armament@UpgradeSECONDARYFlame",
+      "weapon": "OIPlasmaFlamer"
+     }
+    ]
+   },
+   "japan_scoutcar": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 4000.0,
+      "eff_reload": 35.0,
+      "effective_damage": 3378.09,
+      "effective_dps": 291.43,
+      "effective_per_shot": 2040.01,
+      "footprint": 0.1598,
+      "k": 0.51,
+      "reliability": 0.8046,
+      "sigma": 150.04,
+      "slot": "Armament",
+      "weapon": "NambuMG"
+     },
+     {
+      "avg_versus": 0.6652,
+      "damage_total": 5000.0,
+      "eff_reload": 35.0,
+      "effective_damage": 4216.95,
+      "effective_dps": 391.01,
+      "effective_per_shot": 2737.1,
+      "footprint": 0.7989,
+      "k": 0.5474,
+      "reliability": 0.7905,
+      "sigma": 125.02,
+      "slot": "Armament@Upgrade",
+      "weapon": "NambuMGWaveforce"
+     }
+    ]
+   },
+   "japan_shogunexecutioner": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 600000.0,
+      "eff_reload": 300.0,
+      "effective_damage": 65854104.61,
+      "effective_dps": 5552.47,
+      "effective_per_shot": 1665740.96,
+      "footprint": 435.0274,
+      "k": 2.7762,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "ExecutionerSword"
+     }
+    ]
+   },
+   "japan_shrineminitank": {
+    "armaments": [
+     {
+      "avg_versus": 0.32,
+      "damage_total": 24000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 56759.05,
+      "effective_dps": 403.8,
+      "effective_per_shot": 20189.79,
+      "footprint": 6.3916,
+      "k": 0.8412,
+      "reliability": 0.7671,
+      "sigma": 715.58,
+      "slot": "Armament",
+      "weapon": "ShrineTankCannon"
+     }
+    ]
+   },
+   "japan_waveforcetank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7228,
+      "damage_total": 21000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 37363.46,
+      "effective_dps": 408.73,
+      "effective_per_shot": 24523.6,
+      "footprint": 7.0307,
+      "k": 1.1678,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "WaveforceCannon"
+     },
+     {
+      "avg_versus": 0.7228,
+      "damage_total": 21000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 37363.46,
+      "effective_dps": 204.36,
+      "effective_per_shot": 24523.6,
+      "footprint": 7.0307,
+      "k": 1.1678,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Upgrade1",
+      "weapon": "WaveforceCannonChargedLaser"
+     },
+     {
+      "avg_versus": 0.757,
+      "damage_total": 25000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 9620.29,
+      "effective_dps": 53.06,
+      "effective_per_shot": 6367.55,
+      "footprint": 0.7515,
+      "k": 0.2547,
+      "reliability": 0.3366,
+      "sigma": 473.72,
+      "slot": "Armament@Upgrade2",
+      "weapon": "WaveforceCannonDistortedBeam1"
+     },
+     {
+      "avg_versus": 0.7549,
+      "damage_total": 20000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 50959.01,
+      "effective_dps": 330.69,
+      "effective_per_shot": 39683.35,
+      "footprint": 12.7832,
+      "k": 1.9842,
+      "reliability": 0.9501,
+      "sigma": 153.39,
+      "slot": "Armament@Upgrade3",
+      "weapon": "WaveforceCannonDistortedBeam2"
+     }
+    ]
+   }
+  }
+ }
+}

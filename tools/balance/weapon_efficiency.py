@@ -60,10 +60,9 @@ def versus_of(node) -> dict[str, float]:
         return {}
     out = {}
     for child in versus.children:
-        try:
-            out[child.key] = float(str(child.value).strip())
-        except (TypeError, ValueError):
-            continue
+        value = ed.number(child.value)
+        if value is not None:
+            out[child.key] = value
     return out
 
 
@@ -117,9 +116,8 @@ def analyse(resolved, damage_total: float = 20000.0):
             continue
         footprint = ed.footprint_cells2(fo, radii)
         rel = 1.0 if is_instant else ed.reliability(fo, radii, sigma)
-        try:
-            pct_damage = float(str(node.get("Damage")))
-        except (TypeError, ValueError):
+        pct_damage = ed.number(node.get("Damage"))
+        if pct_damage is None:
             continue
         # HealthPercentageDamage: %HP dealt = Damage x Versus/100. Convert to HP via ref.
         hp_equiv = ref_hp * pct_damage / 100.0

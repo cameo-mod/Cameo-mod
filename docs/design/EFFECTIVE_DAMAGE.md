@@ -166,33 +166,67 @@ deal **zero damage at every distance**. The load-time validation accepts it (`Ra
 The metric now mirrors this exactly rather than inventing a per-step grid. **See
 `ROADMAP.md` for the live weapons currently hit by this.**
 
-## 5. Status — the column is not wired into pricing
+## 5. Status — where the numbers live, and what still reads them
 
-`extract_stats.py` writes five fields per weapon (`c9a09dc91`):
+`extract_stats.py` writes them to **`docs/balance/derived/<faction>.json`**, never to
+the raw ledger (W3, 2026-08-11). One row per armament, joined back to the raw ledger by
+`slot` + `weapon`:
 
-`effective_damage`, `effective_base_total`, `effective_footprint_cells2`,
-`effective_avg_reliability`, `effective_sigma`
+| field | metric | meaning |
+|---|---|---|
+| `effective_damage` | area-integrated | per-shot damage integrated over the blast, after scatter |
+| `damage_total` | — | Σ flat main Damage (the input the two metrics share) |
+| `footprint` | area-integrated | damage-weighted area in cell² |
+| `reliability` | area-integrated | P-weighted falloff at the impact point |
+| `sigma` | area-integrated | scatter σ in WDist |
+| `k` | **pricing (W1)** | the dimensionless coefficient — see below |
+| `avg_versus` | pricing | prevalence-weighted mean Versus over the FLAT warheads |
+| `effective_per_shot` | pricing | `k × damage_total` |
+| `eff_reload` | pricing | `formula.eff_reload(reload, burst, burst_delays)` |
+| `effective_dps` | pricing | `k × damage_total × burst / eff_reload` |
 
-**Nothing reads them.** `fit_class.py`, `formula.py`, `apply_balance.py` and
+Two metrics sit side by side on purpose — §1 warns they are not interchangeable, so
+they keep distinct names instead of being blended into one number.
+
+`effective_dps` is the **weapon's** number. `FirepowerMultiplier` is an actor property
+and is deliberately not baked in; the caller applies it.
+
+`docs/balance/derived/_model.json` records the constants every one of these depends on
+(`SWARM_W`, `LEAD`, `TARGET_SPEED`, `MIN_SPREAD`, `A_BLOB`, `A_SELF`, `BLOB_UPTIME`,
+`DENSITY`, `ENGAGEMENT`, `reference_hp`, the armor census). A retune therefore shows up
+as a short readable diff at the top of the tree, not only as thousands of shifted
+decimals underneath it.
+
+**Nothing reads any of it yet.** `fit_class.py`, `formula.py`, `apply_balance.py` and
 `propose_class_rebalance.py` all still price on `Σ main Damage × WeaponClass × burst /
-eff_reload × FirepowerMultiplier`. The column is currently a *diagnostic*, not an input.
-That is the correct state until §3.1 is decided and §6 is worked.
+eff_reload × FirepowerMultiplier`; `build_workbook.py` never read the fields even when
+they sat in the ledger. This is a *diagnostic* tree, not an input — wiring K into
+pricing is **W11**, behind a flag and with a maintainer sign-off.
 
-### 5.1 ⚠ It also violates the "RAW STATS ONLY" ledger law
+### 5.1 The "RAW STATS ONLY" ledger law — restored
 
 `BALANCE_PIPELINE.md` §2 is explicit: *"No DPS, no combined Damage, no
 effective-anything in the JSON. Every number appears exactly as the yaml states it."*
-These five fields are derived, so the ledger no longer obeys its own law.
+For a few days it was broken: `c9a09dc91` wrote five derived fields into every ledger
+row.
 
-This is not pedantry. A derived field moves when the **model** changes, not when the
+That was not pedantry. A derived field moves when the **model** changes, not when the
 game does: fixing the scatter model on 2026-08-11 rewrote **4 136 ledger lines with zero
 `mods/` changes**. The ledger's purpose is to prove yaml ↔ ledger equality
-(`audit_balance_drift`), and mixing model noise into it makes "did a real stat move?"
+(`audit_balance_drift`), and mixing model noise into it made "did a real stat move?"
 unanswerable by diff.
 
-**Recommendation:** emit derived metrics to `docs/balance/derived/*.json` from the same
-`extract_stats.py` run, and keep the ledger raw. Maintainer's call — until then, do not
-build anything that assumes these fields live in the ledger.
+The split restores it, and the restoration is pinned rather than trusted:
+
+- `extract_stats.build_ledgers()` returns the **raw** docs by construction, so the drift
+  audit cannot start diffing model output by accident;
+- `extract_stats.py --check` verifies both trees and labels each finding `DRIFT (raw)`
+  ("the game changed") or `DRIFT (model)` ("a tool changed");
+- `tools/tests/test_ledger_split.py` fails if any committed raw ledger regrows a model
+  field — under the pre-split ledgers that guard trips on 310 rows.
+
+The split commit itself is the proof of purity: **12 130 deletions, 0 additions**, every
+removed line one of the five field names.
 
 ## 6. Roadmap for the metric
 

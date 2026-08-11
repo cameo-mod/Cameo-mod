@@ -1,0 +1,119 @@
+{
+ "ledger": "d2k_harkonnen",
+ "pack": "mods/cameo/ContentPacks/D2k/Harkonnen",
+ "schema": 2,
+ "sections": {
+  "buildings": {
+   "harkonnen_autogunturret": {
+    "armaments": [
+     {
+      "avg_versus": 0.6738,
+      "damage_total": 6000.0,
+      "eff_reload": 182.0,
+      "effective_damage": 8264.66,
+      "effective_dps": 775.46,
+      "effective_per_shot": 5428.21,
+      "footprint": 6.9109,
+      "k": 0.9047,
+      "reliability": 0.8015,
+      "sigma": 238.5,
+      "slot": "Armament",
+      "weapon": "harkonnen_autogunturret"
+     }
+    ]
+   },
+   "harkonnen_flameturret": {
+    "armaments": [
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 25135.0,
+      "eff_reload": 62.0,
+      "effective_damage": 46877.07,
+      "effective_dps": 2601.7,
+      "effective_per_shot": 32261.11,
+      "footprint": 4.3503,
+      "k": 1.2835,
+      "reliability": 0.7774,
+      "sigma": 642.1,
+      "slot": "Armament",
+      "weapon": "HarkonnenFlameTurret"
+     }
+    ]
+   },
+   "harkonnen_rocketturret": {
+    "armaments": [
+     {
+      "avg_versus": 0.656,
+      "damage_total": 16000.0,
+      "eff_reload": 47.0,
+      "effective_damage": 26449.29,
+      "effective_dps": 674.49,
+      "effective_per_shot": 15850.41,
+      "footprint": 11.4087,
+      "k": 0.9907,
+      "reliability": 0.94,
+      "sigma": 97.11,
+      "slot": "Armament@PRIMARY",
+      "weapon": "D2K_TowerMissile"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "combat_tank.harkonnen": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 8000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 16211.51,
+      "effective_dps": 170.82,
+      "effective_per_shot": 9395.02,
+      "footprint": 4.3503,
+      "k": 1.1744,
+      "reliability": 0.9389,
+      "sigma": 176.0,
+      "slot": "Armament",
+      "weapon": "80mm_H"
+     }
+    ]
+   },
+   "devastator": {
+    "armaments": [
+     {
+      "avg_versus": 0.8718,
+      "damage_total": 80000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 62802.99,
+      "effective_dps": 470.29,
+      "effective_per_shot": 47028.65,
+      "footprint": 0.443,
+      "k": 0.5879,
+      "reliability": 0.6743,
+      "sigma": 416.36,
+      "slot": "Armament",
+      "weapon": "DevBullet"
+     }
+    ]
+   },
+   "missile_tank": {
+    "armaments": [
+     {
+      "avg_versus": 0.9632,
+      "damage_total": 17000.0,
+      "eff_reload": 225.0,
+      "effective_damage": 6178.15,
+      "effective_dps": 71.55,
+      "effective_per_shot": 4024.81,
+      "footprint": 6.4016,
+      "k": 0.2368,
+      "reliability": 0.1732,
+      "sigma": 332.51,
+      "slot": "Armament",
+      "weapon": "mtank_pri"
+     }
+    ]
+   }
+  }
+ }
+}

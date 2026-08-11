@@ -1,0 +1,717 @@
+{
+ "ledger": "starcraft_protoss",
+ "pack": "mods/cameo/ContentPacks/StarCraft/Protoss",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "protoss_arbiter": {
+    "armaments": [
+     {
+      "avg_versus": 0.6625,
+      "damage_total": 40000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 24383.87,
+      "effective_dps": 632.38,
+      "effective_per_shot": 15809.58,
+      "footprint": 0.377,
+      "k": 0.3952,
+      "reliability": 0.586,
+      "sigma": 200.0,
+      "slot": "Armament",
+      "weapon": "ArbiterCannon"
+     }
+    ]
+   },
+   "protoss_corsair": {
+    "armaments": [
+     {
+      "avg_versus": 1.0619,
+      "damage_total": 7500.0,
+      "eff_reload": 250.0,
+      "effective_damage": 9227.18,
+      "effective_dps": 51.84,
+      "effective_per_shot": 12960.79,
+      "footprint": 4.2132,
+      "k": 1.7281,
+      "reliability": 0.809,
+      "sigma": 440.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "Corsair_EMP"
+     },
+     {
+      "avg_versus": 0.6038,
+      "damage_total": 4000.0,
+      "eff_reload": 65.0,
+      "effective_damage": 6945.0,
+      "effective_dps": 62.46,
+      "effective_per_shot": 4060.15,
+      "footprint": 7.1082,
+      "k": 1.015,
+      "reliability": 0.8477,
+      "sigma": 305.0,
+      "slot": "Armament@SECONDARY1",
+      "weapon": "CorsairFlash"
+     },
+     {
+      "avg_versus": 0.6038,
+      "damage_total": 4000.0,
+      "eff_reload": 65.0,
+      "effective_damage": 6945.0,
+      "effective_dps": 62.46,
+      "effective_per_shot": 4060.15,
+      "footprint": 7.1082,
+      "k": 1.015,
+      "reliability": 0.8477,
+      "sigma": 305.0,
+      "slot": "Armament@SECONDARY2",
+      "weapon": "CorsairFlash"
+     }
+    ]
+   },
+   "protoss_epigraph": {
+    "armaments": [
+     {
+      "avg_versus": 0.6325,
+      "damage_total": 20000.0,
+      "eff_reload": 36.0,
+      "effective_damage": 21027.66,
+      "effective_dps": 355.94,
+      "effective_per_shot": 12813.85,
+      "footprint": 13.3066,
+      "k": 0.6407,
+      "reliability": 0.7187,
+      "sigma": 225.38,
+      "slot": "Armament@PRIMARY",
+      "weapon": "EpigraphMG"
+     },
+     {
+      "avg_versus": 0.6325,
+      "damage_total": 20000.0,
+      "eff_reload": 36.0,
+      "effective_damage": 21027.66,
+      "effective_dps": 355.94,
+      "effective_per_shot": 12813.85,
+      "footprint": 13.3066,
+      "k": 0.6407,
+      "reliability": 0.7187,
+      "sigma": 225.38,
+      "slot": "Armament@SECONDARY",
+      "weapon": "EpigraphMG"
+     }
+    ]
+   },
+   "protoss_gladius": {
+    "armaments": [
+     {
+      "avg_versus": 0.7701,
+      "damage_total": 110000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 69954.67,
+      "effective_dps": 607.0,
+      "effective_per_shot": 48559.63,
+      "footprint": 13.1342,
+      "k": 0.4415,
+      "reliability": 0.3374,
+      "sigma": 500.0,
+      "slot": "Armament",
+      "weapon": "GladiusCannon"
+     }
+    ]
+   },
+   "protoss_scout": {
+    "armaments": [
+     {
+      "avg_versus": 0.6038,
+      "damage_total": 4000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 6964.97,
+      "effective_dps": 127.3,
+      "effective_per_shot": 4073.48,
+      "footprint": 7.1082,
+      "k": 1.0184,
+      "reliability": 0.8527,
+      "sigma": 295.0,
+      "slot": "Armament@PRIMARY1",
+      "weapon": "ScoutMG"
+     },
+     {
+      "avg_versus": 0.6038,
+      "damage_total": 4000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 6964.97,
+      "effective_dps": 127.3,
+      "effective_per_shot": 4073.48,
+      "footprint": 7.1082,
+      "k": 1.0184,
+      "reliability": 0.8527,
+      "sigma": 295.0,
+      "slot": "Armament@PRIMARY2",
+      "weapon": "ScoutMG"
+     },
+     {
+      "avg_versus": 0.6075,
+      "damage_total": 10000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 9699.51,
+      "effective_dps": 139.12,
+      "effective_per_shot": 5564.72,
+      "footprint": 6.6937,
+      "k": 0.5565,
+      "reliability": 0.6353,
+      "sigma": 205.0,
+      "slot": "Armament@SECONDARY1",
+      "weapon": "ScoutRockets_AA"
+     },
+     {
+      "avg_versus": 0.6075,
+      "damage_total": 10000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 9699.51,
+      "effective_dps": 139.12,
+      "effective_per_shot": 5564.72,
+      "footprint": 6.6937,
+      "k": 0.5565,
+      "reliability": 0.6353,
+      "sigma": 205.0,
+      "slot": "Armament@SECONDARY2",
+      "weapon": "ScoutRockets_AA"
+     }
+    ]
+   },
+   "protoss_starshipsovereign": {
+    "armaments": [
+     {
+      "avg_versus": 0.6156,
+      "damage_total": 13600.0,
+      "eff_reload": 10.0,
+      "effective_damage": 4543.37,
+      "effective_dps": 257.69,
+      "effective_per_shot": 2576.85,
+      "footprint": 0.8139,
+      "k": 0.1895,
+      "reliability": 0.3164,
+      "sigma": 266.95,
+      "slot": "Armament",
+      "weapon": "StarshipSovereignBeam"
+     }
+    ]
+   },
+   "protoss_voidray": {
+    "armaments": [
+     {
+      "avg_versus": 0.6156,
+      "damage_total": 13600.0,
+      "eff_reload": 6.0,
+      "effective_damage": 4615.79,
+      "effective_dps": 436.59,
+      "effective_per_shot": 2619.56,
+      "footprint": 0.8139,
+      "k": 0.1926,
+      "reliability": 0.3217,
+      "sigma": 262.95,
+      "slot": "Armament",
+      "weapon": "VoidRayBeam"
+     }
+    ]
+   }
+  },
+  "defenses": {
+   "protoss_photoncannon": {
+    "armaments": [
+     {
+      "avg_versus": 0.6625,
+      "damage_total": 40000.0,
+      "eff_reload": 28.0,
+      "effective_damage": 24369.71,
+      "effective_dps": 564.3,
+      "effective_per_shot": 15800.38,
+      "footprint": 0.377,
+      "k": 0.395,
+      "reliability": 0.5857,
+      "sigma": 200.19,
+      "slot": "Armament",
+      "weapon": "PhotonCannon"
+     }
+    ]
+   }
+  },
+  "infantry": {
+   "protoss_adept": {
+    "armaments": [
+     {
+      "avg_versus": 0.6778,
+      "damage_total": 17000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 19490.51,
+      "effective_dps": 308.54,
+      "effective_per_shot": 12341.46,
+      "footprint": 3.3971,
+      "k": 0.726,
+      "reliability": 0.8024,
+      "sigma": 127.74,
+      "slot": "Armament",
+      "weapon": "GlaveCanon"
+     },
+     {
+      "avg_versus": 0.6778,
+      "damage_total": 17000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 19490.51,
+      "effective_dps": 308.54,
+      "effective_per_shot": 12341.46,
+      "footprint": 3.3971,
+      "k": 0.726,
+      "reliability": 0.8024,
+      "sigma": 127.74,
+      "slot": "Armament@GARRISONED",
+      "weapon": "GlaveCanon"
+     }
+    ]
+   },
+   "protoss_amaranth": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 30000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 62627.05,
+      "effective_dps": 2332.62,
+      "effective_per_shot": 46652.41,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "WarpBladeAmaranth"
+     }
+    ]
+   },
+   "protoss_darktemplar": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 41751.37,
+      "effective_dps": 1204.67,
+      "effective_per_shot": 30116.83,
+      "footprint": 4.3503,
+      "k": 1.5058,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "WarpBlade"
+     }
+    ]
+   },
+   "protoss_hightemplar": {
+    "armaments": [
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 12000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 35297.33,
+      "effective_dps": 420.46,
+      "effective_per_shot": 26909.13,
+      "footprint": 19.4144,
+      "k": 2.2424,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@1",
+      "weapon": "PsiStorm"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 12000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 35297.33,
+      "effective_dps": 420.46,
+      "effective_per_shot": 26909.13,
+      "footprint": 19.4144,
+      "k": 2.2424,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@2",
+      "weapon": "PsiStorm"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 12000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 35297.33,
+      "effective_dps": 420.46,
+      "effective_per_shot": 26909.13,
+      "footprint": 19.4144,
+      "k": 2.2424,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@3",
+      "weapon": "PsiStorm"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 12000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 35297.33,
+      "effective_dps": 420.46,
+      "effective_per_shot": 26909.13,
+      "footprint": 19.4144,
+      "k": 2.2424,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@4",
+      "weapon": "PsiStorm"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 12000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 35297.33,
+      "effective_dps": 420.46,
+      "effective_per_shot": 26909.13,
+      "footprint": 19.4144,
+      "k": 2.2424,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@5",
+      "weapon": "PsiStorm"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 12000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 35297.33,
+      "effective_dps": 420.46,
+      "effective_per_shot": 26909.13,
+      "footprint": 19.4144,
+      "k": 2.2424,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@6",
+      "weapon": "PsiStorm"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 12000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 35297.33,
+      "effective_dps": 420.46,
+      "effective_per_shot": 26909.13,
+      "footprint": 19.4144,
+      "k": 2.2424,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@7",
+      "weapon": "PsiStorm"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 12000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 35297.33,
+      "effective_dps": 420.46,
+      "effective_per_shot": 26909.13,
+      "footprint": 19.4144,
+      "k": 2.2424,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@8",
+      "weapon": "PsiStorm"
+     }
+    ]
+   },
+   "protoss_legionnaire": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 32000.0,
+      "eff_reload": 26.0,
+      "effective_damage": 66802.19,
+      "effective_dps": 1913.95,
+      "effective_per_shot": 49762.57,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "psi_spear"
+     }
+    ]
+   },
+   "protoss_patriarch": {
+    "armaments": [
+     {
+      "avg_versus": 0.658,
+      "damage_total": 12000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 12615.95,
+      "effective_dps": 220.67,
+      "effective_per_shot": 8275.14,
+      "footprint": 13.4344,
+      "k": 0.6896,
+      "reliability": 0.4916,
+      "sigma": 550.0,
+      "slot": "Armament",
+      "weapon": "PatriarchShoot"
+     },
+     {
+      "avg_versus": 0.658,
+      "damage_total": 12000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 12615.95,
+      "effective_dps": 220.67,
+      "effective_per_shot": 8275.14,
+      "footprint": 13.4344,
+      "k": 0.6896,
+      "reliability": 0.4916,
+      "sigma": 550.0,
+      "slot": "Armament@garrisoned",
+      "weapon": "PatriarchShoot"
+     }
+    ]
+   },
+   "protoss_zealot": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 8000.0,
+      "eff_reload": 36.0,
+      "effective_damage": 16700.55,
+      "effective_dps": 691.15,
+      "effective_per_shot": 12440.64,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "psi_blades"
+     }
+    ]
+   },
+   "protoss_zeratul": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 64000.0,
+      "eff_reload": 24.0,
+      "effective_damage": 133604.38,
+      "effective_dps": 4146.88,
+      "effective_per_shot": 99525.15,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "ZeratulSlice"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "protoss_analogue": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 10000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 20875.68,
+      "effective_dps": 622.03,
+      "effective_per_shot": 15550.8,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "SCVAttack"
+     }
+    ]
+   },
+   "protoss_archon": {
+    "armaments": [
+     {
+      "avg_versus": 1.0619,
+      "damage_total": 45000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 55725.88,
+      "effective_dps": 3040.22,
+      "effective_per_shot": 60804.32,
+      "footprint": 2.5087,
+      "k": 1.3512,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "PsionicShockwave"
+     }
+    ]
+   },
+   "protoss_atreus": {
+    "armaments": [
+     {
+      "avg_versus": 0.6459,
+      "damage_total": 10000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 12097.25,
+      "effective_dps": 756.26,
+      "effective_per_shot": 7562.55,
+      "footprint": 9.3158,
+      "k": 0.7563,
+      "reliability": 0.7439,
+      "sigma": 245.0,
+      "slot": "Armament",
+      "weapon": "AtreusMG"
+     }
+    ]
+   },
+   "protoss_dragoon": {
+    "armaments": [
+     {
+      "avg_versus": 0.6625,
+      "damage_total": 40000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 24383.87,
+      "effective_dps": 395.24,
+      "effective_per_shot": 15809.58,
+      "footprint": 0.377,
+      "k": 0.3952,
+      "reliability": 0.586,
+      "sigma": 200.0,
+      "slot": "Armament",
+      "weapon": "DragoonCannon"
+     }
+    ]
+   },
+   "protoss_idol": {
+    "armaments": [
+     {
+      "avg_versus": 0.7228,
+      "damage_total": 21000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 37363.46,
+      "effective_dps": 204.36,
+      "effective_per_shot": 24523.6,
+      "footprint": 7.0307,
+      "k": 1.1678,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Upgrade1",
+      "weapon": "WaveforceCannonChargedLaser"
+     },
+     {
+      "avg_versus": 0.757,
+      "damage_total": 25000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 9620.29,
+      "effective_dps": 53.06,
+      "effective_per_shot": 6367.55,
+      "footprint": 0.7515,
+      "k": 0.2547,
+      "reliability": 0.3366,
+      "sigma": 473.72,
+      "slot": "Armament@Upgrade2",
+      "weapon": "WaveforceCannonDistortedBeam1"
+     },
+     {
+      "avg_versus": 0.7549,
+      "damage_total": 20000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 50959.01,
+      "effective_dps": 330.69,
+      "effective_per_shot": 39683.35,
+      "footprint": 12.7832,
+      "k": 1.9842,
+      "reliability": 0.9501,
+      "sigma": 153.39,
+      "slot": "Armament@Upgrade3",
+      "weapon": "WaveforceCannonDistortedBeam2"
+     }
+    ]
+   },
+   "protoss_manifold": {
+    "armaments": [
+     {
+      "avg_versus": 0.6868,
+      "damage_total": 6000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 9840.07,
+      "effective_dps": 317.25,
+      "effective_per_shot": 6344.91,
+      "footprint": 9.5091,
+      "k": 1.0575,
+      "reliability": 0.8476,
+      "sigma": 247.8,
+      "slot": "Armament",
+      "weapon": "ManifoldMG"
+     },
+     {
+      "avg_versus": 0.6868,
+      "damage_total": 6000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 9751.87,
+      "effective_dps": 313.86,
+      "effective_per_shot": 6277.23,
+      "footprint": 9.5091,
+      "k": 1.0462,
+      "reliability": 0.8329,
+      "sigma": 271.7,
+      "slot": "Armament@AA",
+      "weapon": "ManifoldMG_AA"
+     }
+    ]
+   },
+   "protoss_positron": {
+    "armaments": [
+     {
+      "avg_versus": 0.628,
+      "damage_total": 40000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 33059.36,
+      "effective_dps": 636.21,
+      "effective_per_shot": 19086.28,
+      "footprint": 6.7877,
+      "k": 0.4772,
+      "reliability": 0.4871,
+      "sigma": 284.51,
+      "slot": "Armament",
+      "weapon": "PositronGrenade"
+     }
+    ]
+   },
+   "protoss_probe": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 10000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 20875.68,
+      "effective_dps": 622.03,
+      "effective_per_shot": 15550.8,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "ProbeAttack"
+     }
+    ]
+   },
+   "protoss_reaver": {
+    "armaments": [
+     {
+      "avg_versus": 0.6929,
+      "damage_total": 200000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 312684.81,
+      "effective_dps": 2349.58,
+      "effective_per_shot": 211461.86,
+      "footprint": 17.3811,
+      "k": 1.0573,
+      "reliability": 0.4771,
+      "sigma": 1422.08,
+      "slot": "Armament@primary",
+      "weapon": "ScarabLaunch"
+     }
+    ]
+   }
+  }
+ }
+}

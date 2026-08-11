@@ -1,0 +1,1711 @@
+{
+ "ledger": "tiberiandawn_gdi",
+ "pack": "mods/cameo/ContentPacks/TiberianDawn/GDI",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "A10": {
+    "armaments": [
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 12000.0,
+      "eff_reload": 143.0,
+      "effective_damage": 10473.62,
+      "effective_dps": 474.75,
+      "effective_per_shot": 6788.97,
+      "footprint": 0.3595,
+      "k": 0.5657,
+      "reliability": 0.7829,
+      "sigma": 250.0,
+      "slot": "Armament@GUNS",
+      "weapon": "Vulcan"
+     },
+     {
+      "avg_versus": 0.7469,
+      "damage_total": 12000.0,
+      "eff_reload": 2.0,
+      "effective_damage": 31174.76,
+      "effective_dps": 12132.1,
+      "effective_per_shot": 24264.21,
+      "footprint": 12.7832,
+      "k": 2.022,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@BOMBS",
+      "weapon": "Napalm"
+     }
+    ]
+   },
+   "A10Carrier": {
+    "armaments": [
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 6000.0,
+      "eff_reload": 143.0,
+      "effective_damage": 3790.36,
+      "effective_dps": 184.72,
+      "effective_per_shot": 2641.54,
+      "footprint": 0.0899,
+      "k": 0.4403,
+      "reliability": 0.6093,
+      "sigma": 225.0,
+      "slot": "Armament@GUNS",
+      "weapon": "VulcanA10Carrier"
+     },
+     {
+      "avg_versus": 0.7469,
+      "damage_total": 8000.0,
+      "eff_reload": 2.0,
+      "effective_damage": 20783.17,
+      "effective_dps": 8088.07,
+      "effective_per_shot": 16176.14,
+      "footprint": 12.7832,
+      "k": 2.022,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@BOMBS",
+      "weapon": "NapalmA10Carrier"
+     },
+     {
+      "avg_versus": 0.6869,
+      "damage_total": 12000.0,
+      "eff_reload": 102.0,
+      "effective_damage": 28700.07,
+      "effective_dps": 318.45,
+      "effective_per_shot": 16240.74,
+      "footprint": 6.3916,
+      "k": 1.3534,
+      "reliability": 0.7938,
+      "sigma": 633.33,
+      "slot": "Armament@AA",
+      "weapon": "A10CarrierMissiles_AA"
+     }
+    ]
+   },
+   "gdirigdrone": {
+    "armaments": [
+     {
+      "avg_versus": 0.5212,
+      "damage_total": 3000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 3184.76,
+      "effective_dps": 67.56,
+      "effective_per_shot": 1688.96,
+      "footprint": 0.6392,
+      "k": 0.563,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@pointdefense",
+      "weapon": "GDIRigPDLaser"
+     }
+    ]
+   },
+   "td_gdi_firehawk": {
+    "armaments": [
+     {
+      "avg_versus": 0.6869,
+      "damage_total": 20000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 46547.35,
+      "effective_dps": 948.11,
+      "effective_per_shot": 26073.02,
+      "footprint": 6.3916,
+      "k": 1.3037,
+      "reliability": 0.7295,
+      "sigma": 833.33,
+      "slot": "Armament",
+      "weapon": "FirehawkMissiles_AA"
+     },
+     {
+      "avg_versus": 0.6869,
+      "damage_total": 20000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 46547.35,
+      "effective_dps": 948.11,
+      "effective_per_shot": 26073.02,
+      "footprint": 6.3916,
+      "k": 1.3037,
+      "reliability": 0.7295,
+      "sigma": 833.33,
+      "slot": "Armament@td_gdi_upgrade_advancedmissiletargeting",
+      "weapon": "FirehawkMissiles_AA"
+     },
+     {
+      "avg_versus": 0.7303,
+      "damage_total": 40000.0,
+      "eff_reload": 52.0,
+      "effective_damage": 317290.66,
+      "effective_dps": 2688.77,
+      "effective_per_shot": 69907.97,
+      "footprint": 110.5142,
+      "k": 1.7477,
+      "reliability": 1.0251,
+      "sigma": 8.33,
+      "slot": "Armament@BOMBS",
+      "weapon": "FirehawkBomb"
+     }
+    ]
+   },
+   "td_gdi_orca": {
+    "armaments": [
+     {
+      "avg_versus": 0.6589,
+      "damage_total": 12000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 11640.37,
+      "effective_dps": 453.04,
+      "effective_per_shot": 7248.65,
+      "footprint": 7.9401,
+      "k": 0.6041,
+      "reliability": 0.6392,
+      "sigma": 317.68,
+      "slot": "Armament@PRIMARY",
+      "weapon": "OrcaMissiles"
+     },
+     {
+      "avg_versus": 0.6589,
+      "damage_total": 12000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 12525.6,
+      "effective_dps": 488.94,
+      "effective_per_shot": 7823.01,
+      "footprint": 7.9401,
+      "k": 0.6519,
+      "reliability": 0.713,
+      "sigma": 236.05,
+      "slot": "Armament@AdvancedMissileTargeting",
+      "weapon": "OrcaMissilesAMT"
+     }
+    ]
+   }
+  },
+  "buildings": {
+   "td_gdi_advancedguardtower": {
+    "armaments": [
+     {
+      "avg_versus": 0.6392,
+      "damage_total": 14000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 10988.86,
+      "effective_dps": 445.88,
+      "effective_per_shot": 6688.24,
+      "footprint": 8.05,
+      "k": 0.4777,
+      "reliability": 0.4974,
+      "sigma": 450.88,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TowerMissile"
+     },
+     {
+      "avg_versus": 0.6392,
+      "damage_total": 14000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 12472.66,
+      "effective_dps": 507.94,
+      "effective_per_shot": 7619.15,
+      "footprint": 8.05,
+      "k": 0.5442,
+      "reliability": 0.6034,
+      "sigma": 319.3,
+      "slot": "Armament@AdvancedMissileTargeting",
+      "weapon": "TowerMissileAMT"
+     }
+    ]
+   },
+   "td_gdi_guardtower": {
+    "armaments": [
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 28.0,
+      "effective_damage": 1774.08,
+      "effective_dps": 161.7,
+      "effective_per_shot": 1131.88,
+      "footprint": 0.3595,
+      "k": 0.5659,
+      "reliability": 0.7972,
+      "sigma": 233.6,
+      "slot": "Armament",
+      "weapon": "HighV"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 28.0,
+      "effective_damage": 3548.17,
+      "effective_dps": 323.39,
+      "effective_per_shot": 2263.76,
+      "footprint": 0.3595,
+      "k": 0.5659,
+      "reliability": 0.7972,
+      "sigma": 233.6,
+      "slot": "Armament@Upgrade",
+      "weapon": "HighVAP"
+     }
+    ]
+   },
+   "td_gdi_skyshield": {
+    "armaments": [
+     {
+      "avg_versus": 0.5952,
+      "damage_total": 8000.0,
+      "eff_reload": 11.0,
+      "effective_damage": 2432.4,
+      "effective_dps": 127.13,
+      "effective_per_shot": 1398.46,
+      "footprint": 0.1523,
+      "k": 0.1748,
+      "reliability": 0.2945,
+      "sigma": 277.6,
+      "slot": "Armament",
+      "weapon": "SkyshieldCannon"
+     }
+    ]
+   }
+  },
+  "infantry": {
+   "E1": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 59.0,
+      "effective_damage": 1676.15,
+      "effective_dps": 68.56,
+      "effective_per_shot": 1011.27,
+      "footprint": 0.1598,
+      "k": 0.5056,
+      "reliability": 0.7981,
+      "sigma": 154.99,
+      "slot": "Armament@PRIMARY",
+      "weapon": "td_gdi_minigunner_minigun"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 59.0,
+      "effective_damage": 1676.15,
+      "effective_dps": 68.56,
+      "effective_per_shot": 1011.27,
+      "footprint": 0.1598,
+      "k": 0.5056,
+      "reliability": 0.7981,
+      "sigma": 154.99,
+      "slot": "Armament@GARRISONED",
+      "weapon": "td_gdi_minigunner_minigun"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 3584.99,
+      "effective_dps": 169.79,
+      "effective_per_shot": 2292.19,
+      "footprint": 0.3595,
+      "k": 0.573,
+      "reliability": 0.8064,
+      "sigma": 223.0,
+      "slot": "Armament@Upgrade",
+      "weapon": "td_gdi_minigunner_minigun_ap"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 3584.99,
+      "effective_dps": 169.79,
+      "effective_per_shot": 2292.19,
+      "footprint": 0.3595,
+      "k": 0.573,
+      "reliability": 0.8064,
+      "sigma": 223.0,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "td_gdi_minigunner_minigun_ap"
+     }
+    ]
+   },
+   "E3": {
+    "armaments": [
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 27336.49,
+      "effective_dps": 170.82,
+      "effective_per_shot": 10761.82,
+      "footprint": 2.758,
+      "k": 0.5979,
+      "reliability": 0.8292,
+      "sigma": 262.27,
+      "slot": "Armament@PRIMARY",
+      "weapon": "Rockets"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 27336.49,
+      "effective_dps": 170.82,
+      "effective_per_shot": 10761.82,
+      "footprint": 2.758,
+      "k": 0.5979,
+      "reliability": 0.8292,
+      "sigma": 262.27,
+      "slot": "Armament@GARRISONED",
+      "weapon": "Rockets"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 27958.56,
+      "effective_dps": 176.58,
+      "effective_per_shot": 11124.44,
+      "footprint": 2.758,
+      "k": 0.618,
+      "reliability": 0.8638,
+      "sigma": 209.2,
+      "slot": "Armament@AdvancedMissileTargeting",
+      "weapon": "RocketsAMT"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 27958.56,
+      "effective_dps": 176.58,
+      "effective_per_shot": 11124.44,
+      "footprint": 2.758,
+      "k": 0.618,
+      "reliability": 0.8638,
+      "sigma": 209.2,
+      "slot": "Armament@AdvancedMissileTargetingGARRISONED",
+      "weapon": "RocketsAMT"
+     }
+    ]
+   },
+   "td_gdi_commando": {
+    "armaments": [
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 40000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 40755.35,
+      "effective_dps": 1193.01,
+      "effective_per_shot": 29825.23,
+      "footprint": 0.1598,
+      "k": 0.7456,
+      "reliability": 0.9789,
+      "sigma": 16.17,
+      "slot": "Armament",
+      "weapon": "td_gdi_commando_sniper"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 40000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 40755.35,
+      "effective_dps": 1193.01,
+      "effective_per_shot": 29825.23,
+      "footprint": 0.1598,
+      "k": 0.7456,
+      "reliability": 0.9789,
+      "sigma": 16.17,
+      "slot": "Armament@GARRISONED",
+      "weapon": "td_gdi_commando_sniper"
+     },
+     {
+      "avg_versus": 0.707,
+      "damage_total": 41000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 41158.76,
+      "effective_dps": 1253.8,
+      "effective_per_shot": 31345.01,
+      "footprint": 0.7989,
+      "k": 0.7645,
+      "reliability": 0.9689,
+      "sigma": 16.17,
+      "slot": "Armament@Upgrade",
+      "weapon": "td_gdi_commando_sniper_elite"
+     },
+     {
+      "avg_versus": 0.707,
+      "damage_total": 41000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 41158.76,
+      "effective_dps": 1253.8,
+      "effective_per_shot": 31345.01,
+      "footprint": 0.7989,
+      "k": 0.7645,
+      "reliability": 0.9689,
+      "sigma": 16.17,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "td_gdi_commando_sniper_elite"
+     }
+    ]
+   },
+   "td_gdi_empgrenadier": {
+    "armaments": [
+     {
+      "avg_versus": 0.7582,
+      "damage_total": 72000.0,
+      "eff_reload": 111.0,
+      "effective_damage": 42568.95,
+      "effective_dps": 276.96,
+      "effective_per_shot": 30742.72,
+      "footprint": 11.0236,
+      "k": 0.427,
+      "reliability": 0.3225,
+      "sigma": 845.97,
+      "slot": "Armament",
+      "weapon": "EMPGrenade"
+     },
+     {
+      "avg_versus": 0.7582,
+      "damage_total": 72000.0,
+      "eff_reload": 111.0,
+      "effective_damage": 42568.95,
+      "effective_dps": 276.96,
+      "effective_per_shot": 30742.72,
+      "footprint": 11.0236,
+      "k": 0.427,
+      "reliability": 0.3225,
+      "sigma": 845.97,
+      "slot": "Armament@GARRISONED",
+      "weapon": "EMPGrenade"
+     }
+    ]
+   },
+   "td_gdi_grenadier": {
+    "armaments": [
+     {
+      "avg_versus": 0.6087,
+      "damage_total": 16000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 18151.02,
+      "effective_dps": 232.28,
+      "effective_per_shot": 9755.91,
+      "footprint": 2.758,
+      "k": 0.6097,
+      "reliability": 0.4449,
+      "sigma": 1212.93,
+      "slot": "Armament",
+      "weapon": "Grenade"
+     },
+     {
+      "avg_versus": 0.6087,
+      "damage_total": 16000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 18151.02,
+      "effective_dps": 232.28,
+      "effective_per_shot": 9755.91,
+      "footprint": 2.758,
+      "k": 0.6097,
+      "reliability": 0.4449,
+      "sigma": 1212.93,
+      "slot": "Armament@GARRISONED",
+      "weapon": "Grenade"
+     }
+    ]
+   },
+   "td_gdi_havoc": {
+    "armaments": [
+     {
+      "avg_versus": 0.6711,
+      "damage_total": 40000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 36504.77,
+      "effective_dps": 238.15,
+      "effective_per_shot": 23815.02,
+      "footprint": 0.1997,
+      "k": 0.5954,
+      "reliability": 0.8877,
+      "sigma": 57.5,
+      "slot": "Armament@ra1_allies_alliedsniper",
+      "weapon": "CommandoSniper"
+     },
+     {
+      "avg_versus": 0.5891,
+      "damage_total": 40000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 69383.4,
+      "effective_dps": 320.24,
+      "effective_per_shot": 32023.63,
+      "footprint": 7.1082,
+      "k": 0.8006,
+      "reliability": 0.8461,
+      "sigma": 308.33,
+      "slot": "Armament@Rocket",
+      "weapon": "CommandoRocketLauncher"
+     },
+     {
+      "avg_versus": 0.6747,
+      "damage_total": 40000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 57812.69,
+      "effective_dps": 361.8,
+      "effective_per_shot": 36180.06,
+      "footprint": 7.1961,
+      "k": 0.9045,
+      "reliability": 0.5458,
+      "sigma": 1433.33,
+      "slot": "Armament@Grenade",
+      "weapon": "CommandoGrenadeLauncher"
+     },
+     {
+      "avg_versus": 0.6711,
+      "damage_total": 8000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 5738.01,
+      "effective_dps": 185.49,
+      "effective_per_shot": 3709.75,
+      "footprint": 0.1997,
+      "k": 0.4637,
+      "reliability": 0.6923,
+      "sigma": 157.5,
+      "slot": "Armament@M16",
+      "weapon": "CommandoM16"
+     },
+     {
+      "avg_versus": 0.6711,
+      "damage_total": 40000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 36504.77,
+      "effective_dps": 238.15,
+      "effective_per_shot": 23815.02,
+      "footprint": 0.1997,
+      "k": 0.5954,
+      "reliability": 0.8877,
+      "sigma": 57.5,
+      "slot": "Armament@SniperGARRISONED",
+      "weapon": "CommandoSniper"
+     },
+     {
+      "avg_versus": 0.5891,
+      "damage_total": 40000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 69383.4,
+      "effective_dps": 320.24,
+      "effective_per_shot": 32023.63,
+      "footprint": 7.1082,
+      "k": 0.8006,
+      "reliability": 0.8461,
+      "sigma": 308.33,
+      "slot": "Armament@RocketGARRISONED",
+      "weapon": "CommandoRocketLauncher"
+     },
+     {
+      "avg_versus": 0.6747,
+      "damage_total": 40000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 57812.69,
+      "effective_dps": 361.8,
+      "effective_per_shot": 36180.06,
+      "footprint": 7.1961,
+      "k": 0.9045,
+      "reliability": 0.5458,
+      "sigma": 1433.33,
+      "slot": "Armament@GrenadeGARRISONED",
+      "weapon": "CommandoGrenadeLauncher"
+     },
+     {
+      "avg_versus": 0.6711,
+      "damage_total": 8000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 5738.01,
+      "effective_dps": 185.49,
+      "effective_per_shot": 3709.75,
+      "footprint": 0.1997,
+      "k": 0.4637,
+      "reliability": 0.6923,
+      "sigma": 157.5,
+      "slot": "Armament@M16GARRISONED",
+      "weapon": "CommandoM16"
+     }
+    ]
+   },
+   "td_gdi_heavysniper": {
+    "armaments": [
+     {
+      "avg_versus": 0.6313,
+      "damage_total": 32000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 18639.37,
+      "effective_dps": 146.19,
+      "effective_per_shot": 10964.41,
+      "footprint": 2.4549,
+      "k": 0.3426,
+      "reliability": 0.4291,
+      "sigma": 269.24,
+      "slot": "Armament",
+      "weapon": "GDISniperRifle"
+     },
+     {
+      "avg_versus": 0.6313,
+      "damage_total": 32000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 18639.37,
+      "effective_dps": 146.19,
+      "effective_per_shot": 10964.41,
+      "footprint": 2.4549,
+      "k": 0.3426,
+      "reliability": 0.4291,
+      "sigma": 269.24,
+      "slot": "Armament@GARRISONED",
+      "weapon": "GDISniperRifle"
+     }
+    ]
+   },
+   "td_gdi_minigunner": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 59.0,
+      "effective_damage": 1676.15,
+      "effective_dps": 68.56,
+      "effective_per_shot": 1011.27,
+      "footprint": 0.1598,
+      "k": 0.5056,
+      "reliability": 0.7981,
+      "sigma": 154.99,
+      "slot": "Armament@PRIMARY",
+      "weapon": "td_gdi_minigunner_minigun"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 59.0,
+      "effective_damage": 1676.15,
+      "effective_dps": 68.56,
+      "effective_per_shot": 1011.27,
+      "footprint": 0.1598,
+      "k": 0.5056,
+      "reliability": 0.7981,
+      "sigma": 154.99,
+      "slot": "Armament@GARRISONED",
+      "weapon": "td_gdi_minigunner_minigun"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 3584.99,
+      "effective_dps": 169.79,
+      "effective_per_shot": 2292.19,
+      "footprint": 0.3595,
+      "k": 0.573,
+      "reliability": 0.8064,
+      "sigma": 223.0,
+      "slot": "Armament@Upgrade",
+      "weapon": "td_gdi_minigunner_minigun_ap"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 3584.99,
+      "effective_dps": 169.79,
+      "effective_per_shot": 2292.19,
+      "footprint": 0.3595,
+      "k": 0.573,
+      "reliability": 0.8064,
+      "sigma": 223.0,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "td_gdi_minigunner_minigun_ap"
+     }
+    ]
+   },
+   "td_gdi_officer": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 16000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 13079.45,
+      "effective_dps": 977.82,
+      "effective_per_shot": 7822.52,
+      "footprint": 0.5193,
+      "k": 0.4889,
+      "reliability": 0.7526,
+      "sigma": 227.98,
+      "slot": "Armament@PRIMARY",
+      "weapon": "OfficerMachineGun"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 16000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 13079.45,
+      "effective_dps": 977.82,
+      "effective_per_shot": 7822.52,
+      "footprint": 0.5193,
+      "k": 0.4889,
+      "reliability": 0.7526,
+      "sigma": 227.98,
+      "slot": "Armament@GARRISONED",
+      "weapon": "OfficerMachineGun"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 3579.98,
+      "effective_dps": 286.04,
+      "effective_per_shot": 2288.33,
+      "footprint": 0.3595,
+      "k": 0.5721,
+      "reliability": 0.8051,
+      "sigma": 224.44,
+      "slot": "Armament@Upgrade",
+      "weapon": "OfficerMachineGunAP"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 3579.98,
+      "effective_dps": 286.04,
+      "effective_per_shot": 2288.33,
+      "footprint": 0.3595,
+      "k": 0.5721,
+      "reliability": 0.8051,
+      "sigma": 224.44,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "OfficerMachineGunAP"
+     }
+    ]
+   },
+   "td_gdi_rocketsoldier": {
+    "armaments": [
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 27336.49,
+      "effective_dps": 170.82,
+      "effective_per_shot": 10761.82,
+      "footprint": 2.758,
+      "k": 0.5979,
+      "reliability": 0.8292,
+      "sigma": 262.27,
+      "slot": "Armament@PRIMARY",
+      "weapon": "Rockets"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 27336.49,
+      "effective_dps": 170.82,
+      "effective_per_shot": 10761.82,
+      "footprint": 2.758,
+      "k": 0.5979,
+      "reliability": 0.8292,
+      "sigma": 262.27,
+      "slot": "Armament@GARRISONED",
+      "weapon": "Rockets"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 27958.56,
+      "effective_dps": 176.58,
+      "effective_per_shot": 11124.44,
+      "footprint": 2.758,
+      "k": 0.618,
+      "reliability": 0.8638,
+      "sigma": 209.2,
+      "slot": "Armament@AdvancedMissileTargeting",
+      "weapon": "RocketsAMT"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 27958.56,
+      "effective_dps": 176.58,
+      "effective_per_shot": 11124.44,
+      "footprint": 2.758,
+      "k": 0.618,
+      "reliability": 0.8638,
+      "sigma": 209.2,
+      "slot": "Armament@AdvancedMissileTargetingGARRISONED",
+      "weapon": "RocketsAMT"
+     }
+    ]
+   },
+   "td_gdi_shotgunner": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 1276.49,
+      "effective_dps": 48.25,
+      "effective_per_shot": 675.46,
+      "footprint": 0.5193,
+      "k": 0.1689,
+      "reliability": 0.2542,
+      "sigma": 817.5,
+      "slot": "Armament@PRIMARY",
+      "weapon": "td_gdi_shotgunner_shotgun"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 1276.49,
+      "effective_dps": 48.25,
+      "effective_per_shot": 675.46,
+      "footprint": 0.5193,
+      "k": 0.1689,
+      "reliability": 0.2542,
+      "sigma": 817.5,
+      "slot": "Armament@GARRISONED",
+      "weapon": "td_gdi_shotgunner_shotgun"
+     }
+    ]
+   },
+   "td_gdi_sonicmissilesoldier": {
+    "armaments": [
+     {
+      "avg_versus": 0.6671,
+      "damage_total": 51000.0,
+      "eff_reload": 125.0,
+      "effective_damage": 55387.87,
+      "effective_dps": 276.86,
+      "effective_per_shot": 34607.13,
+      "footprint": 6.3551,
+      "k": 0.6786,
+      "reliability": 0.7855,
+      "sigma": 150.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "MissileSoldierWeapon"
+     },
+     {
+      "avg_versus": 0.6671,
+      "damage_total": 51000.0,
+      "eff_reload": 125.0,
+      "effective_damage": 55387.87,
+      "effective_dps": 276.86,
+      "effective_per_shot": 34607.13,
+      "footprint": 6.3551,
+      "k": 0.6786,
+      "reliability": 0.7855,
+      "sigma": 150.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "MissileSoldierWeapon"
+     }
+    ]
+   }
+  },
+  "naval": {
+   "CNCCA": {
+    "armaments": [
+     {
+      "avg_versus": 0.7538,
+      "damage_total": 51000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 52383.18,
+      "effective_dps": 419.42,
+      "effective_per_shot": 41942.19,
+      "footprint": 0.6392,
+      "k": 0.8224,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "GDIBattleshipRailgun"
+     },
+     {
+      "avg_versus": 0.7538,
+      "damage_total": 51000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 52383.18,
+      "effective_dps": 419.42,
+      "effective_per_shot": 41942.19,
+      "footprint": 0.6392,
+      "k": 0.8224,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@SECONDARY",
+      "weapon": "GDIBattleshipRailgun"
+     }
+    ]
+   },
+   "CNCPT": {
+    "armaments": [
+     {
+      "avg_versus": 0.6086,
+      "damage_total": 18000.0,
+      "eff_reload": 44.0,
+      "effective_damage": 35284.04,
+      "effective_dps": 763.77,
+      "effective_per_shot": 16802.97,
+      "footprint": 4.3503,
+      "k": 0.9335,
+      "reliability": 0.8727,
+      "sigma": 366.64,
+      "slot": "Armament@Ground",
+      "weapon": "GunboatMissile"
+     },
+     {
+      "avg_versus": 0.6086,
+      "damage_total": 18000.0,
+      "eff_reload": 44.0,
+      "effective_damage": 35909.16,
+      "effective_dps": 783.56,
+      "effective_per_shot": 17238.31,
+      "footprint": 4.3503,
+      "k": 0.9577,
+      "reliability": 0.9074,
+      "sigma": 266.65,
+      "slot": "Armament@AdvancedMissileTargeting",
+      "weapon": "GunboatMissileAMT"
+     },
+     {
+      "avg_versus": 0.6087,
+      "damage_total": 60000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 66364.59,
+      "effective_dps": 591.26,
+      "effective_per_shot": 35475.77,
+      "footprint": 2.758,
+      "k": 0.5913,
+      "reliability": 0.4166,
+      "sigma": 1360.0,
+      "slot": "Armament@DC1",
+      "weapon": "DepthCharge"
+     },
+     {
+      "avg_versus": 0.6087,
+      "damage_total": 60000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 66364.59,
+      "effective_dps": 591.26,
+      "effective_per_shot": 35475.77,
+      "footprint": 2.758,
+      "k": 0.5913,
+      "reliability": 0.4166,
+      "sigma": 1360.0,
+      "slot": "Armament@DC2",
+      "weapon": "DepthCharge"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "td_gdi_apc": {
+    "armaments": [
+     {
+      "avg_versus": 0.6359,
+      "damage_total": 4000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 5719.52,
+      "effective_dps": 349.62,
+      "effective_per_shot": 3496.2,
+      "footprint": 4.7098,
+      "k": 0.8741,
+      "reliability": 0.8412,
+      "sigma": 261.34,
+      "slot": "Armament@PRIMARY",
+      "weapon": "APCGun"
+     },
+     {
+      "avg_versus": 0.6359,
+      "damage_total": 4000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 5705.74,
+      "effective_dps": 348.59,
+      "effective_per_shot": 3485.9,
+      "footprint": 4.7098,
+      "k": 0.8715,
+      "reliability": 0.8377,
+      "sigma": 267.0,
+      "slot": "Armament@SECONDARY",
+      "weapon": "APCGun_AA"
+     }
+    ]
+   },
+   "td_gdi_archerartillery": {
+    "armaments": [
+     {
+      "avg_versus": 0.7165,
+      "damage_total": 70000.0,
+      "eff_reload": 140.0,
+      "effective_damage": 70633.02,
+      "effective_dps": 337.57,
+      "effective_per_shot": 47260.1,
+      "footprint": 13.734,
+      "k": 0.6751,
+      "reliability": 0.3223,
+      "sigma": 1700.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ArcherArtilleryShell"
+     }
+    ]
+   },
+   "td_gdi_assaultapc": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 1673.57,
+      "effective_dps": 96.15,
+      "effective_per_shot": 1009.53,
+      "footprint": 0.1598,
+      "k": 0.5048,
+      "reliability": 0.7968,
+      "sigma": 155.98,
+      "slot": "Armament",
+      "weapon": "MachineGunHumvee2"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 1600.66,
+      "effective_dps": 91.44,
+      "effective_per_shot": 960.17,
+      "footprint": 0.1598,
+      "k": 0.4801,
+      "reliability": 0.7604,
+      "sigma": 183.97,
+      "slot": "Armament@AA",
+      "weapon": "MachineGunHumvee2_AA"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 1783.83,
+      "effective_dps": 108.51,
+      "effective_per_shot": 1139.4,
+      "footprint": 0.3595,
+      "k": 0.5697,
+      "reliability": 0.802,
+      "sigma": 227.99,
+      "slot": "Armament@Upgrade",
+      "weapon": "MachineGunHumvee2AP"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 1759.52,
+      "effective_dps": 106.73,
+      "effective_per_shot": 1120.63,
+      "footprint": 0.3595,
+      "k": 0.5603,
+      "reliability": 0.7899,
+      "sigma": 241.99,
+      "slot": "Armament@UpgradeAA",
+      "weapon": "MachineGunHumvee2AP_AA"
+     }
+    ]
+   },
+   "td_gdi_battletank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 8000.0,
+      "eff_reload": 72.0,
+      "effective_damage": 15310.46,
+      "effective_dps": 124.58,
+      "effective_per_shot": 8969.64,
+      "footprint": 4.3503,
+      "k": 1.1212,
+      "reliability": 0.8262,
+      "sigma": 500.29,
+      "slot": "Armament",
+      "weapon": "120mm"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 16000.0,
+      "eff_reload": 72.0,
+      "effective_damage": 31177.38,
+      "effective_dps": 255.07,
+      "effective_per_shot": 18364.98,
+      "footprint": 4.3503,
+      "k": 1.1478,
+      "reliability": 0.861,
+      "sigma": 400.15,
+      "slot": "Armament@HV",
+      "weapon": "120mmHV"
+     },
+     {
+      "avg_versus": 0.6086,
+      "damage_total": 8000.0,
+      "eff_reload": 72.0,
+      "effective_damage": 15822.5,
+      "effective_dps": 105.08,
+      "effective_per_shot": 7565.79,
+      "footprint": 4.3503,
+      "k": 0.9457,
+      "reliability": 0.8902,
+      "sigma": 316.0,
+      "slot": "Armament@Missile",
+      "weapon": "M1A1Missiles"
+     },
+     {
+      "avg_versus": 0.6086,
+      "damage_total": 8000.0,
+      "eff_reload": 72.0,
+      "effective_damage": 16047.57,
+      "effective_dps": 107.26,
+      "effective_per_shot": 7722.9,
+      "footprint": 4.3503,
+      "k": 0.9654,
+      "reliability": 0.9184,
+      "sigma": 235.0,
+      "slot": "Armament@AdvancedMissileTargeting",
+      "weapon": "M1A1MissilesAMT"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 1785.55,
+      "effective_dps": 67.1,
+      "effective_per_shot": 1140.73,
+      "footprint": 0.3595,
+      "k": 0.5704,
+      "reliability": 0.8029,
+      "sigma": 227.0,
+      "slot": "Armament@MachineGun",
+      "weapon": "M1A1MachineGun"
+     }
+    ]
+   },
+   "td_gdi_boxer": {
+    "armaments": [
+     {
+      "avg_versus": 0.617,
+      "damage_total": 12000.0,
+      "eff_reload": 11.0,
+      "effective_damage": 6623.33,
+      "effective_dps": 354.56,
+      "effective_per_shot": 3900.16,
+      "footprint": 2.5847,
+      "k": 0.325,
+      "reliability": 0.4442,
+      "sigma": 259.72,
+      "slot": "Armament@AG",
+      "weapon": "BoxerCannonAG"
+     },
+     {
+      "avg_versus": 0.617,
+      "damage_total": 12000.0,
+      "eff_reload": 11.0,
+      "effective_damage": 6539.61,
+      "effective_dps": 349.88,
+      "effective_per_shot": 3848.69,
+      "footprint": 2.5847,
+      "k": 0.3207,
+      "reliability": 0.4373,
+      "sigma": 264.58,
+      "slot": "Armament@AA",
+      "weapon": "BoxerCannon_AA"
+     }
+    ]
+   },
+   "td_gdi_defenserig": {
+    "armaments": [
+     {
+      "avg_versus": 0.5212,
+      "damage_total": 3000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 3184.76,
+      "effective_dps": 67.56,
+      "effective_per_shot": 1688.96,
+      "footprint": 0.6392,
+      "k": 0.563,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@pointdefense",
+      "weapon": "GDIRigPDLaser"
+     },
+     {
+      "avg_versus": 0.5212,
+      "damage_total": 3000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 3184.76,
+      "effective_dps": 67.56,
+      "effective_per_shot": 1688.96,
+      "footprint": 0.6392,
+      "k": 0.563,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@pointdefensedeployed",
+      "weapon": "GDIRigPDLaserTower"
+     },
+     {
+      "avg_versus": 0.6378,
+      "damage_total": 24000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 13802.31,
+      "effective_dps": 1044.36,
+      "effective_per_shot": 8354.89,
+      "footprint": 2.5672,
+      "k": 0.3481,
+      "reliability": 0.4681,
+      "sigma": 230.0,
+      "slot": "Armament@mobile",
+      "weapon": "GDIRigPhalanx"
+     },
+     {
+      "avg_versus": 0.6378,
+      "damage_total": 24000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 13192.25,
+      "effective_dps": 796.39,
+      "effective_per_shot": 7963.89,
+      "footprint": 2.5672,
+      "k": 0.3318,
+      "reliability": 0.4427,
+      "sigma": 246.75,
+      "slot": "Armament@Phalanx",
+      "weapon": "GDIRigPhalanxTower"
+     },
+     {
+      "avg_versus": 0.7559,
+      "damage_total": 161000.0,
+      "eff_reload": 95.0,
+      "effective_damage": 165129.56,
+      "effective_dps": 1398.95,
+      "effective_per_shot": 132900.45,
+      "footprint": 0.6392,
+      "k": 0.8255,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Railgun",
+      "weapon": "GDIRigRailgun"
+     },
+     {
+      "avg_versus": 0.6194,
+      "damage_total": 32000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 12108.78,
+      "effective_dps": 415.05,
+      "effective_per_shot": 6225.77,
+      "footprint": 2.9243,
+      "k": 0.1946,
+      "reliability": 0.1956,
+      "sigma": 1174.0,
+      "slot": "Armament@MissilePod",
+      "weapon": "GDIRigMissilePod"
+     },
+     {
+      "avg_versus": 0.6194,
+      "damage_total": 32000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 12988.49,
+      "effective_dps": 452.01,
+      "effective_per_shot": 6780.14,
+      "footprint": 2.9243,
+      "k": 0.2119,
+      "reliability": 0.2231,
+      "sigma": 1033.75,
+      "slot": "Armament@AdvancedMissileTargeting",
+      "weapon": "GDIRigMissilePodAMT"
+     }
+    ]
+   },
+   "td_gdi_exosuit": {
+    "armaments": [
+     {
+      "avg_versus": 0.7493,
+      "damage_total": 21000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 21634.17,
+      "effective_dps": 428.38,
+      "effective_per_shot": 17135.39,
+      "footprint": 0.6392,
+      "k": 0.816,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Railgun",
+      "weapon": "ExosuitRailgun"
+     }
+    ]
+   },
+   "td_gdi_humvee": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 6000.0,
+      "eff_reload": 21.0,
+      "effective_damage": 5083.71,
+      "effective_dps": 438.75,
+      "effective_per_shot": 3071.24,
+      "footprint": 0.1598,
+      "k": 0.5119,
+      "reliability": 0.8073,
+      "sigma": 147.92,
+      "slot": "Armament",
+      "weapon": "MachineGunH"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 6000.0,
+      "eff_reload": 21.0,
+      "effective_damage": 5372.48,
+      "effective_dps": 490.63,
+      "effective_per_shot": 3434.43,
+      "footprint": 0.3595,
+      "k": 0.5724,
+      "reliability": 0.8055,
+      "sigma": 223.96,
+      "slot": "Armament@Upgrade",
+      "weapon": "MachineGunAPH"
+     }
+    ]
+   },
+   "td_gdi_humveemkii": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 1673.57,
+      "effective_dps": 96.15,
+      "effective_per_shot": 1009.53,
+      "footprint": 0.1598,
+      "k": 0.5048,
+      "reliability": 0.7968,
+      "sigma": 155.98,
+      "slot": "Armament",
+      "weapon": "MachineGunHumvee2"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 1783.83,
+      "effective_dps": 108.51,
+      "effective_per_shot": 1139.4,
+      "footprint": 0.3595,
+      "k": 0.5697,
+      "reliability": 0.802,
+      "sigma": 227.99,
+      "slot": "Armament@Upgrade",
+      "weapon": "MachineGunHumvee2AP"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 1600.66,
+      "effective_dps": 91.44,
+      "effective_per_shot": 960.17,
+      "footprint": 0.1598,
+      "k": 0.4801,
+      "reliability": 0.7604,
+      "sigma": 183.97,
+      "slot": "Armament@AA",
+      "weapon": "MachineGunHumvee2_AA"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 1759.52,
+      "effective_dps": 106.73,
+      "effective_per_shot": 1120.63,
+      "footprint": 0.3595,
+      "k": 0.5603,
+      "reliability": 0.7899,
+      "sigma": 241.99,
+      "slot": "Armament@UpgradeAA",
+      "weapon": "MachineGunHumvee2AP_AA"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 16000.0,
+      "eff_reload": 84.0,
+      "effective_damage": 24566.55,
+      "effective_dps": 115.73,
+      "effective_per_shot": 9721.3,
+      "footprint": 2.758,
+      "k": 0.6076,
+      "reliability": 0.8459,
+      "sigma": 236.6,
+      "slot": "Armament@Rockets",
+      "weapon": "RocketsHumvee2"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 16000.0,
+      "eff_reload": 84.0,
+      "effective_damage": 23594.57,
+      "effective_dps": 109.08,
+      "effective_per_shot": 9162.4,
+      "footprint": 2.758,
+      "k": 0.5727,
+      "reliability": 0.7852,
+      "sigma": 329.9,
+      "slot": "Armament@RocketsAA",
+      "weapon": "RocketsHumvee2_AA"
+     },
+     {
+      "avg_versus": 0.6086,
+      "damage_total": 32000.0,
+      "eff_reload": 84.0,
+      "effective_damage": 65629.36,
+      "effective_dps": 399.02,
+      "effective_per_shot": 33517.9,
+      "footprint": 9.1496,
+      "k": 1.0474,
+      "reliability": 0.9072,
+      "sigma": 189.95,
+      "slot": "Armament@AdvancedMissileTargeting",
+      "weapon": "RocketsHumvee2AMT"
+     },
+     {
+      "avg_versus": 0.6086,
+      "damage_total": 32000.0,
+      "eff_reload": 84.0,
+      "effective_damage": 64535.67,
+      "effective_dps": 390.41,
+      "effective_per_shot": 32794.85,
+      "footprint": 9.1496,
+      "k": 1.0248,
+      "reliability": 0.873,
+      "sigma": 259.93,
+      "slot": "Armament@AdvancedMissileTargetingAA",
+      "weapon": "RocketsHumvee2AMT_AA"
+     }
+    ]
+   },
+   "td_gdi_mammothtank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7412,
+      "damage_total": 8000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 19089.91,
+      "effective_dps": 320.61,
+      "effective_per_shot": 12824.47,
+      "footprint": 6.3916,
+      "k": 1.6031,
+      "reliability": 0.7883,
+      "sigma": 650.03,
+      "slot": "Armament@PRIMARY",
+      "weapon": "120mmDual"
+     },
+     {
+      "avg_versus": 0.7412,
+      "damage_total": 16000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 38700.81,
+      "effective_dps": 652.25,
+      "effective_per_shot": 26089.98,
+      "footprint": 6.3916,
+      "k": 1.6306,
+      "reliability": 0.8209,
+      "sigma": 550.02,
+      "slot": "Armament@HV",
+      "weapon": "120mmDualHV"
+     },
+     {
+      "avg_versus": 0.6869,
+      "damage_total": 8000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 19592.58,
+      "effective_dps": 279.76,
+      "effective_per_shot": 11190.58,
+      "footprint": 6.3916,
+      "k": 1.3988,
+      "reliability": 0.8512,
+      "sigma": 457.05,
+      "slot": "Armament@SECONDARY",
+      "weapon": "MammothMissiles"
+     },
+     {
+      "avg_versus": 0.6869,
+      "damage_total": 8000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 19992.5,
+      "effective_dps": 287.87,
+      "effective_per_shot": 11514.89,
+      "footprint": 6.3916,
+      "k": 1.4394,
+      "reliability": 0.9012,
+      "sigma": 303.52,
+      "slot": "Armament@AdvancedMissileTargeting",
+      "weapon": "MammothMissilesAMT"
+     }
+    ]
+   },
+   "td_gdi_mammothtankmkiii": {
+    "armaments": [
+     {
+      "avg_versus": 0.7412,
+      "damage_total": 12000.0,
+      "eff_reload": 110.0,
+      "effective_damage": 28634.99,
+      "effective_dps": 349.76,
+      "effective_per_shot": 19236.82,
+      "footprint": 6.3916,
+      "k": 1.6031,
+      "reliability": 0.7884,
+      "sigma": 650.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "MammothTank3Cannons"
+     },
+     {
+      "avg_versus": 0.7412,
+      "damage_total": 24000.0,
+      "eff_reload": 110.0,
+      "effective_damage": 58051.34,
+      "effective_dps": 711.55,
+      "effective_per_shot": 39135.08,
+      "footprint": 6.3916,
+      "k": 1.6306,
+      "reliability": 0.8209,
+      "sigma": 550.0,
+      "slot": "Armament@HV",
+      "weapon": "MammothTank3CannonsHV"
+     },
+     {
+      "avg_versus": 0.6869,
+      "damage_total": 12000.0,
+      "eff_reload": 110.0,
+      "effective_damage": 29349.99,
+      "effective_dps": 304.63,
+      "effective_per_shot": 16754.66,
+      "footprint": 6.3916,
+      "k": 1.3962,
+      "reliability": 0.8479,
+      "sigma": 467.0,
+      "slot": "Armament@SECONDARY",
+      "weapon": "MammothTank3Missiles"
+     },
+     {
+      "avg_versus": 0.6869,
+      "damage_total": 12000.0,
+      "eff_reload": 110.0,
+      "effective_damage": 29969.32,
+      "effective_dps": 313.75,
+      "effective_per_shot": 17256.52,
+      "footprint": 6.3916,
+      "k": 1.438,
+      "reliability": 0.8995,
+      "sigma": 308.5,
+      "slot": "Armament@AdvancedMissileTargeting",
+      "weapon": "MammothTank3MissilesAMT"
+     }
+    ]
+   },
+   "td_gdi_mlrs": {
+    "armaments": [
+     {
+      "avg_versus": 0.6194,
+      "damage_total": 8000.0,
+      "eff_reload": 136.0,
+      "effective_damage": 2996.46,
+      "effective_dps": 67.81,
+      "effective_per_shot": 1537.06,
+      "footprint": 2.9243,
+      "k": 0.1921,
+      "reliability": 0.1918,
+      "sigma": 1196.8,
+      "slot": "Armament@PRIMARY",
+      "weapon": "227mm"
+     },
+     {
+      "avg_versus": 0.6194,
+      "damage_total": 8000.0,
+      "eff_reload": 136.0,
+      "effective_damage": 3222.03,
+      "effective_dps": 74.08,
+      "effective_per_shot": 1679.23,
+      "footprint": 2.9243,
+      "k": 0.2099,
+      "reliability": 0.22,
+      "sigma": 1048.0,
+      "slot": "Armament@AdvancedMissileTargeting",
+      "weapon": "227mmAMT"
+     }
+    ]
+   },
+   "td_gdi_predatortank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 8000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 15311.28,
+      "effective_dps": 128.15,
+      "effective_per_shot": 8970.26,
+      "footprint": 4.3503,
+      "k": 1.1213,
+      "reliability": 0.8263,
+      "sigma": 500.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "GDIPredatorTankCannon"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 16000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 31178.2,
+      "effective_dps": 262.37,
+      "effective_per_shot": 18365.61,
+      "footprint": 4.3503,
+      "k": 1.1479,
+      "reliability": 0.8611,
+      "sigma": 400.0,
+      "slot": "Armament@Upgrade",
+      "weapon": "GDIPredatorTankCannonHV"
+     },
+     {
+      "avg_versus": 0.6086,
+      "damage_total": 8000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 15769.15,
+      "effective_dps": 107.55,
+      "effective_per_shot": 7528.65,
+      "footprint": 4.3503,
+      "k": 0.9411,
+      "reliability": 0.8836,
+      "sigma": 335.2,
+      "slot": "Armament@SECONDARY",
+      "weapon": "GDIPredatorTankMissiles"
+     },
+     {
+      "avg_versus": 0.6086,
+      "damage_total": 8000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 16014.23,
+      "effective_dps": 109.99,
+      "effective_per_shot": 7699.61,
+      "footprint": 4.3503,
+      "k": 0.9625,
+      "reliability": 0.9142,
+      "sigma": 247.0,
+      "slot": "Armament@AdvancedMissileTargeting",
+      "weapon": "GDIPredatorTankMissilesAMT"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 1781.38,
+      "effective_dps": 65.0,
+      "effective_per_shot": 1137.51,
+      "footprint": 0.3595,
+      "k": 0.5688,
+      "reliability": 0.8008,
+      "sigma": 229.4,
+      "slot": "Armament@MachineGun",
+      "weapon": "GDIPredatorMachineGun"
+     }
+    ]
+   }
+  }
+ }
+}

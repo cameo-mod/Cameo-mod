@@ -1,0 +1,545 @@
+{
+ "ledger": "warcraft2_orcs",
+ "pack": "mods/cameo/ContentPacks/Warcraft2/Orcs",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "wc2_orcs_dragon": {
+    "armaments": [
+     {
+      "avg_versus": 0.6819,
+      "damage_total": 30000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 32224.21,
+      "effective_dps": 363.25,
+      "effective_per_shot": 21794.71,
+      "footprint": 32.3092,
+      "k": 0.7265,
+      "reliability": 0.5357,
+      "sigma": 510.94,
+      "slot": "Armament@VISIBLE",
+      "weapon": "wc2dragonFireVisible"
+     },
+     {
+      "avg_versus": 0.6819,
+      "damage_total": 30000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 32224.21,
+      "effective_dps": 544.87,
+      "effective_per_shot": 21794.71,
+      "footprint": 32.3092,
+      "k": 0.7265,
+      "reliability": 0.5357,
+      "sigma": 510.94,
+      "slot": "Armament@EXPLOSIONS",
+      "weapon": "wc2dragonFireExplosion"
+     }
+    ]
+   }
+  },
+  "defenses": {
+   "wc2_orcs_cannontower": {
+    "armaments": [
+     {
+      "avg_versus": 0.6289,
+      "damage_total": 19000.0,
+      "eff_reload": 34.0,
+      "effective_damage": 10414.52,
+      "effective_dps": 165.62,
+      "effective_per_shot": 5631.15,
+      "footprint": 0.7835,
+      "k": 0.2964,
+      "reliability": 0.5027,
+      "sigma": 291.67,
+      "slot": "Armament@guard",
+      "weapon": "wc2_tower_arrow"
+     },
+     {
+      "avg_versus": 0.6819,
+      "damage_total": 60000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 60951.56,
+      "effective_dps": 457.95,
+      "effective_per_shot": 41215.11,
+      "footprint": 32.3092,
+      "k": 0.6869,
+      "reliability": 0.4774,
+      "sigma": 660.16,
+      "slot": "Armament@cannon",
+      "weapon": "wc2cannontowerFire"
+     }
+    ]
+   },
+   "wc2_orcs_guardtower": {
+    "armaments": [
+     {
+      "avg_versus": 0.6289,
+      "damage_total": 19000.0,
+      "eff_reload": 34.0,
+      "effective_damage": 10414.52,
+      "effective_dps": 165.62,
+      "effective_per_shot": 5631.15,
+      "footprint": 0.7835,
+      "k": 0.2964,
+      "reliability": 0.5027,
+      "sigma": 291.67,
+      "slot": "Armament@guard",
+      "weapon": "wc2_tower_arrow"
+     },
+     {
+      "avg_versus": 0.6819,
+      "damage_total": 60000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 60951.56,
+      "effective_dps": 457.95,
+      "effective_per_shot": 41215.11,
+      "footprint": 32.3092,
+      "k": 0.6869,
+      "reliability": 0.4774,
+      "sigma": 660.16,
+      "slot": "Armament@cannon",
+      "weapon": "wc2cannontowerFire"
+     }
+    ]
+   },
+   "wc2_orcs_orcwatchtower": {
+    "armaments": [
+     {
+      "avg_versus": 0.6289,
+      "damage_total": 19000.0,
+      "eff_reload": 34.0,
+      "effective_damage": 10414.52,
+      "effective_dps": 165.62,
+      "effective_per_shot": 5631.15,
+      "footprint": 0.7835,
+      "k": 0.2964,
+      "reliability": 0.5027,
+      "sigma": 291.67,
+      "slot": "Armament@guard",
+      "weapon": "wc2_tower_arrow"
+     },
+     {
+      "avg_versus": 0.6819,
+      "damage_total": 60000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 60951.56,
+      "effective_dps": 457.95,
+      "effective_per_shot": 41215.11,
+      "footprint": 32.3092,
+      "k": 0.6869,
+      "reliability": 0.4774,
+      "sigma": 660.16,
+      "slot": "Armament@cannon",
+      "weapon": "wc2cannontowerFire"
+     }
+    ]
+   }
+  },
+  "infantry": {
+   "wc2_orcs_deathknight": {
+    "armaments": [
+     {
+      "avg_versus": 0.939,
+      "damage_total": 20000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 31609.18,
+      "effective_dps": 719.17,
+      "effective_per_shot": 28766.73,
+      "footprint": 8.9003,
+      "k": 1.4383,
+      "reliability": 0.7983,
+      "sigma": 250.0,
+      "slot": "Armament",
+      "weapon": "wc2deathknightFire"
+     },
+     {
+      "avg_versus": 0.939,
+      "damage_total": 20000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 31609.18,
+      "effective_dps": 719.17,
+      "effective_per_shot": 28766.73,
+      "footprint": 8.9003,
+      "k": 1.4383,
+      "reliability": 0.7983,
+      "sigma": 250.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "wc2deathknightFire"
+     },
+     {
+      "avg_versus": 0.939,
+      "damage_total": 20000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 31609.18,
+      "effective_dps": 359.58,
+      "effective_per_shot": 28766.73,
+      "footprint": 8.9003,
+      "k": 1.4383,
+      "reliability": 0.7983,
+      "sigma": 250.0,
+      "slot": "Armament@DEATHCOIL",
+      "weapon": "wc2deathknightDeathCoil"
+     },
+     {
+      "avg_versus": 0.939,
+      "damage_total": 20000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 31609.18,
+      "effective_dps": 359.58,
+      "effective_per_shot": 28766.73,
+      "footprint": 8.9003,
+      "k": 1.4383,
+      "reliability": 0.7983,
+      "sigma": 250.0,
+      "slot": "Armament@DEATHCOILSCATTER1",
+      "weapon": "wc2deathknightDeathCoilScatter_Left"
+     },
+     {
+      "avg_versus": 0.939,
+      "damage_total": 20000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 31609.18,
+      "effective_dps": 359.58,
+      "effective_per_shot": 28766.73,
+      "footprint": 8.9003,
+      "k": 1.4383,
+      "reliability": 0.7983,
+      "sigma": 250.0,
+      "slot": "Armament@DEATHCOILSCATTER2",
+      "weapon": "wc2deathknightDeathCoilScatter_Right"
+     },
+     {
+      "avg_versus": 0.856,
+      "damage_total": 1.0,
+      "eff_reload": 60.0,
+      "effective_damage": 0.95,
+      "effective_dps": 0.01,
+      "effective_per_shot": 0.81,
+      "footprint": 0.01,
+      "k": 0.8103,
+      "reliability": 0.9467,
+      "sigma": 10.24,
+      "slot": "Armament@HASTE",
+      "weapon": "wc2deathknightHaste"
+     },
+     {
+      "avg_versus": 1.0,
+      "damage_total": 1.0,
+      "eff_reload": 50.0,
+      "effective_damage": 1.0,
+      "effective_dps": 0.02,
+      "effective_per_shot": 1.0,
+      "footprint": 0.01,
+      "k": 1.0,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@DEATHANDDECAY",
+      "weapon": "wc2deathknightDeathAndDecay"
+     }
+    ]
+   },
+   "wc2_orcs_grunt": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 16000.0,
+      "eff_reload": 18.0,
+      "effective_damage": 33401.09,
+      "effective_dps": 1382.29,
+      "effective_per_shot": 24881.29,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "wc2gruntslice"
+     }
+    ]
+   },
+   "wc2_orcs_kodobeast": {
+    "armaments": [
+     {
+      "avg_versus": 0.6279,
+      "damage_total": 24000.0,
+      "eff_reload": 38.0,
+      "effective_damage": 22940.66,
+      "effective_dps": 348.88,
+      "effective_per_shot": 13257.59,
+      "footprint": 7.2491,
+      "k": 0.5524,
+      "reliability": 0.6538,
+      "sigma": 214.83,
+      "slot": "Armament",
+      "weapon": "wc2axeFire"
+     },
+     {
+      "avg_versus": 0.6279,
+      "damage_total": 24000.0,
+      "eff_reload": 38.0,
+      "effective_damage": 22940.66,
+      "effective_dps": 348.88,
+      "effective_per_shot": 13257.59,
+      "footprint": 7.2491,
+      "k": 0.5524,
+      "reliability": 0.6538,
+      "sigma": 214.83,
+      "slot": "Armament@GARRISONED",
+      "weapon": "wc2axeFire"
+     }
+    ]
+   },
+   "wc2_orcs_ogre": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 30000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 62627.05,
+      "effective_dps": 2332.62,
+      "effective_per_shot": 46652.41,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "wc2ogrepunch"
+     },
+     {
+      "avg_versus": 0.856,
+      "damage_total": 1.0,
+      "eff_reload": 60.0,
+      "effective_damage": 0.95,
+      "effective_dps": 0.01,
+      "effective_per_shot": 0.81,
+      "footprint": 0.01,
+      "k": 0.8103,
+      "reliability": 0.9467,
+      "sigma": 10.24,
+      "slot": "Armament@BLOODLUST",
+      "weapon": "wc2ogremageBloodlust"
+     }
+    ]
+   },
+   "wc2_orcs_trollaxethrower": {
+    "armaments": [
+     {
+      "avg_versus": 0.6279,
+      "damage_total": 24000.0,
+      "eff_reload": 38.0,
+      "effective_damage": 22940.66,
+      "effective_dps": 348.88,
+      "effective_per_shot": 13257.59,
+      "footprint": 7.2491,
+      "k": 0.5524,
+      "reliability": 0.6538,
+      "sigma": 214.83,
+      "slot": "Armament",
+      "weapon": "wc2axeFire"
+     },
+     {
+      "avg_versus": 0.6279,
+      "damage_total": 24000.0,
+      "eff_reload": 38.0,
+      "effective_damage": 22940.66,
+      "effective_dps": 348.88,
+      "effective_per_shot": 13257.59,
+      "footprint": 7.2491,
+      "k": 0.5524,
+      "reliability": 0.6538,
+      "sigma": 214.83,
+      "slot": "Armament@GARRISONED",
+      "weapon": "wc2axeFire"
+     }
+    ]
+   },
+   "wc2_orcs_trollberserker": {
+    "armaments": [
+     {
+      "avg_versus": 0.6279,
+      "damage_total": 24000.0,
+      "eff_reload": 38.0,
+      "effective_damage": 22940.66,
+      "effective_dps": 348.88,
+      "effective_per_shot": 13257.59,
+      "footprint": 7.2491,
+      "k": 0.5524,
+      "reliability": 0.6538,
+      "sigma": 214.83,
+      "slot": "Armament",
+      "weapon": "wc2axeFire"
+     },
+     {
+      "avg_versus": 0.6279,
+      "damage_total": 24000.0,
+      "eff_reload": 38.0,
+      "effective_damage": 22940.66,
+      "effective_dps": 348.88,
+      "effective_per_shot": 13257.59,
+      "footprint": 7.2491,
+      "k": 0.5524,
+      "reliability": 0.6538,
+      "sigma": 214.83,
+      "slot": "Armament@GARRISONED",
+      "weapon": "wc2axeFire"
+     }
+    ]
+   },
+   "wc2_orcs_trollheadhunter": {
+    "armaments": [
+     {
+      "avg_versus": 0.6264,
+      "damage_total": 33600.0,
+      "eff_reload": 40.0,
+      "effective_damage": 30374.53,
+      "effective_dps": 438.51,
+      "effective_per_shot": 17540.26,
+      "footprint": 7.9706,
+      "k": 0.522,
+      "reliability": 0.6696,
+      "sigma": 220.31,
+      "slot": "Armament",
+      "weapon": "wc2axeFirespear"
+     },
+     {
+      "avg_versus": 0.6264,
+      "damage_total": 33600.0,
+      "eff_reload": 40.0,
+      "effective_damage": 30374.53,
+      "effective_dps": 438.51,
+      "effective_per_shot": 17540.26,
+      "footprint": 7.9706,
+      "k": 0.522,
+      "reliability": 0.6696,
+      "sigma": 220.31,
+      "slot": "Armament@GARRISONED",
+      "weapon": "wc2axeFirespear"
+     }
+    ]
+   },
+   "wc2_orcs_warcraft3grunt": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 24000.0,
+      "eff_reload": 18.0,
+      "effective_damage": 50101.64,
+      "effective_dps": 2073.44,
+      "effective_per_shot": 37321.93,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "wc2gruntslice2"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "wc2_orcs_catapult": {
+    "armaments": [
+     {
+      "avg_versus": 0.6972,
+      "damage_total": 120000.0,
+      "eff_reload": 240.0,
+      "effective_damage": 191931.08,
+      "effective_dps": 527.6,
+      "effective_per_shot": 126622.89,
+      "footprint": 15.7844,
+      "k": 1.0552,
+      "reliability": 0.6129,
+      "sigma": 1081.92,
+      "slot": "Armament",
+      "weapon": "wc2catapultFire"
+     }
+    ]
+   },
+   "wc2_orcs_goblinsappers": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 12000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 25050.82,
+      "effective_dps": 1244.06,
+      "effective_per_shot": 18660.97,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Melee",
+      "weapon": "wc2demolitionsquadMelee"
+     }
+    ]
+   },
+   "wc2_orcs_ogremage": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 30000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 62627.05,
+      "effective_dps": 2332.62,
+      "effective_per_shot": 46652.41,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "wc2ogrepunch"
+     },
+     {
+      "avg_versus": 0.856,
+      "damage_total": 1.0,
+      "eff_reload": 60.0,
+      "effective_damage": 0.95,
+      "effective_dps": 0.01,
+      "effective_per_shot": 0.81,
+      "footprint": 0.01,
+      "k": 0.8103,
+      "reliability": 0.9467,
+      "sigma": 10.24,
+      "slot": "Armament@BLOODLUST",
+      "weapon": "wc2ogremageBloodlust"
+     }
+    ]
+   },
+   "wc2_orcs_peon": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 12000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 25050.82,
+      "effective_dps": 1244.06,
+      "effective_per_shot": 18660.97,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "wc2peasantsmack"
+     }
+    ]
+   },
+   "wc2_orcs_siegeengine": {
+    "armaments": [
+     {
+      "avg_versus": 0.688,
+      "damage_total": 140000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 452898.02,
+      "effective_dps": 1601.08,
+      "effective_per_shot": 160107.72,
+      "footprint": 129.1592,
+      "k": 1.1436,
+      "reliability": 0.9286,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "SiegeEngineCannon"
+     }
+    ]
+   }
+  }
+ }
+}

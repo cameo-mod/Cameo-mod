@@ -1,0 +1,687 @@
+{
+ "ledger": "redalert_allies",
+ "pack": "mods/cameo/ContentPacks/RedAlert/Allies",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "ra1_allies_blackhawk": {
+    "armaments": [
+     {
+      "avg_versus": 0.6313,
+      "damage_total": 8000.0,
+      "eff_reload": 6.0,
+      "effective_damage": 5246.07,
+      "effective_dps": 518.84,
+      "effective_per_shot": 3113.05,
+      "footprint": 2.4549,
+      "k": 0.3891,
+      "reliability": 0.5023,
+      "sigma": 216.88,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ChainGunMH60"
+     },
+     {
+      "avg_versus": 0.6313,
+      "damage_total": 8000.0,
+      "eff_reload": 6.0,
+      "effective_damage": 5246.07,
+      "effective_dps": 518.84,
+      "effective_per_shot": 3113.05,
+      "footprint": 2.4549,
+      "k": 0.3891,
+      "reliability": 0.5023,
+      "sigma": 216.88,
+      "slot": "Armament@SECONDARY",
+      "weapon": "ChainGunMH60"
+     }
+    ]
+   },
+   "ra1_allies_longbow": {
+    "armaments": [
+     {
+      "avg_versus": 0.7033,
+      "damage_total": 16000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 34915.76,
+      "effective_dps": 1369.17,
+      "effective_per_shot": 21906.71,
+      "footprint": 10.7419,
+      "k": 1.3692,
+      "reliability": 0.8395,
+      "sigma": 477.0,
+      "slot": "Armament",
+      "weapon": "Hellfire"
+     },
+     {
+      "avg_versus": 0.7033,
+      "damage_total": 16000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 34915.76,
+      "effective_dps": 1369.17,
+      "effective_per_shot": 21906.71,
+      "footprint": 10.7419,
+      "k": 1.3692,
+      "reliability": 0.8395,
+      "sigma": 477.0,
+      "slot": "Armament@Upgrade",
+      "weapon": "HellfireCryo"
+     }
+    ]
+   },
+   "ra1_allies_rapierjumpjet": {
+    "armaments": [
+     {
+      "avg_versus": 0.7391,
+      "damage_total": 10000.0,
+      "eff_reload": 66.0,
+      "effective_damage": 25978.97,
+      "effective_dps": 1196.07,
+      "effective_per_shot": 19735.2,
+      "footprint": 6.3916,
+      "k": 1.9735,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RapierBombs"
+     },
+     {
+      "avg_versus": 0.7391,
+      "damage_total": 10000.0,
+      "eff_reload": 66.0,
+      "effective_damage": 25978.97,
+      "effective_dps": 1196.07,
+      "effective_per_shot": 19735.2,
+      "footprint": 6.3916,
+      "k": 1.9735,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Upgrade",
+      "weapon": "RapierBombsCryo"
+     },
+     {
+      "avg_versus": 0.7033,
+      "damage_total": 16000.0,
+      "eff_reload": 66.0,
+      "effective_damage": 35420.02,
+      "effective_dps": 676.23,
+      "effective_per_shot": 22315.66,
+      "footprint": 10.7419,
+      "k": 1.3947,
+      "reliability": 0.871,
+      "sigma": 383.33,
+      "slot": "Armament@SECONDARY",
+      "weapon": "Aphid_AA"
+     },
+     {
+      "avg_versus": 0.7033,
+      "damage_total": 16000.0,
+      "eff_reload": 66.0,
+      "effective_damage": 35420.02,
+      "effective_dps": 676.23,
+      "effective_per_shot": 22315.66,
+      "footprint": 10.7419,
+      "k": 1.3947,
+      "reliability": 0.871,
+      "sigma": 383.33,
+      "slot": "Armament@SECONDARYUpgrade",
+      "weapon": "AphidCryo_AA"
+     }
+    ]
+   }
+  },
+  "defenses": {
+   "ra1_allies_alliedaagun": {
+    "armaments": [
+     {
+      "avg_versus": 0.5989,
+      "damage_total": 4000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 7971.24,
+      "effective_dps": 599.01,
+      "effective_per_shot": 4792.06,
+      "footprint": 4.3503,
+      "k": 1.198,
+      "reliability": 0.9052,
+      "sigma": 272.82,
+      "slot": "Armament",
+      "weapon": "zsu_23"
+     }
+    ]
+   },
+   "ra1_allies_alliedgunturret": {
+    "armaments": [
+     {
+      "avg_versus": 0.7233,
+      "damage_total": 20000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 42485.02,
+      "effective_dps": 714.32,
+      "effective_per_shot": 28572.78,
+      "footprint": 10.7419,
+      "k": 1.4286,
+      "reliability": 0.7815,
+      "sigma": 650.13,
+      "slot": "Armament",
+      "weapon": "RATurretGun"
+     }
+    ]
+   },
+   "ra1_allies_bastionartillerybunker": {
+    "armaments": [
+     {
+      "avg_versus": 0.6988,
+      "damage_total": 30000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 30913.48,
+      "effective_dps": 239.7,
+      "effective_per_shot": 19176.1,
+      "footprint": 7.3984,
+      "k": 0.6392,
+      "reliability": 0.4139,
+      "sigma": 1305.33,
+      "slot": "Armament",
+      "weapon": "155mmBastion"
+     },
+     {
+      "avg_versus": 0.6988,
+      "damage_total": 30000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 30913.48,
+      "effective_dps": 239.7,
+      "effective_per_shot": 19176.1,
+      "footprint": 7.3984,
+      "k": 0.6392,
+      "reliability": 0.4139,
+      "sigma": 1305.33,
+      "slot": "Armament@Upgrade",
+      "weapon": "155mmBastionCryo"
+     }
+    ]
+   }
+  },
+  "infantry": {
+   "ra1_allies_alliedsniper": {
+    "armaments": [
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 30000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 30483.13,
+      "effective_dps": 223.05,
+      "effective_per_shot": 22305.41,
+      "footprint": 0.1598,
+      "k": 0.7435,
+      "reliability": 0.9762,
+      "sigma": 18.31,
+      "slot": "Armament@PRIMARY",
+      "weapon": "LightSniper"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 30000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 30483.13,
+      "effective_dps": 223.05,
+      "effective_per_shot": 22305.41,
+      "footprint": 0.1598,
+      "k": 0.7435,
+      "reliability": 0.9762,
+      "sigma": 18.31,
+      "slot": "Armament@GARRISONED",
+      "weapon": "LightSniper"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 30000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 30483.13,
+      "effective_dps": 223.05,
+      "effective_per_shot": 22305.41,
+      "footprint": 0.1598,
+      "k": 0.7435,
+      "reliability": 0.9762,
+      "sigma": 18.31,
+      "slot": "Armament@Upgrade",
+      "weapon": "CryoLightSniper"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 30000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 30483.13,
+      "effective_dps": 223.05,
+      "effective_per_shot": 22305.41,
+      "footprint": 0.1598,
+      "k": 0.7435,
+      "reliability": 0.9762,
+      "sigma": 18.31,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "CryoLightSniper"
+     }
+    ]
+   },
+   "ra1_allies_machinegunner": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 16000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 13000.95,
+      "effective_dps": 647.61,
+      "effective_per_shot": 7771.33,
+      "footprint": 0.5193,
+      "k": 0.4857,
+      "reliability": 0.7476,
+      "sigma": 232.5,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RAVulcan"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 16000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 13000.95,
+      "effective_dps": 647.61,
+      "effective_per_shot": 7771.33,
+      "footprint": 0.5193,
+      "k": 0.4857,
+      "reliability": 0.7476,
+      "sigma": 232.5,
+      "slot": "Armament@GARRISONED",
+      "weapon": "RAVulcan"
+     }
+    ]
+   },
+   "ra1_allies_raspy": {
+    "armaments": [
+     {
+      "avg_versus": 1.0,
+      "damage_total": 15000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 13229.03,
+      "effective_dps": 164.6,
+      "effective_per_shot": 13167.67,
+      "footprint": 0.0164,
+      "k": 0.8778,
+      "reliability": 0.8778,
+      "sigma": 30.01,
+      "slot": "Armament",
+      "weapon": "SilencedPPK"
+     }
+    ]
+   },
+   "ra1_allies_tanya": {
+    "armaments": [
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 7777.0,
+      "eff_reload": 7.0,
+      "effective_damage": 7930.12,
+      "effective_dps": 1608.91,
+      "effective_per_shot": 5631.18,
+      "footprint": 0.1598,
+      "k": 0.7241,
+      "reliability": 0.9797,
+      "sigma": 15.55,
+      "slot": "Armament@PRIMARY",
+      "weapon": "Colt45"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 7777.0,
+      "eff_reload": 7.0,
+      "effective_damage": 7930.12,
+      "effective_dps": 1608.91,
+      "effective_per_shot": 5631.18,
+      "footprint": 0.1598,
+      "k": 0.7241,
+      "reliability": 0.9797,
+      "sigma": 15.55,
+      "slot": "Armament@GARRISONED",
+      "weapon": "Colt45"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "ra1_allies_alliedartillery": {
+    "armaments": [
+     {
+      "avg_versus": 0.6988,
+      "damage_total": 30000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 29496.33,
+      "effective_dps": 227.44,
+      "effective_per_shot": 18194.84,
+      "footprint": 7.3984,
+      "k": 0.6065,
+      "reliability": 0.3667,
+      "sigma": 1586.67,
+      "slot": "Armament",
+      "weapon": "155mm"
+     },
+     {
+      "avg_versus": 0.6988,
+      "damage_total": 30000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 29496.33,
+      "effective_dps": 227.44,
+      "effective_per_shot": 18194.84,
+      "footprint": 7.3984,
+      "k": 0.6065,
+      "reliability": 0.3667,
+      "sigma": 1586.67,
+      "slot": "Armament@Upgrade",
+      "weapon": "155mmCryo"
+     }
+    ]
+   },
+   "ra1_allies_alliedheavyaatank": {
+    "armaments": [
+     {
+      "avg_versus": 0.5952,
+      "damage_total": 8000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 3151.16,
+      "effective_dps": 182.49,
+      "effective_per_shot": 1824.93,
+      "footprint": 0.1523,
+      "k": 0.2281,
+      "reliability": 0.3844,
+      "sigma": 223.73,
+      "slot": "Armament@AG",
+      "weapon": "HeavyAATankCannonAG"
+     },
+     {
+      "avg_versus": 0.5952,
+      "damage_total": 8000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 2974.33,
+      "effective_dps": 172.0,
+      "effective_per_shot": 1720.01,
+      "footprint": 0.1523,
+      "k": 0.215,
+      "reliability": 0.3623,
+      "sigma": 235.59,
+      "slot": "Armament@AA",
+      "weapon": "HeavyAATankCannon_AA"
+     }
+    ]
+   },
+   "ra1_allies_alliedlighttank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6656,
+      "damage_total": 12000.0,
+      "eff_reload": 37.0,
+      "effective_damage": 14643.22,
+      "effective_dps": 247.43,
+      "effective_per_shot": 9155.04,
+      "footprint": 14.7986,
+      "k": 0.7629,
+      "reliability": 0.6037,
+      "sigma": 350.0,
+      "slot": "Armament",
+      "weapon": "25mm"
+     }
+    ]
+   },
+   "ra1_allies_alliedmediumtank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 8000.0,
+      "eff_reload": 47.0,
+      "effective_damage": 15310.31,
+      "effective_dps": 190.84,
+      "effective_per_shot": 8969.52,
+      "footprint": 4.3503,
+      "k": 1.1212,
+      "reliability": 0.8262,
+      "sigma": 500.35,
+      "slot": "Armament",
+      "weapon": "90mm"
+     }
+    ]
+   },
+   "ra1_allies_alliedtankdestroyer": {
+    "armaments": [
+     {
+      "avg_versus": 0.6424,
+      "damage_total": 24000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 42327.45,
+      "effective_dps": 389.61,
+      "effective_per_shot": 23376.57,
+      "footprint": 7.1082,
+      "k": 0.974,
+      "reliability": 0.8751,
+      "sigma": 250.13,
+      "slot": "Armament",
+      "weapon": "AlliedTankDestroyerCannon"
+     }
+    ]
+   },
+   "ra1_allies_alliedtigerheavytank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7088,
+      "damage_total": 16000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 33987.81,
+      "effective_dps": 358.02,
+      "effective_per_shot": 21480.97,
+      "footprint": 10.7419,
+      "k": 1.3426,
+      "reliability": 0.7815,
+      "sigma": 650.17,
+      "slot": "Armament",
+      "weapon": "TigerCannon"
+     }
+    ]
+   },
+   "ra1_allies_chronotank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6314,
+      "damage_total": 20000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 13320.47,
+      "effective_dps": 486.18,
+      "effective_per_shot": 7657.37,
+      "footprint": 2.9642,
+      "k": 0.3829,
+      "reliability": 0.5178,
+      "sigma": 344.08,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ChronoTusk"
+     },
+     {
+      "avg_versus": 0.6314,
+      "damage_total": 20000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 13320.47,
+      "effective_dps": 486.18,
+      "effective_per_shot": 7657.37,
+      "footprint": 2.9642,
+      "k": 0.3829,
+      "reliability": 0.5178,
+      "sigma": 344.08,
+      "slot": "Armament@SECONDARY",
+      "weapon": "ChronoTusk"
+     },
+     {
+      "avg_versus": 0.6314,
+      "damage_total": 20000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 13320.47,
+      "effective_dps": 486.18,
+      "effective_per_shot": 7657.37,
+      "footprint": 2.9642,
+      "k": 0.3829,
+      "reliability": 0.5178,
+      "sigma": 344.08,
+      "slot": "Armament@Upgrade",
+      "weapon": "ChronoTuskCryo"
+     },
+     {
+      "avg_versus": 0.6314,
+      "damage_total": 20000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 13320.47,
+      "effective_dps": 486.18,
+      "effective_per_shot": 7657.37,
+      "footprint": 2.9642,
+      "k": 0.3829,
+      "reliability": 0.5178,
+      "sigma": 344.08,
+      "slot": "Armament@UpgradeSECONDARY",
+      "weapon": "ChronoTuskCryo"
+     }
+    ]
+   },
+   "ra1_allies_phasetransport": {
+    "armaments": [
+     {
+      "avg_versus": 0.6084,
+      "damage_total": 16000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 10514.62,
+      "effective_dps": 397.62,
+      "effective_per_shot": 5964.32,
+      "footprint": 2.5872,
+      "k": 0.3728,
+      "reliability": 0.4955,
+      "sigma": 301.52,
+      "slot": "Armament",
+      "weapon": "APTusk"
+     },
+     {
+      "avg_versus": 0.6084,
+      "damage_total": 16000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 10514.62,
+      "effective_dps": 397.62,
+      "effective_per_shot": 5964.32,
+      "footprint": 2.5872,
+      "k": 0.3728,
+      "reliability": 0.4955,
+      "sigma": 301.52,
+      "slot": "Armament@Upgrade",
+      "weapon": "APTuskCryo"
+     }
+    ]
+   },
+   "ra1_allies_ranger": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 4000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 3411.7,
+      "effective_dps": 330.04,
+      "effective_per_shot": 2062.78,
+      "footprint": 0.1598,
+      "k": 0.5157,
+      "reliability": 0.813,
+      "sigma": 143.59,
+      "slot": "Armament",
+      "weapon": "M60mg"
+     }
+    ]
+   },
+   "ra1_allies_reconranger": {
+    "armaments": [
+     {
+      "avg_versus": 0.6387,
+      "damage_total": 33000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 38046.59,
+      "effective_dps": 358.15,
+      "effective_per_shot": 22921.38,
+      "footprint": 14.1844,
+      "k": 0.6946,
+      "reliability": 0.7288,
+      "sigma": 172.9,
+      "slot": "Armament",
+      "weapon": "ReconRangerRecoillessGun"
+     },
+     {
+      "avg_versus": 0.6387,
+      "damage_total": 33000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 38046.59,
+      "effective_dps": 358.15,
+      "effective_per_shot": 22921.38,
+      "footprint": 14.1844,
+      "k": 0.6946,
+      "reliability": 0.7288,
+      "sigma": 172.9,
+      "slot": "Armament@Upgrade",
+      "weapon": "CryoReconRangerRecoillessGun"
+     }
+    ]
+   },
+   "ra1_allies_sheridanassaulttank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6424,
+      "damage_total": 16000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 26277.99,
+      "effective_dps": 222.49,
+      "effective_per_shot": 14239.38,
+      "footprint": 7.1082,
+      "k": 0.89,
+      "reliability": 0.7538,
+      "sigma": 500.12,
+      "slot": "Armament",
+      "weapon": "SheridanCannon"
+     },
+     {
+      "avg_versus": 0.5891,
+      "damage_total": 16000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 28479.51,
+      "effective_dps": 207.44,
+      "effective_per_shot": 13276.0,
+      "footprint": 7.1082,
+      "k": 0.8298,
+      "reliability": 0.8914,
+      "sigma": 217.43,
+      "slot": "Armament@Missile",
+      "weapon": "SheridanMissiles"
+     },
+     {
+      "avg_versus": 0.5891,
+      "damage_total": 16000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 28479.51,
+      "effective_dps": 207.44,
+      "effective_per_shot": 13276.0,
+      "footprint": 7.1082,
+      "k": 0.8298,
+      "reliability": 0.8914,
+      "sigma": 217.43,
+      "slot": "Armament@Upgrade",
+      "weapon": "SheridanMissilesCryo"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 3282.3,
+      "effective_dps": 126.96,
+      "effective_per_shot": 2031.37,
+      "footprint": 0.5193,
+      "k": 0.5078,
+      "reliability": 0.7557,
+      "sigma": 225.12,
+      "slot": "Armament@MG",
+      "weapon": "SheridanVulcan"
+     }
+    ]
+   }
+  }
+ }
+}

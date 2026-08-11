@@ -1,0 +1,1491 @@
+{
+ "ledger": "redalert2mod_tkm",
+ "pack": "mods/cameo/ContentPacks/RedAlert2Mod/TKM",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "tkm_iroquois": {
+    "armaments": [
+     {
+      "avg_versus": 0.637,
+      "damage_total": 4000.0,
+      "eff_reload": 7.0,
+      "effective_damage": 2889.44,
+      "effective_dps": 255.21,
+      "effective_per_shot": 1786.46,
+      "footprint": 0.4219,
+      "k": 0.4466,
+      "reliability": 0.6696,
+      "sigma": 223.91,
+      "slot": "Armament@PRIMARY",
+      "weapon": "HueyGun"
+     },
+     {
+      "avg_versus": 0.6086,
+      "damage_total": 8000.0,
+      "eff_reload": 14.0,
+      "effective_damage": 15891.08,
+      "effective_dps": 543.83,
+      "effective_per_shot": 7613.61,
+      "footprint": 4.3503,
+      "k": 0.9517,
+      "reliability": 0.8988,
+      "sigma": 291.32,
+      "slot": "Armament@Missiles",
+      "weapon": "HueyMissiles"
+     },
+     {
+      "avg_versus": 0.6409,
+      "damage_total": 6000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 10864.88,
+      "effective_dps": 390.27,
+      "effective_per_shot": 6244.35,
+      "footprint": 11.4585,
+      "k": 1.0407,
+      "reliability": 0.8559,
+      "sigma": 321.12,
+      "slot": "Armament@PRIMARYNATO",
+      "weapon": "HueyCryoMissiles"
+     },
+     {
+      "avg_versus": 0.6409,
+      "damage_total": 6000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 10864.88,
+      "effective_dps": 780.54,
+      "effective_per_shot": 6244.35,
+      "footprint": 11.4585,
+      "k": 1.0407,
+      "reliability": 0.8559,
+      "sigma": 321.12,
+      "slot": "Armament@PRIMARYBEREZKA",
+      "weapon": "HueyTwinMissiles"
+     },
+     {
+      "avg_versus": 0.6409,
+      "damage_total": 6000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 10864.88,
+      "effective_dps": 780.54,
+      "effective_per_shot": 6244.35,
+      "footprint": 11.4585,
+      "k": 1.0407,
+      "reliability": 0.8559,
+      "sigma": 321.12,
+      "slot": "Armament@PRIMARYTITAN",
+      "weapon": "HueyTwinMissiles"
+     }
+    ]
+   },
+   "tkm_viper": {
+    "armaments": [
+     {
+      "avg_versus": 0.657,
+      "damage_total": 32000.0,
+      "eff_reload": 56.0,
+      "effective_damage": 46566.62,
+      "effective_dps": 1764.05,
+      "effective_per_shot": 24696.67,
+      "footprint": 8.7005,
+      "k": 0.7718,
+      "reliability": 0.3676,
+      "sigma": 2313.55,
+      "slot": "Armament@BOMBS",
+      "weapon": "ViperMissiles"
+     },
+     {
+      "avg_versus": 0.657,
+      "damage_total": 32000.0,
+      "eff_reload": 56.0,
+      "effective_damage": 46566.62,
+      "effective_dps": 1764.05,
+      "effective_per_shot": 24696.67,
+      "footprint": 8.7005,
+      "k": 0.7718,
+      "reliability": 0.3676,
+      "sigma": 2313.55,
+      "slot": "Armament@PRIMARYNATO",
+      "weapon": "ViperMissilesCryo"
+     },
+     {
+      "avg_versus": 0.657,
+      "damage_total": 32000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 46566.62,
+      "effective_dps": 3087.08,
+      "effective_per_shot": 24696.67,
+      "footprint": 8.7005,
+      "k": 0.7718,
+      "reliability": 0.3676,
+      "sigma": 2313.55,
+      "slot": "Armament@PRIMARYBEREZKA",
+      "weapon": "ViperMissilesTwin"
+     },
+     {
+      "avg_versus": 0.6469,
+      "damage_total": 40000.0,
+      "eff_reload": 56.0,
+      "effective_damage": 54247.98,
+      "effective_dps": 2037.04,
+      "effective_per_shot": 28518.5,
+      "footprint": 14.2165,
+      "k": 0.713,
+      "reliability": 0.3482,
+      "sigma": 2313.55,
+      "slot": "Armament@PRIMARYTITAN",
+      "weapon": "ViperMissilesFire"
+     }
+    ]
+   },
+   "tkmsuicidedrone": {
+    "armaments": [
+     {
+      "avg_versus": 0.7054,
+      "damage_total": 40000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 80724.12,
+      "effective_dps": 2206.2,
+      "effective_per_shot": 55154.97,
+      "footprint": 4.3503,
+      "k": 1.3789,
+      "reliability": 0.9305,
+      "sigma": 200.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TKMDroneExplosion"
+     }
+    ]
+   }
+  },
+  "defenses": {
+   "tkm_bunker": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 3228.62,
+      "effective_dps": 159.47,
+      "effective_per_shot": 1993.36,
+      "footprint": 0.5193,
+      "k": 0.4983,
+      "reliability": 0.7422,
+      "sigma": 237.48,
+      "slot": "Armament",
+      "weapon": "tkmbunkmg"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 28.0,
+      "effective_damage": 3548.17,
+      "effective_dps": 323.39,
+      "effective_per_shot": 2263.76,
+      "footprint": 0.3595,
+      "k": 0.5659,
+      "reliability": 0.7972,
+      "sigma": 233.6,
+      "slot": "Armament@Upgrade",
+      "weapon": "HighVAP"
+     }
+    ]
+   },
+   "tkm_quadturretbunker": {
+    "armaments": [
+     {
+      "avg_versus": 0.6127,
+      "damage_total": 4000.0,
+      "eff_reload": 5.0,
+      "effective_damage": 7970.7,
+      "effective_dps": 893.17,
+      "effective_per_shot": 4465.83,
+      "footprint": 8.7005,
+      "k": 1.1165,
+      "reliability": 0.9051,
+      "sigma": 273.21,
+      "slot": "Armament@AA",
+      "weapon": "TKMAATurretCannon"
+     }
+    ]
+   },
+   "tkm_tankturretbunker": {
+    "armaments": [
+     {
+      "avg_versus": 0.6424,
+      "damage_total": 16000.0,
+      "eff_reload": 28.0,
+      "effective_damage": 26248.41,
+      "effective_dps": 507.82,
+      "effective_per_shot": 14218.98,
+      "footprint": 7.1082,
+      "k": 0.8887,
+      "reliability": 0.752,
+      "sigma": 504.31,
+      "slot": "Armament",
+      "weapon": "tkmturretcannon"
+     }
+    ]
+   },
+   "tkmratflakdeployed": {
+    "armaments": [
+     {
+      "avg_versus": 0.6127,
+      "damage_total": 32000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 48017.23,
+      "effective_dps": 767.02,
+      "effective_per_shot": 24544.7,
+      "footprint": 8.7005,
+      "k": 0.767,
+      "reliability": 0.413,
+      "sigma": 2049.68,
+      "slot": "Armament",
+      "weapon": "FlakbusAA"
+     }
+    ]
+   },
+   "tkmtrenchtankdeployed": {
+    "armaments": [
+     {
+      "avg_versus": 0.7233,
+      "damage_total": 40000.0,
+      "eff_reload": 36.0,
+      "effective_damage": 84175.01,
+      "effective_dps": 1569.45,
+      "effective_per_shot": 56500.06,
+      "footprint": 10.7419,
+      "k": 1.4125,
+      "reliability": 0.7616,
+      "sigma": 710.49,
+      "slot": "Armament",
+      "weapon": "tkmtrenchdepcannon"
+     }
+    ]
+   }
+  },
+  "infantry": {
+   "tkm_juggernaut": {
+    "armaments": [
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 3586.9,
+      "effective_dps": 286.71,
+      "effective_per_shot": 2293.67,
+      "footprint": 0.3595,
+      "k": 0.5734,
+      "reliability": 0.8068,
+      "sigma": 222.45,
+      "slot": "Armament@PRIMARY",
+      "weapon": "tkm_juggernaut"
+     },
+     {
+      "avg_versus": 0.6077,
+      "damage_total": 8000.0,
+      "eff_reload": 21.0,
+      "effective_damage": 3304.48,
+      "effective_dps": 244.8,
+      "effective_per_shot": 1713.59,
+      "footprint": 2.9178,
+      "k": 0.2142,
+      "reliability": 0.2107,
+      "sigma": 1038.93,
+      "slot": "Armament@PRIMARYUPGRADE",
+      "weapon": "tkmjuggap"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 3586.9,
+      "effective_dps": 286.71,
+      "effective_per_shot": 2293.67,
+      "footprint": 0.3595,
+      "k": 0.5734,
+      "reliability": 0.8068,
+      "sigma": 222.45,
+      "slot": "Armament@GARRISONED",
+      "weapon": "tkm_juggernaut"
+     },
+     {
+      "avg_versus": 0.6077,
+      "damage_total": 8000.0,
+      "eff_reload": 21.0,
+      "effective_damage": 3304.48,
+      "effective_dps": 244.8,
+      "effective_per_shot": 1713.59,
+      "footprint": 2.9178,
+      "k": 0.2142,
+      "reliability": 0.2107,
+      "sigma": 1038.93,
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "weapon": "tkmjuggap"
+     }
+    ]
+   },
+   "tkm_marine": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 1679.12,
+      "effective_dps": 253.32,
+      "effective_per_shot": 1013.28,
+      "footprint": 0.1598,
+      "k": 0.5066,
+      "reliability": 0.7996,
+      "sigma": 153.85,
+      "slot": "Armament@PRIMARY",
+      "weapon": "tkmm16"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 1785.68,
+      "effective_dps": 285.21,
+      "effective_per_shot": 1140.83,
+      "footprint": 0.3595,
+      "k": 0.5704,
+      "reliability": 0.803,
+      "sigma": 226.93,
+      "slot": "Armament@PRIMARYUPGRADE",
+      "weapon": "tkmm16ap"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 1679.12,
+      "effective_dps": 253.32,
+      "effective_per_shot": 1013.28,
+      "footprint": 0.1598,
+      "k": 0.5066,
+      "reliability": 0.7996,
+      "sigma": 153.85,
+      "slot": "Armament@GARRISONED",
+      "weapon": "tkmm16"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 1785.68,
+      "effective_dps": 285.21,
+      "effective_per_shot": 1140.83,
+      "footprint": 0.3595,
+      "k": 0.5704,
+      "reliability": 0.803,
+      "sigma": 226.93,
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "weapon": "tkmm16ap"
+     }
+    ]
+   },
+   "tkm_rifleman": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 6000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 5379.39,
+      "effective_dps": 44.29,
+      "effective_per_shot": 3321.44,
+      "footprint": 0.1598,
+      "k": 0.5536,
+      "reliability": 0.8566,
+      "sigma": 110.08,
+      "slot": "Armament@PRIMARY",
+      "weapon": "tkm_rifleman_rifle"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 10000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 8953.72,
+      "effective_dps": 217.78,
+      "effective_per_shot": 5444.46,
+      "footprint": 0.1598,
+      "k": 0.5444,
+      "reliability": 0.8554,
+      "sigma": 111.0,
+      "slot": "Armament@PRIMARYUPGRADE",
+      "weapon": "tkm_rifleman_semiautorifle"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 6000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 5379.39,
+      "effective_dps": 44.29,
+      "effective_per_shot": 3321.44,
+      "footprint": 0.1598,
+      "k": 0.5536,
+      "reliability": 0.8566,
+      "sigma": 110.08,
+      "slot": "Armament@GARRISONED",
+      "weapon": "tkm_rifleman_rifle"
+     }
+    ]
+   },
+   "tkm_rocketeer": {
+    "armaments": [
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 27396.67,
+      "effective_dps": 168.7,
+      "effective_per_shot": 10796.64,
+      "footprint": 2.758,
+      "k": 0.5998,
+      "reliability": 0.8325,
+      "sigma": 257.13,
+      "slot": "Armament@PRIMARY",
+      "weapon": "tkmrockets"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 27396.67,
+      "effective_dps": 168.7,
+      "effective_per_shot": 10796.64,
+      "footprint": 2.758,
+      "k": 0.5998,
+      "reliability": 0.8325,
+      "sigma": 257.13,
+      "slot": "Armament@PRIMARYNATO",
+      "weapon": "tkmcryorockets"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 27005.93,
+      "effective_dps": 330.36,
+      "effective_per_shot": 10571.49,
+      "footprint": 2.758,
+      "k": 0.5873,
+      "reliability": 0.8108,
+      "sigma": 290.47,
+      "slot": "Armament@PRIMARYBEREZKA",
+      "weapon": "tkmtwinrockets"
+     },
+     {
+      "avg_versus": 0.5488,
+      "damage_total": 22000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 33484.82,
+      "effective_dps": 226.16,
+      "effective_per_shot": 14474.29,
+      "footprint": 5.5159,
+      "k": 0.6579,
+      "reliability": 0.8325,
+      "sigma": 257.13,
+      "slot": "Armament@PRIMARYTITAN",
+      "weapon": "tkmfirerockets"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 27336.49,
+      "effective_dps": 170.82,
+      "effective_per_shot": 10761.82,
+      "footprint": 2.758,
+      "k": 0.5979,
+      "reliability": 0.8292,
+      "sigma": 262.27,
+      "slot": "Armament@GARRISONED",
+      "weapon": "Rockets"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 27396.67,
+      "effective_dps": 168.7,
+      "effective_per_shot": 10796.64,
+      "footprint": 2.758,
+      "k": 0.5998,
+      "reliability": 0.8325,
+      "sigma": 257.13,
+      "slot": "Armament@GARRISONEDTITAN",
+      "weapon": "tkmcryorockets"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 27005.93,
+      "effective_dps": 330.36,
+      "effective_per_shot": 10571.49,
+      "footprint": 2.758,
+      "k": 0.5873,
+      "reliability": 0.8108,
+      "sigma": 290.47,
+      "slot": "Armament@GARRISONEDBEREZKA",
+      "weapon": "tkmtwinrockets"
+     },
+     {
+      "avg_versus": 0.5488,
+      "damage_total": 22000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 33484.82,
+      "effective_dps": 226.16,
+      "effective_per_shot": 14474.29,
+      "footprint": 5.5159,
+      "k": 0.6579,
+      "reliability": 0.8325,
+      "sigma": 257.13,
+      "slot": "Armament@GARRISONEDNATO",
+      "weapon": "tkmfirerockets"
+     }
+    ]
+   },
+   "tkm_sniper": {
+    "armaments": [
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 44000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 44609.1,
+      "effective_dps": 593.43,
+      "effective_per_shot": 32638.82,
+      "footprint": 0.1598,
+      "k": 0.7418,
+      "reliability": 0.9739,
+      "sigma": 20.04,
+      "slot": "Armament@PRIMARY",
+      "weapon": "tkmawp"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 44000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 44609.1,
+      "effective_dps": 593.43,
+      "effective_per_shot": 32638.82,
+      "footprint": 0.1598,
+      "k": 0.7418,
+      "reliability": 0.9739,
+      "sigma": 20.04,
+      "slot": "Armament@GARRISONED",
+      "weapon": "tkmawp"
+     }
+    ]
+   },
+   "tkm_spetsnaz": {
+    "armaments": [
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 2000.0,
+      "eff_reload": 18.0,
+      "effective_damage": 2049.94,
+      "effective_dps": 416.81,
+      "effective_per_shot": 1500.53,
+      "footprint": 0.1598,
+      "k": 0.7503,
+      "reliability": 0.985,
+      "sigma": 11.5,
+      "slot": "Armament@PRIMARY",
+      "weapon": "tkmsmg"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 2000.0,
+      "eff_reload": 18.0,
+      "effective_damage": 2049.94,
+      "effective_dps": 416.81,
+      "effective_per_shot": 1500.53,
+      "footprint": 0.1598,
+      "k": 0.7503,
+      "reliability": 0.985,
+      "sigma": 11.5,
+      "slot": "Armament@GARRISONED",
+      "weapon": "tkmsmg"
+     }
+    ]
+   },
+   "tkm_thermonaut": {
+    "armaments": [
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 2000.0,
+      "eff_reload": 56.0,
+      "effective_damage": 3469.83,
+      "effective_dps": 559.63,
+      "effective_per_shot": 2410.72,
+      "footprint": 4.3503,
+      "k": 1.2054,
+      "reliability": 0.6473,
+      "sigma": 1056.94,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ThermoF"
+     },
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 2000.0,
+      "eff_reload": 56.0,
+      "effective_damage": 3469.83,
+      "effective_dps": 559.63,
+      "effective_per_shot": 2410.72,
+      "footprint": 4.3503,
+      "k": 1.2054,
+      "reliability": 0.6473,
+      "sigma": 1056.94,
+      "slot": "Armament@GARRISONED",
+      "weapon": "ThermoF"
+     }
+    ]
+   },
+   "tkm_trooper": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 35.0,
+      "effective_damage": 1684.18,
+      "effective_dps": 145.24,
+      "effective_per_shot": 1016.71,
+      "footprint": 0.1598,
+      "k": 0.5084,
+      "reliability": 0.8021,
+      "sigma": 151.91,
+      "slot": "Armament@PRIMARY",
+      "weapon": "tkm_trooper_ak"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 35.0,
+      "effective_damage": 1684.18,
+      "effective_dps": 145.24,
+      "effective_per_shot": 1016.71,
+      "footprint": 0.1598,
+      "k": 0.5084,
+      "reliability": 0.8021,
+      "sigma": 151.91,
+      "slot": "Armament@GARRISONED",
+      "weapon": "tkm_trooper_ak"
+     },
+     {
+      "avg_versus": 0.6203,
+      "damage_total": 12000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 15063.1,
+      "effective_dps": 107.12,
+      "effective_per_shot": 8569.57,
+      "footprint": 5.5159,
+      "k": 0.7141,
+      "reliability": 0.5658,
+      "sigma": 766.67,
+      "slot": "Armament@gp25",
+      "weapon": "tkm_trooper_gp25"
+     },
+     {
+      "avg_versus": 0.6203,
+      "damage_total": 12000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 15063.1,
+      "effective_dps": 107.12,
+      "effective_per_shot": 8569.57,
+      "footprint": 5.5159,
+      "k": 0.7141,
+      "reliability": 0.5658,
+      "sigma": 766.67,
+      "slot": "Armament@GARRISONEDM203",
+      "weapon": "tkm_trooper_gp25"
+     }
+    ]
+   },
+   "tkm_von": {
+    "armaments": [
+     {
+      "avg_versus": 0.8369,
+      "damage_total": 220000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 249645.16,
+      "effective_dps": 2162.39,
+      "effective_per_shot": 216239.27,
+      "footprint": 9.1924,
+      "k": 0.9829,
+      "reliability": 0.8412,
+      "sigma": 63.03,
+      "slot": "Armament@lockdown",
+      "weapon": "VonSniperLockdown"
+     },
+     {
+      "avg_versus": 0.6413,
+      "damage_total": 30000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 35636.2,
+      "effective_dps": 911.31,
+      "effective_per_shot": 22782.68,
+      "footprint": 6.6637,
+      "k": 0.7594,
+      "reliability": 0.8547,
+      "sigma": 63.03,
+      "slot": "Armament@PRIMARY",
+      "weapon": "VonSniper"
+     },
+     {
+      "avg_versus": 0.7656,
+      "damage_total": 92000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 101402.28,
+      "effective_dps": 1608.77,
+      "effective_per_shot": 80438.64,
+      "footprint": 6.6837,
+      "k": 0.8743,
+      "reliability": 0.813,
+      "sigma": 63.03,
+      "slot": "Armament@PRIMARYUPGRADE",
+      "weapon": "VonSniperAP"
+     },
+     {
+      "avg_versus": 0.6413,
+      "damage_total": 30000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 35636.2,
+      "effective_dps": 911.31,
+      "effective_per_shot": 22782.68,
+      "footprint": 6.6637,
+      "k": 0.7594,
+      "reliability": 0.8547,
+      "sigma": 63.03,
+      "slot": "Armament@GARRISONED",
+      "weapon": "VonSniper"
+     },
+     {
+      "avg_versus": 0.7656,
+      "damage_total": 92000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 101402.28,
+      "effective_dps": 1608.77,
+      "effective_per_shot": 80438.64,
+      "footprint": 6.6837,
+      "k": 0.8743,
+      "reliability": 0.813,
+      "sigma": 63.03,
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "weapon": "VonSniperAP"
+     }
+    ]
+   },
+   "tkmvan": {
+    "armaments": [
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 80000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 80611.26,
+      "effective_dps": 1965.51,
+      "effective_per_shot": 58965.37,
+      "footprint": 0.1598,
+      "k": 0.7371,
+      "reliability": 0.9677,
+      "sigma": 24.8,
+      "slot": "Armament@PRIMARY",
+      "weapon": "VanSniper"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 80000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 80611.26,
+      "effective_dps": 1965.51,
+      "effective_per_shot": 58965.37,
+      "footprint": 0.1598,
+      "k": 0.7371,
+      "reliability": 0.9677,
+      "sigma": 24.8,
+      "slot": "Armament@GARRISONED",
+      "weapon": "VanSniper"
+     }
+    ]
+   },
+   "tkmworker": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 2000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 4175.14,
+      "effective_dps": 103.67,
+      "effective_per_shot": 3110.16,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RA2Shovel"
+     },
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 2000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 4175.14,
+      "effective_dps": 103.67,
+      "effective_per_shot": 3110.16,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "RA2Shovel"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "tkm_abrams": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 12000.0,
+      "eff_reload": 46.0,
+      "effective_damage": 22898.28,
+      "effective_dps": 291.37,
+      "effective_per_shot": 13403.1,
+      "footprint": 4.3503,
+      "k": 1.1169,
+      "reliability": 0.8206,
+      "sigma": 516.49,
+      "slot": "Armament@cannon",
+      "weapon": "tkmrh120gun"
+     }
+    ]
+   },
+   "tkm_as42": {
+    "armaments": [
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 20000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 30369.11,
+      "effective_dps": 398.49,
+      "effective_per_shot": 11954.82,
+      "footprint": 2.758,
+      "k": 0.5977,
+      "reliability": 0.829,
+      "sigma": 262.63,
+      "slot": "Armament@Missiles",
+      "weapon": "as42rockets"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 27396.67,
+      "effective_dps": 168.7,
+      "effective_per_shot": 10796.64,
+      "footprint": 2.758,
+      "k": 0.5998,
+      "reliability": 0.8325,
+      "sigma": 257.13,
+      "slot": "Armament@PRIMARYNATO",
+      "weapon": "tkmcryorockets"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 27005.93,
+      "effective_dps": 330.36,
+      "effective_per_shot": 10571.49,
+      "footprint": 2.758,
+      "k": 0.5873,
+      "reliability": 0.8108,
+      "sigma": 290.47,
+      "slot": "Armament@PRIMARYBEREZKA",
+      "weapon": "tkmtwinrockets"
+     },
+     {
+      "avg_versus": 0.5488,
+      "damage_total": 22000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 33484.82,
+      "effective_dps": 226.16,
+      "effective_per_shot": 14474.29,
+      "footprint": 5.5159,
+      "k": 0.6579,
+      "reliability": 0.8325,
+      "sigma": 257.13,
+      "slot": "Armament@PRIMARYTITAN",
+      "weapon": "tkmfirerockets"
+     }
+    ]
+   },
+   "tkm_bigshiee": {
+    "armaments": [
+     {
+      "avg_versus": 0.7033,
+      "damage_total": 80000.0,
+      "eff_reload": 86.0,
+      "effective_damage": 173639.73,
+      "effective_dps": 2529.72,
+      "effective_per_shot": 108777.92,
+      "footprint": 10.7419,
+      "k": 1.3597,
+      "reliability": 0.8278,
+      "sigma": 511.9,
+      "slot": "Armament@PRIMARY",
+      "weapon": "BigShieeTusk"
+     },
+     {
+      "avg_versus": 0.7033,
+      "damage_total": 80000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 174681.09,
+      "effective_dps": 2435.91,
+      "effective_per_shot": 109616.05,
+      "footprint": 10.7419,
+      "k": 1.3702,
+      "reliability": 0.8408,
+      "sigma": 473.2,
+      "slot": "Armament@PRIMARYNATO",
+      "weapon": "SandmarineTuskCryo"
+     },
+     {
+      "avg_versus": 0.7033,
+      "damage_total": 80000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 174681.09,
+      "effective_dps": 2435.91,
+      "effective_per_shot": 109616.05,
+      "footprint": 10.7419,
+      "k": 1.3702,
+      "reliability": 0.8408,
+      "sigma": 473.2,
+      "slot": "Armament@SECONDARYNATO",
+      "weapon": "SandmarineTuskCryo"
+     },
+     {
+      "avg_versus": 0.7576,
+      "damage_total": 60000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 97441.9,
+      "effective_dps": 6844.15,
+      "effective_per_shot": 64163.9,
+      "footprint": 15.1221,
+      "k": 1.0694,
+      "reliability": 0.7195,
+      "sigma": 344.08,
+      "slot": "Armament@PRIMARYBEREZKA",
+      "weapon": "SandmarineTuskTwin"
+     },
+     {
+      "avg_versus": 0.7576,
+      "damage_total": 60000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 97441.9,
+      "effective_dps": 6844.15,
+      "effective_per_shot": 64163.9,
+      "footprint": 15.1221,
+      "k": 1.0694,
+      "reliability": 0.7195,
+      "sigma": 344.08,
+      "slot": "Armament@SECONDARYBEREZKA",
+      "weapon": "SandmarineTuskTwin"
+     },
+     {
+      "avg_versus": 0.6945,
+      "damage_total": 88000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 185766.98,
+      "effective_dps": 2568.61,
+      "effective_per_shot": 115587.57,
+      "footprint": 16.2578,
+      "k": 1.3135,
+      "reliability": 0.8276,
+      "sigma": 473.2,
+      "slot": "Armament@PRIMARYTITAN",
+      "weapon": "SandmarineTuskFire"
+     },
+     {
+      "avg_versus": 0.6945,
+      "damage_total": 88000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 185766.98,
+      "effective_dps": 2568.61,
+      "effective_per_shot": 115587.57,
+      "footprint": 16.2578,
+      "k": 1.3135,
+      "reliability": 0.8276,
+      "sigma": 473.2,
+      "slot": "Armament@SECONDARYTITAN",
+      "weapon": "SandmarineTuskFire"
+     },
+     {
+      "avg_versus": 0.7162,
+      "damage_total": 160000.0,
+      "eff_reload": 86.0,
+      "effective_damage": 298922.76,
+      "effective_dps": 2501.71,
+      "effective_per_shot": 215147.45,
+      "footprint": 10.7419,
+      "k": 1.3447,
+      "reliability": 0.5255,
+      "sigma": 1577.2,
+      "slot": "Armament@Mortar",
+      "weapon": "bigshieemortar"
+     }
+    ]
+   },
+   "tkm_dronepodtruck": {
+    "armaments": [
+     {
+      "avg_versus": 1.0,
+      "damage_total": 1.0,
+      "eff_reload": 5.0,
+      "effective_damage": 1.0,
+      "effective_dps": 0.2,
+      "effective_per_shot": 1.0,
+      "footprint": 0.01,
+      "k": 1.0,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "DronePodTruckLaser"
+     }
+    ]
+   },
+   "tkm_quadtruck": {
+    "armaments": [
+     {
+      "avg_versus": 0.6031,
+      "damage_total": 4000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 5395.46,
+      "effective_dps": 322.9,
+      "effective_per_shot": 3229.05,
+      "footprint": 4.5101,
+      "k": 0.8073,
+      "reliability": 0.7851,
+      "sigma": 260.51,
+      "slot": "Armament@AG",
+      "weapon": "TKMQuadCannonAG"
+     },
+     {
+      "avg_versus": 0.6031,
+      "damage_total": 4000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 5378.13,
+      "effective_dps": 321.76,
+      "effective_per_shot": 3217.57,
+      "footprint": 4.5101,
+      "k": 0.8044,
+      "reliability": 0.7808,
+      "sigma": 265.76,
+      "slot": "Armament@AA",
+      "weapon": "TKMQuadCannonAA"
+     }
+    ]
+   },
+   "tkm_sandmarine": {
+    "armaments": [
+     {
+      "avg_versus": 0.7033,
+      "damage_total": 80000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 174681.09,
+      "effective_dps": 2435.91,
+      "effective_per_shot": 109616.05,
+      "footprint": 10.7419,
+      "k": 1.3702,
+      "reliability": 0.8408,
+      "sigma": 473.2,
+      "slot": "Armament@PRIMARY",
+      "weapon": "SandmarineTusk"
+     },
+     {
+      "avg_versus": 0.7033,
+      "damage_total": 80000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 174681.09,
+      "effective_dps": 2435.91,
+      "effective_per_shot": 109616.05,
+      "footprint": 10.7419,
+      "k": 1.3702,
+      "reliability": 0.8408,
+      "sigma": 473.2,
+      "slot": "Armament@PRIMARYNATO",
+      "weapon": "SandmarineTuskCryo"
+     },
+     {
+      "avg_versus": 0.7033,
+      "damage_total": 80000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 174681.09,
+      "effective_dps": 2435.91,
+      "effective_per_shot": 109616.05,
+      "footprint": 10.7419,
+      "k": 1.3702,
+      "reliability": 0.8408,
+      "sigma": 473.2,
+      "slot": "Armament@SECONDARYNATO",
+      "weapon": "SandmarineTuskCryo"
+     },
+     {
+      "avg_versus": 0.7576,
+      "damage_total": 60000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 97441.9,
+      "effective_dps": 6844.15,
+      "effective_per_shot": 64163.9,
+      "footprint": 15.1221,
+      "k": 1.0694,
+      "reliability": 0.7195,
+      "sigma": 344.08,
+      "slot": "Armament@PRIMARYBEREZKA",
+      "weapon": "SandmarineTuskTwin"
+     },
+     {
+      "avg_versus": 0.7576,
+      "damage_total": 60000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 97441.9,
+      "effective_dps": 6844.15,
+      "effective_per_shot": 64163.9,
+      "footprint": 15.1221,
+      "k": 1.0694,
+      "reliability": 0.7195,
+      "sigma": 344.08,
+      "slot": "Armament@SECONDARYBEREZKA",
+      "weapon": "SandmarineTuskTwin"
+     },
+     {
+      "avg_versus": 0.6945,
+      "damage_total": 88000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 185766.98,
+      "effective_dps": 2568.61,
+      "effective_per_shot": 115587.57,
+      "footprint": 16.2578,
+      "k": 1.3135,
+      "reliability": 0.8276,
+      "sigma": 473.2,
+      "slot": "Armament@PRIMARYTITAN",
+      "weapon": "SandmarineTuskFire"
+     },
+     {
+      "avg_versus": 0.6945,
+      "damage_total": 88000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 185766.98,
+      "effective_dps": 2568.61,
+      "effective_per_shot": 115587.57,
+      "footprint": 16.2578,
+      "k": 1.3135,
+      "reliability": 0.8276,
+      "sigma": 473.2,
+      "slot": "Armament@SECONDARYTITAN",
+      "weapon": "SandmarineTuskFire"
+     },
+     {
+      "avg_versus": 0.7162,
+      "damage_total": 240000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 453149.97,
+      "effective_dps": 2417.84,
+      "effective_per_shot": 326408.35,
+      "footprint": 10.7419,
+      "k": 1.36,
+      "reliability": 0.5454,
+      "sigma": 1488.74,
+      "slot": "Armament@Mortar",
+      "weapon": "sandmarinemortar"
+     }
+    ]
+   },
+   "tkm_stryker": {
+    "armaments": [
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 5.0,
+      "effective_damage": 1805.07,
+      "effective_dps": 231.16,
+      "effective_per_shot": 1155.81,
+      "footprint": 0.3595,
+      "k": 0.5779,
+      "reliability": 0.8127,
+      "sigma": 215.76,
+      "slot": "Armament",
+      "weapon": "tkmstrykermg"
+     },
+     {
+      "avg_versus": 0.6086,
+      "damage_total": 24000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 46640.59,
+      "effective_dps": 368.73,
+      "effective_per_shot": 22123.96,
+      "footprint": 4.3503,
+      "k": 0.9218,
+      "reliability": 0.8558,
+      "sigma": 415.2,
+      "slot": "Armament@missile",
+      "weapon": "tkmstrykerrockets"
+     },
+     {
+      "avg_versus": 0.6255,
+      "damage_total": 30000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 58300.74,
+      "effective_dps": 505.33,
+      "effective_per_shot": 30319.98,
+      "footprint": 8.7005,
+      "k": 1.0107,
+      "reliability": 0.8558,
+      "sigma": 415.2,
+      "slot": "Armament@missilefire",
+      "weapon": "tkmstrykerfirerockets"
+     }
+    ]
+   },
+   "tkm_t30": {
+    "armaments": [
+     {
+      "avg_versus": 0.7461,
+      "damage_total": 81000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 125236.79,
+      "effective_dps": 1079.16,
+      "effective_per_shot": 86332.87,
+      "footprint": 9.5489,
+      "k": 1.0658,
+      "reliability": 0.4322,
+      "sigma": 1714.84,
+      "slot": "Armament",
+      "weapon": "t30shell"
+     }
+    ]
+   },
+   "tkm_t72m": {
+    "armaments": [
+     {
+      "avg_versus": 1.0,
+      "damage_total": 1.0,
+      "eff_reload": 25.0,
+      "effective_damage": 1.0,
+      "effective_dps": 0.04,
+      "effective_per_shot": 1.0,
+      "footprint": 0.01,
+      "k": 1.0,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@pointdefense",
+      "weapon": "TKMPDLaser"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 19012.6,
+      "effective_dps": 264.68,
+      "effective_per_shot": 11116.5,
+      "footprint": 4.3503,
+      "k": 1.1117,
+      "reliability": 0.8137,
+      "sigma": 536.49,
+      "slot": "Armament",
+      "weapon": "tkm2a46gun"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 1778.64,
+      "effective_dps": 113.54,
+      "effective_per_shot": 1135.4,
+      "footprint": 0.3595,
+      "k": 0.5677,
+      "reliability": 0.7994,
+      "sigma": 230.97,
+      "slot": "Armament@machinegun",
+      "weapon": "tkmkord"
+     }
+    ]
+   },
+   "tkm_technical": {
+    "armaments": [
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 6.0,
+      "effective_damage": 3592.75,
+      "effective_dps": 383.03,
+      "effective_per_shot": 2298.19,
+      "footprint": 0.3595,
+      "k": 0.5745,
+      "reliability": 0.8083,
+      "sigma": 220.76,
+      "slot": "Armament",
+      "weapon": "tkmtechmg"
+     },
+     {
+      "avg_versus": 0.6077,
+      "damage_total": 8000.0,
+      "eff_reload": 21.0,
+      "effective_damage": 3304.48,
+      "effective_dps": 244.8,
+      "effective_per_shot": 1713.59,
+      "footprint": 2.9178,
+      "k": 0.2142,
+      "reliability": 0.2107,
+      "sigma": 1038.93,
+      "slot": "Armament@PRIMARYNATO",
+      "weapon": "tkmtechnicalmgap"
+     }
+    ]
+   },
+   "tkm_technicaltank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 8000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 15303.23,
+      "effective_dps": 213.43,
+      "effective_per_shot": 8964.12,
+      "footprint": 4.3503,
+      "k": 1.1205,
+      "reliability": 0.8253,
+      "sigma": 502.9,
+      "slot": "Armament@cannon",
+      "weapon": "tkmltgun"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 18000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 27776.08,
+      "effective_dps": 344.3,
+      "effective_per_shot": 11017.46,
+      "footprint": 2.758,
+      "k": 0.6121,
+      "reliability": 0.8536,
+      "sigma": 224.77,
+      "slot": "Armament@missiles",
+      "weapon": "tkmtwinrocketstechnicaltank"
+     }
+    ]
+   },
+   "tkm_tornadoglauncher": {
+    "armaments": [
+     {
+      "avg_versus": 0.7054,
+      "damage_total": 20000.0,
+      "eff_reload": 185.0,
+      "effective_damage": 28542.73,
+      "effective_dps": 798.96,
+      "effective_per_shot": 18476.01,
+      "footprint": 4.3503,
+      "k": 0.9238,
+      "reliability": 0.3396,
+      "sigma": 2494.96,
+      "slot": "Armament@PRIMARY",
+      "weapon": "tkmkatyushalalauncherrockets"
+     },
+     {
+      "avg_versus": 0.7054,
+      "damage_total": 20000.0,
+      "eff_reload": 185.0,
+      "effective_damage": 28182.9,
+      "effective_dps": 787.54,
+      "effective_per_shot": 18211.82,
+      "footprint": 4.3503,
+      "k": 0.9106,
+      "reliability": 0.3216,
+      "sigma": 2620.0,
+      "slot": "Armament@PRIMARYNATO",
+      "weapon": "tkmkatyushalalauncherrocketscryo"
+     },
+     {
+      "avg_versus": 0.7054,
+      "damage_total": 20000.0,
+      "eff_reload": 217.0,
+      "effective_damage": 28542.73,
+      "effective_dps": 1362.29,
+      "effective_per_shot": 18476.01,
+      "footprint": 4.3503,
+      "k": 0.9238,
+      "reliability": 0.3396,
+      "sigma": 2494.96,
+      "slot": "Armament@PRIMARYBEREZKA",
+      "weapon": "tkmkatyushalalauncherrocketstwin"
+     },
+     {
+      "avg_versus": 0.6772,
+      "damage_total": 28000.0,
+      "eff_reload": 185.0,
+      "effective_damage": 35556.78,
+      "effective_dps": 944.58,
+      "effective_per_shot": 21843.3,
+      "footprint": 9.8662,
+      "k": 0.7801,
+      "reliability": 0.2961,
+      "sigma": 2620.0,
+      "slot": "Armament@PRIMARYTITAN",
+      "weapon": "tkmkatyushalalauncherrocketsfire"
+     }
+    ]
+   },
+   "tkm_trenchtank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7233,
+      "damage_total": 40000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 84742.23,
+      "effective_dps": 759.47,
+      "effective_per_shot": 56960.28,
+      "footprint": 10.7419,
+      "k": 1.424,
+      "reliability": 0.7758,
+      "sigma": 667.34,
+      "slot": "Armament",
+      "weapon": "tkmtrenchcannon"
+     }
+    ]
+   },
+   "tkm_zaza": {
+    "armaments": [
+     {
+      "avg_versus": 0.6031,
+      "damage_total": 4000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 5395.26,
+      "effective_dps": 403.61,
+      "effective_per_shot": 3228.91,
+      "footprint": 4.5101,
+      "k": 0.8072,
+      "reliability": 0.7851,
+      "sigma": 260.57,
+      "slot": "Armament@AG",
+      "weapon": "TKMZazaCannonAG"
+     },
+     {
+      "avg_versus": 0.6031,
+      "damage_total": 4000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 5377.82,
+      "effective_dps": 402.17,
+      "effective_per_shot": 3217.37,
+      "footprint": 4.5101,
+      "k": 0.8043,
+      "reliability": 0.7807,
+      "sigma": 265.85,
+      "slot": "Armament@AA",
+      "weapon": "TKMZazaCannonAA"
+     }
+    ]
+   }
+  }
+ }
+}

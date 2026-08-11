@@ -1,0 +1,1021 @@
+{
+ "ledger": "shared_redalert2",
+ "pack": "mods/cameo/ContentPacks/RedAlert2/Shared",
+ "schema": 2,
+ "sections": {
+  "misc": {
+   "YRSLAV": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 2000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 4175.14,
+      "effective_dps": 103.67,
+      "effective_per_shot": 3110.16,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RA2Shovel"
+     },
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 2000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 4175.14,
+      "effective_dps": 103.67,
+      "effective_per_shot": 3110.16,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "RA2Shovel"
+     }
+    ]
+   },
+   "ra2_ambu_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_bcab_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_bus_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_c_abram": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 19107.51,
+      "effective_dps": 207.2,
+      "effective_per_shot": 11188.75,
+      "footprint": 4.3503,
+      "k": 1.1189,
+      "reliability": 0.8232,
+      "sigma": 509.11,
+      "slot": "Armament",
+      "weapon": "RA2120mm"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 57.0,
+      "effective_damage": 18972.71,
+      "effective_dps": 388.99,
+      "effective_per_shot": 11086.18,
+      "footprint": 4.3503,
+      "k": 1.1086,
+      "reliability": 0.8097,
+      "sigma": 548.02,
+      "slot": "Armament@elite",
+      "weapon": "RA2120mm_elite"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 6.0,
+      "effective_damage": 3347.92,
+      "effective_dps": 346.33,
+      "effective_per_shot": 2078.0,
+      "footprint": 0.5193,
+      "k": 0.5195,
+      "reliability": 0.7721,
+      "sigma": 210.0,
+      "slot": "Armament@machinegun",
+      "weapon": "RA2GattlingMG1"
+     }
+    ]
+   },
+   "ra2_c_hum": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 6.0,
+      "effective_damage": 3347.92,
+      "effective_dps": 346.33,
+      "effective_per_shot": 2078.0,
+      "footprint": 0.5193,
+      "k": 0.5195,
+      "reliability": 0.7721,
+      "sigma": 210.0,
+      "slot": "Armament",
+      "weapon": "RA2GattlingMG1"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 4.0,
+      "effective_damage": 3345.75,
+      "effective_dps": 519.11,
+      "effective_per_shot": 2076.45,
+      "footprint": 0.5193,
+      "k": 0.5191,
+      "reliability": 0.7715,
+      "sigma": 210.5,
+      "slot": "Armament@elite",
+      "weapon": "RA2GattlingMG2"
+     }
+    ]
+   },
+   "ra2_c_hum2": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 6.0,
+      "effective_damage": 3347.92,
+      "effective_dps": 346.33,
+      "effective_per_shot": 2078.0,
+      "footprint": 0.5193,
+      "k": 0.5195,
+      "reliability": 0.7721,
+      "sigma": 210.0,
+      "slot": "Armament",
+      "weapon": "RA2GattlingMG1"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 4.0,
+      "effective_damage": 3345.75,
+      "effective_dps": 519.11,
+      "effective_per_shot": 2076.45,
+      "footprint": 0.5193,
+      "k": 0.5191,
+      "reliability": 0.7715,
+      "sigma": 210.5,
+      "slot": "Armament@elite",
+      "weapon": "RA2GattlingMG2"
+     }
+    ]
+   },
+   "ra2_c_ifv": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 6.0,
+      "effective_damage": 3347.92,
+      "effective_dps": 346.33,
+      "effective_per_shot": 2078.0,
+      "footprint": 0.5193,
+      "k": 0.5195,
+      "reliability": 0.7721,
+      "sigma": 210.0,
+      "slot": "Armament",
+      "weapon": "RA2GattlingMG1"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 4.0,
+      "effective_damage": 3345.75,
+      "effective_dps": 519.11,
+      "effective_per_shot": 2076.45,
+      "footprint": 0.5193,
+      "k": 0.5191,
+      "reliability": 0.7715,
+      "sigma": 210.5,
+      "slot": "Armament@elite",
+      "weapon": "RA2GattlingMG2"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 6.0,
+      "effective_damage": 6665.46,
+      "effective_dps": 689.06,
+      "effective_per_shot": 4134.37,
+      "footprint": 0.5193,
+      "k": 0.5168,
+      "reliability": 0.7683,
+      "sigma": 213.5,
+      "slot": "Armament@AA",
+      "weapon": "RA2GattlingMG1_AA"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 4.0,
+      "effective_damage": 6652.43,
+      "effective_dps": 1031.28,
+      "effective_per_shot": 4125.1,
+      "footprint": 0.5193,
+      "k": 0.5156,
+      "reliability": 0.7666,
+      "sigma": 215.0,
+      "slot": "Armament@eliteAA",
+      "weapon": "RA2GattlingMG2_AA"
+     }
+    ]
+   },
+   "ra2_car_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_cona_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_cop_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_ddbx_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_euroc_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_jeep_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_limo_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_ptruck_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_stang_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_suvb_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_suvw_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_taxi_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_tractor_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_trucka_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_truckb_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2_ycab_driveby": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 6565.6,
+      "effective_dps": 270.9,
+      "effective_per_shot": 4063.44,
+      "footprint": 0.5193,
+      "k": 0.5079,
+      "reliability": 0.7558,
+      "sigma": 225.0,
+      "slot": "Armament",
+      "weapon": "RA220mmrapid"
+     }
+    ]
+   },
+   "ra2asw": {
+    "armaments": [
+     {
+      "avg_versus": 0.6087,
+      "damage_total": 60000.0,
+      "eff_reload": 37.0,
+      "effective_damage": 87217.32,
+      "effective_dps": 6611.58,
+      "effective_per_shot": 48925.66,
+      "footprint": 2.758,
+      "k": 0.8154,
+      "reliability": 0.7641,
+      "sigma": 362.38,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RA2DepthCharge"
+     }
+    ]
+   },
+   "ra2dest": {
+    "armaments": [
+     {
+      "avg_versus": 0.7412,
+      "damage_total": 16000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 16028.64,
+      "effective_dps": 241.97,
+      "effective_per_shot": 9678.99,
+      "footprint": 1.5979,
+      "k": 0.6049,
+      "reliability": 0.6023,
+      "sigma": 650.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RA2155mm"
+     },
+     {
+      "avg_versus": 0.7412,
+      "damage_total": 16000.0,
+      "eff_reload": 43.0,
+      "effective_damage": 15841.62,
+      "effective_dps": 443.14,
+      "effective_per_shot": 9527.55,
+      "footprint": 1.5979,
+      "k": 0.5955,
+      "reliability": 0.5906,
+      "sigma": 675.0,
+      "slot": "Armament@ELITE",
+      "weapon": "RA2155mm_elite"
+     }
+    ]
+   },
+   "ra2dlph": {
+    "armaments": [
+     {
+      "avg_versus": 0.5467,
+      "damage_total": 3000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 10.8,
+      "effective_dps": 0.1,
+      "effective_per_shot": 6.21,
+      "footprint": 0.0041,
+      "k": 0.0021,
+      "reliability": 0.0031,
+      "sigma": 801.75,
+      "slot": "Armament@PRIMARY",
+      "weapon": "SonicZap"
+     }
+    ]
+   },
+   "ra2e2.black": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 18.0,
+      "effective_damage": 1702.18,
+      "effective_dps": 57.16,
+      "effective_per_shot": 1028.9,
+      "footprint": 0.1598,
+      "k": 0.5144,
+      "reliability": 0.8111,
+      "sigma": 145.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ra2_soviets_conscript_carbine"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 21.0,
+      "effective_damage": 1676.13,
+      "effective_dps": 96.31,
+      "effective_per_shot": 1011.25,
+      "footprint": 0.1598,
+      "k": 0.5056,
+      "reliability": 0.7981,
+      "sigma": 155.0,
+      "slot": "Armament@ELITE",
+      "weapon": "ra2_soviets_conscript_carbine_elite"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 3267.08,
+      "effective_dps": 112.25,
+      "effective_per_shot": 2020.58,
+      "footprint": 0.5193,
+      "k": 0.5051,
+      "reliability": 0.7519,
+      "sigma": 228.62,
+      "slot": "Armament@GARRISONED",
+      "weapon": "RA2vulcan3"
+     }
+    ]
+   },
+   "ra2hornet": {
+    "armaments": [
+     {
+      "avg_versus": 0.6521,
+      "damage_total": 6000.0,
+      "eff_reload": 3.0,
+      "effective_damage": 11955.4,
+      "effective_dps": 2452.95,
+      "effective_per_shot": 7358.86,
+      "footprint": 13.4998,
+      "k": 1.2265,
+      "reliability": 0.8676,
+      "sigma": 300.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RA2HornetMissile"
+     }
+    ]
+   },
+   "ra2leopard": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 19107.51,
+      "effective_dps": 207.2,
+      "effective_per_shot": 11188.75,
+      "footprint": 4.3503,
+      "k": 1.1189,
+      "reliability": 0.8232,
+      "sigma": 509.11,
+      "slot": "Armament",
+      "weapon": "RA2120mm"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 57.0,
+      "effective_damage": 18972.71,
+      "effective_dps": 388.99,
+      "effective_per_shot": 11086.18,
+      "footprint": 4.3503,
+      "k": 1.1086,
+      "reliability": 0.8097,
+      "sigma": 548.02,
+      "slot": "Armament@elite",
+      "weapon": "RA2120mm_elite"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 6.0,
+      "effective_damage": 3347.92,
+      "effective_dps": 346.33,
+      "effective_per_shot": 2078.0,
+      "footprint": 0.5193,
+      "k": 0.5195,
+      "reliability": 0.7721,
+      "sigma": 210.0,
+      "slot": "Armament@machinegun",
+      "weapon": "RA2GattlingMG1"
+     }
+    ]
+   },
+   "ra2shkhero": {
+    "armaments": [
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 36000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 38217.08,
+      "effective_dps": 290.26,
+      "effective_per_shot": 29025.85,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RA2PortaTesla"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 36000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 38217.08,
+      "effective_dps": 290.26,
+      "effective_per_shot": 29025.85,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY2",
+      "weapon": "RA2PortaTesla2"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 36000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 38217.08,
+      "effective_dps": 290.26,
+      "effective_per_shot": 29025.85,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY3",
+      "weapon": "RA2PortaTesla3"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 36000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 38217.08,
+      "effective_dps": 290.26,
+      "effective_per_shot": 29025.85,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "RA2PortaTesla"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 36000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 38217.08,
+      "effective_dps": 290.26,
+      "effective_per_shot": 29025.85,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED2",
+      "weapon": "RA2PortaTesla2"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 36000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 38217.08,
+      "effective_dps": 290.26,
+      "effective_per_shot": 29025.85,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED3",
+      "weapon": "RA2PortaTesla3"
+     }
+    ]
+   },
+   "ra2sidewind": {
+    "armaments": [
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 24000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 35660.75,
+      "effective_dps": 308.82,
+      "effective_per_shot": 13896.74,
+      "footprint": 2.758,
+      "k": 0.579,
+      "reliability": 0.7964,
+      "sigma": 312.68,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RA2GIRocketsG"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 24000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 35660.75,
+      "effective_dps": 308.82,
+      "effective_per_shot": 13896.74,
+      "footprint": 2.758,
+      "k": 0.579,
+      "reliability": 0.7964,
+      "sigma": 312.68,
+      "slot": "Armament@GARRISONED",
+      "weapon": "RA2GIRocketsG"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 48000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 70074.37,
+      "effective_dps": 601.88,
+      "effective_per_shot": 27084.77,
+      "footprint": 2.758,
+      "k": 0.5643,
+      "reliability": 0.7704,
+      "sigma": 352.68,
+      "slot": "Armament@PRIMARYE",
+      "weapon": "RA2GIRocketsG_elite"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 48000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 70074.37,
+      "effective_dps": 601.88,
+      "effective_per_shot": 27084.77,
+      "footprint": 2.758,
+      "k": 0.5643,
+      "reliability": 0.7704,
+      "sigma": 352.68,
+      "slot": "Armament@GARRISONEDE",
+      "weapon": "RA2GIRocketsG_elite"
+     }
+    ]
+   },
+   "ra2sqd": {
+    "armaments": [
+     {
+      "avg_versus": 1.0,
+      "damage_total": 10000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 10024.97,
+      "effective_dps": 312.5,
+      "effective_per_shot": 10000.0,
+      "footprint": 0.01,
+      "k": 1.0,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "SquidPunch"
+     }
+    ]
+   },
+   "ra2sub": {
+    "armaments": [
+     {
+      "avg_versus": 0.6478,
+      "damage_total": 36000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 62309.75,
+      "effective_dps": 381.52,
+      "effective_per_shot": 34336.51,
+      "footprint": 9.1496,
+      "k": 0.9538,
+      "reliability": 0.5871,
+      "sigma": 1000.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RA2TorpTube"
+     },
+     {
+      "avg_versus": 0.6478,
+      "damage_total": 36000.0,
+      "eff_reload": 93.0,
+      "effective_damage": 61272.06,
+      "effective_dps": 722.57,
+      "effective_per_shot": 33599.71,
+      "footprint": 9.1496,
+      "k": 0.9333,
+      "reliability": 0.5583,
+      "sigma": 1111.11,
+      "slot": "Armament@ELITE",
+      "weapon": "RA2TorpTube_elite"
+     }
+    ]
+   },
+   "yrbpln": {
+    "armaments": [
+     {
+      "avg_versus": 0.6544,
+      "damage_total": 32000.0,
+      "eff_reload": 56.0,
+      "effective_damage": 31516.94,
+      "effective_dps": 1320.34,
+      "effective_per_shot": 18484.83,
+      "footprint": 10.6385,
+      "k": 0.5777,
+      "reliability": 0.32,
+      "sigma": 1380.0,
+      "slot": "Armament",
+      "weapon": "MigMissiles"
+     },
+     {
+      "avg_versus": 0.6588,
+      "damage_total": 36000.0,
+      "eff_reload": 56.0,
+      "effective_damage": 38100.24,
+      "effective_dps": 1627.28,
+      "effective_per_shot": 22781.88,
+      "footprint": 14.9888,
+      "k": 0.6328,
+      "reliability": 0.3465,
+      "sigma": 1380.0,
+      "slot": "Armament@rad",
+      "weapon": "MigMissiles_rad"
+     },
+     {
+      "avg_versus": 0.6544,
+      "damage_total": 32000.0,
+      "eff_reload": 56.0,
+      "effective_damage": 31516.94,
+      "effective_dps": 1320.34,
+      "effective_per_shot": 18484.83,
+      "footprint": 10.6385,
+      "k": 0.5777,
+      "reliability": 0.32,
+      "sigma": 1380.0,
+      "slot": "Armament@fire",
+      "weapon": "MigMissiles_fire"
+     },
+     {
+      "avg_versus": 0.6544,
+      "damage_total": 32000.0,
+      "eff_reload": 56.0,
+      "effective_damage": 31516.94,
+      "effective_dps": 1320.34,
+      "effective_per_shot": 18484.83,
+      "footprint": 10.6385,
+      "k": 0.5777,
+      "reliability": 0.32,
+      "sigma": 1380.0,
+      "slot": "Armament@tesla",
+      "weapon": "MigMissiles_tesla"
+     }
+    ]
+   },
+   "yrrobo": {
+    "armaments": [
+     {
+      "avg_versus": 0.7132,
+      "damage_total": 30000.0,
+      "eff_reload": 48.0,
+      "effective_damage": 31408.15,
+      "effective_dps": 479.49,
+      "effective_per_shot": 23015.36,
+      "footprint": 1.9175,
+      "k": 0.7672,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "RA2Robotmm"
+     },
+     {
+      "avg_versus": 0.7132,
+      "damage_total": 30000.0,
+      "eff_reload": 48.0,
+      "effective_damage": 31408.15,
+      "effective_dps": 479.49,
+      "effective_per_shot": 23015.36,
+      "footprint": 1.9175,
+      "k": 0.7672,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@elite",
+      "weapon": "RA2Robotmm_elite"
+     }
+    ]
+   }
+  }
+ }
+}

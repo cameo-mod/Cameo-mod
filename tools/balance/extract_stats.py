@@ -30,10 +30,15 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/audit"))
+sys.path.insert(0, str(ROOT / "tools/balance"))
 from cameo_model import Model  # noqa: E402
 import effective_damage as effmod  # noqa: E402
+import formula  # noqa: E402
+import target_model as tm  # noqa: E402
+import weapon_efficiency as we  # noqa: E402
 
 OUT = ROOT / "docs/balance"
+DERIVED_OUT = OUT / "derived"
 PACKS = ROOT / "mods/cameo/ContentPacks"
 DEFAULTS_YAML = ROOT / "mods/cameo/rules/defaults.yaml"
 
@@ -325,6 +330,124 @@ def warheads(rs, wname: str, _seen=None) -> list[str]:
     return out
 
 
+# ---------------------------------------------------------------------------
+# DERIVED METRICS — computed here, but SPLIT OUT of the raw ledger (W3).
+#
+# BALANCE_PIPELINE.md §2: the ledger is RAW STATS ONLY. Model output living in it
+# made the artifact ambiguous — correcting the scatter model once rewrote 4136
+# ledger lines with `mods/` untouched, so a ledger diff no longer answered a single
+# question. The split gives each tree exactly one meaning:
+#
+#   docs/balance/<faction>.json          diff => THE GAME changed (yaml was edited)
+#   docs/balance/derived/<faction>.json  diff => THE MODEL changed (a tool was edited)
+#
+# They are produced by the same run off the same resolve, so they cannot fall out of
+# step with each other; `DERIVED_KEY` is the temporary carrier that `split_derived`
+# lifts out before the raw ledger is serialised.
+# ---------------------------------------------------------------------------
+DERIVED_KEY = "_derived"
+
+
+def model_constants() -> dict:
+    """The knobs every derived number depends on, written once to derived/_model.json.
+
+    Committed so that a model change shows up as a small, readable diff at the top of
+    the derived tree instead of only as thousands of shifted decimals underneath it.
+    """
+    return {
+        "effective_damage": {"SWARM_W": effmod.SWARM_W, "LEAD": effmod.LEAD,
+                             "TARGET_SPEED": effmod.TARGET_SPEED,
+                             "MIN_SPREAD": effmod.MIN_SPREAD},
+        "target_model": {"A_BLOB": tm.A_BLOB, "A_SELF": tm.A_SELF,
+                         "BLOB_UPTIME": tm.BLOB_UPTIME,
+                         "DENSITY": dict(tm.DENSITY),
+                         "ENGAGEMENT": dict(tm.ENGAGEMENT),
+                         "reference_hp": tm.reference_hp(),
+                         "armor_census": tm.armor_census()},
+    }
+
+
+def derived_metrics(resolved, raw: dict) -> dict | None:
+    """Model output for one weapon. Never written to the raw ledger.
+
+    Carries TWO different metrics on purpose — EFFECTIVE_DAMAGE.md §1 warns they are
+    not interchangeable, so they keep separate names rather than being averaged:
+
+    * `effective_damage` / `footprint` / `reliability` / `sigma` — the area-integrated
+      per-shot metric.
+    * `k` / `effective_per_shot` / `effective_dps` — the W1 pricing coefficient. K is
+      independent of the Damage magnitude, which is what makes pricing invertible:
+      `Damage_required = target_dps x eff_reload / (burst x FP x K)`.
+
+    `effective_dps` is the WEAPON's number. `FirepowerMultiplier` is an actor
+    property, so it is deliberately NOT baked in here — the caller applies it.
+    """
+    out: dict = {}
+    ed = effmod.effective_damage(resolved)
+    if ed is not None:
+        out["effective_damage"] = round(ed[0], 2)
+        out["damage_total"] = ed[1]
+        out["footprint"] = round(ed[2], 4)
+        out["reliability"] = round(ed[3], 4)
+        out["sigma"] = round(ed[4], 2)
+
+    damage_total = ed[1] if ed is not None else 0.0
+    res = we.analyse(resolved, damage_total or 1.0)
+    if res is not None:
+        # Weighted over the FLAT warheads only, whose shares sum to 1.0 — the same
+        # quantity the family table's avgVersus column reports. Including the %-twins
+        # would drag it toward their armor profile and make the two disagree.
+        flat = [p for p in res["parts"] if p["kind"] != "pct"]
+        shares = sum(p["share"] for p in flat) or 1.0
+        out["k"] = round(res["k"], 4)
+        out["avg_versus"] = round(
+            sum(p["share"] * p["versus"] for p in flat) / shares, 4)
+        out["effective_per_shot"] = round(res["k"] * damage_total, 2)
+
+        burst = int(fnum(raw.get("burst")) or 1)
+        reload_delay = fnum(raw.get("reloaddelay"))
+        if reload_delay:
+            eff = formula.eff_reload(reload_delay, burst, fnum(raw.get("burstdelays")))
+            out["eff_reload"] = round(eff, 2)
+            out["effective_dps"] = round(res["k"] * damage_total * burst / eff, 2)
+    return out or None
+
+
+def fnum(v):
+    """First number in a raw ledger value ("15, 15" -> 15.0), else None."""
+    if v is None:
+        return None
+    try:
+        return float(str(v).split(",")[0].strip())
+    except (TypeError, ValueError):
+        return None
+
+
+def split_derived(doc: dict) -> tuple[dict, dict]:
+    """One built doc -> (raw ledger, derived sidecar), mirroring sections/armaments.
+
+    The derived side repeats only the join keys (`slot`, `weapon`) so a row can be
+    matched back to its raw counterpart without duplicating any raw stat.
+    """
+    sections: dict = {}
+    for section, actors in doc["sections"].items():
+        sec: dict = {}
+        for actor, unit in actors.items():
+            arms = []
+            for arm in unit.get("armaments", []):
+                metrics = arm.pop(DERIVED_KEY, None)
+                if metrics:
+                    arms.append({"slot": arm.get("slot"),
+                                 "weapon": arm.get("weapon"), **metrics})
+            if arms:
+                sec[actor] = {"armaments": arms}
+        if sec:
+            sections[section] = sec
+    derived = {"schema": doc["schema"], "ledger": doc["ledger"],
+               "pack": doc["pack"], "sections": sections}
+    return doc, derived
+
+
 def weapon_entry(rs, wname: str) -> dict | None:
     resolved = rs.resolve_weapon(wname)
     if resolved is None:
@@ -350,13 +473,7 @@ def weapon_entry(rs, wname: str) -> dict | None:
     out["damage_warheads"] = damage_warheads
     if not damage_warheads:
         out["extraction_note"] = "no_damage_warheads"
-    ed = effmod.effective_damage(resolved)
-    if ed is not None:
-        out["effective_damage"] = round(ed[0], 2)
-        out["effective_base_total"] = ed[1]
-        out["effective_footprint_cells2"] = round(ed[2], 4)
-        out["effective_avg_reliability"] = round(ed[3], 4)
-        out["effective_sigma"] = round(ed[4], 2)
+    out[DERIVED_KEY] = derived_metrics(resolved, out)
     if local is not None:
         out["versus_templates"] = [c.value for c in local.children
                                    if c.key == "Inherits" or c.key.startswith("Inherits@")]
@@ -547,8 +664,21 @@ def load_existing_design(name: str) -> tuple[dict[str, dict], dict[str, dict]]:
 
 
 def build_ledgers(model: Model, only: str | None = None) -> dict[str, dict]:
+    """RAW ledgers only — what `audit_balance_drift` diffs against `docs/balance/`.
+
+    Kept as the narrow entry point so the drift audit cannot accidentally start
+    comparing model output: a raw diff must always mean "the game changed".
+    """
+    return build_both(model, only)[0]
+
+
+def build_both(model: Model, only: str | None = None) -> tuple[dict[str, dict],
+                                                               dict[str, dict]]:
+    """(raw ledgers, derived sidecars) from a single pass — they cannot desync."""
     rs = model.rs
+    tm.use_ruleset(rs)          # reuse the built tree for the armor census (~8s saved)
     ledgers: dict[str, dict] = {}
+    sidecars: dict[str, dict] = {}
     for ledger, info in sorted(pack_rosters().items()):
         if only and only not in ledger:
             continue
@@ -582,9 +712,11 @@ def build_ledgers(model: Model, only: str | None = None) -> dict[str, dict]:
             if sec:
                 sections[section] = sec
         if sections:
-            ledgers[ledger] = {"schema": 2, "ledger": ledger,
-                               "pack": info["pack"], "sections": sections}
-    return ledgers
+            raw, derived = split_derived({"schema": 2, "ledger": ledger,
+                                          "pack": info["pack"], "sections": sections})
+            ledgers[ledger] = raw
+            sidecars[ledger] = derived
+    return ledgers, sidecars
 
 
 def serialize(doc: dict) -> str:
@@ -601,7 +733,7 @@ def main() -> int:
                          "from docs/balance/weapon_classes.yaml (the sidecar)")
     args = ap.parse_args()
 
-    ledgers = build_ledgers(Model(), args.faction)
+    ledgers, sidecars = build_both(Model(), args.faction)
 
     if args.check_weapon_classes:
         # Extraction has populated _UNMAPPED_WEAPON_TEMPLATES with every class
@@ -621,26 +753,44 @@ def main() -> int:
               f"{rel(WEAPON_CLASS_SIDECAR_PATH)} ({len(_WEAPON_CLASS_SIDECAR)} entries)")
         return 0
 
+    # Both trees are checked, but they are reported apart because they answer
+    # different questions: raw drift = the GAME changed (someone hand-edited yaml),
+    # model drift = a TOOL changed (re-run the extractor and commit the sidecar).
+    targets = [("raw", OUT, ledgers), ("model", DERIVED_OUT, sidecars)]
+
     if args.check:
         drift = 0
-        for name, doc in ledgers.items():
-            p = OUT / f"{name}.json"
-            want = serialize(doc)
-            have = p.read_text(encoding="utf-8") if p.exists() else ""
-            if want != have:
-                print(f"DRIFT: {name} ({'missing' if not have else 'stale'})")
-                drift += 1
+        for label, root, docs in targets:
+            for name, doc in docs.items():
+                p = root / f"{name}.json"
+                want = serialize(doc)
+                have = p.read_text(encoding="utf-8") if p.exists() else ""
+                if want != have:
+                    print(f"DRIFT ({label}): {name} "
+                          f"({'missing' if not have else 'stale'})")
+                    drift += 1
+        want = serialize(model_constants())
+        mp = DERIVED_OUT / "_model.json"
+        if want != (mp.read_text(encoding="utf-8") if mp.exists() else ""):
+            print("DRIFT (model): _model.json — the model constants changed")
+            drift += 1
         print(f"balance check: {len(ledgers)} ledgers, {drift} drifted")
         return 1 if drift else 0
 
-    OUT.mkdir(parents=True, exist_ok=True)
     total = 0
-    for name, doc in ledgers.items():
-        (OUT / f"{name}.json").write_text(serialize(doc), encoding="utf-8", newline="\n")
-        n = sum(len(s) for s in doc["sections"].values())
-        total += n
-        print(f"  {name}.json: {n} actors")
+    for label, root, docs in targets:
+        root.mkdir(parents=True, exist_ok=True)
+        for name, doc in docs.items():
+            (root / f"{name}.json").write_text(serialize(doc),
+                                               encoding="utf-8", newline="\n")
+            if label == "raw":
+                n = sum(len(s) for s in doc["sections"].values())
+                total += n
+                print(f"  {name}.json: {n} actors")
+    (DERIVED_OUT / "_model.json").write_text(serialize(model_constants()),
+                                             encoding="utf-8", newline="\n")
     print(f"wrote {len(ledgers)} ledgers, {total} actors -> {rel(OUT)}")
+    print(f"wrote {len(sidecars)} derived sidecars -> {rel(DERIVED_OUT)}")
     return 0
 
 

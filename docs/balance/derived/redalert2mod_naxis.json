@@ -1,0 +1,2131 @@
+{
+ "ledger": "redalert2mod_naxis",
+ "pack": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "horten_bomber.nax": {
+    "armaments": [
+     {
+      "avg_versus": 0.7001,
+      "damage_total": 50000.0,
+      "eff_reload": 5.0,
+      "effective_damage": 90225.7,
+      "effective_dps": 11939.26,
+      "effective_per_shot": 59696.32,
+      "footprint": 19.0142,
+      "k": 1.1939,
+      "reliability": 0.8538,
+      "sigma": 420.0,
+      "slot": "Armament",
+      "weapon": "JapanSuperBomb"
+     }
+    ]
+   },
+   "naxis_bf109": {
+    "armaments": [
+     {
+      "avg_versus": 0.6868,
+      "damage_total": 6000.0,
+      "eff_reload": 145.0,
+      "effective_damage": 8551.21,
+      "effective_dps": 371.44,
+      "effective_per_shot": 5385.82,
+      "footprint": 9.5091,
+      "k": 0.8976,
+      "reliability": 0.6328,
+      "sigma": 612.18,
+      "slot": "Armament",
+      "weapon": "NaxPlanegun_elite"
+     },
+     {
+      "avg_versus": 0.6868,
+      "damage_total": 6000.0,
+      "eff_reload": 145.0,
+      "effective_damage": 8551.21,
+      "effective_dps": 371.44,
+      "effective_per_shot": 5385.82,
+      "footprint": 9.5091,
+      "k": 0.8976,
+      "reliability": 0.6328,
+      "sigma": 612.18,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxPlanegun_elite"
+     }
+    ]
+   },
+   "naxis_interceptor": {
+    "armaments": [
+     {
+      "avg_versus": 0.6573,
+      "damage_total": 24000.0,
+      "eff_reload": 109.0,
+      "effective_damage": 26921.34,
+      "effective_dps": 650.38,
+      "effective_per_shot": 17722.98,
+      "footprint": 6.5039,
+      "k": 0.7385,
+      "reliability": 0.7152,
+      "sigma": 112.18,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxiInterceptorGun"
+     },
+     {
+      "avg_versus": 0.6477,
+      "damage_total": 20000.0,
+      "eff_reload": 109.0,
+      "effective_damage": 45047.12,
+      "effective_dps": 441.44,
+      "effective_per_shot": 24058.29,
+      "footprint": 10.7419,
+      "k": 1.2029,
+      "reliability": 0.9096,
+      "sigma": 268.6,
+      "slot": "Armament@Rockets",
+      "weapon": "NaxPlaneRockets_elite"
+     }
+    ]
+   },
+   "naxis_me262": {
+    "armaments": [
+     {
+      "avg_versus": 0.6477,
+      "damage_total": 20000.0,
+      "eff_reload": 109.0,
+      "effective_damage": 45047.12,
+      "effective_dps": 441.44,
+      "effective_per_shot": 24058.29,
+      "footprint": 10.7419,
+      "k": 1.2029,
+      "reliability": 0.9096,
+      "sigma": 268.6,
+      "slot": "Armament@Rockets",
+      "weapon": "NaxPlaneRockets_elite"
+     },
+     {
+      "avg_versus": 0.6477,
+      "damage_total": 20000.0,
+      "eff_reload": 109.0,
+      "effective_damage": 45047.12,
+      "effective_dps": 441.44,
+      "effective_per_shot": 24058.29,
+      "footprint": 10.7419,
+      "k": 1.2029,
+      "reliability": 0.9096,
+      "sigma": 268.6,
+      "slot": "Armament@RocketsELITE",
+      "weapon": "NaxPlaneRockets_elite"
+     },
+     {
+      "avg_versus": 0.6868,
+      "damage_total": 6000.0,
+      "eff_reload": 145.0,
+      "effective_damage": 8551.21,
+      "effective_dps": 371.44,
+      "effective_per_shot": 5385.82,
+      "footprint": 9.5091,
+      "k": 0.8976,
+      "reliability": 0.6328,
+      "sigma": 612.18,
+      "slot": "Armament@MG",
+      "weapon": "NaxPlanegun_elite"
+     },
+     {
+      "avg_versus": 0.6868,
+      "damage_total": 6000.0,
+      "eff_reload": 145.0,
+      "effective_damage": 8551.21,
+      "effective_dps": 371.44,
+      "effective_per_shot": 5385.82,
+      "footprint": 9.5091,
+      "k": 0.8976,
+      "reliability": 0.6328,
+      "sigma": 612.18,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxPlanegun_elite"
+     }
+    ]
+   },
+   "naxis_transportzeppelin": {
+    "armaments": [
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 67.0,
+      "effective_damage": 7857.26,
+      "effective_dps": 422.06,
+      "effective_per_shot": 4712.97,
+      "footprint": 7.0923,
+      "k": 0.6733,
+      "reliability": 0.6995,
+      "sigma": 260.74,
+      "slot": "Armament",
+      "weapon": "NaxQuadCannon"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 7843.96,
+      "effective_dps": 553.42,
+      "effective_per_shot": 4704.03,
+      "footprint": 7.0923,
+      "k": 0.672,
+      "reliability": 0.6976,
+      "sigma": 262.74,
+      "slot": "Armament@elite",
+      "weapon": "NaxQuadCannon_elite"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 67.0,
+      "effective_damage": 7821.77,
+      "effective_dps": 419.92,
+      "effective_per_shot": 4689.13,
+      "footprint": 7.0923,
+      "k": 0.6699,
+      "reliability": 0.6945,
+      "sigma": 266.1,
+      "slot": "Armament@AA",
+      "weapon": "NaxQuadCannon_AA"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 7808.71,
+      "effective_dps": 550.63,
+      "effective_per_shot": 4680.37,
+      "footprint": 7.0923,
+      "k": 0.6686,
+      "reliability": 0.6926,
+      "sigma": 268.1,
+      "slot": "Armament@eliteAA",
+      "weapon": "NaxQuadCannon_AA_elite"
+     }
+    ]
+   }
+  },
+  "buildings": {
+   "naxis_flak88": {
+    "armaments": [
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 88.0,
+      "effective_damage": 5443.27,
+      "effective_dps": 282.52,
+      "effective_per_shot": 3107.76,
+      "footprint": 7.0923,
+      "k": 0.444,
+      "reliability": 0.3547,
+      "sigma": 948.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxFlakAA"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 88.0,
+      "effective_damage": 5481.44,
+      "effective_dps": 284.81,
+      "effective_per_shot": 3132.88,
+      "footprint": 7.0923,
+      "k": 0.4476,
+      "reliability": 0.3601,
+      "sigma": 928.0,
+      "slot": "Armament@AA",
+      "weapon": "NaxFlakAG"
+     }
+    ]
+   },
+   "naxis_naxibunker": {
+    "armaments": [
+     {
+      "avg_versus": 0.6851,
+      "damage_total": 48000.0,
+      "eff_reload": 111.0,
+      "effective_damage": 73380.5,
+      "effective_dps": 411.57,
+      "effective_per_shot": 45683.76,
+      "footprint": 13.4998,
+      "k": 0.9517,
+      "reliability": 0.4038,
+      "sigma": 1975.44,
+      "slot": "Armament@mortar",
+      "weapon": "NaxGrilleArty"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 4927.34,
+      "effective_dps": 220.01,
+      "effective_per_shot": 2933.46,
+      "footprint": 0.5193,
+      "k": 0.3667,
+      "reliability": 0.551,
+      "sigma": 415.11,
+      "slot": "Armament@mg",
+      "weapon": "NaxiWW2MachinegunTop"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 7808.71,
+      "effective_dps": 550.63,
+      "effective_per_shot": 4680.37,
+      "footprint": 7.0923,
+      "k": 0.6686,
+      "reliability": 0.6926,
+      "sigma": 268.1,
+      "slot": "Armament@aa",
+      "weapon": "NaxQuadCannon_AA_elite"
+     }
+    ]
+   },
+   "naxis_rifletower": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 32000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 28097.48,
+      "effective_dps": 619.88,
+      "effective_per_shot": 17046.73,
+      "footprint": 0.1598,
+      "k": 0.5327,
+      "reliability": 0.8381,
+      "sigma": 124.3,
+      "slot": "Armament",
+      "weapon": "NaxiRifleT"
+     }
+    ]
+   }
+  },
+  "infantry": {
+   "alien.nax": {
+    "armaments": [
+     {
+      "avg_versus": 0.8001,
+      "damage_total": 32000.0,
+      "eff_reload": 57.0,
+      "effective_damage": 25453.76,
+      "effective_dps": 553.46,
+      "effective_per_shot": 15773.67,
+      "footprint": 4.9994,
+      "k": 0.4929,
+      "reliability": 0.483,
+      "sigma": 411.08,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxiAlienPistol"
+     },
+     {
+      "avg_versus": 0.8001,
+      "damage_total": 32000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 24999.24,
+      "effective_dps": 978.33,
+      "effective_per_shot": 15408.63,
+      "footprint": 4.9994,
+      "k": 0.4815,
+      "reliability": 0.4688,
+      "sigma": 440.0,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxiAlienPistol_elite"
+     },
+     {
+      "avg_versus": 0.8001,
+      "damage_total": 32000.0,
+      "eff_reload": 57.0,
+      "effective_damage": 25453.76,
+      "effective_dps": 553.46,
+      "effective_per_shot": 15773.67,
+      "footprint": 4.9994,
+      "k": 0.4929,
+      "reliability": 0.483,
+      "sigma": 411.08,
+      "slot": "Armament@GARRISONED",
+      "weapon": "NaxiAlienPistol"
+     },
+     {
+      "avg_versus": 0.8001,
+      "damage_total": 32000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 24999.24,
+      "effective_dps": 978.33,
+      "effective_per_shot": 15408.63,
+      "footprint": 4.9994,
+      "k": 0.4815,
+      "reliability": 0.4688,
+      "sigma": 440.0,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "NaxiAlienPistol_elite"
+     }
+    ]
+   },
+   "conehead2.nax": {
+    "armaments": [
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 36000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 38217.08,
+      "effective_dps": 290.26,
+      "effective_per_shot": 29025.85,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RA2PortaTesla"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 36000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 38217.08,
+      "effective_dps": 290.26,
+      "effective_per_shot": 29025.85,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@ELITE",
+      "weapon": "RA2PortaTesla"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 36000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 38217.08,
+      "effective_dps": 290.26,
+      "effective_per_shot": 29025.85,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "RA2PortaTesla"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 36000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 38217.08,
+      "effective_dps": 290.26,
+      "effective_per_shot": 29025.85,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "RA2PortaTesla"
+     }
+    ]
+   },
+   "frank.nax": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 20000.0,
+      "eff_reload": 37.0,
+      "effective_damage": 41751.37,
+      "effective_dps": 840.58,
+      "effective_per_shot": 31101.61,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RA2BrutePunch"
+     },
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 20000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 41751.37,
+      "effective_dps": 1555.08,
+      "effective_per_shot": 31101.61,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@ELITE",
+      "weapon": "RA2BrutePunch_elite"
+     },
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 20000.0,
+      "eff_reload": 37.0,
+      "effective_damage": 41751.37,
+      "effective_dps": 840.58,
+      "effective_per_shot": 31101.61,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "RA2BrutePunch"
+     }
+    ]
+   },
+   "naxis_antitankcannon": {
+    "armaments": [
+     {
+      "avg_versus": 0.6424,
+      "damage_total": 28000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 50164.36,
+      "effective_dps": 371.02,
+      "effective_per_shot": 27826.85,
+      "footprint": 7.1082,
+      "k": 0.9938,
+      "reliability": 0.9031,
+      "sigma": 194.17,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxiAntiTankCannon"
+     },
+     {
+      "avg_versus": 0.6424,
+      "damage_total": 28000.0,
+      "eff_reload": 78.0,
+      "effective_damage": 50080.47,
+      "effective_dps": 711.98,
+      "effective_per_shot": 27767.18,
+      "footprint": 7.1082,
+      "k": 0.9917,
+      "reliability": 0.9001,
+      "sigma": 200.17,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxiAntiTankCannon_elite"
+     }
+    ]
+   },
+   "naxis_bmwbike": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 2480.16,
+      "effective_dps": 65.2,
+      "effective_per_shot": 1477.82,
+      "footprint": 0.5193,
+      "k": 0.3695,
+      "reliability": 0.5551,
+      "sigma": 411.14,
+      "slot": "Armament@AG",
+      "weapon": "NaxiWW2MachinegunSmall"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 2457.05,
+      "effective_dps": 64.51,
+      "effective_per_shot": 1462.27,
+      "footprint": 0.5193,
+      "k": 0.3656,
+      "reliability": 0.5493,
+      "sigma": 416.71,
+      "slot": "Armament@AA",
+      "weapon": "NaxiWW2MachinegunSmall_AA"
+     }
+    ]
+   },
+   "naxis_coneheadsknights": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 16000.0,
+      "eff_reload": 18.0,
+      "effective_damage": 33401.09,
+      "effective_dps": 1382.29,
+      "effective_per_shot": 24881.29,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "wc2gruntslice"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 4000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 3352.2,
+      "effective_dps": 20.22,
+      "effective_per_shot": 2022.47,
+      "footprint": 0.1598,
+      "k": 0.5056,
+      "reliability": 0.7981,
+      "sigma": 155.01,
+      "slot": "Armament@GARRISONED",
+      "weapon": "NaxiRifleCons"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 4000.0,
+      "eff_reload": 103.0,
+      "effective_damage": 3300.1,
+      "effective_dps": 38.59,
+      "effective_per_shot": 1987.19,
+      "footprint": 0.1598,
+      "k": 0.4968,
+      "reliability": 0.7851,
+      "sigma": 165.01,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "NaxiRifleCons_elite"
+     }
+    ]
+   },
+   "naxis_naxiflamer": {
+    "armaments": [
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 4000.0,
+      "eff_reload": 66.0,
+      "effective_damage": 5573.14,
+      "effective_dps": 151.33,
+      "effective_per_shot": 3329.23,
+      "footprint": 2.758,
+      "k": 0.8323,
+      "reliability": 0.7038,
+      "sigma": 460.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxiFlamerTroop"
+     },
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 4000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 5370.61,
+      "effective_dps": 255.52,
+      "effective_per_shot": 3194.06,
+      "footprint": 2.758,
+      "k": 0.7985,
+      "reliability": 0.6532,
+      "sigma": 555.24,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxiFlamerTroop_elite"
+     },
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 4000.0,
+      "eff_reload": 66.0,
+      "effective_damage": 5573.14,
+      "effective_dps": 151.33,
+      "effective_per_shot": 3329.23,
+      "footprint": 2.758,
+      "k": 0.8323,
+      "reliability": 0.7038,
+      "sigma": 460.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "NaxiFlamerTroop"
+     },
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 4000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 5370.61,
+      "effective_dps": 255.52,
+      "effective_per_shot": 3194.06,
+      "footprint": 2.758,
+      "k": 0.7985,
+      "reliability": 0.6532,
+      "sigma": 555.24,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "NaxiFlamerTroop_elite"
+     }
+    ]
+   },
+   "naxis_naximachinegunners": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 4903.92,
+      "effective_dps": 216.13,
+      "effective_per_shot": 2917.71,
+      "footprint": 0.5193,
+      "k": 0.3647,
+      "reliability": 0.5481,
+      "sigma": 417.94,
+      "slot": "Armament@Deployed",
+      "weapon": "NaxiWW2Machinegunner"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 147.0,
+      "effective_damage": 4887.41,
+      "effective_dps": 395.46,
+      "effective_per_shot": 2906.62,
+      "footprint": 0.5193,
+      "k": 0.3633,
+      "reliability": 0.546,
+      "sigma": 419.94,
+      "slot": "Armament@DEPLOYEDELITE",
+      "weapon": "NaxiWW2Machinegunner_elite"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 4903.92,
+      "effective_dps": 216.13,
+      "effective_per_shot": 2917.71,
+      "footprint": 0.5193,
+      "k": 0.3647,
+      "reliability": 0.5481,
+      "sigma": 417.94,
+      "slot": "Armament@GARRISONED",
+      "weapon": "NaxiWW2Machinegunner"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 147.0,
+      "effective_damage": 4887.41,
+      "effective_dps": 395.46,
+      "effective_per_shot": 2906.62,
+      "footprint": 0.5193,
+      "k": 0.3633,
+      "reliability": 0.546,
+      "sigma": 419.94,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "NaxiWW2Machinegunner_elite"
+     }
+    ]
+   },
+   "naxis_naximercenarysniper": {
+    "armaments": [
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 24000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 24472.53,
+      "effective_dps": 149.25,
+      "effective_per_shot": 17909.85,
+      "footprint": 0.1598,
+      "k": 0.7462,
+      "reliability": 0.9797,
+      "sigma": 15.55,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxiSniper"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 24000.0,
+      "eff_reload": 123.0,
+      "effective_damage": 24403.07,
+      "effective_dps": 290.36,
+      "effective_per_shot": 17856.94,
+      "footprint": 0.1598,
+      "k": 0.744,
+      "reliability": 0.9768,
+      "sigma": 17.78,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxiSniper_elite"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 24000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 24472.53,
+      "effective_dps": 149.25,
+      "effective_per_shot": 17909.85,
+      "footprint": 0.1598,
+      "k": 0.7462,
+      "reliability": 0.9797,
+      "sigma": 15.55,
+      "slot": "Armament@GARRISONED",
+      "weapon": "NaxiSniper"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 24000.0,
+      "eff_reload": 123.0,
+      "effective_damage": 24403.07,
+      "effective_dps": 290.36,
+      "effective_per_shot": 17856.94,
+      "footprint": 0.1598,
+      "k": 0.744,
+      "reliability": 0.9768,
+      "sigma": 17.78,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "NaxiSniper_elite"
+     }
+    ]
+   },
+   "naxis_naxiriflerecruit": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 8000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 6732.95,
+      "effective_dps": 39.8,
+      "effective_per_shot": 3979.85,
+      "footprint": 0.1598,
+      "k": 0.4975,
+      "reliability": 0.8017,
+      "sigma": 152.27,
+      "slot": "Armament@PRIMARY",
+      "weapon": "naxis_naxiriflerecruit_rifle"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 8000.0,
+      "eff_reload": 103.0,
+      "effective_damage": 6600.31,
+      "effective_dps": 75.62,
+      "effective_per_shot": 3894.64,
+      "footprint": 0.1598,
+      "k": 0.4868,
+      "reliability": 0.7851,
+      "sigma": 165.0,
+      "slot": "Armament@ELITE",
+      "weapon": "naxis_naxiriflerecruit_rifle_elite"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 8000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 6732.95,
+      "effective_dps": 39.8,
+      "effective_per_shot": 3979.85,
+      "footprint": 0.1598,
+      "k": 0.4975,
+      "reliability": 0.8017,
+      "sigma": 152.27,
+      "slot": "Armament@GARRISONED",
+      "weapon": "naxis_naxiriflerecruit_rifle"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 8000.0,
+      "eff_reload": 103.0,
+      "effective_damage": 6600.31,
+      "effective_dps": 75.62,
+      "effective_per_shot": 3894.64,
+      "footprint": 0.1598,
+      "k": 0.4868,
+      "reliability": 0.7851,
+      "sigma": 165.0,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "naxis_naxiriflerecruit_rifle_elite"
+     }
+    ]
+   },
+   "naxis_naxiriflesoldier": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 4000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 3586.7,
+      "effective_dps": 43.63,
+      "effective_per_shot": 2181.31,
+      "footprint": 0.1598,
+      "k": 0.5453,
+      "reliability": 0.8567,
+      "sigma": 110.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "naxis_naxiriflesoldier_rifle"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 4000.0,
+      "eff_reload": 53.0,
+      "effective_damage": 3571.07,
+      "effective_dps": 81.91,
+      "effective_per_shot": 2170.73,
+      "footprint": 0.1598,
+      "k": 0.5427,
+      "reliability": 0.8528,
+      "sigma": 113.0,
+      "slot": "Armament@ELITE",
+      "weapon": "naxis_naxiriflesoldier_rifle_elite"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 4000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 3586.7,
+      "effective_dps": 43.63,
+      "effective_per_shot": 2181.31,
+      "footprint": 0.1598,
+      "k": 0.5453,
+      "reliability": 0.8567,
+      "sigma": 110.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "naxis_naxiriflesoldier_rifle"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 4000.0,
+      "eff_reload": 53.0,
+      "effective_damage": 3571.07,
+      "effective_dps": 81.91,
+      "effective_per_shot": 2170.73,
+      "footprint": 0.1598,
+      "k": 0.5427,
+      "reliability": 0.8528,
+      "sigma": 113.0,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "naxis_naxiriflesoldier_rifle_elite"
+     }
+    ]
+   },
+   "naxis_panzerfausttrooper": {
+    "armaments": [
+     {
+      "avg_versus": 0.6792,
+      "damage_total": 36000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 59713.61,
+      "effective_dps": 285.02,
+      "effective_per_shot": 38478.11,
+      "footprint": 20.565,
+      "k": 1.0688,
+      "reliability": 0.8018,
+      "sigma": 262.12,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxiShrekCons"
+     },
+     {
+      "avg_versus": 0.6792,
+      "damage_total": 36000.0,
+      "eff_reload": 138.0,
+      "effective_damage": 59152.73,
+      "effective_dps": 552.22,
+      "effective_per_shot": 38103.19,
+      "footprint": 20.565,
+      "k": 1.0584,
+      "reliability": 0.7863,
+      "sigma": 291.53,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxiShrekCons_elite"
+     },
+     {
+      "avg_versus": 0.6792,
+      "damage_total": 36000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 59713.61,
+      "effective_dps": 285.02,
+      "effective_per_shot": 38478.11,
+      "footprint": 20.565,
+      "k": 1.0688,
+      "reliability": 0.8018,
+      "sigma": 262.12,
+      "slot": "Armament@GARRISONED",
+      "weapon": "NaxiShrekCons"
+     },
+     {
+      "avg_versus": 0.6792,
+      "damage_total": 36000.0,
+      "eff_reload": 138.0,
+      "effective_damage": 59152.73,
+      "effective_dps": 552.22,
+      "effective_per_shot": 38103.19,
+      "footprint": 20.565,
+      "k": 1.0584,
+      "reliability": 0.7863,
+      "sigma": 291.53,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "NaxiShrekCons_elite"
+     }
+    ]
+   },
+   "naxis_panzerschreck": {
+    "armaments": [
+     {
+      "avg_versus": 0.6792,
+      "damage_total": 48000.0,
+      "eff_reload": 124.0,
+      "effective_damage": 78663.02,
+      "effective_dps": 408.59,
+      "effective_per_shot": 50665.1,
+      "footprint": 20.565,
+      "k": 1.0555,
+      "reliability": 0.7819,
+      "sigma": 300.15,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxiShrek"
+     },
+     {
+      "avg_versus": 0.6792,
+      "damage_total": 48000.0,
+      "eff_reload": 127.0,
+      "effective_damage": 77987.95,
+      "effective_dps": 790.71,
+      "effective_per_shot": 50210.28,
+      "footprint": 20.565,
+      "k": 1.046,
+      "reliability": 0.7679,
+      "sigma": 329.56,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxiShrek_elite"
+     },
+     {
+      "avg_versus": 0.6792,
+      "damage_total": 48000.0,
+      "eff_reload": 124.0,
+      "effective_damage": 78663.02,
+      "effective_dps": 408.59,
+      "effective_per_shot": 50665.1,
+      "footprint": 20.565,
+      "k": 1.0555,
+      "reliability": 0.7819,
+      "sigma": 300.15,
+      "slot": "Armament@GARRISONED",
+      "weapon": "NaxiShrek"
+     },
+     {
+      "avg_versus": 0.6792,
+      "damage_total": 48000.0,
+      "eff_reload": 127.0,
+      "effective_damage": 77987.95,
+      "effective_dps": 790.71,
+      "effective_per_shot": 50210.28,
+      "footprint": 20.565,
+      "k": 1.046,
+      "reliability": 0.7679,
+      "sigma": 329.56,
+      "slot": "Armament@GARRISONED_E",
+      "weapon": "NaxiShrek_elite"
+     }
+    ]
+   },
+   "naxis_portableflak": {
+    "armaments": [
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 67.0,
+      "effective_damage": 7810.85,
+      "effective_dps": 419.27,
+      "effective_per_shot": 4681.8,
+      "footprint": 7.0923,
+      "k": 0.6688,
+      "reliability": 0.6929,
+      "sigma": 267.78,
+      "slot": "Armament@Deployed",
+      "weapon": "PortableFlak"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 7796.42,
+      "effective_dps": 549.66,
+      "effective_per_shot": 4672.12,
+      "footprint": 7.0923,
+      "k": 0.6674,
+      "reliability": 0.6908,
+      "sigma": 270.0,
+      "slot": "Armament@DEPLOYEDELITE",
+      "weapon": "PortableFlak_elite"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 67.0,
+      "effective_damage": 7810.85,
+      "effective_dps": 419.27,
+      "effective_per_shot": 4681.8,
+      "footprint": 7.0923,
+      "k": 0.6688,
+      "reliability": 0.6929,
+      "sigma": 267.78,
+      "slot": "Armament@GARRISONED",
+      "weapon": "PortableFlak"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 7796.42,
+      "effective_dps": 549.66,
+      "effective_per_shot": 4672.12,
+      "footprint": 7.0923,
+      "k": 0.6674,
+      "reliability": 0.6908,
+      "sigma": 270.0,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "PortableFlak_elite"
+     }
+    ]
+   },
+   "naxis_skymage": {
+    "armaments": [
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 46.0,
+      "effective_damage": 7862.18,
+      "effective_dps": 615.17,
+      "effective_per_shot": 4716.27,
+      "footprint": 7.0923,
+      "k": 0.6738,
+      "reliability": 0.7002,
+      "sigma": 260.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "SkyMageCannon"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 47.0,
+      "effective_damage": 7848.84,
+      "effective_dps": 801.25,
+      "effective_per_shot": 4707.32,
+      "footprint": 7.0923,
+      "k": 0.6725,
+      "reliability": 0.6983,
+      "sigma": 262.0,
+      "slot": "Armament@ELITE",
+      "weapon": "SkyMageCannon_elite"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 46.0,
+      "effective_damage": 7829.01,
+      "effective_dps": 612.26,
+      "effective_per_shot": 4694.0,
+      "footprint": 7.0923,
+      "k": 0.6706,
+      "reliability": 0.6955,
+      "sigma": 265.0,
+      "slot": "Armament@AA",
+      "weapon": "SkyMageCannon_AA"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 47.0,
+      "effective_damage": 7815.91,
+      "effective_dps": 797.48,
+      "effective_per_shot": 4685.2,
+      "footprint": 7.0923,
+      "k": 0.6693,
+      "reliability": 0.6936,
+      "sigma": 267.0,
+      "slot": "Armament@ELITEAA",
+      "weapon": "SkyMageCannon_AA_elite"
+     }
+    ]
+   },
+   "naxis_slave": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 2000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 4175.14,
+      "effective_dps": 103.67,
+      "effective_per_shot": 3110.16,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RA2Shovel"
+     },
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 2000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 4175.14,
+      "effective_dps": 103.67,
+      "effective_per_shot": 3110.16,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "RA2Shovel"
+     }
+    ]
+   },
+   "naxis_slaveoverseer": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 6000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 5370.34,
+      "effective_dps": 43.54,
+      "effective_per_shot": 3265.4,
+      "footprint": 0.1598,
+      "k": 0.5442,
+      "reliability": 0.8551,
+      "sigma": 111.24,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxiRifle"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 6000.0,
+      "eff_reload": 78.0,
+      "effective_damage": 5354.71,
+      "effective_dps": 83.46,
+      "effective_per_shot": 3254.81,
+      "footprint": 0.1598,
+      "k": 0.5425,
+      "reliability": 0.8525,
+      "sigma": 113.24,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxiRifle_elite"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 6000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 5370.34,
+      "effective_dps": 43.54,
+      "effective_per_shot": 3265.4,
+      "footprint": 0.1598,
+      "k": 0.5442,
+      "reliability": 0.8551,
+      "sigma": 111.24,
+      "slot": "Armament@GARRISONED",
+      "weapon": "NaxiRifle"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 6000.0,
+      "eff_reload": 78.0,
+      "effective_damage": 5354.71,
+      "effective_dps": 83.46,
+      "effective_per_shot": 3254.81,
+      "footprint": 0.1598,
+      "k": 0.5425,
+      "reliability": 0.8525,
+      "sigma": 113.24,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "NaxiRifle_elite"
+     }
+    ]
+   },
+   "naxis_sssoldier": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 1730.61,
+      "effective_dps": 81.45,
+      "effective_per_shot": 977.42,
+      "footprint": 0.5193,
+      "k": 0.2444,
+      "reliability": 0.3677,
+      "sigma": 622.5,
+      "slot": "Armament@PRIMARY",
+      "weapon": "naxis_sssoldier_smg"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 151.0,
+      "effective_damage": 1730.61,
+      "effective_dps": 129.46,
+      "effective_per_shot": 977.42,
+      "footprint": 0.5193,
+      "k": 0.2444,
+      "reliability": 0.3677,
+      "sigma": 622.5,
+      "slot": "Armament@ELITE",
+      "weapon": "naxis_sssoldier_smg_elite"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 1730.61,
+      "effective_dps": 81.45,
+      "effective_per_shot": 977.42,
+      "footprint": 0.5193,
+      "k": 0.2444,
+      "reliability": 0.3677,
+      "sigma": 622.5,
+      "slot": "Armament@GARRISONED",
+      "weapon": "naxis_sssoldier_smg"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 151.0,
+      "effective_damage": 1730.61,
+      "effective_dps": 129.46,
+      "effective_per_shot": 977.42,
+      "footprint": 0.5193,
+      "k": 0.2444,
+      "reliability": 0.3677,
+      "sigma": 622.5,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "naxis_sssoldier_smg_elite"
+     }
+    ]
+   },
+   "undead.nax": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 6000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 5370.34,
+      "effective_dps": 43.54,
+      "effective_per_shot": 3265.4,
+      "footprint": 0.1598,
+      "k": 0.5442,
+      "reliability": 0.8551,
+      "sigma": 111.24,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxiRifle"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 6000.0,
+      "eff_reload": 78.0,
+      "effective_damage": 5354.71,
+      "effective_dps": 83.46,
+      "effective_per_shot": 3254.81,
+      "footprint": 0.1598,
+      "k": 0.5425,
+      "reliability": 0.8525,
+      "sigma": 113.24,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxiRifle_elite"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 6000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 5370.34,
+      "effective_dps": 43.54,
+      "effective_per_shot": 3265.4,
+      "footprint": 0.1598,
+      "k": 0.5442,
+      "reliability": 0.8551,
+      "sigma": 111.24,
+      "slot": "Armament@GARRISONED",
+      "weapon": "NaxiRifle"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 6000.0,
+      "eff_reload": 78.0,
+      "effective_damage": 5354.71,
+      "effective_dps": 83.46,
+      "effective_per_shot": 3254.81,
+      "footprint": 0.1598,
+      "k": 0.5425,
+      "reliability": 0.8525,
+      "sigma": 113.24,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "NaxiRifle_elite"
+     }
+    ]
+   }
+  },
+  "naval": {
+   "muboat.nax": {
+    "armaments": [
+     {
+      "avg_versus": 0.6521,
+      "damage_total": 48000.0,
+      "eff_reload": 131.0,
+      "effective_damage": 67941.76,
+      "effective_dps": 600.47,
+      "effective_per_shot": 39331.08,
+      "footprint": 13.4998,
+      "k": 0.8194,
+      "reliability": 0.2905,
+      "sigma": 2750.0,
+      "slot": "Armament",
+      "weapon": "NaxiMissileUboat"
+     }
+    ]
+   },
+   "nax_bitsmark": {
+    "armaments": [
+     {
+      "avg_versus": 0.6739,
+      "damage_total": 80000.0,
+      "eff_reload": 250.0,
+      "effective_damage": 107251.7,
+      "effective_dps": 568.44,
+      "effective_per_shot": 71054.39,
+      "footprint": 9.1496,
+      "k": 0.8882,
+      "reliability": 0.197,
+      "sigma": 3700.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "8Inch"
+     },
+     {
+      "avg_versus": 0.6739,
+      "damage_total": 80000.0,
+      "eff_reload": 250.0,
+      "effective_damage": 107251.7,
+      "effective_dps": 568.44,
+      "effective_per_shot": 71054.39,
+      "footprint": 9.1496,
+      "k": 0.8882,
+      "reliability": 0.197,
+      "sigma": 3700.0,
+      "slot": "Armament@SECONDARY",
+      "weapon": "8Inch"
+     },
+     {
+      "avg_versus": 0.6739,
+      "damage_total": 80000.0,
+      "eff_reload": 250.0,
+      "effective_damage": 107251.7,
+      "effective_dps": 568.44,
+      "effective_per_shot": 71054.39,
+      "footprint": 9.1496,
+      "k": 0.8882,
+      "reliability": 0.197,
+      "sigma": 3700.0,
+      "slot": "Armament@TERCERA",
+      "weapon": "8Inch"
+     },
+     {
+      "avg_versus": 0.6739,
+      "damage_total": 80000.0,
+      "eff_reload": 250.0,
+      "effective_damage": 107251.7,
+      "effective_dps": 568.44,
+      "effective_per_shot": 71054.39,
+      "footprint": 9.1496,
+      "k": 0.8882,
+      "reliability": 0.197,
+      "sigma": 3700.0,
+      "slot": "Armament@CUARTA",
+      "weapon": "8Inch"
+     }
+    ]
+   },
+   "tuboat.nax": {
+    "armaments": [
+     {
+      "avg_versus": 0.6478,
+      "damage_total": 24000.0,
+      "eff_reload": 128.0,
+      "effective_damage": 41539.83,
+      "effective_dps": 357.67,
+      "effective_per_shot": 22891.0,
+      "footprint": 9.1496,
+      "k": 0.9538,
+      "reliability": 0.5871,
+      "sigma": 1000.0,
+      "slot": "Armament@Torp",
+      "weapon": "AsianSmallTorpedo"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "assault.nax": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 28.0,
+      "effective_damage": 19131.0,
+      "effective_dps": 400.24,
+      "effective_per_shot": 11206.65,
+      "footprint": 4.3503,
+      "k": 1.1207,
+      "reliability": 0.8255,
+      "sigma": 502.33,
+      "slot": "Armament",
+      "weapon": "Nax120mmAssault"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 31.0,
+      "effective_damage": 18996.13,
+      "effective_dps": 716.39,
+      "effective_per_shot": 11103.98,
+      "footprint": 4.3503,
+      "k": 1.1104,
+      "reliability": 0.812,
+      "sigma": 541.25,
+      "slot": "Armament@elite",
+      "weapon": "Nax120mmAssault_elite"
+     },
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 6000.0,
+      "eff_reload": 56.0,
+      "effective_damage": 9638.33,
+      "effective_dps": 486.21,
+      "effective_per_shot": 6806.91,
+      "footprint": 13.4998,
+      "k": 1.1345,
+      "reliability": 0.4814,
+      "sigma": 1555.9,
+      "slot": "Armament@Flam",
+      "weapon": "SyndicateFireballLauncher"
+     }
+    ]
+   },
+   "car.nax": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 4927.34,
+      "effective_dps": 220.01,
+      "effective_per_shot": 2933.46,
+      "footprint": 0.5193,
+      "k": 0.3667,
+      "reliability": 0.551,
+      "sigma": 415.11,
+      "slot": "Armament",
+      "weapon": "NaxiWW2MachinegunTop"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 4927.34,
+      "effective_dps": 220.01,
+      "effective_per_shot": 2933.46,
+      "footprint": 0.5193,
+      "k": 0.3667,
+      "reliability": 0.551,
+      "sigma": 415.11,
+      "slot": "Armament@AA",
+      "weapon": "NaxiWW2MachinegunTop_AA"
+     }
+    ]
+   },
+   "naxis_brummbar": {
+    "armaments": [
+     {
+      "avg_versus": 0.7286,
+      "damage_total": 42000.0,
+      "eff_reload": 140.0,
+      "effective_damage": 76037.33,
+      "effective_dps": 368.99,
+      "effective_per_shot": 51658.37,
+      "footprint": 17.1334,
+      "k": 1.23,
+      "reliability": 0.3826,
+      "sigma": 2400.0,
+      "slot": "Armament@AG",
+      "weapon": "NaxBrummbarArty"
+     },
+     {
+      "avg_versus": 0.7286,
+      "damage_total": 42000.0,
+      "eff_reload": 143.0,
+      "effective_damage": 75596.89,
+      "effective_dps": 717.74,
+      "effective_per_shot": 51318.76,
+      "footprint": 17.1334,
+      "k": 1.2219,
+      "reliability": 0.3721,
+      "sigma": 2471.43,
+      "slot": "Armament@elite",
+      "weapon": "NaxBrummbarArty_elite"
+     }
+    ]
+   },
+   "naxis_grille": {
+    "armaments": [
+     {
+      "avg_versus": 0.6851,
+      "damage_total": 48000.0,
+      "eff_reload": 111.0,
+      "effective_damage": 73380.5,
+      "effective_dps": 411.57,
+      "effective_per_shot": 45683.76,
+      "footprint": 13.4998,
+      "k": 0.9517,
+      "reliability": 0.4038,
+      "sigma": 1975.44,
+      "slot": "Armament@AG",
+      "weapon": "NaxGrilleArty"
+     },
+     {
+      "avg_versus": 0.6851,
+      "damage_total": 48000.0,
+      "eff_reload": 114.0,
+      "effective_damage": 72896.44,
+      "effective_dps": 795.27,
+      "effective_per_shot": 45330.59,
+      "footprint": 13.4998,
+      "k": 0.9444,
+      "reliability": 0.3937,
+      "sigma": 2034.78,
+      "slot": "Armament@elite",
+      "weapon": "NaxGrilleArty_elite"
+     }
+    ]
+   },
+   "naxis_halftrack": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 4960.33,
+      "effective_dps": 221.67,
+      "effective_per_shot": 2955.64,
+      "footprint": 0.5193,
+      "k": 0.3695,
+      "reliability": 0.5551,
+      "sigma": 411.14,
+      "slot": "Armament@AG",
+      "weapon": "NaxiWW2Machinegun"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 8000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 4914.09,
+      "effective_dps": 219.34,
+      "effective_per_shot": 2924.55,
+      "footprint": 0.5193,
+      "k": 0.3656,
+      "reliability": 0.5493,
+      "sigma": 416.71,
+      "slot": "Armament@AA",
+      "weapon": "NaxiWW2Machinegun_AA"
+     }
+    ]
+   },
+   "naxis_hetzer": {
+    "armaments": [
+     {
+      "avg_versus": 0.6424,
+      "damage_total": 40000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 68551.3,
+      "effective_dps": 469.6,
+      "effective_per_shot": 37568.34,
+      "footprint": 7.1082,
+      "k": 0.9392,
+      "reliability": 0.8253,
+      "sigma": 350.06,
+      "slot": "Armament@AG",
+      "weapon": "NaxiHetzerDestroyer"
+     },
+     {
+      "avg_versus": 0.6424,
+      "damage_total": 40000.0,
+      "eff_reload": 83.0,
+      "effective_damage": 69184.35,
+      "effective_dps": 915.85,
+      "effective_per_shot": 38007.84,
+      "footprint": 7.1082,
+      "k": 0.9502,
+      "reliability": 0.8411,
+      "sigma": 318.3,
+      "slot": "Armament@elite",
+      "weapon": "NaxiHetzerDestroyer_elite"
+     }
+    ]
+   },
+   "naxis_imperialturbotank": {
+    "armaments": [
+     {
+      "avg_versus": 0.685,
+      "damage_total": 60000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 118226.73,
+      "effective_dps": 831.32,
+      "effective_per_shot": 74818.48,
+      "footprint": 13.4998,
+      "k": 1.247,
+      "reliability": 0.8455,
+      "sigma": 350.16,
+      "slot": "Armament@AG",
+      "weapon": "NaxiJadgDestroyer"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 28.0,
+      "effective_damage": 19131.0,
+      "effective_dps": 400.24,
+      "effective_per_shot": 11206.65,
+      "footprint": 4.3503,
+      "k": 1.1207,
+      "reliability": 0.8255,
+      "sigma": 502.33,
+      "slot": "Armament",
+      "weapon": "Nax120mmAssault"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 31.0,
+      "effective_damage": 18996.13,
+      "effective_dps": 716.39,
+      "effective_per_shot": 11103.98,
+      "footprint": 4.3503,
+      "k": 1.1104,
+      "reliability": 0.812,
+      "sigma": 541.25,
+      "slot": "Armament@elite",
+      "weapon": "Nax120mmAssault_elite"
+     }
+    ]
+   },
+   "naxis_jagdpanzer": {
+    "armaments": [
+     {
+      "avg_versus": 0.685,
+      "damage_total": 60000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 118226.73,
+      "effective_dps": 831.32,
+      "effective_per_shot": 74818.48,
+      "footprint": 13.4998,
+      "k": 1.247,
+      "reliability": 0.8455,
+      "sigma": 350.16,
+      "slot": "Armament@AG",
+      "weapon": "NaxiJadgDestroyer"
+     },
+     {
+      "avg_versus": 0.685,
+      "damage_total": 60000.0,
+      "eff_reload": 93.0,
+      "effective_damage": 117513.89,
+      "effective_dps": 1597.56,
+      "effective_per_shot": 74286.55,
+      "footprint": 13.4998,
+      "k": 1.2381,
+      "reliability": 0.8336,
+      "sigma": 377.23,
+      "slot": "Armament@elite",
+      "weapon": "NaxiJadgDestroyer_elite"
+     }
+    ]
+   },
+   "naxis_kingtigerheavytank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 20000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 38278.19,
+      "effective_dps": 448.51,
+      "effective_per_shot": 22425.65,
+      "footprint": 4.3503,
+      "k": 1.1213,
+      "reliability": 0.8263,
+      "sigma": 500.0,
+      "slot": "Armament",
+      "weapon": "KingNaxTigerCannon"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 20000.0,
+      "eff_reload": 53.0,
+      "effective_damage": 38000.88,
+      "effective_dps": 838.28,
+      "effective_per_shot": 22214.52,
+      "footprint": 4.3503,
+      "k": 1.1107,
+      "reliability": 0.8125,
+      "sigma": 540.0,
+      "slot": "Armament@elite",
+      "weapon": "KingNaxTigerCannon_elite"
+     }
+    ]
+   },
+   "naxis_kubelwagen": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 2478.61,
+      "effective_dps": 88.61,
+      "effective_per_shot": 1476.77,
+      "footprint": 0.5193,
+      "k": 0.3692,
+      "reliability": 0.5547,
+      "sigma": 411.51,
+      "slot": "Armament@AG",
+      "weapon": "NaxiWW2KübelwagenMachinegun"
+     }
+    ]
+   },
+   "naxis_maus": {
+    "armaments": [
+     {
+      "avg_versus": 0.6934,
+      "damage_total": 60000.0,
+      "eff_reload": 99.0,
+      "effective_damage": 94463.63,
+      "effective_dps": 637.41,
+      "effective_per_shot": 63103.42,
+      "footprint": 20.6538,
+      "k": 1.0517,
+      "reliability": 0.7138,
+      "sigma": 500.18,
+      "slot": "Armament",
+      "weapon": "NaxMausCannon"
+     },
+     {
+      "avg_versus": 0.6934,
+      "damage_total": 60000.0,
+      "eff_reload": 102.0,
+      "effective_damage": 93782.72,
+      "effective_dps": 1227.86,
+      "effective_per_shot": 62620.84,
+      "footprint": 20.6538,
+      "k": 1.0437,
+      "reliability": 0.7025,
+      "sigma": 533.54,
+      "slot": "Armament@elite",
+      "weapon": "NaxMausCannon_elite"
+     }
+    ]
+   },
+   "naxis_nokana": {
+    "armaments": [
+     {
+      "avg_versus": 0.6934,
+      "damage_total": 60000.0,
+      "eff_reload": 99.0,
+      "effective_damage": 94463.63,
+      "effective_dps": 637.41,
+      "effective_per_shot": 63103.42,
+      "footprint": 20.6538,
+      "k": 1.0517,
+      "reliability": 0.7138,
+      "sigma": 500.18,
+      "slot": "Armament@AG",
+      "weapon": "NaxMausCannon"
+     },
+     {
+      "avg_versus": 0.6133,
+      "damage_total": 40000.0,
+      "eff_reload": 58.0,
+      "effective_damage": 67338.17,
+      "effective_dps": 1234.65,
+      "effective_per_shot": 35804.78,
+      "footprint": 14.2165,
+      "k": 0.8951,
+      "reliability": 0.7949,
+      "sigma": 411.67,
+      "slot": "Armament@RK",
+      "weapon": "LatinBuggyRocket_elite"
+     },
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 6000.0,
+      "eff_reload": 56.0,
+      "effective_damage": 9638.33,
+      "effective_dps": 486.21,
+      "effective_per_shot": 6806.91,
+      "footprint": 13.4998,
+      "k": 1.1345,
+      "reliability": 0.4814,
+      "sigma": 1555.9,
+      "slot": "Armament@Flam",
+      "weapon": "SyndicateFireballLauncher"
+     }
+    ]
+   },
+   "naxis_oldtank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6424,
+      "damage_total": 28000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 50164.36,
+      "effective_dps": 371.02,
+      "effective_per_shot": 27826.85,
+      "footprint": 7.1082,
+      "k": 0.9938,
+      "reliability": 0.9031,
+      "sigma": 194.17,
+      "slot": "Armament",
+      "weapon": "NaxiAntiTankCannon"
+     }
+    ]
+   },
+   "naxis_ratte": {
+    "armaments": [
+     {
+      "avg_versus": 0.6905,
+      "damage_total": 150000.0,
+      "eff_reload": 155.0,
+      "effective_damage": 256983.86,
+      "effective_dps": 2101.78,
+      "effective_per_shot": 162887.74,
+      "footprint": 11.1338,
+      "k": 1.0859,
+      "reliability": 0.7854,
+      "sigma": 544.4,
+      "slot": "Armament",
+      "weapon": "NaxRatteCannon"
+     },
+     {
+      "avg_versus": 0.6905,
+      "damage_total": 150000.0,
+      "eff_reload": 154.0,
+      "effective_damage": 254639.47,
+      "effective_dps": 4187.66,
+      "effective_per_shot": 161224.94,
+      "footprint": 11.1338,
+      "k": 1.0748,
+      "reliability": 0.7698,
+      "sigma": 584.4,
+      "slot": "Armament@elite",
+      "weapon": "NaxRatteCannon_elite"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 7808.71,
+      "effective_dps": 550.63,
+      "effective_per_shot": 4680.37,
+      "footprint": 7.0923,
+      "k": 0.6686,
+      "reliability": 0.6926,
+      "sigma": 268.1,
+      "slot": "Armament@AA1",
+      "weapon": "NaxQuadCannon_AA_elite"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 7808.71,
+      "effective_dps": 550.63,
+      "effective_per_shot": 4680.37,
+      "footprint": 7.0923,
+      "k": 0.6686,
+      "reliability": 0.6926,
+      "sigma": 268.1,
+      "slot": "Armament@AA2",
+      "weapon": "NaxQuadCannon_AA_elite"
+     }
+    ]
+   },
+   "naxis_shoekarn": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 19107.51,
+      "effective_dps": 207.2,
+      "effective_per_shot": 11188.75,
+      "footprint": 4.3503,
+      "k": 1.1189,
+      "reliability": 0.8232,
+      "sigma": 509.11,
+      "slot": "Armament",
+      "weapon": "RA2120mm"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 57.0,
+      "effective_damage": 18972.71,
+      "effective_dps": 388.99,
+      "effective_per_shot": 11086.18,
+      "footprint": 4.3503,
+      "k": 1.1086,
+      "reliability": 0.8097,
+      "sigma": 548.02,
+      "slot": "Armament@elite",
+      "weapon": "RA2120mm_elite"
+     },
+     {
+      "avg_versus": 0.6851,
+      "damage_total": 48000.0,
+      "eff_reload": 111.0,
+      "effective_damage": 73380.5,
+      "effective_dps": 411.57,
+      "effective_per_shot": 45683.76,
+      "footprint": 13.4998,
+      "k": 0.9517,
+      "reliability": 0.4038,
+      "sigma": 1975.44,
+      "slot": "Armament@mortar",
+      "weapon": "NaxGrilleArty"
+     },
+     {
+      "avg_versus": 0.6521,
+      "damage_total": 24000.0,
+      "eff_reload": 250.0,
+      "effective_damage": 50999.66,
+      "effective_dps": 127.03,
+      "effective_per_shot": 31756.8,
+      "footprint": 13.4998,
+      "k": 1.3232,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@scud",
+      "weapon": "NaxShoeRocket"
+     }
+    ]
+   },
+   "naxis_sturmtiger": {
+    "armaments": [
+     {
+      "avg_versus": 0.683,
+      "damage_total": 80000.0,
+      "eff_reload": 140.0,
+      "effective_damage": 123561.99,
+      "effective_dps": 559.06,
+      "effective_per_shot": 78268.66,
+      "footprint": 13.4998,
+      "k": 0.9784,
+      "reliability": 0.3651,
+      "sigma": 2275.0,
+      "slot": "Armament@AG",
+      "weapon": "NaxSturmArty"
+     }
+    ]
+   },
+   "panzer.nax": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 8000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 15310.33,
+      "effective_dps": 199.32,
+      "effective_per_shot": 8969.54,
+      "footprint": 4.3503,
+      "k": 1.1212,
+      "reliability": 0.8262,
+      "sigma": 500.34,
+      "slot": "Armament",
+      "weapon": "RA2105mm"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 8000.0,
+      "eff_reload": 48.0,
+      "effective_damage": 15205.28,
+      "effective_dps": 370.4,
+      "effective_per_shot": 8889.56,
+      "footprint": 4.3503,
+      "k": 1.1112,
+      "reliability": 0.8131,
+      "sigma": 538.22,
+      "slot": "Armament@elite",
+      "weapon": "RA2105mm_elite"
+     }
+    ]
+   },
+   "tiger.nax": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 19139.1,
+      "effective_dps": 224.26,
+      "effective_per_shot": 11212.83,
+      "footprint": 4.3503,
+      "k": 1.1213,
+      "reliability": 0.8263,
+      "sigma": 500.0,
+      "slot": "Armament",
+      "weapon": "NaxTigerCannon"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 53.0,
+      "effective_damage": 19000.44,
+      "effective_dps": 419.14,
+      "effective_per_shot": 11107.26,
+      "footprint": 4.3503,
+      "k": 1.1107,
+      "reliability": 0.8125,
+      "sigma": 540.0,
+      "slot": "Armament@elite",
+      "weapon": "NaxTigerCannon_elite"
+     }
+    ]
+   },
+   "wirbelwind.nax": {
+    "armaments": [
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 67.0,
+      "effective_damage": 7857.26,
+      "effective_dps": 422.06,
+      "effective_per_shot": 4712.97,
+      "footprint": 7.0923,
+      "k": 0.6733,
+      "reliability": 0.6995,
+      "sigma": 260.74,
+      "slot": "Armament",
+      "weapon": "NaxQuadCannon"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 7843.96,
+      "effective_dps": 553.42,
+      "effective_per_shot": 4704.03,
+      "footprint": 7.0923,
+      "k": 0.672,
+      "reliability": 0.6976,
+      "sigma": 262.74,
+      "slot": "Armament@elite",
+      "weapon": "NaxQuadCannon_elite"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 67.0,
+      "effective_damage": 7821.77,
+      "effective_dps": 419.92,
+      "effective_per_shot": 4689.13,
+      "footprint": 7.0923,
+      "k": 0.6699,
+      "reliability": 0.6945,
+      "sigma": 266.1,
+      "slot": "Armament@AA",
+      "weapon": "NaxQuadCannon_AA"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 7000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 7808.71,
+      "effective_dps": 550.63,
+      "effective_per_shot": 4680.37,
+      "footprint": 7.0923,
+      "k": 0.6686,
+      "reliability": 0.6926,
+      "sigma": 268.1,
+      "slot": "Armament@eliteAA",
+      "weapon": "NaxQuadCannon_AA_elite"
+     }
+    ]
+   }
+  }
+ }
+}

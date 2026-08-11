@@ -1,0 +1,153 @@
+{
+ "ledger": "shared_d2k",
+ "pack": "mods/cameo/ContentPacks/D2k/Shared",
+ "schema": 2,
+ "sections": {
+  "infantry": {
+   "fremen_creep": {
+    "armaments": [
+     {
+      "avg_versus": 0.653,
+      "damage_total": 6000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 4395.08,
+      "effective_dps": 139.88,
+      "effective_per_shot": 2797.69,
+      "footprint": 0.5293,
+      "k": 0.4663,
+      "reliability": 0.6884,
+      "sigma": 130.72,
+      "slot": "Armament@PRIMARY",
+      "weapon": "HMG_fremen"
+     },
+     {
+      "avg_versus": 0.7721,
+      "damage_total": 5200.0,
+      "eff_reload": 45.0,
+      "effective_damage": 5849.61,
+      "effective_dps": 79.42,
+      "effective_per_shot": 3573.9,
+      "footprint": 6.4016,
+      "k": 0.6873,
+      "reliability": 0.5088,
+      "sigma": 171.07,
+      "slot": "Armament@SECONDARY",
+      "weapon": "Fremen_RPG"
+     }
+    ]
+   },
+   "light_inf": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 3587.8,
+      "effective_dps": 112.47,
+      "effective_per_shot": 2249.34,
+      "footprint": 0.5193,
+      "k": 0.5623,
+      "reliability": 0.832,
+      "sigma": 154.75,
+      "slot": "Armament@PRIMARY",
+      "weapon": "light_inf_lmg"
+     },
+     {
+      "avg_versus": 0.6738,
+      "damage_total": 6000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 7122.72,
+      "effective_dps": 230.89,
+      "effective_per_shot": 4617.87,
+      "footprint": 6.9109,
+      "k": 0.7696,
+      "reliability": 0.6112,
+      "sigma": 472.5,
+      "slot": "Armament@Upgrade",
+      "weapon": "light_inf_lmg_upgrade"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 3587.8,
+      "effective_dps": 112.47,
+      "effective_per_shot": 2249.34,
+      "footprint": 0.5193,
+      "k": 0.5623,
+      "reliability": 0.832,
+      "sigma": 154.75,
+      "slot": "Armament@GARRISONED",
+      "weapon": "light_inf_lmg"
+     },
+     {
+      "avg_versus": 0.6738,
+      "damage_total": 6000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 7122.72,
+      "effective_dps": 230.89,
+      "effective_per_shot": 4617.87,
+      "footprint": 6.9109,
+      "k": 0.7696,
+      "reliability": 0.6112,
+      "sigma": 472.5,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "light_inf_lmg_upgrade"
+     }
+    ]
+   },
+   "trooper": {
+    "armaments": [
+     {
+      "avg_versus": 0.6086,
+      "damage_total": 24000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 48767.23,
+      "effective_dps": 381.58,
+      "effective_per_shot": 24421.14,
+      "footprint": 13.4998,
+      "k": 1.0175,
+      "reliability": 0.907,
+      "sigma": 210.74,
+      "slot": "Armament",
+      "weapon": "D2K_Rocket_Trooper"
+     },
+     {
+      "avg_versus": 0.6086,
+      "damage_total": 24000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 48767.23,
+      "effective_dps": 381.58,
+      "effective_per_shot": 24421.14,
+      "footprint": 13.4998,
+      "k": 1.0175,
+      "reliability": 0.907,
+      "sigma": 210.74,
+      "slot": "Armament@garrisoned",
+      "weapon": "D2K_Rocket_Trooper"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "siege_tank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6824,
+      "damage_total": 48000.0,
+      "eff_reload": 74.0,
+      "effective_damage": 82805.22,
+      "effective_dps": 723.43,
+      "effective_per_shot": 53533.68,
+      "footprint": 17.8501,
+      "k": 1.1153,
+      "reliability": 0.6095,
+      "sigma": 1057.67,
+      "slot": "Armament",
+      "weapon": "D2K_155mm"
+     }
+    ]
+   }
+  }
+ }
+}

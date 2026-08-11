@@ -86,32 +86,85 @@ A_SELF = 1.0
 BLOB_UPTIME = 0.30
 
 
-def _ruleset() -> Ruleset:
-    return Ruleset(ROOT)
+_INJECTED: Ruleset | None = None
+
+
+def use_ruleset(rs: Ruleset) -> None:
+    """Reuse a Ruleset the caller has already built, instead of building our own.
+
+    The census resolves EVERY actor in the tree, so a cold call costs ~7s and a
+    fresh `Ruleset(ROOT)` costs about as much again. `extract_stats` and the audits
+    already hold a fully-built Ruleset when they ask for the weights — handing it
+    over turns a ~15s tax into ~3s. Purely an optimisation: the numbers are
+    identical either way.
+    """
+    global _INJECTED
+    _INJECTED = rs
+    for fn in (_ruleset, _scan, armor_census, hp_by_macro, armor_weights, reference_hp):
+        fn.cache_clear()
 
 
 @functools.lru_cache(maxsize=1)
-def armor_census() -> dict[str, int]:
-    """{armor type: number of LIVE concrete actors with it}, resolved (not raw yaml).
+def _ruleset() -> Ruleset:
+    return _INJECTED if _INJECTED is not None else Ruleset(ROOT)
 
-    Resolved so an actor inheriting its armor from a class template is counted,
-    and templates themselves are not.
+
+@functools.lru_cache(maxsize=1)
+def _scan() -> tuple[dict[str, int], dict[str, list[int]]]:
+    """One pass over the resolved roster -> (armor census, HP buckets per macro).
+
+    Both consumers need the same expensive thing — every actor RESOLVED, so that an
+    actor inheriting its armor from a class template is counted and templates are
+    not — so they share a single walk rather than resolving the tree twice.
     """
     rs = _ruleset()
     counts: collections.Counter[str] = collections.Counter()
+    buckets: dict[str, list[int]] = {m: [] for m in ENGAGEMENT}
     for name in rs.actors:
         if name.startswith(("^", "$", "-")) or "." in name:
             continue
         node = rs.resolve(name)
         if node is None:
             continue
+        armor = None
         for child in node.children:
+            # First CANONICAL armor wins. Not simply the first `Armor` node: an actor
+            # can carry several (upgrade variants), and an unrecognised Type on the
+            # first one must not hide a real armor further down.
             if child.key == "Armor" or child.key.startswith("Armor@"):
-                armor = child.get("Type")
-                if armor and str(armor).strip() in ARMORS:
-                    counts[str(armor).strip()] += 1
-                    break                       # one armor per actor
-    return dict(counts)
+                value = child.get("Type")
+                if value and str(value).strip() in ARMORS:
+                    armor = str(value).strip()
+                    break
+        if armor is None:
+            continue
+        counts[armor] += 1
+        health = node.child("Health")
+        if health is None:
+            continue
+        hp = _hp_value(health.get("HP"))
+        if hp and hp > 0:
+            buckets[ARMOR_MACRO[armor]].append(hp)
+    return dict(counts), buckets
+
+
+def _hp_value(raw) -> int | None:
+    """`HP` as an int, or None when the field is not numeric.
+
+    An unresolved placeholder is skipped by the caller rather than swallowed by a
+    handler — the pattern `effective_damage.damage_value` documents
+    (`audit_error_handling.py` E2).
+    """
+    try:
+        return int(float(str(raw)))
+    except (TypeError, ValueError):
+        return None
+
+
+@functools.lru_cache(maxsize=1)
+def armor_census() -> dict[str, int]:
+    """{armor type: number of LIVE concrete actors with it}, resolved (not raw yaml)."""
+    return _scan()[0]
 
 
 # How often a random shot is fired AT each macro class. Prevalence alone is not
@@ -155,30 +208,7 @@ def hp_by_macro() -> dict[str, int]:
     on what it hits — 5% of an infantryman and 5% of a dreadnought are different
     weapons.
     """
-    rs = _ruleset()
-    buckets: dict[str, list[int]] = {m: [] for m in ENGAGEMENT}
-    for name in rs.actors:
-        if name.startswith(("^", "$", "-")) or "." in name:
-            continue
-        node = rs.resolve(name)
-        if node is None:
-            continue
-        health = node.child("Health")
-        if health is None:
-            continue
-        armor = None
-        for child in node.children:
-            if child.key == "Armor" or child.key.startswith("Armor@"):
-                armor = str(child.get("Type") or "").strip()
-                break
-        if armor not in ARMOR_MACRO:
-            continue
-        try:
-            hp = int(float(str(health.get("HP"))))
-        except (TypeError, ValueError):
-            continue
-        if hp > 0:
-            buckets[ARMOR_MACRO[armor]].append(hp)
+    buckets = _scan()[1]
     return {m: int(statistics.median(v)) if v else 0 for m, v in buckets.items()}
 
 

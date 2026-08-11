@@ -1,0 +1,751 @@
+{
+ "ledger": "warcraft2_humans",
+ "pack": "mods/cameo/ContentPacks/Warcraft2/Humans",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "wc2_humans_gryphonrider": {
+    "armaments": [
+     {
+      "avg_versus": 0.7843,
+      "damage_total": 45000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 55286.42,
+      "effective_dps": 434.31,
+      "effective_per_shot": 43431.26,
+      "footprint": 10.8254,
+      "k": 0.9651,
+      "reliability": 0.6871,
+      "sigma": 250.18,
+      "slot": "Armament@VISIBLE",
+      "weapon": "wc2gryphonFireVisible"
+     }
+    ]
+   }
+  },
+  "defenses": {
+   "wc2_humans_cannontower": {
+    "armaments": [
+     {
+      "avg_versus": 0.6289,
+      "damage_total": 19000.0,
+      "eff_reload": 34.0,
+      "effective_damage": 10414.52,
+      "effective_dps": 165.62,
+      "effective_per_shot": 5631.15,
+      "footprint": 0.7835,
+      "k": 0.2964,
+      "reliability": 0.5027,
+      "sigma": 291.67,
+      "slot": "Armament@guard",
+      "weapon": "wc2_tower_arrow"
+     },
+     {
+      "avg_versus": 0.6819,
+      "damage_total": 60000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 60951.56,
+      "effective_dps": 457.95,
+      "effective_per_shot": 41215.11,
+      "footprint": 32.3092,
+      "k": 0.6869,
+      "reliability": 0.4774,
+      "sigma": 660.16,
+      "slot": "Armament@cannon",
+      "weapon": "wc2cannontowerFire"
+     }
+    ]
+   },
+   "wc2_humans_guardtower": {
+    "armaments": [
+     {
+      "avg_versus": 0.6289,
+      "damage_total": 19000.0,
+      "eff_reload": 34.0,
+      "effective_damage": 10414.52,
+      "effective_dps": 165.62,
+      "effective_per_shot": 5631.15,
+      "footprint": 0.7835,
+      "k": 0.2964,
+      "reliability": 0.5027,
+      "sigma": 291.67,
+      "slot": "Armament@guard",
+      "weapon": "wc2_tower_arrow"
+     },
+     {
+      "avg_versus": 0.6819,
+      "damage_total": 60000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 60951.56,
+      "effective_dps": 457.95,
+      "effective_per_shot": 41215.11,
+      "footprint": 32.3092,
+      "k": 0.6869,
+      "reliability": 0.4774,
+      "sigma": 660.16,
+      "slot": "Armament@cannon",
+      "weapon": "wc2cannontowerFire"
+     }
+    ]
+   },
+   "wc2_humans_humanscouttower": {
+    "armaments": [
+     {
+      "avg_versus": 0.6289,
+      "damage_total": 19000.0,
+      "eff_reload": 34.0,
+      "effective_damage": 10414.52,
+      "effective_dps": 165.62,
+      "effective_per_shot": 5631.15,
+      "footprint": 0.7835,
+      "k": 0.2964,
+      "reliability": 0.5027,
+      "sigma": 291.67,
+      "slot": "Armament@guard",
+      "weapon": "wc2_tower_arrow"
+     },
+     {
+      "avg_versus": 0.6819,
+      "damage_total": 60000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 60951.56,
+      "effective_dps": 457.95,
+      "effective_per_shot": 41215.11,
+      "footprint": 32.3092,
+      "k": 0.6869,
+      "reliability": 0.4774,
+      "sigma": 660.16,
+      "slot": "Armament@cannon",
+      "weapon": "wc2cannontowerFire"
+     }
+    ]
+   }
+  },
+  "infantry": {
+   "wc2_humans_archmage": {
+    "armaments": [
+     {
+      "avg_versus": 1.0619,
+      "damage_total": 12000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 11477.25,
+      "effective_dps": 319.62,
+      "effective_per_shot": 12784.97,
+      "footprint": 2.5087,
+      "k": 1.0654,
+      "reliability": 0.7181,
+      "sigma": 250.0,
+      "slot": "Armament",
+      "weapon": "wc2mageFire"
+     },
+     {
+      "avg_versus": 1.0619,
+      "damage_total": 12000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 11477.25,
+      "effective_dps": 319.62,
+      "effective_per_shot": 12784.97,
+      "footprint": 2.5087,
+      "k": 1.0654,
+      "reliability": 0.7181,
+      "sigma": 250.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "wc2mageFire"
+     },
+     {
+      "avg_versus": 0.6663,
+      "damage_total": 18000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 13221.95,
+      "effective_dps": 107.96,
+      "effective_per_shot": 8636.65,
+      "footprint": 13.749,
+      "k": 0.4798,
+      "reliability": 0.3526,
+      "sigma": 666.67,
+      "slot": "Armament@FIREBALL_VISIBLE",
+      "weapon": "wc2mageFireballVisible"
+     },
+     {
+      "avg_versus": 0.6663,
+      "damage_total": 18000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 13221.95,
+      "effective_dps": 539.79,
+      "effective_per_shot": 8636.65,
+      "footprint": 13.749,
+      "k": 0.4798,
+      "reliability": 0.3526,
+      "sigma": 666.67,
+      "slot": "Armament@FIREBALL_EXPLOSIONS",
+      "weapon": "wc2mageFireballExplosion"
+     },
+     {
+      "avg_versus": 0.856,
+      "damage_total": 1.0,
+      "eff_reload": 60.0,
+      "effective_damage": 0.92,
+      "effective_dps": 0.01,
+      "effective_per_shot": 0.78,
+      "footprint": 0.01,
+      "k": 0.7846,
+      "reliability": 0.9166,
+      "sigma": 16.0,
+      "slot": "Armament@SLOW",
+      "weapon": "wc2mageSlow"
+     },
+     {
+      "avg_versus": 1.0,
+      "damage_total": 1.0,
+      "eff_reload": 50.0,
+      "effective_damage": 1.0,
+      "effective_dps": 0.02,
+      "effective_per_shot": 1.0,
+      "footprint": 0.01,
+      "k": 1.0,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@BLIZZARD",
+      "weapon": "wc2mageBlizzard"
+     }
+    ]
+   },
+   "wc2_humans_dwarvenrifleman": {
+    "armaments": [
+     {
+      "avg_versus": 0.6244,
+      "damage_total": 25000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 16435.14,
+      "effective_dps": 162.95,
+      "effective_per_shot": 9776.94,
+      "footprint": 0.4943,
+      "k": 0.3911,
+      "reliability": 0.6353,
+      "sigma": 163.87,
+      "slot": "Armament",
+      "weapon": "wc2_dwarf_Rifle"
+     },
+     {
+      "avg_versus": 0.6244,
+      "damage_total": 25000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 16435.14,
+      "effective_dps": 162.95,
+      "effective_per_shot": 9776.94,
+      "footprint": 0.4943,
+      "k": 0.3911,
+      "reliability": 0.6353,
+      "sigma": 163.87,
+      "slot": "Armament@GARRISONED",
+      "weapon": "wc2_dwarf_Rifle"
+     }
+    ]
+   },
+   "wc2_humans_elvenarcher": {
+    "armaments": [
+     {
+      "avg_versus": 0.6279,
+      "damage_total": 24000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 22380.75,
+      "effective_dps": 516.12,
+      "effective_per_shot": 12903.07,
+      "footprint": 7.2491,
+      "k": 0.5376,
+      "reliability": 0.6305,
+      "sigma": 232.43,
+      "slot": "Armament",
+      "weapon": "wc2arrowFire"
+     },
+     {
+      "avg_versus": 0.6279,
+      "damage_total": 24000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 22380.75,
+      "effective_dps": 516.12,
+      "effective_per_shot": 12903.07,
+      "footprint": 7.2491,
+      "k": 0.5376,
+      "reliability": 0.6305,
+      "sigma": 232.43,
+      "slot": "Armament@GARRISONED",
+      "weapon": "wc2arrowFire"
+     }
+    ]
+   },
+   "wc2_humans_elvenranger": {
+    "armaments": [
+     {
+      "avg_versus": 0.6279,
+      "damage_total": 24000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 22380.75,
+      "effective_dps": 516.12,
+      "effective_per_shot": 12903.07,
+      "footprint": 7.2491,
+      "k": 0.5376,
+      "reliability": 0.6305,
+      "sigma": 232.43,
+      "slot": "Armament",
+      "weapon": "wc2arrowFire"
+     },
+     {
+      "avg_versus": 0.6279,
+      "damage_total": 24000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 22380.75,
+      "effective_dps": 516.12,
+      "effective_per_shot": 12903.07,
+      "footprint": 7.2491,
+      "k": 0.5376,
+      "reliability": 0.6305,
+      "sigma": 232.43,
+      "slot": "Armament@GARRISONED",
+      "weapon": "wc2arrowFire"
+     }
+    ]
+   },
+   "wc2_humans_footman": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 12000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 25050.82,
+      "effective_dps": 1244.06,
+      "effective_per_shot": 18660.97,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "wc2footmanslice"
+     }
+    ]
+   },
+   "wc2_humans_highelfpriest": {
+    "armaments": [
+     {
+      "avg_versus": 1.0619,
+      "damage_total": 12000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 11477.25,
+      "effective_dps": 319.62,
+      "effective_per_shot": 12784.97,
+      "footprint": 2.5087,
+      "k": 1.0654,
+      "reliability": 0.7181,
+      "sigma": 250.0,
+      "slot": "Armament",
+      "weapon": "wc2mageFire"
+     },
+     {
+      "avg_versus": 0.6874,
+      "damage_total": 4025.0,
+      "eff_reload": 60.0,
+      "effective_damage": 4041.46,
+      "effective_dps": 46.11,
+      "effective_per_shot": 2766.85,
+      "footprint": 0.0164,
+      "k": 0.6874,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@EXORCISM",
+      "weapon": "wc2paladinexorcism"
+     }
+    ]
+   },
+   "wc2_humans_highelfsorceress": {
+    "armaments": [
+     {
+      "avg_versus": 1.0619,
+      "damage_total": 12000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 11477.25,
+      "effective_dps": 319.62,
+      "effective_per_shot": 12784.97,
+      "footprint": 2.5087,
+      "k": 1.0654,
+      "reliability": 0.7181,
+      "sigma": 250.0,
+      "slot": "Armament",
+      "weapon": "wc2mageFire"
+     },
+     {
+      "avg_versus": 0.6874,
+      "damage_total": 4025.0,
+      "eff_reload": 60.0,
+      "effective_damage": 4041.46,
+      "effective_dps": 46.11,
+      "effective_per_shot": 2766.85,
+      "footprint": 0.0164,
+      "k": 0.6874,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@EXORCISM",
+      "weapon": "wc2paladinexorcism"
+     }
+    ]
+   },
+   "wc2_humans_highelvenarcher": {
+    "armaments": [
+     {
+      "avg_versus": 0.6264,
+      "damage_total": 33600.0,
+      "eff_reload": 35.0,
+      "effective_damage": 30651.33,
+      "effective_dps": 506.09,
+      "effective_per_shot": 17713.25,
+      "footprint": 7.9706,
+      "k": 0.5272,
+      "reliability": 0.6778,
+      "sigma": 213.91,
+      "slot": "Armament",
+      "weapon": "wc2highArrowFire"
+     },
+     {
+      "avg_versus": 0.6264,
+      "damage_total": 33600.0,
+      "eff_reload": 35.0,
+      "effective_damage": 30651.33,
+      "effective_dps": 506.09,
+      "effective_per_shot": 17713.25,
+      "footprint": 7.9706,
+      "k": 0.5272,
+      "reliability": 0.6778,
+      "sigma": 213.91,
+      "slot": "Armament@GARRISONED",
+      "weapon": "wc2highArrowFire"
+     }
+    ]
+   },
+   "wc2_humans_knight": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 16000.0,
+      "eff_reload": 12.0,
+      "effective_damage": 33401.09,
+      "effective_dps": 2073.44,
+      "effective_per_shot": 24881.29,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "wc2knightslice"
+     },
+     {
+      "avg_versus": 0.6874,
+      "damage_total": 4025.0,
+      "eff_reload": 60.0,
+      "effective_damage": 4041.46,
+      "effective_dps": 46.11,
+      "effective_per_shot": 2766.85,
+      "footprint": 0.0164,
+      "k": 0.6874,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@EXORCISM",
+      "weapon": "wc2paladinexorcism"
+     }
+    ]
+   },
+   "wc2_humans_mage": {
+    "armaments": [
+     {
+      "avg_versus": 1.0619,
+      "damage_total": 12000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 11477.25,
+      "effective_dps": 319.62,
+      "effective_per_shot": 12784.97,
+      "footprint": 2.5087,
+      "k": 1.0654,
+      "reliability": 0.7181,
+      "sigma": 250.0,
+      "slot": "Armament",
+      "weapon": "wc2mageFire"
+     },
+     {
+      "avg_versus": 1.0619,
+      "damage_total": 12000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 11477.25,
+      "effective_dps": 319.62,
+      "effective_per_shot": 12784.97,
+      "footprint": 2.5087,
+      "k": 1.0654,
+      "reliability": 0.7181,
+      "sigma": 250.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "wc2mageFire"
+     },
+     {
+      "avg_versus": 0.6663,
+      "damage_total": 18000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 13221.95,
+      "effective_dps": 107.96,
+      "effective_per_shot": 8636.65,
+      "footprint": 13.749,
+      "k": 0.4798,
+      "reliability": 0.3526,
+      "sigma": 666.67,
+      "slot": "Armament@FIREBALL_VISIBLE",
+      "weapon": "wc2mageFireballVisible"
+     },
+     {
+      "avg_versus": 0.6663,
+      "damage_total": 18000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 13221.95,
+      "effective_dps": 539.79,
+      "effective_per_shot": 8636.65,
+      "footprint": 13.749,
+      "k": 0.4798,
+      "reliability": 0.3526,
+      "sigma": 666.67,
+      "slot": "Armament@FIREBALL_EXPLOSIONS",
+      "weapon": "wc2mageFireballExplosion"
+     },
+     {
+      "avg_versus": 0.856,
+      "damage_total": 1.0,
+      "eff_reload": 60.0,
+      "effective_damage": 0.92,
+      "effective_dps": 0.01,
+      "effective_per_shot": 0.78,
+      "footprint": 0.01,
+      "k": 0.7846,
+      "reliability": 0.9166,
+      "sigma": 16.0,
+      "slot": "Armament@SLOW",
+      "weapon": "wc2mageSlow"
+     },
+     {
+      "avg_versus": 1.0,
+      "damage_total": 1.0,
+      "eff_reload": 50.0,
+      "effective_damage": 1.0,
+      "effective_dps": 0.02,
+      "effective_per_shot": 1.0,
+      "footprint": 0.01,
+      "k": 1.0,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@BLIZZARD",
+      "weapon": "wc2mageBlizzard"
+     }
+    ]
+   },
+   "wc2_humans_militiapeasant": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 12000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 25050.82,
+      "effective_dps": 1244.06,
+      "effective_per_shot": 18660.97,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "wc2footmanslice"
+     }
+    ]
+   },
+   "wc2_humans_mortarteam": {
+    "armaments": [
+     {
+      "avg_versus": 0.6998,
+      "damage_total": 80000.0,
+      "eff_reload": 200.0,
+      "effective_damage": 117840.32,
+      "effective_dps": 365.86,
+      "effective_per_shot": 73171.99,
+      "footprint": 15.0458,
+      "k": 0.9146,
+      "reliability": 0.5326,
+      "sigma": 1600.0,
+      "slot": "Armament",
+      "weapon": "MortarTeamArtilleryShell"
+     },
+     {
+      "avg_versus": 0.6998,
+      "damage_total": 80000.0,
+      "eff_reload": 200.0,
+      "effective_damage": 117840.32,
+      "effective_dps": 365.86,
+      "effective_per_shot": 73171.99,
+      "footprint": 15.0458,
+      "k": 0.9146,
+      "reliability": 0.5326,
+      "sigma": 1600.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "MortarTeamArtilleryShell"
+     }
+    ]
+   },
+   "wc2_humans_warcraft3footman": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 18000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 37576.23,
+      "effective_dps": 1866.1,
+      "effective_per_shot": 27991.45,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "wc2footmanslice2"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "wc2_humans_ballista": {
+    "armaments": [
+     {
+      "avg_versus": 0.6844,
+      "damage_total": 90000.0,
+      "eff_reload": 180.0,
+      "effective_damage": 153103.65,
+      "effective_dps": 571.25,
+      "effective_per_shot": 102824.6,
+      "footprint": 13.4998,
+      "k": 1.1425,
+      "reliability": 0.5762,
+      "sigma": 1136.6,
+      "slot": "Armament",
+      "weapon": "wc2ballistaFire"
+     }
+    ]
+   },
+   "wc2_humans_demolitionsquad": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 12000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 25050.82,
+      "effective_dps": 1244.06,
+      "effective_per_shot": 18660.97,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Melee",
+      "weapon": "wc2demolitionsquadMelee"
+     }
+    ]
+   },
+   "wc2_humans_paladin": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 16000.0,
+      "eff_reload": 12.0,
+      "effective_damage": 33401.09,
+      "effective_dps": 2073.44,
+      "effective_per_shot": 24881.29,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "wc2knightslice"
+     },
+     {
+      "avg_versus": 0.6874,
+      "damage_total": 4025.0,
+      "eff_reload": 60.0,
+      "effective_damage": 4041.46,
+      "effective_dps": 46.11,
+      "effective_per_shot": 2766.85,
+      "footprint": 0.0164,
+      "k": 0.6874,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@EXORCISM",
+      "weapon": "wc2paladinexorcism"
+     }
+    ]
+   },
+   "wc2_humans_peasant": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 12000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 25050.82,
+      "effective_dps": 1244.06,
+      "effective_per_shot": 18660.97,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "wc2peasantsmack"
+     }
+    ]
+   },
+   "wc2_humans_siegeengine": {
+    "armaments": [
+     {
+      "avg_versus": 0.688,
+      "damage_total": 140000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 452898.02,
+      "effective_dps": 1601.08,
+      "effective_per_shot": 160107.72,
+      "footprint": 129.1592,
+      "k": 1.1436,
+      "reliability": 0.9286,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "SiegeEngineCannon"
+     }
+    ]
+   },
+   "wc2_humans_warcraft3knight": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 16000.0,
+      "eff_reload": 12.0,
+      "effective_damage": 33401.09,
+      "effective_dps": 2073.44,
+      "effective_per_shot": 24881.29,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "wc2knightslice"
+     },
+     {
+      "avg_versus": 0.6874,
+      "damage_total": 4025.0,
+      "eff_reload": 60.0,
+      "effective_damage": 4041.46,
+      "effective_dps": 46.11,
+      "effective_per_shot": 2766.85,
+      "footprint": 0.0164,
+      "k": 0.6874,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@EXORCISM",
+      "weapon": "wc2paladinexorcism"
+     }
+    ]
+   }
+  }
+ }
+}

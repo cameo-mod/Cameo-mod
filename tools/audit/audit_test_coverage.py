@@ -50,7 +50,7 @@ PY_SOURCE_DIRS = ("tools/audit", "tools/balance", "tools/packs", "tools/rename")
 # consider git-TRACKED files (scanning.tracked_under), so a scratch script left in
 # tools/ can no longer move them.
 MIN_CS_TESTS = 24
-MIN_PY_TESTS = 96
+MIN_PY_TESTS = 105      # +9: test_ledger_split (W3)
 T3_BASELINE = 218
 
 CS_TEST_ATTR = re.compile(r"^\s*\[(?:Test|TestCase|TestCaseSource)\b", re.MULTILINE)

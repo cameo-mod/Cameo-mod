@@ -1,0 +1,1979 @@
+{
+ "ledger": "tiberiansun_forgotten",
+ "pack": "mods/cameo/ContentPacks/TiberianSun/Forgotten",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "forgotten_apache": {
+    "armaments": [
+     {
+      "avg_versus": 0.6579,
+      "damage_total": 24000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 31051.72,
+      "effective_dps": 1315.31,
+      "effective_per_shot": 19729.7,
+      "footprint": 14.1295,
+      "k": 0.8221,
+      "reliability": 0.7051,
+      "sigma": 287.52,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSApacheMissile"
+     },
+     {
+      "avg_versus": 0.6759,
+      "damage_total": 36000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 51773.55,
+      "effective_dps": 2216.77,
+      "effective_per_shot": 33251.52,
+      "footprint": 17.3592,
+      "k": 0.9237,
+      "reliability": 0.7765,
+      "sigma": 287.52,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSChemApacheMissile"
+     }
+    ]
+   },
+   "forgotten_cobracopter": {
+    "armaments": [
+     {
+      "avg_versus": 0.6579,
+      "damage_total": 24000.0,
+      "eff_reload": 12.0,
+      "effective_damage": 30795.21,
+      "effective_dps": 1630.43,
+      "effective_per_shot": 19565.2,
+      "footprint": 14.1295,
+      "k": 0.8152,
+      "reliability": 0.6944,
+      "sigma": 302.08,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSCobraMissile"
+     },
+     {
+      "avg_versus": 0.6759,
+      "damage_total": 36000.0,
+      "eff_reload": 12.0,
+      "effective_damage": 51474.13,
+      "effective_dps": 2754.71,
+      "effective_per_shot": 33056.48,
+      "footprint": 17.3592,
+      "k": 0.9182,
+      "reliability": 0.7682,
+      "sigma": 302.08,
+      "slot": "Armament@SECONDARY",
+      "weapon": "TSChemCobraMissile"
+     }
+    ]
+   },
+   "forgotten_cropplane": {
+    "armaments": [
+     {
+      "avg_versus": 0.7391,
+      "damage_total": 120000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 311747.6,
+      "effective_dps": 4736.45,
+      "effective_per_shot": 236822.37,
+      "footprint": 6.3916,
+      "k": 1.9735,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSCropBomb"
+     },
+     {
+      "avg_versus": 0.7445,
+      "damage_total": 180000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 467621.4,
+      "effective_dps": 7121.07,
+      "effective_per_shot": 356053.38,
+      "footprint": 12.7832,
+      "k": 1.9781,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSCropBombChem"
+     }
+    ]
+   },
+   "forgotten_locustbomber": {
+    "armaments": [
+     {
+      "avg_versus": 0.7391,
+      "damage_total": 180000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 467621.4,
+      "effective_dps": 35523.35,
+      "effective_per_shot": 355233.55,
+      "footprint": 6.3916,
+      "k": 1.9735,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSLocustBomb"
+     },
+     {
+      "avg_versus": 0.7445,
+      "damage_total": 270000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 701432.1,
+      "effective_dps": 53408.01,
+      "effective_per_shot": 534080.08,
+      "footprint": 12.7832,
+      "k": 1.9781,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSLocustBombChem"
+     }
+    ]
+   },
+   "forgotten_wasp": {
+    "armaments": [
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 18.0,
+      "effective_damage": 3580.09,
+      "effective_dps": 254.27,
+      "effective_per_shot": 2288.41,
+      "footprint": 0.3595,
+      "k": 0.5721,
+      "reliability": 0.8051,
+      "sigma": 224.41,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSWaspClaw"
+     }
+    ]
+   }
+  },
+  "defenses": {
+   "forgotten_brokenrattytankturret": {
+    "armaments": [
+     {
+      "avg_versus": 0.6424,
+      "damage_total": 8000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 13891.26,
+      "effective_dps": 763.95,
+      "effective_per_shot": 7639.47,
+      "footprint": 7.1082,
+      "k": 0.9549,
+      "reliability": 0.8479,
+      "sigma": 304.68,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TS70mmTur"
+     },
+     {
+      "avg_versus": 0.6495,
+      "damage_total": 12000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 12839.48,
+      "effective_dps": 733.82,
+      "effective_per_shot": 7338.23,
+      "footprint": 5.1802,
+      "k": 0.6115,
+      "reliability": 0.6383,
+      "sigma": 304.68,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TS70mmTurChem"
+     }
+    ]
+   },
+   "forgotten_brokenscoopertankturret": {
+    "armaments": [
+     {
+      "avg_versus": 0.7233,
+      "damage_total": 32000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 68502.87,
+      "effective_dps": 1845.85,
+      "effective_per_shot": 46146.2,
+      "footprint": 10.7419,
+      "k": 1.4421,
+      "reliability": 0.798,
+      "sigma": 600.68,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSScoopDualTur"
+     },
+     {
+      "avg_versus": 0.7217,
+      "damage_total": 48000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 98163.41,
+      "effective_dps": 2616.08,
+      "effective_per_shot": 65402.1,
+      "footprint": 14.4749,
+      "k": 1.3625,
+      "reliability": 0.8388,
+      "sigma": 600.68,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSScoopDualTurChem"
+     }
+    ]
+   },
+   "forgotten_brokenwarriortankturret": {
+    "armaments": [
+     {
+      "avg_versus": 0.6083,
+      "damage_total": 48000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 71774.94,
+      "effective_dps": 1182.8,
+      "effective_per_shot": 35484.01,
+      "footprint": 2.758,
+      "k": 0.7393,
+      "reliability": 0.8058,
+      "sigma": 298.17,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSHighVelocityTur"
+     }
+    ]
+   },
+   "forgotten_juggerflakwall": {
+    "armaments": [
+     {
+      "avg_versus": 0.5989,
+      "damage_total": 10000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 19929.33,
+      "effective_dps": 1198.1,
+      "effective_per_shot": 11980.99,
+      "footprint": 4.3503,
+      "k": 1.1981,
+      "reliability": 0.9054,
+      "sigma": 272.47,
+      "slot": "Armament",
+      "weapon": "TSJuggerFlakAA"
+     }
+    ]
+   },
+   "forgotten_machineguntower": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 6.0,
+      "effective_damage": 3255.19,
+      "effective_dps": 335.36,
+      "effective_per_shot": 2012.15,
+      "footprint": 0.5193,
+      "k": 0.503,
+      "reliability": 0.7489,
+      "sigma": 231.36,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSMutVulcanTurret"
+     }
+    ]
+   }
+  },
+  "infantry": {
+   "forgotten_chemsprayinfantry": {
+    "armaments": [
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 32000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 53684.71,
+      "effective_dps": 575.46,
+      "effective_per_shot": 31650.57,
+      "footprint": 2.758,
+      "k": 0.9891,
+      "reliability": 0.9882,
+      "sigma": 18.19,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSChemspray"
+     },
+     {
+      "avg_versus": 0.7119,
+      "damage_total": 96000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 184948.8,
+      "effective_dps": 2310.86,
+      "effective_per_shot": 127097.13,
+      "footprint": 11.3041,
+      "k": 1.3239,
+      "reliability": 0.9845,
+      "sigma": 18.19,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSChemsprayUp"
+     },
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 32000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 53684.71,
+      "effective_dps": 575.46,
+      "effective_per_shot": 31650.57,
+      "footprint": 2.758,
+      "k": 0.9891,
+      "reliability": 0.9882,
+      "sigma": 18.19,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSChemspray"
+     },
+     {
+      "avg_versus": 0.7119,
+      "damage_total": 96000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 184948.8,
+      "effective_dps": 2310.86,
+      "effective_per_shot": 127097.13,
+      "footprint": 11.3041,
+      "k": 1.3239,
+      "reliability": 0.9845,
+      "sigma": 18.19,
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "weapon": "TSChemsprayUP"
+     }
+    ]
+   },
+   "forgotten_engineer": {
+    "armaments": [
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 20574.77,
+      "effective_dps": 602.51,
+      "effective_per_shot": 15062.73,
+      "footprint": 0.1598,
+      "k": 0.7531,
+      "reliability": 0.9888,
+      "sigma": 8.61,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSEngineerPistol"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 20574.77,
+      "effective_dps": 602.51,
+      "effective_per_shot": 15062.73,
+      "footprint": 0.1598,
+      "k": 0.7531,
+      "reliability": 0.9888,
+      "sigma": 8.61,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSEngineerPistol"
+     }
+    ]
+   },
+   "forgotten_ghoststalker": {
+    "armaments": [
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 33540.89,
+      "effective_dps": 790.92,
+      "effective_per_shot": 19773.1,
+      "footprint": 2.758,
+      "k": 0.9887,
+      "reliability": 0.9876,
+      "sigma": 19.11,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSGhostGun"
+     },
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 33540.89,
+      "effective_dps": 790.92,
+      "effective_per_shot": 19773.1,
+      "footprint": 2.758,
+      "k": 0.9887,
+      "reliability": 0.9876,
+      "sigma": 19.11,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSChemGhostGun"
+     },
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 33540.89,
+      "effective_dps": 790.92,
+      "effective_per_shot": 19773.1,
+      "footprint": 2.758,
+      "k": 0.9887,
+      "reliability": 0.9876,
+      "sigma": 19.11,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSGhostGun"
+     },
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 33540.89,
+      "effective_dps": 790.92,
+      "effective_per_shot": 19773.1,
+      "footprint": 2.758,
+      "k": 0.9887,
+      "reliability": 0.9876,
+      "sigma": 19.11,
+      "slot": "Armament@UPGRADEGARRISONED",
+      "weapon": "TSChemGhostGun"
+     }
+    ]
+   },
+   "forgotten_ghoststalker_r4": {
+    "armaments": [
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 33540.89,
+      "effective_dps": 790.92,
+      "effective_per_shot": 19773.1,
+      "footprint": 2.758,
+      "k": 0.9887,
+      "reliability": 0.9876,
+      "sigma": 19.11,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSGhostGun"
+     },
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 33540.89,
+      "effective_dps": 790.92,
+      "effective_per_shot": 19773.1,
+      "footprint": 2.758,
+      "k": 0.9887,
+      "reliability": 0.9876,
+      "sigma": 19.11,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSChemGhostGun"
+     },
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 33540.89,
+      "effective_dps": 790.92,
+      "effective_per_shot": 19773.1,
+      "footprint": 2.758,
+      "k": 0.9887,
+      "reliability": 0.9876,
+      "sigma": 19.11,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSGhostGun"
+     },
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 33540.89,
+      "effective_dps": 790.92,
+      "effective_per_shot": 19773.1,
+      "footprint": 2.758,
+      "k": 0.9887,
+      "reliability": 0.9876,
+      "sigma": 19.11,
+      "slot": "Armament@UPGRADEGARRISONED",
+      "weapon": "TSChemGhostGun"
+     }
+    ]
+   },
+   "forgotten_ghoststalker_sp": {
+    "armaments": [
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 33540.89,
+      "effective_dps": 790.92,
+      "effective_per_shot": 19773.1,
+      "footprint": 2.758,
+      "k": 0.9887,
+      "reliability": 0.9876,
+      "sigma": 19.11,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSGhostGun"
+     },
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 33540.89,
+      "effective_dps": 790.92,
+      "effective_per_shot": 19773.1,
+      "footprint": 2.758,
+      "k": 0.9887,
+      "reliability": 0.9876,
+      "sigma": 19.11,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSChemGhostGun"
+     },
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 33540.89,
+      "effective_dps": 790.92,
+      "effective_per_shot": 19773.1,
+      "footprint": 2.758,
+      "k": 0.9887,
+      "reliability": 0.9876,
+      "sigma": 19.11,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSGhostGun"
+     },
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 33540.89,
+      "effective_dps": 790.92,
+      "effective_per_shot": 19773.1,
+      "footprint": 2.758,
+      "k": 0.9887,
+      "reliability": 0.9876,
+      "sigma": 19.11,
+      "slot": "Armament@UPGRADEGARRISONED",
+      "weapon": "TSChemGhostGun"
+     }
+    ]
+   },
+   "forgotten_mutant": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 18.0,
+      "effective_damage": 1683.45,
+      "effective_dps": 112.91,
+      "effective_per_shot": 1016.21,
+      "footprint": 0.1598,
+      "k": 0.5081,
+      "reliability": 0.8018,
+      "sigma": 152.19,
+      "slot": "Armament@PRIMARY",
+      "weapon": "forgotten_mutant_dualwield"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 18.0,
+      "effective_damage": 1683.45,
+      "effective_dps": 112.91,
+      "effective_per_shot": 1016.21,
+      "footprint": 0.1598,
+      "k": 0.5081,
+      "reliability": 0.8018,
+      "sigma": 152.19,
+      "slot": "Armament@GARRISONED",
+      "weapon": "forgotten_mutant_dualwield"
+     }
+    ]
+   },
+   "forgotten_mutant_sp": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 18.0,
+      "effective_damage": 1683.45,
+      "effective_dps": 112.91,
+      "effective_per_shot": 1016.21,
+      "footprint": 0.1598,
+      "k": 0.5081,
+      "reliability": 0.8018,
+      "sigma": 152.19,
+      "slot": "Armament@PRIMARY",
+      "weapon": "forgotten_mutant_dualwield"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 18.0,
+      "effective_damage": 1683.45,
+      "effective_dps": 112.91,
+      "effective_per_shot": 1016.21,
+      "footprint": 0.1598,
+      "k": 0.5081,
+      "reliability": 0.8018,
+      "sigma": 152.19,
+      "slot": "Armament@GARRISONED",
+      "weapon": "forgotten_mutant_dualwield"
+     }
+    ]
+   },
+   "forgotten_mutant_wild": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 18.0,
+      "effective_damage": 1683.45,
+      "effective_dps": 112.91,
+      "effective_per_shot": 1016.21,
+      "footprint": 0.1598,
+      "k": 0.5081,
+      "reliability": 0.8018,
+      "sigma": 152.19,
+      "slot": "Armament@PRIMARY",
+      "weapon": "forgotten_mutant_dualwield"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 18.0,
+      "effective_damage": 1683.45,
+      "effective_dps": 112.91,
+      "effective_per_shot": 1016.21,
+      "footprint": 0.1598,
+      "k": 0.5081,
+      "reliability": 0.8018,
+      "sigma": 152.19,
+      "slot": "Armament@GARRISONED",
+      "weapon": "forgotten_mutant_dualwield"
+     }
+    ]
+   },
+   "forgotten_mutantmortarman": {
+    "armaments": [
+     {
+      "avg_versus": 0.7223,
+      "damage_total": 32000.0,
+      "eff_reload": 88.0,
+      "effective_damage": 57162.03,
+      "effective_dps": 456.43,
+      "effective_per_shot": 40165.63,
+      "footprint": 10.7419,
+      "k": 1.2552,
+      "reliability": 0.4436,
+      "sigma": 1987.71,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSInfantryMortar"
+     },
+     {
+      "avg_versus": 0.7129,
+      "damage_total": 48000.0,
+      "eff_reload": 88.0,
+      "effective_damage": 95245.9,
+      "effective_dps": 755.85,
+      "effective_per_shot": 66514.54,
+      "footprint": 15.0921,
+      "k": 1.3857,
+      "reliability": 0.7266,
+      "sigma": 811.89,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSInfantryMortarChem"
+     },
+     {
+      "avg_versus": 0.7223,
+      "damage_total": 32000.0,
+      "eff_reload": 88.0,
+      "effective_damage": 57162.03,
+      "effective_dps": 456.43,
+      "effective_per_shot": 40165.63,
+      "footprint": 10.7419,
+      "k": 1.2552,
+      "reliability": 0.4436,
+      "sigma": 1987.71,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSInfantryMortar"
+     },
+     {
+      "avg_versus": 0.7129,
+      "damage_total": 48000.0,
+      "eff_reload": 88.0,
+      "effective_damage": 95245.9,
+      "effective_dps": 755.85,
+      "effective_per_shot": 66514.54,
+      "footprint": 15.0921,
+      "k": 1.3857,
+      "reliability": 0.7266,
+      "sigma": 811.89,
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "weapon": "TSInfantryMortarChem"
+     }
+    ]
+   },
+   "forgotten_mutantsergeant": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 16000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 13078.14,
+      "effective_dps": 977.71,
+      "effective_per_shot": 7821.67,
+      "footprint": 0.5193,
+      "k": 0.4889,
+      "reliability": 0.7525,
+      "sigma": 228.06,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSSergGun"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 16000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 13078.14,
+      "effective_dps": 977.71,
+      "effective_per_shot": 7821.67,
+      "footprint": 0.5193,
+      "k": 0.4889,
+      "reliability": 0.7525,
+      "sigma": 228.06,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSSergGun"
+     }
+    ]
+   },
+   "forgotten_mutantsniper": {
+    "armaments": [
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 10000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 10150.52,
+      "effective_dps": 297.08,
+      "effective_per_shot": 7427.12,
+      "footprint": 0.1598,
+      "k": 0.7427,
+      "reliability": 0.9751,
+      "sigma": 19.11,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSSniper"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 10000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 10150.52,
+      "effective_dps": 297.08,
+      "effective_per_shot": 7427.12,
+      "footprint": 0.1598,
+      "k": 0.7427,
+      "reliability": 0.9751,
+      "sigma": 19.11,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSSniper"
+     }
+    ]
+   },
+   "forgotten_mutantsniper_r4": {
+    "armaments": [
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 10000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 10150.52,
+      "effective_dps": 297.08,
+      "effective_per_shot": 7427.12,
+      "footprint": 0.1598,
+      "k": 0.7427,
+      "reliability": 0.9751,
+      "sigma": 19.11,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSSniper"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 10000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 10150.52,
+      "effective_dps": 297.08,
+      "effective_per_shot": 7427.12,
+      "footprint": 0.1598,
+      "k": 0.7427,
+      "reliability": 0.9751,
+      "sigma": 19.11,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSSniper"
+     }
+    ]
+   },
+   "forgotten_mutantsniper_sp": {
+    "armaments": [
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 10000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 10150.52,
+      "effective_dps": 297.08,
+      "effective_per_shot": 7427.12,
+      "footprint": 0.1598,
+      "k": 0.7427,
+      "reliability": 0.9751,
+      "sigma": 19.11,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSSniper"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 10000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 10150.52,
+      "effective_dps": 297.08,
+      "effective_per_shot": 7427.12,
+      "footprint": 0.1598,
+      "k": 0.7427,
+      "reliability": 0.9751,
+      "sigma": 19.11,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSSniper"
+     }
+    ]
+   },
+   "forgotten_mutantsoldier": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 8000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 6756.61,
+      "effective_dps": 81.61,
+      "effective_per_shot": 4080.31,
+      "footprint": 0.1598,
+      "k": 0.51,
+      "reliability": 0.8046,
+      "sigma": 150.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "forgotten_mutantsoldier_rifle"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 8000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 6756.61,
+      "effective_dps": 81.61,
+      "effective_per_shot": 4080.31,
+      "footprint": 0.1598,
+      "k": 0.51,
+      "reliability": 0.8046,
+      "sigma": 150.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "forgotten_mutantsoldier_rifle"
+     }
+    ]
+   },
+   "forgotten_mutantsoldier_sp": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 8000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 6756.61,
+      "effective_dps": 81.61,
+      "effective_per_shot": 4080.31,
+      "footprint": 0.1598,
+      "k": 0.51,
+      "reliability": 0.8046,
+      "sigma": 150.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "forgotten_mutantsoldier_rifle"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 8000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 6756.61,
+      "effective_dps": 81.61,
+      "effective_per_shot": 4080.31,
+      "footprint": 0.1598,
+      "k": 0.51,
+      "reliability": 0.8046,
+      "sigma": 150.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "forgotten_mutantsoldier_rifle"
+     }
+    ]
+   },
+   "forgotten_rocketinfantry": {
+    "armaments": [
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 24000.0,
+      "eff_reload": 52.0,
+      "effective_damage": 36278.82,
+      "effective_dps": 274.06,
+      "effective_per_shot": 14251.06,
+      "footprint": 2.758,
+      "k": 0.5938,
+      "reliability": 0.8221,
+      "sigma": 273.13,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSBazooka"
+     },
+     {
+      "avg_versus": 0.5303,
+      "damage_total": 24000.0,
+      "eff_reload": 52.0,
+      "effective_damage": 36278.82,
+      "effective_dps": 274.06,
+      "effective_per_shot": 14251.06,
+      "footprint": 2.758,
+      "k": 0.5938,
+      "reliability": 0.8221,
+      "sigma": 273.13,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSBazooka"
+     },
+     {
+      "avg_versus": 0.5251,
+      "damage_total": 30000.0,
+      "eff_reload": 52.0,
+      "effective_damage": 14478.19,
+      "effective_dps": 139.4,
+      "effective_per_shot": 7248.78,
+      "footprint": 0.8474,
+      "k": 0.2416,
+      "reliability": 0.4342,
+      "sigma": 273.13,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSChemBazooka"
+     },
+     {
+      "avg_versus": 0.5251,
+      "damage_total": 30000.0,
+      "eff_reload": 52.0,
+      "effective_damage": 14478.19,
+      "effective_dps": 139.4,
+      "effective_per_shot": 7248.78,
+      "footprint": 0.8474,
+      "k": 0.2416,
+      "reliability": 0.4342,
+      "sigma": 273.13,
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "weapon": "TSChemBazooka"
+     }
+    ]
+   },
+   "forgotten_runnershotgal": {
+    "armaments": [
+     {
+      "avg_versus": 0.6551,
+      "damage_total": 24000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 26223.88,
+      "effective_dps": 509.46,
+      "effective_per_shot": 16302.79,
+      "footprint": 11.6188,
+      "k": 0.6793,
+      "reliability": 0.6085,
+      "sigma": 215.56,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSMutShotgun"
+     },
+     {
+      "avg_versus": 0.6551,
+      "damage_total": 24000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 26223.88,
+      "effective_dps": 509.46,
+      "effective_per_shot": 16302.79,
+      "footprint": 11.6188,
+      "k": 0.6793,
+      "reliability": 0.6085,
+      "sigma": 215.56,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSMutShotgun"
+     }
+    ]
+   },
+   "forgotten_tiberianfiend": {
+    "armaments": [
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 6000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 8801.82,
+      "effective_dps": 378.85,
+      "effective_per_shot": 5051.3,
+      "footprint": 2.758,
+      "k": 0.8419,
+      "reliability": 0.7775,
+      "sigma": 341.74,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSFiendShard"
+     },
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 6000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 8801.82,
+      "effective_dps": 378.85,
+      "effective_per_shot": 5051.3,
+      "footprint": 2.758,
+      "k": 0.8419,
+      "reliability": 0.7775,
+      "sigma": 341.74,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSFiendShard"
+     },
+     {
+      "avg_versus": 0.7119,
+      "damage_total": 18000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 32929.61,
+      "effective_dps": 1696.71,
+      "effective_per_shot": 22622.8,
+      "footprint": 11.3041,
+      "k": 1.2568,
+      "reliability": 0.8874,
+      "sigma": 341.74,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSFiendShardUP"
+     },
+     {
+      "avg_versus": 0.7119,
+      "damage_total": 18000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 32929.61,
+      "effective_dps": 1696.71,
+      "effective_per_shot": 22622.8,
+      "footprint": 11.3041,
+      "k": 1.2568,
+      "reliability": 0.8874,
+      "sigma": 341.74,
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "weapon": "TSFiendShardUP"
+     }
+    ]
+   },
+   "forgotten_tiberianfiend_wild": {
+    "armaments": [
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 6000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 8801.82,
+      "effective_dps": 378.85,
+      "effective_per_shot": 5051.3,
+      "footprint": 2.758,
+      "k": 0.8419,
+      "reliability": 0.7775,
+      "sigma": 341.74,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSFiendShard"
+     },
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 6000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 8801.82,
+      "effective_dps": 378.85,
+      "effective_per_shot": 5051.3,
+      "footprint": 2.758,
+      "k": 0.8419,
+      "reliability": 0.7775,
+      "sigma": 341.74,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSFiendShard"
+     },
+     {
+      "avg_versus": 0.7119,
+      "damage_total": 18000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 32929.61,
+      "effective_dps": 1696.71,
+      "effective_per_shot": 22622.8,
+      "footprint": 11.3041,
+      "k": 1.2568,
+      "reliability": 0.8874,
+      "sigma": 341.74,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSFiendShardUP"
+     },
+     {
+      "avg_versus": 0.7119,
+      "damage_total": 18000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 32929.61,
+      "effective_dps": 1696.71,
+      "effective_per_shot": 22622.8,
+      "footprint": 11.3041,
+      "k": 1.2568,
+      "reliability": 0.8874,
+      "sigma": 341.74,
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "weapon": "TSFiendShardUP"
+     }
+    ]
+   },
+   "forgotten_viniferafiend": {
+    "armaments": [
+     {
+      "avg_versus": 0.6789,
+      "damage_total": 24000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 33638.82,
+      "effective_dps": 1552.34,
+      "effective_per_shot": 20697.92,
+      "footprint": 11.2333,
+      "k": 0.8624,
+      "reliability": 0.6995,
+      "sigma": 766.13,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSFiendShardBlue"
+     },
+     {
+      "avg_versus": 0.6789,
+      "damage_total": 24000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 33638.82,
+      "effective_dps": 1552.34,
+      "effective_per_shot": 20697.92,
+      "footprint": 11.2333,
+      "k": 0.8624,
+      "reliability": 0.6995,
+      "sigma": 766.13,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSFiendShardBlue"
+     },
+     {
+      "avg_versus": 0.7043,
+      "damage_total": 36000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 63195.44,
+      "effective_dps": 3210.13,
+      "effective_per_shot": 42801.68,
+      "footprint": 24.4764,
+      "k": 1.1889,
+      "reliability": 0.7356,
+      "sigma": 766.13,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSFiendShardBlueUP"
+     },
+     {
+      "avg_versus": 0.7043,
+      "damage_total": 36000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 63195.44,
+      "effective_dps": 3210.13,
+      "effective_per_shot": 42801.68,
+      "footprint": 24.4764,
+      "k": 1.1889,
+      "reliability": 0.7356,
+      "sigma": 766.13,
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "weapon": "TSFiendShardBlueUP"
+     }
+    ]
+   },
+   "forgotten_visceroid": {
+    "armaments": [
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 10000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 16834.71,
+      "effective_dps": 397.28,
+      "effective_per_shot": 9931.92,
+      "footprint": 2.758,
+      "k": 0.9932,
+      "reliability": 0.994,
+      "sigma": 9.25,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSVisceroidSpray"
+     },
+     {
+      "avg_versus": 0.6328,
+      "damage_total": 10000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 16834.71,
+      "effective_dps": 397.28,
+      "effective_per_shot": 9931.92,
+      "footprint": 2.758,
+      "k": 0.9932,
+      "reliability": 0.994,
+      "sigma": 9.25,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSVisceroidSpray"
+     },
+     {
+      "avg_versus": 0.7119,
+      "damage_total": 30000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 57877.04,
+      "effective_dps": 1590.94,
+      "effective_per_shot": 39773.5,
+      "footprint": 11.3041,
+      "k": 1.3258,
+      "reliability": 0.9872,
+      "sigma": 9.25,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSVisceroidSprayUP"
+     },
+     {
+      "avg_versus": 0.7119,
+      "damage_total": 30000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 57877.04,
+      "effective_dps": 1590.94,
+      "effective_per_shot": 39773.5,
+      "footprint": 11.3041,
+      "k": 1.3258,
+      "reliability": 0.9872,
+      "sigma": 9.25,
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "weapon": "TSVisceroidSprayUP"
+     }
+    ]
+   },
+   "forgotten_zombiemutant": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 16000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 33401.09,
+      "effective_dps": 1244.06,
+      "effective_per_shot": 24881.29,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSZombieAttack"
+     },
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 16000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 33401.09,
+      "effective_dps": 1244.06,
+      "effective_per_shot": 24881.29,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSZombieAttack"
+     }
+    ]
+   }
+  },
+  "naval": {
+   "forgotten_cannonboat": {
+    "armaments": [
+     {
+      "avg_versus": 0.7354,
+      "damage_total": 18000.0,
+      "eff_reload": 83.0,
+      "effective_damage": 24343.83,
+      "effective_dps": 391.13,
+      "effective_per_shot": 16232.09,
+      "footprint": 5.9482,
+      "k": 0.9018,
+      "reliability": 0.8765,
+      "sigma": 200.0,
+      "slot": "Armament",
+      "weapon": "TSBoatcannon"
+     },
+     {
+      "avg_versus": 0.7305,
+      "damage_total": 25000.0,
+      "eff_reload": 83.0,
+      "effective_damage": 36048.68,
+      "effective_dps": 544.61,
+      "effective_per_shot": 22601.41,
+      "footprint": 9.5774,
+      "k": 0.9041,
+      "reliability": 0.896,
+      "sigma": 200.0,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSChemBoatcannon"
+     },
+     {
+      "avg_versus": 0.6087,
+      "damage_total": 60000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 66364.59,
+      "effective_dps": 591.26,
+      "effective_per_shot": 35475.77,
+      "footprint": 2.758,
+      "k": 0.5913,
+      "reliability": 0.4166,
+      "sigma": 1360.0,
+      "slot": "Armament@DC1",
+      "weapon": "DepthCharge"
+     },
+     {
+      "avg_versus": 0.6087,
+      "damage_total": 60000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 66364.59,
+      "effective_dps": 591.26,
+      "effective_per_shot": 35475.77,
+      "footprint": 2.758,
+      "k": 0.5913,
+      "reliability": 0.4166,
+      "sigma": 1360.0,
+      "slot": "Armament@DC2",
+      "weapon": "DepthCharge"
+     }
+    ]
+   },
+   "forgotten_juggerboat": {
+    "armaments": [
+     {
+      "avg_versus": 0.5989,
+      "damage_total": 10000.0,
+      "eff_reload": 72.0,
+      "effective_damage": 19929.33,
+      "effective_dps": 332.81,
+      "effective_per_shot": 11980.99,
+      "footprint": 4.3503,
+      "k": 1.1981,
+      "reliability": 0.9054,
+      "sigma": 272.47,
+      "slot": "Armament@AA",
+      "weapon": "TSJuggerFlakAA_boat"
+     },
+     {
+      "avg_versus": 0.7054,
+      "damage_total": 20000.0,
+      "eff_reload": 72.0,
+      "effective_damage": 30419.97,
+      "effective_dps": 554.93,
+      "effective_per_shot": 19977.65,
+      "footprint": 4.3503,
+      "k": 0.9989,
+      "reliability": 0.4334,
+      "sigma": 1940.71,
+      "slot": "Armament@AG",
+      "weapon": "TSJuggerboat90mm"
+     },
+     {
+      "avg_versus": 0.712,
+      "damage_total": 30000.0,
+      "eff_reload": 72.0,
+      "effective_damage": 48377.24,
+      "effective_dps": 881.53,
+      "effective_per_shot": 31735.02,
+      "footprint": 8.0834,
+      "k": 1.0578,
+      "reliability": 0.5345,
+      "sigma": 1940.71,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSChemJuggerboat90mm"
+     },
+     {
+      "avg_versus": 0.6087,
+      "damage_total": 60000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 66364.59,
+      "effective_dps": 591.26,
+      "effective_per_shot": 35475.77,
+      "footprint": 2.758,
+      "k": 0.5913,
+      "reliability": 0.4166,
+      "sigma": 1360.0,
+      "slot": "Armament@SECONDARY",
+      "weapon": "DepthCharge"
+     }
+    ]
+   },
+   "forgotten_lcraft": {
+    "armaments": [
+     {
+      "avg_versus": 0.7054,
+      "damage_total": 24000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 39816.34,
+      "effective_dps": 1316.55,
+      "effective_per_shot": 26331.07,
+      "footprint": 4.3503,
+      "k": 1.0971,
+      "reliability": 0.5714,
+      "sigma": 1329.19,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSVanMissile"
+     },
+     {
+      "avg_versus": 0.712,
+      "damage_total": 36000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 63802.88,
+      "effective_dps": 2108.81,
+      "effective_per_shot": 42176.14,
+      "footprint": 8.0834,
+      "k": 1.1716,
+      "reliability": 0.6942,
+      "sigma": 1329.19,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSChemVanMissile"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "forgotten_apctruck": {
+    "armaments": [
+     {
+      "avg_versus": 0.6359,
+      "damage_total": 4000.0,
+      "eff_reload": 12.0,
+      "effective_damage": 5717.19,
+      "effective_dps": 291.21,
+      "effective_per_shot": 3494.46,
+      "footprint": 4.7098,
+      "k": 0.8736,
+      "reliability": 0.8406,
+      "sigma": 262.29,
+      "slot": "Armament",
+      "weapon": "TSMutApcCannon"
+     }
+    ]
+   },
+   "forgotten_bowler": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 5.0,
+      "effective_damage": 3248.0,
+      "effective_dps": 401.41,
+      "effective_per_shot": 2007.07,
+      "footprint": 0.5193,
+      "k": 0.5018,
+      "reliability": 0.7471,
+      "sigma": 233.01,
+      "slot": "Armament",
+      "weapon": "TSBowlerCannon"
+     }
+    ]
+   },
+   "forgotten_chemicalmammothtank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7472,
+      "damage_total": 80000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 203116.84,
+      "effective_dps": 4820.42,
+      "effective_per_shot": 154253.56,
+      "footprint": 12.7832,
+      "k": 1.9282,
+      "reliability": 0.9411,
+      "sigma": 181.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TS120mmxChem"
+     },
+     {
+      "avg_versus": 0.7157,
+      "damage_total": 40000.0,
+      "eff_reload": 66.0,
+      "effective_damage": 58088.53,
+      "effective_dps": 2597.75,
+      "effective_per_shot": 42862.9,
+      "footprint": 7.6265,
+      "k": 1.0716,
+      "reliability": 0.4989,
+      "sigma": 1154.33,
+      "slot": "Armament@SECONDARY",
+      "weapon": "TSMammothTuskChem"
+     }
+    ]
+   },
+   "forgotten_closhtank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 28000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 58297.22,
+      "effective_dps": 826.65,
+      "effective_per_shot": 41332.36,
+      "footprint": 4.3503,
+      "k": 1.4762,
+      "reliability": 0.9945,
+      "sigma": 15.91,
+      "slot": "Armament@PRIMARY",
+      "weapon": "MutFlamer"
+     },
+     {
+      "avg_versus": 0.703,
+      "damage_total": 42000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 74275.69,
+      "effective_dps": 968.21,
+      "effective_per_shot": 48410.34,
+      "footprint": 5.8419,
+      "k": 1.1526,
+      "reliability": 1.064,
+      "sigma": 13.63,
+      "slot": "Armament@UPGRADE",
+      "weapon": "MutFlamerChem"
+     }
+    ]
+   },
+   "forgotten_experimentalmammothtank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6978,
+      "damage_total": 63600.0,
+      "eff_reload": 56.0,
+      "effective_damage": 116664.63,
+      "effective_dps": 2637.73,
+      "effective_per_shot": 73856.44,
+      "footprint": 8.8345,
+      "k": 1.1613,
+      "reliability": 0.8064,
+      "sigma": 466.48,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TS120mmx"
+     },
+     {
+      "avg_versus": 0.7044,
+      "damage_total": 93600.0,
+      "eff_reload": 56.0,
+      "effective_damage": 176401.46,
+      "effective_dps": 4032.21,
+      "effective_per_shot": 112901.84,
+      "footprint": 12.5676,
+      "k": 1.2062,
+      "reliability": 0.8871,
+      "sigma": 332.44,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSChem120mmx"
+     },
+     {
+      "avg_versus": 0.6869,
+      "damage_total": 60000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 148506.72,
+      "effective_dps": 2434.08,
+      "effective_per_shot": 85192.72,
+      "footprint": 6.3916,
+      "k": 1.4199,
+      "reliability": 0.8772,
+      "sigma": 377.08,
+      "slot": "Armament@SECONDARY",
+      "weapon": "TSMammothTusk"
+     }
+    ]
+   },
+   "forgotten_flametank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7288,
+      "damage_total": 40000.0,
+      "eff_reload": 65.0,
+      "effective_damage": 80373.78,
+      "effective_dps": 875.02,
+      "effective_per_shot": 56876.61,
+      "footprint": 7.2561,
+      "k": 1.4219,
+      "reliability": 1.1023,
+      "sigma": 16.17,
+      "slot": "Armament@PRIMARY",
+      "weapon": "MutHFlamer"
+     },
+     {
+      "avg_versus": 0.7327,
+      "damage_total": 60000.0,
+      "eff_reload": 65.0,
+      "effective_damage": 126402.56,
+      "effective_dps": 1388.01,
+      "effective_per_shot": 90220.73,
+      "footprint": 17.7528,
+      "k": 1.5037,
+      "reliability": 1.0647,
+      "sigma": 13.86,
+      "slot": "Armament@UPGRADE",
+      "weapon": "MutHFlamerChem"
+     }
+    ]
+   },
+   "forgotten_m113adats": {
+    "armaments": [
+     {
+      "avg_versus": 0.5753,
+      "damage_total": 8000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 14162.13,
+      "effective_dps": 492.75,
+      "effective_per_shot": 7391.2,
+      "footprint": 7.1082,
+      "k": 0.9239,
+      "reliability": 0.8817,
+      "sigma": 236.87,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSAdatsMissile"
+     },
+     {
+      "avg_versus": 0.5753,
+      "damage_total": 8000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 13788.99,
+      "effective_dps": 477.1,
+      "effective_per_shot": 7156.46,
+      "footprint": 7.1082,
+      "k": 0.8946,
+      "reliability": 0.8351,
+      "sigma": 330.3,
+      "slot": "Armament@SECONDARY",
+      "weapon": "TSAdatsMissile_AA"
+     },
+     {
+      "avg_versus": 0.5753,
+      "damage_total": 8000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 14162.13,
+      "effective_dps": 492.75,
+      "effective_per_shot": 7391.2,
+      "footprint": 7.1082,
+      "k": 0.9239,
+      "reliability": 0.8817,
+      "sigma": 236.87,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSAdatsMissile"
+     },
+     {
+      "avg_versus": 0.5753,
+      "damage_total": 8000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 13788.99,
+      "effective_dps": 477.1,
+      "effective_per_shot": 7156.46,
+      "footprint": 7.1082,
+      "k": 0.8946,
+      "reliability": 0.8351,
+      "sigma": 330.3,
+      "slot": "Armament@UPGRADEAA",
+      "weapon": "TSAdatsMissile_AA"
+     }
+    ]
+   },
+   "forgotten_missilevan": {
+    "armaments": [
+     {
+      "avg_versus": 0.7054,
+      "damage_total": 24000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 39816.34,
+      "effective_dps": 1316.55,
+      "effective_per_shot": 26331.07,
+      "footprint": 4.3503,
+      "k": 1.0971,
+      "reliability": 0.5714,
+      "sigma": 1329.19,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSVanMissile"
+     },
+     {
+      "avg_versus": 0.712,
+      "damage_total": 36000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 63802.88,
+      "effective_dps": 2108.81,
+      "effective_per_shot": 42176.14,
+      "footprint": 8.0834,
+      "k": 1.1716,
+      "reliability": 0.6942,
+      "sigma": 1329.19,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSChemVanMissile"
+     }
+    ]
+   },
+   "forgotten_mlrs": {
+    "armaments": [
+     {
+      "avg_versus": 0.7054,
+      "damage_total": 24000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 34125.2,
+      "effective_dps": 2207.86,
+      "effective_per_shot": 22078.57,
+      "footprint": 4.3503,
+      "k": 0.9199,
+      "reliability": 0.3343,
+      "sigma": 2530.7,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSMLRSMissile"
+     },
+     {
+      "avg_versus": 0.712,
+      "damage_total": 36000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 52959.02,
+      "effective_dps": 3445.53,
+      "effective_per_shot": 34455.26,
+      "footprint": 8.0834,
+      "k": 0.9571,
+      "reliability": 0.393,
+      "sigma": 2530.7,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSChemMLRSMissile"
+     }
+    ]
+   },
+   "forgotten_nomadbarracks": {
+    "armaments": [
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 8000.0,
+      "eff_reload": 6.0,
+      "effective_damage": 7214.42,
+      "effective_dps": 769.79,
+      "effective_per_shot": 4618.71,
+      "footprint": 0.3595,
+      "k": 0.5773,
+      "reliability": 0.8119,
+      "sigma": 216.6,
+      "slot": "Armament",
+      "weapon": "TSNomadGun"
+     }
+    ]
+   },
+   "forgotten_raidercar": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 4000.0,
+      "eff_reload": 26.0,
+      "effective_damage": 3405.65,
+      "effective_dps": 316.72,
+      "effective_per_shot": 2058.68,
+      "footprint": 0.1598,
+      "k": 0.5147,
+      "reliability": 0.8115,
+      "sigma": 144.75,
+      "slot": "Armament",
+      "weapon": "TSRaiderCarCannon"
+     }
+    ]
+   },
+   "forgotten_rattytank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 4000.0,
+      "eff_reload": 24.0,
+      "effective_damage": 7624.23,
+      "effective_dps": 185.88,
+      "effective_per_shot": 4461.2,
+      "footprint": 4.3503,
+      "k": 1.1153,
+      "reliability": 0.8185,
+      "sigma": 522.64,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TS70mm"
+     },
+     {
+      "avg_versus": 0.6691,
+      "damage_total": 6000.0,
+      "eff_reload": 24.0,
+      "effective_damage": 9947.03,
+      "effective_dps": 239.44,
+      "effective_per_shot": 5746.55,
+      "footprint": 5.1577,
+      "k": 0.9578,
+      "reliability": 0.8655,
+      "sigma": 331.81,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TS70mmChem"
+     }
+    ]
+   },
+   "forgotten_ruiner": {
+    "armaments": [
+     {
+      "avg_versus": 0.6176,
+      "damage_total": 36000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 61934.51,
+      "effective_dps": 650.54,
+      "effective_per_shot": 32526.87,
+      "footprint": 7.1082,
+      "k": 0.9035,
+      "reliability": 0.8319,
+      "sigma": 336.76,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSRuinerMissile"
+     },
+     {
+      "avg_versus": 0.6315,
+      "damage_total": 54000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 59401.36,
+      "effective_dps": 684.16,
+      "effective_per_shot": 34208.16,
+      "footprint": 6.5395,
+      "k": 0.6335,
+      "reliability": 0.7345,
+      "sigma": 336.76,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSChemRuinerMissile"
+     }
+    ]
+   },
+   "forgotten_scarabapc": {
+    "armaments": [
+     {
+      "avg_versus": 0.565,
+      "damage_total": 16000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 14930.61,
+      "effective_dps": 825.16,
+      "effective_per_shot": 8251.62,
+      "footprint": 2.3825,
+      "k": 0.5157,
+      "reliability": 0.6354,
+      "sigma": 226.67,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSSAPCMissiles"
+     },
+     {
+      "avg_versus": 0.5876,
+      "damage_total": 24000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 27265.64,
+      "effective_dps": 1539.83,
+      "effective_per_shot": 15398.32,
+      "footprint": 5.1404,
+      "k": 0.6416,
+      "reliability": 0.7077,
+      "sigma": 226.67,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSSAPCCoreMissiles"
+     }
+    ]
+   },
+   "forgotten_scoopertank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 20000.0,
+      "eff_reload": 62.0,
+      "effective_damage": 37938.89,
+      "effective_dps": 715.08,
+      "effective_per_shot": 22167.39,
+      "footprint": 4.3503,
+      "k": 1.1084,
+      "reliability": 0.8094,
+      "sigma": 548.96,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSScoopDual"
+     },
+     {
+      "avg_versus": 0.6883,
+      "damage_total": 30000.0,
+      "eff_reload": 62.0,
+      "effective_damage": 56570.53,
+      "effective_dps": 1112.46,
+      "effective_per_shot": 34486.11,
+      "footprint": 7.58,
+      "k": 1.1495,
+      "reliability": 0.8915,
+      "sigma": 335.57,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSScoopDualChem"
+     }
+    ]
+   },
+   "forgotten_tankkiller": {
+    "armaments": [
+     {
+      "avg_versus": 0.6083,
+      "damage_total": 30000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 44214.47,
+      "effective_dps": 241.73,
+      "effective_per_shot": 21755.31,
+      "footprint": 2.758,
+      "k": 0.7252,
+      "reliability": 0.7843,
+      "sigma": 331.2,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSHighVelocity"
+     },
+     {
+      "avg_versus": 0.6299,
+      "damage_total": 45000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 20321.69,
+      "effective_dps": 122.57,
+      "effective_per_shot": 11031.62,
+      "footprint": 0.8299,
+      "k": 0.2451,
+      "reliability": 0.3806,
+      "sigma": 331.2,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSHighVelocityChem"
+     }
+    ]
+   },
+   "forgotten_thumperbus": {
+    "armaments": [
+     {
+      "avg_versus": 0.7223,
+      "damage_total": 64000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 137862.4,
+      "effective_dps": 824.75,
+      "effective_per_shot": 98970.52,
+      "footprint": 10.7419,
+      "k": 1.5464,
+      "reliability": 0.8114,
+      "sigma": 560.71,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSBusMortar"
+     },
+     {
+      "avg_versus": 0.7336,
+      "damage_total": 128000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 280888.93,
+      "effective_dps": 1664.91,
+      "effective_per_shot": 199788.87,
+      "footprint": 21.3264,
+      "k": 1.5609,
+      "reliability": 0.8615,
+      "sigma": 560.71,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSBusMortarChem"
+     }
+    ]
+   },
+   "forgotten_warriortank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6083,
+      "damage_total": 40000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 58643.39,
+      "effective_dps": 523.74,
+      "effective_per_shot": 28805.56,
+      "footprint": 2.758,
+      "k": 0.7201,
+      "reliability": 0.7766,
+      "sigma": 343.11,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSHighVelocity2"
+     },
+     {
+      "avg_versus": 0.6299,
+      "damage_total": 60000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 26618.98,
+      "effective_dps": 262.0,
+      "effective_per_shot": 14410.16,
+      "footprint": 0.8299,
+      "k": 0.2402,
+      "reliability": 0.3726,
+      "sigma": 343.11,
+      "slot": "Armament@UPGRADE",
+      "weapon": "TSHighVelocity2Chem"
+     }
+    ]
+   }
+  }
+ }
+}

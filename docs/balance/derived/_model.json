@@ -1,0 +1,44 @@
+{
+ "effective_damage": {
+  "LEAD": 0.2,
+  "MIN_SPREAD": 100,
+  "SWARM_W": 0.25,
+  "TARGET_SPEED": 100
+ },
+ "target_model": {
+  "A_BLOB": 9.0,
+  "A_SELF": 1.0,
+  "BLOB_UPTIME": 0.3,
+  "DENSITY": {
+   "AIR": 0.2,
+   "BLD": 0.25,
+   "INF": 2.0,
+   "VEH": 0.33
+  },
+  "ENGAGEMENT": {
+   "AIR": 0.1,
+   "BLD": 0.15,
+   "INF": 0.35,
+   "VEH": 0.4
+  },
+  "armor_census": {
+   "Bomber": 51,
+   "Concrete": 303,
+   "Fighter": 20,
+   "Flak": 78,
+   "Heavy": 137,
+   "Helicopter": 66,
+   "Heroic": 32,
+   "Light": 200,
+   "Medium": 121,
+   "None": 106,
+   "Plate": 89,
+   "Scout": 60,
+   "Spaceship": 22,
+   "Steel": 35,
+   "Superheavy": 94,
+   "Wood": 563
+  },
+  "reference_hp": 74000
+ }
+}

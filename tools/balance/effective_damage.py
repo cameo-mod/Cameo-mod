@@ -201,6 +201,19 @@ def damage_value(raw):
         return None
 
 
+def number(raw):
+    """`raw` as a float, or None when it is not numeric.
+
+    Same contract as `damage_value` for fields that must keep their fractional part
+    (Versus percentages, %-of-HP damage): the caller decides what a missing value
+    means instead of a handler quietly swallowing it — `audit_error_handling.py` E2.
+    """
+    try:
+        return float(str(raw).strip())
+    except (TypeError, ValueError):
+        return None
+
+
 def flat_damage_warheads(resolved):
     """Main + extra-damage flat warheads (exclude %-twin, FriendlyFire, EMP, effects)."""
     out = []

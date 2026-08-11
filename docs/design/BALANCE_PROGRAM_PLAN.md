@@ -31,7 +31,7 @@ status rather than keeping its own copy.
 |---|---|---|---|---|
 | **W1** | K coefficient + target model (measured Versus weights, capped density) | ✅ DONE `f8421d345` | Claude | — |
 | **W2** | `^LightFlameWeapon` → 3-way split + new `^Warhead_Inferno_*` family | 🔵 IN PROGRESS (Devin, 2026-08-11) | **Devin** | — |
-| **W3** | Ledger split: raw stays, derived moves to `docs/balance/derived/` | ⬜ READY | Claude | W1 |
+| **W3** | Ledger split: raw stays, derived moves to `docs/balance/derived/` | ✅ DONE | Claude | W1 |
 | **W4** | Retire weapon-class K; charge-up becomes an ACTOR property | ⬜ READY | Claude | W1 |
 | **W5** | Missing metrics: overkill/TTK, range advantage, ValidTargets, MinRange, AttackDelay | ⬜ READY | Claude | W1 |
 | **W6** | C# `ModifiesCombatProportionalToPhysicalState` (+ pitch/glow hooks) | ⬜ READY | either | — |
@@ -146,27 +146,50 @@ non-beam flame weapons can use it later (same reason `Cryo` keeps its name).
 
 ---
 
-### W3 — Ledger split ⬜ READY · owner Claude · needs W1
+### W3 — Ledger split ✅ DONE · owner Claude · needs W1
 
-`BALANCE_PIPELINE.md` §2 says the ledger is RAW STATS ONLY. Five derived fields
-currently sit in it, and correcting the scatter model rewrote **4136 ledger lines with
-`mods/` untouched** — model noise inside the artifact whose job is proving yaml ↔
-ledger equality.
+`BALANCE_PIPELINE.md` §2 says the ledger is RAW STATS ONLY. Five derived fields sat in
+it, and correcting the scatter model rewrote **4136 ledger lines with `mods/`
+untouched** — model noise inside the artifact whose job is proving yaml ↔ ledger
+equality.
 
-**Design:** same `extract_stats.py` run writes two trees.
-`docs/balance/<faction>.json` — raw only (a diff means *the game changed*).
-`docs/balance/derived/<faction>.json` — `k`, `effective_per_shot`, `eff_reload`,
-`effective_dps`, `avg_versus`, `footprint`, `reliability`, `sigma` (a diff means
-*the model changed*). Keeps clutter out of the raw file and gives each diff one question.
+**Shipped:** one `extract_stats.py` run writes two trees off the same resolve, so they
+cannot desync.
 
-**DONE WHEN**
-- [ ] the five `effective_*` fields are gone from `docs/balance/*.json`;
-- [ ] `docs/balance/derived/*.json` exists, one per faction, same section shape;
-- [ ] `audit_balance_drift` still passes and now reads only the raw tree;
-- [ ] the workbook builder reads derived from the new path;
-- [ ] `BALANCE_PIPELINE.md` §2's ⚠ block is replaced with the settled rule.
+| tree | a diff means |
+|---|---|
+| `docs/balance/<faction>.json` — raw only | **the game changed** |
+| `docs/balance/derived/<faction>.json` — `k`, `avg_versus`, `effective_per_shot`, `eff_reload`, `effective_dps`, `effective_damage`, `damage_total`, `footprint`, `reliability`, `sigma` | **the model changed** |
+| `docs/balance/derived/_model.json` — every constant they depend on | the model was **retuned** |
+
+- [x] the five `effective_*` fields are gone from `docs/balance/*.json` — the split
+      commit is **12 130 deletions, 0 additions**, every removed line one of the five
+      names, so provably not one raw stat moved;
+- [x] `docs/balance/derived/*.json`, 32 sidecars + `_model.json`; rows carry only
+      `slot` + `weapon` as join keys, never a duplicated raw stat;
+- [x] `audit_balance_drift` reads the raw tree **by construction** —
+      `build_ledgers()` returns raw and `build_both()` is the two-tree entry point, so
+      it cannot start diffing model output by accident;
+- [x] `extract_stats.py --check` verifies both trees and labels findings
+      `DRIFT (raw)` vs `DRIFT (model)`;
+- [x] `BALANCE_PIPELINE.md` §2's ⚠ block replaced with the settled rule;
+- [x] `tools/tests/test_ledger_split.py` (9 tests) pins it — the guard trips on 310
+      rows of the pre-split ledgers, so it fails when it should.
+
+⚠ **Correction to this item's original DONE list:** it required "the workbook builder
+reads derived from the new path". That premise was wrong — `build_workbook.py` and
+`import_workbook.py` never read the five fields even while they sat in the ledger
+(`grep -n effective tools/balance/build_workbook.py` → one comment). Nothing consumes
+the derived tree today; giving it its first consumer is **W11**, not W3. No consumer was
+invented just to satisfy a checkbox.
+
+Also folded in (both measured, neither changes a number): `target_model` now resolves
+the roster **once** instead of twice and reuses the caller's `Ruleset` via
+`use_ruleset()` — cold census 15.3s → 6.8s, full extraction of *both* trees 18s. The
+armor census is byte-identical afterwards (Wood 563 … Fighter 20, reference HP 74 000).
 
 **VERIFY:** `grep -l effective_damage docs/balance/*.json | wc -l` → 0
+and `ls docs/balance/derived/*.json | wc -l` → 33
 
 ---
 
@@ -367,7 +390,9 @@ INF 35% / VEH 40% / BLD 15% / AIR 10%.
   the default PATH for a fresh shell — prepend it:
   `export PATH="$PATH:/c/Program Files/GitHub CLI"`. Use it for PR review comments, CI
   status and opening PRs instead of hand-rolling `curl` against the REST API.
-  ⚠ It needs `gh auth login` (interactive, maintainer-only) before it can do anything.
+  ✅ **Authenticated 2026-08-11** as `AedisToru`, scopes `gist, read:org, repo, workflow`;
+  the repo resolves to `Zeruel87/Cameo-mod @ master`. `gh run list`, `gh pr view
+  --comments` and `gh api` all work without further setup.
 - **`openpyxl` 3.1.5** is present on the maintainer's Windows box, so `audit_balance_sheet`
   produces a real report here. It was MISSING on the Linux box that ran PR #251, which is
   why that PR committed `balance_sheet.md` as the 46-byte string "openpyxl not installed".

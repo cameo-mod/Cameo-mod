@@ -1,0 +1,1065 @@
+{
+ "ledger": "starcraft_terran",
+ "pack": "mods/cameo/ContentPacks/StarCraft/Terran",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "terran_battlecruiser": {
+    "armaments": [
+     {
+      "avg_versus": 0.6941,
+      "damage_total": 37600.0,
+      "eff_reload": 38.0,
+      "effective_damage": 144217.43,
+      "effective_dps": 1066.55,
+      "effective_per_shot": 40528.88,
+      "footprint": 122.3844,
+      "k": 1.0779,
+      "reliability": 0.5877,
+      "sigma": 600.0,
+      "slot": "Armament",
+      "weapon": "BCLaser"
+     },
+     {
+      "avg_versus": 0.7167,
+      "damage_total": 145600.0,
+      "eff_reload": 38.0,
+      "effective_damage": 578077.1,
+      "effective_dps": 4320.01,
+      "effective_per_shot": 164160.5,
+      "footprint": 122.3844,
+      "k": 1.1275,
+      "reliability": 0.6169,
+      "sigma": 550.0,
+      "slot": "Armament@Yamato",
+      "weapon": "BCYamatoCannon"
+     }
+    ]
+   },
+   "terran_phobos": {
+    "armaments": [
+     {
+      "avg_versus": 0.6961,
+      "damage_total": 49600.0,
+      "eff_reload": 92.0,
+      "effective_damage": 64616.94,
+      "effective_dps": 1983.56,
+      "effective_per_shot": 45621.88,
+      "footprint": 25.3122,
+      "k": 0.9198,
+      "reliability": 0.546,
+      "sigma": 600.0,
+      "slot": "Armament",
+      "weapon": "PhobosLaser"
+     },
+     {
+      "avg_versus": 0.7167,
+      "damage_total": 145600.0,
+      "eff_reload": 38.0,
+      "effective_damage": 578077.1,
+      "effective_dps": 4320.01,
+      "effective_per_shot": 164160.5,
+      "footprint": 122.3844,
+      "k": 1.1275,
+      "reliability": 0.6169,
+      "sigma": 550.0,
+      "slot": "Armament@Yamato",
+      "weapon": "BCYamatoCannon"
+     }
+    ]
+   },
+   "terran_pythean": {
+    "armaments": [
+     {
+      "avg_versus": 0.7212,
+      "damage_total": 4000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 10082.6,
+      "effective_dps": 1610.44,
+      "effective_per_shot": 6441.77,
+      "footprint": 12.7832,
+      "k": 1.6104,
+      "reliability": 0.9228,
+      "sigma": 237.23,
+      "slot": "Armament",
+      "weapon": "JimRaynorMachineGun"
+     }
+    ]
+   },
+   "terran_sciencevessel": {
+    "armaments": [
+     {
+      "avg_versus": 1.0619,
+      "damage_total": 150000.0,
+      "eff_reload": 360.0,
+      "effective_damage": 125834.92,
+      "effective_dps": 395.53,
+      "effective_per_shot": 142392.46,
+      "footprint": 2.5087,
+      "k": 0.9493,
+      "reliability": 0.6005,
+      "sigma": 400.0,
+      "slot": "Armament@EMP",
+      "weapon": "ScienceVessel_EMP"
+     }
+    ]
+   },
+   "terran_sundog": {
+    "armaments": [
+     {
+      "avg_versus": 0.6496,
+      "damage_total": 17000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 13308.79,
+      "effective_dps": 229.59,
+      "effective_per_shot": 8954.09,
+      "footprint": 0.6392,
+      "k": 0.5267,
+      "reliability": 0.7514,
+      "sigma": 100.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "SunDogLaser"
+     },
+     {
+      "avg_versus": 0.6075,
+      "damage_total": 10000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 8724.91,
+      "effective_dps": 127.74,
+      "effective_per_shot": 4981.88,
+      "footprint": 6.6937,
+      "k": 0.4982,
+      "reliability": 0.5378,
+      "sigma": 267.4,
+      "slot": "Armament@SECONDARY1",
+      "weapon": "SunDogRockets"
+     },
+     {
+      "avg_versus": 0.6075,
+      "damage_total": 10000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 8724.91,
+      "effective_dps": 127.74,
+      "effective_per_shot": 4981.88,
+      "footprint": 6.6937,
+      "k": 0.4982,
+      "reliability": 0.5378,
+      "sigma": 267.4,
+      "slot": "Armament@SECONDARY2",
+      "weapon": "SunDogRockets"
+     }
+    ]
+   },
+   "terran_valkyrie": {
+    "armaments": [
+     {
+      "avg_versus": 0.6331,
+      "damage_total": 8000.0,
+      "eff_reload": 95.0,
+      "effective_damage": 8236.33,
+      "effective_dps": 398.82,
+      "effective_per_shot": 4736.0,
+      "footprint": 6.8635,
+      "k": 0.592,
+      "reliability": 0.6006,
+      "sigma": 345.2,
+      "slot": "Armament@SECONDARY1",
+      "weapon": "ValkyrieRockets"
+     },
+     {
+      "avg_versus": 0.6331,
+      "damage_total": 8000.0,
+      "eff_reload": 95.0,
+      "effective_damage": 8236.33,
+      "effective_dps": 398.82,
+      "effective_per_shot": 4736.0,
+      "footprint": 6.8635,
+      "k": 0.592,
+      "reliability": 0.6006,
+      "sigma": 345.2,
+      "slot": "Armament@SECONDARY2",
+      "weapon": "ValkyrieRockets"
+     }
+    ]
+   },
+   "terran_wraith": {
+    "armaments": [
+     {
+      "avg_versus": 0.6496,
+      "damage_total": 17000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 13307.98,
+      "effective_dps": 279.8,
+      "effective_per_shot": 8953.5,
+      "footprint": 0.6392,
+      "k": 0.5267,
+      "reliability": 0.7514,
+      "sigma": 100.02,
+      "slot": "Armament@PRIMARY",
+      "weapon": "WraithLaser"
+     },
+     {
+      "avg_versus": 0.6075,
+      "damage_total": 10000.0,
+      "eff_reload": 24.0,
+      "effective_damage": 9315.94,
+      "effective_dps": 222.32,
+      "effective_per_shot": 5335.57,
+      "footprint": 6.6937,
+      "k": 0.5336,
+      "reliability": 0.5969,
+      "sigma": 228.04,
+      "slot": "Armament@SECONDARY1",
+      "weapon": "WraithRockets_AA"
+     },
+     {
+      "avg_versus": 0.6075,
+      "damage_total": 10000.0,
+      "eff_reload": 24.0,
+      "effective_damage": 9315.94,
+      "effective_dps": 222.32,
+      "effective_per_shot": 5335.57,
+      "footprint": 6.6937,
+      "k": 0.5336,
+      "reliability": 0.5969,
+      "sigma": 228.04,
+      "slot": "Armament@SECONDARY2",
+      "weapon": "WraithRockets_AA"
+     }
+    ]
+   },
+   "terran_wyvern": {
+    "armaments": [
+     {
+      "avg_versus": 0.6781,
+      "damage_total": 16000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 24284.45,
+      "effective_dps": 463.74,
+      "effective_per_shot": 15651.29,
+      "footprint": 25.0731,
+      "k": 0.9782,
+      "reliability": 0.7342,
+      "sigma": 370.0,
+      "slot": "Armament@SECONDARY1",
+      "weapon": "WyvernRockets"
+     },
+     {
+      "avg_versus": 0.6781,
+      "damage_total": 16000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 24284.45,
+      "effective_dps": 463.74,
+      "effective_per_shot": 15651.29,
+      "footprint": 25.0731,
+      "k": 0.9782,
+      "reliability": 0.7342,
+      "sigma": 370.0,
+      "slot": "Armament@SECONDARY2",
+      "weapon": "WyvernRockets"
+     }
+    ]
+   }
+  },
+  "defenses": {
+   "terran_missileturret": {
+    "armaments": [
+     {
+      "avg_versus": 0.6075,
+      "damage_total": 20000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 13394.92,
+      "effective_dps": 250.54,
+      "effective_per_shot": 7516.33,
+      "footprint": 6.6937,
+      "k": 0.3758,
+      "reliability": 0.3351,
+      "sigma": 490.04,
+      "slot": "Armament@1",
+      "weapon": "MissileTurret"
+     },
+     {
+      "avg_versus": 0.6075,
+      "damage_total": 20000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 13394.92,
+      "effective_dps": 250.54,
+      "effective_per_shot": 7516.33,
+      "footprint": 6.6937,
+      "k": 0.3758,
+      "reliability": 0.3351,
+      "sigma": 490.04,
+      "slot": "Armament@2",
+      "weapon": "MissileTurret"
+     }
+    ]
+   },
+   "terran_sentinel": {
+    "armaments": [
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 20.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 252.4,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "NaxLaserT"
+     }
+    ]
+   }
+  },
+  "infantry": {
+   "terran_firebat": {
+    "armaments": [
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 2000.0,
+      "eff_reload": 52.0,
+      "effective_damage": 3456.4,
+      "effective_dps": 600.14,
+      "effective_per_shot": 2400.57,
+      "footprint": 4.3503,
+      "k": 1.2003,
+      "reliability": 0.6406,
+      "sigma": 1080.0,
+      "slot": "Armament@1",
+      "weapon": "FirebatF"
+     },
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 2000.0,
+      "eff_reload": 52.0,
+      "effective_damage": 3456.4,
+      "effective_dps": 600.14,
+      "effective_per_shot": 2400.57,
+      "footprint": 4.3503,
+      "k": 1.2003,
+      "reliability": 0.6406,
+      "sigma": 1080.0,
+      "slot": "Armament@2",
+      "weapon": "FirebatF"
+     },
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 2000.0,
+      "eff_reload": 52.0,
+      "effective_damage": 3456.4,
+      "effective_dps": 600.14,
+      "effective_per_shot": 2400.57,
+      "footprint": 4.3503,
+      "k": 1.2003,
+      "reliability": 0.6406,
+      "sigma": 1080.0,
+      "slot": "Armament@GARRISONED1",
+      "weapon": "FirebatF"
+     },
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 2000.0,
+      "eff_reload": 52.0,
+      "effective_damage": 3456.4,
+      "effective_dps": 600.14,
+      "effective_per_shot": 2400.57,
+      "footprint": 4.3503,
+      "k": 1.2003,
+      "reliability": 0.6406,
+      "sigma": 1080.0,
+      "slot": "Armament@GARRISONED2",
+      "weapon": "FirebatF"
+     }
+    ]
+   },
+   "terran_ghost": {
+    "armaments": [
+     {
+      "avg_versus": 0.8913,
+      "damage_total": 144000.0,
+      "eff_reload": 22.0,
+      "effective_damage": 167080.18,
+      "effective_dps": 6540.01,
+      "effective_per_shot": 143880.14,
+      "footprint": 9.1924,
+      "k": 0.9992,
+      "reliability": 0.8427,
+      "sigma": 67.42,
+      "slot": "Armament@lockdown",
+      "weapon": "GhostSniperLockdown"
+     },
+     {
+      "avg_versus": 0.6413,
+      "damage_total": 10000.0,
+      "eff_reload": 22.0,
+      "effective_damage": 11777.48,
+      "effective_dps": 342.31,
+      "effective_per_shot": 7530.76,
+      "footprint": 6.6637,
+      "k": 0.7531,
+      "reliability": 0.8446,
+      "sigma": 67.42,
+      "slot": "Armament@PRIMARY",
+      "weapon": "GhostSniper"
+     },
+     {
+      "avg_versus": 0.6413,
+      "damage_total": 10000.0,
+      "eff_reload": 22.0,
+      "effective_damage": 11777.48,
+      "effective_dps": 342.31,
+      "effective_per_shot": 7530.76,
+      "footprint": 6.6637,
+      "k": 0.7531,
+      "reliability": 0.8446,
+      "sigma": 67.42,
+      "slot": "Armament@GARRISONED",
+      "weapon": "GhostSniper"
+     }
+    ]
+   },
+   "terran_harakan": {
+    "armaments": [
+     {
+      "avg_versus": 0.7288,
+      "damage_total": 4000.0,
+      "eff_reload": 85.0,
+      "effective_damage": 5864.8,
+      "effective_dps": 967.37,
+      "effective_per_shot": 4111.31,
+      "footprint": 7.2561,
+      "k": 1.0278,
+      "reliability": 0.5592,
+      "sigma": 1238.57,
+      "slot": "Armament@1",
+      "weapon": "HarakanF"
+     },
+     {
+      "avg_versus": 0.7288,
+      "damage_total": 4000.0,
+      "eff_reload": 85.0,
+      "effective_damage": 5864.8,
+      "effective_dps": 967.37,
+      "effective_per_shot": 4111.31,
+      "footprint": 7.2561,
+      "k": 1.0278,
+      "reliability": 0.5592,
+      "sigma": 1238.57,
+      "slot": "Armament@2",
+      "weapon": "HarakanF"
+     },
+     {
+      "avg_versus": 0.7288,
+      "damage_total": 4000.0,
+      "eff_reload": 85.0,
+      "effective_damage": 5864.8,
+      "effective_dps": 967.37,
+      "effective_per_shot": 4111.31,
+      "footprint": 7.2561,
+      "k": 1.0278,
+      "reliability": 0.5592,
+      "sigma": 1238.57,
+      "slot": "Armament@GARRISONED1",
+      "weapon": "HarakanF"
+     },
+     {
+      "avg_versus": 0.7288,
+      "damage_total": 4000.0,
+      "eff_reload": 85.0,
+      "effective_damage": 5864.8,
+      "effective_dps": 967.37,
+      "effective_per_shot": 4111.31,
+      "footprint": 7.2561,
+      "k": 1.0278,
+      "reliability": 0.5592,
+      "sigma": 1238.57,
+      "slot": "Armament@GARRISONED2",
+      "weapon": "HarakanF"
+     }
+    ]
+   },
+   "terran_jimraynor": {
+    "armaments": [
+     {
+      "avg_versus": 0.7212,
+      "damage_total": 4000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 10082.6,
+      "effective_dps": 1610.44,
+      "effective_per_shot": 6441.77,
+      "footprint": 12.7832,
+      "k": 1.6104,
+      "reliability": 0.9228,
+      "sigma": 237.23,
+      "slot": "Armament@PRIMARY",
+      "weapon": "JimRaynorMachineGun"
+     },
+     {
+      "avg_versus": 0.7212,
+      "damage_total": 4000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 10082.6,
+      "effective_dps": 1610.44,
+      "effective_per_shot": 6441.77,
+      "footprint": 12.7832,
+      "k": 1.6104,
+      "reliability": 0.9228,
+      "sigma": 237.23,
+      "slot": "Armament@GARRISONED",
+      "weapon": "JimRaynorMachineGun"
+     }
+    ]
+   },
+   "terran_madcap": {
+    "armaments": [
+     {
+      "avg_versus": 0.6738,
+      "damage_total": 36000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 38123.47,
+      "effective_dps": 955.31,
+      "effective_per_shot": 23882.75,
+      "footprint": 6.9109,
+      "k": 0.6634,
+      "reliability": 0.4831,
+      "sigma": 671.68,
+      "slot": "Armament@PRIMARY",
+      "weapon": "MadcapGun"
+     },
+     {
+      "avg_versus": 0.6738,
+      "damage_total": 36000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 38123.47,
+      "effective_dps": 955.31,
+      "effective_per_shot": 23882.75,
+      "footprint": 6.9109,
+      "k": 0.6634,
+      "reliability": 0.4831,
+      "sigma": 671.68,
+      "slot": "Armament@GARRISONED",
+      "weapon": "MadcapGun"
+     }
+    ]
+   },
+   "terran_marauder": {
+    "armaments": [
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 30000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 35139.44,
+      "effective_dps": 379.46,
+      "effective_per_shot": 22767.68,
+      "footprint": 6.5738,
+      "k": 0.7589,
+      "reliability": 0.6235,
+      "sigma": 240.2,
+      "slot": "Armament@1",
+      "weapon": "MarauderMissiles"
+     },
+     {
+      "avg_versus": 0.6454,
+      "damage_total": 30000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 35139.44,
+      "effective_dps": 379.46,
+      "effective_per_shot": 22767.68,
+      "footprint": 6.5738,
+      "k": 0.7589,
+      "reliability": 0.6235,
+      "sigma": 240.2,
+      "slot": "Armament@GARRISONED1",
+      "weapon": "MarauderMissiles"
+     }
+    ]
+   },
+   "terran_marine": {
+    "armaments": [
+     {
+      "avg_versus": 0.6738,
+      "damage_total": 36000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 37694.27,
+      "effective_dps": 2359.49,
+      "effective_per_shot": 23594.86,
+      "footprint": 6.9109,
+      "k": 0.6554,
+      "reliability": 0.4712,
+      "sigma": 694.2,
+      "slot": "Armament@PRIMARY",
+      "weapon": "MarineMG"
+     },
+     {
+      "avg_versus": 0.6738,
+      "damage_total": 36000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 37694.27,
+      "effective_dps": 2359.49,
+      "effective_per_shot": 23594.86,
+      "footprint": 6.9109,
+      "k": 0.6554,
+      "reliability": 0.4712,
+      "sigma": 694.2,
+      "slot": "Armament@GARRISONED",
+      "weapon": "MarineMG"
+     }
+    ]
+   },
+   "terran_medic": {
+    "armaments": [
+     {
+      "avg_versus": 0.6839,
+      "damage_total": 7600.0,
+      "eff_reload": 60.0,
+      "effective_damage": 522.07,
+      "effective_dps": 4.05,
+      "effective_per_shot": 242.92,
+      "footprint": 0.1848,
+      "k": 0.032,
+      "reliability": 0.0627,
+      "sigma": 550.0,
+      "slot": "Armament@Flare",
+      "weapon": "MedicFlare"
+     },
+     {
+      "avg_versus": 0.6839,
+      "damage_total": 7600.0,
+      "eff_reload": 60.0,
+      "effective_damage": 522.07,
+      "effective_dps": 4.05,
+      "effective_per_shot": 242.92,
+      "footprint": 0.1848,
+      "k": 0.032,
+      "reliability": 0.0627,
+      "sigma": 550.0,
+      "slot": "Armament@FlareGARRISONED",
+      "weapon": "MedicFlare"
+     }
+    ]
+   },
+   "terran_reaper": {
+    "armaments": [
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 4000.0,
+      "eff_reload": 22.0,
+      "effective_damage": 4114.2,
+      "effective_dps": 136.91,
+      "effective_per_shot": 3011.97,
+      "footprint": 0.1598,
+      "k": 0.753,
+      "reliability": 0.9886,
+      "sigma": 8.75,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ReaperPistols"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 4000.0,
+      "eff_reload": 22.0,
+      "effective_damage": 4114.2,
+      "effective_dps": 136.91,
+      "effective_per_shot": 3011.97,
+      "footprint": 0.1598,
+      "k": 0.753,
+      "reliability": 0.9886,
+      "sigma": 8.75,
+      "slot": "Armament@SECONDARY",
+      "weapon": "ReaperPistols"
+     },
+     {
+      "avg_versus": 0.6851,
+      "damage_total": 12000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 23027.93,
+      "effective_dps": 331.5,
+      "effective_per_shot": 14917.29,
+      "footprint": 13.4998,
+      "k": 1.2431,
+      "reliability": 0.794,
+      "sigma": 469.8,
+      "slot": "Armament@Grenade",
+      "weapon": "ReaperGrenade"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 4000.0,
+      "eff_reload": 22.0,
+      "effective_damage": 4114.2,
+      "effective_dps": 136.91,
+      "effective_per_shot": 3011.97,
+      "footprint": 0.1598,
+      "k": 0.753,
+      "reliability": 0.9886,
+      "sigma": 8.75,
+      "slot": "Armament@GARRISONED1",
+      "weapon": "ReaperPistols"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 4000.0,
+      "eff_reload": 22.0,
+      "effective_damage": 4114.2,
+      "effective_dps": 136.91,
+      "effective_per_shot": 3011.97,
+      "footprint": 0.1598,
+      "k": 0.753,
+      "reliability": 0.9886,
+      "sigma": 8.75,
+      "slot": "Armament@GARRISONED2",
+      "weapon": "ReaperPistols"
+     },
+     {
+      "avg_versus": 0.6851,
+      "damage_total": 12000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 23027.93,
+      "effective_dps": 331.5,
+      "effective_per_shot": 14917.29,
+      "footprint": 13.4998,
+      "k": 1.2431,
+      "reliability": 0.794,
+      "sigma": 469.8,
+      "slot": "Armament@GARRISONEDGrenade",
+      "weapon": "ReaperGrenade"
+     }
+    ]
+   },
+   "terran_specter": {
+    "armaments": [
+     {
+      "avg_versus": 0.8913,
+      "damage_total": 288000.0,
+      "eff_reload": 33.0,
+      "effective_damage": 336880.93,
+      "effective_dps": 8797.42,
+      "effective_per_shot": 290314.77,
+      "footprint": 9.1924,
+      "k": 1.008,
+      "reliability": 0.8521,
+      "sigma": 63.38,
+      "slot": "Armament@lockdown",
+      "weapon": "SpecterSniperLockdown"
+     },
+     {
+      "avg_versus": 0.6413,
+      "damage_total": 20000.0,
+      "eff_reload": 33.0,
+      "effective_damage": 23741.61,
+      "effective_dps": 459.95,
+      "effective_per_shot": 15178.51,
+      "footprint": 6.6637,
+      "k": 0.7589,
+      "reliability": 0.8539,
+      "sigma": 63.38,
+      "slot": "Armament@PRIMARY",
+      "weapon": "SpecterSniper"
+     },
+     {
+      "avg_versus": 0.6413,
+      "damage_total": 20000.0,
+      "eff_reload": 33.0,
+      "effective_damage": 23741.61,
+      "effective_dps": 459.95,
+      "effective_per_shot": 15178.51,
+      "footprint": 6.6637,
+      "k": 0.7589,
+      "reliability": 0.8539,
+      "sigma": 63.38,
+      "slot": "Armament@GARRISONED",
+      "weapon": "SpecterSniper"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "terran_cyclone": {
+    "armaments": [
+     {
+      "avg_versus": 0.5891,
+      "damage_total": 4000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 6919.44,
+      "effective_dps": 425.38,
+      "effective_per_shot": 3190.33,
+      "footprint": 7.1082,
+      "k": 0.7976,
+      "reliability": 0.8413,
+      "sigma": 317.8,
+      "slot": "Armament",
+      "weapon": "CycloneRockets"
+     },
+     {
+      "avg_versus": 0.5891,
+      "damage_total": 4000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 6708.12,
+      "effective_dps": 407.56,
+      "effective_per_shot": 3056.72,
+      "footprint": 7.1082,
+      "k": 0.7642,
+      "reliability": 0.7885,
+      "sigma": 425.0,
+      "slot": "Armament@lockedon",
+      "weapon": "CycloneRocketsLockOn"
+     }
+    ]
+   },
+   "terran_goliath": {
+    "armaments": [
+     {
+      "avg_versus": 0.6868,
+      "damage_total": 6000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 9905.76,
+      "effective_dps": 959.32,
+      "effective_per_shot": 6395.45,
+      "footprint": 9.5091,
+      "k": 1.0659,
+      "reliability": 0.8585,
+      "sigma": 230.0,
+      "slot": "Armament@G1",
+      "weapon": "GoliathMG"
+     },
+     {
+      "avg_versus": 0.6868,
+      "damage_total": 6000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 9905.76,
+      "effective_dps": 959.32,
+      "effective_per_shot": 6395.45,
+      "footprint": 9.5091,
+      "k": 1.0659,
+      "reliability": 0.8585,
+      "sigma": 230.0,
+      "slot": "Armament@G2",
+      "weapon": "GoliathMG"
+     },
+     {
+      "avg_versus": 0.6075,
+      "damage_total": 30000.0,
+      "eff_reload": 33.0,
+      "effective_damage": 26275.2,
+      "effective_dps": 454.72,
+      "effective_per_shot": 15005.84,
+      "footprint": 6.6937,
+      "k": 0.5002,
+      "reliability": 0.5412,
+      "sigma": 265.0,
+      "slot": "Armament@A1",
+      "weapon": "GoliathRockets_AA"
+     },
+     {
+      "avg_versus": 0.6075,
+      "damage_total": 30000.0,
+      "eff_reload": 33.0,
+      "effective_damage": 26275.2,
+      "effective_dps": 454.72,
+      "effective_per_shot": 15005.84,
+      "footprint": 6.6937,
+      "k": 0.5002,
+      "reliability": 0.5412,
+      "sigma": 265.0,
+      "slot": "Armament@A2",
+      "weapon": "GoliathRockets_AA"
+     }
+    ]
+   },
+   "terran_goliathmk2": {
+    "armaments": [
+     {
+      "avg_versus": 0.6672,
+      "damage_total": 8000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 10249.82,
+      "effective_dps": 656.02,
+      "effective_per_shot": 6560.18,
+      "footprint": 9.1161,
+      "k": 0.82,
+      "reliability": 0.7115,
+      "sigma": 232.4,
+      "slot": "Armament@G1",
+      "weapon": "GoliathMk2MG"
+     },
+     {
+      "avg_versus": 0.6672,
+      "damage_total": 8000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 10249.82,
+      "effective_dps": 656.02,
+      "effective_per_shot": 6560.18,
+      "footprint": 9.1161,
+      "k": 0.82,
+      "reliability": 0.7115,
+      "sigma": 232.4,
+      "slot": "Armament@G2",
+      "weapon": "GoliathMk2MG"
+     },
+     {
+      "avg_versus": 0.5895,
+      "damage_total": 32000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 31431.08,
+      "effective_dps": 442.42,
+      "effective_per_shot": 17696.8,
+      "footprint": 6.6537,
+      "k": 0.553,
+      "reliability": 0.5664,
+      "sigma": 284.16,
+      "slot": "Armament@A1",
+      "weapon": "GoliathMk2Rockets"
+     },
+     {
+      "avg_versus": 0.5895,
+      "damage_total": 32000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 31431.08,
+      "effective_dps": 442.42,
+      "effective_per_shot": 17696.8,
+      "footprint": 6.6537,
+      "k": 0.553,
+      "reliability": 0.5664,
+      "sigma": 284.16,
+      "slot": "Armament@A2",
+      "weapon": "GoliathMk2Rockets"
+     }
+    ]
+   },
+   "terran_matador": {
+    "armaments": [
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 6000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 9603.28,
+      "effective_dps": 2098.74,
+      "effective_per_shot": 6780.56,
+      "footprint": 13.4998,
+      "k": 1.1301,
+      "reliability": 0.4756,
+      "sigma": 1585.22,
+      "slot": "Armament",
+      "weapon": "MatadorFlamer"
+     },
+     {
+      "avg_versus": 0.6629,
+      "damage_total": 33000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 23115.77,
+      "effective_dps": 408.31,
+      "effective_per_shot": 15924.19,
+      "footprint": 0.6392,
+      "k": 0.4826,
+      "reliability": 0.6722,
+      "sigma": 131.8,
+      "slot": "Armament@DEPLOYED",
+      "weapon": "MatadorLaser"
+     }
+    ]
+   },
+   "terran_scv": {
+    "armaments": [
+     {
+      "avg_versus": 0.7189,
+      "damage_total": 10000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 20875.68,
+      "effective_dps": 622.03,
+      "effective_per_shot": 15550.8,
+      "footprint": 4.3503,
+      "k": 1.5551,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "SCVAttack"
+     }
+    ]
+   },
+   "terran_siegetank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6753,
+      "damage_total": 30000.0,
+      "eff_reload": 37.0,
+      "effective_damage": 55484.52,
+      "effective_dps": 891.44,
+      "effective_per_shot": 32983.23,
+      "footprint": 13.4998,
+      "k": 1.0994,
+      "reliability": 0.7245,
+      "sigma": 650.13,
+      "slot": "Armament",
+      "weapon": "SiegeTankCannon"
+     },
+     {
+      "avg_versus": 0.688,
+      "damage_total": 140000.0,
+      "eff_reload": 148.0,
+      "effective_damage": 452898.02,
+      "effective_dps": 1081.81,
+      "effective_per_shot": 160107.72,
+      "footprint": 129.1592,
+      "k": 1.1436,
+      "reliability": 0.9286,
+      "sigma": 0.0,
+      "slot": "Armament@DEPLOYED",
+      "weapon": "SiegeTankSiegeCannon"
+     }
+    ]
+   },
+   "terran_vulture": {
+    "armaments": [
+     {
+      "avg_versus": 0.628,
+      "damage_total": 20000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 17250.74,
+      "effective_dps": 404.65,
+      "effective_per_shot": 10116.34,
+      "footprint": 6.7877,
+      "k": 0.5058,
+      "reliability": 0.5232,
+      "sigma": 248.0,
+      "slot": "Armament",
+      "weapon": "VultureGrenade"
+     }
+    ]
+   },
+   "terran_warhound": {
+    "armaments": [
+     {
+      "avg_versus": 0.6928,
+      "damage_total": 16000.0,
+      "eff_reload": 44.0,
+      "effective_damage": 17468.99,
+      "effective_dps": 529.21,
+      "effective_per_shot": 11642.52,
+      "footprint": 11.2851,
+      "k": 0.7277,
+      "reliability": 0.3865,
+      "sigma": 920.21,
+      "slot": "Armament@Cannon",
+      "weapon": "SCTyr"
+     },
+     {
+      "avg_versus": 0.6272,
+      "damage_total": 16000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 12367.48,
+      "effective_dps": 264.86,
+      "effective_per_shot": 5959.26,
+      "footprint": 7.1147,
+      "k": 0.3725,
+      "reliability": 0.3283,
+      "sigma": 1157.8,
+      "slot": "Armament@Rockets",
+      "weapon": "SCTyrAA"
+     }
+    ]
+   }
+  }
+ }
+}

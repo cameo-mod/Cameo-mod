@@ -1,0 +1,1459 @@
+{
+ "ledger": "redalert2mod_futuretech",
+ "pack": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "futuretech_cryocopter": {
+    "armaments": [
+     {
+      "avg_versus": 0.6443,
+      "damage_total": 48000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 93811.93,
+      "effective_dps": 1588.69,
+      "effective_per_shot": 50838.2,
+      "footprint": 13.0844,
+      "k": 1.0591,
+      "reliability": 0.8641,
+      "sigma": 308.0,
+      "slot": "Armament@Rocket",
+      "weapon": "Future_Cryocopter_Rocket"
+     },
+     {
+      "avg_versus": 0.6253,
+      "damage_total": 12600.0,
+      "eff_reload": 8.0,
+      "effective_damage": 4302.02,
+      "effective_dps": 309.31,
+      "effective_per_shot": 2474.44,
+      "footprint": 0.8139,
+      "k": 0.1964,
+      "reliability": 0.3231,
+      "sigma": 260.4,
+      "slot": "Armament@PRIMARY",
+      "weapon": "Future_Cryocopter_Cryo"
+     }
+    ]
+   },
+   "futuretech_harbingergunship": {
+    "armaments": [
+     {
+      "avg_versus": 0.7378,
+      "damage_total": 46488.0,
+      "eff_reload": 75.0,
+      "effective_damage": 60381.37,
+      "effective_dps": 1149.09,
+      "effective_per_shot": 43090.94,
+      "footprint": 31.9532,
+      "k": 0.9269,
+      "reliability": 0.7017,
+      "sigma": 250.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "FutureHarbingerCannon"
+     },
+     {
+      "avg_versus": 0.7378,
+      "damage_total": 46488.0,
+      "eff_reload": 85.0,
+      "effective_damage": 59735.07,
+      "effective_dps": 2005.97,
+      "effective_per_shot": 42626.79,
+      "footprint": 31.9532,
+      "k": 0.9169,
+      "reliability": 0.6878,
+      "sigma": 266.58,
+      "slot": "Armament@PRIMARYELITE",
+      "weapon": "FutureHarbingerCannon_elite"
+     },
+     {
+      "avg_versus": 0.5989,
+      "damage_total": 12000.0,
+      "eff_reload": 9.0,
+      "effective_damage": 23958.57,
+      "effective_dps": 1600.78,
+      "effective_per_shot": 14407.01,
+      "footprint": 4.3503,
+      "k": 1.2006,
+      "reliability": 0.909,
+      "sigma": 262.06,
+      "slot": "Armament@AA",
+      "weapon": "HarbingerChainguns"
+     },
+     {
+      "avg_versus": 0.5989,
+      "damage_total": 12000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 23950.24,
+      "effective_dps": 2880.26,
+      "effective_per_shot": 14401.28,
+      "footprint": 4.3503,
+      "k": 1.2001,
+      "reliability": 0.9083,
+      "sigma": 264.06,
+      "slot": "Armament@AAELITE",
+      "weapon": "HarbingerChainguns_elite"
+     }
+    ]
+   },
+   "futuretech_twister": {
+    "armaments": [
+     {
+      "avg_versus": 0.6425,
+      "damage_total": 10000.0,
+      "eff_reload": 125.0,
+      "effective_damage": 9812.86,
+      "effective_dps": 213.63,
+      "effective_per_shot": 5340.84,
+      "footprint": 9.6171,
+      "k": 0.5341,
+      "reliability": 0.5004,
+      "sigma": 700.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "SteelTwisterMissiles"
+     },
+     {
+      "avg_versus": 0.6425,
+      "damage_total": 10000.0,
+      "eff_reload": 150.0,
+      "effective_damage": 9273.4,
+      "effective_dps": 332.17,
+      "effective_per_shot": 4982.51,
+      "footprint": 9.6171,
+      "k": 0.4983,
+      "reliability": 0.4465,
+      "sigma": 840.0,
+      "slot": "Armament@PRIMARYELITE",
+      "weapon": "SteelTwisterMissiles_elite"
+     }
+    ]
+   },
+   "landcarr_drone.futu": {
+    "armaments": [
+     {
+      "avg_versus": 0.6521,
+      "damage_total": 6000.0,
+      "eff_reload": 3.0,
+      "effective_damage": 11955.4,
+      "effective_dps": 2452.95,
+      "effective_per_shot": 7358.86,
+      "footprint": 13.4998,
+      "k": 1.2265,
+      "reliability": 0.8676,
+      "sigma": 300.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RA2HornetMissile"
+     }
+    ]
+   }
+  },
+  "buildings": {
+   "futuretech_frostbiteturret": {
+    "armaments": [
+     {
+      "avg_versus": 0.6253,
+      "damage_total": 12600.0,
+      "eff_reload": 8.0,
+      "effective_damage": 4238.09,
+      "effective_dps": 304.51,
+      "effective_per_shot": 2436.05,
+      "footprint": 0.8139,
+      "k": 0.1933,
+      "reliability": 0.318,
+      "sigma": 264.25,
+      "slot": "Armament",
+      "weapon": "Future_Turret_Cryo"
+     }
+    ]
+   },
+   "futuretech_multiturretsystem": {
+    "armaments": [
+     {
+      "avg_versus": 0.5545,
+      "damage_total": 8000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 11968.6,
+      "effective_dps": 545.46,
+      "effective_per_shot": 5818.25,
+      "footprint": 5.5159,
+      "k": 0.7273,
+      "reliability": 0.8066,
+      "sigma": 297.0,
+      "slot": "Armament@primary",
+      "weapon": "Future_MultiMissile"
+     },
+     {
+      "avg_versus": 0.614,
+      "damage_total": 10000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 12830.24,
+      "effective_dps": 577.91,
+      "effective_per_shot": 7705.51,
+      "footprint": 11.5074,
+      "k": 0.7706,
+      "reliability": 0.7077,
+      "sigma": 225.0,
+      "slot": "Armament@MISS",
+      "weapon": "Future_MultiMissile_Javelin"
+     },
+     {
+      "avg_versus": 0.6394,
+      "damage_total": 16000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 12789.67,
+      "effective_dps": 361.98,
+      "effective_per_shot": 7722.18,
+      "footprint": 8.3132,
+      "k": 0.4826,
+      "reliability": 0.2798,
+      "sigma": 1867.5,
+      "slot": "Armament@FRAG",
+      "weapon": "Future_MultiMissile_Frag"
+     },
+     {
+      "avg_versus": 0.7569,
+      "damage_total": 55888.0,
+      "eff_reload": 62.0,
+      "effective_damage": 48517.77,
+      "effective_dps": 1710.37,
+      "effective_per_shot": 35347.58,
+      "footprint": 11.4172,
+      "k": 0.6325,
+      "reliability": 0.5408,
+      "sigma": 451.56,
+      "slot": "Armament@Sigma",
+      "weapon": "Future_MultiMissile_Sigma"
+     }
+    ]
+   }
+  },
+  "infantry": {
+   "futuretech_blackwidow": {
+    "armaments": [
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 10000.0,
+      "eff_reload": 19.0,
+      "effective_damage": 10165.03,
+      "effective_dps": 782.97,
+      "effective_per_shot": 7438.17,
+      "footprint": 0.1598,
+      "k": 0.7438,
+      "reliability": 0.9766,
+      "sigma": 18.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "BlackWidowPistols"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 10000.0,
+      "eff_reload": 37.0,
+      "effective_damage": 10243.18,
+      "effective_dps": 1621.12,
+      "effective_per_shot": 7497.7,
+      "footprint": 0.1598,
+      "k": 0.7498,
+      "reliability": 0.9844,
+      "sigma": 12.0,
+      "slot": "Armament@ELITE",
+      "weapon": "BlackWidowPistols_elite"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 10000.0,
+      "eff_reload": 19.0,
+      "effective_damage": 10165.03,
+      "effective_dps": 782.97,
+      "effective_per_shot": 7438.17,
+      "footprint": 0.1598,
+      "k": 0.7438,
+      "reliability": 0.9766,
+      "sigma": 18.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "BlackWidowPistols"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 10000.0,
+      "eff_reload": 37.0,
+      "effective_damage": 10243.18,
+      "effective_dps": 1621.12,
+      "effective_per_shot": 7497.7,
+      "footprint": 0.1598,
+      "k": 0.7498,
+      "reliability": 0.9844,
+      "sigma": 12.0,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "BlackWidowPistols_elite"
+     }
+    ]
+   },
+   "futuretech_cannondroid": {
+    "armaments": [
+     {
+      "avg_versus": 0.6774,
+      "damage_total": 9000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 8293.82,
+      "effective_dps": 201.35,
+      "effective_per_shot": 5033.85,
+      "footprint": 7.6241,
+      "k": 0.5593,
+      "reliability": 0.513,
+      "sigma": 500.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CannonAttackRobotGun"
+     },
+     {
+      "avg_versus": 0.6774,
+      "damage_total": 9000.0,
+      "eff_reload": 28.0,
+      "effective_damage": 8157.71,
+      "effective_dps": 352.58,
+      "effective_per_shot": 4936.13,
+      "footprint": 7.6241,
+      "k": 0.5485,
+      "reliability": 0.4978,
+      "sigma": 533.33,
+      "slot": "Armament@ELITE",
+      "weapon": "CannonAttackRobotGun_elite"
+     }
+    ]
+   },
+   "futuretech_cryolegionnaire": {
+    "armaments": [
+     {
+      "avg_versus": 0.6156,
+      "damage_total": 13600.0,
+      "eff_reload": 30.0,
+      "effective_damage": 3752.67,
+      "effective_dps": 70.49,
+      "effective_per_shot": 2114.57,
+      "footprint": 0.8139,
+      "k": 0.1555,
+      "reliability": 0.2582,
+      "sigma": 318.36,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CryoLegionnaireAttack"
+     },
+     {
+      "avg_versus": 0.6156,
+      "damage_total": 13600.0,
+      "eff_reload": 30.0,
+      "effective_damage": 3752.67,
+      "effective_dps": 70.49,
+      "effective_per_shot": 2114.57,
+      "footprint": 0.8139,
+      "k": 0.1555,
+      "reliability": 0.2582,
+      "sigma": 318.36,
+      "slot": "Armament@GARRISONED",
+      "weapon": "CryoLegionnaireAttack"
+     }
+    ]
+   },
+   "futuretech_enforcer": {
+    "armaments": [
+     {
+      "avg_versus": 0.6551,
+      "damage_total": 12000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 13119.57,
+      "effective_dps": 203.91,
+      "effective_per_shot": 8156.35,
+      "footprint": 11.6188,
+      "k": 0.6797,
+      "reliability": 0.6092,
+      "sigma": 215.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "FutureEnforcerShotgun"
+     },
+     {
+      "avg_versus": 0.6551,
+      "damage_total": 12000.0,
+      "eff_reload": 65.0,
+      "effective_damage": 12914.48,
+      "effective_dps": 123.43,
+      "effective_per_shot": 8022.89,
+      "footprint": 11.6188,
+      "k": 0.6686,
+      "reliability": 0.5921,
+      "sigma": 230.75,
+      "slot": "Armament@PRIMARY2",
+      "weapon": "FutureEnforcerShotgunDeployed"
+     },
+     {
+      "avg_versus": 0.6551,
+      "damage_total": 12000.0,
+      "eff_reload": 65.0,
+      "effective_damage": 12914.48,
+      "effective_dps": 123.43,
+      "effective_per_shot": 8022.89,
+      "footprint": 11.6188,
+      "k": 0.6686,
+      "reliability": 0.5921,
+      "sigma": 230.75,
+      "slot": "Armament@GARRISONED",
+      "weapon": "FutureEnforcerShotgunDeployed"
+     },
+     {
+      "avg_versus": 0.6551,
+      "damage_total": 12000.0,
+      "eff_reload": 43.0,
+      "effective_damage": 13052.29,
+      "effective_dps": 377.33,
+      "effective_per_shot": 8112.61,
+      "footprint": 11.6188,
+      "k": 0.6761,
+      "reliability": 0.6036,
+      "sigma": 220.0,
+      "slot": "Armament@ELITE",
+      "weapon": "FutureEnforcerShotgun_elite"
+     },
+     {
+      "avg_versus": 0.6551,
+      "damage_total": 12000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 12853.48,
+      "effective_dps": 234.8,
+      "effective_per_shot": 7983.12,
+      "footprint": 11.6188,
+      "k": 0.6653,
+      "reliability": 0.587,
+      "sigma": 235.75,
+      "slot": "Armament@ELITE2",
+      "weapon": "FutureEnforcerShotgunDeployed_elite"
+     },
+     {
+      "avg_versus": 0.6551,
+      "damage_total": 12000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 12853.48,
+      "effective_dps": 234.8,
+      "effective_per_shot": 7983.12,
+      "footprint": 11.6188,
+      "k": 0.6653,
+      "reliability": 0.587,
+      "sigma": 235.75,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "FutureEnforcerShotgunDeployed_elite"
+     }
+    ]
+   },
+   "futuretech_javelinsoldier": {
+    "armaments": [
+     {
+      "avg_versus": 0.614,
+      "damage_total": 10000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 12830.24,
+      "effective_dps": 308.22,
+      "effective_per_shot": 7705.51,
+      "footprint": 11.5074,
+      "k": 0.7706,
+      "reliability": 0.7077,
+      "sigma": 225.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "FutureJavelinRockets"
+     },
+     {
+      "avg_versus": 0.614,
+      "damage_total": 10000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 12256.91,
+      "effective_dps": 295.02,
+      "effective_per_shot": 7375.49,
+      "footprint": 11.5074,
+      "k": 0.7375,
+      "reliability": 0.6503,
+      "sigma": 275.0,
+      "slot": "Armament@PRIMARY2",
+      "weapon": "FutureJavelinRocketsDeployed"
+     },
+     {
+      "avg_versus": 0.614,
+      "damage_total": 10000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 12256.91,
+      "effective_dps": 295.02,
+      "effective_per_shot": 7375.49,
+      "footprint": 11.5074,
+      "k": 0.7375,
+      "reliability": 0.6503,
+      "sigma": 275.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "FutureJavelinRocketsDeployed"
+     },
+     {
+      "avg_versus": 0.614,
+      "damage_total": 10000.0,
+      "eff_reload": 28.0,
+      "effective_damage": 12438.71,
+      "effective_dps": 534.33,
+      "effective_per_shot": 7480.61,
+      "footprint": 11.5074,
+      "k": 0.7481,
+      "reliability": 0.6685,
+      "sigma": 258.33,
+      "slot": "Armament@ELITE",
+      "weapon": "FutureJavelinRockets_elite"
+     },
+     {
+      "avg_versus": 0.614,
+      "damage_total": 10000.0,
+      "eff_reload": 28.0,
+      "effective_damage": 11922.55,
+      "effective_dps": 512.93,
+      "effective_per_shot": 7180.97,
+      "footprint": 11.5074,
+      "k": 0.7181,
+      "reliability": 0.6169,
+      "sigma": 308.33,
+      "slot": "Armament@ELITE2",
+      "weapon": "FutureJavelinRocketsDeployed_elite"
+     },
+     {
+      "avg_versus": 0.614,
+      "damage_total": 10000.0,
+      "eff_reload": 28.0,
+      "effective_damage": 11922.55,
+      "effective_dps": 512.93,
+      "effective_per_shot": 7180.97,
+      "footprint": 11.5074,
+      "k": 0.7181,
+      "reliability": 0.6169,
+      "sigma": 308.33,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "FutureJavelinRocketsDeployed_elite"
+     }
+    ]
+   },
+   "futuretech_missiledroid": {
+    "armaments": [
+     {
+      "avg_versus": 0.5695,
+      "damage_total": 24000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 41530.21,
+      "effective_dps": 522.21,
+      "effective_per_shot": 18277.36,
+      "footprint": 7.1082,
+      "k": 0.7616,
+      "reliability": 0.8419,
+      "sigma": 316.67,
+      "slot": "Armament@PRIMARY",
+      "weapon": "MissileAttackRobotGun"
+     },
+     {
+      "avg_versus": 0.5695,
+      "damage_total": 24000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 41131.45,
+      "effective_dps": 901.65,
+      "effective_per_shot": 18033.09,
+      "footprint": 7.1082,
+      "k": 0.7514,
+      "reliability": 0.8253,
+      "sigma": 350.0,
+      "slot": "Armament@ELITE",
+      "weapon": "MissileAttackRobotGun_elite"
+     }
+    ]
+   },
+   "futuretech_scoutdroid": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 46.0,
+      "effective_damage": 3265.3,
+      "effective_dps": 175.59,
+      "effective_per_shot": 2019.32,
+      "footprint": 0.5193,
+      "k": 0.5048,
+      "reliability": 0.7514,
+      "sigma": 229.03,
+      "slot": "Armament@PRIMARY",
+      "weapon": "Future_Wheel_MG"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 3243.6,
+      "effective_dps": 411.07,
+      "effective_per_shot": 2003.95,
+      "footprint": 0.5193,
+      "k": 0.501,
+      "reliability": 0.746,
+      "sigma": 234.03,
+      "slot": "Armament@ELITE",
+      "weapon": "Future_Wheel_MG_elite"
+     }
+    ]
+   },
+   "futuretech_shotgundroid": {
+    "armaments": [
+     {
+      "avg_versus": 0.654,
+      "damage_total": 12000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 13957.76,
+      "effective_dps": 157.64,
+      "effective_per_shot": 8670.16,
+      "footprint": 11.9384,
+      "k": 0.7225,
+      "reliability": 0.6657,
+      "sigma": 220.55,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ShotgunAttackRobotGun"
+     },
+     {
+      "avg_versus": 0.654,
+      "damage_total": 12000.0,
+      "eff_reload": 28.0,
+      "effective_damage": 13906.5,
+      "effective_dps": 616.88,
+      "effective_per_shot": 8636.39,
+      "footprint": 11.9384,
+      "k": 0.7197,
+      "reliability": 0.6614,
+      "sigma": 225.55,
+      "slot": "Armament@ELITE",
+      "weapon": "ShotgunAttackRobotGun_elite"
+     },
+     {
+      "avg_versus": 0.654,
+      "damage_total": 12000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 13957.76,
+      "effective_dps": 157.64,
+      "effective_per_shot": 8670.16,
+      "footprint": 11.9384,
+      "k": 0.7225,
+      "reliability": 0.6657,
+      "sigma": 220.55,
+      "slot": "Armament@GARRISONED",
+      "weapon": "ShotgunAttackRobotGun"
+     },
+     {
+      "avg_versus": 0.654,
+      "damage_total": 12000.0,
+      "eff_reload": 28.0,
+      "effective_damage": 13906.5,
+      "effective_dps": 616.88,
+      "effective_per_shot": 8636.39,
+      "footprint": 11.9384,
+      "k": 0.7197,
+      "reliability": 0.6614,
+      "sigma": 225.55,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "ShotgunAttackRobotGun_elite"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "futuretech_athenacannon": {
+    "armaments": [
+     {
+      "avg_versus": 0.6319,
+      "damage_total": 193600.0,
+      "eff_reload": 1.0,
+      "effective_damage": 195226.36,
+      "effective_dps": 122334.24,
+      "effective_per_shot": 122334.24,
+      "footprint": 0.8139,
+      "k": 0.6319,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AG",
+      "weapon": "AthenaLaser"
+     }
+    ]
+   },
+   "futuretech_energizer": {
+    "armaments": [
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 75000.0,
+      "eff_reload": 125.0,
+      "effective_damage": 79618.92,
+      "effective_dps": 483.76,
+      "effective_per_shot": 60470.53,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Agressive",
+      "weapon": "Future_CoilerAgressive"
+     }
+    ]
+   },
+   "futuretech_futuretank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7299,
+      "damage_total": 650888.0,
+      "eff_reload": 75.0,
+      "effective_damage": 851548.49,
+      "effective_dps": 14658.91,
+      "effective_per_shot": 549708.99,
+      "footprint": 21.7807,
+      "k": 0.8446,
+      "reliability": 0.6083,
+      "sigma": 750.0,
+      "slot": "Armament",
+      "weapon": "FutureTankCannons"
+     },
+     {
+      "avg_versus": 0.7299,
+      "damage_total": 650888.0,
+      "eff_reload": 80.0,
+      "effective_damage": 842189.16,
+      "effective_dps": 27138.3,
+      "effective_per_shot": 542766.1,
+      "footprint": 21.7807,
+      "k": 0.8339,
+      "reliability": 0.5939,
+      "sigma": 790.0,
+      "slot": "Armament@elite",
+      "weapon": "FutureTankCannons_elite"
+     }
+    ]
+   },
+   "futuretech_guardiantank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 12000.0,
+      "eff_reload": 85.0,
+      "effective_damage": 22966.92,
+      "effective_dps": 158.3,
+      "effective_per_shot": 13455.39,
+      "footprint": 4.3503,
+      "k": 1.1213,
+      "reliability": 0.8263,
+      "sigma": 500.0,
+      "slot": "Armament",
+      "weapon": "GuardianTankCannon"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 12000.0,
+      "eff_reload": 88.0,
+      "effective_damage": 22860.48,
+      "effective_dps": 303.96,
+      "effective_per_shot": 13374.32,
+      "footprint": 4.3503,
+      "k": 1.1145,
+      "reliability": 0.8175,
+      "sigma": 525.58,
+      "slot": "Armament@elite",
+      "weapon": "GuardianTankCannon_elite"
+     }
+    ]
+   },
+   "futuretech_gunstrider": {
+    "armaments": [
+     {
+      "avg_versus": 0.5961,
+      "damage_total": 8000.0,
+      "eff_reload": 12.0,
+      "effective_damage": 2570.17,
+      "effective_dps": 124.08,
+      "effective_per_shot": 1488.96,
+      "footprint": 0.4844,
+      "k": 0.1861,
+      "reliability": 0.291,
+      "sigma": 416.6,
+      "slot": "Armament",
+      "weapon": "FutureMechGatling"
+     }
+    ]
+   },
+   "futuretech_oriontank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7465,
+      "damage_total": 61000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 80129.13,
+      "effective_dps": 904.94,
+      "effective_per_shot": 54296.6,
+      "footprint": 7.0307,
+      "k": 0.8901,
+      "reliability": 0.5133,
+      "sigma": 550.0,
+      "slot": "Armament",
+      "weapon": "OrionRailgun"
+     },
+     {
+      "avg_versus": 0.8462,
+      "damage_total": 151000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 154681.99,
+      "effective_dps": 1750.91,
+      "effective_per_shot": 105054.33,
+      "footprint": 7.0407,
+      "k": 0.6957,
+      "reliability": 0.3826,
+      "sigma": 550.0,
+      "slot": "Armament@elite",
+      "weapon": "OrionRailgun_elite"
+     }
+    ]
+   },
+   "futuretech_phalanxwip": {
+    "armaments": [
+     {
+      "avg_versus": 0.6419,
+      "damage_total": 8000.0,
+      "eff_reload": 129.0,
+      "effective_damage": 9506.55,
+      "effective_dps": 328.79,
+      "effective_per_shot": 5301.75,
+      "footprint": 11.9619,
+      "k": 0.6627,
+      "reliability": 0.4407,
+      "sigma": 1244.09,
+      "slot": "Armament",
+      "weapon": "RA2RTruckRocket"
+     },
+     {
+      "avg_versus": 0.6419,
+      "damage_total": 8000.0,
+      "eff_reload": 129.0,
+      "effective_damage": 9506.55,
+      "effective_dps": 328.79,
+      "effective_per_shot": 5301.75,
+      "footprint": 11.9619,
+      "k": 0.6627,
+      "reliability": 0.4407,
+      "sigma": 1244.09,
+      "slot": "Armament@PRIMARYELITE",
+      "weapon": "RA2RTruckRocket"
+     },
+     {
+      "avg_versus": 0.6478,
+      "damage_total": 12000.0,
+      "eff_reload": 264.0,
+      "effective_damage": 20769.92,
+      "effective_dps": 177.79,
+      "effective_per_shot": 11734.44,
+      "footprint": 9.1496,
+      "k": 0.9779,
+      "reliability": 0.5871,
+      "sigma": 1000.0,
+      "slot": "Armament@WATER",
+      "weapon": "FutureMicrotorpedos"
+     }
+    ]
+   },
+   "futuretech_plasmastrider": {
+    "armaments": [
+     {
+      "avg_versus": 0.6968,
+      "damage_total": 30000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 51431.31,
+      "effective_dps": 1093.97,
+      "effective_per_shot": 32819.16,
+      "footprint": 11.9639,
+      "k": 1.094,
+      "reliability": 0.7174,
+      "sigma": 730.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "FutureMechPlasma"
+     },
+     {
+      "avg_versus": 0.6968,
+      "damage_total": 30000.0,
+      "eff_reload": 65.0,
+      "effective_damage": 51059.74,
+      "effective_dps": 2003.07,
+      "effective_per_shot": 32549.85,
+      "footprint": 11.9639,
+      "k": 1.085,
+      "reliability": 0.705,
+      "sigma": 770.0,
+      "slot": "Armament@ELITE",
+      "weapon": "FutureMechPlasma_elite"
+     }
+    ]
+   },
+   "futuretech_riptideacv": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 27.0,
+      "effective_damage": 3270.75,
+      "effective_dps": 299.73,
+      "effective_per_shot": 2023.18,
+      "footprint": 0.5193,
+      "k": 0.5058,
+      "reliability": 0.7528,
+      "sigma": 227.78,
+      "slot": "Armament@AG",
+      "weapon": "ACV_Machinegun"
+     },
+     {
+      "avg_versus": 0.6478,
+      "damage_total": 12000.0,
+      "eff_reload": 264.0,
+      "effective_damage": 20769.92,
+      "effective_dps": 177.79,
+      "effective_per_shot": 11734.44,
+      "footprint": 9.1496,
+      "k": 0.9779,
+      "reliability": 0.5871,
+      "sigma": 1000.0,
+      "slot": "Armament@WATER",
+      "weapon": "FutureMicrotorpedos"
+     }
+    ]
+   },
+   "futuretech_robottank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7132,
+      "damage_total": 30000.0,
+      "eff_reload": 48.0,
+      "effective_damage": 31408.15,
+      "effective_dps": 479.49,
+      "effective_per_shot": 23015.36,
+      "footprint": 1.9175,
+      "k": 0.7672,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "RA2Robotmm"
+     },
+     {
+      "avg_versus": 0.7132,
+      "damage_total": 30000.0,
+      "eff_reload": 48.0,
+      "effective_damage": 31408.15,
+      "effective_dps": 479.49,
+      "effective_per_shot": 23015.36,
+      "footprint": 1.9175,
+      "k": 0.7672,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@elite",
+      "weapon": "RA2Robotmm_elite"
+     }
+    ]
+   },
+   "futuretech_salamanderifv": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 3268.47,
+      "effective_dps": 404.31,
+      "effective_per_shot": 2021.56,
+      "footprint": 0.5193,
+      "k": 0.5054,
+      "reliability": 0.7522,
+      "sigma": 228.3,
+      "slot": "Armament@mg",
+      "weapon": "RA2CRM60"
+     },
+     {
+      "avg_versus": 0.6922,
+      "damage_total": 6000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 9408.6,
+      "effective_dps": 1893.25,
+      "effective_per_shot": 6310.83,
+      "footprint": 6.9109,
+      "k": 1.0518,
+      "reliability": 0.9922,
+      "sigma": 9.38,
+      "slot": "Armament@hmg",
+      "weapon": "RA2CRM60H"
+     },
+     {
+      "avg_versus": 0.8512,
+      "damage_total": 2500.0,
+      "eff_reload": 40.0,
+      "effective_damage": 1155.37,
+      "effective_dps": 23.76,
+      "effective_per_shot": 950.27,
+      "footprint": 0.0624,
+      "k": 0.3801,
+      "reliability": 0.4465,
+      "sigma": 267.82,
+      "slot": "Armament@archer",
+      "weapon": "wc_tower_fire"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 30000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 30483.13,
+      "effective_dps": 223.05,
+      "effective_per_shot": 22305.41,
+      "footprint": 0.1598,
+      "k": 0.7435,
+      "reliability": 0.9762,
+      "sigma": 18.31,
+      "slot": "Armament@lightsniper",
+      "weapon": "LightSniper"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 14000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 14267.51,
+      "effective_dps": 1392.16,
+      "effective_per_shot": 10441.22,
+      "footprint": 0.1598,
+      "k": 0.7458,
+      "reliability": 0.9792,
+      "sigma": 16.0,
+      "slot": "Armament@hero",
+      "weapon": "RA2DoublePistolsIFV"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 60000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 63695.14,
+      "effective_dps": 604.71,
+      "effective_per_shot": 48376.42,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@tesla",
+      "weapon": "TTankZap"
+     },
+     {
+      "avg_versus": 0.6412,
+      "damage_total": 401000.0,
+      "eff_reload": 85.0,
+      "effective_damage": 183946.82,
+      "effective_dps": 1370.53,
+      "effective_per_shot": 116494.63,
+      "footprint": 0.6392,
+      "k": 0.2905,
+      "reliability": 0.4391,
+      "sigma": 261.61,
+      "slot": "Armament@flak",
+      "weapon": "DragunovSniper"
+     },
+     {
+      "avg_versus": 0.6645,
+      "damage_total": 25000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 37162.69,
+      "effective_dps": 576.57,
+      "effective_per_shot": 22486.15,
+      "footprint": 6.2998,
+      "k": 0.8994,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@cannon",
+      "weapon": "RA2MirageGun"
+     },
+     {
+      "avg_versus": 0.6087,
+      "damage_total": 16000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 18151.02,
+      "effective_dps": 232.28,
+      "effective_per_shot": 9755.91,
+      "footprint": 2.758,
+      "k": 0.6097,
+      "reliability": 0.4449,
+      "sigma": 1212.93,
+      "slot": "Armament@grenade",
+      "weapon": "Grenade"
+     },
+     {
+      "avg_versus": 0.7936,
+      "damage_total": 6250.0,
+      "eff_reload": 21.0,
+      "effective_damage": 3720.47,
+      "effective_dps": 143.79,
+      "effective_per_shot": 3019.63,
+      "footprint": 0.0592,
+      "k": 0.4831,
+      "reliability": 0.5869,
+      "sigma": 120.05,
+      "slot": "Armament@plasma",
+      "weapon": "DRPlasmaTankWeapon"
+     },
+     {
+      "avg_versus": 0.7045,
+      "damage_total": 2000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 505.35,
+      "effective_dps": 68.39,
+      "effective_per_shot": 341.95,
+      "footprint": 0.0399,
+      "k": 0.171,
+      "reliability": 0.2427,
+      "sigma": 336.53,
+      "slot": "Armament@litlaser",
+      "weapon": "SWLaserG"
+     },
+     {
+      "avg_versus": 0.9366,
+      "damage_total": 4000.0,
+      "eff_reload": 62.0,
+      "effective_damage": 4029.96,
+      "effective_dps": 181.27,
+      "effective_per_shot": 3746.25,
+      "footprint": 0.03,
+      "k": 0.9366,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@medlaser",
+      "weapon": "USALaserCannonAG"
+     },
+     {
+      "avg_versus": 1.115,
+      "damage_total": 5000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 2784.31,
+      "effective_dps": 36.75,
+      "effective_per_shot": 2756.46,
+      "footprint": 0.2497,
+      "k": 0.5513,
+      "reliability": 0.4944,
+      "sigma": 486.4,
+      "slot": "Armament@greenlaser",
+      "weapon": "SWGreenLaserG"
+     },
+     {
+      "avg_versus": 1.115,
+      "damage_total": 4000.0,
+      "eff_reload": 75.0,
+      "effective_damage": 218.96,
+      "effective_dps": 3.01,
+      "effective_per_shot": 225.89,
+      "footprint": 0.0164,
+      "k": 0.0565,
+      "reliability": 0.0506,
+      "sigma": 537.6,
+      "slot": "Armament@misslaser",
+      "weapon": "SWGBigRedLaserG"
+     },
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 14000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 29148.48,
+      "effective_dps": 688.87,
+      "effective_per_shot": 20666.08,
+      "footprint": 4.3503,
+      "k": 1.4761,
+      "reliability": 0.9945,
+      "sigma": 15.93,
+      "slot": "Armament@fire",
+      "weapon": "BigFlamer"
+     },
+     {
+      "avg_versus": 0.694,
+      "damage_total": 30000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 62243.36,
+      "effective_dps": 937.65,
+      "effective_per_shot": 42194.22,
+      "footprint": 4.3503,
+      "k": 1.4065,
+      "reliability": 0.9872,
+      "sigma": 36.82,
+      "slot": "Armament@chem",
+      "weapon": "RA2RadBeamWeapon"
+     },
+     {
+      "avg_versus": 0.694,
+      "damage_total": 30000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 62243.36,
+      "effective_dps": 937.65,
+      "effective_per_shot": 42194.22,
+      "footprint": 4.3503,
+      "k": 1.4065,
+      "reliability": 0.9872,
+      "sigma": 36.82,
+      "slot": "Armament@thrax",
+      "weapon": "RA2RadBeamWeapon"
+     },
+     {
+      "avg_versus": 0.6141,
+      "damage_total": 4000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 6812.87,
+      "effective_dps": 697.86,
+      "effective_per_shot": 3489.3,
+      "footprint": 7.1082,
+      "k": 0.8723,
+      "reliability": 0.8147,
+      "sigma": 371.35,
+      "slot": "Armament@missile",
+      "weapon": "RA2MultiHoverMissile"
+     },
+     {
+      "avg_versus": 0.8549,
+      "damage_total": 3000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 3031.17,
+      "effective_dps": 102.59,
+      "effective_per_shot": 2564.73,
+      "footprint": 0.0416,
+      "k": 0.8549,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@fremen",
+      "weapon": "Fremen_L"
+     },
+     {
+      "avg_versus": 0.7562,
+      "damage_total": 5000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 71.28,
+      "effective_dps": 0.85,
+      "effective_per_shot": 51.0,
+      "footprint": 0.0061,
+      "k": 0.0102,
+      "reliability": 0.0135,
+      "sigma": 480.0,
+      "slot": "Armament@sonic",
+      "weapon": "TSSonicZap"
+     },
+     {
+      "avg_versus": 0.5545,
+      "damage_total": 12000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 18382.71,
+      "effective_dps": 561.67,
+      "effective_per_shot": 8986.76,
+      "footprint": 5.5159,
+      "k": 0.7489,
+      "reliability": 0.8424,
+      "sigma": 242.0,
+      "slot": "Armament@primary",
+      "weapon": "RA2HoverMissile"
+     },
+     {
+      "avg_versus": 0.5545,
+      "damage_total": 12000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 18122.22,
+      "effective_dps": 882.91,
+      "effective_per_shot": 8829.07,
+      "footprint": 5.5159,
+      "k": 0.7358,
+      "reliability": 0.8207,
+      "sigma": 275.33,
+      "slot": "Armament@primaryelite",
+      "weapon": "RA2HoverMissile_elite"
+     },
+     {
+      "avg_versus": 0.5545,
+      "damage_total": 12000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 17632.78,
+      "effective_dps": 533.53,
+      "effective_per_shot": 8536.54,
+      "footprint": 5.5159,
+      "k": 0.7114,
+      "reliability": 0.7799,
+      "sigma": 338.0,
+      "slot": "Armament@primaryAA",
+      "weapon": "RA2HoverMissile_AA"
+     },
+     {
+      "avg_versus": 0.5545,
+      "damage_total": 12000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 17374.31,
+      "effective_dps": 838.35,
+      "effective_per_shot": 8383.51,
+      "footprint": 5.5159,
+      "k": 0.6986,
+      "reliability": 0.7584,
+      "sigma": 371.33,
+      "slot": "Armament@primaryeliteAA",
+      "weapon": "RA2HoverMissile_AA_elite"
+     },
+     {
+      "avg_versus": 0.6265,
+      "damage_total": 4000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 7564.44,
+      "effective_dps": 156.72,
+      "effective_per_shot": 3918.04,
+      "footprint": 9.1496,
+      "k": 0.9795,
+      "reliability": 0.7474,
+      "sigma": 528.0,
+      "slot": "Armament@primaryThunderbolt",
+      "weapon": "RA2ThunderboltMissile"
+     },
+     {
+      "avg_versus": 0.6265,
+      "damage_total": 4000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 7497.3,
+      "effective_dps": 619.67,
+      "effective_per_shot": 3872.97,
+      "footprint": 9.1496,
+      "k": 0.9682,
+      "reliability": 0.7306,
+      "sigma": 569.0,
+      "slot": "Armament@primaryeliteThunderbolt",
+      "weapon": "RA2ThunderboltMissile_elite"
+     },
+     {
+      "avg_versus": 0.6265,
+      "damage_total": 4000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 7423.74,
+      "effective_dps": 152.94,
+      "effective_per_shot": 3823.46,
+      "footprint": 9.1496,
+      "k": 0.9559,
+      "reliability": 0.7122,
+      "sigma": 616.0,
+      "slot": "Armament@primaryAAThunderbolt",
+      "weapon": "RA2ThunderboltMissile_AA"
+     },
+     {
+      "avg_versus": 0.6265,
+      "damage_total": 4000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 7385.92,
+      "effective_dps": 607.67,
+      "effective_per_shot": 3797.97,
+      "footprint": 9.1496,
+      "k": 0.9495,
+      "reliability": 0.7028,
+      "sigma": 641.0,
+      "slot": "Armament@primaryeliteAAThunderbolt",
+      "weapon": "RA2ThunderboltMissile_AA_elite"
+     },
+     {
+      "avg_versus": 0.6141,
+      "damage_total": 4000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 6711.12,
+      "effective_dps": 684.61,
+      "effective_per_shot": 3423.07,
+      "footprint": 7.1082,
+      "k": 0.8558,
+      "reliability": 0.7892,
+      "sigma": 423.44,
+      "slot": "Armament@missileelite",
+      "weapon": "RA2MultiHoverMissile_elite"
+     },
+     {
+      "avg_versus": 0.6141,
+      "damage_total": 4000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 6513.99,
+      "effective_dps": 658.91,
+      "effective_per_shot": 3294.53,
+      "footprint": 7.1082,
+      "k": 0.8236,
+      "reliability": 0.74,
+      "sigma": 532.03,
+      "slot": "Armament@missileAA",
+      "weapon": "RA2MultiHoverMissile_AA"
+     },
+     {
+      "avg_versus": 0.6141,
+      "damage_total": 4000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 6427.51,
+      "effective_dps": 647.56,
+      "effective_per_shot": 3237.82,
+      "footprint": 7.1082,
+      "k": 0.8095,
+      "reliability": 0.7183,
+      "sigma": 584.11,
+      "slot": "Armament@missileeliteAA",
+      "weapon": "RA2MultiHoverMissile_AA_elite"
+     },
+     {
+      "avg_versus": 0.6265,
+      "damage_total": 4000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 7564.44,
+      "effective_dps": 156.72,
+      "effective_per_shot": 3918.04,
+      "footprint": 9.1496,
+      "k": 0.9795,
+      "reliability": 0.7474,
+      "sigma": 528.0,
+      "slot": "Armament@missileThunderbolt",
+      "weapon": "RA2MultiThunderboltMissile"
+     },
+     {
+      "avg_versus": 0.6265,
+      "damage_total": 4000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 7480.97,
+      "effective_dps": 617.92,
+      "effective_per_shot": 3861.98,
+      "footprint": 9.1496,
+      "k": 0.9655,
+      "reliability": 0.7265,
+      "sigma": 579.25,
+      "slot": "Armament@missileeliteThunderbolt",
+      "weapon": "RA2MultiThunderboltMissile_elite"
+     },
+     {
+      "avg_versus": 0.6265,
+      "damage_total": 4000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 7400.38,
+      "effective_dps": 152.31,
+      "effective_per_shot": 3807.72,
+      "footprint": 9.1496,
+      "k": 0.9519,
+      "reliability": 0.7064,
+      "sigma": 631.38,
+      "slot": "Armament@missileAAThunderbolt",
+      "weapon": "RA2MultiThunderboltMissile_AA"
+     },
+     {
+      "avg_versus": 0.6265,
+      "damage_total": 4000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 7363.07,
+      "effective_dps": 605.21,
+      "effective_per_shot": 3782.55,
+      "footprint": 9.1496,
+      "k": 0.9456,
+      "reliability": 0.6971,
+      "sigma": 656.38,
+      "slot": "Armament@missileeliteAAThunderbolt",
+      "weapon": "RA2MultiThunderboltMissile_AA_elite"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 44000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 44611.51,
+      "effective_dps": 604.46,
+      "effective_per_shot": 32640.65,
+      "footprint": 0.1598,
+      "k": 0.7418,
+      "reliability": 0.974,
+      "sigma": 20.0,
+      "slot": "Armament@ra1_allies_alliedsniper",
+      "weapon": "RA2AWP"
+     }
+    ]
+   }
+  }
+ }
+}

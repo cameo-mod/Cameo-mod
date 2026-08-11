@@ -1,0 +1,1575 @@
+{
+ "ledger": "redalert2mod_schwarzermond",
+ "pack": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "schwarzermond_corruptorpiercer": {
+    "armaments": [
+     {
+      "avg_versus": 0.6473,
+      "damage_total": 6000.0,
+      "eff_reload": 52.0,
+      "effective_damage": 10662.62,
+      "effective_dps": 215.72,
+      "effective_per_shot": 5608.66,
+      "footprint": 13.4998,
+      "k": 0.9348,
+      "reliability": 0.6521,
+      "sigma": 866.67,
+      "slot": "Armament",
+      "weapon": "NaxCorrosionRocket"
+     }
+    ]
+   },
+   "schwarzermond_dieglocke": {
+    "armaments": [
+     {
+      "avg_versus": 0.7552,
+      "damage_total": 10000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 25978.97,
+      "effective_dps": 331.2,
+      "effective_per_shot": 19871.84,
+      "footprint": 6.3916,
+      "k": 1.9872,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxDieGlocke"
+     }
+    ]
+   },
+   "schwarzermond_drone": {
+    "armaments": [
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 109.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 185.25,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "LunarNaxiDroneLaser"
+     },
+     {
+      "avg_versus": 0.5988,
+      "damage_total": 12000.0,
+      "eff_reload": 109.0,
+      "effective_damage": 7393.91,
+      "effective_dps": 64.23,
+      "effective_per_shot": 3500.75,
+      "footprint": 4.0208,
+      "k": 0.2917,
+      "reliability": 0.4486,
+      "sigma": 544.0,
+      "slot": "Armament@Rockets",
+      "weapon": "LunarNaxiDroneMissile"
+     }
+    ]
+   },
+   "schwarzermond_haunebuii": {
+    "armaments": [
+     {
+      "avg_versus": 0.6441,
+      "damage_total": 6000.0,
+      "eff_reload": 66.0,
+      "effective_damage": 11015.76,
+      "effective_dps": 576.85,
+      "effective_per_shot": 6345.38,
+      "footprint": 13.4998,
+      "k": 1.0576,
+      "reliability": 0.711,
+      "sigma": 688.22,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxHaenebuQuadCannon"
+     },
+     {
+      "avg_versus": 0.6441,
+      "damage_total": 6000.0,
+      "eff_reload": 66.0,
+      "effective_damage": 10783.79,
+      "effective_dps": 655.66,
+      "effective_per_shot": 6181.93,
+      "footprint": 13.4998,
+      "k": 1.0303,
+      "reliability": 0.6723,
+      "sigma": 802.92,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxHaenebuQuadCannon_elite"
+     }
+    ]
+   },
+   "schwarzermond_haunebuiii": {
+    "armaments": [
+     {
+      "avg_versus": 0.6441,
+      "damage_total": 6000.0,
+      "eff_reload": 66.0,
+      "effective_damage": 11015.76,
+      "effective_dps": 576.85,
+      "effective_per_shot": 6345.38,
+      "footprint": 13.4998,
+      "k": 1.0576,
+      "reliability": 0.711,
+      "sigma": 688.22,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxHaenebuQuadCannon"
+     },
+     {
+      "avg_versus": 0.6441,
+      "damage_total": 6000.0,
+      "eff_reload": 66.0,
+      "effective_damage": 10783.79,
+      "effective_dps": 655.66,
+      "effective_per_shot": 6181.93,
+      "footprint": 13.4998,
+      "k": 1.0303,
+      "reliability": 0.6723,
+      "sigma": 802.92,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxHaenebuQuadCannon_elite"
+     },
+     {
+      "avg_versus": 0.7391,
+      "damage_total": 10000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 34967.14,
+      "effective_dps": 581.05,
+      "effective_per_shot": 29052.68,
+      "footprint": 9.9869,
+      "k": 2.9053,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@SECOND",
+      "weapon": "NaxiCowDrop"
+     }
+    ]
+   },
+   "schwarzermond_spacezeppelin": {
+    "armaments": [
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 64.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 157.75,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "NaxiBeetleLaser_elite"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 64.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 157.75,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@elite",
+      "weapon": "NaxiBeetleLaser_elite"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 64.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 157.75,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AA",
+      "weapon": "NaxiBeetleLaser_AA_elite"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 64.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 157.75,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@eliteAA",
+      "weapon": "NaxiBeetleLaser_AA_elite"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 68.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 222.71,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@UP",
+      "weapon": "Lunar_YellowBeetleLaser"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 68.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 222.71,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@eliteUP",
+      "weapon": "Lunar_YellowBeetleLaser"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 68.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 222.71,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AA_UP",
+      "weapon": "Lunar_YellowBeetleLaser_AA"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 68.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 222.71,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@eliteAA_UP",
+      "weapon": "Lunar_YellowBeetleLaser_AA"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 72.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 280.45,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AMP",
+      "weapon": "Lunar_AmplifiedBeetleLaser"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 72.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 280.45,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@eliteAMP",
+      "weapon": "Lunar_AmplifiedBeetleLaser"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 72.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 280.45,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AA_AMP",
+      "weapon": "Lunar_AmplifiedBeetleLaser_AA"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 72.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 280.45,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@eliteAA_AMP",
+      "weapon": "Lunar_AmplifiedBeetleLaser_AA"
+     }
+    ]
+   }
+  },
+  "buildings": {
+   "schwarzermond_lasertower": {
+    "armaments": [
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 20.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 252.4,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "NaxLaserT"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 20.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 504.81,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@UP",
+      "weapon": "Lunar_YellowLaserT"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 20.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 757.21,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AMP",
+      "weapon": "Lunar_AmplifiedLaserT"
+     }
+    ]
+   },
+   "schwarzermond_sturmcannon": {
+    "armaments": [
+     {
+      "avg_versus": 0.683,
+      "damage_total": 80000.0,
+      "eff_reload": 140.0,
+      "effective_damage": 123561.99,
+      "effective_dps": 559.06,
+      "effective_per_shot": 78268.66,
+      "footprint": 13.4998,
+      "k": 0.9784,
+      "reliability": 0.3651,
+      "sigma": 2275.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxSturmArty"
+     },
+     {
+      "avg_versus": 0.6858,
+      "damage_total": 83000.0,
+      "eff_reload": 140.0,
+      "effective_damage": 123871.98,
+      "effective_dps": 559.76,
+      "effective_per_shot": 78366.95,
+      "footprint": 14.139,
+      "k": 0.9442,
+      "reliability": 0.3534,
+      "sigma": 2275.0,
+      "slot": "Armament@PRIMARY_UP",
+      "weapon": "Lunar_GreenSturmArty"
+     }
+    ]
+   }
+  },
+  "infantry": {
+   "hole.nax2": {
+    "armaments": [
+     {
+      "avg_versus": 0.7412,
+      "damage_total": 2000.0,
+      "eff_reload": 5.0,
+      "effective_damage": 5195.79,
+      "effective_dps": 714.88,
+      "effective_per_shot": 3574.4,
+      "footprint": 6.3916,
+      "k": 1.7872,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "NaxiBlackholeShoot"
+     }
+    ]
+   },
+   "hole_small.nax2": {
+    "armaments": [
+     {
+      "avg_versus": 0.7412,
+      "damage_total": 2000.0,
+      "eff_reload": 5.0,
+      "effective_damage": 5195.79,
+      "effective_dps": 714.88,
+      "effective_per_shot": 3574.4,
+      "footprint": 6.3916,
+      "k": 1.7872,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "NaxiBlackholeShoot"
+     }
+    ]
+   },
+   "schwarzermond_lunarrocket": {
+    "armaments": [
+     {
+      "avg_versus": 0.8188,
+      "damage_total": 16000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 14551.21,
+      "effective_dps": 149.63,
+      "effective_per_shot": 7481.4,
+      "footprint": 13.5198,
+      "k": 0.4676,
+      "reliability": 0.3504,
+      "sigma": 801.83,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxCorrosionRocketTrooper_elite"
+     },
+     {
+      "avg_versus": 0.8188,
+      "damage_total": 16000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 14551.21,
+      "effective_dps": 149.63,
+      "effective_per_shot": 7481.4,
+      "footprint": 13.5198,
+      "k": 0.4676,
+      "reliability": 0.3504,
+      "sigma": 801.83,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxCorrosionRocketTrooper_elite"
+     },
+     {
+      "avg_versus": 0.8188,
+      "damage_total": 16000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 14551.21,
+      "effective_dps": 149.63,
+      "effective_per_shot": 7481.4,
+      "footprint": 13.5198,
+      "k": 0.4676,
+      "reliability": 0.3504,
+      "sigma": 801.83,
+      "slot": "Armament@GARRISONED",
+      "weapon": "NaxCorrosionRocketTrooper_elite"
+     },
+     {
+      "avg_versus": 0.8188,
+      "damage_total": 16000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 14551.21,
+      "effective_dps": 149.63,
+      "effective_per_shot": 7481.4,
+      "footprint": 13.5198,
+      "k": 0.4676,
+      "reliability": 0.3504,
+      "sigma": 801.83,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "NaxCorrosionRocketTrooper_elite"
+     }
+    ]
+   },
+   "schwarzermond_lunarsoldier": {
+    "armaments": [
+     {
+      "avg_versus": 0.6347,
+      "damage_total": 25000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 22036.68,
+      "effective_dps": 269.76,
+      "effective_per_shot": 13488.01,
+      "footprint": 1.1585,
+      "k": 0.5395,
+      "reliability": 0.8265,
+      "sigma": 112.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "schwarzermond_lunarsoldier_rifle"
+     },
+     {
+      "avg_versus": 0.6347,
+      "damage_total": 25000.0,
+      "eff_reload": 53.0,
+      "effective_damage": 22074.1,
+      "effective_dps": 509.95,
+      "effective_per_shot": 13513.61,
+      "footprint": 1.1585,
+      "k": 0.5405,
+      "reliability": 0.828,
+      "sigma": 111.0,
+      "slot": "Armament@ELITE",
+      "weapon": "schwarzermond_lunarsoldier_rifle_elite"
+     },
+     {
+      "avg_versus": 0.6347,
+      "damage_total": 25000.0,
+      "eff_reload": 53.0,
+      "effective_damage": 26373.19,
+      "effective_dps": 621.04,
+      "effective_per_shot": 16457.67,
+      "footprint": 1.1585,
+      "k": 0.6583,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY_UP",
+      "weapon": "schwarzermond_lunarsoldier_rifle_yellow"
+     },
+     {
+      "avg_versus": 0.6347,
+      "damage_total": 25000.0,
+      "eff_reload": 59.0,
+      "effective_damage": 26373.19,
+      "effective_dps": 1115.77,
+      "effective_per_shot": 16457.67,
+      "footprint": 1.1585,
+      "k": 0.6583,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@ELITE_UP",
+      "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite"
+     },
+     {
+      "avg_versus": 0.6347,
+      "damage_total": 25000.0,
+      "eff_reload": 56.0,
+      "effective_damage": 26373.19,
+      "effective_dps": 881.66,
+      "effective_per_shot": 16457.67,
+      "footprint": 1.1585,
+      "k": 0.6583,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY_AMP",
+      "weapon": "schwarzermond_lunarsoldier_rifle_amplified"
+     },
+     {
+      "avg_versus": 0.6347,
+      "damage_total": 25000.0,
+      "eff_reload": 65.0,
+      "effective_damage": 26373.19,
+      "effective_dps": 1519.17,
+      "effective_per_shot": 16457.67,
+      "footprint": 1.1585,
+      "k": 0.6583,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@ELITE_AMP",
+      "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite"
+     },
+     {
+      "avg_versus": 0.6347,
+      "damage_total": 25000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 22036.68,
+      "effective_dps": 269.76,
+      "effective_per_shot": 13488.01,
+      "footprint": 1.1585,
+      "k": 0.5395,
+      "reliability": 0.8265,
+      "sigma": 112.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "schwarzermond_lunarsoldier_rifle"
+     },
+     {
+      "avg_versus": 0.6347,
+      "damage_total": 25000.0,
+      "eff_reload": 53.0,
+      "effective_damage": 22074.1,
+      "effective_dps": 509.95,
+      "effective_per_shot": 13513.61,
+      "footprint": 1.1585,
+      "k": 0.5405,
+      "reliability": 0.828,
+      "sigma": 111.0,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "schwarzermond_lunarsoldier_rifle_elite"
+     },
+     {
+      "avg_versus": 0.6347,
+      "damage_total": 25000.0,
+      "eff_reload": 53.0,
+      "effective_damage": 26373.19,
+      "effective_dps": 621.04,
+      "effective_per_shot": 16457.67,
+      "footprint": 1.1585,
+      "k": 0.6583,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED_UP",
+      "weapon": "schwarzermond_lunarsoldier_rifle_yellow"
+     },
+     {
+      "avg_versus": 0.6347,
+      "damage_total": 25000.0,
+      "eff_reload": 59.0,
+      "effective_damage": 26373.19,
+      "effective_dps": 1115.77,
+      "effective_per_shot": 16457.67,
+      "footprint": 1.1585,
+      "k": 0.6583,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONEDELITE_UP",
+      "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite"
+     },
+     {
+      "avg_versus": 0.6347,
+      "damage_total": 25000.0,
+      "eff_reload": 56.0,
+      "effective_damage": 26373.19,
+      "effective_dps": 881.66,
+      "effective_per_shot": 16457.67,
+      "footprint": 1.1585,
+      "k": 0.6583,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED_AMP",
+      "weapon": "schwarzermond_lunarsoldier_rifle_amplified"
+     },
+     {
+      "avg_versus": 0.6347,
+      "damage_total": 25000.0,
+      "eff_reload": 65.0,
+      "effective_damage": 26373.19,
+      "effective_dps": 1519.17,
+      "effective_per_shot": 16457.67,
+      "footprint": 1.1585,
+      "k": 0.6583,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONEDELITE_AMP",
+      "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite"
+     }
+    ]
+   },
+   "schwarzermond_noidharvester": {
+    "armaments": [
+     {
+      "avg_versus": 0.6846,
+      "damage_total": 13000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 10392.95,
+      "effective_dps": 257.35,
+      "effective_per_shot": 6176.39,
+      "footprint": 10.318,
+      "k": 0.4751,
+      "reliability": 0.413,
+      "sigma": 608.77,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxiMP40Laser"
+     },
+     {
+      "avg_versus": 0.6846,
+      "damage_total": 13000.0,
+      "eff_reload": 127.0,
+      "effective_damage": 10380.41,
+      "effective_dps": 485.69,
+      "effective_per_shot": 6168.26,
+      "footprint": 10.318,
+      "k": 0.4745,
+      "reliability": 0.412,
+      "sigma": 610.77,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxiMP40Laser_elite"
+     }
+    ]
+   },
+   "schwarzermond_noidmgarmor": {
+    "armaments": [
+     {
+      "avg_versus": 0.6846,
+      "damage_total": 13000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 10392.95,
+      "effective_dps": 257.35,
+      "effective_per_shot": 6176.39,
+      "footprint": 10.318,
+      "k": 0.4751,
+      "reliability": 0.413,
+      "sigma": 608.77,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxiMP40Laser"
+     },
+     {
+      "avg_versus": 0.6846,
+      "damage_total": 13000.0,
+      "eff_reload": 127.0,
+      "effective_damage": 10380.41,
+      "effective_dps": 485.69,
+      "effective_per_shot": 6168.26,
+      "footprint": 10.318,
+      "k": 0.4745,
+      "reliability": 0.412,
+      "sigma": 610.77,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxiMP40Laser_elite"
+     },
+     {
+      "avg_versus": 0.6846,
+      "damage_total": 13000.0,
+      "eff_reload": 115.0,
+      "effective_damage": 10392.95,
+      "effective_dps": 322.25,
+      "effective_per_shot": 6176.39,
+      "footprint": 10.318,
+      "k": 0.4751,
+      "reliability": 0.413,
+      "sigma": 608.77,
+      "slot": "Armament@PRIMARY_UP",
+      "weapon": "Lunar_YellowMP40Laser"
+     },
+     {
+      "avg_versus": 0.6846,
+      "damage_total": 13000.0,
+      "eff_reload": 130.0,
+      "effective_damage": 10380.41,
+      "effective_dps": 521.93,
+      "effective_per_shot": 6168.26,
+      "footprint": 10.318,
+      "k": 0.4745,
+      "reliability": 0.412,
+      "sigma": 610.77,
+      "slot": "Armament@ELITE_UP",
+      "weapon": "Lunar_YellowMP40Laser_elite"
+     },
+     {
+      "avg_versus": 0.6846,
+      "damage_total": 13000.0,
+      "eff_reload": 118.0,
+      "effective_damage": 10392.95,
+      "effective_dps": 366.4,
+      "effective_per_shot": 6176.39,
+      "footprint": 10.318,
+      "k": 0.4751,
+      "reliability": 0.413,
+      "sigma": 608.77,
+      "slot": "Armament@PRIMARY_AMP",
+      "weapon": "Lunar_AmplifiedMP40Laser"
+     },
+     {
+      "avg_versus": 0.6846,
+      "damage_total": 13000.0,
+      "eff_reload": 133.0,
+      "effective_damage": 10380.41,
+      "effective_dps": 556.53,
+      "effective_per_shot": 6168.26,
+      "footprint": 10.318,
+      "k": 0.4745,
+      "reliability": 0.412,
+      "sigma": 610.77,
+      "slot": "Armament@ELITE_AMP",
+      "weapon": "Lunar_AmplifiedMP40Laser_elite"
+     }
+    ]
+   },
+   "schwarzermond_parzival": {
+    "armaments": [
+     {
+      "avg_versus": 0.6694,
+      "damage_total": 61000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 62632.85,
+      "effective_dps": 743.23,
+      "effective_per_shot": 44593.95,
+      "footprint": 0.6392,
+      "k": 0.731,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "BlackHoleMaker"
+     },
+     {
+      "avg_versus": 0.6694,
+      "damage_total": 61000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 62632.85,
+      "effective_dps": 1415.68,
+      "effective_per_shot": 44593.95,
+      "footprint": 0.6392,
+      "k": 0.731,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@ELITE",
+      "weapon": "BlackHoleMaker_elite"
+     },
+     {
+      "avg_versus": 0.6694,
+      "damage_total": 61000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 62632.85,
+      "effective_dps": 743.23,
+      "effective_per_shot": 44593.95,
+      "footprint": 0.6392,
+      "k": 0.731,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "BlackHoleMaker"
+     },
+     {
+      "avg_versus": 0.6694,
+      "damage_total": 61000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 62632.85,
+      "effective_dps": 1415.68,
+      "effective_per_shot": 44593.95,
+      "footprint": 0.6392,
+      "k": 0.731,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "BlackHoleMaker_elite"
+     }
+    ]
+   },
+   "schwarzermond_ubermensch": {
+    "armaments": [
+     {
+      "avg_versus": 0.7936,
+      "damage_total": 18000.0,
+      "eff_reload": 33.0,
+      "effective_damage": 11211.66,
+      "effective_dps": 422.77,
+      "effective_per_shot": 6975.64,
+      "footprint": 4.9994,
+      "k": 0.3875,
+      "reliability": 0.3546,
+      "sigma": 532.04,
+      "slot": "Armament@PRIMARY",
+      "weapon": "UbermenschLaser"
+     },
+     {
+      "avg_versus": 0.7936,
+      "damage_total": 18000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 10923.54,
+      "effective_dps": 691.46,
+      "effective_per_shot": 6741.74,
+      "footprint": 4.9994,
+      "k": 0.3745,
+      "reliability": 0.3386,
+      "sigma": 572.04,
+      "slot": "Armament@ELITE",
+      "weapon": "UbermenschLaser_elite"
+     },
+     {
+      "avg_versus": 0.7936,
+      "damage_total": 18000.0,
+      "eff_reload": 33.0,
+      "effective_damage": 11211.66,
+      "effective_dps": 422.77,
+      "effective_per_shot": 6975.64,
+      "footprint": 4.9994,
+      "k": 0.3875,
+      "reliability": 0.3546,
+      "sigma": 532.04,
+      "slot": "Armament@GARRISONED",
+      "weapon": "UbermenschLaser"
+     },
+     {
+      "avg_versus": 0.7936,
+      "damage_total": 18000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 10923.54,
+      "effective_dps": 691.46,
+      "effective_per_shot": 6741.74,
+      "footprint": 4.9994,
+      "k": 0.3745,
+      "reliability": 0.3386,
+      "sigma": 572.04,
+      "slot": "Armament@GARRISONEDELITE",
+      "weapon": "UbermenschLaser_elite"
+     },
+     {
+      "avg_versus": 0.7936,
+      "damage_total": 18000.0,
+      "eff_reload": 36.0,
+      "effective_damage": 22829.64,
+      "effective_dps": 1430.02,
+      "effective_per_shot": 17160.29,
+      "footprint": 4.9994,
+      "k": 0.9533,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY_UP",
+      "weapon": "Lunar_YellowUbermenschLaser"
+     },
+     {
+      "avg_versus": 0.7936,
+      "damage_total": 18000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 22829.64,
+      "effective_dps": 2042.89,
+      "effective_per_shot": 17160.29,
+      "footprint": 4.9994,
+      "k": 0.9533,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@ELITE_UP",
+      "weapon": "Lunar_YellowUbermenschLaser_elite"
+     },
+     {
+      "avg_versus": 0.7936,
+      "damage_total": 18000.0,
+      "eff_reload": 36.0,
+      "effective_damage": 22829.64,
+      "effective_dps": 1430.02,
+      "effective_per_shot": 17160.29,
+      "footprint": 4.9994,
+      "k": 0.9533,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED_UP",
+      "weapon": "Lunar_YellowUbermenschLaser"
+     },
+     {
+      "avg_versus": 0.7936,
+      "damage_total": 18000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 22829.64,
+      "effective_dps": 2042.89,
+      "effective_per_shot": 17160.29,
+      "footprint": 4.9994,
+      "k": 0.9533,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONEDELITE_UP",
+      "weapon": "Lunar_YellowUbermenschLaser_elite"
+     },
+     {
+      "avg_versus": 0.7936,
+      "damage_total": 18000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 22829.64,
+      "effective_dps": 1760.03,
+      "effective_per_shot": 17160.29,
+      "footprint": 4.9994,
+      "k": 0.9533,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY_AMP",
+      "weapon": "Lunar_AmplifiedUbermenschLaser"
+     },
+     {
+      "avg_versus": 0.7936,
+      "damage_total": 18000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 22829.64,
+      "effective_dps": 2288.04,
+      "effective_per_shot": 17160.29,
+      "footprint": 4.9994,
+      "k": 0.9533,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@ELITE_AMP",
+      "weapon": "Lunar_AmplifiedUbermenschLaser_elite"
+     },
+     {
+      "avg_versus": 0.7936,
+      "damage_total": 18000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 22829.64,
+      "effective_dps": 1760.03,
+      "effective_per_shot": 17160.29,
+      "footprint": 4.9994,
+      "k": 0.9533,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED_AMP",
+      "weapon": "Lunar_AmplifiedUbermenschLaser"
+     },
+     {
+      "avg_versus": 0.7936,
+      "damage_total": 18000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 22829.64,
+      "effective_dps": 2288.04,
+      "effective_per_shot": 17160.29,
+      "footprint": 4.9994,
+      "k": 0.9533,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONEDELITE_AMP",
+      "weapon": "Lunar_AmplifiedUbermenschLaser_elite"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "schwarzermond_crystaltank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 3000.0,
+      "eff_reload": 99.0,
+      "effective_damage": 3184.76,
+      "effective_dps": 244.33,
+      "effective_per_shot": 2418.82,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AG",
+      "weapon": "NaxCrystalLeech"
+     },
+     {
+      "avg_versus": 1.0619,
+      "damage_total": 3000.0,
+      "eff_reload": 44.0,
+      "effective_damage": 3715.06,
+      "effective_dps": 1842.56,
+      "effective_per_shot": 4053.62,
+      "footprint": 2.5087,
+      "k": 1.3512,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxCrystalLeech_elite"
+     }
+    ]
+   },
+   "schwarzermond_dalek": {
+    "armaments": [
+     {
+      "avg_versus": 0.7334,
+      "damage_total": 352000.0,
+      "eff_reload": 76.0,
+      "effective_damage": 366500.91,
+      "effective_dps": 3663.31,
+      "effective_per_shot": 278411.52,
+      "footprint": 1.9175,
+      "k": 0.7909,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "DalekCannon"
+     },
+     {
+      "avg_versus": 0.7344,
+      "damage_total": 702000.0,
+      "eff_reload": 76.0,
+      "effective_damage": 730732.18,
+      "effective_dps": 7316.0,
+      "effective_per_shot": 556016.04,
+      "footprint": 1.9175,
+      "k": 0.792,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@ELITE",
+      "weapon": "DalekCannon_elite"
+     }
+    ]
+   },
+   "schwarzermond_komet": {
+    "armaments": [
+     {
+      "avg_versus": 0.6207,
+      "damage_total": 32000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 17286.67,
+      "effective_dps": 300.01,
+      "effective_per_shot": 9600.46,
+      "footprint": 2.8144,
+      "k": 0.3,
+      "reliability": 0.3643,
+      "sigma": 595.62,
+      "slot": "Armament",
+      "weapon": "Naxis_Komet"
+     },
+     {
+      "avg_versus": 0.6207,
+      "damage_total": 32000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 15654.76,
+      "effective_dps": 268.16,
+      "effective_per_shot": 8580.97,
+      "footprint": 2.8144,
+      "k": 0.2682,
+      "reliability": 0.3133,
+      "sigma": 693.5,
+      "slot": "Armament@AA",
+      "weapon": "Naxis_Komet_AA"
+     }
+    ]
+   },
+   "schwarzermond_korruptesbiest": {
+    "armaments": [
+     {
+      "avg_versus": 0.6473,
+      "damage_total": 6000.0,
+      "eff_reload": 48.0,
+      "effective_damage": 11062.55,
+      "effective_dps": 981.96,
+      "effective_per_shot": 5891.77,
+      "footprint": 13.4998,
+      "k": 0.982,
+      "reliability": 0.7188,
+      "sigma": 666.13,
+      "slot": "Armament@PRIMARY",
+      "weapon": "NaxCorrosionBeast"
+     },
+     {
+      "avg_versus": 0.6473,
+      "damage_total": 6000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 10992.21,
+      "effective_dps": 1460.47,
+      "effective_per_shot": 5841.88,
+      "footprint": 13.4998,
+      "k": 0.9736,
+      "reliability": 0.707,
+      "sigma": 699.47,
+      "slot": "Armament@ELITE",
+      "weapon": "NaxCorrosionBeast_elite"
+     }
+    ]
+   },
+   "schwarzermond_laserbeetle": {
+    "armaments": [
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 64.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 157.75,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "NaxiBeetleLaser_elite"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 64.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 157.75,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AA",
+      "weapon": "NaxiBeetleLaser_AA_elite"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 68.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 222.71,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@UP",
+      "weapon": "Lunar_YellowBeetleLaser"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 68.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 222.71,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AA_UP",
+      "weapon": "Lunar_YellowBeetleLaser_AA"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 72.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 280.45,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AMP",
+      "weapon": "Lunar_AmplifiedBeetleLaser"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 72.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 280.45,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AA_AMP",
+      "weapon": "Lunar_AmplifiedBeetleLaser_AA"
+     }
+    ]
+   },
+   "schwarzermond_lasertank": {
+    "armaments": [
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 64.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 315.51,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "NaxiTank2Laser"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 64.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 315.51,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AA",
+      "weapon": "NaxiTank2Laser_AA"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 68.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 371.18,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@UP",
+      "weapon": "Lunar_YellowTank2Laser"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 68.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 371.18,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AA_UP",
+      "weapon": "Lunar_YellowTank2Laser_AA"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 72.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 420.67,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AMP",
+      "weapon": "Lunar_AmplifiedTank2Laser"
+     },
+     {
+      "avg_versus": 0.587,
+      "damage_total": 8600.0,
+      "eff_reload": 72.0,
+      "effective_damage": 8729.58,
+      "effective_dps": 420.67,
+      "effective_per_shot": 5048.1,
+      "footprint": 0.3221,
+      "k": 0.587,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AA_AMP",
+      "weapon": "Lunar_AmplifiedTank2Laser_AA"
+     }
+    ]
+   },
+   "schwarzermond_lunargrille": {
+    "armaments": [
+     {
+      "avg_versus": 0.6851,
+      "damage_total": 48000.0,
+      "eff_reload": 111.0,
+      "effective_damage": 73380.5,
+      "effective_dps": 411.57,
+      "effective_per_shot": 45683.76,
+      "footprint": 13.4998,
+      "k": 0.9517,
+      "reliability": 0.4038,
+      "sigma": 1975.44,
+      "slot": "Armament@AG",
+      "weapon": "NaxGrilleArty"
+     },
+     {
+      "avg_versus": 0.6851,
+      "damage_total": 48000.0,
+      "eff_reload": 114.0,
+      "effective_damage": 72896.44,
+      "effective_dps": 795.27,
+      "effective_per_shot": 45330.59,
+      "footprint": 13.4998,
+      "k": 0.9444,
+      "reliability": 0.3937,
+      "sigma": 2034.78,
+      "slot": "Armament@elite",
+      "weapon": "NaxGrilleArty_elite"
+     },
+     {
+      "avg_versus": 0.71,
+      "damage_total": 72000.0,
+      "eff_reload": 111.0,
+      "effective_damage": 76145.79,
+      "effective_dps": 420.67,
+      "effective_per_shot": 46694.3,
+      "footprint": 14.139,
+      "k": 0.6485,
+      "reliability": 0.2871,
+      "sigma": 1975.44,
+      "slot": "Armament@upgraded",
+      "weapon": "Lunar_GreenGrilleArty"
+     },
+     {
+      "avg_versus": 0.71,
+      "damage_total": 72000.0,
+      "eff_reload": 114.0,
+      "effective_damage": 75591.05,
+      "effective_dps": 812.03,
+      "effective_per_shot": 46285.67,
+      "footprint": 14.139,
+      "k": 0.6429,
+      "reliability": 0.2794,
+      "sigma": 2034.78,
+      "slot": "Armament@elite-upgrade",
+      "weapon": "Lunar_GreenGrilleArty_elite"
+     }
+    ]
+   },
+   "schwarzermond_lunarpanzer": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 19138.96,
+      "effective_dps": 186.88,
+      "effective_per_shot": 11212.72,
+      "footprint": 4.3503,
+      "k": 1.1213,
+      "reliability": 0.8263,
+      "sigma": 500.04,
+      "slot": "Armament",
+      "weapon": "LunarPanzerCannon"
+     },
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 63.0,
+      "effective_damage": 19003.55,
+      "effective_dps": 352.69,
+      "effective_per_shot": 11109.62,
+      "footprint": 4.3503,
+      "k": 1.111,
+      "reliability": 0.8128,
+      "sigma": 539.1,
+      "slot": "Armament@elite",
+      "weapon": "LunarPanzerCannon_elite"
+     },
+     {
+      "avg_versus": 0.7264,
+      "damage_total": 20000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 20576.62,
+      "effective_dps": 251.05,
+      "effective_per_shot": 12552.68,
+      "footprint": 4.9894,
+      "k": 0.6276,
+      "reliability": 0.5569,
+      "sigma": 500.0,
+      "slot": "Armament@upgraded",
+      "weapon": "Lunar_Green105mm"
+     },
+     {
+      "avg_versus": 0.7264,
+      "damage_total": 20000.0,
+      "eff_reload": 55.0,
+      "effective_damage": 20179.28,
+      "effective_dps": 445.02,
+      "effective_per_shot": 12238.02,
+      "footprint": 4.9894,
+      "k": 0.6119,
+      "reliability": 0.537,
+      "sigma": 540.0,
+      "slot": "Armament@upgraded-elite",
+      "weapon": "Lunar_Green105mm_elite"
+     }
+    ]
+   },
+   "schwarzermond_lunartiger": {
+    "armaments": [
+     {
+      "avg_versus": 0.6926,
+      "damage_total": 16000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 26732.72,
+      "effective_dps": 212.59,
+      "effective_per_shot": 17006.91,
+      "footprint": 13.746,
+      "k": 1.0629,
+      "reliability": 0.8117,
+      "sigma": 500.2,
+      "slot": "Armament",
+      "weapon": "LunarTigerCannon"
+     },
+     {
+      "avg_versus": 0.6926,
+      "damage_total": 16000.0,
+      "eff_reload": 83.0,
+      "effective_damage": 26465.07,
+      "effective_dps": 405.25,
+      "effective_per_shot": 16817.78,
+      "footprint": 13.746,
+      "k": 1.0511,
+      "reliability": 0.7949,
+      "sigma": 539.41,
+      "slot": "Armament@elite",
+      "weapon": "LunarTigerCannon_elite"
+     },
+     {
+      "avg_versus": 0.7109,
+      "damage_total": 22000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 29364.67,
+      "effective_dps": 234.97,
+      "effective_per_shot": 18797.54,
+      "footprint": 14.3852,
+      "k": 0.8544,
+      "reliability": 0.6931,
+      "sigma": 500.2,
+      "slot": "Armament@-upgrade",
+      "weapon": "Lunar_GreenTigerCannon"
+     },
+     {
+      "avg_versus": 0.7109,
+      "damage_total": 22000.0,
+      "eff_reload": 83.0,
+      "effective_damage": 28956.67,
+      "effective_dps": 445.68,
+      "effective_per_shot": 18495.6,
+      "footprint": 14.3852,
+      "k": 0.8407,
+      "reliability": 0.6746,
+      "sigma": 539.41,
+      "slot": "Armament@elite-upgrade",
+      "weapon": "Lunar_GreenTigerCannon_elite"
+     }
+    ]
+   },
+   "schwarzermond_neojagdpanzer": {
+    "armaments": [
+     {
+      "avg_versus": 0.685,
+      "damage_total": 90000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 177336.85,
+      "effective_dps": 1246.95,
+      "effective_per_shot": 112225.3,
+      "footprint": 13.4998,
+      "k": 1.2469,
+      "reliability": 0.8454,
+      "sigma": 350.24,
+      "slot": "Armament@AG",
+      "weapon": "LunarNaxiJadgDestroyer"
+     },
+     {
+      "avg_versus": 0.685,
+      "damage_total": 90000.0,
+      "eff_reload": 93.0,
+      "effective_damage": 176264.71,
+      "effective_dps": 2396.24,
+      "effective_per_shot": 111425.26,
+      "footprint": 13.4998,
+      "k": 1.2381,
+      "reliability": 0.8335,
+      "sigma": 377.38,
+      "slot": "Armament@elite",
+      "weapon": "LunarNaxiJadgDestroyer_elite"
+     },
+     {
+      "avg_versus": 0.7099,
+      "damage_total": 135000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 201980.1,
+      "effective_dps": 1440.2,
+      "effective_per_shot": 129617.98,
+      "footprint": 14.139,
+      "k": 0.9601,
+      "reliability": 0.7256,
+      "sigma": 350.24,
+      "slot": "Armament@AG-upgraded",
+      "weapon": "Lunar_GreenJadgDestroyer"
+     },
+     {
+      "avg_versus": 0.7099,
+      "damage_total": 135000.0,
+      "eff_reload": 93.0,
+      "effective_damage": 199884.92,
+      "effective_dps": 2752.45,
+      "effective_per_shot": 127988.8,
+      "footprint": 14.139,
+      "k": 0.9481,
+      "reliability": 0.7101,
+      "sigma": 377.38,
+      "slot": "Armament@elite-upgrade",
+      "weapon": "Lunar_GreenJadgDestroyer_elite"
+     }
+    ]
+   }
+  }
+ }
+}

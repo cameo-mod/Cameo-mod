@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (2 file(s)) | 24 | >= 24 |
-| T2 | `def test_*` in tools/tests (8 file(s)) | 71 | >= 71 |
-| T3 | modules with no test mentioning them | 220 | <= 220 |
+| T2 | `def test_*` in tools/tests (11 file(s)) | 105 | >= 105 |
+| T3 | modules with no test mentioning them | 218 | <= 218 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (220)
+## T3 — untested modules (218)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -175,7 +175,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_power_budget.py | audit_power_budget |
 | python | tools/audit/audit_promotion_gating.py | audit_promotion_gating |
 | python | tools/audit/audit_rank_decoration.py | audit_rank_decoration |
-| python | tools/audit/audit_recent_changes.py | audit_recent_changes |
 | python | tools/audit/audit_rename_safety.py | audit_rename_safety |
 | python | tools/audit/audit_sequences.py | audit_sequences |
 | python | tools/audit/audit_stat_formulas.py | audit_stat_formulas |
@@ -208,8 +207,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/build_workbook.py | build_workbook |
 | python | tools/balance/check_band.py | check_band |
 | python | tools/balance/count_mixed.py | count_mixed |
-| python | tools/balance/effective_damage.py | effective_damage |
-| python | tools/balance/extract_stats.py | extract_stats |
 | python | tools/balance/fit_class.py | fit_class |
 | python | tools/balance/fix_orphan_old_keys.py | fix_orphan_old_keys |
 | python | tools/balance/fix_orphan_old_keys_multi.py | fix_orphan_old_keys_multi |
@@ -232,6 +229,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/sweep_areadamage.py | sweep_areadamage |
 | python | tools/balance/update_ranges.py | update_ranges |
 | python | tools/balance/verify_generator_sync.py | verify_generator_sync |
+| python | tools/balance/weapon_efficiency.py | weapon_efficiency |
 | python | tools/packs/extract_shared.py | extract_shared |
 | python | tools/packs/split_faction.py | split_faction |
 | python | tools/rename/apply.py | apply |

@@ -1,0 +1,2749 @@
+{
+ "ledger": "redalert_soviets",
+ "pack": "mods/cameo/ContentPacks/RedAlert/Soviets",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "ra1_soviets_armoredyak": {
+    "armaments": [
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 175.0,
+      "effective_damage": 3552.69,
+      "effective_dps": 129.56,
+      "effective_per_shot": 2267.24,
+      "footprint": 0.3595,
+      "k": 0.5668,
+      "reliability": 0.7983,
+      "sigma": 232.3,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ArmoredYakChainGun"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 175.0,
+      "effective_damage": 3552.69,
+      "effective_dps": 129.56,
+      "effective_per_shot": 2267.24,
+      "footprint": 0.3595,
+      "k": 0.5668,
+      "reliability": 0.7983,
+      "sigma": 232.3,
+      "slot": "Armament@SECONDARY",
+      "weapon": "ArmoredYakChainGun"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 8000.0,
+      "eff_reload": 175.0,
+      "effective_damage": 10921.17,
+      "effective_dps": 393.89,
+      "effective_per_shot": 6893.04,
+      "footprint": 3.1175,
+      "k": 0.8616,
+      "reliability": 0.9755,
+      "sigma": 32.3,
+      "slot": "Armament@Upgrade1",
+      "weapon": "IncendiaryArmoredYakChainGun"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 8000.0,
+      "eff_reload": 175.0,
+      "effective_damage": 10921.17,
+      "effective_dps": 393.89,
+      "effective_per_shot": 6893.04,
+      "footprint": 3.1175,
+      "k": 0.8616,
+      "reliability": 0.9755,
+      "sigma": 32.3,
+      "slot": "Armament@Upgrade2",
+      "weapon": "IncendiaryArmoredYakChainGun"
+     }
+    ]
+   },
+   "ra1_soviets_hindattackhelicopter": {
+    "armaments": [
+     {
+      "avg_versus": 0.6409,
+      "damage_total": 6000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 10864.88,
+      "effective_dps": 390.27,
+      "effective_per_shot": 6244.35,
+      "footprint": 11.4585,
+      "k": 1.0407,
+      "reliability": 0.8559,
+      "sigma": 321.12,
+      "slot": "Armament@Missiles",
+      "weapon": "HindMissiles"
+     },
+     {
+      "avg_versus": 0.6409,
+      "damage_total": 6000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 10864.88,
+      "effective_dps": 390.27,
+      "effective_per_shot": 6244.35,
+      "footprint": 11.4585,
+      "k": 1.0407,
+      "reliability": 0.8559,
+      "sigma": 321.12,
+      "slot": "Armament@MissilesRocketPod1",
+      "weapon": "HindMissiles"
+     },
+     {
+      "avg_versus": 0.6409,
+      "damage_total": 6000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 10864.88,
+      "effective_dps": 390.27,
+      "effective_per_shot": 6244.35,
+      "footprint": 11.4585,
+      "k": 1.0407,
+      "reliability": 0.8559,
+      "sigma": 321.12,
+      "slot": "Armament@MissilesRocketPod2",
+      "weapon": "HindMissiles"
+     },
+     {
+      "avg_versus": 0.6733,
+      "damage_total": 10000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 14646.27,
+      "effective_dps": 586.02,
+      "effective_per_shot": 9376.27,
+      "footprint": 16.3597,
+      "k": 0.9376,
+      "reliability": 0.6466,
+      "sigma": 668.53,
+      "slot": "Armament@MissilesHE",
+      "weapon": "HindMissilesThermobaric"
+     },
+     {
+      "avg_versus": 0.6733,
+      "damage_total": 10000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 14646.27,
+      "effective_dps": 586.02,
+      "effective_per_shot": 9376.27,
+      "footprint": 16.3597,
+      "k": 0.9376,
+      "reliability": 0.6466,
+      "sigma": 668.53,
+      "slot": "Armament@MissilesHERocketPod1",
+      "weapon": "HindMissilesThermobaric"
+     },
+     {
+      "avg_versus": 0.6733,
+      "damage_total": 10000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 14646.27,
+      "effective_dps": 586.02,
+      "effective_per_shot": 9376.27,
+      "footprint": 16.3597,
+      "k": 0.9376,
+      "reliability": 0.6466,
+      "sigma": 668.53,
+      "slot": "Armament@MissilesHERocketPod2",
+      "weapon": "HindMissilesThermobaric"
+     },
+     {
+      "avg_versus": 0.6658,
+      "damage_total": 8000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 53940.71,
+      "effective_dps": 448.6,
+      "effective_per_shot": 7177.6,
+      "footprint": 99.8667,
+      "k": 0.8972,
+      "reliability": 0.5009,
+      "sigma": 668.53,
+      "slot": "Armament@MissilesNuke",
+      "weapon": "HindMissilesNuclear"
+     },
+     {
+      "avg_versus": 0.6658,
+      "damage_total": 8000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 53940.71,
+      "effective_dps": 448.6,
+      "effective_per_shot": 7177.6,
+      "footprint": 99.8667,
+      "k": 0.8972,
+      "reliability": 0.5009,
+      "sigma": 668.53,
+      "slot": "Armament@MissilesNukeRocketPod1",
+      "weapon": "HindMissilesNuclear"
+     },
+     {
+      "avg_versus": 0.6658,
+      "damage_total": 8000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 53940.71,
+      "effective_dps": 448.6,
+      "effective_per_shot": 7177.6,
+      "footprint": 99.8667,
+      "k": 0.8972,
+      "reliability": 0.5009,
+      "sigma": 668.53,
+      "slot": "Armament@MissilesNukeRocketPod2",
+      "weapon": "HindMissilesNuclear"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 1784.44,
+      "effective_dps": 142.48,
+      "effective_per_shot": 1139.87,
+      "footprint": 0.3595,
+      "k": 0.5699,
+      "reliability": 0.8023,
+      "sigma": 227.64,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ChainGun"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 1784.44,
+      "effective_dps": 142.48,
+      "effective_per_shot": 1139.87,
+      "footprint": 0.3595,
+      "k": 0.5699,
+      "reliability": 0.8023,
+      "sigma": 227.64,
+      "slot": "Armament@SECONDARY",
+      "weapon": "ChainGun"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 4000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 5474.75,
+      "effective_dps": 432.13,
+      "effective_per_shot": 3457.05,
+      "footprint": 3.1175,
+      "k": 0.8643,
+      "reliability": 0.979,
+      "sigma": 27.64,
+      "slot": "Armament@Upgrade1",
+      "weapon": "IncendiaryChainGun"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 4000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 5474.75,
+      "effective_dps": 432.13,
+      "effective_per_shot": 3457.05,
+      "footprint": 3.1175,
+      "k": 0.8643,
+      "reliability": 0.979,
+      "sigma": 27.64,
+      "slot": "Armament@Upgrade2",
+      "weapon": "IncendiaryChainGun"
+     }
+    ]
+   },
+   "ra1_soviets_kamovattackhelicopter": {
+    "armaments": [
+     {
+      "avg_versus": 0.6679,
+      "damage_total": 40000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 52509.93,
+      "effective_dps": 953.95,
+      "effective_per_shot": 30526.24,
+      "footprint": 3.3971,
+      "k": 0.7632,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Tesla",
+      "weapon": "KamovTesla"
+     },
+     {
+      "avg_versus": 0.6679,
+      "damage_total": 40000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 52509.93,
+      "effective_dps": 953.95,
+      "effective_per_shot": 30526.24,
+      "footprint": 3.3971,
+      "k": 0.7632,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Arcing",
+      "weapon": "KamovTeslaArc"
+     },
+     {
+      "avg_versus": 0.6409,
+      "damage_total": 6000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 10864.88,
+      "effective_dps": 390.27,
+      "effective_per_shot": 6244.35,
+      "footprint": 11.4585,
+      "k": 1.0407,
+      "reliability": 0.8559,
+      "sigma": 321.12,
+      "slot": "Armament@Missiles",
+      "weapon": "HindMissiles"
+     },
+     {
+      "avg_versus": 0.6409,
+      "damage_total": 6000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 10864.88,
+      "effective_dps": 390.27,
+      "effective_per_shot": 6244.35,
+      "footprint": 11.4585,
+      "k": 1.0407,
+      "reliability": 0.8559,
+      "sigma": 321.12,
+      "slot": "Armament@MissilesRocketPod1",
+      "weapon": "HindMissiles"
+     },
+     {
+      "avg_versus": 0.6409,
+      "damage_total": 6000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 10864.88,
+      "effective_dps": 390.27,
+      "effective_per_shot": 6244.35,
+      "footprint": 11.4585,
+      "k": 1.0407,
+      "reliability": 0.8559,
+      "sigma": 321.12,
+      "slot": "Armament@MissilesRocketPod2",
+      "weapon": "HindMissiles"
+     },
+     {
+      "avg_versus": 0.6856,
+      "damage_total": 11000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 10620.19,
+      "effective_dps": 414.81,
+      "effective_per_shot": 6636.94,
+      "footprint": 10.5174,
+      "k": 0.6034,
+      "reliability": 0.4997,
+      "sigma": 668.53,
+      "slot": "Armament@MissilesUpgrade",
+      "weapon": "KamovMissilesTesla"
+     },
+     {
+      "avg_versus": 0.6856,
+      "damage_total": 11000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 10620.19,
+      "effective_dps": 414.81,
+      "effective_per_shot": 6636.94,
+      "footprint": 10.5174,
+      "k": 0.6034,
+      "reliability": 0.4997,
+      "sigma": 668.53,
+      "slot": "Armament@MissilesUpgradeRocketPod1",
+      "weapon": "KamovMissilesTesla"
+     },
+     {
+      "avg_versus": 0.6856,
+      "damage_total": 11000.0,
+      "eff_reload": 16.0,
+      "effective_damage": 10620.19,
+      "effective_dps": 414.81,
+      "effective_per_shot": 6636.94,
+      "footprint": 10.5174,
+      "k": 0.6034,
+      "reliability": 0.4997,
+      "sigma": 668.53,
+      "slot": "Armament@MissilesUpgradeRocketPod2",
+      "weapon": "KamovMissilesTesla"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 1784.44,
+      "effective_dps": 142.48,
+      "effective_per_shot": 1139.87,
+      "footprint": 0.3595,
+      "k": 0.5699,
+      "reliability": 0.8023,
+      "sigma": 227.64,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ChainGun"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 1784.44,
+      "effective_dps": 142.48,
+      "effective_per_shot": 1139.87,
+      "footprint": 0.3595,
+      "k": 0.5699,
+      "reliability": 0.8023,
+      "sigma": 227.64,
+      "slot": "Armament@SECONDARY",
+      "weapon": "ChainGun"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 4000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 5474.75,
+      "effective_dps": 432.13,
+      "effective_per_shot": 3457.05,
+      "footprint": 3.1175,
+      "k": 0.8643,
+      "reliability": 0.979,
+      "sigma": 27.64,
+      "slot": "Armament@Upgrade1",
+      "weapon": "IncendiaryChainGun"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 4000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 5474.75,
+      "effective_dps": 432.13,
+      "effective_per_shot": 3457.05,
+      "footprint": 3.1175,
+      "k": 0.8643,
+      "reliability": 0.979,
+      "sigma": 27.64,
+      "slot": "Armament@Upgrade2",
+      "weapon": "IncendiaryChainGun"
+     }
+    ]
+   },
+   "ra1_soviets_migattackbomber": {
+    "armaments": [
+     {
+      "avg_versus": 0.6086,
+      "damage_total": 40000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 78834.66,
+      "effective_dps": 1393.91,
+      "effective_per_shot": 37635.54,
+      "footprint": 4.3503,
+      "k": 0.9409,
+      "reliability": 0.8833,
+      "sigma": 336.0,
+      "slot": "Armament@Rockets1",
+      "weapon": "Maverick"
+     },
+     {
+      "avg_versus": 0.6086,
+      "damage_total": 40000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 78834.66,
+      "effective_dps": 1393.91,
+      "effective_per_shot": 37635.54,
+      "footprint": 4.3503,
+      "k": 0.9409,
+      "reliability": 0.8833,
+      "sigma": 336.0,
+      "slot": "Armament@Rockets2",
+      "weapon": "Maverick"
+     },
+     {
+      "avg_versus": 0.6993,
+      "damage_total": 40000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 44979.76,
+      "effective_dps": 910.22,
+      "effective_per_shot": 24575.98,
+      "footprint": 4.9894,
+      "k": 0.6144,
+      "reliability": 0.6525,
+      "sigma": 336.0,
+      "slot": "Armament@TeslaUpgrade1",
+      "weapon": "TeslaMaverick"
+     },
+     {
+      "avg_versus": 0.6993,
+      "damage_total": 40000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 44979.76,
+      "effective_dps": 910.22,
+      "effective_per_shot": 24575.98,
+      "footprint": 4.9894,
+      "k": 0.6144,
+      "reliability": 0.6525,
+      "sigma": 336.0,
+      "slot": "Armament@TeslaUpgrade2",
+      "weapon": "TeslaMaverick"
+     },
+     {
+      "avg_versus": 0.6846,
+      "damage_total": 48000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 355206.42,
+      "effective_dps": 2207.98,
+      "effective_per_shot": 59615.37,
+      "footprint": 104.3942,
+      "k": 1.242,
+      "reliability": 0.8755,
+      "sigma": 336.0,
+      "slot": "Armament@NuclearUpgrade1",
+      "weapon": "ThermobaricMaverick"
+     },
+     {
+      "avg_versus": 0.6846,
+      "damage_total": 48000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 355206.42,
+      "effective_dps": 2207.98,
+      "effective_per_shot": 59615.37,
+      "footprint": 104.3942,
+      "k": 1.242,
+      "reliability": 0.8755,
+      "sigma": 336.0,
+      "slot": "Armament@NuclearUpgrade2",
+      "weapon": "ThermobaricMaverick"
+     }
+    ]
+   },
+   "ra1_soviets_nuclearyak": {
+    "armaments": [
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 200000.0,
+      "eff_reload": 125.0,
+      "effective_damage": 1641594.78,
+      "effective_dps": 3287.83,
+      "effective_per_shot": 410978.35,
+      "footprint": 114.9592,
+      "k": 2.0549,
+      "reliability": 1.023,
+      "sigma": 8.33,
+      "slot": "Armament@BOMBS",
+      "weapon": "YakNuclearBomb"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 3543.31,
+      "effective_dps": 149.42,
+      "effective_per_shot": 2260.0,
+      "footprint": 0.3595,
+      "k": 0.565,
+      "reliability": 0.7959,
+      "sigma": 235.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "YakChainGun"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 3543.31,
+      "effective_dps": 149.42,
+      "effective_per_shot": 2260.0,
+      "footprint": 0.3595,
+      "k": 0.565,
+      "reliability": 0.7959,
+      "sigma": 235.0,
+      "slot": "Armament@SECONDARY",
+      "weapon": "YakChainGun"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 8000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 10904.76,
+      "effective_dps": 454.93,
+      "effective_per_shot": 6880.83,
+      "footprint": 3.1175,
+      "k": 0.8601,
+      "reliability": 0.9734,
+      "sigma": 35.0,
+      "slot": "Armament@Upgrade1",
+      "weapon": "IncendiaryYakChainGun"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 8000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 10904.76,
+      "effective_dps": 454.93,
+      "effective_per_shot": 6880.83,
+      "footprint": 3.1175,
+      "k": 0.8601,
+      "reliability": 0.9734,
+      "sigma": 35.0,
+      "slot": "Armament@Upgrade2",
+      "weapon": "IncendiaryYakChainGun"
+     }
+    ]
+   },
+   "ra1_soviets_su57attackbomber": {
+    "armaments": [
+     {
+      "avg_versus": 0.7353,
+      "damage_total": 40000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 554596.45,
+      "effective_dps": 2967.39,
+      "effective_per_shot": 80119.44,
+      "footprint": 103.4638,
+      "k": 2.003,
+      "reliability": 0.9319,
+      "sigma": 360.4,
+      "slot": "Armament",
+      "weapon": "NuclearMaverick"
+     },
+     {
+      "avg_versus": 0.7418,
+      "damage_total": 42000.0,
+      "eff_reload": 54.0,
+      "effective_damage": 422945.12,
+      "effective_dps": 3096.36,
+      "effective_per_shot": 83601.73,
+      "footprint": 109.8554,
+      "k": 1.9905,
+      "reliability": 0.9155,
+      "sigma": 360.4,
+      "slot": "Armament@HE",
+      "weapon": "ThermobaricNuclearMaverick"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 3543.31,
+      "effective_dps": 149.42,
+      "effective_per_shot": 2260.0,
+      "footprint": 0.3595,
+      "k": 0.565,
+      "reliability": 0.7959,
+      "sigma": 235.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "YakChainGun"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 3543.31,
+      "effective_dps": 149.42,
+      "effective_per_shot": 2260.0,
+      "footprint": 0.3595,
+      "k": 0.565,
+      "reliability": 0.7959,
+      "sigma": 235.0,
+      "slot": "Armament@SECONDARY",
+      "weapon": "YakChainGun"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 8000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 10904.76,
+      "effective_dps": 454.93,
+      "effective_per_shot": 6880.83,
+      "footprint": 3.1175,
+      "k": 0.8601,
+      "reliability": 0.9734,
+      "sigma": 35.0,
+      "slot": "Armament@Upgrade1",
+      "weapon": "IncendiaryYakChainGun"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 8000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 10904.76,
+      "effective_dps": 454.93,
+      "effective_per_shot": 6880.83,
+      "footprint": 3.1175,
+      "k": 0.8601,
+      "reliability": 0.9734,
+      "sigma": 35.0,
+      "slot": "Armament@Upgrade2",
+      "weapon": "IncendiaryYakChainGun"
+     }
+    ]
+   },
+   "ra1_soviets_supersonicnuclearbomber": {
+    "armaments": [
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 400000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 3283505.5,
+      "effective_dps": 16443.91,
+      "effective_per_shot": 822195.27,
+      "footprint": 114.9592,
+      "k": 2.0555,
+      "reliability": 1.0238,
+      "sigma": 5.0,
+      "slot": "Armament@Nuke",
+      "weapon": "ParaBombNuke"
+     }
+    ]
+   },
+   "ra1_soviets_teslayak": {
+    "armaments": [
+     {
+      "avg_versus": 0.7588,
+      "damage_total": 180000.0,
+      "eff_reload": 125.0,
+      "effective_damage": 363522.11,
+      "effective_dps": 2168.96,
+      "effective_per_shot": 271119.42,
+      "footprint": 18.4362,
+      "k": 1.5062,
+      "reliability": 1.0103,
+      "sigma": 8.33,
+      "slot": "Armament@BOMBS",
+      "weapon": "YakTeslaBomb"
+     },
+     {
+      "avg_versus": 0.6679,
+      "damage_total": 20000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 26254.97,
+      "effective_dps": 1009.13,
+      "effective_per_shot": 15263.12,
+      "footprint": 3.3971,
+      "k": 0.7632,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Tesla",
+      "weapon": "YakTeslaGun"
+     },
+     {
+      "avg_versus": 0.6679,
+      "damage_total": 20000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 26254.97,
+      "effective_dps": 1009.13,
+      "effective_per_shot": 15263.12,
+      "footprint": 3.3971,
+      "k": 0.7632,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Arcing",
+      "weapon": "YakTeslaGunArc"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 3543.31,
+      "effective_dps": 149.42,
+      "effective_per_shot": 2260.0,
+      "footprint": 0.3595,
+      "k": 0.565,
+      "reliability": 0.7959,
+      "sigma": 235.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "YakChainGun"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 3543.31,
+      "effective_dps": 149.42,
+      "effective_per_shot": 2260.0,
+      "footprint": 0.3595,
+      "k": 0.565,
+      "reliability": 0.7959,
+      "sigma": 235.0,
+      "slot": "Armament@SECONDARY",
+      "weapon": "YakChainGun"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 8000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 10904.76,
+      "effective_dps": 454.93,
+      "effective_per_shot": 6880.83,
+      "footprint": 3.1175,
+      "k": 0.8601,
+      "reliability": 0.9734,
+      "sigma": 35.0,
+      "slot": "Armament@Upgrade1",
+      "weapon": "IncendiaryYakChainGun"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 8000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 10904.76,
+      "effective_dps": 454.93,
+      "effective_per_shot": 6880.83,
+      "footprint": 3.1175,
+      "k": 0.8601,
+      "reliability": 0.9734,
+      "sigma": 35.0,
+      "slot": "Armament@Upgrade2",
+      "weapon": "IncendiaryYakChainGun"
+     }
+    ]
+   },
+   "ra1_soviets_yakscoutplane": {
+    "armaments": [
+     {
+      "avg_versus": 0.7276,
+      "damage_total": 40000.0,
+      "eff_reload": 119.0,
+      "effective_damage": 87231.66,
+      "effective_dps": 2063.96,
+      "effective_per_shot": 61402.81,
+      "footprint": 18.0858,
+      "k": 1.5351,
+      "reliability": 1.0504,
+      "sigma": 12.27,
+      "slot": "Armament@BOMBS",
+      "weapon": "YakNapalm"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 3543.31,
+      "effective_dps": 149.42,
+      "effective_per_shot": 2260.0,
+      "footprint": 0.3595,
+      "k": 0.565,
+      "reliability": 0.7959,
+      "sigma": 235.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "YakChainGun"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 4000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 3543.31,
+      "effective_dps": 149.42,
+      "effective_per_shot": 2260.0,
+      "footprint": 0.3595,
+      "k": 0.565,
+      "reliability": 0.7959,
+      "sigma": 235.0,
+      "slot": "Armament@SECONDARY",
+      "weapon": "YakChainGun"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 8000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 10904.76,
+      "effective_dps": 454.93,
+      "effective_per_shot": 6880.83,
+      "footprint": 3.1175,
+      "k": 0.8601,
+      "reliability": 0.9734,
+      "sigma": 35.0,
+      "slot": "Armament@Upgrade1",
+      "weapon": "IncendiaryYakChainGun"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 8000.0,
+      "eff_reload": 121.0,
+      "effective_damage": 10904.76,
+      "effective_dps": 454.93,
+      "effective_per_shot": 6880.83,
+      "footprint": 3.1175,
+      "k": 0.8601,
+      "reliability": 0.9734,
+      "sigma": 35.0,
+      "slot": "Armament@Upgrade2",
+      "weapon": "IncendiaryYakChainGun"
+     }
+    ]
+   }
+  },
+  "defenses": {
+   "ra1_soviets_flametower": {
+    "armaments": [
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 18000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 34204.78,
+      "effective_dps": 799.37,
+      "effective_per_shot": 23981.08,
+      "footprint": 4.3503,
+      "k": 1.3323,
+      "reliability": 0.8127,
+      "sigma": 539.36,
+      "slot": "Armament",
+      "weapon": "FireballLauncher"
+     },
+     {
+      "avg_versus": 0.7288,
+      "damage_total": 20000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 35225.95,
+      "effective_dps": 828.14,
+      "effective_per_shot": 24844.34,
+      "footprint": 7.2561,
+      "k": 1.2422,
+      "reliability": 0.8543,
+      "sigma": 539.36,
+      "slot": "Armament@Upgrade",
+      "weapon": "FireballLauncherThermobaric"
+     }
+    ]
+   },
+   "ra1_soviets_samsite": {
+    "armaments": [
+     {
+      "avg_versus": 0.5833,
+      "damage_total": 16000.0,
+      "eff_reload": 27.0,
+      "effective_damage": 5895.86,
+      "effective_dps": 119.09,
+      "effective_per_shot": 3215.4,
+      "footprint": 0.6217,
+      "k": 0.201,
+      "reliability": 0.3296,
+      "sigma": 476.33,
+      "slot": "Armament",
+      "weapon": "Nike"
+     }
+    ]
+   },
+   "ra1_soviets_teslacoil": {
+    "armaments": [
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 48000.0,
+      "eff_reload": 3.0,
+      "effective_damage": 50956.11,
+      "effective_dps": 12900.38,
+      "effective_per_shot": 38701.14,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "TeslaZap"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 48000.0,
+      "eff_reload": 3.0,
+      "effective_damage": 50956.11,
+      "effective_dps": 12900.38,
+      "effective_per_shot": 38701.14,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Upgrade1",
+      "weapon": "TeslaZap_EMP"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 48000.0,
+      "eff_reload": 3.0,
+      "effective_damage": 50956.11,
+      "effective_dps": 12900.38,
+      "effective_per_shot": 38701.14,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Upgrade2",
+      "weapon": "TeslaZapArc_EMP"
+     }
+    ]
+   }
+  },
+  "infantry": {
+   "ra1_soviets_ak47conscript": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 3286.66,
+      "effective_dps": 406.89,
+      "effective_per_shot": 2034.46,
+      "footprint": 0.5193,
+      "k": 0.5086,
+      "reliability": 0.7568,
+      "sigma": 224.11,
+      "slot": "Armament",
+      "weapon": "ra1_soviets_ak47conscript_rifle"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 15.0,
+      "effective_damage": 3286.66,
+      "effective_dps": 406.89,
+      "effective_per_shot": 2034.46,
+      "footprint": 0.5193,
+      "k": 0.5086,
+      "reliability": 0.7568,
+      "sigma": 224.11,
+      "slot": "Armament@GARRISONED",
+      "weapon": "ra1_soviets_ak47conscript_rifle"
+     }
+    ]
+   },
+   "ra1_soviets_attackdog": {
+    "armaments": [
+     {
+      "avg_versus": 1.0,
+      "damage_total": 100000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 100249.67,
+      "effective_dps": 10000.0,
+      "effective_per_shot": 100000.0,
+      "footprint": 0.01,
+      "k": 1.0,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "DogJaw"
+     }
+    ]
+   },
+   "ra1_soviets_commissar": {
+    "armaments": [
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 10000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 10223.12,
+      "effective_dps": 374.12,
+      "effective_per_shot": 7482.42,
+      "footprint": 0.1598,
+      "k": 0.7482,
+      "reliability": 0.9824,
+      "sigma": 13.54,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CommissarPistol"
+     },
+     {
+      "avg_versus": 0.6627,
+      "damage_total": 10000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 10223.12,
+      "effective_dps": 374.12,
+      "effective_per_shot": 7482.42,
+      "footprint": 0.1598,
+      "k": 0.7482,
+      "reliability": 0.9824,
+      "sigma": 13.54,
+      "slot": "Armament@GARRISONED",
+      "weapon": "CommissarPistol"
+     }
+    ]
+   },
+   "ra1_soviets_cyberdog": {
+    "armaments": [
+     {
+      "avg_versus": 1.0,
+      "damage_total": 100000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 100249.67,
+      "effective_dps": 10000.0,
+      "effective_per_shot": 100000.0,
+      "footprint": 0.01,
+      "k": 1.0,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "CyberneticDogJaw"
+     }
+    ]
+   },
+   "ra1_soviets_dragunovantimaterialsniper": {
+    "armaments": [
+     {
+      "avg_versus": 0.6412,
+      "damage_total": 401000.0,
+      "eff_reload": 85.0,
+      "effective_damage": 183946.82,
+      "effective_dps": 1370.53,
+      "effective_per_shot": 116494.63,
+      "footprint": 0.6392,
+      "k": 0.2905,
+      "reliability": 0.4391,
+      "sigma": 261.61,
+      "slot": "Armament",
+      "weapon": "DragunovSniper"
+     },
+     {
+      "avg_versus": 0.6412,
+      "damage_total": 401000.0,
+      "eff_reload": 85.0,
+      "effective_damage": 183946.82,
+      "effective_dps": 1370.53,
+      "effective_per_shot": 116494.63,
+      "footprint": 0.6392,
+      "k": 0.2905,
+      "reliability": 0.4391,
+      "sigma": 261.61,
+      "slot": "Armament@GARRISONED",
+      "weapon": "DragunovSniper"
+     }
+    ]
+   },
+   "ra1_soviets_firerocketsoldier": {
+    "armaments": [
+     {
+      "avg_versus": 0.5774,
+      "damage_total": 32000.0,
+      "eff_reload": 53.0,
+      "effective_damage": 12678.22,
+      "effective_dps": 129.42,
+      "effective_per_shot": 6859.06,
+      "footprint": 0.2622,
+      "k": 0.2143,
+      "reliability": 0.3798,
+      "sigma": 251.2,
+      "slot": "Armament@PRIMARY",
+      "weapon": "FireRockets"
+     },
+     {
+      "avg_versus": 0.5774,
+      "damage_total": 32000.0,
+      "eff_reload": 53.0,
+      "effective_damage": 12678.22,
+      "effective_dps": 129.42,
+      "effective_per_shot": 6859.06,
+      "footprint": 0.2622,
+      "k": 0.2143,
+      "reliability": 0.3798,
+      "sigma": 251.2,
+      "slot": "Armament@GARRISONED",
+      "weapon": "FireRockets"
+     },
+     {
+      "avg_versus": 0.6426,
+      "damage_total": 32000.0,
+      "eff_reload": 58.0,
+      "effective_damage": 33030.54,
+      "effective_dps": 373.69,
+      "effective_per_shot": 21674.23,
+      "footprint": 12.7314,
+      "k": 0.6773,
+      "reliability": 0.6343,
+      "sigma": 273.07,
+      "slot": "Armament@Upgrade",
+      "weapon": "FireRocketsThermobaric"
+     },
+     {
+      "avg_versus": 0.6426,
+      "damage_total": 32000.0,
+      "eff_reload": 58.0,
+      "effective_damage": 33030.54,
+      "effective_dps": 373.69,
+      "effective_per_shot": 21674.23,
+      "footprint": 12.7314,
+      "k": 0.6773,
+      "reliability": 0.6343,
+      "sigma": 273.07,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "FireRocketsThermobaric"
+     }
+    ]
+   },
+   "ra1_soviets_flamethrower": {
+    "armaments": [
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 8000.0,
+      "eff_reload": 24.0,
+      "effective_damage": 15310.17,
+      "effective_dps": 447.61,
+      "effective_per_shot": 10742.56,
+      "footprint": 4.3503,
+      "k": 1.3428,
+      "reliability": 0.8262,
+      "sigma": 500.4,
+      "slot": "Armament",
+      "weapon": "FireballGun"
+     },
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 8000.0,
+      "eff_reload": 24.0,
+      "effective_damage": 15310.17,
+      "effective_dps": 447.61,
+      "effective_per_shot": 10742.56,
+      "footprint": 4.3503,
+      "k": 1.3428,
+      "reliability": 0.8262,
+      "sigma": 500.4,
+      "slot": "Armament@GARRISONED",
+      "weapon": "FireballGun"
+     },
+     {
+      "avg_versus": 0.7288,
+      "damage_total": 8000.0,
+      "eff_reload": 24.0,
+      "effective_damage": 14238.15,
+      "effective_dps": 418.53,
+      "effective_per_shot": 10044.79,
+      "footprint": 7.2561,
+      "k": 1.2556,
+      "reliability": 0.8728,
+      "sigma": 500.4,
+      "slot": "Armament@Upgrade",
+      "weapon": "FireballGunThermobaric"
+     },
+     {
+      "avg_versus": 0.7288,
+      "damage_total": 8000.0,
+      "eff_reload": 24.0,
+      "effective_damage": 14238.15,
+      "effective_dps": 418.53,
+      "effective_per_shot": 10044.79,
+      "footprint": 7.2561,
+      "k": 1.2556,
+      "reliability": 0.8728,
+      "sigma": 500.4,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "FireballGunThermobaric"
+     }
+    ]
+   },
+   "ra1_soviets_grenadier": {
+    "armaments": [
+     {
+      "avg_versus": 0.6203,
+      "damage_total": 16000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 18289.08,
+      "effective_dps": 256.09,
+      "effective_per_shot": 10243.45,
+      "footprint": 5.5159,
+      "k": 0.6402,
+      "reliability": 0.4536,
+      "sigma": 1172.13,
+      "slot": "Armament",
+      "weapon": "GrenadeRA"
+     },
+     {
+      "avg_versus": 0.6203,
+      "damage_total": 16000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 18289.08,
+      "effective_dps": 256.09,
+      "effective_per_shot": 10243.45,
+      "footprint": 5.5159,
+      "k": 0.6402,
+      "reliability": 0.4536,
+      "sigma": 1172.13,
+      "slot": "Armament@GARRISONED",
+      "weapon": "GrenadeRA"
+     },
+     {
+      "avg_versus": 0.6628,
+      "damage_total": 16000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 21683.51,
+      "effective_dps": 332.75,
+      "effective_per_shot": 13310.12,
+      "footprint": 12.9817,
+      "k": 0.8319,
+      "reliability": 0.5439,
+      "sigma": 1172.13,
+      "slot": "Armament@Upgrade",
+      "weapon": "GrenadeThermobaric"
+     },
+     {
+      "avg_versus": 0.6628,
+      "damage_total": 16000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 21683.51,
+      "effective_dps": 332.75,
+      "effective_per_shot": 13310.12,
+      "footprint": 12.9817,
+      "k": 0.8319,
+      "reliability": 0.5439,
+      "sigma": 1172.13,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "GrenadeThermobaric"
+     }
+    ]
+   },
+   "ra1_soviets_mortarsoldier": {
+    "armaments": [
+     {
+      "avg_versus": 0.6716,
+      "damage_total": 32000.0,
+      "eff_reload": 88.0,
+      "effective_damage": 29058.99,
+      "effective_dps": 204.23,
+      "effective_per_shot": 17972.39,
+      "footprint": 9.8083,
+      "k": 0.5616,
+      "reliability": 0.2951,
+      "sigma": 1987.71,
+      "slot": "Armament@PRIMARY",
+      "weapon": "SiegeMortar"
+     },
+     {
+      "avg_versus": 0.6716,
+      "damage_total": 32000.0,
+      "eff_reload": 88.0,
+      "effective_damage": 29058.99,
+      "effective_dps": 204.23,
+      "effective_per_shot": 17972.39,
+      "footprint": 9.8083,
+      "k": 0.5616,
+      "reliability": 0.2951,
+      "sigma": 1987.71,
+      "slot": "Armament@GARRISONED",
+      "weapon": "SiegeMortar"
+     },
+     {
+      "avg_versus": 0.6977,
+      "damage_total": 24000.0,
+      "eff_reload": 88.0,
+      "effective_damage": 29124.7,
+      "effective_dps": 216.95,
+      "effective_per_shot": 19091.22,
+      "footprint": 20.8438,
+      "k": 0.7955,
+      "reliability": 0.345,
+      "sigma": 1987.71,
+      "slot": "Armament@Upgrade",
+      "weapon": "SiegeMortarThermobaric"
+     },
+     {
+      "avg_versus": 0.6977,
+      "damage_total": 24000.0,
+      "eff_reload": 88.0,
+      "effective_damage": 29124.7,
+      "effective_dps": 216.95,
+      "effective_per_shot": 19091.22,
+      "footprint": 20.8438,
+      "k": 0.7955,
+      "reliability": 0.345,
+      "sigma": 1987.71,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "SiegeMortarThermobaric"
+     }
+    ]
+   },
+   "ra1_soviets_rifleinfantry": {
+    "armaments": [
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 1697.8,
+      "effective_dps": 51.3,
+      "effective_per_shot": 1025.94,
+      "footprint": 0.1598,
+      "k": 0.513,
+      "reliability": 0.809,
+      "sigma": 146.68,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ra1_soviets_rifleinfantry_carbine"
+     },
+     {
+      "avg_versus": 0.6074,
+      "damage_total": 2000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 1697.8,
+      "effective_dps": 51.3,
+      "effective_per_shot": 1025.94,
+      "footprint": 0.1598,
+      "k": 0.513,
+      "reliability": 0.809,
+      "sigma": 146.68,
+      "slot": "Armament@GARRISONED",
+      "weapon": "ra1_soviets_rifleinfantry_carbine"
+     },
+     {
+      "avg_versus": 0.6197,
+      "damage_total": 4000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 4976.94,
+      "effective_dps": 151.41,
+      "effective_per_shot": 3028.15,
+      "footprint": 2.9178,
+      "k": 0.757,
+      "reliability": 0.8795,
+      "sigma": 123.34,
+      "slot": "Armament@Upgrade",
+      "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary"
+     },
+     {
+      "avg_versus": 0.6197,
+      "damage_total": 4000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 4976.94,
+      "effective_dps": 151.41,
+      "effective_per_shot": 3028.15,
+      "footprint": 2.9178,
+      "k": 0.757,
+      "reliability": 0.8795,
+      "sigma": 123.34,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary"
+     }
+    ]
+   },
+   "ra1_soviets_rocketsoldier": {
+    "armaments": [
+     {
+      "avg_versus": 0.5891,
+      "damage_total": 20000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 35060.17,
+      "effective_dps": 324.95,
+      "effective_per_shot": 16247.35,
+      "footprint": 7.1082,
+      "k": 0.8124,
+      "reliability": 0.8645,
+      "sigma": 271.43,
+      "slot": "Armament@PRIMARY",
+      "weapon": "RocketsRA"
+     },
+     {
+      "avg_versus": 0.5891,
+      "damage_total": 20000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 35060.17,
+      "effective_dps": 324.95,
+      "effective_per_shot": 16247.35,
+      "footprint": 7.1082,
+      "k": 0.8124,
+      "reliability": 0.8645,
+      "sigma": 271.43,
+      "slot": "Armament@GARRISONED",
+      "weapon": "RocketsRA"
+     }
+    ]
+   },
+   "ra1_soviets_shocktrooper": {
+    "armaments": [
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 30000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 31847.57,
+      "effective_dps": 604.71,
+      "effective_per_shot": 24188.21,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "PortaTesla"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 30000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 31847.57,
+      "effective_dps": 604.71,
+      "effective_per_shot": 24188.21,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Upgrade1",
+      "weapon": "PortaTesla_EMP"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 30000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 31847.57,
+      "effective_dps": 604.71,
+      "effective_per_shot": 24188.21,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Upgrade2",
+      "weapon": "PortaTeslaArc_EMP"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 30000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 31847.57,
+      "effective_dps": 604.71,
+      "effective_per_shot": 24188.21,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "PortaTesla"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 30000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 31847.57,
+      "effective_dps": 604.71,
+      "effective_per_shot": 24188.21,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Upgrade1GARRISONED",
+      "weapon": "PortaTesla_EMP"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 30000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 31847.57,
+      "effective_dps": 604.71,
+      "effective_per_shot": 24188.21,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Upgrade2GARRISONED",
+      "weapon": "PortaTeslaArc_EMP"
+     }
+    ]
+   },
+   "ra1_soviets_volkov": {
+    "armaments": [
+     {
+      "avg_versus": 0.6968,
+      "damage_total": 30000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 53119.26,
+      "effective_dps": 3403.91,
+      "effective_per_shot": 34039.06,
+      "footprint": 11.9639,
+      "k": 1.1346,
+      "reliability": 0.7737,
+      "sigma": 560.0,
+      "slot": "Armament",
+      "weapon": "VolkovMagneticWeapon"
+     },
+     {
+      "avg_versus": 0.7177,
+      "damage_total": 36000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 47323.77,
+      "effective_dps": 1562.22,
+      "effective_per_shot": 30463.34,
+      "footprint": 12.603,
+      "k": 0.8462,
+      "reliability": 0.6294,
+      "sigma": 560.96,
+      "slot": "Armament@Tesla",
+      "weapon": "VolkovMagneticWeaponTesla"
+     },
+     {
+      "avg_versus": 0.7127,
+      "damage_total": 160000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 1245834.2,
+      "effective_dps": 6219.46,
+      "effective_per_shot": 248778.29,
+      "footprint": 111.8324,
+      "k": 1.5549,
+      "reliability": 0.7969,
+      "sigma": 657.32,
+      "slot": "Armament@NuclearShells",
+      "weapon": "VolkovMagneticWeaponNuclearShells"
+     },
+     {
+      "avg_versus": 0.6959,
+      "damage_total": 40000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 71952.81,
+      "effective_dps": 4723.44,
+      "effective_per_shot": 47234.45,
+      "footprint": 16.3141,
+      "k": 1.1809,
+      "reliability": 0.7792,
+      "sigma": 567.0,
+      "slot": "Armament@Incendiary",
+      "weapon": "VolkovMagneticWeaponIncendiary"
+     },
+     {
+      "avg_versus": 0.7153,
+      "damage_total": 44000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 57212.47,
+      "effective_dps": 1878.31,
+      "effective_per_shot": 36627.04,
+      "footprint": 15.1253,
+      "k": 0.8324,
+      "reliability": 0.625,
+      "sigma": 577.73,
+      "slot": "Armament@IncendiaryTesla",
+      "weapon": "VolkovMagneticWeaponIncendiaryTesla"
+     },
+     {
+      "avg_versus": 0.7117,
+      "damage_total": 200000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 1274150.64,
+      "effective_dps": 6756.32,
+      "effective_per_shot": 270252.73,
+      "footprint": 111.6483,
+      "k": 1.3513,
+      "reliability": 0.7883,
+      "sigma": 657.32,
+      "slot": "Armament@IncendiaryNuclearShells",
+      "weapon": "VolkovMagneticWeaponIncendiaryNuclearShells"
+     },
+     {
+      "avg_versus": 0.6968,
+      "damage_total": 30000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 53119.26,
+      "effective_dps": 3403.91,
+      "effective_per_shot": 34039.06,
+      "footprint": 11.9639,
+      "k": 1.1346,
+      "reliability": 0.7737,
+      "sigma": 560.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "VolkovMagneticWeapon"
+     },
+     {
+      "avg_versus": 0.7177,
+      "damage_total": 36000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 47323.77,
+      "effective_dps": 1562.22,
+      "effective_per_shot": 30463.34,
+      "footprint": 12.603,
+      "k": 0.8462,
+      "reliability": 0.6294,
+      "sigma": 560.96,
+      "slot": "Armament@GARRISONEDTesla",
+      "weapon": "VolkovMagneticWeaponTesla"
+     },
+     {
+      "avg_versus": 0.7127,
+      "damage_total": 160000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 1245834.2,
+      "effective_dps": 6219.46,
+      "effective_per_shot": 248778.29,
+      "footprint": 111.8324,
+      "k": 1.5549,
+      "reliability": 0.7969,
+      "sigma": 657.32,
+      "slot": "Armament@GARRISONEDNuclearShells",
+      "weapon": "VolkovMagneticWeaponNuclearShells"
+     },
+     {
+      "avg_versus": 0.6959,
+      "damage_total": 40000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 71952.81,
+      "effective_dps": 4723.44,
+      "effective_per_shot": 47234.45,
+      "footprint": 16.3141,
+      "k": 1.1809,
+      "reliability": 0.7792,
+      "sigma": 567.0,
+      "slot": "Armament@GARRISONEDIncendiary",
+      "weapon": "VolkovMagneticWeaponIncendiary"
+     },
+     {
+      "avg_versus": 0.7153,
+      "damage_total": 44000.0,
+      "eff_reload": 39.0,
+      "effective_damage": 57212.47,
+      "effective_dps": 1878.31,
+      "effective_per_shot": 36627.04,
+      "footprint": 15.1253,
+      "k": 0.8324,
+      "reliability": 0.625,
+      "sigma": 577.73,
+      "slot": "Armament@GARRISONEDIncendiaryTesla",
+      "weapon": "VolkovMagneticWeaponIncendiaryTesla"
+     },
+     {
+      "avg_versus": 0.7117,
+      "damage_total": 200000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 1274150.64,
+      "effective_dps": 6756.32,
+      "effective_per_shot": 270252.73,
+      "footprint": 111.6483,
+      "k": 1.3513,
+      "reliability": 0.7883,
+      "sigma": 657.32,
+      "slot": "Armament@GARRISONEDIncendiaryNuclearShells",
+      "weapon": "VolkovMagneticWeaponIncendiaryNuclearShells"
+     }
+    ]
+   },
+   "ra1_soviets_zapper": {
+    "armaments": [
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 48000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 50956.11,
+      "effective_dps": 1209.41,
+      "effective_per_shot": 38701.14,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ZapperPortaTesla"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 48000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 50956.11,
+      "effective_dps": 1209.41,
+      "effective_per_shot": 38701.14,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Upgrade",
+      "weapon": "ZapperPortaTeslaArc"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 48000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 50956.11,
+      "effective_dps": 1209.41,
+      "effective_per_shot": 38701.14,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "ZapperPortaTesla"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 48000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 50956.11,
+      "effective_dps": 1209.41,
+      "effective_per_shot": 38701.14,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@UpgradeGARRISONED",
+      "weapon": "ZapperPortaTeslaArc"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "ra1_soviets_btr80": {
+    "armaments": [
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 3272.94,
+      "effective_dps": 253.09,
+      "effective_per_shot": 2024.73,
+      "footprint": 0.5193,
+      "k": 0.5062,
+      "reliability": 0.7533,
+      "sigma": 227.27,
+      "slot": "Armament",
+      "weapon": "BTRMachineGun"
+     },
+     {
+      "avg_versus": 0.6401,
+      "damage_total": 4000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 3213.75,
+      "effective_dps": 247.86,
+      "effective_per_shot": 1982.85,
+      "footprint": 0.5193,
+      "k": 0.4957,
+      "reliability": 0.7385,
+      "sigma": 240.91,
+      "slot": "Armament@AA",
+      "weapon": "BTRMachineGun_AA"
+     },
+     {
+      "avg_versus": 0.6679,
+      "damage_total": 5000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 6563.74,
+      "effective_dps": 476.97,
+      "effective_per_shot": 3815.78,
+      "footprint": 3.3971,
+      "k": 0.7632,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@TeslaUpgrade1",
+      "weapon": "BTRTeslaMachineGun"
+     },
+     {
+      "avg_versus": 0.6679,
+      "damage_total": 5000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 6563.74,
+      "effective_dps": 476.97,
+      "effective_per_shot": 3815.78,
+      "footprint": 3.3971,
+      "k": 0.7632,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@TeslaUpgrade2",
+      "weapon": "BTRTeslaMachineGunArc"
+     },
+     {
+      "avg_versus": 0.6679,
+      "damage_total": 5000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 6563.74,
+      "effective_dps": 476.97,
+      "effective_per_shot": 3815.78,
+      "footprint": 3.3971,
+      "k": 0.7632,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@TeslaUpgrade1AA",
+      "weapon": "BTRTeslaMachineGun_AA"
+     },
+     {
+      "avg_versus": 0.6679,
+      "damage_total": 5000.0,
+      "eff_reload": 32.0,
+      "effective_damage": 6563.74,
+      "effective_dps": 476.97,
+      "effective_per_shot": 3815.78,
+      "footprint": 3.3971,
+      "k": 0.7632,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@TeslaUpgrade2AA",
+      "weapon": "BTRTeslaMachineGunArc_AA"
+     }
+    ]
+   },
+   "ra1_soviets_flaktruck": {
+    "armaments": [
+     {
+      "avg_versus": 0.6359,
+      "damage_total": 4000.0,
+      "eff_reload": 5.0,
+      "effective_damage": 5707.6,
+      "effective_dps": 1394.92,
+      "effective_per_shot": 3487.3,
+      "footprint": 4.7098,
+      "k": 0.8718,
+      "reliability": 0.8382,
+      "sigma": 266.24,
+      "slot": "Armament@AA",
+      "weapon": "FLAK-23-AA"
+     },
+     {
+      "avg_versus": 0.6359,
+      "damage_total": 4000.0,
+      "eff_reload": 5.0,
+      "effective_damage": 5720.76,
+      "effective_dps": 1398.85,
+      "effective_per_shot": 3497.13,
+      "footprint": 4.7098,
+      "k": 0.8743,
+      "reliability": 0.8415,
+      "sigma": 260.82,
+      "slot": "Armament@AG",
+      "weapon": "FLAK-23-AG"
+     }
+    ]
+   },
+   "ra1_soviets_gatlingtank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 1789.02,
+      "effective_dps": 114.34,
+      "effective_per_shot": 1143.41,
+      "footprint": 0.3595,
+      "k": 0.5717,
+      "reliability": 0.8046,
+      "sigma": 225.0,
+      "slot": "Armament@AG",
+      "weapon": "RAGatlingTankCannon"
+     },
+     {
+      "avg_versus": 0.6728,
+      "damage_total": 2000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 1767.31,
+      "effective_dps": 112.66,
+      "effective_per_shot": 1126.65,
+      "footprint": 0.3595,
+      "k": 0.5633,
+      "reliability": 0.7938,
+      "sigma": 237.5,
+      "slot": "Armament@AA",
+      "weapon": "RAGatlingTankCannon_AA"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 4000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 5482.77,
+      "effective_dps": 346.3,
+      "effective_per_shot": 3463.01,
+      "footprint": 3.1175,
+      "k": 0.8658,
+      "reliability": 0.981,
+      "sigma": 25.0,
+      "slot": "Armament@UpgradeAG",
+      "weapon": "IncendiaryRAGatlingTankCannon"
+     },
+     {
+      "avg_versus": 0.6524,
+      "damage_total": 4000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 5444.78,
+      "effective_dps": 343.48,
+      "effective_per_shot": 3434.77,
+      "footprint": 3.1175,
+      "k": 0.8587,
+      "reliability": 0.9715,
+      "sigma": 37.5,
+      "slot": "Armament@UpgradeAA",
+      "weapon": "IncendiaryRAGatlingTankCannon_AA"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 3000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 3184.76,
+      "effective_dps": 241.88,
+      "effective_per_shot": 2418.82,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@TeslaUpgrade1",
+      "weapon": "TeslaRAGatlingTankCannon"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 3000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 3184.76,
+      "effective_dps": 241.88,
+      "effective_per_shot": 2418.82,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@TeslaUpgrade2",
+      "weapon": "TeslaRAGatlingTankCannonArc"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 3000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 3184.76,
+      "effective_dps": 241.88,
+      "effective_per_shot": 2418.82,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@TeslaUpgrade1AA",
+      "weapon": "TeslaRAGatlingTankCannon_AA"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 3000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 3184.76,
+      "effective_dps": 241.88,
+      "effective_per_shot": 2418.82,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@TeslaUpgrade2AA",
+      "weapon": "TeslaRAGatlingTankCannonArc_AA"
+     }
+    ]
+   },
+   "ra1_soviets_gorynychtank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6933,
+      "damage_total": 14000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 29148.48,
+      "effective_dps": 688.87,
+      "effective_per_shot": 20666.08,
+      "footprint": 4.3503,
+      "k": 1.4761,
+      "reliability": 0.9945,
+      "sigma": 15.93,
+      "slot": "Armament",
+      "weapon": "BigFlamer"
+     }
+    ]
+   },
+   "ra1_soviets_grad": {
+    "armaments": [
+     {
+      "avg_versus": 0.7033,
+      "damage_total": 16000.0,
+      "eff_reload": 150.0,
+      "effective_damage": 28776.29,
+      "effective_dps": 914.76,
+      "effective_per_shot": 17151.69,
+      "footprint": 10.7419,
+      "k": 1.072,
+      "reliability": 0.4558,
+      "sigma": 1921.33,
+      "slot": "Armament",
+      "weapon": "GradRockets"
+     },
+     {
+      "avg_versus": 0.7148,
+      "damage_total": 16000.0,
+      "eff_reload": 150.0,
+      "effective_damage": 27379.85,
+      "effective_dps": 932.21,
+      "effective_per_shot": 17478.99,
+      "footprint": 19.9477,
+      "k": 1.0924,
+      "reliability": 0.4645,
+      "sigma": 1921.33,
+      "slot": "Armament@Upgrade",
+      "weapon": "GradHeavyRockets"
+     }
+    ]
+   },
+   "ra1_soviets_hammertank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7088,
+      "damage_total": 12000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 25490.95,
+      "effective_dps": 358.02,
+      "effective_per_shot": 16110.8,
+      "footprint": 10.7419,
+      "k": 1.3426,
+      "reliability": 0.7815,
+      "sigma": 650.15,
+      "slot": "Armament",
+      "weapon": "HammerTankCannon"
+     },
+     {
+      "avg_versus": 0.7125,
+      "damage_total": 16000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 33987.93,
+      "effective_dps": 513.58,
+      "effective_per_shot": 23111.08,
+      "footprint": 21.4837,
+      "k": 1.4444,
+      "reliability": 0.7815,
+      "sigma": 650.15,
+      "slot": "Armament@Upgrade",
+      "weapon": "HammerTankCannonThermobaric"
+     },
+     {
+      "avg_versus": 0.6839,
+      "damage_total": 7600.0,
+      "eff_reload": 100.0,
+      "effective_damage": 5645.32,
+      "effective_dps": 39.21,
+      "effective_per_shot": 3920.8,
+      "footprint": 0.1848,
+      "k": 0.5159,
+      "reliability": 0.7368,
+      "sigma": 0.0,
+      "slot": "Armament@shtora",
+      "weapon": "ShtoraLaser"
+     }
+    ]
+   },
+   "ra1_soviets_heatraytank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6091,
+      "damage_total": 6600.0,
+      "eff_reload": 8.0,
+      "effective_damage": 5755.35,
+      "effective_dps": 425.54,
+      "effective_per_shot": 3404.35,
+      "footprint": 3.3421,
+      "k": 0.5158,
+      "reliability": 0.6236,
+      "sigma": 54.75,
+      "slot": "Armament@1",
+      "weapon": "HeatRayBeam1"
+     },
+     {
+      "avg_versus": 0.6091,
+      "damage_total": 6600.0,
+      "eff_reload": 8.0,
+      "effective_damage": 5755.35,
+      "effective_dps": 425.54,
+      "effective_per_shot": 3404.35,
+      "footprint": 3.3421,
+      "k": 0.5158,
+      "reliability": 0.6236,
+      "sigma": 54.75,
+      "slot": "Armament@2",
+      "weapon": "HeatRayBeam2"
+     },
+     {
+      "avg_versus": 0.6091,
+      "damage_total": 6600.0,
+      "eff_reload": 8.0,
+      "effective_damage": 5755.35,
+      "effective_dps": 425.54,
+      "effective_per_shot": 3404.35,
+      "footprint": 3.3421,
+      "k": 0.5158,
+      "reliability": 0.6236,
+      "sigma": 54.75,
+      "slot": "Armament@3",
+      "weapon": "HeatRayBeam3"
+     },
+     {
+      "avg_versus": 0.6091,
+      "damage_total": 6600.0,
+      "eff_reload": 8.0,
+      "effective_damage": 5755.35,
+      "effective_dps": 425.54,
+      "effective_per_shot": 3404.35,
+      "footprint": 3.3421,
+      "k": 0.5158,
+      "reliability": 0.6236,
+      "sigma": 54.75,
+      "slot": "Armament@4",
+      "weapon": "HeatRayBeam4"
+     }
+    ]
+   },
+   "ra1_soviets_heavytank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6765,
+      "damage_total": 10000.0,
+      "eff_reload": 81.0,
+      "effective_damage": 19137.95,
+      "effective_dps": 276.84,
+      "effective_per_shot": 11211.95,
+      "footprint": 4.3503,
+      "k": 1.1212,
+      "reliability": 0.8262,
+      "sigma": 500.33,
+      "slot": "Armament",
+      "weapon": "105mm"
+     },
+     {
+      "avg_versus": 0.6849,
+      "damage_total": 12000.0,
+      "eff_reload": 81.0,
+      "effective_damage": 22965.54,
+      "effective_dps": 365.04,
+      "effective_per_shot": 14784.21,
+      "footprint": 8.7005,
+      "k": 1.232,
+      "reliability": 0.8262,
+      "sigma": 500.33,
+      "slot": "Armament@Upgrade",
+      "weapon": "105mmThermobaric"
+     }
+    ]
+   },
+   "ra1_soviets_heavyteslatank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 15000.0,
+      "eff_reload": 10.0,
+      "effective_damage": 15923.78,
+      "effective_dps": 1209.41,
+      "effective_per_shot": 12094.11,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@pointdefense",
+      "weapon": "PointDefenseTesla"
+     },
+     {
+      "avg_versus": 1.0619,
+      "damage_total": 60000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 74301.18,
+      "effective_dps": 1013.41,
+      "effective_per_shot": 81072.43,
+      "footprint": 2.5087,
+      "k": 1.3512,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "TTankZap2_EMP"
+     },
+     {
+      "avg_versus": 1.0619,
+      "damage_total": 60000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 74301.18,
+      "effective_dps": 1013.41,
+      "effective_per_shot": 81072.43,
+      "footprint": 2.5087,
+      "k": 1.3512,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Arcing",
+      "weapon": "TTankZap2Arc_EMP"
+     }
+    ]
+   },
+   "ra1_soviets_kotinnucleartank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7088,
+      "damage_total": 12000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 25490.66,
+      "effective_dps": 322.21,
+      "effective_per_shot": 16110.57,
+      "footprint": 10.7419,
+      "k": 1.3425,
+      "reliability": 0.7815,
+      "sigma": 650.22,
+      "slot": "Armament",
+      "weapon": "KotinCannon"
+     },
+     {
+      "avg_versus": 0.7125,
+      "damage_total": 16000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 33987.55,
+      "effective_dps": 462.22,
+      "effective_per_shot": 23110.77,
+      "footprint": 21.4837,
+      "k": 1.4444,
+      "reliability": 0.7815,
+      "sigma": 650.22,
+      "slot": "Armament@Upgrade",
+      "weapon": "KotinCannonThermobaric"
+     }
+    ]
+   },
+   "ra1_soviets_mammothtank": {
+    "armaments": [
+     {
+      "avg_versus": 0.6902,
+      "damage_total": 24000.0,
+      "eff_reload": 103.0,
+      "effective_damage": 20147.3,
+      "effective_dps": 261.75,
+      "effective_per_shot": 13480.2,
+      "footprint": 5.1682,
+      "k": 0.5617,
+      "reliability": 0.5165,
+      "sigma": 350.06,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ra120mm"
+     },
+     {
+      "avg_versus": 0.6902,
+      "damage_total": 24000.0,
+      "eff_reload": 103.0,
+      "effective_damage": 20147.3,
+      "effective_dps": 261.75,
+      "effective_per_shot": 13480.2,
+      "footprint": 5.1682,
+      "k": 0.5617,
+      "reliability": 0.5165,
+      "sigma": 350.06,
+      "slot": "Armament@PRIMARYTargetingComputer",
+      "weapon": "ra120mmTargetingComputer"
+     },
+     {
+      "avg_versus": 0.745,
+      "damage_total": 24000.0,
+      "eff_reload": 103.0,
+      "effective_damage": 57269.5,
+      "effective_dps": 819.57,
+      "effective_per_shot": 42207.65,
+      "footprint": 19.1748,
+      "k": 1.7587,
+      "reliability": 0.7883,
+      "sigma": 650.06,
+      "slot": "Armament@Upgrade",
+      "weapon": "ra120mmThermobaric"
+     },
+     {
+      "avg_versus": 0.745,
+      "damage_total": 24000.0,
+      "eff_reload": 103.0,
+      "effective_damage": 57269.5,
+      "effective_dps": 819.57,
+      "effective_per_shot": 42207.65,
+      "footprint": 19.1748,
+      "k": 1.7587,
+      "reliability": 0.7883,
+      "sigma": 650.06,
+      "slot": "Armament@UpgradeTargetingComputer",
+      "weapon": "ra120mmThermobaricTargetingComputer"
+     },
+     {
+      "avg_versus": 0.6194,
+      "damage_total": 24000.0,
+      "eff_reload": 103.0,
+      "effective_damage": 18366.31,
+      "effective_dps": 202.71,
+      "effective_per_shot": 10439.69,
+      "footprint": 2.9243,
+      "k": 0.435,
+      "reliability": 0.5825,
+      "sigma": 350.06,
+      "slot": "Armament@SECONDARY",
+      "weapon": "MammothTusk"
+     },
+     {
+      "avg_versus": 0.6194,
+      "damage_total": 24000.0,
+      "eff_reload": 103.0,
+      "effective_damage": 18366.31,
+      "effective_dps": 202.71,
+      "effective_per_shot": 10439.69,
+      "footprint": 2.9243,
+      "k": 0.435,
+      "reliability": 0.5825,
+      "sigma": 350.06,
+      "slot": "Armament@SECONDARYTargetingComputer",
+      "weapon": "MammothTuskTargetingComputer"
+     },
+     {
+      "avg_versus": 0.6851,
+      "damage_total": 36000.0,
+      "eff_reload": 103.0,
+      "effective_damage": 21361.18,
+      "effective_dps": 246.25,
+      "effective_per_shot": 12681.97,
+      "footprint": 3.2513,
+      "k": 0.3523,
+      "reliability": 0.4277,
+      "sigma": 350.06,
+      "slot": "Armament@TeslaSECONDARY",
+      "weapon": "MammothTuskTesla"
+     },
+     {
+      "avg_versus": 0.6851,
+      "damage_total": 36000.0,
+      "eff_reload": 103.0,
+      "effective_damage": 21361.18,
+      "effective_dps": 246.25,
+      "effective_per_shot": 12681.97,
+      "footprint": 3.2513,
+      "k": 0.3523,
+      "reliability": 0.4277,
+      "sigma": 350.06,
+      "slot": "Armament@TeslaSECONDARYTargetingComputer",
+      "weapon": "MammothTuskTeslaTargetingComputer"
+     },
+     {
+      "avg_versus": 0.6607,
+      "damage_total": 32000.0,
+      "eff_reload": 103.0,
+      "effective_damage": 35602.21,
+      "effective_dps": 449.87,
+      "effective_per_shot": 23168.45,
+      "footprint": 15.0339,
+      "k": 0.724,
+      "reliability": 0.6428,
+      "sigma": 350.06,
+      "slot": "Armament@NukeSECONDARY",
+      "weapon": "MammothTuskThermobaric"
+     },
+     {
+      "avg_versus": 0.6607,
+      "damage_total": 32000.0,
+      "eff_reload": 103.0,
+      "effective_damage": 35602.21,
+      "effective_dps": 449.87,
+      "effective_per_shot": 23168.45,
+      "footprint": 15.0339,
+      "k": 0.724,
+      "reliability": 0.6428,
+      "sigma": 350.06,
+      "slot": "Armament@NukeSECONDARYTargetingComputer",
+      "weapon": "MammothTuskThermobaricTargetingComputer"
+     }
+    ]
+   },
+   "ra1_soviets_monstertank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7553,
+      "damage_total": 80000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 1099447.99,
+      "effective_dps": 2381.59,
+      "effective_per_shot": 160757.36,
+      "footprint": 103.4638,
+      "k": 2.0095,
+      "reliability": 0.8101,
+      "sigma": 1022.2,
+      "slot": "Armament@PRIMARY",
+      "weapon": "MonsterTank120mm"
+     },
+     {
+      "avg_versus": 0.7551,
+      "damage_total": 120000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 1190303.98,
+      "effective_dps": 3439.93,
+      "effective_per_shot": 232195.28,
+      "footprint": 109.8554,
+      "k": 1.935,
+      "reliability": 0.7646,
+      "sigma": 1022.2,
+      "slot": "Armament@Upgrade",
+      "weapon": "MonsterTank120mmThermobaric"
+     },
+     {
+      "avg_versus": 0.7201,
+      "damage_total": 40000.0,
+      "eff_reload": 134.0,
+      "effective_damage": 96860.99,
+      "effective_dps": 1934.02,
+      "effective_per_shot": 64789.67,
+      "footprint": 12.7832,
+      "k": 1.6197,
+      "reliability": 0.8236,
+      "sigma": 541.65,
+      "slot": "Armament@SECONDARY",
+      "weapon": "MonsterTankTusk"
+     },
+     {
+      "avg_versus": 0.685,
+      "damage_total": 120250.0,
+      "eff_reload": 134.0,
+      "effective_damage": 68772.33,
+      "effective_dps": 1211.67,
+      "effective_per_shot": 40590.85,
+      "footprint": 3.2513,
+      "k": 0.3376,
+      "reliability": 0.4062,
+      "sigma": 394.4,
+      "slot": "Armament@TeslaSECONDARY",
+      "weapon": "MonsterTankTuskTesla"
+     },
+     {
+      "avg_versus": 0.6607,
+      "damage_total": 106000.0,
+      "eff_reload": 134.0,
+      "effective_damage": 114948.81,
+      "effective_dps": 2234.1,
+      "effective_per_shot": 74842.37,
+      "footprint": 15.0339,
+      "k": 0.7061,
+      "reliability": 0.6146,
+      "sigma": 394.4,
+      "slot": "Armament@NukeSECONDARY",
+      "weapon": "MonsterTankTuskThermobaric"
+     }
+    ]
+   },
+   "ra1_soviets_nuclearv2launcher": {
+    "armaments": [
+     {
+      "avg_versus": 0.6695,
+      "damage_total": 300000.0,
+      "eff_reload": 158.0,
+      "effective_damage": 764586.66,
+      "effective_dps": 1424.23,
+      "effective_per_shot": 225027.85,
+      "footprint": 129.4488,
+      "k": 0.7501,
+      "reliability": 0.3911,
+      "sigma": 1285.83,
+      "slot": "Armament@PRIMARY",
+      "weapon": "SCUDNUKE"
+     },
+     {
+      "avg_versus": 0.6695,
+      "damage_total": 300000.0,
+      "eff_reload": 158.0,
+      "effective_damage": 764586.66,
+      "effective_dps": 1424.23,
+      "effective_per_shot": 225027.85,
+      "footprint": 129.4488,
+      "k": 0.7501,
+      "reliability": 0.3911,
+      "sigma": 1285.83,
+      "slot": "Armament@Upgrade",
+      "weapon": "SCUDNUKEThermobaric"
+     }
+    ]
+   },
+   "ra1_soviets_siegemammothtank": {
+    "armaments": [
+     {
+      "avg_versus": 0.698,
+      "damage_total": 48000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 74667.04,
+      "effective_dps": 697.03,
+      "effective_per_shot": 47049.74,
+      "footprint": 9.8112,
+      "k": 0.9802,
+      "reliability": 0.738,
+      "sigma": 650.18,
+      "slot": "Armament@PRIMARY",
+      "weapon": "ra120mm2"
+     },
+     {
+      "avg_versus": 0.698,
+      "damage_total": 48000.0,
+      "eff_reload": 115.0,
+      "effective_damage": 74667.04,
+      "effective_dps": 818.26,
+      "effective_per_shot": 47049.74,
+      "footprint": 9.8112,
+      "k": 0.9802,
+      "reliability": 0.738,
+      "sigma": 650.18,
+      "slot": "Armament@PRIMARYTargetingComputer",
+      "weapon": "ra120mm2TargetingComputer"
+     },
+     {
+      "avg_versus": 0.745,
+      "damage_total": 48000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 114537.16,
+      "effective_dps": 1250.57,
+      "effective_per_shot": 84413.74,
+      "footprint": 19.1748,
+      "k": 1.7586,
+      "reliability": 0.7883,
+      "sigma": 650.18,
+      "slot": "Armament@Upgrade",
+      "weapon": "ra120mm2Thermobaric"
+     },
+     {
+      "avg_versus": 0.745,
+      "damage_total": 48000.0,
+      "eff_reload": 115.0,
+      "effective_damage": 114537.16,
+      "effective_dps": 1468.07,
+      "effective_per_shot": 84413.74,
+      "footprint": 19.1748,
+      "k": 1.7586,
+      "reliability": 0.7883,
+      "sigma": 650.18,
+      "slot": "Armament@UpgradeTargetingComputer",
+      "weapon": "ra120mm2ThermobaricTargetingComputer"
+     },
+     {
+      "avg_versus": 0.6707,
+      "damage_total": 48000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 39955.89,
+      "effective_dps": 373.68,
+      "effective_per_shot": 25223.57,
+      "footprint": 3.5893,
+      "k": 0.5255,
+      "reliability": 0.5333,
+      "sigma": 350.18,
+      "slot": "Armament@SECONDARY",
+      "weapon": "MammothTusk2"
+     },
+     {
+      "avg_versus": 0.6707,
+      "damage_total": 48000.0,
+      "eff_reload": 115.0,
+      "effective_damage": 39955.89,
+      "effective_dps": 438.67,
+      "effective_per_shot": 25223.57,
+      "footprint": 3.5893,
+      "k": 0.5255,
+      "reliability": 0.5333,
+      "sigma": 350.18,
+      "slot": "Armament@SECONDARYTargetingComputer",
+      "weapon": "MammothTusk2TargetingComputer"
+     },
+     {
+      "avg_versus": 0.7206,
+      "damage_total": 48000.0,
+      "eff_reload": 135.0,
+      "effective_damage": 84711.83,
+      "effective_dps": 896.74,
+      "effective_per_shot": 60530.22,
+      "footprint": 10.9795,
+      "k": 1.261,
+      "reliability": 0.8499,
+      "sigma": 350.18,
+      "slot": "Armament@UpgradeSECONDARY",
+      "weapon": "MammothTusk2Thermobaric"
+     },
+     {
+      "avg_versus": 0.7206,
+      "damage_total": 48000.0,
+      "eff_reload": 115.0,
+      "effective_damage": 84711.83,
+      "effective_dps": 1052.7,
+      "effective_per_shot": 60530.22,
+      "footprint": 10.9795,
+      "k": 1.261,
+      "reliability": 0.8499,
+      "sigma": 350.18,
+      "slot": "Armament@UpgradeSECONDARYTargetingComputer",
+      "weapon": "MammothTusk2ThermobaricTargetingComputer"
+     }
+    ]
+   },
+   "ra1_soviets_teslatank": {
+    "armaments": [
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 60000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 63695.14,
+      "effective_dps": 604.71,
+      "effective_per_shot": 48376.42,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "TTankZap"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 60000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 63695.14,
+      "effective_dps": 604.71,
+      "effective_per_shot": 48376.42,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Upgrade1",
+      "weapon": "TTankZap_EMP"
+     },
+     {
+      "avg_versus": 0.7597,
+      "damage_total": 60000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 63695.14,
+      "effective_dps": 604.71,
+      "effective_per_shot": 48376.42,
+      "footprint": 0.6392,
+      "k": 0.8063,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Upgrade2",
+      "weapon": "TTankZapArc_EMP"
+     }
+    ]
+   },
+   "ra1_soviets_v1rockettruck": {
+    "armaments": [
+     {
+      "avg_versus": 0.6176,
+      "damage_total": 24000.0,
+      "eff_reload": 130.0,
+      "effective_damage": 31725.38,
+      "effective_dps": 471.0,
+      "effective_per_shot": 15307.55,
+      "footprint": 7.1082,
+      "k": 0.6378,
+      "reliability": 0.4334,
+      "sigma": 1639.67,
+      "slot": "Armament",
+      "weapon": "v1rockets"
+     },
+     {
+      "avg_versus": 0.6578,
+      "damage_total": 24000.0,
+      "eff_reload": 130.0,
+      "effective_damage": 21673.05,
+      "effective_dps": 441.58,
+      "effective_per_shot": 14351.24,
+      "footprint": 7.1462,
+      "k": 0.598,
+      "reliability": 0.3075,
+      "sigma": 1639.67,
+      "slot": "Armament@Upgrade",
+      "weapon": "v1rocketsThermobaric"
+     }
+    ]
+   },
+   "ra1_soviets_v2rocketlauncher": {
+    "armaments": [
+     {
+      "avg_versus": 0.7279,
+      "damage_total": 120000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 265737.46,
+      "effective_dps": 1497.63,
+      "effective_per_shot": 179716.09,
+      "footprint": 12.7832,
+      "k": 1.4976,
+      "reliability": 0.6166,
+      "sigma": 1240.67,
+      "slot": "Armament@PRIMARY",
+      "weapon": "SCUD"
+     },
+     {
+      "avg_versus": 0.8205,
+      "damage_total": 240000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 355036.35,
+      "effective_dps": 2051.33,
+      "effective_per_shot": 246160.11,
+      "footprint": 19.1947,
+      "k": 1.0257,
+      "reliability": 0.4132,
+      "sigma": 1240.67,
+      "slot": "Armament@HE",
+      "weapon": "SCUDThermobaric"
+     },
+     {
+      "avg_versus": 0.8068,
+      "damage_total": 225000.0,
+      "eff_reload": 120.0,
+      "effective_damage": 274387.09,
+      "effective_dps": 1535.85,
+      "effective_per_shot": 184301.65,
+      "footprint": 13.4423,
+      "k": 0.8191,
+      "reliability": 0.3543,
+      "sigma": 1240.67,
+      "slot": "Armament@Tesla",
+      "weapon": "SCUDTesla"
+     }
+    ]
+   }
+  }
+ }
+}
