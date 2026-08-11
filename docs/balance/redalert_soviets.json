@@ -4627,62 +4627,37 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
+        "damage": "20000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flame_Medium",
+        "type": "AreaDamage"
        },
        {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "10",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Flame_Medium_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6742",
       "reloaddelay": "30",
       "requires": "ra1_soviets_doctrine_inferno",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^HeavyFlameWeapon",
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Medium"
+      ],
       "weapon": "FireballLauncherThermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5984,123 +5959,73 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flame_Medium",
+        "type": "AreaDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Flame_Medium_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5004",
       "reloaddelay": "24",
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^HeavyFlameWeapon",
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Medium"
+      ],
       "weapon": "FireballGunThermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flame_Medium",
+        "type": "AreaDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Flame_Medium_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5004",
       "reloaddelay": "24",
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^HeavyFlameWeapon",
-       "^MediumFlameWeapon"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Medium"
+      ],
       "weapon": "FireballGunThermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

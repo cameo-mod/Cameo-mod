@@ -43,6 +43,9 @@ status rather than keeping its own copy.
 | **W12** | Superweapon balancing as a SEPARATE track (not unit-priced) | ⬜ READY | maintainer-led | — |
 | **W13** | Warhead system rebuild from the 2494-profile reference corpus | ⬜ READY | Claude | W1, W5 |
 | **W14** | ~~Renormalise `avg_versus`~~ — ✖ DROPPED, the multi-role premium is intended; folded into W13 rule 8b | ✖ DROPPED | — | — |
+| **W15** | `%`-twin fix + `reference_hp` → 200 000 — **PREREQUISITE for W17** | ⬜ READY | Claude | — |
+| **W16** | Charge-up discount PROPORTIONAL to real charge share (supersedes W4's flat 0.75×) | ⬜ READY | Claude | W4 |
+| **W17** | Remove the 2000-damage grid; retire FirepowerMultiplier as a fine-tuning knob | ⛔ BLOCKED | Claude | W15 |
 
 **Recommended order:** W2 ∥ W3 → W4 → W5 → W6 → (W7, W9) → W8 → W10 → W11 → W12.
 `∥` = safe to run in parallel (disjoint file sets).
@@ -503,6 +506,79 @@ archetype — last in the order, genuinely low, never zero. Re-check the interac
 
 (Note also that K is dominated by splash footprint, not Versus: the ground-only
 population scores HIGHER K than the AA-capable one because it is full of artillery.)
+
+---
+
+### W15 — `%`-twin fix + `reference_hp` 200 000 ⬜ READY · **blocks W17**
+
+Two maintainer rulings, both about how percentage damage is valued.
+
+**1. The `%`-twin cannot survive an off-grid Damage value.**
+`formula.distribute_damage` computes it as `per // DAMAGE_STEP` — integer division:
+
+| Damage | twin | effect |
+|---|---|---|
+| 2000 | 1 | fine |
+| 1999 | **0** | the %-warhead silently does NOTHING — hard immunity by rounding |
+| 3500 | 1 | same as 2000 — the twin stops tracking damage |
+
+So freeing the grid (W17) before fixing this silently zeroes every percentage warhead
+under 2000 damage. Fix the derivation first (float, or a scale that is continuous in
+Damage), then remove the grid.
+
+**2. `reference_hp` is a DESIGN constant of 200 000, not a measured median.**
+Maintainer 2026-08-11: percentage damage must be priced as if fired at an average
+BASELINE actor, and 200 000 HP is the right middle — high-tech tanks, dreadnoughts and
+epics all sit well above it, everything else below.
+
+`target_model.reference_hp()` currently MEASURES 74 000 (engagement-weighted median of
+the live roster). Overriding it to 200 000 makes every %-twin worth ~2.7x more in K, so
+this is a real model change: expect the family table to move and say so in the commit.
+Keep the measured value available as a diagnostic — the gap between "what the roster
+actually is" (74 000) and "what we price against" (200 000) is itself information.
+
+**DONE WHEN** the twin is continuous in Damage; `reference_hp` is the design constant
+with the measured one still reportable; the family-table shift is recorded in §5.
+
+---
+
+### W16 — Charge-up proportional to real charge share ⬜ READY · supersedes W4's flat rate
+
+W4 applied a flat **0.75x** to every charging actor. Measured, that is too blunt:
+
+| actor | trait | charge | reload | share of cycle |
+|---|---|---|---|---|
+| Obelisk of Light (TD/TS) | `AttackCharges` | ChargeLevel **50** | — | the heavy case the ruling was written for |
+| RA1 Tesla Coil | `AttackTesla` | InitialChargeDelay **25** | 100 | **20%** |
+| AsianAlliance railtower | `AttackTesla` | **12** | 120 | **9%** |
+| **RA2 Tesla Coil** | `AttackTesla` | **none** | 75 | **0%** |
+
+Maintainer ruling 2026-08-11: *"AttackTesla doesn't have the long charge time of the
+Obelisk … it's very fast, so this needs to be taken into account."* A flat 0.75x would
+hand the RA2 Tesla Coil a 25% discount for a weakness it does not have.
+
+**Model:** `charge_share = charge / (charge + reload)`, discount scaled so the Obelisk
+anchors the documented 0.75x and a zero-charge actor gets exactly 1.0, clamped to
+[0.75, 1.0]. This also RESOLVES the open Tesla question: `AttackTesla` can now join
+`CHARGE_UP_TRAITS` safely, because the model gives each actor the discount its real
+charge burden earns instead of a binary in/out. Retire `CHARGE_UP_EXCLUDED_TRAITS`.
+
+**VERIFY:** RA2 Tesla Coil multiplier == 1.0; Obelisk == 0.75; railtower between.
+
+---
+
+### W17 — Remove the 2000-damage grid ⛔ BLOCKED on W15
+
+Free-valued Damage means the pipeline solves exactly:
+`Damage = target_dps × eff_reload / (burst × K)` — no remainder, so
+**FirepowerMultiplier is no longer needed as a fine-tuning knob.**
+
+⚠ My earlier objection — "keep FP because one weapon serves many actors" — is **VOID**.
+Maintainer 2026-08-11: **no weapon is shared; every vehicle has its own unique weapon
+defined.** So FP has no remaining pricing role at all.
+
+Versus values keep integer steps of 1 and the ordering law, but the floor may sit
+anywhere without tier restriction (W13 rule 5).
 
 ---
 

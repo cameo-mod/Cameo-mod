@@ -230,8 +230,9 @@ FireballLauncher:
 		GlowFadeInFrames: 12
 
 FireballLauncherThermobaric:
-	Inherits: ^HeavyFlameWeapon
-	Inherits@2: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	ReloadDelay: 30
 	Range: 6742
 	Report: firebl3.aud
@@ -241,31 +242,10 @@ FireballLauncherThermobaric:
 		Image: FB1
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@HeavyFlameWeapon: SpreadDamage
-		Damage: 10000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 5
-	Warhead@MediumFlameWeapon: SpreadDamage
-		Damage: 10000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 5
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 10000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 5000
-	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
-		Amount: 10000
-	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 5000
-	Warhead@Effect: CreateEffect
-		Explosions: med_napalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
+	Warhead@Flame_Medium:
+		Damage: 20000
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
+		Damage: 10
 
 FireballGun:
 	Inherits@wh: ^Warhead_Flame_Medium
@@ -297,8 +277,9 @@ FireballGunExplode:
 	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 FireballGunThermobaric:
-	Inherits: ^HeavyFlameWeapon
-	Inherits@2: ^MediumFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
 	ReloadDelay: 24
 	Range: 5004
 	Report: flamer2.aud
@@ -308,54 +289,17 @@ FireballGunThermobaric:
 		Image: FB1
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@HeavyFlameWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@MediumFlameWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 4000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 2000
-	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
-		Amount: 4000
-	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 2000
-	Warhead@Effect: CreateEffect
-		Explosions: med_napalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
+	Warhead@Flame_Medium:
+		Damage: 8000
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
+		Damage: 4
 
 FireballGunThermobaricExplode:
 	Inherits: FireballGunThermobaric
-	Warhead@HeavyFlameWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@MediumFlameWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 2000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 1000
-	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
-		Amount: 2000
-	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 1000
+	Warhead@Flame_Medium:
+		Damage: 4000
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
+		Damage: 2
 
 SiegeMortar:
 	Inherits: ^Warhead_Thermobaric_Medium
