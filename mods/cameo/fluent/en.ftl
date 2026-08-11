@@ -11,6 +11,10 @@ dropdown_weather =
    .choice-none = None
    .choice-weather = Enabled
 
+checkbox_crates =
+   .label = Crates
+   .description = Collect crates with units to receive random bonuses.
+
 button_tab_container_asengine = Attacque Supérior
 
 ## ingame_observer.yaml

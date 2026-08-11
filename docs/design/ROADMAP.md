@@ -236,6 +236,22 @@ AA-gating, rock-paper-scissors) are captured in `BALANCE_SYNTHESIS.md` + `ORIGIN
 - [x] **Documentation architecture quick wins** — owner: Cascade. Added `docs/README.md`; reduced `PROJECT_CONTEXT.md` to orientation and canonical links; kept the complete startup, evidence, incident, and commit-gate protocol in `AGENT_WORKSPACE.md`. Validation: checked links in the entry documents and ran `git diff --check`.
 - [x] **Documentation architecture continuation** — owner: Cascade. De-mixed `MEGAPLAN.md` into a short rebalance index and moved the Dynamic Campaign vision into non-binding `VISION.md`; Formula V2, balance-pipeline, and ARMOR_SYSTEM remain canonical linked sources. Excludes the ROADMAP history split and Formula V2 roster-log migration. Validation: internal-link check and `git diff --check`.
 
+## Code health program
+
+Five recurring tracks run with a 7-day grace period; `run_all.sh` blocks when
+any track is overdue. Registry and procedures: [`docs/audit/PERIODIC.md`](../audit/PERIODIC.md)
+and [`docs/audit/periodic.json`](../audit/periodic.json).
+
+- **Code duplication** — `python tools/audit/audit_code_duplication.py`; every 30 days; baseline C1/C2/C3: **10/14/10**.
+- **Test coverage** — `python tools/audit/audit_test_coverage.py`; every 30 days; baseline T1/T2/T3: **24/54/221**.
+- **Recent-changes review** — `python tools/audit/audit_recent_changes.py --days 30`; every 14 days; baseline R1/R2/R3/R4: **145/2/502/15**.
+- **Error handling** — `python tools/audit/audit_error_handling.py`; every 30 days; baseline E1/E2/E3/E4: **2/30/90/9**.
+- **Security scan** — `python tools/audit/audit_security.py`; every 14 days; baseline S1–S6: **0/0/0/0/0/0**.
+
+Follow-up: establish measured ratchet baselines for `audit_armament_naming` and
+`audit_burst_delays`, then wire them into `run_all.sh`; they are currently
+exempt from the R2 check.
+
 ## Balance — universal class-formula program (2026-07-22, ACTIVE)
 
 **Goal:** ONE balance formula for every class; a class is re-weighted only

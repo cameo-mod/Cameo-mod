@@ -7,7 +7,7 @@ Coverage-tagged upgrades checked: **23** — uncovered unit slots: **21**
 
 | upgrade | faction | declared coverage | covered | uncovered actors |
 |---|---|---|---|---|
-| cabal_upgrade_darkarmament | cabal | infantry | 10/16 | cabal_beholder, cabal_cyborg_assassin, cabal_dissolver, cabal_engineer, cabal_hackercyborg, cabal_orb_drone |
+| cabal_upgrade_darkarmament | cabal | infantry | 10/16 | cabal_beholder, cabal_cyborgassassin, cabal_dissolver, cabal_engineer, cabal_hackercyborg, cabal_orbdrone |
 | cabal_upgrade_firewallprotocol | cabal | roster_wide | 33/38 | cabal_constructionyard, cabal_dissolver, cabal_mobileconstructionvehicle, cabal_tiberiumharvester, tsprobe |
 | cabal_upgrade_fullassimilation | cabal | roster_wide | 33/38 | cabal_constructionyard, cabal_dissolver, cabal_mobileconstructionvehicle, cabal_tiberiumharvester, tsprobe |
 | cabal_upgrade_networkedcombatprotocols | cabal | roster_wide | 33/38 | cabal_constructionyard, cabal_dissolver, cabal_mobileconstructionvehicle, cabal_tiberiumharvester, tsprobe |

@@ -1,0 +1,95 @@
+# Mandatory recurring audits
+
+Five code-health checks are mandatory on a cadence. The registry is
+`docs/audit/periodic.json`; `tools/audit/audit_periodic_freshness.py` (last
+step of `tools/audit/run_all.sh`) turns "we should re-run that sometime" into a
+gate:
+
+| state | condition | effect |
+|---|---|---|
+| ok | age <= cadence | — |
+| DUE | cadence < age <= cadence + grace (7 d) | listed in the report |
+| OVERDUE | age > cadence + grace, or the script/evidence file is gone | **run_all.sh exits 1** |
+
+The *scripted* part of each track runs on every `run_all.sh` and blocks
+immediately on a regression (each script is a ratchet: counts may fall, never
+rise). The *periodic* run below is the wider pass that a script cannot do —
+network queries, the real test suites, and human review of the report — and it
+is what `last_run` tracks.
+
+Stamp a completed periodic run (never stamp without doing the steps):
+
+```sh
+python tools/audit/audit_periodic_freshness.py --record <id> --evidence <path-or-url>
+```
+
+Baselines live at the top of each script. Lowering a baseline after fixing
+findings is the point; raising one needs a note in the commit message saying
+why the debt was accepted.
+
+---
+
+## code-duplication
+
+Cadence 30 d · `python tools/audit/audit_code_duplication.py`
+
+1. Run the script (C1 python clones, C2 C# clones, C3 duplicated constant tables).
+2. Pick at least one clone group and fold it into a shared helper —
+   `tools/audit/scanning.py` (file walking), `tools/audit/miniyaml.py` (parsing),
+   `tools/audit/report.py` (markdown). C3 groups are the cheapest wins.
+3. Lower the baseline in the script to the new count and commit both.
+
+## test-coverage
+
+Cadence 30 d · `python tools/audit/audit_test_coverage.py`
+
+1. Run the script (T1 NUnit floor, T2 python-test floor, T3 untested modules).
+2. Run the real suites and paste the summary lines into the evidence file:
+   ```sh
+   dotnet test OpenRA.Mods.Cameo.Test/OpenRA.Mods.Cameo.Test.csproj -c Release
+   python -m unittest discover -s tools/tests -t tools/tests
+   ```
+3. Add tests for at least one T3 module, then raise T1/T2 and lower T3.
+
+## recent-changes-review
+
+Cadence 14 d · `python tools/audit/audit_recent_changes.py --days 30`
+
+1. Run the script: R1 balance yaml edited without the ledger, R2 audits not
+   wired into `run_all.sh`, R3 commits without provenance, R4 engine/config
+   changes needing a boot gate, R5 churn ranking.
+2. Work the reviewer checklist at the end of the report against R5's files.
+3. R1/R3 only block for commits on or after `ENFORCED_FROM` in the script;
+   older findings are history. Move `ENFORCED_FROM` forward only after the
+   window is clean.
+
+## error-handling
+
+Cadence 30 d · `python tools/audit/audit_error_handling.py`
+
+1. Run the script (E1 bare except, E2 swallowed error, E3 `open()` without
+   `encoding=`, E4 `subprocess` without `check=`).
+2. Fix at least the E1/E2 findings in code touched since the last run — a
+   swallowed exception in an audit means the audit silently under-reports.
+3. Lower the baselines.
+
+## security-scan
+
+Cadence 14 d · `python tools/audit/audit_security.py`
+
+1. Run the script (S1 credential shapes, S2 code execution from data, S3
+   plaintext downloads, S4 unpinned actions, S5 unpinned NuGet, S6 installer
+   download without a SHA).
+2. The script is offline; the periodic run adds the advisory queries:
+   ```sh
+   dotnet list CameoMod.sln package --vulnerable --include-transitive
+   dotnet list CameoMod.sln package --deprecated
+   ```
+3. Re-check that every content download still resolves over https and that its
+   `SHA1` still matches what the mirror serves (mirrors die quietly —
+   `openra.mirror.haffdata.com` was returning a 16-byte Cloudflare error page
+   for all four music packages until 2026-08-10):
+   ```sh
+   curl -sSL -o /tmp/p.zip <url> && sha1sum /tmp/p.zip
+   ```
+4. Paste the results into the evidence file and stamp the run.

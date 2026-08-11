@@ -1307,8 +1307,8 @@ World:
 		CrateActors: crate, wwcrate, ra2_crate, ts_crate
 	LobbySystemActorConditionCheckbox@CRATES:
 		ID: crates
-		Label: checkbox-crates.label
-		Description: checkbox-crates.description
+		Label: checkbox_crates.label
+		Description: checkbox_crates.description
 		Enabled: true
 		DisplayOrder: 1
 		Actors: World, Player
