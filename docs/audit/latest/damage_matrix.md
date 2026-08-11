@@ -1,6 +1,6 @@
 # gen_damage_matrix — armor classes & Versus aggregates (§8.1)
 
-Armor types in live actors: **19**, warheads with Versus tables: **12817**
+Armor types in live actors: **19**, warheads with Versus tables: **12086**
 
 
 ## Armor types referenced by actors
@@ -12,25 +12,25 @@ Bomber, Concrete, Fighter, Flak, HAZMAT, Heavy, Helicopter, Heroic, Light, Mediu
 
 | armor type | #warheads naming it | mean Versus | min | max |
 |---|---|---|---|---|
-| Bomber | 12547 | 29% | 1 | 100 |
-| Concrete | 12792 | 41% | 0 | 200 |
-| Fighter | 12547 | 30% | 1 | 100 |
-| Flak | 12547 | 52% | 1 | 250 |
-| HAZMAT | 3063 | 38% | 25 | 75 |
-| Heavy | 12803 | 43% | 0 | 200 |
-| Helicopter | 12547 | 28% | 1 | 100 |
-| Heroic | 12547 | 46% | 1 | 300 |
-| Light | 12805 | 45% | 1 | 200 |
-| Medium | 12766 | 44% | 0 | 200 |
-| None | 12797 | 54% | 1 | 1000 |
-| Plate | 12547 | 51% | 1 | 275 |
-| REFLECTOR | 2031 | 50% | 50 | 50 |
-| Scout | 12547 | 44% | 1 | 100 |
-| Shield | 12217 | 91% | 17 | 400 |
-| Spaceship | 12547 | 27% | 1 | 100 |
-| Steel | 12547 | 41% | 1 | 100 |
-| Superheavy | 12549 | 42% | 1 | 200 |
-| Wood | 12809 | 44% | 0 | 200 |
+| Bomber | 11816 | 28% | 1 | 100 |
+| Concrete | 12061 | 40% | 0 | 200 |
+| Fighter | 11816 | 30% | 1 | 100 |
+| Flak | 11816 | 50% | 1 | 250 |
+| HAZMAT | 4433 | 45% | 25 | 50 |
+| Heavy | 12072 | 43% | 0 | 200 |
+| Helicopter | 11816 | 27% | 1 | 100 |
+| Heroic | 11816 | 46% | 1 | 300 |
+| Light | 12074 | 45% | 1 | 200 |
+| Medium | 12035 | 44% | 0 | 200 |
+| None | 12066 | 52% | 1 | 1000 |
+| Plate | 11816 | 49% | 1 | 275 |
+| REFLECTOR | 1062 | 50% | 50 | 50 |
+| Scout | 11816 | 45% | 1 | 100 |
+| Shield | 11699 | 86% | 5 | 400 |
+| Spaceship | 11816 | 26% | 1 | 100 |
+| Steel | 11816 | 41% | 1 | 175 |
+| Superheavy | 11818 | 42% | 1 | 200 |
+| Wood | 12078 | 44% | 0 | 200 |
 | harvester | 29 | 42% | 25 | 100 |
 | invulnerable | 29 | 0% | 0 | 0 |
 | wall | 27 | 51% | 5 | 100 |

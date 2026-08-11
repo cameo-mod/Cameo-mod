@@ -1,5 +1,6 @@
 quickinstall: Quick Install Package
-	MirrorList: http://www.openra.net/packages/cnc-mirrors.txt
+	SHA1: 72f337464963fa37d3688eb03e80eefd33669a3d
+	MirrorList: https://www.openra.net/packages/cnc-mirrors.txt
 	Extract:
 		^SupportDir|Content/cameo/conquer.mix: conquer.mix #
 		^SupportDir|Content/cameo/desert.mix: desert.mix #
@@ -12,7 +13,8 @@ quickinstall: Quick Install Package
 		^SupportDir|Content/cameo/winter.mix: winter.mix #
 		
 basefiles: Base Freeware Content
-	MirrorList: http://www.openra.net/packages/ra-base-mirrors.txt
+	SHA1: aa022b208a3b45b4a45c00fdae22ccf3c6de3e5c
+	MirrorList: https://www.openra.net/packages/ra-base-mirrors.txt
 	Extract:
 		^SupportDir|Content/cameo/allies.mix: allies.mix
 		^SupportDir|Content/cameo/conquer.mix: conquer.mix
@@ -27,7 +29,8 @@ basefiles: Base Freeware Content
 		^SupportDir|Content/cameo/temperat.mix: temperat.mix
 
 aftermath: Aftermath Expansion Files
-	MirrorList: http://www.openra.net/packages/ra-aftermath-mirrors.txt
+	SHA1: d511d4363b485e11c63eecf96d4365d42ec4ef5e
+	MirrorList: https://www.openra.net/packages/ra-aftermath-mirrors.txt
 	Extract:
 		^SupportDir|Content/cameo/expand/chrotnk1.aud: expand/chrotnk1.aud
 		^SupportDir|Content/cameo/expand/expand2.mix: expand/expand2.mix
@@ -58,25 +61,29 @@ aftermath: Aftermath Expansion Files
 		^SupportDir|Content/cameo/expand/myes1.aud: expand/myes1.aud
 		
 cncdesert: C&C Desert Tileset
-	MirrorList: http://www.openra.net/packages/ra-cncdesert-mirrors.txt
+	SHA1: 039849f16e39e4722e8c838a393c8a0d6529fd59
+	MirrorList: https://www.openra.net/packages/ra-cncdesert-mirrors.txt
 	Extract:
 		^SupportDir|Content/cameo/cnc/desert.mix: cnc/desert.mix
 music: Red Alert Music
-	URL: http://openra.mirror.haffdata.com/ra-music.zip
+	SHA1: 0becc76e8eb8ab30e3889e03ab936641323e56bc
+	URL: https://republic.community/hosted/files/command-and-conquer/openra/ra-music.zip
 	Extract:
 		^SupportDir|Content/cameo/ra/scores.mix: scores.mix
 cncmusic: C&C Music
-	URL: http://openra.mirror.haffdata.com/cnc-music.zip
+	SHA1: c7f220aa59024f02932d5713b1aa6201113c03b5
+	URL: https://republic.community/hosted/files/command-and-conquer/openra/cnc-music.zip
 	Extract:
 		^SupportDir|Content/cameo/cnc/scores.mix: scores.mix
 tsmusic: Tib Sun Music
-	URL: http://openra.mirror.haffdata.com/ts-music.zip
+	SHA1: f445cf47ffa343d9e211ec31f29fb45c8aefac80
+	URL: https://republic.community/hosted/files/command-and-conquer/openra/ts-music.zip
 	Extract:
 		^SupportDir|Content/cameo/ts/scores.mix: scores.mix
 
 fsmusic: Expansion Freeware Music
 	SHA1: 74b1ec47ea8c9815fb85c998963229aa0a8f8619
-	URL: http://openra.mirror.haffdata.com/ts-fsmusic.zip
+	URL: https://republic.community/hosted/files/command-and-conquer/openra/ts-fsmusic.zip
 	Extract:
 		^SupportDir|Content/cameo/firestorm/dmachine.aud: firestorm/dmachine.aud
 		^SupportDir|Content/cameo/firestorm/elusive.aud: firestorm/elusive.aud

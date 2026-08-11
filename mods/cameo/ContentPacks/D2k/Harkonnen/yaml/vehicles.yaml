@@ -76,6 +76,7 @@ missile_tank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MissileVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
@@ -128,6 +129,7 @@ missile_tank:
 devastator:
 	Inherits@D2KT: ^D2KTank
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@EXT: ^ExternalConditions

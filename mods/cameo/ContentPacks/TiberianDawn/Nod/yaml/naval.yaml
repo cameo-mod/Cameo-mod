@@ -57,6 +57,7 @@ ssmsub:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ArtilleryShipTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^NodRankDecoration
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^FrontalEMP
@@ -126,6 +127,7 @@ nodlasercorvette:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^BattleShipTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^NodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@EliteCapacitors: ^EliteCapacitors

@@ -3,6 +3,9 @@
 _One page. Details: [FINDINGS.md](FINDINGS.md) · raw tables: [baseline/](baseline/) ·
 faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 
+Recurring code-health audits and their cadence are tracked in
+[`PERIODIC.md`](PERIODIC.md) and [`periodic.json`](periodic.json).
+
 ## Counts by bug class
 
 > **Note:** Counts below were generated from the baseline audit run. Significant work since then (weapon template splicing, renames, armor normalization, ContentPack migration) may have changed some counts. Re-run `tools/audit/run_all.sh` for current numbers.
