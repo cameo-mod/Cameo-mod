@@ -146,238 +146,65 @@ GrenadeThermobaricExplode:
 		Damage: 1
 
 FireRockets:
-	Inherits: ^FlakWeapon
-	Inherits@2: ^MediumMissile
-	Inherits@3: ^LightFlameWeapon
-	Inherits@4: ^LightMissile
+	Inherits@wh: ^Warhead_FireMissile_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	ReloadDelay: 53
 	Range: 6036
 	Report: missile6.aud
+	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		TrailImage: fb2
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@FireMissile_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 32000
+	Warhead@FireMissile_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 4
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-	Warhead@Effect: CreateEffect
-		Explosions: small_napalm
-		ImpactSounds: firebl3.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_napalm
-		ImpactSounds: firebl3.aud
+		Damage: 16
 
 FireRocketsExplode:
 	Inherits: FireRockets
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 4000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@LightFlameWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@LightMissile: SpreadDamage
-		Damage: 4000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 2
+	Warhead@FireMissile_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+	Warhead@FireMissile_Heavy_Percentage:
+		ValidTargets: Ground, Water, Air
+		Damage: 8
 
 FireRocketsThermobaric:
-	Inherits: ^HeavyFlameWeapon
-	Inherits@2: ^HeavyMissile
-	Inherits@3: ^MediumFlameWeapon
-	Inherits@4: ^ShrapnelWeapon
-	Inherits@5: ^FlakWeapon
-	Inherits@6: ^MediumMissile
-	Inherits@7: ^LightFlameWeapon
-	Inherits@8: ^LightMissile
+	Inherits@wh: ^Warhead_FireMissile_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	ReloadDelay: 58
 	Range: 6692
 	Report: missile6.aud
+	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		TrailImage: fb2
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@FireMissile_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 32000
+	Warhead@FireMissile_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-	Warhead@Effect: CreateEffect
+		Damage: 16
+	Warhead@Effect:
 		Explosions: med_napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
-		ImpactSounds: firebl3.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: med_napalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		ImpactSounds: firebl3.aud
 
 FireRocketsThermobaricExplode:
 	Inherits: FireRocketsThermobaric
-	Warhead@HeavyFlameWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@HeavyMissile: SpreadDamage
-		Damage: 2000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@MediumFlameWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@LightFlameWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@LightMissile: SpreadDamage
-		Damage: 2000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 1
+	Warhead@FireMissile_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+	Warhead@FireMissile_Heavy_Percentage:
+		ValidTargets: Ground, Water, Air
+		Damage: 8
 
 FireballLauncher:
 	Inherits@wh: ^Warhead_Flame_Medium
