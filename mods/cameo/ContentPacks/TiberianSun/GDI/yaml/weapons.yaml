@@ -1057,45 +1057,20 @@ TSVulcanGun:
 		Damage: 2
 
 TSVulcanGunSonic:
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
-	Inherits@3: ^TeslaWeapon
-	Inherits@4: ^MagicWeapon
-	Inherits@5: ^TSSonicGrenade
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@wh2: ^Warhead_Sonic_Medium
+	Inherits@proj: ^Projectile_Sonic_Shell
+	Inherits@fx: ^Effect_Sonic_Shell
 	ValidTargets: Ground, Water
 	ReloadDelay: 66
 	Burst: 4
 	BurstDelays: 2
 	Range: 6809
 	-Report:
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 2
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 2
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
-		DamageTypes: Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 2
-	Warhead@MagicWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 4000
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 2
+	Warhead@Bullet_Medium: AreaDamage
+		Damage: 8000
+	Warhead@Sonic_Medium: AreaDamage
+		Damage: 8000
 
 KodiakAAGuns:
 	Inherits@wh: ^Warhead_Flak_Medium

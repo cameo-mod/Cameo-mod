@@ -18,6 +18,24 @@
 		ImpactActors: false
 		ValidTargets: Ground, Ship
 
+^Projectile_Sonic_Shell:
+	Report: 120mmf.aud
+	Projectile: Bullet
+		Speed: 896
+		Image: BOMB
+		ContrailLength: 12
+		ContrailStartWidth: 128
+		ContrailEndWidth: 44
+		ContrailStartColor: 8888FFFF
+		ContrailEndColor: FFFFFF22
+
+^Effect_Sonic_Shell:
+	Warhead@Effect: CreateEffect
+		Explosions: blue_med_frag
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+
 ^TSCannon:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 50
