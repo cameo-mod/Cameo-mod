@@ -5057,6 +5057,10 @@
      "v": "Steel"
     },
     "buildable": true,
+    "charge_up": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml#AttackTesla",
+     "v": "AttackTesla"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml#Valued.Cost",
      "v": "1500"
@@ -12124,152 +12128,55 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
+        "tag": "Inferno_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "damage": "1000",
+        "damage": "3",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "tag": "Inferno_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8212",
       "reloaddelay": "8",
       "slot": "Armament@1",
       "versus_templates": [
-       "^LaserWeapon",
-       "^MediumChemicalWeapon",
-       "^LightFlameWeapon"
+       "^Warhead_Inferno_Heavy",
+       "^Effect_Flame_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Inferno_Heavy"
+      ],
       "weapon": "HeatRayBeam1",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
+        "tag": "Inferno_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "damage": "1000",
+        "damage": "3",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "tag": "Inferno_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8212",
       "reloaddelay": "8",
@@ -12277,78 +12184,31 @@
       "versus_templates": [
        "HeatRayBeam1"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Inferno_Heavy"
+      ],
       "weapon": "HeatRayBeam2",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
+        "tag": "Inferno_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "damage": "1000",
+        "damage": "3",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "tag": "Inferno_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8212",
       "reloaddelay": "8",
@@ -12356,78 +12216,31 @@
       "versus_templates": [
        "HeatRayBeam1"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Inferno_Heavy"
+      ],
       "weapon": "HeatRayBeam3",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
+        "tag": "Inferno_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "damage": "1000",
+        "damage": "3",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "tag": "Inferno_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8212",
       "reloaddelay": "8",
@@ -12435,9 +12248,11 @@
       "versus_templates": [
        "HeatRayBeam1"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Inferno_Heavy"
+      ],
       "weapon": "HeatRayBeam4",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -151,6 +151,8 @@ CHIP_SPREAD_LEVEL = {("Tesla", "Super"): 400}
 # chip/utility compensates for). Prism has no chip -> nominal 100.
 ENERGY_THIN_SPREAD = {f: s // 2 for f, s in CHIP_SPREAD.items()}
 ENERGY_THIN_SPREAD["Prism"] = 100
+ENERGY_THIN_SPREAD["Inferno"] = 100
+ENERGY_THIN_SPREAD["Cryo"] = 100
 # Level-specific thin-spread (same rule: half the chip spread).
 ENERGY_THIN_SPREAD_LEVEL = {k: v // 2 for k, v in CHIP_SPREAD_LEVEL.items()}
 
@@ -276,7 +278,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         integ = FAMILY_INTEGRITY_SCALE.get(name)  # shield/EMP auto-drain
         if integ:
             main_wh.append(f"\t\tIntegrityScale: {integ}")
-        percentage_state = FAMILY_PHYSICAL_STATE.get(name) if name in {"Flame", "Chemical"} else None
+        percentage_state = FAMILY_PHYSICAL_STATE.get(name) if name in {"Flame", "Chemical", "Inferno", "Cryo"} else None
         # All %-twins use the Cameo AreaDamagePercentage warhead (unified 2026-08-10): same expanding-ring
         # spatial pass + baked-FF plumbing as the AreaDamage main, and it can carry PhysicalStateScale.
         # Behaviour-preserving drop-in for HealthPercentageDamage (no ValidRelationships: Ally => no FF).
@@ -350,6 +352,8 @@ FAMILY_PHYSICAL_STATE = {
     "Flame":    ("Temperature", 100),   # heat -> overheat/pop
     "Laser":    ("Temperature", 75),    # laser overheats (main only, chip excluded)
     "Chemical": ("Corrosion", 100),     # acid -> corrosion meter
+    "Cryo":     ("Temperature", -100),  # prism beam that freezes
+    "Inferno":  ("Temperature", 100),   # prism beam that burns
     # Plasma (Temperature 50 + Corrosion 50) needs two states on one warhead -> handled at family build.
 }
 
@@ -375,6 +379,7 @@ FAMILY_INTEGRITY_SCALE = {
 FAMILY_DAMAGE_TYPES = {
     "Tesla":   "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
     "Quantum": "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
+    "Inferno": "Prone75Percent, TriggerProne, FireDeath, Incendiary",
     # Storm is handled at its own call site (Prone100Percent + Tesla).
 }
 
@@ -412,17 +417,12 @@ INHERIT_FAMILIES = {
 
 
 def emit_inherit_family(name, parent, psn, pss, levels):
-    """A thin child template: Inherits the parent family + overrides its main warhead to add the state."""
-    blocks = []
-    for level in levels:
-        ptag = f"{parent}_{level}"
-        blocks.append("\n".join([
-            f"^Warhead_{name}_{level}:",
-            f"\tInherits: ^Warhead_{ptag}",
-            f"\tWarhead@{ptag}:",
-            f"\t\tPhysicalStateName: {psn}",
-            f"\t\tPhysicalStateScale: {pss}"]))
-    return "\n\n".join(blocks)
+    """A full family that reuses the parent's ladder and adds a PhysicalState to the main + %-twin."""
+    parent_cfg = WEAPONS[parent]
+    order16 = build_order(parent_cfg[0], parent_cfg[1])
+    vt = valid_targets(parent_cfg[2])
+    dt = FAMILY_DAMAGE_TYPES.get(name)
+    return family(name, order16, vt, levels, **({"damage_types": dt} if dt else {}))
 
 
 # Blend families: a NEW family whose Versus is the per-armor AVERAGE of parent families, plus a

@@ -977,9 +977,8 @@ TeslaZapArcTeslaFragment2_EMP:
 	-Warhead@TeslaArc:
 
 HeatRayBeam1:
-	Inherits: ^LaserWeapon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Inferno_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	Range: 8212
 	ReloadDelay: 8
 	Report: idesat1a.wav
@@ -991,39 +990,17 @@ HeatRayBeam1:
 		BeamDuration: 16
 		Thickness: 32
 		QuantizationCount: 16
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
+	Warhead@Inferno_Heavy:
+		Damage: 6000
+		Spread: 500
+		Falloff: 111, 33, 11, 3
+	Warhead@Inferno_Heavy_Percentage:
+		Damage: 3
+		Spread: 250
+		Falloff: 111, 33, 11, 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeapon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
-		Amount: 6000
-	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 3000
-	# Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-	# 	Amount: 2000
-	# Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
-	# 	Amount: 2000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
+		Explosions: small_napalm
 		Volume: 0.25
 
 HeatRayBeam2:
