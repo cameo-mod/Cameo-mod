@@ -1005,36 +1005,11 @@ TSAssaultCannonTal:
 		Damage: 4
 
 TSAssaultCannonTalSonic:
-	Inherits: ^Chaingun
-	Inherits@2: ^TeslaWeapon
-	Inherits@3: ^MagicWeapon
-	Inherits@4: ^TSSonicGrenade
+	Inherits: TSAssaultCannonTal
+	Inherits@wh2: ^Warhead_Sonic_Medium
 	ReloadDelay: 45
-	Burst: 2
-	BurstDelays: 2
-	Range: 6520
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water
+	Warhead@Sonic_Medium: AreaDamage
 		Damage: 8000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 4
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
-		DamageTypes: Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 2
-	Warhead@MagicWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 4000
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 2
 
 TSVulcanGun:
 	Inherits@wh: ^Warhead_Bullet_Light
