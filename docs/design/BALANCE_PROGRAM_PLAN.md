@@ -551,11 +551,15 @@ W4 applied a flat **0.75x** to every charging actor. Measured, that is too blunt
 | Obelisk of Light (TD/TS) | `AttackCharges` | ChargeLevel **50** | — | the heavy case the ruling was written for |
 | RA1 Tesla Coil | `AttackTesla` | InitialChargeDelay **25** | 100 | **20%** |
 | AsianAlliance railtower | `AttackTesla` | **12** | 120 | **9%** |
-| **RA2 Tesla Coil** | `AttackTesla` | **none** | 75 | **0%** |
+| **RA2 Tesla Coil** | `AttackTesla` | **22 (engine default)** | 75 | **23%** |
 
 Maintainer ruling 2026-08-11: *"AttackTesla doesn't have the long charge time of the
-Obelisk … it's very fast, so this needs to be taken into account."* A flat 0.75x would
-hand the RA2 Tesla Coil a 25% discount for a weakness it does not have.
+Obelisk … it's very fast, so this needs to be taken into account."* ⚠ CORRECTION 2026-08-11: an earlier draft read the RA2 Tesla Coil as having NO charge
+delay. Wrong — `InitialChargeDelay` is simply not written on the actor, so it takes the
+ENGINE DEFAULT of 22 (`AttackTesla.cs:31`). An absent key means default, never zero.
+Re-measured, the RA2 Tesla Coil has the HIGHEST charge share of the Tesla group (23%),
+not the lowest. The ruling stands and is now better supported: Tesla charges are real
+but SHORT relative to the Obelisk's 50, so they earn a smaller discount, not none.
 
 **Model:** `charge_share = charge / (charge + reload)`, discount scaled so the Obelisk
 anchors the documented 0.75x and a zero-charge actor gets exactly 1.0, clamped to
@@ -563,7 +567,9 @@ anchors the documented 0.75x and a zero-charge actor gets exactly 1.0, clamped t
 `CHARGE_UP_TRAITS` safely, because the model gives each actor the discount its real
 charge burden earns instead of a binary in/out. Retire `CHARGE_UP_EXCLUDED_TRAITS`.
 
-**VERIFY:** RA2 Tesla Coil multiplier == 1.0; Obelisk == 0.75; railtower between.
+**VERIFY:** Obelisk == 0.75 (anchor); railtower (9%) closest to 1.0; RA2 Tesla (23%) and
+RA1 Tesla (20%) in between. Read charge values from the RESOLVED actor INCLUDING engine
+defaults — `InitialChargeDelay` defaults to 22.
 
 ---
 
