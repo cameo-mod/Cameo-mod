@@ -406,7 +406,8 @@ def emit_condition(tag, cname, duration, rng, vt):
 # warhead to add a PhysicalState (e.g. Cryo = Prism's anti-LIGHT beam + cold). Keeps the parent's Versus
 # + warhead key. {name: (parent, PhysicalStateName, PhysicalStateScale, levels)}.
 INHERIT_FAMILIES = {
-    "Cryo": ("Prism", "Temperature", -100, L3),   # a prism beam that also freezes (its "utility")
+    "Cryo":    ("Prism", "Temperature", -100, L3),   # a prism beam that also freezes (its "utility")
+    "Inferno": ("Prism", "Temperature", +100, L3),   # a prism beam that also burns (heat ray)
 }
 
 

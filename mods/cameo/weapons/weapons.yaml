@@ -12512,3 +12512,22 @@ generic_bullet_casing:
 		Image: generic_bullet_casing
 		Sequences: idle
 		Palette: d2keffect
+
+###### Inferno: inherits Prism + PhysicalState Temperature 100 ######
+^Warhead_Inferno_Light:
+	Inherits: ^Warhead_Prism_Light
+	Warhead@Prism_Light:
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+
+^Warhead_Inferno_Medium:
+	Inherits: ^Warhead_Prism_Medium
+	Warhead@Prism_Medium:
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+
+^Warhead_Inferno_Heavy:
+	Inherits: ^Warhead_Prism_Heavy
+	Warhead@Prism_Heavy:
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100

@@ -30,7 +30,7 @@ status rather than keeping its own copy.
 | id | work item | status | owner | needs |
 |---|---|---|---|---|
 | **W1** | K coefficient + target model (measured Versus weights, capped density) | ✅ DONE `f8421d345` | Claude | — |
-| **W2** | `^LightFlameWeapon` → 3-way split + new `^Warhead_Inferno_*` family | ⬜ READY | **Devin** | — |
+| **W2** | `^LightFlameWeapon` → 3-way split + new `^Warhead_Inferno_*` family | 🔵 IN PROGRESS (Devin, 2026-08-11) | **Devin** | — |
 | **W3** | Ledger split: raw stays, derived moves to `docs/balance/derived/` | ⬜ READY | Claude | W1 |
 | **W4** | Retire weapon-class K; charge-up becomes an ACTOR property | ⬜ READY | Claude | W1 |
 | **W5** | Missing metrics: overkill/TTK, range advantage, ValidTargets, MinRange, AttackDelay | ⬜ READY | Claude | W1 |
