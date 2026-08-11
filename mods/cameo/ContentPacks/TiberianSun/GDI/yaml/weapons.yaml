@@ -949,13 +949,14 @@ TSJumpCannon:
 TSAssaultCannonSonic:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_Sonic_Medium
-	Inherits@proj: ^Projectile_Flak_Medium
-	Inherits@fx: ^Effect_Flak_Medium
+	Inherits@proj: ^Projectile_Sonic_Shell
+	Inherits@fx: ^Effect_Sonic_Shell
 	ReloadDelay: 45
 	Burst: 2
 	BurstDelays: 2
 	Range: 6305
-	-Report:
+	Projectile: Bullet
+		Inaccuracy: 250
 	Warhead@Flak_Medium: AreaDamage
 		Damage: 4000
 	Warhead@Sonic_Medium: AreaDamage
@@ -983,7 +984,12 @@ TSAssaultCannonTal:
 TSAssaultCannonTalSonic:
 	Inherits: TSAssaultCannonTal
 	Inherits@wh2: ^Warhead_Sonic_Medium
+	Inherits@proj: ^Projectile_Sonic_Shell
+	Inherits@fx: ^Effect_Sonic_Shell
 	ReloadDelay: 45
+	Projectile: Bullet
+		Speed: 2000
+		Inaccuracy: 200
 	Warhead@Sonic_Medium: AreaDamage
 		Damage: 8000
 

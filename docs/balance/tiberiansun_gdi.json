@@ -6444,11 +6444,11 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
-      "effective_avg_reliability": 0.8833,
+      "effective_avg_reliability": 0.8263,
       "effective_base_total": 8000.0,
-      "effective_damage": 15766.82,
+      "effective_damage": 15311.26,
       "effective_footprint_cells2": 8.7005,
-      "effective_sigma": 262.61,
+      "effective_sigma": 390.74,
       "pricing": true,
       "range": "6305",
       "reloaddelay": "45",
@@ -6457,8 +6457,8 @@
       "versus_templates": [
        "^Warhead_Flak_Medium",
        "^Warhead_Sonic_Medium",
-       "^Projectile_Flak_Medium",
-       "^Effect_Flak_Medium"
+       "^Projectile_Sonic_Shell",
+       "^Effect_Sonic_Shell"
       ],
       "warheads": [
        "^Warhead_Flak_Medium",
@@ -6604,7 +6604,9 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "TSAssaultCannonTal",
-       "^Warhead_Sonic_Medium"
+       "^Warhead_Sonic_Medium",
+       "^Projectile_Sonic_Shell",
+       "^Effect_Sonic_Shell"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium",
