@@ -52,7 +52,7 @@
 		Shadow: true
 		HorizontalRateOfTurn: 40
 		VerticalRateOfTurn: 40
-		TrailImage: small_smoke_trail
+		TrailImage: ts_small_smoke_trail
 		TrailInterval: 1
 		ContrailLength: 0
 		MaximumLaunchSpeed: 543
@@ -80,7 +80,7 @@
 		Shadow: true
 		HorizontalRateOfTurn: 10
 		VerticalRateOfTurn: 40
-		TrailImage: small_smoke_trail
+		TrailImage: ts_small_smoke_trail
 		TrailInterval: 1
 		ContrailLength: 0
 		MaximumLaunchSpeed: 213
@@ -1478,7 +1478,7 @@ TSMissileBomblet:
 	Range: 7168
 	Projectile: Bullet
 		Image: 120mm
-		TrailImage: small_smoke_trail
+		TrailImage: ts_small_smoke_trail
 		Shadow: true
 		Speed: 128
 		Blockable: false
@@ -1657,7 +1657,7 @@ E1Droppod:
 	Projectile: Bullet
 		Speed: 300
 		Image: tsdroppod
-		TrailImage: small_smoke_trail
+		TrailImage: ts_small_smoke_trail
 		Palette: ra2
 	Warhead@1Dam: SpreadDamage
 		Damage: 5000

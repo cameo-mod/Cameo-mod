@@ -1876,9 +1876,17 @@ smokey:
 		Length: *
 		ZOffset: 1023
 
-small_smoke_trail:
+ts_small_smoke_trail:
 	idle:
 		Filename: tssmokey2.shp
+		Length: *
+		ZOffset: 1023
+		Offset: 0, 0, 24
+		AlphaFade: true
+
+ts_large_smoke_trail:
+	idle:
+		Filename: smokey.shp
 		Length: *
 		ZOffset: 1023
 		Offset: 0, 0, 24
