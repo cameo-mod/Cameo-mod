@@ -33,7 +33,12 @@ the artifact, **the artifact wins — then fix the stale summary.**
 8. **Audit reports regenerate via `bash tools/audit/run_all.sh` only** (PowerShell `>` writes UTF-16).
 9. **Underscore-only naming** — no hyphens in ids / files / fluent keys.
 10. **Attribute the ACTUAL author in the commit trailer — never impersonate another agent.**
-    Claude Code commits end with `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`.
+    Sign with **your own** identity, including your real model name:
+    `Co-Authored-By: Claude <model> <noreply@anthropic.com>` — e.g. Opus 5 signs
+    `Claude Opus 5`, Opus 4.8 signs `Claude Opus 4.8`. **Never copy the trailer from a
+    previous commit or from this file** — it is a template, not a literal; a version pinned
+    here goes stale the moment the model changes, and copying it makes a newer model
+    misreport itself as an older one.
     **Any OTHER agent (Devin, Cascade, etc.) must use its OWN `Co-Authored-By:` line** (e.g.
     `Co-Authored-By: Devin AI <devin@cognition.ai>`) and must NOT append the Claude trailer — the
     git author is a shared repo identity, so the trailer is the only provenance signal and a wrong

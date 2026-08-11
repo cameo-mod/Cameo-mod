@@ -29,7 +29,10 @@ HARD RULES (several are enforced by hooks — see .claude/settings.json):
     commits before building on them (check mtimes for a live agent first).
  8. Audit reports regen via `bash tools/audit/run_all.sh` ONLY (PowerShell > writes UTF-16).
  9. Underscore-only naming — no hyphens in ids/files/fluent keys.
-10. Commit messages end with: Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+10. Commit trailer = the ACTUAL author, with your REAL model name:
+    Co-Authored-By: Claude <your-model> <noreply@anthropic.com>  (a template, not a
+    literal - do not copy a version from a previous commit). Other agents sign as
+    themselves, e.g. Co-Authored-By: Devin AI <devin@cognition.ai>.
 
 Work queue + effort estimate: docs/design/ROADMAP.md + docs/design/BALANCE_PIPELINE_ESTIMATE.md.
 """
