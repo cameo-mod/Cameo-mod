@@ -1,6 +1,6 @@
 # audit_fluent — localization drift (B12)
 
-Fluent messages loaded: **4734** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **527**
+Fluent messages loaded: **5222** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **526**
 
 
 ## F1 — rules reference fluent keys that don't exist (shows raw key in-game)
@@ -190,7 +190,6 @@ _none found_
 | actor_mig |
 | actor_mignuke |
 | actor_mind |
-| actor_missile_tank |
 | actor_mlrs |
 | actor_mnly |
 | actor_monstertank |
@@ -545,32 +544,33 @@ _none found_
 
 | faction | fluent/total tooltips | coverage |
 |---|---|---|
-| asianalliance | 0/75 | 0% |
-| cabal | 0/83 | 0% |
-| eden | 0/44 | 0% |
-| forgotten | 77/79 | 97% |
-| futuretech | 0/58 | 0% |
-| ixian | 0/80 | 0% |
-| japan | 1/75 | 1% |
-| latinsyndicate | 0/70 | 0% |
-| naxis | 0/77 | 0% |
+| asianalliance | 0/78 | 0% |
+| cabal | 0/84 | 0% |
+| eden | 0/45 | 0% |
+| forgotten | 78/81 | 96% |
+| futuretech | 0/59 | 0% |
+| harkonnen | 0/41 | 0% |
+| ixian | 0/82 | 0% |
+| japan | 1/76 | 1% |
+| latinsyndicate | 0/71 | 0% |
+| naxis | 0/78 | 0% |
 | ordos | 0/92 | 0% |
-| plymouth | 0/45 | 0% |
-| protoss | 0/73 | 0% |
-| ra1_allies | 1/73 | 1% |
-| ra1_soviets | 2/117 | 1% |
-| ra2_allies | 7/69 | 10% |
-| ra2_soviets | 1/59 | 1% |
-| schwarzermond | 0/61 | 0% |
-| steelconsortium | 0/62 | 0% |
-| td_gdi | 1/68 | 1% |
-| td_nod | 3/72 | 4% |
-| terran | 0/78 | 0% |
-| tkm | 1/74 | 1% |
-| ts_gdi | 0/65 | 0% |
-| ts_nod | 1/49 | 2% |
-| wc2_humans | 0/70 | 0% |
-| wc2_orcs | 0/61 | 0% |
-| yuri | 2/66 | 3% |
-| zerg | 0/76 | 0% |
+| plymouth | 0/46 | 0% |
+| protoss | 0/74 | 0% |
+| ra1_allies | 1/74 | 1% |
+| ra1_soviets | 2/118 | 1% |
+| ra2_allies | 7/70 | 10% |
+| ra2_soviets | 1/60 | 1% |
+| schwarzermond | 0/62 | 0% |
+| steelconsortium | 0/63 | 0% |
+| td_gdi | 1/69 | 1% |
+| td_nod | 3/73 | 4% |
+| terran | 0/79 | 0% |
+| tkm | 1/75 | 1% |
+| ts_gdi | 0/69 | 0% |
+| ts_nod | 1/50 | 2% |
+| wc2_humans | 0/71 | 0% |
+| wc2_orcs | 0/62 | 0% |
+| yuri | 2/67 | 2% |
+| zerg | 0/77 | 0% |
 

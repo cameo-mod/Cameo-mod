@@ -1,0 +1,243 @@
+# audit_test_coverage — test floors and untested modules
+
+| metric | meaning | value | floor/baseline |
+|---|---|---|---|
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (2 file(s)) | 24 | >= 24 |
+| T2 | `def test_*` in tools/tests (6 file(s)) | 54 | >= 51 |
+| T3 | modules with no test mentioning them | 221 | <= 221 |
+
+
+## How to run the real suites (periodic run must paste output here)
+
+```
+dotnet test OpenRA.Mods.Cameo.Test/OpenRA.Mods.Cameo.Test.csproj -c Release
+python -m unittest discover -s tools/tests -t tools/tests
+```
+
+
+## T3 — untested modules (221)
+
+| kind | file | type(s)/module |
+|---|---|---|
+| C# | OpenRA.Mods.Cameo/Activities/HeliDeployForGrantedCondition.cs | HeliDeployForGrantedCondition, HeliDeployInner |
+| C# | OpenRA.Mods.Cameo/CyberintelThemes.cs | CyberintelThemes |
+| C# | OpenRA.Mods.Cameo/Effects/TintedSpriteEffect.cs | TintedSpriteEffect |
+| C# | OpenRA.Mods.Cameo/FileSystem/BagFile.cs | AudioBagLoader |
+| C# | OpenRA.Mods.Cameo/Graphics/CameoSpriteSequence.cs | CameoSpriteSequenceLoader, CameoSpriteSequence |
+| C# | OpenRA.Mods.Cameo/Graphics/LightningGeometry.cs | LightningGeometry |
+| C# | OpenRA.Mods.Cameo/Graphics/LightningRenderable.cs | LightningRenderable |
+| C# | OpenRA.Mods.Cameo/Graphics/UILineRenderable.cs | UILineAnnotationRenderable, UIRectangleAnnotationRenderable |
+| C# | OpenRA.Mods.Cameo/LoadScreens/FitImageLoadScreen.cs | FitImageLoadScreen |
+| C# | OpenRA.Mods.Cameo/Orders/CustomFormationsAttackMoveOrderGenerator.cs | CustomFormationsAttackMoveOrderGenerator |
+| C# | OpenRA.Mods.Cameo/Orders/CustomFormationsOrderGeneratorBase.cs | UnitOrderResult, CustomFormationsOrderGeneratorBase, OrderGeneratorHelpers |
+| C# | OpenRA.Mods.Cameo/Orders/CustomFormationsUnitOrderGenerator.cs | CustomFormationsUnitOrderGenerator |
+| C# | OpenRA.Mods.Cameo/Projectiles/LightningZap.cs | LightningZap |
+| C# | OpenRA.Mods.Cameo/Rendering/ColorPickerColorShift.cs | ColorPickerColorShift |
+| C# | OpenRA.Mods.Cameo/Rendering/PlayerColorShift.cs | PlayerColorShift |
+| C# | OpenRA.Mods.Cameo/Traits/AdaptiveGameSpeed.cs | AdaptiveGameSpeed |
+| C# | OpenRA.Mods.Cameo/Traits/AdaptiveGameSpeedHost.cs | AdaptiveGameSpeedHost |
+| C# | OpenRA.Mods.Cameo/Traits/AdaptiveSpeedController.cs | AdaptiveSpeedController |
+| C# | OpenRA.Mods.Cameo/Traits/AnnounceOnDamageState.cs | AnnounceOnDamageState |
+| C# | OpenRA.Mods.Cameo/Traits/Attack/AttackInfectCA.cs | AttackInfectCA |
+| C# | OpenRA.Mods.Cameo/Traits/BotGlobalUnitBudget.cs | BotGlobalUnitBudget |
+| C# | OpenRA.Mods.Cameo/Traits/BotInsurance.cs | BotInsurance |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/CratePickupBotModule.cs | CratePickupBotModule |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/PlugSpawnerBotModuleCA.cs | PlugSpawnerBotModuleCA |
+| C# | OpenRA.Mods.Cameo/Traits/CameoSettings.cs | CameoSettings |
+| C# | OpenRA.Mods.Cameo/Traits/ChangesPhysicalState.cs | ChangesPhysicalState |
+| C# | OpenRA.Mods.Cameo/Traits/Conditions/GrantConditionOnPower.cs | GrantConditionOnPower |
+| C# | OpenRA.Mods.Cameo/Traits/Conditions/GrantExternalConditionToTransport.cs | GrantExternalConditionToTransport |
+| C# | OpenRA.Mods.Cameo/Traits/Conditions/HeliGrantConditionOnDeploy.cs | HeliGrantConditionOnDeploy |
+| C# | OpenRA.Mods.Cameo/Traits/CryoFogEmitter.cs | CryoFogEmitter |
+| C# | OpenRA.Mods.Cameo/Traits/CryoFogLimiter.cs | CryoFogLimiter |
+| C# | OpenRA.Mods.Cameo/Traits/DeployOnCondition.cs | DeployOnCondition |
+| C# | OpenRA.Mods.Cameo/Traits/DeterministicCellOffset.cs | DeterministicCellOffset |
+| C# | OpenRA.Mods.Cameo/Traits/DeterministicOffsetSmokeParticleEmitter.cs | DeterministicOffsetSmokeParticleEmitter |
+| C# | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs | DroneSpawnerMasterCA |
+| C# | OpenRA.Mods.Cameo/Traits/ExplodesCA.cs | FireWarheadsOnDeathCA |
+| C# | OpenRA.Mods.Cameo/Traits/FreeActorWithCondition.cs | FreeActorWithCondition, FreeActorInit, ParentActorInit |
+| C# | OpenRA.Mods.Cameo/Traits/GrantConditionOnPlayerTotalCash.cs | GrantConditionOnPlayerTotalCash |
+| C# | OpenRA.Mods.Cameo/Traits/InfectableCA.cs | InfectorCA, InfectableCA |
+| C# | OpenRA.Mods.Cameo/Traits/InfectableOld.cs | InfectableOld |
+| C# | OpenRA.Mods.Cameo/Traits/InfectorOld.cs | InfectorOld |
+| C# | OpenRA.Mods.Cameo/Traits/Integrity.cs | Integrity |
+| C# | OpenRA.Mods.Cameo/Traits/LarvaConsumingProduction.cs | LarvaConsumingProduction |
+| C# | OpenRA.Mods.Cameo/Traits/LarvaProductionQueue.cs | LarvaProductionQueue |
+| C# | OpenRA.Mods.Cameo/Traits/Modifiers/WithPhysicalStateColoredOverlay.cs | WithPhysicalStateColoredOverlay |
+| C# | OpenRA.Mods.Cameo/Traits/NewConstructionOptionsNotification.cs | NewConstructionOptionsNotification, NewConstructionOptionsOnDeploy |
+| C# | OpenRA.Mods.Cameo/Traits/OneActorPerCell.cs | OneActorPerCell |
+| C# | OpenRA.Mods.Cameo/Traits/PaletteEffects/TAStealthTankCloakPaletteEffect.cs | TAStealthTankCloakPaletteEffect |
+| C# | OpenRA.Mods.Cameo/Traits/Player/CriticalUnitAttackNotifier.cs | CriticalUnit, CriticalUnitAttackNotifier |
+| C# | OpenRA.Mods.Cameo/Traits/Player/CustomFormationsModOptions.cs | CustomFormationsModOptions |
+| C# | OpenRA.Mods.Cameo/Traits/Player/PlayerPromotions.cs | PlayerPromotions |
+| C# | OpenRA.Mods.Cameo/Traits/PlayerDisplayUpgrade.cs | PlayerDisplayUpgrade |
+| C# | OpenRA.Mods.Cameo/Traits/ProductionIconHoverHeader.cs | ProductionIconHoverHeader |
+| C# | OpenRA.Mods.Cameo/Traits/ProductionIconMutualExclusion.cs | ProductionIconMutualExclusion |
+| C# | OpenRA.Mods.Cameo/Traits/PromotionPalette.cs | PromotionPalette |
+| C# | OpenRA.Mods.Cameo/Traits/PromotionUpgrade.cs | PromotionUpgrade |
+| C# | OpenRA.Mods.Cameo/Traits/ProvidesTeamProxyActor.cs | ProvidesTeamProxyActor |
+| C# | OpenRA.Mods.Cameo/Traits/QuotaProductionManager.cs | QuotaProductionManager |
+| C# | OpenRA.Mods.Cameo/Traits/Render/OverlayPlayerColorPalette.cs | OverlayPlayerColorPalette |
+| C# | OpenRA.Mods.Cameo/Traits/Render/WithAlpha.cs | WithAlpha |
+| C# | OpenRA.Mods.Cameo/Traits/Render/WithBuildingBibCA.cs | WithBuildingBibCA |
+| C# | OpenRA.Mods.Cameo/Traits/Render/WithCargoBuilding.cs | WithCargoBuilding |
+| C# | OpenRA.Mods.Cameo/Traits/Render/WithCreepOverlay.cs | CreepLayer, WithCreepOverlay |
+| C# | OpenRA.Mods.Cameo/Traits/Render/WithDeterministicOffsetIdleOverlay.cs | WithDeterministicOffsetIdleOverlay |
+| C# | OpenRA.Mods.Cameo/Traits/Render/WithLifetimeFade.cs | WithLifetimeFade |
+| C# | OpenRA.Mods.Cameo/Traits/Render/WithLoopedMakeAnimation.cs | WithLoopedMakeAnimation |
+| C# | OpenRA.Mods.Cameo/Traits/Render/WithMuzzleGlow.cs | WithMuzzleGlow |
+| C# | OpenRA.Mods.Cameo/Traits/Render/WithMuzzleSmoke.cs | WithMuzzleSmoke |
+| C# | OpenRA.Mods.Cameo/Traits/Render/WithTurretSearchlight.cs | WithTurretSearchlight |
+| C# | OpenRA.Mods.Cameo/Traits/ShadeMaster.cs | ShadeMaster |
+| C# | OpenRA.Mods.Cameo/Traits/ShadeSlave.cs | ShadeSlave |
+| C# | OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs | SlaveMinerSpawnerMaster |
+| C# | OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerSlave.cs | SlaveMinerSpawnerSlave |
+| C# | OpenRA.Mods.Cameo/Traits/SoundAnnouncement.cs | SoundAnnouncement |
+| C# | OpenRA.Mods.Cameo/Traits/StarportBatchProduction.cs | StarportBatchProductionQueue, StarportBatchAirdrop |
+| C# | OpenRA.Mods.Cameo/Traits/SupportPowers/TransferCashSupportPower.cs | TransferCashSupportPower |
+| C# | OpenRA.Mods.Cameo/Traits/TakeOffOnMake.cs | TakeOffOnMake |
+| C# | OpenRA.Mods.Cameo/Traits/TerrainLightSourceCA.cs | TerrainLightSourceCA |
+| C# | OpenRA.Mods.Cameo/Traits/UsePointsOnProduction.cs | UsePointsOnProduction |
+| C# | OpenRA.Mods.Cameo/Traits/World/AutoControlGroupsManager.cs | AutoControlGroupsManager |
+| C# | OpenRA.Mods.Cameo/Traits/World/BackstabGameMode.cs | BackstabGameMode |
+| C# | OpenRA.Mods.Cameo/Traits/World/ConditionalTintPostProcessEffect.cs | ConditionalTintPostProcessEffect |
+| C# | OpenRA.Mods.Cameo/Traits/World/ConditionalWorldTint.cs | ConditionalWorldTint |
+| C# | OpenRA.Mods.Cameo/Traits/World/HeatDistortionRenderer.cs | HeatDistortionRenderer |
+| C# | OpenRA.Mods.Cameo/Traits/World/LobbySystemActorConditionDropdown.cs | LobbySystemActorConditionDropdown |
+| C# | OpenRA.Mods.Cameo/Traits/World/NuclearFlashRenderer.cs | NuclearFlashRenderer |
+| C# | OpenRA.Mods.Cameo/Traits/World/ResourceSparkleEffect.cs | SparkleConfig, ResourceSparkleEffect |
+| C# | OpenRA.Mods.Cameo/Traits/World/ShockwaveDistortionRenderer.cs | ShockwaveDistortionRenderer |
+| C# | OpenRA.Mods.Cameo/Warheads/AffectsIntegrityWarhead.cs | AffectsIntegrityWarhead |
+| C# | OpenRA.Mods.Cameo/Warheads/AreaDamagePercentageWarhead.cs | AreaDamagePercentageWarhead |
+| C# | OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs | AreaDamageWarhead |
+| C# | OpenRA.Mods.Cameo/Warheads/ChangeOwnerToNeutralWarhead.cs | ChangeOwnerToNeutralWarhead |
+| C# | OpenRA.Mods.Cameo/Warheads/GlowImpactWarhead.cs | GlowImpactWarhead |
+| C# | OpenRA.Mods.Cameo/Warheads/HeatDistortionWarhead.cs | HeatDistortionWarhead |
+| C# | OpenRA.Mods.Cameo/Warheads/MindControlWarhead.cs | MindControlWarhead |
+| C# | OpenRA.Mods.Cameo/Warheads/NuclearFlashEffectWarhead.cs | NuclearFlashEffectWarhead |
+| C# | OpenRA.Mods.Cameo/Warheads/ShockwaveWarhead.cs | ShockwaveWarhead |
+| C# | OpenRA.Mods.Cameo/Warheads/SpawnActorInAreaWarhead.cs | SpawnActorInAreaWarhead |
+| C# | OpenRA.Mods.Cameo/Warheads/SpawnActorOrWeaponWarhead.cs | SpawnActorOrWeaponWarhead |
+| C# | OpenRA.Mods.Cameo/Warheads/StealResourceWarhead.cs | StealResourceWarhead |
+| C# | OpenRA.Mods.Cameo/Widgets/AutoControlGroupsWidget.cs | AutoControlGroupsWidget |
+| C# | OpenRA.Mods.Cameo/Widgets/ClickMaskWidget.cs | ClickMaskWidget |
+| C# | OpenRA.Mods.Cameo/Widgets/CommanderTreeDismissWidget.cs | CommanderTreeDismissWidget |
+| C# | OpenRA.Mods.Cameo/Widgets/CommanderTreeWidget.cs | CommanderTreeWidget |
+| C# | OpenRA.Mods.Cameo/Widgets/CustomFormationsCommandBarLogic.cs | CustomFormationsCommandBarLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/DragHandleWidget.cs | DragHandleWidget |
+| C# | OpenRA.Mods.Cameo/Widgets/IngamePromotionCounterWidget.cs | IngamePromotionCounterWidget |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/ActorIconTooltipCameoLogic.cs | ActorIconTooltipCameoLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/ArmyTooltipCameoLogic.cs | ArmyTooltipCameoLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/CameoDisplaySettingsLogic.cs | CameoDisplaySettingsLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/CameoGameplaySettingsLogic.cs | CameoGameplaySettingsLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/CameoMainMenuLogic.cs | CameoMainMenuLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/CameoObserverStatsLogic.cs | CameoObserverStatsLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/CommanderTreeWindowLogic.cs | CommanderTreeWindowLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/Ingame/PromotionTreeButtonLogic.cs | PromotionTreeButtonLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/IngameActorStatsLogicCameo.cs | IngameActorStatsLogicCameo |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/LobbyLogic.cs | LobbyLogic, LobbyFaction |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/ProductionTooltipCameoLogic.cs | ProductionTooltipCameoLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/StarportBatchStatusLogic.cs | StarportBatchStatusLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs | ObserverPromotionsIconsWidget |
+| C# | OpenRA.Mods.Cameo/Widgets/PlayerUpgradesIconsWidget.cs | PlayerUpgradesIconsWidget |
+| C# | OpenRA.Mods.Cameo/Widgets/QuotaProductionPaletteWidget.cs | QuotaProductionPaletteWidget |
+| C# | OpenRA.Mods.Cameo/Widgets/RoundedImageWidget.cs | RoundedImageWidget |
+| C# | OpenRA.Mods.Cameo/Widgets/ScaledImageWidget.cs | ScaledImageWidget |
+| python | tools/audit/audit_ai.py | audit_ai |
+| python | tools/audit/audit_armament_naming.py | audit_armament_naming |
+| python | tools/audit/audit_asset_files.py | audit_asset_files |
+| python | tools/audit/audit_assets.py | audit_assets |
+| python | tools/audit/audit_balance_drift.py | audit_balance_drift |
+| python | tools/audit/audit_balance_sheet.py | audit_balance_sheet |
+| python | tools/audit/audit_basebuilder_crates.py | audit_basebuilder_crates |
+| python | tools/audit/audit_buildable_order.py | audit_buildable_order |
+| python | tools/audit/audit_burst_delays.py | audit_burst_delays |
+| python | tools/audit/audit_code_duplication.py | audit_code_duplication |
+| python | tools/audit/audit_consistency_report.py | audit_consistency_report |
+| python | tools/audit/audit_display_text.py | audit_display_text |
+| python | tools/audit/audit_dune_rank_decoration.py | audit_dune_rank_decoration |
+| python | tools/audit/audit_effect_warhead_names.py | audit_effect_warhead_names |
+| python | tools/audit/audit_elite_gating.py | audit_elite_gating |
+| python | tools/audit/audit_empty_warheads.py | audit_empty_warheads |
+| python | tools/audit/audit_faction_leaks.py | audit_faction_leaks |
+| python | tools/audit/audit_fluent.py | audit_fluent |
+| python | tools/audit/audit_garrison_weapons.py | audit_garrison_weapons |
+| python | tools/audit/audit_inherits.py | audit_inherits |
+| python | tools/audit/audit_metadata.py | audit_metadata |
+| python | tools/audit/audit_min_range.py | audit_min_range |
+| python | tools/audit/audit_missing_elite.py | audit_missing_elite |
+| python | tools/audit/audit_multiplier_modifiers.py | audit_multiplier_modifiers |
+| python | tools/audit/audit_nuclear_flash_bindings.py | audit_nuclear_flash_bindings |
+| python | tools/audit/audit_orphans.py | audit_orphans |
+| python | tools/audit/audit_outliers.py | audit_outliers |
+| python | tools/audit/audit_packs.py | audit_packs |
+| python | tools/audit/audit_periodic_freshness.py | audit_periodic_freshness |
+| python | tools/audit/audit_physical_state_warheads.py | audit_physical_state_warheads |
+| python | tools/audit/audit_power_budget.py | audit_power_budget |
+| python | tools/audit/audit_promotion_gating.py | audit_promotion_gating |
+| python | tools/audit/audit_rank_decoration.py | audit_rank_decoration |
+| python | tools/audit/audit_recent_changes.py | audit_recent_changes |
+| python | tools/audit/audit_rename_safety.py | audit_rename_safety |
+| python | tools/audit/audit_sequences.py | audit_sequences |
+| python | tools/audit/audit_stat_formulas.py | audit_stat_formulas |
+| python | tools/audit/audit_template_conformance.py | audit_template_conformance |
+| python | tools/audit/audit_test_coverage.py | audit_test_coverage |
+| python | tools/audit/audit_ts_death_palette.py | audit_ts_death_palette |
+| python | tools/audit/audit_upgrade_coverage.py | audit_upgrade_coverage |
+| python | tools/audit/audit_upgrades.py | audit_upgrades |
+| python | tools/audit/audit_warhead_split.py | audit_warhead_split |
+| python | tools/audit/audit_weapon_suffixes.py | audit_weapon_suffixes |
+| python | tools/audit/audit_weapon_uniqueness.py | audit_weapon_uniqueness |
+| python | tools/audit/cameo_model.py | cameo_model |
+| python | tools/audit/dump_resolved.py | dump_resolved |
+| python | tools/audit/find_empty_warhead.py | find_empty_warhead |
+| python | tools/audit/find_orphan_old_keys.py | find_orphan_old_keys |
+| python | tools/audit/find_orphan_old_keys_multi.py | find_orphan_old_keys_multi |
+| python | tools/audit/gen_damage_matrix.py | gen_damage_matrix |
+| python | tools/audit/gen_faction_matrix.py | gen_faction_matrix |
+| python | tools/audit/gen_rename_maps.py | gen_rename_maps |
+| python | tools/audit/phase_b_survey.py | phase_b_survey |
+| python | tools/audit/report.py | report |
+| python | tools/audit/review_resolve_diff.py | review_resolve_diff |
+| python | tools/audit/run_all.py | run_all |
+| python | tools/balance/_balance_audit_report.py | _balance_audit_report |
+| python | tools/balance/_fix_min_range.py | _fix_min_range |
+| python | tools/balance/_patch_ledgers_from_reports.py | _patch_ledgers_from_reports |
+| python | tools/balance/_show_audit_summaries.py | _show_audit_summaries |
+| python | tools/balance/_write_weapon_class.py | _write_weapon_class |
+| python | tools/balance/apply_balance.py | apply_balance |
+| python | tools/balance/audit_below_divider.py | audit_below_divider |
+| python | tools/balance/build_workbook.py | build_workbook |
+| python | tools/balance/check_band.py | check_band |
+| python | tools/balance/count_mixed.py | count_mixed |
+| python | tools/balance/extract_stats.py | extract_stats |
+| python | tools/balance/fit_class.py | fit_class |
+| python | tools/balance/fix_orphan_old_keys.py | fix_orphan_old_keys |
+| python | tools/balance/fix_orphan_old_keys_multi.py | fix_orphan_old_keys_multi |
+| python | tools/balance/fix_stale_warhead_keys.py | fix_stale_warhead_keys |
+| python | tools/balance/formula.py | formula |
+| python | tools/balance/gen_effects.py | gen_effects |
+| python | tools/balance/gen_projectiles.py | gen_projectiles |
+| python | tools/balance/gen_weapon_template.py | gen_weapon_template |
+| python | tools/balance/harvester_table.py | harvester_table |
+| python | tools/balance/import_workbook.py | import_workbook |
+| python | tools/balance/propose_class_rebalance.py | propose_class_rebalance |
+| python | tools/balance/propose_rebalance.py | propose_rebalance |
+| python | tools/balance/rename_3way_underscore.py | rename_3way_underscore |
+| python | tools/balance/retrofit_weapon_family.py | retrofit_weapon_family |
+| python | tools/balance/run_with_guard.py | run_with_guard |
+| python | tools/balance/seed_design.py | seed_design |
+| python | tools/balance/splice_templates.py | splice_templates |
+| python | tools/balance/strip_orphan_report.py | strip_orphan_report |
+| python | tools/balance/strip_weapon_versus.py | strip_weapon_versus |
+| python | tools/balance/sweep_areadamage.py | sweep_areadamage |
+| python | tools/balance/update_ranges.py | update_ranges |
+| python | tools/balance/verify_generator_sync.py | verify_generator_sync |
+| python | tools/packs/extract_shared.py | extract_shared |
+| python | tools/packs/split_faction.py | split_faction |
+| python | tools/rename/apply.py | apply |
+| python | tools/rename/apply_ra1_legacy.py | apply_ra1_legacy |
+| python | tools/rename/convert_maps.py | convert_maps |
+| python | tools/rename/curate_map.py | curate_map |
+| python | tools/rename/safe_rename.py | safe_rename |
+

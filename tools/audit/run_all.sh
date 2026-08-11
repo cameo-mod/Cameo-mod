@@ -34,6 +34,8 @@ for a in inherits faction_leaks upgrades upgrade_coverage ai sequences \
          missing_elite elite_gating rank_decoration \
          dune_rank_decoration effect_warhead_names weapon_suffixes \
          balance_sheet consistency_report packs balance_drift \
+         duplicate_keys code_duplication test_coverage recent_changes \
+         error_handling security \
          template_conformance multiplier_modifiers nuclear_flash_bindings \
          ts_death_palette warhead_split physical_state_warheads; do
   echo "== audit_$a"
@@ -54,6 +56,13 @@ for a in createeffect_image:tools/audit_createeffect_image.py \
     || failed=1
   [ -s "$OUT/$name.err" ] || rm -f "$OUT/$name.err"
 done
+
+# Staleness gate for the mandatory recurring audits (docs/audit/periodic.json):
+# runs last so its report reflects this run's evidence files.
+echo "== periodic_freshness"
+"$PYTHON" tools/audit/audit_periodic_freshness.py \
+  > "$OUT/periodic_freshness.md" 2> "$OUT/periodic_freshness.err" || failed=1
+[ -s "$OUT/periodic_freshness.err" ] || rm -f "$OUT/periodic_freshness.err"
 
 echo "== gen_damage_matrix"
 "$PYTHON" tools/audit/gen_damage_matrix.py > "$OUT/damage_matrix.md" || failed=1

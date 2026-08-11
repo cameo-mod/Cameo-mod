@@ -94,6 +94,8 @@ The essential documents, in order:
 - `tools/packs/split_faction.py` — ContentPack extraction.
 - `tools/audit/dump_resolved.py` — resolved-ruleset snapshots; refactors
   must diff empty.
+- Recurring code-health audits and freshness policy: `docs/audit/PERIODIC.md`
+  and `docs/audit/periodic.json`.
 
 ## Commit gate (absolute — no exceptions)
 
