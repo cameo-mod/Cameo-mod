@@ -3178,114 +3178,36 @@
       "burstdelays": "25",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
+        "damage": "50000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "FireMissile_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
+        "damage": "25",
+        "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "tag": "FireMissile_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1790",
       "pricing": true,
       "range": "8940",
       "reloaddelay": "225",
       "slot": "Armament",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon",
-       "^MediumMissile",
-       "^HeavyMissile"
+       "^Warhead_FireMissile_Heavy",
+       "^Effect_Flame_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_FireMissile_Heavy"
+      ],
       "weapon": "HonestJohn",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5864,114 +5786,36 @@
       "burstdelays": "25",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
+        "damage": "50000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "FireMissile_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
+        "damage": "25",
+        "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "tag": "FireMissile_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1790",
       "pricing": true,
       "range": "8940",
       "reloaddelay": "225",
       "slot": "Armament",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon",
-       "^MediumMissile",
-       "^HeavyMissile"
+       "^Warhead_FireMissile_Heavy",
+       "^Effect_Flame_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_FireMissile_Heavy"
+      ],
       "weapon": "HonestJohn",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

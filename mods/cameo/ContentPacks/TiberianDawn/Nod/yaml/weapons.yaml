@@ -258,11 +258,8 @@ LTNKMissiles:
 		Explosions: small_frag
 
 HonestJohn:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^MediumFlameWeapon
-	Inherits@3: ^HeavyFlameWeapon
-	Inherits@4: ^MediumMissile
-	Inherits@5: ^HeavyMissile
+	Inherits@wh: ^Warhead_FireMissile_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	ReloadDelay: 225
 	Burst: 2
 	BurstDelays: 25
@@ -272,61 +269,31 @@ HonestJohn:
 	TargetActorCenter: true
 	ValidTargets: Ground, Water
 	Projectile: Bullet
-		Blockable: false
-		Shadow: true
-		Inaccuracy: 750
 		Image: MISSILE
 		TrailImage: smokey
+		Speed: 250
+		Inaccuracy: 750
+		LaunchAngle: 100
+		Blockable: false
+		Shadow: true
 		TrailDelay: 1
 		TrailInterval: 1
-		Speed: 250
-		LaunchAngle: 100
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@FireMissile_Heavy: AreaDamage
 		ValidTargets: Ground, Water
-		Damage: 10000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 50000
+		FriendlyFireDamage: 30
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath, Incendiary
+	Warhead@FireMissile_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 5000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 5
-	Warhead@MediumFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 10000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 5000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 5
-	Warhead@HeavyFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 10000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 5000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 5
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 10000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 5
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 10000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 5
+		Damage: 25
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath, Incendiary
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
+		ImpactSounds: firebl3.aud
+		ImpactActors: false
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
 
 StealthTankMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
