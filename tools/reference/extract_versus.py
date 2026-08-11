@@ -71,20 +71,34 @@ SOURCES = [
     ("yr_vanilla", "YR", "ini", DOWNLOADS / "YRinis/rulesmd.ini", "yr"),
     ("cnc_reloaded", "YR", "ini",
      DOWNLOADS / "CnCReloaded-2.7.0/Tools/Map Editor/rulesmd.ini", "yr"),
-    ("mental_omega", "YR", "ini", BACKUP / "MentalOmega/rulesmd.ini", "yr"),
+    # ⚠ NOT `MentalOmega/rulesmd.ini` — that loose file is vanilla Yuri's Revenge byte
+    # for byte (both md5 cf7eb658327aff1fe7e6c4e7400eb87f, 31061 lines, 116 Verses).
+    # Harvesting it double-counts vanilla YR and yields zero Mental Omega data. The real
+    # ruleset ("Mental Omega 3.3.6 RULES CONTROL FILE", 751 Verses) lives inside
+    # expandmo99.mix; extract it with tools/reference/extract_mix_ini.py.
+    ("mental_omega", "YR", "ini", BACKUP / "MentalOmega/extracted/rulesmd_MO336.ini", "yr"),
     # DTA ships its live balance in the injected GlobalCode, NOT in Rules.ini — every
     # `Verses=` in Rules.ini/Enhance.ini is commented out (186 of them, kept as design
     # history). "Classic" and "Enhanced" are two rule sets and both are wanted.
-    ("dta_classic", "TD", "ini",
+    # DTA ships TWO rule sets and the maintainer wants both: Rules.ini is CLASSIC mode,
+    # Enhance.ini is ENHANCED mode. Both use the named `Modifier.<armor>` dialect
+    # (688 and 78 lines); the Release and Developer editions carry identical counts.
+    ("dta_classic", "TD", "ini", BACKUP / "DTA/DTA Release/INI/Base/Rules.ini", "ts"),
+    ("dta_enhanced", "TD", "ini", BACKUP / "DTA/DTA Release/INI/Base/Enhance.ini", "ts"),
+    ("dta_globalcode", "TD", "ini",
      BACKUP / "DTA/DTA Developer Edition/INI/Map Code/GlobalCode - Copy.ini", "ts"),
-    ("dta_backup", "TD", "ini",
-     BACKUP / "DTA/DTA Developer Edition/INI/BackUp/GlobalCode.ini", "ts"),
-    ("dta_enhanced", "TD", "ini",
-     BACKUP / "DTA/DTA Developer Edition/INI/Base/Enhance.ini", "ts"),
 ]
 
 INI_SECTION = re.compile(r"^\s*\[([^\]]+)\]")
 INI_VERSES = re.compile(r"^\s*Verses\s*=\s*(.+?)\s*(?:;.*)?$", re.IGNORECASE)
+# DTA (TS + Vinifera) writes NAMED per-armor keys instead of the positional list:
+#     Modifier.none=1000%
+#     Modifier.heavy=250%
+# Every `Verses=` in DTA is commented out, so looking only for the positional form
+# finds nothing and wrongly concludes DTA has no armor profiles. Named keys are also
+# safer — there is no ordering to get wrong.
+INI_MODIFIER = re.compile(r"^\s*Modifier\.([A-Za-z_]+)\s*=\s*(.+?)\s*(?:;.*)?$",
+                          re.IGNORECASE)
 
 
 def _pct(token: str):
@@ -97,15 +111,26 @@ def _pct(token: str):
 
 
 def parse_ini(path: pathlib.Path, engine: str) -> list[dict]:
-    """[Warhead] sections carrying an ACTIVE `Verses=` (commented ones are skipped)."""
+    """[Warhead] sections carrying ACTIVE armor multipliers (comments are skipped).
+
+    Handles both dialects: the positional `Verses=` list and DTA's named
+    `Modifier.<armor>=` keys, which accumulate per section.
+    """
     orders = ARMOR_ORDERS[engine]
     rows, section = [], None
+    named: dict[str, dict[str, float]] = {}
     for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
         if line.lstrip().startswith(";"):
             continue                                    # commented-out history
         head = INI_SECTION.match(line)
         if head:
             section = head.group(1)
+            continue
+        named_hit = INI_MODIFIER.match(line)
+        if named_hit and section is not None:
+            value = _pct(named_hit.group(2))
+            if value is not None:
+                named.setdefault(section, {})[named_hit.group(1).lower()] = value
             continue
         hit = INI_VERSES.match(line)
         if not hit or section is None:
@@ -120,6 +145,10 @@ def parse_ini(path: pathlib.Path, engine: str) -> list[dict]:
             # Refuse to guess: an unknown arity means an engine-extended armor list.
             row["undecoded"] = [t.strip() for t in raw]
         rows.append(row)
+    seen = {r["warhead"] for r in rows}
+    for warhead, versus in named.items():
+        if warhead not in seen:
+            rows.append({"warhead": warhead, "arity": len(versus), "versus": versus})
     return rows
 
 
