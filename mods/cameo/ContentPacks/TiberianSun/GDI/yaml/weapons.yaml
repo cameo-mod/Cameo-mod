@@ -245,71 +245,30 @@ KodiakCannon:
 		Damage: 4
 
 KodiakCannonSonic:
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^HeavyChemicalWeapon
-	Inherits@5: ^RailgunWeapon
-	Inherits@6: ^HeavyMissile
-	Inherits@7: ^HeavyBomb
-	Inherits@8: ^TeslaWeapon
-	Inherits@9: ^MagicWeapon
-	Inherits@10: ^TSSonicGrenade
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@wh2: ^Warhead_Sonic_Heavy
+	Inherits@proj: ^Projectile_Sonic_Shell
+	Inherits@fx: ^Effect_CannonHE_Heavy
+	Inherits@fx2: ^Effect_Sonic_Heavy
 	Range: 9165
 	ReloadDelay: 86
 	Burst: 3
 	BurstDelays: 4
 	Report: tnkfire4.aud
 	ValidTargets: Ground, Water
-	Warhead@HeavyChemicalWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 8000
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 4000
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 4
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 8000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 4
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 8000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 4
 	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@CannonHE_Heavy_Percentage:
-		ValidTargets: Ground, Water
 		Damage: 4
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 8000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 4
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 8000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 4000
-		DamageTypes: Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 4
-	Warhead@MagicWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 8000
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 4
+	Warhead@Sonic_Heavy:
+		Damage: 2000
+	Warhead@Sonic_Heavy_Percentage:
+		Damage: 1
+	Warhead@Effect: CreateEffect
+		Explosions: blue_med_frag
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
 
 TSSonicWeaponEffect:
 	ReloadDelay: 60

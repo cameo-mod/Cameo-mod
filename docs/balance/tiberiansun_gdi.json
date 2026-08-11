@@ -344,125 +344,27 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 50, 25, 10, 5",
+        "damage": "2000",
+        "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
+        "tag": "Sonic_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 50, 25, 10, 5",
+        "damage": "1",
+        "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": null,
-        "spread": "50",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "222",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "111",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
+        "tag": "Sonic_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "effective_avg_reliability": 0.5833,
-      "effective_base_total": 61888.0,
-      "effective_damage": 79225.76,
-      "effective_footprint_cells2": 24.9998,
-      "effective_sigma": 537.58,
+      "effective_avg_reliability": 0.9334,
+      "effective_base_total": 10000.0,
+      "effective_damage": 25312.83,
+      "effective_footprint_cells2": 12.7832,
+      "effective_sigma": 204.58,
       "pricing": true,
       "range": "9165",
       "reloaddelay": "86",
@@ -470,18 +372,14 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
+       "^Warhead_Sonic_Heavy",
+       "^Projectile_Sonic_Shell",
        "^Effect_CannonHE_Heavy",
-       "^HeavyChemicalWeapon",
-       "^RailgunWeapon",
-       "^HeavyMissile",
-       "^HeavyBomb",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^TSSonicGrenade"
+       "^Effect_Sonic_Heavy"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Sonic_Heavy"
       ],
       "weapon": "KodiakCannonSonic",
       "weapon_class_source": "template"
