@@ -361,6 +361,22 @@ INF 35% / VEH 40% / BLD 15% / AIR 10%.
 
 ---
 
+## 5b. TOOLING AVAILABLE TO AGENTS (2026-08-11)
+
+- **`gh` CLI 2.97.0 is installed** at `C:\Program Files\GitHub CLI\gh.exe`. It is NOT on
+  the default PATH for a fresh shell — prepend it:
+  `export PATH="$PATH:/c/Program Files/GitHub CLI"`. Use it for PR review comments, CI
+  status and opening PRs instead of hand-rolling `curl` against the REST API.
+  ⚠ It needs `gh auth login` (interactive, maintainer-only) before it can do anything.
+- **`openpyxl` 3.1.5** is present on the maintainer's Windows box, so `audit_balance_sheet`
+  produces a real report here. It was MISSING on the Linux box that ran PR #251, which is
+  why that PR committed `balance_sheet.md` as the 46-byte string "openpyxl not installed".
+  **Any agent running the suite on Linux must `pip install openpyxl` first** or it will
+  silently commit a degraded report.
+- **`.github/dependabot.yml`** keeps the SHA-pinned actions fresh (weekly, grouped into
+  one PR). Version updates only activate once it is on the default branch of the hosted
+  repo — it does nothing while unpushed.
+
 ## 6. LINKS
 
 `EFFECTIVE_DAMAGE.md` (the metric) · `BALANCE_PIPELINE.md` (the loop) ·

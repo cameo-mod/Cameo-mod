@@ -1,0 +1,36 @@
+# Dependabot — keeps the pinned GitHub Actions fresh.
+#
+# WHY THIS EXISTS: PR #251 pinned the third-party actions to commit SHAs
+# (appleboy/ssh-action -> 0ff4204d = v1.2.5, svenstaro/upload-release-action ->
+# 29e53e91 = v2/2.11.5). Pinning is the right call — a moving tag can be repointed at
+# malicious code, which is exactly what `tools/audit/audit_security.py` S4 checks for —
+# but a SHA never updates itself. Without this file the pins silently rot: no upstream
+# bug fix, no security patch, and nobody notices until something breaks.
+#
+# Dependabot opens a PR when an action moves, and it rewrites BOTH the SHA and the
+# trailing `# v1.2.5` comment, so the pin and its human-readable label stay in sync.
+#
+# NOTE: version updates only start once this file is on the DEFAULT BRANCH of the
+# GitHub-hosted repo. Nothing happens while it is only in a local commit.
+version: 2
+
+updates:
+  - package-ecosystem: "github-actions"
+    # "/" covers every workflow in .github/workflows (ci, packaging, deploy).
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    # One PR for all action bumps instead of one per action — the workflows share
+    # actions/checkout and actions/setup-dotnet across six jobs, so ungrouped updates
+    # would open several PRs that all touch the same two files and conflict.
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(ci)"
+    labels:
+      - "dependencies"
+      - "ci"
