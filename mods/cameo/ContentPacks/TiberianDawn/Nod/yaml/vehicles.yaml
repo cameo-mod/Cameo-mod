@@ -711,6 +711,7 @@ td_nod_buggymkii:
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
+	Inherits@BurningLasers: ^BurningLasers
 	Inherits@decoration: ^NodRankDecoration
 	Tooltip:
 		Name: Nod Buggy Mk. II
@@ -746,20 +747,48 @@ td_nod_buggymkii:
 		MuzzleSequence: muzzle
 		AmmoUsage: 0
 		PauseOnCondition: ammo < 3
-	Armament@Laser:
+	Armament@LaserBase:
 		Weapon: LaserBuggy2
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 3
-		RequiresCondition: td_nod_upgrade_blackmarketupgrades
-	Armament@LaserAA:
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades && !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
+	Armament@LaserElite:
+		Weapon: LaserBuggy2Inferno
+		LocalOffset: 171,0,43
+		MuzzleSequence: muzzle
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 3
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
+	Armament@LaserBurning:
+		Weapon: LaserBuggy2Burning
+		LocalOffset: 171,0,43
+		MuzzleSequence: muzzle
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 3
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_burninglasers
+	Armament@LaserAABase:
 		Weapon: LaserBuggy2_AA
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		AmmoUsage: 0
 		PauseOnCondition: ammo < 3
-		RequiresCondition: td_nod_upgrade_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades && !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
+	Armament@LaserAAElite:
+		Weapon: LaserBuggy2_AAInferno
+		LocalOffset: 171,0,43
+		MuzzleSequence: muzzle
+		AmmoUsage: 0
+		PauseOnCondition: ammo < 3
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
+	Armament@LaserAABurning:
+		Weapon: LaserBuggy2_AABurning
+		LocalOffset: 171,0,43
+		MuzzleSequence: muzzle
+		AmmoUsage: 0
+		PauseOnCondition: ammo < 3
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_burninglasers
 	Armament@Upgrade:
 		Weapon: FireballLauncherBuggy2
 		LocalOffset: 175,0,50

@@ -188,7 +188,8 @@
       "pricing": true,
       "range": "4000",
       "reloaddelay": "18",
-      "slot": "Armament@PRIMARY",
+      "requires": "!td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@Base",
       "versus_templates": [
        "^Warhead_Laser_Medium",
        "^Projectile_Laser_Heavy",
@@ -198,6 +199,76 @@
        "^Warhead_Laser_Medium"
       ],
       "weapon": "VenomLaser",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "100",
+        "tag": "Inferno_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "50",
+        "tag": "Inferno_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "4000",
+      "reloaddelay": "18",
+      "requires": "td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@Elite",
+      "versus_templates": [
+       "^Warhead_Inferno_Medium",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Medium"
+      ],
+      "weapon": "VenomLaserInferno",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "100",
+        "tag": "Inferno_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "50",
+        "tag": "Inferno_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "4000",
+      "reloaddelay": "18",
+      "requires": "td_nod_upgrade_burninglasers",
+      "slot": "Armament@Burning",
+      "versus_templates": [
+       "VenomLaserInferno"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Medium"
+      ],
+      "weapon": "VenomLaserBurning",
       "weapon_class_source": "template"
      }
     ],
@@ -751,7 +822,8 @@
       "pricing": true,
       "range": "6800",
       "reloaddelay": "20",
-      "slot": "Armament",
+      "requires": "!td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@Base",
       "versus_templates": [
        "^Warhead_Laser_Medium",
        "^Projectile_Laser_Heavy",
@@ -761,6 +833,78 @@
        "^Warhead_Laser_Medium"
       ],
       "weapon": "NodTurretLaser",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "100",
+        "tag": "Inferno_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "50",
+        "tag": "Inferno_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6800",
+      "reloaddelay": "20",
+      "requires": "td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@Elite",
+      "versus_templates": [
+       "^Warhead_Inferno_Medium",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Medium"
+      ],
+      "weapon": "NodTurretLaserInferno",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "100",
+        "tag": "Inferno_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "50",
+        "tag": "Inferno_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6800",
+      "reloaddelay": "20",
+      "requires": "td_nod_upgrade_burninglasers",
+      "slot": "Armament@Burning",
+      "versus_templates": [
+       "NodTurretLaserInferno"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Medium"
+      ],
+      "weapon": "NodTurretLaserBurning",
       "weapon_class_source": "template"
      }
     ],
@@ -858,7 +1002,8 @@
       "pricing": true,
       "range": "9600",
       "reloaddelay": "96",
-      "slot": "Armament",
+      "requires": "!td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@Base",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -868,6 +1013,106 @@
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "LaserObelisk",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "96000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "48",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "9600",
+      "reloaddelay": "96",
+      "requires": "td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@Elite",
+      "versus_templates": [
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "LaserObelisk",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "96000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "48",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Inferno_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "12",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Inferno_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "9600",
+      "reloaddelay": "96",
+      "requires": "td_nod_upgrade_burninglasers",
+      "slot": "Armament@Burning",
+      "versus_templates": [
+       "LaserObelisk",
+       "^Warhead_Inferno_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Laser_Heavy",
+       "^Warhead_Inferno_Heavy"
+      ],
+      "weapon": "LaserObeliskBurning",
       "weapon_class_source": "template"
      }
     ],
@@ -3601,6 +3846,34 @@
      "Research"
     ]
    },
+   "td_nod_upgrade_burninglasers": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Burning Lasers",
+    "prerequisites": [
+     "~td_nod_templeofnod",
+     "td_nod_templeprime",
+     "td_nod_upgrade_elitecapacitors",
+     "!td_nod_upgrade_burninglasers"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
    "td_nod_upgrade_cyberneticmodifications": {
     "build_limit": {
      "src": "inherited",
@@ -4352,8 +4625,8 @@
       "pricing": true,
       "range": "5274",
       "reloaddelay": "60",
-      "requires": "td_nod_upgrade_blackmarketupgrades",
-      "slot": "Armament@Laser",
+      "requires": "td_nod_upgrade_blackmarketupgrades && !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@LaserBase",
       "versus_templates": [
        "^Warhead_Laser_Light",
        "^Projectile_Laser_Heavy",
@@ -4363,6 +4636,78 @@
        "^Warhead_Laser_Light"
       ],
       "weapon": "LaserBuggy2",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "100",
+        "tag": "Inferno_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "50",
+        "tag": "Inferno_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "5274",
+      "reloaddelay": "60",
+      "requires": "td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@LaserElite",
+      "versus_templates": [
+       "^Warhead_Inferno_Light",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Light"
+      ],
+      "weapon": "LaserBuggy2Inferno",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "100",
+        "tag": "Inferno_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "50",
+        "tag": "Inferno_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "5274",
+      "reloaddelay": "60",
+      "requires": "td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_burninglasers",
+      "slot": "Armament@LaserBurning",
+      "versus_templates": [
+       "LaserBuggy2Inferno"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Light"
+      ],
+      "weapon": "LaserBuggy2Burning",
       "weapon_class_source": "template"
      },
      {
@@ -4396,8 +4741,8 @@
       "pricing": true,
       "range": "7911",
       "reloaddelay": "60",
-      "requires": "td_nod_upgrade_blackmarketupgrades",
-      "slot": "Armament@LaserAA",
+      "requires": "td_nod_upgrade_blackmarketupgrades && !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@LaserAABase",
       "versus_templates": [
        "LaserBuggy2"
       ],
@@ -4405,6 +4750,76 @@
        "^Warhead_Laser_Light"
       ],
       "weapon": "LaserBuggy2_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "100",
+        "tag": "Inferno_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "50",
+        "tag": "Inferno_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "7911",
+      "reloaddelay": "60",
+      "requires": "td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@LaserAAElite",
+      "versus_templates": [
+       "LaserBuggy2Inferno"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Light"
+      ],
+      "weapon": "LaserBuggy2_AAInferno",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "100",
+        "tag": "Inferno_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "50",
+        "tag": "Inferno_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "7911",
+      "reloaddelay": "60",
+      "requires": "td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_burninglasers",
+      "slot": "Armament@LaserAABurning",
+      "versus_templates": [
+       "LaserBuggy2Burning"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Light"
+      ],
+      "weapon": "LaserBuggy2_AABurning",
       "weapon_class_source": "template"
      }
     ],

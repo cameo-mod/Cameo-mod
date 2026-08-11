@@ -457,6 +457,7 @@ td_nod_laserturret:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@shape: ^1x1Shape
 	Inherits@EliteCapacitors: ^EliteCapacitors
+	Inherits@BurningLasers: ^BurningLasers
 	Inherits@decoration: ^NodRankDecoration
 	Valued:
 		Cost: 1000
@@ -478,10 +479,21 @@ td_nod_laserturret:
 		RealignDelay: -1
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
-	Armament:
+	Armament@Base:
 		Weapon: NodTurretLaser
 		LocalOffset: 500,-80,140, 500,80,140
 		MuzzleSequence: muzzle
+		RequiresCondition: !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
+	Armament@Elite:
+		Weapon: NodTurretLaserInferno
+		LocalOffset: 500,-80,140, 500,80,140
+		MuzzleSequence: muzzle
+		RequiresCondition: td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
+	Armament@Burning:
+		Weapon: NodTurretLaserBurning
+		LocalOffset: 500,-80,140, 500,80,140
+		MuzzleSequence: muzzle
+		RequiresCondition: td_nod_upgrade_burninglasers
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: disabled
@@ -555,6 +567,7 @@ td_nod_obeliskoflight:
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@EliteCapacitors: ^EliteCapacitors
+	Inherits@BurningLasers: ^BurningLasers
 	Inherits@decoration: ^NodRankDecoration
 	Valued:
 		Cost: 1800
@@ -573,9 +586,18 @@ td_nod_obeliskoflight:
 	-WithSpriteBody:
 	WithChargeSpriteBody:
 		Sequence: active
-	Armament:
+	Armament@Base:
 		Weapon: LaserObelisk
 		LocalOffset: -43,-85,1259
+		RequiresCondition: !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
+	Armament@Elite:
+		Weapon: LaserObelisk
+		LocalOffset: -43,-85,1259
+		RequiresCondition: td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
+	Armament@Burning:
+		Weapon: LaserObeliskBurning
+		LocalOffset: -43,-85,1259
+		RequiresCondition: td_nod_upgrade_burninglasers
 	AttackCharges:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled

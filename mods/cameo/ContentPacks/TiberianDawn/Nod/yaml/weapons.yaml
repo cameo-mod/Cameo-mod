@@ -78,6 +78,41 @@ NodTurretLaser:
 	# Warhead@EffectAir: CreateEffect
 	# 	-ImpactSounds:
 
+NodTurretLaserInferno:
+	Inherits@wh: ^Warhead_Inferno_Medium
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	Burst: 2
+	BurstDelays: 4
+	ReloadDelay: 20
+	Range: 6800
+	Report: vpalwe2d.aud
+	ValidTargets: Ground, Water
+	Projectile: LaserZap
+		Width: 96
+		Duration: 12
+		ZOffset: 2047
+		Color: FF0000
+		GlowIntensity: 0.5
+		SecondaryBeam: true
+		SecondaryBeamWidth: 48
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF
+	Warhead@Inferno_Medium:
+		Damage: 12000
+	Warhead@Inferno_Medium_Percentage:
+		Damage: 6
+
+NodTurretLaserBurning:
+	Inherits: NodTurretLaserInferno
+	Burst: 10
+	BurstDelays: 1
+	FirstBurstTargetOffset: -500,0,0
+	FollowingBurstTargetOffset: 100,0,0
+	Projectile: LaserZap
+		TrackTarget: false
+		Inaccuracy: 0
+
 SmallTiberiumExplosion:
 	Inherits: Chemspray
 	Warhead@Chemical_Light:
@@ -503,6 +538,24 @@ LaserObelisk:
 	# Warhead@EffectAir: CreateEffect
 	# 	-ImpactSounds:
 
+LaserObeliskBurning:
+	Inherits: LaserObelisk
+	Inherits@inferno: ^Warhead_Inferno_Heavy
+	ReloadDelay: 96
+	Range: 9600
+	ValidTargets: Ground, Water
+	Burst: 10
+	BurstDelays: 1
+	FirstBurstTargetOffset: -500,0,0
+	FollowingBurstTargetOffset: 100,0,0
+	Projectile: LaserZap
+		TrackTarget: false
+		Inaccuracy: 0
+	Warhead@Inferno_Heavy:
+		Damage: 24000
+	Warhead@Inferno_Heavy_Percentage:
+		Damage: 12
+
 ChemRockets:
 	Inherits: ^Grenade
 	Inherits@2: ^LightChemicalWeapon
@@ -850,23 +903,61 @@ LaserBuggy2:
 			Helicopter: 1
 			Spaceship: 1
 
+LaserBuggy2Inferno:
+	Inherits@wh: ^Warhead_Inferno_Light
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	ReloadDelay: 60
+	Burst: 3
+	BurstDelays: 4
+	Range: 5274
+	Report: vpalwe2d.aud
+	ValidTargets: Ground, Water
+	Projectile: LaserZap
+		Width: 64
+		Duration: 12
+		ZOffset: 2047
+		Color: FF000055
+		SecondaryBeam: true
+		SecondaryBeamWidth: 32
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF
+	Warhead@Inferno_Light:
+		Damage: 6000
+	Warhead@Inferno_Light_Percentage:
+		Damage: 3
+
+LaserBuggy2Burning:
+	Inherits: LaserBuggy2Inferno
+	Burst: 10
+	BurstDelays: 1
+	FirstBurstTargetOffset: -500,0,0
+	FollowingBurstTargetOffset: 100,0,0
+	Projectile: LaserZap
+		TrackTarget: false
+		Inaccuracy: 0
+
 LaserBuggy2_AA:
 	Inherits: LaserBuggy2
 	Range: 7911
 	ValidTargets: Air
-	Warhead@LightFlameWeapon: SpreadDamage
+
+LaserBuggy2_AAInferno:
+	Inherits: LaserBuggy2Inferno
+	Range: 7911
+	ValidTargets: Air
+	Warhead@Inferno_Light:
 		ValidTargets: Air
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Inferno_Light_Percentage:
 		ValidTargets: Air
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+
+LaserBuggy2_AABurning:
+	Inherits: LaserBuggy2Burning
+	Range: 7911
+	ValidTargets: Air
+	Warhead@Inferno_Light:
 		ValidTargets: Air
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Air
-	Warhead@LaserWeapon: SpreadDamage
-		ValidTargets: Air
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Inferno_Light_Percentage:
 		ValidTargets: Air
 
 FireballLauncherBuggy2:
@@ -1254,6 +1345,38 @@ VenomLaser:
 			Bomber: 1
 			Helicopter: 1
 			Spaceship: 1
+
+VenomLaserInferno:
+	Inherits@wh: ^Warhead_Inferno_Medium
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	ReloadDelay: 18
+	Range: 4000
+	Report: vpalwe2d.aud
+	ValidTargets: Ground, Water, Air
+	Projectile: LaserZap
+		Width: 128
+		Duration: 12
+		ZOffset: 2047
+		Color: FF000055
+		SecondaryBeam: true
+		SecondaryBeamWidth: 64
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF
+	Warhead@Inferno_Medium:
+		Damage: 8000
+	Warhead@Inferno_Medium_Percentage:
+		Damage: 4
+
+VenomLaserBurning:
+	Inherits: VenomLaserInferno
+	Burst: 10
+	BurstDelays: 1
+	FirstBurstTargetOffset: -500,0,0
+	FollowingBurstTargetOffset: 100,0,0
+	Projectile: LaserZap
+		TrackTarget: false
+		Inaccuracy: 0
 
 NodCommandoLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
