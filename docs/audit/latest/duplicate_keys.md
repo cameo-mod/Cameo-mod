@@ -21,9 +21,9 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml | 221, 222 | japan_waveforceturret | Inherits@AntiTank | ^PrioritizeVehicle vs ^PrioritizeTank |
 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/templates.yaml | 432, 433 | ^RAFIX | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml | 14, 15 | ra1_soviets_barracks | Inherits@ra1_soviets_barracks | ^IsBarrack vs ^Conscription |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 2457, 2460 | ThermobaricNuclearMaverick | Inherits@2 | ^Warhead_Flame_Heavy vs ^NuclearWarhead |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 2581, 2583 | HammerTankCannonThermobaric | Inherits@3 | ^Projectile_Flame_Medium vs HammerTankCannon |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 2688, 2690 | KotinCannonThermobaric | Inherits@3 | ^Projectile_Flame_Medium vs KotinCannon |
+| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 2097, 2100 | ThermobaricNuclearMaverick | Inherits@2 | ^Warhead_Flame_Heavy vs ^NuclearWarhead |
+| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 2221, 2223 | HammerTankCannonThermobaric | Inherits@3 | ^Projectile_Flame_Medium vs HammerTankCannon |
+| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 2328, 2330 | KotinCannonThermobaric | Inherits@3 | ^Projectile_Flame_Medium vs KotinCannon |
 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml | 255, 256 | ra2_allies_alliedservicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
 | mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml | 246, 247 | ra2_soviets_servicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml | 161, 162 | asianalliance_asianservicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
@@ -53,7 +53,7 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml | 199, 200 | td_nod_repairfacility | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml | 228, 236 | td_nod_templeofnod | Inherits | ^TDBuilding vs ^BuildingPlugProducer |
 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml | 526, 531 | td_nod_chemicalattackbike | Inherits | ^Vehicle vs ^GenericGroundDetector |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 479, 481 | Dragon | Inherits | ^HeavyAAWeapon vs ^HeavyMissile |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 478, 480 | Dragon | Inherits | ^HeavyAAWeapon vs ^HeavyMissile |
 | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml | 216, 217 | cabal_servicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
 | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml | 760, 761 | cabal_cyborgcommando | Inherits@Template | ^HeavyInfantryTemplate vs ^HeroInfantryTemplate |
 | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml | 846, 847 | cabal_cyborgcommandov2 | Inherits@Template | ^HeavyInfantryTemplate vs ^HeroInfantryTemplate |
@@ -179,7 +179,7 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml | 33, 35 | ra1_soviets_barracks | ProvidesPrerequisite |
 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml | 731, 737 | ra1_soviets_commissar | WithDecoration@Carryall |
 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml | 1759, 1762 | ra1_soviets_monstertank | WithAmmoPipsDecoration |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 1411, 1413 | FLAK-23-AG | ReloadDelay |
+| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 1051, 1053 | FLAK-23-AG | ReloadDelay |
 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/aircraft.yaml | 155, 170 | ra2_allies_blackeagle | Selectable |
 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml | 264, 268 | ra2_allies_pillbox | ActorStatValues |
 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml | 372, 374 | ra2_allies_guardiangi | ActorStatValues |
@@ -233,7 +233,7 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml | 929, 941 | latinsyndicate_carteltruck | WithSpriteTurret |
 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml | 1192, 1199 | latinsyndicate_collectiontruck | StoresResources |
 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml | 1379, 1428 | latinsyndicate_topolm | ActorStatValues |
-| mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml | 673, 680 | RA2GrenadePack | Report |
+| mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml | 660, 667 | RA2GrenadePack | Report |
 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml | 212, 236 | tkm_airpad | ProvidesPrerequisite@buildingname |
 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml | 245, 258 | tkm_observationvan | Selectable |
 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml | 280, 289 | tkm_techcenter | Selectable |

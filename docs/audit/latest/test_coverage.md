@@ -3,7 +3,7 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (2 file(s)) | 24 | >= 24 |
-| T2 | `def test_*` in tools/tests (13 file(s)) | 136 | >= 136 |
+| T2 | `def test_*` in tools/tests (13 file(s)) | 136 | >= 148 |
 | T3 | modules with no test mentioning them | 215 | <= 215 |
 
 
@@ -234,4 +234,9 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/rename/convert_maps.py | convert_maps |
 | python | tools/rename/curate_map.py | curate_map |
 | python | tools/rename/safe_rename.py | safe_rename |
+
+
+## FAIL
+
+- T2: 136 python tests < floor 148
 

@@ -312,7 +312,8 @@ def main() -> int:
     args = sys.argv[1:]
     if not args or "--families" in args:
         print(f"# Weapon efficiency K — all families at Heavy, 20 000 total damage\n")
-        print(f"reference HP {tm.reference_hp():,} · blob {tm.A_BLOB} cell² · "
+        print(f"reference HP {tm.reference_hp():,} (design; roster measures "
+              f"{tm.measured_reference_hp():,}) · blob {tm.A_BLOB} cell² · "
               f"own cell {tm.A_SELF} cell²\n")
         print(family_table())
         return 0

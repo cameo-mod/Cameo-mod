@@ -141,7 +141,7 @@ ambiguous: Lunar Tiger -> schwarzermond_lunartiger, schwarzermond_promotion_luna
 | Eden EMP Tiger | eden_tiger_emp | Damage 32000 vs game 100400 |
 | Recon Bike | td_nod_reconbike | HP 10000 vs game 17500; Damage 16000 vs game 32200; Reload 104 vs game 65 |
 | Chemical Attack Bike | td_nod_chemicalattackbike | HP 12500 vs game 22500; Damage 32000 vs game 64300; Reload 100 vs game 80 |
-| Heatray Tank | ra1_soviets_heatraytank | Damage 6000 vs game 27000 |
+| Heatray Tank | ra1_soviets_heatraytank | Damage 6000 vs game 24012 |
 | Nanodrone Buggy | japan_nanodronebuggy | Damage 31108 vs game 23431 |
 | Waveforce Tank | japan_waveforcetank | Damage 30000 vs game 21110 |
 | Storm Raider | ixian_stormraider | Damage 60000 vs game 120160 |
@@ -172,7 +172,7 @@ ambiguous: Ranger -> ra1_allies_ranger, wc2_humans_upgrade_ranger | Battle Fortr
 | sheet unit | actor | mismatches |
 |---|---|---|
 | Apache | forgotten_apache | HP 45000 vs game 30000; Damage 16000 vs game 24152; Reload 22 vs game 15 |
-| Venom | td_nod_venom | Damage 8000 vs game 8625 |
+| Venom | td_nod_venom | Damage 8000 vs game 8629 |
 | Black Hawk | ra1_allies_blackhawk | Damage 5000 vs game 16050; Reload 8 vs game 6 |
 | Sky Hawk | japan_skyhawk | Damage 12000 vs game 84167; Reload 8 vs game 128 [multi-reload] |
 | Rocket Angel | japan_rocketangel | HP 25000 vs game 24000; Speed 160 vs game 140; Damage 24000 vs game 76400; Reload 34 vs game 40 |
@@ -216,7 +216,7 @@ ambiguous: Rocketeer -> ra2_allies_rocketeer, tkm_rocketeer | Twister -> futuret
 
 | sheet unit | actor | mismatches |
 |---|---|---|
-| Nod Laser Turret | td_nod_laserturret | Damage 24000 vs game 25250 |
+| Nod Laser Turret | td_nod_laserturret | Damage 24000 vs game 25262 |
 | Nod Gun Turret | td_nod_gunturret | Damage 24000 vs game 19100 |
 | Sentry Gun | ra2_soviets_sentrygun | Damage 12000 vs game 16100; Reload 20 vs game 27 |
 | Gatling Cannon | yuri_gatlingcannon | Damage 4000 vs game 36153 |

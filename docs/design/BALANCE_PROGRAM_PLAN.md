@@ -45,7 +45,9 @@ status rather than keeping its own copy.
 | **W14** | ~~Renormalise `avg_versus`~~ — ✖ DROPPED, the multi-role premium is intended; folded into W13 rule 8b | ✖ DROPPED | — | — |
 | **W15** | `%`-twin fix + `reference_hp` → 200 000 — **PREREQUISITE for W17** | ✅ DONE | Claude | — |
 | **W16** | Charge-up discount PROPORTIONAL to real charge share (supersedes W4's flat 0.75×) | ⬜ READY | Claude | W4 |
-| **W17** | Remove the 2000-damage grid; retire FirepowerMultiplier as a fine-tuning knob | ⬜ READY (unblocked by W15) | Claude | W15 ✅ |
+| **W17** | ~~Remove the 2000-damage grid~~ (done as a 200 grid in W15); retire FirepowerMultiplier as a fine-tuning knob | ⬜ READY (unblocked by W15) | Claude | W15 ✅ |
+| **W18** | Roll the 0.1% percentage unit out into yaml (`PercentageDenominator: 1000`, ×10 the values) | ⛔ BLOCKED | Claude | W15 ✅, **set B free** |
+| **W19** | Collapse the 195 `SpreadDamage` ExtraDamage chips into the main warhead (KEEP the 34 sniper `OpenToppedDamage`) | ⛔ BLOCKED | Claude | W13, **set B free** |
 
 **Recommended order:** W2 ∥ W3 → W4 → W5 → W6 → (W7, W9) → W8 → W10 → W11 → W12.
 `∥` = safe to run in parallel (disjoint file sets).
@@ -555,6 +557,40 @@ to `measured_reference_hp()` and is still printed by the family table, the
 the measured value stays BELOW the constant — if the roster ever catches up, the constant
 has stopped being the middle it was chosen to be and wants a re-ruling.
 
+**3. ✅ 10x GRANULARITY (maintainer order 2026-08-11, same session).**
+*"Integer steps of 1 was not enough … scale it in steps of 0.1 while also scaling the
+flat damage in steps of 200, so it is the same ratio as before but 10x more granular."*
+
+| | before | after |
+|---|---|---|
+| flat damage grid | 2000 | **200** |
+| percentage twin | whole percent (1%) | **per-mille (0.1%)** |
+| ratio | 1% per 2000 damage | **unchanged** — 16000 damage is still 8% |
+
+The two grids are now in **lockstep: 200 flat damage == exactly 0.1 percentage point**, so
+the twin tracks its weapon's Damage instead of rounding to the nearest whole percent. The
+old grid had to snap 9000/3 = 3000 up to 4000 and hand a 33% remainder to
+`FirepowerMultiplier`; on the 200 grid it lands exactly.
+
+- C#: `AreaDamagePercentageWarhead.PercentageDenominator` — a DENOMINATOR, not a
+  multiplier (it sits beside `IntegrityScale`/`PhysicalStateScale`, which scale UP;
+  the `[Desc]` says so explicitly). `100` = whole percent = the engine convention and
+  the **default, so no existing weapon changes behaviour**; `1000` = per-mille.
+  Validated at load through a new `AreaDamageWarhead.ValidateFields()` hook —
+  implementing `IRulesetLoaded<WeaponInfo>` in the subclass instead would REPLACE the
+  base's explicit implementation, leaving `effectiveRange` unbuilt and every ring empty.
+- Tools: `formula.DAMAGE_STEP = 200`; `percentage_twin(per, denominator)` takes the unit
+  from the node; `twin_denominator()` reads it from the ledger record; `extract_stats`
+  records `percentage_denominator` **only when the node states it**, so ledgers of
+  weapons still on the default diff empty.
+
+⚠ **The unit is threaded, never assumed** — writing whole percent into a per-mille node
+(or the reverse) is a silent 10x error in a number nobody re-reads.
+
+⚠ **The yaml rollout is NOT in this commit — see W18.** The mechanism is live and inert:
+nothing writes `PercentageDenominator: 1000` yet, so every weapon still behaves exactly
+as before.
+
 ---
 
 ### W16 — Charge-up proportional to real charge share ⬜ READY · supersedes W4's flat rate
@@ -588,7 +624,14 @@ defaults — `InitialChargeDelay` defaults to 22.
 
 ---
 
-### W17 — Remove the 2000-damage grid ⛔ BLOCKED on W15
+### W17 — Remove the damage grid ⬜ READY (unblocked by W15)
+
+⚠ **Partly superseded by W15's regrid.** The maintainer chose a **200 grid "for sanity"**,
+not free-valued Damage, so "remove the grid" is now "the grid is 200 and the %-twin tracks
+it exactly". What remains of W17 is the SECOND half: retiring `FirepowerMultiplier` as a
+fine-tuning knob, which the finer grid makes possible (the residual a 200 grid leaves is
+≤100 damage, i.e. under 0.05% of a 200 000-HP reference actor — below the noise the FP
+knob existed to absorb).
 
 Free-valued Damage means the pipeline solves exactly:
 `Damage = target_dps × eff_reload / (burst × K)` — no remainder, so
@@ -600,6 +643,81 @@ defined.** So FP has no remaining pricing role at all.
 
 Versus values keep integer steps of 1 and the ordering law, but the floor may sit
 anywhere without tier restriction (W13 rule 5).
+
+---
+
+### W18 — Roll the 0.1% unit out into yaml ⛔ BLOCKED on set B (Devin, W2)
+
+W15 shipped the MECHANISM; this ships the CONTENT. Blocked purely by file ownership:
+every file involved is set B (`mods/cameo/weapons/**`, `ContentPacks/**/weapons.yaml`),
+which Devin holds while W2 runs. **Do not start this until W2 lands** — §2 is not advisory.
+
+Measured scope (2026-08-11, `Warhead@*Percentage` nodes carrying an explicit `Damage`):
+
+| warhead type | explicit Damage | inherits Damage | can go per-mille? |
+|---|---|---|---|
+| `HealthPercentageDamage` (stock) | **2611** | 135 | ✗ — no such field; must migrate type first |
+| `AreaDamagePercentage` (Cameo) | **182** | 1 | ✓ |
+
+**Order of operations** (each step boot-gated; the whole thing is behaviour-preserving):
+1. `gen_weapon_template.py` emits `PercentageDenominator: 1000` on every `_Percentage`
+   twin and `pct_damage = damage // 200` (2000 damage still = 1.0%, now written `10`).
+2. Regenerate the shared templates; `verify_generator_sync.py` drift back to its
+   expected value. ⚠ This rewrites `mods/cameo/weapons/weapons.yaml` — **set B**.
+3. `×10` every explicit twin `Damage` on a node that just gained the finer unit.
+   A unit change, NOT a balance change: assert the resolved percentage is identical
+   before/after with `tools/audit/review_resolve_diff.py`.
+4. Migrate the 2611 stock `HealthPercentageDamage` nodes to `AreaDamagePercentage`
+   (already documented as a behaviour-preserving drop-in) and ×10 them too.
+
+⚠ **Deleting or retyping a `Warhead@` on a template orphans child BARE overrides → an
+abstract warhead → NRE at `CreateBasic` with no weapon name in the stack.** Run
+`python tools/audit/find_empty_warhead.py` (expect 0) after EVERY batch, not at the end.
+
+**VERIFY:** `grep -rc "PercentageDenominator" mods/cameo` > 0 and
+`python tools/balance/extract_stats.py --check` = 0 drifted.
+
+---
+
+### W19 — Collapse the `ExtraDamage` chips into the main warhead ⬜ READY (design), ⛔ content BLOCKED on set B
+
+Maintainer 2026-08-11: *"extra damage warheads are no longer needed — after our new
+balance formula that can take into account everything from the projectile like spread and
+speed, we can collapse it into the main damage warhead (and later change it based on the
+data-mining synthesis)."*
+
+The reasoning holds and is reinforced by the corpus: the chip is a SECOND warhead, and
+2+ warhead weapons measure a median span of 58 against 75 for single-warhead ones — chips
+flatten exactly the rock-paper-scissors W13 is being built to sharpen. K now measures
+footprint, reliability and profile directly, so the chip no longer pays for anything the
+model cannot see.
+
+Measured scope (229 nodes, 33 files) — and it does **not** collapse uniformly:
+
+| chip type | nodes | families | verdict |
+|---|---|---|---|
+| `SpreadDamage` | **195** | Tesla 184 · Laser 5 · Railgun 1 · Magic 1 | ✓ COLLAPSE — a damage bonus with a bespoke Versus |
+| `OpenToppedDamage` | **34** | Sniper only (`Sniper_Light_ExtraDamage` 26, `SniperWeaponExtraDamage` 8) | ✗ **KEEP** |
+
+⚠ **The 34 sniper chips are not damage chips at all.** `OpenToppedDamage` is the MECHANIC
+by which a sniper hits passengers inside an open-topped transport. Folding it into the main
+warhead does not "merge damage", it deletes the ability — the sniper stops being able to
+shoot a garrison. Collapse the 195 `SpreadDamage` chips; leave the sniper's alone.
+
+The 195 carry bespoke per-family Versus (`CHIPS` / `CHIP_FLOOR` in
+`gen_weapon_template.py`: Tesla = anti-armored-infantry + anti-shield, floors Laser 9 /
+Railgun 10 / Tesla 10). Collapsing therefore means the MAIN warhead's profile must absorb
+that role — which is W13's job, not a mechanical merge. **Sequence W19 after W13** so the
+chip's identity is folded into a profile that was designed with it in mind, rather than
+dropped and re-invented.
+
+Damage bookkeeping: the chip is 50% of main and EXCLUDED from the damage total
+(`spread_damage_sum`), so a naive delete is a real nerf and a naive merge (`main += chip`)
+is a real buff. The collapse is behaviour-preserving only against the RESOLVED effective
+damage — verify with `tools/audit/review_resolve_diff.py`, as in the 3-way split.
+
+**DONE WHEN** the 195 `SpreadDamage` chips are gone, the sniper's 34 `OpenToppedDamage`
+warheads remain, `find_empty_warhead.py` = 0, and the generator no longer emits `CHIPS`.
 
 ---
 
