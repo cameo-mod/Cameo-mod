@@ -28,6 +28,28 @@ committed: `^MissileVehicleTemplate` + 10 reassignments (missile-MLRS family + N
 removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
 
 **Queue (priority order):**
+- **[🔴 P1 BUG — 77 live weapons deal NO flame damage] `^LightFlameWeapon` is a dead
+  warhead.** `mods/cameo/weapons/weapons.yaml` `^LightFlameWeapon` sets
+  `Warhead@LightFlameWeapon: SpreadDamage` with `Spread: 500` **and** `Range: 500` — a
+  SINGLE `Range` value. The engine (`AreaDamageWarhead.cs` + upstream
+  `SpreadDamageWarhead.cs`) then sets `effectiveRange = [500]`, and `GetDamageFalloff`
+  loops `for (i = 1; i < effectiveRange.Length; i++)` — which never runs — and
+  **returns 0**. So `Damage: 1000` is delivered as **zero at every distance**, silently:
+  load-time validation accepts `Range.Length == 1`. 77 live weapons inherit it
+  (`NodTurretLaser`, `HonestJohn`, `VenomLaser`, `FireRockets*`, `SiegeMortar*`,
+  `HeatRayBeam*`, …); one more weapon has the same shape on `Warhead@2`
+  (`Range: 5000`, `Falloff: 100, 100`). **Fix = delete the `Range: 500` line** so
+  `Spread: 500` defines the geometry as intended. That is a warhead change (CLAUDE.md
+  rule 4/5) → needs an explicit maintainer order, and it will make 77 weapons suddenly
+  start dealing their flame damage, so it wants a balance pass with it. Detected by the
+  engine-fidelity fix in [`EFFECTIVE_DAMAGE.md`](EFFECTIVE_DAMAGE.md) §4.
+- **[DECISION NEEDED] `effective_damage`: two open rulings.** (a) Do
+  `*_ExtraDamage` chips count? `formula.spread_damage_sum` excludes them (they are paid
+  for by K / charge delay); the metric includes them — both cannot be right once the
+  column is priced on. (b) Derived fields now sit in the RAW-STATS-ONLY ledger,
+  contradicting `BALANCE_PIPELINE.md` §2; recommendation is to split them into
+  `docs/balance/derived/`. Full spec + improvement roadmap:
+  [`EFFECTIVE_DAMAGE.md`](EFFECTIVE_DAMAGE.md).
 - **[NEXT — needs a maintainer warhead order] Adopt the Sonic family.** `^Warhead_Sonic_*` now bakes
   the `SonicDebuff` mark (`5a14355e6`), but **nothing inherits it**, so it is inert. Candidates:
   TS GDI `TSSonicZapWeapon` / `TSSonicZapWeaponSonic` (the Disruptor — currently Tesla + Magic),

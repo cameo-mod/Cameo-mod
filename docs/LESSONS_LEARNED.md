@@ -173,9 +173,17 @@ codebase.
 - **Exactly 5 stats must be unique within a class** — checked against each other; the uniqueness audit must enforce THESE AND ONLY THESE:
   1. `HP`
   2. `Speed`
-  3. **effective damage per shot** = Σ(all offensive warhead `Damage`) × `FirepowerMultiplier`
+  3. **uniqueness damage per shot** = Σ(all offensive warhead `Damage`) × `FirepowerMultiplier`
   4. `ReloadDelay` — the RAW value, **NOT** the effective/burst-adjusted reload
   5. `Range`
+
+> ⚠ **Do not confuse #3 with the ledger column `effective_damage`.** They are different
+> quantities that were both called "effective damage" until 2026-08-11. #3 is the
+> uniqueness stat above (chips EXCLUDED, FirepowerMultiplier APPLIED). The ledger's
+> `effective_damage` is the area-integrated metric (chips INCLUDED, FirepowerMultiplier
+> NOT applied, weighted by blast footprint and hit reliability) — spec:
+> [`docs/design/EFFECTIVE_DAMAGE.md`](design/EFFECTIVE_DAMAGE.md). Never feed one to the
+> other's consumer.
 - `FirepowerMultiplier` alone — or any single one of these values in isolation — need NOT be unique; on its own it is meaningless. This **supersedes** any earlier "make effective DPS unique via FirepowerMultiplier" rule: DPS is derived, and uniqueness lives on the 5 raw stats above, with #3 (damage×FP) and #4 (raw ReloadDelay) checked **separately** (two units may share one if they differ on the other).
 - Break ties by nudging a stat on its own grid: `Speed` steps of **1** (infantry) / **5** (vehicles, aircraft, ships), `Range` steps of **10**, `Damage` steps of **2000** (then FP-multiplier fine-tune), `HP` steps of **1000**.
 - **CODE NOTE:** `propose_class_rebalance.resolve_dps_uniqueness` and the uniqueness audit currently key on *effective DPS* — they must be updated to key on the 5 stats above (raw damage×FP and raw ReloadDelay separately).
