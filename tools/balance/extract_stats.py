@@ -96,6 +96,29 @@ def stat(resolved, local, trait: str, field: str):
     return {"v": v, "src": src}
 
 
+def charge_up(resolved, local):
+    """The actor's charge-up attack trait + provenance, or None.
+
+    Charge-up is an ACTOR property, not a weapon one (maintainer ruling
+    2026-08-11): the delay inflates the effective reload AND leaves the unit
+    helpless while it winds up, neither of which a weapon's own stats show.
+    `formula.charge_price_multiplier` turns this into the 0.75x price discount.
+
+    Recorded for EVERY charge trait, including `AttackTesla`, which formula
+    deliberately excludes from the discount — the data should show what the tree
+    actually has, and the pricing decision belongs in one place, not two.
+    """
+    known = formula.CHARGE_UP_TRAITS | formula.CHARGE_UP_EXCLUDED_TRAITS
+    for c in resolved.children:
+        base = c.key.split("@", 1)[0]
+        if base not in known:
+            continue
+        lt = child(local, c.key) if local is not None else None
+        src = f"{rel(lt.file)}#{c.key}" if lt is not None else "inherited"
+        return {"v": base, "src": src}
+    return None
+
+
 def defaults_role_templates() -> dict[str, str]:
     """Map full role template names to subtype names from defaults.yaml.
 
@@ -590,6 +613,9 @@ def extract_actor(rs, key: str, section: str) -> dict | None:
     fp = firepower_multiplier(resolved, local)
     if fp:
         u["firepower_multiplier"] = fp
+    chg = charge_up(resolved, local)
+    if chg:
+        u["charge_up"] = chg
     sub = actor_subtype(rs, local, section)
     # design judgment inputs — seeded by Phase 3 from the legacy sheet;
     # null until then (they never exist in yaml).  Subtype is auto-derived

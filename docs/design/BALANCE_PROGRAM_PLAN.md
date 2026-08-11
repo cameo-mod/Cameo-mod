@@ -32,7 +32,7 @@ status rather than keeping its own copy.
 | **W1** | K coefficient + target model (measured Versus weights, capped density) | ✅ DONE `f8421d345` | Claude | — |
 | **W2** | `^LightFlameWeapon` → 3-way split + new `^Warhead_Inferno_*` family | 🔵 IN PROGRESS (Devin, 2026-08-11) | **Devin** | — |
 | **W3** | Ledger split: raw stays, derived moves to `docs/balance/derived/` | ✅ DONE | Claude | W1 |
-| **W4** | Retire weapon-class K; charge-up becomes an ACTOR property | ⬜ READY | Claude | W1 |
+| **W4** | Retire weapon-class K; charge-up becomes an ACTOR property | ✅ DONE | Claude | W1 |
 | **W5** | Missing metrics: overkill/TTK, range advantage, ValidTargets, MinRange, AttackDelay | ⬜ READY | Claude | W1 |
 | **W6** | C# `ModifiesCombatProportionalToPhysicalState` (+ pitch/glow hooks) | ⬜ READY | either | — |
 | **W7** | Sonic → `Resonance` meter (no new C# needed) | ⬜ READY | either | — |
@@ -205,12 +205,40 @@ and `ls docs/balance/derived/*.json | wc -l` → 33
   Obelisk of Light case: the delay inflates the effective reload AND lowers the price.
 
 **DONE WHEN**
-- [ ] `formula.dps()` no longer takes `weapon_class`; call sites updated;
-- [ ] `fit_class.py` reads the charge trait off the ACTOR and applies 0.75×;
-- [ ] `docs/design/FORMULA_V2.md` + `ARMOR_SYSTEM` updated to state the retirement;
-- [ ] a fixture test pins "charged actor prices 0.75× an identical uncharged one".
+- [x] `formula.dps()` no longer takes `weapon_class`; **all six** call sites updated —
+      `fit_class`, `check_band`, `propose_rebalance`, `propose_class_rebalance`,
+      `update_ranges`, and the workbook's **Excel DPS cell** (`build_workbook` dropped
+      `*WeapClass`). The sheet is a second implementation of the same math and
+      `formula.py`'s docstring promises the two agree — leaving the factor in Excel
+      would have made the workbook and the module disagree silently;
+- [x] `fit_class.py` reads the charge trait off the ACTOR and applies 0.75×, via the new
+      `price_unit()` (extracted so the rule is testable rather than inline in `main`);
+- [x] `docs/design/FORMULA_V2.md` + `ARMOR_SYSTEM` updated to state the retirement;
+- [x] `tools/tests/test_formula_charge.py` (10 tests) pins the fixture
+      "charged actor prices 0.75× an identical uncharged one", plus the Tesla exclusion
+      and the positional-argument shift.
 
-**VERIFY:** `grep -rn "weapon_class" tools/balance/formula.py | wc -l` → 0
+⚠ **Two findings that changed the shape of this item:**
+
+1. **The ruling's own example was not covered by the ruling's own trait list.** It names
+   `AttackCharged` / `AttackTurretedCharged` / `AttackFrontalCharged` and cites the
+   Obelisk of Light as the model case — but the Obelisk uses **`AttackCharges`**, a
+   different trait, so the three named traits would have left the cited precedent at
+   full price. `AttackCharges` is therefore in `formula.CHARGE_UP_TRAITS` (4 Obelisks).
+   Live counts: `AttackFrontalCharged` 5 · `AttackCharges` 4 · `AttackTurretedCharged` 2.
+2. **`AttackTesla` (3 actors) is recorded but NOT discounted.** The Tesla Coil is already
+   priced as a special case (ReloadDelay 100 + InitialChargeDelay 25, MaxCharges 3, its
+   own K), so the generic 0.75× on top would discount the same nerf twice. It sits in
+   `CHARGE_UP_EXCLUDED_TRAITS` and **needs a maintainer ruling** before it joins.
+
+Also resolved: `FORMULA_V2` §3b planned this same nerf as a **−0.25 negative special**.
+Both would double-count, so §3b now records that the charge half is implemented as the
+actor price multiplier and the special-K route must not also fire. (The frontal-facing
+−0.25 half is untouched and still future scope.)
+
+**VERIFY:** `python -c "import sys;sys.path.insert(0,'tools/balance');import inspect,formula;print('weapon_class' in inspect.signature(formula.dps).parameters)"` → `False`
+(the old `grep … | wc -l → 0` cannot pass: the docstrings that EXPLAIN the retirement
+must name the retired thing. Test the signature, not the prose.)
 
 ---
 

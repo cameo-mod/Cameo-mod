@@ -2730,6 +2730,10 @@
      "v": "Plate"
     },
     "buildable": true,
+    "charge_up": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#AttackFrontalCharged",
+     "v": "AttackFrontalCharged"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Valued.Cost",
      "v": "600"
@@ -6547,6 +6551,10 @@
      "v": "Light"
     },
     "buildable": true,
+    "charge_up": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#AttackFrontalCharged",
+     "v": "AttackFrontalCharged"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Valued.Cost",
      "v": "1800"

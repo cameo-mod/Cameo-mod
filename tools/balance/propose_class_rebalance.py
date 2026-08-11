@@ -108,20 +108,21 @@ def spread_damages(arm: dict, smallarms_only: bool = False):
     return formula.spread_damage_sum(arm.get("damage_warheads", []), smallarms_only=smallarms_only)
 
 
-def armament_dps(arm: dict, fp: float, base_only: bool = False, smallarms_only: bool = False, wc: float | None = None):
+def armament_dps(arm: dict, fp: float, base_only: bool = False, smallarms_only: bool = False):
     rl = fnum(arm.get("reloaddelay"))
     burst = fnum(arm.get("burst")) or 1
     burst_delays = fnum(arm.get("burstdelays")) or 0
-    wc = wc if wc is not None else (fnum(arm.get("design_weapon_class")) or 0.75)
     if rl is None or rl <= 0:
         return 0.0
     dmg = spread_damages(arm, smallarms_only=smallarms_only)
-    return formula.dps(dmg, rl, wc, int(burst), burst_delays=burst_delays,
+    # No weapon-class weight (W4): the K coefficient measures weapon quality
+    # directly, so the tier weight would double-charge it.
+    return formula.dps(dmg, rl, int(burst), burst_delays=burst_delays,
                        firepower_multiplier=(1.0 if base_only else fp))
 
 
-def unit_dps(u: dict, fp: float, base_only: bool = False, smallarms_only: bool = False, wc: float | None = None):
-    return sum(armament_dps(arm, fp, base_only=base_only, smallarms_only=smallarms_only, wc=wc)
+def unit_dps(u: dict, fp: float, base_only: bool = False, smallarms_only: bool = False):
+    return sum(armament_dps(arm, fp, base_only=base_only, smallarms_only=smallarms_only)
                for arm in u.get("armaments", [])
                if arm.get("pricing") and arm.get("slot") in ("Armament", "Armament@PRIMARY"))
 
@@ -297,13 +298,8 @@ def load_class_rows(cls: str):
                 is_protected = actor in protected
                 fp0 = 1.0 if is_protected else (fp_raw if fp_raw is not None else 1.0)
                 # Scout low-cost units (<=1.5*C0) are SmallArms-only per FORMULA_V2 §3.
-                if cls == "scout" and cost <= spec["cost0"] * 1.5:
-                    smallarms_only = True
-                    wc = 0.75
-                else:
-                    smallarms_only = False
-                    wc = None
-                base_dps = unit_dps(u, fp0, base_only=True, smallarms_only=smallarms_only, wc=wc)
+                smallarms_only = cls == "scout" and cost <= spec["cost0"] * 1.5
+                base_dps = unit_dps(u, fp0, base_only=True, smallarms_only=smallarms_only)
                 row = {
                     "actor": actor,
                     "faction": design.get("faction") or ledger_name,

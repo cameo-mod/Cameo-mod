@@ -69,8 +69,7 @@ def unit_dps(u, fp_factor: float):
         rd = fnum(arm.get("reloaddelay")) or 1
         burst = int(fnum(arm.get("burst")) or 1)
         bd = fnum(arm.get("burstdelays"))
-        wc = fnum(arm.get("design_weapon_class")) or 1.0
-        total += formula.dps(dmg, rd, wc, burst, bd, fp_factor)
+        total += formula.dps(dmg, rd, burst, bd, fp_factor)
     return total
 
 

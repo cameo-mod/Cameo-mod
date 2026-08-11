@@ -23,16 +23,57 @@ def eff_reload(reload_delay: float, burst: int = 1, burst_delays: float | None =
     return reload_delay
 
 
-def dps(damage: float, reload_delay: float, weapon_class: float = 1.0,
-        burst: int = 1, burst_delays: float | None = None,
+def dps(damage: float, reload_delay: float, burst: int = 1,
+        burst_delays: float | None = None,
         firepower_multiplier: float = 1.0) -> float:
     """Burst-aware DPS. With burst=1 this is the legacy G/I*H exactly.
 
     firepower_multiplier is the per-actor FirepowerMultiplier value
     expressed as a factor (1.0 = 100%), used to fine-tune effective
-    damage output without leaving the 2000-step Damage grid."""
-    base = damage * max(burst, 1) / eff_reload(reload_delay, burst, burst_delays) * weapon_class
+    damage output without leaving the 2000-step Damage grid.
+
+    **`weapon_class` was REMOVED here on 2026-08-11 (W4).** It was a tier weight
+    standing in for "how good is this weapon type", back when nothing measured
+    that. The K coefficient now measures it directly from the weapon's own
+    geometry (`weapon_efficiency.py`), so keeping the tier weight as well would
+    charge a weapon twice for the same property. The value still lives in the
+    ledger as `design_weapon_class` (design judgment, and the weapon-class gate
+    reads it) — it simply no longer multiplies the price."""
+    base = damage * max(burst, 1) / eff_reload(reload_delay, burst, burst_delays)
     return base * firepower_multiplier
+
+
+# Charge-up is an ACTOR property, not a weapon one (maintainer ruling 2026-08-11).
+# A charge delay is a large real nerf that DPS alone cannot see: the delay inflates
+# the effective reload AND the unit is helpless while charging, so the price drops.
+CHARGE_UP_PRICE_MULTIPLIER = 0.75
+
+# Traits that make an actor pay for a charge-up. `AttackCharges` is the Obelisk of
+# Light — the case the ruling itself cites as the model — which does NOT use one of
+# the three `*Charged` traits, so naming only those would have left the cited
+# precedent unpriced.
+CHARGE_UP_TRAITS = frozenset({
+    "AttackCharged", "AttackTurretedCharged", "AttackFrontalCharged",
+    "AttackCharges",
+})
+
+# `AttackTesla` charges too, but is deliberately NOT in the set above: the Tesla
+# Coil is already priced as a special case (ReloadDelay 100 + InitialChargeDelay 25,
+# MaxCharges 3, its own K), so applying the generic 0.75x on top would discount it
+# twice. Needs its own maintainer ruling before it joins.
+CHARGE_UP_EXCLUDED_TRAITS = frozenset({"AttackTesla"})
+
+
+def charge_price_multiplier(charge_trait: str | None) -> float:
+    """`CHARGE_UP_PRICE_MULTIPLIER` for a charging actor, else 1.0.
+
+    Applied to the PRICE, not to DPS: price is degree 1/2/3 in its inputs
+    (O/P/Q), so scaling DPS would not yield a clean 0.75x on the result.
+    """
+    if not charge_trait:
+        return 1.0
+    return (CHARGE_UP_PRICE_MULTIPLIER
+            if str(charge_trait).split("@", 1)[0] in CHARGE_UP_TRAITS else 1.0)
 
 
 # Twin warheads — NEVER main / NEVER in the damage total (DESIGN.md):

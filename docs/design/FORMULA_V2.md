@@ -186,7 +186,17 @@ LIST of detected specials + each ability's value; the sheet totals them.
 - **Negative specials exist** (subtract from K): a very long charge delay
   (Obelisk-of-Light style) = **−0.25**; frontal-facing (non-turreted)
   vehicle weapons = **−0.25** — a genuine disadvantage vs turreted units
-  that move and fire at once. Both are FUTURE / VEHICLE scope.
+  that move and fire at once.
+
+  ⚠ **The charge-delay half is now IMPLEMENTED as an actor price multiplier,
+  NOT as a negative special — do not apply both** (W4, 2026-08-11). An actor
+  carrying `AttackCharged` / `AttackTurretedCharged` / `AttackFrontalCharged` /
+  `AttackCharges` prices at **0.75×** via `formula.charge_price_multiplier`,
+  read from the ledger's `charge_up` field. It is a multiplier on the PRICE
+  rather than −0.25 on the special K because `special` enters `estimators()`
+  on the range term only, so it would neither be a clean 0.75× nor scale the
+  HP/DPS terms the charge delay actually devalues. The frontal-facing half is
+  still FUTURE / VEHICLE scope and unimplemented.
 - **Scope order:** finish INFANTRY on the interim uniform weights first;
   the per-ability value table + negative specials land when we start
   VEHICLES (the program AFTER infantry).
@@ -238,6 +248,17 @@ class-specific log, because they apply to all classes.
   main 2000 → ExtraDamage 1000), written by `formula.distribute_damage`, but
   the DPS/price **sum still skips any warhead whose key ends `ExtraDamage`**
   (`formula.spread_damage_sum`).
+> ⚠ **WeaponClass NO LONGER PRICES ANYTHING (W4, 2026-08-11).** `formula.dps()`
+> dropped its `weapon_class` argument, and the workbook's DPS cell dropped its
+> `*WeapClass` factor to match. WC was a tier weight standing in for "how good is
+> this weapon type" back when nothing measured that; the K coefficient
+> (`weapon_efficiency.py`) now measures it from the weapon's own geometry, so
+> keeping the weight too would charge a weapon twice for one property. The
+> `design_weapon_class` field stays in the ledger and the workbook as design data —
+> the warhead-triad meaning below is unchanged and still governs template design.
+> Verify with `inspect.signature(formula.dps)`, not a grep: the docstrings that
+> explain the retirement necessarily name the retired thing.
+
 - **A "weapon class" (WC 1.0) = a light+medium+heavy warhead TRIAD**
   (maintainer 2026-07-20): one light + one medium + one heavy SpreadDamage
   warhead summed. Baseline japan = SmallArms + Chaingun + Railgun-AP; a
@@ -401,7 +422,9 @@ infantry classes.
 | tank destroyer | AP glass-cannon vs heavy armour; frontal weapon (−0.25 special); range/speed on the 2×-bullet-speed convention — NEW template |
 
 Vehicle-only specials attach here (§3b future scope): frontal-facing
-(non-turreted) weapon = −0.25; long charge delay (Obelisk-style) = −0.25.
+(non-turreted) weapon = −0.25. Long charge delay is NO LONGER a special —
+it became the actor-level 0.75× price multiplier in W4 (see §3b); applying
+both would discount a charging unit twice.
 The per-ability special-value table replaces the interim uniform weights
 at the start of this program.
 

@@ -60,7 +60,6 @@ def unit_inputs(u):
         if not dmg or not reload_:
             continue
         total_dps += formula.dps(dmg, reload_,
-                                 fnum(arm.get("design_weapon_class")) or 1.0,
                                  int(fnum(arm.get("burst")) or 1),
                                  fnum(arm.get("burstdelays")))
         best_range = max(best_range, fnum(arm.get("range")) or 0.0)
@@ -70,6 +69,19 @@ def unit_inputs(u):
     return (hp, speed, best_range, total_dps,
             fnum(d.get("special")) or 1.0, fnum(d.get("unit_class")) or 1.0,
             fnum(d.get("tech_tier")) or 1.0)
+
+
+def price_unit(u, inp, o0, p0, q0, cost0) -> float:
+    """Formula-v2 price for one ledger unit, including the actor-level modifiers.
+
+    The charge-up discount is applied to the PRICE, after the estimators, not to
+    DPS: O/P/Q are degree 1/2/3 in their inputs, so scaling DPS would not produce
+    a clean 0.75x on the result. Charging is an ACTOR property (W4) — the delay
+    inflates the effective reload AND the unit is helpless while it winds up.
+    """
+    o, p, q = formula.estimators(*inp)
+    v2 = formula.class_anchor_price(o, p, q, o0, p0, q0, cost0)
+    return v2 * formula.charge_price_multiplier((u.get("charge_up") or {}).get("v"))
 
 
 def collect_units(cls, actors_filter):
@@ -130,8 +142,7 @@ def main() -> int:
         if inp is None or cost is None:
             rows.append((actor, cost, None, None))
             continue
-        o, p, q = formula.estimators(*inp)
-        v2 = formula.class_anchor_price(o, p, q, o0, p0, q0, cost0)
+        v2 = price_unit(u, inp, o0, p0, q0, cost0)
         rows.append((actor, cost, v2, (v2 - cost) / cost if cost else None))
 
     rep = LEDGER / f"formula_v2_{args.cls}.md"

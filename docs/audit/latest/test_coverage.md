@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (2 file(s)) | 24 | >= 24 |
-| T2 | `def test_*` in tools/tests (11 file(s)) | 105 | >= 105 |
-| T3 | modules with no test mentioning them | 218 | <= 218 |
+| T2 | `def test_*` in tools/tests (12 file(s)) | 115 | >= 115 |
+| T3 | modules with no test mentioning them | 216 | <= 216 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (218)
+## T3 — untested modules (216)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -207,11 +207,9 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/build_workbook.py | build_workbook |
 | python | tools/balance/check_band.py | check_band |
 | python | tools/balance/count_mixed.py | count_mixed |
-| python | tools/balance/fit_class.py | fit_class |
 | python | tools/balance/fix_orphan_old_keys.py | fix_orphan_old_keys |
 | python | tools/balance/fix_orphan_old_keys_multi.py | fix_orphan_old_keys_multi |
 | python | tools/balance/fix_stale_warhead_keys.py | fix_stale_warhead_keys |
-| python | tools/balance/formula.py | formula |
 | python | tools/balance/gen_effects.py | gen_effects |
 | python | tools/balance/gen_projectiles.py | gen_projectiles |
 | python | tools/balance/gen_weapon_template.py | gen_weapon_template |

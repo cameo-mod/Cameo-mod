@@ -1,6 +1,6 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **209**
+Files scanned: **210**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
@@ -42,10 +42,10 @@ Files scanned: **209**
 | tools/audit/review_resolve_diff.py | 58 | handler body discards the error |
 | tools/audit_ce_image_usage.py | 29 | handler body discards the error |
 | tools/audit_createeffect_image.py | 19 | handler body discards the error |
-| tools/balance/extract_stats.py | 177 | handler body discards the error |
-| tools/balance/extract_stats.py | 661 | handler body discards the error |
-| tools/balance/formula.py | 100 | handler body discards the error |
-| tools/balance/propose_class_rebalance.py | 268 | handler body discards the error |
+| tools/balance/extract_stats.py | 200 | handler body discards the error |
+| tools/balance/extract_stats.py | 687 | handler body discards the error |
+| tools/balance/formula.py | 141 | handler body discards the error |
+| tools/balance/propose_class_rebalance.py | 269 | handler body discards the error |
 | tools/rename/apply.py | 178 | handler body discards the error |
 | tools/rename/safe_rename.py | 128 | handler body discards the error |
 | tools/rename/safe_rename.py | 137 | handler body discards the error |
