@@ -20,6 +20,18 @@ flagged inline. Faction reference: [FACTIONS.md](../FACTIONS.md)._
 
 ---
 
+## ⭐ START HERE — [`BALANCE_PROGRAM_PLAN.md`](BALANCE_PROGRAM_PLAN.md) (2026-08-11)
+
+**The balance program's board, ownership and acceptance criteria live in ONE file:
+[`docs/design/BALANCE_PROGRAM_PLAN.md`](BALANCE_PROGRAM_PLAN.md).** Work items W1–W12,
+one `VERIFY` command each, file-set ownership so two agents can run in parallel, and the
+universal commit gate. Any agent resuming after a compaction reads §0 of that file first.
+Do not duplicate its status here — this ROADMAP links to it on purpose.
+
+Current: **W1 ✅ done** (K coefficient + target model, `f8421d345`) · **W2 ⬜ ready, owner
+Devin** (`^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*`) · **W3–W5 ⬜ ready,
+owner Claude** (ledger split, retire weapon-class K, the five missing metrics).
+
 ## ▶ ACTIVE — VEHICLE BALANCE APPLY + BACKLOG (2026-07-31)
 
 **Vehicle ladder DESIGN is being re-tuned** — latest table = `docs/balance/anchor_decisions_log.md`

@@ -3,12 +3,17 @@
 
 The pricing formula needs three things the old model guessed at:
 
-1. **Armor prevalence** — a flat mean over 17 armor types prices anti-`Spaceship`
-   performance as heavily as anti-`Heavy`, though the mod has ~2 Spaceships and
-   hundreds of Heavies. `armor_weights()` counts the LIVE resolved actors per armor
-   type, so the weighting self-updates as the roster grows (maintainer order
-   2026-08-11: "the game changes over time … it needs to be constantly updated and
-   self balanced regularly, all automatically without user input").
+1. **Armor prevalence** — a flat mean over 17 armor types prices every armor as if it
+   were equally common, which it is not: the measured census below spans 563 `Wood`
+   down to 20 `Fighter`. Nothing here is hand-written — `armor_census()` counts the
+   LIVE RESOLVED actors, so the weighting self-updates as the roster grows (maintainer
+   order 2026-08-11: "the game changes over time … it needs to be constantly updated
+   and self balanced regularly, all automatically without user input").
+
+   Do not quote armor counts from a raw `grep` of the yaml — it counts templates and
+   misses actors that inherit their armor from a class template. A raw grep says
+   "2 Spaceships"; the resolved census says **22** (StarCraft Terran alone has the
+   Battlecruiser, Phobos and Pythean). Run `python tools/balance/target_model.py`.
 
 2. **Target density** — how many actors a blast realistically catches. Combined
    model (maintainer 2026-08-11, "can we try a combination of both?"): a per-class

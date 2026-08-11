@@ -196,6 +196,35 @@ build anything that assumes these fields live in the ledger.
 
 ## 6. Roadmap for the metric
 
+> **Status and ownership for every item below live in
+> [`BALANCE_PROGRAM_PLAN.md`](BALANCE_PROGRAM_PLAN.md) (W1–W12), not here.** W1 (the K
+> coefficient, prevalence-weighted Versus and the capped density model) is **done** —
+> `tools/balance/target_model.py` + `tools/balance/weapon_efficiency.py`. The list below
+> is the original reasoning; the plan file is what to execute.
+
+**The K coefficient (W1, done).** Because `effective` is linear in `base`, a weapon's
+whole geometry collapses into one dimensionless number:
+
+```
+effective_dps = Damage_total × (burst / eff_reload) × FirepowerMultiplier × K
+K = Σ_warheads  share_w × versus_w × ( reliability_w + secondary_w )
+```
+
+K never depends on the Damage magnitude, so pricing inverts exactly and the 2000 grid is
+never violated — `Damage_required = target_dps × eff_reload / (burst × FP × K)`, rounded
+to the grid with `FirepowerMultiplier` absorbing the remainder. A workbook value of
+2351.85 therefore never goes into yaml: the designer sets geometry for feel, K measures
+it, the pipeline solves for Damage.
+
+**Secondary targets (W1, done).** `secondary = ρ_class × BLOB_UPTIME × (min(footprint,
+A_BLOB) − A_SELF)`. `ρ` is per macro class (INF 2.0 / VEH 0.33 / BLD 0.25 / AIR 0.20 units
+per cell²) so anti-infantry splash legitimately catches more bodies; `A_BLOB = 9 cell²`
+caps a superweapon-sized blast from claiming 50 kills; `A_SELF = 1 cell²` stops the aimed
+target being counted twice. `BLOB_UPTIME = 0.30` is the fraction of shots that actually
+land in a crowd — without it every splash family scored ~5× every single-target family.
+
+
+
 1. **Decide §3.1** (chips in or out). Blocking for any pricing use.
 2. **Make it a rate.** Add `effective_dps = effective × burst / eff_reload(...)` to the
    ledger so it is comparable with the DPS the formula already uses. Per-shot and
