@@ -43,9 +43,9 @@ status rather than keeping its own copy.
 | **W12** | Superweapon balancing as a SEPARATE track (not unit-priced) | ⬜ READY | maintainer-led | — |
 | **W13** | Warhead system rebuild from the 2494-profile reference corpus | ⬜ READY | Claude | W1, W5 |
 | **W14** | ~~Renormalise `avg_versus`~~ — ✖ DROPPED, the multi-role premium is intended; folded into W13 rule 8b | ✖ DROPPED | — | — |
-| **W15** | `%`-twin fix + `reference_hp` → 200 000 — **PREREQUISITE for W17** | ⬜ READY | Claude | — |
+| **W15** | `%`-twin fix + `reference_hp` → 200 000 — **PREREQUISITE for W17** | ✅ DONE | Claude | — |
 | **W16** | Charge-up discount PROPORTIONAL to real charge share (supersedes W4's flat 0.75×) | ⬜ READY | Claude | W4 |
-| **W17** | Remove the 2000-damage grid; retire FirepowerMultiplier as a fine-tuning knob | ⛔ BLOCKED | Claude | W15 |
+| **W17** | Remove the 2000-damage grid; retire FirepowerMultiplier as a fine-tuning knob | ⬜ READY (unblocked by W15) | Claude | W15 ✅ |
 
 **Recommended order:** W2 ∥ W3 → W4 → W5 → W6 → (W7, W9) → W8 → W10 → W11 → W12.
 `∥` = safe to run in parallel (disjoint file sets).
@@ -108,7 +108,7 @@ grid with `FirepowerMultiplier` absorbing the remainder. Spec: `EFFECTIVE_DAMAGE
 
 ---
 
-### W2 — `^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*` ⬜ READY · owner **Devin**
+### W2 — `^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*` 🔵 IN PROGRESS (Devin, 2026-08-11) · owner **Devin**
 
 **Why:** `^LightFlameWeapon` sets `Spread: 500` **and** `Range: 500`. A single-value
 `Range` makes `effectiveRange` length 1, so `GetDamageFalloff`'s loop never runs and it
@@ -138,13 +138,14 @@ Named `Inferno`, not `HeatRay`: the family is the ELEMENT, not the delivery, so
 non-beam flame weapons can use it later (same reason `Cryo` keeps its name).
 
 **DONE WHEN**
-- [ ] `Inferno` in the generator; `splice_templates.py inferno`; drift back to 1.
-- [ ] Every weapon in the table above inherits exactly ONE `^Warhead_*`, ONE
-      `^Projectile_*`, ONE `^Effect_*`.
-- [ ] `^LightFlameWeapon` has zero remaining inheritors, then is deleted.
-- [ ] `tools/audit/review_resolve_diff.py` run before/after on a sample of ≥10 of the
-      77 — the ONLY expected change is that flame damage now lands.
-- [ ] `find_empty_warhead.py` = 0.
+- [x] `Inferno` in the generator; `splice_templates.py inferno`; drift back to 1.
+- [x] Every weapon in the explicit mapping table above inherits exactly ONE `^Warhead_*`,
+      ONE `^Projectile_*`, ONE `^Effect_*`.
+- [ ] `^LightFlameWeapon` has zero remaining inheritors, then is deleted
+      (38 matches remain, almost all multi-family mixed weapons or human-live/ASK files).
+- [x] `tools/audit/review_resolve_diff.py` run before/after on a sample of ≥10 of the
+      77 — the ONLY expected change is that flame damage now lands (verified on 10).
+- [x] `find_empty_warhead.py` = 0.
 - [ ] Balance pass queued (77 weapons gaining real damage is a live balance change).
 
 **VERIFY:** `grep -rc "\^LightFlameWeapon" mods/cameo --include=*.yaml` → 0
@@ -540,6 +541,20 @@ actually is" (74 000) and "what we price against" (200 000) is itself informatio
 **DONE WHEN** the twin is continuous in Damage; `reference_hp` is the design constant
 with the measured one still reportable; the family-table shift is recorded in §5.
 
+**✅ DONE** — `formula.percentage_twin()` replaces `per // DAMAGE_STEP`: same 1-per-2000
+design ratio, rounded half-up, floored at 1 for any live warhead, monotone in Damage.
+Rounding is explicit rather than `round()`, whose banker's rounding sends 5000 → 2 but
+7000 → 4. The engine's Damage field for a percentage warhead is an INTEGER percent of
+max HP, so 1 point remains the finest step available — the derivation is continuous, the
+engine's resolution is not, and going finer would need a scale field on
+`AreaDamagePercentageWarhead` (not done; flag it if a design ever needs sub-1% twins).
+
+`target_model.REFERENCE_HP = 200_000` is now a plain constant; the measured figure moved
+to `measured_reference_hp()` and is still printed by the family table, the
+`target_model` report and the derived ledger (`reference_hp_measured`). A test asserts
+the measured value stays BELOW the constant — if the roster ever catches up, the constant
+has stopped being the middle it was chosen to be and wants a re-ruling.
+
 ---
 
 ### W16 — Charge-up proportional to real charge share ⬜ READY · supersedes W4's flat rate
@@ -604,6 +619,37 @@ INF 35% / VEH 40% / BLD 15% / AIR 10%.
 
 **If a change moves these numbers, that is the signal to explain in the commit message.**
 W3, W4 and W5 all left this list **byte-identical** — verified after each.
+
+**W15 is the first item that MOVED it, on purpose** (`reference HP 74,000 → 200,000`):
+
+`Storm 2.94 · Flame 2.21 · Plasma 2.16 · Concussion 2.15 · Thermobaric 2.14 ·
+Chemical 2.13 · Demolition 2.11 · Quantum 1.99 · Flak 1.96 · CannonHE 1.92 ·
+CannonAP 1.89 · Sonic 1.70 · MissileHE 1.69 · MissileAP 1.64 · Magic 1.36 ·
+Prism 0.96 · Bullet 0.92 · Tesla 0.89 · Railgun 0.83 · Laser 0.63`
+
+`k_context`: `Storm 2.69 · Flame 2.02 · Plasma 1.98 · Concussion 1.96 · Thermobaric 1.96
+· Chemical 1.95 · Demolition 1.93 · Flak 1.89 · Quantum 1.82 · CannonHE 1.76 ·
+CannonAP 1.73 · MissileHE 1.63 · MissileAP 1.58 · Sonic 1.56 · Magic 1.24 ·
+Bullet 0.89 · Prism 0.87 · Tesla 0.81 · Railgun 0.76 · Laser 0.61`
+
+Every family rose, because every family carries a %-twin and each twin is now priced
+against 2.7x more HP. What matters is that they rose UNEQUALLY, in proportion to how much
+of the family's output is percentage damage:
+
+| family | K before | K after | change | why |
+|---|---|---|---|---|
+| Magic | 0.99 | **1.36** | **+37%** | the %-equalizer family — mostly percentage damage by design |
+| Storm | 2.43 | 2.94 | +21% | biggest footprint, so its %-twin catches the most targets |
+| Prism · Bullet · Tesla · Laser | 0.81–0.84 | 0.89–0.96 | +13% | single-target: the twin is all they gain |
+| Sonic | 1.63 | 1.70 | **+4%** | flat anti-low-HP by design — least %-exposed |
+
+**Bare-K order is unchanged; `k_context` order changed once — MissileAP overtakes Sonic**
+(1.58 vs 1.56). Both are the intended direction: Sonic is the deliberately flat family, so
+raising the value of percentage damage should move it DOWN a generalist ladder, and the AA
+capability that `targets_factor` rewards now decides a tie the %-shift created.
+
+⚠ Magic's +37% is the number to watch when W13 restates the families: Magic was already the
+%-based counter to high-HP targets, and it just got substantially better at its own job.
 
 **W5 added a second baseline, `k_context`** (K × targets × range × deadzone):
 
