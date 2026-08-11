@@ -41,6 +41,8 @@ status rather than keeping its own copy.
 | **W10** | `^Blindable` → `Blind` meter | ⛔ BLOCKED | either | W6 |
 | **W11** | Wire K into `fit_class.py` behind a flag; fit one class both ways and compare | ⛔ BLOCKED | Claude | W3, W4, W5 |
 | **W12** | Superweapon balancing as a SEPARATE track (not unit-priced) | ⬜ READY | maintainer-led | — |
+| **W13** | Warhead system rebuild from the 2494-profile reference corpus | ⬜ READY | Claude | W1, W5 |
+| **W14** | Renormalise `avg_versus` over REACHABLE armors (fixes a W5 double-count) | ⬜ READY | Claude | W5 |
 
 **Recommended order:** W2 ∥ W3 → W4 → W5 → W6 → (W7, W9) → W8 → W10 → W11 → W12.
 `∥` = safe to run in parallel (disjoint file sets).
@@ -410,6 +412,80 @@ Maintainer 2026-08-11: superweapons are **not tied to a unit** and are not price
 unit formula — the blob cap in W1 exists partly because a superweapon footprint would
 otherwise claim 50 kills. They need their own process (charge time, one-per-base,
 counterplay), tracked separately from class anchors.
+
+---
+
+### W13 — Warhead system rebuild from the reference corpus ⬜ READY · owner Claude
+
+Reference data: `docs/reference/versus_raw.json` — **2494 warhead profiles, 14 sources**,
+built by `tools/reference/extract_versus.py` (+ `extract_mix_ini.py` for Mental Omega).
+
+**Measured findings that drive the rules below** (all reproducible from that file):
+
+| finding | number |
+|---|---|
+| field median profile span | **87** (Cameo: Light 90 · Medium 75 · Heavy 60 · Super 45) |
+| field distribution | **56% sharp · 23% moderate · 21% flat** — the moderate middle is the LEAST used band, and 3 of Cameo's 4 levels sit in it |
+| Mental Omega alone | median span **95**, 34% flat — a BARBELL: many hard counters AND many all-rounders, few in between |
+| archetypes occupied | Cameo **14** · field **28** |
+| Cameo's most common archetype | `BLD>INF>VEH FLAT HE` at **17.8%**, vs **0.4%** in the field |
+| multi-warhead flattening | 1 warhead → median span **75**; 2+ warheads → **58**. Worst cases lose ~250 span (`VonSniperLockdown` 7 warheads: 290 → 30) |
+| live weapons with 2+ warheads | **1335 of 1972 (68%)** — the size of the migration |
+
+**THE RULES (maintainer, 2026-08-11):**
+
+1. **Exactly ONE damage warhead per weapon.** This is the balance mechanism, not
+   housekeeping: mixing warheads averages their profiles and destroys the counter. The
+   flattest weapons in the game today are the mixed ones, not the designed ones.
+2. **Archetype = macro order × sharp/flat × HE/AP direction × air position.** Aim to
+   occupy the field's ~28 rather than today's 14.
+3. **Most warheads SHARP; ~20% intentionally FLAT** (Sonic, Magic, Tesla) — the field's
+   own ratio, and MO proves you can have both extremes without a mushy middle.
+4. **CLUSTER the reference values, never average them.** Averaging all 2057 three-class
+   profiles yields span **24** against a field median of 87 — it collapses exactly the
+   rock-paper-scissors the corpus was gathered to produce. Take the median WITHIN each
+   archetype cluster.
+5. **Wild values allowed** — no fixed step law. Sources run to span 295 (`LaserTur`:
+   infantry 320, heavy 25). Cameo's step law caps at 90.
+6. **The ordering law still governs** (best→worst by macro priority + sub-ladder). It is
+   what keeps "wild" coherent rather than random.
+7. **Thematic fit per family**: flame = `INF>BLD>VEH · SHARP · HE`, missiles = the
+   air-capable counterpart of cannons, etc.
+8. ⚠ **EVERY warhead damages EVERY armor type — never zero** (maintainer ruling). A
+   landed helicopter is a legitimate target for a flame tank. "Cannot fight air" is
+   expressed by putting the aircraft armors at the END of the ordering (low, non-zero),
+   NOT by omitting them.
+   **Cameo's four dedicated aircraft armors are a deliberate improvement over the source
+   mods, not a divergence to fix.** Those engines share one armor type between aircraft
+   and tanks, so they simply cannot express "devastating vs aircraft, mediocre vs tanks,
+   still good vs infantry" — the flak-cannon profile. An earlier draft of this item
+   listed Cameo's 100%-air-coverage as a gap; that was wrong.
+9. **Prerequisite — the `%`-twin.** `formula.distribute_damage` computes the twin as
+   `per // DAMAGE_STEP` (integer division). Drop the 2000 grid before fixing that and
+   every percentage warhead silently becomes 0 below 2000 damage — hard immunity by
+   rounding. Fix first, then free the grid.
+10. **FirepowerMultiplier survives the grid removal**, but only as the per-ACTOR knob
+    (one weapon serves many actors). It is no longer needed to absorb rounding, because
+    free-valued Damage solves exactly.
+
+**VERIFY:** `python tools/reference/extract_versus.py --summary` → 14 sources, 2494 rows.
+
+---
+
+### W14 — Renormalise `avg_versus` over REACHABLE armors ⬜ READY · owner Claude · needs W5
+
+A W5 double-count found by the maintainer 2026-08-11. A ground-only weapon is penalised
+twice: `avg_versus` averages over all 16 armors including the four aircraft ones (10% of
+the engagement weight) which it can rarely apply, **and** `targets_factor` then multiplies
+by 0.95 for not reaching air.
+
+**Fix:** renormalise the armor weights over the armors the weapon can actually engage, so
+`avg_versus` measures the damage it can really deal; `targets_factor` then carries only
+the opportunity cost of having fewer target types. Keeps the low-but-non-zero air values
+(rule 8 above — landed aircraft) without letting them distort the price.
+
+**VERIFY:** a ground-only and an all-target weapon with identical ground profiles differ
+by `targets_factor` alone, not twice.
 
 ---
 
