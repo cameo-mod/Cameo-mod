@@ -3094,6 +3094,7 @@
 		RequiresCondition: hazmatsuits
 	Mobile:
 		Locomotor: foot
+		ResponsiveBetweenCells: true
 		PauseOnCondition: disabled
 		RequiresCondition: !beingterrordroned
 	Selectable:
