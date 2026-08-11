@@ -42,7 +42,7 @@ status rather than keeping its own copy.
 | **W11** | Wire K into `fit_class.py` behind a flag; fit one class both ways and compare | ⛔ BLOCKED | Claude | W3, W4, W5 |
 | **W12** | Superweapon balancing as a SEPARATE track (not unit-priced) | ⬜ READY | maintainer-led | — |
 | **W13** | Warhead system rebuild from the 2494-profile reference corpus | ⬜ READY | Claude | W1, W5 |
-| **W14** | Renormalise `avg_versus` over REACHABLE armors (fixes a W5 double-count) | ⬜ READY | Claude | W5 |
+| **W14** | ~~Renormalise `avg_versus`~~ — ✖ DROPPED, the multi-role premium is intended; folded into W13 rule 8b | ✖ DROPPED | — | — |
 
 **Recommended order:** W2 ∥ W3 → W4 → W5 → W6 → (W7, W9) → W8 → W10 → W11 → W12.
 `∥` = safe to run in parallel (disjoint file sets).
@@ -472,20 +472,37 @@ built by `tools/reference/extract_versus.py` (+ `extract_mix_ini.py` for Mental 
 
 ---
 
-### W14 — Renormalise `avg_versus` over REACHABLE armors ⬜ READY · owner Claude · needs W5
+### W14 — ✖ DROPPED as specified; folded into W13 rule 8b
 
-A W5 double-count found by the maintainer 2026-08-11. A ground-only weapon is penalised
-twice: `avg_versus` averages over all 16 armors including the four aircraft ones (10% of
-the engagement weight) which it can rarely apply, **and** `targets_factor` then multiplies
-by 0.95 for not reaching air.
+**Original claim (mine, wrong):** ground-only weapons are double-charged because the
+aircraft armors are averaged into `avg_versus` AND discounted again by `targets_factor`,
+so `avg_versus` should be renormalised over reachable armors only.
 
-**Fix:** renormalise the armor weights over the armors the weapon can actually engage, so
-`avg_versus` measures the damage it can really deal; `targets_factor` then carries only
-the opportunity cost of having fewer target types. Keeps the low-but-non-zero air values
-(rule 8 above — landed aircraft) without letting them distort the price.
+**Maintainer's objection (2026-08-11, correct):** that is the INTENDED mechanism. Low air
+multipliers *should* pull `avg_versus` down and make a ground-only unit cheaper than a
+multi-role one. Renormalising would delete the multi-role premium — which is exactly the
+thing we want the pricing to express.
 
-**VERIFY:** a ground-only and an all-target weapon with identical ground profiles differ
-by `targets_factor` alone, not twice.
+**Measured, which settles it:**
+
+| | n | mean K | mean air-Versus | targets_factor |
+|---|---|---|---|---|
+| AA-capable | 868 | 0.790 | 51.9 | 1.000 |
+| ground-only | 1104 | 0.955 | 43.4 | 0.890 |
+
+The Versus route contributes **~1%** (8.5 points of air-Versus at air's 10% engagement
+weight); `targets_factor` contributes **-11%**. The overlap is a rounding error, so there
+is no double-count worth fixing — and renormalising would have removed the good mechanism
+to chase a negligible one.
+
+**The real finding, now W13 rule 8b:** ground-only weapons average **43.4%** against
+aircraft, i.e. the ordering law is NOT yet pushing air to the bottom for them. The
+maintainer's natural-pricing mechanism cannot bite until W13 sets air values properly per
+archetype — last in the order, genuinely low, never zero. Re-check the interaction with
+`targets_factor` AFTER that, not before.
+
+(Note also that K is dominated by splash footprint, not Versus: the ground-only
+population scores HIGHER K than the AA-capable one because it is full of artillery.)
 
 ---
 
