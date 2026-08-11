@@ -390,20 +390,20 @@ TSGrenade:
 		ImpactSounds: expnew13.aud
 
 TSGrenadeSonic:
-	Inherits: ^Warhead_Concussion_Light
-	Inherits@2: ^Warhead_Sonic_Light
-	Inherits@3: ^Effect_Concussion_Light
-	Inherits@4: ^Effect_Sonic_Light
+	Inherits@wh: ^Warhead_Concussion_Light
+	Inherits@wh2: ^Warhead_Sonic_Light
+	Inherits@proj: ^Projectile_Sonic_Shell
+	Inherits@fx: ^Effect_Sonic_Shell
 	ReloadDelay: 50
 	Range: 6151
 	Report: toss1.aud
 	ValidTargets: Ground, Water
 	Projectile: Bullet
-		Speed: 226
+		Speed: 896
 		LaunchAngle: 66
 		Image: BOMB
 		BounceCount: 2
-		ContrailLength: 11
+		ContrailLength: 12
 		ContrailStartWidth: 128
 		ContrailEndWidth: 44
 		ContrailStartColor: 8888FFFF
@@ -412,6 +412,12 @@ TSGrenadeSonic:
 		ValidTargets: Ground, Water
 		Damage: 12000
 	Warhead@Concussion_Light_Percentage:
+		ValidTargets: Ground, Water
+		Damage: 6
+	Warhead@Sonic_Light:
+		ValidTargets: Ground, Water
+		Damage: 12000
+	Warhead@Sonic_Light_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 6
 

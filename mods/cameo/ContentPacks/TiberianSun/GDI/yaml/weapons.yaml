@@ -248,8 +248,7 @@ KodiakCannonSonic:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@wh2: ^Warhead_Sonic_Heavy
 	Inherits@proj: ^Projectile_Sonic_Shell
-	Inherits@fx: ^Effect_CannonHE_Heavy
-	Inherits@fx2: ^Effect_Sonic_Heavy
+	Inherits@fx: ^Effect_Sonic_Shell
 	Range: 9165
 	ReloadDelay: 86
 	Burst: 3
@@ -261,14 +260,9 @@ KodiakCannonSonic:
 	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 4
 	Warhead@Sonic_Heavy:
-		Damage: 2000
+		Damage: 8000
 	Warhead@Sonic_Heavy_Percentage:
-		Damage: 1
-	Warhead@Effect: CreateEffect
-		Explosions: blue_med_frag
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Ground, Ship
+		Damage: 4
 
 TSSonicWeaponEffect:
 	ReloadDelay: 60
@@ -735,19 +729,15 @@ TSBomb:
 TSBombSonic:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_Sonic_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
-	Inherits@fx2: ^Effect_Sonic_Heavy
+	Inherits@proj: ^Projectile_Sonic_Shell
+	Inherits@fx: ^Effect_Sonic_Shell
 	ReloadDelay: 38
 	Burst: 5
 	BurstDelays: 3
 	Range: 1500
 	TargetActorCenter: true
 	Report: 120mmf.aud
-	Projectile: GravityBomb
-		Velocity: 100, 0, -100
-		Acceleration: 0, 0, -10
-		Image: 120mm
-		Shadow: true
+	ValidTargets: Ground, Ship
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 10000
@@ -756,10 +746,10 @@ TSBombSonic:
 		Damage: 5
 	Warhead@Sonic_Heavy:
 		ValidTargets: Ground, Ship
-		Damage: 2000
+		Damage: 10000
 	Warhead@Sonic_Heavy_Percentage:
 		ValidTargets: Ground, Ship
-		Damage: 1
+		Damage: 5
 
 TSMobile_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
