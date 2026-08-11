@@ -784,48 +784,33 @@ TSBomb:
 		InvalidTargets: Vehicle
 
 TSBombSonic:
-	Inherits: ^HeavyBomb
-	Inherits@2: ^TeslaWeapon
-	Inherits@3: ^MagicWeapon
-	Inherits@4: ^TSSonicGrenade
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_Sonic_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@fx2: ^Effect_Sonic_Heavy
 	ReloadDelay: 38
 	Burst: 5
 	BurstDelays: 3
 	Range: 1500
 	TargetActorCenter: true
-	# Projectile: GravityBomb
-	# 	Velocity: 100, 0, -100
-	# 	Acceleration: 0, 0, -10
-	# 	Image: 120mm
-	# 	Shadow: true
-	Warhead@HeavyBomb: SpreadDamage
+	Report: 120mmf.aud
+	Projectile: GravityBomb
+		Velocity: 100, 0, -100
+		Acceleration: 0, 0, -10
+		Image: 120mm
+		Shadow: true
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 10000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		ValidTargets: Ground, Ship
 		Damage: 5
-	Warhead@TeslaWeapon: SpreadDamage
+	Warhead@Sonic_Heavy:
 		ValidTargets: Ground, Ship
-		Damage: 10000
-	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 2000
+	Warhead@Sonic_Heavy_Percentage:
 		ValidTargets: Ground, Ship
-		Damage: 5000
-		DamageTypes: Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Ship
-		Damage: 5
-	Warhead@MagicWeapon: SpreadDamage
-		ValidTargets: Ground, Ship
-		Damage: 10000
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Ship
-		Damage: 5
-	-Warhead@Effect1:
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: ssplash3.aud
-		ValidTargets: Water
-		InvalidTargets: Vehicle
+		Damage: 1
 
 TSMobile_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
