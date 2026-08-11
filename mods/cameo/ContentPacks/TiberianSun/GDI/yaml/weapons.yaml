@@ -319,11 +319,11 @@ TSSonicZapWeapon:
 		ValidRelationships: Neutral, Enemy
 
 TSSonicZapWeaponSonic:
-	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_Magic_Heavy
-	Inherits@3: ^Effect_Magic_Heavy
+	Inherits@wh: ^Warhead_Sonic_Heavy
+	Inherits@fx: ^Effect_Sonic_Heavy
 	ReloadDelay: 60
 	Range: 4050
+	ValidTargets: Ground, Water
 	Projectile: AreaBeam
 		Speed: 0c256
 		Duration: 60
@@ -335,20 +335,10 @@ TSSonicZapWeaponSonic:
 		Blockable: true
 		TrackTarget: true
 		Color: B4A7D645
-	Warhead@Magic_Heavy:
+	Warhead@Sonic_Heavy:
 		Damage: 4000
-	Warhead@Magic_Heavy_Percentage:
+	Warhead@Sonic_Heavy_Percentage:
 		Damage: 2
-		ValidRelationships: Neutral, Enemy
-	Warhead@Tesla_Heavy:
-		Damage: 4000
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		Damage: 2000
-		ValidRelationships: Neutral, Enemy
-	Warhead@Tesla_Heavy_Percentage:
-		Damage: 2
-		ValidRelationships: Neutral, Enemy
 
 TSZapWeapon_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy

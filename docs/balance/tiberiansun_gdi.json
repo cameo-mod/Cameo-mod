@@ -4706,45 +4706,24 @@
        {
         "damage": "4000",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
-        "tag": "Tesla_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "800",
-        "tag": "Magic_Heavy",
+        "tag": "Sonic_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "Magic_Heavy_Percentage",
+        "tag": "Sonic_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "effective_avg_reliability": 0.6689,
-      "effective_base_total": 10000.0,
-      "effective_damage": 13450.08,
-      "effective_footprint_cells2": 7.0307,
+      "effective_avg_reliability": 0.897,
+      "effective_base_total": 4000.0,
+      "effective_damage": 9979.47,
+      "effective_footprint_cells2": 6.3916,
       "effective_sigma": 316.41,
       "pricing": true,
       "range": "4050",
@@ -4752,13 +4731,11 @@
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Magic_Heavy",
-       "^Effect_Magic_Heavy"
+       "^Warhead_Sonic_Heavy",
+       "^Effect_Sonic_Heavy"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Magic_Heavy"
+       "^Warhead_Sonic_Heavy"
       ],
       "weapon": "TSSonicZapWeaponSonic",
       "weapon_class_source": "template"
