@@ -53,7 +53,7 @@ X5 suffix ordering violations: **0**
 |---|---|---|---|
 | ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 957 | CabalLaserBoatLaserAA | Air |
 | ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1273 | CabalManticoreMissilesAA | Air |
-| ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 626 | TSMammothTusk2 | Air |
+| ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 569 | TSMammothTusk2 | Air |
 
 ## X4 — Weapons with deprecated E suffix (informational)
 | File | Line | Weapon |

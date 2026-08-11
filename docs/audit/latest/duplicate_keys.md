@@ -292,9 +292,9 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml | 512, 523 | ts_gdi_techcenter | Selectable |
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml | 555, 570 | ts_gdi_silo | ProvidesPrerequisite@buildingname |
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml | 272, 288 | ts_gdi_titan | RenderVoxels |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 593, 598 | TSHoverMissile | Report |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 661, 675 | TSMammothTusk2II_AA | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1058, 1060, 1064, 1067, 1070 | TSAAPCCannon | ValidTargets |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 536, 541 | TSHoverMissile | Report |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 604, 618 | TSMammothTusk2II_AA | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 982, 984, 988, 991, 994 | TSAAPCCannon | ValidTargets |
 | mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml | 6, 41 | ts_nod_constructionyard | Selectable |
 | mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml | 265, 288 | ts_nod_handof | ProvidesPrerequisite@buildingname |
 | mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml | 316, 340 | ts_nod_warfactory | ProvidesPrerequisite@buildingname |
@@ -587,7 +587,7 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/weapons/starwars.yaml | 814, 818 | SWNapalm | Burst |
 | mods/cameo/weapons/starwars.yaml | 843, 847 | SWNapalm2 | Burst |
 | mods/cameo/weapons/starwars.yaml | 867, 871 | SWNapalm3 | Burst |
-| mods/cameo/weapons/tiberiansun.yaml | 1364, 1366 | TSEngineerPistol | ReloadDelay |
+| mods/cameo/weapons/tiberiansun.yaml | 1339, 1341 | TSEngineerPistol | ReloadDelay |
 | mods/cameo/weapons/warcraft2.yaml | 402, 407 | wc2mageBlizzard | ValidTargets |
 | mods/cameo/weapons/weapons.yaml | 3183, 3188 | ^RepairWeapon | Warhead@Defuse1 |
 | mods/cameo/weapons/wh40k.yaml | 354, 357 | WH40KShootaBoyzGun | Warhead@1Dam |

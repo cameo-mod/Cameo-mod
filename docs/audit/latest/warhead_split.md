@@ -18,7 +18,7 @@ Every SpreadDamage warhead (mains + sides) shares one identical value — the 20
 None. ✅
 
 
-## Review — high uniform stacks (informational, 259)
+## Review — high uniform stacks (informational, 257)
 
 Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (not flattening residue).
 
@@ -119,7 +119,6 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | JapanSuperBomb | 5 | 10000 | 50000 |
 | JapanesePlasmaBomb | 3 | 10000 | 30000 |
 | KodiakCannon | 5 | 8000 | 40000 |
-| KodiakCannonSonic | 7 | 8000 | 56000 |
 | Laboratory_Bioball | 5 | 10000 | 50000 |
 | LatinBuggyRocket | 4 | 10000 | 40000 |
 | LatinBuggyRocket_elite | 4 | 10000 | 40000 |
@@ -144,4 +143,5 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | MigMissiles | 4 | 8000 | 32000 |
 | MigMissiles_AA | 4 | 8000 | 32000 |
 | MigMissiles_AA_elite | 4 | 8000 | 32000 |
+| MigMissiles_elite | 4 | 8000 | 32000 |
 

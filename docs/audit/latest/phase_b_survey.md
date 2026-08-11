@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 356
+Total concrete weapons on old families: 353
 Single old-family with new inherits (Phase B completion): 2
 Pure single old-family (mechanical Phase A candidates): 21
-Mixed old-family (Phase B maintainer sign-off): 333 in 238 groups
+Mixed old-family (Phase B maintainer sign-off): 330 in 235 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `AsianChemicalBombs` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | old: HeavyChemicalWeapon | HeavyChemicalWeapon=2000, HeavyChemicalWeaponFriendlyFire=1000, HeavyChemicalWeaponPercentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, Effect=0, Cloud=0
@@ -174,9 +174,6 @@ Mixed old-family (Phase B maintainer sign-off): 333 in 238 groups
 
 ### HeavyBomb, HeavyCannon, MediumCannon, MediumChemicalWeapon, MediumFlameWeapon, TankDestroyerCannon (1 weapons)
 - `SpecterArtilleryShellUpgrade` (ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml) | dominant: Demolition_Light(4000) | Demolition_Light=4000, Demolition_Light_Percentage=2, Concussion_Medium=4000, Concussion_Medium_Percentage=2, MediumChemicalWeapon=4000, MediumChemicalWeaponFriendlyFire=2000, MediumChemicalWeaponPercentage=2, MediumFlameWeapon=4000, MediumFlameWeaponFriendlyFire=2000, MediumFlameWeaponPercentage=2, HeavyBomb=4000, HeavyBombPercentage=2, TankDestroyerCannon=4000, TankDestroyerCannonPercentage=2, MediumCannon=4000, MediumCannonPercentage=2, HeavyCannon=4000, HeavyCannonPercentage=2 | → collapse to Demolition_Light
-
-### HeavyBomb, HeavyChemicalWeapon, HeavyMissile, MagicWeapon, RailgunWeapon, TeslaWeapon (1 weapons)
-- `KodiakCannonSonic` (ContentPacks\TiberianSun\GDI\yaml\weapons.yaml) | dominant: HeavyChemicalWeapon(8000) | HeavyChemicalWeapon=8000, HeavyChemicalWeaponFriendlyFire=4000, HeavyChemicalWeaponPercentage=4, RailgunWeapon=8000, RailgunWeaponPercentage=4, HeavyMissile=8000, HeavyMissilePercentage=4, CannonHE_Heavy=8000, CannonHE_Heavy_Percentage=4, HeavyBomb=8000, HeavyBombPercentage=4, TeslaWeapon=8000, TeslaExtraDamage=4000, TeslaWeaponPercentage=4, MagicWeapon=8000, MagicWeaponPercentage=4 | → collapse to HeavyChemicalWeapon
 
 ### Chaingun, Grenade, ShrapnelWeapon, SmallArms, TankDestroyerCannon (4 weapons)
 - `FutureEnforcerShotgun` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | dominant: Grenade(2000) | Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1 | → collapse to Grenade
@@ -594,9 +591,6 @@ Mixed old-family (Phase B maintainer sign-off): 333 in 238 groups
 ### HeavyBomb, LightChemicalWeapon, MediumFlameWeapon (1 weapons)
 - `LunarTigerCannon` (ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml) | dominant: LightChemicalWeapon(4000) | LightChemicalWeapon=4000, LightChemicalWeaponFriendlyFire=2000, LightChemicalWeaponPercentage=2, HeavyBomb=4000, HeavyBombPercentage=2, MediumFlameWeapon=4000, MediumFlameWeaponFriendlyFire=2000, MediumFlameWeaponPercentage=2, CannonHE_Medium=4000, CannonHE_Medium_Percentage=2 | → collapse to LightChemicalWeapon
 
-### HeavyBomb, MagicWeapon, TeslaWeapon (1 weapons)
-- `TSBombSonic` (ContentPacks\TiberianSun\GDI\yaml\weapons.yaml) | dominant: HeavyBomb(10000) | HeavyBomb=10000, HeavyBombPercentage=5, TeslaWeapon=10000, TeslaExtraDamage=5000, TeslaWeaponPercentage=5, MagicWeapon=10000, MagicWeaponPercentage=5, EffectWater=0 | → collapse to HeavyBomb
-
 ### HeavyBomb, MediumChemicalWeapon, ShrapnelWeapon (1 weapons)
 - `TSChemBoatcannon` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: HeavyBomb(16000) | HeavyBomb=16000, HeavyBombPercentage=8, MediumChemicalWeapon=8000, MediumChemicalWeaponFriendlyFire=4000, MediumChemicalWeaponPercentage=4 | → collapse to HeavyBomb
 
@@ -650,9 +644,6 @@ Mixed old-family (Phase B maintainer sign-off): 333 in 238 groups
 
 ### LightFlameWeapon, MediumChemicalWeapon, ShrapnelWeapon (1 weapons)
 - `latinsyndicate_latinmilitia_molotov` (ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml) | dominant: LightFlameWeapon(2000) | LightFlameWeapon=2000, LightFlameWeaponFriendlyFire=1000, LightFlameWeaponPercentage=1, MediumChemicalWeapon=2000, MediumChemicalWeaponFriendlyFire=1000, MediumChemicalWeaponPercentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, Demolition_Light=2000, Demolition_Light_Percentage=1, FireShrapnel=0 | → collapse to LightFlameWeapon
-
-### MagicWeapon, ShrapnelWeapon, TeslaWeapon (1 weapons)
-- `TSGrenadeSonic` (weapons\tiberiansun.yaml) | dominant: ShrapnelWeapon(12000) | ShrapnelWeapon=12000, ShrapnelWeaponFriendlyFire=6000, ShrapnelWeaponPercentage=6, CannonHE_Medium=12000, MediumCannonFriendlyFire=6000, CannonHE_Medium_Percentage=6, TeslaWeapon=6000, TeslaExtraDamage=3000, TeslaWeaponPercentage=3, MagicWeapon=6000, MagicWeaponPercentage=3 | → collapse to ShrapnelWeapon
 
 ### MediumCannon, RailgunWeapon, TankDestroyerCannon (1 weapons)
 - `TankBusterBeamCannon` (ContentPacks\RedAlert\Japan\yaml\weapons.yaml) | dominant: TankDestroyerCannon(8000) | TankDestroyerCannon=8000, TankDestroyerCannonPercentage=4, MediumCannon=8000, MediumCannonPercentage=4, RailgunWeapon=8000, RailgunWeaponPercentage=4 | → collapse to TankDestroyerCannon
