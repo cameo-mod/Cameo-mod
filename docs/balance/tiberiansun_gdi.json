@@ -6414,98 +6414,58 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Flak_Medium_Percentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Sonic_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
-        "falloff": null,
-        "spread": "50",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "222",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "111",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Sonic_Medium_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "effective_avg_reliability": 0.3176,
-      "effective_base_total": 9888.0,
-      "effective_damage": 4481.45,
-      "effective_footprint_cells2": 4.7959,
-      "effective_sigma": 473.74,
+      "design_weapon_class": 1.0,
+      "effective_avg_reliability": 0.8833,
+      "effective_base_total": 8000.0,
+      "effective_damage": 15766.82,
+      "effective_footprint_cells2": 8.7005,
+      "effective_sigma": 262.61,
       "pricing": true,
       "range": "6305",
       "reloaddelay": "45",
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^FlakWeapon",
-       "^Chaingun",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^TSSonicGrenade"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Sonic_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flak_Medium",
+       "^Warhead_Sonic_Medium"
+      ],
       "weapon": "TSAssaultCannonSonic",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

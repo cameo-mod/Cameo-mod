@@ -947,43 +947,19 @@ TSJumpCannon:
 		Damage: 2
 
 TSAssaultCannonSonic:
-	Inherits: ^FlakWeapon
-	Inherits@2: ^Chaingun
-	Inherits@3: ^TeslaWeapon
-	Inherits@4: ^MagicWeapon
-	Inherits@5: ^TSSonicGrenade
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@wh2: ^Warhead_Sonic_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	ReloadDelay: 45
 	Burst: 2
 	BurstDelays: 2
 	Range: 6305
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 1
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 1000
-		DamageTypes: Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 1
-	Warhead@MagicWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 1
+	-Report:
+	Warhead@Flak_Medium: AreaDamage
+		Damage: 4000
+	Warhead@Sonic_Medium: AreaDamage
+		Damage: 4000
 
 TSAssaultCannonTal:
 	Inherits@wh: ^Warhead_Bullet_Medium
