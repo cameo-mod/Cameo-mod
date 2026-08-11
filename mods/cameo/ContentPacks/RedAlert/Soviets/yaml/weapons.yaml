@@ -146,7 +146,7 @@ GrenadeThermobaricExplode:
 		Damage: 1
 
 FireRockets:
-	Inherits@wh: ^Warhead_FireMissile_Heavy
+	Inherits@wh: ^Warhead_FireMissile_Light
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
 	ReloadDelay: 53
@@ -157,24 +157,24 @@ FireRockets:
 		TrailImage: fb2
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@FireMissile_Heavy:
+	Warhead@FireMissile_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
-	Warhead@FireMissile_Heavy_Percentage:
+	Warhead@FireMissile_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 16
 
 FireRocketsExplode:
 	Inherits: FireRockets
-	Warhead@FireMissile_Heavy:
+	Warhead@FireMissile_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	Warhead@FireMissile_Heavy_Percentage:
+	Warhead@FireMissile_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 
 FireRocketsThermobaric:
-	Inherits@wh: ^Warhead_FireMissile_Heavy
+	Inherits@wh: ^Warhead_FireMissile_Medium
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
 	ReloadDelay: 58
@@ -185,10 +185,10 @@ FireRocketsThermobaric:
 		TrailImage: fb2
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@FireMissile_Heavy:
+	Warhead@FireMissile_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
-	Warhead@FireMissile_Heavy_Percentage:
+	Warhead@FireMissile_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 16
 	Warhead@Effect:
@@ -199,10 +199,10 @@ FireRocketsThermobaric:
 
 FireRocketsThermobaricExplode:
 	Inherits: FireRocketsThermobaric
-	Warhead@FireMissile_Heavy:
+	Warhead@FireMissile_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	Warhead@FireMissile_Heavy_Percentage:
+	Warhead@FireMissile_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 
@@ -358,9 +358,9 @@ FireballGunThermobaricExplode:
 		Amount: 1000
 
 SiegeMortar:
-	Inherits: ^Warhead_Thermobaric_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits: ^Warhead_Thermobaric_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
 	ReloadDelay: 88
 	Range: 10830
 	MinRange: 2165
@@ -375,16 +375,16 @@ SiegeMortar:
 		ContrailEndWidth: 15
 		ContrailStartColor: FEDCBA98
 		ContrailEndColor: 87654321
-	Warhead@Thermobaric_Heavy:
+	Warhead@Thermobaric_Medium:
 		Damage: 32000
-	Warhead@Thermobaric_Heavy_Percentage:
+	Warhead@Thermobaric_Medium_Percentage:
 		Damage: 16
 
 SiegeMortarExplode:
 	Inherits: SiegeMortar
-	Warhead@Thermobaric_Heavy:
+	Warhead@Thermobaric_Medium:
 		Damage: 16000
-	Warhead@Thermobaric_Heavy_Percentage:
+	Warhead@Thermobaric_Medium_Percentage:
 		Damage: 8
 
 SiegeMortarThermobaric:

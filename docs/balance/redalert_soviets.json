@@ -5730,33 +5730,33 @@
       "damage_warheads": [
        {
         "damage": "32000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "FireMissile_Heavy",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "FireMissile_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "FireMissile_Heavy_Percentage",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "FireMissile_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6036",
       "reloaddelay": "53",
       "requires": "!ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_FireMissile_Heavy",
+       "^Warhead_FireMissile_Light",
        "^Projectile_Missile_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_FireMissile_Heavy"
+       "^Warhead_FireMissile_Light"
       ],
       "weapon": "FireRockets",
       "weapon_class_source": "template"
@@ -5766,33 +5766,33 @@
       "damage_warheads": [
        {
         "damage": "32000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "FireMissile_Heavy",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "FireMissile_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "FireMissile_Heavy_Percentage",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "FireMissile_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6036",
       "reloaddelay": "53",
       "requires": "!ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_FireMissile_Heavy",
+       "^Warhead_FireMissile_Light",
        "^Projectile_Missile_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_FireMissile_Heavy"
+       "^Warhead_FireMissile_Light"
       ],
       "weapon": "FireRockets",
       "weapon_class_source": "template"
@@ -5801,33 +5801,33 @@
       "damage_warheads": [
        {
         "damage": "32000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "FireMissile_Heavy",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "FireMissile_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "FireMissile_Heavy_Percentage",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "FireMissile_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6692",
       "reloaddelay": "58",
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_FireMissile_Heavy",
+       "^Warhead_FireMissile_Medium",
        "^Projectile_Missile_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_FireMissile_Heavy"
+       "^Warhead_FireMissile_Medium"
       ],
       "weapon": "FireRocketsThermobaric",
       "weapon_class_source": "template"
@@ -5837,33 +5837,33 @@
       "damage_warheads": [
        {
         "damage": "32000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "FireMissile_Heavy",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "FireMissile_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "FireMissile_Heavy_Percentage",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "FireMissile_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6692",
       "reloaddelay": "58",
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^Warhead_FireMissile_Heavy",
+       "^Warhead_FireMissile_Medium",
        "^Projectile_Missile_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_FireMissile_Heavy"
+       "^Warhead_FireMissile_Medium"
       ],
       "weapon": "FireRocketsThermobaric",
       "weapon_class_source": "template"
@@ -6478,21 +6478,21 @@
       "damage_warheads": [
        {
         "damage": "32000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "Thermobaric_Heavy",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Thermobaric_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "Thermobaric_Heavy_Percentage",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Thermobaric_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "minrange": "2165",
       "pricing": true,
       "range": "10830",
@@ -6500,12 +6500,12 @@
       "requires": "!ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Thermobaric_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy"
+       "^Warhead_Thermobaric_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium"
       ],
       "warheads": [
-       "^Warhead_Thermobaric_Heavy"
+       "^Warhead_Thermobaric_Medium"
       ],
       "weapon": "SiegeMortar",
       "weapon_class_source": "template"
@@ -6515,21 +6515,21 @@
       "damage_warheads": [
        {
         "damage": "32000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "Thermobaric_Heavy",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Thermobaric_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "Thermobaric_Heavy_Percentage",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Thermobaric_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "minrange": "2165",
       "pricing": false,
       "range": "10830",
@@ -6537,12 +6537,12 @@
       "requires": "!ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Thermobaric_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy"
+       "^Warhead_Thermobaric_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium"
       ],
       "warheads": [
-       "^Warhead_Thermobaric_Heavy"
+       "^Warhead_Thermobaric_Medium"
       ],
       "weapon": "SiegeMortar",
       "weapon_class_source": "template"
