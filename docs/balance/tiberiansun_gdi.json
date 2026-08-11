@@ -2159,112 +2159,54 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
-        "tag": "CannonHE_Medium",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Concussion_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Concussion_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "12000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Sonic_Light",
+        "type": "AreaDamage"
        },
        {
-        "damage": "6000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 75, 50, 25",
+        "damage": "1",
+        "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "falloff": null,
-        "spread": "50",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "222",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "111",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MediumCannonFriendlyFire",
-        "type": "SpreadDamage"
+        "tag": "Sonic_Light_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.0,
-      "effective_avg_reliability": 0.5816,
-      "effective_base_total": 39888.0,
-      "effective_damage": 53209.33,
-      "effective_footprint_cells2": 13.8974,
-      "effective_sigma": 877.34,
+      "design_weapon_class": 0.75,
+      "effective_avg_reliability": 0.6585,
+      "effective_base_total": 14000.0,
+      "effective_damage": 18872.2,
+      "effective_footprint_cells2": 5.5159,
+      "effective_sigma": 544.34,
       "pricing": true,
       "range": "6151",
       "reloaddelay": "50",
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
-       "^ShrapnelWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^TSSonicGrenade"
+       "^Warhead_Concussion_Light",
+       "^Warhead_Sonic_Light",
+       "^Effect_Concussion_Light",
+       "^Effect_Sonic_Light"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_Concussion_Light",
+       "^Warhead_Sonic_Light"
       ],
       "weapon": "TSGrenadeSonic",
       "weapon_class_source": "template"
@@ -2335,112 +2277,54 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
-        "tag": "CannonHE_Medium",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Concussion_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Concussion_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "12000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Sonic_Light",
+        "type": "AreaDamage"
        },
        {
-        "damage": "6000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 75, 50, 25",
+        "damage": "1",
+        "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "falloff": null,
-        "spread": "50",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "222",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "111",
-        "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MediumCannonFriendlyFire",
-        "type": "SpreadDamage"
+        "tag": "Sonic_Light_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.0,
-      "effective_avg_reliability": 0.5816,
-      "effective_base_total": 39888.0,
-      "effective_damage": 53209.33,
-      "effective_footprint_cells2": 13.8974,
-      "effective_sigma": 877.34,
+      "design_weapon_class": 0.75,
+      "effective_avg_reliability": 0.6585,
+      "effective_base_total": 14000.0,
+      "effective_damage": 18872.2,
+      "effective_footprint_cells2": 5.5159,
+      "effective_sigma": 544.34,
       "pricing": false,
       "range": "6151",
       "reloaddelay": "50",
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
-       "^ShrapnelWeapon",
-       "^TeslaWeapon",
-       "^MagicWeapon",
-       "^TSSonicGrenade"
+       "^Warhead_Concussion_Light",
+       "^Warhead_Sonic_Light",
+       "^Effect_Concussion_Light",
+       "^Effect_Sonic_Light"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_Concussion_Light",
+       "^Warhead_Sonic_Light"
       ],
       "weapon": "TSGrenadeSonic",
       "weapon_class_source": "template"
