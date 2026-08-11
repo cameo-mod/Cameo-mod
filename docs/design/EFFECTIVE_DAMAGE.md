@@ -124,12 +124,45 @@ AoE feels over- or under-valued, and it has a physical meaning you can argue abo
 |---|---|---|
 | `ReloadDelay`, `Burst`, `BurstDelays` | the metric is **per shot**, not per second | **it is not DPS.** `DPS = effective × burst / eff_reload`. `fit_class.py` still builds DPS the old way |
 | `FirepowerMultiplier` | actor-level, and one weapon serves many actors | multiply at the actor, as `fit_class.py` already does |
-| `WeaponClass` (0.75/1.0/1.25/1.5) | a tier weight, not a physical property | `formula.dps()` applies it separately |
-| `Versus` / armor profile | lives in the `^Warhead_*` template layer | two weapons with identical `Damage` and opposite armor profiles score the same |
-| `ValidTargets` | — | a ground-only and an all-target weapon score the same |
-| `MinRange`, blockability, `TargetActorCenter` | second-order | — |
-| `*_Percentage` twins | a different currency (% of max HP) | priced separately |
+| `WeaponClass` (0.75/1.0/1.25/1.5) | **RETIRED from pricing entirely (W4)** | `formula.dps()` no longer takes it; K measures weapon quality directly |
+| `Versus` / armor profile | lives in the `^Warhead_*` template layer | folded into K as `avg_versus` (W1), weighted by the measured armor census |
+| `*_Percentage` twins | a different currency (% of max HP) | converted through `reference_hp` and folded into K |
 | `*FriendlyFire` twins | baked own-side splash, never a benefit | correctly ignored |
+
+### 3.0 The context factors (W5, 2026-08-11) — no longer excluded
+
+`ValidTargets` and `MinRange` used to sit in the table above. They are now measured,
+each as a **separate named factor** rather than one blended fudge, so a price that
+moved can be traced to the single factor that moved it:
+
+| factor | models | shape | example |
+|---|---|---|---|
+| `targets` | `ValidTargets` — a weapon that cannot hit air fights less of the game | `FLOOR + (1-FLOOR) x engagement share`, `TARGETS_FLOOR = 0.5` | ground-only **0.95**, AA-only **0.55** |
+| `range` | outranging is worth more than DPS | `1 + 0.25 x (range/median - 1)`, bounded `[0.75, 1.50]` | median range 1.00, long artillery **1.33** |
+| `deadzone` | a `MinRange` hole costs the annulus you cannot cover | `1 - (MinRange/Range)²` (area, not radius) | MinRange 2800 / range 11000 → **0.96** |
+| `overkill` | DPS ignores waste — a 200k burst on a 50k target throws away 75% | `HP / (ceil(HP/dmg) x dmg)` — waste is only the LAST shot | 200k on 50k → **0.25** |
+
+**The split that matters.** `targets`, `range` and `deadzone` do **not** depend on
+`Damage`, so they fold into **`k_context`** and the pricing inversion stays closed-form:
+
+```
+Damage_required = target_dps x eff_reload / (burst x FP x k_context)
+```
+
+**`overkill` does** depend on Damage — it compares per-shot damage against target HP.
+Folding it into K would turn that exact inversion into a fixed-point iteration, so it is
+reported **beside** K and never inside it. `tools/tests/test_weapon_context.py` pins
+this distinction; if you ever fold `overkill` in, the inversion must become iterative.
+
+`TARGETS_FLOOR` exists because AA units are separately class-anchored: a raw
+engagement share would price an AA-only weapon at 0.10 and penalise those units twice.
+An exotic `ValidTargets` set with no `Ground`/`Air` token (`Infantry, Monster`) scores
+1.0 — declining to judge beats guessing "hits nothing".
+
+**`AttackDelay` — the fifth item — does not exist.** W5 listed it, but the field appears
+**0 times** in the tree: charge-up is an ACTOR trait (`AttackCharged`, `AttackCharges`,
+`AttackTesla`, …), and W4 implemented it there as a 0.75x price multiplier. Nothing to
+add at the weapon level.
 
 ### 3.1 ⚠ The ExtraDamage contradiction (needs a maintainer ruling)
 
@@ -180,10 +213,13 @@ the raw ledger (W3, 2026-08-11). One row per armament, joined back to the raw le
 | `reliability` | area-integrated | P-weighted falloff at the impact point |
 | `sigma` | area-integrated | scatter σ in WDist |
 | `k` | **pricing (W1)** | the dimensionless coefficient — see below |
+| `k_context` | **pricing (W5)** | `k × targets × range × deadzone` — still Damage-independent |
 | `avg_versus` | pricing | prevalence-weighted mean Versus over the FLAT warheads |
-| `effective_per_shot` | pricing | `k × damage_total` |
+| `factor_targets` / `factor_range` / `factor_deadzone` | pricing (W5) | the three context factors, individually inspectable (§3.0) |
+| `overkill` | diagnostic (W5) | Damage-DEPENDENT, so reported beside K, never inside it |
+| `effective_per_shot` | pricing | `k_context × damage_total` |
 | `eff_reload` | pricing | `formula.eff_reload(reload, burst, burst_delays)` |
-| `effective_dps` | pricing | `k × damage_total × burst / eff_reload` |
+| `effective_dps` | pricing | `k_context × damage_total × burst / eff_reload` |
 
 Two metrics sit side by side on purpose — §1 warns they are not interchangeable, so
 they keep distinct names instead of being blended into one number.

@@ -31,7 +31,10 @@ Usage:
 
 from __future__ import annotations
 
+import functools
+import math
 import pathlib
+import statistics
 import sys
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -51,6 +54,133 @@ FAMILIES = ["CannonHE", "CannonAP", "MissileAP", "MissileHE", "Railgun", "Tesla"
 
 PCT_SUFFIX = "_Percentage"
 CHIP_SUFFIX = "_ExtraDamage"
+
+# ---------------------------------------------------------------------------
+# W5 CONTEXT FACTORS — what K alone cannot see.
+#
+# Each is a SEPARATE named factor, never one blended fudge: a price that moved
+# has to be explainable by pointing at the factor that moved it.
+#
+# Three of them (targets / range / deadzone) are INDEPENDENT OF DAMAGE, so they
+# fold into `k_context` and the pricing inversion stays exact:
+#     Damage_required = target_dps x eff_reload / (burst x FP x k_context)
+# `overkill` is NOT: it compares per-shot damage against target HP, so it moves
+# when Damage moves. Folding it into K would turn the closed-form inversion into
+# a fixed-point iteration, so it is reported ALONGSIDE K, never inside it.
+# ---------------------------------------------------------------------------
+
+# A weapon that cannot hit air still fights 90% of the game. The floor stops a
+# specialist being priced into irrelevance: AA units are separately class-anchored,
+# so a raw share (Air-only = 0.10) would penalise them twice. Raise the floor for a
+# more forgiving model, lower it to punish narrow weapons harder.
+TARGETS_FLOOR = 0.5
+
+# Outranging is worth more than DPS, but not without limit — a siege weapon already
+# pays for its range in cost and mobility. Bounded so one long-range outlier cannot
+# dominate the price. NOTE: at weight 0.25 the LOW bound is the asymptote (a range of
+# 0 gives 1-0.25 = 0.75), so only the high bound actually clamps today; raising the
+# weight past 0.25 makes the low one bite too.
+RANGE_WEIGHT = 0.25
+RANGE_BOUNDS = (0.75, 1.50)
+
+# A MinRange dead zone costs the ANNULUS you cannot cover, which goes as the square
+# of the radius ratio — a MinRange of half the range loses a quarter of the circle.
+DEADZONE_WEIGHT = 1.0
+
+_INJECTED = None
+
+
+def use_ruleset(rs) -> None:
+    """Reuse a caller's Ruleset for the weapon-side census (see target_model)."""
+    global _INJECTED
+    _INJECTED = rs
+    median_weapon_range.cache_clear()
+
+
+@functools.lru_cache(maxsize=1)
+def median_weapon_range() -> float:
+    """Median `Range` over every live weapon — the yardstick for range advantage.
+
+    Measured, not assumed, so it self-updates as the roster grows (the same rule
+    target_model follows). Weapons without a Range are skipped rather than counted
+    as zero, which would drag the median down.
+    """
+    rs = _INJECTED if _INJECTED is not None else Ruleset(ROOT)
+    ranges = []
+    for name in rs.weapons:
+        resolved = rs.resolve_weapon(name)
+        if resolved is None:
+            continue
+        raw = resolved.get("Range")
+        if raw:
+            value = ed.parse_wdist(raw)
+            if value > 0:
+                ranges.append(value)
+    return statistics.median(ranges) if ranges else 6000.0
+
+
+def targets_factor(resolved) -> float:
+    """How much of the game this weapon can legally shoot at.
+
+    `ValidTargets` maps onto the engagement weights: `Ground` (with `Water`/`Ship`)
+    covers infantry + vehicles + buildings, `Air` covers aircraft. A ground-only
+    weapon reaches 90% of the engagement mass, an AA-only weapon 10%.
+    """
+    raw = resolved.get("ValidTargets")
+    if not raw:
+        return 1.0                      # engine default = everything
+    tokens = {t.strip().lower() for t in str(raw).split(",") if t.strip()}
+    ground = bool(tokens & {"ground", "water", "ship", "trees", "wall"})
+    air = "air" in tokens
+    if not ground and not air:
+        return 1.0                      # exotic set (Shielded, ...) — do not guess
+    share = 0.0
+    if ground:
+        share += tm.ENGAGEMENT["INF"] + tm.ENGAGEMENT["VEH"] + tm.ENGAGEMENT["BLD"]
+    if air:
+        share += tm.ENGAGEMENT["AIR"]
+    return TARGETS_FLOOR + (1.0 - TARGETS_FLOOR) * share
+
+
+def range_factor(resolved, median: float | None = None) -> float:
+    """Bounded reward for outranging the median weapon."""
+    raw = resolved.get("Range")
+    if not raw:
+        return 1.0
+    rng = ed.parse_wdist(raw)
+    median = median or median_weapon_range()
+    if rng <= 0 or median <= 0:
+        return 1.0
+    lo, hi = RANGE_BOUNDS
+    return min(max(1.0 + RANGE_WEIGHT * (rng / median - 1.0), lo), hi)
+
+
+def deadzone_factor(resolved) -> float:
+    """Cost of a `MinRange` hole: the fraction of the engagement disc lost."""
+    raw_min, raw_max = resolved.get("MinRange"), resolved.get("Range")
+    if not raw_min or not raw_max:
+        return 1.0
+    lo, hi = ed.parse_wdist(raw_min), ed.parse_wdist(raw_max)
+    if lo <= 0 or hi <= 0 or lo >= hi:
+        return 1.0
+    return 1.0 - DEADZONE_WEIGHT * (lo / hi) ** 2
+
+
+def overkill_factor(per_shot: float, target_hp: float | None = None) -> float:
+    """Fraction of dealt damage that is NOT wasted on an already-dead target.
+
+    A shot only overkills on the LAST hit, so the waste is the remainder of the
+    final shot: `ceil(HP/dmg)` shots deal `ceil(HP/dmg)*dmg` to remove `HP`.
+    A 200k burst on a 50k target keeps 25%; anything that needs several shots
+    tends to ~1.0.
+
+    DAMAGE-DEPENDENT — reported next to K, never folded into it.
+    """
+    target_hp = target_hp or tm.reference_hp()
+    if per_shot <= 0 or target_hp <= 0:
+        return 1.0
+    shots = math.ceil(target_hp / per_shot)
+    return target_hp / (shots * per_shot)
 
 
 def versus_of(node) -> dict[str, float]:
@@ -127,8 +257,19 @@ def analyse(resolved, damage_total: float = 20000.0):
                       "footprint": footprint, "kind": "pct"})
 
     k = sum(p["share"] * p["versus"] * (p["rel"] + p["secondary"]) for p in parts)
-    return {"k": k, "sigma": sigma, "instant": is_instant, "parts": parts,
-            "effective": damage_total * k, "ref_hp": ref_hp}
+
+    # W5 context factors. The damage-independent three multiply into k_context, so
+    # the pricing inversion stays closed-form; overkill is reported separately
+    # because it moves with Damage (see the constants block).
+    factors = {"targets": targets_factor(resolved),
+               "range": range_factor(resolved),
+               "deadzone": deadzone_factor(resolved)}
+    k_context = k * factors["targets"] * factors["range"] * factors["deadzone"]
+    overkill = overkill_factor(damage_total * k, ref_hp)
+
+    return {"k": k, "k_context": k_context, "factors": factors,
+            "overkill": overkill, "sigma": sigma, "instant": is_instant,
+            "parts": parts, "effective": damage_total * k_context, "ref_hp": ref_hp}
 
 
 def family_table(damage_total: float = 20000.0, level: str = "Heavy") -> str:
@@ -146,18 +287,24 @@ def family_table(damage_total: float = 20000.0, level: str = "Heavy") -> str:
         chip = [p for p in res["parts"] if p["kind"] == "chip"]
         pct = [p for p in res["parts"] if p["kind"] == "pct"]
         main = flat[0] if flat else None
-        rows.append((res["k"] * damage_total, fam, res, main, chip, pct))
-    rows.sort(reverse=True)
+        # Ranked on the CONTEXT-adjusted number — that is what the weapon is
+        # actually worth; the bare K stays visible as its own column.
+        rows.append((res["k_context"] * damage_total, fam, res, main, chip, pct))
+    rows.sort(key=lambda r: (-r[0], r[1]))
 
     out = [f"| # | family (Heavy) | avgVersus | reliab | footprint cell² | secondary | "
-           f"chip | %-twin | **K** | **effective @ {damage_total:,.0f}** |",
-           "|---|---|---|---|---|---|---|---|---|---|"]
+           f"chip | %-twin | **K** | targets | range | deadzone | overkill | "
+           f"**K ctx** | **effective @ {damage_total:,.0f}** |",
+           "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for i, (eff, fam, res, main, chip, pct) in enumerate(rows, 1):
+        f = res["factors"]
         out.append(
             f"| {i} | {fam} | {main['versus']:.2f} | {main['rel']:.2f} | "
             f"{main['footprint']:.2f} | {main['secondary']:.2f} | "
             f"{'yes' if chip else '—'} | {'yes' if pct else '—'} | "
-            f"**{res['k']:.2f}** | **{eff:,.0f}** |")
+            f"**{res['k']:.2f}** | {f['targets']:.2f} | {f['range']:.2f} | "
+            f"{f['deadzone']:.2f} | {res['overkill']:.2f} | "
+            f"**{res['k_context']:.2f}** | **{eff:,.0f}** |")
     return "\n".join(out)
 
 

@@ -33,7 +33,7 @@ status rather than keeping its own copy.
 | **W2** | `^LightFlameWeapon` → 3-way split + new `^Warhead_Inferno_*` family | 🔵 IN PROGRESS (Devin, 2026-08-11) | **Devin** | — |
 | **W3** | Ledger split: raw stays, derived moves to `docs/balance/derived/` | ✅ DONE | Claude | W1 |
 | **W4** | Retire weapon-class K; charge-up becomes an ACTOR property | ✅ DONE | Claude | W1 |
-| **W5** | Missing metrics: overkill/TTK, range advantage, ValidTargets, MinRange, AttackDelay | ⬜ READY | Claude | W1 |
+| **W5** | Missing metrics: overkill/TTK, range advantage, ValidTargets, MinRange, AttackDelay | ✅ DONE | Claude | W1 |
 | **W6** | C# `ModifiesCombatProportionalToPhysicalState` (+ pitch/glow hooks) | ⬜ READY | either | — |
 | **W7** | Sonic → `Resonance` meter (no new C# needed) | ⬜ READY | either | — |
 | **W8** | Gatling ladder → `SpinUp` meter | ⛔ BLOCKED | either | W6 |
@@ -228,12 +228,16 @@ and `ls docs/balance/derived/*.json | wc -l` → 33
    Live counts: `AttackFrontalCharged` 5 · `AttackCharges` 4 · `AttackTurretedCharged` 2.
 2. **`AttackTesla` (3 actors) is recorded but NOT discounted.** The Tesla Coil is already
    priced as a special case (ReloadDelay 100 + InitialChargeDelay 25, MaxCharges 3, its
-   own K), so the generic 0.75× on top would discount the same nerf twice. It sits in
+   own K), so the generic 0.75× on top would compensate the same nerf twice — leaving a
+   charging unit over-paid and cost-efficient rather than balanced. It sits in
    `CHARGE_UP_EXCLUDED_TRAITS` and **needs a maintainer ruling** before it joins.
 
-Also resolved: `FORMULA_V2` §3b planned this same nerf as a **−0.25 negative special**.
-Both would double-count, so §3b now records that the charge half is implemented as the
-actor price multiplier and the special-K route must not also fire. (The frontal-facing
+Also resolved: `FORMULA_V2` §3b planned to compensate this same nerf as a **−0.25
+negative special**. Both firing would pay for one weakness twice — and since a price cut
+is a BUFF in value terms (cheaper = better per credit), the result would be a charging
+unit that is over-compensated and cost-efficient, not balanced. §3b now records that the
+charge half is implemented as the actor price multiplier and the special-K route must
+not also fire. (The frontal-facing
 −0.25 half is untouched and still future scope.)
 
 **VERIFY:** `python -c "import sys;sys.path.insert(0,'tools/balance');import inspect,formula;print('weapon_class' in inspect.signature(formula.dps).parameters)"` → `False`
@@ -242,25 +246,40 @@ must name the retired thing. Test the signature, not the prose.)
 
 ---
 
-### W5 — The five missing metrics ⬜ READY · owner Claude · needs W1
+### W5 — The five missing metrics ✅ DONE · owner Claude · needs W1
 
-All approved by the maintainer 2026-08-11. Add each to `weapon_efficiency.py` as a
-named, individually-inspectable factor — never one blended fudge:
+All approved by the maintainer 2026-08-11. Each is a named, individually-inspectable
+factor in `weapon_efficiency.py` — never one blended fudge, so a price that moved can be
+traced to the ONE factor that moved it. Spec + shapes: `EFFECTIVE_DAMAGE.md` §3.0.
 
-1. **Overkill / TTK** — DPS ignores waste; a 200k burst on a 50k target throws away 75%.
-   Model per-shot damage against the class-anchor HP and discount the excess.
-2. **Range advantage** — outranging is worth more than DPS in a straight fight. Score
-   `range / class_median_range` as a bounded bonus.
-3. **`ValidTargets`** — ground-only and all-target weapons currently score identically.
-   A hard multiplier (a weapon that cannot hit air is worth measurably less).
-4. **`MinRange`** / blockability / turret traverse — a dead zone is a real cost.
-5. **`AttackDelay`** — the charge-up law lives in a memory, not in the metric (pairs
-   with W4).
+| # | factor | shape | it bites |
+|---|---|---|---|
+| 1 | **overkill / TTK** | `HP / (ceil(HP/dmg) × dmg)` — waste is only the LAST shot | 200k on 50k → **0.25** |
+| 2 | **range advantage** | `1 + 0.25 × (range/median − 1)`, bounded `[0.75, 1.50]` | long artillery **1.33** |
+| 3 | **`ValidTargets`** | `0.5 + 0.5 × engagement share` | ground-only **0.95**, AA-only **0.55** |
+| 4 | **`MinRange`** | `1 − (MinRange/Range)²` — the annulus, so area not radius | 2800/11000 → **0.96** |
+| 5 | **`AttackDelay`** | ✖ **does not exist** — see below | — |
 
-**DONE WHEN** each factor is a separate column in the derived output, each has a test,
-and `EFFECTIVE_DAMAGE.md` §3 documents it (moved out of "deliberately not included").
+**The split that makes this safe:** factors 2–4 do NOT depend on `Damage`, so they fold
+into the new **`k_context`** and the pricing inversion stays closed-form. **Overkill does**
+depend on Damage, so it is reported BESIDE K and never inside it — folding it in would turn
+`Damage_required = target_dps × eff_reload / (burst × FP × K)` into a fixed-point iteration.
+`test_weapon_context.py` pins that distinction explicitly.
 
-**VERIFY:** `python tools/balance/weapon_efficiency.py --families` shows the new columns.
+⚠ **Item 5 was based on a field that isn't there.** `AttackDelay` appears **0 times** in
+the tree. Charge-up is an ACTOR trait (`AttackCharged`, `AttackCharges`, `AttackTesla`, …)
+and W4 already implemented it there as the 0.75× price multiplier — which is the right
+layer, since one weapon serves many actors. Nothing to add at the weapon level; no
+placeholder was invented to fill the row.
+
+**DONE WHEN**
+- [x] each factor is a separate column in the derived output — `factor_targets`,
+      `factor_range`, `factor_deadzone`, `overkill`, plus `k_context`;
+- [x] each has a test — `tools/tests/test_weapon_context.py`, 21 tests;
+- [x] `EFFECTIVE_DAMAGE.md` §3.0 documents them, moved out of "deliberately not included".
+
+**VERIFY:** `python tools/balance/weapon_efficiency.py --families` shows
+`targets · range · deadzone · overkill · K ctx`.
 
 ---
 
@@ -409,6 +428,22 @@ Constants: `reference HP 74,000` (measured median) · `A_BLOB 9 cell²` · `A_SE
 INF 35% / VEH 40% / BLD 15% / AIR 10%.
 
 **If a change moves these numbers, that is the signal to explain in the commit message.**
+W3, W4 and W5 all left this list **byte-identical** — verified after each.
+
+**W5 added a second baseline, `k_context`** (K × targets × range × deadzone):
+
+`Storm 2.23 · Flame 1.89 · Plasma 1.86 · Concussion 1.84 · Thermobaric 1.83 ·
+Chemical 1.82 · Demolition 1.81 · Flak 1.77 · Quantum 1.70 · CannonHE 1.64 ·
+CannonAP 1.61 · MissileHE 1.51 · Sonic 1.49 · MissileAP 1.46 · Magic 0.91 ·
+Bullet 0.78 · Prism 0.76 · Tesla 0.74 · Railgun 0.69 · Laser 0.54`
+
+The ORDER changes against bare K, which is the point: **Flak overtakes Quantum** and
+**MissileHE overtakes Sonic** because they can hit air and the others cannot. Under bare
+K an AA-capable and a ground-only weapon were indistinguishable.
+
+Constants added by W5: `TARGETS_FLOOR 0.5` · `RANGE_WEIGHT 0.25` ·
+`RANGE_BOUNDS (0.75, 1.50)` · `DEADZONE_WEIGHT 1.0` · median weapon range **6000**
+(measured over 2364 weapons that declare a Range).
 
 ---
 

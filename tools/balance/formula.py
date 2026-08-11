@@ -44,8 +44,15 @@ def dps(damage: float, reload_delay: float, burst: int = 1,
 
 
 # Charge-up is an ACTOR property, not a weapon one (maintainer ruling 2026-08-11).
-# A charge delay is a large real nerf that DPS alone cannot see: the delay inflates
-# the effective reload AND the unit is helpless while charging, so the price drops.
+#
+# The NERF is the charge delay itself — it inflates the effective reload and leaves the
+# unit helpless while it winds up. This multiplier is the COMPENSATION for that nerf,
+# not more of it: a cheaper unit is BETTER per credit, so 0.75x is a buff in value terms
+# that pays the unit back for a weakness DPS alone cannot see.
+#
+# Which is why it must be applied EXACTLY ONCE. Two mechanisms compensating the same
+# delay would leave a charging unit over-paid and cost-efficient — the opposite of the
+# intent. See FORMULA_V2 3b: the -0.25 negative-special route is retired for this reason.
 CHARGE_UP_PRICE_MULTIPLIER = 0.75
 
 # Traits that make an actor pay for a charge-up. `AttackCharges` is the Obelisk of

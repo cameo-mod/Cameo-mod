@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (2 file(s)) | 24 | >= 24 |
-| T2 | `def test_*` in tools/tests (12 file(s)) | 115 | >= 115 |
-| T3 | modules with no test mentioning them | 216 | <= 216 |
+| T2 | `def test_*` in tools/tests (13 file(s)) | 136 | >= 136 |
+| T3 | modules with no test mentioning them | 215 | <= 215 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (216)
+## T3 — untested modules (215)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -227,7 +227,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/sweep_areadamage.py | sweep_areadamage |
 | python | tools/balance/update_ranges.py | update_ranges |
 | python | tools/balance/verify_generator_sync.py | verify_generator_sync |
-| python | tools/balance/weapon_efficiency.py | weapon_efficiency |
 | python | tools/packs/extract_shared.py | extract_shared |
 | python | tools/packs/split_faction.py | split_faction |
 | python | tools/rename/apply.py | apply |

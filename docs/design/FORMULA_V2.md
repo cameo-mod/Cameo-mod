@@ -189,7 +189,10 @@ LIST of detected specials + each ability's value; the sheet totals them.
   that move and fire at once.
 
   ⚠ **The charge-delay half is now IMPLEMENTED as an actor price multiplier,
-  NOT as a negative special — do not apply both** (W4, 2026-08-11). An actor
+  NOT as a negative special — do not apply both** (W4, 2026-08-11). Note the direction:
+  the charge delay is the NERF, and the price cut is the COMPENSATION for it. Since a
+  cheaper unit is better per credit, compensating twice does not "double-nerf" it — it
+  leaves it **over-paid and cost-efficient**, which is the opposite of the intent. An actor
   carrying `AttackCharged` / `AttackTurretedCharged` / `AttackFrontalCharged` /
   `AttackCharges` prices at **0.75×** via `formula.charge_price_multiplier`,
   read from the ledger's `charge_up` field. It is a multiplier on the PRICE

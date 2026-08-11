@@ -423,16 +423,23 @@ def derived_metrics(resolved, raw: dict) -> dict | None:
         flat = [p for p in res["parts"] if p["kind"] != "pct"]
         shares = sum(p["share"] for p in flat) or 1.0
         out["k"] = round(res["k"], 4)
+        out["k_context"] = round(res["k_context"], 4)
         out["avg_versus"] = round(
             sum(p["share"] * p["versus"] for p in flat) / shares, 4)
-        out["effective_per_shot"] = round(res["k"] * damage_total, 2)
+        # W5 factors, each its own column so a price move can be traced to ONE of
+        # them rather than to an opaque blend.
+        for name, value in res["factors"].items():
+            out[f"factor_{name}"] = round(value, 4)
+        out["overkill"] = round(res["overkill"], 4)
+        out["effective_per_shot"] = round(res["k_context"] * damage_total, 2)
 
         burst = int(fnum(raw.get("burst")) or 1)
         reload_delay = fnum(raw.get("reloaddelay"))
         if reload_delay:
             eff = formula.eff_reload(reload_delay, burst, fnum(raw.get("burstdelays")))
             out["eff_reload"] = round(eff, 2)
-            out["effective_dps"] = round(res["k"] * damage_total * burst / eff, 2)
+            out["effective_dps"] = round(
+                res["k_context"] * damage_total * burst / eff, 2)
     return out or None
 
 
@@ -703,6 +710,7 @@ def build_both(model: Model, only: str | None = None) -> tuple[dict[str, dict],
     """(raw ledgers, derived sidecars) from a single pass — they cannot desync."""
     rs = model.rs
     tm.use_ruleset(rs)          # reuse the built tree for the armor census (~8s saved)
+    we.use_ruleset(rs)          # ... and for the median-weapon-range yardstick
     ledgers: dict[str, dict] = {}
     sidecars: dict[str, dict] = {}
     for ledger, info in sorted(pack_rosters().items()):

@@ -53,8 +53,9 @@ class ChargeMultiplierTest(unittest.TestCase):
         self.assertEqual(formula.charge_price_multiplier("AttackCharges"), 0.75)
 
     def test_tesla_is_excluded(self):
-        """The Tesla Coil is already priced as a special case; the generic
-        discount on top would count the same nerf twice."""
+        """The Tesla Coil is already priced as a special case; the generic discount on
+        top would compensate one weakness twice, leaving it cost-efficient — a price
+        cut is a BUFF in value terms, so over-paying a unit is not a safe error."""
         self.assertEqual(formula.charge_price_multiplier("AttackTesla"), 1.0)
         self.assertIn("AttackTesla", formula.CHARGE_UP_EXCLUDED_TRAITS)
 
