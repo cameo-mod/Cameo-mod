@@ -7113,92 +7113,34 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "4",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
         "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "minrange": "1555",
       "pricing": true,
       "range": "7777",
       "reloaddelay": "108",
       "slot": "Armament",
       "versus_templates": [
-       "^RA2Grenade",
-       "^LightFlameWeapon",
-       "^ShrapnelWeapon",
-       "^RA2MediumMissile"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light_RA2",
+       "^Effect_Demolition_Light_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "RA2RTruckRocket",
       "weapon_class_source": "template"
@@ -7208,78 +7150,22 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "4",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
         "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "minrange": "1555",
       "pricing": true,
       "range": "7777",
@@ -7287,14 +7173,12 @@
       "requires": "rank-elite",
       "slot": "Armament@PRIMARYELITE",
       "versus_templates": [
-       "^RA2Grenade",
-       "^LightFlameWeapon",
-       "^ShrapnelWeapon",
-       "^RA2MediumMissile"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light_RA2",
+       "^Effect_Demolition_Light_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "RA2RTruckRocket",
       "weapon_class_source": "template"

@@ -8790,6 +8790,16 @@ DefuseKit:
 		Inaccuracy: 400
 		Image: BOMB
 
+^Projectile_Grenade_Light_RA2:
+	Projectile: Bullet
+		Speed: 333
+		Blockable: false
+		LaunchAngle: 77
+		Inaccuracy: 777
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+
 ^Projectile_Laser_Heavy:
 	Report: obelray1.aud
 	Projectile: LaserZap
@@ -9498,6 +9508,30 @@ DefuseKit:
 		ImpactSounds: splash9.aud
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
+^Effect_Demolition_Light_RA2:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: demotruck_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpbara.aud, gexpbarb.aud, gexpbarc.aud
+		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+		GlowScale: 2.5
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
