@@ -3975,14 +3975,14 @@
         "damage": "32000",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
-        "tag": "Flame_Light",
+        "tag": "Flak_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
-        "tag": "Flame_Light_Percentage",
+        "tag": "Flak_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -3993,12 +3993,12 @@
       "reloaddelay": "25",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
+       "^Warhead_Flak_Light",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Light"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flak_Light"
       ],
       "weapon": "d2k_basq",
       "weapon_class_source": "template"
@@ -4010,14 +4010,14 @@
         "damage": "32000",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
-        "tag": "Flame_Light",
+        "tag": "Flak_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
-        "tag": "Flame_Light_Percentage",
+        "tag": "Flak_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -4031,7 +4031,7 @@
        "d2k_basq"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_Flak_Light"
       ],
       "weapon": "d2k_basq_AA",
       "weapon_class_source": "template"

@@ -1346,22 +1346,23 @@ farasha_drone_ixian:
 		Damage: 3
 
 d2k_basq:
-	Inherits@wh: ^Warhead_Flame_Light
-	Inherits@proj: ^Projectile_Flame_Light
-	Inherits@fx: ^Effect_Flame_Light
+	Inherits@wh: ^Warhead_Flak_Light
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Light
 	ReloadDelay: 25
 	Range: 3333
 	Report: zhyfir00.aud
 	TargetActorCenter: true
 	ValidTargets: Ground, Water
 	Projectile: Bullet
+		-Image:
+		ContrailStartColor: 00FF4400
 		Speed: 3333
 		Inaccuracy: 333
-		ContrailStartColor: 00FF4400
-	Warhead@Flame_Light:
+	Warhead@Flak_Light:
 		ValidTargets: Ground, Water
 		Damage: 32000
-	Warhead@Flame_Light_Percentage:
+	Warhead@Flak_Light_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 16
 	Warhead@Effect: CreateEffect
@@ -1369,15 +1370,18 @@ d2k_basq:
 		ImpactSounds: EXPLSML4.WAV
 		ExplosionPalette: effect75alpha
 		ImpactActors: false
-		ValidTargets: Ground, Air
+		ValidTargets: Ground
 
 d2k_basq_AA:
 	Inherits: d2k_basq
 	ValidTargets: Air
 	Range: 6666
-	Warhead@Flame_Light:
+	-Warhead@EffectAir:
+	Warhead@Flak_Light:
 		ValidTargets: Air
-	Warhead@Flame_Light_Percentage:
+	Warhead@Flak_Light_Percentage:
+		ValidTargets: Air
+	Warhead@Effect: CreateEffect
 		ValidTargets: Air
 
 # d2k_guild_teleport:
