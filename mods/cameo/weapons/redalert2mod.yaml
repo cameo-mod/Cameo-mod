@@ -1239,8 +1239,8 @@ SyndicateFireballLauncher:
 		Damage: 1
 RA2RTruckRocket:
 	Inherits@wh: ^Warhead_MissileHE_Medium
-	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileHE_Medium
+	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
+	Inherits@fx: ^Effect_MissileHE_Medium_RA2
 	ReloadDelay: 108
 	Burst: 8
 	BurstDelays: 3
@@ -1248,31 +1248,12 @@ RA2RTruckRocket:
 	MinRange: 1555
 	Report: vintatta.wav
 	ValidTargets: Ground, Water
-	Projectile: Missile
-		Image: patriot
-		-TrailImage:
-		-TrailInterval:
-		ContrailLength: 33
-		ContrailStartWidth: 33
-		ContrailEndWidth: 1
 	Warhead@MissileHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@MissileHE_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
-		ValidTargets: Ground, Ship
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
 
 LatinBuggyRocket:
 	Inherits@wh: ^Warhead_Demolition_Light
