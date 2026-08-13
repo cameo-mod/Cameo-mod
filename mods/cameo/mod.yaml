@@ -25,6 +25,7 @@ FileSystem: DefaultFileSystem
 		~cameo|ContentPacks/TiberianSun/Shared/files/sprites: ts_shared_sprites
 		~cameo|ContentPacks/TiberianSun/Shared/files/voxels: ts_shared_voxels
 		~cameo|ContentPacks/TiberianSun/Shared/files/sounds: ts_shared_sounds
+		~cameo|ContentPacks/TiberiumWars/Scrin/files/sprites: scrin_sprites
 		~cameo|ContentPacks/Shared/files/icons: shared_icons
 		~cameo|ContentPacks/Shared/files/sprites: shared_sprites
 		~cameo|ContentPacks/Shared/files/voxels: shared_voxels
@@ -132,6 +133,7 @@ Include: ContentPacks/TiberianSun/CABAL/content.yaml
 Include: ContentPacks/TiberianSun/Nod/content.yaml
 Include: ContentPacks/TiberianSun/GDI/content.yaml
 Include: ContentPacks/TiberianSun/Forgotten/content.yaml
+Include: ContentPacks/TiberiumWars/Scrin/content.yaml
 Include: ContentPacks/RedAlert2/Shared/content.yaml
 Include: ContentPacks/RedAlert2/Allies/content.yaml
 Include: ContentPacks/RedAlert2/Soviets/content.yaml

@@ -1,0 +1,110 @@
+# Structures-only foundation. These actors are available to maps and the editor,
+# but stay outside production until the Drone Ship and the rest of the faction exist.
+
+scrin_drone_platform:
+	Inherits: ^Building
+	Inherits@shape: ^3x2Shape
+	Tooltip:
+		Name: actor_scrin_drone_platform.name
+	Building:
+		Dimensions: 3,2
+		Footprint: xxx xxx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_reactor:
+	Inherits: ^Building
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: actor_scrin_reactor.name
+	Building:
+		Dimensions: 2,2
+		Footprint: xx xx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_extractor:
+	Inherits: ^Building
+	Inherits@shape: ^3x3Shape
+	Tooltip:
+		Name: actor_scrin_extractor.name
+	Building:
+		Dimensions: 3,3
+		Footprint: xxx xxx xxx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_portal:
+	Inherits: ^Building
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: actor_scrin_portal.name
+	Building:
+		Dimensions: 2,2
+		Footprint: xx xx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_warp_gate:
+	Inherits: ^Building
+	Inherits@shape: ^3x2Shape
+	Tooltip:
+		Name: actor_scrin_warp_gate.name
+	Building:
+		Dimensions: 3,2
+		Footprint: xxx xxx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_nerve_center:
+	Inherits: ^Building
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: actor_scrin_nerve_center.name
+	Building:
+		Dimensions: 2,2
+		Footprint: xx xx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_stasis_chamber:
+	Inherits: ^Building
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: actor_scrin_stasis_chamber.name
+	Building:
+		Dimensions: 2,2
+		Footprint: xx xx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_technology_assembler:
+	Inherits: ^Building
+	Inherits@shape: ^3x3Shape
+	Tooltip:
+		Name: actor_scrin_technology_assembler.name
+	Building:
+		Dimensions: 3,3
+		Footprint: xxx xxx xxx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_signal_transmitter:
+	Inherits: ^Building
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: actor_scrin_signal_transmitter.name
+	Building:
+		Dimensions: 2,2
+		Footprint: xx xx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
