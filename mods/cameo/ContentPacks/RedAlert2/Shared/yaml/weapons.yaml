@@ -109,30 +109,6 @@
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 
-^RA2MediumMissileHE:
-	Inherits@wh: ^Warhead_MissileHE_Medium
-	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileHE_Medium
-	Projectile: Missile
-		Image: patriot
-		-TrailImage:
-		-TrailInterval:
-		ContrailLength: 33
-		ContrailStartWidth: 33
-		ContrailEndWidth: 1
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
-		ValidTargets: Ground, Ship
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-
 ^RA2HeavyMissile:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy

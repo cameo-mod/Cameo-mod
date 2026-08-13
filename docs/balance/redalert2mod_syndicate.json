@@ -7135,7 +7135,9 @@
       "reloaddelay": "108",
       "slot": "Armament",
       "versus_templates": [
-       "^RA2MediumMissileHE"
+       "^Warhead_MissileHE_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileHE_Medium"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium"
@@ -7171,7 +7173,9 @@
       "requires": "rank-elite",
       "slot": "Armament@PRIMARYELITE",
       "versus_templates": [
-       "^RA2MediumMissileHE"
+       "^Warhead_MissileHE_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileHE_Medium"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium"
