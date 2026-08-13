@@ -1325,9 +1325,9 @@ d2k_farasha_aa:
 		ValidTargets: Air
 
 farasha_drone_ixian:
-	Inherits@wh: ^Warhead_Inferno_Heavy
+	Inherits@wh: ^Warhead_Inferno_Light
 	Inherits@proj: ^Projectile_Laser_Heavy
-	Inherits@fx: ^Effect_Inferno_Heavy
+	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 25
 	Range: 2500
 	Report: d2k_alfayrus.wav
@@ -1336,11 +1336,11 @@ farasha_drone_ixian:
 		Width: 50
 		ZOffset: 2047
 		Color: FF0000
-	Warhead@Inferno_Heavy:
+	Warhead@Inferno_Light:
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@Inferno_Heavy_Percentage:
+	Warhead@Inferno_Light_Percentage:
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Air
 		Damage: 3

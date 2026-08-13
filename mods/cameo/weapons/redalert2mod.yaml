@@ -1238,9 +1238,7 @@ SyndicateFireballLauncher:
 	Warhead@Flame_Heavy_Percentage:
 		Damage: 1
 RA2RTruckRocket:
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@proj: ^Projectile_Grenade_Light_RA2
-	Inherits@fx: ^Effect_Demolition_Light_RA2
+	Inherits: ^RA2MediumMissileHE
 	ReloadDelay: 108
 	Burst: 8
 	BurstDelays: 3
@@ -1248,10 +1246,10 @@ RA2RTruckRocket:
 	MinRange: 1555
 	Report: vintatta.wav
 	ValidTargets: Ground, Water
-	Warhead@Demolition_Light:
+	Warhead@MissileHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@Demolition_Light_Percentage:
+	Warhead@MissileHE_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 

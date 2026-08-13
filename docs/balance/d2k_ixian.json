@@ -10,32 +10,32 @@
       "damage_warheads": [
        {
         "damage": "6000",
-        "falloff": "100, 50, 25, 10, 5, 0",
+        "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "100",
-        "tag": "Inferno_Heavy",
+        "tag": "Inferno_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
-        "falloff": "100, 50, 25, 10, 5, 0",
+        "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "50",
-        "tag": "Inferno_Heavy_Percentage",
+        "tag": "Inferno_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "2500",
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Inferno_Heavy",
+       "^Warhead_Inferno_Light",
        "^Projectile_Laser_Heavy",
-       "^Effect_Inferno_Heavy"
+       "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_Inferno_Heavy"
+       "^Warhead_Inferno_Light"
       ],
       "weapon": "farasha_drone_ixian",
       "weapon_class_source": "template"

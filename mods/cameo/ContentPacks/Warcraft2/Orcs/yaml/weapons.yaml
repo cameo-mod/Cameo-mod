@@ -338,7 +338,7 @@ wc2deathknightDeathAndDecay_Spread:
 wc2deathknightDeathAndDecay_Hit:
 	Inherits@wh: ^Warhead_Inferno_Heavy
 	Inherits@proj: ^Projectile_Inferno_Heavy
-	Inherits@fx: ^Effect_Inferno_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	ValidTargets: Ground, Water, Air
 	Projectile: InstantHit
 		Speed: 0c512

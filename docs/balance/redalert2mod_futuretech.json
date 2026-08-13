@@ -6904,33 +6904,31 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
-        "tag": "Demolition_Light",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "4",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "minrange": "1555",
       "pricing": true,
       "range": "7777",
       "reloaddelay": "108",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light_RA2",
-       "^Effect_Demolition_Light_RA2"
+       "^RA2MediumMissileHE"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light"
+       "^Warhead_MissileHE_Medium"
       ],
       "weapon": "RA2RTruckRocket",
       "weapon_class_source": "template"
@@ -6941,21 +6939,21 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
-        "tag": "Demolition_Light",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "4",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "MissileHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "minrange": "1555",
       "pricing": true,
       "range": "7777",
@@ -6963,12 +6961,10 @@
       "requires": "rank-elite",
       "slot": "Armament@PRIMARYELITE",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light_RA2",
-       "^Effect_Demolition_Light_RA2"
+       "^RA2MediumMissileHE"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light"
+       "^Warhead_MissileHE_Medium"
       ],
       "weapon": "RA2RTruckRocket",
       "weapon_class_source": "template"

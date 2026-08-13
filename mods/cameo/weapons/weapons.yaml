@@ -8790,16 +8790,6 @@ DefuseKit:
 		Inaccuracy: 400
 		Image: BOMB
 
-^Projectile_Grenade_Light_RA2:
-	Projectile: Bullet
-		Speed: 333
-		Blockable: false
-		LaunchAngle: 77
-		Inaccuracy: 777
-		Image: d2k_missile2
-		Palette: d2keffect
-		TrailImage: large_trail
-
 ^Projectile_Laser_Heavy:
 	Report: obelray1.aud
 	Projectile: LaserZap
@@ -9910,35 +9900,6 @@ DefuseKit:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
-
-^Effect_Inferno_Heavy:
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: big_napalm
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
-		GlowScale: 2.0
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 10
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@GroundFire: SpawnActor
-		Actors: groundfire
-		Range: 1
-		ForceGround: true
-		OwnerType: InternalName
-		InternalOwner: Neutral
 
 ^Effect_Magic_Light:
 	Warhead@Smudge: LeaveSmudge
