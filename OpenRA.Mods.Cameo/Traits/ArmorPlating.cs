@@ -84,7 +84,13 @@ namespace OpenRA.Mods.Cameo.Traits
 	public class ArmorPlating : PausableConditionalTrait<ArmorPlatingInfo>, ITick, ISync,
 		ISelectionBar, IDamageModifier, INotifyDamage
 	{
-		readonly Health health;
+		// Resolved in Created(), NOT in the constructor. Traits are constructed in declaration
+		// order, so TraitOrDefault<Health>() from a constructor returns null whenever Health
+		// happens to be registered later — and a null health means MaxStrength collapses to
+		// Info.MaxStrength (0 by default), the plating starts empty, EmptyCondition fires
+		// immediately, and the whole layer silently does nothing. Created() runs after every
+		// trait exists, so the lookup is always valid there.
+		Health health;
 
 		[VerifySync]
 		public int Strength { get; private set; }
@@ -106,13 +112,15 @@ namespace OpenRA.Mods.Cameo.Traits
 		int pendingDamage;
 
 		public ArmorPlating(ActorInitializer init, ArmorPlatingInfo info)
-			: base(info)
-		{
-			health = init.Self.TraitOrDefault<Health>();
-		}
+			: base(info) { }
 
 		protected override void Created(Actor self)
 		{
+			health = self.TraitOrDefault<Health>();
+
+			// Before base.Created, which is what fires TraitEnabled for an unconditional
+			// trait (ConditionalTrait.cs:63) — TraitEnabled sets Strength from MaxStrength,
+			// so MaxStrength has to be real by then.
 			RecalculateMax();
 			base.Created(self);
 		}
