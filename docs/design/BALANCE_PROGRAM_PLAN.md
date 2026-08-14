@@ -844,6 +844,82 @@ tilt, firing recoil, roll on turns), `PeriodicSpriteEffect`.
 **DONE WHEN** a unit can carry Shield/Armor/Health with per-layer bars, the active layer
 alone decides the Versus lookup, and a dual-armor cyborg needs no `DamageMultiplier` crutch.
 
+#### W21 — verified ground truth (2026-08-12), correcting three assumptions
+
+⚠ **`Integrity` is NOT the shield.** It is Cameo's own **electronics** pool
+(`AffectedByDamageTypes: Tesla`, `ActiveCondition: electronics`, sits beside the EMP bar,
+drained by a warhead's `IntegrityScale`). The shield is **`Shielded`**, from
+`engine/OpenRA.Mods.AS/Traits/Shielded.cs` — 23 files use it vs 9 for Integrity. Every
+`[Desc]` in `Integrity.cs` had been copied verbatim from `Shielded.cs` and called it a
+shield; corrected 2026-08-12. ⚠ `Shielded` lives in the **engine submodule**, so extending
+it needs the mirror workflow — prefer a Cameo-side layer trait.
+
+**The stack forks below the shield** (maintainer 2026-08-12): *"Integrity should only be
+protected by shields but not by armor, so once there are no shields left the unit starts
+taking integrity damage."*
+
+```
+        Shield  (Shielded — absorbs EVERYTHING, incl. electrical)
+           |
+    +------+------+
+    |             |
+  Armor        Integrity        (parallel, selected by damage type:
+ (physical)   (electrical)       armor never protects electronics)
+    |             |
+    +------+------+
+           |
+        Health
+```
+
+**Measured, and each contradicts a stated assumption:**
+
+1. **The regen rule is real but has DRIFTED.** `defaults.yaml` carries only a flat
+   `Step: 10` fallback; the real rule is hand-set per actor. Of 846 actors with a Step:
+   **508 = HP/2500, 232 = HP/1000, 106 (12.5%) OFF-RULE** — including an undocumented
+   third divisor `HP/1250` (chronotank, japan_chihaheavytank, apparition.ixian) and
+   `HP/10000` on the carryalls. This is the case for moving regen INTO the trait.
+   Note the defaults already slow infantry down via `Delay: 2` / `DamageCooldown: 20`
+   against vehicles' `1` / `10`.
+2. **"Versus vs shields is always >100%" is true for mains, false for twins.**
+   Main warheads: n=185, median 110, **129 (70%) above 100**, range 9–400.
+   `%`-twins: n=89, median **25**, only **4 (4%)** above 100.
+   ⚠ The W15 Versus x5 rebase silently FLIPS this — a twin at 25 becomes 125, turning
+   every percentage warhead from shield-resistant to shield-punishing. Decide it
+   deliberately.
+3. **The 150% multiplier is the REVERSE of what was remembered.**
+   `DamageMultiplier@shieldpermanent: Modifier: 150` is gated on `shieldpermanent`,
+   granted by `ixian_upgrade_personalshield` / `japan_upgrade_stealthsuitintegration` /
+   `ordos_upgrade_shields` — the unit's OWN permanent shield. So **permanently**-shielded
+   units take 150% damage and externally-shielded ones take normal, not the other way
+   round. The plan (drop the multiplier, halve externally-granted capacity so 1 shield HP
+   always means one thing) still stands — it just corrects the opposite asymmetry.
+
+**⚠ The 50% armor cap does NOT contain the problem it was chosen for.** Effective HP from a
+layer is `pool × (1 / versus)`. Armor at 50% of HP using a VEHICLE armor type, hit by an
+anti-infantry weapon at 20% vs Medium, absorbs `50k / 0.20 = 250k` — **2.5x the unit's
+whole health bar, from a "50%" layer** — and ~8x at a 17:1 profile. Pool size is additive,
+the armor multiplier is multiplicative, so no flat percentage can cap it. **The cap must
+scale with the spread** (e.g. `pool = HP × k / spread`), or the armor layer's Versus band
+must be narrowed (e.g. 60–140) while body armor keeps the full 20–100.
+
+**A property worth keeping deliberately:** shield 200% pool at 2x rate and armor 50% pool
+at 0.5x rate both refill in EXACTLY the same time as health (2500 ticks in the worked
+example) — pool and rate cancel. So "shields regenerate twice as fast" changes nothing in
+relative terms; only the ramp-up delays (25 / 125 / 250) differentiate the layers. In
+sustained fire the ABSOLUTE rate is what matters, and the shield soaks 4x the armor's
+per-tick — likely more attrition dominance than intended.
+
+**Suggested single ramp formula** for all three layers (one implementation, no per-unit
+tuning): `rate = base × min(1, ticks_since_damage / ramp)`, ramp = 25 / 125 / 250.
+
+**Open questions blocking implementation** — routing (Q4 answered above):
+excess-damage cascade vs block (`Shielded.BlockExcessDamage` is currently `false`);
+which pool a `%`-warhead computes against; whether physical-state meters and DoT bypass
+shields; whether splash hits all layers; repair/engineer/medic coverage per layer; whether
+a destroyed armor bar regenerates in combat or needs a facility; veterancy/crate HP
+scaling across layers; whether vehicles may carry armor or infantry-class only; three
+stacked bars vs one segmented bar at Cameo's zoom.
+
 ---
 
 ## 5. WHAT THE MODEL SAYS TODAY (the W1 baseline, for regression comparison)
