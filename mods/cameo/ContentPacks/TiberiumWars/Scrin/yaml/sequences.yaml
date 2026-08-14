@@ -5,25 +5,27 @@ scrin_drone_platform:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: -0.127,-60.074
+		Offset: 3.873,-48.074
 
 scrin_reactor:
 	idle:
 		Filename: scrin_sprites|scrin_reactor.png
 		Start: 0
-		Length: 1
-		ShadowStart: 1
+		Length: 12
+		Tick: 160
+		ShadowStart: 12
 		ShadowZOffset: -5
-		Offset: -0.094,-33.226
+		Offset: 11.906,-1.226
 
 scrin_extractor:
 	idle:
 		Filename: scrin_sprites|scrin_extractor.png
 		Start: 0
-		Length: 1
-		ShadowStart: 1
+		Length: 16
+		Tick: 100
+		ShadowStart: 16
 		ShadowZOffset: -5
-		Offset: 5.027,-30.344
+		Offset: 9.027,1.656
 
 scrin_portal:
 	idle:
@@ -32,7 +34,7 @@ scrin_portal:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: -0.006,-37.249
+		Offset: 3.994,-17.249
 
 scrin_warp_gate:
 	idle:
@@ -41,7 +43,7 @@ scrin_warp_gate:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: 0.000,-36.954
+		Offset: 0.000,-16.954
 
 scrin_nerve_center:
 	idle:
@@ -50,7 +52,7 @@ scrin_nerve_center:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: 0.045,-57.489
+		Offset: 4.045,-33.489
 
 scrin_stasis_chamber:
 	idle:
@@ -59,7 +61,7 @@ scrin_stasis_chamber:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: 11.266,-26.248
+		Offset: 23.266,-10.248
 
 scrin_technology_assembler:
 	idle:
@@ -68,7 +70,7 @@ scrin_technology_assembler:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: -0.018,-10.543
+		Offset: -0.018,-2.543
 
 scrin_signal_transmitter:
 	idle:
@@ -77,4 +79,123 @@ scrin_signal_transmitter:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: -11.430,-34.649
+		Offset: -11.430,-18.649
+
+scrin_buzzer_hive:
+	idle:
+		Filename: scrin_sprites|scrin_buzzer_hive.png
+		Start: 0
+		Length: 1
+		ShadowStart: 1
+		ShadowZOffset: -5
+		Offset: -4.000,-24.000
+
+scrin_photon_cannon:
+	idle:
+		Filename: scrin_sprites|scrin_photon_cannon.png
+		Start: 0
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 8.000,-12.000
+
+scrin_plasma_missile_battery:
+	idle:
+		Filename: scrin_sprites|scrin_plasma_missile_battery.png
+		Start: 0
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 4.000,-20.000
+
+scrin_growth_accelerator:
+	idle:
+		Filename: scrin_sprites|scrin_growth_accelerator.png
+		Start: 0
+		Length: 16
+		Tick: 100
+		ShadowStart: 16
+		ShadowZOffset: -5
+		Offset: 0.000,-16.000
+
+scrin_storm_column:
+	idle:
+		Filename: scrin_sprites|scrin_storm_column.png
+		Start: 0
+		Length: 16
+		Tick: 100
+		ShadowStart: 16
+		ShadowZOffset: -5
+		Offset: 12.000,-44.000
+
+scrin_rift_generator:
+	idle:
+		Filename: scrin_sprites|scrin_rift_generator.png
+		Start: 0
+		Length: 1
+		ShadowStart: 1
+		ShadowZOffset: -5
+		Offset: 0.000,-36.000
+
+scrin_lightning_spike:
+	idle:
+		Filename: scrin_sprites|scrin_lightning_spike.png
+		Start: 0
+		Length: 1
+		ShadowStart: 1
+		ShadowZOffset: -5
+		Offset: -4.000,-16.000
+
+scrin_tiberium_hive:
+	idle:
+		Filename: scrin_sprites|scrin_tiberium_hive.png
+		Start: 0
+		Length: 1
+		ShadowStart: 1
+		ShadowZOffset: -5
+		Offset: 0.000,-20.000
+
+scrin_warp_chasm:
+	idle:
+		Filename: scrin_sprites|scrin_warp_chasm.png
+		Start: 0
+		Length: 1
+		ShadowStart: 1
+		ShadowZOffset: -5
+		Offset: 0.000,-24.000
+
+scrin_foundry:
+	idle:
+		Filename: scrin_sprites|scrin_foundry.png
+		Start: 0
+		Length: 1
+		ShadowStart: 1
+		ShadowZOffset: -5
+		Offset: 8.000,-4.000
+
+scrin_outpost:
+	idle:
+		Filename: scrin_sprites|scrin_outpost.png
+		Start: 0
+		Length: 1
+		ShadowStart: 1
+		ShadowZOffset: -5
+		Offset: 4.000,-36.000
+
+scrin_control_node:
+	idle:
+		Filename: scrin_sprites|scrin_control_node.png
+		Start: 0
+		Length: 1
+		ShadowStart: 1
+		ShadowZOffset: -5
+		Offset: 4.000,-20.000
+
+scrin_phase_generator:
+	idle:
+		Filename: scrin_sprites|scrin_phase_generator.png
+		Start: 0
+		Length: 1
+		ShadowStart: 1
+		ShadowZOffset: -5
+		Offset: 4.000,-16.000

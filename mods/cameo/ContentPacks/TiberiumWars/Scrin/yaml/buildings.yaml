@@ -1,5 +1,6 @@
-# Structures-only foundation. These actors are available to maps and the editor,
-# but stay outside production until the Drone Ship and the rest of the faction exist.
+# Structures-and-defenses foundation. These actors are available to maps and the
+# editor, but stay outside production until the Drone Ship, weapons, and the rest
+# of the faction exist.
 
 scrin_drone_platform:
 	Inherits: ^Building
@@ -102,6 +103,174 @@ scrin_signal_transmitter:
 	Inherits@shape: ^2x2Shape
 	Tooltip:
 		Name: actor_scrin_signal_transmitter.name
+	Building:
+		Dimensions: 2,2
+		Footprint: xx xx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_buzzer_hive:
+	Inherits: ^Building
+	Inherits@shape: ^1x1Shape
+	Tooltip:
+		Name: actor_scrin_buzzer_hive.name
+	Building:
+		Dimensions: 1,1
+		Footprint: x
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_photon_cannon:
+	Inherits: ^Building
+	Inherits@shape: ^1x1Shape
+	Tooltip:
+		Name: actor_scrin_photon_cannon.name
+	Building:
+		Dimensions: 1,1
+		Footprint: x
+		LocalCenterOffset: 0,0,0
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 0
+		RealignDelay: -1
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_plasma_missile_battery:
+	Inherits: ^Building
+	Inherits@shape: ^1x1Shape
+	Tooltip:
+		Name: actor_scrin_plasma_missile_battery.name
+	Building:
+		Dimensions: 1,1
+		Footprint: x
+		LocalCenterOffset: 0,0,0
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 0
+		RealignDelay: -1
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_growth_accelerator:
+	Inherits: ^Building
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: actor_scrin_growth_accelerator.name
+	Building:
+		Dimensions: 2,2
+		Footprint: xx xx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_storm_column:
+	Inherits: ^Building
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: actor_scrin_storm_column.name
+	Building:
+		Dimensions: 2,2
+		Footprint: xx xx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_rift_generator:
+	Inherits: ^Building
+	Inherits@shape: ^3x3Shape
+	Tooltip:
+		Name: actor_scrin_rift_generator.name
+	Building:
+		Dimensions: 3,3
+		Footprint: xxx xxx xxx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_lightning_spike:
+	Inherits: ^Building
+	Inherits@shape: ^1x1Shape
+	Tooltip:
+		Name: actor_scrin_lightning_spike.name
+	Building:
+		Dimensions: 1,1
+		Footprint: x
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_tiberium_hive:
+	Inherits: ^Building
+	Inherits@shape: ^1x1Shape
+	Tooltip:
+		Name: actor_scrin_tiberium_hive.name
+	Building:
+		Dimensions: 1,1
+		Footprint: x
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_warp_chasm:
+	Inherits: ^Building
+	Inherits@shape: ^4x4Shape
+	Tooltip:
+		Name: actor_scrin_warp_chasm.name
+	Building:
+		Dimensions: 4,4
+		Footprint: xxxx xxxx xxxx xxxx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_foundry:
+	Inherits: ^Building
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: actor_scrin_foundry.name
+	Building:
+		Dimensions: 2,2
+		Footprint: xx xx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_outpost:
+	Inherits: ^Building
+	Inherits@shape: ^1x1Shape
+	Tooltip:
+		Name: actor_scrin_outpost.name
+	Building:
+		Dimensions: 1,1
+		Footprint: x
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_control_node:
+	Inherits: ^Building
+	Inherits@shape: ^4x4Shape
+	Tooltip:
+		Name: actor_scrin_control_node.name
+	Building:
+		Dimensions: 4,4
+		Footprint: xxxx xxxx xxxx xxxx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_phase_generator:
+	Inherits: ^Building
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: actor_scrin_phase_generator.name
 	Building:
 		Dimensions: 2,2
 		Footprint: xx xx
