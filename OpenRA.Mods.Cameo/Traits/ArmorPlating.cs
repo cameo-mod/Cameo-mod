@@ -75,6 +75,12 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		public readonly bool ShowSelectionBar = true;
 
+		[Desc("Hide the bar while the plating is at full strength, so an undamaged unit shows",
+			"no plating bar. This is what makes the layer honour the player's",
+			"'Show Status Bars: On Damage' setting — the renderer draws an extra bar whenever",
+			"its value is non-zero, so a bar that reports full is a bar that is always on screen.")]
+		public readonly bool HideBarWhenFull = true;
+
 		[Desc("W21 R13: armor reads yellow-orange, distinct from the health bar and the shield's purple.")]
 		public readonly Color SelectionBarColor = Color.FromArgb(255, 176, 64);
 
@@ -263,12 +269,20 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (!Info.ShowSelectionBar || IsTraitDisabled || MaxStrength == 0)
 				return 0f;
 
+			// Reporting 0 is how an extra bar hides: the renderer draws it when the value is
+			// non-zero OR DisplayWhenEmpty is set (IsometricSelectionBarsAnnotationRenderable
+			// .DrawExtraBars). An intact plating that reported its full value would sit on
+			// screen permanently, ignoring 'Show Status Bars: On Damage'.
+			if (Info.HideBarWhenFull && Strength >= MaxStrength)
+				return 0f;
+
 			return (float)Strength / MaxStrength;
 		}
 
-		// W21 R13: all three bars are always visible, so an empty plating still shows its
-		// (empty) bar rather than silently vanishing from the unit's silhouette.
-		bool ISelectionBar.DisplayWhenEmpty => Info.ShowSelectionBar && !IsTraitDisabled;
+		// False, so a plating stripped to nothing stops drawing an empty bar too. R13's "all
+		// three bars are always visible" means visible to EVERY player, not visible at every
+		// moment — an undamaged unit should show no damage bars at all.
+		bool ISelectionBar.DisplayWhenEmpty => false;
 
 		Color ISelectionBar.GetColor() { return Info.SelectionBarColor; }
 	}
