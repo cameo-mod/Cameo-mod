@@ -912,13 +912,133 @@ per-tick — likely more attrition dominance than intended.
 **Suggested single ramp formula** for all three layers (one implementation, no per-unit
 tuning): `rate = base × min(1, ticks_since_damage / ramp)`, ramp = 25 / 125 / 250.
 
-**Open questions blocking implementation** — routing (Q4 answered above):
-excess-damage cascade vs block (`Shielded.BlockExcessDamage` is currently `false`);
-which pool a `%`-warhead computes against; whether physical-state meters and DoT bypass
-shields; whether splash hits all layers; repair/engineer/medic coverage per layer; whether
-a destroyed armor bar regenerates in combat or needs a facility; veterancy/crate HP
-scaling across layers; whether vehicles may carry armor or infantry-class only; three
-stacked bars vs one segmented bar at Cameo's zoom.
+#### W21 — MAINTAINER RULINGS 2026-08-12 (the full decision set)
+
+⚠ **Layer order CORRECTED.** An earlier note in this file drew Integrity as a parallel
+branch. The ruling is **sequential**:
+
+```
+Shield  →  Integrity  →  Armor  →  Health
+```
+- **Shield** absorbs EVERYTHING — physical damage, physical-state meters, DoT, and
+  electrical. Nothing gets past an intact shield.
+- **Integrity** (electronics) sits BETWEEN shield and armor: once the shield is gone,
+  electrical damage starts eating it. Type-filtered, so non-electrical damage skips it.
+- **Armor** protects the HEALTH POOL ONLY — it stops nothing else.
+- **Health** decides life and death; every actor has one.
+
+**R1 — 1 HP is 1 HP, always.** THE unifying law. The same armor type must always take the
+same damage from the same hit, so **`DamageMultiplier` is abolished**:
+- damage-reduction upgrades convert to **flat % of HP granted as additional ARMOR,
+  additive** (15% reduction, i.e. `Modifier: 85`, becomes +15% of HP as armor);
+- **no class-level `DamageMultiplier` on unit templates**;
+- veterancy stops granting damage multipliers and **grants HP instead** — currently
+  veterancy gives NO HP at all, only invisible multipliers. HP is visible in the unit stat
+  widget; a multiplier is not. ⚠ This removes an invisible stat from the whole game and is
+  a large re-pricing job — route it through the pipeline.
+- **The ONE possible surviving use** (undecided): Superheavy + armor plating, which has no
+  higher rung to promote into (see R5).
+
+**R2 — Shields are 200% of HP** *because* the W15 Versus x5 rebase flips `%`-twins from
+shield-resistant (median 25) to shield-punishing (~125). The bigger pool is the deliberate
+compensation, not a coincidence. Shields regenerate fastest; armor slowest.
+
+**R3 — Damage cascades.** Excess damage always flows into the next layer in the same shot,
+exactly as `Shielded` behaves today. (So `BlockExcessDamage` stays `false`.)
+
+**R4 — A `%`-warhead computes against the ACTIVE layer**, not max health — it is damaging
+whatever the outer layer currently is.
+
+**R5 — The armor layer's armor TYPE.**
+- **Infantry: AVERAGE the body armor and the plating armor** (this is W20's `Average` mode,
+  and it is what stops an anti-infantry weapon being useless against a plated cyborg).
+- **Vehicles: the plating promotes one rung** — Scout→Light, Light→Medium, Medium→Heavy,
+  Heavy→Superheavy. Superheavy has no rung above it (open).
+- Per-class Health+Armor type COMBOS to be designed: `None+Scout`, `Flak+Light/Medium`,
+  `Plate+Heavy/Superheavy`, etc.
+- ⚠ **OPEN:** for vehicles, does the promoted type REPLACE the body type or are both
+  averaged? Averaging barely moves a tank (adjacent rungs are close) but matters a lot for
+  infantry, aircraft, ships and defences — so "average both" may be the single consistent
+  rule, with the vehicle case simply being a small effect.
+
+**R6 — Pool sizes.** Armor = 50% of HP **for units that start with an armor bar or get a
+full bar from an upgrade**. Other upgrades granting armor stack ADDITIVELY on top.
+
+**R7 — One ramp formula for all layers** (adopted):
+`rate = base × min(1, ticks_since_damage / ramp)`, ramp = **25 health / 125 armor /
+250 shield** (health doubles to 50 for infantry). Regen moves INTO the Health/Armor/Shield
+traits — no more per-actor `Step`. (See the drift evidence above: 12.5% of 846 actors are
+already off-rule.)
+
+**R8 — Armor regenerates in combat, slowly** — no repair facility required, because not
+every faction has one. Armor at **half** the earlier proposal, shield at **twice** it.
+⚠ Exact numbers still to pin: the earlier worked example (100k HP → 40 HP/tick, 200k shield
+→ 80/tick, 50k armor → 20/tick) made all three refill in the SAME time, which erases the
+distinction. With R8's re-scaling they no longer do — confirm the final triple.
+
+**R9 — Shield-break stun: ADOPTED, 25 ticks (1 second).** Accepted *because* shields now
+stop physical-state meters and DoT as well, which is enormous. ⚠ Maintainer's own caveat,
+recorded on purpose: a big AoE breaking every shield at once and stunning a whole army is
+potentially miserable to play against — treat the 25 ticks as a starting value and be
+willing to cut it.
+
+**R10 — Repair vs heal split.** Repair restores **armor plates** (and vehicle health);
+medics restore **infantry health only**. Neither restores shields — shields self-regenerate.
+
+**R11 — Splash hits the top layer only** (current behaviour, kept). **Future idea, not
+decided:** layer-PENETRATING weapons — railgun punches through armor straight to health,
+sonic ignores shields. Note the data already leans this way: mean Versus vs Shield is
+Sonic **55** and Railgun **75**, i.e. both are already poor against shields, so "ignore the
+shield instead" is a thematic upgrade rather than a new axis.
+
+**R12 — Who gets armor.** Cyborgs / droids / noids START with a bar; **any** unit can gain
+one from an external effect or upgrade.
+
+**R13 — UI.** Three bars: health green/yellow/red, shield purple, armor yellow-orange.
+Gradients on shield/armor are OPTIONAL and off by default (colour overload risk). Build a
+**combined segmented bar as a separate trait**, switchable from the game's visual settings
+(3 bars ↔ 1 segmented bar). **All three bars are always visible to everyone**, and
+**"Show Status Bars on Damage" must default to always-on** in the display settings.
+
+**R14 — Tesla is the shield-killer** (verified: mean Versus vs Shield 228.8, the highest of
+any family, next is Nuclear 155 and Storm 147.5). So the "shields hard-counter electrical"
+worry is answered by design: you break the shield with the same weapon family you then use
+on the electronics.
+
+#### ⚠ The Heroic armor conflict is STRUCTURAL, not a data bug
+
+Maintainer: *"Heroic is designed as the heaviest infantry armor, but this causes it to take
+more damage from armor-piercing weapons meant to be anti-tank — suddenly they are really
+good at fighting a commando. Heroic should always be the BEST armor."*
+
+**Measured: of 186 main warheads carrying a full infantry ladder, 52 (28%) give Heroic a
+HIGHER multiplier than some lighter infantry armor** — `^TeslaWeapon` None 125 / Flak 150 /
+Plate 175 / **Heroic 200**, `^RailgunWeapon` 68/72/76/**80**, `^LaserWeapon` 44/56/72/**88**.
+(A few of the 52 are `^HealingWeapon` / `^RepairWeapon`, where a higher number is a bigger
+heal and therefore correct.)
+
+**This is the ordering law working exactly as written** ([[cameo-weapon-ordering-law]]:
+AP → heavy). Heroic is being asked to be two incompatible things at once: the heaviest rung
+of the LIGHT→HEAVY infantry ladder, and "the best armour in the game". Under any law where
+AP scales up with weight, those contradict. Three ways out:
+
+- **(a) Take Heroic out of the ladder** — make it a QUALITY tier that sits at or near the
+  best multiplier for every family. Clean semantics, but it is an exception to the ordering
+  law, and the law is the thing keeping 2494 profiles coherent.
+- **(b) Keep it in the ladder** and accept that a heavily armoured commando is precisely
+  what an AP round is for. Costs nothing, and is defensible thematically.
+- **(c) ★ Give commandos an ARMOR LAYER instead of a special armor type.** Their toughness
+  comes from the extra bar (W21), not from bending the ladder — the ordering law stays
+  intact and Heroic can retire to being just "heavy infantry". **This is the recommended
+  option: W21 dissolves the problem instead of trading one exception for another.**
+
+#### Still open
+
+- The exact regen triple after R8's rescaling (R8).
+- Vehicle plating: promote-and-replace vs promote-and-average (R5).
+- Superheavy + plating: the one place a multiplier might survive (R1/R5).
+- Which layer-penetrating weapons exist, if any (R11).
+- Whether an EXTERNALLY granted shield protects electronics, or only a unit's own.
 
 ---
 
