@@ -39,16 +39,21 @@ namespace OpenRA.Mods.Cameo.Warheads
 	public class AreaDamageWarhead : DamageWarhead, IRulesetLoaded<WeaponInfo>
 	{
 		[Desc("How a victim's MULTIPLE enabled Armor types combine into one Versus value.",
-			"Only affects actors wearing more than one armor (the ~36 dual-armor cyborgs,",
-			"droids and shielded units) — over a single armor every rule returns that armor.",
-			"Multiply: the engine default. 40% x 30% = 12%, so a second armor does not average",
-			"  a weapon's profile, it SQUARES it — a 17:1 weapon becomes ~289:1 against these",
-			"  units, which is why some weapons feel useless and others oppressive.",
-			"Average: 40% and 30% -> 35%. Keeps the weapon's designed profile intact.",
+			"Only affects actors wearing more than one armor (armor-plated units and the legacy",
+			"dual-armor cyborgs and droids) — over a single armor every rule returns that armor,",
+			"which is why a SHIELDED unit is unaffected: its body armor is gated off while the",
+			"shield holds, so only the Shield row is ever read (W21 R5).",
+			"Average: the Cameo law. 40% and 30% -> 35%, so the plating and the body meet in the",
+			"  middle — anti-infantry fire is never useless against a plated cyborg and AP fire is",
+			"  never oppressive against one.",
+			"Multiply: the ENGINE's rule, and the reason this field exists. 40% x 30% = 12%, so a",
+			"  second armor does not average a weapon's profile, it SQUARES it — a 17:1 weapon",
+			"  becomes ~289:1 against these units.",
 			"Lowest / Highest: the unit is as tough as its best / worst protected aspect.",
-			"DEFAULT IS Multiply so this is inert until a balance order flips it — changing it",
-			"is a live balance change across cyborgs AND every shielded unit at once.")]
-		public readonly ArmorCombination MultiArmorCombination = ArmorCombination.Multiply;
+			"⚠ Only warheads that ROUTE THROUGH AreaDamage obey this. The ~878 legacy warhead",
+			"nodes still declaring inline Versus on SpreadDamage keep multiplying until they are",
+			"retired onto ^Warhead_* templates.")]
+		public readonly ArmorCombination MultiArmorCombination = ArmorCombination.Average;
 
 		[Desc("Range between falloff steps.")]
 		public readonly WDist Spread = new(43);

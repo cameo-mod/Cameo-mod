@@ -607,8 +607,6 @@ futuretech_scoutdroid:
 		-RequiresCondition:
 	Armor@Scout:
 		Type: Scout
-	DamageMultiplier@Scout:
-		Modifier: 200
 	Armament@PRIMARY:
 		Weapon: Future_Wheel_MG
 		LocalOffset: 200,200,600, 200,-200,600
@@ -677,8 +675,6 @@ futuretech_shotgundroid:
 		-RequiresCondition:
 	Armor@Heavy:
 		Type: Heavy
-	DamageMultiplier@Heavy:
-		Modifier: 200
 	Armament@PRIMARY:
 		Weapon: ShotgunAttackRobotGun
 		LocalOffset: 400,125,175
@@ -762,8 +758,6 @@ futuretech_cannondroid:
 		-RequiresCondition:
 	Armor@Medium:
 		Type: Medium
-	DamageMultiplier@Medium:
-		Modifier: 200
 	Armament@PRIMARY:
 		Weapon: CannonAttackRobotGun
 		LocalOffset: 400,125,175
@@ -835,8 +829,6 @@ futuretech_missiledroid:
 		-RequiresCondition:
 	Armor@Light:
 		Type: Light
-	DamageMultiplier@Light:
-		Modifier: 200
 	Armament@PRIMARY:
 		Weapon: MissileAttackRobotGun
 		LocalOffset: 200,150,400, 200,-150,400

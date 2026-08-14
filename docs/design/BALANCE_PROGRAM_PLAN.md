@@ -751,7 +751,7 @@ warheads remain, `find_empty_warhead.py` = 0, and the generator no longer emits 
 
 ---
 
-### W20 — Multi-armor combination rule ⬜ MECHANISM READY · rule choice = maintainer
+### W20 — Multi-armor combination rule ✅ DONE (`Average` is live)
 
 Maintainer 2026-08-12: dual-armor units (FutureTech droids, Schwarzer Mond noids, CABAL
 cyborgs) *"can feel unfair — certain weapons seem to do nothing against it while other
@@ -786,20 +786,34 @@ the combination rule hits Protoss plasma shields, D2K/Ixian personal shields, Yu
 suits and Steel Consortium at the same time. **Do not treat "36 dual-armor actors" as one
 population.**
 
-**Mechanism (this item, SAFE):** `AreaDamageWarhead.MultiArmorCombination` —
-`Multiply` (default, byte-identical to today) · `Average` · `Lowest` · `Highest`. Every
-Cameo weapon routes through `AreaDamage`, so one switch covers the whole roster, and
-single-armor actors are unaffected by construction (any rule over one value is that value).
+**Mechanism:** `AreaDamageWarhead.MultiArmorCombination` — `Average` (**the default since
+2026-08-15**) · `Multiply` (the engine's rule) · `Lowest` · `Highest`. Single-armor actors
+are unaffected by construction: any rule over one value returns that value, which is also
+why a SHIELDED unit is untouched — its body armor is gated off while the shield holds.
 
-**Rule choice (maintainer, needs a balance order):** recommendation is `Average` — it keeps
-the weapon's designed profile intact (35% rather than 12% for a 40/30 weapon) and no weapon
-is ever useless or oppressive. ⚠ Flipping it is a LIVE balance change: with `Average` the
-dual-armor units take ~1.5x more damage even after dropping the 200% multiplier, so the
-flip, the multiplier removal and the CABAL/FutureTech reconciliation must land together and
-be re-priced through the pipeline.
+**Maintainer order 2026-08-15, closing R5:** *"armored means armor plating + health armor
+types are averaged"* — so `Average` is now the DEFAULT rather than an opt-in field, and no
+weapon yaml has to declare it. `Average` keeps the weapon's designed profile intact (35%
+rather than 12% for a 40/30 weapon), so no weapon is ever useless or oppressive.
+
+**Landed together with the flip** (they are one change and cannot be split):
+- the 7 `DamageMultiplier … Modifier: 200` squaring compensations are DELETED — 4 FutureTech
+  droids, 2 Yuri slave miners, `^FlyingInfantryTemplate`. Averaged armor plus a 2x damage
+  multiplier would have made those units paper.
+- the 12 CABAL cyborgs needed no edit: they never had the compensation, so averaging simply
+  removes the over-toughness they had been carrying silently.
+
+⚠ **Only warheads routing through `AreaDamage` obey this.** 878 legacy warhead nodes still
+declare inline `Versus` on `SpreadDamage` and keep MULTIPLYING until they are retired onto
+`^Warhead_*` templates (item A5). Until then a dual-armor unit is tougher against legacy
+weapons than against templated ones — a bounded inconsistency that A5 closes, and the
+reason the universal alternative (moving the combination into the engine's `DamageWarhead`
+base, submodule + mirror workflow) stays on the table.
 
 **VERIFY:** `grep -n "MultiArmorCombination" OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs`
-and a boot with the default unchanged.
+shows `= ArmorCombination.Average`, and
+`grep -rn "DamageMultiplier@\(Concrete\|Scout\|Heavy\|Medium\|Light\|FlyingInfantry\):" mods/cameo`
+is empty.
 
 ---
 
@@ -949,17 +963,23 @@ exactly as `Shielded` behaves today. (So `BlockExcessDamage` stays `false`.)
 **R4 — A `%`-warhead computes against the ACTIVE layer**, not max health — it is damaging
 whatever the outer layer currently is.
 
-**R5 — The armor layer's armor TYPE.**
+**R5 — The armor layer's armor TYPE.** ✅ **LIVE since 2026-08-15** (W20 default = `Average`).
+The three states, in the maintainer's words: *"shielded means only shield armor is active,
+armored means armor plating + health armor types are averaged and health means only health
+armor is active."* So the plating armor is gated on the plating's `FullCondition` and the
+BODY armor stays enabled underneath it; only the SHIELD gates the body armor off.
 - **Infantry: AVERAGE the body armor and the plating armor** (this is W20's `Average` mode,
-  and it is what stops an anti-infantry weapon being useless against a plated cyborg).
+  and it is what stops an anti-infantry weapon being useless against a plated cyborg —
+  *"infantry with armor platings will still feel distinct from actual tanks"*).
 - **Vehicles: the plating promotes one rung** — Scout→Light, Light→Medium, Medium→Heavy,
   Heavy→Superheavy. Superheavy has no rung above it (open).
 - Per-class Health+Armor type COMBOS to be designed: `None+Scout`, `Flak+Light/Medium`,
   `Plate+Heavy/Superheavy`, etc.
-- ⚠ **OPEN:** for vehicles, does the promoted type REPLACE the body type or are both
-  averaged? Averaging barely moves a tank (adjacent rungs are close) but matters a lot for
-  infantry, aircraft, ships and defences — so "average both" may be the single consistent
-  rule, with the vehicle case simply being a small effect.
+- ✅ **SETTLED 2026-08-15 — average both, everywhere.** The maintainer's rule is stated for
+  the ARMORED state as such, not for infantry only, and the mechanism is a warhead-wide
+  default rather than a per-actor switch, so vehicles average too. This costs nothing: the
+  promoted type is an ADJACENT rung, so averaging a tank barely moves it, while the same
+  rule matters a lot for infantry, aircraft, ships and defences.
 
 **R6 — Pool sizes.** Armor = 50% of HP **for units that start with an armor bar or get a
 full bar from an upgrade**. Other upgrades granting armor stack ADDITIVELY on top.
@@ -1104,8 +1124,17 @@ can share.
 #### Still open
 
 - The exact regen triple after R8's rescaling (R8).
-- Vehicle plating: promote-and-replace vs promote-and-average (R5).
-- Superheavy + plating: the one place a multiplier might survive (R1/R5).
+- **The ledger has no concept of a layer.** `extract_stats` records one `#Armor.Type` per
+  actor, so a plated walker is booked as its BODY armor (`Plate`) and the model prices it as
+  plain infantry — the plating bar and the averaged type are invisible to pricing. Wiring
+  the first three walkers moved the global armor census by one actor (`Plate` 89→90,
+  `Superheavy` 94→93) and rippled every K in that faction by <0.01%, which is harmless now
+  and will not be once plating is widespread. Decide before the rollout whether the ledger
+  books the bare type, the plated type, or the average.
+- Superheavy + plating: the one place a multiplier might survive (R1/R5). ⚠ Note that
+  averaging (R5, now live) makes this LESS urgent, not more: a Superheavy body averaged
+  with a Superheavy plating is still Superheavy, so the unit simply gains the bar without
+  gaining a type — which may be answer enough.
 - Which layer-penetrating weapons exist, if any (R11).
 - Whether an EXTERNALLY granted shield protects electronics, or only a unit's own.
 

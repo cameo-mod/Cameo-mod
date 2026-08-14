@@ -1161,12 +1161,20 @@ must be `^ArtilleryTemplate`, `cabal_cyborgreaper` and `cabal_manticore` must be
 `^SupportVehicleTemplate`, `cabal_coredefender` must be `^EpicVehicleTemplate`.
 
 **Cyborg dual-armor rule.** All CABAL cyborg infantry use the Future Tech
-droid recipe: the base `Armor` from the infantry class template stays active,
-a secondary vehicle `Armor@<role>` is added, and a `DamageMultiplier@<role>:
-Modifier: 200` is applied to the secondary armor. This makes cyborgs count as
-both infantry and vehicles for weapon Versus tables while keeping them brittle
-against dedicated anti-vehicle fire. True vehicles and walkers do not use this
-pattern.
+droid recipe: the base `Armor` from the infantry class template stays active
+and a secondary vehicle `Armor@<role>` is added, so cyborgs count as both
+infantry and vehicles for weapon Versus tables. True vehicles and walkers do
+not use this pattern.
+
+⚠ **The two armors are AVERAGED, not multiplied** (W20/W21 R5, live since
+2026-08-15): `AreaDamageWarhead.MultiArmorCombination` defaults to `Average`,
+so `Plate` 88 with `Superheavy` 10 resolves to 49, not 8. **Never add a
+`DamageMultiplier@<role>: Modifier: 200` to compensate** — that was the old
+recipe, it fought the ENGINE's multiplication rather than the design, and all
+7 instances were deleted when averaging landed. R1 abolishes `DamageMultiplier`
+generally; toughness is a visible `ArmorPlating` bar, never an invisible knob.
+⚠ Warheads still declaring inline `Versus` on `SpreadDamage` keep multiplying
+until item A5 retires them onto `^Warhead_*` templates.
 
 **Cybernetic Plating shield rule.** CABAL cyborg infantry do NOT have an
 innate `Shielded` trait. Instead, the `cabal_upgrade_cyberneticplating`
