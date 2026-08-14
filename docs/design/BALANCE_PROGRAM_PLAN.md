@@ -1049,7 +1049,10 @@ the maximum changes mid-life (scale proportionally, or keep absolute and heal th
 `MaxHP` also feeds damage states, selection bars, husks, repair and AI evaluation, so
 making it dynamic is invasive well beyond veterancy.
 
-**★ RECOMMENDED ALTERNATIVE — grant an ARMOR POOL instead of raising max HP.** It is the
+**✅ DECIDED 2026-08-12: veterancy and upgrades grant an ARMOR POOL, not max HP.** Max HP
+stays immutable; no `Health.cs` change; the engine submodule is not touched.
+
+**★ THE ALTERNATIVE, now the decision — grant an ARMOR POOL instead of raising max HP.** It is the
 rule R1 already mandates for upgrades ("damage reduction becomes flat % of HP as additive
 armor"), simply applied to veterancy as well:
 - **zero engine change** — the layer trait is Cameo-side by design;
@@ -1064,6 +1067,39 @@ pool means a percentage warhead removes proportionally more absolute HP, so **pe
 weapons give veterans NO protection at all** — they scale straight through. That makes
 `%`-damage the natural anti-veteran counter. Decide whether that is a feature (it is a
 clean rock-paper-scissors answer to deathballs of veterans) or needs a cap.
+
+#### How a layer intercepts damage — the pattern, and the bug NOT to copy
+
+`Shielded` never touches `Health.cs`. It absorbs damage with a two-step trick
+(`engine/OpenRA.Mods.AS/Traits/Shielded.cs:138,197`):
+
+1. `IDamageModifier.GetDamageModifier` returns **1** while the shield is up, so the engine
+   scales the incoming hit to 1%. It returns 1 rather than 0 because a hit reduced to
+   nothing would fire no damage event, and step 2 would never run.
+2. `INotifyDamage.Damaged` then reconstructs the original (`e.Damage.Value / 0.01`),
+   subtracts it from the shield pool, **heals back** the 1% that leaked to health
+   (`InflictDamage` with negative damage), and cascades any excess to health — which is
+   exactly R3's behaviour, already implemented.
+
+**This is the pattern the armor layer should follow** (it needs no engine change and
+composes with the shield automatically), **but not the arithmetic.**
+
+⚠ **The 1%-round-trip loses damage, always downward.** `Util.ApplyPercentageModifiers` is
+integer maths, so a hit of 5032 becomes `5032 × 1 / 100 = 50`, and 50 / 0.01 = **5000** —
+the shield is charged 5000 for a 5032 hit. The residue is silently forgiven, up to 99 per
+hit, which is a small systematic buff to every shield in the game.
+⚠ **Below 100 damage it is total**: `99 × 1 / 100 = 0`, so a sub-100 hit costs the shield
+nothing at all. Cameo's main damage sits in the thousands and lands on the 100 grid, so
+mains are near-exact — but **Versus and Falloff scale damage before this point**, and DoT
+ticks, physical-state chip damage and `%`-twin damage are all small. Those are precisely
+the effects R9 just made shields responsible for absorbing.
+
+**For the armor layer: carry the full-precision value yourself** instead of round-tripping
+through a percentage — e.g. modifier 1 for the event, but subtract the pre-scaled damage
+captured from `e.Damage`, or track the residue and carry it into the next hit. Worth fixing
+in `Shielded` too, but that file is in the ENGINE SUBMODULE (mirror workflow), so the clean
+path is a Cameo-side layer trait that both the armor bar and a future shield replacement
+can share.
 
 #### Still open
 
