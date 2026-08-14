@@ -176,8 +176,21 @@ schwarzermond_noidmgarmor:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 50
-	Armor:
+	# W21 layer stack: exactly ONE Armor is enabled at a time, so the engine
+	# never multiplies two armor types together (that squares a weapon's profile).
+	Armor:                      # body — only once the plating is stripped
+		Type: Plate
+		RequiresCondition: plating_gone
+	Armor@Plating:              # while the plating bar holds
 		Type: Superheavy
+		RequiresCondition: plating_up
+	ArmorPlating:
+		MaxPercentageStrength: 50
+		PercentageRegenAmount: 1
+		RegenInterval: 25
+		RampTicks: 125
+		FullCondition: plating_up
+		EmptyCondition: plating_gone
 	Armament@PRIMARY:
 		Weapon: NaxiMP40Laser
 		LocalOffset: 500,0,400
@@ -254,8 +267,23 @@ schwarzermond_noidharvester:
 		HpPerStep: 3750
 	ChangesHealth@SelfHealing:
 		Step: 30
-	Armor:
+	# W21 layer stack: exactly ONE Armor is enabled at a time, so the engine
+	# never multiplies two armor types together (that squares a weapon's profile).
+	Armor:                      # body — only once the plating is stripped
 		Type: Plate
+		OccupancyCostModifier: 0
+		RequiresCondition: plating_gone
+	Armor@Plating:              # while the plating bar holds
+		Type: Heavy
+		OccupancyCostModifier: 0
+		RequiresCondition: plating_up
+	ArmorPlating:
+		MaxPercentageStrength: 50
+		PercentageRegenAmount: 1
+		RegenInterval: 25
+		RampTicks: 125
+		FullCondition: plating_up
+		EmptyCondition: plating_gone
 	Armament@PRIMARY:
 		Weapon: NaxiMP40Laser
 		LocalOffset: 500,0,400
@@ -329,8 +357,21 @@ schwarzermond_engineeringarmor:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armor:
+	# W21 layer stack: exactly ONE Armor is enabled at a time, so the engine
+	# never multiplies two armor types together (that squares a weapon's profile).
+	Armor:                      # body — only once the plating is stripped
 		Type: Plate
+		RequiresCondition: plating_gone
+	Armor@Plating:              # while the plating bar holds
+		Type: Heavy
+		RequiresCondition: plating_up
+	ArmorPlating:
+		MaxPercentageStrength: 50
+		PercentageRegenAmount: 1
+		RegenInterval: 25
+		RampTicks: 125
+		FullCondition: plating_up
+		EmptyCondition: plating_gone
 	Armament:
 		Name: primary
 		Weapon: RA2IFVRepair

@@ -199,9 +199,22 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			ticksSinceDamage = 0;
 
-			// Full-precision value from GetDamageModifier; the *100 fallback only applies if
-			// some other trait zeroed the modifier first, in which case precision is already lost.
-			var incoming = pendingDamage > 0 ? pendingDamage : e.Damage.Value * 100;
+			// Recover what the actor WOULD have taken without this layer.
+			//
+			// The stashed pre-modifier value is exact, but it ignores every OTHER damage
+			// modifier on the actor (a promotion's DamageMultiplier, say) — using it blindly
+			// would make plating absorb the unreduced hit and deplete too fast. So: if the
+			// engine's result is exactly this trait's own 1% of the stash, nothing else
+			// modified the damage and the exact value is safe. Otherwise something else had a
+			// say, and undoing only our own 1% (x100) preserves it, at the cost of the integer
+			// residue Shielded always pays.
+			//
+			// R1 abolishes DamageMultiplier, after which the exact branch is the only one that
+			// ever runs — but this must be correct BEFORE that pass lands, not after.
+			var mineOnly = pendingDamage / 100;
+			var incoming = pendingDamage > 0 && e.Damage.Value == mineOnly
+				? pendingDamage
+				: e.Damage.Value * 100;
 			pendingDamage = 0;
 
 			var excess = incoming - Strength;
