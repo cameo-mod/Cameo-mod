@@ -1032,6 +1032,39 @@ AP scales up with weight, those contradict. Three ways out:
   intact and Heroic can retire to being just "heavy infantry". **This is the recommended
   option: W21 dissolves the problem instead of trading one exception for another.**
 
+#### R1 addendum — "HP multiplier, not armor multiplier" (maintainer 2026-08-12)
+
+Clarification: veterancy and upgrades should **raise the unit's maximum health dynamically**
+rather than reduce incoming damage.
+
+⚠ **VERIFIED BLOCKER: max health is IMMUTABLE in this engine.**
+`engine/OpenRA.Mods.Common/Traits/Health.cs:81` declares `public int MaxHP { get; }` — a
+get-only property assigned once in the constructor (`:69`). **No trait in
+`OpenRA.Mods.Common`, `OpenRA.Mods.AS` or `OpenRA.Mods.Cameo` modifies it**; the only other
+file that mentions max health, `AS/ActorStatValues.cs`, merely READS it for the stat widget.
+
+So this is not a yaml swap. It needs `Health.cs` — a **core engine trait in the submodule**
+(mirror workflow required) — made mutable, plus a ruling on what happens to CURRENT HP when
+the maximum changes mid-life (scale proportionally, or keep absolute and heal the gap?).
+`MaxHP` also feeds damage states, selection bars, husks, repair and AI evaluation, so
+making it dynamic is invasive well beyond veterancy.
+
+**★ RECOMMENDED ALTERNATIVE — grant an ARMOR POOL instead of raising max HP.** It is the
+rule R1 already mandates for upgrades ("damage reduction becomes flat % of HP as additive
+armor"), simply applied to veterancy as well:
+- **zero engine change** — the layer trait is Cameo-side by design;
+- **visible**, which was the whole point of dropping invisible multipliers — it shows as a
+  bar, and `ActorStatValues` can total the layers for the stat widget;
+- **additive and stackable**, so veterancy, upgrades and external effects compose without
+  a special case;
+- **one mechanism** for every "this unit is tougher now" effect in the game.
+
+⚠ Either way, note the consequence under R4 (a `%`-warhead hits the ACTIVE layer): a bigger
+pool means a percentage warhead removes proportionally more absolute HP, so **percentage
+weapons give veterans NO protection at all** — they scale straight through. That makes
+`%`-damage the natural anti-veteran counter. Decide whether that is a feature (it is a
+clean rock-paper-scissors answer to deathballs of veterans) or needs a cap.
+
 #### Still open
 
 - The exact regen triple after R8's rescaling (R8).
