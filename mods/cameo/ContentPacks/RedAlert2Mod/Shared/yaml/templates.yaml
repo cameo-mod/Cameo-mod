@@ -714,9 +714,17 @@
 	GrantConditionOnPrerequisite@schwarzermond_upgrade_lunaralloys:
 		Condition: schwarzermond_upgrade_lunaralloys
 		Prerequisites: schwarzermond_upgrade_lunaralloys
-	DamageMultiplier@schwarzermond_upgrade_lunaralloys:
+	# W21 R1: the old `DamageMultiplier: 90` is gone — a 10% damage reduction was an
+	# INVISIBLE stat that quietly redefined what 1 HP is worth. The alloys now bolt a
+	# real ARMOR PLATING bar onto the unit instead: same idea, on screen, and it stacks
+	# additively with any plating the unit already carries (the noid walkers) rather
+	# than adding a second bar.
+	ArmorPlating@schwarzermond_upgrade_lunaralloys:
 		RequiresCondition: schwarzermond_upgrade_lunaralloys
-		Modifier: 90
+		MaxPercentageStrength: 20
+		PercentageRegenAmount: 1
+		RegenInterval: 25
+		RampTicks: 125
 	ActorStatValues:
 		Upgrades: schwarzermond_upgrade_lunaralloys
 
@@ -759,9 +767,32 @@
 	TurnSpeedMultiplier@schwarzermond_upgrade_vrilinfusion:
 		RequiresCondition: schwarzermond_upgrade_vrilinfusion
 		Modifier: 125
-	DamageMultiplier@schwarzermond_upgrade_vrilinfusion:
+	# W21 R1: the old `DamageMultiplier: 85` is gone. Vril rewrites the soldier, so the
+	# 15% damage reduction becomes a visible VRIL SHIELD — the outermost layer of the
+	# stack, regenerating fast (R7 ramp 250) and, per R5, replacing the body armor with
+	# `Shield` while it holds. That is the profile Tesla/Storm/EMP tear through and
+	# Sonic barely scratches, so the upgrade changes which weapons counter this faction
+	# rather than just making everything take less damage.
+	# InitialPercentageStrength is a percentage of HEALTH, not of MaxStrength, and
+	# Shielded.TraitEnabled assigns it WITHOUT clamping — so it must equal
+	# MaxPercentageStrength or researching the upgrade would overfill the bar.
+	Shielded@schwarzermond_upgrade_vrilinfusion:
 		RequiresCondition: schwarzermond_upgrade_vrilinfusion
-		Modifier: 85
+		MaxStrength: 0
+		MaxPercentageStrength: 25
+		InitialStrength: 0
+		InitialPercentageStrength: 25
+		DamageRegenDelay: 250
+		RegenAmount: 500
+		RegenInterval: 25
+		ShieldsUpCondition: shielded
+		HideBarWhenFull: true
+		SelectionBarColor: 8888FFFF
+	Armor:
+		RequiresCondition: !shielded
+	Armor@shielded:
+		Type: Shield
+		RequiresCondition: shielded
 	ActorStatValues:
 		Upgrades: schwarzermond_upgrade_vrilinfusion
 

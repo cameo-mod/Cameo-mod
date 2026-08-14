@@ -9,6 +9,7 @@
  */
 #endregion
 
+using System.Linq;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -98,6 +99,18 @@ namespace OpenRA.Mods.Cameo.Traits
 		// trait exists, so the lookup is always valid there.
 		Health health;
 
+		// An actor can carry SEVERAL ArmorPlating traits — innate plating plus an upgrade that
+		// grants more (Schwarzer Mond's noid walkers plus Lunar Alloys, say). W21 R6 says those
+		// stack ADDITIVELY, and the maintainer does not want one bar per source, so the FIRST
+		// trait on the actor OWNS the single pool, bar and conditions; every other one only
+		// contributes its size while enabled and is otherwise inert. A contributor enabling
+		// mid-game (the upgrade completing) grows the pool AND hands over that much strength
+		// immediately, so researching an upgrade visibly plates the units you already own.
+		ArmorPlating[] contributors;
+		ArmorPlating owner;
+		bool contributed;
+		bool IsOwner => owner == this;
+
 		[VerifySync]
 		public int Strength { get; private set; }
 
@@ -123,6 +136,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		protected override void Created(Actor self)
 		{
 			health = self.TraitOrDefault<Health>();
+			contributors = self.TraitsImplementing<ArmorPlating>().ToArray();
+			owner = contributors[0];
 
 			// Before base.Created, which is what fires TraitEnabled for an unconditional
 			// trait (ConditionalTrait.cs:63) — TraitEnabled sets Strength from MaxStrength,
@@ -131,10 +146,37 @@ namespace OpenRA.Mods.Cameo.Traits
 			base.Created(self);
 		}
 
+		int PoolOf(ArmorPlating p)
+		{
+			var fromHealth = health != null ? p.Info.MaxPercentageStrength * health.MaxHP / 100 : 0;
+			return p.Info.MaxStrength + fromHealth;
+		}
+
 		void RecalculateMax()
 		{
-			var fromHealth = health != null ? Info.MaxPercentageStrength * health.MaxHP / 100 : 0;
-			MaxStrength = Info.MaxStrength + fromHealth;
+			if (!IsOwner)
+			{
+				MaxStrength = 0;
+				return;
+			}
+
+			// Count a source only once it has actually reported in (TraitEnabled), never from
+			// IsTraitDisabled: the owner's Created() runs BEFORE a later contributor's, so
+			// reading the flag here and adding the delta there would count the same pool twice.
+			MaxStrength = IsTraitDisabled ? 0 : PoolOf(this);
+			foreach (var c in contributors)
+				if (c != this && c.contributed)
+					MaxStrength += PoolOf(c);
+		}
+
+		// A contributor switching on or off. Grow/shrink the shared pool by exactly that
+		// contributor's size and move Strength with it, so an upgrade grants its plating
+		// immediately instead of waiting for the regen to fill the new headroom.
+		void ContributorChanged(Actor self, int delta)
+		{
+			RecalculateMax();
+			Strength = (Strength + delta).Clamp(0, MaxStrength);
+			UpdateConditions(self);
 		}
 
 		void UpdateConditions(Actor self)
@@ -159,7 +201,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void ITick.Tick(Actor self)
 		{
-			if (IsTraitDisabled || IsTraitPaused)
+			if (!IsOwner || IsTraitDisabled || IsTraitPaused)
 				return;
 
 			if (ticksSinceDamage < int.MaxValue)
@@ -199,13 +241,13 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		bool Absorbs(Damage damage)
 		{
-			return !IsTraitDisabled && Strength > 0 && damage.Value > 0
+			return IsOwner && !IsTraitDisabled && Strength > 0 && damage.Value > 0
 				&& !(!Info.BypassDamageTypes.IsEmpty && damage.DamageTypes.Overlaps(Info.BypassDamageTypes));
 		}
 
 		void INotifyDamage.Damaged(Actor self, AttackInfo e)
 		{
-			if (IsTraitDisabled || Strength == 0 || e.Damage.Value <= 0 || e.Attacker == self)
+			if (!IsOwner || IsTraitDisabled || Strength == 0 || e.Damage.Value <= 0 || e.Attacker == self)
 				return;
 
 			if (!Info.BypassDamageTypes.IsEmpty && e.Damage.DamageTypes.Overlaps(Info.BypassDamageTypes))
@@ -249,6 +291,14 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		protected override void TraitEnabled(Actor self)
 		{
+			contributed = true;
+
+			if (!IsOwner)
+			{
+				owner.ContributorChanged(self, PoolOf(this));
+				return;
+			}
+
 			RecalculateMax();
 			Strength = Info.InitialStrength < 0
 				? MaxStrength
@@ -260,13 +310,23 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		protected override void TraitDisabled(Actor self)
 		{
+			var was = contributed ? PoolOf(this) : 0;
+			contributed = false;
+
+			if (!IsOwner)
+			{
+				owner.ContributorChanged(self, -was);
+				return;
+			}
+
 			Strength = 0;
 			UpdateConditions(self);
 		}
 
 		float ISelectionBar.GetValue()
 		{
-			if (!Info.ShowSelectionBar || IsTraitDisabled || MaxStrength == 0)
+			// Contributors report nothing: one pool, one bar, however many sources feed it.
+			if (!IsOwner || !Info.ShowSelectionBar || IsTraitDisabled || MaxStrength == 0)
 				return 0f;
 
 			// Reporting 0 is how an extra bar hides: the renderer draws it when the value is

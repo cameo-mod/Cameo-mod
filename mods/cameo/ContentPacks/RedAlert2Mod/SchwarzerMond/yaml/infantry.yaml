@@ -184,7 +184,7 @@ schwarzermond_noidmgarmor:
 		Type: Plate
 	Armor@Plating:              # averaged with the body while the plating bar holds
 		Type: Superheavy
-		RequiresCondition: plating_up
+		RequiresCondition: plating_up && !shielded
 	ArmorPlating:
 		MaxPercentageStrength: 50
 		PercentageRegenAmount: 1
@@ -365,7 +365,7 @@ schwarzermond_engineeringarmor:
 		Type: Plate
 	Armor@Plating:              # averaged with the body while the plating bar holds
 		Type: Heavy
-		RequiresCondition: plating_up
+		RequiresCondition: plating_up && !shielded
 	ArmorPlating:
 		MaxPercentageStrength: 50
 		PercentageRegenAmount: 1

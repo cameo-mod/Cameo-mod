@@ -79,7 +79,7 @@ schwarzermond_upgrade_vrilinfusion:
 	Buildable:
 		BuildPaletteOrder: 67
 		Queue: Research
-		Description: All Schwarzer Mond infantry gain 25% firepower, 25% speed and 15% damage reduction.
+		Description: All Schwarzer Mond infantry gain 25% firepower, 25% speed and a regenerating Vril shield worth 25% of their health.
 			Vril energy from the Black Sun program rewrites soldiers at the cellular level, creating true Übermenschen.
 		Prerequisites: ~schwarzermond_techcenter, !schwarzermond_upgrade_vrilinfusion
 	RenderSprites:
@@ -95,7 +95,8 @@ schwarzermond_upgrade_lunaralloys:
 	Buildable:
 		BuildPaletteOrder: 70
 		Queue: Upgrades
-		Description: All Schwarzer Mond units take 10% less damage.
+		Description: All Schwarzer Mond units gain armor plating worth 20% of their health.
+			Regolith-smelted alloys are bolted over the hull, adding a repairing plate layer above the health bar.
 		Prerequisites: ~schwarzermond_radar, !schwarzermond_upgrade_lunaralloys
 	RenderSprites:
 		Image: schwarzermond_upgrade_lunaralloys
