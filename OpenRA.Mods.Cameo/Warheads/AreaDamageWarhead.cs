@@ -28,8 +28,28 @@ namespace OpenRA.Mods.Cameo.Warheads
 		"ALL ticks, so the balance pipeline reads a single number. Replaces the SpreadDamage main",
 		"warhead + its _FriendlyFire twin on the AoE families; the _Percentage and per-weapon",
 		"_ExtraDamage warheads keep their own bespoke Versus and stay separate.")]
+	public enum ArmorCombination
+	{
+		Multiply,
+		Average,
+		Lowest,
+		Highest,
+	}
+
 	public class AreaDamageWarhead : DamageWarhead, IRulesetLoaded<WeaponInfo>
 	{
+		[Desc("How a victim's MULTIPLE enabled Armor types combine into one Versus value.",
+			"Only affects actors wearing more than one armor (the ~36 dual-armor cyborgs,",
+			"droids and shielded units) — over a single armor every rule returns that armor.",
+			"Multiply: the engine default. 40% x 30% = 12%, so a second armor does not average",
+			"  a weapon's profile, it SQUARES it — a 17:1 weapon becomes ~289:1 against these",
+			"  units, which is why some weapons feel useless and others oppressive.",
+			"Average: 40% and 30% -> 35%. Keeps the weapon's designed profile intact.",
+			"Lowest / Highest: the unit is as tough as its best / worst protected aspect.",
+			"DEFAULT IS Multiply so this is inert until a balance order flips it — changing it",
+			"is a live balance change across cyborgs AND every shielded unit at once.")]
+		public readonly ArmorCombination MultiArmorCombination = ArmorCombination.Multiply;
+
 		[Desc("Range between falloff steps.")]
 		public readonly WDist Spread = new(43);
 
@@ -125,6 +145,35 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 		[Desc("Subclass validation hook, called once the base fields are checked.")]
 		protected virtual void ValidateFields() { }
+
+		protected override int DamageVersus(Actor victim, HitShape shape, WarheadArgs args)
+		{
+			if (MultiArmorCombination == ArmorCombination.Multiply)
+				return base.DamageVersus(victim, shape, args);
+
+			if (Versus.Count == 0)
+				return 100;
+
+			// Same selection as the base: enabled armors this warhead has a Versus row for,
+			// filtered by the hit shape's own armor restriction. Only the COMBINATION differs.
+			var armor = victim.TraitsImplementing<Armor>()
+				.Where(a => !a.IsTraitDisabled && a.Info.Type != null && Versus.ContainsKey(a.Info.Type) &&
+					(shape.Info.ArmorTypes.IsEmpty || shape.Info.ArmorTypes.Contains(a.Info.Type)))
+				.Select(a => Versus[a.Info.Type])
+				.ToList();
+
+			// No matching armor means no modifier, exactly as the base's empty product does.
+			if (armor.Count == 0)
+				return 100;
+
+			return MultiArmorCombination switch
+			{
+				ArmorCombination.Average => armor.Sum() / armor.Count,
+				ArmorCombination.Lowest => armor.Min(),
+				ArmorCombination.Highest => armor.Max(),
+				_ => Util.ApplyPercentageModifiers(100, armor),
+			};
+		}
 
 		protected override void DoImpact(WPos pos, Actor firedBy, WarheadArgs args)
 		{

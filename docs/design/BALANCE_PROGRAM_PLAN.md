@@ -48,6 +48,8 @@ status rather than keeping its own copy.
 | **W17** | ~~Remove the 2000-damage grid~~ (done as a 200 grid in W15); retire FirepowerMultiplier as a fine-tuning knob | ⬜ READY (unblocked by W15) | Claude | W15 ✅ |
 | **W18** | Roll the 0.1% percentage unit out into yaml (`PercentageDenominator: 1000`, ×10 the values) | ⛔ BLOCKED | Claude | W15 ✅, **set B free** |
 | **W19** | Collapse the 195 `SpreadDamage` ExtraDamage chips into the main warhead (KEEP the 34 sniper `OpenToppedDamage`) | ⛔ BLOCKED | Claude | W13, **set B free** |
+| **W20** | Multi-armor combination rule (engine MULTIPLIES → squares the profile); mechanism + switch | ⬜ MECHANISM DONE, rule = maintainer | Claude | — |
+| **W21** | Triple-layer health Shield → Armor → Health, layer-aware armor (solves W20 structurally) | ⬜ READY | either | — |
 
 **Recommended order:** W2 ∥ W3 → W4 → W5 → W6 → (W7, W9) → W8 → W10 → W11 → W12.
 `∥` = safe to run in parallel (disjoint file sets).
@@ -746,6 +748,101 @@ damage — verify with `tools/audit/review_resolve_diff.py`, as in the 3-way spl
 
 **DONE WHEN** the 195 `SpreadDamage` chips are gone, the sniper's 34 `OpenToppedDamage`
 warheads remain, `find_empty_warhead.py` = 0, and the generator no longer emits `CHIPS`.
+
+---
+
+### W20 — Multi-armor combination rule ⬜ MECHANISM READY · rule choice = maintainer
+
+Maintainer 2026-08-12: dual-armor units (FutureTech droids, Schwarzer Mond noids, CABAL
+cyborgs) *"can feel unfair — certain weapons seem to do nothing against it while other
+weapons seem too powerful."*
+
+**The cause is multiplication, and it is ENGINE behaviour, not a Cameo choice.**
+`DamageWarhead.DamageVersus` (engine `DamageWarhead.cs:88`) ends in
+`Util.ApplyPercentageModifiers(100, armor)` over EVERY enabled `Armor` trait — a product.
+So a second armor does not average the weapon's profile, it **squares** it: a weapon with a
+17:1 spread becomes ~289:1 against a dual-armor unit. 40% × 30% = 12%, while 90% × 80% =
+72% — a 6:1 gap between "bad" and "good" weapons where a single-armor unit shows ~2-3:1.
+A flat 200% multiplier cannot fix this: it shifts the whole curve, and the problem is the
+curve's SHAPE.
+
+**Measured (2026-08-12): 36 actors declare more than one `Armor`, and they are three
+different things wearing one mechanic —**
+
+| group | actors | pattern | compensation |
+|---|---|---|---|
+| FutureTech droids | 4 | `Plate+Heavy`, `Plate+Medium`, `Flak+Light`, `None+Scout` | **`Modifier: 200`** |
+| **CABAL cyborgs** | **12** | `Plate+Medium`, `Flak+Light`, `Heroic+Superheavy`, … | **NONE** |
+| shields / stealth suits / upgrades | ~20 | a CONDITIONAL `Armor@Shield` layered on the body | various (50–150) |
+
+⚠ **The compensation is applied inconsistently.** The FutureTech droids carry the 200%;
+the CABAL cyborgs — the same design, named in the same breath by the maintainer — carry
+**nothing**, so they are silently far tougher than their FutureTech counterparts. That
+inconsistency is a likely part of what "feels unfair", independent of the combination rule.
+
+⚠ **The ~20 shield/upgrade actors are NOT the same problem.** A conditional `Armor@Shield`
+layered over the body is the layered system (W21) done crudely, and any global change to
+the combination rule hits Protoss plasma shields, D2K/Ixian personal shields, Yuri stealth
+suits and Steel Consortium at the same time. **Do not treat "36 dual-armor actors" as one
+population.**
+
+**Mechanism (this item, SAFE):** `AreaDamageWarhead.MultiArmorCombination` —
+`Multiply` (default, byte-identical to today) · `Average` · `Lowest` · `Highest`. Every
+Cameo weapon routes through `AreaDamage`, so one switch covers the whole roster, and
+single-armor actors are unaffected by construction (any rule over one value is that value).
+
+**Rule choice (maintainer, needs a balance order):** recommendation is `Average` — it keeps
+the weapon's designed profile intact (35% rather than 12% for a 40/30 weapon) and no weapon
+is ever useless or oppressive. ⚠ Flipping it is a LIVE balance change: with `Average` the
+dual-armor units take ~1.5x more damage even after dropping the 200% multiplier, so the
+flip, the multiplier removal and the CABAL/FutureTech reconciliation must land together and
+be re-priced through the pipeline.
+
+**VERIFY:** `grep -n "MultiArmorCombination" OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs`
+and a boot with the default unchanged.
+
+---
+
+### W21 — Triple-layer health: Shield → Armor → Health ⬜ READY (design) · needs C#
+
+Maintainer 2026-08-12: three bars, *"only the highest layer active determines the armor"* —
+shield weak to Tesla/Storm/EMP/Quantum/Laser, armor weak to AP (CannonAP/MissileAP/Railgun),
+health weak to flame/explosive. Reference: **Crystallized Nexus**
+(`~/Downloads/crystallized-nexus-main`, GPLv3 — same licence as Cameo, so a port is fine
+**with attribution**).
+
+**What CN actually has** (`.modsdk/OpenRA.Mods.CN/Traits/Player/SecondaryHealth.cs`, 232
+lines; `CNHealth.cs`, 293 lines):
+
+- ✅ **Already N-layer, not 2** — `CNHealth` collects `TraitsImplementing<SecondaryHealth>()`
+  into an array and walks it, so Shield → Armor → Health works structurally today.
+- ✅ Per layer: `MaxHP`/`InitialHP`, `RegenerateRate` (**0 = ablative armor, >0 =
+  regenerating shield** — exactly the Armor/Shield distinction), `RegenerateDelay`/
+  `Interval`, `BypassDamageTypes`, `PierceDamageTypes` + `PiercePercentage`,
+  `RepairDamageTypes`, `FullCondition`/`EmptyCondition`, depleted/recharged sounds,
+  `BarColor`, and its own `ISelectionBarAboveHealth`.
+- ❌ **`SecondaryHealth.ArmorType` is a DEAD FIELD.** Nothing outside `SecondaryHealth.cs`
+  reads it (verified by grep across the whole CN assembly). CN gives layered HP POOLS, but
+  Versus is still resolved against the actor's single `Armor` trait before the layer ever
+  sees the damage. **The one feature we want is the one CN does not implement.**
+
+**…and we do not need their C# for it.** `Armor` is a `ConditionalTrait` and `DamageVersus`
+filters on `!a.IsTraitDisabled`. So **three `Armor` traits gated on the layers'
+`FullCondition`/`EmptyCondition` give layer-aware armor with ZERO new C#** — and because
+exactly one is enabled at a time, **W20's multiplication problem disappears structurally**.
+That is the whole design, and the maintainer's instinct that the layers solve the dual-armor
+problem is correct.
+
+**The real cost** is the damage routing: intercepting damage before `Health` requires
+replacing or subclassing the stock `Health` trait — CN wrote a 293-line `CNHealth` for
+exactly this, and that is the invasive part, not the layers.
+
+**Also worth lifting from CN** (relevant to the physical-state program's art phase):
+`DamageSmoke`, `CharredPalette`, `BloomGlowEffect`, `VoxelDynamics` (spring-based impact
+tilt, firing recoil, roll on turns), `PeriodicSpriteEffect`.
+
+**DONE WHEN** a unit can carry Shield/Armor/Health with per-layer bars, the active layer
+alone decides the Versus lookup, and a dual-armor cyborg needs no `DamageMultiplier` crutch.
 
 ---
 
