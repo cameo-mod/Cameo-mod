@@ -94,8 +94,8 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/rules/wz2100.yaml | 1232, 1233 | 2100WCM | Inherits@AUTOTARGET | ^2100WallTurreted vs ^AutoTargetGround |
 | mods/cameo/rules/wz2100.yaml | 1252, 1253 | 2100WCH | Inherits@AUTOTARGET | ^2100WallTurreted vs ^AutoTargetGround |
 | mods/cameo/rules/xcom.yaml | 588, 597 | XCOMHQ | Inherits | ^BaseBuilding vs ^CashTricklerMultipliers |
-| mods/cameo/weapons/redalert2mod.yaml | 1429, 1431 | 12MissilesSpawnerScud | Inherits@3 | ^Projectile_Flame_Medium vs ^RA2Grenade |
-| mods/cameo/weapons/redalert2mod.yaml | 1430, 1432 | 12MissilesSpawnerScud | Inherits@4 | ^Effect_Flame_Medium vs ^RA2HeavyMissile |
+| mods/cameo/weapons/redalert2mod.yaml | 1392, 1394 | 12MissilesSpawnerScud | Inherits@3 | ^Projectile_Flame_Medium vs ^RA2Grenade |
+| mods/cameo/weapons/redalert2mod.yaml | 1393, 1395 | 12MissilesSpawnerScud | Inherits@4 | ^Effect_Flame_Medium vs ^RA2HeavyMissile |
 
 
 ## D2 — duplicate keys by key name (top 40)
@@ -164,7 +164,7 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml | 918, 963 | ordos_pythontank | RangeMultiplier@deployed |
 | mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml | 160, 170 | carryall.huskVTOL | FallsToEarth |
 | mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml | 239, 241 | engineer | ActorStatValues |
-| mods/cameo/ContentPacks/D2k/Shared/yaml/templates.yaml | 215, 252 | ^D2KInfantry | Passenger |
+| mods/cameo/ContentPacks/D2k/Shared/yaml/templates.yaml | 223, 260 | ^D2KInfantry | Passenger |
 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml | 182, 186 | ra1_allies_pillbox | ActorStatValues |
 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml | 356, 360 | ra1_allies_camopillbox | ActorStatValues |
 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml | 50, 56 | japan_waveforcereactor | WithDeathAnimation |
@@ -319,7 +319,7 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/templates.yaml | 305, 326 | ^WC2Stables | Power |
 | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/templates.yaml | 339, 356 | ^WC2Church | Power |
 | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml | 89, 118 | wc2_orcs_catapult | Mobile |
-| mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml | 659, 664 | wc2dragonFireExplosion | Projectile |
+| mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml | 639, 644 | wc2dragonFireExplosion | Projectile |
 | mods/cameo/installer/aftermath.yaml | 6, 16 | aftermath > Install | extract-raw |
 | mods/cameo/installer/aftermath.yaml | 121, 131 | aftermath-linux > Install | extract-raw |
 | mods/cameo/installer/allies95.yaml | 7, 20 | allied > Install | extract-raw |

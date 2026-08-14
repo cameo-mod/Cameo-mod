@@ -22,10 +22,10 @@ tsdroppod: ALSO-USED (2)
   mods\cameo\ContentPacks\TiberianSun\GDI\yaml\aircraft.yaml:499: 		Image: tsdroppod
   mods\cameo\weapons\tiberiansun.yaml:1634: 		Image: tsdroppod
 hakurei_giphy: ALSO-USED (2)
-  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:882: 		Image: hakurei_giphy
+  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:866: 		Image: hakurei_giphy
   mods\cameo\sequences\misc.yaml:4534: 		Filename: hakurei_giphy.shp
 hakurei_dream: ALSO-USED (2)
-  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:871: 		Image: hakurei_dream
+  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:855: 		Image: hakurei_dream
   mods\cameo\sequences\misc.yaml:4526: 		Filename: hakurei_dream.shp
 ra2corpse: CE-ONLY
 wc2_effect_sparkle: ALSO-USED (5)
@@ -50,7 +50,7 @@ wc2_lightng: ALSO-USED (2)
   mods\cameo\weapons\warcraft2.yaml:380: 		Image: wc2_lightng
 wc2_effect_blizzard: ALSO-USED (4)
   mods\cameo\ContentPacks\Warcraft2\Humans\yaml\buildings.yaml:574: 		Effect: wc2_effect_blizzard
-  mods\cameo\ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml:347: 		Image: wc2_effect_blizzard
+  mods\cameo\ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml:345: 		Image: wc2_effect_blizzard
   mods\cameo\sequences\warcraft2.yaml:459: 		Filename: wc2_effect_blizzard.shp
   mods\cameo\weapons\warcraft2.yaml:511: 		Image: wc2_effect_blizzard
 wc2_catapult_stone_projectile_medium: ALSO-USED (1)

@@ -150,21 +150,35 @@ def spread_damage_sum(warheads, smallarms_only: bool = False,
     return total
 
 
-# The flat-damage grid. 2000 until 2026-08-11, when the maintainer ordered it 10x finer
-# together with a 10x finer percentage twin, so the RATIO between them is unchanged and
-# both are simply more granular. The two grids are deliberately in lockstep:
-# 200 flat damage == 0.1 percentage point, so one step of either is one step of the other.
-DAMAGE_STEP = 200
+# The flat-damage grid. 2000 until 2026-08-11, when the maintainer regridded it 20x finer
+# (2000 -> 200 -> 100) alongside a percentage twin measured in BASIS POINTS (0.01%).
+#
+# The law is deliberately one sentence: **100 flat damage == 0.01% of max health**, so one
+# step of the flat grid is exactly one step of the percentage grid and the twin can never
+# drift from the weapon it belongs to.
+DAMAGE_STEP = 100
 
-# Flat damage per ONE WHOLE PERCENT of the twin. This is the design ratio and it does NOT
-# change with DAMAGE_STEP — it is what keeps 16000 -> 8% true across the regrid.
-DAMAGE_PER_PERCENT = 2000
+# Flat damage per ONE WHOLE PERCENT of the twin. Raised 2000 -> 10000 in the same ruling:
+# the twin's BASE percentage is now 5x smaller, and the percentage warheads' Versus values
+# are 5x larger to compensate (1..17 became multiples of 5 in [5, 100]).
+#
+# ⚠ THE TWO HALVES ARE ONE CHANGE. Landing this ratio without the Versus x5 makes every
+# percentage twin deal a FIFTH of its damage; landing the Versus x5 without this ratio
+# makes it deal FIVE TIMES. Neither half is safe alone — see W18.
+DAMAGE_PER_PERCENT = 10000
 
 # What a Damage value on a percentage warhead MEANS, as a denominator.
-#   100  = whole percent (stock HealthPercentageDamage, and AreaDamagePercentage's default)
-#   1000 = per-mille, 0.1% steps (AreaDamagePercentage with PercentageDenominator: 1000)
+#   100   = whole percent — stock HealthPercentageDamage, and AreaDamagePercentage's
+#           default, so untouched weapons keep their current behaviour
+#   10000 = basis points, 0.01% steps (AreaDamagePercentage, PercentageDenominator: 10000)
 PERCENT_DENOMINATOR = 100
-PERMILLE_DENOMINATOR = 1000
+BASIS_POINT_DENOMINATOR = 10000
+
+# Percentage-warhead Versus values are multiples of 5 in [5, 100] (the x5 rebase of the
+# old 1..17 band). Which 17-step window a family uses is a W13 profile decision: 5..85
+# reproduces today's balance exactly, 20..100 is the deliberately generalist band.
+PERCENTAGE_VERSUS_STEP = 5
+PERCENTAGE_VERSUS_BOUNDS = (5, 100)
 
 
 def snap_damage_step(value: float, step: int = DAMAGE_STEP) -> int:
@@ -178,13 +192,14 @@ def snap_damage_step(value: float, step: int = DAMAGE_STEP) -> int:
 def percentage_twin(per: float, denominator: int = PERCENT_DENOMINATOR) -> int:
     """The `*Percentage` twin for a main Damage value, in the unit that node uses.
 
-    The design ratio never changes: **one whole percent per 2000 flat damage**, so
-    16000 damage is 8% of max health whatever the units. `denominator` says how the
-    node WRITES that percentage:
+    The design ratio is `DAMAGE_PER_PERCENT`: one whole percent per 10000 flat damage,
+    i.e. **0.01% for every 100 flat damage**. `denominator` says how the node WRITES
+    that percentage:
 
-        100  -> whole percent  (stock HealthPercentageDamage; 16000 -> 8)
-        1000 -> per-mille      (AreaDamagePercentage with PercentageDenominator: 1000;
-                                16000 -> 80, i.e. the same 8.0%, in 0.1% steps)
+        100   -> whole percent (stock HealthPercentageDamage — too coarse to hold the
+                                new ratio; 16000 damage rounds to 2%)
+        10000 -> basis points  (AreaDamagePercentage with PercentageDenominator: 10000;
+                                16000 -> 160, i.e. 1.60%, exactly Damage/100)
 
     Passing the wrong denominator is a silent 10x error in either direction, which is
     why it is threaded from the resolved node rather than assumed.
@@ -444,8 +459,8 @@ def _selftest() -> None:
         return {t: v for t, v in res.items()
                 if not t.lower().endswith(("extradamage", "percentage", "friendlyfire"))}
 
-    # DESIGN.md law: mains identical on the 2000 grid, FF=50%, ExtraDamage
-    # =50% (excluded from total), Pct=1/2000. total 10000 / 5 mains -> 2000.
+    # DESIGN.md law: mains identical on the damage grid, FF=50%, ExtraDamage
+    # =50% (excluded from total). total 10000 / 5 mains -> 2000.
     whs = [wh("A", 22000), wh("Aextradamage", 22000, "SpreadDamage"),
            wh("Apercentage", 1, "HealthPercentageDamage"),
            wh("B", 22000), wh("C", 22000), wh("D", 22000),
@@ -455,25 +470,30 @@ def _selftest() -> None:
     assert sum(mains(r).values()) == 10000, r
     assert r["Dfriendlyfire"] == 1000, r                # FF = 50%
     assert r["Aextradamage"] == 1000, r                 # ExtraDamage = 50%
-    assert r["Apercentage"] == 1, r                     # 1 per 2000
     # ExtraDamage carries a value (50%) but is EXCLUDED from the total
     assert spread_damage_sum(whs) == 22000 * 5          # Aextradamage not summed
 
-    # 16000 main -> Percentage 8 (DESIGN.md example)
-    r = distribute_damage(16000, [wh("m", 4000), wh("mpercentage", 1, "HealthPercentageDamage")])
-    assert r["m"] == 16000 and r["mpercentage"] == 8, r
+    # THE percentage law: 100 flat damage == 0.01% of max health, exactly Damage/100.
+    r = distribute_damage(16000, [wh("m", 4000),
+                                  {"tag": "mpercentage", "damage": "1",
+                                   "type": "AreaDamagePercentage",
+                                   "percentage_denominator": BASIS_POINT_DENOMINATOR}])
+    assert r["m"] == 16000 and r["mpercentage"] == 160, r          # 1.60%
+    assert percentage_twin(DAMAGE_STEP, BASIS_POINT_DENOMINATOR) == 1
 
     # W15: the twin is continuous in Damage — never floored to a silent 0, and it
     # keeps tracking Damage between grid points (the old // gave 1999->0, 3500->1).
-    assert percentage_twin(2000) == 1 and percentage_twin(1999) == 1
-    assert percentage_twin(3500) == 2 and percentage_twin(1) == 1
-    assert percentage_twin(0) == 0                      # no main damage, no twin
-    assert all(percentage_twin(d) >= percentage_twin(d - 100)
+    assert percentage_twin(1999, BASIS_POINT_DENOMINATOR) == 20
+    assert percentage_twin(1, BASIS_POINT_DENOMINATOR) == 1
+    assert percentage_twin(0, BASIS_POINT_DENOMINATOR) == 0   # no main damage, no twin
+    assert all(percentage_twin(d, BASIS_POINT_DENOMINATOR)
+               >= percentage_twin(d - 100, BASIS_POINT_DENOMINATOR)
                for d in range(100, 40000, 100))         # monotone
 
-    # ... and the SAME percentage in the finer unit: 16000 damage is 8% either way.
-    assert percentage_twin(16000, PERMILLE_DENOMINATOR) == 80
-    assert percentage_twin(DAMAGE_STEP, PERMILLE_DENOMINATOR) == 1   # grids in lockstep
+    # Whole percent can no longer HOLD the ratio — 1.60% rounds to 2%. That coarseness
+    # is exactly why W18 migrates the stock nodes to the basis-point warhead.
+    assert percentage_twin(16000) == 2
+    assert percentage_twin(1) == 1                      # but still never a silent zero
 
     # off-grid total snaps to the step; mains stay identical (fine-tune=FP)
     r = distribute_damage(9000, [wh("a", 2000), wh("b", 2000), wh("c", 2000)])

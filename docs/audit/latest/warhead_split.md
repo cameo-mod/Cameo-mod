@@ -18,7 +18,7 @@ Every SpreadDamage warhead (mains + sides) shares one identical value — the 20
 None. ✅
 
 
-## Review — high uniform stacks (informational, 250)
+## Review — high uniform stacks (informational, 246)
 
 Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (not flattening residue).
 

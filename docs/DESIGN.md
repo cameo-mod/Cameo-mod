@@ -850,17 +850,29 @@ steps so the house formulas stay integral:
   sibling unit. If many units of the same class converge on the same price,
   equally spread them across the available 100-grid slots first, then fall
   back to 10-grid only when necessary. Prices are outputs, never inputs.
-- **Damage: 2000-steps.** All main class warheads carry the **identical**
-  (even-spread) value `total ÷ N` on the 2000 grid — never unequal, never
-  off-grid; fine-tune the effective damage with the actor
-  `FirepowerMultiplier`, not by nudging Damage. Their twins are FIXED
-  fractions of that main value:
+- **Damage: 100-steps.** All main class warheads carry the **identical**
+  (even-spread) value `total ÷ N` on the 100 grid — never unequal, never
+  off-grid. (The grid was 2000 until 2026-08-12; it was cut 20x finer so the
+  pipeline lands on the exact value instead of handing a remainder to
+  `FirepowerMultiplier`, whose role as a fine-tuning knob is being retired.)
+  Their twins are FIXED fractions of that main value:
   - **FriendlyFire** twins = always **50% damage** (and 50% spread).
   - **ExtraDamage** twins = always **50%** of the main (any warhead type —
     SpreadDamage or OpenToppedDamage; energy weapons trade area-of-effect
     for this shield/bonus chip) but are **EXCLUDED from the damage total**.
-  - **HealthPercentageDamage (Percentage)** twin = always **1 per 2000**
-    main damage (16000 -> 8).
+    ⚠ Being RETIRED: the 195 `SpreadDamage` chips collapse into the main
+    warhead (the K model now prices what they compensated for), while the 34
+    sniper `OpenToppedDamage` ones STAY — those are how a sniper hits
+    passengers, not a damage bonus. See BALANCE_PROGRAM_PLAN W19.
+  - **Percentage twin** = **100 flat damage is 0.01% of max health**, so the
+    twin is exactly `Damage / 100` written in BASIS POINTS on an
+    `AreaDamagePercentage` warhead with `PercentageDenominator: 10000`.
+    Percentage-warhead `Versus` values are multiples of **5** in [5, 100]
+    (the x5 rebase of the old 1..17 band, which exactly cancels the 5x
+    weaker base ratio — never change one without the other).
+    The stock `HealthPercentageDamage` cannot express this (whole percent
+    only) and is being migrated away; until then it keeps the OLD law of
+    1 per 2000.
   - The ONE code implementation is `formula.distribute_damage` /
     `formula.spread_damage_sum`; guard `audit_warhead_split`.
 - **Only template-inherited warheads may exist.** Every `Warhead@X` on a

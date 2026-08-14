@@ -557,35 +557,57 @@ to `measured_reference_hp()` and is still printed by the family table, the
 the measured value stays BELOW the constant — if the roster ever catches up, the constant
 has stopped being the middle it was chosen to be and wants a re-ruling.
 
-**3. ✅ 10x GRANULARITY (maintainer order 2026-08-11, same session).**
-*"Integer steps of 1 was not enough … scale it in steps of 0.1 while also scaling the
-flat damage in steps of 200, so it is the same ratio as before but 10x more granular."*
+**3. ✅ THE BASIS-POINT REGRID (maintainer order 2026-08-11/12).**
+*"Flat damage steps of 100 and percentage is always 0.01% for each 100 flat damage since
+that seems very easy to remember. Now we can increase all the versus values for the
+percentage warhead to 5x … 20 to 100 … steps of 5."*
+
+**The law, in one sentence: 100 flat damage == 0.01% of max health.** So the twin is
+literally `Damage / 100` and one step of either grid is one step of the other — it cannot
+drift from the weapon it belongs to.
 
 | | before | after |
 |---|---|---|
-| flat damage grid | 2000 | **200** |
-| percentage twin | whole percent (1%) | **per-mille (0.1%)** |
-| ratio | 1% per 2000 damage | **unchanged** — 16000 damage is still 8% |
+| flat damage grid | 2000 | **100** (20x finer) |
+| percentage twin unit | whole percent (1%) | **basis point (0.01%)** |
+| base ratio | 1% per 2000 damage | **1% per 10000 damage** (5x weaker) |
+| percentage-warhead Versus | 1..17, steps of 1 | **multiples of 5 in [5, 100]** (5x larger) |
 
-The two grids are now in **lockstep: 200 flat damage == exactly 0.1 percentage point**, so
-the twin tracks its weapon's Damage instead of rounding to the nearest whole percent. The
-old grid had to snap 9000/3 = 3000 up to 4000 and hand a 33% remainder to
-`FirepowerMultiplier`; on the 200 grid it lands exactly.
+The 5x weaker base and the 5x larger Versus **cancel exactly**, so total percentage damage
+is unchanged: `16000 damage → 160bp (1.60%) × Versus 85` is the same as
+`16000 → 8% × Versus 17`. What is bought is resolution *in both dimensions at once* — the
+twin now separates every flat step, and Versus moves in clean 5s away from the cramped
+1..17 band where a single integer step was a 100% jump at the bottom.
+
+⚠ **THE TWO HALVES ARE ONE CHANGE.** `DAMAGE_PER_PERCENT` (2000 → 10000) without the
+Versus x5 makes every percentage twin deal **a fifth** of its damage; the Versus x5 without
+the ratio makes it deal **five times**. Never land one alone — see W18.
 
 - C#: `AreaDamagePercentageWarhead.PercentageDenominator` — a DENOMINATOR, not a
   multiplier (it sits beside `IntegrityScale`/`PhysicalStateScale`, which scale UP;
   the `[Desc]` says so explicitly). `100` = whole percent = the engine convention and
-  the **default, so no existing weapon changes behaviour**; `1000` = per-mille.
+  the **default, so no existing weapon changes behaviour**; `10000` = basis points.
   Validated at load through a new `AreaDamageWarhead.ValidateFields()` hook —
   implementing `IRulesetLoaded<WeaponInfo>` in the subclass instead would REPLACE the
   base's explicit implementation, leaving `effectiveRange` unbuilt and every ring empty.
-- Tools: `formula.DAMAGE_STEP = 200`; `percentage_twin(per, denominator)` takes the unit
-  from the node; `twin_denominator()` reads it from the ledger record; `extract_stats`
-  records `percentage_denominator` **only when the node states it**, so ledgers of
-  weapons still on the default diff empty.
+- Tools: `formula.DAMAGE_STEP = 100`, `DAMAGE_PER_PERCENT = 10000`,
+  `BASIS_POINT_DENOMINATOR = 10000`, `PERCENTAGE_VERSUS_STEP = 5`;
+  `percentage_twin(per, denominator)` takes the unit from the node, `twin_denominator()`
+  reads it from the ledger record, and `extract_stats` records
+  `percentage_denominator` **only when the node states it**, so ledgers of weapons still
+  on the default diff empty.
 
-⚠ **The unit is threaded, never assumed** — writing whole percent into a per-mille node
-(or the reverse) is a silent 10x error in a number nobody re-reads.
+⚠ **The unit is threaded, never assumed** — writing whole percent into a basis-point node
+(or the reverse) is a silent 100x error in a number nobody re-reads.
+
+**Which 17-step Versus window?** The maintainer picked **20..100**. Recorded, with one
+caveat for W13 to settle: 20..100 has a best/worst ratio of **5:1**, where the exact x5
+rebase (5..85) keeps today's **17:1**. A 5:1 profile is a GENERALIST — the direction W13
+is explicitly moving away from (field median span 87; "each warhead more specialized").
+**Recommendation: make the STEP the law (multiples of 5) and the WINDOW a per-family
+choice** — 5..85 for the sharp families, 20..100 for the intentional generalists (Magic,
+Sonic, Tesla, which the maintainer has already named as such). Both windows are equally
+clean to remember; only the sharpness differs.
 
 ⚠ **The yaml rollout is NOT in this commit — see W18.** The mechanism is live and inert:
 nothing writes `PercentageDenominator: 1000` yet, so every weapon still behaves exactly
@@ -646,7 +668,7 @@ anywhere without tier restriction (W13 rule 5).
 
 ---
 
-### W18 — Roll the 0.1% unit out into yaml ⛔ BLOCKED on set B (Devin, W2)
+### W18 — Roll the basis-point unit out into yaml ⛔ BLOCKED on set B (Devin, W2)
 
 W15 shipped the MECHANISM; this ships the CONTENT. Blocked purely by file ownership:
 every file involved is set B (`mods/cameo/weapons/**`, `ContentPacks/**/weapons.yaml`),
@@ -660,15 +682,21 @@ Measured scope (2026-08-11, `Warhead@*Percentage` nodes carrying an explicit `Da
 | `AreaDamagePercentage` (Cameo) | **182** | 1 | ✓ |
 
 **Order of operations** (each step boot-gated; the whole thing is behaviour-preserving):
-1. `gen_weapon_template.py` emits `PercentageDenominator: 1000` on every `_Percentage`
-   twin and `pct_damage = damage // 200` (2000 damage still = 1.0%, now written `10`).
+1. `gen_weapon_template.py` emits `PercentageDenominator: 10000` on every `_Percentage`
+   twin, `pct_damage = damage // 100` (2000 damage = `20` = 0.20%), **and the x5 Versus
+   band in multiples of 5** — all three together, never separately.
 2. Regenerate the shared templates; `verify_generator_sync.py` drift back to its
    expected value. ⚠ This rewrites `mods/cameo/weapons/weapons.yaml` — **set B**.
-3. `×10` every explicit twin `Damage` on a node that just gained the finer unit.
-   A unit change, NOT a balance change: assert the resolved percentage is identical
-   before/after with `tools/audit/review_resolve_diff.py`.
+3. Restate every explicit twin `Damage` on a node that just gained the finer unit
+   (old whole-percent `N` → `N × 20` basis points, since the base ratio also fell 5x).
+   A unit change, NOT a balance change: assert the resolved percentage damage is
+   identical before/after with `tools/audit/review_resolve_diff.py`.
 4. Migrate the 2611 stock `HealthPercentageDamage` nodes to `AreaDamagePercentage`
-   (already documented as a behaviour-preserving drop-in) and ×10 them too.
+   (already documented as a behaviour-preserving drop-in) and restate them too.
+
+⚠ **A node on the stock warhead CANNOT hold the new ratio** — whole percent rounds 1.60%
+to 2%, a 25% error. Until step 4 lands, those 2611 nodes keep the old ratio and the old
+Versus; the two systems must not be mixed inside one template.
 
 ⚠ **Deleting or retyping a `Warhead@` on a template orphans child BARE overrides → an
 abstract warhead → NRE at `CreateBasic` with no weapon name in the stack.** Run

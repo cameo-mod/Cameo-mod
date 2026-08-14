@@ -1,12 +1,12 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **213** (min 5 statements), C# files: **325** (min 8 lines)
+Python files: **217** (min 5 statements), C# files: **325** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
 | C1 | identical Python function bodies | 10 | 10 |
 | C2 | identical C# method bodies | 14 | 14 |
-| C3 | identical module-level literal tables | 10 | 10 |
+| C3 | identical module-level literal tables | 11 | 10 |
 
 
 ## C1 — Python function clones (10 group(s))
@@ -45,7 +45,7 @@ Python files: **213** (min 5 statements), C# files: **325** (min 8 lines)
 | 2 | fccb77d01668aded | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:825 CountQueuedBuildings(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:833 SellUselessRefinery() |
 
 
-## C3 — Duplicated constant tables (10 group(s))
+## C3 — Duplicated constant tables (11 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
@@ -59,4 +59,10 @@ Python files: **213** (min 5 statements), C# files: **325** (min 8 lines)
 | 2 | 985c1fe34e42db41 | tools/audit/find_empty_warhead.py:16 CENTRAL; tools/balance/sweep_areadamage.py:25 CENTRAL |
 | 2 | c15459229a835d70 | tools/tilesets/build_tc_basalt_from_gimp.py:18 ACTORS; tools/tilesets/fix_tc_basalt_shadow_outlines.py:18 ACTORS |
 | 2 | de57d7955065e638 | tools/balance/gen_effects.py:34 LEVELORDER; tools/balance/gen_projectiles.py:30 LEVELORDER |
+| 2 | eed204ad8ec23410 | tools/audit/propose_sonic_mapping.py:104 OLD_FAMILIES; tools/audit/weapon_families.py:29 OLD_FAMILIES |
+
+
+## FAIL
+
+- C3: 11 > baseline 10
 

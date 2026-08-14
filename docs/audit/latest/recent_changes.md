@@ -1,19 +1,20 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **342**, files touched: **648**
+Commits reviewed: **316**, files touched: **505**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
-| R1 | balance yaml edited without the ledger | 15 | yes |
-| R2 | audit script never run by run_all.sh | 0 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 51 | partly |
-| R4 | engine/mod.config change (needs boot gate) | 8 | no |
+| R1 | balance yaml edited without the ledger | 14 | yes |
+| R2 | audit script never run by run_all.sh | 1 | yes |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 13 | partly |
+| R4 | engine/mod.config change (needs boot gate) | 6 | no |
 
 
-## R1 — hand-edited balance numbers (15)
+## R1 — hand-edited balance numbers (14)
 
 | commit | date | subject | fields |
 |---|---|---|---|
+| a20cda71 | 2026-08-12 | W2: convert wc2deathknightDeathAndDecay_Hit to I | Damage |
 | 086efefc | 2026-08-11 | feat(balance): convert HonestJohn to 3-way split | Damage |
 | 14713d57 | 2026-08-11 | fix(tesla): rename extra-damage chips and restor | Damage |
 | 0d2cd6e8 | 2026-08-10 | feat(warhead): auto-scaling Integrity/EMP + unif | Damage, Spread |
@@ -27,16 +28,16 @@ Commits reviewed: **342**, files touched: **648**
 | 2bc3034c | 2026-08-04 | fix(weapons): add missing generic_bullet_casing  | Range, ReloadDelay, Speed |
 | c240b615 | 2026-08-03 | Balance RA2 Soviet Sentry Gun burst | Burst, ReloadDelay |
 | 78bcba8f | 2026-08-03 | Add spent casing effects to gun defenses (#238) | Range, Speed |
-| 4877a61b | 2026-07-29 | Rework AttractsWorms, Passenger.Weight, Delivers | Burst, BurstDelays, Damage, HP, MinRange, Range, ReloadDelay, Speed, Spread |
-| c2cb7394 | 2026-07-29 | Reduce StarCraft worker death explosion damage ( | Damage |
 
 
-## R2 — audits missing from run_all.sh (0)
+## R2 — audits missing from run_all.sh (1)
 
-_none found_
+| script | problem |
+|---|---|
+| tools/audit/audit_damage_grid.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (51)
+## R3 — commits without provenance (13)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
@@ -53,47 +54,9 @@ _none found_
 | 79fe0ea7 | 2026-08-02 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | f9454587 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 6ca064f0 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 476e79ce | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 42547fe9 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| bd884a17 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 2a2c8f07 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| a7f01417 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 2202abf1 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 55fc0635 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| f0d7dd12 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 3b1c547d | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| f68a0183 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 8f83b6fa | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 8a89bdd2 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| faf4a5f8 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 7a296c96 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 86508c13 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 0016079c | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| a939c929 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 842c3e46 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 13029589 | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| decede7f | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| cd347b0e | 2026-07-31 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 1072298f | 2026-07-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| bcb1a8f0 | 2026-07-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 626aa9e0 | 2026-07-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 930b72c9 | 2026-07-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| b0805ed5 | 2026-07-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 546c52c4 | 2026-07-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 768379bf | 2026-07-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 61443ae8 | 2026-07-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 952d747c | 2026-07-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| d2cab5bb | 2026-07-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 1716149b | 2026-07-30 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| a6e9a386 | 2026-07-29 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 4877a61b | 2026-07-29 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| a4739554 | 2026-07-29 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 11fa20e2 | 2026-07-29 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| d227b8fb | 2026-07-29 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| c47242e8 | 2026-07-29 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 
 
-## R4 — engine/config changes to re-verify (8)
+## R4 — engine/config changes to re-verify (6)
 
 | commit | date | note |
 |---|---|---|
@@ -103,8 +66,6 @@ _none found_
 | 5b9173cf | 2026-08-04 | mod.config changed (rebuild + boot gate required) |
 | 6e210c35 | 2026-08-01 | mod.config changed (rebuild + boot gate required) |
 | 6ca064f0 | 2026-07-31 | mod.config changed (rebuild + boot gate required) |
-| 1716149b | 2026-07-30 | mod.config changed (rebuild + boot gate required) |
-| 4877a61b | 2026-07-29 | mod.config changed (rebuild + boot gate required) |
 
 
 ## R5 — most-churned files (re-read these first)
@@ -112,20 +73,20 @@ _none found_
 | file | commits touching it |
 |---|---|
 | docs/AI_HANDOFF_2026-08-05.md | 63 |
-| mods/cameo/weapons/weapons.yaml | 50 |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 46 |
-| docs/design/ROADMAP.md | 45 |
+| mods/cameo/weapons/weapons.yaml | 49 |
+| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 43 |
 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 42 |
 | docs/balance/redalert_soviets.json | 40 |
-| mods/cameo/weapons/tiberiansun.yaml | 37 |
 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 37 |
 | docs/balance/tiberiansun_gdi.json | 36 |
-| mods/cameo/weapons/redalert2.yaml | 36 |
-| mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 36 |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 35 |
-| mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml | 35 |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 33 |
+| docs/balance/d2k_ixian.json | 34 |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 34 |
+| mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml | 34 |
+| mods/cameo/weapons/tiberiansun.yaml | 33 |
+| docs/design/ROADMAP.md | 33 |
+| mods/cameo/weapons/redalert2.yaml | 33 |
 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml | 33 |
+| mods/cameo/weapons/redalert2mod.yaml | 32 |
 
 
 ## Reviewer checklist (not machine-checkable)
@@ -139,5 +100,10 @@ _none found_
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 0 R1 and 0 R3 of 15/51 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 1 R1 and 0 R3 of 14/13 findings are in scope; the rest predate the gate.
+
+
+## FAIL
+
+- 1 R1, 1 R2, 0 R3 blocking finding(s)
 

@@ -1,10 +1,10 @@
 === 52 VIOLATIONS + 0 REDUNDANT (Image: explosion) ===
 
-[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:827  Hakureiring2  Image: hakurei_giphy
-[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:900  ReimuYinYangDrone  Image: hakurei_giphy
-[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:922  THMiss  Image: hakurei_dream
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:2902  RA2CorpseSpawner  Image: ra2corpse
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:2948  RA2FlyingBody  Image: ra2corpse
+[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:811  Hakureiring2  Image: hakurei_giphy
+[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:884  ReimuYinYangDrone  Image: hakurei_giphy
+[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:906  THMiss  Image: hakurei_dream
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:2926  RA2CorpseSpawner  Image: ra2corpse
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:2972  RA2FlyingBody  Image: ra2corpse
 [VIOLATION] mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:1488  AsianTSIonCannon  Image: tsioncannon
 [VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1791  TDIonCannon  Image: tsioncannon
 [VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1803  TDIonCannon  Image: ionsfx
@@ -29,8 +29,8 @@
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml:190  wc2catapultFire  Image: wc2_catapult_stone_projectile_medium
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml:213  wc2deathknightFire  Image: wc2_effect_death_knight_attack
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml:271  wc2deathknightHaste  Image: wc2_effect_sparkle
-[VIOLATION] mods\cameo\ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml:374  wc2deathknightDeathAndDecay_Hit  Image: wc2_effect_death_and_decay
-[VIOLATION] mods\cameo\ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml:396  wc2deathknightRaiseDead  Image: wc2_effect_sparkle
+[VIOLATION] mods\cameo\ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml:354  wc2deathknightDeathAndDecay_Hit  Image: wc2_effect_death_and_decay
+[VIOLATION] mods\cameo\ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml:376  wc2deathknightRaiseDead  Image: wc2_effect_sparkle
 [VIOLATION] mods\cameo\weapons\generals.yaml:2313  GLSneakAttack  Image: tsdig
 [VIOLATION] mods\cameo\weapons\heroes.yaml:811  McNealMechDrop1  Image: tspodring
 [VIOLATION] mods\cameo\weapons\heroes.yaml:816  McNealMechDrop1  Image: tsmcnealmechdrop
