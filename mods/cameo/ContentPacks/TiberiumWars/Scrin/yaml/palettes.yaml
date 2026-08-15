@@ -1,0 +1,9 @@
+^Palettes:
+	PaletteFromEmbeddedSpritePalette@scrin_hexapod:
+		Name: scrin_hexapod
+		Filename: scrin_sprites|scrin_eradicator_hexapod_idle.png
+		AllowModifiers: true
+	PlayerColorPalette@scrin_hexapod:
+		BasePalette: scrin_hexapod
+		BaseName: scrin_hexapod_player
+		RemapIndex: 249, 250, 251, 252, 253, 254, 255

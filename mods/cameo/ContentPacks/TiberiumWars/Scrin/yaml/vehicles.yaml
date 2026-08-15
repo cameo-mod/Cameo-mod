@@ -1,0 +1,22 @@
+# Map/editor-ready visual foundation. Production, weapons, abilities, and final
+# gameplay values are intentionally deferred with the rest of the Scrin roster.
+scrin_eradicator_hexapod:
+	Inherits: ^Vehicle
+	Tooltip:
+		Name: actor_scrin_eradicator_hexapod.name
+	Health:
+		HP: 100000
+	Armor:
+		Type: Heavy
+	Mobile:
+		Locomotor: wheeled
+		Speed: 30
+		TurnSpeed: 8
+	Selectable:
+		Bounds: 3072, 3072
+	WithMoveAnimation:
+		MoveSequence: move
+		ValidMovementTypes: Horizontal, Turn
+	-Voiced:
+	RenderSprites:
+		PlayerPalette: scrin_hexapod_player

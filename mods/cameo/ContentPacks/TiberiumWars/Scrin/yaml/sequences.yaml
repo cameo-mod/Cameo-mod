@@ -199,3 +199,24 @@ scrin_phase_generator:
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,-20.000
+
+scrin_eradicator_hexapod:
+	idle:
+		Filename: scrin_sprites|scrin_eradicator_hexapod_idle.png
+		Start: 0
+		Length: 1
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 2.000,-22.000
+		Scale: 2
+	move:
+		Filename: scrin_sprites|scrin_eradicator_hexapod_walk.png
+		Start: 0
+		Length: 12
+		Facings: 32
+		Tick: 160
+		ShadowStart: 384
+		ShadowZOffset: -5
+		Offset: 0.000,-22.000
+		Scale: 2
