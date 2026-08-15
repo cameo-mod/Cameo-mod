@@ -472,8 +472,8 @@ built by `tools/reference/extract_versus.py` (+ `extract_mix_ini.py` for Mental 
 
 | finding | number |
 |---|---|
-| field median profile span | **87** (Cameo: Light 90 · Medium 75 · Heavy 60 · Super 45) |
-| field distribution | **56% sharp · 23% moderate · 21% flat** — the moderate middle is the LEAST used band, and 3 of Cameo's 4 levels sit in it |
+| field median profile span | **85** raw · **100** counting damage warheads only (Cameo: Light 90 · Medium 75 · Heavy 60 · Super 45) |
+| field distribution | ⚠ **CORRECTED 2026-08-15 — see the box below.** Raw: 65% sharp · 7% moderate · 27% flat. **Damage warheads only: 84% sharp · 9% moderate · 7% flat** |
 | Mental Omega alone | median span **95**, 34% flat — a BARBELL: many hard counters AND many all-rounders, few in between |
 | archetypes occupied | Cameo **14** · field **28** |
 | Cameo's most common archetype | `BLD>INF>VEH FLAT HE` at **17.8%**, vs **0.4%** in the field |
@@ -487,8 +487,18 @@ built by `tools/reference/extract_versus.py` (+ `extract_mix_ini.py` for Mental 
    flattest weapons in the game today are the mixed ones, not the designed ones.
 2. **Archetype = macro order × sharp/flat × HE/AP direction × air position.** Aim to
    occupy the field's ~28 rather than today's 14.
-3. **Most warheads SHARP; ~20% intentionally FLAT** (Sonic, Magic, Tesla) — the field's
-   own ratio, and MO proves you can have both extremes without a mushy middle.
+3. ⚠ **REVISED 2026-08-15 — the field is far sharper than this rule assumed.**
+   The original rule read *"most warheads SHARP; **~20% intentionally FLAT**, the field's
+   own ratio"*. That 20% was an artifact of counting warheads that carry **no damage at
+   all**: 182 corpus rows are ALL-ZERO and 186 more peak at ≤5 — death animations
+   (`AvatarDeathWH`), dummies (`BioDummyWH`), repair guns, de-evolution and EMP-only
+   effects. A zero profile has span 0, so every one of them was filed as a "flat
+   all-rounder". They are plumbing, not design.
+   Excluding them (`cluster_versus.py`, `DAMAGE_FLOOR`), the real field ratio is
+   **84% sharp · 9% moderate · 7% flat** — flat is roughly **a third** as common as the
+   rule assumed. So: keep flat as a deliberate, RARE identity (Sonic, Magic, Tesla) at
+   under 10% of families, and make everything else genuinely sharp. MO still proves both
+   extremes can coexist without a mushy middle.
 4. **CLUSTER the reference values, never average them.** Averaging all 2057 three-class
    profiles yields span **24** against a field median of 87 — it collapses exactly the
    rock-paper-scissors the corpus was gathered to produce. Take the median WITHIN each
@@ -516,7 +526,35 @@ built by `tools/reference/extract_versus.py` (+ `extract_mix_ini.py` for Mental 
     maintainer's 2026-08-11 ruling that **no weapon is shared**, which removed its entire
     premise ("one weapon serves many actors"). The knob is retired; see **W17**.
 
-**VERIFY:** `python tools/reference/extract_versus.py --summary` → 14 sources, 2494 rows.
+**PROGRESS (2026-08-15) — step 1 of W13 is DONE: the corpus is clustered.**
+`tools/reference/cluster_versus.py` → `docs/reference/versus_archetypes.md`. It places
+**1876 damage profiles into 85 archetypes** (Cameo occupies 14) keyed on
+`macro order x sharp/flat x HE/AP`, and reports the **median profile WITHIN each cluster**,
+never a global average (rule 4). The biggest occupied archetypes, with the number of
+independent mods backing each:
+
+| archetype | n | sources | median span | INF | VEH | BLD |
+|---|--:|--:|--:|--:|--:|--:|
+| `INF>VEH>BLD sharp HE` | 345 | 14 | 100 | 100 | 47 | 23 |
+| `INF>BLD>VEH sharp HE` | 250 | 14 | 100 | 100 | 47 | 63 |
+| `VEH>BLD>INF sharp AP` | 114 | 13 | 90 | 25 | 92 | 63 |
+| `VEH>INF>BLD sharp HE` | 82 | 10 | 110 | 60 | 115 | 24 |
+| `BLD>INF>VEH sharp HE` | 71 | 10 | 150 | 110 | 77 | 197 |
+
+⚠ **The AIR axis is NOT measurable from this corpus and must not be faked.** Only **37 of
+1876** profiles define any aircraft armor at all: the source engines share one armor type
+between aircraft and ground vehicles. That is precisely why Cameo's four dedicated aircraft
+armors are an improvement (rule 8) — and it means each archetype's air POSITION is a
+maintainer design decision, with the corpus contributing nothing. The tool says so in its
+own output rather than emitting an invented number.
+
+**NEXT (step 2):** map Cameo's 16 warhead families onto these archetypes and derive each
+family's target Versus values from its cluster median. That step WRITES
+`mods/cameo/weapons/weapons.yaml` via `gen_weapon_template.py`, so it is **set B** and waits
+on W2 — the derivation itself (set A) can be finished first.
+
+**VERIFY:** `python tools/reference/extract_versus.py --summary` → 14 sources, 2494 rows;
+`python tools/reference/cluster_versus.py` → 1876 profiles, 85 archetypes.
 
 ---
 
