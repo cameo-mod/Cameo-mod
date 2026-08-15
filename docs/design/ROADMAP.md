@@ -234,9 +234,28 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    later; resolution = inline (cross-pack/one-off) or hoist to `^Template` (same-pack). Memory:
    [[cameo-no-actor-inheritance]]. Audit cmd in the memory. Don't stop pipeline work for it.
 
-**ENGINE workflow (Blackrobe 2026-07-31):** `cameo-mod/engine` is a git **submodule (a working clone of `origin Cameo-mod/OpenRA`)**, whose **main branch is `cameo-engine`** — i.e. the "cameo-engine dev clone" referenced in `.windsurf/rules/start-protocol.md`. Engine updates: branch off `cameo-engine`;
-**MIRROR changes both ways** (`cameo-engine` ↔ `cameo-mod/engine`); rebuild before the boot gate. Memory:
-`cameo-engine-submodule`.
+**ENGINE workflow.** ⚠ **CORRECTED 2026-08-15 — `engine/` is NOT a submodule of this repo.**
+Verified: no `.gitmodules`, no `engine/.git`, `.gitignore` lists `engine`/`engine*`, and
+`git ls-files engine` returns **0 tracked files**. `git` run from inside `engine/` silently
+operates on the PARENT repo, which is what made it look like a submodule on `master`.
+**Editing `engine/**` from this repo produces work that cannot be committed and is wiped by
+the next `make all`.** (The earlier wording here — "submodule … MIRROR changes both ways" —
+cost a session's worth of planning before anyone checked.)
+
+The engine is a **SEPARATE clone** of `https://github.com/cameo-mod/OpenRA`, branch
+`cameo-engine`. The binding, step-by-step procedure is
+**`docs/LESSONS_LEARNED.md` → "The canonical engine update pipeline"**: edit + push there →
+`git rev-parse cameo-engine` for the full 40-char hash → `ENGINE_VERSION` in **`mod.config`**
+(not `mod.yaml`) → `make.cmd all` → verify `engine/VERSION` and recreate `engine/glsl/`
+shaders → boot-gate → commit `mod.config`. Also in `CLAUDE.md` and the SessionStart hook.
+
+⭐ **Check for a mod-side SHADOW first** — it avoids the whole round trip.
+`ObjectCreator.FindType` returns the first assembly in `mod.yaml`'s `Assemblies` list holding
+the type name, and that order is AS, CA, **Cameo**, Cnc, D2k, Common, so an
+`OpenRA.Mods.Cameo` class of the same name replaces the engine's with **zero yaml changes**.
+Precedent: `ColorPickerColorShift`, `PlayerColorShift`, and `SelectionDecorations`
+(`57685c3a3`). Prove it with a Cameo-only field — `--docs` lists both types and proves nothing.
+Memory: `cameo-engine-submodule`.
 
 ---
 
