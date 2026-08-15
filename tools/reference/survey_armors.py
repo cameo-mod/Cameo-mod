@@ -59,11 +59,18 @@ COVERED = {
 CANDIDATES = {
     "naval_*": (
         "**NAVAL — the real gap.** Cameo has NO naval armor and no naval "
-        "template; the few ship-like actors borrow `Spaceship`. DTA splits it "
-        "three ways (naval_light/medium/heavy) for the same reason ground armor "
-        "is split: a gunboat and a dreadnought do not share a profile. Naval "
-        "anchors are already queued (ROADMAP phase C-naval) and will need this "
-        "before they can be stated."),
+        "template. Verified by resolving every real ship — an actor whose "
+        "`Mobile.Locomotor` is `naval`, which is the only reliable test; matching "
+        "on names like 'carrier' or 'battlecruiser' finds FLYING units and was "
+        "how an earlier draft of this note wrongly claimed ships use `Spaceship`. "
+        "The three buildable ships (`ra2_allies_aegiscruiser`, "
+        "`ra2_soviets_seascorpion`, `yuri_boomersubmarine`) use the VEHICLE "
+        "ladder: Medium, Light, Medium. So a submarine and a light tank currently "
+        "share a damage profile, and no weapon can be made good at sea without "
+        "also being good against tanks. DTA splits naval three ways "
+        "(naval_light/medium/heavy) for exactly the reason ground armor is split. "
+        "Naval anchors are already queued (ROADMAP phase C-naval) and cannot be "
+        "stated without this."),
     "wall": (
         "Walls resist small arms almost completely but fall to demolition — a "
         "shape no building rung has, since Wood/Steel/Concrete all sit on the "
