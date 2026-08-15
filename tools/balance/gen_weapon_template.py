@@ -26,7 +26,9 @@ Usage:  gen_weapon_template.py [family ...] | --list | --orders
 """
 from __future__ import annotations
 import json
+import math
 import pathlib
+import statistics
 import sys
 
 LADDERS = {  # lightest -> heaviest
@@ -273,6 +275,56 @@ def distinct_ints(rows):
     return [(armor, fixed[armor]) for armor, _ in rows]
 
 
+BAND_LOW = 2.0                      # DESIGN.md §12.0 rule 5 — the target band's flat end
+DERIVED_ARMORS = ("Heroic", "Airborne")
+
+
+def finish_blend(rows):
+    """Repair a BLEND profile: re-derive its derived armors, then re-sharpen it.
+
+    A blend is the per-armor AVERAGE of its parents, and averaging does two things
+    that have to be undone before it ships:
+
+    1. **It computes the derived armors instead of deriving them.** §12.0b says
+       `Heroic = Plate x Scout / peak` **of the profile it belongs to** — and the
+       average of the parents' Heroic is not the product of the blend's own Plate
+       and Scout (`avg(ab/p) != avg(a)avg(b)/avg(p)`). Measured: 5 of 21 blend
+       levels were off, `FireCannon_Light` by 12 points. Same failure as the
+       `/100` divisor bug — a derived value has to be derived LAST, from the
+       finished profile.
+    2. **It flattens.** Averaging profiles that disagree cancels the
+       disagreement — the identical effect that makes a per-family aggregate mush
+       (DESIGN §12.0 rule 5). `ChemMissile_Heavy` came out at 1.8x, under the
+       band. It is re-sharpened back to the band floor with the same POWER LAW the
+       reference side uses (`v' = G * (v/G) ** alpha` about the geometric mean),
+       never by clamping: clamping would move two cells and change the shape,
+       where the power law moves every cell proportionally and preserves both the
+       ordering and the geometric centre.
+    """
+    values = dict(rows)
+    peak = max(v for a, v in rows if a != "Shield" and a not in DERIVED_ARMORS)
+    for name, (first, second) in (("Heroic", ("Plate", "Scout")),
+                                  ("Airborne", ("Helicopter", "Scout"))):
+        if name in values and first in values and second in values and peak > 0:
+            values[name] = values[first] * values[second] / peak
+
+    ladder = [v for a, v in values.items()
+              if a != "Shield" and a not in DERIVED_ARMORS and v > 0]
+    if len(ladder) >= 2:
+        hi, lo = max(ladder), min(ladder)
+        if lo > 0 and 1.0 < hi / lo < BAND_LOW:
+            centre = statistics.geometric_mean(ladder)
+            alpha = math.log(BAND_LOW) / math.log(hi / lo)
+            values = {a: centre * (max(v, 1.0) / centre) ** alpha
+                      for a, v in values.items()}
+
+    # Back inside the window, multiplicatively so the spread just set survives.
+    top = max(values.values())
+    scale = min(1.0, VERSUS_CEILING / top) if top > 0 else 1.0
+    out = [(a, int(round(values[a] * scale))) for a, _ in rows]
+    return sorted(distinct_ints(out), key=lambda r: -r[1])
+
+
 def reference_main(name, order16, level):
     """The measured main-warhead rows for a family+level, or None if unmeasured.
 
@@ -355,6 +407,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         pct_damage = damage // 2000              # 1% chip per 2000 main flat damage
         if versus_override is not None:          # blend family (e.g. Plasma = avg of Flame + Chemical)
             main, pct = versus_override(level)
+            main = finish_blend(main)            # re-derive Heroic/Airborne, un-flatten
             hz = hazmat
         elif mode == "flat":                       # Sonic: ignores armor on FLAT
             fv, fp = FLAT_VALUES[level], FLAT_PCT[level]

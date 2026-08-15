@@ -723,13 +723,39 @@ inside 2x–8x** (median 3.2x, range 2.0–6.2x).
 - An earlier draft placed cliffs by eye and produced an arrow dealing **190 against Plate** —
   95% of its peak against the armour it is least able to defeat.
 
-**Two things left for the maintainer, both now visible as numbers:**
-- **`^Warhead_ChemMissile_Heavy` ships at 1.8x**, just under the band. BLENDS average their
-  parents, and averaging flattens — the same effect that makes the per-family aggregate mush.
-  Whether a blend should be re-sharpened to its parents' level is a design call, not a default.
-- **`Chemical` is declared `dir="heavy"`** in the weapon matrix, so it now visibly deals **134
-  to a superheavy tank and 106 to an unarmoured soldier**. For a corrosive gas that reads
-  backwards. Flipping a family's direction is a design decision, so it is reported, not changed.
+**BLENDS ARE REPAIRED (maintainer, 2026-08-15: re-sharpen to 2.0x, "without clamping of
+course").** A blend is the per-armor AVERAGE of its parents, and averaging did two things that
+had to be undone. `finish_blend()` now does both:
+
+1. **It computed the derived armors instead of DERIVING them.** §12.0b says
+   `Heroic = Plate x Scout / peak` **of the profile it belongs to**, and the average of the
+   parents' Heroic is not the product of the blend's own Plate and Scout
+   (`avg(ab/p) != avg(a)avg(b)/avg(p)`). **5 of 21 blend levels were off**, `FireCannon_Light`
+   by 12 points. Exactly the `/100`-divisor failure again: **a derived value must be derived
+   LAST, from the finished profile.** All 22 now match the rule to within rounding.
+2. **It flattened** — the same cancellation that makes a per-family aggregate mush.
+   `ChemMissile_Heavy` fell to 1.8x. Re-sharpened with the same POWER LAW the reference side
+   uses (`v' = G * (v/G) ** alpha` about the geometric mean), **never by clamping**: clamping
+   moves two cells and deforms the shape, the power law moves every cell proportionally and
+   preserves both the ordering and the geometric centre. It now ships at exactly **2.0x**.
+
+**Result: 0 templates outside 2x–8x, 0 cells outside `[10, 200]`, across all 88.**
+
+⚠ **CORRECTION — my "Chemical reads backwards" note was WRONG, and the docs already said so.**
+`Chemical` is **CORROSION, not gas**: `PHYSICAL_STATE_SYSTEM.md` maps Chemical to the
+**Corrosion** meter at +100 ("pure corrosion") and W9 states "**corrosion eats vehicles**"
+(poison is the separate infantry clone); `SPREAD_FALLOFF_PLAN.md` describes Chemical as a green
+blast and explicitly **"NOT the gas cloud"**. So `dir="heavy"` — best against armoured infantry
+and heavy vehicles — is correct and deliberate: acid eats armour. The anti-infantry gas is a
+DIFFERENT family, `Toxic`.
+
+**REAL GAP FOUND instead: `Toxic` was never rebuilt.** `^ToxicWeapon` is still a legacy
+template with **6 live inheritors** (RA2 Shared, TS Forgotten, the dead central copies) and is
+**absent from `gen_weapon_template.WEAPONS`** — so the genuine anti-infantry gas family has no
+`^Warhead_Toxic_*`, no ordering law, and whatever inline `Versus` it always had.
+`WEAPON_TYPE_SYSTEM.md` specifies it as WC **0.5** sub-light anti-infantry, no-op vs robotic.
+Adding it is a new family (a level below Light), so it needs a maintainer ruling on where 0.5
+sits in the level ladder.
 
 **VERIFY:** `python tools/reference/extract_versus.py --summary` → 16 sources, 3150 rows;
 `python tools/balance/verify_generator_sync.py` → drift = 1 (`^Warhead_Sniper_Light`);
