@@ -492,6 +492,23 @@ cheapest provider wins).
   stack, but the COMBINED product must never drop below **50%** — below
   that units feel undamageable. Hard floor; audit extension TODO
   (worst-case stacked DamageMultiplier per unit < 0.5 = finding).
+- ⭐ **CHARGE-UP DISCOUNT — the 50% anchor** (maintainer law, 2026-08-15). A charging
+  unit is nerfed twice (the delay inflates its effective reload AND it is helpless
+  while winding up), so it is priced at a discount. The discount is PROPORTIONAL to
+  the real burden, never flat:
+  - **A unit whose charge is 50% of its reload earns the full 0.75× discount.**
+    Reload 100, charge 50 — as a share of the cycle, `0.5/1.5` = **1/3**
+    (`formula.CHARGE_ANCHOR_SHARE`). Less charge earns proportionally less discount;
+    a zero-charge unit pays 1.0. Clamped to [0.75, 1.0].
+  - **`charge_share = charge / (charge + cycle)` is a RATIO, not a duration.** The RA1
+    Tesla Coil charges LONGER than the RA2 one (25 vs 20) yet earns a SMALLER
+    discount, because its three zaps stretch the cycle.
+  - ⚠ **`AttackTesla` overrides the weapon's reload.** Its own `ReloadDelay` is the
+    cycle, `MaxCharges` is the burst, and the WEAPON's reload is the burst delay —
+    NOT `ChargeDelay`. Reading the weapon's reload as the cycle overstated Tesla DPS
+    by **11.8×**. See `BALANCE_PROGRAM_PLAN.md` W16.
+  - Charge values are DECISIONS: write `InitialChargeDelay` out rather than inheriting
+    the engine's default of 22. An absent key means DEFAULT, never zero.
 - ⭐ **TEAM UPGRADES ARE ALWAYS WEAKER THAN FACTION UPGRADES** (maintainer law,
   2026-08-15). A team upgrade buffs every allied army, so it must never be the
   strongest thing a faction can research — the faction's own upgrades are what

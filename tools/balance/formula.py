@@ -161,13 +161,25 @@ CHARGE_FIELDS = {
 }
 
 
-# W16 anchor. The Obelisk of Light is the case the 0.75x ruling was written for:
-# AttackCharges ChargeLevel 50 against a weapon reload of 96, so 50/(50+96) = 0.342
-# of its cycle is spent charging. That share earns the full documented discount;
-# everything else is scaled linearly against it. Kept as a CONSTANT rather than
-# read from the Obelisk at runtime — it is a calibration point, and a balance pass
+# W16 anchor, as a LAW rather than one building's stats (maintainer 2026-08-15,
+# "some nice ratio ... might be more consistent"):
+#
+#   A unit that spends HALF AGAIN its reload winding up — charge = 50% of reload —
+#   earns the full 0.75x discount. As a share of the whole cycle that is
+#   0.5 / 1.5 = 1/3.
+#
+# The Obelisk of Light, the case the ruling was written for, sits at 50/(50+96) =
+# 34.2%, so it still anchors at 0.75 (just above the line, clamped) and NOTHING
+# moves: measured across the 11 chargers with a real share, spread 0.198 against
+# today's 0.199.
+#
+# ⚠ A 25%-of-reload anchor (share 20%) was measured and REJECTED: it puts 7 of 11
+# chargers on the 0.75 floor instead of 5, erasing most of the differentiation this
+# item exists to create. Clean is good; clean and flat is not.
+#
+# Kept as a CONSTANT, never read from the Obelisk at runtime — a balance pass
 # retuning that one building must not silently re-price every charging actor.
-CHARGE_ANCHOR_SHARE = 50 / (50 + 96)
+CHARGE_ANCHOR_SHARE = 1 / 3
 
 
 def charge_share(ticks: float | None, cycle: float | None) -> float:

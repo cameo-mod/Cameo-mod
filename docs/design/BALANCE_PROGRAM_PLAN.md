@@ -676,8 +676,26 @@ Re-measured, the RA2 Tesla Coil has the HIGHEST charge share of the Tesla group 
 not the lowest. The ruling stands and is now better supported: Tesla charges are real
 but SHORT relative to the Obelisk's 50, so they earn a smaller discount, not none.
 
-**Model:** `charge_share = charge / (charge + reload)`, discount scaled so the Obelisk
-anchors the documented 0.75x and a zero-charge actor gets exactly 1.0, clamped to
+⭐ **THE ANCHOR IS A LAW, NOT A BUILDING** (maintainer 2026-08-15, "some nice ratio …
+might be more consistent"):
+
+> **A unit whose charge is 50% of its reload earns the full 0.75× discount.**
+> Reload 100, charge 50. As a share of the whole cycle that is `0.5 / 1.5` = **1/3**.
+
+`formula.CHARGE_ANCHOR_SHARE = 1/3`. The Obelisk sits at 50/(50+96) = 34.2%, just above
+the line, so it still anchors at 0.75 and **nothing moved**: measured across the 11
+chargers with a real share, spread 0.198 against the old accidental anchor's 0.199.
+
+⚠ **A 25%-of-reload anchor (share 20%) was measured and REJECTED** — it puts **7 of 11**
+chargers on the 0.75 floor instead of 5, erasing most of the differentiation this item
+exists to create. Clean is good; clean and flat is not.
+
+Optional tidy-up, NOT done (it is a weapon balance number and belongs in the pipeline):
+`td_nod_obeliskoflight`'s weapon reload 96 → 100 would make the anchor unit sit exactly
+ON the law at 33.3% instead of clamping from just above it.
+
+**Model:** `charge_share = charge / (charge + reload)`, discount scaled so the anchor
+share earns the documented 0.75x and a zero-charge actor gets exactly 1.0, clamped to
 [0.75, 1.0]. This also RESOLVES the open Tesla question: `AttackTesla` can now join
 `CHARGE_UP_TRAITS` safely, because the model gives each actor the discount its real
 charge burden earns instead of a binary in/out. Retire `CHARGE_UP_EXCLUDED_TRAITS`.
