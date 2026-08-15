@@ -778,17 +778,25 @@
 	# `Armor RequiresCondition: !shielded` / `Armor@shielded: Shield` swap that R5 wants.
 	# A second Shielded compiles, lints and BOOTS fine, then throws the moment the actor
 	# is produced, because ChangesShield resolves it with .Trait<Shielded>().
-	# Shield strength is granted the way shield generators grant it: ChangesShield pumps
-	# the shared pool, and StartIfBelow caps how much of it this source fills — 25 means
-	# Vril tops the shield up to 25% of health and no further, so a real shield generator
-	# can still take the same unit to 100%.
-	ChangesShield@schwarzermond_upgrade_vrilinfusion:
+	# GrantsShield, not ChangesShield: shield grants must be ADDITIVE. ChangesShield's
+	# StartIfBelow is a CAP, so two upgrades of 25% would both stop at 25% and the second
+	# would be worth nothing. GrantsShield sums instead — two of these give ONE bar
+	# holding 50%, never two bars of 25%.
+	GrantsShield@schwarzermond_upgrade_vrilinfusion:
 		RequiresCondition: schwarzermond_upgrade_vrilinfusion
-		PercentageStep: 2
-		Step: 0
-		Delay: 25
-		StartIfBelow: 25
+		PercentageStrength: 25
+		PercentageRegenAmount: 2
+		RegenInterval: 25
 		DamageCooldown: 250
+	# The shared Shielded is GATED, and `Shielded.Regenerate` returns early while the trait
+	# is disabled — so without naming this upgrade in the gate, Vril would silently grant
+	# NOTHING. Every shield-granting faction template in the mod states the same shape
+	# (D2K Ordos/Ixian, Japan stealth suits, Yuri), so Vril states it too.
+	# ⚠ `-RequiresCondition:` does NOT work here: the removal idiom only applies where the
+	# field already exists in the node being merged, and this template declares its own
+	# fresh `Shielded` node — the engine throws "no elements with key to remove" at BOOT.
+	Shielded:
+		RequiresCondition: !disabled && (schwarzermond_upgrade_vrilinfusion || shieldgen || shielded)
 	# `shieldpermanent` is the mod's marker for an INNATE shield rather than a generator
 	# field (D2K Ordos, Japan stealth suits, Yuri all use it), which Vril is. It buys two
 	# things from ^ShieldedShieldable that this upgrade would otherwise be punished by:

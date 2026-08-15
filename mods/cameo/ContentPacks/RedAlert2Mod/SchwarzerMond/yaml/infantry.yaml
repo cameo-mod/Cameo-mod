@@ -426,6 +426,13 @@ schwarzermond_lunarsoldier:
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@VrilInfusion: ^NaxiVrilInfusion
+	# ^NaxiVrilInfusion is inherited LAST, so its Shielded gate would overwrite the
+	# stealth-suit term this unit alone gets from ^RA2YuriStealthSuits and quietly kill
+	# that shield. RequiresCondition is a scalar — it cannot be appended to — so the only
+	# way to keep both paths is to restate the whole expression here, on the actor, where
+	# it wins over every template.
+	Shielded:
+		RequiresCondition: !disabled && (schwarzermond_upgrade_vrilinfusion || yuri_upgrade_infantrystealthsuits || shieldgen || shielded)
 	# SPECIAL-FORCES VERIFIER (Formula v2, maintainer 2026-07-20): the
 	# Tier-1 clean tripwire (no tech penalty, no specials — the moon-
 	# propaganda is a RECEIVED upgrade buff, not an aura). Exactly 2x the

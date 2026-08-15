@@ -10,6 +10,7 @@
 #endregion
 
 using System.Linq;
+using OpenRA.Mods.AS.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -99,6 +100,10 @@ namespace OpenRA.Mods.Cameo.Traits
 		// trait exists, so the lookup is always valid there.
 		Health health;
 
+		// The layer directly outside this one. W21's stack is SEQUENTIAL — Shield ->
+		// Integrity -> Armor -> Health — and this reference is what enforces it.
+		Shielded shield;
+
 		// An actor can carry SEVERAL ArmorPlating traits — innate plating plus an upgrade that
 		// grants more (Schwarzer Mond's noid walkers plus Lunar Alloys, say). W21 R6 says those
 		// stack ADDITIVELY, and the maintainer does not want one bar per source, so the FIRST
@@ -136,6 +141,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		protected override void Created(Actor self)
 		{
 			health = self.TraitOrDefault<Health>();
+			shield = self.TraitOrDefault<Shielded>();
 			contributors = self.TraitsImplementing<ArmorPlating>().ToArray();
 			owner = contributors[0];
 
@@ -162,26 +168,43 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			// Count a source only once it has actually reported in (TraitEnabled), never from
 			// IsTraitDisabled: the owner's Created() runs BEFORE a later contributor's, so
-			// reading the flag here and adding the delta there would count the same pool twice.
-			MaxStrength = IsTraitDisabled ? 0 : PoolOf(this);
+			// reading the flag there and adding the delta here would count the same pool twice.
+			// The owner counts itself the same way as everyone else — ownership is POSITIONAL
+			// (whoever the trait dictionary lists first) and says nothing about whether that
+			// particular source is switched on.
+			MaxStrength = 0;
 			foreach (var c in contributors)
-				if (c != this && c.contributed)
+				if (c.contributed)
 					MaxStrength += PoolOf(c);
 		}
 
-		// A contributor switching on or off. Grow/shrink the shared pool by exactly that
-		// contributor's size and move Strength with it, so an upgrade grants its plating
-		// immediately instead of waiting for the regen to fill the new headroom.
-		void ContributorChanged(Actor self, int delta)
+		// A source switching on or off. Grow/shrink the shared pool by exactly that source's
+		// size and move Strength with it, so an upgrade grants its plating immediately
+		// instead of waiting for the regen to fill the new headroom.
+		void PoolChanged(Actor self, int delta)
 		{
 			RecalculateMax();
 			Strength = (Strength + delta).Clamp(0, MaxStrength);
 			UpdateConditions(self);
 		}
 
+		// Conditions are per-SOURCE, driven by the shared pool. The owner is whichever
+		// ArmorPlating the trait dictionary happens to list first — on the noid walkers that
+		// is the conditional Lunar Alloys grant, whose Info carries no FullCondition at all —
+		// so reading conditions off the owner alone would leave `plating_up` ungranted and
+		// silently kill the armor-type swap. Every source publishes its OWN conditions.
 		void UpdateConditions(Actor self)
 		{
-			if (Strength > 0)
+			var hasPlating = owner.Strength > 0;
+			foreach (var c in contributors)
+				c.UpdateOwnConditions(self, hasPlating);
+		}
+
+		void UpdateOwnConditions(Actor self, bool hasPlating)
+		{
+			// A source that is switched off publishes nothing: an unresearched upgrade must
+			// not claim the unit is plated just because some other source filled the pool.
+			if (hasPlating && contributed)
 			{
 				if (emptyToken != Actor.InvalidConditionToken)
 					emptyToken = self.RevokeCondition(emptyToken);
@@ -194,14 +217,18 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (fullToken != Actor.InvalidConditionToken)
 					fullToken = self.RevokeCondition(fullToken);
 
-				if (emptyToken == Actor.InvalidConditionToken && !string.IsNullOrEmpty(Info.EmptyCondition))
+				if (emptyToken == Actor.InvalidConditionToken && contributed
+					&& !string.IsNullOrEmpty(Info.EmptyCondition))
 					emptyToken = self.GrantCondition(Info.EmptyCondition);
 			}
 		}
 
+		// Every guard below tests IsOwner and the POOL, never this instance's own enabled
+		// state: the owner is positional, so a disabled owner with an enabled contributor
+		// still has real plating to regenerate, absorb with and draw.
 		void ITick.Tick(Actor self)
 		{
-			if (!IsOwner || IsTraitDisabled || IsTraitPaused)
+			if (!IsOwner || IsTraitPaused || MaxStrength == 0)
 				return;
 
 			if (ticksSinceDamage < int.MaxValue)
@@ -239,15 +266,33 @@ namespace OpenRA.Mods.Cameo.Traits
 			return 1;
 		}
 
+		// ⚠ TWO INTERCEPTING LAYERS MUST NEVER SHARE A HIT. Both Shielded and this trait
+		// absorb by returning damage modifier 1 — i.e. "let 1% through, then heal it back".
+		// The engine MULTIPLIES damage modifiers, so if both fire the hit is scaled to
+		// 1% x 1% = 0.01%, and each layer then recovers its "original" from that and
+		// charges its pool roughly 1% of the real damage. The unit becomes effectively
+		// immortal: observed in play 2026-08-15, a shielded and plated noid walker under a
+		// whole army's focus fire dropped from 125 shield to 124 for a split second.
+		//
+		// So the stack is enforced here: while the SHIELD still holds, the plating is not
+		// the outermost layer and stands completely down.
+		//
+		// ⚠ Known gap, matching how Shielded already behaves: when a shield BREAKS, its
+		// excess damage cascades straight to health rather than into the plating, because
+		// Shielded does that cascade itself and knows nothing about this layer.
+		bool ShieldHolds => shield != null && !shield.IsTraitDisabled && shield.Strength > 0;
+
 		bool Absorbs(Damage damage)
 		{
-			return IsOwner && !IsTraitDisabled && Strength > 0 && damage.Value > 0
+			return IsOwner && !ShieldHolds && Strength > 0 && damage.Value > 0
 				&& !(!Info.BypassDamageTypes.IsEmpty && damage.DamageTypes.Overlaps(Info.BypassDamageTypes));
 		}
 
 		void INotifyDamage.Damaged(Actor self, AttackInfo e)
 		{
-			if (!IsOwner || IsTraitDisabled || Strength == 0 || e.Damage.Value <= 0 || e.Attacker == self)
+			// ShieldHolds mirrors Absorbs: if the shield took this hit, GetDamageModifier
+			// never stashed anything and there is nothing here to charge.
+			if (!IsOwner || ShieldHolds || Strength == 0 || e.Damage.Value <= 0 || e.Attacker == self)
 				return;
 
 			if (!Info.BypassDamageTypes.IsEmpty && e.Damage.DamageTypes.Overlaps(Info.BypassDamageTypes))
@@ -289,44 +334,31 @@ namespace OpenRA.Mods.Cameo.Traits
 			UpdateConditions(self);
 		}
 
+		// Uniform for every source, owner or not: report in, hand the pool this source's
+		// worth of plating, let the owner do the arithmetic.
 		protected override void TraitEnabled(Actor self)
 		{
 			contributed = true;
 
-			if (!IsOwner)
-			{
-				owner.ContributorChanged(self, PoolOf(this));
-				return;
-			}
+			var pool = PoolOf(this);
+			var granted = Info.InitialStrength < 0 ? pool : Info.InitialStrength.Clamp(0, pool);
 
-			RecalculateMax();
-			Strength = Info.InitialStrength < 0
-				? MaxStrength
-				: Info.InitialStrength.Clamp(0, MaxStrength);
-			regenTicks = Info.RegenInterval;
-			ticksSinceDamage = Info.RampTicks;
-			UpdateConditions(self);
+			owner.regenTicks = owner.Info.RegenInterval;
+			owner.ticksSinceDamage = owner.Info.RampTicks;
+			owner.PoolChanged(self, granted);
 		}
 
 		protected override void TraitDisabled(Actor self)
 		{
 			var was = contributed ? PoolOf(this) : 0;
 			contributed = false;
-
-			if (!IsOwner)
-			{
-				owner.ContributorChanged(self, -was);
-				return;
-			}
-
-			Strength = 0;
-			UpdateConditions(self);
+			owner.PoolChanged(self, -was);
 		}
 
 		float ISelectionBar.GetValue()
 		{
 			// Contributors report nothing: one pool, one bar, however many sources feed it.
-			if (!IsOwner || !Info.ShowSelectionBar || IsTraitDisabled || MaxStrength == 0)
+			if (!IsOwner || !Info.ShowSelectionBar || MaxStrength == 0)
 				return 0f;
 
 			// Reporting 0 is how an extra bar hides: the renderer draws it when the value is
