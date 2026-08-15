@@ -54,18 +54,34 @@ schwarzermond_upgrade_vrilpoweredweapons:
 		Image: schwarzermond_upgrade_vrilpoweredweapons
 	ProvidesPrerequisite:
 
+# Schwarzer Mond's TEAM upgrade (maintainer 2026-08-15). Was a faction upgrade;
+# the effects moved to ^Helium3TeamUpgradePower / ^Helium3TeamUpgradeMobile, which
+# defaults.yaml hangs on ^Power, ^VehicleBuffs and ^AircraftBuffs so they reach
+# every team member. Weakened on the way (power 100->50%, speed 25->15%) per
+# DESIGN.md 6, and given a real drawback the other team upgrades do not have.
 schwarzermond_upgrade_helium3:
-	Inherits: ^ResearchedUpgradeTemplate
+	Inherits: ^TeamUpgradeTemplate
 	Tooltip:
 		Name: Helium-3 Enrichment
-	Valued:
-		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 65
-		Queue: Upgrades
-		Description: Increases Hydrogen Plant power output by 50% and vehicle/aircraft speed by 25%.
-			Mines Helium-3 from the lunar regolith to fuel Fourth Reich fusion reactors and propulsion systems.
+		Description: Team Upgrade (Also affects units of your teammates)
+			Increases the power output of every Power Plant in your team by 50%, and gives every vehicle and aircraft in your team 15% more speed and firepower. Fuelled units detonate violently when destroyed.
+			Helium-3 mined from the lunar regolith fuels Fourth Reich fusion reactors and propulsion systems. High Command shares it freely with its allies, and mentions the stability problem only in the footnotes.
 		Prerequisites: ~schwarzermond_radar, !schwarzermond_upgrade_helium3
+	RenderSprites:
+		Image: schwarzermond_upgrade_helium3
+	ProvidesTeamProxyActor:
+		Actor: schwarzermond_upgrade_helium3_proxy_actor
+
+schwarzermond_upgrade_helium3_proxy_actor:
+	Inherits: ^TeamUpgradeProxyActor
+	Tooltip:
+		Name: Helium-3 Enrichment
+	Buildable:
+		Description: Team Upgrade (Also affects units of your teammates)
+			Increases the power output of every Power Plant in your team by 50%, and gives every vehicle and aircraft in your team 15% more speed and firepower. Fuelled units detonate violently when destroyed.
+	PlayerDisplayUpgrade:
 	RenderSprites:
 		Image: schwarzermond_upgrade_helium3
 	ProvidesPrerequisite:

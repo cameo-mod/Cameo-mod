@@ -769,21 +769,72 @@
 	ActorStatValues:
 		Upgrades: schwarzermond_upgrade_moonpropaganda
 
+# ============================================================================
+# HELIUM-3 ENRICHMENT — Schwarzer Mond's TEAM upgrade (maintainer 2026-08-15).
+#
+# SM is high tech, vehicles and aircraft, so the team upgrade reflects that
+# rather than the infantry-morale effect first proposed (DESIGN.md 6: a team
+# upgrade must fit the faction's identity).
+#
+# Calibration against RA1 Soviets' Reactor Overload, the other power team
+# upgrade: that one has ONE effect and doubles power (PowerMultiplier: 200).
+# This has THREE, so each is deliberately weaker — power +50% instead of +100%,
+# and the mobile buff drops from SM's old faction-only +25% speed to +15%.
+# That is the team-is-half-of-faction law in DESIGN.md 6, visible in the number.
+#
+# ...and unlike every other team upgrade in the tree, it has a REAL DRAWBACK:
+# fuelled vehicles and aircraft detonate when killed, friendly fire included, so
+# a dense allied armour ball can chain-react. Sharing the Reich's fusion fuel
+# with the whole team is not supposed to be free.
+# ============================================================================
+
+# The condition itself. Inherited by anything that should KNOW about the
+# upgrade; the effects live in the two templates below.
+# ⚠ No `ActorStatValues: Upgrades:` here any more. DESIGN.md 6: the stat widget
+# lists FACTION upgrades only, never team upgrades — and this is now a team one.
 ^NaxiHelium3:
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_helium3:
+		Condition: schwarzermond_upgrade_helium3
+		Prerequisites: schwarzermond_upgrade_helium3
+
+# POWER half — inherited by ^Power in defaults.yaml, exactly as RA1's
+# ^ReactorOverloadTeamUpgradeRA1 is, so it reaches EVERY team member's plants.
+# ⚠ These two must NOT `Inherits: ^NaxiHelium3`. OpenRA rejects the same parent
+# appearing twice in one tree ("Parent type was already inherited"), and 22 SM
+# actors already inherit ^NaxiHelium3 DIRECTLY while also reaching these through
+# ^Power / ^VehicleBuffs / ^AircraftBuffs. Restating the grant node instead is
+# safe: it is the same key with the same values, so it merges into one trait.
+^Helium3TeamUpgradePower:
 	GrantConditionOnPrerequisite@schwarzermond_upgrade_helium3:
 		Condition: schwarzermond_upgrade_helium3
 		Prerequisites: schwarzermond_upgrade_helium3
 	PowerMultiplier@schwarzermond_upgrade_helium3:
 		RequiresCondition: schwarzermond_upgrade_helium3
 		Modifier: 150
+
+# MOBILE half — inherited by ^VehicleBuffs and ^AircraftBuffs, so it reaches
+# every team member's vehicles and aircraft and nothing else. Infantry are
+# deliberately untouched: this is fuel, not propaganda.
+^Helium3TeamUpgradeMobile:
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_helium3:
+		Condition: schwarzermond_upgrade_helium3
+		Prerequisites: schwarzermond_upgrade_helium3
 	SpeedMultiplier@schwarzermond_upgrade_helium3:
 		RequiresCondition: schwarzermond_upgrade_helium3
-		Modifier: 125
+		Modifier: 115
 	TurnSpeedMultiplier@schwarzermond_upgrade_helium3:
 		RequiresCondition: schwarzermond_upgrade_helium3
-		Modifier: 125
-	ActorStatValues:
-		Upgrades: schwarzermond_upgrade_helium3
+		Modifier: 115
+	FirepowerMultiplier@schwarzermond_upgrade_helium3:
+		RequiresCondition: schwarzermond_upgrade_helium3
+		Modifier: 115
+	# THE DRAWBACK. EmptyWeapon must be set too, or the engine falls back to its
+	# own default `UnitExplode` for the not-loaded case and a transport would
+	# quietly detonate with a different, weaker weapon than everything else.
+	FireWarheadsOnDeath@schwarzermond_upgrade_helium3:
+		RequiresCondition: schwarzermond_upgrade_helium3
+		Weapon: UnitExplodeBig
+		EmptyWeapon: UnitExplodeBig
 
 ^NaxiVrilInfusion:
 	GrantConditionOnPrerequisite@schwarzermond_upgrade_vrilinfusion:

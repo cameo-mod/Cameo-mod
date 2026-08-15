@@ -909,6 +909,7 @@
 
 ^VehicleBuffs:
 	Inherits@GlobalBuffs: ^GlobalBuffs
+	Inherits@Helium3TeamUpgradeMobile: ^Helium3TeamUpgradeMobile
 	Inherits: ^NanoTechRepairs
 	Inherits@ModernFireControlSystems: ^ModernFireControlSystems
 	Inherits@Blitzkrieg: ^Blitzkrieg
@@ -935,6 +936,7 @@
 
 ^AircraftBuffs:
 	Inherits@GlobalBuffs: ^GlobalBuffs
+	Inherits@Helium3TeamUpgradeMobile: ^Helium3TeamUpgradeMobile
 	Inherits@TiberiumAdaptability: ^TiberiumAdaptability
 	DamageMultiplier@AircraftBuffs:
 		Modifier: 90
@@ -7552,6 +7554,7 @@ CPQDEBUGDUMMY:
 ^Power:
 	Inherits: ^PowerMultiplier
 	Inherits@ReactorOverloadTeamUpgradeRA1: ^ReactorOverloadTeamUpgradeRA1
+	Inherits@Helium3TeamUpgradePower: ^Helium3TeamUpgradePower
 	Buildable:
 		Description: Provides power to the base.
 		BuildDurationModifier: 25
