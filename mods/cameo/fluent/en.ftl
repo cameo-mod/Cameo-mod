@@ -11,6 +11,15 @@ dropdown_weather =
    .choice-none = None
    .choice-weather = Enabled
 
+dropdown_resource_regrowth =
+   .label = Resource Regrowth
+   .description = Controls how quickly blossom trees and resource mines spread resources.
+   .choice-off = No Growth
+   .choice-half = 0.5x (slower)
+   .choice-normal = Normal Growth
+   .choice-twice = 2x (faster)
+   .choice-4x = 4x (even faster)
+
 checkbox_crates =
    .label = Crates
    .description = Collect crates with units to receive random bonuses.
