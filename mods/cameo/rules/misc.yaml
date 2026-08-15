@@ -793,7 +793,7 @@ MINE:
 	Inherits@1: ^TibTree
 	Tooltip:
 		Name: Ore Mine
-	SeedsResource:
+	LobbyScaledSeedsResource:
 		ResourceType: Ore
 		Interval: 100
 		MaxRange: 200
@@ -813,7 +813,7 @@ MINE:
 
 SPLIT2:
 	Inherits: ^TibTree
-	SeedsResource:
+	LobbyScaledSeedsResource:
 		ResourceType: Tiberium
 		Interval: 95
 		MaxRange: 180
@@ -833,7 +833,7 @@ SPLIT3:
 	Inherits: ^TibTree
 	RenderSprites:
 		Image: split2
-	SeedsResource:
+	LobbyScaledSeedsResource:
 		ResourceType: Tiberium
 		Interval: 95
 		MaxRange: 180
@@ -853,7 +853,7 @@ SPLITBLUE:
 	Inherits: ^TibTree
 	RenderSprites:
 		Image: split3
-	SeedsResource:
+	LobbyScaledSeedsResource:
 		ResourceType: BlueTiberium
 		Interval: 90
 		MaxRange: 160
@@ -873,7 +873,7 @@ SPLITBLUE:
 
 SPLITRED:
 	Inherits: ^TibTree
-	SeedsResource:
+	LobbyScaledSeedsResource:
 		ResourceType: RedTiberium
 		Interval: 85
 		MaxRange: 140
@@ -893,7 +893,7 @@ SPLITRED:
 
 SPLITGOLD:
 	Inherits: ^TibTree
-	SeedsResource:
+	LobbyScaledSeedsResource:
 		ResourceType: GoldTiberium
 		Interval: 80
 		MaxRange: 120
@@ -915,7 +915,7 @@ GMINE:
 	Inherits@1: ^TibTree
 	Tooltip:
 		Name: Gem Mine
-	SeedsResource:
+	LobbyScaledSeedsResource:
 		ResourceType: Gems
 		Interval: 75
 		MaxRange: 100
