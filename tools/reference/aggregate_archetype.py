@@ -73,14 +73,31 @@ DIRECT = {
 AIR_FROM = {"Fighter": "Light", "Helicopter": "Light",
             "Bomber": "Medium", "Spaceship": "Heavy"}
 
-# ⚠ NOT every source writes Versus on the same scale, and mixing them silently
-# ruins the median this file exists to produce. DTA runs on the Tiberian Sun
-# engine, whose armor multipliers are x10 — measured across the corpus, DTA's
-# median Versus is 690 and 644 against 55-100 everywhere else. A Tesla profile
-# read from DTA unnormalised therefore claims 1000% where the rest say 100%,
-# and one such row drags the median off by an order of magnitude.
-# This is the `[STAT /10]` note already recorded for DTA in ORIGINAL_UNIT_STATS.
-SOURCE_SCALE = {"dta_classic": 0.1, "dta_enhanced": 0.1}
+# ⚠ THE NORMALISATION LAW (maintainer, 2026-08-15):
+#   *"everything needs to be normalized to 100% for the maximum versus value for
+#    each game and each warhead from each game"*
+#
+# Every profile is rescaled so its OWN maximum is 100. This is per-WARHEAD, not
+# per-source, and it is what makes cross-mod comparison mean anything:
+#
+#   * it removes engine scale differences outright — DTA runs on the Tiberian Sun
+#     engine whose multipliers are x10 (measured median Versus 690 against 55-100
+#     elsewhere), and a hand-maintained per-source divisor only ever fixed the
+#     cases somebody had already noticed;
+#   * it removes each mod's POWER LEVEL, which is not what we are borrowing. We
+#     want the SHAPE — "twice as good against infantry as against tanks" — and a
+#     mod that writes 200/100 and one that writes 100/50 are the same design;
+#   * it makes the aggregate meaningful: averaging raw values weights whichever
+#     mod happens to use the biggest numbers.
+#
+# What it deliberately discards is absolute lethality. That belongs to Damage and
+# the level slope, not to the armor profile.
+NORMALISE_MAX = 100.0
+
+# Geometric mean cannot see a zero (any zero makes the whole product zero), and a
+# hard 0 in a source means "immune". Clamping to 1 keeps the data point at
+# "essentially immune" instead of deleting the row from the statistic.
+GMEAN_FLOOR = 1.0
 
 # --------------------------------------------------------------------------- #
 # The concepts. `ini` entries are ACTOR names traced through the rules; `openra`
@@ -115,13 +132,13 @@ ARCHETYPES = {
         "what": "Generic HE — the canonical anti-light/anti-infantry profile",
         "ini_warheads": ["HE"],
         "openra_warheads": ["^Cannon", "ArtilleryShell"],
-        "cameo_family": "^Warhead_CannonHE_*",
+        "cameo_family": "^Warhead_CannonHE_Medium",
     },
     "ap": {
         "what": "Generic AP — the canonical anti-heavy/armour-piercing profile",
         "ini_warheads": ["AP"],
         "openra_warheads": ["^ArmorPierceDamage", "sabot"],
-        "cameo_family": "^Warhead_CannonAP_*",
+        "cameo_family": "^Warhead_CannonAP_Medium",
     },
 }
 
@@ -197,13 +214,19 @@ def collect(concept: str) -> list[dict]:
             if warhead in seen or warhead not in by_name:
                 continue
             seen.add(warhead)
-            scale = SOURCE_SCALE.get(sid, 1.0)
-            versus = {k: float(v) * scale
-                      for k, v in by_name[warhead]["versus"].items()}
+            raw = {k: float(v) for k, v in by_name[warhead]["versus"].items()}
             rows.append({"source": sid, "lineage": lineage, "warhead": warhead,
-                         "how": how + (f" /{int(1 / scale)}" if scale != 1.0 else ""),
-                         "versus": versus})
+                         "how": how, "raw": raw, "versus": normalise(raw)})
     return rows
+
+
+def normalise(versus: dict[str, float]) -> dict[str, float]:
+    """Rescale a profile so its own maximum is `NORMALISE_MAX` (the law above)."""
+    peak = max(versus.values(), default=0.0)
+    if peak <= 0:
+        return dict(versus)
+    factor = NORMALISE_MAX / peak
+    return {k: v * factor for k, v in versus.items()}
 
 
 # --------------------------------------------------------------------------- #
@@ -211,12 +234,20 @@ def collect(concept: str) -> list[dict]:
 # --------------------------------------------------------------------------- #
 def _extend(known: list[float], beyond_top: bool) -> float | None:
     """Continue a ladder by its own last step. Clamped at 0 — a negative
-    multiplier is meaningless, and W13 rule 8 forbids a hard zero anyway."""
+    multiplier is meaningless, and W13 rule 8 forbids a hard zero anyway.
+
+    ⚠ **Needs TWO known values.** An earlier version returned the lone value
+    unchanged when only one rung was defined, which quietly manufactured data:
+    a source defining only `none` produced a `Heroic` equal to it, and a source
+    defining only `heavy` produced a `Scout` equal to it. Those invented cells
+    then entered the medians — Tesla's `Heroic` came out at 100 against a real
+    infantry ladder of 100/55/50, i.e. the extrapolation contradicted the very
+    rows it was built from. One rung is not a slope; return None and let the
+    column report a smaller n.
+    """
     vals = [v for v in known if v is not None]
-    if not vals:
+    if len(vals) < 2:
         return None
-    if len(vals) == 1:
-        return vals[0]
     step = vals[-1] - vals[-2] if beyond_top else vals[0] - vals[1]
     base = vals[-1] if beyond_top else vals[0]
     return max(0.0, base + step)
@@ -277,16 +308,81 @@ def flag_scale_outliers(rows: list[dict]) -> None:
             r["how"] += " ⚠scale?"
 
 
-def summarise(rows: list[dict]) -> tuple[dict[str, float], dict[str, int]]:
-    """Median per Cameo armor across the sources — W13 rule 4, never a mean."""
-    buckets: dict[str, list[float]] = {a: [] for a in CAMEO16}
+def buckets_of(rows: list[dict]) -> dict[str, list[float]]:
+    out: dict[str, list[float]] = {a: [] for a in CAMEO16}
     for r in rows:
         vals, _ = to_cameo(r["versus"])
         for armor, value in vals.items():
-            buckets[armor].append(value)
-    median = {a: round(statistics.median(v), 1) for a, v in buckets.items() if v}
-    counts = {a: len(v) for a, v in buckets.items() if v}
-    return median, counts
+            out[armor].append(value)
+    return {a: v for a, v in out.items() if v}
+
+
+def aggregate(rows: list[dict], how: str) -> dict[str, float]:
+    """One profile from many, three ways.
+
+    * `median` — W13 rule 4's choice. Robust: one mod with an extreme profile
+      cannot move it, so it answers "what does a typical mod ship?".
+    * `mean` — the arithmetic average. Every source pulls proportionally to how
+      far out it sits, so a single outlier drags the whole cell.
+    * `gmean` — the geometric mean. The natural average for MULTIPLIERS, which
+      is exactly what a Versus value is: averaging x2 and x0.5 arithmetically
+      gives 1.25 (a net buff out of nowhere) where the geometric mean gives 1.0.
+      It also sits below the arithmetic mean whenever the spread is wide, so the
+      gap between the two columns is itself a readout of disagreement.
+    """
+    picked: dict[str, float] = {}
+    for armor, values in buckets_of(rows).items():
+        if how == "median":
+            picked[armor] = statistics.median(values)
+        elif how == "mean":
+            picked[armor] = statistics.fmean(values)
+        elif how == "gmean":
+            picked[armor] = statistics.geometric_mean(
+                [max(GMEAN_FLOOR, v) for v in values])
+        else:
+            raise ValueError(how)
+    return {a: round(v, 1) for a, v in picked.items()}
+
+
+# Keys that are not armor types — Cameo carries a few pseudo-armors on the same
+# node (the shield layer, HAZMAT gating, Tesla's REFLECTOR). They must not enter
+# a profile comparison or they distort the normalisation peak.
+NON_ARMOR = {"shield", "hazmat", "reflector"}
+
+
+def cameo_profile(family: str) -> dict[str, float] | None:
+    """Cameo's CURRENT profile for a `^Warhead_*` family, normalised the same way.
+
+    Read from the resolved ruleset rather than the file, so inheritance is
+    applied — the number compared is the one the game uses.
+    """
+    try:
+        sys.path.insert(0, str(ROOT / "tools" / "audit"))
+        from cameo_model import Model
+    except ImportError:
+        return None
+    node = Model().rs.weapons.get(family)
+    if node is None:
+        return None
+    for child in node.children:
+        # the MAIN warhead only — not the _Percentage or _ExtraDamage twins
+        if not child.key.startswith("Warhead@") or child.key.endswith(
+                ("_Percentage", "_ExtraDamage", "_FriendlyFire")):
+            continue
+        for grand in child.children:
+            if grand.key != "Versus":
+                continue
+            vals = {}
+            for leaf in grand.children:
+                if leaf.key.lower() in NON_ARMOR:
+                    continue
+                try:
+                    vals[leaf.key] = float(leaf.value)
+                except (TypeError, ValueError):
+                    continue
+            if vals:
+                return {k: round(v, 1) for k, v in normalise(vals).items()}
+    return None
 
 
 # --------------------------------------------------------------------------- #
@@ -332,18 +428,46 @@ def render(concept: str, rows: list[dict]) -> str:
         cells = ["—" if vals.get(a) is None else f"{vals[a]:g}" for a in CAMEO16]
         lines.append(f"| `{r['source']}` | " + " | ".join(cells) + " |")
 
-    median, counts = summarise(rows)
-    lines.append("| **MEDIAN** | "
-                 + " | ".join("—" if a not in median else f"**{median[a]:g}**"
-                              for a in CAMEO16) + " |")
+    counts = {a: len(v) for a, v in buckets_of(rows).items()}
     lines.append("| _n sources_ | "
                  + " | ".join(str(counts.get(a, 0)) for a in CAMEO16) + " |")
 
-    vals = list(median.values())
+    # --- Table C: the three aggregations, against Cameo as it stands now ----- #
+    aggs = {label: aggregate(rows, how) for label, how in
+            (("median", "median"), ("arithmetic mean", "mean"),
+             ("geometric mean", "gmean"))}
+    cameo = cameo_profile(spec["cameo_family"])
+    if cameo:
+        aggs["CAMEO today"] = cameo
+
+    lines += ["", "### Table C — three ways to aggregate, vs Cameo today", "",
+              "All four rows are normalised to max = 100, so they compare SHAPE, not",
+              "power level. `median` is robust to one weird mod; `arithmetic mean` lets",
+              "every source pull proportionally; `geometric mean` is the correct average",
+              "for MULTIPLIERS (averaging x2 and x0.5 arithmetically invents a net buff",
+              "of 1.25 — geometrically it is 1.0). A wide mean-vs-gmean gap means the",
+              "sources disagree about that armor.", "",
+              "| aggregation | " + " | ".join(CAMEO16) + " | span |",
+              "|---|" + "--:|" * (len(CAMEO16) + 1)]
+    for label, prof in aggs.items():
+        cells = ["—" if prof.get(a) is None else f"{prof[a]:g}" for a in CAMEO16]
+        vals = list(prof.values())
+        span = f"{max(vals) - min(vals):.0f}" if vals else "—"
+        mark = "**" if label == "CAMEO today" else ""
+        lines.append(f"| {mark}{label}{mark} | " + " | ".join(cells) + f" | {span} |")
+
+    med = aggs["median"]
+    vals = list(med.values())
     if vals:
-        lines += ["", f"**Span {max(vals) - min(vals):.0f}** "
-                  f"(min {min(vals):g} · max {max(vals):g}) — the profile this concept "
-                  f"should carry in Cameo, before the level slope is applied.", ""]
+        lines += ["", f"**Reference span {max(vals) - min(vals):.0f}** "
+                  f"(min {min(vals):g} · max {max(vals):g})."]
+        if cameo:
+            cvals = list(cameo.values())
+            lines.append(f"**Cameo span {max(cvals) - min(cvals):.0f}** — "
+                         + ("SHARPER than" if max(cvals) - min(cvals) >
+                            max(vals) - min(vals) else "FLATTER than")
+                         + " the field for this concept.")
+        lines.append("")
     return "\n".join(lines)
 
 
