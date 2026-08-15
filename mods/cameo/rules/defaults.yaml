@@ -5654,91 +5654,11 @@
 	ExternalCondition@INVULNERABILITY:
 		Condition: invulnerability
 
-^GatlingSpeedUpTurretBehavior:
-	ReloadDelayMultiplier@GattlingSpeed1:
-		RequiresCondition: gatling >= 1
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed2:
-		RequiresCondition: gatling >= 2
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed3:
-		RequiresCondition: gatling >= 3
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed4:
-		RequiresCondition: gatling >= 4
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed5:
-		RequiresCondition: gatling >= 5
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed6:
-		RequiresCondition: gatling >= 6
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed7:
-		RequiresCondition: gatling >= 7
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed8:
-		RequiresCondition: gatling >= 8
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed9:
-		RequiresCondition: gatling >= 9
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed10:
-		RequiresCondition: gatling >= 10
-		Modifier: 95
-	RangeMultiplier@GattlingSpeed1:
-		RequiresCondition: gatling >= 1
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed2:
-		RequiresCondition: gatling >= 2
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed3:
-		RequiresCondition: gatling >= 3
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed4:
-		RequiresCondition: gatling >= 4
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed5:
-		RequiresCondition: gatling >= 5
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed6:
-		RequiresCondition: gatling >= 6
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed7:
-		RequiresCondition: gatling >= 7
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed8:
-		RequiresCondition: gatling >= 8
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed9:
-		RequiresCondition: gatling >= 9
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed10:
-		RequiresCondition: gatling >= 10
-		Modifier: 102
-	GrantConditionOnAttack@gatling:
-		Condition: gatling
-		ArmamentNames: primary, garrisoned
-		RequiredShotsPerInstance: 1,2,3,4,5,6,7,8,9,10
-		MaximumInstances: 10
-		RevokeDelay: 30
-		RevokeAll: false
-		IsCyclic: false
-		RevokeOnNewTarget: false
-		RequiresCondition: !rank-elite
-	GrantConditionOnAttack@elitegatling:
-		Condition: gatling
-		ArmamentNames: primary, garrisoned
-		RequiredShotsPerInstance: 1,1,1,1,1,1,1,1,1,1
-		MaximumInstances: 10
-		RevokeDelay: 15
-		RevokeAll: false
-		IsCyclic: false
-		RevokeOnNewTarget: false
-		RequiresCondition: rank-elite
-
-# W8 pilot — the meter-based replacement for ^GatlingSpeedUpTurretBehavior.
-# Twenty conditional multipliers (10 reload + 10 range) collapse into three traits that
-# move continuously instead of in ten visible 5% steps.
+# W8 (2026-08-15) — the gatling spin-up, as a METER instead of a condition ladder.
+# Replaces the three ^GatlingSpeedUp* templates, now deleted: 20 conditional
+# multipliers on the turret variant, 30 on the unit, 40 on the special unit, across
+# 43 actors — roughly 1300 trait objects — collapse into three traits per template
+# that move CONTINUOUSLY rather than in ten visible 5% steps.
 #
 # End-points reproduce the ladder EXACTLY, measured not assumed:
 #   reload  0.95^10 = 0.599 -> ReloadDelayTo 60   (lower = faster)
@@ -5794,131 +5714,23 @@
 		RevokeOnNewTarget: false
 		RequiresCondition: rank-elite
 
-^GatlingSpeedUpUnitBehavior:
-	Inherits: ^GatlingSpeedUpTurretBehavior
-	SpeedMultiplier@GattlingSpeed1:
-		RequiresCondition: gatling >= 1
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed2:
-		RequiresCondition: gatling >= 2
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed3:
-		RequiresCondition: gatling >= 3
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed4:
-		RequiresCondition: gatling >= 4
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed5:
-		RequiresCondition: gatling >= 5
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed6:
-		RequiresCondition: gatling >= 6
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed7:
-		RequiresCondition: gatling >= 7
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed8:
-		RequiresCondition: gatling >= 8
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed9:
-		RequiresCondition: gatling >= 9
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed10:
-		RequiresCondition: gatling >= 10
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed1:
-		RequiresCondition: gatling >= 1
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed2:
-		RequiresCondition: gatling >= 2
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed3:
-		RequiresCondition: gatling >= 3
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed4:
-		RequiresCondition: gatling >= 4
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed5:
-		RequiresCondition: gatling >= 5
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed6:
-		RequiresCondition: gatling >= 6
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed7:
-		RequiresCondition: gatling >= 7
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed8:
-		RequiresCondition: gatling >= 8
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed9:
-		RequiresCondition: gatling >= 9
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed10:
-		RequiresCondition: gatling >= 10
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed1:
-		RequiresCondition: gatling >= 1
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed2:
-		RequiresCondition: gatling >= 2
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed3:
-		RequiresCondition: gatling >= 3
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed4:
-		RequiresCondition: gatling >= 4
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed5:
-		RequiresCondition: gatling >= 5
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed6:
-		RequiresCondition: gatling >= 6
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed7:
-		RequiresCondition: gatling >= 7
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed8:
-		RequiresCondition: gatling >= 8
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed9:
-		RequiresCondition: gatling >= 9
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed10:
-		RequiresCondition: gatling >= 10
-		Modifier: 95
+# Unit variant: adds the SPEED term. The ladder slows a spinning-up gatling
+# (0.95^10 = 0.599) - you root yourself to gain fire rate, which is the design and
+# is what the mod has always shipped. (The W8 spec claimed 122% here; all 30
+# SpeedMultiplier entries are 95, so it was inverted. Verified 2026-08-15.)
+^GatlingSpinUpUnitBehavior:
+	Inherits: ^GatlingSpinUpTurretBehavior
+	ModifiesCombatProportionalToPhysicalState@SpinUp:
+		SpeedFrom: 100
+		SpeedTo: 60
 
-^GatlingSpeedUpSpecialUnitBehavior:
-	Inherits: ^GatlingSpeedUpUnitBehavior
-	DamageMultiplier@GattlingSpeed1:
-		RequiresCondition: gatling >= 1
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed2:
-		RequiresCondition: gatling >= 2
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed3:
-		RequiresCondition: gatling >= 3
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed4:
-		RequiresCondition: gatling >= 4
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed5:
-		RequiresCondition: gatling >= 5
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed6:
-		RequiresCondition: gatling >= 6
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed7:
-		RequiresCondition: gatling >= 7
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed8:
-		RequiresCondition: gatling >= 8
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed9:
-		RequiresCondition: gatling >= 9
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed10:
-		RequiresCondition: gatling >= 10
-		Modifier: 95
+# Special-unit variant: adds the DEFENSIVE term. DamageMultiplier < 100 means less
+# damage TAKEN, so a spun-up gatling is also harder to kill (0.95^10 = 0.599).
+^GatlingSpinUpSpecialUnitBehavior:
+	Inherits: ^GatlingSpinUpUnitBehavior
+	ModifiesCombatProportionalToPhysicalState@SpinUp:
+		DamageTakenFrom: 100
+		DamageTakenTo: 60
 
 ^ConscriptionBuff:
 	ProductionCostMultiplier@global_conscription_buff:

@@ -1706,7 +1706,7 @@ ordos_combatautoguntank:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@EMP: ^TurretEMP
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Inherits@RapidFireArmorPiercingBelts: ^Ordos_RapidFireArmorPiercingBelts
@@ -1761,7 +1761,7 @@ ordos_heavyautoguntank:
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Inherits@RapidFireArmorPiercingBelts: ^Ordos_RapidFireArmorPiercingBelts

@@ -57,6 +57,15 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Firepower modifier at the meter's high end (percentage).")]
 		public readonly int FirepowerTo = 100;
 
+		[Desc("Damage-TAKEN modifier at the meter's low end (percentage; lower = tougher).")]
+		public readonly int DamageTakenFrom = 100;
+
+		[Desc("Damage-TAKEN modifier at the meter's high end (percentage; lower = tougher).",
+			"The gatling 'special unit' ladder uses this: a spun-up gatling is harder to",
+			"kill as well as faster-firing, so the meter has to carry a defensive term or",
+			"those actors cannot be converted without losing a stat.")]
+		public readonly int DamageTakenTo = 100;
+
 		[Desc("Audio pitch at the meter's low end (percentage of normal).",
 			"Folded into this trait rather than a separate one (maintainer's option C): the",
 			"readability hook and the effect it advertises are driven by the same meter, so",
@@ -81,7 +90,7 @@ namespace OpenRA.Mods.Cameo.Traits
 	public class ModifiesCombatProportionalToPhysicalState
 		: ConditionalTrait<ModifiesCombatProportionalToPhysicalStateInfo>,
 			IReloadModifier, IRangeModifier, ISpeedModifier, IFirepowerModifier,
-			INotifyPhysicalStateChanged
+			IDamageModifier, INotifyPhysicalStateChanged
 	{
 		readonly PhysicalState physicalState;
 
@@ -89,6 +98,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		int range = 100;
 		int speed = 100;
 		int firepower = 100;
+		int damageTaken = 100;
 		int pitch = 100;
 
 		/// <summary>Current audio pitch percentage, for sound-playing traits to read.</summary>
@@ -120,6 +130,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			range = Interpolate(Info.RangeFrom, Info.RangeTo, Intensity);
 			speed = Interpolate(Info.SpeedFrom, Info.SpeedTo, Intensity);
 			firepower = Interpolate(Info.FirepowerFrom, Info.FirepowerTo, Intensity);
+			damageTaken = Interpolate(Info.DamageTakenFrom, Info.DamageTakenTo, Intensity);
 			pitch = Interpolate(Info.PitchFrom, Info.PitchTo, Intensity);
 		}
 
@@ -173,6 +184,11 @@ namespace OpenRA.Mods.Cameo.Traits
 		int IFirepowerModifier.GetFirepowerModifier(string armamentName)
 		{
 			return IsTraitDisabled || !Affects(armamentName) ? 100 : firepower;
+		}
+
+		int IDamageModifier.GetDamageModifier(Actor attacker, Damage damage)
+		{
+			return IsTraitDisabled ? 100 : damageTaken;
 		}
 
 		void INotifyPhysicalStateChanged.PhysicalStateChanged(

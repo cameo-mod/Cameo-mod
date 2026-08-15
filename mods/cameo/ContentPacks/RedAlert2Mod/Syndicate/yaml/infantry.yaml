@@ -6,7 +6,7 @@ latinsyndicate_latinmilitia:
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Inherits@EliteGuerillas: ^LatinEliteGuerillas
 	Tooltip:
 		Name: Latin Militia
@@ -288,7 +288,7 @@ latinsyndicate_narco:
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EliteGuerillas: ^LatinEliteGuerillas
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Inherits@flamerup: ^LatinFlameUpgrades
 	Tooltip:
 		Name: Narco
@@ -393,7 +393,7 @@ latinsyndicate_freedomfighter:
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EliteGuerillas: ^LatinEliteGuerillas
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Inherits@flamerup: ^LatinFlameUpgrades
 	Tooltip:
 		Name: Freedom Fighter
