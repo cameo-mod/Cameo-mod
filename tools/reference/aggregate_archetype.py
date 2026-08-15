@@ -106,12 +106,42 @@ AIR_FROM = {"Fighter": "Light", "Bomber": "Medium",
 #
 # What it deliberately discards is absolute lethality. That belongs to Damage and
 # the level slope, not to the armor profile.
-NORMALISE_MAX = 100.0
+#
+# ⚠ **REVISED 2026-08-15 — normalise to the MEDIAN, not the peak, and allow values
+# above 100.** Anchoring on the peak looked safe and was not: RA2's Tesla warhead
+# `Electric` reads `none 100 · plate 100 · medium 100 · heavy 100 · light 85 ·
+# buildings 50 · DRONE 200`. The 200 is a niche anti-terror-drone bonus, but it is
+# the row's maximum, so peak-normalisation halved every real armor and reported
+# Tesla as 50-vs-infantry — a weapon famous for vaporising infantry. Mental Omega's
+# `ElectricCoil` (drone 200 again) came out the same way, and the error survived
+# into the family proposals as Tesla peaking on Superheavy with 30s everywhere else.
+#
+# One outlier must not be allowed to set the scale for fifteen other armors. The
+# median is robust to exactly that: it says "100 is this weapon's TYPICAL
+# effectiveness", and a genuine speciality is free to sit above it.
+#
+# Maintainer, 2026-08-15: *"should we be able to use maximum values above 100%? The
+# old 100% upper limit was only because in the past we didn't have the versus values
+# built into the weapon damage balance calculation, right?"* — exactly right. The K
+# coefficient now measures the profile and prices it (W1), so a 200 is PAID FOR
+# rather than free, and the cap was only ever protecting a formula that could not
+# see it. The corpus itself runs to 320.
+NORMALISE_REFERENCE = 100.0
+# Ceiling for a normalised value. Not a design limit — a guard against a degenerate
+# row (a profile that is almost all zeros) scaling its one live entry into orbit.
+NORMALISE_CEILING = 300.0
 
 # Geometric mean cannot see a zero (any zero makes the whole product zero), and a
 # hard 0 in a source means "immune". Clamping to 1 keeps the data point at
 # "essentially immune" instead of deleting the row from the statistic.
 GMEAN_FLOOR = 1.0
+
+# Minimum separation between any two values in a profile. Maintainer, 2026-08-15:
+# *"maybe make it steps of 2 instead of 1 for those? Minimum step of 2?"* — yes. A
+# 1-point gap satisfies the no-ties rule on paper while being invisible in play;
+# 2 is the smallest step a player could ever notice, so it is the smallest step
+# worth spending a rung on.
+MIN_GAP = 2.0
 
 # --------------------------------------------------------------------------- #
 # THE HEROIC RULE (maintainer, 2026-08-15)
@@ -371,12 +401,20 @@ def collect(concept: str) -> list[dict]:
 
 
 def normalise(versus: dict[str, float]) -> dict[str, float]:
-    """Rescale a profile so its own maximum is `NORMALISE_MAX` (the law above)."""
-    peak = max(versus.values(), default=0.0)
-    if peak <= 0:
+    """Rescale a profile so its MEDIAN is 100 (see the law above).
+
+    Median over the POSITIVE entries only: a hard 0 means "immune", which is a
+    statement about one armor, not evidence about the weapon's general level, and
+    letting zeros drag the centre down would inflate everything else.
+    """
+    live = [v for v in versus.values() if v > 0]
+    if not live:
         return dict(versus)
-    factor = NORMALISE_MAX / peak
-    return {k: v * factor for k, v in versus.items()}
+    centre = statistics.median(live)
+    if centre <= 0:
+        return dict(versus)
+    factor = NORMALISE_REFERENCE / centre
+    return {k: min(NORMALISE_CEILING, v * factor) for k, v in versus.items()}
 
 
 # --------------------------------------------------------------------------- #
@@ -584,13 +622,17 @@ def shape_profile(profile: dict[str, float], floor: float) -> dict[str, float]:
     lo, hi = min(values), max(values)
     if hi <= lo:                                   # a totally flat input
         return {k: floor for k in profile}
-    scaled = {k: floor + (v - lo) * (100.0 - floor) / (hi - lo)
+    # Preserve the profile's own top rather than forcing it to 100 — values above
+    # 100 are legal now (see NORMALISE_REFERENCE) and are the main way a weapon
+    # says "this is what I am FOR".
+    top = max(100.0, min(NORMALISE_CEILING, hi))
+    scaled = {k: floor + (v - lo) * (top - floor) / (hi - lo)
               for k, v in profile.items()}
 
     return enforce_distinct(scaled)
 
 
-def enforce_distinct(profile: dict[str, float], gap: float = 1.0) -> dict[str, float]:
+def enforce_distinct(profile: dict[str, float], gap: float = MIN_GAP) -> dict[str, float]:
     """No two values identical — the maintainer's hard rule, applied last.
 
     Walks DOWN from the peak. Nudging upward instead pins ties against the 100
