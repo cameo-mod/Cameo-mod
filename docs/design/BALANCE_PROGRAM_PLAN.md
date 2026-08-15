@@ -358,9 +358,19 @@ removed. Expect a balance pass: one hit no longer gives the full debuff.
 3197 multiplier instances in the mod**, in ten visible 5% steps. A meter replaces them
 with 3–4, continuously.
 
-Current ladder resolves to `0.95¹⁰ = 0.599` reload (fire rate ×1.67) and
-`1.02¹⁰ = 1.219` range/speed — those are the **end-points** the meter must reproduce
-(0 → 100%, max → 60% reload / 122% range / 122% speed). Elite variant fills faster
+⚠ **CORRECTED 2026-08-15 — this item's own end-points were wrong, and building from
+them would have inverted a stat on all 47 actors.** The line below used to read
+"`1.02¹⁰ = 1.219` range/**speed** … max → 60% reload / 122% range / **122% speed**".
+Verified against `defaults.yaml`: **all 30 `SpeedMultiplier` entries in
+`^GatlingSpeedUpUnitBehavior` are `95`, not `102`.** A spinning-up gatling unit gets
+**SLOWER**, not faster — which is the better design anyway (you root yourself to gain
+fire rate), and it is what the mod has always shipped. The spec had silently copied the
+range direction onto speed.
+
+Current ladder resolves to `0.95¹⁰ = 0.599` reload (fire rate ×1.67),
+`1.02¹⁰ = 1.219` range, and `0.95¹⁰ = 0.599` speed — those are the **end-points** the
+meter must reproduce (0 → 100%, max → **60% reload · 122% range · 60% speed**). The
+turret template has no speed term at all; only the unit one does. Elite variant fills faster
 (`RequiredShotsPerInstance: 1,1,1…` vs `1,2,3…`, `RevokeDelay` 15 vs 30) → same meter,
 higher fill rate.
 

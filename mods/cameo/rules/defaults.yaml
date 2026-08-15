@@ -5736,6 +5736,64 @@
 		RevokeOnNewTarget: false
 		RequiresCondition: rank-elite
 
+# W8 pilot — the meter-based replacement for ^GatlingSpeedUpTurretBehavior.
+# Twenty conditional multipliers (10 reload + 10 range) collapse into three traits that
+# move continuously instead of in ten visible 5% steps.
+#
+# End-points reproduce the ladder EXACTLY, measured not assumed:
+#   reload  0.95^10 = 0.599 -> ReloadDelayTo 60   (lower = faster)
+#   range   1.02^10 = 1.219 -> RangeTo       122
+# The turret template has no speed term, so neither does this.
+#
+# The `gatling` condition is kept as the FILL TRIGGER rather than as ten thresholds:
+# GrantConditionOnAttack still counts shots, but only `>= 1` is read, so the elite
+# variant's faster stacking no longer needs a parallel ladder — it simply reaches the
+# trigger sooner and the meter does the rest.
+^GatlingSpinUpTurretBehavior:
+	PhysicalState@SpinUp:
+		Name: SpinUp
+		MinValue: 0
+		MaxValue: 100
+		RelaxedValue: 0
+		InitialValue: 0
+		RelaxationLinear: 10
+		RelaxationDelay: 30
+		RelaxationInterval: 1
+	ChangesPhysicalState@SpinUp:
+		PhysicalStateName: SpinUp
+		Amount: 10
+		Delay: 5
+		AffectedByModifiers: false
+		RequiresCondition: gatling >= 1
+	ModifiesCombatProportionalToPhysicalState@SpinUp:
+		PhysicalStateName: SpinUp
+		ReloadDelayFrom: 100
+		ReloadDelayTo: 60
+		RangeFrom: 100
+		RangeTo: 122
+		PitchFrom: 100
+		PitchTo: 120
+	GrantConditionOnAttack@gatling:
+		Condition: gatling
+		ArmamentNames: primary, garrisoned
+		RequiredShotsPerInstance: 1,2,3,4,5,6,7,8,9,10
+		MaximumInstances: 10
+		RevokeDelay: 30
+		RevokeAll: false
+		IsCyclic: false
+		RevokeOnNewTarget: false
+		RequiresCondition: !rank-elite
+	GrantConditionOnAttack@elitegatling:
+		Condition: gatling
+		ArmamentNames: primary, garrisoned
+		RequiredShotsPerInstance: 1,1,1,1,1,1,1,1,1,1
+		MaximumInstances: 10
+		RevokeDelay: 15
+		RevokeAll: false
+		IsCyclic: false
+		RevokeOnNewTarget: false
+		RequiresCondition: rank-elite
+
 ^GatlingSpeedUpUnitBehavior:
 	Inherits: ^GatlingSpeedUpTurretBehavior
 	SpeedMultiplier@GattlingSpeed1:
