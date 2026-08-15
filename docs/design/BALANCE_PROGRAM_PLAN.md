@@ -45,11 +45,11 @@ status rather than keeping its own copy.
 | **W14** | ~~Renormalise `avg_versus`~~ — ✖ DROPPED, the multi-role premium is intended; folded into W13 rule 8b | ✖ DROPPED | — | — |
 | **W15** | `%`-twin fix + `reference_hp` → 200 000 — **PREREQUISITE for W17** | ✅ DONE | Claude | — |
 | **W16** | Charge-up discount PROPORTIONAL to real charge share (supersedes W4's flat 0.75×) | ✅ DONE | Claude | W4 ✅ |
-| **W17** | ~~Remove the 2000-damage grid~~ (done as a 200 grid in W15); retire FirepowerMultiplier as a fine-tuning knob | ⬜ READY (unblocked by W15) | Claude | W15 ✅ |
+| **W17** | ~~Remove the 2000-damage grid~~ (done as a 100 grid in W15); retire FirepowerMultiplier as a fine-tuning knob | 🔵 TOOLING DONE; content half ⛔ **set B** | Claude | W15 ✅ |
 | **W18** | Roll the 0.1% percentage unit out into yaml (`PercentageDenominator: 1000`, ×10 the values) | ⛔ BLOCKED | Claude | W15 ✅, **set B free** |
 | **W19** | Collapse the 195 `SpreadDamage` ExtraDamage chips into the main warhead (KEEP the 34 sniper `OpenToppedDamage`) | ⛔ BLOCKED | Claude | W13, **set B free** |
 | **W20** | Multi-armor combination rule (engine MULTIPLIES → squares the profile); mechanism + switch | ⬜ MECHANISM DONE, rule = maintainer | Claude | — |
-| **W21** | Triple-layer health Shield → Armor → Health, layer-aware armor (solves W20 structurally) | ⬜ READY | either | — |
+| **W21** | Layered health Shield → Integrity → Armor → Health, layer-aware armor (solves W20 structurally) | ✅ BUILT + LIVE `ab467fe52` | Claude | — |
 
 **Recommended order:** W2 ∥ W3 → W4 → W5 → W6 → (W7, W9) → W8 → W10 → W11 → W12.
 `∥` = safe to run in parallel (disjoint file sets).
@@ -508,13 +508,13 @@ built by `tools/reference/extract_versus.py` (+ `extract_mix_ini.py` for Mental 
    and tanks, so they simply cannot express "devastating vs aircraft, mediocre vs tanks,
    still good vs infantry" — the flak-cannon profile. An earlier draft of this item
    listed Cameo's 100%-air-coverage as a gap; that was wrong.
-9. **Prerequisite — the `%`-twin.** `formula.distribute_damage` computes the twin as
-   `per // DAMAGE_STEP` (integer division). Drop the 2000 grid before fixing that and
-   every percentage warhead silently becomes 0 below 2000 damage — hard immunity by
-   rounding. Fix first, then free the grid.
-10. **FirepowerMultiplier survives the grid removal**, but only as the per-ACTOR knob
-    (one weapon serves many actors). It is no longer needed to absorb rounding, because
-    free-valued Damage solves exactly.
+9. ✅ **Prerequisite — the `%`-twin. SATISFIED by W15.** The twin used to be
+   `per // DAMAGE_STEP` (integer division), so every percentage warhead silently became 0
+   below one grid step — hard immunity by rounding. `formula.percentage_twin` now rounds
+   half-up and never falls below 1. The grid moved only after that landed.
+10. ✖ **VOID — `FirepowerMultiplier` does NOT survive.** This rule was written before the
+    maintainer's 2026-08-11 ruling that **no weapon is shared**, which removed its entire
+    premise ("one weapon serves many actors"). The knob is retired; see **W17**.
 
 **VERIFY:** `python tools/reference/extract_versus.py --summary` → 14 sources, 2494 rows.
 
@@ -766,25 +766,56 @@ run changes nothing), and `extract_stats` now prints a loud warning after any fi
 
 ---
 
-### W17 — Remove the damage grid ⬜ READY (unblocked by W15)
+### W17 — Retire FirepowerMultiplier 🔵 TOOLING DONE (2026-08-15) · content half ⛔ set B
 
-⚠ **Partly superseded by W15's regrid.** The maintainer chose a **200 grid "for sanity"**,
-not free-valued Damage, so "remove the grid" is now "the grid is 200 and the %-twin tracks
-it exactly". What remains of W17 is the SECOND half: retiring `FirepowerMultiplier` as a
-fine-tuning knob, which the finer grid makes possible (the residual a 200 grid leaves is
-≤100 damage, i.e. under 0.05% of a 200 000-HP reference actor — below the noise the FP
-knob existed to absorb).
-
-Free-valued Damage means the pipeline solves exactly:
-`Damage = target_dps × eff_reload / (burst × K)` — no remainder, so
-**FirepowerMultiplier is no longer needed as a fine-tuning knob.**
+⚠ **Partly superseded by W15's regrid.** The maintainer chose a **grid "for sanity"** (100,
+`formula.DAMAGE_STEP`), not free-valued Damage, so "remove the grid" is now "the grid is 100
+and the %-twin tracks it exactly". What remains of W17 is the SECOND half: retiring
+`FirepowerMultiplier` as a fine-tuning knob, which the finer grid makes possible.
 
 ⚠ My earlier objection — "keep FP because one weapon serves many actors" — is **VOID**.
 Maintainer 2026-08-11: **no weapon is shared; every vehicle has its own unique weapon
-defined.** So FP has no remaining pricing role at all.
+defined.** So FP has no remaining pricing role at all. (This also voids **W13 rule 10**,
+written before that ruling.)
+
+**MEASURED before changing anything** (`plan_firepower_retirement.py`, the whole roster):
+1322 main warheads across **152 actors** carry an unconditional FP. Folding the multiplier
+into `Damage` and snapping back to the grid leaves **1144 exact**, **1214 within 1%**, and
+**108 needing a damage decision**. The residual is not the argument for retirement on its
+own — the argument is that the 1% band is the step the retired knob itself moved in.
+
+⚠ **The 108 are not trims.** They cluster on actors whose FP is a SCALE, not a fine-tune:
+`futuretech_cryocopter` 0.12, `protoss_voidray` 0.09, `ra1_soviets_ak47conscript` 0.14,
+`ra2_soviets_conscript` 0.19. A multiplier that far from 1.0 means the actor is firing
+another unit's weapon at a fraction of its written damage; the grid cannot express the
+result, so those need a real damage decision rather than a fold.
+
+**TOOLING HALF — DONE (set A):**
+- [x] `propose_class_rebalance.decompose_dps` solves on `formula.DAMAGE_STEP` and returns a
+      multiplier of **1.0**, always. It also stopped using the stale hard-coded 2000 grid.
+- [x] The two `over_priced` dead-ends no longer emit `2000, 0.05`. The floor is
+      deliberately identical: one step at fp=1 is the same 100 effective damage.
+- [x] `unique_dmg_per_shot` nudges **Damage in grid steps** instead of walking FP in 1% steps.
+- [x] `apply_balance` cannot WRITE the knob: `firepower_multiplier` moved from
+      `UNIT_FIELDS` to `RETIRED_UNIT_FIELDS`, a ledger/yaml disagreement is REPORTED, and
+      the `set_field` branch that could MINT a missing `FirepowerMultiplier:` block is gone.
+- [x] The report flags `fp-debt` and orders **"DELETE the unconditional
+      FirepowerMultiplier"** — prescribed Damage is solved at fp=1, so a surviving trait
+      would scale it a second time. (The old code overwrote the trait, so this instruction
+      is new and load-bearing.)
+- [x] `tools/tests/test_firepower_retired.py` — 12 tests pinning both halves.
+- [x] `extract_stats` still READS FP and `fit_class` still prices with it. It must: 152
+      actors still carry one, and un-pricing them would misprice the roster.
+
+**CONTENT HALF — blocked on set B** (`mods/cameo/weapons/**`, Devin's while W2 runs).
+Worklist: `docs/balance/firepower_retirement.md`. Per actor: write `Damage x FP` snapped to
+the grid on every main warhead, then DELETE the trait; boot-gate per batch. Conditional
+(upgrade) FP traits are design and are NOT touched.
 
 Versus values keep integer steps of 1 and the ordering law, but the floor may sit
 anywhere without tier restriction (W13 rule 5).
+
+**VERIFY:** `python tools/balance/plan_firepower_retirement.py` → 0 actors, once done.
 
 ---
 
@@ -935,7 +966,23 @@ is empty.
 
 ---
 
-### W21 — Triple-layer health: Shield → Armor → Health ⬜ READY (design) · needs C#
+### W21 — Layered health: Shield → Integrity → Armor → Health ✅ BUILT + LIVE (2026-08-15)
+
+⚠ **The "needs C#" status below is STALE — the C# exists and is in the game.**
+`OpenRA.Mods.Cameo/Traits/` holds `Integrity.cs`, `ArmorPlating.cs` and `GrantsShield.cs`;
+the stack is wired in yaml (`Shielded` 22 files, `Integrity` 6, `ChangesShield` 6,
+`ArmorPlating` 2) and boot-gated across `0556f8fc9` → `4cdf8b2a8` → `ab467fe52`. The
+rulings (R1–R14), the ONE-POOL/ONE-BAR law and the two-intercepting-layers hazard live in
+`docs/design/ARMOR_LAYERS.md` + memory `cameo-armor-layers-and-granularity`.
+
+⚠ **The bug class this shipped with, because boot gates cannot catch it:** two layers that
+both intercept a hit each return damage modifier 1 and then each charge their own pool, so
+the modifiers MULTIPLY — 1% x 1% made a shielded+plated unit effectively immortal in play,
+with a clean boot. Guard: only the TOP surviving layer may absorb (`ShieldHolds`).
+
+The original design notes follow.
+
+**Design reference (as written 2026-08-12, before the build):**
 
 Maintainer 2026-08-12: three bars, *"only the highest layer active determines the armor"* —
 shield weak to Tesla/Storm/EMP/Quantum/Laser, armor weak to AP (CannonAP/MissileAP/Railgun),

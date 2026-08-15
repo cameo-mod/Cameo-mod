@@ -698,6 +698,8 @@ us place a borrowed unit correctly instead of guessing, and lets us decide a fac
 | **Shattered Paradise** (OpenRA) | **Cameo's exact engine** | TS-era peer (GDI/Nod/CABAL/Scrin/Mutant) | ✅ **done** — by role + faction `[STAT peer]` |
 | **CnC Reloaded 2.7.0** | Ares (RA2 **+ TS** combined) | RA2 **and** TS synthesis | ✅ **done** — 325 units in `ORIGINAL_UNITS_RAW.md` (§CnC Reloaded), from `Downloads/CnCReloaded-2.7.0/Tools/Map Editor/rulesmd.ini` `[STAT]` |
 | **Romanov's Vengeance** | OpenRA (RA2 remake) | RA2 synthesis | ✅ **done** — 208 units in `ORIGINAL_UNITS_RAW.md` (§Romanov's Veng.), from `Downloads/Romanovs-Vengeance-master/mods/rv/rules`+`weapons` `[STAT]`. Remember: RV is a faithful remake → weight {vanilla+RV} as ~one vote |
+| **Red Resurrection** (YR mod, OmegaBolt) | Ares/YR | RA2 weapon + unit synthesis | ⏳ **pending — source needed** `[STAT]` (333ggg, 2026-08-14: *"you can just unzip everything from mixes … i think it is unprotected"*). Not in `~/Downloads` as of 2026-08-15. Same pipeline as CnCR once the `rulesmd.ini` is extracted: `extract_versus.py` + the Document-1 generator |
+| **"Reborn"** | ⚠ ambiguous | RA2/TS synthesis | ⏳ **pending — DISAMBIGUATE FIRST** `[STAT?]` (333ggg: *"it should even be upload to github or smth"*). At least three mods use the name; a W3D-engine one (`C&C: Reborn` / `TS: Reborn`) has no `rules.ini`-shaped stat table and would be `[IDENTITY]` only, while an OpenRA/Ares one is `[STAT]`. **Ask which, or get the repo URL, before spending time on it** |
 
 ## Identity / playstyle stubs (safe from lore + design knowledge; exact stats pending web)
 

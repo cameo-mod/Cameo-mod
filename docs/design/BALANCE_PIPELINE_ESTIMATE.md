@@ -47,17 +47,40 @@
   ~15 dual-inherit signature clusters, the 99-weapon single-cannon sweep, and
   the CABAL bespoke pilot. First effect-heavy cluster (`Grenade+LightFlame`)
   proven, de-risking flame/chemical.
-- ✅ **Reference library ~80 % built** (`docs/design/ORIGINAL_UNIT_STATS.md`,
+- ✅ **Reference library — extraction DONE, synthesis NOT** (`ORIGINAL_UNIT_STATS.md`,
   `ORIGINAL_UNITS_RAW.md`, `FACTION_IDENTITY.md`, `shattered_paradise_research.md`,
-  `BALANCE_SYNTHESIS.md`): raw stats for the whole base-game catalogue + peer mods
-  **Mental Omega, DTA, Combined Arms, Shattered Paradise** all extracted;
-  faction-identity research done for the major factions. Only **CnC Reloaded** and
-  **Romanov's Vengeance** (+ Dune/Outpost2/Cosmonarchy stubs) remain. Plus
-  `class_anchors.json` (28 classes), infantry membership auto-classification.
+  `BALANCE_SYNTHESIS.md`). Every peer mod is extracted — Mental Omega, DTA, Combined Arms,
+  Shattered Paradise, **CnC Reloaded (324 rows)** and **Romanov's Vengeance (207 rows)**.
+  Plus `class_anchors.json` (28 classes), infantry membership auto-classification.
+  ⚠ *An earlier revision of this section said CnCR + RV "remain"; it contradicted PHASE R
+  in the same file. Verified 2026-08-15 — both are in `ORIGINAL_UNITS_RAW.md`.*
+- ✅ **Warhead corpus complete** — `docs/reference/versus_raw.json`, **2494 warhead-vs-armor
+  profiles / 14 sources, 0 undecoded** (`extract_versus.py --summary`). This is the input
+  to W13 and it is ready to use today.
 
-**Remaining volume (measured 2026-08-07):** ~1,631 old-template `Inherits`
-lines across 37 weapon files (≈ several hundred weapons); **328** `Warhead@1Dam`
-usages; **48** faction packs; **28** balance classes.
+**Remaining volume — RE-MEASURED 2026-08-15 against the LIVE resolved ruleset**
+(the 2026-08-07 figures counted lines in FILES, including the ~30 weapon files that are
+commented out in `mod.yaml` and load nothing — `shockwave`, `generals`, `darkreign`,
+`wh40k`, `starwars` … Counting dead files overstates the work and hides which of it ships):
+
+| measure | live value |
+|---|--:|
+| concrete weapons the engine loads | **2323** |
+| …already on a `^Warhead_<Family>_<Level>` | **720 (31%)** |
+| …still inheriting an OLD template | **1920 refs / 106 distinct templates** |
+| …still declaring `Warhead@1Dam` locally | **271** |
+| balance classes (`class_anchors.json`) | 28 — 23 complete, 4 missing a verifier |
+| unit rows in Document 1 (RA2 lineage only) | 1021, **1022 `TODO` cells** = R4 is untouched |
+
+Biggest remaining old templates: `^ShrapnelWeapon` 105 · `^Grenade` 100 · `^FlakWeapon` 97
+· `^MediumMissile` 87 · `^MediumChemicalWeapon` 80 · `^TankDestroyerCannon` 78.
+
+⚠ **Document 1 covers the RA2 lineage ONLY** (RA2, YR, MO, CnCR, RV). The TD/RA1/TS peers
+(DTA, Combined Arms, Shattered Paradise) are extracted as per-game summary tables in
+`ORIGINAL_UNIT_STATS.md` but were never run through the Document-1 generator, whose own
+header says "First cut: RA2 family … Scales to all 11 sources by extending `SOURCES`".
+Synthesising TD/TS/RA1 classes needs that extension first — it is a generator change, not
+a new data pull.
 
 ---
 
@@ -189,10 +212,12 @@ i.e. **~45–60 sessions** if the maintainer gates clear promptly, stretching to
 
 - **σ is large on W-C, W-E, D-disp, F** (bespoke/judgment-heavy). Treat their
   numbers as ranges, not points.
-- **R is mostly done** (see §1); the only remaining extraction is CnCR + RV, whose
-  source paths are already recorded in `ORIGINAL_UNIT_STATS.md` — a small task, not
-  a blocker. The real remaining research work is **R4 synthesis** (turning the
-  library into per-class/faction targets), which is analysis, not data-gathering.
+- **R's data-gathering is done** (see §1 — CnCR and RV are both extracted; the earlier
+  "only CnCR + RV remain" line here was stale and is corrected). The real remaining
+  research work is **R4 synthesis** — turning the library into per-class/faction targets.
+  Measured 2026-08-15: **1022 `TODO` cells against 1021 unit rows**, i.e. the
+  `Category`/`Desc` columns are essentially untouched. R4 is analysis, not data-gathering,
+  and it is the single biggest un-started item that other work depends on.
 - **The multi-agent shared working tree is a process risk**, not an effort one:
   two agents on the same `weapons.yaml` = lost work. Use scoped commits, one
   owner per file-set, or separate worktrees.

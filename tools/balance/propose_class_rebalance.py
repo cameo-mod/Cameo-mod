@@ -128,7 +128,16 @@ def unit_dps(u: dict, fp: float, base_only: bool = False, smallarms_only: bool =
 
 
 def resolve_dps_uniqueness(rows, step: float = 0.01) -> None:
-    """Tune FirepowerMultiplier so effective DAMAGE-PER-SHOT (Σwarheads × FP)
+    """⚠ DEAD + SUPERSEDED — tunes a knob that W17 retired. Kept, not deleted,
+    only because it is referenced by name in ROADMAP.md and LESSONS_LEARNED.md.
+
+    Nothing in this module calls it, and its one apparent caller
+    (`_balance_audit_report.py`) reaches for `resolve_dps_uniqueness` on the
+    `*_rebalance_proposal_final` modules, which no longer exist — that script
+    cannot import. The live uniqueness pass is `unique_dmg_per_shot`, which
+    nudges Damage on the grid. Do not revive this one without W17 in hand.
+
+    Tune FirepowerMultiplier so effective DAMAGE-PER-SHOT (Σwarheads × FP)
     is unique across the class — the maintainer 5-stat uniqueness law
     (2026-07-22). Uniqueness keys on damage-per-shot, NOT effective DPS (which
     conflates damage with reload) and NEVER on the FP value itself. Raw
@@ -405,42 +414,69 @@ def solve_target_speed(spec, cost, hp, rng, dps, special, tech_tier, lo, hi):
 
 
 def decompose_dps(target_dps, base_dps, cur_sum, n_wh):
-    """Two-stage: coarse per-warhead Damage on the 2000-grid + FirepowerMultiplier
-    (1% steps) reproducing target_dps. base_dps = eff-DPS at fp=1 with cur_sum SUM
-    (linear in SUM). Returns (per_warhead_damage, fp)."""
+    """Per-warhead `Damage` on the flat grid reproducing target_dps, in ONE stage.
+
+    **W17 — `FirepowerMultiplier` is retired as a fine-tuning knob**, so the second
+    element of the return is always 1.0. It used to be a solved residual: the old
+    code snapped D to the 2000 grid and handed whatever was left to a 1%-step FP,
+    clamped to [0.05, 2.0]. The grid is now `formula.DAMAGE_STEP` (100), 20x finer,
+    so the residual it leaves is half a step — measured across every FP-carrying
+    actor in the roster, 87% of main warheads land EXACTLY on the grid and 92%
+    within 1%. That is below the noise the knob existed to absorb.
+
+    The floor is deliberately unchanged: the old dead-end returned `2000, 0.05`
+    = 100 effective damage per warhead, and one grid step at fp=1 is also 100.
+
+    ⚠ The prescribed Damage assumes **no FirepowerMultiplier on the actor**
+    (`base_dps` is measured with `base_only=True`, i.e. at fp=1). An actor that
+    still carries a legacy unconditional FP must have that trait DELETED when the
+    new Damage lands, or the multiplier applies a second time. `render_report`
+    emits that instruction; `plan_firepower_retirement.py` lists who needs it.
+
+    Returns (per_warhead_damage, 1.0). base_dps = eff-DPS at fp=1 with cur_sum
+    SUM (linear in SUM).
+    """
+    step = formula.DAMAGE_STEP
     if base_dps <= 0 or cur_sum <= 0 or target_dps <= 0:
-        return 2000, 0.05
+        return step, 1.0
     per_unit = base_dps / cur_sum               # eff-DPS per unit of SUM at fp=1
-    needed = target_dps / per_unit              # required SUM × FP
-    D = max(2000, int(round(needed / n_wh / 2000)) * 2000)
-    fp = needed / (D * n_wh)
-    fp = max(0.05, min(2.0, round(fp, 2)))
-    return D, fp
+    needed = target_dps / per_unit              # required SUM
+    return formula.snap_damage_step(needed / n_wh), 1.0
 
 
-def unique_dmg_per_shot(rows, step=0.01):
-    """Nudge FirepowerMultiplier (1% steps) so effective damage-per-shot
-    (Σwarheads × FP) is unique across non-protected, non-soft members. Small FP
-    nudges shift Δ only marginally (reported)."""
+def unique_dmg_per_shot(rows, step=None):
+    """Nudge per-warhead `Damage` in GRID steps so effective damage-per-shot is
+    unique across non-protected, non-soft members.
+
+    **W17:** this used to walk `FirepowerMultiplier` in 1% steps. With the knob
+    retired, Damage itself is the only lever — and the 100 grid is fine enough to
+    be one, since the collision test needs just 0.5 of separation while one step
+    moves a whole shot by `100 x n_warheads`. Damage never nudges below one step.
+    """
+    step = formula.DAMAGE_STEP if step is None else step
     placed = []
+
     def collides(de):
         return any(abs(o["dmg_eff"] - de) <= 0.5 for o in placed
                    if not o["protected"] and not o.get("soft"))
+
     for r in rows:
         if r["protected"] or r.get("soft"):
             placed.append(r)
             continue
-        sumv = r["dmg_shot"]
-        base_fp = r["fp"]
+        n_wh = r.get("n_wh", 1) or 1
+        base = r.get("per_wh") or step
         for k in range(0, 200):
             for sign in ((1, -1) if k > 0 else (1,)):
-                fp = round(base_fp + sign * k * step, 2)
-                if not (0.05 <= fp <= 2.0):
+                per_wh = base + sign * k * step
+                if per_wh < step:
                     continue
-                if not collides(sumv * fp):
-                    r["fp"] = fp
-                    r["dmg_eff"] = sumv * fp
-                    r["dps_eff"] = r["per_unit"] * sumv * fp
+                dmg_shot = per_wh * n_wh
+                if not collides(dmg_shot):
+                    r["per_wh"] = per_wh
+                    r["dmg_shot"] = dmg_shot
+                    r["dmg_eff"] = dmg_shot
+                    r["dps_eff"] = r["per_unit"] * dmg_shot
                     placed.append(r)
                     break
             else:
@@ -478,14 +514,17 @@ def rebalance_class(cls: str):
         tgt = solve_target_dps(spec, r["cost"], r["hp"], r["spd"], r["rng"],
                                r["special"], r["tech_tier"])
         if tgt is None:
-            r["per_wh"], r["fp"] = 2000, 0.05
+            # No positive DPS prices this unit at its cost: park it at the
+            # weakest the grid can express (W17: one step at fp=1, which is the
+            # same effective damage the old `2000, 0.05` dead-end produced).
+            r["per_wh"], r["fp"] = formula.DAMAGE_STEP, 1.0
             r["over_priced"] = True
             tgt = 0.0
         else:
             r["over_priced"] = False
         D, fp = decompose_dps(tgt, r["base_dps"], r["dmg_shot0"] or 1, r["n_wh"])
         if r.get("over_priced"):
-            D, fp = 2000, 0.05
+            D, fp = formula.DAMAGE_STEP, 1.0
         r["per_wh"] = D
         r["fp"] = fp
         r["dmg_shot"] = D * r["n_wh"]
@@ -548,7 +587,7 @@ def render_report(rows, cls):
         "Converter law: cost pinned, range clamped to band + made unique, "
         "eff-DPS trimmed to Δ≤1 via 2000-grid warhead Damage × 1% FirepowerMultiplier.",
         "",
-        "| actor | faction | HP | spd | rng | cost | dmg/wh×n | rl | burst | FP% | eff DPS | price | Δ | flags |",
+        "| actor | faction | HP | spd | rng | cost | dmg/wh×n | rl | burst | legacy FP% | eff DPS | price | Δ | flags |",
         "|---|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|---|",
     ]
     worst = 0.0
@@ -560,12 +599,16 @@ def render_report(rows, cls):
             flags = (flags + " OVERPRICED@min-dps").strip()
         if "/" in str(r.get("weapon_file", "")) and "weapons/" in str(r.get("weapon_file", "")):
             flags = (flags + " shared-wpn?").strip()
+        # W17: a legacy unconditional FirepowerMultiplier still in yaml would
+        # apply ON TOP of the prescribed Damage, which is solved at fp=1.
+        if not r["protected"] and abs(r.get("fp0", 1.0) - 1.0) > 1e-9:
+            flags = (flags + " fp-debt").strip()
         if not r["protected"]:
             worst = max(worst, abs(r["delta"]))
         dcol = f"{r.get('per_wh') or r['dmg']}×{r.get('n_wh', 1)}"
         lines.append(
             f"| `{r['actor']}` | {r['faction']} | {r['hp']} | {r['spd']} | {r['rng']} | "
-            f"{r['cost']} | {dcol} | {r['rl']} | {r['burst']} | {int(round(r['fp']*100))} | "
+            f"{r['cost']} | {dcol} | {r['rl']} | {r['burst']} | {int(round(r['fp0'] * 100))} | "
             f"{r['dps_eff']:.1f} | {r['price']:.0f} | {r['delta']:+.1f} | {flags} |"
         )
     lines += ["", f"**Worst |Δ| among non-anchor members: {worst:.1f}** "
@@ -599,13 +642,18 @@ def render_report(rows, cls):
     for r in rows:
         if r["protected"]:
             continue
-        trait = r["actor"].upper().replace("_", "")
         changes = [
             f"HP {r['hp']}, Speed {r['spd']}, Range {r['rng']}",
             f"each offensive warhead Damage {r.get('per_wh')} (×{r.get('n_wh',1)} = "
             f"SUM {r.get('dmg_shot')}), ReloadDelay {r['rl']}, Burst {r['burst']}",
-            f"FirepowerMultiplier@{trait} {int(round(r['fp']*100))}",
         ]
+        # W17: Damage is solved at fp=1, so a surviving unconditional
+        # FirepowerMultiplier would scale it a SECOND time.
+        if abs(r.get("fp0", 1.0) - 1.0) > 1e-9:
+            changes.append(
+                f"**DELETE the unconditional FirepowerMultiplier "
+                f"({int(round(r['fp0'] * 100))}%)** — the Damage above already "
+                f"includes it (W17)")
         if abs(r["delta"]) > 1:
             changes.append(f"residual Δ {r['delta']:+.1f} (cost pinned at {r['cost']})")
         lines.append(f"- `{r['actor']}`: {', '.join(changes)}")
