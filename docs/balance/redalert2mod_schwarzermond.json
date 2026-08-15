@@ -7038,13 +7038,13 @@
     },
     "buildable": true,
     "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/upgrades.yaml#Valued.Cost",
-     "v": "5000"
+     "src": "inherited",
+     "v": "10000"
     },
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "ResearchedUpgrade",
+     "subtype": "TeamUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7054,8 +7054,23 @@
      "!schwarzermond_upgrade_helium3"
     ],
     "queue": [
-     "Upgrades"
+     "Research"
     ]
+   },
+   "schwarzermond_upgrade_helium3_proxy_actor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": false,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Helium-3 Enrichment"
    },
    "schwarzermond_upgrade_lunaralloys": {
     "build_limit": {

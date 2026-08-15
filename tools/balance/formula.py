@@ -15,6 +15,53 @@ range 5000, reload 50, all modifiers 1 -> O = P = Q = price = 800.
 """
 from __future__ import annotations
 
+import re
+
+_COND_TOKEN = re.compile(r"[A-Za-z_][A-Za-z0-9_.\-]*")
+
+
+def condition_holds_by_default(expr: str | None) -> bool:
+    """Is this OpenRA condition expression true for a UNIT AS BUILT?
+
+    Base pricing has to use the weapon a unit fires the moment it rolls off the
+    line: no promotions, no researched upgrades, not garrisoned, not deployed.
+    So every named condition is evaluated as FALSE and the expression is reduced.
+
+        `!rank-elite`                        -> True   (the BASE weapon)
+        `rank-elite`                         -> False  (the promoted weapon)
+        `!forgotten_upgrade_chemicalweapons` -> True   (before the upgrade)
+        `ifv-miss && !rank-elite`            -> False  (needs a passenger)
+        `shieldgen >= 1`                     -> False  (0 by default)
+        empty / None                         -> True   (unconditional)
+
+    This replaces the old "any `requires` means skip it" rule, which threw away
+    the BASE weapon of every unit that merely has an elite variant — 371 of 863
+    actors with priced armaments had zero DPS and dropped out of pricing entirely
+    (measured 2026-08-15), including `tiger.nax`, the recorded `mbt` anchor.
+    """
+    if expr is None:
+        return True
+    src = expr.strip()
+    if not src:
+        return True
+
+    # Order matters: `!=` must survive the `!` -> `not` rewrite.
+    src = src.replace("!=", "\x00NE\x00")
+    src = src.replace("&&", " and ").replace("||", " or ").replace("!", " not ")
+    src = src.replace("\x00NE\x00", "!=")
+
+    # Every condition name is 0/False. Keep Python keywords the rewrite produced.
+    keep = {"and", "or", "not", "True", "False"}
+    src = _COND_TOKEN.sub(lambda m: m.group(0) if m.group(0) in keep else "0", src)
+
+    try:
+        return bool(eval(src, {"__builtins__": {}}, {}))  # noqa: S307 - digits/operators only
+    except Exception:
+        # An expression we cannot parse is NOT silently treated as a base weapon:
+        # over-counting DPS inflates a price, and a wrong price is worse than a
+        # missing one because it looks authoritative.
+        return False
+
 
 def eff_reload(reload_delay: float, burst: int = 1, burst_delays: float | None = None) -> float:
     """Effective ticks per full burst cycle."""

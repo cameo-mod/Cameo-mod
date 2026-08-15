@@ -39,7 +39,7 @@ status rather than keeping its own copy.
 | **W8** | Gatling ladder → `SpinUp` meter | ⛔ BLOCKED | either | W6 |
 | **W9** | `^Poisonable` → `Poison` meter (gas-cloud dose-response) | ⬜ READY | either | — |
 | **W10** | `^Blindable` → `Blind` meter | ⛔ BLOCKED | either | W6 |
-| **W11** | Wire K into `fit_class.py` behind a flag; fit one class both ways and compare | ⛔ BLOCKED | Claude | W3, W4, W5 |
+| **W11** | Wire K into `fit_class.py` behind a flag; fit one class both ways and compare | ✅ BUILT, sign-off owed (+2 pipeline bugs fixed: 43% of the roster priced at zero DPS) | Claude | W3 ✅, W4 ✅, W5 ✅ |
 | **W12** | Superweapon balancing as a SEPARATE track (not unit-priced) | ⬜ READY | maintainer-led | — |
 | **W13** | Warhead system rebuild from the 2494-profile reference corpus | ⬜ READY | Claude | W1, W5 |
 | **W14** | ~~Renormalise `avg_versus`~~ — ✖ DROPPED, the multi-role premium is intended; folded into W13 rule 8b | ✖ DROPPED | — | — |
@@ -404,13 +404,53 @@ the max-meter uses remain.
 
 ---
 
-### W11 — Wire K into `fit_class.py` ⛔ needs W3, W4, W5
+### W11 — Wire K into `fit_class.py` ✅ BUILT · ⬜ awaiting maintainer sign-off
 
-Behind a flag. Fit ONE class both ways, diff the resulting prices, show the maintainer,
-and only then switch the pipeline. **Never** flip pricing and content in one commit.
+W3/W4/W5 were all ✅ long before anyone re-read this line — the ⛔ was stale, which is
+why this sat "blocked" while its dependencies were done.
 
-**VERIFY:** the comparison report exists in `docs/balance/derived/` and the maintainer
-has signed off in `anchor_decisions_log.md`.
+**Built:** `--use-k` prices on the K-adjusted `effective_dps` from the derived sidecar
+(accuracy, spread, falloff, range, dead zone, reachable targets) instead of raw
+damage/reload; `--compare-k` prices the class BOTH ways and writes the evidence report.
+K is read from the sidecar, never recomputed, so there is one definition of it. The
+anchor is re-fitted in whichever mode is running — pricing members on K against an
+anchor fitted on raw DPS would compare two scales and make every delta meaningless.
+`--compare-k` deliberately writes **no candidate anchor**: it is a report, not a fit.
+
+**⚠ TWO PIPELINE BUGS FOUND BY ACTUALLY RUNNING IT** — both pre-existing, both far more
+consequential than the flag:
+
+1. **43% of the roster was invisible to pricing.** `unit_inputs` skipped every armament
+   carrying any `requires` at all. But `!rank-elite` is the BASE weapon, not an
+   upgrade gate — as is `!forgotten_upgrade_chemicalweapons`, and so on. **371 of 863
+   actors with priced armaments came out at zero DPS** and dropped out of class fits
+   entirely, `tiger.nax` — the recorded `mbt` anchor — among them, which is why fitting
+   `mbt` failed outright. Replaced with `formula.condition_holds_by_default()`: evaluate
+   the condition with every named condition FALSE, i.e. *the weapon the unit fires as
+   built*. Coverage **57% → 96%**; the 37 still at zero genuinely have no as-built weapon
+   (transport- and deploy-gated). 18 unit tests, and it fails CLOSED on an expression it
+   cannot parse — a wrong price looks authoritative, a missing one does not.
+2. **The class-member scan never ran.** The anchor was unioned into `actors_filter`, and
+   a non-empty filter switches off the `design.class_anchor == cls` branch — so every
+   run collected exactly ONE unit (the anchor) and wrote a one-row validation table for
+   the whole class. The anchor now passes through `always=` instead.
+
+**First result — `docs/balance/derived/k_comparison_mbt.md`, 40 units:**
+median price shift **+1.2%** (range −50% … +43%), but it moves prices AWAY from current
+cost for **30/40** units. Individual movements are large and plausible in direction
+(`protoss_dragoon` −51%, `tkm_trenchtank` +43%). Sanity check passed: the raw anchor
+reproduces the documented Tiger identity exactly, O0 = P0 = Q0 = cost0 = 800.
+
+**⚠ That result does NOT justify flipping the pipeline yet**, and the honest reading is
+that it cannot on its own: current costs are themselves unbalanced — that is why this
+program exists — so "moves away from current cost" is not automatically evidence
+against K. What would settle it is running `--compare-k` on a class whose costs the
+maintainer already considers CORRECT, and checking whether K pulls those towards or
+away from them.
+
+**VERIFY:** `python tools/balance/fit_class.py --class mbt --anchor tiger.nax --compare-k`
+→ report in `docs/balance/derived/`, `class_anchors.json` untouched. Sign-off still owed
+in `anchor_decisions_log.md` before `--use-k` becomes the default.
 
 ---
 
