@@ -2224,7 +2224,8 @@
     },
     "buildable": true,
     "charge_up": {
-     "cycle": 120.0,
+     "burst": 5,
+     "cycle_reload": 120.0,
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#AttackTesla",
      "ticks": 12.0,
      "v": "AttackTesla"

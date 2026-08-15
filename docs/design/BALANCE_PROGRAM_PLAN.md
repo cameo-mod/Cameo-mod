@@ -691,13 +691,38 @@ defaults — `InitialChargeDelay` defaults to 22.
 | actor | trait | ticks | cycle | share | multiplier |
 |---|---|---|---|---|---|
 | `td_nod_obeliskoflight` | AttackCharges | 50 | 96 | 34.2% | **0.750** (anchor) |
-| `ra2_soviets_teslacoil` | AttackTesla | 22 (default) | 75 | 22.7% | 0.834 |
-| `ra1_soviets_teslacoil` | AttackTesla | 25 | 100 | 20.0% | 0.854 |
+| `ra2_soviets_teslacoil` | AttackTesla | **20** | 75 | 21.1% | 0.846 |
+| `ra1_soviets_teslacoil` | AttackTesla | 25 | **106** | 19.1% | 0.861 |
 | `wc2_*_siegeengine` | AttackFrontalCharged | 20 | 100 | 16.7% | 0.878 |
-| `asianalliance_railtower` | AttackTesla | 12 | 120 | 9.1% | **0.934** |
+| `asianalliance_railtower` | AttackTesla | 12 | **160** | 7.0% | **0.949** |
 
-Every predicted share reproduced exactly. `ts_nod_obeliskoflight` (45.5%) clamps to 0.75,
-proving the clamp. `CHARGE_UP_EXCLUDED_TRAITS` is retired to an empty set and `AttackTesla`
+`ts_nod_obeliskoflight` (45.5%) clamps to 0.75, proving the clamp.
+
+⭐ **`AttackTesla` OVERRIDES THE WEAPON'S RELOAD** (maintainer 2026-08-15): *"if you have
+the AttackTesla trait, ReloadDelay is taken from that instead of from the weapon, and the
+reload delay from the weapon counts as the burst delay in the formula."* The coil winds up
+once, fires `MaxCharges` zaps, and the WEAPON's reload is the gap between them — the burst
+law verbatim, `eff_reload = trait ReloadDelay + weapon reload × (MaxCharges − 1)`:
+RA1 = 100 + 3×2 = **106**, railtower = 120 + **10**×4 = **160**, RA2 = **75** (one charge).
+
+⚠ **`ChargeDelay` is NOT the gap.** An earlier draft used it and was right twice by
+coincidence — it defaults to 3, and both Tesla Coils happen to carry weapons that also
+reload in 3. The AA railtower's weapon reloads in **10**, and only the railtower exposed
+the error (132 against the correct 160). Two agreeing data points proved nothing.
+
+⭐⭐ **THE REAL PRIZE: an 11.8× DPS OVERSTATEMENT.** Because a Tesla Coil's weapon reloads
+every 3 ticks, `unit_inputs` was pricing the coil as firing 20 times a second when it
+fires 3 zaps per 106 ticks. DPS drives the price, so every `AttackTesla` actor was priced
+off a number ~12× too large. `formula.charge_attack_cycle` now returns the cycle and
+shots-per-cycle for any trait that overrides the weapon, and `fit_class` prices on that.
+
+⭐ **This FLIPS the Tesla ordering, and the flip is the point.** RA1 charges LONGER (25 vs
+20) yet ends up with the SMALLER share (19.1% vs 21.1%), because its three zaps stretch
+the cycle while the single-charge RA2 coil stays at 75. **Charge share is a ratio, not a
+duration** — a fact no flat rate and no charge-time-only reading could ever express.
+
+Charge times are now a DECISION rather than a leftover: RA1 stays 25 and the RA2 coil
+writes `InitialChargeDelay: 20` explicitly instead of inheriting the engine's 22. `CHARGE_UP_EXCLUDED_TRAITS` is retired to an empty set and `AttackTesla`
 joins `CHARGE_UP_TRAITS`, as the item asked.
 
 ⚠ **The cycle for `AttackTesla` is its OWN `ReloadDelay`, never the weapon's.** A Tesla

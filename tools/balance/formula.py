@@ -123,16 +123,41 @@ CHARGE_UP_TRAITS = frozenset({
 CHARGE_UP_EXCLUDED_TRAITS = frozenset()
 
 # Where each trait keeps its wind-up, with the ENGINE DEFAULT applied when the key is
-# absent. An absent key means DEFAULT, never zero: the RA2 Tesla Coil writes no
+# absent. An absent key means DEFAULT, never zero: the RA2 Tesla Coil wrote no
 # `InitialChargeDelay` and an earlier draft of W16 read that as "no charge at all",
-# when the engine gives it 22 — the HIGHEST charge share of the whole Tesla group.
-#   trait -> (charge field, charge default, rate field, cycle field, cycle default)
+# when the engine gives it 22.
+#
+# ⚠ `AttackTesla`'s cycle is a BURST, and is measured with the burst law
+# (`eff_reload`): the coil winds up once, then fires `MaxCharges` zaps `ChargeDelay`
+# ticks apart, so a full cycle is `ReloadDelay + ChargeDelay x (MaxCharges - 1)` —
+# the same shape as a weapon's `ReloadDelay + BurstDelays x (Burst - 1)`.
+# Maintainer 2026-08-15: "it shoots 3 times but with a delay of 3 ticks between each
+# damage tick so it could be handled like a burst delay in our formula."
+# Ignoring the zaps understates a 3-charge coil's cycle by 6 ticks and hands it a
+# discount it has not earned.
+#
+#   trait -> {charge: (field, default), rate/cycle/burst/burst_delay: (field, default)}
 CHARGE_FIELDS = {
-    "AttackTesla":           ("InitialChargeDelay", 22, None,         "ReloadDelay", 120),
-    "AttackCharges":         ("ChargeLevel",        25, "ChargeRate", None,          None),
-    "AttackCharged":         ("ChargeLevel",        25, "ChargeRate", None,          None),
-    "AttackFrontalCharged":  ("ChargeLevel",        25, "ChargeRate", None,          None),
-    "AttackTurretedCharged": ("ChargeLevel",        25, "ChargeRate", None,          None),
+    "AttackTesla": {
+        "charge": ("InitialChargeDelay", 22),
+        # ⚠ `AttackTesla` REPLACES the weapon's reload with its own. Maintainer
+        # 2026-08-15: "if you have the AttackTesla trait, ReloadDelay is taken from
+        # that instead of from the weapon, and the reload delay from the weapon
+        # counts as the burst delay". So the WEAPON's reload is the gap between
+        # zaps, not `ChargeDelay` — those happen to both be 3 on the two Tesla
+        # Coils, which is why an earlier draft using ChargeDelay produced the right
+        # answer for them and the WRONG one for the AA railtower (weapon reload 10:
+        # a 160-tick cycle, not 132).
+        "cycle_reload": ("ReloadDelay", 120),
+        "burst": ("MaxCharges", 1),
+    },
+    # The ChargeLevel family governs no reload of its own — the charge gates the
+    # actor's own gun, so the share is measured against the weapon it delays.
+    # ChargeLevel is a counter filled at ChargeRate per tick, hence the rate divisor.
+    "AttackCharges":         {"charge": ("ChargeLevel", 25), "rate": ("ChargeRate", 1)},
+    "AttackCharged":         {"charge": ("ChargeLevel", 25), "rate": ("ChargeRate", 1)},
+    "AttackFrontalCharged":  {"charge": ("ChargeLevel", 25), "rate": ("ChargeRate", 1)},
+    "AttackTurretedCharged": {"charge": ("ChargeLevel", 25), "rate": ("ChargeRate", 1)},
 }
 
 
@@ -150,6 +175,30 @@ def charge_share(ticks: float | None, cycle: float | None) -> float:
     if not ticks or not cycle or ticks <= 0 or cycle <= 0:
         return 0.0
     return ticks / (ticks + cycle)
+
+
+def charge_attack_cycle(charge, weapon_reload: float | None):
+    """(cycle_ticks, shots_per_cycle) for a trait that OVERRIDES the weapon's reload.
+
+    `AttackTesla` is the case: the trait's own `ReloadDelay` is the cycle, it fires
+    `MaxCharges` zaps within it, and the WEAPON's reload is the gap between those
+    zaps — i.e. exactly a burst, so `eff_reload` applies unchanged.
+
+    Returns None for traits that do NOT override the weapon (the `ChargeLevel`
+    family), whose gun keeps its own reload and whose charge merely delays it.
+
+    ⚠ This is a PRICING correction, not a detail. A Tesla Coil's weapon reloads
+    every 3 ticks, so reading the weapon alone prices it as firing 20 times a
+    second when it really fires 3 zaps per 106 ticks — an 11.8x overstatement of
+    its DPS, and DPS drives the price.
+    """
+    if not isinstance(charge, dict):
+        return None
+    reload_ = charge.get("cycle_reload")
+    if not reload_:
+        return None
+    burst = int(charge.get("burst") or 1)
+    return eff_reload(reload_, burst, weapon_reload), burst
 
 
 def charge_price_multiplier(charge, reload_fallback: float | None = None) -> float:
@@ -179,7 +228,11 @@ def charge_price_multiplier(charge, reload_fallback: float | None = None) -> flo
     if isinstance(charge, dict):
         trait = charge.get("v")
         ticks = charge.get("ticks")
-        cycle = charge.get("cycle") or reload_fallback
+        # A trait that overrides the weapon's reload supplies its own cycle, built
+        # from the weapon reload as the burst delay; everything else measures the
+        # wind-up against the gun it delays.
+        own = charge_attack_cycle(charge, reload_fallback)
+        cycle = own[0] if own else reload_fallback
     else:
         trait, ticks, cycle = charge, None, reload_fallback
 

@@ -2650,9 +2650,10 @@
     },
     "buildable": true,
     "charge_up": {
-     "cycle": 75.0,
+     "burst": 1,
+     "cycle_reload": 75.0,
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#AttackTesla",
-     "ticks": 22,
+     "ticks": 20.0,
      "v": "AttackTesla"
     },
     "cost": {

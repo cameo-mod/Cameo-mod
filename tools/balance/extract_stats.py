@@ -127,9 +127,10 @@ def charge_up(resolved, local):
 
         spec = formula.CHARGE_FIELDS.get(base)
         if spec:
-            cfield, cdefault, ratefield, cyclefield, cycledefault = spec
-
-            def num(key, default):
+            def num(pair, fallback=None):
+                if not pair:
+                    return fallback
+                key, default = pair
                 n = child(c, key)
                 if n is None or n.value in (None, ""):
                     return default
@@ -138,13 +139,18 @@ def charge_up(resolved, local):
                 except (TypeError, ValueError):
                     return default
 
-            ticks = num(cfield, cdefault)
-            if ratefield:
-                rate = num(ratefield, 1) or 1
-                ticks = ticks / rate   # ChargeLevel is a counter filled at ChargeRate
-            rec["ticks"] = round(ticks, 2)
-            if cyclefield:
-                rec["cycle"] = round(num(cyclefield, cycledefault), 2)
+            ticks = num(spec.get("charge"))
+            rate = num(spec.get("rate"), 1) or 1
+            rec["ticks"] = round(ticks / rate, 2)
+
+            # RAW trait fields only. The cycle is NOT precomputed here because it
+            # needs the weapon's reload as its burst delay, and combining the two is
+            # the formula's job — the ledger stores what the yaml says, one law in
+            # one place (formula.charge_attack_cycle).
+            cycle_reload = num(spec.get("cycle_reload"))
+            if cycle_reload:
+                rec["cycle_reload"] = round(cycle_reload, 2)
+                rec["burst"] = int(num(spec.get("burst"), 1) or 1)
         return rec
     return None
 

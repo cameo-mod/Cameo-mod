@@ -93,9 +93,20 @@ def unit_inputs(u, du=None, use_k=False):
         reload_ = fnum(arm.get("reloaddelay"))
         if not dmg or not reload_:
             continue
-        raw = formula.dps(dmg, reload_,
-                          int(fnum(arm.get("burst")) or 1),
-                          fnum(arm.get("burstdelays")))
+        # ⚠ A charge trait may OVERRIDE the weapon's reload entirely. `AttackTesla`
+        # does: its own ReloadDelay is the cycle, it fires MaxCharges zaps inside
+        # it, and the weapon's reload is only the gap between them. A Tesla Coil's
+        # weapon reloads every 3 ticks, so reading the weapon alone prices the coil
+        # as firing 20 times a second when it fires 3 zaps per 106 ticks — DPS
+        # overstated 11.8x, and DPS drives the price.
+        own = formula.charge_attack_cycle(u.get("charge_up"), reload_)
+        if own:
+            cycle, shots = own
+            raw = dmg * shots / cycle
+        else:
+            raw = formula.dps(dmg, reload_,
+                              int(fnum(arm.get("burst")) or 1),
+                              fnum(arm.get("burstdelays")))
         if use_k:
             keyed = kidx.get((arm.get("slot"), arm.get("weapon")))
             if keyed is None:

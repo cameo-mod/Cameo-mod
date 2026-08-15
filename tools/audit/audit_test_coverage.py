@@ -50,7 +50,7 @@ PY_SOURCE_DIRS = ("tools/audit", "tools/balance", "tools/packs", "tools/rename")
 # consider git-TRACKED files (scanning.tracked_under), so a scratch script left in
 # tools/ can no longer move them.
 MIN_CS_TESTS = 24
-MIN_PY_TESTS = 173      # +18 test_condition_default (W11); +2 W16 charge-share tests
+MIN_PY_TESTS = 177      # +18 test_condition_default (W11); +6 W16 charge-share/burst
 # T3 rose 215 -> 218 in b6fb33bb9 ("sync full working tree for tester"), which TRACKED
 # three tools that had been sitting untracked: audit_damage_grid, propose_sonic_mapping,
 # _requantize_ledgers. Tracking them is what makes them count — the ratchet deliberately
