@@ -1123,6 +1123,7 @@
     "buildable": true,
     "charge_up": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#AttackCharges",
+     "ticks": 50.0,
      "v": "AttackCharges"
     },
     "cost": {
@@ -3376,6 +3377,7 @@
     "buildable": true,
     "charge_up": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#AttackTurretedCharged",
+     "ticks": 50.0,
      "v": "AttackTurretedCharged"
     },
     "cost": {

@@ -41,7 +41,7 @@ consistent; only the SHAPE of the class changes between them.
 | `tkm_abrams` | 1000 | 1000 | 1020 | -0% | +2% | +2% |
 | `td_gdi_battletank` | 900 | 928 | 910 | +3% | +1% | -2% |
 | `combat_tank.atreides` | 600 | 938 | 956 | +56% | +59% | +2% |
-| `assault.nax` | 900 | 3229 | 3291 | +259% | +266% | +2% |
+| `assault.nax` | 900 | 3229 | 3290 | +259% | +266% | +2% |
 | `ra1_soviets_heavytank` | 1000 | 1000 | 1015 | +0% | +2% | +2% |
 | `cabal_tarantula` | 1000 | 1000 | 1014 | -0% | +1% | +1% |
 | `ra2_allies_grizzlytank` | 750 | 1004 | 1016 | +34% | +36% | +1% |

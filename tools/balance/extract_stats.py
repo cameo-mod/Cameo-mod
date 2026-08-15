@@ -104,9 +104,17 @@ def charge_up(resolved, local):
     helpless while it winds up, neither of which a weapon's own stats show.
     `formula.charge_price_multiplier` turns this into the 0.75x price discount.
 
-    Recorded for EVERY charge trait, including `AttackTesla`, which formula
-    deliberately excludes from the discount — the data should show what the tree
-    actually has, and the pricing decision belongs in one place, not two.
+    Recorded for EVERY charge trait — the data should show what the tree actually
+    has, and the pricing decision belongs in one place, not two.
+
+    W16 also records the MEASURED wind-up so the discount can scale with it:
+      ticks — how long the actor spends charging
+      cycle — the reload the trait itself governs, when it has one
+
+    ⚠ Both read the ENGINE DEFAULT when the key is absent from the yaml. An absent
+    key means default, never zero: the RA2 Tesla Coil writes no
+    `InitialChargeDelay`, and reading that as "no charge" made it look like the
+    LOWEST-charge Tesla when the engine's default 22 makes it the highest.
     """
     known = formula.CHARGE_UP_TRAITS | formula.CHARGE_UP_EXCLUDED_TRAITS
     for c in resolved.children:
@@ -115,7 +123,29 @@ def charge_up(resolved, local):
             continue
         lt = child(local, c.key) if local is not None else None
         src = f"{rel(lt.file)}#{c.key}" if lt is not None else "inherited"
-        return {"v": base, "src": src}
+        rec = {"v": base, "src": src}
+
+        spec = formula.CHARGE_FIELDS.get(base)
+        if spec:
+            cfield, cdefault, ratefield, cyclefield, cycledefault = spec
+
+            def num(key, default):
+                n = child(c, key)
+                if n is None or n.value in (None, ""):
+                    return default
+                try:                       # ChargeLevel may be a LIST (CA's frontal
+                    return float(str(n.value).split(",")[0].strip())   # variant)
+                except (TypeError, ValueError):
+                    return default
+
+            ticks = num(cfield, cdefault)
+            if ratefield:
+                rate = num(ratefield, 1) or 1
+                ticks = ticks / rate   # ChargeLevel is a counter filled at ChargeRate
+            rec["ticks"] = round(ticks, 2)
+            if cyclefield:
+                rec["cycle"] = round(num(cyclefield, cycledefault), 2)
+        return rec
     return None
 
 
@@ -835,6 +865,20 @@ def main() -> int:
                                              encoding="utf-8", newline="\n")
     print(f"wrote {len(ledgers)} ledgers, {total} actors -> {rel(OUT)}")
     print(f"wrote {len(sidecars)} derived sidecars -> {rel(DERIVED_OUT)}")
+
+    # `_model.json` above is GLOBAL — its armor census and weights are measured
+    # across the whole roster — but a filtered run only rewrites the sidecars it
+    # was asked for. So a --faction run can move the model for everyone while
+    # leaving 31 factions' derived numbers computed against the old one, and
+    # nothing catches it: audit_balance_drift compares raw yaml to the RAW ledger
+    # and never looks at derived. That is exactly how avg_versus/k/effective_dps
+    # went quietly stale across 30 files in 2026-08-15.
+    if args.faction:
+        print("\n⚠ FILTERED RUN — `_model.json` is global and has been rewritten, but only "
+              f"the sidecar(s) matching `{args.faction}` were regenerated.\n"
+              "  Every OTHER faction's derived numbers (avg_versus, k, effective_dps) may "
+              "now be stale.\n"
+              "  Re-run without --faction before trusting or committing derived data.")
     return 0
 
 

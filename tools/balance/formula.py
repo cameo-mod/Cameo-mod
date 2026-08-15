@@ -109,25 +109,89 @@ CHARGE_UP_PRICE_MULTIPLIER = 0.75
 CHARGE_UP_TRAITS = frozenset({
     "AttackCharged", "AttackTurretedCharged", "AttackFrontalCharged",
     "AttackCharges",
+    # W16: `AttackTesla` JOINS the set. It was excluded while the discount was a
+    # flat 0.75x, because a Tesla Coil charges for a fifth of its cycle and the
+    # Obelisk for a third — paying both the same was the double-discount the
+    # exclusion existed to prevent. Now that the discount is proportional to the
+    # measured share, each earns only what its own wind-up costs it, so there is
+    # nothing left to exclude.
+    "AttackTesla",
 })
 
-# `AttackTesla` charges too, but is deliberately NOT in the set above: the Tesla
-# Coil is already priced as a special case (ReloadDelay 100 + InitialChargeDelay 25,
-# MaxCharges 3, its own K), so applying the generic 0.75x on top would discount it
-# twice. Needs its own maintainer ruling before it joins.
-CHARGE_UP_EXCLUDED_TRAITS = frozenset({"AttackTesla"})
+# Retired by W16, kept as an empty set so older callers keep working. Membership is
+# no longer a binary decision — see charge_price_multiplier.
+CHARGE_UP_EXCLUDED_TRAITS = frozenset()
+
+# Where each trait keeps its wind-up, with the ENGINE DEFAULT applied when the key is
+# absent. An absent key means DEFAULT, never zero: the RA2 Tesla Coil writes no
+# `InitialChargeDelay` and an earlier draft of W16 read that as "no charge at all",
+# when the engine gives it 22 — the HIGHEST charge share of the whole Tesla group.
+#   trait -> (charge field, charge default, rate field, cycle field, cycle default)
+CHARGE_FIELDS = {
+    "AttackTesla":           ("InitialChargeDelay", 22, None,         "ReloadDelay", 120),
+    "AttackCharges":         ("ChargeLevel",        25, "ChargeRate", None,          None),
+    "AttackCharged":         ("ChargeLevel",        25, "ChargeRate", None,          None),
+    "AttackFrontalCharged":  ("ChargeLevel",        25, "ChargeRate", None,          None),
+    "AttackTurretedCharged": ("ChargeLevel",        25, "ChargeRate", None,          None),
+}
 
 
-def charge_price_multiplier(charge_trait: str | None) -> float:
-    """`CHARGE_UP_PRICE_MULTIPLIER` for a charging actor, else 1.0.
+# W16 anchor. The Obelisk of Light is the case the 0.75x ruling was written for:
+# AttackCharges ChargeLevel 50 against a weapon reload of 96, so 50/(50+96) = 0.342
+# of its cycle is spent charging. That share earns the full documented discount;
+# everything else is scaled linearly against it. Kept as a CONSTANT rather than
+# read from the Obelisk at runtime — it is a calibration point, and a balance pass
+# retuning that one building must not silently re-price every charging actor.
+CHARGE_ANCHOR_SHARE = 50 / (50 + 96)
+
+
+def charge_share(ticks: float | None, cycle: float | None) -> float:
+    """Fraction of an attack cycle the actor spends winding up. 0.0 when unknown."""
+    if not ticks or not cycle or ticks <= 0 or cycle <= 0:
+        return 0.0
+    return ticks / (ticks + cycle)
+
+
+def charge_price_multiplier(charge, reload_fallback: float | None = None) -> float:
+    """Price discount for a charging actor, PROPORTIONAL to its real charge burden (W16).
+
+    W4 applied a flat 0.75x to every charging actor, which is too blunt: the
+    Obelisk spends 34% of its cycle charging while an Asian Alliance railtower
+    spends 9%, and they were paying the same discount. The discount now scales
+    linearly with `charge_share`, anchored so the Obelisk gets exactly 0.75 and a
+    zero-charge actor gets exactly 1.0, clamped to [0.75, 1.0].
+
+    That is also what lets `AttackTesla` finally join the discount: each actor now
+    earns the discount its own charge burden justifies, so there is no longer a
+    binary in/out decision to get wrong.
 
     Applied to the PRICE, not to DPS: price is degree 1/2/3 in its inputs
-    (O/P/Q), so scaling DPS would not yield a clean 0.75x on the result.
+    (O/P/Q), so scaling DPS would not yield a clean multiplier on the result.
+
+    `charge` is the ledger's `charge_up` record (dict) or, for older callers, the
+    bare trait name. A trait with no measurable charge falls back to the flat rate
+    rather than to 1.0 — it charges, we just cannot see by how much, and pricing it
+    as if it did not charge would be the larger error.
     """
-    if not charge_trait:
+    if not charge:
         return 1.0
-    return (CHARGE_UP_PRICE_MULTIPLIER
-            if str(charge_trait).split("@", 1)[0] in CHARGE_UP_TRAITS else 1.0)
+
+    if isinstance(charge, dict):
+        trait = charge.get("v")
+        ticks = charge.get("ticks")
+        cycle = charge.get("cycle") or reload_fallback
+    else:
+        trait, ticks, cycle = charge, None, reload_fallback
+
+    if not trait or str(trait).split("@", 1)[0] not in CHARGE_UP_TRAITS:
+        return 1.0
+
+    share = charge_share(ticks, cycle)
+    if share <= 0.0:
+        return CHARGE_UP_PRICE_MULTIPLIER
+
+    scaled = 1.0 - (1.0 - CHARGE_UP_PRICE_MULTIPLIER) * (share / CHARGE_ANCHOR_SHARE)
+    return min(1.0, max(CHARGE_UP_PRICE_MULTIPLIER, scaled))
 
 
 # Twin warheads — NEVER main / NEVER in the damage total (DESIGN.md):

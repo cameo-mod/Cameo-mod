@@ -122,7 +122,29 @@ def price_unit(u, inp, o0, p0, q0, cost0) -> float:
     """
     o, p, q = formula.estimators(*inp)
     v2 = formula.class_anchor_price(o, p, q, o0, p0, q0, cost0)
-    return v2 * formula.charge_price_multiplier((u.get("charge_up") or {}).get("v"))
+    return v2 * formula.charge_price_multiplier(u.get("charge_up"),
+                                                charge_cycle_fallback(u))
+
+
+def charge_cycle_fallback(u) -> float | None:
+    """The reload a wind-up competes with, for traits that govern no reload of their own.
+
+    `AttackTesla` carries its own `ReloadDelay`, so it never needs this. The
+    `ChargeLevel` family does: the charge gates the actor's attack, so the share is
+    measured against the gun it delays.
+
+    Takes the LONGEST base-weapon reload, not the shortest: a charge gates the heavy
+    shot, and an actor with a fast secondary (the Terran siege tank's 37 next to its
+    sieged 148) would otherwise look like it charges for most of its cycle and earn a
+    discount it has not paid for. An approximation either way — it assumes the
+    slowest weapon is the charged one, which is true for every charging actor in the
+    tree today.
+    """
+    reloads = [fnum(a.get("reloaddelay")) for a in u.get("armaments", [])
+               if a.get("pricing", True)
+               and formula.condition_holds_by_default(a.get("requires"))]
+    reloads = [r for r in reloads if r]
+    return max(reloads) if reloads else None
 
 
 def collect_units(cls, actors_filter, always=()):

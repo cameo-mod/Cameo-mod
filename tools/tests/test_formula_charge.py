@@ -52,12 +52,49 @@ class ChargeMultiplierTest(unittest.TestCase):
         have left the cited precedent undiscounted."""
         self.assertEqual(formula.charge_price_multiplier("AttackCharges"), 0.75)
 
-    def test_tesla_is_excluded(self):
-        """The Tesla Coil is already priced as a special case; the generic discount on
-        top would compensate one weakness twice, leaving it cost-efficient — a price
-        cut is a BUFF in value terms, so over-paying a unit is not a safe error."""
-        self.assertEqual(formula.charge_price_multiplier("AttackTesla"), 1.0)
-        self.assertIn("AttackTesla", formula.CHARGE_UP_EXCLUDED_TRAITS)
+    def test_tesla_now_joins_the_discount(self):
+        """W16 SUPERSEDES the old exclusion.
+
+        `AttackTesla` used to return 1.0, because a flat 0.75 would have paid a
+        Tesla Coil (a fifth of its cycle spent charging) the same as an Obelisk (a
+        third) — compensating one weakness twice. The discount is now proportional
+        to the measured share, so there is nothing left to exclude and the
+        exclusion set is retired empty.
+        """
+        self.assertEqual(formula.CHARGE_UP_EXCLUDED_TRAITS, frozenset())
+        self.assertIn("AttackTesla", formula.CHARGE_UP_TRAITS)
+
+    def test_discount_scales_with_the_measured_charge_share(self):
+        """The VERIFY table from W16, using each actor's real resolved values."""
+        obelisk = formula.charge_price_multiplier(
+            {"v": "AttackCharges", "ticks": 50}, 96)          # 34.2% -> the anchor
+        ra1_tesla = formula.charge_price_multiplier(
+            {"v": "AttackTesla", "ticks": 25, "cycle": 100})  # 20.0%
+        ra2_tesla = formula.charge_price_multiplier(
+            {"v": "AttackTesla", "ticks": 22, "cycle": 75})   # 22.7% (engine default 22)
+        railtower = formula.charge_price_multiplier(
+            {"v": "AttackTesla", "ticks": 12, "cycle": 120})  # 9.1%
+
+        self.assertAlmostEqual(obelisk, 0.75, places=3)       # anchors the ruling
+        self.assertGreater(railtower, ra2_tesla)              # least charge, least discount
+        self.assertGreater(railtower, ra1_tesla)
+        for m in (ra1_tesla, ra2_tesla, railtower):
+            self.assertGreater(m, 0.75)                       # all lighter than the Obelisk
+            self.assertLess(m, 1.0)                           # but all still discounted
+        # A LONGER charge than the anchor cannot buy more than the anchor's discount.
+        self.assertEqual(formula.charge_price_multiplier(
+            {"v": "AttackCharges", "ticks": 50, "cycle": 60}), 0.75)   # 45.5%, clamped
+
+    def test_unmeasurable_charge_falls_back_to_the_flat_rate(self):
+        """It charges; we just cannot see by how much.
+
+        Pricing it as if it did NOT charge would be the larger error, because a
+        price cut is a BUFF in value terms — over-paying a unit is not a safe
+        default.
+        """
+        self.assertEqual(formula.charge_price_multiplier("AttackTesla"), 0.75)
+        self.assertEqual(formula.charge_price_multiplier(
+            {"v": "AttackCharges", "ticks": None, "cycle": None}), 0.75)
 
     def test_suffixed_trait_still_matches(self):
         self.assertEqual(formula.charge_price_multiplier("AttackCharged@primary"), 0.75)
@@ -83,10 +120,21 @@ class ChargedUnitPricingTest(unittest.TestCase):
         self.assertAlmostEqual(plain, 800.0)          # anchor identity holds
         self.assertAlmostEqual(charged / plain, 0.75)
 
-    def test_tesla_actor_is_not_discounted(self):
+    def test_tesla_actor_is_discounted_in_proportion(self):
+        """W16: a real Tesla Coil pays LESS discount than the Obelisk, not none.
+
+        The unit carries its own cycle (`AttackTesla.ReloadDelay`), so the weapon's
+        reload is not consulted — which matters, because a Tesla Coil's armaments
+        reload every 3 ticks and using that would read as a 90% charge share.
+        """
         plain = self._price({})
-        tesla = self._price({"charge_up": {"v": "AttackTesla", "src": "inherited"}})
-        self.assertAlmostEqual(tesla, plain)
+        tesla = self._price({"charge_up": {"v": "AttackTesla", "ticks": 25,
+                                           "cycle": 100, "src": "inherited"}})
+        obelisk = self._price({"charge_up": {"v": "AttackCharges", "ticks": 50,
+                                             "cycle": 96, "src": "inherited"}})
+        self.assertLess(tesla, plain)                       # it IS discounted now
+        self.assertGreater(tesla, obelisk)                  # but less than the anchor
+        self.assertAlmostEqual(obelisk / plain, 0.75)
 
 
 if __name__ == "__main__":

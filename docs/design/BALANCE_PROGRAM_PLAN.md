@@ -44,7 +44,7 @@ status rather than keeping its own copy.
 | **W13** | Warhead system rebuild from the 2494-profile reference corpus | ⬜ READY | Claude | W1, W5 |
 | **W14** | ~~Renormalise `avg_versus`~~ — ✖ DROPPED, the multi-role premium is intended; folded into W13 rule 8b | ✖ DROPPED | — | — |
 | **W15** | `%`-twin fix + `reference_hp` → 200 000 — **PREREQUISITE for W17** | ✅ DONE | Claude | — |
-| **W16** | Charge-up discount PROPORTIONAL to real charge share (supersedes W4's flat 0.75×) | ⬜ READY | Claude | W4 |
+| **W16** | Charge-up discount PROPORTIONAL to real charge share (supersedes W4's flat 0.75×) | ✅ DONE | Claude | W4 ✅ |
 | **W17** | ~~Remove the 2000-damage grid~~ (done as a 200 grid in W15); retire FirepowerMultiplier as a fine-tuning knob | ⬜ READY (unblocked by W15) | Claude | W15 ✅ |
 | **W18** | Roll the 0.1% percentage unit out into yaml (`PercentageDenominator: 1000`, ×10 the values) | ⛔ BLOCKED | Claude | W15 ✅, **set B free** |
 | **W19** | Collapse the 195 `SpreadDamage` ExtraDamage chips into the main warhead (KEEP the 34 sniper `OpenToppedDamage`) | ⛔ BLOCKED | Claude | W13, **set B free** |
@@ -685,6 +685,41 @@ charge burden earns instead of a binary in/out. Retire `CHARGE_UP_EXCLUDED_TRAIT
 **VERIFY:** Obelisk == 0.75 (anchor); railtower (9%) closest to 1.0; RA2 Tesla (23%) and
 RA1 Tesla (20%) in between. Read charge values from the RESOLVED actor INCLUDING engine
 defaults — `InitialChargeDelay` defaults to 22.
+
+**✅ DONE. Measured across all 14 charging actors in the tree:**
+
+| actor | trait | ticks | cycle | share | multiplier |
+|---|---|---|---|---|---|
+| `td_nod_obeliskoflight` | AttackCharges | 50 | 96 | 34.2% | **0.750** (anchor) |
+| `ra2_soviets_teslacoil` | AttackTesla | 22 (default) | 75 | 22.7% | 0.834 |
+| `ra1_soviets_teslacoil` | AttackTesla | 25 | 100 | 20.0% | 0.854 |
+| `wc2_*_siegeengine` | AttackFrontalCharged | 20 | 100 | 16.7% | 0.878 |
+| `asianalliance_railtower` | AttackTesla | 12 | 120 | 9.1% | **0.934** |
+
+Every predicted share reproduced exactly. `ts_nod_obeliskoflight` (45.5%) clamps to 0.75,
+proving the clamp. `CHARGE_UP_EXCLUDED_TRAITS` is retired to an empty set and `AttackTesla`
+joins `CHARGE_UP_TRAITS`, as the item asked.
+
+⚠ **The cycle for `AttackTesla` is its OWN `ReloadDelay`, never the weapon's.** A Tesla
+Coil's armaments reload every 3 ticks (`ChargeDelay`), so using the weapon would read as a
+~90% charge share and hand it the full discount for nothing. The `ChargeLevel` family has
+no reload of its own and falls back to the LONGEST base-weapon reload — longest, because a
+charge gates the heavy shot, and the Terran siege tank's fast 37-tick secondary next to its
+sieged 148 would otherwise fake a huge share.
+
+⚠ **An actor whose charge cannot be measured keeps the flat 0.75, not 1.0** (2 of the 14:
+`ra1_allies_mobileradarjammer`, `terran_siegetank` — both have only condition-gated weapons,
+so there is no base reload to measure against). It charges; we just cannot see by how much,
+and pricing it as if it did not charge is the larger error — a price cut is a BUFF in value
+terms, so over-paying is not the safe default.
+
+⚠ **SEPARATE DEFECT FOUND AND GUARDED: a `--faction` extract silently staled 30 derived
+files.** `extract_stats --faction X` rewrites the GLOBAL `derived/_model.json` (its armor
+census and weights are measured across the whole roster) but regenerates only X's sidecar —
+so every other faction's `avg_versus`, `k` and `effective_dps` keep being computed against
+the old model. Nothing caught it: `audit_balance_drift` compares raw yaml to the RAW ledger
+and never looks at derived. Fixed here by a full re-extract (verified idempotent: a second
+run changes nothing), and `extract_stats` now prints a loud warning after any filtered run.
 
 ---
 
