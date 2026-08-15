@@ -34,19 +34,19 @@ ends (Heroic / Scout / Superheavy) by continuing the ladder's own step; the
 four aircraft classes are read off the vehicle ladder by weight
 (Fighter/Helicopter←Light, Bomber←Medium, Spaceship←Heavy).
 
-| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| `dta_classic` | 100 | — | — | — | 100 | — | 100 | 100 | 100 | 100 | — | — | — | 100 | — | 100 |
-| `dta_enhanced` | 100 | — | — | — | 100 | — | 100 | 100 | 100 | 100 | — | — | — | 100 | — | 100 |
-| `dta_globalcode` | 100 | — | — | — | 33.3333 | 50 | — | 66.6667 | 83.3333 | 25 | — | 41.6667 | 50 | — | 50 | 66.6667 |
-| `openra_td` | — | — | — | — | — | — | — | — | — | 100 | — | — | — | — | — | — |
-| `combined_arms` | 100 | — | — | — | 40.4 | 40.4 | — | 40.4 | 40.4 | 24 | — | 36 | 40.4 | — | 40.4 | 40.4 |
-| `combined_arms` | 100 | — | — | — | 45.3125 | 26.5625 | — | 7.8125 | 0 | 21.875 | — | 13.75 | 26.5625 | — | 26.5625 | 7.8125 |
-| `shattered_paradise` | — | — | — | — | — | — | — | — | — | 100 | — | — | — | — | — | — |
-| `shattered_paradise` | — | — | — | — | — | — | — | 100 | — | — | — | 0 | — | — | — | 100 |
-| `cnc_reloaded` | 100 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 |
-| `cnc_reloaded` | 100 | 83.3333 | 66.6667 | 50 | 100 | 80 | 60 | 66.6667 | 73.3333 | 66.6667 | 66.6667 | 66.6667 | 80 | 60 | 80 | 66.6667 |
-| _n sources_ | 7 | 2 | 2 | 2 | 7 | 5 | 4 | 8 | 7 | 7 | 2 | 6 | 5 | 4 | 5 | 8 |
+| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| `dta_classic` | 100 | — | — | — | 100 | — | 100 | 100 | 100 | 100 | — | — | — | 100 | — | 100 | — |
+| `dta_enhanced` | 100 | — | — | — | 100 | — | 100 | 100 | 100 | 100 | — | — | — | 100 | — | 100 | — |
+| `dta_globalcode` | 100 | — | — | — | 33.3333 | 50 | — | 66.6667 | 83.3333 | 25 | — | 41.6667 | 50 | — | 50 | 66.6667 | — |
+| `openra_td` | — | — | — | — | — | — | — | — | — | 100 | — | — | — | — | — | — | — |
+| `combined_arms` | 100 | — | — | — | 40.4 | 40.4 | — | 40.4 | 40.4 | 24 | — | 36 | 40.4 | — | 40.4 | 40.4 | — |
+| `combined_arms` | 100 | — | — | — | 45.3125 | 26.5625 | — | 7.8125 | 0 | 21.875 | — | 13.75 | 26.5625 | — | 26.5625 | 7.8125 | — |
+| `shattered_paradise` | — | — | — | — | — | — | — | — | — | 100 | — | — | — | — | — | — | — |
+| `shattered_paradise` | — | — | — | — | — | — | — | 100 | — | — | — | 0 | — | — | — | 100 | — |
+| `cnc_reloaded` | 100 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | — |
+| `cnc_reloaded` | 100 | 83.3333 | 66.6667 | 50 | 100 | 80 | 60 | 66.6667 | 73.3333 | 66.6667 | 66.6667 | 66.6667 | 80 | 60 | 80 | 66.6667 | — |
+| _n sources_ | 7 | 2 | 2 | 2 | 7 | 5 | 4 | 8 | 7 | 7 | 2 | 6 | 5 | 4 | 5 | 8 | 0 |
 
 ### Table C — three ways to aggregate, vs Cameo today
 
@@ -57,12 +57,12 @@ for MULTIPLIERS (averaging x2 and x0.5 arithmetically invents a net buff
 of 1.25 — geometrically it is 1.0). A wide mean-vs-gmean gap means the
 sources disagree about that armor.
 
-| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | span |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| median | 100 | 75 | 66.7 | 58.3 | 66.7 | 50 | 83.3 | 66.7 | 73.3 | 66.7 | 66.7 | 38.8 | 50 | 83.3 | 50 | 66.7 | 61 |
-| arithmetic mean | 100 | 75 | 66.7 | 58.3 | 69.4 | 52.7 | 81.7 | 68.5 | 66.2 | 57.7 | 66.7 | 37.5 | 52.7 | 81.7 | 52.7 | 68.5 | 62 |
-| geometric mean | 100 | 74.5 | 66.7 | 57.7 | 63.3 | 49.1 | 79.5 | 55.8 | 40 | 48 | 66.7 | 21.2 | 49.1 | 79.5 | 49.1 | 55.8 | 79 |
-| **CAMEO today** | 48 | 64 | 80 | 96 | 40 | 52 | 68 | 84 | 100 | 56 | 72 | 88 | 44 | 60 | 76 | 92 | 60 |
+| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne | span |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| median | 100 | 75 | 66.7 | 58.3 | 66.7 | 50 | 83.3 | 66.7 | 73.3 | 66.7 | 66.7 | 38.8 | 50 | 83.3 | 50 | 66.7 | — | 61 |
+| arithmetic mean | 100 | 75 | 66.7 | 58.3 | 69.4 | 52.7 | 81.7 | 68.5 | 66.2 | 57.7 | 66.7 | 37.5 | 52.7 | 81.7 | 52.7 | 68.5 | — | 62 |
+| geometric mean | 100 | 74.5 | 66.7 | 57.7 | 63.3 | 49.1 | 79.5 | 55.8 | 40 | 48 | 66.7 | 21.2 | 49.1 | 79.5 | 49.1 | 55.8 | — | 79 |
+| **CAMEO today** | 48 | 64 | 80 | 96 | 40 | 52 | 68 | 84 | 100 | 56 | 72 | 88 | 44 | 60 | 76 | 92 | — | 60 |
 
 ### Table D — PROPOSED: field magnitudes, law order (`light`-favouring)
 
@@ -78,11 +78,11 @@ write `none 25 · flak 25 · plate 15`, i.e. armour piercing doing LESS to
 plated infantry than to unplated. It is Westwood's design, faithfully
 cloned. Cameo's law inverts it so the weapon stays readable.
 
-| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| field median (raw) | 100 | 75 | 66.7 | 58.3 | 66.7 | 50 | 83.3 | 66.7 | 73.3 | 66.7 | 66.7 | 38.8 | 50 | 83.3 | 50 | 66.7 |
-| **PROPOSED (law order)** | **100** | **65.3** | **53.8** | **41.3** | **76.8** | **62.9** | **52.8** | **51.8** | **30.6** | **50.8** | **49.8** | **15** | **75.8** | **48.8** | **29.6** | **28.6** |
-| Cameo today | 48 | 64 | 80 | 96 | 40 | 52 | 68 | 84 | 100 | 56 | 72 | 88 | 44 | 60 | 76 | 92 |
+| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| field median (raw) | 100 | 75 | 66.7 | 58.3 | 66.7 | 50 | 83.3 | 66.7 | 73.3 | 66.7 | 66.7 | 38.8 | 50 | 83.3 | 50 | 66.7 | — |
+| **PROPOSED (law order)** | **100** | **65.3** | **53.8** | **41.3** | **76.8** | **62.9** | **52.8** | **51.8** | **30.6** | **50.8** | **49.8** | **15** | **75.8** | **48.8** | **29.6** | **28.6** | **22.7** |
+| Cameo today | 48 | 64 | 80 | 96 | 40 | 52 | 68 | 84 | 100 | 56 | 72 | 88 | 44 | 60 | 76 | 92 | — |
 
 **Reference span 61** (min 38.8 · max 100).
 **Cameo span 60** — FLATTER than the field for this concept.
@@ -124,29 +124,29 @@ ends (Heroic / Scout / Superheavy) by continuing the ladder's own step; the
 four aircraft classes are read off the vehicle ladder by weight
 (Fighter/Helicopter←Light, Bomber←Medium, Spaceship←Heavy).
 
-| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| `openra_ra` | — | — | — | — | — | — | — | — | — | 100 | — | — | — | — | — | — |
-| `openra_ra` | — | — | — | — | — | — | — | 82.1918 | — | 100 | — | — | — | — | — | 82.1918 |
-| `openra_ra` | 100 | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
-| `ra2_vanilla` | 50 | 50 | 50 | 50 | 100 | 42.5 | 50 | 50 | 50 | 25 | 25 | 25 | 42.5 | 50 | 42.5 | 50 |
-| `romanovs_vengeance` | 100 | 100 | 100 | 100 | 10 | 10 | 10 | 10 | 10 | 10 | 10 | 9 | 10 | 10 | 10 | 10 |
-| `romanovs_vengeance` | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 90 | 100 | 100 | 100 | 100 |
-| `dta_classic` | 100 | — | — | — | 100 | — | 100 | 100 | 100 | 100 | — | — | — | 100 | — | 100 |
-| `dta_globalcode` | 100 | — | — | — | 16.6667 | 33.3333 | — | 50 | 66.6667 | 16.6667 | — | 33.3333 | 33.3333 | — | 33.3333 | 50 |
-| `combined_arms` | — | — | — | — | — | — | — | — | — | 80 | — | 100 | — | — | — | — |
-| `combined_arms` | 100 | — | — | — | 60.4167 | 45.8333 | — | 31.25 | 16.6667 | 25 | — | 29.1667 | 45.8333 | — | 45.8333 | 31.25 |
-| `combined_arms` | 100 | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
-| `shattered_paradise` | — | — | — | — | — | — | — | — | — | 100 | — | — | — | — | — | — |
-| `shattered_paradise` | — | — | — | — | — | — | — | 82.1918 | — | 100 | — | — | — | — | — | 82.1918 |
-| `shattered_paradise` | 100 | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
-| `cnc_reloaded` | 50 | 50 | 50 | 50 | 100 | 42.5 | 50 | 50 | 50 | 25 | 25 | 25 | 42.5 | 50 | 42.5 | 50 |
-| `mental_omega` | 60 | 55 | 50 | 45 | 100 | 42.5 | 50 | 50 | 50 | 12.5 | 12.5 | 12.5 | 42.5 | 50 | 42.5 | 50 |
-| `mental_omega` | 60 | 55 | 50 | 45 | 100 | 42.5 | 50 | 50 | 50 | 12.5 | 12.5 | 12.5 | 42.5 | 50 | 42.5 | 50 |
-| `ra2_reborn` | 50 | 50 | 50 | 50 | 100 | 42.5 | 50 | 50 | 50 | 25 | 25 | 25 | 42.5 | 50 | 42.5 | 50 |
-| `red_resurrection` | 100 | 100 | 75 | 50 | 70.8333 | 70.8333 | 83.3333 | 75 | 66.6667 | 41.6667 | 37.5 | 33.3333 | 70.8333 | 83.3333 | 70.8333 | 75 |
-| `yr_vanilla` | 50 | 50 | 50 | 50 | 100 | 42.5 | 50 | 50 | 50 | 25 | 25 | 25 | 42.5 | 50 | 42.5 | 50 |
-| _n sources_ | 12 | 9 | 9 | 9 | 12 | 11 | 10 | 12 | 12 | 12 | 9 | 11 | 11 | 10 | 11 | 12 |
+| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| `openra_ra` | — | — | — | — | — | — | — | — | — | 100 | — | — | — | — | — | — | — |
+| `openra_ra` | — | — | — | — | — | — | — | 82.1918 | — | 100 | — | — | — | — | — | 82.1918 | — |
+| `openra_ra` | 100 | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `ra2_vanilla` | 50 | 50 | 50 | 50 | 100 | 42.5 | 50 | 50 | 50 | 25 | 25 | 25 | 42.5 | 50 | 42.5 | 50 | — |
+| `romanovs_vengeance` | 100 | 100 | 100 | 100 | 10 | 10 | 10 | 10 | 10 | 10 | 10 | 9 | 10 | 10 | 10 | 10 | — |
+| `romanovs_vengeance` | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 90 | 100 | 100 | 100 | 100 | — |
+| `dta_classic` | 100 | — | — | — | 100 | — | 100 | 100 | 100 | 100 | — | — | — | 100 | — | 100 | — |
+| `dta_globalcode` | 100 | — | — | — | 16.6667 | 33.3333 | — | 50 | 66.6667 | 16.6667 | — | 33.3333 | 33.3333 | — | 33.3333 | 50 | — |
+| `combined_arms` | — | — | — | — | — | — | — | — | — | 80 | — | 100 | — | — | — | — | — |
+| `combined_arms` | 100 | — | — | — | 60.4167 | 45.8333 | — | 31.25 | 16.6667 | 25 | — | 29.1667 | 45.8333 | — | 45.8333 | 31.25 | — |
+| `combined_arms` | 100 | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `shattered_paradise` | — | — | — | — | — | — | — | — | — | 100 | — | — | — | — | — | — | — |
+| `shattered_paradise` | — | — | — | — | — | — | — | 82.1918 | — | 100 | — | — | — | — | — | 82.1918 | — |
+| `shattered_paradise` | 100 | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `cnc_reloaded` | 50 | 50 | 50 | 50 | 100 | 42.5 | 50 | 50 | 50 | 25 | 25 | 25 | 42.5 | 50 | 42.5 | 50 | — |
+| `mental_omega` | 60 | 55 | 50 | 45 | 100 | 42.5 | 50 | 50 | 50 | 12.5 | 12.5 | 12.5 | 42.5 | 50 | 42.5 | 50 | — |
+| `mental_omega` | 60 | 55 | 50 | 45 | 100 | 42.5 | 50 | 50 | 50 | 12.5 | 12.5 | 12.5 | 42.5 | 50 | 42.5 | 50 | — |
+| `ra2_reborn` | 50 | 50 | 50 | 50 | 100 | 42.5 | 50 | 50 | 50 | 25 | 25 | 25 | 42.5 | 50 | 42.5 | 50 | — |
+| `red_resurrection` | 100 | 100 | 75 | 50 | 70.8333 | 70.8333 | 83.3333 | 75 | 66.6667 | 41.6667 | 37.5 | 33.3333 | 70.8333 | 83.3333 | 70.8333 | 75 | — |
+| `yr_vanilla` | 50 | 50 | 50 | 50 | 100 | 42.5 | 50 | 50 | 50 | 25 | 25 | 25 | 42.5 | 50 | 42.5 | 50 | — |
+| _n sources_ | 12 | 9 | 9 | 9 | 12 | 11 | 10 | 12 | 12 | 12 | 9 | 11 | 11 | 10 | 11 | 12 | 0 |
 
 ### Table C — three ways to aggregate, vs Cameo today
 
@@ -157,12 +157,12 @@ for MULTIPLIERS (averaging x2 and x0.5 arithmetically invents a net buff
 of 1.25 — geometrically it is 1.0). A wide mean-vs-gmean gap means the
 sources disagree about that armor.
 
-| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | span |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| median | 80 | 55 | 50 | 50 | 100 | 42.5 | 50 | 50 | 50 | 25 | 25 | 25 | 42.5 | 50 | 42.5 | 50 | 75 |
-| arithmetic mean | 76.7 | 67.8 | 63.9 | 60 | 79.8 | 46.8 | 59.3 | 55.5 | 55 | 34.9 | 30.3 | 29.1 | 46.8 | 59.3 | 46.8 | 55.5 | 51 |
-| geometric mean | 72.9 | 64.3 | 61 | 57 | 66.2 | 41.6 | 51.5 | 48.8 | 47 | 26.2 | 23.6 | 24.1 | 41.6 | 51.5 | 41.6 | 48.8 | 49 |
-| **CAMEO today** | 72 | 80 | 88 | 96 | 68 | 76 | 84 | 92 | 100 | 56 | 60 | 64 | 40 | 44 | 48 | 52 | 60 |
+| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne | span |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| median | 80 | 55 | 50 | 50 | 100 | 42.5 | 50 | 50 | 50 | 25 | 25 | 25 | 42.5 | 50 | 42.5 | 50 | — | 75 |
+| arithmetic mean | 76.7 | 67.8 | 63.9 | 60 | 79.8 | 46.8 | 59.3 | 55.5 | 55 | 34.9 | 30.3 | 29.1 | 46.8 | 59.3 | 46.8 | 55.5 | — | 51 |
+| geometric mean | 72.9 | 64.3 | 61 | 57 | 66.2 | 41.6 | 51.5 | 48.8 | 47 | 26.2 | 23.6 | 24.1 | 41.6 | 51.5 | 41.6 | 48.8 | — | 49 |
+| **CAMEO today** | 72 | 80 | 88 | 96 | 68 | 76 | 84 | 92 | 100 | 56 | 60 | 64 | 40 | 44 | 48 | 52 | — | 60 |
 
 ### Table D — PROPOSED: field magnitudes, law order (`heavy`-favouring)
 
@@ -178,11 +178,11 @@ write `none 25 · flak 25 · plate 15`, i.e. armour piercing doing LESS to
 plated infantry than to unplated. It is Westwood's design, faithfully
 cloned. Cameo's law inverts it so the weapon stays readable.
 
-| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| field median (raw) | 80 | 55 | 50 | 50 | 100 | 42.5 | 50 | 50 | 50 | 25 | 25 | 25 | 42.5 | 50 | 42.5 | 50 |
-| **PROPOSED (law order)** | **43.3** | **49** | **77.3** | **26.9** | **34.8** | **40.3** | **41.3** | **42.3** | **100** | **13** | **14** | **15** | **32.8** | **33.8** | **38.3** | **39.3** |
-| Cameo today | 72 | 80 | 88 | 96 | 68 | 76 | 84 | 92 | 100 | 56 | 60 | 64 | 40 | 44 | 48 | 52 |
+| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| field median (raw) | 80 | 55 | 50 | 50 | 100 | 42.5 | 50 | 50 | 50 | 25 | 25 | 25 | 42.5 | 50 | 42.5 | 50 | — |
+| **PROPOSED (law order)** | **43.3** | **49** | **77.3** | **26.9** | **34.8** | **40.3** | **41.3** | **42.3** | **100** | **13** | **14** | **15** | **32.8** | **33.8** | **38.3** | **39.3** | **13.3** |
+| Cameo today | 72 | 80 | 88 | 96 | 68 | 76 | 84 | 92 | 100 | 56 | 60 | 64 | 40 | 44 | 48 | 52 | — |
 
 **Reference span 75** (min 25 · max 100).
 **Cameo span 60** — FLATTER than the field for this concept.
@@ -216,21 +216,21 @@ ends (Heroic / Scout / Superheavy) by continuing the ladder's own step; the
 four aircraft classes are read off the vehicle ladder by weight
 (Fighter/Helicopter←Light, Bomber←Medium, Spaceship←Heavy).
 
-| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| `ra2_vanilla` | 100 | 50 | 50 | 50 | 100 | 50 | 50 | 50 | 50 | 25 | 25 | 25 | 50 | 50 | 50 | 50 |
-| `ra2_vanilla` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| `romanovs_vengeance` | 100 | 100 | 100 | 100 | 20 | 10 | 10 | 10 | 10 | 10 | 10 | 9 | 10 | 10 | 10 | 10 |
-| `cnc_reloaded` | 100 | 50 | 50 | 50 | 100 | 50 | 50 | 50 | 50 | 25 | 25 | 25 | 50 | 50 | 50 | 50 |
-| `cnc_reloaded` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| `mental_omega` | 100 | 60 | 60 | 60 | 100 | 50 | 50 | 50 | 50 | 25 | 25 | 25 | 50 | 50 | 50 | 50 |
-| `ra2_reborn` | 100 | 50 | 50 | 50 | 100 | 50 | 50 | 50 | 50 | 25 | 25 | 25 | 50 | 50 | 50 | 50 |
-| `ra2_reborn` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| `red_resurrection` | 66.6667 | 55.5556 | 47.2222 | 38.8889 | 83.3333 | 83.3333 | 100 | 75 | 50 | 27.7778 | 27.7778 | 25 | 83.3333 | 100 | 83.3333 | 75 |
-| `red_resurrection` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| `yr_vanilla` | 100 | 50 | 50 | 50 | 100 | 50 | 50 | 50 | 50 | 25 | 25 | 25 | 50 | 50 | 50 | 50 |
-| `yr_vanilla` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| _n sources_ | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 |
+| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| `ra2_vanilla` | 100 | 50 | 50 | 50 | 100 | 50 | 50 | 50 | 50 | 25 | 25 | 25 | 50 | 50 | 50 | 50 | — |
+| `ra2_vanilla` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
+| `romanovs_vengeance` | 100 | 100 | 100 | 100 | 20 | 10 | 10 | 10 | 10 | 10 | 10 | 9 | 10 | 10 | 10 | 10 | — |
+| `cnc_reloaded` | 100 | 50 | 50 | 50 | 100 | 50 | 50 | 50 | 50 | 25 | 25 | 25 | 50 | 50 | 50 | 50 | — |
+| `cnc_reloaded` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
+| `mental_omega` | 100 | 60 | 60 | 60 | 100 | 50 | 50 | 50 | 50 | 25 | 25 | 25 | 50 | 50 | 50 | 50 | — |
+| `ra2_reborn` | 100 | 50 | 50 | 50 | 100 | 50 | 50 | 50 | 50 | 25 | 25 | 25 | 50 | 50 | 50 | 50 | — |
+| `ra2_reborn` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
+| `red_resurrection` | 66.6667 | 55.5556 | 47.2222 | 38.8889 | 83.3333 | 83.3333 | 100 | 75 | 50 | 27.7778 | 27.7778 | 25 | 83.3333 | 100 | 83.3333 | 75 | — |
+| `red_resurrection` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
+| `yr_vanilla` | 100 | 50 | 50 | 50 | 100 | 50 | 50 | 50 | 50 | 25 | 25 | 25 | 50 | 50 | 50 | 50 | — |
+| `yr_vanilla` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
+| _n sources_ | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 0 |
 
 ### Table C — three ways to aggregate, vs Cameo today
 
@@ -241,12 +241,12 @@ for MULTIPLIERS (averaging x2 and x0.5 arithmetically invents a net buff
 of 1.25 — geometrically it is 1.0). A wide mean-vs-gmean gap means the
 sources disagree about that armor.
 
-| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | span |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| median | 83.3 | 50 | 48.6 | 44.4 | 51.7 | 30 | 30 | 30 | 30 | 17.5 | 17.5 | 17 | 30 | 30 | 30 | 30 | 66 |
-| arithmetic mean | 55.6 | 34.6 | 33.9 | 33.2 | 50.3 | 28.6 | 30 | 27.9 | 25.8 | 13.6 | 13.6 | 13.2 | 28.6 | 30 | 28.6 | 27.9 | 42 |
-| geometric mean | 14.2 | 10.6 | 10.5 | 10.3 | 12.6 | 8.9 | 9.1 | 8.9 | 8.6 | 6.1 | 6.1 | 6 | 8.9 | 9.1 | 8.9 | 8.9 | 8 |
-| **CAMEO today** | 96 | 84 | 72 | 60 | 100 | 88 | 76 | 64 | 56 | 92 | 80 | 68 | 52 | 48 | 44 | 40 | 60 |
+| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne | span |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| median | 83.3 | 50 | 48.6 | 44.4 | 51.7 | 30 | 30 | 30 | 30 | 17.5 | 17.5 | 17 | 30 | 30 | 30 | 30 | — | 66 |
+| arithmetic mean | 55.6 | 34.6 | 33.9 | 33.2 | 50.3 | 28.6 | 30 | 27.9 | 25.8 | 13.6 | 13.6 | 13.2 | 28.6 | 30 | 28.6 | 27.9 | — | 42 |
+| geometric mean | 14.2 | 10.6 | 10.5 | 10.3 | 12.6 | 8.9 | 9.1 | 8.9 | 8.6 | 6.1 | 6.1 | 6 | 8.9 | 9.1 | 8.9 | 8.9 | — | 8 |
+| **CAMEO today** | 96 | 84 | 72 | 60 | 100 | 88 | 76 | 64 | 56 | 92 | 80 | 68 | 52 | 48 | 44 | 40 | — | 60 |
 
 ### Table D — PROPOSED: field magnitudes, law order (`light`-favouring)
 
@@ -257,11 +257,11 @@ ladder reads the way the law requires (W13 rule 6).
 
 ✅ The field median already obeys the law here — the reorder is a no-op.
 
-| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| field median (raw) | 83.3 | 50 | 48.6 | 44.4 | 51.7 | 30 | 30 | 30 | 30 | 17.5 | 17.5 | 17 | 30 | 30 | 30 | 30 |
-| **PROPOSED (law order)** | **100** | **57.3** | **55.5** | **33** | **59.5** | **31.7** | **30.7** | **29.7** | **28.7** | **15.6** | **14.6** | **13.6** | **27.7** | **26.7** | **25.7** | **24.7** |
-| Cameo today | 96 | 84 | 72 | 60 | 100 | 88 | 76 | 64 | 56 | 92 | 80 | 68 | 52 | 48 | 44 | 40 |
+| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| field median (raw) | 83.3 | 50 | 48.6 | 44.4 | 51.7 | 30 | 30 | 30 | 30 | 17.5 | 17.5 | 17 | 30 | 30 | 30 | 30 | — |
+| **PROPOSED (law order)** | **100** | **57.3** | **55.5** | **33** | **59.5** | **31.7** | **30.7** | **29.7** | **28.7** | **15.6** | **14.6** | **13.6** | **27.7** | **26.7** | **25.7** | **24.7** | **15.3** |
+| Cameo today | 96 | 84 | 72 | 60 | 100 | 88 | 76 | 64 | 56 | 92 | 80 | 68 | 52 | 48 | 44 | 40 | — |
 
 **Reference span 66** (min 17 · max 83.3).
 **Cameo span 60** — FLATTER than the field for this concept.
@@ -297,23 +297,23 @@ ends (Heroic / Scout / Superheavy) by continuing the ladder's own step; the
 four aircraft classes are read off the vehicle ladder by weight
 (Fighter/Helicopter←Light, Bomber←Medium, Spaceship←Heavy).
 
-| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| `openra_d2k` | 40 | — | — | — | — | — | — | 100 | — | 80 | — | — | — | — | — | 100 |
-| `openra_ra` | 40 | — | — | — | — | 100 | — | — | — | 100 | — | 66.6667 | 100 | — | 100 | — |
-| `ra2_vanilla` | 100 | 90 | 80 | 70 | 80 | 70 | 35 | 35 | 35 | 75 | 40 | 20 | 70 | 35 | 70 | 35 |
-| `dta_classic` | 100 | — | — | — | 100 | — | 64.3678 | 28.7356 | 0 | 86.2069 | — | — | — | 64.3678 | — | 28.7356 |
-| `openra_td` | 100 | — | — | — | 106.429 | 80 | — | 53.5714 | 27.1429 | 71.4286 | — | 53.5714 | 80 | — | 80 | 53.5714 |
-| `combined_arms` | 33.3333 | — | — | — | — | 100 | — | — | — | 83.3333 | — | 38.8889 | 100 | — | 100 | — |
-| `openra_ts` | 25 | — | — | — | 50 | 75 | — | 100 | 125 | 65 | — | 60 | 75 | — | 75 | 100 |
-| `shattered_paradise` | 25 | — | — | — | 50 | 75 | — | 100 | 125 | 65 | — | 60 | 75 | — | 75 | 100 |
-| `shattered_paradise` | 100 | — | — | — | 106.429 | 80 | — | 53.5714 | 27.1429 | 71.4286 | — | 53.5714 | 80 | — | 80 | 53.5714 |
-| `cnc_reloaded` | 100 | 100 | 100 | 100 | 80 | 70 | 70 | 35 | 0 | 75 | 40 | 20 | 70 | 70 | 70 | 35 |
-| `mental_omega` | 100 | 100 | 100 | 100 | 80 | 60 | 45 | 30 | 15 | 65 | 40 | 30 | 60 | 45 | 60 | 30 |
-| `ra2_reborn` | 100 | 100 | 100 | 100 | 80 | 70 | 70 | 35 | 0 | 75 | 40 | 20 | 70 | 70 | 70 | 35 |
-| `red_resurrection` | 100 | 100 | 100 | 100 | 80 | 70 | 70 | 35 | 0 | 75 | 40 | 20 | 70 | 70 | 70 | 35 |
-| `yr_vanilla` | 100 | 100 | 100 | 100 | 80 | 70 | 70 | 35 | 0 | 75 | 40 | 20 | 70 | 70 | 70 | 35 |
-| _n sources_ | 14 | 6 | 6 | 6 | 11 | 12 | 7 | 12 | 11 | 14 | 6 | 12 | 12 | 7 | 12 | 12 |
+| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| `openra_d2k` | 40 | — | — | — | — | — | — | 100 | — | 80 | — | — | — | — | — | 100 | — |
+| `openra_ra` | 40 | — | — | — | — | 100 | — | — | — | 100 | — | 66.6667 | 100 | — | 100 | — | — |
+| `ra2_vanilla` | 100 | 90 | 80 | 70 | 80 | 70 | 35 | 35 | 35 | 75 | 40 | 20 | 70 | 35 | 70 | 35 | — |
+| `dta_classic` | 100 | — | — | — | 100 | — | 64.3678 | 28.7356 | 0 | 86.2069 | — | — | — | 64.3678 | — | 28.7356 | — |
+| `openra_td` | 100 | — | — | — | 106.429 | 80 | — | 53.5714 | 27.1429 | 71.4286 | — | 53.5714 | 80 | — | 80 | 53.5714 | — |
+| `combined_arms` | 33.3333 | — | — | — | — | 100 | — | — | — | 83.3333 | — | 38.8889 | 100 | — | 100 | — | — |
+| `openra_ts` | 25 | — | — | — | 50 | 75 | — | 100 | 125 | 65 | — | 60 | 75 | — | 75 | 100 | — |
+| `shattered_paradise` | 25 | — | — | — | 50 | 75 | — | 100 | 125 | 65 | — | 60 | 75 | — | 75 | 100 | — |
+| `shattered_paradise` | 100 | — | — | — | 106.429 | 80 | — | 53.5714 | 27.1429 | 71.4286 | — | 53.5714 | 80 | — | 80 | 53.5714 | — |
+| `cnc_reloaded` | 100 | 100 | 100 | 100 | 80 | 70 | 70 | 35 | 0 | 75 | 40 | 20 | 70 | 70 | 70 | 35 | — |
+| `mental_omega` | 100 | 100 | 100 | 100 | 80 | 60 | 45 | 30 | 15 | 65 | 40 | 30 | 60 | 45 | 60 | 30 | — |
+| `ra2_reborn` | 100 | 100 | 100 | 100 | 80 | 70 | 70 | 35 | 0 | 75 | 40 | 20 | 70 | 70 | 70 | 35 | — |
+| `red_resurrection` | 100 | 100 | 100 | 100 | 80 | 70 | 70 | 35 | 0 | 75 | 40 | 20 | 70 | 70 | 70 | 35 | — |
+| `yr_vanilla` | 100 | 100 | 100 | 100 | 80 | 70 | 70 | 35 | 0 | 75 | 40 | 20 | 70 | 70 | 70 | 35 | — |
+| _n sources_ | 14 | 6 | 6 | 6 | 11 | 12 | 7 | 12 | 11 | 14 | 6 | 12 | 12 | 7 | 12 | 12 | 0 |
 
 ### Table C — three ways to aggregate, vs Cameo today
 
@@ -324,12 +324,12 @@ for MULTIPLIERS (averaging x2 and x0.5 arithmetically invents a net buff
 of 1.25 — geometrically it is 1.0). A wide mean-vs-gmean gap means the
 sources disagree about that armor.
 
-| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | span |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| median | 100 | 100 | 100 | 100 | 80 | 72.5 | 70 | 35 | 15 | 75 | 40 | 34.4 | 72.5 | 70 | 72.5 | 35 | 85 |
-| arithmetic mean | 76 | 98.3 | 96.7 | 95 | 81.2 | 76.7 | 60.6 | 53.4 | 32.2 | 75.9 | 40 | 38.6 | 76.7 | 60.6 | 76.7 | 53.4 | 66 |
-| geometric mean | 66.5 | 98.3 | 96.3 | 94.2 | 78.9 | 75.9 | 58.8 | 47.4 | 7.7 | 75.4 | 40 | 34.2 | 75.9 | 58.8 | 75.9 | 47.4 | 91 |
-| **CAMEO today** | 60 | 55 | 50 | 45 | 100 | 90 | 80 | 70 | 65 | 95 | 85 | 75 | 40 | 35 | 30 | 25 | 75 |
+| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne | span |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| median | 100 | 100 | 100 | 100 | 80 | 72.5 | 70 | 35 | 15 | 75 | 40 | 34.4 | 72.5 | 70 | 72.5 | 35 | — | 85 |
+| arithmetic mean | 76 | 98.3 | 96.7 | 95 | 81.2 | 76.7 | 60.6 | 53.4 | 32.2 | 75.9 | 40 | 38.6 | 76.7 | 60.6 | 76.7 | 53.4 | — | 66 |
+| geometric mean | 66.5 | 98.3 | 96.3 | 94.2 | 78.9 | 75.9 | 58.8 | 47.4 | 7.7 | 75.4 | 40 | 34.2 | 75.9 | 58.8 | 75.9 | 47.4 | — | 91 |
+| **CAMEO today** | 60 | 55 | 50 | 45 | 100 | 90 | 80 | 70 | 65 | 95 | 85 | 75 | 40 | 35 | 30 | 25 | — | 75 |
 
 ### Table D — PROPOSED: field magnitudes, law order (`light`-favouring)
 
@@ -345,11 +345,11 @@ write `none 25 · flak 25 · plate 15`, i.e. armour piercing doing LESS to
 plated infantry than to unplated. It is Westwood's design, faithfully
 cloned. Cameo's law inverts it so the weapon stays readable.
 
-| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| field median (raw) | 100 | 100 | 100 | 100 | 80 | 72.5 | 70 | 35 | 15 | 75 | 40 | 34.4 | 72.5 | 70 | 72.5 | 35 |
-| **PROPOSED (law order)** | **100** | **99** | **98** | **78.4** | **80** | **72.5** | **70** | **35** | **15** | **75** | **40** | **33** | **71.5** | **70.5** | **69** | **34** |
-| Cameo today | 60 | 55 | 50 | 45 | 100 | 90 | 80 | 70 | 65 | 95 | 85 | 75 | 40 | 35 | 30 | 25 |
+| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| field median (raw) | 100 | 100 | 100 | 100 | 80 | 72.5 | 70 | 35 | 15 | 75 | 40 | 34.4 | 72.5 | 70 | 72.5 | 35 | — |
+| **PROPOSED (law order)** | **100** | **99** | **98** | **78.4** | **80** | **72.5** | **70** | **35** | **15** | **75** | **40** | **33** | **71.5** | **70.5** | **69** | **34** | **55.2** |
+| Cameo today | 60 | 55 | 50 | 45 | 100 | 90 | 80 | 70 | 65 | 95 | 85 | 75 | 40 | 35 | 30 | 25 | — |
 
 **Reference span 85** (min 15 · max 100).
 **Cameo span 75** — FLATTER than the field for this concept.
@@ -381,19 +381,19 @@ ends (Heroic / Scout / Superheavy) by continuing the ladder's own step; the
 four aircraft classes are read off the vehicle ladder by weight
 (Fighter/Helicopter←Light, Bomber←Medium, Spaceship←Heavy).
 
-| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| `ra2_vanilla` | 25 | 25 | 25 | 25 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 |
-| `romanovs_vengeance` | 100 | 100 | 50 | 0 | — | — | — | — | — | — | — | — | — | — | — | — |
-| `dta_classic` | 19 | — | — | — | 50 | — | 75 | 100 | 125 | 75 | — | — | — | 75 | — | 100 |
-| `dta_enhanced` | 10 | — | — | — | 50 | — | 75 | 100 | 125 | 75 | — | — | — | 75 | — | 100 |
-| `shattered_paradise` | — | — | — | — | 100 | 100 | — | 100 | 100 | — | — | 35 | 100 | — | 100 | 100 |
-| `cnc_reloaded` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 |
-| `mental_omega` | 20 | 20 | 20 | 20 | 30 | 100 | 90 | 80 | 70 | 55 | 30 | 55 | 100 | 90 | 100 | 80 |
-| `ra2_reborn` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 |
-| `red_resurrection` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 |
-| `yr_vanilla` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 |
-| _n sources_ | 9 | 7 | 7 | 7 | 9 | 7 | 8 | 9 | 9 | 8 | 6 | 7 | 7 | 8 | 7 | 9 |
+| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| `ra2_vanilla` | 25 | 25 | 25 | 25 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | — |
+| `romanovs_vengeance` | 100 | 100 | 50 | 0 | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `dta_classic` | 19 | — | — | — | 50 | — | 75 | 100 | 125 | 75 | — | — | — | 75 | — | 100 | — |
+| `dta_enhanced` | 10 | — | — | — | 50 | — | 75 | 100 | 125 | 75 | — | — | — | 75 | — | 100 | — |
+| `shattered_paradise` | — | — | — | — | 100 | 100 | — | 100 | 100 | — | — | 35 | 100 | — | 100 | 100 | — |
+| `cnc_reloaded` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | — |
+| `mental_omega` | 20 | 20 | 20 | 20 | 30 | 100 | 90 | 80 | 70 | 55 | 30 | 55 | 100 | 90 | 100 | 80 | — |
+| `ra2_reborn` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | — |
+| `red_resurrection` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | — |
+| `yr_vanilla` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | — |
+| _n sources_ | 9 | 7 | 7 | 7 | 9 | 7 | 8 | 9 | 9 | 8 | 6 | 7 | 7 | 8 | 7 | 9 | 0 |
 
 ### Table C — three ways to aggregate, vs Cameo today
 
@@ -404,12 +404,12 @@ for MULTIPLIERS (averaging x2 and x0.5 arithmetically invents a net buff
 of 1.25 — geometrically it is 1.0). A wide mean-vs-gmean gap means the
 sources disagree about that armor.
 
-| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | span |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| median | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | 95 |
-| arithmetic mean | 30.4 | 35 | 22.1 | 9.3 | 58.9 | 82.1 | 92.5 | 97.8 | 102.2 | 66.2 | 42.5 | 55.7 | 82.1 | 92.5 | 82.1 | 97.8 | 93 |
-| geometric mean | 24.9 | 29.5 | 20 | 6.1 | 56.5 | 81.4 | 91.8 | 97.6 | 101 | 66 | 42.1 | 54.9 | 81.4 | 91.8 | 81.4 | 97.6 | 95 |
-| **CAMEO today** | 45 | 50 | 55 | 60 | 80 | 85 | 90 | 95 | 100 | 65 | 70 | 75 | 25 | 30 | 35 | 40 | 75 |
+| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne | span |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| median | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | — | 95 |
+| arithmetic mean | 30.4 | 35 | 22.1 | 9.3 | 58.9 | 82.1 | 92.5 | 97.8 | 102.2 | 66.2 | 42.5 | 55.7 | 82.1 | 92.5 | 82.1 | 97.8 | — | 93 |
+| geometric mean | 24.9 | 29.5 | 20 | 6.1 | 56.5 | 81.4 | 91.8 | 97.6 | 101 | 66 | 42.1 | 54.9 | 81.4 | 91.8 | 81.4 | 97.6 | — | 95 |
+| **CAMEO today** | 45 | 50 | 55 | 60 | 80 | 85 | 90 | 95 | 100 | 65 | 70 | 75 | 25 | 30 | 35 | 40 | — | 75 |
 
 ### Table D — PROPOSED: field magnitudes, law order (`heavy`-favouring)
 
@@ -425,11 +425,11 @@ write `none 25 · flak 25 · plate 15`, i.e. armour piercing doing LESS to
 plated infantry than to unplated. It is Westwood's design, faithfully
 cloned. Cameo's law inverts it so the weapon stays readable.
 
-| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| field median (raw) | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 |
-| **PROPOSED (law order)** | **5** | **15.2** | **16.2** | **9** | **55.3** | **72.1** | **98** | **99** | **100** | **38.5** | **54.3** | **60.9** | **70.1** | **71.1** | **96** | **97** |
-| Cameo today | 45 | 50 | 55 | 60 | 80 | 85 | 90 | 95 | 100 | 65 | 70 | 75 | 25 | 30 | 35 | 40 |
+| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| field median (raw) | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | — |
+| **PROPOSED (law order)** | **5** | **15.2** | **16.2** | **9** | **55.3** | **72.1** | **98** | **99** | **100** | **38.5** | **54.3** | **60.9** | **70.1** | **71.1** | **96** | **97** | **53.1** |
+| Cameo today | 45 | 50 | 55 | 60 | 80 | 85 | 90 | 95 | 100 | 65 | 70 | 75 | 25 | 30 | 35 | 40 | — |
 
 **Reference span 95** (min 5 · max 100).
 **Cameo span 75** — FLATTER than the field for this concept.
@@ -501,59 +501,59 @@ ends (Heroic / Scout / Superheavy) by continuing the ladder's own step; the
 four aircraft classes are read off the vehicle ladder by weight
 (Fighter/Helicopter←Light, Bomber←Medium, Spaceship←Heavy).
 
-| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| `openra_ra` | 100 | — | — | — | 105.556 | 66.6667 | — | 27.7778 | 0 | 55.5556 | — | 22.2222 | 66.6667 | — | 66.6667 | 27.7778 |
-| `openra_ra` | — | — | — | — | — | — | — | — | — | 100 | — | 50 | — | — | — | — |
-| `openra_ra` | 87.5 | — | — | — | 75 | 50 | — | 25 | 0 | 100 | — | 12.5 | 50 | — | 50 | 25 |
-| `openra_ra` | 52 | — | — | — | 60 | 60 | — | 60 | 60 | 100 | — | 60 | 60 | — | 60 | 60 |
-| `openra_ra` | — | — | — | — | — | 100 | — | — | — | — | — | — | 100 | — | 100 | — |
-| `ra2_vanilla` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 |
-| `ra2_vanilla` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 |
-| `romanovs_vengeance` | 100 | 100 | 100 | 100 | 66.6667 | 66.6667 | 10 | 10 | 10 | 100 | 23.3333 | 40 | 66.6667 | 10 | 66.6667 | 10 |
-| `dta_classic` | 88 | — | — | — | 113 | — | 69 | 25 | 0 | 100 | — | — | — | 69 | — | 25 |
-| `dta_classic` | 100 | — | — | — | 55 | — | 40 | 25 | 10 | 24 | — | — | — | 40 | — | 25 |
-| `dta_classic` | 90 | — | — | — | 95 | — | 60 | 25 | 0 | 100 | — | — | — | 60 | — | 25 |
-| `dta_classic` | 90 | — | — | — | 95 | — | 60 | 25 | 0 | 100 | — | — | — | 60 | — | 25 |
-| `dta_classic` | 100 | — | — | — | 93.4444 | — | 66.6667 | 39.8889 | 13.1111 | 74.4444 | — | — | — | 66.6667 | — | 39.8889 |
-| `dta_classic` | 44.7761 | — | — | — | 125.522 | — | 89.5522 | 53.5821 | 17.6119 | 100 | — | — | — | 89.5522 | — | 53.5821 |
-| `dta_enhanced` | 77.2059 | — | — | — | 88.2353 | — | 66.1765 | 44.1176 | 22.0588 | 100 | — | — | — | 66.1765 | — | 44.1176 |
-| `dta_enhanced` | 90 | — | — | — | 101 | — | 63 | 25 | 0 | 100 | — | — | — | 63 | — | 25 |
-| `openra_td` | 100 | — | — | — | 172.727 | 90.9091 | — | 9.09091 | 0 | 90.9091 | — | 90.9091 | 90.9091 | — | 90.9091 | 9.09091 |
-| `openra_td` | — | — | — | — | — | — | — | 100 | — | 43.75 | — | 100 | — | — | — | 100 |
-| `openra_td` | 100 | — | — | — | 160.976 | 91.4634 | — | 21.9512 | 0 | 91.4634 | — | 91.4634 | 91.4634 | — | 91.4634 | 21.9512 |
-| `combined_arms` | 100 | — | — | — | 105.556 | 66.6667 | — | 27.7778 | 0 | 55.5556 | — | 27.7778 | 66.6667 | — | 66.6667 | 27.7778 |
-| `combined_arms` | — | — | — | — | — | — | — | — | — | 100 | — | 50 | — | — | — | — |
-| `combined_arms` | 0 | — | — | — | 200 | 100 | — | 0 | 0 | 0 | — | 0 | 100 | — | 100 | 0 |
-| `openra_ts` | 100 | — | — | — | 18.6667 | 9.83333 | — | 1 | 0 | 24.6667 | — | 0.333333 | 9.83333 | — | 9.83333 | 1 |
-| `shattered_paradise` | 100 | — | — | — | 172.727 | 90.9091 | — | 9.09091 | 0 | 90.9091 | — | 90.9091 | 90.9091 | — | 90.9091 | 9.09091 |
-| `shattered_paradise` | 100 | — | — | — | 105.556 | 66.6667 | — | 27.7778 | 0 | 55.5556 | — | 22.2222 | 66.6667 | — | 66.6667 | 27.7778 |
-| `shattered_paradise` | — | — | — | — | — | — | — | — | — | 100 | — | 50 | — | — | — | — |
-| `shattered_paradise` | 100 | — | — | — | 160.976 | 91.4634 | — | 21.9512 | 0 | 91.4634 | — | 91.4634 | 91.4634 | — | 91.4634 | 21.9512 |
-| `shattered_paradise` | 87.5 | — | — | — | 75 | 50 | — | 25 | 0 | 100 | — | 12.5 | 50 | — | 50 | 25 |
-| `shattered_paradise` | 52 | — | — | — | 60 | 60 | — | 60 | 60 | 100 | — | 60 | 60 | — | 60 | 60 |
-| `shattered_paradise` | 100 | — | — | — | 18.6667 | 9.83333 | — | 1 | 0 | 24.6667 | — | 0.333333 | 9.83333 | — | 9.83333 | 1 |
-| `cnc_reloaded` | 100 | 80 | 60 | 40 | 20 | 15 | 8.5 | 10 | 11.5 | 12.5 | 9.5 | 5 | 15 | 8.5 | 15 | 10 |
-| `cnc_reloaded` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 |
-| `cnc_reloaded` | 100 | 80 | 80 | 80 | 100 | 25 | 13 | 13 | 13 | 38 | 25 | 13 | 25 | 13 | 25 | 13 |
-| `cnc_reloaded` | 100 | 80 | 80 | 80 | 100 | 25 | 13 | 13 | 13 | 38 | 15 | 10 | 25 | 13 | 25 | 13 |
-| `cnc_reloaded` | 100 | 72.7273 | 45.4545 | 18.1818 | 36.3636 | 16.7273 | 6.18182 | 3.09091 | 0 | 15.4545 | 7.27273 | 3.63636 | 16.7273 | 6.18182 | 16.7273 | 3.09091 |
-| `mental_omega` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 |
-| `mental_omega` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 |
-| `mental_omega` | 90 | 80 | 80 | 80 | 100 | 50 | 25 | 20 | 15 | 25 | 20 | 10 | 50 | 25 | 50 | 20 |
-| `mental_omega` | 100 | 77.2727 | 77.2727 | 77.2727 | 90.9091 | 36.3636 | 18.1818 | 18.1818 | 18.1818 | 36.3636 | 18.1818 | 13.6364 | 36.3636 | 18.1818 | 36.3636 | 18.1818 |
-| `ra2_reborn` | 100 | 80 | 60 | 40 | 40 | 40 | 20 | 18 | 16 | 16 | 14 | 12 | 40 | 20 | 40 | 18 |
-| `ra2_reborn` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 |
-| `ra2_reborn` | 100 | 80 | 80 | 80 | 100 | 50 | 25 | 25 | 25 | 75 | 50 | 25 | 50 | 25 | 50 | 25 |
-| `ra2_reborn` | 100 | 80 | 80 | 80 | 100 | 50 | 25 | 25 | 25 | 75 | 30 | 20 | 50 | 25 | 50 | 25 |
-| `ra2_reborn` | 100 | 83.3333 | 33.3333 | 0 | 16.6667 | 12.5 | 9.16667 | 10 | 10.8333 | 25 | 8.33333 | 5 | 12.5 | 9.16667 | 12.5 | 10 |
-| `red_resurrection` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 |
-| `red_resurrection` | 100 | 100 | 83.3333 | 66.6667 | 41.6667 | 50 | 50 | 41.6667 | 33.3333 | 0 | 0 | 0 | 50 | 50 | 50 | 41.6667 |
-| `yr_vanilla` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 |
-| `yr_vanilla` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 |
-| `yr_vanilla` | 100 | 80 | 80 | 80 | 100 | 50 | 25 | 25 | 25 | 75 | 50 | 25 | 50 | 25 | 50 | 25 |
-| `yr_vanilla` | 100 | 80 | 80 | 80 | 100 | 50 | 25 | 25 | 25 | 75 | 30 | 20 | 50 | 25 | 50 | 25 |
-| _n sources_ | 45 | 23 | 23 | 23 | 45 | 37 | 31 | 46 | 45 | 46 | 23 | 38 | 37 | 31 | 37 | 46 |
+| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| `openra_ra` | 100 | — | — | — | 105.556 | 66.6667 | — | 27.7778 | 0 | 55.5556 | — | 22.2222 | 66.6667 | — | 66.6667 | 27.7778 | — |
+| `openra_ra` | — | — | — | — | — | — | — | — | — | 100 | — | 50 | — | — | — | — | — |
+| `openra_ra` | 87.5 | — | — | — | 75 | 50 | — | 25 | 0 | 100 | — | 12.5 | 50 | — | 50 | 25 | — |
+| `openra_ra` | 52 | — | — | — | 60 | 60 | — | 60 | 60 | 100 | — | 60 | 60 | — | 60 | 60 | — |
+| `openra_ra` | — | — | — | — | — | 100 | — | — | — | — | — | — | 100 | — | 100 | — | — |
+| `ra2_vanilla` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 | — |
+| `ra2_vanilla` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 | — |
+| `romanovs_vengeance` | 100 | 100 | 100 | 100 | 66.6667 | 66.6667 | 10 | 10 | 10 | 100 | 23.3333 | 40 | 66.6667 | 10 | 66.6667 | 10 | — |
+| `dta_classic` | 88 | — | — | — | 113 | — | 69 | 25 | 0 | 100 | — | — | — | 69 | — | 25 | — |
+| `dta_classic` | 100 | — | — | — | 55 | — | 40 | 25 | 10 | 24 | — | — | — | 40 | — | 25 | — |
+| `dta_classic` | 90 | — | — | — | 95 | — | 60 | 25 | 0 | 100 | — | — | — | 60 | — | 25 | — |
+| `dta_classic` | 90 | — | — | — | 95 | — | 60 | 25 | 0 | 100 | — | — | — | 60 | — | 25 | — |
+| `dta_classic` | 100 | — | — | — | 93.4444 | — | 66.6667 | 39.8889 | 13.1111 | 74.4444 | — | — | — | 66.6667 | — | 39.8889 | — |
+| `dta_classic` | 44.7761 | — | — | — | 125.522 | — | 89.5522 | 53.5821 | 17.6119 | 100 | — | — | — | 89.5522 | — | 53.5821 | — |
+| `dta_enhanced` | 77.2059 | — | — | — | 88.2353 | — | 66.1765 | 44.1176 | 22.0588 | 100 | — | — | — | 66.1765 | — | 44.1176 | — |
+| `dta_enhanced` | 90 | — | — | — | 101 | — | 63 | 25 | 0 | 100 | — | — | — | 63 | — | 25 | — |
+| `openra_td` | 100 | — | — | — | 172.727 | 90.9091 | — | 9.09091 | 0 | 90.9091 | — | 90.9091 | 90.9091 | — | 90.9091 | 9.09091 | — |
+| `openra_td` | — | — | — | — | — | — | — | 100 | — | 43.75 | — | 100 | — | — | — | 100 | — |
+| `openra_td` | 100 | — | — | — | 160.976 | 91.4634 | — | 21.9512 | 0 | 91.4634 | — | 91.4634 | 91.4634 | — | 91.4634 | 21.9512 | — |
+| `combined_arms` | 100 | — | — | — | 105.556 | 66.6667 | — | 27.7778 | 0 | 55.5556 | — | 27.7778 | 66.6667 | — | 66.6667 | 27.7778 | — |
+| `combined_arms` | — | — | — | — | — | — | — | — | — | 100 | — | 50 | — | — | — | — | — |
+| `combined_arms` | 0 | — | — | — | 200 | 100 | — | 0 | 0 | 0 | — | 0 | 100 | — | 100 | 0 | — |
+| `openra_ts` | 100 | — | — | — | 18.6667 | 9.83333 | — | 1 | 0 | 24.6667 | — | 0.333333 | 9.83333 | — | 9.83333 | 1 | — |
+| `shattered_paradise` | 100 | — | — | — | 172.727 | 90.9091 | — | 9.09091 | 0 | 90.9091 | — | 90.9091 | 90.9091 | — | 90.9091 | 9.09091 | — |
+| `shattered_paradise` | 100 | — | — | — | 105.556 | 66.6667 | — | 27.7778 | 0 | 55.5556 | — | 22.2222 | 66.6667 | — | 66.6667 | 27.7778 | — |
+| `shattered_paradise` | — | — | — | — | — | — | — | — | — | 100 | — | 50 | — | — | — | — | — |
+| `shattered_paradise` | 100 | — | — | — | 160.976 | 91.4634 | — | 21.9512 | 0 | 91.4634 | — | 91.4634 | 91.4634 | — | 91.4634 | 21.9512 | — |
+| `shattered_paradise` | 87.5 | — | — | — | 75 | 50 | — | 25 | 0 | 100 | — | 12.5 | 50 | — | 50 | 25 | — |
+| `shattered_paradise` | 52 | — | — | — | 60 | 60 | — | 60 | 60 | 100 | — | 60 | 60 | — | 60 | 60 | — |
+| `shattered_paradise` | 100 | — | — | — | 18.6667 | 9.83333 | — | 1 | 0 | 24.6667 | — | 0.333333 | 9.83333 | — | 9.83333 | 1 | — |
+| `cnc_reloaded` | 100 | 80 | 60 | 40 | 20 | 15 | 8.5 | 10 | 11.5 | 12.5 | 9.5 | 5 | 15 | 8.5 | 15 | 10 | — |
+| `cnc_reloaded` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 | — |
+| `cnc_reloaded` | 100 | 80 | 80 | 80 | 100 | 25 | 13 | 13 | 13 | 38 | 25 | 13 | 25 | 13 | 25 | 13 | — |
+| `cnc_reloaded` | 100 | 80 | 80 | 80 | 100 | 25 | 13 | 13 | 13 | 38 | 15 | 10 | 25 | 13 | 25 | 13 | — |
+| `cnc_reloaded` | 100 | 72.7273 | 45.4545 | 18.1818 | 36.3636 | 16.7273 | 6.18182 | 3.09091 | 0 | 15.4545 | 7.27273 | 3.63636 | 16.7273 | 6.18182 | 16.7273 | 3.09091 | — |
+| `mental_omega` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 | — |
+| `mental_omega` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 | — |
+| `mental_omega` | 90 | 80 | 80 | 80 | 100 | 50 | 25 | 20 | 15 | 25 | 20 | 10 | 50 | 25 | 50 | 20 | — |
+| `mental_omega` | 100 | 77.2727 | 77.2727 | 77.2727 | 90.9091 | 36.3636 | 18.1818 | 18.1818 | 18.1818 | 36.3636 | 18.1818 | 13.6364 | 36.3636 | 18.1818 | 36.3636 | 18.1818 | — |
+| `ra2_reborn` | 100 | 80 | 60 | 40 | 40 | 40 | 20 | 18 | 16 | 16 | 14 | 12 | 40 | 20 | 40 | 18 | — |
+| `ra2_reborn` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 | — |
+| `ra2_reborn` | 100 | 80 | 80 | 80 | 100 | 50 | 25 | 25 | 25 | 75 | 50 | 25 | 50 | 25 | 50 | 25 | — |
+| `ra2_reborn` | 100 | 80 | 80 | 80 | 100 | 50 | 25 | 25 | 25 | 75 | 30 | 20 | 50 | 25 | 50 | 25 | — |
+| `ra2_reborn` | 100 | 83.3333 | 33.3333 | 0 | 16.6667 | 12.5 | 9.16667 | 10 | 10.8333 | 25 | 8.33333 | 5 | 12.5 | 9.16667 | 12.5 | 10 | — |
+| `red_resurrection` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 | — |
+| `red_resurrection` | 100 | 100 | 83.3333 | 66.6667 | 41.6667 | 50 | 50 | 41.6667 | 33.3333 | 0 | 0 | 0 | 50 | 50 | 50 | 41.6667 | — |
+| `yr_vanilla` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 | — |
+| `yr_vanilla` | 100 | 83.3333 | 33.3333 | 0 | 33.3333 | 10 | 5 | 0.833333 | 0 | 25 | 16.6667 | 0.333333 | 10 | 5 | 10 | 0.833333 | — |
+| `yr_vanilla` | 100 | 80 | 80 | 80 | 100 | 50 | 25 | 25 | 25 | 75 | 50 | 25 | 50 | 25 | 50 | 25 | — |
+| `yr_vanilla` | 100 | 80 | 80 | 80 | 100 | 50 | 25 | 25 | 25 | 75 | 30 | 20 | 50 | 25 | 50 | 25 | — |
+| _n sources_ | 45 | 23 | 23 | 23 | 45 | 37 | 31 | 46 | 45 | 46 | 23 | 38 | 37 | 31 | 37 | 46 | 0 |
 
 ### Table C — three ways to aggregate, vs Cameo today
 
@@ -564,12 +564,12 @@ for MULTIPLIERS (averaging x2 and x0.5 arithmetically invents a net buff
 of 1.25 — geometrically it is 1.0). A wide mean-vs-gmean gap means the
 sources disagree about that armor.
 
-| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | span |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| median | 100 | 83.3 | 60 | 40 | 88.2 | 50 | 18.2 | 21 | 0 | 49.7 | 16.7 | 12.2 | 50 | 18.2 | 50 | 21 | 100 |
-| arithmetic mean | 92.2 | 82.8 | 57.4 | 39.2 | 79.3 | 41.4 | 26.9 | 20.5 | 9.4 | 55.5 | 19.6 | 23.4 | 41.4 | 26.9 | 41.4 | 20.5 | 83 |
-| geometric mean | 84.1 | 82.6 | 52.5 | 10.5 | 65.3 | 30.1 | 16.6 | 10 | 3.5 | 40.3 | 16.1 | 7.9 | 30.1 | 16.6 | 30.1 | 10 | 81 |
-| **CAMEO today** | 100 | 90 | 80 | 70 | 65 | 60 | 55 | 50 | 45 | 95 | 85 | 75 | 40 | 35 | 30 | 25 | 75 |
+| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne | span |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| median | 100 | 83.3 | 60 | 40 | 88.2 | 50 | 18.2 | 21 | 0 | 49.7 | 16.7 | 12.2 | 50 | 18.2 | 50 | 21 | — | 100 |
+| arithmetic mean | 92.2 | 82.8 | 57.4 | 39.2 | 79.3 | 41.4 | 26.9 | 20.5 | 9.4 | 55.5 | 19.6 | 23.4 | 41.4 | 26.9 | 41.4 | 20.5 | — | 83 |
+| geometric mean | 84.1 | 82.6 | 52.5 | 10.5 | 65.3 | 30.1 | 16.6 | 10 | 3.5 | 40.3 | 16.1 | 7.9 | 30.1 | 16.6 | 30.1 | 10 | — | 81 |
+| **CAMEO today** | 100 | 90 | 80 | 70 | 65 | 60 | 55 | 50 | 45 | 95 | 85 | 75 | 40 | 35 | 30 | 25 | — | 75 |
 
 ### Table D — PROPOSED: field magnitudes, law order (`light`-favouring)
 
@@ -585,11 +585,11 @@ write `none 25 · flak 25 · plate 15`, i.e. armour piercing doing LESS to
 plated infantry than to unplated. It is Westwood's design, faithfully
 cloned. Cameo's law inverts it so the weapon stays readable.
 
-| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| field median (raw) | 100 | 83.3 | 60 | 40 | 88.2 | 50 | 18.2 | 21 | 0 | 49.7 | 16.7 | 12.2 | 50 | 18.2 | 50 | 21 |
-| **PROPOSED (law order)** | **100** | **85.8** | **66** | **59.4** | **90** | **57.5** | **32.9** | **30.5** | **15** | **54.5** | **29.2** | **25.4** | **56.5** | **55.5** | **31.9** | **29.5** |
-| Cameo today | 100 | 90 | 80 | 70 | 65 | 60 | 55 | 50 | 45 | 95 | 85 | 75 | 40 | 35 | 30 | 25 |
+| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| field median (raw) | 100 | 83.3 | 60 | 40 | 88.2 | 50 | 18.2 | 21 | 0 | 49.7 | 16.7 | 12.2 | 50 | 18.2 | 50 | 21 | — |
+| **PROPOSED (law order)** | **100** | **85.8** | **66** | **59.4** | **90** | **57.5** | **32.9** | **30.5** | **15** | **54.5** | **29.2** | **25.4** | **56.5** | **55.5** | **31.9** | **29.5** | **28.7** |
+| Cameo today | 100 | 90 | 80 | 70 | 65 | 60 | 55 | 50 | 45 | 95 | 85 | 75 | 40 | 35 | 30 | 25 | — |
 
 **Reference span 100** (min 0 · max 100).
 **Cameo span 75** — FLATTER than the field for this concept.
@@ -631,29 +631,29 @@ ends (Heroic / Scout / Superheavy) by continuing the ladder's own step; the
 four aircraft classes are read off the vehicle ladder by weight
 (Fighter/Helicopter←Light, Bomber←Medium, Spaceship←Heavy).
 
-| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| `openra_d2k` | 10 | — | — | — | 60 | 80 | — | 100 | 120 | 60 | — | — | 80 | — | 80 | 100 |
-| `openra_d2k` | 10 | — | — | — | 40 | 70 | — | 100 | 130 | 55 | — | — | 70 | — | 70 | 100 |
-| `openra_ra` | 10 | — | — | — | 0 | 34 | — | 100 | 166 | 74 | — | 50 | 34 | — | 34 | 100 |
-| `dta_classic` | 100 | — | — | — | 68.1818 | — | 63.6364 | 59.0909 | 54.5455 | 59.0909 | — | — | — | 63.6364 | — | 59.0909 |
-| `dta_classic` | 0 | — | — | — | 0 | — | 0 | 0 | 0 | 0 | — | — | — | 0 | — | 0 |
-| `dta_globalcode` | 0 | — | — | — | 0 | 0 | — | 0 | 0 | 0 | — | 0 | 0 | — | 0 | 0 |
-| `openra_td` | 20 | — | — | — | 100 | 100 | — | 100 | 100 | 82.8571 | — | 100 | 100 | — | 100 | 100 |
-| `openra_td` | 10.3448 | — | — | — | 79.3103 | 79.3103 | — | 79.3103 | 79.3103 | 100 | — | — | 79.3103 | — | 79.3103 | 79.3103 |
-| `openra_td` | 22.5806 | — | — | — | 100 | 100 | — | 100 | 100 | 74.1935 | — | 100 | 100 | — | 100 | 100 |
-| `combined_arms` | 10 | — | — | — | 0 | 34 | — | 100 | 166 | 74 | — | 75 | 34 | — | 34 | 100 |
-| `combined_arms` | — | — | — | — | — | 75 | — | — | — | 100 | — | 58.3333 | 75 | — | 75 | — |
-| `openra_ts` | 25 | — | — | — | 50 | 75 | — | 100 | 125 | 65 | — | 60 | 75 | — | 75 | 100 |
-| `shattered_paradise` | 10 | — | — | — | 0 | 34 | — | 100 | 166 | 74 | — | 50 | 34 | — | 34 | 100 |
-| `shattered_paradise` | 20 | — | — | — | 100 | 100 | — | 100 | 100 | 82.8571 | — | 100 | 100 | — | 100 | 100 |
-| `shattered_paradise` | 15 | — | — | — | 80 | 90 | — | 100 | 110 | 65 | — | — | 90 | — | 90 | 100 |
-| `shattered_paradise` | 15 | — | — | — | 40 | 70 | — | 100 | 130 | 45 | — | — | 70 | — | 70 | 100 |
-| `shattered_paradise` | 10.3448 | — | — | — | 79.3103 | 79.3103 | — | 79.3103 | 79.3103 | 100 | — | — | 79.3103 | — | 79.3103 | 79.3103 |
-| `shattered_paradise` | 22.5806 | — | — | — | 100 | 100 | — | 100 | 100 | 74.1935 | — | 100 | 100 | — | 100 | 100 |
-| `shattered_paradise` | 25 | — | — | — | 50 | 75 | — | 100 | 125 | 65 | — | 60 | 75 | — | 75 | 100 |
-| `cnc_reloaded` | 100 | 90 | 65 | 40 | 100 | 75 | 55 | 45 | 35 | 60 | 40 | 40 | 75 | 55 | 75 | 45 |
-| _n sources_ | 19 | 1 | 1 | 1 | 19 | 18 | 3 | 19 | 19 | 20 | 1 | 12 | 18 | 3 | 18 | 19 |
+| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| `openra_d2k` | 10 | — | — | — | 60 | 80 | — | 100 | 120 | 60 | — | — | 80 | — | 80 | 100 | — |
+| `openra_d2k` | 10 | — | — | — | 40 | 70 | — | 100 | 130 | 55 | — | — | 70 | — | 70 | 100 | — |
+| `openra_ra` | 10 | — | — | — | 0 | 34 | — | 100 | 166 | 74 | — | 50 | 34 | — | 34 | 100 | — |
+| `dta_classic` | 100 | — | — | — | 68.1818 | — | 63.6364 | 59.0909 | 54.5455 | 59.0909 | — | — | — | 63.6364 | — | 59.0909 | — |
+| `dta_classic` | 0 | — | — | — | 0 | — | 0 | 0 | 0 | 0 | — | — | — | 0 | — | 0 | — |
+| `dta_globalcode` | 0 | — | — | — | 0 | 0 | — | 0 | 0 | 0 | — | 0 | 0 | — | 0 | 0 | — |
+| `openra_td` | 20 | — | — | — | 100 | 100 | — | 100 | 100 | 82.8571 | — | 100 | 100 | — | 100 | 100 | — |
+| `openra_td` | 10.3448 | — | — | — | 79.3103 | 79.3103 | — | 79.3103 | 79.3103 | 100 | — | — | 79.3103 | — | 79.3103 | 79.3103 | — |
+| `openra_td` | 22.5806 | — | — | — | 100 | 100 | — | 100 | 100 | 74.1935 | — | 100 | 100 | — | 100 | 100 | — |
+| `combined_arms` | 10 | — | — | — | 0 | 34 | — | 100 | 166 | 74 | — | 75 | 34 | — | 34 | 100 | — |
+| `combined_arms` | — | — | — | — | — | 75 | — | — | — | 100 | — | 58.3333 | 75 | — | 75 | — | — |
+| `openra_ts` | 25 | — | — | — | 50 | 75 | — | 100 | 125 | 65 | — | 60 | 75 | — | 75 | 100 | — |
+| `shattered_paradise` | 10 | — | — | — | 0 | 34 | — | 100 | 166 | 74 | — | 50 | 34 | — | 34 | 100 | — |
+| `shattered_paradise` | 20 | — | — | — | 100 | 100 | — | 100 | 100 | 82.8571 | — | 100 | 100 | — | 100 | 100 | — |
+| `shattered_paradise` | 15 | — | — | — | 80 | 90 | — | 100 | 110 | 65 | — | — | 90 | — | 90 | 100 | — |
+| `shattered_paradise` | 15 | — | — | — | 40 | 70 | — | 100 | 130 | 45 | — | — | 70 | — | 70 | 100 | — |
+| `shattered_paradise` | 10.3448 | — | — | — | 79.3103 | 79.3103 | — | 79.3103 | 79.3103 | 100 | — | — | 79.3103 | — | 79.3103 | 79.3103 | — |
+| `shattered_paradise` | 22.5806 | — | — | — | 100 | 100 | — | 100 | 100 | 74.1935 | — | 100 | 100 | — | 100 | 100 | — |
+| `shattered_paradise` | 25 | — | — | — | 50 | 75 | — | 100 | 125 | 65 | — | 60 | 75 | — | 75 | 100 | — |
+| `cnc_reloaded` | 100 | 90 | 65 | 40 | 100 | 75 | 55 | 45 | 35 | 60 | 40 | 40 | 75 | 55 | 75 | 45 | — |
+| _n sources_ | 19 | 1 | 1 | 1 | 19 | 18 | 3 | 19 | 19 | 20 | 1 | 12 | 18 | 3 | 18 | 19 | 0 |
 
 ### Table C — three ways to aggregate, vs Cameo today
 
@@ -664,12 +664,12 @@ for MULTIPLIERS (averaging x2 and x0.5 arithmetically invents a net buff
 of 1.25 — geometrically it is 1.0). A wide mean-vs-gmean gap means the
 sources disagree about that armor.
 
-| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | span |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| median | 15 | 90 | 65 | 40 | 60 | 75 | 55 | 100 | 100 | 69.5 | 40 | 60 | 75 | 55 | 75 | 100 | 85 |
-| arithmetic mean | 22.9 | 90 | 65 | 40 | 55.1 | 70.6 | 39.5 | 82.2 | 99.3 | 65.5 | 40 | 66.1 | 70.6 | 39.5 | 70.6 | 82.2 | 76 |
-| geometric mean | 13.5 | 90 | 65 | 40 | 23.1 | 55.8 | 15.2 | 56.1 | 63.7 | 46.5 | 40 | 48.2 | 55.8 | 15.2 | 55.8 | 56.1 | 76 |
-| **CAMEO today** | 40 | 35 | 30 | 25 | 100 | 90 | 80 | 70 | 65 | 95 | 85 | 75 | 60 | 55 | 50 | 45 | 75 |
+| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne | span |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| median | 15 | 90 | 65 | 40 | 60 | 75 | 55 | 100 | 100 | 69.5 | 40 | 60 | 75 | 55 | 75 | 100 | — | 85 |
+| arithmetic mean | 22.9 | 90 | 65 | 40 | 55.1 | 70.6 | 39.5 | 82.2 | 99.3 | 65.5 | 40 | 66.1 | 70.6 | 39.5 | 70.6 | 82.2 | — | 76 |
+| geometric mean | 13.5 | 90 | 65 | 40 | 23.1 | 55.8 | 15.2 | 56.1 | 63.7 | 46.5 | 40 | 48.2 | 55.8 | 15.2 | 55.8 | 56.1 | — | 76 |
+| **CAMEO today** | 40 | 35 | 30 | 25 | 100 | 90 | 80 | 70 | 65 | 95 | 85 | 75 | 60 | 55 | 50 | 45 | — | 75 |
 
 ### Table D — PROPOSED: field magnitudes, law order (`light`-favouring)
 
@@ -685,11 +685,11 @@ write `none 25 · flak 25 · plate 15`, i.e. armour piercing doing LESS to
 plated infantry than to unplated. It is Westwood's design, faithfully
 cloned. Cameo's law inverts it so the weapon stays readable.
 
-| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| field median (raw) | 15 | 90 | 65 | 40 | 60 | 75 | 55 | 100 | 100 | 69.5 | 40 | 60 | 75 | 55 | 75 | 100 |
-| **PROPOSED (law order)** | **90** | **65** | **15** | **15** | **100** | **99** | **75** | **60** | **55** | **69.5** | **59** | **40** | **98** | **74** | **73** | **54** |
-| Cameo today | 40 | 35 | 30 | 25 | 100 | 90 | 80 | 70 | 65 | 95 | 85 | 75 | 60 | 55 | 50 | 45 |
+| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| field median (raw) | 15 | 90 | 65 | 40 | 60 | 75 | 55 | 100 | 100 | 69.5 | 40 | 60 | 75 | 55 | 75 | 100 | — |
+| **PROPOSED (law order)** | **90** | **65** | **15** | **14** | **100** | **99** | **75** | **60** | **55** | **69.5** | **59** | **40** | **98** | **74** | **73** | **54** | **72** |
+| Cameo today | 40 | 35 | 30 | 25 | 100 | 90 | 80 | 70 | 65 | 95 | 85 | 75 | 60 | 55 | 50 | 45 | — |
 
 **Reference span 85** (min 15 · max 100).
 **Cameo span 75** — FLATTER than the field for this concept.
@@ -725,23 +725,23 @@ ends (Heroic / Scout / Superheavy) by continuing the ladder's own step; the
 four aircraft classes are read off the vehicle ladder by weight
 (Fighter/Helicopter←Light, Bomber←Medium, Spaceship←Heavy).
 
-| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| `ra2_vanilla` | 25 | 25 | 25 | 25 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 |
-| `romanovs_vengeance` | 100 | 100 | 50 | 0 | — | — | — | — | — | — | — | — | — | — | — | — |
-| `dta_classic` | 19 | — | — | — | 50 | — | 75 | 100 | 125 | 75 | — | — | — | 75 | — | 100 |
-| `dta_enhanced` | 10 | — | — | — | 50 | — | 75 | 100 | 125 | 75 | — | — | — | 75 | — | 100 |
-| `openra_td` | 100 | — | — | — | — | — | — | 74.2857 | — | 100 | — | 74.2857 | — | — | — | 74.2857 |
-| `combined_arms` | 100 | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
-| `combined_arms` | 100 | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
-| `combined_arms` | 0 | — | — | — | 0 | 0 | — | 100 | 200 | 0 | — | 0 | 0 | — | 0 | 100 |
-| `shattered_paradise` | 100 | — | — | — | — | — | — | 74.2857 | — | 100 | — | 74.2857 | — | — | — | 74.2857 |
-| `cnc_reloaded` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 |
-| `mental_omega` | 20 | 20 | 20 | 20 | 30 | 100 | 90 | 80 | 70 | 55 | 30 | 55 | 100 | 90 | 100 | 80 |
-| `ra2_reborn` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 |
-| `red_resurrection` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 |
-| `yr_vanilla` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 |
-| _n sources_ | 12 | 7 | 7 | 7 | 9 | 7 | 8 | 11 | 9 | 11 | 6 | 9 | 7 | 8 | 7 | 11 |
+| source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| `ra2_vanilla` | 25 | 25 | 25 | 25 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | — |
+| `romanovs_vengeance` | 100 | 100 | 50 | 0 | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `dta_classic` | 19 | — | — | — | 50 | — | 75 | 100 | 125 | 75 | — | — | — | 75 | — | 100 | — |
+| `dta_enhanced` | 10 | — | — | — | 50 | — | 75 | 100 | 125 | 75 | — | — | — | 75 | — | 100 | — |
+| `openra_td` | 100 | — | — | — | — | — | — | 74.2857 | — | 100 | — | 74.2857 | — | — | — | 74.2857 | — |
+| `combined_arms` | 100 | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `combined_arms` | 100 | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `combined_arms` | 0 | — | — | — | 0 | 0 | — | 100 | 200 | 0 | — | 0 | 0 | — | 0 | 100 | — |
+| `shattered_paradise` | 100 | — | — | — | — | — | — | 74.2857 | — | 100 | — | 74.2857 | — | — | — | 74.2857 | — |
+| `cnc_reloaded` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | — |
+| `mental_omega` | 20 | 20 | 20 | 20 | 30 | 100 | 90 | 80 | 70 | 55 | 30 | 55 | 100 | 90 | 100 | 80 | — |
+| `ra2_reborn` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | — |
+| `red_resurrection` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | — |
+| `yr_vanilla` | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | — |
+| _n sources_ | 12 | 7 | 7 | 7 | 9 | 7 | 8 | 11 | 9 | 11 | 6 | 9 | 7 | 8 | 7 | 11 | 0 |
 
 ### Table C — three ways to aggregate, vs Cameo today
 
@@ -752,12 +752,12 @@ for MULTIPLIERS (averaging x2 and x0.5 arithmetically invents a net buff
 of 1.25 — geometrically it is 1.0). A wide mean-vs-gmean gap means the
 sources disagree about that armor.
 
-| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | span |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| median | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | 95 |
-| arithmetic mean | 39.5 | 35 | 22.1 | 9.3 | 47.8 | 67.9 | 92.5 | 93.5 | 113.3 | 66.4 | 42.5 | 56 | 67.9 | 92.5 | 67.9 | 93.5 | 104 |
-| geometric mean | 24 | 29.5 | 20 | 6.1 | 33.8 | 42.2 | 91.8 | 92.8 | 109.1 | 48.6 | 42.1 | 39.5 | 42.2 | 91.8 | 42.2 | 92.8 | 103 |
-| **CAMEO today** | 25 | 30 | 35 | 40 | 80 | 85 | 90 | 95 | 100 | 45 | 50 | 55 | 60 | 65 | 70 | 75 | 75 |
+| aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne | span |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| median | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | — | 95 |
+| arithmetic mean | 39.5 | 35 | 22.1 | 9.3 | 47.8 | 67.9 | 92.5 | 93.5 | 113.3 | 66.4 | 42.5 | 56 | 67.9 | 92.5 | 67.9 | 93.5 | — | 104 |
+| geometric mean | 24 | 29.5 | 20 | 6.1 | 33.8 | 42.2 | 91.8 | 92.8 | 109.1 | 48.6 | 42.1 | 39.5 | 42.2 | 91.8 | 42.2 | 92.8 | — | 103 |
+| **CAMEO today** | 25 | 30 | 35 | 40 | 80 | 85 | 90 | 95 | 100 | 45 | 50 | 55 | 60 | 65 | 70 | 75 | — | 75 |
 
 ### Table D — PROPOSED: field magnitudes, law order (`heavy`-favouring)
 
@@ -773,11 +773,11 @@ write `none 25 · flak 25 · plate 15`, i.e. armour piercing doing LESS to
 plated infantry than to unplated. It is Westwood's design, faithfully
 cloned. Cameo's law inverts it so the weapon stays readable.
 
-| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| field median (raw) | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 |
-| **PROPOSED (law order)** | **15** | **24** | **25** | **15** | **60** | **75** | **98** | **99** | **100** | **45** | **59** | **65** | **73** | **74** | **96** | **97** |
-| Cameo today | 25 | 30 | 35 | 40 | 80 | 85 | 90 | 95 | 100 | 45 | 50 | 55 | 60 | 65 | 70 | 75 |
+| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| field median (raw) | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 | — |
+| **PROPOSED (law order)** | **15** | **24** | **25** | **14** | **60** | **75** | **98** | **99** | **100** | **45** | **59** | **65** | **73** | **74** | **96** | **97** | **57.6** |
+| Cameo today | 25 | 30 | 35 | 40 | 80 | 85 | 90 | 95 | 100 | 45 | 50 | 55 | 60 | 65 | 70 | 75 | — |
 
 **Reference span 95** (min 5 · max 100).
 **Cameo span 75** — FLATTER than the field for this concept.

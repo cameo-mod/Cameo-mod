@@ -806,7 +806,13 @@ Supersedes the "even step" half of the step law. Three rules, in force for every
    writes 200/100 and one that writes 100/50 are recognised as the SAME design.
    Absolute lethality lives in `Damage`, never in the armor profile.
 2. **It is still a LADDER — no two values identical, anywhere in the profile.**
-   A tie is a wasted rung and makes the weapon unreadable.
+   A tie is a wasted rung and makes the weapon unreadable. This is absolute: it
+   applies to the DERIVED armors too, so it must be the LAST thing enforced —
+   `Heroic` and `Airborne` are computed from other cells and can land exactly on
+   one (measured: `missile_he` produced two 15.0s before the check moved last).
+   The field's own profiles DO plateau — the canonical `HE` warhead sits at 100
+   across the entire infantry ladder — and **Cameo does not copy that**; we take
+   the field's plateau as "these are all near the top" and still separate them.
 3. **But it need NOT be linear.** Equal steps were an artifact of the generator,
    and an even ramp is exactly the "moderate middle" the warhead rebuild exists
    to escape. Measured across 16 reference mods, real profiles use **plateaus
@@ -822,6 +828,43 @@ Supersedes the "even step" half of the step law. Three rules, in force for every
 ⚠ The ordering law (§ARMOR_SYSTEM "PROFILE construction") still decides WHICH
 armor gets which value. The corpus supplies magnitudes, the law supplies order.
 
+### 12.0a PLATFORM, NOT JUST FAMILY (maintainer, 2026-08-15) — binding
+
+*"There is a huge difference between the obelisk of light laser (a very big
+laser) and the small laser from the laser turret and infantry laser weapons …
+light lasers are good against light and heavy lasers are good against heavy."*
+
+**A reference profile is only comparable to a Cameo family if the unit firing it
+plays the same role.** This is why Cameo splits `HE` into `CannonHE` /
+`MissileHE` / `BulletHE` instead of keeping one `HE`, and the same split must be
+applied to the reference data BEFORE anything is averaged.
+
+**Measured** (`tools/reference/survey_platforms.py`, INI sources, warheads traced
+from the firing actor and normalised to peak 100 — medians):
+
+| family | platform | vs INF | vs LIGHT | vs HEAVY | majority direction |
+|---|---|--:|--:|--:|---|
+| laser | infantry | 100 | 48 | **33** | anti-LIGHT 55 / 96 |
+| laser | defense_small | 100 | 50 | **50** | flat 21 / 33 |
+| laser | **defense_big** (Obelisk) | 100 | 67 | **55** | flat 21 / 36 |
+| laser | vehicle_heavy | 100 | 80 | **67** | anti-LIGHT 40 / 74 |
+| tesla | **defense_big** (Coil) | 50 | 42 | 50 | **anti-HEAVY 27 / 30** |
+| tesla | vehicle_light | 100 | 100 | 80 | anti-LIGHT 9 / 14 |
+| cannon | infantry | 100 | 40 | 20 | anti-LIGHT / flat |
+| cannon | vehicle_heavy | 100 | 75 | **87** | the only cannon tier trending anti-HEAVY |
+| missile | infantry | 20 | 83 | **100** | the AT-infantry profile |
+| bullet | every platform | 100 | 23–55 | 13–25 | anti-LIGHT everywhere |
+
+**The hypothesis holds.** Laser lethality against heavy armour climbs with the
+platform — infantry 33 → small turret 50 → Obelisk 55 → heavy vehicle 67 — so a
+family's LEVEL (Light/Medium/Heavy) should track the platform tier, and the
+levels must NOT share one profile shape. It also means `^Warhead_Laser_*` cannot
+be filled from an average over "everything called laser": that mixes a rifle with
+an Obelisk and produces precisely the mush the rebuild exists to remove.
+
+Corollary already banked: **Tesla's big-defence profile is anti-HEAVY in 27 of 30
+measured rows**, which independently validates Cameo's current Tesla direction.
+
 ### 12.0b HEROIC ARMOR IS A BRIDGE, NOT THE TOP RUNG (maintainer, 2026-08-15)
 
 **Heroic is NOT the heavy end of the infantry ladder.** Placing it there
@@ -832,6 +875,23 @@ Scout** — a hybrid of infantry and vehicle, of light and heavy.
 
 **Its value is the PRODUCT of the weapon's Plate and Scout values**, as
 fractions: `Heroic = Plate × Scout / 100`.
+
+**The pattern generalises — a derived armor replaces every dual-`Armor` stack.**
+`^FlyingInfantryTemplate` carries TWO `Armor` traits today (`Scout` + `Fighter`)
+for exactly the reason Heroic wanted two: a jetpack trooper is both infantry and
+aircraft, and multiplying the pair meant only a weapon good at BOTH threatened
+it. W20's switch to averaging silently deleted that. So:
+
+| derived armor | = parent × parent / 100 | replaces |
+|---|---|---|
+| **Heroic** | `Plate × Scout` | the elite-infantry stack |
+| **Airborne** *(name provisional)* | `Helicopter × Scout` | `^FlyingInfantryTemplate`'s Scout+Fighter |
+
+This is how W20 ("two `Armor` traits must never multiply at runtime") and the
+hybrid-armor design stop being in conflict: **one trait per actor, the product
+baked into the armor type at generation time.**
+⚠ Follow-up: collapse `^FlyingInfantryTemplate`'s two `Armor` traits to the
+single derived type — only after the warhead families carry the new column.
 
 That reproduces exactly what the old multiplied-armor stack gave, and averaging
 cannot:

@@ -66,7 +66,7 @@ CAMEO_LADDERS = {
 }
 # Display order: Heroic sits between the ladders it bridges.
 CAMEO16 = (CAMEO_LADDERS["INF"] + ["Heroic"] + CAMEO_LADDERS["VEH"]
-           + CAMEO_LADDERS["BLD"] + CAMEO_LADDERS["AIR"])
+           + CAMEO_LADDERS["BLD"] + CAMEO_LADDERS["AIR"] + ["Airborne"])
 
 # Source armor -> Cameo armor, where a real equivalent exists.
 DIRECT = {
@@ -135,7 +135,23 @@ GMEAN_FLOOR = 1.0
 # TRAITS multiplying at runtime on one actor, which nobody designed. This is a
 # single armor type whose numbers are computed once, at generation time, from a
 # formula the designer chose. One armor trait is still enabled per hit.
-HEROIC_FROM = ("Plate", "Scout")
+#
+# ⚠ **THE PATTERN GENERALISES, and it is the real fix for the dual-armor stacks.**
+# `^FlyingInfantryTemplate` carries TWO `Armor` traits today — `Scout` and
+# `Fighter` — for exactly the same reason Heroic wanted two: a jetpack trooper is
+# both infantry and aircraft, and multiplying the two made only a weapon good at
+# BOTH dangerous to it. Averaging (W20) silently removed that. A DERIVED armor
+# type restores the behaviour with one trait, so W20's "two traits must never
+# multiply" and this design stop being in conflict.
+#
+# Maintainer 2026-08-15: *"we need a new armor type for the flying infantry which
+# is between helicopter and scout armor multiplied (same as heroic is plate x
+# scout)"*. Name `Airborne` is provisional — maintainer to confirm.
+DERIVED_ARMORS = {
+    "Heroic": ("Plate", "Scout"),
+    "Airborne": ("Helicopter", "Scout"),
+}
+HEROIC_FROM = DERIVED_ARMORS["Heroic"]        # kept: referenced by DESIGN.md §12.0b
 
 # --------------------------------------------------------------------------- #
 # THE SPREAD RULE (maintainer, 2026-08-15)
@@ -531,18 +547,20 @@ def lawful_profile(profile: dict[str, float], direction: str) -> dict[str, float
     return out
 
 
-def derive_heroic(profile: dict[str, float]) -> float | None:
-    """Heroic = Plate x Scout, as fractions (see THE HEROIC RULE above).
+def derive_armors(profile: dict[str, float]) -> dict[str, float]:
+    """Every DERIVED armor: the PRODUCT of its two parents (see the rule above).
 
     Both inputs are percentages of the weapon's own peak, so the product is
-    `Plate/100 * Scout/100`, re-expressed as a percentage: `Plate * Scout / 100`.
-    A weapon that is strong against exactly one of the two collapses; only one
-    strong against both stays high.
+    `A/100 * B/100` re-expressed as a percentage, i.e. `A * B / 100`. A weapon
+    strong against exactly one parent collapses; only one strong against BOTH
+    stays high — which is the entire point of a hybrid armor class.
     """
-    plate, scout = (profile.get(a) for a in HEROIC_FROM)
-    if plate is None or scout is None:
-        return None
-    return plate * scout / 100.0
+    out = {}
+    for name, (first, second) in DERIVED_ARMORS.items():
+        a, b = profile.get(first), profile.get(second)
+        if a is not None and b is not None:
+            out[name] = round(a * b / 100.0, 1)
+    return out
 
 
 def shape_profile(profile: dict[str, float], floor: float) -> dict[str, float]:
@@ -563,18 +581,29 @@ def shape_profile(profile: dict[str, float], floor: float) -> dict[str, float]:
     scaled = {k: floor + (v - lo) * (100.0 - floor) / (hi - lo)
               for k, v in profile.items()}
 
-    # No two identical, minimum separation 1. Walking DOWN from the peak rather
-    # than up from the floor: nudging upward pins ties against the 100 cap, where
-    # `min(value, 100)` silently re-creates the duplicate it was meant to remove
-    # (Tesla came out with Plate 100 AND Superheavy 100). Descending has room by
-    # construction — 16 armors need 15 units of separation inside a >=75 range.
-    order = sorted(scaled, key=lambda k: -scaled[k])
+    return enforce_distinct(scaled)
+
+
+def enforce_distinct(profile: dict[str, float], gap: float = 1.0) -> dict[str, float]:
+    """No two values identical — the maintainer's hard rule, applied last.
+
+    Walks DOWN from the peak. Nudging upward instead pins ties against the 100
+    cap, where clamping silently re-creates the duplicate it was removing (Tesla
+    shipped `Plate 100` AND `Superheavy 100` that way). Descending has room by
+    construction: 17 armors need 16 units of separation inside a >=75 range.
+
+    ⚠ Must run AFTER the derived armors are added. `Heroic` and `Airborne` are
+    computed from other cells, so they can land exactly on one — `missile_he`
+    produced two 15.0s and `missile_ap` another. A rule enforced before the last
+    value is written is not enforced.
+    """
+    order = sorted(profile, key=lambda k: -profile[k])
     out: dict[str, float] = {}
     previous = None
     for key in order:
-        value = round(scaled[key], 1)
+        value = round(profile[key], 1)
         if previous is not None and value >= previous:
-            value = previous - 1
+            value = round(previous - gap, 1)
         out[key] = value
         previous = value
     return out
@@ -709,9 +738,8 @@ def render(concept: str, rows: list[dict]) -> str:
     lawful = lawful_profile(med, direction)
     floor = EXTREME_FLOOR if spec.get("specialised") else spec.get("floor", 15)
     lawful = shape_profile(lawful, floor)
-    heroic = derive_heroic(lawful)
-    if heroic is not None:
-        lawful["Heroic"] = round(heroic, 1)
+    lawful.update(derive_armors(lawful))
+    lawful = enforce_distinct(lawful)      # derived cells can land on an existing one
     lines += ["", f"### Table D — PROPOSED: field magnitudes, law order "
               f"(`{direction}`-favouring)", "",
               "The corpus and the ordering law disagree, and each is right about a",
