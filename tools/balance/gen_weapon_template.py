@@ -220,10 +220,24 @@ VERSUS_CEILING = 200
 VERSUS_FLOOR = 10
 REFERENCE_JSON = (pathlib.Path(__file__).resolve().parents[2]
                   / "docs" / "reference" / "family_profiles.json")
-try:
-    REFERENCE_PROFILES = json.loads(REFERENCE_JSON.read_text(encoding="utf-8"))["families"]
-except (OSError, ValueError, KeyError):   # missing/damaged data must not break the generator
-    REFERENCE_PROFILES = {}
+# The families Cameo INVENTED, which have no cross-mod equivalent to measure. Kept in
+# a separate file under docs/design/ rather than merged into the reference JSON, so
+# the two provenances can never be confused: docs/reference/ is what the field said,
+# docs/design/ is what we decided. Regenerate with
+#   python tools/balance/design_invented_profiles.py --write
+DESIGNED_JSON = (pathlib.Path(__file__).resolve().parents[2]
+                 / "docs" / "design" / "invented_family_profiles.json")
+
+
+def _load(path):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))["families"]
+    except (OSError, ValueError, KeyError):   # missing/damaged data must not break the generator
+        return {}
+
+
+REFERENCE_PROFILES = _load(REFERENCE_JSON)
+DESIGNED_PROFILES = _load(DESIGNED_JSON)
 
 
 def distinct_ints(rows):
@@ -269,15 +283,27 @@ def reference_main(name, order16, level):
     the softest layer by design, so pinning them to a constant while the profile
     moves would make a specialist's best target tougher than a shield.
     """
-    entry = REFERENCE_PROFILES.get(name, {}).get(level)
+    # Measured wins over designed: if the corpus ever gains coverage for a family we
+    # had to invent, the evidence should displace the design without anyone having to
+    # remember to delete the old entry.
+    entry = (REFERENCE_PROFILES.get(name, {}).get(level)
+             or DESIGNED_PROFILES.get(name, {}).get(level))
     if entry is None:
         return None
     profile = entry["profile"]
     if not all(a in profile for a in order16):
         return None                       # partial data is not usable data
     values = [profile[a] for a in order16]
-    rows = ([("Shield", int(round(max(values))) + int(round(min(values))))]
-            + [(a, int(round(profile[a]))) for a in order16])
+    shield = max(values) + min(values)
+    # `Shield` is a Versus row like any other, so the window binds on it too — and it
+    # is the row most likely to breach, because its rule puts it one floor ABOVE the
+    # profile's best target and the best target may already be at the ceiling. Scale
+    # the whole set down together rather than clamping Shield alone: clamping would
+    # tie it with the top armor, and a shield that is no softer than the toughest
+    # thing the weapon can hit is not a shield.
+    scale = min(1.0, VERSUS_CEILING / shield) if shield > 0 else 1.0
+    rows = ([("Shield", int(round(shield * scale)))]
+            + [(a, int(round(profile[a] * scale))) for a in order16])
     rows = distinct_ints(rows)
     # Emit DESCENDING. The law's order produced the assignment, but `Heroic` is
     # DERIVED (`Plate x Scout / peak`) and lands wherever its product falls, not in

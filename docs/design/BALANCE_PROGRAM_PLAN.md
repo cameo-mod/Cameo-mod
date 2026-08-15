@@ -676,11 +676,60 @@ the sources contain no derived armor, and clamping would break §12.0b).
   Widening them is DESIGN, not measurement, and it can push a block past its macro neighbour
   and break the ordering law — so it stays a per-family maintainer call.
 
-**NEXT (step 4b):** the 10 families with NO reference coverage — `Flak`, `Chemical`, `Melee`,
-`Arrow`, `Magic`, `Demolition`, `Concussion`, `Sonic`, `Railgun`, `Nuclear`. `Magic` (PCT) and
-`Sonic` (FLAT) are already mode-designed and `Nuclear` is `HAND_TUNED`, so **7 sloped ladders**
-need inventing with reasoning + the spreadsheet the maintainer asked for. They still carry the
-even ramp and the OLD floors (10/25/40), which contradict §12.0's 10–25 band — resolve there.
+**STEP 4b — SHIPPED. The invented families are designed, and the even ramp is GONE.**
+
+Seven sloped ladders had no cross-mod equivalent: `Flak`, `Chemical`, `Melee`, `Arrow`,
+`Demolition`, `Concussion`, `Railgun`. (`Magic` = PCT mode, `Sonic` = FLAT mode and `Nuclear`
+= `HAND_TUNED` are designed by other means and stay deliberate 1.0x/1.8x exceptions.)
+
+| piece | where |
+|---|---|
+| designer + reasoning | `tools/balance/design_invented_profiles.py` |
+| design sheet | `docs/design/INVENTED_WARHEAD_FAMILIES.md` |
+| data | `docs/design/invented_family_profiles.json` (**separate from `docs/reference/`** so measured and designed provenance can never be confused; measured WINS if the corpus ever covers a family) |
+
+**Invented is not arbitrary — only two numbers per family are a choice, and both are
+constrained.** SHARPNESS sits in the measured `2x/4x/8x` band, placed so the seven have their
+OWN median on the field's centre (4x) and none exceeds what the MEASURED families reached
+(6.2x) — the families we invented cannot be quietly sharper than the ones we measured. CLIFF
+POSITION is **derived, not picked**: `rungs / 16`, the share of the order the weapon genuinely
+threatens (a fist works on unarmoured infantry = 2 rungs). Only `width` — how BINARY the weapon
+is — is left as feel. ORDER is `build_order()` as always.
+
+**The measurement that justifies the whole item.** Step regularity across 1350 reference
+profiles with 6+ armors, as the CV of consecutive gaps (`0.00` = a perfectly even ramp):
+
+| p10 | p25 | median | p75 | p90 | CV < 0.30 | CV > 1.00 |
+|--:|--:|--:|--:|--:|--:|--:|
+| 0.78 | 0.97 | **1.25** | 1.58 | 2.06 | **0%** | 73% |
+
+**Not one profile in 1350 is even-stepped.** The ramp these families shipped scored 0.00 — the
+single shape no mod produces at any tier. Now: **median CV 0.99, and 0 templates left on a ramp.**
+
+**Result across ALL 88 templates: 0 cells outside `[10, 200]`, 80 of 81 band-governed templates
+inside 2x–8x** (median 3.2x, range 2.0–6.2x).
+
+**Three bugs this pass flushed out:**
+- ⚠ **The design ratio and the SHIPPED ratio are different quantities.** `enforce_distinct` has
+  to MANUFACTURE separation wherever a tail is packed, and a sharp early cliff packs it hard:
+  at a nominal 6.0x, ten of `Melee`'s sixteen values sat within 2 points of the bottom, so the
+  gap-2 rule pushed the floor from 40 to 21 and shipped **9.4x** — outside the band, from a
+  design that claimed to be inside it. The nominal is now SOLVED by bisection against what
+  survives the no-ties rule, and the JSON records `sharpness_intended` AND `sharpness_shipped`.
+- ⚠ **`Shield` breached the window.** Its rule puts it one floor ABOVE the profile's best
+  target, and the best target may already be at the ceiling — 28 cells over 200. Fixed by
+  scaling the whole row set down together; clamping `Shield` alone would tie it with the top
+  armor, and a shield no softer than the toughest thing the weapon can hit is not a shield.
+- An earlier draft placed cliffs by eye and produced an arrow dealing **190 against Plate** —
+  95% of its peak against the armour it is least able to defeat.
+
+**Two things left for the maintainer, both now visible as numbers:**
+- **`^Warhead_ChemMissile_Heavy` ships at 1.8x**, just under the band. BLENDS average their
+  parents, and averaging flattens — the same effect that makes the per-family aggregate mush.
+  Whether a blend should be re-sharpened to its parents' level is a design call, not a default.
+- **`Chemical` is declared `dir="heavy"`** in the weapon matrix, so it now visibly deals **134
+  to a superheavy tank and 106 to an unarmoured soldier**. For a corrosive gas that reads
+  backwards. Flipping a family's direction is a design decision, so it is reported, not changed.
 
 **VERIFY:** `python tools/reference/extract_versus.py --summary` → 16 sources, 3150 rows;
 `python tools/balance/verify_generator_sync.py` → drift = 1 (`^Warhead_Sniper_Light`);
