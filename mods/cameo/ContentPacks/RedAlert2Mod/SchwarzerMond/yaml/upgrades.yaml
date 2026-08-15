@@ -111,8 +111,8 @@ schwarzermond_upgrade_moonpropaganda:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Research
-		Description: All Schwarzer Mond infantry deal 10% more damage.
-			Funded by MoonCoin, the official cryptocurrency of the Reichsmark 2.0 blockchain.
+		Description: All Schwarzer Mond infantry deal 10% more damage, fight at 50% more firepower below half health, and 15% of the enemy infantry they kill rise again as Lunar Soldiers.
+			The broadcasts run day and night on every frequency the Moon can reach. They work best on the dying — and, it turns out, slightly after.
 		Prerequisites: ~schwarzermond_techcenter, !schwarzermond_upgrade_moonpropaganda
 	RenderSprites:
 		Image: schwarzermond_upgrade_moonpropaganda
@@ -127,7 +127,8 @@ schwarzermond_upgrade_cryptofascism:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Research
-		Description: Every Schwarzer Mond unit generates 1 credit per second.
+		Description: Every Schwarzer Mond unit generates 1 credit per second, and every enemy killed mints MoonCoin worth 25% of the victim's value.
+			The Reich pays its soldiers in MoonCoin, the official memecoin of the Reichsmark 2.0 blockchain. High Command holds 94% of the supply in a cold wallet labelled NOT A RUG, has announced that the chart only goes up, and reminds all personnel that selling is treason. Casualties are not losses, they are liquidity events.
 		Prerequisites: ~schwarzermond_techcenter, !schwarzermond_upgrade_cryptofascism
 	RenderSprites:
 		Image: schwarzermond_upgrade_cryptofascism

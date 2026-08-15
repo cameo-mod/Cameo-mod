@@ -707,6 +707,15 @@
 		Interval: 25
 		Amount: 1
 		RequiresCondition: schwarzermond_upgrade_cryptofascism
+	# MOONCOIN BULL RUN — every kill mints. GivesBounty (on the victim) pays whichever
+	# killer carries a TakesBounty whose ValidTypes contain the victim's bounty Type, so a
+	# private `MoonCoin` type means these units collect from the tree-wide MoonCoin bounty
+	# while nobody else in the game is affected and the existing `global-bounty` game
+	# option keeps its own separate `Bounty` type.
+	TakesBounty@mooncoin:
+		RequiresCondition: schwarzermond_upgrade_cryptofascism
+		ValidTypes: MoonCoin
+		Percentage: 25
 	ActorStatValues:
 		Upgrades: schwarzermond_upgrade_cryptofascism
 
@@ -735,6 +744,28 @@
 	FirepowerMultiplier@schwarzermond_upgrade_moonpropaganda:
 		RequiresCondition: schwarzermond_upgrade_moonpropaganda
 		Modifier: 110
+	# FANATICISM — the propaganda works best on the dying. Below half health a Schwarzer
+	# Mond soldier fights HARDER instead of worse, which is the opposite of how damage
+	# normally feels and pairs directly with the Vril shield: the shield pops, the soldier
+	# goes berserk. MaxHP is a PERCENTAGE (GrantConditionOnHealth), so one number covers
+	# every unit whatever its health.
+	GrantConditionOnHealth@moonpropaganda_fanatic:
+		Condition: moonpropaganda_fanatic
+		MaxHP: 50
+	FirepowerMultiplier@moonpropaganda_fanatic:
+		RequiresCondition: schwarzermond_upgrade_moonpropaganda && moonpropaganda_fanatic
+		Modifier: 150
+	# DEFECTION — enemy infantry who die to the broadcasts get up again on the Reich's
+	# side. The one effect in the faction that converts the enemy's losses into your gains
+	# rather than buffing a number, and the reason this upgrade is worth researching.
+	# ⚠ Deliberately spawns a Schwarzer Mond unit rather than reusing the Naxis
+	# corpse.nax -> undead.nax revive chain: a `.nax` actor here would make SchwarzerMond
+	# depend on the Naxis pack, against the self-contained ContentPack goal.
+	SpawnsActorsOnKill@moonpropaganda_defection:
+		RequiresCondition: schwarzermond_upgrade_moonpropaganda
+		Actor: schwarzermond_lunarsoldier
+		Probability: 15
+		ValidTargets: Infantry
 	ActorStatValues:
 		Upgrades: schwarzermond_upgrade_moonpropaganda
 

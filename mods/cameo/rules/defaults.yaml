@@ -4801,6 +4801,12 @@
 		RequiresCondition: global-bounty
 	TakesBounty:
 		RequiresCondition: global-bounty
+	# Every actor offers a MoonCoin bounty unconditionally, and it is inert for everyone:
+	# GivesBounty only ever pays a killer that carries a TakesBounty listing this exact
+	# Type, which today is only Schwarzer Mond with Cryptofascism researched. Keeping it a
+	# separate node and Type leaves the `global-bounty` game option above untouched.
+	GivesBounty@mooncoin:
+		Type: MoonCoin
 	WithColoredOverlay@BOUNTY:
 		Color: FFFF00BB
 		RequiresCondition: glabounty1 || glabounty2 || glabounty3
