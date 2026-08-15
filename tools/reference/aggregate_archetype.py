@@ -52,13 +52,21 @@ if hasattr(sys.stdout, "reconfigure"):
 # --------------------------------------------------------------------------- #
 # Cameo's 16 armor types, in the ladder order gen_weapon_template.py uses.
 # --------------------------------------------------------------------------- #
+# ⚠ **HEROIC IS NOT THE TOP INFANTRY RUNG** (maintainer ruling, 2026-08-15).
+# Putting it at the heavy end of the infantry ladder backfires: heroes would take
+# the MOST damage from anti-armour weapons, which is the opposite of what an elite
+# unit should feel like. Heroic is instead the BRIDGE between infantry Plate and
+# vehicle Scout, and it is excluded from the INF ladder's ordering for that reason.
+# `HEROIC_FROM` below says how its value is derived.
 CAMEO_LADDERS = {
-    "INF": ["None", "Flak", "Plate", "Heroic"],
+    "INF": ["None", "Flak", "Plate"],
     "VEH": ["Scout", "Light", "Medium", "Heavy", "Superheavy"],
     "BLD": ["Wood", "Steel", "Concrete"],
     "AIR": ["Fighter", "Bomber", "Helicopter", "Spaceship"],
 }
-CAMEO16 = [a for lad in CAMEO_LADDERS.values() for a in lad]
+# Display order: Heroic sits between the ladders it bridges.
+CAMEO16 = (CAMEO_LADDERS["INF"] + ["Heroic"] + CAMEO_LADDERS["VEH"]
+           + CAMEO_LADDERS["BLD"] + CAMEO_LADDERS["AIR"])
 
 # Source armor -> Cameo armor, where a real equivalent exists.
 DIRECT = {
@@ -98,6 +106,54 @@ NORMALISE_MAX = 100.0
 # hard 0 in a source means "immune". Clamping to 1 keeps the data point at
 # "essentially immune" instead of deleting the row from the statistic.
 GMEAN_FLOOR = 1.0
+
+# --------------------------------------------------------------------------- #
+# THE HEROIC RULE (maintainer, 2026-08-15)
+# --------------------------------------------------------------------------- #
+# *"I was thinking of making Heroic an in-between of infantry Plate and vehicle
+#  Scout … when the versus values were still multiplied, combining plate and
+#  scout would be almost perfect, because it combines both infantry and vehicle
+#  and at the same time light and heavy — so most weapons which are only good
+#  against one of them would deal low damage to our heroes, and only those good
+#  against BOTH are good against heroes as well."*
+#
+# That property comes from MULTIPLYING, and averaging destroys it:
+#
+#     anti-infantry weapon   Plate 100 · Scout 30  ->  avg 65   product 30
+#     anti-vehicle weapon    Plate  20 · Scout 90  ->  avg 55   product 18
+#     good against both      Plate  80 · Scout 80  ->  avg 80   product 64
+#
+# The average says the two specialists are nearly as good against a hero as the
+# generalist. The product says exactly what the maintainer wants: specialists
+# fall off a cliff, only the generalist stays high.
+#
+# So Heroic's VALUE is the product of the weapon's Plate and Scout values
+# (as fractions, re-expressed as a percentage) — the old two-armor multiplication
+# collapsed into one armor type.
+#
+# ⚠ **This does NOT reintroduce the W20 squaring bug.** W20 was two `Armor`
+# TRAITS multiplying at runtime on one actor, which nobody designed. This is a
+# single armor type whose numbers are computed once, at generation time, from a
+# formula the designer chose. One armor trait is still enabled per hit.
+HEROIC_FROM = ("Plate", "Scout")
+
+# --------------------------------------------------------------------------- #
+# THE SPREAD RULE (maintainer, 2026-08-15)
+# --------------------------------------------------------------------------- #
+# *"I still want a ladder (no two values should be identical) but it no longer
+#  needs to be perfectly linear. And 100-5 should be the most hardcore spread
+#  ever … 5% should be more like the exception than the rule. For less
+#  specialized warheads you should be between 10 and 25 for the lowest value."*
+#
+#   * top of every profile is 100 (the normalisation law);
+#   * NO TWO VALUES IDENTICAL anywhere in the profile — plateaus are what make a
+#     weapon unreadable, and a tie is a wasted rung;
+#   * steps need NOT be equal. Even ramps are exactly the "moderate middle" W13
+#     exists to avoid; uneven steps are how a weapon says where it really bites;
+#   * floor 10-25 for a normal weapon; **5 only for a deliberately hyper-
+#     specialised one**, and it is meant to stay rare.
+FLOOR_BAND = (10, 25)
+EXTREME_FLOOR = 5
 
 # --------------------------------------------------------------------------- #
 # The concepts. `ini` entries are ACTOR names traced through the rules; `openra`
@@ -143,6 +199,41 @@ ARCHETYPES = {
         "ini_warheads": ["AP"],
         "openra_warheads": ["^ArmorPierceDamage", "sabot"],
         "cameo_family": "^Warhead_CannonAP_Medium",
+        "direction": "heavy",
+        # The one concept that earns the 5 floor: AP is the deliberate extreme,
+        # near-useless against unarmoured infantry. Everything else sits 10-25.
+        "specialised": True,
+    },
+    # Names below are verified present in the corpus, not guessed.
+    "flame": {
+        "what": "Flame — anti-infantry/anti-building, poor against armour",
+        "ini_warheads": ["Fire", "Fire2", "SAFlame", "SSABFlame", "NapalmWH",
+                         "Napalm1", "Napalm2", "FlamethWH1", "FlamethWH2"],
+        "openra_warheads": ["^FlameWeapon", "^FireWeapon", "Napalm", "BigFlamer",
+                            "Flamer", "TankNapalm", "FireballLauncher"],
+        "cameo_family": "^Warhead_Flame_Medium",
+        "direction": "light",
+    },
+    # ⚠ MEASURED LIMITATION, not a gap in the search: the RA2 lineage does NOT
+    # separate missile-AP from cannon-AP — a Rhino shell and a tank-killer rocket
+    # both carry the single `AP` warhead. Only the OpenRA sources ship distinct
+    # missile families (`^AntiGroundMissile`, `^AntiAirMissile`, `Dragon`), so
+    # these two concepts rest on fewer sources than the cannon pair and their `n`
+    # column will say so. Cameo's split into MissileHE/MissileAP is an ADDITION to
+    # the field, which means the corpus can inform the shape but cannot settle it.
+    "missile_he": {
+        "what": "Missile HE — the air-capable counterpart of the HE cannon",
+        "ini_warheads": ["TripleRocketHE", "TSMultiMissileHE", "MultiMissileWH"],
+        "openra_warheads": ["^AntiGroundMissile", "^MissileWeapon", "^Missile",
+                            "^Rocket", "Rockets", "BikeRockets", "^DefaultMissile"],
+        "cameo_family": "^Warhead_MissileHE_Medium",
+        "direction": "light",
+    },
+    "missile_ap": {
+        "what": "Missile AP — anti-tank missile (shares `AP` in the RA2 lineage)",
+        "ini_warheads": ["AP"],
+        "openra_warheads": ["Dragon", "120mmHEAT", "sabot", "StnkMissile"],
+        "cameo_family": "^Warhead_MissileAP_Medium",
         "direction": "heavy",
     },
 }
@@ -313,9 +404,24 @@ def flag_scale_outliers(rows: list[dict]) -> None:
             r["how"] += " ⚠scale?"
 
 
+# A profile needs at least this many DEFINED armors to enter an aggregate.
+#
+# ⚠ This filter fixes a wrong conclusion I drew and reported. A row defining a
+# single armor (the OpenRA `^TeslaWeapon` template rows define only `none`)
+# normalises to `none = 100` by definition — its one value IS its own maximum.
+# Five such rows stacked the `None` column at 100 and made the Tesla median look
+# anti-infantry, which I read as "Cameo's anti-heavy Tesla is inverted against
+# the field". Per-mod inspection showed the opposite: 6 of the 9 mods that state
+# a direction have Tesla RISING toward heavy armour, exactly like Cameo.
+# One armor is not a profile, and normalisation turns it into a fake 100.
+MIN_ARITY_FOR_AGGREGATE = 3
+
+
 def buckets_of(rows: list[dict]) -> dict[str, list[float]]:
     out: dict[str, list[float]] = {a: [] for a in CAMEO16}
     for r in rows:
+        if len(r["versus"]) < MIN_ARITY_FOR_AGGREGATE:
+            continue
         vals, _ = to_cameo(r["versus"])
         for armor, value in vals.items():
             out[armor].append(value)
@@ -390,6 +496,55 @@ def lawful_profile(profile: dict[str, float], direction: str) -> dict[str, float
         targets = list(reversed(present)) if direction == "heavy" else present
         for armor, value in zip(targets, values):
             out[armor] = value
+    return out
+
+
+def derive_heroic(profile: dict[str, float]) -> float | None:
+    """Heroic = Plate x Scout, as fractions (see THE HEROIC RULE above).
+
+    Both inputs are percentages of the weapon's own peak, so the product is
+    `Plate/100 * Scout/100`, re-expressed as a percentage: `Plate * Scout / 100`.
+    A weapon that is strong against exactly one of the two collapses; only one
+    strong against both stays high.
+    """
+    plate, scout = (profile.get(a) for a in HEROIC_FROM)
+    if plate is None or scout is None:
+        return None
+    return plate * scout / 100.0
+
+
+def shape_profile(profile: dict[str, float], floor: float) -> dict[str, float]:
+    """Apply THE SPREAD RULE: peak 100, given floor, no two values identical.
+
+    Rescaling is affine onto [floor, 100], which preserves the RELATIVE shape —
+    the plateaus and cliffs the corpus measured survive; only the range moves.
+    Ties are then broken by the smallest nudge that separates them, walking
+    upward from the floor, so the fix never pushes a value below the floor or
+    above the peak and never reorders the ladder.
+    """
+    if not profile:
+        return {}
+    values = list(profile.values())
+    lo, hi = min(values), max(values)
+    if hi <= lo:                                   # a totally flat input
+        return {k: floor for k in profile}
+    scaled = {k: floor + (v - lo) * (100.0 - floor) / (hi - lo)
+              for k, v in profile.items()}
+
+    # No two identical, minimum separation 1. Walking DOWN from the peak rather
+    # than up from the floor: nudging upward pins ties against the 100 cap, where
+    # `min(value, 100)` silently re-creates the duplicate it was meant to remove
+    # (Tesla came out with Plate 100 AND Superheavy 100). Descending has room by
+    # construction — 16 armors need 15 units of separation inside a >=75 range.
+    order = sorted(scaled, key=lambda k: -scaled[k])
+    out: dict[str, float] = {}
+    previous = None
+    for key in order:
+        value = round(scaled[key], 1)
+        if previous is not None and value >= previous:
+            value = previous - 1
+        out[key] = value
+        previous = value
     return out
 
 
@@ -520,6 +675,11 @@ def render(concept: str, rows: list[dict]) -> str:
     med = aggs["median"]
     violations = order_violations(med, direction)
     lawful = lawful_profile(med, direction)
+    floor = EXTREME_FLOOR if spec.get("specialised") else spec.get("floor", 15)
+    lawful = shape_profile(lawful, floor)
+    heroic = derive_heroic(lawful)
+    if heroic is not None:
+        lawful["Heroic"] = round(heroic, 1)
     lines += ["", f"### Table D — PROPOSED: field magnitudes, law order "
               f"(`{direction}`-favouring)", "",
               "The corpus and the ordering law disagree, and each is right about a",

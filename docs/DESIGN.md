@@ -796,6 +796,65 @@ cheapest provider wins).
 step 6/5/4 = light/medium/heavy law (floor 10/25/40, Shield = 100+floor,
 percentage warhead its own 1-step window), profile = armor order.
 
+### 12.0 THE PROFILE SHAPE LAW (maintainer, 2026-08-15) — binding
+
+Supersedes the "even step" half of the step law. Three rules, in force for every
+`^Warhead_*` family:
+
+1. **Peak is 100.** Every profile is normalised so its own maximum is 100. This
+   is also how reference profiles from other mods are read, so a source that
+   writes 200/100 and one that writes 100/50 are recognised as the SAME design.
+   Absolute lethality lives in `Damage`, never in the armor profile.
+2. **It is still a LADDER — no two values identical, anywhere in the profile.**
+   A tie is a wasted rung and makes the weapon unreadable.
+3. **But it need NOT be linear.** Equal steps were an artifact of the generator,
+   and an even ramp is exactly the "moderate middle" the warhead rebuild exists
+   to escape. Measured across 16 reference mods, real profiles use **plateaus
+   and cliffs** — the canonical HE warhead sits at ~100 across the whole
+   infantry ladder and then falls off to 35 at Heavy and 15 at Superheavy.
+   Uneven steps are how a weapon says where it actually bites.
+4. **The floor band is 10–25.** That is the lowest value a normal weapon may
+   have. **A floor of 5 is the most extreme spread that may ever ship** and
+   marks a deliberately hyper-specialised weapon — `CannonAP` against unarmoured
+   infantry is the archetype. It is the exception, not the pattern; if several
+   families want a 5, they are not all special.
+
+⚠ The ordering law (§ARMOR_SYSTEM "PROFILE construction") still decides WHICH
+armor gets which value. The corpus supplies magnitudes, the law supplies order.
+
+### 12.0b HEROIC ARMOR IS A BRIDGE, NOT THE TOP RUNG (maintainer, 2026-08-15)
+
+**Heroic is NOT the heavy end of the infantry ladder.** Placing it there
+backfires: an elite unit would take the MOST damage from every anti-armour
+weapon, which is the opposite of what "heroic" should feel like. The infantry
+ladder is therefore `None < Flak < Plate`, and **Heroic sits BETWEEN Plate and
+Scout** — a hybrid of infantry and vehicle, of light and heavy.
+
+**Its value is the PRODUCT of the weapon's Plate and Scout values**, as
+fractions: `Heroic = Plate × Scout / 100`.
+
+That reproduces exactly what the old multiplied-armor stack gave, and averaging
+cannot:
+
+| weapon | Plate | Scout | average | **product** |
+|---|--:|--:|--:|--:|
+| anti-infantry specialist | 100 | 30 | 65 | **30** |
+| anti-vehicle specialist | 20 | 90 | 55 | **18** |
+| good against both | 80 | 80 | 80 | **64** |
+
+The average says a specialist is nearly as good against a hero as a generalist.
+The product says what is intended: **specialists fall off a cliff against
+heroes; only a weapon strong against BOTH infantry and vehicles stays strong.**
+
+⚠ This does **not** reintroduce the W20 squaring bug. W20 was two `Armor`
+*traits* multiplying at runtime on one actor, which nobody designed. This is a
+single armor type whose numbers are computed once, at generation time, from a
+formula the designer chose. Exactly one armor trait is still enabled per hit.
+
+Implementation: `tools/reference/aggregate_archetype.py` (`HEROIC_FROM`,
+`FLOOR_BAND`, `shape_profile`); it must be mirrored into
+`gen_weapon_template.py` when the families are regenerated (W13 step 3).
+
 **LAW (2026-07-18): balance numbers move ONLY through the balance
 pipeline** — `docs/design/BALANCE_PIPELINE.md` (raw-stat JSON ledger in
 `docs/balance/`, generated workbench `cameo_balance_v2.xlsx`, gated
