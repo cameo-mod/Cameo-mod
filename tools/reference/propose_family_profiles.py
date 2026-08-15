@@ -90,13 +90,68 @@ DIRECTION_WORD = {"light": "anti-LIGHT", "heavy": "anti-HEAVY"}
 # Below this, a tier is reported as thin rather than treated as settled.
 MIN_ROWS = 8
 
+# --------------------------------------------------------------------------- #
+# Flat-block spreading — OPT-IN, because it is DESIGN, not measurement.
+# --------------------------------------------------------------------------- #
+# The corpus routinely fails to separate rungs inside a macro block: the
+# canonical `AP` warhead is ~100 against every armoured target, because the
+# source games never needed to tell a medium tank from a heavy one. The no-ties
+# rule then separates them by its minimum step and CannonAP's vehicle block
+# reads `96 · 97 · 98 · 99 · 100` — distinct, and useless.
+#
+# `--spread-flat-blocks` fixes that by widening any block whose internal span is
+# under `MIN_BLOCK_SPAN`, redistributing its values around their own mean so the
+# block keeps the POSITION the macro priority gave it while its rungs become
+# readable. Nothing else moves.
+#
+# It is off by default on purpose. The default output is what the field says; the
+# flag is Cameo choosing something the field never expressed, and the two should
+# never be confused in a document someone later mines for evidence.
+MIN_BLOCK_SPAN = 20.0
+
+
+def spread_flat_blocks(profile: dict[str, float], order: list[str],
+                       min_span: float = MIN_BLOCK_SPAN) -> dict[str, float]:
+    """Widen any macro block the corpus left effectively flat.
+
+    Operates per macro ladder, in the sequence `order` already fixed, so the
+    ranking is never changed — only the spacing. The block is re-spread around
+    its own mean, which keeps its centre of mass and therefore its standing
+    relative to the other blocks; a block that the field placed low stays low.
+
+    Blocks the corpus DID differentiate (span >= min_span) are left untouched,
+    so real measured shape always wins over the synthetic spread.
+    """
+    out = dict(profile)
+    for ladder in ag.CAMEO_LADDERS.values():
+        present = [a for a in order if a in ladder and a in profile]
+        if len(present) < 2:
+            continue
+        values = [profile[a] for a in present]
+        span = max(values) - min(values)
+        if span >= min_span:
+            continue                        # the field said something; keep it
+        # Anchor at the block's OWN top and widen downward. Centering on the mean
+        # and spreading both ways looks fairer but pushes the upper rungs past
+        # 100, where the clamp flattens them back into ties that `enforce_distinct`
+        # then separates by 1 — reproducing the exact problem this exists to fix
+        # (`Scout 88 · Light 93 · Medium 97 · Heavy 99 · Superheavy 100`).
+        # The top of a block is also what ranks it against the other blocks, so
+        # holding it fixed keeps the macro priority the field measured.
+        top = max(values)
+        step = min_span / (len(present) - 1)
+        for i, armor in enumerate(present):
+            out[armor] = round(max(1.0, top - i * step), 1)
+    return out
+
 
 def rows_for(corpus_family: str, level: str) -> list[dict]:
     wanted = set(LEVEL_PLATFORMS[level])
     return [r for r in sp.survey(corpus_family) if r["platform"] in wanted]
 
 
-def profile_for(family: str, level: str, cache: dict) -> tuple[dict, int, int] | None:
+def profile_for(family: str, level: str, cache: dict,
+                spread: bool = False) -> tuple[dict, int, int] | None:
     corpus_family, direction = FAMILY_SOURCE[family]
     if corpus_family not in cache:
         cache[corpus_family] = sp.survey(corpus_family)
@@ -153,6 +208,8 @@ def profile_for(family: str, level: str, cache: dict) -> tuple[dict, int, int] |
     values = sorted((median[a] for a in order if a in median), reverse=True)
     lawful = {a: v for a, v in zip([a for a in order if a in median], values)}
     lawful = ag.shape_profile(lawful, LEVEL_FLOOR[level])
+    if spread:
+        lawful = spread_flat_blocks(lawful, order)
     lawful.update(ag.derive_armors(lawful))
     lawful = ag.enforce_distinct(lawful)
     return lawful, len(rows), len({r["source"] for r in rows})
@@ -200,6 +257,8 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--family", help="one family only")
     ap.add_argument("--write", action="store_true", help=f"write {OUT.relative_to(ROOT)}")
+    ap.add_argument("--spread-flat-blocks", action="store_true",
+                    help="DESIGN step: widen macro blocks the corpus left flat")
     args = ap.parse_args()
 
     families = [args.family] if args.family else list(FAMILY_SOURCE)
@@ -213,7 +272,8 @@ def main() -> int:
     for family in families:
         levels = {}
         for level in ("Light", "Medium", "Heavy"):
-            levels[level] = profile_for(family, level, cache)
+            levels[level] = profile_for(family, level, cache,
+                                        spread=args.spread_flat_blocks)
         results[family] = levels
 
     for family, levels in results.items():
