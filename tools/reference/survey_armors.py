@@ -55,34 +55,49 @@ COVERED = {
     "vehiclearmor": "SP alias of a vehicle bucket",
 }
 
-# Worth taking. Each needs a profile no existing rung provides.
-CANDIDATES = {
-    "naval_*": (
-        "**NAVAL — the real gap.** Cameo has NO naval armor and no naval "
-        "template. Verified by resolving every real ship — an actor whose "
-        "`Mobile.Locomotor` is `naval`, which is the only reliable test; matching "
-        "on names like 'carrier' or 'battlecruiser' finds FLYING units and was "
-        "how an earlier draft of this note wrongly claimed ships use `Spaceship`. "
-        "The three buildable ships (`ra2_allies_aegiscruiser`, "
-        "`ra2_soviets_seascorpion`, `yuri_boomersubmarine`) use the VEHICLE "
-        "ladder: Medium, Light, Medium. So a submarine and a light tank currently "
-        "share a damage profile, and no weapon can be made good at sea without "
-        "also being good against tanks. DTA splits naval three ways "
-        "(naval_light/medium/heavy) for exactly the reason ground armor is split. "
-        "Naval anchors are already queued (ROADMAP phase C-naval) and cannot be "
-        "stated without this."),
+# ⚠ VERDICT (maintainer, 2026-08-15): **NONE of them.** All four candidates I
+# proposed were rejected, each for a reason that shows the existing 16 already
+# cover the ground:
+#
+#   naval_*   "Naval is sadly not a big part of our gameplay so having naval
+#             armor types would rarely see any use. They can use vehicle armors
+#             for now." — an armor class earns its place by being USED, and a
+#             rung nothing stands on is 16 more numbers per warhead for nothing.
+#   wall      Walls already map cleanly onto the building ladder:
+#             wire fence + sandbags -> Wood, chainlink -> Steel, concrete -> Concrete.
+#             My claim that walls "need a shape no building rung has" was wrong;
+#             they need the shapes that already exist, correctly assigned.
+#   cy        The Construction Yard already uses Concrete, the heavy building
+#             rung, and the AtomicCore superweapon is already tuned to 75% of CY
+#             health against it. The special case is SOLVED, not outstanding.
+#   harvester Not adopted — see below.
+#
+# So the answer to "what should we take from the reference mods' armor sets" is
+# **nothing**. That is a real finding, not a failure to find one: 16 rungs plus
+# two derived hybrids span what 16 mods express, and the differences are naming
+# and macro-bucket granularity rather than missing design space.
+REJECTED_CANDIDATES = {
+    "naval_light/medium/heavy": (
+        "Ships DO borrow the vehicle ladder — the three buildable ones "
+        "(`ra2_allies_aegiscruiser` Medium, `ra2_soviets_seascorpion` Light, "
+        "`yuri_boomersubmarine` Medium) share profiles with light tanks. But "
+        "three ships is the whole navy: naval is not a significant part of "
+        "Cameo's gameplay, so three new rungs would cost 3 numbers on every one "
+        "of ~55 warhead templates and almost never be read. Vehicle armors for "
+        "now; revisit only if naval ever grows a real roster."),
     "wall": (
-        "Walls resist small arms almost completely but fall to demolition — a "
-        "shape no building rung has, since Wood/Steel/Concrete all sit on the "
-        "normal ladder. Without it, wall balance is a per-weapon hack."),
+        "My reasoning was wrong. Walls do NOT need a shape the building ladder "
+        "lacks — they need the shapes it already has, correctly assigned: "
+        "wire fence + sandbags -> Wood, chainlink -> Steel, concrete wall -> "
+        "Concrete. That is an assignment job, not a new armor type."),
     "harvester": (
-        "Economy units as their own rung. This is a genuine BALANCE LEVER: it "
-        "lets harvester harassment be tuned without touching every light "
-        "vehicle, which is otherwise the only way to reach it."),
+        "Rejected with the rest: harvesters are light vehicles and the light "
+        "vehicle rung already reaches them. Tuning harassment separately is a "
+        "real want, but it belongs to unit pricing, not to a 17th armor column."),
     "cy": (
-        "Construction Yard. Cameo already special-cases it (the AtomicCore "
-        "75%-CY superweapon), and an armor type turns that hand-tuning into a "
-        "profile column — superweapon-vs-CY becomes a number, not an exception."),
+        "Already solved. The Construction Yard uses Concrete, the heavy building "
+        "rung, and the AtomicCore superweapon is already tuned to 75% of CY "
+        "health against it. There is no outstanding special case to absorb."),
 }
 
 
@@ -108,17 +123,17 @@ def main() -> int:
         elif armor in COVERED:
             status = f"covered — {COVERED[armor]}"
         else:
-            status = "CANDIDATE"
+            status = "considered -> REJECTED (see verdict)"
         print(f"{armor:16} {count:6} {n:5}  {status[:76]}")
 
     print("\n" + "=" * 74)
-    print("RECOMMENDED ADDITIONS")
+    print("VERDICT: adopt NOTHING — the 16 rungs already span what 16 mods express")
     print("=" * 74)
-    for name, why in CANDIDATES.items():
-        print(f"\n* {name}\n  " + why.replace("**", ""))
-    print("\nNot recommended: everything in COVERED above — each duplicates a rung "
-          "Cameo\n  already has, and a 17th armor that behaves like the 16th is "
-          "just more numbers\n  to keep consistent.")
+    for name, why in REJECTED_CANDIDATES.items():
+        print(f"\n* {name}  [REJECTED]\n  " + why.replace("**", ""))
+    print("\nEverything else duplicates a rung Cameo already has. A 17th armor that "
+          "behaves\n  like the 16th is just more numbers to keep consistent across "
+          "every warhead.")
     return 0
 
 

@@ -34,14 +34,23 @@ unit's gun is with how tough its hull is, and the two are independent.
 measured from the very Versus values W13 rewrites, so deriving a price factor now
 would bake in the profiles we are about to replace.
 
-⚠ **THE AIR COLUMNS ARE FILTERED, the ground ones are not — and they must be.**
-Only **43%** of live weapons (990 of 2323) can target Air at all. A ground-only
-weapon still *declares* a Versus against Fighter/Bomber/Helicopter/Spaceship, and
-counting those declarations drags the air average down until aircraft look almost
-untouchable. What a flyer actually meets is the average over weapons that CAN
-shoot it, so air exposure is computed over `ValidTargets`-eligible weapons only.
-Without this filter the air armors measured 39-48 against a roster mean of 62,
-which would have priced aircraft as if the whole roster could barely scratch them.
+⚠ **EXPOSURE HAS TWO FACTORS AND YOU NEED BOTH.** Maintainer, 2026-08-15:
+*"Aircraft is inherently BETTER! Just because almost nothing can shoot it! So it
+deserves this higher cost multiplier."* — correct, and it exposed a mistake in an
+earlier version of this file, which filtered air down to `ValidTargets`-eligible
+weapons and reported only the second factor:
+
+    COVERAGE  — what share of the roster can target you AT ALL
+    INTENSITY — among those that can, how hard they hit (mean Versus)
+    EXPOSURE  = coverage x intensity
+
+Only **43%** of live weapons can target Air. Reporting intensity alone answers
+"when something CAN shoot me, how bad is it?" and throws away the survivability
+that comes from three-fifths of the roster being unable to reach you at all —
+which is most of why aircraft feel strong. Reporting the raw average instead is
+also wrong, because a ground-only weapon still *declares* an air Versus it can
+never apply. The product is the honest figure, and it is the one the price
+formula should consume.
 """
 from __future__ import annotations
 
@@ -100,18 +109,20 @@ def weapon_versus(rs, name: str) -> dict[str, float] | None:
     return None
 
 
-def weapon_targets_air(rs, name: str) -> bool:
-    """Can this weapon shoot up at all? Absent `ValidTargets` = ground default."""
+def weapon_reach(rs, name: str) -> tuple[bool, bool]:
+    """(can hit ground, can hit air). OpenRA's default `ValidTargets` is
+    `Ground, Water` — a weapon that never states the field is ground-only."""
     try:
         node = rs.resolve_weapon(name)
     except Exception:
-        return False
+        return (True, False)
     if node is None:
-        return False
+        return (True, False)
     for child in node.children:
         if child.key == "ValidTargets":
-            return "Air" in (child.value or "")
-    return False
+            value = child.value or ""
+            return ("Ground" in value or "Water" in value, "Air" in value)
+    return (True, False)
 
 
 def deployment_counts(rs, model) -> collections.Counter:
@@ -151,6 +162,8 @@ def main() -> int:
 
     weights = collections.Counter() if args.unweighted else deployment_counts(rs, model)
     samples: dict[str, list[float]] = {a: [] for a in ARMORS}
+    reach_weight: collections.Counter = collections.Counter()
+    total_weight = 0
     weapons_used = 0
     for name in rs.weapons:
         if name.startswith("^"):
@@ -162,13 +175,18 @@ def main() -> int:
         if weight <= 0:
             continue                       # defined but nothing fields it
         weapons_used += 1
-        can_hit_air = weapon_targets_air(rs, name)
+        hits_ground, hits_air = weapon_reach(rs, name)
+        total_weight += weight
         for armor in ARMORS:
             if armor not in versus:
                 continue
-            # A weapon that cannot shoot up is not part of what a flyer meets.
-            if armor in LADDERS["AIR"] and not can_hit_air:
+            # COVERAGE: a weapon that cannot reach you is not part of your
+            # exposure at all — but it still counts toward the roster total, which
+            # is what makes being hard to reach worth something.
+            reachable = hits_air if armor in LADDERS["AIR"] else hits_ground
+            if not reachable:
                 continue
+            reach_weight[armor] += weight
             samples[armor].extend([versus[armor]] * weight)
 
     if not weapons_used:
@@ -176,27 +194,30 @@ def main() -> int:
         return 1
 
     mode = "per definition" if args.unweighted else "weighted by deployment"
-    print(f"armor exposure — mean Versus across {weapons_used} live weapons ({mode})\n")
-    means = {a: statistics.fmean(v) for a, v in samples.items() if v}
-    overall = statistics.fmean(means.values())
-    print(f"{'armor':12} {'n':>7} {'mean':>7} {'median':>7}  {'vs roster':>10}  "
-          f"{'HP factor':>9}")
-    for macro, ladder in LADDERS.items():
+    print(f"armor exposure across {weapons_used} live weapons ({mode})")
+    print("exposure = coverage x intensity — see the header for why both\n")
+
+    intensity = {a: statistics.fmean(v) for a, v in samples.items() if v}
+    coverage = {a: reach_weight[a] / total_weight for a in intensity}
+    exposure = {a: coverage[a] * intensity[a] for a in intensity}
+    overall = statistics.fmean(exposure.values())
+
+    print(f"{'armor':12} {'coverage':>9} {'intensity':>10} {'EXPOSURE':>9} "
+          f"{'vs roster':>10} {'HP factor':>10}")
+    for ladder in LADDERS.values():
         for armor in ladder:
-            vals = samples[armor]
-            if not vals:
+            if armor not in exposure:
                 continue
-            mean = means[armor]
-            rel = mean / overall
+            rel = exposure[armor] / overall
             # effective_hp = hp * 100 / exposure -> a factor relative to the roster
-            print(f"{armor:12} {len(vals):7} {mean:7.1f} "
-                  f"{statistics.median(vals):7.1f}  {rel:9.2f}x  {1 / rel:8.2f}x")
+            print(f"{armor:12} {coverage[armor]:8.0%} {intensity[armor]:10.1f} "
+                  f"{exposure[armor]:9.1f} {rel:9.2f}x {1 / rel:9.2f}x")
         print()
-    print(f"roster-wide mean Versus: {overall:.1f}")
-    hi = max(means, key=means.get)
-    lo = min(means, key=means.get)
-    print(f"most exposed : {hi} ({means[hi]:.1f})  -> cheapest per HP")
-    print(f"least exposed: {lo} ({means[lo]:.1f})  -> most expensive per HP")
+    print(f"roster-wide mean exposure: {overall:.1f}")
+    hi = max(exposure, key=exposure.get)
+    lo = min(exposure, key=exposure.get)
+    print(f"most exposed : {hi} ({exposure[hi]:.1f})  -> cheapest per HP")
+    print(f"least exposed: {lo} ({exposure[lo]:.1f})  -> most expensive per HP")
     print("\n⚠ This is measured from the CURRENT Versus values, which W13 is about "
           "to rewrite.\n  Derive a price factor from it only AFTER the warhead "
           "rebuild lands.")

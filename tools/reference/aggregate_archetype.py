@@ -77,9 +77,15 @@ DIRECT = {
     # source engines have to Cameo's Scout class, so it seeds Scout when present.
     "drone": "Scout",
 }
-# Aircraft read off the VEHICLE ladder by weight (maintainer ruling above).
-AIR_FROM = {"Fighter": "Light", "Helicopter": "Light",
-            "Bomber": "Medium", "Spaceship": "Heavy"}
+# Aircraft read off the VEHICLE ladder by weight, RUNG FOR RUNG (maintainer,
+# 2026-08-15 — correcting an earlier draft that had Fighter and Helicopter both
+# on Light and Spaceship on Heavy, which collapsed two air classes onto one
+# vehicle rung and left Superheavy unused):
+#   Fighter <- Light · Bomber <- Medium · Helicopter <- Heavy · Spaceship <- Superheavy
+# The four air classes are a ladder of their own and map one-to-one onto the top
+# four vehicle rungs.
+AIR_FROM = {"Fighter": "Light", "Bomber": "Medium",
+            "Helicopter": "Heavy", "Spaceship": "Superheavy"}
 
 # ⚠ THE NORMALISATION LAW (maintainer, 2026-08-15):
 #   *"everything needs to be normalized to 100% for the maximum versus value for
