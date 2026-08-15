@@ -10,13 +10,14 @@ For the INI mods the warhead is found by TRACING `[actor] Primary=` ->
 rather than a warhead that merely has a matching name.
 ## `obelisk` — Obelisk of Light — the big defensive laser
 
-Cameo family: `^Warhead_Laser_Heavy` · sources: **6** · profiles: **9**
+Cameo family: `^Warhead_Laser_Heavy` · sources: **7** · profiles: **10**
 
 ### Table A — as each mod ships it (original armor types)
 
 | source | warhead | how identified | brick | concrete | heavy | light | none | wood | aircraft | boss | building | defense | infantry | drone | flak | medium | plate | special | steel |
 |---|---|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
 | `dta_classic` | `Super` | traced [OBLI]->LaserFire | — | — | 100 | — | 100 | 100 | — | — | — | — | — | — | — | 100 | — | — | — |
+| `dta_enhanced` | `Super` | traced [OBLI]->LaserFire | — | — | 100 | — | 100 | 100 | — | — | — | — | — | — | — | 100 | — | — | — |
 | `dta_globalcode` | `HopeWH` | traced [OBLI]->FireOfHope | — | 41.6667 | 66.6667 | 50 | 100 | 25 | — | — | — | — | — | — | — | — | — | — | — |
 | `openra_td` | `Laser` | curated name | — | — | — | — | — | 100 | — | — | — | — | — | — | — | — | — | — | — |
 | `combined_arms` | `Laser` | curated name | 20 | 36 | 40.4 | 40.4 | 100 | 24 | — | — | — | — | — | — | — | — | — | — | — |
@@ -36,6 +37,7 @@ four aircraft classes are read off the vehicle ladder by weight
 | source | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
 | `dta_classic` | 100 | — | — | — | 100 | — | 100 | 100 | 100 | 100 | — | — | — | 100 | — | 100 |
+| `dta_enhanced` | 100 | — | — | — | 100 | — | 100 | 100 | 100 | 100 | — | — | — | 100 | — | 100 |
 | `dta_globalcode` | 100 | — | — | — | 33.3333 | 50 | — | 66.6667 | 83.3333 | 25 | — | 41.6667 | 50 | — | 50 | 66.6667 |
 | `openra_td` | — | — | — | — | — | — | — | — | — | 100 | — | — | — | — | — | — |
 | `combined_arms` | 100 | — | — | — | 40.4 | 40.4 | — | 40.4 | 40.4 | 24 | — | 36 | 40.4 | — | 40.4 | 40.4 |
@@ -44,7 +46,7 @@ four aircraft classes are read off the vehicle ladder by weight
 | `shattered_paradise` | — | — | — | — | — | — | — | 100 | — | — | — | 0 | — | — | — | 100 |
 | `cnc_reloaded` | 100 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 | 66.6667 |
 | `cnc_reloaded` | 100 | 83.3333 | 66.6667 | 50 | 100 | 80 | 60 | 66.6667 | 73.3333 | 66.6667 | 66.6667 | 66.6667 | 80 | 60 | 80 | 66.6667 |
-| _n sources_ | 6 | 2 | 2 | 2 | 6 | 5 | 3 | 7 | 6 | 6 | 2 | 6 | 5 | 3 | 5 | 7 |
+| _n sources_ | 7 | 2 | 2 | 2 | 7 | 5 | 4 | 8 | 7 | 7 | 2 | 6 | 5 | 4 | 5 | 8 |
 
 ### Table C — three ways to aggregate, vs Cameo today
 
@@ -57,9 +59,9 @@ sources disagree about that armor.
 
 | aggregation | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | span |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| median | 100 | 75 | 66.7 | 58.3 | 56 | 50 | 66.7 | 66.7 | 70 | 45.8 | 66.7 | 38.8 | 50 | 66.7 | 50 | 66.7 | 61 |
-| arithmetic mean | 100 | 75 | 66.7 | 58.3 | 64.3 | 52.7 | 75.6 | 64 | 60.6 | 50.7 | 66.7 | 37.5 | 52.7 | 75.6 | 52.7 | 64 | 62 |
-| geometric mean | 100 | 74.5 | 66.7 | 57.7 | 58.6 | 49.1 | 73.7 | 51.3 | 34.4 | 42.4 | 66.7 | 21.2 | 49.1 | 73.7 | 49.1 | 51.3 | 79 |
+| median | 100 | 75 | 66.7 | 58.3 | 66.7 | 50 | 83.3 | 66.7 | 73.3 | 66.7 | 66.7 | 38.8 | 50 | 83.3 | 50 | 66.7 | 61 |
+| arithmetic mean | 100 | 75 | 66.7 | 58.3 | 69.4 | 52.7 | 81.7 | 68.5 | 66.2 | 57.7 | 66.7 | 37.5 | 52.7 | 81.7 | 52.7 | 68.5 | 62 |
+| geometric mean | 100 | 74.5 | 66.7 | 57.7 | 63.3 | 49.1 | 79.5 | 55.8 | 40 | 48 | 66.7 | 21.2 | 49.1 | 79.5 | 49.1 | 55.8 | 79 |
 | **CAMEO today** | 48 | 64 | 80 | 96 | 40 | 52 | 68 | 84 | 100 | 56 | 72 | 88 | 44 | 60 | 76 | 92 | 60 |
 
 ### Table D — PROPOSED: field magnitudes, law order (`light`-favouring)
@@ -69,7 +71,7 @@ different thing. The measured values are kept EXACTLY; only which armor
 they attach to changes, so the spread and the cliffs survive while the
 ladder reads the way the law requires (W13 rule 6).
 
-⚠ The raw field median violates the law on: **VEH (Scout=56 Light=50 Medium=66.7 Heavy=66.7 Superheavy=70)**; **BLD (Wood=45.8 Steel=66.7 Concrete=38.8)**; **AIR (Fighter=50 Bomber=66.7 Helicopter=50 Spaceship=66.7)**.
+⚠ The raw field median violates the law on: **VEH (Scout=66.7 Light=50 Medium=83.3 Heavy=66.7 Superheavy=73.3)**; **AIR (Fighter=50 Bomber=83.3 Helicopter=50 Spaceship=66.7)**.
 
 For AP that is not a data error — six independent RA2-lineage mods all
 write `none 25 · flak 25 · plate 15`, i.e. armour piercing doing LESS to
@@ -78,8 +80,8 @@ cloned. Cameo's law inverts it so the weapon stays readable.
 
 | profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| field median (raw) | 100 | 75 | 66.7 | 58.3 | 56 | 50 | 66.7 | 66.7 | 70 | 45.8 | 66.7 | 38.8 | 50 | 66.7 | 50 | 66.7 |
-| **PROPOSED (law order)** | **100** | **65.3** | **53.8** | **31.4** | **58.3** | **52.8** | **51.8** | **38.9** | **30.6** | **50.8** | **24.7** | **15** | **49.8** | **48.8** | **29.6** | **28.6** |
+| field median (raw) | 100 | 75 | 66.7 | 58.3 | 66.7 | 50 | 83.3 | 66.7 | 73.3 | 66.7 | 66.7 | 38.8 | 50 | 83.3 | 50 | 66.7 |
+| **PROPOSED (law order)** | **100** | **65.3** | **53.8** | **41.3** | **76.8** | **62.9** | **52.8** | **51.8** | **30.6** | **50.8** | **49.8** | **15** | **75.8** | **48.8** | **29.6** | **28.6** |
 | Cameo today | 48 | 64 | 80 | 96 | 40 | 52 | 68 | 84 | 100 | 56 | 72 | 88 | 44 | 60 | 76 | 92 |
 
 **Reference span 61** (min 38.8 · max 100).

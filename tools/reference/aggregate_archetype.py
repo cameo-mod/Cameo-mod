@@ -238,6 +238,19 @@ ARCHETYPES = {
     },
 }
 
+# ⚠ SOME INI SOURCES ARE DELTAS, NOT COMPLETE RULESETS.
+# DTA ships one full ruleset (`Rules.ini`, 2321 sections) plus patch files that
+# override PARTS of it: `Enhance.ini` is 471 sections and its `[OBLI]` carries 10
+# keys with **no `Primary=` at all**, because it only restates what Enhanced
+# changes. Tracing such a file alone finds nothing and the source silently
+# vanishes from the comparison — which is exactly what happened to `dta_enhanced`
+# until the maintainer noticed it missing. Reading the patch OVER its base makes
+# the actor resolvable while the patch still wins wherever it speaks.
+INI_BASE = {
+    "dta_enhanced": "dta_classic",
+    "dta_globalcode": "dta_classic",
+}
+
 INI_SECTION = re.compile(r"^\s*\[([^\]]+)\]")
 INI_KEY = re.compile(r"^\s*([A-Za-z][A-Za-z0-9_.]*)\s*=\s*(.+?)\s*(?:;.*)?$")
 
@@ -258,6 +271,25 @@ def read_ini(path: pathlib.Path) -> dict[str, dict[str, str]]:
         if kv and section is not None:
             out[section][kv.group(1).lower()] = kv.group(2)
     return out
+
+
+def read_ini_resolved(sid: str, path: pathlib.Path) -> dict[str, dict[str, str]]:
+    """`read_ini`, but a DELTA source is laid over its base (see `INI_BASE`).
+
+    Section-by-section overlay: the patch's keys win, the base supplies the rest,
+    so `[OBLI]` keeps the `Primary=` it never restated while any stat Enhanced
+    did change still comes from Enhanced.
+    """
+    base_id = INI_BASE.get(sid)
+    if base_id is None:
+        return read_ini(path)
+    base_path = next((p for s, _l, _k, p, _e in ev.SOURCES if s == base_id), None)
+    if base_path is None or not base_path.exists():
+        return read_ini(path)
+    merged = {s: dict(kv) for s, kv in read_ini(base_path).items()}
+    for section, kv in read_ini(path).items():
+        merged.setdefault(section, {}).update(kv)
+    return merged
 
 
 def trace_ini(ini: dict, actor: str) -> list[tuple[str, str]]:
@@ -293,7 +325,7 @@ def collect(concept: str) -> list[dict]:
 
         wanted: list[tuple[str, str]] = []          # (warhead, how)
         if kind == "ini" and path.exists():
-            ini = read_ini(path)
+            ini = read_ini_resolved(sid, path)
             for actor in spec.get("ini_actors", []):
                 for weapon, warhead in trace_ini(ini, actor):
                     wanted.append((warhead, f"traced [{actor}]->{weapon}"))
