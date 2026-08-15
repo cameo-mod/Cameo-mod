@@ -53,6 +53,14 @@ Their own median sharpness is **4.0x** — the field's centre — and the sharpe
 
 ## The profiles
 
+### Toxic
+
+| level | sharpness | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| Trace | 3.322463768115942x | 91.7 | 88 | 76 | 48.1 | 56 | 52.9 | 47.1 | 41.4 | 40 | 70.6 | 64.7 | 58 | 33.3 | 28.8 | 28.2 | 27.6 | 17.8 |
+| Light | 3.322463768115942x | 91.7 | 88 | 76 | 48.1 | 56 | 52.9 | 47.1 | 41.4 | 40 | 70.6 | 64.7 | 58 | 33.3 | 28.8 | 28.2 | 27.6 | 17.8 |
+| Medium | 3.322463768115942x | 91.7 | 88 | 76 | 48.1 | 56 | 52.9 | 47.1 | 41.4 | 40 | 70.6 | 64.7 | 58 | 33.3 | 28.8 | 28.2 | 27.6 | 17.8 |
+
 ### Concussion
 
 | level | sharpness | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship | Airborne |

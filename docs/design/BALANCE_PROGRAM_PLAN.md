@@ -749,7 +749,67 @@ blast and explicitly **"NOT the gas cloud"**. So `dir="heavy"` — best against 
 and heavy vehicles — is correct and deliberate: acid eats armour. The anti-infantry gas is a
 DIFFERENT family, `Toxic`.
 
-**REAL GAP FOUND instead: `Toxic` was never rebuilt.** `^ToxicWeapon` is still a legacy
+✅ **TOXIC IS BUILT (maintainer order 2026-08-15: "build the toxic weapon now to the new
+system and use all the gas clouds we have as reference").**
+
+A THIRD provenance, alongside measured-from-corpus and designed: **measured from Cameo's own
+content.** The mod already ships **28 gas/toxin weapons** with explicit `Versus` (the GLA toxin
+line, the anthrax clouds and their Blue/Purple/Large tiers, Yuri's chaos gas, RA2's cloud pair,
+the Forgotten's smoke). Normalising each to its own peak and taking the per-armor median is the
+same method the reference corpus uses, applied to our own library — so `Toxic` is MEASURED,
+just not from someone else's mod. Labelled `measured:cameo_gas_clouds`, never `designed`.
+
+What the 28 say: `INF > BLD > VEH > AIR`, anti-LIGHT, spread **2.75x** — already inside the
+2x-8x band with no correction, which quietly validates both the band and the library.
+
+- **New `Trace` tier, WC 0.5** (`WEAPON_TYPE_SYSTEM.md`'s spec for Toxic: a lingering field a
+  delivery weapon leaves behind, not an armament). ⚠ **It MUST stay LAST in `LEVELS`** —
+  `li = list(LEVELS).index(level)` indexes the `spreads`/`falloffs` TUPLES positionally, so
+  inserting a level anywhere else silently shifts every other family's spread by one slot.
+  `at()` now tolerates a short tuple instead of raising `IndexError`.
+- Levels `Trace / Light / Medium` deliberately **share one shape**. Unlike the corpus families
+  these are not different PLATFORMS, they are the same gas at different intensities, so the
+  magnitude differs (spread 700/900/1100, WC 0.5/0.75/1.0) and the armour shape should not.
+- `InvalidTargets: wall, Mine, ToxinImmune` carries the "no-op vs robotic" half of the spec.
+  That is a TARGETING rule — W13 rule 8 forbids expressing immunity as a zero multiplier.
+
+**The legacy retirement, done at the TEMPLATE level** (one edit fixing all inheritors):
+`^ToxicWeapon` was a textbook pre-split weapon — main + separate `*FriendlyFire` twin +
+`HealthPercentageDamage` %-twin, all on the same 17-to-1 ladder (the %-twin SHAPE, on a main
+warhead), `Falloff: 111, 33, 11, 3` that never reaches 0, and a building sub-ladder inverted
+(`Wood 12 > Concrete 11 > Steel 10`). It is now a thin child of `^Warhead_Toxic_Light` keeping
+only its own delivery. 10 warhead keys renamed, **5 retired FF twins deleted**, 4 inline
+`Versus` ladders dropped (Versus lives only in templates).
+
+⚠ **The new profile is 6.26x stronger on average than the legacy ladder**, so a naive repoint
+would have made every gas cloud six times as lethal. `Damage` is rescaled to preserve DPS:
+**1111 -> 177**, and the Blue/Purple upgrade tiers to **197 / 213** so their 1.00 / 1.11 / 1.20
+ladder survives. Deliberately NOT snapped to the 100 grid: snapping puts all three on 200 and
+collapses three distinct upgrade tiers into one. ⚠ Their bespoke `Versus` ladders (18-to-2,
+19-to-3) are gone by law, so the tiers lose roughly 9% and 18% of their old edge — recorded
+rather than compensated.
+
+⚠ **A mistake worth keeping:** the first rescale used `text.replace(old, new, 1)`, which hit
+the FIRST `Damage: 200` in the file — an unrelated `Warhead@Concrete: DamagesConcrete`. Caught
+by reading the diff, reverted, redone scoped to the `^ToxicWeapon` block. This is exactly the
+blind-substitution class `LESSONS_LEARNED.md` warns about, and it is invisible to every gate:
+it lints, it boots, and it silently nerfs another weapon by 12%.
+
+**AND THE SURVEY THAT FOUND THE REST** (maintainer: *"can you try to find more weapons like
+that that were not converted yet?"*) — `tools/audit/audit_unconverted_templates.py`, report at
+`docs/audit/latest/unconverted_templates.md`. A template declaring its own `Versus` while
+inheriting no `^Warhead_*` parent has not been converted, and is simultaneously a live
+violation of "Versus lives ONLY in `^Warhead_*` templates".
+
+**47 unconverted templates, 1343 direct inheritors.** Biggest: `^ShrapnelWeapon` (105) →
+Concussion · `^Grenade` (100) → Demolition/Concussion · `^FlakWeapon` (97) → Flak ·
+`^MediumMissile` (88) · `^MediumChemicalWeapon` (80) · `^TankDestroyerCannon` (78) → CannonAP ·
+`^Chaingun` (71) → Bullet. Every target family already EXISTS, so these are retrofits, not
+design. `^SniperWeapon` / `^HealingWeapon` / `^RepairWeapon` stay out by design.
+
+---
+
+**ORIGINAL GAP NOTE (now resolved by the above): `Toxic` was never rebuilt.** `^ToxicWeapon` is still a legacy
 template with **6 live inheritors** (RA2 Shared, TS Forgotten, the dead central copies) and is
 **absent from `gen_weapon_template.WEAPONS`** — so the genuine anti-infantry gas family has no
 `^Warhead_Toxic_*`, no ordering law, and whatever inline `Versus` it always had.
@@ -1050,10 +1110,35 @@ result, so those need a real damage decision rather than a fold.
 - [x] `extract_stats` still READS FP and `fit_class` still prices with it. It must: 152
       actors still carry one, and un-pricing them would misprice the roster.
 
-**CONTENT HALF — blocked on set B** (`mods/cameo/weapons/**`, Devin's while W2 runs).
-Worklist: `docs/balance/firepower_retirement.md`. Per actor: write `Damage x FP` snapped to
-the grid on every main warhead, then DELETE the trait; boot-gate per batch. Conditional
-(upgrade) FP traits are design and are NOT touched.
+**CONTENT HALF — set B is free, but ⛔ the fold AS SPECIFIED IS UNSAFE. Two blockers found
+2026-08-15 by checking the spec against the engine and the ledger before executing it.**
+
+**BLOCKER 1 — the fold is incomplete. `FirepowerMultiplier` scales EVERY warhead, not just
+mains.** `Armament` builds `DamageModifiers` ONCE and passes it to every warhead:
+`DamageWarhead.cs:93`, `AreaDamagePercentageWarhead.cs:53` and
+`HealthPercentageDamageWarhead.cs:24` all apply it, and `ApplyPhysicalStateWarhead.cs:49`
+applies it to the METER amount as well. The worklist's `is_main()` excludes
+`percentage` / `extradamage` / `friendlyfire`, so folding only mains leaves **1610 twin and
+chip warheads across 381 weapons** silently scaled by `1/FP` — an actor at FP 0.5 would have
+its %-twin and chip DOUBLE. The fold must cover every damaging warhead on the weapon plus any
+`ApplyPhysicalState` amount.
+
+**BLOCKER 2 — "no weapon is shared" is FALSE.** The ruling that voided the original objection
+is the premise the fold rests on, and the ledger disagrees: **109 weapons are fired by actors
+carrying DIFFERENT FirepowerMultipliers.** `BigFlamer` is fired by `futuretech_salamanderifv`
+(1.5), `ra1_soviets_gorynychtank` (1) and five `ra2_allies_ifv` variants (1); `ChainGun` by
+`ra1_soviets_hindattackhelicopter` (0.5) and `ra1_soviets_kamovattackhelicopter` (0.25).
+Folding an FP into such a weapon's `Damage` is correct for ONE user and wrong for every other.
+Most are the deliberate IFV/carrier weapon-BORROWING pattern that `audit_weapon_uniqueness`
+class W3 says must never be split.
+
+**So W17's content half needs a decision before any yaml moves:** for a borrowed weapon, either
+the borrowing actor gets its own copy of the weapon (the uniqueness rule's normal answer, but
+it multiplies the IFV's weapon list), or those 109 keep their multiplier as a documented
+exception. Folding them mechanically would corrupt every other user of the weapon.
+
+Once decided: write `Damage x FP` on **every damaging warhead** (not just mains), then DELETE
+the trait; boot-gate per batch. Conditional (upgrade) FP traits are design and are NOT touched.
 
 Versus values keep integer steps of 1 and the ordering law, but the floor may sit
 anywhere without tier restriction (W13 rule 5).

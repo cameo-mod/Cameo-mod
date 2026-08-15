@@ -125,6 +125,93 @@ DESIGNS: dict[str, tuple[float, int, float, str]] = {
                    "band allows without a maintainer ruling."),
 }
 
+# --------------------------------------------------------------------------- #
+# MEASURED FROM CAMEO'S OWN CONTENT — a third provenance
+# --------------------------------------------------------------------------- #
+# Maintainer, 2026-08-15: *"build the toxic weapon now to the new system and use
+# all the gas clouds we have as reference, for example the yuri gas clouds and
+# everything else."*
+#
+# `Toxic` has no cross-mod equivalent in the corpus, but it does not need to be
+# invented either: Cameo already ships **28 gas/toxin weapons** with explicit
+# `Versus` — the GLA toxin line, the anthrax clouds and their Blue/Purple/Large
+# variants, Yuri's chaos gas, RA2's cloud pair, the Forgotten's smoke. Normalising
+# each to its own peak and taking the median per armor is the same method the
+# reference corpus uses, applied to our own library. So this profile is MEASURED,
+# just not from someone else's mod, and it is labelled `measured:cameo_gas_clouds`
+# rather than `designed` so nobody later reads it as a free design choice.
+#
+# What the 28 say (peak-normalised medians):
+#     Flak 62 · None 57 · Plate 55 | Steel 42 · Wood 37 · Concrete 35
+#     Light 42 · Scout 41 · Medium 32 · Heavy 30 · Superheavy 29
+#     Fighter 26 · Spaceship 24 · Helicopter 23 · Bomber 23
+# i.e. INF > BLD > VEH > AIR, anti-LIGHT, spread **2.75x** — already inside the
+# 2x-8x target band without any correction, which is its own small validation of
+# both the band and the library.
+MOD_MEASURED = {"Toxic"}
+GAS_PATTERN = r"anthrax|toxin|toxic|virus|chaos|poison|radiation|gas"
+GAS_MIN_SOURCES = 3          # an armor needs 3 weapons behind it to be reported
+
+
+def survey_mod_gas() -> tuple[dict[str, float], int]:
+    """Median peak-normalised `Versus` across every gas/toxin weapon Cameo ships."""
+    import collections
+    import re
+    sys.path.insert(0, str(ROOT / "tools" / "audit"))
+    import miniyaml  # noqa: E402
+
+    rules = miniyaml.Ruleset(ROOT)
+    pattern = re.compile(GAS_PATTERN, re.I)
+    buckets: dict[str, list[float]] = collections.defaultdict(list)
+    seen = 0
+    for name in rules.weapons:
+        if name.startswith("^") or not pattern.search(name):
+            continue
+        try:
+            weapon = rules.resolve_weapon(name)
+        except Exception:                      # a weapon that will not resolve is not evidence
+            continue
+        if weapon is None:
+            continue
+        for child in weapon.children:
+            if not (child.key == "Warhead" or child.key.startswith("Warhead@")):
+                continue
+            versus = child.child("Versus")
+            if versus is None:
+                continue
+            values = {}
+            for row in versus.children:
+                try:
+                    value = float(str(row.value).strip())
+                except (TypeError, ValueError):
+                    continue
+                if row.key in ag.CAMEO16 and value > 0:
+                    values[row.key] = value
+            if len(values) < 4:
+                continue
+            peak = max(values.values())
+            for armor, value in values.items():
+                buckets[armor].append(100.0 * value / peak)
+            seen += 1
+            break                              # first Versus-bearing warhead only
+    return ({a: statistics.median(v) for a, v in buckets.items()
+             if len(v) >= GAS_MIN_SOURCES}, seen)
+
+
+def mod_measured_profile(family: str, level: str) -> tuple[dict[str, float], float, int]:
+    """A MOD_MEASURED family's profile, through the same laws as every other."""
+    measured, sources = survey_mod_gas()
+    blocks, direction, _air, _levels = gwt.WEAPONS[family]
+    order = gwt.build_order(blocks, direction)
+    # The ordering law places the values; the library supplies only magnitudes.
+    ranked = sorted((measured[a] for a in order if a in measured), reverse=True)
+    profile = {a: v for a, v in zip([a for a in order if a in measured], ranked)}
+    profile = ag.fit_window(ag.fit_ratio(profile))
+    profile.update(ag.derive_armors(profile))
+    profile = ag.enforce_distinct(profile)
+    return profile, achieved(profile), sources
+
+
 # Families that are invented but NOT designed here, and why — recorded so a reader
 # does not read their absence as an oversight.
 EXCLUDED = {
@@ -212,6 +299,18 @@ def profile_for(family: str, level: str) -> tuple[dict[str, float], float]:
 
 def build() -> dict:
     families: dict[str, dict] = {}
+    for family in sorted(MOD_MEASURED):
+        out = {}
+        for level in gwt.WEAPONS[family][3]:
+            profile, got, sources = mod_measured_profile(family, level)
+            out[level] = {
+                "origin": "measured:cameo_gas_clouds",
+                "sources": sources,
+                "sharpness_intended": got,
+                "sharpness_shipped": got,
+                "profile": {a: round(v, 1) for a, v in sorted(profile.items())},
+            }
+        families[family] = out
     for family in DESIGNS:
         levels = gwt.WEAPONS[family][3]
         out = {}

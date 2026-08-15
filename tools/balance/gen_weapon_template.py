@@ -40,8 +40,17 @@ LADDERS = {  # lightest -> heaviest
 CANON16 = {a for arms in LADDERS.values() for a in arms}
 # Level = step (falloff slope) = WeaponClass. Super (step 3, floor 55, WC 1.5, Shield 155)
 # is the superweapon band for Nuclear + charged Tesla — one notch above Heavy (maintainer 2026-08-02).
-LEVELS = {"Light": (6, 10, 16), "Medium": (5, 25, 20), "Heavy": (4, 40, 25), "Super": (3, 55, 30)}
-WC = {"Light": 0.75, "Medium": 1.0, "Heavy": 1.25, "Super": 1.5}
+LEVELS = {"Light": (6, 10, 16), "Medium": (5, 25, 20), "Heavy": (4, 40, 25), "Super": (3, 55, 30),
+          # `Trace` is the SUB-LIGHT tier (WC 0.5) that WEAPON_TYPE_SYSTEM.md specifies for
+          # Toxic: a lingering field a delivery weapon leaves behind, not an armament.
+          # ⚠ **It MUST stay last in this dict.** `li = list(LEVELS).index(level)` indexes the
+          # `spreads` and `falloffs` TUPLES positionally, so inserting a level anywhere but the
+          # end silently shifts every other family's spread and falloff by one slot. Its own
+          # index is therefore 4, and any family using it needs 5-long tuples.
+          # Body is Light's: a family on this tier is expected to carry a designed profile, so
+          # the even-ramp fallback is never reached, and Light's is the sane default if it is.
+          "Trace": (6, 10, 16)}
+WC = {"Light": 0.75, "Medium": 1.0, "Heavy": 1.25, "Super": 1.5, "Trace": 0.5}
 # FLAT / "ignores armor" (Sonic): flat SpreadDamage, same value vs every armor. Tunable.
 FLAT_VALUES = {"Light": 45, "Medium": 55, "Heavy": 65}   # main SpreadDamage vs ALL armors
 FLAT_PCT = {"Light": 5, "Medium": 8, "Heavy": 10}        # its modest % chip
@@ -102,6 +111,16 @@ WEAPONS = {
     "Prism":      ([("VEH", "INF", "BLD"), "AIR"],      "light", False, L3),
     "Flame":      ([("INF", "BLD"), "VEH", "AIR"],      "light", False, L3),
     "Chemical":   ([("INF", "VEH"), "BLD", "AIR"],      "heavy", False, L3),
+    # Toxic = the ANTI-INFANTRY GAS, and a DIFFERENT weapon from Chemical, which is CORROSION
+    # (PHYSICAL_STATE_SYSTEM.md maps Chemical to the Corrosion meter — "pure corrosion" — and
+    # W9 notes "corrosion eats vehicles"; SPREAD_FALLOFF_PLAN.md calls Chemical a green blast
+    # and explicitly "NOT the gas cloud"). That is exactly why the two point OPPOSITE ways:
+    # Chemical is anti-HEAVY because acid eats armour, Toxic is anti-LIGHT because gas kills
+    # people. Order and direction are MEASURED from the mod's own 28 gas/toxin weapons, not
+    # invented — see tools/balance/design_invented_profiles.py.
+    # Hits air (low, non-zero) because the legacy ^ToxicWeapon always did; W13 rule 8 wants
+    # "cannot really fight air" expressed by ranking air LAST, never by omitting it.
+    "Toxic":      (["INF", "BLD", "VEH", "AIR"],        "light", True,  ["Trace", "Light", "Medium"]),
     "Melee":      (["INF", "VEH", "BLD", "AIR"],        "light", False, L3),
     "Arrow":      (["INF", "AIR", "VEH", "BLD"],        "light", True,  L3),
     # Magic = %-EQUALIZER (maintainer 2026-08-02): ground-only, tiny flat + big uniform %
@@ -441,9 +460,13 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
             hz = hazmat
         tag = f"{name}_{level}"
         # Energy families are thinned to near single-target; the chip/utility pays for the low spread.
-        main_spread = ENERGY_THIN_SPREAD_LEVEL.get((name, level), ENERGY_THIN_SPREAD.get(name, spreads[li]))
+        main_spread = ENERGY_THIN_SPREAD_LEVEL.get((name, level), ENERGY_THIN_SPREAD.get(name, at(spreads, li)))
+        invalid = FAMILY_INVALID_TARGETS.get(name)
+        inv_weapon = [f"\tInvalidTargets: {invalid}"] if invalid else []
+        inv_warhead = [f"\t\tInvalidTargets: {invalid}"] if invalid else []
         main_wh = [f"^Warhead_{tag}:",
              f"\tValidTargets: {vt}",
+             *inv_weapon,
              f"\tReloadDelay: {reload}",
              f"\tRange: {rng}",
              f"\tTargetActorCenter: true",
@@ -452,9 +475,10 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
              f"\t\tFriendlyFireDamage: 50",
              f"\t\tFriendlyFireSpread: 50",
              f"\t\tValidTargets: {vt}",
+             *inv_warhead,
              f"\t\tSpread: {main_spread}",
              f"\t\tDamage: {damage}",
-             f"\t\tFalloff: {falloffs[li]}",
+             f"\t\tFalloff: {at(falloffs, li)}",
              f"\t\tVersus:",
              emit_versus(main, hazmat=hz),
              f"\t\tDamageTypes: {damage_types}"]
@@ -477,9 +501,10 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         percentage_type = "AreaDamagePercentage"
         pct_wh = [f"\tWarhead@{tag}_Percentage: {percentage_type}",
              f"\t\tValidTargets: {vt}",
+             *inv_warhead,
              f"\t\tSpread: {main_spread // 2}",
              f"\t\tDamage: {pct_damage}",
-             f"\t\tFalloff: {falloffs[li]}",
+             f"\t\tFalloff: {at(falloffs, li)}",
              f"\t\tVersus:",
              emit_versus(pct)]
         if integ:
@@ -521,8 +546,16 @@ HAND_TUNED = {"Nuclear"}
 
 # Per-family spread overrides. Default is (400, 600, 800, 1000) for
 # Light/Medium/Heavy/Super. Indices beyond a family's level count are ignored.
+# ⚠ Indexed POSITIONALLY by `list(LEVELS).index(level)`, i.e.
+#     0 Light · 1 Medium · 2 Heavy · 3 Super · 4 Trace
+# so any family using `Trace` needs five entries. `at()` below tolerates a short tuple rather
+# than raising IndexError, but a family should still state its own value instead of inheriting
+# whatever happens to sit last.
 FAMILY_SPREADS = {
     "MissileAA": (200, 300, 400),
+    # A gas FIELD is wide and thin by nature — it is area denial, not a hit. Trace (slot 4) is
+    # the faint wisp, Light the standard cloud, Medium the heavy/Large variants.
+    "Toxic": (900, 1100, 800, 800, 700),
 }
 
 # Per-family falloff overrides (default = DEFAULT_FALLOFFS, indexed by level). Bullets are a single
@@ -530,7 +563,21 @@ FAMILY_SPREADS = {
 # flat line. Nuclear is HAND_TUNED (11-wide, hand-set in its yaml template).
 FAMILY_FALLOFFS = {
     "Bullet": ("100, 0", "100, 0", "100, 0"),   # pure max-radius linear
+    # A drifting cloud has no blast centre: concentration is near-even across the field and
+    # only tails off at the edge. Slot order as in FAMILY_SPREADS (Trace is slot 4).
+    "Toxic": ("100, 90, 75, 55, 30, 0",) * 5,
 }
+
+
+def at(seq, index):
+    """`seq[index]`, tolerating a tuple shorter than the level count.
+
+    The per-family spread/falloff tuples are indexed positionally by the level's place in
+    `LEVELS`, so adding a level made every 4-long tuple a latent IndexError for any family
+    that used it. Falling back to the last entry keeps the generator running; the fix for a
+    family that cares is to state its own value.
+    """
+    return seq[index] if index < len(seq) else seq[-1]
 
 # Per-family PhysicalState wiring (docs/design/PHYSICAL_STATE_SYSTEM.md): the main AreaDamage warhead
 # adds `damage x Scale%` to a named meter on hit (Temperature = heat/cold, Corrosion = acid).
@@ -582,6 +629,15 @@ FAMILY_DAMAGE_TYPES = {
 # {family: (condition, duration_x_reload, range_x_spread)}
 FAMILY_CONDITION = {
     "Sonic": ("SonicDebuff", 2, 2),
+}
+
+# Per-family InvalidTargets, emitted on the weapon AND its damaging warheads.
+# WEAPON_TYPE_SYSTEM.md specifies Toxic as "no-op vs robotic": a gas kills people, so a drone
+# or a robot walks through it untouched. That is a TARGETING rule, not a Versus value — W13
+# rule 8 forbids expressing immunity as a zero multiplier, and `ToxinImmune` is the existing
+# target-type the legacy ^ToxicWeapon already used for exactly this.
+FAMILY_INVALID_TARGETS = {
+    "Toxic": "wall, Mine, ToxinImmune",
 }
 
 
