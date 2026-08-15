@@ -90,8 +90,26 @@ DIRECTION_WORD = {"light": "anti-LIGHT", "heavy": "anti-HEAVY"}
 # Below this, a tier is reported as thin rather than treated as settled.
 MIN_ROWS = 8
 
-# Which aggregation the proposals use. Switchable so all three can be compared.
-AGGREGATION = "median"
+# Which aggregation the proposals use — the maintainer's blend (median + mean +
+# gmean) / 3, chosen on measured behaviour across all 10 families x 3 levels:
+#
+#   aggregation   median span   flat blocks   AP vs None
+#   median            118            8            78
+#   mean              128            3            51
+#   gmean             102            5            40
+#   blend             112            3            52
+#
+# `flat blocks` counts vehicle ladders spanning under 20 - the unusable-ladder
+# problem - and blend ties mean for the fewest. `AP vs None` should be LOW, since
+# armour-piercing against unarmoured infantry is the anti-armour extreme, and
+# blend's 52 fixes median's 78 (which contradicted AP's whole identity).
+#
+# ⚠ This also corrects a prediction I made: I argued gmean would produce the
+# SHARPEST profiles. It produces the FLATTEST overall span (102), because pulling
+# high values toward the geometric centre shrinks the top end even while it drops
+# the bottom. gmean is the sharpest on any single specialised cell and the least
+# sharp overall — the opposite of what I claimed, and only measuring showed it.
+AGGREGATION = "blend"
 
 # --------------------------------------------------------------------------- #
 # Flat-block spreading — OPT-IN, because it is DESIGN, not measurement.
@@ -148,6 +166,36 @@ def spread_flat_blocks(profile: dict[str, float], order: list[str],
     return out
 
 
+def combine(values: list[float], how: str) -> float:
+    """One number from many, four ways.
+
+    `blend` is the maintainer's proposal — the mean of all three estimators.
+    It is a real compromise rather than a fudge, because the three fail in
+    DIFFERENT directions: AM-GM guarantees `gmean <= mean` always, so the pair
+    brackets the answer, and the median arbitrates between them without being
+    dragged by either tail. Averaging them keeps the mean's sensitivity to how far
+    outliers sit while diluting it to a third, and keeps the gmean's pull toward
+    sharpness without letting one near-zero source dominate.
+
+    ⚠ Blending happens PER ARMOR, before the ordering pass. Blending finished
+    profiles instead would average values that the sort had already moved onto
+    different armors for different reasons.
+    """
+    if how == "median":
+        return statistics.median(values)
+    if how == "mean":
+        return statistics.fmean(values)
+    if how == "gmean":
+        return statistics.geometric_mean([max(1.0, v) for v in values])
+    if how == "blend":
+        return statistics.fmean([
+            statistics.median(values),
+            statistics.fmean(values),
+            statistics.geometric_mean([max(1.0, v) for v in values]),
+        ])
+    raise ValueError(how)
+
+
 def rows_for(corpus_family: str, level: str) -> list[dict]:
     wanted = set(LEVEL_PLATFORMS[level])
     return [r for r in sp.survey(corpus_family) if r["platform"] in wanted]
@@ -194,15 +242,7 @@ def profile_for(family: str, level: str, cache: dict,
     # `median` is robust to one weird mod; `mean` lets every source pull
     # proportionally; `gmean` is the correct average for MULTIPLIERS (averaging x2
     # and x0.5 arithmetically invents a net buff of 1.25 — geometrically it is 1.0).
-    if AGGREGATION == "median":
-        median = {a: statistics.median(v) for a, v in buckets.items() if v}
-    elif AGGREGATION == "mean":
-        median = {a: statistics.fmean(v) for a, v in buckets.items() if v}
-    elif AGGREGATION == "gmean":
-        median = {a: statistics.geometric_mean([max(1.0, x) for x in v])
-                  for a, v in buckets.items() if v}
-    else:
-        raise ValueError(AGGREGATION)
+    median = {a: combine(v, AGGREGATION) for a, v in buckets.items() if v}
     if len(median) < 4:
         return None
 
@@ -257,7 +297,7 @@ def render_comparison() -> str:
                   "| level | agg | n | mods | " + " | ".join(ag.CAMEO16) + " |",
                   "|---|---|--:|--:|" + "--:|" * len(ag.CAMEO16)]
         for level in ("Light", "Medium", "Heavy"):
-            for agg_name in ("median", "mean", "gmean"):
+            for agg_name in ("median", "mean", "gmean", "blend"):
                 AGGREGATION = agg_name
                 payload = profile_for(family, level, {})
                 if payload is None:
@@ -265,7 +305,7 @@ def render_comparison() -> str:
                 profile, n, mods = payload
                 cells = ["--" if profile.get(a) is None else f"{profile[a]:g}"
                          for a in ag.CAMEO16]
-                mark = "**" if agg_name == "median" else ""
+                mark = "**" if agg_name == "blend" else ""
                 lines.append(f"| {mark}{level}{mark} | {agg_name} | {n} | {mods} | "
                              + " | ".join(cells) + " |")
         lines.append("")
@@ -280,8 +320,8 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--family", help="one family only")
     ap.add_argument("--write", action="store_true", help=f"write {OUT.relative_to(ROOT)}")
-    ap.add_argument("--aggregation", choices=("median", "mean", "gmean"),
-                    default="median", help="how to combine the reference rows")
+    ap.add_argument("--aggregation", choices=("median", "mean", "gmean", "blend"),
+                    default="blend", help="how to combine the reference rows")
     ap.add_argument("--spread-flat-blocks", action="store_true",
                     help="DESIGN step: widen macro blocks the corpus left flat")
     args = ap.parse_args()
