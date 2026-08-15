@@ -324,11 +324,40 @@ a thing for the future maybe?"* — recorded as a FUTURE pass, not queued now.
 Shape when it happens: descriptions already carry a mechanical line plus a
 flavour line (see `schwarzermond_upgrade_cryptofascism`, whose flavour text is
 the MoonCoin rug-pull). That two-line split IS the MTG card layout — rules text
-then italic flavour — so the pass is a sweep over existing `Description:` fields
-rather than a new system. Do it AFTER the balance program settles, because the
-mechanical line has to state final numbers, and check it with
-`audit_display_text` + `audit_fluent` (many descriptions are fluent keys, and
-those must be edited in the `.ftl`, not inline).
+then italic flavour — so the CONTENT pass is a sweep over existing
+`Description:` fields rather than a new system.
+
+**ESTIMATE (2026-08-15), split into the cheap half and the expensive half:**
+
+*Styling mechanism — small, and doable MOD-SIDE.* Checked:
+- **No inline markup exists today.** Zero `.ftl` files use colour/style tags, and
+  OpenRA's `LabelWidget` has no per-span styling — colour is a per-WIDGET
+  property. So "italic flavour" cannot be a tag inside one string; the tooltip
+  has to render **two labels**, one per style.
+- **No italic font is registered.** `mod.yaml` `Fonts:` declares Regular and Bold
+  variants of JudouSansHans only. Italics need an italic TTF added (or the
+  flavour text distinguished by COLOUR/dimming instead, which costs nothing).
+- **The tooltip logic can be shadowed** rather than forked into the engine:
+  chrome `Logic:` classes resolve through `ObjectCreator` exactly like traits, so
+  a Cameo `ProductionTooltipLogic` overrides Common's with no engine round trip
+  (same trick as `SelectionDecorations`, `57685c3a3`). This matters because the
+  widget lives in `engine/`, which **cannot be committed from this repo**.
+- Data model: add a second fluent key per actor (`.flavor` next to
+  `.description`) rather than a separator convention inside one string, so
+  translators and audits can treat them independently.
+
+*Content pass — this is the real cost.* **2021 `Description:` fields** in
+ContentPacks alone: **1159 already fluent keys**, **853 still inline prose**.
+Flavour text is a new line for each, and it is writing, not scripting — there is
+no way to generate it. Sequence it AFTER the balance program: the rules line
+states final numbers, so writing it earlier means writing it twice. The 853
+inline ones should migrate to `.ftl` first (DESIGN.md §7 already requires that),
+which makes the flavour pass a pure `.ftl` job checked by `audit_display_text` +
+`audit_fluent`.
+
+**Recommendation:** build the styling mechanism whenever it is wanted (it is
+self-contained and improves every existing description immediately), but do the
+flavour-writing in faction-sized batches after balance settles.
 
 ## ★ MAJOR PROGRAM (2026-07-25): mod-synthesis balance overhaul — see [`BALANCE_SYNTHESIS.md`](BALANCE_SYNTHESIS.md)
 
