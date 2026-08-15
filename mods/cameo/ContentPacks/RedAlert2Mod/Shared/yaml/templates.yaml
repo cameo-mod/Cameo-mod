@@ -773,26 +773,31 @@
 	# `Shield` while it holds. That is the profile Tesla/Storm/EMP tear through and
 	# Sonic barely scratches, so the upgrade changes which weapons counter this faction
 	# rather than just making everything take less damage.
-	# InitialPercentageStrength is a percentage of HEALTH, not of MaxStrength, and
-	# Shielded.TraitEnabled assigns it WITHOUT clamping — so it must equal
-	# MaxPercentageStrength or researching the upgrade would overfill the bar.
-	Shielded@schwarzermond_upgrade_vrilinfusion:
+	# ⚠ NEVER add a second `Shielded` trait. ^BasicUnit -> ^ShieldedShieldable already
+	# gives EVERY unit one, with capacity 100% of HP and starting empty, plus the
+	# `Armor RequiresCondition: !shielded` / `Armor@shielded: Shield` swap that R5 wants.
+	# A second Shielded compiles, lints and BOOTS fine, then throws the moment the actor
+	# is produced, because ChangesShield resolves it with .Trait<Shielded>().
+	# Shield strength is granted the way shield generators grant it: ChangesShield pumps
+	# the shared pool, and StartIfBelow caps how much of it this source fills — 25 means
+	# Vril tops the shield up to 25% of health and no further, so a real shield generator
+	# can still take the same unit to 100%.
+	ChangesShield@schwarzermond_upgrade_vrilinfusion:
 		RequiresCondition: schwarzermond_upgrade_vrilinfusion
-		MaxStrength: 0
-		MaxPercentageStrength: 25
-		InitialStrength: 0
-		InitialPercentageStrength: 25
-		DamageRegenDelay: 250
-		RegenAmount: 500
-		RegenInterval: 25
-		ShieldsUpCondition: shielded
-		HideBarWhenFull: true
-		SelectionBarColor: 8888FFFF
-	Armor:
-		RequiresCondition: !shielded
-	Armor@shielded:
-		Type: Shield
-		RequiresCondition: shielded
+		PercentageStep: 2
+		Step: 0
+		Delay: 25
+		StartIfBelow: 25
+		DamageCooldown: 250
+	# `shieldpermanent` is the mod's marker for an INNATE shield rather than a generator
+	# field (D2K Ordos, Japan stealth suits, Yuri all use it), which Vril is. It buys two
+	# things from ^ShieldedShieldable that this upgrade would otherwise be punished by:
+	# ChangesShield@shielddischarge stops draining 1% per second, and
+	# DamageMultiplier@shielded stops applying 150% damage — a generator field makes you
+	# fragile while it holds, but a shield grown into the soldier's own cells should not.
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_vrilinfusion_permanent:
+		Condition: shieldpermanent
+		Prerequisites: schwarzermond_upgrade_vrilinfusion
 	ActorStatValues:
 		Upgrades: schwarzermond_upgrade_vrilinfusion
 
