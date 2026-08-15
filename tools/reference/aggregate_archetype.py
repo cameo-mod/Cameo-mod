@@ -73,9 +73,20 @@ DIRECT = {
     "none": "None", "flak": "Flak", "plate": "Plate",
     "light": "Light", "medium": "Medium", "heavy": "Heavy",
     "wood": "Wood", "steel": "Steel", "concrete": "Concrete",
-    # `drone` is RA2's terror-drone/light-walker armor — the closest thing the
-    # source engines have to Cameo's Scout class, so it seeds Scout when present.
-    "drone": "Scout",
+    # ⚠ `drone` is NOT mapped, and the reason is worth keeping.
+    #
+    # It looks like Cameo's Scout — RA2's light robotic armor — and an earlier
+    # version mapped it that way. But RA2's `drone` exists to tune ONE unit, the
+    # Terror Drone, so mods routinely put a huge anti-drone bonus there: the Tesla
+    # Coil's `Electric` warhead reads `drone 200` against ~100 for everything else.
+    # Imported as Scout, that 200 is not a statement about scout vehicles at all,
+    # and it does not even stay put: the ordering pass sorts the values and
+    # reassigns them, so the 200 landed on **Superheavy** and produced a Tesla
+    # ladder of `Scout 63 · Light 67 · Medium 71 · Heavy 75 · Superheavy 200`.
+    #
+    # Scout is therefore extrapolated from the vehicle ladder like the other rungs
+    # the corpus has no equivalent for, which is what makes the ladder end smoothly
+    # (`Heavy 75 -> Superheavy ~79`) instead of jumping.
 }
 # Aircraft read off the VEHICLE ladder by weight, RUNG FOR RUNG (maintainer,
 # 2026-08-15 — correcting an earlier draft that had Fighter and Helicopter both
