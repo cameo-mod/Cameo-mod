@@ -30,24 +30,24 @@ status rather than keeping its own copy.
 | id | work item | status | owner | needs |
 |---|---|---|---|---|
 | **W1** | K coefficient + target model (measured Versus weights, capped density) | ✅ DONE `f8421d345` | Claude | — |
-| **W2** | `^LightFlameWeapon` → 3-way split + new `^Warhead_Inferno_*` family | 🔵 IN PROGRESS (Devin, 2026-08-11) | **Devin** | — |
+| **W2** | `^LightFlameWeapon` → 3-way split + new `^Warhead_Inferno_*` family | ⚠ **ABANDONED by Devin (30 live weapons left); LOCK RELEASED by the maintainer 2026-08-15 — set B is FREE** | Claude | — |
 | **W3** | Ledger split: raw stays, derived moves to `docs/balance/derived/` | ✅ DONE | Claude | W1 |
 | **W4** | Retire weapon-class K; charge-up becomes an ACTOR property | ✅ DONE | Claude | W1 |
 | **W5** | Missing metrics: overkill/TTK, range advantage, ValidTargets, MinRange, AttackDelay | ✅ DONE | Claude | W1 |
-| **W6** | C# `ModifiesCombatProportionalToPhysicalState` (+ pitch/glow hooks) | ⬜ READY | either | — |
+| **W6** | C# `ModifiesCombatProportionalToPhysicalState` (+ pitch/glow hooks) | ✅ DONE `fc45a9632` | Claude | — |
 | **W7** | Sonic → `Resonance` meter (no new C# needed) | ⬜ READY | either | — |
-| **W8** | Gatling ladder → `SpinUp` meter | ⛔ BLOCKED | either | W6 |
+| **W8** | Gatling ladder → `SpinUp` meter | ✅ DONE `c0d6abf70` — all 43 actors, `GattlingSpeed` = 0 | Claude | W6 ✅ |
 | **W9** | `^Poisonable` → `Poison` meter (gas-cloud dose-response) | ⬜ READY | either | — |
-| **W10** | `^Blindable` → `Blind` meter | ⛔ BLOCKED | either | W6 |
+| **W10** | `^Blindable` → `Blind` meter | ⬜ READY (unblocked by W6) | either | W6 ✅ |
 | **W11** | Wire K into `fit_class.py` behind a flag; fit one class both ways and compare | ✅ BUILT, sign-off owed (+2 pipeline bugs fixed: 43% of the roster priced at zero DPS) | Claude | W3 ✅, W4 ✅, W5 ✅ |
 | **W12** | Superweapon balancing as a SEPARATE track (not unit-priced) | ⬜ READY | maintainer-led | — |
-| **W13** | Warhead system rebuild from the 2494-profile reference corpus | ⬜ READY | Claude | W1, W5 |
+| **W13** | Warhead system rebuild from the 2494-profile reference corpus | 🔵 steps 1-3 DONE; **step 4 = regenerate templates, NOW UNBLOCKED** | Claude | W1, W5 |
 | **W14** | ~~Renormalise `avg_versus`~~ — ✖ DROPPED, the multi-role premium is intended; folded into W13 rule 8b | ✖ DROPPED | — | — |
 | **W15** | `%`-twin fix + `reference_hp` → 200 000 — **PREREQUISITE for W17** | ✅ DONE | Claude | — |
 | **W16** | Charge-up discount PROPORTIONAL to real charge share (supersedes W4's flat 0.75×) | ✅ DONE | Claude | W4 ✅ |
-| **W17** | ~~Remove the 2000-damage grid~~ (done as a 100 grid in W15); retire FirepowerMultiplier as a fine-tuning knob | 🔵 TOOLING DONE; content half ⛔ **set B** | Claude | W15 ✅ |
-| **W18** | Roll the 0.1% percentage unit out into yaml (`PercentageDenominator: 1000`, ×10 the values) | ⛔ BLOCKED | Claude | W15 ✅, **set B free** |
-| **W19** | Collapse the 195 `SpreadDamage` ExtraDamage chips into the main warhead (KEEP the 34 sniper `OpenToppedDamage`) | ⛔ BLOCKED | Claude | W13, **set B free** |
+| **W17** | ~~Remove the 2000-damage grid~~ (done as a 100 grid in W15); retire FirepowerMultiplier as a fine-tuning knob | 🔵 TOOLING DONE `451e10a63`; **content half NOW UNBLOCKED** | Claude | W15 ✅ |
+| **W18** | Roll the 0.1% percentage unit out into yaml (`PercentageDenominator: 1000`, ×10 the values) | ⬜ READY (set B free) | Claude | W15 ✅ |
+| **W19** | Collapse the 195 `SpreadDamage` ExtraDamage chips into the main warhead (KEEP the 34 sniper `OpenToppedDamage`) | ⬜ READY (set B free) | Claude | W13 |
 | **W20** | Multi-armor combination rule (engine MULTIPLIES → squares the profile); mechanism + switch | ⬜ MECHANISM DONE, rule = maintainer | Claude | — |
 | **W21** | Layered health Shield → Integrity → Armor → Health, layer-aware armor (solves W20 structurally) | ✅ BUILT + LIVE `ab467fe52` | Claude | — |
 
@@ -68,8 +68,13 @@ One owner per FILE SET at a time. These sets are disjoint by construction:
 | **D — actor defaults** | `mods/cameo/rules/defaults.yaml` | W7, W8, W9, W10 |
 
 ⚠ **Set D is a single file — serialise W7/W8/W9/W10, never run two at once.**
-⚠ W2 (set B) touches `mods/cameo/weapons/weapons.yaml`, which W7 also touches for the
-`^Warhead_Sonic_*` templates. **If W2 and W7 overlap in time, W7 waits.**
+
+⚠ **SET B'S LOCK IS RELEASED (maintainer, 2026-08-15): "you can release his lock since
+Devin will not come back anytime soon".** Devin's W2 stopped on 2026-08-13 with 30 live
+weapons still inheriting `^LightFlameWeapon`. Claude owns set B from now on, which
+unblocks **W13 step 4, W17's content half, W18, W19 and W7** in one stroke — those were
+the only things waiting on it. Finish W2's remaining 30 weapons as part of W13 step 4
+rather than as a separate item; they need the same regeneration anyway.
 
 ---
 
