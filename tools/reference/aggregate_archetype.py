@@ -605,16 +605,27 @@ def lawful_profile(profile: dict[str, float], direction: str) -> dict[str, float
 def derive_armors(profile: dict[str, float]) -> dict[str, float]:
     """Every DERIVED armor: the PRODUCT of its two parents (see the rule above).
 
-    Both inputs are percentages of the weapon's own peak, so the product is
-    `A/100 * B/100` re-expressed as a percentage, i.e. `A * B / 100`. A weapon
+    Both inputs are read as fractions OF THE PROFILE'S OWN PEAK, so the product is
+    `A/top * B/top` re-expressed on the same scale, i.e. `A * B / top`. A weapon
     strong against exactly one parent collapses; only one strong against BOTH
     stays high — which is the entire point of a hybrid armor class.
+
+    ⚠ **The divisor is the profile's peak, NOT the constant 100**, and the two
+    stopped being the same thing when normalisation moved from peak to median
+    (values above 100 became legal). Dividing by 100 while a parent sits at 137
+    AMPLIFIES instead of collapsing: `Bullet_Light` produced `Plate 137 · Scout
+    106 · Heroic 145`, i.e. heroes softer than either half — the exact inversion
+    §12.0b exists to prevent, and it hit **36 of 60** derived cells. Against the
+    peak the product can never exceed either parent, and whenever a profile does
+    peak at 100 this reduces to the documented `A * B / 100` unchanged.
     """
     out = {}
+    top = max((v for k, v in profile.items() if k not in DERIVED_ARMORS), default=100.0)
+    top = max(top, 1.0)
     for name, (first, second) in DERIVED_ARMORS.items():
         a, b = profile.get(first), profile.get(second)
         if a is not None and b is not None:
-            out[name] = round(a * b / 100.0, 1)
+            out[name] = round(a * b / top, 1)
     return out
 
 

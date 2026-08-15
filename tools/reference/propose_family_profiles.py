@@ -40,6 +40,7 @@ from __future__ import annotations
 
 import argparse
 import collections
+import json
 import pathlib
 import statistics
 import sys
@@ -52,6 +53,11 @@ import gen_weapon_template as gwt  # noqa: E402
 import survey_platforms as sp  # noqa: E402
 
 OUT = ROOT / "docs" / "reference" / "family_profiles.md"
+# The FROZEN export the weapon generator consumes. It has to exist as a committed
+# artifact because the corpus itself does not: `survey_platforms` traces the source
+# mods' INI files out of `~/Downloads`, which nobody else has. Freezing the derived
+# numbers keeps `gen_weapon_template.py` hermetic and reproducible on any clone.
+OUT_JSON = ROOT / "docs" / "reference" / "family_profiles.json"
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -89,6 +95,17 @@ LEVEL_FLOOR = {"Light": 25, "Medium": 20, "Heavy": 15, "Super": 10}
 DIRECTION_WORD = {"light": "anti-LIGHT", "heavy": "anti-HEAVY"}
 # Below this, a tier is reported as thin rather than treated as settled.
 MIN_ROWS = 8
+# ...and below EITHER of these it is not shipped at all — the tier inherits the
+# nearest measured tier's shape instead. One mod's opinion is not a measurement,
+# and the aggregate is what makes the corpus trustworthy: `MIN_ARITY_FOR_AGGREGATE`
+# already refuses to average a profile that states only one armor, for exactly the
+# reason that burned us on Tesla (a single-armor row normalises to 100 by
+# definition and then stacks that column). The same logic applies one level up.
+# Measured 2026-08-15: only `Bullet/Heavy` (n=1, mods=1) and `Flame/Heavy`
+# (n=15, mods=2) fail; every other family-level has >=3 independent mods.
+SHIP_MIN_ROWS = 8
+SHIP_MIN_MODS = 3
+LEVEL_ORDER = ("Light", "Medium", "Heavy")
 
 # Which aggregation the proposals use — the maintainer's blend (median + mean +
 # gmean) / 3, chosen on measured behaviour across all 10 families x 3 levels:
@@ -269,6 +286,79 @@ def profile_for(family: str, level: str, cache: dict,
     return lawful, len(rows), len({r["source"] for r in rows})
 
 
+def frozen_profiles(cache: dict | None = None) -> dict:
+    """The export the weapon generator consumes: family -> level -> profile.
+
+    Two things happen here that the markdown comparison deliberately does not do,
+    because this output is what SHIPS rather than what is being weighed up:
+
+    1. **A tier too thin to be evidence inherits the nearest measured tier.**
+       `Bullet/Heavy` rests on ONE row from ONE mod, which is an anecdote wearing
+       a table's clothes. Inheriting `Bullet/Medium`'s shape and re-applying the
+       Heavy floor is the honest answer — the level slope still differentiates it,
+       and the JSON records that the tier was inherited so nobody later mines the
+       number as a measurement.
+    2. **Provenance travels with the values.** `n`, `mods` and `origin` sit next to
+       every profile, so a reader can tell a 151-row / 8-mod consensus from a
+       3-mod one without re-running a corpus they cannot reproduce.
+    """
+    cache = {} if cache is None else cache
+    measured: dict[str, dict[str, tuple]] = {}
+    for family in FAMILY_SOURCE:
+        measured[family] = {}
+        for level in LEVEL_ORDER:
+            payload = profile_for(family, level, cache)
+            if payload is None:
+                continue
+            profile, n, mods = payload
+            measured[family][level] = (profile, n, mods,
+                                       n >= SHIP_MIN_ROWS and mods >= SHIP_MIN_MODS)
+
+    families: dict[str, dict] = {}
+    for family, levels in measured.items():
+        solid = [lv for lv in LEVEL_ORDER if lv in levels and levels[lv][3]]
+        out: dict[str, dict] = {}
+        for level in LEVEL_ORDER:
+            entry = levels.get(level)
+            if entry is not None and entry[3]:
+                profile, n, mods, _ = entry
+                origin = "measured"
+            else:
+                if not solid:
+                    continue                     # nothing in this family to lean on
+                # Nearest measured tier, by distance along Light < Medium < Heavy.
+                idx = LEVEL_ORDER.index(level)
+                donor = min(solid, key=lambda lv: abs(LEVEL_ORDER.index(lv) - idx))
+                profile = dict(measured[family][donor][0])
+                n, mods = (entry[1], entry[2]) if entry else (0, 0)
+                origin = f"inherited:{donor}"
+                # Re-apply THIS level's floor, then re-derive and re-separate: the
+                # donor was shaped to its own floor, and the derived armors are
+                # products of cells the rescale just moved.
+                profile = ag.shape_profile(profile, LEVEL_FLOOR[level])
+                profile.update(ag.derive_armors(profile))
+                profile = ag.enforce_distinct(profile)
+            out[level] = {"origin": origin, "n": n, "mods": mods,
+                          "profile": {a: round(v, 1) for a, v in sorted(profile.items())}}
+        if out:
+            families[family] = out
+    return {
+        "_generated_by": "tools/reference/propose_family_profiles.py --json",
+        "_aggregation": AGGREGATION,
+        "_normalisation": (
+            "each source profile normalised so its MEDIAN is 100; values above 100 "
+            f"are legal up to {ag.NORMALISE_CEILING:g} (K prices the profile, so a "
+            "200 is paid for rather than free)"),
+        "_pipeline": ("reference rows at the family's PLATFORM tier -> aggregate -> "
+                      "ordering law (gen_weapon_template.build_order) -> shape law "
+                      "(LEVEL_FLOOR, min gap 2) -> derived armors -> no-ties"),
+        "_level_floor": LEVEL_FLOOR,
+        "_ship_thresholds": {"min_rows": SHIP_MIN_ROWS, "min_mods": SHIP_MIN_MODS},
+        "_derived_armors": {k: list(v) for k, v in ag.DERIVED_ARMORS.items()},
+        "families": families,
+    }
+
+
 def render_comparison() -> str:
     """Every family x level x aggregation, so the choice can be made by eye."""
     global AGGREGATION
@@ -320,6 +410,9 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--family", help="one family only")
     ap.add_argument("--write", action="store_true", help=f"write {OUT.relative_to(ROOT)}")
+    ap.add_argument("--json", action="store_true",
+                    help=f"write {OUT_JSON.relative_to(ROOT)} (the frozen export "
+                         "gen_weapon_template.py consumes)")
     ap.add_argument("--aggregation", choices=("median", "mean", "gmean", "blend"),
                     default="blend", help="how to combine the reference rows")
     ap.add_argument("--spread-flat-blocks", action="store_true",
@@ -358,6 +451,15 @@ def main() -> int:
     if args.write:
         OUT.write_text(render_comparison(), encoding="utf-8")
         print(f"\nwrote {OUT.relative_to(ROOT)}")
+    if args.json:
+        payload = frozen_profiles(cache)
+        OUT_JSON.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+        n_lv = sum(len(v) for v in payload["families"].values())
+        inherited = [f"{f}/{lv}" for f, lvs in payload["families"].items()
+                     for lv, d in lvs.items() if d["origin"] != "measured"]
+        print(f"\nwrote {OUT_JSON.relative_to(ROOT)}: "
+              f"{len(payload['families'])} families, {n_lv} family-levels"
+              + (f"; inherited (too thin to ship): {', '.join(inherited)}" if inherited else ""))
     return 0
 
 

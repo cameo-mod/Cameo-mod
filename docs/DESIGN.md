@@ -796,15 +796,35 @@ cheapest provider wins).
 step 6/5/4 = light/medium/heavy law (floor 10/25/40, Shield = 100+floor,
 percentage warhead its own 1-step window), profile = armor order.
 
+⚠ **That even-step law now applies only to the families Cameo INVENTED.** Since
+W13 step 4 the ten families with reference coverage (Bullet, CannonHE/AP,
+MissileHE/AP/AA, Laser, Prism, Flame, Tesla) take their magnitudes from the
+measured corpus instead — `docs/reference/family_profiles.json`, consumed by
+`tools/balance/gen_weapon_template.py`. Their floors come from §12.0's 10–25
+band by level (25/20/15/10), not from the 10/25/40 above, and `Shield` keeps its
+rule expressed against the profile's own peak (`top + floor`, which is the same
+`100 + floor` whenever a profile peaks at 100). The ORDER is unchanged: the
+corpus supplies magnitudes, the ordering law supplies order.
+
 ### 12.0 THE PROFILE SHAPE LAW (maintainer, 2026-08-15) — binding
 
 Supersedes the "even step" half of the step law. Three rules, in force for every
 `^Warhead_*` family:
 
-1. **Peak is 100.** Every profile is normalised so its own maximum is 100. This
-   is also how reference profiles from other mods are read, so a source that
-   writes 200/100 and one that writes 100/50 are recognised as the SAME design.
-   Absolute lethality lives in `Damage`, never in the armor profile.
+1. **The MEDIAN is 100, and values above 100 are legal** (revised 2026-08-15;
+   this rule originally said *"peak is 100"*). Every profile is normalised so its
+   own median is 100, which is also how reference profiles from other mods are
+   read — a source that writes 200/100 and one that writes 100/50 are recognised
+   as the SAME design. Absolute lethality still lives in `Damage`, never in the
+   armor profile.
+   **Why the peak was wrong:** normalising to the maximum lets ONE outlier cell
+   halve the entire rest of the profile. RA2's `Electric` warhead carries a 200
+   against a single armor to tune one unit; read peak-first, Tesla came out at
+   ~50 against infantry — a weapon that one-shots infantry, scored as mediocre
+   against them. The median is robust to that, and a peak of 200 is no longer
+   free: **K prices the profile**, so a weapon that is twice as good against its
+   best target is priced as twice as good. The old cap existed only because the
+   pricing formula could not yet see the profile. Ceiling: 300.
 2. **It is still a LADDER — no two values identical, anywhere in the profile.**
    A tie is a wasted rung and makes the weapon unreadable. This is absolute: it
    applies to the DERIVED armors too, so it must be the LAST thing enforced —
@@ -874,7 +894,16 @@ ladder is therefore `None < Flak < Plate`, and **Heroic sits BETWEEN Plate and
 Scout** — a hybrid of infantry and vehicle, of light and heavy.
 
 **Its value is the PRODUCT of the weapon's Plate and Scout values**, as
-fractions: `Heroic = Plate × Scout / 100`.
+fractions of the profile's own PEAK: `Heroic = Plate × Scout / peak`.
+
+⚠ **The divisor is the peak, not the constant 100** — they stopped being the
+same thing when rule 1 above moved normalisation from the peak to the median and
+values over 100 became legal. Dividing by 100 while a parent sits at 137
+AMPLIFIES instead of collapsing: `^Warhead_Bullet_Light` produced `Plate 137 ·
+Scout 106 · **Heroic 145**`, i.e. heroes taking MORE than either half — the exact
+inversion this section exists to prevent. It hit **36 of 60** derived cells
+before it was caught. Against the peak the product can never exceed either
+parent, and whenever a profile does peak at 100 the formula is unchanged.
 
 **The pattern generalises — a derived armor replaces every dual-`Armor` stack.**
 `^FlyingInfantryTemplate` carries TWO `Armor` traits today (`Scout` + `Fighter`)

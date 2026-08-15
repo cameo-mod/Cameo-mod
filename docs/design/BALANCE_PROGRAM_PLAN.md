@@ -41,7 +41,7 @@ status rather than keeping its own copy.
 | **W10** | `^Blindable` → `Blind` meter | ⬜ READY (unblocked by W6) | either | W6 ✅ |
 | **W11** | Wire K into `fit_class.py` behind a flag; fit one class both ways and compare | ✅ BUILT, sign-off owed (+2 pipeline bugs fixed: 43% of the roster priced at zero DPS) | Claude | W3 ✅, W4 ✅, W5 ✅ |
 | **W12** | Superweapon balancing as a SEPARATE track (not unit-priced) | ⬜ READY | maintainer-led | — |
-| **W13** | Warhead system rebuild from the 2494-profile reference corpus | 🔵 steps 1-3 DONE; **step 4 = regenerate templates, NOW UNBLOCKED** | Claude | W1, W5 |
+| **W13** | Warhead system rebuild from the 3150-profile reference corpus | 🔵 steps 1-4a DONE — **the measured profiles are LIVE** on all 10 sourced families (+ 8 blends); 4b = the 10 INVENTED families | Claude | W1, W5 |
 | **W14** | ~~Renormalise `avg_versus`~~ — ✖ DROPPED, the multi-role premium is intended; folded into W13 rule 8b | ✖ DROPPED | — | — |
 | **W15** | `%`-twin fix + `reference_hp` → 200 000 — **PREREQUISITE for W17** | ✅ DONE | Claude | — |
 | **W16** | Charge-up discount PROPORTIONAL to real charge share (supersedes W4's flat 0.75×) | ✅ DONE | Claude | W4 ✅ |
@@ -563,13 +563,60 @@ armors are an improvement (rule 8) — and it means each archetype's air POSITIO
 maintainer design decision, with the corpus contributing nothing. The tool says so in its
 own output rather than emitting an invented number.
 
-**NEXT (step 2):** map Cameo's 16 warhead families onto these archetypes and derive each
-family's target Versus values from its cluster median. That step WRITES
-`mods/cameo/weapons/weapons.yaml` via `gen_weapon_template.py`, so it is **set B** and waits
-on W2 — the derivation itself (set A) can be finished first.
+**STEP 4a — SHIPPED. The measured profiles are live in `weapons.yaml`.**
 
-**VERIFY:** `python tools/reference/extract_versus.py --summary` → 14 sources, 2494 rows;
-`python tools/reference/cluster_versus.py` → 1876 profiles, 85 archetypes.
+The even ramp is gone from every family the corpus can speak for. `table()` in
+`gen_weapon_template.py` survives only as the fallback for the families Cameo invented.
+
+| piece | where |
+|---|---|
+| frozen data | `docs/reference/family_profiles.json` — 10 families x 3 levels, `blend` aggregation, provenance (`n`, `mods`, `origin`) per cell |
+| exporter | `propose_family_profiles.py --json` |
+| consumer | `gen_weapon_template.reference_main()` — order still from `build_order()` |
+| impact report | `tools/balance/report_versus_change.py <rev>` |
+
+**Why the data is FROZEN into a committed JSON rather than derived at generation time:**
+`survey_platforms.py` traces the source mods' INI files out of `~/Downloads`. Nobody else
+has those, so a generator that imported the derivation would only run on one machine.
+
+**Measured result:** 51 warhead tables changed. Profile SPAN (the counter-play) went from a
+uniform 60/75/90 to **72–268**. Mean lethality moved **1.25x** on average (0.79x–2.04x), and
+across 2436 live armaments K moved **median 1.07x, mean 1.16x** (0.88x–1.98x). 36% of
+armaments did not move at all — those are the ~878 legacy nodes still declaring inline
+`Versus` on `SpreadDamage` (item A5), which the templates do not reach.
+
+⚠ **That K shift is not yet paid for.** `Damage` still has its old values, so a family whose
+mean rose 1.4x currently deals 1.4x. The correction is `apply_balance --confirm`, which needs
+a maintainer order (CLAUDE.md rule 3). Until then the tree is deliberately mid-pipeline.
+
+**Two rules were CORRECTED by running this** (both now in DESIGN.md):
+- **§12.0b Heroic/Airborne divide by the profile's PEAK, not by 100.** The two stopped being
+  the same thing when normalisation moved to the median. Dividing by 100 with a parent at 137
+  AMPLIFIES: `Bullet_Light` gave `Plate 137 · Scout 106 · Heroic 145` — heroes softer than
+  either half, the exact inversion §12.0b exists to prevent. **36 of 60** derived cells.
+- **§12.0 rule 1 said "peak is 100"** and the tooling had already moved to the median. Doc
+  fixed to match the artifact.
+
+**Two things deliberately NOT done here:**
+- **`Airborne` is computed but NOT emitted.** Its column would make 17 armors share the
+  %-twin's 16-wide window, where "no two identical" can only ever be the even ramp. Opening
+  that window is **W18**, and W18 must land as ONE change (denominator + x5 values) or every
+  %-twin deals a fifth or five times. `Airborne` ships with W18. ⚠ Also: `Jumpjet` is already
+  a **TerrainType** (`mods/cameo/bits/d2k/arrakis.yaml`) — a reason to keep `Airborne`.
+- **`--spread-flat-blocks` left OFF.** 24 of 30 family-levels have a macro block the corpus
+  left flatter than 20 points (worst: `CannonAP` vehicles spanning 7–8 across five rungs).
+  Widening them is DESIGN, not measurement, and it can push a block past its macro neighbour
+  and break the ordering law — so it stays a per-family maintainer call.
+
+**NEXT (step 4b):** the 10 families with NO reference coverage — `Flak`, `Chemical`, `Melee`,
+`Arrow`, `Magic`, `Demolition`, `Concussion`, `Sonic`, `Railgun`, `Nuclear`. `Magic` (PCT) and
+`Sonic` (FLAT) are already mode-designed and `Nuclear` is `HAND_TUNED`, so **7 sloped ladders**
+need inventing with reasoning + the spreadsheet the maintainer asked for. They still carry the
+even ramp and the OLD floors (10/25/40), which contradict §12.0's 10–25 band — resolve there.
+
+**VERIFY:** `python tools/reference/extract_versus.py --summary` → 16 sources, 3150 rows;
+`python tools/balance/verify_generator_sync.py` → drift = 1 (`^Warhead_Sniper_Light`);
+`python tools/balance/report_versus_change.py <rev>` → the profile diff.
 
 ---
 

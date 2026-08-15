@@ -25,6 +25,8 @@ Naming: UNIFIED `^Warhead_<Family>_<Level>` (family-first, underscore).
 Usage:  gen_weapon_template.py [family ...] | --list | --orders
 """
 from __future__ import annotations
+import json
+import pathlib
 import sys
 
 LADDERS = {  # lightest -> heaviest
@@ -192,6 +194,82 @@ def table(order16, step, top, floor, shield):
     return rows
 
 
+# --------------------------------------------------------------------------- #
+# W13 — MEASURED Versus profiles (the reference corpus), replacing the even ramp
+# --------------------------------------------------------------------------- #
+# `table()` above is a LINEAR ladder: 100, 100-step, 100-2*step ... Equal steps
+# were a generator artifact and produce exactly the "moderate middle" the warhead
+# rebuild exists to escape (DESIGN.md §12.0 rule 3). Where the reference corpus
+# measured a family at a platform tier, its profile is used INSTEAD — plateaus,
+# cliffs and all — and `table()` remains the fallback for the families Cameo
+# invented, which have no cross-mod equivalent to learn from.
+#
+# The data is FROZEN into a committed JSON rather than computed here on purpose:
+# deriving it needs `tools/reference/survey_platforms.py`, which traces the source
+# mods' INI files out of `~/Downloads`. Nobody else has those, so a generator that
+# imported the derivation would only run on one machine. Regenerate the JSON with
+#   python tools/reference/propose_family_profiles.py --json
+# and the ORDER still comes from `build_order()` here — the corpus supplies
+# magnitudes, the law supplies order (DESIGN.md §12.0).
+REFERENCE_JSON = (pathlib.Path(__file__).resolve().parents[2]
+                  / "docs" / "reference" / "family_profiles.json")
+try:
+    REFERENCE_PROFILES = json.loads(REFERENCE_JSON.read_text(encoding="utf-8"))["families"]
+except (OSError, ValueError, KeyError):   # missing/damaged data must not break the generator
+    REFERENCE_PROFILES = {}
+
+
+def distinct_ints(rows):
+    """No two values identical, on INTEGERS — the last step of the shape law.
+
+    The frozen profiles are floats separated by at least 2, but `Versus` is an
+    `int` dictionary in the engine (`DamageWarhead.Versus`), and rounding can
+    re-create a tie the float profile had already separated. Walks DOWN from the
+    peak, which is the direction with room: nudging up pins ties against the top
+    and silently re-creates the duplicate (the bug that shipped Tesla with
+    `Plate 100` AND `Superheavy 100`). `sorted` is stable, so armors that tie
+    keep the order the ordering law gave them.
+    """
+    ranked = sorted(range(len(rows)), key=lambda i: -rows[i][1])
+    fixed, previous = {}, None
+    for i in ranked:
+        armor, value = rows[i]
+        if previous is not None and value >= previous:
+            value = previous - 1
+        fixed[armor] = value
+        previous = value
+    return [(armor, fixed[armor]) for armor, _ in rows]
+
+
+def reference_main(name, order16, level):
+    """The measured main-warhead rows for a family+level, or None if unmeasured.
+
+    `Shield` keeps the rule it always had — one floor above the profile's best
+    target (`table()` passes `100 + floor`, i.e. top + floor). Expressed against
+    the profile's OWN top and floor it is the same rule, and it reduces to exactly
+    the old constant whenever the profile peaks at 100. That matters: shields are
+    the softest layer by design, so pinning them to a constant while the profile
+    moves would make a specialist's best target tougher than a shield.
+    """
+    entry = REFERENCE_PROFILES.get(name, {}).get(level)
+    if entry is None:
+        return None
+    profile = entry["profile"]
+    if not all(a in profile for a in order16):
+        return None                       # partial data is not usable data
+    values = [profile[a] for a in order16]
+    rows = ([("Shield", int(round(max(values))) + int(round(min(values))))]
+            + [(a, int(round(profile[a]))) for a in order16])
+    rows = distinct_ints(rows)
+    # Emit DESCENDING. The law's order produced the assignment, but `Heroic` is
+    # DERIVED (`Plate x Scout / peak`) and lands wherever its product falls, not in
+    # the infantry slot the order gave it — so the law's sequence is no longer a
+    # descending list and a reader can no longer check the ladder by eye. Sorting
+    # is display only: for the even-ramp families it is exactly the order they
+    # already emit, so nothing moves except the derived armors.
+    return sorted(rows, key=lambda r: -r[1])
+
+
 def emit_versus(rows, indent="\t\t\t", hazmat=None):
     out = [] if hazmat is None else [f"{indent}HAZMAT: {hazmat}"]
     for a, v in rows:
@@ -247,7 +325,15 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         else:                                    # standard sloped profile
             step, mfloor, ptop = LEVELS[level]
             pfloor = ptop - 15
-            main = table(order16, step, 100, mfloor, 100 + mfloor)
+            # Measured profile if the corpus has one, otherwise the even ramp.
+            main = (reference_main(name, order16, level)
+                    or table(order16, step, 100, mfloor, 100 + mfloor))
+            # ⚠ The %-twin stays the 1-step ladder, deliberately. Its window is only
+            # 16 wide (`ptop` down to `ptop-15`), so 16 armors that must all differ
+            # can ONLY be the even ramp — there is no room left for a shape. Giving
+            # it one needs W18's x5 rebase to open the window, and W18 must land as
+            # one change (denominator + values) or every %-twin deals a fifth or
+            # five times. Until then the twin carries the ORDER, not the shape.
             pct = table(order16, 1, ptop, pfloor, ptop + pfloor)
             hz = hazmat
         tag = f"{name}_{level}"
@@ -453,13 +539,18 @@ BLEND_ARMOR_ORDER = ["None", "Flak", "Plate", "Heroic", "Scout", "Light", "Mediu
 
 
 def _family_main_pct(pname, level):
-    """(main_dict, pct_dict) armor -> value for a standard family at a level (incl Shield)."""
+    """(main_dict, pct_dict) armor -> value for a standard family at a level (incl Shield).
+
+    Reads the measured profile through the same path `family()` does, so a blend
+    (Plasma, Thermobaric, Quantum, the Fire*/Chem* pairs, Storm) averages the
+    parents' REAL profiles and cannot drift from what the parents themselves emit.
+    """
     bl, d, air, lv = WEAPONS[pname]
     order = build_order(bl, d)
     step, mfloor, ptop = LEVELS[level]
     pfloor = ptop - 15
-    return (dict(table(order, step, 100, mfloor, 100 + mfloor)),
-            dict(table(order, 1, ptop, pfloor, ptop + pfloor)))
+    main = reference_main(pname, order, level) or table(order, step, 100, mfloor, 100 + mfloor)
+    return (dict(main), dict(table(order, 1, ptop, pfloor, ptop + pfloor)))
 
 
 def blend_versus(parents):
