@@ -249,6 +249,54 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
   `CampaignAI` in delivery/deliverycoop rules.yaml and added missing
   `bot_ai.campaign` fluent key to en.ftl.
 
+## ❓ OPEN DESIGN — Schwarzer Mond team upgrade + faction lore pass (2026-08-15)
+
+Two maintainer questions raised while reworking the SM upgrades (`d58cd8603`).
+
+### 1. Does Moon Propaganda become SM's team upgrade?
+
+Every faction is eventually meant to have one; SM has none. The maintainer's own
+difficulty is real: *"it's very hard to make something unique that is also
+teamwide."*
+
+**Recommendation: yes, and SPLIT the effect rather than choosing between unique
+and shared.** The convention already in the tree (`^TeamUpgradeTemplate` +
+`ProvidesTeamProxyActor` + a `^TeamUpgradeProxyActor`, with effects living in a
+template that units inherit — see `asianalliance_upgrade_wayofthedragon` and
+`^WayOfTheDragon`) supports two tiers of effect at once, because the effects
+template and the faction template are separate files:
+
+| effect | scope | why |
+|---|---|---|
+| **Fanaticism** (+50% firepower below half health) | **TEAM-WIDE**, via `^GlobalBuffs` | reads as MORALE, which is faction-agnostic — any army can fight harder when wounded, and propaganda is exactly the thing that would cause it |
+| **Defection** (killed enemy infantry rise as Lunar Soldiers) | **SM ONLY**, stays in `^NaxiMoonPropaganda` | inherently Schwarzer Mond — an ally's dead should not stand up wearing Reich uniforms |
+
+That resolves the tension: the SHARED half is generic but genuinely good, the
+UNIQUE half stays with the faction that earns it. The same shape should work for
+every other faction's team upgrade.
+
+**Cost of converting:** swap `^ResearchedUpgradeTemplate` → `^TeamUpgradeTemplate`
+(cost 5000 → 10000), add an `up_moonpropaganda_proxy_actor.schwarzermond`, and
+move the fanaticism traits into `^GlobalBuffs` gated on the proxy's condition.
+Both effects are already built and boot-gated as a normal upgrade, so this is a
+rewiring job, not new mechanics. **Needs the maintainer's go-ahead** (it is a
+cost and queue change).
+
+### 2. Magic-the-Gathering-style lore for every unit and upgrade
+
+Maintainer, 2026-08-15: *"I want each unit and upgrade to have their own unique
+lore behind them, like the Magic the Gathering cards … But yeah that's more like
+a thing for the future maybe?"* — recorded as a FUTURE pass, not queued now.
+
+Shape when it happens: descriptions already carry a mechanical line plus a
+flavour line (see `schwarzermond_upgrade_cryptofascism`, whose flavour text is
+the MoonCoin rug-pull). That two-line split IS the MTG card layout — rules text
+then italic flavour — so the pass is a sweep over existing `Description:` fields
+rather than a new system. Do it AFTER the balance program settles, because the
+mechanical line has to state final numbers, and check it with
+`audit_display_text` + `audit_fluent` (many descriptions are fluent keys, and
+those must be edited in the `.ftl`, not inline).
+
 ## ★ MAJOR PROGRAM (2026-07-25): mod-synthesis balance overhaul — see [`BALANCE_SYNTHESIS.md`](BALANCE_SYNTHESIS.md)
 
 Big multi-session effort to fix Cameo's extreme-value balance by synthesizing extracted mods into
