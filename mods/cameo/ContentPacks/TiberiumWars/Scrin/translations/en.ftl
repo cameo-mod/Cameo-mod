@@ -72,3 +72,24 @@ actor_scrin_phase_generator =
 
 actor_scrin_eradicator_hexapod =
    .name = Scrin Eradicator Hexapod
+
+actor_scrin_disintegrator =
+   .name = Scrin Disintegrator
+
+actor_scrin_assimilator =
+   .name = Scrin Assimilator
+
+actor_scrin_shock_trooper =
+   .name = Scrin Shock Trooper
+
+actor_scrin_shock_trooper_blink_pack =
+   .name = Scrin Shock Trooper (Blink Pack)
+
+actor_scrin_ravager =
+   .name = Scrin Ravager
+
+actor_scrin_mastermind =
+   .name = Scrin Mastermind
+
+actor_scrin_prodigy =
+   .name = Scrin Prodigy

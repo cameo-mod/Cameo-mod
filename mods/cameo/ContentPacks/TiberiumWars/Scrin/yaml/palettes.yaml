@@ -7,3 +7,66 @@
 		BasePalette: scrin_hexapod
 		BaseName: scrin_hexapod_player
 		RemapIndex: 249, 250, 251, 252, 253, 254, 255
+
+	PaletteFromEmbeddedSpritePalette@scrin_disintegrator:
+		Name: scrin_disintegrator
+		Filename: scrin_sprites|scrin_disintegrator_idle.png
+		AllowModifiers: true
+	PlayerColorPalette@scrin_disintegrator:
+		BasePalette: scrin_disintegrator
+		BaseName: scrin_disintegrator_player
+		RemapIndex: 249, 250, 251, 252, 253, 254, 255
+
+	PaletteFromEmbeddedSpritePalette@scrin_assimilator:
+		Name: scrin_assimilator
+		Filename: scrin_sprites|scrin_assimilator_idle.png
+		AllowModifiers: true
+	PlayerColorPalette@scrin_assimilator:
+		BasePalette: scrin_assimilator
+		BaseName: scrin_assimilator_player
+		RemapIndex: 249, 250, 251, 252, 253, 254, 255
+
+	PaletteFromEmbeddedSpritePalette@scrin_shock_trooper:
+		Name: scrin_shock_trooper
+		Filename: scrin_sprites|scrin_shock_trooper_idle.png
+		AllowModifiers: true
+	PlayerColorPalette@scrin_shock_trooper:
+		BasePalette: scrin_shock_trooper
+		BaseName: scrin_shock_trooper_player
+		RemapIndex: 249, 250, 251, 252, 253, 254, 255
+
+	PaletteFromEmbeddedSpritePalette@scrin_shock_trooper_blink_pack:
+		Name: scrin_shock_trooper_blink_pack
+		Filename: scrin_sprites|scrin_shock_trooper_blink_pack_idle.png
+		AllowModifiers: true
+	PlayerColorPalette@scrin_shock_trooper_blink_pack:
+		BasePalette: scrin_shock_trooper_blink_pack
+		BaseName: scrin_shock_trooper_blink_pack_player
+		RemapIndex: 249, 250, 251, 252, 253, 254, 255
+
+	PaletteFromEmbeddedSpritePalette@scrin_ravager:
+		Name: scrin_ravager
+		Filename: scrin_sprites|scrin_ravager_idle.png
+		AllowModifiers: true
+	PlayerColorPalette@scrin_ravager:
+		BasePalette: scrin_ravager
+		BaseName: scrin_ravager_player
+		RemapIndex: 249, 250, 251, 252, 253, 254, 255
+
+	PaletteFromEmbeddedSpritePalette@scrin_mastermind:
+		Name: scrin_mastermind
+		Filename: scrin_sprites|scrin_mastermind_idle.png
+		AllowModifiers: true
+	PlayerColorPalette@scrin_mastermind:
+		BasePalette: scrin_mastermind
+		BaseName: scrin_mastermind_player
+		RemapIndex: 249, 250, 251, 252, 253, 254, 255
+
+	PaletteFromEmbeddedSpritePalette@scrin_prodigy:
+		Name: scrin_prodigy
+		Filename: scrin_sprites|scrin_prodigy_idle.png
+		AllowModifiers: true
+	PlayerColorPalette@scrin_prodigy:
+		BasePalette: scrin_prodigy
+		BaseName: scrin_prodigy_player
+		RemapIndex: 249, 250, 251, 252, 253, 254, 255

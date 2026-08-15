@@ -220,3 +220,136 @@ scrin_eradicator_hexapod:
 		ShadowZOffset: -5
 		Offset: 0.000,-22.000
 		Scale: 2
+
+scrin_disintegrator:
+	stand:
+		Filename: scrin_sprites|scrin_disintegrator_idle.png
+		Start: 0
+		Length: 1
+		Facings: 8
+		ShadowStart: 8
+		ShadowZOffset: -5
+		Offset: 0.000,-6.000
+	run:
+		Filename: scrin_sprites|scrin_disintegrator_walk.png
+		Start: 0
+		Length: 12
+		Facings: 8
+		Tick: 100
+		ShadowStart: 96
+		ShadowZOffset: -5
+		Offset: 0.000,-6.000
+
+scrin_assimilator:
+	stand:
+		Filename: scrin_sprites|scrin_assimilator_idle.png
+		Start: 0
+		Length: 1
+		Facings: 8
+		ShadowStart: 8
+		ShadowZOffset: -5
+		Offset: 0.000,-6.000
+	run:
+		Filename: scrin_sprites|scrin_assimilator_walk.png
+		Start: 0
+		Length: 12
+		Facings: 8
+		Tick: 100
+		ShadowStart: 96
+		ShadowZOffset: -5
+		Offset: 0.000,-6.000
+
+scrin_shock_trooper:
+	stand:
+		Filename: scrin_sprites|scrin_shock_trooper_idle.png
+		Start: 0
+		Length: 1
+		Facings: 8
+		ShadowStart: 8
+		ShadowZOffset: -5
+		Offset: 0.000,-8.000
+	run:
+		Filename: scrin_sprites|scrin_shock_trooper_walk.png
+		Start: 0
+		Length: 12
+		Facings: 8
+		Tick: 100
+		ShadowStart: 96
+		ShadowZOffset: -5
+		Offset: 0.000,-8.000
+
+scrin_shock_trooper_blink_pack:
+	stand:
+		Filename: scrin_sprites|scrin_shock_trooper_blink_pack_idle.png
+		Start: 0
+		Length: 1
+		Facings: 8
+		ShadowStart: 8
+		ShadowZOffset: -5
+		Offset: 0.000,-12.000
+	run:
+		Filename: scrin_sprites|scrin_shock_trooper_blink_pack_walk.png
+		Start: 0
+		Length: 12
+		Facings: 8
+		Tick: 100
+		ShadowStart: 96
+		ShadowZOffset: -5
+		Offset: 0.000,-12.000
+
+scrin_ravager:
+	stand:
+		Filename: scrin_sprites|scrin_ravager_idle.png
+		Start: 0
+		Length: 1
+		Facings: 8
+		ShadowStart: 8
+		ShadowZOffset: -5
+		Offset: 2.000,-6.000
+	run:
+		Filename: scrin_sprites|scrin_ravager_walk.png
+		Start: 0
+		Length: 12
+		Facings: 8
+		Tick: 100
+		ShadowStart: 96
+		ShadowZOffset: -5
+		Offset: 2.000,-6.000
+
+scrin_mastermind:
+	stand:
+		Filename: scrin_sprites|scrin_mastermind_idle.png
+		Start: 0
+		Length: 1
+		Facings: 8
+		ShadowStart: 8
+		ShadowZOffset: -5
+		Offset: 2.000,-10.000
+	run:
+		Filename: scrin_sprites|scrin_mastermind_walk.png
+		Start: 0
+		Length: 12
+		Facings: 8
+		Tick: 100
+		ShadowStart: 96
+		ShadowZOffset: -5
+		Offset: 2.000,-10.000
+
+scrin_prodigy:
+	stand:
+		Filename: scrin_sprites|scrin_prodigy_idle.png
+		Start: 0
+		Length: 1
+		Facings: 8
+		ShadowStart: 8
+		ShadowZOffset: -5
+		Offset: 2.000,-16.000
+	run:
+		Filename: scrin_sprites|scrin_prodigy_walk.png
+		Start: 0
+		Length: 12
+		Facings: 8
+		Tick: 100
+		ShadowStart: 96
+		ShadowZOffset: -5
+		Offset: 2.000,-16.000

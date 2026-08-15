@@ -1,0 +1,64 @@
+# Map/editor-ready visual foundation. Production roles, weapons, abilities, and
+# final gameplay values are intentionally deferred with the rest of the roster.
+
+^ScrinInfantryVisual:
+	Inherits: ^DefaultInfantry
+	Health:
+		HP: 10000
+	Mobile:
+		Speed: 50
+	WithInfantryBody:
+		IdleSequences: stand
+		StandSequences: stand
+		DefaultAttackSequence: stand
+	-WithDeathAnimation:
+	-Voiced:
+
+scrin_disintegrator:
+	Inherits: ^ScrinInfantryVisual
+	Tooltip:
+		Name: actor_scrin_disintegrator.name
+	RenderSprites:
+		PlayerPalette: scrin_disintegrator_player
+
+scrin_assimilator:
+	Inherits: ^ScrinInfantryVisual
+	Tooltip:
+		Name: actor_scrin_assimilator.name
+	RenderSprites:
+		PlayerPalette: scrin_assimilator_player
+
+scrin_shock_trooper:
+	Inherits: ^ScrinInfantryVisual
+	Tooltip:
+		Name: actor_scrin_shock_trooper.name
+	RenderSprites:
+		PlayerPalette: scrin_shock_trooper_player
+
+scrin_shock_trooper_blink_pack:
+	Inherits: ^ScrinInfantryVisual
+	Tooltip:
+		Name: actor_scrin_shock_trooper_blink_pack.name
+	RenderSprites:
+		PlayerPalette: scrin_shock_trooper_blink_pack_player
+
+scrin_ravager:
+	Inherits: ^ScrinInfantryVisual
+	Tooltip:
+		Name: actor_scrin_ravager.name
+	RenderSprites:
+		PlayerPalette: scrin_ravager_player
+
+scrin_mastermind:
+	Inherits: ^ScrinInfantryVisual
+	Tooltip:
+		Name: actor_scrin_mastermind.name
+	RenderSprites:
+		PlayerPalette: scrin_mastermind_player
+
+scrin_prodigy:
+	Inherits: ^ScrinInfantryVisual
+	Tooltip:
+		Name: actor_scrin_prodigy.name
+	RenderSprites:
+		PlayerPalette: scrin_prodigy_player
