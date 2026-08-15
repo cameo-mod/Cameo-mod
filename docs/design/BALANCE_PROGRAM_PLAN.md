@@ -50,6 +50,8 @@ status rather than keeping its own copy.
 | **W19** | Collapse the 195 `SpreadDamage` ExtraDamage chips into the main warhead (KEEP the 34 sniper `OpenToppedDamage`) | ⬜ READY (set B free) | Claude | W13 |
 | **W20** | Multi-armor combination rule (engine MULTIPLIES → squares the profile); mechanism + switch | ⬜ MECHANISM DONE, rule = maintainer | Claude | — |
 | **W21** | Layered health Shield → Integrity → Armor → Health, layer-aware armor (solves W20 structurally) | ✅ BUILT + LIVE `ab467fe52` | Claude | — |
+| **W22** | Roster census: liveness classifier + per-credit weighting (552/1977 armored actors are not buildable) | ⬜ PROPOSED | — | — |
+| **W23** | Retrofit the 47 legacy templates into the `^Warhead_*` family system | 🔵 MACHINERY DONE + verified; content ⛔ on the 33-collision ruling | Claude | W13 |
 
 **Recommended order:** W2 ∥ W3 → W4 → W5 → W6 → (W7, W9) → W8 → W10 → W11 → W12.
 `∥` = safe to run in parallel (disjoint file sets).
@@ -1722,3 +1724,66 @@ Constants added by W5: `TARGETS_FLOOR 0.5` · `RANGE_WEIGHT 0.25` ·
 `FORMULA_V2.md` (the laws) · `PHYSICAL_STATE_SYSTEM.md` (meters) ·
 `SPREAD_FALLOFF_PLAN.md` (falloff shapes) · `WEAPON_3WAY_SPLIT.md` (the split) ·
 `ROADMAP.md` (everything else) · `AI_HANDOFF_2026-08-05.md` (agent letters)
+
+---
+
+## W23 — Retrofit the 47 legacy templates into the `^Warhead_*` family system 🔵 MACHINERY DONE, content BLOCKED on one ruling
+
+**Why.** DESIGN.md §12 is explicit that **`Versus` lives ONLY in `^Warhead_*` templates**. 47
+templates still declare their own and **1343 weapons inherit them**, so every one is both a
+migration target and a live rule violation — and their ladders pollute the Versus census that
+W1's K coefficient, `armor_exposure.py` and the family surveys are all built on.
+
+### Tooling (committed, verified)
+
+| tool | what it answers |
+|---|---|
+| `tools/audit/audit_unconverted_templates.py` | which templates are still outside the system (47 / 1343) |
+| `tools/balance/measure_retrofit_gap.py` | how far each legacy ladder sits from its target family, and **which** family by rank correlation |
+| `tools/balance/retrofit_legacy_template.py` | performs one conversion, template + all descendants |
+| `tools/balance/verify_retrofit.py` | proves resolved behaviour survived (mean output held, no orphans, no geometry drift) |
+| `tools/balance/remove_dead_weapons.py` | deletes loaded-but-unused definitions that bias the census |
+
+**Measured:** 25 templates convertible, **median gap 1.279x** — so a naive repoint would have made
+~1300 weapons a third more lethal. Full table: `docs/audit/latest/retrofit_gap.json`.
+
+**Data-driven decisions the correlation check made** (shape, not name):
+- all three missile templates are **AP**, not HE (corr 0.77 vs 0.30);
+- `^Grenade` -> `Demolition_Light`, not Concussion (0.94 vs 0.79).
+
+### Excluded by design — need a maintainer ruling, not a script
+
+| template | why |
+|---|---|
+| `^MagicWeapon` | target `^Warhead_Magic_Heavy` is **FLAT 32 vs every armor** (the %-equalizer); the legacy is a 140->40 ladder, so converting DELETES its armor discrimination |
+| `^NuclearWarhead` | family is hand-tuned to **BLD > VEH > AIR > INF**; the legacy ladder is anti-heavy, so a repoint re-roles the weapon |
+| `^LightFlameWeapon` | **W2 owns it** — the maintainer split it across FOUR families per weapon, and its `Range: 500` P1 bug is still open |
+
+### ⛔ THE BLOCKER — 33 weapons collide inside one family
+
+582 of 615 affected weapons convert with their mean output **exactly preserved**. The other 33
+inherit **several legacy templates that map into the SAME family**, so after the rename MiniYaml
+merges two independent warheads into one node and the smaller one's damage disappears:
+
+- `GladiusCannon` inherits `^MediumCannon` + `^HeavyCannon` + `^TankDestroyerCannon` **and**
+  already carries `CannonHE_Medium`/`CannonHE_Heavy`/`CannonAP_Light` — it lost **30 000** damage.
+- `AsianSniperAP` had `Warhead@SmallArms: 6000` *and* `Warhead@Bullet_Light: 16000` as separate
+  SUM-law sources; the rename collapsed them.
+
+A SUM-law compensation pass (write the total into the weapon's own block) recovers most of it —
+`GladiusCannon` from -30% to -6% — but cannot close it, because each template converts in its own
+pass and the collisions compound. **The real question is a design one: should a weapon carry three
+separate cannon warheads of the same family at all?** Under the one-weapon-one-warhead intent it
+should be ONE warhead at the summed damage; that is a maintainer call.
+
+**NEXT:** rule on the 33, then run the batch (25 templates, ~2839 keys, one boot gate).
+
+### Also found — obsolete definitions that bias the census
+
+`^AACannon`, `^RAHeavyMG`, `^RALightMG`, `^Artillery`, `^TSRailgun`, `^TSArtilleryWeapon` are
+**loaded by the live ruleset, inherited by nothing and fired by nothing**, yet each still
+contributes a `Versus` ladder to every census. Their only referrers sit in commented-out files.
+Maintainer, 2026-08-16: *"obsolete things should be removed entirely so they don't affect our
+unit / weapon balance."* Deletion is ready (`remove_dead_weapons.py`) and needs a boot gate.
+⚠ The `--survey` mode deliberately SKIPS unused `^Warhead_*`/`^Effect_*`/`^Projectile_*` — the
+generator ships that matrix on purpose and `verify_generator_sync.py` requires it.
