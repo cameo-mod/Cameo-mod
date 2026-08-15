@@ -114,6 +114,7 @@ ARCHETYPES = {
         "ini_actors": ["OBLI", "TSOBEL", "TSLASR", "ROBOTOBELISK", "NAOBEL"],
         "openra_warheads": ["Laser", "LaserTur", "IonBeamMini"],
         "cameo_family": "^Warhead_Laser_Heavy",
+        "direction": "light",
     },
     "tesla_coil": {
         "what": "Tesla Coil — the big defensive electric weapon",
@@ -121,24 +122,28 @@ ARCHETYPES = {
         "openra_warheads": ["TeslaZap", "PortaTesla", "CoilBolt", "PostBolt",
                             "^TeslaWeapon"],
         "cameo_family": "^Warhead_Tesla_Heavy",
+        "direction": "heavy",
     },
     "prism_tower": {
         "what": "Prism Tower — the RA2-lineage counterpart of the Obelisk",
         "ini_actors": ["ATESLA"],
         "openra_warheads": ["PrismShot", "PrismWarhead"],
         "cameo_family": "^Warhead_Prism_Heavy",
+        "direction": "light",
     },
     "he": {
         "what": "Generic HE — the canonical anti-light/anti-infantry profile",
         "ini_warheads": ["HE"],
         "openra_warheads": ["^Cannon", "ArtilleryShell"],
         "cameo_family": "^Warhead_CannonHE_Medium",
+        "direction": "light",
     },
     "ap": {
         "what": "Generic AP — the canonical anti-heavy/armour-piercing profile",
         "ini_warheads": ["AP"],
         "openra_warheads": ["^ArmorPierceDamage", "sabot"],
         "cameo_family": "^Warhead_CannonAP_Medium",
+        "direction": "heavy",
     },
 }
 
@@ -350,6 +355,60 @@ def aggregate(rows: list[dict], how: str) -> dict[str, float]:
 NON_ARMOR = {"shield", "hazmat", "reflector"}
 
 
+def lawful_profile(profile: dict[str, float], direction: str) -> dict[str, float]:
+    """Re-lay a measured profile so it obeys Cameo's ORDERING LAW.
+
+    **Why this step has to exist.** The corpus and the law disagree, and both are
+    right about different things. Measured across six independent RA2-lineage
+    mods, the canonical `AP` warhead reads `none 25 · flak 25 · plate 15` — armour
+    piercing doing LESS to plated infantry than to unplated. That is not noise,
+    it is Westwood's design, reproduced by everyone who cloned it. But Cameo's
+    ordering law (maintainer 2026-08-01, "the most important part") says an
+    anti-HEAVY weapon must run `Heroic > Plate > Flak > None`, and the law wins:
+    it is what makes a Cameo weapon *readable*, so a player can predict a
+    matchup from the weapon's type instead of memorising 16 numbers each.
+
+    So the corpus supplies the MAGNITUDES — how wide the spread is, where the
+    plateaus and cliffs fall — and the law supplies the ORDER. That is W13 rule 6
+    ("the ordering law still governs; it is what keeps wild coherent rather than
+    random") made executable.
+
+    Method: inside each macro ladder, keep the measured VALUES exactly, then
+    reassign them along the ladder in the direction the law requires. Nothing is
+    invented and nothing is averaged away — only the pairing changes. The macro
+    blocks keep the priority the field gave them (their own mean), because THAT
+    is a genuine measurement of what the weapon is for.
+    """
+    out: dict[str, float] = {}
+    for ladder in CAMEO_LADDERS.values():
+        present = [a for a in ladder if a in profile]
+        if not present:
+            continue
+        values = sorted((profile[a] for a in present), reverse=True)
+        # `heavy` = best against the heaviest rung, so the biggest value goes to
+        # the END of the (lightest -> heaviest) ladder.
+        targets = list(reversed(present)) if direction == "heavy" else present
+        for armor, value in zip(targets, values):
+            out[armor] = value
+    return out
+
+
+def order_violations(profile: dict[str, float], direction: str) -> list[str]:
+    """Ladders where the measured profile disagrees with the law's direction."""
+    bad = []
+    for macro, ladder in CAMEO_LADDERS.items():
+        present = [a for a in ladder if a in profile]
+        if len(present) < 2:
+            continue
+        vals = [profile[a] for a in present]
+        ok = (all(x <= y for x, y in zip(vals, vals[1:])) if direction == "heavy"
+              else all(x >= y for x, y in zip(vals, vals[1:])))
+        if not ok:
+            bad.append(f"{macro} (" + " ".join(f"{a}={profile[a]:g}"
+                                               for a in present) + ")")
+    return bad
+
+
 def cameo_profile(family: str) -> dict[str, float] | None:
     """Cameo's CURRENT profile for a `^Warhead_*` family, normalised the same way.
 
@@ -456,7 +515,40 @@ def render(concept: str, rows: list[dict]) -> str:
         mark = "**" if label == "CAMEO today" else ""
         lines.append(f"| {mark}{label}{mark} | " + " | ".join(cells) + f" | {span} |")
 
+    # --- Table D: the law-conformant synthesis ------------------------------ #
+    direction = spec.get("direction", "light")
     med = aggs["median"]
+    violations = order_violations(med, direction)
+    lawful = lawful_profile(med, direction)
+    lines += ["", f"### Table D — PROPOSED: field magnitudes, law order "
+              f"(`{direction}`-favouring)", "",
+              "The corpus and the ordering law disagree, and each is right about a",
+              "different thing. The measured values are kept EXACTLY; only which armor",
+              "they attach to changes, so the spread and the cliffs survive while the",
+              "ladder reads the way the law requires (W13 rule 6).", ""]
+    if violations:
+        lines += ["⚠ The raw field median violates the law on: "
+                  + "; ".join(f"**{v}**" for v in violations) + ".", "",
+                  "For AP that is not a data error — six independent RA2-lineage mods all",
+                  "write `none 25 · flak 25 · plate 15`, i.e. armour piercing doing LESS to",
+                  "plated infantry than to unplated. It is Westwood's design, faithfully",
+                  "cloned. Cameo's law inverts it so the weapon stays readable.", ""]
+    else:
+        lines += ["✅ The field median already obeys the law here — the reorder is a no-op.",
+                  ""]
+    lines += ["| profile | " + " | ".join(CAMEO16) + " |",
+              "|---|" + "--:|" * len(CAMEO16),
+              "| field median (raw) | "
+              + " | ".join("—" if med.get(a) is None else f"{med[a]:g}"
+                           for a in CAMEO16) + " |",
+              "| **PROPOSED (law order)** | "
+              + " | ".join("—" if lawful.get(a) is None else f"**{lawful[a]:g}**"
+                           for a in CAMEO16) + " |"]
+    if cameo:
+        lines.append("| Cameo today | "
+                     + " | ".join("—" if cameo.get(a) is None else f"{cameo[a]:g}"
+                                  for a in CAMEO16) + " |")
+
     vals = list(med.values())
     if vals:
         lines += ["", f"**Reference span {max(vals) - min(vals):.0f}** "

@@ -62,6 +62,26 @@ sources disagree about that armor.
 | geometric mean | 100 | 74.5 | 66.7 | 57.7 | 58.6 | 49.1 | 73.7 | 51.3 | 34.4 | 52.6 | 66.7 | 21.2 | 49.1 | 73.7 | 49.1 | 51.3 | 79 |
 | **CAMEO today** | 48 | 64 | 80 | 96 | 40 | 52 | 68 | 84 | 100 | 56 | 72 | 88 | 44 | 60 | 76 | 92 | 60 |
 
+### Table D — PROPOSED: field magnitudes, law order (`light`-favouring)
+
+The corpus and the ordering law disagree, and each is right about a
+different thing. The measured values are kept EXACTLY; only which armor
+they attach to changes, so the spread and the cliffs survive while the
+ladder reads the way the law requires (W13 rule 6).
+
+⚠ The raw field median violates the law on: **VEH (Scout=56 Light=50 Medium=66.7 Heavy=66.7 Superheavy=70)**; **AIR (Fighter=50 Bomber=66.7 Helicopter=50 Spaceship=66.7)**.
+
+For AP that is not a data error — six independent RA2-lineage mods all
+write `none 25 · flak 25 · plate 15`, i.e. armour piercing doing LESS to
+plated infantry than to unplated. It is Westwood's design, faithfully
+cloned. Cameo's law inverts it so the weapon stays readable.
+
+| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| field median (raw) | 100 | 75 | 66.7 | 58.3 | 56 | 50 | 66.7 | 66.7 | 70 | 66.7 | 66.7 | 38.8 | 50 | 66.7 | 50 | 66.7 |
+| **PROPOSED (law order)** | **100** | **75** | **66.7** | **58.3** | **70** | **66.7** | **66.7** | **56** | **50** | **66.7** | **66.7** | **38.8** | **66.7** | **66.7** | **50** | **50** |
+| Cameo today | 48 | 64 | 80 | 96 | 40 | 52 | 68 | 84 | 100 | 56 | 72 | 88 | 44 | 60 | 76 | 92 |
+
 **Reference span 61** (min 38.8 · max 100).
 **Cameo span 60** — FLATTER than the field for this concept.
 
@@ -142,6 +162,26 @@ sources disagree about that armor.
 | geometric mean | 77.7 | 64.3 | 61 | 57 | 66.2 | 41.6 | 51.5 | 52.6 | 47 | 38.4 | 23.6 | 27.1 | 41.6 | 51.5 | 41.6 | 52.6 | 54 |
 | **CAMEO today** | 72 | 80 | 88 | 96 | 68 | 76 | 84 | 92 | 100 | 56 | 60 | 64 | 40 | 44 | 48 | 52 | 60 |
 
+### Table D — PROPOSED: field magnitudes, law order (`heavy`-favouring)
+
+The corpus and the ordering law disagree, and each is right about a
+different thing. The measured values are kept EXACTLY; only which armor
+they attach to changes, so the spread and the cliffs survive while the
+ladder reads the way the law requires (W13 rule 6).
+
+⚠ The raw field median violates the law on: **INF (None=100 Flak=55 Plate=50 Heroic=50)**; **VEH (Scout=100 Light=42.5 Medium=50 Heavy=50 Superheavy=50)**; **AIR (Fighter=42.5 Bomber=50 Helicopter=42.5 Spaceship=50)**.
+
+For AP that is not a data error — six independent RA2-lineage mods all
+write `none 25 · flak 25 · plate 15`, i.e. armour piercing doing LESS to
+plated infantry than to unplated. It is Westwood's design, faithfully
+cloned. Cameo's law inverts it so the weapon stays readable.
+
+| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| field median (raw) | 100 | 55 | 50 | 50 | 100 | 42.5 | 50 | 50 | 50 | 25 | 25 | 25 | 42.5 | 50 | 42.5 | 50 |
+| **PROPOSED (law order)** | **50** | **50** | **55** | **100** | **42.5** | **50** | **50** | **50** | **100** | **25** | **25** | **25** | **42.5** | **42.5** | **50** | **50** |
+| Cameo today | 72 | 80 | 88 | 96 | 68 | 76 | 84 | 92 | 100 | 56 | 60 | 64 | 40 | 44 | 48 | 52 |
+
 **Reference span 75** (min 25 · max 100).
 **Cameo span 60** — FLATTER than the field for this concept.
 
@@ -205,6 +245,21 @@ sources disagree about that armor.
 | arithmetic mean | 55.6 | 34.6 | 33.9 | 33.2 | 50.3 | 28.6 | 30 | 27.9 | 25.8 | 13.6 | 13.6 | 13.2 | 28.6 | 30 | 28.6 | 27.9 | 42 |
 | geometric mean | 14.2 | 10.6 | 10.5 | 10.3 | 12.6 | 8.9 | 9.1 | 8.9 | 8.6 | 6.1 | 6.1 | 6 | 8.9 | 9.1 | 8.9 | 8.9 | 8 |
 | **CAMEO today** | 96 | 84 | 72 | 60 | 100 | 88 | 76 | 64 | 56 | 92 | 80 | 68 | 52 | 48 | 44 | 40 | 60 |
+
+### Table D — PROPOSED: field magnitudes, law order (`light`-favouring)
+
+The corpus and the ordering law disagree, and each is right about a
+different thing. The measured values are kept EXACTLY; only which armor
+they attach to changes, so the spread and the cliffs survive while the
+ladder reads the way the law requires (W13 rule 6).
+
+✅ The field median already obeys the law here — the reorder is a no-op.
+
+| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| field median (raw) | 83.3 | 50 | 48.6 | 44.4 | 51.7 | 30 | 30 | 30 | 30 | 17.5 | 17.5 | 17 | 30 | 30 | 30 | 30 |
+| **PROPOSED (law order)** | **83.3** | **50** | **48.6** | **44.4** | **51.7** | **30** | **30** | **30** | **30** | **17.5** | **17.5** | **17** | **30** | **30** | **30** | **30** |
+| Cameo today | 96 | 84 | 72 | 60 | 100 | 88 | 76 | 64 | 56 | 92 | 80 | 68 | 52 | 48 | 44 | 40 |
 
 **Reference span 66** (min 17 · max 83.3).
 **Cameo span 60** — FLATTER than the field for this concept.
@@ -274,6 +329,26 @@ sources disagree about that armor.
 | geometric mean | 66.5 | 98.3 | 96.3 | 94.2 | 78.9 | 75.9 | 58.8 | 47.4 | 7.7 | 75.4 | 40 | 34.2 | 75.9 | 58.8 | 75.9 | 47.4 | 91 |
 | **CAMEO today** | 60 | 55 | 50 | 45 | 100 | 90 | 80 | 70 | 65 | 95 | 85 | 75 | 40 | 35 | 30 | 25 | 75 |
 
+### Table D — PROPOSED: field magnitudes, law order (`light`-favouring)
+
+The corpus and the ordering law disagree, and each is right about a
+different thing. The measured values are kept EXACTLY; only which armor
+they attach to changes, so the spread and the cliffs survive while the
+ladder reads the way the law requires (W13 rule 6).
+
+⚠ The raw field median violates the law on: **AIR (Fighter=72.5 Bomber=70 Helicopter=72.5 Spaceship=35)**.
+
+For AP that is not a data error — six independent RA2-lineage mods all
+write `none 25 · flak 25 · plate 15`, i.e. armour piercing doing LESS to
+plated infantry than to unplated. It is Westwood's design, faithfully
+cloned. Cameo's law inverts it so the weapon stays readable.
+
+| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| field median (raw) | 100 | 100 | 100 | 100 | 80 | 72.5 | 70 | 35 | 15 | 75 | 40 | 34.4 | 72.5 | 70 | 72.5 | 35 |
+| **PROPOSED (law order)** | **100** | **100** | **100** | **100** | **80** | **72.5** | **70** | **35** | **15** | **75** | **40** | **34.4** | **72.5** | **72.5** | **70** | **35** |
+| Cameo today | 60 | 55 | 50 | 45 | 100 | 90 | 80 | 70 | 65 | 95 | 85 | 75 | 40 | 35 | 30 | 25 |
+
 **Reference span 85** (min 15 · max 100).
 **Cameo span 75** — FLATTER than the field for this concept.
 
@@ -333,6 +408,26 @@ sources disagree about that armor.
 | arithmetic mean | 30.4 | 35 | 22.1 | 9.3 | 58.9 | 82.1 | 92.5 | 97.8 | 102.2 | 66.2 | 42.5 | 55.7 | 82.1 | 92.5 | 82.1 | 97.8 | 93 |
 | geometric mean | 24.9 | 29.5 | 20 | 6.1 | 56.5 | 81.4 | 91.8 | 97.6 | 101 | 66 | 42.1 | 54.9 | 81.4 | 91.8 | 81.4 | 97.6 | 95 |
 | **CAMEO today** | 45 | 50 | 55 | 60 | 80 | 85 | 90 | 95 | 100 | 65 | 70 | 75 | 25 | 30 | 35 | 40 | 75 |
+
+### Table D — PROPOSED: field magnitudes, law order (`heavy`-favouring)
+
+The corpus and the ordering law disagree, and each is right about a
+different thing. The measured values are kept EXACTLY; only which armor
+they attach to changes, so the spread and the cliffs survive while the
+ladder reads the way the law requires (W13 rule 6).
+
+⚠ The raw field median violates the law on: **INF (None=25 Flak=25 Plate=15 Heroic=5)**; **BLD (Wood=65 Steel=45 Concrete=60)**; **AIR (Fighter=75 Bomber=100 Helicopter=75 Spaceship=100)**.
+
+For AP that is not a data error — six independent RA2-lineage mods all
+write `none 25 · flak 25 · plate 15`, i.e. armour piercing doing LESS to
+plated infantry than to unplated. It is Westwood's design, faithfully
+cloned. Cameo's law inverts it so the weapon stays readable.
+
+| profile | None | Flak | Plate | Heroic | Scout | Light | Medium | Heavy | Superheavy | Wood | Steel | Concrete | Fighter | Bomber | Helicopter | Spaceship |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| field median (raw) | 25 | 25 | 15 | 5 | 60 | 75 | 100 | 100 | 100 | 65 | 45 | 60 | 75 | 100 | 75 | 100 |
+| **PROPOSED (law order)** | **5** | **15** | **25** | **25** | **60** | **75** | **100** | **100** | **100** | **45** | **60** | **65** | **75** | **75** | **100** | **100** |
+| Cameo today | 45 | 50 | 55 | 60 | 80 | 85 | 90 | 95 | 100 | 65 | 70 | 75 | 25 | 30 | 35 | 40 |
 
 **Reference span 95** (min 5 · max 100).
 **Cameo span 75** — FLATTER than the field for this concept.
