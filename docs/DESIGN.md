@@ -839,11 +839,24 @@ Supersedes the "even step" half of the step law. Three rules, in force for every
    and cliffs** — the canonical HE warhead sits at ~100 across the whole
    infantry ladder and then falls off to 35 at Heavy and 15 at Superheavy.
    Uneven steps are how a weapon says where it actually bites.
-4. **The floor band is 10–25.** That is the lowest value a normal weapon may
-   have. **A floor of 5 is the most extreme spread that may ever ship** and
-   marks a deliberately hyper-specialised weapon — `CannonAP` against unarmoured
-   infantry is the archetype. It is the exception, not the pattern; if several
-   families want a 5, they are not all special.
+4. **THE WINDOW: every Versus value sits in `[10, 200]`** (maintainer,
+   2026-08-15). Nothing outside, ever — including the DERIVED armors, which are
+   products and can otherwise land arbitrarily low. That is a **20:1** maximum
+   span, and it is the SAME extreme this law always allowed: peak 100 against a
+   floor of 5 is also 20:1. Moving normalisation from the peak to the median
+   (rule 1) left the scale open-ended; the window closes it.
+   **The floor band is 10–25** for the value a family actually uses. 25 is a
+   generalist; **10 marks a deliberately hyper-specialised weapon** — `CannonAP`
+   against unarmoured infantry is the archetype. It is the exception, not the
+   pattern; if several families want a 10, they are not all special.
+
+   ⚠ **20:1 is a legal maximum, never a target.** Measured across the reference
+   corpus, the source mods' own family profiles span only **1.3x–7.2x**
+   (`Laser/Heavy` 1.3, `MissileAP/Light` 7.2). Everything sharper than that in a
+   shipped Cameo profile comes from `shape_profile` stretching the measured shape
+   down onto the level's floor — a deliberate design step, not something the
+   field said. Treating 20:1 as a goal would invent counter-play the reference
+   does not support. Shipped today: widest span **11.7x**, median **4.8x**.
 
 ⚠ The ordering law (§ARMOR_SYSTEM "PROFILE construction") still decides WHICH
 armor gets which value. The corpus supplies magnitudes, the law supplies order.

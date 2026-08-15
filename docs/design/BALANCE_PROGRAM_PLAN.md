@@ -597,6 +597,32 @@ a maintainer order (CLAUDE.md rule 3). Until then the tree is deliberately mid-p
 - **§12.0 rule 1 said "peak is 100"** and the tooling had already moved to the median. Doc
   fixed to match the artifact.
 
+**THE VERSUS WINDOW (maintainer, 2026-08-15) — adopted, DESIGN.md §12.0 rule 4.**
+*"the maximum versus value is 200 and the minimum versus value is 10 so the normalized
+spread is 100-5 which is 20x"* — yes, and the ratio is unchanged by it: the old peak-100
+law's most extreme spread was 100-against-5, also **20:1**. The window fixes the SCALE that
+the move to median normalisation had left open-ended (the ceiling was a loose guard at 300).
+
+Implemented as `NORMALISE_CEILING = 200` + `ABSOLUTE_FLOOR = 10`, with `enforce_distinct` /
+`distinct_ints` gaining a BOTTOM-UP repair pass — the descent that separates ties could push
+the tail through the floor (`MissileAA_Heavy` had shipped a derived `Heroic` on 9).
+
+| after the window | |
+|---|---|
+| cells outside `[10, 200]` | **0** (was 18 over 200, 1 under 10) |
+| widest span | **11.7x** (`MissileAA_Medium`) |
+| median span | **4.8x** |
+| lethality change vs the pre-window commit | 0.96x mean (0.84–1.04) |
+
+⚠ **20:1 is a legal maximum, NEVER a target.** The reference mods' own family profiles span
+only **1.3x–7.2x** (`Laser/Heavy` 1.3, `MissileAP/Light` 7.2). Everything sharper in a shipped
+profile is `shape_profile` stretching the measured shape onto the level floor — Cameo's design
+choice, not the field's. **Open question for the maintainer:** that floor is currently keyed to
+LEVEL (`Light 25 · Medium 20 · Heavy 15 · Super 10`), which caps the reachable span at
+8x/10x/13.3x/20x — so the full 20:1 is only available at Super, while the named archetype for
+the extreme (`CannonAP` vs unarmoured infantry) is an ordinary L/M/H family. If the floor is
+meant to be a SPECIALISATION dial rather than a size dial, it should be keyed per FAMILY.
+
 **Two things deliberately NOT done here:**
 - **`Airborne` is computed but NOT emitted.** Its column would make 17 armors share the
   %-twin's 16-wide window, where "no two identical" can only ever be the even ramp. Opening

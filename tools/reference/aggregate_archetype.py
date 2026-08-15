@@ -138,9 +138,29 @@ AIR_FROM = {"Fighter": "Light", "Bomber": "Medium",
 # rather than free, and the cap was only ever protecting a formula that could not
 # see it. The corpus itself runs to 320.
 NORMALISE_REFERENCE = 100.0
-# Ceiling for a normalised value. Not a design limit — a guard against a degenerate
-# row (a profile that is almost all zeros) scaling its one live entry into orbit.
-NORMALISE_CEILING = 300.0
+# --------------------------------------------------------------------------- #
+# THE VERSUS WINDOW (maintainer, 2026-08-15) — binding
+# --------------------------------------------------------------------------- #
+# *"the maximum versus value is 200 and the minimum versus value is 10 so the
+#  normalized spread is 100-5 which is 20x"* — adopted.
+#
+# The ratio is the point, and it is unchanged: the old shape law's most extreme
+# spread was peak 100 against floor 5, i.e. **20:1**, and `200 / 10` is the same
+# 20:1 written on the median-100 scale that replaced the peak-100 one. So the
+# window does not make weapons more specialised than the law already allowed; it
+# fixes the SCALE the law is expressed on, which the move to median normalisation
+# had left open-ended.
+#
+# ⚠ **20:1 is a legal maximum, never a target.** Measured across the corpus, the
+# reference mods' own family profiles span only **1.3x to 7.2x** (`Laser/Heavy`
+# 1.3, `MissileAP/Light` 7.2). Everything beyond that in a shipped profile comes
+# from `shape_profile` stretching the measured shape onto the level's floor — a
+# deliberate design step, not something the field said. Treating 20:1 as the goal
+# would invent counter-play the reference does not support.
+NORMALISE_CEILING = 200.0
+# Nothing in a shipped profile may fall below this, including the DERIVED armors,
+# which are products and so can land arbitrarily low on their own.
+ABSOLUTE_FLOOR = 10.0
 
 # Geometric mean cannot see a zero (any zero makes the whole product zero), and a
 # hard 0 in a source means "immune". Clamping to 1 keeps the data point at
@@ -640,6 +660,7 @@ def shape_profile(profile: dict[str, float], floor: float) -> dict[str, float]:
     """
     if not profile:
         return {}
+    floor = max(floor, ABSOLUTE_FLOOR)          # the window is binding on every family
     values = list(profile.values())
     lo, hi = min(values), max(values)
     if hi <= lo:                                   # a totally flat input
@@ -676,6 +697,19 @@ def enforce_distinct(profile: dict[str, float], gap: float = MIN_GAP) -> dict[st
             value = round(previous - gap, 1)
         out[key] = value
         previous = value
+
+    # The descent can push the tail under the window (`MissileAA_Heavy` landed a
+    # derived `Heroic` on 9). Repair from the BOTTOM up, raising only what breaches
+    # and leaving everything already inside untouched, so the measured shape above
+    # the floor survives. Feasible by construction: 18 values at a gap of 2 need 34
+    # points and the window is 190 wide.
+    if out and min(out.values()) < ABSOLUTE_FLOOR:
+        previous = None
+        for key in reversed(order):
+            lowest = ABSOLUTE_FLOOR if previous is None else round(previous + gap, 1)
+            value = min(max(out[key], lowest), NORMALISE_CEILING)
+            out[key] = round(value, 1)
+            previous = out[key]
     return out
 
 

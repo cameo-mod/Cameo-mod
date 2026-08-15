@@ -211,6 +211,13 @@ def table(order16, step, top, floor, shield):
 #   python tools/reference/propose_family_profiles.py --json
 # and the ORDER still comes from `build_order()` here — the corpus supplies
 # magnitudes, the law supplies order (DESIGN.md §12.0).
+# THE VERSUS WINDOW (maintainer, 2026-08-15, DESIGN.md §12.0): every shipped Versus
+# value sits in [10, 200] — a 20:1 maximum span, which is the SAME extreme the old
+# peak-100 law wrote as "100 against a floor of 5", re-expressed on the median-100
+# scale. A legal maximum, not a target: the reference mods' own profiles span only
+# 1.3x-7.2x, so anything beyond that is Cameo's design choice, not the field's.
+VERSUS_CEILING = 200
+VERSUS_FLOOR = 10
 REFERENCE_JSON = (pathlib.Path(__file__).resolve().parents[2]
                   / "docs" / "reference" / "family_profiles.json")
 try:
@@ -238,6 +245,17 @@ def distinct_ints(rows):
             value = previous - 1
         fixed[armor] = value
         previous = value
+    # THE VERSUS WINDOW (maintainer 2026-08-15): 10 <= Versus <= 200, a 20:1 span,
+    # the same maximum specialisation the peak-100 law expressed as 100-against-5.
+    # The descent above can breach the floor, so repair from the BOTTOM up: raise
+    # only what fell through and leave the measured shape above it alone.
+    if fixed and min(fixed.values()) < VERSUS_FLOOR:
+        previous = None
+        for i in reversed(ranked):
+            armor = rows[i][0]
+            lowest = VERSUS_FLOOR if previous is None else previous + 1
+            fixed[armor] = min(max(fixed[armor], lowest), VERSUS_CEILING)
+            previous = fixed[armor]
     return [(armor, fixed[armor]) for armor, _ in rows]
 
 
