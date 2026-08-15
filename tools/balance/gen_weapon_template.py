@@ -314,7 +314,8 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
            spreads=(400, 600, 800, 1000),
            falloffs=DEFAULT_FALLOFFS,
            damage_types="Prone75Percent, TriggerProne, ExplosionDeath",
-           hazmat=50, reload=25, rng=5120, versus_override=None, physical_states=None):
+           hazmat=50, reload=25, rng=5120, versus_override=None, physical_states=None,
+           profile_family=None):
     """mode: None = sloped (from order16); 'flat' = Sonic (uniform flat, small %);
     'pct' = Magic (tiny uniform flat + LARGE uniform % of max HP).
     Every main warhead is AreaDamage with baked UNIVERSAL friendly fire
@@ -344,7 +345,12 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
             step, mfloor, ptop = LEVELS[level]
             pfloor = ptop - 15
             # Measured profile if the corpus has one, otherwise the even ramp.
-            main = (reference_main(name, order16, level)
+            # `profile_family` lets an INHERITING family (Cryo, Inferno) read its
+            # PARENT's measured profile — the whole premise of those families is
+            # that they reuse the parent's ladder and only add a PhysicalState, so
+            # looking the profile up under their own name silently fell through to
+            # the even ramp and split them off from the parent they inherit.
+            main = (reference_main(profile_family or name, order16, level)
                     or table(order16, step, 100, mfloor, 100 + mfloor))
             # ⚠ The %-twin stays the 1-step ladder, deliberately. Its window is only
             # 16 wide (`ptop` down to `ptop-15`), so 16 armors that must all differ
@@ -526,7 +532,8 @@ def emit_inherit_family(name, parent, psn, pss, levels):
     order16 = build_order(parent_cfg[0], parent_cfg[1])
     vt = valid_targets(parent_cfg[2])
     dt = FAMILY_DAMAGE_TYPES.get(name)
-    return family(name, order16, vt, levels, **({"damage_types": dt} if dt else {}))
+    return family(name, order16, vt, levels, profile_family=parent,
+                  **({"damage_types": dt} if dt else {}))
 
 
 # Blend families: a NEW family whose Versus is the per-armor AVERAGE of parent families, plus a

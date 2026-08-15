@@ -105,7 +105,12 @@ MIN_ROWS = 8
 # (n=15, mods=2) fail; every other family-level has >=3 independent mods.
 SHIP_MIN_ROWS = 8
 SHIP_MIN_MODS = 3
-LEVEL_ORDER = ("Light", "Medium", "Heavy")
+# `Super` is included for the EXPORT only, never for the markdown comparison: only
+# `Tesla` among the measured families has that tier, and its platform set
+# (`defense_big`) is a subset of Heavy's, so it is usually thin and inherits. Left
+# out, `^Warhead_Tesla_Super` silently kept the even ramp and shipped at 1.8x while
+# every other Tesla level was rebuilt.
+LEVEL_ORDER = ("Light", "Medium", "Heavy", "Super")
 
 # Which aggregation the proposals use — the maintainer's blend (median + mean +
 # gmean) / 3, chosen on measured behaviour across all 10 families x 3 levels:
@@ -306,7 +311,11 @@ def frozen_profiles(cache: dict | None = None) -> dict:
     measured: dict[str, dict[str, tuple]] = {}
     for family in FAMILY_SOURCE:
         measured[family] = {}
-        for level in LEVEL_ORDER:
+        # Only the levels the generator actually emits for this family — asking for
+        # a `Super` profile for a family that has no Super tier would freeze a row
+        # nothing ever reads.
+        family_levels = [lv for lv in LEVEL_ORDER if lv in gwt.WEAPONS[family][3]]
+        for level in family_levels:
             payload = profile_for(family, level, cache)
             if payload is None:
                 continue
@@ -318,7 +327,7 @@ def frozen_profiles(cache: dict | None = None) -> dict:
     for family, levels in measured.items():
         solid = [lv for lv in LEVEL_ORDER if lv in levels and levels[lv][3]]
         out: dict[str, dict] = {}
-        for level in LEVEL_ORDER:
+        for level in [lv for lv in LEVEL_ORDER if lv in gwt.WEAPONS[family][3]]:
             entry = levels.get(level)
             if entry is not None and entry[3]:
                 profile, n, mods, _ = entry

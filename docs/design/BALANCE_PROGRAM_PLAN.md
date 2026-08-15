@@ -614,14 +614,56 @@ the tail through the floor (`MissileAA_Heavy` had shipped a derived `Heroic` on 
 | median span | **4.8x** |
 | lethality change vs the pre-window commit | 0.96x mean (0.84–1.04) |
 
-⚠ **20:1 is a legal maximum, NEVER a target.** The reference mods' own family profiles span
-only **1.3x–7.2x** (`Laser/Heavy` 1.3, `MissileAP/Light` 7.2). Everything sharper in a shipped
-profile is `shape_profile` stretching the measured shape onto the level floor — Cameo's design
-choice, not the field's. **Open question for the maintainer:** that floor is currently keyed to
-LEVEL (`Light 25 · Medium 20 · Heavy 15 · Super 10`), which caps the reachable span at
-8x/10x/13.3x/20x — so the full 20:1 is only available at Super, while the named archetype for
-the extreme (`CannonAP` vs unarmoured infantry) is an ordinary L/M/H family. If the floor is
-meant to be a SPECIALISATION dial rather than a size dial, it should be keyed per FAMILY.
+**THE TARGET BAND `2x · 4x · 8x` (maintainer, 2026-08-15) — maximum legal spread != target.**
+*"if you do something automatically it should stay in the reference field's interval … only if
+something is specifically designed otherwise should it be allowed."* The window says what MAY
+ship; this says what ships by DEFAULT.
+
+⚠ **Measured on INDIVIDUAL warheads, not aggregated families — the distinction is the whole
+point.** My first answer quoted 1.3x–7.2x, which is the per-family AGGREGATE and an artifact:
+averaging across mods that disagree about a family's direction CANCELS the disagreement.
+Re-measured over **2402 individual reference warheads** with a real damage profile:
+
+| | measured | adopted |
+|---|--:|--:|
+| flattest (p25) | 1.9x | **2x** |
+| centre (median) | 4.0x | **4x** |
+| sharpest (p75) | 7.5x | **8x** |
+| p90 | 15x | — |
+| **20:1 (the window)** | **field p94** | legal max |
+
+The field's own distribution, snapped to a DOUBLING ladder. It continues 2 · 4 · 8 · 16 and
+the legal maximum sits just past 16 — the window is *one doubling beyond the sharpest default*.
+That the 20:1 window independently lands at the field's 94th percentile is a good sign: it is
+the extreme that genuinely exists and is genuinely rare.
+
+**Mechanism (`aggregate_archetype.py`):** `fit_ratio` is a **no-op inside the band** — most
+families ship the measured shape verbatim. Outside it, the correction is a POWER LAW about the
+profile's geometric mean (`v' = G * (v/G) ** alpha`), not an affine rescale onto a floor:
+scale-free, order-preserving, and it holds the geometric mean — the right centre for a set of
+MULTIPLIERS. An affine squeeze onto a floor drags the mean down and would silently make every
+stretched family cheaper through K. `fit_window` then slides it into `[10, 200]`
+MULTIPLICATIVELY, so the ratio just set is not quietly changed.
+
+**This ANSWERS the level-vs-family floor question by dissolving it.** The floor is no longer a
+dial at all: spread comes from the corpus and level comes from the window, so `LEVEL_FLOOR`
+only survives for the families Cameo INVENTED. Deliberate departures live in
+`SPECIALIST_RATIOS`, **empty by design** — candidate #1 is `CannonAP`, the clean example of why
+the table must exist: DESIGN §12.0 names it the 20:1 archetype while the corpus measures it at
+**1.8x–2.6x**, because the source engines write AP as ~100 against everything armoured and
+averaging leaves it flat. The field cannot supply a distinction it never drew.
+
+**Result: 37 of 37 measured-family templates inside 2x–8x** (median 3.0x, range 2.0–6.4x), 0
+cells outside `[10, 200]`. The band is waived for the DERIVED armors only (they are products,
+the sources contain no derived armor, and clamping would break §12.0b).
+
+**Two bugs this flushed out**, both silent fall-throughs to the even ramp:
+- `^Warhead_Cryo_*` / `^Warhead_Inferno_*` looked their profile up under their OWN name. They
+  are INHERITING families whose entire premise is reusing Prism's ladder, so they split off
+  from the parent and shipped at 10x. Fixed with `family(..., profile_family=parent)`.
+- `^Warhead_Tesla_Super` had no measured tier (the export only walked Light/Medium/Heavy) and
+  kept the even ramp at 1.8x while every other Tesla level was rebuilt. The export now walks
+  the levels the GENERATOR emits; `Tesla/Super` measures n=29 / 7 mods.
 
 **Two things deliberately NOT done here:**
 - **`Airborne` is computed but NOT emitted.** Its column would make 17 armors share the

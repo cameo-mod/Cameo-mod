@@ -850,13 +850,39 @@ Supersedes the "even step" half of the step law. Three rules, in force for every
    against unarmoured infantry is the archetype. It is the exception, not the
    pattern; if several families want a 10, they are not all special.
 
-   ⚠ **20:1 is a legal maximum, never a target.** Measured across the reference
-   corpus, the source mods' own family profiles span only **1.3x–7.2x**
-   (`Laser/Heavy` 1.3, `MissileAP/Light` 7.2). Everything sharper than that in a
-   shipped Cameo profile comes from `shape_profile` stretching the measured shape
-   down onto the level's floor — a deliberate design step, not something the
-   field said. Treating 20:1 as a goal would invent counter-play the reference
-   does not support. Shipped today: widest span **11.7x**, median **4.8x**.
+5. **MAXIMUM LEGAL SPREAD ≠ TARGET SPREAD** (maintainer, 2026-08-15). The window
+   above says what MAY ship. This says what ships by default, and the two must
+   never be confused — 20:1 as a target would invent counter-play no source mod
+   expresses.
+
+   **The target band is `2x · 4x · 8x`** — flattest, centre, sharpest. That is
+   the field's own distribution snapped to a doubling ladder, measured over
+   **2402 individual reference warheads** with a real damage profile:
+
+   | | measured | adopted |
+   |---|--:|--:|
+   | flattest (p25) | 1.9x | **2x** |
+   | centre (median) | 4.0x | **4x** |
+   | sharpest (p75) | 7.5x | **8x** |
+   | p90 · legal max | 15x · 20x is p94 | — |
+
+   The ladder continues 2 · 4 · 8 · 16, and the legal maximum of 20:1 sits just
+   past 16 — the window is *one doubling beyond the sharpest default*.
+
+   **Anything automatic stays inside `2x–8x`. Going outside is a design decision
+   and belongs to the maintainer**, recorded in
+   `aggregate_archetype.SPECIALIST_RATIOS`, never to a default.
+
+   ⚠ **Measure the band on INDIVIDUAL warheads, not on aggregated families.** The
+   per-family aggregate spans only 1.3x–7.2x, because averaging across mods that
+   disagree about a family's direction CANCELS the disagreement. That aggregate is
+   an artifact of averaging, not a design any mod shipped, and targeting it would
+   chase a sharpness no real warhead has.
+
+   ⚠ The band is waived for the **derived** armors (§12.0b) and only for them:
+   they are products, the source profiles contain no derived armor so the field
+   has no opinion to respect, and clamping the product would break the rule that
+   produces it. The `[10, 200]` window still binds on every cell.
 
 ⚠ The ordering law (§ARMOR_SYSTEM "PROFILE construction") still decides WHICH
 armor gets which value. The corpus supplies magnitudes, the law supplies order.

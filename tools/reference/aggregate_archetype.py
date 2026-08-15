@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import pathlib
 import re
 import statistics
@@ -639,6 +640,13 @@ def derive_armors(profile: dict[str, float]) -> dict[str, float]:
     peak the product can never exceed either parent, and whenever a profile does
     peak at 100 this reduces to the documented `A * B / 100` unchanged.
     """
+    # ⚠ A derived armor may legitimately fall BELOW the field band's floor, and it
+    # is the one exception to "automatic output stays inside the field interval".
+    # The band is measured on source profiles that contain no derived armor at all,
+    # so there is no field opinion to respect here — and clamping the product into
+    # the band would break the §12.0b rule that produces it. A hybrid resisting
+    # specialists harder than either parent IS the mechanic. The `[10, 200]` window
+    # still binds; only the spread band is waived, and only for these cells.
     out = {}
     top = max((v for k, v in profile.items() if k not in DERIVED_ARMORS), default=100.0)
     top = max(top, 1.0)
@@ -649,30 +657,135 @@ def derive_armors(profile: dict[str, float]) -> dict[str, float]:
     return out
 
 
-def shape_profile(profile: dict[str, float], floor: float) -> dict[str, float]:
-    """Apply THE SPREAD RULE: peak 100, given floor, no two values identical.
+# --------------------------------------------------------------------------- #
+# THE TARGET SPREAD — measured, never invented (maintainer, 2026-08-15)
+# --------------------------------------------------------------------------- #
+# *"maximum legal spread != target spread … if you do something automatically it
+#  should stay in the reference field's interval … only if something is
+#  specifically designed otherwise should it be allowed."*
+#
+# So the window `[10, 200]` (20:1) says what MAY ship; this says what ships by
+# DEFAULT. The two must never be confused — 20:1 as a target would invent
+# counter-play no source mod expresses.
+#
+# Measured over **2402 individual reference warheads** carrying a real damage
+# profile (>=3 armors, peak >5, so the death-animation and dummy plumbing that
+# once faked a "20% of the field is flat" finding is excluded):
+#
+#     p10 1.0x · p25 1.9x · MEDIAN 4.0x · p75 7.5x · p90 15x · max 300x
+#     26% exceed 7.2x · 6% exceed 20x
+#
+# ⚠ These are INDIVIDUAL warheads, and that distinction is the whole point. The
+# per-family AGGREGATE spans only 1.3x-7.2x, because averaging across mods that
+# disagree about a family's direction CANCELS the disagreement and flattens the
+# result. Reading the aggregate as "the field's interval" would target a
+# sharpness no real warhead has — the aggregate is an artifact of averaging, not
+# a design any mod shipped. The interquartile range of the real warheads is the
+# honest target band, and 20:1 lands at roughly the field's 94th percentile,
+# which is exactly what a "legal but rare" maximum should look like.
+# Maintainer, on seeing those numbers: *"flattest should be 2.0x while the
+# sharpest should be 8.0x and the one in the center 4.0x — a beautiful
+# distribution of 2x, 4x, 8x"*. Adopted. It is the measured distribution snapped
+# to a DOUBLING ladder: p25 1.9 -> 2, median 4.0 -> 4 (exact), p75 7.5 -> 8. Each
+# step is one doubling, which makes the whole scale memorable instead of a set of
+# empirical decimals, and it costs at most 0.5x of fidelity at the edges.
+# The ladder continues 2 · 4 · 8 · 16, and the legal maximum of 20:1 sits just past
+# 16 — so the window is "one doubling beyond the sharpest default".
+FIELD_RATIO_LOW = 2.0                              # p25 1.9, snapped
+FIELD_RATIO_HIGH = 8.0                             # p75 7.5, snapped
+FIELD_RATIO_MEDIAN = 4.0                           # median 4.0, exact
 
-    Rescaling is affine onto [floor, 100], which preserves the RELATIVE shape —
-    the plateaus and cliffs the corpus measured survive; only the range moves.
-    Ties are then broken by the smallest nudge that separates them, walking
-    upward from the floor, so the fix never pushes a value below the floor or
-    above the peak and never reorders the ladder.
+# Families the MAINTAINER has deliberately placed outside the field band. Empty by
+# design: departing from the measured field is a design decision and belongs to a
+# person, not to a default. `{family: target_ratio}`.
+#
+# Candidate #1 is `CannonAP`, and it is the clean example of why this table has to
+# exist: DESIGN.md §12.0 names "CannonAP against unarmoured infantry" as the
+# archetype for the 20:1 extreme, while the corpus measures CannonAP at just
+# 1.8x-2.6x — the source engines write AP as ~100 against everything armoured, so
+# averaging leaves it nearly flat. The field cannot supply a distinction it never
+# drew; only a ruling can.
+SPECIALIST_RATIOS: dict[str, float] = {}
+
+
+def fit_ratio(profile: dict[str, float], target: float | None = None,
+              low: float = FIELD_RATIO_LOW,
+              high: float = FIELD_RATIO_HIGH) -> dict[str, float]:
+    """Bring a profile's max:min ratio into the field's band, and no further.
+
+    **Inside the band this is a no-op** — the measured shape ships verbatim,
+    plateaus, cliffs and all. That is the strongest form of "the corpus supplies
+    the magnitudes": most families are not touched at all.
+
+    Outside it, the correction is a POWER LAW about the profile's geometric mean,
+    `v' = G * (v/G) ** alpha`, rather than an affine rescale onto a floor. Three
+    reasons the power law is the right instrument here:
+
+      * it is scale-free, so it changes the RATIO without also deciding the
+        absolute level — the level is the window's job, not the spread rule's;
+      * it preserves the geometric mean, which is the correct centre for a set of
+        MULTIPLIERS (an affine rescale onto a floor drags the mean down and would
+        silently make every stretched family cheaper via K);
+      * it is monotone, so the ordering law's sequence survives untouched.
+
+    `alpha = log(target) / log(current)` hits the target ratio exactly.
+    """
+    values = [v for v in profile.values() if v > 0]
+    if len(values) < 2:
+        return dict(profile)
+    lo, hi = min(values), max(values)
+    if lo <= 0 or hi <= lo:
+        return dict(profile)
+    current = hi / lo
+    if target is None:
+        target = min(max(current, low), high)
+    if abs(target - current) < 1e-9:
+        return dict(profile)                       # already inside the band
+    centre = statistics.geometric_mean(values)
+    alpha = math.log(target) / math.log(current)
+    return {k: centre * (max(v, GMEAN_FLOOR) / centre) ** alpha for k, v in profile.items()}
+
+
+def fit_window(profile: dict[str, float]) -> dict[str, float]:
+    """Slide the profile into `[ABSOLUTE_FLOOR, NORMALISE_CEILING]`, ratio intact.
+
+    Scaling MULTIPLICATIVELY is what keeps the ratio — an affine squeeze onto the
+    window would quietly change the spread that `fit_ratio` just set. Only when a
+    profile is too WIDE for the window at all (ratio > 20:1) is the spread itself
+    compressed, and then only to exactly the legal maximum.
+    """
+    values = [v for v in profile.values() if v > 0]
+    if not values:
+        return dict(profile)
+    lo, hi = min(values), max(values)
+    limit = NORMALISE_CEILING / ABSOLUTE_FLOOR     # 20:1, the legal maximum
+    if hi / lo > limit:
+        profile = fit_ratio(profile, target=limit)
+        values = [v for v in profile.values() if v > 0]
+        lo, hi = min(values), max(values)
+    scale = 1.0
+    if hi > NORMALISE_CEILING:
+        scale = NORMALISE_CEILING / hi
+    if lo * scale < ABSOLUTE_FLOOR:
+        scale = ABSOLUTE_FLOOR / lo
+    return {k: v * scale for k, v in profile.items()}
+
+
+def shape_profile(profile: dict[str, float], floor: float,
+                  target_ratio: float | None = None) -> dict[str, float]:
+    """THE SPREAD RULE: field-band spread, inside the window, no two values equal.
+
+    `floor` is retained for the families Cameo INVENTED, which have no measured
+    ratio to fit and still take an explicit floor. For a measured family it is
+    unused — its spread comes from the corpus, and its level from the window.
     """
     if not profile:
         return {}
-    floor = max(floor, ABSOLUTE_FLOOR)          # the window is binding on every family
     values = list(profile.values())
     lo, hi = min(values), max(values)
     if hi <= lo:                                   # a totally flat input
-        return {k: floor for k in profile}
-    # Preserve the profile's own top rather than forcing it to 100 — values above
-    # 100 are legal now (see NORMALISE_REFERENCE) and are the main way a weapon
-    # says "this is what I am FOR".
-    top = max(100.0, min(NORMALISE_CEILING, hi))
-    scaled = {k: floor + (v - lo) * (top - floor) / (hi - lo)
-              for k, v in profile.items()}
-
-    return enforce_distinct(scaled)
+        return {k: max(floor, ABSOLUTE_FLOOR) for k in profile}
+    return enforce_distinct(fit_window(fit_ratio(profile, target=target_ratio)))
 
 
 def enforce_distinct(profile: dict[str, float], gap: float = MIN_GAP) -> dict[str, float]:
