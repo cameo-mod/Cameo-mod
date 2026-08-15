@@ -259,28 +259,42 @@ Every faction is eventually meant to have one; SM has none. The maintainer's own
 difficulty is real: *"it's very hard to make something unique that is also
 teamwide."*
 
-**Recommendation: yes, and SPLIT the effect rather than choosing between unique
-and shared.** The convention already in the tree (`^TeamUpgradeTemplate` +
-`ProvidesTeamProxyActor` + a `^TeamUpgradeProxyActor`, with effects living in a
-template that units inherit — see `asianalliance_upgrade_wayofthedragon` and
-`^WayOfTheDragon`) supports two tiers of effect at once, because the effects
-template and the faction template are separate files:
+**~~Recommendation: split Moon Propaganda, fanaticism goes team-wide.~~ REJECTED
+by the maintainer, 2026-08-15 — and rightly:**
 
-| effect | scope | why |
-|---|---|---|
-| **Fanaticism** (+50% firepower below half health) | **TEAM-WIDE**, via `^GlobalBuffs` | reads as MORALE, which is faction-agnostic — any army can fight harder when wounded, and propaganda is exactly the thing that would cause it |
-| **Defection** (killed enemy infantry rise as Lunar Soldiers) | **SM ONLY**, stays in `^NaxiMoonPropaganda` | inherently Schwarzer Mond — an ally's dead should not stand up wearing Reich uniforms |
+> *"Schwarzer Mond is more high tech and more about vehicles and aircraft than
+> infantry so I think the team upgrade should also reflect that a bit."*
 
-That resolves the tension: the SHARED half is generic but genuinely good, the
-UNIQUE half stays with the faction that earns it. The same shape should work for
-every other faction's team upgrade.
+Fanaticism is an INFANTRY-morale effect on a faction that is not infantry-focused.
+It fits the Asian Alliance — whose Banzai upgrade already **is** that effect,
+faction-only — or the Naxis. The mistake was reasoning from an available mechanic
+instead of from faction identity; that is now a binding rule in
+[`DESIGN.md` §6](../DESIGN.md), together with the measured
+**team ≈ half of faction** magnitude law.
 
-**Cost of converting:** swap `^ResearchedUpgradeTemplate` → `^TeamUpgradeTemplate`
-(cost 5000 → 10000), add an `up_moonpropaganda_proxy_actor.schwarzermond`, and
-move the fanaticism traits into `^GlobalBuffs` gated on the proxy's condition.
-Both effects are already built and boot-gated as a normal upgrade, so this is a
-rewiring job, not new mechanics. **Needs the maintainer's go-ahead** (it is a
-cost and queue change).
+**Moon Propaganda therefore STAYS a normal faction upgrade** (fanaticism +
+defection, shipped in `d58cd8603`). SM's team upgrade is a SEPARATE, still
+unbuilt upgrade, and it must be **high-tech, vehicles and aircraft**.
+
+**Candidates (maintainer's pick outstanding):**
+
+| # | upgrade | effect | why it fits |
+|---|---|---|---|
+| **A** | **Anti-Gravity Plating** *(recommended)* | allied **vehicles + aircraft** get an `ArmorPlating` bar worth **10% of health** | SM's lunar alloys and anti-grav tech, exactly HALF of SM's own Lunar Alloys (20%) so the team-is-weaker law is visible in the number; reuses the additive plating pool, so an SM ally already carrying plating sees ONE bigger bar rather than a second one |
+| **B** | **Helium-3 Distribution** | allied vehicles + aircraft **+10% speed/turn**, allied power plants **+15% output** | SM already mines Helium-3 for fusion reactors and propulsion; sharing the fuel IS what a team upgrade is, and it is literally half of SM's own Helium-3 (+25% speed, +50% power) |
+| **C** | **Die Glocke Resonance** | allied vehicles + aircraft **resist disabling** (shorter EMP/disable) | the most distinct option — every existing team upgrade in the tree is a ± multiplier, this one is utility; needs a check of what EMP/disable traits support first |
+
+**A** is the pick: it is a NEW effect for allies rather than a diluted copy of an
+SM upgrade, it produces a visible BAR instead of another invisible percentage
+(the maintainer's standing complaint about generic upgrades), and it demonstrates
+the additive one-pool law. **B** expresses the weaker-shared-version law most
+legibly but is a stat multiplier. **C** is the most interesting and the least
+scoped.
+
+**Cost of building, once picked:** `^TeamUpgradeTemplate` (cost 10000) + an
+`up_<name>_proxy_actor.schwarzermond` + an effects template gated on the proxy's
+condition, inherited by allied vehicles/aircraft via `^GlobalBuffs`. No new C#
+for A or B.
 
 ### 2. Magic-the-Gathering-style lore for every unit and upgrade
 

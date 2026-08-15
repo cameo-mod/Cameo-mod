@@ -492,6 +492,32 @@ cheapest provider wins).
   stack, but the COMBINED product must never drop below **50%** — below
   that units feel undamageable. Hard floor; audit extension TODO
   (worst-case stacked DamageMultiplier per unit < 0.5 = finding).
+- ⭐ **TEAM UPGRADES ARE ALWAYS WEAKER THAN FACTION UPGRADES** (maintainer law,
+  2026-08-15). A team upgrade buffs every allied army, so it must never be the
+  strongest thing a faction can research — the faction's own upgrades are what
+  make it feel distinct. Measured practice in the tree already follows this, and
+  the ratio is roughly **HALF**:
+
+  | upgrade | scope | magnitude |
+  |---|---|---|
+  | `^WayOfTheDragon` (Asian Alliance) | team | ±5% |
+  | `^MenOfSteelTeamUpgradeRA1` | team | ±10% |
+  | `^WarEconomyTeamUpgradeRA1` | team | +10% |
+  | `^AfterburnersUpgradeRA1` | faction | ±15% |
+  | `^UnstableIsotopes`, `^InfernoDoctrine` | faction | +20–25% |
+  | Vril Infusion (Schwarzer Mond) | faction | +25% and a 25%-of-HP shield |
+
+  So: **team ≈ 5–10%, faction ≈ 15–25%.** When a team upgrade shares a mechanic
+  with a faction upgrade, give it half the number so the law is visible in the
+  yaml itself. (`^StaliniumTeamUpgradeRA1` at `Modifier: 80` is the one outlier
+  and should be revisited.)
+- ⭐ **A TEAM UPGRADE MUST FIT THE FACTION'S IDENTITY, not just be a good effect**
+  (maintainer, 2026-08-15). The team upgrade is a statement about what the
+  faction IS, so it has to reflect that faction's focus — Schwarzer Mond is
+  high-tech, vehicles and aircraft, so an infantry-morale effect belongs to the
+  Asian Alliance (whose Banzai upgrade already is one) or to the Naxis, not to
+  SM. Check identity BEFORE mechanics: a mechanic that already exists and works
+  is not a reason to attach it to the wrong faction.
 - **ActorStatValues upgrade list** (design 2026-07-17): the `Upgrades:`
   field on `ActorStatValues` was expanded from a maximum of 5 entries to
   **10**. Every unit must list all faction upgrades (and only faction
