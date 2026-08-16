@@ -23,13 +23,15 @@ What replaced it are three invariants the layer model actually depends on:
   against that weapon — a superheavy tank taking 100% from bullets instead of ~20%.
   A plating is sparse by nature, which is exactly why the columns must be full.
 
-  **I2 — THE COLUMN LAW.** Each plating's mean across all templates is 100, so no
-  plating is stronger overall; they differ only in WHAT they resist. This is the
+  **I2 — THE COLUMN LAW.** Every plating's mean across all templates is the SAME, so
+  no plating is stronger overall; they differ only in WHAT they resist. This is the
   transpose of W25 S1's row law, and the two are independent because platings live
-  outside the class-armor set that S1 normalises.
+  outside the class-armor set that S1 normalises. The common mean is 70 rather than
+  100 because a plating REPLACES the class armor, and six class armors already average
+  better than 100 — at 100 a hero or an aircraft got 25-35% WORSE for taking one.
 
   **I3 — CLOSURE.** Every weapon family has at least one plating that counters it
-  (a row below 100) and at least one it beats (a row above 100). Maintainer:
+  (a row below the common mean) and at least one it beats (a row above it). Maintainer:
   *"every weapon family has an armor counter and every armor type has a weapon
   counter"*. Without this a family is either unanswerable or pointless.
 
@@ -53,9 +55,13 @@ if hasattr(sys.stdout, "reconfigure"):
 
 HEADER = re.compile(r"^\^Warhead_(\w+?)_(\w+):$")
 
-# The plating taxonomy, mirrored in AreaDamageWarhead.PlatingArmors. `Shield` is NOT
-# one: it is a layer of its own, already selected in yaml via `!shielded`.
-PLATINGS = ("HAZMAT", "Composite", "Reactive", "BlastProtection", "REFLECTOR")
+# The plating taxonomy and its target column mean, read from the generator so this file
+# cannot drift from what actually ships. `Shield` is NOT a plating: it is a layer of its
+# own, already selected in yaml via `!shielded`.
+import gen_weapon_template as _gen  # noqa: E402
+
+PLATINGS = tuple(_gen.PLATING_CYCLE)
+TARGET_MEAN = _gen.PLATING_TARGET_MEAN
 
 # Templates the generator does not emit, so they carry no plating columns yet.
 # Listed rather than silently skipped: each is a real gap in the layer.
@@ -120,9 +126,9 @@ def main() -> int:
         vals = [r[p] for p in PLATINGS if p in r]
         if not vals:
             continue
-        if min(vals) >= 100:
+        if min(vals) >= TARGET_MEAN:
             no_counter.append((n, min(vals)))
-        if max(vals) <= 100:
+        if max(vals) <= TARGET_MEAN:
             no_exposure.append((n, max(vals)))
 
     failed = 0
@@ -144,7 +150,8 @@ def main() -> int:
         print("_clean_ — every template carries a row for every plating.")
     print()
 
-    print("## I2 — the column law (each plating averages 100 across all templates)")
+    print(f"## I2 — the column law (every plating averages {TARGET_MEAN:g} "
+          f"across all templates)")
     print()
     print("| plating | mean | min | max |")
     print("|---|--:|--:|--:|")
@@ -153,8 +160,8 @@ def main() -> int:
         if not v:
             continue
         mean = statistics.fmean(v)
-        flag = "" if abs(mean - 100) <= 1.0 else " ⚠"
-        if abs(mean - 100) > 1.0:
+        flag = "" if abs(mean - TARGET_MEAN) <= 1.0 else " ⚠"
+        if abs(mean - TARGET_MEAN) > 1.0:
             failed = 1
         print(f"| `{p}` | **{mean:.2f}**{flag} | {min(v)} | {max(v)} |")
     print()

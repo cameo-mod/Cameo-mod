@@ -165,21 +165,24 @@ namespace OpenRA.Mods.Cameo.Warheads
 		// Selection removes the whole failure mode: only one row is ever read.
 		//
 		// This is deliberately NOT the same as being strictly better. Each plating is strong against
-		// one damage axis and WEAK against another (the 5-cycle: thermochemical -> kinetic -> shaped
-		// charge -> blast -> energy -> thermochemical), so picking one is a trade, not a free
-		// upgrade. That is only safe BECAUSE selection replaced averaging: under averaging a "weak"
-		// row would have been an unconditional penalty stacked on top of the class armor.
+		// one damage axis and WEAK against the next (the cycle: thermochemical -> kinetic -> blast
+		// -> energy -> thermochemical), so picking one is a trade, not a free upgrade. That is only
+		// safe BECAUSE selection replaced averaging: under averaging a "weak" row would have been an
+		// unconditional penalty stacked on top of the class armor.
 		//
 		// `Shield` is absent here on purpose — it already does exactly this in yaml
 		// (`Armor: RequiresCondition: !shielded` in defaults.yaml), and it sits ABOVE plating in the
 		// layer stack, so its own condition takes it out of the running before this code runs.
+		//
+		// ⚠ Keep in step with `gen_weapon_template.PLATING_CYCLE`, which generates the columns.
+		// A name here with no column would select an armor the warheads have no row for, which
+		// `DamageVersus` answers with 100 — i.e. the plating would REMOVE the unit's armor.
 		static readonly string[] PlatingArmors =
 		{
-			"HAZMAT",           // sealed suit / NBC     — vs fire, chemical, radiation
-			"Composite",        // ceramic matrix        — vs kinetic penetrators and bullets
-			"Reactive",         // ERA / slat            — vs shaped charges
-			"BlastProtection",  // spall liner / V-hull  — vs HE, demolition, concussion
-			"REFLECTOR",        // ablative / mirrored   — vs directed energy
+			"HAZMAT",           // sealed / filtered envelope — vs fire, chemical, radiation
+			"Composite",        // ceramic matrix + ERA       — vs kinetic penetrators AND shaped charges
+			"BlastProtection",  // spall liner / V-hull       — vs HE, demolition, concussion
+			"REFLECTOR",        // ablative / mirrored        — vs directed energy
 		};
 
 		protected override int DamageVersus(Actor victim, HitShape shape, WarheadArgs args)

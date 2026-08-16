@@ -400,35 +400,60 @@ def shield_for(family, level, rows):
 # that safe is selection: only one row is ever read, so a weak row is a chosen exposure
 # rather than a penalty stacked on top of the class armor.
 #
-# THE COLUMN LAW: each plating's mean across all templates is 100, so no plating is stronger
-# overall — they differ only in WHAT they are strong against. This is the transpose of W25 S1
-# (which pins each WEAPON's mean across armors) and the two cannot conflict: platings live in
-# NON_ARMOR_ROWS, so they never entered S1's row mean, and S1's armors never enter this
-# column mean.
+# THE COLUMN LAW: every plating's mean across all templates is the SAME, so no plating is
+# stronger overall — they differ only in WHAT they are strong against. This is the transpose
+# of W25 S1 (which pins each WEAPON's mean across armors) and the two cannot conflict:
+# platings live in NON_ARMOR_ROWS, so they never entered S1's row mean, and S1's armors never
+# enter this column mean.
 #
-# THE CYCLE: five platings, five damage axes, each plating countering one axis and weak to
-# the next — `thermo -> kinetic -> shaped -> blast -> energy -> thermo`. An odd cycle is what
-# keeps it from collapsing into two mirrored pairs, and every step is real:
+# ⚠ **The common mean is 70, NOT 100, and the difference is a measured bug fix.** A plating
+# REPLACES the class armor, so what matters is how its column compares to the one it
+# displaces — and six of the sixteen class armors already average better than 100 (`Heroic`
+# 74.3, the four aircraft 76-80). At a mean of 100 a hero or an aircraft that took a plating
+# got 25-35% WORSE, and `td_gdi_upgrade_heavyaircraftarmorplating` is live. That is the same
+# failure as the old averaging bug arriving by a different route: not stacking badly, but
+# DISPLACING SOMETHING BETTER. 70 sits just under `Heroic`'s 74.3, so a plating is a genuine
+# upgrade for every armor it can replace. The maintainer's law is untouched — its purpose was
+# that platings be equal to EACH OTHER, which any common mean satisfies. The ~30% durability
+# this grants must then be PRICED (see E1); it is not free, it is merely not yet charged for.
+PLATING_TARGET_MEAN = 70.0
 #
-#   HAZMAT          counters thermochemical, weak to KINETIC   (a suit does not stop a bullet)
-#   Composite       counters kinetic,        weak to SHAPED    (why ERA had to be invented)
-#   Reactive        counters shaped charges, weak to BLAST     (HE strips the ERA blocks off)
-#   BlastProtection counters blast,          weak to ENERGY    (a spall liner ignores a laser)
-#   REFLECTOR       counters energy,         weak to THERMO    (flame ablates and fouls a mirror)
+# THE CYCLE: FOUR platings over the roster's four real damage axes, each countering one and
+# weak to the next — `thermo -> kinetic -> blast -> energy -> thermo`. Every step is a defeat
+# mechanism, not flavour:
 #
-# Rejected as too niche (maintainer): `Insulated` for Tesla, `Damping` for Sonic, `Warding`
-# for Magic — *"only a few factions have tesla but everyone has something like energy, AP, HE,
-# fire / chemical"*. Electricity folds into `energy`, Sonic into `blast`, Magic into `energy`.
+#   HAZMAT          counters thermochemical, weak to KINETIC  (a seal has no mass; a bullet
+#                                                              passes through a rubber suit)
+#   Composite       counters kinetic AND SHAPED, weak to BLAST (ceramic shatters a penetrator,
+#                                                              ERA breaks a jet — a real tank
+#                                                              carries both at once; neither
+#                                                              spreads an impulse)
+#   BlastProtection counters blast,          weak to ENERGY   (a liner absorbs mechanical
+#                                                              impulse; a beam delivers none)
+#   REFLECTOR       counters energy,         weak to THERMO   (flame and corrosives foul the
+#                                                              surface, and a dull mirror is
+#                                                              just thin plate)
+#
+# ⚠ **`Reactive` was cut on the measurement, not on taste** (§H2). Composition share across
+# all 33 families: thermochemical 27.4%, kinetic 23.4%, blast 22.7%, energy 20.1% — and
+# shaped charge **6.4%**, with only `MissileAP` shaped-led. It failed the maintainer's own
+# niche test, the one that already retired `Insulated`, `Damping` and `Warding`. The `shaped`
+# AXIS survives as an honest description of what those warheads are; it is simply counted
+# under `Composite`, which is how a real tank is built anyway.
+#
+# A four-cycle is not degenerate: each plating is weak to what the NEXT one counters, so it is
+# one 4-cycle rather than two mirrored 2-cycles. (An earlier note claimed only an ODD cycle
+# could avoid that collapse — wrong; what matters is that no two platings counter each other's
+# weakness.)
 PLATING_AXES = ("thermo", "kinetic", "shaped", "blast", "energy")
-PLATING_CYCLE = {                      # plating: (axis it counters, axis it is weak to)
-    "HAZMAT":          ("thermo",  "kinetic"),
-    "Composite":       ("kinetic", "shaped"),
-    "Reactive":        ("shaped",  "blast"),
-    "BlastProtection": ("blast",   "energy"),
-    "REFLECTOR":       ("energy",  "thermo"),
+PLATING_CYCLE = {                  # plating: (axes it counters, axes it is weak to)
+    "HAZMAT":          (("thermo",),            ("kinetic", "shaped")),
+    "Composite":       (("kinetic", "shaped"),  ("blast",)),
+    "BlastProtection": (("blast",),             ("energy",)),
+    "REFLECTOR":       (("energy",),            ("thermo",)),
 }
-# How much a full share moves the row away from 100 — so a pure-thermo weapon reads 50
-# against HAZMAT and 150 against REFLECTOR, before the column is normalised.
+# How much a full share moves the row away from the mean — so a pure-thermo weapon reads half
+# against HAZMAT and half again as much against REFLECTOR, before the column is normalised.
 PLATING_DEPTH = 0.50
 
 # Each PRIMITIVE family's damage composition over the five axes; shares sum to 1. Blends
@@ -500,10 +525,15 @@ def composition(name):
 
 
 def plating_raw(family):
-    """Un-normalised plating row per plating: 100, minus its counter, plus its weakness."""
+    """Un-normalised row per plating: flat, minus what it counters, plus what beats it.
+
+    Counter and weakness are SETS of axes, not single axes — `Composite` answers both
+    kinetic penetrators and shaped-charge jets, so it sums both shares.
+    """
     comp = composition(family)
-    return {p: 100.0 * (1 - PLATING_DEPTH * comp[counter] + PLATING_DEPTH * comp[weak])
-            for p, (counter, weak) in PLATING_CYCLE.items()}
+    return {p: 100.0 * (1 - PLATING_DEPTH * sum(comp[a] for a in counters)
+                        + PLATING_DEPTH * sum(comp[a] for a in weak))
+            for p, (counters, weak) in PLATING_CYCLE.items()}
 
 
 def _plating_scales():
@@ -526,7 +556,7 @@ def _plating_scales():
     for p in PLATING_CYCLE:
         vals = [plating_raw(f)[p] for f in families]
         mean = sum(vals) / len(vals) if vals else 100.0
-        scales[p] = 100.0 / mean if mean else 1.0
+        scales[p] = PLATING_TARGET_MEAN / mean if mean else 1.0
     return scales
 
 
