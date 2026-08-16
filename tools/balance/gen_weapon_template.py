@@ -189,13 +189,18 @@ def emit_chip(tag, family_name, damage, vt, level=None):
     d = CHIPS_LEVEL.get((family_name, level), CHIPS[family_name])
     floor = CHIP_FLOOR[family_name]
     spread = CHIP_SPREAD_LEVEL.get((family_name, level), CHIP_SPREAD[family_name])
-    order = ["REFLECTOR", "Shield", "None", "Flak", "Plate", "Heroic",
+    order = ["HAZMAT", "REFLECTOR", "Shield", "None", "Flak", "Plate", "Heroic",
              "Scout", "Light", "Medium", "Heavy", "Superheavy",
              "Wood", "Steel", "Concrete", "Fighter", "Bomber", "Helicopter", "Spaceship"]
     # Through `emit_versus` so the chip obeys the same descending rule as the main and the
-    # %-twin — REFLECTOR and Shield stay pinned at the front, the armors sort by value.
-    rows = emit_versus([(a, d.get(a, floor)) for a in order
-                        if a != "REFLECTOR" or "REFLECTOR" in d])
+    # %-twin — the overlay armors and Shield stay pinned at the front, the armors sort by
+    # value. The overlays come from `overlay_rows`, not from the CHIPS table: the chip is
+    # part of the same family and a hazmat suit cannot care which warhead of a weapon hit
+    # it. The hand-set `REFLECTOR: 50` the Tesla chip used to carry was a second source for
+    # one cell, which is the same trap that let Tesla's Shield be contested for months.
+    overlays = dict(overlay_rows(family_name))
+    rows = emit_versus([(a, overlays.get(a, d.get(a, floor))) for a in order
+                       if a not in OVERLAY_ARMORS or a in overlays])
     dt = "Prone75Percent, TriggerProne, ExplosionDeath"
     if family_name in FAMILY_INTEGRITY_SCALE:
         dt += ", Tesla"
@@ -335,6 +340,107 @@ def shield_for(family, level, rows):
     damped = SHIELD_SCALE_CENTRE * (scale / SHIELD_SCALE_CENTRE) ** SHIELD_SCALE_DAMP
     rank = PHYSICS_RANK.get(family, SHIELD_DEFAULT_RANK)
     return max(1, round(rank * SHIELD_LEVEL.get(level, 1.0) * damped * SHIELD_RAW_SCALE))
+
+
+# --------------------------------------------------------------------------- #
+# HAZMAT and REFLECTOR — the two OVERLAY armors (maintainer, 2026-08-16)
+# --------------------------------------------------------------------------- #
+# *"reflector armor is basically the same as HAZMAT but for energy weapons ... why is it
+#  missing from the waveforce when it is combining plasma and quantum which is an energy
+#  weapon? the values need to somehow reflect that"*
+#
+# These are not ladder rungs. They are CONDITIONAL overlay armors granted by upgrades —
+# `Armor@HAZMAT` (hazmat suits, Soviet reactive armor: 329 actors) and `Armor@REFLECTOR`
+# (Allied reflective plating: 16 actors) — carried IN ADDITION to the actor's real armor.
+#
+# ⚠ **THE ARITHMETIC CHANGED UNDER W21 AND THE VALUES DID NOT.** When armor types
+# MULTIPLIED, a row of 50 meant exactly "halve the incoming damage", independent of the
+# target. They now AVERAGE, so the same 50 gives
+#
+#     effective = (base + 50) / 2   ->   at base 100, that is 75, a 25% cut, NOT 50%.
+#
+# **Averaging silently halved every overlay's effect.** And it caps the mechanic: with one
+# overlay the best possible is `(base + 10) / 2`, i.e. ~45% — no row value can ever reach
+# the old 50%, because that would need a row of 0, which is immunity.
+#
+# So the row is solved from the REDUCTION it should produce rather than written directly:
+#
+#     effective = (100 + x) / 2 = 100 - R x 100      ->      x = 100 - 200 R
+#
+# The reference base of 100 is not an assumption — W25 S1 pinned every family's Versus MEAN
+# to exactly 100, so 100 IS the average armor row a weapon writes. That is the second thing
+# S1 bought: overlay armors became solvable.
+#
+# With `OVERLAY_DEPTH = 0.45` (the ceiling above), `x = 100 - 90 x share`. A share of 1.0
+# lands on the window floor of 10 and reproduces the old multiplicative feel as closely as
+# averaging permits; a share of 0 OMITS the row.
+#
+# ⚠ **OMITTING IS NOT THE SAME AS WRITING 100.** Both the engine and Cameo's override filter
+# on `Versus.ContainsKey(armorType)`, so an absent row drops the overlay OUT of the average
+# entirely, while `100` pulls the result toward 100. Omission is the only way to say "this
+# weapon does not care about the plating", and it is what a zero share must produce.
+OVERLAY_DEPTH = 0.45
+OVERLAY_ARMORS = ("HAZMAT", "REFLECTOR")
+OVERLAY_MIN_EFFECT = 0.05          # below a 5% cut, omit the row entirely
+
+# What a SEALED SUIT stops: airborne and contact agents — gas, corrosives, radiological
+# particulate, and to a lesser degree flame and thermal flux. Nothing kinetic.
+CHEM_SHARE = {
+    "Toxic": 1.00, "Chemical": 0.95,                       # the agent itself
+    "Flame": 0.70, "Inferno": 0.70, "Nuclear": 0.65,       # heat + combustion / fallout
+    "Cryo": 0.60,                                          # thermal too — insulation helps
+    "Demolition": 0.15, "Laser": 0.15, "Prism": 0.10, "Concussion": 0.10,
+}
+# What REFLECTIVE PLATING stops: directed energy. Coherent light is the canonical case;
+# electrical discharge arcs and CONDUCTS rather than reflecting, so Tesla sits well below
+# Laser even though `PHYSICS_RANK` puts it on top for shields. The two tables rank different
+# physics and must not be merged — a shield is a field, plating is a mirror.
+ENERGY_SHARE = {
+    "Laser": 1.00, "Prism": 1.00,                          # coherent light
+    "Tesla": 0.60, "Storm": 0.55,                          # electrical — arcs, conducts
+    "Nuclear": 0.30,                                       # the thermal flash IS radiant
+    "Sonic": 0.20, "Magic": 0.20, "Railgun": 0.15,         # railgun is a SLUG: kinetic delivery
+    "Cryo": 0.70, "Inferno": 0.70,                         # Prism-delivered (they inherit its beam)
+}
+# A blend's shares are the mean of its parents — the same rule its Versus profile uses, so a
+# new blend is correct for free. Overrides are for the cases where the parent list understates
+# what the weapon physically IS.
+OVERLAY_OVERRIDE = {
+    # Plasma's parents are Flame + Chemical, which gives it no energy share at all — but
+    # plasma is ionised, radiating gas and plating does turn it. Stated, not derived.
+    "Plasma": {"energy": 0.45},
+    # Thermobaric derives 0.32 from Demolition+Concussion+Flame; fuel-air is specifically an
+    # oxygen-consuming aerosol, which is the thing a sealed suit is FOR.
+    "Thermobaric": {"chem": 0.50},
+}
+
+
+def overlay_shares(name):
+    """(chem_share, energy_share) for a family, blends averaged from their parents."""
+    over = OVERLAY_OVERRIDE.get(name, {})
+    if name in BLEND_FAMILIES:
+        parents = BLEND_FAMILIES[name][0]
+        chem = sum(CHEM_SHARE.get(p, 0.0) for p in parents) / len(parents)
+        energy = sum(ENERGY_SHARE.get(p, 0.0) for p in parents) / len(parents)
+    else:
+        chem = CHEM_SHARE.get(name, 0.0)
+        energy = ENERGY_SHARE.get(name, 0.0)
+    return over.get("chem", chem), over.get("energy", energy)
+
+
+def overlay_rows(name):
+    """`[(armor, value)]` for HAZMAT / REFLECTOR — omitting either where it does nothing."""
+    rows = []
+    for armor, share in zip(OVERLAY_ARMORS, overlay_shares(name)):
+        value = max(VERSUS_FLOOR, min(100, round(100 - 200 * OVERLAY_DEPTH * share)))
+        # A share so small the row would change damage by less than OVERLAY_MIN_EFFECT is
+        # dropped rather than written. It is not free to keep: by the rule above, a present
+        # row joins the average and moves the result, so a 4% row is a real-but-invisible
+        # change that still costs a line and a reader's attention. Rows should be deliberate.
+        if share <= 0 or value > 100 - 200 * OVERLAY_MIN_EFFECT:
+            continue
+        rows.append((armor, value))
+    return rows
 
 
 def table(order16, step, top, floor, shield):
@@ -727,7 +833,7 @@ def reference_main(name, order16, level):
     return sorted(rows, key=lambda r: -r[1])
 
 
-def emit_versus(rows, indent="\t\t\t", hazmat=None):
+def emit_versus(rows, indent="\t\t\t"):
     """Emit a `Versus:` node: pseudo-rows first, then armors DESCENDING by value.
 
     Maintainer 2026-08-16: *"the percentage versus values are not ordered by power like
@@ -752,7 +858,7 @@ def emit_versus(rows, indent="\t\t\t", hazmat=None):
     the [10, 200] window in both directions, so sorting it in would drag it to an end and
     hide the ladder it is not part of.
     """
-    out = [] if hazmat is None else [f"{indent}HAZMAT: {hazmat}"]
+    out = []
     lead = [r for r in rows if r[0] in NON_ARMOR_ROWS]
     body = sorted((r for r in rows if r[0] not in NON_ARMOR_ROWS), key=lambda r: -r[1])
     for a, v in lead + body:
@@ -779,7 +885,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
            spreads=(400, 600, 800, 1000),
            falloffs=DEFAULT_FALLOFFS,
            damage_types="Prone75Percent, TriggerProne, ExplosionDeath",
-           hazmat=50, reload=25, rng=5120, versus_override=None, physical_states=None,
+           overlays=True, reload=25, rng=5120, versus_override=None, physical_states=None,
            profile_family=None):
     """mode: None = sloped (from order16); 'flat' = Sonic (uniform flat, small %);
     'pct' = Magic (tiny uniform flat + LARGE uniform % of max HP).
@@ -795,7 +901,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         if versus_override is not None:          # blend family (e.g. Plasma = avg of Flame + Chemical)
             main, pct = versus_override(level)
             main = finish_blend(main)            # re-derive Heroic/Airborne, un-flatten
-            hz = hazmat
+            hz = overlays
         elif mode == "flat":                       # Sonic: ignores armor on FLAT
             fv, fp = FLAT_VALUES[level], FLAT_PCT[level]
             main = [("Shield", fv)] + [(a, fv) for a in allr]
@@ -825,7 +931,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
             # one change (denominator + values) or every %-twin deals a fifth or
             # five times. Until then the twin carries the ORDER, not the shape.
             pct = table(order16, 1, ptop, pfloor, ptop + pfloor)
-            hz = hazmat
+            hz = overlays
         # W25 S2 — the class tilt, BEFORE the mean is pinned: the tilt moves output between
         # armors and would otherwise leave the mean off 100. Order-preserving by
         # construction (see class_tilt), so the two-level ordering law is untouched.
@@ -842,6 +948,14 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         sv = shield_for(name, level, main)
         if sv is not None:
             main = [("Shield", sv)] + [(a, v) for a, v in main if a != "Shield"]
+        # The OVERLAY armors, derived from the family's composition (see overlay_rows).
+        # Carried inside `main` rather than passed separately so they are automatically
+        # excluded from the mean, the tilt and the Shield scale — all three key off
+        # NON_ARMOR_ROWS — and pinned ahead of the ladder by `emit_versus`. Suppressed for
+        # the flat/pct families, whose whole identity is that they ignore armor.
+        main = [r for r in main if r[0] not in OVERLAY_ARMORS]
+        if hz:
+            main = overlay_rows(name) + main
         tag = f"{name}_{level}"
         # Energy families are thinned to near single-target; the chip/utility pays for the low spread.
         main_spread = ENERGY_THIN_SPREAD_LEVEL.get((name, level), ENERGY_THIN_SPREAD.get(name, at(spreads, li)))
@@ -864,7 +978,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
              f"\t\tDamage: {damage}",
              f"\t\tFalloff: {at(falloffs, li)}",
              f"\t\tVersus:",
-             emit_versus(main, hazmat=hz),
+             emit_versus(main),
              f"\t\tDamageTypes: {damage_types}"]
         if name in FAMILY_PHYSICAL_STATE:  # heat/cold/corrosion meter, scaled by main damage
             psn, pss = FAMILY_PHYSICAL_STATE[name]
@@ -990,7 +1104,23 @@ FAMILY_INTEGRITY_SCALE = {
     "Tesla": 100,                          # pure Tesla = full shield-drain (the disable specialist)
     "Storm": 50,                          # Tesla+Magic -> 1/2
     "Quantum": 33,                        # Railgun+Laser+Tesla -> 1/3
-    "Waveforce": 20,                      # Flame+Chemical+Railgun+Laser+Tesla -> 1/5
+    # ⚠ `Waveforce: 20` DELETED 2026-08-16 (maintainer order) — it could never fire.
+    #
+    # The drain rate is `(1 if the damage carries the `Tesla` type else 0) + IntegrityScale/100`
+    # per point of damage, against a pool of 100% of max HP. Waveforce is the one integrity
+    # family that never received `Tesla` in its DamageTypes, so it lost the 1:1 passive drain and
+    # kept only its 20% scale — needing **5x the target's max HP** to reach the disable. The
+    # target dies five times over first. Measured, not inferred (PSEUDO_ARMOR_AND_INTEGRITY §B).
+    #
+    # Maintainer: *"waveforce should remove the integrity damage entirely because it can never
+    # actually reach a full integrity damage, so that it is not calculated in the balance formula
+    # without any effect."* Exactly right, and the second half is the important half: a knob that
+    # does nothing in play but is still read by the pricing model is worse than no knob at all,
+    # because the weapon is charged for an effect it cannot deliver.
+    #
+    # The alternative — granting Waveforce the `Tesla` damage type — was NOT taken: that would
+    # give a 3/5-kinetic blend the same EMP status as a Tesla coil, which is a design claim
+    # nobody made. If Waveforce should have an EMP role it needs both halves, deliberately.
 }
 
 # Per-family DamageTypes override. Every family that affects Integrity (has IntegrityScale) MUST carry
@@ -1224,7 +1354,7 @@ def _generate():
     if not wanted or "storm" in wanted:
         print("###### Storm: Tesla_Super + Magic + TeslaSuperExtraDamage/5 (Super-anchored, scaled down) ######")
         print(family("Storm", None, valid_targets(False), STORM_LEVELS,
-                     versus_override=storm_versus, hazmat=None,
+                     versus_override=storm_versus,
                      damage_types="Prone100Percent, TriggerProne, ElectricityDeath, Tesla"))
         print()
 

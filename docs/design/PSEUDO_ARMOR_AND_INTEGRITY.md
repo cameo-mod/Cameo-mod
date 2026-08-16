@@ -265,6 +265,85 @@ behaviour, so it is a maintainer call, not a refactor.
 
 ---
 
+## D-bis. ✅ SHIPPED 2026-08-16 — the maintainer's rulings
+
+### 1. Waveforce loses `IntegrityScale` entirely
+
+> *"waveforce should remove the integrity damage entirely because it can never actually
+> reach a full integrity damage, so that it is not calculated in the balance formula without
+> any effect."*
+
+Deleted from `FAMILY_INTEGRITY_SCALE`. The second half of that sentence is the important
+half: **a knob that does nothing in play but is still read by the pricing model is worse
+than no knob**, because the weapon is charged for an effect it cannot deliver. (E3 says
+`IntegrityScale` is not priced *today* — but it is on the fix list, and the moment it is,
+Waveforce would have started paying for a disable that needs 5x the target's max HP.)
+
+The alternative — granting Waveforce the `Tesla` damage type so the passive drain fires —
+was deliberately NOT taken. That would give a 3/5-kinetic blend the same EMP status as a
+Tesla coil, which is a design claim nobody made. If Waveforce should have an EMP role it
+needs both halves, chosen on purpose.
+
+### 2. HAZMAT and REFLECTOR are now derived from composition
+
+> *"before when armors were multiplied a HAZMAT and REFLECTOR versus value of 50 means it
+> would also half the incoming damage from those weapon types right? now that it is averaged
+> it should be at what?"*
+
+**The answer is ~10, and the reason is that averaging silently halved every overlay.**
+Under multiplication a row of 50 meant exactly "half the damage", target-independent. Under
+averaging the same 50 gives `(base + 50)/2` — at base 100 that is 75, a **25%** cut, not
+50%. Restoring the old feel needs a row of 0, which is immunity; the window floor of 10 is
+as close as the mechanic allows (a 45% cut).
+
+So the row is now SOLVED from the reduction it should produce:
+
+```
+effective = (100 + x) / 2 = 100 - 100 R        ->        x = 100 - 200 R
+```
+
+The reference base of 100 is not an assumption — **W25 S1 pinned every family's Versus mean
+to exactly 100**, so 100 *is* the average armor row a weapon writes. That is a second thing
+S1 bought that was not planned for: overlay armors became solvable.
+
+With `OVERLAY_DEPTH = 0.45`, `x = 100 - 90 x share`, and two composition tables supply the
+shares — `CHEM_SHARE` (what a sealed suit stops) and `ENERGY_SHARE` (what plating stops).
+Blends average their parents, so `Waveforce` (Flame + Chemical + Railgun + Laser + Tesla)
+gets **both** rows automatically at 68/68, which is exactly the gap the maintainer spotted.
+
+⚠ `ENERGY_SHARE` is deliberately **not** `PHYSICS_RANK`. That table ranks coupling to a
+force FIELD, where Tesla is top at 1.00. Plating is a MIRROR: coherent light (Laser, Prism)
+is the canonical case, while electrical discharge arcs and conducts rather than reflecting,
+so Tesla sits at 0.60. Merging the two would have been a category error that happened to
+look tidy.
+
+| family | chem | energy | HAZMAT | REFLECTOR | suit / plating buys |
+|---|--:|--:|--:|--:|---|
+| Toxic | 1.00 | — | **10** | — | 45% less |
+| Chemical | 0.95 | — | 14 | — | 43% less |
+| Flame · Inferno | 0.70 | —·0.70 | 37 | —·37 | 32% less |
+| Plasma | 0.82 | 0.45 | 26 | 60 | 37% / 20% |
+| **Waveforce** | 0.36 | 0.35 | **68** | **68** | 16% / 16% |
+| Quantum | 0.05 | 0.58 | — | 48 | — / 26% |
+| Tesla | — | 0.60 | — | 46 | — / 27% |
+| Laser · Prism | 0.15·0.10 | 1.00 | 86·— | **10** | — / 45% |
+| Bullet, Cannon\*, Missile\*, Flak, Melee, Arrow, Concussion | — | — | — | — | **rows omitted** |
+
+Rows below a 5% effect are omitted rather than written (`OVERLAY_MIN_EFFECT`): by A2 a
+present row joins the average and moves the result, so a 4% row is a real-but-invisible
+change that still costs a line and a reader's attention.
+
+⚠ **This is a real balance shift for the 329 HAZMAT actors.** They used to carry a flat
+`HAZMAT: 50` against *every* family, i.e. a general 25% damage reduction from all sources.
+Ten kinetic families now omit the row entirely, so hazmat infantry are markedly squishier
+against bullets and shells — which is the correct semantics (a sealed suit does not stop a
+bullet) and is what the ruling asked for, but it is a nerf and should be watched in play.
+
+The `_ExtraDamage` chip now reads its overlays from the same function instead of the
+hand-set `REFLECTOR: 50` it carried: the chip belongs to the same family, and a hazmat suit
+cannot care which warhead of a weapon hit it. A second source for one cell is the exact trap
+that let Tesla's Shield be contested for months.
+
 ## E. What the balance formula still does not see
 
 Measured against `formula.py`, `weapon_efficiency.py` and `target_model.py`.

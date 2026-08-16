@@ -3190,7 +3190,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 139
 			None: 200
 			Flak: 159
@@ -3248,7 +3247,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 150
 			None: 200
 			Flak: 160
@@ -3306,7 +3304,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 165
 			None: 200
 			Flak: 182
@@ -3365,7 +3362,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 132
 			Superheavy: 132
 			Concrete: 123
@@ -3423,7 +3419,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 143
 			Superheavy: 172
 			Concrete: 158
@@ -3481,7 +3476,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 157
 			Superheavy: 151
 			Concrete: 136
@@ -3540,7 +3534,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 136
 			Scout: 200
 			Wood: 169
@@ -3598,7 +3591,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 146
 			Wood: 150
 			Scout: 144
@@ -3656,7 +3648,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 160
 			Wood: 136
 			Scout: 130
@@ -3715,7 +3706,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 133
 			Superheavy: 172
 			Heavy: 169
@@ -3773,7 +3763,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 144
 			Superheavy: 200
 			Heavy: 177
@@ -3831,7 +3820,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 158
 			Superheavy: 160
 			Spaceship: 146
@@ -3890,7 +3878,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 135
 			Scout: 199
 			Wood: 175
@@ -3948,7 +3935,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 147
 			Wood: 157
 			Scout: 143
@@ -4006,7 +3992,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 161
 			Scout: 129
 			Wood: 128
@@ -4065,7 +4050,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 138
 			Spaceship: 188
 			Helicopter: 166
@@ -4123,7 +4107,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 151
 			Spaceship: 191
 			Helicopter: 177
@@ -4181,7 +4164,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 164
 			Spaceship: 161
 			Superheavy: 150
@@ -4240,7 +4222,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 152
 			Fighter: 200
 			None: 193
@@ -4298,7 +4279,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 163
 			None: 200
 			Fighter: 197
@@ -4356,7 +4336,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 178
 			Fighter: 200
 			Bomber: 176
@@ -4415,7 +4394,8 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 86
+			REFLECTOR: 10
 			Shield: 249
 			Superheavy: 140
 			Concrete: 118
@@ -4466,6 +4446,8 @@ DefuseKit:
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
 		Versus:
+			HAZMAT: 86
+			REFLECTOR: 10
 			Shield: 9
 			Scout: 36
 			None: 33
@@ -4499,7 +4481,8 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 86
+			REFLECTOR: 10
 			Shield: 270
 			Concrete: 155
 			Superheavy: 151
@@ -4550,6 +4533,8 @@ DefuseKit:
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
 		Versus:
+			HAZMAT: 86
+			REFLECTOR: 10
 			Shield: 9
 			Scout: 36
 			None: 33
@@ -4583,7 +4568,8 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 86
+			REFLECTOR: 10
 			Shield: 294
 			Superheavy: 162
 			Spaceship: 144
@@ -4634,6 +4620,8 @@ DefuseKit:
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
 		Versus:
+			HAZMAT: 86
+			REFLECTOR: 10
 			Shield: 9
 			Scout: 36
 			None: 33
@@ -4668,7 +4656,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			REFLECTOR: 10
 			Shield: 255
 			Scout: 197
 			None: 162
@@ -4726,7 +4714,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			REFLECTOR: 10
 			Shield: 275
 			None: 147
 			Wood: 144
@@ -4784,7 +4772,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			REFLECTOR: 10
 			Shield: 299
 			Scout: 121
 			None: 120
@@ -4843,7 +4831,8 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 46
+			REFLECTOR: 37
 			Shield: 229
 			Scout: 197
 			None: 162
@@ -4905,7 +4894,8 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 46
+			REFLECTOR: 37
 			Shield: 247
 			None: 147
 			Wood: 144
@@ -4967,7 +4957,8 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 46
+			REFLECTOR: 37
 			Shield: 271
 			Scout: 121
 			None: 120
@@ -5030,7 +5021,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 37
 			Shield: 187
 			None: 200
 			Wood: 194
@@ -5092,7 +5083,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 37
 			Shield: 203
 			None: 200
 			Wood: 198
@@ -5154,7 +5145,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 37
 			Shield: 221
 			None: 191
 			Wood: 187
@@ -5217,7 +5208,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 14
 			Shield: 179
 			Plate: 141
 			Superheavy: 140
@@ -5279,7 +5270,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 14
 			Shield: 195
 			Superheavy: 183
 			Plate: 176
@@ -5341,7 +5332,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 14
 			Shield: 213
 			Superheavy: 166
 			Plate: 162
@@ -5407,7 +5398,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 90, 75, 55, 30, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 10
 			Shield: 159
 			None: 200
 			Flak: 159
@@ -5468,7 +5459,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 90, 75, 55, 30, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 10
 			Shield: 174
 			None: 200
 			Flak: 159
@@ -5529,7 +5520,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 90, 75, 55, 30, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 10
 			Shield: 189
 			None: 200
 			Wood: 152
@@ -5589,7 +5580,8 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 26
+			REFLECTOR: 60
 			Shield: 234
 			None: 170
 			Scout: 150
@@ -5650,7 +5642,8 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 26
+			REFLECTOR: 60
 			Shield: 253
 			None: 179
 			Wood: 156
@@ -5711,7 +5704,8 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 26
+			REFLECTOR: 60
 			Shield: 276
 			None: 165
 			Flak: 141
@@ -5773,7 +5767,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 55
 			Shield: 168
 			None: 172
 			Wood: 159
@@ -5833,7 +5827,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 55
 			Shield: 182
 			None: 179
 			Wood: 164
@@ -5893,7 +5887,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 55
 			Shield: 199
 			None: 164
 			Flak: 140
@@ -5954,7 +5948,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			REFLECTOR: 48
 			Shield: 269
 			None: 170
 			Scout: 150
@@ -6017,7 +6011,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			REFLECTOR: 48
 			Shield: 292
 			None: 180
 			Scout: 142
@@ -6080,7 +6074,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			REFLECTOR: 48
 			Shield: 318
 			None: 158
 			Flak: 135
@@ -6145,7 +6139,8 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 68
+			REFLECTOR: 68
 			Shield: 239
 			None: 176
 			Scout: 148
@@ -6167,7 +6162,6 @@ DefuseKit:
 		PhysicalStates:
 			Temperature: 35
 			Corrosion: 20
-		IntegrityScale: 20
 	Warhead@Waveforce_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -6191,8 +6185,6 @@ DefuseKit:
 			Helicopter: 4
 			Bomber: 3
 			Fighter: 1
-		DamageTypes: Tesla
-		IntegrityScale: 20
 		UpdatesUnitStatistics: false
 
 ^Warhead_Waveforce_Medium:
@@ -6209,7 +6201,8 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 68
+			REFLECTOR: 68
 			Shield: 259
 			None: 180
 			Scout: 142
@@ -6231,7 +6224,6 @@ DefuseKit:
 		PhysicalStates:
 			Temperature: 35
 			Corrosion: 20
-		IntegrityScale: 20
 	Warhead@Waveforce_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -6255,8 +6247,6 @@ DefuseKit:
 			Helicopter: 8
 			Bomber: 7
 			Fighter: 5
-		DamageTypes: Tesla
-		IntegrityScale: 20
 		UpdatesUnitStatistics: false
 
 ^Warhead_Waveforce_Heavy:
@@ -6273,7 +6263,8 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 68
+			REFLECTOR: 68
 			Shield: 282
 			None: 165
 			Flak: 140
@@ -6295,7 +6286,6 @@ DefuseKit:
 		PhysicalStates:
 			Temperature: 35
 			Corrosion: 20
-		IntegrityScale: 20
 	Warhead@Waveforce_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -6319,8 +6309,6 @@ DefuseKit:
 			Helicopter: 13
 			Bomber: 12
 			Fighter: 10
-		DamageTypes: Tesla
-		IntegrityScale: 20
 		UpdatesUnitStatistics: false
 
 ###### Storm: Tesla_Super + Magic + TeslaSuperExtraDamage/5 (Super-anchored, scaled down) ######
@@ -6339,7 +6327,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 68
 			Shield: 192
 			Wood: 171
 			None: 157
@@ -6399,7 +6387,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 68
 			Shield: 209
 			Wood: 178
 			None: 164
@@ -6459,7 +6447,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 68
 			Shield: 227
 			None: 139
 			Flak: 135
@@ -6520,7 +6508,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 57
 			Shield: 186
 			Scout: 174
 			Light: 151
@@ -6580,7 +6568,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 57
 			Shield: 202
 			Light: 178
 			Flak: 156
@@ -6640,7 +6628,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 57
 			Shield: 220
 			Flak: 163
 			Plate: 139
@@ -6701,7 +6689,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 57
 			Shield: 185
 			None: 164
 			Heavy: 135
@@ -6761,7 +6749,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 57
 			Shield: 201
 			Medium: 188
 			None: 158
@@ -6821,7 +6809,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 57
 			Shield: 219
 			None: 164
 			Flak: 140
@@ -6882,6 +6870,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
+			REFLECTOR: 50
 			Shield: 301
 			Plate: 167
 			Light: 138
@@ -6942,6 +6931,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
+			REFLECTOR: 50
 			Shield: 326
 			Plate: 170
 			Light: 155
@@ -7002,6 +6992,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
+			REFLECTOR: 50
 			Shield: 356
 			Plate: 176
 			Light: 134
@@ -7062,6 +7053,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 40, 20, 10, 5, 0
 		Versus:
+			REFLECTOR: 50
 			Shield: 385
 			Plate: 132
 			None: 128
@@ -7123,7 +7115,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 68
 			Shield: 191
 			Wood: 172
 			None: 159
@@ -7183,7 +7175,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 68
 			Shield: 208
 			Wood: 178
 			None: 164
@@ -7243,7 +7235,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 68
 			Shield: 226
 			None: 164
 			Flak: 140
@@ -7304,7 +7296,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 100
 			None: 200
 			Flak: 168
@@ -7362,7 +7353,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 108
 			None: 200
 			Flak: 177
@@ -7420,7 +7410,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 118
 			None: 200
 			Flak: 190
@@ -7479,7 +7468,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 107
 			None: 200
 			Flak: 169
@@ -7537,7 +7525,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 116
 			None: 200
 			Flak: 165
@@ -7595,7 +7582,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 126
 			None: 200
 			Flak: 186
@@ -7883,7 +7869,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 86
 			Shield: 142
 			Wood: 200
 			None: 183
@@ -7941,7 +7927,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 86
 			Shield: 154
 			Wood: 200
 			None: 176
@@ -7999,7 +7985,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 86
 			Shield: 167
 			Wood: 195
 			Steel: 164
@@ -8058,7 +8044,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 145
 			Scout: 152
 			None: 149
@@ -8116,7 +8101,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 156
 			None: 151
 			Wood: 148
@@ -8174,7 +8158,6 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
 			Shield: 170
 			None: 131
 			Wood: 125
@@ -8423,7 +8406,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			REFLECTOR: 86
 			Shield: 307
 			Superheavy: 200
 			Heavy: 181
@@ -8472,6 +8455,7 @@ DefuseKit:
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
 		Versus:
+			REFLECTOR: 86
 			Shield: 10
 			Concrete: 200
 			Steel: 175
@@ -8506,7 +8490,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			REFLECTOR: 46
 			Shield: 312
 			Plate: 132
 			Superheavy: 128
@@ -8558,7 +8542,7 @@ DefuseKit:
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
 		Versus:
-			REFLECTOR: 50
+			REFLECTOR: 46
 			Shield: 300
 			Heroic: 200
 			Plate: 175
@@ -8592,7 +8576,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			REFLECTOR: 46
 			Shield: 338
 			Superheavy: 153
 			Plate: 150
@@ -8644,7 +8628,7 @@ DefuseKit:
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
 		Versus:
-			REFLECTOR: 50
+			REFLECTOR: 46
 			Shield: 300
 			Heroic: 200
 			Plate: 175
@@ -8678,7 +8662,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			REFLECTOR: 46
 			Shield: 369
 			Superheavy: 155
 			Plate: 146
@@ -8730,7 +8714,7 @@ DefuseKit:
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
 		Versus:
-			REFLECTOR: 50
+			REFLECTOR: 46
 			Shield: 300
 			Heroic: 200
 			Plate: 175
@@ -8765,7 +8749,7 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 40, 20, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			REFLECTOR: 46
 			Shield: 400
 			Superheavy: 124
 			Heavy: 119
@@ -8817,7 +8801,7 @@ DefuseKit:
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
 		Versus:
-			REFLECTOR: 50
+			REFLECTOR: 46
 			Shield: 400
 			Heroic: 300
 			Plate: 275
@@ -12908,7 +12892,8 @@ generic_bullet_casing:
 		Damage: 2000
 		Falloff: 100, 50, 33, 25, 20, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 37
+			REFLECTOR: 37
 			Shield: 224
 			Scout: 197
 			None: 162
@@ -12970,7 +12955,8 @@ generic_bullet_casing:
 		Damage: 2000
 		Falloff: 100, 60, 30, 15, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 37
+			REFLECTOR: 37
 			Shield: 241
 			None: 147
 			Wood: 144
@@ -13032,7 +13018,8 @@ generic_bullet_casing:
 		Damage: 2000
 		Falloff: 100, 50, 25, 10, 5, 0
 		Versus:
-			HAZMAT: 50
+			HAZMAT: 37
+			REFLECTOR: 37
 			Shield: 263
 			Scout: 121
 			None: 120
