@@ -1210,6 +1210,17 @@ ixian_neocymek:
 		Step: 120
 	Shielded:
 		RegenAmount: 240
+	WithIdleOverlay@shield1:
+		Image: hexshield_sphere
+		Sequence: large-idle
+		StartSequence: large-idle
+		Palette: ixianhexshield25
+		IsPlayerPalette: false
+	WithIdleOverlay@shield_damage:
+		Image: hexshield_sphere
+		Sequence: large-hit
+		Palette: ixianhexshield50
+		IsPlayerPalette: false
 	Armament@Cannon:
 		Name: primary
 		Weapon: D2K_StormGunCymek
