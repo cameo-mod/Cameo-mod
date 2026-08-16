@@ -137,7 +137,8 @@ Then regenerate and **splice ONLY the pre-Nuclear region**:
 Scoped: `git add tools/balance/gen_weapon_template.py mods/cameo/weapons/weapons.yaml <the 37 swept
 weapon files> tools/balance/sweep_areadamage.py tools/audit/find_empty_warhead.py
 docs/design/AREADAMAGE_HANDOFF.md docs/design/AREADAMAGE_WARHEAD_REBALANCE.md`. **NEVER `-A`.**
-Commit message ends with `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`.
+Commit message ends with your OWN `Co-Authored-By:` trailer carrying your REAL model name
+(CLAUDE.md rule 10) — do not copy the literal from this file or from an older commit.
 
 ### 3e. Pipeline recognition — DONE (this checkpoint)
 `formula._is_main_spread` + `audit_warhead_split.classify_warheads` now accept `AreaDamage` as a

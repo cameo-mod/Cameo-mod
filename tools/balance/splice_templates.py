@@ -7,6 +7,7 @@ swapped for the regenerated one; blank separators and all other content are kept
 After splicing, `verify_generator_sync.py` should report drift = 0.
 
 Usage: python tools/balance/splice_templates.py laser railgun tesla teslacharged prism
+       python tools/balance/splice_templates.py --all      # every family the generator emits
 """
 import subprocess
 import sys
@@ -38,7 +39,13 @@ def parse_blocks(text):
 def main():
     fams = sys.argv[1:]
     if not fams:
-        sys.exit("usage: splice_templates.py <family> ...")
+        sys.exit("usage: splice_templates.py <family> ... | --all")
+    # The generator emits EVERY family when given no family filter, so `--all` is
+    # simply the empty filter. Kept explicit rather than implicit: a bare
+    # `splice_templates.py` rewriting all 88 templates by accident is not a mistake
+    # anyone should be able to make by hitting return.
+    if fams == ["--all"]:
+        fams = []
     out = subprocess.run([sys.executable, str(GEN), *fams], capture_output=True, text=True)
     if out.returncode:
         sys.exit("generator failed:\n" + out.stderr)

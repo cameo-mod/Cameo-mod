@@ -66,7 +66,23 @@ def parse_ints(s) -> list[int]:
 
 
 def falloff_and_radii(node, spread: int):
-    """(falloff percents, radii in WDist). Warhead Range overrides Spread geometry."""
+    """(falloff percents, radii in WDist). Warhead Range overrides Spread geometry.
+
+    Mirrors AreaDamageWarhead/SpreadDamageWarhead EXACTLY, including the engine's
+    single-Range footgun (verified 2026-08-11 against
+    `OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs` and the upstream
+    `SpreadDamageWarhead.cs`, which behave identically):
+
+        if (Range != null) effectiveRange = Range;            // NO expansion
+        else effectiveRange = [i * Spread for i in Falloff];
+
+    and `GetDamageFalloff` walks `for (i = 1; i < effectiveRange.Length; i++)`,
+    returning 0 when the loop never runs. So a `Range:` with a SINGLE value and a
+    multi-step `Falloff` makes the warhead deal ZERO damage at every distance —
+    the metric must score that as zero rather than inventing a per-step grid, or
+    it silently over-values a broken weapon. `has_geometry` is False for that case
+    so callers can report it.
+    """
     fo = node.get("Falloff")
     fo = parse_ints(fo) if fo else [100, 0]
     if len(fo) < 2:
@@ -74,13 +90,13 @@ def falloff_and_radii(node, spread: int):
     rng = node.get("Range")
     if rng:
         radii = [parse_wdist(x) for x in str(rng).split(",") if x.strip() != ""]
-        if len(radii) == 1:                    # single value = per-step spacing
-            radii = [i * radii[0] for i in range(len(fo))]
-        elif len(radii) != len(fo):            # mismatch -> fall back to spread grid
+        if len(radii) < 2:                     # engine: falloff loop never runs -> 0 damage
+            return fo, radii, False
+        if len(radii) != len(fo):              # engine rejects this at load; be conservative
             radii = [i * spread for i in range(len(fo))]
     else:
         radii = [i * spread for i in range(len(fo))]
-    return fo, radii
+    return fo, radii, True
 
 
 def footprint_cells2(fo, radii) -> float:
@@ -106,16 +122,96 @@ def _F(fo, radii, r) -> float:
     return 0.0
 
 
+def scatter_pdf(t: float) -> float:
+    """Radial density of the ENGINE's scatter at radius t*sigma, t in [0, sqrt(2)].
+
+    The engine does NOT scatter uniformly over a disc. `Bullet.cs`:
+
+        target += WVec.FromPDF(world.SharedRandom, 2) * maxInaccuracyOffset / 1024
+
+    and `WVec.FromPDF(r, 2)` draws EACH AXIS as `WDist.FromPDF(r, 2)` = the sum of
+    two uniforms = a TRIANGULAR density on [-sigma, sigma]. So hits cluster near
+    the aim point: mean radius 0.52*sigma (Monte-Carlo, 200k samples) versus
+    0.67*sigma for a uniform disc, and P(r < sigma/4) is 15.7% versus 6.2%.
+
+    Modelling it as a uniform disc therefore throws ~28% of the hits too far out
+    and systematically UNDER-values inaccurate/slow weapons. This returns the
+    radial density of |(X, Y)| with X, Y iid triangular, evaluated numerically
+    once and cached, so `reliability` integrates against the real distribution.
+    """
+    return _RADIAL_PDF(t)
+
+
+def _build_radial_pdf(bins: int = 256, samples: int = 400_000):
+    """Monte-Carlo the radial density of the engine's 2-axis triangular scatter."""
+    import random
+    rng = random.Random(20260811)             # fixed seed: the table must be reproducible
+    hi = math.sqrt(2.0)
+    hist = [0.0] * bins
+    for _ in range(samples):
+        x = (rng.uniform(-1, 1) + rng.uniform(-1, 1)) / 2
+        y = (rng.uniform(-1, 1) + rng.uniform(-1, 1)) / 2
+        b = int(math.hypot(x, y) / hi * bins)
+        if b < bins:
+            hist[b] += 1.0
+    total = sum(hist)
+    width = hi / bins
+    dens = [h / total / width for h in hist]  # normalised so INT dens dt = 1
+
+    def pdf(t: float) -> float:
+        if t < 0 or t >= hi:
+            return 0.0
+        return dens[int(t / hi * bins)]
+    return pdf
+
+
+_RADIAL_PDF = _build_radial_pdf()
+
+
 def reliability(fo, radii, sigma) -> float:
-    """Average falloff over a uniform scatter disc of radius sigma (single POINT target)."""
+    """Expected falloff at the impact point, over the engine's scatter (POINT target).
+
+    E[F(R)] where R is the miss distance. sigma = 0 (instant/perfect) -> 1.0.
+    """
     if sigma <= 0:
         return 1.0
     n = 400
-    acc = 0.0
+    hi = math.sqrt(2.0)
+    acc = weight = 0.0
+    step = hi / n
     for i in range(n):
-        r = (i + 0.5) * sigma / n
-        acc += _F(fo, radii, r) * 2 * math.pi * r * (sigma / n)
-    return acc / (math.pi * sigma * sigma)
+        t = (i + 0.5) * step
+        w = scatter_pdf(t) * step
+        acc += _F(fo, radii, t * sigma) * w
+        weight += w
+    return acc / weight if weight else 1.0
+
+
+def damage_value(raw):
+    """A warhead's `Damage` as an int, or None when the field is not numeric.
+
+    Non-numeric means an unresolved placeholder (an inherited value the resolver
+    could not fold), which this metric skips. Returning None keeps the reason
+    explicit instead of swallowing the parse error at the call site — see
+    `audit_error_handling.py` E2.
+    """
+    try:
+        return int(float(raw))
+    except (TypeError, ValueError):
+        return None
+
+
+def number(raw):
+    """`raw` as a float, or None when it is not numeric.
+
+    Same contract as `damage_value` for fields that must keep their fractional part
+    (Versus percentages, %-of-HP damage): the caller decides what a missing value
+    means instead of a handler quietly swallowing it — `audit_error_handling.py` E2.
+    """
+    try:
+        return float(str(raw).strip())
+    except (TypeError, ValueError):
+        return None
 
 
 def flat_damage_warheads(resolved):
@@ -129,14 +225,8 @@ def flat_damage_warheads(resolved):
             continue
         if c.value not in ("AreaDamage", "SpreadDamage", "TargetDamage"):
             continue
-        d = c.get("Damage")
-        if d is None:
-            continue
-        try:
-            base = int(float(d))
-        except ValueError:
-            continue
-        if base <= 0:
+        base = damage_value(c.get("Damage"))
+        if base is None or base <= 0:
             continue
         out.append((tag, c.value, base, c))
     return out
@@ -168,11 +258,16 @@ def effective_damage(resolved):
     rel_weighted = 0.0
     for _tag, wtype, base, node in whs:
         if wtype == "TargetDamage":
-            fo, radii = [100, 0], [0, MIN_SPREAD]
+            fo, radii, live = [100, 0], [0, MIN_SPREAD], True
         else:
             spread = node.get("Spread")
             spread = max(parse_wdist(spread) if spread else MIN_SPREAD, MIN_SPREAD)
-            fo, radii = falloff_and_radii(node, spread)
+            fo, radii, live = falloff_and_radii(node, spread)
+        if not live:
+            # Engine deals 0 damage here (single Range + multi-step Falloff).
+            # Count the base so the misconfiguration is visible as effective << base.
+            base_total += base
+            continue
         fp = footprint_cells2(fo, radii)
         rel = 1.0 if is_instant else reliability(fo, radii, sigma)
         contrib = base * (rel + SWARM_W * fp)

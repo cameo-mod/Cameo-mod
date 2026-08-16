@@ -30,10 +30,28 @@ the artifact, **the artifact wins — then fix the stale summary.**
    `git checkout -- .` or wide-add someone else's WIP.
 7. **Rebuild C# before boot** if `OpenRA.Mods.Cameo/` or `engine/` changed
    (`DOTNET_ROLL_FORWARD=LatestMajor dotnet build -c Release --nologo -p:TargetPlatform=win-x64` → `engine/bin`).
+   ⚠ **`engine/` IS NOT PART OF THIS REPO** — it is `.gitignore`d, has no `.git`/`.gitmodules`,
+   and `git ls-files engine` returns **zero** files (`git` run from inside it silently targets
+   the PARENT repo). Editing `engine/**` produces work that **cannot be committed here** and is
+   **deleted by the next `make all`**. To change the engine, follow
+   **`docs/LESSONS_LEARNED.md` → "The canonical engine update pipeline"**: edit the SEPARATE
+   `cameo-engine` clone of `github.com/cameo-mod/OpenRA` → push → `git rev-parse cameo-engine`
+   for the full 40-char hash → set `ENGINE_VERSION` in **`mod.config`** → `make.cmd all` →
+   verify `engine/VERSION` + recreate `engine/glsl/` shaders → boot-gate → commit `mod.config`.
+   **First check whether a mod-side SHADOW avoids all of that:** `ObjectCreator.FindType` takes
+   the first assembly in `mod.yaml`'s `Assemblies` list (AS, CA, **Cameo**, Cnc, D2k, Common),
+   so an `OpenRA.Mods.Cameo` type of the same name wins with zero yaml changes (precedent:
+   `ColorPickerColorShift`, `PlayerColorShift`, `SelectionDecorations`). Prove a shadow with a
+   Cameo-only field — `--docs` lists both types and proves nothing.
 8. **Audit reports regenerate via `bash tools/audit/run_all.sh` only** (PowerShell `>` writes UTF-16).
 9. **Underscore-only naming** — no hyphens in ids / files / fluent keys.
 10. **Attribute the ACTUAL author in the commit trailer — never impersonate another agent.**
-    Claude Code commits end with `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`.
+    Sign with **your own** identity, including your real model name:
+    `Co-Authored-By: Claude <model> <noreply@anthropic.com>` — e.g. Opus 5 signs
+    `Claude Opus 5`, Opus 4.8 signs `Claude Opus 4.8`. **Never copy the trailer from a
+    previous commit or from this file** — it is a template, not a literal; a version pinned
+    here goes stale the moment the model changes, and copying it makes a newer model
+    misreport itself as an older one.
     **Any OTHER agent (Devin, Cascade, etc.) must use its OWN `Co-Authored-By:` line** (e.g.
     `Co-Authored-By: Devin AI <devin@cognition.ai>`) and must NOT append the Claude trailer — the
     git author is a shared repo identity, so the trailer is the only provenance signal and a wrong

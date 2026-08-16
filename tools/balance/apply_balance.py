@@ -30,11 +30,21 @@ import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools/balance"))
+import formula  # noqa: E402
+
 LEDGER = ROOT / "docs/balance"
 
 UNIT_FIELDS = ("cost", "hp", "speed", "speed_air", "turn_speed", "sight",
-               "build_limit", "build_duration", "self_heal_step",
-               "firepower_multiplier")
+               "build_limit", "build_duration", "self_heal_step")
+
+# W17 — `FirepowerMultiplier` is RETIRED as a fine-tuning knob, so the pipeline no
+# longer WRITES it. `extract_stats` still reads it (167 actors still carry one and
+# they must keep pricing correctly), and conditional upgrade FP traits are untouched
+# design — this only closes the write path, so a ledger edit can never quietly
+# re-introduce the knob. A ledger/yaml disagreement is REPORTED, never applied:
+# the fix is to fold the multiplier into the weapon's Damage on the 100 grid.
+RETIRED_UNIT_FIELDS = ("firepower_multiplier",)
 WEAPON_FIELDS = {"reloaddelay": "ReloadDelay", "burst": "Burst",
                  "burstdelays": "BurstDelays", "range": "Range",
                  "minrange": "MinRange"}
@@ -82,12 +92,10 @@ class YamlEditor:
                     self.lines[i] = m.group(1) + str(value)
                     self.dirty = True
                     return f"{old} -> {value}"
-        # Insert a new unqualified FirepowerMultiplier block if requested and missing
-        if trait == "FirepowerMultiplier":
-            self.lines.insert(e, f"\tFirepowerMultiplier:")
-            self.lines.insert(e + 1, f"\t\t{field}: {value}")
-            self.dirty = True
-            return f"inserted {field} {value}"
+        # W17 removed the one branch that INSERTED a missing trait block: it existed
+        # solely to create a `FirepowerMultiplier` on an actor that had none, i.e. to
+        # mint the retired fine-tuning knob. Every other UNIT_FIELD is an edit to a
+        # line that already exists, so this path is now uniformly "not written".
         return f"`{trait}.{field}` not written locally"
 
     def set_weapon_field(self, weapon: str, field: str, value) -> str:
@@ -180,6 +188,17 @@ def main() -> int:
         for section, sec in doc["sections"].items():
             for actor, u in sec.items():
                 ru = resolved_unit(doc["ledger"], section, actor) or {}
+                for field in RETIRED_UNIT_FIELDS:
+                    slot, rslot = u.get(field), (ru.get(field) or {})
+                    if not isinstance(slot, dict):
+                        continue
+                    if str(slot.get("v")) == str(rslot.get("v")):
+                        continue
+                    problems.append(
+                        f"{actor}.{field}: RETIRED KNOB (W17) — ledger asks for "
+                        f"{slot.get('v')}, yaml has {rslot.get('v')}. NOT applied. "
+                        f"Fold the multiplier into the weapon's Damage on the "
+                        f"{formula.DAMAGE_STEP} grid and delete the trait.")
                 for field in UNIT_FIELDS:
                     slot = u.get(field)
                     if not isinstance(slot, dict):
@@ -195,12 +214,11 @@ def main() -> int:
                         continue
                     relfile, anchor = src.split("#", 1)
                     trait, _, tfield = anchor.partition(".")
-                    if field == "firepower_multiplier":
-                        # OpenRA stores the Modifier as an integer percentage, e.g. 89 = 89%.
-                        val = int(round(slot["v"] * 100))
-                    else:
-                        val = slot["v"]
-                    res = editor(relfile).set_field(actor, trait, tfield, val)
+                    # Every remaining UNIT_FIELD is written in the unit the ledger
+                    # stores it in. The one that was not — firepower_multiplier,
+                    # a float the engine writes as an integer percentage — is
+                    # retired (W17) and handled above.
+                    res = editor(relfile).set_field(actor, trait, tfield, slot["v"])
                     if res == "unchanged":
                         problems.append(f"{actor}.{field}: SHADOWED — resolved "
                                         f"{rslot.get('v')} != defining line {slot['v']} "

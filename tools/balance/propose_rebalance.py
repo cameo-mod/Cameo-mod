@@ -60,9 +60,7 @@ def unit_row(u):
                 if dmg is not None:
                     damage += dmg
             if damage:
-                total_dps = formula.dps(damage, reload_,
-                                        fnum(primary.get("design_weapon_class")) or 1.0,
-                                        burst,
+                total_dps = formula.dps(damage, reload_, burst,
                                         fnum(primary.get("burstdelays")),
                                         firepower_multiplier=fp)
     return hp, speed, best_range, total_dps, cost, d

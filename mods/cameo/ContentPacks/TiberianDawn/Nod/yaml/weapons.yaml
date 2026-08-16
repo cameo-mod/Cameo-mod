@@ -28,12 +28,9 @@ FlamethrowerExplode:
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 5
 NodTurretLaser:
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
-	Inherits@3: ^HeavyCannon
-	Inherits@4: ^LightFlameWeapon
-	Inherits@5: ^FlakWeapon
-	Inherits@6: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Medium
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	Burst: 2
 	BurstDelays: 4
 	ReloadDelay: 20
@@ -50,36 +47,71 @@ NodTurretLaser:
 		SecondaryBeamWidth: 48
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
-	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
-		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@LightFlameWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 1
+	Warhead@Laser_Medium:
+		Damage: 12000
+	Warhead@Laser_Medium_Percentage:
+		Damage: 6
+	Warhead@Laser_Medium_ExtraDamage:
+		Spread: 300
+		Damage: 600
+		Versus:
+			REFLECTOR: 50
+			Shield: 100
+			None: 1
+			Flak: 1
+			Plate: 1
+			Heroic: 1
+			Superheavy: 1
+			Heavy: 1
+			Medium: 1
+			Light: 1
+			Scout: 1
+			Steel: 1
+			Concrete: 1
+			Wood: 1
+			Fighter: 1
+			Bomber: 1
+			Helicopter: 1
+			Spaceship: 1
 	# Warhead@Effect: CreateEffect
 	# 	-ImpactSounds:
 	# Warhead@EffectAir: CreateEffect
 	# 	-ImpactSounds:
+
+NodTurretLaserInferno:
+	Inherits@wh: ^Warhead_Inferno_Medium
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	Burst: 2
+	BurstDelays: 4
+	ReloadDelay: 20
+	Range: 6800
+	Report: vpalwe2d.aud
+	ValidTargets: Ground, Water
+	Projectile: LaserZap
+		Width: 96
+		Duration: 12
+		ZOffset: 2047
+		Color: FF0000
+		GlowIntensity: 0.5
+		SecondaryBeam: true
+		SecondaryBeamWidth: 48
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF
+	Warhead@Inferno_Medium:
+		Damage: 12000
+	Warhead@Inferno_Medium_Percentage:
+		Damage: 6
+
+NodTurretLaserBurning:
+	Inherits: NodTurretLaserInferno
+	Burst: 10
+	BurstDelays: 1
+	FirstBurstTargetOffset: -500,0,0
+	FollowingBurstTargetOffset: 100,0,0
+	Projectile: LaserZap
+		TrackTarget: false
+		Inaccuracy: 0
 
 SmallTiberiumExplosion:
 	Inherits: Chemspray
@@ -261,11 +293,8 @@ LTNKMissiles:
 		Explosions: small_frag
 
 HonestJohn:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^MediumFlameWeapon
-	Inherits@3: ^HeavyFlameWeapon
-	Inherits@4: ^MediumMissile
-	Inherits@5: ^HeavyMissile
+	Inherits@wh: ^Warhead_FireMissile_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	ReloadDelay: 225
 	Burst: 2
 	BurstDelays: 25
@@ -275,61 +304,31 @@ HonestJohn:
 	TargetActorCenter: true
 	ValidTargets: Ground, Water
 	Projectile: Bullet
-		Blockable: false
-		Shadow: true
-		Inaccuracy: 750
 		Image: MISSILE
 		TrailImage: smokey
+		Speed: 250
+		Inaccuracy: 750
+		LaunchAngle: 100
+		Blockable: false
+		Shadow: true
 		TrailDelay: 1
 		TrailInterval: 1
-		Speed: 250
-		LaunchAngle: 100
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@FireMissile_Heavy: AreaDamage
 		ValidTargets: Ground, Water
-		Damage: 10000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 50000
+		FriendlyFireDamage: 30
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath, Incendiary
+	Warhead@FireMissile_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 5000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 5
-	Warhead@MediumFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 10000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 5000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 5
-	Warhead@HeavyFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 10000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 5000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 5
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 10000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 5
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 10000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 5
+		Damage: 25
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath, Incendiary
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
+		ImpactSounds: firebl3.aud
+		ImpactActors: false
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
 
 StealthTankMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
@@ -538,6 +537,24 @@ LaserObelisk:
 	# 	-ImpactSounds:
 	# Warhead@EffectAir: CreateEffect
 	# 	-ImpactSounds:
+
+LaserObeliskBurning:
+	Inherits: LaserObelisk
+	Inherits@inferno: ^Warhead_Inferno_Heavy
+	ReloadDelay: 96
+	Range: 9600
+	ValidTargets: Ground, Water
+	Burst: 10
+	BurstDelays: 1
+	FirstBurstTargetOffset: -500,0,0
+	FollowingBurstTargetOffset: 100,0,0
+	Projectile: LaserZap
+		TrackTarget: false
+		Inaccuracy: 0
+	Warhead@Inferno_Heavy:
+		Damage: 24000
+	Warhead@Inferno_Heavy_Percentage:
+		Damage: 12
 
 ChemRockets:
 	Inherits: ^Grenade
@@ -841,9 +858,9 @@ MachineGunBuggy2_AA:
 		ValidTargets: Air
 
 LaserBuggy2:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^MediumMissile
-	Inherits@3: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Light
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 60
 	Burst: 3
 	BurstDelays: 4
@@ -859,45 +876,88 @@ LaserBuggy2:
 		SecondaryBeamWidth: 32
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
-	Warhead@LightFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 1
-	Warhead@LaserWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 1
+	Warhead@Laser_Light:
+		Damage: 6000
+	Warhead@Laser_Light_Percentage:
+		Damage: 3
+	Warhead@Laser_Light_ExtraDamage:
+		Spread: 300
+		Damage: 600
+		Versus:
+			REFLECTOR: 50
+			Shield: 100
+			None: 1
+			Flak: 1
+			Plate: 1
+			Heroic: 1
+			Superheavy: 1
+			Heavy: 1
+			Medium: 1
+			Light: 1
+			Scout: 1
+			Steel: 1
+			Concrete: 1
+			Wood: 1
+			Fighter: 1
+			Bomber: 1
+			Helicopter: 1
+			Spaceship: 1
+
+LaserBuggy2Inferno:
+	Inherits@wh: ^Warhead_Inferno_Light
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	ReloadDelay: 60
+	Burst: 3
+	BurstDelays: 4
+	Range: 5274
+	Report: vpalwe2d.aud
+	ValidTargets: Ground, Water
+	Projectile: LaserZap
+		Width: 64
+		Duration: 12
+		ZOffset: 2047
+		Color: FF000055
+		SecondaryBeam: true
+		SecondaryBeamWidth: 32
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF
+	Warhead@Inferno_Light:
+		Damage: 6000
+	Warhead@Inferno_Light_Percentage:
+		Damage: 3
+
+LaserBuggy2Burning:
+	Inherits: LaserBuggy2Inferno
+	Burst: 10
+	BurstDelays: 1
+	FirstBurstTargetOffset: -500,0,0
+	FollowingBurstTargetOffset: 100,0,0
+	Projectile: LaserZap
+		TrackTarget: false
+		Inaccuracy: 0
 
 LaserBuggy2_AA:
 	Inherits: LaserBuggy2
 	Range: 7911
 	ValidTargets: Air
-	Warhead@LightFlameWeapon: SpreadDamage
+
+LaserBuggy2_AAInferno:
+	Inherits: LaserBuggy2Inferno
+	Range: 7911
+	ValidTargets: Air
+	Warhead@Inferno_Light:
 		ValidTargets: Air
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Inferno_Light_Percentage:
 		ValidTargets: Air
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+
+LaserBuggy2_AABurning:
+	Inherits: LaserBuggy2Burning
+	Range: 7911
+	ValidTargets: Air
+	Warhead@Inferno_Light:
 		ValidTargets: Air
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Air
-	Warhead@LaserWeapon: SpreadDamage
-		ValidTargets: Air
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@Inferno_Light_Percentage:
 		ValidTargets: Air
 
 FireballLauncherBuggy2:
@@ -1243,13 +1303,13 @@ SpecterArtilleryShellUpgrade:
 	-Warhead@Effect:
 
 VenomLaser:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^FlakWeapon
-	Inherits@3: ^Chaingun
-	Inherits@4: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Medium
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 18
 	Range: 4000
 	Report: vpalwe2d.aud
+	ValidTargets: Ground, Water, Air
 	Projectile: LaserZap
 		Width: 128
 		Duration: 12
@@ -1259,33 +1319,64 @@ VenomLaser:
 		SecondaryBeamWidth: 64
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
-	Warhead@LightFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@LaserWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
+	Warhead@Laser_Medium:
+		Damage: 8000
+	Warhead@Laser_Medium_Percentage:
+		Damage: 4
+	Warhead@Laser_Medium_ExtraDamage:
+		Spread: 300
+		Damage: 600
+		Versus:
+			REFLECTOR: 50
+			Shield: 100
+			None: 1
+			Flak: 1
+			Plate: 1
+			Heroic: 1
+			Superheavy: 1
+			Heavy: 1
+			Medium: 1
+			Light: 1
+			Scout: 1
+			Steel: 1
+			Concrete: 1
+			Wood: 1
+			Fighter: 1
+			Bomber: 1
+			Helicopter: 1
+			Spaceship: 1
+
+VenomLaserInferno:
+	Inherits@wh: ^Warhead_Inferno_Medium
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	ReloadDelay: 18
+	Range: 4000
+	Report: vpalwe2d.aud
+	ValidTargets: Ground, Water, Air
+	Projectile: LaserZap
+		Width: 128
+		Duration: 12
+		ZOffset: 2047
+		Color: FF000055
+		SecondaryBeam: true
+		SecondaryBeamWidth: 64
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF
+	Warhead@Inferno_Medium:
+		Damage: 8000
+	Warhead@Inferno_Medium_Percentage:
+		Damage: 4
+
+VenomLaserBurning:
+	Inherits: VenomLaserInferno
+	Burst: 10
+	BurstDelays: 1
+	FirstBurstTargetOffset: -500,0,0
+	FollowingBurstTargetOffset: 100,0,0
+	Projectile: LaserZap
+		TrackTarget: false
+		Inaccuracy: 0
 
 NodCommandoLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy

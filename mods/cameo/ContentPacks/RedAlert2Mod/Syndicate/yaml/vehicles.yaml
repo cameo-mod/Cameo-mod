@@ -168,7 +168,7 @@ latinsyndicate_raiderbuggy:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@uprecover: ^LatinCashrecover
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Tooltip:
 		Name: Raider Buggy
 	Valued:
@@ -256,7 +256,7 @@ latinsyndicate_tortugatank:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@uprecover: ^LatinCashrecover
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Tooltip:
 		Name: Tortuga Tank
 	Valued:
@@ -328,7 +328,7 @@ latinsyndicate_rushertank:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Inherits@uprecover: ^LatinCashrecover
 	Tooltip:
 		Name: Rusher Tank
@@ -415,7 +415,7 @@ latinsyndicate_smokertank:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Inherits@uprecover: ^LatinCashrecover
 	Tooltip:
 		Name: Smoker Tank
@@ -520,7 +520,7 @@ latinsyndicate_diablo:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@uprecover: ^LatinCashrecover
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Tooltip:
 		Name: Diablo
 	Valued:
@@ -634,7 +634,7 @@ latinsyndicate_latinapc:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Inherits@cargo: ^CargoVehicle
 	Inherits@bot: ^BotAutoDeployTransport
 	Inherits@uprecover: ^LatinCashrecover
@@ -787,7 +787,7 @@ latinsyndicate_narcohummer:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
-	Inherits@gat: ^GatlingSpeedUpSpecialUnitBehavior
+	Inherits@gat: ^GatlingSpinUpSpecialUnitBehavior
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Inherits@cargo: ^OpenToppedVehicle
 	Inherits@uprecover: ^LatinCashrecover
@@ -871,7 +871,7 @@ latinsyndicate_carteltruck:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
-	Inherits@gat: ^GatlingSpeedUpSpecialUnitBehavior
+	Inherits@gat: ^GatlingSpinUpSpecialUnitBehavior
 	Inherits@cargo: ^OpenToppedVehicle
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Inherits@uprecover: ^LatinCashrecover
@@ -1090,7 +1090,7 @@ latinsyndicate_lars:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Inherits@uprecover: ^LatinCashrecover
 	Inherits@flamerup: ^CartelRocketsUpgrade
 	Inherits@flamerup: ^LatinFlameUpgrades

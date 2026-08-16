@@ -492,6 +492,49 @@ cheapest provider wins).
   stack, but the COMBINED product must never drop below **50%** — below
   that units feel undamageable. Hard floor; audit extension TODO
   (worst-case stacked DamageMultiplier per unit < 0.5 = finding).
+- ⭐ **CHARGE-UP DISCOUNT — the 50% anchor** (maintainer law, 2026-08-15). A charging
+  unit is nerfed twice (the delay inflates its effective reload AND it is helpless
+  while winding up), so it is priced at a discount. The discount is PROPORTIONAL to
+  the real burden, never flat:
+  - **A unit whose charge is 50% of its reload earns the full 0.75× discount.**
+    Reload 100, charge 50 — as a share of the cycle, `0.5/1.5` = **1/3**
+    (`formula.CHARGE_ANCHOR_SHARE`). Less charge earns proportionally less discount;
+    a zero-charge unit pays 1.0. Clamped to [0.75, 1.0].
+  - **`charge_share = charge / (charge + cycle)` is a RATIO, not a duration.** The RA1
+    Tesla Coil charges LONGER than the RA2 one (25 vs 20) yet earns a SMALLER
+    discount, because its three zaps stretch the cycle.
+  - ⚠ **`AttackTesla` overrides the weapon's reload.** Its own `ReloadDelay` is the
+    cycle, `MaxCharges` is the burst, and the WEAPON's reload is the burst delay —
+    NOT `ChargeDelay`. Reading the weapon's reload as the cycle overstated Tesla DPS
+    by **11.8×**. See `BALANCE_PROGRAM_PLAN.md` W16.
+  - Charge values are DECISIONS: write `InitialChargeDelay` out rather than inheriting
+    the engine's default of 22. An absent key means DEFAULT, never zero.
+- ⭐ **TEAM UPGRADES ARE ALWAYS WEAKER THAN FACTION UPGRADES** (maintainer law,
+  2026-08-15). A team upgrade buffs every allied army, so it must never be the
+  strongest thing a faction can research — the faction's own upgrades are what
+  make it feel distinct. Measured practice in the tree already follows this, and
+  the ratio is roughly **HALF**:
+
+  | upgrade | scope | magnitude |
+  |---|---|---|
+  | `^WayOfTheDragon` (Asian Alliance) | team | ±5% |
+  | `^MenOfSteelTeamUpgradeRA1` | team | ±10% |
+  | `^WarEconomyTeamUpgradeRA1` | team | +10% |
+  | `^AfterburnersUpgradeRA1` | faction | ±15% |
+  | `^UnstableIsotopes`, `^InfernoDoctrine` | faction | +20–25% |
+  | Vril Infusion (Schwarzer Mond) | faction | +25% and a 25%-of-HP shield |
+
+  So: **team ≈ 5–10%, faction ≈ 15–25%.** When a team upgrade shares a mechanic
+  with a faction upgrade, give it half the number so the law is visible in the
+  yaml itself. (`^StaliniumTeamUpgradeRA1` at `Modifier: 80` is the one outlier
+  and should be revisited.)
+- ⭐ **A TEAM UPGRADE MUST FIT THE FACTION'S IDENTITY, not just be a good effect**
+  (maintainer, 2026-08-15). The team upgrade is a statement about what the
+  faction IS, so it has to reflect that faction's focus — Schwarzer Mond is
+  high-tech, vehicles and aircraft, so an infantry-morale effect belongs to the
+  Asian Alliance (whose Banzai upgrade already is one) or to the Naxis, not to
+  SM. Check identity BEFORE mechanics: a mechanic that already exists and works
+  is not a reason to attach it to the wrong faction.
 - **ActorStatValues upgrade list** (design 2026-07-17): the `Upgrades:`
   field on `ActorStatValues` was expanded from a maximum of 5 entries to
   **10**. Every unit must list all faction upgrades (and only faction
@@ -747,11 +790,246 @@ cheapest provider wins).
   Imperial Scoutsman, M113 Adats-style condition typos).
 - **G3: garrisoned armaments never carry a FireDelay.**
 
+## 11b. ONE WARHEAD PER WEAPON (binding, maintainer 2026-08-16)
+
+**A weapon has exactly ONE damage warhead.** This is the damage half of the 3-way split
+(**1 warhead + 1 projectile + 1 effect**) and it is a fixed rule, not a target to drift
+toward. It was practised but never written down, which is how the tree accumulated the
+debt below.
+
+Measured 2026-08-16 across every concrete weapon:
+
+| main damage warheads | weapons | |
+|---|--:|---|
+| **1** | 805 | **39% — compliant** |
+| 2 | 457 | |
+| 3 | 284 | |
+| 4 | 248 | |
+| 5–15 | 258 | worst case: 15 |
+
+**Not counted as damage warheads** (these may coexist with the one main warhead):
+`*_Percentage` (the %-twin), `*_ExtraDamage` (the shield chip), and every non-damage
+warhead — `CreateEffect`, `LeaveSmudge`, `GrantExternalCondition`, `ApplyPhysicalState`,
+`SpawnActor`, `AffectsIntegrity`.
+
+### Collapsing a multi-warhead weapon
+
+1. **Sum is preserved.** The survivor's `Damage` = Σ of the old warheads' damage, each
+   first mapped through its own family ratio (`formula.spread_damage_sum`, the SUM law).
+   Collapsing must never change what the weapon deals in total.
+2. **Pick the family that matches the weapon's IDENTITY**, not the one with the largest
+   damage — check what it actually is (its projectile, its lore, its role).
+3. ⚠ **If no existing family fits, CREATE A NEW ONE — do not force a bad fit.**
+   Maintainer, 2026-08-16: *"every time you don't know how to collapse them you should
+   suggest to create a new warhead family."* Blends are cheap: `^Warhead_ChemMissile`,
+   `FireCannon` and `ChemCannon` are all blends of two parents, and a new family is a few
+   lines in `gen_weapon_template.py`.
+
+**Worked examples (both found by the W23 retrofit):**
+
+- `japan_imperialscoutsman_rifle_waveforce` inherits `^WaveforceBulletWarhead` and is not
+  a railgun. Mapping it to `Railgun_Heavy` was wrong — it needs a **`Waveforce`** family,
+  proposed as a Plasma × Quantum blend (Plasma = Flame × Chemical; Quantum = Railgun +
+  Laser + Tesla), i.e. anti-infantry from the thermal half and armour-piercing +
+  anti-shield from the coherent-energy half, delivered wide with a shallow falloff.
+- `GladiusCannon` carries four legacy warheads and inherits `PhotonCannon`, so it is an
+  energy weapon. `Plasma` fits its "good against infantry and tanks alike" role directly.
+
+**A weapon that cannot be collapsed is a design question, not a conversion blocker** — file
+it, propose the family, and do not merge warheads by damage arithmetic alone.
+
 ## 12. Balance formula — the Cameo Armor System workbook
 
 **Weapon Versus construction: see `docs/design/ARMOR_SYSTEM.md`** — the
 step 6/5/4 = light/medium/heavy law (floor 10/25/40, Shield = 100+floor,
 percentage warhead its own 1-step window), profile = armor order.
+
+⚠ **That even-step law now applies only to the families Cameo INVENTED.** Since
+W13 step 4 the ten families with reference coverage (Bullet, CannonHE/AP,
+MissileHE/AP/AA, Laser, Prism, Flame, Tesla) take their magnitudes from the
+measured corpus instead — `docs/reference/family_profiles.json`, consumed by
+`tools/balance/gen_weapon_template.py`. Their floors come from §12.0's 10–25
+band by level (25/20/15/10), not from the 10/25/40 above, and `Shield` keeps its
+rule expressed against the profile's own peak (`top + floor`, which is the same
+`100 + floor` whenever a profile peaks at 100). The ORDER is unchanged: the
+corpus supplies magnitudes, the ordering law supplies order.
+
+### 12.0 THE PROFILE SHAPE LAW (maintainer, 2026-08-15) — binding
+
+Supersedes the "even step" half of the step law. Three rules, in force for every
+`^Warhead_*` family:
+
+1. **The MEDIAN is 100, and values above 100 are legal** (revised 2026-08-15;
+   this rule originally said *"peak is 100"*). Every profile is normalised so its
+   own median is 100, which is also how reference profiles from other mods are
+   read — a source that writes 200/100 and one that writes 100/50 are recognised
+   as the SAME design. Absolute lethality still lives in `Damage`, never in the
+   armor profile.
+   **Why the peak was wrong:** normalising to the maximum lets ONE outlier cell
+   halve the entire rest of the profile. RA2's `Electric` warhead carries a 200
+   against a single armor to tune one unit; read peak-first, Tesla came out at
+   ~50 against infantry — a weapon that one-shots infantry, scored as mediocre
+   against them. The median is robust to that, and a peak of 200 is no longer
+   free: **K prices the profile**, so a weapon that is twice as good against its
+   best target is priced as twice as good. The old cap existed only because the
+   pricing formula could not yet see the profile. Ceiling: 300.
+2. **It is still a LADDER — no two values identical, anywhere in the profile.**
+   A tie is a wasted rung and makes the weapon unreadable. This is absolute: it
+   applies to the DERIVED armors too, so it must be the LAST thing enforced —
+   `Heroic` and `Airborne` are computed from other cells and can land exactly on
+   one (measured: `missile_he` produced two 15.0s before the check moved last).
+   The field's own profiles DO plateau — the canonical `HE` warhead sits at 100
+   across the entire infantry ladder — and **Cameo does not copy that**; we take
+   the field's plateau as "these are all near the top" and still separate them.
+3. **But it need NOT be linear.** Equal steps were an artifact of the generator,
+   and an even ramp is exactly the "moderate middle" the warhead rebuild exists
+   to escape. Measured across 16 reference mods, real profiles use **plateaus
+   and cliffs** — the canonical HE warhead sits at ~100 across the whole
+   infantry ladder and then falls off to 35 at Heavy and 15 at Superheavy.
+   Uneven steps are how a weapon says where it actually bites.
+4. **THE WINDOW: every Versus value sits in `[10, 200]`** (maintainer,
+   2026-08-15). Nothing outside, ever — including the DERIVED armors, which are
+   products and can otherwise land arbitrarily low. That is a **20:1** maximum
+   span, and it is the SAME extreme this law always allowed: peak 100 against a
+   floor of 5 is also 20:1. Moving normalisation from the peak to the median
+   (rule 1) left the scale open-ended; the window closes it.
+   **The floor band is 10–25** for the value a family actually uses. 25 is a
+   generalist; **10 marks a deliberately hyper-specialised weapon** — `CannonAP`
+   against unarmoured infantry is the archetype. It is the exception, not the
+   pattern; if several families want a 10, they are not all special.
+
+5. **MAXIMUM LEGAL SPREAD ≠ TARGET SPREAD** (maintainer, 2026-08-15). The window
+   above says what MAY ship. This says what ships by default, and the two must
+   never be confused — 20:1 as a target would invent counter-play no source mod
+   expresses.
+
+   **The target band is `2x · 4x · 8x`** — flattest, centre, sharpest. That is
+   the field's own distribution snapped to a doubling ladder, measured over
+   **2402 individual reference warheads** with a real damage profile:
+
+   | | measured | adopted |
+   |---|--:|--:|
+   | flattest (p25) | 1.9x | **2x** |
+   | centre (median) | 4.0x | **4x** |
+   | sharpest (p75) | 7.5x | **8x** |
+   | p90 · legal max | 15x · 20x is p94 | — |
+
+   The ladder continues 2 · 4 · 8 · 16, and the legal maximum of 20:1 sits just
+   past 16 — the window is *one doubling beyond the sharpest default*.
+
+   **Anything automatic stays inside `2x–8x`. Going outside is a design decision
+   and belongs to the maintainer**, recorded in
+   `aggregate_archetype.SPECIALIST_RATIOS`, never to a default.
+
+   ⚠ **Measure the band on INDIVIDUAL warheads, not on aggregated families.** The
+   per-family aggregate spans only 1.3x–7.2x, because averaging across mods that
+   disagree about a family's direction CANCELS the disagreement. That aggregate is
+   an artifact of averaging, not a design any mod shipped, and targeting it would
+   chase a sharpness no real warhead has.
+
+   ⚠ The band is waived for the **derived** armors (§12.0b) and only for them:
+   they are products, the source profiles contain no derived armor so the field
+   has no opinion to respect, and clamping the product would break the rule that
+   produces it. The `[10, 200]` window still binds on every cell.
+
+⚠ The ordering law (§ARMOR_SYSTEM "PROFILE construction") still decides WHICH
+armor gets which value. The corpus supplies magnitudes, the law supplies order.
+
+### 12.0a PLATFORM, NOT JUST FAMILY (maintainer, 2026-08-15) — binding
+
+*"There is a huge difference between the obelisk of light laser (a very big
+laser) and the small laser from the laser turret and infantry laser weapons …
+light lasers are good against light and heavy lasers are good against heavy."*
+
+**A reference profile is only comparable to a Cameo family if the unit firing it
+plays the same role.** This is why Cameo splits `HE` into `CannonHE` /
+`MissileHE` / `BulletHE` instead of keeping one `HE`, and the same split must be
+applied to the reference data BEFORE anything is averaged.
+
+**Measured** (`tools/reference/survey_platforms.py`, INI sources, warheads traced
+from the firing actor and normalised to peak 100 — medians):
+
+| family | platform | vs INF | vs LIGHT | vs HEAVY | majority direction |
+|---|---|--:|--:|--:|---|
+| laser | infantry | 100 | 48 | **33** | anti-LIGHT 55 / 96 |
+| laser | defense_small | 100 | 50 | **50** | flat 21 / 33 |
+| laser | **defense_big** (Obelisk) | 100 | 67 | **55** | flat 21 / 36 |
+| laser | vehicle_heavy | 100 | 80 | **67** | anti-LIGHT 40 / 74 |
+| tesla | **defense_big** (Coil) | 50 | 42 | 50 | **anti-HEAVY 27 / 30** |
+| tesla | vehicle_light | 100 | 100 | 80 | anti-LIGHT 9 / 14 |
+| cannon | infantry | 100 | 40 | 20 | anti-LIGHT / flat |
+| cannon | vehicle_heavy | 100 | 75 | **87** | the only cannon tier trending anti-HEAVY |
+| missile | infantry | 20 | 83 | **100** | the AT-infantry profile |
+| bullet | every platform | 100 | 23–55 | 13–25 | anti-LIGHT everywhere |
+
+**The hypothesis holds.** Laser lethality against heavy armour climbs with the
+platform — infantry 33 → small turret 50 → Obelisk 55 → heavy vehicle 67 — so a
+family's LEVEL (Light/Medium/Heavy) should track the platform tier, and the
+levels must NOT share one profile shape. It also means `^Warhead_Laser_*` cannot
+be filled from an average over "everything called laser": that mixes a rifle with
+an Obelisk and produces precisely the mush the rebuild exists to remove.
+
+Corollary already banked: **Tesla's big-defence profile is anti-HEAVY in 27 of 30
+measured rows**, which independently validates Cameo's current Tesla direction.
+
+### 12.0b HEROIC ARMOR IS A BRIDGE, NOT THE TOP RUNG (maintainer, 2026-08-15)
+
+**Heroic is NOT the heavy end of the infantry ladder.** Placing it there
+backfires: an elite unit would take the MOST damage from every anti-armour
+weapon, which is the opposite of what "heroic" should feel like. The infantry
+ladder is therefore `None < Flak < Plate`, and **Heroic sits BETWEEN Plate and
+Scout** — a hybrid of infantry and vehicle, of light and heavy.
+
+**Its value is the PRODUCT of the weapon's Plate and Scout values**, as
+fractions of the profile's own PEAK: `Heroic = Plate × Scout / peak`.
+
+⚠ **The divisor is the peak, not the constant 100** — they stopped being the
+same thing when rule 1 above moved normalisation from the peak to the median and
+values over 100 became legal. Dividing by 100 while a parent sits at 137
+AMPLIFIES instead of collapsing: `^Warhead_Bullet_Light` produced `Plate 137 ·
+Scout 106 · **Heroic 145**`, i.e. heroes taking MORE than either half — the exact
+inversion this section exists to prevent. It hit **36 of 60** derived cells
+before it was caught. Against the peak the product can never exceed either
+parent, and whenever a profile does peak at 100 the formula is unchanged.
+
+**The pattern generalises — a derived armor replaces every dual-`Armor` stack.**
+`^FlyingInfantryTemplate` carries TWO `Armor` traits today (`Scout` + `Fighter`)
+for exactly the reason Heroic wanted two: a jetpack trooper is both infantry and
+aircraft, and multiplying the pair meant only a weapon good at BOTH threatened
+it. W20's switch to averaging silently deleted that. So:
+
+| derived armor | = parent × parent / 100 | replaces |
+|---|---|---|
+| **Heroic** | `Plate × Scout` | the elite-infantry stack |
+| **Airborne** *(name provisional)* | `Helicopter × Scout` | `^FlyingInfantryTemplate`'s Scout+Fighter |
+
+This is how W20 ("two `Armor` traits must never multiply at runtime") and the
+hybrid-armor design stop being in conflict: **one trait per actor, the product
+baked into the armor type at generation time.**
+⚠ Follow-up: collapse `^FlyingInfantryTemplate`'s two `Armor` traits to the
+single derived type — only after the warhead families carry the new column.
+
+That reproduces exactly what the old multiplied-armor stack gave, and averaging
+cannot:
+
+| weapon | Plate | Scout | average | **product** |
+|---|--:|--:|--:|--:|
+| anti-infantry specialist | 100 | 30 | 65 | **30** |
+| anti-vehicle specialist | 20 | 90 | 55 | **18** |
+| good against both | 80 | 80 | 80 | **64** |
+
+The average says a specialist is nearly as good against a hero as a generalist.
+The product says what is intended: **specialists fall off a cliff against
+heroes; only a weapon strong against BOTH infantry and vehicles stays strong.**
+
+⚠ This does **not** reintroduce the W20 squaring bug. W20 was two `Armor`
+*traits* multiplying at runtime on one actor, which nobody designed. This is a
+single armor type whose numbers are computed once, at generation time, from a
+formula the designer chose. Exactly one armor trait is still enabled per hit.
+
+Implementation: `tools/reference/aggregate_archetype.py` (`HEROIC_FROM`,
+`FLOOR_BAND`, `shape_profile`); it must be mirrored into
+`gen_weapon_template.py` when the families are regenerated (W13 step 3).
 
 **LAW (2026-07-18): balance numbers move ONLY through the balance
 pipeline** — `docs/design/BALANCE_PIPELINE.md` (raw-stat JSON ledger in
@@ -850,17 +1128,29 @@ steps so the house formulas stay integral:
   sibling unit. If many units of the same class converge on the same price,
   equally spread them across the available 100-grid slots first, then fall
   back to 10-grid only when necessary. Prices are outputs, never inputs.
-- **Damage: 2000-steps.** All main class warheads carry the **identical**
-  (even-spread) value `total ÷ N` on the 2000 grid — never unequal, never
-  off-grid; fine-tune the effective damage with the actor
-  `FirepowerMultiplier`, not by nudging Damage. Their twins are FIXED
-  fractions of that main value:
+- **Damage: 100-steps.** All main class warheads carry the **identical**
+  (even-spread) value `total ÷ N` on the 100 grid — never unequal, never
+  off-grid. (The grid was 2000 until 2026-08-12; it was cut 20x finer so the
+  pipeline lands on the exact value instead of handing a remainder to
+  `FirepowerMultiplier`, whose role as a fine-tuning knob is being retired.)
+  Their twins are FIXED fractions of that main value:
   - **FriendlyFire** twins = always **50% damage** (and 50% spread).
   - **ExtraDamage** twins = always **50%** of the main (any warhead type —
     SpreadDamage or OpenToppedDamage; energy weapons trade area-of-effect
     for this shield/bonus chip) but are **EXCLUDED from the damage total**.
-  - **HealthPercentageDamage (Percentage)** twin = always **1 per 2000**
-    main damage (16000 -> 8).
+    ⚠ Being RETIRED: the 195 `SpreadDamage` chips collapse into the main
+    warhead (the K model now prices what they compensated for), while the 34
+    sniper `OpenToppedDamage` ones STAY — those are how a sniper hits
+    passengers, not a damage bonus. See BALANCE_PROGRAM_PLAN W19.
+  - **Percentage twin** = **100 flat damage is 0.01% of max health**, so the
+    twin is exactly `Damage / 100` written in BASIS POINTS on an
+    `AreaDamagePercentage` warhead with `PercentageDenominator: 10000`.
+    Percentage-warhead `Versus` values are multiples of **5** in [5, 100]
+    (the x5 rebase of the old 1..17 band, which exactly cancels the 5x
+    weaker base ratio — never change one without the other).
+    The stock `HealthPercentageDamage` cannot express this (whole percent
+    only) and is being migrated away; until then it keeps the OLD law of
+    1 per 2000.
   - The ONE code implementation is `formula.distribute_damage` /
     `formula.spread_damage_sum`; guard `audit_warhead_split`.
 - **Only template-inherited warheads may exist.** Every `Warhead@X` on a
@@ -1149,12 +1439,20 @@ must be `^ArtilleryTemplate`, `cabal_cyborgreaper` and `cabal_manticore` must be
 `^SupportVehicleTemplate`, `cabal_coredefender` must be `^EpicVehicleTemplate`.
 
 **Cyborg dual-armor rule.** All CABAL cyborg infantry use the Future Tech
-droid recipe: the base `Armor` from the infantry class template stays active,
-a secondary vehicle `Armor@<role>` is added, and a `DamageMultiplier@<role>:
-Modifier: 200` is applied to the secondary armor. This makes cyborgs count as
-both infantry and vehicles for weapon Versus tables while keeping them brittle
-against dedicated anti-vehicle fire. True vehicles and walkers do not use this
-pattern.
+droid recipe: the base `Armor` from the infantry class template stays active
+and a secondary vehicle `Armor@<role>` is added, so cyborgs count as both
+infantry and vehicles for weapon Versus tables. True vehicles and walkers do
+not use this pattern.
+
+⚠ **The two armors are AVERAGED, not multiplied** (W20/W21 R5, live since
+2026-08-15): `AreaDamageWarhead.MultiArmorCombination` defaults to `Average`,
+so `Plate` 88 with `Superheavy` 10 resolves to 49, not 8. **Never add a
+`DamageMultiplier@<role>: Modifier: 200` to compensate** — that was the old
+recipe, it fought the ENGINE's multiplication rather than the design, and all
+7 instances were deleted when averaging landed. R1 abolishes `DamageMultiplier`
+generally; toughness is a visible `ArmorPlating` bar, never an invisible knob.
+⚠ Warheads still declaring inline `Versus` on `SpreadDamage` keep multiplying
+until item A5 retires them onto `^Warhead_*` templates.
 
 **Cybernetic Plating shield rule.** CABAL cyborg infantry do NOT have an
 innate `Shielded` trait. Instead, the `cabal_upgrade_cyberneticplating`

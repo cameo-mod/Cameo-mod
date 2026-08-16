@@ -124,7 +124,6 @@
 | `DamageMultiplier@BunkerBuff` |
 | `DamageMultiplier@CEMENTFACTORY` |
 | `DamageMultiplier@COMMANDOCALL` |
-| `DamageMultiplier@COMMANDODEBUFF` |
 | `DamageMultiplier@CloseCombatInfantryBuff` |
 | `DamageMultiplier@Concrete` |
 | `DamageMultiplier@D2K_Og_Buff` |
@@ -188,6 +187,7 @@
 | `DamageMultiplier@Runes` |
 | `DamageMultiplier@SClass` |
 | `DamageMultiplier@SIEGEMAMMOTHPARITY` |
+| `DamageMultiplier@SONICDEBUFF` |
 | `DamageMultiplier@Salvaged1` |
 | `DamageMultiplier@Scout` |
 | `DamageMultiplier@ScoutInfantryBuff` |
@@ -1600,7 +1600,6 @@
 | `SpeedMultiplier@AsianPhalanx5` |
 | `SpeedMultiplier@AttackSlow` |
 | `SpeedMultiplier@COMMANDOCALL` |
-| `SpeedMultiplier@COMMANDODEBUFF` |
 | `SpeedMultiplier@CRITICALDAMAGE` |
 | `SpeedMultiplier@DAMAGED` |
 | `SpeedMultiplier@DEPLOY` |
@@ -1673,6 +1672,7 @@
 | `SpeedMultiplier@RobotEnergizable3` |
 | `SpeedMultiplier@RobotEnergizable4` |
 | `SpeedMultiplier@RobotEnergizable5` |
+| `SpeedMultiplier@SONICDEBUFF` |
 | `SpeedMultiplier@SQUID` |
 | `SpeedMultiplier@SWTargetableWalker` |
 | `SpeedMultiplier@Salvaged1` |

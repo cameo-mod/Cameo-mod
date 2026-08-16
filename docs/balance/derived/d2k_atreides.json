@@ -1,0 +1,32 @@
+{
+ "ledger": "d2k_atreides",
+ "pack": "mods/cameo/ContentPacks/D2k/Atreides",
+ "schema": 2,
+ "sections": {
+  "vehicles": {
+   "combat_tank.atreides": {
+    "armaments": [
+     {
+      "avg_versus": 0.937,
+      "damage_total": 8000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 16211.51,
+      "effective_dps": 499.54,
+      "effective_per_shot": 12488.47,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9633,
+      "factor_targets": 0.95,
+      "footprint": 4.3503,
+      "k": 1.7058,
+      "k_context": 1.5611,
+      "overkill": 0.9771,
+      "reliability": 0.9389,
+      "sigma": 176.0,
+      "slot": "Armament",
+      "weapon": "80mm_A"
+     }
+    ]
+   }
+  }
+ }
+}

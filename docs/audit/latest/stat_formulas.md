@@ -1,6 +1,6 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **783** across 1909 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **785** across 1910 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
 ## F1 — Repairable.HpPerStep ≠ HP/20  (41)
@@ -814,7 +814,7 @@ _none found_
 | zerg_scourge | TurnSpeed 40 (Speed 200) | expected 13 = Speed/15 |
 
 
-## F18 — weapons targeting Air whose damage warheads can't hit Air  (22)
+## F18 — weapons targeting Air whose damage warheads can't hit Air  (24)
 
 | actor | actual | expected |
 |---|---|---|
@@ -827,7 +827,7 @@ _none found_
 | naxdieglocke | Warhead@Chemical_Heavy, Warhead@Chemical_Heavy_Percentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by schwarzermond_dieglocke) |
 | pdlaserbike | Warhead@1Dam | targets Air but no damage warhead hits Air (used by td_nod_chemicalattackbike, td_nod_reconbike) |
 | pdlaserltnk2 | Warhead@1Dam | targets Air but no damage warhead hits Air (used by td_nod_lighttankmkii) |
-| psionicshockwave | Warhead@Tesla_Super, Warhead@Tesla_Super_Percentage, Warhead@Tesla_Super_ExtraDamage, Warhead@TeslaChargedExtraDamage | targets Air but no damage warhead hits Air (used by protoss_archon) |
+| psionicshockwave | Warhead@Tesla_Super, Warhead@Tesla_Super_Percentage, Warhead@Tesla_Super_ExtraDamage | targets Air but no damage warhead hits Air (used by protoss_archon) |
 | sciencevesseldefensematrix | Warhead@1 | targets Air but no damage warhead hits Air (used by terran_sciencevessel) |
 | tkmpdlaser | Warhead@1Dam | targets Air but no damage warhead hits Air (used by tkm_t72m) |
 | tsassaultcannon | Warhead@Flak_Medium, Warhead@Flak_Medium_Percentage, Warhead@Bullet_Medium, Warhead@Bullet_Medium_Percentage | targets Air but no damage warhead hits Air (used by ts_gdi_wolverine) |
@@ -838,6 +838,8 @@ _none found_
 | tsfiendshardup | Warhead@LightChemicalWeapon, Warhead@LightChemicalWeaponFriendlyFire, Warhead@LightChemicalWeaponPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by forgotten_tiberianfiend) |
 | tstacticalchemmissile | Warhead@Concrete | targets Air but no damage warhead hits Air (used by ts_nod_missilesilo) |
 | tstacticalmissile | Warhead@Concrete | targets Air but no damage warhead hits Air (used by ts_nod_missilesilo) |
+| venomlaserburning | Warhead@Inferno_Medium, Warhead@Inferno_Medium_Percentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by td_nod_venom) |
+| venomlaserinferno | Warhead@Inferno_Medium, Warhead@Inferno_Medium_Percentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by td_nod_venom) |
 | wc2deathknightdeathanddecay | Warhead@1Dam_impact | targets Air but no damage warhead hits Air (used by wc2_orcs_deathknight) |
 | wc2mageblizzard | Warhead@1Dam_impact | targets Air but no damage warhead hits Air (used by wc2_humans_archmage, wc2_humans_mage) |
 

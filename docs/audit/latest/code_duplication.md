@@ -1,12 +1,12 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **199** (min 5 statements), C# files: **325** (min 8 lines)
+Python files: **217** (min 5 statements), C# files: **325** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
 | C1 | identical Python function bodies | 10 | 10 |
 | C2 | identical C# method bodies | 14 | 14 |
-| C3 | identical module-level literal tables | 10 | 10 |
+| C3 | identical module-level literal tables | 11 | 10 |
 
 
 ## C1 — Python function clones (10 group(s))
@@ -45,11 +45,11 @@ Python files: **199** (min 5 statements), C# files: **325** (min 8 lines)
 | 2 | fccb77d01668aded | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:825 CountQueuedBuildings(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:833 SellUselessRefinery() |
 
 
-## C3 — Duplicated constant tables (10 group(s))
+## C3 — Duplicated constant tables (11 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
-| 5 | 28fac3656bc8fc3b | tools/audit/find_orphan_old_keys.py:20 CENTRAL; tools/audit/find_orphan_old_keys_multi.py:18 CENTRAL; tools/audit/phase_b_survey.py:15 CENTRAL; tools/balance/fix_orphan_old_keys.py:19 CENTRAL; tools/balance/fix_orphan_old_keys_multi.py:16 CENTRAL |
+| 5 | 28fac3656bc8fc3b | tools/audit/find_orphan_old_keys.py:20 CENTRAL; tools/audit/find_orphan_old_keys_multi.py:18 CENTRAL; tools/audit/weapon_families.py:23 CENTRAL; tools/balance/fix_orphan_old_keys.py:19 CENTRAL; tools/balance/fix_orphan_old_keys_multi.py:16 CENTRAL |
 | 2 | 153d4fc74c8cdd31 | tools/tilesets/build_ra_temperate_basalt_trees.py:20 ACTORS; tools/tilesets/build_volcanic_basalt_gimp_brushes.py:20 ACTORS |
 | 2 | 2665d6950cd4417a | tools/audit/find_orphan_old_keys.py:27 OLD_TO_NEW; tools/balance/fix_orphan_old_keys.py:25 OLD_TO_NEW |
 | 2 | 4979d18fd8f148a1 | tools/tilesets/detect_cliff_dark_noise.py:14 BLACK; tools/tilesets/process_ai_edge_mask.py:15 BLACK |
@@ -59,4 +59,10 @@ Python files: **199** (min 5 statements), C# files: **325** (min 8 lines)
 | 2 | 985c1fe34e42db41 | tools/audit/find_empty_warhead.py:16 CENTRAL; tools/balance/sweep_areadamage.py:25 CENTRAL |
 | 2 | c15459229a835d70 | tools/tilesets/build_tc_basalt_from_gimp.py:18 ACTORS; tools/tilesets/fix_tc_basalt_shadow_outlines.py:18 ACTORS |
 | 2 | de57d7955065e638 | tools/balance/gen_effects.py:34 LEVELORDER; tools/balance/gen_projectiles.py:30 LEVELORDER |
+| 2 | eed204ad8ec23410 | tools/audit/propose_sonic_mapping.py:104 OLD_FAMILIES; tools/audit/weapon_families.py:29 OLD_FAMILIES |
+
+
+## FAIL
+
+- C3: 11 > baseline 10
 

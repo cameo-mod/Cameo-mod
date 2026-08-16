@@ -1,0 +1,1484 @@
+{
+ "ledger": "tiberiansun_cabal",
+ "pack": "mods/cameo/ContentPacks/TiberianSun/CABAL",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "cabal_cyborgassassin": {
+    "armaments": [
+     {
+      "avg_versus": 0.6996,
+      "damage_total": 7000.0,
+      "eff_reload": 21.0,
+      "effective_damage": 7239.68,
+      "effective_dps": 537.69,
+      "effective_per_shot": 5645.76,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0129,
+      "factor_targets": 1.0,
+      "footprint": 0.6491,
+      "k": 0.7963,
+      "k_context": 0.8065,
+      "overkill": 0.9967,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalWaspLaserStriker"
+     }
+    ]
+   },
+   "cabal_hunterdrone": {
+    "armaments": [
+     {
+      "avg_versus": 0.7287,
+      "damage_total": 9000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 9394.48,
+      "effective_dps": 233.67,
+      "effective_per_shot": 7009.97,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9207,
+      "factor_targets": 1.0,
+      "footprint": 0.7989,
+      "k": 0.846,
+      "k_context": 0.7789,
+      "overkill": 0.9729,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalOverkillDroneLaser"
+     }
+    ]
+   },
+   "cabal_hunterdronecarrier": {
+    "armaments": [
+     {
+      "avg_versus": 0.8959,
+      "damage_total": 25000.0,
+      "eff_reload": 125.0,
+      "effective_damage": 25734.03,
+      "effective_dps": 219.02,
+      "effective_per_shot": 27377.19,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0167,
+      "factor_targets": 1.0,
+      "footprint": 0.6392,
+      "k": 1.0771,
+      "k_context": 1.0951,
+      "overkill": 0.9284,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@charge",
+      "weapon": "CabalOverkillCharge"
+     },
+     {
+      "avg_versus": 0.5177,
+      "damage_total": 3000.0,
+      "eff_reload": 99.0,
+      "effective_damage": 3184.76,
+      "effective_dps": 971.35,
+      "effective_per_shot": 1923.27,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0167,
+      "factor_targets": 1.0,
+      "footprint": 0.6392,
+      "k": 0.6306,
+      "k_context": 0.6411,
+      "overkill": 0.9974,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "CabalOverkillLaser"
+     }
+    ]
+   },
+   "cabal_hunterkillermk1": {
+    "armaments": [
+     {
+      "avg_versus": 0.5951,
+      "damage_total": 16600.0,
+      "eff_reload": 24.0,
+      "effective_damage": 16978.0,
+      "effective_dps": 399.89,
+      "effective_per_shot": 9597.33,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9716,
+      "factor_targets": 1.0,
+      "footprint": 0.2721,
+      "k": 0.5951,
+      "k_context": 0.5782,
+      "overkill": 0.9641,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalHunterKillerLasers"
+     },
+     {
+      "avg_versus": 0.6589,
+      "damage_total": 24000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 23041.0,
+      "effective_dps": 709.2,
+      "effective_per_shot": 14184.1,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9892,
+      "factor_targets": 1.0,
+      "footprint": 7.9401,
+      "k": 0.5975,
+      "k_context": 0.591,
+      "overkill": 0.9963,
+      "reliability": 0.6292,
+      "sigma": 329.6,
+      "slot": "Armament@ROCKETS",
+      "weapon": "TSHellfireTwin"
+     }
+    ]
+   },
+   "cabal_hunterkillermk1_elite": {
+    "armaments": [
+     {
+      "avg_versus": 0.6567,
+      "damage_total": 31600.0,
+      "eff_reload": 20.0,
+      "effective_damage": 32786.94,
+      "effective_dps": 1037.62,
+      "effective_per_shot": 20752.47,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0,
+      "factor_targets": 1.0,
+      "footprint": 0.784,
+      "k": 0.6567,
+      "k_context": 0.6567,
+      "overkill": 0.9637,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalHunterKillerLasers_elite"
+     },
+     {
+      "avg_versus": 0.6589,
+      "damage_total": 24000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 23041.0,
+      "effective_dps": 709.2,
+      "effective_per_shot": 14184.1,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9892,
+      "factor_targets": 1.0,
+      "footprint": 7.9401,
+      "k": 0.5975,
+      "k_context": 0.591,
+      "overkill": 0.9963,
+      "reliability": 0.6292,
+      "sigma": 329.6,
+      "slot": "Armament@ROCKETS",
+      "weapon": "TSHellfireTwin"
+     }
+    ]
+   },
+   "cabal_mothership": {
+    "armaments": [
+     {
+      "avg_versus": 0.6498,
+      "damage_total": 21000.0,
+      "eff_reload": 26.0,
+      "effective_damage": 21634.17,
+      "effective_dps": 659.72,
+      "effective_per_shot": 17152.61,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0071,
+      "factor_targets": 1.0,
+      "footprint": 0.6392,
+      "k": 0.811,
+      "k_context": 0.8168,
+      "overkill": 0.9786,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalHunterKillerHeavyLaser"
+     },
+     {
+      "avg_versus": 0.6785,
+      "damage_total": 65000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 60906.37,
+      "effective_dps": 3489.21,
+      "effective_per_shot": 34892.06,
+      "factor_deadzone": 0.9599,
+      "factor_range": 0.9936,
+      "factor_targets": 1.0,
+      "footprint": 9.5247,
+      "k": 0.5628,
+      "k_context": 0.5368,
+      "overkill": 0.9112,
+      "reliability": 0.5811,
+      "sigma": 546.77,
+      "slot": "Armament@ROCKETS",
+      "weapon": "CabalMothershipRockets"
+     }
+    ]
+   },
+   "cabal_orbdrone": {
+    "armaments": [
+     {
+      "avg_versus": 0.6996,
+      "damage_total": 7000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 7239.68,
+      "effective_dps": 283.58,
+      "effective_per_shot": 5671.54,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0175,
+      "factor_targets": 1.0,
+      "footprint": 0.6491,
+      "k": 0.7963,
+      "k_context": 0.8102,
+      "overkill": 0.9967,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalWaspLaser"
+     }
+    ]
+   },
+   "cabal_orbdrone_slave": {
+    "armaments": [
+     {
+      "avg_versus": 0.6996,
+      "damage_total": 7000.0,
+      "eff_reload": 20.0,
+      "effective_damage": 7239.68,
+      "effective_dps": 283.58,
+      "effective_per_shot": 5671.54,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0175,
+      "factor_targets": 1.0,
+      "footprint": 0.6491,
+      "k": 0.7963,
+      "k_context": 0.8102,
+      "overkill": 0.9967,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalWaspLaser"
+     }
+    ]
+   },
+   "cabal_overkillgunship": {
+    "armaments": [
+     {
+      "avg_versus": 0.6376,
+      "damage_total": 13500.0,
+      "eff_reload": 40.0,
+      "effective_damage": 15680.13,
+      "effective_dps": 257.51,
+      "effective_per_shot": 10300.38,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0,
+      "factor_targets": 1.0,
+      "footprint": 1.1938,
+      "k": 0.763,
+      "k_context": 0.763,
+      "overkill": 0.9708,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@LEFT",
+      "weapon": "CabalOverkillGunshipLaser"
+     },
+     {
+      "avg_versus": 0.6376,
+      "damage_total": 13500.0,
+      "eff_reload": 40.0,
+      "effective_damage": 15680.13,
+      "effective_dps": 257.51,
+      "effective_per_shot": 10300.38,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0,
+      "factor_targets": 1.0,
+      "footprint": 1.1938,
+      "k": 0.763,
+      "k_context": 0.763,
+      "overkill": 0.9708,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@RIGHT",
+      "weapon": "CabalOverkillGunshipLaser"
+     }
+    ]
+   }
+  },
+  "defenses": {
+   "cabal_heavycabalobelisk": {
+    "armaments": [
+     {
+      "avg_versus": 0.6698,
+      "damage_total": 280600.0,
+      "eff_reload": 90.0,
+      "effective_damage": 383633.81,
+      "effective_dps": 3290.54,
+      "effective_per_shot": 296149.03,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.262,
+      "factor_targets": 0.95,
+      "footprint": 5.9768,
+      "k": 0.8803,
+      "k_context": 1.0554,
+      "overkill": 0.8097,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSCABALObeliskLaserFire"
+     }
+    ]
+   },
+   "cabal_obeliskofdarkness": {
+    "armaments": [
+     {
+      "avg_versus": 0.6594,
+      "damage_total": 37000.0,
+      "eff_reload": 50.0,
+      "effective_damage": 42752.43,
+      "effective_dps": 456.67,
+      "effective_per_shot": 22833.5,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.262,
+      "factor_targets": 0.55,
+      "footprint": 1.1635,
+      "k": 0.8891,
+      "k_context": 0.6171,
+      "overkill": 0.8685,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "DarkObeliskLaser"
+     }
+    ]
+   },
+   "cabal_plasmaturret": {
+    "armaments": [
+     {
+      "avg_versus": 0.7559,
+      "damage_total": 21000.0,
+      "eff_reload": 25.0,
+      "effective_damage": 22283.31,
+      "effective_dps": 733.26,
+      "effective_per_shot": 18331.54,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0203,
+      "factor_targets": 0.95,
+      "footprint": 0.9987,
+      "k": 0.9006,
+      "k_context": 0.8729,
+      "overkill": 0.9614,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSCABALPlasmaFire"
+     }
+    ]
+   }
+  },
+  "infantry": {
+   "cabal_ascended": {
+    "armaments": [
+     {
+      "avg_versus": 0.6029,
+      "damage_total": 36000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 11604.01,
+      "effective_dps": 212.75,
+      "effective_per_shot": 7233.43,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.125,
+      "factor_targets": 1.0,
+      "footprint": 0.8938,
+      "k": 0.1786,
+      "k_context": 0.2009,
+      "overkill": 0.972,
+      "reliability": 0.2851,
+      "sigma": 524.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalAscendedRockets"
+     },
+     {
+      "avg_versus": 0.6029,
+      "damage_total": 36000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 11604.01,
+      "effective_dps": 212.75,
+      "effective_per_shot": 7233.43,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.125,
+      "factor_targets": 1.0,
+      "footprint": 0.8938,
+      "k": 0.1786,
+      "k_context": 0.2009,
+      "overkill": 0.972,
+      "reliability": 0.2851,
+      "sigma": 524.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "CabalAscendedRockets"
+     }
+    ]
+   },
+   "cabal_cyborgcommando": {
+    "armaments": [
+     {
+      "avg_versus": 0.7192,
+      "damage_total": 150000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 161758.84,
+      "effective_dps": 1057.06,
+      "effective_per_shot": 95135.44,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9675,
+      "factor_targets": 0.95,
+      "footprint": 6.0442,
+      "k": 0.6901,
+      "k_context": 0.6342,
+      "overkill": 0.9661,
+      "reliability": 0.5747,
+      "sigma": 776.19,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalCommandoPlasma"
+     },
+     {
+      "avg_versus": 0.7315,
+      "damage_total": 302888.0,
+      "eff_reload": 90.0,
+      "effective_damage": 259808.33,
+      "effective_dps": 1694.14,
+      "effective_per_shot": 152472.21,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9675,
+      "factor_targets": 0.95,
+      "footprint": 11.0498,
+      "k": 0.5477,
+      "k_context": 0.5034,
+      "overkill": 0.6028,
+      "reliability": 0.5681,
+      "sigma": 426.19,
+      "slot": "Armament@Upgraded",
+      "weapon": "CabalCommandoPlasmaNeutron"
+     },
+     {
+      "avg_versus": 0.7192,
+      "damage_total": 150000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 161758.84,
+      "effective_dps": 1057.06,
+      "effective_per_shot": 95135.44,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9675,
+      "factor_targets": 0.95,
+      "footprint": 6.0442,
+      "k": 0.6901,
+      "k_context": 0.6342,
+      "overkill": 0.9661,
+      "reliability": 0.5747,
+      "sigma": 776.19,
+      "slot": "Armament@GARRISONED",
+      "weapon": "CabalCommandoPlasma"
+     },
+     {
+      "avg_versus": 0.7315,
+      "damage_total": 302888.0,
+      "eff_reload": 90.0,
+      "effective_damage": 259808.33,
+      "effective_dps": 1694.14,
+      "effective_per_shot": 152472.21,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9675,
+      "factor_targets": 0.95,
+      "footprint": 11.0498,
+      "k": 0.5477,
+      "k_context": 0.5034,
+      "overkill": 0.6028,
+      "reliability": 0.5681,
+      "sigma": 426.19,
+      "slot": "Armament@GARRISONEDUpgraded",
+      "weapon": "CabalCommandoPlasmaNeutron"
+     }
+    ]
+   },
+   "cabal_cyborgcommandov2": {
+    "armaments": [
+     {
+      "avg_versus": 0.7192,
+      "damage_total": 150000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 157938.09,
+      "effective_dps": 1075.32,
+      "effective_per_shot": 96778.57,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.011,
+      "factor_targets": 0.95,
+      "footprint": 6.0442,
+      "k": 0.6718,
+      "k_context": 0.6452,
+      "overkill": 0.9924,
+      "reliability": 0.5492,
+      "sigma": 841.5,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalCommandoPlasmaMk2"
+     },
+     {
+      "avg_versus": 0.7315,
+      "damage_total": 302888.0,
+      "eff_reload": 90.0,
+      "effective_damage": 247805.47,
+      "effective_dps": 1676.43,
+      "effective_per_shot": 150878.46,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.011,
+      "factor_targets": 0.95,
+      "footprint": 11.0498,
+      "k": 0.5186,
+      "k_context": 0.4981,
+      "overkill": 0.6366,
+      "reliability": 0.5284,
+      "sigma": 491.5,
+      "slot": "Armament@Upgraded",
+      "weapon": "CabalCommandoPlasmaMk2Neutron"
+     },
+     {
+      "avg_versus": 0.7192,
+      "damage_total": 150000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 157938.09,
+      "effective_dps": 1075.32,
+      "effective_per_shot": 96778.57,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.011,
+      "factor_targets": 0.95,
+      "footprint": 6.0442,
+      "k": 0.6718,
+      "k_context": 0.6452,
+      "overkill": 0.9924,
+      "reliability": 0.5492,
+      "sigma": 841.5,
+      "slot": "Armament@GARRISONED",
+      "weapon": "CabalCommandoPlasmaMk2"
+     },
+     {
+      "avg_versus": 0.7315,
+      "damage_total": 302888.0,
+      "eff_reload": 90.0,
+      "effective_damage": 247805.47,
+      "effective_dps": 1676.43,
+      "effective_per_shot": 150878.46,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.011,
+      "factor_targets": 0.95,
+      "footprint": 11.0498,
+      "k": 0.5186,
+      "k_context": 0.4981,
+      "overkill": 0.6366,
+      "reliability": 0.5284,
+      "sigma": 491.5,
+      "slot": "Armament@GARRISONEDUpgraded",
+      "weapon": "CabalCommandoPlasmaMk2Neutron"
+     }
+    ]
+   },
+   "cabal_cyborginfantry": {
+    "armaments": [
+     {
+      "avg_versus": 0.905,
+      "damage_total": 20000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 16327.17,
+      "effective_dps": 244.49,
+      "effective_per_shot": 14669.12,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9917,
+      "factor_targets": 1.0,
+      "footprint": 0.5193,
+      "k": 0.7396,
+      "k_context": 0.7335,
+      "overkill": 0.9657,
+      "reliability": 0.7514,
+      "sigma": 229.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalCyborgChaingun"
+     },
+     {
+      "avg_versus": 0.905,
+      "damage_total": 20000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 16327.17,
+      "effective_dps": 244.49,
+      "effective_per_shot": 14669.12,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9917,
+      "factor_targets": 1.0,
+      "footprint": 0.5193,
+      "k": 0.7396,
+      "k_context": 0.7335,
+      "overkill": 0.9657,
+      "reliability": 0.7514,
+      "sigma": 229.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "CabalCyborgChaingun"
+     }
+    ]
+   },
+   "cabal_devout": {
+    "armaments": [
+     {
+      "avg_versus": 0.905,
+      "damage_total": 24000.0,
+      "eff_reload": 48.0,
+      "effective_damage": 19540.5,
+      "effective_dps": 743.36,
+      "effective_per_shot": 17840.53,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0083,
+      "factor_targets": 1.0,
+      "footprint": 0.5193,
+      "k": 0.7372,
+      "k_context": 0.7434,
+      "overkill": 0.942,
+      "reliability": 0.7493,
+      "sigma": 231.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSDevoutChainguns"
+     },
+     {
+      "avg_versus": 0.905,
+      "damage_total": 24000.0,
+      "eff_reload": 48.0,
+      "effective_damage": 19540.5,
+      "effective_dps": 743.36,
+      "effective_per_shot": 17840.53,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0083,
+      "factor_targets": 1.0,
+      "footprint": 0.5193,
+      "k": 0.7372,
+      "k_context": 0.7434,
+      "overkill": 0.942,
+      "reliability": 0.7493,
+      "sigma": 231.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSDevoutChainguns"
+     }
+    ]
+   },
+   "cabal_dissolver": {
+    "armaments": [
+     {
+      "avg_versus": 0.636,
+      "damage_total": 4000.0,
+      "eff_reload": 4.0,
+      "effective_damage": 1467.37,
+      "effective_dps": 157.26,
+      "effective_per_shot": 629.04,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9643,
+      "factor_targets": 0.95,
+      "footprint": 0.8299,
+      "k": 0.1717,
+      "k_context": 0.1573,
+      "overkill": 0.9974,
+      "reliability": 0.2631,
+      "sigma": 913.72,
+      "slot": "Armament",
+      "weapon": "CabalDissolverSpray"
+     }
+    ]
+   },
+   "cabal_eliminator800": {
+    "armaments": [
+     {
+      "avg_versus": 0.8946,
+      "damage_total": 4000.0,
+      "eff_reload": 5.0,
+      "effective_damage": 3563.16,
+      "effective_dps": 1085.07,
+      "effective_per_shot": 5425.36,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.994,
+      "factor_targets": 1.0,
+      "footprint": 0.3595,
+      "k": 1.3645,
+      "k_context": 1.3563,
+      "overkill": 0.9904,
+      "reliability": 0.8009,
+      "sigma": 229.28,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalEliminatorGatling"
+     },
+     {
+      "avg_versus": 0.8946,
+      "damage_total": 4000.0,
+      "eff_reload": 5.0,
+      "effective_damage": 3563.16,
+      "effective_dps": 1085.07,
+      "effective_per_shot": 5425.36,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.994,
+      "factor_targets": 1.0,
+      "footprint": 0.3595,
+      "k": 1.3645,
+      "k_context": 1.3563,
+      "overkill": 0.9904,
+      "reliability": 0.8009,
+      "sigma": 229.28,
+      "slot": "Armament@GARRISONED",
+      "weapon": "CabalEliminatorGatling"
+     }
+    ]
+   },
+   "cabal_enlighted": {
+    "armaments": [
+     {
+      "avg_versus": 0.6698,
+      "damage_total": 280600.0,
+      "eff_reload": 25.0,
+      "effective_damage": 383633.81,
+      "effective_dps": 9042.48,
+      "effective_per_shot": 226061.99,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9633,
+      "factor_targets": 0.95,
+      "footprint": 5.9768,
+      "k": 0.8803,
+      "k_context": 0.8056,
+      "overkill": 0.8097,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "TSCABALEnlightedLaser"
+     },
+     {
+      "avg_versus": 0.6698,
+      "damage_total": 280600.0,
+      "eff_reload": 25.0,
+      "effective_damage": 383633.81,
+      "effective_dps": 9042.48,
+      "effective_per_shot": 226061.99,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9633,
+      "factor_targets": 0.95,
+      "footprint": 5.9768,
+      "k": 0.8803,
+      "k_context": 0.8056,
+      "overkill": 0.8097,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@GARRISONED",
+      "weapon": "TSCABALEnlightedLaser"
+     }
+    ]
+   },
+   "cabal_hackercyborg": {
+    "armaments": [
+     {
+      "avg_versus": 1.0,
+      "damage_total": 1.0,
+      "eff_reload": 6.0,
+      "effective_damage": 1.0,
+      "effective_dps": 0.17,
+      "effective_per_shot": 1.03,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0833,
+      "factor_targets": 0.95,
+      "footprint": 0.01,
+      "k": 1.0,
+      "k_context": 1.0292,
+      "overkill": 1.0,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Anim",
+      "weapon": "TSCABALCharge_EMP"
+     },
+     {
+      "avg_versus": 1.1544,
+      "damage_total": 3000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 3544.28,
+      "effective_dps": 595.9,
+      "effective_per_shot": 4767.2,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0833,
+      "factor_targets": 0.95,
+      "footprint": 2.1671,
+      "k": 1.544,
+      "k_context": 1.5891,
+      "overkill": 0.9813,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@End",
+      "weapon": "TSCABALDisable_EMP"
+     }
+    ]
+   },
+   "cabal_rocketcyborg": {
+    "armaments": [
+     {
+      "avg_versus": 0.9107,
+      "damage_total": 12000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 19981.65,
+      "effective_dps": 741.78,
+      "effective_per_shot": 16813.74,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.1147,
+      "factor_targets": 1.0,
+      "footprint": 7.1082,
+      "k": 1.257,
+      "k_context": 1.4011,
+      "overkill": 0.9471,
+      "reliability": 0.7766,
+      "sigma": 450.12,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalRocketCyborgRockets"
+     },
+     {
+      "avg_versus": 0.9107,
+      "damage_total": 12000.0,
+      "eff_reload": 76.0,
+      "effective_damage": 19981.65,
+      "effective_dps": 884.93,
+      "effective_per_shot": 16813.74,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.1147,
+      "factor_targets": 1.0,
+      "footprint": 7.1082,
+      "k": 1.257,
+      "k_context": 1.4011,
+      "overkill": 0.9471,
+      "reliability": 0.7766,
+      "sigma": 450.12,
+      "slot": "Armament@Upgraded",
+      "weapon": "CabalRocketCyborgRocketsUpgraded"
+     },
+     {
+      "avg_versus": 0.9107,
+      "damage_total": 12000.0,
+      "eff_reload": 68.0,
+      "effective_damage": 19981.65,
+      "effective_dps": 741.78,
+      "effective_per_shot": 16813.74,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.1147,
+      "factor_targets": 1.0,
+      "footprint": 7.1082,
+      "k": 1.257,
+      "k_context": 1.4011,
+      "overkill": 0.9471,
+      "reliability": 0.7766,
+      "sigma": 450.12,
+      "slot": "Armament@GARRISONED",
+      "weapon": "CabalRocketCyborgRockets"
+     }
+    ]
+   }
+  },
+  "naval": {
+   "cabal_lazerboat": {
+    "armaments": [
+     {
+      "avg_versus": 0.6606,
+      "damage_total": 41000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 42133.51,
+      "effective_dps": 386.03,
+      "effective_per_shot": 34743.0,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0061,
+      "factor_targets": 1.0,
+      "footprint": 0.6392,
+      "k": 0.8422,
+      "k_context": 0.8474,
+      "overkill": 0.9653,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalLaserBoatLaser"
+     },
+     {
+      "avg_versus": 0.6594,
+      "damage_total": 37000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 42752.43,
+      "effective_dps": 209.41,
+      "effective_per_shot": 18846.99,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0417,
+      "factor_targets": 0.55,
+      "footprint": 1.1635,
+      "k": 0.8891,
+      "k_context": 0.5094,
+      "overkill": 0.8685,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@AA",
+      "weapon": "CabalLaserBoatLaserAA"
+     },
+     {
+      "avg_versus": 0.9282,
+      "damage_total": 60000.0,
+      "eff_reload": 60.0,
+      "effective_damage": 66364.59,
+      "effective_dps": 928.39,
+      "effective_per_shot": 55703.4,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0,
+      "factor_targets": 1.0,
+      "footprint": 2.758,
+      "k": 0.9284,
+      "k_context": 0.9284,
+      "overkill": 0.8976,
+      "reliability": 0.4166,
+      "sigma": 1360.0,
+      "slot": "Armament@SECONDARY",
+      "weapon": "DepthCharge"
+     }
+    ]
+   },
+   "cabal_plasmasub": {
+    "armaments": [
+     {
+      "avg_versus": 0.7192,
+      "damage_total": 75000.0,
+      "eff_reload": 45.0,
+      "effective_damage": 70823.69,
+      "effective_dps": 1175.64,
+      "effective_per_shot": 52903.7,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.25,
+      "factor_targets": 0.95,
+      "footprint": 6.0442,
+      "k": 0.594,
+      "k_context": 0.7054,
+      "overkill": 0.8979,
+      "reliability": 0.4406,
+      "sigma": 1200.0,
+      "slot": "Armament",
+      "weapon": "CabalSubmarinePlasma"
+     }
+    ]
+   },
+   "cabal_radar_cruiser": {
+    "armaments": [
+     {
+      "avg_versus": 1.0,
+      "damage_total": 1.0,
+      "eff_reload": 6.0,
+      "effective_damage": 1.0,
+      "effective_dps": 0.17,
+      "effective_per_shot": 1.03,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0833,
+      "factor_targets": 0.95,
+      "footprint": 0.01,
+      "k": 1.0,
+      "k_context": 1.0292,
+      "overkill": 1.0,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@Anim",
+      "weapon": "TSCABALCharge_EMP"
+     },
+     {
+      "avg_versus": 1.1544,
+      "damage_total": 3000.0,
+      "eff_reload": 8.0,
+      "effective_damage": 3544.28,
+      "effective_dps": 595.9,
+      "effective_per_shot": 4767.2,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0833,
+      "factor_targets": 0.95,
+      "footprint": 2.1671,
+      "k": 1.544,
+      "k_context": 1.5891,
+      "overkill": 0.9813,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@End",
+      "weapon": "TSCABALDisable_EMP"
+     }
+    ]
+   }
+  },
+  "vehicles": {
+   "cabal_artilleryspider": {
+    "armaments": [
+     {
+      "avg_versus": 0.6951,
+      "damage_total": 168000.0,
+      "eff_reload": 64.0,
+      "effective_damage": 127526.7,
+      "effective_dps": 1374.5,
+      "effective_per_shot": 87968.3,
+      "factor_deadzone": 0.96,
+      "factor_range": 1.2325,
+      "factor_targets": 0.95,
+      "footprint": 7.4882,
+      "k": 0.4658,
+      "k_context": 0.5236,
+      "overkill": 0.8519,
+      "reliability": 0.2911,
+      "sigma": 1527.14,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalArtilleryWalkerShell"
+     },
+     {
+      "avg_versus": 0.7247,
+      "damage_total": 338888.0,
+      "eff_reload": 64.0,
+      "effective_damage": 210814.99,
+      "effective_dps": 2337.71,
+      "effective_per_shot": 149613.16,
+      "factor_deadzone": 0.96,
+      "factor_range": 1.2325,
+      "factor_targets": 1.0,
+      "footprint": 17.3714,
+      "k": 0.3731,
+      "k_context": 0.4415,
+      "overkill": 0.7909,
+      "reliability": 0.2572,
+      "sigma": 1527.14,
+      "slot": "Armament@Upgraded",
+      "weapon": "CabalArtilleryWalkerShellUpgraded"
+     }
+    ]
+   },
+   "cabal_avatar": {
+    "armaments": [
+     {
+      "avg_versus": 0.6662,
+      "damage_total": 81000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 83132.19,
+      "effective_dps": 977.62,
+      "effective_per_shot": 68433.12,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0138,
+      "factor_targets": 1.0,
+      "footprint": 0.6392,
+      "k": 0.8333,
+      "k_context": 0.8449,
+      "overkill": 0.9877,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalAvatarLaser"
+     },
+     {
+      "avg_versus": 0.6662,
+      "damage_total": 81000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 83132.19,
+      "effective_dps": 977.62,
+      "effective_per_shot": 68433.12,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0138,
+      "factor_targets": 1.0,
+      "footprint": 0.6392,
+      "k": 0.8333,
+      "k_context": 0.8449,
+      "overkill": 0.9877,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@RIGHT",
+      "weapon": "CabalAvatarLaser"
+     }
+    ]
+   },
+   "cabal_beholder": {
+    "armaments": [
+     {
+      "avg_versus": 0.7094,
+      "damage_total": 46600.0,
+      "eff_reload": 55.0,
+      "effective_damage": 48092.79,
+      "effective_dps": 975.52,
+      "effective_per_shot": 26826.83,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.8542,
+      "factor_targets": 0.95,
+      "footprint": 1.176,
+      "k": 0.7094,
+      "k_context": 0.5757,
+      "overkill": 0.8642,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalBeholderLaser"
+     }
+    ]
+   },
+   "cabal_berserker": {
+    "armaments": [
+     {
+      "avg_versus": 0.7031,
+      "damage_total": 74000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 153862.97,
+      "effective_dps": 8124.88,
+      "effective_per_shot": 108331.78,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.8353,
+      "factor_targets": 0.95,
+      "footprint": 4.3503,
+      "k": 1.8448,
+      "k_context": 1.4639,
+      "overkill": 0.7325,
+      "reliability": 0.9917,
+      "sigma": 24.01,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalBerserkerBlades"
+     }
+    ]
+   },
+   "cabal_coredefender": {
+    "armaments": [
+     {
+      "avg_versus": 0.669,
+      "damage_total": 161000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 165129.56,
+      "effective_dps": 1952.2,
+      "effective_per_shot": 136653.85,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0138,
+      "factor_targets": 1.0,
+      "footprint": 0.6392,
+      "k": 0.8372,
+      "k_context": 0.8488,
+      "overkill": 0.7419,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament",
+      "weapon": "CabalCoreDefenderLaser"
+     },
+     {
+      "avg_versus": 0.669,
+      "damage_total": 161000.0,
+      "eff_reload": 70.0,
+      "effective_damage": 165129.56,
+      "effective_dps": 1952.2,
+      "effective_per_shot": 136653.85,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0138,
+      "factor_targets": 1.0,
+      "footprint": 0.6392,
+      "k": 0.8372,
+      "k_context": 0.8488,
+      "overkill": 0.7419,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@RIGHT",
+      "weapon": "CabalCoreDefenderLaser"
+     }
+    ]
+   },
+   "cabal_cyborgreaper": {
+    "armaments": [
+     {
+      "avg_versus": 0.9032,
+      "damage_total": 32000.0,
+      "eff_reload": 36.0,
+      "effective_damage": 55138.4,
+      "effective_dps": 2355.18,
+      "effective_per_shot": 42393.19,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.991,
+      "factor_targets": 0.95,
+      "footprint": 14.2165,
+      "k": 1.4071,
+      "k_context": 1.3248,
+      "overkill": 0.8883,
+      "reliability": 0.8345,
+      "sigma": 331.4,
+      "slot": "Armament",
+      "weapon": "CabalReaperMissiles"
+     },
+     {
+      "avg_versus": 0.9032,
+      "damage_total": 32000.0,
+      "eff_reload": 36.0,
+      "effective_damage": 53328.17,
+      "effective_dps": 1464.19,
+      "effective_per_shot": 26355.46,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.1117,
+      "factor_targets": 0.55,
+      "footprint": 14.2165,
+      "k": 1.347,
+      "k_context": 0.8236,
+      "overkill": 0.928,
+      "reliability": 0.778,
+      "sigma": 447.2,
+      "slot": "Armament@SECONDARY",
+      "weapon": "CabalReaperMissiles_AA"
+     }
+    ]
+   },
+   "cabal_heavyreaper": {
+    "armaments": [
+     {
+      "avg_versus": 0.8842,
+      "damage_total": 48000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 92474.41,
+      "effective_dps": 3374.8,
+      "effective_per_shot": 70870.76,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0035,
+      "factor_targets": 0.95,
+      "footprint": 17.8501,
+      "k": 1.5487,
+      "k_context": 1.4765,
+      "overkill": 0.8968,
+      "reliability": 0.8109,
+      "sigma": 454.25,
+      "slot": "Armament",
+      "weapon": "CabalHeavyReaperMissiles"
+     },
+     {
+      "avg_versus": 0.8842,
+      "damage_total": 48000.0,
+      "eff_reload": 42.0,
+      "effective_damage": 89681.24,
+      "effective_dps": 2111.19,
+      "effective_per_shot": 44334.93,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.1304,
+      "factor_targets": 0.55,
+      "footprint": 17.8501,
+      "k": 1.4856,
+      "k_context": 0.9236,
+      "overkill": 0.9349,
+      "reliability": 0.7527,
+      "sigma": 606.5,
+      "slot": "Armament@SECONDARY",
+      "weapon": "CabalHeavyReaperMissiles_AA"
+     }
+    ]
+   },
+   "cabal_laserspider": {
+    "armaments": [
+     {
+      "avg_versus": 0.6616,
+      "damage_total": 45000.0,
+      "eff_reload": 90.0,
+      "effective_damage": 46233.38,
+      "effective_dps": 416.08,
+      "effective_per_shot": 37446.9,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0061,
+      "factor_targets": 1.0,
+      "footprint": 0.6392,
+      "k": 0.8271,
+      "k_context": 0.8322,
+      "overkill": 0.8956,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalSpiderLaser"
+     }
+    ]
+   },
+   "cabal_manticore": {
+    "armaments": [
+     {
+      "avg_versus": 0.6298,
+      "damage_total": 11000.0,
+      "eff_reload": 33.0,
+      "effective_damage": 11384.49,
+      "effective_dps": 508.49,
+      "effective_per_shot": 8390.13,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9732,
+      "factor_targets": 1.0,
+      "footprint": 0.6392,
+      "k": 0.7837,
+      "k_context": 0.7627,
+      "overkill": 0.9667,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalManticoreLaser"
+     },
+     {
+      "avg_versus": 0.9032,
+      "damage_total": 48000.0,
+      "eff_reload": 33.0,
+      "effective_damage": 83116.64,
+      "effective_dps": 2205.44,
+      "effective_per_shot": 36389.83,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9732,
+      "factor_targets": 0.55,
+      "footprint": 14.2165,
+      "k": 1.4163,
+      "k_context": 0.7581,
+      "overkill": 0.9807,
+      "reliability": 0.8431,
+      "sigma": 314.32,
+      "slot": "Armament@SECONDARY",
+      "weapon": "CabalManticoreMissilesAA"
+     }
+    ]
+   },
+   "cabal_mantis": {
+    "armaments": [
+     {
+      "avg_versus": 0.7487,
+      "damage_total": 13000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 13524.31,
+      "effective_dps": 295.66,
+      "effective_per_shot": 11826.44,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0451,
+      "factor_targets": 1.0,
+      "footprint": 0.7989,
+      "k": 0.8705,
+      "k_context": 0.9097,
+      "overkill": 0.9819,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalMantisGun"
+     }
+    ]
+   },
+   "cabal_ravager": {
+    "armaments": [
+     {
+      "avg_versus": 1.0461,
+      "damage_total": 32000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 64846.56,
+      "effective_dps": 1884.8,
+      "effective_per_shot": 56544.13,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.875,
+      "factor_targets": 0.95,
+      "footprint": 4.3503,
+      "k": 2.1257,
+      "k_context": 1.767,
+      "overkill": 0.9801,
+      "reliability": 0.9389,
+      "sigma": 175.95,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalRavagerPlasma"
+     },
+     {
+      "avg_versus": 1.0461,
+      "damage_total": 32000.0,
+      "eff_reload": 30.0,
+      "effective_damage": 64846.56,
+      "effective_dps": 1884.8,
+      "effective_per_shot": 56544.13,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.875,
+      "factor_targets": 0.95,
+      "footprint": 4.3503,
+      "k": 2.1257,
+      "k_context": 1.767,
+      "overkill": 0.9801,
+      "reliability": 0.9389,
+      "sigma": 175.95,
+      "slot": "Armament@Upgraded",
+      "weapon": "CabalRavagerPlasmaNeutron"
+     }
+    ]
+   },
+   "cabal_spidercnc4": {
+    "armaments": [
+     {
+      "avg_versus": 0.6616,
+      "damage_total": 45000.0,
+      "eff_reload": 80.0,
+      "effective_damage": 46233.38,
+      "effective_dps": 484.62,
+      "effective_per_shot": 38769.72,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0417,
+      "factor_targets": 1.0,
+      "footprint": 0.6392,
+      "k": 0.8271,
+      "k_context": 0.8615,
+      "overkill": 0.8956,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalSpiderCnc4Laser"
+     }
+    ]
+   },
+   "cabal_tarantula": {
+    "armaments": [
+     {
+      "avg_versus": 0.937,
+      "damage_total": 16000.0,
+      "eff_reload": 48.0,
+      "effective_damage": 30560.83,
+      "effective_dps": 509.26,
+      "effective_per_shot": 24444.24,
+      "factor_deadzone": 1.0,
+      "factor_range": 0.9699,
+      "factor_targets": 0.95,
+      "footprint": 4.3503,
+      "k": 1.6581,
+      "k_context": 1.5278,
+      "overkill": 0.9424,
+      "reliability": 0.8225,
+      "sigma": 511.12,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalTarantulaCannon"
+     },
+     {
+      "avg_versus": 0.937,
+      "damage_total": 24000.0,
+      "eff_reload": 44.0,
+      "effective_damage": 46384.63,
+      "effective_dps": 854.88,
+      "effective_per_shot": 37614.68,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0084,
+      "factor_targets": 0.95,
+      "footprint": 4.3503,
+      "k": 1.6361,
+      "k_context": 1.5673,
+      "overkill": 0.8489,
+      "reliability": 0.8451,
+      "sigma": 445.91,
+      "slot": "Armament@Upgraded",
+      "weapon": "TS120mm_bluenuke"
+     }
+    ]
+   },
+   "cabal_widow": {
+    "armaments": [
+     {
+      "avg_versus": 0.7888,
+      "damage_total": 121000.0,
+      "eff_reload": 40.0,
+      "effective_damage": 125029.7,
+      "effective_dps": 2876.17,
+      "effective_per_shot": 115046.73,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.0339,
+      "factor_targets": 1.0,
+      "footprint": 0.7989,
+      "k": 0.9196,
+      "k_context": 0.9508,
+      "overkill": 0.8987,
+      "reliability": 1.0,
+      "sigma": 0.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "CabalLegionGun"
+     }
+    ]
+   }
+  }
+ }
+}

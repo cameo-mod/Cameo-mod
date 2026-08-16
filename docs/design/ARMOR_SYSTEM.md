@@ -27,6 +27,17 @@ Every damage weapon's Versus table is fully determined by two choices:
 `Super` (step 3) is the CONFIRMED superweapon band (maintainer 2026-08-02) for **Nuclear** and
 **charged Tesla** — one notch above Heavy in both flatness and WeaponClass.
 
+> ⚠ **The `WC (K)` column no longer prices anything (W4, 2026-08-11).** It still names
+> the LEVEL of a warhead family, which is what the step law above is about, but
+> `formula.dps()` dropped its `weapon_class` factor and the workbook's DPS cell dropped
+> `*WeapClass` to match. Weapon quality is now measured directly by the K coefficient in
+> `weapon_efficiency.py` — the tier weight and the measurement would otherwise charge a
+> weapon twice for the same property. Do not reintroduce WC into a price formula.
+>
+> Note the name collision: this `WC (K)` and the pricing `K` are **different quantities**.
+> This one is a per-level design weight (0.75 / 1.00 / 1.25 / 1.50); the pricing K is a
+> measured dimensionless coefficient per weapon (`EFFECTIVE_DAMAGE.md`).
+
 - 16 non-Shield armor types, so 100 down in 15 steps to the floor:
   light 100,94,88,…,10 · medium 100,95,…,25 · heavy 100,96,…,40.
 - **Shield = top + floor** — the one unifying rule for BOTH warheads.

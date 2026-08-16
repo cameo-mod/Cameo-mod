@@ -109,6 +109,30 @@
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 
+^Projectile_ArtilleryRocket_Medium:
+	Projectile: Bullet
+		Speed: 333
+		Inaccuracy: 777
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		LaunchAngle: 77
+
+^Effect_MissileHE_Medium_RA2:
+	Inherits: ^Effect_MissileHE_Medium
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_large_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
 ^RA2HeavyMissile:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1423,6 +1447,7 @@ RA2HornetMissile:
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@3: ^RA2MediumMissile
+	-Warhead@Effect1:
 	ReloadDelay: 3
 	Range: 5000
 	MinRange: 1000
@@ -2223,13 +2248,10 @@ RA2Cloud:
 
 RA2CloudSafe:
 	Inherits: ^ToxicWeapon
-	Warhead@ToxicWeapon: SpreadDamage
+	Warhead@Toxic_Light:
 		ValidRelationships: Neutral, Enemy
 		AffectsParent: False
-	Warhead@ToxicWeaponFriendlyFire: SpreadDamage
-		ValidRelationships: Neutral, Enemy
-		AffectsParent: False
-	Warhead@ToxicWeaponPercentage: HealthPercentageDamage
+	Warhead@Toxic_Light_Percentage:
 		ValidRelationships: Neutral, Enemy
 		AffectsParent: False
 
@@ -2950,4 +2972,3 @@ RA2FlyingBody:
 		ExplosionPalette: ra2effect
 		ValidTargets: Ground
 		Delay: 0
-

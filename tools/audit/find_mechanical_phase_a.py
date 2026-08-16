@@ -17,25 +17,14 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-MOD = Path(__file__).resolve().parents[2] / "mods" / "cameo"
+# CENTRAL / OLD_FAMILIES live in weapon_families.py — they were copy-pasted across
+# the weapon-split tools (audit_code_duplication C3), so a family added to one copy
+# went missing from the others.
+from weapon_families import MOD, OLD_FAMILIES, weapon_files  # noqa: E402
+
 OUT_DIR = Path(__file__).resolve().parents[2] / "docs" / "audit" / "latest"
 
-CENTRAL = ["weapons/weapons.yaml", "weapons/redalert2.yaml",
-           "weapons/redalert2mod.yaml", "weapons/tiberiansun.yaml",
-           "weapons/tiberiandawn.yaml", "weapons/warcraft2.yaml",
-           "weapons/missiles.yaml"]
-FILES = [MOD / p for p in CENTRAL] + sorted((MOD / "ContentPacks").glob("*/*/yaml/weapons.yaml"))
-
-OLD_FAMILIES = {
-    "^SmallArms", "^Chaingun", "^TankDestroyerCannon", "^MediumCannon",
-    "^HeavyCannon", "^LightMissile", "^MediumMissile", "^HeavyMissile",
-    "^FlakWeapon", "^HeavyAAWeapon", "^Grenade", "^ShrapnelWeapon",
-    "^HeavyBomb", "^LaserWeapon", "^RailgunWeapon", "^TeslaWeapon",
-    "^TeslaChargedWeapon", "^SwordWeapon", "^ArrowWeapon", "^MagicWeapon",
-    "^LightFlameWeapon", "^MediumFlameWeapon", "^HeavyFlameWeapon",
-    "^LightChemicalWeapon", "^MediumChemicalWeapon", "^HeavyChemicalWeapon",
-    "^NuclearWarhead", "^SniperWeapon", "^LightArms",
-}
+FILES = weapon_files()
 
 # old family -> suggested new warhead family (from cluster-convert skill)
 FAMILY_MAP = {

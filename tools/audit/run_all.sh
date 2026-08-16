@@ -37,7 +37,8 @@ for a in inherits faction_leaks upgrades upgrade_coverage ai sequences \
          duplicate_keys code_duplication test_coverage recent_changes \
          error_handling security \
          template_conformance multiplier_modifiers nuclear_flash_bindings \
-         ts_death_palette warhead_split physical_state_warheads; do
+         ts_death_palette warhead_split physical_state_warheads \
+         unique_traits; do
   echo "== audit_$a"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" \
     || failed=1
@@ -59,8 +60,13 @@ done
 
 # Staleness gate for the mandatory recurring audits (docs/audit/periodic.json):
 # runs last so its report reflects this run's evidence files.
+# --warn-only: this suite is the PER-COMMIT gate, so a late scheduled scan must not
+# turn it red for a reason unrelated to the commit being made. BROKEN entries (a
+# registered script or evidence file is missing) still fail, because that is a real
+# defect in the tree. Enforce the calendar in the scheduled run instead:
+#   python tools/audit/audit_periodic_freshness.py     (no flag -> exit 1 when late)
 echo "== periodic_freshness"
-"$PYTHON" tools/audit/audit_periodic_freshness.py \
+"$PYTHON" tools/audit/audit_periodic_freshness.py --warn-only \
   > "$OUT/periodic_freshness.md" 2> "$OUT/periodic_freshness.err" || failed=1
 [ -s "$OUT/periodic_freshness.err" ] || rm -f "$OUT/periodic_freshness.err"
 

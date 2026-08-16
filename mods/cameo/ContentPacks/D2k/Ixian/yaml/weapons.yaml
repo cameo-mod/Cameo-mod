@@ -1325,129 +1325,63 @@ d2k_farasha_aa:
 		ValidTargets: Air
 
 farasha_drone_ixian:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: d2k_laser
+	Inherits@wh: ^Warhead_Inferno_Light
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 25
 	Range: 2500
 	Report: d2k_alfayrus.wav
 	ValidTargets: Ground, Water, Air
-	Warhead@LightFlameWeapon: SpreadDamage
+	Projectile: LaserZap
+		Width: 50
+		ZOffset: 2047
+		Color: FF0000
+	Warhead@Inferno_Light:
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 6000
+	Warhead@Inferno_Light_Percentage:
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Air
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@Laser_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
-		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	-Warhead@PhysicalStateLightFlameWeapon:
-	-Warhead@PhysicalStateLightFlameWeaponFriendlyFire:
+		Damage: 3
 
 d2k_basq:
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^LightFlameWeapon
-	Inherits@5: ^MediumChemicalWeapon
-	Inherits@6: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Light
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Light
 	ReloadDelay: 25
 	Range: 3333
 	Report: zhyfir00.aud
 	TargetActorCenter: true
 	ValidTargets: Ground, Water
 	Projectile: Bullet
+		-Image:
+		ContrailStartColor: 00FF4400
 		Speed: 3333
 		Inaccuracy: 333
-		ContrailStartColor: 00FF4400
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flak_Light:
 		ValidTargets: Ground, Water
-		Damage: 8000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 32000
+	Warhead@Flak_Light_Percentage:
 		ValidTargets: Ground, Water
-		Damage: 4000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 4
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 8000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 4000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 4
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 8000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 4
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water
-		Damage: 8000
-	Warhead@CannonHE_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 4
+		Damage: 16
 	Warhead@Effect: CreateEffect
 		Explosions: sczhsplash
+		ImpactSounds: EXPLSML4.WAV
+		ExplosionPalette: effect75alpha
 		ImpactActors: false
-		ValidTargets: Ground, Air
+		ValidTargets: Ground
 
 d2k_basq_AA:
 	Inherits: d2k_basq
 	ValidTargets: Air
 	Range: 6666
-	Warhead@LightFlameWeapon: SpreadDamage
+	-Warhead@EffectAir:
+	Warhead@Flak_Light:
 		ValidTargets: Air
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flak_Light_Percentage:
 		ValidTargets: Air
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Air
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		ValidTargets: Air
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Air
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Air
-	Warhead@CannonHE_Heavy: AreaDamage
-		ValidTargets: Air
-	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Effect: CreateEffect
 		ValidTargets: Air
 
 # d2k_guild_teleport:

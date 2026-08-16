@@ -1,12 +1,12 @@
 # audit_periodic_freshness — mandatory recurring audits
 
-Registry: `docs/audit/periodic.json` — grace **7** days. OVERDUE: **0**, DUE: **0**
+Registry: `docs/audit/periodic.json` — grace **7** days. BROKEN: **0**, OVERDUE: **0**, DUE: **0**
 
 | id | title | cadence (d) | age (d) | due in (d) | state | owner |
 |---|---|---|---|---|---|---|
-| code_duplication | Refactor duplicated code (audit tooling + yaml templates) | 30 | 1 | 29 | ok | unassigned |
-| test_coverage | Test coverage floor (OpenRA.Mods.Cameo + tools/) | 30 | 1 | 29 | ok | unassigned |
-| recent_changes_review | Review recent changes (regression review of the last N days of commits) | 14 | 1 | 13 | ok | unassigned |
-| error_handling | Error handling in tools/ (bare except, silent pass, unguarded IO) | 30 | 1 | 29 | ok | unassigned |
-| security_scan | Security scan (dependencies, secrets, unsafe shell/deserialisation) | 14 | 1 | 13 | ok | unassigned |
+| code_duplication | Refactor duplicated code (audit tooling + yaml templates) | 30 | 4 | 26 | ok | unassigned |
+| test_coverage | Test coverage floor (OpenRA.Mods.Cameo + tools/) | 30 | 4 | 26 | ok | unassigned |
+| recent_changes_review | Review recent changes (regression review of the last N days of commits) | 14 | 4 | 10 | ok | unassigned |
+| error_handling | Error handling in tools/ (bare except, silent pass, unguarded IO) | 30 | 4 | 26 | ok | unassigned |
+| security_scan | Security scan (dependencies, secrets, unsafe shell/deserialisation) | 14 | 4 | 10 | ok | unassigned |
 

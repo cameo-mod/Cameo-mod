@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (2 file(s)) | 24 | >= 24 |
-| T2 | `def test_*` in tools/tests (6 file(s)) | 54 | >= 51 |
-| T3 | modules with no test mentioning them | 221 | <= 221 |
+| T2 | `def test_*` in tools/tests (14 file(s)) | 153 | >= 153 |
+| T3 | modules with no test mentioning them | 218 | <= 218 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (221)
+## T3 — untested modules (218)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -154,6 +154,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_burst_delays.py | audit_burst_delays |
 | python | tools/audit/audit_code_duplication.py | audit_code_duplication |
 | python | tools/audit/audit_consistency_report.py | audit_consistency_report |
+| python | tools/audit/audit_damage_grid.py | audit_damage_grid |
 | python | tools/audit/audit_display_text.py | audit_display_text |
 | python | tools/audit/audit_dune_rank_decoration.py | audit_dune_rank_decoration |
 | python | tools/audit/audit_effect_warhead_names.py | audit_effect_warhead_names |
@@ -171,12 +172,10 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_orphans.py | audit_orphans |
 | python | tools/audit/audit_outliers.py | audit_outliers |
 | python | tools/audit/audit_packs.py | audit_packs |
-| python | tools/audit/audit_periodic_freshness.py | audit_periodic_freshness |
 | python | tools/audit/audit_physical_state_warheads.py | audit_physical_state_warheads |
 | python | tools/audit/audit_power_budget.py | audit_power_budget |
 | python | tools/audit/audit_promotion_gating.py | audit_promotion_gating |
 | python | tools/audit/audit_rank_decoration.py | audit_rank_decoration |
-| python | tools/audit/audit_recent_changes.py | audit_recent_changes |
 | python | tools/audit/audit_rename_safety.py | audit_rename_safety |
 | python | tools/audit/audit_sequences.py | audit_sequences |
 | python | tools/audit/audit_stat_formulas.py | audit_stat_formulas |
@@ -191,18 +190,19 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/cameo_model.py | cameo_model |
 | python | tools/audit/dump_resolved.py | dump_resolved |
 | python | tools/audit/find_empty_warhead.py | find_empty_warhead |
+| python | tools/audit/find_mechanical_phase_a.py | find_mechanical_phase_a |
 | python | tools/audit/find_orphan_old_keys.py | find_orphan_old_keys |
 | python | tools/audit/find_orphan_old_keys_multi.py | find_orphan_old_keys_multi |
 | python | tools/audit/gen_damage_matrix.py | gen_damage_matrix |
 | python | tools/audit/gen_faction_matrix.py | gen_faction_matrix |
 | python | tools/audit/gen_rename_maps.py | gen_rename_maps |
 | python | tools/audit/phase_b_survey.py | phase_b_survey |
-| python | tools/audit/report.py | report |
+| python | tools/audit/propose_sonic_mapping.py | propose_sonic_mapping |
 | python | tools/audit/review_resolve_diff.py | review_resolve_diff |
-| python | tools/audit/run_all.py | run_all |
 | python | tools/balance/_balance_audit_report.py | _balance_audit_report |
 | python | tools/balance/_fix_min_range.py | _fix_min_range |
 | python | tools/balance/_patch_ledgers_from_reports.py | _patch_ledgers_from_reports |
+| python | tools/balance/_requantize_ledgers.py | _requantize_ledgers |
 | python | tools/balance/_show_audit_summaries.py | _show_audit_summaries |
 | python | tools/balance/_write_weapon_class.py | _write_weapon_class |
 | python | tools/balance/apply_balance.py | apply_balance |
@@ -210,12 +210,9 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/build_workbook.py | build_workbook |
 | python | tools/balance/check_band.py | check_band |
 | python | tools/balance/count_mixed.py | count_mixed |
-| python | tools/balance/extract_stats.py | extract_stats |
-| python | tools/balance/fit_class.py | fit_class |
 | python | tools/balance/fix_orphan_old_keys.py | fix_orphan_old_keys |
 | python | tools/balance/fix_orphan_old_keys_multi.py | fix_orphan_old_keys_multi |
 | python | tools/balance/fix_stale_warhead_keys.py | fix_stale_warhead_keys |
-| python | tools/balance/formula.py | formula |
 | python | tools/balance/gen_effects.py | gen_effects |
 | python | tools/balance/gen_projectiles.py | gen_projectiles |
 | python | tools/balance/gen_weapon_template.py | gen_weapon_template |

@@ -85,7 +85,7 @@ futuretech_cryocopter:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Buildable:
 		Queue: Aircraft, RAAircraft, Vehicle, RAVehicle
 		BuildPaletteOrder: 405
@@ -183,7 +183,7 @@ futuretech_harbingergunship:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
-	Inherits@gat: ^GatlingSpeedUpSpecialUnitBehavior
+	Inherits@gat: ^GatlingSpinUpSpecialUnitBehavior
 	Inherits@announce: ^AnnounceOnBuild
 	Tooltip:
 		Name: Harbinger Gunship

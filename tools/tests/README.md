@@ -1,10 +1,16 @@
 # tools/tests — unit tests for the Python tooling
 
-Stdlib `unittest` only (no pip dependency, so CI and a fresh clone can run it):
+Stdlib `unittest` only (no pip dependency, so CI and a fresh clone can run it).
+Run from the repo root:
 
 ```sh
-python -m unittest discover -s tools/tests -t . -v
+python -m unittest discover -s tools/tests -t tools/tests -v
 ```
+
+The top-level directory (`-t`) must be `tools/tests`, not the repo root: neither
+`tools/` nor `tools/tests/` is a package (no `__init__.py`), so `-t .` fails with
+`ImportError: Start directory is not importable`. `audit_test_coverage.py` and
+`docs/audit/PERIODIC.md` already document this form — keep all three in sync.
 
 `audit_test_coverage.py` counts the `def test_*` functions here and fails the
 audit suite if the count drops below its floor, so tests may be added but not

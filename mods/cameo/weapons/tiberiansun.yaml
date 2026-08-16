@@ -52,7 +52,7 @@
 		Shadow: true
 		HorizontalRateOfTurn: 40
 		VerticalRateOfTurn: 40
-		TrailImage: small_smoke_trail
+		TrailImage: ts_small_smoke_trail
 		TrailInterval: 1
 		ContrailLength: 0
 		MaximumLaunchSpeed: 543
@@ -80,7 +80,7 @@
 		Shadow: true
 		HorizontalRateOfTurn: 10
 		VerticalRateOfTurn: 40
-		TrailImage: small_smoke_trail
+		TrailImage: ts_large_smoke_trail
 		TrailInterval: 1
 		ContrailLength: 0
 		MaximumLaunchSpeed: 213
@@ -390,61 +390,36 @@ TSGrenade:
 		ImpactSounds: expnew13.aud
 
 TSGrenadeSonic:
-	Inherits: ^Warhead_CannonHE_Medium
-	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
-	Inherits@4: ^ShrapnelWeapon
-	Inherits@5: ^TeslaWeapon
-	Inherits@6: ^MagicWeapon
-	Inherits@7: ^TSSonicGrenade
+	Inherits@wh: ^Warhead_Concussion_Light
+	Inherits@wh2: ^Warhead_Sonic_Light
+	Inherits@proj: ^Projectile_Sonic_Shell
+	Inherits@fx: ^Effect_Sonic_Shell
 	ReloadDelay: 50
 	Range: 6151
 	Report: toss1.aud
 	ValidTargets: Ground, Water
 	Projectile: Bullet
-		Speed: 226
+		Speed: 896
 		LaunchAngle: 66
 		Image: BOMB
 		BounceCount: 2
-		ContrailLength: 11
+		ContrailLength: 12
 		ContrailStartWidth: 128
 		ContrailEndWidth: 44
 		ContrailStartColor: 8888FFFF
 		ContrailEndColor: FFFFFF22
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Light:
 		ValidTargets: Ground, Water
 		Damage: 12000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 6000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Light_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 6
-	Warhead@CannonHE_Medium:
+	Warhead@Sonic_Light:
 		ValidTargets: Ground, Water
 		Damage: 12000
-	Warhead@MediumCannonFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 6000
-	Warhead@CannonHE_Medium_Percentage:
+	Warhead@Sonic_Light_Percentage:
 		ValidTargets: Ground, Water
 		Damage: 6
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 6000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 3000
-		DamageTypes: Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 3
-	Warhead@MagicWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 6000
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 3
 
 TSGrenadeAA:
 	Inherits: TSGrenade
@@ -1478,7 +1453,7 @@ TSMissileBomblet:
 	Range: 7168
 	Projectile: Bullet
 		Image: 120mm
-		TrailImage: small_smoke_trail
+		TrailImage: ts_small_smoke_trail
 		Shadow: true
 		Speed: 128
 		Blockable: false
@@ -1657,7 +1632,7 @@ E1Droppod:
 	Projectile: Bullet
 		Speed: 300
 		Image: tsdroppod
-		TrailImage: small_smoke_trail
+		TrailImage: ts_small_smoke_trail
 		Palette: ra2
 	Warhead@1Dam: SpreadDamage
 		Damage: 5000

@@ -396,7 +396,7 @@ asianalliance_pulverizer:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@UpGat: ^GatlingSpeedUpUnitBehavior
+	Inherits@UpGat: ^GatlingSpinUpUnitBehavior
 	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
 	Inherits@PulverizerUpgrades: ^PulverizerUpgrades
 	Valued:
@@ -562,7 +562,7 @@ asianalliance_type89mlrs:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@UpGat: ^GatlingSpeedUpUnitBehavior
+	Inherits@UpGat: ^GatlingSpinUpUnitBehavior
 	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
 	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
 	Valued:
@@ -748,7 +748,7 @@ asianalliance_pulverizermecha:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@MC: ^MCImmune
 	Inherits@HackableRobot: ^HackableRobot
-	Inherits@UpGat: ^GatlingSpeedUpUnitBehavior
+	Inherits@UpGat: ^GatlingSpinUpUnitBehavior
 	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
 	Inherits@PulverizerUpgrades: ^PulverizerUpgrades
 	Selectable:
