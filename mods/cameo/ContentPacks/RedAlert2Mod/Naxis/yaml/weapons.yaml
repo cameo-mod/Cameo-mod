@@ -1068,6 +1068,7 @@ NaxShoeRocket:
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@2: ^RA2Grenade
 	Inherits@3: ^RA2MediumMissile
+	-Warhead@Effect1:
 	Report: vaegatta.wav, vaegattb.wav
 	ReloadDelay: 250
 	Range: 12000
@@ -1251,4 +1252,3 @@ NaxisSarubianTarget:
 	MinRange: 1560
 	Projectile: InstantHit
 		Inaccuracy: 1000
-

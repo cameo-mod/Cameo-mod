@@ -1447,6 +1447,7 @@ RA2HornetMissile:
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@3: ^RA2MediumMissile
+	-Warhead@Effect1:
 	ReloadDelay: 3
 	Range: 5000
 	MinRange: 1000
@@ -2974,4 +2975,3 @@ RA2FlyingBody:
 		ExplosionPalette: ra2effect
 		ValidTargets: Ground
 		Delay: 0
-
