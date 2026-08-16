@@ -3074,6 +3074,11 @@
 	MapEditorData:
 		Categories: Critter
 
+# A defined Mobile.TurnSpeed marks infantry that deliberately turn like vehicles; these units opt out of between-cell responsiveness.
+^VehicleTurnRateInfantry:
+	Mobile:
+		ResponsiveBetweenCells: false
+
 ^DefaultInfantry:
 	Inherits@1: ^BasicUnit
 	Inherits@mindcontrol: ^MindControllable

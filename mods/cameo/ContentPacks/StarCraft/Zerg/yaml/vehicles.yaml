@@ -68,6 +68,7 @@ zerg_sporemaw:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Inherits@weapon: ^ZergMissileWeaponUpgrades
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Tooltip:
 		Name: Sporemaw
 	Valued:
@@ -125,6 +126,7 @@ zerg_hermit:
 	Inherits@weapon: ^ZergMissileWeaponUpgrades
 	Inherits@range: ^GroovedSpinesUpgrade
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Tooltip:
 		Name: Hermit
 	Valued:
@@ -187,6 +189,7 @@ zerg_goremaw:
 	Inherits@gat: ^GatlingSpeedUpUnitBehavior
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Tooltip:
 		Name: Goremaw
 	Valued:
@@ -248,6 +251,7 @@ zerg_lurker:
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Inherits@range: ^GroovedSpinesUpgrade
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Tooltip:
 		Name: Lurker
 	Valued:

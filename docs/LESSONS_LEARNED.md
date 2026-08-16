@@ -481,3 +481,8 @@ A `Warhead@X:` line with **no value** is a boot crash, not a lint warning. `Weap
 ## Weapon 3-way split: projectile family naming (2026-08-07)
 
 - **The new projectile family for cannons is `Shell_`, not `Cannon_`.** `^Projectile_Shell_Light/Medium/Heavy` exists; `^Projectile_Cannon*` does not. `CannonHE_Heavy` and `CannonAP_*` weapons use `^Projectile_Shell_*` for delivery and `^Effect_CannonHE_*` / `^Effect_CannonAP_*` for impact.
+
+## Between-cell movement responsiveness (2026-08-11)
+
+- `^DefaultInfantry` enables `ResponsiveBetweenCells` for responsive foot infantry.
+- A defined `Mobile.TurnSpeed` remains the documented marker for infantry that deliberately turn like vehicles; those actors inherit `^VehicleTurnRateInfantry`, which only sets `Mobile.ResponsiveBetweenCells: false` so their balance values and movement tuning remain unchanged.

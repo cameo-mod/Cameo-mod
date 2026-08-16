@@ -9,6 +9,7 @@ cabal_engineer:
 	Inherits@Cyborg: ^TSCyborgs
 	Inherits@CyberneticPlating: ^CabalUpgradeCyberneticPlating
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Armor:
 		Type: None
 		-RequiresCondition:
@@ -85,6 +86,7 @@ cabal_cyborginfantry:
 	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
 	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Armor:
 		Type: Plate
 		-RequiresCondition:
@@ -159,6 +161,7 @@ cabal_rocketcyborg:
 	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
 	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Armor:
 		Type: Flak
 		-RequiresCondition:
@@ -273,6 +276,7 @@ cabal_devout:
 	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
 	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Armor:
 		Type: Plate
 		-RequiresCondition:
@@ -388,6 +392,7 @@ cabal_ascended:
 	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
 	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Armor:
 		Type: Flak
 		-RequiresCondition:
@@ -506,6 +511,7 @@ cabal_enlighted:
 	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
 	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Armor:
 		Type: Flak
 		-RequiresCondition:
@@ -628,6 +634,7 @@ cabal_hackercyborg:
 	Inherits@EMP: ^UnitDisable
 	Inherits@td_nod_handofnod: ^CabalUpgradeHandOf
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Armor:
 		Type: None
 		-RequiresCondition:
@@ -770,6 +777,7 @@ cabal_cyborgcommando:
 	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
 	Inherits@CATALYST: ^CabalUpgradeNeutronNuclearCatalyst
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Armor:
 		Type: Heroic
 		-RequiresCondition:
@@ -857,6 +865,7 @@ cabal_cyborgcommandov2:
 	Inherits@CATALYST: ^CabalUpgradeNeutronNuclearCatalyst
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Armor:
 		Type: Heroic
 		-RequiresCondition:
@@ -941,6 +950,7 @@ cabal_eliminator800:
 	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
 	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Armor:
 		Type: Flak
 		-RequiresCondition:
@@ -1042,6 +1052,7 @@ cabal_dissolver:
 	Inherits@Cyborg: ^TSCyborgs
 	Inherits@CyberneticPlating: ^CabalUpgradeCyberneticPlating
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Armor:
 		Type: Flak
 		-RequiresCondition:
