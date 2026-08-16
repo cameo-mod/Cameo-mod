@@ -147,6 +147,21 @@
 		Name: shield30
 		BasePalette: shield100
 		Alpha: 0.25
+	PaletteFromFile@playershieldbase:
+		Name: playershieldbase
+		Filename: shield_remap.pal
+	PlayerColorPalette@playershield:
+		BasePalette: playershieldbase
+		BaseName: playershield
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PaletteFromPlayerPaletteWithAlpha@playershield25:
+		BaseName: playershield25
+		BasePalette: playershield
+		Alpha: 0.25
+	PaletteFromPlayerPaletteWithAlpha@playershield50:
+		BaseName: playershield50
+		BasePalette: playershield
+		Alpha: 0.5
 	PaletteFromFile@staticterrain-jungle:
 		Name: staticterrain
 		Tileset: JUNGLE

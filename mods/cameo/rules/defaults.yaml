@@ -3302,10 +3302,12 @@
 	WithIdleOverlay@shield1:
 		Sequence: shield-complete-infantry
 		StartSequence: shield-starts-infantry
-		Palette: shield30
+		Palette: playershield25
+		IsPlayerPalette: true
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-infantry
-		Palette: shield60
+		Palette: playershield50
+		IsPlayerPalette: true
 	WithIdleOverlay@shrouded:
 		Image: shrouded_overlay_small
 

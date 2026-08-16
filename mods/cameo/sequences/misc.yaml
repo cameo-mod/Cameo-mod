@@ -4877,21 +4877,17 @@ energyshields:
 		Scale: 1
 		Tick: 50
 	shield-complete-infantry:
-		Filename: modshields.shp
-		Start: 190
-		Length: 30
+		Filename: hexshield_infantry.png
+		Length: 8
 		ZOffset: 1023
-		Reverses: True
-		Scale: 0.45
-		Tick: 50
-		Offset: 0,-20
+		Tick: 80
+		Offset: 0,-9
 	shield-starts-infantry:
-		Filename: modshields.shp
-		Length: *
+		Filename: hexshield_infantry.png
+		Length: 8
 		ZOffset: 1023
-		Scale: 0.45
-		Tick: 50
-		Offset: 0,-20
+		Tick: 80
+		Offset: 0,-9
 
 sparkle:
 	plus:
