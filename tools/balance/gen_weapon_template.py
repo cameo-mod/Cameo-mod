@@ -435,32 +435,39 @@ PLATING_DEPTH = 0.50
 # average their parents, so a new blend is classified for free. This is the same kind of
 # design table as PHYSICS_RANK — measured against nothing, argued from what the weapon IS.
 COMPOSITION = {
-    # kinetic — a mass arrives fast
+    # --- KINETIC: a solid mass arrives at speed. Defeated by hard, brittle ceramic that
+    # shatters or erodes the penetrator before it reaches the backing plate — which is what
+    # composite (Chobham-type) armour IS.
     "Bullet":      {"kinetic": 1.00},
     "Sniper":      {"kinetic": 1.00},
-    "Melee":       {"kinetic": 1.00},
+    "Melee":       {"kinetic": 1.00},                   # a blade is a slow, sharp penetrator
     "Arrow":       {"kinetic": 1.00},
     "Railgun":     {"kinetic": 0.85, "energy": 0.15},   # a SLUG; the energy is in the launcher
-    "CannonAP":    {"kinetic": 0.70, "shaped": 0.30},
-    # shaped charge — a jet, not a mass. The axis ERA exists for.
-    "MissileAP":   {"shaped": 0.90, "blast": 0.10},
-    "MissileHE":   {"blast": 0.80, "shaped": 0.20},
-    # blast — overpressure and fragmentation
+    "CannonAP":    {"kinetic": 0.75, "shaped": 0.25},   # APFSDS, the canonical KE dart
+    # Fragments are METAL MOVING FAST, not overpressure — which is exactly why "flak jacket"
+    # is a real garment and why fragmentation sleeves are rated in kinetic terms. Both of
+    # these were blast-led in the first draft, which credited them to the wrong counter.
+    "Flak":        {"kinetic": 0.60, "blast": 0.40},
+    "MissileAA":   {"kinetic": 0.55, "blast": 0.45},    # continuous-rod / frag warheads
+    # --- SHAPED CHARGE: a metal JET formed by an explosive-driven liner, defeated by making
+    # the jet form early or wander — ERA, slat, spaced plate. Nothing about mass or hardness.
+    "MissileAP":   {"shaped": 0.90, "blast": 0.10},     # HEAT/ATGM
+    "MissileHE":   {"blast": 0.75, "shaped": 0.25},
+    # --- BLAST: overpressure and shock through the structure, defeated by absorbing and
+    # spreading impulse — spall liners, V-hulls, standoff.
     "CannonHE":    {"blast": 0.90, "kinetic": 0.10},
-    "MissileAA":   {"blast": 0.70, "kinetic": 0.30},
-    "Flak":        {"blast": 0.60, "kinetic": 0.40},
     "Demolition":  {"blast": 1.00},
     "Concussion":  {"blast": 1.00},
-    "Sonic":       {"blast": 0.60, "energy": 0.40},     # a pressure wave, so blast-led
+    "Sonic":       {"blast": 0.70, "energy": 0.30},     # a pressure wave IS overpressure
     "Thermobaric": {"blast": 0.60, "thermo": 0.40},     # fuel-air: overpressure + burn
-    # thermochemical — agents and thermal load
+    # --- THERMOCHEMICAL: agents and thermal load, defeated by SEALING and insulating.
     "Flame":       {"thermo": 1.00},
     "Inferno":     {"thermo": 1.00},
     "Chemical":    {"thermo": 1.00},
     "Toxic":       {"thermo": 1.00},
     "Cryo":        {"thermo": 1.00},
     "Nuclear":     {"thermo": 0.50, "blast": 0.40, "energy": 0.10},
-    # energy — directed / radiated
+    # --- ENERGY: radiated or conducted, defeated by REFLECTING or ablating it away.
     "Laser":       {"energy": 1.00},
     "Prism":       {"energy": 1.00},
     "Tesla":       {"energy": 1.00},

@@ -471,6 +471,119 @@ served by `BlastProtection` (both are pressure) and Magic ignores armor by desig
    their upgrade actually represents — RA2 reactive armor is arguably `Reactive`, not HAZMAT.
 4. **E1 grows again**: six plating types priced at zero instead of two.
 
+## H. The plating cycle — real-world reasoning, and what the roster can actually support
+
+### H1 — every counter and every weakness, with its physical basis
+
+A plating defeats a damage mechanism by a specific physical means; it is weak where that
+means does nothing. Both halves are mechanisms, not flavour.
+
+| plating | what it physically IS | COUNTERS because | WEAK TO because |
+|---|---|---|---|
+| **HAZMAT** | sealed, filtered, overpressured envelope + insulation | thermochemical harm arrives as an AGENT or a heat flux, and a sealed boundary keeps gas and liquid off skin/optics while insulation slows conduction | **kinetic** — a seal has no mass and no hardness; a bullet passes through a rubber suit as if it were not there |
+| **Composite** | hard ceramic tiles in a ductile matrix | a kinetic penetrator is defeated by SHATTERING or eroding it before it reaches the backing plate — ceramic is harder than the rod and destroys it on contact | **shaped charge** — the jet is already liquid metal at 8 km/s; there is nothing to shatter, which is historically why ERA had to be invented on top of composite |
+| **Reactive** | explosive sandwich / standoff cage that fires outward | a shaped-charge JET is disrupted by moving plate ACROSS its path, breaking the jet's continuity before it can penetrate | **blast** — ERA bricks are surface-mounted and an HE burst strips or pre-detonates them, leaving the base armour bare |
+| **BlastProtection** | spall liner, V-hull, standoff, energy-absorbing structure | blast is an IMPULSE through the structure; you survive it by spreading it over time and area and by catching the spall the shock throws off the inner wall | **energy** — a liner absorbs mechanical impulse, and a beam delivers none; it deposits heat at a point, which a liner does nothing about |
+| **REFLECTOR** | polished / ablative optical coating | radiated energy is defeated by TURNING IT AWAY before absorption — reflectivity is the whole mechanism, and ablation carries away what does couple | **thermochemical** — sustained flame and corrosives foul, soot and etch the surface, and a mirror that is no longer mirror-bright is just thin plate |
+
+The cycle closes: `thermo → kinetic → shaped → blast → energy → thermo`. Every link is a
+real defeat mechanism rather than a balance convenience, and an odd cycle cannot collapse
+into two mirrored pairs.
+
+### H2 — ⚠ MEASURED: the roster cannot support five EVEN categories
+
+> *"try to make it balanced for amount of weapon types so each category covers about the same
+> number of weapons"*
+
+Total composition share per axis, across all 33 families:
+
+| axis | share of the roster | families it counters |
+|---|--:|--:|
+| thermochemical | **27.4%** | 8 |
+| kinetic | **23.4%** | 6 |
+| blast | **22.7%** | 8 |
+| energy | **20.1%** | 6 |
+| **shaped charge** | **6.4%** | **3** |
+
+**Four of the axes are beautifully even at 20–27%. The fifth is not, and it cannot be made
+even without lying about what the weapons are** — only six families carry ANY shaped share,
+and only `MissileAP` is shaped-led. Shaped charge fails the maintainer's own niche test, the
+one that retired `Insulated`, `Damping` and `Warding`: *"only a few factions have tesla but
+everyone has something like energy, AP, HE, fire / chemical"*.
+
+So the honest answer to "find another 1 or 2, but keep it balanced" is: **you can have
+balanced, or you can have five, not both.** Three ways out, in preference order:
+
+1. **Ship FOUR** — HAZMAT / Composite / BlastProtection / REFLECTOR, at 20–27% each. The
+   maintainer's original set, and the measurement says it was right. `Composite` then
+   counters kinetic AND shaped (ceramic and ERA are both anti-armour), which is how a real
+   modern tank is built anyway — it carries both at once.
+2. **Keep five and accept `Reactive` as a SPECIALIST** — narrow but deep. It should then be
+   cheaper or stronger than the other four, because it answers 6% of the roster.
+3. **Five by splitting kinetic instead** — `Ballistic` (small arms, fragments, blades) vs
+   `Composite` (penetrators, slugs, jets). Both real, but each lands near 12%, which trades
+   one uneven category for two undersized ones.
+
+**Recommendation: option 1.** The four-way split is what the roster actually is, and it is
+the maintainer's own first instinct — *"I think those 4 seem to be good for now"*.
+
+### H3 — corrections made to the composition table
+
+Two families were credited to the wrong counter in the first draft:
+
+* **`Flak` and `MissileAA` were blast-led.** Fragments are METAL MOVING FAST, not
+  overpressure — which is exactly why "flak jacket" is a real garment rated in ballistic
+  terms. Both are now kinetic-led (0.60 / 0.55), which moves them to `Composite`.
+* **`Sonic` 0.60 → 0.70 blast.** A pressure wave IS overpressure; the energy share was
+  overstated by treating "it is a wave" as "it is radiation".
+
+## I. Priced survivability — shields and platings as effective HP (VERIFIED)
+
+> *"since everything deals more damage to shields you can count the 200% shield strength like
+> an extra 100% HP ... but right now you also made the average versus value to armor platings
+> to 100 right? so it evens out"*
+
+**Both halves verified against the shipped matrix.**
+
+| layer | column mean | 1 point is worth | maintainer's estimate |
+|---|--:|--:|---|
+| `Shield` | **210.2** | **0.476 HP** | "200% shield ≈ 100% extra HP" — i.e. 0.5. **Confirmed to 5%.** |
+| all five platings | **100.0** | **1.000 HP** | "it evens out" — **confirmed exactly**, by construction |
+
+So the pricing rule is:
+
+```
+effective_HP = HP + shield_strength x (100 / mean_versus_shield)      # x0.476 today
+```
+
+and a plating contributes **nothing** to effective HP on average — it redistributes only.
+That is the column law doing exactly the job it was designed for.
+
+### ⚠ But the plating column mean of 100 is the WRONG target, and the matrix says so
+
+A plating REPLACES the class armor, so what matters is how its column compares to the column
+it displaces. Measured per class armor:
+
+| class armor | column mean | a plating at 100 is... |
+|---|--:|---|
+| `Heroic` | 74.3 | **35% WORSE** |
+| `Spaceship` · `Helicopter` · `Bomber` · `Fighter` | 76–80 | **25–31% WORSE** |
+| `Concrete` | 97.8 | ~neutral |
+| `Steel` … `None` | 102–129 | 2–22% better |
+
+**Six of the sixteen class armors are already better than any plating**, so an aircraft or a
+hero that takes a plating gets *worse* — and `td_gdi_upgrade_heavyaircraftarmorplating` is a
+live aircraft plating. This is the same failure the averaging bug had, arriving by a
+different route: it is not that the plating stacks badly, it is that it displaces something
+better.
+
+The fix is not to abandon the column law — the maintainer's stated purpose for it was that
+platings be equally good *as each other* (*"so all weapon types combined deal the same
+damage"*), which any common mean satisfies. **Lower the common mean to ~70**, just under
+`Heroic`'s 74.3, and a plating becomes a genuine upgrade for every armor it can replace while
+staying exactly equal across the five. The ~30% durability gain then has to be PRICED, which
+is E1's job and is the correct place for it.
+
 ## E. What the balance formula still does not see
 
 Measured against `formula.py`, `weapon_efficiency.py` and `target_model.py`.
