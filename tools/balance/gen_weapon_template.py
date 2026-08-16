@@ -192,7 +192,10 @@ def emit_chip(tag, family_name, damage, vt, level=None):
     order = ["REFLECTOR", "Shield", "None", "Flak", "Plate", "Heroic",
              "Scout", "Light", "Medium", "Heavy", "Superheavy",
              "Wood", "Steel", "Concrete", "Fighter", "Bomber", "Helicopter", "Spaceship"]
-    rows = "\n".join(f"\t\t\t{a}: {d.get(a, floor)}" for a in order if a != "REFLECTOR" or "REFLECTOR" in d)
+    # Through `emit_versus` so the chip obeys the same descending rule as the main and the
+    # %-twin — REFLECTOR and Shield stay pinned at the front, the armors sort by value.
+    rows = emit_versus([(a, d.get(a, floor)) for a in order
+                        if a != "REFLECTOR" or "REFLECTOR" in d])
     dt = "Prone75Percent, TriggerProne, ExplosionDeath"
     if family_name in FAMILY_INTEGRITY_SCALE:
         dt += ", Tesla"
@@ -205,6 +208,14 @@ def emit_chip(tag, family_name, damage, vt, level=None):
         f"\t\tVersus:",
         rows,
         f"\t\tDamageTypes: {dt}"])
+
+
+# THE VERSUS WINDOW (maintainer 2026-08-15, DESIGN.md §12.0) — every shipped Versus value
+# sits in [10, 200], a 20:1 maximum span. Declared HERE, ahead of its own commentary further
+# down, because the Shield damping below is derived from the window at import time and a
+# module-level constant cannot be used before it is bound.
+VERSUS_CEILING = 200
+VERSUS_FLOOR = 10
 
 
 # --------------------------------------------------------------------------- #
@@ -260,47 +271,70 @@ PHYSICS_RANK = {
 }
 # A shield is an ENERGY BUDGET, so a bigger discharge depletes proportionally more of it.
 SHIELD_LEVEL = {"Trace": 0.80, "Light": 0.90, "Medium": 1.00, "Heavy": 1.12, "Super": 1.25}
-SHIELD_K = 1.39186          # calibrated: Tesla_Super == 400
 SHIELD_DEFAULT_RANK = 0.40  # unlisted family: mid-kinetic, so a new family is never silently strong
-
-# The raw formula spans 69..400 = 5.80x, which the maintainer judged too wide (2026-08-16):
-# "the lowest value against shields should be 100, so the spread is only 4x". Compressed with
-# the POWER LAW about the geometric mean — the same technique the profile fitter uses, and
-# never a clamp: clamping moves only the two extreme cells and deforms the shape, while the
-# power law moves every value proportionally and preserves the ORDER exactly.
-#
-#     v' = G x (v/G) ** alpha,  alpha = ln(4) / ln(5.797) = 0.78885
-#
-# then anchored so the floor lands on 100 (x1.21669). Both targets then hold at once:
-# floor 100, Tesla_Super 400, ratio exactly 4.00x.
-#
-# ⚠ G/alpha/anchor are CALIBRATED AGAINST THE CURRENT PROFILE SET. W25 step S1
-# (mean-normalisation to 100) moves every profile and therefore every geometric scale, so
-# these three must be RE-DERIVED after it — `verify_shield_ladder()` fails loudly if they go
-# stale rather than silently drifting off 100..400.
-SHIELD_GEOMEAN = 158.0
-SHIELD_ALPHA = 0.78885
-SHIELD_ANCHOR = 1.21669
-SHIELD_FLOOR_TARGET = 100
+SHIELD_FLOOR_TARGET = 100   # maintainer 2026-08-16: floor 100, ceiling 400, exactly 4.00x
 SHIELD_CEIL_TARGET = 400
+
+# --------------------------------------------------------------------------- #
+# DAMPING the structural term (W25 S1, 2026-08-16)
+# --------------------------------------------------------------------------- #
+# §5b promised the structural term would "anchor the band without fighting the physics rank
+# for control of the ordering". Post-S1 that was MEASURABLY FALSE at the very top: the scale
+# swings 1.198x across the set while `Tesla -> Storm` is only a 1.053x rank gap, so
+# `Storm_Super` (rank 0.95) overtook `Tesla_Super` (1.00) — 425.3 against 420.5. It did the
+# same at Heavy and Medium. That inverts the maintainer's anchor law ("the only thing that
+# should deal extreme damage to shields is tesla") through a term that was only ever meant
+# to set the band.
+#
+# So the term is DAMPED to the one job §5b actually left it: separating families whose
+# physics rank is EQUAL (`ChemCannon`/`ChemMissile` both 0.50, `CannonHE`/`MissileHE` both
+# 0.33). The exponent is derived, not chosen — it is exactly the largest damping under which
+# the SMALLEST genuine rank gap still wins:
+#
+#     damp = ln(smallest distinct rank ratio) / ln(the scale term's own swing)
+#
+# Both inputs come from things that do not move when profiles do: `PHYSICS_RANK` is a design
+# table, and the swing is bounded by the WINDOW — with the mean pinned at 100 the profile's
+# floor cannot exceed 100 and its top cannot exceed 200, so
+# `sqrt((200+floor)(100+top))` lives in `sqrt(210x200) .. sqrt(300x300)` = 204.9 .. 300.0.
+# Using the window bound rather than the measured spread slightly OVER-damps, which is the
+# safe direction: it can only make a real rank gap more decisive, never less.
+_SCALE_LO = math.sqrt((VERSUS_CEILING + VERSUS_FLOOR) * (100 + 100))
+_SCALE_HI = math.sqrt((VERSUS_CEILING + 100) * (100 + VERSUS_CEILING))
+SHIELD_SCALE_CENTRE = math.sqrt(_SCALE_LO * _SCALE_HI)
+_RANKS = sorted(set(PHYSICS_RANK.values()))
+SHIELD_SCALE_DAMP = (math.log(min(b / a for a, b in zip(_RANKS, _RANKS[1:])))
+                     / math.log(_SCALE_HI / _SCALE_LO))
+
+# Phase 1 emits Shield in CENTI-UNITS (x100) because the final value is not knowable here.
+# The compression to [100, 400] is a property of the whole SET, so it belongs to phase 2
+# (`shield_uniqueness.apply`) — and moving it there is what retires the three hand-calibrated
+# constants (`SHIELD_GEOMEAN`/`ALPHA`/`ANCHOR`) that this very step would have invalidated.
+# They were correct for the pre-S1 profiles and silently wrong the moment those moved, which
+# is a hazard no comment can fix; derived-every-run cannot go stale at all.
+#
+# The x100 is not cosmetic: after damping, two equal-rank families differ by ~1%, which at a
+# raw value of 50 rounds to the SAME integer and would lose the separation the damping exists
+# to preserve. Centi-units keep it. Phase 2 is therefore MANDATORY — it asserts it converted
+# every block, so a missed one fails loudly instead of shipping a Shield of 4900.
+SHIELD_RAW_SCALE = 100
 
 
 def shield_for(family, level, rows):
-    """The Shield row for a finished profile. Applied LAST, overriding every other path.
+    """RAW Shield (centi-units) for a finished profile — phase 2 sets the final value.
 
-    Both the measured path (`reference_main`) and the designed path (`table`) used to
-    compute their own Shield, so two rules contested one cell and the measured one won —
-    which is why Tesla's hand-set 300/400 never took effect. This is now the single source.
+    Applied LAST, overriding every other path. Both the measured path (`reference_main`)
+    and the designed path (`table`) used to compute their own Shield, so two rules
+    contested one cell and the measured one won — which is why Tesla's hand-set 300/400
+    never took effect. This is now the single source.
     """
-    vals = [v for a, v in rows if a not in ("Shield", "HAZMAT", "REFLECTOR")]
+    vals = [v for a, v in rows if a not in NON_ARMOR_ROWS]
     if not vals:
         return None
     scale = math.sqrt((VERSUS_CEILING + min(vals)) * (100 + max(vals)))
+    damped = SHIELD_SCALE_CENTRE * (scale / SHIELD_SCALE_CENTRE) ** SHIELD_SCALE_DAMP
     rank = PHYSICS_RANK.get(family, SHIELD_DEFAULT_RANK)
-    raw = rank * SHIELD_LEVEL.get(level, 1.0) * scale * SHIELD_K
-    # Compress 5.80x -> 4.00x about the geometric mean, then anchor the floor to 100.
-    return max(1, round(SHIELD_GEOMEAN * (raw / SHIELD_GEOMEAN) ** SHIELD_ALPHA
-                        * SHIELD_ANCHOR))
+    return max(1, round(rank * SHIELD_LEVEL.get(level, 1.0) * damped * SHIELD_RAW_SCALE))
 
 
 def table(order16, step, top, floor, shield):
@@ -333,8 +367,7 @@ def table(order16, step, top, floor, shield):
 # peak-100 law wrote as "100 against a floor of 5", re-expressed on the median-100
 # scale. A legal maximum, not a target: the reference mods' own profiles span only
 # 1.3x-7.2x, so anything beyond that is Cameo's design choice, not the field's.
-VERSUS_CEILING = 200
-VERSUS_FLOOR = 10
+# (`VERSUS_CEILING` / `VERSUS_FLOOR` are bound near the top of the file — see the note there.)
 REFERENCE_JSON = (pathlib.Path(__file__).resolve().parents[2]
                   / "docs" / "reference" / "family_profiles.json")
 # The families Cameo INVENTED, which have no cross-mod equivalent to measure. Kept in
@@ -392,6 +425,109 @@ def distinct_ints(rows):
 
 BAND_LOW = 2.0                      # DESIGN.md §12.0 rule 5 — the target band's flat end
 DERIVED_ARMORS = ("Heroic", "Airborne")
+# Rows that live on a Versus node but are not armor classes, so they never enter a
+# profile statistic: the shield LAYER, the HAZMAT gate, Tesla's REFLECTOR.
+NON_ARMOR_ROWS = ("Shield", "HAZMAT", "REFLECTOR")
+
+
+# --------------------------------------------------------------------------- #
+# W25 S1 — THE MEAN-100 LAW (maintainer, 2026-08-16)
+# --------------------------------------------------------------------------- #
+# *"all warheads average all versus values at 100 to make them comparable"*
+#
+# W13 normalised each profile to its MEDIAN. That left every family's MEAN free, and
+# a family's mean is not a shape statistic — it is a MAGNITUDE. `K` is a share-weighted
+# average of the profile, so the mean IS the family's contribution to priced DPS, and
+# picking a family silently changed a weapon's total output as well as its shape.
+# Measured across the 94 shipped templates before this change: means ran 22.0
+# (`Magic_Light`) to 106.1 (`MissileAA_Light`), averaging 75.0 — i.e. up to a 4.8x
+# hidden multiplier between two families that both looked "normalised".
+#
+# Pinning the mean at 100 makes:
+#   * `K` SHAPE-ONLY — choosing a family redistributes output across armors without
+#     changing how much of it there is;
+#   * `Damage` the sole magnitude knob, which is what the balance pipeline wants;
+#   * families directly comparable, which is the maintainer's stated goal.
+#
+# The mean is UNWEIGHTED over the 16 armor rows, deliberately. A share-weighted mean
+# would be a better predictor of realised DPS, but it would make a profile's legality
+# depend on the current unit roster — every roster change would silently move every
+# template. Uniform weighting is a property of the profile alone.
+#
+# ⚠ **The window makes this a constraint, not just a rescale.** With the mean pinned at
+# 100, `max <= 200` becomes `max <= 2 x mean`: a profile that is brilliant against three
+# armors and useless against thirteen CANNOT keep its peak, because thirteen low values
+# drag the mean down. Measured: 11 of 94 templates breach the ceiling under a plain
+# rescale, worst `Melee_Medium` at 316 (median 35.5 against a peak of 174 — the extreme
+# bottom-heavy profile). Those 11 are brought back by the POWER LAW about the geometric
+# mean, `v' = G x (v/G) ** alpha`, never by clamping. Three reasons it is the right
+# instrument, the third specific to this step:
+#
+#   1. it is monotone, so the ordering law's sequence survives untouched;
+#   2. it preserves the geometric mean, the correct centre for a set of MULTIPLIERS;
+#   3. **it preserves the derived-armor relation exactly.** §12.0b sets
+#      `Heroic = Plate x Scout / peak`, and the power law satisfies
+#      `G(P/G)^a x G(S/G)^a / G(peak/G)^a == G(H/G)^a` identically — so Heroic stays
+#      derived without being recomputed. A clamp or an affine squeeze breaks that.
+#
+# The cost is real and is reported by `report_versus_change.py`: the 11 compressed
+# templates lose sharpness (Melee 6.69x -> 2.86x, Arrow 4.71x -> 3.01x; the other eight
+# move by less than 1.0x). Median spread across all 94 barely moves, 3.06x -> 3.00x, so
+# the field band (2/4/8) still holds. If the maintainer wants Melee's skew back, the
+# lever is the CEILING, not this function — under mean-100 a peak of 2x the average is
+# arithmetic, not policy.
+#
+# ⚠ **Scope: the MAIN warhead only.** The `_Percentage` twin encodes its magnitude IN
+# its Versus rows (`Damage` is a fixed 1-per-2000 grid), so normalising it would multiply
+# every %-effect by ~5x. Rebasing the twins is W18's atomic job.
+MEAN_TARGET = 100.0
+
+
+def _powerlaw(vals, alpha):
+    g = statistics.geometric_mean([max(v, 1.0) for v in vals])
+    return [g * (max(v, 1.0) / g) ** alpha for v in vals]
+
+
+def _to_mean(vals, target):
+    m = statistics.fmean(vals)
+    return [v * target / m for v in vals] if m > 0 else list(vals)
+
+
+def mean_normalise(rows, target=MEAN_TARGET):
+    """Rescale a MAIN profile so the MEAN of its armor rows is `target` (see above).
+
+    Returns rows in the SAME ORDER — the emit order is the ordering law's output and
+    `shield_for` overwrites `Shield` immediately after, so nothing here may reshuffle.
+    """
+    idx = [i for i, (a, _) in enumerate(rows) if a not in NON_ARMOR_ROWS]
+    vals = [float(rows[i][1]) for i in idx]
+    if not vals:
+        return rows
+    if max(vals) <= min(vals):
+        # Sonic / Magic are flat BY DESIGN ("ignores armor"). Flat at 100 says exactly
+        # that and nothing else; the level ladder they used to carry here (45/55/65,
+        # 22/27/32/38) was magnitude, which now belongs to Damage and WC.
+        fitted = [target] * len(vals)
+    else:
+        def fits(alpha):
+            out = _to_mean(_powerlaw(vals, alpha), target)
+            return max(out) <= VERSUS_CEILING + 1e-9 and min(out) >= VERSUS_FLOOR - 1e-9
+        if fits(1.0):
+            fitted = _to_mean(vals, target)
+        else:
+            lo, hi = 0.0, 1.0            # largest alpha = least distortion
+            for _ in range(60):
+                mid = (lo + hi) / 2.0
+                if fits(mid):
+                    lo = mid
+                else:
+                    hi = mid
+            fitted = _to_mean(_powerlaw(vals, lo), target)
+    armor = [(rows[i][0], int(round(v))) for i, v in zip(idx, fitted)]
+    if max(vals) > min(vals):
+        armor = distinct_ints(armor)     # rounding can re-tie what the floats separated
+    fixed = dict(armor)
+    return [(a, fixed.get(a, v)) for a, v in rows]
 
 
 def finish_blend(rows):
@@ -482,8 +618,34 @@ def reference_main(name, order16, level):
 
 
 def emit_versus(rows, indent="\t\t\t", hazmat=None):
+    """Emit a `Versus:` node: pseudo-rows first, then armors DESCENDING by value.
+
+    Maintainer 2026-08-16: *"the percentage versus values are not ordered by power like
+    they are for the normal variants ... enforce this rule so percentage values are also
+    always ordered by descending value (except for hazmat and shield which are always
+    first)"*.
+
+    The main warhead already arrived sorted (`reference_main` / `finish_blend` end with a
+    descending sort), but the `_Percentage` twin and the `_ExtraDamage` chip did not: they
+    were emitted in the ORDERING LAW's sequence — macro blocks INF, VEH, BLD, AIR, each
+    ascending for a light-favouring family — which reads as `9 10 11 13 · 7 9 10 12 13`,
+    restarting at every block. The law decides which armor gets which VALUE; it was never
+    meant to decide the print order, and a reader cannot check a ladder that restarts.
+
+    Sorting HERE rather than at each call site makes the invariant unconditional: every
+    Versus node the generator emits is descending, whoever built the rows. The sort is
+    STABLE, so armors that tie keep the ordering law's sequence — which is the right
+    tiebreak, because the law's order is the design statement about them.
+
+    `HAZMAT` and `Shield` are pinned first and excluded from the sort: neither is an armor
+    class (one is a gate, the other the shield LAYER), and `Shield` is deliberately outside
+    the [10, 200] window in both directions, so sorting it in would drag it to an end and
+    hide the ladder it is not part of.
+    """
     out = [] if hazmat is None else [f"{indent}HAZMAT: {hazmat}"]
-    for a, v in rows:
+    lead = [r for r in rows if r[0] in NON_ARMOR_ROWS]
+    body = sorted((r for r in rows if r[0] not in NON_ARMOR_ROWS), key=lambda r: -r[1])
+    for a, v in lead + body:
         out.append(f"{indent}{a}: {v}")
     return "\n".join(out)
 
@@ -554,6 +716,11 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
             # five times. Until then the twin carries the ORDER, not the shape.
             pct = table(order16, 1, ptop, pfloor, ptop + pfloor)
             hz = hazmat
+        # W25 S1 — pin the profile's MEAN to 100 before anything reads it. Must run on
+        # EVERY branch and BEFORE `shield_for`: Shield's structural term is
+        # `sqrt((200+floor)(100+top))`, so it has to see the final ladder, not the
+        # pre-normalisation one. See MEAN_TARGET above for why, and for what it costs.
+        main = mean_normalise(main)
         # SINGLE SOURCE for Shield, applied to EVERY branch (flat, pct and standard):
         # overrides whatever the measured or designed path put there, so the two can never
         # contest the cell again (see shield_for). Placed after the if/else on purpose —
@@ -951,9 +1118,11 @@ def _generate():
 
 if __name__ == "__main__":
     # TWO-PHASE generation. Phase 1 emits every family independently (per-family logic,
-    # which is all `shield_for` can see); phase 2 reassigns Shield across the FINISHED set
-    # so no two templates share a value. Uniqueness is a property of the whole set, so it
-    # cannot be decided while generating one family at a time.
+    # which is all `shield_for` can see) with Shield in RAW centi-units; phase 2 compresses
+    # the finished set onto [100, 400] and reassigns so no two templates share a value.
+    # Both the band and uniqueness are properties of the whole SET, so neither can be
+    # decided while generating one family at a time — and deriving the band here each run
+    # is what keeps it from going stale when the profiles move (as S1 just did).
     import io
     from contextlib import redirect_stdout
     import shield_uniqueness

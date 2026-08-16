@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Global Shield uniqueness pass — the SECOND phase of Shield generation.
+"""Global Shield pass — the SECOND phase of Shield generation: COMPRESS, then UNIQUE.
 
 Maintainer's rule (2026-08-16): *"no weapon should share the same versus value against
 shields"*, with a defined DIRECTION — *"if something has the same value always prioritize it
@@ -15,6 +15,19 @@ phase over all of it. This module is that phase, kept separate from
 With 96 templates in the closed range [100, 400] there are 301 integer slots, so a
 collision-free assignment always exists and the range never has to widen.
 
+**Why the COMPRESSION lives here too** (moved 2026-08-16, W25 S1). Phase 1 emits a RAW
+Shield in centi-units; mapping the set onto [100, 400] needs the set's own extremes, which
+`shield_for` cannot see either. It used to be done per-family with three hand-calibrated
+constants (`SHIELD_GEOMEAN` / `SHIELD_ALPHA` / `SHIELD_ANCHOR`), and those were correct for
+exactly one profile set: the moment S1 renormalised every profile, the ladder silently
+drifted to 110..420 = 3.82x against its stated targets of 100..400 = 4.00x. Deriving the
+compression from the data on every run cannot go stale, so the drift hazard is gone rather
+than merely documented.
+
+The compression is a POWER LAW about the geometric mean, never a clamp: a clamp moves only
+the two extreme cells and deforms the ladder, while `v' = G x (v/G) ** alpha` moves every
+value proportionally and preserves the ORDER exactly.
+
 Two rules, applied in order:
 
 1. **Within a family, Shield ascends** `Trace < Light < Medium < Heavy < Super` — the old
@@ -26,7 +39,9 @@ the `_ExtraDamage` chip carry their own Shield rows and are deliberately left al
 """
 from __future__ import annotations
 
+import math
 import re
+import statistics
 
 LEVEL_RANK = {"Trace": 0, "Light": 1, "Medium": 2, "Heavy": 3, "Super": 4}
 HEADER = re.compile(r"^\^Warhead_(\w+?)_(\w+):$")
@@ -49,6 +64,24 @@ def find_main_shields(lines: list[str]) -> list[tuple[int, str, str, int]]:
                 pass
             seen = True
     return out
+
+
+def compress(raw: list[float], lo: int, hi: int) -> list[float]:
+    """Map the raw ladder onto exactly `[lo, hi]`, order intact.
+
+    `alpha = ln(hi/lo) / ln(raw_hi/raw_lo)` hits the target ratio exactly; the anchor then
+    slides the floor onto `lo`, so BOTH endpoints land by construction on every run. A raw
+    ladder that is already flat (or a single entry) has no ratio to fit — it is placed at
+    the floor rather than divided by zero.
+    """
+    r_lo, r_hi = min(raw), max(raw)
+    if len(raw) < 2 or r_hi <= r_lo or r_lo <= 0:
+        return [float(lo)] * len(raw)
+    g = statistics.geometric_mean(raw)
+    alpha = math.log(hi / lo) / math.log(r_hi / r_lo)
+    out = [g * (v / g) ** alpha for v in raw]
+    anchor = lo / min(out)
+    return [v * anchor for v in out]
 
 
 def assign(found: list[tuple[int, str, str, int]], lo: int, hi: int) -> dict:
@@ -81,10 +114,23 @@ def assign(found: list[tuple[int, str, str, int]], lo: int, hi: int) -> dict:
 
 
 def apply(text: str, lo: int = 100, hi: int = 400) -> str:
+    """Compress every raw Shield onto [lo, hi], then make the values unique.
+
+    ⚠ **This pass is MANDATORY, not an optimisation.** Phase 1 emits centi-units, so a
+    block that reached the file without passing through here would ship a Shield of ~4900.
+    It therefore refuses to run on text whose main-warhead Shield rows it cannot all read,
+    rather than silently converting the ones it understood.
+    """
     lines = text.split("\n")
     found = find_main_shields(lines)
     if not found:
         return text
+    headers = sum(1 for ln in lines if HEADER.match(ln))
+    if len(found) != headers:
+        raise ValueError(f"shield_uniqueness: {headers} template blocks but "
+                         f"{len(found)} readable Shield rows — refusing to half-convert")
+    scaled = compress([float(v) for *_h, v in found], lo, hi)
+    found = [(i, fam, lv, int(round(v))) for (i, fam, lv, _), v in zip(found, scaled)]
     final = assign(found, lo, hi)
     for i, fam, lv, _ in found:
         indent = lines[i][: len(lines[i]) - len(lines[i].lstrip())]

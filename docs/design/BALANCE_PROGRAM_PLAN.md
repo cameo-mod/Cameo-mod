@@ -46,7 +46,7 @@ status rather than keeping its own copy.
 | **W15** | `%`-twin fix + `reference_hp` → 200 000 — **PREREQUISITE for W17** | ✅ DONE | Claude | — |
 | **W16** | Charge-up discount PROPORTIONAL to real charge share (supersedes W4's flat 0.75×) | ✅ DONE | Claude | W4 ✅ |
 | **W17** | ~~Remove the 2000-damage grid~~ (done as a 100 grid in W15); retire FirepowerMultiplier as a fine-tuning knob | 🔵 TOOLING DONE `451e10a63`; **content half NOW UNBLOCKED** | Claude | W15 ✅ |
-| **W18** | Roll the 0.1% percentage unit out into yaml (`PercentageDenominator: 1000`, ×10 the values) | ⬜ READY (set B free) | Claude | W15 ✅ |
+| **W18** | Roll the 0.01% basis-point unit out into yaml (`PercentageDenominator: 10000`, `pct_damage = damage // 100`, ×5 the Versus values — all three together) | ⬜ READY (set B free) | Claude | W15 ✅ |
 | **W19** | Collapse the 195 `SpreadDamage` ExtraDamage chips into the main warhead (KEEP the 34 sniper `OpenToppedDamage`) | ⬜ READY (set B free) | Claude | W13 |
 | **W20** | Multi-armor combination rule (engine MULTIPLIES → squares the profile); mechanism + switch | ⬜ MECHANISM DONE, rule = maintainer | Claude | — |
 | **W21** | Layered health Shield → Integrity → Armor → Health, layer-aware armor (solves W20 structurally) | ✅ BUILT + LIVE `ab467fe52` | Claude | — |
@@ -959,8 +959,12 @@ Sonic, Tesla, which the maintainer has already named as such). Both windows are 
 clean to remember; only the sharpness differs.
 
 ⚠ **The yaml rollout is NOT in this commit — see W18.** The mechanism is live and inert:
-nothing writes `PercentageDenominator: 1000` yet, so every weapon still behaves exactly
-as before.
+nothing writes `PercentageDenominator: 10000` yet, so every weapon still behaves exactly
+as before. **Re-verified 2026-08-16**: `grep -rn PercentageDenominator mods/` is still
+empty, so every `_Percentage` twin is on the default whole-percent unit and the ×5 Versus
+band has NOT landed. The board row above and this note both used to say `1000` / ×10,
+which contradicted the spec in W18 and the C# `[Desc]`; the unit is `10000` (basis points,
+0.01% steps) and the Versus factor is ×5.
 
 ---
 
@@ -1151,11 +1155,18 @@ anywhere without tier restriction (W13 rule 5).
 
 ---
 
-### W18 — Roll the basis-point unit out into yaml ⛔ BLOCKED on set B (Devin, W2)
+### W18 — Roll the basis-point unit out into yaml ⬜ READY (unblocked)
 
-W15 shipped the MECHANISM; this ships the CONTENT. Blocked purely by file ownership:
-every file involved is set B (`mods/cameo/weapons/**`, `ContentPacks/**/weapons.yaml`),
-which Devin holds while W2 runs. **Do not start this until W2 lands** — §2 is not advisory.
+W15 shipped the MECHANISM; this ships the CONTENT. It *was* blocked purely by file
+ownership — every file involved is set B (`mods/cameo/weapons/**`,
+`ContentPacks/**/weapons.yaml`), which Devin held while W2 ran. **Devin's set-B lock has
+since been released**, so the ownership block is gone; the header said BLOCKED long after
+that stopped being true.
+
+Maintainer asked 2026-08-16 whether the ×5 had already landed. **It has not** — verified,
+not assumed: `grep -rn PercentageDenominator mods/` returns nothing, so every `_Percentage`
+twin still reads `Damage` as whole percent. The C# knob is live and inert, exactly as W15
+left it.
 
 Measured scope (2026-08-11, `Warhead@*Percentage` nodes carrying an explicit `Damage`):
 

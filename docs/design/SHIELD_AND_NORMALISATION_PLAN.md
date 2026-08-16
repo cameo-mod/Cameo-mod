@@ -338,6 +338,100 @@ cannot see cross-family collisions. It needs a two-phase generation — compute 
 Shield first, then assign final values — which is a small refactor of the generator's main
 loop, NOT another per-family formula tweak. That refactor is the next step.
 
+## 6e. ✅ S1 SHIPPED — mean-normalisation to 100 (2026-08-16)
+
+`gen_weapon_template.mean_normalise()`, applied to every MAIN warhead on every branch
+(measured, designed, flat, pct and blend) immediately before `shield_for`.
+
+**Measured before:** family means ran **22.0** (`Magic_Light`) to **106.1**
+(`MissileAA_Light`), averaging **75.0** — a hidden magnitude multiplier of up to 4.8x
+between two families that both looked "normalised". **After: every one of the 94 templates
+sits at 100.0 ± 0.2.**
+
+### The constraint nobody had priced
+
+A plain `v x 100/mean` rescale breaks the ceiling on **11 of 94** templates, worst
+`Melee_Medium` at **316**. This is arithmetic, not a bug: with the mean pinned at 100,
+`max <= 200` *means* `max <= 2 x mean`, so a profile that is brilliant against three armors
+and useless against thirteen cannot keep its peak — the thirteen drag the mean down.
+
+Those 11 are brought back by the POWER LAW about the geometric mean, never a clamp. Beyond
+the two reasons the profile fitter already used it (monotone, preserves the geometric
+centre), there is a third that is specific to this step: **it preserves the derived-armor
+relation exactly.** `G(P/G)^a x G(S/G)^a / G(peak/G)^a == G(H/G)^a` identically, so
+`Heroic = Plate x Scout / peak` (§12.0b) survives without being recomputed. An affine
+squeeze onto the window does not.
+
+| | before | after |
+|---|--:|--:|
+| median spread across all 94 | 3.06x | **3.00x** |
+| sharpest family | 7.33x (`Railgun_Heavy`) | 6.41x (`Melee_Light`) |
+| `Melee_Medium` | 6.69x | **2.86x** |
+| `Arrow_Medium` | 4.71x | **3.01x** |
+
+⚠ **The cost is real and belongs to the maintainer, not to me.** Melee and Arrow lose about
+half their skew; the other nine move by less than 1.0x. The field band (2/4/8) still holds
+at the median. **If that skew should come back, the lever is the CEILING, not the
+normaliser** — under mean-100 a peak of twice the average is arithmetic, not policy.
+
+⚠ **Scope: MAIN warheads only.** The `_Percentage` twin encodes its magnitude IN its Versus
+rows, so normalising it would multiply every %-effect by ~5x. Rebasing the twins is W18.
+
+### What S1 did to the Shield ladder — and the fix that outlives it
+
+Exactly the drift §6b warned about: the three hand-calibrated constants
+(`SHIELD_GEOMEAN` / `SHIELD_ALPHA` / `SHIELD_ANCHOR`) were correct for the pre-S1 profiles
+and silently wrong the moment those moved — the ladder landed on **110..420 = 3.82x**
+against its stated targets of 100..400 = 4.00x.
+
+Worse, it inverted the anchor law. The structural term swings **1.198x** across the set
+while `Tesla -> Storm` is only a **1.053x** rank gap, so `Storm_Super` (rank 0.95) overtook
+`Tesla_Super` (1.00), 425.3 to 420.5 — and did the same at Heavy and Medium. §5b had
+promised the structural term would "anchor the band without fighting the physics rank for
+control of the ordering"; post-S1 that was measurably false.
+
+Two changes, and both are structural rather than a re-calibration:
+
+1. **The structural term is DAMPED** to the one job §5b actually left it — separating
+   families whose physics rank is EQUAL (`ChemCannon`/`ChemMissile` both 0.50). The
+   exponent is derived, not chosen: `ln(smallest distinct rank ratio) / ln(the term's own
+   swing)`, i.e. exactly the largest damping under which the smallest genuine rank gap
+   still wins. Both inputs are stable — `PHYSICS_RANK` is a design table, and the swing is
+   bounded by the WINDOW, not by the current profiles.
+2. **The compression moved into phase 2** (`shield_uniqueness.compress`), where the whole
+   set is visible, and is DERIVED on every run. The three stale-able constants are retired.
+   A calibration that cannot go stale beats a comment warning that it might.
+
+**Result: 100..400 = exactly 4.000x, 94 of 94 distinct, Shield ascends within every family,
+and Tesla is the top family at every level it exists** — `Tesla` 312 / 338 / 368 / 400 with
+`Storm` just under at 301 / 326 / 355 / 385.
+
+⚠ **Two templates float outside the pass** because the generator does not emit them:
+`^Warhead_Nuclear_Super` (`HAND_TUNED`, Shield 155) and `^Warhead_Sniper_Light` (110).
+Nuclear now collides with `CannonAP_Heavy` at 155 — and it resolves in S2, which retires
+`HAND_TUNED` and brings Nuclear into the generator as a generalist. `Sniper_Light` is a
+standing hazard: it can collide at any regeneration and nothing would catch it.
+
+### Also shipped: descending Versus order everywhere
+
+Maintainer, 2026-08-16: *"the percentage versus values are not ordered by power like they
+are for the normal variants ... enforce this rule so percentage values are also always
+ordered by descending value (except for hazmat and shield which are always first)"*.
+
+The main warhead already arrived sorted; the `_Percentage` twin and the `_ExtraDamage` chip
+did not — they shipped in the ORDERING LAW's sequence (macro blocks INF, VEH, BLD, AIR),
+which reads `9 10 11 13 · 7 9 10 12 13`, restarting at every block. The law decides which
+armor gets which VALUE; it was never meant to decide the print order.
+
+Sorting now happens inside `emit_versus`, so the invariant is unconditional for every node
+the generator emits, whoever built the rows. The sort is STABLE, so ties keep the ordering
+law's sequence. **All 201 `^Warhead_*` template Versus nodes are now descending.**
+
+⚠ **524 non-descending Versus nodes remain outside the templates** — almost all on legacy
+`Warhead@1Dam` / `2Dam` / `3Eff` weapons carrying their own inline `Versus`, which
+DESIGN.md forbids outright (`Versus` lives only in `^Warhead_*`). They are not worth sorting:
+the retired-naming purge and W23/W24 delete or convert them wholesale.
+
 ## 7. Open decisions
 
 1. **Shield range** — `CEILING + floor` gives 210/225/240. Should Tesla reach ~400 as it
