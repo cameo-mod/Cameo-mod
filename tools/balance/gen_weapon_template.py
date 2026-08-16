@@ -207,6 +207,78 @@ def emit_chip(tag, family_name, damage, vt, level=None):
         f"\t\tDamageTypes: {dt}"])
 
 
+# --------------------------------------------------------------------------- #
+# Shield — a rock-paper-scissors axis, NOT a function of the profile's shape
+# --------------------------------------------------------------------------- #
+# Maintainer 2026-08-16: "shields have their own armor type so they feel unique. Energy
+# weapons deal more damage to shields than physical weapons but physical weapons deal more
+# damage to vehicle armor than energy weapons."
+#
+# The OLD law was `Shield = top + floor`, written when every profile peaked at exactly 100,
+# so it produced the ceiling + floor (110/125/140). W13 renormalised to median-100, "top"
+# became a function of each family's SHARPNESS, and the rule silently started rewarding
+# sharpness instead of anti-shield design — Melee read 200 while Tesla read 151. A sword
+# out-damaged a Tesla coil against an energy shield.
+#
+# ⚠ MEASURED (see SHIELD_AND_NORMALISATION_PLAN.md §5b): NO structural formula can carry the
+# identity. `floor` and `top` are ANTI-CORRELATED by construction — a normalised profile that
+# is sharp necessarily has a low floor and a high top, and a flat one the reverse — so any
+# product of them cancels out to an invariant of the normalisation rather than a property of
+# the weapon (`200+floor` spans just 1.26x, the geometric mean 1.54x, both with >50% ties).
+#
+# So the structural term sets the SCALE and the physics rank sets the ORDER:
+#
+#     Shield = PHYSICS_RANK[family] x SHIELD_LEVEL[level] x sqrt((200+floor)(100+top)) x K
+#
+# K is calibrated so `Tesla_Super` lands on exactly 400 — the value Tesla carried before its
+# anti-shield `ExtraDamage` chip was merged into the main warhead by the AreaDamage
+# conversion, which is what deleted the identity's carrier in the first place.
+#
+# ⚠ Shield is exempt from the [10,200] window in BOTH directions now. It used to be "the one
+# value always ABOVE the cap" because shields were assumed uniformly soft; under the ruling
+# above they are soft to ENERGY and HARD to kinetics, so physical families land below 100
+# (Melee 76 — a blade is the canonical thing a shield stops). The old invariant was a
+# consequence of the old assumption, not a law in its own right.
+PHYSICS_RANK = {
+    # direct electrical / EM — current couples straight into the field; the shield IS the conductor
+    "Tesla": 1.00, "Storm": 0.95,
+    # coherent energy — delivers energy the emitter must absorb; scales with coherence
+    "Quantum": 0.82, "Railgun": 0.78, "Prism": 0.76, "Laser": 0.74,
+    # blended energy — part field-coupling, part thermal
+    "Waveforce": 0.70, "Plasma": 0.68, "Inferno": 0.64,
+    # exotic / field-adjacent
+    "Sonic": 0.60, "Magic": 0.58, "Nuclear": 0.56,
+    # thermal / chemical — a shield stops heat and reagents well; little field coupling
+    "FireCannon": 0.52, "FireMissile": 0.52, "Flame": 0.50, "ChemCannon": 0.50,
+    "ChemMissile": 0.50, "Chemical": 0.48, "Toxic": 0.46, "Thermobaric": 0.44,
+    # kinetic / explosive — momentum is exactly what a shield is designed for
+    "Flak": 0.38, "Concussion": 0.36, "Demolition": 0.35, "Bullet": 0.34,
+    "MissileAA": 0.34, "CannonHE": 0.33, "MissileHE": 0.33, "CannonAP": 0.32,
+    "MissileAP": 0.32, "Sniper": 0.30,
+    # physical contact — the canonical thing a shield stops
+    "Arrow": 0.24, "Melee": 0.22, "Cryo": 0.66,
+}
+# A shield is an ENERGY BUDGET, so a bigger discharge depletes proportionally more of it.
+SHIELD_LEVEL = {"Trace": 0.80, "Light": 0.90, "Medium": 1.00, "Heavy": 1.12, "Super": 1.25}
+SHIELD_K = 1.39186          # calibrated: Tesla_Super == 400
+SHIELD_DEFAULT_RANK = 0.40  # unlisted family: mid-kinetic, so a new family is never silently strong
+
+
+def shield_for(family, level, rows):
+    """The Shield row for a finished profile. Applied LAST, overriding every other path.
+
+    Both the measured path (`reference_main`) and the designed path (`table`) used to
+    compute their own Shield, so two rules contested one cell and the measured one won —
+    which is why Tesla's hand-set 300/400 never took effect. This is now the single source.
+    """
+    vals = [v for a, v in rows if a not in ("Shield", "HAZMAT", "REFLECTOR")]
+    if not vals:
+        return None
+    scale = math.sqrt((VERSUS_CEILING + min(vals)) * (100 + max(vals)))
+    rank = PHYSICS_RANK.get(family, SHIELD_DEFAULT_RANK)
+    return max(1, round(rank * SHIELD_LEVEL.get(level, 1.0) * scale * SHIELD_K))
+
+
 def table(order16, step, top, floor, shield):
     rows = [("Shield", shield)]
     for i, a in enumerate(order16):
@@ -458,6 +530,13 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
             # five times. Until then the twin carries the ORDER, not the shape.
             pct = table(order16, 1, ptop, pfloor, ptop + pfloor)
             hz = hazmat
+        # SINGLE SOURCE for Shield, applied to EVERY branch (flat, pct and standard):
+        # overrides whatever the measured or designed path put there, so the two can never
+        # contest the cell again (see shield_for). Placed after the if/else on purpose —
+        # scoping it to one branch left the FLAT/PCT families on their old value.
+        sv = shield_for(name, level, main)
+        if sv is not None:
+            main = [("Shield", sv)] + [(a, v) for a, v in main if a != "Shield"]
         tag = f"{name}_{level}"
         # Energy families are thinned to near single-target; the chip/utility pays for the low spread.
         main_spread = ENERGY_THIN_SPREAD_LEVEL.get((name, level), ENERGY_THIN_SPREAD.get(name, at(spreads, li)))
@@ -727,6 +806,12 @@ def _family_main_pct(pname, level):
     step, mfloor, ptop = LEVELS[level]
     pfloor = ptop - 15
     main = reference_main(pname, order, level) or table(order, step, 100, mfloor, 100 + mfloor)
+    # Blends average their PARENTS' profiles, and averaging their parents' Shield rows would
+    # average the physics too — a Plasma (Flame+Chemical) would inherit a kinetic Shield.
+    # Recompute from the blend's OWN rank instead, same single source as everything else.
+    sv = shield_for(pname, level, main)
+    if sv is not None:
+        main = [("Shield", sv)] + [(a, v) for a, v in main if a != "Shield"]
     return (dict(main), dict(table(order, 1, ptop, pfloor, ptop + pfloor)))
 
 
