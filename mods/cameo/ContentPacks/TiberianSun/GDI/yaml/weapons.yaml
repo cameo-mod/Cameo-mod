@@ -284,6 +284,8 @@ TSSonicZapWeapon:
 	Inherits: ^Warhead_Tesla_Heavy
 	Inherits@2: ^Warhead_Magic_Heavy
 	Inherits@3: ^Effect_Magic_Heavy
+	Warhead@Effect:
+		-ImpactSounds:
 	ReloadDelay: 60
 	Range: 4050
 	Projectile: AreaBeam
@@ -315,6 +317,8 @@ TSSonicZapWeapon:
 TSSonicZapWeaponSonic:
 	Inherits@wh: ^Warhead_Sonic_Heavy
 	Inherits@fx: ^Effect_Sonic_Heavy
+	Warhead@Effect:
+		-ImpactSounds:
 	ReloadDelay: 60
 	Range: 4050
 	ValidTargets: Ground, Water
@@ -640,6 +644,16 @@ TSHellfireSonic:
 	Warhead@Sonic_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 
 TSZoneHellfire:
 	Inherits: TSHellfire
