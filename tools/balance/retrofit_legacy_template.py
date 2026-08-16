@@ -357,22 +357,33 @@ def delete_node(f: YamlFile, span: tuple[int, int], key: str) -> bool:
 
 
 def ensure_inherits(f: YamlFile, span: tuple[int, int], target: str) -> bool:
-    """Add the family parent, after any inherits the template already has.
+    """Add the family parent at the TOP of the block, before any of its own nodes.
 
-    Order matters in OpenRA: later `Inherits` win on conflicting keys, and the family
-    template is what should win for the warhead layer.
+    ⚠ `Inherits` POSITION IS SEMANTIC IN OPENRA, NOT COSMETIC. `MiniYaml` walks a
+    definition's children in document order and splices the parent's resolved nodes in
+    *at the point the `Inherits` line appears*; nodes that come later override earlier
+    ones. So a node declared BEFORE an `Inherits` is overridden BY THE PARENT.
+
+    This cost a full debugging round. `^HeavyCannon`, `^MediumCannon` and
+    `^TankDestroyerCannon` each already carry `Inherits@glow: ^ImpactGlow` near the END
+    of the block (~line 81) while their warheads sit at line 9. Appending the family
+    inherit after the last existing one therefore placed it *below* the warheads, and
+    the family's `Damage: 2000` / `Spread: 250` / `Falloff` silently overrode the
+    template's own rescaled `Damage: 838` and preserved geometry. It lints clean, boots
+    clean, and `find_empty_warhead` stays 0 — only a resolve diff shows it.
+
+    Inserting at the top is also the tree's own convention, and it is what makes the
+    retrofit's whole contract work: the family supplies the profile, the template keeps
+    everything it explicitly restates.
     """
     start, end = span
-    last = start
     for i in range(start, end):
         if not (f.is_content(i) and f.indent(f.lines[i]) == 1):
             continue
-        if not f.lines[i].strip().startswith("Inherits"):
-            continue
-        if f.lines[i].split(":", 1)[1].strip() == target:
+        if f.lines[i].strip().startswith("Inherits") \
+                and f.lines[i].split(":", 1)[1].strip() == target:
             return False
-        last = i + 1
-    f.insert(last, f"\tInherits@wh: {target}")
+    f.insert(start, f"\tInherits@wh: {target}")
     return True
 
 

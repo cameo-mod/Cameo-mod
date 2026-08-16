@@ -489,3 +489,35 @@ A `Warhead@X:` line with **no value** is a boot crash, not a lint warning. `Weap
 ## Weapon 3-way split: projectile family naming (2026-08-07)
 
 - **The new projectile family for cannons is `Shell_`, not `Cannon_`.** `^Projectile_Shell_Light/Medium/Heavy` exists; `^Projectile_Cannon*` does not. `CannonHE_Heavy` and `CannonAP_*` weapons use `^Projectile_Shell_*` for delivery and `^Effect_CannonHE_*` / `^Effect_CannonAP_*` for impact.
+
+## `Inherits` POSITION is semantic, not cosmetic (2026-08-16)
+
+**The last node wins, and `Inherits` is a node.** `MiniYaml` walks a definition's children
+in document order; when it reaches an `Inherits`/`Inherits@X` line it splices the parent's
+resolved children in **at that point**, and anything later overrides anything earlier
+(`tools/audit/miniyaml.py` `_resolve_generic` reproduces this faithfully). Therefore:
+
+- `Inherits` at the **TOP** → the definition's own nodes win over the parent. This is what
+  almost every definition intends, and it is the tree's convention.
+- `Inherits` at the **BOTTOM** → **the parent silently overrides the definition's own values.**
+
+**How it bit us.** The W23 retrofit appended `Inherits@wh: ^Warhead_<Family>_<Level>` after
+the *last* existing `Inherits`. `^HeavyCannon`, `^MediumCannon` and `^TankDestroyerCannon`
+each already carried `Inherits@glow: ^ImpactGlow` near the END of their block (~line 81)
+while their warheads sit at line 9 — so the family inherit landed *below* the warheads and
+the family's `Damage: 2000`, `Spread: 250` and `Falloff` overrode the template's own
+carefully rescaled `Damage: 838` and its preserved geometry.
+
+**Nothing catches this.** It lints clean under `--check-yaml`, it boots to the menu, and
+`find_empty_warhead` stays 0. The only signal is a before/after resolve diff
+(`tools/balance/verify_retrofit.py`). Cost: a full debugging round, during which the yaml
+was reverted twice.
+
+**Rules:**
+1. Any tool that ADDS an `Inherits` line must insert it at the TOP of the block, never
+   append it after existing ones, unless the parent is deliberately meant to win.
+2. When a definition's own value mysteriously "doesn't apply", check where its `Inherits`
+   lines sit relative to that value BEFORE suspecting the merge engine.
+3. A weapon whose own `Warhead@X` is declared ABOVE its `Inherits` lines is already relying
+   on the parent to win — e.g. `japan_imperialscoutsman_rifle_waveforce` declares
+   `Warhead@Railgun_Heavy` at line 0 and three `Inherits` at lines 2-4.
