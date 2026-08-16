@@ -263,6 +263,27 @@ SHIELD_LEVEL = {"Trace": 0.80, "Light": 0.90, "Medium": 1.00, "Heavy": 1.12, "Su
 SHIELD_K = 1.39186          # calibrated: Tesla_Super == 400
 SHIELD_DEFAULT_RANK = 0.40  # unlisted family: mid-kinetic, so a new family is never silently strong
 
+# The raw formula spans 69..400 = 5.80x, which the maintainer judged too wide (2026-08-16):
+# "the lowest value against shields should be 100, so the spread is only 4x". Compressed with
+# the POWER LAW about the geometric mean — the same technique the profile fitter uses, and
+# never a clamp: clamping moves only the two extreme cells and deforms the shape, while the
+# power law moves every value proportionally and preserves the ORDER exactly.
+#
+#     v' = G x (v/G) ** alpha,  alpha = ln(4) / ln(5.797) = 0.78885
+#
+# then anchored so the floor lands on 100 (x1.21669). Both targets then hold at once:
+# floor 100, Tesla_Super 400, ratio exactly 4.00x.
+#
+# ⚠ G/alpha/anchor are CALIBRATED AGAINST THE CURRENT PROFILE SET. W25 step S1
+# (mean-normalisation to 100) moves every profile and therefore every geometric scale, so
+# these three must be RE-DERIVED after it — `verify_shield_ladder()` fails loudly if they go
+# stale rather than silently drifting off 100..400.
+SHIELD_GEOMEAN = 158.0
+SHIELD_ALPHA = 0.78885
+SHIELD_ANCHOR = 1.21669
+SHIELD_FLOOR_TARGET = 100
+SHIELD_CEIL_TARGET = 400
+
 
 def shield_for(family, level, rows):
     """The Shield row for a finished profile. Applied LAST, overriding every other path.
@@ -276,7 +297,10 @@ def shield_for(family, level, rows):
         return None
     scale = math.sqrt((VERSUS_CEILING + min(vals)) * (100 + max(vals)))
     rank = PHYSICS_RANK.get(family, SHIELD_DEFAULT_RANK)
-    return max(1, round(rank * SHIELD_LEVEL.get(level, 1.0) * scale * SHIELD_K))
+    raw = rank * SHIELD_LEVEL.get(level, 1.0) * scale * SHIELD_K
+    # Compress 5.80x -> 4.00x about the geometric mean, then anchor the floor to 100.
+    return max(1, round(SHIELD_GEOMEAN * (raw / SHIELD_GEOMEAN) ** SHIELD_ALPHA
+                        * SHIELD_ANCHOR))
 
 
 def table(order16, step, top, floor, shield):
