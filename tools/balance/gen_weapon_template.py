@@ -780,7 +780,62 @@ def mean_normalise(rows, target=MEAN_TARGET):
     return [(a, fixed.get(a, v)) for a, v in rows]
 
 
-def finish_blend(rows):
+def blend_direction(name, values):
+    """A blend's LIGHT/HEAVY direction: its parents' majority, else its own lean.
+
+    A blend has no `WEAPONS` entry, so `build_order` never runs for it and it has no
+    declared direction — which is exactly how eight families came to violate the ordering
+    law (see `relay_ladders`). The parents do declare one, and for seven of the eight they
+    agree unanimously.
+
+    The eighth is `Plasma` = `Flame`(light) + `Chemical`(heavy), a genuine 50/50 split. A
+    coin-flip default would be a hidden design decision, so the tie is settled by the
+    AVERAGED PROFILE ITSELF: whichever way the measured average already leans is the way it
+    is laid out. That keeps the answer derived from data rather than chosen, and it stays
+    correct if either parent's profile is ever re-measured.
+    """
+    parents = BLEND_FAMILIES.get(name, ([], None, None))[0]
+    votes = [WEAPONS[p][1] for p in parents if p in WEAPONS]
+    heavy, light = votes.count("heavy"), votes.count("light")
+    if heavy != light:
+        return "heavy" if heavy > light else "light"
+    lean = 0.0                       # sum of (heaviest rung - lightest rung) per ladder
+    for ladder in LADDERS.values():
+        rungs = [a for a in ladder if a in values and a not in DERIVED_ARMORS]
+        if len(rungs) >= 2:
+            lean += values[rungs[-1]] - values[rungs[0]]
+    return "heavy" if lean > 0 else "light"
+
+
+def relay_ladders(values, direction):
+    """Re-lay every macro ladder in `direction`, keeping the VALUES exactly.
+
+    ⚠ **This is the ordering law applied to blends, and it was missing.** The law
+    (maintainer 2026-08-01, "the most important part") fixes each ladder's direction, and
+    the reference side enforces it via `aggregate_archetype.lawful_profile`. Blends skipped
+    it entirely: `blend_versus` averages its parents per-armor, and averaging profiles that
+    disagree about direction produces a ladder that is monotone in NEITHER — measured, 23
+    ladders across 8 families, e.g. `Quantum_Light AIR` reading
+    `Fighter 65 · Bomber 63 · Helicopter 52 · Spaceship 81`. A player cannot predict that
+    from the weapon's type, which is the entire point the law exists to serve.
+
+    Only the PAIRING changes: the measured magnitudes, plateaus and cliffs all survive, and
+    are simply reassigned along the ladder in the lawful order. Same method, and same
+    justification, as `lawful_profile` on the reference side.
+    """
+    out = dict(values)
+    for ladder in LADDERS.values():
+        rungs = [a for a in ladder if a in values and a not in DERIVED_ARMORS]
+        if len(rungs) < 2:
+            continue
+        # `heavy` = best against the heaviest rung, so the biggest value goes to the END.
+        targets = list(reversed(rungs)) if direction == "heavy" else rungs
+        for armor, value in zip(targets, sorted((values[a] for a in rungs), reverse=True)):
+            out[armor] = value
+    return out
+
+
+def finish_blend(rows, name=None):
     """Repair a BLEND profile: re-derive its derived armors, then re-sharpen it.
 
     A blend is the per-armor AVERAGE of its parents, and averaging does two things
@@ -803,14 +858,21 @@ def finish_blend(rows):
        ordering and the geometric centre.
     """
     values = dict(rows)
-    peak = max(v for a, v in rows if a != "Shield" and a not in DERIVED_ARMORS)
-    for name, (first, second) in (("Heroic", ("Plate", "Scout")),
-                                  ("Airborne", ("Helicopter", "Scout"))):
-        if name in values and first in values and second in values and peak > 0:
-            values[name] = values[first] * values[second] / peak
+    # 0. THE ORDERING LAW, which blends used to skip entirely. Must run FIRST: the derived
+    #    armors below are computed from `Plate`/`Scout`, so re-laying afterwards would
+    #    derive them from cells that are about to move.
+    if name is not None:
+        values = relay_ladders(values, blend_direction(name, values))
+
+    peak = max(v for a, v in values.items()
+               if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS)
+    for derived, (first, second) in (("Heroic", ("Plate", "Scout")),
+                                     ("Airborne", ("Helicopter", "Scout"))):
+        if derived in values and first in values and second in values and peak > 0:
+            values[derived] = values[first] * values[second] / peak
 
     ladder = [v for a, v in values.items()
-              if a != "Shield" and a not in DERIVED_ARMORS and v > 0]
+              if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS and v > 0]
     if len(ladder) >= 2:
         hi, lo = max(ladder), min(ladder)
         if lo > 0 and 1.0 < hi / lo < BAND_LOW:
@@ -820,10 +882,33 @@ def finish_blend(rows):
                       for a, v in values.items()}
 
     # Back inside the window, multiplicatively so the spread just set survives.
-    top = max(values.values())
-    scale = min(1.0, VERSUS_CEILING / top) if top > 0 else 1.0
-    out = [(a, int(round(values[a] * scale))) for a, _ in rows]
-    return sorted(distinct_ints(out), key=lambda r: -r[1])
+    #
+    # ⚠ **THE WINDOW SCALE MUST IGNORE THE PSEUDO-ARMORS.** `max(values.values())` used to
+    # include `Shield`, which is deliberately OUTSIDE the [10, 200] window in both
+    # directions — so the shield row, not the armor ladder, decided the scale for the whole
+    # profile. That was a quiet 2x crush while Shield ran 100..400; once phase 1 began
+    # emitting Shield in CENTI-UNITS it became catastrophic: `Quantum_Light` scaled by
+    # 200/18535 = 0.011, every armor rounded to 0 or 1, and `distinct_ints`' floor-repair
+    # pass then FABRICATED the entire ladder from the emit order (10, 11, 12, 14 ...).
+    #
+    # It was invisible because `mean_normalise` runs afterwards and scales the garbage back
+    # up to a mean of 100, so the profiles looked plausible and passed every window check.
+    # The only symptom was the 23 non-monotone ladders logged as E9 — which were never a
+    # missing ordering pass at all, but a ladder that had stopped carrying data.
+    ladder_top = max((v for a, v in values.items() if a not in NON_ARMOR_ROWS),
+                     default=0.0)
+    scale = min(1.0, VERSUS_CEILING / ladder_top) if ladder_top > 0 else 1.0
+    out = distinct_ints([(a, int(round(values[a] * scale))) for a, _ in rows])
+    # Re-lay ONE more time, on the finished integers. `distinct_ints` separates ties by
+    # walking the row list, and that list is in emit order rather than ladder order — so a
+    # raw tie (`Storm_Light` had `Bomber 16` and `Helicopter 16`) gets broken in whichever
+    # direction the list happened to run, re-inverting a ladder that was already lawful.
+    # A second pass is safe by construction: it only PERMUTES an already-valid multiset
+    # within each ladder, so distinctness and the window both survive untouched.
+    if name is not None:
+        final = relay_ladders(dict(out), blend_direction(name, dict(out)))
+        out = [(a, final[a]) for a, _ in out]
+    return sorted(out, key=lambda r: -r[1])
 
 
 def reference_main(name, order16, level):
@@ -934,7 +1019,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         pct_damage = damage // 2000              # 1% chip per 2000 main flat damage
         if versus_override is not None:          # blend family (e.g. Plasma = avg of Flame + Chemical)
             main, pct = versus_override(level)
-            main = finish_blend(main)            # re-derive Heroic/Airborne, un-flatten
+            main = finish_blend(main, name)      # ordering law, re-derive Heroic/Airborne, un-flatten
             hz = overlays
         elif mode == "flat":                       # Sonic: ignores armor on FLAT
             fv, fp = FLAT_VALUES[level], FLAT_PCT[level]
