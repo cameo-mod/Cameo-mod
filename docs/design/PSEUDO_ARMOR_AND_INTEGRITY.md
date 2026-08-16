@@ -344,6 +344,101 @@ hand-set `REFLECTOR: 50` it carried: the chip belongs to the same family, and a 
 cannot care which warhead of a weapon hit it. A second source for one cell is the exact trap
 that let Tesla's Shield be contested for months.
 
+## F. ⚠ CONFIRMED BUG — an armor plating can make a unit take MORE damage
+
+> *"now that I think about it would that mean that averaging can also make the unit take MORE
+> damage? this is a serious concern and something you need to take a deep look into!"*
+
+**Yes. Measured across the live matrix: 98 of 1152 cells, 8.5%, up to 1.84x MORE damage.**
+
+The arithmetic is unavoidable: `effective = (base + plating) / 2` is an INCREASE whenever
+`plating > base`. Any unit whose class armor already resists a weapon better than the plating
+does is *punished for wearing the plating*. It hits heavy units hardest, because they are the
+ones with low (resistant) class rows — which is precisely backwards.
+
+Narrowing HAZMAT to the maintainer's definition (fire / chemical / radiation only — Laser,
+Prism, Demolition and Concussion dropped to zero) removed **the four worst cells outright**
+and cut the total to **57 (5.4%), worst case 1.43x**. That is a real improvement and it
+carries its own lesson — *a share too small to matter is not harmless; averaged against a
+resistant armor it INVERTS* — but 57 inversions is still a broken mechanic. **The taxonomy
+fix is not sufficient. The combination rule has to change.**
+
+### The fix already exists in the tree — for shields
+
+```yaml
+    Armor:
+        RequiresCondition: !shielded        # base armor DISABLED while shielded
+    Armor@shielded:
+        Type: Shield
+        RequiresCondition: shielded         # shield armor INSTEAD OF, not as well as
+```
+`mods/cameo/rules/defaults.yaml:7290`. The shield layer already does exactly what the
+maintainer proposed — layer SELECTION, not combination — in pure yaml, no C# at all. The
+plating armors simply never got the same treatment: they add `Armor@HAZMAT` without ever
+disabling the base, so they average.
+
+### ⚠ But the shield precedent does NOT transfer unchanged, and this is the trap
+
+`Shield` has a row in **every one of the 94 templates**. A plating is SPARSE by design — it
+only carries rows for the weapon classes it counters. Under pure layer selection, a plating
+with no row for bullets leaves the armor list EMPTY, and both the engine and Cameo's override
+`return 100` for an empty list. **A superheavy tank with reactive armor would take 100%
+from bullets instead of ~20%.** Layer selection plus sparse rows is a catastrophic failure
+mode, not a conservative one.
+
+### Options for the combination rule
+
+| # | rule | never increases damage? | cost |
+|---|---|---|---|
+| **R1** | keep averaging | ❌ 57 cells invert | none (status quo, broken) |
+| **R2** | layer selection, FULL plating profiles (the shield model, literally) | ✅ | 6 platings x 94 templates = **564 hand-designed rows**, and one missing row silently returns 100 |
+| **R3** | layer selection, **falling back to the base when the plating has no row** | ❌ still inverts where `plating > base` | small: one branch in Cameo's `DamageVersus` |
+| **R4** | `effective = min(base, plating)` | ✅ **provably** | one new `MultiArmorCombination` mode in Cameo's own warhead — no engine edit |
+| **R5** | R3 **plus a generator invariant** that a plating row may never exceed that template's lowest class-armor row | ✅ by construction | R3 + a guard, and it pushes plating values DOWN |
+
+**Recommendation: R5**, which is the maintainer's own model made safe. It keeps the intended
+semantics — *the plating is what gets hit, when it has an opinion* — while the invariant
+forces R3 and R4 to agree, so the mechanic cannot invert even in principle. The invariant is
+also good design on its own terms: **a plating that counters a weapon class should be better
+against it than any class armor is**, which is exactly what "reactive armor is the answer to
+shaped charges" means. R4 alone is the cheapest correct answer if the maintainer wants this
+closed today rather than designed.
+
+⚠ Whatever is chosen, note the invariant that should be written into DESIGN.md regardless:
+**an armor upgrade must never increase incoming damage.** Nothing currently enforces it, and
+nothing would have caught these 98 cells — no audit, no test, and the boot gate cannot see a
+number that is merely wrong.
+
+## G. The plating taxonomy — 4 given, 2 proposed
+
+> *"Hazmat against fire, chemical and radiation, BlastProtection against all the HE weapons
+> like demolition, concussion etc, reflector against energy, composite against AP weapons and
+> bullets ... try to find another 1 or 2 that fit the real world armors"*
+
+| plating | counters | real-world basis |
+|---|---|---|
+| **HAZMAT** | Flame, Inferno, Chemical, Toxic, Cryo, Nuclear, + fire/chem blends | NBC suit, sealed overpressure hull |
+| **BlastProtection** | Demolition, Concussion, Thermobaric, CannonHE, MissileHE, Flak, Sonic | spall liner, blast-attenuating V-hull |
+| **REFLECTOR** | Laser, Prism, Plasma | ablative / mirrored coating |
+| **Composite** | Bullet, Sniper, CannonAP, Railgun, Arrow | Chobham, ceramic matrix — the anti-KINETIC answer |
+| **➕ Reactive** | MissileAP, and the shaped-charge half of the AT families | **ERA / slat armour.** The KE-vs-HEAT split is the actual axis real tank armour is designed around, and it is the one distinction `Composite` alone cannot express: ceramics beat penetrators, ERA beats shaped charges, and neither does the other's job. |
+| **➕ Insulated** | Tesla, Storm, and the electrical share of Quantum / Waveforce | **Faraday cage / grounding mesh.** This also repairs a compromise in §D-bis: I put Tesla on REFLECTOR at 0.60 because the maintainer's ruling said "energy", while noting a mirror does not stop lightning. With `Insulated` in the set, REFLECTOR goes back to being honestly PHOTONIC (Laser/Prism 1.0, Tesla 0) and electricity gets its own real counter. |
+
+Both additions do the same kind of work: they split a category that was hiding two different
+physics behind one name. That is the test a seventh type would have to pass too — `Damping`
+for Sonic and `Warding` for Magic were considered and rejected, because Sonic is already
+served by `BlastProtection` (both are pressure) and Magic ignores armor by design.
+
+### Consequences to decide before building
+
+1. **Six platings x 32 families is a real matrix**, but it is generated, not hand-typed — the
+   composition shares already exist and each plating reads one axis.
+2. **One plating at a time, or several?** If several can stack, every combination rule above
+   needs re-checking; R4 (`min`) is the only one that stays safe under stacking.
+3. **The 329 HAZMAT actors and 16 REFLECTOR actors need re-tagging** to whichever plating
+   their upgrade actually represents — RA2 reactive armor is arguably `Reactive`, not HAZMAT.
+4. **E1 grows again**: six plating types priced at zero instead of two.
+
 ## E. What the balance formula still does not see
 
 Measured against `formula.py`, `weapon_efficiency.py` and `target_model.py`.

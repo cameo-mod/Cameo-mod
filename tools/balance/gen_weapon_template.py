@@ -383,13 +383,23 @@ OVERLAY_DEPTH = 0.45
 OVERLAY_ARMORS = ("HAZMAT", "REFLECTOR")
 OVERLAY_MIN_EFFECT = 0.05          # below a 5% cut, omit the row entirely
 
-# What a SEALED SUIT stops: airborne and contact agents — gas, corrosives, radiological
-# particulate, and to a lesser degree flame and thermal flux. Nothing kinetic.
+# What a SEALED SUIT stops. Maintainer 2026-08-16, narrowing an earlier draft of this table:
+# *"hazmat is really only for flame / chemical / radiation ... both lasers and prisms are
+# energy weapons so they should be reduced by the reflector armor but not the hazmat armor"*.
+#
+# So the axis is AGENTS AND THERMAL LOAD, not "anything that burns a bit". Laser and Prism
+# dropped to zero (their heat is a side effect of an energy weapon, and REFLECTOR is their
+# counter); Demolition and Concussion dropped to zero as well — blast is a mechanical
+# overpressure, and its counter is `BlastProtection` in the plating taxonomy, not a suit.
+#
+# ⚠ Removing those four also removed the four worst cells in the whole matrix: every one of
+# the top offenders in the "plating INCREASES damage" audit was a marginal ~86 row on exactly
+# these families (`Laser_Medium` HAZMAT 86 vs `Heroic` 32 = 1.84x MORE damage). A share too
+# small to matter is not harmless — averaged against a resistant armor it INVERTS.
 CHEM_SHARE = {
     "Toxic": 1.00, "Chemical": 0.95,                       # the agent itself
     "Flame": 0.70, "Inferno": 0.70, "Nuclear": 0.65,       # heat + combustion / fallout
     "Cryo": 0.60,                                          # thermal too — insulation helps
-    "Demolition": 0.15, "Laser": 0.15, "Prism": 0.10, "Concussion": 0.10,
 }
 # What REFLECTIVE PLATING stops: directed energy. Coherent light is the canonical case;
 # electrical discharge arcs and CONDUCTS rather than reflecting, so Tesla sits well below
