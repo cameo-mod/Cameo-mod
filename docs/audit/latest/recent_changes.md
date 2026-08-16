@@ -1,6 +1,6 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **250**, files touched: **419**
+Commits reviewed: **251**, files touched: **436**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
@@ -113,8 +113,8 @@ _none found_
 | mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 30 |
 | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 29 |
 | mods/cameo/weapons/tiberiansun.yaml | 29 |
+| docs/design/ROADMAP.md | 28 |
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 28 |
-| mods/cameo/weapons/redalert2mod.yaml | 28 |
 
 
 ## Reviewer checklist (not machine-checkable)
