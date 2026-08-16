@@ -297,6 +297,47 @@ physical families land BELOW 100 (a sword at 76 is the canonical thing a shield 
 Shield is now exempt from the window in **both** directions. The old invariant was a
 consequence of the old assumption, not a law in its own right.
 
+## 6c. S2 CLASS TILT — the exact armor grouping (maintainer 2026-08-16, CONFIRMED)
+
+The tilt is **within a family**, comparing that family's own levels against each other (e.g.
+Flame Light vs Flame Medium vs Flame Heavy), NOT across families.
+
+| tier | tilts toward | sub-ladder positions |
+|---|---|---|
+| **Light** | `None`, `Wood`, `Scout`, `Light`, `Fighter` | INF0, BLD0, VEH0, VEH1, AIR0 |
+| **Medium** | `Flak`, `Steel`, `Medium`, `Bomber`, `Helicopter` | INF1, BLD1, VEH2, AIR1, AIR2 |
+| **Heavy** | `Plate`, `Concrete`, `Heavy`, `Superheavy`, `Spaceship` | INF2, BLD2, VEH3, VEH4, AIR3 |
+| **Super** | nothing — **FLAT**, good against everything | the generalist |
+
+Validated: 15 of 16 armors assigned, no armor in two tiers. The 16th is **`Heroic`**, and its
+absence is CORRECT — Heroic is a DERIVED armor (`Plate x Scout / peak`, DESIGN.md §12.0b), so
+it must fall out of the finished profile rather than be assigned a tier of its own.
+
+⚠ **Super is flat, not uniform.** The no-two-values-identical ladder law still applies — Super
+has the *shallowest curve*, not equal numbers. Nuclear is now included (its `BLD>VEH>AIR>INF`
+tilt and `HAND_TUNED` exemption are retired).
+
+## 6d. SHIELD TIE-BREAK — the ordering rule (maintainer 2026-08-16)
+
+> *"the old rule still holds: heavy deals more damage to shields than light. Actually if
+> something has the same value always prioritize it like that light->medium->heavy->super
+> with super dealing the most damage to shields and light the least"*
+
+So the uniqueness pass is not an arbitrary nudge — it has a defined direction:
+
+1. **Within a family, Shield MUST ascend** `Trace < Light < Medium < Heavy < Super`.
+2. **Across families**, ties are broken by that same level order, Super winning.
+3. Only then spread the remainder onto free integer slots.
+
+With 96 templates in the closed range **[100, 400]** there are 301 integer slots, so a
+collision-free assignment always exists — the maintainer's point that fitting 96 values in
+that band is not a problem is correct, and it means the pass never needs to widen the range.
+
+⚠ **Implementation note:** this is a GLOBAL pass and `shield_for()` is per-family, so it
+cannot see cross-family collisions. It needs a two-phase generation — compute every raw
+Shield first, then assign final values — which is a small refactor of the generator's main
+loop, NOT another per-family formula tweak. That refactor is the next step.
+
 ## 7. Open decisions
 
 1. **Shield range** — `CEILING + floor` gives 210/225/240. Should Tesla reach ~400 as it
