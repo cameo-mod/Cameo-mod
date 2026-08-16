@@ -483,6 +483,116 @@ NON_ARMOR_ROWS = ("Shield", "HAZMAT", "REFLECTOR")
 MEAN_TARGET = 100.0
 
 
+# --------------------------------------------------------------------------- #
+# W25 S2 — THE CLASS TILT (maintainer, 2026-08-16)
+# --------------------------------------------------------------------------- #
+# *"light weapons have a bigger damage to light armor types while heavy weapons have a
+#  bigger damage to heavy armor types with medium weapons having bigger damage to medium
+#  armor types ... all inside their own family (compared for example light, medium and
+#  heavy flame weapons) ... and super just deals a more flat damage to everything so it's
+#  overall good (but still doesn't have the same values, just a more flat curve)"*
+#
+# With the mean pinned at 100 by S1, a tilt is FREE: it costs nothing in total output, it
+# only moves where the output lands. That is what makes this expressible at all.
+#
+# The maintainer wrote the tilt as three armor SETS (SHIELD_AND_NORMALISATION_PLAN §6c):
+#
+#     Light  -> None · Wood · Scout · Light · Fighter
+#     Medium -> Flak · Steel · Medium · Bomber · Helicopter
+#     Heavy  -> Plate · Concrete · Heavy · Superheavy · Spaceship
+#
+# Implemented as ladder POSITION rather than as a hard-coded set, because position is what
+# those sets ARE: the lightest rung of every ladder, the middle rung of every ladder, the
+# heaviest rung of every ladder. Reading them off `LADDERS` reproduces all three sets
+# exactly and keeps working if a ladder ever gains a rung, where a literal set would
+# silently leave the new armor untilted.
+#
+# ⚠ **THE TILT MUST NEVER REORDER A LADDER.** The two-level ordering law (maintainer
+# 2026-08-01, "the most important part") fixes which armor in a ladder takes the biggest
+# value, and a Heavy-level tilt on an anti-LIGHT family pushes exactly the wrong way — left
+# alone it would invert `None > Flak > Plate` and make a rifle best against plate. So the
+# tilt is applied to the VALUES, and then each armor is given back the RANK it held before:
+#
+#   * where the tilt agrees with the family's direction it SHARPENS the ladder;
+#   * where it disagrees it FLATTENS it;
+#   * it can never invert it, and it needs no `direction` argument — the profile's own
+#     order is the authority, which is what makes this work for the blends too (they have
+#     no `build_order` at all, their shape comes from averaging their parents).
+#
+# The relative statement the maintainer asked for survives intact: `Scout` takes a larger
+# share of Flame_Light's output than of Flame_Heavy's, and `Superheavy` the reverse.
+#
+# `TILT_RATIO` is the weight span across a ladder, so 1.5 means the favoured end is pulled
+# 1.5x harder than the disfavoured end BEFORE renormalisation. Chosen to stay inside the
+# measured field band (2/4/8) after the sharpening it causes — see the audit below.
+TILT_RATIO = 1.5
+# Super is not merely untilted, it is actively FLATTENED to the band's flat end: it is the
+# generalist, so it should have the shallowest curve of any level. Never to EQUAL values —
+# the no-ties law still binds; "flat" here means "lowest spread", not "uniform".
+SUPER_RATIO = BAND_LOW
+
+
+def tilt_exponent(level, pos, n):
+    """Where position `pos` of `n` sits in this level's favour, in [-0.5, +0.5].
+
+    All three tilts share one range, so `TILT_RATIO` means the same thing at every level.
+    `Trace` is the sub-Light tier and tilts with Light.
+    """
+    if n <= 1:
+        return 0.0
+    t = pos / (n - 1)
+    if level in ("Light", "Trace"):
+        return 0.5 - t                       # favours the lightest rung
+    if level == "Medium":
+        return 0.5 - 2 * abs(t - 0.5)        # favours the middle rungs
+    if level == "Heavy":
+        return t - 0.5                       # favours the heaviest rung
+    return 0.0                               # Super: no tilt, flattened instead
+
+
+def class_tilt(rows, level):
+    """Apply the level's class tilt to a MAIN profile, preserving every ladder's order."""
+    vals = dict(rows)
+    live = [v for a, v in rows if a not in NON_ARMOR_ROWS]
+    if not live or max(live) <= min(live):
+        return rows          # Sonic / Magic are flat BY DESIGN; a tilt would destroy that
+    out = dict(vals)
+    for ladder in LADDERS.values():
+        # Derived armors are excluded: `Heroic` is a PRODUCT of two other cells (§12.0b),
+        # so it has to be recomputed from the finished profile rather than tilted like an
+        # independent rung. That is also why §6c assigns it to no tier.
+        rungs = [a for a in ladder if a in vals and a not in DERIVED_ARMORS]
+        if len(rungs) < 2:
+            continue
+        n = len(rungs)
+        tilted = [vals[a] * TILT_RATIO ** tilt_exponent(level, i, n)
+                  for i, a in enumerate(rungs)]
+        # Give each armor back the rank it held BEFORE the tilt (see the warning above).
+        # `-vals[a]` ranks descending; the index breaks ties stably, so a ladder that
+        # already had two equal values keeps the ordering law's sequence between them.
+        order = sorted(range(n), key=lambda i: (-vals[rungs[i]], i))
+        for slot, i in enumerate(order):
+            out[rungs[i]] = sorted(tilted, reverse=True)[slot]
+    if level == "Super":
+        # The generalist: compress toward the band's flat end about the geometric mean.
+        body = [v for a, v in out.items() if a not in NON_ARMOR_ROWS and v > 0]
+        lo, hi = min(body), max(body)
+        if lo > 0 and hi / lo > SUPER_RATIO:
+            g = statistics.geometric_mean(body)
+            alpha = math.log(SUPER_RATIO) / math.log(hi / lo)
+            out = {a: (v if a in NON_ARMOR_ROWS else g * (max(v, 1.0) / g) ** alpha)
+                   for a, v in out.items()}
+    # Re-derive the products LAST, from the finished profile (§12.0b) — a derived value
+    # computed before the last cell moves is not derived, it is stale.
+    peak = max(v for a, v in out.items()
+               if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS)
+    for name, (first, second) in (("Heroic", ("Plate", "Scout")),
+                                  ("Airborne", ("Helicopter", "Scout"))):
+        if name in out and first in out and second in out and peak > 0:
+            out[name] = out[first] * out[second] / peak
+    return [(a, out[a]) for a, _ in rows]
+
+
 def _powerlaw(vals, alpha):
     g = statistics.geometric_mean([max(v, 1.0) for v in vals])
     return [g * (max(v, 1.0) / g) ** alpha for v in vals]
@@ -716,6 +826,10 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
             # five times. Until then the twin carries the ORDER, not the shape.
             pct = table(order16, 1, ptop, pfloor, ptop + pfloor)
             hz = hazmat
+        # W25 S2 — the class tilt, BEFORE the mean is pinned: the tilt moves output between
+        # armors and would otherwise leave the mean off 100. Order-preserving by
+        # construction (see class_tilt), so the two-level ordering law is untouched.
+        main = class_tilt(main, level)
         # W25 S1 — pin the profile's MEAN to 100 before anything reads it. Must run on
         # EVERY branch and BEFORE `shield_for`: Shield's structural term is
         # `sqrt((200+floor)(100+top))`, so it has to see the final ladder, not the
