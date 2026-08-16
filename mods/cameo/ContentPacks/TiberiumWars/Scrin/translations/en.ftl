@@ -1,8 +1,8 @@
 faction_scrin =
    .description = Alien invasion force from Command & Conquer 3: Tiberium Wars.
-      Structures and defenses plus an initial map/editor Hexapod visual. The
-      Drone Ship, production chain, remaining combat roster, AI, upgrades, and
-      final balance are not implemented yet.
+      Structures, defenses, infantry, and an initial vehicle roster are
+      available as map/editor visuals. The Drone Ship, production chain,
+      aircraft, weapons, AI, upgrades, and final balance are not implemented yet.
 
 actor_scrin_drone_platform =
    .name = Scrin Drone Platform
@@ -93,3 +93,33 @@ actor_scrin_mastermind =
 
 actor_scrin_prodigy =
    .name = Scrin Prodigy
+
+actor_scrin_explorer =
+   .name = Scrin Explorer
+
+actor_scrin_harvester =
+   .name = Scrin Harvester
+
+actor_scrin_seeker =
+   .name = Scrin Seeker
+
+actor_scrin_devourer_tank =
+   .name = Scrin Devourer Tank
+
+actor_scrin_repair_drone =
+   .name = Scrin Repair Drone
+
+actor_scrin_gun_walker =
+   .name = Scrin Gun Walker
+
+actor_scrin_shard_walker =
+   .name = Scrin Shard Walker
+
+actor_scrin_corrupter =
+   .name = Scrin Corrupter
+
+actor_scrin_annihilator_tripod =
+   .name = Scrin Annihilator Tripod
+
+actor_scrin_reaper_tripod =
+   .name = Scrin Reaper Tripod

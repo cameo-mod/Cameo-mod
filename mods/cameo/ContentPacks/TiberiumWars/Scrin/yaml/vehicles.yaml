@@ -1,5 +1,117 @@
 # Map/editor-ready visual foundation. Production, weapons, abilities, and final
 # gameplay values are intentionally deferred with the rest of the Scrin roster.
+
+^ScrinVehicleVisual:
+	Inherits: ^Vehicle
+	Health:
+		HP: 100000
+	Armor:
+		Type: Heavy
+	Mobile:
+		Locomotor: wheeled
+		Speed: 50
+		TurnSpeed: 8
+	Selectable:
+		Bounds: 1024, 1024
+	-Voiced:
+
+^ScrinHoverVisual:
+	Inherits: ^ScrinVehicleVisual
+	Mobile:
+		Locomotor: hover
+
+scrin_explorer:
+	Inherits: ^ScrinHoverVisual
+	Tooltip:
+		Name: actor_scrin_explorer.name
+	RenderSprites:
+		PlayerPalette: scrin_explorer_player
+
+scrin_harvester:
+	Inherits: ^ScrinHoverVisual
+	Tooltip:
+		Name: actor_scrin_harvester.name
+	RenderSprites:
+		PlayerPalette: scrin_harvester_player
+
+scrin_seeker:
+	Inherits: ^ScrinHoverVisual
+	Tooltip:
+		Name: actor_scrin_seeker.name
+	RenderSprites:
+		PlayerPalette: scrin_seeker_player
+
+scrin_devourer_tank:
+	Inherits: ^ScrinHoverVisual
+	Tooltip:
+		Name: actor_scrin_devourer_tank.name
+	RenderSprites:
+		PlayerPalette: scrin_devourer_tank_player
+
+scrin_repair_drone:
+	Inherits: ^ScrinHoverVisual
+	Tooltip:
+		Name: actor_scrin_repair_drone.name
+	WithMoveAnimation:
+		MoveSequence: move
+		ValidMovementTypes: Horizontal, Turn
+	RenderSprites:
+		PlayerPalette: scrin_repair_drone_player
+
+scrin_gun_walker:
+	Inherits: ^ScrinVehicleVisual
+	Tooltip:
+		Name: actor_scrin_gun_walker.name
+	WithMoveAnimation:
+		MoveSequence: move
+		ValidMovementTypes: Horizontal, Turn
+	RenderSprites:
+		PlayerPalette: scrin_gun_walker_player
+
+scrin_shard_walker:
+	Inherits: ^ScrinVehicleVisual
+	Tooltip:
+		Name: actor_scrin_shard_walker.name
+	WithMoveAnimation:
+		MoveSequence: move
+		ValidMovementTypes: Horizontal, Turn
+	RenderSprites:
+		PlayerPalette: scrin_shard_walker_player
+
+scrin_corrupter:
+	Inherits: ^ScrinVehicleVisual
+	Tooltip:
+		Name: actor_scrin_corrupter.name
+	WithMoveAnimation:
+		MoveSequence: move
+		ValidMovementTypes: Horizontal, Turn
+	RenderSprites:
+		PlayerPalette: scrin_corrupter_player
+
+scrin_annihilator_tripod:
+	Inherits: ^ScrinVehicleVisual
+	Tooltip:
+		Name: actor_scrin_annihilator_tripod.name
+	Selectable:
+		Bounds: 2048, 2048
+	WithMoveAnimation:
+		MoveSequence: move
+		ValidMovementTypes: Horizontal, Turn
+	RenderSprites:
+		PlayerPalette: scrin_annihilator_tripod_player
+
+scrin_reaper_tripod:
+	Inherits: ^ScrinVehicleVisual
+	Tooltip:
+		Name: actor_scrin_reaper_tripod.name
+	Selectable:
+		Bounds: 2048, 2048
+	WithMoveAnimation:
+		MoveSequence: move
+		ValidMovementTypes: Horizontal, Turn
+	RenderSprites:
+		PlayerPalette: scrin_reaper_tripod_player
+
 scrin_eradicator_hexapod:
 	Inherits: ^Vehicle
 	Tooltip:

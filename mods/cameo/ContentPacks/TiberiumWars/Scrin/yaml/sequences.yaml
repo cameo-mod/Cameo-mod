@@ -221,6 +221,148 @@ scrin_eradicator_hexapod:
 		Offset: 0.000,-22.000
 		Scale: 2
 
+scrin_explorer:
+	idle:
+		Filename: scrin_sprites|scrin_explorer_idle.png
+		Length: 1
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 8.000,-32.000
+
+scrin_harvester:
+	idle:
+		Filename: scrin_sprites|scrin_harvester_idle.png
+		Length: 1
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 8.000,-20.000
+
+scrin_seeker:
+	idle:
+		Filename: scrin_sprites|scrin_seeker_idle.png
+		Length: 1
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 4.000,-8.000
+
+scrin_devourer_tank:
+	idle:
+		Filename: scrin_sprites|scrin_devourer_tank_idle.png
+		Length: 1
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 0.000,-12.000
+
+scrin_repair_drone:
+	idle:
+		Filename: scrin_sprites|scrin_repair_drone_idle.png
+		Length: 1
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 8.000,-24.000
+	move:
+		Filename: scrin_sprites|scrin_repair_drone_walk.png
+		Length: 4
+		Facings: 32
+		Tick: 160
+		ShadowStart: 128
+		ShadowZOffset: -5
+		Offset: 8.000,-24.000
+
+scrin_gun_walker:
+	idle:
+		Filename: scrin_sprites|scrin_gun_walker_idle.png
+		Length: 1
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 4.000,-8.000
+	move:
+		Filename: scrin_sprites|scrin_gun_walker_walk.png
+		Length: 4
+		Facings: 32
+		Tick: 160
+		ShadowStart: 128
+		ShadowZOffset: -5
+		Offset: 4.000,-8.000
+
+scrin_shard_walker:
+	idle:
+		Filename: scrin_sprites|scrin_shard_walker_idle.png
+		Length: 1
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 4.000,-16.000
+	move:
+		Filename: scrin_sprites|scrin_shard_walker_walk.png
+		Length: 4
+		Facings: 32
+		Tick: 160
+		ShadowStart: 128
+		ShadowZOffset: -5
+		Offset: 4.000,-16.000
+
+scrin_corrupter:
+	idle:
+		Filename: scrin_sprites|scrin_corrupter_idle.png
+		Length: 1
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 4.000,-12.000
+	move:
+		Filename: scrin_sprites|scrin_corrupter_walk.png
+		Length: 4
+		Facings: 32
+		Tick: 160
+		ShadowStart: 128
+		ShadowZOffset: -5
+		Offset: 4.000,-12.000
+
+scrin_annihilator_tripod:
+	idle:
+		Filename: scrin_sprites|scrin_annihilator_tripod_idle.png
+		Length: 1
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 0.000,-22.000
+		Scale: 2
+	move:
+		Filename: scrin_sprites|scrin_annihilator_tripod_walk.png
+		Length: 12
+		Facings: 32
+		Tick: 160
+		ShadowStart: 384
+		ShadowZOffset: -5
+		Offset: 0.000,-22.000
+		Scale: 2
+
+scrin_reaper_tripod:
+	idle:
+		Filename: scrin_sprites|scrin_reaper_tripod_idle.png
+		Length: 1
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 0.000,-22.000
+		Scale: 2
+	move:
+		Filename: scrin_sprites|scrin_reaper_tripod_walk.png
+		Length: 12
+		Facings: 32
+		Tick: 160
+		ShadowStart: 384
+		ShadowZOffset: -5
+		Offset: 0.000,-22.000
+		Scale: 2
+
 scrin_disintegrator:
 	stand:
 		Filename: scrin_sprites|scrin_disintegrator_idle.png
