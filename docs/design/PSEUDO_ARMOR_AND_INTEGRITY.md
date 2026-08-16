@@ -404,10 +404,42 @@ against it than any class armor is**, which is exactly what "reactive armor is t
 shaped charges" means. R4 alone is the cheapest correct answer if the maintainer wants this
 closed today rather than designed.
 
-⚠ Whatever is chosen, note the invariant that should be written into DESIGN.md regardless:
-**an armor upgrade must never increase incoming damage.** Nothing currently enforces it, and
-nothing would have caught these 98 cells — no audit, no test, and the boot gate cannot see a
-number that is merely wrong.
+### ✅ The invariant is now enforced (2026-08-16), independently of the ruling
+
+**AN ARMOR UPGRADE MUST NEVER INCREASE INCOMING DAMAGE.** Two changes, both compatible with
+all five rules above, so neither can conflict with a later decision:
+
+1. **`tools/audit/audit_armor_upgrade_harm.py`** (in `run_all.sh`) checks every
+   (template, plating, class-armor) combination and fails on any that inverts. It encodes
+   the INVARIANT rather than today's arithmetic, so if the combination rule moves to R4 or
+   R5 it goes green on its own and stays useful as the thing that proves it.
+2. **`overlay_rows` now lays the plating into `[VERSUS_FLOOR, min(class rows)]`** instead of
+   onto a fixed scale, so the invariant holds BY CONSTRUCTION — a plating is at worst equal
+   to the best thing the weapon is already resisted by, and better everywhere else. Under R4
+   the clamp is simply redundant.
+
+That took the guard from 57 violations to **0**, and it made the platings meaningfully
+stronger rather than weaker, because the clamp only ever lowers a row:
+
+| | before | after | reduction |
+|---|--:|--:|--:|
+| `Waveforce` HAZMAT / REFLECTOR | 68 / 68 | **38 / 37** | 16% → 31% |
+| `Tesla` REFLECTOR | 46 | **24** | 27% → 38% |
+| `Laser` REFLECTOR | 10 | **10** | 45% (already at the floor) |
+| `Plasma` HAZMAT / REFLECTOR | 26 / 60 | **16 / 29** | 37%/20% → 42%/36% |
+
+⚠ **This is a patch, not the fix.** It removes the defect from the values we ship; it does
+not remove it from the MECHANIC. Any hand-written plating row, any new armor type added
+without going through the generator, and any future actor carrying two platings at once can
+reintroduce it — which is why the audit exists alongside the clamp, and why §F's R4/R5 is
+still the answer.
+
+**Why this class of bug deserves the guard.** It was invisible to everything we run: the
+yaml is well-formed, every value is inside the window, the resolver is happy,
+`find_empty_warhead` is 0, and the game boots — a boot gate cannot see a number that is
+merely WRONG. It was invisible by inspection too, because the defect is in neither value but
+in their INTERACTION: `HAZMAT: 86` is unremarkable, `Heroic: 32` is unremarkable, and their
+average is a 1.84x self-inflicted damage increase.
 
 ## G. The plating taxonomy — 4 given, 2 proposed
 

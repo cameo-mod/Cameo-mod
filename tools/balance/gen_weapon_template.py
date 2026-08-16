@@ -198,7 +198,8 @@ def emit_chip(tag, family_name, damage, vt, level=None):
     # part of the same family and a hazmat suit cannot care which warhead of a weapon hit
     # it. The hand-set `REFLECTOR: 50` the Tesla chip used to carry was a second source for
     # one cell, which is the same trap that let Tesla's Shield be contested for months.
-    overlays = dict(overlay_rows(family_name))
+    overlays = dict(overlay_rows(
+        family_name, [d.get(a, floor) for a in order if a not in NON_ARMOR_ROWS]))
     rows = emit_versus([(a, overlays.get(a, d.get(a, floor))) for a in order
                        if a not in OVERLAY_ARMORS or a in overlays])
     dt = "Prone75Percent, TriggerProne, ExplosionDeath"
@@ -438,16 +439,39 @@ def overlay_shares(name):
     return over.get("chem", chem), over.get("energy", energy)
 
 
-def overlay_rows(name):
-    """`[(armor, value)]` for HAZMAT / REFLECTOR — omitting either where it does nothing."""
+def overlay_rows(name, class_values=None):
+    """`[(armor, value)]` for HAZMAT / REFLECTOR — omitting either where it does nothing.
+
+    ⚠ **THE INVARIANT: AN ARMOR UPGRADE MUST NEVER INCREASE INCOMING DAMAGE.**
+
+    Overlay armors are AVERAGED with the class armor (`effective = (base + plating)/2`),
+    so a plating row ABOVE the class row is a self-inflicted damage increase on a unit that
+    just paid for an upgrade — and it lands hardest on heavy units, because they are the
+    ones with the low, resistant class rows. Measured before this clamp: **98 of 1152 cells,
+    worst 1.84x** (`Laser_Medium` HAZMAT 86 against `Heroic` 32). Nothing else in the suite
+    could see it: the yaml is valid, every value is inside the window, and a boot gate
+    cannot catch a number that is merely wrong. Guard = `audit_armor_upgrade_harm.py`.
+
+    The row is therefore laid into `[VERSUS_FLOOR, min(class rows)]` rather than onto a
+    fixed scale, which makes the invariant hold BY CONSTRUCTION — the plating is at worst
+    equal to the best thing the weapon is already resisted by, and better everywhere else.
+    That is also the right design statement independently: a plating that counters a weapon
+    class should beat any class armor against it, which is what "reactive armor is the
+    answer to shaped charges" means.
+
+    It is compatible with every combination rule in PSEUDO_ARMOR_AND_INTEGRITY §F, so it
+    cannot conflict with a later ruling — under `min(base, plating)` it is simply redundant.
+    """
+    ceiling = min(class_values) if class_values else 100
+    span = max(0, ceiling - VERSUS_FLOOR)
     rows = []
     for armor, share in zip(OVERLAY_ARMORS, overlay_shares(name)):
-        value = max(VERSUS_FLOOR, min(100, round(100 - 200 * OVERLAY_DEPTH * share)))
+        value = max(VERSUS_FLOOR, min(100, round(ceiling - share * span)))
         # A share so small the row would change damage by less than OVERLAY_MIN_EFFECT is
         # dropped rather than written. It is not free to keep: by the rule above, a present
         # row joins the average and moves the result, so a 4% row is a real-but-invisible
         # change that still costs a line and a reader's attention. Rows should be deliberate.
-        if share <= 0 or value > 100 - 200 * OVERLAY_MIN_EFFECT:
+        if share <= 0 or share * span < 2 * OVERLAY_MIN_EFFECT * 100:
             continue
         rows.append((armor, value))
     return rows
@@ -965,7 +989,9 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         # the flat/pct families, whose whole identity is that they ignore armor.
         main = [r for r in main if r[0] not in OVERLAY_ARMORS]
         if hz:
-            main = overlay_rows(name) + main
+            # The class rows set the plating's ceiling — see overlay_rows' invariant.
+            main = overlay_rows(name, [v for a, v in main
+                                       if a not in NON_ARMOR_ROWS]) + main
         tag = f"{name}_{level}"
         # Energy families are thinned to near single-target; the chip/utility pays for the low spread.
         main_spread = ENERGY_THIN_SPREAD_LEVEL.get((name, level), ENERGY_THIN_SPREAD.get(name, at(spreads, li)))
