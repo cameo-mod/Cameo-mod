@@ -197,6 +197,44 @@ Each step has a VERIFY and is independently boot-gateable.
 
 ---
 
+## 5b. MEASURED: neither structural formula can carry the identity (2026-08-16)
+
+Maintainer asked whether `top` could be kept via a geometric mean:
+`sqrt((200 + floor) x (100 + top))`. Computed over all 96 live templates:
+
+| formula | range | spread | distinct values |
+|---|---|--:|---|
+| `200 + floor` | 210 – 265 | **1.26x** | **41 / 96** |
+| `sqrt((200+floor)(100+top))` | 165 – 253 | **1.54x** | **44 / 96** |
+
+The geometric mean IS better — wider spread, fewer ties — but both fail, and the reason is
+mathematically interesting: **`floor` and `top` are anti-correlated by construction.** Every
+profile is normalised, so a sharp family necessarily has a low floor and a high top, and a
+flat family the reverse. Multiplying the two therefore CANCELS most of the variation — the
+product is close to an invariant of the normalisation rather than a property of the weapon.
+`Sonic_Medium` (top 55, floor 55) and `Melee_Heavy` (top 165, floor 35) land 199 vs 250.
+
+Both formulas also violate the **no-two-families-share-a-Shield-value** rule outright: 41
+and 44 distinct values across 96 templates means more than half are ties.
+
+**Conclusion, now with numbers:** a structural rule can set the SCALE (where the Shield band
+sits, and that it tracks weapon strength) but it cannot set the RANK. Anti-shield identity
+is not recoverable from a normalised profile's own shape, because normalisation is exactly
+what removes it. So:
+
+```
+Shield = physics_rank (input 2)  x  structural_scale (input 3)   then uniqueness-spread
+```
+
+`input 3` = `sqrt((200+floor)(100+top))` is the better of the two structural terms and is
+recommended as the scale factor — it keeps `top` in the formula as the maintainer wanted,
+and its near-invariance is a virtue in that role: it anchors the band without fighting the
+physics rank for control of the ordering.
+
+Tesla must end up several times a sword, not 1.2x. Only input 2 can do that.
+
+---
+
 ## 6. Options for the maintainer
 
 **Option A — full programme (recommended).** S1–S5 as above. Fixes the root cause
