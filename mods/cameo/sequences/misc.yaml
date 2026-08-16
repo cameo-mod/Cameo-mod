@@ -4919,6 +4919,20 @@ hexshield_sphere:
 		Tick: 40
 		Offset: 0,16
 
+hexshield_directional_oval:
+	idle:
+		Filename: hexshield_directional_oval.png
+		Length: 4
+		Facings: 32
+		ZOffset: 1023
+		Tick: 80
+	hit:
+		Filename: hexshield_directional_oval.png
+		Length: 4
+		Facings: 32
+		ZOffset: 1023
+		Tick: 40
+
 sparkle:
 	plus:
 		Filename: sparkle.png

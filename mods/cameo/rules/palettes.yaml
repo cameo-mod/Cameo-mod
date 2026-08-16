@@ -188,6 +188,19 @@
 		Name: ixianhexshield50
 		BasePalette: ixianhexshield
 		Alpha: 0.5
+	FixedColorPalette@consortiumhexshield:
+		Base: playershieldbase
+		Name: consortiumhexshield
+		Color: 2DE1FF
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PaletteFromPaletteWithAlpha@consortiumhexshield25:
+		Name: consortiumhexshield25
+		BasePalette: consortiumhexshield
+		Alpha: 0.25
+	PaletteFromPaletteWithAlpha@consortiumhexshield50:
+		Name: consortiumhexshield50
+		BasePalette: consortiumhexshield
+		Alpha: 0.5
 	PaletteFromFile@staticterrain-jungle:
 		Name: staticterrain
 		Tileset: JUNGLE
