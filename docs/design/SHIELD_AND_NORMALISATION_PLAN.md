@@ -258,6 +258,45 @@ or correct it afterwards.
 
 ---
 
+## 6b. ✅ ALL FOUR DECISIONS TAKEN (maintainer, 2026-08-16)
+
+1. **Tesla reaches 400** — *"if the formula allows it then yes but you need to calculate the
+   exact value"*. It does. Calibrating `Shield = physics_rank x level x geometric_scale` so
+   that `Tesla_Super` lands exactly on 400 gives **K = 1.39186**.
+2. **Nuclear becomes a generalist** — *"nuclear can be changed now to be a generalist"*. No
+   exception; the Super-is-flat law applies universally. The `BLD > VEH > AIR > INF` tilt is
+   retired and `HAND_TUNED` comes off Nuclear.
+3. **Options A + B + C combined** — full normalisation + tilt + Shield rebuild, with the
+   corpus mining run as a parallel check on the physics table rather than as a blocker.
+4. **Shield STAYS a `Versus` row.** Maintainer: *"shields have their own armor type so they
+   feel unique. Energy weapons deal more damage to shields than physical weapons but
+   physical weapons deal more damage to vehicle armor than energy weapons"* — i.e. Shield is
+   a genuine rock-paper-scissors axis, not a redundant expression of the W21 layer.
+
+### The computed ladder
+
+| template | rank x level | geometric scale | Shield NOW | **Shield NEW** |
+|---|--:|--:|--:|--:|
+| `Tesla_Super` | 1.25 | 230 | 160 | **400** |
+| `Storm_Super` | 1.19 | 235 | 199 | 388 |
+| `Tesla_Heavy` | 1.12 | 225 | 151 | **350** |
+| `Railgun_Heavy` | 0.87 | 249 | 200 | 302 |
+| `Quantum_Heavy` | 0.92 | 234 | 160 | 299 |
+| … | | | | |
+| `Melee_Medium` | 0.22 | 249 | 200 | **76** |
+| `Melee_Light` | 0.20 | 249 | 200 | 69 |
+
+**Range 69–400 (5.80x). `Tesla / Melee` moves from 0.76x (inverted) to 4.60x.**
+Distinct values: **77 of 93** — the remaining 16 ties are resolved by the existing `MIN_GAP`
+uniqueness pass, exactly as the armor ladder already does.
+
+⚠ **This restates a historical invariant and that is deliberate.** Shield used to be "the one
+value always allowed ABOVE the cap", because shields were assumed uniformly soft. Under the
+maintainer's ruling they are not — they are soft to energy and *hard to kinetics*. So
+physical families land BELOW 100 (a sword at 76 is the canonical thing a shield stops) and
+Shield is now exempt from the window in **both** directions. The old invariant was a
+consequence of the old assumption, not a law in its own right.
+
 ## 7. Open decisions
 
 1. **Shield range** — `CEILING + floor` gives 210/225/240. Should Tesla reach ~400 as it
