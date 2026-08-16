@@ -151,6 +151,37 @@ namespace OpenRA.Mods.Cameo.Warheads
 		[Desc("Subclass validation hook, called once the base fields are checked.")]
 		protected virtual void ValidateFields() { }
 
+		// THE ARMOR-PLATING LAYER (maintainer, 2026-08-16).
+		//
+		// A plating is a MUTUALLY EXCLUSIVE upgrade — a unit picks one — and while it is on, the
+		// plating is what the shot actually hits. So it REPLACES the class armor rather than
+		// combining with it: "shield active -> shield armor, armor plating active -> that plating's
+		// armor type, otherwise -> the armor type from the unit class."
+		//
+		// ⚠ **Combining instead of replacing is what made an upgrade able to HURT you.** While
+		// platings were averaged with the class armor, `effective = (class + plating) / 2` rose
+		// above `class` whenever the plating row did — measured at 98 of 1152 cells, up to 1.84x
+		// MORE damage, worst on heavy units because they are the ones with the low class rows.
+		// Selection removes the whole failure mode: only one row is ever read.
+		//
+		// This is deliberately NOT the same as being strictly better. Each plating is strong against
+		// one damage axis and WEAK against another (the 5-cycle: thermochemical -> kinetic -> shaped
+		// charge -> blast -> energy -> thermochemical), so picking one is a trade, not a free
+		// upgrade. That is only safe BECAUSE selection replaced averaging: under averaging a "weak"
+		// row would have been an unconditional penalty stacked on top of the class armor.
+		//
+		// `Shield` is absent here on purpose — it already does exactly this in yaml
+		// (`Armor: RequiresCondition: !shielded` in defaults.yaml), and it sits ABOVE plating in the
+		// layer stack, so its own condition takes it out of the running before this code runs.
+		static readonly string[] PlatingArmors =
+		{
+			"HAZMAT",           // sealed suit / NBC     — vs fire, chemical, radiation
+			"Composite",        // ceramic matrix        — vs kinetic penetrators and bullets
+			"Reactive",         // ERA / slat            — vs shaped charges
+			"BlastProtection",  // spall liner / V-hull  — vs HE, demolition, concussion
+			"REFLECTOR",        // ablative / mirrored   — vs directed energy
+		};
+
 		protected override int DamageVersus(Actor victim, HitShape shape, WarheadArgs args)
 		{
 			if (MultiArmorCombination == ArmorCombination.Multiply)
@@ -161,11 +192,22 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 			// Same selection as the base: enabled armors this warhead has a Versus row for,
 			// filtered by the hit shape's own armor restriction. Only the COMBINATION differs.
-			var armor = victim.TraitsImplementing<Armor>()
+			var matched = victim.TraitsImplementing<Armor>()
 				.Where(a => !a.IsTraitDisabled && a.Info.Type != null && Versus.ContainsKey(a.Info.Type) &&
 					(shape.Info.ArmorTypes.IsEmpty || shape.Info.ArmorTypes.Contains(a.Info.Type)))
+				.ToList();
+
+			// A plating outranks the class armor: it is the outermost layer, so it is what got hit.
+			// If several are somehow active at once, the most protective wins rather than an
+			// average — stacking platings must never be worse than wearing one.
+			var plating = matched
+				.Where(a => PlatingArmors.Contains(a.Info.Type))
 				.Select(a => Versus[a.Info.Type])
 				.ToList();
+			if (plating.Count > 0)
+				return plating.Min();
+
+			var armor = matched.Select(a => Versus[a.Info.Type]).ToList();
 
 			// No matching armor means no modifier, exactly as the base's empty product does.
 			if (armor.Count == 0)

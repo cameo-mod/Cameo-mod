@@ -189,19 +189,18 @@ def emit_chip(tag, family_name, damage, vt, level=None):
     d = CHIPS_LEVEL.get((family_name, level), CHIPS[family_name])
     floor = CHIP_FLOOR[family_name]
     spread = CHIP_SPREAD_LEVEL.get((family_name, level), CHIP_SPREAD[family_name])
-    order = ["HAZMAT", "REFLECTOR", "Shield", "None", "Flak", "Plate", "Heroic",
+    order = list(PLATING_CYCLE) + ["Shield", "None", "Flak", "Plate", "Heroic",
              "Scout", "Light", "Medium", "Heavy", "Superheavy",
              "Wood", "Steel", "Concrete", "Fighter", "Bomber", "Helicopter", "Spaceship"]
     # Through `emit_versus` so the chip obeys the same descending rule as the main and the
-    # %-twin — the overlay armors and Shield stay pinned at the front, the armors sort by
-    # value. The overlays come from `overlay_rows`, not from the CHIPS table: the chip is
-    # part of the same family and a hazmat suit cannot care which warhead of a weapon hit
-    # it. The hand-set `REFLECTOR: 50` the Tesla chip used to carry was a second source for
-    # one cell, which is the same trap that let Tesla's Shield be contested for months.
-    overlays = dict(overlay_rows(
-        family_name, [d.get(a, floor) for a in order if a not in NON_ARMOR_ROWS]))
+    # %-twin — the platings and Shield stay pinned at the front, the armors sort by value.
+    # The platings come from `plating_rows`, not from the CHIPS table: the chip belongs to
+    # the same family, and an armor plating cannot care which warhead of a weapon hit it.
+    # The hand-set `REFLECTOR: 50` the Tesla chip used to carry was a second source for one
+    # cell, which is the same trap that let Tesla's Shield be contested for months.
+    overlays = dict(plating_rows(family_name))
     rows = emit_versus([(a, overlays.get(a, d.get(a, floor))) for a in order
-                       if a not in OVERLAY_ARMORS or a in overlays])
+                       if a not in PLATING_CYCLE or a in overlays])
     dt = "Prone75Percent, TriggerProne, ExplosionDeath"
     if family_name in FAMILY_INTEGRITY_SCALE:
         dt += ", Tesla"
@@ -380,101 +379,174 @@ def shield_for(family, level, rows):
 # on `Versus.ContainsKey(armorType)`, so an absent row drops the overlay OUT of the average
 # entirely, while `100` pulls the result toward 100. Omission is the only way to say "this
 # weapon does not care about the plating", and it is what a zero share must produce.
-OVERLAY_DEPTH = 0.45
-OVERLAY_ARMORS = ("HAZMAT", "REFLECTOR")
-OVERLAY_MIN_EFFECT = 0.05          # below a 5% cut, omit the row entirely
-
-# What a SEALED SUIT stops. Maintainer 2026-08-16, narrowing an earlier draft of this table:
-# *"hazmat is really only for flame / chemical / radiation ... both lasers and prisms are
-# energy weapons so they should be reduced by the reflector armor but not the hazmat armor"*.
+# --------------------------------------------------------------------------- #
+# THE FIVE ARMOR PLATINGS (maintainer, 2026-08-16)
+# --------------------------------------------------------------------------- #
+# *"Hazmat against fire, chemical and radiation, BlastProtection against all the HE weapons,
+#  reflector against energy, composite against AP weapons and bullets ... they are all good
+#  against a certain family but bad against another and medium against everything else ...
+#  also they will average on 100% each across all weapon types ... and we need to make sure
+#  that every weapon family has an armor counter and every armor type has a weapon counter"*
 #
-# So the axis is AGENTS AND THERMAL LOAD, not "anything that burns a bit". Laser and Prism
-# dropped to zero (their heat is a side effect of an energy weapon, and REFLECTOR is their
-# counter); Demolition and Concussion dropped to zero as well — blast is a mechanical
-# overpressure, and its counter is `BlastProtection` in the plating taxonomy, not a suit.
+# ⚠ **These get a row in EVERY template, exactly like `Shield`.** That is what makes LAYER
+# SELECTION safe: the plating replaces the class armor while it is on, and a sparse row set
+# would leave the armor list empty for the weapon classes it does not counter — which both
+# the engine and `AreaDamageWarhead.DamageVersus` answer with 100, i.e. a superheavy tank
+# taking full damage from bullets. Full columns, no gaps.
 #
-# ⚠ Removing those four also removed the four worst cells in the whole matrix: every one of
-# the top offenders in the "plating INCREASES damage" audit was a marginal ~86 row on exactly
-# these families (`Laser_Medium` HAZMAT 86 vs `Heroic` 32 = 1.84x MORE damage). A share too
-# small to matter is not harmless — averaged against a resistant armor it INVERTS.
-CHEM_SHARE = {
-    "Toxic": 1.00, "Chemical": 0.95,                       # the agent itself
-    "Flame": 0.70, "Inferno": 0.70, "Nuclear": 0.65,       # heat + combustion / fallout
-    "Cryo": 0.60,                                          # thermal too — insulation helps
+# ⚠ **A plating is a TRADE, not an upgrade.** Being WEAK against something is the design, so
+# the "an upgrade must never increase damage" invariant does NOT apply to these the way it
+# applied to the old additive overlays — it is superseded by the column law below. What makes
+# that safe is selection: only one row is ever read, so a weak row is a chosen exposure
+# rather than a penalty stacked on top of the class armor.
+#
+# THE COLUMN LAW: each plating's mean across all templates is 100, so no plating is stronger
+# overall — they differ only in WHAT they are strong against. This is the transpose of W25 S1
+# (which pins each WEAPON's mean across armors) and the two cannot conflict: platings live in
+# NON_ARMOR_ROWS, so they never entered S1's row mean, and S1's armors never enter this
+# column mean.
+#
+# THE CYCLE: five platings, five damage axes, each plating countering one axis and weak to
+# the next — `thermo -> kinetic -> shaped -> blast -> energy -> thermo`. An odd cycle is what
+# keeps it from collapsing into two mirrored pairs, and every step is real:
+#
+#   HAZMAT          counters thermochemical, weak to KINETIC   (a suit does not stop a bullet)
+#   Composite       counters kinetic,        weak to SHAPED    (why ERA had to be invented)
+#   Reactive        counters shaped charges, weak to BLAST     (HE strips the ERA blocks off)
+#   BlastProtection counters blast,          weak to ENERGY    (a spall liner ignores a laser)
+#   REFLECTOR       counters energy,         weak to THERMO    (flame ablates and fouls a mirror)
+#
+# Rejected as too niche (maintainer): `Insulated` for Tesla, `Damping` for Sonic, `Warding`
+# for Magic — *"only a few factions have tesla but everyone has something like energy, AP, HE,
+# fire / chemical"*. Electricity folds into `energy`, Sonic into `blast`, Magic into `energy`.
+PLATING_AXES = ("thermo", "kinetic", "shaped", "blast", "energy")
+PLATING_CYCLE = {                      # plating: (axis it counters, axis it is weak to)
+    "HAZMAT":          ("thermo",  "kinetic"),
+    "Composite":       ("kinetic", "shaped"),
+    "Reactive":        ("shaped",  "blast"),
+    "BlastProtection": ("blast",   "energy"),
+    "REFLECTOR":       ("energy",  "thermo"),
 }
-# What REFLECTIVE PLATING stops: directed energy. Coherent light is the canonical case;
-# electrical discharge arcs and CONDUCTS rather than reflecting, so Tesla sits well below
-# Laser even though `PHYSICS_RANK` puts it on top for shields. The two tables rank different
-# physics and must not be merged — a shield is a field, plating is a mirror.
-ENERGY_SHARE = {
-    "Laser": 1.00, "Prism": 1.00,                          # coherent light
-    "Tesla": 0.60, "Storm": 0.55,                          # electrical — arcs, conducts
-    "Nuclear": 0.30,                                       # the thermal flash IS radiant
-    "Sonic": 0.20, "Magic": 0.20, "Railgun": 0.15,         # railgun is a SLUG: kinetic delivery
-    "Cryo": 0.70, "Inferno": 0.70,                         # Prism-delivered (they inherit its beam)
+# How much a full share moves the row away from 100 — so a pure-thermo weapon reads 50
+# against HAZMAT and 150 against REFLECTOR, before the column is normalised.
+PLATING_DEPTH = 0.50
+
+# Each PRIMITIVE family's damage composition over the five axes; shares sum to 1. Blends
+# average their parents, so a new blend is classified for free. This is the same kind of
+# design table as PHYSICS_RANK — measured against nothing, argued from what the weapon IS.
+COMPOSITION = {
+    # kinetic — a mass arrives fast
+    "Bullet":      {"kinetic": 1.00},
+    "Sniper":      {"kinetic": 1.00},
+    "Melee":       {"kinetic": 1.00},
+    "Arrow":       {"kinetic": 1.00},
+    "Railgun":     {"kinetic": 0.85, "energy": 0.15},   # a SLUG; the energy is in the launcher
+    "CannonAP":    {"kinetic": 0.70, "shaped": 0.30},
+    # shaped charge — a jet, not a mass. The axis ERA exists for.
+    "MissileAP":   {"shaped": 0.90, "blast": 0.10},
+    "MissileHE":   {"blast": 0.80, "shaped": 0.20},
+    # blast — overpressure and fragmentation
+    "CannonHE":    {"blast": 0.90, "kinetic": 0.10},
+    "MissileAA":   {"blast": 0.70, "kinetic": 0.30},
+    "Flak":        {"blast": 0.60, "kinetic": 0.40},
+    "Demolition":  {"blast": 1.00},
+    "Concussion":  {"blast": 1.00},
+    "Sonic":       {"blast": 0.60, "energy": 0.40},     # a pressure wave, so blast-led
+    "Thermobaric": {"blast": 0.60, "thermo": 0.40},     # fuel-air: overpressure + burn
+    # thermochemical — agents and thermal load
+    "Flame":       {"thermo": 1.00},
+    "Inferno":     {"thermo": 1.00},
+    "Chemical":    {"thermo": 1.00},
+    "Toxic":       {"thermo": 1.00},
+    "Cryo":        {"thermo": 1.00},
+    "Nuclear":     {"thermo": 0.50, "blast": 0.40, "energy": 0.10},
+    # energy — directed / radiated
+    "Laser":       {"energy": 1.00},
+    "Prism":       {"energy": 1.00},
+    "Tesla":       {"energy": 1.00},
+    "Storm":       {"energy": 0.90, "blast": 0.10},
+    "Magic":       {"energy": 0.60, "thermo": 0.20, "blast": 0.20},
 }
-# A blend's shares are the mean of its parents — the same rule its Versus profile uses, so a
-# new blend is correct for free. Overrides are for the cases where the parent list understates
-# what the weapon physically IS.
-OVERLAY_OVERRIDE = {
-    # Plasma's parents are Flame + Chemical, which gives it no energy share at all — but
-    # plasma is ionised, radiating gas and plating does turn it. Stated, not derived.
-    "Plasma": {"energy": 0.45},
-    # Thermobaric derives 0.32 from Demolition+Concussion+Flame; fuel-air is specifically an
-    # oxygen-consuming aerosol, which is the thing a sealed suit is FOR.
-    "Thermobaric": {"chem": 0.50},
+# Where a blend's parent list understates what the weapon physically IS.
+COMPOSITION_OVERRIDE = {
+    # Flame + Chemical gives Plasma a pure thermo reading, but plasma is ionised and radiates.
+    "Plasma": {"thermo": 0.55, "energy": 0.45},
 }
 
 
-def overlay_shares(name):
-    """(chem_share, energy_share) for a family, blends averaged from their parents."""
-    over = OVERLAY_OVERRIDE.get(name, {})
-    if name in BLEND_FAMILIES:
+def composition(name):
+    """A family's share over PLATING_AXES; blends average their parents."""
+    if name in COMPOSITION_OVERRIDE:
+        raw = COMPOSITION_OVERRIDE[name]
+    elif name in COMPOSITION:
+        raw = COMPOSITION[name]
+    elif name in BLEND_FAMILIES:
         parents = BLEND_FAMILIES[name][0]
-        chem = sum(CHEM_SHARE.get(p, 0.0) for p in parents) / len(parents)
-        energy = sum(ENERGY_SHARE.get(p, 0.0) for p in parents) / len(parents)
+        raw = {}
+        for p in parents:
+            for axis, share in composition(p).items():
+                raw[axis] = raw.get(axis, 0.0) + share / len(parents)
     else:
-        chem = CHEM_SHARE.get(name, 0.0)
-        energy = ENERGY_SHARE.get(name, 0.0)
-    return over.get("chem", chem), over.get("energy", energy)
+        raw = {}
+    total = sum(raw.values())
+    return {a: raw.get(a, 0.0) / total if total else 0.0 for a in PLATING_AXES}
 
 
-def overlay_rows(name, class_values=None):
-    """`[(armor, value)]` for HAZMAT / REFLECTOR — omitting either where it does nothing.
+def plating_raw(family):
+    """Un-normalised plating row per plating: 100, minus its counter, plus its weakness."""
+    comp = composition(family)
+    return {p: 100.0 * (1 - PLATING_DEPTH * comp[counter] + PLATING_DEPTH * comp[weak])
+            for p, (counter, weak) in PLATING_CYCLE.items()}
 
-    ⚠ **THE INVARIANT: AN ARMOR UPGRADE MUST NEVER INCREASE INCOMING DAMAGE.**
 
-    Overlay armors are AVERAGED with the class armor (`effective = (base + plating)/2`),
-    so a plating row ABOVE the class row is a self-inflicted damage increase on a unit that
-    just paid for an upgrade — and it lands hardest on heavy units, because they are the
-    ones with the low, resistant class rows. Measured before this clamp: **98 of 1152 cells,
-    worst 1.84x** (`Laser_Medium` HAZMAT 86 against `Heroic` 32). Nothing else in the suite
-    could see it: the yaml is valid, every value is inside the window, and a boot gate
-    cannot catch a number that is merely wrong. Guard = `audit_armor_upgrade_harm.py`.
+def _plating_scales():
+    """Per-plating factor pinning each COLUMN's mean to 100 across every emitted template.
 
-    The row is therefore laid into `[VERSUS_FLOOR, min(class rows)]` rather than onto a
-    fixed scale, which makes the invariant hold BY CONSTRUCTION — the plating is at worst
-    equal to the best thing the weapon is already resisted by, and better everywhere else.
-    That is also the right design statement independently: a plating that counters a weapon
-    class should beat any class armor against it, which is what "reactive armor is the
-    answer to shaped charges" means.
-
-    It is compatible with every combination rule in PSEUDO_ARMOR_AND_INTEGRITY §F, so it
-    cannot conflict with a later ruling — under `min(base, plating)` it is simply redundant.
+    Computed here rather than in a second phase because a plating value depends only on the
+    FAMILY, and the set of templates the generator emits is fully determined by the tables
+    above — so the column mean is knowable without generating anything.
     """
-    ceiling = min(class_values) if class_values else 100
-    span = max(0, ceiling - VERSUS_FLOOR)
-    rows = []
-    for armor, share in zip(OVERLAY_ARMORS, overlay_shares(name)):
-        value = max(VERSUS_FLOOR, min(100, round(ceiling - share * span)))
-        # A share so small the row would change damage by less than OVERLAY_MIN_EFFECT is
-        # dropped rather than written. It is not free to keep: by the rule above, a present
-        # row joins the average and moves the result, so a 4% row is a real-but-invisible
-        # change that still costs a line and a reader's attention. Rows should be deliberate.
-        if share <= 0 or share * span < 2 * OVERLAY_MIN_EFFECT * 100:
-            continue
-        rows.append((armor, value))
-    return rows
+    families = []
+    for nm, (_b, _d, _a, levels) in WEAPONS.items():
+        if nm not in HAND_TUNED:
+            families += [nm] * len(levels)
+    for nm, (_p, _n, _s, levels) in INHERIT_FAMILIES.items():
+        families += [nm] * len(levels)
+    for nm, (_p, _s, levels) in BLEND_FAMILIES.items():
+        families += [nm] * len(levels)
+    families += ["Storm"] * len(STORM_LEVELS)
+    scales = {}
+    for p in PLATING_CYCLE:
+        vals = [plating_raw(f)[p] for f in families]
+        mean = sum(vals) / len(vals) if vals else 100.0
+        scales[p] = 100.0 / mean if mean else 1.0
+    return scales
+
+
+_PLATING_SCALES = None
+
+
+def plating_rows(family):
+    """`[(plating, value)]` — the five columns, each normalised to a mean of 100.
+
+    The scales are computed once, on first use, because `_plating_scales` reads WEAPONS /
+    BLEND_FAMILIES / STORM_LEVELS, which are defined further down this file.
+    """
+    global _PLATING_SCALES
+    if _PLATING_SCALES is None:
+        _PLATING_SCALES = _plating_scales()
+    raw = plating_raw(family)
+    return [(p, max(VERSUS_FLOOR, min(VERSUS_CEILING,
+                                      round(raw[p] * _PLATING_SCALES[p]))))
+            for p in PLATING_CYCLE]
+
+
+# ⚠ The earlier two-axis overlay model (CHEM_SHARE / ENERGY_SHARE / OVERLAY_DEPTH, with
+# a clamp keeping every row below the class floor) is SUPERSEDED by the five-plating
+# matrix above. It solved the wrong problem: it treated a plating as an ADDITIVE overlay
+# averaged into the class armor, so it had to guarantee the row could never make things
+# worse. Under layer SELECTION only one row is ever read, and being weak against one axis
+# is the whole design — so the clamp would have deleted the counter-play it was protecting.
 
 
 def table(order16, step, top, floor, shield):
@@ -567,7 +639,7 @@ BAND_LOW = 2.0                      # DESIGN.md §12.0 rule 5 — the target ban
 DERIVED_ARMORS = ("Heroic", "Airborne")
 # Rows that live on a Versus node but are not armor classes, so they never enter a
 # profile statistic: the shield LAYER, the HAZMAT gate, Tesla's REFLECTOR.
-NON_ARMOR_ROWS = ("Shield", "HAZMAT", "REFLECTOR")
+NON_ARMOR_ROWS = ("Shield",) + tuple(PLATING_CYCLE)
 
 
 # --------------------------------------------------------------------------- #
@@ -1070,13 +1142,19 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         # The OVERLAY armors, derived from the family's composition (see overlay_rows).
         # Carried inside `main` rather than passed separately so they are automatically
         # excluded from the mean, the tilt and the Shield scale — all three key off
-        # NON_ARMOR_ROWS — and pinned ahead of the ladder by `emit_versus`. Suppressed for
-        # the flat/pct families, whose whole identity is that they ignore armor.
-        main = [r for r in main if r[0] not in OVERLAY_ARMORS]
-        if hz:
-            # The class rows set the plating's ceiling — see overlay_rows' invariant.
-            main = overlay_rows(name, [v for a, v in main
-                                       if a not in NON_ARMOR_ROWS]) + main
+        # NON_ARMOR_ROWS — and pinned ahead of the ladder by `emit_versus`.
+        #
+        # ⚠ **EVERY template gets all five, with no exceptions — including Sonic and Magic.**
+        # The flat families used to be skipped because "they ignore armor", and under the old
+        # additive overlay that was harmless. Under layer SELECTION it is a hole: a plated
+        # unit hit by a weapon with no row for its plating leaves the armor list EMPTY, which
+        # `DamageVersus` answers with 100 — so skipping the row would make Sonic and Magic
+        # ignore the plating layer entirely and hit plated units HARDER than unplated ones.
+        # Their identity is untouched: "ignores armor" is a statement about the 16 CLASS
+        # armors, which stay flat. A plating designed against pressure may still blunt a
+        # sonic weapon, and that is the correct reading.
+        main = [r for r in main if r[0] not in PLATING_CYCLE]
+        main = plating_rows(name) + main
         tag = f"{name}_{level}"
         # Energy families are thinned to near single-target; the chip/utility pays for the low spread.
         main_spread = ENERGY_THIN_SPREAD_LEVEL.get((name, level), ENERGY_THIN_SPREAD.get(name, at(spreads, li)))
