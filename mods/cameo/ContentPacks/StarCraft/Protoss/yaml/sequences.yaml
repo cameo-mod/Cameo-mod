@@ -324,6 +324,32 @@ protoss_dragoon:
 		Filename: protoss_dragoon_icon.png
 		Offset: 0,0
 
+protoss_structure_hexshields:
+	photon-idle:
+		Filename: protoss_hexshield_dome_photon.png
+		Length: 8
+		Tick: 80
+		ZOffset: 1023
+		Offset: 0.5,-6
+	photon-hit:
+		Filename: protoss_hexshield_dome_photon.png
+		Length: 8
+		Tick: 40
+		ZOffset: 1023
+		Offset: 0.5,-6
+	nexus-idle:
+		Filename: protoss_hexshield_dome_nexus.png
+		Length: 8
+		Tick: 80
+		ZOffset: 1023
+		Offset: 1,-10
+	nexus-hit:
+		Filename: protoss_hexshield_dome_nexus.png
+		Length: 8
+		Tick: 40
+		ZOffset: 1023
+		Offset: 1,-10
+
 protoss_hightemplar:
 	Inherits: ^SCSmallShadow
 	Defaults:

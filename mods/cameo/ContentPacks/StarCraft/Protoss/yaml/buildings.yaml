@@ -21,6 +21,19 @@ protoss_nexus:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: pshbld03.aud
+	WithIdleOverlay@shield1:
+		Image: protoss_structure_hexshields
+		Sequence: nexus-idle
+		StartSequence: nexus-idle
+		Palette: protosshexshield25
+		IsPlayerPalette: false
+		RequiresCondition: !disabled && shielded && !shieldhit && !build-incomplete
+	WithIdleOverlay@shield_damage:
+		Image: protoss_structure_hexshields
+		Sequence: nexus-hit
+		Palette: protosshexshield50
+		IsPlayerPalette: false
+		RequiresCondition: !disabled && shielded && shieldhit && !build-incomplete
 	Production@INFANTRY:
 		Produces: Infantry
 		PauseOnCondition: disabled
