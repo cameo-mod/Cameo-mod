@@ -606,6 +606,7 @@ FAMILY_INTEGRITY_SCALE = {
     "Tesla": 100,                          # pure Tesla = full shield-drain (the disable specialist)
     "Storm": 50,                          # Tesla+Magic -> 1/2
     "Quantum": 33,                        # Railgun+Laser+Tesla -> 1/3
+    "Waveforce": 20,                      # Flame+Chemical+Railgun+Laser+Tesla -> 1/5
 }
 
 # Per-family DamageTypes override. Every family that affects Integrity (has IntegrityScale) MUST carry
@@ -692,6 +693,22 @@ BLEND_FAMILIES = {
     "FireMissile": (["Flame", "MissileHE"],   {"Temperature": 50}, L3),
     "ChemCannon":  (["Chemical", "CannonAP"], {"Corrosion": 50}, L3),
     "ChemMissile": (["Chemical", "MissileAP"],{"Corrosion": 50}, L3),
+    # Waveforce = a resonant energy weapon: "a bit like a mix of the plasma warhead and the
+    # quantum warheads" (maintainer 2026-08-16), adopted for the Japanese energy rifles —
+    # which inherit `^WaveforceBulletWarhead` and were never railguns — and for the Protoss
+    # photon cannons ("the protoss photon cannons should behave like the waveforce").
+    #
+    # Declared as the five UNDERLYING primitives rather than as a blend-of-blends, because
+    # the blend machinery averages PARENT FAMILIES and nesting would need the parents built
+    # first. Plasma = Flame+Chemical, Quantum = Railgun+Laser+Tesla, so the union is exact;
+    # only the weighting differs (20% each here vs 25/25/16.7/16.7/16.7 for a true 50/50 of
+    # the two blends). The thermal half gives it anti-infantry reach, the coherent-energy
+    # half gives armour piercing and the anti-shield coupling.
+    #
+    # Meters follow the documented per-parent-average rule, same as Quantum's comment above:
+    # Temperature = (Flame 100 + Laser 75) / 5 parents = 35; Corrosion = (Chemical 100) / 5 = 20.
+    "Waveforce": (["Flame", "Chemical", "Railgun", "Laser", "Tesla"],
+                  {"Temperature": 35, "Corrosion": 20}, L3),
 }
 # Fixed emission order for a blend (it has no single light/heavy direction).
 BLEND_ARMOR_ORDER = ["None", "Flak", "Plate", "Heroic", "Scout", "Light", "Medium", "Heavy",
