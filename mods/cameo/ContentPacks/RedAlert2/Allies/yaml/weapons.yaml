@@ -18,6 +18,10 @@ RA2PatriotThunderboltMissile:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_AA
 	Inherits@fx: ^Effect_MissileAP_Heavy
+	Warhead@Effect:
+		ImpactSounds: xplos.aud
+	Warhead@EffectAir:
+		ImpactSounds: xplos.aud
 	Report: vifvatta.wav
 	ReloadDelay: 30
 	Range: 14150
@@ -842,4 +846,3 @@ ra2roktgun:
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 	-Warhead@EffectAir:
-

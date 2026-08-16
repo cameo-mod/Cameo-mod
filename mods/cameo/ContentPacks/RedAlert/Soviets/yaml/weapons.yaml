@@ -858,6 +858,13 @@ SCUDThermobaric:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits: SCUD
+	Warhead@Effect:
+		ValidTargets: Ground, Water
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Projectile: Bullet
 		ContrailStartWidth: 100
 		ContrailEndWidth: 20
