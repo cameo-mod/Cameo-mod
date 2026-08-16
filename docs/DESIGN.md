@@ -790,6 +790,54 @@ cheapest provider wins).
   Imperial Scoutsman, M113 Adats-style condition typos).
 - **G3: garrisoned armaments never carry a FireDelay.**
 
+## 11b. ONE WARHEAD PER WEAPON (binding, maintainer 2026-08-16)
+
+**A weapon has exactly ONE damage warhead.** This is the damage half of the 3-way split
+(**1 warhead + 1 projectile + 1 effect**) and it is a fixed rule, not a target to drift
+toward. It was practised but never written down, which is how the tree accumulated the
+debt below.
+
+Measured 2026-08-16 across every concrete weapon:
+
+| main damage warheads | weapons | |
+|---|--:|---|
+| **1** | 805 | **39% — compliant** |
+| 2 | 457 | |
+| 3 | 284 | |
+| 4 | 248 | |
+| 5–15 | 258 | worst case: 15 |
+
+**Not counted as damage warheads** (these may coexist with the one main warhead):
+`*_Percentage` (the %-twin), `*_ExtraDamage` (the shield chip), and every non-damage
+warhead — `CreateEffect`, `LeaveSmudge`, `GrantExternalCondition`, `ApplyPhysicalState`,
+`SpawnActor`, `AffectsIntegrity`.
+
+### Collapsing a multi-warhead weapon
+
+1. **Sum is preserved.** The survivor's `Damage` = Σ of the old warheads' damage, each
+   first mapped through its own family ratio (`formula.spread_damage_sum`, the SUM law).
+   Collapsing must never change what the weapon deals in total.
+2. **Pick the family that matches the weapon's IDENTITY**, not the one with the largest
+   damage — check what it actually is (its projectile, its lore, its role).
+3. ⚠ **If no existing family fits, CREATE A NEW ONE — do not force a bad fit.**
+   Maintainer, 2026-08-16: *"every time you don't know how to collapse them you should
+   suggest to create a new warhead family."* Blends are cheap: `^Warhead_ChemMissile`,
+   `FireCannon` and `ChemCannon` are all blends of two parents, and a new family is a few
+   lines in `gen_weapon_template.py`.
+
+**Worked examples (both found by the W23 retrofit):**
+
+- `japan_imperialscoutsman_rifle_waveforce` inherits `^WaveforceBulletWarhead` and is not
+  a railgun. Mapping it to `Railgun_Heavy` was wrong — it needs a **`Waveforce`** family,
+  proposed as a Plasma × Quantum blend (Plasma = Flame × Chemical; Quantum = Railgun +
+  Laser + Tesla), i.e. anti-infantry from the thermal half and armour-piercing +
+  anti-shield from the coherent-energy half, delivered wide with a shallow falloff.
+- `GladiusCannon` carries four legacy warheads and inherits `PhotonCannon`, so it is an
+  energy weapon. `Plasma` fits its "good against infantry and tanks alike" role directly.
+
+**A weapon that cannot be collapsed is a design question, not a conversion blocker** — file
+it, propose the family, and do not merge warheads by damage arithmetic alone.
+
 ## 12. Balance formula — the Cameo Armor System workbook
 
 **Weapon Versus construction: see `docs/design/ARMOR_SYSTEM.md`** — the

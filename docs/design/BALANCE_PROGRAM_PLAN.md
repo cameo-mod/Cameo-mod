@@ -52,6 +52,8 @@ status rather than keeping its own copy.
 | **W21** | Layered health Shield → Integrity → Armor → Health, layer-aware armor (solves W20 structurally) | ✅ BUILT + LIVE `ab467fe52` | Claude | — |
 | **W22** | Roster census: liveness classifier + per-credit weighting (552/1977 armored actors are not buildable) | ⬜ PROPOSED | — | — |
 | **W23** | Retrofit the 47 legacy templates into the `^Warhead_*` family system | 🔵 MACHINERY DONE + verified; content ⛔ on the 33-collision ruling | Claude | W13 |
+| **W24** | Collapse every weapon to ONE damage warhead (3-way split, damage half) — 61% of weapons carry 2+, worst case 15 | ⬜ READY, blocks W23 content | Claude | — |
+| **W25** | Versus mean-normalisation to 100 + class tilt + the Shield ladder rebuild | ⬜ PLAN WRITTEN (`SHIELD_AND_NORMALISATION_PLAN.md`), needs 4 rulings | Claude | — |
 
 **Recommended order:** W2 ∥ W3 → W4 → W5 → W6 → (W7, W9) → W8 → W10 → W11 → W12.
 `∥` = safe to run in parallel (disjoint file sets).
@@ -1787,3 +1789,27 @@ Maintainer, 2026-08-16: *"obsolete things should be removed entirely so they don
 unit / weapon balance."* Deletion is ready (`remove_dead_weapons.py`) and needs a boot gate.
 ⚠ The `--survey` mode deliberately SKIPS unused `^Warhead_*`/`^Effect_*`/`^Projectile_*` — the
 generator ships that matrix on purpose and `verify_generator_sync.py` requires it.
+
+
+---
+
+## W24 / W25 — see `SHIELD_AND_NORMALISATION_PLAN.md` and DESIGN.md §11b
+
+**W24 (one warhead per weapon)** is now a written binding rule — DESIGN.md **§11b**. Only
+**39%** of weapons comply (805 of 2053); 61% carry 2 or more damage warheads, worst case
+**15**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
+content ships, because same-family collisions are a symptom of it rather than a bug in the
+conversion. Collapsing preserves the SUM; where no family fits, a NEW family is created
+rather than forcing a bad one (maintainer, 2026-08-16). Two already identified:
+`Waveforce` (Plasma × Quantum) for the Japanese energy rifles, and `Plasma` for
+`GladiusCannon`, which inherits `PhotonCannon`.
+
+**W25 (normalisation + Shield)** — full analysis in
+[`SHIELD_AND_NORMALISATION_PLAN.md`](SHIELD_AND_NORMALISATION_PLAN.md). Headline: the
+anti-shield identity is INVERTED (Melee 200, Tesla 151), because `Shield = top + floor` was
+written for peak-100 profiles and W13 renormalised to median-100. The corpus **cannot**
+arbitrate it — `shield` appears in **13 of 3150** profiles, from **1 of 16** mods — so the
+ladder must come from design intent plus the structural `CEILING + floor` rule, not from a
+3-way average over data that does not exist. Four decisions are owed: the Shield range,
+whether Nuclear is an exception to "Super is a generalist", Option A/B/C, and whether
+`Shield` should remain a `Versus` row at all now that W21 made shields a real health layer.
