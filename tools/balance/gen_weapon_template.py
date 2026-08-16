@@ -868,7 +868,7 @@ def storm_versus(level):
             [(a, int(base_pct[a] * f)) for a in keys])
 
 
-if __name__ == "__main__":
+def _generate():
     argv = sys.argv[1:]
     if "--list" in argv:
         for nm, (bl, d, air, lv) in WEAPONS.items():
@@ -946,3 +946,19 @@ if __name__ == "__main__":
                      versus_override=storm_versus, hazmat=None,
                      damage_types="Prone100Percent, TriggerProne, ElectricityDeath, Tesla"))
         print()
+
+
+
+if __name__ == "__main__":
+    # TWO-PHASE generation. Phase 1 emits every family independently (per-family logic,
+    # which is all `shield_for` can see); phase 2 reassigns Shield across the FINISHED set
+    # so no two templates share a value. Uniqueness is a property of the whole set, so it
+    # cannot be decided while generating one family at a time.
+    import io
+    from contextlib import redirect_stdout
+    import shield_uniqueness
+    _buf = io.StringIO()
+    with redirect_stdout(_buf):
+        _generate()
+    sys.stdout.write(shield_uniqueness.apply(
+        _buf.getvalue(), SHIELD_FLOOR_TARGET, SHIELD_CEIL_TARGET))
