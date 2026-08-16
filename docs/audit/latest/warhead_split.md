@@ -1,7 +1,7 @@
 # Warhead-split guard (multi-warhead over-damage)
 
 
-## FAIL 1 — broadcast fingerprint (2)
+## FAIL 1 — broadcast fingerprint (4)
 
 Every SpreadDamage warhead (mains + sides) shares one identical value — the 2026-07-22 broadcast bug. Fix by editing the per-shot TOTAL through the workbook so `distribute_damage` splits it, or by restoring the intended per-warhead values.
 
@@ -9,6 +9,8 @@ Every SpreadDamage warhead (mains + sides) shares one identical value — the 20
 |---|---|---|---|
 | HydraSpit | 4 | 1 | 18000 |
 | NanoArtilleryAG | 3 | 2 | 7777 |
+| NaxiAlienPistol | 3 | 1 | 8000 |
+| NaxiAlienPistol_elite | 3 | 1 | 8000 |
 
 
 ## FAIL 2 — FriendlyFire louder than the shot (0)

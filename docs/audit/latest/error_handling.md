@@ -1,11 +1,11 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **199**
+Files scanned: **201**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 2 | 2 |
-| E2 | handler discards the error | 30 | 30 |
+| E2 | handler discards the error | 31 | 30 |
 | E3 | open() without encoding= | 90 | 90 |
 | E4 | subprocess call without check= | 9 | 9 |
 
@@ -18,7 +18,7 @@ Files scanned: **199**
 | tools/audit_createeffect_image.py | 19 | bare `except:` |
 
 
-## E2 — 30 finding(s)
+## E2 — 31 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -42,8 +42,9 @@ Files scanned: **199**
 | tools/audit/review_resolve_diff.py | 58 | handler body discards the error |
 | tools/audit_ce_image_usage.py | 29 | handler body discards the error |
 | tools/audit_createeffect_image.py | 19 | handler body discards the error |
-| tools/balance/extract_stats.py | 171 | handler body discards the error |
-| tools/balance/extract_stats.py | 530 | handler body discards the error |
+| tools/balance/effective_damage.py | 137 | handler body discards the error |
+| tools/balance/extract_stats.py | 172 | handler body discards the error |
+| tools/balance/extract_stats.py | 544 | handler body discards the error |
 | tools/balance/formula.py | 100 | handler body discards the error |
 | tools/balance/propose_class_rebalance.py | 268 | handler body discards the error |
 | tools/rename/apply.py | 178 | handler body discards the error |
@@ -163,4 +164,9 @@ Files scanned: **199**
 | tools/balance/verify_generator_sync.py | 55 | `subprocess.run()` without check= |
 | tools/hooks/bash_guard.py | 49 | `subprocess.run()` without check= |
 | tools/hooks/exec_guard.py | 45 | `subprocess.run()` without check= |
+
+
+## FAIL
+
+- E2: 31 > baseline 30
 

@@ -19,7 +19,7 @@ S4 — pinned-by-tag or unpinned third-party GitHub Actions
 S5 — NuGet ``PackageReference`` without a pinned version, or a floating
     version range (``*``, ``$(...)``-less wildcards).
 S6 — installer download with no integrity field: a package in
-    ``mods/cameo/installer/downloads.yaml`` that has a ``URL``/``MirrorList``
+    ``mods/cameo-content/installer/downloads.yaml`` that has a ``URL``/``MirrorList``
     but no ``SHA1``/``SHA256``, so whatever the mirror serves is unpacked into
     the player's content directory unverified.
 
@@ -63,7 +63,7 @@ HTTP_URL = re.compile(r"http://(?!localhost|127\.0\.0\.1|0\.0\.0\.0|schemas?\.|w
                       r"[A-Za-z0-9.-]+")
 ACTION_USES = re.compile(r"^\s*uses:\s*([^\s#]+)")
 PACKAGE_REF = re.compile(r"<PackageReference\s+([^>]*)>")
-DOWNLOADS_YAML = "mods/cameo/installer/downloads.yaml"
+DOWNLOADS_YAML = "mods/cameo-content/installer/downloads.yaml"
 
 
 def iter_files(root: pathlib.Path):

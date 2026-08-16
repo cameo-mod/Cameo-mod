@@ -20,6 +20,16 @@ flagged inline. Faction reference: [FACTIONS.md](../FACTIONS.md)._
 
 ---
 
+## ▶ ACTIVE — CAMEO CONTENT INSTALLER
+
+- [ ] **Manage Content downloads:** add the hidden `cameo-content` installer
+  mod, switch Cameo to `ContentInstallerFileSystem`, and keep
+  `ContentPackages:` empty so installation remains opt-in.
+- [ ] **Music manifest follow-up:** downloaded RA/C&C/TS/Firestorm music is
+  stored as `.aud`, while `mods/cameo/music.yaml` currently declares `.mp3`;
+  track mappings remain a separate maintainer decision and are not part of
+  the installer plumbing.
+
 ## ▶ ACTIVE — VEHICLE BALANCE APPLY + BACKLOG (2026-07-31)
 
 **Vehicle ladder DESIGN is being re-tuned** — latest table = `docs/balance/anchor_decisions_log.md`
