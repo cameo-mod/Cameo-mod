@@ -25,6 +25,50 @@ status rather than keeping its own copy.
 
 ---
 
+## 0a. ⛔ ORDER OF OPERATIONS — WEAPON STRUCTURE BEFORE PRICING (ruling 2026-08-17)
+
+**Maintainer:** *"shouldn't we first finish the 3 way split like documented before we start
+applying the balance formula to our actors? It would be double work splitting the multi
+warheads later on. If we split it now applying the balance formula will be easy."*
+
+**Correct, and measured.** A price is a function of `K`, and `K` is built from the weapon's
+warhead set and their `Versus` profiles. Both are still scheduled to change across most of the
+roster, so pricing first means pricing inputs we are about to replace:
+
+| what is still in flux | measured 2026-08-17 |
+|---|---|
+| W24 — fired weapons with **more than one** damage main | **973 of 1495 = 65.1%** (histogram runs out to 15 mains) |
+| armament slots whose `K` moves when those collapse | **1 584** |
+| fired weapons that reach a `^Warhead_*` family at all | **639 of 1620 = 39%** — the rest still route through legacy templates (`audit_unconverted_templates`: 47 templates, 1343 inheritors) |
+
+Collapsing N mains into 1 preserves the damage SUM (`formula.spread_damage_sum`) but **not
+`K`** — `K` is share-weighted over each warhead's armor profile, so picking ONE family changes
+the profile and therefore the price. Retrofitting a legacy template onto a family changes it
+again.
+
+⚠ **The anchor table already said so.** `class_anchors.json` → `mbt.provisional`: *"DPS restat
+DEFERRED to the cannon/weapon rebuild."* The decision to wait was written into the data before
+the question was asked.
+
+**The order:**
+
+1. **W24** — one damage warhead per weapon (DESIGN §11b). 65% non-compliant.
+2. **W23** — the 25-template legacy retrofit. ⭐ **W24 DISSOLVES W23's BLOCKER.** That blocker
+   is "33 weapons inherit several legacy templates mapping into the SAME family, so the rename
+   merges two warheads and the smaller damage vanishes". After W24 each weapon carries ONE
+   damage warhead, so there is nothing left to merge — the collisions were this debt made
+   visible, not a conversion bug. **The owed ruling ("should one weapon carry three warheads of
+   the same family at all?") is already answered by §11b: no.**
+3. **A5** — retire the remaining inline-`Versus` weapons onto templates.
+4. **THEN** class anchors → `fit_class` per class → maintainer sign-off (W11) → targets written
+   into the ledger → `apply_balance --confirm` → boot gate.
+
+**Still safe BEFORE the split:** `fit_class` as a DIAGNOSTIC — it writes a validation report,
+and its anchor write is merge-safe since `f1c89db9f`. Reading where costs stand today costs
+nothing and informs the anchor choice. What must wait is WRITING targets and applying them.
+
+---
+
 ## 1. THE BOARD
 
 | id | work item | status | owner | needs |
