@@ -1,19 +1,21 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **224**, files touched: **342**
+Commits reviewed: **350**, files touched: **472**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
-| R1 | balance yaml edited without the ledger | 10 | yes |
+| R1 | balance yaml edited without the ledger | 12 | yes |
 | R2 | audit script never run by run_all.sh | 2 | yes |
 | R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 9 | partly |
-| R4 | engine/mod.config change (needs boot gate) | 4 | no |
+| R4 | engine/mod.config change (needs boot gate) | 5 | no |
 
 
-## R1 — hand-edited balance numbers (10)
+## R1 — hand-edited balance numbers (12)
 
 | commit | date | subject | fields |
 |---|---|---|---|
+| a20cda71 | 2026-08-12 | W2: convert wc2deathknightDeathAndDecay_Hit to I | Damage |
+| 086efefc | 2026-08-11 | feat(balance): convert HonestJohn to 3-way split | Damage |
 | 14713d57 | 2026-08-11 | fix(tesla): rename extra-damage chips and restor | Damage |
 | 0d2cd6e8 | 2026-08-10 | feat(warhead): auto-scaling Integrity/EMP + unif | Damage, Spread |
 | 39995bba | 2026-08-10 | balance(weapons): wire D2K_StormGunInf/Cymek to  | Damage |
@@ -49,10 +51,11 @@ Commits reviewed: **224**, files touched: **342**
 | b6a58b76 | 2026-08-04 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 
 
-## R4 — engine/config changes to re-verify (4)
+## R4 — engine/config changes to re-verify (5)
 
 | commit | date | note |
 |---|---|---|
+| d6e8712c | 2026-08-15 | mod.config changed (rebuild + boot gate required) |
 | 1d5d5e55 | 2026-08-11 | mod.config changed (rebuild + boot gate required) |
 | f2284b1c | 2026-08-11 | mod.config changed (rebuild + boot gate required) |
 | ea160f40 | 2026-08-10 | mod.config changed (rebuild + boot gate required) |
@@ -63,21 +66,21 @@ Commits reviewed: **224**, files touched: **342**
 
 | file | commits touching it |
 |---|---|
-| docs/AI_HANDOFF_2026-08-05.md | 62 |
-| mods/cameo/weapons/weapons.yaml | 36 |
-| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 34 |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 33 |
-| mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 32 |
-| docs/balance/redalert_soviets.json | 30 |
+| docs/AI_HANDOFF_2026-08-05.md | 63 |
+| mods/cameo/weapons/weapons.yaml | 56 |
+| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 39 |
+| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 39 |
+| docs/balance/redalert_soviets.json | 39 |
+| docs/design/BALANCE_PROGRAM_PLAN.md | 37 |
+| tools/balance/gen_weapon_template.py | 35 |
+| mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 33 |
+| docs/balance/tiberiansun_gdi.json | 33 |
+| docs/balance/d2k_ixian.json | 31 |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 31 |
+| docs/design/ROADMAP.md | 30 |
+| mods/cameo/weapons/redalert2mod.yaml | 29 |
+| mods/cameo/weapons/redalert2.yaml | 29 |
 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml | 29 |
-| mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml | 28 |
-| mods/cameo/weapons/redalert2.yaml | 28 |
-| mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml | 28 |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 27 |
-| docs/balance/tiberiansun_gdi.json | 26 |
-| docs/balance/redalert2mod_tkm.json | 26 |
-| docs/balance/d2k_ixian.json | 25 |
-| docs/balance/redalert_japan.json | 25 |
 
 
 ## Reviewer checklist (not machine-checkable)
@@ -91,10 +94,10 @@ Commits reviewed: **224**, files touched: **342**
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 0 R1 and 0 R3 of 10/9 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 1 R1 and 0 R3 of 12/9 findings are in scope; the rest predate the gate.
 
 
 ## FAIL
 
-- 0 R1, 2 R2, 0 R3 blocking finding(s)
+- 1 R1, 2 R2, 0 R3 blocking finding(s)
 

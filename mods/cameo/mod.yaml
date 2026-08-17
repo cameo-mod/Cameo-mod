@@ -18,9 +18,12 @@ FileSystem: ContentInstallerFileSystem
 		~^SupportDir|Content/cameo/theme
 		^EngineDir|mods/common: common
 		~^SupportDir|Content/cameo/music
-		~^SupportDir|Content/cameo/ra/scores.mix
-		~^SupportDir|Content/cameo/cnc/scores.mix
-		~^SupportDir|Content/cameo/ts/scores.mix
+		~^SupportDir|Content/cameo/ra: cameo_ra
+		~cameo_ra|scores.mix
+		~^SupportDir|Content/cameo/cnc: cameo_cnc
+		~cameo_cnc|scores.mix
+		~^SupportDir|Content/cameo/ts: cameo_ts
+		~cameo_ts|scores.mix
 		~^SupportDir|Content/cameo/firestorm
 		~cameo|ContentPacks/TiberianSun/CABAL/files/icons: cabal_icons
 		~cameo|ContentPacks/TiberianSun/CABAL/files/sprites: cabal_sprites
