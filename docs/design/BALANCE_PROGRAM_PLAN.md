@@ -230,6 +230,83 @@ and every base assault becomes a shield fight.
 
 ---
 
+## 1b. W24 DIAGNOSIS (2026-08-17) — it is an INHERITANCE PILEUP, not a family choice
+
+Measured before touching anything, and the finding changes the plan.
+
+### What the 973 actually are
+
+| shape | count | note |
+|---|--:|---|
+| **inheritance PILEUP** — ≥3 legacy templates inherited, no `^Warhead_*` family | **221** | the sum is an artifact |
+| carries a `^Warhead_*` family inherit | 341 | real multi-warhead designs |
+| 1–2 legacy inherits, no family | 411 | mostly the same disease, milder |
+
+`wc2dragonFireVisible` — a dragon's fire breath — inherits **fifteen** legacy weapon templates:
+
+```
+^LightFlameWeapon  ^LightChemicalWeapon  ^MediumFlameWeapon  ^MediumChemicalWeapon
+^HeavyFlameWeapon  ^HeavyChemicalWeapon  ^TankDestroyerCannon  ^MediumCannon
+^HeavyCannon  ^Grenade  ^ShrapnelWeapon  ^HeavyBomb  ^MediumMissile  ^Chaingun  ^FlakWeapon
+```
+
+A dragon does not fire a tank-destroyer cannon or drop a heavy bomb. Each template contributes a
+damage warhead, so this is accumulated copy-paste, not design. The templates most often pulled in
+this way: `^ShrapnelWeapon` (100 weapons), `^Grenade` (96), `^FlakWeapon` (91), `^MediumMissile`
+(85). **This is the same debt as W23/A5** — 47 legacy templates with 1343 inheritors — showing up
+from the other end.
+
+### ⚠ The finding that changes the collapse rule: 90% are BROADCAST
+
+**874 of the 973 (90%) have EVERY main at the identical damage.** The worst pileups are all one
+value repeated:
+
+| weapon | mains | each | sum |
+|---|--:|--:|--:|
+| `SCUDNUKE` | 15 | 20 000 | 300 000 |
+| `wc2cannontowerFire` | 15 | 4 000 | 60 000 |
+| `wc2dragonFireVisible` | 15 | 2 000 | 30 000 |
+| `SiegeTankSiegeCannon` | 14 | 10 000 | 140 000 |
+
+That is the **broadcast fingerprint** `audit_warhead_split` was written to catch: one design
+number written onto every warhead, multiplying real damage by the warhead count. **So the SUM is
+frequently not a design value** — the dragon's 30 000 exists only because someone pasted 15
+inherits.
+
+⚠ **Which makes DESIGN §11b's "collapsing preserves the SUM" ambiguous here.** Preserving 30 000
+locks the accident in as intent; collapsing to 2 000 is a 15× nerf.
+
+**RECOMMENDATION — preserve the SUM anyway, and let the pricing pass fix the magnitude.** Not
+because 30 000 is right, but because:
+* it keeps W24 a **behaviour-neutral refactor**, which is the only version that can be VERIFIED —
+  `dump_resolved`/`review_resolve_diff` must diff empty, and a boot gate then means something;
+* changing magnitudes inside a structural sweep is a hand-edited balance number (CLAUDE.md rule
+  3) across ~874 weapons at once, with no way to tell a correct collapse from a wrong one;
+* the whole point of §0a's ordering is that **pricing comes after structure**. The pricing pass
+  will move these a long way, and that is where a 15× correction belongs — traceably, through the
+  ledger.
+
+Expect, and do not be alarmed by, large `Damage` moves for these weapons when pricing runs.
+
+### ⚠ The guard's FAIL condition is narrower than the fingerprint it describes
+
+`audit_warhead_split` FAIL 1 requires *"≥2 MAIN warheads **AND ≥1 side warhead** where every
+warhead has the identical damage"*. The side-warhead requirement is why it reports **4** while the
+fingerprint is present on **874**; its informational list adds 246 more but only at ≥8000 damage
+per main. The type filter is fine (it counts `AreaDamage` as well as `SpreadDamage`, line 53).
+**Widen FAIL 1 to "all mains identical" and drop the side-warhead precondition** — otherwise the
+guard cannot see the thing W24 is cleaning up.
+
+### What is still judgment, and what is not
+
+The family choice is NOT "which of 15 legacy templates wins" — it is **"what is this weapon?"**,
+which its name, projectile and report answer directly (a dragon breathing fire → `Flame`). That
+makes it reviewable at a glance rather than a research task per weapon, so the next step is a PLAN
+tool that proposes one family per weapon with that evidence attached, for maintainer review before
+any yaml moves.
+
+---
+
 ## 2. FILE OWNERSHIP — how two agents work at once without collisions
 
 One owner per FILE SET at a time. These sets are disjoint by construction:
