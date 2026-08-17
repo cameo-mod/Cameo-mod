@@ -4918,6 +4918,21 @@ hexshield_sphere:
 		Scale: 1.45
 		Tick: 40
 		Offset: 0,16
+	# Compatibility aliases for existing large-shield receiver overrides.
+	shield-complete-big:
+		Filename: hexshield_sphere.png
+		Length: 8
+		ZOffset: 1023
+		Scale: 1.45
+		Tick: 80
+		Offset: 0,16
+	shield-starts-big:
+		Filename: hexshield_sphere.png
+		Length: 8
+		ZOffset: 1023
+		Scale: 1.45
+		Tick: 80
+		Offset: 0,16
 
 hexshield_directional_oval:
 	idle:

@@ -64,6 +64,12 @@
 
 ^RA2YuriPsionicShields:
 	Inherits@EnemyInProximity: ^EnemyInProximity
+	WithIdleOverlay@shield1:
+		Palette: yurihexshield25
+		IsPlayerPalette: false
+	WithIdleOverlay@shield_damage:
+		Palette: yurihexshield50
+		IsPlayerPalette: false
 	DamageMultiplier@yuri_doctrine_psionicvehicleshields:
 		Modifier: 75
 		RequiresCondition: yuri_doctrine_psionicvehicleshields

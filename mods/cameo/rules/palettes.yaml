@@ -162,6 +162,19 @@
 		BaseName: playershield50
 		BasePalette: playershield
 		Alpha: 0.5
+	FixedColorPalette@hexshield:
+		Base: playershieldbase
+		Name: hexshield
+		Color: 469BFF
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PaletteFromPaletteWithAlpha@hexshield25:
+		Name: hexshield25
+		BasePalette: hexshield
+		Alpha: 0.25
+	PaletteFromPaletteWithAlpha@hexshield50:
+		Name: hexshield50
+		BasePalette: hexshield
+		Alpha: 0.5
 	FixedColorPalette@protosshexshield:
 		Base: playershieldbase
 		Name: protosshexshield
@@ -200,6 +213,19 @@
 	PaletteFromPaletteWithAlpha@consortiumhexshield50:
 		Name: consortiumhexshield50
 		BasePalette: consortiumhexshield
+		Alpha: 0.5
+	FixedColorPalette@yurihexshield:
+		Base: playershieldbase
+		Name: yurihexshield
+		Color: 665CFF
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PaletteFromPaletteWithAlpha@yurihexshield25:
+		Name: yurihexshield25
+		BasePalette: yurihexshield
+		Alpha: 0.25
+	PaletteFromPaletteWithAlpha@yurihexshield50:
+		Name: yurihexshield50
+		BasePalette: yurihexshield
 		Alpha: 0.5
 	PaletteFromFile@staticterrain-jungle:
 		Name: staticterrain

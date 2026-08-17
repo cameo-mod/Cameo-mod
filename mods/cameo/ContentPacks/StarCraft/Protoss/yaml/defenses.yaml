@@ -46,14 +46,10 @@ protoss_photoncannon:
 		Image: protoss_structure_hexshields
 		Sequence: photon-idle
 		StartSequence: photon-idle
-		Palette: protosshexshield25
-		IsPlayerPalette: false
 		RequiresCondition: !disabled && shielded && !shieldhit && !build-incomplete
 	WithIdleOverlay@shield_damage:
 		Image: protoss_structure_hexshields
 		Sequence: photon-hit
-		Palette: protosshexshield50
-		IsPlayerPalette: false
 		RequiresCondition: !disabled && shielded && shieldhit && !build-incomplete
 	-WithSpriteBody:
 	-WithDeathAnimation:

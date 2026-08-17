@@ -1793,6 +1793,11 @@
 		IconPalette: cameo
 	TooltipExtras@Dreadnought:
 		Description: Dreadnought
+	WithIdleOverlay@shield1:
+		Sequence: large-idle
+		StartSequence: large-idle
+	WithIdleOverlay@shield_damage:
+		Sequence: large-hit
 
 ^MissileVehicleTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceVehicle
@@ -2369,6 +2374,17 @@
 
 ^Vehicle:
 	Inherits: ^BasicUnit
+	WithIdleOverlay@shield1:
+		Image: hexshield_sphere
+		Sequence: medium-idle
+		StartSequence: medium-idle
+		Palette: hexshield25
+		IsPlayerPalette: false
+	WithIdleOverlay@shield_damage:
+		Image: hexshield_sphere
+		Sequence: medium-hit
+		Palette: hexshield50
+		IsPlayerPalette: false
 	# Muzzle-flash glow for every ground vehicle; gated per-armament by MuzzleSequence, so only
 	# td_nod_gunturret/MG units flash (harvesters, MCVs, transports without a muzzle stay dark). Ships opt out
 	# via ^BoatUnit; non-td_nod_gunturret creatures reusing a vehicle template opt out with -WithMuzzleGlow.
@@ -2701,6 +2717,17 @@
 
 ^RANeutralPlane: #for actual air units
 	Inherits@1: ^BasicUnit
+	WithIdleOverlay@shield1:
+		Image: hexshield_sphere
+		Sequence: medium-idle
+		StartSequence: medium-idle
+		Palette: hexshield25
+		IsPlayerPalette: false
+	WithIdleOverlay@shield_damage:
+		Image: hexshield_sphere
+		Sequence: medium-hit
+		Palette: hexshield50
+		IsPlayerPalette: false
 	Inherits@ext: ^ExternalConditions
 	Inherits@IC: ^IronCurtainable
 	Inherits@fix: ^Repairable
@@ -3302,12 +3329,12 @@
 	WithIdleOverlay@shield1:
 		Sequence: shield-complete-infantry
 		StartSequence: shield-starts-infantry
-		Palette: playershield25
-		IsPlayerPalette: true
+		Palette: hexshield25
+		IsPlayerPalette: false
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-infantry
-		Palette: playershield50
-		IsPlayerPalette: true
+		Palette: hexshield50
+		IsPlayerPalette: false
 	WithIdleOverlay@shrouded:
 		Image: shrouded_overlay_small
 

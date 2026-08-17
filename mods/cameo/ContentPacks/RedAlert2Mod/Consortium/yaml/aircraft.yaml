@@ -517,13 +517,9 @@ steelconsortium_cloudbreaker:
 		Image: hexshield_directional_oval
 		Sequence: idle
 		StartSequence: idle
-		Palette: consortiumhexshield25
-		IsPlayerPalette: false
 	WithIdleOverlay@shield_damage:
 		Image: hexshield_directional_oval
 		Sequence: hit
-		Palette: consortiumhexshield50
-		IsPlayerPalette: false
 	CarrierMaster:
 		Actors: cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel
 		RearmTicks: 25

@@ -701,6 +701,12 @@ SCSCIENCEFACILITYM:
 		PlayerPalette: player_rgba
 
 ^ProtossPersonalShield:
+	WithIdleOverlay@shield1:
+		Palette: protosshexshield25
+		IsPlayerPalette: false
+	WithIdleOverlay@shield_damage:
+		Palette: protosshexshield50
+		IsPlayerPalette: false
 	Shielded:
 		InitialPercentageStrength: 100
 		DamageRegenDelay: 125

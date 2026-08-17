@@ -71,17 +71,6 @@ protoss_dragoon:
 		Step: 30
 	Shielded:
 		RegenAmount: 60
-	WithIdleOverlay@shield1:
-		Image: hexshield_sphere
-		Sequence: medium-idle
-		StartSequence: medium-idle
-		Palette: protosshexshield25
-		IsPlayerPalette: false
-	WithIdleOverlay@shield_damage:
-		Image: hexshield_sphere
-		Sequence: medium-hit
-		Palette: protosshexshield50
-		IsPlayerPalette: false
 	Armament:
 		Weapon: DragoonCannon
 		FireDelay: 3

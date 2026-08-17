@@ -473,6 +473,12 @@
 		Upgrades: steelconsortium_upgrade_pulseweapons
 
 ^SteelConsortiumNaniteInfusion:
+	WithIdleOverlay@shield1:
+		Palette: consortiumhexshield25
+		IsPlayerPalette: false
+	WithIdleOverlay@shield_damage:
+		Palette: consortiumhexshield50
+		IsPlayerPalette: false
 	DamageMultiplier@steelconsortium_upgrade_naniteinfusion:
 		RequiresCondition: steelconsortium_upgrade_naniteinfusion
 		Modifier: 95

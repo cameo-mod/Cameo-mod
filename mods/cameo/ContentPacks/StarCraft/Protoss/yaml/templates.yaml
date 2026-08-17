@@ -165,6 +165,13 @@
 
 ^LargeProtoss:
 	Inherits: ^BasicProtoss
+	WithIdleOverlay@shield1:
+		Image: hexshield_sphere
+		Sequence: medium-idle
+		StartSequence: medium-idle
+	WithIdleOverlay@shield_damage:
+		Image: hexshield_sphere
+		Sequence: medium-hit
 	Inherits@2: ^IronCurtainable
 	Inherits@EMP: ^UnitDisable
 	Inherits@cloak: ^AcceptsCloakCrate
