@@ -102,8 +102,21 @@
 		Upgrades: ra2_allies_upgrade_infiltratorstraining
 
 ^RA2AlliedCompositeArmorPlatings:
+	# The plating LAYER, not a flat modifier: COMPOSITE replaces the class armor while the
+	# doctrine is on (AreaDamageWarhead selects it), so this branch is now strong against
+	# kinetic AP and bullets and WEAK against blast — a trade, where the old flat 80 was a
+	# free 20%. Modifier dropped 80 -> 95 to match the sibling reflective branch: the type
+	# already averages ~30%, so keeping 80 would have compounded to a 44% cut.
+	Armor@COMPOSITE:
+		Type: COMPOSITE
+		RequiresCondition: ra2_allies_upgrade_compositearmorplating
+	WithDecoration@COMPOSITE:
+		Image: pips
+		Sequence: pip_reflectivearmor
+		Position: BottomRight
+		RequiresCondition: ra2_allies_upgrade_compositearmorplating
 	DamageMultiplier@ra2_allies_upgrade_compositearmorplating:
-		Modifier: 80
+		Modifier: 95
 		RequiresCondition: ra2_allies_upgrade_compositearmorplating
 	GrantConditionOnPrerequisite@ra2_allies_upgrade_compositearmorplating:
 		Condition: ra2_allies_upgrade_compositearmorplating
