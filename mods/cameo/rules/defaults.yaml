@@ -2578,6 +2578,11 @@
 
 ^BoatUnit:
 	Inherits: ^Vehicle
+	WithIdleOverlay@shield1:
+		Sequence: sphere-large
+		StartSequence: sphere-large
+	WithIdleOverlay@shield_damage:
+		Sequence: sphere-large
 	# Ships weren't part of the muzzle-flash pass; opt the whole naval line out (re-enable per-ship if wanted).
 	-WithMuzzleGlow:
 	Inherits@snipe: ^DriverKillImmune

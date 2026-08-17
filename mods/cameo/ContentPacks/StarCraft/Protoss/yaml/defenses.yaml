@@ -44,12 +44,12 @@ protoss_photoncannon:
 		QuantizedFacings: 16
 	WithIdleOverlay@shield1:
 		Image: hexshield_dome
-		Sequence: dome-small
-		StartSequence: dome-small
+		Sequence: dome-raised-small
+		StartSequence: dome-raised-small
 		RequiresCondition: !disabled && shielded && !shieldhit && !build-incomplete
 	WithIdleOverlay@shield_damage:
 		Image: hexshield_dome
-		Sequence: dome-small
+		Sequence: dome-raised-small
 		RequiresCondition: !disabled && shielded && shieldhit && !build-incomplete
 	-WithSpriteBody:
 	-WithDeathAnimation:

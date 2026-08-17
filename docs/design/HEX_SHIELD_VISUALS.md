@@ -16,8 +16,9 @@ The shared geometry policy is:
 - elongated mobile actors: explicit opt-in to `hexshield_directional_oval` /
   `directional-oval-large`.
 
-Additional generic `sphere-small` and `dome-large` tiers are available for explicit actor or
-template overrides. Shared assets and sequence names must remain actor- and faction-neutral.
+Additional generic compact and raised variants are available for silhouettes that should keep
+a tighter fit or need a higher visual center. Shared assets and sequence names must remain
+actor- and faction-neutral.
 
 Palettes are independent from geometry: default and Protoss shields are blue, Ixian shields
 are silver, Yuri shields are indigo, and Consortium shields are cyan. Idle and hit palettes
@@ -44,7 +45,7 @@ their facings and silhouette must be reviewed in game.
 
 ## Performance and fit policy
 
-The eight shared sequences reuse four Indexed8 PNG atlases. A shielded actor still renders one
+The shared sequences reuse four Indexed8 PNG atlases. A shielded actor still renders one
 idle-or-hit overlay, and there is no runtime bounds scan, dynamic scaling, or per-actor sequence
 lookup. This keeps sequence metadata small and does not require an engine feature.
 
