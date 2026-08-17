@@ -297,6 +297,54 @@ per main. The type filter is fine (it counts `AreaDamage` as well as `SpreadDama
 **Widen FAIL 1 to "all mains identical" and drop the side-warhead precondition** — otherwise the
 guard cannot see the thing W24 is cleaning up.
 
+### Flame vs Inferno — KEEP BOTH, and the dragon is Flame
+
+*"Maybe Flame or Inferno? … I'm not even sure we need to have both flame and inferno warheads at
+the same time since they are basically the same right?"*
+
+**They are not the same, and the data says so clearly:**
+
+| | Flame | Inferno |
+|---|---|---|
+| ladder | **SHARP**: `None 200 … Concrete 92`, span ~2.2× | **FLAT**: `Scout 121 … Helicopter 76`, span ~1.6× |
+| role | anti-infantry / anti-wood specialist | generalist — hurts everything about equally |
+| `Shield` | 187–203 | **263** (couples more; it is part-energy) |
+| `PHYSICS_RANK` | 0.50 (thermal) | 0.64 (blended) — vs Prism 0.76 |
+
+Inferno's identity is not "fancier Flame": the family spec is `("Prism", "Temperature", +100, L3)`
+— **a prism chassis that burns**, i.e. a HEAT RAY (`HeatRayBeam1/2`), which is why it inherits
+Prism's flat ladder. Flame is fuel combustion. Merging them would delete the only *generalist*
+thermal option and hand every heat weapon the anti-infantry spike.
+
+**A dragon's fire breath is fuel combustion with an anti-infantry bite → `Flame`.**
+
+### ⚠ CONTRADICTION FOUND while checking this (unfixed)
+
+Two tables in `gen_weapon_template.py` describe the same physics and disagree about Inferno:
+
+```
+PHYSICS_RANK["Inferno"] = 0.64      # "blended energy — part field-coupling, part thermal"
+COMPOSITION["Inferno"]  = {"thermo": 1.00}    # ...100% thermal, 0% energy
+```
+
+`COMPOSITION` drives the plating columns, so Inferno ships with `HAZMAT 35` / `REFLECTOR 103` —
+**byte-identical to Flame**. A focused-energy heat ray should be *reflected* more and *insulated*
+less than a fuel flamethrower; today a REFLECTOR plating does nothing special against it while
+HAZMAT counters it as hard as a flamer.
+
+**Proposed fix, derived rather than invented** — take the energy share from the rank table so the
+two agree by construction:
+
+```
+energy_share = (rank[Inferno] - rank[Flame]) / (rank[Prism] - rank[Flame])
+             = (0.64 - 0.50) / (0.76 - 0.50) = 0.538
+COMPOSITION["Inferno"] = {"thermo": 0.46, "energy": 0.54}
+```
+
+Needs a regenerate + `verify_generator_sync` drift=0 + boot gate, so it is its own commit.
+⚠ Note this is exactly the class of contradiction `audit_doc_claims` **cannot** catch — it is
+code-vs-code, not a documented number.
+
 ### What is still judgment, and what is not
 
 The family choice is NOT "which of 15 legacy templates wins" — it is **"what is this weapon?"**,
