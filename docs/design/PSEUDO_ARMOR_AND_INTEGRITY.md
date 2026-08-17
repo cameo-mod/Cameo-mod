@@ -616,7 +616,7 @@ Measured against `formula.py`, `weapon_efficiency.py` and `target_model.py`.
 | **E1** | **`Shield`, `HAZMAT` and `REFLECTOR` are priced at ZERO.** `target_model.ARMORS` is the 16 canonical types only, so `K` never sees them. | Tesla's `Shield: 400` against **51% of the roster** is free, and the S1/Shield rebuild just made that row far more meaningful. HAZMAT covers 11% of actors. This is the biggest hole, and it grew today. | **high** |
 | **E2** | `PhysicalState` (heat / cold / corrosion) is priced at zero — `extract_stats` reads no such field. | ~89 live bindings deliver a real effect for free. Design work exists (`cameo-physical-state-pricing`), the extractor does not. | **high** |
 | **E3** | `IntegrityScale` is priced at zero. | 1233 actors carry the pool; a disable at 50% HP is worth real money. | medium |
-| **E4** | **`K` mixes two units.** `avg_versus` deliberately excludes the `_Percentage` twins, but `k` sums over ALL parts including them — and until W18 the twin's `Versus` IS its magnitude, on a 16-wide window. | The twin's contribution to `K` is on a different scale from the main's. W18 fixes the unit; until then this is a systematic distortion of every %-carrying weapon's price. | **high** |
+| **E4** | ✅ **FIXED 2026-08-17 — `K` was not damage-independent.** The `%`-twin's damage is a share of the TARGET's max HP, so it does not scale with the weapon's flat `Damage` — yet `k` folded it in as `share = ref_hp × pct_damage / 100 / flat_total`, putting `flat_total` in a DENOMINATOR. | Not a mis-price of anything shipped: `effective_per_shot = damage_total × k_context` is exact at the current Damage, and `propose_class_rebalance` never routes through K (it sums flat warheads, twins excluded). It was a **documented wrong recipe** — the inversion `Damage_required = target_dps × eff_reload / (burst × FP × K)` was stated in 6 places and is only correct at λ=1. Fix: the affine split `k_flat_context` + `pct_absolute_context`, `required_damage()`, and `dps_floor` in the ledger. Guard: `audit_k_linearity.py`. | ~~high~~ **done** |
 | **E5** | Upgrades are priced at zero — there is no ΔP report, so a weapon swap is free. | The maintainer has already flagged this; it is the whole upgrade-rebalance prerequisite. | high (deferred by design) |
 | **E6** | Inaccuracy and projectile speed are not priced. | A weapon that misses is worth less than one that does not; `reliability` covers spatial falloff, not aim. | medium |
 | **E7** | `MinRange` is not priced. | A real artillery drawback that costs nothing. | low |
@@ -628,3 +628,41 @@ Measured against `formula.py`, `weapon_efficiency.py` and `target_model.py`.
 rather than for one weapon, and both are now larger than they were a week ago — E1 because
 the Shield ladder went from a near-constant 110..140 to a designed 100..400, and E4 because
 every family now has a normalised main warhead sitting next to an un-normalised twin.
+
+### E4, as measured and fixed (2026-08-17)
+
+Two things had to be separated that the single `k` conflated, and getting the severity right
+mattered as much as the fix:
+
+* **`k` as a MEASUREMENT is sound.** `effective_per_shot = damage_total × k_context`
+  reproduces the truth exactly at the weapon's current Damage, and the identity
+  `k == k_flat + pct_absolute / flat_total` (checked on all 2016 concrete weapons, L2) shows
+  the new split is a decomposition of the published number, not a second opinion. **No
+  shipped price was wrong.** The `_Percentage`-excluding `spread_damage_sum` also keeps the
+  live `propose_class_rebalance` inversion clear of K entirely.
+* **`k` as a SHAPE COEFFICIENT was false**, and that is what six documents told the reader
+  to invert. Measured on the worst case, `AnthraxCloudLarge` (twin = 75% of output):
+
+  | want | old prescription | old actually delivers | error | new |
+  |--:|--:|--:|--:|--:|
+  | 2.0× | 354 | 1225 vs 1961 asked | **−37.5%** | 887 → exact |
+  | 1.5× | 266 | 1103 vs 1471 asked | −25.0% | 532 → exact |
+  | 1.0× | 177 | 981 vs 981 asked | 0.0% | 177 → exact |
+  | 0.6× | 106 | 883 vs 588 asked | **+50.0%** | UNREACHABLE |
+  | 0.4× | 71 | 834 vs 392 asked | **+112.6%** | UNREACHABLE |
+
+  The old form is exact **only at λ=1**, its own fixed point — which is exactly why nothing
+  caught it: every check that re-derived a weapon's current Damage passed.
+
+**The `%`-twin is a DPS FLOOR.** This fell out of the fix and is a design fact, not a bug: a
+weapon delivers `pct_absolute_context` at `Damage: 0`, so lowering flat Damage can never
+price it below that. 52 weapons have a floor ≥25% of output. `required_damage()` returns
+`None` there instead of a positive number, and `dps_floor` is now published per weapon so the
+balance pass sees the bound before it prescribes an impossible target. To price one of these
+lower, the **twin** must shrink.
+
+**What this leaves for W18.** W18 rebases the twin's `Versus` to basis points (`×5`,
+`PercentageDenominator: 10000`). That changes the twin's magnitude and therefore every
+`pct_absolute` — but not the SHAPE of the model, because the affine split already puts the
+twin on the correct side of the equation. Re-run `extract_stats` after W18 and the floors
+move; nothing needs re-deriving.

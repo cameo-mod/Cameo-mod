@@ -113,9 +113,11 @@ Commit trailer = the ACTUAL agent (CLAUDE.md rule 10). Never sign as another age
 `effective_dps = Damage_total × (burst / eff_reload) × FirepowerMultiplier × K`, with
 `K = Σ_warheads share_w × versus_w × (reliability_w + secondary_w)`.
 
-K is independent of the Damage magnitude, so pricing inverts exactly:
-`Damage_required = target_dps × eff_reload / (burst × FP × K)`, quantised to the 2000
-grid with `FirepowerMultiplier` absorbing the remainder. Spec: `EFFECTIVE_DAMAGE.md`.
+The FLAT part of K is independent of the Damage magnitude, so pricing inverts exactly:
+`Damage_required = (target_per_shot − pct_absolute_context) / k_flat_context`, snapped to
+the grid. ⚠ **Never invert `k` / `k_context`** — a `%`-of-max-HP twin is ADDITIVE, so those
+two move when Damage moves (E4, fixed 2026-08-17; guard `audit_k_linearity.py`). They remain
+correct measurements. Spec: `EFFECTIVE_DAMAGE.md`.
 
 **VERIFY:** `python tools/balance/weapon_efficiency.py --families` prints 20 rows.
 
@@ -280,10 +282,11 @@ traced to the ONE factor that moved it. Spec + shapes: `EFFECTIVE_DAMAGE.md` §3
 | 5 | **`AttackDelay`** | ✖ **does not exist** — see below | — |
 
 **The split that makes this safe:** factors 2–4 do NOT depend on `Damage`, so they fold
-into the new **`k_context`** and the pricing inversion stays closed-form. **Overkill does**
-depend on Damage, so it is reported BESIDE K and never inside it — folding it in would turn
-`Damage_required = target_dps × eff_reload / (burst × FP × K)` into a fixed-point iteration.
-`test_weapon_context.py` pins that distinction explicitly.
+into the new **`k_flat_context`** and the pricing inversion stays closed-form. **Overkill
+does** depend on Damage, so it is reported BESIDE K and never inside it — folding it in
+would turn the inversion into a fixed-point iteration. `test_weapon_context.py` pins that
+distinction explicitly. ⚠ The `%`-twin is that same defect and WAS folded in until E4
+(2026-08-17) split it out as the additive `pct_absolute_context`.
 
 ⚠ **Item 5 was based on a field that isn't there.** `AttackDelay` appears **0 times** in
 the tree. Charge-up is an ACTOR trait (`AttackCharged`, `AttackCharges`, `AttackTesla`, …)

@@ -143,16 +143,27 @@ moved can be traced to the single factor that moved it:
 | `overkill` | DPS ignores waste — a 200k burst on a 50k target throws away 75% | `HP / (ceil(HP/dmg) x dmg)` — waste is only the LAST shot | 200k on 50k → **0.25** |
 
 **The split that matters.** `targets`, `range` and `deadzone` do **not** depend on
-`Damage`, so they fold into **`k_context`** and the pricing inversion stays closed-form:
+`Damage`, so they fold into **`k_flat_context`** and the pricing inversion stays closed-form:
 
 ```
-Damage_required = target_dps x eff_reload / (burst x FP x k_context)
+Damage_required = (target_per_shot - pct_absolute_context) / k_flat_context
 ```
 
 **`overkill` does** depend on Damage — it compares per-shot damage against target HP.
 Folding it into K would turn that exact inversion into a fixed-point iteration, so it is
 reported **beside** K and never inside it. `tools/tests/test_weapon_context.py` pins
 this distinction; if you ever fold `overkill` in, the inversion must become iterative.
+
+⚠ **The `%`-of-max-HP twin was the same defect, and it WAS folded in** (E4, measured
+2026-08-17). Its damage is a share of the TARGET's max HP, so it does not scale with the
+weapon's flat `Damage` — yet `k` carried it as `share = ref_hp × pct_damage / 100 /
+flat_total`, putting `flat_total` in a denominator. **`k` and `k_context` therefore move
+when `Damage` moves and must never be inverted**: doubling `AnthraxCloudLarge`'s flat
+Damage drops its `k` by 37%, and inverting through it to reach 2× the DPS prescribes 40%
+of the Damage actually needed. `k` is still a correct MEASUREMENT — `effective_per_shot =
+Damage_total × k_context` is exact at the weapon's current Damage — it is not a shape
+coefficient. Invert `k_flat_context` (scale-invariant) against `pct_absolute_context`
+(additive). Guard: `tools/audit/audit_k_linearity.py`.
 
 `TARGETS_FLOOR` exists because AA units are separately class-anchored: a raw
 engagement share would price an AA-only weapon at 0.10 and penalise those units twice.
@@ -280,11 +291,19 @@ effective_dps = Damage_total × (burst / eff_reload) × FirepowerMultiplier × K
 K = Σ_warheads  share_w × versus_w × ( reliability_w + secondary_w )
 ```
 
-K never depends on the Damage magnitude, so pricing inverts exactly and the 2000 grid is
-never violated — `Damage_required = target_dps × eff_reload / (burst × FP × K)`, rounded
-to the grid with `FirepowerMultiplier` absorbing the remainder. A workbook value of
-2351.85 therefore never goes into yaml: the designer sets geometry for feel, K measures
-it, the pipeline solves for Damage.
+The FLAT part of K never depends on the Damage magnitude, so pricing inverts exactly and
+the grid is never violated — `Damage_required = (target_per_shot − pct_absolute_context) /
+k_flat_context`, snapped to the grid. A workbook value of 2351.85 therefore never goes into
+yaml: the designer sets geometry for feel, K measures it, the pipeline solves for Damage.
+
+⚠ The `%`-twin is **additive**, not multiplicative (see the E4 note above), so the model is
+affine: `effective_per_shot = Damage_total × k_flat_context + pct_absolute_context`. That
+also means **the twin is a DPS FLOOR** — a weapon still delivers `pct_absolute_context` at
+`Damage: 0`, so no reduction of flat Damage can price it lower. 1537 concrete weapons carry
+a twin and 52 have a floor at ≥25% of output (worst: `AnthraxCloudLarge`, 75%). A target
+below the floor is UNREACHABLE; `weapon_efficiency.required_damage()` returns `None` rather
+than a confidently wrong positive number, and `dps_floor` is published per weapon in the
+derived ledger. To price such a weapon lower, the TWIN has to shrink.
 
 **Secondary targets (W1, done).** `secondary = ρ_class × BLOB_UPTIME × (min(footprint,
 A_BLOB) − A_SELF)`. `ρ` is per macro class (INF 2.0 / VEH 0.33 / BLD 0.25 / AIR 0.20 units

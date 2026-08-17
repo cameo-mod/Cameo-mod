@@ -435,9 +435,12 @@ def derived_metrics(resolved, raw: dict) -> dict | None:
 
     * `effective_damage` / `footprint` / `reliability` / `sigma` — the area-integrated
       per-shot metric.
-    * `k` / `effective_per_shot` / `effective_dps` — the W1 pricing coefficient. K is
-      independent of the Damage magnitude, which is what makes pricing invertible:
-      `Damage_required = target_dps x eff_reload / (burst x FP x K)`.
+    * `k` / `effective_per_shot` / `effective_dps` — the W1 pricing coefficient.
+      ⚠ **`k` and `k_context` measure correctly but MUST NOT BE INVERTED** (E4): a
+      %-of-max-HP twin's damage does not scale with the flat Damage, so `k` carries
+      `flat_total` in a denominator and moves when Damage moves. Invert the AFFINE pair:
+      `Damage_required = (target_per_shot - pct_absolute_context) / k_flat_context`,
+      and treat a target below `dps_floor` as unreachable rather than rounding it.
 
     `effective_dps` is the WEAPON's number. `FirepowerMultiplier` is an actor
     property, so it is deliberately NOT baked in here — the caller applies it.
@@ -461,6 +464,14 @@ def derived_metrics(resolved, raw: dict) -> dict | None:
         shares = sum(p["share"] for p in flat) or 1.0
         out["k"] = round(res["k"], 4)
         out["k_context"] = round(res["k_context"], 4)
+        # E4 — the AFFINE pair. `k`/`k_context` measure correctly but must NEVER be
+        # inverted (they carry the %-twin's absolute damage divided by the current flat
+        # Damage, so they move when Damage moves). These two are the invertible form:
+        #     Damage_required = (target_per_shot - pct_absolute_context) / k_flat_context
+        out["k_flat"] = round(res["k_flat"], 4)
+        out["k_flat_context"] = round(res["k_flat_context"], 4)
+        out["pct_absolute"] = round(res["pct_absolute"], 2)
+        out["pct_absolute_context"] = round(res["pct_absolute_context"], 2)
         out["avg_versus"] = round(
             sum(p["share"] * p["versus"] for p in flat) / shares, 4)
         # W5 factors, each its own column so a price move can be traced to ONE of
@@ -477,6 +488,12 @@ def derived_metrics(resolved, raw: dict) -> dict | None:
             out["eff_reload"] = round(eff, 2)
             out["effective_dps"] = round(
                 res["k_context"] * damage_total * burst / eff, 2)
+            # The DPS this weapon still delivers at `Damage: 0` — its %-twin floor. A
+            # pricing target below it is unreachable by lowering flat Damage, so it has to
+            # be visible in the ledger rather than discovered as a wrong prescription.
+            if res["pct_absolute_context"] > 0:
+                out["dps_floor"] = round(
+                    res["pct_absolute_context"] * burst / eff, 2)
     return out or None
 
 
