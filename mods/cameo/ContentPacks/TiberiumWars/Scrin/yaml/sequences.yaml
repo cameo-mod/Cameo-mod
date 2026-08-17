@@ -113,7 +113,7 @@ scrin_buzzer_hive:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: -4.000,-24.000
+		Offset: 0.000,-4.000
 
 scrin_photon_cannon:
 	idle:
@@ -122,7 +122,7 @@ scrin_photon_cannon:
 		Facings: 32
 		ShadowStart: 32
 		ShadowZOffset: -5
-		Offset: 8.000,-12.000
+		Offset: 0.000,4.000
 
 scrin_plasma_missile_battery:
 	idle:
@@ -131,7 +131,7 @@ scrin_plasma_missile_battery:
 		Facings: 32
 		ShadowStart: 32
 		ShadowZOffset: -5
-		Offset: 4.000,-24.000
+		Offset: 4.000,-4.000
 
 scrin_growth_accelerator:
 	idle:
@@ -141,7 +141,7 @@ scrin_growth_accelerator:
 		Tick: 100
 		ShadowStart: 16
 		ShadowZOffset: -5
-		Offset: 0.000,-16.000
+		Offset: -4.000,-8.000
 
 scrin_storm_column:
 	idle:
@@ -151,7 +151,7 @@ scrin_storm_column:
 		Tick: 100
 		ShadowStart: 16
 		ShadowZOffset: -5
-		Offset: 12.000,-48.000
+		Offset: 8.000,-24.000
 
 scrin_rift_generator:
 	idle:
@@ -160,7 +160,7 @@ scrin_rift_generator:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: 0.000,-44.000
+		Offset: 0.000,-8.000
 
 scrin_lightning_spike:
 	idle:
@@ -169,7 +169,7 @@ scrin_lightning_spike:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: -4.000,-20.000
+		Offset: 4.000,-8.000
 
 scrin_tiberium_hive:
 	idle:
@@ -178,7 +178,7 @@ scrin_tiberium_hive:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: 0.000,-24.000
+		Offset: 0.000,-4.000
 
 scrin_warp_chasm:
 	idle:
@@ -187,7 +187,15 @@ scrin_warp_chasm:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: 0.000,-28.000
+		Offset: 0.000,-16.000
+
+scrin_warp_chasm_core:
+	idle:
+		Filename: scrin_sprites|scrin_warp_gate_core.png
+		Start: 0
+		Length: 48
+		Tick: 83
+		Offset: 0.000,-42.000
 
 scrin_foundry:
 	idle:

@@ -183,36 +183,36 @@ scrin_plasma_missile_battery:
 
 scrin_growth_accelerator:
 	Inherits: ^Building
-	Inherits@shape: ^2x2Shape
+	Inherits@shape: ^2x1Shape
 	Tooltip:
 		Name: actor_scrin_growth_accelerator.name
 	Building:
-		Dimensions: 2,2
-		Footprint: xx xx
+		Dimensions: 2,1
+		Footprint: xx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba
 
 scrin_storm_column:
 	Inherits: ^Building
-	Inherits@shape: ^2x2Shape
+	Inherits@shape: ^1x1Shape
 	Tooltip:
 		Name: actor_scrin_storm_column.name
 	Building:
-		Dimensions: 2,2
-		Footprint: xx xx
+		Dimensions: 1,1
+		Footprint: x
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba
 
 scrin_rift_generator:
 	Inherits: ^Building
-	Inherits@shape: ^3x3Shape
+	Inherits@shape: ^2x2Shape
 	Tooltip:
 		Name: actor_scrin_rift_generator.name
 	Building:
-		Dimensions: 3,3
-		Footprint: xxx xxx xxx
+		Dimensions: 2,2
+		Footprint: xx xx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba
@@ -252,6 +252,11 @@ scrin_warp_chasm:
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba
+	WithIdleOverlay@CORE:
+		Image: scrin_warp_chasm_core
+		Sequence: idle
+		Palette: scrin_warp_gate_training
+		RequiresCondition: !build-incomplete
 
 scrin_foundry:
 	Inherits: ^Building
