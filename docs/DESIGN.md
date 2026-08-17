@@ -960,7 +960,7 @@ Laws:
    `audit_plating_exclusivity.py`. Carrying two plating TRAITS is normal and correct; both
    CONDITIONS being true is not.
 
-### 12.0f PRICED SURVIVABILITY (E1, 2026-08-16)
+### 12.0f PRICED SURVIVABILITY (E1, 2026-08-16; SHIPPED 2026-08-17)
 
 ```
 effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # x0.540 measured
@@ -969,6 +969,33 @@ The factor is MEASURED from the live ruleset, never frozen — the Shield ladder
 and has moved repeatedly. ⚠ **`Integrity` is NOT a shield and is NOT counted**: it absorbs
 nothing (`INotifyDamage` runs after the damage lands), so it buys no survivability at all
 and only gates the EMP disable. Platings contribute 0 net by construction (law 3).
+
+**LAW — only a shield the unit SPAWNS with is priced.** The maintainer's qualifier *"that's
+only if the unit already has armor or shield included in them"* is binding, and it decides
+three buckets:
+
+| the unit has | count | priced into base cost |
+|---|--:|---|
+| a pool present at spawn, no positive gate | **58** | **YES** — `effective_HP` |
+| `MaxPercentageStrength` but `InitialStrength: 0` behind `shieldgen` | 1318 | no — it is an empty CAPACITY, not a shield |
+| a pool granted by an upgrade (incl. every plating) | ~216 | no — that is upgrade pricing (E5) |
+
+⚠ **`!disabled` is NOT a gate.** It is the standard not-EMP'd/not-captured guard and is true
+on a healthy unit. Any classifier that treats every `RequiresCondition` as a gate will hide
+all 43 Protoss shields (`InitialPercentageStrength: 100`, `RequiresCondition: !disabled`) and
+report a shield-free roster. Only a POSITIVE token gates.
+
+**The weapon side gets its own weight, not a rung.** `armor_weights()` carries a 17th `Shield`
+row at the measured baseline damage share (**1.432%**), taken OUT of the 16 class rows so the
+weights still sum to 1.0; `weighted_versus` iterates the weights, never `ARMORS`. Effect:
++0.65% (Bullet) to +3.47% (Tesla). `effective_density` deliberately stays on `ARMORS` — it
+counts BODIES, and a shield sits on a body the class row already counted.
+
+⚠ **The Protoss 150% damage multiplier compensates for their shields.** Pricing the shield and
+retiring that multiplier must land in ONE pass, or the faction pays twice.
+
+Report: `tools/audit/audit_survivability_pricing.py` (informational — these actors are
+mis-priced until `apply_balance --confirm` runs, so it must not gate commits).
 
 ### 12.0 THE PROFILE SHAPE LAW (maintainer, 2026-08-15) — binding
 

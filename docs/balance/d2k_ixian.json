@@ -66,9 +66,21 @@
      "v": "100"
     },
     "name": "Alfayrus",
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Shielded.MaxPercentageStrength",
@@ -391,7 +403,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -520,7 +540,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -775,9 +803,21 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Shielded.MaxPercentageStrength",
@@ -913,7 +953,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1007,7 +1055,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1068,6 +1124,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -1119,6 +1179,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -1162,6 +1226,10 @@
      "RABuilding"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1282,6 +1350,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -1330,6 +1402,10 @@
      "RABuilding"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1384,6 +1460,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -1432,6 +1512,10 @@
      "RABuilding"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1606,6 +1690,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -1650,6 +1738,10 @@
      "RADefence"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1704,6 +1796,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -1755,6 +1851,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -1803,6 +1903,10 @@
      "RABuilding"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1949,6 +2053,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -2005,6 +2113,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -2049,6 +2161,10 @@
      "RADefence"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -2132,7 +2248,15 @@
      "Defence",
      "RADefence"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -2193,6 +2317,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -2236,6 +2364,10 @@
      "RABuilding"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -2723,7 +2855,15 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3017,7 +3157,15 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3200,7 +3348,15 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3320,7 +3476,15 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3440,7 +3604,15 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3770,7 +3942,15 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -4403,6 +4583,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -4872,7 +5056,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -5091,7 +5283,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -5217,7 +5417,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -5342,7 +5550,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -5468,7 +5684,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -5596,9 +5820,21 @@
      "RAVehicle",
      "Starport"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
@@ -5754,7 +5990,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -5880,7 +6124,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -5942,6 +6194,10 @@
      "Starport"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -6161,6 +6417,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -6346,7 +6606,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -6440,7 +6708,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -6501,7 +6777,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -6631,7 +6915,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -6723,7 +7015,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },

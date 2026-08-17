@@ -3,34 +3,69 @@
  "pack": "mods/cameo/ContentPacks/D2k/Atreides",
  "schema": 2,
  "sections": {
+  "buildings": {
+   "atreides_constructionyard": {
+    "shield_always_on": false,
+    "shield_gated_on_upgrade": false,
+    "shield_pool": 1000000.0
+   },
+   "atreides_heavyfactory": {
+    "shield_always_on": false,
+    "shield_gated_on_upgrade": false,
+    "shield_pool": 400000.0
+   },
+   "d2k_silo.atreides": {
+    "shield_always_on": false,
+    "shield_gated_on_upgrade": false,
+    "shield_pool": 50000.0
+   },
+   "refinery.atreides": {
+    "shield_always_on": false,
+    "shield_gated_on_upgrade": false,
+    "shield_pool": 300000.0
+   },
+   "wind_trap.atreides": {
+    "shield_always_on": false,
+    "shield_gated_on_upgrade": false,
+    "shield_pool": 200000.0
+   }
+  },
   "vehicles": {
+   "atreides_mobileconstructionvehicle": {
+    "shield_always_on": false,
+    "shield_gated_on_upgrade": false,
+    "shield_pool": 300000.0
+   },
    "combat_tank.atreides": {
     "armaments": [
      {
-      "avg_versus": 1.0835,
+      "avg_versus": 1.0889,
       "damage_total": 8000.0,
-      "dps_floor": 8.9,
+      "dps_floor": 9.01,
       "eff_reload": 25.0,
       "effective_damage": 16211.51,
-      "effective_dps": 572.26,
-      "effective_per_shot": 14306.61,
+      "effective_dps": 575.17,
+      "effective_per_shot": 14379.37,
       "factor_deadzone": 1.0,
       "factor_range": 0.9633,
       "factor_targets": 0.95,
       "footprint": 4.3503,
-      "k": 1.9541,
-      "k_context": 1.7883,
-      "k_flat": 1.9237,
-      "k_flat_context": 1.7605,
-      "overkill": 0.9841,
-      "pct_absolute": 243.05,
-      "pct_absolute_context": 222.43,
+      "k": 1.964,
+      "k_context": 1.7974,
+      "k_flat": 1.9333,
+      "k_flat_context": 1.7693,
+      "overkill": 0.9791,
+      "pct_absolute": 246.0,
+      "pct_absolute_context": 225.13,
       "reliability": 0.9389,
       "sigma": 176.0,
       "slot": "Armament",
       "weapon": "80mm_A"
      }
-    ]
+    ],
+    "shield_always_on": false,
+    "shield_gated_on_upgrade": false,
+    "shield_pool": 100000.0
    }
   }
  }

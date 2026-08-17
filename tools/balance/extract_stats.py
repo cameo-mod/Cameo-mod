@@ -423,7 +423,11 @@ def model_constants() -> dict:
                          "ENGAGEMENT": dict(tm.ENGAGEMENT),
                          "reference_hp": tm.reference_hp(),
                          "reference_hp_measured": tm.measured_reference_hp(),
-                         "armor_census": tm.armor_census()},
+                         "armor_census": tm.armor_census(),
+                         # E1 — MEASURED off the live Versus rows, never frozen: the
+                         # Shield ladder is regenerated and moved twice in one day.
+                         "shield_versus_mean": round(tm.pseudo_armor_mean("Shield"), 2),
+                         "shield_hp_factor": round(tm.shield_hp_factor(), 4)},
     }
 
 
@@ -501,10 +505,78 @@ def fnum(v):
     """First number in a raw ledger value ("15, 15" -> 15.0), else None."""
     if v is None:
         return None
+    if isinstance(v, dict):          # a provenance cell {"v": ..., "src": ...}
+        v = v.get("v")
+    if v is None:
+        return None
     try:
         return float(str(v).split(",")[0].strip())
     except (TypeError, ValueError):
         return None
+
+
+_COND_TOKEN = re.compile(r"[A-Za-z_][A-Za-z0-9_.]*")
+
+
+def condition_is_gate(cond) -> bool:
+    """True when satisfying `cond` needs something GRANTED (an upgrade, prereq, aura).
+
+    ⚠ **A `RequiresCondition` is not automatically a gate.** `!disabled` is the standard
+    not-EMP'd / not-captured guard and is TRUE on a healthy unit. Counting it as a gate put
+    every Protoss unit (`InitialPercentageStrength: 100`, `RequiresCondition: !disabled`)
+    in the "needs an upgrade" bucket and made the roster look like it had NO always-on
+    shields at all — contradicting the maintainer, who was right. Only a POSITIVE token is
+    a real gate; negated terms are satisfied by default.
+    """
+    if isinstance(cond, dict):
+        cond = cond.get("v")
+    for term in re.split(r"&&|\|\|", str(cond or "")):
+        t = term.strip().strip("()").strip()
+        if t and not t.startswith("!") and _COND_TOKEN.match(t):
+            return True
+    return False
+
+
+def survivability(u: dict) -> dict | None:
+    """E1 — the shield pool as HP-equivalent, for actors that actually spawn with one.
+
+    Maintainer: *"shielded units and armored units need to have a price! it is like extra
+    survivability ... since everything deals more damage to shields you can count the 200%
+    shield strength like an extra 100% HP"* — and, crucially, *"that's only if the unit
+    already has armor or shield included in them"*. That qualifier is the whole rule:
+
+      * a shield the unit SPAWNS with is baseline durability -> price it into the cost;
+      * a shield (or armor plating) granted by an UPGRADE is not baseline -> it belongs to
+        the upgrade-pricing gap E5, and charging the base cost for it would make every
+        un-upgraded unit overpriced.
+
+    Measured 2026-08-17 across the 58 always-on actors: 12 872 500 HP is really 20 316 495
+    effective HP, **+57.8% priced at zero**. At a 200% pool the multiplier is x2.080, so the
+    maintainer's "like an extra 100% HP" was right to 8%.
+
+    ⚠ `Integrity` is deliberately absent — it absorbs NOTHING (see `target_model`), so it
+    buys no survivability and belongs to E3, not here.
+    """
+    hp = fnum(u.get("hp"))
+    if not hp or hp <= 0:
+        return None
+    pool_flat = fnum(u.get("shield_flat")) or 0.0
+    pool_pct = fnum(u.get("shield_pct")) or 0.0
+    if pool_flat + pool_pct <= 0:
+        return None
+    init = (fnum(u.get("shield_init_flat")) or 0.0) \
+        + (fnum(u.get("shield_init_pct")) or 0.0)
+    gated = condition_is_gate(u.get("shield_condition"))
+    always_on = init > 0 and not gated
+    pool = pool_flat + pool_pct * hp / 100.0
+    out = {"shield_pool": round(pool, 1),
+           "shield_always_on": always_on,
+           "shield_gated_on_upgrade": gated}
+    if always_on:
+        eff = tm.effective_hp(hp, pool_flat, pool_pct)
+        out["effective_hp"] = round(eff, 1)
+        out["effective_hp_ratio"] = round(eff / hp, 4)
+    return out
 
 
 def split_derived(doc: dict) -> tuple[dict, dict]:
@@ -523,8 +595,15 @@ def split_derived(doc: dict) -> tuple[dict, dict]:
                 if metrics:
                     arms.append({"slot": arm.get("slot"),
                                  "weapon": arm.get("weapon"), **metrics})
-            if arms:
-                sec[actor] = {"armaments": arms}
+            # Actor-level derived metrics (E1 survivability) sit beside the armament
+            # rows rather than inside them: a shield belongs to the UNIT, not a weapon.
+            actor_metrics = unit.pop(DERIVED_KEY, None)
+            if arms or actor_metrics:
+                sec[actor] = {}
+                if actor_metrics:
+                    sec[actor].update(actor_metrics)
+                if arms:
+                    sec[actor]["armaments"] = arms
         if sec:
             sections[section] = sec
     derived = {"schema": doc["schema"], "ledger": doc["ledger"],
@@ -649,6 +728,16 @@ def extract_actor(rs, key: str, section: str) -> dict | None:
             # EMP-pooled actors carried their whole extra layer for free.
             ("shield_flat", "Shielded", "MaxStrength"),
             ("shield_pct", "Shielded", "MaxPercentageStrength"),
+            # ⚠ A POOL IS NOT A SHIELD. `^ShieldedShieldable` (defaults.yaml:7230) gives
+            # 1592 actors `MaxPercentageStrength: 100` with `InitialStrength: 0`, i.e. a
+            # CAPACITY that starts empty and only fills behind `shieldgen >= 1`. Measured
+            # 2026-08-17: only **58** actors spawn with a pool AND no positive gate on the
+            # trait; 82.8% are empty capacity and the rest wait on an upgrade. Pricing the
+            # capacity would charge 76% of the roster for durability it does not have, so
+            # these three fields are what separates the 58 from the 1534.
+            ("shield_init_flat", "Shielded", "InitialStrength"),
+            ("shield_init_pct", "Shielded", "InitialPercentageStrength"),
+            ("shield_condition", "Shielded", "RequiresCondition"),
             ("integrity_flat", "Integrity", "MaxStrength"),
             ("integrity_pct", "Integrity", "MaxPercentageStrength"),
     ):
@@ -709,6 +798,9 @@ def extract_actor(rs, key: str, section: str) -> dict | None:
     if sub == "SpecialForcesInfantry":
         for arm in arms:
             arm["design_weapon_class"] = 1.0
+    surv = survivability(u)
+    if surv:
+        u[DERIVED_KEY] = surv
     return u
 
 

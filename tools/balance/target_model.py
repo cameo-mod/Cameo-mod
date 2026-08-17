@@ -32,6 +32,7 @@ from __future__ import annotations
 import collections
 import functools
 import pathlib
+import re
 import statistics
 import sys
 
@@ -39,7 +40,13 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/audit"))
 from miniyaml import Ruleset  # noqa: E402
 
-# The 16 canonical armor types + Shield. Order matches gen_weapon_template.py.
+# The 16 canonical CLASS armor types — the rows a unit's own health sits behind.
+# Order matches gen_weapon_template.py.
+#
+# ⚠ `Shield` and the armor PLATINGS are deliberately NOT in here (the comment used to claim
+# "+ Shield" and the tuple never had it — E10). They are not class armors: they are separate
+# LAYERS selected ahead of the class row, so they need their own prevalence weight rather
+# than a slot in this ladder. `armor_weights()` folds `Shield` in at its measured share.
 ARMORS = ("None", "Flak", "Plate", "Heroic",
           "Scout", "Light", "Medium", "Heavy", "Superheavy",
           "Wood", "Steel", "Concrete",
@@ -197,7 +204,103 @@ def armor_weights() -> dict[str, float]:
         total = sum(floored.values())
         for armor, n in floored.items():
             weights[armor] = share * n / total
+    # E1 — the Shield LAYER gets its own weight, taken out of the class rows rather than
+    # added on top, so the total stays 1.0 and a weapon's `versus` remains comparable.
+    s = shield_damage_share()
+    if s > 0:
+        for armor in weights:
+            weights[armor] *= 1.0 - s
+        weights["Shield"] = s
     return weights
+
+
+@functools.lru_cache(maxsize=1)
+def shield_damage_share() -> float:
+    """Fraction of all roster raw damage that lands on the `Shield` row. Measured: 1.4%.
+
+    Derived, never a constant. A shot at a shielded unit hits the Shield row until the pool
+    is gone, so the share is the ratio of raw damage absorbed there to raw damage absorbed
+    overall — and "raw" matters, because a row's Versus decides how much RAW damage a point
+    of pool costs an attacker:
+
+        raw to strip a pool of S   = 100 x S / Versus[Shield]
+        raw to kill H health       = 100 x H / Versus[class armor]
+
+    ⚠ **Only ALWAYS-ON shields count**, and getting that wrong swings the answer by 20x.
+    `^ShieldedShieldable` gives 1592 actors `MaxPercentageStrength: 100` with
+    `InitialStrength: 0` — an empty CAPACITY behind `shieldgen >= 1`. Just 58 actors spawn
+    with a pool and no positive gate. Counting the capacity as a shield is where the claim
+    "Tesla's `Shield: 400` is free against 51% of the roster" came from; the true baseline
+    exposure is **1.4%**, and §E's severity was corrected accordingly.
+
+    ⚠ An upgrade-granted shield is NOT counted. That is not an omission: it is the
+    upgrade-pricing gap E5. Should the maintainer decide the weapon side must price the
+    POST-upgrade world instead of the baseline one, the change is one predicate here
+    (`always_on` -> `pool > 0`) — and it would raise this share to roughly 30%, so it is a
+    design ruling, not a tweak.
+    """
+    rs = _ruleset()
+    v_shield = pseudo_armor_mean("Shield")
+    if v_shield <= 0:
+        return 0.0
+    raw_shield = raw_health = 0.0
+    for name in rs.actors:
+        if name.startswith("^"):
+            continue
+        node = rs.resolve(name)
+        if node is None:
+            continue
+        hp = armor = shielded = None
+        for c in node.children:
+            key = c.key.split("@")[0]
+            if key == "Health":
+                hp = _num(c.get("HP"))
+            elif key == "Armor" and armor is None \
+                    and not _condition_is_gate(c.get("RequiresCondition")):
+                armor = (c.get("Type") or "").strip()
+            elif key == "Shielded" and shielded is None:
+                shielded = c
+        if not hp or hp <= 0:
+            continue
+        v_class = pseudo_armor_mean(armor) if armor in ARMORS else 100.0
+        raw_health += 100.0 * hp / (v_class or 100.0)
+        if shielded is None:
+            continue
+        pool_flat = _num(shielded.get("MaxStrength")) or 0.0
+        pool_pct = _num(shielded.get("MaxPercentageStrength")) or 0.0
+        init = (_num(shielded.get("InitialStrength")) or 0.0) \
+            + (_num(shielded.get("InitialPercentageStrength")) or 0.0)
+        if pool_flat + pool_pct <= 0 or init <= 0 \
+                or _condition_is_gate(shielded.get("RequiresCondition")):
+            continue
+        pool = pool_flat + pool_pct * hp / 100.0
+        raw_shield += 100.0 * pool / v_shield
+    total = raw_shield + raw_health
+    return raw_shield / total if total > 0 else 0.0
+
+
+def _num(v, default=None):
+    try:
+        return float(str(v).strip())
+    except (TypeError, ValueError):
+        return default
+
+
+_COND_TOKEN = re.compile(r"[A-Za-z_][A-Za-z0-9_.]*")
+
+
+def _condition_is_gate(cond) -> bool:
+    """True when the condition needs something GRANTED (upgrade / prereq / aura).
+
+    ⚠ `!disabled` is the standard not-EMP'd guard and is TRUE on a healthy unit — treating
+    it as a gate hid EVERY Protoss shield and made the roster look shield-free. Only a
+    POSITIVE token gates; a negated term is satisfied by default.
+    """
+    for term in re.split(r"&&|\|\|", str(cond or "")):
+        t = term.strip().strip("()").strip()
+        if t and not t.startswith("!") and _COND_TOKEN.match(t):
+            return True
+    return False
 
 
 @functools.lru_cache(maxsize=1)
@@ -345,9 +448,13 @@ def weighted_versus(versus: dict[str, float], weights: dict[str, float] | None =
 
     `versus` maps armor -> percent. Armors the warhead omits fall back to 100
     (the engine's default when a Versus row is absent).
+
+    ⚠ Iterates the WEIGHTS, not `ARMORS`: `armor_weights()` carries a 17th row for the
+    `Shield` LAYER (E1), and looping over the 16 class armors instead would silently drop it
+    — which is exactly how a weapon's whole anti-shield profile came to be priced at zero.
     """
     weights = weights or armor_weights()
-    return sum(weights[a] * versus.get(a, 100.0) / 100.0 for a in ARMORS)
+    return sum(w * versus.get(a, 100.0) / 100.0 for a, w in weights.items())
 
 
 def effective_density(versus: dict[str, float], weights: dict[str, float] | None = None) -> float:
@@ -358,6 +465,10 @@ def effective_density(versus: dict[str, float], weights: dict[str, float] | None
     infantry are the ones that bunch. This is the "combination of both" the
     maintainer asked for: per-class density, then capped by the blob in
     `footprint_targets()`.
+
+    ⚠ Stays on `ARMORS` (unlike `weighted_versus`): this asks how many BODIES a blast
+    catches, and `Shield` is a layer on a body already counted by its class armor — adding it
+    would double-count that unit and it has no `ARMOR_MACRO` density to contribute anyway.
     """
     weights = weights or armor_weights()
     num = den = 0.0

@@ -283,9 +283,21 @@
      "v": "100"
     },
     "name": "Cruiser Fighter",
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.MaxPercentageStrength",
@@ -626,6 +638,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -749,6 +765,10 @@
     },
     "name": "Scalpel",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1079,6 +1099,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -1177,6 +1201,10 @@
      "RAAircraft"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1492,9 +1520,21 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.MaxPercentageStrength",
@@ -1630,9 +1670,21 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.MaxPercentageStrength",
@@ -1911,9 +1963,21 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.MaxPercentageStrength",
@@ -2186,6 +2250,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -2429,6 +2497,10 @@
      "RADefence"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -2722,6 +2794,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -2770,6 +2846,10 @@
      "RABuilding"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -2824,6 +2904,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -2875,6 +2959,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -2921,6 +3009,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -2964,6 +3056,10 @@
      "RABuilding"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3018,6 +3114,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -3066,6 +3166,10 @@
      "RABuilding"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3264,6 +3368,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -3312,6 +3420,10 @@
      "RABuilding"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3371,6 +3483,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -3425,6 +3541,10 @@
      "RADefence"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -4059,6 +4179,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -4107,6 +4231,10 @@
      "RABuilding"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -4678,7 +4806,15 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -4758,9 +4894,21 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",
@@ -5732,6 +5880,10 @@
      "RAInfantry"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -7596,6 +7748,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -8311,6 +8467,10 @@
      "RAInfantry"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -9168,9 +9328,21 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.InitialPercentageStrength",
+     "v": "50"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
@@ -9290,9 +9462,21 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.InitialPercentageStrength",
+     "v": "200"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
@@ -9447,9 +9631,21 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.InitialPercentageStrength",
+     "v": "150"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
@@ -9618,9 +9814,21 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
@@ -10137,6 +10345,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -10192,7 +10404,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -10253,6 +10473,10 @@
      "RAVehicle"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -10506,6 +10730,10 @@
      "RAVehicle"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -11159,9 +11387,21 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
@@ -11334,6 +11574,10 @@
      "RAVehicle"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -11759,9 +12003,21 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
@@ -12275,6 +12531,10 @@
      "RAVehicle"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -12967,6 +13227,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -13295,6 +13559,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -13384,6 +13652,10 @@
      "RAVehicle"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -13740,6 +14012,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -14026,9 +14302,21 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.InitialPercentageStrength",
+     "v": "200"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
@@ -14098,9 +14386,21 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
@@ -14253,9 +14553,21 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.InitialPercentageStrength",
+     "v": "200"
     },
     "shield_pct": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",

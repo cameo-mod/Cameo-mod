@@ -613,7 +613,7 @@ Measured against `formula.py`, `weapon_efficiency.py` and `target_model.py`.
 
 | # | gap | why it matters | severity |
 |---|---|---|---|
-| **E1** | **`Shield`, `HAZMAT` and `REFLECTOR` are priced at ZERO.** `target_model.ARMORS` is the 16 canonical types only, so `K` never sees them. | Tesla's `Shield: 400` against **51% of the roster** is free, and the S1/Shield rebuild just made that row far more meaningful. HAZMAT covers 11% of actors. This is the biggest hole, and it grew today. | **high** |
+| **E1** | ✅ **FIXED 2026-08-17 (both halves).** Weapon side: `armor_weights()` now carries a 17th `Shield` row at its measured damage share, and `weighted_versus` iterates the weights instead of `ARMORS`. Unit side: `extract_stats.survivability()` publishes `effective_hp` for actors that SPAWN with a pool. | ⚠ **The "51% of the roster" figure was wrong** — it counted the 1592 actors carrying `Shielded`, but 1318 of those hold an EMPTY capacity behind `shieldgen >= 1`. Only **58** spawn with a pool, so baseline Shield exposure is **1.432%**, and the weapon-side correction is +0.65% (Bullet) to +3.47% (Tesla), not a repricing. The real hole is the unit side: those 58 carry **+57.8% effective HP at zero cost**. Report: `audit_survivability_pricing.py`. | ~~high~~ **done** |
 | **E2** | `PhysicalState` (heat / cold / corrosion) is priced at zero — `extract_stats` reads no such field. | ~89 live bindings deliver a real effect for free. Design work exists (`cameo-physical-state-pricing`), the extractor does not. | **high** |
 | **E3** | `IntegrityScale` is priced at zero. | 1233 actors carry the pool; a disable at 50% HP is worth real money. | medium |
 | **E4** | ✅ **FIXED 2026-08-17 — `K` was not damage-independent.** The `%`-twin's damage is a share of the TARGET's max HP, so it does not scale with the weapon's flat `Damage` — yet `k` folded it in as `share = ref_hp × pct_damage / 100 / flat_total`, putting `flat_total` in a DENOMINATOR. | Not a mis-price of anything shipped: `effective_per_shot = damage_total × k_context` is exact at the current Damage, and `propose_class_rebalance` never routes through K (it sums flat warheads, twins excluded). It was a **documented wrong recipe** — the inversion `Damage_required = target_dps × eff_reload / (burst × FP × K)` was stated in 6 places and is only correct at λ=1. Fix: the affine split `k_flat_context` + `pct_absolute_context`, `required_damage()`, and `dps_floor` in the ledger. Guard: `audit_k_linearity.py`. | ~~high~~ **done** |
@@ -622,12 +622,64 @@ Measured against `formula.py`, `weapon_efficiency.py` and `target_model.py`.
 | **E7** | `MinRange` is not priced. | A real artillery drawback that costs nothing. | low |
 | **E8** | A5's asymmetry is undocumented in the balance docs: an omitted Versus row and a row of 100 differ for multi-armor actors. | Any future sweep that "fills in missing rows for completeness" would silently rebalance every shielded and hazmat unit. | **trap** |
 | **E9** | 23 macro ladders are non-monotone — blend families average their parents and `finish_blend` never re-imposes the ordering law. | The ordering law is "the most important part"; blends quietly opt out of it. Pre-existing, unrelated to W25. | medium |
-| **E10** | `target_model.ARMORS`' comment says "the 16 canonical armor types + Shield" — the tuple has no Shield. | Stale comment that would mislead exactly the fix E1 needs. | trivial |
+| **E10** | ✅ **FIXED 2026-08-17** alongside E1 — the comment now says what the tuple is (16 CLASS armors) and why `Shield` and the platings are layers with their own weight rather than rungs on the ladder. | It would have misled exactly the fix E1 needed, which is how it got found. | ~~trivial~~ **done** |
 
-**The two I would fix first are E1 and E4**, because both distort prices *systematically*
-rather than for one weapon, and both are now larger than they were a week ago — E1 because
-the Shield ladder went from a near-constant 110..140 to a designed 100..400, and E4 because
-every family now has a normalised main warhead sitting next to an un-normalised twin.
+**E1 and E4 were fixed first** (2026-08-17), because both distorted prices *systematically*
+rather than for one weapon. Both turned out to be a different size than this table first
+claimed, in opposite directions, and the corrections are recorded below rather than quietly
+edited away — a severity estimate that moves by 30x is itself a finding.
+
+### E1, as measured and fixed (2026-08-17)
+
+**The premise was wrong, and checking it was the whole job.** "Tesla's `Shield: 400` is free
+against 51% of the roster" came from counting the 1592 actors whose resolved ruleset contains a
+`Shielded` trait. But `^ShieldedShieldable` (`defaults.yaml:7230`) sets
+`MaxPercentageStrength: 100` together with `InitialStrength: 0`, and the regen sits behind
+`RequiresCondition: shieldgen >= 1`. That is a **capacity**, not a shield: it starts empty and
+stays empty until something fills it.
+
+| bucket | actors | is it durability? | who prices it |
+|---|--:|---|---|
+| spawns with a pool, ungated | **58** | yes | **E1** |
+| empty capacity, needs `shieldgen` | 1318 | no | nobody — correctly |
+| pool behind an upgrade | ~216 | yes, but not baseline | **E5** |
+
+The maintainer's own qualifier decides the split — *"that's only if the unit already has armor
+or shield included in them"*. A shield the unit spawns with is baseline durability; one an
+upgrade grants is not, and charging the base cost for it would overprice every un-upgraded
+unit.
+
+⚠ **`!disabled` is not a gate.** It is the standard not-EMP'd/not-captured guard and is TRUE on
+a healthy unit. An early version of the classifier treated any `RequiresCondition` as a gate,
+which put every Protoss unit (`InitialPercentageStrength: 100`, `RequiresCondition: !disabled`)
+in the "needs an upgrade" bucket and reported that the roster had **no** always-on shields at
+all — contradicting the maintainer, who was right. Only a POSITIVE token gates.
+
+**The two halves, and their true sizes:**
+
+* **Weapon side — small.** Baseline Shield exposure is **1.432%** of all roster raw damage, so
+  adding the row moves a family's `versus` by **+0.65%** (Bullet, `Shield: 165`) to **+3.47%**
+  (Tesla, `Shield: 369`). Correctly ordered — energy families pay most, kinetic least — but a
+  correction, not a repricing. `armor_weights()` takes the share OUT of the class rows so the
+  weights still sum to 1.0 and `versus` stays comparable.
+* **Unit side — the real hole.** Those 58 actors hold **12 872 500 HP that is really 20 316 495
+  effective HP, +57.8%, priced at zero**. Implied price change: median **×1.378**, up to
+  **×1.752**. At a 200% pool the multiplier is **×2.080**, so the maintainer's "count the 200%
+  shield strength like an extra 100% HP" was right to **8%**.
+
+⚠ **The Protoss carry a 150% damage multiplier to compensate for their shields.** Pricing the
+shield is the prerequisite for retiring that multiplier — they have to land in ONE pass, or the
+faction is charged twice for the same thing.
+
+**Why the weapon side stayed on the baseline world.** Counting upgrade-granted shields would
+raise the Shield weight from 1.4% to roughly 30% and reprice every energy weapon. That is a
+design ruling about whether K prices the baseline or the post-upgrade game, so it is left as a
+one-predicate change in `shield_damage_share()` for the maintainer, not decided here.
+
+**Platings need no weight of their own.** Every plating is upgrade-granted, so baseline
+exposure is zero and they belong to E5 with the conditional shields. Their columns are also
+pinned to a common mean by construction (§F), so once E5 does price them, a plating changes
+*where* damage lands, not how much on average.
 
 ### E4, as measured and fixed (2026-08-17)
 

@@ -46,6 +46,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -91,6 +95,10 @@
      "v": "50"
     },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -142,6 +150,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -181,6 +193,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -217,6 +233,10 @@
     },
     "name": "Frigate",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -275,6 +295,10 @@
      "RABuilding"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -496,9 +520,21 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
     },
     "shield_pct": {
      "src": "inherited",
@@ -632,7 +668,15 @@
      "v": "25000"
     },
     "name": "Fremen Warrior",
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -928,7 +972,15 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1114,7 +1166,15 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1432,6 +1492,10 @@
      "Starport"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },

@@ -47,6 +47,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -152,7 +156,15 @@
     "prerequisites": [
      "~yuri_barracks"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -196,6 +208,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -258,6 +274,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -358,6 +378,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -435,6 +459,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -494,6 +522,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -594,6 +626,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -638,6 +674,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -700,6 +740,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -797,6 +841,10 @@
     },
     "name": "Drive By Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -976,6 +1024,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -1131,6 +1183,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -1283,6 +1339,10 @@
      "RAVehicle"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1539,6 +1599,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -1583,6 +1647,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1645,6 +1713,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1745,6 +1817,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -1789,6 +1865,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1851,6 +1931,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -1951,6 +2035,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -1995,6 +2083,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -2057,6 +2149,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -2157,6 +2253,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -2201,6 +2301,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -2263,6 +2367,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -2363,6 +2471,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -2407,6 +2519,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -2469,6 +2585,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -2569,6 +2689,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -2613,6 +2737,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -2675,6 +2803,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -2775,6 +2907,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -2819,6 +2955,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -2881,6 +3021,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -2981,6 +3125,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -3025,6 +3173,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3087,6 +3239,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3187,6 +3343,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -3231,6 +3391,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3293,6 +3457,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3393,6 +3561,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -3437,6 +3609,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3499,6 +3675,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3599,6 +3779,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -3643,6 +3827,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3705,6 +3893,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -3805,6 +3997,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -3882,6 +4078,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -3941,6 +4141,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -4041,6 +4245,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -4085,6 +4293,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -4147,6 +4359,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -4247,6 +4463,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -4291,6 +4511,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -4353,6 +4577,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -4453,6 +4681,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -4497,6 +4729,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -4559,6 +4795,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -4659,6 +4899,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -4703,6 +4947,10 @@
     },
     "name": "Civilian Vehicle",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -4765,6 +5013,10 @@
     },
     "name": "Bomb Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -4862,6 +5114,10 @@
     },
     "name": "Drive By Car",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -4983,6 +5239,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -5050,6 +5310,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -5093,6 +5357,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -5129,6 +5397,10 @@
     },
     "name": "Cargo Plane",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -5270,6 +5542,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -5378,6 +5654,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -5456,6 +5736,10 @@
      "RANaval"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -5625,7 +5909,15 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -5697,6 +5989,10 @@
      "RABuilding"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -5813,6 +6109,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -5860,6 +6160,10 @@
      "RANaval"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -6039,6 +6343,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -6114,6 +6422,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -6157,6 +6469,10 @@
      "RANaval"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -6216,6 +6532,10 @@
     },
     "name": "Tesla Coil Charger",
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -6542,6 +6862,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -6722,7 +7046,15 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -6807,6 +7139,10 @@
      "RANaval"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -6962,6 +7298,10 @@
      "RANaval"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -7376,6 +7716,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -7423,6 +7767,10 @@
      "RANaval"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
@@ -7665,6 +8013,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -7724,6 +8076,10 @@
      "src": "inherited",
      "v": "0"
     },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
     "shield_pct": {
      "src": "inherited",
      "v": "100"
@@ -7777,6 +8133,10 @@
      "RABuilding"
     ],
     "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
      "src": "inherited",
      "v": "0"
     },
