@@ -9645,28 +9645,39 @@ DefuseKit:
 		ZOffset: 2048
 		HitAnim:
 
+# ScaledBullet derives Inaccuracy and Speed from the firing weapon's own Range (maintainer:
+# *"this should be a function for range"*). ⚠ The explicit Speed / Inaccuracy below still WIN —
+# they are kept deliberately, so switching these templates over changes NOTHING today. Deleting
+# `Speed:` activates the 10%-of-Range rule and deleting `Inaccuracy:` activates the 1% rule; both
+# are balance changes and go through the pipeline, not through a refactor.
 ^Projectile_Shell_Light:
 	Report: cannon1.aud
-	Projectile: Bullet
+	Projectile: ScaledBullet
 		Image: 120MM
 		Speed: 500
 		Inaccuracy: 150
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
 		Shadow: true
 
 ^Projectile_Shell_Medium:
 	Report: tnkfire6.aud
-	Projectile: Bullet
+	Projectile: ScaledBullet
 		Image: 120MM
 		Speed: 500
 		Inaccuracy: 300
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
 		Shadow: true
 
 ^Projectile_Shell_Heavy:
 	Report: tnkfire6.aud
-	Projectile: Bullet
+	Projectile: ScaledBullet
 		Image: 120MM
 		Speed: 500
 		Inaccuracy: 450
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
 		Shadow: true
 
 ^Projectile_Sniper_Light:
