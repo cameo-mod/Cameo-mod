@@ -1,11 +1,15 @@
 faction_scrin =
    .description = Alien invasion force from Command & Conquer 3: Tiberium Wars.
       Structures, defenses, infantry, and an initial vehicle roster are
-      available as map/editor visuals. The Drone Ship, production chain,
-      aircraft, weapons, AI, upgrades, and final balance are not implemented yet.
+      available as map/editor visuals. The Drone Ship deployment path is
+      implemented; the production chain, broader aircraft roster, weapons, AI,
+      upgrades, and final balance are not implemented yet.
 
 actor_scrin_drone_platform =
    .name = Scrin Drone Platform
+
+actor_scrin_drone_ship =
+   .name = Scrin Drone Ship
 
 actor_scrin_reactor =
    .name = Scrin Reactor

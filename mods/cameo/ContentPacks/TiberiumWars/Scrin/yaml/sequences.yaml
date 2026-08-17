@@ -1,11 +1,29 @@
 scrin_drone_platform:
 	idle:
 		Filename: scrin_sprites|scrin_drone_platform.png
-		Start: 0
+		Start: 44
 		Length: 1
-		ShadowStart: 1
+		ShadowStart: 89
 		ShadowZOffset: -5
 		Offset: 3.873,-48.074
+	make:
+		Filename: scrin_sprites|scrin_drone_platform.png
+		Start: 0
+		Length: 45
+		Tick: 40
+		ShadowStart: 45
+		ShadowZOffset: -5
+		Offset: 3.873,-48.074
+
+scrin_drone_ship:
+	idle:
+		Filename: scrin_sprites|scrin_drone_ship.png
+		Start: 0
+		Length: 1
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 9.000,-62.000
 
 scrin_reactor:
 	idle:

@@ -3,15 +3,35 @@
 This is a map/editor-ready visual foundation for the future Scrin faction, now
 covering its approved structures, defenses, Eradicator Hexapod, and initial
 infantry and vehicle rosters. It is not a playable roster yet, and the faction
-remains hidden from the lobby. In particular, the Drone Platform must eventually
-be deployed from a Drone Ship; the platform is not registered as a starting actor.
+remains hidden from the lobby. The map/editor-ready Drone Ship now lands and
+transforms into the Drone Platform, which plays its genuine deployment cycle.
 
-The pack contains 40 approved map/editor-ready actors. All sheets pair their
+The pack contains 42 approved map/editor-ready actors. All sheets pair their
 body art with separate, model-derived ground shadows. The structures use
 Cameo's dynamic `player_rgba` palette. Reactor has a restrained 12-frame
 central-spire cycle; Extractor, Growth Accelerator, and Storm Column have
 16-frame idle cycles. Photon Cannon and Plasma Missile Battery use 32 embedded
-turret facings. Signal Transmitter remains static.
+turret facings. Signal Transmitter remains static. Drone Platform uses a
+45-frame, 1.8-second make sequence whose final frame is also its exact idle
+frame. Combined with the Drone Ship's tuned landing rate, deployment takes
+approximately three seconds.
+
+## Top-priority todo
+
+These are the most desirable next features for the Scrin faction, in priority
+order:
+
+1. **Engine-supported Scrin building materialization.** Add a reusable,
+   configurable construction effect. On creation, the actor sprite first fades
+   in as a white silhouette over a configurable interval. A jagged electric
+   boundary then travels from bottom to top, progressively replacing the white
+   silhouette with the actor's actual sprite. Timing, electric-band appearance,
+   and affected sprite bodies must be configurable; the result must not require
+   a separately baked make animation for every structure.
+
+The earlier Tiberium-creep visual pilot was rejected and is deliberately not
+part of this checkpoint. A replacement ground-field concept remains deferred
+until it has a stronger visual direction.
 
 The Eradicator Hexapod uses the approved AIDA frame 65 static pose and the
 corrected WLKA cycle sampled to 12 frames across 32 facings. Its indexed source

@@ -1,0 +1,32 @@
+# Map/editor-ready Scrin Construction Yard deployment actor. The broader
+# aircraft roster remains deferred until its gameplay roles are implemented.
+
+scrin_drone_ship:
+	Inherits: ^Helicopter
+	Tooltip:
+		Name: actor_scrin_drone_ship.name
+	Valued:
+		Cost: 5000
+	Health:
+		HP: 1000000
+	Armor:
+		Type: Heavy
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2304, 2560, 0, -512
+	Aircraft:
+		Speed: 61
+		TurnSpeed: 20
+		AltitudeVelocity: 100
+		CanForceLand: false
+		Repulsable: false
+	Transforms:
+		IntoActor: scrin_drone_platform
+		Offset: -1,-1
+		Facing: 800
+		NoTransformNotification: BuildingCannotPlaceAudio
+	-AttackAircraft:
+	-SpawnActorOnDeath:
+	-Voiced:
+	RenderSprites:
+		PlayerPalette: player_rgba
