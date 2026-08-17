@@ -623,6 +623,17 @@ def extract_actor(rs, key: str, section: str) -> dict | None:
             ("build_limit", "Buildable", "BuildLimit"),
             ("build_duration", "Buildable", "BuildDuration"),
             ("self_heal_step", "ChangesHealth", "Step"),
+            # --- THE SURVIVABILITY LAYERS (E1, 2026-08-16) ---------------------------- #
+            # Maintainer: *"shielded units and armored units need to have a price! it is
+            # like extra survivability ... Extra shields and extra armor platings just make
+            # the units a lot more durable so they need to be included in the balance
+            # formula."*  Read as RAW fields here; `derived_actor_metrics` turns them into
+            # effective HP. Nothing read them before, so 1592 shielded and 1233
+            # EMP-pooled actors carried their whole extra layer for free.
+            ("shield_flat", "Shielded", "MaxStrength"),
+            ("shield_pct", "Shielded", "MaxPercentageStrength"),
+            ("integrity_flat", "Integrity", "MaxStrength"),
+            ("integrity_pct", "Integrity", "MaxPercentageStrength"),
     ):
         s = stat(resolved, local, trait, field)
         if s is not None:

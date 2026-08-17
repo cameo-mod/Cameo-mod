@@ -179,10 +179,10 @@ namespace OpenRA.Mods.Cameo.Warheads
 		// `DamageVersus` answers with 100 — i.e. the plating would REMOVE the unit's armor.
 		static readonly string[] PlatingArmors =
 		{
-			"HAZMAT",           // sealed / filtered envelope — vs fire, chemical, radiation
-			"Composite",        // ceramic matrix + ERA       — vs kinetic penetrators AND shaped charges
-			"BlastProtection",  // spall liner / V-hull       — vs HE, demolition, concussion
-			"REFLECTOR",        // ablative / mirrored        — vs directed energy
+			"HAZMAT",     // sealed / filtered envelope — vs fire, chemical, radiation
+			"COMPOSITE",  // ceramic matrix + ERA       — vs kinetic penetrators AND shaped charges
+			"BLAST",      // spall liner / V-hull       — vs HE, demolition, concussion
+			"REFLECTOR",  // ablative / mirrored        — vs directed energy
 		};
 
 		protected override int DamageVersus(Actor victim, HitShape shape, WarheadArgs args)

@@ -443,23 +443,23 @@ average is a 1.84x self-inflicted damage increase.
 
 ## G. The plating taxonomy — 4 given, 2 proposed
 
-> *"Hazmat against fire, chemical and radiation, BlastProtection against all the HE weapons
+> *"Hazmat against fire, chemical and radiation, BLAST against all the HE weapons
 > like demolition, concussion etc, reflector against energy, composite against AP weapons and
 > bullets ... try to find another 1 or 2 that fit the real world armors"*
 
 | plating | counters | real-world basis |
 |---|---|---|
 | **HAZMAT** | Flame, Inferno, Chemical, Toxic, Cryo, Nuclear, + fire/chem blends | NBC suit, sealed overpressure hull |
-| **BlastProtection** | Demolition, Concussion, Thermobaric, CannonHE, MissileHE, Flak, Sonic | spall liner, blast-attenuating V-hull |
+| **BLAST** | Demolition, Concussion, Thermobaric, CannonHE, MissileHE, Flak, Sonic | spall liner, blast-attenuating V-hull |
 | **REFLECTOR** | Laser, Prism, Plasma | ablative / mirrored coating |
-| **Composite** | Bullet, Sniper, CannonAP, Railgun, Arrow | Chobham, ceramic matrix — the anti-KINETIC answer |
-| **➕ Reactive** | MissileAP, and the shaped-charge half of the AT families | **ERA / slat armour.** The KE-vs-HEAT split is the actual axis real tank armour is designed around, and it is the one distinction `Composite` alone cannot express: ceramics beat penetrators, ERA beats shaped charges, and neither does the other's job. |
+| **COMPOSITE** | Bullet, Sniper, CannonAP, Railgun, Arrow | Chobham, ceramic matrix — the anti-KINETIC answer |
+| **➕ Reactive** | MissileAP, and the shaped-charge half of the AT families | **ERA / slat armour.** The KE-vs-HEAT split is the actual axis real tank armour is designed around, and it is the one distinction `COMPOSITE` alone cannot express: ceramics beat penetrators, ERA beats shaped charges, and neither does the other's job. |
 | **➕ Insulated** | Tesla, Storm, and the electrical share of Quantum / Waveforce | **Faraday cage / grounding mesh.** This also repairs a compromise in §D-bis: I put Tesla on REFLECTOR at 0.60 because the maintainer's ruling said "energy", while noting a mirror does not stop lightning. With `Insulated` in the set, REFLECTOR goes back to being honestly PHOTONIC (Laser/Prism 1.0, Tesla 0) and electricity gets its own real counter. |
 
 Both additions do the same kind of work: they split a category that was hiding two different
 physics behind one name. That is the test a seventh type would have to pass too — `Damping`
 for Sonic and `Warding` for Magic were considered and rejected, because Sonic is already
-served by `BlastProtection` (both are pressure) and Magic ignores armor by design.
+served by `BLAST` (both are pressure) and Magic ignores armor by design.
 
 ### Consequences to decide before building
 
@@ -481,9 +481,9 @@ means does nothing. Both halves are mechanisms, not flavour.
 | plating | what it physically IS | COUNTERS because | WEAK TO because |
 |---|---|---|---|
 | **HAZMAT** | sealed, filtered, overpressured envelope + insulation | thermochemical harm arrives as an AGENT or a heat flux, and a sealed boundary keeps gas and liquid off skin/optics while insulation slows conduction | **kinetic** — a seal has no mass and no hardness; a bullet passes through a rubber suit as if it were not there |
-| **Composite** | hard ceramic tiles in a ductile matrix | a kinetic penetrator is defeated by SHATTERING or eroding it before it reaches the backing plate — ceramic is harder than the rod and destroys it on contact | **shaped charge** — the jet is already liquid metal at 8 km/s; there is nothing to shatter, which is historically why ERA had to be invented on top of composite |
+| **COMPOSITE** | hard ceramic tiles in a ductile matrix | a kinetic penetrator is defeated by SHATTERING or eroding it before it reaches the backing plate — ceramic is harder than the rod and destroys it on contact | **shaped charge** — the jet is already liquid metal at 8 km/s; there is nothing to shatter, which is historically why ERA had to be invented on top of composite |
 | **Reactive** | explosive sandwich / standoff cage that fires outward | a shaped-charge JET is disrupted by moving plate ACROSS its path, breaking the jet's continuity before it can penetrate | **blast** — ERA bricks are surface-mounted and an HE burst strips or pre-detonates them, leaving the base armour bare |
-| **BlastProtection** | spall liner, V-hull, standoff, energy-absorbing structure | blast is an IMPULSE through the structure; you survive it by spreading it over time and area and by catching the spall the shock throws off the inner wall | **energy** — a liner absorbs mechanical impulse, and a beam delivers none; it deposits heat at a point, which a liner does nothing about |
+| **BLAST** | spall liner, V-hull, standoff, energy-absorbing structure | blast is an IMPULSE through the structure; you survive it by spreading it over time and area and by catching the spall the shock throws off the inner wall | **energy** — a liner absorbs mechanical impulse, and a beam delivers none; it deposits heat at a point, which a liner does nothing about |
 | **REFLECTOR** | polished / ablative optical coating | radiated energy is defeated by TURNING IT AWAY before absorption — reflectivity is the whole mechanism, and ablation carries away what does couple | **thermochemical** — sustained flame and corrosives foul, soot and etch the surface, and a mirror that is no longer mirror-bright is just thin plate |
 
 The cycle closes: `thermo → kinetic → shaped → blast → energy → thermo`. Every link is a
@@ -514,14 +514,14 @@ everyone has something like energy, AP, HE, fire / chemical"*.
 So the honest answer to "find another 1 or 2, but keep it balanced" is: **you can have
 balanced, or you can have five, not both.** Three ways out, in preference order:
 
-1. **Ship FOUR** — HAZMAT / Composite / BlastProtection / REFLECTOR, at 20–27% each. The
-   maintainer's original set, and the measurement says it was right. `Composite` then
+1. **Ship FOUR** — HAZMAT / COMPOSITE / BLAST / REFLECTOR, at 20–27% each. The
+   maintainer's original set, and the measurement says it was right. `COMPOSITE` then
    counters kinetic AND shaped (ceramic and ERA are both anti-armour), which is how a real
    modern tank is built anyway — it carries both at once.
 2. **Keep five and accept `Reactive` as a SPECIALIST** — narrow but deep. It should then be
    cheaper or stronger than the other four, because it answers 6% of the roster.
 3. **Five by splitting kinetic instead** — `Ballistic` (small arms, fragments, blades) vs
-   `Composite` (penetrators, slugs, jets). Both real, but each lands near 12%, which trades
+   `COMPOSITE` (penetrators, slugs, jets). Both real, but each lands near 12%, which trades
    one uneven category for two undersized ones.
 
 **Recommendation: option 1.** The four-way split is what the roster actually is, and it is
@@ -533,7 +533,7 @@ Two families were credited to the wrong counter in the first draft:
 
 * **`Flak` and `MissileAA` were blast-led.** Fragments are METAL MOVING FAST, not
   overpressure — which is exactly why "flak jacket" is a real garment rated in ballistic
-  terms. Both are now kinetic-led (0.60 / 0.55), which moves them to `Composite`.
+  terms. Both are now kinetic-led (0.60 / 0.55), which moves them to `COMPOSITE`.
 * **`Sonic` 0.60 → 0.70 blast.** A pressure wave IS overpressure; the energy share was
   overstated by treating "it is a wave" as "it is radiation".
 

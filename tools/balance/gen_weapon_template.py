@@ -382,7 +382,7 @@ def shield_for(family, level, rows):
 # --------------------------------------------------------------------------- #
 # THE FIVE ARMOR PLATINGS (maintainer, 2026-08-16)
 # --------------------------------------------------------------------------- #
-# *"Hazmat against fire, chemical and radiation, BlastProtection against all the HE weapons,
+# *"Hazmat against fire, chemical and radiation, BLAST against all the HE weapons,
 #  reflector against energy, composite against AP weapons and bullets ... they are all good
 #  against a certain family but bad against another and medium against everything else ...
 #  also they will average on 100% each across all weapon types ... and we need to make sure
@@ -418,28 +418,37 @@ def shield_for(family, level, rows):
 # this grants must then be PRICED (see E1); it is not free, it is merely not yet charged for.
 PLATING_TARGET_MEAN = 70.0
 #
+# NAMING: every plating is ALL CAPS (maintainer, 2026-08-16) — the class armors are
+# TitleCase (`None`, `Superheavy`, `Concrete`), so the case alone tells a reader which LAYER
+# a Versus row belongs to without having to remember the taxonomy. Each name is the most
+# recognisable real term for its role rather than a coined one:
+#
+#   HAZMAT     the sealed / filtered suit — already an all-caps acronym in the real world
+#   COMPOSITE  Chobham-type ceramic matrix, the standard word for modern armour
+#   BLAST      names the threat, as HAZMAT does; `SPALL` (the liner) was the alternative and
+#              is more precise but less legible — this is a one-word revert either way
+#   REFLECTOR  the mirrored / ablative coating
+#
 # THE CYCLE: FOUR platings over the roster's four real damage axes, each countering one and
 # weak to the next — `thermo -> kinetic -> blast -> energy -> thermo`. Every step is a defeat
 # mechanism, not flavour:
 #
-#   HAZMAT          counters thermochemical, weak to KINETIC  (a seal has no mass; a bullet
-#                                                              passes through a rubber suit)
-#   Composite       counters kinetic AND SHAPED, weak to BLAST (ceramic shatters a penetrator,
-#                                                              ERA breaks a jet — a real tank
-#                                                              carries both at once; neither
-#                                                              spreads an impulse)
-#   BlastProtection counters blast,          weak to ENERGY   (a liner absorbs mechanical
-#                                                              impulse; a beam delivers none)
-#   REFLECTOR       counters energy,         weak to THERMO   (flame and corrosives foul the
-#                                                              surface, and a dull mirror is
-#                                                              just thin plate)
+#   HAZMAT     counters thermochemical  weak to KINETIC  a seal has no mass; a bullet passes
+#                                                        through a rubber suit
+#   COMPOSITE  counters kinetic+SHAPED  weak to BLAST    ceramic shatters a penetrator and ERA
+#                                                        breaks a jet — a real tank carries
+#                                                        both — but neither spreads an impulse
+#   BLAST      counters blast           weak to ENERGY   a liner absorbs mechanical impulse,
+#                                                        and a beam delivers none
+#   REFLECTOR  counters energy          weak to THERMO   flame and corrosives foul the surface,
+#                                                        and a dull mirror is just thin plate
 #
 # ⚠ **`Reactive` was cut on the measurement, not on taste** (§H2). Composition share across
 # all 33 families: thermochemical 27.4%, kinetic 23.4%, blast 22.7%, energy 20.1% — and
 # shaped charge **6.4%**, with only `MissileAP` shaped-led. It failed the maintainer's own
 # niche test, the one that already retired `Insulated`, `Damping` and `Warding`. The `shaped`
 # AXIS survives as an honest description of what those warheads are; it is simply counted
-# under `Composite`, which is how a real tank is built anyway.
+# under `COMPOSITE`, which is how a real tank is built anyway.
 #
 # A four-cycle is not degenerate: each plating is weak to what the NEXT one counters, so it is
 # one 4-cycle rather than two mirrored 2-cycles. (An earlier note claimed only an ODD cycle
@@ -448,8 +457,8 @@ PLATING_TARGET_MEAN = 70.0
 PLATING_AXES = ("thermo", "kinetic", "shaped", "blast", "energy")
 PLATING_CYCLE = {                  # plating: (axes it counters, axes it is weak to)
     "HAZMAT":          (("thermo",),            ("kinetic", "shaped")),
-    "Composite":       (("kinetic", "shaped"),  ("blast",)),
-    "BlastProtection": (("blast",),             ("energy",)),
+    "COMPOSITE":       (("kinetic", "shaped"),  ("blast",)),
+    "BLAST":           (("blast",),             ("energy",)),
     "REFLECTOR":       (("energy",),            ("thermo",)),
 }
 # How much a full share moves the row away from the mean — so a pure-thermo weapon reads half
@@ -527,7 +536,7 @@ def composition(name):
 def plating_raw(family):
     """Un-normalised row per plating: flat, minus what it counters, plus what beats it.
 
-    Counter and weakness are SETS of axes, not single axes — `Composite` answers both
+    Counter and weakness are SETS of axes, not single axes — `COMPOSITE` answers both
     kinetic penetrators and shaped-charge jets, so it sums both shares.
     """
     comp = composition(family)
