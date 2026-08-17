@@ -54,7 +54,7 @@ scrin_repair_drone:
 		Name: actor_scrin_repair_drone.name
 	WithMoveAnimation:
 		MoveSequence: move
-		ValidMovementTypes: Horizontal, Turn
+		ValidMovementTypes: Horizontal
 	RenderSprites:
 		PlayerPalette: scrin_repair_drone_player
 
@@ -64,7 +64,7 @@ scrin_gun_walker:
 		Name: actor_scrin_gun_walker.name
 	WithMoveAnimation:
 		MoveSequence: move
-		ValidMovementTypes: Horizontal, Turn
+		ValidMovementTypes: Horizontal
 	RenderSprites:
 		PlayerPalette: scrin_gun_walker_player
 
@@ -74,7 +74,7 @@ scrin_shard_walker:
 		Name: actor_scrin_shard_walker.name
 	WithMoveAnimation:
 		MoveSequence: move
-		ValidMovementTypes: Horizontal, Turn
+		ValidMovementTypes: Horizontal
 	RenderSprites:
 		PlayerPalette: scrin_shard_walker_player
 
@@ -84,7 +84,7 @@ scrin_corrupter:
 		Name: actor_scrin_corrupter.name
 	WithMoveAnimation:
 		MoveSequence: move
-		ValidMovementTypes: Horizontal, Turn
+		ValidMovementTypes: Horizontal
 	RenderSprites:
 		PlayerPalette: scrin_corrupter_player
 
@@ -96,7 +96,7 @@ scrin_annihilator_tripod:
 		Bounds: 2048, 2048
 	WithMoveAnimation:
 		MoveSequence: move
-		ValidMovementTypes: Horizontal, Turn
+		ValidMovementTypes: Horizontal
 	RenderSprites:
 		PlayerPalette: scrin_annihilator_tripod_player
 
@@ -108,7 +108,7 @@ scrin_reaper_tripod:
 		Bounds: 2048, 2048
 	WithMoveAnimation:
 		MoveSequence: move
-		ValidMovementTypes: Horizontal, Turn
+		ValidMovementTypes: Horizontal
 	RenderSprites:
 		PlayerPalette: scrin_reaper_tripod_player
 
@@ -128,7 +128,7 @@ scrin_eradicator_hexapod:
 		Bounds: 3072, 3072
 	WithMoveAnimation:
 		MoveSequence: move
-		ValidMovementTypes: Horizontal, Turn
+		ValidMovementTypes: Horizontal
 	-Voiced:
 	RenderSprites:
 		PlayerPalette: scrin_hexapod_player

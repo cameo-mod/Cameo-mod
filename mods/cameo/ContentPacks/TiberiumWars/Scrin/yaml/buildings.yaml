@@ -13,15 +13,22 @@
 
 scrin_drone_platform:
 	Inherits: ^Building
-	Inherits@shape: ^3x2Shape
+	Inherits@shape: ^3x3Shape
 	Tooltip:
 		Name: actor_scrin_drone_platform.name
 	Building:
-		Dimensions: 3,2
-		Footprint: xxx xxx
+		Dimensions: 3,3
+		Footprint: _x_ xxx _x_
 		LocalCenterOffset: 0,0,0
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune
 	RenderSprites:
 		PlayerPalette: player_rgba
+	WithMakeAnimation:
+	Transforms:
+		IntoActor: scrin_drone_ship
+		Offset: 1,1
+		Facing: 480
+		NoTransformNotification: BuildingCannotPlaceAudio
 
 scrin_reactor:
 	Inherits: ^Building
@@ -71,7 +78,7 @@ scrin_portal:
 	WithIdleOverlay@CORE:
 		Image: scrin_portal_core
 		Sequence: idle
-		Palette: scrin_portal_training
+		Palette: effect
 		RequiresCondition: !build-incomplete
 	WithIdleOverlay@FOREGROUND:
 		Image: scrin_portal_foreground
@@ -92,7 +99,7 @@ scrin_warp_gate:
 	WithIdleOverlay@CORE:
 		Image: scrin_warp_gate_core
 		Sequence: idle
-		Palette: scrin_warp_gate_training
+		Palette: effect
 		RequiresCondition: !build-incomplete
 
 scrin_nerve_center:
@@ -121,12 +128,12 @@ scrin_stasis_chamber:
 
 scrin_technology_assembler:
 	Inherits: ^Building
-	Inherits@shape: ^3x4Shape
+	Inherits@shape: ^3x3Shape
 	Tooltip:
 		Name: actor_scrin_technology_assembler.name
 	Building:
-		Dimensions: 3,4
-		Footprint: xx_ xxx xxx _xx
+		Dimensions: 3,3
+		Footprint: xx_ xxx _xx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba
@@ -217,12 +224,12 @@ scrin_storm_column:
 
 scrin_rift_generator:
 	Inherits: ^Building
-	Inherits@shape: ^2x2Shape
+	Inherits@shape: ^3x3Shape
 	Tooltip:
 		Name: actor_scrin_rift_generator.name
 	Building:
-		Dimensions: 2,2
-		Footprint: xx xx
+		Dimensions: 3,3
+		Footprint: xxx xxx xxx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba
@@ -265,7 +272,7 @@ scrin_warp_chasm:
 	WithIdleOverlay@CORE:
 		Image: scrin_warp_chasm_core
 		Sequence: idle
-		Palette: scrin_warp_gate_training
+		Palette: effect
 		RequiresCondition: !build-incomplete
 
 scrin_foundry:
@@ -294,12 +301,12 @@ scrin_outpost:
 
 scrin_control_node:
 	Inherits: ^Building
-	Inherits@shape: ^4x4Shape
+	Inherits@shape: ^4x3Shape
 	Tooltip:
 		Name: actor_scrin_control_node.name
 	Building:
-		Dimensions: 4,4
-		Footprint: xxxx xxxx xxxx xxxx
+		Dimensions: 4,3
+		Footprint: xxxx xxxx xxxx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba

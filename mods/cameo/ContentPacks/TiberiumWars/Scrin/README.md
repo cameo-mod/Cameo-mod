@@ -8,13 +8,17 @@ transforms into the Drone Platform, which plays its genuine deployment cycle.
 
 The pack contains 42 approved map/editor-ready actors. All sheets pair their
 body art with separate, model-derived ground shadows. The structures use
-Cameo's dynamic `player_rgba` palette. Reactor has a restrained 12-frame
-central-spire cycle; Extractor, Growth Accelerator, and Storm Column have
-16-frame idle cycles. Photon Cannon and Plasma Missile Battery use 32 embedded
-turret facings. Signal Transmitter remains static. Drone Platform uses a
+Cameo's dynamic `player_rgba` palette. Reactor and Signal Transmitter remain
+static; Extractor, Growth Accelerator, and Storm Column have 16-frame idle
+cycles. Photon Cannon and Plasma Missile Battery use 32 embedded turret
+facings. Drone Platform uses a
 45-frame, 1.8-second make sequence whose final frame is also its exact idle
 frame. Combined with the Drone Ship's tuned landing rate, deployment takes
 approximately three seconds.
+
+Portal, Warp Gate, and Warp Chasm cores use RGBA animation sheets so their
+authored soft transparency survives the runtime sprite loader. Alternate linked
+portal colors remain deferred until the gameplay mode is implemented.
 
 ## Top-priority todo
 
@@ -51,14 +55,18 @@ Tank, Repair Drone, Gun Walker, Shard Walker, Corrupter, Annihilator Tripod, and
 Reaper Tripod. Hover vehicles remain static except for the Repair Drone. The
 walkers use approved native movement cycles across 32 facings; Gun Walker has
 softened leg-joint skinning to preserve its silhouette at OpenRA resolution.
-Each indexed sheet reserves indices 249-255 for player-color remapping.
+Each indexed sheet reserves indices 249-255 for player-color remapping. Every
+mobile-unit facing is locked to an authored body/rig pivot, with the same
+per-facing correction applied to its complete body and native shadow group.
+This prevents asymmetric hulls, barrels, tentacles, and lifted legs from making
+the model orbit its cell while turning without suppressing real walk motion.
 
 The actors currently expose only the shared building behavior, turret rigs,
 and provisional unit locomotion needed by maps and the editor. Production roles,
 weapons, costs, power, prerequisites, construction animations, destruction art,
 AI, and balance are intentionally deferred. Apart from the reviewed Drone
-Platform 3x2 footprint, the new gameplay footprints remain provisional
-scaffolding.
+Platform 3x3 cross footprint (`_x_ / xxx / _x_`), the new gameplay footprints
+remain provisional scaffolding.
 
 The sprites were independently extracted and rendered from the official
 *Command & Conquer 3: Tiberium Wars* and *Kane's Wrath* assets. The source

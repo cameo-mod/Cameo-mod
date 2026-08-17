@@ -23,29 +23,27 @@ scrin_drone_ship:
 		Facings: 32
 		ShadowStart: 32
 		ShadowZOffset: -5
-		Offset: 9.000,-62.000
+		Offset: 15.873,-54.074
 
 scrin_reactor:
 	idle:
 		Filename: scrin_sprites|scrin_reactor.png
 		Start: 0
-		Length: 12
-		Tick: 160
+		Length: 1
 		ShadowStart: 12
 		ShadowZOffset: -5
 		Offset: 2.000,3.000
-		Scale: 0.65
+		Scale: 0.60
 
 scrin_fusion_reactor:
 	idle:
 		Filename: scrin_sprites|scrin_fusion_reactor.png
 		Start: 0
-		Length: 12
-		Tick: 160
+		Length: 1
 		ShadowStart: 12
 		ShadowZOffset: -5
 		Offset: 2.000,3.000
-		Scale: 0.65
+		Scale: 0.60
 
 scrin_extractor:
 	idle:
@@ -56,7 +54,7 @@ scrin_extractor:
 		ShadowStart: 16
 		ShadowZOffset: -5
 		Offset: 2.000,-1.000
-		Scale: 0.65
+		Scale: 0.60
 
 scrin_portal:
 	idle:
@@ -66,6 +64,7 @@ scrin_portal:
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,-4.000
+		Scale: 0.923077
 
 scrin_portal_core:
 	idle:
@@ -74,6 +73,7 @@ scrin_portal_core:
 		Length: 48
 		Tick: 83
 		Offset: 0.000,0.000
+		Scale: 0.923077
 
 scrin_portal_foreground:
 	idle:
@@ -81,6 +81,7 @@ scrin_portal_foreground:
 		Start: 0
 		Length: 1
 		Offset: 0.000,8.000
+		Scale: 0.923077
 
 scrin_warp_gate:
 	idle:
@@ -90,6 +91,7 @@ scrin_warp_gate:
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,-4.000
+		Scale: 0.923077
 
 scrin_warp_gate_core:
 	idle:
@@ -98,6 +100,7 @@ scrin_warp_gate_core:
 		Length: 48
 		Tick: 83
 		Offset: 3.000,-32.000
+		Scale: 0.923077
 
 scrin_nerve_center:
 	idle:
@@ -107,6 +110,7 @@ scrin_nerve_center:
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,-24.000
+		Scale: 0.923077
 
 scrin_stasis_chamber:
 	idle:
@@ -116,6 +120,7 @@ scrin_stasis_chamber:
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,8.000
+		Scale: 0.923077
 
 scrin_technology_assembler:
 	idle:
@@ -125,6 +130,7 @@ scrin_technology_assembler:
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,0.000
+		Scale: 0.923077
 
 scrin_signal_transmitter:
 	idle:
@@ -134,6 +140,7 @@ scrin_signal_transmitter:
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,4.000
+		Scale: 0.923077
 
 scrin_buzzer_hive:
 	idle:
@@ -190,6 +197,7 @@ scrin_rift_generator:
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,-8.000
+		Scale: 1.0
 
 scrin_lightning_spike:
 	idle:
@@ -217,6 +225,7 @@ scrin_warp_chasm:
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,-16.000
+		Scale: 0.923077
 
 scrin_warp_chasm_core:
 	idle:
@@ -225,6 +234,7 @@ scrin_warp_chasm_core:
 		Length: 48
 		Tick: 83
 		Offset: 0.000,-42.000
+		Scale: 0.923077
 
 scrin_foundry:
 	idle:
@@ -234,6 +244,7 @@ scrin_foundry:
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,-8.000
+		Scale: 0.923077
 
 scrin_outpost:
 	idle:
@@ -243,6 +254,7 @@ scrin_outpost:
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,8.000
+		Scale: 0.923077
 
 scrin_control_node:
 	idle:
@@ -252,6 +264,7 @@ scrin_control_node:
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,-24.000
+		Scale: 0.923077
 
 scrin_phase_generator:
 	idle:
@@ -261,6 +274,7 @@ scrin_phase_generator:
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,-20.000
+		Scale: 0.60
 
 scrin_eradicator_hexapod:
 	idle:

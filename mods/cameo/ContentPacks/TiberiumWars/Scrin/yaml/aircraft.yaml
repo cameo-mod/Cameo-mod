@@ -12,18 +12,19 @@ scrin_drone_ship:
 	Armor:
 		Type: Heavy
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 2304, 2560, 0, -512
+		Bounds: 2048, 2048, 0, -2048
+		DecorationBounds: 2304, 2560, 0, -2048
 	Aircraft:
 		Speed: 61
 		TurnSpeed: 20
 		AltitudeVelocity: 100
 		CanForceLand: false
 		Repulsable: false
+	-WithShadow:
 	Transforms:
 		IntoActor: scrin_drone_platform
 		Offset: -1,-1
-		Facing: 800
+		Facing: 480
 		NoTransformNotification: BuildingCannotPlaceAudio
 	-AttackAircraft:
 	-SpawnActorOnDeath:
