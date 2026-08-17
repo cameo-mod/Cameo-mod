@@ -3,15 +3,19 @@
 **Maintainer 2026-08-17:** *"maybe more reasoning to make each one a finer rating against each
 armor type? like you said sword, arrow and rifle might impact the armors slightly differently even
 though they are in the same kinetic family right? But you need to use your best real world
-reasoning for this to get it right!"*
+reasoning for this to get it right!"* … *"I want all weapon families to be a bit more unique so
+don't put 3 energy weapons exactly on the same versus value but slightly different"*
 
-Nothing applied. This is the reasoning, and it hits a structural wall worth knowing about.
+**STATUS: DONE** — shipped in `e7fa2d57b`. **31 emitted families, 31 distinct rows.** Four groups
+of ties are gone: `Laser/Prism/Tesla`, `Chemical/Cryo/Flame/Toxic`, `Concussion/Demolition`, and
+`Arrow/Bullet/CannonAP/Melee`. Pinned by `tools/tests/test_plating_composition.py`.
 
 ---
 
 ## ⚠ FIRST: the kinetic/shaped split is INVISIBLE to every plating
 
-Refining a sword vs an arrow vs a bullet within the kinetic family **does nothing**. Measured:
+The obvious approach — refine a sword against an arrow against a bullet *within* the kinetic
+family — **does nothing at all**. Measured before anything was applied:
 
 | family | proposed composition | HAZMAT | COMPOSITE | BLAST | REFLECTOR |
 |---|---|--:|--:|--:|--:|
@@ -29,89 +33,205 @@ REFLECTOR   counters {energy}            weak {thermo}
 ```
 
 `kinetic` and `shaped` **always appear together as a set**, so `sum(kinetic, shaped)` is all the
-formula ever sees. **The model has five axes but only FOUR distinguishable groups:** `{thermo}`,
+formula ever sees. **Five axes, but only FOUR distinguishable groups:** `{thermo}`,
 `{kinetic + shaped}`, `{blast}`, `{energy}`.
 
-⭐ **So differentiation only works by moving mass ACROSS group boundaries.** Within-group refinement
-is arithmetically inert — and this is exactly why the earlier tie was a pigeonhole limit rather than
-an oversight: 20 families into 4 groups must collide.
+⭐ **So a row can only earn its difference by moving mass ACROSS a group boundary.** Within-group
+refinement is arithmetically inert. That is also why the original ties were a structural limit
+rather than an oversight — and why the fix is *not* finer shares but a **second defeat mechanism**
+for each family, in a different group. Four groups still give a continuum, so 31 unique rows are
+reachable; what is unreachable is 31 unique rows built out of kinetic-vs-shaped hair-splitting.
+
+⛔ **What must NOT be done is adding ±1 noise to break a tie.** The rows are derived from physics;
+a fabricated difference is a lie about the model, and this project has already been burned by
+exactly that (`b182fd228` — *"blend ladders were FABRICATED, not measured"*).
 
 ---
 
-## What CAN be differentiated, with the physics
+## The secondary shares, one family at a time
 
-### ✅ Melee — blunt trauma is overpressure, not penetration
+### Kinetic cluster — what happens BEHIND the plate
 
-A mace beats plate armour where a sword does not, and the reason is not penetration: a swung mass
-transmits **shock through** rigid armour. That is overpressure behaviour, i.e. the `blast` axis.
+A solid projectile's only honest non-kinetic share is its **spall**: a penetration event throws
+fragments, and a spall liner (`BLAST`) is the real-world answer to it — that is what spall liners
+are *for*. So the share tracks how violent the event is.
 
-```
-Melee: kinetic 0.70, blast 0.30    ->  HAZMAT 135  COMPOSITE 80  BLAST 85  REFLECTOR 100
-```
+| family | share | why |
+|---|---|---|
+| `Arrow` | kinetic 1.00 | the pure point: a slow sharp penetrator, no spall and no flash |
+| `Sniper` | blast 0.05 | one round, one channel, very little behind-plate debris |
+| `Bullet` | blast 0.10 | deforms, cavitates, sprays spall |
+| `Melee` | blast 0.25 | ⭐ blunt trauma is **shock through** rigid armour, i.e. overpressure — a mace beats plate where a sword does not, and *not* by penetrating |
+| `CannonAP` | thermo 0.15 | a DU dart is **pyrophoric**; the documented behind-armour effect is incendiary as much as mechanical |
+| `Railgun` | energy 0.15 | unchanged — the EM launch and plasma sheath (this is why Railgun was never tied) |
+| `MissileAP` | thermo 0.05 | behind-armour incendiary from the jet |
 
-Distinct from Bullet at last, and it reads correctly: a composite plate helps less against a mace
-than against a rifle, and a blast-rated plate helps more.
+`Melee` now reads correctly in both directions: a composite plate helps *less* against a mace
+than against a rifle (53 vs 42), and padding helps *more* (62 vs 68).
 
-### ⭐ Tesla — a mirror does not stop lightning
+### Blast cluster
 
-**This is the strongest finding here, and it says the current grouping is wrong.** `Laser`, `Prism`
-and `Tesla` are all `energy 1.00`, so a REFLECTOR counters all three identically (row 35). But
-reflection defeats **radiant** energy; against a conducted electrical arc a mirror does nothing —
-the real counters are a Faraday cage and grounding. What an arc *does* deliver is intense local
-**resistive heating** and a plasma channel.
+`Concussion` keeps `blast 1.00` as the pure overpressure archetype. `Demolition` takes
+`thermo 0.15` for the detonation flash a contact charge delivers — which is what incendiary
+cutting charges exploit. A sealed suit now gives a little protection against one (65) and none
+against the other (70).
 
-```
-Tesla: energy 0.60, thermo 0.40    ->  HAZMAT 80  COMPOSITE 100  BLAST 130  REFLECTOR 90
-```
+### Thermochemical cluster
 
-So a reflective plating gives only a slight benefit (90, not 35) and an insulating/sealed one gives
-a real one (80) — which is physically right and finally separates Tesla from Laser/Prism.
+A sealed insulated suit really is the right counter to all four, so they keep a thermo **lead**
+and separate on their second mechanism:
 
-### ✅ Railgun — already correct
+* `Toxic` **1.00 thermo** — an agent attacking the **crew** is exactly what a hazmat suit is for,
+  so this is the pure case. It is also the only family a REFLECTOR still makes *worse* (102):
+  the purest agent is the one that fouls a mirror.
+* `Flame` **blast 0.15** — fuel **deflagrates**: a pressure pulse and oxygen depletion.
+* `Chemical` **shaped 0.25** — corrosion (per `PHYSICAL_STATE_SYSTEM.md`, *not* gas) eats a
+  channel through the material, i.e. localised material removal. **Ceramics are chemically
+  inert** where steel and reactive armour are not, so `COMPOSITE` earns a partial answer (62).
+* `Cryo` **energy 0.25, kinetic 0.10** — ⚠ found while writing the guard: Cryo is a **prism
+  chassis** (`INHERIT_FAMILIES`: *"a prism beam that also freezes"*) ranked 0.66 by
+  `PHYSICS_RANK`, yet its composition still said pure thermo — the *same* drift `Inferno`
+  shipped with. The kinetic share is cryogenic **embrittlement**: what breaks is frozen
+  material fracturing.
 
-`kinetic 0.85, energy 0.15` gives 142.5 / 57.5 / 107.5 / 92.5. The energy share is the EM launch
-and plasma sheath, and it already crosses a group boundary, which is why Railgun was never tied.
+### Energy cluster — how much of the delivered damage is THERMAL
 
-### ❌ Bullet vs Arrow vs CannonAP — cannot be honestly separated
+That share is also the order in which a mirrored coating stops being the right idea:
 
-An arrow is low-velocity with a concentrating bodkin point; a bullet is high-velocity and
-deforming; a sabot round is a hypervelocity long rod. Those are real differences — **and all three
-live inside `{kinetic + shaped}`**, so no plating in the current cycle can express them. Inventing
-a blast or energy share for a bullet to break the tie would be fabricating physics, which is the
-`b182fd228` mistake ("blend ladders were FABRICATED, not measured").
-
-### ❌ Flame vs Chemical vs Toxic — the difference is real but not on these axes
-
-* **Flame** — burning fuel: surface heat plus oxygen deprivation.
-* **Chemical** — CORROSION (per `PHYSICAL_STATE_SYSTEM.md`, *not* gas): a reaction consuming the
-  armour material itself.
-* **Toxic** — a biological/chemical agent attacking the **crew**, not the armour.
-
-A sealed, insulated suit is the correct counter to **all three**, so `HAZMAT 35` for each is right.
-Their differentiation properly lives in the **class ladder**, where it already exists — Toxic is
-`INF > BLD > VEH > AIR` because it attacks people, not plating. Forcing them apart on the plating
-axes would misdescribe them.
+| family | composition | REFLECTOR | why |
+|---|---|--:|---|
+| `Prism` | energy 0.90, thermo 0.10 | 41 | focused visible light: the purest radiant beam, and a mirror is its exact counter |
+| `Tesla` | energy 0.75, thermo 0.20, blast 0.05 | 49 | a conducted arc; the thermal part is resistive heating and the blast part is the **thunderclap** — thunder is literally an overpressure wave |
+| `Laser` | energy 0.65, thermo 0.35 | 58 | coherent IR, but the **kill** is ablation |
 
 ---
 
-## If full uniqueness is wanted: split the shaped counter out
+## ⚠ Two of my own claims were wrong, and are corrected here
 
-The honest route is not finer shares — it is **cutting the cycle differently**, because the
-real-world distinction the current five collapse is a famous one:
+**1. "A mirror does not stop lightning."** I argued REFLECTOR should barely help Tesla
+(`energy 0.60 / thermo 0.40`), because reflection defeats *radiant* energy while an arc needs a
+Faraday cage. **Overruled** — maintainer: *"the tesla is the opposite [of Inferno]: it's mostly
+energy and a bit of thermal"* — and the ruling is defensible on physics I had missed: a mirrored
+plating is a **metal skin**, i.e. a conductor, which spreads and grounds an arc. Same benefit,
+different mechanism. `PHYSICS_RANK` also already called Tesla the field-coupling champion at 1.00,
+so "mostly energy" is what the other table had been saying all along.
+
+**2. "Energy must EXCEED thermo or a 50/50 blend cancels."** True of the **raw** row, false of the
+**shipped** one. Every column is pinned to `PLATING_TARGET_MEAN`, so at mean 70 a value only stops
+being a benefit above ~143 raw. A thermo-LED heat ray still gets a real reflector benefit:
+
+```
+Inferno  thermo 0.60 / energy 0.40  ->  HAZMAT 49   REFLECTOR 75
+```
+
+Both reduce it, HAZMAT far more — which is exactly the earlier request (*"reduced by both hazmat
+and reflector armor then? But maybe more by hazmat"*). **The mean-70 ruling is what made the
+maintainer's "mostly thermal" reading available**; under the old mean of 100 a 50/50 really did
+land on ~97, i.e. nothing.
+
+---
+
+## The anti-drift guard: `_rank_blend` is retired
+
+`_rank_blend` derived Inferno's thermo/energy split from `PHYSICS_RANK` arithmetically. That
+**over-reached**: the two tables answer different questions — rank asks how much of a discharge a
+**force field** absorbs, composition asks what reaches **matter** — and `Railgun` has always been
+the standing proof that they are not one axis (rank 0.78, a nearly pure kinetic slug). Deriving
+one from the other therefore had to be overruled the moment a ruling touched either table, which
+is precisely what happened.
+
+`rank_composition_conflicts()` keeps only what the two tables genuinely share, and constrains no
+share:
+
+> a family the shield table calls **field-coupling** (`PHYSICS_RANK >= 0.56`, the table's own band
+> boundary) must have **some** energy share; one it calls thermal/kinetic must have **none**.
+
+That catches exactly the drift that shipped twice (`Inferno` 0.64 and `Cryo` 0.66, both
+`thermo 1.00`) without pretending to know the exact split.
+
+---
+
+## The shipped matrix
+
+31 families, 31 distinct rows (`ARMOR` excluded — it is flat by definition).
+
+| family | HAZMAT | COMPOSITE | BLAST | REFLECTOR | ARMOR | composition |
+|---|--:|--:|--:|--:|--:|---|
+| Arrow | 106 | 35 | 71 | 68 | 70 | kinetic 1.00 |
+| Bullet | 102 | 42 | 68 | 68 | 70 | kinetic 0.90, blast 0.10 |
+| Railgun | 100 | 41 | 77 | 63 | 70 | kinetic 0.85, energy 0.15 |
+| MissileAP | 99 | 44 | 68 | 70 | 70 | thermo 0.05, shaped 0.85, blast 0.10 |
+| Melee | 97 | 53 | 62 | 68 | 70 | kinetic 0.75, blast 0.25 |
+| CannonAP | 95 | 41 | 71 | 73 | 70 | thermo 0.15, kinetic 0.70, shaped 0.15 |
+| Flak | 91 | 63 | 57 | 68 | 70 | kinetic 0.60, blast 0.40 |
+| MissileAA | 90 | 67 | 55 | 68 | 70 | kinetic 0.55, blast 0.45 |
+| MissileHE | 79 | 88 | 45 | 68 | 70 | shaped 0.25, blast 0.75 |
+| ChemMissile | 76 | 53 | 69 | 82 | 70 | thermo 0.40, shaped 0.55, blast 0.05 |
+| CannonHE | 74 | 99 | 39 | 68 | 70 | kinetic 0.10, blast 0.90 |
+| ChemCannon | 74 | 51 | 71 | 83 | 70 | thermo 0.45, kinetic 0.35, shaped 0.20 |
+| Quantum | 74 | 61 | 89 | 57 | 70 | thermo 0.18, kinetic 0.28, blast 0.02, energy 0.52 |
+| Concussion | 70 | 106 | 36 | 68 | 70 | blast 1.00 |
+| Sonic | 70 | 95 | 57 | 58 | 70 | blast 0.70, energy 0.30 |
+| Prism | 67 | 71 | 103 | 41 | 70 | thermo 0.10, energy 0.90 |
+| Storm | 67 | 74 | 96 | 44 | 70 | thermo 0.10, blast 0.10, energy 0.80 |
+| Demolition | 65 | 100 | 41 | 73 | 70 | thermo 0.15, blast 0.85 |
+| Magic | 63 | 78 | 86 | 54 | 70 | thermo 0.20, blast 0.20, energy 0.60 |
+| Tesla | 63 | 72 | 96 | 49 | 70 | thermo 0.20, blast 0.05, energy 0.75 |
+| Waveforce | 63 | 64 | 81 | 72 | 70 | thermo 0.43, kinetic 0.17, shaped 0.05, blast 0.04, energy 0.31 |
+| FireMissile | 60 | 82 | 55 | 82 | 70 | thermo 0.42, shaped 0.12, blast 0.45 |
+| Laser | 58 | 71 | 94 | 58 | 70 | thermo 0.35, energy 0.65 |
+| FireCannon | 57 | 87 | 53 | 82 | 70 | thermo 0.42, kinetic 0.05, blast 0.53 |
+| Thermobaric | 56 | 92 | 50 | 82 | 70 | thermo 0.40, blast 0.60 |
+| Chemical | 53 | 62 | 71 | 93 | 70 | thermo 0.75, shaped 0.25 |
+| Cryo | 51 | 67 | 80 | 82 | 70 | thermo 0.65, kinetic 0.10, energy 0.25 |
+| Plasma | 51 | 71 | 87 | 71 | 70 | thermo 0.55, energy 0.45 |
+| Inferno | 49 | 71 | 86 | 75 | 70 | thermo 0.60, energy 0.40 |
+| Flame | 40 | 76 | 66 | 97 | 70 | thermo 0.85, blast 0.15 |
+| Toxic | 35 | 71 | 71 | 102 | 70 | thermo 1.00 |
+
+**`ARMOR` is 70 for every family BY DESIGN** — it is the generic hedge that *"receives 100% damage
+from everything"*, so it must be flat. Varying it would contradict its purpose, and
+`test_the_generic_plating_stays_flat` pins that.
+
+### "evenly distributed among all the axis" — measured
+
+| | axis share | group share (what the cycle READS) |
+|---|---|---|
+| before | thermo 25.8, energy 25.0, blast 22.9, kinetic 19.7, shaped 6.7 | 1.15× spread |
+| **after** | thermo 27.4, blast 24.9, energy 21.4, kinetic 18.6, shaped 7.7 | **1.28× spread** |
+
+Groups after: `thermo 27.4%`, `kinetic+shaped 26.4%`, `blast 24.9%`, `energy 21.4%`.
+
+⚠ **Honest trade:** group evenness got slightly *worse* (1.15× → 1.28×), because the energy
+families gave mass to thermo. Each plating still faces a quarter of the roster ±3 points, which is
+well inside "even" — the ties were the bigger problem and this is what buying uniqueness cost.
+The raw `shaped` figure stays low (7.7%) and always will: only `MissileAP` is shaped-led, and the
+cycle folds shaped into `COMPOSITE` anyway, which is how a real tank is built.
+
+### Under multiplication
+
+**5 cells of 155 increase damage, worst ×1.06** (was 13 of 100 at ×1.07 — better on both counts):
+`Arrow`/`Concussion` 106, `Prism` 103, `Bullet`/`Toxic` 102. Rows span 3.03:1; multiplied by the
+class ladder that is **5.32:1**, inside the documented 2–8× band (DESIGN §12.0 rule 5).
+
+---
+
+## Still open: if EVERY CELL must be unique, re-cut the cycle
+
+Full-row uniqueness is done. Individual **cells** still coincide (`REFLECTOR` has 18 distinct
+values across 31 families), and the honest route to more is not finer shares but **cutting the
+cycle differently**, because `COMPOSITE` currently merges two platings that behave oppositely in
+reality:
 
 > **Explosive reactive armour defeats shaped charges specifically** — it disrupts the jet before it
 > forms — **and does very little against a long-rod kinetic penetrator.** Spaced armour is the same
 > story. Composite/ceramic armour is the reverse: excellent against kinetic rods, less so against a
 > focused jet.
 
-So `COMPOSITE` currently merges two platings that behave oppositely in reality. Splitting it gives
-`kinetic` and `shaped` their own counters, which immediately separates Bullet (kinetic) from
-MissileAP (shaped 0.90) from CannonAP (0.75/0.25) **with no invented numbers** — the shares already
-exist and would simply become visible.
-
-⚠ Cost: a **sixth plating**, and the closed cycle has to be re-cut so every plating still has
-exactly one counter-axis and one weakness. That is a bigger change than a composition tweak and it
-touches the "each plating equally exposed" property, so it needs its own ruling.
+Splitting that counter would separate `Bullet` (kinetic) from `MissileAP` (shaped 0.85) from
+`CannonAP` (0.70/0.15) **with no invented numbers** — the shares already exist and would simply
+become visible. ⚠ Cost: a **sixth plating**, and the closed cycle has to be re-cut so every
+plating still has exactly one counter-axis and one weakness. That needs its own ruling.
 
 ---
 
