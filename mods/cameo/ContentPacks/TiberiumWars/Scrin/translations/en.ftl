@@ -10,6 +10,9 @@ actor_scrin_drone_platform =
 actor_scrin_reactor =
    .name = Scrin Reactor
 
+actor_scrin_fusion_reactor =
+   .name = Scrin Fusion Reactor
+
 actor_scrin_extractor =
    .name = Scrin Extractor
 

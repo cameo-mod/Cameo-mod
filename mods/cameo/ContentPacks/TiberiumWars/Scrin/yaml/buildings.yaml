@@ -35,6 +35,16 @@ scrin_reactor:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
+# Map/editor-ready upgraded Reactor visual. The Nerve Center research and
+# production-menu replacement are deferred with the playable Scrin economy.
+scrin_fusion_reactor:
+	Inherits: scrin_reactor
+	Tooltip:
+		Name: actor_scrin_fusion_reactor.name
+	RenderSprites:
+		Image: scrin_fusion_reactor
+		PlayerPalette: player_rgba
+
 scrin_extractor:
 	Inherits: ^Building
 	Inherits@shape: ^4x3Shape
