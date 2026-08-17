@@ -490,16 +490,39 @@ PLATING_DEPTH = 0.50
 # Each PRIMITIVE family's damage composition over the five axes; shares sum to 1. Blends
 # average their parents, so a new blend is classified for free. This is the same kind of
 # design table as PHYSICS_RANK — measured against nothing, argued from what the weapon IS.
+#
+# ⚠ EVERY EMITTED FAMILY'S ROW MUST BE UNIQUE (maintainer, 2026-08-17: *"I want all weapon
+# families to be a bit more unique so don't put 3 energy weapons exactly on the same versus
+# value"*), and the ONLY way a family can earn a distinct row is to move mass ACROSS a group
+# boundary. The cycle reads `kinetic` and `shaped` as one SET, so five axes give exactly FOUR
+# distinguishable groups — {thermo} / {kinetic+shaped} / {blast} / {energy} — and refining
+# WITHIN one group is arithmetically INERT: `Bullet` 0.90/0.10 against `Arrow` 0.65/0.35 was
+# measured as BYTE-IDENTICAL. So every secondary share below names a SECOND real defeat
+# mechanism; none is a fudge to break a tie, because a fabricated difference is a lie about the
+# model (`b182fd228`). `tools/tests/test_plating_composition.py` pins the uniqueness, and
+# `docs/design/PLATING_COMPOSITION_REFINEMENT.md` argues every line one at a time.
 COMPOSITION = {
     # --- KINETIC: a solid mass arrives at speed. Defeated by hard, brittle ceramic that
     # shatters or erodes the penetrator before it reaches the backing plate — which is what
     # composite (Chobham-type) armour IS.
-    "Bullet":      {"kinetic": 1.00},
-    "Sniper":      {"kinetic": 1.00},
-    "Melee":       {"kinetic": 1.00},                   # a blade is a slow, sharp penetrator
-    "Arrow":       {"kinetic": 1.00},
+    #
+    # These four were all `kinetic 1.00`, i.e. one four-way tie. They are separated by what
+    # happens BEHIND the plate, which is the only honest non-kinetic share a solid projectile
+    # has: a penetration event throws SPALL, and a spall liner (`BLAST`) is the real answer to
+    # it — that is what spall liners are FOR. So the share tracks how violent the event is.
+    "Arrow":       {"kinetic": 1.00},                   # the pure point: no spall, no flash
+    "Sniper":      {"kinetic": 0.95, "blast": 0.05},    # one round, one channel, little spall
+    "Bullet":      {"kinetic": 0.90, "blast": 0.10},    # deforms, cavitates, sprays spall
+    # A blade is a slow sharp penetrator, but this family also covers the swung mass, and blunt
+    # trauma is the one melee mechanism rigid armour cannot simply stop: a mace transmits SHOCK
+    # THROUGH the plate instead of trying to pass through it, which is overpressure behaviour.
+    # Hence composite helps LESS against melee than against a rifle, and padding helps more.
+    "Melee":       {"kinetic": 0.75, "blast": 0.25},
     "Railgun":     {"kinetic": 0.85, "energy": 0.15},   # a SLUG; the energy is in the launcher
-    "CannonAP":    {"kinetic": 0.75, "shaped": 0.25},   # APFSDS, the canonical KE dart
+    # APFSDS, the canonical KE dart — and a dart is PYROPHORIC (depleted uranium ignites) with
+    # adiabatic heating at the contact point, so the documented behind-armour effect is
+    # incendiary as much as mechanical. That thermal share is what separates it from a bullet.
+    "CannonAP":    {"kinetic": 0.70, "shaped": 0.15, "thermo": 0.15},
     # Fragments are METAL MOVING FAST, not overpressure — which is exactly why "flak jacket"
     # is a real garment and why fragmentation sleeves are rated in kinetic terms. Both of
     # these were blast-led in the first draft, which credited them to the wrong counter.
@@ -507,34 +530,103 @@ COMPOSITION = {
     "MissileAA":   {"kinetic": 0.55, "blast": 0.45},    # continuous-rod / frag warheads
     # --- SHAPED CHARGE: a metal JET formed by an explosive-driven liner, defeated by making
     # the jet form early or wander — ERA, slat, spaced plate. Nothing about mass or hardness.
-    "MissileAP":   {"shaped": 0.90, "blast": 0.10},     # HEAT/ATGM
+    "MissileAP":   {"shaped": 0.85, "blast": 0.10, "thermo": 0.05},   # HEAT/ATGM + BAI
     "MissileHE":   {"blast": 0.75, "shaped": 0.25},
     # --- BLAST: overpressure and shock through the structure, defeated by absorbing and
     # spreading impulse — spall liners, V-hulls, standoff.
     "CannonHE":    {"blast": 0.90, "kinetic": 0.10},
-    "Demolition":  {"blast": 1.00},
+    # `Demolition` and `Concussion` were both `blast 1.00`. A concussion shell is the pure
+    # overpressure archetype; a demolition charge is placed in contact and its detonation
+    # delivers a real thermal flash (that is what an incendiary cutting charge exploits), so a
+    # sealed suit gives a little protection against one and none against the other.
     "Concussion":  {"blast": 1.00},
+    "Demolition":  {"blast": 0.85, "thermo": 0.15},
     "Sonic":       {"blast": 0.70, "energy": 0.30},     # a pressure wave IS overpressure
     "Thermobaric": {"blast": 0.60, "thermo": 0.40},     # fuel-air: overpressure + burn
     # --- THERMOCHEMICAL: agents and thermal load, defeated by SEALING and insulating.
-    "Flame":       {"thermo": 1.00},
-    "Inferno":     {"thermo": 1.00},
-    "Chemical":    {"thermo": 1.00},
-    "Toxic":       {"thermo": 1.00},
-    "Cryo":        {"thermo": 1.00},
+    #
+    # `Flame`/`Chemical`/`Toxic`/`Cryo` were a four-way tie at `thermo 1.00`. A sealed insulated
+    # suit really is the right counter to all four, so they keep a thermo LEAD and separate on
+    # their second mechanism:
+    "Toxic":       {"thermo": 1.00},                    # an agent vs the CREW: the pure case
+    "Flame":       {"thermo": 0.85, "blast": 0.15},     # fuel DEFLAGRATES: pressure + O2 loss
+    # Chemical is CORROSION, not gas (`PHYSICAL_STATE_SYSTEM.md`) — a reaction that eats a
+    # channel through the material itself, which is localised material removal. Ceramics are
+    # chemically INERT where steel and reactive armour are not, so `COMPOSITE` earns a real
+    # (partial) answer to it and that is what separates it from flame.
+    "Chemical":    {"thermo": 0.75, "shaped": 0.25},
+    # ⚠ Cryo is a PRISM CHASSIS (see INHERIT_FAMILIES: "a prism beam that also freezes") ranked
+    # 0.66 by PHYSICS_RANK — i.e. the shield table has always called it a focused-energy
+    # weapon while its composition said pure thermo. Same drift `Inferno` shipped with. The
+    # kinetic share is cryogenic EMBRITTLEMENT: what actually breaks is frozen material
+    # fracturing, a mechanical failure mode a ceramic matrix partly answers.
+    "Cryo":        {"thermo": 0.65, "energy": 0.25, "kinetic": 0.10},
     "Nuclear":     {"thermo": 0.50, "blast": 0.40, "energy": 0.10},
     # --- ENERGY: radiated or conducted, defeated by REFLECTING or ablating it away.
-    "Laser":       {"energy": 1.00},
-    "Prism":       {"energy": 1.00},
-    "Tesla":       {"energy": 1.00},
-    "Storm":       {"energy": 0.90, "blast": 0.10},
+    #
+    # `Laser`/`Prism`/`Tesla` were a three-way tie at `energy 1.00`, so one REFLECTOR row
+    # answered all three identically. They separate on how much of the delivered damage is
+    # THERMAL, which is also the order in which a mirrored coating stops being the right idea:
+    "Prism":       {"energy": 0.90, "thermo": 0.10},    # focused visible light: purest radiant
+    # Maintainer 2026-08-17: *"the tesla is the opposite [of Inferno]: it's mostly energy and a
+    # bit of thermal"*. A conducted arc is the field-coupling champion (PHYSICS_RANK 1.00); what
+    # it delivers to MATTER is resistive heating (the thermo share) plus the arc channel's
+    # thunderclap — thunder is literally an overpressure wave, which is the blast share. And a
+    # mirrored plating is a METAL skin, so it spreads and grounds an arc rather than reflecting
+    # it: same benefit, different mechanism, which is why REFLECTOR still helps here.
+    "Tesla":       {"energy": 0.75, "thermo": 0.20, "blast": 0.05},
+    "Storm":       {"energy": 0.80, "thermo": 0.10, "blast": 0.10},   # lightning: fires+thunder
+    "Laser":       {"energy": 0.65, "thermo": 0.35},    # coherent IR, but the KILL is ablation
     "Magic":       {"energy": 0.60, "thermo": 0.20, "blast": 0.20},
 }
 # Where a blend's parent list understates what the weapon physically IS.
 COMPOSITION_OVERRIDE = {
     # Flame + Chemical gives Plasma a pure thermo reading, but plasma is ionised and radiates.
     "Plasma": {"thermo": 0.55, "energy": 0.45},
+    # Inferno is a PRISM CHASSIS THAT BURNS — a heat ray (`HeatRayBeam1/2`), not a flamethrower.
+    # Maintainer 2026-08-17: *"Inferno which is a heatray so it is kind of both thermal and
+    # energy but MOSTLY THERMAL"*, and earlier: *"shouldn't it be reduced by both hazmat and
+    # reflector armor then? But maybe more by hazmat"*. Both hold here — HAZMAT 49, REFLECTOR 75.
+    #
+    # ⚠ CORRECTION to what this comment used to claim. It said energy had to EXCEED thermo or
+    # "a 50/50 blend CANCELS ... at 50/50 REFLECTOR would sit at exactly 100", which is true of
+    # the RAW row and FALSE of the shipped one: every column is then pinned to
+    # PLATING_TARGET_MEAN, so with the mean at 70 a shipped value only stops being a benefit
+    # above ~143 raw. A thermo-LED heat ray still gets a real reflector benefit (75 < 100). The
+    # ruling that dropped the column mean to 70 is what made the maintainer's reading available;
+    # under the old mean of 100 a 50/50 really did land on ~97, i.e. nothing.
+    "Inferno": {"thermo": 0.60, "energy": 0.40},
 }
+
+# The PHYSICS_RANK band boundary, read OFF that table rather than chosen: everything at or below
+# 0.52 sits in its "thermal / chemical" band and everything at or above 0.56 is at least
+# "exotic / field-adjacent".
+ENERGY_COUPLING_RANK = 0.56
+
+
+def rank_composition_conflicts():
+    """Families whose PHYSICS_RANK band and COMPOSITION disagree about field coupling.
+
+    ⚠ **This REPLACES `_rank_blend`**, which derived Inferno's thermo/energy split from its rank
+    arithmetically. That over-reached: the two tables answer DIFFERENT questions — rank asks how
+    much of a discharge a FORCE FIELD absorbs, composition asks what reaches MATTER — and
+    `Railgun` has always been the standing proof that they are not one axis (rank 0.78, a nearly
+    pure kinetic slug). Deriving one from the other therefore had to be overruled the moment a
+    ruling touched either table, which is exactly what happened.
+
+    So the guard keeps only the part the two tables genuinely share, and constrains no share: a
+    family the shield table calls field-coupling must have SOME energy in it, and one it calls
+    thermal/kinetic must have none. That catches precisely the drift that shipped TWICE — both
+    `Inferno` (0.64) and `Cryo` (0.66) sat at `thermo 1.00` while being prism-chassis weapons.
+    """
+    bad = []
+    for fam, rank in sorted(PHYSICS_RANK.items()):
+        energy = composition(fam)["energy"]
+        if rank >= ENERGY_COUPLING_RANK and energy <= 0:
+            bad.append((fam, rank, energy, "ranked field-coupling, but no energy share"))
+        elif rank < ENERGY_COUPLING_RANK and energy > 0:
+            bad.append((fam, rank, energy, "ranked thermal/kinetic, but has an energy share"))
+    return bad
 
 
 def composition(name):
