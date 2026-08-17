@@ -475,6 +475,9 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   locomotor but no TurnSpeed) stay step-1. Foot infantry also get a Speed±1
   fine-tune as a Δ lever (maintainer 2026-07-22). `VEHICLE_TYPE_CLASSES` still
   forces the class default where every member is a vehicle (mbt).
+- [x] Between-cell movement responsiveness: `^DefaultInfantry` opts in; infantry
+  with a defined `Mobile.TurnSpeed` opt out through `^VehicleTurnRateInfantry`,
+  preserving the documented vehicle-turn-rate marker.
 - [x] Apply **closecombat ReloadDelay 75→70** (anchor DPS 250 / verifier 500) —
   done as part of the 4-anchor restat below.
 - [x] Fix the 4 anchor units to grid (shotgunner/fanatic 4000→2000×2, reload
