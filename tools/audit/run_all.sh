@@ -27,7 +27,7 @@ export PYTHONIOENCODING=utf-8
 # NOTE: "elite_naming" is intentionally excluded — audit_elite_naming.py is
 # deprecated, fully superseded by audit_weapon_suffixes.py X1 section
 # (same check: rank-elite gated armaments not ending _elite).
-for a in inherits faction_leaks upgrades upgrade_coverage ai sequences \
+for a in inherits duplicate_inherits faction_leaks upgrades upgrade_coverage ai sequences \
          metadata outliers orphans assets fluent power_budget stat_formulas \
          weapon_uniqueness garrison_weapons asset_files promotion_gating min_range \
          basebuilder_crates buildable_order display_text rename_safety \
