@@ -203,7 +203,7 @@ Buildable actors with ^GainsExperienceRA2 but NO Armament@*ELITE*: **197**
 | ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml | 341 | tkm_zaza | RedAlert2Mod/TKM |
 | ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml | 974 | tkmvan | RedAlert2Mod/TKM |
 | ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml | 856 | tkmworker | RedAlert2Mod/TKM |
-| ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml | 931 | cabal_eliminator800 | TiberianSun/CABAL |
+| ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml | 940 | cabal_eliminator800 | TiberianSun/CABAL |
 | ContentPacks/TiberianSun/CABAL/yaml/naval.yaml | 1 | cabal_lcraft | TiberianSun/CABAL |
 | ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml | 252 | cabal_pillbox | TiberianSun/CABAL |
 | ContentPacks/TiberianSun/Forgotten/yaml/naval.yaml | 1 | forgotten_lcraft | TiberianSun/Forgotten |

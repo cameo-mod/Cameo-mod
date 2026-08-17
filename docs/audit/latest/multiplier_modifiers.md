@@ -1,6 +1,6 @@
 # audit_multiplier_modifiers — *Multiplier Modifier integer percent check
 
-*Multiplier trait families seen: 1825
+*Multiplier trait families seen: 1823
 
 | trait family |
 |---|
@@ -254,7 +254,6 @@
 | `DamageMultiplier@firing4` |
 | `DamageMultiplier@forcefield` |
 | `DamageMultiplier@forgotten_upgrade_genomemapping` |
-| `DamageMultiplier@forgotten_upgrade_junkarmor` |
 | `DamageMultiplier@global_conscription_buff` |
 | `DamageMultiplier@grimmpower1` |
 | `DamageMultiplier@hive` |
@@ -470,7 +469,6 @@
 | `DamageMultiplier@yuri_doctrine_psionicelite` |
 | `DamageMultiplier@yuri_doctrine_psionicfanatics` |
 | `DamageMultiplier@yuri_doctrine_psionicvehicleshields` |
-| `DamageMultiplier@yuri_doctrine_scrapvehiclearmor` |
 | `DamageMultiplier@yuri_upgrade_brutestrengthmutations` |
 | `DamageMultiplier@yuri_upgrade_geneticmodificationboost` |
 | `DamageMultiplier@yuri_upgrade_gravitondrive` |

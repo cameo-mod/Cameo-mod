@@ -4,7 +4,7 @@
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (2 file(s)) | 24 | >= 24 |
 | T2 | `def test_*` in tools/tests (16 file(s)) | 189 | >= 177 |
-| T3 | modules with no test mentioning them | 235 | <= 224 |
+| T3 | modules with no test mentioning them | 239 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (235)
+## T3 — untested modules (239)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -152,6 +152,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Widgets/ScaledImageWidget.cs | ScaledImageWidget |
 | python | tools/audit/audit_ai.py | audit_ai |
 | python | tools/audit/audit_armament_naming.py | audit_armament_naming |
+| python | tools/audit/audit_armor_upgrade_harm.py | audit_armor_upgrade_harm |
 | python | tools/audit/audit_asset_files.py | audit_asset_files |
 | python | tools/audit/audit_assets.py | audit_assets |
 | python | tools/audit/audit_balance_drift.py | audit_balance_drift |
@@ -171,6 +172,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_fluent.py | audit_fluent |
 | python | tools/audit/audit_garrison_weapons.py | audit_garrison_weapons |
 | python | tools/audit/audit_inherits.py | audit_inherits |
+| python | tools/audit/audit_k_linearity.py | audit_k_linearity |
 | python | tools/audit/audit_metadata.py | audit_metadata |
 | python | tools/audit/audit_min_range.py | audit_min_range |
 | python | tools/audit/audit_missing_elite.py | audit_missing_elite |
@@ -180,12 +182,14 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_outliers.py | audit_outliers |
 | python | tools/audit/audit_packs.py | audit_packs |
 | python | tools/audit/audit_physical_state_warheads.py | audit_physical_state_warheads |
+| python | tools/audit/audit_plating_exclusivity.py | audit_plating_exclusivity |
 | python | tools/audit/audit_power_budget.py | audit_power_budget |
 | python | tools/audit/audit_promotion_gating.py | audit_promotion_gating |
 | python | tools/audit/audit_rank_decoration.py | audit_rank_decoration |
 | python | tools/audit/audit_rename_safety.py | audit_rename_safety |
 | python | tools/audit/audit_sequences.py | audit_sequences |
 | python | tools/audit/audit_stat_formulas.py | audit_stat_formulas |
+| python | tools/audit/audit_survivability_pricing.py | audit_survivability_pricing |
 | python | tools/audit/audit_template_conformance.py | audit_template_conformance |
 | python | tools/audit/audit_test_coverage.py | audit_test_coverage |
 | python | tools/audit/audit_ts_death_palette.py | audit_ts_death_palette |
@@ -258,5 +262,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 235 untested > baseline 224
+- T3: 239 untested > baseline 224
 

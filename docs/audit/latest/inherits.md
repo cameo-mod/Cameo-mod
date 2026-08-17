@@ -1,6 +1,6 @@
 # audit_inherits — §10.3 invariant violations (B2)
 
-Actors+templates scanned: **3961**
+Actors+templates scanned: **3962**
 
 | violation | meaning | count |
 |---|---|---|

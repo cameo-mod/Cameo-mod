@@ -1,11 +1,11 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **237**
+Files scanned: **241**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 2 | 2 |
-| E2 | handler discards the error | 51 | 30 |
+| E2 | handler discards the error | 57 | 30 |
 | E3 | open() without encoding= | 91 | 90 |
 | E4 | subprocess call without check= | 11 | 9 |
 
@@ -18,17 +18,22 @@ Files scanned: **237**
 | tools/audit_createeffect_image.py | 19 | bare `except:` |
 
 
-## E2 — 51 finding(s)
+## E2 — 57 finding(s)
 
 | file | line | detail |
 |---|---|---|
 | tools/audit/audit_ai.py | 45 | handler body discards the error |
+| tools/audit/audit_armor_upgrade_harm.py | 101 | handler body discards the error |
 | tools/audit/audit_balance_sheet.py | 136 | handler body discards the error |
 | tools/audit/audit_dune_rank_decoration.py | 15 | handler body discards the error |
 | tools/audit/audit_elite_gating.py | 16 | handler body discards the error |
 | tools/audit/audit_garrison_weapons.py | 61 | handler body discards the error |
+| tools/audit/audit_k_linearity.py | 80 | handler body discards the error |
+| tools/audit/audit_k_linearity.py | 96 | handler body discards the error |
+| tools/audit/audit_k_linearity.py | 117 | handler body discards the error |
 | tools/audit/audit_missing_elite.py | 21 | handler body discards the error |
 | tools/audit/audit_orphans.py | 93 | handler body discards the error |
+| tools/audit/audit_plating_exclusivity.py | 94 | handler body discards the error |
 | tools/audit/audit_power_budget.py | 100 | handler body discards the error |
 | tools/audit/audit_rank_decoration.py | 49 | handler body discards the error |
 | tools/audit/audit_rank_decoration.py | 68 | handler body discards the error |
@@ -50,7 +55,7 @@ Files scanned: **237**
 | tools/balance/design_invented_profiles.py | 172 | handler body discards the error |
 | tools/balance/design_invented_profiles.py | 186 | handler body discards the error |
 | tools/balance/extract_stats.py | 236 | handler body discards the error |
-| tools/balance/extract_stats.py | 740 | handler body discards the error |
+| tools/balance/extract_stats.py | 860 | handler body discards the error |
 | tools/balance/formula.py | 324 | handler body discards the error |
 | tools/balance/measure_retrofit_gap.py | 134 | handler body discards the error |
 | tools/balance/plan_firepower_retirement.py | 81 | handler body discards the error |
@@ -63,6 +68,7 @@ Files scanned: **237**
 | tools/balance/retrofit_legacy_template.py | 520 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 531 | handler body discards the error |
 | tools/balance/shield_uniqueness.py | 63 | handler body discards the error |
+| tools/balance/target_model.py | 411 | handler body discards the error |
 | tools/balance/verify_retrofit.py | 79 | handler body discards the error |
 | tools/balance/verify_retrofit.py | 87 | handler body discards the error |
 | tools/reference/aggregate_archetype.py | 873 | handler body discards the error |
@@ -191,7 +197,7 @@ Files scanned: **237**
 
 ## FAIL
 
-- E2: 51 > baseline 30
+- E2: 57 > baseline 30
 - E3: 91 > baseline 90
 - E4: 11 > baseline 9
 
