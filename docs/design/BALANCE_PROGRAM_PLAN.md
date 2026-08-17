@@ -134,8 +134,29 @@ exists. Update both together.
 | TEMPORARY ability | 10 | 80 | **KEEP** — Iron Curtain, chrono, invulnerability |
 | VETERANCY / rank | 5 | 75 | → **grant HP instead** (see the correction below) |
 
-**Two no-brainer sweeps, zero gameplay change:**
-* **20 declarations are `Modifier: 100`** — literal no-ops. Delete.
+**Two "no-brainer" sweeps — ⛔ ONE OF THEM WAS WRONG, and it nearly shipped:**
+
+* ~~**20 declarations are `Modifier: 100`** — literal no-ops. Delete.~~
+  ⚠⚠ **FALSE, measured 2026-08-17. Only ONE of the 20 is a no-op.** A `Modifier: 100` on a CHILD
+  is not a no-op — it **CANCELS an inherited value**:
+
+  | | | |
+  |---|--:|---|
+  | `^ScoutInfantryTemplate` declares | **50** | scouts take HALF damage — 2× effective HP |
+  | actors that CANCEL it with a local `Modifier: 100` | 19 | the migrated ones — **deleting these restores the 50% reduction** |
+  | actors that still RESOLVE to 50 | **16** | ⚠ un-migrated: double durability, unpriced |
+  | `^CloseCombatInfantryTemplate` declares | 100 | the only genuine no-op (4 actors, nothing overrides it) |
+
+  I wrote the deletion sweep, and the assertion in it (*"each node is exactly two lines"*) is what
+  caught the error — it hit `Modifier: 50` on the template and stopped. **The scan was asking the
+  wrong question**: it checked whether any DESCENDANT overrode the key, when the danger was an
+  ANCESTOR declaring it. ⭐ **A no-op test must be RESOLVED, never read off the source node.**
+  Claim `unmigrated_scout_damage_multiplier` now measures the 16 every audit run.
+
+  Consequence for W26: these 19 can only be deleted **together with** the template's `50`, and
+  only after the remaining 16 scouts get the 2×-health bake through the pipeline — i.e. it is a
+  balance change needing a maintainer order, not a cleanup. FORMULA_V2's claim that the bake
+  *"replaced"* the reduction was true for 19 of 35.
 * 6 are `Modifier: 0` (true invulnerability) and 1 is `1000`; leave those, they are deliberate.
 
 ### THE PRINCIPLE (use this to decide any case not listed)

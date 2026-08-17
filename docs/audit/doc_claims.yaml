@@ -206,6 +206,31 @@ claims:
           except OSError: pass
       print(n)
 
+  - id: unmigrated_scout_damage_multiplier
+    value: 16
+    tolerance: 0
+    what: >
+      Scouts still resolving `DamageMultiplier@ScoutInfantryBuff: 50` — i.e. taking HALF damage,
+      double effective HP, unpriced. FORMULA_V2 says the 2x-health bake "replaced" this; it
+      replaced it for 19 of 35. The 19 migrated actors CANCEL the template with a local
+      `Modifier: 100`, which is exactly why those overrides look like deletable no-ops and are
+      NOT — deleting them restores the 50% reduction. Goes to 0 when the bake is finished.
+    docs: [docs/design/FORMULA_V2.md, docs/design/ROADMAP.md, docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from cameo_model import Model
+      m = Model(); rs = m.rs; n = 0
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          res = rs.resolve(name)
+          if res is None: continue
+          for c in res.children:
+              if c.key == 'DamageMultiplier@ScoutInfantryBuff':
+                  if (c.get('Modifier') or '').strip() == '50': n += 1
+                  break
+      print(n)
+
   - id: plating_row_ties
     value: 0
     tolerance: 0
