@@ -35,6 +35,28 @@ from report import h1, h2, table
 
 REVIEW_DMG = 8000
 
+# ---------------------------------------------------------------------------
+# FAIL 3 — the BROADCAST FINGERPRINT ITSELF, on a ratchet.
+#
+# ⚠ Measured 2026-08-17: FAIL 1 requires ">=2 mains AND >=1 SIDE warhead, all identical".
+# That side-warhead precondition made it report **4** weapons while the fingerprint it
+# describes — every MAIN at one identical value — is present on **874** of the 973 multi-main
+# fired weapons. The type filter was never the problem (AreaDamage is counted, above); the
+# extra condition was.
+#
+# Widening FAIL 1 outright would turn the whole suite red on 874 weapons of pre-existing W24
+# debt and block every commit until W24 lands, so this is a RATCHET instead: it fails only
+# when the count RISES above the recorded baseline. New broadcasts are caught immediately; the
+# existing debt stays visible without holding the gate hostage.
+#
+# ⬇ LOWER THIS as W24 collapses weapons. It must never be raised — a rise means a hand edit or
+# a foreign tool reintroduced the bug the pipeline's distribute_damage exists to prevent.
+#
+# ⚠ 982, not the 874 quoted in the W24 diagnosis: that figure counts only weapons FIRED by a
+# concrete actor, while this audit scans EVERY concrete weapon (`rs.weapons`), fired or not. Two
+# populations, both correct for their own question — don't reconcile them by changing one.
+BROADCAST_BASELINE = 982
+
 
 def _int(v) -> int:
     try:
@@ -73,6 +95,7 @@ def main() -> int:
     broadcast_rows = []   # FAIL 1
     ff_rows = []          # FAIL 2
     review_rows = []      # informational
+    uniform_mains = []    # FAIL 3 — the fingerprint itself, ratcheted
 
     for wname in sorted(rs.weapons):
         if wname.startswith("^"):
@@ -98,13 +121,20 @@ def main() -> int:
             if d > mx:
                 ff_rows.append([wname, tag, str(d), str(mx)])
 
+        # FAIL 3 — every MAIN identical, regardless of side warheads or damage size.
+        # This is the fingerprint FAIL 1 describes but does not catch.
+        if len(set(main_dmgs)) == 1 and main_dmgs[0] > 0:
+            uniform_mains.append([wname, str(len(mains)), str(main_dmgs[0]),
+                                  str(main_dmgs[0] * len(mains))])
+
         # review — big uniform stacks (allowed, but flag for a look)
         if len(set(main_dmgs)) == 1 and len(mains) >= 3 and mx >= REVIEW_DMG:
             review_rows.append([
                 wname, str(len(mains)), str(mx), str(mx * len(mains))])
 
     out = [h1("Warhead-split guard (multi-warhead over-damage)")]
-    failed = bool(broadcast_rows or ff_rows)
+    over_baseline = len(uniform_mains) > BROADCAST_BASELINE
+    failed = bool(broadcast_rows or ff_rows or over_baseline)
 
     out.append(h2(f"FAIL 1 — broadcast fingerprint ({len(broadcast_rows)})"))
     if broadcast_rows:
@@ -122,6 +152,26 @@ def main() -> int:
         out.append(table(["weapon", "warhead", "ff_damage", "max_main"], ff_rows))
     else:
         out.append("None. ✅\n")
+
+    out.append(h2(f"FAIL 3 — every MAIN identical, on a ratchet "
+                  f"({len(uniform_mains)} vs baseline {BROADCAST_BASELINE})"))
+    out.append(
+        "This is the fingerprint FAIL 1 *describes* but cannot catch: FAIL 1 also requires a "
+        "SIDE warhead, which is why it reports "
+        f"{len(broadcast_rows)} where the fingerprint is on {len(uniform_mains)}.\n")
+    if over_baseline:
+        out.append(f"**FAIL — {len(uniform_mains)} exceeds the baseline of "
+                   f"{BROADCAST_BASELINE}.** A weapon just had one damage number broadcast "
+                   "across its mains. Edit the per-shot TOTAL through the workbook so "
+                   "`formula.distribute_damage` splits it.\n")
+    else:
+        out.append(f"_at or below baseline_ — pre-existing **W24** debt "
+                   f"({len(uniform_mains)} weapons), not a regression. The ratchet catches new "
+                   "broadcasts without blocking every commit on the existing pile. "
+                   "**Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**\n")
+    out.append(table(["weapon", "mains", "per_warhead", "total"], uniform_mains[:40]))
+    if len(uniform_mains) > 40:
+        out.append(f"\n_... and {len(uniform_mains) - 40} more._\n")
 
     out.append(h2(f"Review — high uniform stacks (informational, {len(review_rows)})"))
     if review_rows:
