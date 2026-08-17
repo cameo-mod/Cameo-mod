@@ -50,8 +50,7 @@ def unit_inputs(u):
         rng = fnum(rng.get("v") if isinstance(rng, dict) else rng) or 0.0
         burst = st.get("burst"); burst = int(fnum(burst.get("v") if isinstance(burst, dict) else burst) or 1)
         bd = st.get("burst_delays"); bd = fnum(bd.get("v") if isinstance(bd, dict) else bd)
-        wc = fnum(st.get("design_weapon_class")) or 1.0
-        total_dps += formula.dps(dmg, reload_, wc, burst, bd)
+        total_dps += formula.dps(dmg, reload_, burst, bd)
         best_range = max(best_range, rng)
     if hp is None or speed is None or total_dps == 0:
         return None

@@ -2374,13 +2374,10 @@ RA2Cloud:
 
 RA2CloudSafe:
 	Inherits: ^ToxicWeapon
-	Warhead@ToxicWeapon: SpreadDamage
+	Warhead@Toxic_Light:
 		ValidRelationships: Neutral, Enemy
 		AffectsParent: False
-	Warhead@ToxicWeaponFriendlyFire: SpreadDamage
-		ValidRelationships: Neutral, Enemy
-		AffectsParent: False
-	Warhead@ToxicWeaponPercentage: HealthPercentageDamage
+	Warhead@Toxic_Light_Percentage:
 		ValidRelationships: Neutral, Enemy
 		AffectsParent: False
 

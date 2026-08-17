@@ -280,8 +280,8 @@ def replace_in_yaml(content: str, mapping: dict[str, str]) -> tuple[str, list[st
 
 
 def replace_in_lua(content: str, mapping: dict[str, str]) -> tuple[str, list[str]]:
-    """Replace actor type references in Lua files.
-    
+    r"""Replace actor type references in Lua files.
+
     Only replaces whole quoted strings that match an actor name exactly.
     Skips lines that look like file paths (containing / or \).
     """

@@ -20,15 +20,29 @@ flagged inline. Faction reference: [FACTIONS.md](../FACTIONS.md)._
 
 ---
 
+## ⭐ START HERE — [`BALANCE_PROGRAM_PLAN.md`](BALANCE_PROGRAM_PLAN.md) (2026-08-11)
+
+**The balance program's board, ownership and acceptance criteria live in ONE file:
+[`docs/design/BALANCE_PROGRAM_PLAN.md`](BALANCE_PROGRAM_PLAN.md).** Work items W1–W12,
+one `VERIFY` command each, file-set ownership so two agents can run in parallel, and the
+universal commit gate. Any agent resuming after a compaction reads §0 of that file first.
+Do not duplicate its status here — this ROADMAP links to it on purpose.
+
+Current: **W1 ✅ done** (K coefficient + target model, `f8421d345`) · **W2 ⬜ ready, owner
+Devin** (`^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*`) · **W3–W5 ⬜ ready,
+owner Claude** (ledger split, retire weapon-class K, the five missing metrics).
+
 ## ▶ ACTIVE — CAMEO CONTENT INSTALLER
 
-- [ ] **Manage Content downloads:** add the hidden `cameo-content` installer
-  mod, switch Cameo to `ContentInstallerFileSystem`, and keep
-  `ContentPackages:` empty so installation remains opt-in.
-- [ ] **Music manifest follow-up:** downloaded RA/C&C/TS/Firestorm music is
-  stored as `.aud`, while `mods/cameo/music.yaml` currently declares `.mp3`;
-  track mappings remain a separate maintainer decision and are not part of
-  the installer plumbing.
+- [x] **Manage Content downloads:** hidden `cameo-content` installer mod,
+  Cameo switched to `ContentInstallerFileSystem`, `ContentPackages:` empty so
+  installation stays opt-in; disc-source outputs corrected from `Content/ca/`
+  to `Content/cameo/` (PR #260).
+- [ ] **Disc-source gaps surfaced by the installer going live:** `tsmusic` /
+  `fsmusic` `TestFiles` are not produced by their declared disc sources
+  (Firestorm writes `scores01.mix`), and `Content/cameo/{cnc/desert.mix,
+  ra2/theme.mix, ra2/thememd.mix, expand/*}` are written by disc installs but
+  not mounted by `mods/cameo/mod.yaml`.
 
 ## ▶ ACTIVE — VEHICLE BALANCE APPLY + BACKLOG (2026-07-31)
 
@@ -38,6 +52,28 @@ committed: `^MissileVehicleTemplate` + 10 reassignments (missile-MLRS family + N
 removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
 
 **Queue (priority order):**
+- **[🔴 P1 BUG — 77 live weapons deal NO flame damage] `^LightFlameWeapon` is a dead
+  warhead.** `mods/cameo/weapons/weapons.yaml` `^LightFlameWeapon` sets
+  `Warhead@LightFlameWeapon: SpreadDamage` with `Spread: 500` **and** `Range: 500` — a
+  SINGLE `Range` value. The engine (`AreaDamageWarhead.cs` + upstream
+  `SpreadDamageWarhead.cs`) then sets `effectiveRange = [500]`, and `GetDamageFalloff`
+  loops `for (i = 1; i < effectiveRange.Length; i++)` — which never runs — and
+  **returns 0**. So `Damage: 1000` is delivered as **zero at every distance**, silently:
+  load-time validation accepts `Range.Length == 1`. 77 live weapons inherit it
+  (`NodTurretLaser`, `HonestJohn`, `VenomLaser`, `FireRockets*`, `SiegeMortar*`,
+  `HeatRayBeam*`, …); one more weapon has the same shape on `Warhead@2`
+  (`Range: 5000`, `Falloff: 100, 100`). **Fix = delete the `Range: 500` line** so
+  `Spread: 500` defines the geometry as intended. That is a warhead change (CLAUDE.md
+  rule 4/5) → needs an explicit maintainer order, and it will make 77 weapons suddenly
+  start dealing their flame damage, so it wants a balance pass with it. Detected by the
+  engine-fidelity fix in [`EFFECTIVE_DAMAGE.md`](EFFECTIVE_DAMAGE.md) §4.
+- **[DECISION NEEDED] `effective_damage`: two open rulings.** (a) Do
+  `*_ExtraDamage` chips count? `formula.spread_damage_sum` excludes them (they are paid
+  for by K / charge delay); the metric includes them — both cannot be right once the
+  column is priced on. (b) Derived fields now sit in the RAW-STATS-ONLY ledger,
+  contradicting `BALANCE_PIPELINE.md` §2; recommendation is to split them into
+  `docs/balance/derived/`. Full spec + improvement roadmap:
+  [`EFFECTIVE_DAMAGE.md`](EFFECTIVE_DAMAGE.md).
 - **[NEXT — needs a maintainer warhead order] Adopt the Sonic family.** `^Warhead_Sonic_*` now bakes
   the `SonicDebuff` mark (`5a14355e6`), but **nothing inherits it**, so it is inert. Candidates:
   TS GDI `TSSonicZapWeapon` / `TSSonicZapWeaponSonic` (the Disruptor — currently Tesla + Magic),
@@ -210,9 +246,28 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    later; resolution = inline (cross-pack/one-off) or hoist to `^Template` (same-pack). Memory:
    [[cameo-no-actor-inheritance]]. Audit cmd in the memory. Don't stop pipeline work for it.
 
-**ENGINE workflow (Blackrobe 2026-07-31):** `cameo-mod/engine` is a git **submodule (a working clone of `origin Cameo-mod/OpenRA`)**, whose **main branch is `cameo-engine`** — i.e. the "cameo-engine dev clone" referenced in `.windsurf/rules/start-protocol.md`. Engine updates: branch off `cameo-engine`;
-**MIRROR changes both ways** (`cameo-engine` ↔ `cameo-mod/engine`); rebuild before the boot gate. Memory:
-`cameo-engine-submodule`.
+**ENGINE workflow.** ⚠ **CORRECTED 2026-08-15 — `engine/` is NOT a submodule of this repo.**
+Verified: no `.gitmodules`, no `engine/.git`, `.gitignore` lists `engine`/`engine*`, and
+`git ls-files engine` returns **0 tracked files**. `git` run from inside `engine/` silently
+operates on the PARENT repo, which is what made it look like a submodule on `master`.
+**Editing `engine/**` from this repo produces work that cannot be committed and is wiped by
+the next `make all`.** (The earlier wording here — "submodule … MIRROR changes both ways" —
+cost a session's worth of planning before anyone checked.)
+
+The engine is a **SEPARATE clone** of `https://github.com/cameo-mod/OpenRA`, branch
+`cameo-engine`. The binding, step-by-step procedure is
+**`docs/LESSONS_LEARNED.md` → "The canonical engine update pipeline"**: edit + push there →
+`git rev-parse cameo-engine` for the full 40-char hash → `ENGINE_VERSION` in **`mod.config`**
+(not `mod.yaml`) → `make.cmd all` → verify `engine/VERSION` and recreate `engine/glsl/`
+shaders → boot-gate → commit `mod.config`. Also in `CLAUDE.md` and the SessionStart hook.
+
+⭐ **Check for a mod-side SHADOW first** — it avoids the whole round trip.
+`ObjectCreator.FindType` returns the first assembly in `mod.yaml`'s `Assemblies` list holding
+the type name, and that order is AS, CA, **Cameo**, Cnc, D2k, Common, so an
+`OpenRA.Mods.Cameo` class of the same name replaces the engine's with **zero yaml changes**.
+Precedent: `ColorPickerColorShift`, `PlayerColorShift`, and `SelectionDecorations`
+(`57685c3a3`). Prove it with a Cameo-only field — `--docs` lists both types and proves nothing.
+Memory: `cameo-engine-submodule`.
 
 ---
 
@@ -224,6 +279,97 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
   `LockFaction` values. Also fixed invalid fluent key `bot-campaign-ai.name` →
   `CampaignAI` in delivery/deliverycoop rules.yaml and added missing
   `bot_ai.campaign` fluent key to en.ftl.
+
+## ❓ OPEN DESIGN — Schwarzer Mond team upgrade + faction lore pass (2026-08-15)
+
+Two maintainer questions raised while reworking the SM upgrades (`d58cd8603`).
+
+### 1. Does Moon Propaganda become SM's team upgrade?
+
+Every faction is eventually meant to have one; SM has none. The maintainer's own
+difficulty is real: *"it's very hard to make something unique that is also
+teamwide."*
+
+**~~Recommendation: split Moon Propaganda, fanaticism goes team-wide.~~ REJECTED
+by the maintainer, 2026-08-15 — and rightly:**
+
+> *"Schwarzer Mond is more high tech and more about vehicles and aircraft than
+> infantry so I think the team upgrade should also reflect that a bit."*
+
+Fanaticism is an INFANTRY-morale effect on a faction that is not infantry-focused.
+It fits the Asian Alliance — whose Banzai upgrade already **is** that effect,
+faction-only — or the Naxis. The mistake was reasoning from an available mechanic
+instead of from faction identity; that is now a binding rule in
+[`DESIGN.md` §6](../DESIGN.md), together with the measured
+**team ≈ half of faction** magnitude law.
+
+**Moon Propaganda therefore STAYS a normal faction upgrade** (fanaticism +
+defection, shipped in `d58cd8603`). SM's team upgrade is a SEPARATE, still
+unbuilt upgrade, and it must be **high-tech, vehicles and aircraft**.
+
+**Candidates (maintainer's pick outstanding):**
+
+| # | upgrade | effect | why it fits |
+|---|---|---|---|
+| **A** | **Anti-Gravity Plating** *(recommended)* | allied **vehicles + aircraft** get an `ArmorPlating` bar worth **10% of health** | SM's lunar alloys and anti-grav tech, exactly HALF of SM's own Lunar Alloys (20%) so the team-is-weaker law is visible in the number; reuses the additive plating pool, so an SM ally already carrying plating sees ONE bigger bar rather than a second one |
+| **B** | **Helium-3 Distribution** | allied vehicles + aircraft **+10% speed/turn**, allied power plants **+15% output** | SM already mines Helium-3 for fusion reactors and propulsion; sharing the fuel IS what a team upgrade is, and it is literally half of SM's own Helium-3 (+25% speed, +50% power) |
+| **C** | **Die Glocke Resonance** | allied vehicles + aircraft **resist disabling** (shorter EMP/disable) | the most distinct option — every existing team upgrade in the tree is a ± multiplier, this one is utility; needs a check of what EMP/disable traits support first |
+
+**A** is the pick: it is a NEW effect for allies rather than a diluted copy of an
+SM upgrade, it produces a visible BAR instead of another invisible percentage
+(the maintainer's standing complaint about generic upgrades), and it demonstrates
+the additive one-pool law. **B** expresses the weaker-shared-version law most
+legibly but is a stat multiplier. **C** is the most interesting and the least
+scoped.
+
+**Cost of building, once picked:** `^TeamUpgradeTemplate` (cost 10000) + an
+`up_<name>_proxy_actor.schwarzermond` + an effects template gated on the proxy's
+condition, inherited by allied vehicles/aircraft via `^GlobalBuffs`. No new C#
+for A or B.
+
+### 2. Magic-the-Gathering-style lore for every unit and upgrade
+
+Maintainer, 2026-08-15: *"I want each unit and upgrade to have their own unique
+lore behind them, like the Magic the Gathering cards … But yeah that's more like
+a thing for the future maybe?"* — recorded as a FUTURE pass, not queued now.
+
+Shape when it happens: descriptions already carry a mechanical line plus a
+flavour line (see `schwarzermond_upgrade_cryptofascism`, whose flavour text is
+the MoonCoin rug-pull). That two-line split IS the MTG card layout — rules text
+then italic flavour — so the CONTENT pass is a sweep over existing
+`Description:` fields rather than a new system.
+
+**ESTIMATE (2026-08-15), split into the cheap half and the expensive half:**
+
+*Styling mechanism — small, and doable MOD-SIDE.* Checked:
+- **No inline markup exists today.** Zero `.ftl` files use colour/style tags, and
+  OpenRA's `LabelWidget` has no per-span styling — colour is a per-WIDGET
+  property. So "italic flavour" cannot be a tag inside one string; the tooltip
+  has to render **two labels**, one per style.
+- **No italic font is registered.** `mod.yaml` `Fonts:` declares Regular and Bold
+  variants of JudouSansHans only. Italics need an italic TTF added (or the
+  flavour text distinguished by COLOUR/dimming instead, which costs nothing).
+- **The tooltip logic can be shadowed** rather than forked into the engine:
+  chrome `Logic:` classes resolve through `ObjectCreator` exactly like traits, so
+  a Cameo `ProductionTooltipLogic` overrides Common's with no engine round trip
+  (same trick as `SelectionDecorations`, `57685c3a3`). This matters because the
+  widget lives in `engine/`, which **cannot be committed from this repo**.
+- Data model: add a second fluent key per actor (`.flavor` next to
+  `.description`) rather than a separator convention inside one string, so
+  translators and audits can treat them independently.
+
+*Content pass — this is the real cost.* **2021 `Description:` fields** in
+ContentPacks alone: **1159 already fluent keys**, **853 still inline prose**.
+Flavour text is a new line for each, and it is writing, not scripting — there is
+no way to generate it. Sequence it AFTER the balance program: the rules line
+states final numbers, so writing it earlier means writing it twice. The 853
+inline ones should migrate to `.ftl` first (DESIGN.md §7 already requires that),
+which makes the flavour pass a pure `.ftl` job checked by `audit_display_text` +
+`audit_fluent`.
+
+**Recommendation:** build the styling mechanism whenever it is wanted (it is
+self-contained and improves every existing description immediately), but do the
+flavour-writing in faction-sized batches after balance settles.
 
 ## ★ MAJOR PROGRAM (2026-07-25): mod-synthesis balance overhaul — see [`BALANCE_SYNTHESIS.md`](BALANCE_SYNTHESIS.md)
 
@@ -248,8 +394,13 @@ AA-gating, rock-paper-scissors) are captured in `BALANCE_SYNTHESIS.md` + `ORIGIN
 
 ## Code health program
 
-Five recurring tracks run with a 7-day grace period; `run_all.sh` blocks when
-any track is overdue. Registry and procedures: [`docs/audit/PERIODIC.md`](../audit/PERIODIC.md)
+Five recurring tracks run with a 7-day grace period. Each track's *script* is a
+ratchet that blocks `run_all.sh` on a regression. Being merely **overdue** does
+NOT block the per-commit suite (it is reported loudly; `run_all.sh` passes
+`--warn-only`) — enforce the calendar with the strict
+`python tools/audit/audit_periodic_freshness.py` in a scheduled run. A **BROKEN**
+entry (registered script or evidence file missing) blocks unconditionally.
+Registry and procedures: [`docs/audit/PERIODIC.md`](../audit/PERIODIC.md)
 and [`docs/audit/periodic.json`](../audit/periodic.json).
 
 - **Code duplication** — `python tools/audit/audit_code_duplication.py`; every 30 days; baseline C1/C2/C3: **10/14/10**.

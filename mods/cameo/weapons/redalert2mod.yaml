@@ -1238,10 +1238,9 @@ SyndicateFireballLauncher:
 	Warhead@Flame_Heavy_Percentage:
 		Damage: 1
 RA2RTruckRocket:
-	Inherits: ^RA2Grenade
-	Inherits@2: ^LightFlameWeapon
-	Inherits@3: ^ShrapnelWeapon
-	Inherits@4: ^RA2MediumMissile
+	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
+	Inherits@fx: ^Effect_MissileHE_Medium_RA2
 	ReloadDelay: 108
 	Burst: 8
 	BurstDelays: 3
@@ -1249,48 +1248,12 @@ RA2RTruckRocket:
 	MinRange: 1555
 	Report: vintatta.wav
 	ValidTargets: Ground, Water
-	Projectile: Bullet
-		Speed: 333
-		Inaccuracy: 777
-		Image: d2k_missile2
-		Palette: d2keffect
-		TrailImage: large_trail
-		LaunchAngle: 77
-	Warhead@Demolition_Light:
+	Warhead@MissileHE_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+		Damage: 8000
+	Warhead@MissileHE_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@LightFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
-		ValidTargets: Ground, Water, Air
+		Damage: 4
 
 LatinBuggyRocket:
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -1430,6 +1393,7 @@ LatinBuggyRocket_elite:
 	Inherits@4: ^Effect_Flame_Medium
 	Inherits@3: ^RA2Grenade
 	Inherits@4: ^RA2HeavyMissile
+	Inherits@fx2: ^Effect_Demolition_Heavy
 	Report: vaegatta.wav, vaegattb.wav
 	Range: 10000
 	Projectile: NukeLaunch

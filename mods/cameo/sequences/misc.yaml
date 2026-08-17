@@ -1876,13 +1876,171 @@ smokey:
 		Length: *
 		ZOffset: 1023
 
-small_smoke_trail:
+ts_small_smoke_trail:
+	Defaults:
+		AlphaFade: true
 	idle:
 		Filename: tssmokey2.shp
 		Length: *
 		ZOffset: 1023
-		Offset: 0, 0, 24
-		AlphaFade: true
+		IgnoreWorldTint: true
+
+ts_large_smoke_trail:
+	idle:
+		Filename: tssmokey.shp
+		Length: *
+		ZOffset: 1023
+		IgnoreWorldTint: true
+
+ts_tiny_clsn:
+	idle:
+		Filename: tss_clsn16.shp
+		Length: *
+		ZOffset: 1023
+
+ts_small_clsn:
+	idle:
+		Filename: tss_clsn22.shp
+		Length: *
+		ZOffset: 1023
+
+ts_medium_clsn:
+	idle:
+		Filename: tss_clsn30.shp
+		Length: *
+		ZOffset: 1023
+
+ts_large_clsn:
+	idle:
+		Filename: tss_clsn42.shp
+		Length: *
+		ZOffset: 1023
+
+ts_verylarge_clsn:
+	idle:
+		Filename: tss_clsn58.shp
+		Length: *
+		ZOffset: 1023
+
+ts_tiny_twlt:
+	idle:
+		Filename: tstwlt026.shp
+		Length: *
+		ZOffset: 1023
+
+ts_small_twlt:
+	idle:
+		Filename: tstwlt036.shp
+		Length: *
+		ZOffset: 1023
+
+ts_medium_twlt:
+	idle:
+		Filename: tstwlt050.shp
+		Length: *
+		ZOffset: 1023
+
+ts_large_twlt:
+	idle:
+		Filename: tstwlt070.shp
+		Length: *
+		ZOffset: 1023
+
+ts_verylarge_twlt:
+	idle:
+		Filename: tstwlt100.shp
+		Length: *
+		ZOffset: 1023
+
+ts_small_explosion:
+	idle:
+		Filename: tsexplosml.shp
+		Length: *
+		ZOffset: 1023
+
+ts_medium_explosion:
+	idle:
+		Filename: tsexplomed.shp
+		Length: *
+		ZOffset: 1023
+
+ts_large_explosion:
+	idle:
+		Filename: tsexplolrg.shp
+		Length: *
+		ZOffset: 1023
+
+ts_tiny_bang:
+	idle:
+		Filename: tss_bang16.shp
+		Length: *
+		ZOffset: 1023
+
+ts_small_bang:
+	idle:
+		Filename: tss_bang24.shp
+		Length: *
+		ZOffset: 1023
+
+ts_medium_bang:
+	idle:
+		Filename: tss_bang34.shp
+		Length: *
+		ZOffset: 1023
+
+ts_large_bang:
+	idle:
+		Filename: tss_bang48.shp
+		Length: *
+		ZOffset: 1023
+
+ts_tiny_brnl:
+	idle:
+		Filename: tss_brnl20.shp
+		Length: *
+		ZOffset: 1023
+
+ts_small_brnl:
+	idle:
+		Filename: tss_brnl30.shp
+		Length: *
+		ZOffset: 1023
+
+ts_medium_brnl:
+	idle:
+		Filename: tss_brnl40.shp
+		Length: *
+		ZOffset: 1023
+
+ts_large_brnl:
+	idle:
+		Filename: tss_brnl58.shp
+		Length: *
+		ZOffset: 1023
+
+ts_tiny_tumu:
+	idle:
+		Filename: tss_tumu22.shp
+		Length: *
+		ZOffset: 1023
+
+ts_small_tumu:
+	idle:
+		Filename: tss_tumu30.shp
+		Length: *
+		ZOffset: 1023
+
+ts_medium_tumu:
+	idle:
+		Filename: tss_tumu42.shp
+		Length: *
+		ZOffset: 1023
+
+ts_large_tumu:
+	idle:
+		Filename: tss_tumu60.shp
+		Length: *
+		ZOffset: 1023
 
 red_smokey:
 	idle:

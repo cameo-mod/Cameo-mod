@@ -374,6 +374,11 @@ ra2_soviets_teslacoil:
 		ChargeAudio: btespow.wav
 		MaxCharges: 1
 		ReloadDelay: 75
+		# Maintainer 2026-08-15: RA1 charges 25, RA2 charges 20. Written OUT rather
+		# than left to the engine's default of 22 — an absent key silently pinned
+		# this coil's charge to whatever the engine ships, and W16 prices the
+		# charge share, so the number has to be a decision rather than a leftover.
+		InitialChargeDelay: 20
 	WithMakeAnimation:
 	WithIdleOverlay@powered:
 		Sequence: idle-powered

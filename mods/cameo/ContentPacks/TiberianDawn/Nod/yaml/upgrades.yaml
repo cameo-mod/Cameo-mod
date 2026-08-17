@@ -35,7 +35,7 @@
 		Modifier: 130
 	ReloadDelayMultiplier@td_nod_upgrade_elitecapacitors:
 		RequiresCondition: td_nod_upgrade_elitecapacitors
-		Modifier: 70
+		Modifier: 115
 	RangeMultiplier@td_nod_upgrade_elitecapacitors:
 		RequiresCondition: td_nod_upgrade_elitecapacitors
 		Modifier: 115
@@ -50,6 +50,13 @@
 		Prerequisites: td_nod_upgrade_elitecapacitors
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_elitecapacitors
+
+^BurningLasers:
+	GrantConditionOnPrerequisite@td_nod_upgrade_burninglasers:
+		Condition: td_nod_upgrade_burninglasers
+		Prerequisites: td_nod_upgrade_burninglasers
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_burninglasers
 
 ^ImprovedArtilleries:
 	FirepowerMultiplier@td_nod_upgrade_improvedartilleries:
@@ -258,6 +265,21 @@ td_nod_upgrade_elitecapacitors:
 		Queue: Research
 		Description: upgrade_elitecapacitors.description
 		Prerequisites: ~td_nod_templeofnod, td_nod_templeprime, !td_nod_upgrade_elitecapacitors
+	RenderSprites:
+		Image: elitecapacitorsicon
+	ProvidesPrerequisite:
+
+td_nod_upgrade_burninglasers:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Burning Lasers
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_burninglasers.description
+		Prerequisites: ~td_nod_templeofnod, td_nod_templeprime, td_nod_upgrade_elitecapacitors, !td_nod_upgrade_burninglasers
 	RenderSprites:
 		Image: elitecapacitorsicon
 	ProvidesPrerequisite:

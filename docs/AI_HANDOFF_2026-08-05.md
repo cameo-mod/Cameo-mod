@@ -151,6 +151,99 @@ I got focused on the rename and forgot to check `git branch --show-current` befo
 
 ---
 
+## 1.8. Letter to Devin — Claude, 2026-08-11
+
+Hi Devin,
+
+Thanks for the Tesla cleanup letter and for wiring `effective_damage` into the ledger —
+that commit is what made me actually review the metric, and it turned up two real bugs.
+Everything below is so you can take over completely if I disappear mid-session.
+
+### ⭐ Start here, always
+
+**`docs/design/BALANCE_PROGRAM_PLAN.md` is the single source of truth.** It holds the
+board (W1–W12), file ownership, per-item acceptance criteria, and one `VERIFY` command
+per item. Read §0 before touching anything. Do **not** keep a second status list
+anywhere — every other doc links to that one, on purpose.
+
+**Your item is W2** (`^LightFlameWeapon` → 3-way split + the new `^Warhead_Inferno_*`).
+It is `⬜ READY`, the maintainer has granted the warhead order, and the exact mapping
+table is in the item. It is in file set **B** (weapon content), which is disjoint from
+my set **A** (pipeline tools) — so we can genuinely run in parallel. The one collision
+risk is `mods/cameo/weapons/weapons.yaml`: W2 and W7 both touch it, and W7 waits for you.
+
+### What I did this session (so you can trust or re-verify it)
+
+- **`ca2e2da41`** — the audit ratchets were failing on *other people's uncommitted work*.
+  `scanning.iter_files` walked the raw filesystem, so three untracked scratch scripts in
+  `tools/` counted as untested modules and turned `run_all.sh` red for everyone. Now
+  git-tracked-only, with a fallback to scan-everything outside a checkout. Also fixed the
+  freshness gate so a *calendar* fact can never fail a per-commit gate (`--warn-only`;
+  BROKEN still blocks), fixed an E2 swallow in `effective_damage.py`, and folded the
+  duplicated `CENTRAL`/`OLD_FAMILIES` tables into `tools/audit/weapon_families.py`.
+  **When I started, 1 of 5 periodic audits passed. Now all 5 do.**
+- **`106c77cba`** — two engine-fidelity bugs in `effective_damage`. (1) The scatter model
+  assumed a uniform disc; the engine's `WVec.FromPDF(rng, 2)` is per-axis *triangular*
+  (mean miss 0.52σ, not 0.67σ), so inaccurate/slow weapons were under-valued — 1950 of
+  2024 rows moved up, median +4.9%. (2) A single-value `Range` with a multi-step
+  `Falloff` makes `GetDamageFalloff` return 0 at every distance; the tool was inventing a
+  per-step grid and scoring broken warheads as if they worked. **That is how W2's bug was
+  found.** Also wrote `docs/design/EFFECTIVE_DAMAGE.md` — the metric had no spec at all.
+- **`f8421d345`** — the **K coefficient** (W1). This is the piece that unblocks pricing.
+
+### The one idea worth internalising before you touch pricing
+
+`effective` is **linear in Damage**, so a weapon's entire geometry — spread, falloff,
+projectile speed, inaccuracy, Versus — collapses into one dimensionless number `K`:
+
+```
+effective_dps  = Damage_total × (burst / eff_reload) × FirepowerMultiplier × K
+Damage_required = target_dps × eff_reload / (burst × FP × K)
+Damage_yaml     = round(Damage_required / 2000) × 2000
+FirepowerMult   = Damage_required / Damage_yaml
+```
+
+This answers the maintainer's hardest question ("if the sheet says 2351.85, how does that
+get into the yaml?"): **it never does.** The designer sets geometry for feel, K measures
+what that geometry is worth, and the pipeline solves for `Damage` on the 2000 grid with
+`FirepowerMultiplier` absorbing the remainder. It also retroactively justifies the grid —
+the %-twin is `Damage/2000` with integer division, so off-grid Damage makes the twin's
+share drift and K stops being well-defined.
+
+### Three traps I hit — please don't repeat them
+
+1. **Never edit a shell script while it is running.** I edited `run_all.sh` mid-run; bash
+   re-reads the file as it executes and the run died with "unexpected EOF". Wait for it.
+2. **The boot gate needs a cutoff, not just a grep.** `perf.log` survives between runs, so
+   grepping for `MenuPostProcessEffect.PostWorldLoaded` can match the *previous* boot.
+   Snapshot a timestamp before launching and assert `perf.log` mtime is newer.
+3. **Don't tune an audit so it stops flagging your own commit.** R1 flagged my BUILD 3
+   commit. The fix that was legitimate was structural (an abstract `^Template` has no
+   ledger row, so the rule was unsatisfiable, not strict) — not a carve-out. If you cannot
+   state the fix without mentioning your own commit, it is the wrong fix.
+
+### Also worth knowing
+
+- `run_all.sh` is green **today**. If you find it red, run the five periodic audits
+  individually first — the failure is usually a ratchet, and the ratchet is usually right.
+- My commit trailer is `Claude Opus 5 (1M context)`. The project file still shows the 4.8
+  string; the maintainer has not objected to the accurate one. **Keep using your own** —
+  the trailer is the only provenance signal we have on a shared git identity.
+- `audit_recent_changes` R3 is deliberately review-only now: three demonstrated
+  false-positive classes, including *your* PR #251 (authored "Zan Yewang" with a correct
+  Devin trailer). `STRICT_TRAILER = True` restores blocking if the maintainer wants it.
+- The maintainer's `docs/audit/latest` stash was superseded and dropped this session;
+  recovery SHA is in the session log if it is ever wanted:
+  `git stash store 4aa936d0b58e7b52ced91963e5d4880e8c832d31`.
+
+Take W2. Update its status row in `BALANCE_PROGRAM_PLAN.md` **in the same commit** as the
+work, and run the §3 gate. If you finish and I am still gone, W3 → W4 → W5 are mine but
+fully specified — take them in that order.
+
+— Claude (Opus 5)
+
+---
+
 ## 2. What the previous AI (Claude/Opus) completed
 
 | Commit (examples) | What was done |

@@ -1,0 +1,262 @@
+[
+  {
+    "legacy": "^LightMissile",
+    "target": "^Warhead_MissileAP_Light",
+    "armors": 16,
+    "old_mean": 55,
+    "new_mean": 101.44,
+    "ratio": 1.844,
+    "corr": 0.774,
+    "runner_up": "MissileHE_Light (corr 0.3)"
+  },
+  {
+    "legacy": "^LightChemicalWeapon",
+    "target": "^Warhead_Chemical_Light",
+    "armors": 16,
+    "old_mean": 55,
+    "new_mean": 91.19,
+    "ratio": 1.658,
+    "corr": 0.985
+  },
+  {
+    "legacy": "^Grenade",
+    "target": "^Warhead_Demolition_Light",
+    "armors": 16,
+    "old_mean": 55,
+    "new_mean": 85.5,
+    "ratio": 1.555,
+    "corr": 0.944,
+    "runner_up": "Concussion_Light (corr 0.791)"
+  },
+  {
+    "legacy": "^MediumMissile",
+    "target": "^Warhead_MissileAP_Medium",
+    "armors": 16,
+    "old_mean": 62.5,
+    "new_mean": 95.12,
+    "ratio": 1.522,
+    "corr": 0.774,
+    "runner_up": "MissileHE_Medium (corr 0.3)"
+  },
+  {
+    "legacy": "^MagicWeapon",
+    "target": "^Warhead_Magic_Heavy",
+    "armors": 17,
+    "old_mean": 68.82,
+    "new_mean": 36,
+    "ratio": 0.523,
+    "corr": -0.255,
+    "excluded": "target profile is FLAT (32 vs all) \u2014 the %-equalizer design; converting drops the legacy ladder entirely"
+  },
+  {
+    "legacy": "^SmallArms",
+    "target": "^Warhead_Bullet_Light",
+    "armors": 16,
+    "old_mean": 55,
+    "new_mean": 80.12,
+    "ratio": 1.457,
+    "corr": 0.997
+  },
+  {
+    "legacy": "^MediumChemicalWeapon",
+    "target": "^Warhead_Chemical_Medium",
+    "armors": 16,
+    "old_mean": 62.5,
+    "new_mean": 90.69,
+    "ratio": 1.451,
+    "corr": 0.985
+  },
+  {
+    "legacy": "^FlakWeapon",
+    "target": "^Warhead_Flak_Medium",
+    "armors": 16,
+    "old_mean": 62.5,
+    "new_mean": 89.75,
+    "ratio": 1.436,
+    "corr": 0.988
+  },
+  {
+    "legacy": "^MediumCannon",
+    "target": "^Warhead_CannonHE_Medium",
+    "armors": 16,
+    "old_mean": 62.5,
+    "new_mean": 89.44,
+    "ratio": 1.431,
+    "corr": 0.985
+  },
+  {
+    "legacy": "^TankDestroyerCannon",
+    "target": "^Warhead_CannonAP_Light",
+    "armors": 16,
+    "old_mean": 55,
+    "new_mean": 77.88,
+    "ratio": 1.416,
+    "corr": 0.988
+  },
+  {
+    "legacy": "^LightFlameWeapon",
+    "target": "^Warhead_Flame_Light",
+    "armors": 16,
+    "old_mean": 55,
+    "new_mean": 76.75,
+    "ratio": 1.395,
+    "corr": 0.926,
+    "excluded": "W2 owns it: maintainer split it across four families per weapon, and its Range:500 bug is an open P1"
+  },
+  {
+    "legacy": "^HeavyChemicalWeapon",
+    "target": "^Warhead_Chemical_Heavy",
+    "armors": 16,
+    "old_mean": 70,
+    "new_mean": 93,
+    "ratio": 1.329,
+    "corr": 0.985
+  },
+  {
+    "legacy": "^MediumFlameWeapon",
+    "target": "^Warhead_Flame_Medium",
+    "armors": 16,
+    "old_mean": 62.5,
+    "new_mean": 80.88,
+    "ratio": 1.294,
+    "corr": 0.926
+  },
+  {
+    "legacy": "^HeavyMissile",
+    "target": "^Warhead_MissileAP_Heavy",
+    "armors": 16,
+    "old_mean": 70,
+    "new_mean": 90.5,
+    "ratio": 1.293,
+    "corr": 0.774,
+    "runner_up": "MissileHE_Heavy (corr 0.3)"
+  },
+  {
+    "legacy": "^ShrapnelWeapon",
+    "target": "^Warhead_Concussion_Medium",
+    "armors": 16,
+    "old_mean": 62.5,
+    "new_mean": 79.94,
+    "ratio": 1.279,
+    "corr": 0.947
+  },
+  {
+    "legacy": "^HeavyAAWeapon",
+    "target": "^Warhead_MissileAA_Heavy",
+    "armors": 16,
+    "old_mean": 70,
+    "new_mean": 89.5,
+    "ratio": 1.279,
+    "corr": 0.874
+  },
+  {
+    "legacy": "^HeavyBomb",
+    "target": "^Warhead_Demolition_Heavy",
+    "armors": 16,
+    "old_mean": 70,
+    "new_mean": 88,
+    "ratio": 1.257,
+    "corr": 0.979
+  },
+  {
+    "legacy": "^TeslaWeapon",
+    "target": "^Warhead_Tesla_Heavy",
+    "armors": 17,
+    "old_mean": 68.82,
+    "new_mean": 84,
+    "ratio": 1.221,
+    "corr": 0.633
+  },
+  {
+    "legacy": "^ArrowWeapon",
+    "target": "^Warhead_Arrow_Light",
+    "armors": 16,
+    "old_mean": 55,
+    "new_mean": 66.56,
+    "ratio": 1.21,
+    "corr": 0.844
+  },
+  {
+    "legacy": "^Chaingun",
+    "target": "^Warhead_Bullet_Medium",
+    "armors": 16,
+    "old_mean": 62.5,
+    "new_mean": 74.81,
+    "ratio": 1.197,
+    "corr": 0.971
+  },
+  {
+    "legacy": "^HeavyFlameWeapon",
+    "target": "^Warhead_Flame_Heavy",
+    "armors": 16,
+    "old_mean": 70,
+    "new_mean": 83.62,
+    "ratio": 1.195,
+    "corr": 0.909
+  },
+  {
+    "legacy": "^HeavyCannon",
+    "target": "^Warhead_CannonHE_Heavy",
+    "armors": 16,
+    "old_mean": 70,
+    "new_mean": 83.5,
+    "ratio": 1.193,
+    "corr": 0.985
+  },
+  {
+    "legacy": "^TeslaChargedWeapon",
+    "target": "^Warhead_Tesla_Super",
+    "armors": 17,
+    "old_mean": 75.88,
+    "new_mean": 88.29,
+    "ratio": 1.164,
+    "corr": 0.662
+  },
+  {
+    "legacy": "^SwordWeapon",
+    "target": "^Warhead_Melee_Medium",
+    "armors": 16,
+    "old_mean": 62.5,
+    "new_mean": 55.06,
+    "ratio": 0.881,
+    "corr": 0.762
+  },
+  {
+    "legacy": "^NuclearWarhead",
+    "target": "^Warhead_Nuclear_Super",
+    "armors": 16,
+    "old_mean": 70,
+    "new_mean": 77.5,
+    "ratio": 1.107,
+    "corr": -0.05,
+    "excluded": "family is hand-tuned to BLD>VEH>AIR>INF; the legacy ladder is anti-heavy, so this re-roles it"
+  },
+  {
+    "legacy": "^MissileWeapon",
+    "target": "^Warhead_MissileAP_Medium",
+    "armors": 16,
+    "old_mean": 106.25,
+    "new_mean": 95.12,
+    "ratio": 0.895,
+    "corr": 0.626,
+    "runner_up": "MissileHE_Medium (corr 0.336)"
+  },
+  {
+    "legacy": "^RailgunWeapon",
+    "target": "^Warhead_Railgun_Heavy",
+    "armors": 17,
+    "old_mean": 68.82,
+    "new_mean": 75.53,
+    "ratio": 1.097,
+    "corr": 0.745
+  },
+  {
+    "legacy": "^LaserWeapon",
+    "target": "^Warhead_Laser_Heavy",
+    "armors": 17,
+    "old_mean": 68.82,
+    "new_mean": 68.94,
+    "ratio": 1.002,
+    "corr": 0.522
+  }
+]

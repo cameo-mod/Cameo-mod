@@ -170,11 +170,12 @@ td_nod_venom:
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@cloak: ^CloakedAircraft
 	Inherits@EliteCapacitors: ^EliteCapacitors
+	Inherits@BurningLasers: ^BurningLasers
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@decoration: ^NodRankDecoration
 	Inherits@eject: ^AircraftEjectOnDeath
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -193,10 +194,21 @@ td_nod_venom:
 		HpPerStep: 1375
 	ChangesHealth@SelfHealing:
 		Step: 11
-	Armament@PRIMARY:
+	Armament@Base:
 		Weapon: VenomLaser
 		LocalOffset: 750,0,-250
 		PauseOnCondition: !ammo
+		RequiresCondition: !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
+	Armament@Elite:
+		Weapon: VenomLaserInferno
+		LocalOffset: 750,0,-250
+		PauseOnCondition: !ammo
+		RequiresCondition: td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
+	Armament@Burning:
+		Weapon: VenomLaserBurning
+		LocalOffset: 750,0,-250
+		PauseOnCondition: !ammo
+		RequiresCondition: td_nod_upgrade_burninglasers
 	AttackAircraft:
 		FacingTolerance: 80
 		OpportunityFire: false

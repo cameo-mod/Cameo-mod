@@ -1,10 +1,15 @@
 # Elite weapon gating audit (E2)
 
-Armament@*ELITE* blocks without RequiresCondition: rank-elite: **16**
+Armament@*ELITE* blocks without RequiresCondition: rank-elite: **21**
 
 | File | Line | Actor | Trait | Issue |
 |---|---|---|---|---|
 | ContentPacks/RedAlert2/Allies/yaml/defenses.yaml | 308 | ra2_allies_patriotmissilesystem | Armament@missileeliteThunderbolt | RequiresCondition but NOT rank-elite |
+| ContentPacks/TiberianDawn/Nod/yaml/aircraft.yaml | 202 | td_nod_venom | Armament@Elite | RequiresCondition but NOT rank-elite |
+| ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml | 487 | td_nod_laserturret | Armament@Elite | RequiresCondition but NOT rank-elite |
+| ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml | 593 | td_nod_obeliskoflight | Armament@Elite | RequiresCondition but NOT rank-elite |
+| ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml | 757 | td_nod_buggymkii | Armament@LaserElite | RequiresCondition but NOT rank-elite |
+| ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml | 778 | td_nod_buggymkii | Armament@LaserAAElite | RequiresCondition but NOT rank-elite |
 | rules/generals.yaml | 3950 | glmaura | Armament@NormalElite | RequiresCondition but NOT rank-elite |
 | rules/generals.yaml | 3957 | glmaura | Armament@ToxinElite | RequiresCondition but NOT rank-elite |
 | rules/generals.yaml | 3964 | glmaura | Armament@ToxinBetaElite | RequiresCondition but NOT rank-elite |

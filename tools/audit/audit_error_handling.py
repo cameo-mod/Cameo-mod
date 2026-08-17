@@ -30,6 +30,7 @@ import sys
 
 from miniyaml import find_repo_root
 from report import h1, h2, relpath, table
+from scanning import iter_files
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -103,9 +104,9 @@ def main() -> int:
     unparsed: list[list[str]] = []
 
     for scan in SCAN_DIRS:
-        for path in sorted((root / scan).rglob("*.py")):
-            if any(part in SKIP_PARTS for part in path.parts):
-                continue
+        # scanning.iter_files: shared skip list + git-TRACKED files only, so an
+        # uncommitted scratch script cannot move this ratchet (2026-08-11).
+        for path in iter_files(root / scan, ".py"):
             scanned += 1
             rel = relpath(str(path), root)
             source = path.read_text(encoding="utf-8", errors="replace")

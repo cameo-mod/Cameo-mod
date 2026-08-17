@@ -87,9 +87,9 @@ TankBusterBeamCannon:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 
 TankBusterBeamCannonCharged:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^HeavyCannon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 96
 	Range: 5190
 	Report: JUTankB_weapFire1a.wav, JUTankB_weapFire1b.wav, JUTankB_weapFire1c.wav, JUTankB_weapFire1d.wav, JUTankB_weapFire1e.wav, JUTankB_weapFire1f.wav, JUTankB_weapFire1g.wav, JUTankB_weapFire1h.wav
@@ -103,29 +103,13 @@ TankBusterBeamCannonCharged:
 		DistortionAnimation: 50
 		SegmentLength: 500
 		Inaccuracy: 100
-	Warhead@LightFlameWeapon: SpreadDamage
-		Damage: 8000
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 4
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 8000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 4
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyCannon: SpreadDamage
-		Damage: 8000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		Damage: 4
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 12
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 
 PlasmaFlamer:

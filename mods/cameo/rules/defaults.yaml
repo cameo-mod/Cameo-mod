@@ -909,6 +909,7 @@
 
 ^VehicleBuffs:
 	Inherits@GlobalBuffs: ^GlobalBuffs
+	Inherits@Helium3TeamUpgradeMobile: ^Helium3TeamUpgradeMobile
 	Inherits: ^NanoTechRepairs
 	Inherits@ModernFireControlSystems: ^ModernFireControlSystems
 	Inherits@Blitzkrieg: ^Blitzkrieg
@@ -935,6 +936,7 @@
 
 ^AircraftBuffs:
 	Inherits@GlobalBuffs: ^GlobalBuffs
+	Inherits@Helium3TeamUpgradeMobile: ^Helium3TeamUpgradeMobile
 	Inherits@TiberiumAdaptability: ^TiberiumAdaptability
 	DamageMultiplier@AircraftBuffs:
 		Modifier: 90
@@ -2011,8 +2013,6 @@
 		Type: Scout
 	Armor@Secondary:
 		Type: Fighter
-	DamageMultiplier@FlyingInfantry:
-		Modifier: 200
 	FirepowerMultiplier@FlyingInfantry:
 		Modifier: 50
 	RangeMultiplier@FlyingInfantry:
@@ -3971,7 +3971,7 @@
 		Position: Center
 		Palette: player
 		IsPlayerPalette: True
-		Scale: 0.50
+		Scale: 0.40
 		ScaleWithZoom: True
 	GrantCondition@disable:
 		Condition: disabled
@@ -4154,7 +4154,7 @@
 		Position: Center
 		Palette: player
 		IsPlayerPalette: True
-		Scale: 0.50
+		Scale: 0.40
 		ScaleWithZoom: True
 	GpsDot:
 		String: Forward
@@ -4803,6 +4803,12 @@
 		RequiresCondition: global-bounty
 	TakesBounty:
 		RequiresCondition: global-bounty
+	# Every actor offers a MoonCoin bounty unconditionally, and it is inert for everyone:
+	# GivesBounty only ever pays a killer that carries a TakesBounty listing this exact
+	# Type, which today is only Schwarzer Mond with Cryptofascism researched. Keeping it a
+	# separate node and Type leaves the `global-bounty` game option above untouched.
+	GivesBounty@mooncoin:
+		Type: MoonCoin
 	WithColoredOverlay@BOUNTY:
 		Color: FFFF00BB
 		RequiresCondition: glabounty1 || glabounty2 || glabounty3
@@ -5648,67 +5654,45 @@
 	ExternalCondition@INVULNERABILITY:
 		Condition: invulnerability
 
-^GatlingSpeedUpTurretBehavior:
-	ReloadDelayMultiplier@GattlingSpeed1:
+# W8 (2026-08-15) — the gatling spin-up, as a METER instead of a condition ladder.
+# Replaces the three ^GatlingSpeedUp* templates, now deleted: 20 conditional
+# multipliers on the turret variant, 30 on the unit, 40 on the special unit, across
+# 43 actors — roughly 1300 trait objects — collapse into three traits per template
+# that move CONTINUOUSLY rather than in ten visible 5% steps.
+#
+# End-points reproduce the ladder EXACTLY, measured not assumed:
+#   reload  0.95^10 = 0.599 -> ReloadDelayTo 60   (lower = faster)
+#   range   1.02^10 = 1.219 -> RangeTo       122
+# The turret template has no speed term, so neither does this.
+#
+# The `gatling` condition is kept as the FILL TRIGGER rather than as ten thresholds:
+# GrantConditionOnAttack still counts shots, but only `>= 1` is read, so the elite
+# variant's faster stacking no longer needs a parallel ladder — it simply reaches the
+# trigger sooner and the meter does the rest.
+^GatlingSpinUpTurretBehavior:
+	PhysicalState@SpinUp:
+		Name: SpinUp
+		MinValue: 0
+		MaxValue: 100
+		RelaxedValue: 0
+		InitialValue: 0
+		RelaxationLinear: 10
+		RelaxationDelay: 30
+		RelaxationInterval: 1
+	ChangesPhysicalState@SpinUp:
+		PhysicalStateName: SpinUp
+		Amount: 10
+		Delay: 5
+		AffectedByModifiers: false
 		RequiresCondition: gatling >= 1
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed2:
-		RequiresCondition: gatling >= 2
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed3:
-		RequiresCondition: gatling >= 3
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed4:
-		RequiresCondition: gatling >= 4
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed5:
-		RequiresCondition: gatling >= 5
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed6:
-		RequiresCondition: gatling >= 6
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed7:
-		RequiresCondition: gatling >= 7
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed8:
-		RequiresCondition: gatling >= 8
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed9:
-		RequiresCondition: gatling >= 9
-		Modifier: 95
-	ReloadDelayMultiplier@GattlingSpeed10:
-		RequiresCondition: gatling >= 10
-		Modifier: 95
-	RangeMultiplier@GattlingSpeed1:
-		RequiresCondition: gatling >= 1
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed2:
-		RequiresCondition: gatling >= 2
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed3:
-		RequiresCondition: gatling >= 3
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed4:
-		RequiresCondition: gatling >= 4
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed5:
-		RequiresCondition: gatling >= 5
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed6:
-		RequiresCondition: gatling >= 6
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed7:
-		RequiresCondition: gatling >= 7
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed8:
-		RequiresCondition: gatling >= 8
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed9:
-		RequiresCondition: gatling >= 9
-		Modifier: 102
-	RangeMultiplier@GattlingSpeed10:
-		RequiresCondition: gatling >= 10
-		Modifier: 102
+	ModifiesCombatProportionalToPhysicalState@SpinUp:
+		PhysicalStateName: SpinUp
+		ReloadDelayFrom: 100
+		ReloadDelayTo: 60
+		RangeFrom: 100
+		RangeTo: 122
+		PitchFrom: 100
+		PitchTo: 120
 	GrantConditionOnAttack@gatling:
 		Condition: gatling
 		ArmamentNames: primary, garrisoned
@@ -5730,131 +5714,23 @@
 		RevokeOnNewTarget: false
 		RequiresCondition: rank-elite
 
-^GatlingSpeedUpUnitBehavior:
-	Inherits: ^GatlingSpeedUpTurretBehavior
-	SpeedMultiplier@GattlingSpeed1:
-		RequiresCondition: gatling >= 1
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed2:
-		RequiresCondition: gatling >= 2
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed3:
-		RequiresCondition: gatling >= 3
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed4:
-		RequiresCondition: gatling >= 4
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed5:
-		RequiresCondition: gatling >= 5
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed6:
-		RequiresCondition: gatling >= 6
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed7:
-		RequiresCondition: gatling >= 7
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed8:
-		RequiresCondition: gatling >= 8
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed9:
-		RequiresCondition: gatling >= 9
-		Modifier: 95
-	SpeedMultiplier@GattlingSpeed10:
-		RequiresCondition: gatling >= 10
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed1:
-		RequiresCondition: gatling >= 1
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed2:
-		RequiresCondition: gatling >= 2
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed3:
-		RequiresCondition: gatling >= 3
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed4:
-		RequiresCondition: gatling >= 4
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed5:
-		RequiresCondition: gatling >= 5
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed6:
-		RequiresCondition: gatling >= 6
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed7:
-		RequiresCondition: gatling >= 7
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed8:
-		RequiresCondition: gatling >= 8
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed9:
-		RequiresCondition: gatling >= 9
-		Modifier: 95
-	TurnSpeedMultiplier@GattlingSpeed10:
-		RequiresCondition: gatling >= 10
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed1:
-		RequiresCondition: gatling >= 1
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed2:
-		RequiresCondition: gatling >= 2
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed3:
-		RequiresCondition: gatling >= 3
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed4:
-		RequiresCondition: gatling >= 4
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed5:
-		RequiresCondition: gatling >= 5
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed6:
-		RequiresCondition: gatling >= 6
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed7:
-		RequiresCondition: gatling >= 7
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed8:
-		RequiresCondition: gatling >= 8
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed9:
-		RequiresCondition: gatling >= 9
-		Modifier: 95
-	TurretTurnSpeedMultiplier@GattlingSpeed10:
-		RequiresCondition: gatling >= 10
-		Modifier: 95
+# Unit variant: adds the SPEED term. The ladder slows a spinning-up gatling
+# (0.95^10 = 0.599) - you root yourself to gain fire rate, which is the design and
+# is what the mod has always shipped. (The W8 spec claimed 122% here; all 30
+# SpeedMultiplier entries are 95, so it was inverted. Verified 2026-08-15.)
+^GatlingSpinUpUnitBehavior:
+	Inherits: ^GatlingSpinUpTurretBehavior
+	ModifiesCombatProportionalToPhysicalState@SpinUp:
+		SpeedFrom: 100
+		SpeedTo: 60
 
-^GatlingSpeedUpSpecialUnitBehavior:
-	Inherits: ^GatlingSpeedUpUnitBehavior
-	DamageMultiplier@GattlingSpeed1:
-		RequiresCondition: gatling >= 1
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed2:
-		RequiresCondition: gatling >= 2
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed3:
-		RequiresCondition: gatling >= 3
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed4:
-		RequiresCondition: gatling >= 4
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed5:
-		RequiresCondition: gatling >= 5
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed6:
-		RequiresCondition: gatling >= 6
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed7:
-		RequiresCondition: gatling >= 7
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed8:
-		RequiresCondition: gatling >= 8
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed9:
-		RequiresCondition: gatling >= 9
-		Modifier: 95
-	DamageMultiplier@GattlingSpeed10:
-		RequiresCondition: gatling >= 10
-		Modifier: 95
+# Special-unit variant: adds the DEFENSIVE term. DamageMultiplier < 100 means less
+# damage TAKEN, so a spun-up gatling is also harder to kill (0.95^10 = 0.599).
+^GatlingSpinUpSpecialUnitBehavior:
+	Inherits: ^GatlingSpinUpUnitBehavior
+	ModifiesCombatProportionalToPhysicalState@SpinUp:
+		DamageTakenFrom: 100
+		DamageTakenTo: 60
 
 ^ConscriptionBuff:
 	ProductionCostMultiplier@global_conscription_buff:
@@ -7548,6 +7424,7 @@ CPQDEBUGDUMMY:
 ^Power:
 	Inherits: ^PowerMultiplier
 	Inherits@ReactorOverloadTeamUpgradeRA1: ^ReactorOverloadTeamUpgradeRA1
+	Inherits@Helium3TeamUpgradePower: ^Helium3TeamUpgradePower
 	Buildable:
 		Description: Provides power to the base.
 		BuildDurationModifier: 25

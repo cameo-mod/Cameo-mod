@@ -190,9 +190,17 @@ codebase.
 - **Exactly 5 stats must be unique within a class** — checked against each other; the uniqueness audit must enforce THESE AND ONLY THESE:
   1. `HP`
   2. `Speed`
-  3. **effective damage per shot** = Σ(all offensive warhead `Damage`) × `FirepowerMultiplier`
+  3. **uniqueness damage per shot** = Σ(all offensive warhead `Damage`) × `FirepowerMultiplier`
   4. `ReloadDelay` — the RAW value, **NOT** the effective/burst-adjusted reload
   5. `Range`
+
+> ⚠ **Do not confuse #3 with the ledger column `effective_damage`.** They are different
+> quantities that were both called "effective damage" until 2026-08-11. #3 is the
+> uniqueness stat above (chips EXCLUDED, FirepowerMultiplier APPLIED). The ledger's
+> `effective_damage` is the area-integrated metric (chips INCLUDED, FirepowerMultiplier
+> NOT applied, weighted by blast footprint and hit reliability) — spec:
+> [`docs/design/EFFECTIVE_DAMAGE.md`](design/EFFECTIVE_DAMAGE.md). Never feed one to the
+> other's consumer.
 - `FirepowerMultiplier` alone — or any single one of these values in isolation — need NOT be unique; on its own it is meaningless. This **supersedes** any earlier "make effective DPS unique via FirepowerMultiplier" rule: DPS is derived, and uniqueness lives on the 5 raw stats above, with #3 (damage×FP) and #4 (raw ReloadDelay) checked **separately** (two units may share one if they differ on the other).
 - Break ties by nudging a stat on its own grid: `Speed` steps of **1** (infantry) / **5** (vehicles, aircraft, ships), `Range` steps of **10**, `Damage` steps of **2000** (then FP-multiplier fine-tune), `HP` steps of **1000**.
 - **CODE NOTE:** `propose_class_rebalance.resolve_dps_uniqueness` and the uniqueness audit currently key on *effective DPS* — they must be updated to key on the 5 stats above (raw damage×FP and raw ReloadDelay separately).
@@ -498,3 +506,35 @@ A `Warhead@X:` line with **no value** is a boot crash, not a lint warning. `Weap
 ## Weapon 3-way split: projectile family naming (2026-08-07)
 
 - **The new projectile family for cannons is `Shell_`, not `Cannon_`.** `^Projectile_Shell_Light/Medium/Heavy` exists; `^Projectile_Cannon*` does not. `CannonHE_Heavy` and `CannonAP_*` weapons use `^Projectile_Shell_*` for delivery and `^Effect_CannonHE_*` / `^Effect_CannonAP_*` for impact.
+
+## `Inherits` POSITION is semantic, not cosmetic (2026-08-16)
+
+**The last node wins, and `Inherits` is a node.** `MiniYaml` walks a definition's children
+in document order; when it reaches an `Inherits`/`Inherits@X` line it splices the parent's
+resolved children in **at that point**, and anything later overrides anything earlier
+(`tools/audit/miniyaml.py` `_resolve_generic` reproduces this faithfully). Therefore:
+
+- `Inherits` at the **TOP** → the definition's own nodes win over the parent. This is what
+  almost every definition intends, and it is the tree's convention.
+- `Inherits` at the **BOTTOM** → **the parent silently overrides the definition's own values.**
+
+**How it bit us.** The W23 retrofit appended `Inherits@wh: ^Warhead_<Family>_<Level>` after
+the *last* existing `Inherits`. `^HeavyCannon`, `^MediumCannon` and `^TankDestroyerCannon`
+each already carried `Inherits@glow: ^ImpactGlow` near the END of their block (~line 81)
+while their warheads sit at line 9 — so the family inherit landed *below* the warheads and
+the family's `Damage: 2000`, `Spread: 250` and `Falloff` overrode the template's own
+carefully rescaled `Damage: 838` and its preserved geometry.
+
+**Nothing catches this.** It lints clean under `--check-yaml`, it boots to the menu, and
+`find_empty_warhead` stays 0. The only signal is a before/after resolve diff
+(`tools/balance/verify_retrofit.py`). Cost: a full debugging round, during which the yaml
+was reverted twice.
+
+**Rules:**
+1. Any tool that ADDS an `Inherits` line must insert it at the TOP of the block, never
+   append it after existing ones, unless the parent is deliberately meant to win.
+2. When a definition's own value mysteriously "doesn't apply", check where its `Inherits`
+   lines sit relative to that value BEFORE suspecting the merge engine.
+3. A weapon whose own `Warhead@X` is declared ABOVE its `Inherits` lines is already relying
+   on the parent to win — e.g. `japan_imperialscoutsman_rifle_waveforce` declares
+   `Warhead@Railgun_Heavy` at line 0 and three `Inherits` at lines 2-4.

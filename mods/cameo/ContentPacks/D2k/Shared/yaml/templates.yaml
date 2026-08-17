@@ -3,18 +3,26 @@
 		Image: dunerank
 		Sequence: rank-veteran-1
 		Palette: greyscale
+		Position: BottomRight
+		RequiresCondition: rank-veteran == 1
 	WithDecoration@RANK-2:
 		Image: dunerank
 		Sequence: rank-veteran-2
 		Palette: greyscale
+		Position: BottomRight
+		RequiresCondition: rank-veteran == 2
 	WithDecoration@RANK-3:
 		Image: dunerank
 		Sequence: rank-veteran-3
 		Palette: greyscale
+		Position: BottomRight
+		RequiresCondition: rank-veteran == 3
 	WithDecoration@RANK-ELITE:
 		Image: dunerank
 		Sequence: rank-elite
 		Palette: greyscale
+		Position: BottomRight
+		RequiresCondition: rank-elite
 
 ^D2K_MunitionsSiloBuff:
 	ExternalCondition@d2krearm:
@@ -302,7 +310,7 @@
 		Position: Center
 		Palette: player
 		IsPlayerPalette: True
-		Scale: 0.50
+		Scale: 0.40
 		ScaleWithZoom: True
 	-ActorPreviewPlaceBuildingPreview:
 	D2kActorPreviewPlaceBuildingPreview:

@@ -11,22 +11,12 @@ import sys
 from pathlib import Path
 from collections import defaultdict
 
-MOD = Path(__file__).resolve().parents[2] / "mods" / "cameo"
-CENTRAL = ["weapons/weapons.yaml", "weapons/redalert2.yaml",
-           "weapons/redalert2mod.yaml", "weapons/tiberiansun.yaml",
-           "weapons/tiberiandawn.yaml", "weapons/warcraft2.yaml",
-           "weapons/missiles.yaml"]
-FILES = [MOD / p for p in CENTRAL] + sorted((MOD / "ContentPacks").glob("*/*/yaml/weapons.yaml"))
+# CENTRAL / OLD_FAMILIES live in weapon_families.py — they were copy-pasted across
+# the weapon-split tools (audit_code_duplication C3), so a family added to one copy
+# went missing from the others.
+from weapon_families import MOD, OLD_FAMILIES, weapon_files  # noqa: E402,F401
 
-# old full-stack family templates still in weapons.yaml
-OLD_FAMILIES = {"^SmallArms", "^Chaingun", "^TankDestroyerCannon", "^MediumCannon",
-                "^HeavyCannon", "^LightMissile", "^MediumMissile", "^HeavyMissile",
-                "^FlakWeapon", "^HeavyAAWeapon", "^Grenade", "^ShrapnelWeapon",
-                "^HeavyBomb", "^LaserWeapon", "^RailgunWeapon", "^TeslaWeapon",
-                "^TeslaChargedWeapon", "^SwordWeapon", "^ArrowWeapon", "^MagicWeapon",
-                "^LightFlameWeapon", "^MediumFlameWeapon", "^HeavyFlameWeapon",
-                "^LightChemicalWeapon", "^MediumChemicalWeapon", "^HeavyChemicalWeapon",
-                "^NuclearWarhead", "^SniperWeapon", "^LightArms"}
+FILES = weapon_files()
 RE_INHERITS_OLD = re.compile(r"^\s*Inherits(?:@\w+)?\s*:\s*\^\w+")
 RE_TOPNAME = re.compile(r"^(\w+):\s*$")
 RE_WARHEAD = re.compile(r"^\s*Warhead@(\w+)\s*:\s*(\S*)")

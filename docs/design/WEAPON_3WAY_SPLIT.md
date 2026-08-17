@@ -195,7 +195,8 @@ authoritative path. One canonical retrofit tool; one family per commit; every st
 | RailgunWeapon | Railgun_Heavy | ProjectileRailgun_Heavy | EffectRailgun_Heavy | **+ ExtraDamage** |
 | TeslaWeapon | Tesla_Heavy | ProjectileLightning_Heavy | EffectTesla_Heavy | **+ ExtraDamage + EMP** |
 | TeslaChargedWeapon | TeslaCharged_Super | ProjectileLightning_Super | EffectTesla_Super | **+ ExtraDamage + EMP** |
-| SniperWeapon / ToxicWeapon / HealingWeapon / RepairWeapon | — STAY (special, not converted) | | | |
+| SniperWeapon / HealingWeapon / RepairWeapon | — STAY (special, not converted) | | | |
+| ~~ToxicWeapon~~ | ✅ **CONVERTED 2026-08-15** — no longer stays. Maintainer ordered it built into the family system; it is now a thin child of `^Warhead_Toxic_Light` keeping only its own delivery (`ReloadDelay: 1`, `Spread: 333`, `AffectsParent`, `InstantExplode`). | | | |
 
 **Intermediate templates** (a faction sub-template that inherits a base + overrides only
 projectile/effect, never the warhead — e.g. `^RA2SmallArms`, `^RA2Chaingun`, `^RA2MG`, `^TSMG`,

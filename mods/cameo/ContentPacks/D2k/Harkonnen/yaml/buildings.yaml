@@ -279,7 +279,10 @@ harkonnen_autogunturret:
 	Inherits@shape: ^1x1Shape
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
-	Inherits@gat: ^GatlingSpeedUpTurretBehavior
+	# W8 pilot actor (2026-08-15): first user of the meter-based spin-up. Reproduces
+	# the twenty-multiplier ladder's exact end-points (60% reload, 122% range) with
+	# three traits, and is the concrete instantiation W6 required.
+	Inherits@gat: ^GatlingSpinUpTurretBehavior
 	Armor:
 		Type: Concrete
 	Tooltip:

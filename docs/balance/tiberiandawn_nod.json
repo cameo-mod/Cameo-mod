@@ -27,11 +27,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
-      "effective_avg_reliability": 0.7528,
-      "effective_base_total": 4000.0,
-      "effective_damage": 3370.62,
-      "effective_footprint_cells2": 0.3595,
-      "effective_sigma": 222.5,
       "pricing": true,
       "range": "4501",
       "reloaddelay": "16",
@@ -68,11 +63,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
-      "effective_avg_reliability": 0.8755,
-      "effective_base_total": 2000.0,
-      "effective_damage": 3926.21,
-      "effective_footprint_cells2": 4.3503,
-      "effective_sigma": 280.04,
       "pricing": true,
       "range": "4501",
       "reloaddelay": "16",
@@ -172,96 +162,114 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
+        "damage": "8000",
+        "falloff": "100, 60, 30, 15, 5, 0",
         "spread": "100",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "tag": "Laser_Medium",
+        "type": "AreaDamage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "50",
+        "tag": "Laser_Medium_Percentage",
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "600",
-        "falloff": null,
+        "falloff": "100, 75, 50, 25",
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "Laser_Medium_ExtraDamage",
         "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 8600.0,
-      "effective_damage": 9256.39,
-      "effective_footprint_cells2": 1.3757,
-      "effective_sigma": 0.0,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "18",
-      "slot": "Armament@PRIMARY",
+      "requires": "!td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@Base",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^LaserWeapon"
+       "^Warhead_Laser_Medium",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Medium"
+      ],
       "weapon": "VenomLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "100",
+        "tag": "Inferno_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "50",
+        "tag": "Inferno_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "4000",
+      "reloaddelay": "18",
+      "requires": "td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@Elite",
+      "versus_templates": [
+       "^Warhead_Inferno_Medium",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Medium"
+      ],
+      "weapon": "VenomLaserInferno",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "100",
+        "tag": "Inferno_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "50",
+        "tag": "Inferno_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "4000",
+      "reloaddelay": "18",
+      "requires": "td_nod_upgrade_burninglasers",
+      "slot": "Armament@Burning",
+      "versus_templates": [
+       "VenomLaserInferno"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Medium"
+      ],
+      "weapon": "VenomLaserBurning",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -535,11 +543,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.3678,
-      "effective_base_total": 19000.0,
-      "effective_damage": 11884.82,
-      "effective_footprint_cells2": 7.3085,
-      "effective_sigma": 350.03,
       "pricing": true,
       "range": "7711",
       "reloaddelay": "61",
@@ -658,11 +661,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.484,
-      "effective_base_total": 31000.0,
-      "effective_damage": 29165.97,
-      "effective_footprint_cells2": 13.4868,
-      "effective_sigma": 350.03,
       "pricing": true,
       "range": "7711",
       "reloaddelay": "61",
@@ -798,126 +796,116 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
+        "damage": "12000",
+        "falloff": "100, 60, 30, 15, 5, 0",
         "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "tag": "Laser_Medium",
+        "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": null,
+        "damage": "6",
+        "falloff": "100, 60, 30, 15, 5, 0",
         "spread": "50",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "225",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "tag": "Laser_Medium_Percentage",
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "600",
-        "falloff": null,
+        "falloff": "100, 75, 50, 25",
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "Laser_Medium_ExtraDamage",
         "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 12600.0,
-      "effective_damage": 13362.5,
-      "effective_footprint_cells2": 1.5879,
-      "effective_sigma": 0.0,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6800",
       "reloaddelay": "20",
-      "slot": "Armament",
+      "requires": "!td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@Base",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun",
-       "^HeavyCannon",
-       "^LightFlameWeapon",
-       "^FlakWeapon",
-       "^LaserWeapon"
+       "^Warhead_Laser_Medium",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Medium"
+      ],
       "weapon": "NodTurretLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "100",
+        "tag": "Inferno_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "50",
+        "tag": "Inferno_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6800",
+      "reloaddelay": "20",
+      "requires": "td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@Elite",
+      "versus_templates": [
+       "^Warhead_Inferno_Medium",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Medium"
+      ],
+      "weapon": "NodTurretLaserInferno",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "100",
+        "tag": "Inferno_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "50",
+        "tag": "Inferno_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6800",
+      "reloaddelay": "20",
+      "requires": "td_nod_upgrade_burninglasers",
+      "slot": "Armament@Burning",
+      "versus_templates": [
+       "NodTurretLaserInferno"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Medium"
+      ],
+      "weapon": "NodTurretLaserBurning",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1011,15 +999,11 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 97000.0,
-      "effective_damage": 99531.67,
-      "effective_footprint_cells2": 0.6392,
-      "effective_sigma": 0.0,
       "pricing": true,
       "range": "9600",
       "reloaddelay": "96",
-      "slot": "Armament",
+      "requires": "!td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@Base",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -1030,6 +1014,106 @@
       ],
       "weapon": "LaserObelisk",
       "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "96000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "48",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "9600",
+      "reloaddelay": "96",
+      "requires": "td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@Elite",
+      "versus_templates": [
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "LaserObelisk",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "96000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "48",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Inferno_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "12",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Inferno_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "9600",
+      "reloaddelay": "96",
+      "requires": "td_nod_upgrade_burninglasers",
+      "slot": "Armament@Burning",
+      "versus_templates": [
+       "LaserObelisk",
+       "^Warhead_Inferno_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Laser_Heavy",
+       "^Warhead_Inferno_Heavy"
+      ],
+      "weapon": "LaserObeliskBurning",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1037,6 +1121,11 @@
      "v": "Steel"
     },
     "buildable": true,
+    "charge_up": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#AttackCharges",
+     "ticks": 50.0,
+     "v": "AttackCharges"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Valued.Cost",
      "v": "1800"
@@ -1147,11 +1236,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.25,
-      "effective_base_total": 12000.0,
-      "effective_damage": 3913.65,
-      "effective_footprint_cells2": 0.6092,
-      "effective_sigma": 637.72,
       "pricing": true,
       "range": "12193",
       "reloaddelay": "40",
@@ -1348,11 +1432,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
-      "effective_avg_reliability": 0.4315,
-      "effective_base_total": 4000.0,
-      "effective_damage": 6076.38,
-      "effective_footprint_cells2": 4.3503,
-      "effective_sigma": 1453.74,
       "pricing": true,
       "range": "4988",
       "reloaddelay": "46",
@@ -1390,11 +1469,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
-      "effective_avg_reliability": 0.4315,
-      "effective_base_total": 4000.0,
-      "effective_damage": 6076.38,
-      "effective_footprint_cells2": 4.3503,
-      "effective_sigma": 1453.74,
       "pricing": false,
       "range": "4988",
       "reloaddelay": "46",
@@ -1514,11 +1588,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.6124,
-      "effective_base_total": 36000.0,
-      "effective_damage": 31616.4,
-      "effective_footprint_cells2": 3.1899,
-      "effective_sigma": 250.2,
       "pricing": true,
       "range": "6006",
       "reloaddelay": "54",
@@ -1594,11 +1663,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.6124,
-      "effective_base_total": 36000.0,
-      "effective_damage": 31616.4,
-      "effective_footprint_cells2": 3.1899,
-      "effective_sigma": 250.2,
       "pricing": false,
       "range": "6006",
       "reloaddelay": "54",
@@ -1673,11 +1737,6 @@
       ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 0.75,
-      "effective_avg_reliability": 0.9837,
-      "effective_base_total": 48000.0,
-      "effective_damage": 80315.29,
-      "effective_footprint_cells2": 2.758,
-      "effective_sigma": 19.51,
       "pricing": true,
       "range": "3414",
       "reloaddelay": "48",
@@ -1713,11 +1772,6 @@
       ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 0.75,
-      "effective_avg_reliability": 0.9837,
-      "effective_base_total": 48000.0,
-      "effective_damage": 80315.29,
-      "effective_footprint_cells2": 2.758,
-      "effective_sigma": 19.51,
       "pricing": false,
       "range": "3414",
       "reloaddelay": "48",
@@ -1826,11 +1880,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
-      "effective_avg_reliability": 0.973,
-      "effective_base_total": 40000.0,
-      "effective_damage": 40519.77,
-      "effective_footprint_cells2": 0.1598,
-      "effective_sigma": 16.17,
       "pricing": true,
       "range": "8086",
       "reloaddelay": "25",
@@ -1866,11 +1915,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
-      "effective_avg_reliability": 0.973,
-      "effective_base_total": 40000.0,
-      "effective_damage": 40519.77,
-      "effective_footprint_cells2": 0.1598,
-      "effective_sigma": 16.17,
       "pricing": false,
       "range": "8086",
       "reloaddelay": "25",
@@ -1952,11 +1996,6 @@
       ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 0.75,
-      "effective_avg_reliability": 0.9884,
-      "effective_base_total": 20000.0,
-      "effective_damage": 33558.18,
-      "effective_footprint_cells2": 2.758,
-      "effective_sigma": 13.9,
       "pricing": true,
       "range": "2085",
       "reloaddelay": "60",
@@ -1992,11 +2031,6 @@
       ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 0.75,
-      "effective_avg_reliability": 0.9884,
-      "effective_base_total": 20000.0,
-      "effective_damage": 33558.18,
-      "effective_footprint_cells2": 2.758,
-      "effective_sigma": 13.9,
       "pricing": false,
       "range": "2085",
       "reloaddelay": "60",
@@ -2082,11 +2116,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 3000.0,
-      "effective_damage": 3184.76,
-      "effective_footprint_cells2": 0.6392,
-      "effective_sigma": 0.0,
       "pricing": true,
       "range": "6030",
       "reloaddelay": "8",
@@ -2129,11 +2158,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 3000.0,
-      "effective_damage": 3184.76,
-      "effective_footprint_cells2": 0.6392,
-      "effective_sigma": 0.0,
       "pricing": true,
       "range": "6030",
       "reloaddelay": "8",
@@ -2176,11 +2200,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 3000.0,
-      "effective_damage": 3184.76,
-      "effective_footprint_cells2": 0.6392,
-      "effective_sigma": 0.0,
       "pricing": false,
       "range": "6030",
       "reloaddelay": "8",
@@ -2311,11 +2330,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 144600.0,
-      "effective_damage": 145901.79,
-      "effective_footprint_cells2": 0.1972,
-      "effective_sigma": 0.0,
       "pricing": true,
       "range": "5524",
       "reloaddelay": "50",
@@ -2384,11 +2398,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 144600.0,
-      "effective_damage": 145901.79,
-      "effective_footprint_cells2": 0.1972,
-      "effective_sigma": 0.0,
       "pricing": false,
       "range": "5524",
       "reloaddelay": "50",
@@ -2471,11 +2480,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
-      "effective_avg_reliability": 0.7565,
-      "effective_base_total": 2000.0,
-      "effective_damage": 1592.93,
-      "effective_footprint_cells2": 0.1598,
-      "effective_sigma": 146.09,
       "pricing": true,
       "range": "4609",
       "reloaddelay": "50",
@@ -2514,11 +2518,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
-      "effective_avg_reliability": 0.7565,
-      "effective_base_total": 2000.0,
-      "effective_damage": 1592.93,
-      "effective_footprint_cells2": 0.1598,
-      "effective_sigma": 146.09,
       "pricing": false,
       "range": "4609",
       "reloaddelay": "50",
@@ -2591,11 +2590,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 6600.0,
-      "effective_damage": 6649.68,
-      "effective_footprint_cells2": 0.1623,
-      "effective_sigma": 0.0,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "40",
@@ -2667,11 +2661,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 6600.0,
-      "effective_damage": 6649.68,
-      "effective_footprint_cells2": 0.1623,
-      "effective_sigma": 0.0,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "40",
@@ -2751,11 +2740,6 @@
       ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 0.75,
-      "effective_avg_reliability": 0.7814,
-      "effective_base_total": 18000.0,
-      "effective_damage": 26476.87,
-      "effective_footprint_cells2": 2.758,
-      "effective_sigma": 262.27,
       "pricing": true,
       "range": "6368",
       "reloaddelay": "63",
@@ -2791,11 +2775,6 @@
       ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 0.75,
-      "effective_avg_reliability": 0.7814,
-      "effective_base_total": 18000.0,
-      "effective_damage": 26476.87,
-      "effective_footprint_cells2": 2.758,
-      "effective_sigma": 262.27,
       "pricing": false,
       "range": "6368",
       "reloaddelay": "63",
@@ -2944,11 +2923,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.3621,
-      "effective_base_total": 22000.0,
-      "effective_damage": 14160.48,
-      "effective_footprint_cells2": 7.2729,
-      "effective_sigma": 359.2,
       "pricing": true,
       "range": "6480",
       "reloaddelay": "90",
@@ -3056,11 +3030,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.3621,
-      "effective_base_total": 22000.0,
-      "effective_damage": 14160.48,
-      "effective_footprint_cells2": 7.2729,
-      "effective_sigma": 359.2,
       "pricing": false,
       "range": "6480",
       "reloaddelay": "90",
@@ -3204,11 +3173,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
-      "effective_avg_reliability": 0.5038,
-      "effective_base_total": 16000.0,
-      "effective_damage": 26360.46,
-      "effective_footprint_cells2": 9.1496,
-      "effective_sigma": 1000.0,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "64",
@@ -3262,11 +3226,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "effective_avg_reliability": 0.595,
-      "effective_base_total": 16000.0,
-      "effective_damage": 35086.36,
-      "effective_footprint_cells2": 12.7832,
-      "effective_sigma": 1000.0,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "64",
@@ -3357,11 +3316,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 121000.0,
-      "effective_damage": 124130.88,
-      "effective_footprint_cells2": 0.6392,
-      "effective_sigma": 0.0,
       "pricing": true,
       "range": "9550",
       "reloaddelay": "90",
@@ -3399,11 +3353,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "effective_avg_reliability": 0.6463,
-      "effective_base_total": 10000.0,
-      "effective_damage": 12704.55,
-      "effective_footprint_cells2": 2.4967,
-      "effective_sigma": 532.0,
       "pricing": true,
       "range": "9550",
       "reloaddelay": "35",
@@ -3426,6 +3375,11 @@
      "v": "Medium"
     },
     "buildable": true,
+    "charge_up": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#AttackTurretedCharged",
+     "ticks": 50.0,
+     "v": "AttackTurretedCharged"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Valued.Cost",
      "v": "2300"
@@ -3471,119 +3425,36 @@
       "burstdelays": "25",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
+        "damage": "50000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "FireMissile_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
+        "damage": "25",
+        "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "tag": "FireMissile_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "effective_avg_reliability": 0.1988,
-      "effective_base_total": 50000.0,
-      "effective_damage": 32281.95,
-      "effective_footprint_cells2": 8.9364,
-      "effective_sigma": 1465.2,
+      "design_weapon_class": 1.25,
       "minrange": "1790",
       "pricing": true,
       "range": "8940",
       "reloaddelay": "225",
       "slot": "Armament",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon",
-       "^MediumMissile",
-       "^HeavyMissile"
+       "^Warhead_FireMissile_Heavy",
+       "^Effect_Flame_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_FireMissile_Heavy"
+      ],
       "weapon": "HonestJohn",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3977,6 +3848,34 @@
      "Research"
     ]
    },
+   "td_nod_upgrade_burninglasers": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Burning Lasers",
+    "prerequisites": [
+     "~td_nod_templeofnod",
+     "td_nod_templeprime",
+     "td_nod_upgrade_elitecapacitors",
+     "!td_nod_upgrade_burninglasers"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
    "td_nod_upgrade_cyberneticmodifications": {
     "build_limit": {
      "src": "inherited",
@@ -4187,11 +4086,6 @@
       ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 0.875,
-      "effective_avg_reliability": 0.3701,
-      "effective_base_total": 32000.0,
-      "effective_damage": 40275.67,
-      "effective_footprint_cells2": 7.1082,
-      "effective_sigma": 1495.66,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -4328,11 +4222,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.3609,
-      "effective_base_total": 36000.0,
-      "effective_damage": 41649.79,
-      "effective_footprint_cells2": 19.1041,
-      "effective_sigma": 1495.66,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -4419,11 +4308,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
-      "effective_avg_reliability": 0.7577,
-      "effective_base_total": 4000.0,
-      "effective_damage": 3190.46,
-      "effective_footprint_cells2": 0.1598,
-      "effective_sigma": 145.4,
       "pricing": true,
       "range": "4540",
       "reloaddelay": "10",
@@ -4460,11 +4344,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
-      "effective_avg_reliability": 0.3382,
-      "effective_base_total": 2000.0,
-      "effective_damage": 2055.39,
-      "effective_footprint_cells2": 2.758,
-      "effective_sigma": 1373.02,
       "pricing": true,
       "range": "4540",
       "reloaddelay": "10",
@@ -4576,11 +4455,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.33,
-      "effective_base_total": 6000.0,
-      "effective_damage": 2105.85,
-      "effective_footprint_cells2": 0.2522,
-      "effective_sigma": 226.37,
       "pricing": true,
       "range": "5274",
       "reloaddelay": "60",
@@ -4643,11 +4517,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.3988,
-      "effective_base_total": 6000.0,
-      "effective_damage": 9142.42,
-      "effective_footprint_cells2": 13.4998,
-      "effective_sigma": 1505.27,
       "pricing": true,
       "range": "5274",
       "reloaddelay": "60",
@@ -4716,11 +4585,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.3118,
-      "effective_base_total": 6000.0,
-      "effective_damage": 1997.15,
-      "effective_footprint_cells2": 0.2522,
-      "effective_sigma": 239.56,
       "pricing": true,
       "range": "7911",
       "reloaddelay": "60",
@@ -4737,162 +4601,228 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "100",
+        "tag": "Laser_Light",
+        "type": "AreaDamage"
        },
        {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "50",
+        "tag": "Laser_Light_Percentage",
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "600",
-        "falloff": null,
+        "falloff": "100, 75, 50, 25",
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "Laser_Light_ExtraDamage",
         "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 6600.0,
-      "effective_damage": 7285.1,
-      "effective_footprint_cells2": 1.4331,
-      "effective_sigma": 0.0,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5274",
       "reloaddelay": "60",
-      "requires": "td_nod_upgrade_blackmarketupgrades",
-      "slot": "Armament@Laser",
+      "requires": "td_nod_upgrade_blackmarketupgrades && !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@LaserBase",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^MediumMissile",
-       "^LaserWeapon"
+       "^Warhead_Laser_Light",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Light"
+      ],
       "weapon": "LaserBuggy2",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "100",
+        "tag": "Inferno_Light",
+        "type": "AreaDamage"
        },
        {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "50",
+        "tag": "Inferno_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "5274",
+      "reloaddelay": "60",
+      "requires": "td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@LaserElite",
+      "versus_templates": [
+       "^Warhead_Inferno_Light",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Light"
+      ],
+      "weapon": "LaserBuggy2Inferno",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "100",
+        "tag": "Inferno_Light",
+        "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "50",
+        "tag": "Inferno_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "5274",
+      "reloaddelay": "60",
+      "requires": "td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_burninglasers",
+      "slot": "Armament@LaserBurning",
+      "versus_templates": [
+       "LaserBuggy2Inferno"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Light"
+      ],
+      "weapon": "LaserBuggy2Burning",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "100",
+        "tag": "Laser_Light",
+        "type": "AreaDamage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "50",
+        "tag": "Laser_Light_Percentage",
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "600",
-        "falloff": null,
+        "falloff": "100, 75, 50, 25",
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "Laser_Light_ExtraDamage",
         "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 6600.0,
-      "effective_damage": 7285.1,
-      "effective_footprint_cells2": 1.4331,
-      "effective_sigma": 0.0,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7911",
       "reloaddelay": "60",
-      "requires": "td_nod_upgrade_blackmarketupgrades",
-      "slot": "Armament@LaserAA",
+      "requires": "td_nod_upgrade_blackmarketupgrades && !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@LaserAABase",
       "versus_templates": [
        "LaserBuggy2"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Light"
+      ],
       "weapon": "LaserBuggy2_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "100",
+        "tag": "Inferno_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "50",
+        "tag": "Inferno_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "7911",
+      "reloaddelay": "60",
+      "requires": "td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
+      "slot": "Armament@LaserAAElite",
+      "versus_templates": [
+       "LaserBuggy2Inferno"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Light"
+      ],
+      "weapon": "LaserBuggy2_AAInferno",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "100",
+        "tag": "Inferno_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "50",
+        "tag": "Inferno_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "7911",
+      "reloaddelay": "60",
+      "requires": "td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_burninglasers",
+      "slot": "Armament@LaserAABurning",
+      "versus_templates": [
+       "LaserBuggy2Burning"
+      ],
+      "warheads": [
+       "^Warhead_Inferno_Light"
+      ],
+      "weapon": "LaserBuggy2_AABurning",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4958,11 +4888,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 1.0,
-      "effective_damage": 1.0,
-      "effective_footprint_cells2": 0.01,
-      "effective_sigma": 0.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
@@ -5045,11 +4970,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.3637,
-      "effective_base_total": 32000.0,
-      "effective_damage": 13741.98,
-      "effective_footprint_cells2": 1.0521,
-      "effective_sigma": 340.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "70",
@@ -5185,11 +5105,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.3823,
-      "effective_base_total": 120000.0,
-      "effective_damage": 182729.54,
-      "effective_footprint_cells2": 18.2465,
-      "effective_sigma": 1597.33,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -5313,11 +5228,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.7117,
-      "effective_base_total": 30000.0,
-      "effective_damage": 41959.04,
-      "effective_footprint_cells2": 8.2431,
-      "effective_sigma": 378.48,
       "pricing": true,
       "range": "6962",
       "reloaddelay": "60",
@@ -5399,11 +5309,6 @@
       ],
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "design_weapon_class": 1.0,
-      "effective_avg_reliability": 0.9929,
-      "effective_base_total": 14000.0,
-      "effective_damage": 29126.82,
-      "effective_footprint_cells2": 4.3503,
-      "effective_sigma": 15.93,
       "pricing": true,
       "range": "2390",
       "reloaddelay": "50",
@@ -5487,11 +5392,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "effective_avg_reliability": 0.993,
-      "effective_base_total": 20000.0,
-      "effective_damage": 51817.16,
-      "effective_footprint_cells2": 6.3916,
-      "effective_sigma": 16.89,
       "pricing": true,
       "range": "2534",
       "reloaddelay": "54",
@@ -5573,11 +5473,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
-      "effective_avg_reliability": 0.7777,
-      "effective_base_total": 6000.0,
-      "effective_damage": 11191.76,
-      "effective_footprint_cells2": 4.3503,
-      "effective_sigma": 500.12,
       "pricing": true,
       "range": "4993",
       "reloaddelay": "45",
@@ -5612,11 +5507,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
-      "effective_avg_reliability": 0.8668,
-      "effective_base_total": 6000.0,
-      "effective_damage": 11726.16,
-      "effective_footprint_cells2": 4.3503,
-      "effective_sigma": 299.72,
       "pricing": true,
       "range": "4993",
       "reloaddelay": "45",
@@ -5692,11 +5582,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 1.0,
-      "effective_damage": 1.0,
-      "effective_footprint_cells2": 0.01,
-      "effective_sigma": 0.0,
       "pricing": true,
       "range": "4903",
       "reloaddelay": "25",
@@ -5748,11 +5633,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.3978,
-      "effective_base_total": 8000.0,
-      "effective_damage": 4079.64,
-      "effective_footprint_cells2": 0.8973,
-      "effective_sigma": 500.12,
       "pricing": true,
       "range": "4903",
       "reloaddelay": "35",
@@ -5798,11 +5678,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
-      "effective_avg_reliability": 0.8108,
-      "effective_base_total": 8000.0,
-      "effective_damage": 13594.74,
-      "effective_footprint_cells2": 7.1082,
-      "effective_sigma": 296.12,
       "pricing": true,
       "range": "4903",
       "reloaddelay": "35",
@@ -5928,11 +5803,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 1.0,
-      "effective_base_total": 1.0,
-      "effective_damage": 1.0,
-      "effective_footprint_cells2": 0.01,
-      "effective_sigma": 0.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
@@ -6015,11 +5885,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "effective_avg_reliability": 0.3993,
-      "effective_base_total": 16000.0,
-      "effective_damage": 11367.35,
-      "effective_footprint_cells2": 4.9784,
-      "effective_sigma": 250.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "55",
@@ -6113,11 +5978,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
-      "effective_avg_reliability": 0.3678,
-      "effective_base_total": 32000.0,
-      "effective_damage": 40201.81,
-      "effective_footprint_cells2": 7.1082,
-      "effective_sigma": 1507.17,
       "minrange": "2530",
       "pricing": true,
       "range": "12640",
@@ -6269,11 +6129,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
-      "effective_avg_reliability": 0.2522,
-      "effective_base_total": 32000.0,
-      "effective_damage": 27312.88,
-      "effective_footprint_cells2": 19.2409,
-      "effective_sigma": 1507.17,
       "minrange": "2530",
       "pricing": true,
       "range": "12640",
@@ -6348,119 +6203,36 @@
       "burstdelays": "25",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
+        "damage": "50000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "FireMissile_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
+        "damage": "25",
+        "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "tag": "FireMissile_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "effective_avg_reliability": 0.1988,
-      "effective_base_total": 50000.0,
-      "effective_damage": 32281.95,
-      "effective_footprint_cells2": 8.9364,
-      "effective_sigma": 1465.2,
+      "design_weapon_class": 1.25,
       "minrange": "1790",
       "pricing": true,
       "range": "8940",
       "reloaddelay": "225",
       "slot": "Armament",
       "versus_templates": [
-       "^LightFlameWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon",
-       "^MediumMissile",
-       "^HeavyMissile"
+       "^Warhead_FireMissile_Heavy",
+       "^Effect_Flame_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_FireMissile_Heavy"
+      ],
       "weapon": "HonestJohn",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6578,11 +6350,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
-      "effective_avg_reliability": 0.8234,
-      "effective_base_total": 12000.0,
-      "effective_damage": 22932.0,
-      "effective_footprint_cells2": 4.3503,
-      "effective_sigma": 397.28,
       "pricing": true,
       "range": "7432",
       "reloaddelay": "58",
@@ -6620,11 +6387,6 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
-      "effective_avg_reliability": 0.8234,
-      "effective_base_total": 12000.0,
-      "effective_damage": 22932.0,
-      "effective_footprint_cells2": 4.3503,
-      "effective_sigma": 397.28,
       "pricing": true,
       "range": "7432",
       "reloaddelay": "58",

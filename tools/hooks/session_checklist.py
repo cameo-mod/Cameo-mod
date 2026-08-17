@@ -29,7 +29,30 @@ HARD RULES (several are enforced by hooks — see .claude/settings.json):
     commits before building on them (check mtimes for a live agent first).
  8. Audit reports regen via `bash tools/audit/run_all.sh` ONLY (PowerShell > writes UTF-16).
  9. Underscore-only naming — no hyphens in ids/files/fluent keys.
-10. Commit messages end with: Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+10. Commit trailer = the ACTUAL author, with your REAL model name:
+    Co-Authored-By: Claude <your-model> <noreply@anthropic.com>  (a template, not a
+    literal - do not copy a version from a previous commit). Other agents sign as
+    themselves, e.g. Co-Authored-By: Devin AI <devin@cognition.ai>.
+
+ENGINE CHANGES — `engine/` IS NOT PART OF THIS REPO. It is .gitignored, has no .git and no
+.gitmodules, and `git ls-files engine` returns ZERO files; `git` run from inside it silently
+operates on the PARENT repo. Editing engine/**  produces work that CANNOT be committed here
+and is DELETED by the next `make all`. It is a build output, not source.
+Full procedure: docs/LESSONS_LEARNED.md "The canonical engine update pipeline". In short:
+ 1. Edit C# in the SEPARATE clone of https://github.com/cameo-mod/OpenRA, branch cameo-engine.
+ 2. Commit + push to origin/cameo-engine (check `git status` for stray nested-clone entries).
+ 3. `git rev-parse cameo-engine` for the FULL 40-char hash — never hand-type or truncate it.
+ 4. Set ENGINE_VERSION="<hash>" in **mod.config** (NOT mod.yaml) in this repo.
+ 5. `make.cmd all` — VERSION mismatch makes the SDK delete engine/, refetch and rebuild.
+ 6. Verify engine/VERSION == the hash, build has 0 errors, and recreate any engine/glsl/
+    shaders (the fetch WIPES them, e.g. postprocess_nuclearflash.frag).
+ 7. Boot-gate, then commit mod.config with the docs updates.
+Before choosing that route, check whether the mod assembly can just SHADOW the engine trait:
+ObjectCreator.FindType takes the FIRST assembly in mod.yaml's Assemblies list holding the
+name, and the order is AS, CA, Cameo, Cnc, D2k, Common — so an OpenRA.Mods.Cameo type of the
+same name wins with ZERO yaml changes (precedent: ColorPickerColorShift, PlayerColorShift,
+SelectionDecorations). PROVE a shadow works by giving the Cameo Info a field the engine one
+lacks and booting with that field set — `--docs` lists BOTH types and proves nothing.
 
 Work queue + effort estimate: docs/design/ROADMAP.md + docs/design/BALANCE_PIPELINE_ESTIMATE.md.
 """

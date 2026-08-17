@@ -221,21 +221,29 @@ mode-switching deployables.
 
 ### 10b. Dual armor for WC2 knights + SM Noids
 **Intent (maintainer):** give the WC2 heavy melee line and the SM Noids the "in-between"
-dual armor that FutureTech/CABAL robots have — **one infantry armor + one vehicle armor,
-secondary takes ×200% damage** — so they're harder to hard-counter with pure anti-infantry.
-This also **resolves the `wc2_humans_paladin` line_breaker mis-tag**: instead of borrowing
-`^LineBreakerTemplate` just to get vehicle armor, they carry dual armor directly and go back
-to being infantry/melee-classed.
+dual armor that FutureTech/CABAL robots have — **one infantry armor + one vehicle armor** —
+so they're harder to hard-counter with pure anti-infantry. This also **resolves the
+`wc2_humans_paladin` line_breaker mis-tag**: instead of borrowing `^LineBreakerTemplate`
+just to get vehicle armor, they carry dual armor directly and go back to being
+infantry/melee-classed.
 
-- Pattern in tree — `^TSCyborgDualArmorHeavy` (CABAL): `Armor: Heavy` + `Armor@Secondary: Shield`.
-  (I still need to read one *complete* FutureTech/CABAL example that includes the
-  `DamageMultiplier@Secondary` to copy the exact trait set + the multiplier value.)
+⚠ **The "×200% on the secondary" half of this recipe is DEAD** (W20/W21 R5, 2026-08-15).
+Two armors now **AVERAGE** (`AreaDamageWarhead.MultiArmorCombination: Average`) instead of
+multiplying, so the compensation multiplier has no job and all 7 instances were deleted.
+Copy the trait set WITHOUT a `DamageMultiplier`.
+
+- **Live pattern** (`schwarzermond_noidmgarmor`, `_noidharvester`, `_engineeringarmor`):
+  `Armor: Plate` always on, `Armor@Plating: <vehicle type>` gated on `plating_up`, and an
+  `ArmorPlating` trait granting `FullCondition: plating_up`. The vehicle armor is thus tied
+  to a visible bar — strip the bar and the unit is plain infantry again.
+- Older static pattern, no bar — `^TSCyborgDualArmorHeavy` (CABAL): `Armor: Heavy` +
+  `Armor@Secondary: Shield`, both unconditional.
 - Target units (confirmed present): `wc2_humans_knight`, `wc2_humans_paladin`,
-  `wc2_orcs_ogre`, `wc2_orcs_ogremage`, SM `schwarzermond_noidmgarmor`,
-  `schwarzermond_noidharvester` (+ any other `schwarzermond_noid*`).
+  `wc2_orcs_ogre`, `wc2_orcs_ogremage` — the SM Noids are DONE.
 
-→ **Q6:** confirm the exact armor pair — **Plate (infantry) + Medium** or **Plate + Heavy**?
-— and the secondary multiplier (200%). Then these leave `line_breaker` for melee/infantry.
+→ **Q6 (partly answered):** the SM Noids shipped as **Plate + Superheavy** (MG walker) and
+**Plate + Heavy** (harvester, engineering walker). Confirm the WC2 melee pair, and whether
+they get the static dual armor or the `ArmorPlating` bar.
 
 ---
 

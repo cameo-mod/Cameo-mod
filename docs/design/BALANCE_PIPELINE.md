@@ -59,6 +59,33 @@ manually checking mirrors) is kept, but through two rules:
 No DPS, no combined Damage, no effective-anything in the JSON. Every
 number appears exactly as the yaml states it, with provenance:
 
+> **SETTLED 2026-08-11 (W3).** The law briefly broke: `c9a09dc91` put five DERIVED
+> fields in every ledger row, and a derived field moves when the **formula** moves,
+> with no yaml change at all — correcting the metric's scatter model rewrote **4 136
+> ledger lines while `mods/` was untouched**, i.e. model noise inside the very artifact
+> whose job is to prove yaml ↔ ledger equality.
+>
+> The fields now live in a second tree, written by the **same** `extract_stats.py` run
+> off the same resolve, so the two can never desync:
+>
+> | tree | contents | a diff means |
+> |---|---|---|
+> | `docs/balance/<faction>.json` | raw stats + provenance | **the game changed** — yaml was edited |
+> | `docs/balance/derived/<faction>.json` | `k`, `avg_versus`, `effective_per_shot`, `eff_reload`, `effective_dps`, `effective_damage`, `damage_total`, `footprint`, `reliability`, `sigma` | **the model changed** — a tool was edited |
+> | `docs/balance/derived/_model.json` | the constants every derived number depends on (`SWARM_W`, `BLOB_UPTIME`, `DENSITY`, `ENGAGEMENT`, `reference_hp`, the armor census …) | the model was **retuned** |
+>
+> Each diff now answers exactly one question. `audit_balance_drift` reads only the raw
+> tree (`extract_stats.build_ledgers()` returns raw by construction, so it cannot start
+> diffing model output by accident); `extract_stats.py --check` verifies both and labels
+> the finding `DRIFT (raw)` or `DRIFT (model)`. The derived rows repeat only `slot` and
+> `weapon` as join keys — never a raw stat, so there is still exactly one copy of every
+> number. Spec: [`EFFECTIVE_DAMAGE.md`](EFFECTIVE_DAMAGE.md).
+>
+> ⚠ Nothing consumes the derived tree yet — it is a read-only sidecar. `build_workbook.py`
+> never read the old in-ledger fields either. Wiring K into pricing is **W11**, behind a
+> flag and with a maintainer sign-off; do not let `apply_balance` write `Damage` from a
+> derived number before then.
+
 ```json
 {
   "schema": 2,

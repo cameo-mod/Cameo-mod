@@ -89,15 +89,15 @@ BikeRockets:
 BikeRocketsAA:
     Inherits: BikeRockets
     ValidTargets: Air
- 	Projectile: MissileCA 
+ 	Projectile: MissileCA
         HorizontalRateOfTurn: 16
         Range: 7680
         Speed: 268
-        RangeLimit: 10c512     
+        RangeLimit: 10c512
     Warhead@1Dam: SpreadDamage
-        ValidTargets: Air    
+        ValidTargets: Air
         Damage: 3250
-        
+
 OrcaAGMissiles:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 12
@@ -320,12 +320,15 @@ Patriot:
 		Explosions: poof
 
 HonestJohn:
+	Inherits@wh: ^Warhead_FireMissile_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	ReloadDelay: 240
 	Burst: 2
 	BurstDelays: 25
 	Range: 12288
 	MinRange: 4096
 	Report: rocket2.aud
+	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Blockable: false
 		Shadow: true
@@ -335,29 +338,17 @@ HonestJohn:
 		TrailDelay: 3
 		Speed: 210
 		LaunchAngle: 37
-	Warhead@1Dam: SpreadDamage
+	Warhead@FireMissile_Heavy:
 		Spread: 512
 		Damage: 4500
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Water
-		Versus:
-			None: 100
-			Wood: 50
-			Light: 75
-            Medium: 60
-			Heavy: 50
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath, Incendiary
-	Warhead@3Eff: CreateEffect
-		Explosions: big_napalm
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
-		ValidTargets: Ground, Air, Ship
-	Warhead@4EffWater: CreateEffect
+	Warhead@EffectWater:
 		Explosions: large_splash
 		ValidTargets: Water
 		InvalidTargets: Ship, Structure, Bridge
-        
-HonestJohnCamea:   
+
+HonestJohnCamea:
     Inherits: HonestJohn
     Range: 14592
 ####################################################################################################
@@ -492,9 +483,9 @@ APCRocket_AA:
         RangeLimit: 8c0
   	Warhead@1Dam: SpreadDamage
 		Spread: 256
-		Damage: 4000      
+		Damage: 4000
         ValidTargets: Air
-        
+
 Nike:
 	Inherits: ^AntiAirMissile
 	ReloadDelay: 15

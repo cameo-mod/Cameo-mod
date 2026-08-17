@@ -556,7 +556,7 @@ latinsyndicate_latinsentrygun:
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
 	Inherits@EMP: ^DefenseTurretedEMP
-	Inherits@gat: ^GatlingSpeedUpTurretBehavior
+	Inherits@gat: ^GatlingSpinUpTurretBehavior
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
@@ -684,7 +684,7 @@ latinsyndicate_smlturret:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
 	Inherits@EMP: ^DefenseTurretedEMP
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Inherits@flamerup: ^LatinFlameUpgrades
 	Buildable:
 		Queue: Defence, RADefence
@@ -751,7 +751,7 @@ latinsyndicate_latinaadefender:
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
 	Inherits@EMP: ^DefenseTurretedEMP
-	Inherits@gat: ^GatlingSpeedUpTurretBehavior
+	Inherits@gat: ^GatlingSpinUpTurretBehavior
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50

@@ -193,9 +193,12 @@ def unit_rows(ws, theme, aid, u, section, row):
         ws.cell(row=r, column=COL["EffReload"],
                 value=f"={L('Reload')}{r}+IF({L('Burst')}{r}>1,"
                       f"N({L('BurstDel')}{r})*({L('Burst')}{r}-1),0)")
+        # No *WeapClass (W4): formula.dps() dropped it, and this sheet must emit
+        # the SAME math as the module or the two silently disagree. The WeapClass
+        # column stays as design data — it just no longer prices.
         ws.cell(row=r, column=COL["DPS"],
                 value=f"=IFERROR({L('Damage')}{r}*MAX({L('Burst')}{r},1)"
-                      f"/{L('EffReload')}{r}*{L('WeapClass')}{r}*{fp_factor},0)")
+                      f"/{L('EffReload')}{r}*{fp_factor},0)")
 
     if wrows and hp is not None and speed is not None:
         r = first
@@ -278,7 +281,8 @@ def add_constants_sheet(wb, title):
         (f"{title} — generated workbench (build_workbook.py).", None),
         ("NEVER commit this file; regenerate from the ledger.", None),
         ("Formula law (formula.py, Tiger anchor O=P=Q=Cost=800):", None),
-        ("DPS", "Damage*Burst/(Reload+BurstDel*(Burst-1))*WeapClass*FirepowerMultiplier/100"),
+        ("DPS", "Damage*Burst/(Reload+BurstDel*(Burst-1))*FirepowerMultiplier/100"),
+        ("WeapClass", "design data only — retired from pricing 2026-08-11 (W4)"),
         ("O", "(HP/1e5+Speed/100+Rng*Spec/5+DPS/200)*200*UC*Tier"),
         ("P", "((HP*Speed/25000)+(Rng*Spec*DPS/2.5))*UC*Tier"),
         ("Q", "(HP*Speed*Rng*Spec*DPS*UC*Tier)/12.5e6"),

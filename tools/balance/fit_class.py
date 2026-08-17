@@ -41,53 +41,232 @@ def fnum(v):
         return None
 
 
-def unit_inputs(u):
-    """(hp, speed, range_wdist, dps, special, unit_class, tech_tier) or None."""
+def derived_dps_index(du):
+    """{(slot, weapon): effective_dps} for one actor's derived sidecar entry.
+
+    `effective_dps` is what W1's K coefficient buys: k_context x damage x burst /
+    eff_reload, i.e. DPS already discounted for accuracy, spread, falloff, range,
+    dead zone and how many targets the shot can actually reach. It is computed by
+    extract_stats (via weapon_efficiency.analyse) and is NOT recomputed here — one
+    definition of K, in one place.
+    """
+    idx = {}
+    for arm in (du or {}).get("armaments", []):
+        dps_v = fnum(arm.get("effective_dps"))
+        if dps_v is not None:
+            idx[(arm.get("slot"), arm.get("weapon"))] = dps_v
+    return idx
+
+
+def unit_inputs(u, du=None, use_k=False):
+    """((hp, speed, range_wdist, dps, special, unit_class, tech_tier), fallbacks),
+    or (None, 0) when the unit has no usable combat stats.
+
+    With use_k, each armament contributes its K-adjusted `effective_dps` from the
+    derived sidecar instead of raw damage/reload. Armaments the sidecar has no
+    entry for fall back to raw DPS and are COUNTED, so the report can state its
+    coverage rather than quietly mixing two units of measurement.
+
+    The return shape is the same either way on purpose: a tuple that changes shape
+    with a flag is exactly the kind of thing that silently misprices a roster.
+    """
     hp = fnum((u.get("hp") or {}).get("v"))
     speed = fnum((u.get("speed") or {}).get("v") or (u.get("speed_air") or {}).get("v"))
     d = u.get("design") or {}
     # Unconditional per-actor FirepowerMultiplier scales EFFECTIVE damage output;
     # balance prices on effective DPS = raw x FP-mult (cameo-firepower-mult-in-dps). Default 1.0.
     fp = fnum((u.get("firepower_multiplier") or {}).get("v")) or 1.0
+    kidx = derived_dps_index(du) if use_k else {}
     total_dps, best_range = 0.0, 0.0
+    fallbacks = 0
     for arm in u.get("armaments", []):
         if not arm.get("pricing", True):
             continue
-        if arm.get("requires"):   # upgrade-gated / conditional weapon -> NOT part of BASE dps
+        # Price the weapon the unit fires AS BUILT. The old rule skipped every
+        # armament that had any `requires` at all, which threw away the BASE
+        # weapon of each unit that merely owns an elite variant: 371 of 863
+        # actors with priced armaments came out at zero DPS and dropped out of
+        # pricing entirely, `tiger.nax` — the recorded `mbt` anchor — among them.
+        if not formula.condition_holds_by_default(arm.get("requires")):
             continue
         dmg = formula.spread_damage_sum(arm.get("damage_warheads", []))  # SUM law, chips excluded
         reload_ = fnum(arm.get("reloaddelay"))
         if not dmg or not reload_:
             continue
-        total_dps += formula.dps(dmg, reload_,
-                                 fnum(arm.get("design_weapon_class")) or 1.0,
-                                 int(fnum(arm.get("burst")) or 1),
-                                 fnum(arm.get("burstdelays")))
+        # ⚠ A charge trait may OVERRIDE the weapon's reload entirely. `AttackTesla`
+        # does: its own ReloadDelay is the cycle, it fires MaxCharges zaps inside
+        # it, and the weapon's reload is only the gap between them. A Tesla Coil's
+        # weapon reloads every 3 ticks, so reading the weapon alone prices the coil
+        # as firing 20 times a second when it fires 3 zaps per 106 ticks — DPS
+        # overstated 11.8x, and DPS drives the price.
+        own = formula.charge_attack_cycle(u.get("charge_up"), reload_)
+        if own:
+            cycle, shots = own
+            raw = dmg * shots / cycle
+        else:
+            raw = formula.dps(dmg, reload_,
+                              int(fnum(arm.get("burst")) or 1),
+                              fnum(arm.get("burstdelays")))
+        if use_k:
+            keyed = kidx.get((arm.get("slot"), arm.get("weapon")))
+            if keyed is None:
+                fallbacks += 1
+            total_dps += raw if keyed is None else keyed
+        else:
+            total_dps += raw
         best_range = max(best_range, fnum(arm.get("range")) or 0.0)
     total_dps *= fp   # apply the actor-level FirepowerMultiplier to effective DPS
     if hp is None or speed is None or total_dps == 0:
-        return None
-    return (hp, speed, best_range, total_dps,
-            fnum(d.get("special")) or 1.0, fnum(d.get("unit_class")) or 1.0,
-            fnum(d.get("tech_tier")) or 1.0)
+        return None, 0
+    return ((hp, speed, best_range, total_dps,
+             fnum(d.get("special")) or 1.0, fnum(d.get("unit_class")) or 1.0,
+             fnum(d.get("tech_tier")) or 1.0), fallbacks)
 
 
-def collect_units(cls, actors_filter):
-    out = {}
+def price_unit(u, inp, o0, p0, q0, cost0) -> float:
+    """Formula-v2 price for one ledger unit, including the actor-level modifiers.
+
+    The charge-up discount is applied to the PRICE, after the estimators, not to
+    DPS: O/P/Q are degree 1/2/3 in their inputs, so scaling DPS would not produce
+    a clean 0.75x on the result. Charging is an ACTOR property (W4) — the delay
+    inflates the effective reload AND the unit is helpless while it winds up.
+    """
+    o, p, q = formula.estimators(*inp)
+    v2 = formula.class_anchor_price(o, p, q, o0, p0, q0, cost0)
+    return v2 * formula.charge_price_multiplier(u.get("charge_up"),
+                                                charge_cycle_fallback(u))
+
+
+def charge_cycle_fallback(u) -> float | None:
+    """The reload a wind-up competes with, for traits that govern no reload of their own.
+
+    `AttackTesla` carries its own `ReloadDelay`, so it never needs this. The
+    `ChargeLevel` family does: the charge gates the actor's attack, so the share is
+    measured against the gun it delays.
+
+    Takes the LONGEST base-weapon reload, not the shortest: a charge gates the heavy
+    shot, and an actor with a fast secondary (the Terran siege tank's 37 next to its
+    sieged 148) would otherwise look like it charges for most of its cycle and earn a
+    discount it has not paid for. An approximation either way — it assumes the
+    slowest weapon is the charged one, which is true for every charging actor in the
+    tree today.
+    """
+    reloads = [fnum(a.get("reloaddelay")) for a in u.get("armaments", [])
+               if a.get("pricing", True)
+               and formula.condition_holds_by_default(a.get("requires"))]
+    reloads = [r for r in reloads if r]
+    return max(reloads) if reloads else None
+
+
+def collect_units(cls, actors_filter, always=()):
+    """(raw units, derived units) keyed by actor.
+
+    `actors_filter` is the EXPLICIT --actors list and nothing else. The anchor is
+    passed via `always` instead of being unioned into the filter: a non-empty
+    filter switches off the `design.class_anchor == cls` branch, so folding the
+    anchor in made every run collect exactly one unit — the anchor — and report a
+    one-row validation table for the whole class.
+
+    The derived sidecar is loaded from the matching file in docs/balance/derived/
+    so K comes from the SAME extract run as the raw stats. Reading it from a
+    different source, or recomputing it here, would let the two drift apart
+    silently — and `audit_balance_drift` only guards raw yaml vs ledger.
+    """
+    out, derived = {}, {}
     for jf in sorted(LEDGER.glob("*.json")):
         if jf.name in ("class_anchors.json",):
             continue
         doc = json.loads(jf.read_text(encoding="utf-8"))
         if "sections" not in doc:
             continue
-        for sec in doc["sections"].values():
+
+        dfile = LEDGER / "derived" / jf.name
+        ddoc = json.loads(dfile.read_text(encoding="utf-8")) if dfile.is_file() else {}
+        dsec = ddoc.get("sections") or {}
+
+        for secname, sec in doc["sections"].items():
             for actor, u in sec.items():
-                if actors_filter:
-                    if actor in actors_filter:
-                        out[actor] = u
-                elif (u.get("design") or {}).get("class_anchor") == cls:
-                    out[actor] = u
-    return out
+                keep = (actor in actors_filter if actors_filter
+                        else (u.get("design") or {}).get("class_anchor") == cls)
+                if not keep and actor not in always:
+                    continue
+                out[actor] = u
+                derived[actor] = (dsec.get(secname) or {}).get(actor)
+    return out, derived
+
+
+def write_comparison(args, units, derived, fit) -> int:
+    """W11: price the class both ways and report the difference.
+
+    Deliberately writes NO candidate to class_anchors.json. The plan is explicit
+    that pricing and content never flip in one commit: this produces evidence for
+    the maintainer, and switching the pipeline is a separate, signed-off decision.
+    """
+    raw = fit(False)
+    kfit = fit(True)
+    if raw is None or kfit is None:
+        print(f"anchor `{args.anchor}` lacks hp/speed/weapon stats")
+        return 2
+
+    _, rc0, ro0, rp0, rq0, rrows, _ = raw
+    _, kc0, ko0, kp0, kq0, krows, kfb = kfit
+    kmap = {a: v for a, _c, v, _d in krows}
+
+    both = [(a, c, v, kmap.get(a)) for a, c, v, _d in rrows
+            if v is not None and kmap.get(a) is not None and c]
+    shifts = [(kv / v - 1.0) for _a, _c, v, kv in both if v]
+
+    out = ROOT / "docs/balance/derived" / f"k_comparison_{args.cls}.md"
+    L = [f"# W11 — K comparison for class `{args.cls}`", "",
+         f"Anchor `{args.anchor}`, cost0 {rc0:.0f}. Every member priced twice: on RAW",
+         "damage/reload, and on K-adjusted `effective_dps` from the derived sidecar",
+         "(accuracy, spread, falloff, range, dead zone, reachable targets).",
+         "",
+         "The anchor is re-fitted in each mode, so each column is internally",
+         "consistent; only the SHAPE of the class changes between them.", ""]
+
+    if kfb:
+        L += [f"⚠ **{kfb} armament(s) had no derived entry and fell back to raw DPS.**",
+              "Those rows mix the two scales — re-run `extract_stats.py` and check "
+              "coverage before trusting them.", ""]
+
+    L += [f"| estimator | raw | K |", "|---|---|---|",
+          f"| O0 | {ro0:.2f} | {ko0:.2f} |",
+          f"| P0 | {rp0:.2f} | {kp0:.2f} |",
+          f"| Q0 | {rq0:.2f} | {kq0:.2f} |", "",
+          "| unit | cost | raw price | K price | raw Δ | K Δ | K vs raw |",
+          "|---|---|---|---|---|---|---|"]
+
+    for actor, cost, v, kv in sorted(both, key=lambda r: -(abs(r[3] / r[2] - 1.0) if r[2] else 0)):
+        rd, kd, shift = (v - cost) / cost, (kv - cost) / cost, kv / v - 1.0
+        flag = "" if abs(shift) < 0.10 else (" ⚠" if abs(shift) < 0.30 else " ❗")
+        L.append(f"| `{actor}` | {cost:.0f} | {v:.0f} | {kv:.0f} | "
+                 f"{rd:+.0%} | {kd:+.0%} | {shift:+.0%}{flag} |")
+
+    if shifts:
+        shifts.sort()
+        n = len(shifts)
+        med = shifts[n // 2] if n % 2 else (shifts[n // 2 - 1] + shifts[n // 2]) / 2
+        worse = sum(1 for _a, c, v, kv in both if abs(kv - c) > abs(v - c))
+        L += ["", "## What the switch would do", "",
+              f"- **{n} units** priced both ways.",
+              f"- Median price shift: **{med:+.1%}**; range "
+              f"**{shifts[0]:+.1%} … {shifts[-1]:+.1%}**.",
+              f"- Moves AWAY from the current cost for **{worse}/{n}** units, "
+              f"towards it for **{n - worse}**.", "",
+              "A K switch is worth taking when it moves prices TOWARDS current costs for",
+              "units the maintainer already considers correctly priced — that is evidence",
+              "the coefficient is capturing something real rather than adding noise.",
+              "It is not a target to optimise: a weapon that genuinely is inaccurate",
+              "SHOULD price below its raw damage.", ""]
+
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text("\n".join(L) + "\n", encoding="utf-8", newline="\n")
+    print(f"comparison -> {out.relative_to(ROOT)}  "
+          f"({len(both)} units, median shift {med:+.1%})" if shifts else
+          f"comparison -> {out.relative_to(ROOT)} (no comparable units)")
+    print("no candidate written — --compare-k is a report, not a fit")
+    return 0
 
 
 def main() -> int:
@@ -99,40 +278,68 @@ def main() -> int:
                     "need not exist in game (Tiger-style baseline)")
     ap.add_argument("--actors", nargs="*", help="explicit member list "
                     "(otherwise: design.class_anchor == --class)")
+    ap.add_argument("--use-k", action="store_true",
+                    help="price on K-adjusted effective DPS (derived sidecar) "
+                         "instead of raw damage/reload (W11)")
+    ap.add_argument("--compare-k", action="store_true",
+                    help="W11: price the class BOTH ways and write a comparison "
+                         "report to docs/balance/derived/. Writes no candidate "
+                         "anchor — it is a report, not a fit.")
     args = ap.parse_args()
     if not args.anchor and not args.spec:
         ap.error("need --anchor or --spec")
+    if args.compare_k and args.spec:
+        ap.error("--compare-k needs a real --anchor: a virtual --spec has no "
+                 "armaments, so it has no K to compare")
 
-    units = collect_units(args.cls, set(args.actors or []) |
-                          ({args.anchor} if args.anchor else set()))
-    if args.spec:
-        hp, speed, rng, dmg, reload_, cost0 = (float(x) for x in args.spec.split(","))
-        d0 = formula.dps(dmg, reload_)
-        o0, p0, q0 = formula.estimators(hp, speed, rng, d0)
-        anchor_id = f"SPEC({args.spec})"
-    else:
-        if args.anchor not in units:
-            print(f"anchor `{args.anchor}` not found in the ledger")
-            return 2
-        ai = unit_inputs(units[args.anchor])
+    units, derived = collect_units(args.cls, set(args.actors or []),
+                                   always={args.anchor} if args.anchor else set())
+    def fit(use_k):
+        """(anchor_id, cost0, o0, p0, q0, rows, fallbacks) for one pricing mode.
+
+        The ANCHOR is re-fitted in the same mode as the members. Pricing members
+        on K against an anchor fitted on raw DPS would compare two different
+        scales and make every delta meaningless.
+        """
+        if args.spec:
+            hp, speed, rng, dmg, reload_, c0 = (float(x) for x in args.spec.split(","))
+            d0 = formula.dps(dmg, reload_)
+            e0 = formula.estimators(hp, speed, rng, d0)
+            return (f"SPEC({args.spec})", c0) + e0 + ([], 0)
+
+        ai, af = unit_inputs(units[args.anchor], derived.get(args.anchor), use_k)
         if ai is None:
-            print(f"anchor `{args.anchor}` lacks hp/speed/weapon stats")
-            return 2
-        cost0 = fnum((units[args.anchor].get("cost") or {}).get("v"))
-        o0, p0, q0 = formula.estimators(*ai)
-        anchor_id = args.anchor
-    print(f"anchor {anchor_id}: cost0={cost0:.0f} O0={o0:.2f} P0={p0:.2f} Q0={q0:.2f}")
+            return None
+        c0 = fnum((units[args.anchor].get("cost") or {}).get("v"))
+        e0 = formula.estimators(*ai)
+        rws, fb = [], af
+        for actor, u in sorted(units.items()):
+            inp, f = unit_inputs(u, derived.get(actor), use_k)
+            fb += f
+            cost = fnum((u.get("cost") or {}).get("v"))
+            if inp is None or cost is None:
+                rws.append((actor, cost, None, None))
+                continue
+            v2 = price_unit(u, inp, *e0, c0)
+            rws.append((actor, cost, v2, (v2 - cost) / cost if cost else None))
+        return (args.anchor, c0) + e0 + (rws, fb)
 
-    rows = []
-    for actor, u in sorted(units.items()):
-        inp = unit_inputs(u)
-        cost = fnum((u.get("cost") or {}).get("v"))
-        if inp is None or cost is None:
-            rows.append((actor, cost, None, None))
-            continue
-        o, p, q = formula.estimators(*inp)
-        v2 = formula.class_anchor_price(o, p, q, o0, p0, q0, cost0)
-        rows.append((actor, cost, v2, (v2 - cost) / cost if cost else None))
+    if args.anchor and args.anchor not in units:
+        print(f"anchor `{args.anchor}` not found in the ledger")
+        return 2
+
+    fitted = fit(args.use_k)
+    if fitted is None:
+        print(f"anchor `{args.anchor}` lacks hp/speed/weapon stats")
+        return 2
+    anchor_id, cost0, o0, p0, q0, rows, fallbacks = fitted
+
+    if args.compare_k:
+        return write_comparison(args, units, derived, fit)
+
+    print(f"anchor {anchor_id}: cost0={cost0:.0f} O0={o0:.2f} P0={p0:.2f} Q0={q0:.2f}"
+          + (f"  [K mode, {fallbacks} armament(s) fell back to raw DPS]"
+             if args.use_k else ""))
 
     rep = LEDGER / f"formula_v2_{args.cls}.md"
     lines = [f"# Formula v2 validation — class `{args.cls}`",

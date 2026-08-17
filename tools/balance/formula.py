@@ -15,6 +15,53 @@ range 5000, reload 50, all modifiers 1 -> O = P = Q = price = 800.
 """
 from __future__ import annotations
 
+import re
+
+_COND_TOKEN = re.compile(r"[A-Za-z_][A-Za-z0-9_.\-]*")
+
+
+def condition_holds_by_default(expr: str | None) -> bool:
+    """Is this OpenRA condition expression true for a UNIT AS BUILT?
+
+    Base pricing has to use the weapon a unit fires the moment it rolls off the
+    line: no promotions, no researched upgrades, not garrisoned, not deployed.
+    So every named condition is evaluated as FALSE and the expression is reduced.
+
+        `!rank-elite`                        -> True   (the BASE weapon)
+        `rank-elite`                         -> False  (the promoted weapon)
+        `!forgotten_upgrade_chemicalweapons` -> True   (before the upgrade)
+        `ifv-miss && !rank-elite`            -> False  (needs a passenger)
+        `shieldgen >= 1`                     -> False  (0 by default)
+        empty / None                         -> True   (unconditional)
+
+    This replaces the old "any `requires` means skip it" rule, which threw away
+    the BASE weapon of every unit that merely has an elite variant — 371 of 863
+    actors with priced armaments had zero DPS and dropped out of pricing entirely
+    (measured 2026-08-15), including `tiger.nax`, the recorded `mbt` anchor.
+    """
+    if expr is None:
+        return True
+    src = expr.strip()
+    if not src:
+        return True
+
+    # Order matters: `!=` must survive the `!` -> `not` rewrite.
+    src = src.replace("!=", "\x00NE\x00")
+    src = src.replace("&&", " and ").replace("||", " or ").replace("!", " not ")
+    src = src.replace("\x00NE\x00", "!=")
+
+    # Every condition name is 0/False. Keep Python keywords the rewrite produced.
+    keep = {"and", "or", "not", "True", "False"}
+    src = _COND_TOKEN.sub(lambda m: m.group(0) if m.group(0) in keep else "0", src)
+
+    try:
+        return bool(eval(src, {"__builtins__": {}}, {}))  # noqa: S307 - digits/operators only
+    except Exception:
+        # An expression we cannot parse is NOT silently treated as a base weapon:
+        # over-counting DPS inflates a price, and a wrong price is worse than a
+        # missing one because it looks authoritative.
+        return False
+
 
 def eff_reload(reload_delay: float, burst: int = 1, burst_delays: float | None = None) -> float:
     """Effective ticks per full burst cycle."""
@@ -23,16 +70,193 @@ def eff_reload(reload_delay: float, burst: int = 1, burst_delays: float | None =
     return reload_delay
 
 
-def dps(damage: float, reload_delay: float, weapon_class: float = 1.0,
-        burst: int = 1, burst_delays: float | None = None,
+def dps(damage: float, reload_delay: float, burst: int = 1,
+        burst_delays: float | None = None,
         firepower_multiplier: float = 1.0) -> float:
     """Burst-aware DPS. With burst=1 this is the legacy G/I*H exactly.
 
     firepower_multiplier is the per-actor FirepowerMultiplier value
     expressed as a factor (1.0 = 100%), used to fine-tune effective
-    damage output without leaving the 2000-step Damage grid."""
-    base = damage * max(burst, 1) / eff_reload(reload_delay, burst, burst_delays) * weapon_class
+    damage output without leaving the 2000-step Damage grid.
+
+    **`weapon_class` was REMOVED here on 2026-08-11 (W4).** It was a tier weight
+    standing in for "how good is this weapon type", back when nothing measured
+    that. The K coefficient now measures it directly from the weapon's own
+    geometry (`weapon_efficiency.py`), so keeping the tier weight as well would
+    charge a weapon twice for the same property. The value still lives in the
+    ledger as `design_weapon_class` (design judgment, and the weapon-class gate
+    reads it) — it simply no longer multiplies the price."""
+    base = damage * max(burst, 1) / eff_reload(reload_delay, burst, burst_delays)
     return base * firepower_multiplier
+
+
+# Charge-up is an ACTOR property, not a weapon one (maintainer ruling 2026-08-11).
+#
+# The NERF is the charge delay itself — it inflates the effective reload and leaves the
+# unit helpless while it winds up. This multiplier is the COMPENSATION for that nerf,
+# not more of it: a cheaper unit is BETTER per credit, so 0.75x is a buff in value terms
+# that pays the unit back for a weakness DPS alone cannot see.
+#
+# Which is why it must be applied EXACTLY ONCE. Two mechanisms compensating the same
+# delay would leave a charging unit over-paid and cost-efficient — the opposite of the
+# intent. See FORMULA_V2 3b: the -0.25 negative-special route is retired for this reason.
+CHARGE_UP_PRICE_MULTIPLIER = 0.75
+
+# Traits that make an actor pay for a charge-up. `AttackCharges` is the Obelisk of
+# Light — the case the ruling itself cites as the model — which does NOT use one of
+# the three `*Charged` traits, so naming only those would have left the cited
+# precedent unpriced.
+CHARGE_UP_TRAITS = frozenset({
+    "AttackCharged", "AttackTurretedCharged", "AttackFrontalCharged",
+    "AttackCharges",
+    # W16: `AttackTesla` JOINS the set. It was excluded while the discount was a
+    # flat 0.75x, because a Tesla Coil charges for a fifth of its cycle and the
+    # Obelisk for a third — paying both the same was the double-discount the
+    # exclusion existed to prevent. Now that the discount is proportional to the
+    # measured share, each earns only what its own wind-up costs it, so there is
+    # nothing left to exclude.
+    "AttackTesla",
+})
+
+# Retired by W16, kept as an empty set so older callers keep working. Membership is
+# no longer a binary decision — see charge_price_multiplier.
+CHARGE_UP_EXCLUDED_TRAITS = frozenset()
+
+# Where each trait keeps its wind-up, with the ENGINE DEFAULT applied when the key is
+# absent. An absent key means DEFAULT, never zero: the RA2 Tesla Coil wrote no
+# `InitialChargeDelay` and an earlier draft of W16 read that as "no charge at all",
+# when the engine gives it 22.
+#
+# ⚠ `AttackTesla`'s cycle is a BURST, and is measured with the burst law
+# (`eff_reload`): the coil winds up once, then fires `MaxCharges` zaps `ChargeDelay`
+# ticks apart, so a full cycle is `ReloadDelay + ChargeDelay x (MaxCharges - 1)` —
+# the same shape as a weapon's `ReloadDelay + BurstDelays x (Burst - 1)`.
+# Maintainer 2026-08-15: "it shoots 3 times but with a delay of 3 ticks between each
+# damage tick so it could be handled like a burst delay in our formula."
+# Ignoring the zaps understates a 3-charge coil's cycle by 6 ticks and hands it a
+# discount it has not earned.
+#
+#   trait -> {charge: (field, default), rate/cycle/burst/burst_delay: (field, default)}
+CHARGE_FIELDS = {
+    "AttackTesla": {
+        "charge": ("InitialChargeDelay", 22),
+        # ⚠ `AttackTesla` REPLACES the weapon's reload with its own. Maintainer
+        # 2026-08-15: "if you have the AttackTesla trait, ReloadDelay is taken from
+        # that instead of from the weapon, and the reload delay from the weapon
+        # counts as the burst delay". So the WEAPON's reload is the gap between
+        # zaps, not `ChargeDelay` — those happen to both be 3 on the two Tesla
+        # Coils, which is why an earlier draft using ChargeDelay produced the right
+        # answer for them and the WRONG one for the AA railtower (weapon reload 10:
+        # a 160-tick cycle, not 132).
+        "cycle_reload": ("ReloadDelay", 120),
+        "burst": ("MaxCharges", 1),
+    },
+    # The ChargeLevel family governs no reload of its own — the charge gates the
+    # actor's own gun, so the share is measured against the weapon it delays.
+    # ChargeLevel is a counter filled at ChargeRate per tick, hence the rate divisor.
+    "AttackCharges":         {"charge": ("ChargeLevel", 25), "rate": ("ChargeRate", 1)},
+    "AttackCharged":         {"charge": ("ChargeLevel", 25), "rate": ("ChargeRate", 1)},
+    "AttackFrontalCharged":  {"charge": ("ChargeLevel", 25), "rate": ("ChargeRate", 1)},
+    "AttackTurretedCharged": {"charge": ("ChargeLevel", 25), "rate": ("ChargeRate", 1)},
+}
+
+
+# W16 anchor, as a LAW rather than one building's stats (maintainer 2026-08-15,
+# "some nice ratio ... might be more consistent"):
+#
+#   A unit that spends HALF AGAIN its reload winding up — charge = 50% of reload —
+#   earns the full 0.75x discount. As a share of the whole cycle that is
+#   0.5 / 1.5 = 1/3.
+#
+# The Obelisk of Light, the case the ruling was written for, sits at 50/(50+96) =
+# 34.2%, so it still anchors at 0.75 (just above the line, clamped) and NOTHING
+# moves: measured across the 11 chargers with a real share, spread 0.198 against
+# today's 0.199.
+#
+# ⚠ A 25%-of-reload anchor (share 20%) was measured and REJECTED: it puts 7 of 11
+# chargers on the 0.75 floor instead of 5, erasing most of the differentiation this
+# item exists to create. Clean is good; clean and flat is not.
+#
+# Kept as a CONSTANT, never read from the Obelisk at runtime — a balance pass
+# retuning that one building must not silently re-price every charging actor.
+CHARGE_ANCHOR_SHARE = 1 / 3
+
+
+def charge_share(ticks: float | None, cycle: float | None) -> float:
+    """Fraction of an attack cycle the actor spends winding up. 0.0 when unknown."""
+    if not ticks or not cycle or ticks <= 0 or cycle <= 0:
+        return 0.0
+    return ticks / (ticks + cycle)
+
+
+def charge_attack_cycle(charge, weapon_reload: float | None):
+    """(cycle_ticks, shots_per_cycle) for a trait that OVERRIDES the weapon's reload.
+
+    `AttackTesla` is the case: the trait's own `ReloadDelay` is the cycle, it fires
+    `MaxCharges` zaps within it, and the WEAPON's reload is the gap between those
+    zaps — i.e. exactly a burst, so `eff_reload` applies unchanged.
+
+    Returns None for traits that do NOT override the weapon (the `ChargeLevel`
+    family), whose gun keeps its own reload and whose charge merely delays it.
+
+    ⚠ This is a PRICING correction, not a detail. A Tesla Coil's weapon reloads
+    every 3 ticks, so reading the weapon alone prices it as firing 20 times a
+    second when it really fires 3 zaps per 106 ticks — an 11.8x overstatement of
+    its DPS, and DPS drives the price.
+    """
+    if not isinstance(charge, dict):
+        return None
+    reload_ = charge.get("cycle_reload")
+    if not reload_:
+        return None
+    burst = int(charge.get("burst") or 1)
+    return eff_reload(reload_, burst, weapon_reload), burst
+
+
+def charge_price_multiplier(charge, reload_fallback: float | None = None) -> float:
+    """Price discount for a charging actor, PROPORTIONAL to its real charge burden (W16).
+
+    W4 applied a flat 0.75x to every charging actor, which is too blunt: the
+    Obelisk spends 34% of its cycle charging while an Asian Alliance railtower
+    spends 9%, and they were paying the same discount. The discount now scales
+    linearly with `charge_share`, anchored so the Obelisk gets exactly 0.75 and a
+    zero-charge actor gets exactly 1.0, clamped to [0.75, 1.0].
+
+    That is also what lets `AttackTesla` finally join the discount: each actor now
+    earns the discount its own charge burden justifies, so there is no longer a
+    binary in/out decision to get wrong.
+
+    Applied to the PRICE, not to DPS: price is degree 1/2/3 in its inputs
+    (O/P/Q), so scaling DPS would not yield a clean multiplier on the result.
+
+    `charge` is the ledger's `charge_up` record (dict) or, for older callers, the
+    bare trait name. A trait with no measurable charge falls back to the flat rate
+    rather than to 1.0 — it charges, we just cannot see by how much, and pricing it
+    as if it did not charge would be the larger error.
+    """
+    if not charge:
+        return 1.0
+
+    if isinstance(charge, dict):
+        trait = charge.get("v")
+        ticks = charge.get("ticks")
+        # A trait that overrides the weapon's reload supplies its own cycle, built
+        # from the weapon reload as the burst delay; everything else measures the
+        # wind-up against the gun it delays.
+        own = charge_attack_cycle(charge, reload_fallback)
+        cycle = own[0] if own else reload_fallback
+    else:
+        trait, ticks, cycle = charge, None, reload_fallback
+
+    if not trait or str(trait).split("@", 1)[0] not in CHARGE_UP_TRAITS:
+        return 1.0
+
+    share = charge_share(ticks, cycle)
+    if share <= 0.0:
+        return CHARGE_UP_PRICE_MULTIPLIER
+
+    scaled = 1.0 - (1.0 - CHARGE_UP_PRICE_MULTIPLIER) * (share / CHARGE_ANCHOR_SHARE)
+    return min(1.0, max(CHARGE_UP_PRICE_MULTIPLIER, scaled))
 
 
 # Twin warheads — NEVER main / NEVER in the damage total (DESIGN.md):
@@ -102,15 +326,92 @@ def spread_damage_sum(warheads, smallarms_only: bool = False,
     return total
 
 
-DAMAGE_STEP = 2000
+# The flat-damage grid. 2000 until 2026-08-11, when the maintainer regridded it 20x finer
+# (2000 -> 200 -> 100) alongside a percentage twin measured in BASIS POINTS (0.01%).
+#
+# The law is deliberately one sentence: **100 flat damage == 0.01% of max health**, so one
+# step of the flat grid is exactly one step of the percentage grid and the twin can never
+# drift from the weapon it belongs to.
+DAMAGE_STEP = 100
+
+# Flat damage per ONE WHOLE PERCENT of the twin. Raised 2000 -> 10000 in the same ruling:
+# the twin's BASE percentage is now 5x smaller, and the percentage warheads' Versus values
+# are 5x larger to compensate (1..17 became multiples of 5 in [5, 100]).
+#
+# ⚠ THE TWO HALVES ARE ONE CHANGE. Landing this ratio without the Versus x5 makes every
+# percentage twin deal a FIFTH of its damage; landing the Versus x5 without this ratio
+# makes it deal FIVE TIMES. Neither half is safe alone — see W18.
+DAMAGE_PER_PERCENT = 10000
+
+# What a Damage value on a percentage warhead MEANS, as a denominator.
+#   100   = whole percent — stock HealthPercentageDamage, and AreaDamagePercentage's
+#           default, so untouched weapons keep their current behaviour
+#   10000 = basis points, 0.01% steps (AreaDamagePercentage, PercentageDenominator: 10000)
+PERCENT_DENOMINATOR = 100
+BASIS_POINT_DENOMINATOR = 10000
+
+# Percentage-warhead Versus values are multiples of 5 in [5, 100] (the x5 rebase of the
+# old 1..17 band). Which 17-step window a family uses is a W13 profile decision: 5..85
+# reproduces today's balance exactly, 20..100 is the deliberately generalist band.
+PERCENTAGE_VERSUS_STEP = 5
+PERCENTAGE_VERSUS_BOUNDS = (5, 100)
 
 
 def snap_damage_step(value: float, step: int = DAMAGE_STEP) -> int:
-    """Nearest multiple of the 2000-damage grid (DESIGN.md); a positive
+    """Nearest multiple of the flat-damage grid (DESIGN.md); a positive
     value never snaps below one step."""
     if value <= 0:
         return 0
     return max(step, int(round(value / step)) * step)
+
+
+def percentage_twin(per: float, denominator: int = PERCENT_DENOMINATOR) -> int:
+    """The `*Percentage` twin for a main Damage value, in the unit that node uses.
+
+    The design ratio is `DAMAGE_PER_PERCENT`: one whole percent per 10000 flat damage,
+    i.e. **0.01% for every 100 flat damage**. `denominator` says how the node WRITES
+    that percentage:
+
+        100   -> whole percent (stock HealthPercentageDamage — too coarse to hold the
+                                new ratio; 16000 damage rounds to 2%)
+        10000 -> basis points  (AreaDamagePercentage with PercentageDenominator: 10000;
+                                16000 -> 160, i.e. 1.60%, exactly Damage/100)
+
+    Passing the wrong denominator is a silent 10x error in either direction, which is
+    why it is threaded from the resolved node rather than assumed.
+
+    This used to be ``per // DAMAGE_STEP``, an integer division that made the twin a
+    step function of Damage: 2000 -> 1, **1999 -> 0**, 3500 -> 1 (same as 2000). A
+    twin of 0 is not "a little damage", it is HARD IMMUNITY — the percentage warhead
+    silently does nothing — and it arrived purely from rounding, at exactly the Damage
+    values a finer grid makes legal. Hence W15 lands before the grid moves.
+
+    Rounding is half-UP and explicit rather than ``round()``, whose banker's rounding
+    would send 5000 -> 2 while 7000 -> 4 (both .5 cases, rounded opposite ways). A live
+    warhead never rounds below 1: the engine's Damage field is an integer, so one unit
+    of the node's own denominator is the finest step it can express.
+    """
+    if per <= 0:
+        return 0
+    units_per_damage = denominator / (DAMAGE_PER_PERCENT * PERCENT_DENOMINATOR)
+    return max(1, int(per * units_per_damage + 0.5))
+
+
+def twin_denominator(warhead: dict) -> int:
+    """The unit a percentage twin's Damage is written in, from the ledger record.
+
+    Only `AreaDamagePercentage` can carry a `PercentageDenominator` — the stock
+    `HealthPercentageDamage` has no such field and is always whole percent. An
+    explicit value in the record wins; absence means the engine default.
+    """
+    value = warhead.get("percentage_denominator")
+    if value in (None, ""):
+        return PERCENT_DENOMINATOR
+    try:
+        value = int(value)
+    except (TypeError, ValueError):
+        return PERCENT_DENOMINATOR
+    return value if value > 0 else PERCENT_DENOMINATOR
 
 
 def distribute_damage(new_total, warheads, template_names=None) -> dict[str, int]:
@@ -128,7 +429,8 @@ def distribute_damage(new_total, warheads, template_names=None) -> dict[str, int
         weapons trade area-of-effect for a shield/bonus chip, so it is
         ALWAYS half the main — yet still EXCLUDED from the damage total.
       * each ``*Percentage`` HealthPercentageDamage twin = 1 per 2000 of D
-        (D // 2000, i.e. 16000 -> 8).
+        (16000 -> 8), via ``percentage_twin`` — rounded, never floored to
+        zero, so an off-grid D does not silently disable it.
 
     This is the ONE canonical way to write per-warhead Damage, so a single
     design number can NEVER again be broadcast identically onto every
@@ -152,8 +454,10 @@ def distribute_damage(new_total, warheads, template_names=None) -> dict[str, int
             # 50% twin — ExtraDamage may be SpreadDamage OR OpenToppedDamage
             # (e.g. SniperWeaponExtraDamage); the rule is type-agnostic.
             result[tag] = per // 2
-        elif low.endswith("percentage"):           # HealthPercentageDamage twin
-            result[tag] = per // DAMAGE_STEP
+        elif low.endswith("percentage"):           # %-of-max-health twin
+            # The node's own unit, never assumed: a stock HealthPercentageDamage writes
+            # whole percent, an AreaDamagePercentage may write per-mille.
+            result[tag] = percentage_twin(per, twin_denominator(w))
     return result
 
 
@@ -331,8 +635,8 @@ def _selftest() -> None:
         return {t: v for t, v in res.items()
                 if not t.lower().endswith(("extradamage", "percentage", "friendlyfire"))}
 
-    # DESIGN.md law: mains identical on the 2000 grid, FF=50%, ExtraDamage
-    # =50% (excluded from total), Pct=1/2000. total 10000 / 5 mains -> 2000.
+    # DESIGN.md law: mains identical on the damage grid, FF=50%, ExtraDamage
+    # =50% (excluded from total). total 10000 / 5 mains -> 2000.
     whs = [wh("A", 22000), wh("Aextradamage", 22000, "SpreadDamage"),
            wh("Apercentage", 1, "HealthPercentageDamage"),
            wh("B", 22000), wh("C", 22000), wh("D", 22000),
@@ -342,18 +646,38 @@ def _selftest() -> None:
     assert sum(mains(r).values()) == 10000, r
     assert r["Dfriendlyfire"] == 1000, r                # FF = 50%
     assert r["Aextradamage"] == 1000, r                 # ExtraDamage = 50%
-    assert r["Apercentage"] == 1, r                     # 1 per 2000
     # ExtraDamage carries a value (50%) but is EXCLUDED from the total
     assert spread_damage_sum(whs) == 22000 * 5          # Aextradamage not summed
 
-    # 16000 main -> Percentage 8 (DESIGN.md example)
-    r = distribute_damage(16000, [wh("m", 4000), wh("mpercentage", 1, "HealthPercentageDamage")])
-    assert r["m"] == 16000 and r["mpercentage"] == 8, r
+    # THE percentage law: 100 flat damage == 0.01% of max health, exactly Damage/100.
+    r = distribute_damage(16000, [wh("m", 4000),
+                                  {"tag": "mpercentage", "damage": "1",
+                                   "type": "AreaDamagePercentage",
+                                   "percentage_denominator": BASIS_POINT_DENOMINATOR}])
+    assert r["m"] == 16000 and r["mpercentage"] == 160, r          # 1.60%
+    assert percentage_twin(DAMAGE_STEP, BASIS_POINT_DENOMINATOR) == 1
 
-    # off-grid total snaps to the 2000 step; mains stay identical (fine-tune=FP)
+    # W15: the twin is continuous in Damage — never floored to a silent 0, and it
+    # keeps tracking Damage between grid points (the old // gave 1999->0, 3500->1).
+    assert percentage_twin(1999, BASIS_POINT_DENOMINATOR) == 20
+    assert percentage_twin(1, BASIS_POINT_DENOMINATOR) == 1
+    assert percentage_twin(0, BASIS_POINT_DENOMINATOR) == 0   # no main damage, no twin
+    assert all(percentage_twin(d, BASIS_POINT_DENOMINATOR)
+               >= percentage_twin(d - 100, BASIS_POINT_DENOMINATOR)
+               for d in range(100, 40000, 100))         # monotone
+
+    # Whole percent can no longer HOLD the ratio — 1.60% rounds to 2%. That coarseness
+    # is exactly why W18 migrates the stock nodes to the basis-point warhead.
+    assert percentage_twin(16000) == 2
+    assert percentage_twin(1) == 1                      # but still never a silent zero
+
+    # off-grid total snaps to the step; mains stay identical (fine-tune=FP)
     r = distribute_damage(9000, [wh("a", 2000), wh("b", 2000), wh("c", 2000)])
     assert len(set(r.values())) == 1, r                 # identical
-    assert all(v % 2000 == 0 for v in r.values()), r    # on the 2000 grid
+    assert all(v % DAMAGE_STEP == 0 for v in r.values()), r
+    # 9000/3 = 3000 lands EXACTLY on the 200 grid. The old 2000 grid had to snap it to
+    # 4000 and hand a 33% remainder to FirepowerMultiplier — that is what finer buys.
+    assert set(r.values()) == {3000}, r
 
     # Tiger anchor (DESIGN §12) still holds
     assert round(price(100000, 100, 5000, dps(10000, 50))) == 800

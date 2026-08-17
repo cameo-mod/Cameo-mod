@@ -182,6 +182,32 @@ reference an image+sequence, so the yaml wires with placeholders and the art dro
 
 ## 5. Build STATUS + RESUME TRACKER (updated 2026-08-11 — ⭐ RESUME HERE after /compact)
 
+> ⭐ **The physical-state work is now items W6–W10 in
+> [`BALANCE_PROGRAM_PLAN.md`](BALANCE_PROGRAM_PLAN.md)**, which holds their status,
+> ownership and acceptance criteria. Read §0 of that file first. Summary of the newly
+> approved conversions (maintainer 2026-08-11):
+>
+> - **W6** — new C# `ModifiesCombatProportionalToPhysicalState` (signed from→to for
+>   reload/range/speed/firepower, **with audio-pitch and glow hooks folded in**). This is
+>   the framework's missing half: every existing proportional trait only makes things
+>   worse, so a spin-**up** is impossible without it. Blocks W8 and W10.
+> - **W7** — **Sonic → `Resonance` meter**, no new C# needed. The rule that keeps it
+>   distinct from Corrosion: Resonance **deals no damage at all, ever** (pure force
+>   multiplier, fast decay) while Corrosion is attrition (DoT, slow decay). Sonic becomes
+>   the only debuff that kills nothing and doubles the army's output.
+> - **W8** — gatling ladder → `SpinUp` meter. **47 actors × 20–30 multiplier traits ≈ 1340
+>   objects, ~40% of all 3197 multiplier instances in the mod**, in ten 5% steps.
+>   End-points to reproduce: `0.95¹⁰ = 0.599` reload, `1.02¹⁰ = 1.219` range/speed.
+> - **W9** — **Poison meter**: a Corrosion clone for infantry (corrosion eats vehicles,
+>   poison hurts infantry, flame does both). Gas clouds fill the meter by dwell time and
+>   the DoT scales off it — dose-response, no new C#.
+> - **W10** — **Blind meter**: range scales 100%→20% proportionally; at FULL blind only,
+>   the weapon is disabled, the icon shows, and the `blinded` Targetable applies so
+>   blinders retarget.
+>
+> **Keep binary:** `^Berserkable` (chaos gas) — it flips a *mode* (who you obey), not a
+> magnitude. Rule of thumb: meter a *magnitude*, keep a *mode* binary.
+
 **DONE (committed work was boot-gated unless noted):**
 - ✅ C# damage-scaled `PhysicalStateName`/`PhysicalStateScale` on `AreaDamage` + `_Percentage` — `406261128`
 - ✅ C# MULTI-state `PhysicalStates` dict (one warhead → many meters) — `2e6d6968a`
