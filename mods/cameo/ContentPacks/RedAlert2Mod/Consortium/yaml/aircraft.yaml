@@ -509,12 +509,12 @@ steelconsortium_cloudbreaker:
 	Voiced:
 		VoiceSet: SteelEmpressVoice
 	WithIdleOverlay@shield1:
-		Image: hexshield_fit_directional_oval
-		Sequence: fit-{actor}
-		StartSequence: fit-{actor}
+		Image: hexshield_directional_oval
+		Sequence: directional-oval-large
+		StartSequence: directional-oval-large
 	WithIdleOverlay@shield_damage:
-		Image: hexshield_fit_directional_oval
-		Sequence: fit-{actor}
+		Image: hexshield_directional_oval
+		Sequence: directional-oval-large
 	CarrierMaster:
 		Actors: cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel
 		RearmTicks: 25

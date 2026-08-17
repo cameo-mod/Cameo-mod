@@ -1794,12 +1794,12 @@
 	TooltipExtras@Dreadnought:
 		Description: Dreadnought
 	WithIdleOverlay@shield1:
-		Image: hexshield_fit_sphere
-		Sequence: fit-{actor}
-		StartSequence: fit-{actor}
+		Image: hexshield_sphere
+		Sequence: sphere-large
+		StartSequence: sphere-large
 	WithIdleOverlay@shield_damage:
-		Image: hexshield_fit_sphere
-		Sequence: fit-{actor}
+		Image: hexshield_sphere
+		Sequence: sphere-large
 
 ^MissileVehicleTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceVehicle
@@ -2364,12 +2364,12 @@
 		Type: GrinderCash
 		Sounds: bgrinda.wav
 	WithIdleOverlay@shield1:
-		Image: hexshield_fit_sphere
-		Sequence: fit-{actor}
-		StartSequence: fit-{actor}
+		Image: hexshield_sphere
+		Sequence: sphere-medium
+		StartSequence: sphere-medium
 	WithIdleOverlay@shield_damage:
-		Image: hexshield_fit_sphere
-		Sequence: fit-{actor}
+		Image: hexshield_sphere
+		Sequence: sphere-medium
 	WithIdleOverlay@shrouded:
 		Image: shrouded_overlay
 	ProductionCostMultiplier@scaledprices:
@@ -2379,14 +2379,14 @@
 ^Vehicle:
 	Inherits: ^BasicUnit
 	WithIdleOverlay@shield1:
-		Image: hexshield_fit_sphere
-		Sequence: fit-{actor}
-		StartSequence: fit-{actor}
+		Image: hexshield_sphere
+		Sequence: sphere-medium
+		StartSequence: sphere-medium
 		Palette: hexshield25
 		IsPlayerPalette: false
 	WithIdleOverlay@shield_damage:
-		Image: hexshield_fit_sphere
-		Sequence: fit-{actor}
+		Image: hexshield_sphere
+		Sequence: sphere-medium
 		Palette: hexshield50
 		IsPlayerPalette: false
 	# Muzzle-flash glow for every ground vehicle; gated per-armament by MuzzleSequence, so only
@@ -2722,14 +2722,14 @@
 ^RANeutralPlane: #for actual air units
 	Inherits@1: ^BasicUnit
 	WithIdleOverlay@shield1:
-		Image: hexshield_fit_sphere
-		Sequence: fit-{actor}
-		StartSequence: fit-{actor}
+		Image: hexshield_sphere
+		Sequence: sphere-medium
+		StartSequence: sphere-medium
 		Palette: hexshield25
 		IsPlayerPalette: false
 	WithIdleOverlay@shield_damage:
-		Image: hexshield_fit_sphere
-		Sequence: fit-{actor}
+		Image: hexshield_sphere
+		Sequence: sphere-medium
 		Palette: hexshield50
 		IsPlayerPalette: false
 	Inherits@ext: ^ExternalConditions
@@ -3331,14 +3331,14 @@
 	ActorStatValues:
 		Stats: Armor, Sight, Speed
 	WithIdleOverlay@shield1:
-		Image: hexshield_fit_infantry
-		Sequence: fit-{actor}
-		StartSequence: fit-{actor}
+		Image: hexshield_infantry
+		Sequence: infantry-standard
+		StartSequence: infantry-standard
 		Palette: hexshield25
 		IsPlayerPalette: false
 	WithIdleOverlay@shield_damage:
-		Image: hexshield_fit_infantry
-		Sequence: fit-{actor}
+		Image: hexshield_infantry
+		Sequence: infantry-standard
 		Palette: hexshield50
 		IsPlayerPalette: false
 	WithIdleOverlay@shrouded:
@@ -4057,12 +4057,12 @@
 	ActorStatValues:
 		Stats: Armor, Sight, Power
 	WithIdleOverlay@shield1:
-		Image: hexshield_fit_dome
-		Sequence: fit-{actor}
-		StartSequence: fit-{actor}
+		Image: hexshield_dome
+		Sequence: dome-medium
+		StartSequence: dome-medium
 	WithIdleOverlay@shield_damage:
-		Image: hexshield_fit_dome
-		Sequence: fit-{actor}
+		Image: hexshield_dome
+		Sequence: dome-medium
 	WithIdleOverlay@shrouded:
 		Image: shrouded_overlay_big
 	DamagedByTerrain:
@@ -4745,12 +4745,12 @@
 	-CommandBarBlacklist:
 	-AcceptsDeliveredCash:
 	WithIdleOverlay@shield1:
-		Image: hexshield_fit_dome
-		Sequence: fit-{actor}
-		StartSequence: fit-{actor}
+		Image: hexshield_dome
+		Sequence: dome-small
+		StartSequence: dome-small
 	WithIdleOverlay@shield_damage:
-		Image: hexshield_fit_dome
-		Sequence: fit-{actor}
+		Image: hexshield_dome
+		Sequence: dome-small
 	WithIdleOverlay@shrouded:
 		Image: shrouded_overlay
 

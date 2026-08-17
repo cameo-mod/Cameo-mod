@@ -2,73 +2,56 @@
 
 ## Runtime contract
 
-Shield mechanics still decide whether an actor is shielded. The visual traits keep their
-existing `RequiresCondition`, palette, and upgrade/aura behavior. The fitting layer changes
-only the overlay image and sequence.
+Shield mechanics still decide whether an actor is shielded. The visual traits retain their
+existing conditions, upgrade and aura behavior. This system changes only the overlay image,
+sequence, and fixed faction palette.
 
-`WithIdleOverlay` supports `{actor}` in `Sequence` and `StartSequence`. The token is replaced
-once when the overlay is created, so shared receiver templates can use `fit-{actor}` without
-per-frame fitting or per-actor trait patches.
+The shared geometry policy is:
 
-The shape policy is:
+- infantry: `hexshield_infantry` / `infantry-standard`;
+- ordinary vehicles, ships, and aircraft: `hexshield_sphere` / `sphere-medium`;
+- dreadnought-scale mobile actors: `hexshield_sphere` / `sphere-large`;
+- defenses: `hexshield_dome` / `dome-small`;
+- buildings: `hexshield_dome` / `dome-medium`;
+- elongated mobile actors: explicit opt-in to `hexshield_directional_oval` /
+  `directional-oval-large`.
 
-- buildings: camera-correct dome;
-- infantry: upright oval;
-- vehicles, ships, and aircraft: sphere;
-- explicitly elongated mobile actors: 32-facing directional oval (currently Cloudbreaker).
+Additional generic `sphere-small` and `dome-large` tiers are available for explicit actor or
+template overrides. Shared assets and sequence names must remain actor- and faction-neutral.
 
-Palettes remain independent of shape: default/Protoss blue, Ixian silver, Yuri indigo, and
-Consortium cyan. Idle and hit palettes retain 25% and 50% alpha.
+Palettes are independent from geometry: default and Protoss shields are blue, Ixian shields
+are silver, Yuri shields are indigo, and Consortium shields are cyan. Idle and hit palettes
+retain 25% and 50% alpha.
 
-## Fit formula
+## Choosing a tier
 
-For actor visible bounds `W_A`, `H_A`, actor center `C_A`, master visible bounds `W_M`,
-`H_M`, master center `C_M`, and per-shape padding `P`:
+Class templates supply the normal tier. Override both shield overlays only when the inherited
+tier is visibly too small or excessively loose:
 
-```text
-scale = max((W_A + 2 P_x) / W_M, (H_A + 2 P_y) / H_M)
-sequence offset = C_A / scale - C_M
+```yaml
+WithIdleOverlay@shield1:
+	Image: hexshield_sphere
+	Sequence: sphere-large
+	StartSequence: sphere-large
+WithIdleOverlay@shield_damage:
+	Image: hexshield_sphere
+	Sequence: sphere-large
 ```
 
-Scale is rounded upward to three decimals so serialization cannot reintroduce leakage.
-The sequence offset, rather than a trait offset, owns shield centering. This matters because
-OpenRA scales sequence offsets together with the sprite.
+Do not copy a sequence under an actor-specific name. Add a new generic tier only when multiple
+actors can plausibly reuse it. Directional ovals are deliberate actor-level choices because
+their facings and silhouette must be reviewed in game.
 
-## Regeneration workflow
+## Performance and fit policy
 
-Run the engine utility against the active Cameo manifest, then run the fitter:
+The eight shared sequences reuse four Indexed8 PNG atlases. A shielded actor still renders one
+idle-or-hit overlay, and there is no runtime bounds scan, dynamic scaling, or per-actor sequence
+lookup. This keeps sequence metadata small and does not require an engine feature.
 
-```text
-python tools/audit/fit_hex_shields.py --actors-out <actors.txt>
-OpenRA.Utility cameo --measure-actor-sprite-bounds --actors-file <actors.txt> --out <bounds.json>
-python tools/audit/fit_hex_shields.py <bounds.json> --json-out <report.json> --sequences-out mods/cameo/sequences/generated_hexshield_fits.yaml
-```
+The tradeoff is intentional: shared tiers are less exact than per-actor fitting. Some shields
+will be loose, and unusual silhouettes may leak until given a generic tier override. Static
+bounds are useful for finding candidates, but final scale and offset remain an in-game visual
+decision because voxel models, turrets, animation, and the OpenRA camera affect the result.
 
-The engine utility uses OpenRA's sprite cache, enumerates animation frames and facings, and
-measures visible PNG/SHP pixels. Body-relative turret mounts and independently rotating turret
-sprites are combined across their full facing sets, with both rest and maximum-recoil positions.
-The fitter classifies receiver geometry, applies the formula, and regenerates one sequence per
-actor under four shared image roots. Do not hand-edit the generated YAML.
-
-Directional actors are fitted facing by facing. Each actor body facing is paired with the shield
-facing selected by OpenRA's nearest-facing rule; the shared scale and offset must satisfy every
-pair. This also covers actors such as Cloudbreaker that have 64 body facings but use 32 shield
-facings.
-
-After regeneration, rerun the fitter without `--sequences-out`. `current_covers_model` must
-be true for every result, and every resolved `fit-{actor}` reference must exist.
-
-## Voxel and maintenance notes
-
-Headless sprite measurement cannot rasterize VXL models exactly. Hybrid actors union their
-measured sprite components with conservative `Selectable.DecorationBounds`/`Bounds`; actors
-without visible sprite pixels use the selectable bounds alone. Both cases are identified in the
-JSON report. Review them in game when their voxel or selection bounds change.
-
-The generated sequences all reference the same four indexed PNGs. They add sequence metadata,
-not duplicate sprite atlases, and each shielded actor still renders one idle-or-hit overlay.
-There is no per-frame bounds scan, scale calculation, or additional draw pass.
-
-When actor art, body/turret offsets, animation facings, or selection bounds change, regenerate
-the table. When adding an elongated exception, select the directional oval in the fitter's
-shape policy and keep its actor template on the directional fitted image.
+When actor art changes, first test its inherited tier. Promote or demote it to an existing tier
+when possible; create a reusable generic tier only when necessary.

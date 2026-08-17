@@ -43,13 +43,13 @@ protoss_photoncannon:
 	BodyOrientation:
 		QuantizedFacings: 16
 	WithIdleOverlay@shield1:
-		Image: hexshield_fit_dome
-		Sequence: fit-{actor}
-		StartSequence: fit-{actor}
+		Image: hexshield_dome
+		Sequence: dome-small
+		StartSequence: dome-small
 		RequiresCondition: !disabled && shielded && !shieldhit && !build-incomplete
 	WithIdleOverlay@shield_damage:
-		Image: hexshield_fit_dome
-		Sequence: fit-{actor}
+		Image: hexshield_dome
+		Sequence: dome-small
 		RequiresCondition: !disabled && shielded && shieldhit && !build-incomplete
 	-WithSpriteBody:
 	-WithDeathAnimation:

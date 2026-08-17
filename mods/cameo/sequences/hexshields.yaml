@@ -1,0 +1,67 @@
+# Shared recolorable hex-shield size tiers. Actors inherit a class default and may
+# explicitly select another generic tier when their silhouette needs it.
+
+hexshield_infantry:
+	infantry-standard:
+		Filename: hexshield_infantry.png
+		Length: 8
+		ZOffset: 1023
+		Scale: 1.3
+		Tick: 80
+		Offset: 0,-5.5
+
+hexshield_sphere:
+	sphere-small:
+		Filename: hexshield_sphere.png
+		Length: 8
+		ZOffset: 1023
+		Scale: 0.65
+		Tick: 80
+		Offset: 0,2
+	sphere-medium:
+		Filename: hexshield_sphere.png
+		Length: 8
+		ZOffset: 1023
+		Scale: 1
+		Tick: 80
+		Offset: 0,1
+	sphere-large:
+		Filename: hexshield_sphere.png
+		Length: 8
+		ZOffset: 1023
+		Scale: 1.5
+		Tick: 80
+		Offset: 0,0
+
+hexshield_dome:
+	dome-small:
+		Filename: hexshield_dome_master.png
+		Length: 8
+		ZOffset: 1023
+		Scale: 0.4
+		Tick: 80
+		Offset: 2,-17
+	dome-medium:
+		Filename: hexshield_dome_master.png
+		Length: 8
+		ZOffset: 1023
+		Scale: 0.7
+		Tick: 80
+		Offset: 2,-16
+	dome-large:
+		Filename: hexshield_dome_master.png
+		Length: 8
+		ZOffset: 1023
+		Scale: 1
+		Tick: 80
+		Offset: 1,-20
+
+hexshield_directional_oval:
+	directional-oval-large:
+		Filename: hexshield_directional_oval.png
+		Length: 4
+		Facings: 32
+		ZOffset: 1023
+		Scale: 0.978
+		Tick: 80
+		Offset: -0.141,-11.322
