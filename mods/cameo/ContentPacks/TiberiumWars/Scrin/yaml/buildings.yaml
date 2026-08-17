@@ -2,6 +2,15 @@
 # editor, but stay outside production until the Drone Ship, weapons, and the rest
 # of the faction exist.
 
+^Scrin3x1Shape:
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 512
+	Selectable:
+		Bounds: 3072, 1024
+
 scrin_drone_platform:
 	Inherits: ^Building
 	Inherits@shape: ^3x2Shape
@@ -28,72 +37,86 @@ scrin_reactor:
 
 scrin_extractor:
 	Inherits: ^Building
-	Inherits@shape: ^3x3Shape
+	Inherits@shape: ^4x3Shape
 	Tooltip:
 		Name: actor_scrin_extractor.name
 	Building:
-		Dimensions: 3,3
-		Footprint: xxx xxx xxx
+		Dimensions: 4,3
+		Footprint: =xx= xxxx =xx=
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba
 
 scrin_portal:
 	Inherits: ^Building
-	Inherits@shape: ^2x2Shape
+	Inherits@shape: ^Scrin3x1Shape
 	Tooltip:
 		Name: actor_scrin_portal.name
 	Building:
-		Dimensions: 2,2
-		Footprint: xx xx
+		Dimensions: 3,1
+		Footprint: xxx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba
+	WithIdleOverlay@CORE:
+		Image: scrin_portal_core
+		Sequence: idle
+		Palette: scrin_portal_training
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@FOREGROUND:
+		Image: scrin_portal_foreground
+		Sequence: idle
+		RequiresCondition: !build-incomplete
 
 scrin_warp_gate:
 	Inherits: ^Building
-	Inherits@shape: ^3x2Shape
+	Inherits@shape: ^4x2Shape
 	Tooltip:
 		Name: actor_scrin_warp_gate.name
 	Building:
-		Dimensions: 3,2
-		Footprint: xxx xxx
+		Dimensions: 4,2
+		Footprint: x==x x==x
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba
+	WithIdleOverlay@CORE:
+		Image: scrin_warp_gate_core
+		Sequence: idle
+		Palette: scrin_warp_gate_training
+		RequiresCondition: !build-incomplete
 
 scrin_nerve_center:
 	Inherits: ^Building
-	Inherits@shape: ^2x2Shape
+	Inherits@shape: ^2x1Shape
 	Tooltip:
 		Name: actor_scrin_nerve_center.name
 	Building:
-		Dimensions: 2,2
-		Footprint: xx xx
+		Dimensions: 2,1
+		Footprint: xx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba
 
 scrin_stasis_chamber:
 	Inherits: ^Building
-	Inherits@shape: ^2x2Shape
+	Inherits@shape: ^1x2Shape
 	Tooltip:
 		Name: actor_scrin_stasis_chamber.name
 	Building:
-		Dimensions: 2,2
-		Footprint: xx xx
+		Dimensions: 1,2
+		Footprint: x x
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba
 
 scrin_technology_assembler:
 	Inherits: ^Building
-	Inherits@shape: ^3x3Shape
+	Inherits@shape: ^3x4Shape
 	Tooltip:
 		Name: actor_scrin_technology_assembler.name
 	Building:
-		Dimensions: 3,3
-		Footprint: xxx xxx xxx
+		Dimensions: 3,4
+		Footprint: xx_ xxx xxx _xx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba
@@ -105,7 +128,7 @@ scrin_signal_transmitter:
 		Name: actor_scrin_signal_transmitter.name
 	Building:
 		Dimensions: 2,2
-		Footprint: xx xx
+		Footprint: =x x=
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba
@@ -232,12 +255,12 @@ scrin_warp_chasm:
 
 scrin_foundry:
 	Inherits: ^Building
-	Inherits@shape: ^2x2Shape
+	Inherits@shape: ^2x1Shape
 	Tooltip:
 		Name: actor_scrin_foundry.name
 	Building:
-		Dimensions: 2,2
-		Footprint: xx xx
+		Dimensions: 2,1
+		Footprint: xx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba

@@ -15,7 +15,8 @@ scrin_reactor:
 		Tick: 160
 		ShadowStart: 12
 		ShadowZOffset: -5
-		Offset: 11.906,-1.226
+		Offset: 2.000,3.000
+		Scale: 0.65
 
 scrin_extractor:
 	idle:
@@ -25,7 +26,8 @@ scrin_extractor:
 		Tick: 100
 		ShadowStart: 16
 		ShadowZOffset: -5
-		Offset: 9.027,1.656
+		Offset: 2.000,-1.000
+		Scale: 0.65
 
 scrin_portal:
 	idle:
@@ -34,7 +36,22 @@ scrin_portal:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: 3.994,-17.249
+		Offset: 4.000,-4.000
+
+scrin_portal_core:
+	idle:
+		Filename: scrin_sprites|scrin_portal_core.png
+		Start: 0
+		Length: 48
+		Tick: 83
+		Offset: 0.000,0.000
+
+scrin_portal_foreground:
+	idle:
+		Filename: scrin_sprites|scrin_portal_foreground.png
+		Start: 0
+		Length: 1
+		Offset: 0.000,8.000
 
 scrin_warp_gate:
 	idle:
@@ -43,7 +60,15 @@ scrin_warp_gate:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: 0.000,-16.954
+		Offset: 0.000,-4.000
+
+scrin_warp_gate_core:
+	idle:
+		Filename: scrin_sprites|scrin_warp_gate_core.png
+		Start: 0
+		Length: 48
+		Tick: 83
+		Offset: 3.000,-32.000
 
 scrin_nerve_center:
 	idle:
@@ -52,7 +77,7 @@ scrin_nerve_center:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: 4.045,-33.489
+		Offset: 0.000,-24.000
 
 scrin_stasis_chamber:
 	idle:
@@ -61,7 +86,7 @@ scrin_stasis_chamber:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: 23.266,-10.248
+		Offset: 4.000,8.000
 
 scrin_technology_assembler:
 	idle:
@@ -70,7 +95,7 @@ scrin_technology_assembler:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: -0.018,-2.543
+		Offset: 0.000,0.000
 
 scrin_signal_transmitter:
 	idle:
@@ -79,7 +104,7 @@ scrin_signal_transmitter:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: 4.000,-24.000
+		Offset: 4.000,4.000
 
 scrin_buzzer_hive:
 	idle:
@@ -171,7 +196,7 @@ scrin_foundry:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: 8.000,-8.000
+		Offset: 0.000,-8.000
 
 scrin_outpost:
 	idle:
@@ -180,7 +205,7 @@ scrin_outpost:
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
-		Offset: 4.000,-40.000
+		Offset: 4.000,8.000
 
 scrin_control_node:
 	idle:
