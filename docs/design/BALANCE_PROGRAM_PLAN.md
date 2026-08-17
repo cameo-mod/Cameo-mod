@@ -345,6 +345,55 @@ Needs a regenerate + `verify_generator_sync` drift=0 + boot gate, so it is its o
 ⚠ Note this is exactly the class of contradiction `audit_doc_claims` **cannot** catch — it is
 code-vs-code, not a documented number.
 
+### ⛔ THE PROCEDURE — resolve and INLINE first, remove inherits second, clean up third
+
+**Maintainer 2026-08-17:** *"first you need to resolve all the inherits for the projectile and the
+effects for each weapon before you remove any inherits. So those 15 inherits you saw earlier, they
+all contributed something right? Inherit them one by one in order and resolve that, then remove
+the inherits and then try to clean the massive field list up for what's important."*
+
+**Correct, and the collapse planner alone is nowhere near sufficient** — it only chooses the
+DAMAGE family. Measured on `wc2dragonFireVisible`: its local definition has 63 top-level nodes and
+the full resolve has 69, of which **23 exist ONLY in the inherits**:
+
+| what the inherits alone provide | nodes |
+|---|--:|
+| ground decals — `LeaveSmudge` (`Smudge`, `RA2Scorch`, `DuneRock`, `DuneSand`, `RA2Crater`, `Smudge1`, `Smudge2`, `Smudge2RA2`) | 8 |
+| impact effects — `CreateEffect` (`ShieldHitEffect`, `EffectWater`, `EffectAir`) + `GlowImpact` | 4 |
+| **`ApplyPhysicalState`** — the Temperature meters (Light/Medium/Heavy Flame + FriendlyFire twins) | 6 |
+| `SpawnActor` `GroundFire` (burning ground), `GrantExternalCondition` `ShieldHit`, `DamagesConcrete` | 3 |
+| `InvalidTargets: wall`, `TargetActorCenter: true` | 2 |
+
+and the `Projectile` node goes from **2 local fields to 25 resolved** (`Inaccuracy: 250`,
+`Shadow: true`, +21 more). **Deleting the inherits without inlining first would silently strip
+every impact effect, every decal, the physical-state application, the ground fire, the glow, and
+23 of 25 projectile fields** — a weapon that still lints, still boots, and looks visually broken
+only in play.
+
+⚠ It also already declares all ~41 warhead nodes locally as bare type re-declarations
+(`Warhead@LightFlameWeapon: SpreadDamage`, …), inheriting their FIELDS. Removing the parents
+orphans those into abstract/missing-required-field warheads — the empty-warhead boot-crash class.
+⚠ And it is still `SpreadDamage` / `HealthPercentageDamage` with explicit `FriendlyFire` twins:
+**never converted by the AreaDamage sweep.** So W24 on these weapons is also an A5 conversion.
+
+**The order, per weapon:**
+
+1. **RESOLVE** with `rs.resolve_weapon()` — it already implements the MiniYaml semantics
+   (each parent spliced AT its `Inherits` line, document order, **last node wins**, so among 15
+   inherits the later override the earlier and the weapon's own fields beat all of them).
+2. **INLINE** the whole resolved node as a self-contained definition.
+3. **REMOVE** the inherits.
+4. **COLLAPSE** the damage mains to the one family (`plan_warhead_collapse.py`).
+5. **CLEAN UP — this is where the real value is.** The dragon carries **8 ground decals** because
+   it inherited eight games' worth; after collapsing to `Flame` it needs ONE smudge, ONE impact
+   effect, ONE `ApplyPhysicalState` (Temperature). Same for the 6 physical-state nodes, which
+   exist once per inherited flame tier.
+6. **VERIFY** with `dump_resolved` / `review_resolve_diff` — the diff must show ONLY the intended
+   collapse — then boot-gate the batch.
+
+⚠ Step 5 cannot be automated safely: choosing which of eight decals a Warcraft dragon should
+leave is a design call. Steps 1–3 are mechanical and verifiable; steps 4–5 need the review table.
+
 ### What is still judgment, and what is not
 
 The family choice is NOT "which of 15 legacy templates wins" — it is **"what is this weapon?"**,
