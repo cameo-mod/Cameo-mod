@@ -140,6 +140,57 @@ to 1016 buildings.
 
 ---
 
+## 3a. The maintainer's follow-up: `Versus[Shield] = 200` + spread over ticks
+
+*"those rules should not change anymore. 75% is a good value. So if the value for versus shields
+is 200% it would even out nicely? Remember this needs to be applied over several ticks ... This
+prevents the higher damage to shields being propagated to the HP bar if it's only one extremely
+powerful hit."*
+
+**The tick half is exactly right, and it is load-bearing.** With ONE big hit, damage computed at
+`Shield 200` that overflows the pool cascades its excess into health *carrying the shield's 2×
+multiplier* — health would take double the damage it should. Ticks re-resolve which layer is
+active on every application, so post-shield ticks use `Concrete 100`. AtomicCore already carries
+`Ticks: 10`, so the machinery is in place. **Any layer-crossing weapon needs this**; a
+single-shot version is wrong by construction.
+
+**`Shield: 200` also gives exactly the durability neutrality it should** — that is the
+`V_s = 2 × V_c` condition from §2.
+
+⚠ **But it does NOT restore the 75% contract, and this is worth seeing in full.** Take the
+converted building (health 500 000, pool 1 000 000) with `Shield 200`, `Concrete 100`:
+
+```
+nominal per shot = flat 500 000  +  25% of max HEALTH (500 000) = 125 000   ->  625 000
+over 10 ticks    = 62 500 nominal per tick
+
+ticks 1-8  shield up, x2.00  -> 125 000 actual/tick  -> pool 1 000 000 exactly gone
+ticks 9-10 health,   x1.00   ->  62 500 actual/tick  -> 125 000 onto health
+```
+
+| | raw durability | raw destroyed | fraction |
+|---|--:|--:|--:|
+| unshielded 1M Concrete | 1 000 000 | 750 000 | **75%** ✅ |
+| converted, `Shield: 200` | 1 000 000 ✅ neutral | 625 000 | **62.5%** ❌ |
+
+Durability is now neutral (1 000 000 both sides — the fix worked), yet the nuke destroys 62.5%
+instead of 75%, and the building ends at **75% health** where the unshielded one ends at 25%.
+
+**The missing 12.5 points is the percentage term's BASE.** `AreaDamagePercentage` takes its
+percentage of `healthInfo.HP`, and halving the building's health halved that term from 250 000 to
+125 000. No Versus value can restore it, because Versus multiplies what the percentage produced —
+it cannot un-halve the base. Two checks confirm the base is the culprit rather than the flat/pct
+mix:
+
+* **pure 75% percentage, `maxHealth` base:** 375 000 nominal × 2.00 = 750 000 on a 1 000 000
+  pool → 75% of the shield only, health untouched → **37.5%** of durability. Worse.
+* **per-layer 75%:** 0.75 × 500 000 (shield, in raw) + 0.75 × 500 000 (health) = 750 000 →
+  **75%** ✅, and it lands there for *any* `V_s`, any split, any building size.
+
+**So: adopt both of the maintainer's points AND the per-layer base.** `Shield: 200` for
+neutrality, `Ticks` for correct layer crossing, `PerLayer` for the 75% contract. They are three
+different problems and each needs its own fix.
+
 ## 4. Open question for the maintainer
 
 Per-layer 75% on a shielded building destroys 75% of the shield **and** 75% of the health, so
