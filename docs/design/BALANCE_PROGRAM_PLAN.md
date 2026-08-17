@@ -53,7 +53,7 @@ status rather than keeping its own copy.
 | **W22** | Roster census: liveness classifier + per-credit weighting (552/1977 armored actors are not buildable) | ⬜ PROPOSED | — | — |
 | **W23** | Retrofit the 47 legacy templates into the `^Warhead_*` family system | 🔵 MACHINERY DONE + verified; content ⛔ on the 33-collision ruling | Claude | W13 |
 | **W24** | Collapse every weapon to ONE damage warhead (3-way split, damage half) — 61% of weapons carry 2+, worst case 15 | ⬜ READY, blocks W23 content | Claude | — |
-| **W25** | Versus mean-normalisation to 100 + class tilt + Shield rebuild + the ARMOR-PLATING LAYER | ✅ S1–S4 SHIPPED 2026-08-16/17 (`78568a36d`..`99deed28d`); **S5 `apply_balance --confirm` still pending on E1/E4** | Claude | — |
+| **W25** | Versus mean-normalisation to 100 + class tilt + Shield rebuild + the ARMOR-PLATING LAYER | ✅ S1–S4 SHIPPED 2026-08-16/17 (`78568a36d`..`99deed28d`). **E1 + E4 FIXED** (`30ead6d4b`, `761e79ed9`). ⛔ **S5 is NOT "run `--confirm`" — see the correction below: `--confirm` is a NO-OP until targets are written into the ledger, and that needs W11's sign-off.** | Claude | — |
 
 **Recommended order:** W2 ∥ W3 → W4 → W5 → W6 → (W7, W9) → W8 → W10 → W11 → W12.
 `∥` = safe to run in parallel (disjoint file sets).
@@ -593,8 +593,38 @@ armaments did not move at all — those are the ~878 legacy nodes still declarin
 `Versus` on `SpreadDamage` (item A5), which the templates do not reach.
 
 ⚠ **That K shift is not yet paid for.** `Damage` still has its old values, so a family whose
-mean rose 1.4x currently deals 1.4x. The correction is `apply_balance --confirm`, which needs
-a maintainer order (CLAUDE.md rule 3). Until then the tree is deliberately mid-pipeline.
+mean rose 1.4x currently deals 1.4x.
+
+⛔⭐ **AND `apply_balance --confirm` IS NOT THE CORRECTION — MEASURED 2026-08-17.** Dry-run on
+four factions (`starcraft_protoss`, `redalert2_soviets`, `tiberiansun_gdi`, `warcraft2_orcs`):
+
+```
+DRY RUN: 0 values would change (0 inherited stats skipped).
+```
+
+`apply_balance` writes **LEDGER → yaml**, and the ledger is a faithful EXTRACT of yaml, so
+there is nothing in it to apply. `--confirm` today is a **no-op on every faction**, and it has
+been described as "the pending final step, blocked on E1/E4" across several handoffs. That
+description was wrong in a way no audit could catch, because the tool exits 0 either way.
+
+**The missing step is UPSTREAM of the apply.** The pipeline is
+`extract_stats` → **DECIDE TARGETS** → ledger → `apply_balance --confirm`, and the middle box
+has never been filled in for the roster. Filling it means:
+
+1. Choose the scope (one class, or one faction) — the ledger is per-faction, the anchors per class.
+2. Generate targets: `fit_class.py` (class-formula price vs actual cost) and/or
+   `propose_class_rebalance.py`, or `build_workbook.py` → edit the unlocked cells →
+   `import_workbook.py`.
+3. ⛔ **Get the maintainer's sign-off, which W11 already owes:** *which class has costs they
+   consider CORRECT.* Every price is relative to that anchor, so nothing downstream can be
+   right until it exists — this is the true head of the queue, not the apply.
+4. THEN `apply_balance --faction X --confirm`, re-extract, audits, boot gate, commit yaml +
+   ledger together.
+
+⚠ Because the twin is now known to impose a **DPS floor** (E4), step 2 must respect it: 52
+weapons cannot be priced below 25% of current output by lowering flat `Damage`, so a target
+under `dps_floor` needs the TWIN shrunk instead. `required_damage()` returns `None` there
+rather than a plausible wrong number.
 
 **Two rules were CORRECTED by running this** (both now in DESIGN.md):
 - **§12.0b Heroic/Airborne divide by the profile's PEAK, not by 100.** The two stopped being
