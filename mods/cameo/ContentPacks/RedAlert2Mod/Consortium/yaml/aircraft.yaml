@@ -335,11 +335,6 @@ steelconsortium_empressstation:
 		VoiceSet: SteelEmpressVoice
 	RenderSprites:
 		PlayerPalette: playerra2
-	WithIdleOverlay@shield1:
-		Sequence: shield-complete-big
-		StartSequence: shield-starts-big
-	WithIdleOverlay@shield_damage:
-		Sequence: shield-complete-big
 	ActorStatValues:
 		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
@@ -514,12 +509,12 @@ steelconsortium_cloudbreaker:
 	Voiced:
 		VoiceSet: SteelEmpressVoice
 	WithIdleOverlay@shield1:
-		Image: hexshield_directional_oval
-		Sequence: idle
-		StartSequence: idle
+		Image: hexshield_fit_directional_oval
+		Sequence: fit-{actor}
+		StartSequence: fit-{actor}
 	WithIdleOverlay@shield_damage:
-		Image: hexshield_directional_oval
-		Sequence: hit
+		Image: hexshield_fit_directional_oval
+		Sequence: fit-{actor}
 	CarrierMaster:
 		Actors: cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel
 		RearmTicks: 25

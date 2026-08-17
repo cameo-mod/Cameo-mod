@@ -22,13 +22,13 @@ protoss_nexus:
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: pshbld03.aud
 	WithIdleOverlay@shield1:
-		Image: protoss_structure_hexshields
-		Sequence: nexus-idle
-		StartSequence: nexus-idle
+		Image: hexshield_fit_dome
+		Sequence: fit-{actor}
+		StartSequence: fit-{actor}
 		RequiresCondition: !disabled && shielded && !shieldhit && !build-incomplete
 	WithIdleOverlay@shield_damage:
-		Image: protoss_structure_hexshields
-		Sequence: nexus-hit
+		Image: hexshield_fit_dome
+		Sequence: fit-{actor}
 		RequiresCondition: !disabled && shielded && shieldhit && !build-incomplete
 	Production@INFANTRY:
 		Produces: Infantry

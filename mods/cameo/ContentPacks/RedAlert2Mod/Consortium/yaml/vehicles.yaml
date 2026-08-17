@@ -91,11 +91,6 @@ steelconsortium_katytank:
 		VoiceSet: SteelQuantumTankVoice
 	RenderSprites:
 		PlayerPalette: playerra2
-	WithIdleOverlay@shield1:
-		Sequence: shield-complete-big
-		StartSequence: shield-starts-big
-	WithIdleOverlay@shield_damage:
-		Sequence: shield-complete-big
 	ActorStatValues:
 		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance
 
@@ -188,11 +183,6 @@ steelconsortium_defenderbot:
 		Type: shield
 		Color: 8888FF88
 		RequiresCondition: !disabled
-	WithIdleOverlay@shield1:
-		Sequence: shield-complete-big
-		StartSequence: shield-starts-big
-	WithIdleOverlay@shield_damage:
-		Sequence: shield-complete-big
 	ActorStatValues:
 		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance
 
@@ -282,11 +272,6 @@ steelconsortium_stalker:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	DeathSounds:
-	WithIdleOverlay@shield1:
-		Sequence: shield-complete-big
-		StartSequence: shield-starts-big
-	WithIdleOverlay@shield_damage:
-		Sequence: shield-complete-big
 	ActorStatValues:
 		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance
 
@@ -374,13 +359,6 @@ steelconsortium_whiterabbit:
 		PlayerPalette: playerra
 	DeathSounds:
 	WithDeathAnimation:
-	WithIdleOverlay@shield1:
-		Sequence: shield-complete-big
-		StartSequence: shield-starts-big
-		Offset: 0,0,341
-	WithIdleOverlay@shield_damage:
-		Sequence: shield-complete-big
-		Offset: 0,0,341
 	ActorStatValues:
 		Upgrades: steelconsortium_upgrade_pulseweapons, steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
@@ -1417,11 +1395,6 @@ steelconsortium_poseidontank:
 		DeployType: Battlefortress
 	RenderSprites:
 		PlayerPalette: playerra2cons
-	WithIdleOverlay@shield1:
-		Sequence: shield-complete-big
-		StartSequence: shield-starts-big
-	WithIdleOverlay@shield_damage:
-		Sequence: shield-complete-big
 	ActorStatValues:
 		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 

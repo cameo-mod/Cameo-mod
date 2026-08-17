@@ -4877,76 +4877,21 @@ energyshields:
 		Scale: 1
 		Tick: 50
 	shield-complete-infantry:
-		Filename: hexshield_infantry.png
-		Length: 8
+		Filename: modshields.shp
+		Start: 190
+		Length: 30
 		ZOffset: 1023
-		Tick: 80
-		Offset: 0,-9
+		Reverses: True
+		Scale: 0.45
+		Tick: 50
+		Offset: 0,-20
 	shield-starts-infantry:
-		Filename: hexshield_infantry.png
-		Length: 8
+		Filename: modshields.shp
+		Length: *
 		ZOffset: 1023
-		Tick: 80
-		Offset: 0,-9
-
-hexshield_sphere:
-	medium-idle:
-		Filename: hexshield_sphere.png
-		Length: 8
-		ZOffset: 1023
-		Scale: 0.6
-		Tick: 80
-		Offset: 0,4
-	medium-hit:
-		Filename: hexshield_sphere.png
-		Length: 8
-		ZOffset: 1023
-		Scale: 0.6
-		Tick: 40
-		Offset: 0,4
-	large-idle:
-		Filename: hexshield_sphere.png
-		Length: 8
-		ZOffset: 1023
-		Scale: 1.45
-		Tick: 80
-		Offset: 0,16
-	large-hit:
-		Filename: hexshield_sphere.png
-		Length: 8
-		ZOffset: 1023
-		Scale: 1.45
-		Tick: 40
-		Offset: 0,16
-	# Compatibility aliases for existing large-shield receiver overrides.
-	shield-complete-big:
-		Filename: hexshield_sphere.png
-		Length: 8
-		ZOffset: 1023
-		Scale: 1.45
-		Tick: 80
-		Offset: 0,16
-	shield-starts-big:
-		Filename: hexshield_sphere.png
-		Length: 8
-		ZOffset: 1023
-		Scale: 1.45
-		Tick: 80
-		Offset: 0,16
-
-hexshield_directional_oval:
-	idle:
-		Filename: hexshield_directional_oval.png
-		Length: 4
-		Facings: 32
-		ZOffset: 1023
-		Tick: 80
-	hit:
-		Filename: hexshield_directional_oval.png
-		Length: 4
-		Facings: 32
-		ZOffset: 1023
-		Tick: 40
+		Scale: 0.45
+		Tick: 50
+		Offset: 0,-20
 
 sparkle:
 	plus:
