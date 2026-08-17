@@ -537,7 +537,71 @@ def condition_is_gate(cond) -> bool:
     return False
 
 
-def survivability(u: dict) -> dict | None:
+def shield_damage_multiplier(resolved) -> float:
+    """Product of every `DamageMultiplier` that is active EXACTLY WHILE THE SHIELD IS UP.
+
+    ⚠ **Found 2026-08-17, after the first version of `survivability()` shipped without it.**
+    Every Protoss unit carries
+
+        DamageMultiplier@shielded:
+            RequiresCondition: shielded && !shieldpermanent
+            Modifier: 150
+
+    so while the shield holds the unit takes **150% damage** — the deliberate counterweight
+    the maintainer described (*"it has a 100% shield but also a 150% damage multiplier ... and
+    that makes it very fragile somehow"*). Ignoring it over-credits the shield by 1.5x: a
+    dragoon's 75 000 shield points are worth ~0.36 HP each, not 0.540.
+
+    Only multipliers gated on the shield-up condition count. An UNCONDITIONAL
+    `DamageMultiplier` applies to the health phase too, so it is not a shield property — it is
+    the separate "fold baseline armor into HP" job.
+
+    ⚠ **The shield-up token must be the ONLY positive gate.** A first version multiplied every
+    match and returned 0.9 for the dragoon — because it also swallowed
+    `protoss_upgrade_plasmashields && shielded` (80) and
+    `steelconsortium_upgrade_shieldresistance && shielded` (75). Both need an UPGRADE, so at
+    baseline they are inactive, and counting them turned a 1.5x penalty into a 0.9x bonus:
+    the sign flipped. This is the same baseline-vs-upgrade rule the shield itself obeys, and
+    those two belong to E5 with the rest of the upgrade power.
+    """
+    factor = 1.0
+    up = shield_up_condition(resolved)
+    if not up:
+        return factor
+    for c in resolved.children:
+        if c.key.split("@")[0] != "DamageMultiplier":
+            continue
+        gates = _positive_tokens(str(c.get("RequiresCondition") or ""))
+        if gates != [up]:
+            continue          # unconditional, or needs something else granted first
+        mod = fnum(c.get("Modifier"))
+        if mod is not None and mod > 0:
+            factor *= mod / 100.0
+    return factor
+
+
+def shield_up_condition(resolved) -> str | None:
+    """The condition token the `Shielded` trait publishes while the pool holds."""
+    for c in resolved.children:
+        if c.key.split("@")[0] == "Shielded":
+            v = c.get("ShieldsUpCondition")
+            return str(v).strip() if v else None
+    return None
+
+
+def _positive_tokens(cond: str) -> list[str]:
+    """Tokens that must be TRUE — negated terms are satisfied by default, so never a gate."""
+    out = []
+    for term in re.split(r"&&|\|\|", str(cond or "")):
+        t = term.strip().strip("()").strip()
+        if t and not t.startswith("!"):
+            m = _COND_TOKEN.match(t)
+            if m:
+                out.append(m.group(0))
+    return out
+
+
+def survivability(u: dict, resolved=None) -> dict | None:
     """E1 — the shield pool as HP-equivalent, for actors that actually spawn with one.
 
     Maintainer: *"shielded units and armored units need to have a price! it is like extra
@@ -573,9 +637,15 @@ def survivability(u: dict) -> dict | None:
            "shield_always_on": always_on,
            "shield_gated_on_upgrade": gated}
     if always_on:
-        eff = tm.effective_hp(hp, pool_flat, pool_pct)
+        # A multiplier active only while the shield holds scales the shield's worth, NOT the
+        # health behind it — so it divides the pool term and never touches `hp`.
+        dm = shield_damage_multiplier(resolved) if resolved is not None else 1.0
+        eff = hp + (tm.effective_hp(hp, pool_flat, pool_pct) - hp) / (dm or 1.0)
         out["effective_hp"] = round(eff, 1)
         out["effective_hp_ratio"] = round(eff / hp, 4)
+        if abs(dm - 1.0) > 1e-9:
+            out["shield_damage_multiplier"] = round(dm, 4)
+            out["shield_hp_per_point"] = round(tm.shield_hp_factor() / dm, 4)
     return out
 
 
@@ -798,7 +868,7 @@ def extract_actor(rs, key: str, section: str) -> dict | None:
     if sub == "SpecialForcesInfantry":
         for arm in arms:
             arm["design_weapon_class"] = 1.0
-    surv = survivability(u)
+    surv = survivability(u, resolved)
     if surv:
         u[DERIVED_KEY] = surv
     return u

@@ -129,9 +129,17 @@ def main() -> int:
           f"pricing) |")
     print()
     print(f"Shield row mean Versus **{tm.pseudo_armor_mean('Shield'):.2f}**, so one shield "
-          f"point is **{tm.shield_hp_factor():.4f} HP** — measured off the live ladder every "
-          f"run, never frozen. The Shield row takes "
-          f"**{tm.shield_damage_share():.3%}** of all roster raw damage at baseline.")
+          f"point is **{tm.shield_hp_factor():.4f} HP** BEFORE any shield-gated "
+          f"`DamageMultiplier` — measured off the live ladder every run, never frozen. The "
+          f"Shield row takes **{tm.shield_damage_share():.3%}** of all roster raw damage at "
+          f"baseline.")
+    print()
+    print("⚠ **Every one of these 56 actors also carries "
+          "`DamageMultiplier@shielded: 150`**, so it takes 150% damage WHILE the shield "
+          "holds — the deliberate counterweight to having one. That divides the pool's worth: "
+          f"a shield point is really **{tm.shield_hp_factor() / 1.5:.4f} HP**, and the "
+          "roster-wide gap is 38.6% rather than the 57.8% a shield-only reading gives. "
+          "`shield_damage_multiplier` and `shield_hp_per_point` are published per actor.")
     print()
 
     if not rows:
@@ -151,9 +159,13 @@ def main() -> int:
               f"median **×{statistics.median(ratios):.3f}**, "
               f"max **×{max(ratios):.3f}**")
     print()
-    print("⚠ The maintainer also noted the Protoss carry a **150% damage multiplier** to "
-          "compensate for their shields. Pricing the shield is the PREREQUISITE for retiring "
-          "that multiplier — do both in one pass, or the faction gets charged twice.")
+    print("⚠ **Retiring the 150% multiplier is a BUFF that must be paid for.** The numbers "
+          "above already account for it, so they price the game AS IT IS. Delete "
+          "`DamageMultiplier@shielded` and a shield point jumps from "
+          f"{tm.shield_hp_factor() / 1.5:.3f} to {tm.shield_hp_factor():.3f} HP — the same "
+          "pool becomes 1.5x more valuable and the implied price rises again. Re-extract "
+          "AFTER the deletion and price once, or these units get charged for durability they "
+          "no longer have (or keep durability they were never charged for).")
     print()
     print("## Per actor")
     print()
