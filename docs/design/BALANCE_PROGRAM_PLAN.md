@@ -171,6 +171,59 @@ boot with a missing-required-field error — the same bug class as the empty-war
 removing a template node orphans bare child overrides. **Always scan for dependents that
 inherit a required field before deleting a template block.**
 
+### ⬜ PROPOSED — halve unarmed-building HP, give them a shield (maintainer 2026-08-17)
+
+*"for non defense buildings (which are not priced from the balance formula) you need to half
+their HP and give them 200% shield from their HP so the effective health is about the same
+right?"*
+
+**The identity is right, and there is an EXACT figure.** Measured:
+
+| pool, as % of the HALVED HP | resulting effective HP |
+|--:|--:|
+| 150% | 0.905× (−9.5%) |
+| **185%** | **0.999× (−0.1%)** |
+| 200% | 1.040× (+4.0%) |
+
+⭐ **The break-even pool is `100 / shield_hp_factor` = the MEAN VERSUS VS SHIELD itself
+(185.2%).** Not a coincidence: converting HP into an equal-value shield means undoing exactly
+the average penalty the Shield row applies. So **185% is the derived, self-updating number**
+and 200% overshoots by 4%. Write it as a formula, never as a literal.
+
+⚠⚠ **BUT THE IDENTITY HIDES THE REAL CONSEQUENCE — this is the largest single lever on weapon
+pricing in the project.** Unarmed buildings hold **more HP than the entire unit roster**:
+
+| group | actors | total HP |
+|---|--:|--:|
+| armed buildings (defenses, formula-priced) | 107 | 18 161 500 |
+| **unarmed buildings (the target)** | **1 016** | **238 205 500** |
+| everything else (units) | — | 129 248 940 |
+
+The `Shield` row's share of all roster raw damage is an INPUT to `target_model.weighted_versus`
+→ `K` → every weapon's price. Converting the unarmed buildings moves it:
+
+```
+Shield row share TODAY : 1.432%
+Shield row share AFTER : ~27.5%     = a 19.2x increase in the Shield column's weight
+```
+
+Energy families (Tesla `Shield: 369`) would gain across the board; kinetic families (Melee ~76)
+would lose. **So a change that is neutral for the buildings is emphatically NOT neutral for
+weapons** — it would make "anti-shield" a mainstream weapon property instead of a 1.4% niche,
+and every base assault becomes a shield fight.
+
+**Two rulings owed before this can be built:**
+1. **Is the 19× shift intended?** It is defensible — the Shield row is currently near-decorative
+   and this gives it real meaning — but it is a deliberate rebalance of every weapon, not a
+   side effect to absorb quietly.
+2. **Do building shields REGENERATE?** `^ShieldedShieldable` carries `DamageRegenDelay: 125`.
+   If regen is on, half of every building's effective HP comes back between raids — a large
+   buff to turtling that the effective-HP identity does not show, and the reason harassment
+   strategies would weaken. HP does not regenerate; a shield does. **This is the difference the
+   arithmetic cannot see.**
+
+⚠ Sequencing: do this BEFORE weapon pricing (§0a), never after — it moves K for the whole roster.
+
 ---
 
 ## 2. FILE OWNERSHIP — how two agents work at once without collisions
