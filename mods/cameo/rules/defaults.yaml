@@ -7298,9 +7298,17 @@ CPQDEBUGDUMMY:
 	Armor@shielded:
 		Type: Shield
 		RequiresCondition: shielded
-	DamageMultiplier@shielded:
-		RequiresCondition: shielded && !shieldpermanent
-		Modifier: 150
+	# W26/R1 — the flat 150%-while-shielded penalty is DELETED (2026-08-17).
+	# It duplicated, and fought, the thing it was standing in for. `Armor@shielded` already
+	# routes every hit through the `Shield` Versus row, whose whole design is that energy
+	# weapons hurt shields (Tesla 369) and kinetics do not (Melee ~76). A FLAT 1.5x on top
+	# multiplied both ends equally, so it added no counter-play — it was just an unmanaged
+	# extension of the Shield ladder living OUTSIDE its designed [100,400] window (1.5x would
+	# put Tesla at 553). Worse, it made the pool's worth invisible: a shield point read as
+	# 0.540 HP from the ladder but was really 0.360.
+	# The anti-shield story now lives in ONE place, the Versus row — the same law as
+	# "Versus lives only in ^Warhead_* templates". Removing it is a real BUFF (a shield point
+	# goes 0.360 -> 0.540 HP) and must be paid for in COST: re-extract, then price.
 	DamageMultiplier@steelconsortium_upgrade_shieldresistance:
 		RequiresCondition: steelconsortium_upgrade_shieldresistance && shielded
 		Modifier: 75

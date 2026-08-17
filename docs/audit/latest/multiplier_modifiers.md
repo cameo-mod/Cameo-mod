@@ -1,4 +1,4 @@
-# audit_multiplier_modifiers — *Multiplier Modifier integer percent check
+﻿# audit_multiplier_modifiers — *Multiplier Modifier integer percent check
 
 *Multiplier trait families seen: 1823
 

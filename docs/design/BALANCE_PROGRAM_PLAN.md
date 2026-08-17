@@ -99,8 +99,77 @@ nothing and informs the anchor choice. What must wait is WRITING targets and app
 | **W24** | Collapse every weapon to ONE damage warhead (3-way split, damage half) — 61% of weapons carry 2+, worst case 15 | ⬜ READY, blocks W23 content | Claude | — |
 | **W25** | Versus mean-normalisation to 100 + class tilt + Shield rebuild + the ARMOR-PLATING LAYER | ✅ S1–S4 SHIPPED 2026-08-16/17 (`78568a36d`..`99deed28d`). **E1 + E4 FIXED** (`30ead6d4b`, `761e79ed9`). ⛔ **S5 is NOT "run `--confirm`" — see the correction below: `--confirm` is a NO-OP until targets are written into the ledger, and that needs W11's sign-off.** | Claude | — |
 
+| **W26** | **Retire `DamageMultiplier` (R1) — case by case, 369 live declarations** | 🔵 STARTED 2026-08-17: the shield 150% is DELETED. Inventory + rules below. | Claude | — |
+
 **Recommended order:** W2 ∥ W3 → W4 → W5 → W6 → (W7, W9) → W8 → W10 → W11 → W12.
 `∥` = safe to run in parallel (disjoint file sets).
+
+---
+
+## 1a. W26 — RETIRING `DamageMultiplier`, CASE BY CASE
+
+**Honest status first:** R1 (§W21, below) has said *"`DamageMultiplier` is abolished"* since
+2026-08-12, but **it had no board item and no inventory**, so nothing executed it and it was
+carried in conversation only. That is exactly how a ruling rots. This is the item.
+
+**Maintainer 2026-08-17:** *"we want to remove all the damage multipliers and only keep those
+that are absolutely necessary where we don't have a real answer yet. But mark them still for
+later to replace them with a new mechanic. However some multipliers are still intended
+especially those with status effects so yeah... we need to remove them on a case by case
+basis."*
+
+**369 live declarations** (683 in the tree; 314 sit in DEAD files such as `rules/wh40k.yaml`
+and `rules/wz2100.yaml`, which `mod.yaml` does not load — do not "fix" those, delete the files).
+
+| category | count | median | disposition |
+|---|--:|--:|---|
+| UPGRADE-granted | 128 | 80 | → **convert to armor AMOUNT** (R1: a 15% reduction becomes +15% of HP as armor). Price into the upgrade (E5). |
+| other condition | 113 | 80 | ⬜ **needs sub-classification** — the biggest unknown, do this before touching them |
+| UNCONDITIONAL | 100 | 80 | → **fold into HP.** Pure baseline armor; an unconditional `Modifier: 80` is exactly `HP x 1.25` |
+| PHYSICAL STATE / stance | 12 | 75 | **KEEP** — deployed/crouched/garrisoned is a genuine rate change |
+| TEMPORARY ability | 10 | 80 | **KEEP** — Iron Curtain, chrono, invulnerability |
+| VETERANCY / rank | 5 | 75 | → **grant HP instead** (see the correction below) |
+
+**Two no-brainer sweeps, zero gameplay change:**
+* **20 declarations are `Modifier: 100`** — literal no-ops. Delete.
+* 6 are `Modifier: 0` (true invulnerability) and 1 is `1000`; leave those, they are deliberate.
+
+### THE PRINCIPLE (use this to decide any case not listed)
+
+**`DamageMultiplier` is the right primitive for a RATE; a pool/bar is the right primitive for
+an AMOUNT.** So:
+* an **unconditional rate reduction** is indistinguishable from more HP → fold it into HP;
+* a **conditional rate change** (stance, status, temporary power) stays a multiplier;
+* an **amount** of extra durability becomes a pool (shield / armor plating).
+
+⚠⚠ **CORRECTION — veterancy.** I recommended *keeping* the veterancy multipliers on the
+rate-vs-amount argument, and the maintainer accepted that. **R1 had already ruled the other
+way and R1 is right:** veterancy *"stops granting damage multipliers and grants HP instead —
+currently veterancy gives NO HP at all, only invisible multipliers. **HP is visible in the unit
+stat widget; a multiplier is not.**"* That legibility argument beats mine, and it does **not**
+create the extra health bar the maintainer was worried about — it raises HP on the bar that is
+already there. 5 declarations, so the job is small; the re-pricing is the real cost.
+
+### ✅ DONE — the shield 150% penalty (2026-08-17)
+
+`DamageMultiplier@shielded: Modifier: 150` in `defaults.yaml` (one block, inherited by all 56
+always-on-shield actors). Deleted, because it **duplicated and fought** what it stood for:
+`Armor@shielded` already routes hits through the `Shield` Versus row, whose entire design is
+that energy weapons hurt shields (Tesla 369) and kinetics do not (Melee ~76). A FLAT 1.5x
+scaled both ends equally, adding no counter-play — an unmanaged extension of the Shield ladder
+living OUTSIDE its designed `[100,400]` window (1.5x would put Tesla at 553). It also hid the
+pool's worth: a shield point read 0.540 HP from the ladder but was really 0.360.
+
+⚠ **This is a BUFF and is not yet paid for.** A shield point went 0.360 → 0.540 HP, so the 56
+actors' effective HP rose from +38.6% to +57.8% over raw. `audit_survivability_pricing.py` has
+the per-actor numbers; the cost correction belongs in the same pass that prices the shields.
+
+⚠ **`Modifier` is `[FieldLoader.Require]`.** Two actors (`steelconsortium_stalker`,
+`steelconsortium_whiterabbit`) re-declared `DamageMultiplier@shielded` only to widen the
+condition, inheriting the parent's `Modifier`. Deleting the parent alone would have crashed the
+boot with a missing-required-field error — the same bug class as the empty-warhead crash, where
+removing a template node orphans bare child overrides. **Always scan for dependents that
+inherit a required field before deleting a template block.**
 
 ---
 
