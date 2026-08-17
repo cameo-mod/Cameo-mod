@@ -40,6 +40,89 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 
 ---
 
+## Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)
+
+All five were **invisible to every gate we run** — valid yaml, values inside the window, the
+resolver happy, `find_empty_warhead` 0, and the game booting to the menu. A boot gate cannot
+see a number that is merely WRONG. Each now has a guard, because each was found by accident.
+
+### 1. A PSEUDO-ARMOR ROW DRIVING A WINDOW SCALE (the worst one)
+
+`finish_blend` scaled a blend back into `[10, 200]` with `max(values.values())` — which
+included **`Shield`**, a row deliberately OUTSIDE the window in both directions. So the
+shield value, not the armor ladder, set the scale for the whole profile. A quiet ~2x crush
+while Shield ran 100..400; **catastrophic** once Shield began being emitted in centi-units:
+`Quantum_Light` scaled by `200/18535 = 0.011`, every armor rounded to 0 or 1, and
+`distinct_ints`' floor-repair pass then **FABRICATED the entire ladder** from the emit order.
+
+It hid because `mean_normalise` runs afterwards and scaled the garbage back to a mean of 100.
+The profiles looked plausible and passed every check. The only trace was "23 non-monotone
+ladders", which read like a cosmetic ordering issue and was actually a ladder that had
+stopped carrying data.
+
+**Rule: any statistic over a Versus node must state which rows it excludes.** Use
+`NON_ARMOR_ROWS`, never `max(values)`.
+
+### 2. FILTERING BY NAME WHERE THE TYPE IS AUTHORITATIVE
+
+Excluding %-twins by an `endswith("_Percentage")` KEY suffix silently let ~50 legacy
+templates through — they name theirs `Warhead@SmallArmsPercentage`, no underscore. Their
+`Versus` is a MAGNITUDE (17, 25), so a mean came out 157 instead of 209: a **34% error**.
+
+**Rule: filter warheads on the TYPE (`"Percentage" in child.value`), never on the key name.**
+A naming convention is not an invariant; the type is.
+
+### 3. SCANNING DEAD FILES
+
+`mods/cameo/**/*.yaml` includes files mod.yaml does NOT load — `rules/redalert2.yaml` and
+siblings are dead copies ("now loaded via include-only wrapper packs … not loaded here to
+avoid duplicate keys", mod.yaml:176). A new audit reported a stale flat modifier on a
+template whose LIVE copy had already been fixed.
+
+**Rule: audits read `Ruleset(ROOT).manifest.rules`, not a glob.** A dead file is not
+evidence about what ships.
+
+### 4. A COMBINATION RULE THAT MADE AN UPGRADE HARMFUL
+
+W21 flipped multiple armors from MULTIPLY to AVERAGE and **nobody restated the values**.
+Under multiplication a row of 50 meant "half the damage", target-independent; averaged it
+gives `(base+50)/2` — at base 100 a **25%** cut, not 50%. So every overlay's effect was
+silently halved, and worse, `(base + plating)/2 > base` whenever the plating row exceeded the
+class row: **98 of 1152 cells took MORE damage for wearing armor**, worst 1.84x, hitting
+HEAVY units hardest because they have the low class rows.
+
+**Rule: AN ARMOR UPGRADE MUST NEVER INCREASE INCOMING DAMAGE** (DESIGN §12.0e law 4).
+Guard: `audit_armor_upgrade_harm.py`. And when a combination rule changes, re-derive every
+value that was authored against the old one.
+
+### 5. A MISSING ROW IS NOT "NO OPINION"
+
+Both the engine and Cameo's `DamageVersus` select armors with `Versus.ContainsKey(type)`, and
+an EMPTY match list `return 100`. So for a LAYER-SELECTED armor, omitting a row does not mean
+"this weapon ignores the plating" — it means the plated unit **loses its armor entirely**. A
+superheavy tank would take 100% from bullets instead of ~20%. I wrote this warning and then
+made the exact mistake in my own code by skipping the flat families.
+
+**Rule: every plating gets a row in EVERY template, no exceptions.** Guard:
+`audit_armor_upgrade_harm.py` I1.
+
+### And a process slip worth its own line
+
+`audit_balance_drift` went RED with all 32 ledgers drifted, because seven yaml commits landed
+without re-running `extract_stats`. CLAUDE.md requires committing **yaml and ledger
+TOGETHER**. Re-extract before every commit that moves a balance number, not at the end of a
+session.
+
+### The naming trap that keeps recurring: Integrity is NOT a shield
+
+`Integrity.cs` shipped for months with every `[Desc]` copied verbatim from `Shielded.cs`, and
+the wrong word spread into the warhead's `[Desc]`, the generator's comments and a handoff doc.
+**`Integrity` absorbs NOTHING** — `INotifyDamage` runs after the damage has landed on health —
+so it buys no survivability and only gates the EMP disable. The only thing it shares with a
+shield is the FIELD SHAPE (`MaxStrength + MaxPercentageStrength`). Corrected 2026-08-17.
+
+---
+
 ## 3-way split retrofits: two recurring child-weapon bugs (2026-08-08)
 
 Discovered during a deep review of conversion commits made 2026-08-07/08.

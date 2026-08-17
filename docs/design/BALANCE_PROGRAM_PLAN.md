@@ -53,7 +53,7 @@ status rather than keeping its own copy.
 | **W22** | Roster census: liveness classifier + per-credit weighting (552/1977 armored actors are not buildable) | ⬜ PROPOSED | — | — |
 | **W23** | Retrofit the 47 legacy templates into the `^Warhead_*` family system | 🔵 MACHINERY DONE + verified; content ⛔ on the 33-collision ruling | Claude | W13 |
 | **W24** | Collapse every weapon to ONE damage warhead (3-way split, damage half) — 61% of weapons carry 2+, worst case 15 | ⬜ READY, blocks W23 content | Claude | — |
-| **W25** | Versus mean-normalisation to 100 + class tilt + the Shield ladder rebuild | ⬜ PLAN WRITTEN (`SHIELD_AND_NORMALISATION_PLAN.md`), needs 4 rulings | Claude | — |
+| **W25** | Versus mean-normalisation to 100 + class tilt + Shield rebuild + the ARMOR-PLATING LAYER | ✅ S1–S4 SHIPPED 2026-08-16/17 (`78568a36d`..`99deed28d`); **S5 `apply_balance --confirm` still pending on E1/E4** | Claude | — |
 
 **Recommended order:** W2 ∥ W3 → W4 → W5 → W6 → (W7, W9) → W8 → W10 → W11 → W12.
 `∥` = safe to run in parallel (disjoint file sets).

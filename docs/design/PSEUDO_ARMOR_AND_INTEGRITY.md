@@ -1,7 +1,30 @@
-# HAZMAT / REFLECTOR / Integrity — measured mechanics, and what to do about them
+# The armor-plating layer, shields and Integrity — measured mechanics and shipped design
 
-**Status: RESEARCH + OPTIONS. No mechanic changed yet.** Three maintainer questions of
-2026-08-16, answered from the artifacts rather than from the design docs:
+**Status: ✅ MOSTLY SHIPPED (2026-08-16/17).** Started as research into three maintainer
+questions and became the plating layer. What is LIVE, with the binding summary in
+`DESIGN.md §12.0e/§12.0f`:
+
+| shipped | where |
+|---|---|
+| 5 platings `HAZMAT` `COMPOSITE` `BLAST` `REFLECTOR` `ARMOR`, ALL CAPS, full columns in all 94 templates | §D-bis, §G, §H |
+| LAYER SELECTION — a plating replaces the class armor | `AreaDamageWarhead.DamageVersus` |
+| the column law: every plating averages **70** | §I |
+| `effective_HP = HP + shield x 0.540`, measured live | §I |
+| 4 upgrades retagged; the generic ones stay multipliers | §G |
+| guards `audit_armor_upgrade_harm.py` + `audit_plating_exclusivity.py` | §F, run_all.sh |
+| `Waveforce` IntegrityScale deleted (could never fire) | §B, §D-bis |
+
+**STILL OPEN:** the Integrity options I1–I4 (§B) are analysis only — the pool is still 100%
+of max HP, so the EMP disable still lands late; and the `IntegrityScaleMultiplier` design
+(§D) is written but NOT built, so 15 sites still hard-code `IntegrityScale: 150`.
+
+⚠ **Sections A–E are preserved as WRITTEN, including options that were later rejected**, so
+the reasoning stays auditable. Where a later section supersedes an earlier one it says so.
+The most important such correction: **§A1–A4 describe the AVERAGING world**, which still
+governs class armors but NO LONGER governs platings — §F replaced that with selection.
+
+Three maintainer questions of 2026-08-16, answered from the artifacts rather than from the
+design docs:
 
 1. scale `HAZMAT` **and** `REFLECTOR` by the weapon's thermal / chemical / explosive /
    energy composition — and add `REFLECTOR` to the mixed families that lack it;
