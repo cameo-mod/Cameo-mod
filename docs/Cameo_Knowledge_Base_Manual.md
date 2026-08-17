@@ -11510,7 +11510,7 @@ After studying this chapter, you should be able to:
 | `OpenRA.Mods.Cameo/FileSystem/BagFile.cs` | Cameo-specific `.bag`/`.idx` audio package loader. |
 | `mods/cameo/mod.yaml` | Cameo manifest that mounts `ContentPacks` and registers `AudioBag`. |
 | `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` | Example optional content pack manifest. |
-| `mods/cameo/installer/soviet95.yaml` | Example installer manifest with SHA1 `IDFiles` hashes. |
+| `mods/cameo-content/installer/soviet95.yaml` | Example installer manifest with SHA1 `IDFiles` hashes. |
 
 ## Architecture
 
@@ -11726,7 +11726,7 @@ This file is loaded as a normal mod package through the engine's file system. Th
 
 ### Integrity verification for original assets
 
-The only hash verification present in the Cameo source is in the content installer manifests under `mods/cameo/installer/*.yaml`. For example, `mods/cameo/installer/soviet95.yaml` lists `IDFiles` with SHA1 digests:
+The only hash verification present in the Cameo source is in the content installer manifests under `mods/cameo-content/installer/*.yaml`. For example, `mods/cameo-content/installer/soviet95.yaml` lists `IDFiles` with SHA1 digests:
 
 ```yaml
 soviet: Red Alert 95 (Soviet Disc, English)
@@ -11855,7 +11855,7 @@ If any of the concepts above feel unclear, review the relevant section before co
 - `OpenRA.Mods.Cameo/FileSystem/BagFile.cs` — Cameo `.bag`/`.idx` audio loader.
 - `mods/cameo/mod.yaml` — Cameo package manifest.
 - `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` — example optional content pack.
-- `mods/cameo/installer/soviet95.yaml` — example installer SHA1 manifest.
+- `mods/cameo-content/installer/soviet95.yaml` — example installer SHA1 manifest.
 - `OpenRA.Mods.Common/Installer/InstallerUtils.cs` — engine-side source-file hash verification.
 
 
@@ -17099,20 +17099,20 @@ After studying this chapter, you should be able to:
 | `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml` | GDI faction definition. |
 | `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml` | GDI vehicle overrides. |
 | `mods/cameo/ContentPacks/TiberianDawn/GDI/translations/en.ftl` | GDI ContentPack fluent messages. |
-| `mods/cameo/installer/downloads.yaml` | Freeware download definitions for C&C, RA, TS, and D2K assets. |
-| `mods/cameo/installer/cnc95.yaml` | C&C Gold disc installer. |
-| `mods/cameo/installer/gdi95.yaml` | C&C Gold GDI disc installer. |
-| `mods/cameo/installer/nod95.yaml` | C&C Gold Nod disc installer. |
-| `mods/cameo/installer/allies95.yaml` | Red Alert Allied disc installer. |
-| `mods/cameo/installer/soviet95.yaml` | Red Alert Soviet disc installer. |
-| `mods/cameo/installer/counterstrike.yaml` | Red Alert Counterstrike expansion installer. |
-| `mods/cameo/installer/covertops.yaml` | Red Alert Covert Operations expansion installer. |
-| `mods/cameo/installer/aftermath.yaml` | Red Alert Aftermath expansion installer. |
-| `mods/cameo/installer/firestorm.yaml` | Tiberian Sun Firestorm expansion installer. |
-| `mods/cameo/installer/firstdecade.yaml` | C&C The First Decade installer. |
-| `mods/cameo/installer/origin.yaml` | Origin/C&C Ultimate Collection installer. |
-| `mods/cameo/installer/ra2.yaml` | Red Alert 2 installer. |
-| `mods/cameo/installer/ra2yr.yaml` | Red Alert 2 Yuri's Revenge installer. |
+| `mods/cameo-content/installer/downloads.yaml` | Freeware download definitions for C&C, RA, TS, and D2K assets. |
+| `mods/cameo-content/installer/cnc95.yaml` | C&C Gold disc installer. |
+| `mods/cameo-content/installer/gdi95.yaml` | C&C Gold GDI disc installer. |
+| `mods/cameo-content/installer/nod95.yaml` | C&C Gold Nod disc installer. |
+| `mods/cameo-content/installer/allies95.yaml` | Red Alert Allied disc installer. |
+| `mods/cameo-content/installer/soviet95.yaml` | Red Alert Soviet disc installer. |
+| `mods/cameo-content/installer/counterstrike.yaml` | Red Alert Counterstrike expansion installer. |
+| `mods/cameo-content/installer/covertops.yaml` | Red Alert Covert Operations expansion installer. |
+| `mods/cameo-content/installer/aftermath.yaml` | Red Alert Aftermath expansion installer. |
+| `mods/cameo-content/installer/firestorm.yaml` | Tiberian Sun Firestorm expansion installer. |
+| `mods/cameo-content/installer/firstdecade.yaml` | C&C The First Decade installer. |
+| `mods/cameo-content/installer/origin.yaml` | Origin/C&C Ultimate Collection installer. |
+| `mods/cameo-content/installer/ra2.yaml` | Red Alert 2 installer. |
+| `mods/cameo-content/installer/ra2yr.yaml` | Red Alert 2 Yuri's Revenge installer. |
 | `mods/cameo/maps/` | Built-in Cameo maps and missions. |
 
 ## Architecture
@@ -17134,7 +17134,7 @@ Cameo references the original games in three ways:
 
 1. **File-format support.** `mods/cameo/mod.yaml` declares `PackageFormats: Mix, AudioBag, D2kSoundResources` so the engine can open Westwood MIX archives, Red Alert 2 audio bags, and Dune 2000 sound resources.
 2. **Map compatibility.** `mods/cameo/mod.yaml` declares `SupportsMapsFrom: cnc, ra, cameo`, which tells the engine that Cameo can load maps authored for Tiberian Dawn, Red Alert, and Cameo itself.
-3. **Asset extraction.** The `mods/cameo/installer/*.yaml` manifests identify the original-game files and copy them into the support directory, where the `FileSystem` section of `mods/cameo/mod.yaml` mounts them at runtime.
+3. **Asset extraction.** The `mods/cameo-content/installer/*.yaml` manifests identify the original-game files and copy them into the support directory, where the `FileSystem` section of `mods/cameo/mod.yaml` mounts them at runtime.
 
 The `FileSystem` block in `mods/cameo/mod.yaml` mounts the extracted archives as optional packages, for example:
 
@@ -17217,7 +17217,12 @@ World:
 
 ### Cameo-specific installer manifests
 
-Because Cameo is a single mod, all original-game installers live under `mods/cameo/installer/` rather than in separate `mods/*-content/` directories. The manifests are grouped by source game and release:
+Cameo's original-game installer manifests live under the hidden
+`mods/cameo-content/installer/` mod. This follows the engine's `*-content`
+convention while keeping the primary `cameo` mod responsible for gameplay.
+The hyphenated `cameo-content` identifier is a deliberate exception to
+Cameo's normal underscore-only in-mod naming rule. The manifests are grouped
+by source game and release:
 
 - C&T Tiberian Dawn: `cnc95.yaml`, `gdi95.yaml`, `nod95.yaml`, `firstdecade.yaml`, `origin.yaml`.
 - Red Alert: `allies95.yaml`, `soviet95.yaml`, `counterstrike.yaml`, `covertops.yaml`, `aftermath.yaml`.
@@ -17225,7 +17230,9 @@ Because Cameo is a single mod, all original-game installers live under `mods/cam
 - Red Alert 2: `ra2.yaml`, `ra2yr.yaml`.
 - Freeware downloads: `downloads.yaml`.
 
-For example, `mods/cameo/installer/downloads.yaml` defines the `quickinstall` package that fetches the C&C freeware MIX archives and places them in `^SupportDir|Content/cameo/`:
+For example, `mods/cameo-content/installer/downloads.yaml` defines the
+`quickinstall` package that fetches the C&C freeware MIX archives and places
+them in `^SupportDir|Content/cameo/`:
 
 ```yaml
 quickinstall: Quick Install Package
@@ -17242,7 +17249,7 @@ quickinstall: Quick Install Package
         ^SupportDir|Content/cameo/winter.mix: winter.mix
 ```
 
-`mods/cameo/installer/gdi95.yaml` shows the disc-based installer path for C&C Gold:
+`mods/cameo-content/installer/gdi95.yaml` shows the disc-based installer path for C&C Gold:
 
 ```yaml
 gdi95: C&C Gold (GDI Disc, English)
@@ -17282,7 +17289,7 @@ When a player selects Cameo, the engine loads `mods/cameo/mod.yaml`, mounts its 
 
 ### Content installer
 
-Before Cameo can display all original-game assets, the content installer (`mods/cameo/installer/`) checks for the required files and offers to download or copy them. The installer is itself a YAML-defined screen with C# logic. Files are written to the shared `Content/cameo/` support directory, not to separate `Content/ra/` or `Content/cnc/` directories.
+Before Cameo can display all original-game assets, the content installer (`mods/cameo-content/`) checks for the required files and offers to download or copy them. The installer is itself a YAML-defined screen with C# logic. Files are written to the shared `Content/cameo/` support directory, not to separate `Content/ra/` or `Content/cnc/` directories.
 
 ### Map loading
 
@@ -17372,7 +17379,7 @@ GameSpeeds:
 
 ### Asset extraction
 
-The content installer reads installer definitions in YAML to know which original game files are needed and where to obtain them. It can download from the OpenRA mirrors (see `mods/cameo/installer/downloads.yaml`) or extract from a local installation or CD (see `mods/cameo/installer/gdi95.yaml`, `mods/cameo/installer/allies95.yaml`, etc.).
+The content installer reads installer definitions in YAML to know which original game files are needed and where to obtain them. It can download from the OpenRA mirrors (see `mods/cameo-content/installer/downloads.yaml`) or extract from a local installation or CD (see `mods/cameo-content/installer/gdi95.yaml`, `mods/cameo-content/installer/allies95.yaml`, etc.).
 
 ### Mission objective system
 
@@ -17420,7 +17427,7 @@ Copy the `Player` actor definition from `mods/cameo/ai/ai.yaml` and adjust the b
 ![Common pitfalls  guardrails diagram](images/Part_10_Chapter_01_Official_Mods-checklist-infographic-style-diagram-summarizing-the-top-pitf-fb069e.svg)
 
 
-Create a new file under `mods/cameo/installer/` with the required `IDFiles` and `Install` blocks. Define the required files and download or disc sources. Make sure the output paths write to `^SupportDir|Content/cameo/` or `^Content/cameo/` so the `FileSystem` block in `mods/cameo/mod.yaml` can mount them.
+Create a new file under `mods/cameo-content/installer/` with the required `IDFiles` and `Install` blocks. Define the required files and download or disc sources. Make sure the output paths write to `^SupportDir|Content/cameo/` or `^Content/cameo/` so the `FileSystem` block in `mods/cameo/mod.yaml` can mount them.
 
 ### Add a new ContentPack
 
@@ -17484,11 +17491,11 @@ If any of the concepts above feel unclear, review the relevant section before co
 - `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` — GDI ContentPack manifest.
 - `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml` — GDI faction definition.
 - `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml` — GDI vehicle rules.
-- `mods/cameo/installer/downloads.yaml` — Freeware asset download definitions.
-- `mods/cameo/installer/gdi95.yaml` — C&C Gold GDI disc installer.
-- `mods/cameo/installer/allies95.yaml` — Red Alert Allied disc installer.
-- `mods/cameo/installer/firestorm.yaml` — Tiberian Sun Firestorm installer.
-- `mods/cameo/installer/ra2.yaml` — Red Alert 2 installer.
+- `mods/cameo-content/installer/downloads.yaml` — Freeware asset download definitions.
+- `mods/cameo-content/installer/gdi95.yaml` — C&C Gold GDI disc installer.
+- `mods/cameo-content/installer/allies95.yaml` — Red Alert Allied disc installer.
+- `mods/cameo-content/installer/firestorm.yaml` — Tiberian Sun Firestorm installer.
+- `mods/cameo-content/installer/ra2.yaml` — Red Alert 2 installer.
 - `mods/cameo/ai/ai.yaml` — Cameo AI configuration.
 
 
@@ -41015,5 +41022,3 @@ This appendix covers only the active (non-random) factions defined in the Cameo 
 
 - [Appendix I — Actor Reference (Cameo)](#file-appendices-Appendix_I_Actor_Reference) — abstract templates and Camea-specific actor details.
 - [Appendix M — Official Mod Actor Reference](#file-appendices-Appendix_M_Official_Actor_Reference) — the same treatment for the four bundled OpenRA mods.
-
-

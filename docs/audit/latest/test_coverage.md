@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (2 file(s)) | 24 | >= 24 |
-| T2 | `def test_*` in tools/tests (14 file(s)) | 153 | >= 153 |
-| T3 | modules with no test mentioning them | 218 | <= 218 |
+| T2 | `def test_*` in tools/tests (16 file(s)) | 189 | >= 177 |
+| T3 | modules with no test mentioning them | 235 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (218)
+## T3 — untested modules (235)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -24,6 +24,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Effects/TintedSpriteEffect.cs | TintedSpriteEffect |
 | C# | OpenRA.Mods.Cameo/FileSystem/BagFile.cs | AudioBagLoader |
 | C# | OpenRA.Mods.Cameo/Graphics/CameoSpriteSequence.cs | CameoSpriteSequenceLoader, CameoSpriteSequence |
+| C# | OpenRA.Mods.Cameo/Graphics/LayeredSelectionBarsRenderable.cs | LayeredSelectionBarsRenderable |
 | C# | OpenRA.Mods.Cameo/Graphics/LightningGeometry.cs | LightningGeometry |
 | C# | OpenRA.Mods.Cameo/Graphics/LightningRenderable.cs | LightningRenderable |
 | C# | OpenRA.Mods.Cameo/Graphics/UILineRenderable.cs | UILineAnnotationRenderable, UIRectangleAnnotationRenderable |
@@ -38,6 +39,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveGameSpeedHost.cs | AdaptiveGameSpeedHost |
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveSpeedController.cs | AdaptiveSpeedController |
 | C# | OpenRA.Mods.Cameo/Traits/AnnounceOnDamageState.cs | AnnounceOnDamageState |
+| C# | OpenRA.Mods.Cameo/Traits/ArmorPlating.cs | ArmorPlating |
 | C# | OpenRA.Mods.Cameo/Traits/Attack/AttackInfectCA.cs | AttackInfectCA |
 | C# | OpenRA.Mods.Cameo/Traits/BotGlobalUnitBudget.cs | BotGlobalUnitBudget |
 | C# | OpenRA.Mods.Cameo/Traits/BotInsurance.cs | BotInsurance |
@@ -57,6 +59,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/ExplodesCA.cs | FireWarheadsOnDeathCA |
 | C# | OpenRA.Mods.Cameo/Traits/FreeActorWithCondition.cs | FreeActorWithCondition, FreeActorInit, ParentActorInit |
 | C# | OpenRA.Mods.Cameo/Traits/GrantConditionOnPlayerTotalCash.cs | GrantConditionOnPlayerTotalCash |
+| C# | OpenRA.Mods.Cameo/Traits/GrantsShield.cs | GrantsShield |
 | C# | OpenRA.Mods.Cameo/Traits/InfectableCA.cs | InfectorCA, InfectableCA |
 | C# | OpenRA.Mods.Cameo/Traits/InfectableOld.cs | InfectableOld |
 | C# | OpenRA.Mods.Cameo/Traits/InfectorOld.cs | InfectorOld |
@@ -64,6 +67,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/LarvaConsumingProduction.cs | LarvaConsumingProduction |
 | C# | OpenRA.Mods.Cameo/Traits/LarvaProductionQueue.cs | LarvaProductionQueue |
 | C# | OpenRA.Mods.Cameo/Traits/Modifiers/WithPhysicalStateColoredOverlay.cs | WithPhysicalStateColoredOverlay |
+| C# | OpenRA.Mods.Cameo/Traits/ModifiesCombatProportionalToPhysicalState.cs | ModifiesCombatProportionalToPhysicalState |
 | C# | OpenRA.Mods.Cameo/Traits/NewConstructionOptionsNotification.cs | NewConstructionOptionsNotification, NewConstructionOptionsOnDeploy |
 | C# | OpenRA.Mods.Cameo/Traits/OneActorPerCell.cs | OneActorPerCell |
 | C# | OpenRA.Mods.Cameo/Traits/PaletteEffects/TAStealthTankCloakPaletteEffect.cs | TAStealthTankCloakPaletteEffect |
@@ -78,6 +82,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/ProvidesTeamProxyActor.cs | ProvidesTeamProxyActor |
 | C# | OpenRA.Mods.Cameo/Traits/QuotaProductionManager.cs | QuotaProductionManager |
 | C# | OpenRA.Mods.Cameo/Traits/Render/OverlayPlayerColorPalette.cs | OverlayPlayerColorPalette |
+| C# | OpenRA.Mods.Cameo/Traits/Render/SelectionDecorations.cs | SelectionDecorations |
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithAlpha.cs | WithAlpha |
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithBuildingBibCA.cs | WithBuildingBibCA |
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithCargoBuilding.cs | WithCargoBuilding |
@@ -93,6 +98,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs | SlaveMinerSpawnerMaster |
 | C# | OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerSlave.cs | SlaveMinerSpawnerSlave |
 | C# | OpenRA.Mods.Cameo/Traits/SoundAnnouncement.cs | SoundAnnouncement |
+| C# | OpenRA.Mods.Cameo/Traits/SpawnsActorsOnKill.cs | SpawnsActorsOnKill |
 | C# | OpenRA.Mods.Cameo/Traits/StarportBatchProduction.cs | StarportBatchProductionQueue, StarportBatchAirdrop |
 | C# | OpenRA.Mods.Cameo/Traits/SupportPowers/TransferCashSupportPower.cs | TransferCashSupportPower |
 | C# | OpenRA.Mods.Cameo/Traits/TakeOffOnMake.cs | TakeOffOnMake |
@@ -105,6 +111,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/World/HeatDistortionRenderer.cs | HeatDistortionRenderer |
 | C# | OpenRA.Mods.Cameo/Traits/World/LobbySystemActorConditionDropdown.cs | LobbySystemActorConditionDropdown |
 | C# | OpenRA.Mods.Cameo/Traits/World/NuclearFlashRenderer.cs | NuclearFlashRenderer |
+| C# | OpenRA.Mods.Cameo/Traits/World/ResourceRegrowth.cs | ResourceRegrowth, LobbyScaledSeedsResource |
 | C# | OpenRA.Mods.Cameo/Traits/World/ResourceSparkleEffect.cs | SparkleConfig, ResourceSparkleEffect |
 | C# | OpenRA.Mods.Cameo/Traits/World/ShockwaveDistortionRenderer.cs | ShockwaveDistortionRenderer |
 | C# | OpenRA.Mods.Cameo/Warheads/AffectsIntegrityWarhead.cs | AffectsIntegrityWarhead |
@@ -182,12 +189,15 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_template_conformance.py | audit_template_conformance |
 | python | tools/audit/audit_test_coverage.py | audit_test_coverage |
 | python | tools/audit/audit_ts_death_palette.py | audit_ts_death_palette |
+| python | tools/audit/audit_unconverted_templates.py | audit_unconverted_templates |
+| python | tools/audit/audit_unique_traits.py | audit_unique_traits |
 | python | tools/audit/audit_upgrade_coverage.py | audit_upgrade_coverage |
 | python | tools/audit/audit_upgrades.py | audit_upgrades |
 | python | tools/audit/audit_warhead_split.py | audit_warhead_split |
 | python | tools/audit/audit_weapon_suffixes.py | audit_weapon_suffixes |
 | python | tools/audit/audit_weapon_uniqueness.py | audit_weapon_uniqueness |
 | python | tools/audit/cameo_model.py | cameo_model |
+| python | tools/audit/check_effect_audio.py | check_effect_audio |
 | python | tools/audit/dump_resolved.py | dump_resolved |
 | python | tools/audit/find_empty_warhead.py | find_empty_warhead |
 | python | tools/audit/find_mechanical_phase_a.py | find_mechanical_phase_a |
@@ -205,11 +215,13 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/_requantize_ledgers.py | _requantize_ledgers |
 | python | tools/balance/_show_audit_summaries.py | _show_audit_summaries |
 | python | tools/balance/_write_weapon_class.py | _write_weapon_class |
-| python | tools/balance/apply_balance.py | apply_balance |
+| python | tools/balance/armor_exposure.py | armor_exposure |
 | python | tools/balance/audit_below_divider.py | audit_below_divider |
 | python | tools/balance/build_workbook.py | build_workbook |
 | python | tools/balance/check_band.py | check_band |
+| python | tools/balance/compensate_retrofit.py | compensate_retrofit |
 | python | tools/balance/count_mixed.py | count_mixed |
+| python | tools/balance/design_invented_profiles.py | design_invented_profiles |
 | python | tools/balance/fix_orphan_old_keys.py | fix_orphan_old_keys |
 | python | tools/balance/fix_orphan_old_keys_multi.py | fix_orphan_old_keys_multi |
 | python | tools/balance/fix_stale_warhead_keys.py | fix_stale_warhead_keys |
@@ -218,23 +230,33 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/gen_weapon_template.py | gen_weapon_template |
 | python | tools/balance/harvester_table.py | harvester_table |
 | python | tools/balance/import_workbook.py | import_workbook |
-| python | tools/balance/propose_class_rebalance.py | propose_class_rebalance |
+| python | tools/balance/measure_retrofit_gap.py | measure_retrofit_gap |
+| python | tools/balance/plan_firepower_retirement.py | plan_firepower_retirement |
 | python | tools/balance/propose_rebalance.py | propose_rebalance |
+| python | tools/balance/remove_dead_weapons.py | remove_dead_weapons |
 | python | tools/balance/rename_3way_underscore.py | rename_3way_underscore |
+| python | tools/balance/report_versus_change.py | report_versus_change |
+| python | tools/balance/retrofit_legacy_template.py | retrofit_legacy_template |
 | python | tools/balance/retrofit_weapon_family.py | retrofit_weapon_family |
 | python | tools/balance/run_with_guard.py | run_with_guard |
 | python | tools/balance/seed_design.py | seed_design |
+| python | tools/balance/shield_uniqueness.py | shield_uniqueness |
 | python | tools/balance/splice_templates.py | splice_templates |
 | python | tools/balance/strip_orphan_report.py | strip_orphan_report |
 | python | tools/balance/strip_weapon_versus.py | strip_weapon_versus |
 | python | tools/balance/sweep_areadamage.py | sweep_areadamage |
 | python | tools/balance/update_ranges.py | update_ranges |
 | python | tools/balance/verify_generator_sync.py | verify_generator_sync |
+| python | tools/balance/verify_retrofit.py | verify_retrofit |
 | python | tools/packs/extract_shared.py | extract_shared |
 | python | tools/packs/split_faction.py | split_faction |
-| python | tools/rename/apply.py | apply |
 | python | tools/rename/apply_ra1_legacy.py | apply_ra1_legacy |
 | python | tools/rename/convert_maps.py | convert_maps |
 | python | tools/rename/curate_map.py | curate_map |
 | python | tools/rename/safe_rename.py | safe_rename |
+
+
+## FAIL
+
+- T3: 235 untested > baseline 224
 

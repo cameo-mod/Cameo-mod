@@ -279,6 +279,18 @@ must become COMPLETELY self-contained, loadable without cross-dependencies:
 - a future audit walks every pack, verifies which files are actually used,
   and deletes the unused ones.
 
+### Content installer architecture
+
+Cameo's optional original-game downloads are owned by the hidden
+`mods/cameo-content/` installer mod. The primary `mods/cameo/mod.yaml` uses
+`ContentInstallerFileSystem`, keeps boot-critical mounts under
+`SystemPackages:`, and leaves `ContentPackages:` empty so content installation
+is opt-in through the Manage Content button. Installer manifests live under
+`mods/cameo-content/installer/` and are mounted through the hidden mod's
+`Downloads:` and `Sources:` entries. The hyphenated `cameo-content` mod
+identifier is a deliberate engine-convention exception to Cameo's normal
+underscore-only in-mod naming rule.
+
 ## 3. House stat formulas (audited as F1–F18, `audit_stat_formulas.py`)
 
 Reference-clean units: **TD GDI Archer** (`gdiarcher`), **Ordos Raider**

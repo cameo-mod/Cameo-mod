@@ -1,0 +1,143 @@
+Metadata:
+	Title: mod-title
+	Version: f7540efea90179998cffde8547f42f2c6b6d5cae
+	Hidden: true
+
+FileSystem: DefaultFileSystem
+	Packages:
+		^EngineDir
+		^EngineDir|mods/common-content: content
+		^EngineDir|mods/common: common
+		$cameo-content: cameocontent
+
+Rules:
+
+Cursors:
+	content|cursors.yaml
+
+Chrome:
+	content|chrome.yaml
+
+Assemblies: OpenRA.Mods.AS.dll, OpenRA.Mods.CA.dll, OpenRA.Mods.Cameo.dll, OpenRA.Mods.Cnc.dll, OpenRA.Mods.D2k.dll, OpenRA.Mods.Common.dll
+
+ChromeLayout:
+	content|content.yaml
+
+Notifications:
+	content|notifications.yaml
+
+LoadScreen: ModContentLoadScreen
+	Image: ^EngineDir|mods/common-content/chrome.png
+	Image2x: ^EngineDir|mods/common-content/chrome-2x.png
+	Image3x: ^EngineDir|mods/common-content/chrome-3x.png
+
+ChromeMetrics:
+	common|metrics.yaml
+	content|metrics.yaml
+
+FluentMessages:
+	common|fluent/common.ftl
+	content|fluent/content.ftl
+	content|fluent/chrome.ftl
+	cameocontent|fluent/chrome.ftl
+
+Fonts:
+	Tiny:
+		Font: common|FreeSans.ttf
+		Size: 10
+		Ascender: 8
+	TinyBold:
+		Font: common|FreeSansBold.ttf
+		Size: 10
+		Ascender: 8
+	Regular:
+		Font: common|FreeSans.ttf
+		Size: 14
+		Ascender: 11
+	Bold:
+		Font: common|FreeSansBold.ttf
+		Size: 14
+		Ascender: 11
+	MediumBold:
+		Font: common|FreeSansBold.ttf
+		Size: 18
+		Ascender: 14
+	BigBold:
+		Font: common|FreeSansBold.ttf
+		Size: 24
+		Ascender: 18
+
+ModContent:
+	Mod: cameo
+	QuickDownload: quickinstall
+	Downloads:
+		cameocontent|installer/downloads.yaml
+	Sources:
+		cameocontent|installer/aftermath.yaml
+		cameocontent|installer/allies95.yaml
+		cameocontent|installer/cnc95.yaml
+		cameocontent|installer/counterstrike.yaml
+		cameocontent|installer/covertops.yaml
+		cameocontent|installer/firestorm.yaml
+		cameocontent|installer/firstdecade.yaml
+		cameocontent|installer/gdi95.yaml
+		cameocontent|installer/nod95.yaml
+		cameocontent|installer/origin.yaml
+		cameocontent|installer/ra2.yaml
+		cameocontent|installer/ra2yr.yaml
+		cameocontent|installer/soviet95.yaml
+	Packages:
+		ContentPackage@quickinstall:
+			Title: modcontent_package_quickinstall
+			Identifier: quickinstall
+			TestFiles: ^SupportDir|Content/cameo/conquer.mix, ^SupportDir|Content/cameo/desert.mix, ^SupportDir|Content/cameo/general.mix, ^SupportDir|Content/cameo/sounds.mix, ^SupportDir|Content/cameo/speech.mix, ^SupportDir|Content/cameo/temperat.mix, ^SupportDir|Content/cameo/tempicnh.mix, ^SupportDir|Content/cameo/transit.mix, ^SupportDir|Content/cameo/winter.mix
+			Sources: cnc95, gdi95, nod95, tfd, origin
+			Download: quickinstall
+		ContentPackage@basefiles:
+			Title: modcontent_package_basefiles
+			Identifier: basefiles
+			TestFiles: ^SupportDir|Content/cameo/allies.mix, ^SupportDir|Content/cameo/conquer.mix, ^SupportDir|Content/cameo/hires.mix, ^SupportDir|Content/cameo/interior.mix, ^SupportDir|Content/cameo/local.mix, ^SupportDir|Content/cameo/lores.mix, ^SupportDir|Content/cameo/russian.mix, ^SupportDir|Content/cameo/snow.mix, ^SupportDir|Content/cameo/sounds.mix, ^SupportDir|Content/cameo/speech.mix, ^SupportDir|Content/cameo/temperat.mix
+			Sources: allied, soviet, tfd, origin
+			Download: basefiles
+		ContentPackage@aftermath:
+			Title: modcontent_package_aftermath
+			Identifier: aftermath
+			TestFiles: ^SupportDir|Content/cameo/expand/chrotnk1.aud, ^SupportDir|Content/cameo/expand/expand2.mix, ^SupportDir|Content/cameo/expand/fixit1.aud, ^SupportDir|Content/cameo/expand/hires1.mix, ^SupportDir|Content/cameo/expand/jburn1.aud, ^SupportDir|Content/cameo/expand/jchrge1.aud, ^SupportDir|Content/cameo/expand/jcrisp1.aud, ^SupportDir|Content/cameo/expand/jdance1.aud, ^SupportDir|Content/cameo/expand/jjuice1.aud, ^SupportDir|Content/cameo/expand/jjump1.aud, ^SupportDir|Content/cameo/expand/jlight1.aud, ^SupportDir|Content/cameo/expand/jpower1.aud, ^SupportDir|Content/cameo/expand/jshock1.aud, ^SupportDir|Content/cameo/expand/jyes1.aud, ^SupportDir|Content/cameo/expand/lores1.mix, ^SupportDir|Content/cameo/expand/madchrg2.aud, ^SupportDir|Content/cameo/expand/madexplo.aud, ^SupportDir|Content/cameo/expand/mboss1.aud, ^SupportDir|Content/cameo/expand/mhear1.aud, ^SupportDir|Content/cameo/expand/mhotdig1.aud, ^SupportDir|Content/cameo/expand/mhowdy1.aud, ^SupportDir|Content/cameo/expand/mhuh1.aud, ^SupportDir|Content/cameo/expand/mlaff1.aud, ^SupportDir|Content/cameo/expand/mrise1.aud, ^SupportDir|Content/cameo/expand/mwrench1.aud, ^SupportDir|Content/cameo/expand/myeehaw1.aud, ^SupportDir|Content/cameo/expand/myes1.aud
+			Sources: aftermath, tfd, origin
+			Download: aftermath
+		ContentPackage@cncdesert:
+			Title: modcontent_package_cncdesert
+			Identifier: cncdesert
+			TestFiles: ^SupportDir|Content/cameo/cnc/desert.mix
+			Sources: cnc95, gdi95, nod95, tfd, origin
+			Download: cncdesert
+		ContentPackage@music:
+			Title: modcontent_package_music
+			Identifier: music
+			TestFiles: ^SupportDir|Content/cameo/ra/scores.mix
+			Sources: allied, soviet, counterstrike, covertops, aftermath, tfd, origin
+			Download: music
+		ContentPackage@cncmusic:
+			Title: modcontent_package_cncmusic
+			Identifier: cncmusic
+			TestFiles: ^SupportDir|Content/cameo/cnc/scores.mix
+			Sources: cnc95, gdi95, nod95, covertops, tfd, origin
+			Download: cncmusic
+		ContentPackage@tsmusic:
+			Title: modcontent_package_tsmusic
+			Identifier: tsmusic
+			TestFiles: ^SupportDir|Content/cameo/ts/scores.mix
+			Sources: tfd, origin, fstorm
+			Download: tsmusic
+		ContentPackage@fsmusic:
+			Title: modcontent_package_fsmusic
+			Identifier: fsmusic
+			TestFiles: ^SupportDir|Content/cameo/firestorm/dmachine.aud, ^SupportDir|Content/cameo/firestorm/elusive.aud, ^SupportDir|Content/cameo/firestorm/fsmap.aud, ^SupportDir|Content/cameo/firestorm/fsmenu.aud, ^SupportDir|Content/cameo/firestorm/hacker.aud, ^SupportDir|Content/cameo/firestorm/infiltra.aud, ^SupportDir|Content/cameo/firestorm/kmachine.aud, ^SupportDir|Content/cameo/firestorm/linkup.aud, ^SupportDir|Content/cameo/firestorm/rainnite.aud, ^SupportDir|Content/cameo/firestorm/slavesys.aud
+			Sources: fstorm, tfd, origin
+			Download: fsmusic
+
+SpriteFormats: PngSheet
+
+TerrainFormat: DefaultTerrain
+
+SpriteSequenceFormat: DefaultSpriteSequence
