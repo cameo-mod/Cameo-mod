@@ -118,8 +118,12 @@ later to replace them with a new mechanic. However some multipliers are still in
 especially those with status effects so yeah... we need to remove them on a case by case
 basis."*
 
-**369 live declarations** (683 in the tree; 314 sit in DEAD files such as `rules/wh40k.yaml`
+**366 live declarations** (683 in the tree; 314 sit in DEAD files such as `rules/wh40k.yaml`
 and `rules/wz2100.yaml`, which `mod.yaml` does not load — do not "fix" those, delete the files).
+Was 369 before the shield-150% deletion below. ⚠ **This count is registered in
+`docs/audit/doc_claims.yaml` and re-measured by `audit_doc_claims.py`** — it went stale within
+the same session it was written, and the audit caught it, which is precisely why the registry
+exists. Update both together.
 
 | category | count | median | disposition |
 |---|--:|--:|---|

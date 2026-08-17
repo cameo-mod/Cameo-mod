@@ -1,0 +1,34 @@
+﻿# audit_doc_claims — do the documents still match the tree?
+
+Registry: `docs/audit/doc_claims.yaml` — **9** claims.
+
+A number in prose is true only on the day it is written. These are the claims a DECISION rests on, re-measured every run.
+
+| claim | documented | measured | status |
+|---|--:|--:|---|
+| `shield_versus_mean` | 185.25 | 185.25 | ✅ |
+| `shield_hp_factor` | 0.5398 | 0.539811 | ✅ |
+| `shield_damage_share` | 0.01432 | 0.0143182 | ✅ |
+| `always_on_shield_actors` | 58 | 58 | ✅ |
+| `always_on_shielded_buildings` | 16 | 16 | ✅ |
+| `live_damage_multipliers` | 366 | 366 | ✅ |
+| `multi_main_fired_weapons` | 973 | 973 | ✅ |
+| `percentage_denominator_unset` | 0 | 0 | ✅ |
+| `signed_off_class_anchors` | 0 | 0 | ✅ |
+
+_clean_ — every registered claim still matches the tree.
+
+## Review cadence (for what a number cannot capture)
+
+This audit pins numeric claims. **Prose contradictions — two documents asserting incompatible LAWS in words — still need a human read.** The failure mode is specific and worth naming: a ruling gets made, written into one document, and the older statement is left standing somewhere else. Both then look authoritative.
+
+Known instances of exactly that, all found by accident rather than by process:
+
+| the newer ruling | what still contradicted it |
+|---|---|
+| Shield ladder is derived (DESIGN §12.0c) | `Shield = top + floor` in DESIGN **and** ARMOR_SYSTEM |
+| R1 — veterancy grants HP | advice to keep veterancy multipliers, accepted |
+| Platings are layer-SELECTED | "armor types AVERAGE" in memory + §A1–A4 |
+| W24 answers the 3-same-family question | W23 still listed as blocked on a ruling |
+
+**The rule that would have caught all four:** a ruling is not landed until the OLD statement is struck in every document that carries it. Grep for the old claim before writing the new one — `docs:` lists in this registry exist to make that mechanical for numbers, and the same discipline applies to laws.

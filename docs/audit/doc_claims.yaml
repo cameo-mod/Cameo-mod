@@ -1,0 +1,220 @@
+# doc_claims.yaml — every NUMERIC claim the design docs make, and how to re-measure it.
+#
+# Maintainer 2026-08-17: *"the documentations are starting to explode in size ... regularly
+# review everything for discrepancies and contradictions and then make design decisions
+# together ... Right now a lot of information and design decisions are maybe outdated and
+# contradict newer decisions?"*
+#
+# The problem is real and it is structural: prose cannot be checked, so a number written into a
+# document is true only on the day it is written. This session alone found five:
+#
+#   * "Shield is free against 51% of the roster"  -> actually 1.4%  (35x wrong)
+#   * "Shield = top + floor" stated as law       -> retired weeks earlier, still in 2 docs
+#   * "apply_balance --confirm is the last step"  -> it is a NO-OP
+#   * R1 "veterancy grants HP"                   -> contradicted by advice I gave and it was accepted
+#   * "805 of 2053 weapons comply (39%)"         -> 522 of 1495 FIRED weapons (34.9%)
+#
+# THE FIX: a claim that matters gets an entry here with a `measure` command. `audit_doc_claims.py`
+# runs each one and fails when reality and the document disagree. A doc sentence then becomes
+# checkable, and going stale becomes a red audit instead of a future misunderstanding.
+#
+# RULES
+#  * One entry per claim that a DECISION would rest on. Not every number in every doc.
+#  * `measure` must print ONE number to stdout and nothing else.
+#  * `tolerance` is fractional (0.02 = 2%). Counts that must be exact use 0.
+#  * When a claim legitimately changes, update `value` IN THE SAME COMMIT as the doc. That is
+#    the whole point: the audit forces doc and reality to move together.
+#  * `docs` lists every file repeating the claim — so a change updates ALL of them, which is
+#    how the `Shield = top + floor` duplication survived for weeks.
+
+claims:
+  - id: shield_versus_mean
+    value: 185.25
+    tolerance: 0.01
+    what: Mean Versus-vs-Shield across all main flat warheads. Drives shield_hp_factor.
+    docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md, docs/design/SUPERWEAPON_LAYER_DAMAGE.md]
+    measure: |
+      import sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import target_model as tm
+      print(tm.pseudo_armor_mean('Shield'))
+
+  - id: shield_hp_factor
+    value: 0.5398
+    tolerance: 0.01
+    what: What one shield point is worth as HP (100 / mean Versus vs Shield).
+    docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
+    measure: |
+      import sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import target_model as tm
+      print(tm.shield_hp_factor())
+
+  - id: shield_damage_share
+    value: 0.01432
+    tolerance: 0.05
+    what: >
+      Fraction of roster raw damage landing on the Shield row at BASELINE. The claim that
+      replaced "51% of the roster", which counted empty shield CAPACITY as a shield.
+    docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
+    measure: |
+      import sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import target_model as tm
+      print(tm.shield_damage_share())
+
+  - id: always_on_shield_actors
+    value: 58
+    tolerance: 0
+    what: >
+      Actors that SPAWN with a shield pool and no positive gate — the only ones E1 prices.
+      1318 more carry an empty capacity behind `shieldgen`; ~216 are upgrade-gated.
+    docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
+    measure: |
+      import re, sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from miniyaml import Ruleset
+      TOK = re.compile(r'[A-Za-z_][A-Za-z0-9_.]*')
+      def num(v, d=0.0):
+          try: return float(str(v).strip())
+          except (TypeError, ValueError): return d
+      def gated(cond):
+          for t in re.split(r'&&|\|\|', str(cond or '')):
+              t = t.strip().strip('()').strip()
+              if t and not t.startswith('!') and TOK.match(t): return True
+          return False
+      rs = Ruleset(pathlib.Path('.').resolve()); n = 0
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          node = rs.resolve(name)
+          if node is None: continue
+          for c in node.children:
+              if c.key.split('@')[0] != 'Shielded': continue
+              pool = num(c.get('MaxStrength')) + num(c.get('MaxPercentageStrength'))
+              init = num(c.get('InitialStrength')) + num(c.get('InitialPercentageStrength'))
+              if pool > 0 and init > 0 and not gated(c.get('RequiresCondition')): n += 1
+              break
+      print(n)
+
+  - id: always_on_shielded_buildings
+    value: 16
+    tolerance: 0
+    what: >
+      Buildings with an always-on shield. ALL are Protoss. Corrects an analysis that measured
+      all 1016 unarmed buildings and reported a 19x shift in the Shield column's weight.
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import re, sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from miniyaml import Ruleset
+      TOK = re.compile(r'[A-Za-z_][A-Za-z0-9_.]*')
+      def num(v, d=0.0):
+          try: return float(str(v).strip())
+          except (TypeError, ValueError): return d
+      def gated(cond):
+          for t in re.split(r'&&|\|\|', str(cond or '')):
+              t = t.strip().strip('()').strip()
+              if t and not t.startswith('!') and TOK.match(t): return True
+          return False
+      rs = Ruleset(pathlib.Path('.').resolve()); n = 0
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          node = rs.resolve(name)
+          if node is None: continue
+          sh = None; is_bld = False; armor = None
+          for c in node.children:
+              k = c.key.split('@')[0]
+              if k == 'Shielded' and sh is None: sh = c
+              elif k in ('Building', 'LineBuild'): is_bld = True
+              elif k == 'Armor' and armor is None: armor = (c.get('Type') or '').strip()
+          if sh is None: continue
+          if not (is_bld or armor in ('Wood', 'Steel', 'Concrete')): continue
+          pool = num(sh.get('MaxStrength')) + num(sh.get('MaxPercentageStrength'))
+          init = num(sh.get('InitialStrength')) + num(sh.get('InitialPercentageStrength'))
+          if pool > 0 and init > 0 and not gated(sh.get('RequiresCondition')): n += 1
+      print(n)
+
+  - id: live_damage_multipliers
+    value: 366
+    tolerance: 0
+    what: >
+      DamageMultiplier declarations in LIVE files (mod.yaml's Rules list). The tree holds 683;
+      314 sit in dead files such as rules/wh40k.yaml, which is why a plain grep misleads.
+      Was 369 until the shield-150% block and its two Consortium dependents were deleted
+      (W26, 2026-08-17) — this claim FAILED on the audit's very first run and is the intended
+      demonstration: the count moved with the work and the document had not.
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import re, sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from miniyaml import Ruleset
+      rs = Ruleset(pathlib.Path('.').resolve())
+      pat = re.compile(r'^\tDamageMultiplier(@[\w.]+)?:\s*$')
+      n = 0
+      for p in sorted({q.resolve() for q in rs.manifest.rules}):
+          try: lines = p.read_text(encoding='utf-8', errors='replace').split('\n')
+          except OSError: continue
+          n += sum(1 for ln in lines if pat.match(ln))
+      print(n)
+
+  - id: multi_main_fired_weapons
+    value: 973
+    tolerance: 0
+    what: >
+      Fired weapons carrying MORE THAN ONE damage main — W24's scope, and the reason pricing
+      must wait for the weapon rebuild (their K is still going to move).
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import collections, sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import effective_damage as ed
+      from miniyaml import Ruleset
+      rs = Ruleset(pathlib.Path('.').resolve())
+      fired = collections.Counter()
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          node = rs.resolve(name)
+          if node is None: continue
+          for c in node.children:
+              if c.key == 'Armament' or c.key.startswith('Armament@'):
+                  w = c.get('Weapon')
+                  if w: fired[str(w).strip()] += 1
+      n = 0
+      for w in fired:
+          node = rs.resolve_weapon(w)
+          if node is None: continue
+          mains = [t for t, _wt, _b, _nd in ed.flat_damage_warheads(node)
+                   if 'ExtraDamage' not in t]
+          if len(mains) > 1: n += 1
+      print(n)
+
+  - id: percentage_denominator_unset
+    value: 0
+    tolerance: 0
+    what: >
+      W18 has NOT landed. Any nonzero here means the basis-point rebase shipped and every
+      pct_absolute / dps_floor figure in the docs is stale.
+    docs: [docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md, docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import pathlib, sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from miniyaml import Ruleset
+      rs = Ruleset(pathlib.Path('.').resolve())
+      n = 0
+      for p in sorted({q.resolve() for q in rs.manifest.weapons}):
+          try: n += p.read_text(encoding='utf-8', errors='replace').count('PercentageDenominator')
+          except OSError: pass
+      print(n)
+
+  - id: signed_off_class_anchors
+    value: 0
+    tolerance: 0
+    what: >
+      Class anchors the maintainer has signed off (W11). While this is 0, NO price is final and
+      apply_balance --confirm has nothing correct to apply.
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import json, pathlib
+      d = json.loads(pathlib.Path('docs/balance/class_anchors.json').read_text(encoding='utf-8'))
+      print(sum(1 for v in d.values()
+                if isinstance(v, dict) and 'spec' in v and v.get('signed_off')))
