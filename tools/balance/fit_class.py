@@ -356,13 +356,30 @@ def main() -> int:
     rep.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
     anchors = json.loads(ANCHORS.read_text(encoding="utf-8"))
-    anchors[args.cls] = {"anchor_actor": args.anchor or anchor_id, "cost0": cost0,
-                         "o0": round(o0, 4), "p0": round(p0, 4),
-                         "q0": round(q0, 4), "signed_off": False,
-                         "comment": "candidate — maintainer sign-off pending"}
+    # ⚠⚠ **MERGE, NEVER REPLACE.** This used to be `anchors[args.cls] = {...}`, which
+    # DESTROYED the rest of the entry — measured 2026-08-17 on `mbt`: one run wiped `spec`
+    # (cost0/dps0/hp0/range0_wdist/speed0), `armor`, `tech_tier`, `tech_tier_flag`,
+    # `verifier_actor`, `reveals_shroud` and the "★ LOCKED 2026-08-01" provisional note,
+    # leaving six keys behind. Those are the maintainer's DESIGN inputs, not fit outputs —
+    # `formula.class_baseline_price` reads `spec`, and the tier/verifier pair enforces the
+    # 2.5x identity ([[cameo-verifier-tier-k-match]]). The sign-off workflow is "run
+    # fit_class for each of the 27 classes, then review", so the obvious next step would
+    # have silently erased ALL 27 locked specs, with a clean exit 0 and a plausible report.
+    entry = dict(anchors.get(args.cls) or {})
+    was_signed = bool(entry.get("signed_off"))
+    entry.update({"anchor_actor": args.anchor or anchor_id, "cost0": cost0,
+                  "o0": round(o0, 4), "p0": round(p0, 4), "q0": round(q0, 4),
+                  # A fresh fit moves the numbers, so any previous approval is void.
+                  "signed_off": False,
+                  # Its OWN key: `comment` carries the maintainer's design rationale.
+                  "fit_comment": "candidate — maintainer sign-off pending"})
+    anchors[args.cls] = entry
     ANCHORS.write_text(json.dumps(anchors, sort_keys=True, indent=1,
                                   ensure_ascii=False) + "\n",
                        encoding="utf-8", newline="\n")
+    if was_signed:
+        print(f"⚠ `{args.cls}` was signed_off — this fit RESET it to false. "
+              f"Re-review before relying on it.")
     print(f"candidate written to class_anchors.json (signed_off: false); "
           f"validation -> {rep.relative_to(ROOT)}")
     return 0
