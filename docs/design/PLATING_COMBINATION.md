@@ -91,14 +91,54 @@ half of that design and turns every plating into a strict upgrade, which is exac
 upgrade" the cycle exists to avoid. A +6% penalty against your counter-weapon is a trade a player
 can read and plan around.
 
-**What must be true for this to ship:**
-* `audit_plating_exclusivity` X1 stays green (one active plating, always).
-* `MultiArmorCombination` returns to `Multiply` **for platings only** — the legacy dual-armor
-  cyborgs/droids must stay on `Average`, or they resume squaring (that is W20's actual bug and it
-  has nothing to do with platings).
-* `armor_exposure.py` learns the plating distribution before prices are set.
+## ✅ SHIPPED 2026-08-17 — and it was NOT a one-field flip
+
+Measured before the change: **`MultiArmorCombination` is set NOWHERE in yaml** (0 occurrences), so
+every warhead ran the default `Average`, and under `Average` the Cameo override did
+`if (plating.Count > 0) return plating.Min();` — **the class armor was discarded outright**. That
+is layer SELECTION, confirmed in code rather than assumed.
+
+⚠ **Setting the field to `Multiply` would NOT have implemented this ruling.** That value
+short-circuits to the engine's `DamageWarhead.DamageVersus`, which takes the product of **every**
+matched armor — including two CLASS armors, i.e. W20's squaring bug (40% × 30% = 12%) — and it
+also bypasses the `plating.Min()` protection. So the ruling needed a code change, in
+`AreaDamageWarhead.DamageVersus`:
+
+```csharp
+var classRow = armor.Count == 0 ? 100 : /* MultiArmorCombination over CLASS armors only */;
+return plating.Count > 0 ? classRow * plating.Min() / 100 : classRow;
+```
+
+`MultiArmorCombination` now governs the **class** armors only (still `Average`, so the dual-armor
+cyborgs are untouched) and the plating layer always multiplies on top — the two rules in one field
+that this document called for. No clamp, deliberately.
+
+⭐ **Cheap moment to land it:** only **7 plating grants** exist across the whole roster today, all
+conditional, so the law is set before the platings roll out rather than after. Boot-gated with the
+rebuilt assembly (menu 21:47:41, no new exception log).
+
+⚠ **But do not read "7 grants" as "no gameplay change" — for those seven it is large, and it is
+the whole point.** A HAZMAT-suited infantryman (class armor `None`) under `^Warhead_Flame_Light`,
+which reads `None: 200 / HAZMAT: 40`:
+
+| | vs light flamer | what it means |
+|---|--:|---|
+| SELECTION (before) | **40** | the suit ERASED the unit's flammability class — 5× tougher than an unsuited rifleman, and identically tough to a plated tank |
+| MULTIPLY (after) | **80** | still 2.5× better than unprotected, but infantry stays infantry |
+
+That is the argument in one cell: a hazmat suit should make you resist fire, not stop being a
+soft target. The same unit is now also correctly *worse* off wearing HAZMAT against kinetic fire,
+which is what the closed cycle is for.
+
+**What must still be true:**
+* `audit_plating_exclusivity` X1 stays green (one active plating, always) — it is what keeps
+  `plating.Min()` from being load-bearing.
+* `armor_exposure.py` learns the plating distribution before prices are set (E1).
 * Re-measure the harm cells after any composition change — they moved from 13 to 5 the first time
   the compositions were touched, so this is a live coupling, not a one-off check.
+* ⚠ The ~878 legacy warhead nodes still declaring inline `Versus` on `SpreadDamage` do **not**
+  route through `AreaDamage` and therefore keep the engine's blanket multiply. The layer rule
+  reaches a weapon only once it is on a `^Warhead_*` template (A5 / W24).
 
 ---
 
